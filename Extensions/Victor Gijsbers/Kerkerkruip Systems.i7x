@@ -171,7 +171,7 @@ To do the dig move:
 			now the player does not press X;
 			if the player is alive:
 				if the faction of X hates the faction of the player:
-					make X strike a blow against the player;
+					try X hitting the player;
 			now concentration of X is 0;
 		now the player is not runner;
 	if the player is alive:
@@ -262,10 +262,9 @@ Chapter - Weapon user
 
 A person is either weapon user or not weapon user. A person is usually not weapon user.
 
-A standard AI action select rule (this is the non weapon users never ready rule):
-	if the global attacker is not weapon user:
-		choose row with an Option of the action of the global attacker readying the stored_weapon in the Table of AI Combat Options;
-		decrease the Weight entry by 1000.
+An AI action selection rule for a person (called P) when the running AI is not weapon user (this is the non weapon users never ready rule):
+	choose row with an Option of the action of P readying the chosen weapon in the Table of AI Action Options;
+	decrease the Action Weight entry by 1000.
 
 
 
@@ -291,7 +290,7 @@ Killing rule (this is the grant powers when a monster is slain rule):
 		do the absorption with killed-guy.
 
 Every turn (this is the remove all killed monsters from play rule):
-	repeat with guy running through killed not off-stage persons:
+	repeat with guy running through dead not off-stage persons:
 		unless guy is the player:
 			do the absorption with guy.
 
@@ -433,21 +432,22 @@ Status rule (this is the blindness status rule):
 	if player is blind:
 		say "You are [bold type]blind[roman type].[line break][run paragraph on]".
 
-An attack modifiers rule (this is the blindness attack modifier rule):
+An attack roll rule (this is the blindness attack modifier rule):
 	if the global attacker is blind and the global attacker is not eyeless:
 		say " - 3 (blindness)[run paragraph on]";
-		decrease the to-hit modifier by 3.
+		decrease the roll by 3;
 
-An attack modifiers rule (this is the blindness defence modifier rule):
+An attack roll rule (this is the blindness defence modifier rule):
 	if the global defender is blind and the global defender is not eyeless:
 		say " + 2 (defender blind)[run paragraph on]";
-		increase the to-hit modifier by 2.
+		increase the roll by 2;
 
-Chance to win rule (this is the CTW blindness bonus rule):
+[TODO FIX]
+[Chance to win rule (this is the CTW blindness bonus rule):
 	if the global attacker is blind and the global attacker is not eyeless:
 		decrease the chance-to-win by 3;
 	if the global defender is blind and the global defender is not eyeless:
-		increase the chance-to-win by 2.
+		increase the chance-to-win by 2.]
 
 A perception test rule (this is the blindness affects perception rule):
 	if the test subject is blind and the test subject is not eyeless:
@@ -465,32 +465,33 @@ A person has a number called the heal power. The heal power of a person is usual
 A person has a number called the heal cooldown. The heal cooldown of a person is usually 3.
 A person has a number called the current heal cooldown. The current heal cooldown of a person is usually 0.
 
-First standard AI action select rule (this is the consider healing rule):
-	choose a blank Row in the Table of AI Combat Options;
-	change the Option entry to the action of the global attacker healing;
-	change the Weight entry to -1000.
+First AI action selection rule for a person (called P) (this is the consider healing rule):
+	choose a blank Row in the Table of AI Action Options;
+	change the Option entry to the action of P healing;
+	change the Action Weight entry to -1000.
 		
-Standard AI action select rule (this is the only healers consider healing rule):
-	choose row with an Option of the action of the global attacker healing in the Table of AI Combat Options;
-	if the heal power of the global attacker is greater than 0 and the current heal cooldown of the global attacker is less than 1:
-		change the Weight entry to 5.
+An AI action selection rule for a person (called P) (this is the only healers consider healing rule):
+	choose row with an Option of the action of P healing in the Table of AI Action Options;
+	if the heal power of P is greater than 0 and the current heal cooldown of P is less than 1:
+		change the Action Weight entry to 5.
 			
-Standard AI action select rule (this is the only heal when someone has damage rule):
-	if the heal power of the global attacker is greater than 0:
-		choose row with an Option of the action of the global attacker healing in the Table of AI Combat Options;
-		let P be false;
+An AI action selection rule for a person (called P) (this is the only heal when someone has damage rule):
+	if the heal power of P is greater than 0:
+		choose row with an Option of the action of P healing in the Table of AI Action Options;
+		let someone needs healing be false;
 		let m be 0;
-		repeat with guy running through alive persons enclosed by the location:
-			if the faction of guy does not hate the faction of the global attacker and guy is not the global attacker:
-				let n be permanent health of guy minus health of guy; 
-				if n is greater than 0:
-					now P is true;
-					if m is less than n, now m is n; [at this stage, m becomes the greatest damage any of the global attacker's allies has]
-		if P is false:
-			decrease the Weight entry by 1000;
+		repeat with X running through alive persons enclosed by the location not opposed by P:
+			let n be permanent health of X minus health of X; 
+			if n is greater than 0:
+				now someone needs healing is true;
+				if m is less than n:
+					now m is n; [at this stage, m becomes the greatest damage any of the global attacker's allies has]
+		if someone needs healing is false:
+			decrease the Action Weight entry by 1000;
 		otherwise:
-			if m is greater than heal power of the global attacker, now m is heal power of the global attacker; [now m becomes the maximum amount of damage the global attacker can heal]
-			increase Weight entry by m.
+			if m is greater than heal power of the running AI:
+				now m is heal power of the running AI; [now m becomes the maximum amount of damage the global attacker can heal]
+			increase Action Weight entry by m.
 
 Carry out an actor healing:
 	let m be 0;
@@ -541,22 +542,22 @@ A person is either teleport impossible aware or not teleport impossible aware. A
 
 [AI rules]
 
-First standard AI action select rule (this is the consider teleporting rule):
-	choose a blank Row in the Table of AI Combat Options;
-	change the Option entry to the action of the global attacker teleporting;
-	if the teleport amount of the global attacker is 0 or the combat state of the global attacker is not at-Act:
-		change the Weight entry to -1000;
+First AI action selection rule for an at-Act person (called P) (this is the consider teleporting rule):
+	choose a blank Row in the Table of AI Action Options;
+	change the Option entry to the action of P teleporting;
+	if the teleport amount of the running AI is 0:
+		change the Action Weight entry to -1000;
 	otherwise:
-		if the global attacker is teleport impossible aware:
-			change the Weight entry to -100;
+		if P is teleport impossible aware:
+			change the Action Weight entry to -100;
 		otherwise:
-			change the Weight entry to -20.
+			change the Action Weight entry to -20.
 
-Standard AI action select rule (this is the teleport eagerness rule):
-	choose row with an Option of the action of the global attacker teleporting in the Table of AI Combat Options;
-	let n be the teleport eagerness of the global attacker;
+An AI action selection rule for an at-Act person (called P) (this is the teleport eagerness rule):
+	choose row with an Option of the action of P teleporting in the Table of AI Action Options;
+	let n be the teleport eagerness of P;
 	if a random chance of n in 100 succeeds:
-		increase the Weight entry by 35.
+		increase the Action Weight entry by 35.
 
 Every turn (this is the spontaneous teleport rule):
 	repeat with guy running through spontaneous teleporter not off-stage persons:
@@ -568,8 +569,7 @@ Every turn (this is the spontaneous teleport rule):
 Check an actor teleporting (this is the teleport impossible rule):
 	if teleportation is impossible for the actor:
 		now the actor is teleport impossible aware;
-		now global actor is the actor;
-		say "[CAP-actor] tries to teleport away, but something makes this impossible!" instead.
+		say "[The actor] tries to teleport away, but something makes this impossible!" instead.
 
 Carry out an actor teleporting (this is the standard monster teleport rule):
 	now teleportation-from is the location of the actor; [see teleportation Event]
@@ -577,20 +577,22 @@ Carry out an actor teleporting (this is the standard monster teleport rule):
 	choose a teleportation destination;
 	let see-arriving be false;
 	let see-going be false;
-	if location of the actor is the location, now see-going is true;
-	if teleportation-destination is the location, now see-arriving is true;
+	if location of the actor is the location:
+		now see-going is true;
+	if teleportation-destination is the location:
+		now see-arriving is true;
 	move actor to teleportation-destination;
 	now concentration of actor is 0;
 	unless teleport amount of actor is -1:
 		decrease teleport amount of actor by 1;
-	now global actor is the actor;
+	[ TODO: change these to report rules ]
 	if teleportation-from is the location of the player and teleportation-destination is the location of the player:
-		say "[CAP-actor] teleports away, but reappears in the exact same spot.";
+		say "[The actor] teleports away, but reappears in the exact same spot.";
 	otherwise:
 		if see-going is true:
-			say "[CAP-actor] suddenly teleports away!";
+			say "[The actor] suddenly teleports away!";
 		if see-arriving is true:
-			say "[CAP-actor] suddenly teleports into the room!";
+			say "[The actor] suddenly teleports into the room!";
 	have a teleportation event.
 
 
@@ -630,26 +632,27 @@ A person has a number called the disintegrate power. The disintegrate power of a
 A person has a number called the disintegrate cooldown. The disintegrate cooldown of a person is usually 5.
 A person has a number called the current disintegrate cooldown. The current disintegrate cooldown of a person is usually 0.
 
-First standard AI action select rule (this is the consider disintegrating rule):
-	choose a blank Row in the Table of AI Combat Options;
-	change the Option entry to the action of the global attacker disintegrating;
-	change the Weight entry to -1000.
+First AI action selection rule (this is the consider disintegrating rule):
+	let P be the running AI;
+	choose a blank Row in the Table of AI Action Options;
+	change the Option entry to the action of P disintegrating;
+	change the Action Weight entry to -1000.
 		
-Standard AI action select rule (this is the only disintegraters consider disintegrating rule):
-	choose row with an Option of the action of the global attacker disintegrating in the Table of AI Combat Options;
-	if the disintegrate power of the global attacker is greater than 0 and the current disintegrate cooldown of the global attacker is less than 1:
-		change the Weight entry to disintegrate power of the global attacker;
-		if a random chance of 1 in 10 succeeds, increase Weight entry by 10.
+An AI action selection rule for a person (called P) (this is the only disintegraters consider disintegrating rule):
+	choose row with an Option of the action of P disintegrating in the Table of AI Action Options;
+	if the disintegrate power of P is greater than 0 and the current disintegrate cooldown of the P is less than 1:
+		change the Action Weight entry to disintegrate power of P;
+		if a random chance of 1 in 10 succeeds:
+			increase Action Weight entry by 10.
 
-Standard AI action select rule (this is the only disintegrate when there are items rule):
-	choose row with an Option of the action of the global attacker disintegrating in the Table of AI Combat Options;
+An AI action selection rule for a person (called P) (this is the only disintegrate when there are items rule):
+	choose row with an Option of the action of P disintegrating in the Table of AI Action Options;
 	let boolean be false;
-	repeat with guy running through alive persons enclosed by the location:
-		if the faction of the global attacker hates the faction of guy:
-			if guy has at least one[ corruptible] thing:
-				now boolean is true;
+	repeat with guy running through alive persons enclosed by the location opposed by P:
+		if guy has at least one[ corruptible] thing:
+			now boolean is true;
 	if boolean is false:
-		change the Weight entry to -1000.
+		change the Action Weight entry to -1000.
 
 Carry out an actor disintegrating (this is the standard disintegrate rule):
 	let boolean be false;
@@ -657,7 +660,7 @@ Carry out an actor disintegrating (this is the standard disintegrate rule):
 	let item be the non-thing;
 	while boolean is false:
 		now guy is a random alive person enclosed by the location;
-		if the faction of the global attacker hates the faction of guy:
+		if the actor opposes the guy:
 			if guy has at least one[ corruptible] thing:
 				now item is a random[ corruptible] thing had by guy;
 				now boolean is true;
@@ -746,9 +749,9 @@ Hate rule (this is the nonstandard hate rule):
 				rule succeeds;
 	rule fails.
 
-A standard AI target select rule (this is the do not target yourself rule):
-	choose row stored_row in Table of AI Combat Person Options;
-	if stored_person is the global attacker, decrease the Weight entry by 2000.	
+[An AI target selection rule for a person (called target) (this is the do not target yourself rule):
+	if target is the running AI:
+		decrease the Weight entry by 2000.]
 
 Status rule (this is the undead status rule):
 	if the player is undead:
@@ -843,14 +846,15 @@ Last when play begins:
 
 Section - Silver
 
-Damage modifiers rule (this is the silver damage rule):
-	if the global attacker weapon is silver:
-		if the global defender is not undead:
-			if the numbers boolean is true, say " - 2 (silver weapon)[run paragraph on]";
-			decrease the damage modifier by 2;
-		otherwise:
-			if the numbers boolean is true, say " + 4 (silver weapon)[run paragraph on]";
-			increase the damage modifier by 4.
+A dealing damage rule when the global attacker weapon is silver (this is the silver damage rule):
+	if the global defender is not undead:
+		if the numbers boolean is true:
+			say " - 2 (silver weapon)[run paragraph on]";
+		decrease the damage by 2;
+	otherwise:
+		if the numbers boolean is true:
+			say " + 4 (silver weapon)[run paragraph on]";
+		increase the damage by 4;
 
 
 
@@ -863,14 +867,12 @@ Chapter - Doing risky things
 
 A person is either risky or not risky. A person is usually not risky.
 
-An attack modifiers rule (this is the defender is doing something risky rule):
-	if the global defender is risky:
-		if the numbers boolean is true, say " + 6 (defender taking risky action)[run paragraph on]";
-		increase the to-hit modifier by 6.
+An attack roll rule when the global defender is risky (this is the defender is doing something risky rule):
+	say " + 6 (defender taking risky action)[run paragraph on]";
+	increase the roll by 6.
 
-Chance to win rule (this is the CTW risky bonus rule):
-	if the global defender is risky:
-		increase the chance-to-win by 6.
+Chance to win rule when the global defender is risky (this is the CTW risky bonus rule):
+	increase the chance-to-win by 6.
 
 
 Chapter - Beloved of Aite
@@ -943,16 +945,16 @@ Last carry out examining a hot thing:
 	otherwise:
 		say "blazingly hot.".
 
-First attack modifiers rule:
+First attack roll rule:
 	turn off mentioning hotness.
 
-Last attack modifiers rule:
+Last attack roll rule:
 	turn on mentioning hotness.
 
-First damage modifiers rule:
+First dealing damage rule:
 	turn off mentioning hotness.
 
-Last damage modifiers rule:
+Last dealing damage rule:
 	turn on mentioning hotness.
 
 
@@ -995,14 +997,13 @@ Every turn (this is the heat destroys items rule):
 
 Section - Weapons
 
-A damage modifiers rule (this is the heat increases damage rule):
-	if the global attacker weapon is hot:
-		if the global attacker weapon is not ranged:
-			let n be heat strength of the global attacker weapon;
-			decrease n by heat resistance of global defender;
-			if n greater than 0:
-				if the numbers boolean is true, say " + [n] (heat)[run paragraph on]";
-				increase the damage modifier by n.
+A dealing damage rule when the global attacker weapon is hot (this is the heat increases damage rule):
+	if the global attacker weapon is not ranged:
+		let n be heat strength of the global attacker weapon;
+		decrease n by heat resistance of global defender;
+		if n greater than 0:
+			say " + [n] (heat)[run paragraph on]";
+			increase the damage by n.
 
 An aftereffects rule (this is the heat can cause weapons to break rule):
 	let n be heat strength of the global attacker weapon;
@@ -1143,41 +1144,37 @@ To turn on mentioning rust:
 Before printing the name of a rusted thing:
 	if not-mentioning-rust is false, say "rusted [run paragraph on]".
 
-First attack modifiers rule:
+First attack roll rule:
 	turn off mentioning rust.
 
-Last attack modifiers rule:
+Last attack roll rule:
 	turn on mentioning rust.
 
-First damage modifiers rule:
+First dealing damage rule:
 	turn off mentioning rust.
 
-Last damage modifiers rule:
+Last dealing damage rule:
 	turn on mentioning rust.
 
 
 Section - Weapon penalty
 
-A damage modifiers rule (this is the rust decreases damage rule):
-	if the global attacker weapon is rusted:
-		if the numbers boolean is true, say " - 2 (rust)[run paragraph on]";
-		decrease the damage modifier by 2.
+A dealing damage rule when the global attacker weapon is rusted (this is the rust decreases damage rule):
+	say " - 2 (rust)[run paragraph on]";
+	decrease the damage by 2.
 
 Section - Rusted monster penalty
 
-A damage modifiers rule (this is the rusted monster decreases damage rule):
-	if the global attacker is rusted:
-		if the numbers boolean is true, say " - 2 (rust)[run paragraph on]";
-		decrease the damage modifier by 2.
+A dealing damage rule when the global attacker is rusted (this is the rusted monster decreases damage rule):
+	say " - 2 (rust)[run paragraph on]";
+	decrease the damage by 2.
 
-An attack modifiers rule (this is the rusted monster decreases attack rule):
-	if the global attacker is rusted:
-		if the numbers boolean is true, say " - 2 (rust)[run paragraph on]";
-		decrease the to-hit modifier by 2.
+An attack roll rule when the global attacker is rusted (this is the rusted monster decreases attack rule):
+	say " - 2 (rust)[run paragraph on]";
+	decrease the roll by 2.
 
-Chance to win rule (this is the CTW rusted monster penalty rule):
-	if the global attacker is rusted:
-		decrease the chance-to-win by 2.
+Chance to win rule when the global attacker is rusted (this is the CTW rusted monster penalty rule):
+	decrease the chance-to-win by 2.
 
 
 Section - Rust spores
@@ -1365,8 +1362,8 @@ A sudden combat reset rule (this is the sudden concentration reset rule):
 	repeat with guy running through alive persons enclosed by the location:
 		now concentration of guy is 0.
 
-A sudden combat reset rule (this is the at-Normal reset rule):
-	now the combat state of the player is at-Normal;
+A sudden combat reset rule (this is the reset the player to at-Inactive rule):
+	now the player is at-Inactive;
 
 
 Chapter - Impeded movement
@@ -1404,6 +1401,7 @@ To calculate the pdr for (guy - a person):
 	consider the physical damage reduction rules.
 
 
+
 Chapter - Death blessing and death curse
 
 [This is a SECRET status that the player can receive -- for instance, by reading the symbols of death.]
@@ -1411,21 +1409,20 @@ Chapter - Death blessing and death curse
 A person can be death-blessed or not death-blessed.
 A person can be death-cursed or not death-cursed.
 
-A damage modifiers rule (this is the death-blessed rule):
-	if the global defender is death-blessed:
-		if a random chance of 1 in 10 succeeds:
-			if the numbers boolean is true, say " - 10 (blessing of life)[run paragraph on]";
-			decrease the damage modifier by 10;
-			if a random chance of 1 in 2 succeeds:
-				now the global defender is not death-blessed.
+A dealing damage rule when the global defender is death-blessed (this is the death-blessed rule):
+	if a random chance of 1 in 10 succeeds:
+		say " - 10 (blessing of life)[run paragraph on]";
+		decrease the damage by 10;
+		if a random chance of 1 in 2 succeeds:
+			now the global defender is not death-blessed.
 
-A damage modifiers rule (this is the death-cursed rule):
-	if the global defender is death-cursed:
-		if a random chance of 1 in 20 succeeds:
-			if the numbers boolean is true, say " + 10 (curse of death)[run paragraph on]";
-			increase the damage modifier by 10;
-			if a random chance of 1 in 2 succeeds:
-				now the global defender is not death-cursed.
+A dealing damage rule when the global defender is death-cursed (this is the death-cursed rule):
+	if a random chance of 1 in 20 succeeds:
+		say " + 10 (curse of death)[run paragraph on]";
+		increase the damage by 10;
+		if a random chance of 1 in 2 succeeds:
+			now the global defender is not death-cursed.
+
 
 
 Chapter - Falling
@@ -1486,16 +1483,17 @@ Last falling rule (this is the standard deal falling damage rule):
 				increase m by 5;
 			calculate the pdr for falling-guy;
 			decrease m by pdr;
-			if m is less than 0, now m is 0;
+			if m is less than 0:
+				now m is 0;
 			if falling-test-person is the player:
 				say "With a loud smack, you land in [the location], [if m is 0]receiving no damage[otherwise]receiving [bold type][m] damage[roman type][end if].";
 				decrease health of player by m;
 				now concentration of player is 0;
 				now the take no time boolean is false;
-				if player is killed:
+				if player is dead:
 					end the story saying "Your death was not particularly heroic.";
 			otherwise:
-				decrease health of the falling-test-person by m;
+				decrease the health of the falling-test-person by m;
 				now concentration of the falling-test-person is 0;
 				if the location of falling-test-person is the location of the player and m is not 0:
 					say "[The falling-test-person] receives [m] damage from the fall.".
@@ -1516,15 +1514,13 @@ To ghoulify the player:
 	now the faction of the player is undead;
 	now the player form of the player is ghoul.
 
-An attack modifiers rule (this is the ghoul has less chance to hit rule):
-	if the global attacker is the player and player form of the player is ghoul:
-		if the numbers boolean is true, say " - 1 (ghoul)[run paragraph on]";
-		decrease the to-hit modifier by 1.
+An attack roll rule when the global attacker is a ghoul pc (this is the ghoul has less chance to hit rule):
+	say " - 1 (ghoul)[run paragraph on]";
+	decrease the roll by 1.
 
-A damage modifiers rule (this is the ghoul gives damage resistance rule):
-	if the global defender is the player and player form of the player is ghoul:
-		if the numbers boolean is true, say " - 1 (you are a ghoul)[run paragraph on]";
-		decrease the damage modifier by 1.
+A dealing damage rule when the global defender is a ghoul pc (this is the ghoul gives damage resistance rule):
+	say " - 1 (you are a ghoul)[run paragraph on]";
+	decrease the damage by 1.
 
 A physical damage reduction rule (this is the ghoul damage reduction rule):
 	if the test subject is the player and the player form of the player is ghoul:
@@ -1555,19 +1551,16 @@ A willpower test rule (this is the willpower bonus of vampire rule):
 		increase test score by 2;
 		say " + 2 (vampire)[run paragraph on]".
 
-An attack modifiers rule (this is the vampire has more chance to hit rule):
-	if the global attacker is the player and player form of the player is vampire:
-		if the numbers boolean is true, say " + 1 (vampire)[run paragraph on]";
-		increase the to-hit modifier by 1.
+An attack roll rule when the global attacker is a vampire pc (this is the vampire has more chance to hit rule):
+	say " + 1 (vampire)[run paragraph on]";
+	increase the roll by 1.
 
-An attack modifiers rule (this is the vampire has more chance to be hit rule):
-	if the global defender is the player and player form of the player is vampire:
-		if the numbers boolean is true, say " + 2 (you are a vampire)[run paragraph on]";
-		increase the to-hit modifier by 2.
+An attack roll rule when the global defender is a vampire pc (this is the vampire has more chance to be hit rule):
+	say " + 2 (you are a vampire)[run paragraph on]";
+	increase the roll by 2.
 
-Chance to win rule (this is the CTW versus vampire rule):
-	if the global defender is the player and player form of the player is vampire:
-		increase the chance-to-win by 2.
+Chance to win rule when the global defender is a vampire pc (this is the CTW versus vampire rule):
+	increase the chance-to-win by 2.
 		
 Detection rule (this is the vampire detection rule):
 	if the player form of the player is vampire:
@@ -1603,19 +1596,16 @@ Status rule (this is the vampire bat status rule):
 	if player form of the player is vampire bat:
 		say "You are a [bold type]vampire bat[roman type]: +2 defence, -2 attack, large bonus to hiding, bonus to running away, flying, cannot use weapons or clothing, can turn back into a [italic type]vampire[roman type].[line break][run paragraph on]".
 
-An attack modifiers rule (this is the vampire bat has less chance to be hit rule):
-	if the global defender is the player and player form of the player is vampire bat:
-		if the numbers boolean is true, say " - 2 (bat form)[run paragraph on]";
-		decrease the to-hit modifier by 2.
+An attack roll rule when the global defender is a vampire bat pc (this is the vampire bat has less chance to be hit rule):
+	say " - 2 (bat form)[run paragraph on]";
+	decrease the roll by 2.
 
-Chance to win rule (this is the CTW versus vampire bat rule):
-	if the global defender is the player and player form of the player is vampire bat:
-		decrease the chance-to-win by 2.
+Chance to win rule when the global defender is a vampire bat pc (this is the CTW versus vampire bat rule):
+	decrease the chance-to-win by 2.
 		
-An attack modifiers rule (this is the vampire bat has less chance to hit rule):
-	if the global attacker is the player and player form of the player is vampire bat:
-		if the numbers boolean is true, say " - 2 (bat form)[run paragraph on]";
-		decrease the to-hit modifier by 2.		
+An attack roll rule when the global attacker is a vampire bat pc (this is the vampire bat has less chance to hit rule):
+	say " - 2 (bat form)[run paragraph on]";
+	decrease the roll by 2.		
 
 Detection rule (this is the vampire bat detection rule):
 	if the player form of the player is vampire bat:
@@ -1625,15 +1615,13 @@ A flying rule (this is the vampire bat flies rule):
 	if test subject is player and the player form of the player is vampire bat:
 		rule succeeds.
 
-An attack modifiers rule (this is the vampire bat grants better retreat rule):
-	if the global defender is the player and the player is retreater:
-		if the player form of the player is vampire bat:
-			say " - 2 (bat form retreat bonus)[run paragraph on]";
-			decrease the to-hit modifier by 2;
-	if the global defender is the player and the player is runner:
-		if the player form of the player is vampire bat:
-			say " - 2 (bat form retreat bonus)[run paragraph on]";
-			decrease the to-hit modifier by 2.	
+An attack roll rule (this is the vampire bat grants better retreat rule):
+	if the global defender is a vampire bat retreater pc:
+		say " - 2 (bat form retreat bonus)[run paragraph on]";
+		decrease the roll by 2;
+	if the global defender is a vampire bat runner pc:
+		say " - 2 (bat form retreat bonus)[run paragraph on]";
+		decrease the roll by 2.	
 
 Check readying (this is the vampire bat cannot ready a weapon rule):
 	if the player form of the player is vampire bat:

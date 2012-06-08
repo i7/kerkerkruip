@@ -5,36 +5,35 @@ Use authorial modesty.
 Section - Killing
 
 An aftereffects rule (this is the killing after attack rule):
-	if the global defender is killed:
+	if the global defender is dead:
 		have an event of the global attacker killing the global defender.
 
 Section - Some ATTACK prose rules	
 	
-The end reporting blow with paragraph break rule is not listed in any rulebook.
-	
 [Last final blow report rule (this is the new end reporting blow with paragraph break rule):
 	if global defender is alive, say "[paragraph break]".]
 
-First flavour rule:
+Report an actor hitting:
 	rule succeeds.
 
 The standard lose concentration prose rule is not listed in any rulebook.
 
-Last lose concentration prose rule (this is the new lose concentration prose rule):
-	if the concentration loser is the player, say "You lose your [bold type]concentration[roman type]!";
-	if the concentration loser is not the player, say "[The concentration loser] loses [bold type]concentration[roman type]!".
+Last lose concentration prose rule for a person (called P) (this is the new lose concentration prose rule):
+	if P is the player:
+		say "You lose your [bold type]concentration[roman type]!";
+	otherwise:
+		say "[The P] loses [bold type]concentration[roman type]!".
 	
-A fatal player flavour rule (this is the fatal player kills player rule):
-	if the global defender is the player:
-		say "Your attack ends your own life.";
-		rule succeeds.
+Report the player hitting a dead pc (this is the fatal player kills player rule):
+	say "Your attack ends your own life.";
+	rule succeeds;
+
 
 
 Section - Other stuff
 
-A standard AI target select rule (this is the randomise the target result more rule):
-	choose row stored_row in Table of AI Combat Person Options;
-	increase the Weight entry by a random number between 0 and 3.
+An AI target selection rule (this is the randomise the target result more rule):
+	increase the Weight by a random number between 0 and 3;
 
 Understand "creature" as a person.
 
@@ -42,19 +41,16 @@ Check switching the numbers off:
 	say "The numerical representation of combat cannot be switched off in this game." instead.
 
 After reading a command (this is the d might mean dodge rule):
-	if the player's command matches "d":
-		if the combat state of the player is at-React:
-			say "[italic type](Perhaps you wanted to dodge? The abbreviation for that is 'do'.)[roman type][paragraph break]".
+	if the player's command matches "d" and the player is at-React:
+		say "[italic type](Perhaps you wanted to dodge? The abbreviation for that is 'do'.)[roman type][paragraph break]".
+
 
 
 Section - Because we have teleporting creatures
 
-The standard attacking second phase rule is not listed in any rulebook.
-
-Carry out an actor attacking when the fight consequences variable is true (this is the alternative attacking second phase rule):
-	if the actor is alive and the noun is alive:
-		if the location of the actor is the location of the noun:
-			make the actor strike a blow against the noun.
+Check an actor hitting (this is the stop hitting if the target has teleported rule):
+	unless the location of the actor is the location of the noun:
+		stop the action;
 
 
 [This could be fun, but it needs to be an option that can be set to: none, short, medium, long.]
@@ -71,10 +67,10 @@ This is the non-standard attack roll rule:
 Section - Because sometimes one can attack outside combat
 
 [As I write this, this is only possible when the player attacks himself when commanded by Nomos.]
+First carry out attacking the player when the combat status is peace (this is the attack self when not in combat rule):
+	try the actor hitting the noun instead;
+	
 
-First carry out attacking:
-	if not hate is present:
-		make the actor strike a blow against the noun instead.
 
 Chapter - More actions that take no time
 
@@ -90,12 +86,11 @@ Section - Going nowhere
 
 The can't go that way rule is not listed in any rulebook.
 
-Check an actor going (this is the alternative can't go that way rule):
-	if the room gone to is nothing:
-		take no time;
-		if the door gone through is nothing, stop the action with library
-			message going action number 2 for the room gone from;
-		stop the action with library message going action number 6 for the door gone through;
+Check an actor going when the room gone to is nothing (this is the alternative can't go that way rule):
+	take no time;
+	if the door gone through is nothing:
+		stop the action with library message going action number 2 for the room gone from;
+	stop the action with library message going action number 6 for the door gone through;
 
 Section - Taking what is already carried
 
@@ -193,10 +188,10 @@ Section - Inherent damage modifier
 
 A person has a number called the inherent damage modifier. The inherent damage modifier of a person is usually 0.
 
-A damage modifiers rule (this is the inherent damage modifier rule):
-	if inherent damage modifier of the global attacker is not 0:
-		if the numbers boolean is true, say " + ", inherent damage modifier of the global attacker, " (inherent bonus)[run paragraph on]";
-		increase the damage modifier by the inherent damage modifier of the global attacker.
+A dealing damage rule when the inherent damage modifier of the global attacker is not 0 (this is the inherent damage modifier rule):
+	if the numbers boolean is true:
+		say " + ", inherent damage modifier of the global attacker, " (inherent bonus)[run paragraph on]";
+	increase the damage by the inherent damage modifier of the global attacker;
 
 
 Section - Weapon descriptions
@@ -226,14 +221,10 @@ Section - New rolling mechanism
 
 Instead of the standard 1d10 of ATTACK, we roll 1d7 + 1d4 - 1.]
 
-The standard attack roll rule is not listed in any rulebook.
-
-The current roll is a number that varies.
-
-A basic attack roll rule (this is the alternative attack roll rule):
-	if the numbers boolean is true, say "[italic type]Rolling ";
-	now the to-hit roll is a roll of the dice;
-	if the numbers boolean is true, say the to-hit roll, "[run paragraph on]".
+An attack roll rule (this is the alternative attack roll rule):
+	now the roll is a roll of the dice;
+	say "[italic type]Rolling ", the roll, "[run paragraph on]".
+The alternative attack roll rule is listed instead of the standard attack roll rule in the attack roll rules.
 
 To decide which number is a roll of the dice:
 	let n be a random number between 1 and 7;

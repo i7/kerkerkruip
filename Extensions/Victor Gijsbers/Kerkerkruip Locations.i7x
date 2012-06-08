@@ -12,7 +12,6 @@ Part - The rooms themselves
 
 Chapter - Entrance Hall
 
-
 The Entrance Hall is a room. "The vast entrance hall is empty, silent, foreboding. Skull-sized rubies project a red light far too bright for the eyes of a human."
 
 Entrance Hall is not habitable.
@@ -28,15 +27,14 @@ The skull-sized rubies are in entrance hall. The skull-sized rubies are scenery 
 
 The red light is scenery in Entrance Hall. The description of the red light is "You force yourself to look straight into the light -- but after the merest fraction of a second, you involuntarily close your eyes against the painful glare.". 
 
-An attack modifiers rule (this is the attack penalty in Entrance Hall rule):
+An attack roll rule (this is the attack penalty in Entrance Hall rule):
 	if the location is Entrance Hall:
 		unless the global attacker is blind:
 			let n be 2 minus the smoke penalty of Entrance Hall;
 			if n is greater than 0:
 				say " - [n] (blinding light)[run paragraph on]";
-				decrease the to-hit modifier by n.
+				decrease the roll by n.
 	
-
 The player is in Entrance Hall.
 
 
@@ -75,20 +73,19 @@ After printing the name of something while looking when in Hall of Mirrors:
 	unless the player is blind:
 		say " [one of](reflected thousandfold)[or](mirrored all around you)[or](copied and copied by mirrors)[or](multiplied ad infinitum)[at random]" instead.
 
-A whether attacking begins rule (this is the sometimes attack a mirror image in Hall of Mirrors rule):
-	if the location is Hall of Mirrors:
-		unless the global attacker is blind:
-			unless the global attacker grapples the global defender:
-				unless the global defender grapples the global attacker:
-					test the perception of global attacker against 10;
-					if test result is false:
-						say " Confused by the mirrors, [if global attacker is the player]you start[otherwise][the global attacker] starts[end if] attacking a reflection before realising [if global attacker is the player]your[otherwise]its[end if] mistake.";
-						if the concentration of the global attacker is greater than 1:
-							now the concentration of the global attacker is 1; 
-						rule fails;
-		[				consider the take away until attack circumstances rules;]
-					otherwise:
-						say " Seeing through the illusion created by the mirrors, [if global attacker is the player]you attack[otherwise][the global attacker] attacks[end if] the real [if global defender is not the player][global defender][otherwise]you[end if].".
+Check an actor hitting when the location is Hall of Mirrors (this is the sometimes attack a mirror image in Hall of Mirrors rule):
+	unless the global attacker is blind:
+		unless the global attacker grapples the global defender:
+			unless the global defender grapples the global attacker:
+				test the perception of global attacker against 10;
+				if test result is false:
+					say " Confused by the mirrors, [if global attacker is the player]you start[otherwise][the global attacker] starts[end if] attacking a reflection before realising [if global attacker is the player]your[otherwise]its[end if] mistake.";
+					if the concentration of the global attacker is greater than 1:
+						now the concentration of the global attacker is 1; 
+					rule fails;
+	[				consider the take away until attack circumstances rules;]
+				otherwise:
+					say " Seeing through the illusion created by the mirrors, [if global attacker is the player]you attack[otherwise][the global attacker] attacks[end if] the real [if global defender is not the player][global defender][otherwise]you[end if].".
 
 A perception test rule (this is the concentration bonus in Hall of Mirrors rule): [BUG with chain golem]
 	if an actor attacking in Hall of Mirrors and the actor is the test subject:
@@ -97,15 +94,13 @@ A perception test rule (this is the concentration bonus in Hall of Mirrors rule)
 				increase test score by concentration of the actor;
 				say " + [concentration of the actor] (concentration)[run paragraph on]".
 
-A standard AI action select rule (this is the concentration better in Hall of Mirrors select rule):
-	if location is Hall of Mirrors:
-		choose row with an Option of the action of the global attacker concentrating in the Table of AI Combat Options;
-		increase the Weight entry by 1.
+An AI action selection rule for a person (called P) when the location is Hall of Mirrors (this is the concentration better in Hall of Mirrors select rule):
+	choose row with an Option of the action of P concentrating in the Table of AI Action Options;
+	increase the Action Weight entry by 1.
 
 
 
 Chapter - Phantasmagoria
-
 
 Phantasmagoria is a room. "This huge hall is filled with the radiant images of warriors long dead, fighting their bloody battles over and over again.[run paragraph on][unless the player is blind] You see [phantasmagoria show] -- but the scene changes before you can focus on any details.[run paragraph on][end if]"
 
@@ -117,7 +112,6 @@ Phantasmagoria is treasurable.
 Phantasmagoria is extra-accepting.
 Phantasmagoria is vp-agnostic.
 Phantasmagoria is magical.
-
 
 The radiant images are scenery in Phantasmagoria. Understand "warriors" and "battles" and "image" as the radiant images.
 
@@ -157,11 +151,10 @@ Every turn when in phantasmagoria:
 							now concentration of guy is 0;
 			say "Suddenly, [one of]a disintegrating skeletal warrior[or]a blast of dragon's fire[or]a naked male slave screaming in fear[or]a naked female slave fleeing in tears[or]a huge fountain of fire[or]a crashing ballista bolt[or]a drowning knight, crying for his god,[or]a ghost devouring the flesh of a still living man[or]a frenzied bull elephant[or]a shrieking princess in the claws of a demon[or]an obese king carried by seven blind eunuchs[at random] appears. [unless lijst is empty]While only an image that flickers and then disappears, it startles [lijst with definite articles][otherwise]The illusions do not affect anyone[end if].".
 
-A standard AI action select rule (this is the phantasmagoria concentration select rule):
-	choose row with an Option of the action of the global attacker concentrating in the Table of AI Combat Options;
-	if the location is Phantasmagoria:
-		unless the global attacker is blind:
-			decrease the Weight entry by 2 times the concentration of the global attacker.
+An AI action selection rule for a person (called P) when the location is Phantasmagoria (this is the phantasmagoria concentration select rule):
+	unless the running AI is blind:
+		choose row with an Option of the action of P concentrating in the Table of AI Action Options;
+		decrease the Action Weight entry by 2 times the concentration of P.
 
 
 Chapter - Lake of Lava
@@ -256,34 +249,33 @@ An additional placement rule:
 		place Lake of Lava from Bridge of Doom at x by y by z;
 		now placing Bridge of Doom is false.
 
-Standard AI action select rule (this is the do not dodge in bridge of doom rule):
-	if the location is Bridge of Doom:
-		unless the global attacker is flying:
-			choose row with an Option of the action of the global attacker dodging in the Table of AI Combat Options;
-			decrease the Weight entry by 100.
+An AI action selection rule for a person (called P) when the location is Bridge of Doom (this is the do not dodge in bridge of doom rule):
+	unless P is flying:
+		choose row with an Option of the action of P dodging in the Table of AI Action Options;
+		decrease the Action Weight entry by 100.
 
 Player-vulnerable-to-bridge is a truth state that varies. Player-vulnerable-to-bridge is false.
 
-An aftereffects before flavour text rule (this is the better not dodge on bridge of doom rule):
+After an actor hitting (this is the better not dodge on bridge of doom rule):
 	if the location is the bridge of doom and the global defender can move:
 		if the player is the global defender and the player is at dodge:
-			if the to-hit roll is not greater than the defence of the global defender:
+			if the attack strength is less than the defence of the global defender:
 				unless the player is flying:
 					if player-vulnerable-to-bridge is true:
-						say "You successfully dodge the attack of the [global attacker]. Since there is no place to dodge to on the narrow bridge, your maneuver continues with an involuntary downward movement.";
+						say "You successfully dodge the attack of [the global attacker]. Since there is no place to dodge to on the narrow bridge, your maneuver continues with an involuntary downward movement.";
 						end the game saying "You fell into the lava.";
 						stop the action;
 					otherwise:
-						say "You successfully dodge the attack of the [global attacker]. Since there is no place to dodge to on the narrow bridge, your maneuver almost ends in a drop down into the lava -- but you manage to regain your balance almost miraculously. This is something you might not want to try again.";
+						say "You successfully dodge the attack of [the global attacker]. Since there is no place to dodge to on the narrow bridge, your maneuver almost ends in a drop down into the lava -- but you manage to regain your balance almost miraculously. This is something you might not want to try again.";
 						now player-vulnerable-to-bridge is true.
 
 An aftereffects rule (this is the hit may send you off the bridge of doom rule):
 	if global defender can fall:
-		if the location is the bridge of doom and the global defender is not killed:
+		if the location is the bridge of doom and the global defender is alive:
 			if the final damage is greater than 0:
 				let n be a random number between 0 and 12;
 				if n is less than final damage:
-					say "Reeling from the blow, [the global defender] balance[if the global defender is not the player and the global defender is not plural-named]s[end if] on the edge of the bridge. [italic type]";
+					say "Reeling from the blow, [the global defender] balance[s] on the edge of the bridge. [italic type]";
 					let n be a random number between 6 and 10;
 					test the dexterity of the global defender against n;
 					say "[roman type]";
@@ -300,7 +292,7 @@ An aftereffects rule (this is the hit may send you off the bridge of doom rule):
 							say " [The global defender] slips and falls, disappearing into the lava below.";
 							have a falling event with the global defender falling in Bridge of Doom for reason 1;
 					otherwise:
-						say " [CAP-defender] manage[if the global defender is not the player and the global defender is not plural-named]s[end if] to stay on the bridge.".
+						say " [The global defender] manage[s] to stay on the bridge.".
 
 
 Exceedingly narrow bridge is scenery in Bridge of Doom. The description of exceedingly narrow bridge is "You doubt there is enough room on the bridge to safely dodge an attack.".
@@ -397,8 +389,8 @@ Before doing anything except attacking when Nomos bonus is true:
 			try attacking X instead;
 		otherwise:
 			say "You plan on [current action], but find your body attacking itself instead!";
-			make the player strike a blow against the player instead;
-			if the player is killed:
+			try the player hitting the player instead;
+			if the player is dead:
 				end the game saying "Nomos is not to be toyed with.".
 
 Before attacking when Nomos counter is greater than 0:
@@ -419,12 +411,12 @@ Before attacking when Nomos counter is greater than 0:
 		-- 4: say "speaking a language you have never heard instead." instead;
 		-- 5: say "contemplating the inevitability of Death instead." instead.
 
-An attack modifiers rule (this is the Nomos attack bonus rule):
+An attack roll rule (this is the Nomos attack bonus rule):
 	if Nomos bonus is true and the global attacker is the player:
 		if the numbers boolean is true, say " + 2 (the law is with you)[run paragraph on]";
-		increase the to-hit modifier by 2.
+		increase the roll by 2.
 
-A damage modifiers rule (this is the Nomos damage bonus rule):
+A dealing damage rule (this is the Nomos damage bonus rule):
 	if Nomos bonus is true and the global attacker is the player:
 		let n be 0;
 		if the global defender provides the property level:
@@ -432,7 +424,7 @@ A damage modifiers rule (this is the Nomos damage bonus rule):
 		otherwise:
 			now n is 2;
 		if the numbers boolean is true, say " + [n] (the law is with you)[run paragraph on]";
-		increase the damage modifier by n.
+		increase the damage by n.
 
 The alternative do not kill yourself rule is listed instead of the do not kill yourself rule in the check attacking rulebook.
 
@@ -531,7 +523,7 @@ To have Aite intervene:
 		-- 1: 
 			say "A gigantic [one of]sword[or]spear[or]pike[at random] bursts out of the ground, skewering you for [bold type][X times 2] damage[roman type]!";
 			decrease the health of the player by X times 2;
-			unless the player is killed:
+			unless the player is dead:
 				let the player lose concentration;
 				if the player is hidden:
 					now the player is not hidden;
@@ -541,7 +533,7 @@ To have Aite intervene:
 		-- 2: 
 			say "A huge [one of]sword[or]spear[or]pike[at random] bursts out of the ground, impaling you for [bold type][X] damage[roman type]!";
 			decrease the health of the player by X;
-			unless the player is killed:
+			unless the player is dead:
 				let the player lose concentration;
 			if health of the player is less than 1:
 				end the game saying "Aite is a dangerous mistress.";
@@ -556,7 +548,7 @@ To have Aite intervene:
 		-- 5: 
 			say "A huge [one of]sword[or]spear[or]pike[at random] bursts out of the ground, impaling [the guy] for [bold type][X] damage[roman type]!";
 			decrease the health of the guy by X;
-			unless guy is killed:
+			unless guy is dead:
 				let the guy lose concentration;			
 			if health of the guy is less than 1:
 				now the global attacker is the player;
@@ -565,7 +557,7 @@ To have Aite intervene:
 		-- 6: 
 			say "A gigantic [one of]sword[or]spear[or]pike[at random] bursts out of the ground, impaling [the guy] for [bold type][X times 2] damage[roman type]!";
 			decrease the health of the guy by X times 2;
-			unless guy is killed:
+			unless guy is dead:
 				let the guy lose concentration;			
 			if health of the guy is less than 1:
 				now the global attacker is the player;
@@ -573,11 +565,11 @@ To have Aite intervene:
 				consider the grant powers when a monster is slain rule.
 
 
-An attack modifiers rule (this is the Aite-loved bonus in Temple of Aite rule):
+An attack roll rule (this is the Aite-loved bonus in Temple of Aite rule):
 	if the location is the Temple of Aite:
 		if the global attacker is beloved of Aite:
 			if the numbers boolean is true, say " + 2 (beloved of Aite)[run paragraph on]";
-			increase the to-hit modifier by 2.
+			increase the roll by 2.
 
 Chance to win rule (this is the CTW Aite bonus rule):
 	if the location is the Temple of Aite:
@@ -817,7 +809,7 @@ Treasure placement rule (this is the fill the sarcophagus rule):
 
 Report opening the sarcophagus:
 	if the sarcophagus-inhabitant is not yourself:
-		if the sarcophagus-inhabitant is not off-stage or the sarcophagus-inhabitant is killed:
+		if the sarcophagus-inhabitant is not off-stage or the sarcophagus-inhabitant is dead:
 			now the sarcophagus-inhabitant is yourself;
 	if the sarcophagus-inhabitant is not yourself and the sarcophagus contains less than one thing:
 		move sarcophagus-inhabitant to the location of the sarcophagus;
@@ -875,7 +867,7 @@ Space-Time Discontinuum is magical.
 
 The difficulty level of Space-Time Discontinuum is 1. [Too weird for newbies.]
 
-Initiative rule (this is the initiative is almost completely random in Space-Time Discontinuum rule):
+An initiative update rule (this is the initiative is almost completely random in Space-Time Discontinuum rule):
 	if location is Space-Time Discontinuum and the location is not initiative-conferring:
 		repeat with X running through all alive persons enclosed by the location:				
 			now the initiative of X is a random number between 0 and 100.
@@ -964,11 +956,11 @@ Carry out direction-jumping down in Vast Staircase:
 An aftereffects rule (this is the hit may send you off the vast staircase rule):
 	if staircase still goes down:
 		if the global defender can fall:
-			if the location is the vast staircase and the global defender is not killed:
+			if the location is the vast staircase and the global defender is alive:
 				if the final damage is greater than 0:
 					let n be a random number between 0 and 16;
 					if n is less than final damage:
-						say "Reeling from the blow, [the global defender] balance[if the global defender is not the player or the global defender is plural-named]s[end if] on the edge of the staircase. [italic type]";
+						say "Reeling from the blow, [the global defender] balance[s] on the edge of the staircase. [italic type]";
 						let n be a random number between 6 and 11;
 						test the dexterity of the global defender against n;
 						say "[roman type]";
@@ -979,7 +971,7 @@ An aftereffects rule (this is the hit may send you off the vast staircase rule):
 								say " [The global defender] slips and falls!";
 							have a falling event with global defender falling in Vast Staircase for reason 1;								
 						otherwise:
-							say " [CAP-defender] manage[if the global defender is not the player or the global defender is plural-named]s[end if] to stay on the staircase.".
+							say " [The global defender] manage[s] to stay on the staircase.".
 
 A thing called the staircase is scenery in vast Staircase. Understand "stairs" as the staircase. The description of the staircase is "The staircase winds around the wall, leaving the middle of the room empty.". Instead of climbing the staircase: try going up.
 
@@ -1210,7 +1202,7 @@ Instead of examining the fascinating drawing:
 	repeat with guy running through alive not off-stage persons:
 		unless guy is Malygris or guy is Nameless Horror:
 			add guy to X;
-	let n be the number of killed persons;
+	let n be the number of dead persons;
 	let item be a random readied weapon carried by the player;
 	if the number of entries in X is greater than 1:
 		say "The artist has skillfully drawn a battle scene involving [X with indefinite articles]. [if n is greater than 2]Several figures seem to have been smudged out. [end if]In the background, Malygris rises triumphant over all[if Eternal Prison is placed] -- unless the huge shadow behind him is a creature threatening to consume even him[end if]. You could further [italic type]examine[roman type] the individual creatures, if you wanted to.";
@@ -1229,16 +1221,12 @@ After deciding the scope of the player while adjusted scope for the drawing room
 		unless guy is Nameless Horror:   [TODO!!! This is an ugly hack.]
 			place guy in scope.
 
-This is the switch on adjusted scope for the drawing room rule:
+Before running the parser:
 	if the main actor is the player and the player is in the drawing room:
 		now adjusted scope for the drawing room is true.
 
-The switch on adjusted scope for the drawing room rule is listed before the parse command rule in the turn sequence rules.
-
-This is the switch off adjusted scope for the drawing room rule:
+After running the parser:
 	now adjusted scope for the drawing room is false.
-
-The switch off adjusted scope for the drawing room rule is listed before the acting fast rule in the turn sequence rules.
 
 
 

@@ -2,6 +2,7 @@
 *.inform
 * Materials
 *.i7x
+*.glk*
 
 # The stuff we want to include is listed here, prefixed with !
 !Extensions/Victor Gijsbers/Kerkerkruip*

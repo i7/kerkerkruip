@@ -265,7 +265,7 @@ To do the level 10 victory with (guy - a person):
 Section - Death message
 
 Every turn (this is the player death rule):
-	if the player is killed:
+	if the player is dead:
 		unless the global attacker is the player:
 			end the game saying "You were killed by [no dead property][the global attacker][dead property].";
 		otherwise:
@@ -530,7 +530,7 @@ Before printing the player's obituary (this is the award Mageslayer achievement 
 
 Section - Deathblow
 
-Last final blow report rule (this is the award Deathblow achievement rule):
+Last aftereffects rule (this is the award Deathblow achievement rule):
 	if global attacker is player and final damage is greater than 19:
 		award achievement Deathblow.
 
@@ -544,14 +544,13 @@ Section - From the shadows I come
 
 From-the-shadows boolean is a truth state that varies. From-the-shadows boolean is false.
 
-A preliminary results of attacking rule (this is the set up from the shadows I come rule):
-	if global attacker is the player and player is hidden:
-		if health of the global defender is not less than permanent health of the global defender:
-			now from-the-shadows boolean is true.
+First carry out a hidden pc hitting (this is the set up from the shadows I come rule):
+	if health of the global defender is not less than permanent health of the global defender:
+		now from-the-shadows boolean is true.
 
-Last final blow report rule (this is the award from the shadows achievement rule):
+Last aftereffects rule (this is the award from the shadows achievement rule):
 	if from-the-shadows boolean is true:
-		if global defender is killed:
+		if global defender is dead:
 			award achievement From the shadows I come;
 		now from-the-shadows boolean is false.
 
@@ -568,9 +567,9 @@ Before printing the player's obituary (this is the award Detox achievement rule)
 			
 Section - Injury to insult
 
-Last final blow report rule (this is the award injury to insult achievement rule):
+Last aftereffects rule (this is the award injury to insult achievement rule):
 	if global attacker is the player and global defender is Malygris:
-		if Malygris is killed and global attacker weapon is a natural weapon:
+		if Malygris is dead and global attacker weapon is a natural weapon:
 			award achievement Injury to insult.
 
 Section - Unmoved

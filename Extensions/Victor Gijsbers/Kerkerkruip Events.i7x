@@ -66,7 +66,7 @@ A fragmentation rule (this is the basic fragmentation damage rule):
 		decrease m by pdr;
 		if m is less than 0, now m is 0;			
 		decrease health of guy by m;
-		say "[no dead property][if n is 1 and original n is not 1]and [end if][m] damage to [the guy][if guy is killed] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive and m is not 0] (which breaks [possessive of the guy] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][dead property][run paragraph on]";
+		say "[if n is 1 and original n is not 1]and [end if][m] damage to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive and m is not 0] (which breaks [possessive of the guy] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
 		unless m is 0:
 			now concentration of the guy is 0;
 		decrease n by 1;

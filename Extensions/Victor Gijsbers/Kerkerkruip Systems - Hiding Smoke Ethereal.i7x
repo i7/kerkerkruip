@@ -15,21 +15,20 @@ Status rule (this is the hidden status rule):
 	if the player is hidden:
 		say "You are [bold type]hidden[roman type].[line break][run paragraph on]"
 
-Attack modifiers rule (this is the hidden gives a small attack bonus rule):
-	if the global attacker is hidden:
-		say " + 2 (hidden)[run paragraph on]";
-		increase the to-hit modifier by 2.
+An attack roll rule when the global attacker is hidden (this is the hidden gives a small attack bonus rule):
+	say " + 2 (hidden)[run paragraph on]";
+	increase roll by 2.
 
-First standard_attacker rule (this is the do nothing when all enemies hidden rule):
+First Standard AI rule (this is the do nothing when all enemies hidden rule):
 	let p be false;
 	let q be false;
 	repeat with X running through all alive persons enclosed by the location:
-		if the faction of the global attacker hates the faction of X:
+		if the faction of the running AI hates the faction of X:
 			now p is true;
 			if X is not hidden:
 				now q is true;
 	if p is true and q is false:
-		say "[CAP-attacker] [one of]remains unaware of your presence[or]does not notice you[or]does not detect your presence[at random].";
+		say "[The running AI] [one of]remains unaware of your presence[or]does not notice you[or]does not detect your presence[at random].";
 		rule succeeds.
 	
 
@@ -277,44 +276,38 @@ A smoke immunity rule (this is the smoke immune if eyeless rule):
 
 Section - Effects of smoke
 
+To decide if the attacker is affected by smoke:
+	if the smoke penalty of the location is less than 1 or the global attacker is smoke immune:
+		no;
+	yes;
+
 A detection rule (this is the smoke lessens probability of detection rule):
 	unless main actor is smoke immune:
 		decrease the detection probability by smoke penalty of the location.
 
-An attack modifiers rule (this is the thick smoke makes attacking a little harder rule):
-	if the smoke penalty of the location is greater than 0:
-		unless the global attacker is smoke immune:
-			say " - [smoke penalty of the location] (smoke)[run paragraph on]";
-			decrease the to-hit modifier by smoke penalty of the location.	
+An attack roll rule when the attacker is affected by smoke (this is the thick smoke makes attacking a little harder rule):
+	say " - [smoke penalty of the location] (smoke)[run paragraph on]";
+	decrease the roll by smoke penalty of the location.	
 
-Chance to win rule (this is the CTW smoke penalty rule):
-	if the smoke penalty of the location is greater than 0:
-		unless the global attacker is smoke immune:
-			decrease the chance-to-win by smoke penalty of the location.
+Chance to win rule when the attacker is affected by smoke (this is the CTW smoke penalty rule):
+	decrease the chance-to-win by smoke penalty of the location.
 			
-Attack modifiers rule (this is the running is less risky with smoke rule):
-	if the smoke penalty of the location is greater than 0:
-		unless the global attacker is smoke immune:
-			if the global defender is the player:
-				if the player is runner:
-					let n be smoke penalty of the location;
-					if the numbers boolean is true, say " - [n] (running covered by smoke)[run paragraph on]";
-					decrease the to-hit modifier by n.
+An attack roll rule when the attacker is affected by smoke (this is the running is less risky with smoke rule):
+	if the global defender is the player and the player is runner:
+		let n be smoke penalty of the location;
+		say " - [n] (running covered by smoke)[run paragraph on]";
+		decrease the roll by n.
 			
-Attack modifiers rule (this is the retreating is less risky with smoke rule):
-	if the smoke penalty of the location is greater than 0:
-		unless the global attacker is smoke immune:
-			if the global defender is the player:
-				if the player is retreater:
-					let n be smoke penalty of the location;
-					if the numbers boolean is true, say " - [n] (retreat covered by smoke)[run paragraph on]";
-					decrease the to-hit modifier by n.
+An attack roll rule when the attacker is affected by smoke (this is the retreating is less risky with smoke rule):
+	if the global defender is the player and the player is retreater:
+		let n be smoke penalty of the location;
+		say " - [n] (retreat covered by smoke)[run paragraph on]";
+		decrease the roll by n.
 
-A perception test rule (this is the perception penalty of smoke rule): [BUG with chain golem]
-	if the smoke penalty of the location is greater than 0:
-		unless the global attacker is smoke immune:
-			decrease test score by smoke penalty of the location;
-			say " - [smoke penalty of the location] (smoke)[run paragraph on]".
+A perception test rule when the attacker is affected by smoke (this is the perception penalty of smoke rule): [BUG with chain golem]
+	let n be smoke penalty of the location;
+	decrease test score by n;
+	say " - [n] (smoke)[run paragraph on]".
 
 
 
@@ -373,12 +366,11 @@ Before ethereal-forbidden-second:
 			take no time;
 			say "You cannot do that while you are ethereal." instead.
 
-Last calculate the final damage rule (this is the ethereal damage modifier rule):
-	if the global defender is ethereal:
-		unless the global attacker is ethereal:
-			say " - 100% (defender ethereal)[run paragraph on]";
-			now final damage is 0;
-			decrease hit protection of the global defender by 1;
+Last dealing damage rule (this is the ethereal damage modifier rule):
+	if the global defender is ethereal and the global attacker is not ethereal:
+		say " - 100% (defender ethereal)[run paragraph on]";
+		now final damage is 0;
+		decrease hit protection of the global defender by 1;
 	otherwise if the global attacker is ethereal:
 		say " - 100% (attacker ethereal)[run paragraph on]";
 		now final damage is 0;

@@ -59,7 +59,7 @@ A room is either initiative-conferring or not initiative-conferring. A room is u
 	repeat with place running through rooms:
 		now place is initiative-conferring.]
 
-Initiative rule (this is the player wins initiative first time in a room rule):
+Initiative update rule (this is the player wins initiative first time in a room rule):
 	if the location is initiative-conferring:
 		increase the initiative of the player by 10;
 		now the location is not initiative-conferring.
@@ -94,7 +94,7 @@ Last check going (this is the going and retreating in combat rule):
 						now the player does not press X;
 						if the faction of X hates the faction of the player:
 							unless X is non-attacker:
-								make X strike a blow against the player;
+								try X hitting the player;
 				now concentration of X is 0;
 		otherwise:			
 			unless forced-action is true:
@@ -106,30 +106,26 @@ Last check going (this is the going and retreating in combat rule):
 				if the player is alive:
 					if the faction of X hates the faction of the player:
 						unless X is non-attacker:
-							make X strike a blow against the player;
+							try X hitting the player;
 				now concentration of X is 0;
 		now the player is not runner;
 		now the player is not retreater;				
-		if the player is killed:
+		if the player is dead:
 			do nothing instead;
 		unless the player can move:
 			do nothing instead.
 
-Check looking:
-	if the player is killed, do nothing instead.
+Check looking when the player is dead:
+	do nothing instead.
 	
 
-Attack modifiers rule (this is the running is risky rule):
-	if the global defender is the player:
-		if the player is runner:
-			if the numbers boolean is true, say " + 4 (you are running)[run paragraph on]";
-			increase the to-hit modifier by 4.
+An attack roll rule when the global defender is a runner pc (this is the running is risky rule):
+	say " + 4 (you are running)[run paragraph on]";
+	increase the roll by 4.
 
-Damage modifiers rule (this is the running is very risky rule):
-	if the global defender is the player:
-		if the player is runner:
-			if the numbers boolean is true, say " + 2 (you are running)[run paragraph on]";
-			increase the damage modifier by 2.
+A dealing damage rule when the global defender is a runner pc (this is the running is very risky rule):
+	say " + 2 (you are running)[run paragraph on]";
+	increase the damage by 2.
 
 
 
@@ -396,7 +392,8 @@ Carry out remembering:
 
 A person has a room called the last-seen-location. The last-seen-location of a person is usually Null-Room.
 
-Even acting fast (this is the set last-seen-location rule):
+[Even acting fast?? TODO - Victor, is this rule right?]
+Every turn when acting fast (this is the set last-seen-location rule):
 	repeat with guy running through alive persons in the location:
 		now last-seen-location of guy is the location.
 
@@ -472,11 +469,11 @@ Trophylisting is acting fast.
 Understand "trophy" and "trophies" and "list trophies" as trophylisting.
 
 Carry out trophylisting:
-	if the number of killed persons is 0:
+	if the number of dead persons is 0:
 		say "Nobody has died yet.";
 	otherwise:
 		say "The following creatures have been vanquished:";
-		repeat with guy running through killed seen persons:
+		repeat with guy running through dead seen persons:
 			say "[line break]- [italic type][no dead property][the guy][dead property][roman type] (level [if group level of the guy is not 0][group level of the guy][otherwise][level of the guy][end if])";
 		say "[paragraph break]".
 

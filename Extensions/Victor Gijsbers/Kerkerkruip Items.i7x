@@ -239,9 +239,9 @@ Before applying something to a person (this is the putting a salve on someone is
 		if player is not hidden:
 			say "The salve at the ready, you attempt to reach [the second noun].";
 			now player is risky;
-			make the second noun strike a blow against the player;
+			try the second noun hitting the player;
 			now player is not risky;
-			if player is killed:
+			if player is dead:
 				stop the action;
 		now player is not hidden.
 
@@ -472,26 +472,23 @@ The passive parry max of a dagger is usually 1.
 The active parry max of a dagger is usually 1.
 The weapon damage bonus of a dagger is usually 0.
 
-An attack modifiers rule (this is the dagger extra tension attack bonus rule):
-	if the global attacker weapon is a dagger:
-		let n be 0;
-		now n is the tension divided by 2;
-		if n is not 0:
-			if the numbers boolean is true, say " + ", n, " (dagger benefits from tension)[run paragraph on]";
-			increase the to-hit modifier by n.
+An attack roll rule when the global attacker weapon is a dagger (this is the dagger extra tension attack bonus rule):
+	let n be 0;
+	now n is the tension divided by 2;
+	if n is not 0:
+		say " + ", n, " (dagger benefits from tension)[run paragraph on]";
+		increase the roll by n.
 
-Chance to win rule (this is the CTW dagger concentration bonus rule):
-	if stored_weapon is a dagger:
-		let n be the tension divided by 2;
-		increase the chance-to-win by n.
+Chance to win rule when the chosen weapon is a dagger (this is the CTW dagger concentration bonus rule):
+	let n be the tension divided by 2;
+	increase the chance-to-win by n.
 		
-A damage modifiers rule (this is the dagger extra tension damage bonus rule):
-	if the global attacker weapon is a dagger:
-		let n be 0;
-		now n is the tension divided by 4;
-		if n is not 0:
-			if the numbers boolean is true, say " + ", n, " (dagger benefits from tension)[run paragraph on]";
-			increase the damage modifier by n.
+A dealing damage rule when the global attacker weapon is a dagger (this is the dagger extra tension damage bonus rule):
+	let n be 0;
+	now n is the tension divided by 4;
+	if n is not 0:
+		say " + ", n, " (dagger benefits from tension)[run paragraph on]";
+		increase the damage by n.
 
 The special weapon info of a dagger is usually "; benefits from tension[run paragraph on]".
 
@@ -645,19 +642,18 @@ Carry out inhaling the essence of caution:
 	increase perception of the player by 1;
 	now the player is cautious.
 	
-Initiative rule (this is the sometimes loses initiative when cautious rule):
-	repeat with X running through all alive persons enclosed by the location:
-		if X is cautious:
-			if a random chance of 1 in 20 succeeds:
-[				if X is the player:
-					say "Acting seems a bit rash to you, so you decide to wait instead.";]
-				decrease the initiative of X by 4.
+Initiative update rule (this is the sometimes loses initiative when cautious rule):
+	repeat with X running through all alive cautious persons enclosed by the location:
+		if a random chance of 1 in 20 succeeds:
+			[if X is the player:
+				say "Acting seems a bit rash to you, so you decide to wait instead.";]
+			decrease the initiative of X by 4.
 		
-An attack modifiers rule (this is the caution grants better retreat rule):
+An attack roll rule (this is the caution grants better retreat rule):
 	if the global defender is the player and the player is retreater:
 		if the player is cautious:
-			if the numbers boolean is true, say " - 2 (essence of caution)[run paragraph on]";
-			decrease the to-hit modifier by 2.
+			say " - 2 (essence of caution)[run paragraph on]";
+			decrease the roll by 2.
 
 
 
@@ -789,14 +785,12 @@ Section - Crown of Hargo
 The crown of Hargo is a cursed curse-identified hat. The indefinite article is "the". 
 The crown of Hargo is iron.
 
-An attack modifiers rule (this is the crown of Hargo rule):
-	if the global defender wears the crown of Hargo:
-		if the numbers boolean is true, say " + 1 (defender is overconfident)[run paragraph on]";
-		increase the to-hit modifier by 1.
+An attack roll rule when the global defender wears the crown of Hargo (this is the crown of Hargo rule):
+	say " + 1 (defender is overconfident)[run paragraph on]";
+	increase the roll by 1.
 
-Chance to win rule (this is the CTW crown of Hargo bonus rule):
-	if the global defender wears the crown of Hargo:
-		increase the chance-to-win by 1.
+Chance to win rule when the global defender wears the crown of Hargo (this is the CTW crown of Hargo bonus rule):
+	increase the chance-to-win by 1.
 
 A willpower test rule (this is the willpower bonus of crown of Hargo rule):
 	if the test subject wears the crown of Hargo:
@@ -902,7 +896,7 @@ Instead of throwing the Blessed Grenade:
 			now health of guy is -1;
 			add guy to K;
 		say "As the grenade explodes you hear the singing of angels, several of whom swoop down from the heavens with huge swords and eviscerate [no dead property][K with definite articles][dead property].";
-		if the player is killed:
+		if the player is dead:
 			end the story saying "The undead should not seek blessings.".
 
 
@@ -912,17 +906,10 @@ Metastasio's hat is a minor hat. The description of Metastasio's hat is "Metasta
 Metastasio's hat is alchemical.
 Metastasio's hat is cloth.
 
-An attack modifiers rule (this is the Metastasio's hat grants better retreat rule):
-	if the global defender is the player and the player is retreater:
-		if the player wears Metastasio's hat:
-			say " - 2 (your cowardice)[run paragraph on]";
-			decrease the to-hit modifier by 2.
-
-An attack modifiers rule (this is the Metastasio's hat grants worse attack rule):
-	if the global attacker is the player:
-		if the player wears Metastasio's hat:
-			say " - 2 (your cowardice)[run paragraph on]";
-			decrease the to-hit modifier by 2.
+An attack roll rule when the player wears Metastasio's hat (this is the Metastasio's hat grants worse attack and better retreat rule):
+	if the global attacker is the player or (the global defender is the player and the player is retreater):
+		say " - 2 (your cowardice)[run paragraph on]";
+		decrease the roll by 2.
 
 
 Section - War mask
@@ -943,13 +930,13 @@ The smoke robe is cloth.
 
 The description of the smoky robe is "This robe is adorned with smoke-like, cloudy patterns.".
 
-An attack modifiers rule (this is the smoky robe is better when smoke rule):
+An attack roll rule (this is the smoky robe is better when smoke rule):
 	if the global defender wears the smoky robe:
 		unless the global attacker is smoke immune:
 			if the smoke penalty of the location is not 0:
 				let n be the smoke penalty of the location;
 				say " - [n] (the smoky robe is hard to see)[run paragraph on]";
-				decrease the to-hit modifier by n.
+				decrease the roll by n.
 
 Chance to win rule (this is the CTW smoky robe penalty rule):
 	if the global defender wears the smoky robe:
@@ -988,17 +975,17 @@ The smoky blade is iron.
 
 The description of the smoky blade is "While otherwise a normal sword, it has been enchanted to look like smoke or fog.".
 
-An attack modifiers rule (this is the smoky blade is better when smoke rule):
+An attack roll rule (this is the smoky blade is better when smoke rule):
 	if the global attacker weapon is the smoky blade:
 		unless the global defender is smoke immune:
 			if the smoke penalty of the location is not 0:
 				let n be the smoke penalty of the location;
 				say " + [n] (the smoky blade is hard to see)[run paragraph on]";
-				increase the to-hit modifier by n.
+				increase the roll by n.
 
 Chance to win rule (this is the CTW smoky blade penalty rule):
-	if stored_weapon is the smoky blade:
-		unless the global defender is smoke immune:
+	if the chosen weapon is the smoky blade:
+		unless the chosen target is smoke immune:
 			if the smoke penalty of the location is not 0:
 				let n be the smoke penalty of the location;
 				increase the chance-to-win by n.
@@ -1326,7 +1313,7 @@ Status rule (this is the protection status rule):
 	if hit protection of the player is greater than 0:
 		say "You are [bold type]protected[roman type] from damage dealt by attacks.[line break][run paragraph on]".
 
-Last calculate the final damage rule (this is the hit protection damage modifier rule):
+Last dealing damage rule (this is the hit protection damage modifier rule):
 	if the hit protection of the global defender is greater than 0:
 		say " - 100% (protection)[run paragraph on]";
 		now final damage is 0;
@@ -1417,7 +1404,7 @@ An unholy wave rule (this is the standard unholy wave rule):
 		repeat with guy running through all alive not undead persons in the location:
 			let m be a random number between 3 and 6;
 			decrease health of guy by m;
-			say "[no dead property][if n is 1 and original n is not 1]and [end if][m] damage to [the guy][if guy is killed] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive] (which breaks [possessive of the guy] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][dead property][run paragraph on]";
+			say "[if n is 1 and original n is not 1]and [end if][m] damage to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive] (which breaks [possessive of the guy] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
 			now concentration of the guy is 0;
 			decrease n by 1;
 			if n is 0:
@@ -1513,21 +1500,21 @@ The active parry max of the executioner's axe is 0.
 The dodgability of the executioner's axe is 3.
 The weapon attack bonus of the executioner's axe is -3.
 
-A damage modifiers rule (this is the executioner's axe extra tension damage bonus rule):
+A dealing damage rule (this is the executioner's axe extra tension damage bonus rule):
 	if the global attacker weapon is the executioner's axe:
 		let n be 0;
 		now n is the tension divided by 3;
 		if n is not 0:
 			if the numbers boolean is true, say " + ", n, " (executioner's axe benefits from tension)[run paragraph on]";
-			increase the damage modifier by n.
+			increase the damage by n.
 
-An attack modifiers rule (this is the executioner's axe is better in temple of Nomos rule):
+An attack roll rule (this is the executioner's axe is better in temple of Nomos rule):
 	if the global attacker weapon is the executioner's axe and the location is the Temple of Nomos:
 		if the numbers boolean is true, say " + 3 (Nomos likes the executioner's axe)[run paragraph on]";
-		increase the to-hit modifier by 3.
+		increase the roll by 3.
 
 Chance to win rule (this is the CTW executioner's axe in temple of Nomos rule):
-	if stored_weapon is the executioner's axe and the location is the Temple of Nomos:
+	if chosen weapon is the executioner's axe and the location is the Temple of Nomos:
 		increase the chance-to-win by 3.
 
 The special weapon info of the executioner's axe is "; better tension damage bonus[run paragraph on]".
@@ -1598,7 +1585,7 @@ Section - Boots of the war dance
 The boots of the war dance are major shoes. The boots of the war dance are plural-named. The indefinite article of the boots of the war dance is "the". The description of boots of the war dance is "These graceful boots, supposedly made by the master of Algir, will grant you impeccable footwork in combat. This will undoubtedly grant you extra turns now and then.".
 Boots of the war dance are civilised.
 
-Initiative rule (this is the boots of the war dance give initiative rule):
+Initiative update rule (this is the boots of the war dance give initiative rule):
 	if the player wears the boots of the war dance:
 		if a random chance of 1 in 13 succeeds:
 			increase the initiative of the player by 5.
@@ -1611,7 +1598,7 @@ Section - Boots of wandering
 
 The boots of wandering are cursed curse-identified shoes. The boots of wandering are plural-named. The indefinite article of boots of wandering is "the". The description of boots of wandering is "These graceful boots, supposedly made by the master of Algir, will grant you impeccable footwork in combat. This will undoubtedly grant you extra turns now and then. Unfortunately, when a prince of Algir wore these boots in the War of the Woods, they were cursed by a dying druid. It is now exceedingly unsafe to wear them.".
 
-Initiative rule (this is the boots of the boots of wandering give initiative rule):
+Initiative update rule (this is the boots of the boots of wandering give initiative rule):
 	if the player wears the boots of wandering:
 		if a random chance of 1 in 13 succeeds:
 			increase the initiative of the player by 5.
@@ -1639,7 +1626,7 @@ Every turn when the player is not wearing Ottonian dancing boots:
 		now dance-said is false;
 		say "You can finally [bold type]stop dancing[roman type].".
 
-Initiative rule (this is the Ottonian dancing boots take away initiative rule):
+Initiative update rule (this is the Ottonian dancing boots take away initiative rule):
 	if the player wears Ottonian dancing boots:
 		if a random chance of 1 in 2 succeeds:
 			decrease the initiative of the player by 1;
@@ -1665,44 +1652,47 @@ Constriction prevention of suit of plate mail is 3.
 
 The description of the suit of plate mail is "Functional rather than beautiful, this suit has been made for a true warrior. It will protect you from harm, although it also slows you down.".			
 			
-A damage modifiers rule (this is the plate mail damage modifiers rule):
+A dealing damage rule (this is the plate mail damage modifiers rule):
 	if the global defender is wearing the suit of plate mail:
 		if the global attacker weapon is armour-stoppable:
 			say " - 2 (plate mail)[run paragraph on]";
-			decrease the damage modifier by 2.
+			decrease the damage by 2.
 
 A physical damage reduction rule (this is the plate mail physical damage reduction rule):
 	if the test subject is wearing the suit of plate mail:
 		increase the pdr by 2.
 
-Initiative rule (this is the suit of plate mail takes away initiative rule):
+Initiative update rule (this is the suit of plate mail takes away initiative rule):
 	if the player wears suit of plate mail:
 		if a random chance of 1 in 2 succeeds:
 			decrease the initiative of the player by 1.
 
-An attack modifiers rule (this is the plate mail attack modifiers rule):
+An attack roll rule (this is the plate mail attack modifiers rule):
 	if the global defender wears suit of plate mail:
 		if the global defender is retreater or the global defender is runner:
 			say " + 2 (slowed down by plate mail)[run paragraph on]";
-			increase the to-hit modifier by 2;
+			increase the roll by 2;
 	if the global attacker wears suit of plate mail:
 		say " - 1 (slowed down by plate mail)[run paragraph on]";
-		decrease the to-hit modifier by 1.
+		decrease the roll by 1.
 
 Chance to win rule (this is the CTW plate mail rule):
 	if the global attacker wears suit of plate mail:
 		decrease the chance-to-win by 1.
 
-An attack modifiers rule (this is the plate mail running rule):
+An attack roll rule (this is the plate mail running rule):
 	if the global defender is the player and the player carries the suit of plate mail:
 		if the player is retreater or the player is runner:
 			say " + 2 (you are slowed down by carrying a suit of plate mail)[run paragraph on]";
-			increase the to-hit modifier by 2.
+			increase the roll by 2.
 
-A standard AI action select rule (this is the plate mail concentration select rule):
-	choose row with an Option of the action of the global attacker concentrating in the Table of AI Combat Options;
-	if the global defender is wearing the suit of plate mail:
-		increase the Weight entry by 3.
+An AI action selection rule for a person (called P) (this is the plate mail concentration select rule):
+	choose row with an Option of the action of P concentrating in the Table of AI Action Options;
+	if the chosen target is wearing the suit of plate mail:
+		increase the Action Weight entry by 3.
+
+
+
 
 Section - Essence of Greed
 
@@ -1777,10 +1767,10 @@ The dodgability of the glass cannon is 2.
 The passive parry max of the glass cannon is 0.
 The active parry max of the glass cannon is 3.
 
-An attack modifiers rule (this is the being a glass cannon rule):
+An attack roll rule (this is the being a glass cannon rule):
 	if the global defender weapon is the glass cannon:
 		say " + 3 (you are a glass cannon)[run paragraph on]";
-		increase the to-hit modifier by 3.		
+		increase the roll by 3.		
 
 Chance to win rule (this is the CTW glass cannon bonus rule):
 	if the global defender weapon is the glass cannon:
@@ -1790,7 +1780,7 @@ After readying the glass cannon:
 	say "You feel fragile.";
 	now permanent health of player is permanent health of the player divided by 2;
 	now health of the player is health of the player divided by 2;
-	if player is killed:
+	if player is dead:
 		end the story saying "You were a little too fragile for that.".
 
 An aftereffects rule (this is the glass cannon shatters when used to parry rule):
@@ -1813,7 +1803,7 @@ The difficulty level of the robe of the dead mage is 1.
 
 The description of the robe of the dead mage is "Dominique, marquis of Savon, one of the great mages of his generation, was so fed up with losing his concentration when he was hit that he developed this robe. When the wearer is damaged in combat, he will not lose his concentration; but the protection comes from his life force, and the damage dealt to him is increased by 25% for every level of concentration. People say that nobody ever died with as much concentration as Dominique.".
 
-Last calculate the final damage rule (this is the robe of the dead mage damage rule):
+Last dealing damage rule (this is the robe of the dead mage damage rule):
 	if global defender wears the robe of the dead mage:
 		if concentration of the global defender is greater than 0:
 			if concentration of the global defender is 1:
@@ -1831,10 +1821,10 @@ Last calculate the final damage rule (this is the robe of the dead mage damage r
 				say " + 100% (robe of the dead mage)[run paragraph on]";
 				now final damage is final damage times 2.
 
-An attack modifiers rule (this is the robe of the dead mage protects you rule):
+An attack roll rule (this is the robe of the dead mage protects you rule):
 	if the global defender wears the robe of the dead mage:
 		say " - 1 (robe of the dead mage)[run paragraph on]";
-		decrease the to-hit modifier by 1.		
+		decrease the roll by 1.		
 
 Chance to win rule (this is the CTW robe of the dead mage rule):
 	if the global defender wears the robe of the dead mage:
@@ -1844,12 +1834,13 @@ The alternative lose concentration when hit rule is listed instead of the lose c
 
 An aftereffects rule (this is the alternative lose concentration when hit rule):
 	unless global defender wears the robe of the dead mage:
-		if the final damage is greater than 0 and the global defender is alive, let the global defender lose concentration.
+		if the final damage is greater than 0 and the global defender is alive:
+			let the global defender lose concentration.
 
-A standard AI action select rule (this is the robe of the dead mage attack select rule):
-	choose row with an Option of the action of the global attacker attacking the global defender in the Table of AI Combat Options;
-	if global defender wears the robe of the dead mage:
-		decrease the Weight entry by the concentration of the global defender.
+An AI action selection rule for an at-Act person (called P) (this is the robe of the dead mage attack select rule):
+	choose row with an Option of the action of P attacking the chosen target in the Table of AI Action Options;
+	if chosen target wears the robe of the dead mage:
+		decrease the Action Weight entry by the concentration of the chosen target.
 
 
 Section - Essence of Addiction
@@ -1876,13 +1867,13 @@ The description of the rod of the master builder is "This powerful artefact look
 The rod of the master builder is a digging tool.
 The rod of the master builder is a collapsing tool.
 
-An attack modifiers rule (this is the rod of master builder attack modifiers rule):
+An attack roll rule (this is the rod of master builder attack modifiers rule):
 	if the global defender is the player and the player has the rod of the master builder:
 		if the player is retreater or the player is runner:
 			say " - 2 (rod of the master builder)[run paragraph on]";
-			decrease the to-hit modifier by 2.
+			decrease the roll by 2.
 
-Last calculate the final damage rule (this is the rod of master builder damage modifiers rule):
+Last dealing damage rule (this is the rod of master builder damage modifiers rule):
 	if the global defender is the player and the player has the rod of the master builder:
 		if the player is retreater or the player is runner:
 			say " - 50% (rod of the master builder)[run paragraph on]";
@@ -1908,14 +1899,14 @@ Heat resistance rule (this is the dragon armour heat resistance rule):
 
 [The internal heat of the suit of dragon armour is 4.]
 
-A damage modifiers rule (this is the dragon armour damage modifiers rule):
+A dealing damage rule (this is the dragon armour damage modifiers rule):
 	if the global defender is wearing the suit of dragon armour:
 		if the main actor is not undead:
 			say " - 4 (dragon armour)[run paragraph on]";
-			decrease the damage modifier by 4;
+			decrease the damage by 4;
 		otherwise:
 			say " - 2 (dragon armour)[run paragraph on]";
-			decrease the damage modifier by 2.
+			decrease the damage by 2.
 
 A physical damage reduction rule (this is the dragon armour damage reduction rule):
 	if the test subject is wearing the dragon armour:
@@ -1929,10 +1920,10 @@ A physical damage reduction rule (this is the dragon armour damage reduction rul
 After printing the name of suit of dragon armour:
 	now not-mentioning-hotness is false.]
 
-A standard AI action select rule (this is the dragon armour concentration select rule):
-	choose row with an Option of the action of the global attacker concentrating in the Table of AI Combat Options;
-	if the global defender is wearing the suit of dragon armour:
-		increase the Weight entry by 4.
+An AI action selection rule for a person (called P) (this is the dragon armour concentration select rule):
+	choose row with an Option of the action of P concentrating in the Table of AI Action Options;
+	if the chosen target is wearing the suit of dragon armour:
+		increase the Action Weight entry by 4.
 
 Every turn when the main actor wears the dragon armour:
 	if the health of the main actor is greater than 0:
@@ -2039,36 +2030,36 @@ An ability test rule (this is the ment ability bonus rule):
 			increase test score by ment bonus;
 			say " + [ment bonus] (ment)[run paragraph on]".
 
-An attack modifiers rule (this is the ment attack and defence bonus rule):
+An attack roll rule (this is the ment attack and defence bonus rule):
 	if the global attacker is the player:
 		if ment timer is greater than 0:
 			if the numbers boolean is true, say " + [ment bonus] (ment)[run paragraph on]";
-			increase the to-hit modifier by ment bonus;
+			increase the roll by ment bonus;
 	if the global defender is the player:
 		if ment timer is greater than 0:
 			if the numbers boolean is true, say " - [ment bonus] (your defence increased by ment)[run paragraph on]";
-			decrease the to-hit modifier by ment bonus.
+			decrease the roll by ment bonus.
 			
 Chance to win rule (this is the CTW ment penalty rule): [To make sure the AI correctly guesses its chance to win.]
 	if the ment timer is greater than 0:
 		decrease the chance-to-win by ment bonus.			
 
-A damage modifiers rule (this is the ment damage bonus rule):
+A dealing damage rule (this is the ment damage bonus rule):
 	if the global attacker is the player:
 		if ment timer is greater than 0:
 			if the numbers boolean is true, say " + [ment bonus] (ment)[run paragraph on]";
-			increase the damage modifier by ment bonus;
+			increase the damage by ment bonus;
 	if the global defender is the player:
 		if ment timer is greater than 0:
 			if the numbers boolean is true, say " - [ment bonus] (ment makes you shrug off damage)[run paragraph on]";
-			decrease the damage modifier by ment bonus.
+			decrease the damage by ment bonus.
 
-An attack modifiers rule (this is the feeling down attack penalty rule):
+An attack roll rule (this is the feeling down attack penalty rule):
 	if the global attacker is the player:
 		if the ment addiction is greater than 0:
 			if the ment timer is 0:
 				if the numbers boolean is true, say " - [ment addiction] (feeling down)[run paragraph on]";
-				decrease the to-hit modifier by ment addiction.	
+				decrease the roll by ment addiction.	
 				
 An ability test rule (this is the feeling down ability penalty rule):
 	if the test subject is the player:

@@ -3,7 +3,7 @@
 The story headline is "An IF roguelike".
 The story genre is "dungeon crawl".
 The release number is 2.
-Release along with cover art.
+[Release along with cover art.]
 
 
 Include Menus by Emily Short.
