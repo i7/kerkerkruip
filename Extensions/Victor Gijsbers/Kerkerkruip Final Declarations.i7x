@@ -38,7 +38,7 @@ Tying something to is ethereal-forbidden.
 Drinking is ethereal-forbidden.
 Swinging is ethereal-forbidden.
 Rubbing is ethereal-forbidden.
-Reloading is ethereal-forbidden.
+[Reloading is ethereal-forbidden.]
 Readying is ethereal-forbidden.
 Throwing is ethereal-forbidden.
 Applying something to is ethereal-forbidden.

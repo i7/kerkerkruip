@@ -2,6 +2,9 @@ Kerkerkruip ATTACK Additions by Victor Gijsbers begins here.
 
 Use authorial modesty.
 
+[ Kerkerkruip has no reloadable weapons ]
+Chapter - No reloadable weapons (in place of Chapter - Reloadable Weapons (Standard Plug-in) in Inform ATTACK by Victor Gijsbers)
+
 Section - Killing
 
 An aftereffects rule (this is the killing after attack rule):
@@ -13,8 +16,9 @@ Section - Some ATTACK prose rules
 [Last final blow report rule (this is the new end reporting blow with paragraph break rule):
 	if global defender is alive, say "[paragraph break]".]
 
-Report an actor hitting:
-	rule succeeds.
+The basic fatal player flavour rule is not listed in any rulebook.
+The basic fatal flavour rule is not listed in any rulebook.
+The basic flavour rule is not listed in any rulebook.
 
 The standard lose concentration prose rule is not listed in any rulebook.
 
@@ -24,7 +28,7 @@ Last lose concentration prose rule for a person (called P) (this is the new lose
 	otherwise:
 		say "[The P] loses [bold type]concentration[roman type]!".
 	
-Report the player hitting a dead pc (this is the fatal player kills player rule):
+Report the player hitting a dead pc (this is the report player suicide rule):
 	say "Your attack ends your own life.";
 	rule succeeds;
 
@@ -188,10 +192,9 @@ Section - Inherent damage modifier
 
 A person has a number called the inherent damage modifier. The inherent damage modifier of a person is usually 0.
 
-A dealing damage rule when the inherent damage modifier of the global attacker is not 0 (this is the inherent damage modifier rule):
-	if the numbers boolean is true:
-		say " + ", inherent damage modifier of the global attacker, " (inherent bonus)[run paragraph on]";
-	increase the damage by the inherent damage modifier of the global attacker;
+A damage modifier rule when the inherent damage modifier of the global attacker is not 0 (this is the inherent damage modifier rule):
+	say " + ", inherent damage modifier of the global attacker, " (inherent bonus)[run paragraph on]";
+	increase the attack damage by the inherent damage modifier of the global attacker;
 
 
 Section - Weapon descriptions
@@ -221,10 +224,10 @@ Section - New rolling mechanism
 
 Instead of the standard 1d10 of ATTACK, we roll 1d7 + 1d4 - 1.]
 
-An attack roll rule (this is the alternative attack roll rule):
-	now the roll is a roll of the dice;
-	say "[italic type]Rolling ", the roll, "[run paragraph on]".
-The alternative attack roll rule is listed instead of the standard attack roll rule in the attack roll rules.
+An attack modifier rule (this is the alternative attack roll rule):
+	now the attack strength is a roll of the dice;
+	say "[italic type]Rolling ", the attack strength, "[run paragraph on]".
+The alternative attack roll rule is listed instead of the standard attack roll rule in the attack modifier rules.
 
 To decide which number is a roll of the dice:
 	let n be a random number between 1 and 7;

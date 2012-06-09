@@ -27,13 +27,13 @@ The skull-sized rubies are in entrance hall. The skull-sized rubies are scenery 
 
 The red light is scenery in Entrance Hall. The description of the red light is "You force yourself to look straight into the light -- but after the merest fraction of a second, you involuntarily close your eyes against the painful glare.". 
 
-An attack roll rule (this is the attack penalty in Entrance Hall rule):
+An attack modifier rule (this is the attack penalty in Entrance Hall rule):
 	if the location is Entrance Hall:
 		unless the global attacker is blind:
 			let n be 2 minus the smoke penalty of Entrance Hall;
 			if n is greater than 0:
 				say " - [n] (blinding light)[run paragraph on]";
-				decrease the roll by n.
+				decrease the attack strength by n.
 	
 The player is in Entrance Hall.
 
@@ -94,7 +94,7 @@ A perception test rule (this is the concentration bonus in Hall of Mirrors rule)
 				increase test score by concentration of the actor;
 				say " + [concentration of the actor] (concentration)[run paragraph on]".
 
-An AI action selection rule for a person (called P) when the location is Hall of Mirrors (this is the concentration better in Hall of Mirrors select rule):
+An AI action selection rule for a person (called P) when the location is Hall of Mirrors (this is the concentration is more important in the Hall of Mirrors rule):
 	choose row with an Option of the action of P concentrating in the Table of AI Action Options;
 	increase the Action Weight entry by 1.
 
@@ -151,8 +151,8 @@ Every turn when in phantasmagoria:
 							now concentration of guy is 0;
 			say "Suddenly, [one of]a disintegrating skeletal warrior[or]a blast of dragon's fire[or]a naked male slave screaming in fear[or]a naked female slave fleeing in tears[or]a huge fountain of fire[or]a crashing ballista bolt[or]a drowning knight, crying for his god,[or]a ghost devouring the flesh of a still living man[or]a frenzied bull elephant[or]a shrieking princess in the claws of a demon[or]an obese king carried by seven blind eunuchs[at random] appears. [unless lijst is empty]While only an image that flickers and then disappears, it startles [lijst with definite articles][otherwise]The illusions do not affect anyone[end if].".
 
-An AI action selection rule for a person (called P) when the location is Phantasmagoria (this is the phantasmagoria concentration select rule):
-	unless the running AI is blind:
+An AI action selection rule for a person (called P) when the location is Phantasmagoria (this is the concentration is often futile in Phantasmagoria rule):
+	unless P is blind:
 		choose row with an Option of the action of P concentrating in the Table of AI Action Options;
 		decrease the Action Weight entry by 2 times the concentration of P.
 
@@ -249,7 +249,7 @@ An additional placement rule:
 		place Lake of Lava from Bridge of Doom at x by y by z;
 		now placing Bridge of Doom is false.
 
-An AI action selection rule for a person (called P) when the location is Bridge of Doom (this is the do not dodge in bridge of doom rule):
+An AI action selection rule for an at-React person (called P) when the location is Bridge of Doom (this is the do not dodge on the Bridge of Doom rule):
 	unless P is flying:
 		choose row with an Option of the action of P dodging in the Table of AI Action Options;
 		decrease the Action Weight entry by 100.
@@ -267,14 +267,15 @@ After an actor hitting (this is the better not dodge on bridge of doom rule):
 						stop the action;
 					otherwise:
 						say "You successfully dodge the attack of [the global attacker]. Since there is no place to dodge to on the narrow bridge, your maneuver almost ends in a drop down into the lava -- but you manage to regain your balance almost miraculously. This is something you might not want to try again.";
-						now player-vulnerable-to-bridge is true.
+						now player-vulnerable-to-bridge is true;
+	continue the action.
 
 An aftereffects rule (this is the hit may send you off the bridge of doom rule):
 	if global defender can fall:
 		if the location is the bridge of doom and the global defender is alive:
-			if the final damage is greater than 0:
+			if the attack damage is greater than 0:
 				let n be a random number between 0 and 12;
-				if n is less than final damage:
+				if n is less than the attack damage:
 					say "Reeling from the blow, [the global defender] balance[s] on the edge of the bridge. [italic type]";
 					let n be a random number between 6 and 10;
 					test the dexterity of the global defender against n;
@@ -411,12 +412,12 @@ Before attacking when Nomos counter is greater than 0:
 		-- 4: say "speaking a language you have never heard instead." instead;
 		-- 5: say "contemplating the inevitability of Death instead." instead.
 
-An attack roll rule (this is the Nomos attack bonus rule):
+An attack modifier rule (this is the Nomos attack bonus rule):
 	if Nomos bonus is true and the global attacker is the player:
 		if the numbers boolean is true, say " + 2 (the law is with you)[run paragraph on]";
-		increase the roll by 2.
+		increase the attack strength by 2.
 
-A dealing damage rule (this is the Nomos damage bonus rule):
+A damage modifier rule (this is the Nomos damage bonus rule):
 	if Nomos bonus is true and the global attacker is the player:
 		let n be 0;
 		if the global defender provides the property level:
@@ -424,7 +425,7 @@ A dealing damage rule (this is the Nomos damage bonus rule):
 		otherwise:
 			now n is 2;
 		if the numbers boolean is true, say " + [n] (the law is with you)[run paragraph on]";
-		increase the damage by n.
+		increase the attack damage by n.
 
 The alternative do not kill yourself rule is listed instead of the do not kill yourself rule in the check attacking rulebook.
 
@@ -565,11 +566,11 @@ To have Aite intervene:
 				consider the grant powers when a monster is slain rule.
 
 
-An attack roll rule (this is the Aite-loved bonus in Temple of Aite rule):
+An attack modifier rule (this is the Aite-loved bonus in Temple of Aite rule):
 	if the location is the Temple of Aite:
 		if the global attacker is beloved of Aite:
 			if the numbers boolean is true, say " + 2 (beloved of Aite)[run paragraph on]";
-			increase the roll by 2.
+			increase the attack strength by 2.
 
 Chance to win rule (this is the CTW Aite bonus rule):
 	if the location is the Temple of Aite:
@@ -957,9 +958,9 @@ An aftereffects rule (this is the hit may send you off the vast staircase rule):
 	if staircase still goes down:
 		if the global defender can fall:
 			if the location is the vast staircase and the global defender is alive:
-				if the final damage is greater than 0:
+				if the attack damage is greater than 0:
 					let n be a random number between 0 and 16;
-					if n is less than final damage:
+					if n is less than the attack damage:
 						say "Reeling from the blow, [the global defender] balance[s] on the edge of the staircase. [italic type]";
 						let n be a random number between 6 and 11;
 						test the dexterity of the global defender against n;

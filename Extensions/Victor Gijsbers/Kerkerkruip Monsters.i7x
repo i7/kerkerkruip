@@ -43,14 +43,13 @@ Section - Scattering
 Dagger-scattered is a truth state that varies. Dagger-scattered is false.
 
 An aftereffects rule (this is the scatter the daggers rule):
-	if the global defender is the swarm of daggers and the final damage is greater than 0 and the swarm of daggers is not dead:
+	if the global defender is the swarm of daggers and the attack damage is greater than 0 and the swarm of daggers is not dead:
 		say "The impact of the blow [italic type]scatters[roman type] the swarm of daggers. They will need to spend one action regrouping themselves.";
 		now dagger-scattered is true.
 
-First AI action selection rule (this is the daggers consider waiting rule):
-	if the running AI is the swarm of daggers and dagger-scattered is true:
-		choose a blank Row in the Table of AI Action Options;
-		change the Option entry to the action of the swarm of daggers waiting;
+An AI action selection rule for the swarm of daggers (this is the daggers must wait if scattered rule):
+	if dagger-scattered is true:
+		choose row with an Option of the action of the swarm of daggers waiting in the Table of AI Action Options;
 		change the Action Weight entry to 1000.
 
 Check the swarm of daggers waiting (this is the daggers regroup rule):
@@ -61,20 +60,25 @@ Check the swarm of daggers waiting (this is the daggers regroup rule):
 
 Section - Prose
 
-Report an actor hitting the dead swarm of daggers (this is the fatal swarm of daggers rule):
+Report an actor hitting the dead swarm of daggers:
 	say "All life suddenly goes out of the daggers. For a moment they hang still in the air, but then the planet below pulls them inexorably downwards.";
+	rule succeeds.
 
-Report the swarm of daggers hitting a dead pc (this is the fatal player swarm of daggers rule):
+Report the swarm of daggers hitting a dead pc:
 	say "You desperately attempt to fend off the flying daggers, but there are too many of them. One by one the daggers sink into your flesh, and your soul flees through a thousand mouths.";
+	rule succeeds.
 
-Report the swarm of daggers attacking (this is the swarm of daggers attacks rule):
+Report the swarm of daggers attacking:
 	say "The swarm of daggers [one of]bears down upon[or]launches itself at[or]moves in to attack[at random] [the noun].";
+	rule succeeds.
 
-Report the swarm of daggers parrying (this is the report swarm of daggers parry rule):
+Report the swarm of daggers parrying:
 	say "Several of the daggers float out to stop the attack.";
+	rule succeeds.
 
-Report the swarm of daggers dodging (this is the report swarm of daggers dodge rule):
+Report the swarm of daggers dodging:
 	say "The swarm of daggers attempts to outmaneuver the attack.";
+	rule succeeds.
 	
 
 Section - Power
@@ -136,7 +140,7 @@ Carry out piercing:
 	otherwise:
 		decrease health of the noun by 1;
 		say "The dagger hits, dealing 1 damage and reducing [no dead property][the noun][dead property] to [health of the noun] health.";
-		now final damage is 1;
+		now the attack damage is 1;
 		now global attacker is the player;
 		now global defender is the noun;
 		[TODO reinstate these when we've decided what to do with them]
@@ -173,9 +177,8 @@ When play begins:
 	now active parry max of X is 0;
 	now printed name of X is "ape's [size of blood ape] fists".
 
-
 Aftereffects rule (this is the blood ape grows in size when hit rule):
-	if the global attacker is the blood ape and the final damage is greater than 0:
+	if the global attacker is the blood ape and the attack damage is greater than 0:
 		if the blood ape is not gargantuan:
 			now the blood ape is the size after the size of the blood ape;
 			say "The ape immediately licks the blood of its enemy from its knuckles. Nourished by this substance, it grows to [size of the blood ape] size!";
@@ -199,47 +202,52 @@ Aftereffects rule (this is the blood ape grows in size when hit rule):
 		otherwise:
 			say "Sensing perhaps that it cannot grow further in its current confines, the ape does not lick of the blood.".
 			
-A dealing damage rule when the global attacker is the blood ape (this is the blood ape size damage bonus rule):
+A damage modifier rule when the global attacker is the blood ape (this is the blood ape size damage bonus rule):
 	if the size of the blood ape is:
 		-- small:
 			if the numbers boolean is true, say " - 1 (small size)[run paragraph on]";
-			decrease the damage by 1;
+			decrease the attack damage by 1;
 		-- large:
 			if the numbers boolean is true, say " + 2 (large size)[run paragraph on]";
-			increase the damage by 2;
+			increase the attack damage by 2;
 		-- huge:
 			if the numbers boolean is true, say " + 4 (huge size)[run paragraph on]";
-			increase the damage by 4;
+			increase the attack damage by 4;
 		-- gargantuan:
 			if the numbers boolean is true, say " + 8 (gargantuan size)[run paragraph on]";
-			increase the damage by 8;
+			increase the attack damage by 8;
 			
-An attack roll rule (this is the blood ape size attack bonus rule)::
+An attack modifier rule (this is the blood ape size attack bonus rule)::
 	if the global defender is the blood ape and the global defender is at dodge:
 		if the blood ape is huge:
 			if the numbers boolean is true, say " + 1 (huge ape)[run paragraph on]";
-			increase the roll by 1;
+			increase the attack strength by 1;
 		if the blood ape is gargantuan:
 			if the numbers boolean is true, say " + 2 (gargantuan ape)[run paragraph on]";
-			increase the roll by 2.
+			increase the attack strength by 2.
 
 
 Section - Prose
 
-Report an actor hitting the dead blood ape (this is the fatal blood ape rule):
+Report an actor hitting the dead blood ape:
 	say "[if the blood ape is small or the blood ape is medium]The blood ape topples over with a small grunt[otherwise]The blood ape crashes down with a huge smack[end if].";
+	rule succeeds.
 
-Report the blood ape hitting a dead pc (this is the fatal player blood ape rule):
+Report the blood ape hitting a dead pc:
 	say "The blood ape pounds you into a pulp with its fists, then feasts on your body.";
+	rule succeeds.
 
-Report the blood ape attacking (this is the blood ape attacks rule):
+Report the blood ape attacking:
 	say "The blood ape [one of]swings at [possessive of the global defender] head[or]jumps at [global defender] with its fists ready to swing[at random].";
+	rule succeeds.
 
-Report the blood ape parrying (this is the report blood ape parry rule):
+Report the blood ape parrying:
 	say "The blood ape attempts to stop the attack with its hairy forearms.";
+	rule succeeds.
 
-Report the blood ape dodging (this is the report blood ape dodge rule):
+Report the blood ape dodging:
 	say "The blood ape tries to jump out of the way.";
+	rule succeeds.
 	
 
 Section - Power
@@ -292,10 +300,10 @@ Repelling power of the ape:
 	
 The ape power damage is a number that varies. The ape power damage is 0.
 
-A dealing damage rule (this is the add ape power damage to damage rule):
+A damage modifier rule (this is the add ape power damage to damage rule):
 	if the global attacker is the player and the ape power damage is not 0:
 		if the numbers boolean is true, say " + [ape power damage] (power of the ape)[run paragraph on]";
-		increase the damage by ape power damage.		
+		increase the attack damage by ape power damage.		
 
 Every turn when the main actor is the player (this is the decrease ape power damage over time rule):
 	if the ape power damage is greater than 0:
@@ -303,7 +311,7 @@ Every turn when the main actor is the player (this is the decrease ape power dam
 			decrease ape power damage by 1.
 
 Aftereffects rule (this is the increase ape damage rule):
-	if global attacker is the player and final damage is greater than 0:
+	if global attacker is the player and the attack damage is greater than 0:
 		if power of the ape is granted:
 			increase ape power damage by 3.
 
@@ -337,10 +345,9 @@ The defence of the ravenous armadillo is 5.
 The dexterity of the ravenous armadillo is 3.
 The perception of the ravenous armadillo is 4. 
 
-A dealing damage rule (this is the ravenous armadillo takes less damage rule):
-	if the global defender is the ravenous armadillo:
-		if the numbers boolean is true, say " - 3 (tough scales)[run paragraph on]";
-		decrease the damage by 3.
+A damage modifier rule when the global defender is the ravenous armadillo (this is the ravenous armadillo takes less damage rule):
+	say " - 3 (tough scales)[run paragraph on]";
+	decrease the attack damage by 3.
 
 The intrinsic heat resistance of the ravenous armadillo is 3.
 
@@ -358,42 +365,45 @@ When play begins:
 
 Section - Prose
 
-Report an actor hitting the dead ravenous armadillo (this is the fatal ravenous armadillo rule):
-	say "As the armadillo dies, its body splits open, revealing [if at least one thing is in the armadillo stomach][a list of things in the armadillo stomach][otherwise]no items at all[end if].";
+Report an actor hitting the dead ravenous armadillo:
+	say "As the armadillo dies, its body splits open, revealing [if at least one thing is in the armadillo stomach][a list of things in the armadillo stomach][otherwise]nothing at all[end if].";
+	rule succeeds.
 
-Report the ravenous armadillo hitting a dead pc (this is the fatal player ravenous armadillo rule):
+Report the ravenous armadillo hitting a dead pc:
 	say "The ravenous armadillo smashes your head in with its tail club.";
+	rule succeeds.
 
-Report the ravenous armadillo attacking (this is the ravenous armadillo attacks rule):
+Report the ravenous armadillo attacking:
 	say "The armadillo raises its tail threateningly towards [the global defender].";
+	rule succeeds.
 
-Report the ravenous armadillo parrying (this is the report ravenous armadillo parry rule):
+Report the ravenous armadillo parrying:
 	say "The armadillo tries to ward off the attack with its tail.";
+	rule succeeds.
 
-Report the ravenous armadillo dodging (this is the report ravenous armadillo dodge rule):
+Report the ravenous armadillo dodging:
 	say "The armadillo lumbers aside.";
+	rule succeeds.
 		
-Report the ravenous armadillo concentrating (this is the armadillo concentration prose rule):
+Report the ravenous armadillo concentrating:
 	if the concentration of the ravenous armadillo is:
 		-- 1:
-			say "The armadillo narrows its eyes. You assume it is concentrating." instead;
+			say "The armadillo narrows its eyes. You assume it is concentrating.";
 		-- 2:
-			say "The armadillo makes a few thoughtful movements with its tail." instead;
+			say "The armadillo makes a few thoughtful movements with its tail.";
 		-- 3:
-			say "A final sweep of its tail club seems to indicate that the armadillo has made up its mind." instead.	
+			say "A final sweep of its tail club seems to indicate that the armadillo has made up its mind.";
+	rule succeeds.
 		
 
 Section - Armadillo-eating
 
 Armadillo-eating is an action applying to nothing.
 
-First AI action selection rule for the ravenous armadillo (this is the consider ravenous armadillo eating rule):
+An AI action selection rule for the ravenous armadillo (this is the ravenous armadillo considers eating rule):
 	choose a blank Row in the Table of AI Action Options;
 	change the Option entry to the action of the ravenous armadillo armadillo-eating;
-	change the Action Weight entry to 0.
-
-An AI action selection rule for the ravenous armadillo (this is the ravenous armadillo eating select rule):
-	choose row with an Option of the action of the ravenous armadillo armadillo-eating in the Table of AI Action Options;
+	change the Action Weight entry to 0;
 	if a random chance of 1 in 2 succeeds:
 		if there is a good item for the armadillo to eat:
 			increase Action Weight entry by 12;
@@ -492,10 +502,10 @@ Absorbing power of the armadillo:
 	decrease dexterity of the player by 1;
 	say "As the armadillo succumbs, you feel its soul absorbed into your own body. ([bold type]Power of the armadillo[roman type]: +1 attack, +1 damage resistance, +5 health, -1 dexterity, and the [italic type]scales[roman type] skill, which gives you a temporary damage reduction that costs some health to use and expires as soon as you attack.)[paragraph break]".
 
-A dealing damage rule (this is the power of the armadillo gives damage resistance rule):
+A damage modifier rule (this is the power of the armadillo gives damage resistance rule):
 	if the global defender is the player and the power of the armadillo is granted:
 		if the numbers boolean is true, say " - 1 (armadillo)[run paragraph on]";
-		decrease the damage by 1.
+		decrease the attack damage by 1.
 
 Repelling power of the armadillo:
 	decrease melee of the player by 1;
@@ -506,11 +516,11 @@ Section - The scales skill
 
 The scales number is a number that varies. The scales number is usually 0.
 
-A dealing damage rule (this is the scales gives damage resistance rule):
+A damage modifier rule (this is the scales gives damage resistance rule):
 	if the global defender is the player and the scales number is greater than 0:
 		let n be the scales number;
 		if the numbers boolean is true, say " - [n] (scales)[run paragraph on]";
-		decrease the damage by n.
+		decrease the attack damage by n.
 
 A physical damage reduction rule (this is the scaling damage reduction rule):
 	if the test subject is the player and the scales number is greater than 0:
@@ -546,7 +556,8 @@ Carry out scaling:
 After the player hitting (this is the scales disappear after attacking rule):
 	if the scales number is not 0:
 		now the scales number is 0;
-		say "Your scales disappear.".
+		say "Your scales disappear.";
+	continue the action.
 
 Status rule (this is the scales status rule):
 	if scales number is greater than 0:
@@ -626,10 +637,10 @@ Carry out an actor stunning:
 	now the actor is at-stun;
 	try the actor attacking the noun instead.
 
-A dealing damage rule (this is the less damage when stunning rule):
+A damage modifier rule (this is the less damage when stunning rule):
 	if the global attacker is at-stun:
 		if the numbers boolean is true, say " - 2 (stunning)[run paragraph on]";
-		decrease the damage by 2.
+		decrease the attack damage by 2.
 
 Check Miranda attacking:
 	if the stun count of the noun is 0 and Miranda is not at-stun:
@@ -637,7 +648,7 @@ Check Miranda attacking:
 
 Aftereffects rule (this is the stunning rule):
 	if the global attacker is at-stun and the global defender is not dead:
-		if the final damage is greater than 0:
+		if the attack damage is greater than 0:
 			say "[if global defender is player]You are[otherwise][The global defender] is[end if] [bold type]stunned[roman type]!";
 			if the global attacker is the player:
 				now global defender is sometime-stunned; [for the Stunning performance achievement]
@@ -663,14 +674,14 @@ Section - Stunned
 A person has a number called the stun count. The stun count of a person is usually 0.
 Definition: a person is stunned if his stun count is greater than 0.
 
-An attack roll rule (this is the attack roll stunned bonus rule):
+An attack modifier rule (this is the attack roll stunned bonus rule):
 	if the global attacker is stunned:
 		let n be 2;
 		if the global defender is the player:
 			if the player is retreater or the player is runner:
 				increase n by 3;
 		if the numbers boolean is true, say " - [n] (stunned)[run paragraph on]";
-		decrease the roll by n.
+		decrease the attack strength by n.
 
 Chance to win rule (this is the CTW stun penalty rule):
 	if the global attacker is stunned:
@@ -680,7 +691,7 @@ Check concentrating when the player is stunned:
 	take no time;
 	say "You feel too stunned for concentration." instead.
 
-An AI action selection rule for a person (called P) when the running AI is stunned (this is the do not concentrate when stunned rule):
+An AI action selection rule for a stunned person (called P) (this is the do not concentrate when stunned rule):
 	choose row with an Option of the action of P concentrating in the Table of AI Action Options;
 	decrease the Action Weight entry by 1000.
 
@@ -693,34 +704,37 @@ Every turn (this is the stun wears off rule):
 			otherwise if main actor is visible:
 				say "[The main actor] [if the main actor is plural-named]are[otherwise]is[end if] [bold type]no longer stunned[roman type].".
 
-
-
-
 Section - Miranda's Prose
 
-Report an actor hitting the dead Miranda (this is the fatal Miranda rule):
+Report an actor hitting the dead Miranda:
 	say "'But... my adventure was only just beginning!' cries Miranda.";
+	rule succeeds.
 
-Report Miranda hitting a dead pc (this is the fatal player Miranda rule):
+Report Miranda hitting a dead pc:
 	say "Miranda dances on your corpse. 'This is my first step towards fame!'";
+	rule succeeds.
 
-Report Miranda attacking (this is the Miranda attacks rule):
+Report Miranda attacking:
 	say "Miranda jumps towards [the global defender][if Miranda is at-stun], intent on stunning[end if].";
+	rule succeeds.
 
-Report Miranda parrying (this is the report Miranda parry rule):
+Report Miranda parrying:
 	say "Miranda attempts to ward off the attack.";
+	rule succeeds.
 
-Report Miranda dodging (this is the report Miranda dodge rule):
+Report Miranda dodging:
 	say "Miranda jumps aside.";
+	rule succeeds.
 
-Report Miranda concentrating (this is the Miranda concentration prose rule):
+Report Miranda concentrating:
 	if the concentration of the actor is:
 		-- 1:
-			say "Miranda seeks the calm within." instead;
+			say "Miranda seeks the calm within.";
 		-- 2:
-			say "Chanting softly, Miranda aligns her spirit with the ambient energies." instead;
+			say "Chanting softly, Miranda aligns her spirit with the ambient energies.";
 		-- 3:
-			say "Miranda finishes her meditations." instead.	
+			say "Miranda finishes her meditations.";
+	rule succeeds.
 
 Section - Power of Miranda
 
@@ -764,7 +778,6 @@ The chain golem is iron.
 The chain golem is emotionless.
 
 The description of the chain golem is "A hulking form made of metal chains and animated by a soul bound to it through dark magics.".
-
 
 The health of the chain golem is 24.
 The melee of the chain golem is 1.
@@ -820,12 +833,11 @@ Check an actor attacking (this is the attack a spinning chain golem rule):
 			otherwise:
 				say "[paragraph break]".
 
-A dealing damage rule (this is the chain golem damage depends on concentration rule):
-	if the global attacker is the chain golem:
-		if the concentration of the chain golem is not 0:
-			let n be the concentration of the chain golem times 2;
-			if the numbers boolean is true, say " + [n] (golem spinning)[run paragraph on]";
-			increase the damage by n.	
+A damage modifier rule when the global attacker is the chain golem (this is the chain golem damage depends on concentration rule):
+	if the concentration of the chain golem is not 0:
+		let n be the concentration of the chain golem times 2;
+		if the numbers boolean is true, say " + [n] (golem spinning)[run paragraph on]";
+		increase the attack damage by n.	
 
 This is the new concentration damage modifier rule:
 	unless global attacker is the chain golem:
@@ -834,9 +846,8 @@ This is the new concentration damage modifier rule:
 			if the concentration of the global attacker is 2, now the first dummy is 2;
 			if the concentration of the global attacker is 3, now the first dummy is 4;
 			if the numbers boolean is true, say " + ", the first dummy, " (concentration)[run paragraph on]";
-			increase the damage by the first dummy.
-		
-The new concentration damage modifier rule is listed instead of the concentration damage modifier rule in the dealing damage rulebook.
+			increase the attack damage by the first dummy.
+The new concentration damage modifier rule is listed instead of the concentration damage modifier rule in the damage modifier rulebook.
 						
 An AI action selection rule for the chain golem (this is the chain golem likes to concentrate rule):
 	unless a random chance of 1 in 10 succeeds:
@@ -856,15 +867,12 @@ Section - Disarm power
 
 Golem-disarming is an action applying to one thing.
 
-First AI action selection rule for the at-Act chain golem (this is the consider chain golem disarm rule):
+An AI action selection rule for the at-Act chain golem (this is the chain golem considers disarming rule):	
 	choose a blank Row in the Table of AI Action Options;
 	change the Option entry to the action of the chain golem golem-disarming the chosen target;
-	change the Action Weight entry to -1000.
-
-An AI action selection rule for the at-Act chain golem (this is the chain golem disarm rule):	
+	change the Action Weight entry to -1000;
 	if chosen target is the player:
 		if the player carries at least one readied weapon:
-			choose row with an Option of the action of the chain golem golem-disarming the chosen target in the Table of AI Action Options;
 			let X be a random readied weapon carried by the player;
 			if X is not part of the player:
 				increase the Action Weight entry by 1000;
@@ -886,36 +894,41 @@ Carry out a person golem-disarming:
 
 Section - Prose
 
-Report an actor hitting the dead chain golem (this is the fatal chain golem rule):
+Report an actor hitting the dead chain golem:
 	say "The chains lash out one final time, blindly seeking prey -- but fall down limply before they can hit anyone. With thousands of hard metal clicks they start falling asunder.";
+	rule succeeds.
 
-Report the chain golem hitting a dead pc (this is the fatal player chain golem rule):
+Report the chain golem hitting a dead pc:
 	say "Smashed by the chains, your broken body is slowly dragged towards the core of the golem -- where an unmentionable fate awaits it.";
+	rule succeeds.
 
-Report the chain golem attacking (this is the chain golem attack rule):
+Report the chain golem attacking:
 	say "Several of the [if concentration of the chain golem is 1]slowly spinning [otherwise if concentration of the chain golem is 2]spinning [otherwise if concentration of the chain golem is 3]wildly spinning [end if]chains [one of]direct themselves towards[or]lash out at[or]attempt to smash themselves into[at random] [the global defender].";
+	rule succeeds.
 
-Report the chain golem parrying (this is the report chain golem parry rule):
+Report the chain golem parrying:
 	say "The chain golem lashes out with a heavy iron chain, trying to stop the attack.";
+	rule succeeds.
 
-Report the chain golem dodging (this is the report chain golem dodge rule):
+Report the chain golem dodging:
 	say "The chain golem attempts to squirm out of the way.";
+	rule succeeds.
 
-Report the chain golem concentrating (this is the chain golem concentration prose rule):
+Report the chain golem concentrating:
 	if the concentration of the chain golem is:
-	-- 1:
-		say "The chain golem starts rotating slowly, spinning its chains around its core." instead;
-	-- 2:
-		say "The chain golem speeds up, its chains whirling through the air." instead;
-	-- 3:
-		say "The chain golem spins even faster, audibly slashing the air with its whip-like metal appendages." instead.	
+		-- 1:
+			say "The chain golem starts rotating slowly, spinning its chains around its core.";
+		-- 2:
+			say "The chain golem speeds up, its chains whirling through the air.";
+		-- 3:
+			say "The chain golem spins even faster, audibly slashing the air with its whip-like metal appendages.";
+	rule succeeds.
 
-Lose concentration prose rule for the chain golem (this is the chain golem lose concentration prose rule):
+Lose concentration prose rule for the chain golem:
 	say "Unbalanced by the hit, the chain golem [bold type]stops spinning[roman type]." instead.
 
 
 Section - Power
-
 
 The power of the chains is a power. Chain golem grants power of the chains.
 The power level of power of the chains is 2.
@@ -955,7 +968,6 @@ Carry out lashing:
 
 Report lashing:
 	say "You will attempt to strike swiftly, before you are hit.".
-
 
 Status skill rule (this is the chain golem power status skill rule):
 	if power of the chains is granted:
@@ -1000,52 +1012,47 @@ When play begins:
 	now active parry max of X is 0;
 	now printed name of X is "bomb's detonating surface".
 
-Initiative update rule when the jumping bomb is enclosed by the location (this is the jumping bomb slightly less initiative rule):
+Initiative update rule when the jumping bomb is enclosed by the location (this is the jumping bomb has slightly less initiative rule):
 	if a random chance of 1 in 5 succeeds:
 		decrease the initiative of the jumping bomb by 1.
 
-An AI action selection rule for the at-Act jumping bomb (this is the jumping bomb wants to concentrate before attacking rule):
-	let P be the jumping bomb;
-	choose row with an Option of the action of P attacking the chosen target in the Table of AI Action Options;
+An AI action selection rule for the at-Act jumping bomb (this is the jumping bomb only attacks when highly concentrated rule):
+	choose row with an Option of the action of the bomb attacking the chosen target in the Table of AI Action Options;
 	if concentration of the jumping bomb is less than 2:
 		decrease the Action Weight entry by 100;
 	if concentration of the jumping bomb is 2:
 		decrease the Action Weight entry by 5.
 
 An AI action selection rule for the jumping bomb (this is the jumping bomb concentration select rule):
-	let P be the jumping bomb;
-	choose row with an Option of the action of P concentrating in the Table of AI Action Options;
+	choose row with an Option of the action of the bomb concentrating in the Table of AI Action Options;
 	increase the Action Weight entry by 5;
 	if the jumping bomb is at-React:
 		decrease Action Weight entry by 500.
 		
 An AI action selection rule for the at-React jumping bomb (this is the jumping bomb dislikes parrying rule):
-	let P be the jumping bomb;
-	choose row with an Option of the action of P parrying in the Table of AI Action Options;
+	choose row with an Option of the action of the bomb parrying in the Table of AI Action Options;
 	decrease the Action Weight entry by 100.
 
-Carry out hitting (this is the jumping bomb kamikaze rule):
-	if the global attacker is the jumping bomb:
-		say "[roman type]When the jumping bomb hits [the global defender], it explodes with a terrible bang. [if the global defender is the player]Not even all the king's horses and all the king's men would be able to put the thousand pieces of your body back together[otherwise][The global defender] is killed instantly[end if][italic type].";
-		now the health of the global attacker is -10;
-		now the health of the global defender is -10;
-		have an event of the global attacker killing the global defender;		
-		if the player is not alive:
-			end the game saying "You exploded.";
-			rule fails.
-The jumping bomb kamikaze rule is listed after the standard whether the attack hit rule in the carry out hitting rules.
+A contact rule when the global attacker is the jumping bomb (this is the jumping bomb kamikaze rule):
+	say "[roman type]When the jumping bomb hits [the global defender], it explodes with a terrible bang. [if the global defender is the player]Not even all the king's horses and all the king's men will be able to put the thousand pieces of your body back together[otherwise][The global defender] is killed instantly[end if][italic type].";
+	now the health of the global attacker is -10;
+	now the health of the global defender is -10;
+	have an event of the global attacker killing the global defender;		
+	if the player is not alive:
+		end the game saying "You exploded.";
+		rule fails.
 
-An attack roll rule when the global attacker is the jumping bomb (this is the jumping bomb concentration attack modifier rule):
+An attack modifier rule when the global attacker is the jumping bomb (this is the jumping bomb concentration attack modifier rule):
 	if the concentration of the jumping bomb is greater than 0:
 		let n be 2 times the concentration of the jumping bomb;
 		say " - ", n, " (lower concentration bonus for jumping bomb)[run paragraph on]";
-		decrease the roll by n.
+		decrease the attack strength by n.
 			
-An attack roll rule when the global defender is the jumping bomb (this is the jumping bomb concentration defence modifier rule):
+An attack modifier rule when the global defender is the jumping bomb (this is the jumping bomb concentration defence modifier rule):
 	if the concentration of the jumping bomb is greater than 0:
 		let n be the concentration of the jumping bomb;
 		say " - ", n, " (speed of the jumping bomb)[run paragraph on]";
-		decrease the roll by n.	
+		decrease the attack strength by n.	
 
 Chance to win rule when the global defender is the jumping bomb (this is the CTW bomb penalty rule):
 	if the concentration of the jumping bomb is greater than 0:
@@ -1054,34 +1061,33 @@ Chance to win rule when the global defender is the jumping bomb (this is the CTW
 
 Section - Prose
 
-
-Report an actor hitting the dead jumping bomb (this is the fatal jumping bomb rule):
+Report an actor hitting the dead jumping bomb:
 	say "As the last of its blood flows out of the jumping bomb, it goes limp and falls to the floor like a punctured balloon.";
+	rule succeeds.
 
-Report an actor attacking (this is the jumping bomb attack rule):
-	if the actor is the jumping bomb:
-		say "Suddenly changing its direction, the jumping bomb launches itself towards [the noun] -- threatening instant death upon contact.";
+Report the bomb attacking:
+	say "Suddenly changing its direction, the jumping bomb launches itself towards [the noun] -- threatening instant death upon contact.";
+	rule succeeds.
 
-Report an actor dodging (this is the report jumping bomb dodge rule):
-	if the actor is the jumping bomb:
-		say "The jumping bomb attempts to bump out of the way.";
+Report the bomb dodging:
+	say "The jumping bomb attempts to bump out of the way.";
+	rule succeeds.
 
-Report an actor concentrating (this is the jumping bomb concentration prose rule):
-	if the actor is the jumping bomb:
-		if the concentration of the actor is:
-			-- 1:
-				say "The jumping bomb jumps up and down a little bit faster." instead;
-			-- 2:
-				say "The jumping bomb speeds up, and is now bumping around energetically." instead;
-			-- 3:
-				say "The jumping bomb accelerates yet further, your image of it dissolving almost into a blur." instead.	
+Report the bomb concentrating:
+	if the concentration of the actor is:
+		-- 1:
+			say "The jumping bomb jumps up and down a little bit faster.";
+		-- 2:
+			say "The jumping bomb speeds up, and is now bumping around energetically.";
+		-- 3:
+			say "The jumping bomb accelerates yet further, your image of it dissolving almost into a blur.";
+	rule succeeds.
 
-Lose concentration prose rule for the jumping bomb (this is the jumping bomb lose concentration prose rule):
+Lose concentration prose rule for the jumping bomb:
 	say "Knocked back by the hit, the jumping bomb [bold type]loses most of its speed[roman type]." instead.
 
 
 Section - Power
-
 
 The power of the bomb is a power. Jumping bomb grants power of the bomb.
 The power level of power of the bomb is 2.
@@ -1097,8 +1103,6 @@ Repelling power of the bomb:
 	decrease melee of the player by 2;
 	decrease defence of the player by 2;
 	decrease permanent health of the player by 10.
-
-
 
 Section - Explode
 
@@ -1130,7 +1134,6 @@ Status skill rule (this is the jumping bomb power status skill rule):
 
 Chapter - Level 2 - The reaper
 
-
 Section - Definitions
 
 The Reaper is a male monster. The reaper is not neuter. "A pale man in dark robes[if the reaper carries a readied scythe], wielding a huge scythe,[end if] stands here. It is the Reaper, a serial killer who believes he is Death himself."
@@ -1151,7 +1154,6 @@ When play begins:
 
 The reaper is weapon user.
 
-
 Section - Reaper's scythes of flame, slaying and oxidation
 
 The scythe of flaming is a scythe. The description of the scythe of flaming is "Enchanted with a spell of heat, this scythe always remains unnaturally hot.".
@@ -1159,10 +1161,10 @@ The internal heat of scythe of flaming is 3.
 
 The scythe of slaying is a scythe. The scythe of slaying is silver. The description of the scythe of slaying is "Ages ago, the monks of Averoigne forged these weapons, imbuing them with powerful enchantments against the living dead.".
 
-A dealing damage rule (this is the scythe of slaying deals great damage to undead rule):
+A damage modifier rule (this is the scythe of slaying deals great damage to undead rule):
 	if global attacker weapon is the scythe of slaying and global defender is undead:
 		if the numbers boolean is true, say " + 5 (slaying undead)[run paragraph on]";
-		increase the damage by 5.
+		increase the attack damage by 5.
 
 The special weapon info of the scythe of slaying is "; massive damage against undead[run paragraph on]".
 
@@ -1172,12 +1174,12 @@ The special weapon info of the scythe of oxidation is "; rusts weapons[run parag
 
 An aftereffects rule (this is the scythe of oxidation rusts stuff rule):
 	if the global attacker weapon is the scythe of oxidation:
-		if the global defender is at parry and the final damage is 0:
+		if the global defender is at parry and the attack damage is 0:
 			if the global defender weapon is iron and the global defender weapon is not rusted:
 				say "Having been in contact with the scythe of oxidation, [the global defender weapon] [bold type]rusts[roman type].";
 				now the global defender weapon is rusted;
 	if the global defender weapon is the scythe of oxidation:
-		if the global defender is at parry and the final damage is 0:
+		if the global defender is at parry and the attack damage is 0:
 			if the global attacker weapon is iron and the global attacker weapon is not rusted and the passive parry max of the global attacker weapon is not 0:
 				if the global attacker weapon is not a part of the global attacker:
 					say "Having been in contact with the scythe of oxidation, [the global attacker weapon] [bold type]rusts[roman type].";
@@ -1187,7 +1189,7 @@ An aftereffects rule (this is the scythe of oxidation rusts stuff rule):
 						say "Having hit the scythe of oxidation, [the global defender] [bold type]rusts[roman type]!";			
 						now the global defender is rusted;
 	if the global attacker weapon is the scythe of oxidation:
-		if the global defender is iron and the final damage is greater than 0:
+		if the global defender is iron and the attack damage is greater than 0:
 			if the global defender is not rusted and the global defender is alive:
 				say "Having been hit with the scythe of oxidation, [the global defender] [bold type]rusts[roman type]!";			
 				now the global defender is rusted.
@@ -1219,30 +1221,34 @@ When play begins:
 
 Section - Prose
 
-Report an actor hitting the dead Reaper (this is the fatal Reaper rule):
+Report an actor hitting the dead Reaper:
 	say "'This -- but this is impossible! Death is me!' the Reaper shouts as the bony hands of disillusion pull him to the underworld.";
+	rule succeeds.
 
-Report the Reaper hitting a dead pc (this is the fatal player Reaper rule):
+Report the Reaper hitting a dead pc:
 	say "'Now go to sleep, my child,' says the Reaper. 'You have suffered enough.'";
+	rule succeeds.
 
-Report the reaper attacking (this is the Reaper attack rule):
+Report the reaper attacking:
 	say "The Reaper advances towards [the noun][one of][or], with a skulllike grin[or], saying 'Et in Arcadia ego!' in a booming voice[as decreasingly likely outcomes].";
+	rule succeeds.
 
-Report the Reaper dodging (this is the report Reaper dodge rule):
+Report the Reaper dodging:
 	say "'Nobody can touch Death!' says the Reaper as he ducks away.";
+	rule succeeds.
 
-Report the Reaper concentrating (this is the Reaper concentration prose rule):
+Report the Reaper concentrating:
 	if the concentration of the Reaper is:
 		-- 1:
-			say "The Reaper contemplates the meaning of Death." instead;
+			say "The Reaper contemplates the meaning of Death.";
 		-- 2:
-			say "The Reaper immerses himself further into his meditations on mortality." instead;
+			say "The Reaper immerses himself further into his meditations on mortality.";
 		-- 3:
-			say "'I see your end!' the Reaper announces as he finishes his contemplations." instead.	
+			say "'I see your end!' the Reaper announces as he finishes his contemplations.";
+	rule succeeds.
 
 
 Section - Power
-
 
 The power of the Reaper is a power. Reaper grants power of the Reaper.
 The power level of power of the Reaper is 2.
@@ -1363,18 +1369,14 @@ enslaved is a faction.
 When play begins:
 	now enslaved hates friendly;
 	now friendly hates enslaved.
-
-First AI action selection rule for the mindslug (this is the consider mindblasting rule):
+		
+An AI action selection rule for the at-Act mindslug (this is the mindslug considers mindblasting rule):
 	choose a blank Row in the Table of AI Action Options;
 	change the Option entry to the action of the mindslug mindblasting the chosen target;
-	change the Action Weight entry to -1000.
-		
-An AI action selection rule for the mindslug (this is the only the mindslug considers mindblasting rule):
-	choose row with an Option of the action of the mindslug mindblasting the chosen target in the Table of AI Action Options;
-	if the combat state of the global attacker is at-Act:
-		change the Action Weight entry to 12;
-	otherwise:
-		change the Action Weight entry to -1000.
+	change the Action Weight entry to 12;
+	[ But it doesn't always mindblast ]
+	if a random chance of 3 in 5 succeeds:
+		decrease the Action Weight entry by 100.
 
 An AI action selection rule for the at-Act mindslug (this is the mindslug dislikes attacking rule):
 	choose row with an Option of the action of the mindslug attacking the chosen target in the Table of AI Action Options;
@@ -1382,12 +1384,7 @@ An AI action selection rule for the at-Act mindslug (this is the mindslug dislik
 		
 An AI action selection rule for the at-React mindslug (this is the mindslug doesnt dodge rule):
 	choose row with an Option of the action of the mindslug dodging in the Table of AI Action Options;
-	decrease the Action Weight entry by 100.		
-
-An AI action selection rule for the mindslug (this is the mindslug does not always mindblast rule):
-	if a random chance of 3 in 5 succeeds:
-		choose row with an Option of the action of the mindslug mindblasting the chosen target in the Table of AI Action Options;
-		decrease the Action Weight entry by 100.
+	decrease the Action Weight entry by 100.
 		
 Carry out the mindslug mindblasting:
 	say "The mindslug blasts [the global defender] with psionic energy. [italic type]";
@@ -1416,17 +1413,21 @@ An AI target selection rule for a person (called target) when the running AI is 
 
 Section - Prose
 
-Report an actor hitting the dead mindslug (this is the fatal mindslug rule):
+Report an actor hitting the dead mindslug:
 	say "A mental oppression falls from your mind as the mindslug succumbs to its injuries, its evil intelligence snuffed.";
+	rule succeeds.
 
-Report the mindslug hitting a dead pc (this is the fatal player mindslug rule):
+Report the mindslug hitting a dead pc:
 	say "The mindslug crashes on top of you, burying your body under tons of oozing gastropod flesh.";
+	rule succeeds.
 
-Report the mindslug attacking (this is the mindslug attack rule):
+Report the mindslug attacking:
 	say "Raising its hideous body, the mindslug bears down on [the global defender].";
+	rule succeeds.
 
-Report the mindslug dodging (this is the report mindslug dodge rule):
+Report the mindslug dodging:
 	say "The mindslug oozes out of the way.";
+	rule succeeds.
 
 
 Section - Slaves
@@ -1464,14 +1465,14 @@ When play begins:
 		move Fafhrd to the location of mindslug;
 		move Mouser to the location of mindslug.
 
-An attack roll rule (this is the mindslug defended by the enslaved rule):
+An attack modifier rule (this is the mindslug defended by the enslaved rule):
 	if the global defender is the mindslug and the global attacker is not hidden:
 		let n be the number of enslaved persons in the location;
 		if n greater than 0:
 			let m be n + 1;
 			let m be n times m;
 			if the numbers boolean is true, say " - ", m, " (defended by slaves)[run paragraph on]";
-			decrease the roll by m.
+			decrease the attack strength by m.
 
 Chance to win rule (this is the CTW mindslug enslaved penalty rule):
 	if the global defender is the mindslug:
@@ -1481,10 +1482,10 @@ Chance to win rule (this is the CTW mindslug enslaved penalty rule):
 			let m be n times m;		
 			decrease the chance-to-win by m.
 
-An attack roll rule (this is the enslaved have bad defence rule):
+An attack modifier rule (this is the enslaved have bad defence rule):
 	if the global defender is enslaved:
 		if the numbers boolean is true, say " + 2 (defender uninterested in own safety)[run paragraph on]";
-		increase the roll by 2.
+		increase the attack strength by 2.
 
 Chance to win rule (this is the CTW enslaved bonus rule):
 	if the global defender is enslaved:
@@ -1510,8 +1511,9 @@ Check an enslaved npc attacking (this is the slaves may be freed from mindslug r
 
 Section - Prose for Fafhrd and Mouser
 
-Report an actor hitting the dead Fafhrd (this is the fatal Fafhrd rule):
+Report an actor hitting the dead Fafhrd:
 	say "Cursing his fate, Fafhrd falls down[if Mouser is alive and the faction of Mouser is not enslaved and Mouser is in the location]. 'Fafhrd!' screams Mouser[do the mouser rage][end if].";
+	rule succeeds.
 
 To say do the mouser rage:
 	increase melee of Mouser by 2;
@@ -1519,20 +1521,25 @@ To say do the mouser rage:
 	if global attacker is the player:
 		now faction of Mouser is hostile.
 
-Report Fafhrd hitting a dead pc (this is the fatal player Fafhrd rule):
+Report Fafhrd hitting a dead pc:
 	say "The contemplative northern barbarian ends your life, with what seems to be a hint of sadness in his face.";
+	rule succeeds.
 
-Report Fafhrd attacking (this is the Fafhrd attack rule):
+Report Fafhrd attacking:
 	say "Fafhrd rushes towards [the noun].";
+	rule succeeds.
 
-Report Fafhrd dodging (this is the report Fafhrd dodge rule):
+Report Fafhrd dodging:
 	say "Fafhrd ducks aside.";
+	rule succeeds.
 
-Report Fafhrd parrying (this is the report Fafhrd parry rule):
+Report Fafhrd parrying:
 	say "Fafhrd raises his weapon to stop the blow.";
+	rule succeeds.
 
-Report an actor hitting the dead Mouser (this is the fatal Mouser rule):
+Report an actor hitting the dead Mouser:
 	say "Mouser staggers backwards, mortally wounded. He tries to say something, but no sound ever passes his lips again[if Fafhrd is alive and the faction of Fafhrd is not enslaved and Fafhrd is in the location]. 'Vengeance!' screams Fafhrd[do the fafhrd rage][end if].";
+	rule succeeds.
 
 To say do the Fafhrd rage:
 	increase melee of Fafhrd by 2;
@@ -1540,17 +1547,21 @@ To say do the Fafhrd rage:
 	if global attacker is the player:
 		now faction of Fafhrd is hostile.
 
-Report Mouser hitting a dead pc (this is the fatal player Mouser rule):
+Report Mouser hitting a dead pc:
 	say "As you fall down, Mouser shrugs somewhat apologetically.";
+	rule succeeds.
 
-Report Mouser attacking (this is the Mouser attack rule):
+Report Mouser attacking:
 	say "Fast as a snake, Mouser lashes out at [the global defender].";
+	rule succeeds.
 
-Report Mouser dodging (this is the report Mouser dodge rule):
+Report Mouser dodging:
 	say "Deftly, Mouser rolls aside to avoid the attack.";
+	rule succeeds.
 
-Report Mouser parrying (this is the report Mouser parry rule):
+Report Mouser parrying:
 	say "Mouser tries to parry the blow.";
+	rule succeeds.
 
 Last report talking to Fafhrd when Fafhrd is friendly:
 	say "Fafhrd shrugs.".
@@ -1642,17 +1653,17 @@ Carry out dominating:
 		say "You attempt to dominate [the noun], but suddenly feel very afraid!";
 		now noun dominates the player.
 
-An attack roll rule (this is the domination attack modifier rule):
+An attack modifier rule (this is the domination attack modifier rule):
 	if the global defender dominates the global attacker:
 		if the numbers boolean is true, say " - 2 (afraid of [the global defender])[run paragraph on]";
-		decrease the roll by 2.
+		decrease the attack strength by 2.
 
 Chance to win rule (this is the CTW domination penalty rule):
 	if the global defender dominates the global attacker:
 		decrease the chance-to-win by 2.
 
 An aftereffects rule (this is the domination stops after a hit rule):
-	if the global defender dominates the global attacker and the final damage is greater than 0:
+	if the global defender dominates the global attacker and the attack damage is greater than 0:
 		now the global defender does not dominate the global attacker;
 		say "[The global attacker] no longer fear[s] [the global defender].".
 
@@ -1695,13 +1706,11 @@ Section - The tentacle grapples
 
 Grappling relates one person to another. The verb to grapple (he grapples, they grapple, he grappled, it is grappled, he is grappling) implies the grappling relation. 
 
-Carry out hitting (this is the tentacle grapples rule):
-	if the global attacker is the giant tentacle:
-		say "The giant tentacle [bold type]wraps itself around[italic type] [the global defender]!";
-		now giant tentacle grapples the global defender.
-The tentacle grapples rule is listed after the standard whether the attack hit rule in the carry out hitting rules.
+A contact rule when the global attacker is the giant tentacle (this is the tentacle grapples rule):
+	say "The giant tentacle [bold type]wraps itself around[italic type] [the global defender]!";
+	now giant tentacle grapples the global defender.
 
-An AI action selection rule for the giant tentacle (this is the tentacle attacks only when not grappling rule):
+An AI action selection rule for the at-Act giant tentacle (this is the tentacle attacks only when not grappling rule):
 	choose row with an Option of the action of the giant tentacle attacking the chosen target in the Table of AI Action Options;
 	if the giant tentacle grapples the chosen target:
 		decrease the Action Weight entry by 1000;
@@ -1762,7 +1771,7 @@ Check attacking (this is the cannot attack when grappled rule):
 			say "Caught in [the X], you are unable to attack anyone else." instead.
 	
 An aftereffects rule (this is the tentacle lets go when damaged rule):
-	if the global defender is the giant tentacle and the final damage is greater than 0:
+	if the global defender is the giant tentacle and the attack damage is greater than 0:
 		if the giant tentacle grapples someone and the giant tentacle is alive:
 			let X be a random person grappled by the giant tentacle;
 			say "Recoiling in pain, the giant tentacle [bold type]lets go[roman type] of [the X].";
@@ -1797,64 +1806,49 @@ Tentacle-constricting is an action applying to nothing.
 
 Constriction level is a number that varies. Constriction level is 0.
 
-First AI action selection rule for the giant tentacle (this is the consider tentacle-constricting rule):
-	choose a blank Row in the Table of AI Action Options;
-	change the Option entry to the action of the giant tentacle tentacle-constricting;
-	if the combat state of giant tentacle is at-Act:
-		change the Action Weight entry to 0;
-	otherwise:
-		change the Action weight entry to -100.
-		
-An AI action selection rule for the giant tentacle (this is the tentacle constricts when grappling rule):
-	choose row with an Option of the action of the giant tentacle tentacle-constricting in the Table of AI Action Options;
-	unless the giant tentacle grapples the chosen target:
-		decrease the Action Weight entry by 1000;
-	otherwise:
-		increase the Action Weight entry by 15.
+An AI action selection rule for the at-Act giant tentacle (this is the tentacle considers constricting rule):
+	if the giant tentacle grapples the chosen target:
+		choose a blank Row in the Table of AI Action Options;
+		change the Option entry to the action of the giant tentacle tentacle-constricting;
+		change the Action Weight entry to 15;
 
 Clothing has a number called the constriction prevention. The constriction prevention of clothing is usually 0.
 
 Definition: clothing (called item) is constriction-preventing if the constriction prevention of item is greater than 0.
-
 
 Carry out the giant tentacle tentacle-constricting:
 	increase constriction level by 1; [constricts tighter]
 	let n be constriction level;
 	let m be 0;	
 	let preventer be a random clothing;
-	if global defender wears at least one constriction-preventing clothing:
+	if the chosen target wears at least one constriction-preventing clothing:
 		let i be 0;
-		repeat with item running through clothing worn by global defender:
+		repeat with item running through clothing worn by the chosen target:
 			increase m by constriction prevention of item;
 			unless i is greater than constriction prevention of item:
 				now preventer is item;
 			now i is constriction prevention of item; [at the end of the repeat, preventer is the item with the largest constriction prevention]
 	if n is greater than m: [constriction prevention < constriction level: normal damage]
-		decrease health of global defender by constriction level;
+		decrease health of the chosen target by constriction level;
 		if m is greater than 0:
 			remove preventer from play; [and the preventing item gets smashed]
-		say "The giant tentacle tightens its muscles, dealing [bold type][constriction level] damage[roman type] to [the name of the global defender].[if m is greater than 0] [The preventer] get[s] smashed in the process[end if]";
-		if the global defender is dead:
-			have an event of the giant tentacle killing the global defender;
-		if the player is dead, end the story saying "You suffocate in the tentacle's deadly embrace.";
+		say "The giant tentacle tightens its muscles, dealing [bold type][constriction level] damage[roman type] to [the name of the chosen target].[if m is greater than 0] [The preventer] get[s] smashed in the process[end if]";
+		if the chosen target is dead:
+			have an event of the giant tentacle killing the chosen target;
+		if the player is dead:
+			end the story saying "You suffocate in the tentacle's deadly embrace.";
 	otherwise: [constriction prevention >= constriction level: no damage]
-		say "The giant tentacle tightens its muscles, but the [preventer] protect[s] [the global defender] against the pressure.".
+		say "The giant tentacle tightens its muscles, but the [preventer] protect[s] [the chosen target] against the pressure.".
 
 Section - and the tentacle shakes
 
 Tentacle-shaking is an action applying to nothing.
-
-First AI action selection rule for the at-React giant tentacle (this is the consider tentacle-shaking rule):
-	choose a blank Row in the Table of AI Action Options;
-	change the Option entry to the action of the the giant tentacle tentacle-shaking;
-	change the Action Weight entry to 15;
 		
 An AI action selection rule for the at-React giant tentacle (this is the tentacle shakes when attacked and grappling rule):
-	choose row with an Option of the action of the giant tentacle tentacle-shaking in the Table of AI Action Options;
 	if the giant tentacle grapples the main actor:
-		increase the Action Weight entry by 5 times the concentration of the main actor;
-	otherwise:
-		decrease the Action Weight entry by 1000.
+		choose a blank Row in the Table of AI Action Options;
+		change the Option entry to the action of the the giant tentacle tentacle-shaking;
+		change the Action Weight entry to 15 plus 5 times the concentration of the main actor;
 
 Carry out the giant tentacle tentacle-shaking:
 	say "The giant tentacle vigourously shakes [the main actor], aiming to confuse and confound.[italic type] ";
@@ -1871,17 +1865,16 @@ Carry out the giant tentacle tentacle-shaking:
 
 A person can be tentacle-confused. A person is usually not tentacle-confused.
 
-An attack roll rule when the global attacker is tentacle-confused (this is the tentacle-confused attack modifier rule):
+An attack modifier rule when the global attacker is tentacle-confused (this is the tentacle-confused attack modifier rule):
 	say " - 2 (confused)[run paragraph on]";
-	decrease the roll by 2.	
+	decrease the attack strength by 2.	
 
 Chance to win rule when the global attacker is tentacle-confused (this is the CTW confusion penalty rule):
 	decrease the chance-to-win by 2.
 
-Aftereffects rule (this is the no longer tentacle-confused after attacking rule):
-	if the global attacker is tentacle-confused:
-		say "[The global attacker] [is-are] no longer confused.";
-		now the global attacker is not tentacle-confused.
+Aftereffects rule when the global attacker is tentacle-confused (this is the no longer tentacle-confused after attacking rule):
+	say "[The global attacker] [is-are] no longer confused.";
+	now the global attacker is not tentacle-confused.
 
 Status rule (this is the tentacle-confused status rule):
 	if the player is tentacle-confused:
@@ -1889,38 +1882,38 @@ Status rule (this is the tentacle-confused status rule):
 
 Section - Tentacle prose
 
-Report an actor hitting the dead giant tentacle (this is the fatal giant tentacle rule):
+Report an actor hitting the dead giant tentacle:
 	say "The giant tentacle crashes down, never to rise again.";
+	rule succeeds.
 
-Report the giant tentacle hitting a dead pc (this is the fatal player giant tentacle rule):
+Report the giant tentacle hitting a dead pc:
 	say "Even though Tooloo was slain in times immemorial, his appendages still claim victims today.";
+	rule succeeds.
 
-Report the giant tentacle attacking (this is the giant tentacle attack rule):
+Report the giant tentacle attacking:
 	say "The giant tentacle moves in to grab [the global defender].";
+	rule succeeds.
 
-Report the giant tentacle dodging (this is the report giant tentacle dodge rule):
+Report the giant tentacle dodging:
 	say "The giant tentacle tries to avoid the blow.";
+	rule succeeds.
 
-Last dealing damage rule (this is the tentacle report result of blow in numbers mode rule):
-	if the global attacker is the giant tentacle:
-		if the final damage is less than 1: [no damage]
-			unless the giant tentacle grapples the global defender:
-				if the global defender is not the player, say "allowing [the global defender] to escape unscathed.[run paragraph on]";
-				if the global defender is the player, say "allowing you to escape unscathed.[run paragraph on]";
-			otherwise:
-				if the global defender is not the player, say "but holds on to [the global defender].[run paragraph on]";
-				if the global defender is the player, say "but holds on to you.[run paragraph on]";
+[ This is almost the same as the standard show the attack damage dealt rule, except with the option to mention that the tentacle still holds on to the defender. ]
+Last damage multiplier rule when the global attacker is the giant tentacle (this is the show the damage dealt by the giant tentacle rule):
+	say " = [bold type]", the attack damage, " damage[roman type][italic type], ";
+	if the attack damage is less than 1: [no damage]
+		unless the giant tentacle grapples the global defender:
+			say "allowing [the global defender] to escape unscathed.[run paragraph on]";
 		otherwise:
-			if the final damage is less than the health of the global defender: [non-fatal]
-				if the global defender is not the player, say "wounding [the global defender] to ", health of the global defender minus final damage, " health.[run paragraph on]" ;
-				if the global defender is the player, say "wounding you to ", health of the global defender minus final damage, " health.[run paragraph on]";
-			otherwise: [fatal]
-				if the global defender is not the player:
-					if the numbers boolean is true, say "killing [the name of the global defender].[run paragraph on]";
-				otherwise:
-					if the numbers boolean is true, say "killing you.";
-		say "[roman type][paragraph break]";
-		rule succeeds.
+			say "but holds on to [the global defender].[run paragraph on]";
+	otherwise:
+		if the attack damage is less than the health of the global defender: [non-fatal]
+			say "wounding [the global defender] to ", health of the global defender minus the attack damage, " health.[run paragraph on]" ;
+		otherwise: [fatal]
+			say "killing [the name of the global defender].[run paragraph on]";
+	say "[roman type][paragraph break]";
+	rule succeeds.
+The standard show the attack damage dealt rule is listed after the show the damage dealt by the giant tentacle rule in the damage multiplier rules.
 
 Section - Power of the Tentacle
 
@@ -2019,17 +2012,21 @@ When play begins:
 	let X be a random natural weapon part of healer of Aite;
 	now printed name of X is "healer's fists".
 
-Report an actor hitting the dead healer of Aite (this is the fatal healer of Aite rule):
+Report an actor hitting the dead healer of Aite:
 	say "The healer stares in disbelief at his fatal wounds before he topples over.";
+	rule succeeds.
 
-Report the healer of Aite hitting a dead pc (this is the fatal player healer of Aite rule):
+Report the healer of Aite hitting a dead pc:
 	say "'Aite be praised!' These are the last words you hear as the healer's sword penetrates your heart.";
+	rule succeeds.
 
-Report the healer of Aite attacking (this is the healer of Aite attack rule):
+Report the healer of Aite attacking:
 	say "The healer pokes his sword at [the noun].";
+	rule succeeds.
 
-Report the healer of Aite dodging (this is the report healer of Aite dodge rule):
+Report the healer of Aite dodging:
 	say "'Save me, great Aite!' the healer exclaims as he attempts to duck away.";
+	rule succeeds.
 
 Section - Tormentor of Aite
 
@@ -2052,17 +2049,21 @@ When play begins:
 	let X be a random natural weapon part of tormentor of Aite;
 	now printed name of X is "tormentor's fists".
 
-Report an actor hitting the dead tormentor of Aite (this is the fatal tormentor of Aite rule):
+Report an actor hitting the dead tormentor of Aite:
 	say "The tormentor cries in pain and rage as her body's vital functions fail.";
+	rule succeeds.
 
-Report the tormentor of Aite hitting a dead pc (this is the fatal player tormentor of Aite rule):
+Report the tormentor of Aite hitting a dead pc:
 	say "'Aite be praised!' These are the last words you hear as magical pain racks your body.";
+	rule succeeds.
 
-Report the tormentor of Aite attacking (this is the tormentor of Aite attack rule):
+Report the tormentor of Aite attacking:
 	say "The tormentor raises her staff towards [the noun], preparing a magical attack.";
+	rule succeeds.
 
-Report the tormentor of Aite dodging (this is the report tormentor of Aite dodge rule):
+Report the tormentor of Aite dodging:
 	say "'You will never get me!' the tormentor exclaims as she attempts to duck away.";
+	rule succeeds.
 
 Section - Defender of Aite
 
@@ -2085,20 +2086,25 @@ When play begins:
 	let X be a random natural weapon part of defender of Aite;
 	now printed name of X is "defender's fists".
 
-Report an actor hitting the dead defender of Aite (this is the fatal defender of Aite rule):
+Report an actor hitting the dead defender of Aite:
 	say "The defender falls to the ground with a smash, never to stand up again.";
+	rule succeeds.
 
-Report the defender of Aite hitting a dead pc (this is the fatal player defender of Aite rule):
+Report the defender of Aite hitting a dead pc:
 	say "'Aite be praised!' These are the last words you hear as the defender hacks you apart.";
+	rule succeeds.
 
-Report the defender of Aite attacking (this is the defender of Aite attack rule):
+Report the defender of Aite attacking:
 	say "The defender starts lumbering towards [the noun].";
+	rule succeeds.
 
-Report the defender of Aite parrying (this is the report defender of Aite parry rule):
+Report the defender of Aite parrying:
 	say "The soldier raises his shield to stop the attack.";
+	rule succeeds.
 
-Report the defender of Aite dodging (this is the report defender of Aite dodge rule):
+Report the defender of Aite dodging:
 	say "The soldier attempts to jump away, using his shield for additional cover.";
+	rule succeeds.
 
 Section - Power of the Fanatics of Aite
 
@@ -2189,35 +2195,34 @@ Section - Bodmall's lightning attack
 
 [Mostly this is just prose, except --]
 
-An attack roll rule (this is the do not parry with metal weapons against Bodmall's lightning attack rule):
+An attack modifier rule (this is the do not parry with metal weapons against Bodmall's lightning attack rule):
 	if the global attacker is Bodmall and the global defender is at parry:
 		if the global defender weapon is iron:
 			if the numbers boolean is true:
 				say " + 3 ([global defender weapon] acts as a lightning rod)[run paragraph on]";
-			increase the roll by 3;
+			increase the attack strength by 3;
 		if the global defender weapon is silver:
 			if the numbers boolean is true:
 				say " + 5 ([global defender weapon] acts as a lightning rod)[run paragraph on]";
-			increase the roll by 5.
+			increase the attack strength by 5.
 
-A dealing damage rule when the global attacker is Bodmall (this is the iron or silver suit acts as a faraday cage rule):
+A damage modifier rule when the global attacker is Bodmall (this is the iron or silver suit acts as a faraday cage rule):
 	if the global defender wears an iron suit or the global defender wears a silver suit:
 		let X be a random suit worn by the global defender;
 		if the numbers boolean is true:
 			say " - 3 ([the X] acts as a Faraday cage)[run paragraph on]";
-		decrease the damage by 3.
+		decrease the attack damage by 3.
 
 
 Section - Bodmall power - Raise fog
 
 Bodmall-fogging is an action applying to nothing.
 
-First AI action selection rule (this is the Bodmall considers fogging rule):
-	if the global attacker is Bodmall:
-		if smoke timer of the location of Bodmall is 0:
-			choose a blank Row in the Table of AI Action Options;
-			change the Option entry to the action of the global attacker Bodmall-fogging;
-			change the Action Weight entry to a random number between -5 and 15;
+An AI action selection rule for Bodmall (this is the Bodmall considers fogging rule):
+	if smoke timer of the location of Bodmall is 0:
+		choose a blank Row in the Table of AI Action Options;
+		change the Option entry to the action of the Bodmall Bodmall-fogging;
+		change the Action Weight entry to a random number between -5 and 15;
 
 Carry out Bodmall Bodmall-fogging:
 	say "Bodmall chants softly, and great [bold type]clouds of fog[roman type] or smoke rise up from the ground.";
@@ -2226,18 +2231,18 @@ Carry out Bodmall Bodmall-fogging:
 
 Section - Bodmall power - Transmute metal to wood
 
+[TODO make this an action applying to a thing?]
 Bodmall-transmuting is an action applying to nothing.
 
-First AI action selection rule (this is the Bodmall considers transmuting rule):
-	if the global attacker is Bodmall:
-		let X be a random readied weapon enclosed by the global defender;
-		if X is iron or X is silver:
-			choose a blank Row in the Table of AI Action Options;
-			change the Option entry to the action of the global attacker Bodmall-transmuting;
-			change the Action Weight entry to a random number between -50 and 20;
+An AI action selection rule for Bodmall (this is the Bodmall considers transmuting rule):
+	let X be a random readied weapon enclosed by the chosen target;
+	if X is iron or X is silver:
+		choose a blank Row in the Table of AI Action Options;
+		change the Option entry to the action of the Bodmall Bodmall-transmuting;
+		change the Action Weight entry to a random number between -50 and 20;
 
 Carry out Bodmall Bodmall-transmuting:
-	let X be a random readied weapon enclosed by the global defender;
+	let X be a random readied weapon enclosed by the chosen target;
 	if X is iron or X is silver:
 		if X resists Bodmall transmutation:
 			say "Bodmall screams several harsh syllables and points at [the X]. Nothing happens.";
@@ -2266,7 +2271,7 @@ Section - Bodmall power - Barkskin
 
 Bodmall-barkskinning is an action applying to nothing.
 
-First AI action selection rule for Bodmall (this is the Bodmall considers barkskinning rule):
+An AI action selection rule for Bodmall (this is the Bodmall considers barkskinning rule):
 	if Bodmall is not barkskinned:
 		choose a blank Row in the Table of AI Action Options;
 		change the Option entry to the action of the Bodmall Bodmall-barkskinning;
@@ -2278,11 +2283,11 @@ Carry out Bodmall Bodmall-barkskinning:
 
 A person is either barkskinned or not barkskinned. A person is usually not barkskinned.
 
-A dealing damage rule (this is the barkskin decreases damage rule):
+A damage modifier rule (this is the barkskin decreases damage rule):
 	if the global defender is barkskinned:
 		unless the global attacker weapon is an axe:
 			if the numbers boolean is true, say " - 1 (barkskin)[run paragraph on]";
-			decrease the damage by 1.
+			decrease the attack damage by 1.
 
 Barkskin is a part of Bodmall. Understand "skin" and "bark" as barkskin.
 
@@ -2337,7 +2342,7 @@ Check an actor attacking when the thorny bushes are in the location (this is the
 									say "[The name of the global attacker] is killed by the thorns!";
 									rule fails.
 
-Last report an actor dodging (this is the thorns hurt the dodger rule):
+After reporting an actor dodging (this is the thorns hurt the dodger rule):
 	if the thorny bushes are in the location:
 		unless the actor is flying:
 			unless the actor is Bodmall:
@@ -2358,21 +2363,21 @@ Last report an actor dodging (this is the thorns hurt the dodger rule):
 								say "[The name of the actor] is killed by the thorns!";
 								rule fails.
 
-An attack roll rule (this is the thorns running rule):
+An attack modifier rule (this is the thorns running rule):
 	if the global defender is the player and the thorny bushes are in the location:
 		if the player is retreater or the player is runner:		
 			unless the power of Bodmall is granted:
 				say " + 3 (you are slowed down by the thorny bushes)[run paragraph on]";
-				increase the roll by 3;
+				increase the attack strength by 3;
 			otherwise:
 				unless the global attacker weapon is ranged:
 					say " - 2 (your retreat covered by the thorny bushes)[run paragraph on]";
-					decrease the roll by 2.
+					decrease the attack strength by 2.
 
 
 Bodmall-summoning is an action applying to nothing.
 
-First AI action selection rule for Bodmall (this is the Bodmall considers summoning rule):
+An AI action selection rule for Bodmall (this is the Bodmall considers summoning thorns rule):
 	if thorny bushes are not in the location:
 		choose a blank Row in the Table of AI Action Options;
 		change the Option entry to the action of Bodmall Bodmall-summoning;
@@ -2385,20 +2390,24 @@ Carry out Bodmall Bodmall-summoning:
 
 Section - Bodmall prose
 
-Report an actor hitting dead Bodmall (this is the fatal Bodmall rule):
+Report an actor hitting the dead Bodmall:
 	say "'I will haunt you come Samhain!', whispers Bodmall as her body returns to the earth.";
+	rule succeeds.
 
-Report Bodmall hitting a dead pc (this is the fatal player Bodmall rule):
+Report Bodmall hitting a dead pc:
 	if the player is undead:
 		say "Bodmall kneels over your corpse. 'The undead are a blight on this world, and they will be destroyed,' she says.";
 	otherwise:
 		say "Bodmall kneels over your corpse. 'Death is but a stage in the cycle of Nature,' she says.";
+	rule succeeds.
 
-Report Bodmall attacking (this is the Bodmall attack rule):
+Report Bodmall attacking:
 	say "Bodmall throws her hands forward, casting a lightning bolt at [the global defender].";
+	rule succeeds.
 
-Report Bodmall dodging (this is the report Bodmall dodge rule):
+Report Bodmall dodging:
 	say "Gracefully, Bodmall attempts to glide out of the way.";
+	rule succeeds.
 
 
 Section - Power of Bodmall
@@ -2480,7 +2489,7 @@ The damage die of the dagger of draining is 8.
 The special weapon info of the dagger of draining is "; drains statistics[run paragraph on]".
 
 An aftereffects rule (this is the dagger of draining aftereffects rule):
-	if the global attacker weapon is the dagger of draining and the final damage is greater than 0:
+	if the global attacker weapon is the dagger of draining and the attack damage is greater than 0:
 		if a random chance of 1 in 3 succeeds:
 			decrease defence of the global defender by 1;
 			increase defence of the global attacker by 1;
@@ -2549,12 +2558,12 @@ Section - Special power - unghoul
 
 Unghouling is an action applying to nothing.
 
-First AI action selection rule for Malygris (this is the consider unghouling rule):
-	if Malygris opposes the player:
-		if the player form of the player is ghoul and at least two undead persons are in the location:
-			choose a blank Row in the Table of AI Action Options;
-			change the Option entry to the action of Malygris unghouling;
-			change the Action Weight entry to a random number between 0 and 30.
+An AI action selection rule for Malygris (this is the consider unghouling rule):
+	[if Malygris opposes the player:] [Why was this here?]
+	if the player form of the player is ghoul and at least two undead persons are in the location:
+		choose a blank Row in the Table of AI Action Options;
+		change the Option entry to the action of Malygris unghouling;
+		change the Action Weight entry to a random number between 0 and 30.
 
 Carry out Malygris unghouling:
 	say "As Malygris casts a complex spell, and you feel your flesh [bold type]returning to normal[roman type]!";
@@ -2605,11 +2614,13 @@ Check attacking (this is the attacking with the demon blade is a bad idea rule):
 
 Section - Demonic assassin prose
 
-Report an actor hitting the dead demonic assassin (this is the fatal demonic assassin rule):
+Report an actor hitting the dead demonic assassin:
 	say "With a thunderous explosion, the demonic assassin is pulled back to Hell.";
+	rule succeeds.
 
-Report the demonic assassin hitting a dead pc (this is the fatal player demonic assassin rule):
+Report the demonic assassin hitting a dead pc:
 	say "The assassin's laugh as you fall down is the most evil thing you have ever heard. It is also the last.";
+	rule succeeds.
 
 
 
@@ -2665,7 +2676,6 @@ Every turn (this is the Nameless Horror kills all rule):
 			if guy is dead:
 				remove guy from play.
 
-
 Every turn when Nameless Horror is follower (this is the increase hunger of Nameless Horror rule):
 	increase follower percentile chance of Nameless Horror by 1. 
 
@@ -2674,26 +2684,22 @@ Every turn when follower percentile chance of Nameless Horror is greater than 10
 	if way is a direction:
 		try Nameless Horror going the way.
 	
-An AI action selection rule (this is the Nameless Horror does not concentrate rule):
-	if the running AI is the Nameless Horror:
-		choose row with an Option of the action of the global attacker concentrating in the Table of AI Action Options;
-		decrease the Action Weight entry by 1000.
+An AI action selection rule for the Nameless Horror (this is the Nameless Horror does not concentrate rule):
+	choose row with an Option of the action of the Nameless Horror concentrating in the Table of AI Action Options;
+	decrease the Action Weight entry by 1000.
 
-An AI action selection rule (this is the Nameless Horror does not parry rule):
-	if the running AI is the Nameless Horror:
-		choose row with an Option of the action of the global attacker parrying in the Table of AI Action Options;
-		decrease the Action Weight entry by 1000.
+An AI action selection rule for the at-React Nameless Horror (this is the Nameless Horror does not parry rule):
+	choose row with an Option of the action of the Nameless Horror parrying in the Table of AI Action Options;
+	decrease the Action Weight entry by 1000.
 		
-An AI action selection rule (this is the Nameless Horror does not dodge rule):
-	if the running AI is the Nameless Horror:
-		choose row with an Option of the action of the global attacker dodging in the Table of AI Action Options;
-		decrease the Action Weight entry by 1000.		
+An AI action selection rule for the at-React Nameless Horror (this is the Nameless Horror does not dodge rule):
+	choose row with an Option of the action of the Nameless Horror dodging in the Table of AI Action Options;
+	decrease the Action Weight entry by 1000.		
 
-First AI action selection rule (this is the Nameless Horror considers waiting rule):
-	if the running AI is the Nameless Horror:
-		choose a blank Row in the Table of AI Action Options;
-		change the Option entry to the action of the global attacker waiting;
-		change the Action Weight entry to 0.
+An AI action selection rule for the Nameless Horror (this is the Nameless Horror considers waiting rule):
+	choose a blank Row in the Table of AI Action Options;
+	change the Option entry to the action of the Nameless Horror waiting;
+	change the Action Weight entry to 0.
 
 Instead of the Nameless Horror waiting:
 	say "[one of]The Nameless Horror emits a maddening shriek[or]Darkness coalesces around the Nameless Horror[or]The world shakes as the Nameless Horror roars in defiance[at random].".
@@ -2779,7 +2785,7 @@ Every turn when a rotting limb is enclosed by the location (this is the rotting 
 					remove item from play.
 
 An aftereffects rule (this is the rotting corpse loses limbs rule):
-	if the global defender is alive and final damage is greater than 0:
+	if the global defender is alive and the attack damage is greater than 0:
 		if the global defender is the rotting corpse and limbs of the rotting corpse is not 0:
 			let item be a random rotting limb part of the rotting corpse;
 			say "As the corpse reels back from the blow, his [item] falls off.";
@@ -2797,43 +2803,43 @@ An AI action selection rule for the rotting corpse (this is the rotting corpse w
 		choose row with an Option of the action of P concentrating in the Table of AI Action Options;
 		decrease the Action Weight entry by 1000.
 
-An attack roll rule when the global attacker is the rotting corpse (this is the rotting corpse attack modifier rule):
+An attack modifier rule when the global attacker is the rotting corpse (this is the rotting corpse attack modifier rule):
 	let m be arms of the rotting corpse + legs of the rotting corpse;
 	let m be 4 minus m;
 	unless m is 0:
 		if the numbers boolean is true, say " - [m] (missing limbs)[run paragraph on]";
-		decrease the roll by m.
+		decrease the attack strength by m.
 
-An attack roll rule when the global defender is the rotting corpse (this is the rotting corpse defense modifier rule):
+An attack modifier rule when the global defender is the rotting corpse (this is the rotting corpse defense modifier rule):
 	if legs of the rotting corpse is 1:
 		say " + 2 (corpse missing a leg)[run paragraph on]";
-		increase the roll by 2;
+		increase the attack strength by 2;
 	if legs of the rotting corpse is 0:
 		say " + 4 (corpse missing both legs)[run paragraph on]";
-		increase the roll by 4.
+		increase the attack strength by 4.
 
-Last dealing damage rule (this is the rotting corpse without limbs rule):
-	if global attacker is the rotting corpse:
-		if limbs of the rotting corpse is 0:
-			say " - 100% (no means of attack)[run paragraph on]";
-			now final damage is 0.
+A damage multiplier rule when the global attacker is the rotting corpse (this is the limbless rotting corpse can't attack rule):
+	if limbs of the rotting corpse is 0:
+		say " - 100% (no means of attack)[run paragraph on]";
+		now the attack damage is 0.
 
 Section - Rotting corpse prose
 
-Report an actor hitting the dead rotting corpse (this is the fatal rotting corpse rule):
+Report an actor hitting the dead rotting corpse:
 	say "The rotting corpse disintegrates slimily.";
+	rule succeeds.
 
-Report an actor hitting a dead pc (this is the fatal player rotting corpse rule):
-	if the global attacker is the rotting corpse:
-		say "Your last sensation is the rotting corpse falling on top of you and oozing its way into your nostrils.";
+Report the corpse hitting a dead pc:
+	say "Your last sensation is the rotting corpse falling on top of you and oozing its way into your nostrils.";
+	rule succeeds.
 
-Report an actor attacking (this is the rotting corpse attack rule):
-	if the actor is the rotting corpse:
-		say "The rotting corpse [if legs of the rotting corpse is 2]walks[otherwise if legs of the rotting corpse is 1]hops[otherwise]crawls[end if] towards [the global defender], [if arms of the rotting corpse is 2]its arms raised[otherwise if arms of the rotting corpse is 1]its single arm raised[otherwise if the rotting head is part of the rotting corpse]its teeth at the ready[otherwise if legs of the rotting corpse is greater than 0]hoping to land a good kick[otherwise]with no other weapon than its smell[end if].";
+Report the corpse attacking:
+	say "The rotting corpse [if legs of the rotting corpse is 2]walks[otherwise if legs of the rotting corpse is 1]hops[otherwise]crawls[end if] towards [the global defender], [if arms of the rotting corpse is 2]its arms raised[otherwise if arms of the rotting corpse is 1]its single arm raised[otherwise if the rotting head is part of the rotting corpse]its teeth at the ready[otherwise if legs of the rotting corpse is greater than 0]hoping to land a good kick[otherwise]with no other weapon than its smell[end if].";
+	rule succeeds.
 
-Report an actor dodging (this is the report rotting corpse dodge rule):
-	if the actor is the rotting corpse:
-		say "The corpse [if legs of the rotting corpse is 2]walks[otherwise if legs of the rotting corpse is 1]hops[otherwise]crawls[end if] out of the way.";
+Report the corpse dodging:
+	say "The corpse [if legs of the rotting corpse is 2]walks[otherwise if legs of the rotting corpse is 1]hops[otherwise]crawls[end if] out of the way.";
+	rule succeeds.
 
 
 
@@ -2874,31 +2880,26 @@ Section - Shape-shifting
 Aswang-shifting is an action applying to nothing.
 Considered-shape is an as-shape that varies.
 
-First AI action selection rule (this is the consider aswang-shifting rule):
-	if the global attacker is the aswang:
-		choose a blank Row in the Table of AI Action Options;
-		change the Option entry to the action of the global attacker aswang-shifting;
-		change the Action Weight entry to 0;
-		now considered-shape is as-witch.
-
-An AI action selection rule (this is the aswang aswang-shifting select rule):
-	if the global attacker is the aswang:
-		choose row with an Option of the action of the global attacker aswang-shifting in the Table of AI Action Options;
-		if the as-shape of the aswang is as-witch and the health of the aswang is less than 15:
-			now considered-shape is as-dog;
-			increase Action Weight entry by 10;
-		if the as-shape of the aswang is as-witch and the health of the aswang is less than 7:
-			now considered-shape is as-bird;
-			increase Action Weight entry by 5;
-		if the as-shape of the aswang is as-dog and the health of the aswang is less than 7:
-			now considered-shape is as-bird;
-			increase Action Weight entry by 12;
-		if the as-shape of the aswang is as-bird and the health of the aswang is greater than 12:
-			now considered-shape is as-witch;
-			increase Action Weight entry by 10;
+An AI action selection rule for the aswang (this is the aswang considers shape shifting rule):
+	choose a blank Row in the Table of AI Action Options;
+	change the Option entry to the action of the global attacker aswang-shifting;
+	change the Action Weight entry to 0;
+	now considered-shape is as-witch;
+	if the as-shape of the aswang is as-witch and the health of the aswang is less than 15:
+		now considered-shape is as-dog;
+		increase Action Weight entry by 10;
+	if the as-shape of the aswang is as-witch and the health of the aswang is less than 7:
+		now considered-shape is as-bird;
+		increase Action Weight entry by 5;
+	if the as-shape of the aswang is as-dog and the health of the aswang is less than 7:
+		now considered-shape is as-bird;
+		increase Action Weight entry by 12;
+	if the as-shape of the aswang is as-bird and the health of the aswang is greater than 12:
+		now considered-shape is as-witch;
+		increase Action Weight entry by 10;
 [		if a random chance of 1 in 30 succeeds: [and just to spice things up a bit]
-			now considered-shape is a random as-shape;
-			now Action Weight entry is a random number between 1 and 30].
+		now considered-shape is a random as-shape;
+		now Action Weight entry is a random number between 1 and 30].
 
 Carry out the aswang aswang-shifting:
 	while considered-shape is as-shape of the aswang:
@@ -2935,19 +2936,11 @@ Section - The witch can hex you
 Aswang-hexing is an action applying to nothing.
 A person is either hexed or not hexed. A person is usually not hexed.
 
-First AI action selection rule for the aswang (this is the consider aswang-hexing rule):
-	if the as-shape of the aswang is as-witch:
+An AI action selection rule for the as-witch aswang (this is the aswang as witch considers hexing rule):
+	if the as-shape of the aswang is as-witch and the chosen target is not hexed:
 		choose a blank Row in the Table of AI Action Options;
 		now the Option entry is the action of the aswang aswang-hexing;
-		now the Action Weight entry is 0.
-
-An AI action selection rule for the aswang (this is the aswang aswang-hexing select rule):
-	if the as-shape of the aswang is as-witch:
-		choose row with an Option of the action of the aswang aswang-hexing in the Table of AI Action Options;
-		if the chosen target is not hexed:
-			increase Action Weight entry by 10;
-		otherwise:
-			decrease Action Weight entry by 1000.
+		now the Action Weight entry is 10;
 
 Carry out the aswang aswang-hexing:
 	say "The aswang attempts to hex [the chosen target]. [italic type]";
@@ -2978,29 +2971,20 @@ Every turn when at least one alive person is hexed (this is the remove hexes whe
 
 Section - The dog simply attacks a lot
 
-An AI action selection rule for the at-Act aswang (this is the aswang as dog attack select rule):
-	if the as-shape of the aswang is as-dog:
-		choose row with an Option of the action of the aswang attacking the chosen target in the Table of AI Action Options;
-		increase Action Weight entry by 3.
+An AI action selection rule for the at-Act as-dog aswang (this is the aswang as dog likes to attack rule):
+	choose row with an Option of the action of the aswang attacking the chosen target in the Table of AI Action Options;
+	increase Action Weight entry by 3.
 
 Section - The bird attempts to flee and regenerate
 
 Aswang-fleeing is an action applying to nothing.
 
-First AI action selection rule (this is the consider aswang-fleeing rule):
-	if the global attacker is the aswang and the as-shape of the aswang is as-bird:
-		choose a blank Row in the Table of AI Action Options;
-		change the Option entry to the action of the global attacker aswang-fleeing;
-		change the Action Weight entry to 0.
-
-An AI action selection rule (this is the aswang aswang-fleeing select rule):
-	if the global attacker is the aswang and the as-shape of the aswang is as-bird:
-		choose row with an Option of the action of the global attacker aswang-fleeing in the Table of AI Action Options;
-		if a random chance of 1 in 3 succeeds and health of the aswang is less than 10:
-			if a random chance of 1 in 2 succeeds or aswang is follower:
-				increase Action Weight entry by 20;
-		otherwise:
-			decrease Action Weight entry by 1000.
+An AI action selection rule for the as-bird aswang (this is the aswang as bird considers fleeing rule):
+	if a random chance of 1 in 3 succeeds and health of the aswang is less than 10:
+		if a random chance of 1 in 2 succeeds or aswang is follower:
+			choose a blank Row in the Table of AI Action Options;
+			change the Option entry to the action of the aswang aswang-fleeing;
+			increase Action Weight entry by 20;
 
 Carry out the aswang aswang-fleeing:
 	if at least one room is adjacent to the location:
@@ -3026,21 +3010,24 @@ Section - And the bird flies
 A flying rule (this is the aswang as bird flies rule):
 	if test subject is the aswang and the as-shape of the aswang is as-bird:
 		rule succeeds.
-
 				
 Section - Prose				
 
-Report an actor hitting the dead aswang (this is the fatal aswang rule):
+Report an actor hitting the dead aswang:
 	say "The aswang [if as-shape of aswang is as-witch]dies screaming[otherwise if as-shape of aswang is as-bird]dies screeching[otherwise]dies howling[end if].";
+	rule succeeds.
 
-Report the aswang hitting a dead pc (this is the fatal player aswang rule):
+Report the aswang hitting a dead pc:
 	say "You are torn apart by the [if as-shape of aswang is as-witch]witch[otherwise if as-shape of aswang is as-bird]bird[otherwise]hound[end if].";
+	rule succeeds.
 
-Report the aswang attacking (this is the aswang attack rule):
+Report the aswang attacking:
 	say "The aswang rushes at [the noun], with [if as-shape of aswang is as-witch]sharp fingernails ready[otherwise if as-shape of aswang is as-bird]talons and beak outstretched[otherwise]slavering fangs ready[end if].";
+	rule succeeds.
 
-Report the aswang dodging (this is the report aswang dodge rule):
-	say "The aswang [if as-shape of aswang is as-witch]jumps[otherwise if as-shape of aswang is as-bird]flies[otherwise]jumps[end if] aside.";	
+Report the aswang dodging:
+	say "The aswang [if as-shape of aswang is as-witch]jumps[otherwise if as-shape of aswang is as-bird]flies[otherwise]jumps[end if] aside.";
+	rule succeeds.
 				
 
 
@@ -3074,18 +3061,14 @@ The abyss of the soul strength is a number that varies. The abyss of the soul st
 
 Section - AI
 
-[Its AI is so nonstandard that we just override everything else.]
-
-First AI action selection rule (this is the abyss of the soul AI rule):
-	if the global attacker is the abyss of the soul:
-		if combat state of the global attacker is at-Act:
-			choose a blank Row in the Table of AI Action Options;
-			change the Option entry to the action of the global attacker pulsating;
-			change the Action Weight entry to 1000;
-		if combat state of the global attacker is at-React:
-			choose a blank Row in the Table of AI Action Options;
-			change the Option entry to the action of the global attacker waiting;
-			change the Action Weight entry to 1000.
+An AI action selection rule for the at-Act abyss of the soul (this is the abyss of the soul pulsates rule):
+	choose a blank Row in the Table of AI Action Options;
+	change the Option entry to the action of the global attacker pulsating;
+	change the Action Weight entry to 5000;
+		
+An AI action selection rule for the at-React abyss of the soul (this is the abyss of the soul does not react rule):
+	choose row with an Option of the action of the abyss of the soul waiting in the Table of AI Action Options;
+	change the Action Weight entry to 5000.
 
 Check the abyss of the soul waiting:
 	say "The abyss of the soul hovers in the air, nearly motionless." instead.
@@ -3113,8 +3096,6 @@ Carry out the abyss of the soul pulsating:
 	if achieve-temp is 1:
 		award achievement I return to serve.
 
-
-
 Section - Growing
 
 An absorption stopping rule (this is the abyss of the soul absorbs all souls rule):
@@ -3135,8 +3116,11 @@ An absorption stopping rule (this is the abyss of the soul absorbs all souls rul
 
 Section - Prose
 
-Report an actor hitting the dead abyss of the soul (this is the fatal abyss of the soul rule):
+Report an actor hitting the dead abyss of the soul:
 	say "The abyss of the soul collapses in on itself and disappears with a soft 'plop'.";
+	rule succeeds.
+
+
 
 
 
@@ -3216,47 +3200,54 @@ To have the smoke demon appear:
 
 Section - Prose
 
-Report an actor hitting the dead smoke demon (this is the fatal smoke demon rule):
+Report an actor hitting the dead smoke demon:
 	say "The smoke demon drifts apart[if the smoke timer of the location is greater than 0]. Though there are still clouds of smoke here, they no longer seem to be sentient[end if].";
+	rule succeeds.
 
-Report the smoke demon hitting a dead pc (this is the fatal player smoke demon rule):
+Report the smoke demon hitting a dead pc:
 	say "You attempt to breathe, but your lungs are only filled with smoke and more smoke. The murderous vapours seem to become as thick as wool as you desperately try to exhale, inhale, anything -- all in vain. As you suffocate, tendrils of smoke softly close your eyelids.";
 
-Report the smoke demon attacking (this is the smoke demon attacks rule):
+Report the smoke demon attacking:
 	say "The smoke demon casts his vaporous tendrils towards [the noun].";
+	rule succeeds.
 
-Report the smoke demon parrying (this is the report smoke demon parry rule):
+Report the smoke demon parrying:
 	say "Protective layers of smoke appear in front of the smoke demon.";
+	rule succeeds.
 
-Report the smoke demon dodging (this is the report smoke demon dodge rule):
+Report the smoke demon dodging:
 	say "The smoke demon gently floats out of the way.";
+	rule succeeds.
 
-Report the smoke demon concentrating (this is the smoke demon concentration prose rule):
+Report the smoke demon concentrating:
 	if the concentration of the smoke demon is:
 		-- 1:
-			say "The smoke demon seems to become denser." instead;
+			say "The smoke demon seems to become denser.";
 		-- 2:
-			say "Even more smoke is drawn into the smoke demon's form." instead;
+			say "Even more smoke is drawn into the smoke demon's form.";
 		-- 3:
-			say "The smoke demon becomes even denser and now seems almost material." instead.	
+			say "The smoke demon becomes even denser and now seems almost material.";
+	rule succeeds.
 
-Last dealing damage rule (this is the smoke demon denseness rule):
-	if global defender is the smoke demon:
-		if concentration of the global defender is greater than 0:
-			if concentration of the global defender is 1:
-				say " + 25% (smoke demon is somewhat dense)[run paragraph on]";
-				increase final damage by final damage divided by 4;
-			if concentration of the global defender is 2:
-				say " +50% (smoke demon is quite dense)[run paragraph on]";
-				increase final damage by final damage divided by 2;		
-			if concentration of the global defender is 3:
-				say " + 75% (smoke demon is very dense)[run paragraph on]";
-				let n be final damage divided by 4;
-				now final damage is final damage times 2;
-				decrease final damage by n;
-			if concentration of the global defender is 4:
-				say " + 100% (smoke demon is extremely dense)[run paragraph on]";
-				now final damage is final damage times 2.
+A damage multiplier rule when the global defender is the smoke demon (this is the smoke demon denseness multiplier rule):
+	if concentration of the smoke demon is:
+		-- 1:
+			say " + 25% (smoke demon is somewhat dense)[run paragraph on]";
+			increase the attack damage by the attack damage divided by 4;
+		-- 2:
+			say " +50% (smoke demon is quite dense)[run paragraph on]";
+			increase the attack damage by the attack damage divided by 2;		
+		-- 3:
+			say " + 75% (smoke demon is very dense)[run paragraph on]";
+			let n be the attack damage divided by 4;
+			now the attack damage is the attack damage times 2;
+			decrease the attack damage by n;
+		-- 4:
+			say " + 100% (smoke demon is extremely dense)[run paragraph on]";
+			now the attack damage is the attack damage times 2.
+
+
+
 
 
 Chapter - Imp
@@ -3288,17 +3279,12 @@ When play begins:
 Understand "claws" as the imp.
 
 
-
 Section - AI
-
-An AI action selection rule for the imp (this is the imp ready select rule):
-	choose row with an Option of the action of the imp readying the chosen weapon in the Table of AI Action Options;
-	now the Action Weight entry is -1000.
 
 Imping is an action applying to nothing.
 Imp-grabbing is an action applying to nothing.
 
-First AI action selection rule for the imp (this is the consider imping rule):
+An AI action selection rule for the imp (this is the imp considers imping rule):
 	choose a blank Row in the Table of AI Action Options;
 	change the Option entry to the action of the imp imping;
 	change the Action Weight entry to a random number between 0 and 80.
@@ -3365,17 +3351,21 @@ Every turn when the imp is on-stage (this is the imp not absent AI rule):
 
 Section - Prose				
 
-Report an actor hitting the dead imp (this is the fatal imp rule):
+Report an actor hitting the dead imp:
 	say "The imp dies with a sad screech.";
+	rule succeeds.
 
-Report the imp hitting a dead pc (this is the fatal player imp rule):
+Report the imp hitting a dead pc:
 	say "The imp's claws open your jugular vein, and hot blood spurts all around.";
+	rule succeeds.
 
-Report the imp attacking (this is the imp attack rule):
+Report the imp attacking:
 	say "The imp dives at [the noun], his tiny claws ready to strike.";
+	rule succeeds.
 
-Report the imp dodging (this is the report imp dodge rule):
+Report the imp dodging:
 	say "The imp tries to fly away.";
+	rule succeeds.
 
 
 [Chapter - Duskwing

@@ -7,21 +7,20 @@ The release number is 2.
 
 
 Include Menus by Emily Short.
-Include Basic Help Menu by Emily Short.
+[Include Basic Help Menu by Emily Short.]
 Include Basic Screen Effects by Emily Short. 
 Include Epistemology by Eric Eve.
+Include Numbered Disambiguation Choices by Aaron Reed.
+[Include Real-Time Delays by Erik Temple.]
+Include Glulx Entry Points by Emily Short.
+[Include Default Messages by Ron Newcomb.]
+Include Dynamic Objects by Jesse McGrew.
 
 [Doesn't work with moving people.]
 
 Every turn (this is the mark items as seen every turn rule): 
 	repeat with item running through things that are enclosed by the location:
 		if the item is not enclosed by an opaque closed container, now the item is seen.
-
-Include Numbered Disambiguation Choices by Aaron Reed.
-Include Real-Time Delays by Erik Temple.
-Include Default Messages by Ron Newcomb.
-Include Dynamic Objects by Jesse McGrew.
-
 		
 Include Alternative Permadeath by Victor Gijsbers.
 The binary file of save data is called "KerkerkruipSaves".
@@ -58,4 +57,3 @@ Generation info is a truth state that varies. Generation info is [true]false.
 	copy scroll of teleportation to player;
 	copy scroll of teleportation to player;
 	copy scroll of teleportation to player.]
-	

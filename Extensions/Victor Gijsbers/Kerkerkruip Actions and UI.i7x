@@ -119,13 +119,13 @@ Check looking when the player is dead:
 	do nothing instead.
 	
 
-An attack roll rule when the global defender is a runner pc (this is the running is risky rule):
+An attack modifier rule when the global defender is a runner pc (this is the running is risky rule):
 	say " + 4 (you are running)[run paragraph on]";
-	increase the roll by 4.
+	increase the attack strength by 4.
 
-A dealing damage rule when the global defender is a runner pc (this is the running is very risky rule):
+A damage modifier rule when the global defender is a runner pc (this is the running is very risky rule):
 	say " + 2 (you are running)[run paragraph on]";
-	increase the damage by 2.
+	increase the attack damage by 2.
 
 
 
@@ -303,9 +303,7 @@ Last report going (this is the check whether destination reached rule):
 
 Chapter - Status
 
-Asking status is an action applying to nothing. Understand "status" and "stat" and "stats" as asking status.
-
-Asking status is acting fast.
+Asking status is an action out of world. Understand "status" and "stat" and "stats" as asking status.
 
 Carry out asking status:
 	say "[bold type]Health[roman type]: [health of the player] of [permanent health of the player][line break][run paragraph on]";
@@ -356,9 +354,7 @@ Last carry out examining a person:
 
 Section - Memory
 
-Remembering is an action applying to nothing. Understand "memory" and "remember" and "r" as remembering.
-
-Remembering is acting fast.
+Remembering is an action out of world. Understand "memory" and "remember" and "r" as remembering.
 
 Carry out remembering:
 	if the number of unvisited placed placeable notnogo rooms is zero:
@@ -464,7 +460,6 @@ To say general direction from (place1 - a room) to (place2 - a room):
 Chapter - Trophy list
 
 Trophylisting is an action out of world.
-Trophylisting is acting fast.
 
 Understand "trophy" and "trophies" and "list trophies" as trophylisting.
 
@@ -480,7 +475,6 @@ Carry out trophylisting:
 Chapter - Commands command
 
 Showing commands is an action out of world.
-Showing commands is acting fast.
 
 Understand "commands" and "show commands" as showing commands.
 	
@@ -565,7 +559,7 @@ Instead of asking something for:
 	say "You enjoy an idle boast as much as the next person, but this is hardly the time for an in-depth conversation.".
 
 Report talking to:
-	say "'[one of]I'll get back at the prince.[run paragraph on][or]I will defeat all my enemies![run paragraph on][or]I am immortal.[run paragraph on][or]Pride cometh before the fall.[run paragraph on][at random]', you say[if the player is hidden], revealing your presence[end if].[run paragraph on][line break][paragraph break]";
+	say "'[one of]I'll get back at the prince.[or]I will defeat all my enemies![or]I am immortal.[or]Pride cometh before the fall.[at random]', you say[if the player is hidden], revealing your presence[end if].[run paragraph on][line break][paragraph break]";
 	now the player is not hidden.
 
 

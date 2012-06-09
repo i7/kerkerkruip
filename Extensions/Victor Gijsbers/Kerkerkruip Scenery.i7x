@@ -175,6 +175,8 @@ Part - Symbols
 
 A symbol-extra is a kind of extra.
 
+Understand "read [symbol-extra]" as examining.
+
 An extra scoring rule (this is the extra symbols in same room rule):
 	if considered extra is a symbol-extra:
 		if considered room encloses a symbol-extra:
@@ -186,16 +188,15 @@ The holy symbols are a religious symbol-extra. "Hundreds of holy symbols cover t
 
 The description of the holy symbols is "You see the symbols of all the more life-affirming religions you know: suns and stars, solar wheels, crosses, hexagrams, flames, trees, birds, and many others. Presumably, their presence protects against undead and demonic beings.".
 
-An attack roll rule (this is the holy symbols attack bonus rule):
-	if the location encloses the holy symbols:
-		if the global attacker is undead or the global attacker is demonic:
-			if the numbers boolean is true, say " - 2 (holy symbols)[run paragraph on]";
-			decrease the roll by 2.
+An attack modifier rule when the location encloses the holy symbols (this is the holy symbols attack bonus rule):
+	if the global attacker is undead or the global attacker is demonic:
+		if the numbers boolean is true:
+			say " - 2 (holy symbols)[run paragraph on]";
+		decrease the attack strength by 2;
 
-Chance to win rule (this is the CTW holy symbols rule):
-	if the location encloses the holy symbols:
-		if the global attacker is undead or the global attacker is demonic:
-			decrease the chance-to-win by 2.
+Chance to win rule when the location encloses the holy symbols (this is the CTW holy symbols rule):
+	if the global attacker is undead or the global attacker is demonic:
+		decrease the chance-to-win by 2.
 
 
 Chapter - Unholy symbols
@@ -204,15 +205,13 @@ The unholy symbols are a religious symbol-extra. "Hundreds of unholy symbols cov
 
 The description of the unholy symbols is "You see the symbols of all the death-worshiping religions you know: skulls and bones, pentagrams, moons, bats, scythes, and many others. Presumably, their presence strengthens undead and demonic beings.".
 
-An attack roll rule (this is the unholy symbols attack bonus rule):
-	if the location encloses the unholy symbols:
-		if the global attacker is undead or the global attacker is demonic:	
-			if the numbers boolean is true, say " + 2 (unholy symbols)[run paragraph on]";
-			increase the roll by 2.
+An attack modifier rule when the location encloses the unholy symbols (this is the unholy symbols attack bonus rule):
+	if the global attacker is undead or the global attacker is demonic:	
+		if the numbers boolean is true, say " + 2 (unholy symbols)[run paragraph on]";
+		increase the attack strength by 2.
 		
-Chance to win rule (this is the CTW unholy symbols rule):
-	if the location encloses the unholy symbols:
-		if the global attacker is undead or the global attacker is demonic:
-			decrease the chance-to-win by 2.		
+Chance to win rule when the location encloses the unholy symbols (this is the CTW unholy symbols rule):
+	if the global attacker is undead or the global attacker is demonic:
+		decrease the chance-to-win by 2.		
 
 Kerkerkruip Scenery ends here.
