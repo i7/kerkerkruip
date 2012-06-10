@@ -6,10 +6,10 @@ Part - Hiding
 
 Chapter - Hidden
 
-A person is either hidden or not hidden. A person is usually not hidden.
-A person is either on-the-lookout or not on-the-lookout. A person is usually not on-the-lookout. [Once they have seen you appear from the shadows once, they'll be better at detecting you later.]
-A person is either unnaturally aware or not unnaturally aware. [The unnaturally aware always detect you.]
-A person is either unnaturally aware follower or not unnaturally aware follower. [An unnaturally aware follower may not detect you, but does know where you are in the dungeon.]
+A person can be hidden. A person is usually not hidden.
+A person can be on-the-lookout. A person is usually not on-the-lookout. [Once they have seen you appear from the shadows once, they'll be better at detecting you later.]
+A person can be unnaturally aware. [The unnaturally aware always detect you.]
+A person can be unnaturally aware follower. [An unnaturally aware follower may not detect you, but does know where you are in the dungeon.]
 
 Status rule (this is the hidden status rule):
 	if the player is hidden:
@@ -41,7 +41,7 @@ The detection probability is a number that varies. The detection probability is 
 The detection rules are a rulebook.
 
 Every turn (this is the possibly detected rule):   [TODO: turn into a starting the combat round rule?]
-	if the player is hidden and hate is present:
+	if the player is hidden and the combat status is not peace:
 		if the main actor is the player or the faction of the main actor hates the faction of the player: [allies don't increase probability of detection]
 			consider the detection rules;
 			let n be a random number between 1 and 100;
@@ -143,7 +143,7 @@ Check concentrating (this is the cannot concentrate while hidden rule):
 Section - Hiding
 
 To hide:
-	unless hate is present:
+	if the combat status is peace:
 		say "You blend into the shadows.";
 		now the player is hidden;
 	otherwise:
@@ -263,7 +263,7 @@ To decide whether (guy - a person) is smoke immune:
 	otherwise:
 		decide no.
 
-A person can be smoke attuned or not smoke attuned. A person is usually not smoke attuned. [Smoke attuned people do not receive smoke penalties.]
+A person can be smoke attuned. A person is usually not smoke attuned. [Smoke attuned people do not receive smoke penalties.]
 
 A smoke immunity rule (this is the smoke immune if smoke attuned rule):
 	if test subject is smoke attuned:
@@ -319,7 +319,7 @@ Part - Etherealness
 
 Chapter - Etherealness
 
-A person is either ethereal or not ethereal. A person is usually not ethereal.
+A person can be ethereal. A person is usually not ethereal.
 
 A person has a number called the ethereal timer. The ethereal timer of a person is usually 0. [-1 means infinite]
 
@@ -354,17 +354,15 @@ To make (guy - a person) ethereal:
 		unless item is radiant:
 			move item to X.
 
-Before ethereal-forbidden:
-	if the player is ethereal:
-		unless the noun is radiance:
-			take no time;
-			say "You cannot do that while you are ethereal." instead.
+Before ethereal-forbidden when the player is ethereal:
+	unless the noun is radiance:
+		take no time;
+		say "You cannot do that while you are ethereal." instead.
 
-Before ethereal-forbidden-second:
-	if the player is ethereal:
-		unless the second noun is radiance:
-			take no time;
-			say "You cannot do that while you are ethereal." instead.
+Before ethereal-forbidden-second when the player is ethereal:
+	unless the second noun is radiance:
+		take no time;
+		say "You cannot do that while you are ethereal." instead.
 
 A damage multiplier rule (this is the ethereal damage multiplier rule):
 	if the global defender is ethereal and the global attacker is not ethereal:
@@ -431,6 +429,6 @@ Every turn when the player is not in moving through solid rock (this is the dest
 Every turn when the player is in moving through solid rock (this is the player dies in solid rock if not ethereal rule):
 	if the player is not ethereal:
 		say "Your body, having regained its material solidity, cannot coexist in one place with solid rock.";
-		end the game saying "Rock is stronger than flesh.".
+		end the story saying "Rock is stronger than flesh".
 
 Kerkerkruip Systems - Hiding Smoke Ethereal ends here.

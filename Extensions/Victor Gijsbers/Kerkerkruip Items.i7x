@@ -562,8 +562,8 @@ Report wearing:
 
 Section - Cursed
 
-A thing can be cursed or not cursed. A thing is usually not cursed.
-A thing can be curse-identified or not curse-identified. A thing is usually not curse-identified.
+A thing can be cursed. A thing is usually not cursed.
+A thing can be curse-identified. A thing is usually not curse-identified.
 
 Understand the cursed property as describing a thing.
 
@@ -630,7 +630,7 @@ The essence of caution is magical.
 The essence of caution is iron.
 
 
-A person can be cautious or not cautious. A person is usually not cautious.
+A person can be cautious. A person is usually not cautious.
 
 The description of the essence of caution is "This small metal bottle contains the magical essence of caution, distilled from the brain of [one of]the only councilor of Hargo the Furious of Yahvinna who lived to die of old age[or]the famous Algirian general al-Hawabi, who fought only two battles in a forty year campaign -- and won both[or]an unknown rogue, whose exploits would be legendary if only they were known[sticky random]. When inhaled, it confers this mindset to the user. [italic type](+1 perception, +2 defence bonus when retreating, sometimes lose initiative.)[roman type]".
 
@@ -661,7 +661,7 @@ The essence of rage is a minor essence. The indefinite article is "the".
 The essence of rage is magical.
 The essence of rage is iron.
 
-A person can be enraged or not enraged. A person is usually not enraged.
+A person can be enraged. A person is usually not enraged.
 
 The description of the essence of rage is "This small metal bottle contains the magical essence of rage, distilled from the brain of [one of]a berserk warrior from the far north[or]Charles IV of Averoigne, who, at the moment of his greatest victory, was poisoned by the brother he had always cherished[sticky random]. When inhaled, it confers this mindset to the user. [italic type](+1 willpower, +1 attack, unable to retreat.)[roman type]".
 
@@ -672,7 +672,7 @@ Carry out inhaling the essence of rage:
 	now the player is enraged.
 
 Last check retreating (this is the do not retreat when enraged rule):
-	if hate is present and the player is enraged:
+	if the combat status is not peace and the player is enraged:
 		let Y be the player;
 		repeat with X running through persons in the location:
 			if the faction of X hates the faction of the player:
@@ -681,7 +681,7 @@ Last check retreating (this is the do not retreat when enraged rule):
 		say "And allow [the Y] to live? Never!" instead.
 
 Last check going (this is the do not go in combat when enraged rule):
-	if hate is present and the player is enraged:
+	if the player is enraged and the combat status is not peace:
 		let Y be the player;
 		repeat with X running through persons in the location:
 			if the faction of X hates the faction of the player:
@@ -697,7 +697,7 @@ The essence of patience is a major essence. The indefinite article is "the".
 The essence of patience is magical.
 The essence of patience is iron.
 
-A person can be patient or not patient. A person is usually not patient.
+A person can be patient. A person is usually not patient.
 
 The description of the essence of patience is "This small metal bottle contains the magical essence of patience, distilled from the brain of [one of]a High Priest of Yahvinna who endured fifty-three years of torture just to hear the news of his enemy's death[or]the author of 'A Careful Calculation of the first Twenty Thousand Decimals of the Squared Circle'[sticky random]. When inhaled, it confers this mindset to the user. [italic type](Whenever you wait, the tension is halved.)[roman type]".
 
@@ -888,11 +888,10 @@ Instead of throwing the Blessed Grenade:
 	if the number of undead persons in the location is less than 1:
 		say "As the grenade explodes you hear the singing of angels. But nothing further appears to happen.";
 	otherwise:
-		let K be a list of persons;
-		repeat with guy running through alive undead persons in the location:
+		let K be the list of alive undead persons in the location;
+		say "As the grenade explodes you hear the singing of angels, several of whom swoop down from the heavens with huge swords and eviscerate [K with definite articles].";
+		repeat with guy running through K:
 			now health of guy is -1;
-			add guy to K;
-		say "As the grenade explodes you hear the singing of angels, several of whom swoop down from the heavens with huge swords and eviscerate [no dead property][K with definite articles][dead property].";
 		if the player is dead:
 			end the story saying "The undead should not seek blessings.".
 
@@ -1151,7 +1150,7 @@ The large-scroll-of-remove-curse-pack is a major treasure pack.
 The large-scroll-of-remove-curse-pack is civilised.
 A treasure placement rule:
 	copy scroll of remove curse to large-scroll-of-remove-curse-pack;
-	copy scroll of remove curse to large-scroll-of-remove-curse-pack..
+	copy scroll of remove curse to large-scroll-of-remove-curse-pack.
 
 Section - Scroll of Shadows
 		
@@ -1408,7 +1407,7 @@ An unholy wave rule (this is the standard unholy wave rule):
 	otherwise:
 		say "no damage to anyone.";
 	if health of the player is less than 1:
-		end the game saying "Your life force has been negated.".
+		end the story saying "Your life force has been negated".
 
 The description of a scroll of death is "Reading this scroll will deal damage to all non-undead creatures in the room.". The plural of scroll of death is scrolls of death.
 A scroll of death is paper.
@@ -1599,8 +1598,8 @@ Initiative update rule (this is the boots of the boots of wandering give initiat
 		if a random chance of 1 in 13 succeeds:
 			increase the initiative of the player by 5.
 
-Before doing anything (this is the boots of wandering weirdness rule):
-	if the player wears the boots of wandering and a random chance of 1 in 40 succeeds:
+Before doing anything when the player wears the boots of wandering (this is the boots of wandering weirdness rule):
+	if a random chance of 1 in 40 succeeds:
 		if at least one room is adjacent to the location of the player:
 			let place2 be the location of the player; [needed because of a bug in inform]
 			let place be a random room which is adjacent to place2;
@@ -1697,7 +1696,7 @@ The essence of greed is magical.
 The essence of greed is iron.
 The difficulty level of the essence of greed is 2.
 
-A person can be greedy or not greedy. A person is usually not greedy.
+A person can be greedy. A person is usually not greedy.
 
 The description of the essence of greed is "This small metal bottle contains the magical essence of greed, distilled from the bones of the legendary thief Mithaldo, whose hunger for treasure was so great that he let himself be swallowed by a dragon in order to get at the jewels the beast had eaten through the centuries. When the dragon was slain some decades later, Mithaldo's bony fingers were found in the dragon's stomach, still clinging to a large diamond. [italic type](When absorbing a soul, the player receives much more health, but permanently loses one or more points of defence.)[roman type]".
 
@@ -1925,7 +1924,7 @@ Every turn when the main actor wears the dragon armour:
 			if a random chance of 1 in 2 succeeds:
 				decrease the health of the main actor by 1;
 		if the health of the main actor is less than 1:
-			end the game saying "The dragon armour has claimed your life.".
+			end the story saying "The dragon armour has claimed your life".
 
 
 Section - Drakul's Lifeblood
@@ -1990,7 +1989,7 @@ Section - Ment
 A package of ment is a kind of thing. The plural of package of ment is packages of ment. The description of a package of ment is "Carefully folded in paper, this is just enough ment to get you pumped up for combat. You could snort it whenever you wish[if the ment addiction is 0] -- though you are a little hesitant to start your habit again[end if].".
 A package of ment is paper.
 
-There are ten packages of ment. The player carries three packages of ment.
+[There are ten packages of ment.] The player carries three packages of ment.
 
 The ment addiction is a number that varies. The ment addiction is 0.
 
@@ -2016,7 +2015,7 @@ Every turn when the main actor is the player:
 		if the OD timer is 3:
 			say "Respiration becomes more difficult by the second. Your heartbeat feels very irregular.";
 		if the OD timer is 0:
-			end the game saying "You OD'ed.".
+			end the story saying "You OD'ed".
 
 An ability test rule (this is the ment ability bonus rule):
 	if the test subject is the player:
@@ -2073,7 +2072,7 @@ Check snorting:
 			take no time;
 			say "You cannot snort that." instead.
 
-Check snorting a package of ment when hate is present:
+Check snorting a package of ment when the combat status is not peace:
 	unless player is hidden:
 		take no time;
 		say "There is absolutely no way you could pull that off in a combat situation. The ment would get spilled everywhere." instead.

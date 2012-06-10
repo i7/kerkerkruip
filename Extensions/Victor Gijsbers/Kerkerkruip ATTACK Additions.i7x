@@ -128,7 +128,7 @@ A person has a number called Perception. The Perception of a person is usually 5
 To test the perception of (guy - a person) against (n - a number):
 	now test subject is guy;
 	now test score is a roll of the dice;
-	say "[if guy is the player]You roll[otherwise][The guy] rolls[end if] ", test score, " + [perception of guy] (perception score)[run paragraph on]";
+	say "[The guy] roll[s] ", test score, " + [perception of guy] (perception score)[run paragraph on]";
 	increase test score by perception of guy;
 	consider the perception test rules;
 	consider the ability test rules;
@@ -150,7 +150,7 @@ A person has a number called Dexterity. The Dexterity of a person is usually 5.
 To test the dexterity of (guy - a person) against (n - a number):
 	now test subject is guy;
 	now test score is a roll of the dice;
-	say "[if guy is the player]You roll[otherwise][The guy] rolls[end if] ", test score, " + [dexterity of guy] (dexterity score)[run paragraph on]";
+	say "[The guy] roll[s] ", test score, " + [dexterity of guy] (dexterity score)[run paragraph on]";
 	increase test score by dexterity of guy;
 	consider the dexterity test rules;
 	consider the ability test rules;
@@ -173,7 +173,7 @@ A person has a number called Willpower. The Willpower of a person is usually 5.
 To test the willpower of (guy - a person) against (n - a number):
 	now test subject is guy;
 	now test score is a roll of the dice;
-	say "[if guy is the player]You roll[otherwise][The guy] rolls[end if] ", test score, " + [willpower of guy] (willpower score)[run paragraph on]";
+	say "[The guy] roll[s] ", test score, " + [willpower of guy] (willpower score)[run paragraph on]";
 	increase test score by willpower of guy;
 	consider the willpower test rules;
 	consider the ability test rules;

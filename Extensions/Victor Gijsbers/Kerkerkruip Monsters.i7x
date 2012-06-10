@@ -50,7 +50,7 @@ An aftereffects rule (this is the scatter the daggers rule):
 An AI action selection rule for the swarm of daggers (this is the daggers must wait if scattered rule):
 	if dagger-scattered is true:
 		choose row with an Option of the action of the swarm of daggers waiting in the Table of AI Action Options;
-		change the Action Weight entry to 1000.
+		now the Action Weight entry is 1000.
 
 Check the swarm of daggers waiting (this is the daggers regroup rule):
 	if dagger-scattered is true:
@@ -127,8 +127,8 @@ Carry out piercing:
 	decrease the health of the player by 1;
 	now the concentration of the player is 0;
 	if player is not alive:
-		say "With a final effort, you manage to form part of your body into a dagger -- but you succumb from the exertion";
-		end the game saying "You committed suicide.";
+		say "With a final effort, you manage to form part of your body into a dagger -- but you succumb from the exertion.";
+		end the story saying "You committed suicide";
 	let n be 8;
 	increase n by greatest power of the player;
 	increase n by greatest power of the player;	
@@ -139,7 +139,7 @@ Carry out piercing:
 		say "[The noun] manages to evade the dagger.";
 	otherwise:
 		decrease health of the noun by 1;
-		say "The dagger hits, dealing 1 damage and reducing [no dead property][the noun][dead property] to [health of the noun] health.";
+		say "The dagger hits, dealing 1 damage and reducing [the name of the noun] to [health of the noun] health.";
 		now the attack damage is 1;
 		now global attacker is the player;
 		now global defender is the noun;
@@ -238,7 +238,7 @@ Report the blood ape hitting a dead pc:
 	rule succeeds.
 
 Report the blood ape attacking:
-	say "The blood ape [one of]swings at [possessive of the global defender] head[or]jumps at [global defender] with its fists ready to swing[at random].";
+	say "The blood ape [one of]swings at [possessive of the noun] head[or]jumps at [the noun] with its fists ready to swing[at random].";
 	rule succeeds.
 
 Report the blood ape parrying:
@@ -374,7 +374,7 @@ Report the ravenous armadillo hitting a dead pc:
 	rule succeeds.
 
 Report the ravenous armadillo attacking:
-	say "The armadillo raises its tail threateningly towards [the global defender].";
+	say "The armadillo raises its tail threateningly towards [the noun].";
 	rule succeeds.
 
 Report the ravenous armadillo parrying:
@@ -402,8 +402,7 @@ Armadillo-eating is an action applying to nothing.
 
 An AI action selection rule for the ravenous armadillo (this is the ravenous armadillo considers eating rule):
 	choose a blank Row in the Table of AI Action Options;
-	change the Option entry to the action of the ravenous armadillo armadillo-eating;
-	change the Action Weight entry to 0;
+	now the Option entry is the action of the ravenous armadillo armadillo-eating;
 	if a random chance of 1 in 2 succeeds:
 		if there is a good item for the armadillo to eat:
 			increase Action Weight entry by 12;
@@ -616,7 +615,7 @@ Stunning is an action applying to one thing. Understand "stun [person]" as stunn
 Does the player mean stunning an alive person: it is very likely.
 Does the player mean stunning the player: it is unlikely.
 
-A person is either at-stun or not at-stun. A person is usually not at-stun.
+A person can be at-stun. A person is usually not at-stun.
 
 A person can be sometime-stunned. [for the Stunning performance achievement]
 
@@ -715,7 +714,7 @@ Report Miranda hitting a dead pc:
 	rule succeeds.
 
 Report Miranda attacking:
-	say "Miranda jumps towards [the global defender][if Miranda is at-stun], intent on stunning[end if].";
+	say "Miranda jumps towards [the noun][if Miranda is at-stun], intent on stunning[end if].";
 	rule succeeds.
 
 Report Miranda parrying:
@@ -793,43 +792,40 @@ When play begins:
 	now active parry max of X is 3;
 	now the printed name of X is "lashing chains";
 	now X is ranged.
-	
-Check an actor attacking (this is the attack a spinning chain golem rule):
-	if the global defender is the chain golem and the global attacker weapon is not ranged:
-		if the concentration of the global defender is not 0:
-			say "[The global attacker] attempt[s] to duck under the whirling chains. ";
+
+Check an actor attacking the chain golem (this is the attack a spinning chain golem rule):
+	let W be a random readied weapon held by the actor;
+	unless W is ranged:
+		if the concentration of the actor is not 0:
+			say "[The actor] attempt[s] to duck under the whirling chains. ";
 			let n be the concentration of the chain golem;
 			increase n by 7;
 			if a random chance of 1 in 2 succeeds:
 				decrease n by 1;
-			test the dexterity of the global attacker against n;
+			test the dexterity of the actor against n;
 			if test result is false:
 				let n be two times the concentration of the chain golem;
-				calculate the pdr for global attacker;
+				calculate the pdr for the actor;
 				decrease n by pdr;
-				if n is less than 0, now n is 0;
+				if n is less than 0:
+					now n is 0;
 				unless n is 0:
-					say " One of the chains catches [the global attacker] with a loud smack, dealing [bold type][n] damage[roman type][run paragraph on]";
-					decrease the health of the global attacker by n;
-					if the global attacker is alive:
-						if the concentration of the global attacker is not zero:
-							say " and breaking [possessive of the global attacker] concentration.";
-							now concentration of the global attacker is 0;
+					say " One of the chains catches [the actor] with a loud smack, dealing [bold type][n] damage[roman type][run paragraph on]";
+					decrease the health of the actor by n;
+					if the actor is alive:
+						if the concentration of the actor is not zero:
+							say " and breaking [possessive of the actor] concentration.";
+							now concentration of the actor is 0;
 						otherwise:
 							say ".";
 					otherwise:
-						if the global attacker is the player:
-							say " and killing you.";
-							have an event of the chain golem killing the player;
-							if the player is dead:
-								end the game saying "You died valiantly, but in vain.";
-							rule fails;
-						otherwise:
-							say ". [The global attacker] immediately dies.";
-							have an event of the chain golem killing the global attacker;
-							rule fails;
+						say "[if the actor is the player] and killing you.[otherwise] [The actor] immediately dies.[end if]";
+						have an event of the chain golem killing the actor;
+						if the player is dead:
+							end the story saying "You died valiantly, but in vain";
+						rule fails;
 				otherwise:
-					say " One of the chains catches [the global attacker] with a loud smack, but it deals no damage[roman type].";
+					say " One of the chains catches [the actor] with a loud smack, but it deals no damage[roman type].";
 			otherwise:
 				say "[paragraph break]".
 
@@ -867,17 +863,15 @@ Section - Disarm power
 
 Golem-disarming is an action applying to one thing.
 
+[TODO: any reason why this shouldn't work for any target?]
 An AI action selection rule for the at-Act chain golem (this is the chain golem considers disarming rule):	
-	choose a blank Row in the Table of AI Action Options;
-	change the Option entry to the action of the chain golem golem-disarming the chosen target;
-	change the Action Weight entry to -1000;
 	if chosen target is the player:
-		if the player carries at least one readied weapon:
-			let X be a random readied weapon carried by the player;
-			if X is not part of the player:
-				increase the Action Weight entry by 1000;
-				if a random chance of 1 in 10 succeeds:
-					increase the Action Weight entry by 20.
+		if the player carries at least one readied artificial weapon:
+			let X be a random readied artificial carried by the player;
+			choose a blank Row in the Table of AI Action Options;
+			now the Option entry is the action of the chain golem golem-disarming the chosen target;
+			if a random chance of 1 in 10 succeeds:
+				increase the Action Weight entry by 20.
 
 Carry out a person golem-disarming:
 	say "[The chain golem] suddenly launches several of its chains in an attempt to grab [possessive of the noun] weapon. [italic type]";
@@ -903,7 +897,7 @@ Report the chain golem hitting a dead pc:
 	rule succeeds.
 
 Report the chain golem attacking:
-	say "Several of the [if concentration of the chain golem is 1]slowly spinning [otherwise if concentration of the chain golem is 2]spinning [otherwise if concentration of the chain golem is 3]wildly spinning [end if]chains [one of]direct themselves towards[or]lash out at[or]attempt to smash themselves into[at random] [the global defender].";
+	say "Several of the [if concentration of the chain golem is 1]slowly spinning [otherwise if concentration of the chain golem is 2]spinning [otherwise if concentration of the chain golem is 3]wildly spinning [end if]chains [one of]direct themselves towards[or]lash out at[or]attempt to smash themselves into[at random] [the noun].";
 	rule succeeds.
 
 Report the chain golem parrying:
@@ -964,7 +958,7 @@ Check lashing:
 Carry out lashing:
 	choose a blank row in the Table of Delayed Actions;
 	now the Action Speed entry is a random number between 8 and 14;
-	now the Action entry is the action of the actor attacking the main actor;
+	now the Action entry is the action of the actor hitting the main actor;
 
 Report lashing:
 	say "You will attempt to strike swiftly, before you are hit.".
@@ -1039,7 +1033,7 @@ A contact rule when the global attacker is the jumping bomb (this is the jumping
 	now the health of the global defender is -10;
 	have an event of the global attacker killing the global defender;		
 	if the player is not alive:
-		end the game saying "You exploded.";
+		end the story saying "You exploded";
 		rule fails.
 
 An attack modifier rule when the global attacker is the jumping bomb (this is the jumping bomb concentration attack modifier rule):
@@ -1152,7 +1146,7 @@ When play begins:
 	let X be a random natural weapon part of the Reaper;
 	now printed name of X is "Reaper's knuckles".
 
-The reaper is weapon user.
+The reaper is a weapon user.
 
 Section - Reaper's scythes of flame, slaying and oxidation
 
@@ -1307,8 +1301,8 @@ Check reaping (this is the cannot reap yourself rule):
 
 Check reaping (this is the reaping a dead person rule):
 	if the noun is dead:
-		end the story saying "Your dedication to Death went too far.";
-		say "You are instantly transported to the Land of the Dead, where [no dead property][the noun][dead property] currently resides." instead.
+		end the story saying "Your dedication to Death went too far";
+		say "You are instantly transported to the Land of the Dead, where [the name of the noun] currently resides." instead.
 
 Check reaping (this is the reaping with one health rule):
 	if the health of the player is 1:
@@ -1372,8 +1366,8 @@ When play begins:
 		
 An AI action selection rule for the at-Act mindslug (this is the mindslug considers mindblasting rule):
 	choose a blank Row in the Table of AI Action Options;
-	change the Option entry to the action of the mindslug mindblasting the chosen target;
-	change the Action Weight entry to 12;
+	now the Option entry is the action of the mindslug mindblasting the chosen target;
+	now the Action Weight entry is 12;
 	[ But it doesn't always mindblast ]
 	if a random chance of 3 in 5 succeeds:
 		decrease the Action Weight entry by 100.
@@ -1387,25 +1381,25 @@ An AI action selection rule for the at-React mindslug (this is the mindslug does
 	decrease the Action Weight entry by 100.
 		
 Carry out the mindslug mindblasting:
-	say "The mindslug blasts [the global defender] with psionic energy. [italic type]";
+	say "The mindslug blasts [the noun] with psionic energy. [italic type]";
 	let n be 10;
 	increase n by concentration of the mindslug;
-	test the willpower of the global defender against n; 
+	test the willpower of the noun against n; 
 	say "[roman type]";
 	if test result is true:
-		say " [The global defender] resist[s] the mindslug's influence!";
+		say " [The noun] resist[s] the mindslug's influence!";
 	otherwise:
-		decrease willpower of the global defender by 1;
-		say " [The global defender] fail[s] to resist the mindslug's mental blast, and [possessive of the global defender] willpower decreases to [willpower of the global defender].";
-		if willpower of the global defender is less than 1:
-			if the global defender is the player:
-				end the game saying "You will live on as the unquestioning slave of a giant slug.";
+		decrease willpower of the noun by 1;
+		say " [The noun] fail[s] to resist the mindslug's mental blast, and [possessive of the noun] willpower decreases to [willpower of the noun].";
+		if willpower of the noun is less than 1:
+			if the noun is the player:
+				end the story saying "You live on as the unquestioning slave of a giant slug";
 			otherwise:
-				now the faction of the global defender is enslaved;
-				say "[The global defender] is now under the control of the mindslug.";
+				now the faction of the noun is enslaved;
+				say "[The noun] is now under the control of the mindslug.";
 		otherwise:
-			if the concentration of the global defender is greater than 0:
-				let the global defender lose concentration;
+			if the concentration of the noun is greater than 0:
+				let the noun lose concentration;
 	now the concentration of the mindslug is 0.
 		
 An AI target selection rule for a person (called target) when the running AI is the mindslug (this is the mindslug prefers low willpower rule):
@@ -1422,7 +1416,7 @@ Report the mindslug hitting a dead pc:
 	rule succeeds.
 
 Report the mindslug attacking:
-	say "Raising its hideous body, the mindslug bears down on [the global defender].";
+	say "Raising its hideous body, the mindslug bears down on [the noun].";
 	rule succeeds.
 
 Report the mindslug dodging:
@@ -1552,7 +1546,7 @@ Report Mouser hitting a dead pc:
 	rule succeeds.
 
 Report Mouser attacking:
-	say "Fast as a snake, Mouser lashes out at [the global defender].";
+	say "Fast as a snake, Mouser lashes out at [the noun].";
 	rule succeeds.
 
 Report Mouser dodging:
@@ -1809,8 +1803,8 @@ Constriction level is a number that varies. Constriction level is 0.
 An AI action selection rule for the at-Act giant tentacle (this is the tentacle considers constricting rule):
 	if the giant tentacle grapples the chosen target:
 		choose a blank Row in the Table of AI Action Options;
-		change the Option entry to the action of the giant tentacle tentacle-constricting;
-		change the Action Weight entry to 15;
+		now the Option entry is the action of the giant tentacle tentacle-constricting;
+		now the Action Weight entry is 15;
 
 Clothing has a number called the constriction prevention. The constriction prevention of clothing is usually 0.
 
@@ -1847,8 +1841,8 @@ Tentacle-shaking is an action applying to nothing.
 An AI action selection rule for the at-React giant tentacle (this is the tentacle shakes when attacked and grappling rule):
 	if the giant tentacle grapples the main actor:
 		choose a blank Row in the Table of AI Action Options;
-		change the Option entry to the action of the the giant tentacle tentacle-shaking;
-		change the Action Weight entry to 15 plus 5 times the concentration of the main actor;
+		now the Option entry is the action of the the giant tentacle tentacle-shaking;
+		now the Action Weight entry is 15 plus 5 times the concentration of the main actor;
 
 Carry out the giant tentacle tentacle-shaking:
 	say "The giant tentacle vigourously shakes [the main actor], aiming to confuse and confound.[italic type] ";
@@ -1891,7 +1885,7 @@ Report the giant tentacle hitting a dead pc:
 	rule succeeds.
 
 Report the giant tentacle attacking:
-	say "The giant tentacle moves in to grab [the global defender].";
+	say "The giant tentacle moves in to grab [the noun].";
 	rule succeeds.
 
 Report the giant tentacle dodging:
@@ -2221,8 +2215,8 @@ Bodmall-fogging is an action applying to nothing.
 An AI action selection rule for Bodmall (this is the Bodmall considers fogging rule):
 	if smoke timer of the location of Bodmall is 0:
 		choose a blank Row in the Table of AI Action Options;
-		change the Option entry to the action of the Bodmall Bodmall-fogging;
-		change the Action Weight entry to a random number between -5 and 15;
+		now the Option entry is the action of the Bodmall Bodmall-fogging;
+		now the Action Weight entry is a random number between -5 and 15;
 
 Carry out Bodmall Bodmall-fogging:
 	say "Bodmall chants softly, and great [bold type]clouds of fog[roman type] or smoke rise up from the ground.";
@@ -2238,8 +2232,8 @@ An AI action selection rule for Bodmall (this is the Bodmall considers transmuti
 	let X be a random readied weapon enclosed by the chosen target;
 	if X is iron or X is silver:
 		choose a blank Row in the Table of AI Action Options;
-		change the Option entry to the action of the Bodmall Bodmall-transmuting;
-		change the Action Weight entry to a random number between -50 and 20;
+		now the Option entry is the action of the Bodmall Bodmall-transmuting;
+		now the Action Weight entry is a random number between -50 and 20;
 
 Carry out Bodmall Bodmall-transmuting:
 	let X be a random readied weapon enclosed by the chosen target;
@@ -2274,14 +2268,14 @@ Bodmall-barkskinning is an action applying to nothing.
 An AI action selection rule for Bodmall (this is the Bodmall considers barkskinning rule):
 	if Bodmall is not barkskinned:
 		choose a blank Row in the Table of AI Action Options;
-		change the Option entry to the action of the Bodmall Bodmall-barkskinning;
-		change the Action Weight entry to a random number between -10 and 20;
+		now the Option entry is the action of the Bodmall Bodmall-barkskinning;
+		now the Action Weight entry is a random number between -10 and 20;
 
 Carry out Bodmall Bodmall-barkskinning:
 	say "Bodmall chants loudly, and her [bold type]skin[roman type] transforms and toughens. It now looks like the bark of a tree.";
 	now Bodmall is barkskinned.
 
-A person is either barkskinned or not barkskinned. A person is usually not barkskinned.
+A person can be barkskinned. A person is usually not barkskinned.
 
 A damage modifier rule (this is the barkskin decreases damage rule):
 	if the global defender is barkskinned:
@@ -2312,56 +2306,55 @@ Instead of taking the thorny bushes:
 	say "They seem to be rooted to the spot.".
 
 Check an actor attacking when the thorny bushes are in the location (this is the attack with thorns in the location rule):
-	unless the global attacker weapon is ranged:
-		unless the global attacker is flying:
-			unless the global attacker is Bodmall:
-				unless the global attacker is the player and the power of Bodmall is granted:
-					say "[The global attacker] must move through the thorny bushes to reach [the global defender]. [italic type]";
-					test the perception of the global attacker against 12;
-					if test result is true:
-						say " ";
-						test the dexterity of the global attacker against 12;
-					if test result is true:
-						say "[roman type] The thorns deal [bold type]no damage[roman type].";
-					otherwise:
-						let n be 3;
-						calculate the pdr for global attacker;
-						decrease n by pdr;
-						if n is less than 0, now n is 0;
-						if n is 0:
-							say " [roman type]Because of damage reduction, the thorns deal [bold type]no damage[roman type] to [the global attacker].";
-						otherwise:
-							say " [roman type]The thorns deal [bold type][n] damage[roman type] to [the global attacker].";
-							decrease the health of the global attacker by n;
-							unless the global attacker is alive:
-								if the global attacker is the player:
-									say "Your weakened body could not handle this!";
-									end the game saying "A thorn kills a man, not by force, but by pricking often.";
-									rule fails;
-								otherwise:
-									say "[The name of the global attacker] is killed by the thorns!";
-									rule fails.
-
-After reporting an actor dodging (this is the thorns hurt the dodger rule):
-	if the thorny bushes are in the location:
-		unless the actor is flying:
-			unless the actor is Bodmall:
-				unless the actor is the player and the power of Bodmall is granted:
-					let n be 1;
+	unless the actor is Bodmall or the actor is flying:
+		unless the actor is the player and the power of Bodmall is granted:
+			let W be a random readied weapon held by the actor;
+			unless W is ranged:
+				say "[The actor] must move through the thorny bushes to reach [the noun]. [italic type]";
+				test the perception of the actor against 12;
+				if test result is true:
+					say " ";
+					test the dexterity of the actor against 12;
+				if test result is true:
+					say "[roman type] The thorns deal [bold type]no damage[roman type].";
+				otherwise:
+					let n be 3;
 					calculate the pdr for the actor;
 					decrease n by pdr;
-					if n is less than 0, now n is 0;
-					unless n is 0:
-						say "Dodging is dangerous with so many thorns around; the bushes deal [bold type]1 damage[roman type] to [the actor].";
-						decrease the health of the actor by 1;
-						unless the actor is alive:
+					if n is less than 0:
+						now n is 0;
+					if n is 0:
+						say " [roman type]Because of damage reduction, the thorns deal [bold type]no damage[roman type] to [the actor].";
+					otherwise:
+						say " [roman type]The thorns deal [bold type][n] damage[roman type] to [the actor].";
+						decrease the health of the actor by n;
+						if the actor is dead:
 							if the actor is the player:
 								say "Your weakened body could not handle this!";
-								end the game saying "A thorn kills a man, not by force, but by continuously pricking.";
+								end the story saying "A thorn kills a man, not by force, but by pricking often";
 								rule fails;
 							otherwise:
 								say "[The name of the actor] is killed by the thorns!";
 								rule fails.
+
+After reporting an actor dodging when the thorny bushes are in the location (this is the thorns hurt the dodger rule):
+	unless the actor is Bodmall or the actor is flying:
+		unless the actor is the player and the power of Bodmall is granted:
+			let n be 1;
+			calculate the pdr for the actor;
+			decrease n by pdr;
+			if n is less than 0, now n is 0;
+			unless n is 0:
+				say "Dodging is dangerous with so many thorns around; the bushes deal [bold type]1 damage[roman type] to [the actor].";
+				decrease the health of the actor by 1;
+				unless the actor is alive:
+					if the actor is the player:
+						say "Your weakened body could not handle this!";
+						end the story saying "A thorn kills a man, not by force, but by continuously pricking";
+						rule fails;
+					otherwise:
+						say "[The name of the actor] is killed by the thorns!";
+						rule fails.
 
 An attack modifier rule (this is the thorns running rule):
 	if the global defender is the player and the thorny bushes are in the location:
@@ -2380,8 +2373,8 @@ Bodmall-summoning is an action applying to nothing.
 An AI action selection rule for Bodmall (this is the Bodmall considers summoning thorns rule):
 	if thorny bushes are not in the location:
 		choose a blank Row in the Table of AI Action Options;
-		change the Option entry to the action of Bodmall Bodmall-summoning;
-		change the Action Weight entry to a random number between -100 and 35.
+		now the Option entry is the action of Bodmall Bodmall-summoning;
+		now the Action Weight entry is a random number between -100 and 35.
 
 Carry out Bodmall Bodmall-summoning:
 	say "Bodmall makes several complicated gestures, and [bold type]huge thorny bushes[roman type] come out of the ground everywhere around you!";
@@ -2402,7 +2395,7 @@ Report Bodmall hitting a dead pc:
 	rule succeeds.
 
 Report Bodmall attacking:
-	say "Bodmall throws her hands forward, casting a lightning bolt at [the global defender].";
+	say "Bodmall throws her hands forward, casting a lightning bolt at [the noun].";
 	rule succeeds.
 
 Report Bodmall dodging:
@@ -2490,24 +2483,24 @@ The special weapon info of the dagger of draining is "; drains statistics[run pa
 
 An aftereffects rule (this is the dagger of draining aftereffects rule):
 	if the global attacker weapon is the dagger of draining and the attack damage is greater than 0:
-		if a random chance of 1 in 3 succeeds:
-			decrease defence of the global defender by 1;
-			increase defence of the global attacker by 1;
-			say "The magical dagger saps [no dead property][possessive of the global defender][dead property] defensive reflexes, transferring them to [the global attacker].";
-		otherwise:
-			if a random chance of 1 in 3 succeeds:
+		say "The magical dagger saps ";
+		if a random number between 1 and 4 is:
+			-- 1:
+				decrease defence of the global defender by 1;
+				increase defence of the global attacker by 1;
+				say "[possessive of the global defender] defensive reflexes, transferring them to [the global attacker].";
+			-- 2:
 				decrease willpower of the global defender by 1;
 				increase willpower of the global attacker by 1;
-				say "The magical dagger saps [no dead property][possessive of the global defender][dead property] willpower, transferring it to [the global attacker].";
-			otherwise:
-				if a random chance of 1 in 2 succeeds:
-					decrease dexterity of the global defender by 1;
-					increase dexterity of the global attacker by 1;
-					say "The magical dagger saps [no dead property][possessive of the global defender][dead property] dexterity, transferring it to [the global attacker].";
-				otherwise:
-					decrease perception of the global defender by 1;
-					increase perception of the global attacker by 1;
-					say "The magical dagger saps [no dead property][possessive of the global defender][dead property] perception, transferring it to [the global attacker].";.
+				say "[possessive of the global defender] willpower, transferring it to [the global attacker].";
+			-- 3:
+				decrease dexterity of the global defender by 1;
+				increase dexterity of the global attacker by 1;
+				say "[possessive of the global defender] dexterity, transferring it to [the global attacker].";
+			-- 4:
+				decrease perception of the global defender by 1;
+				increase perception of the global attacker by 1;
+				say "[possessive of the global defender] perception, transferring it to [the global attacker].";.
 
 An AI weapon selection rule for the dagger of draining (this is the Malygris prefers the dagger of draining rule):
 	increase the Weight by 10.
@@ -2562,8 +2555,8 @@ An AI action selection rule for Malygris (this is the consider unghouling rule):
 	[if Malygris opposes the player:] [Why was this here?]
 	if the player form of the player is ghoul and at least two undead persons are in the location:
 		choose a blank Row in the Table of AI Action Options;
-		change the Option entry to the action of Malygris unghouling;
-		change the Action Weight entry to a random number between 0 and 30.
+		now the Option entry is the action of Malygris unghouling;
+		now the Action Weight entry is a random number between 0 and 30.
 
 Carry out Malygris unghouling:
 	say "As Malygris casts a complex spell, and you feel your flesh [bold type]returning to normal[roman type]!";
@@ -2698,8 +2691,7 @@ An AI action selection rule for the at-React Nameless Horror (this is the Namele
 
 An AI action selection rule for the Nameless Horror (this is the Nameless Horror considers waiting rule):
 	choose a blank Row in the Table of AI Action Options;
-	change the Option entry to the action of the Nameless Horror waiting;
-	change the Action Weight entry to 0.
+	now the Option entry is the action of the Nameless Horror waiting;
 
 Instead of the Nameless Horror waiting:
 	say "[one of]The Nameless Horror emits a maddening shriek[or]Darkness coalesces around the Nameless Horror[or]The world shakes as the Nameless Horror roars in defiance[at random].".
@@ -2834,7 +2826,7 @@ Report the corpse hitting a dead pc:
 	rule succeeds.
 
 Report the corpse attacking:
-	say "The rotting corpse [if legs of the rotting corpse is 2]walks[otherwise if legs of the rotting corpse is 1]hops[otherwise]crawls[end if] towards [the global defender], [if arms of the rotting corpse is 2]its arms raised[otherwise if arms of the rotting corpse is 1]its single arm raised[otherwise if the rotting head is part of the rotting corpse]its teeth at the ready[otherwise if legs of the rotting corpse is greater than 0]hoping to land a good kick[otherwise]with no other weapon than its smell[end if].";
+	say "The rotting corpse [if legs of the rotting corpse is 2]walks[otherwise if legs of the rotting corpse is 1]hops[otherwise]crawls[end if] towards [the noun], [if arms of the rotting corpse is 2]its arms raised[otherwise if arms of the rotting corpse is 1]its single arm raised[otherwise if the rotting head is part of the rotting corpse]its teeth at the ready[otherwise if legs of the rotting corpse is greater than 0]hoping to land a good kick[otherwise]with no other weapon than its smell[end if].";
 	rule succeeds.
 
 Report the corpse dodging:
@@ -2882,8 +2874,8 @@ Considered-shape is an as-shape that varies.
 
 An AI action selection rule for the aswang (this is the aswang considers shape shifting rule):
 	choose a blank Row in the Table of AI Action Options;
-	change the Option entry to the action of the global attacker aswang-shifting;
-	change the Action Weight entry to 0;
+	now the Option entry is the action of the aswang aswang-shifting;
+	[now the Action Weight entry is 0;]
 	now considered-shape is as-witch;
 	if the as-shape of the aswang is as-witch and the health of the aswang is less than 15:
 		now considered-shape is as-dog;
@@ -2933,24 +2925,24 @@ To transform away from bird:
 
 Section - The witch can hex you
 
-Aswang-hexing is an action applying to nothing.
-A person is either hexed or not hexed. A person is usually not hexed.
+Aswang-hexing is an action applying to one visible thing.
+A person can be hexed. A person is usually not hexed.
 
 An AI action selection rule for the as-witch aswang (this is the aswang as witch considers hexing rule):
-	if the as-shape of the aswang is as-witch and the chosen target is not hexed:
+	if the chosen target is not hexed:
 		choose a blank Row in the Table of AI Action Options;
-		now the Option entry is the action of the aswang aswang-hexing;
+		now the Option entry is the action of the aswang aswang-hexing the chosen target;
 		now the Action Weight entry is 10;
 
 Carry out the aswang aswang-hexing:
-	say "The aswang attempts to hex [the chosen target]. [italic type]";
+	say "The aswang attempts to hex [the noun]. [italic type]";
 	let n be 11 + concentration of the aswang;
-	test the willpower of the chosen target against n;
+	test the willpower of the noun against n;
 	if test result is false:
-		say " [roman type][The chosen target] [is-are] now [bold type]hexed[roman type].";
-		now global defender is hexed;
+		say " [roman type][The noun] [is-are] now [bold type]hexed[roman type].";
+		now the noun is hexed;
 	otherwise:
-		say " [roman type][The chosen target] [bold type]resist[s] the hex[roman type].";
+		say " [roman type][The noun] [bold type]resist[s] the hex[roman type].";
 
 Initiative update rule (this is the decrease initiative when hexed rule):
 	repeat with X running through all alive persons enclosed by the location:
@@ -2983,8 +2975,8 @@ An AI action selection rule for the as-bird aswang (this is the aswang as bird c
 	if a random chance of 1 in 3 succeeds and health of the aswang is less than 10:
 		if a random chance of 1 in 2 succeeds or aswang is follower:
 			choose a blank Row in the Table of AI Action Options;
-			change the Option entry to the action of the aswang aswang-fleeing;
-			increase Action Weight entry by 20;
+			now the Option entry is the action of the aswang aswang-fleeing;
+			now the Action Weight entry is 20;
 
 Carry out the aswang aswang-fleeing:
 	if at least one room is adjacent to the location:
@@ -3063,12 +3055,12 @@ Section - AI
 
 An AI action selection rule for the at-Act abyss of the soul (this is the abyss of the soul pulsates rule):
 	choose a blank Row in the Table of AI Action Options;
-	change the Option entry to the action of the global attacker pulsating;
-	change the Action Weight entry to 5000;
+	now the Option entry is the action of the abyss of the soul pulsating;
+	now the Action Weight entry is 5000;
 		
 An AI action selection rule for the at-React abyss of the soul (this is the abyss of the soul does not react rule):
 	choose row with an Option of the action of the abyss of the soul waiting in the Table of AI Action Options;
-	change the Action Weight entry to 5000.
+	now the Action Weight entry is 5000.
 
 Check the abyss of the soul waiting:
 	say "The abyss of the soul hovers in the air, nearly motionless." instead.
@@ -3088,7 +3080,7 @@ Carry out the abyss of the soul pulsating:
 				add guy to dodenlijst;
 				if the player is undead:
 					now achieve-temp is 1;
-	say "[no dead property]The abyss of the soul pulsates, [unless lijst is empty]sending out a wave of negative energy that deals [bold type][n] damage[roman type] to [lijst with definite articles][otherwise]but its negative energy dissipates harmlessly[end if][unless dodenlijst is empty], killing [dodenlijst with definite articles][end if][dead property].";
+	say "The abyss of the soul pulsates, [unless lijst is empty]sending out a wave of negative energy that deals [bold type][n] damage[roman type] to [the names of lijst][otherwise]but its negative energy dissipates harmlessly[end if][unless dodenlijst is empty], killing [the names of dodenlijst][end if].";
 	unless dodenlijst is empty:
 		repeat with guy running through dodenlijst:
 			have an event of the abyss of the soul killing guy;
@@ -3107,11 +3099,11 @@ An absorption stopping rule (this is the abyss of the soul absorbs all souls rul
 			increase abyss of the soul strength by 1;
 			say "You attempt to absorb the soul of [the test subject], but feel how it disappears into the [bold type]deadly abyss[roman type][if test subject is Malygris]. The abyss of the soul immediately grows to gigantic proportions, obliterating the entire dungeon[end if].";
 			if the level of test subject is 5:
-				end the game saying "Malygris is dead, and so are you. Technically, that counts as a victory.";
+				end the story saying "Malygris is dead, and so are you. Technically, that counts as a victory.";
 			rule succeeds;
 		if the level of test subject is 10:
 			say "When the soul of [the test subject] disappears into the deadly abyss, the world of the living is shattered.";
-			end the story saying "You have set off a cataclysm that destroys galaxies.";
+			end the story saying "You have set off a cataclysm that destroys galaxies";
 			rule succeeds.
 
 Section - Prose
@@ -3160,7 +3152,7 @@ Understand "tendrils" as the smoke demon.
 
 Section - Making it appear and disappear
 
-A room is either smoke-demoned or not smoke-demoned. A room is usually not smoke-demoned.
+A room can be smoke-demoned. A room is usually not smoke-demoned.
 
 Every turn (this is the smoke demon appears and disappears rule):
 	repeat with place running through smoke-demoned rooms:
@@ -3286,8 +3278,8 @@ Imp-grabbing is an action applying to nothing.
 
 An AI action selection rule for the imp (this is the imp considers imping rule):
 	choose a blank Row in the Table of AI Action Options;
-	change the Option entry to the action of the imp imping;
-	change the Action Weight entry to a random number between 0 and 80.
+	now the Option entry is the action of the imp imping;
+	now the Action Weight entry is a random number between 0 and 80.
 
 Carry out the imp imping:
 	say "TEST: [combat state of the imp].";

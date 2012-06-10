@@ -28,19 +28,19 @@ X is civilised/religious/barren/deathly/elemental/magical/alchemical]
 
 Section - Placement properties
 
-A room can be connectable or not connectable. A room is usually connectable. [Additional connections can be made in the last stage of making the map.]
+A room can be connectable. A room is usually connectable. [Additional connections can be made in the last stage of making the map.]
 
-A room can be connection-inviting or not connection-inviting. A room is usually not connection-inviting. [If connection-inviting (and connectable), all possible connections to this room will be made.]
+A room can be connection-inviting. A room is usually not connection-inviting. [If connection-inviting (and connectable), all possible connections to this room will be made.]
 
-A room can be placeable or not placeable. A room is usually placeable. [Not placeable rooms are not considered during the normal dungeon creation.]
+A room can be placeable. A room is usually placeable. [Not placeable rooms are not considered during the normal dungeon creation.]
 
-A room can be habitable or not habitable. A room is usually habitable. [Monsters can be placed in it.]
+A room can be habitable. A room is usually habitable. [Monsters can be placed in it.]
 
-A room can be treasurable or not treasurable. A room is usually treasurable. [Treasures can be placed in it.]
+A room can be treasurable. A room is usually treasurable. [Treasures can be placed in it.]
 
-A room is either extra-accepting or not extra-accepting. A room is usually extra-accepting. [Extras can be placed in it.]
+A room can be extra-accepting. A room is usually extra-accepting. [Extras can be placed in it.]
 
-A room is either nogo or notnogo. A room is usually notnogo. [Nogo rooms are not listed in exits and remember commands.]
+A room can be nogo. A room is usually not nogo. [Nogo rooms are not listed in exits and remember commands.]
 
 Section - Vertical placement
 
@@ -94,7 +94,7 @@ Section - Consecration
 
 [Temples should be consecrated. Some powers -- such as extra praying abilities -- will only work in non-consecrated rooms.]
 
-A room is either consecrated or not consecrated. A room is usually not consecrated.
+A room can be consecrated. A room is usually not consecrated.
 
 
 
@@ -122,7 +122,7 @@ Check digging (this is the dig in a direct rule):
 	if noun is not a cardinal direction:
 		say "You can only dig north, south, west, east, up, or down." instead.
 
-A thing is either a digging tool or not a digging tool. A thing is usually not a digging tool.
+A thing can be a digging tool. A thing is usually not a digging tool.
 
 Check digging (this is the can only dig when carrying a digging tool rule):
 	unless the player has a digging tool:
@@ -164,7 +164,7 @@ Carry out digging:
 				say "A magical force prevents you from digging.".
 
 To do the dig move:
-	if hate is present and the player is not hidden:
+	if the combat status is not peace and the player is not hidden:
 		now the player is runner;
 		repeat with X running through alive persons in the location:
 			now X does not press the player;
@@ -210,7 +210,7 @@ Check collapsing (this is the collapse in a direct rule):
 	if noun is not a cardinal direction:
 		say "You can only collapse a passage to the north, south, west, east, up, or down." instead.
 
-A thing is either a collapsing tool or not a collapsing tool. A thing is usually not a collapsing tool.
+A thing can be a collapsing tool. A thing is usually not a collapsing tool.
 
 Check collapsing (this is the can only collapse when carrying a collapsing tool rule):
 	unless the player has a collapsing tool:
@@ -246,7 +246,7 @@ Chapter - Emotionless
 
 [Some persons have no emotions, and are immune to, for instance, being dominated.]
 
-A person is either emotionless or not emotionless. A person is usually not emotionless.
+A person can be emotionless. A person is usually not emotionless.
 
 
 Chapter - Non-attacker
@@ -260,7 +260,7 @@ Chapter - Weapon user
 
 [Weapon users can ready new weapons.]
 
-A person is either weapon user or not weapon user. A person is usually not weapon user.
+A person can be a weapon user. A person is usually not a weapon user.
 
 An AI action selection rule for a person (called P) when the chosen weapon is not readied and the running AI is not weapon user (this is the non weapon users never ready rule):
 	choose row with an Option of the action of P readying the chosen weapon in the Table of AI Action Options;
@@ -277,9 +277,9 @@ A person has a size. A person is usually medium.
 
 Chapter - Powers
 
-A power is a kind of thing.
+A power is a kind of object.
 
-A power is either granted or not granted. A power is usually not granted.
+A power can be granted. A power is usually not granted.
 A power has a number called the power level. The power level of a power is usually 1.
 A power has some text called the command text. The command text of a power is usually "".
 
@@ -382,7 +382,7 @@ Chapter - Flying
 
 [Some persons have flight, which makes them immune to some effects.]
 
-A person can be flyer or not flyer. A person is usually not flyer.
+A person can be a flyer. A person is usually not a flyer.
 
 The flying rules are a rulebook.
 
@@ -406,9 +406,9 @@ Status rule (this is the flying status rule):
 
 Chapter - Blindness
 
-A person can be blinded or not blinded. A person is usually not blinded. [Blinded is a property that makes you blind. It can be cured.]
+A person can be blinded. A person is usually not blinded. [Blinded is a property that makes you blind. It can be cured.]
 
-A person can be eyeless or not eyeless. A person is usually not eyeless. [An eyeless person is blind but not negatively affected by blindness.]
+A person can be eyeless. A person is usually not eyeless. [An eyeless person is blind but not negatively affected by blindness.]
 
 The blindness rules are a rulebook.
 
@@ -513,9 +513,9 @@ Teleporting is an action applying to nothing.
 
 A person has a number called the teleport amount. The teleport amount of a person is usually 0. [Number of times the monster can teleport. -1 means infinitely.]
 A person has a number called the teleport eagerness. The teleport eagerness of a person is usually 10. [percentage chance of serious consideration]
-A person is either spontaneous teleporter or not spontaneous teleporter. A person is usually not spontaneous teleporter. [A spontaneous teleporter will also teleport when the player is not present. Best used with a teleport amount of -1.]
+A person can be a spontaneous teleporter. A person is usually not a spontaneous teleporter. [A spontaneous teleporter will also teleport when the player is not present. Best used with a teleport amount of -1.]
 
-A room can be teleportable or not teleportable. A room is usually teleportable. [A teleportable room is one you can teleport TO.]
+A room can be teleportable. A room is usually teleportable. [A teleportable room is one you can teleport TO.]
 
 [We have teleport rules which check whether a person can teleport.]
 The teleport impossible rules are a rulebook.
@@ -530,20 +530,20 @@ To decide whether teleportation is impossible for (guy - a person):
 
 [Finally, it need not be obvious to a person that teleportation is impossible. If a person is a teleport impossible aware, he does.]
 
-A person is either teleport impossible aware or not teleport impossible aware. A person is usually not teleport impossible aware.
+A person can be teleport impossible aware. A person is usually not teleport impossible aware.
 
 [AI rules]
 
 First AI action selection rule for an at-Act person (called P) (this is the consider teleporting rule):
 	choose a blank Row in the Table of AI Action Options;
-	change the Option entry to the action of P teleporting;
-	if the teleport amount of the running AI is 0:
-		change the Action Weight entry to -1000;
+	now the Option entry is the action of P teleporting;
+	if the teleport amount of P is 0:
+		now the Action Weight entry is -1000;
 	otherwise:
 		if P is teleport impossible aware:
-			change the Action Weight entry to -100;
+			now the Action Weight entry is -100;
 		otherwise:
-			change the Action Weight entry to -20.
+			now the Action Weight entry is -20.
 
 An AI action selection rule for an at-Act person (called P) (this is the teleport eagerness rule):
 	let n be the teleport eagerness of P;
@@ -629,8 +629,8 @@ First AI action selection rule for a person (called P) (this is the consider dis
 		repeat with guy running through alive persons enclosed by the location opposed by P:
 			if guy has at least one[ corruptible] thing:
 				choose a blank Row in the Table of AI Action Options;
-				change the Option entry to the action of P disintegrating;
-				change the Action Weight entry to disintegrate power of P;
+				now the Option entry is the action of P disintegrating;
+				now the Action Weight entry is disintegrate power of P;
 				if a random chance of 1 in 10 succeeds:
 					increase Action Weight entry by 10;
 				stop;
@@ -672,7 +672,7 @@ Chapter - Followers
 
 [Followers consider the follower rules. If these do not fail, they attempt to move one room towards the player.]
 
-A person is either follower or not follower. A person is usually not follower.
+A person can be a follower. A person is usually not a follower.
 A person has a number called the follower percentile chance. The follower percentile chance of a person is usually 100.
 
 The followers rules are a rulebook.
@@ -749,13 +749,13 @@ Chapter - Ranged weapons
 
 [Some specials should or should not happen for ranged weapons. For instance, a heated ranged weapon does not deal extra damage.]
 	
-A weapon is either ranged or not ranged. A weapon is usually not ranged.
+A weapon can be ranged. A weapon is usually not ranged.
 
 Chapter - Armour-stoppable
 
 [Armour should only reduce the damage of some weapons. For instance, armour doesn't help against a lightning bolt or dragon's fire.]
 
-A weapon is either armour-stoppable or not armour-stoppable. A weapon is usually armour-stoppable.
+A weapon can be armour-stoppable. A weapon is usually armour-stoppable.
 
 
 Chapter - Materials
@@ -846,7 +846,7 @@ Chapter - Doing risky things
 
 [I don't think we are actually using this right now.]
 
-A person is either risky or not risky. A person is usually not risky.
+A person can be risky. A person is usually not risky.
 
 An attack modifier rule when the global defender is risky (this is the defender is doing something risky rule):
 	say " + 6 (defender taking risky action)[run paragraph on]";
@@ -868,7 +868,7 @@ To decide whether (guy - a person) is beloved of Aite:
 	otherwise:
 		decide no.
 
-A person can be Aite-loved or not Aite-loved. A person is usually not Aite-loved.
+A person can be Aite-loved. A person is usually not Aite-loved.
 
 A beloved of Aite rule (this is the Aite-loved rule):
 	if test subject is Aite-loved:
@@ -941,7 +941,7 @@ Last damage modifier rule:
 
 Section - Temperatures and flaming
 
-A thing is either flaming or not flaming. A thing is usually not flaming.
+A thing can be flaming. A thing is usually not flaming.
 Understand the flaming property as describing a thing. Understand "burning" as flaming.
 
 Every turn (this is the flaming items burn away rule):
@@ -1063,7 +1063,7 @@ Last every turn (this is the internal heat rule):
 
 Section - Cooling
 
-A thing is either cooler or not cooler. A thing is usually cooler. [If a burn check was made for an item, it will become not cooler than 1, and therefore will not cool down this turn. This stops us from having many repeated messages about something cooling down completely.]
+A thing can be a cooler. A thing is usually cooler. [If a burn check was made for an item, it will become not cooler than 1, and therefore will not cool down this turn. This stops us from having many repeated messages about something cooling down completely.]
 
 Last every turn (this is the cooling rule):
 	repeat with item running through hot not flaming things:
@@ -1111,7 +1111,7 @@ Chapter - Rust
 
 Section - The property
 
-A thing is either rusted or not rusted. A thing is usually not rusted.
+A thing can be rusted. A thing is usually not rusted.
 Understand "rusted" as a thing when the item described is rusted.
 
 Not-mentioning-rust is a truth state that varies. Not-mentioning-rust is false.
@@ -1160,7 +1160,7 @@ Chance to win rule when the global attacker is rusted (this is the CTW rusted mo
 
 Section - Rust spores
 
-A room is either rust-spored or not rust-spored. A room is usually not rust-spored.
+A room can be rust-spored. A room is usually not rust-spored.
 
 Rust spores is a backdrop. Rust spores is everywhere. Rust spores is plural-named. Understand "brown" and "moss" and "spore" as rust spores.
 
@@ -1214,7 +1214,7 @@ A rusting rule (this is the only iron items can rust rule):
 
 Section - Spreading of the rust
 
-A room can be either rust-spored-candidate or not rust-spored-candidate.
+A room can be a rust-spored-candidate.
 
 Every turn when at least one placed room is rust-spored (this is the spread rust spores rule):
 	repeat with place running through placed not rust-spored rooms:
@@ -1246,7 +1246,7 @@ A dungeon interest rule (this is the add rust to the dungeon rule):
 
 Section - Containers which release rust spores
 
-A container is either rust-releasing or not rust-releasing. A container is usually not rust-releasing.
+A container can be rust-releasing. A container is usually not rust-releasing.
 
 Every turn when at least one rust-releasing container is not off-stage (this is the rust the contents of rust-releasing containers rule):
 	repeat with item running through rust-releasing not off-stage containers:
@@ -1387,8 +1387,8 @@ Chapter - Death blessing and death curse
 
 [This is a SECRET status that the player can receive -- for instance, by reading the symbols of death.]
 
-A person can be death-blessed or not death-blessed.
-A person can be death-cursed or not death-cursed.
+A person can be death-blessed.
+A person can be death-cursed.
 
 A damage modifier rule when the global defender is death-blessed (this is the death-blessed rule):
 	if a random chance of 1 in 10 succeeds:

@@ -5,6 +5,8 @@ The story genre is "dungeon crawl".
 The release number is 2.
 [Release along with cover art.]
 
+Use no deprecated features.
+Use MAX_PROP_TABLE_SIZE of 300000.
 
 Include Menus by Emily Short.
 [Include Basic Help Menu by Emily Short.]
@@ -20,7 +22,8 @@ Include Dynamic Objects by Jesse McGrew.
 
 Every turn (this is the mark items as seen every turn rule): 
 	repeat with item running through things that are enclosed by the location:
-		if the item is not enclosed by an opaque closed container, now the item is seen.
+		if the item is not enclosed by an opaque closed container:
+			now the item is seen.
 		
 Include Alternative Permadeath by Victor Gijsbers.
 The binary file of save data is called "KerkerkruipSaves".
@@ -44,8 +47,6 @@ Include Kerkerkruip Actions and UI by Victor Gijsbers.
 Include Kerkerkruip Start and Finish by Victor Gijsbers.
 Include Kerkerkruip Final Declarations by Victor Gijsbers.
 
-Use MAX_PROP_TABLE_SIZE of 300000.
-
 The maximum score is 18. [1 + 1 + 2 + 2 + 3 + 4 + 5 = 18]
 The notify score changes rule is not listed in any rulebook.
 
@@ -57,3 +58,7 @@ Generation info is a truth state that varies. Generation info is [true]false.
 	copy scroll of teleportation to player;
 	copy scroll of teleportation to player;
 	copy scroll of teleportation to player.]
+
+[TODO:
+- Let the player hide in certain rooms - for example if the lantern and shadows are there, or the Hall of Mirrors
+]

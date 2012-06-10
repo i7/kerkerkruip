@@ -268,9 +268,9 @@ Section - Death message
 Every turn (this is the player death rule):
 	if the player is dead:
 		unless the global attacker is the player:
-			end the game saying "You were killed by [no dead property][the global attacker][dead property].";
+			end the story saying "You were killed by [the name of the global attacker]";
 		otherwise:
-			end the game saying "You committed suicide. How unseemly!".
+			end the story saying "You committed suicide. How unseemly!".
 
 Section - What happens after the obituary
 
@@ -282,9 +282,9 @@ After printing the player's obituary:
 
 When play begins: 
 	choose row with a final response rule of immediately restore saved game rule in the Table of Final Question Options; 
-	delete the final question wording entry;
+	blank out the final question wording entry;
 	choose row with a final response rule of immediately undo rule in the Table of Final Question Options; 
-	delete the final question wording entry. 
+	blank out the final question wording entry. 
 
 
 
