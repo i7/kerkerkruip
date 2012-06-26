@@ -19,16 +19,16 @@ An attack modifier rule when the global attacker is hidden (this is the hidden g
 	say " + 2 (hidden)[run paragraph on]";
 	increase attack strength by 2.
 
-First Standard AI rule (this is the do nothing when all enemies hidden rule):
-	let p be false;
-	let q be false;
+First Standard AI rule for a person (called P) (this is the do nothing when all enemies hidden rule):
+	let conflict be false;
+	let detected be false;
 	repeat with X running through all alive persons enclosed by the location:
-		if the faction of the running AI hates the faction of X:
-			now p is true;
+		if P opposes X:
+			now conflict is true;
 			if X is not hidden:
-				now q is true;
-	if p is true and q is false:
-		say "[The running AI] [one of]remains unaware of your presence[or]does not notice you[or]does not detect your presence[at random].";
+				now detected is true;
+	if conflict is true and detected is false:
+		say "[The P] [one of]remains unaware of your presence[or]does not notice you[or]does not detect your presence[at random].";
 		rule succeeds.
 	
 

@@ -467,7 +467,6 @@ A person has a number called the current heal cooldown. The current heal cooldow
 			
 First AI action selection rule for a person (called P) (this is the consider healing rule):
 	if the heal power of P is greater than 0 and the current heal cooldown of P is less than 1:
-		choose row with an Option of the action of P healing in the Table of AI Action Options;
 		let someone needs healing be false;
 		let greatest injury be 0;
 		repeat with X running through alive persons enclosed by the location not opposed by P:
@@ -493,7 +492,8 @@ Carry out an actor healing:
 				if m is less than n:
 					now chosen one is guy;
 					now m is n;
-	if m is greater than heal power of the actor, now m is heal power of the actor;
+	if m is greater than heal power of the actor:
+		now m is heal power of the actor;
 	say "[The actor] casts a spell of magical healing on [the chosen one], removing [m] points of damage.";
 	heal chosen one for m health;
 	now current heal cooldown of the actor is heal cooldown of the actor. 
@@ -770,21 +770,21 @@ Heat-behaviour is a kind of value. The heat-behaviours are burner and melter. [A
 The materials are defined by the Table of Materials.
 
 Table of Materials
-material		material-adjective		destroying heat		heat-behaviour		corrosion resistance
-other-material	"nondescript"		5					burner				950					
-iron			"iron"				10					melter				995
-silver		"silver"				7					melter				985
-paper		"paper"				1					burner				950
-cloth		"cloth"				1					burner				950
-wood		"wooden"			3					burner				970
-leather		"leather"				3					burner				980
-flesh		"flesh"				2					burner				900
-glass		"glass"				6					melter				999
-stone		"stone"				15					melter				998
-dragon skin	"dragon skin"			20					burner				999
-radiance		"radiant"				99					melter				1000
-adamant		"adamantine"			999					melter				1000
-vapour		"vapourous"			999					burner				1000
+material	material-adjective	destroying heat	heat-behaviour	corrosion resistance
+other-material	"nondescript"	5	burner	950					
+iron	"iron"	10	melter	995
+silver	"silver"	7	melter	985
+paper	"paper"	1	burner	950
+cloth	"cloth"	1	burner	950
+wood	"wooden"	3	burner	970
+leather	"leather"	3	burner	980
+flesh	"flesh"	2	burner	900
+glass	"glass"	6	melter	999
+stone	"stone"	15	melter	998
+dragon skin	"dragon skin"	20	burner	999
+radiance	"radiant"	99	melter	1000
+adamant	"adamantine"	999	melter	1000
+vapour	"vapourous"	999	burner	1000
 
 Understand the material property as describing a thing.
 [Understand the material-adjective property as describing a material.]

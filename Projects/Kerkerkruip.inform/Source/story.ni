@@ -14,7 +14,7 @@ Include Basic Screen Effects by Emily Short.
 Include Epistemology by Eric Eve.
 Include Numbered Disambiguation Choices by Aaron Reed.
 [Include Real-Time Delays by Erik Temple.]
-Include Glulx Entry Points by Emily Short.
+Include Glulx Entry Points by Emily Short. [Consider just checking if graphics are supported directly]
 [Include Default Messages by Ron Newcomb.]
 Include Dynamic Objects by Jesse McGrew.
 
@@ -61,4 +61,5 @@ Generation info is a truth state that varies. Generation info is [true]false.
 
 [TODO:
 - Let the player hide in certain rooms - for example if the lantern and shadows are there, or the Hall of Mirrors
+- If you dig down 20 times discover the Nameless Horror
 ]
