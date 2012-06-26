@@ -217,7 +217,7 @@ A damage modifier rule when the global attacker is the blood ape (this is the bl
 			if the numbers boolean is true, say " + 8 (gargantuan size)[run paragraph on]";
 			increase the attack damage by 8;
 			
-An attack modifier rule (this is the blood ape size attack bonus rule)::
+An attack modifier rule (this is the blood ape size attack bonus rule):
 	if the global defender is the blood ape and the global defender is at dodge:
 		if the blood ape is huge:
 			if the numbers boolean is true, say " + 1 (huge ape)[run paragraph on]";
@@ -238,7 +238,7 @@ Report the blood ape hitting a dead pc:
 	rule succeeds.
 
 Report the blood ape attacking:
-	say "The blood ape [one of]swings at [possessive of the global defender] head[or]jumps at [global defender] with its fists ready to swing[at random].";
+	say "The blood ape [one of]swings at [possessive of the noun] head[or]jumps at [the noun] with its fists ready to swing[at random].";
 	rule succeeds.
 
 Report the blood ape parrying:
@@ -374,7 +374,7 @@ Report the ravenous armadillo hitting a dead pc:
 	rule succeeds.
 
 Report the ravenous armadillo attacking:
-	say "The armadillo raises its tail threateningly towards [the global defender].";
+	say "The armadillo raises its tail threateningly towards [the noun].";
 	rule succeeds.
 
 Report the ravenous armadillo parrying:
@@ -684,7 +684,7 @@ An attack modifier rule (this is the attack roll stunned bonus rule):
 		decrease the attack strength by n.
 
 Chance to win rule (this is the CTW stun penalty rule):
-	if the global attacker is stunned:
+	if the main actor is stunned:
 		decrease the chance-to-win by 2.
 		
 Check concentrating when the player is stunned:
@@ -715,7 +715,7 @@ Report Miranda hitting a dead pc:
 	rule succeeds.
 
 Report Miranda attacking:
-	say "Miranda jumps towards [the global defender][if Miranda is at-stun], intent on stunning[end if].";
+	say "Miranda jumps towards [the noun][if Miranda is at-stun], intent on stunning[end if].";
 	rule succeeds.
 
 Report Miranda parrying:
@@ -903,7 +903,7 @@ Report the chain golem hitting a dead pc:
 	rule succeeds.
 
 Report the chain golem attacking:
-	say "Several of the [if concentration of the chain golem is 1]slowly spinning [otherwise if concentration of the chain golem is 2]spinning [otherwise if concentration of the chain golem is 3]wildly spinning [end if]chains [one of]direct themselves towards[or]lash out at[or]attempt to smash themselves into[at random] [the global defender].";
+	say "Several of the [if concentration of the chain golem is 1]slowly spinning [otherwise if concentration of the chain golem is 2]spinning [otherwise if concentration of the chain golem is 3]wildly spinning [end if]chains [one of]direct themselves towards[or]lash out at[or]attempt to smash themselves into[at random] [the noun].";
 	rule succeeds.
 
 Report the chain golem parrying:
@@ -1333,6 +1333,178 @@ Carry out reaping:
 
 
 
+Chapter - Level 2 - Demon of Rage
+
+The demon of rage is a demonic monster. "A demon of rage fills the room with its inarticulate cries."
+The demon-of-rage-number is a number that varies. The demon-of-rage-number is 0.
+
+Understand "cries" and "inarticulate" as the demon of rage.
+
+The level of the demon of rage is 2.
+
+The description of the demon of rage is "An amorphous swirl of red and black light, this demonic creature is the spirit of rage incarnate.".
+Instead of listening to the demon of rage:
+	say "In its fierce wailing, you hear the voices of all your victims.".
+
+The health of the demon of rage is 18.
+The melee of the demon of rage is 0.
+The defence of the demon of rage is 8.
+The dexterity of the demon of rage is 5.
+The perception of the demon of rage is 5. 
+The willpower of the demon of rage is 5.
+
+When play begins:
+	let X be a random natural weapon part of the demon of rage;
+	now dodgability of X is 2;
+	now damage die of X is 6;	
+	now passive parry max of X is 2;
+	now active parry max of X is 0;
+	now printed name of X is "demon's fiery tendrils".
+
+Section - Getting stronger
+
+[The demon of rage gets stronger whenever someone dies.]
+
+Last killing rule (this is the demon of rage gets stronger rule):
+	if demon of rage is not off-stage:
+		if killed-guy is not the demon of rage and killed-guy is not the player:
+			do the demon of rage power-up.
+
+To do the demon of rage power-up:
+	increase demon-of-rage-number by 1;
+	increase melee of demon of rage by 1;
+	increase defence of demon of rage by 1;
+	increase health of demon of rage by 3;
+	increase permanent health of demon of rage by 3;
+	increase dexterity of demon of rage by 1;
+	increase dexterity of demon of rage by 2;
+	increase dexterity of demon of rage by 3;
+	if demon-of-rage-number is 2:
+		now demon of rage is flyer;
+	if demon-of-rage-number is 3:
+		now intrinsic heat resistance of demon of rage is 2;
+		now inherent damage modifier of demon of rage is 2;
+	if demon-of-rage-number is 4:
+		now hit protection of demon of rage is 1;
+	if demon-of-rage-number is 5:		
+		now inherent damage modifier of demon of rage is 3;
+		now follower percentile chance of demon of rage is 70;
+		now demon of rage is follower;
+	if demon of rage is in the location:
+		say "The [bold type]demon of rage[roman type] howls and seems to grow stronger!";
+	otherwise:
+		let way be the best route from the location of player to the location of the demon of rage;
+		if way is a direction:
+			say "You hear a [bold type]fierce howl[roman type] [way].";
+		otherwise:
+			say "You hear a [bold type]fierce howl[roman type] somewhere in the dungeon.".
+
+Section - Prose
+
+Report an actor hitting the dead demon of rage:
+	say "A terrifying shriek of anger fills the entire dungeon as the demon of rage vanishes into the abyss. But has more than its outward manifestation been defeated?";
+	rule succeeds.
+
+Report the demon of rage hitting a dead pc:
+	say "'No!', you scream, and the syllable turns into a fiery, a fierce, an eternal and all-devouring shriek of hate and rage.";
+	rule succeeds.
+
+Report the demon of rage attacking:
+	say "Full of darkness and fire, the demon rushes towards [the noun].";
+	rule succeeds.
+
+Report the demon of rage dodging:
+	say "The demon flashes from one side of the room to the other, attempting to dodge the attack.";
+	rule succeeds.
+
+Report the demon of rage concentrating:
+	if the concentration of the actor is 1, say "The demon of rage burns with a fiercer light." instead;
+	if the concentration of the actor is 2, say "The demon of rage glows like the hottest of embers." instead;
+	if the concentration of the actor is 3, say "The demon of rage becomes even more radiant, and howls with the lust for blood." instead.	
+
+Section - When enraged
+
+An attack modifier rule (this is the enraged and the demon of rage rule):
+	if the global attacker is enraged and the global defender is the demon of rage:
+		if the numbers boolean is true, say " + 4 (attuned to the demon)[run paragraph on]";
+		increase the attack strength by 4.
+
+
+
+Section - Power
+
+
+The power of rage is a power. Demon of rage grants power of rage.
+The power level of power of rage is 2.
+The command text of power of rage is "howl".
+
+Absorbing power of rage:
+	increase melee of the player by 2;
+	increase permanent health of the player by 10;
+	say "As the demon of rage dies, your heart is filled with anger. ([bold type]Power of rage[roman type]: +2 attack, +10 health; cannot retreat; you can [italic type]howl[roman type] to improve your next attack but permanently decrease your defence.)[paragraph break]".
+
+Last check retreating (this is the do not retreat when power of rage rule):
+	if hate is present and power of rage is granted:
+		let Y be the player;
+		repeat with X running through persons in the location:
+			if the faction of X hates the faction of the player:
+				now Y is X;
+		take no time;
+		say "And allow [the Y] to live? Never!" instead.
+
+Last check going (this is the do not go in combat when power of rage rule):
+	if hate is present and power of rage is granted:
+		let Y be the player;
+		repeat with X running through persons in the location:
+			if the faction of X hates the faction of the player:
+				now Y is X;
+		take no time;
+		say "And allow [the Y] to live? Never!" instead.
+
+Repelling power of rage:
+	decrease melee of the player by 2;
+	decrease permanent health of the player by 10.
+
+Status skill rule (this is the rage power status skill rule):
+	if power of rage is granted:
+		say "You can [bold type]howl[roman type] in rage. Your melee and damage both increase by 3 for the next attack, but your defence permanently decreases by 1. [italic type](Level 2)[roman type][line break][run paragraph on]".
+
+Section - Howling
+
+Howling is an action applying to nothing. Understand "howl" as howling.
+
+A person can be at-howl or not at-howl. A person is usually not at-howl.
+
+Check howling:
+	if power of rage is not granted:
+		take no time;
+		say "You do not possess that power." instead.
+			
+Carry out howling:
+	say "You howl with rage!";
+	now player is at-howl;
+	decrease defence of player by 1.
+			
+An attack modifier rule (this is the howl attack bonus rule rule):
+	if the global attacker is at-howl:
+		if the numbers boolean is true, say " + 3 (howling)[run paragraph on]";
+		increase the attack strength by 3.	
+
+A damage modifier rule (this is the howl damage bonus rule):
+	if the global attacker is at-howl:
+		if the numbers boolean is true, say " + 3 (howling)[run paragraph on]";
+		increase the attack damage by 3.
+			
+Aftereffects rule (this is the take away howling rule):
+	now the global attacker is not at-howl.
+
+Status rule (this is the howling status rule):
+	if the player is at-howl:
+		say "You are [bold type]howling[roman type]: +2 to attack, +3 to damage.[line break][run paragraph on]".
+
+
+
+
 Chapter - Level 3 - Mindslug
 
 A mindslug is a monster. "A vast slug covered in green ooze has positioned itself in this room."
@@ -1387,22 +1559,22 @@ An AI action selection rule for the at-React mindslug (this is the mindslug does
 	decrease the Action Weight entry by 100.
 		
 Carry out the mindslug mindblasting:
-	say "The mindslug blasts [the global defender] with psionic energy. [italic type]";
+	say "The mindslug blasts [the noun] with psionic energy. [italic type]";
 	let n be 10;
 	increase n by concentration of the mindslug;
 	test the willpower of the global defender against n; 
 	say "[roman type]";
 	if test result is true:
-		say " [The global defender] resist[s] the mindslug's influence!";
+		say " [The noun] resist[s] the mindslug's influence!";
 	otherwise:
 		decrease willpower of the global defender by 1;
-		say " [The global defender] fail[s] to resist the mindslug's mental blast, and [possessive of the global defender] willpower decreases to [willpower of the global defender].";
+		say " [The noun] fail[s] to resist the mindslug's mental blast, and [possessive of the noun] willpower decreases to [willpower of the noun].";
 		if willpower of the global defender is less than 1:
 			if the global defender is the player:
 				end the game saying "You will live on as the unquestioning slave of a giant slug.";
 			otherwise:
 				now the faction of the global defender is enslaved;
-				say "[The global defender] is now under the control of the mindslug.";
+				say "[The noun] is now under the control of the mindslug.";
 		otherwise:
 			if the concentration of the global defender is greater than 0:
 				let the global defender lose concentration;
@@ -1422,7 +1594,7 @@ Report the mindslug hitting a dead pc:
 	rule succeeds.
 
 Report the mindslug attacking:
-	say "Raising its hideous body, the mindslug bears down on [the global defender].";
+	say "Raising its hideous body, the mindslug bears down on [the noun].";
 	rule succeeds.
 
 Report the mindslug dodging:
@@ -1552,7 +1724,7 @@ Report Mouser hitting a dead pc:
 	rule succeeds.
 
 Report Mouser attacking:
-	say "Fast as a snake, Mouser lashes out at [the global defender].";
+	say "Fast as a snake, Mouser lashes out at [the noun].";
 	rule succeeds.
 
 Report Mouser dodging:
@@ -1891,7 +2063,7 @@ Report the giant tentacle hitting a dead pc:
 	rule succeeds.
 
 Report the giant tentacle attacking:
-	say "The giant tentacle moves in to grab [the global defender].";
+	say "The giant tentacle moves in to grab [the noun].";
 	rule succeeds.
 
 Report the giant tentacle dodging:
@@ -2311,10 +2483,12 @@ Instead of entering the thorny bushes:
 Instead of taking the thorny bushes:
 	say "They seem to be rooted to the spot.".
 
+[TODO: Can check rules use global attacker/defender?]
+
 Check an actor attacking when the thorny bushes are in the location (this is the attack with thorns in the location rule):
 	unless the global attacker weapon is ranged:
 		unless the global attacker is flying:
-			unless the global attacker is Bodmall:
+			unless the global attacker is Bodmall or the global attacker is not alive:
 				unless the global attacker is the player and the power of Bodmall is granted:
 					say "[The global attacker] must move through the thorny bushes to reach [the global defender]. [italic type]";
 					test the perception of the global attacker against 12;
@@ -2402,7 +2576,7 @@ Report Bodmall hitting a dead pc:
 	rule succeeds.
 
 Report Bodmall attacking:
-	say "Bodmall throws her hands forward, casting a lightning bolt at [the global defender].";
+	say "Bodmall throws her hands forward, casting a lightning bolt at [the noun].";
 	rule succeeds.
 
 Report Bodmall dodging:
@@ -2834,7 +3008,7 @@ Report the corpse hitting a dead pc:
 	rule succeeds.
 
 Report the corpse attacking:
-	say "The rotting corpse [if legs of the rotting corpse is 2]walks[otherwise if legs of the rotting corpse is 1]hops[otherwise]crawls[end if] towards [the global defender], [if arms of the rotting corpse is 2]its arms raised[otherwise if arms of the rotting corpse is 1]its single arm raised[otherwise if the rotting head is part of the rotting corpse]its teeth at the ready[otherwise if legs of the rotting corpse is greater than 0]hoping to land a good kick[otherwise]with no other weapon than its smell[end if].";
+	say "The rotting corpse [if legs of the rotting corpse is 2]walks[otherwise if legs of the rotting corpse is 1]hops[otherwise]crawls[end if] towards [the noun], [if arms of the rotting corpse is 2]its arms raised[otherwise if arms of the rotting corpse is 1]its single arm raised[otherwise if the rotting head is part of the rotting corpse]its teeth at the ready[otherwise if legs of the rotting corpse is greater than 0]hoping to land a good kick[otherwise]with no other weapon than its smell[end if].";
 	rule succeeds.
 
 Report the corpse dodging:
@@ -3063,7 +3237,7 @@ Section - AI
 
 An AI action selection rule for the at-Act abyss of the soul (this is the abyss of the soul pulsates rule):
 	choose a blank Row in the Table of AI Action Options;
-	change the Option entry to the action of the global attacker pulsating;
+	change the Option entry to the action of the main actor pulsating;
 	change the Action Weight entry to 5000;
 		
 An AI action selection rule for the at-React abyss of the soul (this is the abyss of the soul does not react rule):
