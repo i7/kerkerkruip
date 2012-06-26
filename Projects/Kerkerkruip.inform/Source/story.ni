@@ -1,8 +1,8 @@
-"Kerkerkruip - Release 2" by Victor Gijsbers
+"Kerkerkruip - Release 3 - Alpha" by Victor Gijsbers
 
 The story headline is "An IF roguelike".
 The story genre is "dungeon crawl".
-The release number is 2.
+The release number is 3.
 [Release along with cover art.]
 
 Use no deprecated features.

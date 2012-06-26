@@ -1330,7 +1330,7 @@ Carry out reading a scroll:
 		remove noun from play;
 		say "You become ethereal[if the player has a not radiance thing]; your possessions drop to the ground[end if]!";
 		make the player ethereal;
-		now ethereal timer of the player is a random number between 20 and 25;
+		now ethereal timer of the player is a random number between 10 and 15;
 		rule succeeds.
 		
 

@@ -946,7 +946,7 @@ Check direction-jumping down in Vast Staircase:
 
 Carry out direction-jumping down in Vast Staircase:
 	say "You jump down the vast staircase.";
-	have a falling event with global defender falling in Vast Staircase for reason 2;
+	have a falling event with actor falling in Vast Staircase for reason 2;
 	do nothing instead.
 
 An aftereffects rule (this is the hit may send you off the vast staircase rule):
