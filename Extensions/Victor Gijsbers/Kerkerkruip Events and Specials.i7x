@@ -24,8 +24,13 @@ Smoke rule (this is the smoke on the Elemental Plane of Smoke rule):
 Instead of digging in Elemental Plane of Smoke:
 	take no time;
 	say "You cannot dig tunnels in the smoke.".
+	
+A teleport impossible rule (this is the no teleportation in elemental plane of smoke rule):
+	if the location of the test subject is elemental plane of smoke:
+		rule succeeds.	
 
 Instead of going in Elemental Plane of Smoke:
+	now concentration of the player is 0;
 	repeat with item running through things in Elemental Plane of Smoke:
 		unless item is a person or item is a backdrop:
 			move item to Elemental Plane of Smoke Storage.;
