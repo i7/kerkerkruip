@@ -50,7 +50,7 @@ Part - Preliminaries
 
 Section - Directions
 
-A direction is either cardinal or not cardinal. A direction is usually not cardinal. North is cardinal. South is cardinal. East is cardinal. West is cardinal. Up is cardinal. Down is cardinal.
+A direction can be cardinal. A direction is usually not cardinal. North is cardinal. South is cardinal. East is cardinal. West is cardinal. Up is cardinal. Down is cardinal.
 
 Section - Coordinates
 
@@ -60,7 +60,7 @@ A room has a number called the z-coordinate. [up]
 
 Section - Placed and unplaced
 
-A room is either placed or not placed. A room is usually not placed.
+A room can be placed. A room is usually not placed.
 
 Section - Global variables
 
@@ -175,9 +175,9 @@ Chapter - Choosing the right room
 Section - Building a list of suitable rooms
 
 Table of Suitable Rooms
-Candidate		Room Score
-a room			a number
-with 200 blank rows
+Candidate	Room Score
+a room	a number
+with 30 blank rows
 
 To fill the Table of Suitable Rooms:
 	blank out the whole of the Table of Suitable Rooms;
@@ -411,8 +411,8 @@ Chapter - Main routines
 Section - The Table of monsters
 
 Table of Monster Rooms
-Locale		Distance		Level
-a room		a number	a number
+Locale	Distance	Level
+a room	a number	a number
 with 20 blank rows
 
 
@@ -491,7 +491,7 @@ Section - Table of Suitable Monsters
 Table of Suitable Monsters
 Applicant	Monster score
 a monster	a number
-with 100 blank rows
+with 30 blank rows
 
 Section - Putting monsters in rooms
 
