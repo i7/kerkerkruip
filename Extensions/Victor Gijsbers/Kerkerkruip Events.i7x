@@ -74,9 +74,9 @@ A fragmentation rule (this is the basic fragmentation damage rule):
 			say ""; [For an extra newline. Don't ask.]
 	if health of the player is less than 1:
 		if fragmentation-guy is the player:
-			end the game saying "You have blown yourself to pieces.";
+			end the story saying "You have blown yourself to pieces";
 		otherwise:
-			end the game saying "You have been blown to pieces.".
+			end the story saying "You have been blown to pieces".
 
 A fragmentation rule (this is the glass items can shatter through fragmentation rule):
 	repeat with item running through glass things enclosed by fragmentation-place:
@@ -116,7 +116,7 @@ Shatter rule (this is the people shattering rule):
 	if shatter-item is a person:
 		now health of shatter-item is -100;
 		if shatter-item is the player:
-			end the game saying "Your body shattered to pieces!";
+			end the story saying "Your body shattered to pieces!";
 		otherwise:
 			say "[The shatter-item] [bold type]shatter[unless shatter-item is plural-named]s[end if][roman type] to pieces!";
 		rule succeeds.
