@@ -12,7 +12,7 @@ Section - Retreating action
 Retreating is an action applying to nothing.
 Understand "retreat" and "flee" as retreating.
 
-A person is either retreater or not retreater. A person is usually not retreater.
+A person can be a retreater. A person is usually not a retreater.
 
 The retreat location is a room that varies. The retreat location is Entrance Hall.
 
@@ -33,14 +33,12 @@ Check retreating (this is the cannot retreat when in the retreat location rule):
 		take no time;
 		say "There is nowhere to retreat to." instead.
 		
-Check retreating (this is the cannot retreat when there are no enemies rule):
-	if not hate is present:
-		say "There's nothing here to retreat from." instead.
+Check retreating when the combat status is peace (this is the cannot retreat when there are no enemies rule):
+	say "There's nothing here to retreat from." instead.
 		
-Check retreating (this is the cannot retreat as reaction rule):
-	if the combat state of the player is not at-Act:
-		take no time;
-		say "You cannot retreat as a reaction--try to survive and run away on your own turn." instead.
+Check an at-React pc retreating (this is the cannot retreat as reaction rule):
+	take no time;
+	say "You cannot retreat as a reaction--try to survive and run away on your own turn." instead.
 
 Carry out retreating (this is the standard carry out retreat rule):
 	now the player is retreater;
@@ -53,7 +51,7 @@ Section - Allow the player a free retreat whenever he first enters a room
 
 [We implement this by automatically having the player win initiative -- which is a nice thing to do anyway. But only the first time he enters a room!]
 
-A room is either initiative-conferring or not initiative-conferring. A room is usually initiative-conferring.
+A room can be initiative-conferring. A room is usually initiative-conferring.
 
 [A resetting the dungeon rule (this is the reset initiative-conferring rule):
 	repeat with place running through rooms:
@@ -73,17 +71,17 @@ Check going (this is the cannot go as a reaction rule):
 		say "You cannot move as a reaction--try to survive and move away on your own turn." instead.
 
 Last check going (this is the treat going as retreat when possible rule):
-	if hate is present and the player is not retreater:
+	if the player is not retreater and the combat status is not peace:
 		let way be the direction from location to retreat location;
 		if noun is way:
 			try retreating instead.
 
 
 
-A person is either runner or not runner. A person is usually not runner.
+A person can be a runner. A person is usually not a runner.
 
 Last check going (this is the going and retreating in combat rule):
-	if hate is present and the player is not hidden:
+	if the player is not hidden and the combat status is not peace:
 		if player is retreater:
 			unless forced-action is true:
 				say "Deciding that discretion is the better part of valour, you bravely run away.";
@@ -144,7 +142,7 @@ Check going to:
 		take no time;
 		say "You're already here." instead.
 
-Definition: a room (called place) is safe if place is safe-1 and place is notnogo.
+Definition: a room (called place) is safe if place is safe-1 and place is not nogo.
 Definition: a room (called place) is safe-1 if the number of alive hater persons in place is 0 or place is the location or place is location-to-go. [We do not count the starting and end points.]
 
 Definition: a person (called guy) is hater if the faction of guy hates the faction of the player.
@@ -357,19 +355,22 @@ Section - Memory
 Remembering is an action out of world. Understand "memory" and "remember" and "r" as remembering.
 
 Carry out remembering:
-	if the number of unvisited placed placeable notnogo rooms is zero:
+	if the number of unvisited placed placeable not nogo rooms is zero:
 		say "All locations have been explored.";
 	otherwise:
 		say "You have not yet explored:[line break]";
-		repeat with place running through placed unvisited notnogo rooms:
+		repeat with place running through placed unvisited not nogo rooms:
 			repeat with further place running through placed visited rooms:
 				if absolute distance between place and further place is 1:
 					repeat with way running through cardinal directions:
 						if place is the room the way of further place:
 							say " - the [way] exit of [the further place] ([if further place is not the location]which lies [the road to further place] from here[otherwise]where you currently are[end if])[line break]";
 	say "[line break]You have visited the following rooms: ";
-	let m be the number of visited rooms;
-	decrease m by the number of visited tunnels;
+	let m be the number of visited rooms minus the number of visited tunnels;
+	[ Sort the rooms in alphabetical order ]
+	[let R be the list of visited rooms;
+	sort R in printed name order;
+	repeat with X running through R:]
 	repeat with X running through visited rooms:
 		unless X is a tunnel:
 			say "[X] ([the road to X])[run paragraph on]";
@@ -390,8 +391,9 @@ A person has a room called the last-seen-location. The last-seen-location of a p
 
 [Even acting fast?? TODO - Victor, is this rule right?]
 [Victor: yes, it is right: this should be an "even acting fast" rule, i.e., a rule that happens evens when we skip the every turn rules. I have re-added the even acting fast logic to ATTACK (where you stripped it away).]
+[I'm going to try "every turn", but I'm pretty sure this will lead to bugs.]
 
-Even acting fast (this is the set last-seen-location rule):
+Every turn (this is the set last-seen-location rule):
 	repeat with guy running through alive persons in the location:
 		now last-seen-location of guy is the location.
 
@@ -471,7 +473,7 @@ Carry out trophylisting:
 	otherwise:
 		say "The following creatures have been vanquished:";
 		repeat with guy running through dead seen persons:
-			say "[line break]- [italic type][no dead property][the guy][dead property][roman type] (level [if group level of the guy is not 0][group level of the guy][otherwise][level of the guy][end if])";
+			say "[line break]- [italic type][the name of the guy][roman type] (level [if group level of the guy is not 0][group level of the guy][otherwise][level of the guy][end if])";
 		say "[paragraph break]".
 
 Chapter - Commands command
@@ -707,19 +709,19 @@ Report looking:
 	let count be 0;
 	repeat with way running through direction:
 		let further place be the room the way from the location;
-		if further place is a room and further place is notnogo:
+		if further place is a room and further place is not nogo:
 			increase count by 1;
 	if count is not 0:
 		if count is 1:
 			repeat with way running through direction:
 				let further place be the room the way from the location;
-				if further place is a room and further place is notnogo:
+				if further place is a room and further place is not nogo:
 					say "An exit leads [way][if further place is visited] (to [further place])[end if].";
 		otherwise:
 			say "Exits lead ";
 			repeat with way running through direction:
 				let further place be the room the way from the location;
-				if further place is a room and further place is notnogo:
+				if further place is a room and further place is not nogo:
 					if count is greater than 1:
 						say "[way][if further place is visited] (to [further place])[end if][if count is greater than 2],[end if] ";
 						decrease count by 1;
@@ -735,10 +737,8 @@ Report looking:
 
 Chapter - Helping testers
 
-Understand "* [text]" as a mistake ("(Your [if a random chance of 1 in 20 succeeds]wise [otherwise if a random chance of 1 in 50 succeeds]incredibly useful [end if]comment has been recorded[act no time].)").
+Understand "* [text]" as a mistake ("(Your [if a random chance of 1 in 20 succeeds]wise [otherwise if a random chance of 1 in 50 succeeds]incredibly useful [end if]comment has been recorded[take no time].)").
 
-To say act no time:
-	take no time.
 
 
 
