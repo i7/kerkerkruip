@@ -68,7 +68,7 @@ Fragmentation rule (this is the hall of mirrors fragmentation rule):
 		rule succeeds.
 
 
-After printing the name of something while looking when in Hall of Mirrors:
+After printing the name of something while looking when the location is the Hall of Mirrors:
 	say "[run paragraph on]";
 	unless the player is blind:
 		say " [one of](reflected thousandfold)[or](mirrored all around you)[or](copied and copied by mirrors)[or](multiplied ad infinitum)[at random]" instead.
@@ -131,25 +131,24 @@ To say phantasmagoria show:
 		-- 6: say "several knights in plate armour struggling to reach the shores of a swamp, while the land retreats before them as if it were alive";
 		-- 7: say "shrieking ghosts being whipped into a frenzy by a necromancer thousands of years old";
 		-- 8: say "an elated thief running towards a huge pile of treasure, which then opens a maw and devours him";
-		-- 9: say "a hopeful party of sixteen year old adventurers getting slaughtered by [no dead property][a random monster][dead property]";
+		-- 9: say "a hopeful party of sixteen year old adventurers getting slaughtered by [the name of a random monster]";
 		-- 10:
 			if at least one monster is not alive:
 				let guy be a random not alive monster;
-				say "yourself fighting [no dead property][the guy][dead property]";
+				say "yourself fighting [the name of the guy]";
 			otherwise:
 				say "three bull-men getting eaten by a horrendous swamp monster".
 
-Every turn when in phantasmagoria:
-	if hate is present:
-		if a random chance of 1 in 5 succeeds:
-			let lijst be a list of persons;
-			repeat with guy running through alive persons enclosed by the location:
-				unless guy is blind:
-					if concentration of guy is greater than 0:
-						if a random number between 1 and 5 is greater than the concentration of guy:
-							add guy to lijst;
-							now concentration of guy is 0;
-			say "Suddenly, [one of]a disintegrating skeletal warrior[or]a blast of dragon's fire[or]a naked male slave screaming in fear[or]a naked female slave fleeing in tears[or]a huge fountain of fire[or]a crashing ballista bolt[or]a drowning knight, crying for his god,[or]a ghost devouring the flesh of a still living man[or]a frenzied bull elephant[or]a shrieking princess in the claws of a demon[or]an obese king carried by seven blind eunuchs[at random] appears. [unless lijst is empty]While only an image that flickers and then disappears, it startles [lijst with definite articles][otherwise]The illusions do not affect anyone[end if].".
+Every turn when the location is the phantasmagoria and the combat status is not peace:
+	if a random chance of 1 in 5 succeeds:
+		let lijst be a list of persons;
+		repeat with guy running through alive persons enclosed by the location:
+			unless guy is blind:
+				if concentration of guy is greater than 0:
+					if a random number between 1 and 5 is greater than the concentration of guy:
+						add guy to lijst;
+						now concentration of guy is 0;
+		say "Suddenly, [one of]a disintegrating skeletal warrior[or]a blast of dragon's fire[or]a naked male slave screaming in fear[or]a naked female slave fleeing in tears[or]a huge fountain of fire[or]a crashing ballista bolt[or]a drowning knight, crying for his god,[or]a ghost devouring the flesh of a still living man[or]a frenzied bull elephant[or]a shrieking princess in the claws of a demon[or]an obese king carried by seven blind eunuchs[at random] appears. [unless lijst is empty]While only an image that flickers and then disappears, it startles [lijst with definite articles][otherwise]The illusions do not affect anyone[end if].".
 
 An AI action selection rule for a person (called P) when the location is Phantasmagoria (this is the concentration is often futile in Phantasmagoria rule):
 	unless P is blind:
@@ -179,7 +178,7 @@ Falling rule (this is the Lake of Lava kills fallers rule):
 	if falling-destination is Lake of Lava:
 		if falling-guy is not ethereal:
 			if falling-guy is player:
-				end the game saying "You fell into the lava.";
+				end the story saying "You fell into the lava";
 			otherwise:
 				now the health of falling-guy is -10;
 			rule succeeds.
@@ -263,7 +262,7 @@ After an actor hitting (this is the better not dodge on bridge of doom rule):
 				unless the player is flying:
 					if player-vulnerable-to-bridge is true:
 						say "You successfully dodge the attack of [the global attacker]. Since there is no place to dodge to on the narrow bridge, your maneuver continues with an involuntary downward movement.";
-						end the game saying "You fell into the lava.";
+						end the story saying "You fell into the lava";
 						stop the action;
 					otherwise:
 						say "You successfully dodge the attack of [the global attacker]. Since there is no place to dodge to on the narrow bridge, your maneuver almost ends in a drop down into the lava -- but you manage to regain your balance almost miraculously. This is something you might not want to try again.";
@@ -336,7 +335,7 @@ The statue of Nomos is scenery in Temple of Nomos. The description of the statue
 
 Instead of attacking the statue of Nomos:
 	say "For aeons, warmth and coldness, air and water, and all the internal material tensions have wrought their slow changes on the atomic structure of the statue of Nomos. This is the exact moment when the critical limit is reached, and Nomos[apostrophe] massive marble fist breaks free and surrenders itself to the laws of gravity. Your body underneath is forced to surrender as well.";
-	end the game saying "You were crushed.". 
+	end the story saying "You were crushed". 
 
 Instead of climbing the statue of Nomos:
 	say "It is far too smooth for you to climb.".
@@ -358,7 +357,7 @@ Every turn (this is the decrease the Nomos wrath counter rule):
 			decrease Nomos wrath counter by 1;
 			if the Nomos wrath counter is 0:
 				say "From the beginning of time, all the Universe's constituent particles have traced their preordained paths, to arrive at their present constellation -- a rare constellation in which all the thermal energy of your body is suddenly transferred to the air and dissipates. Your blood freezes, and you die.";
-				end the game saying "The last thing you hear is booming but mirthless laughter.".
+				end the story saying "The last thing you hear is booming but mirthless laughter".
 
 Instead of praying in Temple of Nomos:
 	if the Nomos counter is greater than 0:
@@ -392,12 +391,11 @@ Before doing anything except attacking when Nomos bonus is true:
 			say "You plan on [current action], but find your body attacking itself instead!";
 			try the player hitting the player instead;
 			if the player is dead:
-				end the game saying "Nomos is not to be toyed with.".
+				end the story saying "Nomos is not to be toyed with".
 
 Before attacking when Nomos counter is greater than 0:
 	say "Deciding to break the command of Nomos, you plan on attacking [the noun]. However, you find yourself ";
-	let N be a random number between 1 and 5;
-	if N is:
+	if a random number between 1 and 5 is:
 		-- 1: say "doing nothing instead.";
 			try waiting instead;
 		-- 2: say "concentrating instead.";
@@ -427,26 +425,23 @@ A damage modifier rule (this is the Nomos damage bonus rule):
 		if the numbers boolean is true, say " + [n] (the law is with you)[run paragraph on]";
 		increase the attack damage by n.
 
-The alternative do not kill yourself rule is listed instead of the do not kill yourself rule in the check attacking rulebook.
-
 This is the alternative do not kill yourself rule:
 	if the noun is the player and Nomos bonus is false:
 		take no time;
 		say "You are not that desperate!" instead.
-
-The alternative do not attack friendly people rule is listed instead of the do not attack friendly people rule in the check attacking rulebook.
+The alternative do not kill yourself rule is listed instead of the do not kill yourself rule in the check attacking rulebook.
 
 This is the alternative do not attack friendly people rule:
 	if the faction of the player is the faction of the noun and Nomos bonus is false:
 		take no time;
 		say "[The noun] is your friend, not your enemy!" instead.
-
-The alternative do not attack neutral people rule is listed instead of the do not attack neutral people rule in the check attacking rulebook.		
+The alternative do not attack friendly people rule is listed instead of the do not attack friendly people rule in the check attacking rulebook.
 
 This is the alternative do not attack neutral people rule:
 	if the faction of the player does not hate the faction of the noun and Nomos bonus is false:
 		take no time;
 		say "[The noun] is not your enemy." instead.
+The alternative do not attack neutral people rule is listed instead of the do not attack neutral people rule in the check attacking rulebook.
 		
 
 
@@ -482,7 +477,7 @@ Instead of climbing the statue of Aite:
 	say "You cut yourself badly as soon as you touch the statue.";
 	decrease the health of the player by 3;
 	if the health of the player is less than 1:
-		end the game saying "You sacrificed yourself to Aite.".
+		end the story saying "You sacrificed yourself to Aite".
 
 Instead of praying in Temple of Aite (this is the Aite prayer rule):
 	do the Aite prayer.
@@ -530,14 +525,14 @@ To have Aite intervene:
 					now the player is not hidden;
 					say "Your cry of pain reveals your presence.";
 			if health of the player is less than 1:
-				end the game saying "Aite is a dangerous mistress.";
+				end the story saying "Aite is a dangerous mistress";
 		-- 2: 
 			say "A huge [one of]sword[or]spear[or]pike[at random] bursts out of the ground, impaling you for [bold type][X] damage[roman type]!";
 			decrease the health of the player by X;
 			unless the player is dead:
 				let the player lose concentration;
 			if health of the player is less than 1:
-				end the game saying "Aite is a dangerous mistress.";
+				end the story saying "Aite is a dangerous mistress";
 		-- 3:
 			if the concentration of the guy is less than 3:
 				say "[The guy] suddenly looks [bold type]highly concentrated[roman type], as if divinely inspired.";
@@ -676,7 +671,7 @@ Every turn (this is the decrease the Isatzo time-out each turn rule):
 			say "Isatzo is available for prayer again.".
 	
 Instead of praying in the Temple of Isatzo:
-	if not hate is present:
+	if the combat status is peace:
 		take no time;
 		say "There is nothing for Isatzo to balance here -- you must be engaged in a fight.";
 	otherwise:
@@ -1210,10 +1205,10 @@ Instead of examining the fascinating drawing:
 	otherwise:
 		say "The artist has skillfully drawn a battle scene between you and Malygris, where you are evidently being crushed by the mighty wizard. Large portions of the drawing have been wiped out.".
 
-After deciding the scope of the player while in Drawing Room:
+[After deciding the scope of the player while the location is the Drawing Room:
 	repeat with guy running through alive not off-stage persons:
 		unless guy is Nameless Horror:   [TODO!!! This is an ugly hack.]
-			place guy in scope.
+			place guy in scope.]
 
 Adjusted scope for the drawing room is a truth state that varies.
 
@@ -1222,8 +1217,7 @@ After deciding the scope of the player while adjusted scope for the drawing room
 		unless guy is Nameless Horror:   [TODO!!! This is an ugly hack.]
 			place guy in scope.
 
-Before running the parser:
-	if the main actor is the player and the player is in the drawing room:
+Before running the parser when the location is the drawing room:
 		now adjusted scope for the drawing room is true.
 
 After running the parser:
@@ -1265,7 +1259,7 @@ Instead of smelling in the Quartering Room:
 	say "The stench of rotting bodies overwhelms everything else.".
 
 The large pile of body parts is scenery in the Quartering Room.
-Understand "human" and "non-human" and "part" and "legs" and "arms" and "heads" and "intestines" as the large pile of body parts.
+Understand "human" and "non-human" and "part" and "legs" and "arms" and "heads" and "intestines" and "bodies" as the large pile of body parts.
 
 Description of the large pile of body parts is "A gruesome collection of legs, arms, heads, intestines, and all other parts of the human body. If you really wanted to, you could search it for treasures.".
 
@@ -1474,6 +1468,110 @@ The difficulty level of Lair of the Imp is 2.
 Dungeon interest rule (this is the add imp to its lair rule):
 	if Lair of the Imp is placed:
 		move imp to Lair of the Imp.
+
+
+Chapter - The maze
+
+The Maze is a room. "You are in a maze of twisty little passages, all alike. Exits lead in all directions."
+
+The maze is not connectable.
+The maze is not connection-inviting.
+The maze is not placeable.
+The maze is not habitable.
+The maze is not treasurable.
+The maze is not teleportable.
+The maze is not extra-accepting.
+The maze is vp-agnostic.
+The maze is magical.
+
+The maze-waiting-room is a room. "BUG: the player should never end up here."
+
+The maze-waiting-room is not connectable.
+The maze-waiting-room is not connection-inviting.
+The maze-waiting-room is not placeable.
+The maze-waiting-room is not habitable.
+The maze-waiting-room is not treasurable.
+The maze-waiting-room is not teleportable.
+The maze-waiting-room is not extra-accepting.
+The maze-waiting-room is vp-agnostic.
+The maze-waiting-room is magical.
+
+Maze-sound is a direction that varies.
+
+Instead of going in the maze:
+	do the maze move.		
+
+To do the maze move:
+	now concentration of the player is 0;
+	repeat with item running through things in the maze:
+		unless item is the player:
+			unless item is a person:
+				remove item from play;
+			otherwise:
+				move item to maze-waiting-room;
+	say "You move through the tunnels, quickly losing all sense of direction.";
+	if noun is maze-sound:
+		let guy be a random person in maze-waiting-room;
+		move guy to maze;
+		now concentration of guy is 0;
+	now maze-sound is northwest;
+	update the combat status;
+	if combat status is peace:
+		if a random chance of 1 in 2 succeeds:
+			now maze-sound is a random cardinal direction;
+			say "[line break]A sound comes from somewhere [bold type][maze-sound][roman type] from here.";
+	try looking.
+
+Instead of digging in the maze:
+	take no time;
+	say "The magical walls resist your efforts at digging.".
+
+A teleport impossible rule (this is the no teleportation in maze rule):
+	if the location of the test subject is the maze:
+		rule succeeds.
+
+Section - Getting mazed
+
+Pre-maze-location is a room that varies.
+
+To maze (the first guy - a person) and (the second guy - a person):
+	unless first guy is in the maze:
+		if first guy opposes second guy and first guy is alive and second guy is alive: [if they're not enemies, we do nothing]
+			if second guy is the player:
+				now second guy is first guy;
+				now first guy is the player; [we switch them, so the player comes first]
+			if first guy is the player:
+				now pre-maze-location is location of the player;
+				say "You suddenly find yourself transported to...";
+				move the player to the maze;
+				move second guy to maze-waiting-room;
+				now maze-sound is northwest; [you cannot go nw]
+			otherwise: [when the player is not involved, we stimulate a combat]
+				let n be level of first guy plus level of second guy;
+				increase n by 4;
+				let m be level of first guy;
+				increase m by 2;
+				while first guy is alive and second guy is alive:
+					if a random chance of m in n succeeds:  [chance is: LVL1 + 2 / (LVL1 + 2 + LVL2 + 2); creatures of the same level: 1/2; level 4 vs level 3: 6/11; level 4 vs level 2: 6/10; level 4 vs level 0: 6/8.]
+						decrease health of second guy by 2;
+					otherwise:
+						decrease health of first guy by 2;
+				if location of first guy is location of the player:
+					say "[The first guy] and [the second guy] guy briefly flicker in and out of existence. When they become solid once more, [bold type][no dead property][if first guy is not alive][the first guy][otherwise][the second guy][end if][dead property] has been killed[roman type]!"
+
+
+Section - Getting out of the maze
+
+
+Every turn when in the maze:
+	update the combat status;
+	if no person is in the maze-waiting-room and combat status is peace:
+		say "You are [bold type]transported back[roman type] from the maze.";
+		repeat with item running through things in the maze:
+			unless item is player:
+				move item to pre-maze-location;
+		move player to pre-maze-location.
+
 
 
 [Elemental Plane: see Kerkerkruip Events and Specials]
