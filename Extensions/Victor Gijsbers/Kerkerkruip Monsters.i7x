@@ -1362,7 +1362,8 @@ Section - Getting stronger
 Last killing rule (this is the demon of rage gets stronger rule):
 	if demon of rage is not off-stage:
 		if killed-guy is not the demon of rage and killed-guy is not the player:
-			do the demon of rage power-up.
+			if x-coordinate of the location of killed-guy is not 100: [these rooms, such as the maze, are not part of the dungeon]
+				do the demon of rage power-up.
 
 To do the demon of rage power-up:
 	increase demon-of-rage-number by 1;
@@ -2135,9 +2136,97 @@ Status skill rule (this is the tentacle power status skill rule):
 
 
 
+Chapter - Level 3 - Minotaur
+
+The minotaur is a monster. "A huge minotaur[if the minotaur carries the minotaur's axe], carrying a huge axe,[end if] stands ready for combat."
+
+The description of the minotaur is "Half man, half bull, this fearsome creature is associated by legends with two things: axes and mazes.".
+
+The level of the minotaur is 3.
+
+The health of minotaur is 35.
+The melee of minotaur is 4.
+The defence of minotaur is 10.
+The dexterity of minotaur is 6.
+The perception of minotaur is 5. 
+The willpower of minotaur is 8.
+
+When play begins:
+	let X be a random natural weapon part of minotaur;
+	now printed name of X is "minotaur's fist";
+	now the damage die of X is 6.
+
+Minotaur is a weapon user.
+
+Section - Minotaur's axe
+
+The minotaur's axe is an axe. The description of the minotaur's axe is "A huge axe covered in mystic runes.".
+The minotaur carries the minotaur's axe. The minotaur's axe is readied.
+
+The damage die of the minotaur's axe is 6.
+The weapon attack bonus of the minotaur's axe is -3.
+The weapon damage bonus of the minotaur's axe is 3.
+The dodgability of the minotaur's axe is 3.
+The passive parry max of the minotaur's axe is 0.
+The active parry max of the minotaur's axe is 1.
+
+An attack modifier rule when the location of the global attacker is the maze and the global attacker weapon is the minotaur's axe:
+	say " + 3 (minotaur's axe stronger in the maze)[run paragraph on]";
+	increase the attack strength by 3.
+	
+The special weapon info of the minotaur's axe is "; when damage is dealt, casts attacker and defender in a magical maze[run paragraph on]".
+
+Last aftereffects rule (this is the minotaur's axe maze rule):
+	if the global attacker weapon is the minotaur's axe:
+		if the attack damage is greater than 0:
+			if the location of the player is not the maze:
+				maze the actor and the noun.
+
+Section - Minotaur prose
+
+Report an actor hitting the dead minotaur:
+	say "Moaning plaintively, the minotaur expires.";
+	rule succeeds.
+
+Report the minotaur hitting a dead pc:
+	say "Unlike Theseus, you could not best the minotaur.";
+	rule succeeds.
+
+Report the minotaur attacking:
+	say "With a fearsome bellow, the minotaur swings at [the noun].";
+	rule succeeds.
+
+Report the minotaur dodging:
+	say "The minotaur lumbers aside.";
+	rule succeeds.
 
 
+Section - Power
 
+The power of the minotaur is a power. The minotaur grants power of the minotaur.
+The power level of power of the minotaur is 3.
+The command text of power of the minotaur is "axe proficiency".
+
+Absorbing power of minotaur:
+	increase melee of the player by 3;
+	increase defence of player by 2;
+	increase permanent health of the player by 17;
+	say "As the minotaur dies, you feel its soul absorbed into your own body. ([bold type]Power of the minotaur[roman type]: +3 attack,  +2 defence, +10 health; 10% chance of dealing 10 bonus damage when attacking with an axe.)[paragraph break]".
+
+A damage modifier rule (this is the power of the minotaur damage bonus rule):
+	if the power of the minotaur is granted and the actor is the player and the global attacker weapon is an axe:
+		if a random chance of 1 in 10 succeeds:
+			if the numbers boolean is true, say " + 10 (axe proficiency)[run paragraph on]";
+			increase the attack damage by 10.
+
+Repelling power of minotaur:
+	decrease melee of the player by 3;
+	decrease defence of player by 2;
+	decrease permanent health of the player by 17.
+
+Status skill rule (this is the minotaur power status skill rule):
+	if power of rage is granted:
+		say "Your [bold type]axe proficiency[roman type] gives you a 10% chance of dealing 10 bonus damage when attacking with an axe. [italic type](Level 3)[roman type][line break][run paragraph on]".
 
 
 

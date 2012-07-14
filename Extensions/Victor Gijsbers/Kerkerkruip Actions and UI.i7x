@@ -391,8 +391,9 @@ A person has a room called the last-seen-location. The last-seen-location of a p
 
 [Even acting fast?? TODO - Victor, is this rule right?]
 [Victor: yes, it is right: this should be an "even acting fast" rule, i.e., a rule that happens evens when we skip the every turn rules. I have re-added the even acting fast logic to ATTACK (where you stripped it away).]
+[I'm going to try "every turn", but I'm pretty sure this will lead to bugs.]
 
-Even acting fast (this is the set last-seen-location rule):
+Every turn (this is the set last-seen-location rule):
 	repeat with guy running through alive persons in the location:
 		now last-seen-location of guy is the location.
 

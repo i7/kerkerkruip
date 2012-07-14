@@ -1637,5 +1637,3 @@ Carry out turning vampire:
 
 
 Kerkerkruip Systems ends here.
-
-

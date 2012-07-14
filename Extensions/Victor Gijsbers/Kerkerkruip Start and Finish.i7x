@@ -622,4 +622,3 @@ Carry out achievemenuing:
 	carry out the displaying activity;
 	clear the screen;
 	try looking;
-	stop the action.

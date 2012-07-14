@@ -1470,6 +1470,110 @@ Dungeon interest rule (this is the add imp to its lair rule):
 		move imp to Lair of the Imp.
 
 
+Chapter - The maze
+
+The Maze is a room. "You are in a maze of twisty little passages, all alike. Exits lead in all directions."
+
+The maze is not connectable.
+The maze is not connection-inviting.
+The maze is not placeable.
+The maze is not habitable.
+The maze is not treasurable.
+The maze is not teleportable.
+The maze is not extra-accepting.
+The maze is vp-agnostic.
+The maze is magical.
+
+The maze-waiting-room is a room. "BUG: the player should never end up here."
+
+The maze-waiting-room is not connectable.
+The maze-waiting-room is not connection-inviting.
+The maze-waiting-room is not placeable.
+The maze-waiting-room is not habitable.
+The maze-waiting-room is not treasurable.
+The maze-waiting-room is not teleportable.
+The maze-waiting-room is not extra-accepting.
+The maze-waiting-room is vp-agnostic.
+The maze-waiting-room is magical.
+
+Maze-sound is a direction that varies.
+
+Instead of going in the maze:
+	do the maze move.		
+
+To do the maze move:
+	now concentration of the player is 0;
+	repeat with item running through things in the maze:
+		unless item is the player:
+			unless item is a person:
+				remove item from play;
+			otherwise:
+				move item to maze-waiting-room;
+	say "You move through the tunnels, quickly losing all sense of direction.";
+	if noun is maze-sound:
+		let guy be a random person in maze-waiting-room;
+		move guy to maze;
+		now concentration of guy is 0;
+	now maze-sound is northwest;
+	update the combat status;
+	if combat status is peace:
+		if a random chance of 1 in 2 succeeds:
+			now maze-sound is a random cardinal direction;
+			say "[line break]A sound comes from somewhere [bold type][maze-sound][roman type] from here.";
+	try looking.
+
+Instead of digging in the maze:
+	take no time;
+	say "The magical walls resist your efforts at digging.".
+
+A teleport impossible rule (this is the no teleportation in maze rule):
+	if the location of the test subject is the maze:
+		rule succeeds.
+
+Section - Getting mazed
+
+Pre-maze-location is a room that varies.
+
+To maze (the first guy - a person) and (the second guy - a person):
+	unless first guy is in the maze:
+		if first guy opposes second guy and first guy is alive and second guy is alive: [if they're not enemies, we do nothing]
+			if second guy is the player:
+				now second guy is first guy;
+				now first guy is the player; [we switch them, so the player comes first]
+			if first guy is the player:
+				now pre-maze-location is location of the player;
+				say "You suddenly find yourself transported to...";
+				move the player to the maze;
+				move second guy to maze-waiting-room;
+				now maze-sound is northwest; [you cannot go nw]
+			otherwise: [when the player is not involved, we stimulate a combat]
+				let n be level of first guy plus level of second guy;
+				increase n by 4;
+				let m be level of first guy;
+				increase m by 2;
+				while first guy is alive and second guy is alive:
+					if a random chance of m in n succeeds:  [chance is: LVL1 + 2 / (LVL1 + 2 + LVL2 + 2); creatures of the same level: 1/2; level 4 vs level 3: 6/11; level 4 vs level 2: 6/10; level 4 vs level 0: 6/8.]
+						decrease health of second guy by 2;
+					otherwise:
+						decrease health of first guy by 2;
+				if location of first guy is location of the player:
+					say "[The first guy] and [the second guy] guy briefly flicker in and out of existence. When they become solid once more, [bold type][no dead property][if first guy is not alive][the first guy][otherwise][the second guy][end if][dead property] has been killed[roman type]!"
+
+
+Section - Getting out of the maze
+
+
+Every turn when in the maze:
+	update the combat status;
+	if no person is in the maze-waiting-room and combat status is peace:
+		say "You are [bold type]transported back[roman type] from the maze.";
+		repeat with item running through things in the maze:
+			unless item is player:
+				move item to pre-maze-location;
+		move player to pre-maze-location.
+
+
+
 [Elemental Plane: see Kerkerkruip Events and Specials]
 
 Kerkerkruip Locations ends here.
