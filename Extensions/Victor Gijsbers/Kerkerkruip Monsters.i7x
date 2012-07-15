@@ -129,7 +129,7 @@ Carry out piercing:
 	if player is not alive:
 		say "With a final effort, you manage to form part of your body into a dagger -- but you succumb from the exertion.";
 		end the story saying "You committed suicide";
-	let n be 8;
+	let n be 10;
 	increase n by greatest power of the player;
 	increase n by greatest power of the player;	
 	say "You transform part of your own flesh into a magical dagger, which then speeds towards [the noun] of its own accord. [italic type][run paragraph on]";
@@ -527,7 +527,7 @@ A physical damage reduction rule (this is the scaling damage reduction rule):
 
 Scaling is an action applying to one number. Understand "scale [a number]" and "scales [a number]" as scaling.
 
-Understand "scales" and "scale" as a mistake ("[take no time][italic type]You need to supply the level of scales you wish to attain by typing, for example, 'scales 2'. This would give you 2 damage reduction and would cost you 2 health. The maximum number you can choose is equal to the highest level monster you have defeated, which is currently [greatest power of the player][roman type].").
+Understand "scales" and "scale" as a mistake ("[take no time][italic type]You need to supply the level of scales you wish to attain by typing, for example, 'scales 2'. This would give you 2 damage reduction and would cost you between 0 and 2 health. The maximum number you can choose is equal to the highest level monster you have defeated, which is currently [greatest power of the player][roman type].").
 
 Check scaling:
 	if power of the armadillo is not granted:
@@ -546,9 +546,9 @@ Check scaling:
 
 Carry out scaling:
 	now the scales number is the number understood;
-	let n be a random number between 1 and the number understood;
+	let n be a random number between 0 and the number understood;
 	decrease the health of the player by n;
-	say "Hard scales appear all over your body; the power drains [n] of your health.";
+	say "Hard scales appear all over your body[if n is greater than 0]; the power drains [n] of your health[end if].";
 	if the player is dead:
 		end the story saying "That transformation was more than your body could handle.".
 
@@ -564,7 +564,7 @@ Status rule (this is the scales status rule):
 
 Status skill rule (this is the armadillo status skill rule):
 	if the power of armadillo is granted:
-		say "You have the [bold type]scales[roman type] power, which covers you in hard scales that reduce all damage done to you. Using this power costs you some health, and it expires when you attack. [italic type](Level 1)[roman type][line break][run paragraph on]".
+		say "You have the [bold type]scales[roman type] power, which covers you in hard scales that reduce all damage done to you. Using this power may cost you some health, and it expires when you attack. [italic type](Level 1)[roman type][line break][run paragraph on]".
 
 An AI action selection rule for a person (called P) (this is the concentrate more if the player has scales rule):
 	if the chosen target is the player:
@@ -1462,7 +1462,7 @@ Repelling power of rage:
 
 Status skill rule (this is the rage power status skill rule):
 	if power of rage is granted:
-		say "You can [bold type]howl[roman type] in rage. Your melee and damage both increase by 3 for the next attack, but your defence permanently decreases by 1. [italic type](Level 2)[roman type][line break][run paragraph on]".
+		say "You can [bold type]howl[roman type] in rage. Your melee and damage both increase by 4 for the next attack, but your defence permanently decreases by 1. [italic type](Level 2)[roman type][line break][run paragraph on]".
 
 Section - Howling
 
@@ -1482,20 +1482,20 @@ Carry out howling:
 			
 An attack modifier rule (this is the howl attack bonus rule rule):
 	if the global attacker is at-howl:
-		if the numbers boolean is true, say " + 3 (howling)[run paragraph on]";
-		increase the attack strength by 3.	
+		if the numbers boolean is true, say " + 4 (howling)[run paragraph on]";
+		increase the attack strength by 4.	
 
 A damage modifier rule (this is the howl damage bonus rule):
 	if the global attacker is at-howl:
-		if the numbers boolean is true, say " + 3 (howling)[run paragraph on]";
-		increase the attack damage by 3.
+		if the numbers boolean is true, say " + 4 (howling)[run paragraph on]";
+		increase the attack damage by 4.
 			
 Aftereffects rule (this is the take away howling rule):
 	now the global attacker is not at-howl.
 
 Status rule (this is the howling status rule):
 	if the player is at-howl:
-		say "You are [bold type]howling[roman type]: +2 to attack, +3 to damage.[line break][run paragraph on]".
+		say "You are [bold type]howling[roman type]: +4 to attack, +4 to damage.[line break][run paragraph on]".
 
 
 
@@ -2115,7 +2115,7 @@ Check confusing:
 
 Carry out confusing:
 	say "A tentacle suddenly leaps out of your body and shakes [the main actor], aiming to confuse and confound.[italic type] ";
-	let n be a random number between 7 and 12;
+	let n be a random number between 8 and 12;
 	if a random chance of 1 in 7 succeeds:
 		increase n by 3;	
 	if a random chance of 1 in 10 succeeds:
@@ -2592,7 +2592,7 @@ Check an actor attacking when the thorny bushes are in the location (this is the
 						if the actor is dead:
 							if the actor is the player:
 								say "Your weakened body could not handle this!";
-								end the story saying "A thorn kills a man, not by force, but by pricking often";
+								end the story saying "A thorn kills a man, not by force, but by pricking often.";
 								rule fails;
 							otherwise:
 								say "[The name of the actor] is killed by the thorns!";
