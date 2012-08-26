@@ -1337,6 +1337,7 @@ The demon-of-rage-number is a number that varies. The demon-of-rage-number is 0.
 Understand "cries" and "inarticulate" as the demon of rage.
 
 The level of the demon of rage is 2.
+Difficulty level of the demon of rage is 2.
 
 The description of the demon of rage is "An amorphous swirl of red and black light, this demonic creature is the spirit of rage incarnate.".
 Instead of listening to the demon of rage:
@@ -2146,6 +2147,7 @@ The minotaur is a monster. "A huge minotaur[if the minotaur carries the minotaur
 The description of the minotaur is "Half man, half bull, this fearsome creature is associated by legends with two things: axes and mazes.".
 
 The level of the minotaur is 3.
+Difficulty level of the minotaur is 2.
 
 The health of minotaur is 35.
 The melee of minotaur is 4.
