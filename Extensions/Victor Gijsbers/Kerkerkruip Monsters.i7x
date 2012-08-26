@@ -202,20 +202,21 @@ Aftereffects rule (this is the blood ape grows in size when hit rule):
 		otherwise:
 			say "Sensing perhaps that it cannot grow further in its current confines, the ape does not lick of the blood.".
 			
-A damage modifier rule when the global attacker is the blood ape (this is the blood ape size damage bonus rule):
-	if the size of the blood ape is:
-		-- small:
-			if the numbers boolean is true, say " - 1 (small size)[run paragraph on]";
-			decrease the attack damage by 1;
-		-- large:
-			if the numbers boolean is true, say " + 2 (large size)[run paragraph on]";
-			increase the attack damage by 2;
-		-- huge:
-			if the numbers boolean is true, say " + 4 (huge size)[run paragraph on]";
-			increase the attack damage by 4;
-		-- gargantuan:
-			if the numbers boolean is true, say " + 8 (gargantuan size)[run paragraph on]";
-			increase the attack damage by 8;
+A damage modifier rule (this is the blood ape size damage bonus rule):
+	if the global attacker is the blood ape:
+		if the size of the blood ape is:
+			-- small:
+				if the numbers boolean is true, say " - 1 (small size)[run paragraph on]";
+				decrease the attack damage by 1;
+			-- large:
+				if the numbers boolean is true, say " + 2 (large size)[run paragraph on]";
+				increase the attack damage by 2;
+			-- huge:
+				if the numbers boolean is true, say " + 4 (huge size)[run paragraph on]";
+				increase the attack damage by 4;
+			-- gargantuan:
+				if the numbers boolean is true, say " + 8 (gargantuan size)[run paragraph on]";
+				increase the attack damage by 8;
 			
 An attack modifier rule (this is the blood ape size attack bonus rule):
 	if the global defender is the blood ape and the global defender is at dodge:
@@ -345,9 +346,10 @@ The defence of the ravenous armadillo is 5.
 The dexterity of the ravenous armadillo is 3.
 The perception of the ravenous armadillo is 4. 
 
-A damage modifier rule when the global defender is the ravenous armadillo (this is the ravenous armadillo takes less damage rule):
-	say " - 3 (tough scales)[run paragraph on]";
-	decrease the attack damage by 3.
+A damage modifier rule (this is the ravenous armadillo takes less damage rule):
+	if the global defender is the ravenous armadillo:
+		say " - 3 (tough scales)[run paragraph on]";
+		decrease the attack damage by 3.
 
 The intrinsic heat resistance of the ravenous armadillo is 3.
 
@@ -829,8 +831,8 @@ Check an actor attacking the chain golem (this is the attack a spinning chain go
 			otherwise:
 				say "[paragraph break]".
 
-A damage modifier rule when the global attacker is the chain golem (this is the chain golem damage depends on concentration rule):
-	if the concentration of the chain golem is not 0:
+A damage modifier rule (this is the chain golem damage depends on concentration rule):
+	if the global attacker is the chain golem and the concentration of the chain golem is not 0:
 		let n be the concentration of the chain golem times 2;
 		if the numbers boolean is true, say " + [n] (golem spinning)[run paragraph on]";
 		increase the attack damage by n.	
@@ -1036,14 +1038,14 @@ A contact rule when the global attacker is the jumping bomb (this is the jumping
 		end the story saying "You exploded";
 		rule fails.
 
-An attack modifier rule when the global attacker is the jumping bomb (this is the jumping bomb concentration attack modifier rule):
-	if the concentration of the jumping bomb is greater than 0:
+An attack modifier rule (this is the jumping bomb concentration attack modifier rule):
+	if the global attacker is the jumping bomb and the concentration of the jumping bomb is greater than 0:
 		let n be 2 times the concentration of the jumping bomb;
 		say " - ", n, " (lower concentration bonus for jumping bomb)[run paragraph on]";
 		decrease the attack strength by n.
 			
-An attack modifier rule when the global defender is the jumping bomb (this is the jumping bomb concentration defence modifier rule):
-	if the concentration of the jumping bomb is greater than 0:
+An attack modifier rule (this is the jumping bomb concentration defence modifier rule):
+	if the global defender is the jumping bomb and the concentration of the jumping bomb is greater than 0:
 		let n be the concentration of the jumping bomb;
 		say " - ", n, " (speed of the jumping bomb)[run paragraph on]";
 		decrease the attack strength by n.	
@@ -1439,7 +1441,7 @@ Absorbing power of rage:
 	say "As the demon of rage dies, your heart is filled with anger. ([bold type]Power of rage[roman type]: +2 attack, +10 health; cannot retreat; you can [italic type]howl[roman type] to improve your next attack but permanently decrease your defence.)[paragraph break]".
 
 Last check retreating (this is the do not retreat when power of rage rule):
-	if hate is present and power of rage is granted:
+	if the combat status is combat and power of rage is granted:
 		let Y be the player;
 		repeat with X running through persons in the location:
 			if the faction of X hates the faction of the player:
@@ -1448,7 +1450,7 @@ Last check retreating (this is the do not retreat when power of rage rule):
 		say "And allow [the Y] to live? Never!" instead.
 
 Last check going (this is the do not go in combat when power of rage rule):
-	if hate is present and power of rage is granted:
+	if the combat status is combat and power of rage is granted:
 		let Y be the player;
 		repeat with X running through persons in the location:
 			if the faction of X hates the faction of the player:
@@ -2032,9 +2034,10 @@ Carry out the giant tentacle tentacle-shaking:
 
 A person can be tentacle-confused. A person is usually not tentacle-confused.
 
-An attack modifier rule when the global attacker is tentacle-confused (this is the tentacle-confused attack modifier rule):
-	say " - 2 (confused)[run paragraph on]";
-	decrease the attack strength by 2.	
+An attack modifier rule (this is the tentacle-confused attack modifier rule):
+	if the global attacker is tentacle-confused:
+		say " - 2 (confused)[run paragraph on]";
+		decrease the attack strength by 2.	
 
 Chance to win rule when the global attacker is tentacle-confused (this is the CTW confusion penalty rule):
 	decrease the chance-to-win by 2.
@@ -2170,9 +2173,10 @@ The dodgability of the minotaur's axe is 3.
 The passive parry max of the minotaur's axe is 0.
 The active parry max of the minotaur's axe is 1.
 
-An attack modifier rule when the location of the global attacker is the maze and the global attacker weapon is the minotaur's axe:
-	say " + 3 (minotaur's axe stronger in the maze)[run paragraph on]";
-	increase the attack strength by 3.
+An attack modifier rule:
+	if the location of the global attacker is the maze and the global attacker weapon is the minotaur's axe:
+		say " + 3 (minotaur's axe stronger in the maze)[run paragraph on]";
+		increase the attack strength by 3.
 	
 The special weapon info of the minotaur's axe is "; when damage is dealt, casts attacker and defender in a magical maze[run paragraph on]".
 
@@ -2461,12 +2465,13 @@ An attack modifier rule (this is the do not parry with metal weapons against Bod
 				say " + 5 ([global defender weapon] acts as a lightning rod)[run paragraph on]";
 			increase the attack strength by 5.
 
-A damage modifier rule when the global attacker is Bodmall (this is the iron or silver suit acts as a faraday cage rule):
-	if the global defender wears an iron suit or the global defender wears a silver suit:
-		let X be a random suit worn by the global defender;
-		if the numbers boolean is true:
-			say " - 3 ([the X] acts as a Faraday cage)[run paragraph on]";
-		decrease the attack damage by 3.
+A damage modifier rule (this is the iron or silver suit acts as a faraday cage rule):
+	if the global attacker is Bodmall:
+		if the global defender wears an iron suit or the global defender wears a silver suit:
+			let X be a random suit worn by the global defender;
+			if the numbers boolean is true:
+				say " - 3 ([the X] acts as a Faraday cage)[run paragraph on]";
+			decrease the attack damage by 3.
 
 
 Section - Bodmall power - Raise fog
@@ -3056,23 +3061,25 @@ An AI action selection rule for the rotting corpse (this is the rotting corpse w
 		choose row with an Option of the action of P concentrating in the Table of AI Action Options;
 		decrease the Action Weight entry by 1000.
 
-An attack modifier rule when the global attacker is the rotting corpse (this is the rotting corpse attack modifier rule):
-	let m be arms of the rotting corpse + legs of the rotting corpse;
-	let m be 4 minus m;
-	unless m is 0:
-		if the numbers boolean is true, say " - [m] (missing limbs)[run paragraph on]";
-		decrease the attack strength by m.
+An attack modifier rule (this is the rotting corpse attack modifier rule):
+	if the global attacker is the rotting corpse:
+		let m be arms of the rotting corpse + legs of the rotting corpse;
+		let m be 4 minus m;
+		unless m is 0:
+			if the numbers boolean is true, say " - [m] (missing limbs)[run paragraph on]";
+			decrease the attack strength by m.
 
-An attack modifier rule when the global defender is the rotting corpse (this is the rotting corpse defense modifier rule):
-	if legs of the rotting corpse is 1:
-		say " + 2 (corpse missing a leg)[run paragraph on]";
-		increase the attack strength by 2;
-	if legs of the rotting corpse is 0:
-		say " + 4 (corpse missing both legs)[run paragraph on]";
-		increase the attack strength by 4.
+An attack modifier rule (this is the rotting corpse defense modifier rule):
+	if the global defender is the rotting corpse:
+		if legs of the rotting corpse is 1:
+			say " + 2 (corpse missing a leg)[run paragraph on]";
+			increase the attack strength by 2;
+		if legs of the rotting corpse is 0:
+			say " + 4 (corpse missing both legs)[run paragraph on]";
+			increase the attack strength by 4.
 
-A damage multiplier rule when the global attacker is the rotting corpse (this is the limbless rotting corpse can't attack rule):
-	if limbs of the rotting corpse is 0:
+A damage multiplier rule (this is the limbless rotting corpse can't attack rule):
+	if the global attacker is the rotting corpse and limbs of the rotting corpse is 0:
 		say " - 100% (no means of attack)[run paragraph on]";
 		now the attack damage is 0.
 

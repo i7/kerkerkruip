@@ -192,9 +192,11 @@ Section - Inherent damage modifier
 
 A person has a number called the inherent damage modifier. The inherent damage modifier of a person is usually 0.
 
-A damage modifier rule when the inherent damage modifier of the global attacker is not 0 (this is the inherent damage modifier rule):
-	say " + ", inherent damage modifier of the global attacker, " (inherent bonus)[run paragraph on]";
-	increase the attack damage by the inherent damage modifier of the global attacker;
+[ TODO: Should this be a standard part of ATTACK? ]
+A damage modifier rule (this is the inherent damage modifier rule):
+	if the inherent damage modifier of the global attacker is not 0:
+		say " + ", inherent damage modifier of the global attacker, " (inherent bonus)[run paragraph on]";
+		increase the attack damage by the inherent damage modifier of the global attacker;
 
 
 Section - Weapon descriptions

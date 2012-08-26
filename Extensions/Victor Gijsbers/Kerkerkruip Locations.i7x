@@ -1557,13 +1557,13 @@ To maze (the first guy - a person) and (the second guy - a person):
 					otherwise:
 						decrease health of first guy by 2;
 				if location of first guy is location of the player:
-					say "[The first guy] and [the second guy] guy briefly flicker in and out of existence. When they become solid once more, [bold type][no dead property][if first guy is not alive][the first guy][otherwise][the second guy][end if][dead property] has been killed[roman type]!"
+					say "[The name of the first guy] and [the name of the second guy] guy briefly flicker in and out of existence. When they become solid once more, [bold type][if first guy is not alive][the name of the first guy][otherwise][the name of the second guy][end if] has been killed[roman type]!"
 
 
 Section - Getting out of the maze
 
 
-Every turn when in the maze:
+Every turn when the location is the maze:
 	update the combat status;
 	if no person is in the maze-waiting-room and combat status is peace:
 		say "You are [bold type]transported back[roman type] from the maze.";

@@ -827,15 +827,14 @@ Last when play begins:
 
 Section - Silver
 
-A damage modifier rule when the global attacker weapon is silver (this is the silver damage rule):
-	if the global defender is not undead:
-		if the numbers boolean is true:
+A damage modifier rule (this is the silver damage rule):
+	if the global attacker weapon is silver:
+		if the global defender is not undead:
 			say " - 2 (silver weapon)[run paragraph on]";
-		decrease the attack damage by 2;
-	otherwise:
-		if the numbers boolean is true:
+			decrease the attack damage by 2;
+		otherwise:
 			say " + 4 (silver weapon)[run paragraph on]";
-		increase the attack damage by 4;
+			increase the attack damage by 4;
 
 
 
@@ -848,9 +847,10 @@ Chapter - Doing risky things
 
 A person can be risky. A person is usually not risky.
 
-An attack modifier rule when the global defender is risky (this is the defender is doing something risky rule):
-	say " + 6 (defender taking risky action)[run paragraph on]";
-	increase the attack strength by 6.
+An attack modifier rule (this is the defender is doing something risky rule):
+	if the global defender is risky:
+		say " + 6 (defender taking risky action)[run paragraph on]";
+		increase the attack strength by 6.
 
 Chance to win rule when the global defender is risky (this is the CTW risky bonus rule):
 	increase the chance-to-win by 6.
@@ -978,8 +978,8 @@ Every turn (this is the heat destroys items rule):
 
 Section - Weapons
 
-A damage modifier rule when the global attacker weapon is hot (this is the heat increases damage rule):
-	if the global attacker weapon is not ranged:
+A damage modifier rule (this is the heat increases damage rule):
+	if the global attacker weapon is hot and the global attacker weapon is not ranged:
 		let n be heat strength of the global attacker weapon;
 		decrease n by heat resistance of global defender;
 		if n greater than 0:
@@ -1140,19 +1140,22 @@ Last damage modifier rule:
 
 Section - Weapon penalty
 
-A damage modifier rule when the global attacker weapon is rusted (this is the rust decreases damage rule):
-	say " - 2 (rust)[run paragraph on]";
-	decrease the attack damage by 2.
+A damage modifier rule (this is the rust decreases damage rule):
+	if the global attacker weapon is rusted:
+		say " - 2 (rust)[run paragraph on]";
+		decrease the attack damage by 2.
 
 Section - Rusted monster penalty
 
-A damage modifier rule when the global attacker is rusted (this is the rusted monster decreases damage rule):
-	say " - 2 (rust)[run paragraph on]";
-	decrease the attack damage by 2.
+A damage modifier rule (this is the rusted monster decreases damage rule):
+	if the global attacker is rusted:
+		say " - 2 (rust)[run paragraph on]";
+		decrease the attack damage by 2.
 
-An attack modifier rule when the global attacker is rusted (this is the rusted monster decreases attack rule):
-	say " - 2 (rust)[run paragraph on]";
-	decrease the attack strength by 2.
+An attack modifier rule (this is the rusted monster decreases attack rule):
+	if the global attacker is rusted:
+		say " - 2 (rust)[run paragraph on]";
+		decrease the attack strength by 2.
 
 Chance to win rule when the global attacker is rusted (this is the CTW rusted monster penalty rule):
 	decrease the chance-to-win by 2.
@@ -1390,19 +1393,21 @@ Chapter - Death blessing and death curse
 A person can be death-blessed.
 A person can be death-cursed.
 
-A damage modifier rule when the global defender is death-blessed (this is the death-blessed rule):
-	if a random chance of 1 in 10 succeeds:
-		say " - 10 (blessing of life)[run paragraph on]";
-		decrease the attack damage by 10;
-		if a random chance of 1 in 2 succeeds:
-			now the global defender is not death-blessed.
+A damage modifier rule (this is the death-blessed rule):
+	if the global defender is death-blessed:
+		if a random chance of 1 in 10 succeeds:
+			say " - 10 (blessing of life)[run paragraph on]";
+			decrease the attack damage by 10;
+			if a random chance of 1 in 2 succeeds:
+				now the global defender is not death-blessed.
 
-A damage modifier rule when the global defender is death-cursed (this is the death-cursed rule):
-	if a random chance of 1 in 20 succeeds:
-		say " + 10 (curse of death)[run paragraph on]";
-		increase the attack damage by 10;
-		if a random chance of 1 in 2 succeeds:
-			now the global defender is not death-cursed.
+A damage modifier rule (this is the death-cursed rule):
+	if the global defender is death-cursed:
+		if a random chance of 1 in 20 succeeds:
+			say " + 10 (curse of death)[run paragraph on]";
+			increase the attack damage by 10;
+			if a random chance of 1 in 2 succeeds:
+				now the global defender is not death-cursed.
 
 
 
@@ -1495,13 +1500,15 @@ To ghoulify the player:
 	now the faction of the player is undead;
 	now the player form of the player is ghoul.
 
-An attack modifier rule when the global attacker is a ghoul pc (this is the ghoul has less chance to hit rule):
-	say " - 1 (ghoul)[run paragraph on]";
-	decrease the attack strength by 1.
+An attack modifier rule (this is the ghoul has less chance to hit rule):
+	if the global attacker is a ghoul pc:
+		say " - 1 (ghoul)[run paragraph on]";
+		decrease the attack strength by 1.
 
-A damage modifier rule when the global defender is a ghoul pc (this is the ghoul gives damage resistance rule):
-	say " - 1 (you are a ghoul)[run paragraph on]";
-	decrease the attack damage by 1.
+A damage modifier rule (this is the ghoul gives damage resistance rule):
+	if the global attacker is a ghoul pc:
+		say " - 1 (you are a ghoul)[run paragraph on]";
+		decrease the attack damage by 1.
 
 A physical damage reduction rule (this is the ghoul damage reduction rule):
 	if the test subject is the player and the player form of the player is ghoul:
@@ -1532,13 +1539,15 @@ A willpower test rule (this is the willpower bonus of vampire rule):
 		increase test score by 2;
 		say " + 2 (vampire)[run paragraph on]".
 
-An attack modifier rule when the global attacker is a vampire pc (this is the vampire has more chance to hit rule):
-	say " + 1 (vampire)[run paragraph on]";
-	increase the attack strength by 1.
+An attack modifier rule (this is the vampire has more chance to hit rule):
+	if the global attacker is a vampire pc:
+		say " + 1 (vampire)[run paragraph on]";
+		increase the attack strength by 1.
 
-An attack modifier rule when the global defender is a vampire pc (this is the vampire has more chance to be hit rule):
-	say " + 2 (you are a vampire)[run paragraph on]";
-	increase the attack strength by 2.
+An attack modifier rule (this is the vampire has more chance to be hit rule):
+	if the global defender is a vampire pc:
+		say " + 2 (you are a vampire)[run paragraph on]";
+		increase the attack strength by 2.
 
 Chance to win rule when the global defender is a vampire pc (this is the CTW versus vampire rule):
 	increase the chance-to-win by 2.
@@ -1577,16 +1586,18 @@ Status rule (this is the vampire bat status rule):
 	if player form of the player is vampire bat:
 		say "You are a [bold type]vampire bat[roman type]: +2 defence, -2 attack, large bonus to hiding, bonus to running away, flying, cannot use weapons or clothing, can turn back into a [italic type]vampire[roman type].[line break][run paragraph on]".
 
-An attack modifier rule when the global defender is a vampire bat pc (this is the vampire bat has less chance to be hit rule):
-	say " - 2 (bat form)[run paragraph on]";
-	decrease the attack strength by 2.
+An attack modifier rule (this is the vampire bat has less chance to be hit rule):
+	if the global defender is a vampire bat pc:
+		say " - 2 (bat form)[run paragraph on]";
+		decrease the attack strength by 2.
 
 Chance to win rule when the global defender is a vampire bat pc (this is the CTW versus vampire bat rule):
 	decrease the chance-to-win by 2.
 		
-An attack modifier rule when the global attacker is a vampire bat pc (this is the vampire bat has less chance to hit rule):
-	say " - 2 (bat form)[run paragraph on]";
-	decrease the attack strength by 2.		
+An attack modifier rule (this is the vampire bat has less chance to hit rule):
+	if the global attacker is a vampire bat pc:
+		say " - 2 (bat form)[run paragraph on]";
+		decrease the attack strength by 2.		
 
 Detection rule (this is the vampire bat detection rule):
 	if the player form of the player is vampire bat:

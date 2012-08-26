@@ -15,9 +15,10 @@ Status rule (this is the hidden status rule):
 	if the player is hidden:
 		say "You are [bold type]hidden[roman type].[line break][run paragraph on]"
 
-An attack modifier rule when the global attacker is hidden (this is the hidden gives a small attack bonus rule):
-	say " + 2 (hidden)[run paragraph on]";
-	increase attack strength by 2.
+An attack modifier rule (this is the hidden gives a small attack bonus rule):
+	if the global attacker is hidden:
+		say " + 2 (hidden)[run paragraph on]";
+		increase attack strength by 2.
 
 First Standard AI rule for a person (called P) (this is the do nothing when all enemies hidden rule):
 	let conflict be false;
@@ -285,21 +286,22 @@ A detection rule (this is the smoke lessens probability of detection rule):
 	unless main actor is smoke immune:
 		decrease the detection probability by smoke penalty of the location.
 
-An attack modifier rule when the attacker is affected by smoke (this is the thick smoke makes attacking a little harder rule):
-	say " - [smoke penalty of the location] (smoke)[run paragraph on]";
-	decrease the attack strength by smoke penalty of the location.	
+An attack modifier rule (this is the thick smoke makes attacking a little harder rule):
+	if the attacker is affected by smoke:
+		say " - [smoke penalty of the location] (smoke)[run paragraph on]";
+		decrease the attack strength by smoke penalty of the location.	
 
 Chance to win rule when the attacker is affected by smoke (this is the CTW smoke penalty rule):
 	decrease the chance-to-win by smoke penalty of the location.
 			
-An attack modifier rule when the attacker is affected by smoke (this is the running is less risky with smoke rule):
-	if the global defender is the player and the player is runner:
+An attack modifier rule (this is the running is less risky with smoke rule):
+	if the global defender is the player and the player is runner and the attacker is affected by smoke:
 		let n be smoke penalty of the location;
 		say " - [n] (running covered by smoke)[run paragraph on]";
 		decrease the attack strength by n.
 			
-An attack modifier rule when the attacker is affected by smoke (this is the retreating is less risky with smoke rule):
-	if the global defender is the player and the player is retreater:
+An attack modifier rule (this is the retreating is less risky with smoke rule):
+	if the global defender is the player and the player is retreater and the attacker is affected by smoke:
 		let n be smoke penalty of the location;
 		say " - [n] (retreat covered by smoke)[run paragraph on]";
 		decrease the attack strength by n.

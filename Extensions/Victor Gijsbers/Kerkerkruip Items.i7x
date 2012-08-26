@@ -469,23 +469,25 @@ The passive parry max of a dagger is usually 1.
 The active parry max of a dagger is usually 1.
 The weapon damage bonus of a dagger is usually 0.
 
-An attack modifier rule when the global attacker weapon is a dagger (this is the dagger extra tension attack bonus rule):
-	let n be 0;
-	now n is the tension divided by 2;
-	if n is not 0:
-		say " + ", n, " (dagger benefits from tension)[run paragraph on]";
-		increase the attack strength by n.
+An attack modifier rule (this is the dagger extra tension attack bonus rule):
+	if the global attacker weapon is a dagger:
+		let n be 0;
+		now n is the tension divided by 2;
+		if n is not 0:
+			say " + ", n, " (dagger benefits from tension)[run paragraph on]";
+			increase the attack strength by n.
 
 Chance to win rule when the chosen weapon is a dagger (this is the CTW dagger concentration bonus rule):
 	let n be the tension divided by 2;
 	increase the chance-to-win by n.
 		
-A damage modifier rule when the global attacker weapon is a dagger (this is the dagger extra tension damage bonus rule):
-	let n be 0;
-	now n is the tension divided by 4;
-	if n is not 0:
-		say " + ", n, " (dagger benefits from tension)[run paragraph on]";
-		increase the attack damage by n.
+A damage modifier rule (this is the dagger extra tension damage bonus rule):
+	if the global attacker weapon is a dagger:
+		let n be 0;
+		now n is the tension divided by 4;
+		if n is not 0:
+			say " + ", n, " (dagger benefits from tension)[run paragraph on]";
+			increase the attack damage by n.
 
 The special weapon info of a dagger is usually "; benefits from tension[run paragraph on]".
 
@@ -782,9 +784,10 @@ Section - Crown of Hargo
 The crown of Hargo is a cursed curse-identified hat. The indefinite article is "the". 
 The crown of Hargo is iron.
 
-An attack modifier rule when the global defender wears the crown of Hargo (this is the crown of Hargo rule):
-	say " + 1 (defender is overconfident)[run paragraph on]";
-	increase the attack strength by 1.
+An attack modifier rule (this is the crown of Hargo rule):
+	if the global defender wears the crown of Hargo:
+		say " + 1 (defender is overconfident)[run paragraph on]";
+		increase the attack strength by 1.
 
 Chance to win rule when the global defender wears the crown of Hargo (this is the CTW crown of Hargo bonus rule):
 	increase the chance-to-win by 1.
@@ -902,10 +905,11 @@ Metastasio's hat is a minor hat. The description of Metastasio's hat is "Metasta
 Metastasio's hat is alchemical.
 Metastasio's hat is cloth.
 
-An attack modifier rule when the player wears Metastasio's hat (this is the Metastasio's hat grants worse attack and better retreat rule):
-	if the global attacker is the player or (the global defender is the player and the player is retreater):
-		say " - 2 (your cowardice)[run paragraph on]";
-		decrease the attack strength by 2.
+An attack modifier rule (this is the Metastasio's hat grants worse attack and better retreat rule):
+	if the player wears Metastasio's hat:
+		if the global attacker is the player or (the global defender is the player and the player is retreater):
+			say " - 2 (your cowardice)[run paragraph on]";
+			decrease the attack strength by 2.
 
 
 Section - War mask
