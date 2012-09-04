@@ -2821,7 +2821,7 @@ Unghouling is an action applying to nothing.
 
 An AI action selection rule for Malygris (this is the consider unghouling rule):
 	[if Malygris opposes the player:] [Why was this here?]
-	if the player form of the player is ghoul and at least two undead persons are in the location:
+	if the current form is ghoul-form and at least two undead persons are in the location:
 		choose a blank Row in the Table of AI Action Options;
 		now the Option entry is the action of Malygris unghouling;
 		now the Action Weight entry is a random number between 0 and 30.

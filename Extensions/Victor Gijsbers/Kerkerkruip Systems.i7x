@@ -1488,163 +1488,224 @@ Last falling rule (this is the standard deal falling damage rule):
 
 Chapter - Player forms
 
-[The player can take on different forms: human-form, ghoul, vampire, vampire bat, ...]
+[The player can take on different forms: human-form, ghoul, vampire, vampire bat, ...
 
-Player form is a kind of value. The player forms are human-form, ghoul, vampire, vampire bat.
+The variabel "current form" contains the current player form.
 
-The player has a player form. The player form of the player is human-form.
+In addition, forms are either form-active or not form-active. Active forms are those that a player can switch to -- assuming we have built te code to do so, of course.]
+
+Player form is a kind of value.
+
+The player forms are defined by the Table of Forms.
+
+Table of Forms
+player form		turn-text									form faction
+human-form		"You turn back into a normal human being."	friendly
+ghoul-form		"You turn into a loathsome ghoul!"			undead
+vampire-form		"You turn into a vampire!"					undead
+vampirebat-form	"You turn into a vampire bat!"				undead
+
+Current form is a player form that varies.
+Current form is human-form.
+
+A player form can be form-active. A player form is usually not form-active.
+Human-form is form-active.
+
+
+Section - Trumping relation
+
+[Trumping: if A trumps B, and A is active, then when the player would turn into B, she turns into A instead. For instance, ghoul form trumps human form. If the player were to switch from vampire form back to human form, but ghoul form is active, she'll return to being a ghoul instead.]
+
+Trumping relates various player forms to various player forms.
+
+The verb to trump (he trumps, they trump, he trumped, it is trumped, he is trumping) implies the trumping relation. 
+
+Ghoul-form trumps human-form.
+Vampire-form trumps human-form.
+Vampire-form trumps ghoul-form.
+Vampirebat-form trumps human-form.
+Vampirebat-form trumps ghoul-form.
+
+[Please don't make circular trumping relations. This will lead to infinite loops.]
+
+
+
+Section - Changing form
+
+Target form is a player form that varies.
+
+To find the trump of (Y - a player form):
+	now target form is Y;
+	repeat with X running through player forms:
+		if X is form-active and X trumps target form:
+			unless current form trumps target form and X is not current form: [Prefer staying the same. Works only one level deep; can be changed if necessary, but would be costly and useless at the moment.]
+				now target form is X;
+	unless target form is Y:
+		find the trump of target form.
+
+To turn the player into (X - a player form):
+	find the trump of X;
+	unless target form is current form:
+		choose row with a player form of target form in Table of Forms;
+		now current form is target form;
+		now faction of the player is form faction entry;
+		say turn-text entry;
+		say "[line break]";
+	otherwise:
+		say "You don't seem to change.".
+
+
 
 Section - Ghoul
 
 To ghoulify the player:
-	now the faction of the player is undead;
-	now the player form of the player is ghoul.
+	now ghoul-form is form-active;
+	turn the player into ghoul-form.
 
 An attack modifier rule (this is the ghoul has less chance to hit rule):
-	if the global attacker is a ghoul pc:
+	if the global attacker is the player and current form is ghoul-form:
 		say " - 1 (ghoul)[run paragraph on]";
 		decrease the attack strength by 1.
 
 A damage modifier rule (this is the ghoul gives damage resistance rule):
-	if the global attacker is a ghoul pc:
+	if the global attacker is the player and current form is ghoul-form:
 		say " - 1 (you are a ghoul)[run paragraph on]";
 		decrease the attack damage by 1.
 
 A physical damage reduction rule (this is the ghoul damage reduction rule):
-	if the test subject is the player and the player form of the player is ghoul:
+	if the test subject is the player and the current form is ghoul-form:
 		increase the pdr by 1.
 
 Status rule (this is the ghoul status rule):
-	if player form of the player is ghoul:
+	if current form is ghoul-form:
 		say "You are a [bold type]ghoul[roman type]: -1 attack; +1 damage resistance.[line break][run paragraph on]".
 
 To unghoulify the player:
-	now the faction of the player is friendly;
-	now player form of the player is human-form.
+	now ghoul-form is not form-active;
+	turn the player into human-form.
 
 
 Section - Vampire
 
 
 To vampirise the player:
-	now the faction of the player is undead;
-	now the player form of the player is vampire.
+	now vampire-form is form-active;
+	now vampirebat-form is form-active;
+	turn the player into vampire-form.
 
 Status rule (this is the vampire status rule):
-	if player form of the player is vampire:
+	if current form is vampire-form:
 		say "You are a [bold type]vampire[roman type]: +2 willpower, +1 attack, -2 defence, modest bonus to hiding, can turn into a [italic type]bat[roman type].[line break][run paragraph on]".
 
 A willpower test rule (this is the willpower bonus of vampire rule):
-	if the test subject is the player and the player form of the player is vampire:
+	if the test subject is the player and the current form is vampire-form:
 		increase test score by 2;
 		say " + 2 (vampire)[run paragraph on]".
 
 An attack modifier rule (this is the vampire has more chance to hit rule):
-	if the global attacker is a vampire pc:
+	if the global attacker is the player and current form is vampire-form:
 		say " + 1 (vampire)[run paragraph on]";
 		increase the attack strength by 1.
 
 An attack modifier rule (this is the vampire has more chance to be hit rule):
-	if the global defender is a vampire pc:
+	if the global defender is the player and the current form is vampire-form:
 		say " + 2 (you are a vampire)[run paragraph on]";
 		increase the attack strength by 2.
 
-Chance to win rule when the global defender is a vampire pc (this is the CTW versus vampire rule):
+Chance to win rule when the global defender is the player and current form is vampire-form (this is the CTW versus vampire rule):
 	increase the chance-to-win by 2.
 		
 Detection rule (this is the vampire detection rule):
-	if the player form of the player is vampire:
+	if the current form is vampire-form:
 		decrease the detection probability by 5.
 
 To unvampirise the player:
 	now the faction of the player is friendly;
-	now player form of the player is human-form.
-
-Turning bat is an action applying to nothing. Understand "bat" and "bat form" and "vampire bat" as turning bat.
-
-Check turning bat:
-	if the player form of the player is not vampire:
-		take no time;
-		if the player form of the player is vampire bat:
-			say "You already are in bat form." instead;
-		otherwise:
-			say "You do not possess that power." instead.
-
-Carry out turning bat:
-	say "You turn into a bat!";
-	now player form of player is vampire bat;
-	repeat with X running through weapons enclosed by the player:
-		now X is not readied;
-	repeat with X running through clothing enclosed by the player:
-		now the player carries X.
+	now current form is human-form.
 
 
 Section - Vampire bat
 
 
 Status rule (this is the vampire bat status rule):
-	if player form of the player is vampire bat:
+	if current form is vampirebat-form:
 		say "You are a [bold type]vampire bat[roman type]: +2 defence, -2 attack, large bonus to hiding, bonus to running away, flying, cannot use weapons or clothing, can turn back into a [italic type]vampire[roman type].[line break][run paragraph on]".
 
 An attack modifier rule (this is the vampire bat has less chance to be hit rule):
-	if the global defender is a vampire bat pc:
+	if the global defender is the player and current form is vampirebat-form:
 		say " - 2 (bat form)[run paragraph on]";
 		decrease the attack strength by 2.
 
-Chance to win rule when the global defender is a vampire bat pc (this is the CTW versus vampire bat rule):
+Chance to win rule when the global defender is the player and current form is vampirebat-form (this is the CTW versus vampire bat rule):
 	decrease the chance-to-win by 2.
 		
 An attack modifier rule (this is the vampire bat has less chance to hit rule):
-	if the global attacker is a vampire bat pc:
+	if the global attacker is the player and current form is vampirebat-form:
 		say " - 2 (bat form)[run paragraph on]";
 		decrease the attack strength by 2.		
 
 Detection rule (this is the vampire bat detection rule):
-	if the player form of the player is vampire bat:
+	if the current form is vampirebat-form:
 		decrease the detection probability by 20.
 
 A flying rule (this is the vampire bat flies rule):
-	if test subject is player and the player form of the player is vampire bat:
+	if test subject is player and the current form is vampirebat-form:
 		rule succeeds.
 
 An attack modifier rule (this is the vampire bat grants better retreat rule):
-	if the global defender is a vampire bat retreater pc:
+	if the global defender is the player and current form is vampirebat-form and the global defender is retreater:
 		say " - 2 (bat form retreat bonus)[run paragraph on]";
 		decrease the attack strength by 2;
-	if the global defender is a vampire bat runner pc:
+	if the global defender is the player and current form is vampirebat-form and the global defender is runner:
 		say " - 2 (bat form retreat bonus)[run paragraph on]";
 		decrease the attack strength by 2.	
 
 Check readying (this is the vampire bat cannot ready a weapon rule):
-	if the player form of the player is vampire bat:
+	if the current form is vampirebat-form:
 		take no time;
 		say "In bat form, you cannot use weapons." instead.
 
 Check wearing (this is the vampire bat cannot wear clothing rule):
-	if the player form of the player is vampire bat:
+	if the current form is vampirebat-form:
 		take no time;
 		say "In bat form, you cannot wear clothing." instead.
 
-Every turn when the player form of the player is vampire bat (this is the unready readied weapons when bat rule):
+Every turn when the current form is vampirebat-form (this is the unready readied weapons when bat rule):
 	if the player encloses at least one readied weapon:
 		repeat with X running through readied weapons enclosed by the player:
 			unless X is a natural weapon:
 				say "Your claws cannot effectively wield [the X].";
 				now X is not readied.
 
+Section - Commands for turning into vampire and vampire bat
+
 Turning vampire is an action applying to nothing. Understand "vampire" and "turn vampire" as turning vampire.
 
 Check turning vampire:
-	if the player form of the player is not vampire bat:
+	if vampire-form is not form-active:
 		take no time;
-		if the player form of the player is vampire:
-			say "You already are in vampire form." instead;
-		otherwise:
-			say "You do not possess that power." instead.
+		say "You do not possess that power." instead;
+	if the current form is vampire-form:
+		say "You already are in vampire form." instead;
 
 Carry out turning vampire:
-	say "You turn back into a vampire!";
-	now player form of player is vampire.
+	turn the player into vampire-form.
+
+Turning bat is an action applying to nothing. Understand "bat" and "bat form" and "vampire bat" as turning bat.
+
+Check turning bat:
+	if vampirebat-form is not form-active:
+		take no time;
+		say "You do not possess that power." instead;
+	if the current form is vampirebat-form:
+		say "You already are in vampire bat form." instead;
+
+Carry out turning bat:
+	turn the player into vampirebat-form;
+	repeat with X running through weapons enclosed by the player:
+		now X is not readied;
+	repeat with X running through clothing enclosed by the player:
+		now the player carries X.
 
 
 Kerkerkruip Systems ends here.

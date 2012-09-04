@@ -1078,11 +1078,7 @@ The printed name of a scroll of ghoulification is "scroll of ghoulification". [C
 Carry out reading a scroll:
 	if scroll-effect of the noun is scroll-ghoulification:
 		remove noun from play;
-		unless the player is undead:
-			say "As you read the scroll, your flesh starts to rot and most of your vital functions cease. You have been turned into a ghoul!";
-			ghoulify the player;
-		otherwise:
-			say "As you are undead already, the scroll has no effect on you.";
+		ghoulify the player;
 		rule succeeds.
 
 The small-scroll-of-ghoulification-pack is a minor treasure pack. [One scroll of ghoulification is in the small-scroll-of-ghoulification-pack.]
@@ -1539,7 +1535,7 @@ The weapon damage bonus of the vampiric dagger is 0.
 An aftereffects rule (this is the vampiric dagger leeches rule):
 	if the global attacker weapon is the vampiric dagger and the the attack damage is greater than 0:
 		let n be a random number between 1 and the attack damage;
-		unless the global attacker is the player and the player form of the player is vampire:
+		unless the global attacker is the player and the current form is vampire-form:
 			if n is greater than 1:
 				now n is a random number between 1 and 2;
 			let m be permanent health of the global attacker;
@@ -1942,8 +1938,8 @@ Instead of eating Drakul's lifeblood:
 	
 Instead of drinking Drakul's lifeblood:
 	remove noun from play;
-	vampirise the player;
-	say "As you gulp down the blood, you feel your whole body changing -- it becomes cold and fragile, but also swift and lean. Magical power courses through your veins. You have been turned into a vampire!".
+	say "As you gulp down the blood, you feel your whole body changing -- it becomes cold and fragile, but also swift and lean. Magical power courses through your veins. ";
+	vampirise the player.
 
 
 Chapter - Special items
