@@ -3552,7 +3552,7 @@ An AI action selection rule for the imp (this is the imp considers imping rule):
 	now the Action Weight entry is a random number between 0 and 80.
 
 Carry out the imp imping:
-	say "TEST: [combat state of the imp].";
+[	say "TEST: [combat state of the imp].";]
 	if the combat state of the imp is at-React:
 		if a random chance of 1 in 2 succeeds:
 			try the imp teleporting instead;
