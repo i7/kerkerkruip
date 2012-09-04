@@ -1723,6 +1723,24 @@ Last absorbing a power (called the granted power):
 		say "Your greed causes you to absorb an extra [greed bonus] health, but it also gives you a permanent -[n] defence penalty.[paragraph break]".
 
 
+Section - Vial of Purification
+
+
+The vial of purification is a minor religious glass thing. Understand "water" and "waters" as vial of purification. The description of vial of purification is "Drinking the water in this small vial might cure you of some unfortunate afflictions.".
+
+Instead of eating vial of purification:
+	try drinking vial of purification.
+	
+Instead of drinking vial of purification:
+	remove noun from play;
+	say "The waters purify you of all undead influences. ";
+	now ghoul-form is not form-active;
+	now vampire-form is not form-active;
+	now vampirebat-form is not form-active;		
+	turn the player into human-form.
+
+
+
 
 Chapter - Epic Items
 
