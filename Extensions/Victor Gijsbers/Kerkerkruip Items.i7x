@@ -955,6 +955,32 @@ The gorgeous dagger is iron.
 The description of the gorgeous dagger is "Adorned with gold and a large emerald at the end of the hilt, this dagger is not only beautiful, but also perfect for precise attacks in tense situations. The decadence of its design proves it to be of Yahvinnean origin.".
 
 
+Section - Dagger of the double strike
+
+The dagger of the double strike is a major dagger.
+The dagger of the double strike is civilised.
+The dagger of the double strike is iron.
+
+The damage die of the dagger of the double strike is 1.
+The weapon attack bonus of the dagger of double strike is -2.
+
+The description of the dagger of the double strike is "The dagger looks dull and far from dangerous. But appearances deceive, for this weapon has been imbued with a dangerous magic.".
+
+The special weapon info of the dagger of the double strike is "; allows its wielder to strike again immediately if the first attack did no damage[run paragraph on]".
+
+Making-double-strike is a truth state that varies. Making-double-strike is false.
+
+Last after reporting an actor hitting (this is the hit again with the dagger of double strike rule):
+	if the global attacker weapon is the dagger of double strike:
+		if making-double-strike is false:
+			if the attack damage is 0:
+				if the global attacker is alive and the global defender is alive:
+					now making-double-strike is true;
+					say "The dagger of the double strike slashes out again!";
+					try the global attacker hitting the global defender;
+					now making-double-strike is false.
+
+
 Section - Fearsome axe
 
 The fearsome axe is a minor axe.
