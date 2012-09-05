@@ -1,12 +1,10 @@
-"Kerkerkruip - Release 3 - Alpha" by Victor Gijsbers
+"Kerkerkruip - Release 4" by Victor Gijsbers
 
 The story headline is "An IF roguelike".
 The story genre is "dungeon crawl".
-The release number is 3.
+The release number is 4.
 [Release along with cover art.]
 
-Use no deprecated features.
-Use MAX_PROP_TABLE_SIZE of 300000.
 
 Include Menus by Emily Short.
 [Include Basic Help Menu by Emily Short.]
@@ -14,7 +12,7 @@ Include Basic Screen Effects by Emily Short.
 Include Epistemology by Eric Eve.
 Include Numbered Disambiguation Choices by Aaron Reed.
 [Include Real-Time Delays by Erik Temple.]
-Include Glulx Entry Points by Emily Short. [Consider just checking if graphics are supported directly]
+Include Glulx Entry Points by Emily Short.
 [Include Default Messages by Ron Newcomb.]
 Include Dynamic Objects by Jesse McGrew.
 
@@ -22,8 +20,7 @@ Include Dynamic Objects by Jesse McGrew.
 
 Every turn (this is the mark items as seen every turn rule): 
 	repeat with item running through things that are enclosed by the location:
-		if the item is not enclosed by an opaque closed container:
-			now the item is seen.
+		if the item is not enclosed by an opaque closed container, now the item is seen.
 		
 Include Alternative Permadeath by Victor Gijsbers.
 The binary file of save data is called "KerkerkruipSaves".
@@ -47,6 +44,8 @@ Include Kerkerkruip Actions and UI by Victor Gijsbers.
 Include Kerkerkruip Start and Finish by Victor Gijsbers.
 Include Kerkerkruip Final Declarations by Victor Gijsbers.
 
+Use MAX_PROP_TABLE_SIZE of 300000.
+
 The maximum score is 18. [1 + 1 + 2 + 2 + 3 + 4 + 5 = 18]
 The notify score changes rule is not listed in any rulebook.
 
@@ -55,11 +54,6 @@ The notify score changes rule is not listed in any rulebook.
 Generation info is a truth state that varies. Generation info is [true]false.
 
 [When play begins:
-	copy scroll of teleportation to player;
+	copy scroll of ghoulification to player;
 	copy scroll of teleportation to player;
 	copy scroll of teleportation to player.]
-
-[TODO:
-- Let the player hide in certain rooms - for example if the lantern and shadows are there, or the Hall of Mirrors
-- If you dig down 20 times discover the Nameless Horror
-]
