@@ -262,6 +262,7 @@ Victory message rule (this is the Nameless Horror message rule):
 To do the level 10 victory with (guy - a person):
 	say "In slaying [the guy], you have done the impossible. You absorb its soul, and though this process leaves little of your own personality intact, your powers increase a thousandfold. Even the gods bow to you.";
 	end the story saying "You reign eternally!".
+	
 
 Section - Death message
 
@@ -276,9 +277,30 @@ Section - What happens after the obituary
 
 After printing the player's obituary:
 	write out the file of victories;
-[	if the player is victorious:
-		say "You have now won [number-of-victories] times; your current winning streak is [winning-streak] victories; and the best winning streak you have ever had was [best-winning-streak] victories.";]
-	[permanently kill the player. [make saves unusable]]
+	consider the unlock stuff rule.
+
+
+This is the unlock stuff rule:
+	let X be a list of rooms;
+	let W be a list of persons;
+	let Z be a list of things;
+	repeat with Y running through rooms:
+		if unlock level of Y is number-of-victories:
+			add Y to X;
+	if X is not empty:
+		say "You have [bold type]unlocked[roman type] [if the number of entries in X is 1]a new room[otherwise]new rooms[end if]: [bold type][X with definite articles][roman type]!";
+	repeat with Y running through persons:
+		if unlock level of Y is number-of-victories:
+			add Y to W;
+	if W is not empty:
+		say "You have [bold type]unlocked[roman type] [if the number of entries in W is 1]a new monster[otherwise]new monsters[end if]: [bold type][W with definite articles][roman type]!";
+	repeat with Y running through things:
+		if Y is not a person:
+			if unlock level of Y is number-of-victories:
+				add Y to Z;
+	if Z is not empty:
+		say "You have [bold type]unlocked[roman type] [if the number of entries in Z is 1]a new thing[otherwise]new things[end if]: [bold type][Z with definite articles][roman type]!".
+
 
 When play begins: 
 	choose row with a final response rule of immediately restore saved game rule in the Table of Final Question Options; 

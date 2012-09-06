@@ -862,6 +862,7 @@ Space-Time Discontinuum is vp-agnostic.
 Space-Time Discontinuum is magical.
 
 The difficulty level of Space-Time Discontinuum is 1. [Too weird for newbies.]
+The rarity of Space-Time Discontinuum is 1. [Placed less often.]
 
 An initiative update rule (this is the initiative is almost completely random in Space-Time Discontinuum rule):
 	if location is Space-Time Discontinuum and the location is not initiative-conferring:
