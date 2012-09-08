@@ -85,7 +85,17 @@ Report wearing:
 		now the player is wearing the hidden identity of the noun;
 		set pronouns from the hidden identity of the noun;
 		remove the noun from play;
-		say "As soon as you put on [the noun], your flesh crawls. You realise that [the noun] [is-are] actually the [hidden identity of the noun]." instead.
+		say "As soon as you put on [the noun], your flesh crawls. You realise that [the noun] [is-are] actually the [bold type][hidden identity of the noun][roman type]!" instead.
+
+Report readying:
+	unless the hidden identity of the noun is the non-thing:
+		remove the noun from play;
+		now the hidden identity of the noun is curse-identified;
+		now the player carries the hidden identity of the noun;
+		now the hidden identity of the noun is readied;
+		set pronouns from the hidden identity of the noun;
+		say "As soon as you ready [the noun], a chilling feeling goes through your arms. [The noun] [is-are] actually the [bold type][hidden identity of the noun][roman type]!" instead.
+
 
 Section - Cursed
 
@@ -1023,6 +1033,11 @@ The large-unguentum-argenti-pack is alchemical.
 
 
 
+
+
+
+
+
 Chapter - Sprayables
 
 Section - The sprayables kind
@@ -1821,6 +1836,34 @@ Last after reporting an actor hitting (this is the hit again with the dagger of 
 					say "The dagger of the double strike slashes out again!";
 					try the global attacker hitting the global defender;
 					now making-double-strike is false.
+
+Section - The backstabber (cursed)
+
+The backstabber is a cursed curse-identified dagger. The backstabber is proper-named.
+The backstabber is iron.
+
+A treasure placement rule (this is the double strike can be backstabber rule):
+	if a random chance of 1 in 4 succeeds:
+		now the hidden identity of the dagger of double strike is the backstabber.
+
+The description of the backstabber is "This treacherous blade sometimes strikes out at random people -- including yourself.".
+The special weapon info of the backstabber is "; sometimes attacks a random person instead of the intended target[run paragraph on]"
+
+Making-backstab is a truth state that varies. Making-backstab is false.
+
+First check an actor hitting (this is the hitting with the backstabber rule):
+	if the global attacker weapon is the backstabber:
+		if making-backstab is false:
+			if a random chance of 1 in 2 succeeds:
+				let X be a random alive person in the location of the actor;
+				unless X is the noun:
+					say "The [bold type]backstabber[roman type] attacks [X] instead!";
+					now making-backstab is true;
+					try the actor hitting X instead.
+
+Check an actor hitting (this is the reset backstab rule):
+	now making-backstab is false.
+
 
 Section - Vampiric dagger (major)
 
