@@ -641,8 +641,26 @@ After taking off the cloak of shadows when the player is hidden:
 	now player is not hidden;
 	say "You reveal your presence to the world.".
 
+Section - Cloak of reflection (minor)
 
+The cloak of reflection is a minor cloak.
+The cloak of reflection is magical.
+The cloak of reflection is cloth.
 
+The description of the cloak of reflection is "A piece of silk with thousands of small magical mirrors sewn on it, this cloak is both beautiful and useful. It will sometimes, though not infallibly, reflect back ranged attacks to the attacker.".
+
+First check an actor hitting (this is the cloak of reflection rule):
+	if the noun wears the cloak of reflection:
+		if the global attacker weapon is ranged:
+			if a random chance of 2 in 7 succeeds:
+				say "The cloak of reflection [bold type]reflects[roman type] the attack back to [the actor]!";
+				try the actor hitting the actor instead.
+
+A dungeon interest rule (this is the Malygris sometimes wears the cloak of reflection rule):
+	if a random chance of 1 in 10 succeeds:
+		if Malygris does not wear a cloak:
+			now Malygris wears the cloak of reflection;
+			if generation info is true, say "* Malygris wears the cloak of reflection.".
 
 Chapter - Shoes
 
