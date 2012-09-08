@@ -1736,7 +1736,7 @@ Chapter - Sword
 
 A sword is a kind of weapon. 
 A sword is usually iron.
-The passive parry max of a sword is usually 4.
+The active parry max of a sword is usually 4.
 
 Understand "blade" as a sword.
 
@@ -2012,6 +2012,86 @@ The passive parry max of a staff of pain is usually 0.
 The weapon damage bonus of a staff of pain is usually 0.
 
 
+
+
+Chapter - Maces
+
+A mace is a kind of weapon. 
+A mace is usually iron.
+
+The damage die of a mace is usually 5.
+The weapon attack bonus of a mace is usually 0.
+The weapon damage bonus of a mace is usually 1.
+The dodgability of a mace is usually 2.
+The passive parry max of a mace is usually 2.
+The active parry max of a mace is usually 2.
+
+Section - Spiked mace of the ape king
+
+The spiked mace of the ape king is a major mace.
+The spiked mace of the ape king is barren.
+The spiked mace of the ape king is iron.
+
+The spiked mace of the ape king has a size.
+
+Table of Spiked Mace of the Ape King
+Blood	Dam	WAB	WDB	DOD	PPM		APM	Size
+0		3		1		0		1		2		2		tiny
+1		3		1		0		1		2		2		tiny
+2		4		1		0		1		2		2		small
+3		4		1		1		1		2		2		small
+4		5		0		1		1		2		2		small
+5		5		0		1		1		2		2		medium
+6		6		0		2		2		2		2		medium
+7		6		0		2		2		2		2		medium
+8		7		0		2		2		2		1		large
+9		7		-1		3		2		1		1		large
+10		8		-1		3		2		1		1		large
+11		8		-1		3		3		1		1		huge
+12		9		-2		3		3		1		1		huge
+13		9		-2		4		3		1		0		huge
+14		10		-2		4		4		1		0		gargantuan
+15		10		-3		4		4		0		0		gargantuan
+
+Spiked-mace-blood is a number that varies. Spiked-mace-blood is 0.
+
+To set stats for the spiked mace of the ape king:
+	now the spiked mace of the ape king is iron;
+	now the spiked mace of the ape king is not rusted;
+	if spiked-mace-blood is less than 16:
+		choose row with a blood of spiked-mace-blood in the Table of Spiked Mace of the Ape King;
+		now the damage die of the spiked mace of the ape king is Dam entry;
+		now the weapon attack bonus of the spiked mace of the ape king is WAB entry;
+		now the weapon damage bonus of the spiked mace of the ape king is WDB entry;
+		now the dodgability of the spiked mace of the ape king is DOD entry;
+		now the passive parry max of the spiked mace of the ape king is PPM entry;
+		now the active parry max of the spiked mace of the ape king is APM entry;
+		now the size of the spiked mace of the ape king is Size entry;
+	otherwise:
+		let guy be a random person who has the spiked mace of the ape king;
+		unless guy is nothing: [who knows whether we program animated weapons at some point?]
+			say "The [bold type]spiked mace of the ape king[roman type] suddenly grows so big that [guy] cannot hold on to it. It [bold type]crashes[roman type] to the floor!";
+			move spiked mace of the ape king to location of guy;
+		otherwise:
+			say "The [bold type]spiked mace of the ape king[roman type] suddenly [bold type]crashes[roman type] to the floor!";
+			move spiked mace of the ape king to location of spiked mace of the ape king;
+		now spiked mace of the ape king is not readied;
+		now spiked mace of the ape king is fixed in place;
+		now description of spiked mace of the ape king is "The mace has grown to such proportions that not even the strongest man in the world would be able to lift it.".
+	
+When play begins:
+		set stats for the spiked mace of the ape king.
+		
+The description of spiked mace of the ape king is "A ball studded with sharp spikes and put at the end of a stick makes a simple but effective weapon. It is currently of [size of spiked mace of the ape king] size.".
+
+An aftereffects rule (this is the spiked mace grows rule):
+	if the global attacker weapon is the spiked mace of the ape king:
+		if the attack damage is greater than 0:
+			increase spiked-mace-blood by 1;
+			set stats for the spiked mace of the ape king;
+			if spiked-mace-blood is less than 16:
+				say "The spiked mace of the ape king grows!"
+				
 
 
 
