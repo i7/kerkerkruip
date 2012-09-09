@@ -757,7 +757,7 @@ Ruined tombs is scenery in the crypt. Understand "skulls" and "skull" and "bones
 
 The sarcophagus is a closed openable scenery container in The Crypt. Understand "tomb" as the sarcophagus. The description of the sarcophagus is "A marble monstrosity carved with skeletons and other symbols of death.".
 
-The symbols of death are part of the sarcophagus. Understand "skeletons" and "formula" as the symbols of death. The description of the symbols of death is "The symbols seem to spell out a magical formula. Your knowledge of necromancy is limited, and the only way to find out what the formula does would be by reading it.".
+The symbols of death are scenery in The Crypt. The symbols of death are plural-named. Understand "skeletons" and "formula" as the symbols of death. The description of the symbols of death is "The symbols seem to spell out a magical formula. Your knowledge of necromancy is limited, and the only way to find out what the formula does would be by reading it.".
 
 Symbols-of-death-number is a number that varies. Symbols-of-death-number is 0.
 
