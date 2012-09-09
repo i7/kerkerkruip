@@ -309,6 +309,20 @@ When play begins:
 	blank out the final question wording entry. 
 
 
+Chapter - Doing a reset
+
+To do the reset:
+	choose row 1 in the Table of Victories;
+	now the Victories entry is 0;
+	now the Streak entry is 0;
+	now the Best-Streak entry is 0;
+	write File of Victories from Table of Victories;
+	now number-of-victories is 0;
+	now winning-streak is 0;
+	now best-winning-streak is 0;
+	now difficulty is 0.
+
+
 
 Chapter - Introduction Menu
 
@@ -342,7 +356,8 @@ The first when play begins rule (this is the title screen rule):
 			say "   Start a new game             :       S[line break]";
 		if difficulty is 0:
 			say "   Skip to Normal difficulty    :       N[line break]";	
-		say "   Display help menu            :       M[line break]";		
+		say "   Display help menu            :       M[line break]";
+		say "   Reset victories              :       R[line break]";
 		say "   Quit                         :       Q[line break]";  
 		say variable letter spacing;
 		let redraw be 0;
@@ -355,7 +370,7 @@ The first when play begins rule (this is the title screen rule):
 			[ S: Start a new game ]
 			otherwise if k is 115 or k is 83:
 				delete file of save data;
-				clear the screen; 
+				clear the screen;
 				make no decision;	
 			[ N: go to normal difficult ]	
 			otherwise if (k is 110 or k is 78) and difficulty is 0:
@@ -370,8 +385,11 @@ The first when play begins rule (this is the title screen rule):
 			[ Q: quit ]
 			otherwise if k is 113 or k is 81:
 				stop game abruptly;
-			[otherwise if k is 82 or k is 114:
-				follow the restore the game rule;]
+			[ R: rest]
+			otherwise if k is 114 or k is 82:
+				now the current menu is Table of Reset Menu;
+				carry out the displaying activity;
+				now redraw is 1;
 			[ M: menu ]
 			otherwise if k is 109 or k is 77:
 				now the current menu is Table of Kerkerkruip Help;
@@ -398,6 +416,17 @@ To say difficulty level (m - a number):
 	if m is greater than 7:
 		say "IMPOSSIBLE[run paragraph on]".
 
+
+Chapter - Reset Menu
+
+Table of Reset Menu
+title		subtable		description		toggle 
+"No, do not reset the number of victories to 0!"		--	--	quit rule
+"Yes, I am sure: reset the number of victories to 0!"	--	--	the resetting rule
+
+This is the resetting rule:
+	do the reset;
+	consider the quit rule.
 
 
 Chapter - The asking for help action (for use without Basic Help Menu by Emily Short)
