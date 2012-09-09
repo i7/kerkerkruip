@@ -653,7 +653,7 @@ First check an actor hitting (this is the cloak of reflection rule):
 	if the noun wears the cloak of reflection:
 		if the global attacker weapon is ranged:
 			if a random chance of 2 in 7 succeeds:
-				say "The cloak of reflection [bold type]reflects[roman type] the attack back to [the actor]!";
+				say "[if the noun is the player]The[otherwise][Possessive of the noun][end if] cloak of reflection [bold type]reflects[roman type] the attack back to [the actor]!";
 				try the actor hitting the actor instead.
 
 A dungeon interest rule (this is the Malygris sometimes wears the cloak of reflection rule):
