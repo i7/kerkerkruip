@@ -2043,7 +2043,7 @@ The dodgability of a mace is usually 2.
 The passive parry max of a mace is usually 2.
 The active parry max of a mace is usually 2.
 
-Section - Spiked mace of the ape king
+Section - Spiked mace of the ape king (major)
 
 The spiked mace of the ape king is a major mace.
 The spiked mace of the ape king is barren.
@@ -2056,26 +2056,22 @@ Blood	Dam	WAB	WDB	DOD	PPM		APM	Size
 0		3		1		0		1		2		2		tiny
 1		3		1		0		1		2		2		tiny
 2		4		1		0		1		2		2		small
-3		4		1		1		1		2		2		small
-4		5		0		1		1		2		2		small
-5		5		0		1		1		2		2		medium
-6		6		0		2		2		2		2		medium
-7		6		0		2		2		2		2		medium
-8		7		0		2		2		2		1		large
-9		7		-1		3		2		1		1		large
-10		8		-1		3		2		1		1		large
-11		8		-1		3		3		1		1		huge
-12		9		-2		3		3		1		1		huge
-13		9		-2		4		3		1		0		huge
-14		10		-2		4		4		1		0		gargantuan
-15		10		-3		4		4		0		0		gargantuan
+3		5		0		1		1		2		2		small
+4		5		0		1		1		2		2		medium
+5		6		0		2		2		2		2		medium
+6		7		0		2		2		2		1		large
+7		8		-1		3		2		1		1		large
+8		8		-1		3		3		1		1		huge
+9		9		-2		4		3		1		0		huge
+10		10		-3		4		4		1		0		gargantuan
+11		11		-4		4		4		0		0		gargantuan
 
 Spiked-mace-blood is a number that varies. Spiked-mace-blood is 0.
 
 To set stats for the spiked mace of the ape king:
 	now the spiked mace of the ape king is iron;
 	now the spiked mace of the ape king is not rusted;
-	if spiked-mace-blood is less than 16:
+	if spiked-mace-blood is less than 12:
 		choose row with a blood of spiked-mace-blood in the Table of Spiked Mace of the Ape King;
 		now the damage die of the spiked mace of the ape king is Dam entry;
 		now the weapon attack bonus of the spiked mace of the ape king is WAB entry;
@@ -2106,7 +2102,7 @@ An aftereffects rule (this is the spiked mace grows rule):
 		if the attack damage is greater than 0:
 			increase spiked-mace-blood by 1;
 			set stats for the spiked mace of the ape king;
-			if spiked-mace-blood is less than 16:
+			if spiked-mace-blood is less than 12:
 				say "The spiked mace of the ape king grows!"
 				
 
