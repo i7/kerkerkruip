@@ -649,6 +649,9 @@ Temple of Isatzo is consecrated.
 Temple of Isatzo is vp-agnostic.
 Temple of Isatzo is religious.
 
+The unlock level of Temple of Isatzo is 5.
+The unlock text of Temple of Isatzo is "a temple dedicated to the fickle god of balance"
+
 The statue of Isatzo is scenery in Temple of Isatzo. The description of the statue of Isatzo is "Made of grey stone, the statue of Isatzo offers one healing and one punishing hand to the world. He looks on mankind with one auspicious and one dropping eye, in equal scale weighing delight and dole.". Understand "god" and "deity" as the statue of Isatzo.
 
 Instead of attacking the statue of Isatzo:
@@ -863,6 +866,9 @@ Space-Time Discontinuum is magical.
 
 The difficulty level of Space-Time Discontinuum is 1. [Too weird for newbies.]
 The rarity of Space-Time Discontinuum is 1. [Placed less often.]
+
+The unlock level of Space-Time Discontinuum is 10.
+The unlock text of Space-Time Discontinuum is "a weird place where time functions differently than elsewhere".
 
 An initiative update rule (this is the initiative is almost completely random in Space-Time Discontinuum rule):
 	if location is Space-Time Discontinuum and the location is not initiative-conferring:

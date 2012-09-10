@@ -290,6 +290,9 @@ The essence of greed is magical.
 The essence of greed is iron.
 The difficulty level of the essence of greed is 2.
 
+The unlock level of essence of greed is 4.
+The unlock text of essence of greed is "an essence which allows you to gain more health, at the cost of your safety".
+
 A person can be greedy. A person is usually not greedy.
 
 The description of the essence of greed is "This small metal bottle contains the magical essence of greed, distilled from the bones of the legendary thief Mithaldo, whose hunger for treasure was so great that he let himself be swallowed by a dragon in order to get at the jewels the beast had eaten through the centuries. When the dragon was slain some decades later, Mithaldo's bony fingers were found in the dragon's stomach, still clinging to a large diamond. [italic type](When absorbing a soul, the player receives much more health, but permanently loses one or more points of defence.)[roman type]".
@@ -321,6 +324,9 @@ Section - Essence of Addiction (epic)
 The essence of addiction is an epic essence. The indefinite article is "the".
 The essence of addiction is magical.
 The essence of addiction is iron.
+
+The unlock level of essence of addiction is 6.
+The unlock text of essence of addiction is "an essence which will greatly enhance both the positive and negative effects of ment".
 
 The description of the essence of addiction is "This small metal bottle contains the magical essence of addiction, distilled from the brain of a ment user. When inhaled, it greatly increases you addiction to ment -- increasing both the positive effects of a high and the negative effects of a low.".
 
@@ -472,7 +478,8 @@ The tormenting necklace is deathly.
 
 The description of the tormenting necklace is "This monstrous necklace is made of shards of glass, fossilised teeth, broken points of daggers and thorns. It is imbued with a magic that deals paralysing pain to anyone who is wounded in combat. [italic type](This necklace lowers the initiative of anyone who gets hit -- including you -- thus increasing the probability that a successful attacker can immediately act again.)[roman type]".
 
-[TODO -- we want some monsters to be immune to this effect.]
+The unlock level of tormenting necklace is 6.
+The unlock text of tormenting necklace is "a necklace that lowers the initiative of anyone who gets damaged in combat".
 
 Aftereffects rule (this is the tormenting necklace rule):
 	if the player wears the tormenting necklace:
@@ -646,6 +653,9 @@ Section - Cloak of reflection (minor)
 The cloak of reflection is a minor cloak.
 The cloak of reflection is magical.
 The cloak of reflection is cloth.
+
+The unlock level of cloak of reflection is 8.
+The unlock text of cloak of reflection is "a cloak that can reflect ranged attacks back to the attacker".
 
 The description of the cloak of reflection is "A piece of silk with thousands of small magical mirrors sewn on it, this cloak is both beautiful and useful. It will sometimes, though not infallibly, reflect back ranged attacks to the attacker.".
 
@@ -1748,6 +1758,9 @@ The smoky blade is iron.
 
 The description of the smoky blade is "While otherwise a normal sword, it has been enchanted to look like smoke or fog.".
 
+The unlock level of smoky blade is 2.
+The unlock text of smoky blade is "a sword that is hard to see in smoke-filled areas"
+
 An attack modifier rule (this is the smoky blade is better when smoke rule):
 	if the global attacker weapon is the smoky blade:
 		unless the global defender is smoke immune:
@@ -1952,6 +1965,10 @@ The executioner's axe is iron.
 
 The description of the executioner's axe is "This is the blade that chopped off the head of Philip the Traitor after he had been found guilty of murdering his brother, Charles IV. Ever since, pilgrims have flocked to Montenoir's temple of Nomos to see and revere it. How it has ended up in this dungeon is anyone's guess.".
 
+The unlock level of the executioner's axe is 10.
+The unlock text of the executioner's axe is "an unwieldy axe that deals massive damage".
+
+
 The damage die of the executioner's axe is 7.
 The weapon damage bonus of the executioner's axe is 4.
 The active parry max of the executioner's axe is 0.
@@ -2097,7 +2114,7 @@ An aftereffects rule (this is the spiked mace grows rule):
 
 Chapter - Other weapons
 
-Section - Magical pickaxe
+Section - Magical pickaxe (major)
 
 The pickaxe is a major iron barren weapon.
 The pickaxe is a digging tool.
@@ -2106,8 +2123,11 @@ Understand "axe" as the pickaxe.
 
 The description of the pickaxe is "Used by wizards to construct their dungeons, a magical pickaxe can be used to dig tunnels in whatever direction you wish. Just dig north, for instance. In a pinch, it can also serve as a weapon.".
 
+The unlock level of the magical pickaxe is 9.
+The unlock text of the magical pickaxe is "an item that functions both as a weapon and as a tool for digging tunnels".
+
 The damage die of the pickaxe is 5.
-The weapon attack bonus of the pickaxe is -2.
+The weapon attack bonus of the pickaxe is -1.
 The weapon damage bonus of the pickaxe is 2.
 The dodgability of the pickaxe is 3.
 The passive parry max of the pickaxe is 1.
