@@ -322,6 +322,10 @@ To do the reset:
 	now best-winning-streak is 0;
 	now difficulty is 0.
 
+To do the achievement reset:
+	repeat through Table of Held Achievements:
+		now held difficulty entry is -1;
+	write File of Achievements from Table of Held Achievements.	
 
 
 Chapter - Introduction Menu
@@ -421,13 +425,17 @@ Chapter - Reset Menu
 
 Table of Reset Menu
 title		subtable		description		toggle 
-"No, do not reset the number of victories to 0!"		--	--	quit rule
-"Yes, I am sure: reset the number of victories to 0!"	--	--	the resetting rule
+"No, do not reset the number of victories."		--	--	quit rule
+"Yes, I am sure: reset the number of victories."	--	--	the resetting rule
+"Please reset the achievements list instead."	--	--	the achievement resetting rule
 
 This is the resetting rule:
 	do the reset;
 	consider the quit rule.
 
+This is the achievement resetting rule:
+	do the achievement reset;
+	consider the quit rule.
 
 Chapter - The asking for help action (for use without Basic Help Menu by Emily Short)
 
