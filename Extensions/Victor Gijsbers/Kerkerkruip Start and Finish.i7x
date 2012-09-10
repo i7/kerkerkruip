@@ -47,7 +47,7 @@ To write out the file of victories:
 		unless number-of-victories is 1:
 			increase winning-streak by 1; [We want to go from easy to normal difficulty.]
 		otherwise:
-			say "[paragraph break][bold type]You have defeated Malygris on easy mode, proving that you understand the basics of the game! Next time, Kerkerkruip will start in normal mode. From now on, new items, monsters and locations will be available; and the game will start tracking your winning streak and will scale the difficulty accordingly. Have fun![roman type]";
+			say "[paragraph break][bold type]You have defeated Malygris on easy mode, proving that you understand the basics of the game! Next time, Kerkerkruip will start in normal mode. From now on, new items, monsters and locations will be available; and the game will start tracking your winning streak and will scale the difficulty accordingly. Have fun![roman type][paragraph break]";
 		if winning-streak is greater than best-winning-streak:
 			now best-winning-streak is winning-streak;
 	otherwise:
@@ -281,26 +281,25 @@ After printing the player's obituary:
 
 
 This is the unlock stuff rule:
-	let X be a list of rooms;
-	let W be a list of persons;
-	let Z be a list of things;
+	let X be a list of objects; [We cannot repeat through objects, so:]
 	repeat with Y running through rooms:
 		if unlock level of Y is number-of-victories:
-			add Y to X;
-	if X is not empty:
-		say "You have [bold type]unlocked[roman type] [if the number of entries in X is 1]a new room[otherwise]new rooms[end if]: [bold type][X with definite articles][roman type]!";
+			if unlock hidden switch of Y is not true:
+				add Y to X;
 	repeat with Y running through persons:
 		if unlock level of Y is number-of-victories:
-			add Y to W;
-	if W is not empty:
-		say "You have [bold type]unlocked[roman type] [if the number of entries in W is 1]a new monster[otherwise]new monsters[end if]: [bold type][W with definite articles][roman type]!";
+			if unlock hidden switch of Y is not true:		
+				add Y to X;
 	repeat with Y running through things:
 		if Y is not a person:
 			if unlock level of Y is number-of-victories:
-				add Y to Z;
-	if Z is not empty:
-		say "You have [bold type]unlocked[roman type] [if the number of entries in Z is 1]a new thing[otherwise]new things[end if]: [bold type][Z with definite articles][roman type]!".
-
+				if unlock hidden switch of Y is not true:			
+					add Y to X;
+	if X is not empty:
+		say "You have [bold type]unlocked[roman type] new content:[paragraph break]";
+		repeat with item running through X:
+			say "* [the item] ([unlock text of item])[line break]";
+		say "[line break]".
 
 When play begins: 
 	choose row with a final response rule of immediately restore saved game rule in the Table of Final Question Options; 

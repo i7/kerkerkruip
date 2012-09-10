@@ -801,7 +801,34 @@ Carry out testreadying:
 		let item be a random readied weapon enclosed by guy;
 		say "[guy] - [item][line break]".
 
+Section - Unlock Table
 
+Table of Unlocks
+stuff		unllevel
+(an object)	(a number)
+with 200 blank rows
+
+Unlocktabling is an action applying to nothing. Understand "showunlock" as unlocktabling.
+
+Carry out unlocktabling:
+	let X be a list of objects; [We cannot repeat through objects, so:]
+	repeat with Y running through rooms:
+		if Y is unlockable:
+			add Y to X;
+	repeat with Y running through persons:
+		if Y is unlockable:
+			add Y to X;
+	repeat with Y running through things:
+		if Y is not a person:
+			if Y is unlockable:
+				add Y to X;
+	repeat with item running through X:
+		choose a blank row in Table of Unlocks;
+		now stuff entry is item;
+		now unllevel entry is unlock level of item;
+	sort Table of Unlocks in unllevel order;
+	repeat through Table of Unlocks:
+		say "[unllevel entry]: [stuff entry] ([if unlock hidden switch of stuff entry is false][unlock text of stuff entry][otherwise]hidden[end if])[line break]".
 
 
 Kerkerkruip Actions and UI ends here.

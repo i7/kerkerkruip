@@ -68,6 +68,9 @@ An object has a number called the unlock level. The unlock level of an object is
 
 Definition: an object is unlockable if its unlock level is greater than 0.
 
+An object has some text called the unlock text. The unlock text of an object is usually "which the developers forgot to describe here".
+An object has a truth state called the unlock hidden switch. The unlock hidden switch of an object is usually false. [Set to true if the object should not announce its unlocking.]
+
 
 Book - Creating the Map
 
