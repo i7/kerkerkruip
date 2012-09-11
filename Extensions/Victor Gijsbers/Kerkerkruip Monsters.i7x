@@ -125,13 +125,14 @@ Check piercing:
 
 Carry out piercing:
 	decrease the health of the player by 1;
-	now the concentration of the player is 0;
 	if player is not alive:
 		say "With a final effort, you manage to form part of your body into a dagger -- but you succumb from the exertion.";
 		end the story saying "You committed suicide";
-	let n be 10;
+	let n be 8;
 	increase n by greatest power of the player;
 	increase n by greatest power of the player;	
+	increase n by the concentration of the player;
+	now the concentration of the player is 0;
 	say "You transform part of your own flesh into a magical dagger, which then speeds towards [the noun] of its own accord. [italic type][run paragraph on]";
 	test the dexterity of the noun against n;
 	say "[roman type] ";
@@ -143,9 +144,7 @@ Carry out piercing:
 		now the attack damage is 1;
 		now global attacker is the player;
 		now global defender is the noun;
-		[TODO reinstate these when we've decided what to do with them]
-		[consider the after hitting rules;]
-		consider the aftereffects rules;
+		consider the aftereffects rules.
 		
 		
 		
@@ -797,41 +796,40 @@ When play begins:
 	now the printed name of X is "lashing chains";
 	now X is ranged.
 
-Check an actor attacking the chain golem (this is the attack a spinning chain golem rule):
+First carry out an actor attacking the chain golem (this is the attack a spinning chain golem rule):
 	let W be a random readied weapon held by the actor;
 	unless W is ranged:
-		if the concentration of the actor is not 0:
-			say "[The actor] attempt[s] to duck under the whirling chains. ";
-			let n be the concentration of the chain golem;
-			increase n by 7;
-			if a random chance of 1 in 2 succeeds:
-				decrease n by 1;
-			test the dexterity of the actor against n;
-			if test result is false:
-				let n be two times the concentration of the chain golem;
-				calculate the pdr for the actor;
-				decrease n by pdr;
-				if n is less than 0:
-					now n is 0;
-				unless n is 0:
-					say " One of the chains catches [the actor] with a loud smack, dealing [bold type][n] damage[roman type][run paragraph on]";
-					decrease the health of the actor by n;
-					if the actor is alive:
-						if the concentration of the actor is not zero:
-							say " and breaking [possessive of the actor] concentration.";
-							now concentration of the actor is 0;
-						otherwise:
-							say ".";
+		say "[The actor] attempt[s] to duck under the whirling chains. ";
+		let n be the concentration of the chain golem;
+		increase n by 7;
+		if a random chance of 1 in 2 succeeds:
+			decrease n by 1;
+		test the dexterity of the actor against n;
+		if test result is false:
+			let n be two times the concentration of the chain golem;
+			calculate the pdr for the actor;
+			decrease n by pdr;
+			if n is less than 0:
+				now n is 0;
+			unless n is 0:
+				say " One of the chains catches [the actor] with a loud smack, dealing [bold type][n] damage[roman type][run paragraph on]";
+				decrease the health of the actor by n;
+				if the actor is alive:
+					if the concentration of the actor is not zero:
+						say " and breaking [possessive of the actor] concentration.";
+						now concentration of the actor is 0;
 					otherwise:
-						say "[if the actor is the player] and killing you.[otherwise] [The actor] immediately dies.[end if]";
-						have an event of the chain golem killing the actor;
-						if the player is dead:
-							end the story saying "You died valiantly, but in vain";
-						rule fails;
+						say ".";
 				otherwise:
-					say " One of the chains catches [the actor] with a loud smack, but it deals no damage[roman type].";
+					say "[if the actor is the player] and killing you.[otherwise] [The actor] immediately dies.[end if]";
+					have an event of the chain golem killing the actor;
+					if the player is dead:
+						end the story saying "You died valiantly, but in vain";
+					rule fails;
 			otherwise:
-				say "[paragraph break]".
+				say " One of the chains catches [the actor] with a loud smack, but it deals no damage[roman type].";
+		otherwise:
+			say "[paragraph break]".
 
 A damage modifier rule (this is the chain golem damage depends on concentration rule):
 	if the global attacker is the chain golem and the concentration of the chain golem is not 0:
