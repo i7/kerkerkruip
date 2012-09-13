@@ -2252,40 +2252,10 @@ Instead of drinking Drakul's lifeblood:
 	say "As you gulp down the blood, you feel your whole body changing -- it becomes cold and fragile, but also swift and lean. Magical power courses through your veins. ";
 	vampirise the player.
 
-Section - Tome of Transmutation (epic)
 
-The tome of transmutation is a thing. First-trans-material is a material that varies. Second-trans-material is a material that varies.
-Tome of transmutation is paper.
-Tome of transmutation is magical.
 
-When play begins (this is the set tome of transmutation rule):
-	let n be a random number between 1 and 10;
-	choose row n in Table of Tome Possibilities;
-	now first-trans-material is the first-material entry;
-	now second-trans-material is the second-material entry.
 
-Table of Tome Possibilities
-first-material		second-material
-wood			iron
-wood			silver
-wood			adamant
-iron				wood
-iron				silver
-iron				adamant
-iron				glass
-silver			iron
-silver			wood
-silver			adamant
 
-The description of tome of transmutation is "When read, this powerful book will turn all [material-adjective of first-trans-material] objects into [second-trans-material].".
-
-Instead of reading the tome of transmutation:
-	say "You speak the mighty words of power. In a flare of magical light, the tome disappears -- and all [material-adjective of first-trans-material] objects have turned into [second-trans-material]!";
-	remove tome of transmutation from play;
-	repeat with item running through things:
-		if material of item is first-trans-material:
-			now material of item is second-trans-material;
-	rule succeeds.
 
 
 
@@ -2411,6 +2381,113 @@ Status rule (this is the ment status rule):
 Instead of eating a package of ment (this is the ment cannot be eaten rule):
 	take no time;
 	say "Ment has to be taken through the nose, not the mouth. Try snorting it.".
+
+
+
+
+
+
+
+
+
+
+
+Chapter - Tomes
+
+A tome is a kind of thing.
+The indefinite article of a tome is usually "the".
+
+The description of a tome is usually "Who knows what will happen if you decide to read this legendary work of magic?"
+
+Section - Tome of Transmutation
+
+The Tome of Transmutation is a tome. First-trans-material is a material that varies. Second-trans-material is a material that varies.
+Tome of Transmutation is paper.
+Tome of Transmutation is magical.
+
+
+When play begins (this is the set tome of transmutation rule):
+	let n be a random number between 1 and 10;
+	choose row n in Table of Tome Possibilities;
+	now first-trans-material is the first-material entry;
+	now second-trans-material is the second-material entry.
+
+Table of Tome Possibilities
+first-material		second-material
+wood			iron
+wood			silver
+wood			adamant
+iron				wood
+iron				silver
+iron				adamant
+iron				glass
+silver			iron
+silver			wood
+silver			adamant
+
+[The description of tome of transmutation is "When read, this powerful book will turn all [material-adjective of first-trans-material] objects into [second-trans-material].".]
+
+Instead of reading the tome of transmutation:
+	say "You speak the mighty words of power. In a flare of magical light, the tome disappears -- and all [material-adjective of first-trans-material] objects have turned into [second-trans-material]!";
+	remove tome of transmutation from play;
+	repeat with item running through things:
+		if material of item is first-trans-material:
+			now material of item is second-trans-material;
+	rule succeeds.
+
+
+Section - Tome of Sudden Death
+
+The Tome of Sudden Death is a tome.
+Tome of Sudden Death is paper.
+Tome of Sudden Death is magical.
+
+The sudden-death-boolean is a truth state that varies. Sudden-death-boolean is false.
+
+Every turn when sudden-death-boolean is true:
+	repeat with guy running through alive persons:
+		now health of guy is 1.
+
+Instead of reading the tome of sudden death:
+	say "Life is fragile. A single blow could kill a man.";
+	remove tome of sudden death from play;
+	now sudden-death-boolean is true;
+	rule succeeds.
+
+
+Section - Tome of the Brightest Flame
+
+The Tome of the Brightest Flame is a tome.
+Tome of the Brightest Flame is paper.
+Tome of the Brightest Flame is magical.
+
+Brightest-flame-counter is a number that varies. Brightest-flame-counter is 0.
+
+Instead of reading the tome of the brightest flame:
+	say "You have chosen fame over a long life. Achieve it while you may!";
+	now hit protection of the player is 50;
+	now brightest-flame-counter is 31.
+	
+A physical damage reduction rule (this is the brightest flame damage reduction rule):
+	if the test subject is the player and brightest-flame-counter is not 0:
+		increase the pdr by 100.	
+	
+Every turn when brightest-flame-counter is not 0:
+	if main actor is the player:
+		decrease brightest-flame-counter by 1;
+		if brightest-flame-counter is 30 or brightest-flame-counter is 20 or brightest-flame-counter is 10 or brightest-flame-counter is 5 or brightest-flame-counter is 1:
+			say "You will [bold type]die[roman type] in [brightest-flame-counter] turn[unless brightest-flame-counter is 1]s[end if]!";
+		if brightest-flame-counter is 0:
+			end the story saying "Your moment of fame has come and gone.".
+
+Victory message rule (this is the brightest flame message rule):
+	if brightest-flame-counter is not 0:		
+		end the story saying "You have destroyed your foe, and will be able to enjoy your victory for another [brightest-flame-counter] turns!";
+		rule succeeds.
+
+
+
+
 
 
 Kerkerkruip Items ends here.
