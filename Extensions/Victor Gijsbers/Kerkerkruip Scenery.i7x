@@ -93,8 +93,8 @@ Chapter - Teleportation beacon
 
 Teleportation-beacon-on is a truth state that varies.
 
-A dungeon interest rule (this is the eleportation-beacon-on rule):
-	if a random chance of 1 in 10 succeeds:
+A dungeon interest rule (this is the teleportation-beacon-on rule):
+	if a random chance of 1 in 10 succeeds and location of teleportation beacon is placeable:
 		now teleportation-beacon-on is true;
 	otherwise:
 		now teleportation-beacon-on is false.
