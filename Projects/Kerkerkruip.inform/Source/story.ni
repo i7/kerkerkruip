@@ -22,12 +22,13 @@ Every turn (this is the mark items as seen every turn rule):
 	repeat with item running through things that are enclosed by the location:
 		if the item is not enclosed by an opaque closed container, now the item is seen.
 		
-Include Alternative Permadeath by Victor Gijsbers.
+Include Kerkerkruip Permadeath by Victor Gijsbers.
 The binary file of save data is called "KerkerkruipSaves".
 
 Use undo prevention.
 
-Include Inform ATTACK by Victor Gijsbers.
+Include version 4 of Inform ATTACK by Victor Gijsbers.
+[You can get the latest ATTACK at https://github.com/i7/ATTACK ]
 
 Include Kerkerkruip Dungeon Generation by Victor Gijsbers.
 Include Kerkerkruip Events by Victor Gijsbers.
