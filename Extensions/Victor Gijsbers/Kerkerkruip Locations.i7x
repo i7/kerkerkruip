@@ -1581,6 +1581,49 @@ Every turn when the location is the maze:
 
 
 
+
+
+
+
+Chapter - The Arcane Vault
+
+The Arcane Vault is a room. "An oppressive silence pervades the marble hall, as if all earthly sounds are smothered by the alien force of magic. For magic is strong here, and seems to be radiating outward from a crystal pedestal in the middle of the room."
+
+The Arcane Vault is connectable.
+The Arcane Vault is not connection-inviting.
+The Arcane Vault is placeable.
+The Arcane Vault is not habitable.
+The Arcane Vault is not treasurable.
+The Arcane Vault is teleportable.
+The Arcane Vault is not extra-accepting.
+The Arcane Vault is vp-agnostic.
+The Arcane Vault is magical.
+
+The rarity of Arcane Vault is 5.
+
+A dungeon interest rule (this is the potentially add the Arcane Vault rule):
+	if Arcane Vault is not placed:
+		if a random chance of 1 in 30 succeeds:
+			put Arcane Vault in a near location;
+			now Arcane Vault is not teleportable.
+
+Instead of listening to the Arcane Vault:
+	say "All sounds seem muffled and unreal.".
+
+The crystal pedestal is scenery in Arcane Vault. The crystal pedestal is a supporter. The description of crystal pedestal is "The pedestal is made of a pale purple crystal you have never seen before. On top of it lies [if at least one tome is on the crystal pedestal][a random tome on the crystal pedestal][otherwise]a tome-shaped piece of air[end if]."
+
+A dungeon interest rule (this is the place a tome on the pedestal rule):
+	let item be a random off-stage tome;
+	move item to the crystal pedestal;
+	if generation info is true, say "* Put [item] on the pedestal.".
+		
+Check taking a tome (this is the do no remove tomes from the pedestal rule):
+	if the noun is on the crystal pedestal:
+		say "The magical forces binding the tome to the pedestal are too great." instead.
+		
+
+
+
 [Elemental Plane: see Kerkerkruip Events and Specials]
 
 Kerkerkruip Locations ends here.
