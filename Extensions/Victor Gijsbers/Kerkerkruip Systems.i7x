@@ -1601,7 +1601,7 @@ A faculty bonus rule (this is the mind bonus of vampire rule):
 	if tested faculty is mind:
 		if the test subject is the player and the current form is vampire-form:
 			increase test score by 2;
-			say " + 2 (vampire)[run paragraph on]".
+			[say " + 2 (vampire)[run paragraph on]"].
 
 An attack modifier rule (this is the vampire has more chance to hit rule):
 	if the global attacker is the player and current form is vampire-form:

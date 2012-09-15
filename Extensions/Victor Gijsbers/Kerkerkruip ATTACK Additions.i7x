@@ -146,8 +146,8 @@ To decide which number is the final body of (guy - a person):
 To decide which number is the mind bonus of (guy - a person):
 	now test subject is guy;
 	now faculty bonus score is 0;
-	consider the mind bonus rules;
-	say "[run paragraph on]";	
+	follow the mind bonus rules;
+	say "[run paragraph on]";
 	consider the faculty bonus rules;
 	say "[run paragraph on]";	
 	decide on faculty bonus score.

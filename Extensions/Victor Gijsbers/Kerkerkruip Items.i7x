@@ -490,7 +490,7 @@ Aftereffects rule (this is the tormenting necklace rule):
 
 Chapter - Hats
 
-[Section - Crown of the empire (minor)
+Section - Crown of the empire (minor)
 
 The crown of the empire is a minor hat. The indefinite article is "the". 
 The crown of the empire is civilised.
@@ -500,12 +500,11 @@ A treasure placement rule (this is the crown of empire can be crown of Hargo rul
 	if a random chance of 1 in 6 succeeds:
 		now the hidden identity of the crown of the empire is the crown of Hargo.
 
-A willpower test rule (this is the willpower bonus of the crown of the empire rule):
+A faculty bonus rule (this is the mind bonus of the crown of the empire rule):
 	if the test subject wears the crown of the empire:
-		increase test score by 2;
-		say " + 2 (crown of the empire)[run paragraph on]".
+		increase faculty bonus score by 2.
 
-The description of the crown of the empire is "This harsh and heavy crown was once worn by one of the emperors of Yahvinna, a line of rulers known for their unbending willpower. [italic type](It grants a +2 bonus on willpower checks.)[roman type]".
+The description of the crown of the empire is "This harsh and heavy crown was once worn by one of the emperors of Yahvinna, a line of rulers known for their unbending willpower. [italic type](It grants a +2 mind bonus.)[roman type]".
 
 Section - Crown of Hargo (cursed)
 
@@ -520,12 +519,12 @@ An attack modifier rule (this is the crown of Hargo rule):
 Chance to win rule when the global defender wears the crown of Hargo (this is the CTW crown of Hargo bonus rule):
 	increase the chance-to-win by 1.
 
-A willpower test rule (this is the willpower bonus of crown of Hargo rule):
+[A mind bonus rule (this is the mind bonus of crown of Hargo rule):
 	if the test subject wears the crown of Hargo:
-		increase test score by 4;
-		say " + 4 (crown of Hargo)[run paragraph on]".
+		increase faculty bonus score by 4;
+	say "[run paragraph on]".]
 
-The description of Crown of Hargo is "Of all the emperors of Yahvinna, Hargo was the most arrogant and the most obstinate. This was both the foundation of his military successes and the cause of his eventual downfall. [italic type](The crown grants a +4 bonus on willpower checks, but a -1 penalty to defence.)[roman type]".]
+The description of Crown of Hargo is "Of all the emperors of Yahvinna, Hargo was the most arrogant and the most obstinate. This was both the foundation of his military successes and the cause of his eventual downfall. [italic type](The crown grants a +4 mind bonus, but a -1 penalty to defence.)[roman type]".
 
 Section - Metastasio's hat (minor)
 
