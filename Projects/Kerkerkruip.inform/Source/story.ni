@@ -46,6 +46,7 @@ Include Kerkerkruip Start and Finish by Victor Gijsbers.
 Include Kerkerkruip Final Declarations by Victor Gijsbers.
 
 Use MAX_PROP_TABLE_SIZE of 300000.
+Use MAX_OBJ_PROP_COUNT of 128.
 
 The maximum score is 18. [1 + 1 + 2 + 2 + 3 + 4 + 5 = 18]
 The notify score changes rule is not listed in any rulebook.
