@@ -449,10 +449,10 @@ An attack modifier rule (this is the blindness defence modifier rule):
 	if the global defender is blind and the global defender is not eyeless:
 		increase the chance-to-win by 2.]
 
-A perception test rule (this is the blindness affects perception rule):
+[A perception test rule (this is the blindness affects perception rule):
 	if the test subject is blind and the test subject is not eyeless:
 		decrease test score by 3;
-		say " - 3 (blindness)[run paragraph on]".
+		say " - 3 (blindness)[run paragraph on]".]
 
 
 Chapter - Healing
@@ -1597,10 +1597,11 @@ Status rule (this is the vampire status rule):
 	if current form is vampire-form:
 		say "You are a [bold type]vampire[roman type]: +2 willpower, +1 attack, -2 defence, modest bonus to hiding, can turn into a [italic type]bat[roman type].[line break][run paragraph on]".
 
-A willpower test rule (this is the willpower bonus of vampire rule):
-	if the test subject is the player and the current form is vampire-form:
-		increase test score by 2;
-		say " + 2 (vampire)[run paragraph on]".
+A faculty test rule (this is the mind bonus of vampire rule):
+	if tested faculty is mind:
+		if the test subject is the player and the current form is vampire-form:
+			increase test score by 2;
+			say " + 2 (vampire)[run paragraph on]".
 
 An attack modifier rule (this is the vampire has more chance to hit rule):
 	if the global attacker is the player and current form is vampire-form:

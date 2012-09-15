@@ -175,11 +175,11 @@ To buff (guy - a person):
 	if m is 2:
 		increase defence of guy by 1;
 	if m is 3:
-		increase dexterity of guy by 1;
+		increase body score of guy by 1;
 	if m is 4:	
-		increase willpower of guy by 1;
+		increase mind score of guy by 1;
 	if m is 5:	
-		increase perception of guy by 1.
+		increase spirit score of guy by 1.
 
 
 Chapter - Setting up initial scores for the player
@@ -188,9 +188,9 @@ To set up initial scores for the player:
 	now permanent health of the player is 13;
 	now melee of the player is 1;
 	now defence of the player is 7;
-	now perception of the player is 5;
-	now dexterity of the player is 5;
-	now willpower of the player is 5;
+	now body score of the player is 5;
+	now mind score of the player is 5;
+	now spirit score of the player is 5;
 	give the player a stat bonus;
 	give the player a stat bonus;
 	give the player a stat penalty;
@@ -201,22 +201,22 @@ To give the player a stat bonus:
 	if i is 1:
 		increase permanent health of the player by 1;
 	if i is 2:
-		increase perception of the player by 1;
+		increase body score of the player by 1;
 	if i is 3:
-		increase dexterity of the player by 1;
+		increase mind score of the player by 1;
 	if i is 4:
-		increase willpower of the player by 1.
+		increase spirit score of the player by 1.
 
 To give the player a stat penalty:
 	let i be a random number between 1 and 4;
 	if i is 1:
 		decrease permanent health of the player by 1;
 	if i is 2:
-		decrease perception of the player by 1;
+		decrease body score of the player by 1;
 	if i is 3:
-		decrease dexterity of the player by 1;
+		decrease mind score of the player by 1;
 	if i is 4:
-		decrease willpower of the player by 1.
+		decrease spirit score of the player by 1.
 
 
 Chapter - Start and Finish

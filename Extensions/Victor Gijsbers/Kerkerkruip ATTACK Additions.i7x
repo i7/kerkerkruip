@@ -110,82 +110,60 @@ Check an actor taking (this is the alternative can't take what's already taken r
 
 
 
-Chapter - Statistics
+Chapter - Faculties
 
-[We already have:
-* Melee
-* Defence
-* Health
+[Up to version 5, Kerkerkruip used Perception, Dexterity and Willpower. From version 6 on, we will use Body, Mind and Spirit instead. These will also be much more interesting.]
 
-Now we will add some more.]
+The faculty test rules are a rulebook.
 
-The ability test rules are a rulebook.
+A person has a number called body score. The body score of a person is usually 5.
+A person has a number called mind score. The mind score of a person is usually 5.
+A person has a number called spirit score. The spirit score of a person is usually 5.
 
-Section - Perception 
+A faculty is a kind of object. Body, mind and spirit are faculties.
 
-A person has a number called Perception. The Perception of a person is usually 5.
+The tested faculty is a faculty that varies.
 
-To test the perception of (guy - a person) against (n - a number):
+Section - Testing faculties
+
+To test the body of (guy - a person) against (n - a number):
+	now tested faculty is body;
+	test the faculty of guy against n.
+
+To test the mind of (guy - a person) against (n - a number):
+	now tested faculty is mind;
+	test the faculty of guy against n.
+
+To test the spirit of (guy - a person) against (n - a number):
+	now tested faculty is spirit;
+	test the faculty of guy against n.
+
+To test the faculty of (guy - a person) against (n - a number):
 	now test subject is guy;
 	now test score is a roll of the dice;
-	say "[The guy] roll[s] ", test score, " + [perception of guy] (perception score)[run paragraph on]";
-	increase test score by perception of guy;
-	consider the perception test rules;
-	consider the ability test rules;
+	say "[The guy] roll[s] ", test score, " + [run paragraph on]";
+	if tested faculty is body:
+		say "[body score of guy] (body)[run paragraph on]";
+		increase test score by body score of guy;
+	if tested faculty is mind:
+		say "[mind score of guy] (mind)[run paragraph on]";
+		increase test score by mind score of guy;
+	if tested faculty is spirit:
+		say "[spirit score of guy] (spirit)[run paragraph on]";
+		increase test score by spirit score of guy;		
+	consider the faculty test rules;
 	say " = [test score] against a target number of ", n, "[run paragraph on]";
 	if test score is less than n:
-		say ", failing the perception check.[run paragraph on]";
+		say ", failing the [tested faculty] check.[run paragraph on]";
 		now test result is false;
 	otherwise:
-		say ", succeeding at the perception check.[run paragraph on]";
+		say ", succeeding at the [tested faculty] check.[run paragraph on]";
 		now test result is true.
 
-The perception test rules are a rulebook.
-
-
-Section - Dexterity
-
-A person has a number called Dexterity. The Dexterity of a person is usually 5.
-
-To test the dexterity of (guy - a person) against (n - a number):
-	now test subject is guy;
-	now test score is a roll of the dice;
-	say "[The guy] roll[s] ", test score, " + [dexterity of guy] (dexterity score)[run paragraph on]";
-	increase test score by dexterity of guy;
-	consider the dexterity test rules;
-	consider the ability test rules;
-	say " = [test score] against a target number of ", n, "[run paragraph on]";
-	if test score is less than n:
-		say ", failing the dexterity check.[run paragraph on]";
-		now test result is false;
-	otherwise:
-		say ", succeeding at the dexterity check.[run paragraph on]";
-		now test result is true.
-
-The dexterity test rules are a rulebook.
 
 
 
-Section - Willpower
 
-A person has a number called Willpower. The Willpower of a person is usually 5.
-
-To test the willpower of (guy - a person) against (n - a number):
-	now test subject is guy;
-	now test score is a roll of the dice;
-	say "[The guy] roll[s] ", test score, " + [willpower of guy] (willpower score)[run paragraph on]";
-	increase test score by willpower of guy;
-	consider the willpower test rules;
-	consider the ability test rules;
-	say " = [test score] against a target number of ", n, "[run paragraph on]";
-	if test score is less than n:
-		say ", failing the willpower check.[run paragraph on]";
-		now test result is false;
-	otherwise:
-		say ", succeeding at the willpower check.[run paragraph on]";
-		now test result is true.
-
-The willpower test rules are a rulebook.
 
 
 Section - Inherent damage modifier 

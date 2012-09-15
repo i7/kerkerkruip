@@ -17,7 +17,7 @@ Last carry out the ravenous armadillo armadillo-eating:
 		now the printed name of the ravenous armadillo is "vampire armadillo";
 		increase melee of ravenous armadillo by 1;
 		decrease defence of ravenous armadillo by 2;
-		increase willpower of ravenous armadillo by 2;
+		increase mind score of ravenous armadillo by 2;
 		now faction of ravenous armadillo is undead.
 
 

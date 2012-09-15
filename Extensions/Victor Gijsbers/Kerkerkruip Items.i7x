@@ -195,7 +195,7 @@ Instead of drinking an essence:
 	say "The gaseous essence is no fluid, and cannot be drunk. You could, however, [italic type]inhale[roman type] it.".
 
 
-Section - Essence of Caution (minor)
+[Section - Essence of Caution (minor)
 
 The essence of caution is a minor essence. The indefinite article is "the".
 The essence of caution is magical.
@@ -222,7 +222,7 @@ An attack modifier rule (this is the caution grants better retreat rule):
 	if the global defender is the player and the player is retreater:
 		if the player is cautious:
 			say " - 2 (essence of caution)[run paragraph on]";
-			decrease the attack strength by 2.
+			decrease the attack strength by 2.]
 
 
 Section - Essence of Rage (minor)
@@ -233,7 +233,7 @@ The essence of rage is iron.
 
 A person can be enraged. A person is usually not enraged.
 
-The description of the essence of rage is "This small metal bottle contains the magical essence of rage, distilled from the brain of [one of]a berserk warrior from the far north[or]Charles IV of Averoigne, who, at the moment of his greatest victory, was poisoned by the brother he had always cherished[sticky random]. When inhaled, it confers this mindset to the user. [italic type](+1 willpower, +1 attack, unable to retreat.)[roman type]".
+[The description of the essence of rage is "This small metal bottle contains the magical essence of rage, distilled from the brain of [one of]a berserk warrior from the far north[or]Charles IV of Averoigne, who, at the moment of his greatest victory, was poisoned by the brother he had always cherished[sticky random]. When inhaled, it confers this mindset to the user. [italic type](+1 willpower, +1 attack, unable to retreat.)[roman type]".
 
 Carry out inhaling the essence of rage:
 	say " You will show them all that you are not to be toyed with!";
@@ -257,7 +257,7 @@ Last check going (this is the do not go in combat when enraged rule):
 			if the faction of X hates the faction of the player:
 				now Y is X;
 		take no time;
-		say "And allow [the Y] to live? Never!" instead.
+		say "And allow [the Y] to live? Never!" instead.]
 
 
 Section - Essence of Patience (minor)
@@ -490,7 +490,7 @@ Aftereffects rule (this is the tormenting necklace rule):
 
 Chapter - Hats
 
-Section - Crown of the empire (minor)
+[Section - Crown of the empire (minor)
 
 The crown of the empire is a minor hat. The indefinite article is "the". 
 The crown of the empire is civilised.
@@ -525,7 +525,7 @@ A willpower test rule (this is the willpower bonus of crown of Hargo rule):
 		increase test score by 4;
 		say " + 4 (crown of Hargo)[run paragraph on]".
 
-The description of Crown of Hargo is "Of all the emperors of Yahvinna, Hargo was the most arrogant and the most obstinate. This was both the foundation of his military successes and the cause of his eventual downfall. [italic type](The crown grants a +4 bonus on willpower checks, but a -1 penalty to defence.)[roman type]".
+The description of Crown of Hargo is "Of all the emperors of Yahvinna, Hargo was the most arrogant and the most obstinate. This was both the foundation of his military successes and the cause of his eventual downfall. [italic type](The crown grants a +4 bonus on willpower checks, but a -1 penalty to defence.)[roman type]".]
 
 Section - Metastasio's hat (minor)
 
@@ -723,7 +723,7 @@ Chapter - Gauntlets
 Chapter - Masks
 [Includes masks, goggles, and anything else that covers the face.]
 
-Section - Goggles of acuity (minor)
+[Section - Goggles of acuity (minor)
 
 The goggles of acuity are a minor mask. They are plural-named. The indefinite article is "the". 
 The goggles of acuity are civilised.
@@ -749,7 +749,7 @@ A blindness rule (this is the goggles of blindness rule):
 	if the test subject wears the goggles of blindness:
 		rule succeeds.
 
-The description of goggles of blindness is "These goggles prevent the wearer from seeing anything at all. A free-for-all fight between condemned criminals forced to wear such goggles is one of the most beloved shows during the Feast of Flesh; you have to smile as you recall the spectacle.".
+The description of goggles of blindness is "These goggles prevent the wearer from seeing anything at all. A free-for-all fight between condemned criminals forced to wear such goggles is one of the most beloved shows during the Feast of Flesh; you have to smile as you recall the spectacle.".]
 
 Section - War mask (minor)
 
@@ -1493,20 +1493,11 @@ Status rule (this is the skilled status rule):
 	if player skill bonus timer is greater than 0:
 		say "You are [bold type]skilled[roman type]: +3 bonus to perception, dexterity and willpower checks.[line break][run paragraph on]".
 
-A perception test rule (this is the perception bonus of being skilled rule):
+A faculty test rule (this is the perception bonus of being skilled rule):
 	if the test subject is the player and the player skill bonus timer is greater than 0:
 		increase test score by 3;
 		say " + 3 (skilled)[run paragraph on]".
 
-A willpower test rule (this is the willpower bonus of being skilled rule):
-	if the test subject is the player and the player skill bonus timer is greater than 0:
-		increase test score by 3;
-		say " + 3 (skilled)[run paragraph on]".
-		
-A dexterity test rule (this is the dexterity bonus of being skilled rule):
-	if the test subject is the player and the player skill bonus timer is greater than 0:
-		increase test score by 3;
-		say " + 3 (skilled)[run paragraph on]".		
 
 
 Section - Scroll of Death
@@ -2292,7 +2283,7 @@ Every turn when the main actor is the player:
 		if the OD timer is 0:
 			end the story saying "You OD'ed".
 
-An ability test rule (this is the ment ability bonus rule):
+A faculty test rule (this is the ment ability bonus rule):
 	if the test subject is the player:
 		if ment timer is greater than 0:
 			increase test score by ment bonus;
@@ -2329,7 +2320,7 @@ An attack modifier rule (this is the feeling down attack penalty rule):
 				if the numbers boolean is true, say " - [ment addiction] (feeling down)[run paragraph on]";
 				decrease the attack strength by ment addiction.	
 				
-An ability test rule (this is the feeling down ability penalty rule):
+A faculty test rule (this is the feeling down ability penalty rule):
 	if the test subject is the player:
 		if the ment addiction is greater than 0:
 			if the ment timer is 0:

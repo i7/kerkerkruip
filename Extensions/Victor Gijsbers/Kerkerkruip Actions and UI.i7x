@@ -309,9 +309,9 @@ Carry out asking status:
 	say "[bold type]Health[roman type]: [health of the player] of [permanent health of the player][line break][run paragraph on]";
 	say "[bold type]Attack[roman type]: [melee of the player][line break][run paragraph on]";
 	say "[bold type]Defence[roman type]: [defence of the player][line break][run paragraph on]";
-	say "[bold type]Perception[roman type]: [perception of the player][line break][run paragraph on]";
-	say "[bold type]Dexterity[roman type]: [Dexterity of the player][line break][run paragraph on]";
-	say "[bold type]Willpower[roman type]: [Willpower of the player][line break][run paragraph on]";
+	say "[bold type]Body[roman type]: [body score of the player][line break][run paragraph on]";
+	say "[bold type]Mind[roman type]: [mind score of the player][line break][run paragraph on]";
+	say "[bold type]Spirit[roman type]: [spirit score of the player][line break][run paragraph on]";
 	consider the status rules;
 	consider the status skill rules;
 	say "[line break][run paragraph on]".

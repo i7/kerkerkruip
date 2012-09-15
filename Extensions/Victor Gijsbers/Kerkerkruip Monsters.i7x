@@ -21,8 +21,8 @@ The swarm of daggers is flyer.
 The health of the swarm of daggers is 12.
 The melee of the swarm of daggers is 3.
 The defence of the swarm of daggers is 4.
-The dexterity of the swarm of daggers is 6.
-The perception of the swarm of daggers is 4. 
+The body score of the swarm of daggers is 6.
+The spirit score of the swarm of daggers is 4. 
 
 When play begins:
 	let X be a random natural weapon part of the swarm of daggers;
@@ -92,15 +92,15 @@ Absorbing power of the daggers:
 	increase inherent damage modifier of the player by 2;
 	decrease defence of the player by 1;
 	increase permanent health of the player by 6;
-	increase dexterity of the player by 1;
-	say "As the daggers fall down, you feel the soul that animated them absorbed into your own body. You are sharp. You are deadly. ([bold type]Power of the daggers[roman type]: +2 attack, +1 damage, -1 defence, +6 health, +1 dexterity, and the [italic type]pierce[roman type] skill.)[paragraph break]".
+	increase body score of the player by 1;
+	say "As the daggers fall down, you feel the soul that animated them absorbed into your own body. You are sharp. You are deadly. ([bold type]Power of the daggers[roman type]: +2 attack, +1 damage, -1 defence, +6 health, +1 body score, and the [italic type]pierce[roman type] skill.)[paragraph break]".
 
 Repelling power of the daggers:
 	decrease melee of the player by 2;
 	decrease inherent damage modifier of the player by 2;
 	increase defence of the player by 1;
 	decrease permanent health of the player by 6;
-	decrease dexterity of the player by 1.
+	decrease body score of the player by 1.
 
 Status skill rule (this is the pierce status skill rule):
 	if the power of daggers is granted:
@@ -134,7 +134,7 @@ Carry out piercing:
 	increase n by the concentration of the player;
 	now the concentration of the player is 0;
 	say "You transform part of your own flesh into a magical dagger, which then speeds towards [the noun] of its own accord. [italic type][run paragraph on]";
-	test the dexterity of the noun against n;
+	test the body of the noun against n;
 	say "[roman type] ";
 	if test result is true:
 		say "[The noun] manages to evade the dagger.";
@@ -344,8 +344,8 @@ The description of ravenous armadillo is "As their name suggests, ravenous armad
 The health of the ravenous armadillo is 10.
 The melee of the ravenous armadillo is -2.
 The defence of the ravenous armadillo is 5.
-The dexterity of the ravenous armadillo is 3.
-The perception of the ravenous armadillo is 4. 
+The body score of the ravenous armadillo is 3.
+The spirit score of the ravenous armadillo is 4. 
 
 A damage modifier rule (this is the ravenous armadillo takes less damage rule):
 	if the global defender is the ravenous armadillo:
@@ -501,8 +501,8 @@ Absorbing power of the armadillo:
 	do the armadillo stomach trick;
 	increase melee of the player by 1;
 	increase permanent health of the player by 5;
-	decrease dexterity of the player by 1;
-	say "As the armadillo succumbs, you feel its soul absorbed into your own body. ([bold type]Power of the armadillo[roman type]: +1 attack, +1 damage resistance, +5 health, -1 dexterity, and the [italic type]scales[roman type] skill, which gives you a temporary damage reduction that costs some health to use and expires as soon as you attack.)[paragraph break]".
+	decrease body score of the player by 1;
+	say "As the armadillo succumbs, you feel its soul absorbed into your own body. ([bold type]Power of the armadillo[roman type]: +1 attack, +1 damage resistance, +5 health, -1 body score, and the [italic type]scales[roman type] skill, which gives you a temporary damage reduction that costs some health to use and expires as soon as you attack.)[paragraph break]".
 
 A damage modifier rule (this is the power of the armadillo gives damage resistance rule):
 	if the global defender is the player and the power of the armadillo is granted:
@@ -512,7 +512,7 @@ A damage modifier rule (this is the power of the armadillo gives damage resistan
 Repelling power of the armadillo:
 	decrease melee of the player by 1;
 	decrease permanent health of the player by 5;
-	increase dexterity of the player by 1.
+	increase body score of the player by 1.
 
 Section - The scales skill
 
@@ -591,9 +591,9 @@ The description of Miranda is "Although she is currently working as one of Malyg
 The health of Miranda is 12.
 The melee of Miranda is 0.
 The defence of Miranda is 7.
-The dexterity of Miranda is 7.
-The perception of Miranda is 6.
-The willpower of Miranda is 5.
+The body score of Miranda is 7.
+The spirit score of Miranda is 6.
+The mind score of Miranda is 5.
 
 Miranda is weapon user.
 
@@ -748,14 +748,14 @@ Absorbing power of Miranda:
 	increase melee of the player by 1;
 	increase defence of the player by 1;	
 	increase permanent health of the player by 5;
-	increase perception of the player by 1;	
-	say "As Miranda dies, you feel her soul absorbed into your own body. ([bold type]Power of Miranda[roman type]: +1 attack, +1 defence, +5 health, +1 perception, and the [italic type]stun[roman type] skill.)[paragraph break]".
+	increase spirit score of the player by 1;	
+	say "As Miranda dies, you feel her soul absorbed into your own body. ([bold type]Power of Miranda[roman type]: +1 attack, +1 defence, +5 health, +1 spirit score, and the [italic type]stun[roman type] skill.)[paragraph break]".
 
 Repelling power of Miranda:
 	decrease melee of the player by 1;
 	decrease defence of the player by 1;
 	decrease permanent health of the player by 5;
-	decrease perception of the player by 1.
+	decrease spirit score of the player by 1.
 
 Status skill rule (this is the Miranda status skill rule):
 	if the power of Miranda is granted:
@@ -784,8 +784,8 @@ The description of the chain golem is "A hulking form made of metal chains and a
 The health of the chain golem is 24.
 The melee of the chain golem is 1.
 The defence of the chain golem is 8.
-The dexterity of the chain golem is 4.
-The perception of the chain golem is 4. 
+The body score of the chain golem is 4.
+The spirit score of the chain golem is 4. 
 
 When play begins:
 	let X be a random natural weapon part of the chain golem;
@@ -804,7 +804,7 @@ First carry out an actor attacking the chain golem (this is the attack a spinnin
 		increase n by 7;
 		if a random chance of 1 in 2 succeeds:
 			decrease n by 1;
-		test the dexterity of the actor against n;
+		test the body of the actor against n;
 		if test result is false:
 			let n be two times the concentration of the chain golem;
 			calculate the pdr for the actor;
@@ -877,7 +877,7 @@ An AI action selection rule for the at-Act chain golem (this is the chain golem 
 
 Carry out a person golem-disarming:
 	say "[The chain golem] suddenly launches several of its chains in an attempt to grab [possessive of the noun] weapon. [italic type]";
-	test the perception of the noun against 10;
+	test the spirit of the noun against 10;
 	if test result is true:
 		say "[roman type] [The noun] see[s] it coming in time, and manage[s] to keep the weapon out of the golem's reach.";
 	otherwise:
@@ -993,9 +993,9 @@ The description of the jumping bomb is "Connoisseurs consider these jumping ball
 The health of the jumping bomb is 18.
 The melee of the jumping bomb is -1.
 The defence of the jumping bomb is 8.
-The dexterity of the jumping bomb is 6.
-The perception of the jumping bomb is 4. 
-The willpower of the jumping bomb is 6.
+The body score of the jumping bomb is 6.
+The spirit score of the jumping bomb is 4. 
+The mind score of the jumping bomb is 6.
 
 When play begins:
 	if difficulty is 0:
@@ -1346,9 +1346,9 @@ Instead of listening to the demon of rage:
 The health of the demon of rage is 18.
 The melee of the demon of rage is 0.
 The defence of the demon of rage is 8.
-The dexterity of the demon of rage is 5.
-The perception of the demon of rage is 5. 
-The willpower of the demon of rage is 5.
+The body score of the demon of rage is 5.
+The spirit score of the demon of rage is 5. 
+The mind score of the demon of rage is 5.
 
 When play begins:
 	let X be a random natural weapon part of the demon of rage;
@@ -1374,9 +1374,9 @@ To do the demon of rage power-up:
 	increase defence of demon of rage by 1;
 	increase health of demon of rage by 3;
 	increase permanent health of demon of rage by 3;
-	increase dexterity of demon of rage by 1;
-	increase dexterity of demon of rage by 2;
-	increase dexterity of demon of rage by 3;
+	increase body score of demon of rage by 1;
+	increase body score of demon of rage by 2;
+	increase body score of demon of rage by 3;
 	if demon-of-rage-number is 2:
 		now demon of rage is flyer;
 	if demon-of-rage-number is 3:
@@ -1516,9 +1516,9 @@ The description of the mindslug is "It is of the dreaded race of mindslugs, abom
 The health of the mindslug is 27.
 The melee of the mindslug is 2.
 The defence of the mindslug is 7.
-The dexterity of the mindslug is 3.
-The perception of the mindslug is 7. 
-The willpower of the mindslug is 11.
+The body score of the mindslug is 3.
+The spirit score of the mindslug is 7. 
+The mind score of the mindslug is 11.
 
 When play begins:
 	let X be a random natural weapon part of the mindslug;
@@ -1560,14 +1560,14 @@ Carry out the mindslug mindblasting:
 	say "The mindslug blasts [the noun] with psionic energy. [italic type]";
 	let n be 10;
 	increase n by concentration of the mindslug;
-	test the willpower of the noun against n; 
+	test the mind of the noun against n; 
 	say "[roman type]";
 	if test result is true:
 		say " [The noun] resist[s] the mindslug's influence!";
 	otherwise:
-		decrease willpower of the noun by 1;
-		say " [The noun] fail[s] to resist the mindslug's mental blast, and [possessive of the noun] willpower decreases to [willpower of the noun].";
-		if willpower of the noun is less than 1:
+		decrease mind score of the noun by 1;
+		say " [The noun] fail[s] to resist the mindslug's mental blast, and [possessive of the noun] mind score decreases to [mind score of the noun].";
+		if mind score of the noun is less than 1:
 			if the noun is the player:
 				end the story saying "You live on as the unquestioning slave of a giant slug";
 			otherwise:
@@ -1578,8 +1578,8 @@ Carry out the mindslug mindblasting:
 				let the noun lose concentration;
 	now the concentration of the mindslug is 0.
 		
-An AI target selection rule for a person (called target) when the running AI is the mindslug (this is the mindslug prefers low willpower rule):
-	decrease the Weight by the willpower of the target.
+An AI target selection rule for a person (called target) when the running AI is the mindslug (this is the mindslug prefers low mind score rule):
+	decrease the Weight by the mind score of the target.
 
 Section - Prose
 
@@ -1750,15 +1750,15 @@ Absorbing power of the mindslug:
 	increase melee of the player by 3;
 	increase defence of the player by 3;
 	increase permanent health of the player by 15;
-	increase willpower of the player by 4;
-	say "As the mindslug dies, you feel its powerful intelligence absorbed into your own body. ([bold type]Power of the mindslug[roman type]: +3 attack, +3 defence, +15 health, +4 willpower, and you can attempt to [italic type]dominate[roman type] an enemy.)[paragraph break]";
+	increase mind score of the player by 4;
+	say "As the mindslug dies, you feel its powerful intelligence absorbed into your own body. ([bold type]Power of the mindslug[roman type]: +3 attack, +3 defence, +15 health, +4 mind score, and you can attempt to [italic type]dominate[roman type] an enemy.)[paragraph break]";
 	make slaves followers.
 
 Repelling power of the mindslug:
 	decrease melee of the player by 3;
 	decrease defence of the player by 3;
 	decrease permanent health of the player by 15;
-	decrease willpower of the player by 4;
+	decrease mind score of the player by 4;
 	unmake slaves followers.
 
 To make slaves followers:
@@ -1811,8 +1811,8 @@ Check dominating (this is the dominated rule):
 Carry out dominating:
 	let n be 50 times the health of the noun; [50 * HN]
 	now n is n divided by the health of the player; [(50 * HN) / HP]
-	increase n by 5 times willpower of the noun;
-	decrease n by 5 times willpower of the player; [((50 * HN) / HP) + 5 * (WN - WP)] [= 50 when everything is identical.]
+	increase n by 5 times mind score of the noun;
+	decrease n by 5 times mind score of the player; [((50 * HN) / HP) + 5 * (WN - WP)] [= 50 when everything is identical.]
 	if n is less than 10, now n is 10;
 	if n is greater than 90, now n is 90;
 	let m be a random number between 1 and 100;
@@ -1861,9 +1861,9 @@ The level of giant tentacle is 3.
 The health of giant tentacle is 35.
 The melee of giant tentacle is 4.
 The defence of giant tentacle is 10.
-The dexterity of giant tentacle is 10.
-The perception of giant tentacle is 6. 
-The willpower of giant tentacle is 6.
+The body score of giant tentacle is 10.
+The spirit score of giant tentacle is 6. 
+The mind score of giant tentacle is 6.
 
 When play begins:
 	let X be a random natural weapon part of giant;
@@ -2023,7 +2023,7 @@ An AI action selection rule for the at-React giant tentacle (this is the tentacl
 Carry out the giant tentacle tentacle-shaking:
 	say "The giant tentacle vigourously shakes [the main actor], aiming to confuse and confound.[italic type] ";
 	let n be 9 + concentration of the giant tentacle;
-	test the willpower of the main actor against n; 
+	test the mind of the main actor against n; 
 	say "[roman type]";
 	if test result is true:
 		say " [The main actor] remain[s] [if the concentration of the main actor is greater than 0]concentrated[otherwise]sharp[end if].";
@@ -2124,7 +2124,7 @@ Carry out confusing:
 		increase n by 3;	
 	if a random chance of 1 in 10 succeeds:
 		increase n by 10;
-	test the willpower of the main actor against n; 
+	test the mind of the main actor against n; 
 	say "[roman type]";
 	if test result is true:
 		say " [The main actor] remain[s] [if the concentration of the main actor is greater than 0]concentrated[otherwise]sharp[end if].";
@@ -2152,9 +2152,9 @@ Difficulty level of the minotaur is 2.
 The health of minotaur is 35.
 The melee of minotaur is 4.
 The defence of minotaur is 10.
-The dexterity of minotaur is 6.
-The perception of minotaur is 5. 
-The willpower of minotaur is 8.
+The body score of minotaur is 6.
+The spirit score of minotaur is 5. 
+The mind score of minotaur is 8.
 
 When play begins:
 	let X be a random natural weapon part of minotaur;
@@ -2379,7 +2379,7 @@ Every turn (this is the grant fanatics of power boolean rule):
 	if healer of Aite is dead and Tormentor of Aite is dead and Defender of Aite is dead:
 		if fanatics power boolean is false:
 			now fanatics power boolean is true;
-			say "Impressed with your prowess in combat, Aite grants you her favour! ([bold type]Power of the fanatics of Aite[roman type]: +4 attack, +4 defence, +20 health, +2 willpower, pray to Aite anywhere.)[paragraph break]";
+			say "Impressed with your prowess in combat, Aite grants you her favour! ([bold type]Power of the fanatics of Aite[roman type]: +4 attack, +4 defence, +20 health, +2 mind score, pray to Aite anywhere.)[paragraph break]";
 			gain the power of the fanatics of Aite. 
 
 To gain the power of the Fanatics of Aite:
@@ -2394,13 +2394,13 @@ Absorbing power of the Fanatics of Aite:
 	increase melee of the player by 4;
 	increase defence of the player by 4;
 	increase permanent health of the player by 20;
-	increase willpower of the player by 2.
+	increase mind score of the player by 2.
 
 Repelling power of the Fanatics of Aite:
 	decrease melee of the player by 4;
 	decrease defence of the player by 4;
 	decrease permanent health of the player by 20;
-	decrease willpower of the player by 2.
+	decrease mind score of the player by 2.
 
 Status skill rule (this is the fanatics of aite status skill rule):
 	if power of the fanatics of aite is granted:
@@ -2437,9 +2437,9 @@ The level of Bodmall is 4.
 The health of Bodmall is 35.
 The melee of Bodmall is 5.
 The defence of Bodmall is 12.
-The dexterity of Bodmall is 8.
-The perception of Bodmall is 8. 
-The willpower of Bodmall is 9.
+The body score of Bodmall is 8.
+The spirit score of Bodmall is 8. 
+The mind score of Bodmall is 9.
 
 When play begins:
 	let X be a random natural weapon part of Bodmall;
@@ -2579,10 +2579,10 @@ Check an actor attacking when the thorny bushes are in the location (this is the
 			let W be a random readied weapon held by the actor;
 			unless W is ranged:
 				say "[The actor] must move through the thorny bushes to reach [the noun]. [italic type]";
-				test the perception of the actor against 12;
+				test the spirit of the actor against 12;
 				if test result is true:
 					say " ";
-					test the dexterity of the actor against 12;
+					test the body of the actor against 12;
 				if test result is true:
 					say "[roman type] The thorns deal [bold type]no damage[roman type].";
 				otherwise:
@@ -2681,18 +2681,18 @@ Absorbing power of Bodmall:
 	increase melee of the player by 4;
 	increase defence of the player by 4;
 	increase permanent health of the player by 20;
-	increase willpower of the player by 1;
-	increase perception of the player by 1;
-	increase dexterity of the player by 1;
+	increase mind score of the player by 1;
+	increase spirit score of the player by 1;
+	increase body score of the player by 1;
 	say "As Bodmall dies, you feel her soul absorbed into your own body. ([bold type]Power of Bodmall[roman type]: +4 attack, +4 defence, +20 health, +1 to all attributes, and you can summon [italic type]thorns[roman type].)[paragraph break]".
 
 Repelling power of Bodmall:
 	decrease melee of the player by 4;
 	decrease defence of the player by 4;
 	decrease permanent health of the player by 20;
-	decrease willpower of the player by 1;
-	decrease perception of the player by 1;
-	decrease dexterity of the player by 1.
+	decrease mind score of the player by 1;
+	decrease spirit score of the player by 1;
+	decrease body score of the player by 1.
 
 Status skill rule (this is the Bodmall status skill rule):
 	if power of Bodmall is granted:
@@ -2730,9 +2730,9 @@ The level of Malygris is 5.
 The health of Malygris is 55.
 The melee of Malygris is 7.
 The defence of Malygris is 16.
-The dexterity of Malygris is 9.
-The perception of Malygris is 9. 
-The willpower of Malygris is 12.
+The body score of Malygris is 9.
+The spirit score of Malygris is 9. 
+The mind score of Malygris is 12.
 
 When play begins:
 	let X be a random natural weapon part of Malygris;
@@ -2758,17 +2758,17 @@ An aftereffects rule (this is the dagger of draining aftereffects rule):
 				increase defence of the global attacker by 1;
 				say "[possessive of the global defender] defensive reflexes, transferring them to [the global attacker].";
 			-- 2:
-				decrease willpower of the global defender by 1;
-				increase willpower of the global attacker by 1;
-				say "[possessive of the global defender] willpower, transferring it to [the global attacker].";
+				decrease mind score of the global defender by 1;
+				increase mind score of the global attacker by 1;
+				say "[possessive of the global defender] mind score, transferring it to [the global attacker].";
 			-- 3:
-				decrease dexterity of the global defender by 1;
-				increase dexterity of the global attacker by 1;
-				say "[possessive of the global defender] dexterity, transferring it to [the global attacker].";
+				decrease body score of the global defender by 1;
+				increase body score of the global attacker by 1;
+				say "[possessive of the global defender] body score, transferring it to [the global attacker].";
 			-- 4:
-				decrease perception of the global defender by 1;
-				increase perception of the global attacker by 1;
-				say "[possessive of the global defender] perception, transferring it to [the global attacker].";.
+				decrease spirit score of the global defender by 1;
+				increase spirit score of the global attacker by 1;
+				say "[possessive of the global defender] spirit score, transferring it to [the global attacker].";.
 
 An AI weapon selection rule for the dagger of draining (this is the Malygris prefers the dagger of draining rule):
 	increase the Weight by 10.
@@ -2846,9 +2846,9 @@ The demonic assassin is demonic.
 The health of demonic assassin is 25.
 The melee of demonic assassin is 4.
 The defence of demonic assassin is 12.
-The dexterity of demonic assassin is 8.
-The perception of demonic assassin is 8. 
-The willpower of demonic assassin is 8.
+The body score of demonic assassin is 8.
+The spirit score of demonic assassin is 8. 
+The mind score of demonic assassin is 8.
 
 The demonic assassin is follower.
 Follower percentile chance of demonic assassin is 100.
@@ -2979,9 +2979,9 @@ The level of rotting corpse is 0.
 The health of rotting corpse is 30.
 The melee of rotting corpse is 3.
 The defence of rotting corpse is 8.
-The dexterity of rotting corpse is 3.
-The perception of rotting corpse is 6. 
-The willpower of rotting corpse is 4.
+The body score of rotting corpse is 3.
+The spirit score of rotting corpse is 6. 
+The mind score of rotting corpse is 4.
 
 When play begins:
 	let X be a random natural weapon part of the rotting corpse;
@@ -3125,9 +3125,9 @@ The level of the aswang is 0.
 The health of the aswang is 22.
 The melee of the aswang is 2.
 The defence of the aswang is 9.
-The dexterity of the aswang is 6.
-The perception of the aswang is 5. 
-The willpower of the aswang is 7.
+The body score of the aswang is 6.
+The spirit score of the aswang is 5. 
+The mind score of the aswang is 7.
 
 When play begins:
 	let X be a random natural weapon part of the aswang;
@@ -3207,7 +3207,7 @@ An AI action selection rule for the as-witch aswang (this is the aswang as witch
 Carry out the aswang aswang-hexing:
 	say "The aswang attempts to hex [the noun]. [italic type]";
 	let n be 11 + concentration of the aswang;
-	test the willpower of the noun against n;
+	test the mind of the noun against n;
 	if test result is false:
 		say " [roman type][The noun] [is-are] now [bold type]hexed[roman type].";
 		now the noun is hexed;
@@ -3310,9 +3310,9 @@ The level of the abyss of the soul is 0.
 The health of the abyss of the soul is 40.
 The melee of the abyss of the soul is 0.
 The defence of the abyss of the soul is 8.
-The dexterity of the abyss of the soul is 5.
-The perception of the abyss of the soul is 5. 
-The willpower of the abyss of the soul is 20.
+The body score of the abyss of the soul is 5.
+The spirit score of the abyss of the soul is 5. 
+The mind score of the abyss of the soul is 20.
 
 The abyss of the soul is eyeless.
 The abyss of the soul is emotionless.
@@ -3405,9 +3405,9 @@ The smoke demon is eyeless.
 The health of the smoke demon is 10.
 The melee of the smoke demon is 2.
 The defence of the smoke demon is 5.
-The dexterity of the smoke demon is 6.
-The perception of the smoke demon is 6. 
-The willpower of the smoke demon is 8.
+The body score of the smoke demon is 6.
+The spirit score of the smoke demon is 6. 
+The mind score of the smoke demon is 8.
 
 When play begins:
 	let X be a random natural weapon part of the smoke demon;
@@ -3526,9 +3526,9 @@ The imp is flyer.
 The health of the imp is 10.
 The melee of the imp is -2.
 The defence of the imp is 9.
-The dexterity of the imp is 9.
-The perception of the imp is 6. 
-The willpower of the imp is 4.
+The body score of the imp is 9.
+The spirit score of the imp is 6. 
+The mind score of the imp is 4.
 
 When play begins:
 	let X be a random natural weapon part of the imp;

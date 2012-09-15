@@ -84,7 +84,7 @@ A detection rule (this is the tension increases probability of detection rule):
 
 A detection rule (this is the perception probability of detection rule):
 	unless the main actor is the player:
-		increase the detection probability by the perception of the main actor.
+		increase the detection probability by the spirit score of the main actor.
 
 A detection rule (this is the on-the-lookout increases probability of detection rule):
 	unless the main actor is the player:
@@ -306,10 +306,10 @@ An attack modifier rule (this is the retreating is less risky with smoke rule):
 		say " - [n] (retreat covered by smoke)[run paragraph on]";
 		decrease the attack strength by n.
 
-A perception test rule when the attacker is affected by smoke (this is the perception penalty of smoke rule): [BUG with chain golem]
+[A perception test rule when the attacker is affected by smoke (this is the perception penalty of smoke rule): [BUG with chain golem]
 	let n be smoke penalty of the location;
 	decrease test score by n;
-	say " - [n] (smoke)[run paragraph on]".
+	say " - [n] (smoke)[run paragraph on]".]
 
 
 

@@ -77,7 +77,7 @@ Check an actor hitting when the location is Hall of Mirrors (this is the sometim
 	unless the global attacker is blind:
 		unless the global attacker grapples the global defender:
 			unless the global defender grapples the global attacker:
-				test the perception of global attacker against 10;
+				test the mind of global attacker against 10;
 				if test result is false:
 					say " Confused by the mirrors, [if global attacker is the player]you start[otherwise][the global attacker] starts[end if] attacking a reflection before realising [if global attacker is the player]your[otherwise]its[end if] mistake.";
 					if the concentration of the global attacker is greater than 1:
@@ -87,12 +87,12 @@ Check an actor hitting when the location is Hall of Mirrors (this is the sometim
 				otherwise:
 					say " Seeing through the illusion created by the mirrors, [if global attacker is the player]you attack[otherwise][the global attacker] attacks[end if] the real [if global defender is not the player][global defender][otherwise]you[end if].".
 
-A perception test rule (this is the concentration bonus in Hall of Mirrors rule): [BUG with chain golem]
+[A perception test rule (this is the concentration bonus in Hall of Mirrors rule): [BUG with chain golem]
 	if an actor attacking in Hall of Mirrors and the actor is the test subject:
 		unless the test subject is blind:
 			if concentration of the actor is greater than 0:
 				increase test score by concentration of the actor;
-				say " + [concentration of the actor] (concentration)[run paragraph on]".
+				say " + [concentration of the actor] (concentration)[run paragraph on]".]
 
 An AI action selection rule for a person (called P) when the location is Hall of Mirrors (this is the concentration is more important in the Hall of Mirrors rule):
 	choose row with an Option of the action of P concentrating in the Table of AI Action Options;
@@ -277,7 +277,7 @@ An aftereffects rule (this is the hit may send you off the bridge of doom rule):
 				if n is less than the attack damage:
 					say "Reeling from the blow, [the global defender] balance[s] on the edge of the bridge. [italic type]";
 					let n be a random number between 6 and 10;
-					test the dexterity of the global defender against n;
+					test the body of the global defender against n;
 					say "[roman type]";
 					if test result is false:
 						if the global defender is the player:
@@ -965,7 +965,7 @@ An aftereffects rule (this is the hit may send you off the vast staircase rule):
 					if n is less than the attack damage:
 						say "Reeling from the blow, [the global defender] balance[s] on the edge of the staircase. [italic type]";
 						let n be a random number between 6 and 11;
-						test the dexterity of the global defender against n;
+						test the body of the global defender against n;
 						say "[roman type]";
 						if test result is false:
 							if the global defender is the player:
