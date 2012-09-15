@@ -1597,7 +1597,7 @@ Status rule (this is the vampire status rule):
 	if current form is vampire-form:
 		say "You are a [bold type]vampire[roman type]: +2 willpower, +1 attack, -2 defence, modest bonus to hiding, can turn into a [italic type]bat[roman type].[line break][run paragraph on]".
 
-A faculty test rule (this is the mind bonus of vampire rule):
+A faculty bonus rule (this is the mind bonus of vampire rule):
 	if tested faculty is mind:
 		if the test subject is the player and the current form is vampire-form:
 			increase test score by 2;

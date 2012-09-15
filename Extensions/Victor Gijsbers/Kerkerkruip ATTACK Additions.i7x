@@ -114,17 +114,66 @@ Chapter - Faculties
 
 [Up to version 5, Kerkerkruip used Perception, Dexterity and Willpower. From version 6 on, we will use Body, Mind and Spirit instead. These will also be much more interesting.]
 
-The faculty test rules are a rulebook.
-
 A person has a number called body score. The body score of a person is usually 5.
 A person has a number called mind score. The mind score of a person is usually 5.
 A person has a number called spirit score. The spirit score of a person is usually 5.
 
 A faculty is a kind of object. Body, mind and spirit are faculties.
 
-The tested faculty is a faculty that varies.
+Section - Faculty bonuses
+
+The body bonus rules are a rulebook.
+The mind bonus rules are a rulebook.
+The spirit bonus rules are a rulebook.
+The faculty bonus rules are a rulebook.
+
+Faculty bonus score is a number that varies.
+
+To decide which number is the body bonus of (guy - a person):
+	now test subject is guy;
+	now faculty bonus score is 0;
+	consider the body bonus rules;
+	say "[run paragraph on]";	
+	consider the faculty bonus rules;
+	say "[run paragraph on]";
+	decide on faculty bonus score.
+	
+To decide which number is the final body of (guy - a person):
+	let n be body score of the guy plus body bonus of the guy;
+	say "[run paragraph on]";	
+	decide on n.
+
+To decide which number is the mind bonus of (guy - a person):
+	now test subject is guy;
+	now faculty bonus score is 0;
+	consider the mind bonus rules;
+	say "[run paragraph on]";	
+	consider the faculty bonus rules;
+	say "[run paragraph on]";	
+	decide on faculty bonus score.
+	
+To decide which number is the final mind of (guy - a person):
+	let n be mind score of the guy plus mind bonus of the guy;
+	say "[run paragraph on]";	
+	decide on n.
+	
+To decide which number is the spirit bonus of (guy - a person):
+	now test subject is guy;
+	now faculty bonus score is 0;
+	consider the spirit bonus rules;
+	say "[run paragraph on]";	
+	consider the faculty bonus rules;
+	say "[run paragraph on]";
+	decide on faculty bonus score.
+	
+To decide which number is the final spirit of (guy - a person):
+	let n be spirit score of the guy plus spirit bonus of the guy;
+	say "[run paragraph on]";	
+	decide on n.
 
 Section - Testing faculties
+
+The tested faculty is a faculty that varies.
 
 To test the body of (guy - a person) against (n - a number):
 	now tested faculty is body;
@@ -143,15 +192,14 @@ To test the faculty of (guy - a person) against (n - a number):
 	now test score is a roll of the dice;
 	say "[The guy] roll[s] ", test score, " + [run paragraph on]";
 	if tested faculty is body:
-		say "[body score of guy] (body)[run paragraph on]";
-		increase test score by body score of guy;
+		say "[final body of guy] (body)[run paragraph on]";
+		increase test score by final body of the guy;
 	if tested faculty is mind:
-		say "[mind score of guy] (mind)[run paragraph on]";
-		increase test score by mind score of guy;
+		say "[final mind of guy] (mind)[run paragraph on]";
+		increase test score by final mind of the guy;
 	if tested faculty is spirit:
-		say "[spirit score of guy] (spirit)[run paragraph on]";
-		increase test score by spirit score of guy;		
-	consider the faculty test rules;
+		say "[final spirit of guy] (spirit)[run paragraph on]";
+		increase test score by final spirit of the guy;		
 	say " = [test score] against a target number of ", n, "[run paragraph on]";
 	if test score is less than n:
 		say ", failing the [tested faculty] check.[run paragraph on]";
@@ -161,8 +209,23 @@ To test the faculty of (guy - a person) against (n - a number):
 		now test result is true.
 
 
+Section - Direct benefits of faculties
 
+An attack modifier rule (this is the body defence bonus rule):
+	let n be the final body of the global defender;
+	if a random chance of n in 40 succeeds:
+		say " - 2 (successful defensive move)[run paragraph on]";
+		decrease the attack strength by 2.
+	
+[Concentration stuff for mind.]
 
+Initiative update rule (this is the increase initiative based on spirit rule):
+	repeat with X running through all alive persons enclosed by the location:
+		let n be the final spirit of X;
+		if a random chance of n in 40 succeeds:
+			increase the initiative of X by a random number between 1 and 3.
+
+[Critical hit chance for balance.]
 
 
 

@@ -1493,10 +1493,10 @@ Status rule (this is the skilled status rule):
 	if player skill bonus timer is greater than 0:
 		say "You are [bold type]skilled[roman type]: +3 bonus to perception, dexterity and willpower checks.[line break][run paragraph on]".
 
-A faculty test rule (this is the perception bonus of being skilled rule):
+A faculty bonus rule (this is the perception bonus of being skilled rule):
 	if the test subject is the player and the player skill bonus timer is greater than 0:
 		increase test score by 3;
-		say " + 3 (skilled)[run paragraph on]".
+		[say " + 3 (skilled)[run paragraph on]"].
 
 
 
@@ -2283,11 +2283,11 @@ Every turn when the main actor is the player:
 		if the OD timer is 0:
 			end the story saying "You OD'ed".
 
-A faculty test rule (this is the ment ability bonus rule):
+A faculty bonus rule (this is the ment ability bonus rule):
 	if the test subject is the player:
 		if ment timer is greater than 0:
 			increase test score by ment bonus;
-			say " + [ment bonus] (ment)[run paragraph on]".
+			[say " + [ment bonus] (ment)[run paragraph on]"].
 
 An attack modifier rule (this is the ment attack and defence bonus rule):
 	if the global attacker is the player:
@@ -2320,12 +2320,12 @@ An attack modifier rule (this is the feeling down attack penalty rule):
 				if the numbers boolean is true, say " - [ment addiction] (feeling down)[run paragraph on]";
 				decrease the attack strength by ment addiction.	
 				
-A faculty test rule (this is the feeling down ability penalty rule):
+A faculty bonus rule (this is the feeling down ability penalty rule):
 	if the test subject is the player:
 		if the ment addiction is greater than 0:
 			if the ment timer is 0:
 				decrease test score by ment addiction;
-				say " - [ment addiction] (feeling down)[run paragraph on]".				
+				[say " - [ment addiction] (feeling down)[run paragraph on]"].				
 				
 
 Snorting is an action applying to one carried thing. Understand "snort [thing]" and "sniff [thing]" as snorting. Understand "use [package of ment]" as snorting.
