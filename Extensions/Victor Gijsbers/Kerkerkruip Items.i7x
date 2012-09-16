@@ -500,7 +500,7 @@ A treasure placement rule (this is the crown of empire can be crown of Hargo rul
 	if a random chance of 1 in 6 succeeds:
 		now the hidden identity of the crown of the empire is the crown of Hargo.
 
-A faculty bonus rule (this is the mind bonus of the crown of the empire rule):
+A mind bonus rule (this is the mind bonus of the crown of the empire rule):
 	if the test subject wears the crown of the empire:
 		increase faculty bonus score by 2.
 
@@ -519,10 +519,9 @@ An attack modifier rule (this is the crown of Hargo rule):
 Chance to win rule when the global defender wears the crown of Hargo (this is the CTW crown of Hargo bonus rule):
 	increase the chance-to-win by 1.
 
-[A mind bonus rule (this is the mind bonus of crown of Hargo rule):
+A mind bonus rule (this is the mind bonus of crown of Hargo rule):
 	if the test subject wears the crown of Hargo:
-		increase faculty bonus score by 4;
-	say "[run paragraph on]".]
+		increase faculty bonus score by 4.
 
 The description of Crown of Hargo is "Of all the emperors of Yahvinna, Hargo was the most arrogant and the most obstinate. This was both the foundation of his military successes and the cause of his eventual downfall. [italic type](The crown grants a +4 mind bonus, but a -1 penalty to defence.)[roman type]".
 

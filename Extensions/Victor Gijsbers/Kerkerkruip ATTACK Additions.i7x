@@ -209,13 +209,58 @@ To test the faculty of (guy - a person) against (n - a number):
 		now test result is true.
 
 
+Section - Faculty increase
+
+Unallocated faculty is a number that varies. Unallocated faculty is 0.
+
+[The grant routine is called by power transferral in Kerkerkruip Systems.]
+
+To grant a faculty increase of (n - a number):
+	increase unallocated faculty by n;
+	say "You can now increase one of your faculties by [bold type][unallocated faculty] point[if unallocated faculty is not 1]s[end if][roman type]. (Type 'body', 'mind', or 'spirit', depending on your choice.) [run paragraph on]".
+	
+Last status rule (this is the unallocated faculty rule):
+	if unallocated faculty is greater than 0:
+		say "You can increase one of your faculties by [bold type][unallocated faculty] point[if unallocated faculty is not 1]s[end if][roman type]. (Type 'body', 'mind', or 'spirit', depending on your choice. This action takes no time.)[line break][run paragraph on]".
+
+Increasing body is an action out of world. Understand "body" as increasing body.
+Increasing mind is an action out of world. Understand "mind" as increasing mind.
+Increasing spirit is an action out of world. Understand "spirit" as increasing spirit.
+
+Check increasing body:
+	if unallocated faculty is less than 1:
+		say "You do not have any points left!" instead.
+
+Check increasing mind:
+	if unallocated faculty is less than 1:
+		say "You do not have any points left!" instead.
+
+Check increasing spirit:
+	if unallocated faculty is less than 1:
+		say "You do not have any points left!" instead.
+
+Carry out increasing body:
+	increase body score of the player by unallocated faculty;
+	say "Your basic body increases to [body score of the player]; your effective body is now [run paragraph on][final body of the player].[line break][paragraph break]";
+	now unallocated faculty is 0.
+
+Carry out increasing mind:
+	increase mind score of the player by unallocated faculty;
+	say "Your basic mind increases to [mind score of the player][run paragraph on][if mind score of player is not final mind of player]; your effective mind is now [run paragraph on][final mind of the player][end if].[line break][paragraph break]";
+	now unallocated faculty is 0.
+	
+Carry out increasing spirit:
+	increase spirit score of the player by unallocated faculty;
+	say "Your basic spirit increases to [spirit score of the player]; your effectivespirit is now [run paragraph on][final spirit of the player].[line break][paragraph break]";
+	now unallocated faculty is 0.
+
 Section - Direct benefits of faculties
 
 An attack modifier rule (this is the body defence bonus rule):
 	let n be the final body of the global defender;
-	if a random chance of n in 40 succeeds:
-		say " - 2 (successful defensive move)[run paragraph on]";
-		decrease the attack strength by 2.
+	if a random chance of n in 50 succeeds:
+		say " - 3 (fast defence)[run paragraph on]";
+		decrease the attack strength by 3.
 	
 [Concentration stuff for mind.]
 
@@ -226,6 +271,13 @@ Initiative update rule (this is the increase initiative based on spirit rule):
 			increase the initiative of X by a random number between 1 and 3.
 
 [Critical hit chance for balance.]
+
+
+
+
+
+
+
 
 
 

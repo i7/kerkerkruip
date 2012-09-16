@@ -317,15 +317,16 @@ To do power transferral with (guy - a person):
 						follow the repelling rules for Y;
 						now Y is not granted;
 			if the number of entries in Z is greater than 0:
-				say "The violence of the absorption drives [Z with definite articles] out of your body. ";.
+				say "The violence of the absorption drives [Z with definite articles] out of your body. ";
+			grant a faculty increase of n.
 
 To heal fully because (guy - a person) is slain:
 	if the level of guy is greater than 0 and the level of guy is not 10:
 		unless the player is undead:
-			say "Absorbing a soul has fully healed you.[paragraph break]";
+			say "Absorbing a soul has [bold type]fully healed[roman type] you.";
 			fully heal the player;
 		otherwise:
-			say "Absorbing a soul has restored some of your health.[paragraph break]";
+			say "Absorbing a soul has [bold type]restored some of your health[roman type].";
 			let n be 8 times level of guy;
 			heal the player for n health;
 	if the level of guy is 10:
@@ -339,6 +340,7 @@ To have (guy - a person) disappear:
 			if Y is a weapon:
 				now Y is not readied;
 	remove guy from play.
+
 
 To do achievement awarding for (guy - a person):
 	if level of guy is 1:

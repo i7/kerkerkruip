@@ -92,15 +92,13 @@ Absorbing power of the daggers:
 	increase inherent damage modifier of the player by 2;
 	decrease defence of the player by 1;
 	increase permanent health of the player by 6;
-	increase body score of the player by 1;
-	say "As the daggers fall down, you feel the soul that animated them absorbed into your own body. You are sharp. You are deadly. ([bold type]Power of the daggers[roman type]: +2 attack, +1 damage, -1 defence, +6 health, +1 body score, and the [italic type]pierce[roman type] skill.)[paragraph break]".
+	say "As the daggers fall down, you feel the soul that animated them absorbed into your own body. You are sharp. You are deadly. ([bold type]Power of the daggers[roman type]: +2 attack, +1 damage, -1 defence, +6 health, and the [italic type]pierce[roman type] skill.)[paragraph break]".
 
 Repelling power of the daggers:
 	decrease melee of the player by 2;
 	decrease inherent damage modifier of the player by 2;
 	increase defence of the player by 1;
-	decrease permanent health of the player by 6;
-	decrease body score of the player by 1.
+	decrease permanent health of the player by 6.
 
 Status skill rule (this is the pierce status skill rule):
 	if the power of daggers is granted:
@@ -501,8 +499,7 @@ Absorbing power of the armadillo:
 	do the armadillo stomach trick;
 	increase melee of the player by 1;
 	increase permanent health of the player by 5;
-	decrease body score of the player by 1;
-	say "As the armadillo succumbs, you feel its soul absorbed into your own body. ([bold type]Power of the armadillo[roman type]: +1 attack, +1 damage resistance, +5 health, -1 body score, and the [italic type]scales[roman type] skill, which gives you a temporary damage reduction that costs some health to use and expires as soon as you attack.)[paragraph break]".
+	say "As the armadillo succumbs, you feel its soul absorbed into your own body. ([bold type]Power of the armadillo[roman type]: +1 attack, +1 damage resistance, +5 health, and the [italic type]scales[roman type] skill, which gives you a temporary damage reduction that costs some health to use and expires as soon as you attack.)[paragraph break]".
 
 A damage modifier rule (this is the power of the armadillo gives damage resistance rule):
 	if the global defender is the player and the power of the armadillo is granted:
@@ -511,8 +508,7 @@ A damage modifier rule (this is the power of the armadillo gives damage resistan
 
 Repelling power of the armadillo:
 	decrease melee of the player by 1;
-	decrease permanent health of the player by 5;
-	increase body score of the player by 1.
+	decrease permanent health of the player by 5.
 
 Section - The scales skill
 
@@ -748,14 +744,12 @@ Absorbing power of Miranda:
 	increase melee of the player by 1;
 	increase defence of the player by 1;	
 	increase permanent health of the player by 5;
-	increase spirit score of the player by 1;	
-	say "As Miranda dies, you feel her soul absorbed into your own body. ([bold type]Power of Miranda[roman type]: +1 attack, +1 defence, +5 health, +1 spirit score, and the [italic type]stun[roman type] skill.)[paragraph break]".
+	say "As Miranda dies, you feel her soul absorbed into your own body. ([bold type]Power of Miranda[roman type]: +1 attack, +1 defence, +5 health, and the [italic type]stun[roman type] skill.)[paragraph break]".
 
 Repelling power of Miranda:
 	decrease melee of the player by 1;
 	decrease defence of the player by 1;
-	decrease permanent health of the player by 5;
-	decrease spirit score of the player by 1.
+	decrease permanent health of the player by 5.
 
 Status skill rule (this is the Miranda status skill rule):
 	if the power of Miranda is granted:
@@ -1750,15 +1744,13 @@ Absorbing power of the mindslug:
 	increase melee of the player by 3;
 	increase defence of the player by 3;
 	increase permanent health of the player by 15;
-	increase mind score of the player by 4;
-	say "As the mindslug dies, you feel its powerful intelligence absorbed into your own body. ([bold type]Power of the mindslug[roman type]: +3 attack, +3 defence, +15 health, +4 mind score, and you can attempt to [italic type]dominate[roman type] an enemy.)[paragraph break]";
+	say "As the mindslug dies, you feel its powerful intelligence absorbed into your own body. ([bold type]Power of the mindslug[roman type]: +3 attack, +3 defence, +15 health, and you can attempt to [italic type]dominate[roman type] an enemy.)[paragraph break]";
 	make slaves followers.
 
 Repelling power of the mindslug:
 	decrease melee of the player by 3;
 	decrease defence of the player by 3;
 	decrease permanent health of the player by 15;
-	decrease mind score of the player by 4;
 	unmake slaves followers.
 
 To make slaves followers:
@@ -2379,7 +2371,7 @@ Every turn (this is the grant fanatics of power boolean rule):
 	if healer of Aite is dead and Tormentor of Aite is dead and Defender of Aite is dead:
 		if fanatics power boolean is false:
 			now fanatics power boolean is true;
-			say "Impressed with your prowess in combat, Aite grants you her favour! ([bold type]Power of the fanatics of Aite[roman type]: +4 attack, +4 defence, +20 health, +2 mind score, pray to Aite anywhere.)[paragraph break]";
+			say "Impressed with your prowess in combat, Aite grants you her favour! ([bold type]Power of the fanatics of Aite[roman type]: +4 attack, +4 defence, +20 health, pray to Aite anywhere.)[paragraph break]";
 			gain the power of the fanatics of Aite. 
 
 To gain the power of the Fanatics of Aite:
@@ -2393,14 +2385,12 @@ To gain the power of the Fanatics of Aite:
 Absorbing power of the Fanatics of Aite:
 	increase melee of the player by 4;
 	increase defence of the player by 4;
-	increase permanent health of the player by 20;
-	increase mind score of the player by 2.
+	increase permanent health of the player by 20.
 
 Repelling power of the Fanatics of Aite:
 	decrease melee of the player by 4;
 	decrease defence of the player by 4;
-	decrease permanent health of the player by 20;
-	decrease mind score of the player by 2.
+	decrease permanent health of the player by 20.
 
 Status skill rule (this is the fanatics of aite status skill rule):
 	if power of the fanatics of aite is granted:
@@ -2681,18 +2671,12 @@ Absorbing power of Bodmall:
 	increase melee of the player by 4;
 	increase defence of the player by 4;
 	increase permanent health of the player by 20;
-	increase mind score of the player by 1;
-	increase spirit score of the player by 1;
-	increase body score of the player by 1;
-	say "As Bodmall dies, you feel her soul absorbed into your own body. ([bold type]Power of Bodmall[roman type]: +4 attack, +4 defence, +20 health, +1 to all attributes, and you can summon [italic type]thorns[roman type].)[paragraph break]".
+	say "As Bodmall dies, you feel her soul absorbed into your own body. ([bold type]Power of Bodmall[roman type]: +4 attack, +4 defence, +20 health, and you can summon [italic type]thorns[roman type].)[paragraph break]".
 
 Repelling power of Bodmall:
 	decrease melee of the player by 4;
 	decrease defence of the player by 4;
-	decrease permanent health of the player by 20;
-	decrease mind score of the player by 1;
-	decrease spirit score of the player by 1;
-	decrease body score of the player by 1.
+	decrease permanent health of the player by 20.
 
 Status skill rule (this is the Bodmall status skill rule):
 	if power of Bodmall is granted:
