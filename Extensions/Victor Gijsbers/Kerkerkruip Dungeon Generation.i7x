@@ -129,7 +129,7 @@ Resetting the map rule (this is the we start with entrance Hall rule):
 	now the z-coordinate of Entrance Hall is 0;
 	now Entrance Hall is placed.
 
-Section - Creating the map and collapsing passages
+Section - Creating the map
 
 The creating the map rules are a rulebook.
 
@@ -146,6 +146,65 @@ Creating the map rule (this is the locate and connect all rooms rule):
 			let chosen room be a suitable room from place at x by y by z;
 			place chosen room from place at x by y by z.
 
+Section - Adding tunnels
+
+Last creating the map rule (this is the potentially add a tunnel rule):
+	if a random chance of 1 in 3 succeeds:
+		create a tunnel;
+	if a random chance of 1 in 6 succeeds:
+		create a tunnel.
+		
+To create a tunnel:
+	let P be a random placed placeable connectable room;
+	let Q be P;
+	while Q is P:
+		now Q is a random placed placeable connectable room;
+	if generation info is true, say "* Building a tunnel between [P] and [Q].[line break][run paragraph on]";			
+	let R be false;
+	while R is false:
+		if absolute distance between P and Q is 1:
+			let way be the direction from P to Q;
+			if generation info is true, say "* Adding connection between [P] and [Q]. Destination reached.[line break][run paragraph on]";
+			change the way exit of P to Q;
+			let reverse be the opposite of way;
+			change the reverse exit of Q to P;
+			now R is true;
+		otherwise:
+			if the number of rooms surrounding x-coordinate of P by y-coordinate of P by z-coordinate of P is the number of cardinal directions:
+				if generation info is true, say "* Giving up on tunnel building.[line break][run paragraph on]";	
+				now R is true;
+			otherwise:
+				let building block be a random not placed tunnel;
+				if a random chance of 1 in 5 succeeds: [go in a random direction]
+					place building block next to P;
+					now P is building block;
+				otherwise:
+					let way be the general direction from P to Q;
+					let x be the x way of P;
+					let y be the y way of P;
+					let z be the z way of P;
+					if the space at x by y by z is free:
+						place building block from P at x by y by z;
+						now P is building block;
+					otherwise:
+						let T be the room at x by y by z;
+						if T is placeable and T is connectable:
+							if generation info is true, say "* Adding connection between [P] and [T].[line break][run paragraph on]";
+							change the way exit of P to T;
+							let reverse be the opposite of way;
+							change the reverse exit of T to P;
+							now P is T;
+						otherwise:
+							if generation info is true, say "* Giving up on tunnel building.[line break][run paragraph on]";	
+							now R is true;
+		if R is false and number of not placed tunnels is less than 26:
+			if generation info is true, say "* Giving up on tunnel building.[line break][run paragraph on]";
+			now R is true.
+
+
+		
+Section - Additional connections and collapsable passages
+
 Collapse relates rooms to each other. The verb to collapse (he collapses, they collapse, he collapsed, it is collapsed, he is collapsing) implies the collapse relation.
 			
 Last creating the map (this is the possibly adding some further connections rule):
@@ -161,6 +220,7 @@ Last creating the map (this is the possibly adding some further connections rule
 						change the reverse exit of further place to place;
 						if a random chance of 1 in 4 succeeds:
 							now place collapses further place.
+
 
 Resetting the map rule (this is the reset collapse rule):
 	repeat with place running through rooms:
@@ -353,6 +413,39 @@ To decide which direction is the direction from (a - a room) to (b - a room):
 			decide on up;
 		if z-coordinate of a minus z-coordinate of b is 1:
 			decide on down.
+
+[The randoms below are to make the choice of direction fair.]
+
+To decide which direction is the general direction from (a - a room) to (b - a room):
+	if a random chance of 1 in 3 succeeds:
+		if x-coordinate of a is greater than x-coordinate of b:
+			decide on south;
+		if x-coordinate of a is less than x-coordinate of b:
+			decide on north;
+	if a random chance of 1 in 2 succeeds:
+		if y-coordinate of a is greater than y-coordinate of b:
+			decide on west;
+		if y-coordinate of a is less than y-coordinate of b:
+			decide on east;		
+	if z-coordinate of a is greater than z-coordinate of b:
+		decide on down;
+	if z-coordinate of a is less than z-coordinate of b:
+		decide on up;
+	if a random chance of 1 in 2 succeeds:
+		if x-coordinate of a is greater than x-coordinate of b:
+			decide on south;
+		if x-coordinate of a is less than x-coordinate of b:
+			decide on north;
+	if y-coordinate of a is greater than y-coordinate of b:
+		decide on west;
+	if y-coordinate of a is less than y-coordinate of b:
+		decide on east;
+	if x-coordinate of a is greater than x-coordinate of b:
+		decide on south;
+	if x-coordinate of a is less than x-coordinate of b:
+		decide on north.
+
+
 
 Section - Number of surrounding rooms
 			

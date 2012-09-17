@@ -112,6 +112,12 @@ First carry out going (this is the collapse rule):
 		now X does not collapse location;
 		now location does not collapse X.
 
+Section - Tunnels
+
+Tunnel is a kind of room. "A fairly nondescript tunnel." A tunnel is usually not placeable. A tunnel is usually not habitable. There is 35 tunnels.
+
+[Note: we cannot use Dynamic Objects to create new tunnels without disabling fast route finding. (Fast route finding uses a table of rooms, and fails messily when we add new rooms to the game.) So I'm just starting out with 25 tunnels. We don't want the player to dig hundreds of tunnels anyway.]
+
 
 Section - Digging and extra rooms
 
@@ -131,10 +137,6 @@ Check digging (this is the can only dig when carrying a digging tool rule):
 Check digging (this is the only dig in connectable rooms rule):
 	unless location is connectable:
 		say "A magical force prevents you from digging." instead.
-
-Tunnel is a kind of room. "A fairly nondescript tunnel." A tunnel is not placeable. There is 25 tunnels.
-
-[Note: we cannot use Dynamic Objects to create new tunnels without disabling fast route finding. (Fast route finding uses a table of rooms, and fails messily when we add new rooms to the game.) So I'm just starting out with 25 tunnels. We don't want the player to dig hundreds of tunnels anyway.]
 
 Carry out digging:
 	let x be the x noun of location;
@@ -232,6 +234,21 @@ Carry out collapsing:
 	let reverse be the opposite of noun;
 	change the reverse exit of place to nothing;
 	say "With a huge crash, the [if noun is up or noun is down]staircase[otherwise]corridor[end if] collapses!".
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 Book - Monsters

@@ -120,7 +120,7 @@ Pierce-cooldown is a number that varies. Pierce-cooldown is 0.
 Every turn when main actor is the player:
 	if pierce-cooldown is greater than 0:
 		decrease pierce-cooldown by 1;
-		if combat state is peace:
+		if combat status is peace:
 			now pierce-cooldown is 0.
 
 Check piercing:
@@ -153,7 +153,7 @@ A damage modifier rule (this is the more damage when piercing rule):
 Aftereffects rule (this is the remove at-pierce rule):
 	now the global attacker is not at-pierce.
 
-[For reference, this is the old piercing ability
+[For reference, this is the old piercing ability:
 	
 Carry out piercing:
 	decrease the health of the player by 1;
