@@ -309,7 +309,7 @@ Carry out increasing mind:
 	
 Carry out increasing spirit:
 	increase spirit score of the player by unallocated faculty;
-	say "Your basic spirit increases to [spirit score of the player]; your effectivespirit is now [run paragraph on][final spirit of the player].[line break][paragraph break]";
+	say "Your basic spirit increases to [spirit score of the player]; your effective spirit is now [run paragraph on][final spirit of the player].[line break][paragraph break]";
 	now unallocated faculty is 0.
 
 Section - Direct benefits of faculties

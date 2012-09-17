@@ -85,7 +85,7 @@ Section - Power
 
 The power of the daggers is a power. Swarm of daggers grants power of the daggers.
 The power level of power of the daggers is 1.
-The command text of power of the daggers is "pierce".
+The command text of power of the daggers is "pierce[if pierce-cooldown is not 0] ([pierce-cooldown])[end if]".
 
 Absorbing power of the daggers:
 	increase melee of the player by 2;
@@ -102,7 +102,7 @@ Repelling power of the daggers:
 
 Status skill rule (this is the pierce status skill rule):
 	if the power of daggers is granted:
-		say "You can [bold type]pierce[roman type] an enemy, accepting one damage for a chance to deal one damage to the enemy. [italic type](Level 1)[roman type][line break][run paragraph on]";
+		say "You can [bold type]pierce[roman type] an enemy, dealing extra damage if your attack hits. This ability has a cooldown. [italic type](Level 1)[roman type][line break][run paragraph on]";
 
 
 
@@ -113,14 +113,48 @@ Piercing is an action applying to one visible thing. Understand "pierce [thing]"
 Does the player mean piercing the player: it is unlikely.
 Does the player mean piercing an alive person: it is very likely.
 
+A person can be at-pierce. A person is usually not at-pierce.
+
+Pierce-cooldown is a number that varies. Pierce-cooldown is 0.
+
+Every turn when main actor is the player:
+	if pierce-cooldown is greater than 0:
+		decrease pierce-cooldown by 1;
+		if combat state is peace:
+			now pierce-cooldown is 0.
+
 Check piercing:
 	if power of daggers is not granted:
 		take no time;
 		say "You do not have that power." instead.
 
 Check piercing:
+	if pierce-cooldown is not 0:
+		take no time;
+		say "You must wait [pierce-cooldown] turn before you can use your piercing ability again." instead.
+
+Check piercing:
 	abide by the check attacking rules.
 
+Carry out piercing:
+	now the player is at-pierce;
+	let n be the final spirit of the player divided by 3;
+	let o be 12 minus n;
+	now pierce-cooldown is o;
+	try the actor attacking the noun instead.
+
+A damage modifier rule (this is the more damage when piercing rule):
+	if the global attacker is at-pierce:
+		let n be the final body of the global attacker divided by 5;
+		increase n by 2;
+		if the numbers boolean is true, say " + [n] (piercing)[run paragraph on]";
+		increase the attack damage by n.
+
+Aftereffects rule (this is the remove at-pierce rule):
+	now the global attacker is not at-pierce.
+
+[For reference, this is the old piercing ability
+	
 Carry out piercing:
 	decrease the health of the player by 1;
 	if player is not alive:
@@ -142,7 +176,7 @@ Carry out piercing:
 		now the attack damage is 1;
 		now global attacker is the player;
 		now global defender is the noun;
-		consider the aftereffects rules.
+		consider the aftereffects rules.]
 		
 		
 		
