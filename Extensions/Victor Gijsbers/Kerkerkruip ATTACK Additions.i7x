@@ -2,8 +2,65 @@ Kerkerkruip ATTACK Additions by Victor Gijsbers begins here.
 
 Use authorial modesty.
 
+
+Section - New rolling mechanism
+
+[This roll creates a number between 1 and 10, but biased towards the middle values. This makes combat somewhat less random, which benefits the player and makes penalties and bonuses more important. However, we also allow a 10 to turn into a 20, so that everyone has a chance to hit everyone.
+
+Instead of the standard 1d10 of ATTACK, we roll 1d7 + 1d4 - 1.]
+
+The roller is a person that varies. [The guy who is rolling the dice. Used in the natural twenty rules.]
+
+An attack modifier rule (this is the alternative attack roll rule):
+	now roller is the global attacker;
+	now the attack strength is a roll of the dice;
+	say "[italic type]Rolling ", the attack strength, "[run paragraph on]".
+	
+The alternative attack roll rule is listed instead of the standard attack roll rule in the attack modifier rules.
+
+The natural twenty chance is a number that varies.
+The natural twenty rules are a rulebook.
+
+To decide which number is a roll of the dice:
+	let n be a random number between 1 and 7;
+	let m be a random number between 0 and 3;
+	let x be n + m;
+	now natural twenty chance is 0;
+	consider the natural twenty rules;
+	if a random chance of natural twenty chance in 100 succeeds:
+		now x is 20;
+	decide on x.
+
+[1: 1/28
+2: 2/28
+3: 3/28
+4-7: 4/28
+8: 3/28
+9: 2/28
+10: 1/28]
+
+
 [ Kerkerkruip has no reloadable weapons ]
 Chapter - No reloadable weapons (in place of Chapter - Reloadable Weapons (Standard Plug-in) in Inform ATTACK by Victor Gijsbers)
+
+
+
+Section - Losing concentration
+
+The alternative lose concentration when hit rule is listed instead of the lose concentration when hit rule in the aftereffects rules.
+
+The remain concentrated chance is a number that varies.
+The remain concentrated rules are a rulebook.
+
+An aftereffects rule (this is the alternative lose concentration when hit rule):
+	if the the attack damage is greater than 0 and the global defender is alive:
+		now the remain concentrated chance is 0;
+		consider the remain concentrated rules;
+		unless a random chance of remain concentrated chance in 100 succeeds:
+			let the global defender lose concentration.
+
+A remain concentrated rule (this is the damage penalty for remaining concentrated rule):
+	decrease remain concentrated chance by attack damage.
 
 Section - Killing
 
@@ -189,6 +246,7 @@ To test the spirit of (guy - a person) against (n - a number):
 
 To test the faculty of (guy - a person) against (n - a number):
 	now test subject is guy;
+	now roller is the guy;
 	now test score is a roll of the dice;
 	say "[The guy] roll[s] ", test score, " + [run paragraph on]";
 	if tested faculty is body:
@@ -259,10 +317,11 @@ Section - Direct benefits of faculties
 An attack modifier rule (this is the body defence bonus rule):
 	let n be the final body of the global defender;
 	if a random chance of n in 50 succeeds:
-		say " - 3 (fast defence)[run paragraph on]";
+		say " - 3 (random body bonus)[run paragraph on]";
 		decrease the attack strength by 3.
 	
-[Concentration stuff for mind.]
+A remain concentrated rule (this is the mind bonus for remaining concentrated rule):
+	increase remain concentrated chance by 2 times final mind of the global defender.
 
 Initiative update rule (this is the increase initiative based on spirit rule):
 	repeat with X running through all alive persons enclosed by the location:
@@ -270,10 +329,16 @@ Initiative update rule (this is the increase initiative based on spirit rule):
 		if a random chance of n in 40 succeeds:
 			increase the initiative of X by a random number between 1 and 3.
 
-[Critical hit chance for balance.]
-
-
-
+[Critical hit chance is determined by the lowest of your three attributes.]
+A natural twenty rule (this is the faculties natural twenty rule):
+	let n be final body of the roller;
+	let o be final mind of the roller;
+	let p be final spirit of the roller;
+	if o is less than n:
+		now n is o;
+	if p is less than n:
+		now n is p;
+	increase natural twenty chance by n.
 
 
 
@@ -313,33 +378,7 @@ To say parry and dodge info of (item - a weapon):
 
 A weapon has some text called the special weapon info. The special weapon info of a weapon is usually "".
 
-Section - New rolling mechanism
 
-[This roll creates a number between 1 and 10, but biased towards the middle values. This makes combat somewhat less random, which benefits the player and makes penalties and bonuses more important. However, we also allow a 10 to turn into a 20, so that everyone has a chance to hit everyone.
-
-Instead of the standard 1d10 of ATTACK, we roll 1d7 + 1d4 - 1.]
-
-An attack modifier rule (this is the alternative attack roll rule):
-	now the attack strength is a roll of the dice;
-	say "[italic type]Rolling ", the attack strength, "[run paragraph on]".
-The alternative attack roll rule is listed instead of the standard attack roll rule in the attack modifier rules.
-
-To decide which number is a roll of the dice:
-	let n be a random number between 1 and 7;
-	let m be a random number between 0 and 3;
-	let x be n + m;
-	if x is 10:
-		if a random chance of 1 in 2 succeeds:
-			now x is 20;
-	decide on x.
-
-[1: 1/28
-2: 2/28
-3: 3/28
-4-7: 4/28
-8: 3/28
-9: 2/28
-10: 1/28]
 
 
 Kerkerkruip ATTACK Additions ends here.

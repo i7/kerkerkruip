@@ -612,12 +612,10 @@ Chance to win rule (this is the CTW robe of the dead mage rule):
 	if the global defender wears the robe of the dead mage:
 		decrease the chance-to-win by 1.
 
-The alternative lose concentration when hit rule is listed instead of the lose concentration when hit rule in the aftereffects rules.
+A remain concentrated rule (this is the robe of the dead mage concentration rule):
+	if global defender wears the robe of the dead mage:
+		increase remain concentrated chance by 1000.
 
-An aftereffects rule (this is the alternative lose concentration when hit rule):
-	unless global defender wears the robe of the dead mage:
-		if the the attack damage is greater than 0 and the global defender is alive:
-			let the global defender lose concentration.
 
 An AI action selection rule for an at-Act person (called P) (this is the robe of the dead mage discourages attacking rule):
 	if chosen target wears the robe of the dead mage:
