@@ -289,7 +289,95 @@ Chapter - Size
 
 Size is a kind of value. The sizes are tiny, small, medium, large, huge and gargantuan.
 
-A person has a size. A person is usually medium.
+A thing has a size. A thing is usually medium.
+
+[Note: sizes of a person are meant to reflect how big they themselves are. Sizes of objects are meant to reflect for what size person they were meant. Thus, a 'medium dagger' is much smaller than a 'medium bed': both are normal-sized objects as they are made for normal-sized humans. A huge dagger might be about the same size as a medium sword -- it would just be hard to handle for a medium person, because the hilt would be too big to grip with a hand!]
+
+To decide which number is the size difference of (a - a thing) and (b - a thing):
+	if a is medium and b is medium: [most common case, just to speed things up]
+		decide on 0;
+	let n be 0;
+	if a is tiny:
+		increase n by 2;
+	if a is small:
+		increase n by 1;		
+	if a is large:
+		decrease n by 1;
+	if a is huge:
+		decrease n by 2;	
+	if a is gargantuan:
+		decrease n by 3;
+	if b is tiny:
+		decrease n by 2;
+	if b is small:
+		decrease n by 1;		
+	if b is large:
+		increase n by 1;
+	if b is huge:
+		increase n by 2;	
+	if b is gargantuan:
+		increase n by 3;
+	decide on n.
+	
+[The resulting number lies between +5 (a is small, b is gargantuan) and -5 (a is gargantuan, b is small)]
+
+Section - Size and combat
+
+An attack modifier rule (this is the size attack modifier rule):
+	if the global defender is not medium:
+		if the global defender is tiny:
+			say " - 2 (defender tiny)[run paragraph on]";
+			decrease the attack strength by 2;
+		if the global defender is small:
+			say " - 1 (defender small)[run paragraph on]";
+			decrease the attack strength by 1;		
+		if the global defender is large:
+			say " + 1 (defender large)[run paragraph on]";
+			increase the attack strength by 1;
+		if the global defender is huge:
+			say " + 2 (defender huge)[run paragraph on]";
+			increase the attack strength by 2;
+		if the global defender is gargantuan:
+			say " + 3 (defender gargantuan)[run paragraph on]";
+			increase the attack strength by 3.
+
+A damage modifier rule (this is the natural weapon size damage modifier rule):
+	if the global attacker is not medium or the global attacker weapon is not medium:
+		if the global attacker weapon is a natural weapon part of the global attacker:
+			if the global attacker weapon is not size-agnostic:
+				if the size of the global attacker is:
+					-- tiny:
+						if the numbers boolean is true, say " - 2 (tiny size)[run paragraph on]";
+						decrease the attack damage by 2;			
+					-- small:
+						if the numbers boolean is true, say " - 1 (small size)[run paragraph on]";
+						decrease the attack damage by 1;
+					-- large:
+						if the numbers boolean is true, say " + 1 (large size)[run paragraph on]";
+						increase the attack damage by 1;
+					-- huge:
+						if the numbers boolean is true, say " + 2 (huge size)[run paragraph on]";
+						increase the attack damage by 2;
+					-- gargantuan:
+						if the numbers boolean is true, say " + 4 (gargantuan size)[run paragraph on]";
+						increase the attack damage by 4;
+
+An attack modifier rule (this is the weapon size attack modifier rule):
+	if global attacker weapon is not size-agnostic:
+		if the global attacker weapon is not a natural weapon part of the global attacker:
+			let n be the size difference of the global attacker and the global attacker weapon;
+			unless n is 0:
+				if n is less than 0:
+					now n is 0 minus n;
+				if n is greater than 2:
+					increase n by 1;
+				if n is greater than 4:
+					increase n by 1; [1->1, 2->2, 3->4, 4->6, 5->7]
+				if the numbers boolean is true, say " - [n] (weapon size)[run paragraph on]";
+				decrease the attack strength by n.
+
+					
+
 
 
 Chapter - Powers
@@ -775,6 +863,12 @@ Chapter - Armour-stoppable
 [Armour should only reduce the damage of some weapons. For instance, armour doesn't help against a lightning bolt or dragon's fire.]
 
 A weapon can be armour-stoppable. A weapon is usually armour-stoppable.
+
+Chapter - Size-agnostic
+
+[Some weapons are not dependent on the user's size for their damage output.]
+
+A weapon can be size-agnostic. A weapon is usually not size-agnostic.
 
 
 Chapter - Materials

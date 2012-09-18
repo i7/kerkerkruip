@@ -233,7 +233,7 @@ Aftereffects rule (this is the blood ape grows in size when hit rule):
 		otherwise:
 			say "Sensing perhaps that it cannot grow further in its current confines, the ape does not lick of the blood.".
 			
-A damage modifier rule (this is the blood ape size damage bonus rule):
+[A damage modifier rule (this is the blood ape size damage bonus rule):
 	if the global attacker is the blood ape:
 		if the size of the blood ape is:
 			-- small:
@@ -247,16 +247,16 @@ A damage modifier rule (this is the blood ape size damage bonus rule):
 				increase the attack damage by 4;
 			-- gargantuan:
 				if the numbers boolean is true, say " + 8 (gargantuan size)[run paragraph on]";
-				increase the attack damage by 8;
+				increase the attack damage by 8;]
 			
-An attack modifier rule (this is the blood ape size attack bonus rule):
+[An attack modifier rule (this is the blood ape size attack bonus rule):
 	if the global defender is the blood ape and the global defender is at dodge:
 		if the blood ape is huge:
 			if the numbers boolean is true, say " + 1 (huge ape)[run paragraph on]";
 			increase the attack strength by 1;
 		if the blood ape is gargantuan:
 			if the numbers boolean is true, say " + 2 (gargantuan ape)[run paragraph on]";
-			increase the attack strength by 2.
+			increase the attack strength by 2.]
 
 
 Section - Prose
@@ -1892,7 +1892,7 @@ The spirit score of giant tentacle is 6.
 The mind score of giant tentacle is 6.
 
 When play begins:
-	let X be a random natural weapon part of giant;
+	let X be a random natural weapon part of giant tentacle;
 	now printed name of X is "tentacle";
 	now the damage die of X is 0.
 
@@ -2468,6 +2468,7 @@ The mind score of Bodmall is 9.
 When play begins:
 	let X be a random natural weapon part of Bodmall;
 	now X is ranged;
+	now X is size-agnostic;
 	now X is not armour-stoppable;
 	now damage die of X is 10;
 	now the passive parry max of X is 0;
@@ -3429,6 +3430,7 @@ The mind score of the smoke demon is 8.
 
 When play begins:
 	let X be a random natural weapon part of the smoke demon;
+	now X is size-agnostic;
 	now damage die of X is 5;
 	now dodgability of X is 2;
 	now passive parry max of X is 2;

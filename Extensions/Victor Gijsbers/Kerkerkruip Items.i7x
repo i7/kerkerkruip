@@ -2007,6 +2007,7 @@ Chapter - Staves
 
 A staff of pain is a kind of weapon. The plural of staff of pain is staves of pain.
 A staff of pain is usually wood. A staff of pain is ranged.
+A staff of pain is size-agnostic.
 
 The damage die of a staff of pain is usually 4.
 The weapon attack bonus of a staff of pain is usually 1.
@@ -2036,22 +2037,20 @@ The spiked mace of the ape king is a major mace.
 The spiked mace of the ape king is barren.
 The spiked mace of the ape king is iron.
 
-The spiked mace of the ape king has a size.
-
 Table of Spiked Mace of the Ape King
-Blood	Dam	WAB	WDB	DOD	PPM		APM	Size
-0		3		1		0		1		2		2		tiny
-1		3		1		0		1		2		2		tiny
-2		4		1		0		1		2		2		small
-3		5		0		1		1		2		2		small
-4		5		0		1		1		2		2		medium
-5		6		0		2		2		2		2		medium
-6		7		0		2		2		2		1		large
-7		8		-1		3		2		1		1		large
-8		8		-1		3		3		1		1		huge
-9		9		-2		4		3		1		0		huge
-10		10		-3		4		4		1		0		gargantuan
-11		11		-4		4		4		0		0		gargantuan
+Blood	Dam	WDB	DOD	PPM		APM	Size
+0		3		0		1		2		2		tiny
+1		3		0		1		2		2		tiny
+2		4		0		1		2		2		small
+3		5		1		1		2		2		small
+4		5		1		1		2		2		medium
+5		6		2		2		2		2		medium
+6		7		2		2		2		1		large
+7		8		3		2		1		1		large
+8		8		3		3		1		1		huge
+9		9		4		3		1		0		huge
+10		10		4		3		1		0		gargantuan
+11		11		4		3		0		0		gargantuan
 
 Spiked-mace-blood is a number that varies. Spiked-mace-blood is 0.
 
@@ -2061,7 +2060,6 @@ To set stats for the spiked mace of the ape king:
 	if spiked-mace-blood is less than 12:
 		choose row with a blood of spiked-mace-blood in the Table of Spiked Mace of the Ape King;
 		now the damage die of the spiked mace of the ape king is Dam entry;
-		now the weapon attack bonus of the spiked mace of the ape king is WAB entry;
 		now the weapon damage bonus of the spiked mace of the ape king is WDB entry;
 		now the dodgability of the spiked mace of the ape king is DOD entry;
 		now the passive parry max of the spiked mace of the ape king is PPM entry;
@@ -2124,6 +2122,7 @@ The glass cannon is magical.
 The material of the glass cannon is glass.
 
 The glass cannon is ranged.
+The glass cannon is size-agnostic.
 
 The description of the glass cannon is "At first sight this seems to be nothing but a foot-long tube of glass. However, it is a very powerful weapon, the shots of which can quickly destroy even the most powerful enemy. But be warned: not only does the glass cannon make you an easier target, it is also the case that when you ready the weapon, you [bold type]permanently[roman type] lose half of your health.".
 
