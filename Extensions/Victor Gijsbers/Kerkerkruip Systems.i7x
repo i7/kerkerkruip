@@ -291,6 +291,12 @@ Size is a kind of value. The sizes are tiny, small, medium, large, huge and garg
 
 A thing has a size. A thing is usually medium.
 
+Understand the size property as describing a thing.
+
+Before printing the name of a weapon (called item):
+	if item is not medium:
+		say "[size of item] ".
+
 [Note: sizes of a person are meant to reflect how big they themselves are. Sizes of objects are meant to reflect for what size person they were meant. Thus, a 'medium dagger' is much smaller than a 'medium bed': both are normal-sized objects as they are made for normal-sized humans. A huge dagger might be about the same size as a medium sword -- it would just be hard to handle for a medium person, because the hilt would be too big to grip with a hand!]
 
 To decide which number is the size difference of (a - a thing) and (b - a thing):
@@ -319,7 +325,7 @@ To decide which number is the size difference of (a - a thing) and (b - a thing)
 		increase n by 3;
 	decide on n.
 	
-[The resulting number lies between +5 (a is small, b is gargantuan) and -5 (a is gargantuan, b is small)]
+[The resulting number lies between +5 (a is tiny, b is gargantuan) and -5 (a is gargantuan, b is tiny)]
 
 Section - Size and combat
 
@@ -341,26 +347,37 @@ An attack modifier rule (this is the size attack modifier rule):
 			say " + 3 (defender gargantuan)[run paragraph on]";
 			increase the attack strength by 3.
 
-A damage modifier rule (this is the natural weapon size damage modifier rule):
+Chance to win rule when the global defender is not medium (this is the CTW defender size bonus rule):
+	if the global defender is tiny:
+		decrease the chance-to-win by 2;
+	if the global defender is small:
+		decrease the chance-to-win by 1;		
+	if the global defender is large:
+		increase the chance-to-win by 1;
+	if the global defender is huge:
+		increase the chance-to-win by 2;
+	if the global defender is gargantuan:
+		increase the chance-to-win by 3.
+
+A damage modifier rule (this is the weapon size damage modifier rule):
 	if the global attacker is not medium or the global attacker weapon is not medium:
-		if the global attacker weapon is a natural weapon part of the global attacker:
-			if the global attacker weapon is not size-agnostic:
-				if the size of the global attacker is:
-					-- tiny:
-						if the numbers boolean is true, say " - 2 (tiny size)[run paragraph on]";
-						decrease the attack damage by 2;			
-					-- small:
-						if the numbers boolean is true, say " - 1 (small size)[run paragraph on]";
-						decrease the attack damage by 1;
-					-- large:
-						if the numbers boolean is true, say " + 1 (large size)[run paragraph on]";
-						increase the attack damage by 1;
-					-- huge:
-						if the numbers boolean is true, say " + 2 (huge size)[run paragraph on]";
-						increase the attack damage by 2;
-					-- gargantuan:
-						if the numbers boolean is true, say " + 4 (gargantuan size)[run paragraph on]";
-						increase the attack damage by 4;
+		if the global attacker weapon is not size-agnostic:
+			if the size of the global attacker is:
+				-- tiny:
+					if the numbers boolean is true, say " - 2 (tiny attacker)[run paragraph on]";
+					decrease the attack damage by 2;			
+				-- small:
+					if the numbers boolean is true, say " - 1 (small attacker)[run paragraph on]";
+					decrease the attack damage by 1;
+				-- large:
+					if the numbers boolean is true, say " + 1 (large attacker)[run paragraph on]";
+					increase the attack damage by 1;
+				-- huge:
+					if the numbers boolean is true, say " + 2 (huge attacker)[run paragraph on]";
+					increase the attack damage by 2;
+				-- gargantuan:
+					if the numbers boolean is true, say " + 4 (gargantuan attacker)[run paragraph on]";
+					increase the attack damage by 4;
 
 An attack modifier rule (this is the weapon size attack modifier rule):
 	if global attacker weapon is not size-agnostic:
@@ -376,8 +393,7 @@ An attack modifier rule (this is the weapon size attack modifier rule):
 				if the numbers boolean is true, say " - [n] (weapon size)[run paragraph on]";
 				decrease the attack strength by n.
 
-					
-
+[No chance to win rule: monsters who start using over- or undersized weapons probably deserve being clumsy.]
 
 
 Chapter - Powers
