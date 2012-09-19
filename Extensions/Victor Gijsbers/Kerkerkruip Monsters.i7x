@@ -297,8 +297,9 @@ Aftereffects rule (this is the increase ape damage rule):
 					let n be 0;
 					if health of the player < permanent health of the player:
 						now n is permanent health of the player minus health of the player;
-						if n is greater than 3:
-							now n is 3;
+						let m be 1 + final body of the player divided by 3;
+						if n is greater than m:
+							now n is m;
 						heal the player for n health;
 					say "You grow to [bold type][size of the player][roman type] size[if n is not 0], regaining [n] health in the process[end if]!".
 
@@ -312,7 +313,7 @@ Status skill rule (this is the ape power status skill rule):
 			
 Every turn when the player is not medium (this is the revert back to normal rule):
 	if combat status is peace:
-		say "You revert back to [bold type]medium size[roman type].";
+		say "As the combat is over, you revert back to [bold type]medium size[roman type].";
 		now the player is medium.
 
 
