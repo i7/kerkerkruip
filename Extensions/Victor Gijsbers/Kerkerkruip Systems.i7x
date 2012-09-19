@@ -297,6 +297,11 @@ Before printing the name of a weapon (called item):
 	if item is not medium:
 		say "[size of item] ".
 
+Status rule (this is the size status rule):
+	if player is not medium:
+		say "Your current size is [bold type][size of the plauer][roman type].[line break][run paragraph on]".
+
+
 [Note: sizes of a person are meant to reflect how big they themselves are. Sizes of objects are meant to reflect for what size person they were meant. Thus, a 'medium dagger' is much smaller than a 'medium bed': both are normal-sized objects as they are made for normal-sized humans. A huge dagger might be about the same size as a medium sword -- it would just be hard to handle for a medium person, because the hilt would be too big to grip with a hand!]
 
 To decide which number is the size difference of (a - a thing) and (b - a thing):
@@ -383,6 +388,8 @@ An attack modifier rule (this is the weapon size attack modifier rule):
 	if global attacker weapon is not size-agnostic:
 		if the global attacker weapon is not a natural weapon part of the global attacker:
 			let n be the size difference of the global attacker and the global attacker weapon;
+			if n is less than 0:
+				now n is 0 minus n;
 			unless n is 0:
 				let n be n times 2;
 				if the numbers boolean is true, say " - [n] (weapon size)[run paragraph on]";

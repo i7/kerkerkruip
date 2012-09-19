@@ -153,31 +153,7 @@ A damage modifier rule (this is the more damage when piercing rule):
 Aftereffects rule (this is the remove at-pierce rule):
 	now the global attacker is not at-pierce.
 
-[For reference, this is the old piercing ability:
-	
-Carry out piercing:
-	decrease the health of the player by 1;
-	if player is not alive:
-		say "With a final effort, you manage to form part of your body into a dagger -- but you succumb from the exertion.";
-		end the story saying "You committed suicide";
-	let n be 8;
-	increase n by greatest power of the player;
-	increase n by greatest power of the player;	
-	increase n by the concentration of the player;
-	now the concentration of the player is 0;
-	say "You transform part of your own flesh into a magical dagger, which then speeds towards [the noun] of its own accord. [italic type][run paragraph on]";
-	test the body of the noun against n;
-	say "[roman type] ";
-	if test result is true:
-		say "[The noun] manages to evade the dagger.";
-	otherwise:
-		decrease health of the noun by 1;
-		say "The dagger hits, dealing 1 damage and reducing [the name of the noun] to [health of the noun] health.";
-		now the attack damage is 1;
-		now global attacker is the player;
-		now global defender is the noun;
-		consider the aftereffects rules.]
-		
+
 		
 		
 		
@@ -212,7 +188,7 @@ Aftereffects rule (this is the blood ape grows in size when hit rule):
 	if the global attacker is the blood ape and the attack damage is greater than 0:
 		if the blood ape is not gargantuan:
 			now the blood ape is the size after the size of the blood ape;
-			say "The ape immediately licks the blood of its enemy from its knuckles. Nourished by this substance, it grows to [size of the blood ape] size!";
+			say "The ape immediately licks the blood of its enemy from its knuckles. Nourished by this substance, it grows to [bold type][size of the blood ape][normal type] size!";
 			increase permanent health of blood ape by 3;
 			increase health of blood ape by 3;
 			if size of blood ape is large or size of blood ape is gargantuan:
@@ -233,30 +209,6 @@ Aftereffects rule (this is the blood ape grows in size when hit rule):
 		otherwise:
 			say "Sensing perhaps that it cannot grow further in its current confines, the ape does not lick of the blood.".
 			
-[A damage modifier rule (this is the blood ape size damage bonus rule):
-	if the global attacker is the blood ape:
-		if the size of the blood ape is:
-			-- small:
-				if the numbers boolean is true, say " - 1 (small size)[run paragraph on]";
-				decrease the attack damage by 1;
-			-- large:
-				if the numbers boolean is true, say " + 2 (large size)[run paragraph on]";
-				increase the attack damage by 2;
-			-- huge:
-				if the numbers boolean is true, say " + 4 (huge size)[run paragraph on]";
-				increase the attack damage by 4;
-			-- gargantuan:
-				if the numbers boolean is true, say " + 8 (gargantuan size)[run paragraph on]";
-				increase the attack damage by 8;]
-			
-[An attack modifier rule (this is the blood ape size attack bonus rule):
-	if the global defender is the blood ape and the global defender is at dodge:
-		if the blood ape is huge:
-			if the numbers boolean is true, say " + 1 (huge ape)[run paragraph on]";
-			increase the attack strength by 1;
-		if the blood ape is gargantuan:
-			if the numbers boolean is true, say " + 2 (gargantuan ape)[run paragraph on]";
-			increase the attack strength by 2.]
 
 
 Section - Prose
@@ -284,30 +236,36 @@ Report the blood ape dodging:
 
 Section - Power
 
+[We assume that onle the power of the ape can change the size of the player. If this is ever changed, the code below needs to change as well! We'll also need to think about how these things interact.]
+
 The power of the ape is a power. Blood ape grants power of the ape.
 The power level of power of the ape is 1.
-The command text of power of the ape is "+ [ape power damage] damage".
+
+The maximum ape power is a size that varies.
+
+The command text of power of the ape is "[if maximum ape power is not tiny and maximum ape power is not small and maximum ape power is not medium]ape power[end if]".
 
 Absorbing power of the ape:
+	now maximum ape power is size of the blood ape;
 	let n be 0;
 	let m be 1;
-	if the blood ape is small:
+	if maximum ape power is small:
 		now n is 2;
-	if the blood ape is medium:
+	if maximum ape power is medium:
 		now n is 4;
-	if the blood ape is large:
+	if maximum ape power is large:
 		now n is 6;
-	if the blood ape is huge:
+	if maximum ape power is huge:
 		now n is 8;
 		now m is 2;
-	if the blood ape is gargantuan:
+	if maximum ape power is gargantuan:
 		now n is 10;
 		now m is 2;
 	increase permanent health of the player by n;
 	increase melee of the player by m;
 	increase defence of the player by 1;
 	increase inherent damage modifier of the player by 1;
-	say "The blood-hungry soul that animated the ape is absorbed into your own body. You are strong. You hunger for blood. ([bold type]Power of the ape[roman type]: +[m] attack, +1 defence, +[n] health; when you score a hit, your damage will increase for a short time.)[paragraph break]".
+	say "The blood-hungry soul that animated the ape is absorbed into your own body. You are strong. You hunger for blood. ([bold type]Power of the ape[roman type]: +[m] attack, +1 defence, +[n] health; [if maximum ape power is not tiny and maximum ape power is not small and maximum ape power is not medium]by scoring hits, you may grow up to [maximum ape power] size[otherwise]the ape was too small to grant you any special powers[end if].)[paragraph break]".
 
 Repelling power of the ape:
 	let n be 0;
@@ -327,36 +285,35 @@ Repelling power of the ape:
 	decrease permanent health of the player by n;
 	decrease melee of the player by m;
 	decrease defence of the player by 1;
-	decrease inherent damage modifier of the player by 1;
-	now ape power damage is 0.
+	decrease inherent damage modifier of the player by 1.
 	
-The ape power damage is a number that varies. The ape power damage is 0.
-
-A damage modifier rule (this is the add ape power damage to damage rule):
-	if the global attacker is the player and the ape power damage is not 0:
-		if the numbers boolean is true, say " + [ape power damage] (power of the ape)[run paragraph on]";
-		increase the attack damage by ape power damage.		
-
-Every turn when the main actor is the player (this is the decrease ape power damage over time rule):
-	if the ape power damage is greater than 0:
-		if a random chance of 1 in 3 succeeds or a random chance of ape power damage in 10 succeeds:
-			decrease ape power damage by 1.
-
 Aftereffects rule (this is the increase ape damage rule):
 	if global attacker is the player and the attack damage is greater than 0:
 		if power of the ape is granted:
-			increase ape power damage by 3.
+			if size of the player < maximum ape power:
+				update the combat status;
+				if combat state is not peace:
+					now the size of the player is the size after the size of the player;
+					let n be 0;
+					if health of the player < permanent health of the player:
+						now n is permanent health of the player minus health of the player;
+						if n is greater than 3:
+							now n is 3;
+						heal the player for n health;
+					say "You grow to [bold type][size of the player][roman type] size[if n is not 0], regaining [n] health in the process[end if]!".
 
 Status rule (this is the ape power damage status rule):
-	if power of the ape is granted and ape power damage is greater than 0:
-		say "[bold type]Power of the ape[roman type]: +[ape power damage] damage bonus.[line break][run paragraph on]".
+	if power of the ape is granted and player is not medium:
+		say "[bold type]Power of the ape[roman type]: you are currently [size of the player].[line break][run paragraph on]".
 		
 Status skill rule (this is the ape power status skill rule):
 	if power of the ape is granted:
-		say "Since you are strengthened by [bold type]blood[roman type], hitting an enemy gives you a temporary damage bonus. [italic type](Level 1)[roman type][line break][run paragraph on]".
+		say "[if maximum ape power is not tiny and maximum ape power is not small and maximum ape power is not medium]Whenever you damage an enemy, you will grow -- up to [maximum ape power] size[otherwise]The ape was too small to give you a special power[end if]. [italic type](Level 1)[roman type][line break][run paragraph on]".
 			
-
-
+Every turn when the player is not medium (this is the revert back to normal rule):
+	if combat status is peace:
+		say "You revert back to [bold type]medium size[roman type].";
+		now the player is medium.
 
 
 Chapter - Level 1 - Ravenous Armadillo
