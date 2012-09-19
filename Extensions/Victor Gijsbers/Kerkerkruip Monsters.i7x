@@ -188,7 +188,7 @@ Aftereffects rule (this is the blood ape grows in size when hit rule):
 	if the global attacker is the blood ape and the attack damage is greater than 0:
 		if the blood ape is not gargantuan:
 			now the blood ape is the size after the size of the blood ape;
-			say "The ape immediately licks the blood of its enemy from its knuckles. Nourished by this substance, it grows to [bold type][size of the blood ape][normal type] size!";
+			say "The ape immediately licks the blood of its enemy from its knuckles. Nourished by this substance, it grows to [bold type][size of the blood ape][roman type] size!";
 			increase permanent health of blood ape by 3;
 			increase health of blood ape by 3;
 			if size of blood ape is large or size of blood ape is gargantuan:
@@ -292,7 +292,7 @@ Aftereffects rule (this is the increase ape damage rule):
 		if power of the ape is granted:
 			if size of the player < maximum ape power:
 				update the combat status;
-				if combat state is not peace:
+				if combat status is not peace:
 					now the size of the player is the size after the size of the player;
 					let n be 0;
 					if health of the player < permanent health of the player:
