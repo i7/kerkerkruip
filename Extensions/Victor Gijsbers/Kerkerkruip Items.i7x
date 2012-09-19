@@ -2077,7 +2077,7 @@ To set stats for the spiked mace of the ape king:
 		now spiked mace of the ape king is fixed in place;
 		now description of spiked mace of the ape king is "The mace has grown to such proportions that not even the strongest man in the world would be able to lift it.".
 	
-When play begins:
+Last dungeon interest rule (this is the spiked mace stat set rule): [this puts us after the rule that may randomly change the size of a weapon]
 		set stats for the spiked mace of the ape king.
 		
 The description of spiked mace of the ape king is "A ball studded with sharp spikes and put at the end of a stick makes a simple but effective weapon. It is currently of [size of spiked mace of the ape king] size.".

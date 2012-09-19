@@ -384,17 +384,55 @@ An attack modifier rule (this is the weapon size attack modifier rule):
 		if the global attacker weapon is not a natural weapon part of the global attacker:
 			let n be the size difference of the global attacker and the global attacker weapon;
 			unless n is 0:
-				if n is less than 0:
-					now n is 0 minus n;
-				if n is greater than 2:
-					increase n by 1;
-				if n is greater than 4:
-					increase n by 1; [1->1, 2->2, 3->4, 4->6, 5->7]
+				let n be n times 2;
 				if the numbers boolean is true, say " - [n] (weapon size)[run paragraph on]";
 				decrease the attack strength by n.
 
 [No chance to win rule: monsters who start using over- or undersized weapons probably deserve being clumsy.]
 
+Section - Size of weapons
+
+[These operations are not reversible. Better not have the player play with them!]
+
+To increase the size of (item - a weapon):
+	unless the size of item is gargantuan:
+		now the size of item is the size after the size of item;
+		unless item is size-agnostic:
+			increase weapon damage bonus of item by 1;
+			increase damage die of item by 1;
+			if a random chance of 1 in 2 succeeds:
+				if passive parry max of item is greater than 1:
+					decrease passive parry max of item by 1;
+				increase dodgability of item by 1.
+	
+To decrease the size of (item - a weapon):
+	unless the size of item is tiny:
+		now the size of item is the size before the size of item;
+		unless item is size-agnostic:
+			if weapon damage bonus of item is greater than 0:
+				decrease weapon damage bonus of item by 1;
+			if damage die of item is greater than 1:
+				decrease damage die of item by 1;
+			if a random chance of 1 in 2 succeeds:
+				increase passive parry max of item by 1;
+				if dodgability of item is greater than 0:
+					decrease dodgability of item by 1.
+	
+A dungeon interest rule (this is the change weapon sizes rule):
+	repeat with item running through not off-stage not non-treasure not carried not size-agnostic weapons:
+		if a random chance of 1 in 30 succeeds:
+			decrease the size of item;
+			if a random chance of 1 in 5 succeeds:
+				decrease the size of item;
+			if generation info is true, say "* Now [item] is [size of item].";
+		otherwise:
+			if a random chance of 1 in 10 succeeds:
+				increase the size of item;
+				if a random chance of 1 in 2 succeeds:
+					increase the size of item;
+					if a random chance of 1 in 2 succeeds:
+						increase the size of item;
+				if generation info is true, say "* Now [item] is [size of item].".
 
 Chapter - Powers
 
