@@ -123,6 +123,9 @@ Every turn when main actor is the player:
 		if combat status is peace:
 			now pierce-cooldown is 0.
 
+Aftereffects rule (this is the remove at-pierce rule):
+	now the global attacker is not at-pierce.
+
 Check piercing:
 	if power of daggers is not granted:
 		take no time;
@@ -150,8 +153,7 @@ A damage modifier rule (this is the more damage when piercing rule):
 		if the numbers boolean is true, say " + [n] (piercing)[run paragraph on]";
 		increase the attack damage by n.
 
-Aftereffects rule (this is the remove at-pierce rule):
-	now the global attacker is not at-pierce.
+
 
 
 		
@@ -315,6 +317,12 @@ Every turn when the player is not medium (this is the revert back to normal rule
 	if combat status is peace:
 		say "As the combat is over, you revert back to [bold type]medium size[roman type].";
 		now the player is medium.
+
+
+
+
+
+
 
 
 Chapter - Level 1 - Ravenous Armadillo
@@ -485,13 +493,13 @@ Section - Power of the Armadillo
 
 The power of the armadillo is a power. Ravenous armadillo grants power of the armadillo.
 The power level of power of the armadillo is 1.
-The command text of power of the armadillo is "scales".
+The command text of power of the armadillo is "scales[if scales-cooldown is not 0] ([scales-cooldown])[end if]".
 
 Absorbing power of the armadillo:
 	do the armadillo stomach trick;
 	increase melee of the player by 1;
 	increase permanent health of the player by 5;
-	say "As the armadillo succumbs, you feel its soul absorbed into your own body. ([bold type]Power of the armadillo[roman type]: +1 attack, +1 damage resistance, +5 health, and the [italic type]scales[roman type] skill, which gives you a temporary damage reduction that costs some health to use and expires as soon as you attack.)[paragraph break]".
+	say "As the armadillo succumbs, you feel its soul absorbed into your own body. ([bold type]Power of the armadillo[roman type]: +1 attack, +1 damage resistance, +5 health, and the [italic type]scales[roman type] skill, which allows you to cover yourself in hard scales.)[paragraph break]".
 
 A damage modifier rule (this is the power of the armadillo gives damage resistance rule):
 	if the global defender is the player and the power of the armadillo is granted:
@@ -504,21 +512,16 @@ Repelling power of the armadillo:
 
 Section - The scales skill
 
-The scales number is a number that varies. The scales number is usually 0.
+A person can be at-scale. A person is usually not at-scale.
 
 A damage modifier rule (this is the scales gives damage resistance rule):
-	if the global defender is the player and the scales number is greater than 0:
-		let n be the scales number;
+	if the global defender is at-scale:
+		let n be the final body of the global defender divided by 3;
+		increase n by 5;
 		if the numbers boolean is true, say " - [n] (scales)[run paragraph on]";
 		decrease the attack damage by n.
 
-A physical damage reduction rule (this is the scaling damage reduction rule):
-	if the test subject is the player and the scales number is greater than 0:
-		increase the pdr by scales number.
-
-Scaling is an action applying to one number. Understand "scale [a number]" and "scales [a number]" as scaling.
-
-Understand "scales" and "scale" as a mistake ("[take no time][italic type]You need to supply the level of scales you wish to attain by typing, for example, 'scales 2'. This would give you 2 damage reduction and would cost you between 0 and 2 health. The maximum number you can choose is equal to the highest level monster you have defeated, which is currently [greatest power of the player][roman type].").
+Scaling is an action applying to nothing. Understand "scale" and "scales" as scaling.
 
 Check scaling:
 	if power of the armadillo is not granted:
@@ -526,41 +529,36 @@ Check scaling:
 		say "You do not possess that power." instead.
 
 Check scaling:
-	if the number understood is less than 1:
+	if the combat state of the player is not at-React:
 		take no time;
-		say "You must choose a positive number." instead.
+		say "You can only use the scales ability as a reaction." instead.
 
+Scales-cooldown is a number that varies. Scales-cooldown is 0.
+
+Every turn when main actor is the player:
+	if scales-cooldown is greater than 0:
+		decrease scales-cooldown by 1;
+		if combat status is peace:
+			now scales-cooldown is 0.
+		
 Check scaling:
-	if the number understood is greater than the greatest power of the player:
+	if scales-cooldown is not 0:
 		take no time;
-		say "You are not powerful enough for that; the maximum level of scales you can use is [greatest power of the player]." instead.
+		say "You must wait [scales-cooldown] turn before you can use your scaling ability again." instead.		
 
 Carry out scaling:
-	now the scales number is the number understood;
-	let n be a random number between 0 and the number understood;
-	decrease the health of the player by n;
-	say "Hard scales appear all over your body[if n is greater than 0]; the power drains [n] of your health[end if].";
-	if the player is dead:
-		end the story saying "That transformation was more than your body could handle.".
-
-After the player hitting (this is the scales disappear after attacking rule):
-	if the scales number is not 0:
-		now the scales number is 0;
-		say "Your scales disappear.";
-	continue the action.
-
-Status rule (this is the scales status rule):
-	if scales number is greater than 0:
-		say "You are covered in [bold type]scales[roman type]: +[scales number] damage reduction.[line break][run paragraph on]".
+	say "Hard scales appear all over your body.[line break][paragraph break]";
+	now the player is at-scale;
+	let n be 10;
+	decrease n by final spirit of the player divided by 4;
+	now scales-cooldown is n.
+	
+Aftereffects rule (this is the remove at-scale rule):
+	now the global attacker is not at-scale.
 
 Status skill rule (this is the armadillo status skill rule):
 	if the power of armadillo is granted:
-		say "You have the [bold type]scales[roman type] power, which covers you in hard scales that reduce all damage done to you. Using this power may cost you some health, and it expires when you attack. [italic type](Level 1)[roman type][line break][run paragraph on]".
-
-An AI action selection rule for a person (called P) (this is the concentrate more if the player has scales rule):
-	if the chosen target is the player:
-		choose row with an Option of the action of P concentrating in the Table of AI Action Options;
-		increase the Action Weight entry by scales number.
+		say "You can react by using your [bold type]scales[roman type] power, which covers you in hard scales that reduce the damage done to you. This ability has a cooldown. [italic type](Level 1)[roman type][line break][run paragraph on]".
 
 
 
