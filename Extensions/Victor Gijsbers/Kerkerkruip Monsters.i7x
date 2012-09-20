@@ -134,7 +134,7 @@ Check piercing:
 Check piercing:
 	if pierce-cooldown is not 0:
 		take no time;
-		say "You must wait [pierce-cooldown] turn before you can use your piercing ability again." instead.
+		say "You must wait [pierce-cooldown] turn[unless pierce-cooldown is 1]s[end if] before you can use your piercing ability again." instead.
 
 Check piercing:
 	abide by the check attacking rules.
@@ -299,7 +299,7 @@ Aftereffects rule (this is the increase ape damage rule):
 					let n be 0;
 					if health of the player < permanent health of the player:
 						now n is permanent health of the player minus health of the player;
-						let m be 1 + final body of the player divided by 3;
+						let m be 1 + final body of the player / 3;
 						if n is greater than m:
 							now n is m;
 						heal the player for n health;
@@ -544,7 +544,7 @@ Every turn when main actor is the player:
 Check scaling:
 	if scales-cooldown is not 0:
 		take no time;
-		say "You must wait [scales-cooldown] turn before you can use your scaling ability again." instead.		
+		say "You must wait [scales-cooldown] turn[unless scales-cooldown is 1]s[end if] before you can use your scaling ability again." instead.		
 
 Carry out scaling:
 	say "Hard scales appear all over your body.[line break][paragraph break]";
@@ -902,7 +902,7 @@ Section - Power
 
 The power of the chains is a power. Chain golem grants power of the chains.
 The power level of power of the chains is 2.
-The command text of power of the chains is "lash".
+The command text of power of the chains is "lash[if lash-cooldown is not 0] ([lash-cooldown])[end if]".
 
 Absorbing power of the chains:
 	increase melee of the player by 2;
@@ -932,16 +932,33 @@ Check lashing:
 		say "You can only lash as a reaction to an attack." instead.
 
 Carry out lashing:
+	now lash-cooldown is 10 - final spirit of the player / 5;
 	choose a blank row in the Table of Delayed Actions;
-	now the Action Speed entry is a random number between 8 and 14;
-	now the Action entry is the action of the actor hitting the main actor;
+	let n be 10 - final spirit of the player / 4;
+	let m be a random number between n and 12;
+	now the Action Speed entry is m;
+	now the Action entry is the action of the actor hitting the main actor.
 
 Report lashing:
 	say "You will attempt to strike swiftly, before you are hit.".
 
+
+Lash-cooldown is a number that varies. Lash-cooldown is 0.
+
+Every turn when main actor is the player:
+	if lash-cooldown is greater than 0:
+		decrease lash-cooldown by 1;
+		if combat status is peace:
+			now lash-cooldown is 0.
+		
+Check lashing:
+	if lash-cooldown is not 0:
+		take no time;
+		say "You must wait [lash-cooldown] turn[unless lash-cooldown is 1]s[end if] before you can use your lashing ability again." instead.		
+
 Status skill rule (this is the chain golem power status skill rule):
 	if power of the chains is granted:
-		say "You can [bold type]lash out[roman type] as a reaction. This counterattack will sometimes, but not always, happen before the enemy hits you. [italic type](Level 2)[roman type][line break][run paragraph on]".
+		say "You can [bold type]lash[roman type] as a reaction. This counterattack will sometimes, but not always, happen before the enemy hits you. This ability has a cooldown. [italic type](Level 2)[roman type][line break][run paragraph on]".
 
 
 
