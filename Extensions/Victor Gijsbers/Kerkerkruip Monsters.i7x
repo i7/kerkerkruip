@@ -577,9 +577,9 @@ The description of Miranda is "Although she is currently working as one of Malyg
 The health of Miranda is 12.
 The melee of Miranda is 0.
 The defence of Miranda is 7.
-The body score of Miranda is 7.
+The body score of Miranda is 5.
 The spirit score of Miranda is 6.
-The mind score of Miranda is 5.
+The mind score of Miranda is 7.
 
 Miranda is weapon user.
 
@@ -627,61 +627,51 @@ Carry out an actor stunning:
 
 A damage modifier rule (this is the less damage when stunning rule):
 	if the global attacker is at-stun:
-		if the numbers boolean is true, say " - 2 (stunning)[run paragraph on]";
-		decrease the attack damage by 2.
+		if the numbers boolean is true, say " - 1 (stunning)[run paragraph on]";
+		decrease the attack damage by 1.
 
 Check Miranda attacking:
-	if the stun count of the noun is 0 and Miranda is not at-stun:
+	if the noun is not stunned and Miranda is not at-stun:
 		try Miranda stunning the noun instead.
 
 Aftereffects rule (this is the stunning rule):
 	if the global attacker is at-stun and the global defender is not dead:
 		if the attack damage is greater than 0:
-			say "[if global defender is player]You are[otherwise][The global defender] is[end if] [bold type]stunned[roman type]!";
 			if the global attacker is the player:
 				now global defender is sometime-stunned; [for the Stunning performance achievement]
 				if at least three people are sometime-stunned:
 					award achievement stunning performance;
-			let m be a random number between 1 and 2;
-			if m is 2 and a random chance of 1 in 5 succeeds:
-				now m is 3; [1: 50%, 2: 40%, 3: 10%; average 1.6 turns.]
-			if the global attacker is the player:
-				if a random chance of 1 in 3 succeeds:
-					increase m by 1; [1: 33%, 2: 44%, 3: 20%, 4: 3%.]
+			let m be the final mind of the global attacker;
 			if stun count of the global defender is less than m:
 				now the stun count of the global defender is m;
+			now stun strength of the global defender is final mind of the global attacker divided by 2;
+			say "[if global defender is player]You are[otherwise][The global defender] is[end if] [bold type]stunned[roman type], receiving a -1 attack penalty and a -[stun strength of the global defender] penalty to all faculties for [m] turns!";			
 	now the global attacker is not at-stun.
 
 Status rule (this is the stunned status rule):
 	if the player is stunned:
-		say "You are [bold type]stunned[roman type]: -2 to attack, cannot concentrate.[line break][run paragraph on]".
+		say "You are [bold type]stunned[roman type]: -1 to attack, -[stun strength of the player] to body, mind and spirit.[line break][run paragraph on]".
 
 
 Section - Stunned
 
 A person has a number called the stun count. The stun count of a person is usually 0.
+A person has a number called the stun strength.
+
 Definition: a person is stunned if his stun count is greater than 0.
 
 An attack modifier rule (this is the attack roll stunned bonus rule):
 	if the global attacker is stunned:
-		let n be 2;
-		if the global defender is the player:
-			if the player is retreater or the player is runner:
-				increase n by 3;
-		if the numbers boolean is true, say " - [n] (stunned)[run paragraph on]";
-		decrease the attack strength by n.
+		if the numbers boolean is true, say " - 1 (stunned)[run paragraph on]";
+		decrease the attack strength by 1.
 
 Chance to win rule (this is the CTW stun penalty rule):
 	if the main actor is stunned:
-		decrease the chance-to-win by 2.
-		
-Check concentrating when the player is stunned:
-	take no time;
-	say "You feel too stunned for concentration." instead.
+		decrease the chance-to-win by 1.
 
-An AI action selection rule for a stunned person (called P) (this is the do not concentrate when stunned rule):
-	choose row with an Option of the action of P concentrating in the Table of AI Action Options;
-	decrease the Action Weight entry by 1000.
+A faculty bonus rule (this is the stunning faculty penalty rule):
+	if test subject is stunned:
+		decrease faculty bonus score by stun strength of the test subject.
 
 Every turn (this is the stun wears off rule):
 	if the main actor is stunned:
@@ -743,7 +733,7 @@ Repelling power of Miranda:
 
 Status skill rule (this is the Miranda status skill rule):
 	if the power of Miranda is granted:
-		say "You have the [bold type]stun[roman type] skill: you can try to [italic type]stun[roman type] an enemy; this means you attack with a -2 damage penalty, but if you hit you will decrease the opponent's effectiveness for several rounds. [italic type](Level 1)[roman type][line break][run paragraph on]".
+		say "You have the [bold type]stun[roman type] skill: you can try to [italic type]stun[roman type] an enemy; this means you attack with a -1 damage penalty, but if you hit you will decrease the opponent's effectiveness for several rounds. [italic type](Level 1)[roman type][line break][run paragraph on]".
 
 
 
