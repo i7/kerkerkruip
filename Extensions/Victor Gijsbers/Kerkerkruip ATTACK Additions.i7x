@@ -64,7 +64,7 @@ A remain concentrated rule (this is the damage penalty for remaining concentrate
 
 Section - Killing
 
-An aftereffects rule (this is the killing after attack rule):
+Last after reporting an actor hitting (this is the killing after attack rule):
 	if the global defender is dead:
 		have an event of the global attacker killing the global defender.
 

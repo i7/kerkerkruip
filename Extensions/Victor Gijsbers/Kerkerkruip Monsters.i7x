@@ -1097,9 +1097,9 @@ Killing rule (this is the explode after death rule):
 	if the killed-guy is the player:
 		if the killer-guy is not dead:
 			if power of the bomb is granted:
-				let n be level of the killer-guy;
-				now n is n times 2;
-				increase n by a random number between 0 and 4;
+				let m be final body of the player;
+				if m is less than 5, now m is 5;
+				let n be a random number between 5 and m;
 				if health of the killer-guy is not greater than n:
 					say "Your body explodes vehemently, killing [the killer-guy][if the level of the killer-guy is 0]. Unfortunately, [the killer-guy] is levelless and cannot heal you[otherwise if the level of the killer-guy is 5]. Your soul attempts to swallow that of your enemy, but [the killer-guy] is quicker and far more powerful, swallowing yours and thus coming back to life. You, however, are destroyed for all eternity[otherwise]! As your soul swallows that of your enemy whole, you feel your body reconstituting itself[end if].[paragraph break]";
 					if the level of the killer-guy is not 0 and the level of the killer-guy is not 5:
@@ -1294,19 +1294,24 @@ Check reaping (this is the cannot reap yourself rule):
 
 Check reaping (this is the reaping a dead person rule):
 	if the noun is dead:
-		end the story saying "Your dedication to Death went too far";
+		end the story saying "Your dedication to Death went too far.";
 		say "You are instantly transported to the Land of the Dead, where [the name of the noun] currently resides." instead.
 
-Check reaping (this is the reaping with one health rule):
+[Check reaping (this is the reaping with one health rule):
 	if the health of the player is 1:
 		end the story saying "Your dedication to Death went too far.";
-		say "You attempt to reap [the noun], but the strain is too much for your weak body." instead.
+		say "You attempt to reap [the noun], but the strain is too much for your weak body." instead.]
 
 Carry out reaping:
 	repeat with guy running through persons in the location:
 		now concentration of guy is 0;
-	decrease health of the player by greatest power of the player;
-	decrease permanent health of the player by greatest power of the player;
+	let n be final spirit of the player;
+	unless a random chance of n in 33 succeeds:
+		decrease health of the player by greatest power of the player;
+		decrease permanent health of the player by greatest power of the player;
+		if the health of the player is less than 1:
+			end the story saying "Your dedication to Death went too far.";
+			say "You attempt to reap [the noun], but the strain is too much for your weak body." instead;
 	unless teleportation is impossible for the player:
 		let destination be the location of the noun;
 		say "You live in the aging cells of an infant's face, and your voice can be heard in the silence after each heartbeat. Death attends on us always, and in his guise you find yourself poised to reap [the noun] --[paragraph break]";
@@ -1456,7 +1461,7 @@ Repelling power of rage:
 
 Status skill rule (this is the rage power status skill rule):
 	if power of rage is granted:
-		say "You can [bold type]howl[roman type] in rage. Your melee and damage both increase by 4 for the next attack, but your defence permanently decreases by 1. [italic type](Level 2)[roman type][line break][run paragraph on]".
+		say "You can [bold type]howl[roman type] in rage. Your attack bonus increases by 4 for the next attack, and your damage increased by an amount that depends on your mind score. However, your defence permanently decreases by 1. [italic type](Level 2)[roman type][line break][run paragraph on]".
 
 Section - Howling
 
@@ -1481,8 +1486,10 @@ An attack modifier rule (this is the howl attack bonus rule rule):
 
 A damage modifier rule (this is the howl damage bonus rule):
 	if the global attacker is at-howl:
-		if the numbers boolean is true, say " + 4 (howling)[run paragraph on]";
-		increase the attack damage by 4.
+		let n be final mind of the player / 3;
+		increase n by 2;
+		if the numbers boolean is true, say " + [n] (howling)[run paragraph on]";
+		increase the attack damage by n.
 			
 Aftereffects rule (this is the take away howling rule):
 	now the global attacker is not at-howl.
