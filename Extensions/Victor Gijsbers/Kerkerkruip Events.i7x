@@ -60,8 +60,9 @@ A fragmentation rule (this is the basic fragmentation damage rule):
 	let original n be n;
 	repeat with guy running through all alive persons in fragmentation-place:
 		let m be a random number between 2 and 5;
-		if fragmentation-item is silver and the guy is undead:
-			increase m by 3;
+		if fragmentation-item is silver:
+			if the guy is undead or the guy is demonic:
+				increase m by 3;
 		calculate the pdr for guy;
 		decrease m by pdr;
 		if m is less than 0, now m is 0;			

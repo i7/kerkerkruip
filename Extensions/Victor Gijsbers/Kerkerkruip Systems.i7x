@@ -865,24 +865,43 @@ A followers rule (this is the follower cannot follow hidden person rule):
 		rule fails.
 
 
-Chapter - New factions - undead and horrors
+[OK, we need to tear apart factions and type.]
+
+Chapter - Monster types
+
+Type is a kind of value. The types are living, undead, demonic, horrific.
+
+A person has a type. The type of a person is usually living.
+
+Status rule (this is the undead status rule):
+	if the player is undead:
+		say "You are [bold type]undead[roman type]: other undead are your allies; other potential allies may be your enemies instead; absorbing a soul may heal you only partially.[line break][run paragraph on]".
+
+
+Chapter - New factions
 
 [Undead attack everyone, except for other undead. Horrors attack everyone. Demonic doesn't hate demonic or hostile.]
 
-undead is a faction.
-horrific is a faction.
-demonic is a faction.
+undead-faction is a faction.
+horrific-faction is a faction.
+mindslug-enslaved is a faction.
+player-enslaved is a faction.
 
-When play begins (this is the set undead and horror factions rule):
+Definition: a person is enslaved if its faction is mindslug-enslaved or its faction is player-enslaved.
+
+When play begins (this is the set factions rule):
+	now mindslug-enslaved hates friendly;
+	now friendly hates mindslug-enslaved;
 	repeat with X running through factions:
-		now horrific hates X;
-		now X hates horrific;
-		unless X is undead:
-			now undead hates X;
-			now X hates undead;
-		unless X is demonic or X is hostile:
-			now demonic hates X;
-			now X hates demonic.
+		now horrific-faction hates X;
+		now X hates horrific-faction;
+		unless X is undead-faction:
+			now undead-faction hates X;
+			now X hates undead-faction;
+		if friendly hates X:
+			now player-enslaved hates X;
+		if X hates friendly:
+			now X hates player-enslaved.
 
 [And now some stuff we need because horrors might attack themselves.]
 
@@ -901,10 +920,6 @@ Hate rule (this is the nonstandard hate rule):
 [An AI target selection rule for a person (called target) (this is the do not target yourself rule):
 	if target is the running AI:
 		decrease the Weight entry by 2000.]
-
-Status rule (this is the undead status rule):
-	if the player is undead:
-		say "You are [bold type]undead[roman type]: other undead are your allies; potential living allies are your enemies instead; absorbing a soul may heal you only partially.[line break][run paragraph on]".
 
 Every turn when the player is undead (this is the undead follow undead rule):
 	repeat with guy running through undead not follower persons in the location:
@@ -1003,7 +1018,7 @@ Section - Silver
 
 A damage modifier rule (this is the silver damage rule):
 	if the global attacker weapon is silver:
-		if the global defender is not undead:
+		if the global defender is not undead and the global defender is not demonic:
 			say " - 2 (silver weapon)[run paragraph on]";
 			decrease the attack damage by 2;
 		otherwise:
@@ -1673,17 +1688,34 @@ Player form is a kind of value.
 The player forms are defined by the Table of Forms.
 
 Table of Forms
-player form		turn-text									form faction
-human-form		"You turn back into a normal human being."	friendly
-ghoul-form		"You turn into a loathsome ghoul!"			undead
-vampire-form		"You turn into a vampire!"					undead
-vampirebat-form	"You turn into a vampire bat!"				undead
+player form
+human-form
+ghoul-form
+vampire-form
+vampirebat-form
+
+Table of Form Properties
+player form		turn-text									turn type			special rule
+human-form		"You turn back into a normal human being."	living			the turn-living rule
+ghoul-form		"You turn into a loathsome ghoul!"			undead			the turn-undead rule
+vampire-form		"You turn into a vampire!"					undead			the turn-undead rule
+vampirebat-form	"You turn into a vampire bat!"				undead			the turn-undead rule
 
 Current form is a player form that varies.
 Current form is human-form.
 
 A player form can be form-active. A player form is usually not form-active.
 Human-form is form-active.
+
+This is the turn-living rule:
+	now undead-faction hates friendly;
+	now friendly hates undead-faction.
+	
+This is the turn-undead rule:
+	now undead-faction does not hate friendly;
+	now friendly does not hate undead-faction.
+
+
 
 
 Section - Trumping relation
@@ -1720,13 +1752,19 @@ To find the trump of (Y - a player form):
 To turn the player into (X - a player form):
 	find the trump of X;
 	unless target form is current form:
-		choose row with a player form of target form in Table of Forms;
+		choose row with a player form of target form in Table of Form Properties;
 		now current form is target form;
-		now faction of the player is form faction entry;
+		now type of the player is turn type entry;
+		consider the special rule entry;
 		say turn-text entry;
 		say "[line break]";
 	otherwise:
 		say "You don't seem to change.".
+
+
+
+Section - Human
+
 
 
 
@@ -1767,6 +1805,9 @@ To vampirise the player:
 	now vampirebat-form is form-active;
 	turn the player into vampire-form.
 
+This is the turn-vampire rule:
+	say "".
+
 Status rule (this is the vampire status rule):
 	if current form is vampire-form:
 		say "You are a [bold type]vampire[roman type]: +2 willpower, +1 attack, -2 defence, modest bonus to hiding, can turn into a [italic type]bat[roman type].[line break][run paragraph on]".
@@ -1801,6 +1842,8 @@ To unvampirise the player:
 
 Section - Vampire bat
 
+This is the turn-vampire-bat rule:
+	say "".
 
 Status rule (this is the vampire bat status rule):
 	if current form is vampirebat-form:

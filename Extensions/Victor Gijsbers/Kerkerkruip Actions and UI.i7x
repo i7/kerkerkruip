@@ -335,21 +335,16 @@ Chapter - Monster information
 
 Last carry out examining a person:
 	unless the noun is the player:
-		say "[The noun] is [if level of the noun is not 0]a level [level of the noun in words] [faction of the noun] creature[otherwise if the group level of the noun is not 0]part of a level [group level of the noun in words] group and [faction of the noun][otherwise]a levelless [faction of the noun] creature[end if].[run paragraph on]";
-[		let K be a list of things;
-		let m be 0;
-		repeat with item running through things carried by the noun:
-			unless item is part of something:
-				add item to K;
-				increase m by 1;
-		if m greater than 0:
-			say " [The noun] carries [K with indefinite articles].[run paragraph on]"; ]
+		say "[The noun] is [if level of the noun is not 0]a level [level of the noun in words] [type of the noun] [interesting faction of the noun] creature[otherwise if the group level of the noun is not 0]part of a level [group level of the noun in words] group, [type of the noun], and [interesting faction of the noun][otherwise]a levelless [type of the noun] [interesting faction of the noun] creature[end if].[run paragraph on]";
 		if the number of things carried by the noun is greater than 0:
 			say " [The noun] carries [a list of things carried by the noun].[run paragraph on]"; 	
 		if the number of things worn by the noun is greater than 0:
 			say " [The noun] wears [a list of things worn by the noun].[run paragraph on]"; 				
 		say "[paragraph break]".
 		
+To say interesting faction of (guy - a person):
+	say "[if faction of the player hates faction of guy and the guy is not enslaved]hostile[otherwise if the guy is enslaved]enslaved[otherwise]friendly[end if][run paragraph on]".
+
 
 
 Section - Memory

@@ -190,7 +190,7 @@ The description of the holy symbols is "You see the symbols of all the more life
 
 An attack modifier rule (this is the holy symbols attack bonus rule):
 	if the location encloses the holy symbols:
-		if the global attacker is undead or the global attacker is demonic or the global attacker is horrific:
+		if the global attacker is undead or the global attacker is demonic:
 			if the numbers boolean is true:
 				say " - 2 (holy symbols)[run paragraph on]";
 			decrease the attack strength by 2;
@@ -208,7 +208,7 @@ The description of the unholy symbols is "You see the symbols of all the death-w
 
 An attack modifier rule (this is the unholy symbols attack bonus rule):
 	if the location encloses the unholy symbols:
-		if the global attacker is undead or the global attacker is demonic or the global attacker is horrific:	
+		if the global attacker is undead or the global attacker is demonic:	
 			if the numbers boolean is true, say " + 2 (unholy symbols)[run paragraph on]";
 			increase the attack strength by 2.
 		

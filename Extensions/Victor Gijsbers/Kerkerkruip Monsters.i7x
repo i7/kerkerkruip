@@ -1283,7 +1283,7 @@ Check reaping (this is the cannot reap the unseen rule):
 		say "You have not yet seen [the noun]." instead.
 
 Check reaping (this is the cannot reap the undead rule):
-	if the faction of the noun is undead:
+	if the noun is undead:
 		take no time;
 		say "The undead are no longer haunted by Death, so you cannot reap them." instead.
 
@@ -1327,7 +1327,7 @@ Carry out reaping:
 
 Chapter - Level 2 - Demon of Rage
 
-The demon of rage is a demonic monster. "A demon of rage fills the room with its inarticulate cries."
+The demon of rage is a demonic hostile monster. "A demon of rage fills the room with its inarticulate cries."
 The demon-of-rage-number is a number that varies. The demon-of-rage-number is 0.
 
 Understand "cries" and "inarticulate" as the demon of rage.
@@ -1529,14 +1529,7 @@ Section - Mind blast action
 
 Mindblasting is an action applying to one thing.
 
-enslaved is a faction.
 
-[After printing the name of a enslaved person:
-	say " (enslaved)".]
-
-When play begins:
-	now enslaved hates friendly;
-	now friendly hates enslaved.
 		
 An AI action selection rule for the at-Act mindslug (this is the mindslug considers mindblasting rule):
 	choose a blank Row in the Table of AI Action Options;
@@ -1569,7 +1562,7 @@ Carry out the mindslug mindblasting:
 			if the noun is the player:
 				end the story saying "You live on as the unquestioning slave of a giant slug";
 			otherwise:
-				now the faction of the noun is enslaved;
+				now the faction of the noun is mindslug-enslaved;
 				say "[The noun] is now under the control of the mindslug.";
 		otherwise:
 			if the concentration of the noun is greater than 0:
@@ -1600,7 +1593,7 @@ Report the mindslug dodging:
 
 Section - Slaves
 
-Fafhrd is a enslaved man. The description of Fafhrd is "This male barbarian is strong and muscular. He looks like an able and shrewd fighter.".
+Fafhrd is a mindslug-enslaved man. The description of Fafhrd is "This male barbarian is strong and muscular. He looks like an able and shrewd fighter.".
 
 Health of Fafhrd is 13.
 Melee of Fafhrd is 1.
@@ -1614,7 +1607,7 @@ Fafhrd carries a sword called Fafhrd's sword. The description of Fafhrd's sword 
 Follower percentile chance of Fafhrd is 75.
 Fafhrd is weapon user.
 
-Mouser is a enslaved man. The description of Mouser is "Mouser is a small, fast man. You know his type from the alleys and alehouses of Montenoir.".
+Mouser is a mindslug-enslaved man. The description of Mouser is "Mouser is a small, fast man. You know his type from the alleys and alehouses of Montenoir.".
 
 Mouser carries a sword called Mouser's sword. The description of Mouser's sword is "A relatively short sword."
 
@@ -1635,7 +1628,7 @@ When play begins:
 
 An attack modifier rule (this is the mindslug defended by the enslaved rule):
 	if the global defender is the mindslug and the global attacker is not hidden:
-		let n be the number of enslaved persons in the location;
+		let n be the number of mindslug-enslaved persons in the location;
 		if n greater than 0:
 			let m be n + 1;
 			let m be n times m;
@@ -1644,48 +1637,52 @@ An attack modifier rule (this is the mindslug defended by the enslaved rule):
 
 Chance to win rule (this is the CTW mindslug enslaved penalty rule):
 	if the global defender is the mindslug:
-		let n be the number of enslaved persons in the location;
+		let n be the number of mindslug-enslaved persons in the location;
 		if n greater than 0:
 			let m be n + 1;
 			let m be n times m;		
 			decrease the chance-to-win by m.
 
 An attack modifier rule (this is the enslaved have bad defence rule):
-	if the global defender is enslaved:
+	if the global defender is mindslug-enslaved:
 		if the numbers boolean is true, say " + 2 (defender uninterested in own safety)[run paragraph on]";
 		increase the attack strength by 2.
 
 Chance to win rule (this is the CTW enslaved bonus rule):
-	if the global defender is enslaved:
+	if the global defender is mindslug-enslaved:
 		increase the chance-to-win by 2.
 
 Every turn (this is the free slaves of the mindslug when it is killed rule):
-	if the number of enslaved alive persons in the location is greater than 0 and the mindslug is dead:
-		repeat with guy running through enslaved alive persons in the location:
+	if the number of mindslug-enslaved alive persons in the location is greater than 0 and the mindslug is dead:
+		repeat with guy running through mindslug-enslaved alive persons in the location:
 			now guy is friendly;
-			if player is not undead:
-				if guy is Fafhrd:
-					say "'Thanks, man,' says Fafhrd. 'I guess you have earned yourself some help.'[paragraph break]";
-				if guy is Mouser:
-					say "'I knew we shouldn't have trusted Ningauble,' Mouser states. 'Let's get out of here as quickly as possible.'[paragraph break]";
-				if guy is not Fafhrd and guy is not Mouser:
-					say "[The guy] is freed from the mindslug's influence.[paragraph break]"
+			if guy is undead:
+				now guy is undead-faction;
+			if guy is horrific:
+				now guy is horrific-faction;
+			if guy is Fafhrd:
+				say "'Thanks, man,' says Fafhrd. 'I guess you have earned yourself some help.'[paragraph break]";
+			if guy is Mouser:
+				say "'I knew we shouldn't have trusted Ningauble,' Mouser states. 'Let's get out of here as quickly as possible.'[paragraph break]";
+			if guy is not Fafhrd and guy is not Mouser:
+				say "[The guy] is freed from the mindslug's influence.[paragraph break]"
 
-Check an enslaved npc attacking (this is the slaves may be freed from mindslug rule):
+Check a mindslug-enslaved npc attacking (this is the slaves may be freed from mindslug rule):
 	consider the free slaves of the mindslug when it is killed rule;
-	if actor is not enslaved:
+	if actor is not mindslug-enslaved:
 		do nothing instead.
 		
 
 Section - Prose for Fafhrd and Mouser
 
 Report an actor hitting the dead Fafhrd:
-	say "Cursing his fate, Fafhrd falls down[if Mouser is alive and the faction of Mouser is not enslaved and Mouser is in the location]. 'Fafhrd!' screams Mouser[do the mouser rage][end if].";
+	say "Cursing his fate, Fafhrd falls down[if Mouser is alive and the faction of Mouser is not mindslug-enslaved and Mouser is in the location]. 'Fafhrd!' screams Mouser[do the mouser rage][end if].";
 	rule succeeds.
 
 To say do the mouser rage:
 	increase melee of Mouser by 2;
 	decrease defence of Mouser by 1;
+	increase health of Mouser by 5;
 	if global attacker is the player:
 		now faction of Mouser is hostile.
 
@@ -1706,12 +1703,13 @@ Report Fafhrd parrying:
 	rule succeeds.
 
 Report an actor hitting the dead Mouser:
-	say "Mouser staggers backwards, mortally wounded. He tries to say something, but no sound ever passes his lips again[if Fafhrd is alive and the faction of Fafhrd is not enslaved and Fafhrd is in the location]. 'Vengeance!' screams Fafhrd[do the fafhrd rage][end if].";
+	say "Mouser staggers backwards, mortally wounded. He tries to say something, but no sound ever passes his lips again[if Fafhrd is alive and the faction of Fafhrd is not mindslug-enslaved and Fafhrd is in the location]. 'Vengeance!' screams Fafhrd[do the fafhrd rage][end if].";
 	rule succeeds.
 
 To say do the Fafhrd rage:
 	increase melee of Fafhrd by 2;
 	decrease defence of Fafhrd by 1;
+	increase health of Fafhrd by 5;
 	if global attacker is the player:
 		now faction of Fafhrd is hostile.
 
@@ -2877,7 +2875,7 @@ Report the demonic assassin hitting a dead pc:
 
 Chapter - Nameless Horror
 
-The Nameless Horror is a horrific monster. "Screams rip from your throat as soon as you become aware of the mindbogglingly hideous monster that resides here, an abomination referred to only as the Nameless Horror." The indefinite article of the nameless horror is "the". The description of the Nameless Horror is "A vast dark mass sprouting teeth and claws at random -- you cannot force yourself to look at it.".
+The Nameless Horror is a horrific horrific-faction monster. "Screams rip from your throat as soon as you become aware of the mindbogglingly hideous monster that resides here, an abomination referred to only as the Nameless Horror." The indefinite article of the nameless horror is "the". The description of the Nameless Horror is "A vast dark mass sprouting teeth and claws at random -- you cannot force yourself to look at it.".
 
 A final monster placement rule (this is the Nameless Horror in Eternal Prison rule):
 	now Nameless horror is in eternal prison.
@@ -2887,6 +2885,7 @@ The level of Nameless Horror is 10.
 The health of Nameless Horror is 1000.
 The melee of Nameless Horror is 50.
 
+The Nameless Horror is horrific.
 The Nameless Horror is eyeless.
 The Nameless Horror is unnaturally aware.
 The Nameless Horror is emotionless.
@@ -2958,7 +2957,7 @@ Instead of the Nameless Horror waiting:
 
 Chapter - Rotting corpse
 
-The rotting corpse is an undead monster. "An animated corpse shambles around. Its smell is absolutely disgusting."
+The rotting corpse is an undead undead-faction monster. "An animated corpse shambles around. Its smell is absolutely disgusting."
 
 The rotting corpse is emotionless.
 The rotting corpse is eyeless.
@@ -3104,7 +3103,7 @@ Chapter - Aswang
 As-shape is a kind of value. The as-shapes are as-witch, as-bird and as-dog.
 The aswang has an as-shape. The as-shape of the aswang is as-witch.
 
-The aswang is an undead monster. "An aswang is here, having taken the shape of [if as-shape of aswang is as-witch]an ugly old woman[otherwise if as-shape of aswang is as-bird]a huge owl-like bird[otherwise]a ferocious black dog[end if]."
+The aswang is an undead undead-faction monster. "An aswang is here, having taken the shape of [if as-shape of aswang is as-witch]an ugly old woman[otherwise if as-shape of aswang is as-bird]a huge owl-like bird[otherwise]a ferocious black dog[end if]."
 Understand "witch" and "dog" and "hound" and "bird" and "owl" and "woman" and "ugly" and "old" as the aswang.
 
 The description of the aswang is "The undead monster has currently taken the form of [if as-shape of aswang is as-witch]an ugly old woman with long, dirty hair and completely white eyes[otherwise if as-shape of aswang is as-bird]a huge owl-like bird with leathery wings[otherwise]a ferocious black dog with blood-shot eyes[end if].".
@@ -3289,7 +3288,7 @@ Chapter - Abyss of the Soul
 [Like the blood ape, except it grows MUCH stronger whenever a creature in the dungeon dies; and the player cannot absorb the soul!]
 [But Malygris must have the power to un-undead the player.]
 
-The abyss of the soul is an undead monster. "Before you floats an abyss of the soul; it looks like a [size of the abyss of the soul] sphere of utter darkness."
+The abyss of the soul is an undead undead-faction monster. "Before you floats an abyss of the soul; it looks like a [size of the abyss of the soul] sphere of utter darkness."
 The abyss of the soul is small.
 
 The description of the Abyss of the Soul is "This [size of the abyss of the soul] sphere of utter darkness is an abyss of the soul, one of the most fearsome of undead monsters. Not only does it sap the strength of all nearby living creatures, it also feeds on the souls of the recently departed.".
@@ -3385,7 +3384,10 @@ A smoke demon is a monster.
 
 The description of the smoke demon is "It is hard to say exactly which features of the smoky form show it to be sentient, but there is not the slightest doubt in your mind that it is.".
 
-The smoke demon is horrific. The level of the smoke demon is 0.
+The smoke demon is demonic.
+The smoke demon is horrific-faction. [Attacks even other demons.]
+
+The level of the smoke demon is 0.
 The smoke demon is smoke attuned.
 The smoke demon is flyer.
 The smoke demon is emotionless.

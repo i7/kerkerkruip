@@ -938,7 +938,7 @@ Instead of throwing a smoke grenade:
 
 Section - Fragmentation grenade
 
-A fragmentation grenade is a kind of grenade. The description of a fragmentation grenade is "When thrown, the [if the fragmentation grenade is silver]silver [end if]fragmentation grenade will explode into many sharp fragments. These are guaranteed to deal damage to everyone in the location[if the fragmentation grenade is silver], but especially to undead[end if]. You cannot handle these items without a feeling of national pride; for it was this invention of Metastasio's that allowed the outnumbered forces of Louis VIII to defeat the Algirian hordes.".
+A fragmentation grenade is a kind of grenade. The description of a fragmentation grenade is "When thrown, the [if the fragmentation grenade is silver]silver [end if]fragmentation grenade will explode into many sharp fragments. These are guaranteed to deal damage to everyone in the location[if the fragmentation grenade is silver], but especially to undead and demons[end if]. You cannot handle these items without a feeling of national pride; for it was this invention of Metastasio's that allowed the outnumbered forces of Louis VIII to defeat the Algirian hordes.".
 A fragmentation grenade is iron.
 Understand "frag" as a fragmentation grenade.
 
@@ -2193,7 +2193,7 @@ Instead of eating vial of purification:
 	
 Instead of drinking vial of purification:
 	remove noun from play;
-	say "The waters purify you of all undead influences. ";
+	say "The waters purify you of all undead influences.";
 	now ghoul-form is not form-active;
 	now vampire-form is not form-active;
 	now vampirebat-form is not form-active;		
@@ -2235,7 +2235,7 @@ Instead of eating Drakul's lifeblood:
 	
 Instead of drinking Drakul's lifeblood:
 	remove noun from play;
-	say "As you gulp down the blood, you feel your whole body changing -- it becomes cold and fragile, but also swift and lean. Magical power courses through your veins. ";
+	say "As you gulp down the blood, you feel your whole body changing -- it becomes cold and fragile, but also swift and lean. Magical power courses through your veins.";
 	vampirise the player.
 
 

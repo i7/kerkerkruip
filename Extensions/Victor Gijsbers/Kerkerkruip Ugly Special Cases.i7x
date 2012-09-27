@@ -18,7 +18,8 @@ Last carry out the ravenous armadillo armadillo-eating:
 		increase melee of ravenous armadillo by 1;
 		decrease defence of ravenous armadillo by 2;
 		increase mind score of ravenous armadillo by 2;
-		now faction of ravenous armadillo is undead.
+		now ravenous armadillo is undead;
+		now faction of ravenous armadillo is undead-faction.
 
 
 Kerkerkruip Ugly Special Cases ends here.

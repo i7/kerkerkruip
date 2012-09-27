@@ -771,7 +771,7 @@ Before reading the symbols of death:
 		if n is less than 3:
 			say "You either fail to pronounce the symbols correctly, or the spell has lost its power, for there is no effect.";
 		if n is 3:
-			unless the player is undead:
+			unless ghoul-form is form-active:
 				say "As you read the symbols, your flesh starts to rot and most of your vital functions cease. You have been turned into a ghoul!";
 				ghoulify the player;
 			otherwise:
