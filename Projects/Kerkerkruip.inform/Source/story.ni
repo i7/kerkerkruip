@@ -18,6 +18,9 @@ Include Dynamic Objects by Jesse McGrew.
 
 [Doesn't work with moving people.]
 
+[ Epistemology - mark items as seen in the every turn rules rather than when looking.]
+The mark items as seen when looking rule is not listed in any rulebook.
+
 Every turn (this is the mark items as seen every turn rule): 
 	repeat with item running through things that are enclosed by the location:
 		if the item is not enclosed by an opaque closed container, now the item is seen.
@@ -42,6 +45,7 @@ Include Kerkerkruip Monsters by Victor Gijsbers.
 Include Kerkerkruip Events and Specials by Victor Gijsbers.
 Include Kerkerkruip Ugly Special Cases by Victor Gijsbers.
 Include Kerkerkruip Actions and UI by Victor Gijsbers.
+Include Kerkerkruip Help and hints by Victor Gijsbers.
 Include Kerkerkruip Start and Finish by Victor Gijsbers.
 Include Kerkerkruip Final Declarations by Victor Gijsbers.
 
