@@ -1803,7 +1803,7 @@ Carry out enslaving:
 	if test result is false:
 		say " Unfortunately, your will is not strong enough to break your enemy's resistance.[paragraph break]";
 	otherwise:
-		say "[paragraph break][bold type]'I will do your bidding, [master]!'[roman type] [the noun] exclaims[if the noun is the swarm of daggers] -- somewhat surprisingly, given that it lacks not just vocal chords but also a respiratory system[otherwise], bowing deeply[end if].[paragraph break]";
+		say "[paragraph break][bold type]'I will do your bidding, [master]!'[roman type] [the noun] whispers[if the noun is the swarm of daggers] -- somewhat surprisingly, given that it lacks not just vocal chords but also a respiratory system[otherwise] [one of]in an awed tone of voice[or]in a groveling tone of voice[purely at random][end if].[paragraph break]";
 		now faction of the noun is player-enslaved;
 		now noun is sometime-enslaved;
 		now noun is follower;
@@ -1813,6 +1813,7 @@ Carry out enslaving:
 				if the action entry is the action of the noun hitting the player:
 					blank out the whole row;
 		now concentration of the noun is 0;
+	now concentration of the player is 0;
 	now enslave-cooldown is 9 - (final spirit of the player / 3).
 
 To say master:
@@ -1870,6 +1871,12 @@ An aftereffects rule (this is the remove betrayed rule):
 	if the global defender is betrayed:
 		now the global defender is not betrayed;
 		release slaves.
+
+[BUG: betraying when not in combat.]
+
+Instead of an actor waiting when the actor is betrayed:
+	say "[The actor] does not suspect your betrayal.".
+
 
 
 Chapter - Level 3 - Giant tentacle

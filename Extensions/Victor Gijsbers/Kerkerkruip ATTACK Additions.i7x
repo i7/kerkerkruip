@@ -3,7 +3,7 @@ Kerkerkruip ATTACK Additions by Victor Gijsbers begins here.
 Use authorial modesty.
 
 
-Section - New check attack stuff
+Section - Attacking when the combat status is peace (Nomos, slaves)
 
 [Nomos. Attack slaves.]
 
@@ -14,19 +14,40 @@ This is the alternative do not kill yourself rule:
 		
 The alternative do not kill yourself rule is listed instead of the do not kill yourself rule in the check attacking rulebook.
 
+Attacking-from-peace is a truth state that varies. Attacking-from-peace is false.
+
 This is the alternative do not attack friendly people rule:
 	if the faction of the player does not hate the faction of the noun:
 		if the faction of the noun is player-enslaved:
 			now the noun is betrayed;
+			if combat status is peace:
+				now attacking-from-peace is true;
 			now faction of the noun is hostile;
 		otherwise:
-			unless the Nomos bonus is true:
+			if the Nomos bonus is true:
+				if combat status is peace:
+					now attacking-from-peace is true;
+				now faction of the noun is hostile;
+			otherwise:
 				take no time;
 				say "[The noun] is your friend, not your enemy!" instead.
 				
 The alternative do not attack friendly people rule is listed instead of the do not attack friendly people rule in the check attacking rulebook.
 
 The do not attack neutral people rule is not listed in any rulebook.
+
+First check attacking:
+	now attacking-from-peace is false. [If it didn't get reset for some reason.]
+
+Last report attacking:
+	if attacking-from-peace is true:
+		now attacking-from-peace is false;
+		now combat state of the noun is at-React;
+		run the AI rules for the noun;
+		now the combat status is concluding;
+		consider the run delayed actions rule;
+		consider the conclude the combat round rule.
+
 
 
 Section - New rolling mechanism

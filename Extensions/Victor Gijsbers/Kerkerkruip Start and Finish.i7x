@@ -249,7 +249,8 @@ To decide whether the player is victorious:
 	let counter be 0;
 	repeat with guy running through alive not off-stage monsters:
 		if the level of guy is 5:
-			now counter is 1;
+			unless guy is player-enslaved:
+				now counter is 1;
 	if counter is 0:
 		decide yes;
 	decide no.
@@ -266,6 +267,11 @@ Victory message rule (this is the Nameless Horror message rule):
 	if the Nameless Horror is follower:		
 		end the story saying "You have won... technically. The Nameless Horror will find you soon, and you end will not be pretty.";
 		rule succeeds.
+
+Victory message rule (this is the enslaved Malygris message rule):
+	if Malygris is player-enslaved:		
+		end the story saying "You have turned Malygris into your slave!";
+		rule succeeds.	
 	
 To do the level 10 victory with (guy - a person):
 	say "In slaying [the guy], you have done the impossible. You absorb its soul, and though this process leaves little of your own personality intact, your powers increase a thousandfold. Even the gods bow to you.";
