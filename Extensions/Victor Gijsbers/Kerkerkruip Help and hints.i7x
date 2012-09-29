@@ -103,11 +103,13 @@ Section - The File of Hints
 The File Of Hints is called "KerkerkruipHints".
 
 Table of Hints
-Retreat	Concentrate	
-0	0
+Retreat	Concentrate	Drawing	Grenades
+0	0	0	0
 
 hint-retreat is a number variable.
 hint-concentrate is a number variable.
+hint-drawing is a number variable.
+hint-grenades is a number variable.
 
 First when play begins:
 	if File of Hints exists:
@@ -115,32 +117,35 @@ First when play begins:
 	choose row 1 in the Table of Hints;
 	now hint-retreat is the Retreat entry;
 	now hint-concentrate is the Concentrate entry;
+	now hint-drawing is the Drawing entry;
+	now hint-grenades is the Grenades entry;
 
 To write out the file of hints:
 	choose row 1 in the Table of Hints;
 	now the Retreat entry is hint-retreat;
 	now the Concentrate entry is hint-concentrate;
+	now the Drawing entry is hint-drawing;
+	now the Grenades entry is hint-grenades;
 	write File of Hints from Table of Hints.
 
 Section - The hints themselves
 
 The hint rules are a rulebook. The hint rules have default success.
 
-Before running the parser (this is the show contextual hints rule):
+Last before running the parser (this is the show contextual hints rule):
 	follow the hint rules;
 	if the rule succeeded:
 		write out the file of hints;
 
 [ Hint about free retreat when first discovering a high level monster ]
 
-After reporting going when hint-retreat is 0 (this is the hint for free retreat rule):
+After going when hint-retreat is 0 (this is the hint for free retreat rule):
 	let highlevel be a number;
-	let playerlevel be the level of the player;
 	repeat with X running through unseen monsters in the location:
-		if (the level of X - 1) > playerlevel:
-			now highlevel is the level of X;
-	if highlevel > 0:
-		now hint-retreat is 1;
+		if (the level of X - 1) > the level of the player:
+			now hint-retreat is 1;
+			break;
+	continue the action;
 
 Hint rule when hint-retreat is 1:
 	now hint-retreat is 2;
@@ -151,6 +156,7 @@ Hint rule when hint-retreat is 1:
 
 After the player hitting when hint-concentrate is 0 for the third time (this is the too much attacking rule):
 	now hint-concentrate is 1;
+	continue the action;
 	
 Hint rule when hint-concentrate is 1:
 	now hint-concentrate is 2;
@@ -159,5 +165,21 @@ Hint rule when hint-concentrate is 1:
 Carry out concentrating when hint-concentrate is 0 (this is the don't remind the player to concentrate if they are doing so rule):
 	now hint-concentrate is 2;
 	write out the file of hints;
+
+[ Suggest throwing grenades as a reaction ]
+
+Hint rule when hint-grenades is 0:
+	if the player is not at-React or a random chance of 2 in 3 succeeds or the player does not carry a grenade:
+		make no decision;
+	now hint-grenades is 2;
+	say "[italic type][bracket]Note: you can throw grenades as a reaction.[close bracket][roman type][paragraph break]";
+	
+[ Suggest that players take a closer look at the fascinating drawing ]
+
+Hint rule when hint-drawing is 0:
+	if the location is not the Drawing room:
+		make no decision;
+	now hint-drawing is 2;
+	say "[italic type][bracket]Note: you might like to take a closer look at that drawing.[close bracket][roman type][paragraph break]";
 
 Kerkerkruip Help and hints ends here.

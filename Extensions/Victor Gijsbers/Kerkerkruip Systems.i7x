@@ -461,11 +461,16 @@ Every turn (this is the remove all killed monsters from play rule):
 			do the absorption with guy.
 
 To do the absorption with (guy - a person):
+	[ Increase score and the level of the player]
 	increase score by level of guy;
+	if the level of guy is greater than the level of the player:
+		now the level of the player is the level of the guy;
+	[ Absorb some powers! ]
 	now test subject is guy;
 	unless absorption is stopped:
 		do power transferral with the guy;
 		heal fully because the guy is slain;
+	[ Get your trophy ]
 	have the guy disappear;
 	do achievement awarding for the guy.
 
