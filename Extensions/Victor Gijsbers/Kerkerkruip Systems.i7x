@@ -1709,11 +1709,15 @@ Human-form is form-active.
 
 This is the turn-living rule:
 	now undead-faction hates friendly;
-	now friendly hates undead-faction.
+	now friendly hates undead-faction;
+	now undead-faction hates player-enslaved;
+	now player-enslaved hates undead-faction.
 	
 This is the turn-undead rule:
 	now undead-faction does not hate friendly;
-	now friendly does not hate undead-faction.
+	now friendly does not hate undead-faction;
+	now undead-faction does not hate player-enslaved;
+	now player-enslaved does not hate undead-faction.
 
 
 
