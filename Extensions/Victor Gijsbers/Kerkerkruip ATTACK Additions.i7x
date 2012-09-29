@@ -3,6 +3,32 @@ Kerkerkruip ATTACK Additions by Victor Gijsbers begins here.
 Use authorial modesty.
 
 
+Section - New check attack stuff
+
+[Nomos. Attack slaves.]
+
+This is the alternative do not kill yourself rule:
+	if the noun is the player and Nomos bonus is false:
+		take no time;
+		say "You are not that desperate!" instead.
+		
+The alternative do not kill yourself rule is listed instead of the do not kill yourself rule in the check attacking rulebook.
+
+This is the alternative do not attack friendly people rule:
+	if the faction of the player does not hate the faction of the noun:
+		if the faction of the noun is player-enslaved:
+			now the noun is betrayed;
+			now faction of the noun is hostile;
+		otherwise:
+			unless the Nomos bonus is true:
+				take no time;
+				say "[The noun] is your friend, not your enemy!" instead.
+				
+The alternative do not attack friendly people rule is listed instead of the do not attack friendly people rule in the check attacking rulebook.
+
+The do not attack neutral people rule is not listed in any rulebook.
+
+
 Section - New rolling mechanism
 
 [This roll creates a number between 1 and 10, but biased towards the middle values. This makes combat somewhat less random, which benefits the player and makes penalties and bonuses more important. However, we also allow a 10 to turn into a 20, so that everyone has a chance to hit everyone.

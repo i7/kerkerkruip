@@ -1803,7 +1803,7 @@ Carry out enslaving:
 	if test result is false:
 		say " Unfortunately, your will is not strong enough to break your enemy's resistance.[paragraph break]";
 	otherwise:
-		say "[paragraph break][bold type]'I will do your bidding, [master]!'[roman type] [the noun] exclaims[if the noun is the swarm of daggers] -- somewhat surprisingly, given that it lacks not just vocal chords but also a respiratory system[otherwise]bowing deeply[end if].[paragraph break]";
+		say "[paragraph break][bold type]'I will do your bidding, [master]!'[roman type] [the noun] exclaims[if the noun is the swarm of daggers] -- somewhat surprisingly, given that it lacks not just vocal chords but also a respiratory system[otherwise], bowing deeply[end if].[paragraph break]";
 		now faction of the noun is player-enslaved;
 		now noun is sometime-enslaved;
 		now noun is follower;
@@ -1840,16 +1840,36 @@ Check enslaving:
 
 Status skill rule (this is the mind slug power status skill rule):
 	if power of the mindslug is granted:
-		say "You can attempt to [bold type]enslave[roman type] an enemy. Your chance will be higher if your enemy's health and concentration is lower, and if your own concentration is higher. This ability has a cooldown. [italic type](Level 3)[roman type][line break][run paragraph on]".
+		say "You can attempt to [bold type]enslave[roman type] an enemy. This ability has a cooldown. [italic type](Level 3)[roman type][line break][run paragraph on]".
 
 
 
 
 Section - Attacking your slaves
 
+A person can be betrayed. A person is usually not betrayed.
 
+[Making sure that attacking a slave is possible and makes him betrayed is done in Kerkerkruip ATTACK Additions.]
 
+An attack modifier rule (this is the betrayal attack modifier rule):
+	if the global defender is betrayed:
+		if the numbers boolean is true, say " + 6 (betrayed by [master])[run paragraph on]";
+		increase the attack strength by 6.
 
+A damage modifier rule (this is the betrayel damage bonus rule):
+	if the global defender is betrayed:
+		if the numbers boolean is true, say " + 4 (betrayed by [master])[run paragraph on]";
+		increase the attack damage by 4.
+
+AI action selection rule for a person (called P) (this is the betrayed people always wait rule):
+	if P is betrayed:
+		choose row with an Option of the action of P waiting in the Table of AI Action Options;
+		now the Action Weight entry is 1000.
+
+An aftereffects rule (this is the remove betrayed rule):
+	if the global defender is betrayed:
+		now the global defender is not betrayed;
+		release slaves.
 
 
 Chapter - Level 3 - Giant tentacle

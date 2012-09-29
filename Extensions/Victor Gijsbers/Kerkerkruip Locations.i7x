@@ -425,23 +425,7 @@ A damage modifier rule (this is the Nomos damage bonus rule):
 		if the numbers boolean is true, say " + [n] (the law is with you)[run paragraph on]";
 		increase the attack damage by n.
 
-This is the alternative do not kill yourself rule:
-	if the noun is the player and Nomos bonus is false:
-		take no time;
-		say "You are not that desperate!" instead.
-The alternative do not kill yourself rule is listed instead of the do not kill yourself rule in the check attacking rulebook.
 
-This is the alternative do not attack friendly people rule:
-	if the faction of the player is the faction of the noun and Nomos bonus is false:
-		take no time;
-		say "[The noun] is your friend, not your enemy!" instead.
-The alternative do not attack friendly people rule is listed instead of the do not attack friendly people rule in the check attacking rulebook.
-
-This is the alternative do not attack neutral people rule:
-	if the faction of the player does not hate the faction of the noun and Nomos bonus is false:
-		take no time;
-		say "[The noun] is not your enemy." instead.
-The alternative do not attack neutral people rule is listed instead of the do not attack neutral people rule in the check attacking rulebook.
 		
 
 
