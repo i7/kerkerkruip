@@ -591,7 +591,7 @@ The description of monk's robe is "A plain and simple robe. You doubt it is usef
 
 Section - Nunchuck
 
-The pair of nunchucks are a weapon. The pair of nunchucks is wood. Understand "nunchuck" and "nunchuk" and "nunchuks" as the pair of nunchucks.
+The pair of nunchucks are a weapon. The pair of nunchucks is wood. Understand "nunchuck" and "nunchuk" and "nunchuks" as the pair of nunchucks. The pair of nunchucks is ambiguously plural.
 The description of the pair of nunchucks is "These two pieces of wood with a metal chain between them can be surprisingly dangerous.".
 The active parry max of the pair of nunchucks is 4.
 
