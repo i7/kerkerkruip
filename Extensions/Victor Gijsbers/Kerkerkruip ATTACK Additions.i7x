@@ -184,14 +184,16 @@ The mind bonus rules are a rulebook.
 The spirit bonus rules are a rulebook.
 The faculty bonus rules are a rulebook.
 
+To process (RL - a rule): (- ProcessRulebook({RL}, 0, true); -).
+
 Faculty bonus score is a number that varies.
 
 To decide which number is the body bonus of (guy - a person):
 	now test subject is guy;
 	now faculty bonus score is 0;
-	consider the body bonus rules;
+	process the body bonus rules;
 	say "[run paragraph on]";	
-	consider the faculty bonus rules;
+	process the faculty bonus rules;
 	say "[run paragraph on]";
 	decide on faculty bonus score.
 	
@@ -203,9 +205,9 @@ To decide which number is the final body of (guy - a person):
 To decide which number is the mind bonus of (guy - a person):
 	now test subject is guy;
 	now faculty bonus score is 0;
-	follow the mind bonus rules;
+	process the mind bonus rules;
 	say "[run paragraph on]";
-	consider the faculty bonus rules;
+	process the faculty bonus rules;
 	say "[run paragraph on]";	
 	decide on faculty bonus score.
 	
@@ -217,9 +219,9 @@ To decide which number is the final mind of (guy - a person):
 To decide which number is the spirit bonus of (guy - a person):
 	now test subject is guy;
 	now faculty bonus score is 0;
-	consider the spirit bonus rules;
+	process the spirit bonus rules;
 	say "[run paragraph on]";	
-	consider the faculty bonus rules;
+	process the faculty bonus rules;
 	say "[run paragraph on]";
 	decide on faculty bonus score.
 	

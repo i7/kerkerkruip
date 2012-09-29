@@ -1740,106 +1740,114 @@ Section - Power of the Mindslug
 
 The power of the mindslug is a power. Mindslug grants power of the mindslug.
 The power level of power of the mindslug is 3.
-The command text of power of the mindslug is "dominate".
+The command text of power of the mindslug is "enslave[if enslave-cooldown is not 0] ([enslave-cooldown])[end if]".
 
 Absorbing power of the mindslug:
 	increase melee of the player by 3;
 	increase defence of the player by 3;
 	increase permanent health of the player by 15;
 	say "As the mindslug dies, you feel its powerful intelligence absorbed into your own body. ([bold type]Power of the mindslug[roman type]: +3 attack, +3 defence, +15 health, and you can attempt to [italic type]dominate[roman type] an enemy.)[paragraph break]";
-	make slaves followers.
+	make helpers followers.
 
 Repelling power of the mindslug:
 	decrease melee of the player by 3;
 	decrease defence of the player by 3;
 	decrease permanent health of the player by 15;
-	unmake slaves followers.
+	unmake helpers followers;
+	release slaves.
 
-To make slaves followers:
+To make helpers followers:
 	now Fafhrd is follower;
 	now Mouser is follower.
 
-To unmake slaves followers:
+To unmake helpers followers:
 	now Fafhrd is not follower;
 	now Mouser is not follower.
 
-Section - Dominating
+To release slaves:
+	if at least one alive person is player-enslaved:
+		say "[if at least two alive persons are player-enslaved]Your slaves are[otherwise]Your slave is[end if] [bold type]released[roman type] from bondage!";
+		repeat with guy running through player-enslaved people:
+			now faction of guy is hostile.
 
-Domination relates various people to various people.
 
-The verb to dominate (he dominates, they dominate, he dominated, it is dominated, he is dominating) implies the domination relation.
+Section - Enslaving
 
-Dominating is an action applying to one thing. Understand "dominate [something]" and "dom [something]" as dominating.
+Enslaving is an action applying to one thing. Understand "enslave [person]" as enslaving.
 
-Does the player mean dominating an alive person: it is very likely.
-Does the player mean dominating the player: it is unlikely.
-
-Check dominating (this is the need the Power of the Mindslug rule):
+Check enslaving (this is the need the Power of the Mindslug to enslave rule):
 	unless Power of the Mindslug is granted:
 		take no time;
 		say "You do not have that power." instead.
 
-Check dominating (this is the only dominate people rule):
-	if the noun is not a person:
-		say "You spend some time trying to impress an inanimate object." instead.
-
-Check dominating (this is the only dominate enemies rule):
+Check enslaving (this is the only enslave enemies rule):
 	if the faction of the player does not hate the faction of the noun:
 		take no time;
-		say "You can only dominate enemies." instead.
+		say "You can only enslave your enemies." instead.
 
-Check dominating (this is the already dominating rule):
-	if the player dominates the noun:
+Check enslaving (this is the cannot enslave the undead rule):
+	if the noun is undead:
 		take no time;
-		say "You already dominate [the noun]." instead.
+		say "The undead cannot be enslaved." instead.
 
-Check dominating (this is the cannot dominate the emotionless rule):
-	if the noun is emotionless:
-		say "You attempt to impress [the noun], but provoke no reaction at all." instead.
-
-Check dominating (this is the dominated rule):
-	if the noun dominates the player:
-		take no time;
-		say "You are too afraid of [the noun] to try that!" instead.
-
-Carry out dominating:
-	let n be 50 times the health of the noun; [50 * HN]
-	now n is n divided by the health of the player; [(50 * HN) / HP]
-	increase n by 5 times mind score of the noun;
-	decrease n by 5 times mind score of the player; [((50 * HN) / HP) + 5 * (WN - WP)] [= 50 when everything is identical.]
-	if n is less than 10, now n is 10;
-	if n is greater than 90, now n is 90;
-	let m be a random number between 1 and 100;
-	if m is greater than n:
-		say "[The noun] cower[s] before your imposing presence.";
-		now player dominates the noun;
+Carry out enslaving:
+	let n be final mind of the noun;
+	increase n by health of the noun;
+	increase n by 2 * concentration of the noun;
+	decrease n by 2 * concentration of the player;
+	increase n by 5; [mind + health + 5 + 2 * (Concentration of target - concentration of player)]
+	if noun is sometime-enslaved:
+		increase n by 20;
+	say "You attempt to enslave [the noun]. [run paragraph on]";
+	test the mind of the player against n;
+	if test result is false:
+		say " Unfortunately, your will is not strong enough to break your enemy's resistance.[paragraph break]";
 	otherwise:
-		say "You attempt to dominate [the noun], but suddenly feel very afraid!";
-		now noun dominates the player.
+		say "[paragraph break][bold type]'I will do your bidding, [master]!'[roman type] [the noun] exclaims[if the noun is the swarm of daggers] -- somewhat surprisingly, given that it lacks not just vocal chords but also a respiratory system[otherwise]bowing deeply[end if].[paragraph break]";
+		now faction of the noun is player-enslaved;
+		now noun is sometime-enslaved;
+		now noun is follower;
+		now follower percentile chance of noun is 95;
+		if combat state of player is at-react:
+			repeat through Table of Delayed Actions:
+				if the action entry is the action of the noun hitting the player:
+					blank out the whole row;
+		now concentration of the noun is 0;
+	now enslave-cooldown is 9 - (final spirit of the player / 3).
 
-An attack modifier rule (this is the domination attack modifier rule):
-	if the global defender dominates the global attacker:
-		if the numbers boolean is true, say " - 2 (afraid of [the global defender])[run paragraph on]";
-		decrease the attack strength by 2.
+To say master:
+	if the player is male:
+		say "master[run paragraph on]";
+	otherwise if the player is female:
+		say "mistress[run paragraph on]";
+	otherwise:
+		say "dread ungendered being[run paragraph on]".
 
-Chance to win rule (this is the CTW domination penalty rule):
-	if the global defender dominates the global attacker:
-		decrease the chance-to-win by 2.
+A person can be sometime-enslaved. A person is usually not sometime-enslaved.
 
-An aftereffects rule (this is the domination stops after a hit rule):
-	if the global defender dominates the global attacker and the attack damage is greater than 0:
-		now the global defender does not dominate the global attacker;
-		say "[The global attacker] no longer fear[s] [the global defender].".
+Enslave-cooldown is a number that varies. Enslave-cooldown is 0.
 
-Status rule (this is the domination status rule):
-	if at least one alive person is dominated by the player:
-		say "You [bold type]dominate[roman type]: [list of alive persons dominated by the player with definite articles].[line break][run paragraph on]";
-	if at least one alive person dominates the player:
-		say "You are [bold type]dominated[roman type] by: [list of alive persons dominating the player with definite articles].[line break][run paragraph on]".
+Every turn when main actor is the player:
+	if enslave-cooldown is greater than 0:
+		decrease enslave-cooldown by 1;
+		if combat status is peace:
+			now enslave-cooldown is 0.
+		
+Check enslaving:
+	if enslave-cooldown is not 0:
+		take no time;
+		say "You must wait [enslave-cooldown] turn[unless enslave-cooldown is 1]s[end if] before you can use your enslaving ability again." instead.		
 
-Status skill rule (this is the domination status skill rule):
-	if the power of mindslug is granted:
-		say "You can attempt to [bold type]dominate[roman type] enemies, which will give them an attack penalty against you that only disappears when they successfully hit you. If the attempt fails, the enemy dominates you instead. Weaker enemies are easier to dominate. [italic type](Level 3)[roman type][line break][run paragraph on]".
+Status skill rule (this is the mind slug power status skill rule):
+	if power of the mindslug is granted:
+		say "You can attempt to [bold type]enslave[roman type] an enemy. Your chance will be higher if your enemy's health and concentration is lower, and if your own concentration is higher. This ability has a cooldown. [italic type](Level 3)[roman type][line break][run paragraph on]".
+
+
+
+
+Section - Attacking your slaves
+
+
 
 
 

@@ -218,6 +218,14 @@ To give the player a stat penalty:
 	if i is 4:
 		decrease spirit score of the player by 1.
 
+When play begins (this is the set gender rule):
+	if a random chance of 1 in 2 succeeds:
+		now the player is male;
+	otherwise:
+		now the player is female.
+
+
+
 
 Chapter - Start and Finish
 
