@@ -2242,13 +2242,14 @@ An attack modifier rule:
 		say " + 3 (minotaur's axe stronger in the maze)[run paragraph on]";
 		increase the attack strength by 3.
 	
-The special weapon info of the minotaur's axe is "; when damage is dealt, casts attacker and defender in a magical maze[run paragraph on]".
+The special weapon info of the minotaur's axe is "; when damage is dealt and the wielder has the power of the minotaur, casts attacker and defender in a magical maze[run paragraph on]".
 
 Last aftereffects rule (this is the minotaur's axe maze rule):
 	if the global attacker weapon is the minotaur's axe:
-		if the attack damage is greater than 0:
-			if the location of the player is not the maze:
-				maze the actor and the noun.
+		if the global attacker is the minotaur or (the global attacker is the player and the power of the minotaur is granted):
+			if the attack damage is greater than 0:
+				if the location of the player is not the maze:
+					maze the actor and the noun.
 
 Section - Minotaur prose
 
@@ -2279,13 +2280,18 @@ Absorbing power of minotaur:
 	increase melee of the player by 3;
 	increase defence of player by 2;
 	increase permanent health of the player by 17;
-	say "As the minotaur dies, you feel its soul absorbed into your own body. ([bold type]Power of the minotaur[roman type]: +3 attack,  +2 defence, +10 health; 10% chance of dealing 10 bonus damage when attacking with an axe.)[paragraph break]".
+	say "As the minotaur dies, you feel its soul absorbed into your own body. ([bold type]Power of the minotaur[roman type]: +3 attack,  +2 defence, +17 health; ability to use the minotaur's axe; faculty bonus in the maze; 10% chance of dealing 10 bonus damage when attacking with an axe.)[paragraph break]".
 
 A damage modifier rule (this is the power of the minotaur damage bonus rule):
 	if the power of the minotaur is granted and the actor is the player and the global attacker weapon is an axe:
 		if a random chance of 1 in 10 succeeds:
 			if the numbers boolean is true, say " + 10 (axe proficiency)[run paragraph on]";
 			increase the attack damage by 10.
+
+A faculty bonus rule (this is the power of the minotaur faculty bonus rule):
+	if location of the test subject is the maze:
+		if test subject is the player and the power of the minotaur is granted:
+			increase faculty bonus score by 3.
 
 Repelling power of minotaur:
 	decrease melee of the player by 3;
