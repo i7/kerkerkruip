@@ -2050,14 +2050,14 @@ An AI action selection rule for the at-React giant tentacle (this is the tentacl
 		now the Action Weight entry is 15 plus 5 times the concentration of the main actor;
 
 Carry out the giant tentacle tentacle-shaking:
-	say "The giant tentacle vigourously shakes [the main actor], aiming to confuse and confound.[italic type] ";
+	say "The giant tentacle vigourously shakes [the main actor] while projecting the horrifying image of Tooloo.[italic type] ";
 	let n be 9 + concentration of the giant tentacle;
 	test the mind of the main actor against n; 
 	say "[roman type]";
 	if test result is true:
 		say " [The main actor] remain[s] [if the concentration of the main actor is greater than 0]concentrated[otherwise]sharp[end if].";
 	otherwise:
-		say " [The main actor] [is-are] confused.";
+		say " [The main actor] [is-are] horrified and confused!";
 		now the main actor is tentacle-confused;
 		if the concentration of the main actor is greater than 0:
 			let the main actor lose concentration.
@@ -2079,6 +2079,8 @@ Aftereffects rule when the global attacker is tentacle-confused (this is the no 
 Status rule (this is the tentacle-confused status rule):
 	if the player is tentacle-confused:
 		say "You are [bold type]confused[roman type] by the giant tentacle, which gives you a -2 attack penalty on your next attack.[line break][run paragraph on]".
+
+
 
 Section - Tentacle prose
 
@@ -2115,57 +2117,88 @@ Last damage multiplier rule when the global attacker is the giant tentacle (this
 	rule succeeds.
 The standard show the attack damage dealt rule is listed after the show the damage dealt by the giant tentacle rule in the damage multiplier rules.
 
+
+
 Section - Power of the Tentacle
 
 The power of the tentacle is a power. Giant tentacle grants power of the tentacle.
 The power level of power of the tentacle is 3.
-The command text of power of the tentacle is "confuse".
+The command text of power of the tentacle is "sprout".
 
 Absorbing power of the tentacle:
 	increase melee of the player by 3;
 	increase defence of the player by 3;
 	increase permanent health of the player by 15;
-	say "As the giant tentacle dies, you feel its soul absorbed into your own body. ([bold type]Power of the tentacle[roman type]: +3 attack, +3 defence, +15 health, and you can attempt to [italic type]confuse[roman type] an enemy when you are attacked.)[paragraph break]".
+	say "As the giant tentacle dies, you feel its soul absorbed into your own body. ([bold type]Power of the tentacle[roman type]: +3 attack, +3 defence, +15 health, and you can [italic type]sprout[roman type] horrific tentacles that may make your opponents go insane.)[paragraph break]".
 
 Repelling power of the tentacle:
 	decrease melee of the player by 3;
 	decrease defence of the player by 3;
 	decrease permanent health of the player by 15.
 
-Section - Confusing
 
-Confusing is an action applying to nothing. Understand "confuse" as confusing.
+Section - Sprouting
 
-Check confusing:
+Sprouting is an action applying to one number. Understand "sprout [a number]" as sprouting.
+
+Unnumbered sprouting is an action applying to nothing. Understand "sprout" as unnumbered sprouting.
+
+Instead of unnumbered sprouting:
+	take no time;
+	say "You need to indicate how many tentacles you want to sprout by typing 'sprout 1', 'sprout 2', 'sprout 3' or 'sprout 4'. The more tentacles you sprout, the more powerful the effects -- but you will also lose more of your mind score."
+
+Check sprouting:
 	if power of the tentacle is not granted:
 		take no time;
 		say "You do not possess that power." instead.
 
-Check confusing:
-	if the combat state of the actor is not at-React:
-		take no time;
-		say "You can only confuse as a reaction to an attack." instead.
 
-Carry out confusing:
-	say "A tentacle suddenly leaps out of your body and shakes [the main actor], aiming to confuse and confound.[italic type] ";
-	let n be a random number between 8 and 12;
-	if a random chance of 1 in 7 succeeds:
-		increase n by 3;	
-	if a random chance of 1 in 10 succeeds:
-		increase n by 10;
-	test the mind of the main actor against n; 
-	say "[roman type]";
-	if test result is true:
-		say " [The main actor] remain[s] [if the concentration of the main actor is greater than 0]concentrated[otherwise]sharp[end if].";
-	otherwise:
-		say " [The main actor] [is-are] confused.";
-		now the main actor is tentacle-confused;
-		if the concentration of the main actor is greater than 0:
-			let the main actor lose concentration.
+Check sprouting:
+	if the number understood is less than 1 or the number understood is greater than 4:
+		take no time;
+		say "You can only sprout 1, 2, 3 or 4 tentacles." instead.
+
+Carry out sprouting:
+	let n be the number understood;
+	say "[if n is 1]A horrible tentacle sprouts[end if][if n is 2]Two[otherwise if n is 3]Three[otherwise if n is 4]Four[end if][if n is not 1] horrible tentacles sprout[end if] from your body! This spectacle was not meant to be seen by mortal eyes, and your mind score decreases by [n] points.[paragraph break]";
+	repeat with guy running through people in the location:
+		unless guy is the player:
+			if guy is insane:
+				say "[The guy] has already gone insane, so the tentacles have no further effect.[paragraph break]";
+			otherwise:
+				let m be 4 + (4 * n) - (health of the guy / 3) + (concentration of the player);
+				if m is less than 1:
+					now m is 1;
+				test the mind of the guy against m;
+				if test result is true:
+					say " Sanity is maintained.[run paragraph on]";
+				otherwise:
+					say " [The guy] goes [bold type]insane[roman type]![run paragraph on]";
+					now faction of the guy is insane;
+				if n is greater than 1:
+					if concentration of guy is greater than 0:
+						now concentration of guy is 0;
+						say " [The guy] [bold type]loses concentration[roman type].[run paragraph on]";
+				if n is greater than 2 or guy is insane:
+					if combat state of player is at-react:
+						repeat through Table of Delayed Actions:
+							if the action entry is the action of the guy hitting the player:
+								blank out the whole row;
+				if n is greater than 3:
+					if stun count of the guy is less than 6:
+						say " [The guy] is [bold type]stunned[roman type]![run paragraph on]";
+						now the stun count of the guy is 6;
+						now stun strength of the global defender is 4;
+				say "[paragraph break]";
+	now concentration of the player is 0;
+	decrease mind score of the player by n;
+	if mind score of the player is less than 1:
+		end the story saying "That was too unspeakable for your mind to bear!".
+
 
 Status skill rule (this is the tentacle power status skill rule):
 	if power of the tentacle is granted:
-		say "You can [bold type]confuse[roman type] as a reaction; the attacker may lose concentration and become confused. [italic type](Level 3)[roman type][line break][run paragraph on]".
+		say "You can [bold type]sprout[roman type] between 1 and 4 tentacles, a horrifying spectacle that may make other creatures go crazy. [italic type](Level 3)[roman type][run paragraph on]".
 
 
 

@@ -343,7 +343,7 @@ Last carry out examining a person:
 		say "[paragraph break]".
 		
 To say interesting faction of (guy - a person):
-	say "[if faction of the player hates faction of guy and the guy is not enslaved]hostile[otherwise if the guy is enslaved]enslaved[otherwise]friendly[end if][run paragraph on]".
+	say "[if faction of the player hates faction of guy and the guy is not enslaved and guy is not insane]hostile[otherwise if the guy is enslaved]enslaved[otherwise if the guy is insane]insane[otherwise]friendly[end if][run paragraph on]".
 
 
 

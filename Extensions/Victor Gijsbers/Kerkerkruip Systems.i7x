@@ -886,6 +886,7 @@ undead-faction is a faction.
 horrific-faction is a faction.
 mindslug-enslaved is a faction.
 player-enslaved is a faction.
+insane is a faction.
 
 Definition: a person is enslaved if its faction is mindslug-enslaved or its faction is player-enslaved.
 
@@ -895,6 +896,8 @@ When play begins (this is the set factions rule):
 	repeat with X running through factions:
 		now horrific-faction hates X;
 		now X hates horrific-faction;
+		now insane hates X;
+		now X hates insane;
 		unless X is undead-faction:
 			now undead-faction hates X;
 			now X hates undead-faction;
@@ -926,6 +929,30 @@ Every turn when the player is undead (this is the undead follow undead rule):
 		now guy is follower;
 		if follower percentile chance of guy is less than 50:
 			now follower percentile chance of guy is 50.
+
+
+Chapter - Insanity
+
+A Standard AI rule for an insane person (called P) (this is the insane people attack themselves rule):
+	if P is at-Act:
+		if a random chance of 1 in 6 succeeds:
+			try P attacking P;
+			rule succeeds.
+
+An AI target selection rule (this is the insane randomise the target result rule):
+	if the running AI is insane:
+		increase the Weight by a random number between 0 and 700.
+
+Last AI action selection rule (this is the insane randomise the action result rule):
+	if the running AI is insane:
+		repeat through the Table of AI Action Options:
+			increase the Action Weight entry by a random number between 0 and 700.
+
+A damage modifier rule (this is the insane people sometimes get insane damage bonus rule):
+	if global attacker is insane and global attacker weapon is not size-agnostic:
+		if a random chance of 1 in 5 succeeds:
+			if the numbers boolean is true, say " + 10 (insane burst of strength)[run paragraph on]";
+			increase the attack damage by 10.
 
 
 Chapter - Ranged weapons
