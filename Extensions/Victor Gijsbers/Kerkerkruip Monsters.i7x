@@ -2284,7 +2284,8 @@ Absorbing power of minotaur:
 
 A damage modifier rule (this is the power of the minotaur damage bonus rule):
 	if the power of the minotaur is granted and the actor is the player and the global attacker weapon is an axe:
-		if a random chance of 1 in 10 succeeds:
+		let n be final body of the player;
+		if a random chance of n in 100 succeeds:
 			if the numbers boolean is true, say " + 10 (axe proficiency)[run paragraph on]";
 			increase the attack damage by 10.
 
@@ -2300,7 +2301,7 @@ Repelling power of minotaur:
 
 Status skill rule (this is the minotaur power status skill rule):
 	if power of rage is granted:
-		say "Your [bold type]axe proficiency[roman type] gives you a 10% chance of dealing 10 bonus damage when attacking with an axe. [italic type](Level 3)[roman type][line break][run paragraph on]".
+		say "Your [bold type]axe proficiency[roman type] gives you a (your body)% chance of dealing 10 bonus damage when attacking with an axe. You can also use the special power of the minotaur's axe, and are stronger in the maze. [italic type](Level 3)[roman type][line break][run paragraph on]".
 
 
 
