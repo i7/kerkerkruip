@@ -2448,7 +2448,7 @@ Every turn (this is the grant fanatics of power boolean rule):
 	if healer of Aite is dead and Tormentor of Aite is dead and Defender of Aite is dead:
 		if fanatics power boolean is false:
 			now fanatics power boolean is true;
-			say "Impressed with your prowess in combat, Aite grants you her favour! ([bold type]Power of the fanatics of Aite[roman type]: +4 attack, +4 defence, +20 health, pray to Aite anywhere.)[paragraph break]";
+			say "Impressed with your prowess in combat, Aite grants you her favour! ([bold type]Power of the fanatics of Aite[roman type]: +4 attack, +4 defence, +20 health, pray to Aite anywhere and for better effects.)[paragraph break]";
 			gain the power of the fanatics of Aite. 
 
 To gain the power of the Fanatics of Aite:
@@ -2484,9 +2484,6 @@ First check praying:
 		if the location is not consecrated:
 			do the Aite prayer instead.
 
-[			if the Aite counter is 0:
-				now the Aite counter is a random number between 2 and 12;
-			say "You ask Aite for help in battle, and anxiously await the consequences." instead.]
 
 
 
@@ -2544,6 +2541,290 @@ A damage modifier rule (this is the iron or silver suit acts as a faraday cage r
 			decrease the attack damage by 3.
 
 
+
+Section - Bodmall power - Barkskin
+
+Bodmall-barkskinning is an action applying to nothing.
+
+An AI action selection rule for Bodmall (this is the Bodmall considers barkskinning rule):
+	if Bodmall is not barkskinned:
+		choose a blank Row in the Table of AI Action Options;
+		now the Option entry is the action of the Bodmall Bodmall-barkskinning;
+		now the Action Weight entry is a random number between -10 and 20;
+
+Carry out Bodmall Bodmall-barkskinning:
+	say "Bodmall chants loudly, and her [bold type]skin[roman type] transforms and toughens. It now looks like the bark of a tree.";
+	now Bodmall is barkskinned.
+
+A person can be barkskinned. A person is usually not barkskinned.
+
+A damage modifier rule (this is the barkskin decreases damage rule):
+	if the global defender is barkskinned:
+		unless the global attacker weapon is an axe:
+			if the numbers boolean is true, say " - 1 (barkskin)[run paragraph on]";
+			decrease the attack damage by 1.
+
+Barkskin is a part of Bodmall. Understand "skin" and "bark" as barkskin.
+
+The description of barkskin is "Bodmall's skin looks [if Bodmall is barkskinned]tough and tree-like[otherwise]perfectly normal[end if].".
+
+Section - Bodmall power - Brambles
+
+
+Bodmall-summoning is an action applying to nothing.
+
+An AI action selection rule for Bodmall (this is the Bodmall considers summoning thorns rule):
+	if brambles are not in the location:
+		choose a blank Row in the Table of AI Action Options;
+		now the Option entry is the action of Bodmall Bodmall-summoning;
+		now the Action Weight entry is a random number between -100 and 35.
+
+Carry out Bodmall Bodmall-summoning:
+	say "Bodmall makes several complicated gestures, and [bold type]brambles[roman type] come out of the ground everywhere around you!";
+	move brambles to the location.
+
+An AI action selection rule for Bodmall (this is the Bodmall considers launching rule):
+	if brambles are in the location and brambles strength is greater than 1:
+		choose a blank Row in the Table of AI Action Options;
+		now the Option entry is the action of Bodmall launching;
+		now the Action Weight entry is -10;
+		increase Action Weight entry by ((2 * brambles strength) + brambles duration).
+
+
+Section - Bodmall prose
+
+Report an actor hitting the dead Bodmall:
+	say "'I will haunt you come Samhain!', whispers Bodmall as her body returns to the earth.";
+	rule succeeds.
+
+Report Bodmall hitting a dead pc:
+	if the player is undead:
+		say "Bodmall kneels over your corpse. 'The undead are a blight on this world, and they will be destroyed,' she says.";
+	otherwise:
+		say "Bodmall kneels over your corpse. 'Death is but a stage in the cycle of Nature,' she says.";
+	rule succeeds.
+
+Report Bodmall attacking:
+	say "Bodmall throws her hands forward, casting a lightning bolt at [the noun].";
+	rule succeeds.
+
+Report Bodmall dodging:
+	say "Gracefully, Bodmall attempts to glide out of the way.";
+	rule succeeds.
+
+
+Section - Power of Bodmall
+
+The power of Bodmall is a power. Bodmall grants power of Bodmall.
+The power level of power of Bodmall is 4.
+The command text of power of Bodmall is "thorns".
+	
+Absorbing power of Bodmall:
+	increase melee of the player by 4;
+	increase defence of the player by 4;
+	increase permanent health of the player by 20;
+	say "As Bodmall dies, you feel her soul absorbed into your own body. ([bold type]Power of Bodmall[roman type]: +4 attack, +4 defence, +20 health, and you can summon [italic type]thorns[roman type].)[paragraph break]".
+
+Repelling power of Bodmall:
+	decrease melee of the player by 4;
+	decrease defence of the player by 4;
+	decrease permanent health of the player by 20.
+
+Status skill rule (this is the Bodmall status skill rule):
+	if power of Bodmall is granted:
+		say "You have the power of Bodmall, which allows you to summon [bold type]thorns[roman type] that will impede most enemies. [italic type](Level 4)[roman type][line break][run paragraph on]".
+
+Section - Druidic
+
+Definition: a person (called the guy) is druidic if the guy is bodmall or (the guy is the player and power of bodmall is granted).
+
+A smoke immunity rule (this is the smoke immune if druidic rule):
+	if test subject is druidic:
+		rule succeeds.
+
+
+
+Chapter - The brambles
+
+The brambles duration is a number that varies. The brambles duration is 0.
+The brambles strength is a number that varies. The brambles strength is 0.
+
+Section - The brambles object
+
+The brambles are a thing. "Huge brambles are everywhere." The brambles are plural-named and fixed in place. Understand "bush" and "thorn" and "thorns" and "huge" and "brambles" and "bramble" as the brambles.
+
+The description of the brambles is "Moving through these brambles is possible, but will not easy[if the power of Bodmall is granted]; except for you, of course[end if][if brambles strength is not 0]. There are [thorns size] thorns all over the bushes[end if].[paragraph break]".
+
+Instead of climbing the brambles:
+	try entering the brambles.
+
+Instead of entering the brambles:
+	take no time;
+	say "The brambles are neither thick nor high enough to give you a good hiding spot.".
+
+Instead of taking the brambles:
+	say "They seem to be rooted to the spot.".
+
+Section - Standard attack modifier effect of brambles
+
+An attack modifier rule (this is the brambles attack modifier rule):
+	if the brambles are in the location:
+		unless the global attacker is druidic or the global attacker is flying:
+			let W be a random readied weapon held by the actor;
+			unless W is ranged:
+				say " - 2 (brambles impede movement)[run paragraph on]";
+				decrease attack strength by 2;
+	if the global defender is the player and the brambles are in the location:
+		if the player is retreater or the player is runner:		
+			unless the power of Bodmall is granted:
+				say " + 2 (you are slowed down by the brambles)[run paragraph on]";
+				increase the attack strength by 2.
+				
+Section - Summoning brambles
+
+Summoning brambles is an action applying to nothing. Understand "brambles" and "bramble" and "summon brambles" as summoning brambles.
+
+Check summoning brambles:
+	if power of Bodmall is not granted:
+		take no time;
+		say "You do not possess that power." instead.
+
+Check summoning brambles:
+	if the brambles are in the location:
+		take no time;
+		say "The brambles are already here. (Perhaps you mean to use the [italic type]launch[roman type] ability instead?)" instead.
+
+Carry out summoning brambles:
+	say "You speak the ancient syllables, and brambles grow out of the ground everywhere around you!";
+	move brambles to the location;
+	now brambles duration is 0;
+	now brambles strength is 0.
+
+Section - Unsummoning brambles
+
+Every turn when brambles are not off-stage:
+	if combat status is peace:
+		if brambles are in the location of the player:
+			say "The brambles [bold type]wither and die[roman type].";
+		remove brambles from play.
+	
+Section - Growing the brambles
+
+Every turn when the main actor is druidic:
+	if the brambles are in the location:
+		increase brambles duration by 1;
+		let n be brambles duration;
+		if n is greater than 20:
+			now n is 20;
+		if brambles duration is greater than 3 and brambles strength is 0:
+			if a random chance of 1 in 2 succeeds:
+				now brambles strength is 1;
+				say "The brambles grow [bold type]tiny thorns[roman type]!";
+		otherwise if brambles strength is greater than 0:
+			if a random chance of n in 20 succeeds:
+				do a fruit grow;
+			otherwise:
+				do a thorns grow.
+
+To do a thorns grow:
+	if a random chance of brambles strength in 8 succeeds:
+		unless brambles strength is less than 3:
+			if a random chance of brambles strength in 8 succeeds:
+				decrease brambles strength by 1;
+				say "The thorns on the brambles [bold type]wilt[roman type] and grow smaller.";
+	otherwise:
+		unless brambles strength is 5:
+			increase brambles strength by 1;
+			say "The thorns on the brambles [bold type]grow[roman type].".
+
+
+Section - Saying the thorns size
+
+To say thorns size:
+	if brambles strength is:
+		-- 0:
+			say "no[run paragraph on]";
+		-- 1:
+			say "tiny[run paragraph on]";
+		-- 2:
+			say "small[run paragraph on]";			
+		-- 3:
+			say "medium[run paragraph on]";
+		-- 4:
+			say "large[run paragraph on]";
+		-- 5:
+			say "terrible[run paragraph on]".
+
+Section - Launch!
+
+
+Launching is an action applying to nothing. Understand "launch" as launching.
+
+Check launching:
+	if power of Bodmall is not granted:
+		take no time;
+		say "You do not possess that power." instead.
+
+Check launching:
+	if the brambles are not in the location:
+		take no time;
+		say "The brambles aren't here yet. (Perhaps you mean to use the [italic type]bramble[roman type] ability instead?)" instead.
+
+Check launching:
+	if brambles strength is less than 1:
+		take no time;
+		say "The brambles have no thorns or fruit yet." instead.
+		
+Check launching:
+	if the number of alive not druidic persons in location is 0:
+		take no time;
+		say "There's nobody to launch the thorns at." instead.
+
+Carry out an actor launching:
+	say "[if the actor is the player]You raise your hands[otherwise if the actor is Bodmall]The druidess raises her hands[otherwise][The actor] gestures[end if], and the brambles [bold type]launch[roman type] their deadly thorns![paragraph break]";
+	launch the thorns;
+	now brambles duration is 0;
+	now brambles strength is 0.
+
+To launch the thorns:
+	say "Thorns are launched at everyone, dealing [run paragraph on]";
+	let n be the number of alive not druidic persons in location;
+	let original n be n;
+	let concentest be false;
+	repeat with guy running through all alive not druidic persons in location:
+		let m be a random number between 1 and brambles strength;
+		calculate the pdr for guy;
+		decrease m by pdr;
+		if m is less than 0, now m is 0;			
+		decrease health of guy by m;
+		now concentest is false;
+		if concentration of the guy is greater than 0 and guy is alive and m is not 0:
+			if a random chance of brambles strength in 5 succeeds:
+				now concentration of the guy is 0;
+				now concentest is true;
+		say "[if n is 1 and original n is not 1]and [end if][m] damage to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentest is true] (which breaks [possessive of the guy] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
+		decrease n by 1;
+		if n is 0:
+			say ""; [For an extra newline. Don't ask.]
+	if health of the player is less than 1:
+		end the story saying "You have been pricked to death.".
+
+
+
+
+
+Section - Fruit
+
+To do a fruit grow:
+	say "".
+
+
+
+
+Section - Old Bodmall stuff
+
+
+[
 Section - Bodmall power - Raise fog
 
 Bodmall-fogging is an action applying to nothing.
@@ -2594,54 +2875,10 @@ To decide whether (item - a weapon) resists Bodmall transmutation:
 	if a random chance of 10 in m succeeds:
 		decide no;
 	otherwise:
-		decide yes.
+		decide yes.]
 
-
-Section - Bodmall power - Barkskin
-
-Bodmall-barkskinning is an action applying to nothing.
-
-An AI action selection rule for Bodmall (this is the Bodmall considers barkskinning rule):
-	if Bodmall is not barkskinned:
-		choose a blank Row in the Table of AI Action Options;
-		now the Option entry is the action of the Bodmall Bodmall-barkskinning;
-		now the Action Weight entry is a random number between -10 and 20;
-
-Carry out Bodmall Bodmall-barkskinning:
-	say "Bodmall chants loudly, and her [bold type]skin[roman type] transforms and toughens. It now looks like the bark of a tree.";
-	now Bodmall is barkskinned.
-
-A person can be barkskinned. A person is usually not barkskinned.
-
-A damage modifier rule (this is the barkskin decreases damage rule):
-	if the global defender is barkskinned:
-		unless the global attacker weapon is an axe:
-			if the numbers boolean is true, say " - 1 (barkskin)[run paragraph on]";
-			decrease the attack damage by 1.
-
-Barkskin is a part of Bodmall. Understand "skin" and "bark" as barkskin.
-
-The description of barkskin is "Bodmall's skin looks [if Bodmall is barkskinned]tough and tree-like[otherwise]perfectly normal[end if].".
-
-Section - Bodmall power - Thorns
-
-The thorny bushes are a thing. "Huge bushes, apparently dead but full of large and extremely sharp thorns, are everywhere." The  thorny bushes are plural-named and fixed in place. Understand "bush" and "thorn" and "thorns" and "huge" as the thorny bushes.
-
-The description of the thorny bushes is "Moving through these bushes is possible, but it is certainly going to hurt. Neither attacking nor dodging will be truly safe.".
-
-Instead of climbing the thorny bushes:
-	try entering the thorny bushes.
-
-Instead of entering the thorny bushes:
-	say "You jump into the thorns, receiving [bold type]10 damage[roman type] before you can crawl out again.";
-	decrease health of the player by 10;
-	if the player is dead:
-		end the story saying "I'd love to give you a barbed compliment.".
-
-Instead of taking the thorny bushes:
-	say "They seem to be rooted to the spot.".
-
-Check an actor attacking when the thorny bushes are in the location (this is the attack with thorns in the location rule):
+[
+Check an actor attacking when the brambles are in the location (this is the attack with brambles in the location rule):
 	unless the actor is Bodmall or the actor is flying:
 		unless the actor is the player and the power of Bodmall is granted:
 			let W be a random readied weapon held by the actor;
@@ -2701,82 +2938,7 @@ An attack modifier rule (this is the thorns running rule):
 			otherwise:
 				unless the global attacker weapon is ranged:
 					say " - 2 (your retreat covered by the thorny bushes)[run paragraph on]";
-					decrease the attack strength by 2.
-
-
-Bodmall-summoning is an action applying to nothing.
-
-An AI action selection rule for Bodmall (this is the Bodmall considers summoning thorns rule):
-	if thorny bushes are not in the location:
-		choose a blank Row in the Table of AI Action Options;
-		now the Option entry is the action of Bodmall Bodmall-summoning;
-		now the Action Weight entry is a random number between -100 and 35.
-
-Carry out Bodmall Bodmall-summoning:
-	say "Bodmall makes several complicated gestures, and [bold type]huge thorny bushes[roman type] come out of the ground everywhere around you!";
-	move thorny bushes to the location.
-
-
-Section - Bodmall prose
-
-Report an actor hitting the dead Bodmall:
-	say "'I will haunt you come Samhain!', whispers Bodmall as her body returns to the earth.";
-	rule succeeds.
-
-Report Bodmall hitting a dead pc:
-	if the player is undead:
-		say "Bodmall kneels over your corpse. 'The undead are a blight on this world, and they will be destroyed,' she says.";
-	otherwise:
-		say "Bodmall kneels over your corpse. 'Death is but a stage in the cycle of Nature,' she says.";
-	rule succeeds.
-
-Report Bodmall attacking:
-	say "Bodmall throws her hands forward, casting a lightning bolt at [the noun].";
-	rule succeeds.
-
-Report Bodmall dodging:
-	say "Gracefully, Bodmall attempts to glide out of the way.";
-	rule succeeds.
-
-
-Section - Power of Bodmall
-
-The power of Bodmall is a power. Bodmall grants power of Bodmall.
-The power level of power of Bodmall is 4.
-The command text of power of Bodmall is "thorns".
-	
-Absorbing power of Bodmall:
-	increase melee of the player by 4;
-	increase defence of the player by 4;
-	increase permanent health of the player by 20;
-	say "As Bodmall dies, you feel her soul absorbed into your own body. ([bold type]Power of Bodmall[roman type]: +4 attack, +4 defence, +20 health, and you can summon [italic type]thorns[roman type].)[paragraph break]".
-
-Repelling power of Bodmall:
-	decrease melee of the player by 4;
-	decrease defence of the player by 4;
-	decrease permanent health of the player by 20.
-
-Status skill rule (this is the Bodmall status skill rule):
-	if power of Bodmall is granted:
-		say "You have the power of Bodmall, which allows you to summon [bold type]thorns[roman type] that will impede most enemies. [italic type](Level 4)[roman type][line break][run paragraph on]".
-
-Section - Summoning thorns
-
-Summoning thorns is an action applying to nothing. Understand "thorns" and "thorn" and "summon thorns" as summoning thorns.
-
-Check summoning thorns:
-	if power of Bodmall is not granted:
-		take no time;
-		say "You do not possess that power." instead.
-
-Check summoning thorns:
-	if the thorny bushes are in the location:
-		take no time;
-		say "The thorny bushes are already here." instead.
-
-Carry out summoning thorns:
-	say "You speak the ancient syllables, and bushes full of thorns grow out of the ground!";
-	move thorny bushes to the location.
+					decrease the attack strength by 2.]
 
 
 
