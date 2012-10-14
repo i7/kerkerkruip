@@ -480,7 +480,13 @@ Every turn (this is the decrease the Aite counter rule):
 			have Aite intervene.
 
 To have Aite intervene:
+	let p be the final spirit of the player;
+	let aite damage bonus be 0;
 	let n be a random number between 1 and 6;
+	if power of the fanatics of aite is granted:
+		if a random chance of p in 50 succeeds:
+			now n is a random number between 2 and 6;
+		now aite damage bonus is p divided by 5;
 	if Aite wrath state is 1 and n is less than 4:
 		increase n by 3;
 	if Aite wrath state is -1 and n is greater than 3:
@@ -495,6 +501,7 @@ To have Aite intervene:
 	if n is less than 1, now n is 1;
 	let X be permanent health of the player;
 	now X is X divided by 8; [the standard unit of damage is 12.5% of the maximum health of the player, rounded down]
+	increase X by aite damage bonus; [increased by spirit / 5 if the player has the power of aite]
 	unless at least one hostile alive person is enclosed by the location:
 		if n is greater than 2:
 			make no decision;
