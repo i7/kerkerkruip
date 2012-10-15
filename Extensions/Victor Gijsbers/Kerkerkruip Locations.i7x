@@ -1261,6 +1261,8 @@ Instead of taking the large pile of body parts:
 Pile-searched is a truth state that varies. Pile-searched is false.
 
 Body parts storage is a container.
+The body parts storage is part of the pile of body parts.
+It is closed, unopenable and privately-named.
 One scroll of ghoulification is in the body parts storage.
 One scroll of summoning is in the body parts storage.
 One scroll of death is in the body parts storage.

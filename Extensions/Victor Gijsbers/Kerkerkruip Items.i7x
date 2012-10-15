@@ -1103,6 +1103,7 @@ A scroll is a kind of thing. There is a scroll. [So that iterating through scrol
 A scroll is usually improper-named.
 A scroll is usually civilised.
 A scroll is usually paper.
+Understand "scroll" as a scroll.
 Understand "scrolls" as the plural of a scroll.
 
 Reading is an action applying to one carried thing. Understand the command "read" as something new. Understand "read [thing]" as reading.
@@ -1161,6 +1162,9 @@ A scroll has a scroll name.
 A scroll has a scroll name called true name.
 
 Understand the scroll name property as describing a scroll.
+
+Understand "labelled" as a scroll when the scroll is unidentified.
+Understand "of" as a scroll when the scroll is identified.
 
 Rule for printing the name of a scroll (called S) (this is the printing the name of scrolls rule):
 	let name be printed name of scroll name of S;
@@ -1616,6 +1620,7 @@ Section - Summoning (minor)
 
 The small-scroll-of-summoning-pack is a minor treasure pack.
 The small-scroll-of-summoning-pack is magical.	
+The difficulty level of the small-scroll-of-summoning-pack is 1.
 One scroll of summoning is in the small-scroll-of-summoning-pack.
 
 [Section - Fireworks (minor)
