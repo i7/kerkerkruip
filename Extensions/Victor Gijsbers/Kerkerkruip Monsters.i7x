@@ -2617,13 +2617,13 @@ Section - Power of Bodmall
 
 The power of Bodmall is a power. Bodmall grants power of Bodmall.
 The power level of power of Bodmall is 4.
-The command text of power of Bodmall is "thorns".
+The command text of power of Bodmall is "brambles".
 	
 Absorbing power of Bodmall:
 	increase melee of the player by 4;
 	increase defence of the player by 4;
 	increase permanent health of the player by 20;
-	say "As Bodmall dies, you feel her soul absorbed into your own body. ([bold type]Power of Bodmall[roman type]: +4 attack, +4 defence, +20 health, and you can summon [italic type]thorns[roman type].)[paragraph break]".
+	say "As Bodmall dies, you feel her soul absorbed into your own body. ([bold type]Power of Bodmall[roman type]: +4 attack, +4 defence, +20 health, and you can summon [italic type]brambles[roman type].)[paragraph break]".
 
 Repelling power of Bodmall:
 	decrease melee of the player by 4;
@@ -2632,7 +2632,7 @@ Repelling power of Bodmall:
 
 Status skill rule (this is the Bodmall status skill rule):
 	if power of Bodmall is granted:
-		say "You have the power of Bodmall, which allows you to summon [bold type]thorns[roman type] that will impede most enemies. [italic type](Level 4)[roman type][line break][run paragraph on]".
+		say "You have the power of Bodmall, which allows you to summon [bold type]brambles[roman type] that will impede most enemies; once the brambles grow thorns and fruits, you can also [bold type]launch[roman type] these. [italic type](Level 4)[roman type][line break][run paragraph on]".
 
 Section - Druidic
 
@@ -2642,7 +2642,10 @@ A smoke immunity rule (this is the smoke immune if druidic rule):
 	if test subject is druidic:
 		rule succeeds.
 
-
+An attack modifier rule (this is the druid using wooden weapon attack modifier rule):
+	if the global attacker is druidic and the global attacker weapon is wood:
+		say " + 1 (druid using wooden weapon)[run paragraph on]";
+		increase attack strength by 1.
 
 Chapter - The brambles
 
@@ -2653,7 +2656,7 @@ Section - The brambles object
 
 The brambles are a thing. "Huge brambles are everywhere." The brambles are plural-named and fixed in place. Understand "bush" and "thorn" and "thorns" and "huge" and "brambles" and "bramble" as the brambles.
 
-The description of the brambles is "Moving through these brambles is possible, but will not easy[if the power of Bodmall is granted]; except for you, of course[end if][if brambles strength is not 0]. There are [thorns size] thorns all over the bushes[end if].[paragraph break]".
+The description of the brambles is "Moving through these brambles is possible, but will not be easy[if the power of Bodmall is granted], except for you[end if][if brambles strength is not 0]. There are [thorns size] thorns all over the bushes[end if][if at least one fruit is part of the brambles]. There are also [list of fruits that are part of the brambles] hanging on the branches[end if].".
 
 Instead of climbing the brambles:
 	try entering the brambles.
@@ -2716,8 +2719,8 @@ Every turn when the main actor is druidic:
 		let n be brambles duration;
 		if n is greater than 20:
 			now n is 20;
-		if brambles duration is greater than 3 and brambles strength is 0:
-			if a random chance of 1 in 2 succeeds:
+		if brambles duration is greater than 2 and brambles strength is 0:
+			if a random chance of 1 in 2 succeeds or a random chance of final body of the player in 30 succeeds:
 				now brambles strength is 1;
 				say "The brambles grow [bold type]tiny thorns[roman type]!";
 		otherwise if brambles strength is greater than 0:
@@ -2729,7 +2732,7 @@ Every turn when the main actor is druidic:
 To do a thorns grow:
 	if a random chance of brambles strength in 8 succeeds:
 		unless brambles strength is less than 3:
-			if a random chance of brambles strength in 8 succeeds:
+			unless a random chance of final body of the player in 20 succeeds:
 				decrease brambles strength by 1;
 				say "The thorns on the brambles [bold type]wilt[roman type] and grow smaller.";
 	otherwise:
@@ -2783,12 +2786,15 @@ Check launching:
 Carry out an actor launching:
 	say "[if the actor is the player]You raise your hands[otherwise if the actor is Bodmall]The druidess raises her hands[otherwise][The actor] gestures[end if], and the brambles [bold type]launch[roman type] their deadly thorns![paragraph break]";
 	launch the thorns;
+	launch fruit;
 	now brambles duration is 0;
 	now brambles strength is 0.
 
 To launch the thorns:
-	say "Thorns are launched at everyone, dealing [run paragraph on]";
+	say "Thorns shoot towards everyone, dealing [run paragraph on]";
 	let n be the number of alive not druidic persons in location;
+	if n is 0:
+		say "no damage to anyone.";
 	let original n be n;
 	let concentest be false;
 	repeat with guy running through all alive not druidic persons in location:
@@ -2809,15 +2815,76 @@ To launch the thorns:
 	if health of the player is less than 1:
 		end the story saying "You have been pricked to death.".
 
+Fruit-launching is an object based rulebook.
 
-
+To launch fruit:
+	repeat with whatsname running through fruit:
+		if whatsname is part of the brambles:
+			follow the fruit-launching rulebook for whatsname.
 
 
 Section - Fruit
 
-To do a fruit grow:
-	say "".
+A fruit is a kind of thing. A fruit is usually plural-named.
+A fruit has a number called the growth threshold.
 
+Definition: a fruit (called the whatsname) is growable if (growth threshold of whatsname is less than brambles duration and growth threshold of whatsname is less than final body of the player).
+
+To do a fruit grow:
+	if at least one fruit is growable:
+		let whatsname be a random growable fruit;
+		if whatsname is not fruit of kings:
+			if whatsname is part of the brambles:
+				if a random chance of 1 in 3 succeeds:
+					say "All [bold type][whatsname] shrink[roman type] and disappear from the brambles.";
+					remove whatsname from play;
+			otherwise:
+				say "Suddenly, [bold type][whatsname] appear[roman type] all over on the brambles.";
+				now whatsname is part of the brambles;
+		otherwise:
+			if whatsname is part of the brambles:
+				say "The [bold type]fruit of kings[roman type] suddenly [bold type]shrinks and dies[roman type]!";
+				remove whatsname from play;
+			otherwise:
+				if Malygris is in the location: [no abusing the fruit of kings by waiting for it in an easy fight!!]
+					say "The [bold type]fruit of kings[roman type] suddenly [bold type]appears[roman type] on the brambles!";
+					now whatsname is part of the brambles.
+
+Section - Smoking fruit
+
+There is a fruit called smoking fruit. The growth threshold of smoking fruit is 3.
+
+Section - Wooden fruit
+
+There is a fruit called wooden fruit. The growth threshold of wooden fruit is 3.
+
+Section - Rusted fruit
+
+There is a fruit called rusted fruit. The growth threshold of rusted fruit is 6.
+
+Section - Hidden fruit
+
+There is a fruit called hidden fruit. The growth threshold of hidden fruit is 6.
+
+Section - Buzzing fruit
+
+There is a fruit called buzzing fruit. The growth threshold of buzzing fruit is 9.
+
+Section - Crawling fruit
+
+There is a fruit called crawling fruit. The growth threshold of crawling fruit is 9.
+
+Section - Golden fruit
+
+There is a fruit called golden fruit. The growth threshold of golden fruit is 12.
+
+Section - Shimmering fruit
+
+There is a fruit called shimmering fruit. The growth threshold of shimmering fruit is 12.
+
+Section - Fruit of kings
+
+There is a fruit called the fruit of kings. The fruit of kings is not plural-named. The growth threshold of fruit of kings is 14.
 
 
 
