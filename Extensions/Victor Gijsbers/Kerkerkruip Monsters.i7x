@@ -2519,6 +2519,7 @@ When play begins:
 	now printed name of X is "lightning bolt".
 
 
+
 Section - Bodmall's lightning attack
 
 [Mostly this is just prose, except --]
@@ -2625,7 +2626,8 @@ Absorbing power of Bodmall:
 	increase melee of the player by 4;
 	increase defence of the player by 4;
 	increase permanent health of the player by 20;
-	say "As Bodmall dies, you feel her soul absorbed into your own body. ([bold type]Power of Bodmall[roman type]: +4 attack, +4 defence, +20 health, and you can summon [italic type]brambles[roman type].)[paragraph break]".
+	say "As Bodmall dies, you feel her soul absorbed into your own body. ([bold type]Power of Bodmall[roman type]: +4 attack, +4 defence, +20 health, and you can summon [italic type]brambles[roman type].) In addition, a staff suddenly appears in your inventory.[paragraph break]";
+	now the player carries the druidic staff.
 
 Repelling power of Bodmall:
 	decrease melee of the player by 4;
@@ -2635,6 +2637,21 @@ Repelling power of Bodmall:
 Status skill rule (this is the Bodmall status skill rule):
 	if power of Bodmall is granted:
 		say "You have the power of Bodmall, which allows you to summon [bold type]brambles[roman type] that will impede most enemies; once the brambles grow thorns and fruits, you can also [bold type]launch[roman type] these. [italic type](Level 4)[roman type][line break][run paragraph on]".
+
+Section - Druidic staff
+
+The druidic staff is a weapon.
+
+The description of druidic staff is "A simple wooden staff, but very well balanced.".
+
+The druidic staff is wood.
+
+The damage die of the druidic staff is 6.
+The weapon attack bonus of the druidic staff is 1.
+The dodgability of the druidic staff is 2.
+The active parry max of the druidic staff is 3.
+The passive parry max of the druidic staff is 2.
+The weapon damage bonus of the druidic staff is 1.
 
 Section - Druidic
 
@@ -2893,7 +2910,7 @@ Fruit-launching the wooden fruit:
 				if damage die of item2 is greater than	4:
 					decrease damage die of item2 by 1;
 	otherwise:
-		say "The wooden fruit fall to the fround and don't seem to do anything.".
+		say "[line break]The wooden fruit fall to the ground and don't seem to do anything.".
 
 Definition: a thing (called the item) is woodenable if ((item is a person and item is iron) or (item is a person and item is silver) or (item is a weapon and item is iron) or (item is a weapon and item is silver)) and (item is not a natural weapon).
 
