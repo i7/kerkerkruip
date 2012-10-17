@@ -267,7 +267,9 @@ Absorbing power of the ape:
 	increase melee of the player by m;
 	increase defence of the player by 1;
 	increase inherent damage modifier of the player by 1;
-	say "The blood-hungry soul that animated the ape is absorbed into your own body. You are strong. You hunger for blood. ([bold type]Power of the ape[roman type]: +[m] attack, +1 defence, +[n] health; [if maximum ape power is not tiny and maximum ape power is not small and maximum ape power is not medium]by scoring hits, you may grow up to [maximum ape power] size[otherwise]the ape was too small to grant you any special powers[end if].)[paragraph break]".
+	say "The blood-hungry soul that animated the ape is absorbed into your own body. You are strong. You hunger for blood. ([bold type]Power of the ape[roman type]: +[m] attack, +1 defence, +[n] health; [if maximum ape power is not tiny and maximum ape power is not small and maximum ape power is not medium]by scoring hits, you may grow up to [maximum ape power] size[otherwise]the ape was too small to grant you any special powers[end if].)[paragraph break]";
+	if maximum ape power is tiny or maximum ape power is small or maximum ape power is medium:
+		now command text of power of the ape is "".
 
 Repelling power of the ape:
 	let n be 0;
@@ -745,7 +747,7 @@ Chapter - Level 2 - Chain Golem
 
 Section - Definitions
 
-The chain golem is a monster. "The room is dominated by a chain golem, a moving mass of iron and copper chains, both thick and thin, that hulks in its center[if the concentration of the chain golem is not 0]. The golem is spinning [end if][if the concentration of the chain golem is 1]slowly[otherwise if the concentration of the chain golem is 2]wildly[otherwise if the concentration of the chain golem is 3]furiously[end if]."
+The chain golem is a monster. "The room is dominated by a chain golem, a moving mass of [if chain golem is iron]iron and copper[otherwise][material-adjective of material of chain golem][end if] chains, both thick and thin, that hulks in its center[if the concentration of the chain golem is not 0]. The golem is spinning [end if][if the concentration of the chain golem is 1]slowly[otherwise if the concentration of the chain golem is 2]wildly[otherwise if the concentration of the chain golem is 3]furiously[end if]."
 
 The level of the chain golem is 2.
 
@@ -753,7 +755,7 @@ The chain golem is eyeless.
 The chain golem is iron.
 The chain golem is emotionless.
 
-The description of the chain golem is "A hulking form made of metal chains and animated by a soul bound to it through dark magics.".
+The description of the chain golem is "A hulking form made of [if chain golem is iron]metal[otherwise][material-adjective of material of chain golem][end if] chains and animated by a soul bound to it through dark magics.".
 
 The health of the chain golem is 24.
 The melee of the chain golem is 1.
@@ -773,7 +775,7 @@ When play begins:
 First carry out an actor attacking the chain golem (this is the attack a spinning chain golem rule):
 	let W be a random readied weapon held by the actor;
 	unless W is ranged:
-		say "[The actor] attempt[s] to duck under the whirling chains. ";
+		say "[The actor] attempt[s] to duck under the whirling chains. [run paragraph on]";
 		let n be the concentration of the chain golem;
 		increase n by 7;
 		if a random chance of 1 in 2 succeeds:
@@ -850,7 +852,7 @@ An AI action selection rule for the at-Act chain golem (this is the chain golem 
 				increase the Action Weight entry by 20.
 
 Carry out a person golem-disarming:
-	say "[The chain golem] suddenly launches several of its chains in an attempt to grab [possessive of the noun] weapon. [italic type]";
+	say "[The chain golem] suddenly launches several of its chains in an attempt to grab [possessive of the noun] weapon. [italic type][run paragraph on]";
 	test the spirit of the noun against 10;
 	if test result is true:
 		say "[roman type] [The noun] see[s] it coming in time, and manage[s] to keep the weapon out of the golem's reach.";
@@ -865,7 +867,7 @@ Carry out a person golem-disarming:
 Section - Prose
 
 Report an actor hitting the dead chain golem:
-	say "The chains lash out one final time, blindly seeking prey -- but fall down limply before they can hit anyone. With thousands of hard metal clicks they start falling asunder.";
+	say "The chains lash out one final time, blindly seeking prey -- but fall down limply before they can hit anyone. With thousands of [if chain golem is iron]hard metal [end if]clicks they start falling asunder.";
 	rule succeeds.
 
 Report the chain golem hitting a dead pc:
@@ -877,7 +879,7 @@ Report the chain golem attacking:
 	rule succeeds.
 
 Report the chain golem parrying:
-	say "The chain golem lashes out with a heavy iron chain, trying to stop the attack.";
+	say "The chain golem lashes out with a heavy [material-adjective of material of chain golem] chain, trying to stop the attack.";
 	rule succeeds.
 
 Report the chain golem dodging:
@@ -891,7 +893,7 @@ Report the chain golem concentrating:
 		-- 2:
 			say "The chain golem speeds up, its chains whirling through the air.";
 		-- 3:
-			say "The chain golem spins even faster, audibly slashing the air with its whip-like metal appendages.";
+			say "The chain golem spins even faster, audibly slashing the air with its whip-like [if chain golem is iron]metal[otherwise][material-adjective of material of chain golem][end if] appendages.";
 	rule succeeds.
 
 Lose concentration prose rule for the chain golem:
@@ -1548,7 +1550,7 @@ An AI action selection rule for the at-React mindslug (this is the mindslug does
 	decrease the Action Weight entry by 100.
 		
 Carry out the mindslug mindblasting:
-	say "The mindslug blasts [the noun] with psionic energy. [italic type]";
+	say "The mindslug blasts [the noun] with psionic energy. [italic type][run paragraph on]";
 	let n be 10;
 	increase n by concentration of the mindslug;
 	test the mind of the noun against n; 
@@ -2050,7 +2052,7 @@ An AI action selection rule for the at-React giant tentacle (this is the tentacl
 		now the Action Weight entry is 15 plus 5 times the concentration of the main actor;
 
 Carry out the giant tentacle tentacle-shaking:
-	say "The giant tentacle vigourously shakes [the main actor] while projecting the horrifying image of Tooloo.[italic type] ";
+	say "The giant tentacle vigourously shakes [the main actor] while projecting the horrifying image of Tooloo.[italic type] [run paragraph on]";
 	let n be 9 + concentration of the giant tentacle;
 	test the mind of the main actor against n; 
 	say "[roman type]";
@@ -2617,7 +2619,7 @@ Section - Power of Bodmall
 
 The power of Bodmall is a power. Bodmall grants power of Bodmall.
 The power level of power of Bodmall is 4.
-The command text of power of Bodmall is "brambles".
+The command text of power of Bodmall is "[if brambles are not in the location]brambles[otherwise]launch[end if]".
 	
 Absorbing power of Bodmall:
 	increase melee of the player by 4;
@@ -2820,72 +2822,239 @@ Fruit-launching is an object based rulebook.
 To launch fruit:
 	repeat with whatsname running through fruit:
 		if whatsname is part of the brambles:
-			follow the fruit-launching rulebook for whatsname.
+			follow the fruit-launching rulebook for whatsname;
+			remove whatsname from play.
 
 
 Section - Fruit
 
 A fruit is a kind of thing. A fruit is usually plural-named.
 A fruit has a number called the growth threshold.
+A fruit can be player-only. [Grow only when the player is the druid.]
 
 Definition: a fruit (called the whatsname) is growable if (growth threshold of whatsname is less than brambles duration and growth threshold of whatsname is less than final body of the player).
 
 To do a fruit grow:
 	if at least one fruit is growable:
 		let whatsname be a random growable fruit;
-		if whatsname is not fruit of kings:
-			if whatsname is part of the brambles:
-				if a random chance of 1 in 3 succeeds:
-					say "All [bold type][whatsname] shrink[roman type] and disappear from the brambles.";
+		unless (whatsname is player-only and player is not druidic):
+			if whatsname is not fruit of kings:
+				if whatsname is part of the brambles:
+					if a random chance of 1 in 3 succeeds:
+						say "All [bold type][whatsname] shrink[roman type] and disappear from the brambles.";
+						remove whatsname from play;
+				otherwise:
+					say "Suddenly, [bold type][whatsname] appear[roman type] all over on the brambles.";
+					now whatsname is part of the brambles;
+			otherwise:
+				if whatsname is part of the brambles:
+					say "The [bold type]fruit of kings[roman type] suddenly [bold type]shrinks and dies[roman type]!";
 					remove whatsname from play;
-			otherwise:
-				say "Suddenly, [bold type][whatsname] appear[roman type] all over on the brambles.";
-				now whatsname is part of the brambles;
-		otherwise:
-			if whatsname is part of the brambles:
-				say "The [bold type]fruit of kings[roman type] suddenly [bold type]shrinks and dies[roman type]!";
-				remove whatsname from play;
-			otherwise:
-				if Malygris is in the location: [no abusing the fruit of kings by waiting for it in an easy fight!!]
-					say "The [bold type]fruit of kings[roman type] suddenly [bold type]appears[roman type] on the brambles!";
-					now whatsname is part of the brambles.
+				otherwise:
+					if Malygris is in the location: [no abusing the fruit of kings by waiting for it in an easy fight!!]
+						say "The [bold type]fruit of kings[roman type] suddenly [bold type]appears[roman type] on the brambles!";
+						now whatsname is part of the brambles.
+
+Instead of taking a fruit:
+	take no time;
+	say "The fruit won't come loose.".
 
 Section - Smoking fruit
 
 There is a fruit called smoking fruit. The growth threshold of smoking fruit is 3.
+The description of the smoking fruit is "Little blackened berries from which tiny puffs of smoke escape every few second.".
+
+Fruit-launching the smoking fruit:
+	say "[line break]The smoking fruit burst open, releasing [bold type]clouds of smoke[roman type].";
+	increase smoke timer of the location of the brambles by 6.
 
 Section - Wooden fruit
 
 There is a fruit called wooden fruit. The growth threshold of wooden fruit is 3.
+The description of the wooden fruit is "Small hard spheres, like marbles cut from wood.".
+
+Fruit-launching the wooden fruit:
+	if at least one woodenable thing is enclosed by the location of the brambles:
+		let item be a random woodenable thing enclosed by the location of the brambles;
+		say "[line break]The wooden fruit smash against [the item], turning [if the item is not a person and the item is not plural-named]it[otherwise if the item is not a person]them[otherwise if the item is male]him[otherwise if the item is female]her[otherwise]it[end if] to [bold type]wood[roman type].";
+		now item is wood;
+		now item is not rusted;
+		if item is a weapon:
+			now damage die of item is damage die of item divided by 2;
+			decrease weapon attack bonus of item by 1;
+		if item is a person:
+			decrease melee of item by 1;
+			decrease defence of item by 1;
+			if at least one natural weapon is part of item:
+				let item2 be a random natural weapon that is part of item;
+				now item2 is wood;
+				if damage die of item2 is greater than	3:
+					decrease damage die of item2 by 1;
+				if damage die of item2 is greater than	4:
+					decrease damage die of item2 by 1;
+	otherwise:
+		say "The wooden fruit fall to the fround and don't seem to do anything.".
+
+Definition: a thing (called the item) is woodenable if ((item is a person and item is iron) or (item is a person and item is silver) or (item is a weapon and item is iron) or (item is a weapon and item is silver)) and (item is not a natural weapon).
 
 Section - Rusted fruit
 
 There is a fruit called rusted fruit. The growth threshold of rusted fruit is 6.
+The description of the rusted fruit is "These fruit look like someone made ornamental fungi from metal, and then left them out in the rain for too long.".
+
+Fruit-launching the rusted fruit:
+	say "[line break]The rusted fruit smash to pieces against the wall, releasing clouds of [bold type]rust spores[roman type].";
+	now the location is rust-spored.
 
 Section - Hidden fruit
 
 There is a fruit called hidden fruit. The growth threshold of hidden fruit is 6.
+The description of the hidden fruit is "You can hardly see them.".
+Hidden fruit is player-only.
+
+Fruit-launching the hidden fruit:
+	if the player is hidden:
+		say "[line break]The hidden fruit are launched toward you, where they burst open in a confusing play of light and shadows; but since you are already hidden, this has no effect.";
+	otherwise:
+		say "[line break]The hidden fruit are launched toward you, where they burst open in a confusing play of light and shadows. You are now [bold type]hidden[roman type].";
+		now the player is hidden.
 
 Section - Buzzing fruit
 
 There is a fruit called buzzing fruit. The growth threshold of buzzing fruit is 9.
+The description of the buzzing fruit is "These fruit look like tiny hives, and sound as if swarms of angry bees live inside them.".
+
+The swarm of bees is a fixed in place thing. The description of the swarm of bees is "These bees are mad. Really mad. And they'll take it out one anyone who doesn't have druidic powers.".
+
+Instead of taking the swarm of bees:
+	take no time;
+	say "You can't grab a swarm of angry bees.".
+	
+Instead of attacking the swarm of bees:
+	take no time;
+	say "They're everywhere! There's no chance of killing this swarm.".
+	
+Every turn when the swarm of bees is in the location:
+	if at least one not druidic person is in the location:
+		let guy be a random not druidic person in the location;
+		let n be a random number between 1 and 3;
+		decrease health of guy by n;
+		say "The swarm of bees attacks [the guy], dealing [bold type][n] damage[roman type][if health of guy is less than 1], which is [bold type]deadly[roman type][otherwise if concentration of guy is greater than 0] and breaking [bold type]concentration[roman type][end if].";
+		now concentration of guy is 0;
+		if guy is the player and health of the player is less than 0:
+			end the story saying "That must sting!".
+			
+Last every turn when the swarm of bees is in the location:
+	if a random chance of 1 in 8 succeeds:
+		say "The [bold type]swarm of bees disappears[roman type].";
+		remove swarm of bees from play.
+	
+Fruit-launching the buzzing fruit:
+	say "[line break]The buzzing fruit smash to pieces, releasing a [bold type]swarm of angry bees[roman type].";
+	move swarm of bees to the location.
+
 
 Section - Crawling fruit
 
 There is a fruit called crawling fruit. The growth threshold of crawling fruit is 9.
+The description of the crawling fruit is "From a distance, they appear to be fruit coloured in black and white, but from up close it turns out that they actually consist of crawling worms and beetles.".
+
+Fruit-launching crawling fruit:
+	if the number of alive undead persons in the location is less than 1:
+		say "[line break]The crawling fruit release beetles and worms that hunger for dead flesh. Unfortunaly, they find no undead monsters[if large pile of body parts is in the location]; but they do devour the pile of human body parts[end if].";
+	otherwise:
+		let K be the list of alive undead persons in the location;
+		say "[line break]The crawling fruit release [bold type]beetles and worms[roman type] that hunger for dead flesh. They feast on the body of [K with definite articles], decreasing health by 50%.";
+		repeat with guy running through K:
+			now health of guy is (health of guy / 2);
+			if health of guy is 0, now health of guy is 1.
 
 Section - Golden fruit
 
 There is a fruit called golden fruit. The growth threshold of golden fruit is 12.
+The description of the golden fruit is "They are a beautiful gold.".
 
-Section - Shimmering fruit
+The golden fruit timer is a number that varies.
 
-There is a fruit called shimmering fruit. The growth threshold of shimmering fruit is 12.
+An attack modifier rule (this is the golden fruit rule):
+	if the golden fruit timer is greater than 0 and the global attacker is druidic:
+		say " + 3 (golden fruit bonus)[run paragraph on]";
+		increase the attack strength by 3.
+
+Every turn when the main actor is druidic:
+	if the golden fruit timer is greater than 0:
+		decrease the golden fruit timer by 1;
+		if the golden fruit timer is 0:
+			say "The effect of the golden fruit [bold type]wears off[roman type].".
+
+Fruit-launching golden fruit:
+	let guy be a random druidic person in the location;
+	say "[line break]The golden fruit explode above [the guy], releasing a [bold type]golden light[roman type].";
+	now golden fruit timer is a random number between 8 and 14.
+
+Status rule (this is the golden fruit status rule):
+	if the player is druidic and the golden fruit timer is greater than 0:
+		say "You are under the influence of the [bold type]golden fruit[roman type], which gives you a +3 attack bonus.[line break][run paragraph on]".
+
+Section - Weird fruit
+
+There is a fruit called weird fruit. The growth threshold of weird fruit is 12.
+The description of the weird fruit is "Just looking at them makes your head hurt.".
+Weird fruit is player-only.
+
+Weird fruit timer is a number that varies.
+Weird fruit place is a room that varies.
+
+Every turn when the main actor is druidic:
+	if the weird fruit timer is greater than 0:
+		decrease the weird fruit timer by 1;
+		if the weird fruit timer is 0:
+			say "The distracting effects of the weird fruit [bold type]wear off[roman type].".
+
+Fruit-launching weird fruit:
+	say "[line break]The weird fruit explode all around, releasing [bold type]weird and distracting[roman type] images and sounds. You find it remarkably easy to ignore them, but others may be more confused, and may take irrational actions.";
+	now weird fruit timer is a random number between 10 and 12;
+	now weird fruit place is the location.
+	
+Last AI action selection rule (this is the weird fruit randomise the action result rule):
+	if weird fruit timer is not 0 and the weird fruit place is the location and the running AI is not druidic:
+		repeat through the Table of AI Action Options:
+			increase the Action Weight entry by a random number between 0 and 300.	
 
 Section - Fruit of kings
 
 There is a fruit called the fruit of kings. The fruit of kings is not plural-named. The growth threshold of fruit of kings is 14.
+The description of the fruit of kings is "You feel reverence for this highest product of the natural world: the fruit from which the divine substance of ment is made!".
+Fruit of kings is player-only.
 
+Fruit-launching fruit of kings:
+	say "[line break]The fruit of kings majestically sails towards you, comes to a halt before your nose, and releases its precious powder. [bold type]Ment[roman type]!";
+	have the ment kick in.
+
+Section - Shimmering fruit
+
+There is a fruit called shimmering fruit. The growth threshold of shimmering fruit is 12.
+The description of the shimmering fruit is "One moment they seem be here, the next moment they seem to be somewhere else.".
+
+Fruit-launching shimmering fruit:
+	say "[line break]Very slowly, the shimmering fruit rise up. Then, suddenly, they explode into a [bold type]chaos of portals[roman type]!";
+	repeat with guy running through alive persons in the location:
+		if guy is not the player:
+			let n be teleport amount of guy;
+			try the guy teleporting;
+			now teleport amount of guy is n; [compensating]
+	teleport the player.
+
+[Section - Testing
+
+Allfruiting is an action applying to nothing. Understand "allfruit" as allfruiting.
+
+Carry out allfruiting:
+	take no time;
+	say "K.";
+	now brambles strength is 4;
+	repeat with X running through fruits:
+		now X is a part of the brambles.]
 
 
 Section - Old Bodmall stuff
@@ -3497,7 +3666,7 @@ An AI action selection rule for the as-witch aswang (this is the aswang as witch
 		now the Action Weight entry is 10;
 
 Carry out the aswang aswang-hexing:
-	say "The aswang attempts to hex [the noun]. [italic type]";
+	say "The aswang attempts to hex [the noun]. [italic type][run paragraph on]";
 	let n be 11 + concentration of the aswang;
 	test the mind of the noun against n;
 	if test result is false:

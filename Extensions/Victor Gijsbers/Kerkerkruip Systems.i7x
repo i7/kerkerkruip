@@ -743,7 +743,7 @@ Carry out an actor teleporting (this is the standard monster teleport rule):
 		now see-arriving is true;
 	move actor to teleportation-destination;
 	now concentration of actor is 0;
-	unless teleport amount of actor is -1:
+	unless teleport amount of actor is -1 or teleport amount of actor is 0:
 		decrease teleport amount of actor by 1;
 	[ TODO: change these to report rules ]
 	if teleportation-from is the location of the player and teleportation-destination is the location of the player:

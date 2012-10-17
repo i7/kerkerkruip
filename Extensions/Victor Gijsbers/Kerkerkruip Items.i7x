@@ -952,7 +952,7 @@ The Blessed Grenade is a major grenade. The indefinite article of the Blessed Gr
 
 Instead of throwing the Blessed Grenade:
 	remove the noun from play;
-	if the number of undead persons in the location is less than 1:
+	if the number of alive undead persons in the location is less than 1:
 		say "As the grenade explodes you hear the singing of angels. But nothing further appears to happen.";
 	otherwise:
 		let K be the list of alive undead persons in the location;
