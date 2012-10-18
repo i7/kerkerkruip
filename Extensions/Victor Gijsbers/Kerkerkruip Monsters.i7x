@@ -2053,16 +2053,19 @@ An AI action selection rule for the at-React giant tentacle (this is the tentacl
 
 Carry out the giant tentacle tentacle-shaking:
 	say "The giant tentacle vigourously shakes [the main actor] while projecting the horrifying image of Tooloo.[italic type] [run paragraph on]";
-	let n be 9 + concentration of the giant tentacle;
+	let n be 12;
 	test the mind of the main actor against n; 
 	say "[roman type]";
 	if test result is true:
 		say " [The main actor] remain[s] [if the concentration of the main actor is greater than 0]concentrated[otherwise]sharp[end if].";
 	otherwise:
-		say " [The main actor] [is-are] horrified and confused!";
+		say " [The main actor] [is-are] horrified and confused![run paragraph on]";
 		now the main actor is tentacle-confused;
 		if the concentration of the main actor is greater than 0:
-			let the main actor lose concentration.
+			say " [run paragraph on]";
+			let the main actor lose concentration;
+		otherwise:
+			say "[paragraph break]".
 
 A person can be tentacle-confused. A person is usually not tentacle-confused.
 
