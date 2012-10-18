@@ -1258,6 +1258,8 @@ A scroll of teleportation is teleportation.
 The description of a scroll of teleportation is "Reading this scroll will instantaneously transport the reader to another location.".
 The plural of scroll of teleportation is scrolls of teleportation.
 
+There are three scrolls of teleportation.
+
 Carry out reading a scroll of teleportation:
 	unless teleportation is impossible for the player:
 		teleport the player;
@@ -1276,6 +1278,8 @@ A scroll of ghoulification is ghoulification.
 The description of a scroll of ghoulification is "Reading this scroll will turn you into an undead ghoul.".
 The plural of scroll of ghoulification is scrolls of ghoulification.
 
+There are two scrolls of ghoulification.
+
 Carry out reading a scroll of ghoulification:
 	ghoulify the player;
 
@@ -1290,6 +1294,8 @@ A scroll of knowledge is a kind of scroll.
 A scroll of knowledge is knowledge.
 The description of a scroll of knowledge is "Reading this scroll will grant you knowledge about all other scrolls.".
 The plural of scroll of knowledge is scrolls of knowledge.
+
+There are three scrolls of knowledge.
 
 Carry out reading a scroll of knowledge:
 	say "The nature of scrolls suddenly becomes clear to you.";
@@ -1311,6 +1317,8 @@ A scroll of curse removal is a kind of scroll.
 A scroll of curse removal is curse removal.
 The description of a scroll of curse removal is "Reading this scroll will remove any curses from the item you are carrying."
 The plural of scroll of curse removal is scrolls of curse removal.
+
+There are three scrolls of curse removal.
 
 Carry out reading a scroll of curse removal:
 	if the player has at least one cursed corruptible thing:
@@ -1338,6 +1346,8 @@ A scroll of shadows is shadows-name.
 The description of a scroll of shadows is "Reading this scroll will make you hidden, though it may fail if enemies are nearby."
 The plural of scroll of shadows is scrolls of shadows.
 
+There are three scrolls of shadows.
+
 Carry out reading a scroll of shadows:
 	if the player is hidden:
 		say "The scroll disappears and you remain hidden.";
@@ -1355,6 +1365,8 @@ A scroll of summoning is a kind of scroll.
 A scroll of summoning is summoning.
 The description of a scroll of summoning is "Reading this scroll will summon an undead monster. Be careful, for it does not make the creature friendly."
 The plural of scroll of summoning is scrolls of summoning.
+
+There are two scrolls of summoning.
 
 Carry out reading a scroll of summoning:
 	if at least one alive undead person is off-stage:
@@ -1393,6 +1405,8 @@ A scroll of the blade is a kind of scroll.
 A scroll of the blade is the-blade.
 The description of a scroll of the blade is "Reading this scroll will make a temporary adamantine blade appear in your hands.".
 The plural of scroll of the blade is scrolls of the blade.
+
+There are three scrolls of the blade.
 
 Carry out reading a scroll of the blade:
 	repeat with item running through weapons enclosed by the player:
@@ -1444,6 +1458,8 @@ A scroll of protection is protection.
 The description of a scroll of protection is "Reading this scroll will protect you against all damage from the next one or two attacks."
 The plural of scroll of protection is scrolls of protection.
 
+There are three scrolls of protection.
+
 Carry out reading a scroll of protection:
 	say "You feel protected.";
 	if hit protection of the player is less than 2:
@@ -1472,6 +1488,8 @@ A scroll of etherealness is etherealness.
 The description of a scroll of etherealness is "Reading this scroll will temporarily turn you ethereal."
 The plural of scroll of etherealness is scrolls of etherealness.
 
+There are three scrolls of etherealness.
+
 Carry out reading a scroll of etherealness:
 	say "You become ethereal[if the player has a not radiance thing]; your possessions drop to the ground[end if]!";
 	make the player ethereal;
@@ -1486,8 +1504,10 @@ skill
 
 A scroll of skill is a kind of scroll.
 A scroll of skill is skill.
-The description of a scroll of skill is "Reading this scroll will give you a temporary bonus to all perception, willpower and dexterity checks."
+The description of a scroll of skill is "Reading this scroll will give you a temporary bonus to body, mind and spirit."
 The plural of scroll of skill is scrolls of skill.
+
+There are three scrolls of skill.
 
 Carry out reading a scroll of skill:
 	say "You suddenly feel very skilled!";
@@ -1542,6 +1562,8 @@ A scroll of death is a kind of scroll.
 A scroll of death is death.
 The description of a scroll of death is "Reading this scroll will deal damage to all non-undead creatures in the room."
 The plural of scroll of death is scrolls of death.
+
+There are three scrolls of death.
 
 Carry out reading a scroll of death:
 	consider the unholy wave rules;
