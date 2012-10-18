@@ -291,7 +291,8 @@ Section - What happens after the obituary
 
 After printing the player's obituary:
 	write out the file of victories;
-	consider the unlock stuff rule.
+	if the player is victorious:
+		consider the unlock stuff rule.
 
 
 This is the unlock stuff rule:
