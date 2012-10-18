@@ -2849,7 +2849,7 @@ A fruit is a kind of thing. A fruit is usually plural-named.
 A fruit has a number called the growth threshold.
 A fruit can be player-only. [Grow only when the player is the druid.]
 
-Definition: a fruit (called the whatsname) is growable if (growth threshold of whatsname is less than brambles duration and growth threshold of whatsname is less than final body of the player).
+Definition: a fruit (called the whatsname) is growable if (growth threshold of whatsname is less than (brambles duration + (final body of the player / 3))).
 
 To do a fruit grow:
 	if at least one fruit is growable:
@@ -2858,8 +2858,9 @@ To do a fruit grow:
 			if whatsname is not fruit of kings:
 				if whatsname is part of the brambles:
 					if a random chance of 1 in 3 succeeds:
-						say "All [bold type][whatsname] shrink[roman type] and disappear from the brambles.";
-						remove whatsname from play;
+						unless a random chance of final body of the player in 30 succeeds:
+							say "All [bold type][whatsname] shrink[roman type] and disappear from the brambles.";
+							remove whatsname from play;
 				otherwise:
 					say "Suddenly, [bold type][whatsname] appear[roman type] all over on the brambles.";
 					now whatsname is part of the brambles;
@@ -2878,7 +2879,7 @@ Instead of taking a fruit:
 
 Section - Smoking fruit
 
-There is a fruit called smoking fruit. The growth threshold of smoking fruit is 3.
+There is a fruit called smoking fruit. The growth threshold of smoking fruit is 6.
 The description of the smoking fruit is "Little blackened berries from which tiny puffs of smoke escape every few second.".
 
 Fruit-launching the smoking fruit:
@@ -2887,7 +2888,7 @@ Fruit-launching the smoking fruit:
 
 Section - Wooden fruit
 
-There is a fruit called wooden fruit. The growth threshold of wooden fruit is 3.
+There is a fruit called wooden fruit. The growth threshold of wooden fruit is 6.
 The description of the wooden fruit is "Small hard spheres, like marbles cut from wood.".
 
 Fruit-launching the wooden fruit:
@@ -2916,7 +2917,7 @@ Definition: a thing (called the item) is woodenable if ((item is a person and it
 
 Section - Rusted fruit
 
-There is a fruit called rusted fruit. The growth threshold of rusted fruit is 6.
+There is a fruit called rusted fruit. The growth threshold of rusted fruit is 9.
 The description of the rusted fruit is "These fruit look like someone made ornamental fungi from metal, and then left them out in the rain for too long.".
 
 Fruit-launching the rusted fruit:
@@ -2925,7 +2926,7 @@ Fruit-launching the rusted fruit:
 
 Section - Hidden fruit
 
-There is a fruit called hidden fruit. The growth threshold of hidden fruit is 6.
+There is a fruit called hidden fruit. The growth threshold of hidden fruit is 9.
 The description of the hidden fruit is "You can hardly see them.".
 Hidden fruit is player-only.
 
@@ -2938,7 +2939,7 @@ Fruit-launching the hidden fruit:
 
 Section - Buzzing fruit
 
-There is a fruit called buzzing fruit. The growth threshold of buzzing fruit is 9.
+There is a fruit called buzzing fruit. The growth threshold of buzzing fruit is 12.
 The description of the buzzing fruit is "These fruit look like tiny hives, and sound as if swarms of angry bees live inside them.".
 
 The swarm of bees is a fixed in place thing. The description of the swarm of bees is "These bees are mad. Really mad. And they'll take it out one anyone who doesn't have druidic powers.".
@@ -2973,7 +2974,7 @@ Fruit-launching the buzzing fruit:
 
 Section - Crawling fruit
 
-There is a fruit called crawling fruit. The growth threshold of crawling fruit is 9.
+There is a fruit called crawling fruit. The growth threshold of crawling fruit is 12.
 The description of the crawling fruit is "From a distance, they appear to be fruit coloured in black and white, but from up close it turns out that they actually consist of crawling worms and beetles.".
 
 Fruit-launching crawling fruit:
@@ -2988,7 +2989,7 @@ Fruit-launching crawling fruit:
 
 Section - Golden fruit
 
-There is a fruit called golden fruit. The growth threshold of golden fruit is 12.
+There is a fruit called golden fruit. The growth threshold of golden fruit is 15.
 The description of the golden fruit is "They are a beautiful gold.".
 
 The golden fruit timer is a number that varies.
@@ -3015,7 +3016,7 @@ Status rule (this is the golden fruit status rule):
 
 Section - Weird fruit
 
-There is a fruit called weird fruit. The growth threshold of weird fruit is 12.
+There is a fruit called weird fruit. The growth threshold of weird fruit is 15.
 The description of the weird fruit is "Just looking at them makes your head hurt.".
 Weird fruit is player-only.
 
@@ -3040,7 +3041,7 @@ Last AI action selection rule (this is the weird fruit randomise the action resu
 
 Section - Fruit of kings
 
-There is a fruit called the fruit of kings. The fruit of kings is not plural-named. The growth threshold of fruit of kings is 14.
+There is a fruit called the fruit of kings. The fruit of kings is not plural-named. The growth threshold of fruit of kings is 17.
 The description of the fruit of kings is "You feel reverence for this highest product of the natural world: the fruit from which the divine substance of ment is made!".
 Fruit of kings is player-only.
 
@@ -3050,7 +3051,7 @@ Fruit-launching fruit of kings:
 
 Section - Shimmering fruit
 
-There is a fruit called shimmering fruit. The growth threshold of shimmering fruit is 12.
+There is a fruit called shimmering fruit. The growth threshold of shimmering fruit is 15.
 The description of the shimmering fruit is "One moment they seem be here, the next moment they seem to be somewhere else.".
 
 Fruit-launching shimmering fruit:
