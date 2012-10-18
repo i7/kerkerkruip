@@ -1099,10 +1099,11 @@ Chapter - Scrolls
 
 Section - The scrolls kind
 
-A scroll is a kind of thing.
+A scroll is a kind of thing. There is a scroll. [So that iterating through scroll subkinds works!]
+A scroll is usually improper-named.
 A scroll is usually civilised.
 A scroll is usually paper.
-The description of a scroll is usually "You'll have to read this scroll to find out what it does.".
+Understand "scroll" as a scroll.
 Understand "scrolls" as the plural of a scroll.
 
 Reading is an action applying to one carried thing. Understand the command "read" as something new. Understand "read [thing]" as reading.
@@ -1116,253 +1117,258 @@ Check reading when the player is blind (this is the cannot read when blind rule)
 	take no time;
 	say "[The noun] has not been written in braille." instead.
 
-Carry out reading:
-	say "Hm. Interesting.".
+Carry out reading a scroll:
+	remove the noun from play.
 
 Section - Unidentified Scrolls
 
-[Mostly by Zed Lopez.]
+[ Scroll names are used for printing and parsing scrolls. Each kind of scroll needs a corresponding scroll name value.
+If the scroll kind is just one word, it's easy - follow the example of the scroll of teleportation.
+If it has more than one word you'll need to add extra understand phrases - see the scroll of curse removal. ]
 
-A thing can be either actual or prototypical. A thing is usually actual.
+A scroll name is a kind of value.
+Some scroll names are defined by the Table of Scroll Names.
 
-After cloning a new object from a thing:
-	now new object is actual.
+Table of Scroll Names
+scroll name	printed name	obfuscated
+unnamed-scroll	""	false
+mort	"MORT EILYSH"	true
+naar	"NAAR OD ERAE"	true
+dolp	"DOLP ZEEZ"	true
+chetnak	"CHETNAK"	true
+cistrob	"CISTROB JIRSGEV"	true
+twan	"TWAN METIER"	true
+hermei	"HERMEI LE SCHIM"	true
+lonsifira	"LONSIFIRA"	true
+kripmeteel	"KRIPMETEEL"	true
+souspenot	"SOUSPENOT"	true
+shalm	"SHALM SAWESAS"	true
+petrichor	"PETRICHOR"	true
+malleote	"MALLEOTE"	true
+paven	"PAVEN"	true
+ancholain	"ANCHOLAIN"	true
 
-A scroll-effect-value is a kind of value. Some scroll-effect-values are defined by the Table of Scroll Effects.
+Understand "mort" and "eilysh" as mort.
+Understand "naar" and "od" and "erae" as naar.
+Understand "dolp" and "zeez" as dolp.
+Understand "cistrob" and "jirsgev" as cistrob.
+Understand "twan" and "metier" as twan.
+Understand "hermei" and "le" and "schim" as hermei.
+Understand "shalm" and "sawesas" as shalm.
 
-Table of Scroll Effects
-scroll-effect-value
-scroll-teleportation
-scroll-identify
-scroll-remove-curse
-scroll-ghoulification
-scroll-shadows
-scroll-summoning
-scroll-fireworks
-scroll-blade
-scroll-protection
-scroll-ethereal
-scroll-skill
-scroll-death
-no-effect
+A scroll is usually privately-named.
+A scroll can be identified or unidentified. A scroll is usually identified.
+A scroll has a scroll name.
+A scroll has a scroll name called true name.
 
-Having-knowledge-of relates one person to various scroll-effect-values. The verb to have-knowledge-of (it has-knowledge-of, they have-knowledge-of, it had-knowledge-of, it was-known, it is having-knowledge-of) implies the having-knowledge-of relation.
+Understand the scroll name property as describing a scroll.
 
-A scroll is usually prototypical. A scroll has a scroll-effect-value called scroll-effect. A scroll has a truth state called true-name. A scroll is usually improper-named.
+Understand "labelled" as a scroll when the scroll is unidentified.
+Understand "of" as a scroll when the scroll is identified.
 
-Having-scroll-effect relates a scroll (called item) to a scroll-effect-value (called effect) when effect is the scroll-effect of item. The verb to have-scroll-effect (it has-scroll-effect, they have-scroll-effect, it had-scroll-effect, it was scroll-effect-had-by, it is having-scroll-effect) implies the having-scroll-effect relation.
+Rule for printing the name of a scroll (called S) (this is the printing the name of scrolls rule):
+	let name be printed name of scroll name of S;
+	if S is unidentified:
+		say "scroll labelled [name]";
+	otherwise if the name is not "":
+		say "scroll of [name]";
+	otherwise:
+		say "scroll of [scroll name of S]";
 
-Definition: a scroll (called item) is plain rather than obfuscated if the true-name of item is true.
+Rule for printing the plural name of a scroll (called S) (this is the printing the plural name of scrolls rule):
+	let name be printed name of scroll name of S;
+	if S is unidentified:
+		say "scrolls labelled [name]";
+	otherwise if the printed name of the scroll name of S is not "":
+		say "scrolls of [name]";
+	otherwise:
+		say "scrolls of [scroll name of S]";
+	
+Instead of examining an unidentified scroll:
+	say "You'll have to read this scroll to find out what it does."
 
-Scroll-parsable is a kind of value. The scroll-parsables are none-parse, mort-eilysh-parse, naar-od-erae-parse, dolp-zeez-parse, chetnak-parse, cistrob-jirsgev-parse, twan-metier-parse, hermei-le-schim-parse, lonsifira-parse, kripmeteel-parse, souspenot-parse, shalm-sawesas-parse, zyxyz-parse.
+[ Some I6 for iterating through the scroll subkinds ]
+Include (-
 
-A scroll has a scroll-parsable.
-Understand the scroll-parsable property as describing a scroll.
+! Find the kind of an object
+[ KindOfObj obj;
+	return KindHierarchy-->( ( obj.KD_Count ) * 2 );
+];
 
-Understand "mort" and "eilysh" as mort-eilysh-parse.
-Understand "naar" and "od" and "erae" as naar-od-erae-parse.
-Understand "dolp" and "zeez" as dolp-zeez-parse.
-Understand "chetnak" as chetnak-parse.
-Understand "cistrob" and "jirsgev" as cistrob-jirsgev-parse.
-Understand "twan" and "metier" as twan-metier-parse.
-Understand "hermei" and "le" and "schim" as hermei-le-schim-parse.
-Understand "lonsifira" as lonsifira-parse.
-Understand "kripmeteel" as kripmeteel-parse.
-Understand "souspenot" as souspenot-parse.
-Understand "shalm" and "sawesas" as shalm-sawesas-parse.
-Understand "zyxyz" as zyxyz-parse.
+! Test if a kind is a subkind of another kind
+[ TestSubkind subclass superclass	i;
+	! These classes are outside the kind heirarchy and must be dealt with first
+	if ( subclass == Class or Object or Routine or String or VPH_Class )
+		rfalse;
+	
+	while (1)
+	{
+		if ( KindHierarchy-->i == subclass )
+			return KindHierarchy-->( KindHierarchy-->(i + 1) * 2 ) == superclass;
+		i = i + 2;
+	}
+];
 
-Some scrolls are defined by the Table of Magic Scrolls.
+-).
 
+To decide what object is the kind of (obj - object):
+	(-  KindOfObj( {obj} ) -).
 
-Table of Magic Scrolls
-scroll	scroll-effect	true-name	plural-name	scroll-parsable	
-scroll of teleportation	scroll-teleportation	true	"scrolls of teleportation"	none-parse
-scroll of identify	scroll-identify	true	"scrolls of identify"	none-parse
-scroll of remove curse	scroll-remove-curse	true	"scrolls of remove curse"	none-parse
-scroll of ghoulification	scroll-ghoulification	true	"scrolls of ghoulification"	none-parse
-scroll of shadows	scroll-shadows	true	"scrolls of shadows"	none-parse
-scroll of summoning	scroll-summoning	true	"scrolls of summoning"	none-parse
-scroll of fireworks	scroll-fireworks	true	"scrolls of fireworks"	none-parse
-scroll of the blade	scroll-blade	true	"scrolls of the blade"	none-parse
-scroll of protection	scroll-protection	true	"scrolls of protection"	none-parse
-scroll of etherealness	scroll-ethereal	true	"scrolls of etherealness"	none-parse
-scroll of skill	scroll-skill	true	"scrolls of skill"	none-parse
-scroll of death	scroll-death	true	"scrolls of death"	none-parse
-scroll labelled MORT EILYSH	no-effect	false	"scrolls labelled MORT EILYSH"	mort-eilysh-parse
-scroll labelled NAAR OD ERAE	no-effect	false	"scrolls labelled NAAR OD ERAE"	naar-od-erae-parse
-scroll labelled DOLP ZEEZ	no-effect	false	"scrolls labelled DOLP ZEEZ"	dolp-zeez-parse
-scroll labelled CHETNAK	no-effect	false	"scrolls labelled CHETNAK"	chetnak-parse
-scroll labelled CISTROB JIRSGEV	no-effect	false	"scrolls labelled CISTROB JIRSGEV"	cistrob-jirsgev-parse
-scroll labelled TWAN METIER	no-effect	false	"scrolls labelled TWAN METIER"	twan-metier-parse
-scroll labelled HERMEI LE SCHIM	no-effect	false	"scrolls labelled HERMEI LE SCHIM"	hermei-le-schim-parse
-scroll labelled LONSIFIRA	no-effect	false	"scrolls labelled LONSIFIRA"	lonsifira-parse
-scroll labelled KRIPMETEEL	no-effect	false	"scrolls labelled KRIPMETEEL"	kripmeteel-parse
-scroll labelled SOUSPENOT	no-effect	false	"scrolls labelled SOUSPENOT"	souspenot-parse
-scroll labelled SHALM SAWESAS	no-effect	false	"scrolls labelled SHALM SAWESAS"	shalm-sawesas-parse
-scroll labelled ZYXYZ	no-effect	false	"scrolls labelled ZYXYZ"	zyxyz-parse
+To repeat with (loopvar - nonexisting K variable) running through the/-- kinds of (kind - name of kind of value of kind K) begin -- end:
+	(- objectloop( {loopvar} && metaclass({loopvar}) == Class && TestSubkind({loopvar}, KindOfObj({-default-value-for:kind})) ) -).
+	
+To repeat with (loopvar - nonexisting object variable) running through the/-- instances of (kind - object) begin -- end:
+	(- objectloop( {loopvar} && {loopvar} ofclass {kind} ) -).
 
-First when play begins (this is the set plural names for scrolls rule):
-	repeat with item running through scrolls:
-		choose a row with scroll of item in Table of Magic Scrolls;
-		now printed plural name of item is plural-name entry;
-		now item is improper-named.
+When play begins (this is the obfuscate scrolls rule):
+	[ Get the list of obfuscated scroll names ]
+	let names be a list of scroll names;
+	repeat with N running through scroll names:
+		if obfuscated of N is true:
+			add N to names;
+	sort names in random order;
+	repeat with S running through the kinds of scroll:
+		let N be entry 1 of names;
+		remove entry 1 from names;
+		repeat with I running through the instances of S:
+			now I is unidentified;
+			now the true name of I is the scroll name of I;
+			now the scroll name of I is N;
 
-To scroll-effect-identify (effect - a scroll-effect-value):  
-	let realitem be a random prototypical plain scroll which has-scroll-effect effect;
-	now player has-knowledge-of effect;
-	repeat with item running through every actual on-stage obfuscated scroll which has-scroll-effect effect:
-		let itemholder be holder of item;
-		let newobject be a new object cloned from realitem;
-		remove item from play; [now we must copy all relevant properties]
-		if item is flaming:
-			now newobject is flaming; [whether it is aflame]
-		now heat strength of newobject is heat strength of item; [how hot it is]
-		now newobject is in itemholder.
+To identify (S - a scroll):
+	repeat with I running through the instances of the kind of S:
+		now I is identified;
+		now the scroll name of I is the true name of I;
 
-Last check reading a scroll:
-	let effect be scroll-effect of the noun;
-	remove noun from play;
-	if player does not have-knowledge-of effect:
-		repeat through Table of Magic Scrolls:
-			if scroll-effect entry is effect and true-name entry is true:
-				say "It is a [scroll entry]!";
-		scroll-effect-identify effect.
-
-Last dungeon interest rule (this is the set up scroll identities rule):
-	let l be a list of scroll-effect-values;
-	repeat with eachscroll running through every plain prototypical scroll:
-		add scroll-effect of eachscroll to l;
-	sort l in random order;
-	let i be 1;
-	repeat with eachscroll running through every obfuscated scroll:
-		now scroll-effect of eachscroll is entry i of l;
-		if generation info is true, say "* [eachscroll]: [scroll-effect of eachscroll].";
-		repeat with item running through every plain scroll:
-			if scroll-effect of item is scroll-effect of eachscroll:
-				now scroll-parsable of item is scroll-parsable of eachscroll;
-		increase i by 1;
-	amnesia all scrolls.
-		
-To amnesia all scrolls:
-	repeat with effect running through scroll-effect-values:
-		let obfuscateditem be a random prototypical obfuscated scroll which has-scroll-effect effect;
-		unless obfuscateditem is nothing:
-			repeat with item running through every actual plain on-stage scroll which has-scroll-effect effect:    
-				let itemholder be holder of item;
-				let newobject be a new object cloned from obfuscateditem;
-				remove item from play;
-				now newobject is in itemholder.
-
-To copy (item - a thing) to (item2 - a thing):	
-	let copy be a new object cloned from item;
-	move copy to item2.
+First carry out reading an unidentified scroll (called S):
+	identify S;
+	say "It is [a S]!";
 
 
 
-Section - Scroll of teleportation		
-		
-[A scroll of teleportation is a kind of scroll.] The description of a scroll of teleportation is "Reading this scroll will instantaneously transport the reader to another location.". The plural of scroll of teleportation is scrolls of teleportation.
-A scroll of teleportation is paper.
-[The printed name of a scroll of teleportation is "scroll of teleportation". [Circumventing bug 459: http://inform7.com/mantis/view.php?id=459.]]
 
-Carry out reading a scroll:
-	if scroll-effect of the noun is scroll-teleportation:
-		remove noun from play;
-		unless teleportation is impossible for the player:
-			teleport the player;
-		otherwise:
-			say "The scroll disappears, but something has stopped you from teleporting.";
-		rule succeeds.
+Section - Scroll of teleportation
+
+Table of Scroll Names (continued)
+scroll name
+teleportation
+
+A scroll of teleportation is a kind of scroll.
+A scroll of teleportation is teleportation.
+The description of a scroll of teleportation is "Reading this scroll will instantaneously transport the reader to another location.".
+The plural of scroll of teleportation is scrolls of teleportation.
+
+Carry out reading a scroll of teleportation:
+	unless teleportation is impossible for the player:
+		teleport the player;
+	otherwise:
+		say "The scroll disappears, but something has stopped you from teleporting.";
+
 
 Section - Scroll of Ghoulification		
 
-[A scroll of ghoulification is a kind of scroll.] The description of a scroll of ghoulification is "Reading this scroll will turn you into an undead ghoul.". The plural of scroll of ghoulification is scrolls of ghoulification.
-A scroll of ghoulification is paper.
-The printed name of a scroll of ghoulification is "scroll of ghoulification". [Circumventing bug 459: http://inform7.com/mantis/view.php?id=459.]
+Table of Scroll Names (continued)
+scroll name
+ghoulification
 
-Carry out reading a scroll:
-	if scroll-effect of the noun is scroll-ghoulification:
-		remove noun from play;
-		ghoulify the player;
-		rule succeeds.
+A scroll of ghoulification is a kind of scroll.
+A scroll of ghoulification is ghoulification.
+The description of a scroll of ghoulification is "Reading this scroll will turn you into an undead ghoul.".
+The plural of scroll of ghoulification is scrolls of ghoulification.
 
-Section - Scroll of Identify		
-
-[A scroll of identify is a kind of scroll.] The description of a scroll of identify is "Reading this scroll will grant you knowledge about all other scrolls.". The plural of scroll of identify is scrolls of identify.
-A scroll of identify is paper.
-The printed name of a scroll of identify is "scroll of identify". [Circumventing bug 459: http://inform7.com/mantis/view.php?id=459.]
-
-Carry out reading a scroll:
-	if scroll-effect of the noun is scroll-identify:
-		remove noun from play;
-		say "The nature of scrolls suddenly becomes clear to you.";
-		repeat with item running through prototypical obfuscated scrolls:
-			let effect be scroll-effect of item;
-			scroll-effect-identify effect;
-		rule succeeds.
+Carry out reading a scroll of ghoulification:
+	ghoulify the player;
 
 
-Section -  Scroll of Remove Curse
+Section - Scroll of Knowledge
 
-[A scroll of remove curse is a kind of scroll.] The description of a scroll of remove curse is "Reading this scroll will uncurse any items you are carrying.". The plural of scroll of remove curse is scrolls of remove curse.
-A scroll of remove curse is paper.
-The printed name of a scroll of remove curse is "scroll of remove curse". [Circumventing bug 459: http://inform7.com/mantis/view.php?id=459.]
+Table of Scroll Names (continued)
+scroll name
+knowledge
 
-Carry out reading a scroll:
-	if scroll-effect of the noun is scroll-remove-curse:
-		remove noun from play;
-		if the player has at least one cursed corruptible thing:
-			let K be a list of things;
-			repeat with item running through cursed corruptible things had by the player:
-				now item is not cursed;
-				add item to K;
-			say "The scroll uncurses [K with definite articles].";
-		otherwise:
-			say "The scroll does nothing, since you had no cursed items.";
-		now the player is not death-cursed;
-		rule succeeds.
+A scroll of knowledge is a kind of scroll.
+A scroll of knowledge is knowledge.
+The description of a scroll of knowledge is "Reading this scroll will grant you knowledge about all other scrolls.".
+The plural of scroll of knowledge is scrolls of knowledge.
+
+Carry out reading a scroll of knowledge:
+	say "The nature of scrolls suddenly becomes clear to you.";
+	repeat with S running through the kinds of scroll:
+		repeat with I running through the instances of S:
+			now I is identified;
+			now the scroll name of I is the true name of I;
+
+
+Section -  Scroll of Curse Removal
+
+Table of Scroll Names (continued)
+scroll name
+curse removal
+
+Understand "curse" and "removal" as curse removal.
+
+A scroll of curse removal is a kind of scroll.
+A scroll of curse removal is curse removal.
+The description of a scroll of curse removal is "Reading this scroll will remove any curses from the item you are carrying."
+The plural of scroll of curse removal is scrolls of curse removal.
+
+Carry out reading a scroll of curse removal:
+	if the player has at least one cursed corruptible thing:
+		let K be a list of things;
+		repeat with item running through cursed corruptible things had by the player:
+			now item is not cursed;
+			add item to K;
+		say "The scroll removes the curse[s] from [K with definite articles].";
+	otherwise:
+		say "The scroll does nothing, since you had no cursed items.";
+	now the player is not death-cursed;
 
 
 Section - Scroll of Shadows
-		
-[A scroll of shadows is a kind of scroll.] The description of a scroll of shadows is "Reading this scroll will make you hidden, though it may fail if enemies are nearby.". The plural of scroll of shadows is scrolls of shadows.
-A scroll of shadows is paper.
-The printed name of a scroll of shadows is "scroll of shadows". [Circumventing bug 459: http://inform7.com/mantis/view.php?id=459.]
-Understand "shadow" as a scroll of shadows.
 
-Carry out reading a scroll:
-	if scroll-effect of the noun is scroll-shadows:
-		remove noun from play;
-		if the player is hidden:
-			say "The scroll disappears and you remain hidden.";
-		otherwise:
-			hide;
-		rule succeeds.
+[ The scroll of shadows conflicts with the cloak of shadows, so we must call the scroll name shadows-name. ]
+Table of Scroll Names (continued)
+scroll name	printed name
+shadows-name	"shadows"
+
+Understand "shadows" and "shadow" as shadows-name.
+
+A scroll of shadows is a kind of scroll.
+A scroll of shadows is shadows-name.
+The description of a scroll of shadows is "Reading this scroll will make you hidden, though it may fail if enemies are nearby."
+The plural of scroll of shadows is scrolls of shadows.
+
+Carry out reading a scroll of shadows:
+	if the player is hidden:
+		say "The scroll disappears and you remain hidden.";
+	otherwise:
+		hide;
 
 
 Section - Scroll of Summoning
 
-[A scroll of summoning is a kind of scroll.] The description of a scroll of summoning is "Reading this scroll will summon an undead monster. Be careful, for it does not make the creature friendly.". The plural of scroll of summoning is scrolls of summoning.
-A scroll of summoning is paper.
-The printed name of a scroll of summoning is "scroll of summoning". [Circumventing bug 459: http://inform7.com/mantis/view.php?id=459.]
+Table of Scroll Names (continued)
+scroll name
+summoning
 
-Carry out reading a scroll:
-	if scroll-effect of the noun is scroll-summoning:
-		remove noun from play;
-		if at least one alive undead person is off-stage:
-			let guy be a random alive off-stage undead person;
-			move guy to location of the player;
-			say "You speak the awful spell, and [a guy] appears before you!";
-			now guy is follower;
-			unless the follower percentile chance of guy is greater than 60:
-				now follower percentile chance of guy is 60;
-		otherwise:
-			say "You speak the awful spell, but nothing happens. The planes must not be well-aligned.";
-		rule succeeds.
+A scroll of summoning is a kind of scroll.
+A scroll of summoning is summoning.
+The description of a scroll of summoning is "Reading this scroll will summon an undead monster. Be careful, for it does not make the creature friendly."
+The plural of scroll of summoning is scrolls of summoning.
+
+Carry out reading a scroll of summoning:
+	if at least one alive undead person is off-stage:
+		let guy be a random alive off-stage undead person;
+		move guy to location of the player;
+		say "You speak the awful spell, and [a guy] appears before you!";
+		now guy is follower;
+		unless the follower percentile chance of guy is greater than 60:
+			now follower percentile chance of guy is 60;
+	otherwise:
+		say "You speak the awful spell, but nothing happens. The planes must not be well-aligned.";
 
 
-Section - Scroll of fireworks
+[Section - Scroll of fireworks
 
 The description of a scroll of fireworks is "Who knows what this weird scroll will do?". The plural of scroll of fireworks is scrolls of fireworks.
 A scroll of fireworks is paper.
@@ -1372,30 +1378,34 @@ Carry out reading a scroll:
 	if scroll-effect of the noun is scroll-fireworks:
 		remove noun from play;
 		say "Gratuitous purple fireworks fill the room, spelling the words [bold type]YOU HAVE LOST THE GAME[roman type].";
-		rule succeeds.
+		rule succeeds.]
 
 
 Section - Scroll of the blade
 
-The description of a scroll of the blade is "Reading this scroll will make a temporary adamantine blade appear in your hands.". The plural of scroll of the blade is scrolls of the blade.
-A scroll of the blade is paper.
-The printed name of a scroll of the blade is "scroll of the blade".
+Table of Scroll Names (continued)
+scroll name	printed name
+the-blade	"the blade"
 
-Carry out reading a scroll:
-	if scroll-effect of the noun is scroll-blade:
-		remove noun from play;
-		repeat with item running through weapons enclosed by the player:
-			if item is readied:
-				now item is not readied;
-		move adamantine blade to player;
-		now adamantine blade is readied;
-		do the adamantine blade shuffle;
-		if the player is not ethereal:
-			say "A magical sword formed of adamant suddenly appears in your hands!";
-		otherwise:
-			say "A magical sword formed of adamant suddenly appears in your hands -- and falls through them to the ground!";
-			move adamantine blade to the location;
-		rule succeeds.
+Understand "blade" and "the blade" as the-blade.
+
+A scroll of the blade is a kind of scroll.
+A scroll of the blade is the-blade.
+The description of a scroll of the blade is "Reading this scroll will make a temporary adamantine blade appear in your hands.".
+The plural of scroll of the blade is scrolls of the blade.
+
+Carry out reading a scroll of the blade:
+	repeat with item running through weapons enclosed by the player:
+		if item is readied:
+			now item is not readied;
+	move adamantine blade to player;
+	now adamantine blade is readied;
+	do the adamantine blade shuffle;
+	if the player is not ethereal:
+		say "A magical sword formed of adamant suddenly appears in your hands!";
+	otherwise:
+		say "A magical sword formed of adamant suddenly appears in your hands -- and falls through them to the ground!";
+		move adamantine blade to the location;
 
 The adamantine blade is an adamant weapon. The description of the adamantine blade is "This is a magical blade made of the hardest substance in the universe. You wonder how long the spell will last." Understand "sword" as the adamantine blade.
 
@@ -1425,19 +1435,21 @@ Section - Scroll of Protection
 
 A person has a number called the hit protection. The hit protection of a person is usually 0.
 
-The description of a scroll of protection is "Reading this scroll will protect you against all damage from the next one or two attacks.". The plural of scroll of protection is scrolls of protection.
-A scroll of protection is paper.
-The printed name of a scroll of protection is "scroll of protection".
+Table of Scroll Names (continued)
+scroll name
+protection
 
-Carry out reading a scroll:
-	if scroll-effect of the noun is scroll-protection:
-		remove noun from play;
-		say "You feel protected.";
-		if hit protection of the player is less than 2:
-			now hit protection of the player is 1;
-			if a random chance of 4 in 10 succeeds:
-				now hit protection of the player is 2;
-		rule succeeds.
+A scroll of protection is a kind of scroll.
+A scroll of protection is protection.
+The description of a scroll of protection is "Reading this scroll will protect you against all damage from the next one or two attacks."
+The plural of scroll of protection is scrolls of protection.
+
+Carry out reading a scroll of protection:
+	say "You feel protected.";
+	if hit protection of the player is less than 2:
+		now hit protection of the player is 1;
+		if a random chance of 4 in 10 succeeds:
+			now hit protection of the player is 2;
 
 Status rule (this is the protection status rule):
 	if hit protection of the player is greater than 0:
@@ -1451,31 +1463,35 @@ A damage multiplier rule when the hit protection of the global defender is great
 
 Section - Scroll of Etherealness
 
-The description of a scroll of etherealness is "Reading this scroll will temporarily turn you ethereal.". The plural of scroll of etherealness is scrolls of etherealness.
-A scroll of etherealness is paper.
-The printed name of a scroll of etherealness is "scroll of etherealness".
+Table of Scroll Names (continued)
+scroll name
+etherealness
 
-Carry out reading a scroll:
-	if scroll-effect of the noun is scroll-ethereal:
-		remove noun from play;
-		say "You become ethereal[if the player has a not radiance thing]; your possessions drop to the ground[end if]!";
-		make the player ethereal;
-		now ethereal timer of the player is a random number between 10 and 15;
-		rule succeeds.
+A scroll of etherealness is a kind of scroll.
+A scroll of etherealness is etherealness.
+The description of a scroll of etherealness is "Reading this scroll will temporarily turn you ethereal."
+The plural of scroll of etherealness is scrolls of etherealness.
+
+Carry out reading a scroll of etherealness:
+	say "You become ethereal[if the player has a not radiance thing]; your possessions drop to the ground[end if]!";
+	make the player ethereal;
+	now ethereal timer of the player is a random number between 10 and 15;
 		
 
 Section - Scroll of Skill
 
-The description of a scroll of skill is "Reading this scroll will give you a temporary bonus to all perception, willpower and dexterity checks.". The plural of scroll of skill is scrolls of skill.
-A scroll of skill is paper.
-The printed name of a scroll of skill is "scroll of skill".
+Table of Scroll Names (continued)
+scroll name
+skill
 
-Carry out reading a scroll:
-	if scroll-effect of the noun is scroll-skill:
-		remove noun from play;
-		say "You suddenly feel very skilled!";
-		increase the player skill bonus timer by a random number between 15 and 20;
-		rule succeeds.
+A scroll of skill is a kind of scroll.
+A scroll of skill is skill.
+The description of a scroll of skill is "Reading this scroll will give you a temporary bonus to all perception, willpower and dexterity checks."
+The plural of scroll of skill is scrolls of skill.
+
+Carry out reading a scroll of skill:
+	say "You suddenly feel very skilled!";
+	increase the player skill bonus timer by a random number between 15 and 20;
 
 The player skill bonus timer is a number that varies. The player skill bonus timer is 0.
 
@@ -1518,15 +1534,17 @@ An unholy wave rule (this is the standard unholy wave rule):
 	if health of the player is less than 1:
 		end the story saying "Your life force has been negated".
 
-The description of a scroll of death is "Reading this scroll will deal damage to all non-undead creatures in the room.". The plural of scroll of death is scrolls of death.
-A scroll of death is paper.
-The printed name of a scroll of death is "scroll of death".
+Table of Scroll Names (continued)
+scroll name
+death
 
-Carry out reading a scroll:
-	if scroll-effect of the noun is scroll-death:
-		remove noun from play;
-		consider the unholy wave rules;
-		rule succeeds.
+A scroll of death is a kind of scroll.
+A scroll of death is death.
+The description of a scroll of death is "Reading this scroll will deal damage to all non-undead creatures in the room."
+The plural of scroll of death is scrolls of death.
+
+Carry out reading a scroll of death:
+	consider the unholy wave rules;
 
 
 
@@ -1536,183 +1554,153 @@ Section - Teleportation, small (minor)
 
 The small-scroll-of-teleportation-pack is a minor treasure pack.
 The small-scroll-of-teleportation-pack is civilised.
-
-A treasure placement rule:
-	copy scroll of teleportation to small-scroll-of-teleportation-pack.
+One scroll of teleportation is in the small-scroll-of-teleportation-pack.
 
 The second-small-scroll-of-teleportation-pack is a minor treasure pack.
 The second-small-scroll-of-teleportation-pack is civilised.
-
-A treasure placement rule:
-	copy scroll of teleportation to second-small-scroll-of-teleportation-pack.
+One scroll of teleportation is in the second-small-scroll-of-teleportation-pack.
 	
 Section - Teleportation, large (major)	
 	
-The large-scroll-of-teleportation-pack is a major treasure pack. [Two scrolls of teleportation are in the large-scroll-of-teleportation-pack.] [Stock the large-scroll-of-teleportation-pack with 2 clones of scroll of teleportation.]
+The large-scroll-of-teleportation-pack is a major treasure pack.
+Two scrolls of teleportation are in the large-scroll-of-teleportation-pack. [Stock the large-scroll-of-teleportation-pack with 2 clones of scroll of teleportation.]
 The large-scroll-of-teleportation-pack is civilised.
 
-A treasure placement rule:
-	copy scroll of teleportation to large-scroll-of-teleportation-pack;
-	copy scroll of teleportation to large-scroll-of-teleportation-pack.
+Section - Knowledge (minor)
 
-Section - Identify (minor)
+The small-scroll-of-knowledge-pack is a minor treasure pack.
+The small-scroll-of-knowledge-pack is civilised.
+One scroll of knowledge is in the small-scroll-of-knowledge-pack.
 
-The small-scroll-of-identify-pack is a minor treasure pack.
-The small-scroll-of-identify-pack is civilised.
-A treasure placement rule:
-	copy scroll of identify to small-scroll-of-identify-pack.
-
-The second-small-scroll-of-identify-pack is a minor treasure pack. 
-The second-small-scroll-of-identify-pack is civilised.
-A treasure placement rule:
-	copy scroll of identify to second-small-scroll-of-identify-pack.
+The second-small-scroll-of-knowledge-pack is a minor treasure pack. 
+The second-small-scroll-of-knowledge-pack is civilised.
+One scroll of knowledge is in the second-small-scroll-of-knowledge-pack.
 
 Section - Ghoulification (minor)
 
-The small-scroll-of-ghoulification-pack is a minor treasure pack. [One scroll of ghoulification is in the small-scroll-of-ghoulification-pack.]
+The small-scroll-of-ghoulification-pack is a minor treasure pack.
+One scroll of ghoulification is in the small-scroll-of-ghoulification-pack.
 The small-scroll-of-ghoulification-pack is civilised.
 The difficulty level of the small-scroll-of-ghoulification-pack is 1.
 
-A treasure placement rule:
-	copy scroll of ghoulification to small-scroll-of-ghoulification-pack.
-
-Section - Remove curse, small (minor)
+Section - Curse removal, small (minor)
 
 The small-scroll-of-remove-curse-pack is a minor treasure pack.
 The small-scroll-of-remove-curse-pack is civilised.
-A treasure placement rule:
-	copy scroll of remove curse to small-scroll-of-remove-curse-pack.
+One scroll of curse removal is in the small-scroll-of-remove-curse-pack.
 
 The second-small-scroll-of-remove-curse-pack is a minor treasure pack.
 The second-small-scroll-of-remove-curse-pack is civilised.
-A treasure placement rule:
-	copy scroll of remove curse to second-small-scroll-of-remove-curse-pack.
+One scroll of curse removal is in the second-small-scroll-of-remove-curse-pack.
 
 Section - Remove curse, large (major)
 
 The large-scroll-of-remove-curse-pack is a major treasure pack.
 The large-scroll-of-remove-curse-pack is civilised.
-A treasure placement rule:
-	copy scroll of remove curse to large-scroll-of-remove-curse-pack;
-	copy scroll of remove curse to large-scroll-of-remove-curse-pack.
+Two scrolls of curse removal is in the large-scroll-of-remove-curse-pack.
 The rarity of large-scroll-of-remove-curse-pack is 1.
 
 Section - Shadows, small (minor)
 
 The small-scroll-of-shadows-pack is a minor treasure pack.
-The small-scroll-of-shadows-pack is civilised.	
-A treasure placement rule:
-	copy scroll of shadows to small-scroll-of-shadows-pack.
+The small-scroll-of-shadows-pack is civilised.
+One scroll of shadows is in small-scroll-of-shadows-pack.
 
 The second-small-scroll-of-shadows-pack is a minor treasure pack.
 The second-small-scroll-of-shadows-pack is civilised.	
-A treasure placement rule:
-	copy scroll of shadows to second-small-scroll-of-shadows-pack.
+One scroll of shadows is in second-small-scroll-of-shadows-pack.
 
 Section - Shadows, large (major)
 
 The large-scroll-of-shadows-pack is a major treasure pack.
 The large-scroll-of-shadows-pack is civilised.
-A treasure placement rule:
-	copy scroll of shadows to large-scroll-of-shadows-pack;
-	copy scroll of shadows to large-scroll-of-shadows-pack.
+Two scrolls of shadows is in large-scroll-of-shadows-pack.
 
 Section - Summoning (minor)
 
 The small-scroll-of-summoning-pack is a minor treasure pack.
 The small-scroll-of-summoning-pack is magical.	
 The difficulty level of the small-scroll-of-summoning-pack is 1.
+One scroll of summoning is in the small-scroll-of-summoning-pack.
 
-A treasure placement rule:
-	copy scroll of summoning to small-scroll-of-summoning-pack.
-
-Section - Fireworks (minor)
+[Section - Fireworks (minor)
 
 The small-scroll-of-fireworks-pack is a minor treasure pack.
 The small-scroll-of-fireworks-pack is magical.	
 The rarity of small-scroll-of-fireworks is 5.
 
 A treasure placement rule:
-	copy scroll of fireworks to small-scroll-of-fireworks-pack.
+	copy scroll of fireworks to small-scroll-of-fireworks-pack.]
 
 Section - Blade, small (minor)
 
 The small-scroll-of-the-blade-pack is a minor treasure pack.
-The small-scroll-of-the-blade-pack is civilised.	
-A treasure placement rule:
-	copy scroll of the blade to small-scroll-of-the-blade-pack.
+The small-scroll-of-the-blade-pack is civilised.
+One scroll of the blade is in the small-scroll-of-the-blade-pack.
 
 Section - Blade, large (major)
 
 The large-scroll-of-the-blade-pack is a major treasure pack.
 The large-scroll-of-the-blade-pack is civilised.
-A treasure placement rule:
-	copy scroll of the blade to large-scroll-of-the-blade-pack;
-	copy scroll of the blade to large-scroll-of-the-blade-pack.
+Two scrolls of the blade is in the large-scroll-of-the-blade-pack.
 
 Section - Protection (major)
 
 The small-scroll-of-protection-pack is a major treasure pack.
-The small-scroll-of-protection-pack is civilised.	
-A treasure placement rule:
-	copy scroll of protection to small-scroll-of-shadows-pack.
+The small-scroll-of-protection-pack is civilised.
+One scroll of protection is in the small-scroll-of-protection-pack.
 
 Section - Skill, small (minor)
 
 The small-scroll-of-skill-pack is a minor treasure pack.
 The small-scroll-of-skill-pack is civilised.	
-A treasure placement rule:
-	copy scroll of skill to small-scroll-of-skill-pack.
+One scroll of skill is in the small-scroll-of-skill-pack.
 
 Section - Skill, large (major)
 
 The large-scroll-of-skill-pack is a major treasure pack.
 The large-scroll-of-skill-pack is civilised.
-A treasure placement rule:
-	copy scroll of skill to large-scroll-of-skill-pack;
-	copy scroll of skill to large-scroll-of-skill-pack.
+Two scrolls of skill is in the large-scroll-of-skill-pack.
 The rarity of large-scroll-of-skill-pack is 1.
 
 Section - Death, small (minor)
 
 The small-scroll-of-death-pack is a minor treasure pack.
-The small-scroll-of-death-pack is civilised.The difficulty level of small-scroll-of-death-pack is 1.
-A treasure placement rule:
-	copy scroll of death to small-scroll-of-death-pack.
+The small-scroll-of-death-pack is civilised.
+The difficulty level of small-scroll-of-death-pack is 1.
+One scroll of death is in the small-scroll-of-death-pack.
 
 Section - Death, large (major)
 
 The large-scroll-of-death-pack is a major treasure pack.
-The large-scroll-of-death-pack is civilised. The difficulty level of large-scroll-of-death-pack is 1.
-A treasure placement rule:
-	copy scroll of death to large-scroll-of-death-pack;
-	copy scroll of death to large-scroll-of-death-pack.
+The large-scroll-of-death-pack is civilised.
+The difficulty level of large-scroll-of-death-pack is 1.
+Two scrolls of death are in the large-scroll-of-death-pack.
 
 Section - Deathly [summon, ghoul, death], (major)
 
 The deathly-pack is a major treasure pack.
-The deathly-pack is deathly. The difficulty level of deathly-pack is 1.
-A treasure placement rule:
-	copy scroll of summoning to deathly-pack;
-	copy scroll of ghoulification to deathly-pack;
-	copy scroll of death to deathly-pack.
+The deathly-pack is deathly.
+The difficulty level of deathly-pack is 1.
+One scroll of summoning is in the deathly-pack.
+One scroll of ghoulification is in the deathly-pack.
+One scroll of death is in the deathly-pack.
 
 Section - Combat [blade, protection], (major)
 
 The combat-scroll-pack is a major treasure pack.
 The combat-scroll-pack is civilised.
-A treasure placement rule:
-	copy scroll of the blade to combat-scroll-pack;
-	copy scroll of protection to combat-scroll-pack.
+One scroll of the blade is in the combat-scroll-pack.
+One scroll of protection is in the combat-scroll-pack.
 
 Section - Thief [shadows, teleport, ethereal], (major)
 
 The thief-scroll-pack is a major treasure pack.
-The thief-scroll-pack is civilised. The difficulty level of thief-scroll-pack is 1.
-A treasure placement rule:
-	copy scroll of shadows to thief-scroll-pack;
-	copy scroll of teleportation to thief-scroll-pack;
-	copy scroll of etherealness to thief-scroll-pack.
+The thief-scroll-pack is civilised.
+The difficulty level of thief-scroll-pack is 1.
+One scroll of shadows is in the thief-scroll-pack.
+One scroll of teleportation is in the thief-scroll-pack.
+One scroll of etherealness is in the thief-scroll-pack.
 
 
 

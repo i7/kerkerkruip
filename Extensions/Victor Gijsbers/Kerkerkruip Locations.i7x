@@ -1145,17 +1145,11 @@ Last check inserting something into the scroll analyser:
 		say "The scroll analyser refuses to open.";
 	otherwise:
 		decrease scroll analyser count by 1;
-		let effect be scroll-effect of the noun;
-		if player has-knowledge-of effect:
+		if the noun is identified:
 			say "The machine confirms that this is [a noun].[run paragraph on]";
 		otherwise:
-			repeat through Table of Magic Scrolls:
-				if scroll-effect entry is effect and true-name entry is true:
-					say "It is a [scroll entry]![run paragraph on]";
-			scroll-effect-identify effect;
-			repeat with item running through scrolls carried by the player:
-				if scroll-effect of item is effect:
-					have the parser notice item;
+			identify noun;
+			say "It is a [noun]![run paragraph on]";
 		if scroll analyser count is less than 1:
 			say " As you take back your scroll, something snaps within the analyser. It will probably never work again.";
 		otherwise:
@@ -1266,9 +1260,16 @@ Instead of taking the large pile of body parts:
 
 Pile-searched is a truth state that varies. Pile-searched is false.
 
+Body parts storage is a container.
+The body parts storage is part of the pile of body parts.
+It is closed, unopenable and privately-named.
+One scroll of ghoulification is in the body parts storage.
+One scroll of summoning is in the body parts storage.
+One scroll of death is in the body parts storage.
+
 Instead of searching the large pile of body parts:
 	if pile-searched is false:
-		if a random chance of 1 in 2 succeeds:
+		if a random chance of 1 in 3 succeeds:
 			now pile-searched is true;
 			if rotting corpse is off-stage and rotting corpse is alive:
 				say "As you search the pile, a rotting corpse jumps out!";
@@ -1278,26 +1279,12 @@ Instead of searching the large pile of body parts:
 				say "The most valuable thing you find is a putrefying arm that might function as a club.";
 				move putrefying arm to player;
 		otherwise:
-			do the pile-scroll-giving;
+			now a random off-stage scroll is in the body parts storage;
+			let item be a random scroll in the body parts storage;
+			now item is carried by the player;
+			say "You have found [an item] buried between the body parts. It is slightly wet and smelly, but still usable.";
 	otherwise:
 		say "You find nothing else in the pile.".
-		
-To do the pile-scroll-giving:
-	let effect be a random scroll-effect;
-	while effect is no-effect:
-		now effect is a random scroll-effect;
-	if a random chance of 1 in 5 succeeds:
-		now effect is scroll-ghoulification;
-	if a random chance of 1 in 4 succeeds:
-		now effect is scroll-summoning;
-	if a random chance of 1 in 5 succeeds:
-		now effect is scroll-death;
-	let item be a random prototypical obfuscated scroll which has-scroll-effect effect;
-	if player has-knowledge-of effect:
-		now item is a random prototypical plain scroll which has-scroll-effect effect;
-	let newobject be a new object cloned from item;
-	move newobject to player;
-	say "You have found [a newobject] buried between the body parts. It is slightly wet and smelly, but still usable.".
 
 The putrefying arm is a 	weapon.
 The description of putrefying arm is "Although it smells terribly, this arm is actually quite sturdy. You could beat people with it.".
