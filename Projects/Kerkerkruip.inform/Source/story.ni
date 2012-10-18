@@ -1,23 +1,18 @@
-"Kerkerkruip - Release 5" by Victor Gijsbers
+"Kerkerkruip - Release 6 - PRE-BETA!!" by Victor Gijsbers
 
 The story headline is "An IF roguelike".
 The story genre is "dungeon crawl".
-The release number is 5.
+The release number is 6.
 [Release along with cover art.]
 
-
+	
 Include Menus by Emily Short.
-[Include Basic Help Menu by Emily Short.]
 Include Basic Screen Effects by Emily Short. 
-Include Epistemology by Eric Eve.
 Include Numbered Disambiguation Choices by Aaron Reed.
-[Include Real-Time Delays by Erik Temple.]
 Include Glulx Entry Points by Emily Short.
-[Include Default Messages by Ron Newcomb.]
 Include Dynamic Objects by Jesse McGrew.
-
+Include Epistemology by Eric Eve.
 [Doesn't work with moving people.]
-
 Every turn (this is the mark items as seen every turn rule): 
 	repeat with item running through things that are enclosed by the location:
 		if the item is not enclosed by an opaque closed container, now the item is seen.
@@ -45,7 +40,7 @@ Include Kerkerkruip Actions and UI by Victor Gijsbers.
 Include Kerkerkruip Start and Finish by Victor Gijsbers.
 Include Kerkerkruip Final Declarations by Victor Gijsbers.
 
-Use MAX_PROP_TABLE_SIZE of 300000.
+Use MAX_PROP_TABLE_SIZE of 500000.
 Use MAX_OBJ_PROP_COUNT of 128.
 
 The maximum score is 18. [1 + 1 + 2 + 2 + 3 + 4 + 5 = 18]
@@ -55,6 +50,9 @@ The notify score changes rule is not listed in any rulebook.
 
 Generation info is a truth state that varies. Generation info is [true]false.
 
+[Last when play begins:
+	increase mind score of the player by 40.]
+	
 [When play begins:
 	copy scroll of ghoulification to player;
 	copy scroll of teleportation to player;
