@@ -547,8 +547,8 @@ To have Aite intervene:
 			unless guy is dead:
 				let the guy lose concentration;			
 			if health of the guy is less than 1:
-				now the global attacker is the player;
-				now the global defender is the guy;
+				now killer-guy is the player;
+				now killed-guy is the guy;
 				consider the grant powers when a monster is slain rule.
 
 
