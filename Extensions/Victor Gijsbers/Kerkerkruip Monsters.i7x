@@ -2140,6 +2140,11 @@ Repelling power of the tentacle:
 	decrease melee of the player by 3;
 	decrease defence of the player by 3;
 	decrease permanent health of the player by 15.
+	
+Status skill rule (this is the tentacle power status skill rule):
+	if power of the tentacle is granted:
+		say "You can [bold type]sprout[roman type] between 1 and 4 tentacles, a horrifying spectacle that may make other creatures go crazy. [italic type](Level 3)[roman type][line break][run paragraph on]".
+	
 
 
 Section - Sprouting
@@ -2200,10 +2205,6 @@ Carry out sprouting:
 	if mind score of the player is less than 1:
 		end the story saying "That was too unspeakable for your mind to bear!".
 
-
-Status skill rule (this is the tentacle power status skill rule):
-	if power of the tentacle is granted:
-		say "You can [bold type]sprout[roman type] between 1 and 4 tentacles, a horrifying spectacle that may make other creatures go crazy. [italic type](Level 3)[roman type][run paragraph on]".
 
 
 
