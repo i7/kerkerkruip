@@ -1269,7 +1269,7 @@ One scroll of death is in the body parts storage.
 
 Instead of searching the large pile of body parts:
 	if pile-searched is false:
-		if a random chance of 1 in 2 succeeds:
+		if a random chance of 1 in 3 succeeds:
 			now pile-searched is true;
 			if rotting corpse is off-stage and rotting corpse is alive:
 				say "As you search the pile, a rotting corpse jumps out!";
@@ -1279,7 +1279,7 @@ Instead of searching the large pile of body parts:
 				say "The most valuable thing you find is a putrefying arm that might function as a club.";
 				move putrefying arm to player;
 		otherwise:
-			now a random off-stage unidentified scroll is in the body parts storage;
+			now a random off-stage scroll is in the body parts storage;
 			let item be a random scroll in the body parts storage;
 			now item is carried by the player;
 			say "You have found [an item] buried between the body parts. It is slightly wet and smelly, but still usable.";
