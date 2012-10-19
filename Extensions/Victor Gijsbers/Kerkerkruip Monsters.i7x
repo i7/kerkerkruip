@@ -70,7 +70,10 @@ Report the swarm of daggers hitting a dead pc:
 	rule succeeds.
 
 Report the swarm of daggers attacking:
-	say "The swarm of daggers [one of]bears down upon[or]launches itself at[or]moves in to attack[at random] [the noun].";
+	unless the noun is the actor:
+		say "The swarm of daggers [one of]bears down upon[or]launches itself at[or]moves in to attack[at random] [the noun].";
+	otherwise:
+		say "The daggers start savagely attacking each other!";
 	rule succeeds.
 
 Report the swarm of daggers parrying:
@@ -79,6 +82,10 @@ Report the swarm of daggers parrying:
 
 Report the swarm of daggers dodging:
 	say "The swarm of daggers attempts to outmaneuver the attack.";
+	rule succeeds.
+
+Report the swarm of daggers waiting when the swarm of daggers is insane:
+	say "The daggers form [one of]a big heart, including the text 'WE LOVE YOU'[or]a screaming face[or]a cute pony[or]the letters 'REDRUM'[or]a hand giving the one finger salute[at random], then quickly go back to their original constellation.";
 	rule succeeds.
 	
 
@@ -230,7 +237,10 @@ Report the blood ape hitting a dead pc:
 	rule succeeds.
 
 Report the blood ape attacking:
-	say "The blood ape [one of]swings at [possessive of the noun] head[or]jumps at [the noun] with its fists ready to swing[at random].";
+	unless the noun is the actor:
+		say "The blood ape [one of]swings at [possessive of the noun] head[or]jumps at [the noun] with its fists ready to swing[at random].";
+	otherwise:
+		say "The blood ape swings its fists at its own head!";
 	rule succeeds.
 
 Report the blood ape parrying:
@@ -241,6 +251,10 @@ Report the blood ape dodging:
 	say "The blood ape tries to jump out of the way.";
 	rule succeeds.
 	
+Report the blood ape waiting when the blood ape is insane:
+	say "The blood ape maniacally thumps its chest.";
+	rule succeeds.
+
 
 Section - Power
 
@@ -385,7 +399,10 @@ Report the ravenous armadillo hitting a dead pc:
 	rule succeeds.
 
 Report the ravenous armadillo attacking:
-	say "The armadillo raises its tail threateningly towards [the noun].";
+	unless the actor is the noun:
+		say "The armadillo raises its tail threateningly towards [the noun].";
+	otherwise:
+		say "The armadillo swings its tail towards its own head.";
 	rule succeeds.
 
 Report the ravenous armadillo parrying:
@@ -404,6 +421,10 @@ Report the ravenous armadillo concentrating:
 			say "The armadillo makes a few thoughtful movements with its tail.";
 		-- 3:
 			say "A final sweep of its tail club seems to indicate that the armadillo has made up its mind.";
+	rule succeeds.
+
+Report the ravenous armadillo waiting when the ravenous armadillo is insane:
+	say "The armadillo tries to eat its own feet.";
 	rule succeeds.
 		
 
@@ -703,7 +724,10 @@ Report Miranda hitting a dead pc:
 	rule succeeds.
 
 Report Miranda attacking:
-	say "Miranda jumps towards [the noun][if Miranda is at-stun], intent on stunning[end if].";
+	unless the actor is the noun:
+		say "Miranda jumps towards [the noun][if Miranda is at-stun], intent on stunning[end if].";
+	otherwise:
+		say "'I just can't go on,' Miranda sobs as she attempts to end her own life.";
 	rule succeeds.
 
 Report Miranda parrying:
@@ -722,6 +746,10 @@ Report Miranda concentrating:
 			say "Chanting softly, Miranda aligns her spirit with the ambient energies.";
 		-- 3:
 			say "Miranda finishes her meditations.";
+	rule succeeds.
+
+Report Miranda waiting when Miranda is insane:
+	say "Miranda waves her hands around in a magical pattern that you do not recognise. 'Wax on, wax off,' she announces.";
 	rule succeeds.
 
 Section - Power of Miranda
@@ -885,7 +913,10 @@ Report the chain golem hitting a dead pc:
 	rule succeeds.
 
 Report the chain golem attacking:
-	say "Several of the [if concentration of the chain golem is 1]slowly spinning [otherwise if concentration of the chain golem is 2]spinning [otherwise if concentration of the chain golem is 3]wildly spinning [end if]chains [one of]direct themselves towards[or]lash out at[or]attempt to smash themselves into[at random] [the noun].";
+	unless the actor is the noun:
+		say "Several of the [if concentration of the chain golem is 1]slowly spinning [otherwise if concentration of the chain golem is 2]spinning [otherwise if concentration of the chain golem is 3]wildly spinning [end if]chains [one of]direct themselves towards[or]lash out at[or]attempt to smash themselves into[at random] [the noun].";
+	otherwise:
+		say "The chain golem's chains get all entangled, and seem to want to rip each other apart.";
 	rule succeeds.
 
 Report the chain golem parrying:
@@ -909,6 +940,9 @@ Report the chain golem concentrating:
 Lose concentration prose rule for the chain golem:
 	say "Unbalanced by the hit, the chain golem [bold type]stops spinning[roman type]." instead.
 
+Report the chain golem waiting when the chain golem is insane:
+	say "The chain golem dances what appears to be a [one of]wild tango[or]passable waltz[or]pretty insane jumpstyle[or]romantic merengue[at random].";
+	rule succeeds.
 
 Section - Power
 
@@ -1066,7 +1100,10 @@ Report an actor hitting the dead jumping bomb:
 	rule succeeds.
 
 Report the bomb attacking:
-	say "Suddenly changing its direction, the jumping bomb launches itself towards [the noun] -- threatening instant death upon contact.";
+	unless the actor is the noun:
+		say "Suddenly changing its direction, the jumping bomb launches itself towards [the noun] -- threatening instant death upon contact.";
+	otherwise:
+		say "The jumping bomb attempts the seemingly impossible feat of smashing into itself.";
 	rule succeeds.
 
 Report the bomb dodging:
@@ -1086,6 +1123,9 @@ Report the bomb concentrating:
 Lose concentration prose rule for the jumping bomb:
 	say "Knocked back by the hit, the jumping bomb [bold type]loses most of its speed[roman type]." instead.
 
+Report bomb waiting when jumping bomb is insane:
+	say "The bomb jumps around the room as if there were no tomorrow.";
+	rule succeeds.
 
 Section - Power
 
@@ -1235,7 +1275,10 @@ Report the Reaper hitting a dead pc:
 	rule succeeds.
 
 Report the reaper attacking:
-	say "The Reaper advances towards [the noun][one of][or], with a skulllike grin[or], saying 'Et in Arcadia ego!' in a booming voice[as decreasingly likely outcomes].";
+	unless the actor is the noun:
+		say "The Reaper advances towards [the noun][one of][or], with a skulllike grin[or], saying 'Et in Arcadia ego!' in a booming voice[as decreasingly likely outcomes].";
+	otherwise:
+		say "'What is dead may never die!' the Reaper screams.";
 	rule succeeds.
 
 Report the Reaper dodging:
@@ -1252,6 +1295,9 @@ Report the Reaper concentrating:
 			say "'I see your end!' the Reaper announces as he finishes his contemplations.";
 	rule succeeds.
 
+Report the Reaper waiting when the Reaper is insane:
+	say "'I feel... alive,' the Reaper muses.";
+	rule succeeds.
 
 Section - Power
 
@@ -1423,7 +1469,10 @@ Report the demon of rage hitting a dead pc:
 	rule succeeds.
 
 Report the demon of rage attacking:
-	say "Full of darkness and fire, the demon rushes towards [the noun].";
+	unless the actor is the noun:
+		say "Full of darkness and fire, the demon rushes towards [the noun].";
+	otherwise:
+		say "The demon of rage tries to claw out its own eyes.";
 	rule succeeds.
 
 Report the demon of rage dodging:
@@ -1434,6 +1483,10 @@ Report the demon of rage concentrating:
 	if the concentration of the actor is 1, say "The demon of rage burns with a fiercer light." instead;
 	if the concentration of the actor is 2, say "The demon of rage glows like the hottest of embers." instead;
 	if the concentration of the actor is 3, say "The demon of rage becomes even more radiant, and howls with the lust for blood." instead.	
+
+Report demon of rage waiting when demon of rage is insane:
+	say "The demon of rage's shrieks suddenly turn into a fit of coughing[one of][or]. Small embers fall from its mouth[at random].";
+	rule succeeds.
 
 Section - When enraged
 
@@ -1603,11 +1656,18 @@ Report the mindslug hitting a dead pc:
 	rule succeeds.
 
 Report the mindslug attacking:
-	say "Raising its hideous body, the mindslug bears down on [the noun].";
+	unless the actor is the noun:
+		say "Raising its hideous body, the mindslug bears down on [the noun].";
+	otherwise:
+		say "The mindslug tries to smash its own head into the ground.";
 	rule succeeds.
 
 Report the mindslug dodging:
 	say "The mindslug oozes out of the way.";
+	rule succeeds.
+
+Report the mindslug waiting when the mindslug is insane:
+	say "You suddenly hear a voice inside your head. 'Cover yourself with salt,' it says. 'Come on, cover yourself with salt!'";
 	rule succeeds.
 
 
@@ -1711,7 +1771,10 @@ Report Fafhrd hitting a dead pc:
 	rule succeeds.
 
 Report Fafhrd attacking:
-	say "Fafhrd rushes towards [the noun].";
+	unless the actor is the noun:
+		say "Fafhrd rushes towards [the noun].";
+	otherwise:
+		say "'Let it never be said that I did not die a hero's death!' Fafhrd exclaims.";
 	rule succeeds.
 
 Report Fafhrd dodging:
@@ -1720,6 +1783,10 @@ Report Fafhrd dodging:
 
 Report Fafhrd parrying:
 	say "Fafhrd raises his weapon to stop the blow.";
+	rule succeeds.
+
+Report Fafhrd waiting when Fafhrd is insane:
+	say "Fafhrd stands motionless, pining for the fjords.";
 	rule succeeds.
 
 Report an actor hitting the dead Mouser:
@@ -1738,7 +1805,10 @@ Report Mouser hitting a dead pc:
 	rule succeeds.
 
 Report Mouser attacking:
-	say "Fast as a snake, Mouser lashes out at [the noun].";
+	unless the actor is the noun:
+		say "Fast as a snake, Mouser lashes out at [the noun].";
+	otherwise:
+		say "'He won't see this coming!' Mouser announces as he attacks himself.";
 	rule succeeds.
 
 Report Mouser dodging:
@@ -1748,6 +1818,10 @@ Report Mouser dodging:
 Report Mouser parrying:
 	say "Mouser tries to parry the blow.";
 	rule succeeds.
+	
+Report Mouser waiting when Mouser is insane:
+	say "'Why did I have to go after wealth and fame, instead of just marrying some full-bosomed hussy and enjoying the many, uh, joys of domestic life?' Mouser laments.";
+	rule succeeds.	
 
 Last report talking to Fafhrd when Fafhrd is friendly:
 	say "Fafhrd shrugs.".
@@ -1938,7 +2012,7 @@ An AI action selection rule for the at-Act giant tentacle (this is the tentacle 
 		increase the Action Weight entry by 3.
 
 An AI target selection rule for a person (called target) when the running AI is the giant tentacle (this is the tentacle prefers the grappled person rule):
-	if the giant tentacle grapples the target:
+	if the giant tentacle grapples the target and the target is not the giant tentacle:
 		increase the Weight by 1000;
 
 Check going (this is the cannot go when grappled rule):
@@ -2117,12 +2191,19 @@ Report the giant tentacle hitting a dead pc:
 	rule succeeds.
 
 Report the giant tentacle attacking:
-	say "The giant tentacle moves in to grab [the noun].";
+	unless the actor is the noun:
+		say "The giant tentacle moves in to grab [the noun].";
+	otherwise:
+		say "The tentacle attempts to tie itself into a knot.";
 	rule succeeds.
 
 Report the giant tentacle dodging:
 	say "The giant tentacle tries to avoid the blow.";
 	rule succeeds.
+	
+Report giant tentacle waiting when giant tentacle is insane:
+	say "The giant tentacle tries to hide by imitating a leaf of grass.";
+	rule succeeds.	
 
 [ This is almost the same as the standard show the attack damage dealt rule, except with the option to mention that the tentacle still holds on to the defender. ]
 Last damage multiplier rule when the global attacker is the giant tentacle (this is the show the damage dealt by the giant tentacle rule):
@@ -2229,7 +2310,7 @@ Carry out sprouting:
 
 Chapter - Level 3 - Minotaur
 
-The minotaur is a monster. "A huge minotaur[if the minotaur carries the minotaur's axe], carrying a huge axe,[end if] stands ready for combat."
+The minotaur is a male monster. "A huge minotaur[if the minotaur carries the minotaur's axe], carrying a huge axe,[end if] stands ready for combat."
 
 The description of the minotaur is "Half man, half bull, this fearsome creature is associated by legends with two things: axes and mazes.".
 
@@ -2288,11 +2369,18 @@ Report the minotaur hitting a dead pc:
 	rule succeeds.
 
 Report the minotaur attacking:
-	say "With a fearsome bellow, the minotaur swings at [the noun].";
+	unless the actor is the noun:
+		say "With a fearsome bellow, the minotaur swings at [the noun].";
+	otherwise:
+		say "The minotaur swings at himself.";
 	rule succeeds.
 
 Report the minotaur dodging:
 	say "The minotaur lumbers aside.";
+	rule succeeds.
+
+Report the minotaur waiting when the minotaur is insane:
+	say "The minotaur speaks in a voice that you can barely understand. 'I must escape!' he says.";
 	rule succeeds.
 
 
@@ -2381,12 +2469,19 @@ Report the healer of Aite hitting a dead pc:
 	rule succeeds.
 
 Report the healer of Aite attacking:
-	say "The healer pokes his sword at [the noun].";
+	unless the actor is the noun:
+		say "The healer pokes his sword at [the noun].";
+	otherwise:
+		say "'My head has offended me,' the healer announces. 'It must be cut off.'";
 	rule succeeds.
 
 Report the healer of Aite dodging:
 	say "'Save me, great Aite!' the healer exclaims as he attempts to duck away.";
 	rule succeeds.
+	
+Report healer of Aite waiting when healer of Aite is insane:
+	say "The healer puts his hand together as if to pray, then says: 'Pancakes, please'.";
+	rule succeeds.	
 
 Section - Tormentor of Aite
 
@@ -2422,12 +2517,19 @@ Report the tormentor of Aite hitting a dead pc:
 	rule succeeds.
 
 Report the tormentor of Aite attacking:
-	say "The tormentor raises her staff towards [the noun], preparing a magical attack.";
+	unless actor is the noun:
+		say "The tormentor raises her staff towards [the noun], preparing a magical attack.";
+	otherwise:
+		say "The tormentor tries to put her staff in a place where the sun doesn't shine.";
 	rule succeeds.
 
 Report the tormentor of Aite dodging:
 	say "'You will never get me!' the tormentor exclaims as she attempts to duck away.";
 	rule succeeds.
+	
+Report the tormentor of Aite waiting when the tormentor of Aite is insane:
+	say "'I never wanted to be a tormentor,' the priestess says. 'I wanted to be a [one of]goose girl[or]lumberjack[or]mother[at random]!' Tears stream down her face.";
+	rule succeeds.	
 
 Section - Defender of Aite
 
@@ -2463,7 +2565,10 @@ Report the defender of Aite hitting a dead pc:
 	rule succeeds.
 
 Report the defender of Aite attacking:
-	say "The defender starts lumbering towards [the noun].";
+	unless the actor is the noun:
+		say "The defender starts lumbering towards [the noun].";
+	otherwise:
+		say "'Do you think this wil hurt?' the defender asks as he attacks himself.";
 	rule succeeds.
 
 Report the defender of Aite parrying:
@@ -2473,6 +2578,10 @@ Report the defender of Aite parrying:
 Report the defender of Aite dodging:
 	say "The soldier attempts to jump away, using his shield for additional cover.";
 	rule succeeds.
+	
+Report the defender of Aite waiting when the defender of Aite is insane:
+	say "The defender licks his shield.";
+	rule succeeds.	
 
 Section - Power of the Fanatics of Aite
 
@@ -2645,11 +2754,18 @@ Report Bodmall hitting a dead pc:
 	rule succeeds.
 
 Report Bodmall attacking:
-	say "Bodmall throws her hands forward, casting a lightning bolt at [the noun].";
+	unless the actor is the noun:
+		say "Bodmall throws her hands forward, casting a lightning bolt at [the noun].";
+	otherwise:
+		say "'I need a new thrill, and you aren't going to give it to me' Bodmall tells you as she throws a lightning bolt at herself.";
 	rule succeeds.
 
 Report Bodmall dodging:
 	say "Gracefully, Bodmall attempts to glide out of the way.";
+	rule succeeds.
+
+Report Bodmall waiting when Bodmall is insane:
+	say "'Though I shall fall as the harvest corn, it is my fate, I'm pagan born!' Bodmall sings.";
 	rule succeeds.
 
 
@@ -3351,9 +3467,64 @@ Carry out Malygris unghouling:
 	say "As Malygris casts a complex spell, and you feel your flesh [bold type]returning to normal[roman type]!";
 	unghoulify the player.
 
+Section - Malygris prose
+
+Report Malygris hitting a dead pc:
+	say "'That's one less annoyance. Now I can get back to work.' Malygris says to the world at large.";
+	rule succeeds.
+
+Report Malygris attacking:
+	unless the actor is the noun:
+		say "Smiling his wicked, slim smile, Malygris lunges towards [the noun].";
+	otherwise:
+		say "'I'll make this a little less one-sided, by softening myself up for you,' Maltgris confides.";
+	rule succeeds.
+
+Report Malygris dodging:
+	say "Swirling his robe around him, Malygris dodges the attack.";
+	rule succeeds.
+
+Report Malygris parrying:
+	say "Malygris's smile never falters as he interposes his weapon.";
+	rule succeeds.
 
 
+Section - Love affair with the insane Malygris
 
+Check Malygris attacking Malygris:
+	if a random chance of 2 in 3 succeeds:
+		try Malygris waiting instead.
+
+Malygris-love-affair is a number that varies. Malygris-love-affair is 0.
+Malygris-lover is a truth state that varies. Malygris-lover is false.
+
+Report Malygris waiting when Malygris is insane:
+	unless Malygris-love-affair is 3:
+		increase Malygris-love-affair by 1;
+	if Malygris-love-affair is:
+		-- 1:
+			say "'I forgive you, young [if the player is male]man[otherwise if the player is female]lady[otherwise]creature[end if], for I know that you did not come here of your own accord.' Malygris tells you.";
+		-- 2:
+			say "'You remind me of someone I once knew. A person who was very dear to me.' Malygris brushes away a tear.";
+		-- otherwise:
+			say "'I feel embarrassed to say this, but... well... to be frank, I find you a [italic type]very attractive[roman type] [if the player is male]young guy[otherwise if the player is female]young gal[otherwise]young thing[end if]. Will you kiss me?' Malygris suggests.";
+	rule succeeds.
+
+Instead of kissing Malygris:
+	if Malygris-love-affair is 0:
+		say "That doesn't seem like a good idea.";
+		take no time;
+	if Malygris-love-affair is 1 or Malygris-love-affair is 2:
+		say "That would be rushing things. Have a little patience.";
+		take no time;
+	if Malygris-love-affair is greater than 2:
+		now Malygris-lover is true;
+		say "You overcome your initial resistance, and walk up to the old man. From up close, he looks vulnerable and very human. Your lips find each other, and your tongues soon follow suit. This is... much more pleasant than you had imagined it would be. It feels [italic type]right[roman type].[paragraph break]While he keeps kissing you ardently, Malygris slowly lowers himself to his knees. You gasp as he makes you realise that he has several centuries of experience under his belt. No, you're probably not going to miss the prince. No. Not at all.".
+
+Victory message rule (this is the Malygris lover message rule):
+	if Malygris-lover is true:		
+		end the story saying "You have found true love and infinite pleasure!";
+		rule succeeds.	
 
 Book - Other Monsters
 
@@ -3405,7 +3576,24 @@ Report the demonic assassin hitting a dead pc:
 	say "The assassin's laugh as you fall down is the most evil thing you have ever heard. It is also the last.";
 	rule succeeds.
 
+Report the demonic assassin attacking:
+	unless the actor is the noun:
+		say "The assassin jumps at [the noun].";
+	otherwise:
+		say "The demonic assassin laughs its evil laugh as it slashes at itself.";
+	rule succeeds.
 
+Report the demonic assassin dodging:
+	say "The demonic assassin dives out of the way.";
+	rule succeeds.
+
+Report the demonic assassin parrying:
+	say "The assassing raises his blade.";
+	rule succeeds.
+
+Report the demonic assassin waiting when the demonic assassin is insane:
+	say "The assassin stabs the ground several times, with little effect.";
+	rule succeeds.
 
 
 Chapter - Nameless Horror
@@ -3490,6 +3678,25 @@ An AI action selection rule for the Nameless Horror (this is the Nameless Horror
 
 Instead of the Nameless Horror waiting:
 	say "[one of]The Nameless Horror emits a maddening shriek[or]Darkness coalesces around the Nameless Horror[or]The world shakes as the Nameless Horror roars in defiance[at random].".
+
+
+Section - Nameless horror prose
+
+Report an actor hitting the dead Nameless horror:
+	say "The death scene of the Nameless Horror cannot be described.";
+	rule succeeds.
+
+Report the Nameless horror hitting a dead pc:
+	say "Tentacles! Shrieks! Claws! Darkness! Everywhere!";
+	rule succeeds.
+
+Report the Nameless horror attacking:
+	unless the actor is the noun:
+		say "The Nameless Horror lumbers towards [the noun].";
+	otherwise:
+		say "The Nameless Horror turns on itself.";
+	rule succeeds.
+
 
 
 
@@ -3624,14 +3831,16 @@ Report the corpse hitting a dead pc:
 	rule succeeds.
 
 Report the corpse attacking:
-	say "The rotting corpse [if legs of the rotting corpse is 2]walks[otherwise if legs of the rotting corpse is 1]hops[otherwise]crawls[end if] towards [the noun], [if arms of the rotting corpse is 2]its arms raised[otherwise if arms of the rotting corpse is 1]its single arm raised[otherwise if the rotting head is part of the rotting corpse]its teeth at the ready[otherwise if legs of the rotting corpse is greater than 0]hoping to land a good kick[otherwise]with no other weapon than its smell[end if].";
+	say "The rotting corpse [if legs of the rotting corpse is 2]walks[otherwise if legs of the rotting corpse is 1]hops[otherwise]crawls[end if] towards [if the noun is the actor]itself[otherwise][the noun][end if], [if arms of the rotting corpse is 2]its arms raised[otherwise if arms of the rotting corpse is 1]its single arm raised[otherwise if the rotting head is part of the rotting corpse]its teeth at the ready[otherwise if legs of the rotting corpse is greater than 0]hoping to land a good kick[otherwise]with no other weapon than its smell[end if].";
 	rule succeeds.
 
 Report the corpse dodging:
 	say "The corpse [if legs of the rotting corpse is 2]walks[otherwise if legs of the rotting corpse is 1]hops[otherwise]crawls[end if] out of the way.";
 	rule succeeds.
 
-
+Report the corpse waiting when the rotting corpse is insane:
+	say "The rotting corpse spends a few seconds just rotting.";
+	rule succeeds.
 
 
 
@@ -3813,13 +4022,19 @@ Report the aswang hitting a dead pc:
 	rule succeeds.
 
 Report the aswang attacking:
-	say "The aswang rushes at [the noun], with [if as-shape of aswang is as-witch]sharp fingernails ready[otherwise if as-shape of aswang is as-bird]talons and beak outstretched[otherwise]slavering fangs ready[end if].";
+	unless the actor is the noun:
+		say "The aswang rushes at [the noun], with [if as-shape of aswang is as-witch]sharp fingernails ready[otherwise if as-shape of aswang is as-bird]talons and beak outstretched[otherwise]slavering fangs ready[end if].";
+	otherwise:
+		say "The aswang claws at her own eyes.";
 	rule succeeds.
 
 Report the aswang dodging:
 	say "The aswang [if as-shape of aswang is as-witch]jumps[otherwise if as-shape of aswang is as-bird]flies[otherwise]jumps[end if] aside.";
 	rule succeeds.
 				
+Report the aswang waiting when the aswang is insane:
+	say "The aswang cackles like an insane witch. Which makes sense.";
+	rule succeeds.
 
 
 
@@ -3912,6 +4127,9 @@ Report an actor hitting the dead abyss of the soul:
 	say "The abyss of the soul collapses in on itself and disappears with a soft 'plop'.";
 	rule succeeds.
 
+Report the abyss of the soul waiting when the abyss of the soul is insane:
+	say "The abyss of the soul just hangs there doing nothing, but you sense that it is having a lot of fun.";
+	rule succeeds.
 
 
 
@@ -3991,6 +4209,7 @@ To have the smoke demon disappear from (place - a room):
 
 To have the smoke demon appear:
 	now health of the smoke demon is 10;
+	now faction of the smoke demon is horrific-faction;
 	move smoke demon to the location;
 	say "The smoke coalesces to [bold type]form a smoke demon[roman type]!".
 
@@ -4005,7 +4224,10 @@ Report the smoke demon hitting a dead pc:
 	say "You attempt to breathe, but your lungs are only filled with smoke and more smoke. The murderous vapours seem to become as thick as wool as you desperately try to exhale, inhale, anything -- all in vain. As you suffocate, tendrils of smoke softly close your eyelids.";
 
 Report the smoke demon attacking:
-	say "The smoke demon casts his vaporous tendrils towards [the noun].";
+	unless actor is the noun:
+		say "The smoke demon casts his vaporous tendrils towards [the noun].";
+	otherwise:
+		say "The smoke demon strangles itself.";
 	rule succeeds.
 
 Report the smoke demon parrying:
@@ -4014,6 +4236,10 @@ Report the smoke demon parrying:
 
 Report the smoke demon dodging:
 	say "The smoke demon gently floats out of the way.";
+	rule succeeds.
+	
+Report the smoke demon waiting when the smoke demon is insane:
+	say "The smoke demon blows some smoke rings, just for fun.";
 	rule succeeds.
 
 Report the smoke demon concentrating:
@@ -4158,11 +4384,18 @@ Report the imp hitting a dead pc:
 	rule succeeds.
 
 Report the imp attacking:
-	say "The imp dives at [the noun], his tiny claws ready to strike.";
+	unless the actor is the noun:
+		say "The imp dives at [the noun], his tiny claws ready to strike.";
+	otherwise:
+		say "'I've always hated you!' the imp exclaims as it attacks itself.";
 	rule succeeds.
 
 Report the imp dodging:
 	say "The imp tries to fly away.";
+	rule succeeds.
+
+Report the imp waiting when the imp is insane:
+	say "'I will steal everything. Everything. EVERYTHING! Even myself!' the imp shouts.";
 	rule succeeds.
 
 

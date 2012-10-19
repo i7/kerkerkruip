@@ -253,6 +253,8 @@ To decide whether the player is victorious:
 				now counter is 1;
 	if counter is 0:
 		decide yes;
+	if Malygris-lover is true:
+		decide yes;
 	decide no.
 
 Every turn (this is the victory rule):
@@ -271,7 +273,7 @@ Victory message rule (this is the Nameless Horror message rule):
 Victory message rule (this is the enslaved Malygris message rule):
 	if Malygris is player-enslaved:		
 		end the story saying "You have turned Malygris into your slave!";
-		rule succeeds.	
+		rule succeeds.
 	
 To do the level 10 victory with (guy - a person):
 	say "In slaying [the guy], you have done the impossible. You absorb its soul, and though this process leaves little of your own personality intact, your powers increase a thousandfold. Even the gods bow to you.";
@@ -625,7 +627,8 @@ Section - Mageslayer
 
 Before printing the player's obituary (this is the award Mageslayer achievement rule):
 	if the player is victorious:
-		award achievement Mageslayer.
+		unless Malygris is alive:
+			award achievement Mageslayer.
 
 Section - Deathblow
 
