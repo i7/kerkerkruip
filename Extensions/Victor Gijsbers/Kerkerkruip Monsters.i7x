@@ -2625,18 +2625,22 @@ Section - Power of Bodmall
 The power of Bodmall is a power. Bodmall grants power of Bodmall.
 The power level of power of Bodmall is 4.
 The command text of power of Bodmall is "[if brambles are not in the location]brambles[otherwise]launch[end if]".
+
+The druid is a person that varies. The druid is Bodmall. [The person whose scores determine how the brambles work.]
 	
 Absorbing power of Bodmall:
 	increase melee of the player by 4;
 	increase defence of the player by 4;
 	increase permanent health of the player by 20;
 	say "As Bodmall dies, you feel her soul absorbed into your own body. ([bold type]Power of Bodmall[roman type]: +4 attack, +4 defence, +20 health, and you can summon [italic type]brambles[roman type].) In addition, a staff suddenly appears in your inventory.[paragraph break]";
-	now the player carries the druidic staff.
+	now the player carries the druidic staff;
+	now the druid is the player.
 
 Repelling power of Bodmall:
 	decrease melee of the player by 4;
 	decrease defence of the player by 4;
-	decrease permanent health of the player by 20.
+	decrease permanent health of the player by 20;
+	remove the brambles from play.
 
 Status skill rule (this is the Bodmall status skill rule):
 	if power of Bodmall is granted:
@@ -2668,7 +2672,8 @@ A smoke immunity rule (this is the smoke immune if druidic rule):
 An attack modifier rule (this is the druid using wooden weapon attack modifier rule):
 	if the global attacker is druidic and the global attacker weapon is wood:
 		say " + 1 (druid using wooden weapon)[run paragraph on]";
-		increase attack strength by 1.
+		increase attack strength by 1.		
+	
 
 Chapter - The brambles
 
@@ -2743,7 +2748,7 @@ Every turn when the main actor is druidic:
 		if n is greater than 20:
 			now n is 20;
 		if brambles duration is greater than 2 and brambles strength is 0:
-			if a random chance of 1 in 2 succeeds or a random chance of final body of the player in 30 succeeds:
+			if a random chance of 1 in 2 succeeds or a random chance of final body of the druid in 30 succeeds:
 				now brambles strength is 1;
 				say "The brambles grow [bold type]tiny thorns[roman type]!";
 		otherwise if brambles strength is greater than 0:
@@ -2755,7 +2760,7 @@ Every turn when the main actor is druidic:
 To do a thorns grow:
 	if a random chance of brambles strength in 8 succeeds:
 		unless brambles strength is less than 3:
-			unless a random chance of final body of the player in 20 succeeds:
+			unless a random chance of final body of the druid in 20 succeeds:
 				decrease brambles strength by 1;
 				say "The thorns on the brambles [bold type]wilt[roman type] and grow smaller.";
 	otherwise:
@@ -2853,7 +2858,7 @@ A fruit is a kind of thing. A fruit is usually plural-named.
 A fruit has a number called the growth threshold.
 A fruit can be player-only. [Grow only when the player is the druid.]
 
-Definition: a fruit (called the whatsname) is growable if (growth threshold of whatsname is less than (brambles duration + (final body of the player / 3))).
+Definition: a fruit (called the whatsname) is growable if (growth threshold of whatsname is less than (brambles duration + (final body of the druid / 3))).
 
 To do a fruit grow:
 	if at least one fruit is growable:
@@ -2862,7 +2867,7 @@ To do a fruit grow:
 			if whatsname is not fruit of kings:
 				if whatsname is part of the brambles:
 					if a random chance of 1 in 3 succeeds:
-						unless a random chance of final body of the player in 30 succeeds:
+						unless a random chance of final body of the druid in 30 succeeds:
 							say "All [bold type][whatsname] shrink[roman type] and disappear from the brambles.";
 							remove whatsname from play;
 				otherwise:
