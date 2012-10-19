@@ -22,7 +22,8 @@ The health of the swarm of daggers is 12.
 The melee of the swarm of daggers is 3.
 The defence of the swarm of daggers is 4.
 The body score of the swarm of daggers is 6.
-The spirit score of the swarm of daggers is 4. 
+The mind score of the swarm of daggers is 3.
+The spirit score of the swarm of daggers is 6. 
 
 When play begins:
 	let X be a random natural weapon part of the swarm of daggers;
@@ -178,6 +179,10 @@ The health of the blood ape is 8.
 The melee of the blood ape is 0.
 The defence of the blood ape is 8.
 
+The body score of the blood ape is 4.
+The mind score of the blood ape is 5.
+The spirit score of the blood ape is 4. 
+
 When play begins:
 	let X be a random natural weapon part of the blood ape;
 	now damage die of X is 6;
@@ -193,6 +198,7 @@ Aftereffects rule (this is the blood ape grows in size when hit rule):
 			say "The ape immediately licks the blood of its enemy from its knuckles. Nourished by this substance, it grows to [bold type][size of the blood ape][roman type] size!";
 			increase permanent health of blood ape by 3;
 			increase health of blood ape by 3;
+			increase body score of the blood ape by 1;
 			if size of blood ape is large or size of blood ape is gargantuan:
 				increase melee of blood ape by 1;
 			let X be a random natural weapon part of the blood ape;
@@ -344,8 +350,10 @@ The description of ravenous armadillo is "As their name suggests, ravenous armad
 The health of the ravenous armadillo is 10.
 The melee of the ravenous armadillo is -2.
 The defence of the ravenous armadillo is 5.
-The body score of the ravenous armadillo is 3.
-The spirit score of the ravenous armadillo is 4. 
+
+The body score of the ravenous armadillo is 6.
+The mind score of the ravenous armadillo is 4.
+The spirit score of the ravenous armadillo is 5. 
 
 A damage modifier rule (this is the ravenous armadillo takes less damage rule):
 	if the global defender is the ravenous armadillo:
@@ -580,8 +588,8 @@ The health of Miranda is 12.
 The melee of Miranda is 0.
 The defence of Miranda is 7.
 The body score of Miranda is 5.
-The spirit score of Miranda is 6.
 The mind score of Miranda is 7.
+The spirit score of Miranda is 5.
 
 Miranda is weapon user.
 
@@ -760,8 +768,10 @@ The description of the chain golem is "A hulking form made of [if chain golem is
 The health of the chain golem is 24.
 The melee of the chain golem is 1.
 The defence of the chain golem is 8.
-The body score of the chain golem is 4.
-The spirit score of the chain golem is 4. 
+
+The body score of the chain golem is 7.
+The mind score of the chain golem is 4.
+The spirit score of the chain golem is 7.
 
 When play begins:
 	let X be a random natural weapon part of the chain golem;
@@ -986,9 +996,10 @@ The description of the jumping bomb is "Connoisseurs consider these jumping ball
 The health of the jumping bomb is 18.
 The melee of the jumping bomb is -1.
 The defence of the jumping bomb is 8.
-The body score of the jumping bomb is 6.
-The spirit score of the jumping bomb is 4. 
-The mind score of the jumping bomb is 6.
+
+The body score of the jumping bomb is 8.
+The spirit score of the jumping bomb is 3. 
+The mind score of the jumping bomb is 3.
 
 When play begins:
 	if difficulty is 0:
@@ -1103,11 +1114,12 @@ Killing rule (this is the explode after death rule):
 				if m is less than 5, now m is 5;
 				let n be a random number between 5 and m;
 				if health of the killer-guy is not greater than n:
-					say "Your body explodes vehemently, killing [the killer-guy][if the level of the killer-guy is 0]. Unfortunately, [the killer-guy] is levelless and cannot heal you[otherwise if the level of the killer-guy is 5]. Your soul attempts to swallow that of your enemy, but [the killer-guy] is quicker and far more powerful, swallowing yours and thus coming back to life. You, however, are destroyed for all eternity[otherwise]! As your soul swallows that of your enemy whole, you feel your body reconstituting itself[end if].[paragraph break]";
+					say "Your body explodes vehemently, killing [the killer-guy][if the level of the killer-guy is 0]. Unfortunately, [the killer-guy] is levelless and cannot heal you[otherwise if the abyss of the soul is alive and the abyss of the soul is not off-stage]. Your soul attempts to swallow that of your enemy, but before this can happen, you are both sucked into the abyss of the soul[otherwise if the level of the killer-guy is 5]. Your soul attempts to swallow that of your enemy, but [the killer-guy] is quicker and far more powerful, swallowing yours and thus coming back to life. You, however, are destroyed for all eternity[otherwise]! As your soul swallows that of your enemy whole, you feel your body reconstituting itself[end if].[paragraph break]";
 					if the level of the killer-guy is not 0 and the level of the killer-guy is not 5:
-						now the health of the player is 1;
-						now the health of the killer-guy is -1;
-						have an event of the player killing killer-guy;
+						unless (the abyss of the soul is alive and the abyss of the soul is not off-stage):
+							now the health of the player is 1;
+							now the health of the killer-guy is -1;
+							have an event of the player killing killer-guy;
 				otherwise:
  					say "Your body explodes vehemently, but [the killer-guy] survives the blast.[paragraph break]".
 		
@@ -1136,6 +1148,10 @@ The description of the reaper is "He once used to be a man like any other, but h
 The health of the Reaper is 24.
 The melee of the Reaper is 1.
 The defence of the Reaper is 8.
+
+The body score of the Reaper is 6.
+The mind score of the Reaper is 5.
+The spirit score of the Reaper is 7.
 
 When play begins:
 	let X be a random natural weapon part of the Reaper;
@@ -1344,9 +1360,10 @@ Instead of listening to the demon of rage:
 The health of the demon of rage is 18.
 The melee of the demon of rage is 0.
 The defence of the demon of rage is 8.
-The body score of the demon of rage is 5.
-The spirit score of the demon of rage is 5. 
-The mind score of the demon of rage is 5.
+
+The body score of the demon of rage is 6.
+The mind score of the demon of rage is 6.
+The spirit score of the demon of rage is 6. 
 
 When play begins:
 	let X be a random natural weapon part of the demon of rage;
@@ -1516,9 +1533,10 @@ The description of the mindslug is "It is of the dreaded race of mindslugs, abom
 The health of the mindslug is 27.
 The melee of the mindslug is 2.
 The defence of the mindslug is 7.
+
 The body score of the mindslug is 3.
-The spirit score of the mindslug is 7. 
 The mind score of the mindslug is 11.
+The spirit score of the mindslug is 7. 
 
 When play begins:
 	let X be a random natural weapon part of the mindslug;
@@ -1892,9 +1910,10 @@ The level of giant tentacle is 3.
 The health of giant tentacle is 35.
 The melee of giant tentacle is 4.
 The defence of giant tentacle is 10.
-The body score of giant tentacle is 10.
+
+The body score of giant tentacle is 8.
+The mind score of giant tentacle is 10.
 The spirit score of giant tentacle is 6. 
-The mind score of giant tentacle is 6.
 
 When play begins:
 	let X be a random natural weapon part of giant tentacle;
@@ -2220,9 +2239,10 @@ Difficulty level of the minotaur is 2.
 The health of minotaur is 35.
 The melee of minotaur is 4.
 The defence of minotaur is 10.
-The body score of minotaur is 6.
-The spirit score of minotaur is 5. 
-The mind score of minotaur is 8.
+
+The body score of minotaur is 10.
+The spirit score of minotaur is 6. 
+The mind score of minotaur is 6.
 
 When play begins:
 	let X be a random natural weapon part of minotaur;
@@ -2336,6 +2356,10 @@ The health of the Healer of Aite is 20.
 The melee of the Healer of Aite is 1.
 The defence of the Healer of Aite is 8.
 
+The body score of Healer of Aite is 10.
+The mind score of Healer of Aite is 9.
+The spirit score of Healer of Aite is 9. 
+
 The group level of the Healer of Aite is 4.
 
 Heal power of the healer of Aite is 5.
@@ -2374,6 +2398,10 @@ The health of the Tormentor of Aite is 16.
 The melee of the Tormentor of Aite is 3.
 The defence of the Tormentor of Aite is 9.
 
+The body score of Tormentor of Aite is 8.
+The mind score of Tormentor of Aite is 8.
+The spirit score of Tormentor of Aite is 12. 
+
 The group level of the Tormentor of Aite is 4.
 
 The tormentor of Aite is Aite-loved.
@@ -2410,6 +2438,10 @@ The description of the defender of Aite is "This heavily armoured priest is a de
 The health of the Defender of Aite is 23.
 The melee of the Defender of Aite is 1.
 The defence of the Defender of Aite is 12.
+
+The body score of Defender of Aite is 12.
+The mind score of Defender of Aite is 10.
+The spirit score of Defender of Aite is 8. 
 
 The group level of the Defender of Aite is 4.
 
@@ -2507,9 +2539,10 @@ The level of Bodmall is 4.
 The health of Bodmall is 35.
 The melee of Bodmall is 5.
 The defence of Bodmall is 12.
-The body score of Bodmall is 8.
-The spirit score of Bodmall is 8. 
+
+The body score of Bodmall is 10.
 The mind score of Bodmall is 9.
+The spirit score of Bodmall is 9. 
 
 When play begins:
 	let X be a random natural weapon part of Bodmall;
@@ -3217,9 +3250,10 @@ The level of Malygris is 5.
 The health of Malygris is 55.
 The melee of Malygris is 7.
 The defence of Malygris is 16.
-The body score of Malygris is 9.
-The spirit score of Malygris is 9. 
-The mind score of Malygris is 12.
+
+The body score of Malygris is 11.
+The mind score of Malygris is 11.
+The spirit score of Malygris is 11. 
 
 When play begins:
 	let X be a random natural weapon part of Malygris;
