@@ -525,6 +525,18 @@ A mind bonus rule (this is the mind bonus of crown of Hargo rule):
 
 The description of Crown of Hargo is "Of all the emperors of Yahvinna, Hargo was the most arrogant and the most obstinate. This was both the foundation of his military successes and the cause of his eventual downfall. [italic type](The crown grants a +4 mind bonus, but a -1 penalty to defence.)[roman type]".
 
+Section - Diadem of the priestess (minor)
+
+The diadem of the priestess is a minor hat. The indefinite article is "the". 
+The diadem of the priestess is civilised.
+The diadem of the priestess is silver.
+
+A spirit bonus rule (this is the spirit bonus of the diadem of the priestess rule):
+	if the test subject wears the diadem of the priestess:
+		increase faculty bonus score by 2.
+
+The description of the diadem of the priestess is "This graceful diadem has been used thousands of times in rites for gods now long dead. [italic type](It grants a +2 spirit bonus.)[roman type]".
+
 Section - Metastasio's hat (minor)
 
 Metastasio's hat is a minor hat. The description of Metastasio's hat is "Metastasio envisioned whole armies that would lob grenades at the enemy and would then run away as fast as they could. This hat was meant as a prototype piece of equipment to help with the latter. But the generals of Averoigne did not share Metastasio's ideas, and Louis VIII expressly forbade further production of these hats, a decision the chroniclers have all lauded.". Metastasio's hat is proper-named.
@@ -563,6 +575,18 @@ Chance to win rule (this is the CTW smoky robe penalty rule):
 			if the smoke penalty of the location is not 0:
 				let n be the smoke penalty of the location;
 				decrease the chance-to-win by n.
+				
+Section - Shirt of muscles (minor)
+
+The shirt of muscles is a minor shirt. The indefinite article is "the". 
+The shirt of muscles is civilised.
+The shirt of muscles is cloth.
+
+A body bonus rule (this is the body bonus of the shirt of muscles rule):
+	if the test subject wears the shirt of muscles:
+		increase faculty bonus score by 2.
+
+The description of the shirt of muscles is "The wearer of this shirt immediately appears more muscled. While this may well be a merely visual effect, the magic of the shirt nevertheless increases the wearer's body score. [italic type](It grants a +2 body bonus.)[roman type]".	
 
 Section - Asbestos vest (minor)
 
@@ -719,9 +743,19 @@ Chapter - Gauntlets
 Chapter - Masks
 [Includes masks, goggles, and anything else that covers the face.]
 
-[Section - Goggles of acuity (minor)
+Section - War mask (minor)
 
-The goggles of acuity are a minor mask. They are plural-named. The indefinite article is "the". 
+The war mask is a minor mask. The description of the war mask is "This warlike metal mask is painted with the holy symbols of Aite, and is a sacred object of her religion.".
+The war mask is religious.
+The war mask is iron.
+
+A beloved of Aite rule (this is the war mask Aite rule):
+	if the test subject wears the war mask:
+		rule succeeds.
+
+Section - Goggles of acuity (major)
+
+The goggles of acuity are a major mask. They are plural-named. The indefinite article is "the". 
 The goggles of acuity are civilised.
 The goggles of acuity are leather.
 
@@ -729,12 +763,11 @@ A treasure placement rule (this is the acuity can be blindness rule):
 	if a random chance of 1 in 6 succeeds:
 		now the hidden identity of the goggles of acuity is the goggles of blindness.
 
-A perception test rule (this is the perception bonus of the goggles of acuity rule): [BUG with chain golem]
+A faculty bonus rule (this is the perception bonus of the goggles of acuity rule):
 	if the test subject wears the goggles of acuity:
-		increase test score by 2;
-		say " + 2 (goggles of acuity)[run paragraph on]".
+		increase faculty bonus score by 1.
 
-The description of the goggles of acuity is "These goggles have been magically enchanted to grant sharper eyesight to the wearer. They were made for the marquis of Savon, who wasted his eyes poring over ancient tomes in his ill-lit library. [italic type](They grant a +2 bonus on perception checks.)[roman type]".
+The description of the goggles of acuity is "These goggles have been magically enchanted to make the wearer more aware of anything that happens around him. They were originally made for the marquis of Savon, who wasted his eyes poring over ancient tomes in his ill-lit library, but their use extends far beyond that of reading glasses. [italic type](They grant a +1 bonus to body, mind and spirit.)[roman type]".
 
 Section - Goggles of blindness (cursed)
 
@@ -745,17 +778,7 @@ A blindness rule (this is the goggles of blindness rule):
 	if the test subject wears the goggles of blindness:
 		rule succeeds.
 
-The description of goggles of blindness is "These goggles prevent the wearer from seeing anything at all. A free-for-all fight between condemned criminals forced to wear such goggles is one of the most beloved shows during the Feast of Flesh; you have to smile as you recall the spectacle.".]
-
-Section - War mask (minor)
-
-The war mask is a minor mask. The description of the war mask is "This warlike metal mask is painted with the holy symbols of Aite, and is a sacred object of her religion.".
-The war mask is religious.
-The war mask is iron.
-
-A beloved of Aite rule (this is the war mask Aite rule):
-	if the test subject wears the war mask:
-		rule succeeds.
+The description of goggles of blindness is "These goggles prevent the wearer from seeing anything at all. A free-for-all fight between condemned criminals forced to wear such goggles is one of the most beloved shows during the Feast of Flesh; you have to smile as you recall the spectacle.".
 
 
 
