@@ -3367,9 +3367,10 @@ The demonic assassin is demonic.
 The health of demonic assassin is 25.
 The melee of demonic assassin is 4.
 The defence of demonic assassin is 12.
+
 The body score of demonic assassin is 8.
-The spirit score of demonic assassin is 8. 
 The mind score of demonic assassin is 8.
+The spirit score of demonic assassin is 8. 
 
 The demonic assassin is follower.
 Follower percentile chance of demonic assassin is 100.
@@ -3418,6 +3419,10 @@ The level of Nameless Horror is 10.
 
 The health of Nameless Horror is 1000.
 The melee of Nameless Horror is 50.
+
+The body score of Nameless Horror is 20.
+The mind score of Nameless Horror is 20.
+The spirit score of Nameless Horror is 20. 
 
 The Nameless Horror is horrific.
 The Nameless Horror is eyeless.
@@ -3501,9 +3506,10 @@ The level of rotting corpse is 0.
 The health of rotting corpse is 30.
 The melee of rotting corpse is 3.
 The defence of rotting corpse is 8.
-The body score of rotting corpse is 3.
-The spirit score of rotting corpse is 6. 
+
+The body score of rotting corpse is 4.
 The mind score of rotting corpse is 4.
+The spirit score of rotting corpse is 4. 
 
 When play begins:
 	let X be a random natural weapon part of the rotting corpse;
@@ -3647,9 +3653,10 @@ The level of the aswang is 0.
 The health of the aswang is 22.
 The melee of the aswang is 2.
 The defence of the aswang is 9.
+
 The body score of the aswang is 6.
-The spirit score of the aswang is 5. 
-The mind score of the aswang is 7.
+The mind score of the aswang is 6.
+The spirit score of the aswang is 6. 
 
 When play begins:
 	let X be a random natural weapon part of the aswang;
@@ -3832,9 +3839,10 @@ The level of the abyss of the soul is 0.
 The health of the abyss of the soul is 40.
 The melee of the abyss of the soul is 0.
 The defence of the abyss of the soul is 8.
-The body score of the abyss of the soul is 5.
-The spirit score of the abyss of the soul is 5. 
-The mind score of the abyss of the soul is 20.
+
+The body score of the abyss of the soul is 1.
+The mind score of the abyss of the soul is 10.
+The spirit score of the abyss of the soul is 10. 
 
 The abyss of the soul is eyeless.
 The abyss of the soul is emotionless.
@@ -3930,9 +3938,10 @@ The smoke demon is eyeless.
 The health of the smoke demon is 10.
 The melee of the smoke demon is 2.
 The defence of the smoke demon is 5.
-The body score of the smoke demon is 6.
-The spirit score of the smoke demon is 6. 
-The mind score of the smoke demon is 8.
+
+The body score of the smoke demon is 7.
+The mind score of the smoke demon is 7.
+The spirit score of the smoke demon is 7. 
 
 When play begins:
 	let X be a random natural weapon part of the smoke demon;
@@ -4052,8 +4061,9 @@ The imp is flyer.
 The health of the imp is 10.
 The melee of the imp is -2.
 The defence of the imp is 9.
-The body score of the imp is 9.
-The spirit score of the imp is 6. 
+
+The body score of the imp is 4.
+The spirit score of the imp is 4. 
 The mind score of the imp is 4.
 
 When play begins:
