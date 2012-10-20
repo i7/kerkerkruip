@@ -2097,6 +2097,10 @@ An impeded movement rule (this is the being grappled impedes movement rule):
 	if someone grapples the test subject:
 		rule fails.
 
+A detection rule (this is the cannot hide when grappled rule):
+	if someone grapples the player:
+		increase detection probability by 1000.
+
 Section - and the tentacle constricts
 
 Tentacle-constricting is an action applying to nothing.
