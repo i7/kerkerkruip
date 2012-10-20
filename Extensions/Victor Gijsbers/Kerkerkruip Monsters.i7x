@@ -1168,7 +1168,7 @@ Killing rule (this is the explode after death rule):
 		
 Status skill rule (this is the jumping bomb power status skill rule):
 	if power of the bomb is granted:
-		say "When you die, you [bold type]explode[roman type], dealing as much damage to your enemy as the enemy dealt to you. This gives you a last chance to kill your enemy, and perhaps absorb his soul and come back to life in the process. [italic type](Level 2)[roman type][line break][run paragraph on]".
+		say "When you die, you [bold type]explode[roman type], dealing an amount of damage to your enemy based on your body score. This gives you a last chance to kill your enemy, and perhaps absorb his soul and come back to life in the process. [italic type](Level 2)[roman type][line break][run paragraph on]".
 
 
 
