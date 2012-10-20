@@ -313,7 +313,7 @@ This is the unlock stuff rule:
 				if unlock hidden switch of Y is not true:			
 					add Y to X;
 	if X is not empty:
-		say "You have [bold type]unlocked[roman type] new content:[paragraph break]";
+		say "You have [bold type]unlocked[roman type] new content:[line break][run paragraph on]";
 		repeat with item running through X:
 			say "* [the item] ([unlock text of item])[line break]";
 		say "[line break]".
