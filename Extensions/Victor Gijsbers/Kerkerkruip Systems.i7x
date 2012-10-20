@@ -166,21 +166,22 @@ Carry out digging:
 				say "A magical force prevents you from digging.".
 
 To do the dig move:
-	if the combat status is not peace and the player is not hidden:
-		now the player is runner;
-		repeat with X running through alive persons in the location:
-			now X does not press the player;
-			now the player does not press X;
-			if the player is alive:
-				if the faction of X hates the faction of the player:
-					try X hitting the player;
-			now concentration of X is 0;
-		now the player is not runner;
-	if the player is alive:
-		let place be the room noun of location;
-		now retreat location is location;
-		move the player to place;
-		now the take no time boolean is false.
+	unless the player can move:
+		if the combat status is not peace and the player is not hidden:
+			now the player is runner;
+			repeat with X running through alive persons in the location:
+				now X does not press the player;
+				now the player does not press X;
+				if the player is alive:
+					if the faction of X hates the faction of the player:
+						try X hitting the player;
+				now concentration of X is 0;
+			now the player is not runner;
+		if the player is alive:
+			let place be the room noun of location;
+			now retreat location is location;
+			move the player to place;
+			now the take no time boolean is false.
 
 Last carry out looking when the location is a tunnel (this is the hint about other rooms rule):
 	let K be a list of directions;
