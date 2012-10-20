@@ -381,7 +381,7 @@ First every turn rule (this is the Nomos bonus is false rule):
 	if the main actor is the player:
 		now Nomos bonus is false.
 
-Before doing anything except attacking when Nomos bonus is true:
+Before doing anything except attacking or hitting or piercing or stunning when Nomos bonus is true:
 	if the main actor is the player:
 		if at least one hostile alive person is enclosed by the location:
 			let X be a random hostile person enclosed by the location;
