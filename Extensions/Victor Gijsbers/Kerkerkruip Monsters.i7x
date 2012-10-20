@@ -46,6 +46,9 @@ Dagger-scattered is a truth state that varies. Dagger-scattered is false.
 An aftereffects rule (this is the scatter the daggers rule):
 	if the global defender is the swarm of daggers and the attack damage is greater than 0 and the swarm of daggers is not dead:
 		say "The impact of the blow [italic type]scatters[roman type] the swarm of daggers. They will need to spend one action regrouping themselves.";
+		repeat through Table of Delayed Actions:
+			if the action entry is the action of the swarm of daggers hitting the player:
+				blank out the whole row;		
 		now dagger-scattered is true.
 
 An AI action selection rule for the swarm of daggers (this is the daggers must wait if scattered rule):
