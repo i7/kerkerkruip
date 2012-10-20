@@ -2421,7 +2421,7 @@ Repelling power of minotaur:
 	decrease permanent health of the player by 17.
 
 Status skill rule (this is the minotaur power status skill rule):
-	if power of rage is granted:
+	if power of minotaur is granted:
 		say "Your [bold type]axe proficiency[roman type] gives you a (your body)% chance of dealing 10 bonus damage when attacking with an axe. You can also use the special power of the minotaur's axe, and are stronger in the maze. [italic type](Level 3)[roman type][line break][run paragraph on]".
 
 
