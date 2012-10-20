@@ -265,7 +265,7 @@ After an actor hitting (this is the better not dodge on bridge of doom rule):
 						end the story saying "You fell into the lava";
 						stop the action;
 					otherwise:
-						say "You successfully dodge the attack of [the global attacker]. Since there is no place to dodge to on the narrow bridge, your maneuver almost ends in a drop down into the lava -- but you manage to regain your balance almost miraculously. This is something you might not want to try again.";
+						say "You successfully dodge the attack of [the global attacker]. Since there is no place to dodge to on the narrow bridge, your maneuver almost ends in a drop down into the lava -- but you manage to [bold type]regain your balance[roman type] almost miraculously. This is something you might not want to try again.";
 						now player-vulnerable-to-bridge is true;
 	continue the action.
 
@@ -275,10 +275,10 @@ An aftereffects rule (this is the hit may send you off the bridge of doom rule):
 			if the attack damage is greater than 0:
 				let n be a random number between 0 and 12;
 				if n is less than the attack damage:
-					say "Reeling from the blow, [the global defender] balance[s] on the edge of the bridge. [italic type]";
+					say "Reeling from the blow, [the global defender] balance[s] on the edge of the bridge. [italic type][run paragraph on]";
 					let n be a random number between 6 and 10;
 					test the body of the global defender against n;
-					say "[roman type]";
+					say "[roman type][run paragraph on]";
 					if test result is false:
 						if the global defender is the player:
 							if player-vulnerable-to-bridge is true:
