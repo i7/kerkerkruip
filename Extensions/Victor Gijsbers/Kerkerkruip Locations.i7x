@@ -381,34 +381,39 @@ First every turn rule (this is the Nomos bonus is false rule):
 	if the main actor is the player:
 		now Nomos bonus is false.
 
-Before doing anything except attacking or hitting or piercing or stunning when Nomos bonus is true:
-	if the main actor is the player:
-		if at least one hostile alive person is enclosed by the location:
-			let X be a random hostile person enclosed by the location;
-			say "You plan on [current action], but find yourself attacking [the X] instead.";
-			try attacking X instead;
-		otherwise:
-			say "You plan on [current action], but find your body attacking itself instead!";
-			try the player hitting the player instead;
-			if the player is dead:
-				end the story saying "Nomos is not to be toyed with".
+Before not attacklike behaviour:
+	if Nomos bonus is true:
+		if combat state of the actor is not at-react:
+			if the main actor is the player and the actor is the player:
+				if at least one hostile alive person is enclosed by the location:
+					let X be a random hostile person enclosed by the location;
+					say "You plan on [current action], but find yourself attacking [the X] instead.";
+					try attacking X instead;
+				otherwise:
+					say "You plan on [current action], but find your body attacking itself instead!";
+					try the player hitting the player instead;
+					if the player is dead:
+						end the story saying "Nomos is not to be toyed with".
 
-Before attacking when Nomos counter is greater than 0:
+Before attacklike behaviour when Nomos counter is greater than 0:
 	say "Deciding to break the command of Nomos, you plan on attacking [the noun]. However, you find yourself ";
-	if a random number between 1 and 5 is:
-		-- 1: say "doing nothing instead.";
-			try waiting instead;
-		-- 2: say "concentrating instead.";
-			try concentrating instead;
-		-- 3:
-			if the player carries at least one thing:
-				let X be a random thing carried by the player;
-				say "dropping [the X] instead.";
-				try dropping X instead;
-			otherwise: 
-				say "praising the god instead." instead;
-		-- 4: say "speaking a language you have never heard instead." instead;
-		-- 5: say "contemplating the inevitability of Death instead." instead.
+	if player is not the main actor:
+		say "doing nothing instead." instead;
+	otherwise:
+		if a random number between 1 and 5 is:
+			-- 1: say "doing nothing instead.";
+				try waiting instead;
+			-- 2: say "concentrating instead.";
+				try concentrating instead;
+			-- 3:
+				if the player carries at least one thing:
+					let X be a random thing carried by the player;
+					say "dropping [the X] instead.";
+					try dropping X instead;
+				otherwise: 
+					say "praising the god instead." instead;
+			-- 4: say "speaking a language you have never heard instead." instead;
+			-- 5: say "contemplating the inevitability of Death instead." instead.
 
 An attack modifier rule (this is the Nomos attack bonus rule):
 	if Nomos bonus is true and the global attacker is the player:

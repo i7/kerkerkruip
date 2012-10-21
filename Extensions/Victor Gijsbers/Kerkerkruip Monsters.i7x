@@ -121,6 +121,8 @@ Section - Piercing ability
 
 Piercing is an action applying to one visible thing. Understand "pierce [thing]" as piercing.
 
+Piercing is attacklike behaviour.
+
 Does the player mean piercing the player: it is unlikely.
 Does the player mean piercing an alive person: it is very likely.
 
@@ -634,6 +636,8 @@ Miranda carries the pair of nunchucks. The pair of nunchucks is readied.
 Section - Stunning blow
 
 Stunning is an action applying to one thing. Understand "stun [person]" as stunning.
+
+Stunning is attacklike behaviour.
 
 Does the player mean stunning an alive person: it is very likely.
 Does the player mean stunning the player: it is unlikely.

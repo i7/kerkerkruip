@@ -1055,6 +1055,12 @@ A damage modifier rule (this is the silver damage rule):
 
 
 
+Chapter - Attacklike behaviour
+
+Attacking is attacklike behaviour.
+Hitting is attacklike behaviour.
+
+
 
 Chapter - Doing risky things
 
