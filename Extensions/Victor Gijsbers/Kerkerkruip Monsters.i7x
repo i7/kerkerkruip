@@ -2583,7 +2583,7 @@ Report the defender of Aite attacking:
 	unless the actor is the noun:
 		say "The defender starts lumbering towards [the noun].";
 	otherwise:
-		say "'Do you think this wil hurt?' the defender asks as he attacks himself.";
+		say "'Do you think this will hurt?' the defender asks as he attacks himself.";
 	rule succeeds.
 
 Report the defender of Aite parrying:
