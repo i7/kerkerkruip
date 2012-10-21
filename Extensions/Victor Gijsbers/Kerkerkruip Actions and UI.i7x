@@ -315,9 +315,9 @@ Carry out asking status:
 	let mb be fm - mind score of the player;
 	let fs be final spirit of the player;
 	let sb be fs - spirit score of the player;	
-	say "[bold type]Body[roman type]: [run paragraph on][fb][if fb is greater than body score of the player] ([body score of the player] inherent + [bb] bonus)[end if][if fb is less than body score of the player] ([body score of the player] inherent - [bb * -1] bonus)[end if][line break][run paragraph on]";
-	say "[bold type]Mind[roman type]: [run paragraph on][fm][if fm is greater than mind score of the player] ([mind score of the player] inherent + [mb] bonus)[end if][if fm is less than mind score of the player] ([mind score of the player] inherent - [mb * -1] bonus)[end if][line break][run paragraph on]";
-	say "[bold type]Spirit[roman type]: [run paragraph on][fs][if fs is greater than spirit score of the player] ([spirit score of the player] inherent + [sb] bonus)[end if][if fs is less than spirit score of the player] ([spirit score of the player] inherent - [sb * -1] bonus)[end if][line break][run paragraph on]";
+	say "[bold type]Body[roman type]: [run paragraph on][fb][if fb is greater than body score of the player] ([body score of the player] inherent + [bb] bonus)[end if][if fb is less than body score of the player] ([body score of the player] inherent - [bb * -1] penalty)[end if][line break][run paragraph on]";
+	say "[bold type]Mind[roman type]: [run paragraph on][fm][if fm is greater than mind score of the player] ([mind score of the player] inherent + [mb] bonus)[end if][if fm is less than mind score of the player] ([mind score of the player] inherent - [mb * -1] penalty)[end if][line break][run paragraph on]";
+	say "[bold type]Spirit[roman type]: [run paragraph on][fs][if fs is greater than spirit score of the player] ([spirit score of the player] inherent + [sb] bonus)[end if][if fs is less than spirit score of the player] ([spirit score of the player] inherent - [sb * -1] penalty)[end if][line break][run paragraph on]";
 	consider the status rules;
 	consider the status skill rules;
 	say "[line break][run paragraph on]".
