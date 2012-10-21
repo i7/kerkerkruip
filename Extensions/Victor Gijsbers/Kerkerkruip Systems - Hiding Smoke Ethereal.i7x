@@ -106,6 +106,10 @@ Section - Action rules
 Carry out attacking:
 	increase detection probability by 70.
 
+An aftereffects rule (this is the be detected after successful attack rule):
+	if the global attacker is the player and the attack damage is greater than 0:
+		increase detection probability by 250.
+
 Carry out concentrating:
 	increase detection probability by 50;
 	if the player is hidden:
