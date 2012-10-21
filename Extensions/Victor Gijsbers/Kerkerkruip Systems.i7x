@@ -132,11 +132,16 @@ A thing can be a digging tool. A thing is usually not a digging tool.
 
 Check digging (this is the can only dig when carrying a digging tool rule):
 	unless the player has a digging tool:
+		take no time;
 		say "You need a suitable tool to dig." instead.
 
 Check digging (this is the only dig in connectable rooms rule):
 	unless location is connectable:
 		say "A magical force prevents you from digging." instead.
+
+Check an at-React pc digging (this is the cannot dig as reaction rule):
+	take no time;
+	say "You cannot dig as a reaction." instead.
 
 Carry out digging:
 	let x be the x noun of location;
