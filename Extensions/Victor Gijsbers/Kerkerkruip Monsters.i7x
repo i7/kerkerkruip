@@ -3116,6 +3116,7 @@ There is a fruit called buzzing fruit. The growth threshold of buzzing fruit is 
 The description of the buzzing fruit is "These fruit look like tiny hives, and sound as if swarms of angry bees live inside them.".
 
 The swarm of bees is a fixed in place thing. The description of the swarm of bees is "These bees are mad. Really mad. And they'll take it out one anyone who doesn't have druidic powers.".
+The swarm of bees is ambiguously plural.
 
 Instead of taking the swarm of bees:
 	take no time;
