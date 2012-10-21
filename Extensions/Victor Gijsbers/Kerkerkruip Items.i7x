@@ -1129,8 +1129,14 @@ A scroll is usually paper.
 Understand "scroll" as a scroll.
 Understand "scrolls" as the plural of a scroll.
 
-Reading is an action applying to one carried thing. Understand the command "read" as something new. Understand "read [thing]" as reading.
+Reading is an action applying to one thing. Understand the command "read" as something new. Understand "read [thing]" as reading.
 Does the player mean reading a scroll: it is likely.
+Does the player mean reading a tome: it is likely.
+
+Check reading when the noun is a scroll:
+	unless the player carries the noun:
+		take no time;
+		say "You'll have to get hold of [the noun] first." instead.
 
 Check reading when the noun is not a scroll (this is the can only read scrolls rule):
 	take no time;
