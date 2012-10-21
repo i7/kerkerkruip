@@ -222,7 +222,7 @@ A person has a number called body score. The body score of a person is usually 5
 A person has a number called mind score. The mind score of a person is usually 5.
 A person has a number called spirit score. The spirit score of a person is usually 5.
 
-A faculty is a kind of object. Body, mind and spirit are faculties.
+A faculty is a kind of object. body, mind and spirit are faculties.
 
 Section - Faculty bonuses
 
