@@ -613,11 +613,14 @@ Instead of praying in Temple of Sul:
 		unless the maximum prayers to Sul is greater than 0:
 			say "You pray, but there is no answer.";
 		otherwise:
-			if the player has at least one cursed corruptible thing:
+			if the player has at least one uncurseable thing:
 				let K be a list of things;
-				repeat with item running through cursed corruptible things had by the player:
-					now item is not cursed;
-					add item to K;
+				repeat with item running through uncurseable things had by the player:
+					if hidden identity of item is not non-thing and hidden identity of item is corruptible:
+						now hidden identity of item is not cursed;
+					if item is corruptible:
+						now item is not cursed;
+					add item to K; [we uncurse the hidden identity, but we do not reveal it!]
 				say "Sul uncurses [K with definite articles].";
 				decrease maximum prayers to Sul by 1;
 			otherwise if the player has at least one cursed thing:
@@ -629,6 +632,8 @@ Instead of praying in Temple of Sul:
 					let item be a random corruptible not cursed thing had by the player;
 					now item is cursed;
 					now item is curse-identified.
+
+
 
 
 Chapter - Temple of Isatzo

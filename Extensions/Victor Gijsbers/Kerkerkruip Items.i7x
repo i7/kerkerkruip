@@ -76,6 +76,7 @@ Section - Hidden identity
 [Some objects appear to be A, but are actually B. In order to do handle this smoothly, including references to it, we just use object A, and replace it with object B as soon as it is used.]
 
 The non-thing is a thing. [This is a dummy object.]
+The non-thing is incorruptible.
 
 A thing has a thing called the hidden identity. The hidden identity of a thing is usually the non-thing.
 
@@ -1349,12 +1350,17 @@ The plural of scroll of curse removal is scrolls of curse removal.
 
 There are three scrolls of curse removal.
 
+Definition: a thing (called the item) is uncurseable if (item is cursed and item is corruptible) or (hidden identity of item is not non-thing and hidden identity of item is cursed and hidden identity of item is corruptible).
+
 Carry out reading a scroll of curse removal:
-	if the player has at least one cursed corruptible thing:
+	if the player has at least one uncurseable thing:
 		let K be a list of things;
-		repeat with item running through cursed corruptible things had by the player:
-			now item is not cursed;
-			add item to K;
+		repeat with item running through uncurseable things had by the player:
+			if hidden identity of item is not non-thing and hidden identity of item is corruptible:
+				now hidden identity of item is not cursed;
+			if item is corruptible:
+				now item is not cursed;
+			add item to K; [we uncurse the hidden identity, but we do not reveal it!]
 		say "The scroll removes the curse[s] from [K with definite articles].";
 	otherwise:
 		say "The scroll does nothing, since you had no cursed items.";
