@@ -267,7 +267,7 @@ Last victory message rule (this is the normal victory message rule):
 
 Victory message rule (this is the Nameless Horror message rule):
 	if the Nameless Horror is follower:		
-		end the story saying "You have won... technically. The Nameless Horror will find you soon, and you end will not be pretty.";
+		end the story saying "You have won... technically. The Nameless Horror will find you soon, and your end will not be pretty.";
 		rule succeeds.
 
 Victory message rule (this is the enslaved Malygris message rule):
