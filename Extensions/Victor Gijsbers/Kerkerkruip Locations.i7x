@@ -1219,10 +1219,10 @@ After deciding the scope of the player while adjusted scope for the drawing room
 		unless guy is Nameless Horror:   [TODO!!! This is an ugly hack.]
 			place guy in scope.
 
-Before running the parser when the location is the drawing room:
+Before taking a player action when the location is the drawing room:
 		now adjusted scope for the drawing room is true.
 
-After running the parser:
+After taking a player action:
 	now adjusted scope for the drawing room is false.
 
 

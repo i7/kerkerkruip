@@ -680,12 +680,11 @@ The unlock text of cloak of reflection is "a cloak that can reflect ranged attac
 
 The description of the cloak of reflection is "A piece of silk with thousands of small magical mirrors sewn on it, this cloak is both beautiful and useful. It will sometimes, though not infallibly, reflect back ranged attacks to the attacker.".
 
-First check an actor hitting (this is the cloak of reflection rule):
-	if the noun wears the cloak of reflection:
-		if the global attacker weapon is ranged:
-			if a random chance of 2 in 7 succeeds:
-				say "[if the noun is the player]The[otherwise][Possessive of the noun][end if] cloak of reflection [bold type]reflects[roman type] the attack back to [the actor]!";
-				try the actor hitting the actor instead.
+Check an actor hitting when the noun wears the cloak of reflection (this is the cloak of reflection rule):
+	if the global attacker weapon is ranged:
+		if a random chance of 2 in 7 succeeds:
+			say "[if the noun is the player]The[otherwise][Possessive of the noun][end if] cloak of reflection [bold type]reflects[roman type] the attack back to [the actor]!";
+			try the actor hitting the actor instead.
 
 A dungeon interest rule (this is the Malygris sometimes wears the cloak of reflection rule):
 	if a random chance of 1 in 10 succeeds:
@@ -1898,18 +1897,17 @@ The special weapon info of the backstabber is "; sometimes attacks a random pers
 
 Making-backstab is a truth state that varies. Making-backstab is false.
 
-First check an actor hitting (this is the hitting with the backstabber rule):
-	if the global attacker weapon is the backstabber:
-		if making-backstab is false:
-			if a random chance of 1 in 2 succeeds:
-				let X be a random alive person in the location of the actor;
-				unless X is the noun:
-					say "The [bold type]backstabber[roman type] attacks [X] instead!";
-					now making-backstab is true;
-					try the actor hitting X instead.
+Check an actor hitting when the global attacker weapon is the backstabber (this is the hitting with the backstabber rule):
+	if making-backstab is false:
+		if a random chance of 1 in 2 succeeds:
+			let X be a random alive person in the location of the actor;
+			unless X is the noun:
+				say "The [bold type]backstabber[roman type] attacks [X] instead!";
+				now making-backstab is true;
+				try the actor hitting X;
+				now making-backstab is false;
+				stop the action;
 
-Check an actor hitting (this is the reset backstab rule):
-	now making-backstab is false.
 
 
 Section - Vampiric dagger (major)

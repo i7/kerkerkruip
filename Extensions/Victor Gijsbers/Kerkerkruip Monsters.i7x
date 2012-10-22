@@ -11,7 +11,7 @@ Chapter - Level 1 - Swarm of Daggers
 
 Section - Definitions
 
-The swarm of daggers is a monster. "A swarm of small daggers is flying through the air like a flock of birds, their sharp points eagerly seeking your flesh." The level of swarm of daggers is 1.
+The swarm of daggers is a monster. "A swarm of small daggers is flying through the air like a flock of birds, their sharp points eagerly seeking flesh." The level of swarm of daggers is 1.
 
 The swarm of daggers is ambiguously plural.
 
@@ -1847,7 +1847,7 @@ Absorbing power of the mindslug:
 	increase melee of the player by 3;
 	increase defence of the player by 3;
 	increase permanent health of the player by 15;
-	say "As the mindslug dies, you feel its powerful intelligence absorbed into your own body. ([bold type]Power of the mindslug[roman type]: +3 attack, +3 defence, +15 health, and you can attempt to [italic type]dominate[roman type] an enemy.)[paragraph break]";
+	say "As the mindslug dies, you feel its powerful intelligence absorbed into your own body. ([bold type]Power of the mindslug[roman type]: +3 attack, +3 defence, +15 health, and you can attempt to [italic type]enslave[roman type] an enemy.)[paragraph break]";
 	make helpers followers.
 
 Repelling power of the mindslug:

@@ -154,13 +154,6 @@ After reading a command (this is the d might mean dodge rule):
 
 
 
-Section - Because we have teleporting creatures
-
-Check an actor hitting (this is the stop hitting if the target has teleported rule):
-	unless the location of the actor is the location of the noun:
-		stop the action;
-
-
 [This could be fun, but it needs to be an option that can be set to: none, short, medium, long.]
 [The non-standard attack roll rule is listed instead of the standard attack roll rule in the basic attack roll rules.
 
