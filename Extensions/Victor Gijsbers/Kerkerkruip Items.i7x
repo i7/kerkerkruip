@@ -1143,9 +1143,8 @@ A scroll name is a kind of value.
 Some scroll names are defined by the Table of Scroll Names.
 
 Table of Scroll Names
-scroll name	printed name	obfuscated
-unnamed-scroll	""	false
-mort	"MORT EILYSH"	true
+scroll name	printed name	obfuscated	unhealthy
+mort	"MORT EILYSH"	true	false
 naar	"NAAR OD ERAE"	true
 dolp	"DOLP ZEEZ"	true
 chetnak	"CHETNAK"	true
@@ -1160,6 +1159,10 @@ petrichor	"PETRICHOR"	true
 malleote	"MALLEOTE"	true
 paven	"PAVEN"	true
 ancholain	"ANCHOLAIN"	true
+
+Definition: a scroll name is obfuscated if obfuscated of it is true.
+Definition: a scroll name is unhealthy if unhealthy of it is true.
+Definition: a scroll name is healthy if obfuscated of it is false and unhealthy of it is false.
 
 Understand "mort" and "eilysh" as mort.
 Understand "naar" and "od" and "erae" as naar.
@@ -1234,11 +1237,7 @@ To repeat with (loopvar - nonexisting object variable) running through the/-- in
 	(- objectloop( {loopvar} && {loopvar} ofclass {kind} ) -).
 
 When play begins (this is the obfuscate scrolls rule):
-	[ Get the list of obfuscated scroll names ]
-	let names be a list of scroll names;
-	repeat with N running through scroll names:
-		if obfuscated of N is true:
-			add N to names;
+	let names be the list of obfuscated scroll names;
 	sort names in random order;
 	repeat with S running through the kinds of scroll:
 		let N be entry 1 of names;
@@ -1271,8 +1270,6 @@ A scroll of teleportation is teleportation.
 The description of a scroll of teleportation is "Reading this scroll will instantaneously transport the reader to another location.".
 The plural of scroll of teleportation is scrolls of teleportation.
 
-There are three scrolls of teleportation.
-
 Carry out reading a scroll of teleportation:
 	unless teleportation is impossible for the player:
 		teleport the player;
@@ -1283,15 +1280,13 @@ Carry out reading a scroll of teleportation:
 Section - Scroll of Ghoulification		
 
 Table of Scroll Names (continued)
-scroll name
-ghoulification
+scroll name	unhealthy
+ghoulification	true
 
 A scroll of ghoulification is a kind of scroll.
 A scroll of ghoulification is ghoulification.
 The description of a scroll of ghoulification is "Reading this scroll will turn you into an undead ghoul.".
 The plural of scroll of ghoulification is scrolls of ghoulification.
-
-There are two scrolls of ghoulification.
 
 Carry out reading a scroll of ghoulification:
 	ghoulify the player;
@@ -1307,8 +1302,6 @@ A scroll of knowledge is a kind of scroll.
 A scroll of knowledge is knowledge.
 The description of a scroll of knowledge is "Reading this scroll will grant you knowledge about all other scrolls.".
 The plural of scroll of knowledge is scrolls of knowledge.
-
-There are three scrolls of knowledge.
 
 Carry out reading a scroll of knowledge:
 	say "The nature of scrolls suddenly becomes clear to you.";
@@ -1330,8 +1323,6 @@ A scroll of curse removal is a kind of scroll.
 A scroll of curse removal is curse removal.
 The description of a scroll of curse removal is "Reading this scroll will remove any curses from the item you are carrying."
 The plural of scroll of curse removal is scrolls of curse removal.
-
-There are three scrolls of curse removal.
 
 Definition: a thing (called the item) is uncurseable if (item is cursed and item is corruptible) or (hidden identity of item is not non-thing and hidden identity of item is cursed and hidden identity of item is corruptible).
 
@@ -1364,8 +1355,6 @@ A scroll of shadows is shadows-name.
 The description of a scroll of shadows is "Reading this scroll will make you hidden, though it may fail if enemies are nearby."
 The plural of scroll of shadows is scrolls of shadows.
 
-There are three scrolls of shadows.
-
 Carry out reading a scroll of shadows:
 	if the player is hidden:
 		say "The scroll disappears and you remain hidden.";
@@ -1376,15 +1365,13 @@ Carry out reading a scroll of shadows:
 Section - Scroll of Summoning
 
 Table of Scroll Names (continued)
-scroll name
-summoning
+scroll name	unhealthy
+summoning	true
 
 A scroll of summoning is a kind of scroll.
 A scroll of summoning is summoning.
 The description of a scroll of summoning is "Reading this scroll will summon an undead monster. Be careful, for it does not make the creature friendly."
 The plural of scroll of summoning is scrolls of summoning.
-
-There are two scrolls of summoning.
 
 Carry out reading a scroll of summoning:
 	if at least one alive undead person is off-stage:
@@ -1423,8 +1410,6 @@ A scroll of the blade is a kind of scroll.
 A scroll of the blade is the-blade.
 The description of a scroll of the blade is "Reading this scroll will make a temporary adamantine blade appear in your hands.".
 The plural of scroll of the blade is scrolls of the blade.
-
-There are three scrolls of the blade.
 
 Carry out reading a scroll of the blade:
 	repeat with item running through weapons enclosed by the player:
@@ -1476,8 +1461,6 @@ A scroll of protection is protection.
 The description of a scroll of protection is "Reading this scroll will protect you against all damage from the next one or two attacks."
 The plural of scroll of protection is scrolls of protection.
 
-There are three scrolls of protection.
-
 Carry out reading a scroll of protection:
 	say "You feel protected.";
 	if hit protection of the player is less than 2:
@@ -1506,8 +1489,6 @@ A scroll of etherealness is etherealness.
 The description of a scroll of etherealness is "Reading this scroll will temporarily turn you ethereal."
 The plural of scroll of etherealness is scrolls of etherealness.
 
-There are three scrolls of etherealness.
-
 Carry out reading a scroll of etherealness:
 	say "You become ethereal[if the player has a not radiance thing]; your possessions drop to the ground[end if]!";
 	make the player ethereal;
@@ -1524,8 +1505,6 @@ A scroll of skill is a kind of scroll.
 A scroll of skill is skill.
 The description of a scroll of skill is "Reading this scroll will give you a temporary bonus to body, mind and spirit."
 The plural of scroll of skill is scrolls of skill.
-
-There are three scrolls of skill.
 
 Carry out reading a scroll of skill:
 	say "You suddenly feel very skilled!";
@@ -1573,15 +1552,13 @@ An unholy wave rule (this is the standard unholy wave rule):
 		end the story saying "Your life force has been negated".
 
 Table of Scroll Names (continued)
-scroll name
-death
+scroll name	unhealthy
+death	true
 
 A scroll of death is a kind of scroll.
 A scroll of death is death.
 The description of a scroll of death is "Reading this scroll will deal damage to all non-undead creatures in the room."
 The plural of scroll of death is scrolls of death.
-
-There are three scrolls of death.
 
 Carry out reading a scroll of death:
 	consider the unholy wave rules;

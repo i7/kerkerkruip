@@ -1268,33 +1268,69 @@ Description of the large pile of body parts is "A gruesome collection of legs, a
 Instead of taking the large pile of body parts:
 	say "You definitely do not want any of the body parts.".
 
-Pile-searched is a truth state that varies. Pile-searched is false.
+Pile search count is a number variable.
 
-Body parts storage is a container.
-The body parts storage is part of the pile of body parts.
-It is closed, unopenable and privately-named.
-One scroll of ghoulification is in the body parts storage.
-One scroll of summoning is in the body parts storage.
-One scroll of death is in the body parts storage.
-
+[ The probabilities of finding a healthy scroll, unhealthy scroll, or the corpse depends on how many times we've searched the pile already. The chance of finding both a healthy scroll and the corpse increases the more we search. ]
 Instead of searching the large pile of body parts:
-	if pile-searched is false:
-		if a random chance of 1 in 3 succeeds:
-			now pile-searched is true;
-			if rotting corpse is off-stage and rotting corpse is alive:
-				say "As you search the pile, a rotting corpse jumps out!";
-				move rotting corpse to location of the large pile of body parts;
-				now the player is not hidden;
+	let N be a random number between 0 and 99;
+	if pile search count is:
+		-- -1:
+			say "You find nothing else in the pile." instead;
+		-- 0:
+			if N < 60:
+				find an unhealthy scroll;
+			otherwise if N < 90:
+				find a healthy scroll;
 			otherwise:
-				say "The most valuable thing you find is a putrefying arm that might function as a club.";
-				move putrefying arm to player;
-		otherwise:
-			now a random off-stage scroll is in the body parts storage;
-			let item be a random scroll in the body parts storage;
-			now item is carried by the player;
-			say "You have found [an item] buried between the body parts. It is slightly wet and smelly, but still usable.";
+				find the corpse;
+		-- 1:
+			if N < 35:
+				find an unhealthy scroll;
+			otherwise if N < 85:
+				find a healthy scroll;
+			otherwise:
+				find the corpse;
+		-- 2:
+			if N < 10:
+				find an unhealthy scroll;
+			otherwise if N < 60:
+				find a healthy scroll;
+			otherwise:
+				find the corpse;
+		-- otherwise:
+			if N < 10:
+				find an unhealthy scroll;
+			otherwise if N < 20:
+				find a healthy scroll;
+			otherwise:
+				find the corpse;
+	increment pile search count;
+
+To find an unhealthy scroll:
+	find a scroll of type random unhealthy scroll name;
+
+To find a healthy scroll:
+	find a scroll of type random healthy scroll name;
+
+To find a scroll of type (N - scroll name):
+	let the template be the default value of scroll;
+	repeat with S running through scrolls:
+		if the true name of S is N:
+			now the template is S;
+			break;
+	let the new scroll be a new object cloned from the template;
+	now the new scroll is carried by the player;
+	say "You have found [a new scroll] buried between the body parts. It is slightly wet and smelly, but still usable.";
+
+To find the corpse:
+	if rotting corpse is off-stage and rotting corpse is alive:
+		say "As you search the pile, a rotting corpse jumps out!";
+		move rotting corpse to location of the large pile of body parts;
+		now the player is not hidden;
 	otherwise:
-		say "You find nothing else in the pile.".
+		say "The most valuable thing you find is a putrefying arm that might function as a club.";
+		move putrefying arm to player;
+	now pile search count is -2; [ Account for the increment ]
 
 The putrefying arm is a 	weapon.
 The description of putrefying arm is "Although it smells terribly, this arm is actually quite sturdy. You could beat people with it.".
