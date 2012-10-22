@@ -30,13 +30,13 @@ Include Kerkerkruip Events by Victor Gijsbers.
 Include Kerkerkruip ATTACK Additions by Victor Gijsbers.
 Include Kerkerkruip Systems by Victor Gijsbers.
 Include Kerkerkruip Systems - Hiding Smoke Ethereal by Victor Gijsbers.
+Include Kerkerkruip Actions and UI by Victor Gijsbers.
 Include Kerkerkruip Items by Victor Gijsbers.
 Include Kerkerkruip Locations by Victor Gijsbers.
 Include Kerkerkruip Scenery by Victor Gijsbers.
 Include Kerkerkruip Monsters by Victor Gijsbers.
 Include Kerkerkruip Events and Specials by Victor Gijsbers.
 Include Kerkerkruip Ugly Special Cases by Victor Gijsbers.
-Include Kerkerkruip Actions and UI by Victor Gijsbers.
 Include Kerkerkruip Start and Finish by Victor Gijsbers.
 Include Kerkerkruip Final Declarations by Victor Gijsbers.
 

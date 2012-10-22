@@ -531,6 +531,7 @@ Understand "drop [something] in [something]" as inserting it into.
 Understand "use [clothing]" as wearing.
 Understand "use [scroll]" as reading.
 Understand "use [grenade]" as throwing.
+Understand "use [fungicide contraption]" as spraying.
 
 Understand "activate [something]" as switching on.
 Understand "deactivate [something]" as switching off.
@@ -568,6 +569,25 @@ Instead of asking something for:
 Report talking to:
 	say "'[one of]I'll get back at the prince.[or]I will defeat all my enemies![or]I am immortal.[or]Pride cometh before the fall.[at random]', you say[if the player is hidden], revealing your presence[end if].[run paragraph on][line break][paragraph break]";
 	now the player is not hidden.
+
+
+
+Chapter - Reading
+
+Reading is an action applying to one thing. Understand the command "read" as something new. Understand "read [thing]" as reading.
+A thing can be readable.
+Does the player mean reading a readable thing: it is likely.
+
+Check reading a not readable thing (this is the can only read readable things rule):
+	take no time;
+	say "You cannot read that." instead.
+
+Check reading when the player is blind (this is the cannot read when blind rule):
+	take no time;
+	say "[The noun] has not been written in braille." instead.
+
+
+
 
 
 Chapter - Replacing "You can see" is not a joke

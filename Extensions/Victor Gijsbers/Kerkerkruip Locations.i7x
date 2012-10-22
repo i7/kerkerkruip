@@ -765,7 +765,7 @@ The symbols of death are scenery in The Crypt. The symbols of death are plural-n
 
 Symbols-of-death-number is a number that varies. Symbols-of-death-number is 0.
 
-Before reading the symbols of death:
+Instead of reading the symbols of death:
 	if Symbols-of-death-number is 0:
 		now Symbols-of-death-number is 1;
 		let n be a random number between 1 and 5;

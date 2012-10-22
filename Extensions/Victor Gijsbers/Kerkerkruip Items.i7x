@@ -1127,25 +1127,9 @@ A scroll is a kind of thing. There is a scroll. [So that iterating through scrol
 A scroll is usually improper-named.
 A scroll is usually civilised.
 A scroll is usually paper.
+A scroll is readable.
 Understand "scroll" as a scroll.
 Understand "scrolls" as the plural of a scroll.
-
-Reading is an action applying to one thing. Understand the command "read" as something new. Understand "read [thing]" as reading.
-Does the player mean reading a scroll: it is likely.
-Does the player mean reading a tome: it is likely.
-
-Check reading when the noun is a scroll:
-	unless the player carries the noun:
-		take no time;
-		say "You'll have to get hold of [the noun] first." instead.
-
-Check reading when the noun is not a scroll (this is the can only read scrolls rule):
-	take no time;
-	say "You cannot read that." instead.
-
-Check reading when the player is blind (this is the cannot read when blind rule):
-	take no time;
-	say "[The noun] has not been written in braille." instead.
 
 Carry out reading a scroll:
 	remove the noun from play.
@@ -1270,9 +1254,9 @@ To identify (S - a scroll):
 		now I is identified;
 		now the scroll name of I is the true name of I;
 
-First carry out reading an unidentified scroll (called S):
-	identify S;
-	say "It is [a S]!";
+First carry out reading an unidentified scroll:
+	identify the noun;
+	say "It is [a noun]!";
 
 
 
@@ -2426,6 +2410,7 @@ Instead of eating a package of ment (this is the ment cannot be eaten rule):
 Chapter - Tomes
 
 A tome is a kind of thing.
+A tome is readable.
 The indefinite article of a tome is usually "the".
 
 The description of a tome is usually "Who knows what will happen if you decide to read this legendary work of magic?"
@@ -2458,13 +2443,12 @@ silver			adamant
 
 [The description of tome of transmutation is "When read, this powerful book will turn all [material-adjective of first-trans-material] objects into [second-trans-material].".]
 
-Instead of reading the tome of transmutation:
+Carry out reading the tome of transmutation:
 	say "You speak the mighty words of power. In a flare of magical light, the tome disappears -- and all [material-adjective of first-trans-material] objects have turned into [second-trans-material]!";
 	remove tome of transmutation from play;
 	repeat with item running through things:
 		if material of item is first-trans-material:
 			now material of item is second-trans-material;
-	rule succeeds.
 
 
 Section - Tome of Sudden Death
@@ -2479,11 +2463,10 @@ Every turn when sudden-death-boolean is true:
 	repeat with guy running through alive persons:
 		now health of guy is 1.
 
-Instead of reading the tome of sudden death:
+Carry out reading the tome of sudden death:
 	say "Life is fragile. A single blow could kill a man.";
 	remove tome of sudden death from play;
 	now sudden-death-boolean is true;
-	rule succeeds.
 
 
 Section - Tome of the Brightest Flame
@@ -2494,7 +2477,7 @@ Tome of the Brightest Flame is magical.
 
 Brightest-flame-counter is a number that varies. Brightest-flame-counter is 0.
 
-Instead of reading the tome of the brightest flame:
+Carry out reading the tome of the brightest flame:
 	say "You have chosen fame over a long life. Achieve it while you may!";
 	now hit protection of the player is 50;
 	now brightest-flame-counter is 31.
