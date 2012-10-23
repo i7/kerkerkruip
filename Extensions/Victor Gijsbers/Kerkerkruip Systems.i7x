@@ -182,7 +182,7 @@ To do the dig move:
 						try X hitting the player;
 				now concentration of X is 0;
 			now the player is not runner;
-		if the player is alive:
+		if the player is alive and the player can move:
 			let place be the room noun of location;
 			now retreat location is location;
 			move the player to place;
