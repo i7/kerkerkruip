@@ -73,6 +73,8 @@ A fragmentation rule (this is the basic fragmentation damage rule):
 		decrease n by 1;
 		if n is 0:
 			say ""; [For an extra newline. Don't ask.]
+		if health of guy is less than 1:
+			clean the table of delayed actions for guy;
 	if health of the player is less than 1:
 		if fragmentation-guy is the player:
 			end the story saying "You have blown yourself to pieces";
