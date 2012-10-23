@@ -1479,7 +1479,7 @@ A damage multiplier rule when the hit protection of the global defender is great
 	decrease hit protection of the global defender by 1.
 
 
-Section - Scroll of Etherealness
+[Section - Scroll of Etherealness
 
 Table of Scroll Names (continued)
 scroll name
@@ -1493,7 +1493,7 @@ The plural of scroll of etherealness is scrolls of etherealness.
 Carry out reading a scroll of etherealness:
 	say "You become ethereal[if the player has a not radiance thing]; your possessions drop to the ground[end if]!";
 	make the player ethereal;
-	now ethereal timer of the player is a random number between 10 and 15;
+	now ethereal timer of the player is a random number between 10 and 15;]
 		
 
 Section - Scroll of Skill
@@ -1716,9 +1716,9 @@ Section - Thief [shadows, teleport, ethereal], (major)
 The thief-scroll-pack is a major treasure pack.
 The thief-scroll-pack is civilised.
 The difficulty level of thief-scroll-pack is 1.
-One scroll of shadows is in the thief-scroll-pack.
+Two scrolls of shadows are in the thief-scroll-pack.
 One scroll of teleportation is in the thief-scroll-pack.
-One scroll of etherealness is in the thief-scroll-pack.
+[One scroll of etherealness is in the thief-scroll-pack.]
 
 
 
