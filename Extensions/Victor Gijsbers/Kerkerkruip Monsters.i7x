@@ -974,6 +974,8 @@ Chapter - Ability - Lashing
 
 Lashing is an action applying to nothing. Understand "lash" and "lash out" as lashing.
 
+Lashing is attacklike behaviour.
+
 Check lashing:
 	if power of the chains is not granted:
 		take no time;
