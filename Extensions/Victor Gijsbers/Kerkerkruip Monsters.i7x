@@ -4201,12 +4201,26 @@ Every turn (this is the tweak smoke demon rule):
 
 To have the smoke demon disappear from (place - a room):
 	remove smoke demon from play;
+	while someone grapples the smoke demon:
+		let guy be a random person who grapples the smoke demon;
+		now guy does not grapple the smoke demon;
 	if place is the location:
 		say "With an eery cry, the [bold type]smoke demon dissipates[roman type]!".
 
 To have the smoke demon appear:
 	now health of the smoke demon is 10;
 	now faction of the smoke demon is horrific-faction;
+	now concentration of the smoke demon is 0;
+	now melee of the smoke demon is 2;
+	now defence of the smoke demon is 5;
+	now body score of the smoke demon is 7;
+	now mind score of the smoke demon is 7;
+	now spirit score of the smoke demon is 7;
+	now size of smoke demon is medium;
+	now stun count of the smoke demon is 0;
+	now stun strength of the smoke demon is 0;
+	now smoke demon is unseen;
+	now last-seen-location of the smoke demon is Null-Room;
 	move smoke demon to the location;
 	say "The smoke coalesces to [bold type]form a smoke demon[roman type]!".
 
