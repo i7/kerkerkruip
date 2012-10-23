@@ -982,6 +982,7 @@ Instead of throwing the Blessed Grenade:
 		say "As the grenade explodes you hear the singing of angels, several of whom swoop down from the heavens with huge swords and eviscerate [K with definite articles].";
 		repeat with guy running through K:
 			now health of guy is -1;
+			clean the table of delayed actions for the guy;
 		if the player is dead:
 			end the story saying "The undead should not seek blessings.".
 
