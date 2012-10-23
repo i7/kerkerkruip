@@ -3108,8 +3108,8 @@ Instead of attacking the swarm of bees:
 	say "They're everywhere! There's no chance of killing this swarm.".
 	
 Every turn when the swarm of bees is in the location:
-	if at least one not druidic person is in the location:
-		let guy be a random not druidic person in the location;
+	if at least one alive not druidic person is in the location:
+		let guy be a random alive not druidic person in the location;
 		let n be a random number between 1 and 3;
 		decrease health of guy by n;
 		say "The swarm of bees attacks [the guy], dealing [bold type][n] damage[roman type][if health of guy is less than 1], which is [bold type]deadly[roman type][otherwise if concentration of guy is greater than 0] and breaking [bold type]concentration[roman type][end if].";
