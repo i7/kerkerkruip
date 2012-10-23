@@ -2124,6 +2124,7 @@ Carry out the giant tentacle tentacle-constricting:
 		say "The giant tentacle tightens its muscles, dealing [bold type][constriction level] damage[roman type] to [the name of the chosen target].[if m is greater than 0] [The preventer] get[s] smashed in the process[end if]";
 		if the chosen target is dead:
 			have an event of the giant tentacle killing the chosen target;
+			now constriction level is 0;
 		if the player is dead:
 			end the story saying "You suffocate in the tentacle's deadly embrace.";
 	otherwise: [constriction prevention >= constriction level: no damage]
