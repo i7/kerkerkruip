@@ -24,10 +24,11 @@ First Standard AI rule for a person (called P) (this is the do nothing when all 
 	let conflict be false;
 	let detected be false;
 	repeat with X running through all alive persons enclosed by the location:
-		if P opposes X:
-			now conflict is true;
-			if X is not hidden:
-				now detected is true;
+		unless P is X:
+			if P opposes X:
+				now conflict is true;
+				if X is not hidden:
+					now detected is true;
 	if conflict is true and detected is false:
 		say "[The P] [one of]remains unaware of your presence[or]does not notice you[or]does not detect your presence[at random].";
 		rule succeeds.
