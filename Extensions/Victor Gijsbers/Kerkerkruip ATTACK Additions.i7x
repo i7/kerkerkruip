@@ -421,6 +421,16 @@ To say parry and dodge info of (item - a weapon):
 A weapon has some text called the special weapon info. The special weapon info of a weapon is usually "".
 
 
+Section - Cleaning the Table of Delayed Actions
+
+To clean the table of delayed actions for (guy - a person):
+	repeat through the table of delayed actions:
+		if the actor part of the action entry is the guy or the noun part of the action entry is the guy:
+			blank out the whole row.
+
+A killing rule (this is the don't do delayed action with killed guy rule):
+	clean the table of delayed actions for killed-guy.
+
 
 
 Kerkerkruip ATTACK Additions ends here.

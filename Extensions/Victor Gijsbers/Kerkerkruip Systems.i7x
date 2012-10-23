@@ -759,6 +759,7 @@ Carry out an actor teleporting (this is the standard monster teleport rule):
 			say "[The actor] suddenly teleports away!";
 		if see-arriving is true:
 			say "[The actor] suddenly teleports into the room!";
+	clean the table of delayed actions for the actor;
 	have a teleportation event.
 
 
@@ -779,6 +780,7 @@ To teleport the player:
 	say "A sickening feeling, and then you find yourself in --[paragraph break]";
 	now retreat location is teleportation-destination;
 	consider the sudden combat reset rules;
+	clean the table of delayed actions for the player;
 	move player to teleportation-destination;
 	now the take no time boolean is false.
 
@@ -1710,7 +1712,8 @@ Last falling rule (this is the standard deal falling damage rule):
 				decrease the health of the falling-test-person by m;
 				now concentration of the falling-test-person is 0;
 				if the location of falling-test-person is the location of the player and m is not 0:
-					say "[The falling-test-person] receives [m] damage from the fall.".
+					say "[The falling-test-person] receives [m] damage from the fall.";
+			clean the table of delayed actions for the falling-test-person.
 
 
 
