@@ -2024,12 +2024,6 @@ An AI target selection rule for a person (called target) when the running AI is 
 	if the giant tentacle grapples the target and the target is not the giant tentacle:
 		increase the Weight by 1000;
 
-Check going (this is the cannot go when grappled rule):
-	if at least one person grapples the player:
-		let X be a random person grappling the player;
-		take no time;
-		say "Caught in [the X], you are unable to run away!" instead.
-
 Check wearing (this is the cannot wear when grappled rule):
 	if at least one person grapples the player:
 		let X be a random person grappling the player;
@@ -2047,18 +2041,6 @@ Check taking (this is the cannot take when grappled rule):
 		let X be a random person grappling the player;
 		take no time;
 		say "Caught in [the X], you are unable to reach [the noun]." instead.
-
-Check entering (this is the cannot enter when grappled rule):
-	if at least one person grapples the player:
-		let X be a random person grappling the player;
-		take no time;
-		say "Caught in [the X], you are unable to move." instead.
-
-Check exiting (this is the cannot exit when grappled rule):
-	if at least one person grapples the player:
-		let X be a random person grappling the player;
-		take no time;
-		say "Caught in [the X], you are unable to move." instead.
 
 Check taking inventory (this is the cannot take inventory when grappled rule):
 	if at least one person grapples the player:

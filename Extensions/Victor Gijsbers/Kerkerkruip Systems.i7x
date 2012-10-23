@@ -171,7 +171,7 @@ Carry out digging:
 				say "A magical force prevents you from digging.".
 
 To do the dig move:
-	unless the player can move:
+	if the player can move:
 		if the combat status is not peace and the player is not hidden:
 			now the player is runner;
 			repeat with X running through alive persons in the location:
@@ -1582,7 +1582,7 @@ A sudden combat reset rule (this is the reset the player to at-Inactive rule):
 
 Chapter - Impeded movement
 
-[In some circumstances, you cannot move. This affects stuff like falling into the lava or jumping down the staircase -- though not reading a scroll of teleportation. We make one universal silent check. We are not using it for going, entering and so on: in such cases, we probably want to print special prose. We do check it after the retreat-induced attacks, though, because these may have stopped us from retreating.]
+[In some circumstances, you cannot move. This affects stuff like falling into the lava or jumping down the staircase -- though not reading a scroll of teleportation. We make one universal silent check. We use it for going, entering and so on. We also check it after the retreat-induced attacks because these may have stopped us from retreating.]
 
 The impeded movement rules are a rulebook.
 
@@ -1593,6 +1593,22 @@ To decide whether (guy - a person) can move:
 		decide no;
 	decide yes.
 
+Check entering when not the player can move (this is the cannot enter when unable to move rule):
+	take no time;
+	say "You are unable to move." instead.
+
+Check exiting when not the player can move (this is the cannot exit when unable to move rule):
+	take no time;
+	say "You are unable to move." instead.
+
+Check going when not the player can move (this is the cannot go when grappled rule):
+	take no time;
+	say "You are unable to move." instead.
+		
+Check getting off when not the player can move (this is the cannot get off when unable to move rule):
+	take no time;
+	say "You are unable to move." instead.
+				
 
 Chapter - Forced action
 

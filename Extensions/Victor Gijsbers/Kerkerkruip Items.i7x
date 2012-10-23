@@ -718,14 +718,15 @@ Initiative update rule (this is the boots of the boots of wandering give initiat
 			increase the initiative of the player by 5.
 
 Before doing anything when the player wears the boots of wandering (this is the boots of wandering weirdness rule):
-	if a random chance of 1 in 40 succeeds:
-		if at least one room is adjacent to the location of the player:
-			let place2 be the location of the player; [needed because of a bug in inform]
-			let place be a random room which is adjacent to place2;
-			let way be the direction from the location of the player to place;
-			say "Before you can do anything, the [bold type]boots of wandering[roman type] attempt to run [way]!";
-			now forced-action is true;
-			try going way instead.
+	if the player can move:
+		if a random chance of 1 in 40 succeeds:
+			if at least one room is adjacent to the location of the player:
+				let place2 be the location of the player; [needed because of a bug in inform]
+				let place be a random room which is adjacent to place2;
+				let way be the direction from the location of the player to place;
+				say "Before you can do anything, the [bold type]boots of wandering[roman type] attempt to run [way]!";
+				now forced-action is true;
+				try going way instead.
 
 
 

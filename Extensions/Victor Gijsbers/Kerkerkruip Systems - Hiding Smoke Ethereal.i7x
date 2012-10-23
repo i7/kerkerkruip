@@ -407,26 +407,27 @@ Moving through solid rock is not habitable.
 [Feeling the rock.]
 
 Before going when the player is ethereal:
-	unless x-coordinate of location is 100: [Unplaced rooms are at 100, 100, 100, and should handle etherealness in some other way if they wish to. E.g, the maze, the elemental plane of smoke.]
-		let x be the x noun of location;
-		let y be the y noun of location;
-		let z be the z noun of location;
-		if the space at x by y by z is free: [no room there -> move to solid rock]
-			say "You walk through rock.";
-			unless player is in moving through solid rock:
-				move player to moving through solid rock;
-			now x-coordinate of moving through solid rock is x;
-			now y-coordinate of moving through solid rock is y;
-			now z-coordinate of moving through solid rock is z;
-			stop the action;			
-		otherwise: [room there -> just move the player]
-			let item be the room at x by y by z;
-			if item is the room noun from the location: 
-				continue the action; [this is the case of normal movement]
-			otherwise:
-				say "You walk through the walls.";
-				move player to item;
-				stop the action.
+	if the player can move:
+		unless x-coordinate of location is 100: [Unplaced rooms are at 100, 100, 100, and should handle etherealness in some other way if they wish to. E.g, the maze, the elemental plane of smoke.]
+			let x be the x noun of location;
+			let y be the y noun of location;
+			let z be the z noun of location;
+			if the space at x by y by z is free: [no room there -> move to solid rock]
+				say "You walk through rock.";
+				unless player is in moving through solid rock:
+					move player to moving through solid rock;
+				now x-coordinate of moving through solid rock is x;
+				now y-coordinate of moving through solid rock is y;
+				now z-coordinate of moving through solid rock is z;
+				stop the action;			
+			otherwise: [room there -> just move the player]
+				let item be the room at x by y by z;
+				if item is the room noun from the location: 
+					continue the action; [this is the case of normal movement]
+				otherwise:
+					say "You walk through the walls.";
+					move player to item;
+					stop the action.
 
 Every turn when the player is not in moving through solid rock (this is the destroy solid rock coordinates rule):
 	now x-coordinate of moving through solid rock is 1000;

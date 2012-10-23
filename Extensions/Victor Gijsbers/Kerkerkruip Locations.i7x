@@ -309,7 +309,7 @@ Carry out entering the seething lake of lava:
 Carry out direction-jumping down in Bridge of Doom:
 	try entering the seething lake of lava instead.
 
-Instead of going down in Bridge of Doom:
+Instead of going down in Bridge of Doom when the player can move:
 	unless the player is ethereal:
 		try entering the seething lake of lava instead.
 
@@ -1104,7 +1104,7 @@ The huge magical portal is scenery in Portal Room. The description of huge magic
 
 A thing called the huge empty portal is scenery. The description of the huge empty portal is "The magical field gone, the portal now seems pretty useless.".
 
-Instead of entering the huge magical portal:
+Instead of entering the huge magical portal when the player can move:
 	teleport the player;
 	if a random chance of 1 in 4 succeeds:
 		remove huge magical portal from play;
@@ -1461,7 +1461,7 @@ Smoke rule (this is the smoke at the Portal of Smoke rule):
 
 The portal to the elemental plane of smoke is stone scenery in Portal of Smoke. Understand "entrance" as portal to the elemental plane of smoke. The description of the portal to the elemental plane of smoke is "You cannot make out any details, given all the smoke that is coming from it; but you could enter the portal if you really wanted to.".
 
-Instead of entering the portal to the elemental plane of smoke:
+Instead of entering the portal to the elemental plane of smoke when the player can move:
 	consider the sudden combat reset rules;
 	let item be portal to Kerkerkruip;
 	move item to Elemental Plane of Smoke;
@@ -1533,7 +1533,7 @@ The maze-waiting-room is magical.
 
 Maze-sound is a direction that varies.
 
-Instead of going in the maze:
+Instead of going in the maze when the player can move:
 	do the maze move.		
 
 To do the maze move:

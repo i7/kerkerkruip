@@ -29,7 +29,7 @@ A teleport impossible rule (this is the no teleportation in elemental plane of s
 	if the location of the test subject is elemental plane of smoke:
 		rule succeeds.	
 
-Instead of going in Elemental Plane of Smoke:
+Instead of going in Elemental Plane of Smoke when the player can move:
 	now concentration of the player is 0;
 	repeat with item running through things in Elemental Plane of Smoke:
 		unless item is a person or item is a backdrop:
@@ -51,13 +51,13 @@ Does the player mean entering the portal to Kerkerkruip: it is likely.
 Instead of going outside in Elemental Plane of Smoke:
 	try exiting.
 
-Instead of exiting in Elemental Plane of Smoke:
+Instead of exiting in Elemental Plane of Smoke when the player can move:
 	if portal to Kerkerkruip is in the location:
 		try entering the portal to Kerkerkruip;
 	otherwise:
 		say "If only you could find that portal again!".
 
-Instead of entering the portal to Kerkerkruip:
+Instead of entering the portal to Kerkerkruip when the player can move:
 	consider the sudden combat reset rules;
 	move player to Portal of Smoke;
 	now the take no time boolean is false.
