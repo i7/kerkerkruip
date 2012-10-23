@@ -300,14 +300,18 @@ Exceedingly narrow bridge is scenery in Bridge of Doom. The description of excee
 Seething lake of lava is a scenery open enterable container in Bridge of Doom. The description of seething lake of lava is "Molten rock -- whether heated by natural or by unnatural means you cannot say.".
 
 Carry out entering the seething lake of lava:
-	end the story saying "You committed suicide.";
-	say "On a whim, you jump down into the lava." instead.
+	unless the player is ethereal:
+		end the story saying "You committed suicide.";
+		say "On a whim, you jump down into the lava." instead;
+	otherwise:
+		try going down instead.
 
 Carry out direction-jumping down in Bridge of Doom:
 	try entering the seething lake of lava instead.
 
 Instead of going down in Bridge of Doom:
-	try entering the seething lake of lava instead.
+	unless the player is ethereal:
+		try entering the seething lake of lava instead.
 
 First carry out inserting something into the seething lake of lava:
 	remove the noun from play;
