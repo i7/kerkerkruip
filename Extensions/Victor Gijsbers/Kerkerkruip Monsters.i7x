@@ -4200,6 +4200,7 @@ Every turn (this is the tweak smoke demon rule):
 		now defence of the smoke demon is n.
 
 To have the smoke demon disappear from (place - a room):
+	clean the table of delayed actions for the smoke demon;
 	remove smoke demon from play;
 	while someone grapples the smoke demon:
 		let guy be a random person who grapples the smoke demon;
@@ -4217,6 +4218,8 @@ To have the smoke demon appear:
 	now mind score of the smoke demon is 7;
 	now spirit score of the smoke demon is 7;
 	now size of smoke demon is medium;
+	now smoke demon is not at dodge;
+	now smoke demon is not at parry;
 	now stun count of the smoke demon is 0;
 	now stun strength of the smoke demon is 0;
 	now smoke demon is unseen;
