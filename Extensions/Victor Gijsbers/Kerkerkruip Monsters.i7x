@@ -4266,6 +4266,11 @@ Report the smoke demon concentrating:
 			say "The smoke demon becomes even denser and now seems almost material.";
 	rule succeeds.
 
+A damage modifier rule when the global attacker is the smoke demon (this is the less damage when smoke demon attacks druid rule):
+	if the global defender is druidic:
+		if the numbers boolean is true, say " - 4 (druid resistant to smoke)[run paragraph on]";
+		decrease the attack damage by 4.
+
 A damage multiplier rule when the global defender is the smoke demon (this is the smoke demon denseness multiplier rule):
 	if concentration of the smoke demon is:
 		-- 1:
