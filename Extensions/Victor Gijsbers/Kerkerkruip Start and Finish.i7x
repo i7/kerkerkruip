@@ -321,14 +321,21 @@ This is the unlock stuff rule:
 
 Section - The final question
 
+[First stuff to get around an Inform 7 bug.]
+Table of Literal Topics
+text		topic
+"new"	"new"
+
 When play begins: 
 	choose row with a final response rule of immediately restore saved game rule in the Table of Final Question Options; 
 	blank out the whole row;
 	choose row with a final response rule of immediately undo rule in the Table of Final Question Options; 
 	blank out the whole row;
-[	choose row with a final response rule of immediately restart the VM rule in the Table of Final Question Options;
-	now topic entry is "new";
-	now final question wording entry is "start a NEW game"].
+	choose a row with a text of "new" in the Table of Literal Topics;
+	let new be the topic entry;	
+	choose row with a final response rule of immediately restart the VM rule in the Table of Final Question Options;
+	now topic entry is new;
+	now final question wording entry is "start a NEW game".
 
 Chapter - Doing a reset
 
