@@ -1155,22 +1155,52 @@ Repelling power of the bomb:
 
 Section - Explode
 
+Can-grant-soul is a truth state that varies.
+Can-grant-soul-guy is a person that varies.
+The special can grant soul rules are a rulebook.
+
+To decide whether (guy - a person) can grant a soul:
+	if level of guy is 0:
+		now can-grant-soul is false;
+	otherwise:
+		now can-grant-soul is true;
+	if guy is the player:
+		now can-grant-soul is false;
+	consider the special can grant soul rules;
+	decide on can-grant-soul.
+
+The explosion victim is a person that varies.
+
+To choose the explosion victim:
+	now explosion victim is the player;
+	repeat with guy running through people in the location:
+		if guy can grant a soul:
+			if explosion victim is the player: [always better than yourself]
+				now explosion victim is guy;
+			if level of explosion victim is greater than 4: [always better than Malygris]
+				now explosion victim is guy;
+			if health of explosion victim is greater than health of guy: [choose person with lowest health]
+				now explosion victim is guy.
+					
 Killing rule (this is the explode after death rule):
 	if the killed-guy is the player:
-		if the killer-guy is not dead:
-			if power of the bomb is granted:
+		if power of the bomb is granted:
+			choose the explosion victim;
+			if explosion victim is the player:
+				say "Your body explodes vehemently, but there is nobody here who could grant you a soul.[paragraph break]";
+			otherwise:
 				let m be final body of the player;
 				if m is less than 5, now m is 5;
 				let n be a random number between 5 and m;
-				if health of the killer-guy is not greater than n:
-					say "Your body explodes vehemently, killing [the killer-guy][if the level of the killer-guy is 0]. Unfortunately, [the killer-guy] is levelless and cannot heal you[otherwise if the abyss of the soul is alive and the abyss of the soul is not off-stage]. Your soul attempts to swallow that of your enemy, but before this can happen, you are both sucked into the abyss of the soul[otherwise if the level of the killer-guy is 5]. Your soul attempts to swallow that of your enemy, but [the killer-guy] is quicker and far more powerful, swallowing yours and thus coming back to life. You, however, are destroyed for all eternity[otherwise]! As your soul swallows that of your enemy whole, you feel your body reconstituting itself[end if].[paragraph break]";
-					if the level of the killer-guy is not 0 and the level of the killer-guy is not 5:
+				if health of the explosion victim is not greater than n:
+					say "Your body explodes vehemently, killing [the explosion victim][if the abyss of the soul is alive and the abyss of the soul is not off-stage]. Your soul attempts to swallow that of your enemy, but before this can happen, you are both sucked into the abyss of the soul[otherwise if the level of the explosion victim is greater than 4]. Your soul attempts to swallow that of your enemy, but [the explosion victim] is quicker and far more powerful, swallowing yours and thus coming back to life. You, however, are destroyed for all eternity[otherwise]! As your soul swallows that of your enemy whole, you feel your body reconstituting itself[end if].[paragraph break]";
+					if the level of the explosion victim is not greater than 5:
 						unless (the abyss of the soul is alive and the abyss of the soul is not off-stage):
 							now the health of the player is 1;
-							now the health of the killer-guy is -1;
-							have an event of the player killing killer-guy;
+							now the health of the explosion victim is -1;
+							have an event of the player killing explosion victim;
 				otherwise:
- 					say "Your body explodes vehemently, but [the killer-guy] survives the blast.[paragraph break]".
+					say "Your body explodes vehemently as you throw yourself at [the explosion victim], but you only deal [n] damage instead of the [health of the explosion victim] damage you needed to deal.[paragraph break]".
 		
 Status skill rule (this is the jumping bomb power status skill rule):
 	if power of the bomb is granted:
@@ -2593,6 +2623,15 @@ Every turn (this is the grant fanatics of power boolean rule):
 			now fanatics power boolean is true;
 			say "Impressed with your prowess in combat, Aite grants you her favour! ([bold type]Power of the fanatics of Aite[roman type]: +4 attack, +4 defence, +20 health, pray to Aite anywhere and for better effects.)[paragraph break]";
 			gain the power of the fanatics of Aite. 
+
+A special can grant soul rule (this is the fanatics of Aite can grant soul rule):
+	if can-grant-soul-guy is the healer of Aite and the Tormentor of Aite is dead and the Defender of Aite is dead:
+		now can-grant-soul is true;
+	if can-grant-soul-guy is the tormentor of Aite and the healer of Aite is dead and the Defender of Aite is dead:
+		now can-grant-soul is true;
+	if can-grant-soul-guy is the defender of Aite and the Tormentor of Aite is dead and the healer of Aite is dead:
+		now can-grant-soul is true.
+	
 
 To gain the power of the Fanatics of Aite:
 	increase score by 4;

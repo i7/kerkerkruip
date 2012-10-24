@@ -939,6 +939,8 @@ Every turn when the player is undead (this is the undead follow undead rule):
 			now follower percentile chance of guy is 50.
 
 
+
+
 Chapter - Insanity
 
 A Standard AI rule for an insane person (called P) (this is the insane people attack themselves rule):
