@@ -10,14 +10,13 @@ Section - Setting up the File of Victories
 The File Of Victories is called "KerkerkruipData".
 
 Table of Victories
-Victories	Streak	Best-Streak[	Is-Save]
-0	0	0[	0]
+Victories	Level	Best-Level
+0	0	0
 
 The number-of-victories is a number that varies.
-The winning-streak is a number that varies.
-The best-winning-streak is a number that varies.
-[The Is-Save is a number that varies.]
 The difficulty is a number that varies.
+The best-level is a number that varies.
+
 
 Section - Reading in the File of Victories
 
@@ -26,12 +25,8 @@ First when play begins:
 		read File Of Victories into Table of Victories;
 	choose row 1 in the Table of Victories;
 	now number-of-victories is the Victories entry;
-	now winning-streak is the Streak entry;
-	now best-winning-streak is the Best-Streak entry;
-	now difficulty is winning-streak + 1;
-[	now Is-Save is Is-Save entry;]
-	if number-of-victories is 0:
-		decrease difficulty by 1;
+	now difficulty is the level entry;
+	now best-level is the Best-Level entry;
 	set up initial scores for the player;
 	apply the difficulty;
 	if File of Achievements exists:
@@ -44,39 +39,40 @@ Section - Writing out the File of Victories
 To write out the file of victories:
 	if the player is victorious:
 		increase number-of-victories by 1;
-		unless number-of-victories is 1:
-			increase winning-streak by 1; [We want to go from easy to normal difficulty.]
-		otherwise:
-			say "[paragraph break][bold type]You have defeated Malygris on easy mode, proving that you understand the basics of the game! Next time, Kerkerkruip will start in normal mode. From now on, new items, monsters and locations will be available; and the game will start tracking your winning streak and will scale the difficulty accordingly. Have fun![roman type][paragraph break]";
-		if winning-streak is greater than best-winning-streak:
-			now best-winning-streak is winning-streak;
+		increase difficulty by 1; [We want to go from easy to normal difficulty.]
+		if difficulty is 1:
+			say "[paragraph break][bold type]You have defeated Malygris on easy mode, proving that you understand the basics of the game! Next time, Kerkerkruip will start in normal mode. From now on, new items, monsters and locations will be available. Have fun![roman type][paragraph break]";
+		if difficulty is greater than best-level:
+			now best-level is difficulty;
 	otherwise:
-		now winning-streak is 0;
+		unless difficulty is less than 2:
+			decrease difficulty by 1;
 	choose row 1 in the Table of Victories;
 	now the Victories entry is number-of-victories;
-	now the Streak entry is winning-streak;
-	now the Best-Streak entry is best-winning-streak;
+	now the Level entry is difficulty;
+	now the Best-Level entry is best-level;
 	write File of Victories from Table of Victories;
 	write File of Achievements from Table of Held Achievements.
 
 To write out the file of victories without reset:
 	choose row 1 in the Table of Victories;
 	now the Victories entry is number-of-victories;
-	now the Streak entry is winning-streak;
-	now the Best-Streak entry is best-winning-streak;
+	now the Level entry is difficulty;
+	now the Best-Level entry is best-level;
 	write File of Victories from Table of Victories;
 	write File of Achievements from Table of Held Achievements.
 
 
 Section - Restarting resets the winning streak
 
-First carry out restarting the game (this is the reset streak on restart rule):
+First carry out restarting the game (this is the lower difficulty on restart rule):
 	unless player is victorious:
-		now winning-streak is 0;
+		unless difficulty is less than 2:
+			decrease difficulty by 1;
 		choose row 1 in the Table of Victories;
 		now the Victories entry is number-of-victories;
-		now the Streak entry is winning-streak;
-		now the Best-Streak entry is best-winning-streak;
+		now the Level entry is difficulty;
+		now the Best-Level entry is best-level;
 		write File of Victories from Table of Victories;
 		write File of Achievements from Table of Held Achievements.
 
@@ -150,20 +146,26 @@ A wrong Save-ID rule (this is the custom wrong Save-ID rule):
 Section - Applying the difficulty
 
 To apply the difficulty:
-	if the difficulty is 0:
+	if difficulty is 0:
 		increase health of the player by 5;
 		increase permanent health of the player by 5;
 		increase melee of the player by 1;
+		increase defence of the player by 2;
+	if difficulty is 1:
+		increase health of the player by 3;
+		increase permanent health of the player by 3;
+		increase melee of the player by 1;		
 		increase defence of the player by 1;
-	if the difficulty is 1:
-		increase health of the player by 2;
-		increase permanent health of the player by 2;
-	let k be 7 + difficulty;
+	if difficulty is 2:
+		increase health of the player by 1;
+		increase permanent health of the player by 1;
+		increase defence of the player by 1;
+	let k be 6 + difficulty;
 	repeat with guy running through monsters:
 		now health of guy is k times health of guy;
 		now health of guy is health of guy divided by 10;
-	if difficulty is greater than 1:
-		let n be difficulty - 1;
+	if difficulty is greater than 2:
+		let n be difficulty - 2;
 		repeat with guy running through monsters:
 			repeat with i running from 1 to n:
 				buff guy.
@@ -218,13 +220,13 @@ To give the player a stat penalty:
 	if i is 4:
 		decrease spirit score of the player by 1.
 
-When play begins (this is the set gender rule):
+This is the set gender rule:
 	if a random chance of 1 in 2 succeeds:
 		now the player is male;
 	otherwise:
 		now the player is female.
 
-
+The set gender rule is listed before the title screen rule in the when play begins rules.
 
 
 Chapter - Start and Finish
@@ -296,7 +298,6 @@ After printing the player's obituary:
 	if the player is victorious:
 		consider the unlock stuff rule.
 
-
 This is the unlock stuff rule:
 	let X be a list of objects; [We cannot repeat through objects, so:]
 	repeat with Y running through rooms:
@@ -318,25 +319,28 @@ This is the unlock stuff rule:
 			say "* [the item] ([unlock text of item])[line break]";
 		say "[line break]".
 
+Section - The final question
+
 When play begins: 
 	choose row with a final response rule of immediately restore saved game rule in the Table of Final Question Options; 
-	blank out the final question wording entry;
+	blank out the whole row;
 	choose row with a final response rule of immediately undo rule in the Table of Final Question Options; 
-	blank out the final question wording entry. 
-
+	blank out the whole row;
+[	choose row with a final response rule of immediately restart the VM rule in the Table of Final Question Options;
+	now topic entry is "new";
+	now final question wording entry is "start a NEW game"].
 
 Chapter - Doing a reset
 
 To do the reset:
 	choose row 1 in the Table of Victories;
 	now the Victories entry is 0;
-	now the Streak entry is 0;
-	now the Best-Streak entry is 0;
+	now the Level entry is 0;
+	now the Best-Level entry is 0;
 	write File of Victories from Table of Victories;
 	now number-of-victories is 0;
-	now winning-streak is 0;
-	now best-winning-streak is 0;
-	now difficulty is 0.
+	now difficulty is 0;
+	now best-level is 0.
 
 To do the achievement reset:
 	repeat through Table of Held Achievements:
@@ -364,18 +368,18 @@ The first when play begins rule (this is the title screen rule):
 		[say "'[story title]' by [story author]";
 		say paragraph break;]
 		say " SCORES:[line break]";
-		say "   Your total victories         : [unless number-of-victories is greater than 9] [end if][unless number-of-victories is greater than 99] [end if]    [number-of-victories][line break]";
-		say "   Your current winning streak  :    [unless winning-streak is greater than 9] [end if][unless winning-streak is greater than 99] [end if] [winning-streak][line break]";
-		say "   Your best winning streak     :  [unless best-winning-streak is greater than 9] [end if][unless best-winning-streak is greater than 99] [end if]   [best-winning-streak][paragraph break]";
-		say "   Current difficulty           :  [difficulty level difficulty] (level [difficulty])";
-		say line break;
+		say "   Current level                :  [difficulty level difficulty] ([difficulty])[paragraph break]";
+		say "   Highest level achieved       :  [difficulty level best-level] ([best-level])[line break][paragraph break]";
+		say "   Your total victories         :  [number-of-victories][line break]";		
+[		say "   Your current winning streak  :    [unless winning-streak is greater than 9] [end if][unless winning-streak is greater than 99] [end if] [winning-streak][line break]";
+		say "   Your best winning streak     :  [unless best-winning-streak is greater than 9] [end if][unless best-winning-streak is greater than 99] [end if]   [best-winning-streak][paragraph break]";]
 		say paragraph break;
 		say " OPTIONS:[line break]";
 		say "   [if the file of save data exists]Continue the game[otherwise]Start a new game [end if]            :    (SPACE)[line break]";
 		if the file of save data exists:
 			say "   Start a new game             :       S[line break]";
 		if difficulty is 0:
-			say "   Skip to Normal difficulty    :       N[line break]";	
+			say "   Skip to Apprentice level     :       N[line break]";	
 		say "   Display help menu            :       M[line break]";
 		say "   Reset victories              :       R[line break]";
 		say "   Quit                         :       Q[line break]";  
@@ -418,23 +422,29 @@ The first when play begins rule (this is the title screen rule):
 
 To say difficulty level (m - a number):
 	if m is 0:
-		say "EASY[run paragraph on]";
+		say "NOVICE[run paragraph on]";
 	if m is 1:
-		say "NORMAL[run paragraph on]";
+		say "APPRENTICE[run paragraph on]";
 	if m is 2:
-		say "HARD[run paragraph on]";
+		say "ADEPT[run paragraph on]";
 	if m is 3:
-		say "VERY HARD[run paragraph on]";
+		say "EXPERT[run paragraph on]";
 	if m is 4:
-		say "NIGHTMARE[run paragraph on]";
+		say "MASTER[run paragraph on]";		
 	if m is 5:
-		say "INSANE[run paragraph on]";
+		say "GRANDMASTER[run paragraph on]";
 	if m is 6:
-		say "HELL[run paragraph on]";
+		say "[if player is not female]PRINCE[otherwise]PRINCESS[end if][run paragraph on]";
 	if m is 7:
-		say "BEYOND HELL[run paragraph on]";
-	if m is greater than 7:
-		say "IMPOSSIBLE[run paragraph on]".
+		say "[if player is not female]KING[otherwise]QUEEN[end if][run paragraph on]";
+	if m is 8:
+		say "[if player is not female]EMPEROR[otherwise]EMPRESS[end if][run paragraph on]";
+	if m is 9:
+		say "DEMON[run paragraph on]";
+	if m is 10:
+		say "ANGEL[run paragraph on]";
+	if m is greater than 10:
+		say "[if player is not female]GOD[otherwise]GODDESS[end if][run paragraph on]".
 
 
 Chapter - Reset Menu

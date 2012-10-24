@@ -812,6 +812,12 @@ Carry out reducing:
 	say "Set to 1 HP.";
 	now health of the noun is 1.
 
+Winning is an action applying to nothing. Understand "win" as winning.
+
+Carry out winning:
+	say "Sure.";
+	now health of Malygris is -2.
+
 
 Section - Miscellaneous tests
 
