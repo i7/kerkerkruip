@@ -1612,6 +1612,122 @@ Status rule (this is the howling status rule):
 
 
 
+
+
+Chapter - Level 2 - Hound
+
+The hound is a monster. "A gigantic hound snarls[if player is not hidden] at you[end if] across the room."
+Understand "gigantic" and "huge" and "dog" as the hound.
+The level of the hound is 2.
+The description of the hound is "The black hound is ever watchful, waiting for the moment it needs to punish its prey."
+
+The health of the hound is 16.
+The melee of the hound is 2.
+The defence of the hound is 8.
+
+The body score of the hound is 7.
+The mind score of the hound is 7.
+The spirit score of the hound is 5.
+
+[When play begins:
+	let X be a random natural weapon part of the hound;
+	now dodgability of X is 6;
+	now damage die of X is 4;	
+	now passive parry max of X is 2;
+	now active parry max of X is 2;]
+
+Section - Prose
+
+Report an actor hitting the dead hound:
+	say "The hound collapses, its strength finally gone.";
+	rule succeeds.
+
+Report the hound hitting a dead pc:
+	say "The hound tears your flesh apart, and you die in pieces.";
+	rule succeeds.
+
+Report the hound concentrating:
+	say "[one of]The hound breathes deeply, preparing to attack.[or]The hound glares at [the chosen target].[or]Tensing its muscles, the hound appears certain to attack![at random]";
+	rule succeeds.
+
+Report the hound attacking:
+	unless the actor is the noun:
+		say "The hound leaps at [the noun][one of] with a loud growl.[or], its teeth sharp and ready.[or] with unblinking eyes.[at random]";
+	otherwise:
+		say "The hound bites down on its own tail.";
+	rule succeeds.
+
+Report the hound dodging:
+	say "The hound jumps [one of]to the side.[or]back.[at random]";
+	rule succeeds.
+
+Report the hound waiting when the hound is insane:
+	say "The hound runs in a circle, chasing its own tail.";
+	rule succeeds.
+
+An AI action selection rule for the hound:
+	[ Prefer to those who have some concentration ]
+	if the hound is at-Act:
+		let c be the concentration of the chosen target;
+		if c > 0:
+			choose row with an Option of the action of the hound attacking the chosen target in the Table of AI Action Options;
+			increase the Action Weight entry by c;
+	[ Do not parry ]
+	otherwise:
+		choose row with an Option of the action of the hound parrying in the Table of AI Action Options;
+		now the Action Weight entry is -1000
+
+Section - Power
+
+The power of the hound is a power. The hound grants the power of the hound.
+The power level of power of the hound is 2.
+
+Absorbing power of the hound:
+	increase melee of the player by 4;
+	increase defence of the player by 2;
+	increase permanent health of the player by 5;
+	say "As the great hound dies, you suddenly feel a passion for constant vigilance. ([bold type]Power of the hound[roman type]: +4 attack, +2 defence, +5 health, and you will never let your enemies take two shots at you.)[paragraph break]";
+
+Repelling power of the hound:
+	decrease melee of the player by 4;
+	decrease defence of the player by 2;
+	decrease permanent health of the player by 5;
+
+Last initiative update rule (this is the hound never misses a chance rule):
+	[ First we choose the vigilent - either the hound or the player with the power of the hound ]
+	let the vigilent be the stand in for no one;
+	if the power of the hound is granted:
+		[ If the power of the hound is granted then the player has a chance of (Mind-2) in Mind of being vigilent ]
+		let M be the mind score of the player;
+		if a random chance of (M - 2) in M succeeds:
+			now the vigilent is the player;
+		otherwise:
+			stop;
+	[ The hound is always vigilent ]
+	otherwise if the hound is in the location and the hound is alive:
+		now the vigilent is the hound;
+	otherwise:
+		stop;
+	[ Set the initiative of the vigilent to 1000 ]
+	now the initiative of the vigilent is 1000;
+	[ If the vigilent was the main actor last time then find the person with the next greatest initiative and increase theirs too ]
+	if the main actor is the vigilent:
+		let the new main actor be the vigilent;
+		let max initiative be 0;
+		repeat with X running through all alive not passive persons enclosed by the location:
+			if X is not the vigilent and the initiative of X is greater than max initiative:
+				now the new main actor is X;
+				now max initiative is the initiative of X;
+		now the initiative of the the new main actor is 2000;
+
+Status skill rule (this is the power of the hound status skill rule):
+	if power of the hound is granted:
+		say "You are [bold type]vigilent[roman type] and will not let your enemies take two shots at you. [italic type](Level 2)[roman type][line break][run paragraph on]";
+
+
+
+
+
 Chapter - Level 3 - Mindslug
 
 A mindslug is a monster. "A vast slug covered in green ooze has positioned itself in this room."
