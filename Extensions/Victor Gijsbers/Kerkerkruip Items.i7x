@@ -196,7 +196,7 @@ Instead of drinking an essence:
 	say "The gaseous essence is no fluid, and cannot be drunk. You could, however, [italic type]inhale[roman type] it.".
 
 
-[Section - Essence of Caution (minor)
+Section - Essence of Caution (minor)
 
 The essence of caution is a minor essence. The indefinite article is "the".
 The essence of caution is magical.
@@ -205,25 +205,22 @@ The essence of caution is iron.
 
 A person can be cautious. A person is usually not cautious.
 
-The description of the essence of caution is "This small metal bottle contains the magical essence of caution, distilled from the brain of [one of]the only councilor of Hargo the Furious of Yahvinna who lived to die of old age[or]the famous Algirian general al-Hawabi, who fought only two battles in a forty year campaign -- and won both[or]an unknown rogue, whose exploits would be legendary if only they were known[sticky random]. When inhaled, it confers this mindset to the user. [italic type](+1 perception, +2 defence bonus when retreating, sometimes lose initiative.)[roman type]".
+The description of the essence of caution is "This small metal bottle contains the magical essence of caution, distilled from the brain of [one of]the only councilor of Hargo the Furious of Yahvinna who lived to die of old age[or]the famous Algirian general al-Hawabi, who fought only two battles in a forty year campaign -- and won both[or]an unknown rogue, whose exploits would be legendary if only they were known[sticky random]. When inhaled, it confers this mindset to the user. [italic type](+2 defence bonus when retreating, sometimes lose initiative.)[roman type]".
 
 Carry out inhaling the essence of caution:
-	say " The decision to do this suddenly seems exceedingly rash.";[[paragraph break](You have gained 1 perception, and a +2 defence bonus when retreating. You may sometimes lose initiative in combat.)[paragraph break]]
-	increase perception of the player by 1;
+	say " The decision to do this suddenly seems exceedingly rash.";
 	now the player is cautious.
 	
 Initiative update rule (this is the sometimes loses initiative when cautious rule):
-	repeat with X running through all alive cautious persons enclosed by the location:
-		if a random chance of 1 in 20 succeeds:
-			[if X is the player:
-				say "Acting seems a bit rash to you, so you decide to wait instead.";]
+	if a random chance of 1 in 20 succeeds:
+		repeat with X running through all alive cautious persons enclosed by the location:
 			decrease the initiative of X by 4.
 		
 An attack modifier rule (this is the caution grants better retreat rule):
 	if the global defender is the player and the player is retreater:
 		if the player is cautious:
 			say " - 2 (essence of caution)[run paragraph on]";
-			decrease the attack strength by 2.]
+			decrease the attack strength by 2.
 
 
 Section - Essence of Rage (minor)
@@ -234,11 +231,13 @@ The essence of rage is iron.
 
 A person can be enraged. A person is usually not enraged.
 
-[The description of the essence of rage is "This small metal bottle contains the magical essence of rage, distilled from the brain of [one of]a berserk warrior from the far north[or]Charles IV of Averoigne, who, at the moment of his greatest victory, was poisoned by the brother he had always cherished[sticky random]. When inhaled, it confers this mindset to the user. [italic type](+1 willpower, +1 attack, unable to retreat.)[roman type]".
+The description of the essence of rage is "This small metal bottle contains the magical essence of rage, distilled from the brain of [one of]a berserk warrior from the far north[or]Charles IV of Averoigne, who, at the moment of his greatest victory, was poisoned by the brother he had always cherished[sticky random]. When inhaled, it confers this mindset to the user. [italic type](+2 body, +2 spirit, -2 mind, +1 attack, unable to retreat.)[roman type]".
 
 Carry out inhaling the essence of rage:
 	say " You will show them all that you are not to be toyed with!";
-	increase willpower of the player by 1;
+	increase body score of the player by 2;
+	increase spirit score of the player by 2;
+	decrease mind score of the player by 2;
 	increase melee of the player by 1;
 	now the player is enraged.
 
@@ -258,7 +257,7 @@ Last check going (this is the do not go in combat when enraged rule):
 			if the faction of X hates the faction of the player:
 				now Y is X;
 		take no time;
-		say "And allow [the Y] to live? Never!" instead.]
+		say "And allow [the Y] to live? Never!" instead.
 
 
 Section - Essence of Patience (minor)
@@ -609,7 +608,7 @@ The material of the robe of the dead mage is cloth.
 The indefinite article of the robe of the dead mage is "the".
 The difficulty level of the robe of the dead mage is 1.
 
-The description of the robe of the dead mage is "Dominique, marquis of Savon, one of the great mages of his generation, was so fed up with losing his concentration when he was hit that he developed this robe. When the wearer is damaged in combat, he will not lose his concentration; but the protection comes from his life force, and the damage dealt to him is increased by 25% for every level of concentration. People say that nobody ever died with as much concentration as Dominique.".
+The description of the robe of the dead mage is "Dominique, marquis of Savon, one of the great mages of his generation, was so fed up with losing his concentration when he was hit that he developed this robe. When the wearer is damaged in combat, he will not lose his concentration; but the protection comes from his life force, and the damage dealt to him is increased by 25% for every level of concentration. Nobody ever died with as much concentration as Dominique.".
 
 A damage multiplier rule when the global defender wears the robe of the dead mage (this is the robe of the dead mage damage multiplier rule):
 	if concentration of the global defender is:
@@ -764,7 +763,7 @@ A treasure placement rule (this is the acuity can be blindness rule):
 	if a random chance of 1 in 6 succeeds:
 		now the hidden identity of the goggles of acuity is the goggles of blindness.
 
-A faculty bonus rule (this is the perception bonus of the goggles of acuity rule):
+A faculty bonus rule (this is the faculty bonus of the goggles of acuity rule):
 	if the test subject wears the goggles of acuity:
 		increase faculty bonus score by 1.
 
@@ -1522,12 +1521,11 @@ Every turn when the player is the main actor (this is the decrease player skill 
 
 Status rule (this is the skilled status rule):
 	if player skill bonus timer is greater than 0:
-		say "You are [bold type]skilled[roman type]: +3 bonus to perception, dexterity and willpower checks.[line break][run paragraph on]".
+		say "You are [bold type]skilled[roman type]: +3 bonus to body, mind and spirit.[line break][run paragraph on]".
 
-A faculty bonus rule (this is the perception bonus of being skilled rule):
+A faculty bonus rule (this is the faculty bonus of being skilled rule):
 	if the test subject is the player and the player skill bonus timer is greater than 0:
-		increase test score by 3;
-		[say " + 3 (skilled)[run paragraph on]"].
+		increase test score by 3.
 
 
 
