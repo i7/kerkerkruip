@@ -1166,6 +1166,7 @@ To decide whether (guy - a person) can grant a soul:
 		now can-grant-soul is true;
 	if guy is the player:
 		now can-grant-soul is false;
+	now can-grant-soul-guy is guy;
 	consider the special can grant soul rules;
 	decide on can-grant-soul.
 
