@@ -103,6 +103,10 @@ The teleportation beacon is a magical stone extra. "You recognise a complicated 
 
 The description of the teleportation beacon is "When turned on, this beacon will ensure that all teleportations in Kerkerkruip lead to this room.".
 
+Does the player mean switching on the teleportation beacon: it is likely.
+Does the player mean switching off the teleportation beacon: it is likely.
+Does the player mean turning the teleportation beacon: it is likely.
+
 Instead of turning or pushing or pulling the teleportation beacon:
 	if teleportation-beacon-on is true:
 		try switching off the teleportation beacon;
