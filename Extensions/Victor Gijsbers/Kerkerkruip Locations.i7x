@@ -368,10 +368,13 @@ Instead of praying in Temple of Nomos:
 		say "You pray again, even though Nomos has already given you his decree. Will your iniquity go unpunished?";
 		if Nomos wrath counter is 0:
 			now Nomos wrath counter is a random number between 5 and 50;
-			if a random chance of 1 in 3 succeeds:
+			if a random chance of 1 in 2 succeeds:
 				now Nomos wrath counter is 0;
 	otherwise:
 		now Nomos counter is a random number between 1 and 5;
+		if Nomos counter is 1 or Nomos counter is 2:
+			if a random chance if 1 in 2 succeeds:
+				increase Nomos counter by 1;
 		say "A deep voice inside your head speaks: 'You will attack [Nomos counter] turns from now. The law will be with you.'".
 
 
