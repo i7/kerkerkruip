@@ -657,6 +657,12 @@ Check stunning (this is the stun yourself rule):
 		say "You can't bring yourself to do it." instead.
 
 Check stunning:
+	let item be a random readied weapon had by the player;
+	if item is ranged:
+		take no time;
+		say "You cannot stun with ranged weapons." instead.
+
+Check stunning:
 	abide by the check attacking rules.
 
 Carry out an actor stunning:
@@ -664,7 +670,7 @@ Carry out an actor stunning:
 	try the actor attacking the noun instead.
 
 A damage modifier rule (this is the less damage when stunning rule):
-	if the global attacker is at-stun:
+	if the global attacker is at-stun and global attacker weapon is not ranged:
 		if the numbers boolean is true, say " - 1 (stunning)[run paragraph on]";
 		decrease the attack damage by 1.
 
@@ -674,7 +680,7 @@ Check Miranda attacking:
 
 Aftereffects rule (this is the stunning rule):
 	if the global attacker is at-stun and the global defender is not dead:
-		if the attack damage is greater than 0:
+		if the attack damage is greater than 0 and global attacker weapon is not ranged:
 			if the global attacker is the player:
 				now global defender is sometime-stunned; [for the Stunning performance achievement]
 				if at least three people are sometime-stunned:
