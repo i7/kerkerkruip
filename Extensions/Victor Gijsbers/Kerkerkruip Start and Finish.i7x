@@ -28,7 +28,6 @@ First when play begins:
 	now difficulty is the level entry;
 	now best-level is the Best-Level entry;
 	set up initial scores for the player;
-	apply the difficulty;
 	if File of Achievements exists:
 		read File of Achievements into Table of Held Achievements;
 	update the achievements;
@@ -398,6 +397,7 @@ The first when play begins rule (this is the title screen rule):
 			if k is 32 or k is -6 or k is 67 or k is 99 or k is 110 or k is 78:
 				if file of save data exists and (k is 110 or k is 78):
 					delete file of save data;
+				apply the difficulty;
 				clear the screen;
 				make no decision;	
 			[ S: skip to apprentice level]	
