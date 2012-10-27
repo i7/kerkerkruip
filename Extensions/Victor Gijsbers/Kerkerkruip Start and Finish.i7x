@@ -382,29 +382,26 @@ The first when play begins rule (this is the title screen rule):
 		say "   Your best winning streak     :  [unless best-winning-streak is greater than 9] [end if][unless best-winning-streak is greater than 99] [end if]   [best-winning-streak][paragraph break]";]
 		say paragraph break;
 		say " OPTIONS:[line break]";
-		say "   [if the file of save data exists]Continue the game[otherwise]Start a new game [end if]            :    (SPACE)[line break]";
+		say "   [if the file of save data exists]Continue the game[otherwise]New game         [end if]            :    (SPACE)[line break]";
 		if the file of save data exists:
-			say "   Start a new game             :       S[line break]";
+			say "   New game                     :       N[line break]";
 		if difficulty is 0:
-			say "   Skip to Apprentice level     :       N[line break]";	
-		say "   Display help menu            :       M[line break]";
+			say "   Skip to Apprentice level     :       S[line break]";	
+		say "   Display menu                 :       M[line break]";
 		say "   Reset victories              :       R[line break]";
 		say "   Quit                         :       Q[line break]";  
 		say variable letter spacing;
 		let redraw be 0;
 		while redraw is 0:
 			let k be the chosen letter;
-			[ Space/Enter: continue ]
-			if k is 32 or k is -6:
-				clear the screen; 
-				make no decision;
-			[ S: Start a new game ]
-			otherwise if k is 115 or k is 83:
-				delete file of save data;
+			[ Space/Enter/C/N: continue ]
+			if k is 32 or k is -6 or k is 67 or k is 99 or k is 110 or k is 78:
+				if file of save data exists and (k is 110 or k is 78):
+					delete file of save data;
 				clear the screen;
 				make no decision;	
-			[ N: go to normal difficult ]	
-			otherwise if (k is 110 or k is 78) and difficulty is 0:
+			[ S: skip to apprentice level]	
+			otherwise if (k is 115 or k is 83) and difficulty is 0:
 				now number-of-victories is 1;
 				now difficulty is 1;
 				write out the file of victories without reset;
