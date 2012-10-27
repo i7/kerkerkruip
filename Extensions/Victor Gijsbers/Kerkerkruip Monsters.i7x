@@ -1152,7 +1152,7 @@ Absorbing power of the bomb:
 	increase melee of the player by 2;
 	increase defence of the player by 2;
 	increase permanent health of the player by 10;
-	say "As the bomb deflates, you feel its insane, beastly soul absorbed into your own body. ([bold type]Power of the bomb[roman type]: +2 attack, +2 defence, +10 health, and you will now [italic type]explode[roman type] when killed, giving you a last chance to defeat your enemy and perhaps absorb his soul in the process.)[paragraph break]".
+	say "As the bomb deflates, you feel its insane, beastly soul absorbed into your own body. ([bold type]Power of the bomb[roman type]: +2 attack, +2 defence, +10 health, and you will now [italic type]explode[roman type] when killed, giving you a last chance to defeat an enemy and absorb a soul in the process.)[paragraph break]".
 
 Repelling power of the bomb:
 	decrease melee of the player by 2;
@@ -1211,7 +1211,7 @@ Killing rule (this is the explode after death rule):
 		
 Status skill rule (this is the jumping bomb power status skill rule):
 	if power of the bomb is granted:
-		say "When you die, you [bold type]explode[roman type], dealing an amount of damage to your enemy based on your body score. This gives you a last chance to kill your enemy, and perhaps absorb his soul and come back to life in the process. [italic type](Level 2)[roman type][line break][run paragraph on]".
+		say "When you die, you [bold type]explode[roman type], dealing an amount of damage to your enemy based on your body score. This gives you a last chance to kill an enemy, and perhaps absorb a soul and come back to life in the process. [italic type](Level 2)[roman type][line break][run paragraph on]".
 
 
 
