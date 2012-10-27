@@ -493,7 +493,12 @@ Chapter - Praying
 Praying is an action applying to nothing. Understand "pray" and "pr" as praying.
 
 Carry out praying:
+	increase detection probability by 50.
+
+Carry out praying:
 	say "You send a quick prayer to the [one of]Maiden[or]Crone[or]Knight[or]Smith[at random], but you're afraid your gods are too young to have power here.".
+
+
 
 
 Chapter - Jumping in a direction
