@@ -1652,7 +1652,7 @@ Report the hound concentrating:
 
 Report the hound attacking:
 	unless the actor is the noun:
-		say "[if saved initiative > -1 and the noun is the hound provoker][one of]Anticipating[or]Prepared for[at random] [possessive of the noun] attack, the hound jumps at [it-them of the noun][otherwise]The hound leaps at [the noun][end if][one of] with a loud growl.[or], its teeth sharp and ready.[or] with unblinking eyes.[at random]";
+		say "[if saved initiative > -1 and the noun is the hound provoker][one of]Anticipating [or]Prepared for [at random][possessive of the noun] attack, the hound jumps at [it-them of the noun][otherwise]The hound leaps at [the noun][end if][one of] with a loud growl.[or], its teeth sharp and ready.[or] with unblinking eyes.[at random]";
 	otherwise:
 		say "The hound bites down on its own tail.";
 	rule succeeds.
@@ -1712,13 +1712,14 @@ An aftereffects rule (this is the set up the power of the hound rule):
 	if the global defender is the hound:
 		now saved initiative is -2;
 		now the hound provoker is the global attacker;
-	otherwise if the global defender is the player and the power of the hound is granted:
+	[ If for some reason you attacked yourself you don't get an extra turn ]
+	otherwise if the global defender is the player and the global attacker is not the player and the power of the hound is granted:
 		if a random chance of 2 in the mind score of the player succeeds:
 			say "Your mind was otherwise occupied; that attack took you by surprise.";
 		otherwise:
 			now saved initiative is -2;
 			now the hound provoker is the global attacker;
-			say "[one of]Anticipating[or]Prepared for[at random] [one of]the attack[or]their every move[at random], you[one of] respond instantly![or]r response is immediate![at random]";
+			say "[one of]Anticipating[or]Prepared for[at random] [one of]the attack[or]their every move[at random][one of], you respond instantly![or], your response is immediate![at random]";
 
 An attack modifier rule (this is the power of the hound attack modifier rule):
 	if the saved initiative > -1 and the global defender is the hound provoker:
