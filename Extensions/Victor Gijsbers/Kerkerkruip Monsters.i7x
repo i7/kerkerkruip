@@ -35,7 +35,7 @@ When play begins:
 	now active parry max of X is 0;
 	now the printed name of X is "sharp points".
 
-The description of the swarm of daggers is "Animated by some dark magic, these daggers purposefully seek to undo you.".
+The description of the swarm of daggers is "Animated by some dark magic, these daggers purposefully seek to undo [if faction of the swarm of daggers hates faction of the player]you[otherwise]their enemies[end if].".
 
 An AI action selection rule for the swarm of daggers (this is the daggers do not concentrate rule):
 	choose row with an Option of the action of the swarm of daggers concentrating in the Table of AI Action Options;
