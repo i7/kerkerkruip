@@ -39,6 +39,7 @@ Instead of going in Elemental Plane of Smoke when the player can move:
 		if a random chance of 1 in 20 succeeds:
 			move item to Elemental Plane of Smoke;
 			add item to lijst;
+			have the parser notice item;
 	say "[if lijst is not empty]Running through the smoke, you stumble across [a list of things that list-inhabit lijst][otherwise][one of]You stumble blindly through the smoke[or]You run through an endless world of clouds[or]Nothing appears to change, no matter how long you run[as decreasingly likely outcomes][end if].".
 			
 Elemental Plane of Smoke Storage is a room.
