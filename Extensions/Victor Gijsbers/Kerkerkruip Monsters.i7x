@@ -1676,6 +1676,7 @@ Section - Power
 
 The power of the hound is a power. The hound grants the power of the hound.
 The power level of power of the hound is 2.
+The command text of power of the hound is "retaliation".
 
 Status skill rule (this is the power of the hound status skill rule):
 	if power of the hound is granted:
