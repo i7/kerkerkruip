@@ -4559,7 +4559,10 @@ Carry out the imp imp-grabbing:
 Special teleportation destination rule (this is the imp teleporting rule):
 	if the teleportation-guy is the imp:
 		if the location of the imp is the Lair of the Imp:
-			now teleportation-destination is location of the player;
+			if location of the player is teleportable:
+				now teleportation-destination is location of the player;
+			otherwise:
+				now teleportation-destination is location of the imp;
 		otherwise:
 			now teleportation-destination is Lair of the Imp.
 
