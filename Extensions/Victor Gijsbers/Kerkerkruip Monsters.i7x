@@ -4355,7 +4355,12 @@ Section - Making it appear and disappear
 
 A room can be smoke-demoned. A room is usually not smoke-demoned.
 
-Every turn (this is the smoke demon appears and disappears rule):
+The smoke demon time-out is a number that varies. The smoke demon time-out is 0.
+
+Every turn when the smoke demon time-out is not 0:
+	decrease the smoke demon time-out by 1.
+
+Every turn when smoke demon time-out is 0 (this is the smoke demon appears and disappears rule):
 	repeat with place running through smoke-demoned rooms:
 		if the smoke timer of place is 0:
 			now place is not smoke-demoned;
@@ -4365,7 +4370,7 @@ Every turn (this is the smoke demon appears and disappears rule):
 		unless the location is smoke-demoned:
 			let n be the smoke timer of the location;
 			if n is greater than 5:
-				if a random chance of n in 500 succeeds:
+				if a random chance of n in 200 succeeds:
 					now the location is smoke-demoned;
 		if the location is smoke-demoned:
 			unless the smoke demon is enclosed by the location:
@@ -4383,11 +4388,16 @@ Every turn (this is the tweak smoke demon rule):
 To have the smoke demon disappear from (place - a room):
 	clean the table of delayed actions for the smoke demon;
 	remove smoke demon from play;
+	now smoke demon time-out is a random number between 5 and 10;
 	while someone grapples the smoke demon:
 		let guy be a random person who grapples the smoke demon;
 		now guy does not grapple the smoke demon;
 	if place is the location:
 		say "With an eery cry, the [bold type]smoke demon dissipates[roman type]!".
+
+An aftereffects rule (this is the set smoke demon time-out rule):
+	if the global defender is the smoke demon and the smoke demon is not alive:
+		now smoke demon time-out is a random number between 5 and 18.
 
 To have the smoke demon appear:
 	now health of the smoke demon is 10;
