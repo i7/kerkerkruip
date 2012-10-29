@@ -1619,6 +1619,140 @@ Status rule (this is the howling status rule):
 
 
 
+
+
+Chapter - Level 2 - Hound
+
+The hound is a monster. "A gigantic hound [one of]snarls[or]growls[at random] [if player is not hidden]at you [end if]across the room."
+Understand "gigantic" and "huge" and "dog" as the hound.
+The level of the hound is 2.
+The description of the hound is "The black hound is ever watchful, preparing for the moment it needs to punish its prey."
+
+The health of the hound is 16.
+The melee of the hound is 2.
+The defence of the hound is 8.
+
+The body score of the hound is 7.
+The mind score of the hound is 7.
+The spirit score of the hound is 5.
+
+[When play begins:
+	let X be a random natural weapon part of the hound;
+	now dodgability of X is 6;
+	now damage die of X is 4;	
+	now passive parry max of X is 2;
+	now active parry max of X is 2;]
+
+Section - Prose
+
+Report an actor hitting the dead hound:
+	say "The hound collapses, [one of]its preparation insufficient for that last attack.[or]evidently underprepared for this fight.[at random]";
+	rule succeeds.
+
+Report the hound hitting a dead pc:
+	say "The hound tears your flesh apart, its [one of]plan fulfilled.[or]visions realised.[at random]";
+	rule succeeds.
+
+Report the hound concentrating:
+	say "[one of]The hound breathes deeply, preparing to attack.[or]The hound glares at [the chosen target].[or]Tensing its muscles, the hound appears ready to attack![at random]";
+	rule succeeds.
+
+Report the hound attacking:
+	unless the actor is the noun:
+		say "[if saved initiative > -1 and the noun is the hound provoker][one of]Anticipating [or]Prepared for [at random][possessive of the noun] attack, the hound jumps at [it-them of the noun][otherwise]The hound leaps at [the noun][end if][one of] with a loud growl.[or], its teeth sharp and ready.[or] with unblinking eyes.[at random]";
+	otherwise:
+		say "The hound bites down on its own tail.";
+	rule succeeds.
+
+Report the hound dodging:
+	say "The hound jumps [one of]to the side.[or]back.[at random]";
+	rule succeeds.
+
+Report the hound waiting when the hound is insane:
+	say "The hound runs in a circle, chasing its own tail.";
+	rule succeeds.
+
+Section - Power
+
+The power of the hound is a power. The hound grants the power of the hound.
+The power level of power of the hound is 2.
+
+Status skill rule (this is the power of the hound status skill rule):
+	if power of the hound is granted:
+		say "You are [bold type]prepared[roman type] like the great hound to respond instantly after any attack against you. [italic type](Level 2)[roman type][line break][run paragraph on]";
+
+Absorbing power of the hound:
+	increase melee of the player by 4;
+	increase defence of the player by 2;
+	increase permanent health of the player by 5;
+	say "As the great hound dies, you suddenly see visions of your future. ([bold type]Power of the hound[roman type]: +4 attack, +2 defence, +5 health, and you are prepared to respond instantly after being attacked.)[paragraph break]";
+
+Repelling power of the hound:
+	decrease melee of the player by 4;
+	decrease defence of the player by 2;
+	decrease permanent health of the player by 5;
+
+[ The initiative of the prepared one. -1: all is normal, -2: this turn is the instant response, anything else: the instant response is happening right now! ]
+Saved initiative is a number variable. Saved initiative is -1.
+The hound provoker is a person variable.
+
+The alternative determine the main actor rule is listed instead of the determine the main actor rule in the combat round rules.
+A combat round rule when the combat status is combat (this is the alternative determine the main actor rule):
+	if saved initiative is -1:
+		rank participants by initiative;
+		now the main actor is the next participant;
+		now the combat state of the main actor is at-Act;
+	if saved initiative is -2:
+		if the hound is alive:
+			now the main actor is the hound;
+		otherwise:
+			now the main actor is the player;
+		now saved initiative is the initiative of the main actor;
+		now the combat state of the main actor is at-Act;
+
+[ After a successful turn reset the saved initative ]
+Every turn when saved initiative > -1:
+	now the initiative of the main actor is saved initiative;
+	now saved initiative is -1;
+
+An aftereffects rule (this is the set up the power of the hound rule):
+	if the global defender is the hound:
+		now saved initiative is -2;
+		now the hound provoker is the global attacker;
+	[ If for some reason you attacked yourself you don't get an extra turn ]
+	otherwise if the global defender is the player and the global attacker is not the player and the power of the hound is granted:
+		if a random chance of 2 in the mind score of the player succeeds:
+			say "Your mind was otherwise occupied; that attack took you by surprise.";
+		otherwise:
+			now saved initiative is -2;
+			now the hound provoker is the global attacker;
+			say "[one of]Anticipating[or]Prepared for[at random] [one of]the attack[or]their every move[at random][one of], you respond instantly![or], your response is immediate![at random]";
+
+An attack modifier rule (this is the power of the hound attack modifier rule):
+	if the saved initiative > -1 and the global defender is the hound provoker:
+		say " + 2 (prepared response)[run paragraph on]";
+		increase the attack strength by 2;
+
+A damage modifier rule (this is the power of the hound damage modifier rule):
+	if the saved initiative > -1 and the global defender is the hound provoker:
+		say " + 2 (prepared response)[run paragraph on]";
+		increase the attack damage by 2;
+
+An AI action selection rule for the hound:
+	[ Attack with the instant response turn]
+	if the hound is at-Act:
+		if the saved initiative > -1 and the chosen target is the hound provoker:
+			choose row with an Option of the action of the hound attacking the chosen target in the Table of AI Action Options;
+			increase the Action Weight entry by a random number between 2 and 5;
+	[ Do not parry ]
+	otherwise:
+		choose row with an Option of the action of the hound parrying in the Table of AI Action Options;
+		now the Action Weight entry is -1000;
+
+
+
+
+
 Chapter - Level 3 - Mindslug
 
 A mindslug is a monster. "A vast slug covered in green ooze has positioned itself in this room."
