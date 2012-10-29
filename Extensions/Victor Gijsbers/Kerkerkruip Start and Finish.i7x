@@ -397,6 +397,8 @@ The first when play begins rule (this is the title screen rule):
 			if k is 32 or k is -6 or k is 67 or k is 99 or k is 110 or k is 78:
 				if file of save data exists and (k is 110 or k is 78):
 					delete file of save data;
+					unless difficulty is less than 2:
+						decrease difficulty by 1;
 				apply the difficulty;
 				clear the screen;
 				make no decision;	
