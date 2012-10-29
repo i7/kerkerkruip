@@ -1623,7 +1623,7 @@ Status rule (this is the howling status rule):
 
 Chapter - Level 2 - Hound
 
-The hound is a monster. "A gigantic hound [one of]snarls[or]growls[at random] [if player is not hidden]at you [end if]across the room."
+The hound is a monster. "A gigantic hound [one of]snarls[or]growls[at random] [if player is not hidden and the faction of the hound hates the faction of the player]at you [end if]across the room."
 Understand "gigantic" and "huge" and "dog" as the hound.
 The level of the hound is 2.
 The description of the hound is "The black hound is ever watchful, preparing for the moment it needs to punish its prey."
@@ -1636,12 +1636,12 @@ The body score of the hound is 7.
 The mind score of the hound is 7.
 The spirit score of the hound is 5.
 
-[When play begins:
+When play begins:
 	let X be a random natural weapon part of the hound;
-	now dodgability of X is 6;
-	now damage die of X is 4;	
+	now dodgability of X is 2;
+	now damage die of X is 8; [Its bite is worse than its bark!]
 	now passive parry max of X is 2;
-	now active parry max of X is 2;]
+	now active parry max of X is 0.
 
 Section - Prose
 
@@ -1682,14 +1682,14 @@ Status skill rule (this is the power of the hound status skill rule):
 		say "You are [bold type]prepared[roman type] like the great hound to respond instantly after any attack against you. [italic type](Level 2)[roman type][line break][run paragraph on]";
 
 Absorbing power of the hound:
-	increase melee of the player by 4;
-	increase defence of the player by 2;
+	increase melee of the player by 3;
+	increase defence of the player by 1;
 	increase permanent health of the player by 5;
-	say "As the great hound dies, you suddenly see visions of your future. ([bold type]Power of the hound[roman type]: +4 attack, +2 defence, +5 health, and you are prepared to respond instantly after being attacked.)[paragraph break]";
+	say "As the great hound dies, you suddenly see visions of your future. ([bold type]Power of the hound[roman type]: +3 attack, +1 defence, +5 health, and you are prepared to respond instantly after being attacked.)[paragraph break]";
 
 Repelling power of the hound:
-	decrease melee of the player by 4;
-	decrease defence of the player by 2;
+	decrease melee of the player by 3;
+	decrease defence of the player by 1;
 	decrease permanent health of the player by 5;
 
 [ The initiative of the prepared one. -1: all is normal, -2: this turn is the instant response, anything else: the instant response is happening right now! ]
@@ -1716,11 +1716,11 @@ Every turn when saved initiative > -1:
 	now saved initiative is -1;
 
 An aftereffects rule (this is the set up the power of the hound rule):
-	if the global defender is the hound:
+	if the global defender is the hound and the hound is alive:
 		now saved initiative is -2;
 		now the hound provoker is the global attacker;
 	[ If for some reason you attacked yourself you don't get an extra turn ]
-	otherwise if the global defender is the player and the global attacker is not the player and the power of the hound is granted:
+	otherwise if the global defender is the player and the global attacker is not the player and the power of the hound is granted and the player is alive:
 		if a random chance of 2 in the mind score of the player succeeds:
 			say "Your mind was otherwise occupied; that attack took you by surprise.";
 		otherwise:
