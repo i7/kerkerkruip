@@ -1525,7 +1525,7 @@ Status rule (this is the skilled status rule):
 
 A faculty bonus rule (this is the faculty bonus of being skilled rule):
 	if the test subject is the player and the player skill bonus timer is greater than 0:
-		increase test score by 3.
+		increase faculty bonus score by 3.
 
 
 
@@ -2285,9 +2285,16 @@ Every turn when the main actor is the player:
 A faculty bonus rule (this is the ment ability bonus rule):
 	if the test subject is the player:
 		if ment timer is greater than 0:
-			increase test score by ment bonus;
+			increase faculty bonus score by ment bonus;
 			[say " + [ment bonus] (ment)[run paragraph on]"].
-
+				
+A faculty bonus rule (this is the feeling down ability penalty rule):
+	if the test subject is the player:
+		if the ment addiction is greater than 0:
+			if the ment timer is 0:
+				decrease faculty bonus score by ment addiction;
+				[say " - [ment addiction] (feeling down)[run paragraph on]"].				
+				
 An attack modifier rule (this is the ment attack and defence bonus rule):
 	if the global attacker is the player:
 		if ment timer is greater than 0:
@@ -2318,14 +2325,7 @@ An attack modifier rule (this is the feeling down attack penalty rule):
 			if the ment timer is 0:
 				if the numbers boolean is true, say " - [ment addiction] (feeling down)[run paragraph on]";
 				decrease the attack strength by ment addiction.	
-				
-A faculty bonus rule (this is the feeling down ability penalty rule):
-	if the test subject is the player:
-		if the ment addiction is greater than 0:
-			if the ment timer is 0:
-				decrease test score by ment addiction;
-				[say " - [ment addiction] (feeling down)[run paragraph on]"].				
-				
+
 
 Snorting is an action applying to one carried thing. Understand "snort [thing]" and "sniff [thing]" as snorting. Understand "use [package of ment]" as snorting.
 

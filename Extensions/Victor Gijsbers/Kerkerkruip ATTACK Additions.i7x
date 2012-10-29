@@ -292,14 +292,17 @@ To test the faculty of (guy - a person) against (n - a number):
 	now test score is a roll of the dice;
 	say "[The guy] roll[s] ", test score, " + [run paragraph on]";
 	if tested faculty is body:
-		say "[final body of guy] (body)[run paragraph on]";
-		increase test score by final body of the guy;
+		let k be final body of the guy;
+		say "[k] (body)[run paragraph on]";
+		increase test score by k;
 	if tested faculty is mind:
-		say "[final mind of guy] (mind)[run paragraph on]";
-		increase test score by final mind of the guy;
+		let k be final mind of guy;
+		say "[k] (mind)[run paragraph on]";
+		increase test score by k;
 	if tested faculty is spirit:
-		say "[final spirit of guy] (spirit)[run paragraph on]";
-		increase test score by final spirit of the guy;		
+		let k be final spirit of guy;
+		say "[k] (spirit)[run paragraph on]";
+		increase test score by k;		
 	say " = [test score] against a target number of ", n, "[run paragraph on]";
 	if test score is less than n:
 		say ", failing the [tested faculty] check.[run paragraph on]";

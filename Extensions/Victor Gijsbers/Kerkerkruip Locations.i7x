@@ -87,13 +87,6 @@ Check an actor hitting when the location is Hall of Mirrors (this is the sometim
 				otherwise:
 					say " Seeing through the illusion created by the mirrors, [if global attacker is the player]you attack[otherwise][the global attacker] attacks[end if] the real [if global defender is not the player][global defender][otherwise]you[end if].".
 
-[A perception test rule (this is the concentration bonus in Hall of Mirrors rule): [BUG with chain golem]
-	if an actor attacking in Hall of Mirrors and the actor is the test subject:
-		unless the test subject is blind:
-			if concentration of the actor is greater than 0:
-				increase test score by concentration of the actor;
-				say " + [concentration of the actor] (concentration)[run paragraph on]".]
-
 An AI action selection rule for a person (called P) when the location is Hall of Mirrors (this is the concentration is more important in the Hall of Mirrors rule):
 	choose row with an Option of the action of P concentrating in the Table of AI Action Options;
 	increase the Action Weight entry by 1.
