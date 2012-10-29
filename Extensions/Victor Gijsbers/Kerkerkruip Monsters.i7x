@@ -1659,7 +1659,7 @@ Report the hound concentrating:
 
 Report the hound attacking:
 	unless the actor is the noun:
-		say "[if saved initiative > -1 and the noun is the hound provoker][one of]Anticipating [or]Prepared for [at random][possessive of the noun] attack, the hound jumps at [it-them of the noun][otherwise]The hound leaps at [the noun][end if][one of] with a loud growl.[or], its teeth sharp and ready.[or] with unblinking eyes.[at random]";
+		say "[if hound status is 1 and the noun is the hound provoker][one of]Anticipating [or]Prepared for [at random][possessive of the noun] attack, the hound jumps at [it-them of the noun][otherwise]The hound leaps at [the noun][end if][one of] with a loud growl.[or], its teeth sharp and ready.[or] with unblinking eyes.[at random]";
 	otherwise:
 		say "The hound bites down on its own tail.";
 	rule succeeds.
@@ -1694,16 +1694,17 @@ Repelling power of the hound:
 	decrease permanent health of the player by 5;
 
 [ The initiative of the prepared one. -1: all is normal, -2: this turn is the instant response, anything else: the instant response is happening right now! ]
-Saved initiative is a number variable. Saved initiative is -1.
+Saved initiative is a number variable.
+Hound status is a number variable. [0 = nothing; 1 = now; 2 = next turn]
 The hound provoker is a person variable.
 
 The alternative determine the main actor rule is listed instead of the determine the main actor rule in the combat round rules.
 A combat round rule when the combat status is combat (this is the alternative determine the main actor rule):
-	if saved initiative is -1:
+	unless hound status is 1:
 		rank participants by initiative;
 		now the main actor is the next participant;
 		now the combat state of the main actor is at-Act;
-	if saved initiative is -2:
+	otherwise:
 		if the hound is alive:
 			now the main actor is the hound;
 		otherwise:
@@ -1712,37 +1713,38 @@ A combat round rule when the combat status is combat (this is the alternative de
 		now the combat state of the main actor is at-Act;
 
 [ After a successful turn reset the saved initative ]
-Every turn when saved initiative > -1:
-	now the initiative of the main actor is saved initiative;
-	now saved initiative is -1;
+Every turn when hound status > 0:
+	if hound status is 1:
+		now the initiative of the main actor is saved initiative;
+	decrease hound status by 1.
 
 An aftereffects rule (this is the set up the power of the hound rule):
 	if the global defender is the hound and the hound is alive:
-		now saved initiative is -2;
+		now hound status is 2;
 		now the hound provoker is the global attacker;
 	[ If for some reason you attacked yourself you don't get an extra turn ]
 	otherwise if the global defender is the player and the global attacker is not the player and the power of the hound is granted and the player is alive:
 		if a random chance of 2 in the mind score of the player succeeds:
 			say "Your mind was otherwise occupied; that attack took you by surprise.";
 		otherwise:
-			now saved initiative is -2;
+			now hound status is 2;
 			now the hound provoker is the global attacker;
 			say "[one of]Anticipating[or]Prepared for[at random] [one of]the attack[or]their every move[at random][one of], you respond instantly![or], your response is immediate![at random]";
 
 An attack modifier rule (this is the power of the hound attack modifier rule):
-	if the saved initiative > -1 and the global defender is the hound provoker:
+	if hound status is 1 and the global defender is the hound provoker:
 		say " + 2 (prepared response)[run paragraph on]";
 		increase the attack strength by 2;
 
 A damage modifier rule (this is the power of the hound damage modifier rule):
-	if the saved initiative > -1 and the global defender is the hound provoker:
+	if hound status is 1 and the global defender is the hound provoker:
 		say " + 2 (prepared response)[run paragraph on]";
 		increase the attack damage by 2;
 
 An AI action selection rule for the hound:
 	[ Attack with the instant response turn]
 	if the hound is at-Act:
-		if the saved initiative > -1 and the chosen target is the hound provoker:
+		if hound status is 1 and the chosen target is the hound provoker:
 			choose row with an Option of the action of the hound attacking the chosen target in the Table of AI Action Options;
 			increase the Action Weight entry by a random number between 2 and 5;
 	[ Do not parry ]
