@@ -83,9 +83,10 @@ A detection rule (this is the base probability of detection rule):
 A detection rule (this is the tension increases probability of detection rule):
 	increase the detection probability by the tension.
 
-A detection rule (this is the perception probability of detection rule):
+A detection rule (this is the spirit probability of detection rule):
 	unless the main actor is the player:
-		increase the detection probability by the spirit score of the main actor.
+		let n be spirit score of the main actor / 2;
+		increase the detection probability by n.
 
 A detection rule (this is the on-the-lookout increases probability of detection rule):
 	unless the main actor is the player:
@@ -394,7 +395,8 @@ First impeded movement rule (this is the can always move when ethereal rule):
 		rule succeeds.
 		
 A detection rule (this is the ethereal makes hiding easier rule):
-	decrease the detection probability by 25.
+	if player is ethereal:
+		decrease the detection probability by 25.
 
 Section - Moving through rock
 
