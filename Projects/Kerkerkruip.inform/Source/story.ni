@@ -22,7 +22,7 @@ The binary file of save data is called "KerkerkruipSaves".
 
 Use undo prevention.
 
-Include version 4 of Inform ATTACK by Victor Gijsbers.
+Include version 4/121102 of Inform ATTACK by Victor Gijsbers.
 [You can get the latest ATTACK at https://github.com/i7/ATTACK ]
 
 Include Kerkerkruip Dungeon Generation by Victor Gijsbers.

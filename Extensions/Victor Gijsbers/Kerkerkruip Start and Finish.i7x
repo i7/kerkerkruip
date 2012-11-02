@@ -486,7 +486,7 @@ Carry out asking for help:
 	carry out the displaying activity;
 	clear the screen;
 	try looking;
-	stop the action.
+	report the main action again;
 	
 Table of Kerkerkruip Help
 title	subtable	description	toggle 
@@ -730,3 +730,4 @@ Carry out achievemenuing:
 	carry out the displaying activity;
 	clear the screen;
 	try looking;
+	report the main action again;
