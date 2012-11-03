@@ -33,6 +33,13 @@ First Standard AI rule for a person (called P) (this is the do nothing when all 
 		say "[The P] [one of]remains unaware of your presence[or]does not notice you[or]does not detect your presence[at random].";
 		rule succeeds.
 	
+An AI target selection rule for a hidden person (this is the do not prefer hidden people rule):
+	decrease the Weight by 1000.
+	
+First check an actor hitting (this is the stop hitting if the defender is hidden rule):
+	if the global defender is hidden:
+		stop the action.
+	
 
 [
 An aftereffects rule (this is the attacking breaks hidden rule):
@@ -42,22 +49,31 @@ An aftereffects rule (this is the attacking breaks hidden rule):
 The detection probability is a number that varies. The detection probability is 0.
 The detection rules are a rulebook.
 
-Every turn (this is the possibly detected rule):   [TODO: turn into a starting the combat round rule?]
-	if the player is hidden and the combat status is not peace:
-		if the main actor is the player or the faction of the main actor hates the faction of the player: [allies don't increase probability of detection]
-			consider the detection rules;
-			let n be a random number between 1 and 100;
-[			say "Roll: [n] against [detection probability]."; [TEST]]
-			if the detection probability is greater than n:
-				now the player is not hidden;
-				if the main actor is not the player:
-					say "[The main actor] [if main actor is plural-named]have[otherwise]has[end if] detected you!";
-				otherwise:
-					say "You have been revealed!";
-				repeat with guy running through visible persons:
-					if the faction of guy hates the faction of the player:
-						now guy is on-the-lookout;
+This is the possibly detected rule:   [TODO: turn into a starting the combat round rule?]
+ [allies don't increase probability of detection]
+	consider the detection rules;
+	let n be a random number between 1 and 100;
+[	say "Roll: [n] against [detection probability]."; [TEST]]
+	if the detection probability is greater than n:
+		now the player is not hidden;
+		if the main actor is not the player:
+			say "[The main actor] [if main actor is plural-named]have[otherwise]has[end if] detected you!";
+		otherwise:
+			say "You have been revealed!";
+		repeat with guy running through visible persons:
+			if the faction of guy hates the faction of the player:
+				now guy is on-the-lookout;
 	now detection probability is 0.
+
+Starting the combat round rule:
+	if the player is hidden:
+		if the faction of the main actor hates the faction of the player:	
+			follow the possibly detected rule.
+	
+[Every turn when the player is hidden:
+	if the combat status is not peace and the player is the main actor:
+		consider the possibly detected rule;
+	now detection probability is 0.]
 
 [
 
@@ -78,7 +94,7 @@ A starting the combat round rule (this is the possible detection rule):
 Section - Detection rules
 
 A detection rule (this is the base probability of detection rule):
-	increase the detection probability by 3.
+	increase the detection probability by 5.
 	
 A detection rule (this is the tension increases probability of detection rule):
 	increase the detection probability by the tension.
@@ -153,16 +169,16 @@ To hide:
 	if the combat status is peace:
 		say "You blend into the shadows.";
 		now the player is hidden;
-	otherwise:
+[	otherwise:
 		consider the detection rules;
 		increase detection probability by 50;
 		let n be a random number between 1 and 100;
 [		say "Roll: [n] against [detection probability]."; [TEST]]
 		unless the detection probability is greater than n:
 			say "You blend into the shadows.";
-			now the player is hidden;
-		otherwise:
-			say "You fail to hide."
+			now the player is hidden;]
+	otherwise:
+		say "You fail to hide."
 
 
 
