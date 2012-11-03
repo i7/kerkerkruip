@@ -467,6 +467,17 @@ This is the suit check rule:
 		rule fails.
 
 
+Does the player mean taking off something worn:
+	it is very likely.
+	
+Does the player mean taking off something not worn:
+	it is very unlikely.	
+
+Does the player mean wearing something worn:
+	it is very unlikely.
+
+Does the player mean wearing something not worn:
+	it is very likely.
 
 
 Chapter - Necklaces
