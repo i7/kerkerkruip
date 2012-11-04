@@ -136,6 +136,7 @@ Chapter - Going to
 Going to is an action applying to one object.
 Understand "go to [any visited room]" and "go [any visited room]" and "[any visited room]" as going to.
 Understand "go to [any seen person]" and "go [any seen person]" and "[any seen person]" as going to.
+[ Should we also allow going to things? ]
 
 Null-Room is a room. "You should never see this text. That would be a BUG." Null-Room is not placeable.
 
@@ -159,8 +160,6 @@ Definition: a person (called guy) is hater if the guy opposes the player.
 Carry out going to a room:
 	now location-to-go is the noun;
 	let way be the best route from the location of player to the noun through visited safe rooms;
-[	unless way is a direction:
-		let way be the best route from the location of player to the noun through visited rooms;		]
 	unless way is a direction:
 		take no time;
 		say "You don't know how to go there safely." instead;
@@ -169,13 +168,11 @@ Carry out going to a room:
 Carry out going to a thing:
 	now location-to-go is the last-seen-location of the noun;
 	let way be the best route from the location of player to location-to-go through visited safe rooms;
-[	unless way is a direction:
-		let way be the best route from the location of player to the noun through visited rooms;		]
 	unless way is a direction:
 		take no time;
 		say "You don't know a safe path towards [it-them]." instead;
-	try going way instead.
-
+	say "You last saw [the noun] in [the location-to-go], so you [one of]strike out[or]head[at random] towards there.";
+	try going way instead;
 
 Shorter going to is an action applying to nothing. Understand "go to" and "go on" as shorter going to.
 
@@ -187,7 +184,6 @@ Instead of shorter going to:
 		try going to the location-to-go.
 
 [And now, mapping the empty command to "go to". Not easy, we need an ugly I6 substitution.]
-
 
 Include (- [ Keyboard  a_buffer a_table  nw i w w2 x1 x2;
 	sline1 = score; sline2 = turns;
