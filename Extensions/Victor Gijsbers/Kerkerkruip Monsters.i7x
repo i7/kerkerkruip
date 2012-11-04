@@ -4,6 +4,66 @@ Use authorial modesty.
 
 
 
+Chapter - Monster statistics
+
+A person has a number called ID.
+A person can be encountered.
+A person has a number called died count. [ The number of times the person has been killed by the player. Also includes kills by player allies. ]
+A person has a number called kill count. [ The number of times the person has killed the player. ]
+
+Table of Monster Statistics
+ColID (a number)	ColSeen [encountered] (a truth state)	died (a number)	kill (a number)
+with 27 blank rows [ Don't forget to update this when monsters are added! ]
+
+The File Of Monster Statistics is called "KerkerkruipStats".
+
+The load monster statistics rule is listed before the title screen rule in the when play begins rules.
+This is the load monster statistics rule:
+	if File of Monster Statistics exists:
+		read File Of Monster Statistics into the Table of Monster Statistics;
+	repeat with X running through npc people:
+		if the ID of X is not 0:
+			if there is a ColID of ID of X in the Table of Monster Statistics:
+				choose row with a ColID of ID of X in the Table of Monster Statistics;
+				if there is a ColSeen entry and the ColSeen entry is true:
+					now X is encountered;
+				if there is a died entry:
+					now the died count of X is the died entry;
+				if there is a kill entry:
+					now the kill count of X is the kill entry;
+			otherwise:
+				choose a blank row in the Table of Monster Statistics;
+				now the ColID entry is the ID of X;
+
+To update the monster statistics:
+	repeat with X running through npc people:
+		if the ID of X is not 0:
+			choose row with a ColID of ID of X in the Table of Monster Statistics;
+			if X is encountered:
+				now the ColSeen entry is true;
+			now the died entry is the died count of X;
+			now the kill entry is the kill count of X;
+	write File of Monster Statistics from Table of Monster Statistics;
+
+Section - Encountered
+
+Every turn (this is the mark people as encountered rule): 
+	repeat with X running through npc people that are enclosed by the location:
+		if X is not encountered:
+			now X is encountered;
+			update the monster statistics;
+
+Section - Died and Kill counts
+
+Killing rule (this is the increment died and kill stats rule):
+	if killed-guy is the player:
+		increment the kill count of the killer-guy;
+	otherwise:
+		increment the died count of the killed-guy;
+	update the monster statistics;
+
+
+
 
 
 
@@ -12,6 +72,7 @@ Chapter - Level 1 - Swarm of Daggers
 Section - Definitions
 
 The swarm of daggers is a monster. "A swarm of small daggers is flying through the air like a flock of birds, their sharp points eagerly seeking flesh." The level of swarm of daggers is 1.
+The ID of the swarm of daggers is 1.
 
 The swarm of daggers is ambiguously plural.
 
@@ -185,6 +246,7 @@ A blood ape is a monster. "A [if the size of the blood ape is not medium][size o
 The description of the blood ape is "It looks like a gorilla, except that is has an intensely red fur and is perhaps even more muscular. [if the blood ape is small]Thankfully, the ape is somewhat smaller than you are[otherwise if the blood ape is medium]The blood ape has grown to the proportion of a very broad-chested human[otherwise if the blood ape is large]The blood ape now stands taller than you, and its fists have grown bigger than your head[otherwise if the blood ape is huge]The massive blood ape towers above you, having grown to the size of an elephant[otherwise if the blood ape is gargantuan]The blood ape has grown to colossal proportions, hardly fitting in the room. You fear it could easily crush you[end if]."
 
 The level of the blood ape is 1.
+The ID of the blood ape is 2.
 The blood ape is small.
 
 The health of the blood ape is 8.
@@ -359,6 +421,7 @@ Section - Definitions
 The ravenous armadillo is a monster. "A huge armadillo is here, searching for anything it can eat."
 
 The level of ravenous armadillo is 1.
+The ID of the ravenous armadillo is 3.
 The difficulty level of ravenous armadillo is 1. [Too confusing for new players.]
 
 The unlock level of the ravenous armadillo is 3.
@@ -606,7 +669,8 @@ Miranda is a monster. "A stunning young woman in a simple monk's robe awaits you
 
 Miranda is proper-named. Miranda is female. Miranda is not neuter. Understand "woman" and "stunning" and "monk" as Miranda.
 
-The level of the Miranda is 1.
+The level of Miranda is 1.
+The ID of Miranda is 4.
 
 The description of Miranda is "Although she is currently working as one of Malygris's guards, Miranda dreams about a bright future as a famous adventurer.".
 
@@ -799,6 +863,7 @@ Section - Definitions
 The chain golem is a monster. "The room is dominated by a chain golem, a moving mass of [if chain golem is iron]iron and copper[otherwise][material-adjective of material of chain golem][end if] chains, both thick and thin, that hulks in its center[if the concentration of the chain golem is not 0]. The golem is spinning [end if][if the concentration of the chain golem is 1]slowly[otherwise if the concentration of the chain golem is 2]wildly[otherwise if the concentration of the chain golem is 3]furiously[end if]."
 
 The level of the chain golem is 2.
+The ID of the chain golem is 5.
 
 The chain golem is eyeless.
 The chain golem is iron.
@@ -1036,6 +1101,7 @@ A jumping bomb is a monster. "A skull-sized ball of gooish, undulating flesh jum
 Understand "ball" and "flesh" and "meat" as the jumping bomb.
 
 The level of jumping Bomb is 2.
+The ID of the jumping Bomb is 6.
 
 The jumping bomb is eyeless.
 The jumping bomb is emotionless.
@@ -1228,6 +1294,7 @@ The Reaper is a male monster. The reaper is not neuter. "A pale man in dark robe
 Understand "pale" and "man" and "dark" and "robes" and "serial" and "killer" and "him" as the Reaper.
 
 The level of the Reaper is 2.
+The ID of the Reaper is 7.
 
 The description of the reaper is "He once used to be a man like any other, but his vocation has left him unnaturally pale and gaunt.".
 
@@ -1443,6 +1510,7 @@ The demon-of-rage-number is a number that varies. The demon-of-rage-number is 0.
 Understand "cries" and "inarticulate" as the demon of rage.
 
 The level of the demon of rage is 2.
+The ID of the demon of rage is 8.
 Difficulty level of the demon of rage is 2.
 
 The description of the demon of rage is "An amorphous swirl of red and black light, this demonic creature is the spirit of rage incarnate.".
@@ -1626,6 +1694,7 @@ Chapter - Level 2 - Hound
 The hound is a monster. "A gigantic hound [one of]snarls[or]growls[at random] [if player is not hidden and the faction of the hound hates the faction of the player]at you [end if]across the room."
 Understand "gigantic" and "huge" and "dog" as the hound.
 The level of the hound is 2.
+The ID of the hound is 9.
 The description of the hound is "The black hound is ever watchful, preparing for the moment it needs to punish its prey."
 
 The health of the hound is 16.
@@ -1763,6 +1832,7 @@ A mindslug is a monster. "A vast slug covered in green ooze has positioned itsel
 Understand "slug" and "master" and "ooze" as the mindslug.
 
 The level of the mindslug is 3.
+The ID of the mindslug is 10.
 
 The description of the mindslug is "It is of the dreaded race of mindslugs, abominations that use their telepathic powers to enslave others.".
 
@@ -1857,6 +1927,7 @@ Report the mindslug waiting when the mindslug is insane:
 Section - Slaves
 
 Fafhrd is a mindslug-enslaved man. The description of Fafhrd is "This male barbarian is strong and muscular. He looks like an able and shrewd fighter.".
+The ID of Fafhrd is 11.
 
 Health of Fafhrd is 13.
 Melee of Fafhrd is 1.
@@ -1871,6 +1942,7 @@ Follower percentile chance of Fafhrd is 75.
 Fafhrd is weapon user.
 
 Mouser is a mindslug-enslaved man. The description of Mouser is "Mouser is a small, fast man. You know his type from the alleys and alehouses of Montenoir.".
+The ID of Mouser is 12.
 
 Mouser carries a sword called Mouser's sword. The description of Mouser's sword is "A relatively short sword."
 
@@ -2163,6 +2235,7 @@ The giant tentacle is a monster. "A single giant tentacle guards against intrude
 The description of the giant tentacle is "Aeons ago, the Knight of the Dawn fought and killed a great tentacled horror known as Tooloo. So great was Tooloo's tenacity, however, that each of his tentacles continued to live on separately -- and this is one of them.".
 
 The level of giant tentacle is 3.
+The ID of the giant tentacle is 13.
 
 The health of giant tentacle is 35.
 The melee of giant tentacle is 4.
@@ -2485,6 +2558,7 @@ The minotaur is a male monster. "A huge minotaur[if the minotaur carries the min
 The description of the minotaur is "Half man, half bull, this fearsome creature is associated by legends with two things: axes and mazes.".
 
 The level of the minotaur is 3.
+The ID of the minotaur is 14.
 Difficulty level of the minotaur is 2.
 
 The health of minotaur is 35.
@@ -2595,6 +2669,7 @@ Status skill rule (this is the minotaur power status skill rule):
 Chapter - Level 4 - Fanatics of Aite 
 
 The fanatics-of-Aite-package is a monster. The level of the fanatics-of-Aite-package is 4.
+The ID of the fanatics-of-Aite-package is 15.
 
 Final monster placement rule (this is the place fanatics of Aite rule):
 	if fanatics-of-Aite-package is not off-stage:
@@ -2609,6 +2684,7 @@ Section - Healer of Aite
 A healer of Aite is a male monster. The healer of Aite is not neuter. "A white-robed healer of Aite is chanting in praise of his goddess."
 Understand "white-robed" as the Healer of Aite.
 The description of the healer of Aite is "This white-robed priest is a healer of Aite. Their task is to support the other fanatics in their never-ending crusade.".
+The ID of the Healer of Aite is 16.
 
 The health of the Healer of Aite is 20.
 The melee of the Healer of Aite is 1.
@@ -2658,6 +2734,7 @@ Section - Tormentor of Aite
 A tormentor of Aite is a female monster. The tormentor of Aite is not neuter. "A black-robed mage stalks through the room."
 Understand "black-robed" and "mage" as the Tormentor of Aite.
 The description of the tormentor of Aite is "You immediately recognise the black-robed mage as a tormentor of Aite, savage priests who specialise in inflicting pain on all who oppose their faith.".
+The ID of the Tormentor of Aite is 17.
 
 The health of the Tormentor of Aite is 16.
 The melee of the Tormentor of Aite is 3.
@@ -2706,6 +2783,7 @@ Section - Defender of Aite
 A defender of Aite is a male monster. The defender of Aite is not neuter. "Equipped with a small sword and a huge shield, a heavily armoured man awaits any attacks."
 Understand "armoured" and "man" as the defender of Aite.
 The description of the defender of Aite is "This heavily armoured priest is a defender of Aite, one of the front-line troops of the armies of this horrible faith.".
+The ID of the defender of Aite is 18.
 
 The health of the Defender of Aite is 23.
 The melee of the Defender of Aite is 1.
@@ -2823,6 +2901,7 @@ Bodmall is a monster. Bodmall is proper-named. Bodmall is female and not neuter.
 Understand "druid" and "druidess" and "witch" as Bodmall.
 
 The level of Bodmall is 4.
+The ID of Bodmall is 19.
 
 The health of Bodmall is 35.
 The melee of Bodmall is 5.
@@ -3542,6 +3621,7 @@ Malygris is a monster. Malygris is proper-named. Malygris is male and not neuter
 Understand "sorcerer" and "mage" and "wizard" and "him" as the Malygris.
 
 The level of Malygris is 5.
+The ID of Malygris is 20.
 
 The health of Malygris is 55.
 The melee of Malygris is 7.
@@ -3713,6 +3793,7 @@ Chapter - Demonic assassin
 The demonic assassin is a monster. "A horned figure stalks through the room." Understand "horned" and "figure" as the demonic assassin. The description of the demonic assassin is "A being summoned by Malygris from the depths of Hell, this demon has only one purpose: to stop you from reaching its master.".
 
 The level of demonic assassin is 0.
+The ID of the demonic assassin is 21.
 The demonic assassin is demonic.
 
 The health of demonic assassin is 25.
@@ -3784,6 +3865,7 @@ A final monster placement rule (this is the Nameless Horror in Eternal Prison ru
 	now Nameless horror is in eternal prison.
 
 The level of Nameless Horror is 10.
+The ID of the Nameless Horror is 22.
 
 The health of Nameless Horror is 1000.
 The melee of Nameless Horror is 50.
@@ -3889,6 +3971,7 @@ The rotting corpse is emotionless.
 The rotting corpse is eyeless.
 
 The level of rotting corpse is 0.
+The ID of the rotting corpse is 23.
 
 The health of rotting corpse is 30.
 The melee of rotting corpse is 3.
@@ -4038,6 +4121,7 @@ Understand "witch" and "dog" and "hound" and "bird" and "owl" and "woman" and "u
 The description of the aswang is "The undead monster has currently taken the form of [if as-shape of aswang is as-witch]an ugly old woman with long, dirty hair and completely white eyes[otherwise if as-shape of aswang is as-bird]a huge owl-like bird with leathery wings[otherwise]a ferocious black dog with blood-shot eyes[end if].".
 
 The level of the aswang is 0.
+The ID of the aswang is 24.
 
 The health of the aswang is 22.
 The melee of the aswang is 2.
@@ -4230,6 +4314,7 @@ The abyss of the soul is small.
 The description of the Abyss of the Soul is "This [size of the abyss of the soul] sphere of utter darkness is an abyss of the soul, one of the most fearsome of undead monsters. Not only does it sap the strength of all nearby living creatures, it also feeds on the souls of the recently departed.".
 
 The level of the abyss of the soul is 0.
+The ID of the abyss of the soul is 25.
 
 The health of the abyss of the soul is 40.
 The melee of the abyss of the soul is 0.
@@ -4328,6 +4413,7 @@ The smoke demon is demonic.
 The smoke demon is horrific-faction. [Attacks even other demons.]
 
 The level of the smoke demon is 0.
+The ID of the smoke demon is 26.
 The smoke demon is smoke attuned.
 The smoke demon is flyer.
 The smoke demon is emotionless.
@@ -4494,6 +4580,7 @@ There is a monster called an imp.
 The description of the imp is "Imps are minor demons with unnaturally small wings. They rarely engage in combat, prefering to teleport or fly away from danger.".
 
 The imp is demonic. The level of the imp is 0.
+The ID of the imp is 27.
 The imp is flyer.
 
 The health of the imp is 10.
