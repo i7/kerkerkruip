@@ -133,30 +133,47 @@ A damage modifier rule (this is the running is very risky rule):
 
 Chapter - Going to
 
-Going to is an action applying to one object. Understand "go to [any visited room]" and "go [any visited room]" and "[any visited room]" as going to.
+Going to is an action applying to one object.
+Understand "go to [any visited room]" and "go [any visited room]" and "[any visited room]" as going to.
+Understand "go to [any seen person]" and "go [any seen person]" and "[any seen person]" as going to.
 
 Null-Room is a room. "You should never see this text. That would be a BUG." Null-Room is not placeable.
 
 The location-to-go is a room that varies. The location-to-go is Null-Room.
 
-Check going to:
+Check going to a room:
 	if the noun is the location:
 		take no time;
 		say "You're already here." instead.
+		
+Check going to a thing:
+	if the location of the noun is the location:
+		take no time;
+		say "[It-they]['s-'re] right here!" instead.
 
 Definition: a room (called place) is safe if place is safe-1 and place is not nogo.
 Definition: a room (called place) is safe-1 if the number of alive hater persons in place is 0 or place is the location or place is location-to-go. [We do not count the starting and end points.]
 
-Definition: a person (called guy) is hater if the faction of guy hates the faction of the player.
+Definition: a person (called guy) is hater if the guy opposes the player.
 
-Carry out going to:
+Carry out going to a room:
 	now location-to-go is the noun;
 	let way be the best route from the location of player to the noun through visited safe rooms;
 [	unless way is a direction:
 		let way be the best route from the location of player to the noun through visited rooms;		]
 	unless way is a direction:
 		take no time;
-		say "You don't know a safe path towards that location." instead;
+		say "You don't know how to go there safely." instead;
+	try going way instead.
+
+Carry out going to a thing:
+	now location-to-go is the last-seen-location of the noun;
+	let way be the best route from the location of player to location-to-go through visited safe rooms;
+[	unless way is a direction:
+		let way be the best route from the location of player to the noun through visited rooms;		]
+	unless way is a direction:
+		take no time;
+		say "You don't know a safe path towards [it-them]." instead;
 	try going way instead.
 
 
@@ -165,7 +182,7 @@ Shorter going to is an action applying to nothing. Understand "go to" and "go on
 Instead of shorter going to:
 	if location-to-go is Null-Room:
 		take no time;
-		say "Unable to go automatically: you haven't provided a destination yet. Please use a command like 'go to Entrance Hall' first.";
+		say "Unable to go automatically: you haven't provided a destination yet. Please use a command like 'go to Entrance Hall' or 'go to Malygris' first.";
 	otherwise:
 		try going to the location-to-go.
 
