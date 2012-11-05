@@ -1323,8 +1323,9 @@ Carry out reading a scroll of knowledge:
 	say "The nature of scrolls suddenly becomes clear to you.";
 	repeat with S running through the kinds of scroll:
 		repeat with I running through the instances of S:
-			identify I;
-			break;
+			if I is unidentified:
+				identify I;
+				break;
 
 
 Section -  Scroll of Curse Removal

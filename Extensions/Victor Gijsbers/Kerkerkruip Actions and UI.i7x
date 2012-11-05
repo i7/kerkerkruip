@@ -477,20 +477,19 @@ To say general direction from (place1 - a room) to (place2 - a room):
 	say "[K]".
 
 
-Chapter - Trophy list
+Chapter - Trophy list (requesting the score)
 
-Trophylisting is an action out of world.
+Understand "trophy" and "trophies" and "list trophies" as requesting the score.
 
-Understand "trophy" and "trophies" and "list trophies" as trophylisting.
-
-Carry out trophylisting:
+The announce the score rule is not listed in the carry out requesting the score rules.
+Carry out requesting the score:
 	if the number of dead persons is 0:
-		say "Nobody has died yet.";
+		say "You have not yet killed anyone, taking [turn count] turn[s] to do so.";
 	otherwise:
-		say "The following creatures have been vanquished:";
+		say "The following beings have been vanquished:";
 		repeat with guy running through dead seen persons:
 			say "[line break]- [italic type][the name of the guy][roman type] (level [if group level of the guy is not 0][group level of the guy][otherwise][level of the guy][end if])";
-		say "[paragraph break]".
+		say "[paragraph break]You have accomplished this in [turn count] turn[s]!";
 
 Chapter - Commands command
 
@@ -522,22 +521,6 @@ Carry out direction-jumping:
 	say "You hop around.".
 
 
-Chapter - Equipping
-
-Equipping is an action applying to one thing. Understand "equip [something]" as equipping.
-
-Check equipping:
-	if the noun is not a weapon and the noun is not clothing:
-		take no time;
-		say "You can only equip weapons and clothing.".
-
-Carry out equipping a weapon:
-	try readying the noun instead.
-
-Carry out equipping clothing:
-	try wearing the noun instead.
-
-
 Chapter - More synonyms
 
 Understand "jump in [something]" as entering.
@@ -546,6 +529,7 @@ Understand "throw [something] in [something]" as inserting it into.
 Understand "throw [something] into [something]" as inserting it into.
 Understand "drop [something] in [something]" as inserting it into.
 
+Understand the command "equip" as "use".
 Understand "use [clothing]" as wearing.
 Understand "use [scroll]" as reading.
 Understand "use [grenade]" as throwing.
