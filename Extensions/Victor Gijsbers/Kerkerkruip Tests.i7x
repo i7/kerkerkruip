@@ -1,5 +1,7 @@
 Kerkerkruip Tests by Victor Gijsbers begins here.
 
+Use authorial modesty.
+
 [ Tests for various things ]
 
 Chapter - Tests (not for release)

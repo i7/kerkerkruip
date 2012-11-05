@@ -1788,17 +1788,19 @@ Every turn when hound status > 0:
 	decrease hound status by 1.
 
 An aftereffects rule (this is the set up the power of the hound rule):
-	if the global defender is the hound and the hound is alive:
-		now hound status is 2;
-		now the hound provoker is the global attacker;
-	[ If for some reason you attacked yourself you don't get an extra turn ]
-	otherwise if the global defender is the player and the global attacker is not the player and the power of the hound is granted and the player is alive:
-		if a random chance of 2 in the mind score of the player succeeds:
-			say "Your mind was otherwise occupied; that attack took you by surprise.";
-		otherwise:
+	[ Check that we're not running from a battle - the power isn't used in that circumstance! ]
+	if the global defender is at-React:
+		if the global defender is the hound and the hound is alive:
 			now hound status is 2;
 			now the hound provoker is the global attacker;
-			say "[one of]Anticipating[or]Prepared for[at random] [one of]the attack[or]their every move[at random][one of], you respond instantly![or], your response is immediate![at random]";
+		[ If for some reason you attacked yourself you don't get an extra turn ]
+		otherwise if the global defender is the player and the global attacker is not the player and the power of the hound is granted and the player is alive:
+			if a random chance of 2 in the mind score of the player succeeds:
+				say "Your mind was otherwise occupied; that attack took you by surprise.";
+			otherwise:
+				now hound status is 2;
+				now the hound provoker is the global attacker;
+				say "[one of]Anticipating[or]Prepared for[at random] [one of]the attack[or]their every move[at random][one of], you respond instantly![or], your response is immediate![at random]";
 
 An attack modifier rule (this is the power of the hound attack modifier rule):
 	if hound status is 1 and the global defender is the hound provoker:

@@ -1188,9 +1188,10 @@ Understand "shalm" and "sawesas" as shalm.
 A scroll is usually privately-named.
 A scroll can be identified or unidentified. A scroll is usually identified.
 A scroll has a scroll name.
-A scroll has a scroll name called true name.
+A scroll has a scroll name called alternative name.
 
 Understand the scroll name property as describing a scroll.
+Understand the alternative name property as describing a scroll when the scroll is identified.
 
 Understand "labelled" as a scroll when the scroll is unidentified.
 Understand "of" as a scroll when the scroll is identified.
@@ -1257,13 +1258,15 @@ When play begins (this is the obfuscate scrolls rule):
 		remove entry 1 from names;
 		repeat with I running through the instances of S:
 			now I is unidentified;
-			now the true name of I is the scroll name of I;
+			now the alternative name of I is the scroll name of I;
 			now the scroll name of I is N;
 
 To identify (S - a scroll):
 	repeat with I running through the instances of the kind of S:
 		now I is identified;
-		now the scroll name of I is the true name of I;
+		let temp name be the scroll name of I;
+		now the scroll name of I is the alternative name of I;
+		now the alternative name of I is temp name;
 
 First carry out reading an unidentified scroll:
 	identify the noun;
@@ -1320,8 +1323,8 @@ Carry out reading a scroll of knowledge:
 	say "The nature of scrolls suddenly becomes clear to you.";
 	repeat with S running through the kinds of scroll:
 		repeat with I running through the instances of S:
-			now I is identified;
-			now the scroll name of I is the true name of I;
+			identify I;
+			break;
 
 
 Section -  Scroll of Curse Removal
