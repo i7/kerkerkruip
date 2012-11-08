@@ -13,7 +13,7 @@ A person has a number called kill count. [ The number of times the person has ki
 
 Table of Monster Statistics
 ColID (a number)	ColSeen [encountered] (a truth state)	died (a number)	kill (a number)
-with 27 blank rows [ Don't forget to update this when monsters are added! ]
+with 28 blank rows [ Don't forget to update this when monsters are added! ]
 
 The File Of Monster Statistics is called "KerkerkruipStats".
 
@@ -4701,6 +4701,97 @@ Report the imp dodging:
 Report the imp waiting when the imp is insane:
 	say "'I will steal everything. Everything. EVERYTHING! Even myself!' the imp shouts.";
 	rule succeeds.
+
+
+
+
+Chapter - The demonic mistress
+
+[The demoness can appear when the player wears the demon lord's diadem.]
+
+The demonic mistress is a monster. "A horned figure stalks through the room." Understand "horned" and "figure" as the demonic mistress. The description of the demonic mistress is "A being summoned by Malygris from the depths of Hell, this demon has only one purpose: to stop you from reaching its master.".
+
+The level of demonic mistress is 0.
+The ID of the demonic mistress is 28.
+The demonic mistress is demonic.
+
+The health of demonic mistress is 25.
+The melee of demonic mistress is 5.
+The defence of demonic mistress is 10.
+
+The body score of demonic mistress is 9.
+The mind score of demonic mistress is 9.
+The spirit score of demonic mistress is 9. 
+
+The demonic mistress is follower.
+Follower percentile chance of demonic mistress is 100.
+The demonic mistress is unnaturally aware.
+
+When play begins:
+	let X be a random natural weapon part of the demonic mistress;
+	now the printed name of X is "claws".
+	
+Demonic mistress is weapon user.
+
+The demonic mistress carries the demon whip.
+
+The demon whip is a weapon.
+The demon whip is ranged.
+
+The damage die of the demon whip is 3.
+The weapon attack bonus of the demon whip is 1.
+The weapon damage bonus of the demon whip is 2.
+The dodgability of the demon whip is 2.
+The passive parry max of the demon whip is 1.
+The active parry max of the demon whip is 0.
+
+The demon whip is cursed.
+
+The description of the demon whip is "The demons of the lower hells use these savage whips to break the minds of their slaves.".
+
+An aftereffects rule (this is the demon whip rule):
+	if the global attacker weapon is the demon whip:
+		if the attack damage is greater than 0:
+			if the global defender is alive:
+				say "The demon whip [bold type]breaks [possessive of the global defender] willpower[roman type] (-2 mind score)![paragraph break]";
+				decrease mind score of global defender by 2;
+				if global defender is the player and global attacker is the demonic mistress:
+					if final mind of the player is less than 1:
+						say "'Come. You will serve my master,' the demon mistress breathes in your ear. Your will broken entirely, you meekly kneel as she chains your hands together, puts a collar around your neck, and pulls you along into the depths of hell.";
+						end the game saying "This is infinitely worse than being enslaved by a mindslug.";
+						rule fails.
+
+
+Section - Demonic mistress prose
+
+Report an actor hitting the dead demonic mistress:
+	say "'You have failed!' a booming voice shouts as a huge hairy arm pulls the demon mistress back into hell. Her screams are music to your ears.";
+	rule succeeds.
+
+Report the demonic mistress hitting a dead pc:
+	say "'A pity. [if the player is female]She[otherwise if the player was male]He[otherwise]It[end if] was too weak to serve.' She kicks your corpse out of the way.";
+	rule succeeds.
+
+Report the demonic mistress attacking:
+	unless the actor is the noun:
+		say "The demonic mistress lashes out at [the noun].";
+	otherwise:
+		say "'I deserve to be punished!' the demonic mistress whispers as she attempts to hit her own back.";
+	rule succeeds.
+
+Report the demonic mistress dodging:
+	say "The demonic mistress jumps away.";
+	rule succeeds.
+
+Report the demonic mistress parrying:
+	say "The demonic mistress parries.";
+	rule succeeds.
+
+Report the demonic mistress waiting when the demonic mistress is insane:
+	say "'Now lay down and die, or I will give all of you another two hundred thousand lashes!' the demonic mistress screams.";
+	rule succeeds.
+
+
 
 
 [Chapter - Duskwing

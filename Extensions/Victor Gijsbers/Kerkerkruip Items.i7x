@@ -561,7 +561,43 @@ A spirit bonus rule (this is the spirit bonus of the diadem of the priestess rul
 	if the test subject wears the diadem of the priestess:
 		increase faculty bonus score by 2.
 
+A treasure placement rule (this is the diadem of the priestess can be devil's diadem rule):
+	if a random chance of 1 in 6 succeeds:
+		now the hidden identity of the diadem of the priestess is the demon lord's diadem.
+
 The description of the diadem of the priestess is "This graceful diadem has been used thousands of times in rites for gods now long dead. [italic type](It grants a +2 spirit bonus.)[roman type]".
+
+Section - The demon lord's diadem (cursed)
+
+The demon lord's diadem is a cursed curse-identified hat. The indefinite article is "the". 
+The demon lord's diadem is silver.
+
+A spirit bonus rule (this is the spirit bonus of the demon lord's diadem rule):
+	if the test subject wears the demon lord's diadem:
+		increase faculty bonus score by 4.
+
+The description of the demon lord's diadem is "Everyone agreed that this magical necklace helped Marcia Gracewood rise to the rank of high priestess, but only her enemies believed the rumours that if was gifted to her by a powerful demon lord in exchange for her eternal service. The manner of her 'death' proved them right in the most dramatic way possible. [italic type](It grants a +4 spirit bonus. As for the demon... well... who knows?)[roman type]".
+
+The demon-diadem-number is a number that varies.
+
+A treasure placement rule (this is the demon's diadem calibration rule):
+	if a random chance of 1 in 3 succeeds:
+		now the demon-diadem-number is 0;
+	otherwise:
+		now the demon-diadem-number is a random number between 10 and 80.
+
+Every turn when the player wears the demon lord's diadem:
+	if the main actor is the player:
+		if the demon-diadem-number is not 0:
+			decrease the demon-diadem-number by 1;
+			if the demon-diadem-number is 0:
+				do the claim of the demon.
+
+To do the claim of the demon:
+	remove demon lord's diadem from play;
+	say "With a sudden flash, a [bold type]demoness carrying a bright red whip[roman type] appears in the room. She gestures, and the silver diadem you've been wearing disappears. 'I don't think you'll need that anymore,' she states in a harsh whisper. 'Seeing how you will be spending the rest of eternity serving my master.'";
+	move the demonic mistress to the location.
+
 
 Section - Metastasio's hat (minor)
 
