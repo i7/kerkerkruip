@@ -654,10 +654,38 @@ A body bonus rule (this is the body bonus of the bodice of body rule):
 
 The description of the bodice of body is "This magical item is an elegant green and black garment, stiffened with whalebone and laced in front. It makes the wearer's body supple and responsive as never before. [italic type](It grants a +2 body bonus.)[roman type]".	
 
+A treasure placement rule (this is the bodice of body can be bodice of breathlessness rule):
+	if a random chance of 6 in 6 succeeds:
+		now the hidden identity of the bodice of body is the bodice of breathlessness.
 
+Section - Bodice of breathlessness (cursed)
 
+The bodice of breathlessness is a cursed curse-identified shirt. The indefinite article is "the".
+The bodice of breathlessness is cloth.
 
+A body bonus rule (this is the body bonus of the bodice of breathlessness rule):
+	if the test subject wears the bodice of breathlessness:
+		let m be (concentration of the test subject * 2);
+		let n be (2 - m);
+		increase faculty bonus score by n.
 
+The description of the bodice of breathlessness is "This magical item is an elegant green and black garment, stiffened with whalebone and laced in front. While it makes the wearer's body supple and responsive as never before, it has a hidden defect: when you concentrate, the lace tightens and pushes the breath from your body.[paragraph break][italic type](The bodice of breathlessness grants a +2 body bonus when not concentrated, but this is reduced by 2 for every level of concentration. Thus, you will have a -4 body penalty when you have 3 levels of concentration.)[roman type]".
+
+To decide whether breathlessness is the case:
+	if the player wears the bodice of breathlessness:
+		decide yes;
+	otherwise:
+		decide no.
+
+Report concentrating when breathlessness is the case (this is the bodice of breathlessness reporting rule):
+	if the concentration of the actor is:
+		-- 1:
+			say "You are now mildly concentrated. The lace of your bodice tightens uncomfortably.";
+		-- 2:
+			say "You are now quite concentrated.  Your bodice tightens even more, making it hard to breath.";
+		-- 3:
+			say "You are now maximally concentrated.  You struggle to get air as the bodice almosy crushes your ribs.";
+	rule fails.
 
 Section - Asbestos vest (minor)
 
