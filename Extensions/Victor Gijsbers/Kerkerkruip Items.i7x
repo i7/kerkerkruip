@@ -284,7 +284,6 @@ Section - Essence of Greed (major)
 The essence of greed is a major essence. The indefinite article is "the".
 The essence of greed is magical.
 The essence of greed is iron.
-The difficulty level of the essence of greed is 2.
 
 The unlock level of essence of greed is 4.
 The unlock text of essence of greed is "an essence which allows you to gain more health, at the cost of your safety".
@@ -478,21 +477,41 @@ Does the player mean wearing something not worn:
 
 Chapter - Necklaces
 
-Section - Tormenting necklace (minor)
+Section - Tormenting necklace (major)
 
-The tormenting necklace is a minor necklace.
+The tormenting necklace is a major necklace.
 The tormenting necklace is deathly.
 
-The description of the tormenting necklace is "This monstrous necklace is made of shards of glass, fossilised teeth, broken points of daggers and thorns. It is imbued with a magic that deals paralysing pain to anyone who is wounded in combat. [italic type](This necklace lowers the initiative of anyone who gets hit -- including you -- thus increasing the probability that a successful attacker can immediately act again.)[roman type]".
+The description of the tormenting necklace is "This monstrous necklace is made of shards of glass, fossilised teeth, broken points of daggers and thorns. It is imbued with a magic that deals paralysing pain to those who are wounded in combat. [italic type](The necklace is activated in two circumstances: when the wearer is dealt damage by an attack, and when an attack by the wearer deals damage to someone else. The person who has been dealt damage will writhe in agony and must skip the next turn.)[roman type]".
 
 The unlock level of tormenting necklace is 6.
-The unlock text of tormenting necklace is "a necklace that lowers the initiative of anyone who gets damaged in combat".
+The unlock text of tormenting necklace is "a necklace that paralyses those who get damaged in combat".
+
+A person can be necklace-tormented. A person is usually not necklace-tormented.
+The necklace-torment-counter is a number that varies. The necklace-torment-counter is 0.
 
 Aftereffects rule (this is the tormenting necklace rule):
-	if the player wears the tormenting necklace:
+	if the global defender wears the tormenting necklace or the global attacker wears the tormenting necklace:
 		if the attack damage is greater than 0:
-			decrease initiative of the global defender by 2.
+			unless global defender is necklace-tormented:
+				now global defender is necklace-tormented;
+				increase necklace-torment-counter by 1.
 
+This is the necklace of torment rule:
+	if main actor is necklace-tormented:
+		say "[The main actor] writhe[s] in [bold type]agony[roman type]!";
+		now main actor is not necklace-tormented;
+		decrease necklace-torment-counter by 1;
+		now combat status is concluding.
+
+The necklace of torment rule is listed before the the main actor chooses an action rule in the combat round rules.
+
+Every turn when necklace-torment-counter is not 0:
+	if combat status is peace:
+		repeat with guy running through necklace-tormented people:
+			now guy is not necklace-tormented.
+
+[Torment should be canceled outside combat. I've implemented this using a counter in order to speed things up and not have to cycle through all persons every turn.]
 
 
 Chapter - Hats
