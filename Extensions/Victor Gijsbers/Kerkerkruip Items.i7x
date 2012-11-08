@@ -258,7 +258,7 @@ Last check going (this is the do not go in combat when enraged rule):
 
 Section - Essence of Patience (minor)
 
-The essence of patience is a major essence. The indefinite article is "the".
+The essence of patience is a minor essence. The indefinite article is "the".
 The essence of patience is magical.
 The essence of patience is iron.
 
