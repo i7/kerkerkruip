@@ -216,7 +216,7 @@ An attack modifier rule (this is the caution grants better retreat rule):
 	if the global defender is the player and the player is retreater:
 		if the player is cautious:
 			say " - 3 (essence of caution)[run paragraph on]";
-			decrease the attack strength by 2.
+			decrease the attack strength by 3.
 
 
 Section - Essence of Rage (minor)
@@ -599,6 +599,10 @@ To do the claim of the demon:
 	move the demonic mistress to the location.
 
 
+[
+
+[Currently boring, so I'm commenting it out. Should do something with grenades.]
+
 Section - Metastasio's hat (minor)
 
 Metastasio's hat is a minor hat. The description of Metastasio's hat is "Metastasio envisioned whole armies that would lob grenades at the enemy and would then run away as fast as they could. This hat was meant as a prototype piece of equipment to help with the latter. But the generals of Averoigne did not share Metastasio's ideas, and Louis VIII expressly forbade further production of these hats, a decision the chroniclers have all lauded.". Metastasio's hat is proper-named.
@@ -609,7 +613,7 @@ An attack modifier rule (this is the Metastasio's hat grants worse attack and be
 	if the player wears Metastasio's hat:
 		if the global attacker is the player or (the global defender is the player and the player is retreater):
 			say " - 2 (your cowardice)[run paragraph on]";
-			decrease the attack strength by 2.
+			decrease the attack strength by 2.]
 
 
 
