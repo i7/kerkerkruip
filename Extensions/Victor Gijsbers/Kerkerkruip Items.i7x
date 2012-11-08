@@ -655,7 +655,7 @@ A body bonus rule (this is the body bonus of the bodice of body rule):
 The description of the bodice of body is "This magical item is an elegant green and black garment, stiffened with whalebone and laced in front. It makes the wearer's body supple and responsive as never before. [italic type](It grants a +2 body bonus.)[roman type]".	
 
 A treasure placement rule (this is the bodice of body can be bodice of breathlessness rule):
-	if a random chance of 6 in 6 succeeds:
+	if a random chance of 1 in 6 succeeds:
 		now the hidden identity of the bodice of body is the bodice of breathlessness.
 
 Section - Bodice of breathlessness (cursed)
@@ -687,6 +687,9 @@ Report concentrating when breathlessness is the case (this is the bodice of brea
 			say "You are now maximally concentrated.  You struggle to get air as the bodice almosy crushes your ribs.";
 	rule fails.
 
+[
+[Too boring right now, because there are almost no flaming weapons.]
+
 Section - Asbestos vest (minor)
 
 The asbestos vest is a minor shirt. The description of asbestos vest is "While it doesn't provide much protection against weapons, this vest could be useful for its fire resistance. It bears the signs of the Montenoir alchemist guild.".
@@ -695,7 +698,8 @@ Asbestos vest is other-material.
 
 Heat resistance rule (this is the asbestos vest heat resistance rule):
 	if test subject wears asbestos vest:
-		increase temp-heat by 4.
+		increase temp-heat by 4.]
+
 
 Section - Robe of the Dead Mage (epic)
 
