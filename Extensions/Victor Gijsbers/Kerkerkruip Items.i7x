@@ -205,21 +205,17 @@ The essence of caution is iron.
 
 A person can be cautious. A person is usually not cautious.
 
-The description of the essence of caution is "This small metal bottle contains the magical essence of caution, distilled from the brain of [one of]the only councilor of Hargo the Furious of Yahvinna who lived to die of old age[or]the famous Algirian general al-Hawabi, who fought only two battles in a forty year campaign -- and won both[or]an unknown rogue, whose exploits would be legendary if only they were known[sticky random]. When inhaled, it confers this mindset to the user. [italic type](+2 defence bonus when retreating, sometimes lose initiative.)[roman type]".
+The description of the essence of caution is "This small metal bottle contains the magical essence of caution, distilled from the brain of [one of]the only councilor of Hargo the Furious of Yahvinna who lived to die of old age[or]the famous Algirian general al-Hawabi, who fought only two battles in a forty year campaign -- and won both[or]an unknown rogue, whose exploits would be legendary if only they were known[sticky random]. When inhaled, it confers this mindset to the user. [italic type](+3 defence bonus when retreating, -1 spirit.)[roman type]".
 
 Carry out inhaling the essence of caution:
 	say " The decision to do this suddenly seems exceedingly rash.";
-	now the player is cautious.
+	now the player is cautious;
+	decrease spirit score of the player by 1.
 	
-Initiative update rule (this is the sometimes loses initiative when cautious rule):
-	if a random chance of 1 in 20 succeeds:
-		repeat with X running through all alive cautious persons enclosed by the location:
-			decrease the initiative of X by 4.
-		
 An attack modifier rule (this is the caution grants better retreat rule):
 	if the global defender is the player and the player is retreater:
 		if the player is cautious:
-			say " - 2 (essence of caution)[run paragraph on]";
+			say " - 3 (essence of caution)[run paragraph on]";
 			decrease the attack strength by 2.
 
 
