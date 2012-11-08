@@ -642,17 +642,22 @@ Chance to win rule (this is the CTW smoky robe penalty rule):
 				let n be the smoke penalty of the location;
 				decrease the chance-to-win by n.
 				
-Section - Shirt of muscles (minor)
+Section - Bodice of body (minor)
 
-The shirt of muscles is a minor shirt. The indefinite article is "the". 
-The shirt of muscles is civilised.
-The shirt of muscles is cloth.
+The bodice of body is a minor shirt. The indefinite article is "the". 
+The bodice of body is civilised.
+The bodice of body is cloth.
 
-A body bonus rule (this is the body bonus of the shirt of muscles rule):
-	if the test subject wears the shirt of muscles:
+A body bonus rule (this is the body bonus of the bodice of body rule):
+	if the test subject wears the bodice of body:
 		increase faculty bonus score by 2.
 
-The description of the shirt of muscles is "The wearer of this shirt immediately appears more muscled. While this may well be a merely visual effect, the magic of the shirt nevertheless increases the wearer's body score. [italic type](It grants a +2 body bonus.)[roman type]".	
+The description of the bodice of body is "This magical item is an elegant green and black garment, stiffened with whalebone and laced in front. It makes the wearer's body supple and responsive as never before. [italic type](It grants a +2 body bonus.)[roman type]".	
+
+
+
+
+
 
 Section - Asbestos vest (minor)
 
