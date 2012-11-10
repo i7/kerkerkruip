@@ -720,6 +720,26 @@ Heat resistance rule (this is the asbestos vest heat resistance rule):
 		increase temp-heat by 4.]
 
 
+Section - Monk's robe (monster)
+
+The monk's robe is a shirt. The monk's robe is cloth.
+Miranda wears monk's robe.
+The description of monk's robe is "A plain and simple brown robe. Years of being worn by deniers of the flesh has instilled ascetic virtues in the fabric. [italic type](-2 body, +1 mind, +1 spirit)[roman type]".
+
+A body bonus rule (this is the body penalty of the monk's robe rule):
+	if the test subject wears the monk's robe:
+		decrease faculty bonus score by 2.
+
+A mind bonus rule (this is the mind bonus of the monk's robe rule):
+	if the test subject wears the monk's robe:
+		increase faculty bonus score by 1.		
+
+A spirit bonus rule (this is the spirit bonus of the monk's robe rule):
+	if the test subject wears the monk's robe:
+		increase faculty bonus score by 1.
+
+
+
 Section - Robe of the Dead Mage (epic)
 
 [Concentration not broken on hit; damage increased by 33% per point of concentration.]

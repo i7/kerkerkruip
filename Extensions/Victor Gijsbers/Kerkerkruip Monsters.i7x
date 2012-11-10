@@ -683,11 +683,7 @@ The spirit score of Miranda is 5.
 
 Miranda is weapon user.
 
-Section - Miranda's robe
-
-The monk's robe is a shirt. The monk's robe is cloth.
-Miranda wears monk's robe.
-The description of monk's robe is "A plain and simple robe. You doubt it is useful for any purpose but modesty.".
+[Wears monk's robe: see Kerkerkruip Items]
 
 Section - Nunchuck
 
