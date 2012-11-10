@@ -1,8 +1,8 @@
-"Kerkerkruip - Release 6 - PRE-BETA!!" by Victor Gijsbers
+"Kerkerkruip - Release 7 - BETA" by Victor Gijsbers
 
 The story headline is "An IF roguelike".
 The story genre is "dungeon crawl".
-The release number is 6.
+The release number is 7.
 [Release along with cover art.]
 
 	
@@ -22,7 +22,7 @@ The binary file of save data is called "KerkerkruipSaves".
 
 Use undo prevention.
 
-Include version 4/121102 of Inform ATTACK by Victor Gijsbers.
+Include version 4/121110 of Inform ATTACK by Victor Gijsbers.
 [You can get the latest ATTACK at https://github.com/i7/ATTACK ]
 
 Include Kerkerkruip Dungeon Generation by Victor Gijsbers.
@@ -39,7 +39,6 @@ Include Kerkerkruip Events and Specials by Victor Gijsbers.
 Include Kerkerkruip Ugly Special Cases by Victor Gijsbers.
 Include Kerkerkruip Start and Finish by Victor Gijsbers.
 Include Kerkerkruip Final Declarations by Victor Gijsbers.
-Include Kerkerkruip Tests by Victor Gijsbers.
 
 Use MAX_PROP_TABLE_SIZE of 500000.
 Use MAX_OBJ_PROP_COUNT of 128.
