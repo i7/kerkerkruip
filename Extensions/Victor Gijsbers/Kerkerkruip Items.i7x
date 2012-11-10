@@ -830,7 +830,7 @@ This is the boots of the wardance rule:
 		if n is greater than 0:
 			if the numbers boolean is true:
 				say " - 1 (boots of the war dance)[run paragraph on]";
-				decrease the attack strength by 1.
+			decrease the attack strength by 1.
 
 The boots of the wardance rule is listed before the standard tension attack modifier rule in the attack modifier rules.
 		
@@ -867,7 +867,51 @@ Chapter - Gauntlets
 
 Section - Gauntlets of grip (major)
 
-The gauntlets of grip are gauntlets.
+The gauntlets of grip are major gauntlets. The gauntlets of grip are plural-named. The indefinite article is "the".
+The gauntlets of grip are civilised.
+The gauntlets of grip are iron.
+The description of the gauntlets of grip is "These sturdy gauntlets make it easier to parry your opponent's attacks.".
+
+This is the gauntlets of grip rule:
+	if the global defender is at parry and the global defender wears the gauntlets of grip:
+		let n be the passive parry max of global attacker weapon; [active parry max doesn't matter, since gauntlets could be used themselves]
+		if n is greater than 0:
+			if the gauntlets of grip are not rusted:
+				if the numbers boolean is true:
+					say " - 1 (gauntlets of grip)[run paragraph on]";
+				decrease the attack strength by 1.
+
+The gauntlets of grip rule is listed before the dodge defence bonus rule in the attack modifier rules.
+
+A treasure placement rule (this is the grip can be greasy rule):
+	if a random chance of 1 in 4 succeeds:
+		now the hidden identity of the gauntlets of grip is greasy gauntlets.
+
+Section - Greasy gauntlets (cursed)
+
+The greasy gauntlets are cursed curse-identified gauntlets. The greasy gauntlets are plural-named. The indefinite article is "the".
+The greasy gauntlets are iron.
+The description of the greasy gauntlets is "These gauntlets are supernaturally slick and greasy. It might be hard to hold on to a weapon while wearing them.".
+
+Last aftereffects rule (this is the greasy gauntlets rule):
+	if the global attacker wears the greasy gauntlets and the attack damage is greater than 0:
+		if the global attacker weapon is not ranged:
+			if a random chance of 1 in 6 succeeds:
+				do the grease drop with the global attacker;
+	if the global defender wears the greasy gauntlets and the global defender is at parry and the attack damage is 0:
+		if the passive parry max of the global attacker weapon is not 0:
+			if a random chance of 1 in 4 succeeds:
+				do the grease drop with the global defender.
+
+To do the grease drop with (guy - a person):
+	let item be a random readied weapon enclosed by guy;
+	unless item is a natural weapon:
+		now item is not readied;
+		move item to the location of guy;
+		if guy is the player:
+			say "Because of the force of the blow and the slipperiness of the gauntlets, you [bold type]drop [the item][roman type].";
+		otherwise:
+			say "[The guy] drop[s] [the item].".
 
 
 Chapter - Masks
