@@ -685,13 +685,7 @@ Miranda is weapon user.
 
 [Wears monk's robe: see Kerkerkruip Items]
 
-Section - Nunchuck
-
-The pair of nunchucks are a weapon. The pair of nunchucks is wood. Understand "nunchuck" and "nunchuk" and "nunchuks" as the pair of nunchucks. The pair of nunchucks is ambiguously plural.
-The description of the pair of nunchucks is "These two pieces of wood with a metal chain between them can be surprisingly dangerous.".
-The active parry max of the pair of nunchucks is 4.
-
-Miranda carries the pair of nunchucks. The pair of nunchucks is readied.
+[Carries nunchucks: see Kerkerkruip Items]
 
 Section - Stunning blow
 
@@ -1934,7 +1928,7 @@ When play begins:
 	let X be a random natural weapon part of Fafhrd;
 	now printed name of X is "Fafhrd's fists".
 
-Fafhrd carries a sword called Fafhrd's sword. The description of Fafhrd's sword is "It looks like a normal sword that has seen a lot of use."
+[Fafhrd carries claymore: see Kerkerkruip Items.]
 
 Follower percentile chance of Fafhrd is 75.
 Fafhrd is weapon user.
@@ -1942,7 +1936,7 @@ Fafhrd is weapon user.
 Mouser is a mindslug-enslaved man. The description of Mouser is "Mouser is a small, fast man. You know his type from the alleys and alehouses of Montenoir.".
 The ID of Mouser is 12.
 
-Mouser carries a sword called Mouser's sword. The description of Mouser's sword is "A relatively short sword."
+[Mouser carries sneaky sword: see Kerkerkruip Items.]
 
 Health of Mouser is 8.
 Defence of Mouser is 9.

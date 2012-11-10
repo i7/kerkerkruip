@@ -1966,8 +1966,22 @@ Chance to win rule (this is the CTW smoky blade penalty rule):
 				let n be the smoke penalty of the location;
 				increase the chance-to-win by n.
 
+Section - Sneaky sword (monster)
+
+Mouser carries a sword called sneaky sword. The description of sneaky sword is "This sword is especially suitable for making sneaky attacks."
+
+The special weapon info of the sneaky sword is "; +2 damage when hidden[run paragraph on]"
+
+A damage modifier rule (this is the sneaky sword damage bonus rule):
+	if the global attacker weapon is the sneaky sword:
+		if the global attacker is hidden:
+			say " + 2 (sneaky attack)[run paragraph on]";
+			increase the attack damage by 2.
 
 
+Section - Claymore (monster)
+
+Fafhrd carries a sword called claymore. The description of claymore is "It looks like a normal sword that has seen a lot of use."
 
 
 Chapter - Rapier
@@ -2359,7 +2373,13 @@ An aftereffects rule (this is the glass cannon shatters when used to parry rule)
 
 The special weapon info of the glass cannon is "; makes you easier to hit; halves your health[run paragraph on]".
 
+Section - Nunchuck (monster)
 
+The pair of nunchucks are a weapon. The pair of nunchucks is wood. Understand "nunchuck" and "nunchuk" and "nunchuks" as the pair of nunchucks. The pair of nunchucks is ambiguously plural.
+The description of the pair of nunchucks is "These two pieces of wood with a metal chain between them can be surprisingly dangerous.".
+The active parry max of the pair of nunchucks is 4.
+
+Miranda carries the pair of nunchucks. The pair of nunchucks is readied.
 
 
 
