@@ -795,30 +795,34 @@ A dungeon interest rule (this is the Malygris sometimes wears the cloak of refle
 			now Malygris wears the cloak of reflection;
 			if generation info is true, say "* Malygris wears the cloak of reflection.".
 
+
+
+
 Chapter - Shoes
 
 Section - Boots of the war dance (major)
 
-The boots of the war dance are major shoes. The boots of the war dance are plural-named. The indefinite article of the boots of the war dance is "the". The description of boots of the war dance is "These graceful boots, supposedly made by the master of Algir, will grant you impeccable footwork in combat. This will undoubtedly grant you extra turns now and then.".
+The boots of the war dance are major shoes. The boots of the war dance are plural-named. The indefinite article of the boots of the war dance is "the". The description of boots of the war dance is "These graceful boots, supposedly made by the master of Algir, will grant you impeccable footwork in combat. [italic type](They give you a +1 bonus to dodging.)[roman type]".
 Boots of the war dance are civilised.
 
-Initiative update rule (this is the boots of the war dance give initiative rule):
-	if the player wears the boots of the war dance:
-		if a random chance of 1 in 13 succeeds:
-			increase the initiative of the player by 5.
+This is the boots of the wardance rule:
+	if the global defender is at dodge and the global defender wears the boots of the war dance:
+		let n be the dodgability of global attacker weapon;
+		if n is greater than 0:
+			if the numbers boolean is true:
+				say " - 1 (boots of the war dance)[run paragraph on]";
+				decrease the attack strength by 1.
 
+The boots of the wardance rule is listed before the standard tension attack modifier rule in the attack modifier rules.
+		
 A treasure placement rule (this is the war dance can be wandering rule):
-	if a random chance of 1 in 8 succeeds:
+	if a random chance of 1 in 4 succeeds:
 		now the hidden identity of the boots of the war dance is boots of wandering.
+
 
 Section - Boots of wandering (cursed)
 
-The boots of wandering are cursed curse-identified shoes. The boots of wandering are plural-named. The indefinite article of boots of wandering is "the". The description of boots of wandering is "These graceful boots, supposedly made by the master of Algir, will grant you impeccable footwork in combat. This will undoubtedly grant you extra turns now and then. Unfortunately, when a prince of Algir wore these boots in the War of the Woods, they were cursed by a dying druid. It is now exceedingly unsafe to wear them.".
-
-Initiative update rule (this is the boots of the boots of wandering give initiative rule):
-	if the player wears the boots of wandering:
-		if a random chance of 1 in 13 succeeds:
-			increase the initiative of the player by 5.
+The boots of wandering are cursed curse-identified shoes. The boots of wandering are plural-named. The indefinite article of boots of wandering is "the". The description of boots of wandering is "These graceful boots were supposed to grant their wearer impeccable footwork in combat. Unfortunately, when a prince of Algir wore these boots in the War of the Woods, they were cursed by a dying druid. They are now exceedingly unsafe.".
 
 Before doing anything when the player wears the boots of wandering (this is the boots of wandering weirdness rule):
 	if the player can move:
