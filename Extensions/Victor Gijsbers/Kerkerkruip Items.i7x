@@ -947,6 +947,16 @@ A beloved of Aite rule (this is the war mask Aite rule):
 	if the test subject wears the war mask:
 		rule succeeds.
 
+Section - Blindfold (minor)
+
+The blindfold is a minor mask. The description of the blindfold is "Wearing this blindfold will prevent you from seeing anything.".
+The blindfold is civilised.
+The blindfold is cloth.
+
+A blindness rule (this is the blindfold rule):
+	if the test subject wears the blindfold:
+		rule succeeds.
+
 Section - Goggles of acuity (major)
 
 The goggles of acuity are a major mask. They are plural-named. The indefinite article is "the". 
@@ -972,7 +982,7 @@ A blindness rule (this is the goggles of blindness rule):
 	if the test subject wears the goggles of blindness:
 		rule succeeds.
 
-The description of goggles of blindness is "These goggles prevent the wearer from seeing anything at all. A free-for-all fight between condemned criminals forced to wear such goggles is one of the most beloved shows during the Feast of Flesh; you have to smile as you recall the spectacle.".
+The description of goggles of blindness is "These goggles prevent the wearer from seeing anything at all. A free-for-all fight between condemned criminals forced to wear such goggles is one of the most beloved shows during the Feast of Flesh; you smile as you recall the spectacle.".
 
 
 
