@@ -411,11 +411,21 @@ Last check wearing a belt:
 		say "You will first have to take off [the item]." instead. 
 		
 Last check wearing gauntlets:
+	if the player encloses at least one cursed readied weapon:
+		let item be a random cursed readied weapon enclosed by the player;
+		take no time;
+		say "You will first have to uncurse [the item]." instead;
 	if the player wears gauntlets:
 		let item be a random gauntlets worn by the player;
 		take no time;
-		say "You will first have to take off [the item]." instead;
+		say "You will first have to take off [the item]." instead.
 	[abide by the suit check rule]. 
+
+Last check taking off gauntlets:
+	if the player encloses at least one cursed readied weapon:
+		let item be a random cursed readied weapon enclosed by the player;
+		take no time;
+		say "You will first have to uncurse [the item]." instead.
 				
 Last check wearing a mask:
 	if the player wears a mask:
@@ -461,6 +471,15 @@ This is the suit check rule:
 		say "You will first have to take off [the item].";
 		rule fails.
 
+Last check taking off a suit:
+	if the player wears a cursed cloak:
+		let item be a random cloak worn by the player;
+		take no time;
+		say "You will first have to uncurse [the item]." instead;
+	if the player wears a cursed belt:
+		let item be a random belt worn by the player;
+		take no time;
+		say "You will first have to uncurse [the item]." instead.
 
 Does the player mean taking off something worn:
 	it is very likely.
@@ -819,7 +838,6 @@ A treasure placement rule (this is the war dance can be wandering rule):
 	if a random chance of 1 in 4 succeeds:
 		now the hidden identity of the boots of the war dance is boots of wandering.
 
-
 Section - Boots of wandering (cursed)
 
 The boots of wandering are cursed curse-identified shoes. The boots of wandering are plural-named. The indefinite article of boots of wandering is "the". The description of boots of wandering is "These graceful boots were supposed to grant their wearer impeccable footwork in combat. Unfortunately, when a prince of Algir wore these boots in the War of the Woods, they were cursed by a dying druid. They are now exceedingly unsafe.".
@@ -846,6 +864,10 @@ Chapter - Belts
 
 
 Chapter - Gauntlets
+
+Section - Gauntlets of grip (major)
+
+The gauntlets of grip are gauntlets.
 
 
 Chapter - Masks
