@@ -1728,13 +1728,13 @@ The adamantine blade is an adamant weapon. The description of the adamantine bla
 The adamantine blade timer is a number that varies.
 
 To do the adamantine blade shuffle:
-	now the damage die of the adamantine blade is a random number between 5 and 12;
-	now the weapon attack bonus of the adamantine blade is a random number between -1 and 5;
+	now the damage die of the adamantine blade is a random number between 5 and 10;
+	now the weapon attack bonus of the adamantine blade is a random number between -1 and 4;
 	now the weapon damage bonus of the adamantine blade is a random number between 0 and 2;
 	now the dodgability of the adamantine blade is a random number between 1 and 4;
 	now the passive parry max of the adamantine blade is a random number between 1 and 4;
 	now the active parry max of the adamantine blade is a random number between 1 and 4;
-	now the adamantine blade timer is a random number between 12 and 22.
+	now the adamantine blade timer is a random number between 12 and 20.
 
 Every turn when the adamantine blade is not off-stage (this is the adamantine blade countdown rule):
 	if the main actor is the player:
