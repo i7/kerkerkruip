@@ -661,21 +661,21 @@ Chance to win rule (this is the CTW smoky robe penalty rule):
 				let n be the smoke penalty of the location;
 				decrease the chance-to-win by n.
 				
-Section - Bodice of body (minor)
+Section - Bodice of physique (minor)
 
-The bodice of body is a minor shirt. The indefinite article is "the". 
-The bodice of body is civilised.
-The bodice of body is cloth.
+The bodice of physique is a minor shirt. The indefinite article is "the". 
+The bodice of physique is civilised.
+The bodice of physique is cloth.
 
-A body bonus rule (this is the body bonus of the bodice of body rule):
-	if the test subject wears the bodice of body:
+A body bonus rule (this is the body bonus of the bodice of physique rule):
+	if the test subject wears the bodice of physique:
 		increase faculty bonus score by 2.
 
-The description of the bodice of body is "This magical item is an elegant green and black garment, stiffened with whalebone and laced in front. It makes the wearer's body supple and responsive as never before. [italic type](It grants a +2 body bonus.)[roman type]".	
+The description of the bodice of physique is "This magical item is an elegant green and black garment, stiffened with whalebone and laced in front. It makes the wearer's body supple and responsive as never before. [italic type](It grants a +2 body bonus.)[roman type]".	
 
-A treasure placement rule (this is the bodice of body can be bodice of breathlessness rule):
+A treasure placement rule (this is the bodice of physique can be bodice of breathlessness rule):
 	if a random chance of 1 in 6 succeeds:
-		now the hidden identity of the bodice of body is the bodice of breathlessness.
+		now the hidden identity of the bodice of physique is the bodice of breathlessness.
 
 Section - Bodice of breathlessness (cursed)
 
@@ -1047,7 +1047,7 @@ Understand "armor" as the suit of dragon armour.
 
 [The difficulty level of suit of dragon armour is 3.]
 
-The description of the suit of dragon armour is "This lovely suit has been made of dragon leather, the most durable and most magical substance known to man. It protects the wearer against heat and most kinds of damage, but continuously drains his or her health. Use with extreme caution.".
+The description of the suit of dragon armour is "This lovely suit has been made of dragon leather, the most durable and most magical substance known to man. It protects the wearer against most kinds of damage, but continuously drains his or her health. Use with extreme caution.".
 			
 Heat resistance rule (this is the dragon armour heat resistance rule):
 	if test subject is wearing the suit of dragon armour:
