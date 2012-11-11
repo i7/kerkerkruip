@@ -6,7 +6,7 @@ The release number is 7.
 [Release along with cover art.]
 
 	
-Include Menus by Emily Short.
+Include version 4/121111 of Menus by Emily Short. [Get this at https://github.com/i7/extensions]
 Include Basic Screen Effects by Emily Short. 
 Include Numbered Disambiguation Choices by Aaron Reed.
 Include Glulx Entry Points by Emily Short.
@@ -42,6 +42,7 @@ Include Kerkerkruip Final Declarations by Victor Gijsbers.
 
 Use MAX_PROP_TABLE_SIZE of 500000.
 Use MAX_OBJ_PROP_COUNT of 128.
+Use MAX_STATIC_DATA of 500000.
 
 The maximum score is 18. [1 + 1 + 2 + 2 + 3 + 4 + 5 = 18]
 The notify score changes rule is not listed in any rulebook.
