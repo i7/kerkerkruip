@@ -1187,16 +1187,19 @@ A flash grenade is a kind of grenade. The description of a flash grenade is "Whe
 A flash grenade is iron.
 
 Instead of throwing a flash grenade:
-	let lijst be a list of person;
-	repeat with guy running through alive persons in the location:
-		unless guy is blind:
-			let n be a random number between 0 and 8; [these lines ensure that in a smoky environment, you're not always blinded]
-			if guy is the player, decrease n by 2; [this is weighed a little in favour of the player, because she is throwing the grenade away from her, so there is bound to be a lot of smoke between her and the flash]
-			if guy is smoke immune, increase n by 20; [but hey, if your immune to smoke, you don't benefit from this]
-			unless n is less than smoke penalty of the location:
-				add guy to lijst;
-				now guy is blinded;
-	say "You throw the flash grenade, and a blinding light [unless lijst is empty]burns away the retinae of anyone unlucky enough to see it clearly, namely, [lijst with definite articles][otherwise]flashes through the room[end if].";
+	if the noun is rusted and a random chance of 1 in 2 succeeds:
+		say "You throw the flash grenade, but there is only a feeble explosion. The rust must have rendered it useless.";
+	otherwise:
+		let lijst be a list of person;
+		repeat with guy running through alive persons in the location:
+			unless guy is blind:
+				let n be a random number between 0 and 8; [these lines ensure that in a smoky environment, you're not always blinded]
+				if guy is the player, decrease n by 2; [this is weighed a little in favour of the player, because she is throwing the grenade away from her, so there is bound to be a lot of smoke between her and the flash]
+				if guy is smoke immune, increase n by 20; [but hey, if your immune to smoke, you don't benefit from this]
+				unless n is less than smoke penalty of the location:
+					add guy to lijst;
+					now guy is blinded;
+		say "You throw the flash grenade, and a blinding light [unless lijst is empty]burns away the retinae of anyone unlucky enough to see it clearly, namely, [lijst with definite articles][otherwise]flashes through the room[end if].";
 	remove noun from play.
 
 Section - Rust grenade
@@ -1215,10 +1218,13 @@ A smoke grenade is a kind of grenade. The description of a smoke grenade is "Whe
 A smoke grenade is iron.
 
 Instead of throwing a smoke grenade:
-	say "You throw the smoke grenade, and it immediately explodes into a large cloud of smoke.";
-	remove noun from play;
-	let n be a random number between 6 and 8;
-	increase the smoke timer of the location by n.
+	if the noun is rusted and a random chance of 1 in 2 succeeds:
+		say "You throw the smoke grenade, but there is only a feeble explosion. The rust must have rendered it useless.";
+	otherwise:
+		say "You throw the smoke grenade, and it immediately explodes into a large cloud of smoke.";
+		let n be a random number between 6 and 8;
+		increase the smoke timer of the location by n;
+	remove noun from play;.
 
 Section - Fragmentation grenade
 
@@ -1227,25 +1233,32 @@ A fragmentation grenade is iron.
 Understand "frag" as a fragmentation grenade.
 
 Instead of throwing a fragmentation grenade:
-	say "The grenade explodes, dealing [run paragraph on]";
-	have a fragmentation event in location with noun by player.
+	if the noun is rusted and a random chance of 1 in 2 succeeds:
+		say "You throw the fragmentation grenade, but there is only a feeble explosion. The rust must have rendered it useless.";
+		remove the noun from play;
+	otherwise:
+		say "The grenade explodes, dealing [run paragraph on]";
+		have a fragmentation event in location with noun by player.
 
 Section - Blessed Grenade (major)
 
 The Blessed Grenade is a major grenade. The indefinite article of the Blessed Grenade is "the". The description of Blessed Grenade is "This grenade is rumoured to be extremely effective against undead.".
 
 Instead of throwing the Blessed Grenade:
-	remove the noun from play;
-	if the number of alive undead persons in the location is less than 1:
-		say "As the grenade explodes you hear the singing of angels. But nothing further appears to happen.";
+	if the noun is rusted and a random chance of 1 in 2 succeeds:
+		say "You throw the Blessed Grenade, but there is only a feeble explosion. The rust must have rendered it useless.";
 	otherwise:
-		let K be the list of alive undead persons in the location;
-		say "As the grenade explodes you hear the singing of angels, several of whom swoop down from the heavens with huge swords and eviscerate [K with definite articles].";
-		repeat with guy running through K:
-			now health of guy is -1;
-			clean the table of delayed actions for the guy;
-		if the player is dead:
-			end the story saying "The undead should not seek blessings.".
+		if the number of alive undead persons in the location is less than 1:
+			say "As the grenade explodes you hear the singing of angels. But nothing further appears to happen.";
+		otherwise:
+			let K be the list of alive undead persons in the location;
+			say "As the grenade explodes you hear the singing of angels, several of whom swoop down from the heavens with huge swords and eviscerate [K with definite articles].";
+			repeat with guy running through K:
+				now health of guy is -1;
+				clean the table of delayed actions for the guy;
+			if the player is dead:
+				end the story saying "The undead should not seek blessings.";
+	remove the noun from play.
 
 Section - Grenade packs
 
