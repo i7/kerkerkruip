@@ -500,6 +500,7 @@ Section - Tormenting necklace (major)
 
 The tormenting necklace is a major necklace.
 The tormenting necklace is deathly.
+The tormenting necklace is iron.
 
 The description of the tormenting necklace is "This monstrous necklace is made of shards of glass, fossilised teeth, broken points of daggers and thorns. It is imbued with a magic that deals paralysing pain to those who are wounded in combat. [italic type](The necklace is activated in two circumstances: when the wearer is dealt damage by an attack, and when an attack by the wearer deals damage to someone else. The person who has been dealt damage will writhe in agony and must skip the next turn.)[roman type]".
 
@@ -531,6 +532,30 @@ Every turn when necklace-torment-counter is not 0:
 			now guy is not necklace-tormented.
 
 [Torment should be canceled outside combat. I've implemented this using a counter in order to speed things up and not have to cycle through all persons every turn.]
+
+Section - Periapt of prophecy
+
+The periapt of prophecy is an epic necklace.
+The periapt of prophecy is magical.
+The periapt of prophecy is silver.
+
+The description of the periapt of prophecy is "In most circumstance, this tiny amulet hanging from a delicate silver necklace is merely decorative. But when you are under the influence of ment, it will reveal its powers of precognition.".
+
+The periapt attack strength is a number that varies.
+
+This is the periapt rule:
+	if the player wears the periapt of prophecy and the ment timer is greater than 0:
+		if the combat status is combat:
+			if the main actor is the player:
+				now the periapt attack strength is a roll of the dice;
+				say "If you choose to attack, your performance will be [if periapt attack strength is less than 4]weak[otherwise if periapt attack strength is less than 8]average[otherwise if periapt attack strength is not 20]strong[otherwise]heroic[end if].".
+
+The periapt rule is listed before the main actor chooses an action rule in the combat round rules.
+
+A special set attack strength rule (this is the periapt attack roll rule):
+	if the player wears the periapt of prophecy and the ment timer is greater than 0:
+		if the main actor is the player:
+			now attack strength is periapt attack strength.
 
 
 Chapter - Hats
@@ -573,7 +598,7 @@ The description of Crown of Hargo is "Of all the emperors of Yahvinna, Hargo was
 Section - Diadem of the priestess (minor)
 
 The diadem of the priestess is a minor hat. The indefinite article is "the". 
-The diadem of the priestess is civilised.
+The diadem of the priestess is religious.
 The diadem of the priestess is silver.
 
 A spirit bonus rule (this is the spirit bonus of the diadem of the priestess rule):
