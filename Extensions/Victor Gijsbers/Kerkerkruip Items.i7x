@@ -1186,6 +1186,19 @@ Section - Flash grenades
 A flash grenade is a kind of grenade. The description of a flash grenade is "When thrown, this magical grenade emits a pulse of searing light so strong that it will blind anyone in its vicinity, even if they close their eyes. The device is universally judged to be Metastasio's most useless invention.".
 A flash grenade is iron.
 
+A person has a number called the flash-grenade-timer.
+
+Every turn (this is the recover from flash rule):
+	if the flash-grenade-timer of the main actor is greater than 0:
+		decrease flash-grenade-timer of the main actor by 1;
+		if flash-grenade-timer of the main actor is 0:
+			unless main actor is blind:
+				say "[The main actor] can [bold type]see again[roman type]!".
+				
+A blindness rule (this is the blind if flashed rule):
+	if flash-grenade-timer of test subject is greater than 0:
+		rule succeeds.				
+
 Instead of throwing a flash grenade:
 	if the noun is rusted and a random chance of 1 in 2 succeeds:
 		say "You throw the flash grenade, but there is only a feeble explosion. The rust must have rendered it useless.";
@@ -1193,12 +1206,15 @@ Instead of throwing a flash grenade:
 		let lijst be a list of person;
 		repeat with guy running through alive persons in the location:
 			unless guy is blind:
-				let n be a random number between 0 and 8; [these lines ensure that in a smoky environment, you're not always blinded]
-				if guy is the player, decrease n by 2; [this is weighed a little in favour of the player, because she is throwing the grenade away from her, so there is bound to be a lot of smoke between her and the flash]
-				if guy is smoke immune, increase n by 20; [but hey, if your immune to smoke, you don't benefit from this]
-				unless n is less than smoke penalty of the location:
+				let n be 15;
+				decrease n by (final body of guy / 3);
+				unless guy is smoke immune:
+					decrease n by smoke penalty of the location;
+				if n is less than 0:
+					now n is 0;
+				if n is not 0:
 					add guy to lijst;
-					now guy is blinded;
+					now flash-grenade-timer of guy is n;
 		say "You throw the flash grenade, and a blinding light [unless lijst is empty]burns away the retinae of anyone unlucky enough to see it clearly, namely, [lijst with definite articles][otherwise]flashes through the room[end if].";
 	remove noun from play.
 
