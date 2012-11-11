@@ -723,7 +723,7 @@ Heat resistance rule (this is the asbestos vest heat resistance rule):
 Section - Monk's robe (monster)
 
 The monk's robe is a shirt. The monk's robe is cloth.
-Miranda wears monk's robe.
+
 The description of monk's robe is "A plain and simple brown robe. Years of being worn by deniers of the flesh has instilled ascetic virtues in the fabric. [italic type](-2 body, +1 mind, +1 spirit)[roman type]".
 
 A body bonus rule (this is the body penalty of the monk's robe rule):
@@ -1978,7 +1978,7 @@ Chance to win rule (this is the CTW smoky blade penalty rule):
 
 Section - Sneaky sword (monster)
 
-Mouser carries a sword called sneaky sword. The description of sneaky sword is "This sword is especially suitable for making sneaky attacks."
+There is a sword called sneaky sword. The description of sneaky sword is "This sword is especially suitable for making sneaky attacks."
 
 The special weapon info of the sneaky sword is "; +2 damage when hidden[run paragraph on]"
 
@@ -1989,9 +1989,9 @@ A damage modifier rule (this is the sneaky sword damage bonus rule):
 			increase the attack damage by 2.
 
 
-Section - Claymore (monster)
+[Section - Claymore (monster)
 
-Fafhrd carries a sword called claymore. The description of claymore is "It looks like a normal sword that has seen a lot of use."
+Fafhrd carries a sword called claymore. The description of claymore is "It looks like a normal sword that has seen a lot of use."]
 
 
 Chapter - Rapier
@@ -2388,8 +2388,6 @@ Section - Nunchuck (monster)
 The pair of nunchucks are a weapon. The pair of nunchucks is wood. Understand "nunchuck" and "nunchuk" and "nunchuks" as the pair of nunchucks. The pair of nunchucks is ambiguously plural.
 The description of the pair of nunchucks is "These two pieces of wood with a metal chain between them can be surprisingly dangerous.".
 The active parry max of the pair of nunchucks is 4.
-
-Miranda carries the pair of nunchucks. The pair of nunchucks is readied.
 
 
 
