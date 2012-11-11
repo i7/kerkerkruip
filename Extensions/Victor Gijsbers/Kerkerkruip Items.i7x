@@ -2066,17 +2066,54 @@ Chance to win rule (this is the CTW smoky blade penalty rule):
 				let n be the smoke penalty of the location;
 				increase the chance-to-win by n.
 
-Section - Sneaky sword (monster)
+Section - Sneaking sword (monster)
 
-There is a sword called sneaky sword. The description of sneaky sword is "This sword is especially suitable for making sneaky attacks."
+There is a sword called sneaking sword. The description of sneaking sword is "This sword is especially suitable for making sneaky attacks."
 
-The special weapon info of the sneaky sword is "; +2 damage when hidden[run paragraph on]"
+The special weapon info of the sneaking sword is "; +2 damage when hidden[run paragraph on]"
 
-A damage modifier rule (this is the sneaky sword damage bonus rule):
-	if the global attacker weapon is the sneaky sword:
+A damage modifier rule (this is the sneaking sword damage bonus rule):
+	if the global attacker weapon is the sneaking sword:
 		if the global attacker is hidden:
 			say " + 2 (sneaky attack)[run paragraph on]";
 			increase the attack damage by 2.
+
+A treasure placement rule (this is the sneaking sword can be singing sword rule):
+	if a random chance of 1 in 5 succeeds:
+		now the hidden identity of the sneaking sword is the singing sword.
+
+Section - Singing sword (cursed)
+
+The singing sword is a cursed curse-identified sword. The description of the singing sword is "When you wield it, this sword hums all the time, and sometimes breaks out into song. This will make it hard to hide. You wonder how Mouser tamed it...".
+
+Every turn (this is the singing sword fun rule):
+	if the singing sword is readied and the player is the main actor and the player encloses the singing sword:
+		if the combat status is peace or the singing sword is not tamed:
+			if a random chance of 1 in 15 succeeds:
+				say "'[one of]We are the champions![run paragraph on][or]Who wants to live forever?[run paragraph on][or]Stay true to your dungeon.[run paragraph on][or]We don't need no teleportation![run paragraph on][or]O, the wars, they will be fought again.[run paragraph on][or]I'll take you to the candy shop.[run paragraph on][or]I wanna take a ride on your disco stick![run paragraph on][as decreasingly likely outcomes]' sings your sword.[line break][paragraph break]"
+
+Detection rule (this is the singing sword detection rule):
+	if the singing sword is readied and the player encloses the singing sword and the singing sword is not tamed:
+		increase detection probability by 30.
+
+The singing sword can be tamed. The singing sword is not tamed.
+The singing contest is a number that varies. The singing contest is 0.
+
+Instead of singing when the player encloses the readied not tamed singing sword:
+	if singing contest is 0:
+		say "You start singing a soft tune. 'Ha, is that the best you can do?' your sword asks. 'Beat this!' And he breaks out in a loud and boisterous battle song.";
+	if singing contest is 1:
+		say "There is no way this sword is going to outdo you. You give a fine rendition of a popular aria. But the sword isn't impressed. 'I bet you can't do the really [italic type]high[roman type] notes!' he says, and continues to show off his impressive falsetto.";
+	if singing contest is 2:
+		if the player is female:
+			say "You smirk. Your coloratura is second to none; and if your social position had allowed it, you would have been the star of the opera house. So you sing a brilliant rendition of the queen of the night, rising higher and higher, utterly confident.[paragraph break]'Yeah? Think I can't do that just as well?' the sword asks you.[paragraph break]'No, you can't.'[paragraph break]'Yeah, well, well, let me show you! Ahum.'[paragraph break]'I'm waiting.'[paragraph break]'Okay, I can't do it. You win.'[paragraph break]'And now be quiet when I'm battle, you understand?' The sword meekly acquiesces.";
+			now the singing sword is tamed;
+		otherwise:
+			say "You'll show that sword. If he can use his falsetto, so can you. So you embark on an ambitious alto aria -- but after a couple of notes, you come to a sputtering halt. There's no way you can reach that high.[paragraph break]'Bwahaha, loser!' the sword laughs.";
+	if singing contest is 3:
+		say "You're not going to take on the singing sword again.";
+	if singing contest is less than 3:
+		increase singing contest by 1.
 
 
 [Section - Claymore (monster)
