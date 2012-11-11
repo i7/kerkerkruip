@@ -1400,7 +1400,11 @@ Carry out spraying fungicide contraption:
 		say "You spray the fungicide all around. The rust spores blacken and wither.";
 		now location is not rust-spored;
 	otherwise:
-		say "You spray the fungicide all around.".
+		say "You spray the fungicide all around.";
+	repeat with way running through cardinal directions:
+		let place be the room way from the location;
+		unless place is nothing:
+			now place is not rust-spored.
 
 
 
