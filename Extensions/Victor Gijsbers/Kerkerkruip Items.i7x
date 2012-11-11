@@ -859,8 +859,41 @@ A dungeon interest rule (this is the Malygris sometimes wears the cloak of refle
 			now Malygris wears the cloak of reflection;
 			if generation info is true, say "* Malygris wears the cloak of reflection.".
 
+Section - Psychedelic cloak (minor)
 
+The psychedelic cloak is a minor cloak.
+The psychedelic cloak is magical.
+The psychedelic cloak is cloth.
 
+The description of the psychedelic cloak is "[if ment timer is 0]Despite its name, it is just a boring square cloak.[otherwise]Bright patches of colour move chaotically across the psychedelic cloak. Groovy! [italic type](The distracting presence of this object is bound to temporarily lower the mind scores of those who see it -- you excluded.)[roman type][end if]"
+
+A mind bonus rule (this is the psychedelic cloak rule):
+	if the test subject can see the psychedelic cloak and test subject is not the player:
+		if the player wears the psychedelic cloak and the ment timer is not 0:
+			decrease faculty bonus score by (1 + ment bonus).
+
+Last carry out snorting a package of ment:
+	if the player wears the psychedelic cloak:
+		say "Your cloak suddenly becomes very psychedelic!".
+
+[Last carry out rules fires even when silently taking off, e.g., when doing "drop cloak". First report rule stops normal report rule.]
+
+Last carry out wearing the psychedelic cloak:
+	if the ment timer is not 0:
+		say "As you fasten it, the cloak suddenly becomes very psychedelic!".
+	
+First report wearing the psychedelic cloak:
+	if the ment timer is not 0:
+		rule succeeds.
+	
+Last carry out taking off the psychedelic cloak:
+	if the ment timer is not 0:
+		say "The cloak returns to its dull, grey state.".
+	
+First report taking off the psychedelic cloak:
+	if the ment timer is not 0:
+		rule succeeds.
+	
 
 Chapter - Shoes
 
