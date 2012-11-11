@@ -890,7 +890,7 @@ Section - Gauntlets of grip (major)
 The gauntlets of grip are major gauntlets. The gauntlets of grip are plural-named. The indefinite article is "the".
 The gauntlets of grip are civilised.
 The gauntlets of grip are iron.
-The description of the gauntlets of grip is "These sturdy gauntlets make it easier to parry your opponent's attacks.".
+The description of the gauntlets of grip is "These sturdy armoured gloves make it easier to parry your opponent's attacks.".
 
 This is the gauntlets of grip rule:
 	if the global defender is at parry and the global defender wears the gauntlets of grip:
@@ -911,7 +911,7 @@ Section - Greasy gauntlets (cursed)
 
 The greasy gauntlets are cursed curse-identified gauntlets. The greasy gauntlets are plural-named. The indefinite article is "the".
 The greasy gauntlets are iron.
-The description of the greasy gauntlets is "These gauntlets are supernaturally slick and greasy. It might be hard to hold on to a weapon while wearing them.".
+The description of the greasy gauntlets is "These armoured gloves are supernaturally slick and greasy. It might be hard to hold on to a weapon while wearing them.".
 
 Last aftereffects rule (this is the greasy gauntlets rule):
 	if the global attacker wears the greasy gauntlets and the attack damage is greater than 0:
