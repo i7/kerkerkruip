@@ -998,7 +998,7 @@ Suit of plate mail is iron.
 
 Constriction prevention of suit of plate mail is 3.
 
-The description of the suit of plate mail is "Functional rather than beautiful, this suit has been made for a true warrior. It will protect you from harm, although it also slows you down.".			
+The description of the suit of plate mail is "Functional rather than beautiful, this suit has been made for a true warrior. It will protect you from harm, although it also slows you down. [italic type](-2 damage from attacks, -1 attack, -2 body.)[roman type]".			
 			
 A damage modifier rule (this is the plate mail damage modifiers rule):
 	if the global defender is wearing the suit of plate mail:
@@ -1010,11 +1010,6 @@ A physical damage reduction rule (this is the plate mail physical damage reducti
 	if the test subject is wearing the suit of plate mail:
 		increase the pdr by 2.
 
-Initiative update rule (this is the suit of plate mail takes away initiative rule):
-	if the player wears suit of plate mail:
-		if a random chance of 1 in 2 succeeds:
-			decrease the initiative of the player by 1.
-
 An attack modifier rule (this is the plate mail attack modifiers rule):
 	if the global defender wears suit of plate mail:
 		if the global defender is retreater or the global defender is runner:
@@ -1023,6 +1018,10 @@ An attack modifier rule (this is the plate mail attack modifiers rule):
 	if the global attacker wears suit of plate mail:
 		say " - 1 (slowed down by plate mail)[run paragraph on]";
 		decrease the attack strength by 1.
+
+A body bonus rule (this is the body penalty of the suit of plate mail rule):
+	if the test subject wears the suit of plate mail:
+		decrease faculty bonus score by 2.
 
 Chance to win rule (this is the CTW plate mail rule):
 	if the global attacker wears suit of plate mail:
