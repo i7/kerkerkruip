@@ -2290,7 +2290,6 @@ Check an actor hitting when the global attacker weapon is the backstabber (this 
 				stop the action;
 
 
-
 Section - Vampiric dagger (major)
 
 The vampiric dagger is a major dagger.
@@ -2324,7 +2323,39 @@ An aftereffects rule (this is the vampiric dagger leeches rule):
 		unless n is 0:
 			say "The vampiric dagger [bold type]transfers [n] health[roman type] to [the global attacker].".
 			
-			
+Section - Dagger of draining (monster)
+
+[Used by Malygris]
+
+The dagger of draining is a dagger. The description of the dagger of draining is "This magical dagger saps the powers of any enemy it hits, and transfers it to the wielder.".
+The damage die of the dagger of draining is 8.
+
+The special weapon info of the dagger of draining is "; drains statistics[run paragraph on]".
+
+An aftereffects rule (this is the dagger of draining aftereffects rule):
+	if the global attacker weapon is the dagger of draining and the attack damage is greater than 0:
+		say "The magical dagger saps ";
+		if a random number between 1 and 4 is:
+			-- 1:
+				decrease defence of the global defender by 1;
+				increase defence of the global attacker by 1;
+				say "[possessive of the global defender] defensive reflexes, transferring them to [the global attacker].";
+			-- 2:
+				decrease mind score of the global defender by 1;
+				increase mind score of the global attacker by 1;
+				say "[possessive of the global defender] mind score, transferring it to [the global attacker].";
+			-- 3:
+				decrease body score of the global defender by 1;
+				increase body score of the global attacker by 1;
+				say "[possessive of the global defender] body score, transferring it to [the global attacker].";
+			-- 4:
+				decrease spirit score of the global defender by 1;
+				increase spirit score of the global attacker by 1;
+				say "[possessive of the global defender] spirit score, transferring it to [the global attacker].";.
+
+An AI weapon selection rule for the dagger of draining (this is the Malygris prefers the dagger of draining rule):
+	increase the Weight by 10.
+							
 
 
 
@@ -2389,7 +2420,7 @@ Chance to win rule (this is the CTW executioner's axe in temple of Nomos rule):
 
 The special weapon info of the executioner's axe is "; better tension damage bonus[run paragraph on]".
 
-Section - Minotaur's axe
+Section - Minotaur's axe (monster)
 
 The minotaur's axe is an axe. The description of the minotaur's axe is "A huge axe covered in mystic runes.".
 
@@ -2478,7 +2509,9 @@ An aftereffects rule (this is the scythe of oxidation rusts stuff rule):
 
 
 
-Chapter - Staff of pain (monster)
+Chapter - Staves
+
+Section - Staff of pain (monster)
 
 [One of these is used by the tormentor of Aite.]
 
@@ -2493,6 +2526,22 @@ The dodgability of a staff of pain is usually 0.
 The active parry max of a staff of pain is usually 1.
 The passive parry max of a staff of pain is usually 0.
 The weapon damage bonus of a staff of pain is usually 0.
+
+
+Section - Druidic staff (reward)
+
+The druidic staff is a weapon.
+
+The description of druidic staff is "A simple wooden staff, but very well balanced.".
+
+The druidic staff is wood.
+
+The damage die of the druidic staff is 6.
+The weapon attack bonus of the druidic staff is 1.
+The dodgability of the druidic staff is 2.
+The active parry max of the druidic staff is 3.
+The passive parry max of the druidic staff is 2.
+The weapon damage bonus of the druidic staff is 1.
 
 
 

@@ -3004,20 +3004,6 @@ Status skill rule (this is the Bodmall status skill rule):
 	if power of Bodmall is granted:
 		say "You have the power of Bodmall, which allows you to summon [bold type]brambles[roman type] that will impede most enemies; once the brambles grow thorns and fruits, you can also [bold type]launch[roman type] these. [italic type](Level 4)[roman type][line break][run paragraph on]".
 
-Section - Druidic staff
-
-The druidic staff is a weapon.
-
-The description of druidic staff is "A simple wooden staff, but very well balanced.".
-
-The druidic staff is wood.
-
-The damage die of the druidic staff is 6.
-The weapon attack bonus of the druidic staff is 1.
-The dodgability of the druidic staff is 2.
-The active parry max of the druidic staff is 3.
-The passive parry max of the druidic staff is 2.
-The weapon damage bonus of the druidic staff is 1.
 
 Section - Druidic
 
@@ -3588,39 +3574,9 @@ When play begins:
 
 Malygris is weapon user.
 
-Section - Weapon
+Malygris carries the dagger of draining
 
-The dagger of draining is a dagger.
 
-Malygris carries the dagger of draining. The dagger of draining is a weapon. The description of the dagger of draining is "This magical dagger saps the powers of any enemy it hits, and transfers it to the wielder.".
-The damage die of the dagger of draining is 8.
-
-The special weapon info of the dagger of draining is "; drains statistics[run paragraph on]".
-
-An aftereffects rule (this is the dagger of draining aftereffects rule):
-	if the global attacker weapon is the dagger of draining and the attack damage is greater than 0:
-		say "The magical dagger saps ";
-		if a random number between 1 and 4 is:
-			-- 1:
-				decrease defence of the global defender by 1;
-				increase defence of the global attacker by 1;
-				say "[possessive of the global defender] defensive reflexes, transferring them to [the global attacker].";
-			-- 2:
-				decrease mind score of the global defender by 1;
-				increase mind score of the global attacker by 1;
-				say "[possessive of the global defender] mind score, transferring it to [the global attacker].";
-			-- 3:
-				decrease body score of the global defender by 1;
-				increase body score of the global attacker by 1;
-				say "[possessive of the global defender] body score, transferring it to [the global attacker].";
-			-- 4:
-				decrease spirit score of the global defender by 1;
-				increase spirit score of the global attacker by 1;
-				say "[possessive of the global defender] spirit score, transferring it to [the global attacker].";.
-
-An AI weapon selection rule for the dagger of draining (this is the Malygris prefers the dagger of draining rule):
-	increase the Weight by 10.
-				
 
 Section - Special powers
 
