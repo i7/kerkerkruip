@@ -57,10 +57,14 @@ Section - New rolling mechanism
 Instead of the standard 1d10 of ATTACK, we roll 1d7 + 1d4 - 1.]
 
 The roller is a person that varies. [The guy who is rolling the dice. Used in the natural twenty rules.]
+The special set attack strength rules are a rulebook. [Used for periapt of prophecy]
 
 An attack modifier rule (this is the alternative attack roll rule):
 	now roller is the global attacker;
-	now the attack strength is a roll of the dice;
+	now the attack strength is 0;
+	consider the special set attack strength rules;
+	if attack strength is 0: [nothing intervened]
+		now the attack strength is a roll of the dice;
 	say "[italic type]Rolling ", the attack strength, "[run paragraph on]".
 	
 The alternative attack roll rule is listed instead of the standard attack roll rule in the attack modifier rules.

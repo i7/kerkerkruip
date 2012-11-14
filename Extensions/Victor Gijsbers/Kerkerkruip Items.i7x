@@ -500,6 +500,7 @@ Section - Tormenting necklace (major)
 
 The tormenting necklace is a major necklace.
 The tormenting necklace is deathly.
+The tormenting necklace is iron.
 
 The description of the tormenting necklace is "This monstrous necklace is made of shards of glass, fossilised teeth, broken points of daggers and thorns. It is imbued with a magic that deals paralysing pain to those who are wounded in combat. [italic type](The necklace is activated in two circumstances: when the wearer is dealt damage by an attack, and when an attack by the wearer deals damage to someone else. The person who has been dealt damage will writhe in agony and must skip the next turn.)[roman type]".
 
@@ -531,6 +532,30 @@ Every turn when necklace-torment-counter is not 0:
 			now guy is not necklace-tormented.
 
 [Torment should be canceled outside combat. I've implemented this using a counter in order to speed things up and not have to cycle through all persons every turn.]
+
+Section - Periapt of prophecy
+
+The periapt of prophecy is an epic necklace.
+The periapt of prophecy is magical.
+The periapt of prophecy is silver.
+
+The description of the periapt of prophecy is "In most circumstance, this tiny amulet hanging from a delicate silver necklace is merely decorative. But when you are under the influence of ment, it will reveal its powers of precognition.".
+
+The periapt attack strength is a number that varies.
+
+This is the periapt rule:
+	if the player wears the periapt of prophecy and the ment timer is greater than 0:
+		if the combat status is combat:
+			if the main actor is the player:
+				now the periapt attack strength is a roll of the dice;
+				say "If you choose to attack, your performance will be [if periapt attack strength is less than 4]weak[otherwise if periapt attack strength is less than 8]average[otherwise if periapt attack strength is not 20]strong[otherwise]heroic[end if].".
+
+The periapt rule is listed before the main actor chooses an action rule in the combat round rules.
+
+A special set attack strength rule (this is the periapt attack roll rule):
+	if the player wears the periapt of prophecy and the ment timer is greater than 0:
+		if the main actor is the player:
+			now attack strength is periapt attack strength.
 
 
 Chapter - Hats
@@ -573,7 +598,7 @@ The description of Crown of Hargo is "Of all the emperors of Yahvinna, Hargo was
 Section - Diadem of the priestess (minor)
 
 The diadem of the priestess is a minor hat. The indefinite article is "the". 
-The diadem of the priestess is civilised.
+The diadem of the priestess is religious.
 The diadem of the priestess is silver.
 
 A spirit bonus rule (this is the spirit bonus of the diadem of the priestess rule):
@@ -661,21 +686,21 @@ Chance to win rule (this is the CTW smoky robe penalty rule):
 				let n be the smoke penalty of the location;
 				decrease the chance-to-win by n.
 				
-Section - Bodice of body (minor)
+Section - Bodice of physique (minor)
 
-The bodice of body is a minor shirt. The indefinite article is "the". 
-The bodice of body is civilised.
-The bodice of body is cloth.
+The bodice of physique is a minor shirt. The indefinite article is "the". 
+The bodice of physique is civilised.
+The bodice of physique is cloth.
 
-A body bonus rule (this is the body bonus of the bodice of body rule):
-	if the test subject wears the bodice of body:
+A body bonus rule (this is the body bonus of the bodice of physique rule):
+	if the test subject wears the bodice of physique:
 		increase faculty bonus score by 2.
 
-The description of the bodice of body is "This magical item is an elegant green and black garment, stiffened with whalebone and laced in front. It makes the wearer's body supple and responsive as never before. [italic type](It grants a +2 body bonus.)[roman type]".	
+The description of the bodice of physique is "This magical item is an elegant green and black garment, stiffened with whalebone and laced in front. It makes the wearer's body supple and responsive as never before. [italic type](It grants a +2 body bonus.)[roman type]".	
 
-A treasure placement rule (this is the bodice of body can be bodice of breathlessness rule):
+A treasure placement rule (this is the bodice of physique can be bodice of breathlessness rule):
 	if a random chance of 1 in 6 succeeds:
-		now the hidden identity of the bodice of body is the bodice of breathlessness.
+		now the hidden identity of the bodice of physique is the bodice of breathlessness.
 
 Section - Bodice of breathlessness (cursed)
 
@@ -834,8 +859,41 @@ A dungeon interest rule (this is the Malygris sometimes wears the cloak of refle
 			now Malygris wears the cloak of reflection;
 			if generation info is true, say "* Malygris wears the cloak of reflection.".
 
+Section - Psychedelic cloak (minor)
 
+The psychedelic cloak is a minor cloak.
+The psychedelic cloak is magical.
+The psychedelic cloak is cloth.
 
+The description of the psychedelic cloak is "[if ment timer is 0]Despite its name, it is just a boring square cloak.[otherwise]Bright patches of colour move chaotically across the psychedelic cloak. Groovy! [italic type](The distracting presence of this object is bound to temporarily lower the mind scores of those who see it -- you excluded.)[roman type][end if]"
+
+A mind bonus rule (this is the psychedelic cloak rule):
+	if the test subject can see the psychedelic cloak and test subject is not the player:
+		if the player wears the psychedelic cloak and the ment timer is not 0:
+			decrease faculty bonus score by (1 + ment bonus).
+
+Last carry out snorting a package of ment:
+	if the player wears the psychedelic cloak:
+		say "Your cloak suddenly becomes very psychedelic!".
+
+[Last carry out rules fires even when silently taking off, e.g., when doing "drop cloak". First report rule stops normal report rule.]
+
+Last carry out wearing the psychedelic cloak:
+	if the ment timer is not 0:
+		say "As you fasten it, the cloak suddenly becomes very psychedelic!".
+	
+First report wearing the psychedelic cloak:
+	if the ment timer is not 0:
+		rule succeeds.
+	
+Last carry out taking off the psychedelic cloak:
+	if the ment timer is not 0:
+		say "The cloak returns to its dull, grey state.".
+	
+First report taking off the psychedelic cloak:
+	if the ment timer is not 0:
+		rule succeeds.
+	
 
 Chapter - Shoes
 
@@ -890,7 +948,7 @@ Section - Gauntlets of grip (major)
 The gauntlets of grip are major gauntlets. The gauntlets of grip are plural-named. The indefinite article is "the".
 The gauntlets of grip are civilised.
 The gauntlets of grip are iron.
-The description of the gauntlets of grip is "These sturdy gauntlets make it easier to parry your opponent's attacks.".
+The description of the gauntlets of grip is "These sturdy armoured gloves make it easier to parry your opponent's attacks.".
 
 This is the gauntlets of grip rule:
 	if the global defender is at parry and the global defender wears the gauntlets of grip:
@@ -911,7 +969,7 @@ Section - Greasy gauntlets (cursed)
 
 The greasy gauntlets are cursed curse-identified gauntlets. The greasy gauntlets are plural-named. The indefinite article is "the".
 The greasy gauntlets are iron.
-The description of the greasy gauntlets is "These gauntlets are supernaturally slick and greasy. It might be hard to hold on to a weapon while wearing them.".
+The description of the greasy gauntlets is "These armoured gloves are supernaturally slick and greasy. It might be hard to hold on to a weapon while wearing them.".
 
 Last aftereffects rule (this is the greasy gauntlets rule):
 	if the global attacker wears the greasy gauntlets and the attack damage is greater than 0:
@@ -998,7 +1056,7 @@ Suit of plate mail is iron.
 
 Constriction prevention of suit of plate mail is 3.
 
-The description of the suit of plate mail is "Functional rather than beautiful, this suit has been made for a true warrior. It will protect you from harm, although it also slows you down.".			
+The description of the suit of plate mail is "Functional rather than beautiful, this suit has been made for a true warrior. It will protect you from harm, although it also slows you down. [italic type](-2 damage from attacks, -1 attack, -2 body.)[roman type]".			
 			
 A damage modifier rule (this is the plate mail damage modifiers rule):
 	if the global defender is wearing the suit of plate mail:
@@ -1010,11 +1068,6 @@ A physical damage reduction rule (this is the plate mail physical damage reducti
 	if the test subject is wearing the suit of plate mail:
 		increase the pdr by 2.
 
-Initiative update rule (this is the suit of plate mail takes away initiative rule):
-	if the player wears suit of plate mail:
-		if a random chance of 1 in 2 succeeds:
-			decrease the initiative of the player by 1.
-
 An attack modifier rule (this is the plate mail attack modifiers rule):
 	if the global defender wears suit of plate mail:
 		if the global defender is retreater or the global defender is runner:
@@ -1023,6 +1076,10 @@ An attack modifier rule (this is the plate mail attack modifiers rule):
 	if the global attacker wears suit of plate mail:
 		say " - 1 (slowed down by plate mail)[run paragraph on]";
 		decrease the attack strength by 1.
+
+A body bonus rule (this is the body penalty of the suit of plate mail rule):
+	if the test subject wears the suit of plate mail:
+		decrease faculty bonus score by 2.
 
 Chance to win rule (this is the CTW plate mail rule):
 	if the global attacker wears suit of plate mail:
@@ -1048,7 +1105,7 @@ Understand "armor" as the suit of dragon armour.
 
 [The difficulty level of suit of dragon armour is 3.]
 
-The description of the suit of dragon armour is "This lovely suit has been made of dragon leather, the most durable and most magical substance known to man. It protects the wearer against heat and most kinds of damage, but continuously drains his or her health. Use with extreme caution.".
+The description of the suit of dragon armour is "This lovely suit has been made of dragon leather, the most durable and most magical substance known to man. It protects the wearer against most kinds of damage, but continuously drains his or her health. Use with extreme caution.".
 			
 Heat resistance rule (this is the dragon armour heat resistance rule):
 	if test subject is wearing the suit of dragon armour:
@@ -1129,17 +1186,36 @@ Section - Flash grenades
 A flash grenade is a kind of grenade. The description of a flash grenade is "When thrown, this magical grenade emits a pulse of searing light so strong that it will blind anyone in its vicinity, even if they close their eyes. The device is universally judged to be Metastasio's most useless invention.".
 A flash grenade is iron.
 
+A person has a number called the flash-grenade-timer.
+
+Every turn (this is the recover from flash rule):
+	if the flash-grenade-timer of the main actor is greater than 0:
+		decrease flash-grenade-timer of the main actor by 1;
+		if flash-grenade-timer of the main actor is 0:
+			unless main actor is blind:
+				say "[The main actor] can [bold type]see again[roman type]!".
+				
+A blindness rule (this is the blind if flashed rule):
+	if flash-grenade-timer of test subject is greater than 0:
+		rule succeeds.				
+
 Instead of throwing a flash grenade:
-	let lijst be a list of person;
-	repeat with guy running through alive persons in the location:
-		unless guy is blind:
-			let n be a random number between 0 and 8; [these lines ensure that in a smoky environment, you're not always blinded]
-			if guy is the player, decrease n by 2; [this is weighed a little in favour of the player, because she is throwing the grenade away from her, so there is bound to be a lot of smoke between her and the flash]
-			if guy is smoke immune, increase n by 20; [but hey, if your immune to smoke, you don't benefit from this]
-			unless n is less than smoke penalty of the location:
-				add guy to lijst;
-				now guy is blinded;
-	say "You throw the flash grenade, and a blinding light [unless lijst is empty]burns away the retinae of anyone unlucky enough to see it clearly, namely, [lijst with definite articles][otherwise]flashes through the room[end if].";
+	if the noun is rusted and a random chance of 1 in 2 succeeds:
+		say "You throw the flash grenade, but there is only a feeble explosion. The rust must have rendered it useless.";
+	otherwise:
+		let lijst be a list of person;
+		repeat with guy running through alive persons in the location:
+			unless guy is blind:
+				let n be 15;
+				decrease n by (final body of guy / 3);
+				unless guy is smoke immune:
+					decrease n by smoke penalty of the location;
+				if n is less than 0:
+					now n is 0;
+				if n is not 0:
+					add guy to lijst;
+					now flash-grenade-timer of guy is n;
+		say "You throw the flash grenade, and a blinding light [unless lijst is empty]burns away the retinae of anyone unlucky enough to see it clearly, namely, [lijst with definite articles][otherwise]flashes through the room[end if].";
 	remove noun from play.
 
 Section - Rust grenade
@@ -1158,10 +1234,13 @@ A smoke grenade is a kind of grenade. The description of a smoke grenade is "Whe
 A smoke grenade is iron.
 
 Instead of throwing a smoke grenade:
-	say "You throw the smoke grenade, and it immediately explodes into a large cloud of smoke.";
-	remove noun from play;
-	let n be a random number between 6 and 8;
-	increase the smoke timer of the location by n.
+	if the noun is rusted and a random chance of 1 in 2 succeeds:
+		say "You throw the smoke grenade, but there is only a feeble explosion. The rust must have rendered it useless.";
+	otherwise:
+		say "You throw the smoke grenade, and it immediately explodes into a large cloud of smoke.";
+		let n be a random number between 6 and 8;
+		increase the smoke timer of the location by n;
+	remove noun from play;.
 
 Section - Fragmentation grenade
 
@@ -1170,25 +1249,32 @@ A fragmentation grenade is iron.
 Understand "frag" as a fragmentation grenade.
 
 Instead of throwing a fragmentation grenade:
-	say "The grenade explodes, dealing [run paragraph on]";
-	have a fragmentation event in location with noun by player.
+	if the noun is rusted and a random chance of 1 in 2 succeeds:
+		say "You throw the fragmentation grenade, but there is only a feeble explosion. The rust must have rendered it useless.";
+		remove the noun from play;
+	otherwise:
+		say "The grenade explodes, dealing [run paragraph on]";
+		have a fragmentation event in location with noun by player.
 
 Section - Blessed Grenade (major)
 
 The Blessed Grenade is a major grenade. The indefinite article of the Blessed Grenade is "the". The description of Blessed Grenade is "This grenade is rumoured to be extremely effective against undead.".
 
 Instead of throwing the Blessed Grenade:
-	remove the noun from play;
-	if the number of alive undead persons in the location is less than 1:
-		say "As the grenade explodes you hear the singing of angels. But nothing further appears to happen.";
+	if the noun is rusted and a random chance of 1 in 2 succeeds:
+		say "You throw the Blessed Grenade, but there is only a feeble explosion. The rust must have rendered it useless.";
 	otherwise:
-		let K be the list of alive undead persons in the location;
-		say "As the grenade explodes you hear the singing of angels, several of whom swoop down from the heavens with huge swords and eviscerate [K with definite articles].";
-		repeat with guy running through K:
-			now health of guy is -1;
-			clean the table of delayed actions for the guy;
-		if the player is dead:
-			end the story saying "The undead should not seek blessings.".
+		if the number of alive undead persons in the location is less than 1:
+			say "As the grenade explodes you hear the singing of angels. But nothing further appears to happen.";
+		otherwise:
+			let K be the list of alive undead persons in the location;
+			say "As the grenade explodes you hear the singing of angels, several of whom swoop down from the heavens with huge swords and eviscerate [K with definite articles].";
+			repeat with guy running through K:
+				now health of guy is -1;
+				clean the table of delayed actions for the guy;
+			if the player is dead:
+				end the story saying "The undead should not seek blessings.";
+	remove the noun from play.
 
 Section - Grenade packs
 
@@ -1314,7 +1400,11 @@ Carry out spraying fungicide contraption:
 		say "You spray the fungicide all around. The rust spores blacken and wither.";
 		now location is not rust-spored;
 	otherwise:
-		say "You spray the fungicide all around.".
+		say "You spray the fungicide all around.";
+	repeat with way running through cardinal directions:
+		let place be the room way from the location;
+		unless place is nothing:
+			now place is not rust-spored.
 
 
 
@@ -1638,13 +1728,13 @@ The adamantine blade is an adamant weapon. The description of the adamantine bla
 The adamantine blade timer is a number that varies.
 
 To do the adamantine blade shuffle:
-	now the damage die of the adamantine blade is a random number between 5 and 12;
-	now the weapon attack bonus of the adamantine blade is a random number between -1 and 5;
+	now the damage die of the adamantine blade is a random number between 5 and 10;
+	now the weapon attack bonus of the adamantine blade is a random number between -1 and 4;
 	now the weapon damage bonus of the adamantine blade is a random number between 0 and 2;
 	now the dodgability of the adamantine blade is a random number between 1 and 4;
 	now the passive parry max of the adamantine blade is a random number between 1 and 4;
 	now the active parry max of the adamantine blade is a random number between 1 and 4;
-	now the adamantine blade timer is a random number between 12 and 22.
+	now the adamantine blade timer is a random number between 12 and 20.
 
 Every turn when the adamantine blade is not off-stage (this is the adamantine blade countdown rule):
 	if the main actor is the player:
@@ -1976,17 +2066,54 @@ Chance to win rule (this is the CTW smoky blade penalty rule):
 				let n be the smoke penalty of the location;
 				increase the chance-to-win by n.
 
-Section - Sneaky sword (monster)
+Section - Sneaking sword (monster)
 
-There is a sword called sneaky sword. The description of sneaky sword is "This sword is especially suitable for making sneaky attacks."
+There is a sword called sneaking sword. The description of sneaking sword is "This sword is especially suitable for making sneaky attacks."
 
-The special weapon info of the sneaky sword is "; +2 damage when hidden[run paragraph on]"
+The special weapon info of the sneaking sword is "; +2 damage when hidden[run paragraph on]"
 
-A damage modifier rule (this is the sneaky sword damage bonus rule):
-	if the global attacker weapon is the sneaky sword:
+A damage modifier rule (this is the sneaking sword damage bonus rule):
+	if the global attacker weapon is the sneaking sword:
 		if the global attacker is hidden:
 			say " + 2 (sneaky attack)[run paragraph on]";
 			increase the attack damage by 2.
+
+A treasure placement rule (this is the sneaking sword can be singing sword rule):
+	if a random chance of 1 in 5 succeeds:
+		now the hidden identity of the sneaking sword is the singing sword.
+
+Section - Singing sword (cursed)
+
+The singing sword is a cursed curse-identified sword. The description of the singing sword is "When you wield it, this sword hums all the time, and sometimes breaks out into song. This will make it hard to hide. You wonder how Mouser tamed it...".
+
+Every turn (this is the singing sword fun rule):
+	if the singing sword is readied and the player is the main actor and the player encloses the singing sword:
+		if the combat status is peace or the singing sword is not tamed:
+			if a random chance of 1 in 15 succeeds:
+				say "'[one of]We are the champions![run paragraph on][or]Who wants to live forever?[run paragraph on][or]Stay true to your dungeon.[run paragraph on][or]We don't need no teleportation![run paragraph on][or]O, the wars, they will be fought again.[run paragraph on][or]I'll take you to the candy shop.[run paragraph on][or]I wanna take a ride on your disco stick![run paragraph on][as decreasingly likely outcomes]' sings your sword.[line break][paragraph break]"
+
+Detection rule (this is the singing sword detection rule):
+	if the singing sword is readied and the player encloses the singing sword and the singing sword is not tamed:
+		increase detection probability by 30.
+
+The singing sword can be tamed. The singing sword is not tamed.
+The singing contest is a number that varies. The singing contest is 0.
+
+Instead of singing when the player encloses the readied not tamed singing sword:
+	if singing contest is 0:
+		say "You start singing a soft tune. 'Ha, is that the best you can do?' your sword asks. 'Beat this!' And he breaks out in a loud and boisterous battle song.";
+	if singing contest is 1:
+		say "There is no way this sword is going to outdo you. You give a fine rendition of a popular aria. But the sword isn't impressed. 'I bet you can't do the really [italic type]high[roman type] notes!' he says, and continues to show off his impressive falsetto.";
+	if singing contest is 2:
+		if the player is female:
+			say "You smirk. Your coloratura is second to none; and if your social position had allowed it, you would have been the star of the opera house. So you sing a brilliant rendition of the queen of the night, rising higher and higher, utterly confident.[paragraph break]'Yeah? Think I can't do that just as well?' the sword asks you.[paragraph break]'No, you can't.'[paragraph break]'Yeah, well, well, let me show you! Ahum.'[paragraph break]'I'm waiting.'[paragraph break]'Okay, I can't do it. You win.'[paragraph break]'And now be quiet when I'm battle, you understand?' The sword meekly acquiesces.";
+			now the singing sword is tamed;
+		otherwise:
+			say "You'll show that sword. If he can use his falsetto, so can you. So you embark on an ambitious alto aria -- but after a couple of notes, you come to a sputtering halt. There's no way you can reach that high.[paragraph break]'Bwahaha, loser!' the sword laughs.";
+	if singing contest is 3:
+		say "You're not going to take on the singing sword again.";
+	if singing contest is less than 3:
+		increase singing contest by 1.
 
 
 [Section - Claymore (monster)
