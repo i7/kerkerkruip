@@ -13,12 +13,12 @@ A person has a number called kill count. [ The number of times the person has ki
 
 Table of Monster Statistics
 ColID (a number)	ColSeen [encountered] (a truth state)	died (a number)	kill (a number)
-with 28 blank rows [ Don't forget to update this when monsters are added! ]
+--	--	--	--
+with 35 blank rows [ Don't forget to update this when monsters are added! We include a buffer incase the player goes back to an older version. ]
 
 The File Of Monster Statistics is called "KerkerkruipStats".
 
-The load monster statistics rule is listed before the title screen rule in the when play begins rules.
-This is the load monster statistics rule:
+Before showing the title screen (this is the load monster statistics rule):
 	if File of Monster Statistics exists:
 		read File Of Monster Statistics into the Table of Monster Statistics;
 	repeat with X running through npc people:
@@ -47,11 +47,14 @@ To update the monster statistics:
 
 Section - Encountered
 
-Every turn (this is the mark people as encountered rule): 
+Every turn (this is the mark people as encountered rule):
+	let update be 0;
 	repeat with X running through npc people that are enclosed by the location:
 		if X is not encountered:
 			now X is encountered;
-			update the monster statistics;
+			now update is 1;
+	if update is 1:
+		update the monster statistics;
 
 Section - Died and Kill counts
 

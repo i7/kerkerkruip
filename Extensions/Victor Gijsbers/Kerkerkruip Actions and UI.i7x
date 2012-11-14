@@ -589,7 +589,51 @@ Check reading when the player is blind (this is the cannot read when blind rule)
 	say "[The noun] has not been written in braille." instead.
 
 
+Chapter - Achievements Menu
 
+Achievemenuing is an action out of world.
+
+Understand "achieve" and "achievements" as achievemenuing.
+
+Carry out achievemenuing:
+	now the current menu is the Table of Achievement Menu;
+	carry out the displaying activity;
+	clear the screen;
+	try looking;
+	report the main action again;
+
+
+Chapter - Enemies and Powers Menu
+
+Powermenuing is an action out of world.
+
+Understand "enemies" and "powers" as powermenuing.
+
+Carry out powermenuing:
+	consider the show the table of enemies and powers rule;
+	clear the screen;
+	try looking;
+	report the main action again;
+
+
+Chapter - The asking for help action (for use without Basic Help Menu by Emily Short)
+
+Asking for help is an action out of world.
+Understand "help" or "hint" or "hints" or "about" or "info" as asking for help.
+Carry out asking for help (this is the help request rule): do nothing.
+
+Chapter - Help Menu
+
+Understand "menu" as asking for help.
+
+The help request rule is not listed in any rulebook.
+
+Carry out asking for help:
+	now the current menu is the Table of Kerkerkruip Help;
+	carry out the displaying activity;
+	clear the screen;
+	try looking;
+	report the main action again;
 
 
 Chapter - Replacing "You can see" is not a joke

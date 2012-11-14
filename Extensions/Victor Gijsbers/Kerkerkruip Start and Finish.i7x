@@ -2,190 +2,48 @@ Kerkerkruip Start and Finish by Victor Gijsbers begins here.
 
 Use authorial modesty.
 
-
-Chapter - Wins and difficulty
-
-Section - Setting up the File of Victories
-
-The File Of Victories is called "KerkerkruipData".
-
-Table of Victories
-Victories	Level	Best-Level
-0	0	0
-
-The number-of-victories is a number that varies.
-The difficulty is a number that varies.
-The best-level is a number that varies.
-
-
-Section - Reading in the File of Victories
-
-First when play begins:
-	if File of Victories exists:
-		read File Of Victories into Table of Victories;
-	choose row 1 in the Table of Victories;
-	now number-of-victories is the Victories entry;
-	now difficulty is the level entry;
-	now best-level is the Best-Level entry;
-	set up initial scores for the player;
-	if File of Achievements exists:
-		read File of Achievements into Table of Held Achievements;
-	update the achievements;
-	write out the file of victories without reset.
-
-Section - Writing out the File of Victories
-
-To write out the file of victories:
-	if the player is victorious:
-		increase number-of-victories by 1;
-		increase difficulty by 1; [We want to go from easy to normal difficulty.]
-		if difficulty is 1:
-			say "[paragraph break][bold type]You have defeated Malygris on easy mode, proving that you understand the basics of the game! Next time, Kerkerkruip will start in normal mode. From now on, new items, monsters and locations will be available. Have fun![roman type][paragraph break]";
-		if difficulty is greater than best-level:
-			now best-level is difficulty;
-	otherwise:
-		unless difficulty is less than 2:
-			decrease difficulty by 1;
-	choose row 1 in the Table of Victories;
-	now the Victories entry is number-of-victories;
-	now the Level entry is difficulty;
-	now the Best-Level entry is best-level;
-	write File of Victories from Table of Victories;
-	write File of Achievements from Table of Held Achievements.
-
-To write out the file of victories without reset:
-	choose row 1 in the Table of Victories;
-	now the Victories entry is number-of-victories;
-	now the Level entry is difficulty;
-	now the Best-Level entry is best-level;
-	write File of Victories from Table of Victories;
-	write File of Achievements from Table of Held Achievements.
-
-
-Section - Restarting resets the winning streak
-
-First carry out restarting the game (this is the lower difficulty on restart rule):
-	unless player is victorious:
-		unless difficulty is less than 2:
-			decrease difficulty by 1;
-		choose row 1 in the Table of Victories;
-		now the Victories entry is number-of-victories;
-		now the Level entry is difficulty;
-		now the Best-Level entry is best-level;
-		write File of Victories from Table of Victories;
-		write File of Achievements from Table of Held Achievements.
-
-
-[Section - Permadeath additions and replacements
-
-The standard suicide rule is not listed in any rulebook.
-
-A suicide rule (this is the custom suicide rule):
-	say "Do you wish to commit suicide? (You will [bold type]not[roman type] be able to continue with this character, even if you have saved the game earlier.) ";
-	if player consents:
-		write out the file of victories;
-		permanently kill the player;
-		rule succeeds;
-	otherwise:
-		rule fails.
-
-The permadeath report saving rule is not listed in any rulebook.
-
-Report saving the game (this is the alternative permadeath report saving rule):
-	if save-failed is false:
-		consider the safe saving allowed rules;
-		if rule failed:		
-			if File of Adventurers exists:
-				read File Of Adventurers into Table of Adventurers;
-				repeat through the Table of Adventurers:
-					if the ID-1 entry is First ID and the ID-2 entry is Second ID and the ID-3 entry is Third ID:
-						if the Saving-state entry is 1: [this means we are saving]
-							now the Saving-state entry is 0;
-							write File Of Adventurers from the Table of Adventurers;
-							try fast restarting;
-						otherwise: [this means we are restoring]
-							if the Save-ID entry is 0:
-								consider the killed-before rules;
-							otherwise if Unique-save-ID is not Save-ID entry:
-								consider the wrong Save-ID rules;
-							otherwise:
-								clear the screen;
-								try looking;
-			otherwise:
-				consider the missing-adventurer rules.
-
-Fast restarting is an action out of world.
-
-Carry out fast restarting (this is the standard carry out fast restarting rule):
-	consider the immediately restart the VM rule.
-
-The standard killed before rule is not listed in any rulebook.
-
-A killed-before rule (this is the custom killed before rule):
-	say "This character is already dead.";
-	wait for any key;
-	consider the immediately restart the VM rule.
-
-The standard missing adventurer rule is not listed in any rulebook.
-
-A missing-adventurer rule (this is the custom missing adventurer rule):
-	say "A vital file appears to be missing!";
-	wait for any key;	
-	consider the immediately restart the VM rule.
-
-The standard wrong Save-ID rule is not listed in any rulebook.
-
-A wrong Save-ID rule (this is the custom wrong Save-ID rule):
-	say "This save game is too far in the past.";
-	wait for any key;	
-	consider the immediately restart the VM rule.
-
+[ Start and finish takes care of:
+	showing the title screen and help menu
+	handling difficultly levels
+	winning and losing
 ]
 
-Section - Applying the difficulty
-
-To apply the difficulty:
-	if difficulty is 0:
-		increase health of the player by 5;
-		increase permanent health of the player by 5;
-		increase melee of the player by 1;
-		increase defence of the player by 2;
-	if difficulty is 1:
-		increase health of the player by 3;
-		increase permanent health of the player by 3;
-		increase melee of the player by 1;		
-		increase defence of the player by 1;
-	if difficulty is 2:
-		increase health of the player by 1;
-		increase permanent health of the player by 1;
-		increase defence of the player by 1;
-	let k be 6 + difficulty;
-	repeat with guy running through monsters:
-		now health of guy is k times health of guy;
-		now health of guy is health of guy divided by 10;
-	if difficulty is greater than 2:
-		let n be difficulty - 2;
-		repeat with guy running through monsters:
-			repeat with i running from 1 to n:
-				buff guy.
-			
-To buff (guy - a person):
-	let m be a random number between 1 and 5;
-	if m is 1:
-		increase melee of guy by 1;
-	if m is 2:
-		increase defence of guy by 1;
-	if m is 3:
-		increase body score of guy by 1;
-	if m is 4:	
-		increase mind score of guy by 1;
-	if m is 5:	
-		increase spirit score of guy by 1.
 
 
-Chapter - Setting up initial scores for the player
+Chapter - The title screen activity
 
-To set up initial scores for the player:
+Showing the title screen is an activity.
+
+[ Show the title screen in the place of the when play begins rules ]
+
+The show the title screen rule is listed instead of the when play begins stage rule in the startup rules.
+This is the show the title screen rule:
+	carry out the showing the title screen activity;
+
+Last after showing the title screen:
+	consider the when play begins rules;
+
+
+
+Section - The difficulty level
+
+The difficulty is a number that varies.
+
+Before showing the title screen:
+	now difficulty is data value 2;
+
+
+
+Section - Player stats
+
+[ Must be done before showing the title screen as some difficulty labels are gendered! ]
+Before showing the title screen (this is the set gender rule):
+	if a random chance of 1 in 2 succeeds:
+		now the player is male;
+	otherwise:
+		now the player is female;
+
+First after showing the title screen (this is the set up initial scores for the player rule):
 	now permanent health of the player is 13;
 	now melee of the player is 1;
 	now defence of the player is 7;
@@ -195,7 +53,7 @@ To set up initial scores for the player:
 	give the player a stat bonus;
 	give the player a stat bonus;
 	give the player a stat penalty;
-	restore the health of the player.
+	restore the health of the player;
 
 To give the player a stat bonus:
 	let i be a random number between 1 and 4;
@@ -219,139 +77,49 @@ To give the player a stat penalty:
 	if i is 4:
 		decrease spirit score of the player by 1.
 
-This is the set gender rule:
-	if a random chance of 1 in 2 succeeds:
-		now the player is male;
-	otherwise:
-		now the player is female.
-
-The set gender rule is listed before the title screen rule in the when play begins rules.
 
 
-Chapter - Start and Finish
+Section - Applying the difficulty
+
+After showing the title screen (this is the apply the difficulty rule):
+	if difficulty is 0:
+		increase health of the player by 5;
+		increase permanent health of the player by 5;
+		increase melee of the player by 1;
+		increase defence of the player by 2;
+	if difficulty is 1:
+		increase health of the player by 3;
+		increase permanent health of the player by 3;
+		increase melee of the player by 1;		
+		increase defence of the player by 1;
+	if difficulty is 2:
+		increase health of the player by 1;
+		increase permanent health of the player by 1;
+		increase defence of the player by 1;
+	let k be 6 + difficulty;
+	repeat with guy running through monsters:
+		now health of guy is (k times health of guy) / 10;
+	if difficulty is greater than 2:
+		let n be difficulty - 2;
+		repeat with guy running through monsters:
+			repeat with i running from 1 to n:
+				buff guy.
+			
+To buff (guy - a person):
+	let m be a random number between 1 and 5;
+	if m is 1:
+		increase melee of guy by 1;
+	if m is 2:
+		increase defence of guy by 1;
+	if m is 3:
+		increase body score of guy by 1;
+	if m is 4:	
+		increase mind score of guy by 1;
+	if m is 5:	
+		increase spirit score of guy by 1.
 
 
 
-Section - Start
-
-Started boolean is a truth state that varies. Started boolean is false.
-
-Last when play begins (this is the introduction rule):
-	say "[paragraph break]When you claimed that you were tough enough to take on Malygris single-handedly, everyone knew you had been drinking much more than was good for you. And the prince is not one to let an opportunity pass. Before you could so much as protest, his court mage opened a portal and you were shoved through. Predictably, the portal immediately disappeared. You doubt they're going to open it up again -- but at least you can try to make good on your boast and kill Malygris, the Wizard of Kerkerkruip!";
-	now started boolean is true. [See right below here, in the definition of "victorious".]
-
-Section - Victory message
-
-The victory message rules are a rulebook.
-
-To decide whether the player is victorious:
-	if started boolean is false:
-		decide no;
-	let counter be 0;
-	repeat with guy running through alive not off-stage monsters:
-		if the level of guy is 5:
-			unless guy is player-enslaved:
-				now counter is 1;
-	if counter is 0:
-		decide yes;
-	if Malygris-lover is true:
-		decide yes;
-	decide no.
-
-Every turn (this is the victory rule):
-	if the player is victorious:
-		consider the victory message rules.
-		
-Last victory message rule (this is the normal victory message rule):		
-	end the story saying "You have defeated Malygris! With his immense magical powers now at your disposal, it is time to teleport back to Montenoir and pay a little visit to the prince.";
-	rule succeeds.
-
-Victory message rule (this is the Nameless Horror message rule):
-	if the Nameless Horror is follower:		
-		end the story saying "You have won... technically. The Nameless Horror will find you soon, and your end will not be pretty.";
-		rule succeeds.
-
-Victory message rule (this is the enslaved Malygris message rule):
-	if Malygris is player-enslaved:		
-		end the story saying "You have turned Malygris into your slave!";
-		rule succeeds.
-	
-To do the level 10 victory with (guy - a person):
-	say "In slaying [the guy], you have done the impossible. You absorb its soul, and though this process leaves little of your own personality intact, your powers increase a thousandfold. Even the gods bow to you.";
-	end the story saying "You reign eternally!".
-	
-
-Section - Death message
-
-Every turn (this is the player death rule):
-	if the player is dead:
-		unless the global attacker is the player:
-			end the story saying "You were killed by [the name of the global attacker]";
-		otherwise:
-			end the story saying "You committed suicide. How unseemly!".
-
-Section - What happens after the obituary
-
-After printing the player's obituary:
-	write out the file of victories;
-	if the player is victorious:
-		consider the unlock stuff rule.
-
-This is the unlock stuff rule:
-	let X be a list of objects; [We cannot repeat through objects, so:]
-	repeat with Y running through rooms:
-		if unlock level of Y is number-of-victories:
-			if unlock hidden switch of Y is not true:
-				add Y to X;
-	repeat with Y running through persons:
-		if unlock level of Y is number-of-victories:
-			if unlock hidden switch of Y is not true:		
-				add Y to X;
-	repeat with Y running through things:
-		if Y is not a person:
-			if unlock level of Y is number-of-victories:
-				if unlock hidden switch of Y is not true:			
-					add Y to X;
-	if X is not empty:
-		say "You have [bold type]unlocked[roman type] new content:[line break][run paragraph on]";
-		repeat with item running through X:
-			say "* [the item] ([unlock text of item])[line break]";
-		say "[line break]".
-
-Section - The final question
-
-[First stuff to get around an Inform 7 bug.]
-Table of Literal Topics
-text		topic
-"new"	"new"
-
-When play begins: 
-	choose row with a final response rule of immediately restore saved game rule in the Table of Final Question Options; 
-	blank out the whole row;
-	choose row with a final response rule of immediately undo rule in the Table of Final Question Options; 
-	blank out the whole row;
-	choose a row with a text of "new" in the Table of Literal Topics;
-	let new be the topic entry;	
-	choose row with a final response rule of immediately restart the VM rule in the Table of Final Question Options;
-	now topic entry is new;
-	now final question wording entry is "start a NEW game".
-
-Chapter - Doing a reset
-
-To do the reset:
-	choose row 1 in the Table of Victories;
-	now the Victories entry is 0;
-	now the Level entry is 0;
-	now the Best-Level entry is 0;
-	write File of Victories from Table of Victories;
-	now number-of-victories is 0;
-	now difficulty is 0;
-	now best-level is 0.
-
-To do the achievement reset:
-	repeat through Table of Held Achievements:
-		now held difficulty entry is -1;
-	write File of Achievements from Table of Held Achievements.	
 
 
 Chapter - Introduction Menu
@@ -360,7 +128,7 @@ Chapter - Introduction Menu
 
 Figure opening figure is the file "smallercover.jpg".
 
-The first when play begins rule (this is the title screen rule):
+Rule for showing the title screen (this is the text title screen rule):
 	while 1 is 1:
 		clear the screen;
 		redraw status line;
@@ -375,8 +143,9 @@ The first when play begins rule (this is the title screen rule):
 		say paragraph break;]
 		say " SCORES:[line break]";
 		say "   Current level                :  [difficulty level difficulty] ([difficulty])[paragraph break]";
+		let best-level be data value 3;
 		say "   Highest level achieved       :  [difficulty level best-level] ([best-level])[line break][paragraph break]";
-		say "   Your total victories         :  [number-of-victories][line break]";		
+		say "   Your total victories         :  [ data value 1][line break]";		
 [		say "   Your current winning streak  :    [unless winning-streak is greater than 9] [end if][unless winning-streak is greater than 99] [end if] [winning-streak][line break]";
 		say "   Your best winning streak     :  [unless best-winning-streak is greater than 9] [end if][unless best-winning-streak is greater than 99] [end if]   [best-winning-streak][paragraph break]";]
 		say paragraph break;
@@ -399,23 +168,20 @@ The first when play begins rule (this is the title screen rule):
 					delete file of save data;
 					unless difficulty is less than 2:
 						decrease difficulty by 1;
-				apply the difficulty;
+						set data value 2 to difficulty;
 				clear the screen;
 				make no decision;	
 			[ S: skip to apprentice level]	
 			otherwise if (k is 115 or k is 83) and difficulty is 0:
-				now number-of-victories is 1;
 				now difficulty is 1;
-				write out the file of victories without reset;
-				set up initial scores for the player;
-				apply the difficulty;
+				set data value 2 to difficulty;
 				delete file of save data;
 				clear the screen; 
 				make no decision;
 			[ Q: quit ]
 			otherwise if k is 113 or k is 81:
 				stop game abruptly;
-			[ R: rest]
+			[ R: reset menu ]
 			otherwise if k is 114 or k is 82:
 				now the current menu is Table of Reset Menu;
 				carry out the displaying activity;
@@ -453,7 +219,7 @@ To say difficulty level (m - a number):
 		say "[if player is not female]GOD[otherwise]GODDESS[end if][run paragraph on]".
 
 
-Chapter - Reset Menu
+Section - Reset Menu
 
 Table of Reset Menu
 title	subtable	description	toggle 
@@ -462,31 +228,21 @@ title	subtable	description	toggle
 "Please reset the achievements list instead."	--	--	the achievement resetting rule
 
 This is the resetting rule:
-	do the reset;
+	now difficulty is 0;
+	set data value 1 to 0;
+	set data value 2 to difficulty;
+	set data value 3 to 0;
+	set data value 4 to 0;
 	consider the quit rule.
 
 This is the achievement resetting rule:
-	do the achievement reset;
+	repeat through Table of Held Achievements:
+		now held difficulty entry is -1;
+	write File of Achievements from Table of Held Achievements;
 	consider the quit rule.
 
-Chapter - The asking for help action (for use without Basic Help Menu by Emily Short)
 
-Asking for help is an action out of world.
-Understand "help" or "hint" or "hints" or "about" or "info" as asking for help.
-Carry out asking for help (this is the help request rule): do nothing.
-
-Chapter - Help Menu
-
-Understand "menu" as asking for help.
-
-The help request rule is not listed in any rulebook.
-
-Carry out asking for help:
-	now the current menu is the Table of Kerkerkruip Help;
-	carry out the displaying activity;
-	clear the screen;
-	try looking;
-	report the main action again;
+Section - Help Menu
 	
 Table of Kerkerkruip Help
 title	subtable	description	toggle 
@@ -587,55 +343,9 @@ This is the describe an enemy and power rule:
 	say paragraph break;
 	pause the game;
 
-Powermenuing is an action out of world.
-
-Understand "enemies" and "powers" as powermenuing.
-
-Carry out powermenuing:
-	consider the show the table of enemies and powers rule;
-	clear the screen;
-	try looking;
-	report the main action again;
-
-	
 
 
-Chapter - Achievements
-
-The File Of Achievements is called "KerkerkruipAchievements".
-
-Achievement is a kind of value. Some achievements are defined by the Table of Achievements.
-
-Table of Achievements
-achievement
-Assistant dungeoneer
-Adventurer
-Hunter
-Destroyer
-Mageslayer
-Deathblow
-I return to serve
-From the shadows I come
-Stunning performance
-Detox
-Injury to insult
-Unmoved
-Nature's fragile vessel
-Durin's bane
-
-Table of Held Achievements
-held achievement	held difficulty
-(an achievement)	(a number)
-with 14 blank rows
-
-To update the achievements:
-	repeat through Table of Achievements:
-		let current achievement be the achievement entry;
-		unless there is a held achievement of current achievement in the Table of Held Achievements:
-			choose a blank row in the Table of Held Achievements;
-			now held achievement entry is current achievement;
-			now held difficulty entry is -1.
-
+Section - Achievements menu
 
 Table of Achievement Menu
 title	subtable	description	toggle
@@ -665,103 +375,138 @@ To say achievement (current achievement - an achievement):
 	otherwise:
 		say " -- not yet achieved".
 
-To award achievement (current achievement - an achievement):
-	if there is a held achievement of current achievement in the Table of Held Achievements:
-		choose row with a held achievement of current achievement in the Table of Held Achievements;
-		if held difficulty entry is less than difficulty:
-			now held difficulty entry is difficulty;
-			say "[line break]You have been awarded the [bold type][current achievement][roman type] achievement!".
 
-[The first achievements are in the Systems / powers code.]
 
-Section - Mageslayer
+Chapter - Start
 
-Before printing the player's obituary (this is the award Mageslayer achievement rule):
+Started boolean is a truth state that varies. Started boolean is false.
+
+Last when play begins (this is the introduction rule):
+	say "[paragraph break]When you claimed that you were tough enough to take on Malygris single-handedly, everyone knew you had been drinking much more than was good for you. And the prince is not one to let an opportunity pass. Before you could so much as protest, his court mage opened a portal and you were shoved through. Predictably, the portal immediately disappeared. You doubt they're going to open it up again -- but at least you can try to make good on your boast and kill Malygris, the Wizard of Kerkerkruip!";
+	now started boolean is true. [See section Victory message below.]
+
+
+
+
+
+Chapter - The end
+
+Section - Death message
+
+Every turn (this is the player death rule):
+	if the player is dead:
+		unless the global attacker is the player:
+			end the story saying "You were killed by [the name of the global attacker]";
+		otherwise:
+			end the story saying "You committed suicide. How unseemly!".
+
+
+Section - Victory message
+
+The victory message rules are a rulebook.
+
+To decide whether the player is victorious:
+	if started boolean is false:
+		decide no;
+	let counter be 0;
+	repeat with guy running through alive not off-stage monsters:
+		if the level of guy is 5:
+			unless guy is player-enslaved:
+				now counter is 1;
+	if counter is 0:
+		decide yes;
+	if Malygris-lover is true:
+		decide yes;
+	decide no.
+
+Every turn (this is the victory rule):
 	if the player is victorious:
-		unless Malygris is alive:
-			award achievement Mageslayer.
+		consider the victory message rules.
+		
+Last victory message rule (this is the normal victory message rule):		
+	end the story saying "You have defeated Malygris! With his immense magical powers now at your disposal, it is time to teleport back to Montenoir and pay a little visit to the prince.";
+	rule succeeds.
 
-Section - Deathblow
+Victory message rule (this is the Nameless Horror message rule):
+	if the Nameless Horror is follower:		
+		end the story saying "You have won... technically. The Nameless Horror will find you soon, and your end will not be pretty.";
+		rule succeeds.
 
-Last aftereffects rule (this is the award Deathblow achievement rule):
-	if global attacker is player and the attack damage is greater than 19:
-		award achievement Deathblow.
+Victory message rule (this is the enslaved Malygris message rule):
+	if Malygris is player-enslaved:		
+		end the story saying "You have turned Malygris into your slave!";
+		rule succeeds.
+	
+To do the level 10 victory with (guy - a person):
+	say "In slaying [the guy], you have done the impossible. You absorb its soul, and though this process leaves little of your own personality intact, your powers increase a thousandfold. Even the gods bow to you.";
+	end the story saying "You reign eternally!".
 
-Section - I return to serve
 
-Killing rule (this is the award I return to serve achievement rule):
-	if killer-guy is undead and the player is undead and killer-guy is not the player:
-		award achievement I return to serve.
+Section - What happens after the obituary
 
-Section - From the shadows I come
-
-From-the-shadows boolean is a truth state that varies. From-the-shadows boolean is false.
-
-First carry out a hidden pc hitting (this is the set up from the shadows I come rule):
-	if health of the global defender is not less than permanent health of the global defender:
-		now from-the-shadows boolean is true.
-
-Last aftereffects rule (this is the award from the shadows achievement rule):
-	if from-the-shadows boolean is true:
-		if global defender is dead:
-			award achievement From the shadows I come;
-		now from-the-shadows boolean is false.
-
-Section - Stunning performance
-
-[Handled by the Miranda code in Kerkerkruip Monsters.]
-
-Section - Detox
-
-Before printing the player's obituary (this is the award Detox achievement rule):
+After printing the player's obituary (this is the update the difficulty rule):
 	if the player is victorious:
-		if ment addiction is 0:
-			award achievement Detox.
-			
-Section - Injury to insult
+		set data value 1 to data value 1 + 1; [ number of victories ]
+		set data value 4 to data value 4 + 1; [ number of victories for the purpose of unlocking ]
+		increase difficulty by 1; [We want to go from easy to normal difficulty.]
+		if difficulty is 1:
+			say "[paragraph break][bold type]You have defeated Malygris on easy mode, proving that you understand the basics of the game! Next time, Kerkerkruip will start in normal mode. From now on, new items, monsters and locations will be available. Have fun![roman type][paragraph break]";
+		if difficulty is greater than data value 3: [ best level ]
+			set data value 3 to difficulty;
+	otherwise:
+		unless difficulty is less than 2:
+			decrease difficulty by 1;
+	set data value 2 to difficulty;
 
-Last aftereffects rule (this is the award injury to insult achievement rule):
-	if global attacker is the player and global defender is Malygris:
-		if Malygris is dead and global attacker weapon is a natural weapon:
-			award achievement Injury to insult.
-
-Section - Unmoved
-
-The unmoved boolean is a truth state that varies. The unmoved boolean is true.
-
-Carry out dodging:
-	now the unmoved boolean is false.
-
-Carry out parrying:
-	now the unmoved boolean is false.
-
-Before printing the player's obituary (this is the award Unmoved achievement rule):
+Last after printing the player's obituary (this is the unlock stuff rule):
 	if the player is victorious:
-		if unmoved boolean is true:
-			award achievement Unmoved.
+		let number-of-victories be data value 1;
+		let X be a list of objects; [We cannot repeat through objects, so:]
+		repeat with Y running through rooms:
+			if unlock level of Y is number-of-victories:
+				if unlock hidden switch of Y is not true:
+					add Y to X;
+		repeat with Y running through persons:
+			if unlock level of Y is number-of-victories:
+				if unlock hidden switch of Y is not true:		
+					add Y to X;
+		repeat with Y running through things:
+			if Y is not a person:
+				if unlock level of Y is number-of-victories:
+					if unlock hidden switch of Y is not true:			
+						add Y to X;
+		if X is not empty:
+			say "You have [bold type]unlocked[roman type] new content:[line break][run paragraph on]";
+			repeat with item running through X:
+				say "* [the item] ([unlock text of item])[line break]";
+			say "[line break]";
 
-Section - Nature's fragile vessel
 
-Before printing the player's obituary (this is the award fragile vessel achievement rule):
-	if the player is victorious:
-		if permanent health of the player is less than 15:
-			award achievement Nature's fragile vessel.
+Section - The final question
 
-Section - Durin's bane
+[First stuff to get around an Inform 7 bug.]
+Table of Literal Topics
+text	topic
+"new"	"new"
 
-[Handled by the Nameless Horror code in Kerkerkruip Monsters.]
+When play begins: 
+	choose row with a final response rule of immediately restore saved game rule in the Table of Final Question Options; 
+	blank out the whole row;
+	choose row with a final response rule of immediately undo rule in the Table of Final Question Options; 
+	blank out the whole row;
+	choose a row with a text of "new" in the Table of Literal Topics;
+	let new be the topic entry;	
+	choose row with a final response rule of immediately restart the VM rule in the Table of Final Question Options;
+	now topic entry is new;
+	now final question wording entry is "start a NEW game";
+
+
+Section - Lower the difficulty when restarting
+
+First carry out restarting the game (this is the lower difficulty on restart rule):
+	unless player is victorious:
+		unless difficulty is less than 2:
+			decrease difficulty by 1;
+			set data value 2 to difficulty;
 
 Kerkerkruip Start and Finish ends here.
-
-Section - Achievements Menu
-
-Achievemenuing is an action out of world.
-
-Understand "achieve" and "achievements" as achievemenuing.
-
-Carry out achievemenuing:
-	now the current menu is the Table of Achievement Menu;
-	carry out the displaying activity;
-	clear the screen;
-	try looking;
-	report the main action again;

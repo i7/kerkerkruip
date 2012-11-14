@@ -25,6 +25,7 @@ Use undo prevention.
 Include version 4/121110 of Inform ATTACK by Victor Gijsbers.
 [You can get the latest ATTACK at https://github.com/i7/ATTACK ]
 
+Include Kerkerkruip Persistent Data by Victor Gijsbers.
 Include Kerkerkruip Dungeon Generation by Victor Gijsbers.
 Include Kerkerkruip Events by Victor Gijsbers.
 Include Kerkerkruip ATTACK Additions by Victor Gijsbers.

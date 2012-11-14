@@ -290,7 +290,7 @@ Placement possible rule (this is the adjust rooms for rarity rule):
 		rule fails.
 
 Placement possible rule (this is the do not use rooms that are not yet unlocked rule):
-	if the unlock level of considered room is greater than number-of-victories:
+	if the unlock level of considered room is greater than data value 1:
 		rule fails.
 
 Last placement possible rule:
@@ -677,7 +677,7 @@ Monster placement possible rule (this is the adjust monsters for rarity rule):
 		rule fails.
 
 Monster placement possible rule (this is the do not use monsters that are not yet unlocked rule):
-	if the unlock level of considered monster is greater than number-of-victories:
+	if the unlock level of considered monster is greater than data value 1:
 		rule fails.
 
 Last monster placement possible rule:
@@ -709,7 +709,7 @@ Section - Treasure placement
 
 Considered treasure is a thing that varies.
 
-Definition: a thing (called item) is not-too-difficult if the difficulty level of item is not greater than the difficulty and the unlock level of item is not greater than number-of-victories.
+Definition: a thing (called item) is not-too-difficult if the difficulty level of item is not greater than the difficulty and the unlock level of item is not greater than data value 1.
 
 First treasure placement rule (this is the remove rare items rule):
 	repeat with X running through rare not non-treasure things:
