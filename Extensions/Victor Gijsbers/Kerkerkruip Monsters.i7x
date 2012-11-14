@@ -1951,7 +1951,7 @@ Mouser is a mindslug-enslaved man. The description of Mouser is "Mouser is a sma
 The ID of Mouser is 12.
 
 [Mouser carries sneaky sword: see Kerkerkruip Items.]
-Mouser carries the sneaky sword.
+Mouser carries the sneaking sword.
 
 Health of Mouser is 8.
 Defence of Mouser is 9.
