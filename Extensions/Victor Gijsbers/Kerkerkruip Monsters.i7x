@@ -2695,7 +2695,8 @@ The spirit score of Tormentor of Aite is 12.
 The group level of the Tormentor of Aite is 4.
 
 The tormentor of Aite is Aite-loved.
-The tormentor's staff is a readied staff of pain. The tormentor of Aite carries the tormentor's staff. The description of the tormentor's staff is "This staff of pain wounds with magic that can be neither parried nor dodged.".
+
+The tormentor of Aite carries a staff of pain.
 
 Tormentor of Aite is weapon user.
 
@@ -2713,7 +2714,7 @@ Report the tormentor of Aite hitting a dead pc:
 
 Report the tormentor of Aite attacking:
 	unless actor is the noun:
-		say "The tormentor raises her staff towards [the noun], preparing a magical attack.";
+		say "The tormentor raises her staff, preparing to cause pain to [the noun].";
 	otherwise:
 		say "The tormentor tries to put her staff in a place where the sun doesn't shine.";
 	rule succeeds.
@@ -2744,7 +2745,7 @@ The spirit score of Defender of Aite is 8.
 The group level of the Defender of Aite is 4.
 
 The defender of Aite is Aite-loved.
-The defender's sword is a readied sword. The defender of Aite carries the defender's sword. The description of the defender's sword is "Just a plain sword.".
+The defender of Aite carries the immaculate sword.
 
 Defender of Aite is weapon user.
 

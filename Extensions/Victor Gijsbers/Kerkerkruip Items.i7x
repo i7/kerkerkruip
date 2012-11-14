@@ -2164,6 +2164,16 @@ A damage modifier rule (this is the holy sword damage bonus rule):
 				say " + ", n, " (holiness)[run paragraph on]";
 				increase the attack damage by n.
 
+Section - Immaculate sword (monster)
+
+[The defender of Aite carries it.]
+
+The immaculate sword is a sword. The description of the immaculate sword is "Absolutely stainless."
+The immaculate sword is incorruptible.
+
+The special weapon info of the immaculate sword is "; cannot be corrupted[run paragraph on]".
+
+
 
 
 Chapter - Rapier
@@ -2468,14 +2478,17 @@ An aftereffects rule (this is the scythe of oxidation rusts stuff rule):
 
 
 
-Chapter - Staves 
+Chapter - Staff of pain (monster)
+
+[One of these is used by the tormentor of Aite.]
 
 A staff of pain is a kind of weapon. The plural of staff of pain is staves of pain.
 A staff of pain is usually wood. A staff of pain is ranged.
 A staff of pain is size-agnostic.
+The description of a staff of pain is "The staff of pain wounds with magic that can be neither parried nor dodged.".
 
 The damage die of a staff of pain is usually 4.
-The weapon attack bonus of a staff of pain is usually 1.
+The weapon attack bonus of a staff of pain is usually 0.
 The dodgability of a staff of pain is usually 0.
 The active parry max of a staff of pain is usually 1.
 The passive parry max of a staff of pain is usually 0.
