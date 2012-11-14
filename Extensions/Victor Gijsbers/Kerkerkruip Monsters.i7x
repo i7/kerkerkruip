@@ -2545,31 +2545,9 @@ When play begins:
 
 Minotaur is a weapon user.
 
-Section - Minotaur's axe
+The minotaur carries the minotaur's axe.  The minotaur's axe is readied.
 
-The minotaur's axe is an axe. The description of the minotaur's axe is "A huge axe covered in mystic runes.".
-The minotaur carries the minotaur's axe. The minotaur's axe is readied.
 
-The damage die of the minotaur's axe is 6.
-The weapon attack bonus of the minotaur's axe is -3.
-The weapon damage bonus of the minotaur's axe is 3.
-The dodgability of the minotaur's axe is 3.
-The passive parry max of the minotaur's axe is 0.
-The active parry max of the minotaur's axe is 1.
-
-An attack modifier rule:
-	if the location of the global attacker is the maze and the global attacker weapon is the minotaur's axe:
-		say " + 3 (minotaur's axe stronger in the maze)[run paragraph on]";
-		increase the attack strength by 3.
-	
-The special weapon info of the minotaur's axe is "; when damage is dealt and the wielder has the power of the minotaur, casts attacker and defender in a magical maze[run paragraph on]".
-
-Last aftereffects rule (this is the minotaur's axe maze rule):
-	if the global attacker weapon is the minotaur's axe:
-		if the global attacker is the minotaur or (the global attacker is the player and the power of the minotaur is granted):
-			if the attack damage is greater than 0:
-				if the location of the player is not the maze:
-					maze the actor and the noun.
 
 Section - Minotaur prose
 
@@ -2668,7 +2646,7 @@ The group level of the Healer of Aite is 4.
 
 Heal power of the healer of Aite is 5.
 The healer of Aite is Aite-loved.
-The healer's sword is a readied sword. The healer of Aite carries the healer's sword. The description of the healer's sword is "Just a plain sword.".
+The healer of Aite carries the holy sword.
 
 Healer of Aite is weapon user.
 

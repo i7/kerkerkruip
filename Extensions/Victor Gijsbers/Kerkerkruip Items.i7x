@@ -2068,6 +2068,8 @@ Chance to win rule (this is the CTW smoky blade penalty rule):
 
 Section - Sneaking sword (monster)
 
+[Mouser carries it]
+
 There is a sword called sneaking sword. The description of sneaking sword is "This sword is especially suitable for making sneaky attacks."
 
 The special weapon info of the sneaking sword is "; +2 damage when hidden[run paragraph on]"
@@ -2118,6 +2120,8 @@ Instead of singing when the player encloses the readied not tamed singing sword:
 
 Section - Claymore (monster)
 
+[Fafhrd carries it.]
+
 The claymore is a sword. The description of claymore is "This big sword is mainly used by barbarian tribes. Depending on your body score, it has a chance of destroying any weapon that parries it or is parried by it. (The probability is 5% for every 4 points of body; i.e., 5% at 4 body, 10% at 8 body, and so on.)"
 
 The special weapon info of the claymore is "; shatters weapons[run paragraph on]"
@@ -2140,7 +2144,26 @@ An aftereffects rule (this is the claymore can cause weapons to break rule):
 						say "The claymore [bold type]shatters [the target][roman type]!";
 						remove target from play.
 						
-						
+Section - Holy sword (monster)
+
+[The healer of Aite carries it.]						
+
+The holy sword is a sword. The description of the holy sword is "This sword shines with a clear white light. It deals additional damage to undead and demons. (It deals 1 extra damage for each 6 points of spirit; i.e., 1 damage at 6 spirit, 2 damage at 12 spirit, and so on.)".
+
+The special weapon info of the holy sword is "; deals extra damage to undead and demons; shines with light, making it harder to hide[run paragraph on]".
+
+Detection rule (this is the hiky sword detection rule):
+	if the holy sword is readied and the player encloses the holy sword:
+		increase detection probability by 5.
+
+A damage modifier rule (this is the holy sword damage bonus rule):
+	if the global attacker weapon is the holy sword:
+		if the global defender is undead or global defender is demonic:
+			let n be (final spirit of global attacker / 6);
+			if n > 0:
+				say " + ", n, " (holiness)[run paragraph on]";
+				increase the attack damage by n.
+
 
 
 Chapter - Rapier
@@ -2356,7 +2379,31 @@ Chance to win rule (this is the CTW executioner's axe in temple of Nomos rule):
 
 The special weapon info of the executioner's axe is "; better tension damage bonus[run paragraph on]".
 
+Section - Minotaur's axe
 
+The minotaur's axe is an axe. The description of the minotaur's axe is "A huge axe covered in mystic runes.".
+
+The damage die of the minotaur's axe is 6.
+The weapon attack bonus of the minotaur's axe is -3.
+The weapon damage bonus of the minotaur's axe is 3.
+The dodgability of the minotaur's axe is 3.
+The passive parry max of the minotaur's axe is 0.
+The active parry max of the minotaur's axe is 1.
+
+An attack modifier rule:
+	if the location of the global attacker is the maze and the global attacker weapon is the minotaur's axe:
+		say " + 3 (minotaur's axe stronger in the maze)[run paragraph on]";
+		increase the attack strength by 3.
+	
+The special weapon info of the minotaur's axe is "; when damage is dealt and the wielder has the power of the minotaur, casts attacker and defender in a magical maze[run paragraph on]".
+
+Last aftereffects rule (this is the minotaur's axe maze rule):
+	if the global attacker weapon is the minotaur's axe:
+		if the global attacker is the minotaur or (the global attacker is the player and the power of the minotaur is granted):
+			if the attack damage is greater than 0:
+				if the location of the player is not the maze:
+					maze the actor and the noun.
+					
 
 
 
