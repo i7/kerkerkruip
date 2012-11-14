@@ -1313,46 +1313,6 @@ When play begins:
 
 The reaper is a weapon user.
 
-Section - Reaper's scythes of flame, slaying and oxidation
-
-The scythe of flaming is a scythe. The description of the scythe of flaming is "Enchanted with a spell of heat, this scythe always remains unnaturally hot.".
-The internal heat of scythe of flaming is 3.
-
-The scythe of slaying is a scythe. The scythe of slaying is silver. The description of the scythe of slaying is "Ages ago, the monks of Averoigne forged these weapons, imbuing them with powerful enchantments against the living dead.".
-
-A damage modifier rule (this is the scythe of slaying deals great damage to undead rule):
-	if global attacker weapon is the scythe of slaying and global defender is undead:
-		if the numbers boolean is true, say " + 5 (slaying undead)[run paragraph on]";
-		increase the attack damage by 5.
-
-The special weapon info of the scythe of slaying is "; massive damage against undead[run paragraph on]".
-
-The scythe of oxidation is a scythe. The scythe of oxidation is iron. The scythe of oxidation is rusted. The description of the scythe of oxidation is "Some entropic demon or deity has given this scythe the ability to rust the opponent's weapons in combat.".
-
-The special weapon info of the scythe of oxidation is "; rusts weapons[run paragraph on]".
-
-An aftereffects rule (this is the scythe of oxidation rusts stuff rule):
-	if the global attacker weapon is the scythe of oxidation:
-		if the global defender is at parry and the attack damage is 0:
-			if the global defender weapon is iron and the global defender weapon is not rusted:
-				say "Having been in contact with the scythe of oxidation, [the global defender weapon] [bold type]rusts[roman type].";
-				now the global defender weapon is rusted;
-	if the global defender weapon is the scythe of oxidation:
-		if the global defender is at parry and the attack damage is 0:
-			if the global attacker weapon is iron and the global attacker weapon is not rusted and the passive parry max of the global attacker weapon is not 0:
-				if the global attacker weapon is not a part of the global attacker:
-					say "Having been in contact with the scythe of oxidation, [the global attacker weapon] [bold type]rusts[roman type].";
-					now the global attacker weapon is rusted;
-				otherwise:
-					if the global defender is not rusted and the global defender is alive:
-						say "Having hit the scythe of oxidation, [the global defender] [bold type]rusts[roman type]!";			
-						now the global defender is rusted;
-	if the global attacker weapon is the scythe of oxidation:
-		if the global defender is iron and the attack damage is greater than 0:
-			if the global defender is not rusted and the global defender is alive:
-				say "Having been hit with the scythe of oxidation, [the global defender] [bold type]rusts[roman type]!";			
-				now the global defender is rusted.
-
 First when play begins (this is the Reaper carries a random scythe rule): [first, to stop game from readying another weapon]
 	let m be a random number between 1 and 3;
 	if m is 1:
@@ -1942,7 +1902,7 @@ When play begins:
 	let X be a random natural weapon part of Fafhrd;
 	now printed name of X is "Fafhrd's fists".
 
-Fafhrd carries a sword called claymore. The description of claymore is "It looks like a normal sword that has seen a lot of use."
+Fafhrd carries the claymore.
 
 Follower percentile chance of Fafhrd is 75.
 Fafhrd is weapon user.

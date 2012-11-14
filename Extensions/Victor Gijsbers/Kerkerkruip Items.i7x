@@ -2116,9 +2116,31 @@ Instead of singing when the player encloses the readied not tamed singing sword:
 		increase singing contest by 1.
 
 
-[Section - Claymore (monster)
+Section - Claymore (monster)
 
-Fafhrd carries a sword called claymore. The description of claymore is "It looks like a normal sword that has seen a lot of use."]
+The claymore is a sword. The description of claymore is "This big sword is mainly used by barbarian tribes. Depending on your body score, it has a chance of destroying any weapon that parries it or is parried by it. (The probability is 5% for every 4 points of body; i.e., 5% at 4 body, 10% at 8 body, and so on.)"
+
+The special weapon info of the claymore is "; shatters weapons[run paragraph on]"
+
+An aftereffects rule (this is the claymore can cause weapons to break rule):
+	if global attacker weapon is the claymore or global defender weapon is the claymore: [using claymore]
+		if global defender is at parry and attack damage is 0 and global attacker weapon is not ranged: [parry successful]
+			let target be the claymore;
+			let n be 0;
+			if global attacker weapon is the claymore:
+				now target is global defender weapon;
+				now n is (final body of the global attacker / 4);
+			otherwise:
+				now target is global attacker weapon;
+				now n is (final body of the global defender / 4);
+			if target is corruptible:
+				if target is not a natural weapon:
+[					say "TEST: running with n = [n] and target is [target].";]
+					if a random chance of n in 20 succeeds:
+						say "The claymore [bold type]shatters [the target][roman type]!";
+						remove target from play.
+						
+						
 
 
 Chapter - Rapier
@@ -2351,6 +2373,49 @@ The active parry max of a scythe is usually 1.
 The weapon damage bonus of a scythe is usually 0.
 
 
+Section - Scythe of flame (monster)
+
+The scythe of flaming is a scythe. The description of the scythe of flaming is "Enchanted with a spell of heat, this scythe always remains unnaturally hot.".
+The internal heat of scythe of flaming is 3.
+
+Section - Scythe of slaying (monster)
+
+The scythe of slaying is a scythe. The scythe of slaying is silver. The description of the scythe of slaying is "Ages ago, the monks of Averoigne forged these weapons, imbuing them with powerful enchantments against the living dead.".
+
+A damage modifier rule (this is the scythe of slaying deals great damage to undead rule):
+	if global attacker weapon is the scythe of slaying and global defender is undead:
+		if the numbers boolean is true, say " + 5 (slaying undead)[run paragraph on]";
+		increase the attack damage by 5.
+
+The special weapon info of the scythe of slaying is "; massive damage against undead[run paragraph on]".
+
+Section - Scythe of oxidation (monster)
+
+The scythe of oxidation is a scythe. The scythe of oxidation is iron. The scythe of oxidation is rusted. The description of the scythe of oxidation is "Some entropic demon or deity has given this scythe the ability to rust the opponent's weapons in combat.".
+
+The special weapon info of the scythe of oxidation is "; rusts weapons[run paragraph on]".
+
+An aftereffects rule (this is the scythe of oxidation rusts stuff rule):
+	if the global attacker weapon is the scythe of oxidation:
+		if the global defender is at parry and the attack damage is 0:
+			if the global defender weapon is iron and the global defender weapon is not rusted:
+				say "Having been in contact with the scythe of oxidation, [the global defender weapon] [bold type]rusts[roman type].";
+				now the global defender weapon is rusted;
+	if the global defender weapon is the scythe of oxidation:
+		if the global defender is at parry and the attack damage is 0:
+			if the global attacker weapon is iron and the global attacker weapon is not rusted and the passive parry max of the global attacker weapon is not 0:
+				if the global attacker weapon is not a part of the global attacker:
+					say "Having been in contact with the scythe of oxidation, [the global attacker weapon] [bold type]rusts[roman type].";
+					now the global attacker weapon is rusted;
+				otherwise:
+					if the global defender is not rusted and the global defender is alive:
+						say "Having hit the scythe of oxidation, [the global defender] [bold type]rusts[roman type]!";			
+						now the global defender is rusted;
+	if the global attacker weapon is the scythe of oxidation:
+		if the global defender is iron and the attack damage is greater than 0:
+			if the global defender is not rusted and the global defender is alive:
+				say "Having been hit with the scythe of oxidation, [the global defender] [bold type]rusts[roman type]!";			
+				now the global defender is rusted.
 
 
 

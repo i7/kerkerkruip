@@ -1230,7 +1230,7 @@ An aftereffects rule (this is the heat can cause weapons to break rule):
 					say "[The global attacker weapon], weakened by being heated, is [bold type]destroyed[roman type]!";
 					turn on mentioning hotness;				
 					remove global attacker weapon from play;
-	if the attack damage is less than 0 and the defender is at parry:
+	if the attack damage is less than 1 and the defender is at parry:
 		if m is greater than 0:
 			if the global defender weapon is corruptible:
 				if a random chance of n in 50 succeeds:
