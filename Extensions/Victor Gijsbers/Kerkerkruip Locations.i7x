@@ -865,7 +865,6 @@ Space-Time Discontinuum is extra-accepting.
 Space-Time Discontinuum is vp-agnostic.
 Space-Time Discontinuum is magical.
 
-The difficulty level of Space-Time Discontinuum is 1. [Too weird for newbies.]
 The rarity of Space-Time Discontinuum is 1. [Placed less often.]
 
 The unlock level of Space-Time Discontinuum is 10.
@@ -1293,14 +1292,14 @@ Instead of searching the large pile of body parts:
 		-- 2:
 			if N < 10:
 				find an unhealthy scroll;
-			otherwise if N < 60:
+			otherwise if N < 50:
 				find a healthy scroll;
 			otherwise:
 				find the corpse;
 		-- otherwise:
 			if N < 10:
 				find an unhealthy scroll;
-			otherwise if N < 20:
+			otherwise if N < 30:
 				find a healthy scroll;
 			otherwise:
 				find the corpse;
@@ -1494,7 +1493,7 @@ Lair of the Imp is magical.
 Instead of smelling the lair of the imp:
 	say "Mostly sulphur, but you'd recognise this smell anywhere -- you used to have a pet imp when you were an apprentice."
 
-The difficulty level of Lair of the Imp is 2.
+The unlock level of Lair of the Imp is 2.
 
 Dungeon interest rule (this is the add imp to its lair rule):
 	if Lair of the Imp is placed:

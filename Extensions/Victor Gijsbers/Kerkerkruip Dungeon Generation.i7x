@@ -34,13 +34,7 @@ To create the dungeon:
 	finish the dungeon;
 	unless generation info is true:
 		clear the screen.
-	
 
-Section - Difficulty level
-
-[Objects can only appear if the difficulty >= difficulty level of the object. Note that a newbe-game has difficulty level 0, while all subsequent games have a difficulty level of 1 or higher.]
-
-An object has a number called the difficulty level. The difficulty level of an object is usually 0. 
 
 
 Section - Rarity
@@ -63,6 +57,11 @@ To decide if (stuff - an object) is too rare:
 Section - Unlock level
 
 [Objects with an unlock level on N will onleybe placed after the player has won at least N games. Winning the Nth game will display a message telling the player that the object has been unlocked.]
+
+The unlock score is a number variable.
+
+After showing the title screen:
+	now the unlock score is data value 4;
 
 An object has a number called the unlock level. The unlock level of an object is usually 0.
 
@@ -281,16 +280,12 @@ To fill the Table of Suitable Rooms:
 
 The placement possible rules are a rulebook.
 
-Placement possible rule (this is the do not use rooms that are too difficult rule):
-	if the difficulty level of considered room is greater than difficulty:
-		rule fails.
-
 Placement possible rule (this is the adjust rooms for rarity rule):
 	if considered room is too rare:
 		rule fails.
 
 Placement possible rule (this is the do not use rooms that are not yet unlocked rule):
-	if the unlock level of considered room is greater than data value 1:
+	if the unlock level of considered room is greater than the unlock score:
 		rule fails.
 
 Last placement possible rule:
@@ -668,16 +663,8 @@ First monster placement possible rule (this is the only monsters of the right le
 	if the level of considered monster is not global monster level:
 		rule fails.
 
-Monster placement possible rule (this is the monster difficulty level rule):
-	if the difficulty level of considered monster is greater than the difficulty:
-		rule fails.
-
-Monster placement possible rule (this is the adjust monsters for rarity rule):
-	if considered monster is too rare:
-		rule fails.
-
 Monster placement possible rule (this is the do not use monsters that are not yet unlocked rule):
-	if the unlock level of considered monster is greater than data value 1:
+	if the unlock level of considered monster is greater than the unlock score:
 		rule fails.
 
 Last monster placement possible rule:
@@ -709,7 +696,7 @@ Section - Treasure placement
 
 Considered treasure is a thing that varies.
 
-Definition: a thing (called item) is not-too-difficult if the difficulty level of item is not greater than the difficulty and the unlock level of item is not greater than data value 1.
+Definition: a thing (called item) is not-too-difficult if the unlock level of item is not greater than the unlock score.
 
 First treasure placement rule (this is the remove rare items rule):
 	repeat with X running through rare not non-treasure things:

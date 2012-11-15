@@ -8,7 +8,7 @@ Monster statistics are however mangaged in the Monsters extension. ]
 
 Chapter - General data storage
 
-[ We store data in a table (and file). Both keys and values are integers. Keys can be skipped, though this is not recommended.
+[ We store data in a table (and file). Both keys and values are integers. Keys can be skipped freely.
 
 The table length should be longer than we need in order to have a buffer in case the player decides to go back to an older version.
 

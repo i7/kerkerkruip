@@ -32,6 +32,9 @@ The difficulty is a number that varies.
 Before showing the title screen:
 	now difficulty is data value 2;
 
+To set difficulty to (x - number):
+	now difficulty is x;
+	set data value 2 to difficulty;
 
 
 Section - Player stats
@@ -149,14 +152,14 @@ Rule for showing the title screen (this is the text title screen rule):
 [		say "   Your current winning streak  :    [unless winning-streak is greater than 9] [end if][unless winning-streak is greater than 99] [end if] [winning-streak][line break]";
 		say "   Your best winning streak     :  [unless best-winning-streak is greater than 9] [end if][unless best-winning-streak is greater than 99] [end if]   [best-winning-streak][paragraph break]";]
 		say paragraph break;
-		say " OPTIONS:[line break]";
+		say " ACTIONS:[line break]";
 		say "   [if the file of save data exists]Continue the game[otherwise]New game         [end if]            :    (SPACE)[line break]";
 		if the file of save data exists:
 			say "   New game                     :       N[line break]";
 		if difficulty is 0:
 			say "   Skip to Apprentice level     :       S[line break]";	
 		say "   Display menu                 :       M[line break]";
-		say "   Reset victories              :       R[line break]";
+		say "   Options                      :       O[line break]";
 		say "   Quit                         :       Q[line break]";  
 		say variable letter spacing;
 		let redraw be 0;
@@ -167,23 +170,21 @@ Rule for showing the title screen (this is the text title screen rule):
 				if file of save data exists and (k is 110 or k is 78):
 					delete file of save data;
 					unless difficulty is less than 2:
-						decrease difficulty by 1;
-						set data value 2 to difficulty;
+						set difficulty to (difficulty - 1);
 				clear the screen;
 				make no decision;	
 			[ S: skip to apprentice level]	
 			otherwise if (k is 115 or k is 83) and difficulty is 0:
-				now difficulty is 1;
-				set data value 2 to difficulty;
+				set difficulty to 1;
 				delete file of save data;
 				clear the screen; 
 				make no decision;
 			[ Q: quit ]
 			otherwise if k is 113 or k is 81:
 				stop game abruptly;
-			[ R: reset menu ]
-			otherwise if k is 114 or k is 82:
-				now the current menu is Table of Reset Menu;
+			[ O: options menu ]
+			otherwise if k is 111 or k is 79:
+				now the current menu is Table of Options Menu;
 				carry out the displaying activity;
 				now redraw is 1;
 			[ M: menu ]
@@ -219,28 +220,30 @@ To say difficulty level (m - a number):
 		say "[if player is not female]GOD[otherwise]GODDESS[end if][run paragraph on]".
 
 
-Section - Reset Menu
+Section - Options Menu
 
-Table of Reset Menu
+Table of Options Menu
 title	subtable	description	toggle 
-"No, do not reset the number of victories."	--	--	quit rule
-"Yes, I am sure: reset the number of victories."	--	--	the resetting rule
-"Please reset the achievements list instead."	--	--	the achievement resetting rule
+"No, do not reset the number of victories"	--	--	quit rule
+"Yes, I am sure: reset the number of victories"	--	--	the resetting rule
+"Please reset the achievements list"	--	--	the achievement resetting rule
+"Unlock everything"	--	--	the unlock everything rule
 
 This is the resetting rule:
-	now difficulty is 0;
-	set data value 1 to 0;
-	set data value 2 to difficulty;
-	set data value 3 to 0;
+	set difficulty to 0;
+	set data value 1 to 0, table only;
+	set data value 3 to 0, table only;
 	set data value 4 to 0;
 	consider the quit rule.
 
 This is the achievement resetting rule:
-	repeat through Table of Held Achievements:
-		now held difficulty entry is -1;
+	blank out the whole of the Table of Held Achievements;
 	write File of Achievements from Table of Held Achievements;
 	consider the quit rule.
 
+This is the unlock everything rule:
+	set data value 4 to 100;
+	consider the quit rule.
 
 Section - Help Menu
 	
@@ -446,21 +449,23 @@ Section - What happens after the obituary
 
 After printing the player's obituary (this is the update the difficulty rule):
 	if the player is victorious:
-		set data value 1 to data value 1 + 1; [ number of victories ]
-		set data value 4 to data value 4 + 1; [ number of victories for the purpose of unlocking ]
+		set data value 1 to data value 1 + 1, table only; [ number of victories ]
+		set data value 4 to data value 4 + 1, table only; [ number of victories for the purpose of unlocking ]
 		increase difficulty by 1; [We want to go from easy to normal difficulty.]
 		if difficulty is 1:
 			say "[paragraph break][bold type]You have defeated Malygris on easy mode, proving that you understand the basics of the game! Next time, Kerkerkruip will start in normal mode. From now on, new items, monsters and locations will be available. Have fun![roman type][paragraph break]";
 		if difficulty is greater than data value 3: [ best level ]
-			set data value 3 to difficulty;
+			set data value 3 to difficulty, table only;
 	otherwise:
 		unless difficulty is less than 2:
 			decrease difficulty by 1;
 	set data value 2 to difficulty;
 
-Last after printing the player's obituary (this is the unlock stuff rule):
+Last after printing the player's obituary (this is the list unlocked stuff rule):
 	if the player is victorious:
-		let number-of-victories be data value 1;
+		let number-of-victories be data value 4;
+		if number-of-victories > 99:
+			stop;
 		let X be a list of objects; [We cannot repeat through objects, so:]
 		repeat with Y running through rooms:
 			if unlock level of Y is number-of-victories:
@@ -506,7 +511,6 @@ Section - Lower the difficulty when restarting
 First carry out restarting the game (this is the lower difficulty on restart rule):
 	unless player is victorious:
 		unless difficulty is less than 2:
-			decrease difficulty by 1;
-			set data value 2 to difficulty;
+			set difficulty to (difficulty - 1);
 
 Kerkerkruip Start and Finish ends here.

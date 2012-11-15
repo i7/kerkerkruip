@@ -427,7 +427,6 @@ The ravenous armadillo is a monster. "A huge armadillo is here, searching for an
 
 The level of ravenous armadillo is 1.
 The ID of the ravenous armadillo is 3.
-The difficulty level of ravenous armadillo is 1. [Too confusing for new players.]
 
 The unlock level of the ravenous armadillo is 3.
 The unlock text of the ravenous armadillo is "a monster that searches the dungeon for anything it can eat".
@@ -1473,7 +1472,7 @@ Understand "cries" and "inarticulate" as the demon of rage.
 
 The level of the demon of rage is 2.
 The ID of the demon of rage is 8.
-Difficulty level of the demon of rage is 2.
+The unlock level of the demon of rage is 2.
 
 The description of the demon of rage is "An amorphous swirl of red and black light, this demonic creature is the spirit of rage incarnate.".
 Instead of listening to the demon of rage:
@@ -2528,7 +2527,7 @@ The description of the minotaur is "Half man, half bull, this fearsome creature 
 
 The level of the minotaur is 3.
 The ID of the minotaur is 14.
-Difficulty level of the minotaur is 2.
+The unlock level of the minotaur is 2.
 
 The health of minotaur is 35.
 The melee of minotaur is 4.
@@ -4614,7 +4613,7 @@ Chapter - The demonic mistress
 
 [The demoness can appear when the player wears the demon lord's diadem.]
 
-The demonic mistress is a monster. "A horned figure stalks through the room." Understand "horned" and "figure" as the demonic mistress. The description of the demonic mistress is "A being summoned by Malygris from the depths of Hell, this demon has only one purpose: to stop you from reaching its master.".
+The demonic mistress is a monster. "A horned figure stalks through the room." Understand "horned" and "figure" and "demon" and "demoness" as the demonic mistress. The description of the demonic mistress is "A being summoned by Malygris from the depths of Hell, this demon has only one purpose: to stop you from reaching its master.".
 
 The level of demonic mistress is 0.
 The ID of the demonic mistress is 28.

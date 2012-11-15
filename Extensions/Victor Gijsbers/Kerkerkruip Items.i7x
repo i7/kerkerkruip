@@ -171,7 +171,7 @@ Section - The Essence Kind
 An essence is a kind of thing. Understand "essence" and "small" and "metal" and "bottle" as an essence.
 An essence is usually magical.
 An essence is usually iron.
-The difficulty level of an essence is usually 1.
+The unlock level of an essence is usually 1.
 
 Inhaling is an action applying to one carried thing. Understand "inhale [thing]" as inhaling.
 Does the player mean inhaling an essence: it is very likely.
@@ -773,7 +773,7 @@ The robe of the dead mage is an epic shirt.
 The robe of the dead mage is magical.
 The material of the robe of the dead mage is cloth.
 The indefinite article of the robe of the dead mage is "the".
-The difficulty level of the robe of the dead mage is 1.
+The unlock level of the robe of the dead is 1.
 
 The description of the robe of the dead mage is "Dominique, marquis of Savon, one of the great mages of his generation, was so fed up with losing his concentration when he was hit that he developed this robe. When the wearer is damaged in combat, he will not lose his concentration; but the protection comes from his life force, and the damage dealt to him is increased by 25% for every level of concentration. Nobody ever died with as much concentration as Dominique.".
 
@@ -1896,7 +1896,7 @@ Section - Ghoulification (minor)
 The small-scroll-of-ghoulification-pack is a minor treasure pack.
 One scroll of ghoulification is in the small-scroll-of-ghoulification-pack.
 The small-scroll-of-ghoulification-pack is civilised.
-The difficulty level of the small-scroll-of-ghoulification-pack is 1.
+The unlock level of the small-scroll-of-ghoulification-pack is 1.
 
 Section - Curse removal, small (minor)
 
@@ -1935,7 +1935,7 @@ Section - Summoning (minor)
 
 The small-scroll-of-summoning-pack is a minor treasure pack.
 The small-scroll-of-summoning-pack is magical.	
-The difficulty level of the small-scroll-of-summoning-pack is 1.
+The unlock level of the small-scroll-of-summoning-pack is 1.
 One scroll of summoning is in the small-scroll-of-summoning-pack.
 
 [Section - Fireworks (minor)
@@ -1982,21 +1982,21 @@ Section - Death, small (minor)
 
 The small-scroll-of-death-pack is a minor treasure pack.
 The small-scroll-of-death-pack is civilised.
-The difficulty level of small-scroll-of-death-pack is 1.
+The unlock level of small-scroll-of-death-pack is 1.
 One scroll of death is in the small-scroll-of-death-pack.
 
 Section - Death, large (major)
 
 The large-scroll-of-death-pack is a major treasure pack.
 The large-scroll-of-death-pack is civilised.
-The difficulty level of large-scroll-of-death-pack is 1.
+The unlock level of large-scroll-of-death-pack is 1.
 Two scrolls of death are in the large-scroll-of-death-pack.
 
 Section - Deathly [summon, ghoul, death], (major)
 
 The deathly-pack is a major treasure pack.
 The deathly-pack is deathly.
-The difficulty level of deathly-pack is 1.
+The unlock level of deathly-pack is 1.
 One scroll of summoning is in the deathly-pack.
 One scroll of ghoulification is in the deathly-pack.
 One scroll of death is in the deathly-pack.
@@ -2012,7 +2012,7 @@ Section - Thief [shadows, teleport, ethereal], (major)
 
 The thief-scroll-pack is a major treasure pack.
 The thief-scroll-pack is civilised.
-The difficulty level of thief-scroll-pack is 1.
+The unlock level of thief-scroll-pack is 1.
 Two scrolls of shadows are in the thief-scroll-pack.
 One scroll of teleportation is in the thief-scroll-pack.
 [One scroll of etherealness is in the thief-scroll-pack.]
@@ -2758,7 +2758,7 @@ Instead of readying the rod of the master builder:
 Section - Drakul's Lifeblood (epic)
 
 Drakul's lifeblood is an epic deathly glass thing. Understand "blood" and "vial" as Drakul's lifeblood. The description of Drakul's lifeblood is "This small vial holds the blood of a powerful vampire. Drinking it might have far-reaching consequences.".
-The difficulty level of Drakul's lifeblood is 2.
+The unlock level of Drakul's lifeblood is 2.
 
 
 Instead of eating Drakul's lifeblood:
