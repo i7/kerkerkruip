@@ -2411,6 +2411,31 @@ Last carry out an actor attacking (this is the fearsome axe rule):
 
 The special weapon info of the fearsome axe is "; inspires fear[run paragraph on]".
 
+A treasure placement rule (this is the fearsome can be fearful rule):
+	if a random chance of 1 in 6 succeeds:
+		now the hidden identity of the fearsome axe is the fearful axe.
+
+Section - Fearful axe (cursed)
+
+The fearful axe is a cursed curse-identified axe. The fearful axe is iron.
+
+The damage die of the fearful axe is 5.
+The active parry max of the fearful axe is 1.
+
+The description of the fearful axe is "While not exactly a nimble weapon, this axe is certainly able to deal out some punishment. Unfortunately, the weapon is cursed with an enchantment that sometimes strikes fear into the heart of the wielder, making him forego his attack. (The probability of not attacking because of fear is (20 - your mind)%.)".
+
+The special weapon info of the fearful axe is "; makes the wielder a coward[run paragraph on]".
+
+Last check an actor attacking (this is the fearful axe rule):
+	if the actor encloses the fearful axe and the fearful axe is readied:
+		let n be (20 - final mind of the actor);
+		if n is greater than 0:
+			if a random chance of n in 100 succeeds:
+				if the actor is the player:
+					say "You are suddenly too afraid to attack!" instead;
+				otherwise:
+					say "[The actor] [if the actor is plural-named]are[otherwise]is[end if] overcome by fear!" instead.
+
 
 Section - Executioner's axe (major)
 
