@@ -2696,6 +2696,7 @@ The passive parry max of the pickaxe is 1.
 The active parry max of the pickaxe is 2.
 
 Section - Glass Cannon (epic)
+
 [Very good weapon which halves you permanent health.]
 
 The glass cannon is an epic weapon.
@@ -2739,6 +2740,8 @@ An aftereffects rule (this is the glass cannon shatters when used to parry rule)
 The special weapon info of the glass cannon is "; makes you easier to hit; halves your health[run paragraph on]".
 
 Section - Nunchuck (monster)
+
+[Carried by Miranda.]
 
 The pair of nunchucks are a weapon. The pair of nunchucks is wood. Understand "nunchuck" and "nunchuk" and "nunchuks" as the pair of nunchucks. The pair of nunchucks is ambiguously plural.
 The description of the pair of nunchucks is "These two pieces of wood with a metal chain between them can be surprisingly dangerous.".
