@@ -2398,7 +2398,19 @@ The fearsome axe is iron.
 The damage die of the fearsome axe is 5.
 The active parry max of the fearsome axe is 1.
 
-The description of the fearsome axe is "While not exactly a nimble weapon, this fearsome axe is certainly able to deal out some punishment.".
+The description of the fearsome axe is "While not exactly a nimble weapon, this axe is certainly able to deal out some punishment. It also has a chance of striking fear in the hearts of your enemies. (When you attack with the fearsome axe, there is a chance that they will not be able to react. The probability of this happening is (your mind - their mind) * 4%.)".
+
+Last carry out an actor attacking (this is the fearsome axe rule):
+	if the actor encloses the fearsome axe and the fearsome axe is readied:
+		let n be the final mind of the actor;
+		decrease n by the final mind of the noun;
+		if n is greater than 0:
+			if a random chance of n in 25 succeeds:
+				now combat state of noun is at-Inactive;
+				say "[The noun] cower[s] in fear before the attack.".
+
+The special weapon info of the fearsome axe is "; inspires fear[run paragraph on]".
+
 
 Section - Executioner's axe (major)
 
