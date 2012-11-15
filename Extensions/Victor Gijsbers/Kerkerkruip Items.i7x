@@ -2173,6 +2173,23 @@ The immaculate sword is incorruptible.
 
 The special weapon info of the immaculate sword is "; cannot be corrupted[run paragraph on]".
 
+Section - Demon blade (monster)
+
+[Carried by the demonic assassin.]
+
+The demon blade is a sword. The description of the demon blade is "A jagged sword covered in evil-looking runes. It was never meant to be used by humans.".
+
+The demon blade is cursed.
+The internal heat of the demon blade is 4.
+
+Check attacking (this is the attacking with the demon blade is a bad idea rule):
+	if the player carries the demon blade and the demon blade is readied:
+		if a random chance of 3 in 5 succeeds:
+			say "The [bold type]demonic blade[roman type] turns on you!";
+			try the player hitting the player instead;
+
+
+
 
 
 
@@ -2689,6 +2706,37 @@ Section - Nunchuck (monster)
 The pair of nunchucks are a weapon. The pair of nunchucks is wood. Understand "nunchuck" and "nunchuk" and "nunchuks" as the pair of nunchucks. The pair of nunchucks is ambiguously plural.
 The description of the pair of nunchucks is "These two pieces of wood with a metal chain between them can be surprisingly dangerous.".
 The active parry max of the pair of nunchucks is 4.
+
+Section - Demon whip (monster)
+
+[Carried by the demonic mistress]
+
+
+The demon whip is a weapon.
+The demon whip is ranged.
+
+The damage die of the demon whip is 3.
+The weapon attack bonus of the demon whip is 1.
+The weapon damage bonus of the demon whip is 2.
+The dodgability of the demon whip is 2.
+The passive parry max of the demon whip is 1.
+The active parry max of the demon whip is 0.
+
+The demon whip is cursed.
+
+The description of the demon whip is "The demons of the lower hells use these savage whips to break the minds of their slaves.".
+
+An aftereffects rule (this is the demon whip rule):
+	if the global attacker weapon is the demon whip:
+		if the attack damage is greater than 0:
+			if the global defender is alive:
+				say "The demon whip [bold type]breaks [possessive of the global defender] willpower[roman type] (-2 mind score)![paragraph break]";
+				decrease mind score of global defender by 2;
+				if global defender is the player and global attacker is the demonic mistress:
+					if final mind of the player is less than 1:
+						say "'Come. You will serve my master,' the demon mistress breathes in your ear. Your will broken entirely, you meekly kneel as she chains your hands together, puts a collar around your neck, and pulls you along into the depths of hell.";
+						end the game saying "This is infinitely worse than being enslaved by a mindslug.";
+						rule fails.
 
 
 
