@@ -1714,7 +1714,7 @@ Last falling rule (this is the standard deal falling damage rule):
 			let m be a random number between 2 and 5;
 			if falling-reason is 2:
 				decrease m by 1; [small bonus for voluntary jumping]
-			if a random chance of 1 in 4 succeeds:
+			if a random chance of 1 in 10 succeeds: [make it slightly dangerous]
 				increase m by 5;
 			calculate the pdr for falling-guy;
 			decrease m by pdr;

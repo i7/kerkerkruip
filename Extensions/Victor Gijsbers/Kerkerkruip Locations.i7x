@@ -882,7 +882,7 @@ An initiative update rule (this is the initiative is almost completely random in
 
 Chapter - Vast Staircase
 
-The Vast Staircase is a room. "A vast staircase spirals up and down[if staircase still goes down]. In a pinch, you would be able to jump down to the room below, although this might not be particularly healthy[end if]."
+The Vast Staircase is a room. "A vast staircase spirals up and down[if staircase still goes down]. In a pinch, you might be able to escape from combat by [italic type]jumping down[roman type] to the room below, although this might not be particularly healthy[end if]."
 
 Vast Staircase is connectable.
 Vast Staircase is not connection-inviting.
