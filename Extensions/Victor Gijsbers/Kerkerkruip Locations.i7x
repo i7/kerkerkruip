@@ -759,7 +759,7 @@ The Crypt is deathly.
 
 Ruined tombs is scenery in the crypt. Understand "skulls" and "skull" and "bones" and "bone" as the ruined tombs. The description of the ruined tombs is "Broken and useless.". Instead of taking the ruined tombs: say "You do not find anything useful among the debris.".
 
-The sarcophagus is a closed openable scenery container in The Crypt. Understand "tomb" as the sarcophagus. The description of the sarcophagus is "A marble monstrosity carved with skeletons and other symbols of death.".
+The sarcophagus is a closed openable scenery container in The Crypt. Understand "tomb" and "coffin" as the sarcophagus. The description of the sarcophagus is "A marble monstrosity carved with skeletons and other symbols of death.".
 
 The symbols of death are scenery in The Crypt. The symbols of death are plural-named. Understand "skeletons" and "formula" as the symbols of death. The description of the symbols of death is "The symbols seem to spell out a magical formula. Your knowledge of necromancy is limited, and the only way to find out what the formula does would be by reading it.".
 
@@ -811,18 +811,22 @@ Report opening the sarcophagus:
 	if the sarcophagus-inhabitant is not yourself:
 		if the sarcophagus-inhabitant is not off-stage or the sarcophagus-inhabitant is dead:
 			now the sarcophagus-inhabitant is yourself;
-	if the sarcophagus-inhabitant is not yourself and the sarcophagus contains less than one thing:
+	let N be the number of things contained by the sarcophagus;
+	if the sarcophagus-inhabitant is not yourself:
 		move sarcophagus-inhabitant to the location of the sarcophagus;
 		now the player is not hidden;
-		say "As you open the sarcophagus, [a sarcophagus-inhabitant] jumps out!" instead;
-	if the sarcophagus-inhabitant is not yourself and the sarcophagus encloses at least one things:
-		move sarcophagus-inhabitant to the location of the sarcophagus;
-		now the player is not hidden;
-		say "As you open the sarcophagus, you see [a list of things enclosed by the sarcophagus]; but also [a sarcophagus-inhabitant] jumping out of it!" instead;
-	if the sarcophagus-inhabitant is yourself and the sarcophagus encloses at least one thing:
-		say "The sarcophagus contains [a list of things enclosed by the sarcophagus]." instead;
-	if the sarcophagus-inhabitant is yourself and the sarcophagus contains less than one thing:
-		say "The sarcophagus is disappointingly empty. Some other grave robber must have been here before you." instead. 
+		have the parser notice the sarcophagus-inhabitant;
+		if N is 0:
+			say "As you open the sarcophagus, [a sarcophagus-inhabitant] jumps out!";
+		otherwise:
+			say "As you open the sarcophagus, you see [a list of things enclosed by the sarcophagus]; but also [a sarcophagus-inhabitant] jumping out of it!";
+	otherwise if N > 0:
+		say "The sarcophagus contains [a list of things enclosed by the sarcophagus]. You pick [if N is 1]it[otherwise]them[end if] up.";
+		have the parser notice a random thing enclosed by the sarcophagus;
+		now the player carries everything enclosed by the sarcophagus;
+	otherwise:
+		say "The sarcophagus is disappointingly empty. Some other grave robber must have been here before you.";
+	rule succeeds;
 
 Instead of entering the sarcophagus:
 	say "One should not joke with death.".
@@ -1319,7 +1323,8 @@ To find a scroll of type (N - scroll name):
 			break;
 	let the new scroll be a new object cloned from the template;
 	now the new scroll is carried by the player;
-	say "You have found [a new scroll] buried between the body parts. It is slightly wet and smelly, but still usable.";
+	have the parser notice the new scroll;
+	say "You have found [a new scroll][one of] in between the body parts[or] buried in the pile[at random]. It is slightly [one of]wet and smelly[or]covered in slime[at random], but it looks like it will still work.";
 
 To find the corpse:
 	if rotting corpse is off-stage and rotting corpse is alive:
