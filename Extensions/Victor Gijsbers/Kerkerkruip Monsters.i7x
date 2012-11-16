@@ -1657,7 +1657,7 @@ The hound is a monster. "A gigantic hound [one of]snarls[or]growls[at random] [i
 Understand "gigantic" and "huge" and "dog" as the hound.
 The level of the hound is 2.
 The ID of the hound is 9.
-The description of the hound is "The black hound is ever watchful, preparing for the moment it needs to punish its prey."
+The description of the hound is "The black hound is ever watchful, ready to punish its prey for any wrong move."
 
 The health of the hound is 16.
 The melee of the hound is 2.
@@ -1677,7 +1677,7 @@ When play begins:
 Section - Prose
 
 Report an actor hitting the dead hound:
-	say "The hound collapses, [one of]its preparation insufficient for that last attack.[or]evidently underprepared for this fight.[at random]";
+	say "The hound collapses, [one of]its strength insufficient for a last counterstrike.[or]vigilant no more.[at random]";
 	rule succeeds.
 
 Report the hound hitting a dead pc:
@@ -1685,7 +1685,7 @@ Report the hound hitting a dead pc:
 	rule succeeds.
 
 Report the hound concentrating:
-	say "[one of]The hound breathes deeply, preparing to attack.[or]The hound glares at [the chosen target].[or]Tensing its muscles, the hound appears ready to attack![at random]";
+	say "[if concentration of the hound is 1]The hound breathes deeply, preparing to attack.[otherwise if concentration of the hound is 2]The hound glares at [the chosen target].[otherwise if concentration of the hound is 3]Tensing its muscles, the hound appears ready to attack![at random]";
 	rule succeeds.
 
 Report the hound attacking:
@@ -1707,18 +1707,18 @@ Section - Power
 
 The power of the hound is a power. The hound grants the power of the hound.
 The power level of power of the hound is 2.
-The command text of power of the hound is "retaliation".
-The description of power of the hound is "Type: passive ability.[paragraph break]Command: none.[paragraph break]After you are attacked, with a probability of (mind - 2) / mind, you get a chance to immediately retaliate. If this happens, you will automatically win the initiative for that turn. You can perform any action you wish, just as normal, but if you do choose to retaliate against your attacker, you get a +2 attack and +2 damage bonus. Any action that leads to an attack will count as a retaliation (including the special pierce and stun powers)."
+The command text of power of the hound is "counterstrike".
+The description of power of the hound is "Type: passive ability.[paragraph break]Command: none.[paragraph break]After you are attacked, with a probability of (mind - 2) / mind, you get a chance for an immediate counterstrike. If this happens, you will automatically win the initiative for that turn. You can perform any action you wish, just as normal, but if you do choose to retaliate against your attacker, you get a +2 attack and +2 damage bonus. Any action that leads to an attack will count as a counterstrike (including the special pierce and stun powers)."
 
 Status skill rule (this is the power of the hound status skill rule):
 	if power of the hound is granted:
-		say "You are [bold type]prepared[roman type] like the great hound to respond instantly after any attack against you. [italic type](Level 2)[roman type][line break][run paragraph on]";
+		say "Like the great hound, you are always prepared for an immediate [bold type]counterstrike[roman type]. [italic type](Level 2)[roman type][line break][run paragraph on]";
 
 Absorbing power of the hound:
 	increase melee of the player by 3;
 	increase defence of the player by 1;
 	increase permanent health of the player by 5;
-	say "As the great hound dies, you suddenly see visions of your future. ([bold type]Power of the hound[roman type]: +3 attack, +1 defence, +5 health, and you are prepared to respond instantly after being attacked.)[paragraph break]";
+	say "As the great hound dies, its dual traits of boldness and tactical insight descend into your soul. ([bold type]Power of the hound[roman type]: +3 attack, +1 defence, +5 health, and you are prepared to respond instantly after being attacked.)[paragraph break]";
 
 Repelling power of the hound:
 	decrease melee of the player by 3;
@@ -1763,16 +1763,16 @@ An aftereffects rule (this is the set up the power of the hound rule):
 			otherwise:
 				now hound status is 2;
 				now the hound provoker is the global attacker;
-				say "[one of]Anticipating[or]Prepared for[at random] [one of]the attack[or]their every move[at random][one of], you respond instantly![or], your response is immediate![at random]";
+				say "[one of]Anticipating[or]Prepared for[at random] [one of]the attack[or][possessive of the hound provoker] move[at random][one of], you respond instantly![or], your response is immediate![at random]";
 
 An attack modifier rule (this is the power of the hound attack modifier rule):
 	if hound status is 1 and the global defender is the hound provoker:
-		say " + 2 (prepared response)[run paragraph on]";
+		say " + 2 (counterstrike)[run paragraph on]";
 		increase the attack strength by 2;
 
 A damage modifier rule (this is the power of the hound damage modifier rule):
 	if hound status is 1 and the global defender is the hound provoker:
-		say " + 2 (prepared response)[run paragraph on]";
+		say " + 2 (counterstrike)[run paragraph on]";
 		increase the attack damage by 2;
 
 An AI action selection rule for the hound:
