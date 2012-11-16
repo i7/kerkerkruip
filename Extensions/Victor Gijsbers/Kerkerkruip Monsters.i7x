@@ -1685,7 +1685,7 @@ Report the hound hitting a dead pc:
 	rule succeeds.
 
 Report the hound concentrating:
-	say "[if concentration of the hound is 1]The hound breathes deeply, preparing to attack.[otherwise if concentration of the hound is 2]The hound glares at [the chosen target].[otherwise if concentration of the hound is 3]Tensing its muscles, the hound appears ready to attack![at random]";
+	say "[if concentration of the hound is 1]The hound breathes deeply, preparing to attack.[otherwise if concentration of the hound is 2]The hound glares at [the chosen target].[otherwise if concentration of the hound is 3]Tensing its muscles, the hound appears ready to attack![end if]";
 	rule succeeds.
 
 Report the hound attacking:
