@@ -1318,7 +1318,7 @@ To find a healthy scroll:
 To find a scroll of type (N - scroll name):
 	let the template be the default value of scroll;
 	repeat with S running through scrolls:
-		if the scroll name of S is N or the alternative name of S is N:
+		if the true name of S is N:
 			now the template is S;
 			break;
 	let the new scroll be a new object cloned from the template;
