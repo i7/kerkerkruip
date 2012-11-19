@@ -1324,7 +1324,7 @@ To find a scroll of type (N - scroll name):
 	let the new scroll be a new object cloned from the template;
 	now the new scroll is carried by the player;
 	have the parser notice the new scroll;
-	say "You have found [a new scroll][one of] in between the body parts[or] buried in the pile[at random]. It is slightly [one of]wet and smelly[or]covered in slime[at random], but it looks like it will still work.";
+	say "You have found [a new scroll][one of] in between the body parts[or] buried in the pile[at random]. It's slightly [one of]wet and smelly[or]covered in slime[at random], but it looks like it will still work, so you scoop it up.";
 
 To find the corpse:
 	if rotting corpse is off-stage and rotting corpse is alive:
