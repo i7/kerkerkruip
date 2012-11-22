@@ -224,9 +224,8 @@ Section - Options Menu
 
 Table of Options Menu
 title	subtable	description	toggle 
-"No, do not reset the number of victories"	--	--	quit rule
-"Yes, I am sure: reset the number of victories"	--	--	the resetting rule
-"Please reset the achievements list"	--	--	the achievement resetting rule
+"Reset number of victories"	--	--	the resetting rule
+"Reset achievements"	--	--	the achievement resetting rule
 "Unlock everything"	--	--	the unlock everything rule
 
 This is the resetting rule:
@@ -464,7 +463,7 @@ After printing the player's obituary (this is the update the difficulty rule):
 Last after printing the player's obituary (this is the list unlocked stuff rule):
 	if the player is victorious:
 		let number-of-victories be data value 4;
-		if number-of-victories > 99:
+		if number-of-victories > 99 or number-of-victories < 2:
 			stop;
 		let X be a list of objects; [We cannot repeat through objects, so:]
 		repeat with Y running through rooms:
