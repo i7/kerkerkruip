@@ -351,7 +351,7 @@ Section - Achievements menu
 
 Table of Achievement Menu
 title	subtable	description	toggle
-"Assistant Dungeoneer    [achievement assistant dungeoneer]"	--	"Kill a level 1 creature."
+"[run paragraph on][setup achievement menu]Assistant Dungeoneer    [achievement assistant dungeoneer]"	--	"Kill a level 1 creature."
 "Adventurer              [achievement adventurer]"	--	"Kill a level 2 creature."
 "Hunter                  [achievement hunter]"	--	"Kill a level 3 creature."
 "Destroyer               [achievement destroyer]"	--	"Kill a level 4 creature."
@@ -365,6 +365,10 @@ title	subtable	description	toggle
 "Unmoved                 [achievement unmoved]"	--	"Win the game without using 'dodge' and 'parry'."
 "Nature's fragile vessel [achievement nature's fragile vessel]"	--	"Win the game with less than 15 maximum health."
 "Durin's bane            [achievement durin's bane]"	--	"Wake up an unbeatable foe."
+
+To say setup achievement menu:
+	if Table of Held Achievements is empty:
+		follow the load achievements rule.
 
 To say achievement (current achievement - an achievement):
 	if there is a held achievement of current achievement in the Table of Held Achievements:
