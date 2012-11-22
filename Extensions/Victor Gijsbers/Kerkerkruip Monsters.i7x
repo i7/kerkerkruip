@@ -84,7 +84,7 @@ The material of the swarm of daggers is iron.
 The swarm of daggers is emotionless.
 The swarm of daggers is flyer.
 
-The health of the swarm of daggers is 12.
+The health of the swarm of daggers is 14.
 The melee of the swarm of daggers is 3.
 The defence of the swarm of daggers is 4.
 The body score of the swarm of daggers is 6.
@@ -253,7 +253,7 @@ The level of the blood ape is 1.
 The ID of the blood ape is 2.
 The blood ape is small.
 
-The health of the blood ape is 8.
+The health of the blood ape is 10.
 The melee of the blood ape is 0.
 The defence of the blood ape is 8.
 
@@ -433,7 +433,7 @@ The unlock text of the ravenous armadillo is "a monster that searches the dungeo
 
 The description of ravenous armadillo is "As their name suggests, ravenous armadillos will eat anything. They may seem slow and easy to hit, but their tough scales ensures that they can shrug off most damage, and their bony tail club packs a considerable punch.".
 
-The health of the ravenous armadillo is 10.
+The health of the ravenous armadillo is 12.
 The melee of the ravenous armadillo is -2.
 The defence of the ravenous armadillo is 5.
 
@@ -679,7 +679,7 @@ The ID of Miranda is 4.
 
 The description of Miranda is "Although she is currently working as one of Malygris's guards, Miranda dreams about a bright future as a famous adventurer.".
 
-The health of Miranda is 12.
+The health of Miranda is 14.
 The melee of Miranda is 0.
 The defence of Miranda is 7.
 The body score of Miranda is 5.
@@ -869,7 +869,7 @@ The chain golem is emotionless.
 
 The description of the chain golem is "A hulking form made of [if chain golem is iron]metal[otherwise][material-adjective of material of chain golem][end if] chains and animated by a soul bound to it through dark magics.".
 
-The health of the chain golem is 24.
+The health of the chain golem is 26.
 The melee of the chain golem is 1.
 The defence of the chain golem is 8.
 
@@ -1107,7 +1107,7 @@ The jumping bomb is emotionless.
 
 The description of the jumping bomb is "Connoisseurs consider these jumping balls of red meat to be among the most exciting spectacles of Yahvinna's annual Feast of Flesh. To the slaves and convicts down in the arena, whose limbs the spectators hope to have blown into their lap, the jumping bombs also bring excitement, though of a wholly different type.".
 
-The health of the jumping bomb is 18.
+The health of the jumping bomb is 20.
 The melee of the jumping bomb is -1.
 The defence of the jumping bomb is 8.
 
@@ -1298,7 +1298,7 @@ The ID of the Reaper is 7.
 
 The description of the reaper is "He once used to be a man like any other, but his vocation has left him unnaturally pale and gaunt.".
 
-The health of the Reaper is 24.
+The health of the Reaper is 26.
 The melee of the Reaper is 1.
 The defence of the Reaper is 8.
 
@@ -1478,7 +1478,7 @@ The description of the demon of rage is "An amorphous swirl of red and black lig
 Instead of listening to the demon of rage:
 	say "In its fierce wailing, you hear the voices of all your victims.".
 
-The health of the demon of rage is 18.
+The health of the demon of rage is 21.
 The melee of the demon of rage is 0.
 The defence of the demon of rage is 8.
 
@@ -1659,7 +1659,7 @@ The level of the hound is 2.
 The ID of the hound is 9.
 The description of the hound is "The black hound is ever watchful, ready to punish its prey for any wrong move."
 
-The health of the hound is 16.
+The health of the hound is 19.
 The melee of the hound is 2.
 The defence of the hound is 8.
 
@@ -1801,7 +1801,7 @@ The ID of the mindslug is 10.
 
 The description of the mindslug is "It is of the dreaded race of mindslugs, abominations that use their telepathic powers to enslave others.".
 
-The health of the mindslug is 27.
+The health of the mindslug is 28.
 The melee of the mindslug is 2.
 The defence of the mindslug is 7.
 
@@ -1894,7 +1894,7 @@ Section - Slaves
 Fafhrd is a mindslug-enslaved man. The description of Fafhrd is "This male barbarian is strong and muscular. He looks like an able and shrewd fighter.".
 The ID of Fafhrd is 11.
 
-Health of Fafhrd is 13.
+Health of Fafhrd is 14.
 Melee of Fafhrd is 1.
 
 When play begins:
@@ -1912,7 +1912,7 @@ The ID of Mouser is 12.
 [Mouser carries sneaky sword: see Kerkerkruip Items.]
 Mouser carries the sneaking sword.
 
-Health of Mouser is 8.
+Health of Mouser is 10.
 Defence of Mouser is 9.
 
 When play begins:
