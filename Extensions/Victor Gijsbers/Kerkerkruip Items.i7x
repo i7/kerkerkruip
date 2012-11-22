@@ -2597,7 +2597,39 @@ The active parry max of the druidic staff is 3.
 The passive parry max of the druidic staff is 2.
 The weapon damage bonus of the druidic staff is 1.
 
+Section - Was sceptre (monster)
 
+[Carried by the mummified priest.]
+
+The was sceptre is a weapon.
+
+The description of the was sceptre is "This long staff has the stylised head of an ibis on top, and ends in a fork. While not a great tool for combat, it is a carrier of much spiritual power. [italic type](-2 body, -2 mind, +4 spirit)[roman type]".
+
+The was sceptre is wood.
+
+A dungeon interest rule (this is the maybe curse was sceptre rule):
+	if a random chance of 1 in 3 succeeds:
+		unless was sceptre is incorruptible:
+			now was sceptre is cursed.
+
+The damage die of the was sceptre is 4.
+The weapon attack bonus of the was sceptre is 0.
+The dodgability of the was sceptre is 2.
+The active parry max of the was sceptre is 2.
+The passive parry max of the was sceptre is 2.
+The weapon damage bonus of the was sceptre is 0.
+
+A body bonus rule (this is the body penalty of the was sceptre rule):
+	if the test subject carries the readied was sceptre:
+		decrease faculty bonus score by 2.
+
+A mind bonus rule (this is the mind penalty of the was sceptre rule):
+	if the test subject carries the readied was sceptre:
+		decrease faculty bonus score by 2.
+
+A spirit bonus rule (this is the spirit bonus of the was sceptre rule):
+	if the test subject carries the readied was sceptre:
+		increase faculty bonus score by 4.
 
 
 Chapter - Maces

@@ -4293,6 +4293,97 @@ Report the abyss of the soul waiting when the abyss of the soul is insane:
 
 
 
+Chapter - Mummified priest
+
+The mummified priest is a male not neuter undead undead-faction monster. 
+Understand "mummy" as the mummified priest.
+
+The description of the mummified priest is "Ancient embalming techniques have saved this priest's body from decomposition. Dark magics have returned a semblance of life to his remains."
+
+The mummified priest is emotionless.
+The mummified priest is eyeless.
+
+The level of mummified priest is 0.
+The ID of the mummified priest is 29.
+
+The health of mummified priest is 25.
+The melee of mummified priest is 2.
+The defence of mummified priest is 9.
+
+The body score of mummified priest is 6.
+The mind score of mummified priest is 6.
+The spirit score of mummified priest is 6. 
+
+When play begins:
+	let X be a random natural weapon part of the mummified priest;
+	now the printed name of X is "bandaged fists".
+
+The mummified priest carries the was sceptre.
+
+Section - Cursing
+
+Mummy-cursing is an action applying to one thing.
+
+An AI action selection rule for the mummified priest (this is the mummified priest considers cursing rule):
+	let item be mummy-curse-item;
+	if item is a thing:
+		choose a blank Row in the Table of AI Action Options;
+		now the Option entry is the action of the mummified priest mummy-cursing item;
+		now the Action Weight entry is a random number between -10 and 25.
+
+To decide which thing is mummy-curse-item:
+	let item be nothing;
+	if a random chance of 1 in 3 succeeds: [item in the location]
+		if at least one not cursed corruptible weapon is in the location:
+			let item be a random not cursed corruptible weapon in the location;
+		otherwise if at least one not cursed corruptible clothing is in the location:
+			let item be a random not cursed corruptible clothing in the location;
+	otherwise: [item carried by the enemy]
+		if at least one not cursed corruptible weapon is carried by the chosen target:
+			let item be a random not cursed corruptible weapon carried by the chosen target;
+		otherwise if at least one not cursed corruptible clothing is carried by the chosen target:
+			let item be a random not cursed corruptible clothing carried by the chosen target;
+	decide on item.
+		
+Carry out an actor mummy-cursing:
+	say "[The actor] speaks several horrible syllables of an evil, long-dead language. For a moment, [bold type][the noun] flashes[roman type] with a dark red light!";
+	now noun is cursed;
+	now noun is curse-identified.
+
+Section - Prose				
+
+Report an actor hitting the dead mummified priest:
+	say "The bandages unravel as [the actor] send[s] the mummified priest back to whatever pyramid-filled hell it came from.";
+	rule succeeds.
+
+Report the mummified priest hitting a dead pc:
+	say "After the priest kills you, he dedicates your ka to Osiris.";
+	rule succeeds.
+
+Report the mummified priest attacking:
+	unless the actor is the noun:
+		say "The mummified priest stalks towards [the noun][if the mummified priest carries the readied was sceptre] with his sceptre raised[end if].";
+	otherwise:
+		say "The mummified priest tears at its own bandages.";
+	rule succeeds.
+
+Report the mummified priest dodging:
+	say "Mumbling curse words, the priest attempts to step aside.";
+	rule succeeds.
+
+Report the mummified priest parrying:
+	say "Calling on the help of [one of]Seth[or]Osiris[or]Isis[or]Anubis[or]Horus[or]Ra[at random], the priest tries to ward off the attack.";
+	rule succeeds.
+				
+Report the mummified priest waiting when the mummified priest is insane:
+	say "The mummified priest runs around on all fours in immitation of a dung beetle.";
+	rule succeeds.
+
+
+
+
+
+
 
 Chapter - Smoke demons
 
