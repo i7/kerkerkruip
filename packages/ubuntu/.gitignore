@@ -1,0 +1,11 @@
+*~
+*.build
+*.changes
+*.deb
+*.dsc
+*.gz
+*.log
+*.substvars
+kerkerkruip/debian/files
+kerkerkruip/debian/kerkerkruip/
+kerkerkruip/Kerkerkruip.gblorb

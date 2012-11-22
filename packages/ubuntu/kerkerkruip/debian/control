@@ -1,0 +1,17 @@
+Source: kerkerkruip
+Section: games
+Priority: extra
+Maintainer: Dannii Willis <curiousdannii@gmail.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.3
+
+Package: kerkerkruip
+Architecture: all
+Depends:  ${misc:Depends}, gargoyle | gargoyle-free, fonts-linuxlibertine | ttf-linux-libertine
+Description: Interactive fiction roguelike game
+ Kerkerkruip is a dungeon crawling game that brings together the interactive
+ fiction medium with the roguelike genre. You take on the role of an adventurer
+ in a randomly generated dungeon, whose only hope of escape is to destroy the
+ mighty wizard Malygris. The game has been designed to offer a diverse array of
+ meaningful tactical and strategical options, and combines the thrill of random
+ combat with the skill of complex puzzle solving.
