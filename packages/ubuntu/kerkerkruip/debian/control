@@ -1,9 +1,11 @@
 Source: kerkerkruip
+Maintainer: Dannii Willis <curiousdannii@gmail.com>
 Section: games
 Priority: extra
-Maintainer: Dannii Willis <curiousdannii@gmail.com>
 Build-Depends: debhelper (>= 8.0.0)
 Standards-Version: 3.9.3
+Homepage: https://github.com/i7/kerkerkruip
+Vcs-Git: https://github.com/i7/kerkerkruip.git
 
 Package: kerkerkruip
 Architecture: all
