@@ -4,7 +4,7 @@ Use authorial modesty.
 
 Chapter - Elemental Plane of Smoke
 
-There is a room called Elemental Plane of Smoke. "Smoke is everywhere. You are completely disoriented."
+There is a room called elemental plane of smoke. "Smoke is everywhere. You are completely disoriented."
 
 Elemental Plane of Smoke is not connectable.
 Elemental Plane of Smoke is not connection-inviting.

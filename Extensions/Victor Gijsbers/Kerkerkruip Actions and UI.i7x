@@ -14,7 +14,7 @@ Understand "retreat" and "flee" as retreating.
 
 A person can be a retreater. A person is usually not a retreater.
 
-The retreat location is a room that varies. The retreat location is Entrance Hall.
+The retreat location is a room that varies. The retreat location is the entrance hall.
 
 [A resetting the dungeon rule (this is the reset retreating rule):
 	now retreat location is Entrance Hall;
@@ -389,7 +389,7 @@ Carry out remembering:
 	repeat with X running through R:]
 	repeat with X running through visited rooms:
 		unless X is a tunnel:
-			say "[X] ([the road to X])[run paragraph on]";
+			say "[the X] ([the road to X])[run paragraph on]";
 			decrease m by 1;
 			if m is greater than 0:
 				say ", ";
@@ -400,7 +400,7 @@ Carry out remembering:
 		repeat with guy running through alive seen persons:
 			unless player is guy:
 				unless last-seen-location of guy is Null-Room:
-					say "- [italic type][the guy][roman type] (level [if group level of the guy is not 0][group level of the guy][otherwise][level of the guy][end if]) in [italic type][last-seen-location of the guy][roman type] ([if last-seen-location of the guy is not the location]which lies [the road to last-seen-location of the guy] from here[otherwise]where you currently are[end if])[line break]";
+					say "- [italic type][the guy][roman type] (level [if group level of the guy is not 0][group level of the guy][otherwise][level of the guy][end if]) in [italic type][the last-seen-location of the guy][roman type] ([if last-seen-location of the guy is not the location]which lies [the road to last-seen-location of the guy] from here[otherwise]where you currently are[end if])[line break]";
 	say "[line break][italic type]Tip[roman type]: [one of]additional information can be gotten with 'status', 'trophies' and (once you have defeated enough monsters) 'sense'[or]you can move one room towards a location by typing 'go to [italic type]location[roman type]'[or]you can 'pray' in any temple[or]'look', 'examine' and 'inventory' are free actions, so use them often[or]if a fight proves too much for you, try to 'retreat'. On entering a room for the first time, you can always retreat for free[or]remember how powers work. If you kill a level 3 creature, you will lose all powers of level 3 and lower; so if you want to have more than one power at the same time, you'll have to kill a lower level creature after defeating a higher level creature[at random].".
 
 A person has a room called the last-seen-location. The last-seen-location of a person is usually Null-Room.
@@ -770,11 +770,31 @@ The verb to list-inhabit (it list-inhabits, they list-inhabit) implies the list-
 [And now we can say "a list of things that list-inhabit named-list".]
 		
 		
-Chapter - Map-related actions and commands
+Chapter - Looking
 
-Section - Showing the entrances
+[ We need to capitalise the room names! But we can cheat and skip some of the other stuff. ]
+The alternative room description heading rule is listed instead of the the room description heading rule in the carry out looking rules.
+Carry out looking (this is the alternative room description heading rule):
+	say bold type;
+	[if the visibility level count is 0:
+		begin the printing the name of a dark room activity;
+		if handling the printing the name of a dark room activity,
+			issue miscellaneous library message number 71;
+		end the printing the name of a dark room activity;
+	otherwise if the visibility ceiling is the location:
+		say "[visibility ceiling]";
+	otherwise:
+		say "[The visibility ceiling]";]
+	say printed name of visibility ceiling in title case;
+	say roman type;
+	let intermediate level be the visibility-holder of the actor;
+	repeat with intermediate level count running from 2 to the visibility level count:
+		issue library message looking action number 8 for the intermediate level;
+		let the intermediate level be the visibility-holder of the intermediate level;
+	say line break;
+	say run paragraph on with special look spacing;
 
-Report looking:
+Report looking (this is the room exits rule):
 	let count be 0;
 	repeat with way running through direction:
 		let further place be the room the way from the location;
@@ -785,17 +805,17 @@ Report looking:
 			repeat with way running through direction:
 				let further place be the room the way from the location;
 				if further place is a room and further place is not nogo:
-					say "An exit leads [way][if further place is visited] (to [further place])[end if].";
+					say "An exit leads [way][if further place is visited] (to [the further place])[end if].";
 		otherwise:
 			say "Exits lead ";
 			repeat with way running through direction:
 				let further place be the room the way from the location;
 				if further place is a room and further place is not nogo:
 					if count is greater than 1:
-						say "[way][if further place is visited] (to [further place])[end if][if count is greater than 2],[end if] ";
+						say "[way][if further place is visited] (to [the further place])[end if][if count is greater than 2],[end if] ";
 						decrease count by 1;
 					otherwise:
-						say "and [way][if further place is visited] (to [further place])[end if].".
+						say "and [way][if further place is visited] (to [the further place])[end if].".
 	
 
 

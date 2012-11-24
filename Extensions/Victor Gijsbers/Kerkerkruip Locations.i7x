@@ -12,7 +12,7 @@ Part - The rooms themselves
 
 Chapter - Entrance Hall
 
-The Entrance Hall is a room. "The vast entrance hall is empty, silent, foreboding. Skull-sized rubies project a red light far too bright for the eyes of a human."
+The entrance hall is a room. "The vast entrance hall is empty, silent, foreboding. Skull-sized rubies project a red light far too bright for the eyes of a human."
 
 Entrance Hall is not habitable.
 Entrance Hall is connectable.
@@ -43,7 +43,7 @@ The player is in Entrance Hall.
 
 Chapter - Hall of Mirrors
 
-The Hall of Mirrors is a room. "Mirrors surround you on all sides in an impossible geometry[run paragraph on][unless the player is blind]. Myriad reflections follow your every movement -- though some, always in the corner of your eyes, seem to behave differently[end if]."
+The hall of mirrors is a room. "Mirrors surround you on all sides in an impossible geometry[run paragraph on][unless the player is blind]. Myriad reflections follow your every movement -- though some, always in the corner of your eyes, seem to behave differently[end if]."
 
 Hall of Mirrors is habitable.
 Hall of Mirrors is connectable.
@@ -95,7 +95,7 @@ An AI action selection rule for a person (called P) when the location is Hall of
 
 Chapter - Phantasmagoria
 
-Phantasmagoria is a room. "This huge hall is filled with the radiant images of warriors long dead, fighting their bloody battles over and over again.[run paragraph on][unless the player is blind] You see [phantasmagoria show] -- but the scene changes before you can focus on any details.[run paragraph on][end if]"
+The phantasmagoria is a room. "This huge hall is filled with the radiant images of warriors long dead, fighting their bloody battles over and over again.[run paragraph on][unless the player is blind] You see [phantasmagoria show] -- but the scene changes before you can focus on any details.[run paragraph on][end if]"
 
 Phantasmagoria is connectable.
 Phantasmagoria is not connection-inviting.
@@ -151,7 +151,7 @@ An AI action selection rule for a person (called P) when the location is Phantas
 
 Chapter - Lake of Lava
 
-Lake of Lava is a room.
+The lake of lava is a room.
 
 Lake of Lava is nogo.
 Lake of Lava is not connectable.
@@ -182,7 +182,7 @@ Chapter - Bridge of Doom
 
 [TODO: nooit iets onder de Bridge of Doom?]
 
-The Bridge of Doom is a room. "You stand on an exceedingly narrow bridge crossing a seething lake of lava. Dodging would be suicidal."
+The bridge of doom is a room. "You stand on an exceedingly narrow bridge crossing a seething lake of lava. Dodging would be suicidal."
 
 Bridge of Doom is not connectable.
 Bridge of Doom is not connection-inviting.
@@ -316,7 +316,7 @@ First carry out inserting something into the seething lake of lava:
 
 Chapter - Temple of Nomos
 
-The Temple of Nomos is a room. "The exactly elliptical room is dominated by a towering statue of Nomos, built out of harsh geometrical forms."
+The temple of Nomos is a room. "The exactly elliptical room is dominated by a towering statue of Nomos, built out of harsh geometrical forms."
 
 Temple of Nomos is connectable.
 Temple of Nomos is not connection-inviting.
@@ -436,7 +436,7 @@ A damage modifier rule (this is the Nomos damage bonus rule):
 
 Chapter - Temple of Aite
 
-The Temple of Aite is a room. "The black stones have been scratched in a million fights, and will nevermore lose the faint colour of blood. This is the temple of Aite, whose laughing statue rises above all."
+The temple of Aite is a room. "The black stones have been scratched in a million fights, and will nevermore lose the faint colour of blood. This is the temple of Aite, whose laughing statue rises above all."
 
 Temple of Aite is connectable.
 Temple of Aite is not connection-inviting.
@@ -571,7 +571,7 @@ Chance to win rule (this is the CTW Aite bonus rule):
 
 Chapter - Temple of Sul
 
-The Temple of Sul is a room. "The only feature breaking the monotony of the circular room made of polished white marble is a huge [if the statue of Sul is in the Temple of Sul]statue. Hewn from flawless mountain crystal, it portrays the goddess Sul[otherwise]pile of fragments of the broken statue[end if]."
+The temple of Sul is a room. "The only feature breaking the monotony of the circular room made of polished white marble is a huge [if the statue of Sul is in the Temple of Sul]statue. Hewn from flawless mountain crystal, it portrays the goddess Sul[otherwise]pile of fragments of the broken statue[end if]."
 
 Temple of Sul is connectable.
 Temple of Sul is not connection-inviting.
@@ -638,7 +638,7 @@ Instead of praying in Temple of Sul:
 
 Chapter - Temple of Isatzo
 
-The Temple of Isatzo is a room. "Exactly half of the room is black, and exactly half of it is white. This is the temple of Isatzo, the god of balance, whose statue stands in the center, one arm stretched out to each side."
+The temple of Isatzo is a room. "Exactly half of the room is black, and exactly half of it is white. This is the temple of Isatzo, the god of balance, whose statue stands in the center, one arm stretched out to each side."
 
 Temple of Isatzo is connectable.
 Temple of Isatzo is connection-inviting.
@@ -746,7 +746,7 @@ Instead of praying in the Temple of Isatzo:
 
 Chapter - The Crypt
 
-The Crypt is a room. "Skulls and bones lie scattered amongst the ruined tombs. One big sarcophagus is still intact, and currently [if the sarcophagus is open]open[otherwise]closed[end if]."
+The crypt is a room. "Skulls and bones lie scattered amongst the ruined tombs. One big sarcophagus is still intact, and currently [if the sarcophagus is open]open[otherwise]closed[end if]."
 
 The Crypt is connectable.
 The Crypt is not connection-inviting.
@@ -834,7 +834,7 @@ Instead of entering the sarcophagus:
 
 Chapter - Workshop of the Blademaster
 
-Workshop of the Blademaster is a room. "The famous workshop of the master of Algir has been transported here in all its glory. A huge forge dominates the room."
+The workshop of the blademaster is a room. "The famous workshop of the master of Algir has been transported here in all its glory. A huge forge dominates the room."
 
 Workshop of the Blademaster is connectable.
 Workshop of the Blademaster is not connection-inviting.
@@ -858,7 +858,7 @@ Every turn when the huge forge contains at least one thing (this is the huge for
 
 Chapter - Space-Time Discontinuum
 
-Space-Time Discontinuum is a room. "Here powerful sorcerers once tortured time to learn the secrets of eternity. Everything around you seems to happen either faster or slower than it should."
+The space-time discontinuum is a room. "Here powerful sorcerers once tortured time to learn the secrets of eternity. Everything around you seems to happen either faster or slower than it should."
 
 Space-Time Discontinuum is connectable.
 Space-Time Discontinuum is not connection-inviting.
@@ -882,7 +882,7 @@ An initiative update rule (this is the initiative is almost completely random in
 
 Chapter - Vast Staircase
 
-The Vast Staircase is a room. "A vast staircase spirals up and down[if staircase still goes down]. In a pinch, you might be able to escape from combat by [italic type]jumping down[roman type] to the room below, although this might not be particularly healthy[end if]."
+The vast staircase is a room. "A vast staircase spirals up and down[if staircase still goes down]. In a pinch, you might be able to escape from combat by [italic type]jumping down[roman type] to the room below, although this might not be particularly healthy[end if]."
 
 Vast Staircase is connectable.
 Vast Staircase is not connection-inviting.
@@ -986,7 +986,7 @@ A thing called the staircase is scenery in vast Staircase. Understand "stairs" a
 
 Chapter - Alchemical Laboratory
 
-The Alchemical Laboratory is a room. "Centuries ago, Malygris captured the great alchemist Metastasio and forced him to work in this laboratory. Most of his equipment is now gone, but one curious machine remains."
+The alchemical laboratory is a room. "Centuries ago, Malygris captured the great alchemist Metastasio and forced him to work in this laboratory. Most of his equipment is now gone, but one curious machine remains."
 
 Alchemical Laboratory is connectable.
 Alchemical Laboratory is not connection-inviting.
@@ -1029,7 +1029,7 @@ A dungeon interest rule (this is the open or close pipes in Hall of Vapours rule
 	otherwise:
 		now pipes-open is false.
 
-The Hall of Vapours is a room. "Several large pipes [if pipes-open is true]continuously spew forth vapours into this room[otherwise]dominate the room[end if]. A big wheel is attached to the pipes."
+The hall of vapours is a room. "Several large pipes [if pipes-open is true]continuously spew forth vapours into this room[otherwise]dominate the room[end if]. A big wheel is attached to the pipes."
 
 Hall of Vapours is connectable.
 Hall of Vapours is connection-inviting.
@@ -1088,7 +1088,7 @@ Smoke rule (this is the smoke the Hall of Vapours rule):
 
 Chapter - Portal Room
 
-Portal Room is a room. "A huge [if the huge magical portal is in Portal Room]magical[otherwise]empty[end if] portal dominates the room."
+The portal room is a room. "A huge [if the huge magical portal is in Portal Room]magical[otherwise]empty[end if] portal dominates the room."
 
 Portal Room is connectable.
 Portal Room is not connection-inviting.
@@ -1116,7 +1116,7 @@ Instead of entering the huge empty portal:
 
 Chapter - Library
 
-Library is a room. "Hundreds of books line the walls of this magnificent library, a bigger collection than the already legendary one of the marquis of Savon. Malygris even has a scroll analyser installed."
+The library is a room. "Hundreds of books line the walls of this magnificent library, a bigger collection than the already legendary one of the marquis of Savon. Malygris even has a scroll analyser installed."
 
 Library is connectable.
 Library is not connection-inviting.
@@ -1172,7 +1172,7 @@ Last check inserting something into the scroll analyser:
 
 Chapter - Drawing Room
 
-The Drawing Room is a room. "This otherwise unremarkable room has been decorated with a fascinating drawing."
+The drawing room is a room. "This otherwise unremarkable room has been decorated with a fascinating drawing."
 
 The Drawing Room is connectable.
 The Drawing Room is not connection-inviting.
@@ -1250,7 +1250,7 @@ Instead of attacking or cutting or touching the fascinating drawing:
 
 Chapter - Quartering Room
 
-The Quartering Room is a room. "The smell of decay here is overwhelming. A large pile of human body parts lies in a corner."
+The quartering room is a room. "The smell of decay here is overwhelming. A large pile of human body parts lies in a corner."
 
 The Quartering Room is connectable.
 The Quartering Room is not connection-inviting.
@@ -1378,7 +1378,7 @@ To do a random step:
 
 Chapter - Eternal Prison
 
-The Eternal Prison is a room. "The sense of evil emanating from the very stone of this room is almost overpowering."
+The eternal prison is a room. "The sense of evil emanating from the very stone of this room is almost overpowering."
 
 Eternal Prison is connectable.
 Eternal Prison is not connection-inviting.
@@ -1397,7 +1397,7 @@ A dungeon interest rule (this is the potentially add the Eternal Prison rule):
 
 Chapter - Hidden Treasury
 
-Hidden Treasury is a room. "On a raised portion of the floor stands a huge chest, beautifully inlaid with gems and precious metals. It must have been full of treasure once."
+The hidden treasury is a room. "On a raised portion of the floor stands a huge chest, beautifully inlaid with gems and precious metals. It must have been full of treasure once."
 
 Hidden Treasury is connectable.
 Hidden Treasury is not connection-inviting.
@@ -1422,7 +1422,7 @@ A dungeon interest rule (this is the potentially add the Hidden Treasury rule):
 
 Chapter - Cavern of Rust
 
-Cavern of Rust is a room. "The walls of this cavern are covered with the spores of the rust fungus."
+The cavern of rust is a room. "The walls of this cavern are covered with the spores of the rust fungus."
 
 Cavern of Rust is connectable.
 Cavern of Rust is not connection-inviting.
@@ -1442,7 +1442,7 @@ A dungeon interest rule (this is the potentially add the Cavern of Rust rule):
 
 Chapter - Portal of Smoke
 
-Portal of Smoke is a room. "Huge clouds of smoke pour forth from a magical portal. This must be an entrance to the elemental plane of smoke!"
+The portal of smoke is a room. "Huge clouds of smoke pour forth from a magical portal. This must be an entrance to the elemental plane of smoke!"
 
 Portal of Smoke is connectable.
 Portal of Smoke is not connection-inviting.
@@ -1483,7 +1483,7 @@ A dungeon interest rule (this is the potentially add the Portal of Smoke rule):
 
 Chapter - Lair of the Imp
 
-Lair of the Imp is a room. "There is no mistaking the smell of this room: an imp has been living here for centuries."
+The lair of the imp is a room. "There is no mistaking the smell of this room: an imp has been living here for centuries."
 
 Lair of the Imp is connectable.
 Lair of the Imp is not connection-inviting.
@@ -1507,7 +1507,7 @@ Dungeon interest rule (this is the add imp to its lair rule):
 
 Chapter - The maze
 
-The Maze is a room. "You are in a maze of twisty little passages, all alike. Exits lead in all directions."
+The maze is a room. "You are in a maze of twisty little passages, all alike. Exits lead in all directions."
 
 The maze is not connectable.
 The maze is not connection-inviting.
@@ -1615,7 +1615,7 @@ Every turn when the location is the maze:
 
 Chapter - The Arcane Vault
 
-The Arcane Vault is a room. "An oppressive silence pervades the marble hall, as if all earthly sounds are smothered by the alien force of magic. For magic is strong here, and seems to be radiating outward from a crystal pedestal in the middle of the room."
+The arcane vault is a room. "An oppressive silence pervades the marble hall, as if all earthly sounds are smothered by the alien force of magic. For magic is strong here, and seems to be radiating outward from a crystal pedestal in the middle of the room."
 
 The Arcane Vault is connectable.
 The Arcane Vault is not connection-inviting.
