@@ -65,9 +65,23 @@ Killing rule (this is the increment died and kill stats rule):
 		increment the died count of the killed-guy;
 	update the monster statistics;
 
+Section - Testing IDs - Not for release
 
+Table of Test Monster IDs
+Brute		Tag
+(a person)		(a number)
+with 100 blank rows
 
+MonsterIDing is an action applying to nothing. Understand "TestID" as monsterIDing.
 
+Carry out monsterIDing:
+	repeat with guy running through persons:
+		choose a blank row in Table of Test Monster IDs;
+		now brute entry is guy;
+		now tag entry is ID of guy;
+	sort Table of Test Monster IDs in tag order;
+	repeat through Table of Test Monster IDs:
+		say "[brute entry]: [tag entry][line break]".
 
 
 Chapter - Level 1 - Swarm of Daggers
@@ -849,6 +863,35 @@ Status skill rule (this is the Miranda status skill rule):
 		say "You have the [bold type]stun[roman type] skill: you can try to [italic type]stun[roman type] an enemy; this means you attack with a -1 damage penalty, but if you hit you will decrease the opponent's effectiveness for several rounds. [italic type](Level 1)[roman type][line break][run paragraph on]".
 
 
+[
+Chapter - Level 1 - Wisps of pain
+
+Section - Definitions
+
+The wisps of pain are a monster. "Wisps of pain, tiny sentient spots of darkness, hover in the air."
+
+The wisps of pain a plural-named. Understand "wisp" as the wisps of pain.
+
+
+The level of the wisps of pain is 1.
+The ID of the wisps of pain is 30.
+
+The description of Miranda is "Although she is currently working as one of Malygris's guards, Miranda dreams about a bright future as a famous adventurer.".
+
+The health of Miranda is 14.
+The melee of Miranda is 0.
+The defence of Miranda is 7.
+The body score of Miranda is 5.
+The mind score of Miranda is 7.
+The spirit score of Miranda is 5.
+
+Miranda is weapon user.
+
+[Wears monk's robe: see Kerkerkruip Items]
+Miranda wears monk's robe.
+
+[Carries nunchucks: see Kerkerkruip Items]
+Miranda carries the pair of nunchucks. The pair of nunchucks is readied.]
 
 
 
