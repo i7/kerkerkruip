@@ -863,35 +863,53 @@ Status skill rule (this is the Miranda status skill rule):
 		say "You have the [bold type]stun[roman type] skill: you can try to [italic type]stun[roman type] an enemy; this means you attack with a -1 damage penalty, but if you hit you will decrease the opponent's effectiveness for several rounds. [italic type](Level 1)[roman type][line break][run paragraph on]".
 
 
-[
+
 Chapter - Level 1 - Wisps of pain
 
 Section - Definitions
 
-The wisps of pain are a monster. "Wisps of pain, tiny sentient spots of darkness, hover in the air."
+The wisps of pain are a monster. "Wisps of pain hover in the air."
 
-The wisps of pain a plural-named. Understand "wisp" as the wisps of pain.
-
+The wisps of pain are plural-named. Understand "wisp" as the wisps of pain.
 
 The level of the wisps of pain is 1.
 The ID of the wisps of pain is 30.
 
-The description of Miranda is "Although she is currently working as one of Malygris's guards, Miranda dreams about a bright future as a famous adventurer.".
+The description of the wisps of pain is "Dark spots of necromantic magic move through the air. They deal pain and torment, and can permanently cripple anyone foolish enough to oppose them.".
 
-The health of Miranda is 14.
-The melee of Miranda is 0.
-The defence of Miranda is 7.
-The body score of Miranda is 5.
-The mind score of Miranda is 7.
-The spirit score of Miranda is 5.
+The health of the wisps of pain is 14.
+The melee of the wisps of pain is 0.
+The defence of the wisps of pain is 5.
+The body score of the wisps of pain is 3.
+The mind score of the wisps of pain is 6.
+The spirit score of the wisps of pain is 9.
 
-Miranda is weapon user.
+The unlock level of the wisps of pain is 12.
+The unlock text of the wisps if pain is "terrible creatures that weaken their enemies permanently".
 
-[Wears monk's robe: see Kerkerkruip Items]
-Miranda wears monk's robe.
+A damage modifier rule (this is the wisps of pain take less damage rule):
+	if the global defender is the wisps of pain:
+		say " - 5 (hard to damage)[run paragraph on]";
+		decrease the attack damage by 5.
 
-[Carries nunchucks: see Kerkerkruip Items]
-Miranda carries the pair of nunchucks. The pair of nunchucks is readied.]
+Section - States
+
+[The wisps of pain are either at large in the room, or circling around someone. They can only use their torment power when at large, and can only hurt someone when circiling around a person. ]
+
+
+Section - Causing pain
+
+Wisphurting is an action applying to one thing.
+
+[Carry out the wisps of pain wisphurting:
+	say "The wisps "]
+
+An AI action selection rule for the wisps of pain (this is the wisps of pain consider wisphurting rule):
+	choose a blank Row in the Table of AI Action Options;
+	now the Option entry is the action of the wisps of pain wisphurting the chosen target;
+	increase Action Weight entry by 20.
+
+
 
 
 
