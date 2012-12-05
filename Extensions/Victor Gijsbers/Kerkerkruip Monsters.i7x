@@ -868,7 +868,7 @@ Chapter - Level 1 - Wisps of pain
 
 Section - Definitions
 
-The wisps of pain are a monster. "Wisps of pain hover in the air."
+The wisps of pain are a monster. "Wisps of pain hover in the air[if the wisp-target is not the wisps of pain], close around [the wisp-target]."
 
 The wisps of pain are plural-named. Understand "wisp" as the wisps of pain.
 
@@ -885,31 +885,185 @@ The mind score of the wisps of pain is 6.
 The spirit score of the wisps of pain is 9.
 
 The unlock level of the wisps of pain is 12.
-The unlock text of the wisps if pain is "terrible creatures that weaken their enemies permanently".
+The unlock text of the wisps of pain is "terrible creatures that weaken their enemies permanently".
 
 A damage modifier rule (this is the wisps of pain take less damage rule):
 	if the global defender is the wisps of pain:
 		say " - 5 (hard to damage)[run paragraph on]";
 		decrease the attack damage by 5.
 
+
+
 Section - States
 
-[The wisps of pain are either at large in the room, or circling around someone. They can only use their torment power when at large, and can only hurt someone when circiling around a person. ]
+[The wisps of pain are either at large in the room, or circling around someone. They can only use their torment power when at large, and can only hurt someone when circling around a person. ]
 
+[If the wisps are circling around someone, that person is the wisp-target. Otherwise, they themselves are the wisp-target.]
+
+The wisp-target is a person that varies. The wisp-target is the wisps of pain.
+
+Section - AI Rules
+
+Chance to win rule when the global attacker is the wisps of pain (this is the CTW wisps of pain rule):
+	increase the chance-to-win by 20. [Always successful.]
+
+An AI action selection rule for the wisps of pain (this is the special wisps AI rule):
+	choose row with an Option of the action of the wisps of pain concentrating in the Table of AI Action Options;
+	decrease the Action Weight entry by 100;
+	if the wisps of pain is at-React:
+		choose row with an Option of the action of the wisps of pain parrying in the Table of AI Action Options;
+		decrease the Action Weight entry by 100.
+	
+[An AI action selection rule for the wisps of pain (this is the wisps of pain consider wisphurting rule):
+	choose a blank Row in the Table of AI Action Options;
+	now the Option entry is the action of the wisps of pain wisphurting the chosen target;
+	increase Action Weight entry by 20.]
+
+An AI action selection rule for the wisps of pain (this is the wisps of pain consider tormenting rule):
+	choose a blank Row in the Table of AI Action Options;
+	now the Option entry is the action of the wisps of pain tormenting;
+	if the wisp-target is the wisps of pain:
+		let n be 0;
+		repeat with guy running through people in location of the wisps of pain:
+			if faction of guy hates faction of wisps of pain:
+				increase n by concentration of guy;
+				if guy is chosen target:
+					increase n by concentration of guy;
+		if n is 0:
+			decrease Action Weight entry by 100;
+		otherwise:
+			increase Action Weight entry by (2 * n);
+	otherwise:
+		decrease Action Weight entry by 100.
+
+Section - Redirecting attacking + changing wisp-target
+
+Check the wisps of pain attacking:
+	if the wisp-target is the noun:
+		try the wisps of pain wisphurting the noun instead;
+	otherwise:
+		now wisp-target is the noun;
+		say "The wisps of pain float through the air, positioning themselves around [the noun]." instead.
+
+Check the wisps of pain hitting:
+	do nothing instead.
+
+Section - Redirecting dodging
+
+Instead of the wisps of pain dodging:
+	if the wisp-target is the wisps of pain:
+		try the wisps of pain tormenting;
+	otherwise:
+		do nothing.
 
 Section - Causing pain
 
 Wisphurting is an action applying to one thing.
 
-[Carry out the wisps of pain wisphurting:
-	say "The wisps "]
+Carry out the wisps of pain wisphurting:
+	let n be a random number between 1 and 3;
+	say "The wisps of pain launch themselves at [if the noun is not the player][the noun][otherwise]you[end if], passing right through [if the noun is not the player][possessive of the noun][otherwise]your[end if] body and dealing 1 point of permanent [bold type][if n is 1]body[otherwise if n is 2]mind[otherwise]spirit[end if] damage[roman type]. They then spread out through the room.";
+	if n is 1:
+		decrease body score of the noun by 1;
+	if n is 2:
+		decrease mind score of the noun by 1;	
+	if n is 3:
+		decrease spirit score of the noun by 1;
+	now wisp-target is wisps of pain.
 
-An AI action selection rule for the wisps of pain (this is the wisps of pain consider wisphurting rule):
-	choose a blank Row in the Table of AI Action Options;
-	now the Option entry is the action of the wisps of pain wisphurting the chosen target;
-	increase Action Weight entry by 20.
+Section - Tormenting power
+
+Tormenting is an action applying to nothing. Understand "torment" as tormenting.
+
+Carry out an actor tormenting:
+	if actor is the player:
+		now torment-cooldown is 12 - final spirit of the player / 3;
+	let lijst be a list of persons;
+	repeat with guy running through alive persons enclosed by the location:
+		if concentration of guy is greater than 0:
+			let n be final mind of guy;
+			unless a random chance of n in 50 succeeds:
+				add guy to lijst;
+				now concentration of guy is 0;
+	say "[if the actor is the player]You project[otherwise if the actor is the wisps of pain]The wisps of pain suddenly release[otherwise][The actor] releases[end if] a wave of tormenting energy, [if number of entries in lijst is 1 and the player is listed in lijst]breaking [bold type]your concentration[roman type][otherwise if number of entries in lijst is not 0]breaking the [bold type]concentration[roman type] of [lijst with definite articles][otherwise]which doesn't seem to do anything[end if]."
+
+Check tormenting:
+	if power of the wisps is not granted:
+		take no time;
+		say "You do not possess that power." instead.
+
+Torment-cooldown is a number that varies. Torment-cooldown is 0.
+
+Every turn when main actor is the player:
+	if torment-cooldown is greater than 0:
+		decrease torment-cooldown by 1;
+		if combat status is peace:
+			now torment-cooldown is 0.
+		
+Check tormenting:
+	if torment-cooldown is not 0:
+		take no time;
+		say "You must wait [torment-cooldown] turn[unless torment-cooldown is 1]s[end if] before you can use your tormenting ability again." instead.		
 
 
+
+Section - Prose
+
+Report an actor hitting the dead wisps of pain:
+	say "With a sudden flash of blueish light, the wisps of pain disintegrate.";
+	rule succeeds.
+
+Report the wisps of pain hitting a dead pc:
+	say "The wisps of pain feast on your body. 'I didn't even know we could deal damage?' one of them whispers. 'No, it must be a bug. But let's enjoy it while we may,' another answers.";
+	rule succeeds.
+
+Report the wisps of pain waiting when the wisps of pain are insane:
+	say "The wisps of pain bounce around the room.";
+	now the wisp-target is wisps of pain;
+	rule succeeds.
+
+Section - Power
+
+The power of the wisps is a power. Wisps of pain grants power of the wisps.
+The power level of power of the wisps is 1.
+The command text of power of the wisps is "torment[if torment-cooldown is not 0] ([torment-cooldown])[end if]".
+
+The description of power of the wisps is "Type: active ability.[paragraph break]Command: torment.[paragraph break]Effect: A wave of torment will pass through the room, breaking everyone's concentration. (A person has a 2% chance of resisting this effect per point of mind.) This ability has a cooldown of 12 - spirit/3 turns."
+
+Wisp-strength is a number that varies. Wisp-strength is 0.
+
+Absorbing power of the wisps:
+	now wisp-strength is greatest power of the player;
+	if wisp-strength is less than 1:
+		now wisp-strength is 1;
+	increase melee of the player by 1;
+	increase defence of the player by 1;
+	increase permanent health of the player by 6;
+	say "As the wisps of pain are destroyed, you feel the soul that animated it absorbed into your own body. This causes you immediate and seemingly permanent [bold type]pain[roman type]! ([bold type]Power of the wisps[roman type]: +1 attack, +1 defence, +16 health, the [italic type]torment[roman type] skill, and pain.)[paragraph break]".
+
+Repelling power of the wisps:
+	decrease melee of the player by 1;
+	decrease defence of the player by 1;
+	decrease permanent health of the player by 6;
+	[say "The pain that didn't kill you, [bold type]made you stronger[roman type]! (Repelling the power of the wisps has given you a permanent +[wisp-strength] bonus to body, mind and spirit.)"].
+
+A faculty bonus rule (this is the wisps faculty penalty or bonus rule):
+	if wisp-strength is not 0:
+		if power of the wisps is granted:
+			decrease faculty bonus score by wisp-strength;
+		otherwise:
+			increase faculty bonus score by wisp-strength.
+
+Status skill rule (this is the wisps status skill rule):
+	if the power of wisps is granted:
+		say "You have the [bold type]torment[roman type] skill: you can [italic type]torment[roman type] everyone in the room, breaking their concentration. [italic type](Level 1)[roman type][line break][run paragraph on]".
+
+Status rule (this is the wisps status rule):
+	if wisp-strength is not 0:
+		if power of the wisps is granted:
+			say "You are [bold type]in pain[roman type]: -[wisp-strength] to body, mind and spirit.[line break][run paragraph on]";
+		otherwise:
+			say "Pain has made you [bold type]stronger[roman type]: +[wisp-strength] to body, mind and spirit.[line break][run paragraph on]".
 
 
 
