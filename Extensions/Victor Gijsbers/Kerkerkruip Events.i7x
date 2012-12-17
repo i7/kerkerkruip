@@ -129,19 +129,6 @@ Shatter rule (this is the things shattering rule):
 	say "[The shatter-item] [bold type]shatter[unless shatter-item is plural-named]s[end if][roman type]."
 
 
-Chapter - Teleportation
-
-[This event happens after teleportation has taken place. Special stuff can intervene here.]
-
-Teleportation-guy is a person that varies. [These three variables should be set in advance.]
-Teleportation-destination is a room that varies.
-Teleportation-from is a room that varies.
-
-To have a teleportation event:
-	consider the teleportation event rules.
-
-The teleportation event rules are a rulebook.
-
 
 
 

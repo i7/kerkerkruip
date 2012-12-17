@@ -704,8 +704,51 @@ To decide whether teleportation is impossible for (guy - a person):
 		decide no.
 
 [Finally, it need not be obvious to a person that teleportation is impossible. If a person is a teleport impossible aware, he does.]
-
 A person can be teleport impossible aware. A person is usually not teleport impossible aware.
+
+[ The teleporting action ]
+
+Teleportation-destination is a room that varies.
+Teleportation-from is a room that varies.
+
+Setting action variables for teleporting:
+	now teleportation-from is the location of the actor; [see teleportation Event]
+
+Check an actor teleporting (this is the teleport impossible rule):
+	if teleportation is impossible for the actor:
+		now the actor is teleport impossible aware;
+		say "[The actor] tries to teleport away, but something makes this impossible!" instead.
+
+First carry out an actor teleporting (this is the choose a destination rule):
+	let destination be a random placed placeable teleportable room;
+	while destination is the location of the actor:
+		let destination be a random placed placeable teleportable room;
+	now teleportation-destination is destination;
+
+Last carry out an actor teleporting (this is the actually do the teleportation rule):
+	move actor to teleportation-destination;
+	now concentration of actor is 0;
+	unless teleport amount of actor is -1 or teleport amount of actor is 0:
+		decrease teleport amount of actor by 1;
+	clean the table of delayed actions for the actor;
+
+Report an npc teleporting:
+	if teleportation-from is the location and teleportation-destination is the location:
+		say "[The actor] teleport[s] away, but reappear[s] in the exact same spot.";
+	otherwise:
+		if teleportation-from is the location:
+			say "[The actor] suddenly teleport[s] away!";
+		if  teleportation-destination is the location:
+			say "[The actor] suddenly teleport[s] into the room!";
+
+
+To teleport the player:
+	say "A sickening feeling, and then you find yourself in --[paragraph break]";
+	try the player teleporting;
+	now retreat location is teleportation-destination;
+	consider the sudden combat reset rules;
+	now the take no time boolean is false;
+
 
 [AI rules]
 
@@ -732,58 +775,6 @@ Every turn (this is the spontaneous teleport rule):
 			let n be the teleport eagerness of guy;
 			if a random chance of n in 100 succeeds:
 				try guy teleporting. 
-
-Check an actor teleporting (this is the teleport impossible rule):
-	if teleportation is impossible for the actor:
-		now the actor is teleport impossible aware;
-		say "[The actor] tries to teleport away, but something makes this impossible!" instead.
-
-Carry out an actor teleporting (this is the standard monster teleport rule):
-	now teleportation-from is the location of the actor; [see teleportation Event]
-	now teleportation-guy is the actor;
-	choose a teleportation destination;
-	let see-arriving be false;
-	let see-going be false;
-	if location of the actor is the location:
-		now see-going is true;
-	if teleportation-destination is the location:
-		now see-arriving is true;
-	move actor to teleportation-destination;
-	now concentration of actor is 0;
-	unless teleport amount of actor is -1 or teleport amount of actor is 0:
-		decrease teleport amount of actor by 1;
-	[ TODO: change these to report rules ]
-	if teleportation-from is the location of the player and teleportation-destination is the location of the player:
-		say "[The actor] teleports away, but reappears in the exact same spot.";
-	otherwise:
-		if see-going is true:
-			say "[The actor] suddenly teleports away!";
-		if see-arriving is true:
-			say "[The actor] suddenly teleports into the room!";
-	clean the table of delayed actions for the actor;
-	have a teleportation event.
-
-
-To choose a teleportation destination:
-	let destination be a random placed placeable teleportable room;
-	while destination is the location of teleportation-guy:
-		let destination be a random placed placeable teleportable room;
-	now teleportation-destination is destination;
-	consider the special teleportation destination rules.
-
-The special teleportation destination rules are a rulebook. [Can intervene on the destination.]
-
-
-To teleport the player:
-	now teleportation-from is the location of the player; [see teleportation Event]
-	now teleportation-guy is the player;
-	choose a teleportation destination;
-	say "A sickening feeling, and then you find yourself in --[paragraph break]";
-	now retreat location is teleportation-destination;
-	consider the sudden combat reset rules;
-	clean the table of delayed actions for the player;
-	move player to teleportation-destination;
-	now the take no time boolean is false.
 
 Every turn (this is the teleport impossible awareness expires rule):
 	repeat with guy running through teleport impossible aware persons:

@@ -3801,7 +3801,7 @@ The teleport eagerness of Malygris is 8.
 
 Malygris-summon-countdown is a number that varies. Malygris-summon-countdown is 0.
 
-Last carry out Malygris teleporting:
+After reporting Malygris teleporting:
 	if teleportation-destination is not the location of the player:
 		if the teleport amount of Malygris is 1:
 			now Malygris-summon-countdown is a random number between 5 and 7;
@@ -4846,15 +4846,15 @@ Carry out the imp imp-grabbing:
 	if lijst is empty:
 		try the imp teleporting instead.
 
-Special teleportation destination rule (this is the imp teleporting rule):
-	if the teleportation-guy is the imp:
+Carry out an actor teleporting (this is the imp teleporting rule):
+	if the actor is the imp:
 		if the location of the imp is the Lair of the Imp:
-			if location of the player is teleportable:
-				now teleportation-destination is location of the player;
+			if location is teleportable:
+				now teleportation-destination is location;
 			otherwise:
 				now teleportation-destination is location of the imp;
 		otherwise:
-			now teleportation-destination is Lair of the Imp.
+			now teleportation-destination is Lair of the Imp;
 
 Every turn when the imp is on-stage (this is the imp not absent AI rule):
 	if main actor is the player:

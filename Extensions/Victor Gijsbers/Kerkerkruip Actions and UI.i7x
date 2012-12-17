@@ -413,11 +413,9 @@ Every turn (this is the set last-seen-location rule):
 	repeat with guy running through alive persons in the location:
 		now last-seen-location of guy is the location.
 
-A teleportation event rule (this is the reset last-seen-location after some teleports rule):
-	if teleportation-guy is not the player:
-		if teleportation-from is the location of the player:
-			if teleportation-destination is not the location of the player:
-				now last-seen-location of teleportation-guy is Null-Room.
+After reporting an npc teleporting (this is the reset last-seen-location after teleporting rule):
+	if teleportation-from is the location and teleportation-destination is not the location:
+		now last-seen-location of the actor is Null-Room;
 
 To say the road to (place - a room):
 	if place is location of the player:

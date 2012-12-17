@@ -130,7 +130,7 @@ Instead of switching off the teleportation beacon:
 		say "With a complicated magical gesture, you turn off the teleportation beacon.".
 
 
-A special teleportation destination rule (this is the teleportation beacon rule):
+Carry out an actor teleporting (this is the teleportation beacon rule):
 	unless the teleportation beacon is off-stage:
 		if teleportation-beacon-on is true:
 			now teleportation-destination is location of teleportation beacon.
