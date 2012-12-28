@@ -1499,6 +1499,7 @@ Instead of smelling the lair of the imp:
 	say "Mostly sulphur, but you'd recognise this smell anywhere -- you used to have a pet imp when you were an apprentice."
 
 The unlock level of Lair of the Imp is 2.
+The unlock hidden switch of the lair of the imp is true.
 
 Dungeon interest rule (this is the add imp to its lair rule):
 	if Lair of the Imp is placed:

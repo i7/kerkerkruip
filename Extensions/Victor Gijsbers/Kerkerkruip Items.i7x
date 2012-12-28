@@ -172,6 +172,7 @@ An essence is a kind of thing. Understand "essence" and "small" and "metal" and 
 An essence is usually magical.
 An essence is usually iron.
 The unlock level of an essence is usually 1.
+The unlock hidden switch of an essence is usually true.
 
 Inhaling is an action applying to one carried thing. Understand "inhale [thing]" as inhaling.
 Does the player mean inhaling an essence: it is very likely.
@@ -287,6 +288,7 @@ The essence of greed is iron.
 
 The unlock level of essence of greed is 4.
 The unlock text of essence of greed is "an essence which allows you to gain more health, at the cost of your safety".
+The unlock hidden switch of essence of greed is false.
 
 A person can be greedy. A person is usually not greedy.
 
@@ -322,6 +324,7 @@ The essence of addiction is iron.
 
 The unlock level of essence of addiction is 6.
 The unlock text of essence of addiction is "an essence which will greatly enhance both the positive and negative effects of ment".
+The unlock hidden switch of essence of addiction is false.
 
 The description of the essence of addiction is "This small metal bottle contains the magical essence of addiction, distilled from the brain of a ment user. When inhaled, it greatly increases you addiction to ment -- increasing both the positive effects of a high and the negative effects of a low.".
 
@@ -773,7 +776,8 @@ The robe of the dead mage is an epic shirt.
 The robe of the dead mage is magical.
 The material of the robe of the dead mage is cloth.
 The indefinite article of the robe of the dead mage is "the".
-The unlock level of the robe of the dead is 1.
+The unlock level of the robe of the dead mage is 7.
+The unlock text of the robe of the dead mage is "a piece of clothing that allows you to remain concentrated when hit... at a price".
 
 The description of the robe of the dead mage is "Dominique, marquis of Savon, one of the great mages of his generation, was so fed up with losing his concentration when he was hit that he developed this robe. When the wearer is damaged in combat, he will not lose his concentration; but the protection comes from his life force, and the damage dealt to him is increased by 25% for every level of concentration. Nobody ever died with as much concentration as Dominique.".
 
@@ -1897,6 +1901,7 @@ The small-scroll-of-ghoulification-pack is a minor treasure pack.
 One scroll of ghoulification is in the small-scroll-of-ghoulification-pack.
 The small-scroll-of-ghoulification-pack is civilised.
 The unlock level of the small-scroll-of-ghoulification-pack is 1.
+The unlock hidden switch of the small-scroll-of-ghoulification-pack is true.
 
 Section - Curse removal, small (minor)
 
@@ -1914,6 +1919,7 @@ The large-scroll-of-remove-curse-pack is a major treasure pack.
 The large-scroll-of-remove-curse-pack is civilised.
 Two scrolls of curse removal is in the large-scroll-of-remove-curse-pack.
 The rarity of large-scroll-of-remove-curse-pack is 1.
+The unlock hidden switch of the small-scroll-of-remove-curse-pack is true.
 
 Section - Shadows, small (minor)
 
@@ -1936,6 +1942,7 @@ Section - Summoning (minor)
 The small-scroll-of-summoning-pack is a minor treasure pack.
 The small-scroll-of-summoning-pack is magical.	
 The unlock level of the small-scroll-of-summoning-pack is 1.
+The unlock hidden switch of the small-scroll-of-summoning-pack is true.
 One scroll of summoning is in the small-scroll-of-summoning-pack.
 
 [Section - Fireworks (minor)
@@ -1983,6 +1990,7 @@ Section - Death, small (minor)
 The small-scroll-of-death-pack is a minor treasure pack.
 The small-scroll-of-death-pack is civilised.
 The unlock level of small-scroll-of-death-pack is 1.
+The unlock hidden switch of the small-scroll-of-death-pack is true.
 One scroll of death is in the small-scroll-of-death-pack.
 
 Section - Death, large (major)
@@ -1990,6 +1998,7 @@ Section - Death, large (major)
 The large-scroll-of-death-pack is a major treasure pack.
 The large-scroll-of-death-pack is civilised.
 The unlock level of large-scroll-of-death-pack is 1.
+The unlock hidden switch of the large-scroll-of-death-pack is true.
 Two scrolls of death are in the large-scroll-of-death-pack.
 
 Section - Deathly [summon, ghoul, death], (major)
@@ -1997,6 +2006,7 @@ Section - Deathly [summon, ghoul, death], (major)
 The deathly-pack is a major treasure pack.
 The deathly-pack is deathly.
 The unlock level of deathly-pack is 1.
+The unlock hidden switch of the deathly-pack is true.
 One scroll of summoning is in the deathly-pack.
 One scroll of ghoulification is in the deathly-pack.
 One scroll of death is in the deathly-pack.
@@ -2013,6 +2023,7 @@ Section - Thief [shadows, teleport, ethereal], (major)
 The thief-scroll-pack is a major treasure pack.
 The thief-scroll-pack is civilised.
 The unlock level of thief-scroll-pack is 1.
+The unlock hidden switch of the thief-scroll-pack is true.
 Two scrolls of shadows are in the thief-scroll-pack.
 One scroll of teleportation is in the thief-scroll-pack.
 [One scroll of etherealness is in the thief-scroll-pack.]
@@ -2878,8 +2889,8 @@ Instead of readying the rod of the master builder:
 Section - Drakul's Lifeblood (epic)
 
 Drakul's lifeblood is an epic deathly glass thing. Understand "blood" and "vial" as Drakul's lifeblood. The description of Drakul's lifeblood is "This small vial holds the blood of a powerful vampire. Drinking it might have far-reaching consequences.".
-The unlock level of Drakul's lifeblood is 2.
-
+The unlock level of Drakul's lifeblood is 11.
+The unlock text of Darkul's lifeblood is "an small vial of blood that can turn you into a vampire".
 
 Instead of eating Drakul's lifeblood:
 	try drinking Drakul's lifeblood.

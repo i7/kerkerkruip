@@ -1688,6 +1688,7 @@ Understand "cries" and "inarticulate" as the demon of rage.
 The level of the demon of rage is 2.
 The ID of the demon of rage is 8.
 The unlock level of the demon of rage is 2.
+The unlock hidden switch of the demon of rage is true.
 
 The description of the demon of rage is "An amorphous swirl of red and black light, this demonic creature is the spirit of rage incarnate.".
 Instead of listening to the demon of rage:
@@ -2743,6 +2744,7 @@ The description of the minotaur is "Half man, half bull, this fearsome creature 
 The level of the minotaur is 3.
 The ID of the minotaur is 14.
 The unlock level of the minotaur is 2.
+The unlock hidden switch of the minotaur is true.
 
 The health of minotaur is 35.
 The melee of minotaur is 4.

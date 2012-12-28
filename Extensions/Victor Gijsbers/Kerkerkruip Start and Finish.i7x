@@ -472,7 +472,10 @@ Section - What happens after the obituary
 After printing the player's obituary (this is the update the difficulty rule):
 	if the player is victorious:
 		set data value 1 to data value 1 + 1, table only; [ number of victories ]
-		set data value 4 to data value 4 + 1, table only; [ number of victories for the purpose of unlocking ]
+		let n be data value 4;
+		increase n by 1;
+		set data value 4 to n; [WTF??? Why does this work, while the next line doesn't??]
+[		set data value 4 to data value 4 + 1, table only; [ number of victories for the purpose of unlocking ]]
 		increase difficulty by 1; [We want to go from easy to normal difficulty.]
 		if difficulty is 1:
 			say "[paragraph break][bold type]You have defeated Malygris on easy mode, proving that you understand the basics of the game! Next time, Kerkerkruip will start in normal mode. From now on, new items, monsters and locations will be available. Have fun![roman type][paragraph break]";
@@ -503,7 +506,7 @@ Last after printing the player's obituary (this is the list unlocked stuff rule)
 					if unlock hidden switch of Y is not true:			
 						add Y to X;
 		if X is not empty:
-			say "You have [bold type]unlocked[roman type] new content:[line break][run paragraph on]";
+			say "[line break]You have [bold type]unlocked[roman type] new content:[line break][run paragraph on]";
 			repeat with item running through X:
 				say "* [the item] ([unlock text of item])[line break]";
 			say "[line break]";
