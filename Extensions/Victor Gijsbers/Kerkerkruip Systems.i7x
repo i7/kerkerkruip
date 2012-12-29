@@ -730,7 +730,8 @@ Last carry out an actor teleporting (this is the actually do the teleportation r
 	now concentration of actor is 0;
 	unless teleport amount of actor is -1 or teleport amount of actor is 0:
 		decrease teleport amount of actor by 1;
-	clean the table of delayed actions for the actor;
+	unless teleportation-from is the location and teleportation-destination is the location:
+		clean the table of delayed actions for the actor;
 
 Report an npc teleporting:
 	if teleportation-from is the location and teleportation-destination is the location:

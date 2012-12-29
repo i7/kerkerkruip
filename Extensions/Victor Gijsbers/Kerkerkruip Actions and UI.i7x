@@ -601,17 +601,19 @@ Carry out achievemenuing:
 	report the main action again;
 
 
-[Chapter - Enemies and Powers Menu
+Chapter - Enemies and Powers Menu
 
 Powermenuing is an action out of world.
 
 Understand "enemies" and "powers" as powermenuing.
 
 Carry out powermenuing:
-	consider the show the table of enemies and powers rule;
+	[consider the show the table of enemies and powers rule;]
+	now the current menu is the Table of Power Help;
+	carry out the displaying activity;
 	clear the screen;
 	try looking;
-	report the main action again;]
+	report the main action again;
 
 
 Chapter - The asking for help action (for use without Basic Help Menu by Emily Short)
