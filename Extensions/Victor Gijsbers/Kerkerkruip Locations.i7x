@@ -1344,6 +1344,78 @@ Instead of smelling putrefying arm:
 	say "It is horrible.".
 
 
+
+Chapter - Hall of the Raging Banshees
+
+The Hall of the Raging Banshees is a room. "A shaded, grotesque hall, fully cut out of onyx. Deep within the blackness of its walls hideous female figures seem to scream at you. [italic type](Current tension modifier: +[bansheemod] body, -[bansheemod] mind.)[roman type]"
+
+The Hall of the Raging Banshees is connectable.
+The Hall of the Raging Banshees is not connection-inviting.
+The Hall of the Raging Banshees is placeable.
+The Hall of the Raging Banshees is habitable.
+The Hall of the Raging Banshees is [not ]treasurable. [Because why not?]
+The Hall of the Raging Banshees is [not ]extra-accepting. [Because why not?]
+The Hall of the Raging Banshees is vp-agnostic.
+The Hall of the Raging Banshees is deathly.
+
+There is a thing called the banshees. The banshees are scenery and plural-named. Understand "figure", "figures", "silhouettes", "silhouette", "woman", "women", "banshee", "banshees" as the banshees. The banshees are in Hall of the Raging Banshees.
+
+Instead of examining the banshees:
+	say "You avert your eyes from the horrific sight of the madly screaming women.".
+
+[Instead of listening to the banshees:
+	update the combat status; 
+	say "[If the combat status is not peace and the tension is greater than 0]Even without listening, the howling of the banshees intensifies your feeling of anger against everything walking around in these Halls. You begin to understand that these Halls should be filled with blood![end if][If the tension boolean is true]After your triumph, the eery screams subsided and your bloody rage ended. While this may have left you in a tranquil state, you realise this is only temporary.[end if]".]
+
+To decide which number is the bansheemod:
+	let x be the tension;
+	now x is x divided by 3;
+	if tension is greater than 9:
+		increase x by 1;
+	decide on x.
+
+A body bonus rule (this is the banshee body bonus rule):
+	if the location is the Hall of the Raging Banshees and the combat status is not peace:
+		increase faculty bonus score by bansheemod.
+
+A mind bonus rule (this is the banshee mind bonus rule):
+	if the location is the Hall of the Raging Banshees and the combat status is not peace:
+		decrease faculty bonus score by bansheemod.
+
+[
+Every turn when the location is the hall of the Raging Banshees and the combat status is not peace:
+	let x be (tension - tensionmod);
+	if the determine faculty boolean is false:
+		now the pcbody is the body score of the player;
+		now the pcmind is the mind score of the player;
+		now the determine faculty boolean is true;
+	if x is 0:
+		say "[If the tension is greater than 0]You feel the banshee-induced rage burning constantly.[end if]";
+	otherwise if x is greater than 0:
+		say "[If the tensionmod is 0]A horrendous scream, imbued with intense hatred, emanates from the hideous female figures in the walls. It fills you with a growing, blinding rage, making all mental activities that much harder.[end if][If the tensionmod is greater than 0]The scream becomes louder and intenser, imbuing you with greater rage.[end if][If the tension is greater than 3]More horrifying, the screaming faces of the banshees seem to break loose from the onyx walls; their white, pale faces [end if] [italic type](Body + 1, Mind - 1)[roman type]";
+		increase the body score of the player by x;
+		decrease the mind score of the player by x;
+		now the tension boolean is true;
+	otherwise if x is less than 0:
+		say "[If the tension is greater than 0]The screaming starts to weaken and you feel a sudden relief and calm; slowly, you slowly start to regain your composure.[otherwise] As the silence returns, you fully regain your composure. The hideous faces start to fade away in the onyx blackness of the wall, uneased by the relative peace returned in the Halls.[end if]";
+		now x is x multiplied by -1;
+		decrease the body score of the player by x;
+		increase the mind score of the player by x;
+		now the tensionmod is the tension.
+
+Every turn when the location is the hall of the Raging Banshees and the combat status is peace and the determine faculty boolean is true:
+	now the body score of the player is the pcbody;
+	now the mind score of the player is the pcmind.]
+
+
+
+
+
+
+
+
+
+
 [In a huge beast skeleton?]
  [a white stairway that mounted amid the veering vapors. Behind him the flames rose unbroken, like a topless rampart; and on either hand, from instant to instant, the smoke shaped itself into demon forms and faces that menaced him]
 [Presently he came to the huge, browless skull of an uncouth creature, which reposed on the ground with upward-gazing orbits; and beyond the skull was the monster's moldly skeleton, wholly blocking the passage. Its ribs were cramped by the narrowing walls, as if it had crept there and had died in the darkness, unable to withdraw or go forward. White spiders, demon-headed and large as monkeys, had woven their webs in the hollow arches of the bones; and they swarmed out interminably as Nushain approached; and the skeleton seemed to stir and quiver as they seethed over it abhorrently and dropped to the ground before the astrologer. Behind them others poured in a countless army, crowding and mantling every ossicle.]
