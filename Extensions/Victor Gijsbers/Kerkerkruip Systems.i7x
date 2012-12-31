@@ -447,6 +447,8 @@ A dungeon interest rule (this is the change weapon sizes rule):
 						increase the size of item;
 				if generation info is true, say "* Now [item] is [size of item].".
 
+
+
 Chapter - Powers
 
 A power is a kind of object.

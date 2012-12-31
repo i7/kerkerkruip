@@ -1319,12 +1319,20 @@ Section - The salves kind
 
 A salve is a kind of thing.
 A salve is usually alchemical.
+A salve can be reusable. A salve is usually not reusable.
 
 Applying it to is an action applying to one carried thing and one thing. Understand "apply [something] to [something]" as applying it to. Understand "rub [something] on [something]" as applying it to.
 Does the player mean applying a salve to something: it is very likely.
 
 Check putting a salve on something:
 	try applying the noun to the second noun instead.
+
+Check applying it to:
+	if the second noun is enclosed by a person:
+		let guy be a random person enclosing the second noun;
+		if faction of the guy hates faction of the player:
+			take no time;
+			say "You cannot rub a salve on the weapon held by someone who is hostile to you." instead.
 
 Before applying something to a person (this is the putting a salve on someone is risky rule):
 	if the faction of the second noun hates the faction of the player:
@@ -1339,30 +1347,34 @@ Before applying something to a person (this is the putting a salve on someone is
 
 Carry out applying something to something:
 	say "Nothing particular seems to happen.";
-	remove the noun from play.
+	unless the noun is reusable:
+		remove the noun from play.
 
 Section - Unguentum argenti
 
 An unguentum argenti is a kind of salve. The plural of unguentum argenti is unguenta argenti. The description of unguentum argenti is "An expensive alchemical salve that can be rubbed on iron objects to turn them into silver.". Understand "salve" as unguentum argenti.
 
-Instead of applying unguentum argenti to an iron weapon:
+Carry out applying unguentum argenti to an iron weapon:
 	say "You carefully apply the salve to [the second noun], turning it into a silver weapon.";
 	now the second noun is silver;
-	remove noun from play.
+	remove noun from play;
+	rule succeeds.
 
-Instead of applying unguentum argenti to an alive iron person:
+Carry out applying unguentum argenti to an alive iron person:
 	say "You apply the salve wherever you can, significantly weakening [the second noun].";
 	now the second noun is silver;
 	remove noun from play;
 	now permanent health of the second noun is permanent health of the second noun divided by 2;
 	now health of the second noun is health of the second noun divided by 2;
 	if health of the second noun is less than 1:
-		now health of the second noun is 1.
+		now health of the second noun is 1;
+	rule succeeds.
 
-Instead of applying unguentum argenti to an iron thing:
+Carry out applying unguentum argenti to an iron thing:
 	say "You carefully apply the salve to [the second noun], turning it into silver.";
 	now second noun is silver;
-	remove noun from play.
+	remove noun from play;
+	rule succeeds.
 		
 The small-unguentum-argenti-pack is a minor treasure pack. One unguentum argenti is in the small-unguentum-argenti-pack.
 The small-unguentum-argenti-pack is alchemical.
@@ -1371,13 +1383,59 @@ The large-unguentum-argenti-pack is a major treasure pack. Two unguenta argenti 
 The large-unguentum-argenti-pack is alchemical.
 
 
+Section - Unguentum crescendi (minor)
 
+[Because growing and shrinking are not exact reverses in terms of combat statistics, we'll make it so that you cannot go back and implement a system of immunity. Also useful for stuff like the mace of the ape king.] 
+A weapon can be crescendied. A weapon is usually not crescendied.
+A weapon can be diminuendied. A weapon is usually not diminuendied.
 
+An unguentum crescendi is a kind of salve. The plural of unguentum crescendi is unguenta crescendi. The description of unguentum crescendi is "An expensive alchemical salve that can be rubbed on weapons to make them grow. It can be used multiple times.". Understand "salve" as unguentum crescendi.
 
+Carry out applying unguentum crescendi to something:
+	unless the second noun is a weapon:
+		say "The salve will only work on weapons.";
+		take no time;
+	otherwise:
+		if the second noun is gargantuan:
+			say "You cannot make that any bigger.";
+			take no time;
+		otherwise:
+			if second noun is diminuendied:
+				say "Some magic seems to protect this weapon against the unguentum crescendi.";
+			otherwise:
+				say "You carefully apply the salve to [the second noun], ";
+				increase the size of the second noun;
+				say "turning it [size of the second noun].";
+				now the second noun is crescendied;
+	rule succeeds.
 
+The small-unguentum-crescendi-pack is a minor treasure pack. One unguentum crescendi is in the small-unguentum-crescendi-pack.
+The small-unguentum-crescendi-pack is alchemical.
 
+Section - Unguentum diminuendi (minor)
 
+An unguentum diminuendi is a kind of salve. The plural of unguentum diminuendi is unguenta diminuendi. The description of unguentum diminuendi is "An expensive alchemical salve that can be rubbed on weapons to make them shrink. It can be used multiple times.". Understand "salve" as unguentum diminuendi.
 
+Carry out applying unguentum diminuendi to something:
+	unless the second noun is a weapon:
+		say "The salve will only work on weapons.";
+		take no time;
+	otherwise:
+		if the second noun is tiny:
+			say "You cannot make that any smaller.";
+			take no time;
+		otherwise:
+			if second noun is crescendied:
+				say "Some magic seems to protect this weapon against the unguentum diminuendi.";
+			otherwise:
+				say "You carefully apply the salve to [the second noun], ";
+				decrease the size of the second noun;
+				say "turning it [size of the second noun].";
+				now the second noun is diminuendied;
+	rule succeeds.
+
+The small-unguentum-diminuendi-pack is a minor treasure pack. One unguentum diminuendi is in the small-unguentum-diminuendi-pack.
+The small-unguentum-diminuendi-pack is alchemical.
 
 
 Chapter - Sprayables
@@ -2039,8 +2097,6 @@ A magical guide is a kind of thing. A magical guide is readable. Understand "boo
 Before printing the name of a magical guide, say "[italic type]". After printing the name of a magical guide, say "[roman type]". 
 
 A magical guide has a list of scroll names called the guide list.
-
-A magical guide has a list of texts called the printable guide list.
 
 Instead of examining a magical guide:
 	say "Reading this little manual of magic will teach you how to recognise scrolls of [readable guide list of the noun].";
@@ -2729,6 +2785,8 @@ Section - Spiked mace of the ape king (major)
 The spiked mace of the ape king is a major mace.
 The spiked mace of the ape king is barren.
 The spiked mace of the ape king is iron.
+
+The spiked mace of the ape king is crescendied. The spiked mace of the ape king is diminuendied.
 
 Table of Spiked Mace of the Ape King
 Blood	Dam	WDB	DOD	PPM		APM	Size
