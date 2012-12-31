@@ -2036,20 +2036,38 @@ Chapter - Magical guides
 
 A magical guide is a kind of thing. A magical guide is readable. Understand "book" and "manual" as a magical guide.
 
+Before printing the name of a magical guide, say "[italic type]". After printing the name of a magical guide, say "[roman type]". 
+
 A magical guide has a list of scroll names called the guide list.
 
+A magical guide has a list of texts called the printable guide list.
+
 Instead of examining a magical guide:
-	say "Reading this little manual of magic will teach you how to recognise scrolls of [guide list of the noun].";
+	say "Reading this little manual of magic will teach you how to recognise scrolls of [readable guide list of the noun].";
 	take no time.
 
 Carry out reading a magical guide:
-	say "From now on, you will recognise scrolls of [guide list of the noun].";
+	say "From now on, you will recognise scrolls of [readable guide list of the noun].";
 	repeat with S running through the kinds of scroll:
 		repeat with I running through the instances of S:
 			if true name of I is listed in guide list of noun:
 				if I is unidentified:
 					identify I;
 					break.
+
+To say readable (list-to-print - a list of scroll names):
+	let n be the number of entries in list-to-print;
+	repeat with stuff running through list-to-print:
+		if printed name of stuff is not "":
+			say "[printed name of stuff]";
+		otherwise:
+			say "[stuff]";
+		if n is greater than 2:
+			say ", ";
+		if n is 2:
+			say " and ";
+		decrease n by 1.
+
 
 Section - Introduction to Necromancy (minor)
 
@@ -2083,6 +2101,12 @@ When play begins:
 	add (entry 1 of names) to guide list of Miscellanea Magica;
 	add (entry 2 of names) to guide list of Miscellanea Magica;		
 	add (entry 3 of names) to guide list of Miscellanea Magica.
+
+
+
+
+
+
 
 
 
