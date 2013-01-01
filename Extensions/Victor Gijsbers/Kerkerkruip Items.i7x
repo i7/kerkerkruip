@@ -2614,6 +2614,8 @@ Section - Minotaur's axe (monster)
 
 The minotaur's axe is an axe. The description of the minotaur's axe is "A huge axe covered in mystic runes.".
 
+The minotaur's axe is large.
+
 The damage die of the minotaur's axe is 6.
 The weapon attack bonus of the minotaur's axe is -3.
 The weapon damage bonus of the minotaur's axe is 3.

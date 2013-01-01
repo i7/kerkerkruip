@@ -90,6 +90,7 @@ Section - Definitions
 
 The swarm of daggers is a monster. "A swarm of small daggers is flying through the air like a flock of birds, their sharp points eagerly seeking flesh." The level of swarm of daggers is 1.
 The ID of the swarm of daggers is 1.
+The swarm of daggers is small.
 
 The swarm of daggers is ambiguously plural.
 
@@ -437,10 +438,11 @@ Chapter - Level 1 - Ravenous Armadillo
 
 Section - Definitions
 
-The ravenous armadillo is a monster. "A huge armadillo is here, searching for anything it can eat."
+The ravenous armadillo is a monster. "A big armadillo is here, searching for anything it can eat."
 
 The level of ravenous armadillo is 1.
 The ID of the ravenous armadillo is 3.
+The ravenous armadillo is medium.
 
 The unlock level of the ravenous armadillo is 3.
 The unlock text of the ravenous armadillo is "a monster that searches the dungeon for anything it can eat".
@@ -690,6 +692,7 @@ Miranda is proper-named. Miranda is female. Miranda is not neuter. Understand "w
 
 The level of Miranda is 1.
 The ID of Miranda is 4.
+Miranda is medium.
 
 The description of Miranda is "Although she is currently working as one of Malygris's guards, Miranda dreams about a bright future as a famous adventurer.".
 
@@ -874,6 +877,7 @@ The wisps of pain are plural-named. Understand "wisp" as the wisps of pain.
 
 The level of the wisps of pain is 1.
 The ID of the wisps of pain is 30.
+The wisps of pain are tiny.
 
 The description of the wisps of pain is "Dark spots of necromantic magic move through the air. They deal pain and torment, and can permanently cripple anyone foolish enough to oppose them.".
 
@@ -1077,6 +1081,7 @@ The chain golem is a monster. "The room is dominated by a chain golem, a moving 
 
 The level of the chain golem is 2.
 The ID of the chain golem is 5.
+The chain golem is large.
 
 The chain golem is eyeless.
 The chain golem is iron.
@@ -1316,6 +1321,7 @@ Understand "ball" and "flesh" and "meat" as the jumping bomb.
 
 The level of jumping Bomb is 2.
 The ID of the jumping Bomb is 6.
+The jumping bomb is small.
 
 The jumping bomb is eyeless.
 The jumping bomb is emotionless.
@@ -1510,6 +1516,7 @@ Understand "pale" and "man" and "dark" and "robes" and "serial" and "killer" and
 
 The level of the Reaper is 2.
 The ID of the Reaper is 7.
+The Reaper is medium.
 
 The description of the reaper is "He once used to be a man like any other, but his vocation has left him unnaturally pale and gaunt.".
 
@@ -1687,6 +1694,7 @@ Understand "cries" and "inarticulate" as the demon of rage.
 
 The level of the demon of rage is 2.
 The ID of the demon of rage is 8.
+The demon of rage is medium.
 The unlock level of the demon of rage is 2.
 The unlock hidden switch of the demon of rage is true.
 
@@ -1873,6 +1881,8 @@ The hound is a monster. "A gigantic hound [one of]snarls[or]growls[at random] [i
 Understand "gigantic" and "huge" and "dog" as the hound.
 The level of the hound is 2.
 The ID of the hound is 9.
+The hound is large.
+
 The description of the hound is "The black hound is ever watchful, ready to punish its prey for any wrong move."
 
 The health of the hound is 19.
@@ -2014,6 +2024,7 @@ Understand "slug" and "master" and "ooze" as the mindslug.
 
 The level of the mindslug is 3.
 The ID of the mindslug is 10.
+The mindslug is huge.
 
 The description of the mindslug is "It is of the dreaded race of mindslugs, abominations that use their telepathic powers to enslave others.".
 
@@ -2109,6 +2120,7 @@ Section - Slaves
 
 Fafhrd is a mindslug-enslaved man. The description of Fafhrd is "This male barbarian is strong and muscular. He looks like an able and shrewd fighter.".
 The ID of Fafhrd is 11.
+Fafhrd is medium.
 
 Health of Fafhrd is 14.
 Melee of Fafhrd is 1.
@@ -2130,6 +2142,7 @@ Mouser carries the sneaking sword.
 
 Health of Mouser is 10.
 Defence of Mouser is 9.
+Mouser is medium.
 
 When play begins:
 	let X be a random natural weapon part of Mouser;
@@ -2419,6 +2432,7 @@ The description of the giant tentacle is "Aeons ago, the Knight of the Dawn foug
 
 The level of giant tentacle is 3.
 The ID of the giant tentacle is 13.
+The giant tentacle is huge.
 
 The health of giant tentacle is 35.
 The melee of giant tentacle is 4.
@@ -2737,12 +2751,14 @@ Carry out sprouting:
 
 Chapter - Level 3 - Minotaur
 
-The minotaur is a male monster. "A huge minotaur[if the minotaur carries the minotaur's axe], carrying a huge axe,[end if] stands ready for combat."
+The minotaur is a male monster. "A ferocious minotaur[if the minotaur carries the minotaur's axe] wielding a big axe[end if] stands ready for combat."
 
 The description of the minotaur is "Half man, half bull, this fearsome creature is associated by legends with two things: axes and mazes.".
 
 The level of the minotaur is 3.
 The ID of the minotaur is 14.
+The minotaur is large.
+
 The unlock level of the minotaur is 2.
 The unlock hidden switch of the minotaur is true.
 
@@ -2849,6 +2865,7 @@ A healer of Aite is a male monster. The healer of Aite is not neuter. "A white-r
 Understand "white-robed" as the Healer of Aite.
 The description of the healer of Aite is "This white-robed priest is a healer of Aite. Their task is to support the other fanatics in their never-ending crusade.".
 The ID of the Healer of Aite is 16.
+The Healer of Aite is medium.
 
 The health of the Healer of Aite is 20.
 The melee of the Healer of Aite is 1.
@@ -2899,6 +2916,7 @@ A tormentor of Aite is a female monster. The tormentor of Aite is not neuter. "A
 Understand "black-robed" and "mage" as the Tormentor of Aite.
 The description of the tormentor of Aite is "You immediately recognise the black-robed mage as a tormentor of Aite, savage priests who specialise in inflicting pain on all who oppose their faith.".
 The ID of the Tormentor of Aite is 17.
+The Tormentor of Aite is medium.
 
 The health of the Tormentor of Aite is 16.
 The melee of the Tormentor of Aite is 3.
@@ -2949,6 +2967,7 @@ A defender of Aite is a male monster. The defender of Aite is not neuter. "Equip
 Understand "armoured" and "man" as the defender of Aite.
 The description of the defender of Aite is "This heavily armoured priest is a defender of Aite, one of the front-line troops of the armies of this horrible faith.".
 The ID of the defender of Aite is 18.
+The defender of Aite is medium.
 
 The health of the Defender of Aite is 23.
 The melee of the Defender of Aite is 1.
@@ -3068,6 +3087,7 @@ Understand "druid" and "druidess" and "witch" as Bodmall.
 
 The level of Bodmall is 4.
 The ID of Bodmall is 19.
+Bodmall is medium.
 
 The health of Bodmall is 35.
 The melee of Bodmall is 5.
@@ -3775,6 +3795,7 @@ Understand "sorcerer" and "mage" and "wizard" and "him" as the Malygris.
 
 The level of Malygris is 5.
 The ID of Malygris is 20.
+Malygris is medium.
 
 The health of Malygris is 55.
 The melee of Malygris is 7.
@@ -3917,6 +3938,8 @@ The demonic assassin is a monster. "A horned figure stalks through the room." Un
 
 The level of demonic assassin is 0.
 The ID of the demonic assassin is 21.
+The demonic assassin is medium.
+
 The demonic assassin is demonic.
 
 The health of demonic assassin is 25.
@@ -3978,6 +4001,7 @@ A final monster placement rule (this is the Nameless Horror in Eternal Prison ru
 
 The level of Nameless Horror is 10.
 The ID of the Nameless Horror is 22.
+The Nameless Horror is gargantuan.
 
 The health of Nameless Horror is 1000.
 The melee of Nameless Horror is 50.
@@ -4084,6 +4108,7 @@ The rotting corpse is eyeless.
 
 The level of rotting corpse is 0.
 The ID of the rotting corpse is 23.
+The rotting corpse is medium.
 
 The health of rotting corpse is 30.
 The melee of rotting corpse is 3.
@@ -4234,6 +4259,7 @@ The description of the aswang is "The undead monster has currently taken the for
 
 The level of the aswang is 0.
 The ID of the aswang is 24.
+The aswang is medium.
 
 The health of the aswang is 22.
 The melee of the aswang is 2.
@@ -4487,6 +4513,7 @@ An absorption stopping rule (this is the abyss of the soul absorbs all souls rul
 		if the level of test subject is not 0 and the level of test subject is not 10:
 			if the abyss of the soul is not gargantuan:
 				now the abyss of the soul is the size after the size of the abyss of the soul;
+				now base size of the abyss of the soul is the size of the abyss of the soul;
 			increase health of the abyss of the soul by 15;
 			increase abyss of the soul strength by 1;
 			say "You attempt to absorb the soul of [the test subject], but feel how it disappears into the [bold type]deadly abyss[roman type][if test subject is Malygris]. The abyss of the soul immediately grows to gigantic proportions, obliterating the entire dungeon[end if].";
@@ -4522,6 +4549,7 @@ The mummified priest is eyeless.
 
 The level of mummified priest is 0.
 The ID of the mummified priest is 29.
+The mummified priest is medium.
 
 The health of mummified priest is 25.
 The melee of mummified priest is 2.
@@ -4617,6 +4645,8 @@ The smoke demon is horrific-faction. [Attacks even other demons.]
 
 The level of the smoke demon is 0.
 The ID of the smoke demon is 26.
+The smoke demon is large.
+
 The smoke demon is smoke attuned.
 The smoke demon is flyer.
 The smoke demon is emotionless.
@@ -4784,6 +4814,8 @@ The description of the imp is "Imps are minor demons with unnaturally small wing
 
 The imp is demonic. The level of the imp is 0.
 The ID of the imp is 27.
+The imp is small.
+
 The imp is flyer.
 
 The health of the imp is 10.
@@ -4914,6 +4946,8 @@ The demonic mistress is a monster. "A horned figure stalks through the room." Un
 
 The level of demonic mistress is 0.
 The ID of the demonic mistress is 28.
+The demonic mistress is medium.
+
 The demonic mistress is demonic.
 
 The health of demonic mistress is 25.
