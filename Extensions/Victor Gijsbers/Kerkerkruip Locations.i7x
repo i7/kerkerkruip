@@ -67,7 +67,6 @@ Fragmentation rule (this is the hall of mirrors fragmentation rule):
 		say "All the mirrors are blown to pieces and fall down like a rain of ice and light. But after a few seconds,  the shards of glass start moving up and reform the mirrors. Not a crack can be seen.";
 		rule succeeds.
 
-
 After printing the name of something while looking when the location is the Hall of Mirrors:
 	say "[run paragraph on]";
 	unless the player is blind:
@@ -1344,7 +1343,7 @@ Instead of smelling putrefying arm:
 	say "It is horrible.".
 
 
-
+[
 Chapter - Hall of the Raging Banshees
 
 The Hall of the Raging Banshees is a room. "A shaded, grotesque hall, fully cut out of onyx. Deep within the blackness of its walls hideous female figures seem to scream at you. [italic type](Current tension modifier: +[bansheemod] body, -[bansheemod] mind.)[roman type]"
@@ -1405,11 +1404,71 @@ Every turn when the location is the hall of the Raging Banshees and the combat s
 
 Every turn when the location is the hall of the Raging Banshees and the combat status is peace and the determine faculty boolean is true:
 	now the body score of the player is the pcbody;
-	now the mind score of the player is the pcmind.]
+	now the mind score of the player is the pcmind.]]
 
+Chapter - Hall of the Raging Banshees
 
+The Hall of the Raging Banshees is a room. "A shaded, grotesque hall, fully cut out of onyx.[if living banshees boolean is false] Deep within the blackness of its walls hideous female figures seem to scream at you.[otherwise] A horde of female spirits is flying around, wailing their insane laments.[end if] [italic type](Current tension modifier: +[bansheemod] body, -[bansheemod] mind[if living banshees boolean is true]; [20 + (4 * tension)]% chance of concentration failure[end if].)[roman type]"
 
+The Hall of the Raging Banshees is connectable.
+The Hall of the Raging Banshees is not connection-inviting.
+The Hall of the Raging Banshees is placeable.
+The Hall of the Raging Banshees is habitable.
+The Hall of the Raging Banshees is treasurable.
+The Hall of the Raging Banshees is extra-accepting.
+The Hall of the Raging Banshees is vp-agnostic.
+The Hall of the Raging Banshees is deathly.
 
+There is a thing called the banshees. "A horde of banshees is flying through the room, screaming and howling."
+
+The banshees are scenery, and plural-named. Understand "figure", "figures", "silhouettes", "silhouette", "woman", "women", "banshee", "banshees" as the banshees. The banshees are in Hall of the Raging Banshees.
+
+Instead of examining the banshees:
+	say "You avert your eyes from the horrific sight of the madly screaming women.".
+	
+Instead of attacking the banshees:
+	say "[if the living banshees boolean is true]They appear to be insubstantial[otherwise]You could not break through the onyx walls[end if].";
+	take no time.
+
+Instead of listening to the banshees:
+	say "[if the living banshees boolean is true]They screams are bloodcurdling[otherwise]No actual sound escapes from the walls[end if].".
+
+[Declaring a variable which determines whether the banshees find enough tension to break loose from the walls]
+The living banshees boolean is a truth state variable that varies. The living banshees boolean is false.
+
+To decide which number is the bansheemod:
+	let x be the tension;
+	now x is x divided by 4;
+	if tension is greater than 12:
+		increase x by 1;
+	decide on x.
+
+Every turn when the location is the Hall of the Raging Banshees (this is the activate banshees rule):
+	if (the tension is greater than 9) and the living banshees boolean is false:
+		say "The [bold type]banshees[roman type] suddenly break loose from the onyx walls!  They start to incite all creatures in the hall, screaming and flying around them.";
+		now the living banshees boolean is true;
+	otherwise if (4 is greater than the tension) and the living banshees boolean is true:
+		say "Bored by a lack of tension, the [bold type]banshees[roman type] recede into the walls, leaving with a last, horrifying scream.";
+		now the living banshees boolean is false.
+
+Check an actor concentrating when the living banshees boolean is true:
+	let y be the tension;
+	now y is y times 4 plus 20;
+	if a random chance of y in 100 succeeds:
+		say "The wailing of the banshees disturbs [possessive of the actor] attempt to concentrate." instead.
+
+An AI action selection rule for a person (called P) when the location is Hall of the Raging Banshees (this is the less concentration when banshees howl rule):
+	if the living banshees boolean is true:
+		choose row with an Option of the action of P concentrating in the Table of AI Action Options;
+		decrease the Action Weight entry by bansheemod.
+		
+A body bonus rule (this is the banshee body bonus rule):
+	if the location is the Hall of the Raging Banshees and the combat status is not peace:
+		increase faculty bonus score by bansheemod.
+
+A mind bonus rule (this is the banshee mind bonus rule):
+	if the location is the Hall of the Raging Banshees and the combat status is not peace:
+		decrease faculty bonus score by bansheemod.
 
 
 
