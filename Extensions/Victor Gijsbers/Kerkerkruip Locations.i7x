@@ -1343,69 +1343,6 @@ Instead of smelling putrefying arm:
 	say "It is horrible.".
 
 
-[
-Chapter - Hall of the Raging Banshees
-
-The Hall of the Raging Banshees is a room. "A shaded, grotesque hall, fully cut out of onyx. Deep within the blackness of its walls hideous female figures seem to scream at you. [italic type](Current tension modifier: +[bansheemod] body, -[bansheemod] mind.)[roman type]"
-
-The Hall of the Raging Banshees is connectable.
-The Hall of the Raging Banshees is not connection-inviting.
-The Hall of the Raging Banshees is placeable.
-The Hall of the Raging Banshees is habitable.
-The Hall of the Raging Banshees is [not ]treasurable. [Because why not?]
-The Hall of the Raging Banshees is [not ]extra-accepting. [Because why not?]
-The Hall of the Raging Banshees is vp-agnostic.
-The Hall of the Raging Banshees is deathly.
-
-There is a thing called the banshees. The banshees are scenery and plural-named. Understand "figure", "figures", "silhouettes", "silhouette", "woman", "women", "banshee", "banshees" as the banshees. The banshees are in Hall of the Raging Banshees.
-
-Instead of examining the banshees:
-	say "You avert your eyes from the horrific sight of the madly screaming women.".
-
-[Instead of listening to the banshees:
-	update the combat status; 
-	say "[If the combat status is not peace and the tension is greater than 0]Even without listening, the howling of the banshees intensifies your feeling of anger against everything walking around in these Halls. You begin to understand that these Halls should be filled with blood![end if][If the tension boolean is true]After your triumph, the eery screams subsided and your bloody rage ended. While this may have left you in a tranquil state, you realise this is only temporary.[end if]".]
-
-To decide which number is the bansheemod:
-	let x be the tension;
-	now x is x divided by 3;
-	if tension is greater than 9:
-		increase x by 1;
-	decide on x.
-
-A body bonus rule (this is the banshee body bonus rule):
-	if the location is the Hall of the Raging Banshees and the combat status is not peace:
-		increase faculty bonus score by bansheemod.
-
-A mind bonus rule (this is the banshee mind bonus rule):
-	if the location is the Hall of the Raging Banshees and the combat status is not peace:
-		decrease faculty bonus score by bansheemod.
-
-[
-Every turn when the location is the hall of the Raging Banshees and the combat status is not peace:
-	let x be (tension - tensionmod);
-	if the determine faculty boolean is false:
-		now the pcbody is the body score of the player;
-		now the pcmind is the mind score of the player;
-		now the determine faculty boolean is true;
-	if x is 0:
-		say "[If the tension is greater than 0]You feel the banshee-induced rage burning constantly.[end if]";
-	otherwise if x is greater than 0:
-		say "[If the tensionmod is 0]A horrendous scream, imbued with intense hatred, emanates from the hideous female figures in the walls. It fills you with a growing, blinding rage, making all mental activities that much harder.[end if][If the tensionmod is greater than 0]The scream becomes louder and intenser, imbuing you with greater rage.[end if][If the tension is greater than 3]More horrifying, the screaming faces of the banshees seem to break loose from the onyx walls; their white, pale faces [end if] [italic type](Body + 1, Mind - 1)[roman type]";
-		increase the body score of the player by x;
-		decrease the mind score of the player by x;
-		now the tension boolean is true;
-	otherwise if x is less than 0:
-		say "[If the tension is greater than 0]The screaming starts to weaken and you feel a sudden relief and calm; slowly, you slowly start to regain your composure.[otherwise] As the silence returns, you fully regain your composure. The hideous faces start to fade away in the onyx blackness of the wall, uneased by the relative peace returned in the Halls.[end if]";
-		now x is x multiplied by -1;
-		decrease the body score of the player by x;
-		increase the mind score of the player by x;
-		now the tensionmod is the tension.
-
-Every turn when the location is the hall of the Raging Banshees and the combat status is peace and the determine faculty boolean is true:
-	now the body score of the player is the pcbody;
-	now the mind score of the player is the pcmind.]]
-
 Chapter - Hall of the Raging Banshees
 
 The Hall of the Raging Banshees is a room. "A shaded, grotesque hall, fully cut out of onyx.[if living banshees boolean is false] Deep within the blackness of its walls hideous female figures seem to scream at you.[otherwise] A horde of female spirits is flying around, wailing their insane laments.[end if] [italic type](Current tension modifier: +[bansheemod] body, -[bansheemod] mind[if living banshees boolean is true]; [20 + (4 * tension)]% chance of concentration failure[end if].)[roman type]"
@@ -1418,6 +1355,8 @@ The Hall of the Raging Banshees is treasurable.
 The Hall of the Raging Banshees is extra-accepting.
 The Hall of the Raging Banshees is vp-agnostic.
 The Hall of the Raging Banshees is deathly.
+
+The rarity of Hall of the Raging Banshees is 1.
 
 There is a thing called the banshees. "A horde of banshees is flying through the room, screaming and howling."
 
@@ -1471,7 +1410,31 @@ A mind bonus rule (this is the banshee mind bonus rule):
 		decrease faculty bonus score by bansheemod.
 
 
+Chapter - Columnated Ruins
 
+Columnated Ruins is a room. "This must have been a temple once, but all that is left is a forest of pillars, mostly broken and shattered. Even gods may be forgotten."
+
+Columnated Ruins is connectable.
+Columnated Ruins is not connection-inviting.
+Columnated Ruins is placeable.
+Columnated Ruins is habitable.
+Columnated Ruins is treasurable.
+Columnated Ruins is extra-accepting.
+Columnated Ruins is vp-agnostic.
+Columnated Ruins is civilised.
+
+The rarity of Collumnated Ruins is 1.
+
+The pillars are scenery in columnated ruins. The description of the pillars is "Larger creatures will have trouble navigating the dense forest of pillars, while smaller creatures will find many easy spots to duck away.".
+
+An attack modifier rule (this is the attack penalty in Columnated Ruins rule):
+	if the location is Columnated Ruins:
+		let n be the size difference of the global attacker and the global defender;
+		if n is greater than 0:
+			say " + [n] (defender hampered by pillars)[run paragraph on]";
+		otherwise if n is less than 0:
+			say " - [-1 * n] (attacker hampered by pillars)[run paragraph on]";
+		increase the attack strength by n..
 
 
 
