@@ -1960,18 +1960,22 @@ A mutation rule (this is the mutate flying rule):
 		if the player is not flyer:
 			now the player is flyer;
 			say "You grow wings and gain the power of flight!";
+			now mutated boolean is true;
 		otherwise:
 			now the player is not flyer;
-			say "You lose your wings, and can no longer fly!".
+			say "You lose your wings, and can no longer fly!";
+			now mutated boolean is true.
 
 A mutation rule (this is the mutate eyeless rule):
 	if a random chance of 1 in 10 succeeds:
 		if the player is eyeless:
 			now the player is eyeless;
 			say "You lose your eyes... but find that you don't need them to be aware of your surroundings!";
+			now mutated boolean is true;
 		otherwise:
 			now the player is not eyeless;
-			say "You regrow your eyes!".
+			say "You regrow your eyes!";
+			now mutated boolean is true.
 
 
 
@@ -2536,6 +2540,31 @@ An aftereffects rule (this is the vampiric dagger leeches rule):
 		increase health of the global attacker by n;
 		unless n is 0:
 			say "The vampiric dagger [bold type]transfers [n] health[roman type] to [the global attacker].".
+
+Section - Giantbane (major)
+
+Giantbane is a major dagger.
+Giantbane is civilised.
+Giantbane is iron.
+Giantbane is proper-named.
+Giantbane is small.
+
+A dungeon interest rule (this is the set giantbane size rule):
+	if a random chance of 1 in 5 succeeds:
+		now giantbane is medium;
+	if a random chance of 2 in 5 succeeds:
+		now giantbane is tiny.
+
+The description of Giantbane is "This dagger deals massive damage to big creatures, the damage bonus increasing as the size of the wielder and that of the victim differ more.".
+
+A damage modifier rule (this is the Giantbane damage bonus rule):
+	if the global attacker weapon is Giantbane:
+		let n be the size difference of the global attacker and the global defender;
+		if n is greater than 0:
+			now n is n * 2;
+			say " + ", n, " (Giantbane's special)[run paragraph on]";
+			increase the attack damage by n.
+
 			
 Section - Dagger of draining (monster)
 
