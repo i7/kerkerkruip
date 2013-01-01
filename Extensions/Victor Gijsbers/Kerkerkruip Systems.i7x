@@ -297,6 +297,12 @@ Size is a kind of value. The sizes are tiny, small, medium, large, huge and garg
 
 A thing has a size. A thing is usually medium.
 
+A person has a size called the base size.
+
+Last when play begins (this is the set base size rule):
+	repeat with guy running through persons:
+		now base size of guy is size of guy.
+
 Understand the size property as describing a thing.
 
 Before printing the name of a weapon (called item):
@@ -433,17 +439,17 @@ To decrease the size of (item - a weapon):
 	
 A dungeon interest rule (this is the change weapon sizes rule):
 	repeat with item running through not off-stage not non-treasure not carried not size-agnostic weapons:
-		if a random chance of 1 in 30 succeeds:
+		if a random chance of 1 in 20 succeeds:
 			decrease the size of item;
-			if a random chance of 1 in 5 succeeds:
+			if a random chance of 1 in 2 succeeds:
 				decrease the size of item;
 			if generation info is true, say "* Now [item] is [size of item].";
 		otherwise:
 			if a random chance of 1 in 10 succeeds:
 				increase the size of item;
-				if a random chance of 1 in 2 succeeds:
+				if a random chance of 2 in 3 succeeds:
 					increase the size of item;
-					if a random chance of 1 in 2 succeeds:
+					if a random chance of 2 in 3 succeeds:
 						increase the size of item;
 				if generation info is true, say "* Now [item] is [size of item].".
 
