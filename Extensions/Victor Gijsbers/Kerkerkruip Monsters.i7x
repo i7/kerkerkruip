@@ -422,10 +422,10 @@ Status skill rule (this is the ape power status skill rule):
 	if power of the ape is granted:
 		say "[if maximum ape power is not tiny and maximum ape power is not small and maximum ape power is not medium]Whenever you damage an enemy, you will grow -- up to [maximum ape power] size[otherwise]The ape was too small to give you a special power[end if]. [italic type](Level 1)[roman type][line break][run paragraph on]".
 			
-Every turn when the player is not medium (this is the revert back to normal rule):
+Every turn when the size of the player is not the base size of the player (this is the revert back to normal rule):
 	if combat status is peace:
-		say "As the combat is over, you revert back to [bold type]medium size[roman type].";
-		now the player is medium.
+		say "As the combat is over, you revert back to [bold type][base size of the player] size[roman type].";
+		now the size of the player is the base size of the player.
 
 
 
