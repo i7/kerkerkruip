@@ -1410,6 +1410,43 @@ A mind bonus rule (this is the banshee mind bonus rule):
 		decrease faculty bonus score by bansheemod.
 
 
+
+Chapter - Tungausy Sweat Lodge 
+
+The Tungausy Sweat Lodge is a room. "The penetrating scent of dozens indigenous herbs pervade your nostrils as you enter the Tungausy Sweat Lodge.  A large circle of men wearing skull masks is standing around you, chanting monotonously in an ancient tongue.  In the four wind directions, incense burners are producing a grey, thick smoke. While you may feel feeble due to the intense smoke within this hall, the incense places your soul in a state of trance, assisting you in the use of religious powers. [italic type](Current tension modifier: +[incensemod] spirit, -[incensemod] on attacks.)[roman type]"
+
+The Tungausy Sweat Lodge is connectable.
+The Tungausy Sweat Lodge is not connection-inviting.
+The Tungausy Sweat Lodge is placeable.
+The Tungausy Sweat Lodge is habitable.
+The Tungausy Sweat Lodge is treasurable.
+The Tungausy Sweat Lodge is extra-accepting.
+The Tungausy Sweat Lodge is vp-agnostic.
+The Tungausy Sweat Lodge is religious.
+
+The rarity of Tungausy Sweat Lodge is 1.
+
+The incense is scenery. Understand "scent", "herbs", "indigenous", "indigenous herbs", "smoke" as incense.  The description of the incense is "The smell of the incense is pervading, containing a mixture of sweet and spicy senses". The incense is in the Tungausy Sweat Lodge.
+
+Instead of taking the incense:
+	say "The circle of chanting shamans is preventing you from getting anywhere near the incense".
+
+To decide which number is the incensemod:
+	let x be the tension;
+	now x is x divided by 4;
+	if tension is greater than 12:
+		increase x by 1;
+	decide on x.
+
+A spirit bonus rule (this is the incense spirit bonus rule):
+	if the location is the Tungausy Sweat Lodge and the combat status is not peace:
+		increase faculty bonus score by incensemod.
+
+An attack modifier rule (this is the incense penalty in Sweat Lodge rule):
+	if the location is the Tungausy Sweat Lodge:
+		say " - [incensemod] (incense penalty)[run paragraph on]";
+		decrease the attack strength by incensemod.
+
 Chapter - Columnated Ruins
 
 Columnated Ruins is a room. "This must have been a temple once, but all that is left is a forest of pillars, mostly broken and shattered. Even gods may be forgotten."
