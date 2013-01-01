@@ -663,6 +663,23 @@ An attack modifier rule (this is the Metastasio's hat grants worse attack and be
 			decrease the attack strength by 2.]
 
 
+Section - Crown of the god-king (major)
+
+The crown of the god-king is a major hat. The indefinite article is "the". 
+The crown of the god-king is religious.
+The crown of the god-king is iron.
+
+The blood magic cost of crown of the god-king is 5.
+The blood magic level of crown of the god-king is 0.
+The blood magic maximum of crown of the god-king is 99.
+
+The description of the crown of the god-king is "This terrible crown, made of magical iron needles, can grant immense powers to its wearer. But they have to be bought at a high price. [italic type](Current bonus: +[blood magic level of the crown of the god-king] to body, mind and spirit. This bonus will increase to +[blood magic level of the crown of the god-king + 1] if you feed the crown [current blood cost of crown of the god-king] blood.)[roman type]".
+
+A faculty bonus rule (this is the crown of the god-king bonus rule):
+	if the test subject wears the crown of the god-king:
+		increase faculty bonus score by blood magic level of the crown of the god-king.
+
+
 
 Chapter - Shirts
 

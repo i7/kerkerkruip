@@ -1992,4 +1992,52 @@ Carry out turning bat:
 		now the player carries X.
 
 
+
+
+
+Chapter - Blood Magic
+
+Section - Preliminaries
+
+A thing has a number called the blood magic cost. The blood magic cost of a thing is usually 0.
+A thing has a number called the blood magic level. The blood magic level of a thing is usually 0.
+A thing has a number called the blood magic maximum. The blood magic maximum of a thing is usually 0.
+
+To decide which number is the current blood cost of (item - a thing):
+	let n be (blood magic level of item) + 1;
+	now n is n * (blood magic cost of item);
+	decide on n.
+	
+Section - Feeding
+	
+Feeding is an action applying to one carried thing. Understand "feed [something]" as feeding.
+
+Check feeding:
+	if blood magic cost of the noun is 0:
+		say "You cannot feed [the noun]." instead;
+	if blood magic level of the noun is blood magic maximum of the noun:
+		say "[The noun] [is-are] satiated." instead.
+
+Carry out feeding:
+	let n be current blood cost of the noun;
+	decrease health of the player by n;
+	if health of the player is less than 1:
+		say "You feed [n] health to [the noun], which is more than your body can handle.";
+		end the game saying "Foolish people should not dabble in blood magic.";
+	otherwise:
+		say "You feed [n] health to [the noun], increasing [its-theirs] power!";
+		increase blood magic level of the noun by 1.
+
+After printing the name of a thing (called item) while taking inventory:
+	if blood magic cost of item is not 0:
+		if blood magic level of item is not blood magic maximum of item:
+			say " (can be fed [current blood cost of item] blood)".
+
+
+
+
+
+
+
+
 Kerkerkruip Systems ends here.
