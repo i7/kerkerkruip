@@ -404,6 +404,7 @@ An attack modifier rule (this is the weapon size attack modifier rule):
 				now n is 0 minus n;
 			unless n is 0:
 				let n be n times 2;
+				decrease n by 1;
 				if the numbers boolean is true, say " - [n] (weapon size)[run paragraph on]";
 				decrease the attack strength by n.
 
