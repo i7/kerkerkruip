@@ -311,7 +311,7 @@ Before printing the name of a weapon (called item):
 
 Status rule (this is the size status rule):
 	if player is not medium:
-		say "Your current size is [bold type][size of the player][roman type].[line break][run paragraph on]".
+		say "Your current size is [bold type][size of the player][roman type][if size of the player is not base size of the player], and your base size is [bold type][base size of the player][roman type][end if].[line break][run paragraph on]".
 
 
 [Note: sizes of a person are meant to reflect how big they themselves are. Sizes of objects are meant to reflect for what size person they were meant. Thus, a 'medium dagger' is much smaller than a 'medium bed': both are normal-sized objects as they are made for normal-sized humans. A huge dagger might be about the same size as a medium sword -- it would just be hard to handle for a medium person, because the hilt would be too big to grip with a hand!]
