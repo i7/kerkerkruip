@@ -440,4 +440,93 @@ A killing rule (this is the don't do delayed action with killed guy rule):
 
 
 
+
+
+
+Chapter - New Combat Actions
+
+Section - Rolling
+
+Rolling is an action applying to nothing. Understand "roll" as rolling.
+
+A person can be at-roll. A person is usually not at-roll.
+A person can be just-rolled. A person is usually not just-rolled.
+A person has a person called the rolled-at-guy.
+
+Carry out an actor rolling:
+	now the actor is at-roll;
+	try the actor dodging.
+
+A damage modifier rule (this is the rolling damage modifier rule):
+	if the global defender is at-roll:
+		say " + 3 (defender rolling)[run paragraph on]";
+		increase the attack damage by 3.
+
+Aftereffects rule (this is the set rolling variables rule):
+	if the attack strength is not greater than the defence of the global defender and the global defender is at-roll:
+		now global defender is just-rolled;
+		now rolled-at-guy of the global defender is the global attacker;
+		now the actor is not at-roll.
+
+An attack modifier rule (this is the rolling bonus rule):
+	if the global attacker is just-rolled:
+		if the rolled-at-guy of the global attacker is the global defender:
+			say " + 1 (rolled to attack)[run paragraph on]";
+			increase the attack strength by 1.
+
+A damage modifier rule (this is the rolling damage bonus rule):
+	if the global attacker is just-rolled:
+		if the rolled-at-guy of the global attacker is the global defender:
+			say " + 1 (rolled to attack)[run paragraph on]";
+			increase the attack damage by 1.
+
+Before reading a command (this is the rolling notification rule):
+	if the main actor is the player and the player is just-rolled:
+		say "(If you attack [the rolled-at-guy of the player] right now, you will get your rolling bonus.)".
+
+Every turn when main actor is just-rolled:
+	now main actor is not just-rolled.
+
+Every turn when main actor is at-roll:
+	now main actor is not at-roll.
+
+Section - Blocking
+
+Blocking is an action applying to nothing. Understand "block" as blocking.
+
+A person can be at-block. A person is usually not at-block.
+A person has a number called the block modifier.
+
+Check blocking:
+	if the concentration of the player is 0:
+		take no time;
+		say "You can only block when you are concentrated." instead.
+
+Carry out an actor blocking:
+	now the actor is at-block;
+	try the actor parrying.
+
+First carry out an actor parrying:
+	if the actor is at-block:
+		now block modifier of the actor is concentration of the actor;
+		now concentration of the actor is 0.
+
+An attack modifier rule (this is the blocking defence bonus rule):
+	if the block modifier of the global defender is not 0:
+		let n be block modifier of the global defender;
+		if passive parry max of the global attacker weapon is less than n:
+			now n is passive parry max of the global attacker weapon;
+		if n is 0:
+			say " - [n] (cannot block)[run paragraph on]";
+		otherwise:
+			say " - [n] (block bonus)[run paragraph on]";
+		decrease the attack strength by n;
+		now the actor is not at-block.
+
+Every turn when block modifier of main actor is not 0:
+	now block modifier of main actor is 0.
+
+Every turn when main actor is at-block:
+	now main actor is not at-block.
+
 Kerkerkruip ATTACK Additions ends here.
