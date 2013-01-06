@@ -1,4 +1,4 @@
-"Kerkerkruip - Release 7 - BETA" by Victor Gijsbers
+"Kerkerkruip - Release 7" by Victor Gijsbers
 
 The story headline is "An IF roguelike".
 The story genre is "dungeon crawl".
@@ -11,8 +11,11 @@ Include Basic Screen Effects by Emily Short.
 Include Numbered Disambiguation Choices by Aaron Reed.
 Include Glulx Entry Points by Emily Short.
 Include Dynamic Objects by Jesse McGrew.
-Include Epistemology by Eric Eve.
-[Doesn't work with moving people.]
+Include Epistemology by Eric Eve. [Doesn't work with moving people.]
+[Include Kerkerkruip Glimmr Additions by Erik Temple.]
+Include Flexible Windows by Jon Ingold.
+[Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. Be sure to comment Flexible Windows in instead!]
+
 Every turn (this is the mark items as seen every turn rule): 
 	repeat with item running through things that are enclosed by the location:
 		if the item is not enclosed by an opaque closed container, now the item is seen.
@@ -41,9 +44,11 @@ Include Kerkerkruip Ugly Special Cases by Victor Gijsbers.
 Include Kerkerkruip Start and Finish by Victor Gijsbers.
 Include Kerkerkruip Final Declarations by Victor Gijsbers.
 
+
 Use MAX_PROP_TABLE_SIZE of 500000.
-Use MAX_OBJ_PROP_COUNT of 128.
+Use MAX_OBJ_PROP_COUNT of 256.
 Use MAX_STATIC_DATA of 500000.
+Use MAX_OBJECTS of 650.
 
 The maximum score is 18. [1 + 1 + 2 + 2 + 3 + 4 + 5 = 18]
 The notify score changes rule is not listed in any rulebook.
@@ -59,3 +64,10 @@ Generation info is a truth state that varies. Generation info is [true]false.
 	copy scroll of ghoulification to player;
 	copy scroll of teleportation to player;
 	copy scroll of teleportation to player.]
+	
+
+[Kerkerkruip's when play begin rules don't fire until after the menu is cleared. This means that extension such as Flexible Windows that have critical startup code in when play begins need to be adjusted. Due to weaknesses in Inform's extension interactions, this has to be in story.ni rather than the Kerkerkruip Glimmr extension.]
+The allocate rocks rule is not listed in the when play begins rules. The allocate rocks rule is listed before the show the title screen rule in the startup rules.
+The rock validation rule is not listed in the when play begins rules. The rock validation rule is listed before the show the title screen rule in the startup rules.
+The initial hyperlink request rule is not listed in the when play begins rules. The initial hyperlink request rule is listed before the show the title screen rule in the startup rules.
+
