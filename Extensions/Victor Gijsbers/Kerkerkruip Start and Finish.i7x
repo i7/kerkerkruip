@@ -136,7 +136,7 @@ Rule for showing the title screen (this is the text title screen rule):
 		clear the screen;
 		redraw status line;
 		say paragraph break;		
-		if Glulx graphics is supported:
+		if glulx text-buffer graphics is supported:
 			display figure opening figure[ centered];
 		otherwise:
 			say "[bold type]Kerkerkruip[roman type] -- by Victor Gijsbers";
