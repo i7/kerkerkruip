@@ -879,9 +879,9 @@ A followers rule (this is the follower cannot follow hidden person rule):
 
 Chapter - Monster types
 
-Type is a kind of value. The types are living, undead, demonic, horrific.
+Creature-type is a kind of value. The creature-types are living, undead, demonic, horrific.
 
-A person has a type. The type of a person is usually living.
+A person has a creature-type. The creature-type of a person is usually living.
 
 Status rule (this is the undead status rule):
 	if the player is undead:
@@ -1757,7 +1757,7 @@ vampire-form
 vampirebat-form
 
 Table of Form Properties
-player form		turn-text									turn type			special rule
+player form		turn-text									turn-type			special rule
 human-form		"You turn back into a normal human being."	living			the turn-living rule
 ghoul-form		"You turn into a loathsome ghoul!"			undead			the turn-undead rule
 vampire-form		"You turn into a vampire!"					undead			the turn-undead rule
@@ -1820,7 +1820,7 @@ To turn the player into (X - a player form):
 	unless target form is current form:
 		choose row with a player form of target form in Table of Form Properties;
 		now current form is target form;
-		now type of the player is turn type entry;
+		now creature-type of the player is turn-type entry;
 		consider the special rule entry;
 		say turn-text entry;
 		say "[line break]";
