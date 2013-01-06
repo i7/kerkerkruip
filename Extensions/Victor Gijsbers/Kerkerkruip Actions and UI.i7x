@@ -354,7 +354,7 @@ Chapter - Monster information
 
 Last carry out examining a person:
 	unless the noun is the player:
-		say "[The noun] is [if level of the noun is not 0]a level [level of the noun in words] [type of the noun] [interesting faction of the noun] creature[otherwise if the group level of the noun is not 0]part of a level [group level of the noun in words] group, [type of the noun], and [interesting faction of the noun][otherwise]a levelless [type of the noun] [interesting faction of the noun] creature[end if].[run paragraph on]";
+		say "[The noun] is [if level of the noun is not 0]a level [level of the noun in words] [creature-type of the noun] [interesting faction of the noun] creature[otherwise if the group level of the noun is not 0]part of a level [group level of the noun in words] group, [creature-type of the noun], and [interesting faction of the noun][otherwise]a levelless [creature-type of the noun] [interesting faction of the noun] creature[end if].[run paragraph on]";
 		if the number of things carried by the noun is greater than 0:
 			say " [The noun] carries [a list of things carried by the noun].[run paragraph on]"; 	
 		if the number of things worn by the noun is greater than 0:
