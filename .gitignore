@@ -3,9 +3,14 @@
 * Materials
 *.i7x
 *.glk*
+.DS_Store
+Projects/Kerkerkruip.inform/Settings.plist
+Projects/Kerkerkruip.inform/manifest.plist
+Projects/Kerkerkruip.inform/uuid.txt
 
 # The stuff we want to include is listed here, prefixed with !
 !Extensions/Victor Gijsbers/Kerkerkruip*
-!Projects/Kerkerkruip Materials/Figures/Smallercover.jpg
+!Extensions/Erik Temple/Kerkerkruip*
+#Projects/Kerkerkruip Materials/Figures/  (for later, perhaps)
 
 Reserved
