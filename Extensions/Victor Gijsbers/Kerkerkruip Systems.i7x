@@ -584,7 +584,7 @@ A flying rule (this is the flyers fly rule):
 
 Status rule (this is the flying status rule):
 	if player is flying:
-		say "You are [bold type]flying[roman type].[line break][run paragraph on]".
+		say "You [if the player is flyer]have wings and [end if]are [bold type]flying[roman type].[line break][run paragraph on]".
 
 
 
@@ -615,6 +615,10 @@ A blindness rule (this is the blind if eyeless rule):
 Status rule (this is the blindness status rule):
 	if player is blind:
 		say "You are [bold type]blind[roman type].[line break][run paragraph on]".
+	
+Status rule (this is the eyeless status rule):
+	if player is eyeless:
+		say "You do not need [bold type]eyes[roman type] to perceive your surroundings.[line break][run paragraph on]".	
 
 An attack modifier rule (this is the blindness attack modifier rule):
 	if the global attacker is blind and the global attacker is not eyeless:
