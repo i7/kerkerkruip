@@ -358,7 +358,8 @@ Last carry out examining a person:
 		if the number of things carried by the noun is greater than 0:
 			say " [The noun] carries [a list of things carried by the noun].[run paragraph on]"; 	
 		if the number of things worn by the noun is greater than 0:
-			say " [The noun] wears [a list of things worn by the noun].[run paragraph on]"; 				
+			say " [The noun] wears [a list of things worn by the noun].[run paragraph on]";
+		say " [The noun] [is-are] of [size of the noun] size, and [has-have] [health of the noun] of [permanent health of the noun] health left.[run paragraph on]" ;
 		say "[paragraph break]".
 		
 To say interesting faction of (guy - a person):
