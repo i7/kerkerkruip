@@ -1626,6 +1626,8 @@ Lair of the Imp is extra-accepting.
 Lair of the Imp is vp-agnostic.
 Lair of the Imp is magical.
 
+Rariryt of the Lair of the Imp is 3. [Should be special.]
+
 Instead of smelling the lair of the imp:
 	say "Mostly sulphur, but you'd recognise this smell anywhere -- you used to have a pet imp when you were an apprentice."
 
