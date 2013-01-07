@@ -626,17 +626,11 @@ An attack modifier rule (this is the blindness defence modifier rule):
 		say " + 2 (defender blind)[run paragraph on]";
 		increase the attack strength by 2;
 
-[TODO FIX]
-[Chance to win rule (this is the CTW blindness bonus rule):
+Chance to win rule (this is the CTW blindness bonus rule):
 	if the global attacker is blind and the global attacker is not eyeless:
 		decrease the chance-to-win by 3;
 	if the global defender is blind and the global defender is not eyeless:
-		increase the chance-to-win by 2.]
-
-[A perception test rule (this is the blindness affects perception rule):
-	if the test subject is blind and the test subject is not eyeless:
-		decrease test score by 3;
-		say " - 3 (blindness)[run paragraph on]".]
+		increase the chance-to-win by 2.
 
 
 Chapter - Healing
@@ -1877,7 +1871,7 @@ This is the turn-vampire rule:
 
 Status rule (this is the vampire status rule):
 	if current form is vampire-form:
-		say "You are a [bold type]vampire[roman type]: +2 willpower, +1 attack, -2 defence, modest bonus to hiding, can turn into a [italic type]bat[roman type].[line break][run paragraph on]".
+		say "You are a [bold type]vampire[roman type]: +2 mind, +1 attack, -2 defence, modest bonus to hiding, can turn into a [italic type]bat[roman type].[line break][run paragraph on]".
 
 A faculty bonus rule (this is the mind bonus of vampire rule):
 	if tested faculty is mind:
