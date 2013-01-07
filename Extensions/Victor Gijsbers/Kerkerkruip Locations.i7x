@@ -1464,6 +1464,9 @@ The rarity of Collumnated Ruins is 1.
 
 The pillars are scenery in columnated ruins. The description of the pillars is "Larger creatures will have trouble navigating the dense forest of pillars, while smaller creatures will find many easy spots to duck away.".
 
+Instead of pushing or pulling or attacking the pillars:
+	say "They are too tough to play domino with.".
+
 An attack modifier rule (this is the attack penalty in Columnated Ruins rule):
 	if the location is Columnated Ruins:
 		let n be the size difference of the global attacker and the global defender;
