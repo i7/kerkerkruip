@@ -395,9 +395,9 @@ Carry out remembering:
 				say ", ";
 			otherwise:
 				say ".";
-	if at least two seen persons are alive: [because one of them is the player]
+	if at least two seen not off-stage persons are alive: [because one of them is the player]
 		say "[line break]You have seen the following creatures in these locations:[line break]";
-		repeat with guy running through alive seen persons:
+		repeat with guy running through alive seen not off-stage persons:
 			unless player is guy:
 				unless last-seen-location of guy is Null-Room:
 					say "- [italic type][the guy][roman type] (level [if group level of the guy is not 0][group level of the guy][otherwise][level of the guy][end if]) in [italic type][the last-seen-location of the guy][roman type] ([if last-seen-location of the guy is not the location]which lies [the road to last-seen-location of the guy] from here[otherwise]where you currently are[end if])[line break]";
