@@ -1,8 +1,8 @@
-"Kerkerkruip - Release 7" by Victor Gijsbers
+"Kerkerkruip - Release 8 - BETA" by Victor Gijsbers
 
 The story headline is "An IF roguelike".
 The story genre is "dungeon crawl".
-The release number is 7.
+The release number is 8.
 [Release along with cover art.]
 
 	

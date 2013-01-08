@@ -1464,6 +1464,9 @@ The rarity of Collumnated Ruins is 1.
 
 The pillars are scenery in columnated ruins. The description of the pillars is "Larger creatures will have trouble navigating the dense forest of pillars, while smaller creatures will find many easy spots to duck away.".
 
+Instead of pushing or pulling or attacking the pillars:
+	say "They are too tough to play domino with.".
+
 An attack modifier rule (this is the attack penalty in Columnated Ruins rule):
 	if the location is Columnated Ruins:
 		let n be the size difference of the global attacker and the global defender;
@@ -1625,6 +1628,8 @@ Lair of the Imp is teleportable.
 Lair of the Imp is extra-accepting.
 Lair of the Imp is vp-agnostic.
 Lair of the Imp is magical.
+
+Rarity of the Lair of the Imp is 3. [Should be special.]
 
 Instead of smelling the lair of the imp:
 	say "Mostly sulphur, but you'd recognise this smell anywhere -- you used to have a pet imp when you were an apprentice."

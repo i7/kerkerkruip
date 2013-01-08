@@ -3049,7 +3049,7 @@ An aftereffects rule (this is the demon whip rule):
 	if the global attacker weapon is the demon whip:
 		if the attack damage is greater than 0:
 			if the global defender is alive:
-				say "The demon whip [bold type]breaks [possessive of the global defender] willpower[roman type] (-2 mind score)![paragraph break]";
+				say "The demon whip [bold type]breaks [possessive of the global defender] will[roman type] (-2 mind score)![paragraph break]";
 				decrease mind score of global defender by 2;
 				if global defender is the player and global attacker is the demonic mistress:
 					if final mind of the player is less than 1:

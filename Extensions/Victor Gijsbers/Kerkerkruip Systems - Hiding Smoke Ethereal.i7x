@@ -328,14 +328,6 @@ An attack modifier rule (this is the retreating is less risky with smoke rule):
 		say " - [n] (retreat covered by smoke)[run paragraph on]";
 		decrease the attack strength by n.
 
-[A perception test rule when the attacker is affected by smoke (this is the perception penalty of smoke rule): [BUG with chain golem]
-	let n be smoke penalty of the location;
-	decrease test score by n;
-	say " - [n] (smoke)[run paragraph on]".]
-
-
-
-
 
 
 
