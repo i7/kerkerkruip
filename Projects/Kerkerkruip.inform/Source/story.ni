@@ -13,6 +13,7 @@ Include Glulx Entry Points by Emily Short.
 Include Dynamic Objects by Jesse McGrew.
 Include Epistemology by Eric Eve. [Doesn't work with moving people.]
 [Include Kerkerkruip Glimmr Additions by Erik Temple.]
+Include Glulx Status Window Control by Erik Temple.[Not needed when the Glimmr additions are included]
 Include Flexible Windows by Jon Ingold.
 [Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. Be sure to comment Flexible Windows in instead!]
 
@@ -77,5 +78,36 @@ Section - Relist rock validation rule (not for release)
 The rock validation rule is not listed in the when play begins rules. The rock validation rule is listed before the show the title screen rule in the startup rules.
 
 
+Chapter - Multiple windows test
 
+Table of Common Color Values (continued)
+glulx color value	assigned number
+g-stats-color	15658734
+g-inventory-color	14540253
+
+
+The back-colour of the main-window is g-white.[For CocoaGlk]
+
+The stats-window is a text-buffer g-window spawned by the main-window. The back-colour is g-stats-color. The measurement is 30. The position is g-placeright.
+
+The inventory-window is a text-buffer g-window spawned by the stats-window. The back-colour is g-inventory-color. The measurement is 50. The position is g-placebelow.
+
+Window-drawing rule for the stats-window (this is the construct stats window rule):
+	move focus to stats-window, clearing the window;
+	try asking status;
+	return to main screen.
+
+Window-drawing rule for the inventory-window (this is the construct inventory window rule):
+	move focus to inventory-window, clearing the window;
+	try taking inventory;
+	return to main screen.
+
+Last when play begins:
+	open the status window;
+	open up the stats-window;
+	open up the inventory-window;
+	
+Last every turn rule:
+	follow the window-drawing rules for the stats-window;
+	follow the window-drawing rules for the inventory-window;
 
