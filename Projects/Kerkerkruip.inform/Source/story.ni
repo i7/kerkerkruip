@@ -12,8 +12,10 @@ Include Numbered Disambiguation Choices by Aaron Reed.
 Include Glulx Entry Points by Emily Short.
 Include Dynamic Objects by Jesse McGrew.
 Include Epistemology by Eric Eve. [Doesn't work with moving people.]
+Include Glulx Status Window Control by Erik Temple.
 Include Kerkerkruip Glimmr Additions by Erik Temple.
 [Include Flexible Windows by Jon Ingold.]
+
 [Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. Be sure to comment Flexible Windows in instead!]
 
 Every turn (this is the mark items as seen every turn rule): 
@@ -77,5 +79,8 @@ Section - Relist rock validation rule (not for release)
 The rock validation rule is not listed in the when play begins rules. The rock validation rule is listed before the show the title screen rule in the startup rules.
 
 
+Chapter - Menu code adjustments
 
+Before displaying:
+	open the status window.
 
