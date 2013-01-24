@@ -2,7 +2,6 @@ Kerkerkruip Glimmr Additions by Erik Temple begins here.
 
 Use authorial modesty.
 
-Include Glulx Status Window Control by Erik Temple.
 Include Glimmr Graphic Hyperlinks by Erik Temple.
 Include Glimmr Canvas Animation by Erik Temple.
 Include Glimmr Bitmap Font by Erik Temple.
@@ -19,11 +18,22 @@ To say <:
  	say stream of main-window;
 	say run paragraph on.
 	
-First when play begins:
-	Try switching the story transcript on.]
+First for showing the title screen:
+	Try switching the story transcript on;
+	continue the action.]
+
+
+Chapter - Simplifying Glimmr credits
+
+The announce colophon rule is not listed in any rulebook.
 
 
 Chapter - Assets
+
+A figure name has a number called the y-offset. The y-offset of a figure-name is usually 0.[It is not necessary for all figure-names to get this property, but a bug in Inform prevents us from referring to the property if it is not defined in this way.]
+
+Section - Sounds
+
 
 Section - Minimovies
 
@@ -188,7 +198,73 @@ Figure of title_00036 is the file "title_00036.jpg".
 Figure of title_00037 is the file "title_00037.jpg".
 Figure of title_00038 is the file "title_00038.jpg".
 Figure of title_00039 is the file "title_00039.jpg".
-Figure of title_00040 is the file "title_00040.jpg".
+Figure of title_00040 is the file "title_00040.jpg".[Hold here - basic title]
+Figure of title_00041 is the file "title_00041.jpg".
+Figure of title_00042 is the file "title_00042.jpg".
+Figure of title_00043 is the file "title_00043.jpg".
+Figure of title_00044 is the file "title_00044.jpg".
+Figure of title_00045 is the file "title_00045.jpg".
+Figure of title_00046 is the file "title_00046.jpg".
+Figure of title_00047 is the file "title_00047.jpg".
+Figure of title_00048 is the file "title_00048.jpg".
+Figure of title_00049 is the file "title_00049.jpg".
+Figure of title_00050 is the file "title_00050.jpg".
+Figure of title_00051 is the file "title_00051.jpg".
+Figure of title_00052 is the file "title_00052.jpg".
+Figure of title_00053 is the file "title_00053.jpg".
+Figure of title_00054 is the file "title_00054.jpg".[Loop starts here]
+Figure of title_00055 is the file "title_00055.jpg".
+Figure of title_00056 is the file "title_00056.jpg".
+Figure of title_00057 is the file "title_00057.jpg".
+Figure of title_00058 is the file "title_00058.jpg".
+Figure of title_00059 is the file "title_00059.jpg".
+Figure of title_00060 is the file "title_00060.jpg".
+Figure of title_00061 is the file "title_00061.jpg".
+Figure of title_00062 is the file "title_00062.jpg".
+Figure of title_00063 is the file "title_00063.jpg".
+Figure of title_00064 is the file "title_00064.jpg".
+Figure of title_00065 is the file "title_00065.jpg".[Loop ends here]
+
+
+Section - Rogues Gallery transition
+
+Figure of transition_RoguesGallery_00001 is the file "transition_RoguesGallery_00001.jpg".
+Figure of transition_RoguesGallery_00002 is the file "transition_RoguesGallery_00002.jpg".
+Figure of transition_RoguesGallery_00003 is the file "transition_RoguesGallery_00003.jpg".
+Figure of transition_RoguesGallery_00004 is the file "transition_RoguesGallery_00004.jpg".
+Figure of transition_RoguesGallery_00005 is the file "transition_RoguesGallery_00005.jpg".
+Figure of transition_RoguesGallery_00006 is the file "transition_RoguesGallery_00006.jpg".
+Figure of transition_RoguesGallery_00007 is the file "transition_RoguesGallery_00007.jpg".
+Figure of transition_RoguesGallery_00008 is the file "transition_RoguesGallery_00008.jpg".
+Figure of transition_RoguesGallery_00009 is the file "transition_RoguesGallery_00009.jpg".
+Figure of transition_RoguesGallery_00010 is the file "transition_RoguesGallery_00010.jpg".
+Figure of transition_RoguesGallery_00011 is the file "transition_RoguesGallery_00011.jpg".
+Figure of transition_RoguesGallery_00012 is the file "transition_RoguesGallery_00012.jpg".
+Figure of transition_RoguesGallery_00013 is the file "transition_RoguesGallery_00013.jpg".
+Figure of transition_RoguesGallery_00014 is the file "transition_RoguesGallery_00014.jpg".
+Figure of transition_RoguesGallery_00015 is the file "transition_RoguesGallery_00015.jpg".
+Figure of transition_RoguesGallery_00016 is the file "transition_RoguesGallery_00016.jpg".
+Figure of transition_RoguesGallery_00017 is the file "transition_RoguesGallery_00017.jpg".
+Figure of transition_RoguesGallery_00018 is the file "transition_RoguesGallery_00018.jpg".
+Figure of transition_RoguesGallery_00019 is the file "transition_RoguesGallery_00019.jpg".
+Figure of transition_RoguesGallery_00020 is the file "transition_RoguesGallery_00020.jpg".
+Figure of transition_RoguesGallery_00021 is the file "transition_RoguesGallery_00021.jpg".
+Figure of transition_RoguesGallery_00022 is the file "transition_RoguesGallery_00022.jpg".
+Figure of transition_RoguesGallery_00023 is the file "transition_RoguesGallery_00023.jpg".
+Figure of transition_RoguesGallery_00024 is the file "transition_RoguesGallery_00024.jpg".
+Figure of transition_RoguesGallery_00025 is the file "transition_RoguesGallery_00025.jpg".
+Figure of transition_RoguesGallery_00026 is the file "transition_RoguesGallery_00026.jpg".
+Figure of transition_RoguesGallery_00027 is the file "transition_RoguesGallery_00027.jpg".
+Figure of transition_RoguesGallery_00028 is the file "transition_RoguesGallery_00028.jpg".
+Figure of transition_RoguesGallery_00029 is the file "transition_RoguesGallery_00029.jpg".
+Figure of transition_RoguesGallery_00030 is the file "transition_RoguesGallery_00030.jpg".
+Figure of transition_RoguesGallery_00031 is the file "transition_RoguesGallery_00031.jpg".
+Figure of transition_RoguesGallery_00032 is the file "transition_RoguesGallery_00032.jpg".
+Figure of transition_RoguesGallery_00033 is the file "transition_RoguesGallery_00033.jpg".
+Figure of transition_RoguesGallery_00034 is the file "transition_RoguesGallery_00034.jpg".
+Figure of transition_RoguesGallery_00035 is the file "transition_RoguesGallery_00035.jpg".
+Figure of transition_RoguesGallery_00036 is the file "transition_RoguesGallery_00036.jpg".
+Figure of transition_RoguesGallery_00037 is the file "transition_RoguesGallery_00037.jpg".
 
 
 Section - Main Menu
@@ -197,6 +273,7 @@ Section - Main Menu
 Figure of Button-Continue is the file "button-Continue.png".
 Figure of Button-Help is the file "button-Help.png".
 Figure of Button-New Game is the file "button-New Game.png".
+Figure of Button-Options is the file "button-Options.png".
 Figure of Button-Quit is the file "button-Quit.png".
 Figure of Button-Reset is the file "button-Reset.png".
 Figure of Button-Score Info is the file "button-Score-Info.png".
@@ -211,7 +288,7 @@ Figure of Tooltip-Score is the file "tooltip-Score.png".
 [Type slugs for difficulty levels]
 Figure of Diff-Adept is the file "slug-Difficulty-Adept.png".
 Figure of Diff-Angel is the file "slug-Difficulty-Angel.png".
-Figure of Diff-Apprentice is the file "slug-Difficulty-Apprentice.png".
+Figure of Diff-Apprentice is the file "slug-Difficulty-Apprentice.png". 
 Figure of Diff-Demon is the file "slug-Difficulty-Demon.png".
 Figure of Diff-Emperor is the file "slug-Difficulty-Emperor.png".
 Figure of Diff-Empress is the file "slug-Difficulty-Empress.png".
@@ -229,10 +306,14 @@ Figure of Diff-Queen is the file "slug-Difficulty-Queen.png".
 
 Section - Monster cards
 
-Figure of card-RoguesGallery is the file "card-RoguesGallery_24bit.png".
-Figure of card-MalygrisAwaits is the file "card-MalygrisAwaits_24bit.png".
-Figure of card-Miranda is the file "card-Miranda_24bit.png".
-Figure of card-Daggers is the file "card-Daggers_24bit.png".
+[Type slug for stats]
+Figure of slug-Card-stats is the file "slug-Card-stats.png".
+
+[Card art]
+Figure of card-Armadillo is the file "card-Armadillo.jpg".
+Figure of card-Chain_Golem is the file "card-Chain_Golem.jpg".
+Figure of card-Daggers is the file "card-Daggers.jpg".
+Figure of card-Miranda is the file "card-Miranda.jpg".
 
 
 Chapter - Mini-movie definitions
@@ -261,16 +342,78 @@ Chapter - Title animation
 The title-animation is an animation track. The image-reel is {Figure of title_00001, Figure of title_00002, Figure of title_00003, Figure of title_00004, Figure of title_00005, Figure of title_00006, Figure of title_00007, Figure of title_00008, Figure of title_00009, Figure of title_00010, Figure of title_00011, Figure of title_00012, Figure of title_00013, Figure of title_00014, Figure of title_00015, Figure of title_00016, Figure of title_00017, Figure of title_00018, Figure of title_00019, Figure of title_00020, Figure of title_00021, Figure of title_00022, Figure of title_00023, Figure of title_00024, Figure of title_00025, Figure of title_00026, Figure of title_00027, Figure of title_00028, Figure of title_00029, Figure of title_00030, Figure of title_00031, Figure of title_00032, Figure of title_00033, Figure of title_00034, Figure of title_00035, Figure of title_00036, Figure of title_00037, Figure of title_00038, Figure of title_00039, Figure of title_00040}.
 
 
+Chapter - Title instructions
 
-Chapter - Graphics
-[Still to do here: Add a question before the title screen: "Do you want graphics? (Graphics are not compatible with screen readers.)" This would appear only for first-time players, and would only be shown if the interpreter supports graphics. We save the decision into the data table.]
+[Display the start button text and the rogues gallery info, for use only until some level 1 or greater enemies have been killed.]
+The title-instruction track is an animation track. The image-reel is {Figure of title_00041, Figure of title_00042, Figure of title_00043, Figure of title_00044, Figure of title_00045, Figure of title_00046, Figure of title_00047, Figure of title_00048, Figure of title_00049, Figure of title_00050, Figure of title_00051, Figure of title_00052, Figure of title_00053}.
 
-Title-graphics is a truth state variable.
+[Flash the start button text]
+The start-button track is an animation track. The image-reel is {Figure of title_00054, Figure of title_00055, Figure of title_00056, Figure of title_00057, Figure of title_00058, Figure of title_00059, Figure of title_00060, Figure of title_00061, Figure of title_00062, Figure of title_00063, Figure of title_00064, Figure of title_00065}.
+
+
+Section - Rogues Gallery transition
+
+The gallery-transition is an animation track. The image-reel is {Figure of transition_RoguesGallery_00001, Figure of transition_RoguesGallery_00002, Figure of transition_RoguesGallery_00003, Figure of transition_RoguesGallery_00004, Figure of transition_RoguesGallery_00005, Figure of transition_RoguesGallery_00006, Figure of transition_RoguesGallery_00007, Figure of transition_RoguesGallery_00008, Figure of transition_RoguesGallery_00009, Figure of transition_RoguesGallery_00010, Figure of transition_RoguesGallery_00011, Figure of transition_RoguesGallery_00012, Figure of transition_RoguesGallery_00013, Figure of transition_RoguesGallery_00014, Figure of transition_RoguesGallery_00015, Figure of transition_RoguesGallery_00016, Figure of transition_RoguesGallery_00017, Figure of transition_RoguesGallery_00018, Figure of transition_RoguesGallery_00019, Figure of transition_RoguesGallery_00020, Figure of transition_RoguesGallery_00021, Figure of transition_RoguesGallery_00022, Figure of transition_RoguesGallery_00023, Figure of transition_RoguesGallery_00024, Figure of transition_RoguesGallery_00025, Figure of transition_RoguesGallery_00026, Figure of transition_RoguesGallery_00027, Figure of transition_RoguesGallery_00028, Figure of transition_RoguesGallery_00029, Figure of transition_RoguesGallery_00030, Figure of transition_RoguesGallery_00031, Figure of transition_RoguesGallery_00032, Figure of transition_RoguesGallery_00033, Figure of transition_RoguesGallery_00034, Figure of transition_RoguesGallery_00035, Figure of transition_RoguesGallery_00036, Figure of transition_RoguesGallery_00037}.
+
+
+Chapter - Graphics support and preferences
+
+Full graphics support is a truth state variable.
 
 Rule for starting the virtual machine (this is the graphics support rule):
 	[This rule will change to also check whether the player has made a choice about graphics, i.e. whether data value 5 exists. We'll probably need to move it to a new rulebook.]
 	if glulx graphics is supported and glulx graphic-window mouse input is supported and glulx timekeeping is supported and glulx PNG transparency is supported:
-		now title-graphics is true.
+		now full graphics support is true.
+
+Before showing the title screen (this is the request graphics preferences rule):
+	if data value 5 is 0[i.e., no value] and full graphics support is true:
+		say "[italic type]If you are using a screen reader to play the game, you should answer NO. The main menu graphics are not compatible with screen readers. The graphics preference can also be changed from the Options menu.[roman type][paragraph break]";
+		say "[bold type]Would you like menu graphics?[roman type] ";
+		if the player consents:
+			set data value 5 to 1;
+		otherwise:
+			set data value 5 to -1;
+		clear the main-window.
+
+The request graphics preferences rule is listed after the load the file of data storage rule in the before showing the title screen rules.
+
+
+Section - Setting graphics preferences from the command line
+
+Setting graphics on is an action out of world. Understand "graphics on" as setting graphics on.
+
+Carry out setting graphics on:
+	if data value 5 is 1:
+		say "Graphics are already turned on.";
+	otherwise:
+		set data value 5 to 1;
+		if data value 5 is not 1:
+			say "Warning: Could not set graphics preference.";
+		otherwise:
+			say "Graphics will be used to display the main menu."
+
+Setting graphics off is an action out of world. Understand "graphics off" as setting graphics off.
+
+Carry out setting graphics off:
+	if data value 5 is -1:
+		say "Graphics are already turned off.";
+	otherwise:
+		set data value 5 to -1;
+		if data value 5 is not -1:
+			say "Warning: Could not set graphics preference.";
+		otherwise:
+			say "Graphics will no longer be used to display the main menu."
+
+
+Chapter - Session flag
+
+Carry out restarting the game (this is the set session flag on restart rule):
+	[This sets a flag that we can check--and reset--to decide whether or not to show the title animation before the main menu.]
+	set data value 6 to 1.
+
+First carry out quitting the game (this is the set session flag on quit rule):
+	[We set the session flag to 0 on quit. This will almost never be necessary, but it helps assure that we will see the animated title on starting a new session.]
+	set data value 6 to 0.
 
 
 Chapter - Set up the graphics window
@@ -286,27 +429,81 @@ Section - Easy delays
 
 The pause track is an animation track.
 
-To pause for (T - number) milliseconds/ms:
-	animate the pause track as a temporalizing animation at T ms per frame with a duration of 1 frame;
-	delay input until all animations are complete.
+To pause for (T - number) milliseconds/ms, accepting input:
+	animate the pause track as a temporalizing animation at 130 ms per frame[8fps] with a duration of (T / 130)frames;
+	if accepting input:
+		wait for main menu input until all animations are complete;
+	otherwise:
+		delay input until all animations are complete.
 
 
-Chapter - Basic graphic title screen rule
+For updating graphics windows for animation when pause track is animation-active (this is the don't refresh windows while we are merely holding rule):
+	do nothing.
+	
 
-For showing the title screen when title-graphics is true (this is the graphic title screen rule):
+
+Chapter - Menu control
+
+Menu-active is a truth state variable.
+
+For showing the title screen when full graphics support is true and data value 5 is 1 (this is the graphic title screen rule):
+	close the status window;
+	let session flag be false;
 	open up the graphics-window;
-	clear the main-window;
-	display animated titles.
-
-
-Chapter - Main title
-
-To display animated titles:
-	show a minimovie;[will later have a test to determine whether a movie should be shown--we only display the movie and title on the first game in a given play session. Subsequent restarts will return directly to the main menu.]
-	show the title;
-	fade in the main menu;
+	if data value 6 is 1:
+		now session flag is true;
+		set data value 6 to 0;
+	if session flag is false:
+		show a minimovie;
+		show the title;
+	now menu-active is true;
+	while menu-active is true:
+		close the status window;[on returning from a text menu]
+		open up the graphics-window;[it is possible that it may be closed on return from a menu]
+		fade in the main menu;
+		pause for 2000 milliseconds, accepting input;
+		if the number of entries in the monster-card queue is greater than 0:
+			if menu-active is true:
+				transition to monster card gallery;
+			if menu-active is true:
+				animate monster cards;
+		otherwise if menu-active is true:
+			show startup instructions;
+	clear the main-window;[we don't want to see old content in the main window when the menu closes]
 	close title screen;
 	open the status window.
+
+To menu-start new game:
+	if the file of save data exists:
+		delete file of save data;
+		unless difficulty is less than 2:
+			set difficulty to (difficulty - 1);
+
+To menu-continue game:
+	do nothing.
+
+To menu-quit game:
+	clear the main-window;[Some interpreters will show the main window after we've quit, so we handle that.]
+	say "Thank you for playing Kerkerkruip!";
+	close title screen;
+	stop game abruptly.
+
+To menu-request help menu:
+	now the current menu is the Table of Kerkerkruip Help;
+	close title screen;
+	carry out the displaying activity.
+
+To menu-request options menu:
+	now the current menu is Table of Options Menu;
+	close title screen;
+	carry out the displaying activity.
+
+To menu-skip novice:
+	set difficulty to 1;
+	delete file of save data.
+
+
+Chapter - Title animation
 
 
 Section - Show a minimovie
@@ -328,13 +525,13 @@ To show a minimovie:
 	delay input until all animations are complete;
 	deactivate the command-container;
 	animate the film as a reel animation targeting the opening-canvas at 8 fps;
-	delay input until all animations are complete.
+	delay input until all animations are complete.[input is not allowed during the minimovie.]
 	
 
 Animation rule for the command-movie:
 	let cur-frame be the current-frame of the command-movie;
-	if cur-frame - 3 is greater than 0:
-		if the remainder after dividing (cur-frame - 3) by 2 is 0:
+	if cur-frame - 6 is greater than 0:
+		if the remainder after dividing (cur-frame - 6) by 2 is 0:
 			increase the cursor-position of the command-movie by 1;
 			if the cursor-position of the command-movie > string-length of the command-movie:
 				cease animating the command-movie;
@@ -348,18 +545,17 @@ Animation rule for the command-movie:
 
 Section - Show the title
 
-The title-screen is a g-canvas. The canvas-width is 660. The canvas-height is 718.
+The title-screen is a g-canvas. The canvas-width is 660. The canvas-height is 718.[Same as the main menu, for convenience's sake, since the final frame of the title image will carry forward into the menu.]
 
-The title-container is a sprite. It is center-aligned. The origin is {330, 359}. The display-layer is 10000. The associated canvas is the title-screen.
+The title-container is a sprite. It is center-aligned. The origin is {330, 359}. The associated canvas is the title-screen.
 
 To show the title:
 	now the associated canvas of the graphics-window is the title-screen;
 	animate the title-animation as a reel animation targeting the title-container at 8 fps;
-	delay input until all animations are complete;
-	now the associated canvas of the title-container is the main-menu.
+	delay input until all animations are complete.[Input is not allowed during the title animation.]
 
 
-Section - Main menu
+Chapter - Main menu
 
 The main-menu is a g-canvas. The canvas-width is 660. The canvas-height is 718.
 
@@ -382,10 +578,38 @@ sprite	image-ID	origin
 Continue_Game	Figure of Button-Continue	{55, 15}
 Help_Button	Figure of Button-Help	{236, 51}
 New_Game	Figure of Button-New Game	{56, 51}
-Quit_Game	Figure of Button-Quit	{339, 51}
-Reset_Victories	Figure of Button-Reset	{521, 674}
+Options_Button	Figure of Button-Options	{339, 51}
+Quit_Game	Figure of Button-Quit	{482, 51}
+[Reset_Victories	Figure of Button-Reset	{521, 674}[without a modal confirmation, it seems best to leave this for the Options menu]]
 ScoreInfo_Button	Figure of Button-Score Info	{587, 672}[680]
 Skip_Button	Figure of Button-Skip Apprentice	{70, 674}
+
+
+A type-container is a kind of image-rendered string. The associated canvas of a type-container is the main-menu. Some type-containers are defined by the Table of Image String Boxes. The display-layer of a type-container is 11000.
+
+Table of Image String Boxes
+image-rendered string	origin	associated font	text-string	display status
+current-difficulty	{144, 650}	Humanist-small	"(0)"	g-active
+highest-difficulty	{416, 650}	Humanist-small	"(0)"	g-active
+
+
+
+Chapter - Monster cards
+
+slug-Card-stats is a type-slug. The image-ID is Figure of slug-Card-stats. The origin is {456, 284}. The display status is g-inactive. The display-layer is 2. [401, 189]
+The slug-Card-stats has a number called the y-standard. The y-standard of the slug-Card-stats is 284.
+
+A card-type-container is a kind of type-container. The display-layer of a card-type-container is usually 3. A card-type-container is usually center-aligned. The display status of a card-type-container is g-inactive. The associated font of a card-type-container is usually Humanist-large.
+
+A card-type-container has a number called the y-standard.
+
+Some card-type-containers are defined by the Table of Monster Card Type Containers.
+
+Table of Monster Card Type Containers
+card-type-container	origin	y-standard	text-string
+kill-counter	{520, 334}	334	"0"
+death-counter	{520, 425}	425	"0"
+
 
 
 Section - Fading in the main menu
@@ -393,22 +617,288 @@ Section - Fading in the main menu
 The menu fade-up track is an animation track.
 
 To fade in the main menu:
+	now the image-ID of the transition-container is the image-ID of the title-container;
 	now the associated canvas of the graphics-window is the main-menu;
+	prepare type slugs;
+	prepare difficulty levels for display;
+	prepare monster cards;
+	repeat with el running through card-type-containers:
+		deactivate el;[hides type slug for cards; they will be turned on when card display begins]
 	animate the menu fade-up track as a fade animation targeting the main-menu and using the Black-Fader from 100 % to 0 % at 8 fps with a duration of 6 frames;
-	delay input until all animations are complete;
-	pause for 4000 ms.
+	wait for main menu input until all animations are complete.[Input is allowed once we are fading in to the menu.]
+
+
+Section - Show the startup instructions
+[The animation here will also trigger, via callback, a second animation that will loop until we provide input.]
+
+To show startup instructions:
+	animate the title-instruction track as a reel animation targeting the transition-container at 8 fps;
+	wait for main menu input until all animations are complete;
+	animate the start-button track as a reel animation targeting the transition-container at 8 fps, cycling;
+	wait for main menu input until all animations are complete.
+
+
+Section - Transition animation
+[The transition links the title image to the rogues gallery. If there are no enemies in the gallery yet, we have a different treatment.]
+
+The transition-container is a sprite. It is center-aligned. The image-ID is Figure of Null. The origin is {330, 359}. The display-layer is 10000. The associated canvas is the main-menu.
+
+To transition to monster card gallery:
+	animate the gallery-transition as a reel animation targeting the transition-container at 8 fps;
+	wait for main menu input until all animations are complete;
+	pause for 1000 milliseconds, accepting input;
+	now the image-ID of the transition-container is the image-ID of the card-container.
+
+
+Section - Animate cards
+
+The card-container is a sprite. It is center-aligned. The image-ID is Figure of Null. The origin is {330, 359}. The display-layer is 1. The associated canvas is the main-menu.
+
+The card-occluder is a rectangle primitive. The tint is g-black. The origin is {55, 95}. The endpoint is {610, 623}. The display status is g-inactive. The display-layer is 10000. The associated canvas is the main-menu.
+
+The card-fader track is an animation track.
+
+The card-iteration track is an animation track.[ The card-iteration track has a number called animation-index.]
+
+To animate monster cards:
+	deactivate the transition-container;
+	activate slug-Card-stats;
+	repeat with item running through card-type-containers:
+		activate item;
+	let index be 0;
+	while menu-active is true:
+		close the status window;[on returning from a text menu]
+		open up the graphics-window;[it is possible that it may be closed on return from a menu]
+		increase index by 1;
+		if index > number of entries in the monster-card queue:
+			now index is 1;
+		let current-creature be entry index of the monster-card queue;
+		let card-image be the card of the current-creature;
+		if card-image is Figure of Null:
+			next;
+		now image-ID of the card-container is the card-image;
+		let y be vertical-offset of card-image;
+		now entry 2 of the origin of slug-Card-stats is y + y-standard of slug-Card-stats;
+		repeat with item running through card-type-containers:
+			now entry 2 of the origin of the item is y + y-standard of item;
+		now text-string of kill-counter is "[died count of current-creature]";
+		now text-string of death-counter is "[kill count of current-creature]";
+		deactivate the card-occluder;
+		now the animation-callback of the card-fader is "";
+		say "[>console][bracket]Kerkerkruip[close bracket]: Card occluder deactivated.[<]";
+		animate the card-fader track as a fade animation targeting the card-container and using the Black-Fader from 100 % to 0 % at 8 fps with a duration of 6 frames;
+		wait for main menu input until all animations are complete;
+		pause for 4000 milliseconds, accepting input;
+		animate the card-fader track as a fade animation targeting the card-container and using the Black-Fader from 0 % to 100 % at 8 fps with a duration of 6 frames;
+		now the animation-callback of the card-fader is "[@ activate the card-occluder]";
+		wait for main menu input until all animations are complete;
+		say "[>console][bracket]Kerkerkruip[close bracket]: *** Card Completed ***.[<]".
+		
+To decide what number is vertical-offset of (F - figure-name):
+	if F provides the property y-offset:
+		decide on y-offset of F;
+	decide on 0.
+
+
+Section - Preparing menu display
+
+To prepare type slugs:
+	if the file of save data exists:
+		activate Continue_Game;
+	otherwise:
+		deactivate Continue_Game;
+	if difficulty is 0:
+		activate Skip_Button;
+	otherwise:
+		deactivate Skip_Button.
+
+To prepare difficulty levels for display:
+	now the image-ID of Difficulty-slug is the proper slug for the difficulty;
+	now entry 1 of the origin of current-difficulty is 144 + (image-width of the image-ID of Difficulty-slug);
+	now the text-string of current-difficulty is "([difficulty])";
+	let best-level be data value 3;
+	now the image-ID of Best-Difficulty-slug is the the proper slug for best-level;
+	now entry 1 of the origin of highest-difficulty is 416 + (image-width of the image-ID of Best-Difficulty-slug);
+	now the text-string of highest-difficulty is "([best-level])".
+
+To decide which figure name is the proper slug for (n - a number):
+	if n is 0:
+		decide on Figure of Diff-Novice;
+	if n is 1: 
+		decide on Figure of Diff-Apprentice;
+	if n is 2: 
+		decide on Figure of Diff-Adept;
+	if n is 3: 
+		decide on Figure of Diff-Expert;
+	if n is 4: 
+		decide on Figure of Diff-Master;
+	if n is 5: 
+		decide on Figure of Diff-Grandmaster;
+	if n is 6:
+		if player is female: 
+			decide on Figure of Diff-Princess; 
+		decide on Figure of Diff-Prince;
+	if n is 7: 
+		if player is female: 
+			decide on Figure of Diff-Queen;
+		decide on Figure of Diff-King;
+	if n is 8: 
+		if player is female: 
+			decide on Figure of Diff-Empress;
+		decide on Figure of Diff-Emperor;
+	if n is 9:
+		decide on Figure of Diff-Demon;
+	if n is 10:
+		decide on Figure of Diff-Angel;
+	if n is greater than 10:
+		if player is female: 
+			decide on Figure of Diff-Goddess;
+		decide on Figure of Diff-God;
+	decide on Figure of Diff-Novice.
+
+
+Section - Preparing monster cards
+
+A person has a figure-name called the card. The card of a person is usually Figure of Null.
+
+The card of Miranda is figure of card-Miranda.
+The card of the swarm of daggers is figure of card-Daggers.
+The card of the ravenous armadillo is figure of card-Armadillo.
+The card of the chain golem is figure of card-Chain_Golem.
+
+The monster-card queue is a list of people variable.
+
+To prepare monster cards:
+	now the monster-card queue is {};
+	repeat with villain running through npc people:
+		if the level of villain > 0 and the level of villain < 6 and the died count of villain > 0:
+			add villain to monster-card queue;
+	sort monster-card queue in level order.
 
 
 Chapter - Input to main menu
 
+Event-handled is a truth state variable.
+
+To wait for main menu input until all animations are complete:
+	while animation is queued and menu-active is true:[We don't want any new animations to start if our input is moving us out of the main menu]
+		cancel character input in the main-window;
+		request character input in the main-window;
+		now event-handled is false;
+		wait for glk input;
+		if the current glk event is glk-initiated or the current glk event is mouse-event or the current glk event is char-event:
+			let event-outcome be glk event handled in null-event context;
+			if event-handled is true:	
+				break.
+
+To move on from main menu, deactivating it:
+	now event-handled is true;
+	if deactivating it:
+		now menu-active is false;
+
+[First glulx character input rule when the showing the title screen activity is going on:
+	unless the displaying activity is going on:
+		cancel character input in the main-window;]
+
+Glulx character input rule when the graphics-window is g-present (this is the graphical menu keyboard input rule):
+	if the showing the title screen activity is going on:
+		let key be the character code returned;
+		#if utilizing animation debugging;
+		say "[>console][CA]Key pressed ([key]).[<]";
+		#end if;
+		if key means continue or key means new game:
+			if file of save data exists and key means new game:
+				follow the graphlink processing rules for New_Game;
+			otherwise:
+				follow the graphlink processing rules for Continue_Game;
+		if key means show help menu:
+			follow the graphlink processing rules for Help_Button;
+		if key means show options:
+			follow the graphlink processing rules for Options_Button;
+		if key means quit game:
+			follow the graphlink processing rules for Quit_Game;
+		if key means skip novice mode:
+			follow the graphlink processing rules for Skip_Button.
+
+
+Section - Key codes
+
+To decide whether (keypress - a number) means continue:
+	if keypress is 32 or keypress is 67 or keypress is 99 or keypress is -6:
+		decide yes.
+	
+To decide whether (keypress - a number) means new game[N(ew) or space]:
+	if keypress is 78 or keypress is 110, decide yes.
+
+To decide whether (keypress - a number) means show options:[O(ptions)]
+	if keypress is 79 or keypress is 111, decide yes.
+	
+To decide whether (keypress - a number) means show help menu:[H(elp) or M(enu)]
+	if keypress is 72 or keypress is 104 or keypress is 77 or keypress is 109, decide yes.
+	
+To decide whether (keypress - a number) means quit game:[Q(uit)]
+	if keypress is 81 or keypress is 113, decide yes.
+	
+To decide whether (keypress - a number) means skip novice mode:[S(kip)]
+	if keypress is 83 or keypress is 115 and difficulty is 0, decide yes.
+	
+To decide whether (keypress - a number) means reset victories:[R(eset)]
+	if keypress is 82 or keypress is 114, decide yes.
+
+To decide whether (keypress - a number) means unlock all content:[U(nlock)]
+	if keypress is 85 or keypress is 117 and (data value 4) is not 100, decide yes.
+
+
+Section - Graphic links
+
+Graphlink processing rule for New_Game:
+	menu-start new game;
+	move on from main menu, deactivating it.
+	
+Graphlink processing rule for Continue_Game:
+	move on from main menu, deactivating it.
+	
+Graphlink processing rule for Quit_Game:
+	now menu-active is false;
+	menu-quit game.
+
+Graphlink processing rule for Options_Button:
+	menu-request options menu;
+	move on from main menu.
+
+Graphlink processing rule for Help_Button:
+	menu-request help menu;
+	move on from main menu.
+
+Graphlink processing rule for Skip_Button:
+	menu-skip novice;
+	move on from main menu.
+
+
 Section - Visual button response
+[We use visual button response for both keypresses and for clicks: keyboard input triggers the graphlink rules for the appropriate button.]
 
 The button-press track and the button-rebound track are animation tracks.
 
-The animation-callback of the button-press track is "[@ animate the button-rebound track as a fade animation targeting the animation-target of the button-press track and using the Black-fader from 45 percent to 0 percent at 100 fps with a duration of 1 frames]".
+The animation-callback of the button-press track is "[@ animate the button-rebound track as a fade animation targeting the animation-target of the button-press track and using the Black-fader from 45 percent to 0 percent at 8 fps with a duration of 1 frame]".
 			
 First graphlink processing rule for a button (called the depressed):
-	animate the button-press track as a fade animation targeting the depressed and using the Black-fader from 0 percent to 45 percent at 100 fps with a duration of 1 frames.
+	animate the button-press track as a fade animation targeting the depressed and using the Black-fader from 0 percent to 45 percent at 8 fps with a duration of 1 frame.
+
+
+Section - Tooltips
+
+A tooltip is a kind of sprite. The associated canvas of a tooltip is the main-menu. The display status of a tooltip is g-inactive. Some tooltips are defined by the Table of Tool-Tips.
+
+Table of Tool-Tips
+sprite	image-ID	origin	display-layer
+Score-Tip	Figure of Tooltip-Score	{343, 474}[482]	20000
+
+Graphlink processing rule for ScoreInfo_Button:
+	if the display status of the Score-Tip is g-inactive:
+		activate the Score-Tip;
+	otherwise:
+		deactivate the Score-Tip;
 
 
 Chapter - Closing the title screen
@@ -416,10 +906,15 @@ Chapter - Closing the title screen
 The window-fading track is an animation track. The animation-callback of the window-fading track is "[@ now the associated canvas of the graphics-window is the g-null-canvas]".
 
 To close title screen:
-	deactivate all tracks but the button-press track;[allows the button-press animation to complete]
+	open up the graphics-window;[window may be closed.]
+	deactivate all tracks but the button-press track;[allows the button-press animation to complete];
+	repeat with tip running through tooltips:
+		deactivate tip;[turn off all tooltips]
+	cancel character input in the main-window;[just in case we're waiting for input]
 	now the display-layer of the black-fader is 30000;
-	animate the window-fading track as a fade animation targeting the graphics-window and using the Black-Fader from 0 % to 100 % at 8 fps with a duration of 8 frames;
+	animate the window-fading track as a fade animation targeting the graphics-window and using the Black-Fader from 0 % to 100 % at 8 fps with a duration of 6 frames;
 	delay input until all animations are complete;
+	now the display-layer of the black-fader is 9999;
 	shut down the graphics-window.
 	
 To deactivate all tracks but (target - an animation track):
