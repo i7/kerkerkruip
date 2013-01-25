@@ -17,24 +17,42 @@ Map approved is a truth state that varies. Map approved is false.
 To create the dungeon:
 	now map approved is false;
 	while map approved is false:
-		say "Generating map...";
+		print generation message "Generating map...";
 		consider the resetting the map rules;
 		consider the creating the map rules;
 		if generation info is true, say "[paragraph break]";
 		approve the map;
 		if map approved is false:
-			say "Map rejected.";
-	say "Placing monsters...";
+			print generation message "    Map rejected.";
+	print generation message "Placing monsters...";
 	place monsters;
 	if generation info is true, say "[paragraph break]";
-	say "Placing treasures...";
+	print generation message "Placing treasures...";
 	stock the dungeon;
 	make the dungeon interesting;
-	say "Finishing the dungeon...";
+	print generation message "Finishing the dungeon...";
 	finish the dungeon;
 	unless generation info is true:
 		clear the screen.
 
+Section - Generation message code (for use with Glimmr Canvas Animation by Erik Temple)
+
+To print generation message (T - text):
+	start a 1 millisecond timer;
+	wait for glk input;
+	if the current glk event is timer-event:
+		say T;
+		start a 0 millisecond timer;
+	otherwise if the current glk event is glk-initiated:[handle window resizes, basically]
+		let event-outcome be glk event handled in null-event context.
+
+To start a/-- (T - a number) millisecond timer:
+	(- if (glk_gestalt(gestalt_Timer, 0)) glk_request_timer_events({T});  -)
+
+Section - Basic printing of generation messages (for use without Glimmr Canvas Animation by Erik Temple)
+
+To print generation message (T - text):
+	say T.
 
 
 Section - Rarity
@@ -707,6 +725,7 @@ First treasure placement rule (this is the remove rare items rule):
 			
 
 A treasure placement rule (this is the stock minor treasure rule):
+	print generation message "    Placing minor treasures...";
 	let n be the number of off-stage not-too-difficult minor things;
 	let m be a random number between 6 and 12;
 	if m is greater than n, now m is n;
@@ -718,6 +737,7 @@ A treasure placement rule (this is the stock minor treasure rule):
 		if generation info is true, say "* placed [stuff] in [considered room]".
 		
 A treasure placement rule (this is the stock major treasure rule):
+	print generation message "    Placing major treasures...";
 	let n be the number of off-stage not-too-difficult major things;
 	let m be a random number between 3 and 6;
 	if m is greater than n, now m is n;
@@ -736,6 +756,7 @@ A treasure placement rule (this is the stock major treasure rule):
 
 
 A treasure placement rule (this is the stock epic treasure rule):
+	print generation message "    Placing epic treasures (well, you hope)...";
 	let n be the number of off-stage not-too-difficult epic things;
 	let m be a random number between 1 and 2;
 	if m is greater than n, now m is n;
@@ -756,6 +777,7 @@ A treasure placement rule (this is the stock epic treasure rule):
 
 
 A treasure placement rule (this is the stock special treasure rule):
+	print generation message "    Placing special treasures...";
 	let n be the number of off-stage not-too-difficult special things;
 	let m be a random number between 0 and 1;
 	if m is greater than n, now m is n;

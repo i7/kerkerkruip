@@ -30,7 +30,7 @@ The announce colophon rule is not listed in any rulebook.
 
 Chapter - Assets
 
-A figure name has a number called the y-offset. The y-offset of a figure-name is usually 0.[It is not necessary for all figure-names to get this property, but a bug in Inform prevents us from referring to the property if it is not defined in this way.]
+A figure name has a number called the y-offset. The y-offset of a figure-name is usually 0.[It is not necessary for all figure-names to get this property, but a bug in Inform--http://inform7.com/mantis/view.php?id=1067--prevents us from referring to the property if it is not defined in this way.]
 
 [Section - Sounds
 
@@ -363,7 +363,6 @@ Chapter - Graphics support and preferences
 Full graphics support is a truth state variable.
 
 Rule for starting the virtual machine (this is the graphics support rule):
-	[This rule will change to also check whether the player has made a choice about graphics, i.e. whether data value 5 exists. We'll probably need to move it to a new rulebook.]
 	if glulx graphics is supported and glulx graphic-window mouse input is supported and glulx timekeeping is supported and glulx PNG transparency is supported:
 		now full graphics support is true.
 
@@ -565,7 +564,7 @@ The title-container is a sprite. It is center-aligned. The origin is {330, 359}.
 To show the title:
 	now the associated canvas of the graphics-window is the title-screen;
 	animate the title-animation as a reel animation targeting the title-container at 8 fps;
-	play sound of music;
+	[play sound of music;]
 	delay input until all animations are complete.[Input is not allowed during the title animation.]
 
 
