@@ -32,7 +32,9 @@ Chapter - Assets
 
 A figure name has a number called the y-offset. The y-offset of a figure-name is usually 0.[It is not necessary for all figure-names to get this property, but a bug in Inform prevents us from referring to the property if it is not defined in this way.]
 
-Section - Sounds
+[Section - Sounds
+
+Sound of music is the file "Christian__Kiane__Fromentin_-_Tahrire__zangue_shotor.mp3".[File seems not to work with Gargoyle.]]
 
 
 Section - Minimovies
@@ -443,8 +445,10 @@ For updating graphics windows for animation when pause track is animation-active
 
 
 Chapter - Menu control
+[###]
 
 Menu-active is a truth state variable.
+Redraw-menu is a truth state variable. Redraw-menu is false.
 
 For showing the title screen when full graphics support is true and data value 5 is 1 (this is the graphic title screen rule):
 	close the status window;
@@ -456,22 +460,32 @@ For showing the title screen when full graphics support is true and data value 5
 	if session flag is false:
 		show a minimovie;
 		show the title;
+	set JUMP POINT redraw_menu;
 	now menu-active is true;
-	while menu-active is true:
-		close the status window;[on returning from a text menu]
-		open up the graphics-window;[it is possible that it may be closed on return from a menu]
-		fade in the main menu;
-		pause for 2000 milliseconds, accepting input;
-		if the number of entries in the monster-card queue is greater than 0:
-			if menu-active is true:
-				transition to monster card gallery;
-			if menu-active is true:
-				animate monster cards;
-		otherwise if menu-active is true:
-			show startup instructions;
-	clear the main-window;[we don't want to see old content in the main window when the menu closes]
-	close title screen;
-	open the status window.
+	now redraw-menu is false;
+	close the status window;[for returning from a text menu]
+	open up the graphics-window;[it is possible that it may be closed on return from a menu]
+	fade in the main menu;
+	pause for 2000 milliseconds, accepting input;
+	if the number of entries in the monster-card queue is greater than 0:
+		if menu-active is true:
+			transition to monster card gallery;
+		if menu-active is true:
+			animate monster cards;
+	otherwise if menu-active is true:
+		show startup instructions;
+	if redraw-menu is true:
+		JUMP to redraw_menu;
+	otherwise:
+		clear the main-window;[we don't want to see old content in the main window when the menu closes]
+		close title screen;
+		open the status window.
+
+To set jump point redraw_menu:
+	(- .RedrawMenu; -)
+	
+To jump to redraw_menu:
+	(- jump RedrawMenu; -)
 
 To menu-start new game:
 	if the file of save data exists:
@@ -504,7 +518,6 @@ To menu-skip novice:
 
 
 Chapter - Title animation
-
 
 Section - Show a minimovie
 
@@ -552,6 +565,7 @@ The title-container is a sprite. It is center-aligned. The origin is {330, 359}.
 To show the title:
 	now the associated canvas of the graphics-window is the title-screen;
 	animate the title-animation as a reel animation targeting the title-container at 8 fps;
+	play sound of music;
 	delay input until all animations are complete.[Input is not allowed during the title animation.]
 
 
@@ -617,15 +631,21 @@ Section - Fading in the main menu
 The menu fade-up track is an animation track.
 
 To fade in the main menu:
-	now the image-ID of the transition-container is the image-ID of the title-container;
 	now the associated canvas of the graphics-window is the main-menu;
+	prepare central zone;
 	prepare type slugs;
 	prepare difficulty levels for display;
 	prepare monster cards;
 	repeat with el running through card-type-containers:
 		deactivate el;[hides type slug for cards; they will be turned on when card display begins]
 	animate the menu fade-up track as a fade animation targeting the main-menu and using the Black-Fader from 100 % to 0 % at 8 fps with a duration of 6 frames;
+	[play sound of music;]
 	wait for main menu input until all animations are complete.[Input is allowed once we are fading in to the menu.]
+
+To prepare central zone:
+	now the image-ID of the transition-container is [the image-ID of the title-container]Figure of title_00040;
+	deactivate card-container;
+	activate transition-container.
 
 
 Section - Show the startup instructions
@@ -685,14 +705,14 @@ To animate monster cards:
 		now text-string of death-counter is "[kill count of current-creature]";
 		deactivate the card-occluder;
 		now the animation-callback of the card-fader is "";
-		say "[>console][bracket]Kerkerkruip[close bracket]: Card occluder deactivated.[<]";
+		[say "[>console][bracket]Kerkerkruip[close bracket]: Card occluder deactivated.[<]";]
 		animate the card-fader track as a fade animation targeting the card-container and using the Black-Fader from 100 % to 0 % at 8 fps with a duration of 6 frames;
 		wait for main menu input until all animations are complete;
 		pause for 4000 milliseconds, accepting input;
 		animate the card-fader track as a fade animation targeting the card-container and using the Black-Fader from 0 % to 100 % at 8 fps with a duration of 6 frames;
 		now the animation-callback of the card-fader is "[@ activate the card-occluder]";
 		wait for main menu input until all animations are complete;
-		say "[>console][bracket]Kerkerkruip[close bracket]: *** Card Completed ***.[<]".
+		[say "[>console][bracket]Kerkerkruip[close bracket]: *** Card Completed ***.[<]".]
 		
 To decide what number is vertical-offset of (F - figure-name):
 	if F provides the property y-offset:
@@ -703,6 +723,7 @@ To decide what number is vertical-offset of (F - figure-name):
 Section - Preparing menu display
 
 To prepare type slugs:
+	say "Preparing type slugs!";
 	if the file of save data exists:
 		activate Continue_Game;
 	otherwise:
@@ -793,8 +814,9 @@ To wait for main menu input until all animations are complete:
 
 To move on from main menu, deactivating it:
 	now event-handled is true;
-	if deactivating it:
-		now menu-active is false;
+	now menu-active is false;
+	unless deactivating it:
+		now redraw-menu is true.
 
 [First glulx character input rule when the showing the title screen activity is going on:
 	unless the displaying activity is going on:
@@ -809,6 +831,8 @@ Glulx character input rule when the graphics-window is g-present (this is the gr
 		if key means continue or key means new game:
 			if file of save data exists and key means new game:
 				follow the graphlink processing rules for New_Game;
+			otherwise unless file of save data exists:
+				follow the graphlink processing rules for New_Game;
 			otherwise:
 				follow the graphlink processing rules for Continue_Game;
 		if key means show help menu:
@@ -817,7 +841,7 @@ Glulx character input rule when the graphics-window is g-present (this is the gr
 			follow the graphlink processing rules for Options_Button;
 		if key means quit game:
 			follow the graphlink processing rules for Quit_Game;
-		if key means skip novice mode:
+		if key means skip novice mode and difficulty is 0:
 			follow the graphlink processing rules for Skip_Button.
 
 
@@ -842,38 +866,49 @@ To decide whether (keypress - a number) means quit game:[Q(uit)]
 To decide whether (keypress - a number) means skip novice mode:[S(kip)]
 	if keypress is 83 or keypress is 115 and difficulty is 0, decide yes.
 	
-To decide whether (keypress - a number) means reset victories:[R(eset)]
+[To decide whether (keypress - a number) means reset victories:[R(eset)]
 	if keypress is 82 or keypress is 114, decide yes.
 
 To decide whether (keypress - a number) means unlock all content:[U(nlock)]
-	if keypress is 85 or keypress is 117 and (data value 4) is not 100, decide yes.
+	if keypress is 85 or keypress is 117 and (data value 4) is not 100, decide yes.]
 
 
 Section - Graphic links
 
 Graphlink processing rule for New_Game:
+	cease animating all tracks but the button-press track;
 	menu-start new game;
 	move on from main menu, deactivating it.
 	
 Graphlink processing rule for Continue_Game:
+	cease animating all tracks but the button-press track;
 	move on from main menu, deactivating it.
 	
 Graphlink processing rule for Quit_Game:
+	cease animating all tracks but the button-press track;
 	now menu-active is false;
 	menu-quit game.
 
 Graphlink processing rule for Options_Button:
+	cease animating all tracks but the button-press track;
 	menu-request options menu;
 	move on from main menu.
 
 Graphlink processing rule for Help_Button:
+	cease animating all tracks but the button-press track;
 	menu-request help menu;
 	move on from main menu.
 
 Graphlink processing rule for Skip_Button:
 	menu-skip novice;
-	move on from main menu.
+	animate the button-fade track as a fade animation targeting the Skip_Button and using the Black-fader from 0 percent to 100 percent at 8 fps with a duration of 3 frames.
 
+The button-fade track is an animation track. The animation-callback is "[@ process visuals after skipping difficulty]".
+
+To process visuals after skipping difficulty:
+	deactivate the animation-target of the button-fade track;
+	prepare difficulty levels for display;
+	prepare type slugs.
 
 Section - Visual button response
 [We use visual button response for both keypresses and for clicks: keyboard input triggers the graphlink rules for the appropriate button.]
@@ -883,7 +918,8 @@ The button-press track and the button-rebound track are animation tracks.
 The animation-callback of the button-press track is "[@ animate the button-rebound track as a fade animation targeting the animation-target of the button-press track and using the Black-fader from 45 percent to 0 percent at 8 fps with a duration of 1 frame]".
 			
 First graphlink processing rule for a button (called the depressed):
-	animate the button-press track as a fade animation targeting the depressed and using the Black-fader from 0 percent to 45 percent at 8 fps with a duration of 1 frame.
+	unless the depressed is the Skip_Button:
+		animate the button-press track as a fade animation targeting the depressed and using the Black-fader from 0 percent to 45 percent at 8 fps with a duration of 1 frame.
 
 
 Section - Tooltips
@@ -907,7 +943,7 @@ The window-fading track is an animation track. The animation-callback of the win
 
 To close title screen:
 	open up the graphics-window;[window may be closed.]
-	deactivate all tracks but the button-press track;[allows the button-press animation to complete];
+	cease animating all tracks but the button-press track;[allows the button-press animation to complete];
 	repeat with tip running through tooltips:
 		deactivate tip;[turn off all tooltips]
 	cancel character input in the main-window;[just in case we're waiting for input]
@@ -917,7 +953,7 @@ To close title screen:
 	now the display-layer of the black-fader is 9999;
 	shut down the graphics-window.
 	
-To deactivate all tracks but (target - an animation track):
+To cease animating all tracks but (target - an animation track):
 	repeat with track running through animation-active animation tracks:
 		if track is not target:
 			deactivate track.
