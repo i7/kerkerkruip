@@ -38,10 +38,10 @@ To create the dungeon:
 Section - Generation message code (for use with Glimmr Canvas Animation by Erik Temple)
 
 To print generation message (T - text):
+	say T;
 	start a 1 millisecond timer;
 	wait for glk input;
 	if the current glk event is timer-event:
-		say T;
 		start a 0 millisecond timer;
 	otherwise if the current glk event is glk-initiated:[handle window resizes, basically]
 		let event-outcome be glk event handled in null-event context.
