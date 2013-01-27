@@ -33,9 +33,11 @@ Chapter - Assets
 
 A figure name has a number called the y-offset. The y-offset of a figure-name is usually 0.[It is not necessary for all figure-names to get this property, but a bug in Inform--http://inform7.com/mantis/view.php?id=1067--prevents us from referring to the property if it is not defined in this way.]
 
-[Section - Sounds
+Section - Sounds
 
-Sound of music is the file "Los_Jekes_-_Klezmer_de_Coiro.ogg".]
+Sound of Klezmer is the file "Los_Jekes_-_Klezmer_de_Coiro.ogg".
+Sound of Persian is the file "Christian__Kiane__Fromentin_-_Ilk_Bahar.ogg".
+Sound of Spanish gypsy is the file "Los_Jekes_-_Romani.ogg".
 
 
 Section - Minimovies
@@ -369,7 +371,7 @@ The start-button track is an animation track. The image-reel is {Figure of title
 
 Section - Rogues Gallery transition
 
-The gallery-transition is an animation track. The image-reel is {Figure of transition_RoguesGallery_00001, Figure of transition_RoguesGallery_00002, Figure of transition_RoguesGallery_00003, Figure of transition_RoguesGallery_00004, Figure of transition_RoguesGallery_00005, Figure of transition_RoguesGallery_00006, Figure of transition_RoguesGallery_00007, Figure of transition_RoguesGallery_00008, Figure of transition_RoguesGallery_00009, Figure of transition_RoguesGallery_00010, Figure of transition_RoguesGallery_00011, Figure of transition_RoguesGallery_00012, Figure of transition_RoguesGallery_00013, Figure of transition_RoguesGallery_00014, Figure of transition_RoguesGallery_00015, Figure of transition_RoguesGallery_00016, Figure of transition_RoguesGallery_00017, Figure of transition_RoguesGallery_00018, Figure of transition_RoguesGallery_00019, Figure of transition_RoguesGallery_00020, Figure of transition_RoguesGallery_00021, Figure of transition_RoguesGallery_00022, Figure of transition_RoguesGallery_00023, Figure of transition_RoguesGallery_00024, Figure of transition_RoguesGallery_00025, Figure of transition_RoguesGallery_00026, Figure of transition_RoguesGallery_00027, Figure of transition_RoguesGallery_00028, Figure of transition_RoguesGallery_00029, Figure of transition_RoguesGallery_00030, Figure of transition_RoguesGallery_00031, Figure of transition_RoguesGallery_00032, Figure of transition_RoguesGallery_00033,[ Figure of transition_RoguesGallery_00034,] Figure of transition_RoguesGallery_00035,[ Figure of transition_RoguesGallery_00036,] Figure of transition_RoguesGallery_00037}.
+The gallery-transition is an animation track. The image-reel is {Figure of transition_RoguesGallery_00001, Figure of transition_RoguesGallery_00002, Figure of transition_RoguesGallery_00003, Figure of transition_RoguesGallery_00004, Figure of transition_RoguesGallery_00005, Figure of transition_RoguesGallery_00006, Figure of transition_RoguesGallery_00007, Figure of transition_RoguesGallery_00008, Figure of transition_RoguesGallery_00009, Figure of transition_RoguesGallery_00010, Figure of transition_RoguesGallery_00011, Figure of transition_RoguesGallery_00012, Figure of transition_RoguesGallery_00013, Figure of transition_RoguesGallery_00014, Figure of transition_RoguesGallery_00015, Figure of transition_RoguesGallery_00016, Figure of transition_RoguesGallery_00017, Figure of transition_RoguesGallery_00018, Figure of transition_RoguesGallery_00019, Figure of transition_RoguesGallery_00020, Figure of transition_RoguesGallery_00021, Figure of transition_RoguesGallery_00022, Figure of transition_RoguesGallery_00023, Figure of transition_RoguesGallery_00024, Figure of transition_RoguesGallery_00025, Figure of transition_RoguesGallery_00026, Figure of transition_RoguesGallery_00027, Figure of transition_RoguesGallery_00028, Figure of transition_RoguesGallery_00029, Figure of transition_RoguesGallery_00030, Figure of transition_RoguesGallery_00031, Figure of transition_RoguesGallery_00032, Figure of transition_RoguesGallery_00033, Figure of transition_RoguesGallery_00034, Figure of transition_RoguesGallery_00035, Figure of transition_RoguesGallery_00036, Figure of transition_RoguesGallery_00037}.
 
 
 Chapter - Graphics support and preferences
@@ -466,15 +468,35 @@ Chapter - Menu control
 Menu-active is a truth state variable.
 Redraw-menu is a truth state variable. Redraw-menu is false.
 
+To decide what sound-name is the music selected by the player:
+	say "Please select background music: [line break]";
+	let count be a number;
+	repeat with tune running through sound-names:
+		increment count;
+		let T be indexed text;
+		let T be "[tune]";
+		replace the text "Sound of " in T with "";
+		say "   ([count]) [T][line break]";
+	while 1 is 1:
+		let k be the character code entered in the main-window - 48;
+		if k is less than (count + 1) and k is greater than 0:
+			now count is 0;
+			repeat with tune running through sound-names:
+				increment count;
+				if k is count:
+					decide on tune.
+
 For showing the title screen when full graphics support is true and data value 5 is 1 (this is the graphic title screen rule):
-	close the status window;
+	let theme music be the music selected by the player;
+	close the status window;[needed on restart]
 	let session flag be false;
 	open up the graphics-window;
 	if data value 6 is 1:
 		now session flag is true;
 		set data value 6 to 0;
 	if session flag is false:
-		show a minimovie;
+		show a minimovie;	
+		play the theme music;
 		show the title;
 	set JUMP POINT redraw_menu;
 	now menu-active is true;
