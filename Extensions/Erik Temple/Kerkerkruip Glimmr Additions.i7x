@@ -10,6 +10,7 @@ Include Glimmr Animation Fader - Black by Erik Temple.
 [Include Glimmr Debugging Console by Erik Temple.
 
 Use animation debugging.
+Use Glimmr debugging.
 
 To say >console:
 	say echo stream of main-window.
@@ -34,7 +35,7 @@ A figure name has a number called the y-offset. The y-offset of a figure-name is
 
 [Section - Sounds
 
-Sound of music is the file "Christian__Kiane__Fromentin_-_Tahrire__zangue_shotor.mp3".[File seems not to work with Gargoyle.]]
+Sound of music is the file "Los_Jekes_-_Klezmer_de_Coiro.ogg".]
 
 
 Section - Minimovies
@@ -312,11 +313,24 @@ Section - Monster cards
 Figure of slug-Card-stats is the file "slug-Card-stats.png".
 
 [Card art]
-Figure of card-Armadillo is the file "card-Armadillo.jpg".
-Figure of card-Chain_Golem is the file "card-Chain_Golem.jpg".
-Figure of card-Daggers is the file "card-Daggers.jpg".
-Figure of card-Miranda is the file "card-Miranda.jpg".
+Figure of card-Armadillo is the file "card_Armadillo.jpg".
+Figure of card-Chain_Golem is the file "card_Chain-Golem.jpg".
+Figure of card-Daggers is the file "card_Daggers.jpg".
+Figure of card-Mindslug is the file "card_Mindslug.jpg".
+Figure of card-Miranda is the file "card_Miranda.jpg".
+Figure of card-Reaper is the file "card_Reaper.jpg".
+Figure of card-Tentacle is the file "card_Tentacle.jpg".
 
+[Placeholders]
+Figure of card_Malygris is the file "card_Malygris.jpg".
+Figure of card_Bodmall is the file "card_Bodmall.jpg".
+Figure of card_Fanatics-of-Aite is the file "card_Fanatics-of-Aite.jpg".
+Figure of card_Minotaur is the file "card_Minotaur.jpg".
+Figure of card_Hound is the file "card_Hound.jpg".
+Figure of card_Demon-of-Rage is the file "card_Demon-of-Rage.jpg".
+Figure of card_Blood-Ape is the file "card_Blood-Ape.jpg".
+Figure of card_Jumping-Bomb is the file "card_Jumping-Bomb.jpg".
+Figure of card_Wisps-of-Pain is the file "card_Wisps-of-Pain.jpg".
 
 Chapter - Mini-movie definitions
 
@@ -355,7 +369,7 @@ The start-button track is an animation track. The image-reel is {Figure of title
 
 Section - Rogues Gallery transition
 
-The gallery-transition is an animation track. The image-reel is {Figure of transition_RoguesGallery_00001, Figure of transition_RoguesGallery_00002, Figure of transition_RoguesGallery_00003, Figure of transition_RoguesGallery_00004, Figure of transition_RoguesGallery_00005, Figure of transition_RoguesGallery_00006, Figure of transition_RoguesGallery_00007, Figure of transition_RoguesGallery_00008, Figure of transition_RoguesGallery_00009, Figure of transition_RoguesGallery_00010, Figure of transition_RoguesGallery_00011, Figure of transition_RoguesGallery_00012, Figure of transition_RoguesGallery_00013, Figure of transition_RoguesGallery_00014, Figure of transition_RoguesGallery_00015, Figure of transition_RoguesGallery_00016, Figure of transition_RoguesGallery_00017, Figure of transition_RoguesGallery_00018, Figure of transition_RoguesGallery_00019, Figure of transition_RoguesGallery_00020, Figure of transition_RoguesGallery_00021, Figure of transition_RoguesGallery_00022, Figure of transition_RoguesGallery_00023, Figure of transition_RoguesGallery_00024, Figure of transition_RoguesGallery_00025, Figure of transition_RoguesGallery_00026, Figure of transition_RoguesGallery_00027, Figure of transition_RoguesGallery_00028, Figure of transition_RoguesGallery_00029, Figure of transition_RoguesGallery_00030, Figure of transition_RoguesGallery_00031, Figure of transition_RoguesGallery_00032, Figure of transition_RoguesGallery_00033, Figure of transition_RoguesGallery_00034, Figure of transition_RoguesGallery_00035, Figure of transition_RoguesGallery_00036, Figure of transition_RoguesGallery_00037}.
+The gallery-transition is an animation track. The image-reel is {Figure of transition_RoguesGallery_00001, Figure of transition_RoguesGallery_00002, Figure of transition_RoguesGallery_00003, Figure of transition_RoguesGallery_00004, Figure of transition_RoguesGallery_00005, Figure of transition_RoguesGallery_00006, Figure of transition_RoguesGallery_00007, Figure of transition_RoguesGallery_00008, Figure of transition_RoguesGallery_00009, Figure of transition_RoguesGallery_00010, Figure of transition_RoguesGallery_00011, Figure of transition_RoguesGallery_00012, Figure of transition_RoguesGallery_00013, Figure of transition_RoguesGallery_00014, Figure of transition_RoguesGallery_00015, Figure of transition_RoguesGallery_00016, Figure of transition_RoguesGallery_00017, Figure of transition_RoguesGallery_00018, Figure of transition_RoguesGallery_00019, Figure of transition_RoguesGallery_00020, Figure of transition_RoguesGallery_00021, Figure of transition_RoguesGallery_00022, Figure of transition_RoguesGallery_00023, Figure of transition_RoguesGallery_00024, Figure of transition_RoguesGallery_00025, Figure of transition_RoguesGallery_00026, Figure of transition_RoguesGallery_00027, Figure of transition_RoguesGallery_00028, Figure of transition_RoguesGallery_00029, Figure of transition_RoguesGallery_00030, Figure of transition_RoguesGallery_00031, Figure of transition_RoguesGallery_00032, Figure of transition_RoguesGallery_00033,[ Figure of transition_RoguesGallery_00034,] Figure of transition_RoguesGallery_00035,[ Figure of transition_RoguesGallery_00036,] Figure of transition_RoguesGallery_00037}.
 
 
 Chapter - Graphics support and preferences
@@ -439,6 +453,9 @@ To pause for (T - number) milliseconds/ms, accepting input:
 
 
 For updating graphics windows for animation when pause track is animation-active (this is the don't refresh windows while we are merely holding rule):
+	#if utilizing animation debugging;
+	say "[>console][bracket]Kerkerkruip[close bracket]Graphics drawing suppressed (don't refresh windows while we are merely holding rule).[<]";
+	#end if;
 	do nothing.
 	
 
@@ -474,6 +491,7 @@ For showing the title screen when full graphics support is true and data value 5
 	otherwise if menu-active is true:
 		show startup instructions;
 	if redraw-menu is true:
+		say "*** Redrawing!";
 		JUMP to redraw_menu;
 	otherwise:
 		clear the main-window;[we don't want to see old content in the main window when the menu closes]
@@ -722,7 +740,7 @@ To decide what number is vertical-offset of (F - figure-name):
 Section - Preparing menu display
 
 To prepare type slugs:
-	say "Preparing type slugs!";
+	[say "Preparing type slugs!";]
 	if the file of save data exists:
 		activate Continue_Game;
 	otherwise:
@@ -785,6 +803,19 @@ The card of Miranda is figure of card-Miranda.
 The card of the swarm of daggers is figure of card-Daggers.
 The card of the ravenous armadillo is figure of card-Armadillo.
 The card of the chain golem is figure of card-Chain_Golem.
+The card of the mindslug is the figure of card-Mindslug.
+The card of the reaper is the figure of card-Reaper.
+The card of the giant tentacle is the figure of card-Tentacle.
+[placeholders]
+The card of Malygris is the figure of card_Malygris.
+The card of Bodmall is the figure of card_Bodmall.
+The card of the fanatics-of-Aite-package is figure of card_Fanatics-of-Aite.
+The card of the minotaur is figure of card_Minotaur.
+The card of the hound is figure of card_Hound.
+The card of the demon of rage is figure of card_Demon-of-Rage.
+The card of the blood ape is figure of card_Blood-Ape.
+The card of the jumping bomb is figure of card_Jumping-Bomb.
+The card of the wisps of pain is figure of card_Wisps-of-Pain.
 
 The monster-card queue is a list of people variable.
 
