@@ -33,11 +33,11 @@ Chapter - Assets
 
 A figure name has a number called the y-offset. The y-offset of a figure-name is usually 0.[It is not necessary for all figure-names to get this property, but a bug in Inform--http://inform7.com/mantis/view.php?id=1067--prevents us from referring to the property if it is not defined in this way.]
 
-Section - Sounds
+[Section - Sounds
 
 Sound of Klezmer is the file "Los_Jekes_-_Klezmer_de_Coiro.ogg".
 Sound of Persian is the file "Christian__Kiane__Fromentin_-_Ilk_Bahar.ogg".
-Sound of Spanish gypsy is the file "Los_Jekes_-_Romani.ogg".
+Sound of Spanish gypsy is the file "Los_Jekes_-_Romani.ogg".]
 
 
 Section - Minimovies
@@ -468,7 +468,7 @@ Chapter - Menu control
 Menu-active is a truth state variable.
 Redraw-menu is a truth state variable. Redraw-menu is false.
 
-To decide what sound-name is the music selected by the player:
+[To decide what sound-name is the music selected by the player:
 	say "Please select background music: [line break]";
 	let count be a number;
 	repeat with tune running through sound-names:
@@ -484,10 +484,10 @@ To decide what sound-name is the music selected by the player:
 			repeat with tune running through sound-names:
 				increment count;
 				if k is count:
-					decide on tune.
+					decide on tune.]
 
 For showing the title screen when full graphics support is true and data value 5 is 1 (this is the graphic title screen rule):
-	let theme music be the music selected by the player;
+	[let theme music be the music selected by the player;]
 	close the status window;[needed on restart]
 	let session flag be false;
 	open up the graphics-window;
@@ -496,7 +496,7 @@ For showing the title screen when full graphics support is true and data value 5
 		set data value 6 to 0;
 	if session flag is false:
 		show a minimovie;	
-		play the theme music;
+		[play the theme music;]
 		show the title;
 	set JUMP POINT redraw_menu;
 	now menu-active is true;
@@ -615,7 +615,7 @@ The main-menu is a g-canvas. The canvas-width is 660. The canvas-height is 718.
 
 Section - Element declarations for main menu
 
-A type-slug is a kind of sprite. The display status of a type-slug is g-active. The associated canvas of a type-slug is the main-menu. Some type-slugs are defined by the Table of Non-Interactive Elements.
+A type-slug is a kind of sprite. The display status of a type-slug is g-active. The display-layer of a type-slug is 3. The associated canvas of a type-slug is the main-menu. Some type-slugs are defined by the Table of Non-Interactive Elements.
 
 Table of Non-Interactive Elements
 sprite	image-ID	origin
@@ -638,12 +638,12 @@ ScoreInfo_Button	Figure of Button-Score Info	{587, 672}[680]
 Skip_Button	Figure of Button-Skip Apprentice	{70, 674}
 
 
-A type-container is a kind of image-rendered string. The associated canvas of a type-container is the main-menu. Some type-containers are defined by the Table of Image String Boxes. The display-layer of a type-container is 11000.
+A type-container is a kind of image-rendered string. The associated canvas of a type-container is the main-menu. Some type-containers are defined by the Table of Image String Boxes. The display-layer of a type-container is 3.
 
 Table of Image String Boxes
 image-rendered string	origin	associated font	text-string	display status
-current-difficulty	{144, 650}	Humanist-small	"(0)"	g-active
-highest-difficulty	{416, 650}	Humanist-small	"(0)"	g-active
+current-difficulty	{144, 650}	Humanist-small-crimson	"(0)"	g-active
+highest-difficulty	{416, 650}	Humanist-small-crimson	"(0)"	g-active
 
 
 
@@ -652,7 +652,7 @@ Chapter - Monster cards
 slug-Card-stats is a type-slug. The image-ID is Figure of slug-Card-stats. The origin is {456, 284}. The display status is g-inactive. The display-layer is 2. [401, 189]
 The slug-Card-stats has a number called the y-standard. The y-standard of the slug-Card-stats is 284.
 
-A card-type-container is a kind of type-container. The display-layer of a card-type-container is usually 3. A card-type-container is usually center-aligned. The display status of a card-type-container is g-inactive. The associated font of a card-type-container is usually Humanist-large.
+A card-type-container is a kind of type-container. The display-layer of a card-type-container is usually 4. A card-type-container is usually center-aligned. The display status of a card-type-container is g-inactive. The associated font of a card-type-container is usually Humanist-large-crimson.
 
 A card-type-container has a number called the y-standard.
 
@@ -713,7 +713,7 @@ Section - Animate cards
 
 The card-container is a sprite. It is center-aligned. The image-ID is Figure of Null. The origin is {330, 359}. The display-layer is 1. The associated canvas is the main-menu.
 
-The card-occluder is a rectangle primitive. The tint is g-black. The origin is {55, 95}. The endpoint is {610, 623}. The display status is g-inactive. The display-layer is 10000. The associated canvas is the main-menu.
+The card-occluder is a rectangle primitive. The tint is g-black. The origin is {55, 95}. The endpoint is {610, 623}. The display status is g-inactive. The display-layer is 9998. The associated canvas is the main-menu.
 
 The card-fader track is an animation track.
 
@@ -980,7 +980,7 @@ A tooltip is a kind of sprite. The associated canvas of a tooltip is the main-me
 
 Table of Tool-Tips
 sprite	image-ID	origin	display-layer
-Score-Tip	Figure of Tooltip-Score	{343, 474}[482]	20000
+Score-Tip	Figure of Tooltip-Score	{343, 474}[482]	10000
 
 Graphlink processing rule for ScoreInfo_Button:
 	if the display status of the Score-Tip is g-inactive:
@@ -998,11 +998,9 @@ To close title screen:
 	cease animating all tracks but the button-press track;[allows the button-press animation to complete];
 	repeat with tip running through tooltips:
 		deactivate tip;[turn off all tooltips]
-	cancel character input in the main-window;[just in case we're waiting for input]
-	now the display-layer of the black-fader is 30000;
+	cancel character input in the main-window;[just in case we're somehow waiting for input]
 	animate the window-fading track as a fade animation targeting the graphics-window and using the Black-Fader from 0 % to 100 % at 8 fps with a duration of 6 frames;
 	delay input until all animations are complete;
-	now the display-layer of the black-fader is 9999;
 	shut down the graphics-window.
 	
 To cease animating all tracks but (target - an animation track):
@@ -1012,3 +1010,50 @@ To cease animating all tracks but (target - an animation track):
 
 
 Kerkerkruip Glimmr Additions ends here.
+
+---- DOCUMENTATION ----
+
+Summary of menu graphic elements and their z-ordering:
+
+	##Canvases
+	opening-canvas
+	title-screen
+	main-menu
+
+	##Sprites
+	title-container (1)
+	transition-container (10,000) - needs to float above fader
+	card-container (1)
+
+	##Buttons (3)
+	Continue_Game
+	Help_Button
+	New_Game
+	Options_Button
+	Quit_Game
+	ScoreInfo_Button
+	Skip_Button
+
+	##Slugs (3)
+	Score-slug
+	Difficulty-slug
+	Best-Difficulty-slug
+	-- monster cards only --
+	slug-Card-stats (2)
+
+	##Strings (3)
+	command-container
+	current-difficulty
+	highest-difficulty
+	-- monster cards only --
+	kill-counter (4)
+	death-counter (4)
+
+	##Primitives
+	card-occluder (9,998)
+
+	##Tooltips (10,000) - tooltips float above everything else
+	Score-Tip
+
+	##Fader
+	9,999 (default)

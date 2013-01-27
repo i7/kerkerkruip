@@ -4,13 +4,13 @@ Use authorial modesty.
 
 Chapter - Font for card scores
 
-Humanist-large is an image-based font.
+Humanist-large-crimson is an image-based font.
 
-The font table of Humanist-large is the Table of Large Humanist Typeface Parameters.
+The font table of Humanist-large-crimson is the Table of Large Humanist Typeface Parameters.
 
-The font-height of Humanist-large is 29.
-The background-margin of Humanist-large is 3.
-The cursor-width of Humanist-large is 1.
+The font-height of Humanist-large-crimson is 29.
+The background-margin of Humanist-large-crimson is 3.
+The cursor-width of Humanist-large-crimson is 1.
 
 
 Section - Card score font declarations
@@ -45,13 +45,13 @@ glyph	char	glyph-ref	yoffset	advance
 
 Chapter - Difficulty Font
 
-Humanist-small is an image-based font.
+Humanist-small-crimson is an image-based font.
 
-The font table of Humanist-small is the Table of Small Humanist Typeface Parameters.
+The font table of Humanist-small-crimson is the Table of Small Humanist Typeface Parameters.
 
-The font-height of Humanist-small is 15.
-The background-margin of Humanist-small is 2.
-The cursor-width of the Humanist-small is 1.
+The font-height of Humanist-small-crimson is 15.
+The background-margin of Humanist-small-crimson is 2.
+The cursor-width of the Humanist-small-crimson is 1.
 
 
 Section - Difficulty font declarations
