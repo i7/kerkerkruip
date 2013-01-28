@@ -280,9 +280,17 @@ Figure of Button-Help is the file "button-Help.png".
 Figure of Button-New Game is the file "button-New Game.png".
 Figure of Button-Options is the file "button-Options.png".
 Figure of Button-Quit is the file "button-Quit.png".
-Figure of Button-Reset is the file "button-Reset.png".
+[Figure of Button-Reset is the file "button-Reset.png".]
 Figure of Button-Score Info is the file "button-Score-Info.png".
 Figure of Button-Skip Apprentice is the file "button-Skip-to-Apprentice.png".
+[Pressed buttons]
+Figure of button-Continue_pressed is the file "button-Continue_pressed.png".
+Figure of button-Help_pressed is the file "button-Help_pressed.png".
+Figure of button-New Game_pressed is the file "button-New Game_pressed.png".
+Figure of button-Options_pressed is the file "button-Options_pressed.png".
+Figure of button-Quit_pressed is the file "button-Quit_pressed.png".
+Figure of button-Score-Info_pressed is the file "button-Score-Info_pressed.png".
+Figure of button-Skip-to-Apprentice_pressed is the file "button-Skip-to-Apprentice_pressed.png".
 
 [Type slugs for main menu]
 Figure of Score-Slug is the file "slug-Score.png".
@@ -624,18 +632,19 @@ Difficulty-slug	Figure of Diff-Novice	{138, 647}
 Best-Difficulty-slug	Figure of Diff-Novice	{411, 647}
 
 
-A button is a kind of sprite. The display status of a button is g-active. The associated canvas of a button is the main-menu. The graphlink status of a button is g-active. The display-layer of a button is 3. Some buttons are defined by the Table of Interactive Elements.
+A button is a kind of sprite. A button has a figure-name called the depressed state. The display status of a button is g-active. The associated canvas of a button is the main-menu. The graphlink status of a button is g-active. The display-layer of a button is 3. Some buttons are defined by the Table of Interactive Elements.
 
 Table of Interactive Elements
-sprite	image-ID	origin
-Continue_Game	Figure of Button-Continue	{55, 15}
-Help_Button	Figure of Button-Help	{236, 51}
-New_Game	Figure of Button-New Game	{56, 51}
-Options_Button	Figure of Button-Options	{339, 51}
-Quit_Game	Figure of Button-Quit	{482, 51}
+sprite	image-ID	origin	depressed state	resting state	
+Continue_Game	Figure of Button-Continue	{50, 13}	Figure of button-Continue_pressed	Figure of Button-Continue
+Help_Button	Figure of Button-Help	{231, 49}	Figure of button-Help_pressed	Figure of Button-Help
+New_Game	Figure of Button-New Game	{51, 49}	Figure of button-New Game_pressed	Figure of Button-New Game
+Options_Button	Figure of Button-Options	{333, 49}	Figure of button-Options_pressed	Figure of Button-Options
+Quit_Game	Figure of Button-Quit	{477, 49}	Figure of button-Quit_pressed	Figure of Button-Quit
+ScoreInfo_Button	Figure of Button-Score Info	{580, 665}	Figure of button-Score-Info_pressed	Figure of Button-Score Info
+Skip_Button	Figure of Button-Skip Apprentice	{63, 670}	Figure of button-Skip-to-Apprentice_pressed	Figure of Button-Skip Apprentice
+
 [Reset_Victories	Figure of Button-Reset	{521, 674}[without a modal confirmation, it seems best to leave this for the Options menu]]
-ScoreInfo_Button	Figure of Button-Score Info	{587, 672}[680]
-Skip_Button	Figure of Button-Skip Apprentice	{70, 674}
 
 
 A type-container is a kind of image-rendered string. The associated canvas of a type-container is the main-menu. Some type-containers are defined by the Table of Image String Boxes. The display-layer of a type-container is 3.
@@ -965,13 +974,17 @@ To process visuals after skipping difficulty:
 Section - Visual button response
 [We use visual button response for both keypresses and for clicks: keyboard input triggers the graphlink rules for the appropriate button.]
 
-The button-press track and the button-rebound track are animation tracks.
+The button-press track is an animation track.
 
-The animation-callback of the button-press track is "[@ animate the button-rebound track as a fade animation targeting the animation-target of the button-press track and using the Black-fader from 45 percent to 0 percent at 8 fps with a duration of 1 frame]".
+Animation rule for the button-press track:
+	let depressed be the animation-target of the button-press track;
+	if the current-frame of the button-press track is:
+		-- 1: now the image-ID of the depressed is the depressed state of the depressed;
+		-- 3: now the image-ID of the depressed is the resting state of the depressed.
 			
 First graphlink processing rule for a button (called the depressed):
-	unless the depressed is the Skip_Button:
-		animate the button-press track as a fade animation targeting the depressed and using the Black-fader from 0 percent to 45 percent at 8 fps with a duration of 1 frame.
+	now the animation-target of the button-press track is the depressed;
+	animate the button-press track as a custom animation at 8 fps with a duration of 3 frames.
 
 
 Section - Tooltips
@@ -999,8 +1012,10 @@ To close title screen:
 	repeat with tip running through tooltips:
 		deactivate tip;[turn off all tooltips]
 	cancel character input in the main-window;[just in case we're somehow waiting for input]
+	now the display-layer of the black-fader is 10001;[need to put fader above transition container to fade out whole menu]
 	animate the window-fading track as a fade animation targeting the graphics-window and using the Black-Fader from 0 % to 100 % at 8 fps with a duration of 6 frames;
 	delay input until all animations are complete;
+	now the display-layer of the black-fader is 9999;
 	shut down the graphics-window.
 	
 To cease animating all tracks but (target - an animation track):
