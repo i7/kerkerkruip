@@ -980,7 +980,12 @@ Animation rule for the button-press track:
 	let depressed be the animation-target of the button-press track;
 	if the current-frame of the button-press track is:
 		-- 1: now the image-ID of the depressed is the depressed state of the depressed;
-		-- 3: now the image-ID of the depressed is the resting state of the depressed.
+		-- 3: now the image-ID of the depressed is the resting state of the depressed;
+	if the depressed is ScoreInfo_Button and current-frame of the button-press track is 3:
+		if the display status of the Score-Tip is g-inactive:
+			activate the Score-Tip;
+		otherwise:
+			deactivate the Score-Tip.
 			
 First graphlink processing rule for a button (called the depressed):
 	now the animation-target of the button-press track is the depressed;
@@ -989,17 +994,11 @@ First graphlink processing rule for a button (called the depressed):
 
 Section - Tooltips
 
-A tooltip is a kind of sprite. The associated canvas of a tooltip is the main-menu. The display status of a tooltip is g-inactive. Some tooltips are defined by the Table of Tool-Tips.
+A tooltip is a kind of sprite. The associated canvas of a tooltip is the main-menu. The display-layer of a tooltip is 10000. The display status of a tooltip is g-inactive. Some tooltips are defined by the Table of Tool-Tips.
 
 Table of Tool-Tips
-sprite	image-ID	origin	display-layer
-Score-Tip	Figure of Tooltip-Score	{343, 474}[482]	10000
-
-Graphlink processing rule for ScoreInfo_Button:
-	if the display status of the Score-Tip is g-inactive:
-		activate the Score-Tip;
-	otherwise:
-		deactivate the Score-Tip;
+sprite	image-ID	origin
+Score-Tip	Figure of Tooltip-Score	{343, 474}[482]
 
 
 Chapter - Closing the title screen
