@@ -2490,6 +2490,25 @@ The gorgeous dagger is iron.
 
 The description of the gorgeous dagger is "Adorned with gold and a large emerald at the end of the hilt, this dagger is not only beautiful, but also perfect for precise attacks in tense situations. The decadence of its design proves it to be of Yahvinnean origin.".
 
+Section - Evil dagger (minor)
+
+The evil dagger is a major dagger.
+The evil dagger is deathly.
+The evil dagger is iron.
+
+The blood magic cost of evil dagger is 2.
+The blood magic level of evil dagger is 0.
+The blood magic maximum of evil dagger is 99.
+
+The description of evil dagger is "This dagger was once used as a ritual weapon by a Yahvinnean death cult. Whenever it hits someone, its evil magic has a [1 + blood magic level of evil dagger]% chance of killing the target outright. This percentage will increase by 1% when the dagger is fed."
+
+A contact rule (this is the evil dagger bonus rule):
+	if the global attacker weapon is the evil dagger:
+		if a random chance of (1 + blood magic level of evil dagger) in 100 succeeds:
+			now health of global defender is -1;
+			say "[roman type]The evil magic of the dagger [bold type]immediately kills[roman type] [the global defender]!";
+			rule fails.
+
 Section - Dagger of the double strike (major)
 
 The dagger of the double strike is a major dagger.
