@@ -2721,11 +2721,18 @@ The executioner's axe is a major axe.
 The executioner's axe is deathly.
 The executioner's axe is iron.
 
-The description of the executioner's axe is "This is the blade that chopped off the head of Philip the Traitor after he had been found guilty of murdering his brother, Charles IV. Ever since, pilgrims have flocked to Montenoir's temple of Nomos to see and revere it. How it has ended up in this dungeon is anyone's guess.".
+The description of the executioner's axe is "This is the blade that chopped off the head of Philip the Traitor after he had been found guilty of murdering his brother, Charles IV. Ever since, pilgrims have flocked to Montenoir's temple of Nomos to see and revere it. How it has ended up in this dungeon is anyone's guess. Feeding the axe will increase its attack modifier by +1.".
 
 The unlock level of the executioner's axe is 10.
 The unlock text of the executioner's axe is "an unwieldy axe that deals massive damage".
 
+The blood magic cost of executioner's axe is 15.
+The blood magic level of executioner's axe is 0.
+The blood magic maximum of executioner's axe is 99.
+
+Carry out feeding (this is the feed the executioner's axe rule):
+	if the noun is the executioner's axe:
+		increase the weapon attack bonus of the executioner's axe by 1.
 
 The damage die of the executioner's axe is 7.
 The weapon damage bonus of the executioner's axe is 4.
