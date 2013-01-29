@@ -765,14 +765,12 @@ To animate monster cards:
 		now text-string of death-counter is "[kill count of current-creature]";
 		deactivate the card-occluder;
 		now the animation-callback of the card-fader is "";
-		[say "[>console][bracket]Kerkerkruip[close bracket]: Card occluder deactivated.[<]";]
 		animate the card-fader track as a fade animation targeting the card-container and using the Black-Fader from 100 % to 0 % at 8 fps with a duration of 6 frames;
 		wait for main menu input until all animations are complete;
 		pause for 4000 milliseconds, accepting input;
 		animate the card-fader track as a fade animation targeting the card-container and using the Black-Fader from 0 % to 100 % at 8 fps with a duration of 6 frames;
 		now the animation-callback of the card-fader is "[@ activate the card-occluder]";
-		wait for main menu input until all animations are complete;
-		[say "[>console][bracket]Kerkerkruip[close bracket]: *** Card Completed ***.[<]".]
+		wait for main menu input until all animations are complete.
 		
 To decide what number is vertical-offset of (F - figure-name):
 	if F provides the property y-offset:
@@ -783,7 +781,6 @@ To decide what number is vertical-offset of (F - figure-name):
 Section - Preparing menu display
 
 To prepare type slugs:
-	[say "Preparing type slugs!";]
 	if the file of save data exists:
 		activate Continue_Game;
 	otherwise:
