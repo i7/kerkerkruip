@@ -505,36 +505,37 @@ The tormenting necklace is a major necklace.
 The tormenting necklace is deathly.
 The tormenting necklace is iron.
 
-The description of the tormenting necklace is "This monstrous necklace is made of shards of glass, fossilised teeth, broken points of daggers and thorns. It is imbued with a magic that deals paralysing pain to those who are wounded in combat. [italic type](The necklace is activated in two circumstances: when the wearer is dealt damage by an attack, and when an attack by the wearer deals damage to someone else. The person who has been dealt damage will writhe in agony and must skip the next turn.)[roman type]".
+The description of the tormenting necklace is "This monstrous necklace is made of shards of glass, fossilised teeth, broken points of daggers and thorns. It is imbued with a magic that deals paralysing pain to those who are wounded in combat. [italic type](The necklace is activated in two circumstances: when the wearer is dealt damage by an attack, and when an attack by the wearer deals damage to someone else. The person who has been dealt damage will writhe in agony and must skip the next [if blood magic level of tormenting necklace is 0]turn. Feeding the necklace will increase this to two turns[otherwise]two turns[end if].)[roman type]".
+
+The blood magic cost of tormenting necklace is 15.
+The blood magic level of tormenting necklace is 0.
+The blood magic maximum of tormenting necklace is 1.
 
 The unlock level of tormenting necklace is 6.
 The unlock text of tormenting necklace is "a necklace that paralyses those who get damaged in combat".
 
-A person can be necklace-tormented. A person is usually not necklace-tormented.
-The necklace-torment-counter is a number that varies. The necklace-torment-counter is 0.
+A person has a number called the necklace-torment-counter. The necklace-torment-counter of a person is usually 0.
+Definition: a person (called guy) is necklace-torment-affected if necklace-torment-counter of guy is not 0.
 
 Aftereffects rule (this is the tormenting necklace rule):
 	if the global defender wears the tormenting necklace or the global attacker wears the tormenting necklace:
 		if the attack damage is greater than 0:
-			unless global defender is necklace-tormented:
-				now global defender is necklace-tormented;
-				increase necklace-torment-counter by 1.
+			now necklace-torment-counter of global defender is (1 + blood magic level of tormenting necklace).
 
 This is the necklace of torment rule:
-	if main actor is necklace-tormented:
+	if necklace-torment-counter of the main actor is not 0:
 		say "[The main actor] writhe[s] in [bold type]agony[roman type]!";
-		now main actor is not necklace-tormented;
-		decrease necklace-torment-counter by 1;
+		decrease necklace-torment-counter of main actor by 1;
 		now combat status is concluding.
 
 The necklace of torment rule is listed before the the main actor chooses an action rule in the combat round rules.
 
-Every turn when necklace-torment-counter is not 0:
+Every turn when at least one person is necklace-torment-affected:
 	if combat status is peace:
-		repeat with guy running through necklace-tormented people:
-			now guy is not necklace-tormented.
+		repeat with guy running through necklace-torment-affected people:
+			now necklace-torment-counter of guy is 0.
 
-[Torment should be canceled outside combat. I've implemented this using a counter in order to speed things up and not have to cycle through all persons every turn.]
+[Torment should be canceled outside combat.]
 
 Section - Periapt of prophecy
 
@@ -864,13 +865,23 @@ The cloak of reflection is magical.
 The cloak of reflection is cloth.
 
 The unlock level of cloak of reflection is 8.
-The unlock text of cloak of reflection is "a cloak that can reflect ranged attacks back to the attacker".
+The unlock text of cloak of reflection is "a cloak that sometimes reflects ranged attacks back to the attacker".
 
-The description of the cloak of reflection is "A piece of silk with thousands of small magical mirrors sewn on it, this cloak is both beautiful and useful. It will sometimes, though not infallibly, reflect back ranged attacks to the attacker.".
+The blood magic cost of cloak of reflection is 4.
+The blood magic level of cloak of reflection is 0.
+The blood magic maximum of cloak of reflection is 3.
+
+To decide which number is the cloak of reflection percentage:
+	let n be 20 * blood magic level of cloak of reflection;
+	increase n by 20;
+	decide on n.
+
+The description of the cloak of reflection is "A piece of silk with thousands of small magical mirrors sewn on it, this cloak is both beautiful and useful. It will reflect ranged attacks back to the attacker [cloak of reflection percentage]% of the time[if blood magic level of cloak of reflection is not blood magic maximum of cloak of reflection]. This will increase by 20% if the cloak is fed[end if].".
 
 Check an actor hitting when the noun wears the cloak of reflection (this is the cloak of reflection rule):
 	if the global attacker weapon is ranged:
-		if a random chance of 2 in 7 succeeds:
+		let n be 1 + blood magic level of cloak of reflection;
+		if a random chance of n in 5 succeeds:
 			say "[if the noun is the player]The[otherwise][Possessive of the noun][end if] cloak of reflection [bold type]reflects[roman type] the attack back to [the actor]!";
 			try the actor hitting the actor instead.
 
@@ -879,6 +890,7 @@ A dungeon interest rule (this is the Malygris sometimes wears the cloak of refle
 		if Malygris does not wear a cloak:
 			now Malygris wears the cloak of reflection;
 			if generation info is true, say "* Malygris wears the cloak of reflection.".
+
 
 Section - Psychedelic cloak (minor)
 
@@ -2288,15 +2300,19 @@ Section - Sneaking sword (monster)
 
 [Mouser carries it]
 
-There is a sword called sneaking sword. The description of sneaking sword is "This sword is especially suitable for making sneaky attacks."
+There is a sword called sneaking sword. The description of sneaking sword is "This sword is especially suitable for making sneaky attacks, dealing [blood magic level of sneaking sword] extra damage. This damage bonus will increase by 1 if the sword is fed."
 
-The special weapon info of the sneaking sword is "; +2 damage when hidden[run paragraph on]"
+The special weapon info of the sneaking sword is "; +[blood magic level of sneaking sword] damage when hidden[run paragraph on]"
+
+The blood magic cost of sneaking sword is 2.
+The blood magic level of sneaking sword is 1.
+The blood magic maximum of sneaking sword is 99.
 
 A damage modifier rule (this is the sneaking sword damage bonus rule):
 	if the global attacker weapon is the sneaking sword:
 		if the global attacker is hidden:
-			say " + 2 (sneaky attack)[run paragraph on]";
-			increase the attack damage by 2.
+			say " + [blood magic level of sneaking sword] (sneaky attack)[run paragraph on]";
+			increase the attack damage by blood magic level of sneaking sword.
 
 A treasure placement rule (this is the sneaking sword can be singing sword rule):
 	if a random chance of 1 in 5 succeeds:
