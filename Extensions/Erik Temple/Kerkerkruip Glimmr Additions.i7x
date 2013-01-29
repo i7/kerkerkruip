@@ -29,6 +29,22 @@ Chapter - Simplifying Glimmr credits
 The announce colophon rule is not listed in any rulebook.
 
 
+Chapter - Setting background colors for Gargoyle
+
+To open up (graphics-window - a g-window):
+	if graphics-window is g-unpresent and the main-window is ancestral to graphics-window:
+		set the Gargoyle background color to the color g-black;
+		now every g-window ancestral to graphics-window is g-required;
+		calibrate windows.
+
+
+For window-shutting the graphics-window:
+	if the graphics-window is g-present:
+		set the Gargoyle background color to the color g-white;
+		now every g-window descended from the graphics-window is g-unrequired;
+		calibrate windows.
+
+
 Chapter - Assets
 
 A figure name has a number called the y-offset. The y-offset of a figure-name is usually 0.[It is not necessary for all figure-names to get this property, but a bug in Inform--http://inform7.com/mantis/view.php?id=1067--prevents us from referring to the property if it is not defined in this way.]
@@ -878,10 +894,6 @@ To move on from main menu, deactivating it:
 	now menu-active is false;
 	unless deactivating it:
 		now redraw-menu is true.
-
-[First glulx character input rule when the showing the title screen activity is going on:
-	unless the displaying activity is going on:
-		cancel character input in the main-window;]
 
 Glulx character input rule when the graphics-window is g-present (this is the graphical menu keyboard input rule):
 	if the showing the title screen activity is going on:
