@@ -477,17 +477,14 @@ To pause for (T - number) milliseconds/ms, accepting input:
 	otherwise:
 		delay input until all animations are complete.
 
-
-For updating graphics windows for animation when pause track is animation-active (this is the don't refresh windows while we are merely holding rule):
+[For updating graphics windows for animation when pause track is animation-active (this is the don't refresh windows while we are merely holding rule):
 	#if utilizing animation debugging;
-	say "[>console][bracket]Kerkerkruip[close bracket]Graphics drawing suppressed (don't refresh windows while we are merely holding rule).[<]";
+	say "[>console][bracket]Kerkerkruip[close bracket]: Graphics drawing suppressed (don't refresh windows while we are merely holding rule).[<]";
 	#end if;
-	do nothing.
+	do nothing.]
 	
 
-
 Chapter - Menu control
-[###]
 
 Menu-active is a truth state variable.
 Redraw-menu is a truth state variable. Redraw-menu is false.
@@ -537,7 +534,6 @@ For showing the title screen when full graphics support is true and data value 5
 	otherwise if menu-active is true:
 		show startup instructions;
 	if redraw-menu is true:
-		say "*** Redrawing!";
 		JUMP to redraw_menu;
 	otherwise:
 		clear the main-window;[we don't want to see old content in the main window when the menu closes]
@@ -915,7 +911,9 @@ Glulx character input rule when the graphics-window is g-present (this is the gr
 		if key means quit game:
 			follow the graphlink processing rules for Quit_Game;
 		if key means skip novice mode and difficulty is 0:
-			follow the graphlink processing rules for Skip_Button.
+			follow the graphlink processing rules for Skip_Button;
+		if key means show score info tooltip:
+			follow the graphlink processing rules for ScoreInfo_Button.
 
 
 Section - Key codes
@@ -938,6 +936,9 @@ To decide whether (keypress - a number) means quit game:[Q(uit)]
 	
 To decide whether (keypress - a number) means skip novice mode:[S(kip)]
 	if keypress is 83 or keypress is 115 and difficulty is 0, decide yes.
+
+To decide whether (keypress - a number) means show score info tooltip:[(I)nfo]
+	if keypress is 73 or keypress is 105, decide yes.
 	
 [To decide whether (keypress - a number) means reset victories:[R(eset)]
 	if keypress is 82 or keypress is 114, decide yes.
