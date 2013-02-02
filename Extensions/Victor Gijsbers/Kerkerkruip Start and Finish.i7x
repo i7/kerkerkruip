@@ -133,9 +133,10 @@ Figure opening figure is the file "smallercover.jpg".
 
 Rule for showing the title screen (this is the text title screen rule):
 	while 1 is 1:
+		close the status window;[in case we've come to the menu with it open]
 		clear the screen;
-		redraw status line;
-		say paragraph break;		
+		[redraw status line;
+		say paragraph break;]	
 		if glulx text-buffer graphics is supported:
 			display figure opening figure[ centered];
 		otherwise:
@@ -243,6 +244,22 @@ This is the achievement resetting rule:
 This is the unlock everything rule:
 	set data value 4 to 100;
 	consider the quit rule.
+
+
+Section - Adding menu screen graphics to the Options menu (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+Table of Options Menu (continued)
+title	subtable	description	toggle 
+"Toggle menu graphics (will restart the game)"	--	--	the toggle menu graphics rule
+
+This is the toggle menu graphics rule:
+	if data value 5 is 1:
+		set data value 5 to -1, table only;
+	otherwise:
+		set data value 5 to 1, table only;
+	set data value 6 to 0;
+	follow the immediately restart the VM rule.
+
 
 Section - Help Menu
 	

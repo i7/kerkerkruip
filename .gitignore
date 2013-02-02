@@ -1,16 +1,17 @@
 # We first ignore all projects and extensions so that we can simply copy our I7 directory into the repository.
-*.inform
-* Materials
-*.i7x
+*~
+*.blurb
+*Build
+*.DS_Store
 *.glk*
-.DS_Store
-Projects/Kerkerkruip.inform/Settings.plist
-Projects/Kerkerkruip.inform/manifest.plist
-Projects/Kerkerkruip.inform/uuid.txt
+*.iFiction
+*Index
+*Release
+*.skein
 
 # The stuff we want to include is listed here, prefixed with !
 !Extensions/Victor Gijsbers/Kerkerkruip*
 !Extensions/Erik Temple/Kerkerkruip*
-#Projects/Kerkerkruip Materials/Figures/  (for later, perhaps)
+!Projects/Kerkerkruip Materials/Figures/
 
 Reserved
