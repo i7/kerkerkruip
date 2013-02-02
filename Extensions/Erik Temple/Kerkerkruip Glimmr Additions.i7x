@@ -9,8 +9,8 @@ Include Kerkerkruip Image Fonts by Erik Temple.
 Include Glimmr Animation Fader - Black by Erik Temple.
 [Include Glimmr Debugging Console by Erik Temple.
 
-Use animation debugging.
-Use Glimmr debugging.
+[Use animation debugging.
+Use Glimmr debugging.]
 
 To say >console:
 	say echo stream of main-window.
@@ -49,11 +49,11 @@ Chapter - Assets
 
 A figure name has a number called the y-offset. The y-offset of a figure-name is usually 0.[It is not necessary for all figure-names to get this property, but a bug in Inform--http://inform7.com/mantis/view.php?id=1067--prevents us from referring to the property if it is not defined in this way.]
 
-[Section - Sounds
+Section - Sounds
 
 Sound of Klezmer is the file "Los_Jekes_-_Klezmer_de_Coiro.ogg".
 Sound of Persian is the file "Christian__Kiane__Fromentin_-_Ilk_Bahar.ogg".
-Sound of Spanish gypsy is the file "Los_Jekes_-_Romani.ogg".]
+Sound of Spanish gypsy is the file "Los_Jekes_-_Romani.ogg".
 
 
 Section - Minimovies
@@ -517,7 +517,7 @@ For showing the title screen when full graphics support is true and data value 5
 		set data value 6 to 0;
 	if session flag is false:
 		show a minimovie;	
-		[play the theme music;]
+		play the theme music;
 		show the title;
 	set JUMP POINT redraw_menu;
 	now menu-active is true;
@@ -1014,6 +1014,7 @@ Score-Tip	Figure of Tooltip-Score	{343, 474}[482]
 Chapter - Closing the title screen
 
 The window-fading track is an animation track. The animation-callback of the window-fading track is "[@ now the associated canvas of the graphics-window is the g-null-canvas]".
+The music-fading track is an animation track. The animation-callback of the music-fading track is "[@ stop background channel]".
 
 To close title screen:
 	open up the graphics-window;[window may be closed.]
@@ -1023,6 +1024,8 @@ To close title screen:
 	cancel character input in the main-window;[just in case we're somehow waiting for input]
 	now the display-layer of the black-fader is 10001;[need to put fader above transition container to fade out whole menu]
 	animate the window-fading track as a fade animation targeting the graphics-window and using the Black-Fader from 0 % to 100 % at 8 fps with a duration of 6 frames;
+	if menu-active is false:[fade out music only if we're leaving menu for good.]
+		animate the music-fading track as a custom animation at 8 fps with a duration of 6 frames;
 	delay input until all animations are complete;
 	now the display-layer of the black-fader is 9999;
 	shut down the graphics-window.
@@ -1032,6 +1035,72 @@ To cease animating all tracks but (target - an animation track):
 		if track is not target:
 			deactivate track.
 
+Animation rule for the music-fading track:
+	decrement the volume of the background;
+	set simple volume for background channel to volume of background.
+
+
+Chapter - Sound
+
+A sound-channel is a kind of thing.
+A sound-channel has a number called the ref-number. 
+A sound-channel has a number called the volume. The volume of a sound-channel is usually 5.
+
+Foreground and background are sound-channels.
+
+To play the theme music:
+	set up sound channels;
+	play sound of Persian in background channel, looping.
+
+To say resource number of (S - a sound name):
+	(- print ResourceIDsOfSounds-->{S} ; -).
+
+To set up sound channels:
+	repeat with item running through sound-channels:
+		now the ref-number of item is the internal number of item.
+
+To decide what number is internal number of (foreground - a sound-channel):
+	(- gg_foregroundchan -);
+
+To decide what number is internal number of (background - a sound-channel):
+	(- gg_backgroundchan -);
+
+To play (sound - a sound-name) in (channel - a sound-channel) channel, looping, with notification:
+	(- SoundPlay(ResourceIDsOfSounds-->{sound},{channel},{phrase options}); -)
+
+To set simple volume for (channel - a sound-channel) channel to (volume - a number):
+	(- SetVolume({channel},{volume}); -)
+
+To stop (channel - a sound-channel) channel:
+	(- SoundCease({channel}); -)
+
+
+Include (- 
+
+[ SoundPlay sound chan loop notify;
+	if (glk_gestalt(gestalt_Sound,0)) {
+		glk_schannel_play_ext(chan.ref_number,sound,0-loop,notify); 
+	}
+];
+
+[ SetVolume chan vol;
+	if (glk_gestalt(gestalt_SoundVolume,0)) {
+		if ((vol <= 5) && (vol > 0)) {
+			glk_schannel_set_volume(chan.ref_number, vol * 13107+1);
+		}
+		else if (vol == 0) {
+			glk_schannel_set_volume(chan.ref_number, vol);
+		}
+	}
+];
+
+[ SoundCease chan;
+	if (glk_gestalt(gestalt_Sound,0)) {
+		glk_schannel_stop(chan.ref_number);
+	}
+];
+
+-) after "Figures.i6t".
 
 Kerkerkruip Glimmr Additions ends here.
 
