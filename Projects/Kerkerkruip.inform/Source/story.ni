@@ -88,24 +88,41 @@ g-inventory-color	14540253
 
 The back-colour of the main-window is g-white.[For CocoaGlk]
 
-The stats-window is a text-buffer g-window spawned by the main-window. The back-colour is g-stats-color. The measurement is 30. The position is g-placeright.
+The stats-window is a text-buffer g-window spawned by the main-window. The back-colour is g-stats-color. The measurement is 40. The position is g-placeright.
 
-The inventory-window is a text-buffer g-window spawned by the stats-window. The back-colour is g-inventory-color. The measurement is 50. The position is g-placebelow.
+The stat-header-window is a text-buffer g-window spawned by the stats-window. The measurement is 1. The position is g-placeabove. The scale method is g-fixed-size. The back-colour is g-inventory-color.
+
+The inventory-window is a text-buffer g-window spawned by the stats-window. The back-colour is g-stats-color. The measurement is 50. The position is g-placebelow.
+
+The inventory-header-window is a text-buffer g-window spawned by the inventory-window. The measurement is 1. The position is g-placeabove. The scale method is g-fixed-size.  The back-colour is g-inventory-color.
+
 
 Window-drawing rule for the stats-window (this is the construct stats window rule):
 	move focus to stats-window, clearing the window;
 	try asking status;
+	return to main screen.
+	
+Window-drawing rule for the stat-header-window (this is the construct stat header window rule):
+	move focus to stat-header-window, clearing the window;
+	say "[bold type]Status[roman type]";
+	return to main screen.
+	
+Window-drawing rule for the inventory-header-window (this is the construct inventory header window rule):
+	move focus to inventory-header-window, clearing the window;
+	say "[bold type]Inventory[roman type]";
 	return to main screen.
 
 Window-drawing rule for the inventory-window (this is the construct inventory window rule):
 	move focus to inventory-window, clearing the window;
 	try taking inventory;
 	return to main screen.
-
+	
 Last when play begins:
 	open the status window;
 	open up the stats-window;
 	open up the inventory-window;
+	open up the stat-header-window;
+	open up the inventory-header-window;
 	
 Last every turn rule:
 	follow the window-drawing rules for the stats-window;
