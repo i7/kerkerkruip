@@ -49,11 +49,11 @@ Chapter - Assets
 
 A figure name has a number called the y-offset. The y-offset of a figure-name is usually 0.[It is not necessary for all figure-names to get this property, but a bug in Inform--http://inform7.com/mantis/view.php?id=1067--prevents us from referring to the property if it is not defined in this way.]
 
-Section - Sounds
+[Section - Sounds
 
 Sound of Klezmer is the file "Los_Jekes_-_Klezmer_de_Coiro.ogg".
 Sound of Persian is the file "Christian__Kiane__Fromentin_-_Ilk_Bahar.ogg".
-Sound of Spanish gypsy is the file "Los_Jekes_-_Romani.ogg".
+Sound of Spanish gypsy is the file "Los_Jekes_-_Romani.ogg".][****]
 
 
 Section - Minimovies
@@ -517,7 +517,7 @@ For showing the title screen when full graphics support is true and data value 5
 		set data value 6 to 0;
 	if session flag is false:
 		show a minimovie;	
-		play the theme music;
+		[play the theme music;][****]
 		show the title;
 	set JUMP POINT redraw_menu;
 	now menu-active is true;
@@ -1023,9 +1023,12 @@ To close title screen:
 		deactivate tip;[turn off all tooltips]
 	cancel character input in the main-window;[just in case we're somehow waiting for input]
 	now the display-layer of the black-fader is 10001;[need to put fader above transition container to fade out whole menu]
-	animate the window-fading track as a fade animation targeting the graphics-window and using the Black-Fader from 0 % to 100 % at 8 fps with a duration of 6 frames;
-	if menu-active is false:[fade out music only if we're leaving menu for good.]
-		animate the music-fading track as a custom animation at 8 fps with a duration of 6 frames;
+	let fade-length be 6;
+	if menu-active is false:
+		now fade-length is the maximum sound volume;
+	animate the window-fading track as a fade animation targeting the graphics-window and using the Black-Fader from 0 % to 100 % at 8 fps with a duration of (fade-length) frames;
+	[if menu-active is false:[fade out music only if we're leaving menu for good.]
+		animate the music-fading track as a custom animation at 8 fps with a duration of (fade-length) frames;][****]
 	delay input until all animations are complete;
 	now the display-layer of the black-fader is 9999;
 	shut down the graphics-window.
@@ -1042,15 +1045,17 @@ Animation rule for the music-fading track:
 
 Chapter - Sound
 
+The maximum sound volume is a number variable. The maximum sound volume is 10.
+
 A sound-channel is a kind of thing.
 A sound-channel has a number called the ref-number. 
-A sound-channel has a number called the volume. The volume of a sound-channel is usually 5.
+A sound-channel has a number called the volume. The volume of a sound-channel is usually 10.
 
 Foreground and background are sound-channels.
 
 To play the theme music:
 	set up sound channels;
-	play sound of Persian in background channel, looping.
+	[play sound of Persian in background channel, looping.][****]
 
 To say resource number of (S - a sound name):
 	(- print ResourceIDsOfSounds-->{S} ; -).
@@ -1085,11 +1090,11 @@ Include (-
 
 [ SetVolume chan vol;
 	if (glk_gestalt(gestalt_SoundVolume,0)) {
-		if ((vol <= 5) && (vol > 0)) {
-			glk_schannel_set_volume(chan.ref_number, vol * 13107+1);
+		if ((vol <= (+ maximum sound volume +)) && (vol > 0)) {
+			glk_schannel_set_volume(chan.ref_number, (vol * (65535 / (+ maximum sound volume +)))+1);
 		}
-		else if (vol == 0) {
-			glk_schannel_set_volume(chan.ref_number, vol);
+		else {
+			glk_schannel_set_volume(chan.ref_number, 0);
 		}
 	}
 ];
