@@ -703,8 +703,8 @@ Include Basic Screen Effects by Emily Short.
 
 Table of Fancy Status
 left	central	right
-"[bold type][status location][roman type]"	"Tension: [tension]"	"Health: [health of the player]/[permanent health of the player]"
-"Special powers: [powers of the player]"
+" [bold type][status location][roman type]"	"Tension: [tension]"	"Health: [health of the player]/[permanent health of the player]"
+" Special powers: [powers of the player]"
 
 To say status location:
 	 let phrase be indexed text;
