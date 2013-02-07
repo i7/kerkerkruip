@@ -13,10 +13,11 @@ Include Glulx Entry Points by Emily Short.
 Include Dynamic Objects by Jesse McGrew.
 Include Epistemology by Eric Eve. [Doesn't work with moving people.]
 Include Glulx Status Window Control by Erik Temple.
-[Include Kerkerkruip Glimmr Additions by Erik Temple.]
-Include Flexible Windows by Jon Ingold.
 
 [Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. Be sure to comment Flexible Windows in instead!]
+[Include Kerkerkruip Glimmr Additions by Erik Temple.]
+Include Flexible Windows by Jon Ingold.
+Include Kerkerkruip Windows by Erik Temple.
 
 Every turn (this is the mark items as seen every turn rule): 
 	repeat with item running through things that are enclosed by the location:
@@ -69,7 +70,7 @@ Generation info is a truth state that varies. Generation info is [true]false.
 	
 
 Chapter - Flexible Windows relisting
-[Kerkerkruip's when play begin rules don't fire until after the menu is cleared. This means that extension such as Flexible Windows that have critical startup code in when play begins need to be adjusted. Due to weaknesses in Inform's extension interactions, this has to be in story.ni rather than the Kerkerkruip Glimmr extension.]
+[Kerkerkruip's when play begin rules don't fire until after the menu is cleared. This means that extension such as Flexible Windows that have critical startup code in when play begins need to be adjusted. Due to weaknesses in Inform's extension interactions, this has to be in story.ni rather than the Kerkerkruip Glimmr Additions extension.]
 
 The allocate rocks rule is not listed in the when play begins rules. The allocate rocks rule is listed before the show the title screen rule in the startup rules.
 The initial hyperlink request rule is not listed in the when play begins rules. The initial hyperlink request rule is listed before the show the title screen rule in the startup rules.
