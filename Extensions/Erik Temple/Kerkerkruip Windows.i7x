@@ -63,6 +63,7 @@ To decide which special-style is normal-style:
 	(- 0 -).
 
 To open the/-- status window:
+	shut down border-7-window;[just in case it's already open]
 	if the status window is already open, rule fails;
 	set styles for the status window;
 	initialize the status window;
