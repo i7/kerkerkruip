@@ -850,9 +850,15 @@ Carry out entering the huge forge:
 	say "You decide to test whether the inside of the forge is truly as hot as hell. Your experience is consistent with the stories.";
 	end the story saying "Only a little carbon remains of you.".
 
-Every turn when the huge forge contains at least one thing (this is the huge forge rule):
+[Every turn when the huge forge contains at least one thing (this is the huge forge rule):
 	repeat with item running through things enclosed by huge forge:
-		now heat strength of item is 9.
+		now heat strength of item is 9.]
+
+Last check inserting something into the huge forge:
+	say "You hold [the noun] in the forge for a few seconds.";
+	now heat strength of noun is 9;
+	rule succeeds.
+
 
 
 Chapter - Space-Time Discontinuum
