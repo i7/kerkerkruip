@@ -17,7 +17,7 @@ Include Glulx Status Window Control by Erik Temple.
 [Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. Be sure to comment Flexible Windows in instead!]
 [Include Kerkerkruip Glimmr Additions by Erik Temple.]
 Include Flexible Windows by Jon Ingold.
-Include Kerkerkruip Windows by Erik Temple.
+[Include Kerkerkruip Windows by Erik Temple.]
 
 Every turn (this is the mark items as seen every turn rule): 
 	repeat with item running through things that are enclosed by the location:
@@ -37,6 +37,7 @@ Include Kerkerkruip Events by Victor Gijsbers.
 Include Kerkerkruip ATTACK Additions by Victor Gijsbers.
 Include Kerkerkruip Systems by Victor Gijsbers.
 Include Kerkerkruip Systems - Hiding Smoke Ethereal by Victor Gijsbers.
+Include Kerkerkruip Monster Abilities by Victor Gijsbers.
 Include Kerkerkruip Actions and UI by Victor Gijsbers.
 Include Kerkerkruip Items by Victor Gijsbers.
 Include Kerkerkruip Locations by Victor Gijsbers.
