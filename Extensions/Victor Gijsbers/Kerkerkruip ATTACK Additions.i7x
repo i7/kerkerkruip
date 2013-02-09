@@ -2,6 +2,11 @@ Kerkerkruip ATTACK Additions by Victor Gijsbers begins here.
 
 Use authorial modesty.
 
+Section - No concentrating outside of combat
+
+Check concentrating (this is the do not concentrate outside of combat rule):
+	if combat status is peace:
+		say "You can only concentrate in a combat situation." instead.
 
 Section - Attacking when the combat status is peace (Nomos, slaves)
 
