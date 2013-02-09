@@ -927,6 +927,7 @@ An AI action selection rule for the wisps of pain (this is the special wisps AI 
 An AI action selection rule for the wisps of pain (this is the wisps of pain consider tormenting rule):
 	choose a blank Row in the Table of AI Action Options;
 	now the Option entry is the action of the wisps of pain tormenting;
+	now the Action Weight entry is 0;
 	if the wisp-target is the wisps of pain:
 		let n be 0;
 		repeat with guy running through people in location of the wisps of pain:
@@ -1183,6 +1184,7 @@ An AI action selection rule for the at-Act chain golem (this is the chain golem 
 			let X be a random readied artificial carried by the player;
 			choose a blank Row in the Table of AI Action Options;
 			now the Option entry is the action of the chain golem golem-disarming the chosen target;
+			now the Action Weight entry is 0;
 			if a random chance of 1 in 10 succeeds:
 				increase the Action Weight entry by 20.
 
@@ -4286,7 +4288,7 @@ Considered-shape is an as-shape that varies.
 An AI action selection rule for the aswang (this is the aswang considers shape shifting rule):
 	choose a blank Row in the Table of AI Action Options;
 	now the Option entry is the action of the aswang aswang-shifting;
-	[now the Action Weight entry is 0;]
+	now the Action Weight entry is 0;
 	now considered-shape is as-witch;
 	if the as-shape of the aswang is as-witch and the health of the aswang is less than 15:
 		now considered-shape is as-dog;
