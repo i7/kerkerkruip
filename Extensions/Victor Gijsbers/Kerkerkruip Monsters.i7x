@@ -14,7 +14,7 @@ A person has a number called kill count. [ The number of times the person has ki
 Table of Monster Statistics
 ColID (a number)	ColSeen [encountered] (a truth state)	died (a number)	kill (a number)
 --	--	--	--
-with 35 blank rows [ Don't forget to update this when monsters are added! We include a buffer incase the player goes back to an older version. ]
+with 36 blank rows [ Don't forget to update this when monsters are added! We include a buffer incase the player goes back to an older version. ]
 
 The File Of Monster Statistics is called "KerkerkruipStats".
 
@@ -1195,7 +1195,7 @@ Carry out a person golem-disarming:
 		say "[roman type] [The noun] see[s] it coming in time, and manage[s] to keep the weapon out of the golem's reach.";
 	otherwise:
 		let X be a random readied weapon carried by the noun;
-		say "[roman type] [The noun] realise[s] what is happening only when it is too late, and a chain has already wrapped itself around [possessive of the noun] [X], pulls sharply, and sends the weapon flying across the room.";
+		say "[roman type] [The noun] realise[s] what is happening only when it is too late, and a chain has already wrapped itself around [possessive of the noun] [X], pulls sharply, and [bold type]sends the weapon flying[roman type] across the room.";
 		now X is not readied;
 		now a random natural weapon part of the noun is readied;
 		move X to the location.
@@ -1725,10 +1725,15 @@ Section - Getting stronger
 
 [The demon of rage gets stronger whenever someone dies.]
 
+Demon-of-rage-stored-location is a room that varies.
+
+First killing rule (this is the demon of rage set the stage rule):
+	now demon-of-rage-stored-location is the location of killed-guy.
+		
 Last killing rule (this is the demon of rage gets stronger rule):
 	if demon of rage is not off-stage:
 		if killed-guy is not the demon of rage and killed-guy is not the player:
-			if x-coordinate of the location of killed-guy is not 100: [these rooms, such as the maze, are not part of the dungeon]
+			if x-coordinate of demon-of-rage-stored-location is not 100: [these rooms, such as the maze, are not part of the dungeon]
 				do the demon of rage power-up.
 
 To do the demon of rage power-up:
@@ -1738,8 +1743,8 @@ To do the demon of rage power-up:
 	increase health of demon of rage by 3;
 	increase permanent health of demon of rage by 3;
 	increase body score of demon of rage by 1;
-	increase body score of demon of rage by 2;
-	increase body score of demon of rage by 3;
+	increase mind score of demon of rage by 1;
+	increase spirit score of demon of rage by 2;
 	if demon-of-rage-number is 2:
 		now demon of rage is flyer;
 	if demon-of-rage-number is 3:
@@ -3582,7 +3587,7 @@ Fruit-launching crawling fruit:
 
 Section - Golden fruit
 
-There is a fruit called golden fruit. The growth threshold of golden fruit is 15.
+There is a fruit called golden fruit. The growth threshold of golden fruit is 14.
 The description of the golden fruit is "They are a beautiful gold.".
 
 The golden fruit timer is a number that varies.
@@ -3609,7 +3614,7 @@ Status rule (this is the golden fruit status rule):
 
 Section - Weird fruit
 
-There is a fruit called weird fruit. The growth threshold of weird fruit is 15.
+There is a fruit called weird fruit. The growth threshold of weird fruit is 14.
 The description of the weird fruit is "Just looking at them makes your head hurt.".
 Weird fruit is player-only.
 
@@ -3634,7 +3639,7 @@ Last AI action selection rule (this is the weird fruit randomise the action resu
 
 Section - Fruit of kings
 
-There is a fruit called the fruit of kings. The fruit of kings is not plural-named. The growth threshold of fruit of kings is 17.
+There is a fruit called the fruit of kings. The fruit of kings is not plural-named. The growth threshold of fruit of kings is 14.
 The description of the fruit of kings is "You feel reverence for this highest product of the natural world: the fruit from which the divine substance of ment is made!".
 Fruit of kings is player-only.
 
@@ -3668,124 +3673,53 @@ Carry out allfruiting:
 		now X is a part of the brambles.]
 
 
-Section - Old Bodmall stuff
+Chapter - Level 4 - Overmind
 
+The overmind is a monster. "You do not know whether the overmind is the name of the infernal machine that fills this room with shrieks of steam and clangs of metal, or of the wizened old homunculus inside it, or of them together. But whatever is the case: the overmind is here." The description of the overmind is "A little man with a long wide beard sits in the midst of an incredibly complicated and fast-moving contraption. Whistles blow and big flat pieces of metal bang together in a horrific symphony. Gleaming metal circles revolve around and through each other in a chaotic dance that appears to be a parody of a planetarium. Or perhaps it is a real planetarium representing a world made by a mad god.".
 
-[
-Section - Bodmall power - Raise fog
+Understand "homunculus" as the overmind.
 
-Bodmall-fogging is an action applying to nothing.
+The level of the overmind is 4.
+The ID of the overmind is 30.
+The overmind is huge.
 
-An AI action selection rule for Bodmall (this is the Bodmall considers fogging rule):
-	if smoke timer of the location of Bodmall is 0:
-		choose a blank Row in the Table of AI Action Options;
-		now the Option entry is the action of the Bodmall Bodmall-fogging;
-		now the Action Weight entry is a random number between -5 and 15;
+The health of the overmind is 38.
+The melee of the overmind is 4.
+The defence of the overmind is 11.
 
-Carry out Bodmall Bodmall-fogging:
-	say "Bodmall chants softly, and great [bold type]clouds of fog[roman type] or smoke rise up from the ground.";
-	now smoke timer of the location of Bodmall is a random number between 5 and 12.
+The body score of the overmind is 9.
+The mind score of the overmind is 10.
+The spirit score of the overmind is 7. 
 
+When play begins:
+	let X be a random natural weapon part of the overmind;
+	now printed name of X is "metal spike".
 
-Section - Bodmall power - Transmute metal to wood
+Section - Overmind bonus
 
-[TODO make this an action applying to a thing?]
-Bodmall-transmuting is an action applying to nothing.
+To decide which number is the overmind bonus of (guy - a person):
+	if the overmind is not off-stage:
+		unless the faction of the overmind hates faction of guy:
+			unless level of guy is greater than 3:
+				let n be level of guy;
+				if group level of guy > n:
+					now n is group level of guy;
+				decide on n;
+	decide on 0.
 
-An AI action selection rule for Bodmall (this is the Bodmall considers transmuting rule):
-	let X be a random readied weapon enclosed by the chosen target;
-	if X is iron or X is silver:
-		choose a blank Row in the Table of AI Action Options;
-		now the Option entry is the action of the Bodmall Bodmall-transmuting;
-		now the Action Weight entry is a random number between -50 and 20;
+A faculty bonus rule (this is the overmind faculty bonus rule):
+	if the overmind is not off-stage:
+		increase faculty bonus score by overmind bonus of test subject.
 
-Carry out Bodmall Bodmall-transmuting:
-	let X be a random readied weapon enclosed by the chosen target;
-	if X is iron or X is silver:
-		if X resists Bodmall transmutation:
-			say "Bodmall screams several harsh syllables and points at [the X]. Nothing happens.";
-		otherwise:
-			say "Bodmall screams several harsh syllables and points at [the X]. It immediately [bold type]turns to wood[roman type]!";
-			now X is wood;
-			now X is not rusted;
-			now damage die of X is damage die of X divided by 2;
-			decrease weapon attack bonus of X by 2;
-	otherwise:
-		say "Bodmall chants softly.".
+An attack modifier rule (this is the overmind attack and defence bonus rule):
+	if the overmind is not off-stage:
+		if (overmind bonus of the global attacker) is greater than 0:
+			if the numbers boolean is true, say " + [overmind bonus of the global attacker] (overmind)[run paragraph on]";
+			increase the attack strength by overmind bonus of the global attacker;
+		if (overmind bonus of the global defender) is greater than 0:
+			if the numbers boolean is true, say " - [overmind bonus of the global defender] (overmind)[run paragraph on]";
+			decrease the attack strength by overmind bonus of the global defender.
 
-To decide whether (item - a weapon) resists Bodmall transmutation:
-	let m be 20;
-	if item is major:
-		increase m by 10;
-	if item is epic:
-		increase m by 20;
-	if a random chance of 10 in m succeeds:
-		decide no;
-	otherwise:
-		decide yes.]
-
-[
-Check an actor attacking when the brambles are in the location (this is the attack with brambles in the location rule):
-	unless the actor is Bodmall or the actor is flying:
-		unless the actor is the player and the power of Bodmall is granted:
-			let W be a random readied weapon held by the actor;
-			unless W is ranged:
-				say "[The actor] must move through the thorny bushes to reach [the noun]. [italic type]";
-				test the spirit of the actor against 12;
-				if test result is true:
-					say " ";
-					test the body of the actor against 12;
-				if test result is true:
-					say "[roman type] The thorns deal [bold type]no damage[roman type].";
-				otherwise:
-					let n be 3;
-					calculate the pdr for the actor;
-					decrease n by pdr;
-					if n is less than 0:
-						now n is 0;
-					if n is 0:
-						say " [roman type]Because of damage reduction, the thorns deal [bold type]no damage[roman type] to [the actor].";
-					otherwise:
-						say " [roman type]The thorns deal [bold type][n] damage[roman type] to [the actor].";
-						decrease the health of the actor by n;
-						if the actor is dead:
-							if the actor is the player:
-								say "Your weakened body could not handle this!";
-								end the story saying "A thorn kills a man, not by force, but by pricking often.";
-								rule fails;
-							otherwise:
-								say "[The name of the actor] is killed by the thorns!";
-								rule fails.
-
-After reporting an actor dodging when the thorny bushes are in the location (this is the thorns hurt the dodger rule):
-	unless the actor is Bodmall or the actor is flying:
-		unless the actor is the player and the power of Bodmall is granted:
-			let n be 1;
-			calculate the pdr for the actor;
-			decrease n by pdr;
-			if n is less than 0, now n is 0;
-			unless n is 0:
-				say "Dodging is dangerous with so many thorns around; the bushes deal [bold type]1 damage[roman type] to [the actor].";
-				decrease the health of the actor by 1;
-				unless the actor is alive:
-					if the actor is the player:
-						say "Your weakened body could not handle this!";
-						end the story saying "A thorn kills a man, not by force, but by continuously pricking";
-						rule fails;
-					otherwise:
-						say "[The name of the actor] is killed by the thorns!";
-						rule fails.
-
-An attack modifier rule (this is the thorns running rule):
-	if the global defender is the player and the thorny bushes are in the location:
-		if the player is retreater or the player is runner:		
-			unless the power of Bodmall is granted:
-				say " + 3 (you are slowed down by the thorny bushes)[run paragraph on]";
-				increase the attack strength by 3;
-			otherwise:
-				unless the global attacker weapon is ranged:
-					say " - 2 (your retreat covered by the thorny bushes)[run paragraph on]";
-					decrease the attack strength by 2.]
 
 
 
