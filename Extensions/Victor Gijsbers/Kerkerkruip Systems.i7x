@@ -1382,11 +1382,11 @@ This is the turn-vampire rule:
 
 Status rule (this is the vampire status rule):
 	if current form is vampire-form:
-		say "You are a [bold type]vampire[roman type]: +2 mind, +1 attack, -2 defence, modest bonus to hiding, can turn into a [italic type]bat[roman type].[line break][run paragraph on]".
+		say "You are a [bold type]vampire[roman type]: +4 mind, +1 attack, -2 defence, modest bonus to hiding, can turn into a [italic type]bat[roman type].[line break][run paragraph on]".
 
 A mind bonus rule (this is the mind bonus of vampire rule):
 	if the test subject is the player and the current form is vampire-form:
-		increase faculty bonus score by 2.
+		increase faculty bonus score by 4.
 
 An attack modifier rule (this is the vampire has more chance to hit rule):
 	if the global attacker is the player and current form is vampire-form:
