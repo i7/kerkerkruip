@@ -1351,7 +1351,7 @@ Instead of smelling putrefying arm:
 
 Chapter - Hall of the Raging Banshees
 
-The Hall of the Raging Banshees is a room. "A shaded, grotesque hall, fully cut out of onyx.[if living banshees boolean is false] Deep within the blackness of its walls hideous female figures seem to scream at you.[otherwise] A horde of female spirits is flying around, wailing their insane laments.[end if] [italic type](Current tension modifier: +[bansheemod] body, -[bansheemod] mind[if living banshees boolean is true]; [20 + (4 * tension)]% chance of concentration failure[end if].)[roman type]"
+The hall of the raging banshees is a room. "A shaded, grotesque hall, fully cut out of onyx.[if living banshees boolean is false] Deep within the blackness of its walls hideous female figures seem to scream at you.[otherwise] A horde of female spirits is flying around, wailing their insane laments.[end if] [italic type](Current tension modifier: +[bansheemod] body, -[bansheemod] mind[if living banshees boolean is true]; [20 + (4 * tension)]% chance of concentration failure[end if].)[roman type]"
 
 The Hall of the Raging Banshees is connectable.
 The Hall of the Raging Banshees is not connection-inviting.
@@ -1419,7 +1419,7 @@ A mind bonus rule (this is the banshee mind bonus rule):
 
 Chapter - Tungausy Sweat Lodge 
 
-The Tungausy Sweat Lodge is a room. "The penetrating scent of dozens indigenous herbs pervade your nostrils as you enter the Tungausy Sweat Lodge.  A large circle of men wearing skull masks is standing around you, chanting monotonously in an ancient tongue.  In the four wind directions, incense burners are producing a grey, thick smoke. While you may feel feeble due to the intense smoke within this hall, the incense places your soul in a state of trance, assisting you in the use of religious powers. [italic type](Current tension modifier: +[incensemod] spirit, -[incensemod] on attacks.)[roman type]"
+The tungausy sweat lodge is a room. "The penetrating scent of dozens indigenous herbs pervade your nostrils as you enter the Tungausy Sweat Lodge.  A large circle of men wearing skull masks is standing around you, chanting monotonously in an ancient tongue.  In the four wind directions, incense burners are producing a grey, thick smoke. While you may feel feeble due to the intense smoke within this hall, the incense places your soul in a state of trance, assisting you in the use of religious powers. [italic type](Current tension modifier: +[incensemod] spirit, -[incensemod] on attacks.)[roman type]"
 
 The Tungausy Sweat Lodge is connectable.
 The Tungausy Sweat Lodge is not connection-inviting.
@@ -1455,7 +1455,7 @@ An attack modifier rule (this is the incense penalty in Sweat Lodge rule):
 
 Chapter - Columnated Ruins
 
-Columnated Ruins is a room. "This must have been a temple once, but all that is left is a forest of pillars, mostly broken and shattered. Even gods may be forgotten."
+The columnated ruins is a room. "This must have been a temple once, but all that is left is a forest of pillars, mostly broken and shattered. Even gods may be forgotten."
 
 Columnated Ruins is connectable.
 Columnated Ruins is not connection-inviting.
