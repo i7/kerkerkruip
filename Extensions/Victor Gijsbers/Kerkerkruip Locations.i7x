@@ -972,7 +972,7 @@ An aftereffects rule (this is the hit may send you off the vast staircase rule):
 				if the attack damage is greater than 0:
 					let n be a random number between 0 and 16;
 					if n is less than the attack damage:
-						say "Reeling from the blow, [the global defender] balance[s] on the edge of the staircase. [italic type]";
+						say "Reeling from the blow, [the global defender] balance[s] on the edge of the staircase. [italic type][run paragraph on]";
 						let n be a random number between 6 and 11;
 						test the body of the global defender against n;
 						say "[roman type]";
