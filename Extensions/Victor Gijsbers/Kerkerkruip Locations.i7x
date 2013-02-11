@@ -1468,7 +1468,7 @@ Columnated Ruins is civilised.
 
 The rarity of Collumnated Ruins is 1.
 
-The pillars are scenery in columnated ruins. The description of the pillars is "Larger creatures will have trouble navigating the dense forest of pillars, while smaller creatures will find many easy spots to duck away.".
+The pillars are scenery in columnated ruins. The description of the pillars is "Larger creatures will have trouble navigating the dense forest of pillars, while smaller creatures will find many easy spots to duck away.". Understand "column" and "pillar" and "columns" as the pillars.
 
 Instead of pushing or pulling or attacking the pillars:
 	say "They are too tough to play domino with.".
