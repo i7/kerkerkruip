@@ -2826,7 +2826,7 @@ Absorbing power of minotaur:
 	increase melee of the player by 3;
 	increase defence of player by 2;
 	increase permanent health of the player by 17;
-	say "As the minotaur dies, you feel its soul absorbed into your own body. ([bold type]Power of the minotaur[roman type]: +3 attack,  +2 defence, +17 health; ability to use the minotaur's axe; faculty bonus in the maze; 10% chance of dealing 10 bonus damage when attacking with an axe.)[paragraph break]".
+	say "As the minotaur dies, you feel its soul absorbed into your own body. ([bold type]Power of the minotaur[roman type]: +3 attack,  +2 defence, +17 health; ability to use the minotaur's axe; faculty bonus in the maze; a (your body)% chance of dealing 10 bonus damage when attacking with an axe.)[paragraph break]".
 
 A damage modifier rule (this is the power of the minotaur damage bonus rule):
 	if the power of the minotaur is granted and the actor is the player and the global attacker weapon is an axe:
