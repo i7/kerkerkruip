@@ -3168,7 +3168,7 @@ Section - Drakul's Lifeblood (epic)
 
 Drakul's lifeblood is an epic deathly glass thing. Understand "blood" and "vial" as Drakul's lifeblood. The description of Drakul's lifeblood is "This small vial holds the blood of a powerful vampire. Drinking it might have far-reaching consequences.".
 The unlock level of Drakul's lifeblood is 11.
-The unlock text of Darkul's lifeblood is "an small vial of blood that can turn you into a vampire".
+The unlock text of Drakul's lifeblood is "an small vial of blood that can turn you into a vampire".
 
 Instead of eating Drakul's lifeblood:
 	try drinking Drakul's lifeblood.
