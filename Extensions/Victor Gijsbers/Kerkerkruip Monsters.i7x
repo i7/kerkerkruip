@@ -675,7 +675,7 @@ Carry out scaling:
 	now scales-cooldown is n.
 	
 Aftereffects rule (this is the remove at-scale rule):
-	now the global attacker is not at-scale.
+	now the global defender is not at-scale.
 
 Status skill rule (this is the armadillo status skill rule):
 	if the power of armadillo is granted:
