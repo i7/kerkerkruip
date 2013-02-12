@@ -4508,7 +4508,7 @@ Mummy-cursing is an action applying to one thing.
 
 An AI action selection rule for the mummified priest (this is the mummified priest considers cursing rule):
 	let item be mummy-curse-item;
-	if item is a thing:
+	if item is not the mummified priest:
 		choose a blank Row in the Table of AI Action Options;
 		now the Option entry is the action of the mummified priest mummy-cursing item;
 		now the Action Weight entry is a random number between -10 and 25.
@@ -4525,7 +4525,10 @@ To decide which thing is mummy-curse-item:
 			let item be a random not cursed corruptible weapon carried by the chosen target;
 		otherwise if at least one not cursed corruptible clothing is carried by the chosen target:
 			let item be a random not cursed corruptible clothing carried by the chosen target;
-	decide on item.
+	unless item is nothing:
+		decide on item;
+	otherwise:
+		decide on mummified priest.
 		
 Carry out an actor mummy-cursing:
 	say "[The actor] speaks several horrible syllables of an evil, long-dead language. For a moment, [bold type][the noun] flashes[roman type] with a dark red light!";
