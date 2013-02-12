@@ -3273,10 +3273,10 @@ Check snorting:
 			take no time;
 			say "You cannot snort that." instead.
 
-Check snorting a package of ment when the combat status is not peace:
+[Check snorting a package of ment when the combat status is not peace:
 	unless player is hidden:
 		take no time;
-		say "There is absolutely no way you could pull that off in a combat situation. The ment would get spilled everywhere." instead.
+		say "There is absolutely no way you could pull that off in a combat situation. The ment would get spilled everywhere." instead.]
 
 Carry out snorting a package of ment:
 	if the ment addiction is 0 or at least three packages of ment are on-stage:
