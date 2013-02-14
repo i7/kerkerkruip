@@ -1151,8 +1151,16 @@ When play begins (this is the set scroll analyser count rule):
 	if a random chance of 1 in 4 succeeds:
 		increase scroll analyser count by 1.
 
-The scroll analyser is an open scenery container in library. The material of the scroll analyser is iron. The description of scroll analyser is "This weird machine can identify scrolls, [if scroll analyser count is greater than 0]and seems ready for operation. Just put a scroll in it, and it will do its magic[otherwise]but it seems to have broken. It no longer accepts scrolls[end if].".
+The scroll analyser is an open scenery container in library. The initial appearance of the scroll analyser is "A scroll analyser seems to have been abandoned here." The material of the scroll analyser is iron. The description of scroll analyser is "This weird machine can identify scrolls, [if scroll analyser count is greater than 0]and seems ready for operation. Just put a scroll in it, and it will do its magic[otherwise]but it seems to have broken. It no longer accepts scrolls[end if].".
 Understand "analyzer" and "weird" and "machine" and "device" as the scroll analyser.
+
+First dungeon interest rule (this is the turn the analyser into an extra rule):
+	if the library is not placed:
+		now scroll analyser is extra;
+		now scroll analyser is not scenery;
+		now mood of scroll analyser is civilised;
+		remove scroll analyser from play;
+		decrease scroll analyser count by 1.
 
 A treasure scoring rule (this is the scrolls in library rule):
 	if considered treasure contains a scroll and considered room is the library:
