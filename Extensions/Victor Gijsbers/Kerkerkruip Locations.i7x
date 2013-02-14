@@ -1236,14 +1236,14 @@ After deciding the scope of the player while adjusted scope for the drawing room
 			place guy in scope.
 
 Before taking a player action when the location is the drawing room:
-		now adjusted scope for the drawing room is true.
+	now adjusted scope for the drawing room is true.
 
 After taking a player action:
 	now adjusted scope for the drawing room is false.
 
 
 
-Before doing anything except examining or reaping in Drawing Room:
+Before doing anything except examining or reaping or going to in Drawing Room:
 	if the noun is a person and the location of the noun is not the location of the player:
 		take no time;
 		say "It is only a drawing." instead;
