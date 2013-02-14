@@ -6,17 +6,17 @@ Use authorial modesty.
 
 Chapter - Placing extra scenery
 
-An extra is a kind of thing. An extra is usually fixed in place.
+A thing can be extra. A thing is usually not extra.
 
-Considered extra is an extra that varies.
+Considered extra is a thing that varies.
 
 
 Dungeon interest rule (this is the add extra scenery rule):
-	let n be the number of off-stage extras;
+	let n be the number of off-stage extra things;
 	if n is greater than 8, now n is 8;
 	now n is a random number between 1 and n;
 	repeat with i running from 1 to n:
-		let considered extra be a random off-stage extra;
+		now considered extra is a random off-stage extra thing;
 		choose an extra room;
 		unless considered room is Entrance Hall:
 			move considered extra to considered room;
@@ -78,7 +78,7 @@ An extra scoring rule (this is the extra mood rule):
 
 Chapter - Broken pipe
 
-The broken pipe is an alchemical extra. "A broken pipe continuously spews forth vapours." The broken pipe is iron.
+The broken pipe is an alchemical fixed in place extra thing. "A broken pipe continuously spews forth vapours." The broken pipe is iron.
 The description of the broken pipe is "Smoke comes from a small iron pipe that is sticking out of the wall. Perhaps it went somewhere useful once, but whatever was attached to it seems to have been forcibly removed.".
 
 Smoke rule (this is the smoke from the broken pipe rule):
@@ -99,7 +99,7 @@ A dungeon interest rule (this is the teleportation-beacon-on rule):
 	otherwise:
 		now teleportation-beacon-on is false.
 
-The teleportation beacon is a magical stone extra. "You recognise a complicated stone contraption in a corner as a teleportation beacon. It seems to be [if teleportation-beacon-on is false]in[end if]active." Understand "complicated" and "stone" and "contraption" as the teleportation beacon.
+The teleportation beacon is a magical stone fixed in place extra thing. "You recognise a complicated stone contraption in a corner as a teleportation beacon. It seems to be [if teleportation-beacon-on is false]in[end if]active." Understand "complicated" and "stone" and "contraption" as the teleportation beacon.
 
 The description of the teleportation beacon is "When turned on, this beacon will ensure that all teleportations in Kerkerkruip lead to this room.".
 
@@ -138,7 +138,7 @@ Carry out an actor teleporting (this is the teleportation beacon rule):
 
 Chapter - Statue of shards
 
-The statue of shards is an iron alchemical extra. "A weird statue made of metal shards stands in one of the corners. It is ugly and slightly menacing."
+The statue of shards is an iron alchemical fixed in place extra thing. "A weird statue made of metal shards stands in one of the corners. It is ugly and slightly menacing."
 
 The description of the statue of shards is "It looks like some insane alchemist's practical joke.".
 
@@ -160,7 +160,7 @@ Every turn when the location of the statue of shards is the location of the play
 
 Chapter - Flickering lights
 
-The flickering lamps are a civilised extra. "Flickering lamps hang suspended from the ceiling, casting weird shadows all across the room." Understand "weird" and "shadows" as the flickering lamps. The flickering lamps are plural-named.
+The flickering lamps are a civilised fixed in place extra thing. "Flickering lamps hang suspended from the ceiling, casting weird shadows all across the room." Understand "weird" and "shadows" as the flickering lamps. The flickering lamps are plural-named.
 
 The description of the flickering lamps is "Because of the constantly shifting patterns of light and shadows, it should be relatively easy to hide in this room.".
 
@@ -177,7 +177,7 @@ Last detection rule (this is the flickering lamps detection rule):
 
 Part - Symbols
 
-A symbol-extra is a kind of extra.
+A symbol-extra is a kind of thing. A symbol-extra is always extra and fixed in place.
 
 Understand "read [symbol-extra]" as examining.
 
