@@ -692,6 +692,11 @@ For printing the locale description (this is the alternative-you-can-also-see ru
 			end the listing nondescript items activity with the domain;
 	continue the activity.
 
+Chapter - Whether all includes
+
+Rule for deciding whether all includes a someone-held thing while taking: it does not.
+
+Definition: a thing (called the item) is someone-held if item is enclosed by a person.
 
 Chapter - Layout
 
