@@ -170,8 +170,20 @@ Last detection rule (this is the flickering lamps detection rule):
 		now the detection probability is n.
 
 
+Chapter - Tungausy Totem
 
+The tungausy totem is a religious fixed in place extra thing. "A primitive totem pole of the tungausy people casts its eerie glance about the room." Understand "pole" as the tungausy totem.
 
+The description of the tungausy totem is "Being in the presence of the tungausy totem gives anyone a +3 bonus to spirit.".
+
+A spirit bonus rule (this is the tungausy totem spirit bonus rule):
+	if the tungausy totem is in the location:
+		increase faculty bonus score by 3.
+
+An extra scoring rule (this is the tungausy totem and sweat lodge not together rule):
+	if considered extra is tungausy totem:
+		if considered room is tungausy sweat lodge:
+			decrease current room score by 20.
 
 
 
