@@ -473,7 +473,7 @@ Aftereffects rule (this is the set rolling variables rule):
 	if the attack strength is not greater than the defence of the global defender and the global defender is at-roll:
 		now global defender is just-rolled;
 		now rolled-at-guy of the global defender is the global attacker;
-		now the actor is not at-roll.
+		now global defender is not at-roll.
 
 An attack modifier rule (this is the rolling bonus rule):
 	if the global attacker is just-rolled:
