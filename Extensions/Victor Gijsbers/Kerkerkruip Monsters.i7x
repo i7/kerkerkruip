@@ -1826,7 +1826,7 @@ Last check retreating (this is the do not retreat when power of rage rule):
 		take no time;
 		say "And allow [the Y] to live? Never!" instead.
 
-Last check going (this is the do not go in combat when power of rage rule):
+This is the do not go in combat when power of rage rule:
 	if the combat status is not peace and power of rage is granted:
 		let Y be the player;
 		repeat with X running through persons in the location:
@@ -1834,6 +1834,8 @@ Last check going (this is the do not go in combat when power of rage rule):
 				now Y is X;
 		take no time;
 		say "And allow [the Y] to live? Never!" instead.
+		
+The do not go in combat when power of rage rule is listed before the going and retreating in combat rule in the check going rules.
 
 Repelling power of rage:
 	decrease melee of the player by 2;

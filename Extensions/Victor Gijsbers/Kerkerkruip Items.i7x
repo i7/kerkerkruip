@@ -247,7 +247,7 @@ Last check retreating (this is the do not retreat when enraged rule):
 		take no time;
 		say "And allow [the Y] to live? Never!" instead.
 
-Last check going (this is the do not go in combat when enraged rule):
+This is the do not go in combat when enraged rule:
 	if the player is enraged and the combat status is not peace:
 		let Y be the player;
 		repeat with X running through persons in the location:
@@ -256,6 +256,7 @@ Last check going (this is the do not go in combat when enraged rule):
 		take no time;
 		say "And allow [the Y] to live? Never!" instead.
 
+The do not go in combat when enraged rule is listed before the going and retreating in combat rule in the check going rules.
 
 Section - Essence of Patience (minor)
 
