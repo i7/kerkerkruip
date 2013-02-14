@@ -257,6 +257,42 @@ Chance to win rule (this is the CTW blindness bonus rule):
 	if the global defender is blind and the global defender is not eyeless:
 		increase the chance-to-win by 2.
 
+Chapter - Being enraged
+
+A person can be enraged. A person is usually not enraged.
+
+The rage rules are a rulebook.
+
+To decide whether (guy - a person) is raging:
+	now test subject is guy;
+	consider the rage rules;
+	if rule succeeded:
+		decide yes;
+	otherwise:
+		decide no.
+		
+A rage rule:
+	if test subject is enraged:
+		rule succeeds.
+
+Status rule (this is the rage status rule):
+	if player is raging:
+		say "You are [bold type]raging[roman type], and will not retreat.[line break][run paragraph on]".
+
+This is the do not go in combat when raging rule:
+	if the player is raging and the combat status is not peace:
+		let Y be the player;
+		repeat with X running through persons in the location:
+			if the faction of X hates the faction of the player:
+				now Y is X;
+		take no time;
+		say "And allow [the Y] to live? Never!" instead.
+
+The do not go in combat when raging rule is listed before the going and retreating in combat rule in the check going rules.
+The do not go in combat when raging rule is listed in the check retreating rules.
+The do not go in combat when raging rule is listed in the check digging rules.
+
+
 Chapter - Insanity
 
 A Standard AI rule for an insane person (called P) (this is the insane people attack themselves rule):

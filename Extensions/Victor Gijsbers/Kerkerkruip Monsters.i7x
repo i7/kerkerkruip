@@ -1817,25 +1817,9 @@ Absorbing power of rage:
 	increase permanent health of the player by 10;
 	say "As the demon of rage dies, your heart is filled with anger. ([bold type]Power of rage[roman type]: +2 attack, +10 health; cannot retreat; you can [italic type]howl[roman type] to improve your next attack but permanently decrease your defence.)[paragraph break]".
 
-Last check retreating (this is the do not retreat when power of rage rule):
-	if the combat status is not peace and power of rage is granted:
-		let Y be the player;
-		repeat with X running through persons in the location:
-			if the faction of X hates the faction of the player:
-				now Y is X;
-		take no time;
-		say "And allow [the Y] to live? Never!" instead.
-
-This is the do not go in combat when power of rage rule:
-	if the combat status is not peace and power of rage is granted:
-		let Y be the player;
-		repeat with X running through persons in the location:
-			if the faction of X hates the faction of the player:
-				now Y is X;
-		take no time;
-		say "And allow [the Y] to live? Never!" instead.
-		
-The do not go in combat when power of rage rule is listed before the going and retreating in combat rule in the check going rules.
+A rage rule:
+	if test subject is the player and power of rage is granted:
+		rule succeeds.
 
 Repelling power of rage:
 	decrease melee of the player by 2;

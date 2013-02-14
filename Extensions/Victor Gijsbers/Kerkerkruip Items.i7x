@@ -226,8 +226,6 @@ The essence of rage is a minor essence. The indefinite article is "the".
 The essence of rage is magical.
 The essence of rage is iron.
 
-A person can be enraged. A person is usually not enraged.
-
 The description of the essence of rage is "This small metal bottle contains the magical essence of rage, distilled from the brain of [one of]a berserk warrior from the far north[or]Charles IV of Averoigne, who, at the moment of his greatest victory, was poisoned by the brother he had always cherished[sticky random]. When inhaled, it confers this mindset to the user. [italic type](+2 body, +2 spirit, -2 mind, +1 attack, unable to retreat.)[roman type]".
 
 Carry out inhaling the essence of rage:
@@ -238,25 +236,7 @@ Carry out inhaling the essence of rage:
 	increase melee of the player by 1;
 	now the player is enraged.
 
-Last check retreating (this is the do not retreat when enraged rule):
-	if the combat status is not peace and the player is enraged:
-		let Y be the player;
-		repeat with X running through persons in the location:
-			if the faction of X hates the faction of the player:
-				now Y is X;
-		take no time;
-		say "And allow [the Y] to live? Never!" instead.
 
-This is the do not go in combat when enraged rule:
-	if the player is enraged and the combat status is not peace:
-		let Y be the player;
-		repeat with X running through persons in the location:
-			if the faction of X hates the faction of the player:
-				now Y is X;
-		take no time;
-		say "And allow [the Y] to live? Never!" instead.
-
-The do not go in combat when enraged rule is listed before the going and retreating in combat rule in the check going rules.
 
 Section - Essence of Patience (minor)
 
