@@ -668,7 +668,7 @@ Check scaling:
 		say "You must wait [scales-cooldown] turn[unless scales-cooldown is 1]s[end if] before you can use your scaling ability again." instead.		
 
 Carry out scaling:
-	say "Hard scales appear all over your body.[line break][paragraph break]";
+	say "Hard scales appear all over your body.[paragraph break]";
 	now the player is at-scale;
 	let n be 10;
 	decrease n by final spirit of the player divided by 4;
