@@ -88,6 +88,42 @@ Definition: an object is unlockable if its unlock level is greater than 0.
 An object has some text called the unlock text. The unlock text of an object is usually "which the developers forgot to describe here".
 An object has a truth state called the unlock hidden switch. The unlock hidden switch of an object is usually false. [Set to true if the object should not announce its unlocking.]
 
+Section - Testobjects - Not for release
+
+An object can be testobject or not testobject. An object is usually not testobject.
+
+First resetting the map rule (this is the remove rarity from testobjects rule):
+	repeat with item running through testobject rooms:
+		now rarity of item is 0;
+		now unlock level of item is 0;
+	repeat with item running through testobject things:
+		now rarity of item is 0;
+		now unlock level of item is 0.
+
+A placement scoring rule (this is the testobject placement scoring rule):
+	if considered room is testobject:
+		increase current room score by 10.
+
+A monster placement possible rule (this is the prefer testobject monsters rule):
+	repeat with guy running through testobject off-stage monsters:
+		if level of guy is global monster level:
+			if considered monster is not testobject:
+				rule fails.
+		
+A monster placement scoring rule (this is the testobject monster scoring rule):
+	if considered monster is testobject:
+		increase current monster score by 10.
+
+Last treasure placement rule (this is the stock testobject things rule):
+	print generation message "    Placing testobjects...";
+	let n be the number of off-stage testobject things;
+	repeat with i running from 1 to n:
+		let stuff be a random off-stage testobject thing;
+		now considered treasure is stuff;
+		choose a room;
+		move stuff to considered room;
+		if generation info is true, say "* placed [stuff] in [considered room]".
+		
 
 Book - Creating the Map
 
