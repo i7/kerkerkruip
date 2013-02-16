@@ -3661,9 +3661,9 @@ Carry out allfruiting:
 
 Chapter - Level 4 - Overmind
 
-The overmind is a monster. "You do not know whether the overmind is the name of the infernal machine that fills this room with shrieks of steam and clangs of metal, or of the wizened old homunculus inside it, or of them together. But whatever is the case: the overmind is here." The description of the overmind is "A little man with a long wide beard sits in the midst of an incredibly complicated and fast-moving contraption. Whistles blow and big flat pieces of metal bang together in a horrific symphony. Gleaming metal circles revolve around and through each other in a chaotic dance that appears to be a parody of a planetarium. Or perhaps it is a real planetarium representing a world made by a mad god.".
+The overmind is a monster. "An infernal machine fills this room with shrieks of steam and clangs of metal, while a wizened old homunculus sit inside it, pulling levers. This must be the overmind." The description of the overmind is "A little man with a long wide beard sits in the midst of an incredibly complicated and fast-moving contraption. Whistles blow and big flat pieces of metal bang together in a horrific symphony. Gleaming metal circles revolve around and through each other in a chaotic dance that appears to be a parody of a planetarium. Or perhaps it is a real planetarium representing a world made by a mad god.".
 
-Understand "homunculus" as the overmind.
+Understand "homunculus" as the overmind. The indefinite article of the overmind is "the".
 
 The level of the overmind is 4.
 The ID of the overmind is 30.
@@ -3679,7 +3679,14 @@ The spirit score of the overmind is 7.
 
 When play begins:
 	let X be a random natural weapon part of the overmind;
-	now printed name of X is "metal spike".
+	now X is ranged;
+	now X is size-agnostic;
+	now damage die of X is 1;
+	now the passive parry max of X is 0;
+	now the active parry max of X is 0;
+	now the dodgability of X is 2;	
+	now printed name of X is "small nail".
+
 
 Section - Overmind bonus
 
@@ -3707,8 +3714,68 @@ An attack modifier rule (this is the overmind attack and defence bonus rule):
 			decrease the attack strength by overmind bonus of the global defender.
 
 
+Section - Useful overmind stuff
 
+Definition: a person is overmind-ally if (it is alive) and (it is not off-stage) and (level of it is less than 4) and (faction of it does not hate faction of the overmind) and (location of the overmind is not location of it) and (the best route from the location of the overmind to the location of it is a direction).
 
+To decide which number is the potential overmind allies:
+	let n be the number of overmind-ally persons;
+	decide on n.
+
+Section - AI
+
+An AI action selection rule for the at-Act overmind (this is the overmind doesnt like attacking rule):
+	choose row with an Option of the action of the overmind attacking the chosen target in the Table of AI Action Options;
+	decrease the Action Weight entry by 20.
+
+An AI action selection rule for the overmind (this is the overmind concentration select rule):
+	choose row with an Option of the action of the overmind concentrating in the Table of AI Action Options;
+	increase the Action Weight entry by (2 * potential overmind allies);
+	if concentration of the overmind is 2:
+		increase Action weight entry by 4.
+	
+
+Section - Overmind power - Call to arms
+
+Overmind-calling is an action applying to nothing.
+
+An AI action selection rule for the overmind (this is the overmind considers calling rule):
+	choose a blank Row in the Table of AI Action Options;
+	now the Option entry is the action of the overmind overmind-calling;
+	now the Action Weight entry is a random number between 0 and 5;
+	increase Action Weight entry by (2 * concentration of the overmind);
+	let n be potential overmind allies;
+	if n is greater than 2:
+		increase Action Weight entry by 1;
+	if n is 0:
+		decrease Action Weight entry by 1000.
+
+Carry out the overmind overmind-calling:
+	let n be potential overmind allies;
+	if n is 0:
+		say "The overmind attempts to calls its allies, but the machine doesn't seem to function.";
+	otherwise:
+		if concentration of the overmind is less than 3 or n is 1:
+			call an ally;
+		otherwise:
+			call all allies;
+	now concentration of the overmind is 0.
+
+To call an ally:
+	let guy be a random overmind-ally person;
+	if location of the overmind is location of the player:
+		say "You briefly see an image of [the guy] flickering above the overmind, and a weird buzzing sound fills the dungeon.";
+	let the way be the best route from the location of guy to the location of the overmind;
+	if way is a direction, try guy going the way.
+
+To call all allies:
+	if location of the overmind is location of the player:
+		say "All the wheels and circles of the overmind suddenly come to a complete halt, and it emits a piercing wail of alarm that must have reached even the farthest reaches of the dungeon";
+	repeat with guy running through overmind-ally persons:
+		let the way be the best route from the location of guy to the location of the overmind;
+		if way is a direction, try guy going the way.
+	
+	
 
 Chapter - Level 5 - Malygris
 
