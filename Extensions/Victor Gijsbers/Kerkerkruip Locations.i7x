@@ -988,11 +988,11 @@ An aftereffects rule (this is the hit may send you off the vast staircase rule):
 A thing called the staircase is scenery in vast Staircase. Understand "stairs" as the staircase. The description of the staircase is "The staircase winds around the wall, leaving the middle of the room empty.". Instead of climbing the staircase: try going up.
 
 
-
 Chapter - Alchemical Laboratory
 
 The alchemical laboratory is a room. "Centuries ago, Malygris captured the great alchemist Metastasio and forced him to work in this laboratory. Most of his equipment is now gone, but one curious machine remains."
 
+Alchemical Laboratory is connectable.
 Alchemical Laboratory is connectable.
 Alchemical Laboratory is not connection-inviting.
 Alchemical Laboratory is placeable.
@@ -1021,6 +1021,7 @@ Last check inserting something into the curious machine:
 		otherwise:
 			say "You put [the noun] in the curious machine, but when nothing happens, you take it out again.";
 	rule succeeds.
+
 
 
 
@@ -1759,6 +1760,130 @@ Every turn when the location is the maze:
 		move player to pre-maze-location.
 
 
+Chapter - Arena of the Fallen
+
+Entrance to the Arena is a room. "The outer construction of the large, black dome is towering when seen from the entrance point. The outer walls are adorned with high reliefs of scenes with former competitors triumphing in great battles.  The last scene, depicted above the entrance, shows [if triumphing boolean is false]Victor Gijsbers triumphing over Malygris[otherwise] [the name of the player] triumphing over [oppname][end if]. The gate to the Arena of the Fallen is closed."
+	
+Entrance to the Arena is connectable.
+Entrance to the Arena is not connection-inviting.
+Entrance to the Arena is placeable.
+Entrance to the Arena is not habitable.
+Entrance to the Arena is not treasurable.
+Entrance to the Arena is extra-accepting.
+Entrance to the Arena is vp-agnostic.
+Entrance to the Arena is magical.
+
+The rarity of Entrance to the Arena is 5. 
+
+
+The Arena of the Fallen is a room. "The remains of a formerly great arena. Remains are lying everywhere and there is something unholy about this Arena. Playing around with souls departed is probably not for the faint of heart."
+
+The Arena of the Fallen is not connectable.
+The Arena of the Fallen is not connection-inviting.
+The Arena of the Fallen is not placeable.
+The Arena of the Fallen is not habitable.
+The Arena of the Fallen is not treasurable.
+The Arena of the Fallen is not teleportable.
+The Arena of the Fallen is not extra-accepting.
+The Arena of the Fallen is vp-agnostic.
+The Arena of the Fallen is magical.
+
+The Arena-waiting-room is a room. "BUG: the player should never end up here."
+
+The Arena-waiting-room is not connectable.
+The Arena-waiting-room is not connection-inviting.
+The Arena-waiting-room is not placeable.
+The Arena-waiting-room is not habitable.
+The Arena-waiting-room is not treasurable.
+The Arena-waiting-room is not teleportable.
+The Arena-waiting-room is not extra-accepting.
+The Arena-waiting-room is vp-agnostic.
+The Arena-waiting-room is magical.
+
+
+The dome is scenery in the Entrance to the Arena. Understand "Arena" as dome. The description of the dome is "A large dome. You feel uneasy looking at it, as it seems to be controlled by unholy energies."
+The scriblings are scenery in the Entrance to the Arena and plural-named. Understand "writings" and "scriptures" as scriblings. The description of the scriblings is "As you start to read the text, it lights up in a crimson red light: [italic type] If you wish, you can relive a battle once fought, but it will become the most challenging fight you ever had. If you are prepared, try to [roman type]smash the shard with a weapon [italic type].".
+Instead of reading the scriblings:
+	say "As you start to read the text, it lights up in a crimson red light: [italic type] If you wish, you can relive a battle once fought, but it will become the most challenging fight you ever had. If you are prepared, try to [roman type]smash the shard with a weapon [italic type].".
+
+The  stone table is a supporter in the Entrance to the Arena. The description of the stone table is "A large stone table." The stone table is fixed in place. On it is a soulchest.
+The soulchest is an opaque, openable, open container. The description of the soulchest is "A large chest, adorned with a number of crimson rubies." 
+
+A soulfragment is a kind of thing with description "A shard of a lost soul, waiting for you to be resurrected".
+Soulcatching relates a person to a soulfragment. The verb to soulcatch (he soulcatches, it soulcatches, they soulcatch, it is soulcatched, it has been soulcatched, it was soulcatched) implies the soulcatching relation.
+Every person soulcatches a soulfragment (called its shard). 
+
+The triumphing boolean is a truth state variable that varies. The triumphing boolean is false.
+The fighting boolean is a truth state variable that varies. The fighting boolean is false.
+The oppname is a text that varies. The oppname is "".
+
+Every turn when the fighting boolean is false and the player is not in the Entrance to the Arena:
+	Repeat with P running through powers that are not granted:
+		Repeat with Per running through dead persons:
+			if Per grants P:
+				Repeat with soulfrag running through soulfragments soulcatched by Per:
+					if soulfrag is off-stage:
+						move soulfrag to the soulchest.
+
+Understand "smash [something] with [something]" as smashing it with.
+
+Smashing it with is an action applying to two things. 
+ 
+ Check smashing it with:
+	if the noun is not a soulfragment:
+		say "It wouldn't be a wise decision to smash a shard using that [noun]!" instead;
+	if the second noun is not a weapon: 
+		say "The [second noun] isn't meant to smash things up. Try using a weapon instead!" instead.
+
+Carry out smashing it with:
+	if the player is in the Entrance to the Arena:
+		repeat with Pers running through monsters who soulcatches the noun:
+			if the printed name of Pers matches the regular expression "package$":
+				move Pers to the Arena-waiting-room;
+				abide by the place fanatics of Aite rule;
+				repeat with guy running through persons in the Arena-waiting-room:
+					challenge guy;
+					say "The heavy doors open, where the angry [guy] awaits, angered from your last fight and strengthened by evil magic!";
+					move the player to the Arena of the Fallen;
+					now the fighting boolean is true;
+			otherwise:
+				challenge Pers;
+				move the player to the Arena of the Fallen;
+				now the fighting boolean is true.
+
+
+To challenge (the guy - a person):
+	let x be level of the guy;
+	if the fighting boolean is false:
+		now x is x times 3 divided by 2 to the nearest 2;
+		let d be a random number between 2 and 8;
+		let g be a random number between 1 and 3;
+		let hm be d times x;
+		let s be g plus x;
+		increase the permanent health of guy by hm;
+		increase the body score of guy by g;
+		increase the mind score of guy by g;
+		increase the spirit score of guy by g;
+		increase the melee of guy by x;
+		increase the defence of guy by x;
+		move the guy to the Arena of the Fallen;
+		restore the health of the guy;
+	otherwise:
+		say "You have already challenged someone. The Arena can only lend its magical powers once.";
+		take no time.
+
+
+Section - Getting out of the Arena
+
+
+Every turn when the location is the Arena of the Fallen:
+	update the combat status;
+	if no person is in the Arena-waiting-room and combat status is peace:
+		say "You are [bold type]transported back[roman type] to the Entrance of the Arena.";
+		repeat with item running through things in the Arena of the Fallen:
+			unless item is player:
+				move item to Entrance to the Arena;
+		move player to Entrance to the Arena.
 
 
 
