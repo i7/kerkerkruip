@@ -1817,13 +1817,14 @@ The triumphing boolean is a truth state variable that varies. The triumphing boo
 The fighting boolean is a truth state variable that varies. The fighting boolean is false.
 The oppname is a text that varies. The oppname is "".
 
-Every turn when the fighting boolean is false and the player is not in the Entrance to the Arena:
-	Repeat with P running through powers that are not granted:
-		Repeat with Per running through dead persons:
-			if Per grants P:
-				Repeat with soulfrag running through soulfragments soulcatched by Per:
-					if soulfrag is off-stage:
-						move soulfrag to the soulchest.
+Every turn when the player is not in the Entrance to the Arena:
+	If the fighting boolean is false:
+		Repeat with P running through powers that are not granted:
+			Repeat with Per running through dead persons:
+				if Per grants P:
+					Repeat with soulfrag running through soulfragments soulcatched by Per:
+						if soulfrag is off-stage:
+							move soulfrag to the soulchest.
 
 Understand "smash [something] with [something]" as smashing it with.
 
@@ -1836,42 +1837,41 @@ Smashing it with is an action applying to two things.
 		say "The [second noun] isn't meant to smash things up. Try using a weapon instead!" instead.
 
 Carry out smashing it with:
-	if the player is in the Entrance to the Arena:
+	if the player is in the Entrance to the Arena and the fighting boolean is false:
 		repeat with Pers running through monsters who soulcatches the noun:
 			if the printed name of Pers matches the regular expression "package$":
+				now the oppname is "Fanatics of Aite";
 				move Pers to the Arena-waiting-room;
 				abide by the place fanatics of Aite rule;
 				repeat with guy running through persons in the Arena-waiting-room:
-					challenge guy;
 					say "The heavy doors open, where the angry [guy] awaits, angered from your last fight and strengthened by evil magic!";
 					move the player to the Arena of the Fallen;
 					now the fighting boolean is true;
 			otherwise:
+				now the oppname is the printed name of Pers;
 				challenge Pers;
 				move the player to the Arena of the Fallen;
-				now the fighting boolean is true.
-
-
-To challenge (the guy - a person):
-	let x be level of the guy;
-	if the fighting boolean is false:
-		now x is x times 3 divided by 2 to the nearest 2;
-		let d be a random number between 2 and 8;
-		let g be a random number between 1 and 3;
-		let hm be d times x;
-		let s be g plus x;
-		increase the permanent health of guy by hm;
-		increase the body score of guy by g;
-		increase the mind score of guy by g;
-		increase the spirit score of guy by g;
-		increase the melee of guy by x;
-		increase the defence of guy by x;
-		move the guy to the Arena of the Fallen;
-		restore the health of the guy;
+				now the fighting boolean is true;
 	otherwise:
 		say "You have already challenged someone. The Arena can only lend its magical powers once.";
 		take no time.
 
+
+To challenge (the guy - a person):
+	let x be level of the guy;
+	now x is x times 3 divided by 2 to the nearest 2;
+	let d be a random number between 2 and 8;
+	let g be a random number between 1 and 3;
+	let hm be d times x;
+	let s be g plus x;
+	increase the permanent health of guy by hm;
+	increase the body score of guy by g;
+	increase the mind score of guy by g;
+	increase the spirit score of guy by g;
+	increase the melee of guy by x;
+	increase the defence of guy by x;
+	move the guy to the Arena of the Fallen;
+	restore the health of the guy.
 
 Section - Getting out of the Arena
 
@@ -1879,10 +1879,13 @@ Section - Getting out of the Arena
 Every turn when the location is the Arena of the Fallen:
 	update the combat status;
 	if no person is in the Arena-waiting-room and combat status is peace:
+		now the triumphing boolean is true;
 		say "You are [bold type]transported back[roman type] to the Entrance of the Arena.";
 		repeat with item running through things in the Arena of the Fallen:
 			unless item is player:
 				move item to Entrance to the Arena;
+		repeat with soulfrag running through on-stage soulfragments:
+			now soulfrag is off-stage;
 		move player to Entrance to the Arena.
 
 
