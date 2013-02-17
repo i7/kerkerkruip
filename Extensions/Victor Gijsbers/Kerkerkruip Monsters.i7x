@@ -1929,6 +1929,7 @@ The power of the hound is a power. The hound grants the power of the hound.
 The power level of power of the hound is 2.
 The command text of power of the hound is "counterstrike".
 The description of power of the hound is "Type: passive ability.[paragraph break]Command: none.[paragraph break]After you are attacked, with a probability of (mind - 2) / mind, you get a chance for an immediate counterstrike. If this happens, you will automatically win the initiative for that turn. You can perform any action you wish, just as normal, but if you do choose to retaliate against your attacker, you get a +2 attack and +2 damage bonus. Any action that leads to an attack will count as a counterstrike (including the special pierce and stun powers)."
+Understand "counterstrike" as a mistake ("[if the power of the hound is granted and the player is at-React]You will retaliate soon, but now you must react to [possessive of the main actor]'s attack![otherwise if the power of the hound is granted]You are prepared to make counterstrikes, but only after you have been attacked.[otherwise]You do not have the power of the hound.").
 
 Status skill rule (this is the power of the hound status skill rule):
 	if power of the hound is granted:
@@ -1952,17 +1953,16 @@ The hound provoker is a person variable.
 
 The alternative determine the main actor rule is listed instead of the determine the main actor rule in the combat round rules.
 A combat round rule when the combat status is combat (this is the alternative determine the main actor rule):
-	unless hound status is 1:
-		rank participants by initiative;
-		now the main actor is the next participant;
-		now the combat state of the main actor is at-Act;
-	otherwise:
+	rank participants by initiative;
+	if hound status is 1:
 		if the hound is alive:
 			now the main actor is the hound;
 		otherwise:
 			now the main actor is the player;
 		now saved initiative is the initiative of the main actor;
-		now the combat state of the main actor is at-Act;
+	otherwise:
+		now the main actor is the next participant;
+	now the combat state of the main actor is at-Act;
 
 [ After a successful turn reset the saved initative ]
 Every turn when hound status > 0:
@@ -3666,7 +3666,7 @@ The overmind is a monster. "An infernal machine fills this room with shrieks of 
 Understand "homunculus" as the overmind. The indefinite article of the overmind is "the".
 
 The level of the overmind is 4.
-The ID of the overmind is 30.
+The ID of the overmind is 31.
 The overmind is huge.
 
 The health of the overmind is 38.
