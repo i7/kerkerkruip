@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="Kerkerkruip" Manufacturer="Victor Gijsbers" Version="7.0.0.0" Language="1033" UpgradeCode="d4ad0fbc-7903-4637-af41-d701e38117d1">
+		<Package InstallerVersion="300" Compressed="yes"/>
+		<Media Id="1" Cabinet="myapplication.cab" EmbedCab="yes"/>
+
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLDIR" Name="Kerkerkruip">
+				
+					<!-- Gargoyle! -->
+					<Component Id="Gargoyle" Guid="b051e1d0-3ab3-4747-ae1d-6b94beb65b19">
+						<File Source="gargoyle\git.exe" KeyPath="yes"/>
+						<File Source="gargoyle\freetype6.dll"/>
+						<File Source="gargoyle\libgarglk.dll"/>
+						<File Source="gargoyle\libjpeg-8.dll"/>
+						<File Source="gargoyle\libogg-0.dll"/>
+						<File Source="gargoyle\libpng14-14.dll"/>
+						<File Source="gargoyle\libvorbis-0.dll"/>
+						<File Source="gargoyle\libvorbisfile-3.dll"/>
+						<File Source="gargoyle\mikmod.dll"/>
+						<File Source="gargoyle\SDL.dll"/>
+						<File Source="gargoyle\SDL_mixer.dll"/>
+						<File Source="gargoyle\SDL_sound.dll"/>
+						<File Source="gargoyle\smpeg.dll"/>
+						<File Source="gargoyle\zlib1.dll"/>
+					</Component>
+					
+					<!-- Kerkerkruip! -->
+					<Component Id="Kerkerkruip" Guid="322e78b2-00ce-443d-8b31-bb331103ed8b">
+						<File Source="Kerkerkruip.gblorb" KeyPath="yes"/>
+						<File Source="kerkerkruip.bat"/>
+					</Component>
+				
+				</Directory>
+			</Directory>
+			
+			<Directory Id="ProgramMenuFolder">
+				<Directory Id="ProgramMenuSubfolder" Name="Kerkerkruip">
+					<Component Id="ApplicationShortcuts" Guid="a09c1970-eb88-484b-a01b-4de1c43f9d5c">
+						<Shortcut Id="ApplicationShortcut1"
+							Name="Kerkerkruip"
+							Description="Kerkerkruip"
+							Target="[INSTALLDIR]kerkerkruip.bat"
+							WorkingDirectory="INSTALLDIR"/>
+						<RegistryValue Root="HKCU" Key="Software\Victor Gijsbers\Kerkerkruip" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+						<RemoveFolder Id="ProgramMenuSubfolder" On="uninstall"/>
+					</Component>
+				</Directory>
+			</Directory>
+			
+		</Directory>
+
+		<Feature Id="MainApplication" Title="Kerkerkruip" Level="1">
+			<ComponentRef Id="Gargoyle"/>
+			<ComponentRef Id="Kerkerkruip"/>
+			<ComponentRef Id="ApplicationShortcuts"/>
+		</Feature>
+		
+	</Product>
+</Wix>

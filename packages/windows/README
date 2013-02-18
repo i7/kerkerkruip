@@ -1,0 +1,10 @@
+Windows package of Kerkerkruip
+==============================
+
+Install WiX from http://wixtoolset.org/
+
+Unzip gargoyle-2011.1-windows.zip (or later) to gargoyle
+
+Copy Kerkerkruip.gblorb to this folder
+
+Run build.bat
