@@ -285,6 +285,8 @@ Status rule (this is the size status rule):
 
 [Note: sizes of a person are meant to reflect how big they themselves are. Sizes of objects are meant to reflect for what size person they were meant. Thus, a 'medium dagger' is much smaller than a 'medium bed': both are normal-sized objects as they are made for normal-sized humans. A huge dagger might be about the same size as a medium sword -- it would just be hard to handle for a medium person, because the hilt would be too big to grip with a hand!]
 
+The standard measure is a medium thing. [You can test the size difference of the standard measure and X.]
+
 To decide which number is the size difference of (a - a thing) and (b - a thing):
 	if a is medium and b is medium: [most common case, just to speed things up]
 		decide on 0;
@@ -422,6 +424,14 @@ A dungeon interest rule (this is the change weapon sizes rule):
 					if a random chance of 2 in 3 succeeds:
 						increase the size of item;
 				if generation info is true, say "* Now [item] is [size of item].".
+
+Section - Other effects of size
+
+A detection rule (this is the size increases probability of detection rule):
+	let n be the size difference of (the standard measure) and (the player);
+	now n is n * 3;
+	increase the detection probability by n.
+
 
 
 
