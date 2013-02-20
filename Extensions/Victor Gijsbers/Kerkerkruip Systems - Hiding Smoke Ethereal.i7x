@@ -94,7 +94,7 @@ A starting the combat round rule (this is the possible detection rule):
 Section - Detection rules
 
 A detection rule (this is the base probability of detection rule):
-	increase the detection probability by 5.
+	increase the detection probability by 3.
 	
 A detection rule (this is the tension increases probability of detection rule):
 	increase the detection probability by the tension.
