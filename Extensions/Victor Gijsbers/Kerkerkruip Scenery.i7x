@@ -174,18 +174,36 @@ Chapter - Tungausy Totem
 
 The tungausy totem is a religious fixed in place extra thing. "A primitive totem pole of the tungausy people casts its eerie glance about the room." Understand "pole" as the tungausy totem.
 
-The description of the tungausy totem is "Being in the presence of the tungausy totem gives anyone a +3 bonus to spirit.".
+The description of the tungausy totem is "Being in the presence of the tungausy totem gives anyone a +5 bonus to spirit.".
 
 A spirit bonus rule (this is the tungausy totem spirit bonus rule):
 	if the tungausy totem is in the location:
-		increase faculty bonus score by 3.
+		increase faculty bonus score by 5.
 
 An extra scoring rule (this is the tungausy totem and sweat lodge not together rule):
 	if considered extra is tungausy totem:
 		if considered room is tungausy sweat lodge:
 			decrease current room score by 20.
 
+Chapter - Focal totem
 
+The focal totem is a magical fixed in place extra thing. "The harsh but regular geometries of a focal totem calm your mind." Understand "harsh" and "geometries" as the focal totem.
+
+The description of the focal totem is "The magic cults of Yahvinna have developed these weird-looking totems to increase their mental concentration; it gives anyone a +5 bonus to mind."
+
+A mind bonus rule (this is the focal totem mind bonus rule):
+	if the focal totem is in the location:
+		increase faculty bonus score by 5.
+
+Chapter - Totem of the Bull
+
+The totem of the bull is a religious fixed in place extra thing. "A totem pole in the form of a stylised bull inspires you to feats of bodily strength." Understand "pole" as the totem of the bull.
+
+The description of the totem of the bull is "According to some tales, the totem poles of the alargansi people can turn into real bulls in times of need. You doubt that this is true, but it is certainly the case that this totem grants anyone a +5 bonus to body.".
+
+A body bonus rule (this is the totem of the bull body bonus rule):
+	if the totem of the bull is in the location:
+		increase faculty bonus score by 5.
 
 Part - Symbols
 
