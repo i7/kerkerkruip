@@ -911,6 +911,15 @@ First report taking off the psychedelic cloak:
 
 Chapter - Shoes
 
+Section - Soft slippers (minor)
+
+The soft slippers are minor shoes. The soft slippers are plural-named. The description of the soft slippers is "A pair of compfortable slippers, looking like cute [one of]pink[or]yellow[or]mint green[or]baby blue[or]turquoise[sticky random] [one of]mindslugs[or]Tooloos[or]blood apes[or]armadillos[or]demons of rage[or]minotaurs[or]abysses of the soul[or]imps[sticky random]. They will allow you to remain hidden more easily.".
+
+Detection rule (this is the soft slippers detection rule):
+	if the player wears the soft slippers:
+		decrease detection probability by 5.
+
+
 Section - Boots of the war dance (major)
 
 The boots of the war dance are major shoes. The boots of the war dance are plural-named. The indefinite article of the boots of the war dance is "the". The description of boots of the war dance is "These graceful boots, supposedly made by the master of Algir, will grant you impeccable footwork in combat. [italic type](They give you a +1 bonus to dodging.)[roman type]".
