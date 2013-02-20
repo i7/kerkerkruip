@@ -270,7 +270,7 @@ The blood ape is small.
 
 The health of the blood ape is 10.
 The melee of the blood ape is 0.
-The defence of the blood ape is 8.
+The defence of the blood ape is 7.
 
 The body score of the blood ape is 4.
 The mind score of the blood ape is 5.
@@ -1333,7 +1333,7 @@ The description of the jumping bomb is "Connoisseurs consider these jumping ball
 
 The health of the jumping bomb is 20.
 The melee of the jumping bomb is -1.
-The defence of the jumping bomb is 8.
+The defence of the jumping bomb is 7.
 
 The body score of the jumping bomb is 8.
 The spirit score of the jumping bomb is 3. 
@@ -1881,7 +1881,7 @@ The description of the hound is "The black hound is ever watchful, ready to puni
 
 The health of the hound is 19.
 The melee of the hound is 2.
-The defence of the hound is 8.
+The defence of the hound is 9.
 
 The body score of the hound is 7.
 The mind score of the hound is 7.
@@ -1890,7 +1890,7 @@ The spirit score of the hound is 5.
 When play begins:
 	let X be a random natural weapon part of the hound;
 	now dodgability of X is 2;
-	now damage die of X is 8; [Its bite is worse than its bark!]
+	now damage die of X is 7; [Its bite is worse than its bark!]
 	now passive parry max of X is 2;
 	now active parry max of X is 0.
 
@@ -2024,7 +2024,7 @@ The description of the mindslug is "It is of the dreaded race of mindslugs, abom
 
 The health of the mindslug is 28.
 The melee of the mindslug is 2.
-The defence of the mindslug is 7.
+The defence of the mindslug is 8.
 
 The body score of the mindslug is 3.
 The mind score of the mindslug is 11.
@@ -2429,8 +2429,8 @@ The ID of the giant tentacle is 13.
 The giant tentacle is huge.
 
 The health of giant tentacle is 35.
-The melee of giant tentacle is 4.
-The defence of giant tentacle is 10.
+The melee of giant tentacle is 3.
+The defence of giant tentacle is 11.
 
 The body score of giant tentacle is 8.
 The mind score of giant tentacle is 10.
@@ -2757,8 +2757,8 @@ The unlock level of the minotaur is 2.
 The unlock hidden switch of the minotaur is true.
 
 The health of minotaur is 35.
-The melee of minotaur is 4.
-The defence of minotaur is 10.
+The melee of minotaur is 3.
+The defence of minotaur is 11.
 
 The body score of minotaur is 10.
 The spirit score of minotaur is 6. 
@@ -4446,7 +4446,7 @@ The ID of the abyss of the soul is 25.
 
 The health of the abyss of the soul is 40.
 The melee of the abyss of the soul is 0.
-The defence of the abyss of the soul is 8.
+The defence of the abyss of the soul is 7.
 
 The body score of the abyss of the soul is 1.
 The mind score of the abyss of the soul is 10.
@@ -4647,7 +4647,7 @@ The smoke demon is eyeless.
 
 The health of the smoke demon is 10.
 The melee of the smoke demon is 2.
-The defence of the smoke demon is 5.
+The defence of the smoke demon is 6.
 
 The body score of the smoke demon is 7.
 The mind score of the smoke demon is 7.
@@ -4656,7 +4656,7 @@ The spirit score of the smoke demon is 7.
 When play begins:
 	let X be a random natural weapon part of the smoke demon;
 	now X is size-agnostic;
-	now damage die of X is 5;
+	now damage die of X is 4;
 	now dodgability of X is 2;
 	now passive parry max of X is 2;
 	now active parry max of X is 0;	
@@ -4813,7 +4813,7 @@ The imp is flyer.
 
 The health of the imp is 10.
 The melee of the imp is -2.
-The defence of the imp is 9.
+The defence of the imp is 8.
 
 The body score of the imp is 4.
 The spirit score of the imp is 4. 
