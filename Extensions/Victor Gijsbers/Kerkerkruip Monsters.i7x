@@ -3669,6 +3669,9 @@ The level of the overmind is 4.
 The ID of the overmind is 31.
 The overmind is huge.
 
+The unlock level of the overmind is 16.
+The unlock text of the overmind is "a psionic machine that strenghtens all its allies".
+
 The health of the overmind is 38.
 The melee of the overmind is 4.
 The defence of the overmind is 11.
@@ -3698,14 +3701,19 @@ To decide which number is the overmind bonus of (guy - a person):
 				if group level of guy > n:
 					now n is group level of guy;
 				decide on n;
+	otherwise if power of the overmind is granted:
+		if guy is not the player:
+			unless faction of the player hates faction of guy:
+				let n be (final mind of the player) / 6;
+				decide on n;
 	decide on 0.
 
 A faculty bonus rule (this is the overmind faculty bonus rule):
-	if the overmind is not off-stage:
+	if the overmind is not off-stage or power of the overmind is granted:
 		increase faculty bonus score by overmind bonus of test subject.
 
 An attack modifier rule (this is the overmind attack and defence bonus rule):
-	if the overmind is not off-stage:
+	if the overmind is not off-stage or power of the overmind is granted:
 		if (overmind bonus of the global attacker) is greater than 0:
 			if the numbers boolean is true, say " + [overmind bonus of the global attacker] (overmind)[run paragraph on]";
 			increase the attack strength by overmind bonus of the global attacker;
@@ -3726,14 +3734,17 @@ Section - AI
 
 An AI action selection rule for the at-Act overmind (this is the overmind doesnt like attacking rule):
 	choose row with an Option of the action of the overmind attacking the chosen target in the Table of AI Action Options;
-	decrease the Action Weight entry by 20.
+	decrease the Action Weight entry by a random number between 0 and 50.
 
 An AI action selection rule for the overmind (this is the overmind concentration select rule):
 	choose row with an Option of the action of the overmind concentrating in the Table of AI Action Options;
 	increase the Action Weight entry by (2 * potential overmind allies);
 	if concentration of the overmind is 2:
 		increase Action weight entry by 4.
-	
+
+An AI action selection rule for the at-React overmind (this is the overmind doesnt like dodging rule):
+	choose row with an Option of the action of the overmind dodging in the Table of AI Action Options;
+	decrease the Action Weight entry by 5.	
 
 Section - Overmind power - Call to arms
 
@@ -3763,19 +3774,102 @@ Carry out the overmind overmind-calling:
 
 To call an ally:
 	let guy be a random overmind-ally person;
-	if location of the overmind is location of the player:
-		say "You briefly see an image of [the guy] flickering above the overmind, and a weird buzzing sound fills the dungeon.";
 	let the way be the best route from the location of guy to the location of the overmind;
-	if way is a direction, try guy going the way.
+	if way is a direction, try guy going the way;
+	if location of the overmind is location of the player:
+		say "You briefly see an image of [the guy] flickering above the overmind, and a weird buzzing sound fills the dungeon[if way is a direction]. In the image, [the guy] move[s] to [the location of the guy][end if].".
 
 To call all allies:
 	if location of the overmind is location of the player:
-		say "All the wheels and circles of the overmind suddenly come to a complete halt, and it emits a piercing wail of alarm that must have reached even the farthest reaches of the dungeon";
+		say "All the wheels and circles of the overmind suddenly come to a complete halt, and it emits a piercing wail of alarm that must have reached even the farthest reaches of the dungeon.";
 	repeat with guy running through overmind-ally persons:
 		let the way be the best route from the location of guy to the location of the overmind;
 		if way is a direction, try guy going the way.
 	
+Section - Overmind prose
+
+Report the overmind hitting a dead pc:
+	say "'That worked? That actually worked? Who needs allies?!' The little man inside the overmind dances with joy.";
+	rule succeeds.
+
+Report the overmind attacking:
+	unless the actor is the noun:
+		say "With a puny clicking sound, the overmind launches a small nail at [the noun].";
+	otherwise:
+		say "The overmind prepares an attack, but several of its parts seem to be pointing the wrong way.";
+	rule succeeds.
+
+Report the overmind dodging:
+	say "The overmind rolls aside on its small wheels.";
+	rule succeeds.
+
+Report the overmind parrying:
+	say "Big plates of metal suddenly surround the overmind.";
+	rule succeeds.
+
+Report the overmind waiting when the overmind is insane:
+	say "Flickering above the overmind, you briefly seen an image of [one of]a leopard dying on the snowy peak of a solitary mountain[or]a huge three-headed devil entrapped in a lake of ice[or]a penis-shaped object called 'S-Gerät 00000' screaming across the sky[or]a homunculus sacrificing himself to a sea goddess[at random].";
+	rule succeeds.
+
+Section - Power of the overmind
+
+The power of the overmind is a power. The overmind grants power of the overmind.
+The power level of power of the overmind is 4.
+The command text of power of the overmind is "call".
+The description of power of the overmind is "Type: active and passive ability.[paragraph break]Command: call [italic type]someone[roman type].[paragraph break]You can call any person in the game, except Malygris. Calling someone will make that person move one room towards you, if possible.[paragraph break]In addition, the power of the overmind makes your allies more powerful. They get an attack and defence bonus equal to mind/6."
 	
+Absorbing power of the overmind:
+	increase melee of the player by 2;
+	increase defence of the player by 3;
+	increase permanent health of the player by 20;
+	say "As the overmind dies, you feel its soul absorbed into your own body. ([bold type]Power of the overmind[roman type]: +2 attack, +2 defence, +20 health, stronger allies, and you can [italic type]call[roman type] people.)[paragraph break]".
+
+Repelling power of the overmind:
+	decrease melee of the player by 2;
+	decrease defence of the player by 3;
+	decrease permanent health of the player by 20.
+
+Status skill rule (this is the vermind status skill rule):
+	if power of the overmind is granted:
+		say "You have the power of the overmind, which gives a combat bonus to your allies and allows you to [bold type]call[roman type] anyone except Malygris. [italic type](Level 4)[roman type][line break][run paragraph on]".
+
+Section - Calling
+
+Calling is an action applying to one visible thing. Understand "call [any person]" as calling.
+
+Check calling:
+	if power of the overmind is not granted:
+		take no time;
+		say "You do not possess that power." instead.
+
+Check calling:
+	if the noun is off-stage or the noun is not alive:
+		take no time;
+		say "[The noun] [is-are] not available for calling." instead.
+
+Check calling:
+	if the level of the noun is greater than 4:
+		take no time;
+		say "[The noun] [is-are] too powerful to be called." instead.
+
+Check calling:
+	if the location of the noun is the location of the player:
+		take no time;
+		say "[The noun] [is-are] already here." instead.
+
+Carry out calling:
+	if the noun can move:
+		let the way be the best route from the location of the noun to the location of the player;
+		if way is a direction:
+			let place be the location of the noun;
+			try the noun going the way;
+			unless location of the noun is location of the player:
+				say "[The noun] move[s] from [the place] to [the location of the noun].";
+		otherwise:
+			say "[The noun] [has-have] no way to reach you!";
+	otherwise:
+		say "Something prevents [the noun] from following your command.".
+
 
 Chapter - Level 5 - Malygris
 
