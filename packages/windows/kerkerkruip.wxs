@@ -3,7 +3,9 @@
 	<Product Id="*" Name="Kerkerkruip" Manufacturer="Victor Gijsbers" Version="7.0.0.0" Language="1033" UpgradeCode="d4ad0fbc-7903-4637-af41-d701e38117d1">
 		<Package InstallerVersion="300" Compressed="yes"/>
 		<Media Id="1" Cabinet="myapplication.cab" EmbedCab="yes"/>
-
+		
+		<MajorUpgrade AllowDowngrades="yes"/>
+		
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="ProgramFilesFolder">
 				<Directory Id="INSTALLDIR" Name="Kerkerkruip">
@@ -29,7 +31,6 @@
 					<!-- Kerkerkruip! -->
 					<Component Id="Kerkerkruip" Guid="322e78b2-00ce-443d-8b31-bb331103ed8b">
 						<File Source="Kerkerkruip.gblorb" KeyPath="yes"/>
-						<File Source="kerkerkruip.bat"/>
 					</Component>
 				
 				</Directory>
@@ -40,10 +41,10 @@
 					<Component Id="ApplicationShortcuts" Guid="a09c1970-eb88-484b-a01b-4de1c43f9d5c">
 						<Shortcut Id="ApplicationShortcut1"
 							Name="Kerkerkruip"
-							Description="Kerkerkruip"
-							Target="[INSTALLDIR]kerkerkruip.bat"
+							Target="[INSTALLDIR]git.exe"
+							Arguments="Kerkerkruip.gblorb"
 							WorkingDirectory="INSTALLDIR"/>
-						<RegistryValue Root="HKCU" Key="Software\Victor Gijsbers\Kerkerkruip" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+						<RegistryValue Root="HKCU" Key="Software\Kerkerkruip" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
 						<RemoveFolder Id="ProgramMenuSubfolder" On="uninstall"/>
 					</Component>
 				</Directory>
@@ -56,6 +57,9 @@
 			<ComponentRef Id="Kerkerkruip"/>
 			<ComponentRef Id="ApplicationShortcuts"/>
 		</Feature>
+		
+		<UIRef Id="WixUI_Minimal"/>
+		<WixVariable Id="WixUILicenseRtf" Value="eula.rtf" />
 		
 	</Product>
 </Wix>
