@@ -58,8 +58,13 @@
 			<ComponentRef Id="ApplicationShortcuts"/>
 		</Feature>
 		
-		<UIRef Id="WixUI_Minimal"/>
-		<WixVariable Id="WixUILicenseRtf" Value="eula.rtf" />
+		<UIRef Id="WixUI_Kerkerkruip"/>
+		<WixVariable Id="WixUIDialogBmp" Value="welcome.jpg"/>
+		<WixVariable Id="WixUIBannerBmp" Value="banner.jpg"/>
+		
+		<CustomAction Id="LaunchApplication"
+			FileKey="git.exe" ExeCommand="Kerkerkruip.gblorb"
+			Execute="immediate" Impersonate="yes" Return="asyncNoWait"/>
 		
 	</Product>
 </Wix>
