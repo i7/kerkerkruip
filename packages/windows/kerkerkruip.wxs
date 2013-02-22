@@ -1,18 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="Kerkerkruip" Manufacturer="Victor Gijsbers" Version="7.0.0.0" Language="1033" UpgradeCode="d4ad0fbc-7903-4637-af41-d701e38117d1">
-		<Package InstallerVersion="300" Compressed="yes"/>
+	<Product Id="*"
+		Name="Kerkerkruip" Manufacturer="Victor Gijsbers"
+		Version="7.0.0.0"
+		Language="1033" UpgradeCode="d4ad0fbc-7903-4637-af41-d701e38117d1">
+		<Package
+			InstallerVersion="300"
+			InstallScope="perUser"
+			InstallPrivileges="limited"
+			Compressed="yes"/>
 		<Media Id="1" Cabinet="myapplication.cab" EmbedCab="yes"/>
+		<Property Id="ALLUSERS" Secure="yes"/>
 		
 		<MajorUpgrade AllowDowngrades="yes"/>
 		
 		<Directory Id="TARGETDIR" Name="SourceDir">
-			<Directory Id="ProgramFilesFolder">
+			<Directory Id="LocalAppDataFolder" Name="AppData">
 				<Directory Id="INSTALLDIR" Name="Kerkerkruip">
 				
 					<!-- Gargoyle! -->
 					<Component Id="Gargoyle" Guid="b051e1d0-3ab3-4747-ae1d-6b94beb65b19">
-						<File Source="gargoyle\git.exe" KeyPath="yes"/>
+						<File Source="gargoyle\git.exe"/>
 						<File Source="gargoyle\freetype6.dll"/>
 						<File Source="gargoyle\libgarglk.dll"/>
 						<File Source="gargoyle\libjpeg-8.dll"/>
@@ -26,11 +34,15 @@
 						<File Source="gargoyle\SDL_sound.dll"/>
 						<File Source="gargoyle\smpeg.dll"/>
 						<File Source="gargoyle\zlib1.dll"/>
+						<RegistryValue Root="HKCU" Key="Software\Kerkerkruip" Name="Gargoyle" Type="string" Value="[ProductVersion]" KeyPath="yes"/>
 					</Component>
 					
 					<!-- Kerkerkruip! -->
 					<Component Id="Kerkerkruip" Guid="322e78b2-00ce-443d-8b31-bb331103ed8b">
-						<File Source="Kerkerkruip.gblorb" KeyPath="yes"/>
+						<File Source="Kerkerkruip.gblorb"/>
+						<File Source="..\..\Projects\Kerkerkruip Materials\Kerkerkruip.ini"/>
+						<RegistryValue Root="HKCU" Key="Software\Kerkerkruip" Name="Kerkerkruip" Type="string" Value="[ProductVersion]" KeyPath="yes"/>
+						<RemoveFolder Id="RemoveAppRootDirectory" On="uninstall"/>
 					</Component>
 				
 				</Directory>
@@ -44,7 +56,7 @@
 							Target="[INSTALLDIR]git.exe"
 							Arguments="Kerkerkruip.gblorb"
 							WorkingDirectory="INSTALLDIR"/>
-						<RegistryValue Root="HKCU" Key="Software\Kerkerkruip" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+						<RegistryValue Root="HKCU" Key="Software\Kerkerkruip" Name="Shortcut" Type="string" Value="[ProductVersion]" KeyPath="yes"/>
 						<RemoveFolder Id="ProgramMenuSubfolder" On="uninstall"/>
 					</Component>
 				</Directory>
