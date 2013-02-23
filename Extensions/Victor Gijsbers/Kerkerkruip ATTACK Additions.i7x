@@ -419,7 +419,8 @@ Last report examining a weapon (this is the extra weapon info rule):
 	say "[italic type]Combat statistics: 1d[damage die of the noun] + [weapon damage bonus of the noun] damage; [if weapon attack bonus of the noun is less than 0]-[otherwise]+[end if][absolute value of weapon attack bonus of the noun] attack modifier[if the noun is ranged]; ranged[end if][parry and dodge info of the noun][if the noun is silver]; good against undead and demons[end if][special weapon info of the noun][roman type].[run paragraph on][line break][paragraph break]"
 			
 To say parry and dodge info of (item - a weapon):
-	if passive parry max of item is less than 2:
+	say "; can be parried for [passive parry max of item]; can parry for [active parry max of item]; can be dodged for [dodgability of item][run paragraph on]".
+[	if passive parry max of item is less than 2:
 		say "; hard to parry[run paragraph on]";
 	if passive parry max of item is greater than 3:
 		say "; easy to parry[run paragraph on]";
@@ -430,7 +431,7 @@ To say parry and dodge info of (item - a weapon):
 	if dodgability of item is less than 2:
 		say "; hard to dodge[run paragraph on]";
 	if dodgability of item is greater than 3:
-		say "; easy to dodge[run paragraph on]".
+		say "; easy to dodge[run paragraph on]".]
 
 A weapon has some text called the special weapon info. The special weapon info of a weapon is usually "".
 
