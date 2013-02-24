@@ -1842,7 +1842,7 @@ Carry out smashing it with:
 			if the printed name of Pers matches the regular expression "package$":
 				now the oppname is "Fanatics of Aite";
 				move Pers to the Arena-waiting-room;
-				abide by the place fanatics of Aite rule;
+				[abide by the place fanatics of Aite rule;]
 				repeat with guy running through persons in the Arena-waiting-room:
 					say "The heavy doors open, where the angry [guy] awaits, angered from your last fight and strengthened by evil magic!";
 					move the player to the Arena of the Fallen;

@@ -4,6 +4,28 @@ Use authorial modesty.
 
 
 
+Chapter - Groups of enemies
+
+[ Sometimes enemies are grouped together. We will use a relationship to link an enemy with its companions, and a table will describe the nature of each grouping. ]
+
+Accompaniment relates various people to one person (called the leader).
+The verb to accompany (he accompanies, they accompany, he accompanied, it is accompanied, he is accompanying) implies the accompaniment relation. 
+
+Table of Accompaniment Rules
+Group leader	Place followers
+The mindslug	true
+The healer of Aite	true
+
+[ Place all the followers with their leaders ]
+Final monster placement rule (this is the place accompanying enemies with their leader rule):
+	repeat with X running through on-stage people:
+		if there is a group leader of X in the Table of Accompaniment Rules:
+			choose the row with group leader of X in the Table of Accompaniment Rules;
+			if the place followers entry is true:
+				now all the people who accompany X are in the location of X;
+
+
+
 Chapter - Monster statistics
 
 A person has a number called ID.
@@ -2115,6 +2137,7 @@ Section - Slaves
 Fafhrd is a mindslug-enslaved man. The description of Fafhrd is "This male barbarian is strong and muscular. He looks like an able and shrewd fighter.".
 The ID of Fafhrd is 11.
 Fafhrd is medium.
+Fafhrd accompanies the mindslug.
 
 Health of Fafhrd is 14.
 Melee of Fafhrd is 1.
@@ -2130,6 +2153,7 @@ Fafhrd is weapon user.
 
 Mouser is a mindslug-enslaved man. The description of Mouser is "Mouser is a small, fast man. You know his type from the alleys and alehouses of Montenoir.".
 The ID of Mouser is 12.
+Mouser accompanies the mindslug.
 
 [Mouser carries sneaky sword: see Kerkerkruip Items.]
 Mouser carries the sneaking sword.
@@ -2144,11 +2168,6 @@ When play begins:
 
 Follower percentile chance of Mouser is 85.
 Mouser is weapon user.
-
-When play begins:
-	if mindslug is not off-stage:
-		move Fafhrd to the location of mindslug;
-		move Mouser to the location of mindslug.
 
 An attack modifier rule (this is the mindslug defended by the enslaved rule):
 	if the global defender is the mindslug and the global attacker is not hidden:
@@ -2842,16 +2861,11 @@ Status skill rule (this is the minotaur power status skill rule):
 
 Chapter - Level 4 - Fanatics of Aite 
 
-The fanatics-of-Aite-package is a monster. The level of the fanatics-of-Aite-package is 4.
-The ID of the fanatics-of-Aite-package is 15.
+[ All the fanatics of Aite should be treated the same, but we have to treat one as their leader. We'll choose the Healer solely because it's listed first!
+The old fanatics-of-Aite-package is no longer needed. ]
 
-Final monster placement rule (this is the place fanatics of Aite rule):
-	if fanatics-of-Aite-package is not off-stage:
-		let X be the location of fanatics-of-Aite-package;
-		move healer of Aite to X;
-		move tormentor of Aite to X;
-		move defender of Aite to X;
-		remove fanatics-of-Aite-package from play. 
+[The fanatics-of-Aite-package is a monster. The level of the fanatics-of-Aite-package is 4.
+The ID of the fanatics-of-Aite-package is 15.]
 
 Section - Healer of Aite
 
@@ -2860,6 +2874,7 @@ Understand "white-robed" as the Healer of Aite.
 The description of the healer of Aite is "This white-robed priest is a healer of Aite. Their task is to support the other fanatics in their never-ending crusade.".
 The ID of the Healer of Aite is 16.
 The Healer of Aite is medium.
+The level of the healer of Aite is 4.
 
 The health of the Healer of Aite is 20.
 The melee of the Healer of Aite is 1.
@@ -2911,6 +2926,7 @@ Understand "black-robed" and "mage" as the Tormentor of Aite.
 The description of the tormentor of Aite is "You immediately recognise the black-robed mage as a tormentor of Aite, savage priests who specialise in inflicting pain on all who oppose their faith.".
 The ID of the Tormentor of Aite is 17.
 The Tormentor of Aite is medium.
+The tormentor of Aite accompanies the healer of Aite.
 
 The health of the Tormentor of Aite is 16.
 The melee of the Tormentor of Aite is 3.
@@ -2962,6 +2978,7 @@ Understand "armoured" and "man" as the defender of Aite.
 The description of the defender of Aite is "This heavily armoured priest is a defender of Aite, one of the front-line troops of the armies of this horrible faith.".
 The ID of the defender of Aite is 18.
 The defender of Aite is medium.
+The defender of Aite accompanies the healer of Aite.
 
 The health of the Defender of Aite is 23.
 The melee of the Defender of Aite is 1.
