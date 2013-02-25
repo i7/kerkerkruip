@@ -1762,7 +1762,7 @@ Every turn when the location is the maze:
 
 Chapter - Arena of the Fallen
 
-Entrance to the Arena is a room. "The outer construction of the large, black dome is towering when seen from the entrance point. The outer walls are adorned with high reliefs of scenes with former competitors triumphing in great battles.  The last scene, depicted above the entrance, shows [if triumphing boolean is false]Victor Gijsbers triumphing over Malygris[otherwise] [the name of the player] triumphing over [oppname][end if]. The gate to the Arena of the Fallen is closed."
+Entrance to the Arena is a room. "The outer construction of the large, black dome is towering when seen from the entrance point. The outer walls are adorned with high reliefs of scenes with former competitors triumphing in great battles.  The last scene, depicted above the entrance, shows [if triumphing boolean is false]Victor Gijsbers triumphing over Malygris[otherwise] [the name of the player] triumphing over [oppname][end if]. The gate to the Arena of the Fallen is closed. Above a large stone table, some scriptures are engraved in the wall."
 	
 Entrance to the Arena is connectable.
 Entrance to the Arena is not connection-inviting.
@@ -1802,11 +1802,11 @@ The Arena-waiting-room is magical.
 
 
 The dome is scenery in the Entrance to the Arena. Understand "Arena" as dome. The description of the dome is "A large dome. You feel uneasy looking at it, as it seems to be controlled by unholy energies."
-The scriblings are scenery in the Entrance to the Arena and plural-named. Understand "writings" and "scriptures" as scriblings. The description of the scriblings is "As you start to read the text, it lights up in a crimson red light: [italic type] If you wish, you can relive a battle once fought, but it will become the most challenging fight you ever had. If you are prepared, try to [roman type]smash the shard with a weapon [italic type].".
-Instead of reading the scriblings:
-	say "As you start to read the text, it lights up in a crimson red light: [italic type] If you wish, you can relive a battle once fought, but it will become the most challenging fight you ever had. If you are prepared, try to [roman type]smash the shard with a weapon [italic type].".
+The scribblings are scenery in the Entrance to the Arena and plural-named. Understand "writings" and "scriptures" as scribblings. The description of the scribblings is "[if triumphing boolean is false]As you start to read the text, it lights up in a crimson red light: [italic type] If you wish, you can relive a battle once fought, but it will become the most challenging fight you ever had. If you are prepared, try to [roman type]smash the shard with a weapon[italic type].[otherwise]An eerie red light celebrates your victory: 'Hail to our last victor. Unfornunately, the powers of the Arena can be lend only once[end if].".
+Instead of reading the scribblings:
+	say "[if triumphing boolean is false]As you start to read the text, it lights up in a crimson red light: [italic type] If you wish, you can relive a battle once fought, but it will become the most challenging fight you ever had. If you are prepared, try to [roman type]smash the shard [italic type]with a weapon.[otherwise]An eerie red light celebrates your victory: 'Hail to our last victor. Unfornunately, the powers of the Arena can be lend only once[end if].".
 
-The  stone table is a supporter in the Entrance to the Arena. The description of the stone table is "A large stone table." The stone table is fixed in place. On it is a soulchest.
+The  stone table is a supporter and scenery in the Entrance to the Arena. The description of the stone table is "A large stone table." On it is a soulchest.
 The soulchest is an opaque, openable, open container. The description of the soulchest is "A large chest, adorned with a number of crimson rubies." 
 
 A soulfragment is a kind of thing with description "A shard of a lost soul, waiting for you to be resurrected".
