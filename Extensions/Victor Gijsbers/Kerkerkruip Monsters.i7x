@@ -6,23 +6,31 @@ Use authorial modesty.
 
 Chapter - Groups of enemies
 
-[ Sometimes enemies are grouped together. We will use a relationship to link an enemy with its companions, and a table will describe the nature of each grouping. ]
+[ Sometimes enemies are grouped together. We will use a relationship to link a leading enemy with its companions, and properties of each leader will describe the nature of each grouping. ]
 
 Accompaniment relates various people to one person (called the leader).
 The verb to accompany (he accompanies, they accompany, he accompanied, it is accompanied, he is accompanying) implies the accompaniment relation. 
 
-Table of Accompaniment Rules
-Group leader	Place followers
-The mindslug	true
-The healer of Aite	true
+Definition: a person is a follower if it relates to a person by the accompaniment relation.
+
+A person can be group leading.
+A person can be initially accompanied. A group leading person is usually initially accompanied.
+A person can be kills claiming. A group leading person is usually kills claiming.
+A person can be defeated individually.
+
+To decide whether the group of (X - a person) has been defeated:
+	if X is alive and X is on-stage:
+		decide no;
+	repeat with F running through the people who accompany X:
+		if F is alive and F is on-stage:
+			decide no;
+	decide yes.
 
 [ Place all the followers with their leaders ]
 Final monster placement rule (this is the place accompanying enemies with their leader rule):
-	repeat with X running through on-stage people:
-		if there is a group leader of X in the Table of Accompaniment Rules:
-			choose the row with group leader of X in the Table of Accompaniment Rules;
-			if the place followers entry is true:
-				now all the people who accompany X are in the location of X;
+	repeat with X running through on-stage group leading people:
+		if X is initially accompanied:
+			now all the people who accompany X are in the location of X.
 
 
 
@@ -83,8 +91,14 @@ Section - Died and Kill counts
 Killing rule (this is the increment died and kill stats rule):
 	if killed-guy is the player:
 		increment the kill count of the killer-guy;
+		[ Award a kill to the leader of a group ]
+		if the killer-guy is a follower:
+			if the leader of the killer-guy is kills claiming:
+				increment the kill count of the killer-guy;
 	otherwise:
-		increment the died count of the killed-guy;
+		[ Mark a defeat only if the person stands alone or the whole group has been defeated ]
+		if the killed-guy is not group leading or killed-guy is defeated individually or the group of killed-guy has been defeated:
+			increment the died count of the killed-guy;
 	update the monster statistics;
 
 Section - Testing IDs - Not for release
@@ -2042,6 +2056,9 @@ The level of the mindslug is 3.
 The ID of the mindslug is 10.
 The mindslug is huge.
 
+The mindslug is group leading.
+The mindslug is defeated individually.
+
 The description of the mindslug is "It is of the dreaded race of mindslugs, abominations that use their telepathic powers to enslave others.".
 
 The health of the mindslug is 28.
@@ -2864,9 +2881,6 @@ Chapter - Level 4 - Fanatics of Aite
 [ All the fanatics of Aite should be treated the same, but we have to treat one as their leader. We'll choose the Healer solely because it's listed first!
 The old fanatics-of-Aite-package is no longer needed. ]
 
-[The fanatics-of-Aite-package is a monster. The level of the fanatics-of-Aite-package is 4.
-The ID of the fanatics-of-Aite-package is 15.]
-
 Section - Healer of Aite
 
 A healer of Aite is a male monster. The healer of Aite is not neuter. "A white-robed healer of Aite is chanting in praise of his goddess."
@@ -2875,6 +2889,9 @@ The description of the healer of Aite is "This white-robed priest is a healer of
 The ID of the Healer of Aite is 16.
 The Healer of Aite is medium.
 The level of the healer of Aite is 4.
+
+The healer of Aite is group leading.
+The healer of Aite is not defeated individually.
 
 The health of the Healer of Aite is 20.
 The melee of the Healer of Aite is 1.
