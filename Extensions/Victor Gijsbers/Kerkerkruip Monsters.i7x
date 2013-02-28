@@ -99,6 +99,10 @@ Killing rule (this is the increment died and kill stats rule):
 		[ Mark a defeat only if the person stands alone or the whole group has been defeated ]
 		if the killed-guy is not group leading or killed-guy is defeated individually or the group of killed-guy has been defeated:
 			increment the died count of the killed-guy;
+		[ If a leader was killed before all their followers then their died count will need to be incremented when the last follower dies ]
+		if the killed-guy is a follower:
+			if the group of the leader of the killed-guy has been defeated:
+				increment the died count of the leader of the killed-guy;
 	update the monster statistics;
 
 Section - Testing IDs - Not for release
