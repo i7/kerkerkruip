@@ -1943,58 +1943,24 @@ Carry out reading a scroll of death:
 	consider the unholy wave rules;
 
 
-Section - Scroll of Mutation
+Section - Scroll of Alteration
 
 Table of Scroll Names (continued)
 scroll name
-mutation
+alteration
 
-A scroll of mutation is a kind of scroll.
-A scroll of mutation is mutation.
-The description of a scroll of mutation is "Reading this scroll can radically alter your body."
-The plural of scroll of mutation is scrolls of mutation.
+A scroll of alteration is a kind of scroll.
+A scroll of alteration is alteration.
+The description of a scroll of alteration is "Reading this scroll can radically alter your body."
+The plural of scroll of alteration is scrolls of alteration.
 
-The mutated boolean is a truth state that varies.
 
-Carry out reading a scroll of mutation:
-	now mutated boolean is false;
-	consider the mutation rules;
+
+Carry out reading a scroll of alteration:
+	consider the mutating rules;
 	if mutated boolean is false:
 		say "Nothing happened!".
 	
-The mutation rules are a rulebook.
-
-A mutation rule (this is the mutate size rule):
-	let target size be a random size;
-	if a random chance of 1 in 4 succeeds:
-		now target size is medium;
-	if target size is not the size of the player:
-		now size of the player is target size;
-		now base size of the player is target size;
-		say "Your body suddenly becomes [target size]!";
-		now mutated boolean is true.
-
-A mutation rule (this is the mutate flying rule):
-	if a random chance of 1 in 5 succeeds:
-		if the player is not flyer:
-			now the player is flyer;
-			say "You grow wings and gain the power of flight!";
-			now mutated boolean is true;
-		otherwise:
-			now the player is not flyer;
-			say "You lose your wings, and can no longer fly!";
-			now mutated boolean is true.
-
-A mutation rule (this is the mutate eyeless rule):
-	if a random chance of 1 in 10 succeeds:
-		if the player is eyeless:
-			now the player is eyeless;
-			say "You lose your eyes... but find that you don't need them to be aware of your surroundings!";
-			now mutated boolean is true;
-		otherwise:
-			now the player is not eyeless;
-			say "You regrow your eyes!";
-			now mutated boolean is true.
 
 
 
@@ -2133,15 +2099,15 @@ The unlock level of large-scroll-of-death-pack is 1.
 The unlock hidden switch of the large-scroll-of-death-pack is true.
 Two scrolls of death are in the large-scroll-of-death-pack.
 
-Section - Mutation, small (minor)
+Section - Alteration, small (minor)
 
-The small-scroll-of-mutation-pack is a minor treasure pack.
-The small-scroll-of-mutation-pack is magical.
-One scroll of mutation is in the small-scroll-of-mutation-pack.
+The small-scroll-of-alteration-pack is a minor treasure pack.
+The small-scroll-of-alteration-pack is magical.
+One scroll of alteration is in the small-scroll-of-alteration-pack.
 
-The large-scroll-of-mutation-pack is a minor treasure pack.
-The large-scroll-of-mutation-pack is magical.
-Two scrolls of mutation are in the large-scroll-of-mutation-pack.
+The large-scroll-of-alteration-pack is a minor treasure pack.
+The large-scroll-of-alteration-pack is magical.
+Two scrolls of alteration are in the large-scroll-of-alteration-pack.
 
 Section - Deathly [summon, ghoul, death], (major)
 

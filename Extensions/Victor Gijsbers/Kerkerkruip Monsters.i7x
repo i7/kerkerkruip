@@ -2010,6 +2010,7 @@ An AI action selection rule for the hound:
 
 
 
+
 Chapter - Level 3 - Mindslug
 
 A mindslug is a monster. "A vast slug covered in green ooze has positioned itself in this room."
@@ -2705,13 +2706,15 @@ Check sprouting:
 
 Carry out sprouting:
 	let n be the number understood;
-	say "[if n is 1]A horrible tentacle sprouts[end if][if n is 2]Two[otherwise if n is 3]Three[otherwise if n is 4]Four[end if][if n is not 1] horrible tentacles sprout[end if] from your body! This spectacle was not meant to be seen by mortal eyes, and your mind score decreases by [n] points.[paragraph break]";
+	say "[if n is 1]A horrible tentacle sprouts[end if][if n is 2]Two[otherwise if n is 3]Three[otherwise if n is 4]Four[end if][if n is not 1] horrible tentacles sprout[end if] from your body! This spectacle was not meant to be seen by mortal eyes, and your mind score decreases by [n] points[if pseudopods is adapted]. Your pseudopods also wave and grow and terrify your enemies[end if].[paragraph break]";
 	repeat with guy running through people in the location:
 		unless guy is the player:
 			if guy is insane:
 				say "[The guy] has already gone insane, so the tentacles have no further effect.[paragraph break]";
 			otherwise:
 				let m be 4 + (4 * n) - (health of the guy / 3) + (concentration of the player);
+				if pseudopods is adapted:
+					increase m by 3;
 				if m is less than 1:
 					now m is 1;
 				test the mind of the guy against m;

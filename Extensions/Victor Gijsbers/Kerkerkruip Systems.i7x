@@ -1508,6 +1508,144 @@ Carry out turning bat:
 
 
 
+Chapter - Mutations
+
+[Mutations are for use with the scroll of mutation, and maybe some other stuff. They apply only to the player.
+
+We also put the mutation rules here, even when they do not use the mutation kind -- e.g., when they apply to properties of all people.]
+
+Section - Mutating rules
+
+The mutating rules are a rulebook.
+
+The mutated boolean is a truth state that varies.
+First mutating rule (this is the set mutated boolean rule):
+	now mutated boolean is false.
+
+A mutating rule (this is the mutate size rule):
+	let target size be a random size;
+	if a random chance of 1 in 4 succeeds:
+		now target size is medium;
+	if target size is not the size of the player:
+		now size of the player is target size;
+		now base size of the player is target size;
+		say "Your body suddenly becomes [target size]!";
+		now mutated boolean is true.
+
+
+A mutating rule (this is the mutate gender rule):
+	if a random chance of 1 in 10 succeeds:
+		let n be a random number between 1 and 11;
+		if n is less than 6:
+			if the player is not male:
+				now the player is male;
+				say "You turn into a man!";
+				now mutated boolean is true;
+		otherwise if n is less than 11:
+			if the player is not female:
+				now the player is female;
+				say "You turn into a woman!";
+				now mutated boolean is true;
+		otherwise:
+			if the player is male or the player is female:
+				now the player is not female;
+				now the player is not male;
+				say "You turn into a sexless being!";
+				now mutated boolean is true.
+		
+			
+
+
+Section - The mutation kind
+
+Mutation is a kind of value. Some mutations are defined by the Table of Player Mutations.
+
+Mutations can be adapted. Mutations are usually not adapted.
+
+Table of Player Mutations
+mutation		mutate-text		unmutate-text
+wings		"You grow wings and gain the power of flight!"		"You lose your wings!"
+darkvision	"You gain the ability to see in total darkness!"		"You lose your darkvision!"
+pseudopods	"Hundreds of apparently useless pseudopods grow from your skin."		"The pseudopods that covered you disappear."
+disintegrating flesh	"Your flesh loses much of ist consistency!"		"Your flesh returns to its normal solidity."
+metallic scales	"Your body is covered in metallic scales!"		"The metallic scales disappear from your body."
+
+
+Status rule (this is the mutations status rule):
+	if at least one mutation is adapted:
+		say "Your altered body has [bold type][list of adapted mutations][roman type].[line break][run paragraph on]".
+
+Section - Mutating mutations
+
+Mutations can be just-mutated. Mutations are usually not just-mutated.
+
+A mutating rule (this is the consider mutations rule):
+	let n be 3;
+	while a random chance of 1 in n succeeds:
+		if at least one mutation is not just-mutated:
+			let perk be a random not just-mutated mutation;
+			if perk is adapted:
+				unmutate perk;
+				now mutated boolean is true;
+			otherwise:
+				mutate perk;
+				now mutated boolean is true;
+			now perk is just-mutated;
+			increase n by 2;
+	repeat with perk running through mutations:
+		now perk is not just-mutated.
+
+To mutate (perk - a mutation):
+	choose row with mutation of perk in Table of Player Mutations;
+	now perk is adapted;
+	say "[mutate-text entry][line break]".
+
+To unmutate (perk - a mutation):
+	choose row with mutation of perk in Table of Player Mutations;
+	now perk is not adapted;
+	say "[unmutate-text entry][line break]".
+
+
+Section - Wings
+
+A flying rule (this is the wings flying rule):
+	if test subject is player and wings is adapted:
+		rule succeeds.
+
+Section - Darkvision
+
+First blindness rule (this is the not blind if darkvision rule):
+	if test subject is player and darkvision is adapted:
+		rule fails.
+
+Section - Pseudopods
+
+[Pseudopods give a bonus to the sprout ability!]
+
+Section - Disintegrating flesh
+
+A damage modifier rule (this is the disintegrating flesh damage modifier rule):
+	if the global defender is the player and disintegrating flesh is adapted:
+		say " + 1 (disintegrating flesh)[run paragraph on]";
+		increase the attack damage by 1.
+
+
+Section - Metallic scales
+
+A physical damage reduction rule (this is the metallic scales damage reduction rule):
+	if the test subject is the player and metallic scales is adapted:
+		increase the pdr by 1.
+
+A damage modifier rule (this is the metallic scales damage modifier rule):
+	if the global defender is the player and metallic scales is adapted:
+		if the global attacker weapon is armour-stoppable:
+			say " - 1 (metallic scales)[run paragraph on]";
+			decrease the attack damage by 1.
+
+
+
+
+
 
 Chapter - Blood Magic
 

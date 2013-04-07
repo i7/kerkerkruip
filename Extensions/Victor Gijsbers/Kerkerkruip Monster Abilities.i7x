@@ -349,8 +349,6 @@ To calculate the pdr for (guy - a person):
 
 
 
-
-
 Part - Abilities
 
 Chapter - Healing
