@@ -1928,6 +1928,65 @@ Check taking a tome (this is the do no remove tomes from the pedestal rule):
 	if the noun is on the crystal pedestal:
 		say "The magical forces binding the tome to the pedestal are too great." instead.
 		
+Chapter - The Zen Room
+
+The Zen Room is a room. "A room of calmth and serenity, adorned with beautiful drawings. In the centre, a comfortable looking chair is waiting for you to sit on."
+
+The Zen Room is connectable.
+The Zen Room is not connection-inviting.
+The Zen Room is placeable.
+The Zen Room is habitable.
+The Zen Room is treasurable.
+The Zen Room is teleportable.
+The Zen Room is not extra-accepting.
+The Zen Room is vp-agnostic.
+The Zen Room is civilised.
+
+The rarity of Zen Room is 6.
+
+The Zen drawings are scenery and plural-named.
+Instead of examining the Zen drawings, say "All kinds of Mandala's and pictures of Buddha's."
+
+A chair is a kind of supporter. A chair is enterable. 
+
+The comfy chair is a chair and scenery in the Zen Room. The description of the comfy chair is "A leather, well worn chair, but quite cozy to look at. It seems to be owned by [chairinheritor]." Understand "comfortable looking chair","well worn chair" and "leather chair" as the comfy chair.
+ 
+Chairinheritance relates a person to a chair. The verb to chairinherit (he chairinherits, they chairinherit, he chairinherited, he has chairinherited) implies the chairinheritance relation.
+
+When play begins:
+	If a random chance of 3 in 4 succeeds:
+		now Malygris chairinherits the comfy chair;
+	otherwise:
+		let X be a list of persons;
+		repeat with guy running through alive not off-stage persons:
+			unless guy is Malygris or guy is Nameless Horror:
+				add guy to X;
+		sort X in random order;
+		now entry 1 of X chairinherits the comfy chair.
+
+ To decide which person is the chairinheritor:
+	repeat with guy running through alive not off-stage persons:
+		if guy chairinherits the comfy chair:
+			decide on guy.
+
+
+After entering the comfy chair:
+	If the comfy chair is in the Zen room:
+		If the player is male:
+			say "You hear [chairinheritor] screaming: [italic type]He'll probably be in the Zen Room![roman type] Suddenly, you feel yourself, and the chair, moving fastly. A fair ride later...";
+			move the comfy chair to the location of chairinheritor;
+			say "You find yourself in [the printed name of the location]. [chairinheritor] smiles, saying [italic type] Mr. Adventurer, we meet at last[roman type]!";
+			take no time;
+		Otherwise if the player is female:
+			say "You hear [chairinheritor] screaming: [italic type]She'll probably be in the Zen Room![roman type] Suddenly, you feel yourself, and the chair, moving fastly. A fair ride later...";
+			move the comfy chair to the location of chairinheritor;
+			say "You find yourself in [the printed name of the location]. [chairinheritor] smiles, saying [italic type] Ms. Adventurer, we meet at last![roman type]";
+			take no time;
+		Otherwise:
+			say "You hear [chairinheritor] screaming: [italic type]It'll probably be in the Zen Room![roman type] Suddenly, you feel yourself, and the chair, moving fastly. A fair ride later...";
+			move the comfy chair to the location of chairinheritor;
+			say "You find yourself in [the printed name of the location]. [chairinheritor] smiles, saying [italic type] Adventurer, we meet at last![roman type]";
+			take no time.
 
 
 
