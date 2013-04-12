@@ -72,6 +72,18 @@ Last when play begins:
 	copy scroll of teleportation to player;
 	copy scroll of teleportation to player.]
 	
+When play begins:
+	now all placed not nogo rooms are map-revealed;
+	now all placed not nogo rooms are visited;
+	now all placed not nogo rooms are enemy-revealed;
+	now all alive not off-stage persons are seen;
+	if the eternal prison is not placed, now the nameless horror is not seen.
+
+[When play begins: 
+	if there is a placed tunnel-drawn room:
+		let place be a random placed tunnel-drawn room;
+		now all alive not off-stage persons are in place.]
+	
 
 Chapter - Flexible Windows relisting
 [Kerkerkruip's when play begin rules don't fire until after the menu is cleared. This means that extension such as Flexible Windows that have critical startup code in when play begins need to be adjusted. Due to weaknesses in Inform's extension interactions, this has to be in story.ni rather than the Kerkerkruip Glimmr Additions extension.]
@@ -92,18 +104,4 @@ Before displaying:
 [After printing the name of a room (called the place):
 	say " ([y-coordinate of place],[x-coordinate of place],[z-coordinate of place])";]
 	
-
-Chapter - Testing
-
-When play begins:
-	now all placed not nogo rooms are map-revealed;
-	now all placed not nogo rooms are visited;
-	now all placed not nogo rooms are enemy-revealed;
-	now all alive not off-stage persons are seen;
-	if the eternal prison is not placed, now the nameless horror is not seen.
-
-[When play begins: 
-	if there is a placed tunnel-drawn room:
-		let place be a random placed tunnel-drawn room;
-		now all alive not off-stage persons are in place.]
 

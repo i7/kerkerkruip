@@ -1752,15 +1752,20 @@ To set up the map keyboard instructions:
 			now entry 1 of the origin of the item is the horizontal center + the x-off of the item;
 			now entry 2 of the origin of the item is the vertical anchor + the y-off of the item.
 
-A glulx redrawing rule when the map-window is g-present (this is the reset map scrolling offsets on forced redraw rule):
-	reset the scrolling offsets;
-	compensate for small map window;
-	set up the map keyboard instructions;
 
-A glulx arranging rule when the map-window is g-present (this is the reset map scrolling offsets on window arranging rule):
-	reset the scrolling offsets;
-	compensate for small map window;
-	set up the map keyboard instructions;
+Section - Graphic links for scrolling
+
+Graphlink processing rule for up_arrow:
+	scroll map north.
+
+Graphlink processing rule for down_arrow:
+	scroll map south.
+
+Graphlink processing rule for right_arrow:
+	scroll map east.
+
+Graphlink processing rule for left_arrow:
+	scroll map west.
 
 
 Section - Map Legend
@@ -1786,7 +1791,21 @@ An element display rule for the map-legend (this is the map legend display rule)
 			let offset be the image-height of the legend-label of the villain / 2;
 			display the legend-label of the villain in the map-window at x by y;
 			draw a rectangle (15461355[10% gray]) in map-window from x by (y + offset) to (x + image-width of the legend-label of the villain) by (y + offset) + 1;
-			increase y by the image-height of the legend-label of the villain plus 0;
+			increase y by the image-height of the legend-label of the villain plus 0.
+
+
+Section - Map window redraw
+
+A glulx redrawing rule when the map-window is g-present (this is the reset map scrolling offsets on forced redraw rule):
+	reset the scrolling offsets;
+	compensate for small map window;
+	set up the map keyboard instructions;
+
+A glulx arranging rule when the map-window is g-present (this is the reset map scrolling offsets on window arranging rule):
+	reset the scrolling offsets;
+	compensate for small map window;
+	set up the map keyboard instructions.
+
 
 
 Kerkerkruip Glimmr Additions ends here.
