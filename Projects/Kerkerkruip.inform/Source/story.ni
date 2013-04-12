@@ -15,8 +15,8 @@ Include Epistemology by Eric Eve. [Doesn't work with moving people.]
 Include Glulx Status Window Control by Erik Temple.
 
 [Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. Be sure to comment Flexible Windows in instead!]
-[Include Kerkerkruip Glimmr Additions by Erik Temple.]
-Include Flexible Windows by Jon Ingold.
+Include Kerkerkruip Glimmr Additions by Erik Temple.
+[Include Flexible Windows by Jon Ingold.]
 [Include Kerkerkruip Windows by Erik Temple.]
 
 Every turn (this is the mark items as seen every turn rule): 
@@ -61,6 +61,9 @@ The notify score changes rule is not listed in any rulebook.
 
 Generation info is a truth state that varies. Generation info is [true]false.
 
+Last when play begins:
+	move magical spade to the player.
+
 [Last when play begins:
 	increase mind score of the player by 40.]
 	
@@ -85,4 +88,22 @@ Chapter - Menu code adjustments
 
 Before displaying:
 	open the status window.
+	
+[After printing the name of a room (called the place):
+	say " ([y-coordinate of place],[x-coordinate of place],[z-coordinate of place])";]
+	
+
+Chapter - Testing
+
+When play begins:
+	now all placed not nogo rooms are map-revealed;
+	now all placed not nogo rooms are visited;
+	now all placed not nogo rooms are enemy-revealed;
+	now all alive not off-stage persons are seen;
+	if the eternal prison is not placed, now the nameless horror is not seen.
+
+[When play begins: 
+	if there is a placed tunnel-drawn room:
+		let place be a random placed tunnel-drawn room;
+		now all alive not off-stage persons are in place.]
 

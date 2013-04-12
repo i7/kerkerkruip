@@ -1793,8 +1793,6 @@ Check taking a tome (this is the do no remove tomes from the pedestal rule):
 		say "The magical forces binding the tome to the pedestal are too great." instead.
 		
 
-
-
 [Elemental Plane: see Kerkerkruip Events and Specials]
 
 Kerkerkruip Locations ends here.

@@ -51,7 +51,7 @@ To decide which number is data value (X - a number):
 	otherwise:
 		decide on 0;
 
-To set data value (X - a number) to (Y - a number), table only:
+To set data value (X - a number) to (Y - a number), table only (this is data-value setting):
 	if there is a key of X in the Table of Data Storage:
 		choose row with a key of X in the Table of Data Storage;
 	otherwise:

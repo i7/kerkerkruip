@@ -258,7 +258,10 @@ This is the toggle menu graphics rule:
 	otherwise:
 		set data value 5 to 1, table only;
 	set data value 6 to 0;
-	follow the immediately restart the VM rule.
+	restart immediately.
+
+To restart immediately: 
+	(- @restart; -).
 
 
 Section - Help Menu

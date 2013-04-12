@@ -5010,6 +5010,4 @@ Report the demonic mistress waiting when the demonic mistress is insane:
 A huge skeletal moth with a concentration-stealing ability?]
 
 
-
-
 Kerkerkruip Monsters ends here.

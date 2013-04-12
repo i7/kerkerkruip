@@ -242,6 +242,21 @@ Carry out collapsing:
 	say "With a huge crash, the [if noun is up or noun is down]staircase[otherwise]corridor[end if] collapses!".
 
 
+Section - Support for graphical mapping
+
+[Kerkerkruip's REMEMBER command uses a room's visited status to list rooms. However, we might have a need for showing rooms on the map that haven't been visited yet.]
+
+A room can be map-revealed. A room is usually not map-revealed.
+
+[We may need to show enemies without actually mapping the rooms they are in. We still need to reserve space on the map for necessary rooms, however, and can do so by designating rooms to be "enemy-drawn".]
+
+A room can be enemy-revealed. A room is usually not enemy-revealed.
+
+[It might make sense for some rooms to be drawn as if they were tunnels; these would generally be linear rooms, such as a bridge.]
+
+A room can be tunnel-drawn. A room is usually not tunnel-drawn. A tunnel is usually tunnel-drawn.
+
+
 
 
 
