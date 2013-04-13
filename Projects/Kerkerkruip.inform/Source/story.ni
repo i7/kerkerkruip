@@ -61,16 +61,14 @@ The notify score changes rule is not listed in any rulebook.
 
 Generation info is a truth state that varies. Generation info is [true]false.
 
+
 Last when play begins:
 	move magical spade to the player.
 
 [Last when play begins:
 	increase mind score of the player by 40.]
 	
-[When play begins:
-	copy scroll of ghoulification to player;
-	copy scroll of teleportation to player;
-	copy scroll of teleportation to player.]
+[The player carries a scroll of psycholocation and a scroll of mapping.]
 	
 [When play begins:
 	now all placed not nogo rooms are map-revealed;
@@ -83,6 +81,8 @@ Last when play begins:
 	if there is a placed tunnel-drawn room:
 		let place be a random placed tunnel-drawn room;
 		now all alive not off-stage persons are in place.]
+		
+
 	
 
 Chapter - Flexible Windows relisting
@@ -103,5 +103,5 @@ Before displaying:
 	
 [After printing the name of a room (called the place):
 	say " ([y-coordinate of place],[x-coordinate of place],[z-coordinate of place])";]
-	
 
+	
