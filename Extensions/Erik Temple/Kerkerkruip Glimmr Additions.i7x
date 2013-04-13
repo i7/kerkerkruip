@@ -1169,7 +1169,8 @@ To close title screen:
 		animate the music-fading track as a custom animation at 8 fps with a duration of (fade-length) frames;][****]
 	delay input until all animations are complete;
 	now the display-layer of the black-fader is 9999;
-	shut down the graphics-window.
+	shut down the graphics-window;
+	open the status window.
 	
 To cease animating all tracks but (target - an animation track):
 	repeat with track running through animation-active animation tracks:
@@ -1272,6 +1273,7 @@ Check showing the map:
 
 Carry out showing the map:
 	follow the dungeon extent calculation rules;
+	close the status window;
 	open up the map-window;
 	follow the glulx arranging rules;
 	while true is true:
@@ -1313,9 +1315,11 @@ To scroll map (dir - direction):
 
 Report showing the map:
 	shut down the map-window;
+	open the status window;
+	if there is a display-inactive size-sensitive g-element[i.e., if we have had to hide any of the UI elements, the map window was too small]:
+		say "[bracket]The window was too small to show the map comfortably. Try increasing the size of your game window.[close bracket][line break]";
 	say "Map consulted.";
-	[repeat with place running through the ordered dungeon manifest:
-		say "[Place]: ([x-coordinate of place], [y-coordinate of place], [z-coordinate of place]).";]
+	
 
 
 Section - Calculating the size of the dungeon
@@ -1725,8 +1729,8 @@ To set up the map keyboard instructions:
 	repeat with item running through map-buttons:
 		now the image-ID of the item is the active state of the item;
 		deactivate the item;
-	if the map-width of the map-renderer is greater than (width of the map-window - legend-width of the map-legend):
-		now the max-scroll-offset-x of the map-renderer is MAX (map-tile-width) or map-tile-width + (map-width of the map-renderer - (width of the map-window - legend-width of the map-legend));
+	if the map-width of the map-renderer is greater than (width of the map-window - legend-width of the map-legend) - map-tile-width:
+		now the max-scroll-offset-x of the map-renderer is (map-tile-width * 3) + (((map-width of the map-renderer - (width of the map-window - legend-width of the map-legend)) / map-tile-width) * map-tile-width);
 		now the image-ID of the map-keyboard-instructions is Figure of map_text_arrow_keys;
 		activate the left_arrow;
 		activate the right_arrow;
@@ -1805,6 +1809,12 @@ A glulx arranging rule when the map-window is g-present (this is the reset map s
 	reset the scrolling offsets;
 	compensate for small map window;
 	set up the map keyboard instructions.
+
+
+Section - Status window
+
+Last when play begins (this is the open up the status window rule):
+	open the status window;
 
 
 

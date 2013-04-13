@@ -72,12 +72,12 @@ Last when play begins:
 	copy scroll of teleportation to player;
 	copy scroll of teleportation to player.]
 	
-When play begins:
+[When play begins:
 	now all placed not nogo rooms are map-revealed;
 	now all placed not nogo rooms are visited;
 	now all placed not nogo rooms are enemy-revealed;
 	now all alive not off-stage persons are seen;
-	if the eternal prison is not placed, now the nameless horror is not seen.
+	if the eternal prison is not placed, now the nameless horror is not seen.]
 
 [When play begins: 
 	if there is a placed tunnel-drawn room:
