@@ -175,10 +175,9 @@ Section - Status window hyperlinks
 Hyperlink processing rule when the current hyperlink window is the stats-window and the current hyperlink ID is 1:
 	move focus to stats-window, clearing the window;
 	consider the show basic stats rule;
-	say line break;
 	consider the status rules;
-	if the rule succeeded, say line break;
 	consider the status skill rules;
+	say line break;
 	say "[link 2]< back[end link][run paragraph on]";
 	return to main screen;
 	rule succeeds.
