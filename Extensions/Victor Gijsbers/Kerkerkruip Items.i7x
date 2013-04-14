@@ -914,6 +914,7 @@ Chapter - Shoes
 Section - Soft slippers (minor)
 
 The soft slippers are minor shoes. The soft slippers are plural-named. The description of the soft slippers is "A pair of compfortable slippers, looking like cute [one of]pink[or]yellow[or]mint green[or]baby blue[or]turquoise[sticky random] [one of]mindslugs[or]Tooloos[or]blood apes[or]armadillos[or]demons of rage[or]minotaurs[or]abysses of the soul[or]imps[sticky random]. They will allow you to remain hidden more easily.".
+Soft slippers are civilised.
 
 Detection rule (this is the soft slippers detection rule):
 	if the player wears the soft slippers:
