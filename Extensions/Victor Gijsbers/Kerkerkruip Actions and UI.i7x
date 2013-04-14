@@ -733,6 +733,8 @@ The print standard inventory rule is not listed in any rulebook.
 
 Carry out taking inventory: 
 	take no time;
+
+Carry out taking inventory (this is the full inventory rule):
 	if the number of things had by the player is 0, say "You are empty-handed." instead; 
 	unless the number of weapons enclosed by the player is the number of natural weapons enclosed by the player:
 		say "You are carrying[line break][italic type]-weapons[roman type]: [line break]";

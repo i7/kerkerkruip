@@ -17,13 +17,17 @@ Chapter - Window definitions
 
 Section - Windows with content
 
-The stats-window is a text-buffer g-window spawned by the main-window. The back-colour is g-window-color. The measurement is 30. The position is g-placeright.
+The stats-window is a text-buffer g-window spawned by the main-window. The back-colour is g-window-color. The measurement is 25. The position is g-placeright.
 
 The stat-header-window is a text-buffer g-window spawned by the stats-window. The measurement is 1. The position is g-placeabove. The scale method is g-fixed-size. The back-colour is g-header-color.
 
-The powers-window is a text-buffer g-window spawned by the stats-window. The back-colour is g-window-color. The measurement is 55. The position is g-placebelow.
+The powers-window is a text-buffer g-window spawned by the stats-window. The back-colour is g-window-color. The measurement is 17. The scale method is g-fixed-size. The position is g-placebelow.
 
 The powers-header-window is a text-buffer g-window spawned by the powers-window. The measurement is 1. The position is g-placeabove. The scale method is g-fixed-size.  The back-colour is g-header-color.
+
+The inventory-window is a text-buffer g-window spawned by the main-window. The back-colour is g-window-color. The measurement is 30. The position is g-placeleft.
+
+The inventory-header-window is a text-buffer g-window spawned by the inventory-window. The measurement is 1. The position is g-placeabove. The scale method is g-fixed-size. The back-colour is g-header-color.
 
 
 Section - Border windows
@@ -46,6 +50,12 @@ The border-5-window is a graphics g-window spawned by the stats-window. The meas
 The border-6-window is a graphics g-window spawned by the powers-window. The measurement is 1. The position is g-placeabove. The scale method is g-fixed-size.  The back-colour is g-humanist-crimson.
 
 The border-7-window is a graphics g-window spawned by the main-window. The measurement is 1. The position is g-placeabove. The scale method is g-fixed-size.  The back-colour is g-humanist-crimson.
+
+The border-8-window is a graphics g-window spawned by the inventory-window. The measurement is 1. The position is g-placeabove. The scale method is g-fixed-size.  The back-colour is g-humanist-crimson.
+
+The border-9-window is a graphics g-window spawned by the inventory-window. The measurement is 2. The position is g-placeleft. The scale method is g-fixed-size.  The back-colour is g-white.
+
+The border-10-window is a graphics g-window spawned by the inventory-window. The measurement is 6. The position is g-placeright. The scale method is g-fixed-size.  The back-colour is g-white.
 
 
 Section - Window styling
@@ -80,13 +90,16 @@ To set up styles for side windows:
 Chapter - Window-drawing rules
 [There are two primary places where we need to redraw the windows. First, before reading a command should handle all in-game situations. But we also need the stats to reflect the last turn of the game when we've won, since this will most often be a combat turn that we have lost. For that, we hook into the activity for printing the player's "obituary".]
 
-Before reading a command (this is the refresh side windows rule):
+To redraw subsidiary content windows:
 	follow the window-drawing rules for the stats-window;
-	follow the window-drawing rules for the powers-window.
+	follow the window-drawing rules for the powers-window;
+	follow the window-drawing rules for the inventory-window.
+
+Before reading a command (this is the refresh side windows rule):
+	redraw subsidiary content windows..
 	
 Before printing the player's obituary (this is the final refresh side windows rule):
-	follow the window-drawing rules for the stats-window;
-	follow the window-drawing rules for the powers-window.
+	redraw subsidiary content windows.
 
 
 Section - Statistics window
@@ -129,15 +142,76 @@ Window-drawing rule for the powers-window (this is the construct power window ru
 	if pow is 0:
 		say "[bold type]You have not yet acquired any special powers[roman type].";
 	otherwise:
-		consider the status skill rules;
+		[consider the status skill rules;]
+		repeat with ability running through granted powers:
+			say "[link (the ability typecast to a number)][command text of the ability in sentence case][end link]: level [power level of the ability][run paragraph on]";
+			if there is a power of ability in the Table of Enemy Powers:
+				choose row with power of ability from the Table of Enemy Powers;
+				say " ([faculty1 entry][if there is a faculty2 entry] & [faculty2 entry][end if])[run paragraph on]";
+			say "[line break]";
 	if pow < 3:
 		say "[line break][italic type]Tip:[roman type] [one of]Every dungeon contains seven monsters with a positive level: two level 1 monsters, two level 2 monsters, and one each of levels 3, 4 and 5[or]When you absorb an enemy's soul, it fully heals you, increases your statistics, and grants you a special power[or]Health bonuses belong to powers. If you lose a power, you will also lose the health bonus that comes with it[or]When you absorb the soul of a monster of a certain level, all souls of the same or a lower level are immediately driven out of your body[or]Level 0 monsters never grant you health or powers[or]Some monsters form groups, and you will have to kill the entire group before power transferal happens[or]Maximising the number of souls you have at your disposal by choosing the right order in which to kill the monsters is one of the keys of success in [italic type]Kerkerkruip[roman type][at random]."; 
 	say run paragraph on;
 	return to main screen.
 
+Hyperlink processing rule when the current hyperlink window is the powers-window:
+	let ability be the current hyperlink ID typecast to an object;
+	if ability is a power:
+		let T be an indexed text;
+		let T be "[ability]" in title case;
+		move focus to powers-window, clearing the window;
+		say "[bold type][T].[roman type][line break][description of the ability] [link 1]< back[end link][run paragraph on]";
+		return to main screen;
+		rule succeeds.
+
+Hyperlink processing rule when the current hyperlink window is the powers-window and the current hyperlink ID is 1[i.e., we've hit the back button while reading the description of some power.]:
+	follow the window-drawing rules for the powers-window;
+	rule succeeds.
+
 Window-drawing rule for the powers-header-window (this is the construct powers header window rule):
 	move focus to powers-header-window, clearing the window;
 	say "[first custom style]Powers[roman type]";
+	say run paragraph on;
+	return to main screen.
+
+Table of Enemy Powers
+power	faculty1	faculty2
+power of the armadillo	body	spirit
+power of the ape	body	--
+power of the daggers	spirit	body
+power of Miranda	mind	--
+power of the wisps	spirit	--
+power of the chains	spirit	--
+power of the bomb	body	--
+power of the Reaper	spirit	--
+power of rage	mind	--
+power of the hound	mind	--
+power of the mindslug	mind	spirit
+power of the tentacle	mind	--
+power of the minotaur	body	--
+power of the Fanatics of Aite	spirit	--
+power of Bodmall	body	--
+
+
+To decide what number is (O - an object) typecast to a number:
+	(- {O} -).
+
+To decide what object is (N - a number) typecast to an object:
+	(- {N} -).
+
+
+
+Section - Inventory window
+	
+Window-drawing rule for the inventory-window (this is the construct inventory window rule):
+	move focus to inventory-window, clearing the window;
+	consider the full inventory rule; 
+	say run paragraph on;
+	return to main screen.
+
+Window-drawing rule for the inventory-header-window (this is the construct inventory header window rule):
+	move focus to inventory-header-window, clearing the window;
+	say "[first custom style]Inventory[roman type]";
 	say run paragraph on;
 	return to main screen.
 
@@ -157,10 +231,16 @@ To open side windows:
 	place border border-4-window;
 	[apply justification of center-justified to bold-style;][doesn't work in Gargoyle]
 	open up the powers-header-window;
-	place border border-6-window.
+	place border border-6-window;
+	open up the inventory-window;
+	place border border-9-window;
+	place border border-10-window;
+	open up the inventory-header-window;
+	place border border-8-window.
 	
 To close side windows:
 	shut down the stats-window;
+	shut down the inventory-window;
 	shut down the border-1-window.
 	
 
