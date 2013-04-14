@@ -2145,7 +2145,11 @@ Chapter - Magical guides
 
 A magical guide is a kind of thing. A magical guide is readable. Understand "book" and "manual" as a magical guide.
 
-Before printing the name of a magical guide, say "[italic type]". After printing the name of a magical guide, say "[roman type]". 
+Last before printing the name of a magical guide:
+	say "[italic type]".
+
+First after printing the name of a magical guide:
+	say "[roman type]".
 
 A magical guide has a list of scroll names called the guide list.
 

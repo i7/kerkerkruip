@@ -70,7 +70,7 @@ Fragmentation rule (this is the hall of mirrors fragmentation rule):
 After printing the name of something while looking when the location is the Hall of Mirrors:
 	say "[run paragraph on]";
 	unless the player is blind:
-		say " [one of](reflected thousandfold)[or](mirrored all around you)[or](copied and copied by mirrors)[or](multiplied ad infinitum)[at random]" instead.
+		say " [one of](reflected thousandfold)[or](mirrored all around you)[or](copied and copied by mirrors)[or](multiplied ad infinitum)[at random]".
 
 Check an actor hitting when the location is Hall of Mirrors (this is the sometimes attack a mirror image in Hall of Mirrors rule):
 	unless the global attacker is blind:
