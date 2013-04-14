@@ -1840,13 +1840,15 @@ Carry out smashing it with:
 	if the player is in the Entrance to the Arena and the fighting boolean is false:
 		repeat with Pers running through monsters who soulcatches the noun:
 			if the printed name of Pers matches the regular expression "package$":
+			[TO DO: UGLY HACK for the Fanatics of Aite group]
 				now the oppname is "Fanatics of Aite";
 				move Pers to the Arena-waiting-room;
 				abide by the place fanatics of Aite rule;
 				repeat with guy running through persons in the Arena-waiting-room:
+					challenge guy;
 					say "The heavy doors open, where the angry [guy] awaits, angered from your last fight and strengthened by evil magic!";
-					move the player to the Arena of the Fallen;
-					now the fighting boolean is true;
+				now the fighting boolean is true;
+				move the player to the Arena of the Fallen;
 			otherwise:
 				now the oppname is the printed name of Pers;
 				challenge Pers;
@@ -1942,7 +1944,7 @@ The Zen Room is not extra-accepting.
 The Zen Room is vp-agnostic.
 The Zen Room is civilised.
 
-The rarity of Zen Room is 6.
+The rarity of Zen Room is 5.
 
 The Zen drawings are scenery and plural-named.
 Instead of examining the Zen drawings, say "All kinds of Mandala's and pictures of Buddha's."
@@ -1960,6 +1962,7 @@ When play begins:
 		let X be a list of persons;
 		repeat with guy running through alive not off-stage persons:
 			unless guy is Malygris or guy is Nameless Horror:
+			[TO DO: UGLY HACK for Nameless Horror]
 				add guy to X;
 		sort X in random order;
 		now entry 1 of X chairinherits the comfy chair.
