@@ -730,7 +730,7 @@ Report concentrating when breathlessness is the case (this is the bodice of brea
 		-- 2:
 			say "You are now quite concentrated.  Your bodice tightens even more, making it hard to breath.";
 		-- 3:
-			say "You are now maximally concentrated.  You struggle to get air as the bodice almosy crushes your ribs.";
+			say "You are now maximally concentrated.  You struggle to get air as the bodice almost crushes your ribs.";
 	rule fails.
 
 [
