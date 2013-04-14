@@ -3170,8 +3170,9 @@ An AI action selection rule for Bodmall (this is the Bodmall considers summoning
 		now the Action Weight entry is a random number between -100 and 35.
 
 Carry out Bodmall Bodmall-summoning:
-	say "Bodmall makes several complicated gestures, and [bold type]brambles[roman type] come out of the ground everywhere around you!";
-	move brambles to the location.
+	if the location of Bodmall is the location of the player:
+		say "Bodmall makes several complicated gestures, and [bold type]brambles[roman type] come out of the ground everywhere around you!";
+		move brambles to the location.
 
 An AI action selection rule for Bodmall (this is the Bodmall considers launching rule):
 	if brambles are in the location and brambles strength is greater than 1:
