@@ -21,7 +21,7 @@ The stats-window is a text-buffer g-window spawned by the main-window. The back-
 
 The stat-header-window is a text-buffer g-window spawned by the stats-window. The measurement is 1. The position is g-placeabove. The scale method is g-fixed-size. The back-colour is g-header-color.
 
-The powers-window is a text-buffer g-window spawned by the stats-window. The back-colour is g-window-color. The measurement is 17. The scale method is g-fixed-size. The position is g-placebelow.
+The powers-window is a text-buffer g-window spawned by the stats-window. The back-colour is g-window-color. The measurement is 13. The scale method is g-fixed-size. The position is g-placebelow.
 
 The powers-header-window is a text-buffer g-window spawned by the powers-window. The measurement is 1. The position is g-placeabove. The scale method is g-fixed-size.  The back-colour is g-header-color.
 
@@ -106,32 +106,86 @@ Section - Statistics window
 
 Window-drawing rule for the stats-window (this is the construct stats window rule):
 	move focus to stats-window, clearing the window;	
-	consider the status rules;[show point distribution message]
+	consider the short status rules;[show point distribution messages]
 	say "[line break][run paragraph on]";
 	consider the show basic stats rule;[show statistics]
 	say run paragraph on;
 	return to main screen.
-	
-[This is the side-window stats rule:[adapted from the show basic stats rule, to use fixed width type.]
-	say "[second custom style]Health:  [fixed letter spacing][health of the player] of [permanent health of the player][line break][run paragraph on]";
-	say "[second custom style]Attack:  [fixed letter spacing][melee of the player][line break][run paragraph on]";
-	say "[second custom style]Defence: [fixed letter spacing][defence of the player][line break][run paragraph on]";
-	let fb be final body of the player;
-	let bb be fb - body score of the player;
-	let fm be final mind of the player;
-	let mb be fm - mind score of the player;
-	let fs be final spirit of the player;
-	let sb be fs - spirit score of the player;	
-	say "[second custom style]Body:    [fixed letter spacing][run paragraph on][fb][if fb is greater than body score of the player] ([body score of the player] inherent + [bb] bonus)[end if][if fb is less than body score of the player] ([body score of the player] inherent - [bb * -1] penalty)[end if][line break][run paragraph on]";
-	say "[second custom style]Mind:    [fixed letter spacing][run paragraph on][fm][if fm is greater than mind score of the player] ([mind score of the player] inherent + [mb] bonus)[end if][if fm is less than mind score of the player] ([mind score of the player] inherent - [mb * -1] penalty)[end if][line break][run paragraph on]";
-	say "[second custom style]Spirit:  [fixed letter spacing][run paragraph on][fs][if fs is greater than spirit score of the player] ([spirit score of the player] inherent + [sb] bonus)[end if][if fs is less than spirit score of the player] ([spirit score of the player] inherent - [sb * -1] penalty)[end if][line break][run paragraph on]";
-	say roman type.]
+
+The short status rules are a rulebook.
+
+Short status rule (this is the combat basics short status rule):
+	if concentration of the player is not 0:
+		let n be concentration of the player;
+		say "[bold type]Concentration[roman type]: [if n is 1]+2[else if n is 2]+4[else if n is 3]+8[end if] attack, [if n is 1]no[else if n is 2]+2[else if n is 3]+4[end if] damage[line break][run paragraph on]";
+	if tension is greater than 1:
+		say "[bold type]Tension[roman type]: +[tension divided by 2] attack, +[tension divided by 3] damage[line break][run paragraph on]";
+	if ment timer is greater than 0:
+		say "[bold type]Ment[roman type]: +[ment bonus] attack, +[ment bonus] damage, -[ment bonus] enemy damage, +[ment bonus] defence, +[ment bonus] abilities.[line break][run paragraph on]";
+	if ment timer is 0 and ment addiction is greater than 0:
+		say "[bold type]Down[roman type]: -[ment addiction] attack, -[ment addiction] abilities[line break][line break][run paragraph on]".
+
+Short status rule (this is the attributes short status rule):[start with "human" vs undead, and use commas before each subsequent item.]
+	say "You are [if current form is ghoul-form]a ghoul[else if current form is vampire-form]a vampire[else if current form is vampirebat-form]a vampire bat[else if the player is undead]undead[else]human[end if][run paragraph on]";
+	if player is not base size of the player:
+		say ", [size of the player] in stature[run paragraph on]";
+	if player is ethereal:
+		say ", ethereal[run paragraph on]";
+	if player is flying:
+		say ", winged and flying[run paragraph on]";
+	if player is blind or the player is eyeless:
+		say ", [if player is eyeless]eyeless[else]blind[end if][run paragraph on]";
+	if hit protection of the player is greater than 0:
+		say ", protected from damage[run paragraph on]";
+	if the player is hidden:
+		say ", hidden[run paragraph on]";
+	if at least one person grapples the player:
+		let X be a random person grappling the player;
+		say ", grappled by [the X][run paragraph on]";
+	if the player is druidic and the golden fruit timer is greater than 0:
+		say ", under the influence of the golden fruit[run paragraph on]";
+	if player skill bonus timer is greater than 0:
+		say ", skilled[run paragraph on]";
+	if the player is stunned:
+		say ", stunned[run paragraph on]";
+	if the player is hexed:
+		say ", hexed[run paragraph on]";
+	if the player is tentacle-confused:
+		say ", confused[run paragraph on]";
+	if wisp-strength is not 0:
+		say ", [if power of the wisps is granted]in pain[otherwise]pain-hardened[end if][run paragraph on]";
+	if the player is at-howl:
+		say ", howling[run paragraph on]";
+	say ". ([link 1]detailed status report[end link])[line break][run paragraph on]"
+
+Short status rule (this is the unallocated faculty short status rule):
+	if unallocated faculty is greater than 0:
+		say "[italic type]Increase one of your faculties by typing 'body', 'mind', or 'spirit' ([unallocated faculty] point[if unallocated faculty is greater than 1]s[end if]).[roman type][line break][run paragraph on]".
+
 	
 Window-drawing rule for the stat-header-window (this is the construct stat header window rule):
 	move focus to stat-header-window, clearing the window;
 	say "[first custom style]Statistics[roman type]";
 	say run paragraph on;
 	return to main screen.
+
+
+Section - Status window hyperlinks
+
+Hyperlink processing rule when the current hyperlink window is the stats-window and the current hyperlink ID is 1:
+	move focus to stats-window, clearing the window;
+	consider the show basic stats rule;
+	say line break;
+	consider the status rules;
+	if the rule succeeded, say line break;
+	consider the status skill rules;
+	say "[link 2]< back[end link][run paragraph on]";
+	return to main screen;
+	rule succeeds.
+
+Hyperlink processing rule when the current hyperlink window is the stats-window and the current hyperlink ID is 2[i.e., we've hit the back button while reading the full status information.]:
+	follow the window-drawing rules for the stats-window;
+	rule succeeds.	
 
 
 Section - Powers window
@@ -150,23 +204,9 @@ Window-drawing rule for the powers-window (this is the construct power window ru
 				say " ([faculty1 entry][if there is a faculty2 entry] & [faculty2 entry][end if])[run paragraph on]";
 			say "[line break]";
 	if pow < 3:
-		say "[line break][italic type]Tip:[roman type] [one of]Every dungeon contains seven monsters with a positive level: two level 1 monsters, two level 2 monsters, and one each of levels 3, 4 and 5[or]When you absorb an enemy's soul, it fully heals you, increases your statistics, and grants you a special power[or]Health bonuses belong to powers. If you lose a power, you will also lose the health bonus that comes with it[or]When you absorb the soul of a monster of a certain level, all souls of the same or a lower level are immediately driven out of your body[or]Level 0 monsters never grant you health or powers[or]Some monsters form groups, and you will have to kill the entire group before power transferal happens[or]Maximising the number of souls you have at your disposal by choosing the right order in which to kill the monsters is one of the keys of success in [italic type]Kerkerkruip[roman type][at random]."; 
+		say "[line break][italic type]Tip:[roman type] [one of]Every dungeon contains seven monsters with a positive level: two level 1 monsters, two level 2 monsters, and one each of levels 3, 4 and 5[or]When you absorb an enemy's soul, it fully heals you, increases your statistics, and grants you a special power[or]Health bonuses belong to powers. If you lose a power, you will also lose the health bonus that comes with it[or]When you absorb the soul of a monster of a certain level, all souls of the same or a lower level are immediately driven out of your body[or]Level 0 monsters never grant you health or powers[or]Some monsters form groups, and you will have to kill the entire group before power transferal happens[or]Maximising the number of souls you have at your disposal by choosing the right order in which to kill the monsters is one of the keys to success in [italic type]Kerkerkruip[roman type][at random]."; 
 	say run paragraph on;
 	return to main screen.
-
-Hyperlink processing rule when the current hyperlink window is the powers-window:
-	let ability be the current hyperlink ID typecast to an object;
-	if ability is a power:
-		let T be an indexed text;
-		let T be "[ability]" in title case;
-		move focus to powers-window, clearing the window;
-		say "[bold type][T].[roman type][line break][description of the ability] [link 1]< back[end link][run paragraph on]";
-		return to main screen;
-		rule succeeds.
-
-Hyperlink processing rule when the current hyperlink window is the powers-window and the current hyperlink ID is 1[i.e., we've hit the back button while reading the description of some power.]:
-	follow the window-drawing rules for the powers-window;
-	rule succeeds.
 
 Window-drawing rule for the powers-header-window (this is the construct powers header window rule):
 	move focus to powers-header-window, clearing the window;
@@ -199,6 +239,22 @@ To decide what number is (O - an object) typecast to a number:
 To decide what object is (N - a number) typecast to an object:
 	(- {N} -).
 
+
+Section - Powers window hyperlinks
+
+Hyperlink processing rule when the current hyperlink window is the powers-window:
+	let ability be the current hyperlink ID typecast to an object;
+	if ability is a power:
+		let T be an indexed text;
+		let T be "[ability]" in title case;
+		move focus to powers-window, clearing the window;
+		say "[bold type][T].[roman type][line break][description of the ability] [link 2]< back[end link][run paragraph on]";
+		return to main screen;
+		rule succeeds.
+
+Hyperlink processing rule when the current hyperlink window is the powers-window and the current hyperlink ID is 2[i.e., we've hit the back button while reading the description of some power.]:
+	follow the window-drawing rules for the powers-window;
+	rule succeeds.
 
 
 Section - Inventory window
