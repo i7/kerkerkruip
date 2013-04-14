@@ -1932,7 +1932,7 @@ Check taking a tome (this is the do no remove tomes from the pedestal rule):
 		
 Chapter - The Zen Room
 
-The Zen Room is a room. "A room of calmth and serenity, adorned with beautiful drawings. In the centre, a comfortable looking chair is waiting for you to sit on."
+The Zen Room is a room. "A room of calmth and serenity, adorned with beautiful drawings[if comfy chair is in Zen room]. In the centre, a comfortable looking chair is waiting for you to sit on[end if]."
 
 The Zen Room is connectable.
 The Zen Room is not connection-inviting.
@@ -1949,47 +1949,33 @@ The rarity of Zen Room is 5.
 The Zen drawings are scenery and plural-named.
 Instead of examining the Zen drawings, say "All kinds of Mandala's and pictures of Buddha's."
 
-A chair is a kind of supporter. A chair is enterable. 
+A chair is a kind of supporter. A chair is enterable.
 
-The comfy chair is a chair and scenery in the Zen Room. The description of the comfy chair is "A leather, well worn chair, but quite cozy to look at. It seems to be owned by [chairinheritor]." Understand "comfortable looking chair","well worn chair" and "leather chair" as the comfy chair.
- 
-Chairinheritance relates a person to a chair. The verb to chairinherit (he chairinherits, they chairinherit, he chairinherited, he has chairinherited) implies the chairinheritance relation.
+An attack modifier rule (this is the hard to fight while sitting in a chair rule):
+	if the global attacker is on a chair:
+		say " - 3 (sitting in a chair)[run paragraph on]";
+		decrease the attack strength by 3.
+
+The chairinheritor is a person that varies. The chairinheritor is Malygris.
 
 When play begins:
-	If a random chance of 3 in 4 succeeds:
-		now Malygris chairinherits the comfy chair;
-	otherwise:
+	if a random chance of 1 in 4 succeeds:
 		let X be a list of persons;
-		repeat with guy running through alive not off-stage persons:
-			unless guy is Malygris or guy is Nameless Horror:
-			[TO DO: UGLY HACK for Nameless Horror]
-				add guy to X;
+		repeat with guy running through alive talker not off-stage not friendly persons:
+			add guy to X;
 		sort X in random order;
-		now entry 1 of X chairinherits the comfy chair.
+		now chairinheritor is entry 1 of X.
 
- To decide which person is the chairinheritor:
-	repeat with guy running through alive not off-stage persons:
-		if guy chairinherits the comfy chair:
-			decide on guy.
-
-
-After entering the comfy chair:
-	If the comfy chair is in the Zen room:
-		If the player is male:
-			say "You hear [chairinheritor] screaming: [italic type]He'll probably be in the Zen Room![roman type] Suddenly, you feel yourself, and the chair, moving fastly. A fair ride later...";
+The comfy chair is a chair and scenery in the Zen Room. The description of the comfy chair is "A leather, well worn chair, but quite cozy to look at[if chairinheritor is alive and chairinheritor is not off-stage]. Somehow, you feel it is owned by [the chairinheritor][end if]." Understand "comfortable looking","well worn" and "leather" as the comfy chair.
+ 
+Report entering the comfy chair:
+	if the comfy chair is in the Zen room and chairinheritor is not in the Zen room and chairinheritor is alive and chairinheritor is not off-stage:
+		if the best route from the Zen room to the location of the chairinheritor is a direction:
 			move the comfy chair to the location of chairinheritor;
-			say "You find yourself in [the printed name of the location]. [chairinheritor] smiles, saying [italic type] Mr. Adventurer, we meet at last[roman type]!";
+			now comfy chair is not scenery;
+			say "You hear [the chairinheritor] screaming: '[if player is male]He[otherwise if player is female]She[otherwise]It[end if]'ll probably be in the Zen Room!' Suddenly, you feel yourself, and the chair, moving at a breakneck speed. A few moments later you find yourself in [the printed name of the location]. 'Well, well, well,' [the chairinheritor] smirks, 'look who we have here. We meet at last, Adventurer!'";
 			take no time;
-		Otherwise if the player is female:
-			say "You hear [chairinheritor] screaming: [italic type]She'll probably be in the Zen Room![roman type] Suddenly, you feel yourself, and the chair, moving fastly. A fair ride later...";
-			move the comfy chair to the location of chairinheritor;
-			say "You find yourself in [the printed name of the location]. [chairinheritor] smiles, saying [italic type] Ms. Adventurer, we meet at last![roman type]";
-			take no time;
-		Otherwise:
-			say "You hear [chairinheritor] screaming: [italic type]It'll probably be in the Zen Room![roman type] Suddenly, you feel yourself, and the chair, moving fastly. A fair ride later...";
-			move the comfy chair to the location of chairinheritor;
-			say "You find yourself in [the printed name of the location]. [chairinheritor] smiles, saying [italic type] Adventurer, we meet at last![roman type]";
-			take no time.
+			rule succeeds.
 
 
 
