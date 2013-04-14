@@ -98,6 +98,7 @@ The swarm of daggers is eyeless.
 The material of the swarm of daggers is iron.
 The swarm of daggers is emotionless.
 The swarm of daggers is flyer.
+The swarm of daggers is not talker.
 
 The health of the swarm of daggers is 14.
 The melee of the swarm of daggers is 3.
@@ -267,6 +268,7 @@ The description of the blood ape is "It looks like a gorilla, except that is has
 The level of the blood ape is 1.
 The ID of the blood ape is 2.
 The blood ape is small.
+The blood ape is not talker.
 
 The health of the blood ape is 10.
 The melee of the blood ape is 0.
@@ -443,6 +445,7 @@ The ravenous armadillo is a monster. "A big armadillo is here, searching for any
 The level of ravenous armadillo is 1.
 The ID of the ravenous armadillo is 3.
 The ravenous armadillo is medium.
+The ravenous armadillo is not talker.
 
 The unlock level of the ravenous armadillo is 3.
 The unlock text of the ravenous armadillo is "a monster that searches the dungeon for anything it can eat".
@@ -694,6 +697,7 @@ Miranda is proper-named. Miranda is female. Miranda is not neuter. Understand "w
 The level of Miranda is 1.
 The ID of Miranda is 4.
 Miranda is medium.
+Miranda is talker.
 
 The description of Miranda is "Although she is currently working as one of Malygris's guards, Miranda dreams about a bright future as a famous adventurer.".
 
@@ -879,6 +883,7 @@ The wisps of pain are plural-named. Understand "wisp" as the wisps of pain.
 The level of the wisps of pain is 1.
 The ID of the wisps of pain is 30.
 The wisps of pain are tiny.
+The wisps of pain are not talker.
 
 The description of the wisps of pain is "Dark spots of necromantic magic move through the air. They deal pain and torment, and can permanently cripple anyone foolish enough to oppose them.".
 
@@ -1084,6 +1089,7 @@ The chain golem is a monster. "The room is dominated by a chain golem, a moving 
 The level of the chain golem is 2.
 The ID of the chain golem is 5.
 The chain golem is large.
+The chain golem is not talker.
 
 The chain golem is eyeless.
 The chain golem is iron.
@@ -1325,6 +1331,7 @@ Understand "ball" and "flesh" and "meat" as the jumping bomb.
 The level of jumping Bomb is 2.
 The ID of the jumping Bomb is 6.
 The jumping bomb is small.
+The jumping bomb is not talker.
 
 The jumping bomb is eyeless.
 The jumping bomb is emotionless.
@@ -1520,6 +1527,7 @@ Understand "pale" and "man" and "dark" and "robes" and "serial" and "killer" and
 The level of the Reaper is 2.
 The ID of the Reaper is 7.
 The Reaper is medium.
+The Reaper is talker.
 
 The description of the reaper is "He once used to be a man like any other, but his vocation has left him unnaturally pale and gaunt.".
 
@@ -1700,6 +1708,7 @@ The ID of the demon of rage is 8.
 The demon of rage is medium.
 The unlock level of the demon of rage is 2.
 The unlock hidden switch of the demon of rage is true.
+The demon of rage is talker.
 
 The description of the demon of rage is "An amorphous swirl of red and black light, this demonic creature is the spirit of rage incarnate.".
 Instead of listening to the demon of rage:
@@ -1876,6 +1885,7 @@ Understand "gigantic" and "huge" and "dog" as the hound.
 The level of the hound is 2.
 The ID of the hound is 9.
 The hound is large.
+The hound is not talker.
 
 The description of the hound is "The black hound is ever watchful, ready to punish its prey for any wrong move."
 
@@ -2020,6 +2030,7 @@ Understand "slug" and "master" and "ooze" as the mindslug.
 The level of the mindslug is 3.
 The ID of the mindslug is 10.
 The mindslug is huge.
+The mindslug is not talker.
 
 The description of the mindslug is "It is of the dreaded race of mindslugs, abominations that use their telepathic powers to enslave others.".
 
@@ -2128,6 +2139,7 @@ Fafhrd carries the claymore.
 
 Follower percentile chance of Fafhrd is 75.
 Fafhrd is weapon user.
+Fafhrd is talker.
 
 Mouser is a mindslug-enslaved man. The description of Mouser is "Mouser is a small, fast man. You know his type from the alleys and alehouses of Montenoir.".
 The ID of Mouser is 12.
@@ -2138,6 +2150,7 @@ Mouser carries the sneaking sword.
 Health of Mouser is 10.
 Defence of Mouser is 9.
 Mouser is medium.
+Mouser is talker.
 
 When play begins:
 	let X be a random natural weapon part of Mouser;
@@ -2428,6 +2441,7 @@ The description of the giant tentacle is "Aeons ago, the Knight of the Dawn foug
 The level of giant tentacle is 3.
 The ID of the giant tentacle is 13.
 The giant tentacle is huge.
+The giant tentacle is not talker.
 
 The health of giant tentacle is 35.
 The melee of giant tentacle is 3.
@@ -2755,6 +2769,7 @@ The description of the minotaur is "Half man, half bull, this fearsome creature 
 The level of the minotaur is 3.
 The ID of the minotaur is 14.
 The minotaur is large.
+The minotaur is not talker.
 
 The unlock level of the minotaur is 2.
 The unlock hidden switch of the minotaur is true.
@@ -2863,6 +2878,7 @@ Understand "white-robed" as the Healer of Aite.
 The description of the healer of Aite is "This white-robed priest is a healer of Aite. Their task is to support the other fanatics in their never-ending crusade.".
 The ID of the Healer of Aite is 16.
 The Healer of Aite is medium.
+The Healer of Aite is talker.
 
 The health of the Healer of Aite is 20.
 The melee of the Healer of Aite is 1.
@@ -2914,6 +2930,7 @@ Understand "black-robed" and "mage" as the Tormentor of Aite.
 The description of the tormentor of Aite is "You immediately recognise the black-robed mage as a tormentor of Aite, savage priests who specialise in inflicting pain on all who oppose their faith.".
 The ID of the Tormentor of Aite is 17.
 The Tormentor of Aite is medium.
+The Tormentor of Aite is talker.
 
 The health of the Tormentor of Aite is 16.
 The melee of the Tormentor of Aite is 3.
@@ -2965,6 +2982,7 @@ Understand "armoured" and "man" as the defender of Aite.
 The description of the defender of Aite is "This heavily armoured priest is a defender of Aite, one of the front-line troops of the armies of this horrible faith.".
 The ID of the defender of Aite is 18.
 The defender of Aite is medium.
+The defender of Aite is talker.
 
 The health of the Defender of Aite is 23.
 The melee of the Defender of Aite is 1.
@@ -3085,6 +3103,7 @@ Understand "druid" and "druidess" and "witch" as Bodmall.
 The level of Bodmall is 4.
 The ID of Bodmall is 19.
 Bodmall is medium.
+Bodmall is talker.
 
 The health of Bodmall is 35.
 The melee of Bodmall is 5.
@@ -3672,6 +3691,7 @@ Understand "homunculus" as the overmind. The indefinite article of the overmind 
 The level of the overmind is 4.
 The ID of the overmind is 31.
 The overmind is huge.
+The overmind is talker.
 
 The unlock level of the overmind is 16.
 The unlock text of the overmind is "a psionic machine that strenghtens all its allies".
@@ -3884,6 +3904,7 @@ Understand "sorcerer" and "mage" and "wizard" and "him" as the Malygris.
 The level of Malygris is 5.
 The ID of Malygris is 20.
 Malygris is medium.
+Malygris is talker.
 
 The health of Malygris is 55.
 The melee of Malygris is 7.
@@ -4027,6 +4048,7 @@ The demonic assassin is a monster. "A horned figure stalks through the room." Un
 The level of demonic assassin is 0.
 The ID of the demonic assassin is 21.
 The demonic assassin is medium.
+The demonic assassin is talker.
 
 The demonic assassin is demonic.
 
@@ -4090,6 +4112,7 @@ A final monster placement rule (this is the Nameless Horror in Eternal Prison ru
 The level of Nameless Horror is 10.
 The ID of the Nameless Horror is 22.
 The Nameless Horror is gargantuan.
+The Nameless Horror is not talker.
 
 The health of Nameless Horror is 1000.
 The melee of Nameless Horror is 50.
@@ -4193,6 +4216,7 @@ The rotting corpse is an undead undead-faction monster. "An animated corpse sham
 
 The rotting corpse is emotionless.
 The rotting corpse is eyeless.
+The rotting corpse is not talker.
 
 The level of rotting corpse is 0.
 The ID of the rotting corpse is 23.
@@ -4339,6 +4363,7 @@ Chapter - Aswang
 
 As-shape is a kind of value. The as-shapes are as-witch, as-bird and as-dog.
 The aswang has an as-shape. The as-shape of the aswang is as-witch.
+The aswang is talker.
 
 The aswang is an undead undead-faction monster. "An aswang is here, having taken the shape of [if as-shape of aswang is as-witch]an ugly old woman[otherwise if as-shape of aswang is as-bird]a huge owl-like bird[otherwise]a ferocious black dog[end if]."
 Understand "witch" and "dog" and "hound" and "bird" and "owl" and "woman" and "ugly" and "old" as the aswang.
@@ -4536,6 +4561,7 @@ Chapter - Abyss of the Soul
 
 The abyss of the soul is an undead undead-faction monster. "Before you floats an abyss of the soul; it looks like a [size of the abyss of the soul] sphere of utter darkness."
 The abyss of the soul is small.
+The abyss of the soul is not talker.
 
 The description of the Abyss of the Soul is "This [size of the abyss of the soul] sphere of utter darkness is an abyss of the soul, one of the most fearsome of undead monsters. Not only does it sap the strength of all nearby living creatures, it also feeds on the souls of the recently departed.".
 
@@ -4634,6 +4660,7 @@ The description of the mummified priest is "Ancient embalming techniques have sa
 
 The mummified priest is emotionless.
 The mummified priest is eyeless.
+The mummified priest is talker.
 
 The level of mummified priest is 0.
 The ID of the mummified priest is 29.
@@ -4737,6 +4764,7 @@ The smoke demon is horrific-faction. [Attacks even other demons.]
 The level of the smoke demon is 0.
 The ID of the smoke demon is 26.
 The smoke demon is large.
+The smoke demon is not talker.
 
 The smoke demon is smoke attuned.
 The smoke demon is flyer.
@@ -4906,6 +4934,7 @@ The description of the imp is "Imps are minor demons with unnaturally small wing
 The imp is demonic. The level of the imp is 0.
 The ID of the imp is 27.
 The imp is small.
+The imp is talker.
 
 The imp is flyer.
 
@@ -5038,6 +5067,7 @@ The demonic mistress is a monster. "A horned figure stalks through the room." Un
 The level of demonic mistress is 0.
 The ID of the demonic mistress is 28.
 The demonic mistress is medium.
+The demonic mistress is talker.
 
 The demonic mistress is demonic.
 
