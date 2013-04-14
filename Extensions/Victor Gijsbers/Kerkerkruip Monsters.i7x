@@ -3872,6 +3872,11 @@ Check calling:
 		say "[The noun] [is-are] not available for calling." instead.
 
 Check calling:
+	if the noun is not seen:
+		take no time;
+		say "You haven't yet established visual contact with [the noun].".
+
+Check calling:
 	if the level of the noun is greater than 4:
 		take no time;
 		say "[The noun] [is-are] too powerful to be called." instead.
@@ -3889,6 +3894,7 @@ Carry out calling:
 			try the noun going the way;
 			unless location of the noun is location of the player:
 				say "[The noun] move[s] from [the place] to [the location of the noun].";
+				now last-seen-location of the noun is location of the noun;
 		otherwise:
 			say "[The noun] [has-have] no way to reach you!";
 	otherwise:
