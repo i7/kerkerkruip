@@ -18,6 +18,7 @@ Include Glulx Status Window Control by Erik Temple.
 Include Kerkerkruip Glimmr Additions by Erik Temple.
 [Include Flexible Windows by Jon Ingold.]
 [Include Kerkerkruip Windows by Erik Temple.]
+Include Extended Debugging by Erik Temple.
 
 Every turn (this is the mark items as seen every turn rule): 
 	repeat with item running through things that are enclosed by the location:
@@ -68,19 +69,11 @@ Last when play begins:
 [Last when play begins:
 	increase mind score of the player by 40.]
 	
-[The player carries a scroll of psycholocation and a scroll of mapping.]
-	
-[When play begins:
-	now all placed not nogo rooms are map-revealed;
-	now all placed not nogo rooms are visited;
-	now all placed not nogo rooms are enemy-revealed;
-	now all alive not off-stage persons are seen;
-	if the eternal prison is not placed, now the nameless horror is not seen.]
+The player carries a scroll of psycholocation and a scroll of mapping.
 
-[When play begins: 
-	if there is a placed tunnel-drawn room:
-		let place be a random placed tunnel-drawn room;
-		now all alive not off-stage persons are in place.]
+When play begins: 
+	repeat with item running through scrolls carried by the player:
+		identify item.
 		
 
 	

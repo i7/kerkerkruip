@@ -1817,6 +1817,19 @@ Last when play begins (this is the open up the status window rule):
 	open the status window;
 
 
+Section - Test command for map window (for use with Extended Debugging by Erik Temple)
+
+Revealing the entire map is an action out of world. Understand "reveal map" or "reveal full map" or "full map" as revealing the entire map.
+
+Carry out revealing the entire map:
+	now all placed not nogo rooms are map-revealed;
+	now all placed not nogo rooms are visited;
+	now all placed not nogo rooms are enemy-revealed;
+	now all alive not off-stage persons are seen;
+	if the eternal prison is not placed, now the nameless horror is not seen;
+	try showing the map.
+
+
 
 Kerkerkruip Glimmr Additions ends here.
 
