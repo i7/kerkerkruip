@@ -853,16 +853,16 @@ The blood magic level of cloak of reflection is 0.
 The blood magic maximum of cloak of reflection is 3.
 
 To decide which number is the cloak of reflection percentage:
-	let n be 20 * blood magic level of cloak of reflection;
-	increase n by 20;
+	let n be 15 * blood magic level of cloak of reflection;
+	increase n by 15;
 	decide on n.
 
-The description of the cloak of reflection is "A piece of silk with thousands of small magical mirrors sewn on it, this cloak is both beautiful and useful. It will reflect ranged attacks back to the attacker [cloak of reflection percentage]% of the time[if blood magic level of cloak of reflection is not blood magic maximum of cloak of reflection]. This will increase by 20% if the cloak is fed[end if].".
+The description of the cloak of reflection is "A piece of silk with thousands of small magical mirrors sewn on it, this cloak is both beautiful and useful. It will reflect ranged attacks back to the attacker [cloak of reflection percentage]% of the time[if blood magic level of cloak of reflection is not blood magic maximum of cloak of reflection]. This will increase by 15% if the cloak is fed[end if].".
 
 Check an actor hitting when the noun wears the cloak of reflection (this is the cloak of reflection rule):
 	if the global attacker weapon is ranged:
-		let n be 1 + blood magic level of cloak of reflection;
-		if a random chance of n in 5 succeeds:
+		let n be 15 * (1 + blood magic level of cloak of reflection);
+		if a random chance of n in 100 succeeds:
 			say "[if the noun is the player]The[otherwise][Possessive of the noun][end if] cloak of reflection [bold type]reflects[roman type] the attack back to [the actor]!";
 			try the actor hitting the actor instead.
 
