@@ -157,6 +157,14 @@ Every turn when the location of the statue of shards is the location of the play
 			have a fragmentation event in location with statue of shards by player.
 
 
+Chapter - Throne of the God-King
+
+The throne of the god-king is a civilised adamant fixed in place extra chair. "The impressive throne of the god-king graces this location." Understand "chair" and "impressive" as the throne of the god-king. The description of the throne of the god-king is "This large throne was made from the rare metal adamant, but has none of the gems and other sumptuous decorations you are used to seeing on royal objects. Instead, its design is harsh and simple. Sitting on it may reduce your combat effectiveness, but it will also boost your faculties."
+
+A faculty bonus rule (this is the throne of the god-king bonus rule):
+	if the test subject is on the throne of the god-king:
+		increase faculty bonus score by 5.
+
 
 Chapter - Flickering lights
 
@@ -249,5 +257,9 @@ An attack modifier rule (this is the unholy symbols attack bonus rule):
 Chance to win rule when the location encloses the unholy symbols (this is the CTW unholy symbols rule):
 	if the global attacker is undead or the global attacker is demonic:
 		decrease the chance-to-win by 2.		
+
+
+
+
 
 Kerkerkruip Scenery ends here.
