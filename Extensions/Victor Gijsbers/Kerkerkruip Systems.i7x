@@ -1677,8 +1677,9 @@ Carry out feeding:
 		say "You feed [n] health to [the noun], which is more than your body can handle.";
 		end the game saying "Foolish people should not dabble in blood magic.";
 	otherwise:
-		say "You feed [n] health to [the noun], increasing [its-theirs] power!";
-		increase blood magic level of the noun by 1.
+		say "You feed [n] health to [the noun], increasing [its-theirs] power[if concentration of the player is greater than 0] (and losing your concentration)[end if]!";
+		increase blood magic level of the noun by 1;
+		now concentration of the player is 0.
 
 After printing the name of a thing (called item) while taking inventory:
 	if blood magic cost of item is not 0:
