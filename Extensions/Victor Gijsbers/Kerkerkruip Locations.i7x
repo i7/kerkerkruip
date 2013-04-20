@@ -1956,6 +1956,16 @@ An attack modifier rule (this is the hard to fight while sitting in a chair rule
 		say " - 3 (sitting in a chair)[run paragraph on]";
 		decrease the attack strength by 3.
 
+Check going (this is the cannot go when in a chair rule):
+	if the player is on a chair:
+		take no time;
+		say "You'll have to stand up first." instead.
+
+Check retreating (this is the cannot retreat when in a chair rule):
+	if the player is on a chair:
+		take no time;
+		say "You'll have to stand up first." instead.	
+
 The chairinheritor is a person that varies. The chairinheritor is Malygris.
 
 When play begins:
@@ -1971,9 +1981,19 @@ The comfy chair is a chair and scenery in the Zen Room. The description of the c
 Report entering the comfy chair:
 	if the comfy chair is in the Zen room and chairinheritor is not in the Zen room and chairinheritor is alive and chairinheritor is not off-stage:
 		if the best route from the Zen room to the location of the chairinheritor is a direction:
+			let chair-route be a list of rooms;
+			let place be the Zen room;
+			let way be north;
+			while place is not the location of the chairinheritor:
+				now way is best route from place to the location of the chairinheritor;
+				now place is the room way of place;
+				if place is not the location of the chairinheritor:
+					add place to chair-route;
+					now place is visited;
+					now retreat location is place; [will end up being the last room before the final room]
 			move the comfy chair to the location of chairinheritor;
 			now comfy chair is not scenery;
-			say "You hear [the chairinheritor] screaming: '[if player is male]He[otherwise if player is female]She[otherwise]It[end if]'ll probably be in the Zen Room!' Suddenly, you feel yourself, and the chair, moving at a breakneck speed. A few moments later you find yourself in [the printed name of the location]. 'Well, well, well,' [the chairinheritor] smirks, 'look who we have here. We meet at last, Adventurer!'";
+			say "You hear [the chairinheritor] screaming: '[if player is male]He[otherwise if player is female]She[otherwise]It[end if]'ll probably be in the Zen Room!' Suddenly, you feel yourself, and the chair, moving at a breakneck speed[if chair-route is not empty] through [chair-route with definite articles][end if]. A few moments later you find yourself in [the printed name of the location]. 'Well, well, well,' [the chairinheritor] smirks, 'look who we have here. We meet at last, Adventurer!'";
 			take no time;
 			rule succeeds.
 
