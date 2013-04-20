@@ -3928,9 +3928,15 @@ Malygris is weapon user.
 
 Malygris carries the dagger of draining
 
+Section - Randomising Malygris
 
+The randomise Malygris rules are a rulebook.
 
-Section - Special powers
+Last dungeon interest rule (this is the randomise Malygris rule):
+	consider the randomise Malygris rules.
+	
+
+Section - Special power - Teleportation
 
 [Teleportation.]
 
@@ -3947,7 +3953,20 @@ After reporting Malygris teleporting:
 			if demonic assassin is alive and demonic assassin is off-stage: [failed to summon last time]
 				now Malygris-summon-countdown is a random number between 4 and 5. [and this time he is faster]
 
-[summoning]
+A randomise Malygris rule (this is the randomise Malygris teleporting rule):
+	if a random chance of 1 in 4 succeeds: [teleporting]
+		if a random chance of 1 in 4 succeeds:
+			now teleport amount of Malygris is 0;
+		otherwise if a random chance of 1 in 4 succeeds:
+			now teleport amount of Malygris is 1;
+		otherwise if a random chance of 1 in 3 succeeds:
+			now teleport amount of Malygris is 3;
+		otherwise:
+			now teleport amount of Malygris is a random number between 4 and 20;
+			now teleport eagerness of Malygris is 6;
+		if generation info is true, say "* Teleport amount of Malyrgis set to [teleport amount of Malygris].";.
+
+Section - Special power - Summoning the demonic assassin
 
 Every turn when Malygris-summon-countdown is not 0:
 	if the location of Malygris is the location of the player and the player is not hidden:
@@ -3964,19 +3983,26 @@ Every turn when Malygris-summon-countdown is not 0:
 			if the location of Malygris is the location of the player:
 				say "Malygris speaks the words of a long and complicated spell.".
 		
-[Item destruction.]
+Section - Special power - Disintegration
 
-Disintegrate power of Malygris is 10.
+A randomise Malygris rule (this is the randomise Malygris disintegration rule):
+	now disintegrate power of Malygris is 10;
+	if a random chance of 1 in 3 succeeds:
+		if a random chance of 2 in 3 succeeds:
+			now disintegrate power of Malygris is 0;
+		otherwise if a random chance of 1 in 2 succeeds:
+			now disintegrate power of Malygris is 13;
+		otherwise:
+			now disintegrate power of Malygris is 20;
+	if generation info is true, say "* Disintegrate power of Malygris set to [disintegrate power of Malygris].".
 
-
-Section - Special power - unghoul
-
-[Unghoul. This is to counter any abyss-of-the-soul-play.]
+Section - Special power - Unghouling
 
 Unghouling is an action applying to nothing.
 
-An AI action selection rule for Malygris (this is the consider unghouling rule):
-	[if Malygris opposes the player:] [Why was this here?]
+Malygris-unghouling is a truth state that varies.
+
+An AI action selection rule for Malygris when Malygris-unghouling is true (this is the consider unghouling rule):
 	if the current form is ghoul-form and at least two undead persons are in the location:
 		choose a blank Row in the Table of AI Action Options;
 		now the Option entry is the action of Malygris unghouling;
@@ -3985,6 +4011,24 @@ An AI action selection rule for Malygris (this is the consider unghouling rule):
 Carry out Malygris unghouling:
 	say "As Malygris casts a complex spell, and you feel your flesh [bold type]returning to normal[roman type]!";
 	unghoulify the player.
+
+A randomise Malygris rule (this is the randomise Malygris unghouling rule):
+	if a random chance of 1 in 2 succeeds:
+		now malygris-unghouling is true;
+		if generation info is true, say "* Malygris can unghoul.";
+	otherwise:
+		now malygris-unghouling is false.
+
+Section - Special power - Healing
+
+A randomise Malygris rule (this is the randomise Malygris healing rule):
+	if a random chance of 1 in 5 succeeds:
+		now heal power of Malygris is a random number between 3 and 7;
+		if a random chance of 1 in 3 succeeds:
+			increase heal power of Malygris by 10;
+		now heal cooldown of Malygris is a random number between 1 and 5;
+		if generation info is true, say "* Malygris has heal power of [heal power of Malygris] and heal cooldown of [heal cooldown of Malygris].".
+				
 
 Section - Malygris prose
 
