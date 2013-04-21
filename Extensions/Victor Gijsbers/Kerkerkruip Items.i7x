@@ -367,6 +367,12 @@ Last check wearing a shirt:
 		take no time;
 		say "You will first have to take off [the item]." instead;
 	abide by the suit check rule.
+
+Last check taking off a shirt:
+	if the player wears a cursed cloak:
+		let item be a random cloak worn by the player;
+		take no time;
+		say "You will first have to uncurse [the item]." instead.
 		
 Last check wearing a cloak:
 	if the player wears a cloak:
