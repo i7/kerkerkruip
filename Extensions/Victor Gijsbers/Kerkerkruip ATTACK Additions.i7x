@@ -109,7 +109,7 @@ The remain concentrated chance is a number that varies.
 The remain concentrated rules are a rulebook.
 
 An aftereffects rule (this is the alternative lose concentration when hit rule):
-	if the the attack damage is greater than 0 and the global defender is alive:
+	if the the attack damage is greater than 0 and the global defender is alive and the concentration of the global defender is not 0:
 		now the remain concentrated chance is 0;
 		consider the remain concentrated rules;
 		unless a random chance of remain concentrated chance in 100 succeeds:
