@@ -131,7 +131,7 @@ Check digging (this is the dig in a direct rule):
 A thing can be a digging tool. A thing is usually not a digging tool.
 
 Check digging (this is the can only dig when carrying a digging tool rule):
-	unless the player has a digging tool:
+	unless (the player has a digging tool or tunneling claws is adapted):
 		take no time;
 		say "You need a suitable tool to dig." instead.
 
@@ -151,7 +151,7 @@ Carry out digging:
 		if there is at least one not placed tunnel:
 			let item be a random not placed tunnel;
 			place item from location at x by y by z;
-			say "You magically create a tunnel [noun].";
+			say "You [if tunneling claws is adapted]quickly dig[otherwise]magically create[end if] a tunnel [noun].";
 			do the dig move;
 		otherwise:
 			say "The laws of this place prevent further digging.";
@@ -165,7 +165,7 @@ Carry out digging:
 				change the noun exit of the location to item; 
     				let reverse be the opposite of noun; 
     				change the reverse exit of item to the location;
-				say "You magically create a tunnel [noun].";
+				say "You [if tunneling claws is adapted]quickly dig[otherwise]magically create[end if] a tunnel [noun].";
 				do the dig move;
 			otherwise:
 				say "A magical force prevents you from digging.".
@@ -1569,6 +1569,7 @@ darkvision	"You gain the ability to see in total darkness!"		"You lose your dark
 pseudopods	"Hundreds of apparently useless pseudopods grow from your skin."		"The pseudopods that covered you disappear."
 disintegrating flesh	"Your flesh loses much of ist consistency!"		"Your flesh returns to its normal solidity."
 metallic scales	"Your body is covered in metallic scales!"		"The metallic scales disappear from your body."
+tunneling claws	"Your hands turn into tunneling claws!"		"Your tunneling claws disappear."
 
 
 Status rule (this is the mutations status rule):
@@ -1642,9 +1643,9 @@ A damage modifier rule (this is the metallic scales damage modifier rule):
 			say " - 1 (metallic scales)[run paragraph on]";
 			decrease the attack damage by 1.
 
+Section - Tunneling claws
 
-
-
+[Tunneling claws coded into the digging rules.]
 
 
 Chapter - Blood Magic
