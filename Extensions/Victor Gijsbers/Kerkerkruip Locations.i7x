@@ -1946,8 +1946,8 @@ The Zen Room is civilised.
 
 The rarity of Zen Room is 5.
 
-The Zen drawings are scenery and plural-named.
-Instead of examining the Zen drawings, say "All kinds of Mandala's and pictures of Buddha's."
+The Zen drawings are scenery and plural-named. The Zen drawings are in the Zen room. Understand "drawing" and "beautiful" and "mandala" and "Buddha" as the Zen drawings.
+Instead of examining the Zen drawings, say "Mandalas and pictures of the Buddha. You've never had much respect for these pacifistic religions."
 
 The chairinheritor is a person that varies. The chairinheritor is Malygris.
 
