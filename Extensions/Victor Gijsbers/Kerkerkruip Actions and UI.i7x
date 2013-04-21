@@ -437,6 +437,11 @@ Sensing is an action applying to nothing. Understand "sense" as sensing.
 
 [Sensing is acting fast.] [This makes the demon assassin a lot more fun, because you now have to decide whether or not you want to sense Malygris often.]
 
+Check sensing (this is the do not sense when not in the dungeon rule):
+	if x-coordinate of the location is 100:
+		take no time;
+		say "You do not seem to be in the dungeon, so your sensing power doesn't work." instead.
+
 Carry out sensing:
 	if greatest power of the player is less than 3:
 		take no time;
