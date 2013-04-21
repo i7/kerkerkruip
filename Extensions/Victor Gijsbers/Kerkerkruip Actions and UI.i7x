@@ -835,8 +835,14 @@ Report looking (this is the room exits rule):
 	
 
 
+Section - XYZZY
 
+Xyzzying is an action applying to nothing.
 
+Understand "xyzzy" as xyzzying.
+
+Carry out xyzzying:
+	say "You spend a moment fondly remembering your vector calculus classes.".
 
 
 
