@@ -72,7 +72,7 @@ Last when play begins:
 
 		
 
-Chapter - Scroll of mapping
+[Chapter - Scroll of mapping
 
 Table of Scroll Names (continued)
 scroll name
@@ -113,13 +113,11 @@ At the time when the psycholocator peters out:
 	now all enemy-revealed rooms are not enemy-revealed;
 	say "Your clairvoyant sensation fades; you can no longer sense the psyches of your enemies."
 	
+The player carries one scroll of psycholocation and one scroll of mapping.]
 
-The player carries a scroll of psycholocation and a scroll of mapping.
-
-When play begins: 
+When play begins:
 	repeat with item running through scrolls carried by the player:
 		identify item.
-
 	
 
 Chapter - Flexible Windows relisting

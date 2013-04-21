@@ -2,7 +2,7 @@ Kerkerkruip Glimmr Additions by Erik Temple begins here.
 
 Use authorial modesty.
 
-Include Glimmr Graphic Hyperlinks by Erik Temple.
+Include version 1/130420 of Glimmr Graphic Hyperlinks by Erik Temple.[Get the latest version at https://glimmr-i7x.googlecode.com/svn/trunk/Glimmr%20Graphic%20Hyperlinks.i7x]
 Include Glimmr Canvas Animation by Erik Temple.
 Include Glimmr Bitmap Font by Erik Temple.
 Include Kerkerkruip Image Fonts by Erik Temple.
@@ -476,6 +476,7 @@ Figure of map_text_title is the file "map_text_title.png".
 Figure of map_text_legend_title is the file "map_text_legend_title.png".
 Figure of map_text_any_key is the file "map_text_any_key.png".
 Figure of map_text_arrow_keys is the file "map_text_arrow_keys.png".Figure of map_text_compass_rose is the file "map_text_compass_rose.png".
+Figure of map_ellipsis is the file "map_ellipsis.png".
 
 Figure of map_button_down_arrow_active is the file "map_button_down_arrow_active.png".
 Figure of map_button_down_arrow_inactive is the file "map_button_down_arrow_inactive.png".
@@ -1262,6 +1263,12 @@ g-deep-blue	10846
 g-sky-blue	12444924[#bde4fc]
 
 
+After constructing the map-window (this is the prevent drawing the map window on opening rule):
+	rule succeeds.
+
+The start looking for graphlinks rule is listed before the prevent drawing the map window on opening rule in the after constructing rules.
+
+
 Section - Command to show the map
 
 Showing the map is an action out of world. Understand "map" and "show the/-- map" and "m" as showing the map.
@@ -1401,7 +1408,7 @@ Section - Drawing rule for the map object
 
 The map-renderer is a g-element. The associated canvas is the map-canvas. The graphlink status of the map-renderer is usually g-active. The display-layer is 1.
 
-[The map-offset is a number, dynamically set, that allows us to center the map on the player's location.]
+[The map-offset is a number, dynamically set, that allows us to center the map in the window.]
 The map-renderer has a number called map-offset-x.
 The map-renderer has a number called map-offset-y.
 [The scroll-offset is a number that allows us to adjust the placement of the map in response to player input.]
@@ -1445,6 +1452,26 @@ An element display rule for the map-renderer (this is the map display rule):
 	now map-offset-y of the map-renderer is (height of the map-window / 2) - (map-height  of the map-renderer / 2) + scroll-offset-y of the map-renderer;
 	compensate for small map window;
 	set up the map keyboard instructions;
+	let z be map-offset-y of the map-renderer;
+	repeat with index running from the number of entries of the level-specific y-extents down to 1:
+		if entry (index) of the level-specific y-extents is {}:
+			display the image Figure of map_ellipsis in map-window at (((width of the map-window - legend-width of the map-legend) / 2) - (image-width of Figure of map_ellipsis / 2)) by ((z - map-tile-height) - (image-height of Figure of map_ellipsis / 2));
+		otherwise:
+			now z is z + (map-tile-height * 2) + (entry 2 of entry index of the level-specific y-extents - entry 1 of entry index of the level-specific y-extents);
+	[let z be 0;
+	repeat with index running from the number of entries of the level-specific y-extents down to 1:			
+		let x1 be (map-offset-x of the map-renderer - ((map-max-x of the map-renderer - map-min-x of the map-renderer) / 2)) - 20;
+		let x2 be (map-offset-x of the map-renderer + (map-max-x of the map-renderer - map-min-x of the map-renderer)) + 20;
+		draw a rectangle (11316396[40% gray]) in the map-window at x1 by (map-offset-y of the map-renderer + z)  with dimensions 10 by 1;
+		draw a rectangle (11316396[40% gray]) in the map-window at (x2 - 10) by (map-offset-y of the map-renderer + z)  with dimensions 10 by 1;
+		if entry (index) of the level-specific y-extents is not {}:
+			let y be (entry 2 of entry index of the level-specific y-extents - entry 1 of entry index of the level-specific y-extents);
+			draw a rectangle (11316396[40% gray]) in the map-window at x1 by (map-offset-y of the map-renderer + z)  with dimensions 1 by y;
+			draw a rectangle (11316396[40% gray]) in the map-window at x1 by (map-offset-y of the map-renderer + z + y)  with dimensions 10 by 1;
+			draw a rectangle (11316396[40% gray]) in the map-window at x2 by (map-offset-y of the map-renderer + z)  with dimensions 1 by y;
+			draw a rectangle (11316396[40% gray]) in the map-window at (x2 - 10) by (map-offset-y of the map-renderer + z + y)  with dimensions 10 by 1;
+		now z is z + (map-tile-height * 2) + (entry 2 of entry index of the level-specific y-extents - entry 1 of entry index of the level-specific y-extents);
+	say "level-specific y-extents: [level-specific y-extents].";]
 	now z-shift of the map-renderer is 0;
 	let z-stage be (z-coordinate of entry 1 of the ordered dungeon manifest + z-adjust);
 	[++++++++++First we place backgrounds only.]
@@ -1478,7 +1505,6 @@ An element display rule for the map-renderer (this is the map display rule):
 			now z-shift of map-renderer is z-shift of the map-renderer + (map-tile-height * 2) + (entry 2 of entry z-stage of the level-specific y-extents - entry 1 of entry z-stage of the level-specific y-extents);
 			[say "z-shift: [z-shift of the map-renderer] (z-stage: [z-stage]).";]
 			now z-stage is z-coordinate of place + z-adjust;
-			[draw a rectangle (11316396[40% gray]) in the map-window at map-offset-x of the map-renderer by ((map-offset-y of the map-renderer - level-y-adjustment of the map-renderer) + z-shift of the map-renderer) with dimensions map-width of the map-renderer by 1;]
 		now level-y-adjustment of the map-renderer is entry 1 of entry z-stage of the level-specific y-extents;
 		now the enemies list is {};
 		if place is visited or place is enemy-revealed:
@@ -1633,7 +1659,8 @@ To calculate the per-level extents of the map using adjustments (x-adjust - numb
 				now map-width of map-renderer is ABS (max-x - min-x);
 	let y be 0;
 	repeat with level running through the level-specific y-extents:
-		now y is y + ABS (entry 2 of level - entry 1 of level);
+		if level is not {}:
+			now y is y + ABS (entry 2 of level - entry 1 of level);
 	now map-height of the map-renderer is y + (((z-coordinate of entry 1 of the ordered dungeon manifest + z-adjust) - 1) * (map-tile-height * 2));
 	[say "x-extents: [level-specific x-extents in brace notation].";
 	say "y-extents: [level-specific y-extents in brace notation].";
@@ -1804,11 +1831,13 @@ A glulx redrawing rule when the map-window is g-present (this is the reset map s
 	reset the scrolling offsets;
 	compensate for small map window;
 	set up the map keyboard instructions;
+	continue the action.
 
 A glulx arranging rule when the map-window is g-present (this is the reset map scrolling offsets on window arranging rule):
 	reset the scrolling offsets;
 	compensate for small map window;
-	set up the map keyboard instructions.
+	set up the map keyboard instructions;
+	continue the action.
 
 
 Section - Status window
