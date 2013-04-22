@@ -1602,7 +1602,7 @@ Section - The Reaper follows you!
 Every turn when the Reaper is in the location and the Reaper is not follower (this is the Reaper starts following rule):
 	if the player is not hidden:
 		say "'Do not be afraid, for I will end your suffering!' the Reaper exclaims.";
-		now Reaper is follower.
+		now the Reaper is follower.
 	
 Follower percentile chance of the Reaper is 5.
 

@@ -1762,7 +1762,7 @@ Every turn when the location is the maze:
 
 Chapter - Arena of the Fallen
 
-Entrance to the Arena is a room. "A large, black dome seen from the outside towers over you -- though you find it impossible to say in which direction, as if the normal rules of space do not obtain here. The outer wall of the dome, which must be the legendary Arena of the Fallen, is adorned with high reliefs of battle scenes. The scene depicted above the entrance shows [if triumphing boolean is false]Victor triumphing over Malygris[otherwise] [the name of the player] triumphing over [oppname][end if]. The gate to the Arena is closed. Above a large stone table, some inscriptions are engraved on the wall."
+Entrance to the Arena is a room. "A large, black dome seen from the outside towers over you -- though you find it impossible to say in which direction, as if the normal rules of space do not obtain here. The outer wall of the dome, which must be the legendary Arena of the Fallen, is adorned with high reliefs of battle scenes. The scene depicted above the entrance, which seems hermetically closed, shows [if triumphing boolean is false]Victor triumphing over Malygris[otherwise] [the name of the player] triumphing over [oppname][end if]. Some inscriptions are engraved on the wall."
 	
 Entrance to the Arena is connectable.
 Entrance to the Arena is not connection-inviting.
@@ -1801,15 +1801,16 @@ The Arena-waiting-room is vp-agnostic.
 The Arena-waiting-room is magical.
 
 
-The dome is scenery in the Entrance to the Arena. Understand "Arena" as dome. The description of the dome is "A large dome. You feel uneasy looking at it, as it seems to be controlled by unholy energies."
-The scribblings are scenery in the Entrance to the Arena and plural-named. Understand "writings" and "inscriptions" and "inscription" as scribblings. The description of the scribblings is "[if triumphing boolean is false]As you start to read the text, it lights up in a crimson red light: [italic type] If you wish, you can relive a battle once fought, but it will become the most challenging fight you ever had. If you are prepared, try to [roman type]smash the shard with a weapon[italic type].[otherwise]An eerie red light celebrates your victory: 'Hail to our last victor. Unfornunately, the powers of the Arena can be lend only once[end if].".
+The black dome is scenery in the Entrance to the Arena. Understand "Arena" and "large" and "black" and "of the fallen" as the black dome. The description of the black dome is "You feel uneasy looking at it, as it seems to be formed of unholy energies that defy all the laws of your own world."
+
+The scribblings are scenery in the Entrance to the Arena and plural-named. Understand "writings" and "inscriptions" and "inscription" as the scribblings. The description of the scribblings is "[if triumphing boolean is false]As you start to read the text, it lights up in a dark crimson: [italic type] If you wish, you can relive a battle you fought before, but it will become the most challenging fight you ever had. To start the fight, simply [roman type]smash the appropriate shard with a weapon[italic type][otherwise]Writings glowing with an eerie red light celebrate your victory: 'Hail to our last victor!'[end if].".
+
 Instead of reading the scribblings:
-	say "[if triumphing boolean is false]As you start to read the text, it lights up in a crimson red light: [italic type] If you wish, you can relive a battle once fought, but it will become the most challenging fight you ever had. If you are prepared, try to [roman type]smash the shard [italic type]with a weapon.[otherwise]An eerie red light celebrates your victory: 'Hail to our last victor. Unfornunately, the powers of the Arena can be lend only once[end if].".
+	try examining the scribblings..
 
-The  stone table is a supporter and scenery in the Entrance to the Arena. The description of the stone table is "A large stone table." On it is a soulchest.
-The soulchest is an opaque, openable, open container. The description of the soulchest is "A large chest, adorned with a number of crimson rubies." 
+The soulchest is an opaque, openable, open, fixed in place container in Entrance to the Arena. Understand "chest" as the soulchest. The description of the soulchest is "A large chest, adorned with a number of crimson rubies." 
 
-A soulfragment is a kind of thing with description "A shard of a lost soul, waiting for you to be resurrected".
+A soulfragment is a kind of thing with description "A shard of a lost soul. You could smash it to resurrect the being it belongs to.".
 Soulcatching relates a person to a soulfragment. The verb to soulcatch (he soulcatches, it soulcatches, they soulcatch, it is soulcatched, it has been soulcatched, it was soulcatched) implies the soulcatching relation.
 Every person soulcatches a soulfragment (called its shard). 
 
@@ -1826,18 +1827,21 @@ Every turn when the player is not in the Entrance to the Arena:
 						if soulfrag is off-stage:
 							move soulfrag to the soulchest.
 
-Understand "smash [something] with [something]" as smashing it with.
+[Understand "smash [something] with [something]" as smashing it with.]
 
-Smashing it with is an action applying to two things. 
+Shardsmashing is an action applying to one thing.
+
+Instead of attacking a soulfragment:
+	try shardsmashing the noun.
  
- Check smashing it with:
+[ Check smashing it with:
 	if the noun is not a soulfragment:
 		say "It wouldn't be a wise decision to smash a shard using that [noun]!" instead;
 	if the second noun is not a weapon: 
-		say "The [second noun] isn't meant to smash things up. Try using a weapon instead!" instead.
+		say "The [second noun] isn't meant to smash things up. Try using a weapon instead!" instead.]
 
-Carry out smashing it with:
-	if the player is in the Entrance to the Arena and the fighting boolean is false:
+Carry out shardsmashing:
+	if the player is in the Entrance to the Arena:
 		repeat with Pers running through monsters who soulcatches the noun:
 			if Pers is group leading and Pers is not defeated individually:
 				move Pers to the Arena-waiting-room;
@@ -1847,16 +1851,17 @@ Carry out smashing it with:
 						move X to the location of Pers;
 				repeat with guy running through persons in the Arena-waiting-room:
 					challenge guy;
-					say "The heavy doors open, where the angry [guy] awaits, angered from your last fight and strengthened by evil magic!";
+					say "The heavy doors open, where the angry [guy] awaits, strengthened by evil magic!";
 				now the fighting boolean is true;
 				move the player to the Arena of the Fallen;
 			otherwise:
 				now the oppname is the printed name of Pers;
 				challenge Pers;
+				say "The heavy doors open, where the angry [Pers] awaits, strengthened by evil magic!";
 				move the player to the Arena of the Fallen;
 				now the fighting boolean is true;
 	otherwise:
-		say "You have already challenged someone. The Arena can only lend its magical powers once.";
+		say "You have already challenged someone. The Arena can only be used once.";
 		take no time.
 
 
@@ -1879,12 +1884,12 @@ To challenge (the guy - a person):
 Growing dissatisfaction is a number variable.
  
 To decide which number is the demon distraction:
-	Let x be the tension;
+	let x be the tension;
 	now x is x divided by 2;
 	increase x by growing dissatisfaction;
 	[Growing dissatisfaction accounts for the fact that the spectators become growingly dissatisfied by the lack of excitement]
-	If x is greater than 30:
-		now x is 30;
+[	If x is greater than 30:
+		now x is 30;] [unnecessary]
 	if a random chance of x in 30 succeeds:
 		now x is 1;
 	otherwise:
@@ -1892,13 +1897,15 @@ To decide which number is the demon distraction:
 	decide on x.
 
 
-Every turn when the location is the Arena of the Fallen:
+[Commenting the stuff below out until we have updated it, because this is HUGELY buggy!!]
+
+[Every turn when the location is the Arena of the Fallen:
 	update the combat status;
 	if the combat status is not peace:
-		If demon distraction is 1:
+		if demon distraction is 1:
 			increment growing dissatisfaction;
-			Let N be a random number between 1 and 4;
-			If N is:
+			let N be a random number between 1 and 4;
+			if N is:
 				-- 1:
 					decrease the concentration of the global attacker by 1;
 					say "Distracted by [one of]the strong sulfur smell[or]hundreds of prying, crimson eyes[or]gripping claws[or]the black figure towering above you[or]gruesome howling[purely at random], [if global attacker is the player]you are[otherwise][the global attacker] is[end if] unable to maintain this level of concentration.";
@@ -1912,7 +1919,7 @@ Every turn when the location is the Arena of the Fallen:
 				-- 4:
 					Let X be a random number between 1 and 4;
 					decrease the health of the global defender by X;
-					say "Disgruntled by  lack of blood, the spectators decide to lend a helping hand. [one of]Grippling claws tears away at[or]A small dagger, coated with a bit of blood, slices[or]Noxious fumes envelop[or]A small rock is flinged at[purely at random] you[if global attacker is not the player]r opponent[end if], doing [X] damage!".
+					say "Disgruntled by  lack of blood, the spectators decide to lend a helping hand. [one of]Grippling claws tears away at[or]A small dagger, coated with a bit of blood, slices[or]Noxious fumes envelop[or]A small rock is flinged at[purely at random] you[if global attacker is not the player]r opponent[end if], doing [X] damage!".]
 
 
 Section - Getting out of the Arena
