@@ -1776,7 +1776,7 @@ Entrance to the Arena is magical.
 The rarity of Entrance to the Arena is 5. 
 
 
-The Arena of the Fallen is a room. "The remains of a formerly great arena. Remains are lying everywhere and there is something unholy about this Arena. Playing around with souls departed is probably not for the faint of heart."
+The Arena of the Fallen is a room. "The remains of a formerly great arena. Remains are lying everywhere and there is something unholy about this Arena. Playing around with souls departed is probably not for the faint of heart. All around you are demonic spectators, excited to relive the exciting game once more. You'd better keep them entertained and keep the blood flowing..."
 
 The Arena of the Fallen is not connectable.
 The Arena of the Fallen is not connection-inviting.
@@ -1820,7 +1820,7 @@ The oppname is a text that varies. The oppname is "".
 Every turn when the player is not in the Entrance to the Arena:
 	If the fighting boolean is false:
 		Repeat with P running through powers that are not granted:
-			Repeat with Per running through dead persons:
+			Repeat with Per running through all dead persons:
 				if Per grants P:
 					Repeat with soulfrag running through soulfragments soulcatched by Per:
 						if soulfrag is off-stage:
@@ -1839,11 +1839,12 @@ Smashing it with is an action applying to two things.
 Carry out smashing it with:
 	if the player is in the Entrance to the Arena and the fighting boolean is false:
 		repeat with Pers running through monsters who soulcatches the noun:
-			if the printed name of Pers matches the regular expression "package$":
-			[TO DO: UGLY HACK for the Fanatics of Aite group]
-				now the oppname is "Fanatics of Aite";
+			if Pers is group leading and Pers is not defeated individually:
 				move Pers to the Arena-waiting-room;
-				[abide by the place fanatics of Aite rule;]
+				now oppname is the printed name of Pers;
+				if Pers is initially accompanied:
+					repeat with X running through people who accompany Pers:
+						move X to the location of Pers;
 				repeat with guy running through persons in the Arena-waiting-room:
 					challenge guy;
 					say "The heavy doors open, where the angry [guy] awaits, angered from your last fight and strengthened by evil magic!";
@@ -1874,6 +1875,45 @@ To challenge (the guy - a person):
 	increase the defence of guy by x;
 	move the guy to the Arena of the Fallen;
 	restore the health of the guy.
+
+Growing dissatisfaction is a number variable.
+ 
+To decide which number is the demon distraction:
+	Let x be the tension;
+	divide x by 2;
+	increase x by growing dissatisfaction;
+	[Growing dissatisfaction accounts for the fact that the spectators become growingly dissatisfied by the lack of excitement]
+	If x is greater than 30:
+		now x is 30;
+	if a random chance of x in 30 succeeds:
+		now x is 1;
+	otherwise:
+		now x is 0;
+	decide on x.
+
+
+Every turn when the location is the Arena of the Fallen:
+	update the combat status;
+	if the combat status is not peace:
+		If demon distraction is 1:
+			increment growing dissatisfaction;
+			Let N be a random number between 1 and 4;
+			If N is:
+				-- 1:
+					decrease the concentration of the global attacker by 1;
+					say "Distracted by [one of]the strong sulfur smell[or]hundreds of prying, crimson eyes[or]gripping claws[or]the black figure towering above you[or]gruesome howling[purely at random], [if global attacker is the player]you are[otherwise][the global attacker] is[end if] unable to maintain this level of concentration.";
+				-- 2:
+					decrease the concentration of the global defender by 1;
+					say "Distracted by [one of]the strong sulfur smell[or]hundreds of prying, crimson eyes[or]gripping claws[or]the black figure towering above you[or]gruesome howling[purely at random], [if global defender is the player]you are[otherwise][the global defender] is[end if] unable to maintain this level of concentration.";
+				-- 3:
+					Let X be a random number between 1 and 4;
+					decrease the health of the global attacker by X;
+					say "Disgruntled by  lack of blood, the spectators decide to lend a helping hand. [one of]Grippling claws tears away at[or]A small dagger, coated with a bit of blood, slices[or]Noxious fumes envelop[or]A small rock is flinged at[purely at random] you[if global attacker is not the player]r opponent[end if], doing [X] damage!";
+				-- 4:
+					Let X be a random number between 1 and 4;
+					decrease the health of the global defender by X;
+					say "Disgruntled by  lack of blood, the spectators decide to lend a helping hand. [one of]Grippling claws tears away at[or]A small dagger, coated with a bit of blood, slices[or]Noxious fumes envelop[or]A small rock is flinged at[purely at random] you[if global attacker is not the player]r opponent[end if], doing [X] damage!".
+
 
 Section - Getting out of the Arena
 
