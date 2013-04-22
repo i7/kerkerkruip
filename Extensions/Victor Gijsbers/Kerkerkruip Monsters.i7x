@@ -4,6 +4,36 @@ Use authorial modesty.
 
 
 
+Chapter - Groups of enemies
+
+[ Sometimes enemies are grouped together. We will use a relationship to link a leading enemy with its companions, and properties of each leader will describe the nature of each grouping. ]
+
+Accompaniment relates various people to one person (called the leader).
+The verb to accompany (he accompanies, they accompany, he accompanied, it is accompanied, he is accompanying) implies the accompaniment relation. 
+
+Definition: a person is a follower if it relates to a person by the accompaniment relation.
+
+A person can be group leading.
+A person can be initially accompanied. A group leading person is usually initially accompanied.
+A person can be kills claiming. A group leading person is usually kills claiming.
+A person can be defeated individually.
+
+To decide whether the group of (X - a person) has been defeated:
+	if X is alive and X is on-stage:
+		decide no;
+	repeat with F running through the people who accompany X:
+		if F is alive and F is on-stage:
+			decide no;
+	decide yes.
+
+[ Place all the followers with their leaders ]
+Final monster placement rule (this is the place accompanying enemies with their leader rule):
+	repeat with X running through on-stage group leading people:
+		if X is initially accompanied:
+			now all the people who accompany X are in the location of X.
+
+
+
 Chapter - Monster statistics
 
 A person has a number called ID.
@@ -61,8 +91,18 @@ Section - Died and Kill counts
 Killing rule (this is the increment died and kill stats rule):
 	if killed-guy is the player:
 		increment the kill count of the killer-guy;
+		[ Award a kill to the leader of a group ]
+		if the killer-guy is a follower:
+			if the leader of the killer-guy is kills claiming:
+				increment the kill count of the killer-guy;
 	otherwise:
-		increment the died count of the killed-guy;
+		[ Mark a defeat only if the person stands alone or the whole group has been defeated ]
+		if the killed-guy is not group leading or killed-guy is defeated individually or the group of killed-guy has been defeated:
+			increment the died count of the killed-guy;
+		[ If a leader was killed before all their followers then their died count will need to be incremented when the last follower dies ]
+		if the killed-guy is a follower:
+			if the group of the leader of the killed-guy has been defeated:
+				increment the died count of the leader of the killed-guy;
 	update the monster statistics;
 
 Section - Testing IDs - Not for release
@@ -2032,6 +2072,9 @@ The ID of the mindslug is 10.
 The mindslug is huge.
 The mindslug is not talker.
 
+The mindslug is group leading.
+The mindslug is defeated individually.
+
 The description of the mindslug is "It is of the dreaded race of mindslugs, abominations that use their telepathic powers to enslave others.".
 
 The health of the mindslug is 28.
@@ -2127,6 +2170,7 @@ Section - Slaves
 Fafhrd is a mindslug-enslaved man. The description of Fafhrd is "This male barbarian is strong and muscular. He looks like an able and shrewd fighter.".
 The ID of Fafhrd is 11.
 Fafhrd is medium.
+Fafhrd accompanies the mindslug.
 
 Health of Fafhrd is 14.
 Melee of Fafhrd is 1.
@@ -2143,6 +2187,7 @@ Fafhrd is talker.
 
 Mouser is a mindslug-enslaved man. The description of Mouser is "Mouser is a small, fast man. You know his type from the alleys and alehouses of Montenoir.".
 The ID of Mouser is 12.
+Mouser accompanies the mindslug.
 
 [Mouser carries sneaky sword: see Kerkerkruip Items.]
 Mouser carries the sneaking sword.
@@ -2158,11 +2203,6 @@ When play begins:
 
 Follower percentile chance of Mouser is 85.
 Mouser is weapon user.
-
-When play begins:
-	if mindslug is not off-stage:
-		move Fafhrd to the location of mindslug;
-		move Mouser to the location of mindslug.
 
 An attack modifier rule (this is the mindslug defended by the enslaved rule):
 	if the global defender is the mindslug and the global attacker is not hidden:
@@ -2860,16 +2900,8 @@ Status skill rule (this is the minotaur power status skill rule):
 
 Chapter - Level 4 - Fanatics of Aite 
 
-The fanatics-of-Aite-package is a monster. The level of the fanatics-of-Aite-package is 4.
-The ID of the fanatics-of-Aite-package is 15.
-
-Final monster placement rule (this is the place fanatics of Aite rule):
-	if fanatics-of-Aite-package is not off-stage:
-		let X be the location of fanatics-of-Aite-package;
-		move healer of Aite to X;
-		move tormentor of Aite to X;
-		move defender of Aite to X;
-		remove fanatics-of-Aite-package from play. 
+[ All the fanatics of Aite should be treated the same, but we have to treat one as their leader. We'll choose the Healer solely because it's listed first!
+The old fanatics-of-Aite-package is no longer needed. ]
 
 Section - Healer of Aite
 
@@ -2879,6 +2911,11 @@ The description of the healer of Aite is "This white-robed priest is a healer of
 The ID of the Healer of Aite is 16.
 The Healer of Aite is medium.
 The Healer of Aite is talker.
+
+The level of the healer of Aite is 4.
+
+The healer of Aite is group leading.
+The healer of Aite is not defeated individually.
 
 The health of the Healer of Aite is 20.
 The melee of the Healer of Aite is 1.
@@ -2932,6 +2969,8 @@ The ID of the Tormentor of Aite is 17.
 The Tormentor of Aite is medium.
 The Tormentor of Aite is talker.
 
+The tormentor of Aite accompanies the healer of Aite.
+
 The health of the Tormentor of Aite is 16.
 The melee of the Tormentor of Aite is 3.
 The defence of the Tormentor of Aite is 9.
@@ -2982,7 +3021,11 @@ Understand "armoured" and "man" as the defender of Aite.
 The description of the defender of Aite is "This heavily armoured priest is a defender of Aite, one of the front-line troops of the armies of this horrible faith.".
 The ID of the defender of Aite is 18.
 The defender of Aite is medium.
+
 The defender of Aite is talker.
+
+The defender of Aite accompanies the healer of Aite.
+
 
 The health of the Defender of Aite is 23.
 The melee of the Defender of Aite is 1.
