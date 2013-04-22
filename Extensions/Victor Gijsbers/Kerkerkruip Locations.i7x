@@ -1762,7 +1762,7 @@ Every turn when the location is the maze:
 
 Chapter - Arena of the Fallen
 
-Entrance to the Arena is a room. "The outer construction of the large, black dome is towering when seen from the entrance point. The outer walls are adorned with high reliefs of scenes with former competitors triumphing in great battles.  The last scene, depicted above the entrance, shows [if triumphing boolean is false]Victor Gijsbers triumphing over Malygris[otherwise] [the name of the player] triumphing over [oppname][end if]. The gate to the Arena of the Fallen is closed. Above a large stone table, some scriptures are engraved in the wall."
+Entrance to the Arena is a room. "A large, black dome seen from the outside towers over you -- though you find it impossible to say in which direction, as if the normal rules of space do not obtain here. The outer wall of the dome, which must be the legendary Arena of the Fallen, is adorned with high reliefs of battle scenes. The scene depicted above the entrance shows [if triumphing boolean is false]Victor triumphing over Malygris[otherwise] [the name of the player] triumphing over [oppname][end if]. The gate to the Arena is closed. Above a large stone table, some inscriptions are engraved on the wall."
 	
 Entrance to the Arena is connectable.
 Entrance to the Arena is not connection-inviting.
@@ -1776,7 +1776,7 @@ Entrance to the Arena is magical.
 The rarity of Entrance to the Arena is 5. 
 
 
-The Arena of the Fallen is a room. "The remains of a formerly great arena. Remains are lying everywhere and there is something unholy about this Arena. Playing around with souls departed is probably not for the faint of heart. All around you are demonic spectators, excited to relive the exciting game once more. You'd better keep them entertained and keep the blood flowing..."
+The Arena of the Fallen is a room. "The ruins of a formerly great arena. The ground is littered with remains, and there is definitely something unholy about this place. Playing around with the souls of the departed is probably not for the faint of heart. All around you demonic spectators cheer gleefully, excited once again to witness the game of death. You'd better keep them entertained and the blood flowing ..."
 
 The Arena of the Fallen is not connectable.
 The Arena of the Fallen is not connection-inviting.
@@ -1802,7 +1802,7 @@ The Arena-waiting-room is magical.
 
 
 The dome is scenery in the Entrance to the Arena. Understand "Arena" as dome. The description of the dome is "A large dome. You feel uneasy looking at it, as it seems to be controlled by unholy energies."
-The scribblings are scenery in the Entrance to the Arena and plural-named. Understand "writings" and "scriptures" as scribblings. The description of the scribblings is "[if triumphing boolean is false]As you start to read the text, it lights up in a crimson red light: [italic type] If you wish, you can relive a battle once fought, but it will become the most challenging fight you ever had. If you are prepared, try to [roman type]smash the shard with a weapon[italic type].[otherwise]An eerie red light celebrates your victory: 'Hail to our last victor. Unfornunately, the powers of the Arena can be lend only once[end if].".
+The scribblings are scenery in the Entrance to the Arena and plural-named. Understand "writings" and "inscriptions" and "inscription" as scribblings. The description of the scribblings is "[if triumphing boolean is false]As you start to read the text, it lights up in a crimson red light: [italic type] If you wish, you can relive a battle once fought, but it will become the most challenging fight you ever had. If you are prepared, try to [roman type]smash the shard with a weapon[italic type].[otherwise]An eerie red light celebrates your victory: 'Hail to our last victor. Unfornunately, the powers of the Arena can be lend only once[end if].".
 Instead of reading the scribblings:
 	say "[if triumphing boolean is false]As you start to read the text, it lights up in a crimson red light: [italic type] If you wish, you can relive a battle once fought, but it will become the most challenging fight you ever had. If you are prepared, try to [roman type]smash the shard [italic type]with a weapon.[otherwise]An eerie red light celebrates your victory: 'Hail to our last victor. Unfornunately, the powers of the Arena can be lend only once[end if].".
 
@@ -1880,7 +1880,7 @@ Growing dissatisfaction is a number variable.
  
 To decide which number is the demon distraction:
 	Let x be the tension;
-	divide x by 2;
+	now x is x divided by 2;
 	increase x by growing dissatisfaction;
 	[Growing dissatisfaction accounts for the fact that the spectators become growingly dissatisfied by the lack of excitement]
 	If x is greater than 30:
