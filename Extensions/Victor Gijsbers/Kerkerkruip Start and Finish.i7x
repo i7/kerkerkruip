@@ -396,11 +396,16 @@ title	subtable	description	toggle
 "Deathblow               [achievement deathblow]"	--	"Deal at least 20 damage with a single blow."
 "I return to serve       [achievement I return to serve]"	--	"Have an undead creature that is allied to you kill someone."
 "From the shadows I come [achievement From the shadows I come]"	--	"Kill an enemy at full health with one hit, while striking from the shadows."
-"Stunning performance    [achievement Stunning performance]"	--	"Stun three different creatures in a single game."
+["Stunning performance    [achievement Stunning performance]"	--	"Stun three different creatures in a single game."]
 "Detox                   [achievement detox]"	--	"Win the game without using ment."
 "Injury to insult        [achievement injury to insult]"	--	"Kill Malygris with your bare hands."
-"Unmoved                 [achievement unmoved]"	--	"Win the game without using 'dodge' and 'parry'."
+["Unmoved                 [achievement unmoved]"	--	"Win the game without using 'dodge' and 'parry'."]
 "Nature's fragile vessel [achievement nature's fragile vessel]"	--	"Win the game with less than 15 maximum health."
+"Make love not war       [achievement make love not war]"	--	"Achieve the romantic ending."
+"Twice fallen            [achievement twice fallen]"		--		"Achieve victory in the Arena of the Fallen."
+"Give them blood         [achievement give them blood]"		--	"Feed 50 blood to blood magic items in a single game."
+"Royal fruit             [achievement royal fruit]"	--		"Receive the fabled Fruit of Kings."
+"Sixth heaven            [achievement sixth heaven]"		--	"Get a +6 ment bonus."
 "Durin's bane            [achievement durin's bane]"	--	"Wake up an unbeatable foe."
 
 To say setup achievement menu:

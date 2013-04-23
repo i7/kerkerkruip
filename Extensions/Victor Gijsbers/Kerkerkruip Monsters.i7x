@@ -804,10 +804,10 @@ Check Miranda attacking:
 Aftereffects rule (this is the stunning rule):
 	if the global attacker is at-stun and the global defender is not dead:
 		if the attack damage is greater than 0 and global attacker weapon is not ranged:
-			if the global attacker is the player:
+[			if the global attacker is the player:
 				now global defender is sometime-stunned; [for the Stunning performance achievement]
 				if at least three people are sometime-stunned:
-					award achievement stunning performance;
+					award achievement stunning performance;]
 			let m be the final mind of the global attacker;
 			if stun count of the global defender is less than m:
 				now the stun count of the global defender is m;
@@ -3697,7 +3697,8 @@ Fruit of kings is player-only.
 
 Fruit-launching fruit of kings:
 	say "[line break]The fruit of kings majestically sails towards you, comes to a halt before your nose, and releases its precious powder. [bold type]Ment[roman type]!";
-	have the ment kick in.
+	have the ment kick in;
+	award achievement Royal fruit.
 
 Section - Shimmering fruit
 
@@ -4128,7 +4129,8 @@ Instead of kissing Malygris:
 		say "You overcome your initial resistance, and walk up to the old man. From up close, he looks vulnerable and very human. Your lips find each other, and your tongues soon follow suit. This is... much more pleasant than you had imagined it would be. It feels [italic type]right[roman type].[paragraph break]While he keeps kissing you ardently, Malygris slowly lowers himself to his knees. You gasp as he makes you realise that he has several centuries of experience under his belt. No, you're probably not going to miss the prince. No. Not at all.".
 
 Victory message rule (this is the Malygris lover message rule):
-	if Malygris-lover is true:		
+	if Malygris-lover is true:	
+		award achievement Make love not war;
 		end the story saying "You have found true love and infinite pleasure!";
 		rule succeeds.	
 

@@ -1935,7 +1935,8 @@ Every turn when the location is the Arena of the Fallen:
 				move item to Entrance to the Arena;
 		repeat with soulfrag running through on-stage soulfragments:
 			now soulfrag is off-stage;
-		move player to Entrance to the Arena.
+		move player to Entrance to the Arena;
+		award achievement Twice fallen.
 
 
 

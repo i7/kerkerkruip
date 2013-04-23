@@ -1660,6 +1660,8 @@ To decide which number is the current blood cost of (item - a thing):
 	let n be (blood magic level of item) + 1;
 	now n is n * (blood magic cost of item);
 	decide on n.
+
+Total blood magic is a number that varies. Total blood magic is 0.
 	
 Section - Feeding
 	
@@ -1680,7 +1682,10 @@ Carry out feeding:
 	otherwise:
 		say "You feed [n] health to [the noun], increasing [its-theirs] power[if concentration of the player is greater than 0] (and losing your concentration)[end if]!";
 		increase blood magic level of the noun by 1;
-		now concentration of the player is 0.
+		now concentration of the player is 0;
+		increase total blood magic by n;
+		if total blood magic is greater than 49:
+			award achievement Give them blood.
 
 After printing the name of a thing (called item) while taking inventory:
 	if blood magic cost of item is not 0:

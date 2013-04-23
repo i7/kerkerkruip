@@ -85,6 +85,11 @@ Injury to insult
 Unmoved
 Nature's fragile vessel
 Durin's bane
+Make love not war
+Twice fallen
+Give them blood
+Royal fruit
+Sixth heaven
 
 Table of Held Achievements
 held achievement	held difficulty
@@ -161,7 +166,7 @@ Last aftereffects rule (this is the award injury to insult achievement rule):
 		if Malygris is dead and global attacker weapon is a natural weapon:
 			award achievement Injury to insult.
 
-Section - Unmoved
+[Section - Unmoved
 
 The unmoved boolean is a truth state that varies. The unmoved boolean is true.
 
@@ -174,7 +179,7 @@ Carry out parrying:
 Before printing the player's obituary (this is the award Unmoved achievement rule):
 	if the player is victorious:
 		if unmoved boolean is true:
-			award achievement Unmoved.
+			award achievement Unmoved.]
 
 Section - Nature's fragile vessel
 
@@ -186,6 +191,27 @@ Before printing the player's obituary (this is the award fragile vessel achievem
 Section - Durin's bane
 
 [Handled by the Nameless Horror code in Kerkerkruip Monsters.]
+
+Section - Make love not war
+
+[Handled by the Malygris code in Kerkerkruip Monsters]
+
+Section - Twice fallen
+
+[Handled by Arena of the Fallen code in Kerkerkruip Location]
+
+Section - Gallons of the stuff
+
+[Handled by blood magic code in Kerkerkruip Systems]
+
+Section - Royal fruit
+
+[Handled by Bodmall code in Kerkerkruip Monsters]
+
+Section - Sixth Heaven
+
+[Handled by ment code in Kerkerkruip Items]
+
 
 
 
