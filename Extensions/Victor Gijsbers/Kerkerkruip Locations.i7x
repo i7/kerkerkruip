@@ -1820,11 +1820,11 @@ The oppname is a text that varies. The oppname is "".
 
 Every turn when the player is not in the Entrance to the Arena:
 	If the fighting boolean is false:
-		Repeat with P running through powers that are not granted:
-			Repeat with Per running through all dead persons:
-				if Per grants P:
-					Repeat with soulfrag running through soulfragments soulcatched by Per:
-						if soulfrag is off-stage:
+		Repeat with Per running through all dead persons:
+			Repeat with P running through powers granted by Per:
+				if P is not granted:
+					Repeat with soulfrag running through soulfragments:
+						if Per soulcatches soulfrag:
 							move soulfrag to the soulchest.
 
 [Understand "smash [something] with [something]" as smashing it with.]
@@ -1881,46 +1881,40 @@ To challenge (the guy - a person):
 	move the guy to the Arena of the Fallen;
 	restore the health of the guy.
 
-Growing dissatisfaction is a number variable.
- 
-To decide which number is the demon distraction:
-	let x be the tension;
-	now x is x divided by 2;
-	increase x by growing dissatisfaction;
-	[Growing dissatisfaction accounts for the fact that the spectators become growingly dissatisfied by the lack of excitement]
-[	If x is greater than 30:
-		now x is 30;] [unnecessary]
-	if a random chance of x in 30 succeeds:
-		now x is 1;
-	otherwise:
-		now x is 0;
-	decide on x.
+The growing dissatisfaction is a number which varies. Growing dissatisfaction is 0.
+The current dissatisfaction is a number which varies. The current dissatisfaction is 0.
 
+After not attacklike behaviour:
+	if the location is the Arena of the Fallen:
+		increase current dissatisfaction by 1;
+	continue the action.
 
-[Commenting the stuff below out until we have updated it, because this is HUGELY buggy!!]
+After attacklike behaviour:
+	if the location is the Arena of the Fallen:
+		if a random chance of 1 in 3 succeeds:
+			decrease current dissatisfaction by 1;
+	continue the action.
 
-[Every turn when the location is the Arena of the Fallen:
-	update the combat status;
-	if the combat status is not peace:
-		if demon distraction is 1:
-			increment growing dissatisfaction;
-			let N be a random number between 1 and 4;
-			if N is:
-				-- 1:
-					decrease the concentration of the global attacker by 1;
-					say "Distracted by [one of]the strong sulfur smell[or]hundreds of prying, crimson eyes[or]gripping claws[or]the black figure towering above you[or]gruesome howling[purely at random], [if global attacker is the player]you are[otherwise][the global attacker] is[end if] unable to maintain this level of concentration.";
-				-- 2:
-					decrease the concentration of the global defender by 1;
-					say "Distracted by [one of]the strong sulfur smell[or]hundreds of prying, crimson eyes[or]gripping claws[or]the black figure towering above you[or]gruesome howling[purely at random], [if global defender is the player]you are[otherwise][the global defender] is[end if] unable to maintain this level of concentration.";
-				-- 3:
-					Let X be a random number between 1 and 4;
-					decrease the health of the global attacker by X;
-					say "Disgruntled by  lack of blood, the spectators decide to lend a helping hand. [one of]Grippling claws tears away at[or]A small dagger, coated with a bit of blood, slices[or]Noxious fumes envelop[or]A small rock is flinged at[purely at random] you[if global attacker is not the player]r opponent[end if], doing [X] damage!";
-				-- 4:
-					Let X be a random number between 1 and 4;
-					decrease the health of the global defender by X;
-					say "Disgruntled by  lack of blood, the spectators decide to lend a helping hand. [one of]Grippling claws tears away at[or]A small dagger, coated with a bit of blood, slices[or]Noxious fumes envelop[or]A small rock is flinged at[purely at random] you[if global attacker is not the player]r opponent[end if], doing [X] damage!".]
-
+A last aftereffects rule(this is the disgruntled demons rule):
+	if the location is the Arena of the Fallen:
+		if the attack damage is 0:
+			let x be the current dissatisfaction;
+			increase x by the growing dissatisfaction;
+			let guy be a random alive person in the Arena of the Fallen;
+			Let N be a random number between 1 and x;
+			if N > 3:
+				if the concentration of guy > 0:
+					decrease the concentration of guy by 1;
+					say "Distracted by [one of]the strong sulfur smell[or]hundreds of prying, crimson eyes[or]gripping claws[or]the black figure towering above you[or]gruesome howling[purely at random], [if guy is the player]you are[otherwise][guy] is[end if] unable to maintain this level of concentration.";
+					now the current dissatisfaction is 0;
+					increase the growing dissatisfaction by 2;
+			otherwise if N > 8:
+				Let X be a random number between 1 and 4;
+				decrease the health of guy by X;
+				say "Disgruntled by  lack of blood, the spectators decide to lend a helping hand. [one of]Grippling claws tears away at[or]A small dagger, coated with a bit of blood, slices[or]Noxious fumes envelop[or]A small rock is flinged at[purely at random] you[if guy is not the player]r opponent[end if], doing [X] damage!";
+				now the current dissatisfaction is 0;
+				increase the growing dissatisfaction by 2.
+				
 
 Section - Getting out of the Arena
 
