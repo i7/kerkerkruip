@@ -11,7 +11,7 @@ Chapter - Groups of enemies
 Accompaniment relates various people to one person (called the leader).
 The verb to accompany (he accompanies, they accompany, he accompanied, it is accompanied, he is accompanying) implies the accompaniment relation. 
 
-Definition: a person is a follower if it relates to a person by the accompaniment relation.
+Definition: a person is a grouper if it relates to a person by the accompaniment relation.
 
 A person can be group leading.
 A person can be initially accompanied. A group leading person is usually initially accompanied.
@@ -26,7 +26,7 @@ To decide whether the group of (X - a person) has been defeated:
 			decide no;
 	decide yes.
 
-[ Place all the followers with their leaders ]
+[ Place all the groupers with their leaders ]
 Final monster placement rule (this is the place accompanying enemies with their leader rule):
 	repeat with X running through on-stage group leading people:
 		if X is initially accompanied:
@@ -92,15 +92,15 @@ Killing rule (this is the increment died and kill stats rule):
 	if killed-guy is the player:
 		increment the kill count of the killer-guy;
 		[ Award a kill to the leader of a group ]
-		if the killer-guy is a follower:
+		if the killer-guy is a grouper:
 			if the leader of the killer-guy is kills claiming:
 				increment the kill count of the killer-guy;
 	otherwise:
 		[ Mark a defeat only if the person stands alone or the whole group has been defeated ]
 		if the killed-guy is not group leading or killed-guy is defeated individually or the group of killed-guy has been defeated:
 			increment the died count of the killed-guy;
-		[ If a leader was killed before all their followers then their died count will need to be incremented when the last follower dies ]
-		if the killed-guy is a follower:
+		[ If a leader was killed before all their groupers then their died count will need to be incremented when the last grouper dies ]
+		if the killed-guy is a grouper:
 			if the group of the leader of the killed-guy has been defeated:
 				increment the died count of the leader of the killed-guy;
 	update the monster statistics;
