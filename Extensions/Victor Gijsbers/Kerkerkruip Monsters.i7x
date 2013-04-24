@@ -3765,7 +3765,7 @@ To decide which number is the overmind bonus of (guy - a person):
 	if the overmind is not off-stage:
 		unless the faction of the overmind hates faction of guy:
 			unless level of guy is greater than 3:
-				unless x-coordinate of location of guy is 100 [not in normal dungeon]
+				unless x-coordinate of location of guy is 100: [not in normal dungeon]
 					let n be level of guy;
 					if group level of guy > n:
 						now n is group level of guy;
