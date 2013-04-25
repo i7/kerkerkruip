@@ -1806,7 +1806,7 @@ The black dome is scenery in the Entrance to the Arena. Understand "Arena" and "
 The scribblings are scenery in the Entrance to the Arena and plural-named. Understand "writings" and "inscriptions" and "inscription" as the scribblings. The description of the scribblings is "[if triumphing boolean is false]As you start to read the text, it lights up in a dark crimson: [italic type] If you wish, you can relive a battle you fought before, but it will become the most challenging fight you ever had. To start the fight, simply [roman type]smash the appropriate shard with a weapon[italic type][otherwise]Writings glowing with an eerie red light celebrate your victory: 'Hail to our last victor!'[end if].".
 
 Instead of reading the scribblings:
-	try examining the scribblings..
+	try examining the scribblings.
 
 The soulchest is an opaque, openable, open, fixed in place container in Entrance to the Arena. Understand "chest" as the soulchest. The description of the soulchest is "A large chest, adorned with a number of crimson rubies." 
 
@@ -1881,7 +1881,7 @@ To challenge (the guy - a person):
 	move the guy to the Arena of the Fallen;
 	restore the health of the guy.
 
-The growing dissatisfaction is a number which varies. Growing dissatisfaction is 0.
+The demon boredom is a number which varies. The demon boredom is 0.
 The current dissatisfaction is a number which varies. The current dissatisfaction is 0.
 
 After not attacklike behaviour:
@@ -1891,29 +1891,36 @@ After not attacklike behaviour:
 
 After attacklike behaviour:
 	if the location is the Arena of the Fallen:
-		if a random chance of 1 in 3 succeeds:
-			decrease current dissatisfaction by 1;
+		decrease current dissatisfaction by 1;
 	continue the action.
 
-A last aftereffects rule(this is the disgruntled demons rule):
-	if the location is the Arena of the Fallen:
-		if the attack damage is 0:
-			let x be the current dissatisfaction;
-			increase x by the growing dissatisfaction;
-			let guy be a random alive person in the Arena of the Fallen;
-			Let N be a random number between 1 and x;
-			if N > 3:
-				if the concentration of guy > 0:
-					decrease the concentration of guy by 1;
-					say "Distracted by [one of]the strong sulfur smell[or]hundreds of prying, crimson eyes[or]gripping claws[or]the black figure towering above you[or]gruesome howling[purely at random], [if guy is the player]you are[otherwise][guy] is[end if] unable to maintain this level of concentration.";
-					now the current dissatisfaction is 0;
-					increase the growing dissatisfaction by 2;
-			otherwise if N > 8:
-				Let X be a random number between 1 and 4;
-				decrease the health of guy by X;
-				say "Disgruntled by  lack of blood, the spectators decide to lend a helping hand. [one of]Grippling claws tears away at[or]A small dagger, coated with a bit of blood, slices[or]Noxious fumes envelop[or]A small rock is flinged at[purely at random] you[if guy is not the player]r opponent[end if], doing [X] damage!";
-				now the current dissatisfaction is 0;
-				increase the growing dissatisfaction by 2.
+To decide which number is the distractionchance:
+	let x be the current dissatisfaction;
+	increase x by the demon boredom;
+	let N be a random number between 1 and x;
+	decide on N.
+
+Every turn when the location is the Arena of the Fallen and the combat status is not peace:
+	let guy be a random alive person in the Arena of the Fallen;
+	if distractionchance > 3:
+		if the concentration of guy > 0:
+			decrease the concentration of guy by 1;
+			say "Distracted by [one of]the strong sulfur smell[or]hundreds of prying, crimson eyes[or]gripping claws[or]the black figure towering above you[or]gruesome howling[purely at random], [if guy is the player]you are[otherwise][guy] is[end if] unable to maintain this level of concentration. [if guy is the player]your[otherwise][guy]'s[end if]  current concentration is";
+			if the concentration of guy is:
+				-- 1:
+					say " now mildly concentrated.";
+				-- 2:
+					say " now quite concentrated.";
+				-- 3:
+					say " now maximally concentrated.";
+			now the current dissatisfaction is 0;
+			increase the demon boredom by 2;
+	otherwise if distractionchance > 6:
+		Let X be a random number between 1 and distractionchance - 2;
+		decrease the health of guy by X;
+		say "Disgruntled by  lack of blood, the spectators decide to lend a helping hand. [one of]Grippling claws tears away at[or]A small dagger, coated with a bit of blood, slices[or]Noxious fumes envelop[or]A small rock is flinged at[purely at random] you[if guy is not the player]r opponent[end if], doing [X] damage!";
+		now the current dissatisfaction is 0;
+		increase the demon boredom by 2.
 				
 
 Section - Getting out of the Arena
