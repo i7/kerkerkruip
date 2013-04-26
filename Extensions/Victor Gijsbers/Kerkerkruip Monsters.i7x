@@ -1500,7 +1500,6 @@ Section - Explode
 
 Can-grant-soul is a truth state that varies.
 Can-grant-soul-guy is a person that varies.
-The special can grant soul rules are a rulebook.
 
 To decide whether (guy - a person) can grant a soul:
 	if level of guy is 0:
@@ -1509,8 +1508,16 @@ To decide whether (guy - a person) can grant a soul:
 		now can-grant-soul is true;
 	if guy is the player:
 		now can-grant-soul is false;
+	if guy is grouper or (guy is group leading and guy is not defeated individually):
+		let X be guy;
+		if guy is grouper:
+			now X is a random person accompanied by guy;
+			if X is alive and X is on-stage:
+				now can-grant-soul is false;
+		repeat with F running through the people who accompany X:
+			if F is alive and F is on-stage and F is not guy:
+				now can-grant-soul is false;
 	now can-grant-soul-guy is guy;
-	consider the special can grant soul rules;
 	decide on can-grant-soul.
 
 The explosion victim is a person that varies.
