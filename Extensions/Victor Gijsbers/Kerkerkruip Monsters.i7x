@@ -11,7 +11,7 @@ Chapter - Groups of enemies
 Accompaniment relates various people to one person (called the leader).
 The verb to accompany (he accompanies, they accompany, he accompanied, it is accompanied, he is accompanying) implies the accompaniment relation. 
 
-Definition: a person is a grouper if a person relates to it by the accompaniment relation.
+Definition: a person is a grouper if a person relates to it by the accompaniment relation. [This definition is seemingly in reverse because of what might well be a bug in Inform 7: http://inform7.com/mantis/view.php?id=1113. CHECK IT WHEN A NEW INFORM BUILD COMES OUT!!]
 
 A person can be group leading.
 A person can be initially accompanied. A group leading person is usually initially accompanied.
