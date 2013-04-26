@@ -459,8 +459,9 @@ To do the absorption with (guy - a person):
 	have the guy disappear;
 	if guy is grouper and guy is not group leading:
 		let guy2 be a random person accompanied by guy; [Redirect absorption to group leader]
-		now guy is guy2;
-	if guy is not group leading or group of guy has been defeated:
+		unless guy2 is defeated individually:
+			now guy is guy2;
+	if guy is not group leading or group of guy has been defeated or guy is defeated individually:
 		increase score by level of guy;
 		now test subject is guy;
 		unless absorption is stopped:
