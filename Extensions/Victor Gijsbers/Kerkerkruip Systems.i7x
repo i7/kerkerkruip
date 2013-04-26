@@ -456,13 +456,17 @@ Every turn (this is the remove all killed monsters from play rule):
 			do the absorption with guy.
 
 To do the absorption with (guy - a person):
-	increase score by level of guy;
-	now test subject is guy;
-	unless absorption is stopped:
-		do power transferral with the guy;
-		heal fully because the guy is slain;
 	have the guy disappear;
-	do achievement awarding for the guy.
+	if guy is grouper and guy is not group leading:
+		let guy2 be a random person accompanied by guy; [Redirect absorption to group leader]
+		now guy is guy2;
+	if guy is not group leading or group of guy has been defeated:
+		increase score by level of guy;
+		now test subject is guy;
+		unless absorption is stopped:
+			do power transferral with the guy;
+			heal fully because the guy is slain;
+		do achievement awarding for the guy.
 
 To do power transferral with (guy - a person):
 	repeat with X running through powers:

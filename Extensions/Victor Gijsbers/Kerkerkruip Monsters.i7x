@@ -11,7 +11,7 @@ Chapter - Groups of enemies
 Accompaniment relates various people to one person (called the leader).
 The verb to accompany (he accompanies, they accompany, he accompanied, it is accompanied, he is accompanying) implies the accompaniment relation. 
 
-Definition: a person is a grouper if it relates to a person by the accompaniment relation.
+Definition: a person is a grouper if a person relates to it by the accompaniment relation.
 
 A person can be group leading.
 A person can be initially accompanied. A group leading person is usually initially accompanied.
@@ -103,7 +103,7 @@ Killing rule (this is the increment died and kill stats rule):
 		if the killed-guy is a grouper:
 			if the group of the leader of the killed-guy has been defeated:
 				increment the died count of the leader of the killed-guy;
-	update the monster statistics;
+	update the monster statistics.
 
 Section - Testing IDs - Not for release
 
@@ -2969,6 +2969,8 @@ The ID of the Tormentor of Aite is 17.
 The Tormentor of Aite is medium.
 The Tormentor of Aite is talker.
 
+The level of the tormentor of Aite is 4.
+
 The tormentor of Aite accompanies the healer of Aite.
 
 The health of the Tormentor of Aite is 16.
@@ -3024,6 +3026,8 @@ The defender of Aite is medium.
 
 The defender of Aite is talker.
 
+The level of the defender of Aite is 4.
+
 The defender of Aite accompanies the healer of Aite.
 
 
@@ -3075,12 +3079,12 @@ Report the defender of Aite waiting when the defender of Aite is insane:
 
 Section - Power of the Fanatics of Aite
 
-The power of the Fanatics of Aite is a power. fanatics-of-Aite-package grants power of Fanatics of Aite.
+The power of the Fanatics of Aite is a power. Healer of Aite grants power of Fanatics of Aite.
 The power level of power of the Fanatics of Aite is 4.
 The command text of power of the fanatics of Aite is "pray".
 The description of power of the fantatics of Aite is "Type: active ability.[paragraph break]Command: pray (while not in another god's temple).[paragraph break]Effect: You can pray to Aite even when you are not in her temple, though the effect will not work in the temples of other gods. The probability that Aite's power will help you and harm your enemies also increases, with the increase being more pronounced if your spirit is higher. When Aite sends a divine weapon to skewer people, these also do more damage: huge weapons get a damage bonus of spirit / 5, and gigantic weapons get this bonus twice."
 
-The fanatics power boolean is a truth state that varies. The fanatics power boolean is false.
+[The fanatics power boolean is a truth state that varies. The fanatics power boolean is false.
 
 Every turn (this is the grant fanatics of power boolean rule):
 	if healer of Aite is dead and Tormentor of Aite is dead and Defender of Aite is dead:
@@ -3104,7 +3108,7 @@ To gain the power of the Fanatics of Aite:
 	unless absorption is stopped:
 		do power transferral with fanatics-of-Aite-package;
 		heal fully because fanatics-of-Aite-package is slain;
-	do achievement awarding for the fanatics-of-Aite-package.
+	do achievement awarding for the fanatics-of-Aite-package.]
 	
 Absorbing power of the Fanatics of Aite:
 	increase melee of the player by 4;
