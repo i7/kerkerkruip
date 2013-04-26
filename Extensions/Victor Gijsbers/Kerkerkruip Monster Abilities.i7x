@@ -439,7 +439,9 @@ Check an actor teleporting (this is the teleport impossible rule):
 	if teleportation is impossible for the actor:
 		now the actor is teleport impossible aware;
 		if the actor is visible:
-			say "[The actor] tries to teleport away, but something makes this impossible!" instead.
+			say "[The actor] tries to teleport away, but something makes this impossible!" instead;
+		otherwise:
+			do nothing instead.
 
 First carry out an actor teleporting (this is the choose a destination rule):
 	let destination be a random placed placeable teleportable room;
