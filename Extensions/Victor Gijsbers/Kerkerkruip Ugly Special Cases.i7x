@@ -28,7 +28,13 @@ Kerkerkruip Ugly Special Cases ends here.
 
 Chapter - Fixing Numbered Disambiguation Choices
 
-[Hopefully, we can kick this out when Inform is updated!]
+[Hopefully, we can kick this out when Inform is updated!
+
+Test with: The player carries a scroll of alteration. The player carries a scroll of the blade.
+
+purloin analyser / drop analyser / put scroll in analyser / 2.
+
+See issue #]
 
 Include (-
 
