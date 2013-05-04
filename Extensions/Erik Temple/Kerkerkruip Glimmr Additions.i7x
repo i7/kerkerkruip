@@ -29,6 +29,12 @@ Chapter - Simplifying Glimmr credits
 The announce colophon rule is not listed in any rulebook.
 
 
+Chapter - Dealing with restore
+
+After restoring from a saved game:
+	reset the Glulx timer.[Kerkerkruip doesn't use the standard library restore code, so we need to reproduce Glimmr Canvas Animation's restore protection here.]
+
+
 Chapter - Setting background colors for Gargoyle
 
 To open up (graphics-window - a g-window):
@@ -605,7 +611,6 @@ The graphics-window is a graphics g-window spawned by the main-window. The posit
 Chapter - Animation code support
 
 Section - Easy delays
-[This code allows us to trigger a delay using a short phrase ("pause for ### milliseconds"), implementing the delay using the "temporalizing" animation preset: a single frame is requested, "displaying" for the number of milliseconds given. While this is intended solely to pause the game for a given amount of time and makes no change to the display, it does result in an extra--and strictly unnecessary--refresh of the graphics window. This causes no performance issues in practice, but is probably worth mentioning.]
 
 The pause track is an animation track.
 

@@ -318,7 +318,7 @@ Chapter - Status
 
 Asking status is an action out of world. Understand "status" and "stat" and "stats" as asking status.
 
-Carry out asking status:
+Carry out asking status (this is the show basic stats rule):
 	say "[bold type]Health[roman type]: [health of the player] of [permanent health of the player][line break][run paragraph on]";
 	say "[bold type]Attack[roman type]: [melee of the player][line break][run paragraph on]";
 	say "[bold type]Defence[roman type]: [defence of the player][line break][run paragraph on]";
@@ -331,6 +331,8 @@ Carry out asking status:
 	say "[bold type]Body[roman type]: [run paragraph on][fb][if fb is greater than body score of the player] ([body score of the player] inherent + [bb] bonus)[end if][if fb is less than body score of the player] ([body score of the player] inherent - [bb * -1] penalty)[end if][line break][run paragraph on]";
 	say "[bold type]Mind[roman type]: [run paragraph on][fm][if fm is greater than mind score of the player] ([mind score of the player] inherent + [mb] bonus)[end if][if fm is less than mind score of the player] ([mind score of the player] inherent - [mb * -1] penalty)[end if][line break][run paragraph on]";
 	say "[bold type]Spirit[roman type]: [run paragraph on][fs][if fs is greater than spirit score of the player] ([spirit score of the player] inherent + [sb] bonus)[end if][if fs is less than spirit score of the player] ([spirit score of the player] inherent - [sb * -1] penalty)[end if][line break][run paragraph on]";
+
+Carry out asking status:
 	consider the status rules;
 	consider the status skill rules;
 	say "[line break][run paragraph on]".
@@ -713,7 +715,7 @@ Check reading when the player is blind (this is the cannot read when blind rule)
 
 Chapter - Achievements Menu
 
-Achievemenuing is an action out of world.
+Achievemenuing is an action out of world. Achievemenuing is in-game menu-checking.
 
 Understand "achieve" and "achievements" as achievemenuing.
 
@@ -727,7 +729,7 @@ Carry out achievemenuing:
 
 Chapter - Enemies and Powers Menu
 
-Powermenuing is an action out of world.
+Powermenuing is an action out of world. Powermenuing is in-game menu-checking.
 
 Understand "enemies" and "powers" as powermenuing.
 
@@ -742,7 +744,7 @@ Carry out powermenuing:
 
 Chapter - The asking for help action (for use without Basic Help Menu by Emily Short)
 
-Asking for help is an action out of world.
+Asking for help is an action out of world. Asking for help is in-game menu-checking.
 Understand "help" or "hint" or "hints" or "about" or "info" as asking for help.
 Carry out asking for help (this is the help request rule): do nothing.
 
@@ -824,8 +826,8 @@ Include Basic Screen Effects by Emily Short.
 
 Table of Fancy Status
 left	central	right
-"[bold type][status location][roman type]"	"Tension: [tension]"	"Health: [health of the player]/[permanent health of the player]"
-"Special powers: [powers of the player]"
+" [bold type][status location][roman type]"	"Tension: [tension]"	"Health: [health of the player]/[permanent health of the player]"
+" Special powers: [powers of the player]"
 
 To say status location:
 	 let phrase be indexed text;
@@ -854,6 +856,8 @@ The print standard inventory rule is not listed in any rulebook.
 
 Carry out taking inventory: 
 	take no time;
+
+Carry out taking inventory (this is the full inventory rule):
 	if the number of things had by the player is 0, say "You are empty-handed." instead; 
 	unless the number of weapons enclosed by the player is the number of natural weapons enclosed by the player:
 		say "You are carrying[line break][italic type]-weapons[roman type]: [line break]";
