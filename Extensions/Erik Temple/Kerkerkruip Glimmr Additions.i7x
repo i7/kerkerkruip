@@ -654,6 +654,7 @@ Redraw-menu is a truth state variable. Redraw-menu is false.
 For showing the title screen when full graphics support is true and data value 5 is 1 (this is the graphic title screen rule):
 	[let theme music be the music selected by the player;]
 	close the status window;[needed on restart]
+	close side windows;[needed on restart]
 	let session flag be false;
 	open up the graphics-window;
 	if data value 6 is 1:
@@ -667,6 +668,7 @@ For showing the title screen when full graphics support is true and data value 5
 	now menu-active is true;
 	now redraw-menu is false;
 	close the status window;[for returning from a text menu]
+	close side windows;[probably not necessary here, but added for future-proofing.]
 	open up the graphics-window;[it is possible that it may be closed on return from a menu]
 	fade in the main menu;
 	pause for 2000 milliseconds, accepting input;
@@ -682,7 +684,7 @@ For showing the title screen when full graphics support is true and data value 5
 	otherwise:
 		clear the main-window;[we don't want to see old content in the main window when the menu closes]
 		close title screen;
-		open the status window.
+		[open the status window.]
 
 To set jump point redraw_menu:
 	(- .RedrawMenu; -)
@@ -892,6 +894,7 @@ To animate monster cards:
 	let index be 0;
 	while menu-active is true:
 		close the status window;[on returning from a text menu]
+		close side windows;[probably not necessary, but included for future-proofing]
 		open up the graphics-window;[it is possible that it may be closed on return from a menu]
 		increase index by 1;
 		if index > number of entries in the monster-card queue:
@@ -1176,7 +1179,7 @@ To close title screen:
 	delay input until all animations are complete;
 	now the display-layer of the black-fader is 9999;
 	shut down the graphics-window;
-	open the status window.
+	[open the status window.]
 	
 To cease animating all tracks but (target - an animation track):
 	repeat with track running through animation-active animation tracks:
@@ -1286,6 +1289,7 @@ Check showing the map:
 Carry out showing the map:
 	follow the dungeon extent calculation rules;
 	close the status window;
+	close side windows;
 	open up the map-window;
 	follow the glulx arranging rules;
 	while true is true:
@@ -1327,6 +1331,7 @@ To scroll map (dir - direction):
 
 Report showing the map:
 	shut down the map-window;
+	open side windows;
 	open the status window;
 	if there is a display-inactive size-sensitive g-element[i.e., if we have had to hide any of the UI elements, the map window was too small]:
 		say "[bracket]The window was too small to show the map comfortably. Try increasing the size of your game window.[close bracket][line break]";
@@ -1812,10 +1817,10 @@ A glulx arranging rule when the map-window is g-present (this is the reset map s
 	continue the action.
 
 
-Section - Status window
+[Section - Status window
 
 Last when play begins (this is the open up the status window rule):
-	open the status window;
+	open the status window;]
 
 
 Section - Test command for map window (for use with Extended Debugging by Erik Temple)

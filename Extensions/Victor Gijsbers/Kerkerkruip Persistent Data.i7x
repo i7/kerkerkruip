@@ -19,6 +19,7 @@ Data entries (careful, may not be up to date!):
 	4: victories count for the purpose of unlocking content
 	5: main menu graphics desired (1 = yes, -1 = no) [code in Kerkerkruip Glimmr Additions.i7x]
 	6: session flag [code in Kerkerkruip Glimmr Additions.i7x]
+	7: window panels disabled (0 = enabled, 1 = disabled)
 ]
 
 The File of Data Storage is called "KerkerkruipStorage".

@@ -91,12 +91,13 @@ Chapter - Window-drawing rules
 [There are two primary places where we need to redraw the windows. First, before reading a command should handle all in-game situations. But we also need the stats to reflect the last turn of the game when we've won, since this will most often be a combat turn that we have lost. For that, we hook into the activity for printing the player's "obituary".]
 
 To redraw subsidiary content windows:
-	follow the window-drawing rules for the stats-window;
-	follow the window-drawing rules for the powers-window;
-	follow the window-drawing rules for the inventory-window.
+	if data value 7 is 0:
+		follow the window-drawing rules for the stats-window;
+		follow the window-drawing rules for the powers-window;
+		follow the window-drawing rules for the inventory-window.
 
 Before reading a command (this is the refresh side windows rule):
-	redraw subsidiary content windows..
+	redraw subsidiary content windows.
 	
 Before printing the player's obituary (this is the final refresh side windows rule):
 	redraw subsidiary content windows.
@@ -104,9 +105,9 @@ Before printing the player's obituary (this is the final refresh side windows ru
 
 Section - Statistics window
 
-Window-drawing rule for the stats-window (this is the construct stats window rule):
+Window-drawing rule for the stats-window when the stats-window is g-present (this is the construct stats window rule):
 	move focus to stats-window, clearing the window;	
-	consider the short status rules;[show point distribution messages]
+	consider the short status rules;[show point distribution messages and player attributes]
 	say "[line break][run paragraph on]";
 	consider the show basic stats rule;[show statistics]
 	say run paragraph on;
@@ -132,7 +133,7 @@ Short status rule (this is the attributes short status rule):[start with "human"
 	if player is ethereal:
 		say ", ethereal[run paragraph on]";
 	if player is flying:
-		say ", winged and flying[run paragraph on]";
+		say ", flying[run paragraph on]";
 	if player is blind or the player is eyeless:
 		say ", [if player is eyeless]eyeless[else]blind[end if][run paragraph on]";
 	if hit protection of the player is greater than 0:
@@ -163,22 +164,22 @@ Short status rule (this is the unallocated faculty short status rule):
 		say "[italic type]Increase one of your faculties by typing 'body', 'mind', or 'spirit' ([unallocated faculty] point[if unallocated faculty is greater than 1]s[end if]).[roman type][line break][run paragraph on]".
 
 	
-Window-drawing rule for the stat-header-window (this is the construct stat header window rule):
+Window-drawing rule for the stat-header-window when the stat-header-window is g-present (this is the construct stat header window rule):
 	move focus to stat-header-window, clearing the window;
 	say "[first custom style]Statistics[roman type]";
 	say run paragraph on;
 	return to main screen.
 
 
-Section - Status window hyperlinks
+Section - Statistics window hyperlinks
 
 Hyperlink processing rule when the current hyperlink window is the stats-window and the current hyperlink ID is 1:
 	move focus to stats-window, clearing the window;
+	say "[link 2]< back[end link][line break][line break][run paragraph on]";
 	consider the show basic stats rule;
 	consider the status rules;
 	consider the status skill rules;
-	say line break;
-	say "[link 2]< back[end link][run paragraph on]";
+	say run paragraph on;
 	return to main screen;
 	rule succeeds.
 
@@ -189,7 +190,7 @@ Hyperlink processing rule when the current hyperlink window is the stats-window 
 
 Section - Powers window
 	
-Window-drawing rule for the powers-window (this is the construct power window rule):
+Window-drawing rule for the powers-window when the powers-window is g-present (this is the construct power window rule):
 	move focus to powers-window, clearing the window;
 	let pow be the number of granted powers;
 	if pow is 0:
@@ -207,7 +208,7 @@ Window-drawing rule for the powers-window (this is the construct power window ru
 	say run paragraph on;
 	return to main screen.
 
-Window-drawing rule for the powers-header-window (this is the construct powers header window rule):
+Window-drawing rule for the powers-header-window when the powers-header-window is g-present (this is the construct powers header window rule):
 	move focus to powers-header-window, clearing the window;
 	say "[first custom style]Powers[roman type]";
 	say run paragraph on;
@@ -258,13 +259,13 @@ Hyperlink processing rule when the current hyperlink window is the powers-window
 
 Section - Inventory window
 	
-Window-drawing rule for the inventory-window (this is the construct inventory window rule):
+Window-drawing rule for the inventory-window when the inventory-window is g-present (this is the construct inventory window rule):
 	move focus to inventory-window, clearing the window;
 	consider the full inventory rule; 
 	say run paragraph on;
 	return to main screen.
 
-Window-drawing rule for the inventory-header-window (this is the construct inventory header window rule):
+Window-drawing rule for the inventory-header-window when the inventory-header-window is g-present (this is the construct inventory header window rule):
 	move focus to inventory-header-window, clearing the window;
 	say "[first custom style]Inventory[roman type]";
 	say run paragraph on;
@@ -272,8 +273,33 @@ Window-drawing rule for the inventory-header-window (this is the construct inven
 
 
 Chapter - Opening and closing windows
+
+Toggling window panels is an action out of world. Understand "toggle info panels" or "info panels" or "toggle information panels" or "information panels" as toggling window panels.
+
+Understand "disable info panels" or "disable information panels" as toggling window panels when data value 7 is 0.
+
+Understand "enable info panels" or "enable information panels" as toggling window panels when data value 7 is 1.
+
+Understand "disable info panels" or "disable information panels" as a mistake ("The information panels are already disabled.") when data value 7 is 1.
+
+Understand "enable info panels" or "enable information panels" as a mistake ("The information panels are already enabled.") when data value 7 is 0.
+
+Carry out toggling window panels:
+	close the status window;
+	if data value 7 is 1:
+		set data value 7 to 0;
+		open side windows;
+		open the status window;
+		say "The information panels have been enabled. Type INFO PANELS to disable them again.";
+	otherwise:
+		set data value 7 to 1;
+		close side windows;
+		open the status window;
+		say "The information panels have been disabled. Type INFO PANELS to re-enable them."
+
 	
 To open side windows:
+	if data value 7 is 1, rule fails;
 	set up styles for side windows;
 	open up the stats-window;
 	place border border-3-window;
@@ -301,9 +327,18 @@ To close side windows:
 
 Section - Events
 
-Last when play begins (this is the open up game windows rule):
+Last when play begins (this is the check info panel capacity rule):
+	if data value 7 is 1:
+		say "[bracket]Information panels are disabled. Type INFO PANELS to enable them.[close bracket][line break][run paragraph on]";
+	if data value 7 is 0:
+		if width of the main-window is less than 102 or height of the main-window is less than 34:
+			say "[bracket]Your game window is too small for you to use the information panels comfortably. Maximize your window, then type INFO PANELS to enable them.[close bracket][line break][run paragraph on]";
+			set data value 7 to 1;
+	follow the open up game windows rule.
+
+This is the open up game windows rule:
 	open side windows;
-	open the status window;
+	open the status window.
 
 [We need to close and open the side windows when we visit the in-game help menus. "In-game menu checking" is a kind of action that identifies the way we get to the menus while playing the game.]
 Before displaying when in-game menu-checking:
@@ -317,7 +352,7 @@ After displaying when in-game menu-checking:
 After restoring from a saved game:
 	close the status window;
 	close side windows;
-	consider the open up game windows rule.
+	consider the check info panel capacity rule.
 
 
 Kerkerkruip Windows ends here.

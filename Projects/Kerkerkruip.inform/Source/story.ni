@@ -17,7 +17,7 @@ Include Glulx Status Window Control by Erik Temple.
 [Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. Be sure to comment Flexible Windows in instead!]
 Include Kerkerkruip Glimmr Additions by Erik Temple.
 [Include Flexible Windows by Jon Ingold.]
-[Include Kerkerkruip Windows by Erik Temple.]
+Include Kerkerkruip Windows by Erik Temple.
 Include Extended Debugging by Erik Temple.
 
 Every turn (this is the mark items as seen every turn rule): 
@@ -60,7 +60,7 @@ The notify score changes rule is not listed in any rulebook.
 
 [This is for testing.]
 
-Generation info is a truth state that varies. Generation info is [true][false].
+Generation info is a truth state that varies. Generation info is [true]false.
 
 [Last when play begins:
 	move magical spade to the player.
