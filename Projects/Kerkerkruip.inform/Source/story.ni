@@ -3,8 +3,7 @@
 The story headline is "An IF roguelike".
 The story genre is "dungeon crawl".
 The release number is 8.
-[Release along with cover art.]
-
+Release along with [cover art and] a file of "garglk.ini" called "garglk.ini".
 	
 Include version 4/121111 of Menus by Emily Short. [Get this at https://github.com/i7/extensions]
 Include Basic Screen Effects by Emily Short. 

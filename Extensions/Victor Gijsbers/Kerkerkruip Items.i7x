@@ -543,7 +543,7 @@ The periapt of prophecy is an epic necklace.
 The periapt of prophecy is magical.
 The periapt of prophecy is silver.
 
-The description of the periapt of prophecy is "In most circumstance, this tiny amulet hanging from a delicate silver necklace is merely decorative. But when you are under the influence of ment, it will reveal its powers of precognition.".
+The description of the periapt of prophecy is "In most circumstances, this tiny amulet hanging from a delicate silver necklace is merely decorative. But when you are under the influence of ment, it will reveal its powers of precognition.".
 
 The periapt attack strength is a number that varies.
 

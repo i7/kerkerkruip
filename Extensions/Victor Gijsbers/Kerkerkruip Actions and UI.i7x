@@ -459,7 +459,7 @@ To say map description:
 				decrement count;
 				say ", [if max-count is greater than 1]one[end if]([place]) [triaxial way from location to place][run paragraph on]";
 			say ". [run paragraph on]";
-	say "[paragraph break]"
+	say "[line break]"
 
 To decide what number is (N - a number) grid-compared to (L - a number):
 	if L is 1:
@@ -532,12 +532,13 @@ Carry out sensing when the psycholocation boolean is true:
 			increment count;
 			choose row with enemy of adversary in the Table of Soul Descriptions;
 			if the location of the player is the location of the adversary:
-				say "   the soul of [the adversary] here with you, like [power-text entry][line break]";
+				say " - [italic type]the soul of [the adversary][roman type] here with you, like [power-text entry][line break]";
+				next;
 			let the way be the best route from the location of player to the location of the adversary;
 			if way is a direction:
-				say "   [power-text entry], from the [way][line break]";
+				say " - [italic type][power-text entry][roman type], from the [way][line break]";
 			otherwise:
-				say "   [power-text entry], somewhere [general direction from location of the player to location of the adversary][line break]"
+				say " - [italic type][power-text entry][roman type], somewhere [general direction from location of the player to location of the adversary][line break]"
 
 Table of Soul Descriptions
 enemy	power-text
@@ -556,8 +557,8 @@ giant tentacle	"amputated horror"
 minotaur	"a skein of twisting passages"
 fanatics-of-Aite-package	"a head with three faces twisted with hate"
 Bodmall	"spreading thorns dripping with dew--or blood"
-Malygris	"a bolt of black streaked with a blaze of hot white[if Malygris-love-affair is greater than 0], to which you find yourself attracted[end if]"
-nameless horror	"a turning in on itself of space, on which you cannot bear to focus your attention"
+Malygris	"a bolt of black shot through with a blaze of hot white[if Malygris-love-affair is greater than 0], to which you find yourself quite attracted[end if]"
+nameless horror	"a turning in on itself of space and time, on which you cannot bear to focus your attention"
 
 
 Carry out sensing when the psycholocation boolean is false:		
