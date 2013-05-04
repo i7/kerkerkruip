@@ -60,65 +60,16 @@ The notify score changes rule is not listed in any rulebook.
 
 [This is for testing.]
 
-Generation info is a truth state that varies. Generation info is [true]false.
-
-
-Last when play begins:
-	move magical spade to the player.
+Generation info is a truth state that varies. Generation info is [true][false].
 
 [Last when play begins:
-	increase mind score of the player by 40.]
-	
-
-		
-
-[Chapter - Scroll of mapping
-
-Table of Scroll Names (continued)
-scroll name
-mapping
-psycholocation
-
-A scroll of mapping is a kind of scroll.
-A scroll of mapping is mapping.
-The description of a scroll of mapping is "Reading this scroll will instantaneously reveal the plan of the entire dungeon, including secret rooms (check the MAP to see it).".
-The plural of scroll of mapping is scrolls of mapping.
-
-Carry out reading a scroll of mapping (this is the reveal the map rule):
-	now all placed not nogo rooms are map-revealed;
-	say "The scroll is not a spell at all! It is a magically obfuscated blueprint of the Kerkerkruip dungeon! Type MAP to see the dungeon's complete floor plan."
-
-
-Chapter - Scroll of psycholocation
-
-A scroll of psycholocation is a kind of scroll.
-A scroll of psycholocation is psycholocation.
-The description of a scroll of psycholocation is "Reading this scroll will grant you the ability to sense all of the creatures whose souls you might be able to absorb (check the MAP to see their locations).".
-The plural of scroll of psycholocation is scrolls of psycholocation.
-
-Carry out reading a scroll of psycholocation (this is the reveal enemies rule):
-	let adversary-count be 0;
-	repeat with place running through placed not nogo rooms:
-		repeat with adversary running through persons in place:
-			if the adversary is not the player and the level of the adversary is greater than 0 and the level of the adversary is less than 6:
-				now place is enemy-revealed;
-				increment adversary-count;
-	if the adversary-count is greater than 0:
-		say "You enter a weird clairvoyant state: The psyche[if adversary-count is greater than 1]s[end if] of your enemies call[if adversary-count is less than 2]s[end if] out to you. For a short time, you will be able to sense the presence and location of creatures whose souls you can absorb. If there are other creatures in the same space, you will see them via soul-reflection. Type MAP to psycholocate.";
-		psycholocator peters out in 10 turns from now;
-	otherwise:
-		say "The scroll's magic enfolds you, but you cannot sense the souls of any enemies. Perhaps there are none remaining."
-	
-At the time when the psycholocator peters out:
-	now all enemy-revealed rooms are not enemy-revealed;
-	say "Your clairvoyant sensation fades; you can no longer sense the psyches of your enemies."
+	move magical spade to the player.
 	
 The player carries one scroll of psycholocation and one scroll of mapping.]
 
-When play begins:
-	repeat with item running through scrolls carried by the player:
-		identify item.
-	
+[Last when play begins:
+	increase mind score of the player by 40.]
+
 
 Chapter - Flexible Windows relisting
 [Kerkerkruip's when play begin rules don't fire until after the menu is cleared. This means that extension such as Flexible Windows that have critical startup code in when play begins need to be adjusted. Due to weaknesses in Inform's extension interactions, this has to be in story.ni rather than the Kerkerkruip Glimmr Additions extension.]

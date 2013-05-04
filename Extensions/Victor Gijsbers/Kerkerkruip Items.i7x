@@ -2007,6 +2007,56 @@ A mutation rule (this is the mutate eyeless rule):
 			now mutated boolean is true.
 
 
+Section - Scroll of mapping
+
+Table of Scroll Names (continued)
+scroll name
+mapping
+
+Mapping boolean is a truth state variable.
+
+A scroll of mapping is a kind of scroll.
+A scroll of mapping is mapping.
+The description of a scroll of mapping is "Reading this scroll will instantaneously reveal the plan of the entire dungeon, including secret rooms ([if the map can be shown]check the MAP to see it[otherwise]type REMEMBER for more[end if]).".
+The plural of scroll of mapping is scrolls of mapping.
+
+Carry out reading a scroll of mapping (this is the reveal the map rule):
+	now all placed not nogo rooms are map-revealed;
+	now the mapping boolean is true;
+	say "As you read the scroll, a complete floor plan of the dungeon of Kerkerkruip imprints itself on your mind! [if the map can be shown]Type MAP to see it[otherwise]A description of where you are has been added to the REMEMBER command[end if]."
+
+
+Section - Scroll of psycholocation
+
+Table of Scroll Names (continued)
+scroll name
+psycholocation
+
+Psycholocation boolean is a truth state variable.
+
+A scroll of psycholocation is a kind of scroll.
+A scroll of psycholocation is psycholocation.
+The description of a scroll of psycholocation is "Reading this scroll will grant you the ability to sense all of the creatures whose souls you might be able to absorb (check the MAP to see their locations).".
+The plural of scroll of psycholocation is scrolls of psycholocation.
+
+Carry out reading a scroll of psycholocation (this is the reveal enemies rule):
+	let adversary-count be 0;
+	repeat with place running through placed not nogo rooms:
+		repeat with adversary running through persons in place:
+			if the adversary is not the player and the level of the adversary is greater than 0:
+				now place is enemy-revealed;
+				increment adversary-count;
+	if the adversary-count is greater than 0:
+		say "You enter a weird clairvoyant state: The psyche[if adversary-count is greater than 1]s[end if] of your enemies call[if adversary-count is less than 2]s[end if] out to you. For a short time, you will be able to sense the presence and location of creatures whose souls you can absorb. If there are other creatures in the same space, you will see them via soul-reflection. Type [if the map can be shown]MAP[otherwise]SENSE[end if] to psycholocate.";
+		now the psycholocation boolean is true;
+		psycholocator peters out in 10 turns from now;
+	otherwise:
+		say "The scroll's magic enfolds you, but you cannot sense the souls of any enemies. Perhaps there are none remaining."
+	
+At the time when the psycholocator peters out:
+	now all enemy-revealed rooms are not enemy-revealed;
+	now the psycholocation boolean is false;
+	say "Your clairvoyant sensation fades; you can no longer sense the psyches of your enemies."
 
 
 Chapter - Scroll packs

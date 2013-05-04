@@ -1274,7 +1274,7 @@ Section - Command to show the map
 Showing the map is an action out of world. Understand "map" and "show the/-- map" and "m" as showing the map.
 
 Check showing the map:
-	if not glulx graphics is supported and not glulx graphic-window mouse input is supported and not glulx PNG transparency is supported:
+	unless the map can be shown:
 		say "Your interpreter does not offer full graphics support, so the map is not available. Try using the REMEMBER command (R for short). Here it is:[paragraph break][input-style-for-glulx]>REMEMBER[roman type][line break]";
 		try remembering instead.
 
@@ -1331,13 +1331,6 @@ Report showing the map:
 
 Section - Calculating the size of the dungeon
 
-Extent-minimum-x is a number variable.
-Extent-maximum-x is a number variable.
-Extent-minimum-y is a number variable.
-Extent-maximum-y is a number variable.
-Extent-minimum-z is a number variable.
-Extent-maximum-z is a number variable.
-
 The ordered dungeon manifest is a list of rooms variable.
 
 The dungeon extent calculation rules are a rulebook.
@@ -1348,32 +1341,6 @@ A dungeon extent calculation rule (this is the basic dungeon extent rule):
 	#if utilizing Glimmr debugging;
 	say "[>console]Kerkerkruip: Dungeon extent:[line break]x: [Extent-minimum-x] / [Extent-maximum-x][line break]y: [Extent-minimum-y] / [Extent-maximum-y][line break]z: [Extent-minimum-z] / [Extent-maximum-z].[<]";
 	#end if;
-
-Definition: a room (called the place) is map-ready if the place is placed and (the place is visited or the place is map-revealed or the place is enemy-revealed).
-
-To calculate the extent of the dungeon:
-	now extent-minimum-x is 100;
-	now extent-maximum-x is -100;
-	now extent-minimum-y is 100;
-	now extent-maximum-y is -100;
-	now extent-minimum-z is 100;
-	now extent-maximum-z is -100;
-	repeat with place running through map-ready rooms:
-		let x be x-coordinate of place;
-		let y be y-coordinate of place;
-		let z be z-coordinate of place;
-		if x is greater than extent-maximum-x:
-			now extent-maximum-x is x;
-		if x is less than extent-minimum-x:
-			now extent-minimum-x is x;
-		if y is greater than extent-maximum-y:
-			now extent-maximum-y is y;
-		if y is less than extent-minimum-y:
-			now extent-minimum-y is y;
-		if z is greater than extent-maximum-z:
-			now extent-maximum-z is z;
-		if z is less than extent-minimum-z:
-			now extent-minimum-z is z.	
 		
 To order the manifest of dungeon rooms:
 	now the ordered dungeon manifest is {};
