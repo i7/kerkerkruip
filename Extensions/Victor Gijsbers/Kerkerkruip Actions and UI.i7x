@@ -835,7 +835,10 @@ To say status location:
 	 say "[phrase][run paragraph on]".
 
 Rule for constructing the status line:
-	fill status bar with Table of Fancy Status;
+	if data value 7 is 1:
+		fill status bar with Table of Fancy Status;
+	otherwise:
+		center "[bold type][status location][roman type]" at row 1;
 	rule succeeds. 
 
 To say powers of the player:
