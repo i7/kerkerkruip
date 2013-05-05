@@ -37,7 +37,7 @@ After restoring from a saved game:
 
 Chapter - Setting background colors for Gargoyle
 
-To open up (graphics-window - a g-window):
+To open up the graphics-window:
 	if graphics-window is g-unpresent and the main-window is ancestral to graphics-window:
 		set the Gargoyle background color to the color g-black;
 		now every g-window ancestral to graphics-window is g-required;
@@ -1292,6 +1292,7 @@ Carry out showing the map:
 	follow the dungeon extent calculation rules;
 	close the status window;
 	close side windows;
+	set the Gargoyle background color to the color g-black;
 	open up the map-window;
 	follow the glulx arranging rules;
 	while true is true:
@@ -1333,6 +1334,7 @@ To scroll map (dir - direction):
 
 Report showing the map:
 	shut down the map-window;
+	set the Gargoyle background color to the color g-white;
 	open side windows;
 	open the status window;
 	if there is a display-inactive size-sensitive g-element[i.e., if we have had to hide any of the UI elements, the map window was too small]:
@@ -1817,12 +1819,6 @@ A glulx arranging rule when the map-window is g-present (this is the reset map s
 	compensate for small map window;
 	set up the map keyboard instructions;
 	continue the action.
-
-
-[Section - Status window
-
-Last when play begins (this is the open up the status window rule):
-	open the status window;]
 
 
 Section - Test command for map window (for use with Extended Debugging by Erik Temple)

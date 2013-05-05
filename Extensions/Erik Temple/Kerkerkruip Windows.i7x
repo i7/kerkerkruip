@@ -79,6 +79,13 @@ To open the/-- status window:
 	initialize the status window;
 	place border border-7-window.
 
+To close the/-- status window:
+	shut status win;
+	shut down border-7-window.
+
+To shut status win:
+	(- if (gg_statuswin) glk_window_close(gg_statuswin, 0); gg_statuswin = 0; -)
+
 To apply color (N - a number) to (chosen style - a special-style) for grid windows:
 	(- glk_stylehint_set(wintype_TextGrid, {chosen style}, stylehint_TextColor, {N}); -)
 
@@ -299,7 +306,8 @@ Carry out toggling window panels:
 
 	
 To open side windows:
-	if data value 7 is 1, rule fails;
+	if data value 7 is 1, rule fails;	
+	set the Gargoyle background color to the color g-white;
 	set up styles for side windows;
 	open up the stats-window;
 	place border border-3-window;
