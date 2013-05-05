@@ -356,7 +356,7 @@ Figure of card-Tentacle is the file "card_Tentacle.jpg".
 [Placeholders]
 Figure of card_Malygris is the file "card_Malygris.jpg".
 Figure of card_Bodmall is the file "card_Bodmall.jpg".
-Figure of card_healer_of_Aite is the file "card_Fanatics-of-Aite.jpg".
+Figure of card_Fanatics-of-Aite is the file "card_Fanatics-of-Aite.jpg".
 Figure of card_Minotaur is the file "card_Minotaur.jpg".
 Figure of card_Hound is the file "card_Hound.jpg".
 Figure of card_Demon-of-Rage is the file "card_Demon-of-Rage.jpg".
@@ -998,7 +998,7 @@ The card of the giant tentacle is the figure of card-Tentacle.
 [placeholders]
 The card of Malygris is the figure of card_Malygris.
 The card of Bodmall is the figure of card_Bodmall.
-The card of the fanatics-of-Aite-package is figure of card_Fanatics-of-Aite.
+The card of the healer of Aite is figure of card_Fanatics-of-Aite.
 The card of the minotaur is figure of card_Minotaur.
 The card of the hound is figure of card_Hound.
 The card of the demon of rage is figure of card_Demon-of-Rage.
