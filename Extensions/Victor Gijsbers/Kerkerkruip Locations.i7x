@@ -2059,8 +2059,6 @@ Report entering the comfy chair:
 			take no time;
 			rule succeeds.
 
-
-
 [Elemental Plane: see Kerkerkruip Events and Specials]
 
 Kerkerkruip Locations ends here.

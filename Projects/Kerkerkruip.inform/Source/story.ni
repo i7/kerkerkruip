@@ -3,8 +3,7 @@
 The story headline is "An IF roguelike".
 The story genre is "dungeon crawl".
 The release number is 8.
-[Release along with cover art.]
-
+Release along with [cover art and] a file of "garglk.ini" called "garglk.ini".
 	
 Include version 4/121111 of Menus by Emily Short. [Get this at https://github.com/i7/extensions]
 Include Basic Screen Effects by Emily Short. 
@@ -17,7 +16,8 @@ Include Glulx Status Window Control by Erik Temple.
 [Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. Be sure to comment Flexible Windows in instead!]
 Include Kerkerkruip Glimmr Additions by Erik Temple.
 [Include Flexible Windows by Jon Ingold.]
-[Include Kerkerkruip Windows by Erik Temple.]
+Include Kerkerkruip Windows by Erik Temple.
+Include Extended Debugging by Erik Temple.
 
 Every turn (this is the mark items as seen every turn rule): 
 	repeat with item running through things that are enclosed by the location:
@@ -63,14 +63,17 @@ The notify score changes rule is not listed in any rulebook.
 Generation info is a truth state that varies. Generation info is [true]false.
 
 [Last when play begins:
-	increase mind score of the player by 25.]
-
-[The player carries ten scrolls of alteration.]
+	move magical spade to the player.
 	
+The player carries one scroll of psycholocation and one scroll of mapping.]
 [The Zen room is testobject.]
 
 [The overmind is testobject.]
 	
+
+[Last when play begins:
+	increase mind score of the player by 40.]
+
 
 Chapter - Flexible Windows relisting
 [Kerkerkruip's when play begin rules don't fire until after the menu is cleared. This means that extension such as Flexible Windows that have critical startup code in when play begins need to be adjusted. Due to weaknesses in Inform's extension interactions, this has to be in story.ni rather than the Kerkerkruip Glimmr Additions extension.]
@@ -88,3 +91,4 @@ Chapter - Menu code adjustments
 Before displaying:
 	open the status window.
 
+	

@@ -318,7 +318,7 @@ Chapter - Status
 
 Asking status is an action out of world. Understand "status" and "stat" and "stats" as asking status.
 
-Carry out asking status:
+Carry out asking status (this is the show basic stats rule):
 	say "[bold type]Health[roman type]: [health of the player] of [permanent health of the player][line break][run paragraph on]";
 	say "[bold type]Attack[roman type]: [melee of the player][line break][run paragraph on]";
 	say "[bold type]Defence[roman type]: [defence of the player][line break][run paragraph on]";
@@ -331,6 +331,8 @@ Carry out asking status:
 	say "[bold type]Body[roman type]: [run paragraph on][fb][if fb is greater than body score of the player] ([body score of the player] inherent + [bb] bonus)[end if][if fb is less than body score of the player] ([body score of the player] inherent - [bb * -1] penalty)[end if][line break][run paragraph on]";
 	say "[bold type]Mind[roman type]: [run paragraph on][fm][if fm is greater than mind score of the player] ([mind score of the player] inherent + [mb] bonus)[end if][if fm is less than mind score of the player] ([mind score of the player] inherent - [mb * -1] penalty)[end if][line break][run paragraph on]";
 	say "[bold type]Spirit[roman type]: [run paragraph on][fs][if fs is greater than spirit score of the player] ([spirit score of the player] inherent + [sb] bonus)[end if][if fs is less than spirit score of the player] ([spirit score of the player] inherent - [sb * -1] penalty)[end if][line break][run paragraph on]";
+
+Carry out asking status:
 	consider the status rules;
 	consider the status skill rules;
 	say "[line break][run paragraph on]".
@@ -383,8 +385,10 @@ Remembering is an action out of world. Understand "memory" and "remember" and "r
 
 Carry out remembering:
 	if the number of unvisited placed placeable not nogo rooms is zero:
-		say "All locations have been explored.";
+		say "All locations have been explored. [Map description]";
 	otherwise:
+		if the mapping boolean is true:
+			say "[Map description]";
 		say "You have not yet explored:[line break]";
 		repeat with place running through placed unvisited not nogo rooms:
 			repeat with further place running through placed visited rooms:
@@ -438,7 +442,90 @@ To say the road to (place - a room):
 		otherwise:
 			say "no known path[run paragraph on]".
 
+To say map description:
+	calculate the extent of the dungeon;
+	let x-adjust be (0 - extent-minimum-x) + 1;[These numbers will allow us to transform the coordinates so that each starts with 1]
+	let y-adjust be (0 - extent-minimum-y) + 1;
+	let z-adjust be (0 - extent-minimum-z) + 1;
+	let x be the x-coordinate of the location + x-adjust;
+	let y be the y-coordinate of the location + y-adjust;
+	let z be the (0 - (z-coordinate of the location + z-adjust)) + (extent-maximum-z + z-adjust) + 1[this reverses the direction of the z vector so that we can increase downward as is usual for roguelike dungeons; otherwise, Kerkerkruip counts upward, as is usual for skyscrapers.];
+	say "Based on [if the mapping boolean is true]the [bold type]map[roman type] you found[otherwise]your explorations[end if], you calculate that you are on the [ordinal of z] level down of a dungeon [(extent-maximum-z + z-adjust) in words] floor[s] deep. [run paragraph on]";
+	say "You are in the [run paragraph on]";
+	let dx be x grid-compared to (extent-maximum-x - extent-minimum-x) + 1;
+	let dy be y grid-compared to (extent-maximum-y - extent-minimum-y) + 1;
+	[say "(x-min: [extent-minimum-x], x-max: [extent-maximum-x]; y-min: [extent-minimum-y], y-max: [extent-maximum-y]; mx: [(extent-maximum-x - extent-minimum-x) + 1], my: [(extent-maximum-y - extent-minimum-y) + 1]; x: [x], y: [y]; dx: [dx], dy: [dy]) ";]
+	if dx is 0 and dy is 0:
+		say "central part ";
+	otherwise:
+		say "[if dx is -1]south[end if][if dx is 1]north[end if][if dy is -1]west[end if][if dy is 1]east[end if][if dy is 0 or dx is 0]-central[end if] part ";
+	say "of the complex. [run paragraph on]";
+	if the mapping boolean is true[i.e., this shows only if we've seen a map!]:
+		let count be the number of unvisited placed not nogo not teleportable rooms that are not the location;
+		if count is greater than 0:
+			say "The map indicates that there [if count is greater than 1]are [count in words] secret rooms[otherwise]is a secret room[end if] in the dungeon[run paragraph on]";
+			let max-count be count;
+			repeat with place running through unvisited placed not nogo not teleportable rooms that are not the location:
+				decrement count;
+				say ", [if max-count is greater than 1]one[end if]([place]) [triaxial way from location to place][run paragraph on]";
+			say ". [run paragraph on]";
+	say "[line break]"
 
+To decide what number is (N - a number) grid-compared to (L - a number):
+	if L is 1:
+		decide on 0;[we're always at the center if the extent is 1.]
+	if L is 2:
+		decide on N - (3 - N);[there is no center with an extent of 2--we're on one side or the other.]
+	let split be L / 3 as a fixed point number;
+	let spread be 0.0000;
+	if L is even:
+		now spread is 1.0000;[even widths will have a wider central zone]
+	if N is real greater than split and (N is real less than spread real plus (split real times 2) or N real equals spread real plus (split real times 2)):
+		decide on 0;
+	if N is real less than split or N real equals split:
+		decide on -1;
+	decide on 1.
+
+To say triaxial way from (A - a room) to (B - a room):
+	let N-S be "";
+	let E-W be "";
+	let U-D be "";
+	if x-coordinate of A minus x-coordinate of B is less than 0:
+		now N-S is "north";
+	if x-coordinate of A minus x-coordinate of B is greater than 0:
+		now N-S is "south";
+	if y-coordinate of A minus y-coordinate of B is less than 0:
+		now E-W is "east";
+	if y-coordinate of A minus y-coordinate of B is greater than 0:
+		now E-W is "west";
+	if z-coordinate of A minus z-coordinate of B is less than 0:
+		now U-D is "up";
+	if z-coordinate of A minus z-coordinate of B is greater than 0:
+		now U-D is "down";
+	let vertical-distance be the absolute value of the z-coordinate of A minus the z-coordinate of B;
+	if U-D is not "":
+		say "[if vertical-distance is greater than 1][vertical-distance in words] floors [end if][U-D][run paragraph on]";
+		if N-S is "" and E-W is "":
+			say "ward from here";
+		otherwise:
+			say " and to the [run paragraph on]";
+	otherwise:
+		say "to the [run paragraph on]";
+	if N-S is not "":
+		say "[N-S][run paragraph on]";
+	if E-W is not "":
+		say "[E-W]".
+	
+
+An ordinal is a kind of value. Some ordinals are first, second, third, fourth, fifth, sixth, seventh, eighth, ninth, tenth, eleventh, twelfth, thirteenth, fourteenth, fifteenth, sixteenth, seventeeth, eighteenth, nineteenth, twentieth, twenty-first, twenty-second, twenty-third, twenty-fourth, twenty-fifth, twenty-sixth, twenty-seventh, twenty-eighth, twenty-ninth, thirtieth, thirty-first, thirty-second, thirty-third, thirty-fourth, thirty-fifth, thirty-sixth, thirty-seventh, thirty-eighth, thirty-ninth, fortieth.
+
+To decide what ordinal is the ordinal of (N - a number):
+	if N is greater than 40 or N is less than 1:
+		decide on fortieth;
+	decide on the ordinated N.
+
+To decide what ordinal is the ordinated (N - a number):
+	(- {N} -).
 
 
 Section - Sensing
@@ -452,7 +539,44 @@ Check sensing (this is the do not sense when not in the dungeon rule):
 		take no time;
 		say "You do not seem to be in the dungeon, so your sensing power doesn't work." instead.
 
-Carry out sensing:
+Carry out sensing when the psycholocation boolean is true:
+	say "As if with a third eye, you can sense:[paragraph break]";
+	let count be 0;
+	repeat with adversary running through alive not off-stage persons:
+		if the adversary is not the player and the level of the adversary is greater than 0:
+			increment count;
+			choose row with enemy of adversary in the Table of Soul Descriptions;
+			if the location of the player is the location of the adversary:
+				say " - [italic type]the soul of [the adversary][roman type] here with you, like [power-text entry][line break]";
+				next;
+			let the way be the best route from the location of player to the location of the adversary;
+			if way is a direction:
+				say " - [italic type][power-text entry][roman type], from the [way][line break]";
+			otherwise:
+				say " - [italic type][power-text entry][roman type], somewhere [general direction from location of the player to location of the adversary][line break]"
+
+Table of Soul Descriptions
+enemy	power-text
+daggers	"an aura like sharpened steel"
+blood ape	"a zone of tautened, reddened air"
+ravenous armadillo	"energy like a screen of scales"
+Miranda	"a cloud of staggering purple"
+wisps of pain	"dark stains of tormented energy"
+chain golem	"lashings of steel"
+jumping bomb	"a pulsating bundle of glowing embers"
+Reaper	"a black hood hanging in air"
+demon of rage	"a squall of fury"
+hound	"a sharp yellow eye, narrowed and alert"
+mindslug	"inspiralling reflections in green ooze"
+giant tentacle	"amputated horror"
+minotaur	"a skein of twisting passages"
+fanatics-of-Aite-package	"a head with three faces twisted with hate"
+Bodmall	"spreading thorns dripping with dew--or blood"
+Malygris	"a bolt of black shot through with a blaze of hot white[if Malygris-love-affair is greater than 0], to which you find yourself quite attracted[end if]"
+nameless horror	"a turning in on itself of space and time, on which you cannot bear to focus your attention"
+
+
+Carry out sensing when the psycholocation boolean is false:		
 	if greatest power of the player is less than 3:
 		take no time;
 		say "You are not yet powerful enough to magically sense anything.";
@@ -465,6 +589,8 @@ Carry out sensing:
 				say "Malygris is right here.[line break]";
 			otherwise:
 				say "There seems to be no available route towards Malygris.[line break]";
+
+Carry out sensing:
 	if greatest power of the player is greater than 3:
 		repeat with item running through not off-stage epic things:
 			if location of item is not location of the player and location of item is placed:
@@ -605,7 +731,7 @@ Check reading when the player is blind (this is the cannot read when blind rule)
 
 Chapter - Achievements Menu
 
-Achievemenuing is an action out of world.
+Achievemenuing is an action out of world. Achievemenuing is in-game menu-checking.
 
 Understand "achieve" and "achievements" as achievemenuing.
 
@@ -619,7 +745,7 @@ Carry out achievemenuing:
 
 Chapter - Enemies and Powers Menu
 
-Powermenuing is an action out of world.
+Powermenuing is an action out of world. Powermenuing is in-game menu-checking.
 
 Understand "enemies" and "powers" as powermenuing.
 
@@ -634,7 +760,7 @@ Carry out powermenuing:
 
 Chapter - The asking for help action (for use without Basic Help Menu by Emily Short)
 
-Asking for help is an action out of world.
+Asking for help is an action out of world. Asking for help is in-game menu-checking.
 Understand "help" or "hint" or "hints" or "about" or "info" as asking for help.
 Carry out asking for help (this is the help request rule): do nothing.
 
@@ -721,8 +847,8 @@ Include Basic Screen Effects by Emily Short.
 
 Table of Fancy Status
 left	central	right
-"[bold type][status location][roman type]"	"Tension: [tension]"	"Health: [health of the player]/[permanent health of the player]"
-"Special powers: [powers of the player]"
+" [bold type][status location][roman type]"	"Tension: [tension]"	"Health: [health of the player]/[permanent health of the player]"
+" Special powers: [powers of the player]"
 
 To say status location:
 	 let phrase be indexed text;
@@ -730,7 +856,10 @@ To say status location:
 	 say "[phrase][run paragraph on]".
 
 Rule for constructing the status line:
-	fill status bar with Table of Fancy Status;
+	if data value 7 is 1:
+		fill status bar with Table of Fancy Status;
+	otherwise:
+		center "[bold type][status location][roman type]" at row 1;
 	rule succeeds. 
 
 To say powers of the player:
@@ -751,6 +880,8 @@ The print standard inventory rule is not listed in any rulebook.
 
 Carry out taking inventory: 
 	take no time;
+
+Carry out taking inventory (this is the full inventory rule):
 	if the number of things had by the player is 0, say "You are empty-handed." instead; 
 	unless the number of weapons enclosed by the player is the number of natural weapons enclosed by the player:
 		say "You are carrying[line break][italic type]-weapons[roman type]: [line break]";

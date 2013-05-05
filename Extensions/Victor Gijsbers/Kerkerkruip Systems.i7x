@@ -242,22 +242,57 @@ Carry out collapsing:
 	say "With a huge crash, the [if noun is up or noun is down]staircase[otherwise]corridor[end if] collapses!".
 
 
+Section - Support for mapping
 
+To decide whether the map can be shown:
+	if glulx graphics is supported and glulx graphic-window mouse input is supported and glulx PNG transparency is supported:
+		decide yes;
+	decide no.
 
+[Kerkerkruip's REMEMBER command uses a room's visited status to list rooms. However, we might have a need for showing rooms on the map that haven't been visited yet.]
 
+A room can be map-revealed. A room is usually not map-revealed.
 
+[We may need to show enemies without actually mapping the rooms they are in. We still need to reserve space on the map for necessary rooms, however, and can do so by designating rooms to be "enemy-drawn".]
 
+A room can be enemy-revealed. A room is usually not enemy-revealed.
 
+[It might make sense for some rooms to be drawn as if they were tunnels; these would generally be linear rooms, such as a bridge.]
 
+A room can be tunnel-drawn. A room is usually not tunnel-drawn. A tunnel is usually tunnel-drawn.
 
+Definition: a room (called the place) is map-ready if the place is placed and (the place is visited or the place is map-revealed or the place is enemy-revealed).
 
+Extent-minimum-x is a number variable.
+Extent-maximum-x is a number variable.
+Extent-minimum-y is a number variable.
+Extent-maximum-y is a number variable.
+Extent-minimum-z is a number variable.
+Extent-maximum-z is a number variable.
 
-
-
-
-
-
-
+To calculate the extent of the dungeon:
+	now extent-minimum-x is 100;
+	now extent-maximum-x is -100;
+	now extent-minimum-y is 100;
+	now extent-maximum-y is -100;
+	now extent-minimum-z is 100;
+	now extent-maximum-z is -100;
+	repeat with place running through map-ready rooms:
+		let x be x-coordinate of place;
+		let y be y-coordinate of place;
+		let z be z-coordinate of place;
+		if x is greater than extent-maximum-x:
+			now extent-maximum-x is x;
+		if x is less than extent-minimum-x:
+			now extent-minimum-x is x;
+		if y is greater than extent-maximum-y:
+			now extent-maximum-y is y;
+		if y is less than extent-minimum-y:
+			now extent-minimum-y is y;
+		if z is greater than extent-maximum-z:
+			now extent-maximum-z is z;
+		if z is less than extent-minimum-z:
+			now extent-minimum-z is z.	
 
 
 Chapter - Size

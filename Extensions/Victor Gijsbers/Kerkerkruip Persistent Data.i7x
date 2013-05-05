@@ -19,6 +19,7 @@ Data entries (careful, may not be up to date!):
 	4: victories count for the purpose of unlocking content
 	5: main menu graphics desired (1 = yes, -1 = no) [code in Kerkerkruip Glimmr Additions.i7x]
 	6: session flag [code in Kerkerkruip Glimmr Additions.i7x]
+	7: window panels disabled (0 = enabled, 1 = disabled)
 ]
 
 The File of Data Storage is called "KerkerkruipStorage".
@@ -51,7 +52,7 @@ To decide which number is data value (X - a number):
 	otherwise:
 		decide on 0;
 
-To set data value (X - a number) to (Y - a number), table only:
+To set data value (X - a number) to (Y - a number), table only (this is data-value setting):
 	if there is a key of X in the Table of Data Storage:
 		choose row with a key of X in the Table of Data Storage;
 	otherwise:
