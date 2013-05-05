@@ -356,7 +356,7 @@ Figure of card-Tentacle is the file "card_Tentacle.jpg".
 [Placeholders]
 Figure of card_Malygris is the file "card_Malygris.jpg".
 Figure of card_Bodmall is the file "card_Bodmall.jpg".
-Figure of card_Fanatics-of-Aite is the file "card_Fanatics-of-Aite.jpg".
+Figure of healer of Aite is the file "card_Fanatics-of-Aite.jpg".
 Figure of card_Minotaur is the file "card_Minotaur.jpg".
 Figure of card_Hound is the file "card_Hound.jpg".
 Figure of card_Demon-of-Rage is the file "card_Demon-of-Rage.jpg".
@@ -481,7 +481,8 @@ Figure of map_legend_demonic_mistress is the file "map_legend_demonic_mistress.p
 Figure of map_text_title is the file "map_text_title.png".
 Figure of map_text_legend_title is the file "map_text_legend_title.png".
 Figure of map_text_any_key is the file "map_text_any_key.png".
-Figure of map_text_arrow_keys is the file "map_text_arrow_keys.png".Figure of map_text_compass_rose is the file "map_text_compass_rose.png".
+Figure of map_text_arrow_keys is the file "map_text_arrow_keys.png".
+Figure of map_text_compass_rose is the file "map_text_compass_rose.png".
 Figure of map_ellipsis is the file "map_ellipsis.png".
 
 Figure of map_button_down_arrow_active is the file "map_button_down_arrow_active.png".
@@ -491,7 +492,8 @@ Figure of map_button_left_arrow_inactive is the file "map_button_left_arrow_inac
 Figure of map_button_right_arrow_active is the file "map_button_right_arrow_active.png".
 Figure of map_button_right_arrow_inactive is the file "map_button_right_arrow_inactive.png".
 Figure of map_button_up_arrow_active is the file "map_button_up_arrow_active.png".
-Figure of map_button_up_arrow_inactive is the file "map_button_up_arrow_inactive.png".
+Figure of map_button_up_arrow_inactive is the file "map_button_up_arrow_inactive.png".
+
 
 
 Chapter - Mini-movie definitions
