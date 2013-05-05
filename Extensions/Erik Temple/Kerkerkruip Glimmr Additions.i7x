@@ -356,7 +356,7 @@ Figure of card-Tentacle is the file "card_Tentacle.jpg".
 [Placeholders]
 Figure of card_Malygris is the file "card_Malygris.jpg".
 Figure of card_Bodmall is the file "card_Bodmall.jpg".
-Figure of healer of Aite is the file "card_Fanatics-of-Aite.jpg".
+Figure of card_healer_of_Aite is the file "card_Fanatics-of-Aite.jpg".
 Figure of card_Minotaur is the file "card_Minotaur.jpg".
 Figure of card_Hound is the file "card_Hound.jpg".
 Figure of card_Demon-of-Rage is the file "card_Demon-of-Rage.jpg".
