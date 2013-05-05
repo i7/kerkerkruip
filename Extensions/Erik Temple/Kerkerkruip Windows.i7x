@@ -229,7 +229,7 @@ power of the hound	mind	--
 power of the mindslug	mind	spirit
 power of the tentacle	mind	--
 power of the minotaur	body	--
-power of the healer of Aite	spirit	--
+power of the Fanatics of Aite	spirit	--
 power of Bodmall	body	--
 
 

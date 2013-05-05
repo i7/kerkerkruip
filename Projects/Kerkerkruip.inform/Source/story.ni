@@ -49,10 +49,10 @@ Include Kerkerkruip Start and Finish by Victor Gijsbers.
 Include Kerkerkruip Final Declarations by Victor Gijsbers.
 
 
-Use MAX_PROP_TABLE_SIZE of 500000.
+Use MAX_PROP_TABLE_SIZE of 800000.
 Use MAX_OBJ_PROP_COUNT of 256.
 Use MAX_STATIC_DATA of 500000.
-Use MAX_OBJECTS of 650.
+Use MAX_OBJECTS of 800.
 Use MAX_SYMBOLS of 30000.
 
 The maximum score is 18. [1 + 1 + 2 + 2 + 3 + 4 + 5 = 18]
