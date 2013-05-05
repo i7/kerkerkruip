@@ -250,7 +250,7 @@ Section - Adding menu screen graphics to the Options menu (for use with Kerkerkr
 
 Table of Options Menu (continued)
 title	subtable	description	toggle 
-"Toggle menu graphics (will restart the game)"	--	--	the toggle menu graphics rule
+"Toggle menu graphics"	--	--	the toggle menu graphics rule
 
 This is the toggle menu graphics rule:
 	if data value 5 is 1:
