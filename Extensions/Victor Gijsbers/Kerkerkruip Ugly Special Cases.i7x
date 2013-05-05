@@ -34,14 +34,13 @@ Test with: The player carries a scroll of alteration. The player carries a scrol
 
 purloin analyser / drop analyser / put scroll in analyser / 2.
 
-See issue #]
+See issue #59]
 
 Include (-
 
-Global hold = 0;
-
-[ Descriptors  o x flag cto type n;
+[ Descriptors  o x flag cto type n hold signal;
 	hold = 0;
+	signal = 0;
 	ResetDescriptors();
 	if (wn > num_words) return 0;
 
@@ -74,11 +73,13 @@ Global hold = 0;
 		if (o == OTHER1__WD or OTHER2__WD or OTHER3__WD) {
 			indef_mode = 1; flag = 1;
 			indef_type = indef_type | OTHER_BIT;
+			signal = 1;
 		}
 		if (o == ALL1__WD or ALL2__WD or ALL3__WD or ALL4__WD or ALL5__WD) {
 			indef_mode = 1; flag = 1; indef_wanted = INDEF_ALL_WANTED;
 			if (take_all_rule == 1) take_all_rule = 2;
 			indef_type = indef_type | PLURAL_BIT;
+			signal = 1;
 		}
 		if (allow_plurals) {
 			if (NextWordStopped() ~= -1) { wn--; n = TryNumber(wn-1); } else { n=0; wn--; }
@@ -98,7 +99,12 @@ Global hold = 0;
 	wn--;
 	if (hold == 1) {
 		hold=0;
-		wn--;
+		if (signal == 0) {
+			wn--;
+		}
+		else {
+			signal = 0;
+		}
 	}
 	return 0;
 ];
