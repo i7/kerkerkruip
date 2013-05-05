@@ -23,7 +23,7 @@ To create the dungeon:
 		if generation info is true, say "[paragraph break]";
 		approve the map;
 		if map approved is false:
-			print generation message "    Map rejected.";
+			print generation message "    Map rejected. ";
 	print generation message "Placing monsters...";
 	place monsters;
 	if generation info is true, say "[paragraph break]";

@@ -12,6 +12,13 @@ g-header-color	14540253
 g-humanist-crimson	10231552
 
 
+Chapter - Parser error fix
+[When we print to multiple windows, the Inform default library's automatic spacing routines are fooled. So we need to readjust spacing. Also, Kerkerkruip seems to call the printing a parser error activity twice for each parser error (once w/an empty message, followed by a second time in which the message is printed), hence the odd cycling here, to avoid printing spaces both before and after the error message.]
+
+After printing a parser error:
+	say "[one of][run paragraph on][or][line break][run paragraph on][cycling]"
+
+
 Chapter - Window definitions
 
 
@@ -56,6 +63,8 @@ The border-8-window is a graphics g-window spawned by the inventory-window. The 
 The border-9-window is a graphics g-window spawned by the inventory-window. The measurement is 2. The position is g-placeleft. The scale method is g-fixed-size.  The back-colour is g-white.
 
 The border-10-window is a graphics g-window spawned by the inventory-window. The measurement is 6. The position is g-placeright. The scale method is g-fixed-size.  The back-colour is g-white.
+
+The border-11-window is a graphics g-window spawned by the inventory-window. The measurement is 2. The position is g-placebelow. The scale method is g-fixed-size.  The back-colour is g-white.
 
 
 Section - Window styling
@@ -268,7 +277,7 @@ Section - Inventory window
 	
 Window-drawing rule for the inventory-window when the inventory-window is g-present (this is the construct inventory window rule):
 	move focus to inventory-window, clearing the window;
-	consider the full inventory rule; 
+	try taking inventory; 
 	say run paragraph on;
 	return to main screen.
 
@@ -324,6 +333,7 @@ To open side windows:
 	open up the inventory-window;
 	place border border-9-window;
 	place border border-10-window;
+	place border border-11-window;
 	open up the inventory-header-window;
 	place border border-8-window.
 	
