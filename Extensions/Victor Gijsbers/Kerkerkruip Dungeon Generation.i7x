@@ -767,7 +767,7 @@ First treasure placement rule (this is the remove rare items rule):
 A treasure placement rule (this is the stock minor treasure rule):
 	print generation message "    Placing minor treasures...";
 	let n be the number of off-stage not-too-difficult minor things;
-	let m be a random number between 6 and 12;
+	let m be a random number between 7 and 14;
 	if m is greater than n, now m is n;
 	repeat with i running from 1 to m:
 		let stuff be a random off-stage not-too-difficult minor thing;
@@ -779,7 +779,7 @@ A treasure placement rule (this is the stock minor treasure rule):
 A treasure placement rule (this is the stock major treasure rule):
 	print generation message "    Placing major treasures...";
 	let n be the number of off-stage not-too-difficult major things;
-	let m be a random number between 3 and 6;
+	let m be a random number between 4 and 6;
 	if m is greater than n, now m is n;
 	repeat with i running from 1 to m:
 		let stuff be a random off-stage not-too-difficult major thing;

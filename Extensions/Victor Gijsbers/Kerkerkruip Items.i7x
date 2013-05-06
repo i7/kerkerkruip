@@ -2068,6 +2068,18 @@ The second-small-scroll-of-remove-curse-pack is a minor treasure pack.
 The second-small-scroll-of-remove-curse-pack is civilised.
 One scroll of curse removal is in the second-small-scroll-of-remove-curse-pack.
 
+Section - Mapping (minor)
+
+The small-scroll-of-mapping-pack is a minor treasure pack.
+The small-scroll-of-mapping-pack is civilised.
+One scroll of mapping is in the small-scroll-of-mapping-pack.
+
+Section - Psycholocation (minor)
+
+The small-scroll-of-psycholocation-pack is a minor treasure pack.
+The small-scroll-of-psycholocation-pack is civilised.
+One scroll of psycholocation is in the small-scroll-of-psycholocation-pack.
+
 Section - Remove curse, large (major)
 
 The large-scroll-of-remove-curse-pack is a major treasure pack.
@@ -2193,8 +2205,13 @@ Two scrolls of shadows are in the thief-scroll-pack.
 One scroll of teleportation is in the thief-scroll-pack.
 [One scroll of etherealness is in the thief-scroll-pack.]
 
+Section - Knowing [knowledge, mapping, psycholocation], (major)
 
-
+The knowing-scroll-pack is a major treasure pack.
+The knowing-scroll-pack is civilised.
+One scroll of knowledge is in the knowing-scroll-pack.
+One scroll of mapping is in the knowing-scroll-pack.
+One scroll of psycholocation is in the knowing-scroll-pack.
 
 
 Chapter - Magical guides
