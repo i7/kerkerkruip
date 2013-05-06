@@ -720,6 +720,10 @@ First monster placement possible rule (this is the only monsters of the right le
 Monster placement possible rule (this is the do not use monsters that are not yet unlocked rule):
 	if the unlock level of considered monster is greater than the unlock score:
 		rule fails.
+		
+Monster placement possible rule (this is the do not use groupers rule):
+	if considered monster is grouper:
+		rule fails.		
 
 Last monster placement possible rule:
 	rule succeeds.
