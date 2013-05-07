@@ -280,7 +280,7 @@ Section - Inventory window
 	
 Window-drawing rule for the inventory-window when the inventory-window is g-present (this is the construct inventory window rule):
 	move focus to inventory-window, clearing the window;
-	try taking inventory; 
+	consider the full inventory rule; 
 	say run paragraph on;
 	return to main screen.
 

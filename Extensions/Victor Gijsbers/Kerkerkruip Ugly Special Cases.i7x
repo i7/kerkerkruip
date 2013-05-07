@@ -26,7 +26,7 @@ Kerkerkruip Ugly Special Cases ends here.
 
 
 
-Chapter - Fixing Numbered Disambiguation Choices
+Chapter - Fixing Numbered Disambiguation Choices (for use with Numbered Disambiguation Choices by Aaron Reed)
 
 [Hopefully, we can kick this out when Inform is updated!
 

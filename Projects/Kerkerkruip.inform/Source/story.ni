@@ -15,7 +15,8 @@ Include Glulx Status Window Control by Erik Temple.
 
 [Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. Be sure to comment Flexible Windows in instead!]
 Include Kerkerkruip Glimmr Additions by Erik Temple.
-[Include Flexible Windows by Jon Ingold.]
+[Include Flexible Windows by Jon Ingold.
+Include FIxed Points Maths by Michael Callaghan.]
 Include Kerkerkruip Windows by Erik Temple.
 Include Extended Debugging by Erik Temple.
 
