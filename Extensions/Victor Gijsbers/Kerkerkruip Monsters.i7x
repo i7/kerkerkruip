@@ -3931,7 +3931,7 @@ Check calling:
 Check calling:
 	if the noun is not seen:
 		take no time;
-		say "You haven't yet established visual contact with [the noun].".
+		say "You haven't yet established visual contact with [the noun]." instead.
 
 Check calling:
 	if the level of the noun is greater than 4:
