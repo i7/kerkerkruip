@@ -467,7 +467,7 @@ To say map description:
 			let max-count be count;
 			repeat with place running through unvisited placed not nogo not teleportable rooms that are not the location:
 				decrement count;
-				say ", [if max-count is greater than 1]one[end if]([place]) [triaxial way from location to place][run paragraph on]";
+				say ", [if max-count is greater than 1]one[end if] [triaxial way from location to place][run paragraph on]";
 			say ". [run paragraph on]";
 	say "[line break]"
 
