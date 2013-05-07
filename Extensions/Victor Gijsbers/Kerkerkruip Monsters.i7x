@@ -3784,7 +3784,7 @@ To decide which number is the overmind bonus of (guy - a person):
 	otherwise if power of the overmind is granted:
 		if guy is not the player:
 			unless faction of the player hates faction of guy:
-				let n be (final mind of the player) / 6;
+				let n be (final mind of the player) / 5;
 				decide on n;
 	decide on 0.
 
@@ -3897,7 +3897,7 @@ Section - Power of the overmind
 The power of the overmind is a power. The overmind grants power of the overmind.
 The power level of power of the overmind is 4.
 The command text of power of the overmind is "call".
-The description of power of the overmind is "Type: active and passive ability.[paragraph break]Command: call [italic type]someone[roman type].[paragraph break]You can call any person in the game, except Malygris. Calling someone will make that person move one room towards you, if possible.[paragraph break]In addition, the power of the overmind makes your allies more powerful. They get an attack and defence bonus equal to mind/6."
+The description of power of the overmind is "Type: active and passive ability.[paragraph break]Command: call [italic type]someone[roman type].[paragraph break]You can call any person in the game, except Malygris. Calling someone will make that person move one room towards you, if possible.[paragraph break]In addition, the power of the overmind makes your allies more powerful. They get an attack and defence bonus equal to mind/5."
 	
 Absorbing power of the overmind:
 	increase melee of the player by 2;
