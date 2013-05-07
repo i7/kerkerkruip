@@ -1090,7 +1090,7 @@ Absorbing power of the wisps:
 	increase melee of the player by 1;
 	increase defence of the player by 1;
 	increase permanent health of the player by 6;
-	say "As the wisps of pain are destroyed, you feel the soul that animated it absorbed into your own body. This causes you immediate and seemingly permanent [bold type]pain[roman type]! ([bold type]Power of the wisps[roman type]: +1 attack, +1 defence, +16 health, the [italic type]torment[roman type] skill, and pain.)[paragraph break]".
+	say "As the wisps of pain are destroyed, you feel the soul that animated it absorbed into your own body. This causes you immediate and seemingly permanent [bold type]pain[roman type]! ([bold type]Power of the wisps[roman type]: +1 attack, +1 defence, +6 health, the [italic type]torment[roman type] skill, and pain.)[paragraph break]".
 
 Repelling power of the wisps:
 	decrease melee of the player by 1;
