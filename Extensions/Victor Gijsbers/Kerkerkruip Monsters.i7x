@@ -3818,7 +3818,8 @@ An AI action selection rule for the at-Act overmind (this is the overmind doesnt
 
 An AI action selection rule for the overmind (this is the overmind concentration select rule):
 	choose row with an Option of the action of the overmind concentrating in the Table of AI Action Options;
-	increase the Action Weight entry by (2 * potential overmind allies);
+	if a random chance of 2 in 3 succeeds:
+		increase the Action Weight entry by (2 * potential overmind allies);
 	if concentration of the overmind is 2:
 		increase Action weight entry by 4.
 
