@@ -1727,7 +1727,7 @@ Carry out feeding:
 		if total blood magic is greater than 49:
 			award achievement Give them blood.
 
-After printing the name of a thing (called item) while taking inventory:
+After printing the name of a thing (called item) while stock-taking:
 	if blood magic cost of item is not 0:
 		if blood magic level of item is not blood magic maximum of item:
 			say " (can be fed [current blood cost of item] blood)".

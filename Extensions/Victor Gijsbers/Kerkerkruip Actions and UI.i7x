@@ -878,12 +878,21 @@ Section - Inventory
 
 The print empty inventory rule is not listed in any rulebook.
 The print standard inventory rule is not listed in any rulebook.
+The readied inventory listing rule is not listed in any rulebook.
 
 Carry out taking inventory: 
 	take no time;
 
+Stock-taking is an activity.
+
 Carry out taking inventory (this is the full inventory rule):
-	if the number of things had by the player is 0, say "You are empty-handed." instead; 
+	if the number of things had by the player is 0, say "You are empty-handed." instead;
+	carry out the stock-taking activity.
+
+After printing the name of a readied weapon while stock-taking (this is the readied stock listing rule):
+	say " (readied)".
+
+For stock-taking:
 	unless the number of weapons enclosed by the player is the number of natural weapons enclosed by the player:
 		say "You are carrying[line break][italic type]-weapons[roman type]: [line break]";
 		now all things enclosed by the player are unmarked for listing; 
