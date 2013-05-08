@@ -813,7 +813,7 @@ Table of Image String Boxes
 image-rendered string	origin	associated font	text-string	display status
 current-difficulty	{144, 650}	Humanist-small-crimson	"(0)"	g-active
 highest-difficulty	{416, 650}	Humanist-small-crimson	"(0)"	g-active
-
+total-victories	{501, 673}	Humanist-small-crimson	"0"	g-active
 
 
 Chapter - Monster cards
@@ -946,7 +946,8 @@ To prepare difficulty levels for display:
 	let best-level be data value 3;
 	now the image-ID of Best-Difficulty-slug is the the proper slug for best-level;
 	now entry 1 of the origin of highest-difficulty is 416 + (image-width of the image-ID of Best-Difficulty-slug);
-	now the text-string of highest-difficulty is "([best-level])".
+	now the text-string of highest-difficulty is "([best-level])";
+	now the text-string of total-victories is "[data value 1]";
 
 To decide which figure name is the proper slug for (n - a number):
 	if n is 0:
@@ -1871,6 +1872,7 @@ Summary of menu graphic elements and their z-ordering:
 	command-container
 	current-difficulty
 	highest-difficulty
+	total-victories
 	-- monster cards only --
 	kill-counter (4)
 	death-counter (4)
