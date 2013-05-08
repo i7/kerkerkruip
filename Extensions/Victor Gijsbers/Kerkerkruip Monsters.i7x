@@ -1090,7 +1090,7 @@ Absorbing power of the wisps:
 	increase melee of the player by 1;
 	increase defence of the player by 1;
 	increase permanent health of the player by 6;
-	say "As the wisps of pain are destroyed, you feel the soul that animated it absorbed into your own body. This causes you immediate and seemingly permanent [bold type]pain[roman type]! ([bold type]Power of the wisps[roman type]: +1 attack, +1 defence, +16 health, the [italic type]torment[roman type] skill, and pain.)[paragraph break]".
+	say "As the wisps of pain are destroyed, you feel the soul that animated it absorbed into your own body. This causes you immediate and seemingly permanent [bold type]pain[roman type]! ([bold type]Power of the wisps[roman type]: +1 attack, +1 defence, +6 health, the [italic type]torment[roman type] skill, and pain.)[paragraph break]".
 
 Repelling power of the wisps:
 	decrease melee of the player by 1;
@@ -3784,7 +3784,7 @@ To decide which number is the overmind bonus of (guy - a person):
 	otherwise if power of the overmind is granted:
 		if guy is not the player:
 			unless faction of the player hates faction of guy:
-				let n be (final mind of the player) / 6;
+				let n be (final mind of the player) / 5;
 				decide on n;
 	decide on 0.
 
@@ -3818,7 +3818,8 @@ An AI action selection rule for the at-Act overmind (this is the overmind doesnt
 
 An AI action selection rule for the overmind (this is the overmind concentration select rule):
 	choose row with an Option of the action of the overmind concentrating in the Table of AI Action Options;
-	increase the Action Weight entry by (2 * potential overmind allies);
+	if a random chance of 2 in 3 succeeds:
+		increase the Action Weight entry by (2 * potential overmind allies);
 	if concentration of the overmind is 2:
 		increase Action weight entry by 4.
 
@@ -3896,7 +3897,7 @@ Section - Power of the overmind
 The power of the overmind is a power. The overmind grants power of the overmind.
 The power level of power of the overmind is 4.
 The command text of power of the overmind is "call".
-The description of power of the overmind is "Type: active and passive ability.[paragraph break]Command: call [italic type]someone[roman type].[paragraph break]You can call any person in the game, except Malygris. Calling someone will make that person move one room towards you, if possible.[paragraph break]In addition, the power of the overmind makes your allies more powerful. They get an attack and defence bonus equal to mind/6."
+The description of power of the overmind is "Type: active and passive ability.[paragraph break]Command: call [italic type]someone[roman type].[paragraph break]You can call any person in the game, except Malygris. Calling someone will make that person move one room towards you, if possible.[paragraph break]In addition, the power of the overmind makes your allies more powerful. They get an attack and defence bonus equal to mind/5."
 	
 Absorbing power of the overmind:
 	increase melee of the player by 2;
@@ -3930,7 +3931,7 @@ Check calling:
 Check calling:
 	if the noun is not seen:
 		take no time;
-		say "You haven't yet established visual contact with [the noun].".
+		say "You haven't yet established visual contact with [the noun]." instead.
 
 Check calling:
 	if the level of the noun is greater than 4:
