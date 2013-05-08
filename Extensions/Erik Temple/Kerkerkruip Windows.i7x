@@ -205,6 +205,8 @@ Hyperlink processing rule when the current hyperlink window is the stats-window 
 
 
 Section - Powers window
+
+Power-tip-text is a text variable.
 	
 Window-drawing rule for the powers-window when the powers-window is g-present (this is the construct power window rule):
 	move focus to powers-window, clearing the window;
@@ -219,13 +221,40 @@ Window-drawing rule for the powers-window when the powers-window is g-present (t
 				choose row with power of ability from the Table of Enemy Powers;
 				say " ([faculty1 entry][if there is a faculty2 entry] & [faculty2 entry][end if])[run paragraph on]";
 			say "[line break]";
-	if pow < 3:
+	if pow < 3 and (turn count is less than 2 or the remainder after dividing turn count by 50 is 0):
 		if data value 1 < 3:
-			say "[line break][italic type]Tip:[roman type] [one of]Every dungeon contains seven monsters with a positive level: two level 1 monsters, two level 2 monsters, and one each of levels 3, 4 and 5[or]When you absorb an enemy's soul, it fully heals you, increases your statistics, and grants you a special power[or]Health bonuses belong to powers. If you lose a power, you will also lose the health bonus that comes with it[or]When you absorb the soul of a monster of a certain level, all souls of the same or a lower level are immediately driven out of your body[or]Level 0 monsters never grant you health or powers[or]Some monsters form groups, and you will have to kill the entire group before power transferal happens[or]Maximising the number of souls you have at your disposal by choosing the right order in which to kill the monsters is one of the keys to success in [italic type]Kerkerkruip[roman type][at random]."; 
+			choose a random row from the Table of Beginner Tips;
+			now power-tip-text is tip entry;
 		otherwise:
-			say "[line break][italic type]Tip:[roman type] [one of]You can now snort ment in combat[or]Examining a monster will reveal its health[or]Balance body, mind and spirit to maximise your chance of rolling 20[or]Most scrolls won't hurt you, so experimenting can pay off[or]The goddess Sul can help you with cursed items[or]Fragmentation grenades will break people's concentration[or]The power of the bomb will automatically choose the best victim[or]If you want to see all items and monsters, use the unlock everything option in the menu[or]The [italic type]roll[roman type] action is a more risky, but potentially more rewarding, version of the [italic type]dodge[roman type] action[or]You can sacrifice your concentration for a more powerful [italic type]parry[roman type] by choosing the [italic type]block[roman type] action[at random].";
-	say run paragraph on;
+			choose a random row from the Table of Expert Tips;
+			now power-tip-text is tip entry; 
+	say "[line break][italic type]Tip:[roman type] [power-tip-text]";
+	say "[run paragraph on]";
 	return to main screen.
+
+Table of Beginner Tips
+tip
+"Every dungeon contains seven monsters with a positive level: two level 1 monsters, two level 2 monsters, and one each of levels 3, 4 and 5."
+"When you absorb an enemy's soul, it fully heals you, increases your statistics, and grants you a special power."
+"Health bonuses belong to powers. If you lose a power, you will also lose the health bonus that comes with it."
+"When you absorb the soul of a monster of a certain level, all souls of the same or a lower level are immediately driven out of your body."
+"Level 0 monsters never grant you health or powers."
+"Some monsters form groups, and you will have to kill the entire group before power transferal happens."
+"Maximising the number of souls you have at your disposal by choosing the right order in which to kill the monsters is one of the keys to success in [italic type]Kerkerkruip[roman type]."
+
+Table of Expert Tips
+tip
+"You can now snort ment in combat."
+"Examining a monster will reveal its health."
+"Balance body, mind and spirit to maximise your chance of rolling 20."
+"Most scrolls won't hurt you, so experimenting can pay off."
+"The goddess Sul can help you with cursed items."
+"Fragmentation grenades will break people's concentration."
+"The power of the bomb will automatically choose the best victim."
+"If you want to see all items and monsters, use the unlock everything option in the menu."
+"The [italic type]roll[roman type] action is a more risky, but potentially more rewarding, version of the [italic type]dodge[roman type] action."
+"You can sacrifice your concentration for a more powerful [italic type]parry[roman type] by choosing the [italic type]block[roman type] action."
+
 
 Window-drawing rule for the powers-header-window when the powers-header-window is g-present (this is the construct powers header window rule):
 	move focus to powers-header-window, clearing the window;
