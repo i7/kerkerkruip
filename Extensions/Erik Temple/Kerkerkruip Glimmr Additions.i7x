@@ -813,7 +813,7 @@ Table of Image String Boxes
 image-rendered string	origin	associated font	text-string	display status
 current-difficulty	{144, 650}	Humanist-small-crimson	"(0)"	g-active
 highest-difficulty	{416, 650}	Humanist-small-crimson	"(0)"	g-active
-total-victories	{501, 673}	Humanist-small-crimson	"0"	g-active
+total-victories	{488, 674}	Humanist-small-crimson	"0"	g-active
 
 
 Chapter - Monster cards
