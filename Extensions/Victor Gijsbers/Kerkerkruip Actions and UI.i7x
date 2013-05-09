@@ -136,6 +136,8 @@ Chapter - Going to
 Going to is an action applying to one object.
 Understand "go to [any visited room]" and "go [any visited room]" and "[any visited room]" as going to.
 Understand "go to [any seen person]" and "go [any seen person]" and "[any seen person]" as going to.
+
+Does the player mean going to a not alive person: it is unlikely.
 [ Should we also allow going to things? ]
 
 Null-Room is a room. "You should never see this text. That would be a BUG." Null-Room is not placeable.
