@@ -624,10 +624,10 @@ Every turn when at least one thing is in the armadillo stomach:
 	repeat with item running through things in the armadillo stomach:
 		corrode item.
 
-To do the armadillo stomach trick:
-	if at least one thing is in the armadillo stomach:
-		repeat with item running through things in the armadillo stomach:
-			move item to the location of the ravenous armadillo.
+Disappearing the ravenous armadillo:
+	while at least one thing is in the armadillo stomach:
+		let item be a random thing in the armadillo stomach;
+		move item to the location of the ravenous armadillo.
 
 The armadillo stomach is privately-named.
 
@@ -660,7 +660,6 @@ The command text of power of the armadillo is "scales[if scales-cooldown is not 
 The description of power of the armadillo is "Type: reactive combat ability.[paragraph break]Command: scales.[paragraph break]Effect: As a reaction, you can use the scales skill to cover yourself in damage absorbing scales. The damage of the current attack will be reduced by 5 + body/3 points. This ability has a cooldown of 10 - spirit/4 turns."
 
 Absorbing power of the armadillo:
-	do the armadillo stomach trick;
 	increase melee of the player by 1;
 	increase permanent health of the player by 5;
 	say "As the armadillo succumbs, you feel its soul absorbed into your own body. ([bold type]Power of the armadillo[roman type]: +1 attack, +1 damage resistance, +5 health, and the [italic type]scales[roman type] skill, which allows you to cover yourself in hard scales.)[paragraph break]".

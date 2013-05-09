@@ -534,6 +534,7 @@ To heal fully because (guy - a person) is slain:
 		do the level 10 victory with guy.
 
 To have (guy - a person) disappear:
+	consider the disappearing rules for guy;
 	let X be the holder of guy;
 	unless X is nothing:
 		repeat with Y running through things had by guy:
@@ -553,7 +554,7 @@ To do achievement awarding for (guy - a person):
 	if level of guy is 4:
 		award achievement destroyer.
 
-
+Disappearing is a person based rulebook.
 Absorbing is a power based rulebook.
 Repelling is a power based rulebook.
 
