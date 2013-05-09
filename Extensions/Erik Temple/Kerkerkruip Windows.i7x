@@ -325,15 +325,15 @@ Window-drawing rule for the inventory-header-window when the inventory-header-wi
 
 Chapter - Opening and closing windows
 
-Toggling window panels is an action out of world. Understand "toggle info panels" or "info panels" or "toggle information panels" or "information panels" as toggling window panels.
+Toggling window panels is an action out of world. Understand "toggle info panels" or "info panels" or "toggle information panels" or "information panels" or "panels" as toggling window panels.
 
-Understand "disable info panels" or "disable information panels" as toggling window panels when data value 7 is 0.
+Understand "disable panels" or "disable info panels" or "disable information panels" as toggling window panels when data value 7 is 0.
 
-Understand "enable info panels" or "enable information panels" as toggling window panels when data value 7 is 1.
+Understand "enable panels" or "enable info panels" or "enable information panels" as toggling window panels when data value 7 is 1.
 
-Understand "disable info panels" or "disable information panels" as a mistake ("The information panels are already disabled.") when data value 7 is 1.
+Understand "disable panels" or "disable info panels" or "disable information panels" as a mistake ("The information panels are already disabled.") when data value 7 is 1.
 
-Understand "enable info panels" or "enable information panels" as a mistake ("The information panels are already enabled.") when data value 7 is 0.
+Understand "enable panels" or "enable info panels" or "enable information panels" as a mistake ("The information panels are already enabled.") when data value 7 is 0.
 
 Carry out toggling window panels:
 	close the status window;
@@ -341,12 +341,12 @@ Carry out toggling window panels:
 		set data value 7 to 0;
 		open side windows;
 		open the status window;
-		say "The information panels have been enabled. Type INFO PANELS to disable them again.";
+		say "The information panels have been enabled. Type PANELS to disable them again.";
 	otherwise:
 		set data value 7 to 1;
 		close side windows;
 		open the status window;
-		say "The information panels have been disabled. Type INFO PANELS to re-enable them."
+		say "The information panels have been disabled. Type PANELS to re-enable them."
 
 	
 To open side windows:
@@ -382,10 +382,10 @@ Section - Events
 
 Last when play begins (this is the check info panel capacity rule):
 	if data value 7 is 1:
-		say "[bracket]Information panels are disabled. Type INFO PANELS to enable them.[close bracket][line break][run paragraph on]";
+		say "[bracket]Information panels are disabled. Type PANELS to enable them.[close bracket][line break][run paragraph on]";
 	if data value 7 is 0:
 		if width of the main-window is less than 102 or height of the main-window is less than 34:
-			say "[bracket]Your game window is too small for you to use the information panels comfortably. Maximize your window, then type INFO PANELS to enable them.[close bracket][line break][run paragraph on]";
+			say "[bracket]Your game window is too small for you to use the information panels comfortably. Maximize your window, then type PANELS to enable them.[close bracket][line break][run paragraph on]";
 			set data value 7 to 1;
 	follow the open up game windows rule.
 
