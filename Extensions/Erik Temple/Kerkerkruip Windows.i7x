@@ -141,7 +141,9 @@ Short status rule (this is the combat basics short status rule):
 	if ment timer is greater than 0:
 		say "[bold type]Ment[roman type]: +[ment bonus] attack, +[ment bonus] damage, -[ment bonus] enemy damage, +[ment bonus] defence, +[ment bonus] abilities.[line break][run paragraph on]";
 	if ment timer is 0 and ment addiction is greater than 0:
-		say "[bold type]Down[roman type]: -[ment addiction] attack, -[ment addiction] abilities[line break][line break][run paragraph on]".
+		say "[bold type]Down[roman type]: -[ment addiction] attack, -[ment addiction] abilities[line break][line break][run paragraph on]";
+	if the location is the Tungausy Sweat Lodge and incensemod is not 0:
+		say "[bold type]Incense[roman type]: -[incensemod] attack.".
 
 Short status rule (this is the attributes short status rule):[start with "human" vs undead, and use commas before each subsequent item.]
 	say "You are [if current form is ghoul-form]a ghoul[else if current form is vampire-form]a vampire[else if current form is vampirebat-form]a vampire bat[else if the player is undead]undead[else]human[end if][run paragraph on]";
