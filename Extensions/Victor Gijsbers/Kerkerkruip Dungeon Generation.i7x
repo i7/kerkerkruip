@@ -88,7 +88,7 @@ Definition: an object is unlockable if its unlock level is greater than 0.
 An object has some text called the unlock text. The unlock text of an object is usually "which the developers forgot to describe here".
 An object has a truth state called the unlock hidden switch. The unlock hidden switch of an object is usually false. [Set to true if the object should not announce its unlocking.]
 
-Section - Testobjects - Not for release
+Section - Testobjects
 
 An object can be testobject or not testobject. An object is usually not testobject.
 
@@ -115,7 +115,7 @@ A monster placement scoring rule (this is the testobject monster scoring rule):
 		increase current monster score by 10.
 
 Last treasure placement rule (this is the stock testobject things rule):
-	print generation message "    Placing testobjects...";
+	if generation info is true, print generation message "    Placing testobjects...";
 	let n be the number of off-stage testobject things;
 	repeat with i running from 1 to n:
 		let stuff be a random off-stage testobject thing;
@@ -197,7 +197,11 @@ Creating the map rule (this is the locate and connect all rooms rule):
 		let z be the z way of place;
 		if the space at x by y by z is free:
 			let chosen room be a suitable room from place at x by y by z;
-			place chosen room from place at x by y by z.
+			place chosen room from place at x by y by z;
+	while more than one testobject room is not placed:
+		let place be a random not placed testobject room;
+		let place2 be a random placed room;
+		place place next to place2.
 
 Section - Adding tunnels
 
