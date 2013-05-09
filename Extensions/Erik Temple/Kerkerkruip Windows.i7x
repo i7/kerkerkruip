@@ -41,8 +41,9 @@ Section - Border windows
 [These windows will only be visible in interpreters that support graphics, and are not essential to the interface.]
 
 To place border (win - a graphics g-window):
-	if glulx graphics is supported:
-		open up win.
+	do nothing.
+	[if glulx graphics is supported:
+		open up win.]
 
 The border-1-window is a graphics g-window spawned by the main-window. The measurement is 6. The position is g-placeright. The scale method is g-fixed-size.  The back-colour is g-white.
 
@@ -221,8 +222,8 @@ Window-drawing rule for the powers-window when the powers-window is g-present (t
 				choose row with power of ability from the Table of Enemy Powers;
 				say " ([faculty1 entry][if there is a faculty2 entry] & [faculty2 entry][end if])[run paragraph on]";
 			say "[line break]";
-	if pow < 3 and (turn count is less than 2 or the remainder after dividing turn count by 50 is 0):
-		if data value 1 < 3:
+	if pow < 3 and (turn count is less than 2 or the remainder after dividing turn count by 30 is 0):
+		if a random chance of 3 in ((data value 1) + 4) succeeds: [Expert tips show up more often when number of victories is higher.]
 			choose a random row from the Table of Beginner Tips;
 			now power-tip-text is tip entry;
 		otherwise:
