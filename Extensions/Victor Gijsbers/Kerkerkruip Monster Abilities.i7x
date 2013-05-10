@@ -425,7 +425,9 @@ To decide whether teleportation is impossible for (guy - a person):
 		decide no.
 
 A teleport impossible rule (this is the no teleportation outside the dungeon rule):
-	if x-coordinate of (the location of the test subject) is 100:
+	if test subject is off-stage:
+		rule succeeds;
+	otherwise if x-coordinate of (the location of the test subject) is 100:
 		rule succeeds.
 
 [Finally, it need not be obvious to a person that teleportation is impossible. If a person is a teleport impossible aware, he does.]

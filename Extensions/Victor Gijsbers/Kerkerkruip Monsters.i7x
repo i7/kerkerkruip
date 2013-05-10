@@ -3772,7 +3772,9 @@ When play begins:
 Section - Overmind bonus
 
 To decide which number is the overmind bonus of (guy - a person):
-	if the overmind is not off-stage:
+	if guy is off-stage:
+		decide on 0;
+	otherwise if the overmind is not off-stage:
 		unless the faction of the overmind hates faction of guy:
 			unless level of guy is greater than 3:
 				unless x-coordinate of location of guy is 100: [not in normal dungeon]
