@@ -160,6 +160,8 @@ Short status rule (this is the attributes short status rule):[start with "human"
 		say ", protected from damage[run paragraph on]";
 	if the player is hidden:
 		say ", hidden[run paragraph on]";
+	if the player is raging:
+		say ", enraged[run paragraph on]";
 	if at least one person grapples the player:
 		let X be a random person grappling the player;
 		say ", grappled by [the X][run paragraph on]";
