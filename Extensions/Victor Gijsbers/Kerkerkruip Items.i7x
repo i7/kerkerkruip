@@ -219,6 +219,9 @@ An attack modifier rule (this is the caution grants better retreat rule):
 			say " - 3 (essence of caution)[run paragraph on]";
 			decrease the attack strength by 3.
 
+Status rule (this is the cautious status rule):
+	if player is cautious:
+		say "You are [bold type]cautious[roman type]: +3 defence bonus when retreating.[line break][run paragraph on]".
 
 Section - Essence of Rage (minor)
 
@@ -260,6 +263,10 @@ First report waiting:
 	if player is patient:
 		say "You wait patiently. You feel no tension." instead.
 
+Status rule (this is the patient status rule):
+	if player is patient:
+		say "You are [bold type]patient[roman type]: when you wait, the tension is halved.[line break][run paragraph on]".
+
 
 Section - Essence of Greed (major)
 
@@ -296,6 +303,10 @@ Last absorbing a power (called the granted power):
 			now n is 2;
 		decrease defence of the player by n;
 		say "Your greed causes you to absorb an extra [greed bonus] health, but it also gives you a permanent -[n] defence penalty.[paragraph break]".
+		
+Status rule (this is the greedy status rule):
+	if player is greedy:
+		say "You are [bold type]greedy[roman type]: absorbing a power decreases your defence, but grants you more health.[line break][run paragraph on]".	
 
 Section - Essence of Addiction (epic)
 
