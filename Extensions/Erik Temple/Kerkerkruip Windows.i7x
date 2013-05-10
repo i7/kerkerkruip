@@ -7,9 +7,10 @@ Chapter - UI Colors
 
 Table of Common Color Values (continued)
 glulx color value	assigned number
-g-window-color	15658734
-g-header-color	14540253
-g-humanist-crimson	10231552
+g-window-color	15658734[#EEEEEE]
+g-header-color	14540253[#DDDDDD]
+g-status-color	12369084[#BCBCBC]
+g-humanist-crimson	10231552[#9C1F00]
 
 
 Chapter - Parser error fix
@@ -74,7 +75,7 @@ The back-colour of the main-window is g-white.[For CocoaGlk]
 
 To set styles for the status window:
 	set the background of the status window to colored;
-	set the background color of the status window to g-header-color;
+	set the background color of the status window to g-status-color;
 	set the text color of the status window to g-black;[just for completeness, will be the default in most Glk implementations]
 	[apply bold-weight boldness to bold-style;]
 	apply color (assigned number of g-humanist-crimson) to bold-style for grid windows.
@@ -224,7 +225,7 @@ Window-drawing rule for the powers-window when the powers-window is g-present (t
 				choose row with power of ability from the Table of Enemy Powers;
 				say " ([faculty1 entry][if there is a faculty2 entry] & [faculty2 entry][end if])[run paragraph on]";
 			say "[line break]";
-	if pow < 3 and (turn count is less than 2 or the remainder after dividing turn count by 30 is 0):
+	if pow < 3 and (turn count is 1 or the remainder after dividing turn count by 30 is 0):
 		if a random chance of 3 in ((data value 1) + 4) succeeds: [Expert tips show up more often when number of victories is higher.]
 			choose a random row from the Table of Beginner Tips;
 			now power-tip-text is tip entry;
