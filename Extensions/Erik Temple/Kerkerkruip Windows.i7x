@@ -148,7 +148,7 @@ Short status rule (this is the combat basics short status rule):
 
 Short status rule (this is the attributes short status rule):[start with "human" vs undead, and use commas before each subsequent item.]
 	say "You are [if current form is ghoul-form]a ghoul[else if current form is vampire-form]a vampire[else if current form is vampirebat-form]a vampire bat[else if the player is undead]undead[else]human[end if][run paragraph on]";
-	if player is not base size of the player:
+	if player is not medium:
 		say ", [size of the player] in stature[run paragraph on]";
 	if player is ethereal:
 		say ", ethereal[run paragraph on]";
