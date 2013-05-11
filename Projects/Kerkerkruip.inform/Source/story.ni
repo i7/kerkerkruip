@@ -1,4 +1,4 @@
-"Kerkerkruip - Release 8 - BETA" by Victor Gijsbers
+"Kerkerkruip - Release 8" by Victor Gijsbers
 
 The story headline is "An IF roguelike".
 The story genre is "dungeon crawl".
@@ -15,10 +15,11 @@ Include Glulx Status Window Control by Erik Temple.
 
 [Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. Be sure to comment Flexible Windows in instead!]
 Include Kerkerkruip Glimmr Additions by Erik Temple.
-[Include Flexible Windows by Jon Ingold.
-Include FIxed Points Maths by Michael Callaghan.]
 Include Kerkerkruip Windows by Erik Temple.
 Include Extended Debugging by Erik Temple.
+
+[Include Flexible Windows by Jon Ingold.
+Include Fixed Point Maths by Michael Callaghan.]
 
 Every turn (this is the mark items as seen every turn rule): 
 	repeat with item running through things that are enclosed by the location:
@@ -47,6 +48,7 @@ Include Kerkerkruip Monsters by Victor Gijsbers.
 Include Kerkerkruip Events and Specials by Victor Gijsbers.
 Include Kerkerkruip Ugly Special Cases by Victor Gijsbers.
 Include Kerkerkruip Start and Finish by Victor Gijsbers.
+Include Kerkerkruip Tests by Victor Gijsbers.
 Include Kerkerkruip Final Declarations by Victor Gijsbers.
 
 
@@ -64,10 +66,12 @@ The notify score changes rule is not listed in any rulebook.
 Generation info is a truth state that varies. Generation info is [true]false.
 
 [Last when play begins:
-	move magical spade to the player.
-	
-The player carries one scroll of psycholocation and one scroll of mapping.]
-[The Zen room is testobject.]
+	move magical spade to the player.]
+[	
+The player carries one scroll of psycholocation and one scroll of mapping.
+One scroll of the blade is in Entrance Hall.]
+[The Zen room is testobject.
+Entrance to the Arena is testobject.]
 
 [The overmind is testobject.]
 	
