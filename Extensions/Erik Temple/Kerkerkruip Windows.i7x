@@ -247,6 +247,7 @@ tip
 "Level 0 monsters never grant you health or powers."
 "Some monsters form groups, and you will have to kill the entire group before power transferal happens."
 "Maximising the number of souls you have at your disposal by choosing the right order in which to kill the monsters is one of the keys to success in [italic type]Kerkerkruip[roman type]."
+"In the graphical version of the game, typing 'map' will show you the map."
 
 Table of Expert Tips
 tip
