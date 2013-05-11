@@ -235,7 +235,7 @@ Window-drawing rule for the powers-window when the powers-window is g-present (t
 			choose a random row from the Table of Expert Tips;
 			now power-tip-text is tip entry; 
 	say "[line break][italic type]Tip:[roman type] [power-tip-text]";
-	say "[run paragraph on]";
+	say "[line break][run paragraph on]";
 	return to main screen.
 
 Table of Beginner Tips
