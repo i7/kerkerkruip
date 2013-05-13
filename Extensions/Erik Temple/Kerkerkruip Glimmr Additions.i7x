@@ -40,15 +40,11 @@ Chapter - Setting background colors for Gargoyle
 To open up the graphics-window:
 	if graphics-window is g-unpresent and the main-window is ancestral to graphics-window:
 		set the Gargoyle background color to the color g-black;
-		now every g-window ancestral to graphics-window is g-required;
-		calibrate windows.
+		open up graphics-window;
 
-
-For window-shutting the graphics-window:
+Before window-shutting the graphics-window:
 	if the graphics-window is g-present:
 		set the Gargoyle background color to the color g-white;
-		now every g-window descended from the graphics-window is g-unrequired;
-		calibrate windows.
 
 
 Chapter - Assets

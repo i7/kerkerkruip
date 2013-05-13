@@ -42,9 +42,9 @@ Section - Border windows
 [These windows will only be visible in interpreters that support graphics, and are not essential to the interface.]
 
 To place border (win - a graphics g-window):
-	do nothing.
-	[if glulx graphics is supported:
-		open up win.]
+	[do nothing.]
+	if glulx graphics is supported:
+		open up win.
 
 The border-1-window is a graphics g-window spawned by the main-window. The measurement is 6. The position is g-placeright. The scale method is g-fixed-size.  The back-colour is g-white.
 
