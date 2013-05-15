@@ -76,6 +76,26 @@ Last when play begins (this is the check person IDs rule):
 					say "[X] has the same ID as [Y].[line break]";
 
 
+Section - Testing IDs
+
+Table of Test Monster IDs
+Brute		Tag
+(a person)		(a number)
+with 100 blank rows
+
+MonsterIDing is an action applying to nothing. Understand "TestID" as monsterIDing.
+
+Carry out monsterIDing:
+	repeat with guy running through persons:
+		choose a blank row in Table of Test Monster IDs;
+		now brute entry is guy;
+		now tag entry is ID of guy;
+	sort Table of Test Monster IDs in tag order;
+	repeat through Table of Test Monster IDs:
+		say "[brute entry]: [tag entry][line break]".
+
+
+
 Section - Showing readied weapons
 
 Testreadying is an action applying to nothing. Understand "testready" as testreadying.

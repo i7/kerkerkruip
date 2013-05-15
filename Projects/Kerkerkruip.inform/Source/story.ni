@@ -57,6 +57,7 @@ Use MAX_OBJ_PROP_COUNT of 256.
 Use MAX_STATIC_DATA of 500000.
 Use MAX_OBJECTS of 800.
 Use MAX_SYMBOLS of 30000.
+Use MAX_ACTIONS of 250.
 
 The maximum score is 18. [1 + 1 + 2 + 2 + 3 + 4 + 5 = 18]
 The notify score changes rule is not listed in any rulebook.
@@ -66,14 +67,15 @@ The notify score changes rule is not listed in any rulebook.
 Generation info is a truth state that varies. Generation info is [true]false.
 
 [Last when play begins:
-	move magical spade to the player.]
-[	
-The player carries one scroll of psycholocation and one scroll of mapping.
-One scroll of the blade is in Entrance Hall.]
+	move mummified priest to location of Malygris.
+	
+The player carries one scroll of psycholocation and one scroll of mapping.]
+
+[One scroll of the blade is in Entrance Hall.]
 [The Zen room is testobject.
 Entrance to the Arena is testobject.]
 
-[The overmind is testobject.]
+[The healer of Aite is testobject.]
 	
 
 [Last when play begins:
