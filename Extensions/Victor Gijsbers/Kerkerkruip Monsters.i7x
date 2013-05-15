@@ -105,23 +105,6 @@ Killing rule (this is the increment died and kill stats rule):
 				increment the died count of the leader of the killed-guy;
 	update the monster statistics.
 
-Section - Testing IDs - Not for release
-
-Table of Test Monster IDs
-Brute		Tag
-(a person)		(a number)
-with 100 blank rows
-
-MonsterIDing is an action applying to nothing. Understand "TestID" as monsterIDing.
-
-Carry out monsterIDing:
-	repeat with guy running through persons:
-		choose a blank row in Table of Test Monster IDs;
-		now brute entry is guy;
-		now tag entry is ID of guy;
-	sort Table of Test Monster IDs in tag order;
-	repeat through Table of Test Monster IDs:
-		say "[brute entry]: [tag entry][line break]".
 
 
 Chapter - Level 1 - Swarm of Daggers
@@ -4216,7 +4199,8 @@ Chapter - Nameless Horror
 The Nameless Horror is a horrific horrific-faction monster. "Screams rip from your throat as soon as you become aware of the mindbogglingly hideous monster that resides here, an abomination referred to only as the Nameless Horror." The indefinite article of the nameless horror is "the". The description of the Nameless Horror is "A vast dark mass sprouting teeth and claws at random -- you cannot force yourself to look at it.".
 
 A final monster placement rule (this is the Nameless Horror in Eternal Prison rule):
-	now Nameless horror is in eternal prison.
+	 if eternal prison is placed:
+		now Nameless horror is in eternal prison.
 
 The level of Nameless Horror is 10.
 The ID of the Nameless Horror is 22.
