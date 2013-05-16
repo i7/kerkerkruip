@@ -243,7 +243,7 @@ Window-drawing rule for the powers-window when the powers-window is g-present (t
 		[consider the status skill rules;]
 		repeat with ability running through granted powers:
 			if ability is the power of the ape:
-				say "[if maximum ape power is not tiny and maximum ape power is not small and maximum ape power is not medium][link (the ability typecast to a number)][command text of the ability in sentence case][end link]: level [power level of the ability] (max [maximum ape power])[otherwise]ape power: level [power level of the ability] (no special ability)[end if][run paragraph on]";
+				say "[if maximum ape power is not tiny and maximum ape power is not small and maximum ape power is not medium][link (the ability typecast to a number)][command text of the ability in sentence case][end link]: level [power level of the ability] (max [maximum ape power])[otherwise][link (the ability typecast to a number)]ape power[end link]: level [power level of the ability] (no special ability)[end if][run paragraph on]";
 			otherwise:
 				say "[link (the ability typecast to a number)][command text of the ability in sentence case][end link]: level [power level of the ability][run paragraph on]";
 			if there is a power of ability in the Table of Enemy Powers:
