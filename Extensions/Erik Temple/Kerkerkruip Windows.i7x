@@ -105,6 +105,26 @@ To set up styles for side windows:
 	apply bold-weight boldness to special-style-1.
 
 
+Section - Setting standard text colors
+
+To set basic text color to (col - a glulx color value):
+	(- SetBasicTextColor({col}); -)
+
+Include (-
+
+	[ SetBasicTextColor col i;
+		if (col == (+g-placenullcol+)) rfalse;
+		col = ColVal(col);
+		for (i = 0: i < style_NUMSTYLES : i++)
+ 	 		glk_stylehint_set(wintype_Textbuffer, i, stylehint_TextColor, 0);
+	];
+
+-)
+
+Before starting the virtual machine:
+	set basic text color to g-black.
+
+
 Chapter - Window-drawing rules
 [There are two primary places where we need to redraw the windows. First, before reading a command should handle all in-game situations. But we also need the stats to reflect the last turn of the game when we've won, since this will most often be a combat turn that we have lost. For that, we hook into the activity for printing the player's "obituary".]
 
