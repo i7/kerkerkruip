@@ -77,7 +77,7 @@ The avatar of Bodmall is Figure of map_monster_Bodmall.
 The avatar of healer of Aite is Figure of map_monster_healer_of_Aite.
 The avatar of tormentor of Aite is Figure of map_monster_tormentor_of_Aite.
 The avatar of defender of Aite is Figure of map_monster_defender_of_Aite.
-[The avatar of overmind is Figure of map_monster_overmind.]
+The avatar of overmind is Figure of map_monster_overmind.
 [level 5]
 The avatar of Malygris is Figure of map_monster_Malygris.
 [people]
@@ -121,7 +121,7 @@ The legend-label of Bodmall is Figure of map_legend_Bodmall.
 The legend-label of healer of Aite is Figure of map_legend_healer_of_Aite.
 The legend-label of tormentor of Aite is Figure of map_legend_tormentor_of_Aite.
 The legend-label of defender of Aite is Figure of map_legend_defender_of_Aite.
-[The legend-label of overmind is Figure of map_legend_overmind.]
+The legend-label of overmind is Figure of map_legend_overmind.
 [level 5]
 The legend-label of Malygris is Figure of map_legend_Malygris.
 [people]
@@ -175,6 +175,8 @@ The map-label of Lair of the Imp is Figure of map_label_Imp_s_Lair.
 The map-label of Maze is Figure of map_label_Maze.
 The map-label of Arcane Vault is Figure of map_label_Vault.
 The map-label of Elemental Plane of Smoke is Figure of map_label_Smoke.
+The map-label of Entrance to the Arena is Figure of map_label_Arena.
+The map-label of Zen Room is Figure of map_label_Zen.
 
 
 Section - Special map backgrounds

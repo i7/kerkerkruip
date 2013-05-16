@@ -408,6 +408,8 @@ Figure of map_label_Imp_s_Lair is the file "map_label_Imp_s_Lair.png".
 Figure of map_label_Maze is the file "map_label_Maze.png".
 Figure of map_label_Vault is the file "map_label_Vault.png".
 Figure of map_label_Smoke is the file "map_label_Smoke.png".
+Figure of map_label_Arena is the file "map_label_Arena.png".
+Figure of map_label_Zen is the file "map_label_Zen.png".
 
 [Enemy labels]
 Figure of map_monster_Miranda is the file "map_monster_Miranda.png".
