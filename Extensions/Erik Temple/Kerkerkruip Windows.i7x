@@ -75,7 +75,7 @@ The back-colour of the main-window is g-white.[For CocoaGlk]
 
 To set styles for the status window:
 	set the background of the status window to colored;
-	set the background color of the status window to g-status-color;
+	set the background color of the status window to g-header-color;
 	set the text color of the status window to g-black;[just for completeness, will be the default in most Glk implementations]
 	[apply bold-weight boldness to bold-style;]
 	apply color (assigned number of g-humanist-crimson) to bold-style for grid windows.
