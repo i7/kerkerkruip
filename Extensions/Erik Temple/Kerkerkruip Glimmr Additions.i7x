@@ -1515,9 +1515,6 @@ An element display rule for the map-renderer (this is the map display rule):
 				let base-row be 1;
 				repeat with adversary running through enemies list:
 					repeat with count running from base-row to the number of rows in the avatar-table of the map-renderer:
-						[if count is greater than the number of rows in the avatar-table:
-							say "Note that there are so many enemies in [place] that they can't all be shown on the map. They include: [list of alive seen persons enclosed by place].";
-							break;[**** This is currently a poor implementation. We should really set a flag or a list for rooms that failed, and have the mapping action itself list the failures.]]
 						choose row (count) in the avatar-table of the map-renderer;
 						if place is tunnel-drawn and count is less than 5 and the room (placement entry) of place is not a not nogo room:[if we're looking at the cardinal directions for the first time and we see one that leads somewhere, we have a tunnel tile and should put a monster there--otherwise move on.]
 							next;
@@ -1830,6 +1827,29 @@ Carry out revealing the entire map:
 	if the eternal prison is not placed, now the nameless horror is not seen;
 	try showing the map.
 
+
+Section - Testing for map assets (for use with Extended Debugging by Erik Temple)
+
+Last when play begins:
+	repeat with place running through rooms:
+		if place is not a tunnel and place is placeable:
+			if place provides the property map-label:
+				if the map-label of place is Figure of Null:
+					say "[place] has no map label image.";
+			otherwise:
+				say "[place] does not provide the map-label property. Check to be sure that it will be labeled properly on the map.";
+	repeat with villain running through persons:
+		if villain is not the player:
+			if villain provides the property avatar:
+				if the avatar of villain is Figure of Null:
+					say "[villain] has no avatar image.";
+			otherwise:
+				say "[villain] does not provide the avatar property. Check to be sure that it will be labeled properly on the map.";
+			if villain provides the property legend-label:
+				if the legend-label of villain is Figure of Null:
+					say "[villain] has no legend label image.";
+			otherwise:
+				say "[villain] does not provide the legend-label property. Check to be sure that it will be labeled properly in the map legend."
 
 
 Kerkerkruip Glimmr Additions ends here.
