@@ -1,5 +1,7 @@
 Kerkerkruip Permadeath (for Glulx only) by Victor Gijsbers begins here.
 
+Use authorial modesty.
+
 [Note: This extension has been adapted from Erik Temple's Roguelike save & restore. See: http://www.intfiction.org/forum/viewtopic.php?f=7&t=2843]
 
 

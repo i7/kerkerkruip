@@ -1,5 +1,7 @@
 Kerkerkruip Monster Abilities by Victor Gijsbers begins here.
 
+Use authorial modesty.
+
 [This extension contains code that defines abilities, attributes and temporary properties of monsters (sometimes including the player).
 
 Some exceptions:
