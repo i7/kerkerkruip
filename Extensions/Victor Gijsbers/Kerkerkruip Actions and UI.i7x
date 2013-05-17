@@ -341,15 +341,22 @@ Carry out asking status:
 	
 The status rules are a rulebook.
 The status skill rules are a rulebook.
+Long status is a truth state variable. Long status is true.
 
 Status rule (this is the status concentration rule):
 	if concentration of the player is not 0:
 		let n be concentration of the player;
-		say "[bold type]Concentration[roman type]: [if n is 1]+2[else if n is 2]+4[else if n is 3]+8[end if] attack bonus, [if n is 1]no[else if n is 2]+2[else if n is 3]+4[end if] damage bonus[line break][run paragraph on]";
+		if long status is true:
+			say "[bold type]Concentration[roman type]: [if n is 1]+2[else if n is 2]+4[else if n is 3]+8[end if] attack bonus, [if n is 1]no[else if n is 2]+2[else if n is 3]+4[end if] damage bonus[line break][run paragraph on]";
+		otherwise:
+			say "[bold type]Concentration[roman type]: [if n is 1]+2[else if n is 2]+4[else if n is 3]+8[end if] attack, [if n is 1]no[else if n is 2]+2[else if n is 3]+4[end if] damage[line break][run paragraph on]";
 
 Status rule (this is the status tension rule):
 	if tension is greater than 1:
-		say "[bold type]Tension[roman type]: +[tension divided by 2] attack bonus, +[tension divided by 3] damage bonus[line break][run paragraph on]";
+		if long status is true:
+			say "[bold type]Tension[roman type]: +[tension divided by 2] attack bonus, +[tension divided by 3] damage bonus[line break][run paragraph on]";
+		otherwise:
+			say "[bold type]Tension[roman type]: +[tension divided by 2] attack, +[tension divided by 3] damage[line break][run paragraph on]";
 
 
 

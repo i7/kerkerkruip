@@ -221,7 +221,8 @@ An attack modifier rule (this is the caution grants better retreat rule):
 
 Status rule (this is the cautious status rule):
 	if player is cautious:
-		say "You are [bold type]cautious[roman type]: +3 defence bonus when retreating.[line break][run paragraph on]".
+		if long status is true:
+			say "You are [bold type]cautious[roman type]: +3 defence bonus when retreating.[line break][run paragraph on]".
 
 Section - Essence of Rage (minor)
 
@@ -265,7 +266,8 @@ First report waiting:
 
 Status rule (this is the patient status rule):
 	if player is patient:
-		say "You are [bold type]patient[roman type]: when you wait, the tension is halved.[line break][run paragraph on]".
+		if long status is true:
+			say "You are [bold type]patient[roman type]: when you wait, the tension is halved.[line break][run paragraph on]".
 
 
 Section - Essence of Greed (major)
@@ -306,7 +308,8 @@ Last absorbing a power (called the granted power):
 		
 Status rule (this is the greedy status rule):
 	if player is greedy:
-		say "You are [bold type]greedy[roman type]: absorbing a power decreases your defence, but grants you more health.[line break][run paragraph on]".	
+		if long status is true:
+			say "You are [bold type]greedy[roman type]: absorbing a power decreases your defence, but grants you more health.[line break][run paragraph on]".	
 
 Section - Essence of Addiction (epic)
 
@@ -1868,7 +1871,10 @@ Carry out reading a scroll of protection:
 
 Status rule (this is the protection status rule):
 	if hit protection of the player is greater than 0:
-		say "You are [bold type]protected[roman type] from damage dealt by attacks.[line break][run paragraph on]".
+		if long status is true:
+			say "You are [bold type]protected[roman type] from damage dealt by attacks.[line break][run paragraph on]";
+		otherwise:
+			say ", protected from damage[run paragraph on]";
 
 A damage multiplier rule when the hit protection of the global defender is greater than 0 (this is the hit protection damage multiplier rule):
 	say " - 100% (protection)[run paragraph on]";
@@ -1918,7 +1924,10 @@ Every turn when the player is the main actor (this is the decrease player skill 
 
 Status rule (this is the skilled status rule):
 	if player skill bonus timer is greater than 0:
-		say "You are [bold type]skilled[roman type]: +3 bonus to body, mind and spirit.[line break][run paragraph on]".
+		if long status is true:
+			say "You are [bold type]skilled[roman type]: +3 bonus to body, mind and spirit.[line break][run paragraph on]";
+		otherwise:
+			say ", skilled[run paragraph on]";
 
 A faculty bonus rule (this is the faculty bonus of being skilled rule):
 	if the test subject is the player and the player skill bonus timer is greater than 0:
@@ -3347,9 +3356,15 @@ To have the ment kick in:
 
 Status rule (this is the ment status rule):
 	if ment timer is greater than 0:
-		say "You are under the influence of [bold type]ment[roman type]: +[ment bonus] attack, +[ment bonus] damage, -[ment bonus] enemy damage, +[ment bonus] defence, +[ment bonus] to all abilities.[line break][run paragraph on]";
+		if long status is true:
+			say "You are under the influence of [bold type]ment[roman type]: +[ment bonus] attack, +[ment bonus] damage, -[ment bonus] enemy damage, +[ment bonus] defence, +[ment bonus] to all abilities.[line break][run paragraph on]";
+		otherwise:
+			say "[bold type]Ment[roman type]: +[ment bonus] attack, +[ment bonus] damage, -[ment bonus] enemy damage, +[ment bonus] defence, +[ment bonus] abilities.[line break][run paragraph on]";
 	if ment timer is 0 and ment addiction is greater than 0:
-		say "You feel [bold type]down[roman type]: -[ment addiction] attack, -[ment addiction] to all abilities[line break][run paragraph on]".
+		if long status is true:
+			say "You feel [bold type]down[roman type]: -[ment addiction] attack, -[ment addiction] to all abilities[line break][run paragraph on]";
+		otherwise:
+			say "[bold type]Down[roman type]: -[ment addiction] attack, -[ment addiction] abilities[line break][line break][run paragraph on]";
 
 Instead of eating a package of ment (this is the ment cannot be eaten rule):
 	take no time;

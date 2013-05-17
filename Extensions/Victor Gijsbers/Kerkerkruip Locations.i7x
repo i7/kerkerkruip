@@ -1570,7 +1570,10 @@ An attack modifier rule (this is the incense penalty in Sweat Lodge rule):
 		
 Status rule (this is the sweat lodge attack modifier rule):
 	if the location is the Tungausy Sweat Lodge and incensemod is not 0:
-		say "The [bold type]incense[roman type] gives everyone a +[incensemod] spirit bonus and a -[incensemod] attack penalty.[line break][run paragraph on]".
+		if long status is true:
+			say "The [bold type]incense[roman type] gives everyone a +[incensemod] spirit bonus and a -[incensemod] attack penalty.[line break][run paragraph on]";
+		otherwise:
+			say "[bold type]Incense[roman type]: -[incensemod] attack.";
 
 
 Section - Tungausy Sweat Lodge label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)

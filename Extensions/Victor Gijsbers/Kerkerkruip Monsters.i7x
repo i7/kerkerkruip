@@ -457,7 +457,8 @@ Aftereffects rule (this is the increase ape damage rule):
 
 Status rule (this is the ape power damage status rule):
 	if power of the ape is granted and player is not medium:
-		say "[bold type]Power of the ape[roman type]: you are currently [size of the player].[line break][run paragraph on]".
+		if long status is true:
+			say "[bold type]Power of the ape[roman type]: you are currently [size of the player].[line break][run paragraph on]".
 		
 Status skill rule (this is the ape power status skill rule):
 	if power of the ape is granted:
@@ -829,7 +830,10 @@ Aftereffects rule (this is the stunning rule):
 
 Status rule (this is the stunned status rule):
 	if the player is stunned:
-		say "You are [bold type]stunned[roman type]: -1 to attack, -[stun strength of the player] to body, mind and spirit.[line break][run paragraph on]".
+		if long status is true:
+			say "You are [bold type]stunned[roman type]: -1 to attack, -[stun strength of the player] to body, mind and spirit.[line break][run paragraph on]";
+		otherwise:
+			say ", stunned[run paragraph on]";
 
 
 Section - Stunned
@@ -1128,10 +1132,13 @@ Status skill rule (this is the wisps status skill rule):
 
 Status rule (this is the wisps status rule):
 	if wisp-strength is not 0:
-		if power of the wisps is granted:
-			say "You are [bold type]in pain[roman type]: -[wisp-strength] to body, mind and spirit.[line break][run paragraph on]";
+		if long status is true:
+			if power of the wisps is granted:
+				say "You are [bold type]in pain[roman type]: -[wisp-strength] to body, mind and spirit.[line break][run paragraph on]";
+			otherwise:
+				say "Pain has made you [bold type]stronger[roman type]: +[wisp-strength] to body, mind and spirit.[line break][run paragraph on]";
 		otherwise:
-			say "Pain has made you [bold type]stronger[roman type]: +[wisp-strength] to body, mind and spirit.[line break][run paragraph on]".
+			say ", [if power of the wisps is granted]in pain[otherwise]pain-hardened[end if][run paragraph on]";
 
 
 
@@ -1960,7 +1967,10 @@ Aftereffects rule (this is the take away howling rule):
 
 Status rule (this is the howling status rule):
 	if the player is at-howl:
-		say "You are [bold type]howling[roman type]: +4 to attack, +4 to damage.[line break][run paragraph on]".
+		if long status is true:
+			say "You are [bold type]howling[roman type]: +4 to attack, +4 to damage.[line break][run paragraph on]";
+		otherwise:
+			say ", howling[run paragraph on]";
 
 
 
@@ -2644,7 +2654,10 @@ Every turn (this is the reset grappling after going rule):
 Status rule (this is the grappled status rule):
 	if at least one person grapples the player:
 		let X be a random person grappling the player;
-		say "You are [bold type]grappled[roman type] by [the X].[line break][run paragraph on]".
+		if long status is true:
+			say "You are [bold type]grappled[roman type] by [the X].[line break][run paragraph on]";
+		otherwise:
+			say ", grappled by [the X][run paragraph on]";
 		
 A sudden combat reset rule (this is the sudden grapple reset rule):
 	repeat with guy running through alive persons in the location:
@@ -2743,7 +2756,10 @@ Aftereffects rule when the global attacker is tentacle-confused (this is the no 
 
 Status rule (this is the tentacle-confused status rule):
 	if the player is tentacle-confused:
-		say "You are [bold type]confused[roman type] by the giant tentacle, which gives you a -2 attack penalty on your next attack.[line break][run paragraph on]".
+		if long status is true:
+			say "You are [bold type]confused[roman type] by the giant tentacle, which gives you a -2 attack penalty on your next attack.[line break][run paragraph on]";
+		otherwise:
+			say ", confused[run paragraph on]";
 
 
 
@@ -3775,7 +3791,10 @@ Fruit-launching golden fruit:
 
 Status rule (this is the golden fruit status rule):
 	if the player is druidic and the golden fruit timer is greater than 0:
-		say "You are under the influence of the [bold type]golden fruit[roman type], which gives you a +3 attack bonus.[line break][run paragraph on]".
+		if long status is true:
+			say "You are under the influence of the [bold type]golden fruit[roman type], which gives you a +3 attack bonus.[line break][run paragraph on]";
+		otherwise:
+			say ", under the influence of the golden fruit[run paragraph on]";
 
 Section - Weird fruit
 
@@ -4728,7 +4747,10 @@ Initiative update rule (this is the decrease initiative when hexed rule):
 
 Status rule (this is the hexed status rule):
 	if the player is hexed:
-		say "You have been [bold type]hexed[roman type] by the aswang, which gives you an initiative penalty.[line break][run paragraph on]".
+		if long status is true:
+			say "You have been [bold type]hexed[roman type] by the aswang, which gives you an initiative penalty.[line break][run paragraph on]";
+		otherwise:
+			say ", hexed[run paragraph on]";
 
 Every turn when at least one alive person is hexed (this is the remove hexes when aswang is dead rule):
 	if the aswang is dead:

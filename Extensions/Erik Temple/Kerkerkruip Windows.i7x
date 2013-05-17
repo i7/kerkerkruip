@@ -144,66 +144,20 @@ Before printing the player's obituary (this is the final refresh side windows ru
 Section - Statistics window
 
 Window-drawing rule for the stats-window when the stats-window is g-present (this is the construct stats window rule):
-	move focus to stats-window, clearing the window;	
-	consider the short status rules;[show point distribution messages and player attributes]
-	say "[line break][run paragraph on]";
+	move focus to stats-window, clearing the window;
+	now long status is false;
+	consider the status rules;
+	say ".[line break][run paragraph on]";
 	consider the show basic stats rule;[show statistics]
 	say run paragraph on;
+	say "([link 1]detailed status report[end link])[line break][run paragraph on]";
+	now long status is true;
 	return to main screen.
 
-The short status rules are a rulebook.
-
-Short status rule (this is the combat basics short status rule):
-	if concentration of the player is not 0:
-		let n be concentration of the player;
-		say "[bold type]Concentration[roman type]: [if n is 1]+2[else if n is 2]+4[else if n is 3]+8[end if] attack, [if n is 1]no[else if n is 2]+2[else if n is 3]+4[end if] damage[line break][run paragraph on]";
-	if tension is greater than 1:
-		say "[bold type]Tension[roman type]: +[tension divided by 2] attack, +[tension divided by 3] damage[line break][run paragraph on]";
-	if ment timer is greater than 0:
-		say "[bold type]Ment[roman type]: +[ment bonus] attack, +[ment bonus] damage, -[ment bonus] enemy damage, +[ment bonus] defence, +[ment bonus] abilities.[line break][run paragraph on]";
-	if ment timer is 0 and ment addiction is greater than 0:
-		say "[bold type]Down[roman type]: -[ment addiction] attack, -[ment addiction] abilities[line break][line break][run paragraph on]";
-	if the location is the Tungausy Sweat Lodge and incensemod is not 0:
-		say "[bold type]Incense[roman type]: -[incensemod] attack.".
-
-Short status rule (this is the attributes short status rule):[start with "human" vs undead, and use commas before each subsequent item.]
-	say "You are [if current form is ghoul-form]a ghoul[else if current form is vampire-form]a vampire[else if current form is vampirebat-form]a vampire bat[else if the player is undead]undead[else]human[end if][run paragraph on]";
-	if player is not medium:
-		say ", [size of the player] in stature[run paragraph on]";
-	if player is ethereal:
-		say ", ethereal[run paragraph on]";
-	if player is flying:
-		say ", flying[run paragraph on]";
-	if player is blind or the player is eyeless:
-		say ", [if player is eyeless]eyeless[else]blind[end if][run paragraph on]";
-	if hit protection of the player is greater than 0:
-		say ", protected from damage[run paragraph on]";
-	if the player is hidden:
-		say ", hidden[run paragraph on]";
-	if the player is raging:
-		say ", enraged[run paragraph on]";
-	if at least one person grapples the player:
-		let X be a random person grappling the player;
-		say ", grappled by [the X][run paragraph on]";
-	if the player is druidic and the golden fruit timer is greater than 0:
-		say ", under the influence of the golden fruit[run paragraph on]";
-	if player skill bonus timer is greater than 0:
-		say ", skilled[run paragraph on]";
-	if the player is stunned:
-		say ", stunned[run paragraph on]";
-	if the player is hexed:
-		say ", hexed[run paragraph on]";
-	if the player is tentacle-confused:
-		say ", confused[run paragraph on]";
-	if wisp-strength is not 0:
-		say ", [if power of the wisps is granted]in pain[otherwise]pain-hardened[end if][run paragraph on]";
-	if the player is at-howl:
-		say ", howling[run paragraph on]";
-	say ". ([link 1]detailed status report[end link])[line break][run paragraph on]"
-
-Short status rule (this is the unallocated faculty short status rule):
-	if unallocated faculty is greater than 0:
-		say "[italic type]Increase one of your faculties by typing 'body', 'mind', or 'spirit' ([unallocated faculty] point[if unallocated faculty is greater than 1]s[end if]).[roman type][line break][run paragraph on]".
+First status rule (this is the unallocated faculty short status rule):
+	if long status is false:
+		if unallocated faculty is greater than 0:
+			say "[italic type]Increase one of your faculties by typing 'body', 'mind', or 'spirit' ([unallocated faculty] point[if unallocated faculty is greater than 1]s[end if]).[roman type][line break][run paragraph on]";
 
 	
 Window-drawing rule for the stat-header-window when the stat-header-window is g-present (this is the construct stat header window rule):

@@ -315,7 +315,10 @@ Before printing the name of a weapon (called item):
 
 Status rule (this is the size status rule):
 	if player is not medium:
-		say "Your current size is [bold type][size of the player][roman type][if size of the player is not base size of the player], and your base size is [bold type][base size of the player][roman type][end if].[line break][run paragraph on]".
+		if long status is true:
+			say "Your current size is [bold type][size of the player][roman type][if size of the player is not base size of the player], and your base size is [bold type][base size of the player][roman type][end if].[line break][run paragraph on]";
+		otherwise:
+			say ", [size of the player] in stature[run paragraph on]";
 
 
 [Note: sizes of a person are meant to reflect how big they themselves are. Sizes of objects are meant to reflect for what size person they were meant. Thus, a 'medium dagger' is much smaller than a 'medium bed': both are normal-sized objects as they are made for normal-sized humans. A huge dagger might be about the same size as a medium sword -- it would just be hard to handle for a medium person, because the hilt would be too big to grip with a hand!]
@@ -1314,11 +1317,11 @@ vampire-form
 vampirebat-form
 
 Table of Form Properties
-player form		turn-text									turn-type			special rule
-human-form		"You turn back into a normal human being."	living			the turn-living rule
-ghoul-form		"You turn into a loathsome ghoul!"			undead			the turn-undead rule
-vampire-form		"You turn into a vampire!"					undead			the turn-undead rule
-vampirebat-form	"You turn into a vampire bat!"				undead			the turn-undead rule
+player form	turn-text	turn-type	special rule
+human-form	"You turn back into a normal human being."	living	the turn-living rule
+ghoul-form	"You turn into a loathsome ghoul!"	undead	the turn-undead rule
+vampire-form	"You turn into a vampire!"	undead	the turn-undead rule
+vampirebat-form	"You turn into a vampire bat!"	undead	the turn-undead rule
 
 Current form is a player form that varies.
 Current form is human-form.
@@ -1338,7 +1341,9 @@ This is the turn-undead rule:
 	now undead-faction does not hate player-enslaved;
 	now player-enslaved does not hate undead-faction.
 
-
+Status rule (this is the short player form status rule):
+	if long status is false:
+		say "You are [if current form is ghoul-form]a ghoul[else if current form is vampire-form]a vampire[else if current form is vampirebat-form]a vampire bat[else if the player is undead]undead[else]human[end if][run paragraph on]";
 
 
 Section - Trumping relation
@@ -1413,7 +1418,8 @@ A physical damage reduction rule (this is the ghoul damage reduction rule):
 
 Status rule (this is the ghoul status rule):
 	if current form is ghoul-form:
-		say "You are a [bold type]ghoul[roman type]: -1 attack; +1 damage resistance.[line break][run paragraph on]".
+		if long status is true:
+			say "You are a [bold type]ghoul[roman type]: -1 attack; +1 damage resistance.[line break][run paragraph on]".
 
 To unghoulify the player:
 	now ghoul-form is not form-active;
@@ -1433,7 +1439,8 @@ This is the turn-vampire rule:
 
 Status rule (this is the vampire status rule):
 	if current form is vampire-form:
-		say "You are a [bold type]vampire[roman type]: +4 mind, +2 attack, -2 defence, modest bonus to hiding, can turn into a [italic type]bat[roman type].[line break][run paragraph on]".
+		if long status is true:
+			say "You are a [bold type]vampire[roman type]: +4 mind, +2 attack, -2 defence, modest bonus to hiding, can turn into a [italic type]bat[roman type].[line break][run paragraph on]".
 
 A mind bonus rule (this is the mind bonus of vampire rule):
 	if the test subject is the player and the current form is vampire-form:
@@ -1468,7 +1475,8 @@ This is the turn-vampire-bat rule:
 
 Status rule (this is the vampire bat status rule):
 	if current form is vampirebat-form:
-		say "You are a [bold type]vampire bat[roman type]: +2 defence, -2 attack, large bonus to hiding, bonus to running away, flying, cannot use weapons or clothing, can turn back into a [italic type]vampire[roman type].[line break][run paragraph on]".
+		if long status is true:
+			say "You are a [bold type]vampire bat[roman type]: +2 defence, -2 attack, large bonus to hiding, bonus to running away, flying, cannot use weapons or clothing, can turn back into a [italic type]vampire[roman type].[line break][run paragraph on]".
 
 An attack modifier rule (this is the vampire bat has less chance to be hit rule):
 	if the global defender is the player and current form is vampirebat-form:
@@ -1604,18 +1612,19 @@ Mutation is a kind of value. Some mutations are defined by the Table of Player M
 Mutations can be adapted. Mutations are usually not adapted.
 
 Table of Player Mutations
-mutation		mutate-text		unmutate-text
-wings		"You grow wings and gain the power of flight!"		"You lose your wings!"
-darkvision	"You gain the ability to see in total darkness!"		"You lose your darkvision!"
-pseudopods	"Hundreds of apparently useless pseudopods grow from your skin."		"The pseudopods that covered you disappear."
-disintegrating flesh	"Your flesh loses much of ist consistency!"		"Your flesh returns to its normal solidity."
-metallic scales	"Your body is covered in metallic scales!"		"The metallic scales disappear from your body."
-tunneling claws	"Your hands turn into tunneling claws!"		"Your tunneling claws disappear."
+mutation	mutate-text	unmutate-text
+wings	"You grow wings and gain the power of flight!"	"You lose your wings!"
+darkvision	"You gain the ability to see in total darkness!"	"You lose your darkvision!"
+pseudopods	"Hundreds of apparently useless pseudopods grow from your skin."	"The pseudopods that covered you disappear."
+disintegrating flesh	"Your flesh loses much of ist consistency!"	"Your flesh returns to its normal solidity."
+metallic scales	"Your body is covered in metallic scales!"	"The metallic scales disappear from your body."
+tunneling claws	"Your hands turn into tunneling claws!"	"Your tunneling claws disappear."
 
 
 Status rule (this is the mutations status rule):
 	if at least one mutation is adapted:
-		say "Your altered body has [bold type][list of adapted mutations][roman type].[line break][run paragraph on]".
+		if long status is true:
+			say "Your altered body has [bold type][list of adapted mutations][roman type].[line break][run paragraph on]";
 
 Section - Mutating mutations
 

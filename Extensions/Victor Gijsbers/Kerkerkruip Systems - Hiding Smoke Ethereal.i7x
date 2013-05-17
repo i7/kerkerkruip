@@ -13,7 +13,10 @@ A person can be unnaturally aware follower. [An unnaturally aware follower may n
 
 Status rule (this is the hidden status rule):
 	if the player is hidden:
-		say "You are [bold type]hidden[roman type].[line break][run paragraph on]"
+		if long status is true:
+			say "You are [bold type]hidden[roman type].[line break][run paragraph on]";
+		otherwise:
+			say ", hidden[run paragraph on]";
 
 An attack modifier rule (this is the hidden gives a small attack bonus rule):
 	if the global attacker is hidden:
@@ -392,7 +395,10 @@ A damage multiplier rule (this is the ethereal damage multiplier rule):
 
 Status rule (this is the ethereal status rule):
 	if player is ethereal:
-		say "You are [bold type]ethereal[roman type]: you cannot interact with most physical objects.[line break][run paragraph on]".
+		if long status is true:
+			say "You are [bold type]ethereal[roman type]: you cannot interact with most physical objects.[line break][run paragraph on]";
+		otherwise:
+			say ", ethereal[run paragraph on]";
 
 A physical damage reduction rule (this is the no physical damage when ethereal rule):
 	if test subject is ethereal:

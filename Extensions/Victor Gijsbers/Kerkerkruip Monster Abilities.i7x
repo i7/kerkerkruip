@@ -32,7 +32,8 @@ A person has a creature-type. The creature-type of a person is usually living.
 
 Status rule (this is the undead status rule):
 	if the player is undead:
-		say "You are [bold type]undead[roman type]: other undead are your allies; other potential allies may be your enemies instead; absorbing a soul may heal you only partially.[line break][run paragraph on]".
+		if long status is true:
+			say "You are [bold type]undead[roman type]: other undead are your allies; other potential allies may be your enemies instead; absorbing a soul may heal you only partially.[line break][run paragraph on]";
 
 
 Chapter - New factions
@@ -178,7 +179,10 @@ A flying rule (this is the flyers fly rule):
 
 Status rule (this is the flying status rule):
 	if player is flying:
-		say "You [if the player is flyer]have wings and [end if]are [bold type]flying[roman type].[line break][run paragraph on]".
+		if long status is true:
+			say "You [if the player is flyer]have wings and [end if]are [bold type]flying[roman type].[line break][run paragraph on]";
+		otherwise:
+			say ", flying[run paragraph on]";
 
 Chapter - Followers
 
@@ -239,11 +243,17 @@ A blindness rule (this is the blind if eyeless rule):
 		
 Status rule (this is the blindness status rule):
 	if player is blind:
-		say "You are [bold type]blind[roman type].[line break][run paragraph on]".
+		if long status is true:
+			say "You are [bold type]blind[roman type].[line break][run paragraph on]";
+		otherwise:
+			say ", blind[run paragraph on]";
 	
 Status rule (this is the eyeless status rule):
 	if player is eyeless:
-		say "You do not need [bold type]eyes[roman type] to perceive your surroundings.[line break][run paragraph on]".	
+		if long status is true:
+			say "You do not need [bold type]eyes[roman type] to perceive your surroundings.[line break][run paragraph on]";
+		otherwise:
+			say ", eyeless[run paragraph on]";
 
 An attack modifier rule (this is the blindness attack modifier rule):
 	if the global attacker is blind and the global attacker is not eyeless:
@@ -281,7 +291,10 @@ A rage rule:
 
 Status rule (this is the rage status rule):
 	if player is raging:
-		say "You are [bold type]raging[roman type], and will not retreat.[line break][run paragraph on]".
+		if long status is true:
+			say "You are [bold type]raging[roman type], and will not retreat.[line break][run paragraph on]";
+		otherwise:
+			say ", enraged[run paragraph on]";
 
 This is the do not go in combat when raging rule:
 	if the player is raging and the combat status is not peace:
