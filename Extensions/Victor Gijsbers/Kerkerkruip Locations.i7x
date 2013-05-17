@@ -346,6 +346,8 @@ Chapter - Temple of Nomos
 
 The temple of Nomos is a room. "The exactly elliptical room is dominated by a towering statue of Nomos, built out of harsh geometrical forms."
 
+Temple of Nomos is dedicated to Nomos.
+
 Temple of Nomos is connectable.
 Temple of Nomos is not connection-inviting.
 Temple of Nomos is placeable.
@@ -384,7 +386,7 @@ Every turn (this is the decrease the Nomos wrath counter rule):
 				say "From the beginning of time, all the Universe's constituent particles have traced their preordained paths, to arrive at their present constellation -- a rare constellation in which all the thermal energy of your body is suddenly transferred to the air and dissipates. Your blood freezes, and you die.";
 				end the story saying "The last thing you hear is booming but mirthless laughter".
 
-Instead of praying in Temple of Nomos:
+[Instead of praying in Temple of Nomos:
 	if the Nomos counter is greater than 0:
 		say "You pray again, even though Nomos has already given you his decree. Will your iniquity go unpunished?";
 		if Nomos wrath counter is 0:
@@ -396,7 +398,7 @@ Instead of praying in Temple of Nomos:
 		if Nomos counter is 1 or Nomos counter is 2:
 			if a random chance of 1 in 2 succeeds:
 				increase Nomos counter by 1;
-		say "A deep voice inside your head speaks: 'You will attack [Nomos counter] turns from now. The law will be with you.'".
+		say "A deep voice inside your head speaks: 'You will attack [Nomos counter] turns from now. The law will be with you.'".]
 
 
 		
@@ -468,6 +470,8 @@ Chapter - Temple of Aite
 
 The temple of Aite is a room. "The black stones have been scratched in a million fights, and will nevermore lose the faint colour of blood. This is the temple of Aite, whose laughing statue rises above all."
 
+Temple of Aite is dedicated to Aite.
+
 Temple of Aite is connectable.
 Temple of Aite is not connection-inviting.
 Temple of Aite is placeable.
@@ -497,9 +501,9 @@ Instead of climbing the statue of Aite:
 	decrease the health of the player by 3;
 	if the health of the player is less than 1:
 		end the story saying "You sacrificed yourself to Aite".
-
+[
 Instead of praying in Temple of Aite (this is the Aite prayer rule):
-	do the Aite prayer.
+	do the Aite prayer.]
 	
 To do the Aite prayer:	
 	say "You ask Aite for help in battle, and [run paragraph on][if player is beloved of Aite]confidently[otherwise]anxiously[end if] await the consequences.[line break][paragraph break]";
@@ -608,6 +612,8 @@ Chapter - Temple of Sul
 
 The temple of Sul is a room. "The only feature breaking the monotony of the circular room made of polished white marble is a huge [if the statue of Sul is in the Temple of Sul]statue. Hewn from flawless mountain crystal, it portrays the goddess Sul[otherwise]pile of fragments of the broken statue[end if]."
 
+Temple of Sul is dedicated to Sul.
+
 Temple of Sul is connectable.
 Temple of Sul is not connection-inviting.
 Temple of Sul is placeable.
@@ -641,6 +647,7 @@ Maximum prayers to Sul is a number that varies.
 When play begins:
 	now maximum prayers to Sul is a random number between 1 and 3.
 
+[
 Instead of praying in Temple of Sul:
 	unless the statue of Sul is in the Temple of Sul:
 		say "Praying has little effect, now that the statue has been destroyed.";
@@ -666,7 +673,7 @@ Instead of praying in Temple of Sul:
 				if the player has at least one corruptible not cursed thing:
 					let item be a random corruptible not cursed thing had by the player;
 					now item is cursed;
-					now item is curse-identified.
+					now item is curse-identified.]
 
 
 Section - Temple of Sul label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
@@ -678,6 +685,8 @@ The map-label of Temple of Sul is Figure of map_label_Sul.
 Chapter - Temple of Isatzo
 
 The temple of Isatzo is a room. "Exactly half of the room is black, and exactly half of it is white. This is the temple of Isatzo, the god of balance, whose statue stands in the center, one arm stretched out to each side."
+
+Temple of Isatzo is dedicated to Chton.
 
 Temple of Isatzo is connectable.
 Temple of Isatzo is connection-inviting.
@@ -713,7 +722,7 @@ Every turn (this is the decrease the Isatzo time-out each turn rule):
 		if Isatzo time-out is 0 and player is in Temple of Isatzo:
 			say "Isatzo is available for prayer again.".
 	
-Instead of praying in the Temple of Isatzo:
+[Instead of praying in the Temple of Isatzo:
 	if the combat status is peace:
 		take no time;
 		say "There is nothing for Isatzo to balance here -- you must be engaged in a fight.";
@@ -780,7 +789,7 @@ Instead of praying in the Temple of Isatzo:
 					increase weapon attack bonus of item by 1;
 				otherwise:
 					say "Isatzo decides that your [item] is imbalanced and needs a nerf (permanent -1 attack bonus).";
-					decrease weapon attack bonus of item by 1.
+					decrease weapon attack bonus of item by 1.]
 
 
 Section - Temple of Isatzo label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
