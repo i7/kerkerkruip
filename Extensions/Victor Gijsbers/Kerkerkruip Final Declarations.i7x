@@ -52,93 +52,93 @@ Unlocking something with is ethereal-forbidden-second.
 
 Chapter - Graphic declarations (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
-Section - Monster avatars for the map
+[Section - Monster avatars for the map
 
-A person has a figure name called the avatar. The avatar of a person is usually Figure of Null.
+A person has a figure name called the avatar. The avatar of a person is usually Figure of Null.]
 
 [level 1]
-The avatar of Miranda is Figure of map_monster_Miranda.
-The avatar of swarm of daggers is Figure of map_monster_swarm_of_daggers.
-The avatar of ravenous armadillo is Figure of map_monster_ravenous_armadillo.
-The avatar of wisps of pain is Figure of map_monster_wisps_of_pain.
-The avatar of blood ape is Figure of map_monster_blood_ape.
+[The avatar of Miranda is Figure of map_monster_Miranda.]
+[The avatar of swarm of daggers is Figure of map_monster_swarm_of_daggers.]
+[The avatar of ravenous armadillo is Figure of map_monster_ravenous_armadillo.]
+[The avatar of wisps of pain is Figure of map_monster_wisps_of_pain.]
+[The avatar of blood ape is Figure of map_monster_blood_ape.]
 [level 2]
-The avatar of chain golem is Figure of map_monster_chain_golem.
-The avatar of reaper is Figure of map_monster_reaper.
-The avatar of jumping bomb is Figure of map_monster_jumping_bomb.
-The avatar of hound is Figure of map_monster_hound.
-The avatar of demon of rage is Figure of map_monster_demon_of_rage.
+[The avatar of chain golem is Figure of map_monster_chain_golem.]
+[The avatar of reaper is Figure of map_monster_reaper.]
+[The avatar of jumping bomb is Figure of map_monster_jumping_bomb.]
+[The avatar of hound is Figure of map_monster_hound.]
+[The avatar of demon of rage is Figure of map_monster_demon_of_rage.]
 [level 3]
-The avatar of mindslug is Figure of map_monster_mindslug.
-The avatar of minotaur is Figure of map_monster_minotaur.
-The avatar of giant tentacle is Figure of map_monster_giant_tentacle.
+[The avatar of mindslug is Figure of map_monster_mindslug.]
+[The avatar of minotaur is Figure of map_monster_minotaur.]
+[The avatar of giant tentacle is Figure of map_monster_giant_tentacle.]
 [level 4]
-The avatar of Bodmall is Figure of map_monster_Bodmall.
-The avatar of healer of Aite is Figure of map_monster_healer_of_Aite.
-The avatar of tormentor of Aite is Figure of map_monster_tormentor_of_Aite.
-The avatar of defender of Aite is Figure of map_monster_defender_of_Aite.
-The avatar of overmind is Figure of map_monster_overmind.
+[The avatar of Bodmall is Figure of map_monster_Bodmall.]
+[The avatar of healer of Aite is Figure of map_monster_healer_of_Aite.]
+[The avatar of tormentor of Aite is Figure of map_monster_tormentor_of_Aite.]
+[The avatar of defender of Aite is Figure of map_monster_defender_of_Aite.]
+[The avatar of overmind is Figure of map_monster_overmind.]
 [level 5]
-The avatar of Malygris is Figure of map_monster_Malygris.
+[The avatar of Malygris is Figure of map_monster_Malygris.]
 [people]
-The avatar of Fafhrd is Figure of map_monster_Fafhrd.
-The avatar of Mouser is Figure of map_monster_Mouser.
+[The avatar of Fafhrd is Figure of map_monster_Fafhrd.
+The avatar of Mouser is Figure of map_monster_Mouser.]
 [cosmic beasts]
-The avatar of Nameless Horror is Figure of map_monster_Nameless_Horror.
+[The avatar of Nameless Horror is Figure of map_monster_Nameless_Horror.]
 [undead]
-The avatar of rotting corpse is Figure of map_monster_rotting_corpse.
-The avatar of aswang is Figure of map_monster_aswang.
-The avatar of mummified priest is Figure of map_monster_mummified_priest.
-The avatar of abyss of the soul is Figure of map_monster_abyss_of_the_soul.
+[The avatar of rotting corpse is Figure of map_monster_rotting_corpse.]
+[The avatar of aswang is Figure of map_monster_aswang.]
+[The avatar of mummified priest is Figure of map_monster_mummified_priest.]
+[The avatar of abyss of the soul is Figure of map_monster_abyss_of_the_soul.]
 [demons]
-The avatar of demonic assassin is Figure of map_monster_demonic_assassin.
-The avatar of smoke demon is Figure of map_monster_smoke_demon.
-The avatar of imp is Figure of map_monster_imp.
-The avatar of demonic mistress is Figure of map_monster_demonic_mistress.
+[The avatar of demonic assassin is Figure of map_monster_demonic_assassin.]
+[The avatar of smoke demon is Figure of map_monster_smoke_demon.]
+[The avatar of imp is Figure of map_monster_imp.]
+[The avatar of demonic mistress is Figure of map_monster_demonic_mistress.]
 
 Section - Legend labels for the map
 
-A person has a figure name called the legend-label. The legend-label of a person is usually Figure of Null.
+[A person has a figure name called the legend-label. The legend-label of a person is usually Figure of Null.]
 
 [level 1]
-The legend-label of Miranda is Figure of map_legend_Miranda.
-The legend-label of swarm of daggers is Figure of map_legend_swarm_of_daggers.
-The legend-label of ravenous armadillo is Figure of map_legend_ravenous_armadillo.
-The legend-label of wisps of pain is Figure of map_legend_wisps_of_pain.
-The legend-label of blood ape is Figure of map_legend_blood_ape.
+[The legend-label of Miranda is Figure of map_legend_Miranda.]
+[The legend-label of swarm of daggers is Figure of map_legend_swarm_of_daggers.]
+[The legend-label of ravenous armadillo is Figure of map_legend_ravenous_armadillo.]
+[The legend-label of wisps of pain is Figure of map_legend_wisps_of_pain.]
+[The legend-label of blood ape is Figure of map_legend_blood_ape.]
 [level 2]
-The legend-label of chain golem is Figure of map_legend_chain_golem.
-The legend-label of reaper is Figure of map_legend_reaper.
-The legend-label of jumping bomb is Figure of map_legend_jumping_bomb.
-The legend-label of hound is Figure of map_legend_hound.
-The legend-label of demon of rage is Figure of map_legend_demon_of_rage.
+[The legend-label of chain golem is Figure of map_legend_chain_golem.]
+[The legend-label of reaper is Figure of map_legend_reaper.]
+[The legend-label of jumping bomb is Figure of map_legend_jumping_bomb.]
+[The legend-label of hound is Figure of map_legend_hound.]
+[The legend-label of demon of rage is Figure of map_legend_demon_of_rage.]
 [level 3]
-The legend-label of mindslug is Figure of map_legend_mindslug.
-The legend-label of minotaur is Figure of map_legend_minotaur.
-The legend-label of giant tentacle is Figure of map_legend_giant_tentacle.
+[The legend-label of mindslug is Figure of map_legend_mindslug.]
+[The legend-label of minotaur is Figure of map_legend_minotaur.]
+[The legend-label of giant tentacle is Figure of map_legend_giant_tentacle.]
 [level 4]
-The legend-label of Bodmall is Figure of map_legend_Bodmall.
-The legend-label of healer of Aite is Figure of map_legend_healer_of_Aite.
-The legend-label of tormentor of Aite is Figure of map_legend_tormentor_of_Aite.
-The legend-label of defender of Aite is Figure of map_legend_defender_of_Aite.
-The legend-label of overmind is Figure of map_legend_overmind.
+[The legend-label of Bodmall is Figure of map_legend_Bodmall.]
+[The legend-label of healer of Aite is Figure of map_legend_healer_of_Aite.]
+[The legend-label of tormentor of Aite is Figure of map_legend_tormentor_of_Aite.]
+[The legend-label of defender of Aite is Figure of map_legend_defender_of_Aite.]
+[The legend-label of overmind is Figure of map_legend_overmind.]
 [level 5]
-The legend-label of Malygris is Figure of map_legend_Malygris.
+[The legend-label of Malygris is Figure of map_legend_Malygris.]
 [people]
-The legend-label of Fafhrd is Figure of map_legend_Fafhrd.
-The legend-label of Mouser is Figure of map_legend_Mouser.
+[The legend-label of Fafhrd is Figure of map_legend_Fafhrd.
+The legend-label of Mouser is Figure of map_legend_Mouser.]
 [cosmic beasts]
-The legend-label of Nameless Horror is Figure of map_legend_Nameless_Horror.
+[The legend-label of Nameless Horror is Figure of map_legend_Nameless_Horror.]
 [undead]
-The legend-label of rotting corpse is Figure of map_legend_rotting_corpse.
-The legend-label of aswang is Figure of map_legend_aswang.
-The legend-label of mummified priest is Figure of map_legend_mummified_priest.
-The legend-label of abyss of the soul is Figure of map_legend_abyss_of_the_soul.
+[The legend-label of rotting corpse is Figure of map_legend_rotting_corpse.]
+[The legend-label of aswang is Figure of map_legend_aswang.]
+[The legend-label of mummified priest is Figure of map_legend_mummified_priest.]
+[The legend-label of abyss of the soul is Figure of map_legend_abyss_of_the_soul.]
 [demons]
-The legend-label of demonic assassin is Figure of map_legend_demonic_assassin.
-The legend-label of smoke demon is Figure of map_legend_smoke_demon.
-The legend-label of imp is Figure of map_legend_imp.
-The legend-label of demonic mistress is Figure of map_legend_demonic_mistress.
+[The legend-label of demonic assassin is Figure of map_legend_demonic_assassin.]
+[The legend-label of smoke demon is Figure of map_legend_smoke_demon.]
+[The legend-label of imp is Figure of map_legend_imp.]
+[The legend-label of demonic mistress is Figure of map_legend_demonic_mistress.]
 
 
 Section - Room labels for the map

@@ -106,6 +106,11 @@ Killing rule (this is the increment died and kill stats rule):
 	update the monster statistics.
 
 
+Section - Monster avatars for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+A person has a figure name called the avatar. The avatar of a person is usually Figure of Null.
+A person has a figure name called the legend-label. The legend-label of a person is usually Figure of Null.
+
 
 Chapter - Level 1 - Swarm of Daggers
 
@@ -143,6 +148,12 @@ The description of the swarm of daggers is "Animated by some dark magic, these d
 An AI action selection rule for the swarm of daggers (this is the daggers do not concentrate rule):
 	choose row with an Option of the action of the swarm of daggers concentrating in the Table of AI Action Options;
 	decrease the Action Weight entry by 100.
+
+Section - Dagger images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of swarm of daggers is Figure of map_monster_swarm_of_daggers.
+The legend-label of swarm of daggers is Figure of map_legend_swarm_of_daggers.
+
 
 Section - Scattering
 
@@ -336,6 +347,11 @@ Aftereffects rule (this is the blood ape grows in size when hit rule):
 			say "Sensing perhaps that it cannot grow further in its current confines, the ape does not lick of the blood.".
 			
 
+Section - Blood Ape images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of blood ape is Figure of map_monster_blood_ape.
+The legend-label of blood ape is Figure of map_legend_blood_ape.
+
 
 Section - Prose
 
@@ -500,7 +516,14 @@ When play begins:
 	now dodgability of X is 3;
 	now passive parry max of X is 1;
 	now active parry max of X is 3;
-	now the printed name of X is "bony tail club".			
+	now the printed name of X is "bony tail club".		
+
+
+Section - Armadillo images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)	
+
+The avatar of ravenous armadillo is Figure of map_monster_ravenous_armadillo.
+The legend-label of ravenous armadillo is Figure of map_legend_ravenous_armadillo.
+
 
 Section - Prose
 
@@ -738,6 +761,13 @@ Miranda wears monk's robe.
 [Carries nunchucks: see Kerkerkruip Items]
 Miranda carries the pair of nunchucks. The pair of nunchucks is readied.
 
+
+Section - Miranda images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)	
+
+The avatar of Miranda is Figure of map_monster_Miranda.
+The legend-label of Miranda is Figure of map_legend_Miranda.
+
+
 Section - Stunning blow
 
 Stunning is an action applying to one thing. Understand "stun [person]" as stunning.
@@ -924,6 +954,11 @@ A damage modifier rule (this is the wisps of pain take less damage rule):
 		say " - 5 (hard to damage)[run paragraph on]";
 		decrease the attack damage by 5.
 
+
+Section - Wisps of pain images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)	
+
+The avatar of wisps of pain is Figure of map_monster_wisps_of_pain.
+The legend-label of wisps of pain is Figure of map_legend_wisps_of_pain.
 
 
 Section - States
@@ -1200,6 +1235,11 @@ An AI action selection rule for the chain golem (this is the chain golem likes t
 		if concentration of the global attacker is 1:
 			decrease the Weight entry by 8.]
 
+Section - Chain Golem images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of chain golem is Figure of map_monster_chain_golem.
+The legend-label of chain golem is Figure of map_legend_chain_golem.
+
 
 Section - Disarm power
 
@@ -1426,6 +1466,12 @@ Chance to win rule when the global defender is the jumping bomb (this is the CTW
 		decrease the chance-to-win by the concentration of the jumping bomb.
 
 
+Section - Jumping Bomb images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of jumping bomb is Figure of map_monster_jumping_bomb.
+The legend-label of jumping bomb is Figure of map_legend_jumping_bomb.
+
+
 Section - Prose
 
 Report an actor hitting the dead jumping bomb:
@@ -1585,6 +1631,13 @@ First when play begins (this is the Reaper carries a random scythe rule): [first
 	if m is 3:
 		move the scythe of oxidation to the Reaper;
 		now the scythe of oxidation is readied.
+
+
+Section - Reaper images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of reaper is Figure of map_monster_reaper.
+The legend-label of reaper is Figure of map_legend_reaper.
+
 
 Section - The Reaper follows you!
 
@@ -1758,6 +1811,13 @@ When play begins:
 	now passive parry max of X is 2;
 	now active parry max of X is 0;
 	now printed name of X is "demon's fiery tendrils".
+
+
+Section - Demon of Rage images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of demon of rage is Figure of map_monster_demon_of_rage.
+The legend-label of demon of rage is Figure of map_legend_demon_of_rage.
+
 
 Section - Getting stronger
 
@@ -1933,6 +1993,13 @@ When play begins:
 	now passive parry max of X is 2;
 	now active parry max of X is 0.
 
+
+Section - Hound images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of hound is Figure of map_monster_hound.
+The legend-label of hound is Figure of map_legend_hound.
+
+
 Section - Prose
 
 Report an actor hitting the dead hound:
@@ -2080,6 +2147,13 @@ When play begins:
 	now passive parry max of X is 2;
 	now active parry max of X is 0;
 	now printed name of X is "slug's crushing body".
+
+
+Section - Mindslug images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of mindslug is Figure of map_monster_mindslug.
+The legend-label of mindslug is Figure of map_legend_mindslug.
+
 
 Section - Mind blast action
 
@@ -2238,6 +2312,14 @@ Check a mindslug-enslaved npc attacking (this is the slaves may be freed from mi
 	consider the free slaves of the mindslug when it is killed rule;
 	if actor is not mindslug-enslaved:
 		do nothing instead.
+
+
+Section - Fafhrd and Mouser images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of Fafhrd is Figure of map_monster_Fafhrd.
+The legend-label of Fafhrd is Figure of map_legend_Fafhrd.
+The avatar of Mouser is Figure of map_monster_Mouser.
+The legend-label of Mouser is Figure of map_legend_Mouser.
 		
 
 Section - Prose for Fafhrd and Mouser
@@ -2486,6 +2568,13 @@ When play begins:
 	now the damage die of X is 0.
 
 The giant tentacle is eyeless.
+
+
+Section - Giant Tentacle images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of giant tentacle is Figure of map_monster_giant_tentacle.
+The legend-label of giant tentacle is Figure of map_legend_giant_tentacle.
+
 
 Section - The tentacle grapples
 
@@ -2821,6 +2910,11 @@ Minotaur is a weapon user.
 The minotaur carries the minotaur's axe.  The minotaur's axe is readied.
 
 
+Section - Minotaur images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of minotaur is Figure of map_monster_minotaur.
+The legend-label of minotaur is Figure of map_legend_minotaur.
+
 
 Section - Minotaur prose
 
@@ -2949,6 +3043,13 @@ Report healer of Aite waiting when healer of Aite is insane:
 	say "The healer puts his hand together as if to pray, then says: 'Pancakes, please'.";
 	rule succeeds.	
 
+
+Section - Healer of Aite images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of healer of Aite is Figure of map_monster_healer_of_Aite.
+The legend-label of healer of Aite is Figure of map_legend_healer_of_Aite.
+
+
 Section - Tormentor of Aite
 
 A tormentor of Aite is a female monster. The tormentor of Aite is not neuter. "A black-robed mage stalks through the room."
@@ -3004,6 +3105,13 @@ Report the tormentor of Aite dodging:
 Report the tormentor of Aite waiting when the tormentor of Aite is insane:
 	say "'I never wanted to be a tormentor,' the priestess says. 'I wanted to be a [one of]goose girl[or]lumberjack[or]mother[at random]!' Tears stream down her face.";
 	rule succeeds.	
+
+
+Section - Tormentor of Aite images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of tormentor of Aite is Figure of map_monster_tormentor_of_Aite.
+The legend-label of tormentor of Aite is Figure of map_legend_tormentor_of_Aite.
+
 
 Section - Defender of Aite
 
@@ -3065,6 +3173,13 @@ Report the defender of Aite dodging:
 Report the defender of Aite waiting when the defender of Aite is insane:
 	say "The defender licks his shield.";
 	rule succeeds.	
+
+
+Section - Tormentor of Aite images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of defender of Aite is Figure of map_monster_defender_of_Aite.
+The legend-label of defender of Aite is Figure of map_legend_defender_of_Aite.
+
 
 Section - Power of the Fanatics of Aite
 
@@ -3160,6 +3275,11 @@ When play begins:
 	now the dodgability of X is 3;
 	now printed name of X is "lightning bolt".
 
+
+Section - Bodmall images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of Bodmall is Figure of map_monster_Bodmall.
+The legend-label of Bodmall is Figure of map_legend_Bodmall.
 
 
 Section - Bodmall's lightning attack
@@ -3752,6 +3872,12 @@ When play begins:
 	now printed name of X is "small nail".
 
 
+Section - Overmind images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of overmind is Figure of map_monster_overmind.
+The legend-label of overmind is Figure of map_legend_overmind.
+
+
 Section - Overmind bonus
 
 To decide which number is the overmind bonus of (guy - a person):
@@ -3967,7 +4093,14 @@ When play begins:
 
 Malygris is weapon user.
 
-Malygris carries the dagger of draining
+Malygris carries the dagger of draining.
+
+
+Section - Malygris images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of Malygris is Figure of map_monster_Malygris.
+The legend-label of Malygris is Figure of map_legend_Malygris.
+
 
 Section - Randomising Malygris
 
@@ -4164,6 +4297,13 @@ Demonic assassin is weapon user.
 
 The demonic assassin carries the demon blade.
 
+
+Section - Demonic Assassin images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of demonic assassin is Figure of map_monster_demonic_assassin.
+The legend-label of demonic assassin is Figure of map_legend_demonic_assassin.
+
+
 Section - Demonic assassin prose
 
 Report an actor hitting the dead demonic assassin:
@@ -4280,6 +4420,12 @@ An AI action selection rule for the Nameless Horror (this is the Nameless Horror
 
 Instead of the Nameless Horror waiting:
 	say "[one of]The Nameless Horror emits a maddening shriek[or]Darkness coalesces around the Nameless Horror[or]The world shakes as the Nameless Horror roars in defiance[at random].".
+
+
+Section - Nameless Horror images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of Nameless Horror is Figure of map_monster_Nameless_Horror.
+The legend-label of Nameless Horror is Figure of map_legend_Nameless_Horror.
 
 
 Section - Nameless horror prose
@@ -4425,6 +4571,13 @@ A damage multiplier rule (this is the limbless rotting corpse can't attack rule)
 		say " - 100% (no means of attack)[run paragraph on]";
 		now the attack damage is 0.
 
+
+Section - Rotting corpse images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of rotting corpse is Figure of map_monster_rotting_corpse.
+The legend-label of rotting corpse is Figure of map_legend_rotting_corpse.
+
+
 Section - Rotting corpse prose
 
 Report an actor hitting the dead rotting corpse:
@@ -4482,6 +4635,13 @@ When play begins:
 	now passive parry max of X is 2;
 	now active parry max of X is 0;	
 	now the printed name of X is "[if as-shape of aswang is as-witch]razor-sharp fingernails[otherwise if as-shape of aswang is as-bird]beak[otherwise]teeth[end if]".
+
+
+Section - Aswang images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of aswang is Figure of map_monster_aswang.
+The legend-label of aswang is Figure of map_legend_aswang.
+
 
 Section - Shape-shifting
 
@@ -4676,6 +4836,13 @@ The abyss of the soul is flyer.
 
 The abyss of the soul strength is a number that varies. The abyss of the soul strength is 2.
 
+
+Section - Mummified priest images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of abyss of the soul is Figure of map_monster_abyss_of_the_soul.
+The legend-label of abyss of the soul is Figure of map_legend_abyss_of_the_soul.
+
+
 Section - AI
 
 An AI action selection rule for the at-Act abyss of the soul (this is the abyss of the soul pulsates rule):
@@ -4772,6 +4939,13 @@ When play begins:
 	now the printed name of X is "bandaged fists".
 
 The mummified priest carries the was sceptre.
+
+
+Section - Mummified priest images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of mummified priest is Figure of map_monster_mummified_priest.
+The legend-label of mummified priest is Figure of map_legend_mummified_priest.
+
 
 Section - Cursing
 
@@ -4882,6 +5056,12 @@ When play begins:
 	now the printed name of X is "tendrils".
 
 Understand "tendrils" as the smoke demon.
+
+
+Section - Smoke Demon images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of smoke demon is Figure of map_monster_smoke_demon.
+The legend-label of smoke demon is Figure of map_legend_smoke_demon.
 
 
 Section - Making it appear and disappear
@@ -5050,6 +5230,12 @@ When play begins:
 Understand "claws" as the imp.
 
 
+Section - Imp images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of imp is Figure of map_monster_imp.
+The legend-label of imp is Figure of map_legend_imp.
+
+
 Section - AI
 
 Imping is an action applying to nothing.
@@ -5183,6 +5369,12 @@ When play begins:
 Demonic mistress is weapon user.
 
 The demonic mistress carries the demon whip.
+
+
+Section - Demonic Mistress images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of demonic mistress is Figure of map_monster_demonic_mistress.
+The legend-label of demonic mistress is Figure of map_legend_demonic_mistress.
 
 
 Section - Demonic mistress prose
