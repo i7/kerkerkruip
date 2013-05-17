@@ -29,6 +29,23 @@ Dedication relates various rooms to one god. The verb to be dedicated to implies
 
 The verb to infuse (he infuses, they infuse, he infused it, it is infused, it is infusing) implies the reversed dedication relation.
 
+Section - Favour rules
+
+The favour rules are a god based rulebook.
+
+
+Section - Status and short status
+
+Status rule (this is the religion status rule):
+	if the player worships a god:
+		if long status is true:
+			say "You worship [bold type][a random god worshipped by the player][roman type], and have accrued a favour of [divine favour].[line break][run paragraph on]";
+		otherwise:
+			say "Worshipping [bold type][a random god worshipped by the player][roman type], with [divine favour] favour.";
+
+
+
+
 
 Chapter - Commands
 
@@ -65,7 +82,23 @@ Carry out sacrificing:
 	let guy be a random god who infuses the location of the player;
 	now player worships guy;
 	increase divine favour by 1;
-	say "You now worship [guy], and have [divine favour] favour.".
+	say "You now worship [guy], and have [divine favour] favour.";
+	consider the favour rules for guy.
+
+
+
+
+Chapter - Aite
+
+Section - Favour rules
+
+Favour rule for Aite (this is the Aite favour 1 rule):
+	say "Aite grants you bloodlust! (If you damage someone with an attack, you will get a +1 attack bonus and a +1 damage bonus during your next turn.)";
+	[now player is bloodlusty;
+	now bloodlust strength of player is 1.]
+
+
+
 
 
 
