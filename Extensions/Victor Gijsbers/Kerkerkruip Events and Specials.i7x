@@ -64,7 +64,10 @@ Instead of entering the portal to Kerkerkruip when the player can move:
 	now the take no time boolean is false.
 			
 
+Section - Elemental Plane of Smoke label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+[Almost certainly not needed, but the label graphic exists, so what the heck.]
 
+The map-label of Elemental Plane of Smoke is Figure of map_label_Smoke.
 
 
 

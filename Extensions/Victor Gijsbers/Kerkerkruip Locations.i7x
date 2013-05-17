@@ -5,6 +5,18 @@ Use authorial modesty.
 
 Book - Rooms
 
+Section - Room labels for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+A room has a figure name called the map-label. The map-label of a room is usually Figure of Null.
+
+
+Section - Special map backgrounds (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+A room has a figure name called the map-background. The map-background of a room is usually Figure of Null.
+
+The Bridge of Doom is tunnel-drawn. The map-background of Bridge of Doom is Figure of map_room_lava.
+[If a room's background needs to extend outside the tile extent of the room, give it a y-offset.]
+[Figure of map_room_lava has a number called y-offset. The y-offset is 0.]
 
 
 Part - The rooms themselves
@@ -38,7 +50,9 @@ An attack modifier rule (this is the attack penalty in Entrance Hall rule):
 The player is in Entrance Hall.
 
 
+Section - Entrance Hall label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
+The map-label of Entrance Hall is Figure of map_label_Entrance.
 
 
 Chapter - Hall of Mirrors
@@ -90,6 +104,10 @@ An AI action selection rule for a person (called P) when the location is Hall of
 	choose row with an Option of the action of P concentrating in the Table of AI Action Options;
 	increase the Action Weight entry by 1.
 
+
+Section - Hall of Mirrors label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Hall of Mirrors is Figure of map_label_Mirrors.
 
 
 Chapter - Phantasmagoria
@@ -148,6 +166,11 @@ An AI action selection rule for a person (called P) when the location is Phantas
 		decrease the Action Weight entry by 2 times the concentration of P.
 
 
+Section - Hall of Mirrors label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Phantasmagoria is Figure of map_label_Phantasmagoria.
+
+
 Chapter - Lake of Lava
 
 The lake of lava is a room.
@@ -175,6 +198,10 @@ Falling rule (this is the Lake of Lava kills fallers rule):
 				now the health of falling-guy is -10;
 			rule succeeds.
 
+
+Section - Lake of Lava label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Lake of Lava is Figure of map_label_Lava_lake.
 
 
 Chapter - Bridge of Doom
@@ -309,7 +336,9 @@ First carry out inserting something into the seething lake of lava:
 	remove the noun from play;
 	say "You throw [the noun] into the lava." instead.
 				
+Section - Bridge of Doom label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
+The map-label of Bridge of Doom is Figure of map_label_Bridge.
 
 
 
@@ -430,7 +459,9 @@ A damage modifier rule (this is the Nomos damage bonus rule):
 		increase the attack damage by n.
 
 
-		
+Section - Temple of Nomos label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Temple of Nomos is Figure of map_label_Nomos.
 
 
 Chapter - Temple of Aite
@@ -568,6 +599,11 @@ Chance to win rule (this is the CTW Aite bonus rule):
 			increase the chance-to-win by 2.
 
 
+Section - Temple of Aite label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Temple of Aite is Figure of map_label_Aite.
+
+
 Chapter - Temple of Sul
 
 The temple of Sul is a room. "The only feature breaking the monotony of the circular room made of polished white marble is a huge [if the statue of Sul is in the Temple of Sul]statue. Hewn from flawless mountain crystal, it portrays the goddess Sul[otherwise]pile of fragments of the broken statue[end if]."
@@ -632,6 +668,10 @@ Instead of praying in Temple of Sul:
 					now item is cursed;
 					now item is curse-identified.
 
+
+Section - Temple of Sul label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Temple of Sul is Figure of map_label_Sul.
 
 
 
@@ -743,6 +783,12 @@ Instead of praying in the Temple of Isatzo:
 					decrease weapon attack bonus of item by 1.
 
 
+Section - Temple of Isatzo label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Temple of Isatzo is Figure of map_label_Isatzo.
+
+
+
 Chapter - The Crypt
 
 The crypt is a room. "Skulls and bones lie scattered amongst the ruined tombs. One big sarcophagus is still intact, and currently [if the sarcophagus is open]open[otherwise]closed[end if]."
@@ -831,6 +877,12 @@ Instead of entering the sarcophagus:
 	say "One should not joke with death.".
 
 
+Section - Crypt label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Crypt is Figure of map_label_Crypt.
+
+
+
 Chapter - Workshop of the Blademaster
 
 The workshop of the blademaster is a room. "The famous workshop of the master of Algir has been transported here in all its glory. A huge forge dominates the room."
@@ -860,6 +912,11 @@ Last check inserting something into the huge forge:
 	rule succeeds.
 
 
+Section - Workshop of the Blademaster label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Workshop of the Blademaster is Figure of map_label_Workshop.
+
+
 
 Chapter - Space-Time Discontinuum
 
@@ -883,6 +940,12 @@ An initiative update rule (this is the initiative is almost completely random in
 	if location is Space-Time Discontinuum and the location is not initiative-conferring:
 		repeat with X running through all alive persons enclosed by the location:				
 			now the initiative of X is a random number between 0 and 100.
+
+
+Section - Space-Time Discontinuum label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Space-Time Discontinuum is Figure of map_label_Discontinuum.
+
 
 
 Chapter - Vast Staircase
@@ -988,6 +1051,12 @@ An aftereffects rule (this is the hit may send you off the vast staircase rule):
 A thing called the staircase is scenery in vast Staircase. Understand "stairs" as the staircase. The description of the staircase is "The staircase winds around the wall, leaving the middle of the room empty.". Instead of climbing the staircase: try going up.
 
 
+Section - Vast Staircase label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Vast Staircase is Figure of map_label_Staircase.
+
+
+
 Chapter - Alchemical Laboratory
 
 The alchemical laboratory is a room. "Centuries ago, Malygris captured the great alchemist Metastasio and forced him to work in this laboratory. Most of his equipment is now gone, but one curious machine remains."
@@ -1022,6 +1091,10 @@ Last check inserting something into the curious machine:
 			say "You put [the noun] in the curious machine, but when nothing happens, you take it out again.";
 	rule succeeds.
 
+
+Section - Alchemical Laboratory label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Alchemical Laboratory is Figure of map_label_Laboratory.
 
 
 
@@ -1089,6 +1162,11 @@ Smoke rule (this is the smoke the Hall of Vapours rule):
 	if test room is Hall of Vapours and pipes-open is true:
 		if temporary smoke timer is less than 10:
 			now temporary smoke timer is 10.
+
+
+Section - Hall of Vapours label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Hall of Vapours is Figure of map_label_Vapours.
 			
 
 
@@ -1118,6 +1196,11 @@ Instead of entering the huge magical portal when the player can move:
 Instead of entering the huge empty portal:
 	take no time;
 	say "The magical field has dissipated, and the portal is now useless.".
+
+
+Section - Portal Room label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Portal Room is Figure of map_label_Portal.
 
 
 Chapter - Library
@@ -1182,6 +1265,12 @@ Last check inserting something into the scroll analyser:
 		otherwise:
 			say "[paragraph break]";
 	rule succeeds.
+
+
+Section - Library label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Library is Figure of map_label_Library.
+
 
 
 Chapter - Drawing Room
@@ -1260,6 +1349,12 @@ Persuasion rule for asking people to try doing something when the player is in D
 
 Instead of attacking or cutting or touching the fascinating drawing:
 	say "The painting seems to be magically protected.".
+
+
+Section - Drawing Room label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Drawing Room is Figure of map_label_Drawing.
+
 
 
 Chapter - Quartering Room
@@ -1358,6 +1453,12 @@ Instead of smelling putrefying arm:
 	say "It is horrible.".
 
 
+Section - Quartering Room label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Quartering Room is Figure of map_label_Quartering.
+
+
+
 Chapter - Hall of the Raging Banshees
 
 The hall of the raging banshees is a room. "A shaded, grotesque hall, fully cut out of onyx.[if living banshees boolean is false] Deep within the blackness of its walls hideous female figures seem to scream at you.[otherwise] A horde of female spirits is flying around, wailing their insane laments.[end if] [italic type](Current tension modifier: +[bansheemod] body, -[bansheemod] mind[if living banshees boolean is true]; [20 + (4 * tension)]% chance of concentration failure[end if].)[roman type]"
@@ -1425,6 +1526,11 @@ A mind bonus rule (this is the banshee mind bonus rule):
 		decrease faculty bonus score by bansheemod.
 
 
+Section - Hall of the Raging Banshees label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Hall of the Raging Banshees is Figure of map_label_Banshees.
+
+
 
 Chapter - Tungausy Sweat Lodge 
 
@@ -1466,6 +1572,13 @@ Status rule (this is the sweat lodge attack modifier rule):
 	if the location is the Tungausy Sweat Lodge and incensemod is not 0:
 		say "The [bold type]incense[roman type] gives everyone a +[incensemod] spirit bonus and a -[incensemod] attack penalty.[line break][run paragraph on]".
 
+
+Section - Tungausy Sweat Lodge label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Tungausy Sweat Lodge is Figure of map_label_Sweat_lodge.
+
+
+
 Chapter - Columnated Ruins
 
 The columnated ruins is a room. "This must have been a temple once, but all that is left is a forest of pillars, mostly broken and shattered. Even gods may be forgotten."
@@ -1494,6 +1607,11 @@ An attack modifier rule (this is the attack penalty in Columnated Ruins rule):
 		otherwise if n is less than 0:
 			say " - [-1 * n] (attacker hampered by pillars)[run paragraph on]";
 		increase the attack strength by n..
+
+
+Section - Columnated Ruins label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Columnated Ruins is Figure of map_label_Columns.
 
 
 
@@ -1548,6 +1666,12 @@ A dungeon interest rule (this is the potentially add the Eternal Prison rule):
 		put Eternal Prison in a near location.
 
 
+Section - Eternal Prison label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Eternal Prison is Figure of map_label_Prison.
+
+
+
 Chapter - Hidden Treasury
 
 The hidden treasury is a room. "On a raised portion of the floor stands a huge chest, beautifully inlaid with gems and precious metals. It must have been full of treasure once."
@@ -1572,6 +1696,11 @@ A dungeon interest rule (this is the potentially add the Hidden Treasury rule):
 			place 1 of epic things in ornate chest.
 
 
+Section - Hidden Treasury label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Hidden Treasury is Figure of map_label_Treasury.
+
+
 
 Chapter - Cavern of Rust
 
@@ -1591,6 +1720,12 @@ Cavern of Rust is rust-spored.
 A dungeon interest rule (this is the potentially add the Cavern of Rust rule):
 	if a random chance of 1 in 5 succeeds:
 		put Cavern of Rust in a near location.
+
+
+Section - Cavern of Rust label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Cavern of Rust is Figure of map_label_Rust.
+
 
 
 Chapter - Portal of Smoke
@@ -1634,6 +1769,13 @@ A dungeon interest rule (this is the potentially add the Portal of Smoke rule):
 		if a random chance of 1 in 3 succeeds:
 			place 1 of epic things in Elemental Plane of Smoke Storage.
 
+
+Section - Portal of Smoke label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Portal of Smoke is Figure of map_label_Smoke_portal.
+
+
+
 Chapter - Lair of the Imp
 
 The lair of the imp is a room. "There is no mistaking the smell of this room: an imp has been living here for centuries."
@@ -1659,6 +1801,12 @@ The unlock hidden switch of the lair of the imp is true.
 Dungeon interest rule (this is the add imp to its lair rule):
 	if Lair of the Imp is placed:
 		move imp to Lair of the Imp.
+
+
+Section - Lair of the Imp label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Lair of the Imp is Figure of map_label_Imp_s_Lair.
+
 
 
 Chapter - The maze
@@ -1720,6 +1868,12 @@ Instead of digging in the maze:
 A teleport impossible rule (this is the no teleportation in maze rule):
 	if the location of the test subject is the maze:
 		rule succeeds.
+
+
+Section - Maze label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Maze is Figure of map_label_Maze.
+
 
 Section - Getting mazed
 
@@ -1923,6 +2077,11 @@ Every turn when the location is the Arena of the Fallen and the combat status is
 		say "Disgruntled by  lack of blood, the spectators decide to lend a helping hand. [one of]Grippling claws tears away at[or]A small dagger, coated with a bit of blood, slices[or]Noxious fumes envelop[or]A small rock is flinged at[purely at random] you[if guy is not the player]r opponent[end if], doing [X] damage[if health of guy is less than 1] and killing [the guy][end if]!";
 		now the current dissatisfaction is 0;
 		increase the demon boredom by 2.
+
+
+Section - Entrance to the Arena label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Entrance to the Arena is Figure of map_label_Arena.
 				
 
 Section - Getting out of the Arena
@@ -1979,6 +2138,13 @@ A dungeon interest rule (this is the place a tome on the pedestal rule):
 Check taking a tome (this is the do no remove tomes from the pedestal rule):
 	if the noun is on the crystal pedestal:
 		say "The magical forces binding the tome to the pedestal are too great." instead.
+
+
+Section - Arcane Vault label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Arcane Vault is Figure of map_label_Vault.
+
+
 		
 Chapter - The Zen Room
 
@@ -2008,6 +2174,12 @@ When play begins:
 			add guy to X;
 		sort X in random order;
 		now chairinheritor is entry 1 of X.
+
+
+Section - Zen Room label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Zen Room is Figure of map_label_Zen.
+
 
 Section - Chairs
 
