@@ -310,6 +310,90 @@ The do not go in combat when raging rule is listed in the check retreating rules
 The do not go in combat when raging rule is listed in the check digging rules.
 
 
+Chapter - Bloodlust
+
+Section - Bloodlusting
+
+A person can be bloodlusting, about-to-bloodlust, or notlusting. A person is usually notlusting.
+
+Aftereffects rule (this is the aftereffect bloodlusting rule):
+	if the attack damage is not 0:
+		now global attacker is about-to-bloodlust.
+
+Every turn (this is the bloodlusting rule):
+	if main actor is about-to-bloodlust:
+		now main actor is bloodlusting;
+	otherwise:
+		now main actor is notlusting.
+
+Section - Bloodlust rules
+
+The bloodlust rules are a rulebook.
+The bloodlust dummy is a number that varies.
+
+To decide which number is bloodlust of (guy - a person):
+	now test subject is guy;
+	now bloodlust dummy is 0;
+	consider the bloodlust rules;
+	decide on bloodlust dummy.
+
+Section - Attack and damage bonus
+
+An attack modifier rule (this is the bloodlusting attack bonus rule):
+	if the global attacker is bloodlusting:
+		let n be bloodlust of global attacker;
+		if n is not 0:
+			say " + ", n, " (bloodlust)[run paragraph on]";
+			increase the attack strength by n.
+
+A damage modifier rule (this is the bloodlusting damage bonus rule):
+	if the global attacker is bloodlusting:
+		let n be bloodlust of global attacker;
+		if n is not 0:
+			say " + ", n, " (bloodlust)[run paragraph on]";
+			increase the attack damage by n.
+
+Section - Status
+
+Status rule (this is the bloodlust status rule):
+	if bloodlust of player is not 0:
+		let n be bloodlust of the player;
+		if long status is true:
+			say "Level [n] [bold type]bloodlust[roman type][line break][run paragraph on]".
+
+Section - Status
+
+Status rule (this is the bloodlusting status rule):
+	if player is bloodlusting and bloodlust of player is not 0:
+		let n be bloodlust of the player;
+		if long status is true:
+			say "[bold type]Bloodlust[roman type]: +[n] attack bonus, +[n] damage bonus[line break][run paragraph on]";
+		otherwise:
+			say "[bold type]Bloodlust[roman type]: +[n] attack, +[n] damage[line break][run paragraph on]".
+
+Section - AI
+
+Chance to win rule when the main actor is bloodlusting (this is the CTW bloodlusting bonus rule):
+	let n be bloodlust of the main actor;
+	increase the chance-to-win by n.
+
+An AI action selection rule for a bloodlusting person (this is the prefer attacking when bloodlusting rule):
+	choose row with an Option of the action of the main actor attacking the chosen target in the Table of AI Action Options;
+	let n be bloodlust of the main actor;
+	increase the Action Weight entry by n.	
+
+Section - Innate bloodlust
+
+A person has a number called the innate bloodlust. The innate bloodlust of a person is usually 0.
+
+Bloodlust rule (this is the innate bloodlust rule):
+	increase bloodlust dummy by innate bloodlust of test subject.
+		
+
+
+
+
+
 Chapter - Insanity
 
 A Standard AI rule for an insane person (called P) (this is the insane people attack themselves rule):

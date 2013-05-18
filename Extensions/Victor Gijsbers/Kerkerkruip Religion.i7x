@@ -93,11 +93,18 @@ Chapter - Aite
 Section - Favour rules
 
 Favour rule for Aite (this is the Aite favour 1 rule):
-	say "Aite grants you bloodlust! (If you damage someone with an attack, you will get a +1 attack bonus and a +1 damage bonus during your next turn.)";
-	[now player is bloodlusty;
-	now bloodlust strength of player is 1.]
+	say "Aite grants you 1 level of bloodlust!";
+	increase innate bloodlust of player by 1.
 
 
+Section - Bloodlust
+
+Bloodlust rule (this is the aite bloodlust rule):
+	if test subject is the player and player worships aite:
+		if divine favour is greater than 0:
+			increase bloodlust dummy by 1;
+		if divine favour is greater than 5:
+			increase bloodlust dummy by 1.
 
 
 
