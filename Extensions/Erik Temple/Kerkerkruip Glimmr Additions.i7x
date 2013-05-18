@@ -1841,7 +1841,7 @@ Last when play begins:
 			otherwise:
 				say "[place] does not provide the map-label property. Check to be sure that it will be labeled properly on the map.";
 	repeat with villain running through persons:
-		if villain is not the player:
+		if villain is not the player and villain is not a god:
 			if villain provides the property avatar:
 				if the avatar of villain is Figure of Null:
 					say "[villain] has no avatar image.";
