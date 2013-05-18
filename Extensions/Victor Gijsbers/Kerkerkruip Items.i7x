@@ -2544,7 +2544,7 @@ The gorgeous dagger is iron.
 
 The description of the gorgeous dagger is "Adorned with gold and a large emerald at the end of the hilt, this dagger is not only beautiful, but also perfect for precise attacks in tense situations. The decadence of its design proves it to be of Yahvinnean origin.".
 
-Section - Evil dagger (minor)
+Section - Evil dagger (major)
 
 The evil dagger is a major dagger.
 The evil dagger is deathly.
@@ -3176,7 +3176,13 @@ Section - Magical spade (major)
 
 The magical spade is a major thing. The magical spade is a digging tool. The description of the magical spade is "Used by wizards to construct their dungeons, a magical spade can be used to dig tunnels in whatever direction you wish. Just dig north, for instance.".
 The magical spade is magical.
-The magical spade is iron.			
+The magical spade is iron.
+
+Last dungeon interest rule (this is the extra magical spade placement rule):
+	if magical spade is off-stage:
+		if a random chance of 3 in 10 succeeds:
+			let place be a random placed treasurable room;
+			move magical spade to place.
 
 Section - Vial of Purification (minor)
 
