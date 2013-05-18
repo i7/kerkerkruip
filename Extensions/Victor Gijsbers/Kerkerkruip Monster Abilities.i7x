@@ -359,7 +359,7 @@ Status rule (this is the bloodlust status rule):
 	if bloodlust of player is not 0:
 		let n be bloodlust of the player;
 		if long status is true:
-			say "Level [n] [bold type]bloodlust[roman type][line break][run paragraph on]".
+			say "Level [n] [bold type]bloodlust[roman type].[line break][run paragraph on]".
 
 Section - Status
 
@@ -367,7 +367,7 @@ Status rule (this is the bloodlusting status rule):
 	if player is bloodlusting and bloodlust of player is not 0:
 		let n be bloodlust of the player;
 		if long status is true:
-			say "[bold type]Bloodlust[roman type]: +[n] attack bonus, +[n] damage bonus[line break][run paragraph on]";
+			say "[bold type]Bloodlust[roman type]: +[n] attack bonus, +[n] damage bonus.[line break][run paragraph on]";
 		otherwise:
 			say "[bold type]Bloodlust[roman type]: +[n] attack, +[n] damage[line break][run paragraph on]".
 

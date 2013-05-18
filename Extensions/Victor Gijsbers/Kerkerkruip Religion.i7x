@@ -93,9 +93,32 @@ Chapter - Aite
 Section - Favour rules
 
 Favour rule for Aite (this is the Aite favour 1 rule):
-	say "Aite grants you 1 level of bloodlust!";
-	increase innate bloodlust of player by 1.
+	if divine favour is 1:
+		say "Aite grants you 1 level of bloodlust!".
 
+Favour rule for Aite (this is the Aite favour 3 rule):
+	if divine favour is 3:
+		say "Aite grants you survival instincts!";
+		let n be body score of player + mind score of player + spirit score of player;
+		increase n by a random number between -2 and 6;
+		let a be a random number between 1 and n;
+		now n is n - a;
+		let b be a random number between 1 and n;
+		let c be n - b;
+		let d be a random number between 1 and 3;
+		if d is 1:
+			now body score of the player is a;
+			now mind score of the player is b;
+			now spirit score of the player is c;
+		if d is 2:
+			now body score of the player is b;
+			now mind score of the player is c;
+			now spirit score of the player is a;
+		if d is 3:
+			now body score of the player is c;
+			now mind score of the player is a;
+			now spirit score of the player is b;			
+		say "Aite shuffles your faculties -- you now have [body score of the player] body, [mind score of the player] mind, and [spirit score of the player] spirit."
 
 Section - Bloodlust
 
@@ -107,6 +130,36 @@ Bloodlust rule (this is the aite bloodlust rule):
 			increase bloodlust dummy by 1.
 
 
+Section - Survival Instinct
+
+An attack modifier rule (this is the survival instinct attack modifier rule):
+	if the global defender is the player:
+		if survival instinct is active:
+			say " - 2 (survival instinct)[run paragraph on]";
+			decrease the attack strength by 2.
+
+To decide whether survival instinct is active:
+	if the player worships Aite:
+		if divine favour is greater than 2:
+			let n be ((permanent health of the player + 3) / 4);
+			if health of the player < n:
+				decide yes;
+	otherwise:
+		decide no.
+
+Status rule (this is the survival instinct status rule):
+	if the player worships Aite and divine favour is greater than 2:
+		if long status is true:
+			say "You have [bold type]survival instincts[roman type][line break][run paragraph on]".
+
+Status rule (this is the survival instinct active status rule):
+	if survival instinct is active:
+		if long status is true:
+			say "[bold type]Survival instinct[roman type]: +2 defence bonus[line break][run paragraph on]";
+		otherwise:
+			say "[bold type]Survival instinct[roman type]: +2 defence[line break][run paragraph on]".			
 
 
+			
+			
 Kerkerkruip Religion ends here.
