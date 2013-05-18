@@ -94,17 +94,19 @@ Section - Favour rules
 
 Favour rule for Aite (this is the Aite favour 1 rule):
 	if divine favour is 1:
-		say "Aite grants you 1 level of bloodlust!".
+		say "Aite grants you one level of bloodlust!".
 
 Favour rule for Aite (this is the Aite favour 3 rule):
 	if divine favour is 3:
 		say "Aite grants you survival instincts!";
 		let n be body score of player + mind score of player + spirit score of player;
-		increase n by a random number between -2 and 6;
+		increase n by a random number between 2 and 4;
 		let a be a random number between 1 and n;
 		now n is n - a;
 		let b be a random number between 1 and n;
+		if b is less than 1, now b is 1;
 		let c be n - b;
+		if c is less than 1, now c is 1;
 		let d be a random number between 1 and 3;
 		if d is 1:
 			now body score of the player is a;
@@ -119,6 +121,56 @@ Favour rule for Aite (this is the Aite favour 3 rule):
 			now mind score of the player is a;
 			now spirit score of the player is b;			
 		say "Aite shuffles your faculties -- you now have [body score of the player] body, [mind score of the player] mind, and [spirit score of the player] spirit."
+
+The Aite-gift-box is a container. Two scrolls of the blade are in the Aite-gift-box.
+
+Favour rule for Aite (this is the Aite favour 6 rule):
+	if divine favour is 6:
+		say "Aite grants you another level of bloodlust, and two scrolls of the blade!";
+		repeat with item running through things enclosed by the Aite-gift-box:
+			if item is a scroll:
+				identify item;
+			move item to player.
+
+Favour rule for Aite (this is the Aite favour 10 rule):
+	if divine favour is 10:
+		say "Aite remakes your body in her own image!";
+		now player is female;
+		let n be a random number between -2 and 5;
+		if n is 0:
+			now n is 1;
+		say "Your attack score changes from [melee of the player] to [melee of the player + n]. ";
+		increase melee of the player by n;
+		now n is a random number between -2 and 5;
+		if n is 0:
+			now n is 1;
+		say "Your defence score changes from [defence of the player] to [defence of the player + n]. ";
+		increase defence of the player by n;
+		now n is body score of player + mind score of player + spirit score of player;
+		increase n by a random number between -2 and 10;
+		let a be a random number between 1 and n;
+		now n is n - a;
+		let b be a random number between 1 and n;
+		if b is less than 1, now b is 1;
+		let c be n - b;
+		if c is less than 1, now c is 1;
+		let d be a random number between 1 and 3;
+		if d is 1:
+			now body score of the player is a;
+			now mind score of the player is b;
+			now spirit score of the player is c;
+		if d is 2:
+			now body score of the player is b;
+			now mind score of the player is c;
+			now spirit score of the player is a;
+		if d is 3:
+			now body score of the player is c;
+			now mind score of the player is a;
+			now spirit score of the player is b;			
+		say "Aite shuffles your faculties -- you now have [body score of the player] body, [mind score of the player] mind, and [spirit score of the player] spirit.";		
+		consider the mutating rules;
+		follow the consider mutations rule;
+		follow the consider mutations rule.
 
 Section - Bloodlust
 
@@ -150,7 +202,7 @@ To decide whether survival instinct is active:
 Status rule (this is the survival instinct status rule):
 	if the player worships Aite and divine favour is greater than 2:
 		if long status is true:
-			say "You have [bold type]survival instincts[roman type][line break][run paragraph on]".
+			say "You have [bold type]survival instincts[roman type].[line break][run paragraph on]".
 
 Status rule (this is the survival instinct active status rule):
 	if survival instinct is active:

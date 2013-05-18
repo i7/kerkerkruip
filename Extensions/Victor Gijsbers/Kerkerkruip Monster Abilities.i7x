@@ -359,7 +359,7 @@ Status rule (this is the bloodlust status rule):
 	if bloodlust of player is not 0:
 		let n be bloodlust of the player;
 		if long status is true:
-			say "Level [n] [bold type]bloodlust[roman type].[line break][run paragraph on]".
+			say "Level [N in words] [bold type]bloodlust[roman type].[line break][run paragraph on]".
 
 Section - Status
 
