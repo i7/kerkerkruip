@@ -296,6 +296,43 @@ To have Aite intervene:
 			consider the grant powers when a monster is slain rule.
 
 
-			
+Chapter - Nomos
+
+Section - Favour rules
+
+Favour rule for Nomos (this is the Nomos favour 1 rule):
+	if divine favour is 1:
+		say "Nomos grants you protection from the next successful attack against you!";
+		increase hit protection of player by 1.
+
+Favour rule for Nomos (this is the Nomos favour 3 rule):
+	if divine favour is 3:
+		say "Nomos grants you 1 point of physical damage reduction, and an inquisitor's hood.";
+		move inquisitor's hood to the player.
+
+Favour rule for Nomos (this is the Nomos favour 6 rule):
+	if divine favour is 6:
+		say "Nomos grants you another 1 point of physical damage reduction, and the Malleus Maleficarum.";
+		move Malleus Maleficarum to the player.
+
+
+Section - Damage reduction
+
+A physical damage reduction rule (this is the worshipping Nomos damage reduction rule):
+	if the test subject is the player and the player worships Nomos:
+		if divine favour is greater than 2:
+			increase pdr by 1;
+		if divine favour is greater than 5:
+			increase pdr by 1;
+		if divine favour is greater than 9:
+			increase pdr by 2.
+
+Section - Inquisitor's hood
+
+[See Kerkerkruip Items]
+
+Section - Malleus Maleficarum
+
+[See Kerkerkruip Items]
 			
 Kerkerkruip Religion ends here.

@@ -780,8 +780,6 @@ Does the player mean stunning the player: it is unlikely.
 
 A person can be at-stun. A person is usually not at-stun.
 
-A person can be sometime-stunned. [for the Stunning performance achievement]
-
 First check stunning:
 	if Power of Miranda is not granted:
 		take no time;
@@ -806,7 +804,7 @@ Carry out an actor stunning:
 	try the actor attacking the noun instead.
 
 A damage modifier rule (this is the less damage when stunning rule):
-	if the global attacker is at-stun and global attacker weapon is not ranged:
+	if the global attacker is at-stun and global attacker weapon is not ranged and global attacker weapon is not stunning-weapon:
 		if the numbers boolean is true, say " - 1 (stunning)[run paragraph on]";
 		decrease the attack damage by 1.
 
@@ -815,17 +813,23 @@ Check Miranda attacking:
 		try Miranda stunning the noun instead.
 
 Aftereffects rule (this is the stunning rule):
-	if the global attacker is at-stun and the global defender is not dead:
+	if (the global attacker is at-stun and the global defender is not dead) or global attacker weapon is stunning-weapon:
 		if the attack damage is greater than 0 and global attacker weapon is not ranged:
-[			if the global attacker is the player:
-				now global defender is sometime-stunned; [for the Stunning performance achievement]
-				if at least three people are sometime-stunned:
-					award achievement stunning performance;]
-			let m be the final mind of the global attacker;
+			let m be 0;
+			if global attacker is at-stun:
+				increase m by final mind of the global attacker;
+			if global attacker weapon is stunning-weapon: 
+				increase m by 3;
 			if stun count of the global defender is less than m:
 				now the stun count of the global defender is m;
-			now stun strength of the global defender is final mind of the global attacker divided by 2;
-			say "[if global defender is player]You are[otherwise][The global defender] is[end if] [bold type]stunned[roman type], receiving a -1 attack penalty and a -[stun strength of the global defender] penalty to all faculties for [m] turns!";			
+			let n be 0;
+			if global attacker is at-stun:
+				increase n by final mind of the global attacker divided by 2;
+			if global attacker weapon is stunning-weapon: 
+				increase n by 3;
+			if stun strength of the global defender is less than n:
+				now stun strength of the global defender is n;
+			say "[if global defender is player]You are[otherwise][The global defender] is[end if] [bold type]stunned[roman type], receiving a -1 attack penalty and a -[stun strength of the global defender] penalty to all faculties for [stun count of the global defender] turns!";
 	now the global attacker is not at-stun.
 
 Status rule (this is the stunned status rule):
@@ -860,10 +864,12 @@ Every turn (this is the stun wears off rule):
 	if the main actor is stunned:
 		decrease stun count of main actor by 1;
 		if stun count of main actor is 0:
+			now stun strength of main actor is 0;
 			if main actor is player:
 				say "You are [bold type]no longer stunned[roman type].";
 			otherwise if main actor is visible:
 				say "[The main actor] [if the main actor is plural-named]are[otherwise]is[end if] [bold type]no longer stunned[roman type].".
+
 
 Section - Miranda's Prose
 

@@ -681,6 +681,16 @@ A faculty bonus rule (this is the crown of the god-king bonus rule):
 	if the test subject wears the crown of the god-king:
 		increase faculty bonus score by blood magic level of the crown of the god-king.
 
+Section - The inquisitor's hood (special)
+
+[Gifted by Nomos.]
+
+The inquisitor's hood is a hat. The description of the inquisitor's hood is "Dedication to Nomos requires discipline and concentration. To avoid being distracted by the blows of their enemies and the screams of tortured heretics, the inquisitors wear these magical hoods. This particular one gives you a +15% chance of remaining concentrated when damaged."
+
+A remain concentrated rule (this is the inquisitor's hood concentration rule):
+	if global defender wears the inquisitor's hood:
+		increase remain concentrated chance by 15.
+
 
 
 Chapter - Shirts
@@ -3047,6 +3057,48 @@ An aftereffects rule (this is the spiked mace grows rule):
 				say "The spiked mace of the ape king grows!"
 				
 
+Chapter - Hammer
+
+Section - Stunning weapon
+
+A weapon can be stunning-weapon. A weapon is usually not stunning-weapon. [A stunning weapon always stuns, without damage penalty. When combined with the stun action, it is extra effective.]
+
+Section - The hammer kind
+
+A hammer is a kind of weapon.
+A hammer is usually iron.
+
+The damage die of a hammer is usually 4.
+The weapon attack bonus of a hammer is usually -1.
+The weapon damage bonus of a hammer is usually 2.
+The dodgability of a hammer is usually 3.
+The passive parry max of a hammer is usually 1.
+The active parry max of a hammer is usually 1.
+
+A hammer is usually stunning-weapon.
+The special weapon info of a hammer is usually "; stuns opponents[run paragraph on]".
+
+Section - Malleus Maleficarum
+
+The Malleus Maleficarum is a hammer. The indefinite article is "the". The description of the Malleus Maleficarum is "To kill witches and other creatures of chaos, one needs to be accurate and methodical. This hammer is an excellent tool for the task." Understand "hammer" as the Malleus Maleficarum.
+
+The weapon attack bonus of Malleus Maleficarum is 1.
+The damage die of Malleus Maleficarum is 5.
+The weapon damage bonus of Malleus Maleficarum is 3.
+
+The special weapon info of the Malleus Maleficarum is "; stuns opponents; does not benefit from tension[run paragraph on]".
+
+Malleus-tension-dummy is a number that varies.
+
+First attack modifier rule (this is the Malleus remove tension rule):
+	if global attacker weapon is Malleus Maleficarum:
+		now malleus-tension-dummy is tension;
+		now tension is 0.
+
+First aftereffects rule (this is the Malleus reset tension rule):
+	if global attacker weapon is Malleus Maleficarum:
+		now tension is malleus-tension-dummy.
+	
 
 
 Chapter - Other weapons
