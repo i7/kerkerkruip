@@ -1540,10 +1540,9 @@ Section - Hall of the Raging Banshees label for the map (for use with Kerkerkrui
 The map-label of Hall of the Raging Banshees is Figure of map_label_Banshees.
 
 
-
 Chapter - Tungausy Sweat Lodge 
 
-The tungausy sweat lodge is a room. "The penetrating scent of dozens indigenous herbs pervade your nostrils as you enter the Tungausy Sweat Lodge.  A large circle of men wearing skull masks is standing around you, chanting monotonously in an ancient tongue.  In the four wind directions, incense burners are producing a grey, thick smoke. While you may feel feeble due to the intense smoke within this hall, the incense places your soul in a state of trance, assisting you in the use of religious powers. [italic type](Current tension modifier: +[incensemod] spirit, -[incensemod] on attacks.)[roman type]"
+The Tungausy sweat lodge is a room. "The penetrating scent of dozens of indigenous herbs pervades your nostrils as you enter the Tungausy Sweat Lodge.  A large group of men wearing skull masks encircles you, chanting monotonously in an ancient tongue.  At each of the four cardinal directions, incense burners produce a grey, thick smoke. While you may feel feeble due to the intense smoke within this hall, the incense places your soul in a state of trance, assisting you in the use of certain powers. [italic type](Current tension modifier: +[incensemod] spirit, -[incensemod] on attacks.)[roman type]"
 
 The Tungausy Sweat Lodge is connectable.
 The Tungausy Sweat Lodge is not connection-inviting.
@@ -1559,7 +1558,13 @@ The rarity of Tungausy Sweat Lodge is 1.
 The incense is scenery. Understand "scent", "herbs", "indigenous", "indigenous herbs", "smoke" as incense.  The description of the incense is "The smell of the incense is pervading, containing a mixture of sweet and spicy senses". The incense is in the Tungausy Sweat Lodge.
 
 Instead of taking the incense:
-	say "The circle of chanting shamans is preventing you from getting anywhere near the incense".
+	say "The circle of chanting shamans prevents you from getting anywhere near the incense".
+
+The dancing Tungausy shamans are scenery in the Tungausy Sweat Lodge. They are plural-named. Understand "men", "man", "shaman", "chanting", "circle", "dancer", "dancers" as the dancing Tungausy shamans. The description of the dancing Tungausy shamans is "You're not certain whether they are real or a figment, but you feel sure that they cannot harm you, nor you them."
+
+Instead of doing anything to the dancing Tungausy shamans:
+	say the description of the dancing Tungausy shamans;
+	say line break.
 
 To decide which number is the incensemod:
 	let x be the tension;

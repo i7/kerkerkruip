@@ -180,9 +180,9 @@ Last detection rule (this is the flickering lamps detection rule):
 
 Chapter - Tungausy Totem
 
-The tungausy totem is a religious fixed in place extra thing. "A primitive totem pole of the tungausy people casts its eerie glance about the room." Understand "pole" as the tungausy totem.
+The Tungausy totem is a religious fixed in place extra thing. "A primitive totem pole of the Tungausy people casts its eerie glance about the room." Understand "pole" as the tungausy totem.
 
-The description of the tungausy totem is "Being in the presence of the tungausy totem gives anyone a +5 bonus to spirit.".
+The description of the tungausy totem is "Being in the presence of the Tungausy totem gives anyone a +5 bonus to spirit.".
 
 A spirit bonus rule (this is the tungausy totem spirit bonus rule):
 	if the tungausy totem is in the location:
