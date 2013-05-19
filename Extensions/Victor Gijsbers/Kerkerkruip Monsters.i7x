@@ -3202,34 +3202,8 @@ Section - Power of the Fanatics of Aite
 The power of the Fanatics of Aite is a power. Healer of Aite grants power of the Fanatics of Aite.
 The power level of power of the Fanatics of Aite is 4.
 The command text of power of the fanatics of Aite is "pray".
-The description of power of the fanatics of Aite is "Type: active ability.[paragraph break]Command: pray (while not in another god's temple).[paragraph break]Effect: You can pray to Aite even when you are not in her temple, though the effect will not work in the temples of other gods. The probability that Aite's power will help you and harm your enemies also increases, with the increase being more pronounced if your spirit is higher. When Aite sends a divine weapon to skewer people, these also do more damage: huge weapons get a damage bonus of spirit / 5, and gigantic weapons get this bonus twice."
+The description of power of the fanatics of Aite is "Type: active and passive ability.[paragraph break]Command: sacrifice (while not in another god's temple).[paragraph break]Effect: You can sacrifice to Aite even when you are not in her temple, though the effect will not work in the temples of other gods. Once you worship Aite, the probability that her combat interventions will occur increases, the probability that they will benefit you increases, and they start dealing more damage. All these effects scale with your spirit score."
 
-[The fanatics power boolean is a truth state that varies. The fanatics power boolean is false.
-
-Every turn (this is the grant fanatics of power boolean rule):
-	if healer of Aite is dead and Tormentor of Aite is dead and Defender of Aite is dead:
-		if fanatics power boolean is false:
-			now fanatics power boolean is true;
-			say "Impressed with your prowess in combat, Aite grants you her favour! ([bold type]Power of the fanatics of Aite[roman type]: +4 attack, +4 defence, +20 health, pray to Aite anywhere and for better effects.)[paragraph break]";
-			gain the power of the fanatics of Aite. 
-
-A special can grant soul rule (this is the fanatics of Aite can grant soul rule):
-	if can-grant-soul-guy is the healer of Aite and the Tormentor of Aite is dead and the Defender of Aite is dead:
-		now can-grant-soul is true;
-	if can-grant-soul-guy is the tormentor of Aite and the healer of Aite is dead and the Defender of Aite is dead:
-		now can-grant-soul is true;
-	if can-grant-soul-guy is the defender of Aite and the Tormentor of Aite is dead and the healer of Aite is dead:
-		now can-grant-soul is true.
-	
-
-To gain the power of the Fanatics of Aite:
-	increase score by 4;
-	now test subject is fanatics-of-Aite-package;
-	unless absorption is stopped:
-		do power transferral with fanatics-of-Aite-package;
-		heal fully because fanatics-of-Aite-package is slain;
-	do achievement awarding for the fanatics-of-Aite-package.]
-	
 Absorbing power of the Fanatics of Aite:
 	increase melee of the player by 4;
 	increase defence of the player by 4;
@@ -3242,19 +3216,27 @@ Repelling power of the Fanatics of Aite:
 
 Status skill rule (this is the fanatics of aite status skill rule):
 	if power of the fanatics of aite is granted:
-		say "You have the power of the fanatics of Aite, which allows you to [bold type]pray[roman type] to the goddess even when you are not in her temple. This power does not work in the temples of other gods. [italic type](Level 4)[roman type][line break][run paragraph on]".
+		say "You have the power of the fanatics of Aite, which allows you to [bold type]sacrifice[roman type] to the goddess even when you are not in her temple. This power does not work in the temples of other gods. [italic type](Level 4)[roman type][line break][run paragraph on]".
+	
+A room can be temporary-Aite-temple. A room is usually not temporary-Aite-temple.
+		
+First check sacrificing (this is the turn every location into a temple of Aite rule):
+	if location is temporary-Aite-temple:
+		now location is not dedicated to Aite;
+		now location is not temporary-Aite-temple;
+	if no god infuses location:
+		if power of the fanatics of Aite is granted:
+			now location is dedicated to Aite;
+			now location is temporary-Aite-temple.
 
-Section - Praying when Aite power is granted
+	
+	
+
+Section - Beloved of Aite
 
 A beloved of Aite rule (this is the aite loves the bearer of her power rule):
 	if test subject is the player and power of the fanatics of aite is granted:
 		rule succeeds.
-
-First check praying:
-	if the power of the fanatics of aite is granted:
-		if the location is not consecrated:
-			do the Aite prayer instead.
-
 
 
 

@@ -167,7 +167,7 @@ Favour rule for Aite (this is the Aite favour 10 rule):
 			now body score of the player is c;
 			now mind score of the player is a;
 			now spirit score of the player is b;			
-		say "Aite shuffles your faculties -- you now have [body score of the player] body, [mind score of the player] mind, and [spirit score of the player] spirit.";		
+		say "Aite shuffles your faculties -- you now have [body score of the player] body, [mind score of the player] mind, and [spirit score of the player] spirit. ";		
 		consider the mutating rules;
 		follow the consider mutations rule;
 		follow the consider mutations rule.
@@ -210,6 +210,90 @@ Status rule (this is the survival instinct active status rule):
 			say "[bold type]Survival instinct[roman type]: +2 defence bonus[line break][run paragraph on]";
 		otherwise:
 			say "[bold type]Survival instinct[roman type]: +2 defence[line break][run paragraph on]".			
+
+Section - Beloved of Aite
+
+A beloved of Aite rule (this is the worshippers are beloved of Aite rule):
+	if test subject worships Aite:
+		rule succeeds.
+
+Section - Aite's engagement in combat
+
+Every turn when the player worships Aite (this is the Aite intervenes in combat rule):
+	if combat status is not peace:
+		if at least one hostile alive person is enclosed by the location:
+			let n be divine favour;
+			if power of the fanatics of Aite is granted:
+				increase n by (final spirit of the player / 3);
+			if a random chance of n in 100 succeeds:
+				have Aite intervene.
+
+To have Aite intervene:
+	let n be a random number between 3 and 50;
+	increase n by a random number between 1 and divine favour;
+	increase n by a random number between 1 and divine favour;
+	if power of the fanatics of Aite is granted:
+		increase n by 3;
+	if Aite wrath state is 1:
+		increase n by 10;
+	if Aite wrath state is -1:
+		decrease n by 10;
+	if at least one hostile alive person is enclosed by the location:
+		repeat with guy running through hostile alive persons enclosed by the location:
+			if guy is beloved of Aite:
+				decrease n by 4;
+	let X be permanent health of the player;
+	now X is X divided by 10; [the standard unit of damage is 10% of the maximum health of the player, rounded down]
+	increase X by a random number between 0 and 2;
+	if power of the fanatics of Aite is granted:
+		if a random chance of final spirit of the player in 50 succeeds:
+			increase X by 2;
+	let guy be a random hostile alive person enclosed by the location;
+	if n < 10:
+		let Y be (X times 3) divided by 2;
+		say "A gigantic [one of]sword[or]spear[or]pike[at random] bursts out of the ground, skewering you for [bold type][Y] damage[roman type]!";
+		decrease the health of the player by Y;
+		unless the player is dead:
+			let the player lose concentration;
+			if the player is hidden:
+				now the player is not hidden;
+				say "Your cry of pain reveals your presence.";
+		if health of the player is less than 1:
+			end the story saying "Aite is a dangerous mistress";
+	otherwise if n < 20:
+		say "A huge [one of]sword[or]spear[or]pike[at random] bursts out of the ground, impaling you for [bold type][X] damage[roman type]!";
+		decrease the health of the player by X;
+		unless the player is dead:
+			let the player lose concentration;
+		if health of the player is less than 1:
+			end the story saying "Aite is a dangerous mistress";
+	otherwise if n < 30:
+		if the concentration of the guy is less than 3:
+			say "[The guy] suddenly looks [bold type]highly concentrated[roman type], as if divinely inspired.";
+			now the concentration of the guy is 3;
+	otherwise if n < 40:
+		if the concentration of the player is less than 3:
+			say "You suddenly feel divinely inspired and [bold type]highly concentrated[roman type].";
+			now the concentration of the player is 3;
+	otherwise if n < 50:
+		say "A huge [one of]sword[or]spear[or]pike[at random] bursts out of the ground, impaling [the guy] for [bold type][X] damage[roman type]!";
+		decrease the health of the guy by X;
+		unless guy is dead:
+			let the guy lose concentration;			
+		if health of the guy is less than 1:
+			now the global attacker is the player;
+			now the global defender is the guy;
+			consider the grant powers when a monster is slain rule;
+	otherwise:
+		let Y be (X times 3) divided by 2;
+		say "A gigantic [one of]sword[or]spear[or]pike[at random] bursts out of the ground, impaling [the guy] for [bold type][Y] damage[roman type]!";
+		decrease the health of the guy by Y;
+		unless guy is dead:
+			let the guy lose concentration;			
+		if health of the guy is less than 1:
+			now killer-guy is the player;
+			now killed-guy is the guy;
+			consider the grant powers when a monster is slain rule.
 
 
 			
