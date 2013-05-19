@@ -13,13 +13,6 @@ g-status-color	12369084[#BCBCBC]
 g-humanist-crimson	10231552[#9C1F00]
 
 
-Chapter - Parser error fix
-[When we print to multiple windows, the Inform default library's automatic spacing routines are fooled. So we need to readjust spacing. Also, Kerkerkruip seems to call the printing a parser error activity twice for each parser error (once w/an empty message, followed by a second time in which the message is printed), hence the odd cycling here, to avoid printing spaces both before and after the error message.]
-
-After printing a parser error:
-	say "[one of][run paragraph on][or][line break][run paragraph on][cycling]"
-
-
 Chapter - Window definitions
 
 
