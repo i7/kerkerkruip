@@ -307,14 +307,18 @@ Favour rule for Nomos (this is the Nomos favour 1 rule):
 
 Favour rule for Nomos (this is the Nomos favour 3 rule):
 	if divine favour is 3:
-		say "Nomos grants you 1 point of physical damage reduction, and an inquisitor's hood.";
+		say "Nomos grants you a point of physical damage reduction, and an inquisitor's hood.";
 		move inquisitor's hood to the player.
 
 Favour rule for Nomos (this is the Nomos favour 6 rule):
 	if divine favour is 6:
-		say "Nomos grants you another 1 point of physical damage reduction, and the Malleus Maleficarum.";
+		say "Nomos grants you another point of physical damage reduction, and the Malleus Maleficarum.";
 		move Malleus Maleficarum to the player.
 
+Favour rule for Nomos (this is the Nomos favour 10 rule):
+	if divine favour is 10:
+		say "Nomos grants you a further two points of physical damage reduction, and the Tome of Law!";
+		move Tome of Law to the player.
 
 Section - Damage reduction
 
@@ -334,5 +338,98 @@ Section - Inquisitor's hood
 Section - Malleus Maleficarum
 
 [See Kerkerkruip Items]
+
+Section - Tome of Law
+
+[See Kerkerkruip Items]
+
+Section - Nomos's engagement in combat
+
+Every turn when the player worships Nomos (this is the Nomos intervenes in combat rule):
+	if combat status is not peace and Nomos counter is 0 and main actor is the player:
+		let n be divine favour;
+		if a random chance of n in 40 succeeds:
+			have Nomos intervene.
+
+The Nomos counter is a number that varies. The Nomos counter is 0.
+The Nomos bonus is a truth state that varies. The Nomos bonus is false.
+
+Every turn (this is the decrease the Nomos counter rule):
+	if the main actor is the player:
+		if Nomos counter is greater than 0:
+			decrease Nomos counter by 1;
+			if Nomos counter is 0:
+				now Nomos bonus is true.
+
+To have Nomos intervene:
+	now Nomos counter is a random number between 1 and 5;
+	if Nomos counter is 1 or Nomos counter is 2:
+		if a random chance of 1 in 2 succeeds:
+			increase Nomos counter by 1;
+	say "A deep voice inside your head speaks: 'You will attack [bold type][Nomos counter] turns[roman type] from now. The law will be with you.'".
+
+Before reading a command (this is the planning notification rule):
+	if the main actor is the player:
+		if the Nomos bonus is true:
+			say "[bold type](Remember: Nomos has told you to attack this turn.)[roman type][line break]".		
+
+First every turn rule (this is the Nomos bonus is false rule):
+	if the main actor is the player:
+		now Nomos bonus is false.
+
+Before not attacklike behaviour:
+	if Nomos bonus is true:
+		if combat state of the actor is not at-react:
+			if the main actor is the player and the actor is the player:
+				if at least one hostile alive person is enclosed by the location:
+					let X be a random hostile person enclosed by the location;
+					say "You plan on [current action], but find yourself attacking [the X] instead.";
+					try attacking X instead;
+				otherwise:
+					say "You plan on [current action], but find your body attacking itself instead!";
+					try the player hitting the player instead;
+					if the player is dead:
+						end the story saying "Nomos is not to be toyed with".
+
+Before attacklike behaviour when Nomos counter is greater than 0:
+	say "Deciding to break the command of Nomos, you plan on attacking [the noun]. However, you find yourself ";
+	if player is not the main actor:
+		say "doing nothing instead." instead;
+	otherwise:
+		if a random number between 1 and 5 is:
+			-- 1: say "doing nothing instead.";
+				try waiting instead;
+			-- 2: say "concentrating instead.";
+				try concentrating instead;
+			-- 3:
+				if the player carries at least one thing:
+					let X be a random thing carried by the player;
+					say "dropping [the X] instead.";
+					try dropping X instead;
+				otherwise: 
+					say "praising the god instead." instead;
+			-- 4: say "speaking a language you have never heard instead." instead;
+			-- 5: say "contemplating the inevitability of Death instead." instead.
+
+An attack modifier rule (this is the Nomos attack bonus rule):
+	if Nomos bonus is true and the global attacker is the player:
+		if the numbers boolean is true, say " + [nomos piety] (the law is with you)[run paragraph on]";
+		increase the attack strength by nomos piety.
+
+A damage modifier rule (this is the Nomos damage bonus rule):
+	if Nomos bonus is true and the global attacker is the player:
+		if the numbers boolean is true, say " + [nomos piety] (the law is with you)[run paragraph on]";
+		increase the attack damage by nomos piety.
+			
+To decide which number is Nomos piety:
+	if player worships Nomos:
+		if divine favour > 9:
+			decide on 4;
+		if divine favour > 5:
+			decide on 3;
+		if divine favour > 2:
+			decide on 2;
+		decide on 1;
+	decide on 0.
 			
 Kerkerkruip Religion ends here.

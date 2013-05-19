@@ -552,7 +552,10 @@ This is the periapt rule:
 	if the player wears the periapt of prophecy and the ment timer is greater than 0:
 		if the combat status is combat:
 			if the main actor is the player:
-				now the periapt attack strength is a roll of the dice;
+				if tome-of-law-number is not 0:
+					now periapt attack strength is tome-of-law-number;
+				otherwise:
+					now the periapt attack strength is a roll of the dice;
 				say "If you choose to attack, your performance will be [if periapt attack strength is less than 4]weak[otherwise if periapt attack strength is less than 8]average[otherwise if periapt attack strength is not 20]strong[otherwise]heroic[end if].".
 
 The periapt rule is listed before the main actor chooses an action rule in the combat round rules.
@@ -3530,9 +3533,22 @@ Victory message rule (this is the brightest flame message rule):
 		end the story saying "You have destroyed your foe, and will be able to enjoy your victory for another [brightest-flame-counter] turns!";
 		rule succeeds.
 
+Section - Tome of Law
 
+The Tome of Law is a tome.
+Tome of Law is paper.
+Tome of Low is magical.
 
+Tome-of-law-number is a number that varies. Tome-of-law-number is 0.
 
+Carry out reading the Tome of Law:
+	now tome-of-law-number is a random number between 1 and 10;
+	say "The page shows the number [tome-of-law-number]."
+
+First special set attack strength rule (this is the tome of law attack roll rule):
+	if the tome-of-law-number is not 0:
+		now attack strength is tome-of-law-number;
+		rule succeeds.
 
 
 Kerkerkruip Items ends here.
