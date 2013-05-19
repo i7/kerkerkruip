@@ -367,17 +367,11 @@ Instead of attacking the statue of Nomos:
 Instead of climbing the statue of Nomos:
 	say "It is far too smooth for you to climb.".
 
-The Nomos counter is a number that varies. The Nomos counter is 0.
-The Nomos wrath counter is a number that varies. The Nomos wrath counter is 0.
-The Nomos bonus is a truth state that varies. The Nomos bonus is false.
 
-Every turn (this is the decrease the Nomos counter rule):
-	if the main actor is the player:
-		if Nomos counter is greater than 0:
-			decrease Nomos counter by 1;
-			if Nomos counter is 0:
-				now Nomos bonus is true.
-			
+
+[Doesn't do anything right now, but we might want to reuse it.]
+The Nomos wrath counter is a number that varies. The Nomos wrath counter is 0.			
+
 Every turn (this is the decrease the Nomos wrath counter rule):
 	if the main actor is the player:
 		if Nomos wrath counter is greater than 0:
@@ -386,79 +380,7 @@ Every turn (this is the decrease the Nomos wrath counter rule):
 				say "From the beginning of time, all the Universe's constituent particles have traced their preordained paths, to arrive at their present constellation -- a rare constellation in which all the thermal energy of your body is suddenly transferred to the air and dissipates. Your blood freezes, and you die.";
 				end the story saying "The last thing you hear is booming but mirthless laughter".
 
-[Instead of praying in Temple of Nomos:
-	if the Nomos counter is greater than 0:
-		say "You pray again, even though Nomos has already given you his decree. Will your iniquity go unpunished?";
-		if Nomos wrath counter is 0:
-			now Nomos wrath counter is a random number between 5 and 50;
-			if a random chance of 1 in 2 succeeds:
-				now Nomos wrath counter is 0;
-	otherwise:
-		now Nomos counter is a random number between 1 and 5;
-		if Nomos counter is 1 or Nomos counter is 2:
-			if a random chance of 1 in 2 succeeds:
-				increase Nomos counter by 1;
-		say "A deep voice inside your head speaks: 'You will attack [Nomos counter] turns from now. The law will be with you.'".]
 
-
-		
-Before reading a command (this is the planning notification rule):
-	if the main actor is the player:
-		if the Nomos bonus is true:
-			say "[bold type](Remember: Nomos has told you to attack this turn.)[roman type][line break]".		
-
-First every turn rule (this is the Nomos bonus is false rule):
-	if the main actor is the player:
-		now Nomos bonus is false.
-
-Before not attacklike behaviour:
-	if Nomos bonus is true:
-		if combat state of the actor is not at-react:
-			if the main actor is the player and the actor is the player:
-				if at least one hostile alive person is enclosed by the location:
-					let X be a random hostile person enclosed by the location;
-					say "You plan on [current action], but find yourself attacking [the X] instead.";
-					try attacking X instead;
-				otherwise:
-					say "You plan on [current action], but find your body attacking itself instead!";
-					try the player hitting the player instead;
-					if the player is dead:
-						end the story saying "Nomos is not to be toyed with".
-
-Before attacklike behaviour when Nomos counter is greater than 0:
-	say "Deciding to break the command of Nomos, you plan on attacking [the noun]. However, you find yourself ";
-	if player is not the main actor:
-		say "doing nothing instead." instead;
-	otherwise:
-		if a random number between 1 and 5 is:
-			-- 1: say "doing nothing instead.";
-				try waiting instead;
-			-- 2: say "concentrating instead.";
-				try concentrating instead;
-			-- 3:
-				if the player carries at least one thing:
-					let X be a random thing carried by the player;
-					say "dropping [the X] instead.";
-					try dropping X instead;
-				otherwise: 
-					say "praising the god instead." instead;
-			-- 4: say "speaking a language you have never heard instead." instead;
-			-- 5: say "contemplating the inevitability of Death instead." instead.
-
-An attack modifier rule (this is the Nomos attack bonus rule):
-	if Nomos bonus is true and the global attacker is the player:
-		if the numbers boolean is true, say " + 2 (the law is with you)[run paragraph on]";
-		increase the attack strength by 2.
-
-A damage modifier rule (this is the Nomos damage bonus rule):
-	if Nomos bonus is true and the global attacker is the player:
-		let n be 0;
-		if the global defender provides the property level:
-			now n is 1 + level of the global defender;
-		otherwise:
-			now n is 2;
-		if the numbers boolean is true, say " + [n] (the law is with you)[run paragraph on]";
-		increase the attack damage by n.
 
 
 Section - Temple of Nomos label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
@@ -501,95 +423,6 @@ Instead of climbing the statue of Aite:
 	decrease the health of the player by 3;
 	if the health of the player is less than 1:
 		end the story saying "You sacrificed yourself to Aite".
-[
-Instead of praying in Temple of Aite (this is the Aite prayer rule):
-	do the Aite prayer.]
-	
-To do the Aite prayer:	
-	say "You ask Aite for help in battle, and [run paragraph on][if player is beloved of Aite]confidently[otherwise]anxiously[end if] await the consequences.[line break][paragraph break]";
-	if the Aite counter is 0:
-		now the Aite counter is a random number between 2 and 12.
-	
-The Aite counter is a number that varies. The Aite counter is 0.
-
-Every turn (this is the decrease the Aite counter rule):
-	if Aite counter is greater than 0:
-		decrease Aite counter by 1;
-		if Aite counter is 0:
-			have Aite intervene.
-
-To have Aite intervene:
-	let p be the final spirit of the player;
-	let aite damage bonus be 0;
-	let n be a random number between 1 and 6;
-	if power of the fanatics of aite is granted:
-		if a random chance of p in 50 succeeds:
-			now n is a random number between 2 and 6;
-		now aite damage bonus is p divided by 5;
-	if Aite wrath state is 1 and n is less than 4:
-		increase n by 3;
-	if Aite wrath state is -1 and n is greater than 3:
-		decrease n by 3;  [1-3 are bad, 4-6 are good]
-	if player is beloved of Aite:
-		increase n by 1;
-	if at least one hostile alive person is enclosed by the location:
-		repeat with guy running through hostile alive persons enclosed by the location:
-			if guy is beloved of Aite:
-				if a random chance of 1 in 2 succeeds, decrease n by 1;
-	if n is greater than 6, now n is 6;
-	if n is less than 1, now n is 1;
-	let X be permanent health of the player;
-	now X is X divided by 8; [the standard unit of damage is 12.5% of the maximum health of the player, rounded down]
-	increase X by aite damage bonus; [increased by spirit / 5 if the player has the power of aite]
-	unless at least one hostile alive person is enclosed by the location:
-		if n is greater than 2:
-			make no decision;
-	let guy be a random hostile alive person enclosed by the location;
-	if n is:
-		-- 1: 
-			say "A gigantic [one of]sword[or]spear[or]pike[at random] bursts out of the ground, skewering you for [bold type][X times 2] damage[roman type]!";
-			decrease the health of the player by X times 2;
-			unless the player is dead:
-				let the player lose concentration;
-				if the player is hidden:
-					now the player is not hidden;
-					say "Your cry of pain reveals your presence.";
-			if health of the player is less than 1:
-				end the story saying "Aite is a dangerous mistress";
-		-- 2: 
-			say "A huge [one of]sword[or]spear[or]pike[at random] bursts out of the ground, impaling you for [bold type][X] damage[roman type]!";
-			decrease the health of the player by X;
-			unless the player is dead:
-				let the player lose concentration;
-			if health of the player is less than 1:
-				end the story saying "Aite is a dangerous mistress";
-		-- 3:
-			if the concentration of the guy is less than 3:
-				say "[The guy] suddenly looks [bold type]highly concentrated[roman type], as if divinely inspired.";
-				now the concentration of the guy is 3;
-		-- 4:
-			if the concentration of the player is less than 3:
-				say "You suddenly feel divinely inspired and [bold type]highly concentrated[roman type].";
-				now the concentration of the player is 3;
-		-- 5: 
-			say "A huge [one of]sword[or]spear[or]pike[at random] bursts out of the ground, impaling [the guy] for [bold type][X] damage[roman type]!";
-			decrease the health of the guy by X;
-			unless guy is dead:
-				let the guy lose concentration;			
-			if health of the guy is less than 1:
-				now the global attacker is the player;
-				now the global defender is the guy;
-				consider the grant powers when a monster is slain rule;
-		-- 6: 
-			say "A gigantic [one of]sword[or]spear[or]pike[at random] bursts out of the ground, impaling [the guy] for [bold type][X times 2] damage[roman type]!";
-			decrease the health of the guy by X times 2;
-			unless guy is dead:
-				let the guy lose concentration;			
-			if health of the guy is less than 1:
-				now killer-guy is the player;
-				now killed-guy is the guy;
-				consider the grant powers when a monster is slain rule.
-
 
 An attack modifier rule (this is the Aite-loved bonus in Temple of Aite rule):
 	if the location is the Temple of Aite:

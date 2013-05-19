@@ -552,7 +552,10 @@ This is the periapt rule:
 	if the player wears the periapt of prophecy and the ment timer is greater than 0:
 		if the combat status is combat:
 			if the main actor is the player:
-				now the periapt attack strength is a roll of the dice;
+				if tome-of-law-number is not 0:
+					now periapt attack strength is tome-of-law-number;
+				otherwise:
+					now the periapt attack strength is a roll of the dice;
 				say "If you choose to attack, your performance will be [if periapt attack strength is less than 4]weak[otherwise if periapt attack strength is less than 8]average[otherwise if periapt attack strength is not 20]strong[otherwise]heroic[end if].".
 
 The periapt rule is listed before the main actor chooses an action rule in the combat round rules.
@@ -680,6 +683,16 @@ The description of the crown of the god-king is "This terrible crown, made of ma
 A faculty bonus rule (this is the crown of the god-king bonus rule):
 	if the test subject wears the crown of the god-king:
 		increase faculty bonus score by blood magic level of the crown of the god-king.
+
+Section - The inquisitor's hood (special)
+
+[Gifted by Nomos.]
+
+The inquisitor's hood is a hat. The description of the inquisitor's hood is "Dedication to Nomos requires discipline and concentration. To avoid being distracted by the blows of their enemies and the screams of tortured heretics, the inquisitors wear these magical hoods. This particular one gives you a +15% chance of remaining concentrated when damaged."
+
+A remain concentrated rule (this is the inquisitor's hood concentration rule):
+	if global defender wears the inquisitor's hood:
+		increase remain concentrated chance by 15.
 
 
 
@@ -2544,7 +2557,7 @@ The gorgeous dagger is iron.
 
 The description of the gorgeous dagger is "Adorned with gold and a large emerald at the end of the hilt, this dagger is not only beautiful, but also perfect for precise attacks in tense situations. The decadence of its design proves it to be of Yahvinnean origin.".
 
-Section - Evil dagger (minor)
+Section - Evil dagger (major)
 
 The evil dagger is a major dagger.
 The evil dagger is deathly.
@@ -3047,6 +3060,48 @@ An aftereffects rule (this is the spiked mace grows rule):
 				say "The spiked mace of the ape king grows!"
 				
 
+Chapter - Hammer
+
+Section - Stunning weapon
+
+A weapon can be stunning-weapon. A weapon is usually not stunning-weapon. [A stunning weapon always stuns, without damage penalty. When combined with the stun action, it is extra effective.]
+
+Section - The hammer kind
+
+A hammer is a kind of weapon.
+A hammer is usually iron.
+
+The damage die of a hammer is usually 4.
+The weapon attack bonus of a hammer is usually -1.
+The weapon damage bonus of a hammer is usually 2.
+The dodgability of a hammer is usually 3.
+The passive parry max of a hammer is usually 1.
+The active parry max of a hammer is usually 1.
+
+A hammer is usually stunning-weapon.
+The special weapon info of a hammer is usually "; stuns opponents[run paragraph on]".
+
+Section - Malleus Maleficarum
+
+The Malleus Maleficarum is a hammer. The indefinite article is "the". The description of the Malleus Maleficarum is "To kill witches and other creatures of chaos, one needs to be accurate and methodical. This hammer is an excellent tool for the task." Understand "hammer" as the Malleus Maleficarum.
+
+The weapon attack bonus of Malleus Maleficarum is 1.
+The damage die of Malleus Maleficarum is 5.
+The weapon damage bonus of Malleus Maleficarum is 3.
+
+The special weapon info of the Malleus Maleficarum is "; stuns opponents; does not benefit from tension[run paragraph on]".
+
+Malleus-tension-dummy is a number that varies.
+
+First attack modifier rule (this is the Malleus remove tension rule):
+	if global attacker weapon is Malleus Maleficarum:
+		now malleus-tension-dummy is tension;
+		now tension is 0.
+
+First aftereffects rule (this is the Malleus reset tension rule):
+	if global attacker weapon is Malleus Maleficarum:
+		now tension is malleus-tension-dummy.
+	
 
 
 Chapter - Other weapons
@@ -3176,7 +3231,13 @@ Section - Magical spade (major)
 
 The magical spade is a major thing. The magical spade is a digging tool. The description of the magical spade is "Used by wizards to construct their dungeons, a magical spade can be used to dig tunnels in whatever direction you wish. Just dig north, for instance.".
 The magical spade is magical.
-The magical spade is iron.			
+The magical spade is iron.
+
+Last dungeon interest rule (this is the extra magical spade placement rule):
+	if magical spade is off-stage:
+		if a random chance of 3 in 10 succeeds:
+			let place be a random placed treasurable room;
+			move magical spade to place.
 
 Section - Vial of Purification (minor)
 
@@ -3472,9 +3533,22 @@ Victory message rule (this is the brightest flame message rule):
 		end the story saying "You have destroyed your foe, and will be able to enjoy your victory for another [brightest-flame-counter] turns!";
 		rule succeeds.
 
+Section - Tome of Law
 
+The Tome of Law is a tome.
+Tome of Law is paper.
+Tome of Low is magical.
 
+Tome-of-law-number is a number that varies. Tome-of-law-number is 0.
 
+Carry out reading the Tome of Law:
+	now tome-of-law-number is a random number between 1 and 10;
+	say "The page shows the number [tome-of-law-number]."
+
+First special set attack strength rule (this is the tome of law attack roll rule):
+	if the tome-of-law-number is not 0:
+		now attack strength is tome-of-law-number;
+		rule succeeds.
 
 
 Kerkerkruip Items ends here.
