@@ -457,7 +457,7 @@ Temple of Sul is consecrated.
 Temple of Sul is vp-agnostic.
 Temple of Sul is religious.
 
-The statue of Sul is scenery in Temple of Sul. The description of the statue of Sul is "This is the crystal-clear statue of Sul, goddess of blessings and purification. She has been known to lift curses; but she has also been rumoured to hate spurious prayers.". Understand "god" and "deity" as the statue of Sul.
+The statue of Sul is scenery in Temple of Sul. The description of the statue of Sul is "This is the crystal-clear statue of Sul, goddess of blessings and purification. She has been known to lift curses; but she has also been rumoured to hate spurious prayers.". Understand "god" and "deity" and "crystal" as the statue of Sul.
 
 The pile of fragments is scenery. The description of the pile of fragments is "This crystal rubble is all that is left of the proud statue of Sul.". Instead of taking the pile of fragments: say "For reasons that cannot be merely physical, you are unable to move the rubble". Understand "rubble" and "broken" and "statue" and "crystal" as the pile of fragments.
 
