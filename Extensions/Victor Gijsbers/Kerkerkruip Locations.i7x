@@ -476,38 +476,6 @@ Instead of touching the statue of Sul:
 Instead of climbing the statue of Sul:
 	say "You attempt to climb Sul's statue, but it so smooth that you make no progress at all.".
 
-Maximum prayers to Sul is a number that varies.
-When play begins:
-	now maximum prayers to Sul is a random number between 1 and 3.
-
-[
-Instead of praying in Temple of Sul:
-	unless the statue of Sul is in the Temple of Sul:
-		say "Praying has little effect, now that the statue has been destroyed.";
-	otherwise:
-		unless the maximum prayers to Sul is greater than 0:
-			say "You pray, but there is no answer.";
-		otherwise:
-			if the player has at least one uncurseable thing:
-				let K be a list of things;
-				repeat with item running through uncurseable things had by the player:
-					if hidden identity of item is not non-thing and hidden identity of item is corruptible:
-						now hidden identity of item is not cursed;
-					if item is corruptible:
-						now item is not cursed;
-					add item to K; [we uncurse the hidden identity, but we do not reveal it!]
-				say "Sul uncurses [K with definite articles].";
-				decrease maximum prayers to Sul by 1;
-			otherwise if the player has at least one cursed thing:
-				say "Unfortunately, Sul cannot help you.";
-			otherwise:
-				say "Sul is displeased with your spurious prayer!";
-				now maximum prayers to Sul is 0;
-				if the player has at least one corruptible not cursed thing:
-					let item be a random corruptible not cursed thing had by the player;
-					now item is cursed;
-					now item is curse-identified.]
-
 
 Section - Temple of Sul label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 

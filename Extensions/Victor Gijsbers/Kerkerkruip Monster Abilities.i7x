@@ -26,7 +26,7 @@ A monster is usually neuter.
 
 Chapter - Monster types
 
-Creature-type is a kind of value. The creature-types are living, undead, demonic, horrific.
+Creature-type is a kind of value. The creature-types are living, undead, demonic, angelic, horrific.
 
 A person has a creature-type. The creature-type of a person is usually living.
 
@@ -389,6 +389,36 @@ A person has a number called the innate bloodlust. The innate bloodlust of a per
 Bloodlust rule (this is the innate bloodlust rule):
 	increase bloodlust dummy by innate bloodlust of test subject.
 		
+
+
+Chapter - Radiance
+
+A person has a number called the radiation. The radiation of a person is usually 0.
+Definition: a person (called guy) is radiant if the radiation of guy > 0.
+Definition: a person (called guy) is radiance-immune if ((guy is angelic) or (guy is the player and player worships Sul)).
+
+
+An attack modifier rule (this is the radiance attack bonus rule):
+	if the global attacker is radiant:
+		unless global defender is blind or global defender is radiance-immune:
+			let n be radiation of global attacker;
+			if n is not 0:
+				say " + ", n, " (radiance)[run paragraph on]";
+				increase the attack strength by n;
+	if the global defender is radiant:
+		unless global attacker is blind or the global attacker is radiance-immune:
+			let n be radiation of global defender;
+			if n is not 0:
+				say " - ", n, " (radiance)[run paragraph on]";
+				decrease the attack strength by n.
+
+Section - Status
+
+Status rule (this is the radiance status rule):
+	if player is radiant:
+		let n be radiation of the player;
+		if long status is true:
+			say "Level [n in words] [bold type]radiance[roman type]: +[n] to attack and defence against sighted beings (except angels).[line break][run paragraph on]".
 
 
 

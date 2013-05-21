@@ -389,7 +389,7 @@ Before not attacklike behaviour:
 					say "You plan on [current action], but find your body attacking itself instead!";
 					try the player hitting the player instead;
 					if the player is dead:
-						end the story saying "Nomos is not to be toyed with".
+						end the story saying "Nomos is not to be toyed with.".
 
 Before attacklike behaviour when Nomos counter is greater than 0:
 	say "Deciding to break the command of Nomos, you plan on attacking [the noun]. However, you find yourself ";
@@ -431,5 +431,132 @@ To decide which number is Nomos piety:
 			decide on 2;
 		decide on 1;
 	decide on 0.
+
+
+Chapter - Sul
+
+Check sacrificing (this is the cannot sacrifice to Sul when undead rule):
+	if the location of the player is dedicated to sul and the player is undead:
+		say "Sul abhors the undead! Divine wrath strikes you instantly, dealing [bold type]10 damage[roman type].";
+		decrease health of player by 10;
+		if the player is dead:
+			end the story saying "Your attempt at contrition wasn't appreciated.";
+		rule fails.
+
+
+Section - Favour rules
+
+Favour rule for Sul (this is the Sul favour 1 rule):
+	if divine favour is 1:
+		say "Sul grants you knowledge of deathly magic, so that you will not inadvertently use it; she gives you immunity to angelic radiance; and she now protects you from curses.";
+		identify a random scroll of death;
+		identify a random scroll of ghoulification;
+		identify a random scroll of summoning.
+
+Favour rule for Sul (this is the Sul favour 3 rule):
+	if divine favour is 3:
+		say "Sul grants you angelic radiance, and makes you an undead slayer!";
+		increase radiation of player by 1.
+
+Favour rule for Sul (this is the Sul favour 6 rule):
+	if divine favour is 6:
+		let item be a random readied weapon enclosed by the player;
+		if item is a natural weapon:
+			say "Sul makes you a demon slayer; she also attempts to bless your weapon, but you aren't wielding any.";
+		otherwise if item is incorruptible:
+			say "Sul makes you a demon slayer; she also attempts to bless [the item], but it unfortunately resists the attempt.";
+		otherwise:
+			say "Sul makes you a demon slayer, and blesses [the item], making it more accurate, more deadly, and imbuing it with the purifying power of fire.";
+			increase damage die of item by 1;
+			increase weapon attack bonus of item by 1;
+			increase internal heat of item by 3.
+
+Favour rule for Sul (this is the Sul favour 10 rule):
+	if divine favour is 10:
+		say "Sul cures you of any addictions you might have, and grants you a more powerful angelic radiance.";
+		increase radiation of player by 2;
+		now ment timer is 0;
+		now OD timer is 0;
+		now ment addiction is 0.
+
+Section - Protection from curses
+
+Every turn when the player worships Sul:
+	if the player encloses an uncurseable thing and divine favour > 0:
+		let K be a list of things;
+		repeat with item running through uncurseable things had by the player:
+			if hidden identity of item is not non-thing and hidden identity of item is corruptible:
+				now hidden identity of item is not cursed;
+			if item is corruptible:
+				now item is not cursed;
+			add item to K; [we uncurse the hidden identity, but we do not reveal it!]
+		say "Sul uncurses [K with definite articles].".
+
+Section - Unable to use deathly magic
+
+Last check reading a scroll of death:
+	if player worships Sul:
+		remove noun from play;
+		say "Before you finish reading it, the scroll burns up in your hands! Sul is not amused by your defiant behaviour, and deals [bold type]10 damage[roman type] to you.";
+		decrease health of player by 10;
+		if the player is dead:
+			end the story saying "And you will know My name is the Lady when I lay My vengeance upon thee. ";
+		rule fails.
+
+Last check reading a scroll of summoning:
+	if player worships Sul:
+		remove noun from play;
+		say "Before you finish reading it, the scroll burns up in your hands! Sul is not amused by your defiant behaviour, and deals [bold type]10 damage[roman type] to you.";
+		decrease health of player by 10;
+		if the player is dead:
+			end the story saying "And you will know My name is the Lady when I lay My vengeance upon thee. ";
+		rule fails.
+		
+Last check reading a scroll of ghoulification:
+	if player worships Sul:
+		remove noun from play;
+		say "Before you finish reading it, the scroll burns up in your hands! Sul is not amused by your defiant behaviour, and deals [bold type]10 damage[roman type] to you.";
+		decrease health of player by 10;
+		if the player is dead:
+			end the story saying "And you will know My name is the Lady when I lay My vengeance upon thee. ";
+		rule fails.
+		
+Section - Radiance
+
+[See Kerkerkruip Monster Abilities.]
+
+Section - Undead slayer
+
+An attack modifier rule (this is the undead slayer attack bonus rule):
+	if the global attacker is the player and the player worships sul and the global defender is undead and divine favour > 2:
+		say " + 2 (undead slayer)[run paragraph on]";
+		increase the attack strength by 2.
+
+A damage modifier rule (this is the undead slayer damage bonus rule):
+	if the global attacker is the player and the player worships sul and the global defender is undead and divine favour > 2:
+		say " + 2 (undead slayer)[run paragraph on]";
+		increase the attack damage by 2.
+		
+Status rule (this is the undead slayer status rule):
+	if player worships sul and divine favour > 2:
+		if long status is true:
+			say "[bold type]Undead slayer[roman type]: +2 to attack and defence against undead.[line break][run paragraph on]".		
+
+Section - Demon slayer
+
+An attack modifier rule (this is the demon slayer attack bonus rule):
+	if the global attacker is the player and the player worships sul and the global defender is demonic and divine favour > 5:
+		say " + 2 (demon slayer)[run paragraph on]";
+		increase the attack strength by 2.
+
+A damage modifier rule (this is the demon slayer damage bonus rule):
+	if the global attacker is the player and the player worships sul and the global defender is demonic and divine favour > 5:
+		say " + 2 (demon slayer)[run paragraph on]";
+		increase the attack damage by 2.
+		
+Status rule (this is the demon slayer status rule):
+	if player worships sul and divine favour > 5:
+		if long status is true:
+			say "[bold type]Demon slayer[roman type]: +2 to attack and defence against demons.[line break][run paragraph on]".				
 			
 Kerkerkruip Religion ends here.

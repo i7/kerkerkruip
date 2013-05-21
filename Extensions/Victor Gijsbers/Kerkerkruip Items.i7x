@@ -575,7 +575,7 @@ The crown of the empire is civilised.
 The crown of the empire is iron.
 
 A treasure placement rule (this is the crown of empire can be crown of Hargo rule):
-	if a random chance of 1 in 6 succeeds:
+	if a random chance of 1 in 5 succeeds:
 		now the hidden identity of the crown of the empire is the crown of Hargo.
 
 A mind bonus rule (this is the mind bonus of the crown of the empire rule):
@@ -614,7 +614,7 @@ A spirit bonus rule (this is the spirit bonus of the diadem of the priestess rul
 		increase faculty bonus score by 2.
 
 A treasure placement rule (this is the diadem of the priestess can be devil's diadem rule):
-	if a random chance of 1 in 6 succeeds:
+	if a random chance of 1 in 4 succeeds:
 		now the hidden identity of the diadem of the priestess is the demon lord's diadem.
 
 The description of the diadem of the priestess is "This graceful diadem has been used thousands of times in rites for gods now long dead. [italic type](It grants a +2 spirit bonus.)[roman type]".
