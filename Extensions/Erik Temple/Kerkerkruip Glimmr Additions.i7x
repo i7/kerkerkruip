@@ -550,6 +550,7 @@ Before showing the title screen (this is the request graphics preferences rule):
 			set data value 5 to 1;
 		otherwise:
 			set data value 5 to -1;
+			set data value 7 to 1;[also disable information panels]
 		clear the main-window.
 
 The request graphics preferences rule is listed after the load the file of data storage rule in the before showing the title screen rules.
