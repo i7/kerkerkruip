@@ -510,19 +510,20 @@ To do the absorption with (guy - a person):
 To do power transferral with (guy - a person):
 	repeat with X running through powers:
 		if guy grants X:
-			follow the absorbing rules for X;
-			now X is granted;
-			let n be the power level of X;
-			let Z be a list of powers;
-			repeat with Y running through granted powers:
-				unless X is Y:
-					unless power level of Y is greater than the power level of X:
-						add Y to Z;
-						follow the repelling rules for Y;
-						now Y is not granted;
-			if the number of entries in Z is greater than 0:
-				say "The violence of the absorption drives [Z with definite articles] out of your body. ";
-			grant a faculty increase of n.
+			unless X is granted:
+				follow the absorbing rules for X;
+				now X is granted;
+				let n be the power level of X;
+				let Z be a list of powers;
+				repeat with Y running through granted powers:
+					unless X is Y:
+						unless power level of Y is greater than the power level of X:
+							add Y to Z;
+							follow the repelling rules for Y;
+							now Y is not granted;
+				if the number of entries in Z is greater than 0:
+					say "The violence of the absorption drives [Z with definite articles] out of your body. ";
+				grant a faculty increase of n.
 
 To heal fully because (guy - a person) is slain:
 	if the level of guy is greater than 0 and the level of guy is not 10:
