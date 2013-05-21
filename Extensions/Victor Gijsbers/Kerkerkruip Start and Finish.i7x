@@ -231,6 +231,7 @@ title	subtable	description	toggle
 "Reset number of victories"	--	--	the resetting rule
 "Reset achievements"	--	--	the achievement resetting rule
 "Unlock everything"	--	--	the unlock everything rule
+"Toggle information panels"	--	--	the toggle info panels rule
 
 This is the resetting rule:
 	set difficulty to 0;
@@ -246,6 +247,13 @@ This is the achievement resetting rule:
 
 This is the unlock everything rule:
 	set data value 4 to 100;
+	consider the quit rule.
+
+This is the toggle info panels rule:
+	if data value 7 is 0:
+		set data value 7 to 1;
+	otherwise:
+		set data value 7 to 0;
 	consider the quit rule.
 
 
