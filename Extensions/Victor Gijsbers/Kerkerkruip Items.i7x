@@ -2013,13 +2013,13 @@ Mapping boolean is a truth state variable.
 
 A scroll of mapping is a kind of scroll.
 A scroll of mapping is mapping.
-The description of a scroll of mapping is "Reading this scroll will instantaneously reveal the plan of the entire dungeon, including secret rooms ([if the map can be shown]check the MAP to see it[otherwise]type REMEMBER for more[end if]).".
+The description of a scroll of mapping is "Reading this scroll will instantaneously reveal the plan of the entire dungeon, including secret rooms ([if the map can be shown]check the MAP to see it, or if you prefer not to use the graphical map, [end if]type REMEMBER for more).".
 The plural of scroll of mapping is scrolls of mapping.
 
 Carry out reading a scroll of mapping (this is the reveal the map rule):
 	now all placed not nogo rooms are map-revealed;
 	now the mapping boolean is true;
-	say "As you read the scroll, a complete floor plan of the dungeon of Kerkerkruip imprints itself on your mind! [if the map can be shown]Type MAP to see it[otherwise]A description of where you are has been added to the REMEMBER command[end if]."
+	say "As you read the scroll, a complete floor plan of the dungeon of Kerkerkruip imprints itself on your mind! [if the map can be shown]Type MAP to see it. [end if]A description of where you are has [if the map can be shown]also [end if]been added to the REMEMBER command."
 
 
 Section - Scroll of psycholocation
@@ -2032,7 +2032,7 @@ Psycholocation boolean is a truth state variable.
 
 A scroll of psycholocation is a kind of scroll.
 A scroll of psycholocation is psycholocation.
-The description of a scroll of psycholocation is "Reading this scroll will grant you the ability to sense all of the creatures whose souls you might be able to absorb (check the MAP to see their locations).".
+The description of a scroll of psycholocation is "Reading this scroll will grant you the ability to sense all of the creatures whose souls you might be able to absorb (check the MAP to see their locations, or use the SENSE command).".
 The plural of scroll of psycholocation is scrolls of psycholocation.
 
 Carry out reading a scroll of psycholocation (this is the reveal enemies rule):
@@ -2043,7 +2043,7 @@ Carry out reading a scroll of psycholocation (this is the reveal enemies rule):
 				now place is enemy-revealed;
 				increment adversary-count;
 	if the adversary-count is greater than 0:
-		say "You enter a weird clairvoyant state: The psyche[if adversary-count is greater than 1]s[end if] of your enemies call[if adversary-count is less than 2]s[end if] out to you. For a short time, you will be able to sense the presence and location of creatures whose souls you can absorb. If there are other creatures in the same space, you will see them via soul-reflection. Type [if the map can be shown]MAP[otherwise]SENSE[end if] to psycholocate.";
+		say "You enter a weird clairvoyant state: The psyche[if adversary-count is greater than 1]s[end if] of your enemies call[if adversary-count is less than 2]s[end if] out to you. For a short time, you will be able to sense the presence and location of creatures whose souls you can absorb. If there are other creatures in the same space, you will see them via soul-reflection. Type [if the map can be shown]MAP or[otherwise]SENSE[end if] to psycholocate.";
 		now the psycholocation boolean is true;
 		psycholocator peters out in 10 turns from now;
 	otherwise:
