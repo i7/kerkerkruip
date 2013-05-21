@@ -433,6 +433,10 @@ To decide which number is Nomos piety:
 	decide on 0.
 
 
+
+
+
+
 Chapter - Sul
 
 Check sacrificing (this is the cannot sacrifice to Sul when undead rule):
@@ -540,7 +544,7 @@ A damage modifier rule (this is the undead slayer damage bonus rule):
 Status rule (this is the undead slayer status rule):
 	if player worships sul and divine favour > 2:
 		if long status is true:
-			say "[bold type]Undead slayer[roman type]: +2 to attack and defence against undead.[line break][run paragraph on]".		
+			say "[bold type]Undead slayer[roman type]: +2 to attack and damage against undead.[line break][run paragraph on]".		
 
 Section - Demon slayer
 
@@ -557,6 +561,17 @@ A damage modifier rule (this is the demon slayer damage bonus rule):
 Status rule (this is the demon slayer status rule):
 	if player worships sul and divine favour > 5:
 		if long status is true:
-			say "[bold type]Demon slayer[roman type]: +2 to attack and defence against demons.[line break][run paragraph on]".				
+			say "[bold type]Demon slayer[roman type]: +2 to attack and damage against demons.[line break][run paragraph on]".				
+
+Section - Suls' intervention
+
+A damage multiplier rule when the player worships sul (this is the sul sometimes prevents damage rule):
+	unless faction of global defender hates faction of player:
+		unless global defender is undead or global defender is demonic:
+			if a random chance of divine favour in 40 succeeds:
+				say "[bold type] - 100% (Sul intervenes)[roman type][run paragraph on]";
+				now the attack damage is 0.
+
+
 			
 Kerkerkruip Religion ends here.
