@@ -490,7 +490,7 @@ The ravenous armadillo is not talker.
 The unlock level of the ravenous armadillo is 3.
 The unlock text of the ravenous armadillo is "a monster that searches the dungeon for anything it can eat".
 
-The description of ravenous armadillo is "As their name suggests, ravenous armadillos will eat anything. They may seem slow and easy to hit, but their tough scales ensures that they can shrug off most damage, and their bony tail club packs a considerable punch.".
+The description of ravenous armadillo is "As their name suggests, ravenous armadillos will eat anything. They may seem slow and easy to hit, but their tough scales ensure that they can shrug off most damage, and their bony tail club packs a considerable punch.".
 
 The health of the ravenous armadillo is 12.
 The melee of the ravenous armadillo is -2.
