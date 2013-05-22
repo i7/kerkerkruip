@@ -1959,6 +1959,8 @@ An unholy wave rule (this is the standard unholy wave rule):
 	if n is greater than 0:
 		repeat with guy running through all alive not undead persons in the location:
 			let m be a random number between 3 and 6;
+			if guy is deathly-resistant:
+				decrease m by 2;
 			decrease health of guy by m;
 			say "[if n is 1 and original n is not 1]and [end if][m] damage to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive] (which breaks [possessive of the guy] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
 			now concentration of the guy is 0;

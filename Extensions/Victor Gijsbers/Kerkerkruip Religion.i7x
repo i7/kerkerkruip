@@ -563,7 +563,7 @@ Status rule (this is the demon slayer status rule):
 		if long status is true:
 			say "[bold type]Demon slayer[roman type]: +2 to attack and damage against demons.[line break][run paragraph on]".				
 
-Section - Suls' intervention
+Section - Sul's intervention
 
 A damage multiplier rule when the player worships sul (this is the sul sometimes prevents damage rule):
 	unless faction of global defender hates faction of player:
@@ -572,6 +572,86 @@ A damage multiplier rule when the player worships sul (this is the sul sometimes
 				say "[bold type] - 100% (Sul intervenes)[roman type][run paragraph on]";
 				now the attack damage is 0.
 
+
+
+
+Chapter - Chton
+
+Favour rule for Chton (this is the Chton favour 1 rule):
+	if divine favour is 1:
+		say "Chton grants you knowledge of and partial protection from deathly magic, and gifts you a scroll.";
+		identify a random scroll of death;
+		identify a random scroll of ghoulification;
+		identify a random scroll of summoning;
+		do a Chton gift;
+		now player is deathly-resistant.
+
+Favour rule for Chton (this is the Chton favour 3 rule):
+	if divine favour is 3:
+		say "Chton grants you the ability to switch between ghoul form and human form, and gifts you three more scrolls.";
+		do a Chton gift;
+		do a Chton gift;
+		do a Chton gift;
+		now ghoul-form is form-active;
+		now human-form is form-active.
+
+Favour rule for Chton (this is the Chton favour 6 rule):
+	if divine favour is 6:
+		say "Chton grants you the ability to switch to ghost form, and gifts you three more scrolls.";
+		do a Chton gift;
+		do a Chton gift;
+		do a Chton gift;
+		now ghost-form is form-active.
+
+Favour rule for Chton (this is the Chton favour 10 rule):
+	if divine favour is 10:
+		say "Chton grants you the ability to switch to lich form, and gifst you three more scrolls.";
+		do a Chton gift;
+		do a Chton gift;
+		do a Chton gift;
+		now lich-form is form-active.
+
+Section - Chton's treasure chest
+
+Chton-treasure-chest is a container.
+Twelve scrolls of death and four scrolls of summoning are in Chton-treasure-chest.
+
+To do a Chton gift:
+	let item be a random thing in Chton-treasure-chest;
+	move item to player.
+
+Section - Chton's intervention
+
+Every turn when the player worships Chton (this is the Chton intervenes in combat rule):
+	if combat status is not peace:
+		if at least one hostile alive person is enclosed by the location:
+			let n be divine favour;
+			if current form is ghost-form:
+				increase n by 2;
+			if current form is lich-form:
+				increase n by 5;
+			if a random chance of n in 100 succeeds:
+				have Chton intervene.
+
+To have Chton intervene:
+	say "Chton suddenly sends a [bold type]wave of unholy energy[roman type] through the room, dealing [run paragraph on]";
+	let n be the number of alive not undead persons in the location;
+	let original n be n;
+	if n is greater than 0:
+		repeat with guy running through all alive not undead persons in the location:
+			let m be a random number between 3 and 6;
+			if guy is deathly-resistant:
+				decrease m by 2;
+			decrease health of guy by m;
+			say "[if n is 1 and original n is not 1]and [end if][m] damage to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive] (which breaks [possessive of the guy] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
+			now concentration of the guy is 0;
+			decrease n by 1;
+			if n is 0:
+				say ""; [For an extra newline. Don't ask.]
+	otherwise:
+		say "no damage to anyone.";
+	if health of the player is less than 1:
+		end the story saying "Quem di diligunt, adolescens moritur".	
 
 			
 Kerkerkruip Religion ends here.

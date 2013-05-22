@@ -124,6 +124,16 @@ Chapter - Talker
 A person can be talker. A person is usually talker.
 
 
+Chapter - Resistance against deathly magic
+
+[Scrolls of death and Chton's ability deal less damge.]
+
+A person can be deathly-resistant. A person is usually not deathly-resistant.
+
+Status rule (this is the deathly-resistant status rule):
+	if player is deathly-resistant and player is not undead:
+		if long status is true:
+			say "You are somewhat resistant to deathly magic.[line break][run paragraph on]".;
 
 Part - Movement
 
