@@ -6,6 +6,7 @@
 *.glk*
 *.iFiction
 *Index
+*manifest.plist
 *Release
 *.skein
 

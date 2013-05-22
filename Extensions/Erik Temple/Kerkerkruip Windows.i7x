@@ -3,6 +3,14 @@ Kerkerkruip Windows by Erik Temple begins here.
 Use authorial modesty.
 
 
+Chapter - Parser error fix
+
+[This error is redirected to another error type, meaning that the activity is run twice. For this reason we only print a line break for other errors.]
+After printing a parser error when the latest parser error is not the noun did not make sense in that context error:
+	say line break.
+
+
+
 Chapter - UI Colors
 
 Table of Common Color Values (continued)
