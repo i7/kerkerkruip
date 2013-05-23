@@ -147,15 +147,18 @@ Section - Statistics window
 Window-drawing rule for the stats-window when the stats-window is g-present (this is the construct stats window rule):
 	move focus to stats-window, clearing the window;
 	now long status is false;
-	consider the status rules;
-	say ".[line break][run paragraph on]";
+	consider the status combat stats rules;
+	consider the short player form status rule;[the player's form]
+	consider the status attribute rules;
+	say ". [bracket][link 1]detailed status report[end link][close bracket][line break][run paragraph on]";
+	consider the unallocated faculty short status rule;[shortened message for any unassigned faculty points]
+	say "[line break][run paragraph on]";
 	consider the show basic stats rule;[show statistics]
 	say run paragraph on;
-	say "([link 1]detailed status report[end link])[line break][run paragraph on]";
 	now long status is true;
 	return to main screen.
 
-First status rule (this is the unallocated faculty short status rule):
+This is the unallocated faculty short status rule:
 	if long status is false:
 		if unallocated faculty is greater than 0:
 			say "[italic type]Increase one of your faculties by typing 'body', 'mind', or 'spirit' ([unallocated faculty] point[if unallocated faculty is greater than 1]s[end if]).[roman type][line break][run paragraph on]";
@@ -174,7 +177,8 @@ Hyperlink processing rule when the current hyperlink window is the stats-window 
 	move focus to stats-window, clearing the window;
 	say "[link 2]< back[end link][line break][line break][run paragraph on]";
 	consider the show basic stats rule;
-	consider the status rules;
+	consider the status combat stats rules;
+	consider the status attribute rules;
 	consider the status skill rules;
 	say run paragraph on;
 	return to main screen;

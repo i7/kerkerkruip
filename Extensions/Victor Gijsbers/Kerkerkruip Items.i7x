@@ -219,7 +219,7 @@ An attack modifier rule (this is the caution grants better retreat rule):
 			say " - 3 (essence of caution)[run paragraph on]";
 			decrease the attack strength by 3.
 
-Status rule (this is the cautious status rule):
+Status attribute rule (this is the cautious status rule):
 	if player is cautious:
 		if long status is true:
 			say "You are [bold type]cautious[roman type]: +3 defence bonus when retreating.[line break][run paragraph on]".
@@ -264,7 +264,7 @@ First report waiting:
 	if player is patient:
 		say "You wait patiently. You feel no tension." instead.
 
-Status rule (this is the patient status rule):
+Status attribute rule (this is the patient status rule):
 	if player is patient:
 		if long status is true:
 			say "You are [bold type]patient[roman type]: when you wait, the tension is halved.[line break][run paragraph on]".
@@ -306,7 +306,7 @@ Last absorbing a power (called the granted power):
 		decrease defence of the player by n;
 		say "Your greed causes you to absorb an extra [greed bonus] health, but it also gives you a permanent -[n] defence penalty.[paragraph break]".
 		
-Status rule (this is the greedy status rule):
+Status attribute rule (this is the greedy status rule):
 	if player is greedy:
 		if long status is true:
 			say "You are [bold type]greedy[roman type]: absorbing a power decreases your defence, but grants you more health.[line break][run paragraph on]".	
@@ -1882,7 +1882,7 @@ Carry out reading a scroll of protection:
 		if a random chance of 4 in 10 succeeds:
 			now hit protection of the player is 2;
 
-Status rule (this is the protection status rule):
+Status attribute rule (this is the protection status rule):
 	if hit protection of the player is greater than 0:
 		if long status is true:
 			say "You are [bold type]protected[roman type] from damage dealt by attacks.[line break][run paragraph on]";
@@ -1935,7 +1935,7 @@ Every turn when the player is the main actor (this is the decrease player skill 
 		if player skill bonus timer is 0:
 			say "You suddenly feel [bold type]unskilled[roman type].".
 
-Status rule (this is the skilled status rule):
+Status attribute rule (this is the skilled status rule):
 	if player skill bonus timer is greater than 0:
 		if long status is true:
 			say "You are [bold type]skilled[roman type]: +3 bonus to body, mind and spirit.[line break][run paragraph on]";
@@ -3417,7 +3417,7 @@ To have the ment kick in:
 	
 
 
-Status rule (this is the ment status rule):
+Status combat stats rule (this is the ment status rule):
 	if ment timer is greater than 0:
 		if long status is true:
 			say "You are under the influence of [bold type]ment[roman type]: +[ment bonus] attack, +[ment bonus] damage, -[ment bonus] enemy damage, +[ment bonus] defence, +[ment bonus] to all abilities.[line break][run paragraph on]";

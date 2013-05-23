@@ -455,7 +455,7 @@ Aftereffects rule (this is the increase ape damage rule):
 						heal the player for n health;
 					say "You grow to [bold type][size of the player][roman type] size[if n is not 0], regaining [n] health in the process[end if]!".
 
-Status rule (this is the ape power damage status rule):
+Status attribute rule (this is the ape power damage status rule):
 	if power of the ape is granted and player is not medium:
 		if long status is true:
 			say "[bold type]Power of the ape[roman type]: you are currently [size of the player].[line break][run paragraph on]".
@@ -832,7 +832,7 @@ Aftereffects rule (this is the stunning rule):
 			say "[if global defender is player]You are[otherwise][The global defender] is[end if] [bold type]stunned[roman type], receiving a -1 attack penalty and a -[stun strength of the global defender] penalty to all faculties for [stun count of the global defender] turns!";
 	now the global attacker is not at-stun.
 
-Status rule (this is the stunned status rule):
+Status attribute rule (this is the stunned status rule):
 	if the player is stunned:
 		if long status is true:
 			say "You are [bold type]stunned[roman type]: -1 to attack, -[stun strength of the player] to body, mind and spirit.[line break][run paragraph on]";
@@ -1136,7 +1136,7 @@ Status skill rule (this is the wisps status skill rule):
 	if the power of wisps is granted:
 		say "You have the [bold type]torment[roman type] skill: you can [italic type]torment[roman type] everyone in the room, breaking their concentration. [italic type](Level 1)[roman type][line break][run paragraph on]".
 
-Status rule (this is the wisps status rule):
+Status attribute rule (this is the wisps status rule):
 	if wisp-strength is not 0:
 		if long status is true:
 			if power of the wisps is granted:
@@ -1971,7 +1971,7 @@ A damage modifier rule (this is the howl damage bonus rule):
 Aftereffects rule (this is the take away howling rule):
 	now the global attacker is not at-howl.
 
-Status rule (this is the howling status rule):
+Status attribute rule (this is the howling status rule):
 	if the player is at-howl:
 		if long status is true:
 			say "You are [bold type]howling[roman type]: +4 to attack, +4 to damage.[line break][run paragraph on]";
@@ -2657,7 +2657,7 @@ Every turn (this is the reset grappling after going rule):
 			let X be a random person grappled by the giant tentacle;
 			now giant tentacle does not grapple X.
 
-Status rule (this is the grappled status rule):
+Status attribute rule (this is the grappled status rule):
 	if at least one person grapples the player:
 		let X be a random person grappling the player;
 		if long status is true:
@@ -2760,7 +2760,7 @@ Aftereffects rule when the global attacker is tentacle-confused (this is the no 
 	say "[The global attacker] [is-are] no longer confused.";
 	now the global attacker is not tentacle-confused.
 
-Status rule (this is the tentacle-confused status rule):
+Status attribute rule (this is the tentacle-confused status rule):
 	if the player is tentacle-confused:
 		if long status is true:
 			say "You are [bold type]confused[roman type] by the giant tentacle, which gives you a -2 attack penalty on your next attack.[line break][run paragraph on]";
@@ -3777,7 +3777,7 @@ Fruit-launching golden fruit:
 	say "[line break]The golden fruit explode above [the guy], releasing a [bold type]golden light[roman type].";
 	now golden fruit timer is a random number between 8 and 14.
 
-Status rule (this is the golden fruit status rule):
+Status attribute rule (this is the golden fruit status rule):
 	if the player is druidic and the golden fruit timer is greater than 0:
 		if long status is true:
 			say "You are under the influence of the [bold type]golden fruit[roman type], which gives you a +3 attack bonus.[line break][run paragraph on]";
@@ -4733,7 +4733,7 @@ Initiative update rule (this is the decrease initiative when hexed rule):
 			if a random chance of 2 in 3 succeeds:
 				decrease the initiative of X by a random number between 0 and 2.
 
-Status rule (this is the hexed status rule):
+Status attribute rule (this is the hexed status rule):
 	if the player is hexed:
 		if long status is true:
 			say "You have been [bold type]hexed[roman type] by the aswang, which gives you an initiative penalty.[line break][run paragraph on]";

@@ -36,7 +36,7 @@ The favour rules are a god based rulebook.
 
 Section - Status and short status
 
-Status rule (this is the religion status rule):
+Status combat stats rule (this is the religion status rule):
 	if the player worships a god:
 		if long status is true:
 			say "You worship [bold type][a random god worshipped by the player][roman type], and have accrued a favour of [divine favour].[line break][run paragraph on]";
@@ -199,12 +199,12 @@ To decide whether survival instinct is active:
 	otherwise:
 		decide no.
 
-Status rule (this is the survival instinct status rule):
+Status attribute rule (this is the survival instinct status rule):
 	if the player worships Aite and divine favour is greater than 2:
 		if long status is true:
 			say "You have [bold type]survival instincts[roman type].[line break][run paragraph on]".
 
-Status rule (this is the survival instinct active status rule):
+Status combat stats rule (this is the survival instinct active status rule):
 	if survival instinct is active:
 		if long status is true:
 			say "[bold type]Survival instinct[roman type]: +2 defence bonus[line break][run paragraph on]";
@@ -541,7 +541,7 @@ A damage modifier rule (this is the undead slayer damage bonus rule):
 		say " + 2 (undead slayer)[run paragraph on]";
 		increase the attack damage by 2.
 		
-Status rule (this is the undead slayer status rule):
+Status attribute rule (this is the undead slayer status rule):
 	if player worships sul and divine favour > 2:
 		if long status is true:
 			say "[bold type]Undead slayer[roman type]: +2 to attack and damage against undead.[line break][run paragraph on]".		
@@ -558,7 +558,7 @@ A damage modifier rule (this is the demon slayer damage bonus rule):
 		say " + 2 (demon slayer)[run paragraph on]";
 		increase the attack damage by 2.
 		
-Status rule (this is the demon slayer status rule):
+Status attribute rule (this is the demon slayer status rule):
 	if player worships sul and divine favour > 5:
 		if long status is true:
 			say "[bold type]Demon slayer[roman type]: +2 to attack and damage against demons.[line break][run paragraph on]".				

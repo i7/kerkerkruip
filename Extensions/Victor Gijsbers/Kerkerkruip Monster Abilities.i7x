@@ -30,7 +30,7 @@ Creature-type is a kind of value. The creature-types are living, undead, demonic
 
 A person has a creature-type. The creature-type of a person is usually living.
 
-Status rule (this is the undead status rule):
+Status attribute rule (this is the undead status rule):
 	if the player is undead:
 		if long status is true:
 			say "You are [bold type]undead[roman type]: other undead are your allies; other potential allies may be your enemies instead; absorbing a soul may heal you only partially.[line break][run paragraph on]";
@@ -130,7 +130,7 @@ Chapter - Resistance against deathly magic
 
 A person can be deathly-resistant. A person is usually not deathly-resistant.
 
-Status rule (this is the deathly-resistant status rule):
+Status attribute rule (this is the deathly-resistant status rule):
 	if player is deathly-resistant and player is not undead:
 		if long status is true:
 			say "You are somewhat resistant to deathly magic.[line break][run paragraph on]".;
@@ -187,7 +187,7 @@ A flying rule (this is the flyers fly rule):
 	if test subject is flyer:
 		rule succeeds.
 
-Status rule (this is the flying status rule):
+Status attribute rule (this is the flying status rule):
 	if player is flying:
 		if long status is true:
 			say "You [if the player is flyer]have wings and [end if]are [bold type]flying[roman type].[line break][run paragraph on]";
@@ -251,14 +251,14 @@ A blindness rule (this is the blind if eyeless rule):
 	if test subject is eyeless:
 		rule succeeds.
 		
-Status rule (this is the blindness status rule):
+Status attribute rule (this is the blindness status rule):
 	if player is blind:
 		if long status is true:
 			say "You are [bold type]blind[roman type].[line break][run paragraph on]";
 		otherwise:
 			say ", blind[run paragraph on]";
 	
-Status rule (this is the eyeless status rule):
+Status attribute rule (this is the eyeless status rule):
 	if player is eyeless:
 		if long status is true:
 			say "You do not need [bold type]eyes[roman type] to perceive your surroundings.[line break][run paragraph on]";
@@ -299,7 +299,7 @@ A rage rule:
 	if test subject is enraged:
 		rule succeeds.
 
-Status rule (this is the rage status rule):
+Status attribute rule (this is the rage status rule):
 	if player is raging:
 		if long status is true:
 			say "You are [bold type]raging[roman type], and will not retreat.[line break][run paragraph on]";
@@ -365,7 +365,7 @@ A damage modifier rule (this is the bloodlusting damage bonus rule):
 
 Section - Status
 
-Status rule (this is the bloodlust status rule):
+Status attribute rule (this is the bloodlust status rule):
 	if bloodlust of player is not 0:
 		let n be bloodlust of the player;
 		if long status is true:
@@ -373,7 +373,7 @@ Status rule (this is the bloodlust status rule):
 
 Section - Status
 
-Status rule (this is the bloodlusting status rule):
+Status combat stats rule (this is the bloodlusting status rule):
 	if player is bloodlusting and bloodlust of player is not 0:
 		let n be bloodlust of the player;
 		if long status is true:
@@ -424,11 +424,13 @@ An attack modifier rule (this is the radiance attack bonus rule):
 
 Section - Status
 
-Status rule (this is the radiance status rule):
+Status attribute rule (this is the radiance status rule):
 	if player is radiant:
 		let n be radiation of the player;
 		if long status is true:
-			say "Level [n in words] [bold type]radiance[roman type]: +[n] to attack and defence against sighted beings (except angels).[line break][run paragraph on]".
+			say "Level [n in words] [bold type]radiance[roman type]: +[n] to attack and defence against sighted beings (except angels).[line break][run paragraph on]";
+		otherwise:
+			say " , radiant[run paragraph on]".
 
 
 

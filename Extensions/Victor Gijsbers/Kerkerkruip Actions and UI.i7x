@@ -335,15 +335,17 @@ Carry out asking status (this is the show basic stats rule):
 	say "[bold type]Spirit[roman type]: [run paragraph on][fs][if fs is greater than spirit score of the player] ([spirit score of the player] inherent + [sb] bonus)[end if][if fs is less than spirit score of the player] ([spirit score of the player] inherent - [sb * -1] penalty)[end if][line break][run paragraph on]";
 
 Carry out asking status:
-	consider the status rules;
+	consider the status combat stats rules;
+	consider the status attribute rules;
 	consider the status skill rules;
 	say "[line break][run paragraph on]".
 	
-The status rules are a rulebook.
+The status combat stats rules are a rulebook.
+The status attribute rules are a rulebook.
 The status skill rules are a rulebook.
 Long status is a truth state variable. Long status is true.
 
-Status rule (this is the status concentration rule):
+Status combat stats rule (this is the status concentration rule):
 	if concentration of the player is not 0:
 		let n be concentration of the player;
 		if long status is true:
@@ -351,7 +353,7 @@ Status rule (this is the status concentration rule):
 		otherwise:
 			say "[bold type]Concentration[roman type]: [if n is 1]+2[else if n is 2]+4[else if n is 3]+8[end if] attack, [if n is 1]no[else if n is 2]+2[else if n is 3]+4[end if] damage[line break][run paragraph on]";
 
-Status rule (this is the status tension rule):
+Status combat stats rule (this is the status tension rule):
 	if tension is greater than 1:
 		if long status is true:
 			say "[bold type]Tension[roman type]: +[tension divided by 2] attack bonus, +[tension divided by 3] damage bonus[line break][run paragraph on]";

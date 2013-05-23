@@ -313,7 +313,7 @@ Before printing the name of a weapon (called item):
 	if item is not medium:
 		say "[size of item] ".
 
-Status rule (this is the size status rule):
+Status attribute rule (this is the size status rule):
 	if player is not medium:
 		if long status is true:
 			say "Your current size is [bold type][size of the player][roman type][if size of the player is not base size of the player], and your base size is [bold type][base size of the player][roman type][end if].[line break][run paragraph on]";
@@ -1346,7 +1346,7 @@ This is the turn-undead rule:
 	now undead-faction does not hate player-enslaved;
 	now player-enslaved does not hate undead-faction.
 
-Status rule (this is the short player form status rule):
+This is the short player form status rule:
 	if long status is false:
 		say "You are [if current form is ghoul-form]a ghoul[else if current form is vampire-form]a vampire[else if current form is vampirebat-form]a vampire bat[else if current form is ghost-form]a ghost[else if current form is lich-form]a lich[else if the player is undead]undead[else]human[end if][run paragraph on]";
 
@@ -1423,7 +1423,7 @@ A physical damage reduction rule (this is the ghoul damage reduction rule):
 	if the test subject is the player and the current form is ghoul-form:
 		increase the pdr by 1.
 
-Status rule (this is the ghoul status rule):
+Status attribute rule (this is the ghoul status rule):
 	if current form is ghoul-form:
 		if long status is true:
 			say "You are a [bold type]ghoul[roman type]: -1 attack; +1 damage resistance.[line break][run paragraph on]".
@@ -1455,7 +1455,7 @@ To vampirise the player:
 This is the turn-vampire rule:
 	say "".
 
-Status rule (this is the vampire status rule):
+Status attribute rule (this is the vampire status rule):
 	if current form is vampire-form:
 		if long status is true:
 			say "You are a [bold type]vampire[roman type]: +4 mind, +2 attack, -2 defence, modest bonus to hiding.[line break][run paragraph on]".
@@ -1491,7 +1491,7 @@ Section - Vampire bat
 This is the turn-vampire-bat rule:
 	say "".
 
-Status rule (this is the vampire bat status rule):
+Status attribute rule (this is the vampire bat status rule):
 	if current form is vampirebat-form:
 		if long status is true:
 			say "You are a [bold type]vampire bat[roman type]: +2 defence, -2 attack, large bonus to hiding, bonus to running away, flying, cannot use weapons or clothing.[line break][run paragraph on]".
@@ -1628,7 +1628,7 @@ Carry out turning bat:
 
 Section - Status
 
-Status rule (this is the change form rule):
+Status attribute rule (this is the change form rule):
 	if long status is true:
 		let n be 0;
 		let m be 0;
@@ -1707,12 +1707,12 @@ mutation	mutate-text	unmutate-text
 wings	"You grow wings and gain the power of flight!"	"You lose your wings!"
 darkvision	"You gain the ability to see in total darkness!"	"You lose your darkvision!"
 pseudopods	"Hundreds of apparently useless pseudopods grow from your skin."	"The pseudopods that covered you disappear."
-disintegrating flesh	"Your flesh loses much of ist consistency!"	"Your flesh returns to its normal solidity."
+disintegrating flesh	"Your flesh loses much of its consistency!"	"Your flesh returns to its normal solidity."
 metallic scales	"Your body is covered in metallic scales!"	"The metallic scales disappear from your body."
 tunneling claws	"Your hands turn into tunneling claws!"	"Your tunneling claws disappear."
 
 
-Status rule (this is the mutations status rule):
+Status attribute rule (this is the mutations status rule):
 	if at least one mutation is adapted:
 		if long status is true:
 			say "Your altered body has [bold type][list of adapted mutations][roman type].[line break][run paragraph on]";

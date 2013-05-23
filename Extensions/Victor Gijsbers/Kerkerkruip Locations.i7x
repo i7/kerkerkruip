@@ -1383,7 +1383,7 @@ An attack modifier rule (this is the incense penalty in Sweat Lodge rule):
 		say " - [incensemod] (incense penalty)[run paragraph on]";
 		decrease the attack strength by incensemod.
 		
-Status rule (this is the sweat lodge attack modifier rule):
+Status combat stats rule (this is the sweat lodge attack modifier rule):
 	if the location is the Tungausy Sweat Lodge and incensemod is not 0:
 		if long status is true:
 			say "The [bold type]incense[roman type] gives everyone a +[incensemod] spirit bonus and a -[incensemod] attack penalty.[line break][run paragraph on]";

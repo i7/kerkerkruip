@@ -333,9 +333,9 @@ To grant a faculty increase of (n - a number):
 	increase unallocated faculty by n;
 	say "You can now increase one of your faculties by [bold type][unallocated faculty] point[if unallocated faculty is not 1]s[end if][roman type]. (Type 'body', 'mind', or 'spirit', depending on your choice.) [run paragraph on]".
 	
-Last status rule (this is the unallocated faculty rule):
+Last status skill rule (this is the unallocated faculty rule):
 	if unallocated faculty is greater than 0:
-		say "You can increase one of your faculties by [bold type][unallocated faculty] point[if unallocated faculty is not 1]s[end if][roman type]. (Type 'body', 'mind', or 'spirit', depending on your choice. This action takes no time.)[line break][run paragraph on]".
+		say "[italic type]You can increase one of your faculties by [bold type][unallocated faculty] point[if unallocated faculty is not 1]s[end if][italic type]. (Type 'body', 'mind', or 'spirit', depending on your choice. This action takes no time.)[roman type][line break][run paragraph on]".
 
 Increasing body is an action out of world. Understand "body" as increasing body.
 Increasing mind is an action out of world. Understand "mind" as increasing mind.

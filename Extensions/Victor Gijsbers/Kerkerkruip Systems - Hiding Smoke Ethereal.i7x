@@ -11,7 +11,7 @@ A person can be on-the-lookout. A person is usually not on-the-lookout. [Once th
 A person can be unnaturally aware. [The unnaturally aware always detect you.]
 A person can be unnaturally aware follower. [An unnaturally aware follower may not detect you, but does know where you are in the dungeon.]
 
-Status rule (this is the hidden status rule):
+Status attribute rule (this is the hidden status rule):
 	if the player is hidden:
 		if long status is true:
 			say "You are [bold type]hidden[roman type].[line break][run paragraph on]";
@@ -393,7 +393,7 @@ A damage multiplier rule (this is the ethereal damage multiplier rule):
 		now the attack damage is 0;
 		decrease hit protection of the global defender by 1.
 
-Status rule (this is the ethereal status rule):
+Status attribute rule (this is the ethereal status rule):
 	if player is ethereal:
 		if long status is true:
 			say "You are [bold type]ethereal[roman type]: you cannot interact with most physical objects.[line break][run paragraph on]";
