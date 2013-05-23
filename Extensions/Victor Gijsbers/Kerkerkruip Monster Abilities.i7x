@@ -192,7 +192,7 @@ Status attribute rule (this is the flying status rule):
 		if long status is true:
 			say "You [if the player is flyer]have wings and [end if]are [bold type]flying[roman type].[line break][run paragraph on]";
 		otherwise:
-			say ", flying[run paragraph on]";
+			say "[@ check initial position of attribute]winged and flying[run paragraph on]";
 
 Chapter - Followers
 
@@ -256,14 +256,14 @@ Status attribute rule (this is the blindness status rule):
 		if long status is true:
 			say "You are [bold type]blind[roman type].[line break][run paragraph on]";
 		otherwise:
-			say ", blind[run paragraph on]";
+			say "[@ check initial position of attribute]blind[run paragraph on]";
 	
 Status attribute rule (this is the eyeless status rule):
 	if player is eyeless:
 		if long status is true:
 			say "You do not need [bold type]eyes[roman type] to perceive your surroundings.[line break][run paragraph on]";
 		otherwise:
-			say ", eyeless[run paragraph on]";
+			say "[@ check initial position of attribute]eyeless[run paragraph on]";
 
 An attack modifier rule (this is the blindness attack modifier rule):
 	if the global attacker is blind and the global attacker is not eyeless:
@@ -304,7 +304,7 @@ Status attribute rule (this is the rage status rule):
 		if long status is true:
 			say "You are [bold type]raging[roman type], and will not retreat.[line break][run paragraph on]";
 		otherwise:
-			say ", enraged[run paragraph on]";
+			say "[@ check initial position of attribute]enraged[run paragraph on]";
 
 This is the do not go in combat when raging rule:
 	if the player is raging and the combat status is not peace:
@@ -430,7 +430,7 @@ Status attribute rule (this is the radiance status rule):
 		if long status is true:
 			say "Level [n in words] [bold type]radiance[roman type]: +[n] to attack and defence against sighted beings (except angels).[line break][run paragraph on]";
 		otherwise:
-			say " , radiant[run paragraph on]".
+			say "[@ check initial position of attribute]radiant[run paragraph on]".
 
 
 

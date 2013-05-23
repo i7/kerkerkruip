@@ -1887,7 +1887,7 @@ Status attribute rule (this is the protection status rule):
 		if long status is true:
 			say "You are [bold type]protected[roman type] from damage dealt by attacks.[line break][run paragraph on]";
 		otherwise:
-			say ", protected from damage[run paragraph on]";
+			say "[@ check initial position of attribute]protected from damage[run paragraph on]";
 
 A damage multiplier rule when the hit protection of the global defender is greater than 0 (this is the hit protection damage multiplier rule):
 	say " - 100% (protection)[run paragraph on]";
@@ -1940,7 +1940,7 @@ Status attribute rule (this is the skilled status rule):
 		if long status is true:
 			say "You are [bold type]skilled[roman type]: +3 bonus to body, mind and spirit.[line break][run paragraph on]";
 		otherwise:
-			say ", skilled[run paragraph on]";
+			say "[@ check initial position of attribute]skilled[run paragraph on]";
 
 A faculty bonus rule (this is the faculty bonus of being skilled rule):
 	if the test subject is the player and the player skill bonus timer is greater than 0:

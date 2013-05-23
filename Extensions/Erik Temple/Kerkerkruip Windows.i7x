@@ -142,15 +142,16 @@ Before printing the player's obituary (this is the final refresh side windows ru
 	redraw subsidiary content windows.
 
 
-Section - Statistics window
+Section - Statistics window	
 
 Window-drawing rule for the stats-window when the stats-window is g-present (this is the construct stats window rule):
 	move focus to stats-window, clearing the window;
 	now long status is false;
+	now attribute printed is false;
 	consider the status combat stats rules;
 	consider the short player form status rule;[the player's form]
 	consider the status attribute rules;
-	say ". [bracket][link 1]detailed status report[end link][close bracket][line break][run paragraph on]";
+	say "[if attribute printed is true]. [end if][bracket][link 1]detailed status report[end link][close bracket][line break][run paragraph on]";
 	consider the unallocated faculty short status rule;[shortened message for any unassigned faculty points]
 	say "[line break][run paragraph on]";
 	consider the show basic stats rule;[show statistics]
@@ -158,11 +159,20 @@ Window-drawing rule for the stats-window when the stats-window is g-present (thi
 	now long status is true;
 	return to main screen.
 
+
+Attribute printed is a truth state variable. Attribute printed is false.
+
+To check initial position of attribute:
+	if attribute printed is false:
+		say "You are [run paragraph on]";
+		now attribute printed is true;
+	otherwise:
+		say ", [run paragraph on]".
+
 This is the unallocated faculty short status rule:
 	if long status is false:
 		if unallocated faculty is greater than 0:
-			say "[italic type]Increase one of your faculties by typing 'body', 'mind', or 'spirit' ([unallocated faculty] point[if unallocated faculty is greater than 1]s[end if]).[roman type][line break][run paragraph on]";
-
+			say "[italic type]Increase one of your faculties by typing 'body', 'mind', or 'spirit' ([unallocated faculty] point[if unallocated faculty is greater than 1]s[end if]).[roman type][line break][run paragraph on]".
 	
 Window-drawing rule for the stat-header-window when the stat-header-window is g-present (this is the construct stat header window rule):
 	move focus to stat-header-window, clearing the window;

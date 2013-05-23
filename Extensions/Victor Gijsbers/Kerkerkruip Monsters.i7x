@@ -837,7 +837,7 @@ Status attribute rule (this is the stunned status rule):
 		if long status is true:
 			say "You are [bold type]stunned[roman type]: -1 to attack, -[stun strength of the player] to body, mind and spirit.[line break][run paragraph on]";
 		otherwise:
-			say ", stunned[run paragraph on]";
+			say "[@ check initial position of attribute]stunned[run paragraph on]";
 
 
 Section - Stunned
@@ -1144,7 +1144,7 @@ Status attribute rule (this is the wisps status rule):
 			otherwise:
 				say "Pain has made you [bold type]stronger[roman type]: +[wisp-strength] to body, mind and spirit.[line break][run paragraph on]";
 		otherwise:
-			say ", [if power of the wisps is granted]in pain[otherwise]pain-hardened[end if][run paragraph on]";
+			say "[@ check initial position of attribute][if power of the wisps is granted]in pain[otherwise]pain-hardened[end if][run paragraph on]";
 
 
 
@@ -1976,7 +1976,7 @@ Status attribute rule (this is the howling status rule):
 		if long status is true:
 			say "You are [bold type]howling[roman type]: +4 to attack, +4 to damage.[line break][run paragraph on]";
 		otherwise:
-			say ", howling[run paragraph on]";
+			say "[@ check initial position of attribute]howling[run paragraph on]";
 
 
 
@@ -2663,7 +2663,7 @@ Status attribute rule (this is the grappled status rule):
 		if long status is true:
 			say "You are [bold type]grappled[roman type] by [the X].[line break][run paragraph on]";
 		otherwise:
-			say ", grappled by [the X][run paragraph on]";
+			say "[@ check initial position of attribute]grappled by [the X][run paragraph on]";
 		
 A sudden combat reset rule (this is the sudden grapple reset rule):
 	repeat with guy running through alive persons in the location:
@@ -2765,7 +2765,7 @@ Status attribute rule (this is the tentacle-confused status rule):
 		if long status is true:
 			say "You are [bold type]confused[roman type] by the giant tentacle, which gives you a -2 attack penalty on your next attack.[line break][run paragraph on]";
 		otherwise:
-			say ", confused[run paragraph on]";
+			say "[@ check initial position of attribute]confused[run paragraph on]";
 
 
 
@@ -3782,7 +3782,7 @@ Status attribute rule (this is the golden fruit status rule):
 		if long status is true:
 			say "You are under the influence of the [bold type]golden fruit[roman type], which gives you a +3 attack bonus.[line break][run paragraph on]";
 		otherwise:
-			say ", under the influence of the golden fruit[run paragraph on]";
+			say "[@ check initial position of attribute]under the influence of the golden fruit[run paragraph on]";
 
 Section - Weird fruit
 
@@ -4738,7 +4738,7 @@ Status attribute rule (this is the hexed status rule):
 		if long status is true:
 			say "You have been [bold type]hexed[roman type] by the aswang, which gives you an initiative penalty.[line break][run paragraph on]";
 		otherwise:
-			say ", hexed[run paragraph on]";
+			say "[@ check initial position of attribute]hexed[run paragraph on]";
 
 Every turn when at least one alive person is hexed (this is the remove hexes when aswang is dead rule):
 	if the aswang is dead:
