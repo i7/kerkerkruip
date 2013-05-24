@@ -387,10 +387,9 @@ Chance to win rule when the main actor is bloodlusting (this is the CTW bloodlus
 	let n be bloodlust of the main actor;
 	increase the chance-to-win by n.
 
-An AI action selection rule for a bloodlusting person (this is the prefer attacking when bloodlusting rule):
-	choose row with an Option of the action of the main actor attacking the chosen target in the Table of AI Action Options;
-	let n be bloodlust of the main actor;
-	increase the Action Weight entry by n.	
+An AI action selection rule for an at-Act bloodlusting person (called P) (this is the prefer attacking when bloodlusting rule):
+	choose row with an Option of the action of P attacking the chosen target in the Table of AI Action Options;
+	increase the Action Weight entry by the bloodlust of P;
 
 Section - Innate bloodlust
 

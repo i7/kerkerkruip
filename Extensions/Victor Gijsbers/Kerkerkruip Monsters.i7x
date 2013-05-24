@@ -2117,7 +2117,7 @@ A damage modifier rule (this is the power of the hound damage modifier rule):
 		say " + 2 (counterstrike)[run paragraph on]";
 		increase the attack damage by 2;
 
-An AI action selection rule for the hound:
+An AI action selection rule for the hound (this is the hound likes to counterstrike but never parries rule):
 	[ Attack with the instant response turn]
 	if the hound is at-Act:
 		if hound status is 1 and the chosen target is the hound provoker:
