@@ -3250,11 +3250,18 @@ Instead of eating vial of purification:
 	
 Instead of drinking vial of purification:
 	remove noun from play;
-	say "The waters purify you of all undead influences.";
-	now ghoul-form is not form-active;
-	now vampire-form is not form-active;
-	now vampirebat-form is not form-active;		
-	turn the player into human-form.
+	unless the player worships Chton:
+		say "The waters purify you of all undead influences.";
+		repeat with shape running through player forms:
+			choose a row with player form of shape in Table of Form Properties;
+			if turn-type entry is undead:
+				now shape is not form-active;
+		turn the player into human-form;
+	otherwise:
+		say "Chton prevents the vial of purification from doing its work; but your attempt at escaping undeath did not amuse him. A wave of extreme cold racks your body, dealing [bold type]15 damage[roman type]!";
+		decrease health of player by 15;
+		if the player is dead:
+			end the story saying "Don't worry; Chton will soon raise you as a mindless zombie.".
 
 Section - Rod of the Master Builder (epic)
 
@@ -3406,12 +3413,12 @@ Carry out snorting a package of ment:
 
 To have the ment kick in:
 	increase the ment addiction by 1;
-	[unless ment timer is 0:
+	unless ment timer is 0:
 		if a random chance of 1 in 2 succeeds:
 			if the OD timer is 0:
 				now the OD timer is 12;
 			otherwise:
-				end the game saying "You OD'ed.";]
+				end the game saying "You OD'ed.";
 	now the ment timer is a random number between 10 and 15;
 	remove the noun from play.
 	
@@ -3516,7 +3523,8 @@ Brightest-flame-counter is a number that varies. Brightest-flame-counter is 0.
 Carry out reading the tome of the brightest flame:
 	say "You have chosen fame over a long life. Achieve it while you may!";
 	now hit protection of the player is 50;
-	now brightest-flame-counter is 31.
+	now brightest-flame-counter is 31;
+	remove tome of the brightest flame from play.
 	
 A physical damage reduction rule (this is the brightest flame damage reduction rule):
 	if the test subject is the player and brightest-flame-counter is not 0:

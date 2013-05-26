@@ -5351,7 +5351,7 @@ Chapter - The demonic mistress
 
 [The demoness can appear when the player wears the demon lord's diadem.]
 
-The demonic mistress is a monster. "A horned figure stalks through the room." Understand "horned" and "figure" and "demon" and "demoness" as the demonic mistress. The description of the demonic mistress is "A being summoned by Malygris from the depths of Hell, this demon has only one purpose: to stop you from reaching its master.".
+The demonic mistress is a female monster. "A horned figure stalks through the room." Understand "horned" and "figure" and "demon" and "demoness" as the demonic mistress. The description of the demonic mistress is "A being summoned by Malygris from the depths of Hell, this demon has only one purpose: to stop you from reaching its master.".
 
 The level of demonic mistress is 0.
 The ID of the demonic mistress is 28.
