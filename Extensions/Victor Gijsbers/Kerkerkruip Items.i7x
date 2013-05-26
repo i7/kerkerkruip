@@ -3413,12 +3413,12 @@ Carry out snorting a package of ment:
 
 To have the ment kick in:
 	increase the ment addiction by 1;
-	[unless ment timer is 0:
+	unless ment timer is 0:
 		if a random chance of 1 in 2 succeeds:
 			if the OD timer is 0:
 				now the OD timer is 12;
 			otherwise:
-				end the game saying "You OD'ed.";]
+				end the game saying "You OD'ed.";
 	now the ment timer is a random number between 10 and 15;
 	remove the noun from play.
 	
