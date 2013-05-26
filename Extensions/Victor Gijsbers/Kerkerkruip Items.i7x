@@ -3516,7 +3516,8 @@ Brightest-flame-counter is a number that varies. Brightest-flame-counter is 0.
 Carry out reading the tome of the brightest flame:
 	say "You have chosen fame over a long life. Achieve it while you may!";
 	now hit protection of the player is 50;
-	now brightest-flame-counter is 31.
+	now brightest-flame-counter is 31;
+	remove tome of the brightest flame from play.
 	
 A physical damage reduction rule (this is the brightest flame damage reduction rule):
 	if the test subject is the player and brightest-flame-counter is not 0:
