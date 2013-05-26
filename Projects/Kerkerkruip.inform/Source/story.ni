@@ -24,12 +24,14 @@ Every turn (this is the mark items as seen every turn rule):
 
 Section - Glimmr or Flexible Windows
 
-[Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. Be sure to comment Flexible Windows in instead!]
-Include Kerkerkruip Glimmr Additions by Erik Temple.
-Include Kerkerkruip Windows by Erik Temple.
+[Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. Be sure to comment in Flexible Windows + Fixed Points Maths instead!]
+[Include Kerkerkruip Glimmr Additions by Erik Temple.]
+Include Flexible Windows by Jon Ingold.
+Include Fixed Point Maths by Michael Callaghan.
 
-[Include Flexible Windows by Jon Ingold.
-Include Fixed Point Maths by Michael Callaghan.]
+Include Kerkerkruip Windows by Erik Temple.
+[Include Extended Debugging by Erik Temple.]
+
 
 Section - Include Permadeath
 		
@@ -85,8 +87,6 @@ Generation info is a truth state that varies. Generation info is [true]false.
 
 Section - Testing - Not for release
 
-Include Extended Debugging by Erik Temple.
-
 [Last when play begins:
 	move mummified priest to location of Malygris.
 	
@@ -118,4 +118,8 @@ Section - Menu code adjustments
 Before displaying:
 	open the status window.
 
-	
+
+Section - Defining perform syntax (not for use with Glimmr Canvas Animation by Erik Temple)
+
+To say perform/@ (ph - phrase): (- if (0==0) {ph} -).
+
