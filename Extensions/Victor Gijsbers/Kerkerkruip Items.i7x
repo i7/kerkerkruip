@@ -3250,11 +3250,18 @@ Instead of eating vial of purification:
 	
 Instead of drinking vial of purification:
 	remove noun from play;
-	say "The waters purify you of all undead influences.";
-	now ghoul-form is not form-active;
-	now vampire-form is not form-active;
-	now vampirebat-form is not form-active;		
-	turn the player into human-form.
+	unless the player worships Chton:
+		say "The waters purify you of all undead influences.";
+		repeat with shape running through player forms:
+			choose a row with player form of shape in Table of Form Properties;
+			if turn-type entry is undead:
+				now shape is not form-active;
+		turn the player into human-form;
+	otherwise:
+		say "Chton prevents the vial of purification from doing its work; but your attempt at escaping undeath did not amuse him. A wave of extreme cold racks your body, dealing [bold type]15 damage[roman type]!";
+		decrease health of player by 15;
+		if the player is dead:
+			end the story saying "Don't worry; Chton will soon raise you as a mindless zombie.".
 
 Section - Rod of the Master Builder (epic)
 
