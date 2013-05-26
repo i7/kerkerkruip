@@ -132,8 +132,8 @@ Favour rule for Aite (this is the Aite favour 6 rule):
 				identify item;
 			move item to player.
 
-Favour rule for Aite (this is the Aite favour 10 rule):
-	if divine favour is 10:
+Favour rule for Aite (this is the Aite favour 9 rule):
+	if divine favour is 9:
 		say "Aite remakes your body in her own image!";
 		now player is female;
 		let n be a random number between -2 and 5;
@@ -315,8 +315,8 @@ Favour rule for Nomos (this is the Nomos favour 6 rule):
 		say "Nomos grants you another point of physical damage reduction, and the Malleus Maleficarum.";
 		move Malleus Maleficarum to the player.
 
-Favour rule for Nomos (this is the Nomos favour 10 rule):
-	if divine favour is 10:
+Favour rule for Nomos (this is the Nomos favour 9 rule):
+	if divine favour is 9:
 		say "Nomos grants you a further two points of physical damage reduction, and the Tome of Law!";
 		move Tome of Law to the player.
 
@@ -328,7 +328,7 @@ A physical damage reduction rule (this is the worshipping Nomos damage reduction
 			increase pdr by 1;
 		if divine favour is greater than 5:
 			increase pdr by 1;
-		if divine favour is greater than 9:
+		if divine favour is greater than 8:
 			increase pdr by 2.
 
 Section - Inquisitor's hood
@@ -423,7 +423,7 @@ A damage modifier rule (this is the Nomos damage bonus rule):
 			
 To decide which number is Nomos piety:
 	if player worships Nomos:
-		if divine favour > 9:
+		if divine favour > 8:
 			decide on 4;
 		if divine favour > 5:
 			decide on 3;
@@ -475,8 +475,8 @@ Favour rule for Sul (this is the Sul favour 6 rule):
 			increase weapon attack bonus of item by 1;
 			increase internal heat of item by 3.
 
-Favour rule for Sul (this is the Sul favour 10 rule):
-	if divine favour is 10:
+Favour rule for Sul (this is the Sul favour 9 rule):
+	if divine favour is 9:
 		say "Sul cures you of any addictions you might have, and grants you a more powerful angelic radiance.";
 		increase radiation of player by 2;
 		now ment timer is 0;
@@ -504,7 +504,7 @@ Last check reading a scroll of death:
 		say "Before you finish reading it, the scroll burns up in your hands! Sul is not amused by your defiant behaviour, and deals [bold type]10 damage[roman type] to you.";
 		decrease health of player by 10;
 		if the player is dead:
-			end the story saying "And you will know My name is the Lady when I lay My vengeance upon thee. ";
+			end the story saying "And you will know My name is the Lady when I lay My vengeance upon thee.";
 		rule fails.
 
 Last check reading a scroll of summoning:
@@ -603,8 +603,8 @@ Favour rule for Chton (this is the Chton favour 6 rule):
 		do a Chton gift;
 		now ghost-form is form-active.
 
-Favour rule for Chton (this is the Chton favour 10 rule):
-	if divine favour is 10:
+Favour rule for Chton (this is the Chton favour 9 rule):
+	if divine favour is 9:
 		say "Chton grants you the ability to switch to lich form, and gifst you three more scrolls.";
 		do a Chton gift;
 		do a Chton gift;
