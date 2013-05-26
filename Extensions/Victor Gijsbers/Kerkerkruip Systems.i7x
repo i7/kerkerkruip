@@ -1437,6 +1437,16 @@ To unghoulify the player:
 
 Section - Ghost
 
+Status attribute rule (this is the ghost status rule):
+	if current form is ghost-form:
+		if long status is true:
+			say "You are a [bold type]ghost[roman type]: all attacks by and against you have an additional 50% chance of missing.[line break][run paragraph on]".
+
+Last check an actor hitting (this is the ghost form rule):
+	if current form is ghost-form:
+		if global attacker is player or global defender is player:
+			if a random chance of 1 in 2 succeeds:
+				say "Due to your [bold type]insubstantiality[roman type], [possessive of the global attacker] attack passes harmlessly through [the global defender]." instead.
 
 Section - Lich
 
