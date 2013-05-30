@@ -1440,7 +1440,7 @@ Section - Ghost
 Status attribute rule (this is the ghost status rule):
 	if current form is ghost-form:
 		if long status is true:
-			say "You are a [bold type]ghost[roman type]: all attacks by and against you have an additional 50% chance of missing.[line break][run paragraph on]".
+			say "You are a [bold type]ghost[roman type]: all attacks by and against you have an additional 50% chance of missing; you get a large bonus to hiding.[line break][run paragraph on]".
 
 Last check an actor hitting (this is the ghost form rule):
 	if current form is ghost-form:
@@ -1448,7 +1448,27 @@ Last check an actor hitting (this is the ghost form rule):
 			if a random chance of 1 in 2 succeeds:
 				say "Due to your [bold type]insubstantiality[roman type], [possessive of the global attacker] attack passes harmlessly through [the global defender]." instead.
 
+Detection rule (this is the ghost detection rule):
+	if the current form is ghost-form:
+		decrease the detection probability by 30.
+
 Section - Lich
+
+Status attribute rule (this is the lich status rule):
+	if current form is lich-form:
+		if long status is true:
+			say "You are a [bold type]lich[roman type]: even powerful undead will follow you; you have a dreadful presence equal to the number of undead in the room; all undead allies gain +1 bloodlust.[line break][run paragraph on]".
+
+A dread rule (this is the lich-form dread rule):
+	if test subject is player and current form is lich-form:
+		let n be the number of alive undead persons in the location;
+		increase dread dummy by n.
+
+Bloodlust rule (this is the lich-form bloodlust rule):
+	if test subject is undead and test subject is not the player and current form is lich-form:
+		if location of the player is location of test subject:
+			unless faction of player hates faction of test subject:
+				increase bloodlust dummy by 1.
 
 
 Section - Vampire

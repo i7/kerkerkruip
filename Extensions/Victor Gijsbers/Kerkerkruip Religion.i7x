@@ -591,7 +591,6 @@ Favour rule for Chton (this is the Chton favour 3 rule):
 		say "Chton grants you the ability to switch between ghoul form and human form, and gifts you three more scrolls.";
 		do a Chton gift;
 		do a Chton gift;
-		do a Chton gift;
 		now ghoul-form is form-active;
 		now human-form is form-active.
 
@@ -614,7 +613,7 @@ Favour rule for Chton (this is the Chton favour 9 rule):
 Section - Chton's treasure chest
 
 Chton-treasure-chest is a container.
-Twelve scrolls of death and four scrolls of summoning are in Chton-treasure-chest.
+Twelve scrolls of death and five scrolls of summoning are in Chton-treasure-chest.
 
 To do a Chton gift:
 	let item be a random thing in Chton-treasure-chest;
@@ -630,6 +629,10 @@ Every turn when the player worships Chton (this is the Chton intervenes in comba
 				increase n by 2;
 			if current form is lich-form:
 				increase n by 5;
+			increase n by 6;
+			decrease n by (3 times (the number of people in the location));
+			if n < 1:
+				now n is 1;
 			if a random chance of n in 100 succeeds:
 				have Chton intervene.
 

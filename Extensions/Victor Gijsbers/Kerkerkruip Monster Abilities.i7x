@@ -432,7 +432,50 @@ Status attribute rule (this is the radiance status rule):
 			say "[@ check initial position of attribute]radiant[run paragraph on]".
 
 
+Chapter - Dreadful presence
 
+Section - Dread rules
+
+The dread rules are a rulebook.
+The dread dummy is a number that varies.
+
+To decide which number is dreadful presence of (guy - a person):
+	now test subject is guy;
+	now dread dummy is 0;
+	consider the dread rules;
+	decide on dread dummy.
+
+Definition: a person (called guy) is dreadful if (dreadful presence of guy > 0).
+
+Section - Dreadful presence effect
+
+This is the dreadful presence effect rule:
+	if combat status is combat and main actor is not undead:
+		repeat with guy running through alive people in the location:
+			if faction of guy hates faction of main actor:
+				let n be dreadful presence of guy;
+				if n > 0:
+					let m be 10 times n;
+					increase m by 5;
+					decrease m by final mind of main actor;
+					decrease m by level of main actor;
+					if m > 40:
+						now m is 40;
+					if m < 0:
+						now m is 0;
+					if a random chance of m in 100 succeeds:
+						say "[The main actor] cower[s] before [possessive of guy] [bold type]dreadful presence[roman type]!";
+						now combat status is concluding.
+
+The dreadful presence effect rule is listed before the the main actor chooses an action rule in the combat round rules.
+
+Section - Status rule
+
+Status attribute rule (this is the dreadful presence status rule):
+	if long status is true:
+		let n be dreadful presence of the player;
+		if n is not 0:
+			say "Level [N in words] [bold type]dreadful presence[roman type].[line break][run paragraph on]".
 
 
 Chapter - Insanity

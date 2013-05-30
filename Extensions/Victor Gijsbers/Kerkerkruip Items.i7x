@@ -524,7 +524,7 @@ Aftereffects rule (this is the tormenting necklace rule):
 			now necklace-torment-counter of global defender is (1 + blood magic level of tormenting necklace).
 
 This is the necklace of torment rule:
-	if necklace-torment-counter of the main actor is not 0:
+	if necklace-torment-counter of the main actor is not 0 and combat status is combat:
 		say "[The main actor] writhe[s] in [bold type]agony[roman type]!";
 		decrease necklace-torment-counter of main actor by 1;
 		now combat status is concluding.
