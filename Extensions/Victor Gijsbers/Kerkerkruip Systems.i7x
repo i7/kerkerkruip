@@ -481,6 +481,7 @@ A power can be granted. A power is usually not granted.
 A power has a number called the power level. The power level of a power is usually 1.
 A power has some text called the command text. The command text of a power is usually "".
 A power has a text called the description.
+A power has a text called the power-name.
 
 Granting relates one monster to one power. The verb to grant (he grants, they grant, he granted, it is granted, he is granting) implies the granting relation.
 

@@ -61,8 +61,6 @@ Carry out praying:
 
 Section - Sacrificing
 
-[TODO: doesn't remove powers yet!] 
-
 Sacrificing is an action applying to nothing. Understand "sacrifice" as sacrificing.
 
 Check sacrificing (this is the cannot sacrifice when not in a dedicated room rule):
@@ -77,14 +75,50 @@ Check sacrificing (this is the cannot sacrifice to a new god rule):
 			unless the player worships guy:
 				take no time;
 				say "[Guy] will not accept your sacrifice, since you already worship [a random god worshipped by the player]!" instead.
-		
-Carry out sacrificing:
-	let guy be a random god who infuses the location of the player;
-	now player worships guy;
-	increase divine favour by 1;
-	say "You now worship [guy], and have [divine favour] favour.";
-	consider the favour rules for guy.
 
+Check sacrificing (this is the cannot sacrifice when no power is granted rule):
+	if no power is granted:
+		take no time;
+		say "You do not have any powers to sacrifice!" instead.
+
+Sacrifice-powers is a number that varies.
+Sacrifice-lijst is a list of texts that varies.
+Sacrifice-lijst-2 is a list of powers that varies.		
+
+Carry out sacrificing:
+	take no time;
+	now sacrifice-powers is the number of granted powers;
+	now sacrifice-lijst is {};
+	now sacrifice-lijst-2 is {};
+	now current question is "Which power do you want to sacrifice? (Please enter a number.)";
+	repeat with stuff running through powers:
+		if stuff is granted:
+			add stuff to sacrifice-lijst-2;
+			add power-name of stuff to sacrifice-lijst;
+	add "do not sacrifice a power" to sacrifice-lijst;
+	now current question menu is sacrifice-lijst;
+	ask a closed question, in menu mode.
+
+A menu question rule (this is the sacrifice rule):
+	if the current question is "Which power do you want to sacrifice? (Please enter a number.)":
+		let n be number of entries in sacrifice-lijst;
+		let m be the number understood;
+		if m > 0:
+			if m < n:
+				let guy be a random god who infuses the location of the player;
+				now player worships guy;
+				let stuff be entry m of sacrifice-lijst-2;
+				let q be (divine favour plus power level of stuff);
+				say "You sacrifice the [power-name of stuff] to [guy], gaining [power level of stuff in words] divine favour (for a total of [q in words] favour).[paragraph break]";
+				follow the repelling rules for stuff;
+				now stuff is not granted;
+				while q > divine favour:
+					increase divine favour by 1;
+					consider the favour rules for guy;
+			otherwise if m is n:
+				say "You decide to not sacrifice a power.";
+			exit.
+		
 
 
 
