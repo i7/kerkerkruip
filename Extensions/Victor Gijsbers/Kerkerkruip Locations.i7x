@@ -483,119 +483,42 @@ The map-label of Temple of Sul is Figure of map_label_Sul.
 
 
 
-Chapter - Temple of Isatzo
+Chapter - Temple of Chton
 
-The temple of Isatzo is a room. "Exactly half of the room is black, and exactly half of it is white. This is the temple of Isatzo, the god of balance, whose statue stands in the center, one arm stretched out to each side."
+The temple of Chton is a room. "This austere alabaster chamber is a temple to Chton, the god of death. You do not expect the dead to be particularly meek here. A smooth grey statue of Chton silently watches you." [Allusions are to Emily Dickinson, "Safe in their alabaster chambres."]
 
-Temple of Isatzo is dedicated to Chton.
+Temple of Chton is dedicated to Chton.
 
-Temple of Isatzo is connectable.
-Temple of Isatzo is connection-inviting.
-Temple of Isatzo is placeable.
-Temple of Isatzo is habitable.
-Temple of Isatzo is treasurable.
-Temple of Isatzo is extra-accepting.
-Temple of Isatzo is consecrated.
-Temple of Isatzo is vp-agnostic.
-Temple of Isatzo is religious.
+Temple of Chton is connectable.
+Temple of Chton is connection-inviting.
+Temple of Chton is placeable.
+Temple of Chton is habitable.
+Temple of Chton is treasurable.
+Temple of Chton is extra-accepting.
+Temple of Chton is consecrated.
+Temple of Chton is vp-agnostic.
+Temple of Chton is religious.
 
-The unlock level of Temple of Isatzo is 5.
-The unlock text of Temple of Isatzo is "a temple dedicated to the fickle god of balance"
+The statue of Chton is scenery in Temple of Chton. The description of the statue of Chton is "Strangers to your country are always surprised that Chton is depicted as a good-looking youth rather than as an old man or a skeletal figure. They don't understand that death is the opposite and the abolition of age, illness, decay -- nothing could be more beautiful and seductive.". Understand "smooth" and "grey" as the statue of Chton.
 
-The statue of Isatzo is scenery in Temple of Isatzo. The description of the statue of Isatzo is "Made of grey stone, the statue of Isatzo offers one healing and one punishing hand to the world. He looks on mankind with one auspicious and one dropping eye, in equal scale weighing delight and dole.". Understand "god" and "deity" as the statue of Isatzo.
+Instead of attacking the statue of Chton:
+	say "With strange aeons even death may die -- but for now this statue seems indestructible.". 
 
-Instead of attacking the statue of Isatzo:
-	say "The statue seems impervious to harm.". 
+Instead of touching the statue of Chton:
+	say "It feels as cold as death.".
 
-Instead of touching the statue of Isatzo:
-	try climbing the statue of Isatzo.
+Instead of climbing the statue of Chton:
+	say "The statue is too smooth to climb.".
 
-Instead of climbing the statue of Isatzo:
-	say "For every meter you climb, you glide one meter down.".
-
-Understand "auspicious" and "dropping" and "eye" and "arm" and "arms" as the statue of Isatzo.
-
-The Isatzo time-out is a number that varies. The Isatzo time-out is 0.
-
-Every turn (this is the decrease the Isatzo time-out each turn rule):
-	if the main actor is the player and the Isatzo time-out is greater than 0:
-		decrease Isatzo time-out by 1;
-		if Isatzo time-out is 0 and player is in Temple of Isatzo:
-			say "Isatzo is available for prayer again.".
+An attack modifier rule (this is the undead better in temple of Chton rule):
+	if the global attacker is undead and the location is the Temple of Chton:
+		if the numbers boolean is true, say " + 1 (undead in temple of Chton)[run paragraph on]";
+		increase the attack strength by 1.
 	
-[Instead of praying in the Temple of Isatzo:
-	if the combat status is peace:
-		take no time;
-		say "There is nothing for Isatzo to balance here -- you must be engaged in a fight.";
-	otherwise:
-		if Isatzo time-out is greater than 0:
-			take no time;
-			say "The time for a new intervention by Isatzo has not yet come.";
-		otherwise:
-			now Isatzo time-out is a random number between 2 and 10;
-			let guy be the player;
-			while the faction of guy does not hate the faction of the player:
-				let guy be a random person enclosed by the location; [this cannot fail, since hate is present]
-			let m be a random number between 1 and 4;
-			if m is 1:
-				let n be concentration of guy + concentration of player;
-				increase n by 1;
-				now n is n divided by 2;
-				now concentration of guy is n;
-				now concentration of the player is n;
-				say "Isatzo sets your concentration and that of [the guy] to [if n is 0]none[otherwise if n is 1]mild[otherwise if n is 2]medium[otherwise if n is 3]maximal[end if].";
-			if m is 2:
-				if health of guy is health of player:
-					say "Isatzo feels your health and that of [the guy] are already balanced enough.";
-				otherwise:
-					let n be health of guy minus health of player;
-					let n be absolute value of n;
-					increase n by 1;
-					now n is n divided by 2;
-					if health of guy is less than health of player:
-						say "Isatzo transfers [n] health from you to [the guy].";
-						increase health of the guy by n;
-						decrease health of the player by n;
-					if health of guy is greater than health of player:
-						say "Isatzo transfers [n] health from [the guy] to you.";
-						decrease health of the guy by n;
-						increase health of the player by n;
-			if m is 3:
-				if a random chance of 1 in 2 succeeds:
-					let i be the number of things had by the player;
-					let j be the number of things had by guy;
-					let k be i + j;
-					if i is j or k is 0:
-						say "Isatzo feels your items and those of [the guy] are well-balanced.";
-					if i is greater than j:
-						let item be a random not readied thing had by the player;
-						say "Isatzo decides to give your [item] to [the guy].";
-						move item to guy;
-					if j is greater than i:
-						let item be a random not readied thing had by the guy;
-						say "Isatzo decides to give [possessive of the guy] [item] to you.";
-						move item to player;
-				otherwise:
-					let n be a random number between 0 and 3;
-					if a random chance of 1 in 2 succeeds:
-						now concentration of the player is n;
-						say "To balance the combat, Isatzo sets your concentration to [if n is 0]none[otherwise if n is 1]mild[otherwise if n is 2]medium[otherwise if n is 3]maximal[end if].";
-					otherwise:
-						now concentration of guy is n;
-						say "To balance the combat, Isatzo sets the concentration of [the guy] to [if n is 0]none[otherwise if n is 1]mild[otherwise if n is 2]medium[otherwise if n is 3]maximal[end if].";
-			if m is 4:
-				let item be a random readied weapon enclosed by the player;
-				if a random chance of 1 in 2 succeeds:
-					say "Isatzo decides that your [item] is imbalanced and needs a buff (permanent +1 attack bonus).";
-					increase weapon attack bonus of item by 1;
-				otherwise:
-					say "Isatzo decides that your [item] is imbalanced and needs a nerf (permanent -1 attack bonus).";
-					decrease weapon attack bonus of item by 1.]
 
+Section - Temple of Chton label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
-Section - Temple of Isatzo label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
-
-The map-label of Temple of Isatzo is Figure of map_label_Isatzo.
+The map-label of Temple of Chton is Figure of map_label_Isatzo. [TODO!]
 
 
 
