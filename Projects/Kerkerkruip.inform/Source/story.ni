@@ -13,6 +13,8 @@ Include Numbered Disambiguation Choices by Aaron Reed.
 Include Glulx Entry Points by Emily Short.
 Include Dynamic Objects by Jesse McGrew.
 Include Glulx Status Window Control by Erik Temple.
+Include Fixed Point Maths by Michael Callaghan.
+Include Questions by Michael Callaghan.
 
 Section - Including Epistemology
 
@@ -27,7 +29,7 @@ Section - Glimmr or Flexible Windows
 [Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. Be sure to comment in Flexible Windows + Fixed Points Maths instead!]
 [Include Kerkerkruip Glimmr Additions by Erik Temple.]
 Include Flexible Windows by Jon Ingold.
-Include Fixed Point Maths by Michael Callaghan.
+
 
 Include Kerkerkruip Windows by Erik Temple.
 [Include Extended Debugging by Erik Temple.]
@@ -100,6 +102,7 @@ Entrance to the Arena is testobject.]
 	
 [Last when play begins:
 	increase mind score of the player by 40.]
+
 
 
 Section - Flexible Windows relisting
