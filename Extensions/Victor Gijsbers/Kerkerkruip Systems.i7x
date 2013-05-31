@@ -1416,7 +1416,7 @@ An attack modifier rule (this is the ghoul has less chance to hit rule):
 		decrease the attack strength by 1.
 
 A damage modifier rule (this is the ghoul gives damage resistance rule):
-	if the global attacker is the player and current form is ghoul-form:
+	if the global defender is the player and current form is ghoul-form:
 		say " - 1 (you are a ghoul)[run paragraph on]";
 		decrease the attack damage by 1.
 
