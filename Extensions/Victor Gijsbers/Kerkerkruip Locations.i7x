@@ -1323,6 +1323,7 @@ The map-label of Tungausy Sweat Lodge is Figure of map_label_Sweat_lodge.
 Chapter - Columnated Ruins
 
 The columnated ruins is a room. "This must have been a temple once, but all that is left is a forest of pillars, mostly broken and shattered. Even gods may be forgotten."
+Understand "columns" as the columnated ruins when the location is not columnated ruins.
 
 Columnated Ruins is connectable.
 Columnated Ruins is not connection-inviting.
