@@ -5039,6 +5039,59 @@ Report the mummified priest waiting when the mummified priest is insane:
 
 
 
+Chapter - Zombie toad
+
+The zombie toad is an undead undead-faction monster. 
+
+The description of the zombie toad is "This toad wasn't pretty when it was alive, and undeath hasn't improved its looks. Raising toads is a favourite pastime of very young necromancers once they've progressed beyond the stage of insects. Fortunately, a zombie toad isn't a real menace to anyone who is not a zombie fly."
+
+The zombie toad is emotionless.
+
+The level of zombie toad is 0.
+The ID of the zombie toad is 32.
+The zombie toad is tiny.
+
+The health of zombie toad is 3.
+The melee of zombie toad is -2.
+The defence of zombie toad is 7.
+
+The body score of zombie toad is 3.
+The mind score of zombie toad is 3.
+The spirit score of zombie toad is 3. 
+
+When play begins:
+	let X be a random natural weapon part of the zombie toad;
+	now the printed name of X is "tongue";
+	now the damage die of X is 1.
+
+Section - Prose				
+
+Report an actor hitting the dead zombie toad:
+	say "[The actor] squash[es] the toad.";
+	rule succeeds.
+
+Report the zombie toad hitting a dead pc:
+	say "The toad's tongue touches your skin. You die, presumably from laughter.";
+	rule succeeds.
+
+Report the zombie toad attacking:
+	unless the actor is the noun:
+		say "The toad hops towards [the noun].";
+	otherwise:
+		say "The toad tries to catch itself with its tongue.";
+	rule succeeds.
+
+Report the zombie toad dodging:
+	say "Ponderously, the zombie toad hops aside.";
+	rule succeeds.
+
+Report the zombie toad parrying:
+	say "The toad uses its tongue to ward off the attack.";
+	rule succeeds.
+				
+Report the zombie toad waiting when the zombie toad is insane:
+	say "The toad tries to mate with your foot.";
+	rule succeeds.
 
 
 
