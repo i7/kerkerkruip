@@ -849,8 +849,13 @@ An AI action selection rule for an at-Act person (called P) (this is the robe of
 		choose row with an Option of the action of P attacking the chosen target in the Table of AI Action Options;
 		decrease the Action Weight entry by the concentration of the chosen target.
 
+Section - Gown of the red court (Nomos)
 
+The gown of the red court is a shirt. The gown of the red court is cloth. The description of the gown of the red court is "Citizens of Montenoir who have been accused of a capital offence are always judged by a special court comprised of their female relatives. Foreigners often scoff at this system, assuming that nobody is ever convicted. They do not understand that the love of law is greater than the love of family, and that the sight of one's own mother or wife in the blood red judge's gown will make even the most hardened criminals tremble. [italic type](Wearing the gown gives you one level of dreadful presence.)[roman type]".
 
+A dread rule (this is the gown of the read court dread rule):
+	if test subject wears gown of the red court:
+		increase dread dummy by 1.
 
 
 Chapter - Cloaks
@@ -3091,7 +3096,7 @@ The weapon attack bonus of Malleus Maleficarum is 1.
 The damage die of Malleus Maleficarum is 5.
 The weapon damage bonus of Malleus Maleficarum is 3.
 
-The special weapon info of the Malleus Maleficarum is "; stuns opponents; does not benefit from tension[run paragraph on]".
+The special weapon info of the Malleus Maleficarum is "; stuns opponents; does not benefit from tension; grants one level of dreadful presence[run paragraph on]".
 
 Malleus-tension-dummy is a number that varies.
 
@@ -3104,7 +3109,10 @@ First aftereffects rule (this is the Malleus reset tension rule):
 	if global attacker weapon is Malleus Maleficarum:
 		now tension is malleus-tension-dummy.
 	
-
+A dread rule (this is the malleus dread rule):
+	if test subject carries Malleus Maleficarum and Malleus Maleficarum is readied:
+		increase dread dummy by 1.
+		
 
 Chapter - Other weapons
 

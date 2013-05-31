@@ -336,8 +336,9 @@ Section - Favour rules
 
 Favour rule for Nomos (this is the Nomos favour 1 rule):
 	if divine favour is 1:
-		say "Nomos grants you protection from the next successful attack against you!";
-		increase hit protection of player by 1.
+		say "Nomos grants you protection from the next successful attack against you, and also gifts you a gown of the red court.";
+		increase hit protection of player by 1;
+		move gown of the red court to the player.
 
 Favour rule for Nomos (this is the Nomos favour 3 rule):
 	if divine favour is 3:
@@ -364,6 +365,12 @@ A physical damage reduction rule (this is the worshipping Nomos damage reduction
 			increase pdr by 1;
 		if divine favour is greater than 8:
 			increase pdr by 2.
+
+
+
+Section - Gown of the Red Court
+
+[See Kerkerkruip Items]
 
 Section - Inquisitor's hood
 
@@ -486,14 +493,14 @@ Section - Favour rules
 
 Favour rule for Sul (this is the Sul favour 1 rule):
 	if divine favour is 1:
-		say "Sul grants you knowledge of deathly magic, so that you will not inadvertently use it; she gives you immunity to angelic radiance; and she now protects you from curses.";
+		say "Sul grants you knowledge of deathly magic, so that you will not inadvertently use it; she gives you immunity to angelic radiance; and she protects you from curses.";
 		identify a random scroll of death;
 		identify a random scroll of ghoulification;
 		identify a random scroll of summoning.
 
 Favour rule for Sul (this is the Sul favour 3 rule):
 	if divine favour is 3:
-		say "Sul grants you angelic radiance, and makes you an undead slayer!";
+		say "Sul grants you a level of angelic radiance, and makes you an undead slayer!";
 		increase radiation of player by 1.
 
 Favour rule for Sul (this is the Sul favour 6 rule):
@@ -502,7 +509,7 @@ Favour rule for Sul (this is the Sul favour 6 rule):
 		if item is a natural weapon:
 			say "Sul makes you a demon slayer; she also attempts to bless your weapon, but you aren't wielding any.";
 		otherwise if item is incorruptible:
-			say "Sul makes you a demon slayer; she also attempts to bless [the item], but it unfortunately resists the attempt.";
+			say "Sul makes you a demon slayer; she also attempts to bless [the item], but unfortunately it resists the attempt.";
 		otherwise:
 			say "Sul makes you a demon slayer, and blesses [the item], making it more accurate, more deadly, and imbuing it with the purifying power of fire.";
 			increase damage die of item by 1;
@@ -511,7 +518,7 @@ Favour rule for Sul (this is the Sul favour 6 rule):
 
 Favour rule for Sul (this is the Sul favour 9 rule):
 	if divine favour is 9:
-		say "Sul cures you of any addictions you might have, and grants you a more powerful angelic radiance.";
+		say "Sul cures you of any addictions you might have, and grants you two more levels of angelic radiance.";
 		increase radiation of player by 2;
 		now ment timer is 0;
 		now OD timer is 0;
