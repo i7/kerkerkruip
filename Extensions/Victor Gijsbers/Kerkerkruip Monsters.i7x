@@ -4863,7 +4863,7 @@ The abyss of the soul is flyer.
 The abyss of the soul strength is a number that varies. The abyss of the soul strength is 2.
 
 
-Section - Mummified priest images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+Section - Abyss of the soul images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
 The avatar of abyss of the soul is Figure of map_monster_abyss_of_the_soul.
 The legend-label of abyss of the soul is Figure of map_legend_abyss_of_the_soul.
