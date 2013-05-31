@@ -79,7 +79,10 @@ Check sacrificing (this is the cannot sacrifice to a new god rule):
 Check sacrificing (this is the cannot sacrifice when no power is granted rule):
 	if no power is granted:
 		take no time;
-		say "You do not have any powers to sacrifice!" instead.
+		say "You do not have any powers to sacrifice!" instead;
+	otherwise if no sacrificable power is granted:
+		take no time;
+		say "None of your powers can be sacrificed!" instead.
 
 Sacrifice-powers is a number that varies.
 Sacrifice-lijst is a list of texts that varies.
@@ -87,12 +90,12 @@ Sacrifice-lijst-2 is a list of powers that varies.
 
 Carry out sacrificing:
 	take no time;
-	now sacrifice-powers is the number of granted powers;
+	now sacrifice-powers is the number of granted sacrificable powers;
 	now sacrifice-lijst is {};
 	now sacrifice-lijst-2 is {};
 	now current question is "Which power do you want to sacrifice? (Please enter a number.)";
 	repeat with stuff running through powers:
-		if stuff is granted:
+		if stuff is granted and stuff is sacrificable:
 			add stuff to sacrifice-lijst-2;
 			add power-name of stuff to sacrifice-lijst;
 	add "do not sacrifice a power" to sacrifice-lijst;

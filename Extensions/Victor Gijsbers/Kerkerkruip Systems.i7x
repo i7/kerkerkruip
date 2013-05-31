@@ -482,6 +482,7 @@ A power has a number called the power level. The power level of a power is usual
 A power has some text called the command text. The command text of a power is usually "".
 A power has a text called the description.
 A power has a text called the power-name.
+A power can be sacrificable. A power is usually sacrificable.
 
 Granting relates one monster to one power. The verb to grant (he grants, they grant, he granted, it is granted, he is granting) implies the granting relation.
 

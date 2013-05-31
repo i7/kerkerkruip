@@ -1112,6 +1112,7 @@ The command text of power of the wisps is "torment[if torment-cooldown is not 0]
 
 The description of power of the wisps is "Type: active ability.[paragraph break]Command: torment.[paragraph break]Effect: A wave of torment will pass through the room, breaking everyone's concentration. (A person has a 2% chance of resisting this effect per point of mind.) This ability has a cooldown of 12 - spirit/3 turns."
 The power-name of power of the wisps is "power of the wisps".
+The power of the wisps is not sacrificable.
 
 Wisp-strength is a number that varies. Wisp-strength is 0.
 
