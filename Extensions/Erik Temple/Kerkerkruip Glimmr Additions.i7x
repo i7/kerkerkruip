@@ -438,6 +438,7 @@ Figure of map_monster_rotting_corpse is the file "map_monster_rotting_corpse.png
 Figure of map_monster_aswang is the file "map_monster_aswang.png".
 Figure of map_monster_mummified_priest is the file "map_monster_mummified_priest.png".
 Figure of map_monster_abyss_of_the_soul is the file "map_monster_abyss_of_the_soul.png".
+Figure of map_monster_zombie_toad is the file "map_monster_zombie_toad.png".
 Figure of map_monster_demonic_assassin is the file "map_monster_demonic_assassin.png".
 Figure of map_monster_smoke_demon is the file "map_monster_smoke_demon.png".
 Figure of map_monster_imp is the file "map_monster_imp.png".
@@ -470,6 +471,7 @@ Figure of map_legend_rotting_corpse is the file "map_legend_rotting_corpse.png".
 Figure of map_legend_aswang is the file "map_legend_aswang.png".
 Figure of map_legend_mummified_priest is the file "map_legend_mummified_priest.png".
 Figure of map_legend_abyss_of_the_soul is the file "map_legend_abyss_of_the_soul.png".
+Figure of map_legend_zombie_toad is the file "map_legend_zombie_toad.png".
 Figure of map_legend_demonic_assassin is the file "map_legend_demonic_assassin.png".
 Figure of map_legend_smoke_demon is the file "map_legend_smoke_demon.png".
 Figure of map_legend_imp is the file "map_legend_imp.png".
@@ -1904,3 +1906,49 @@ Summary of menu graphic elements and their z-ordering:
 
 	##Fader
 	9,999 (default)
+
+
+List of enemies' map avatars:
+
+##Ensouled Rogues
+Miranda (level 1)	m
+Swarm of Daggers (level 1)	†
+Ravenous Armadillo (level 1)	a
+Wisps of Pain (level 1)	⁂
+Blood Ape (level 1)	A
+Chain Golem (level 2)	g
+Reaper (level 2)	R
+Jumping Bomb (level 2)	j
+Hound (level 2)	h
+Demon of Rage (level 2)	d
+Mindslug (level 3)	S
+Minotaur (level 3)	t
+Giant Tentacle (level 3)	L
+Bodmall (level 4)	B
+Healer of Aite (level 4)	H
+Tormentor of Aite (level 4)	T
+Defender of Aite (level 4)	D
+Overmind (level 4)	O
+Malygris (level 5)	M
+
+##Humans
+Fafhrd (no level)	f
+Mouser (no level)	r
+
+##Cosmic Horrors
+Nameless Horror	N
+
+##Undead
+Rotting Corpse (undead)	c
+Aswang (undead)	a
+Mummified Priest (undead)	p
+Abyss of the Soul (undead)	Y
+Zombie Toad	o
+
+##Hellspawn
+Demonic Assassin (no level)	A
+Smoke Demon (no level)	K
+Imp (no level)	i
+Demonic Mistress (no level)	S
+
+

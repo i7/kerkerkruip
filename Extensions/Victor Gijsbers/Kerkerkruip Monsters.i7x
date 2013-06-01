@@ -5064,6 +5064,13 @@ When play begins:
 	now the printed name of X is "tongue";
 	now the damage die of X is 1.
 
+
+Section - Zombie Toad images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of zombie toad is Figure of map_monster_zombie_toad.
+The legend-label of zombie toad is Figure of map_legend_zombie_toad.
+
+
 Section - Prose				
 
 Report an actor hitting the dead zombie toad:
