@@ -518,7 +518,7 @@ An attack modifier rule (this is the undead better in temple of Chton rule):
 
 Section - Temple of Chton label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
-The map-label of Temple of Chton is Figure of map_label_Isatzo. [TODO!]
+The map-label of Temple of Chton is Figure of map_label_Chton.
 
 
 

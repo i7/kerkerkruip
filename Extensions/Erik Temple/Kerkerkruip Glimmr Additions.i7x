@@ -386,7 +386,7 @@ Figure of map_label_Bridge is the file "map_label_Bridge.png".
 Figure of map_label_Nomos is the file "map_label_Nomos.png".
 Figure of map_label_Aite is the file "map_label_Aite.png".
 Figure of map_label_Sul is the file "map_label_Sul.png".
-Figure of map_label_Isatzo is the file "map_label_Isatzo.png".
+Figure of map_label_Chton is the file "map_label_Chton.png".
 Figure of map_label_Crypt is the file "map_label_Crypt.png".
 Figure of map_label_Workshop is the file "map_label_Workshop.png".
 Figure of map_label_Discontinuum is the file "map_label_Discontinuum.png".
