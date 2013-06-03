@@ -471,9 +471,7 @@ To decide which number is Nomos piety:
 			decide on 4;
 		if divine favour > 5:
 			decide on 3;
-		if divine favour > 2:
-			decide on 2;
-		decide on 1;
+		decide on 2;
 	decide on 0.
 
 
