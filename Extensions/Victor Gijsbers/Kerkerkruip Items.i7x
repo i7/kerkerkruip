@@ -799,6 +799,17 @@ A spirit bonus rule (this is the spirit bonus of the monk's robe rule):
 		increase faculty bonus score by 1.
 
 
+Section - Mendele's robe (major)
+
+Mendele's robe is a major shirt. Mendele's robe is proper-named and cloth.
+
+The description of Mendele's robe is "The mad monk Mendele gained notoriety for his fanatical belief in the malleability of the human body. This cloak is one of his most insane creations: whenever the wearer absorbs a soul, his or her body will mutate in unpredictable ways.".
+
+Last absorbing a power (called the granted power):
+	if the player wears Mendele's robe:
+		say "The robe of the mad monk lights up in a flash of mutagenic glow.[paragraph break]";
+		consider the mutating rules.
+
 
 Section - Robe of the Dead Mage (epic)
 
