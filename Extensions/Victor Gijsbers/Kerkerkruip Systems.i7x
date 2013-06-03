@@ -1736,12 +1736,15 @@ Mutations can be adapted. Mutations are usually not adapted.
 
 Table of Player Mutations
 mutation	mutate-text	unmutate-text
-wings	"You grow wings and gain the power of flight!"	"You lose your wings!"
-darkvision	"You gain the ability to see in total darkness!"	"You lose your darkvision!"
-pseudopods	"Hundreds of apparently useless pseudopods grow from your skin."	"The pseudopods that covered you disappear."
-disintegrating flesh	"Your flesh loses much of its consistency!"	"Your flesh returns to its normal solidity."
-metallic scales	"Your body is covered in metallic scales!"	"The metallic scales disappear from your body."
-tunneling claws	"Your hands turn into tunneling claws!"	"Your tunneling claws disappear."
+wings	"You grow [bold type]wings[roman type] and gain the power of flight!"	"You lose your wings."
+darkvision	"You gain the ability to [bold type]see in total darkness[roman type]!"	"You lose your darkvision."
+pseudopods	"Hundreds of apparently useless [bold type]pseudopods[roman type] grow from your skin."	"The pseudopods that covered you disappear."
+disintegrating flesh	"Your [bold type]flesh[roman type] loses much of its consistency!"	"Your flesh returns to its normal solidity."
+metallic scales	"Your body is covered in [bold type]metallic scales[roman type]!"	"The metallic scales disappear from your body."
+tunneling claws	"Your hands turn into [bold type]tunneling claws[roman type]!"	"Your tunneling claws disappear."
+flexible muscles	"Your muscles become [bold type]flexible[roman type]!"		"Your muscles regain their normal flexibility."
+an iron will		"A change in your brain increases you [bold type]willpower[roman type]!"	"Your willpower returns to its normal strength."
+astral sensitivity	"A physiological change makes you [bold type]astrally sensitive[roman type], increasing your spirit score."	"You lose your astral sensitivity."
 
 
 Status attribute rule (this is the mutations status rule):
@@ -1754,7 +1757,7 @@ Section - Mutating mutations
 Mutations can be just-mutated. Mutations are usually not just-mutated.
 
 A mutating rule (this is the consider mutations rule):
-	let n be 3;
+	let n be 2;
 	while a random chance of 1 in n succeeds:
 		if at least one mutation is not just-mutated:
 			let perk be a random not just-mutated mutation;
@@ -1819,6 +1822,20 @@ A damage modifier rule (this is the metallic scales damage modifier rule):
 Section - Tunneling claws
 
 [Tunneling claws coded into the digging rules.]
+
+Section - Flexible muscles, iron will, astrally sensitive
+
+A body bonus rule (this is the flexible muscles rule):
+	if the test subject is the player and flexible muscles is adapted:
+		increase faculty bonus score by 2.
+
+A mind bonus rule (this is the iron will rule):
+	if the test subject is the player and an iron will is adapted:
+		increase faculty bonus score by 2.		
+
+A spirit bonus rule (this is the astrally sensitive rule):
+	if the test subject is the player and astral sensitivity is adapted:
+		increase faculty bonus score by 2.
 
 
 Chapter - Blood Magic
