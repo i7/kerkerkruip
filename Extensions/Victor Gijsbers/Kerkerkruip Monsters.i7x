@@ -2917,7 +2917,7 @@ Chapter - Level 3 - Minotaur
 
 The minotaur is a male monster. "A ferocious minotaur[if the minotaur carries the minotaur's axe] wielding a big axe[end if] stands ready for combat."
 
-The description of the minotaur is "Half man, half bull, this fearsome creature is associated by legends with two things: axes and mazes.".
+The description of the minotaur is "Fruit of the mad monk Mendele's vile experiments, he wields an axe rumoured to possess mystical powers.".
 
 The level of the minotaur is 3.
 The ID of the minotaur is 14.
