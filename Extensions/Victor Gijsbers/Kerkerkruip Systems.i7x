@@ -1745,6 +1745,7 @@ tunneling claws	"Your hands turn into [bold type]tunneling claws[roman type]!"	"
 flexible muscles	"Your muscles become [bold type]flexible[roman type]!"		"Your muscles regain their normal flexibility."
 an iron will		"A change in your brain increases you [bold type]willpower[roman type]!"	"Your willpower returns to its normal strength."
 astral sensitivity	"A physiological change makes you [bold type]astrally sensitive[roman type], increasing your spirit score."	"You lose your astral sensitivity."
+psychic powers	"You gain [bold type]psychic powers[roman type]!"		"You lose your psychic powers."
 
 
 Status attribute rule (this is the mutations status rule):
@@ -1836,6 +1837,12 @@ A mind bonus rule (this is the iron will rule):
 A spirit bonus rule (this is the astrally sensitive rule):
 	if the test subject is the player and astral sensitivity is adapted:
 		increase faculty bonus score by 2.
+
+Section - Psychich powers
+
+A psycholocation rule (this is the psychic powers rule):
+	if psychic powers is adapted:
+		rule succeeds.
 
 
 Chapter - Blood Magic

@@ -2061,7 +2061,7 @@ Carry out reading a scroll of psycholocation (this is the reveal enemies rule):
 				now place is enemy-revealed;
 				increment adversary-count;
 	if the adversary-count is greater than 0:
-		say "You enter a weird clairvoyant state: The psyche[if adversary-count is greater than 1]s[end if] of your enemies call[if adversary-count is less than 2]s[end if] out to you. For a short time, you will be able to sense the presence and location of creatures whose souls you can absorb. If there are other creatures in the same space, you will see them via soul-reflection. Type [if the map can be shown]MAP or[otherwise]SENSE[end if] to psycholocate.";
+		say "You enter a weird clairvoyant state: The psyche[if adversary-count is greater than 1]s[end if] of your enemies call[if adversary-count is less than 2]s[end if] out to you. For a short time, you will be able to sense the presence and location of creatures whose souls you can absorb. If there are other creatures in the same space, you will see them via soul-reflection. Type [if the map can be shown]MAP[otherwise]SENSE[end if] to psycholocate.";
 		now the psycholocation boolean is true;
 		psycholocator peters out in 10 turns from now;
 	otherwise:
@@ -2070,7 +2070,21 @@ Carry out reading a scroll of psycholocation (this is the reveal enemies rule):
 At the time when the psycholocator peters out:
 	now all enemy-revealed rooms are not enemy-revealed;
 	now the psycholocation boolean is false;
-	say "Your clairvoyant sensation fades; you can no longer sense the psyches of your enemies."
+	unless psycholocation is active:
+		say "Your clairvoyant sensation fades; you can no longer sense the psyches of your enemies."
+
+The psycholocation rules are a rulebook.
+
+To decide whether psycholocation is active:
+	consider the psycholocation rules;
+	if rule succeeded:
+		decide yes;
+	otherwise:
+		decide no.	
+
+A psycholocation rule (this is the psycholocation boolean rule):
+	if psycholocation boolean is true:
+		rule succeeds.
 
 
 Chapter - Scroll packs
