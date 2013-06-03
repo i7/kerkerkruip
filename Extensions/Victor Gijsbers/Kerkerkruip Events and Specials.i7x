@@ -18,8 +18,8 @@ Elemental Plane of Smoke is elemental.
 
 Smoke rule (this is the smoke on the Elemental Plane of Smoke rule):
 	if test room is Elemental Plane of Smoke:
-		if temporary smoke timer is less than 25:
-			now temporary smoke timer is 25.
+		if temporary smoke timer is less than 15:
+			now temporary smoke timer is 15.
 
 Instead of digging in Elemental Plane of Smoke:
 	take no time;
