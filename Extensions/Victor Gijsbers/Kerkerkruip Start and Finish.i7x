@@ -376,17 +376,8 @@ To say the hand written list of extensions:
 	[line break]Dynamic Objects by Jesse McGrew
 	[line break]Dynamic Tables by Jesse McGrew
 	[line break]Flexible Windows by Jon Ingold
-	[line break]Fixed Point Maths by Michael Callaghan";
-
-
-[To say original credits text:
-	say "[italic type]These are the credits of the original version of the game as released in the Interactive Fiction Competition 2011.[roman type][paragraph break]Most of all, I would like to thank my alpha- and beta-testers: Matt Weiner, Michael Fransioli, Erik Temple, Michiel Hermes, Lance Camelot, Wasse Asmlash, Vyacheslav Dobranov, Dannii Willis, Captain Mikee, and Bora Bosna. (If I have forgotten you, let me know!) Any piece of interactive fiction needs testers, but one as complicated as [italic type]Kerkerkruip[roman type] doubly so.[paragraph break]I would also like to thank the makers of Inform 7, everyone whose extensions I have used or misused, and everyone who has helped me on the forums and the newsgroups -- there are a lot of you, and you may know who you are. Andrew Plotkin has answered perhaps more of my technical questions than anyone else, so a special thanks to him.[paragraph break]Thanks also to Captain Orange for allowing me to use his photo for the cover image.[paragraph break]This game has been inspired by many works of interactive fiction, computer roleplaying games and roguelikes. I want to single out [italic type]Desktop Dungeons[roman type] for special mention, since it was that game that gave me the idea of making a 'coffee break' roguelike -- finally a project I could finish! Apart from the fact that a roguelike is never finished, of course.".
-
-To say current credits text:
-	say "[italic type]Current Kerkerkruip Team[roman type][paragraph break]Victor Gijsbers -- lead game design & general contributor[line break]Dannii Willis -- lead technical design & general contributor[line break]Erik Temple -- lead graphical and interface design[line break]Remko van der Pluijm -- general contributor[paragraph break]See the Contact section for more information on contributing to [italic type]Kerkerkruip[roman type]! We welcome submission of ideas and code."
-
-To say copyright text:
-	say "[italic type]Kerkerkruip[roman type] is copyright 2012 by Victor Gijsbers. It is released under the GPL version 3 or any later version. The extensions used are copyright by their respective authors; some of them were released under the Creative Commons Attribution license. The cover image is a photo by Captain Orange, modified by Victor Gijsbers. It is used with permission for this game, but should not be used for other games. (Unless you get permission yourself.)".]
+	[line break]Fixed Point Maths by Michael Callaghan
+	[line break]Questions by Michael Callaghan";
 
 To say contact text:
 	say "This is where stuff is going on:[paragraph break]* Updates to the game are announced on the current website, which is also where you can find the latest version of the game: http://lilith.cc/~victor/?q=content/kerkerkruip[line break]* Updates are also announced on the IFDB, which is the ideal venue for reviewing interactive fiction: http://ifdb.tads.org[line break]* The source code and current design discussions can be found on github: https://github.com/i7/kerkerkruip[line break]* Design discussions, programming tutorials and help from other gamers are at the IF Forum: http://www.intfiction.org/forum/index.php[paragraph break]Github and the forum are the preferred places for interaction, but you can also contact Victor with comments, bug reports, and anything else at victor@lilith.cc."

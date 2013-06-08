@@ -803,6 +803,28 @@ Carry out asking for help:
 	report the main action again;
 
 
+
+Chapter - Credits menu
+
+Understand "credit" or "credits" or "copyright" or "copyrights" or "licence" or "license" as requesting the story file version.
+
+Requesting the story file version is in-game menu-checking.
+
+The announce the story file version rule is not listed in any rulebook.
+
+Carry out requesting the story file version:
+	begin the displaying activity;
+	now the current menu title is "Credits, Copyright & Afterword";
+	now the endnode flag is 1;
+	redraw status line;
+	now the endnode flag is 0;
+	clear only the main screen;
+	say "[variable letter spacing][total credits][paragraph break]";
+	pause the game;
+	end the displaying activity;
+
+
+
 Chapter - Replacing "You can see" is not a joke
 
 [All this just because the player can be blind... and it probably stops working in the next release of Inform.]
