@@ -8,7 +8,12 @@ fi
 
 if [ ! -d "$HOME/.kerkerkruip" ]; then
 	mkdir $HOME/.kerkerkruip
+fi
+if [ ! -f "$HOME/.kerkerkruip/Kerkerkruip.gblorb" ]; then
 	ln -s /usr/share/kerkerkruip/Kerkerkruip.gblorb $HOME/.kerkerkruip/Kerkerkruip.gblorb
+fi
+if [ ! -f "$HOME/.kerkerkruip/Kerkerkruip.ini" ]; then
+	ln -s /usr/share/kerkerkruip/Kerkerkruip.ini $HOME/.kerkerkruip/Kerkerkruip.ini
 fi
 
 $GAR $HOME/.kerkerkruip/Kerkerkruip.gblorb
