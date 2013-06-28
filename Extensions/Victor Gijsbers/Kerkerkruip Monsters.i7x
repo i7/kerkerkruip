@@ -776,7 +776,9 @@ The legend-label of Miranda is Figure of map_legend_Miranda.
 Section - Setting up Miranda's power and equipment
 
 A dungeon interest rule (this is the setting up Miranda rule):
-	now stun probability of Miranda is 100.
+	now stun probability of Miranda is 100;
+	if a random chance of 1 in 2 succeeds:
+		now Miranda is disarmer.
 
 [Wears monk's robe: see Kerkerkruip Items]
 Miranda wears monk's robe.
