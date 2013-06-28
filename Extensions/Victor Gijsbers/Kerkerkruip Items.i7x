@@ -801,7 +801,7 @@ A spirit bonus rule (this is the spirit bonus of the monk's robe rule):
 
 Section - Mendele's robe (major)
 
-Mendele's robe is a major shirt. Mendele's robe is proper-named and cloth.
+Mendele's robe is a major shirt. Mendele's robe is proper-named, alchemical and cloth.
 
 The description of Mendele's robe is "The mad monk Mendele gained notoriety for his fanatical belief in the malleability of the human body. This cloak is one of his most insane creations: whenever the wearer absorbs a soul, his or her body will mutate in unpredictable ways.".
 
