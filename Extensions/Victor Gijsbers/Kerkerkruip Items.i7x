@@ -79,6 +79,7 @@ The non-thing is a thing. [This is a dummy object.]
 The non-thing is incorruptible.
 
 A thing has a thing called the hidden identity. The hidden identity of a thing is usually the non-thing.
+Definition: a thing (called item) is hidden-identifiable if hidden identity of item is not the non-thing.
 
 Report wearing:
 	unless the hidden identity of the noun is the non-thing:
@@ -97,6 +98,20 @@ Report readying:
 		set pronouns from the hidden identity of the noun;
 		say "As soon as you ready [the noun], a chilling feeling goes through your arms. [The noun] [is-are] actually the [bold type][hidden identity of the noun][roman type]!" instead.
 
+Last dungeon interest rule (this is the hidden identities also revealed by enemies rule):
+	repeat with item running through wearable hidden-identifiable things:
+		if a person wears item:
+			let guy be a random person wearing item;
+			now guy is wearing hidden identity of item;
+			remove item from play;
+	repeat with item running through hidden-identifiable weapons:
+		if item is readied:
+			let guy be a random person enclosing item;
+			now guy carries hidden identity of item;
+			now hidden identity of item is readied;
+			now item is not readied;
+			remove item from play.
+	
 
 Section - Cursed
 
@@ -538,7 +553,23 @@ Every turn when at least one person is necklace-torment-affected:
 
 [Torment should be canceled outside combat.]
 
-Section - Periapt of prophecy
+Section - Miranda's amulet (monster)
+
+Miranda's amulet is a necklace. Miranda's amulet is proper-named.
+Miranda's amulet is magical.
+Miranda's amulet is silver.
+
+The description of Miranda's amulet is "This silver amulet, shaped like the sun and imbued with magic, was given to Miranda by her father when she set out on a live of adventure. It will reflect ranged attacks back to the attacker 10% of the time.".
+
+Check an actor hitting when the noun wears Miranda's amulet (this is the Miranda's amulet rule):
+	if the global attacker weapon is ranged:
+		unless the actor is the noun: [No infinite reflection cascade!]
+			if a random chance of 1 in 10 succeeds:
+				say "The magic of Miranda's amulet [bold type]reflects[roman type] the attack back to [the actor]!";
+				try the actor hitting the actor instead.
+
+
+Section - Periapt of prophecy (epic)
 
 The periapt of prophecy is an epic necklace.
 The periapt of prophecy is magical.
@@ -784,7 +815,7 @@ Section - Monk's robe (monster)
 
 The monk's robe is a shirt. The monk's robe is cloth.
 
-The description of monk's robe is "A plain and simple brown robe. Years of being worn by deniers of the flesh has instilled ascetic virtues in the fabric. [italic type](-2 body, +1 mind, +1 spirit)[roman type]".
+The description of monk's robe is "A plain and simple brown robe. Years of being worn by deniers of the flesh has instilled ascetic virtues in the fabric. [italic type](-2 body, +2 mind, +2 spirit)[roman type]".
 
 A body bonus rule (this is the body penalty of the monk's robe rule):
 	if the test subject wears the monk's robe:
@@ -792,11 +823,12 @@ A body bonus rule (this is the body penalty of the monk's robe rule):
 
 A mind bonus rule (this is the mind bonus of the monk's robe rule):
 	if the test subject wears the monk's robe:
-		increase faculty bonus score by 1.		
+		increase faculty bonus score by 2.		
 
 A spirit bonus rule (this is the spirit bonus of the monk's robe rule):
 	if the test subject wears the monk's robe:
-		increase faculty bonus score by 1.
+		increase faculty bonus score by 2.
+
 
 
 Section - Mendele's robe (major)
@@ -910,10 +942,11 @@ The description of the cloak of reflection is "A piece of silk with thousands of
 
 Check an actor hitting when the noun wears the cloak of reflection (this is the cloak of reflection rule):
 	if the global attacker weapon is ranged:
-		let n be 15 * (1 + blood magic level of cloak of reflection);
-		if a random chance of n in 100 succeeds:
-			say "[if the noun is the player]The[otherwise][Possessive of the noun][end if] cloak of reflection [bold type]reflects[roman type] the attack back to [the actor]!";
-			try the actor hitting the actor instead.
+		unless the actor is the noun: [No infinite reflections]
+			let n be 15 * (1 + blood magic level of cloak of reflection);
+			if a random chance of n in 100 succeeds:
+				say "[if the noun is the player]The[otherwise][Possessive of the noun][end if] cloak of reflection [bold type]reflects[roman type] the attack back to [the actor]!";
+				try the actor hitting the actor instead.
 
 A dungeon interest rule (this is the Malygris sometimes wears the cloak of reflection rule):
 	if a random chance of 1 in 10 succeeds:
@@ -2652,7 +2685,7 @@ Check an actor hitting when the global attacker weapon is the backstabber (this 
 		if a random chance of 1 in 2 succeeds:
 			let X be a random alive person in the location of the actor;
 			unless X is the noun:
-				say "The [bold type]backstabber[roman type] attacks [X] instead!";
+				say "The [bold type]backstabber[roman type] attacks [the X] instead!";
 				now making-backstab is true;
 				try the actor hitting X;
 				now making-backstab is false;

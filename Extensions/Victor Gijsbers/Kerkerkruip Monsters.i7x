@@ -783,13 +783,23 @@ A dungeon interest rule (this is the setting up Miranda rule):
 	otherwise:
 		now Miranda is concentration-breaking reactor;
 		now cbr strength of Miranda is 9;
-	now Miranda is roll-user.
+	if a random chance of 1 in 2 succeeds:
+		now Miranda is roll-user;
+	if a random chance of 3 in 4 succeeds:
+		move pair of nunchucks to Miranda;
+		now pair of nunchucks is readied;
+		if a random chance of 1 in 20 succeeds:
+			now pair of nunchucks is adamant;
+	otherwise if a random chance of 1 in 2 succeeds:
+		move dagger of the double strike to Miranda;
+		now dagger of the double strike is readied;
+	now Miranda wears monk's robe;
+	if a random chance of 1 in 5 succeeds:
+		now Miranda wears Miranda's amulet.
 
-[Wears monk's robe: see Kerkerkruip Items]
-Miranda wears monk's robe.
 
-[Carries nunchucks: see Kerkerkruip Items]
-Miranda carries the pair of nunchucks. The pair of nunchucks is readied.
+
+
 
 Section - Miranda's shuriken attack
 
