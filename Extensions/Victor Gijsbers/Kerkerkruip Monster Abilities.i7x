@@ -868,12 +868,12 @@ Chapter - Disarming
 
 A person can be disarmer. A person is usually not disarmer.
 
-A person has some text called the first disarm text. The first disarm text of a person is usually "[disarm-1]".
+A person has a number called the disarm strength. The disarm strength of a person is usually 10.
 
+A person has some text called the first disarm text. The first disarm text of a person is usually "[disarm-1]".
 To say disarm-1: say "[The disarm-actor] suddenly attempts to disarm [the noun]. [italic type][run paragraph on]".
 
 A person has some text called the second disarm text. The second disarm text of a person is usually "[disarm-2]".
-
 To say disarm-2: say "[roman type] [The noun] realise[s] what is happening only when it is too late, and [bold type][the disarm-weapon] [is-are] sent flying[roman type] across the room."
 
 Section - Disarm power
@@ -896,7 +896,7 @@ Carry out a person disarming:
 	let X be a random readied weapon carried by the noun;
 	now disarm-weapon is X;
 	say first disarm text of the actor;
-	test the spirit of the noun against 10;
+	test the spirit of the noun against disarm strength of the actor;
 	if test result is true:
 		say "[roman type] [The noun] see[s] it coming in time, and manage[s] to keep the weapon out of [possessive of the actor] reach.";
 	otherwise:
@@ -904,6 +904,38 @@ Carry out a person disarming:
 		now X is not readied;
 		now a random natural weapon part of the noun is readied;
 		move X to the location.
+
+
+
+Chapter - Concentration-breaking reaction
+
+A person can be concentration-breaking reactor. A person is usually not concentration-breaking reactor.
+A person has some text called the first cbr text. A person has some text called the cbr fail text. A person has some text called the cbr success text. [These must be set by hand!]
+A person has a number called the cbr strength. The cbr strength of a person is usually 10.
+
+Section - Concentration-breaking reaction power
+
+Concentration-breaking is an action applying to one thing.
+
+An AI action selection rule for an at-React concentration-breaking reactor person (called P) (this is the cbr AI rule):	
+	choose a blank Row in the Table of AI Action Options;
+	now the Option entry is the action of P concentration-breaking the main actor;
+	now the Action Weight entry is 0;
+	if concentration of main actor is 0:
+		decrease Action Weight entry by 1000;
+	otherwise:
+		increase Action Weight entry by ((concentration of main actor) times (concentration of main actor));
+		increase Action Weight entry by cbr strength of P;
+		decrease Action Weight entry by final body of the main actor.
+
+Carry out a person concentration-breaking:
+	say first cbr text of the actor;
+	test the body of the noun against cbr strength of the actor;
+	if test result is false:
+		say cbr success text of the actor;
+		now concentration of the noun is 0;
+	otherwise:
+		say cbr fail text of the actor.	
 
 
 Kerkerkruip Monster Abilities ends here.

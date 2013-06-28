@@ -778,7 +778,11 @@ Section - Setting up Miranda's power and equipment
 A dungeon interest rule (this is the setting up Miranda rule):
 	now stun probability of Miranda is 100;
 	if a random chance of 1 in 2 succeeds:
-		now Miranda is disarmer.
+		now Miranda is disarmer;
+		now disarm strength of Miranda is 9;
+	otherwise:
+		now Miranda is concentration-breaking reactor;
+		now cbr strength of Miranda is 9.
 
 [Wears monk's robe: see Kerkerkruip Items]
 Miranda wears monk's robe.
@@ -786,6 +790,11 @@ Miranda wears monk's robe.
 [Carries nunchucks: see Kerkerkruip Items]
 Miranda carries the pair of nunchucks. The pair of nunchucks is readied.
 
+Section - Miranda's shuriken attack
+
+First cbr text of Miranda is "Miranda quickly throws a shuriken, attempting to break [possessive of the noun] concentration. [italic type][run paragraph on]".
+Cbr fail text of Miranda is "[roman type] The shuriken misses, and [possessive of the noun] attack continues unhampered.[paragraph break]".
+Cbr success text of Miranda is "[roman type] The shuriken hits, making [bold type][the noun] lose concentration[roman type]![paragraph break]".
 
 Section - Miranda's Prose
 
@@ -1178,6 +1187,7 @@ The legend-label of chain golem is Figure of map_legend_chain_golem.
 Section - Disarming
 
 The chain golem is disarmer.
+Disarm strength of chain golem is 13.
 
 First disarm text of the chain golem is "[chain-disarm-1]".
 To say chain-disarm-1: say "[The chain golem] suddenly launches several of its chains in an attempt to grab [possessive of the noun] weapon. [italic type][run paragraph on]".
