@@ -759,11 +759,13 @@ The spirit score of Miranda is 5.
 
 Miranda is weapon user.
 
-[Wears monk's robe: see Kerkerkruip Items]
-Miranda wears monk's robe.
-
-[Carries nunchucks: see Kerkerkruip Items]
-Miranda carries the pair of nunchucks. The pair of nunchucks is readied.
+When play begins:
+	let X be a random natural weapon part of Miranda;
+	now damage die of X is 5;
+	now dodgability of X is 2;
+	now passive parry max of X is 2;
+	now active parry max of X is 0;
+	now the printed name of X is "fists".	
 
 
 Section - Miranda images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)	
@@ -775,6 +777,12 @@ Section - Setting up Miranda's power and equipment
 
 A dungeon interest rule (this is the setting up Miranda rule):
 	now stun probability of Miranda is 100.
+
+[Wears monk's robe: see Kerkerkruip Items]
+Miranda wears monk's robe.
+
+[Carries nunchucks: see Kerkerkruip Items]
+Miranda carries the pair of nunchucks. The pair of nunchucks is readied.
 
 
 Section - Miranda's Prose
@@ -1165,34 +1173,15 @@ Section - Chain Golem images for the map (for use with Kerkerkruip Glimmr Additi
 The avatar of chain golem is Figure of map_monster_chain_golem.
 The legend-label of chain golem is Figure of map_legend_chain_golem.
 
+Section - Disarming
 
-Section - Disarm power
+The chain golem is disarmer.
 
-Golem-disarming is an action applying to one thing.
+First disarm text of the chain golem is "[chain-disarm-1]".
+To say chain-disarm-1: say "[The chain golem] suddenly launches several of its chains in an attempt to grab [possessive of the noun] weapon. [italic type][run paragraph on]".
 
-[TODO: any reason why this shouldn't work for any target?]
-An AI action selection rule for the at-Act chain golem (this is the chain golem considers disarming rule):	
-	if chosen target is the player:
-		if the player carries at least one readied artificial weapon:
-			let X be a random readied artificial carried by the player;
-			choose a blank Row in the Table of AI Action Options;
-			now the Option entry is the action of the chain golem golem-disarming the chosen target;
-			now the Action Weight entry is 0;
-			if a random chance of 1 in 10 succeeds:
-				increase the Action Weight entry by 20.
-
-Carry out a person golem-disarming:
-	say "[The chain golem] suddenly launches several of its chains in an attempt to grab [possessive of the noun] weapon. [italic type][run paragraph on]";
-	test the spirit of the noun against 10;
-	if test result is true:
-		say "[roman type] [The noun] see[s] it coming in time, and manage[s] to keep the weapon out of the golem's reach.";
-	otherwise:
-		let X be a random readied weapon carried by the noun;
-		say "[roman type] [The noun] realise[s] what is happening only when it is too late, and a chain has already wrapped itself around [possessive of the noun] [X], pulls sharply, and [bold type]sends the weapon flying[roman type] across the room.";
-		now X is not readied;
-		now a random natural weapon part of the noun is readied;
-		move X to the location.
-
+Second disarm text of the chain golem is "[chain-disarm-2]".
+To say chain-disarm-2: say "[roman type] [The noun] realise[s] what is happening only when it is too late, and a chain has already wrapped itself around [possessive of the noun] [disarm-weapon], pulls sharply, and [bold type]sends the weapon flying[roman type] across the room.".
 
 Section - Prose
 

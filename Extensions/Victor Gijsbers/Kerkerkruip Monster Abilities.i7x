@@ -864,7 +864,46 @@ Every turn (this is the stun wears off rule):
 
 
 
+Chapter - Disarming
 
+A person can be disarmer. A person is usually not disarmer.
+
+A person has some text called the first disarm text. The first disarm text of a person is usually "[disarm-1]".
+
+To say disarm-1: say "[The disarm-actor] suddenly attempts to disarm [the noun]. [italic type][run paragraph on]".
+
+A person has some text called the second disarm text. The second disarm text of a person is usually "[disarm-2]".
+
+To say disarm-2: say "[roman type] [The noun] realise[s] what is happening only when it is too late, and [bold type][the disarm-weapon] [is-are] sent flying[roman type] across the room."
+
+Section - Disarm power
+
+Disarming is an action applying to one thing.
+Disarm-actor is a person that varies.
+Disarm-weapon is a person that varies.
+
+An AI action selection rule for an at-Act disarmer person (called P) (this is the disarmers considers disarming rule):	
+	if chosen target carries at least one readied artificial weapon:
+		let X be a random readied artificial carried by the chosen target;
+		choose a blank Row in the Table of AI Action Options;
+		now the Option entry is the action of P disarming the chosen target;
+		now the Action Weight entry is 0;
+		if a random chance of 1 in 10 succeeds:
+			increase the Action Weight entry by 20.
+
+Carry out a person disarming:
+	now disarm-actor is the actor;
+	let X be a random readied weapon carried by the noun;
+	now disarm-weapon is X;
+	say first disarm text of the actor;
+	test the spirit of the noun against 10;
+	if test result is true:
+		say "[roman type] [The noun] see[s] it coming in time, and manage[s] to keep the weapon out of [possessive of the actor] reach.";
+	otherwise:
+		say second disarm text of the actor;
+		now X is not readied;
+		now a random natural weapon part of the noun is readied;
+		move X to the location.
 
 
 Kerkerkruip Monster Abilities ends here.
