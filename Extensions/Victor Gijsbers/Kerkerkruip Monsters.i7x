@@ -782,7 +782,8 @@ A dungeon interest rule (this is the setting up Miranda rule):
 		now disarm strength of Miranda is 9;
 	otherwise:
 		now Miranda is concentration-breaking reactor;
-		now cbr strength of Miranda is 9.
+		now cbr strength of Miranda is 9;
+	now Miranda is roll-user.
 
 [Wears monk's robe: see Kerkerkruip Items]
 Miranda wears monk's robe.
@@ -818,7 +819,7 @@ Report Miranda parrying:
 	rule succeeds.
 
 Report Miranda dodging:
-	say "Miranda jumps aside.";
+	say "Miranda [if Miranda is not at-roll]jumps aside[otherwise] rolls towards [the main actor][end if].";
 	rule succeeds.
 
 Report Miranda concentrating:

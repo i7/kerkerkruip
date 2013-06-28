@@ -488,6 +488,15 @@ An attack modifier rule (this is the rolling bonus rule):
 		if the rolled-at-guy of the global attacker is the global defender:
 			say " + 1 (rolled to attack)[run paragraph on]";
 			increase the attack strength by 1.
+			
+Chance to win rule (this is the CTW roll bonus rule):
+	if running AI is just-rolled and chosen target is rolled-at-guy of running AI:
+		increase the chance-to-win by 1.		
+
+An AI action selection rule for an at-Act person (called P) (this is the rolling attack select rule):
+	choose row with an Option of the action of the main actor attacking the chosen target in the Table of AI Action Options;
+	if running AI is just-rolled and chosen target is rolled-at-guy of running AI:
+		increase the Action Weight entry by 1.
 
 A damage modifier rule (this is the rolling damage bonus rule):
 	if the global attacker is just-rolled:
@@ -504,6 +513,24 @@ Every turn when main actor is just-rolled:
 
 Every turn when main actor is at-roll:
 	now main actor is not at-roll.
+	
+Section - AI for rolling
+
+A person can be roll-user. A person is usually not roll-user.
+A person has a number called the saved-CTW.
+
+[You must supply at-roll prose yourself for NPCs that are roll-users!]
+
+An AI action selection rule for an at-React person (called P) (this is the save CTW rule):
+	if P is not the player and P is roll-user:
+		let n be (5 minus normalised chance-to-win);
+		now saved-CTW of P is n.
+
+First carry out an actor dodging (this is the some actors will roll instead rule):
+	if the actor is not the player and the actor is roll-user:
+		if a random chance of saved-CTW of actor in 5 succeeds:
+			now the actor is at-roll.
+
 
 Section - Blocking
 

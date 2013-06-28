@@ -871,7 +871,7 @@ A person can be disarmer. A person is usually not disarmer.
 A person has a number called the disarm strength. The disarm strength of a person is usually 10.
 
 A person has some text called the first disarm text. The first disarm text of a person is usually "[disarm-1]".
-To say disarm-1: say "[The disarm-actor] suddenly attempts to disarm [the noun]. [italic type][run paragraph on]".
+To say disarm-1: say "[The disarm-actor] tries to disarm [the noun]. [italic type][run paragraph on]".
 
 A person has some text called the second disarm text. The second disarm text of a person is usually "[disarm-2]".
 To say disarm-2: say "[roman type] [The noun] realise[s] what is happening only when it is too late, and [bold type][the disarm-weapon] [is-are] sent flying[roman type] across the room."
@@ -898,7 +898,7 @@ Carry out a person disarming:
 	say first disarm text of the actor;
 	test the spirit of the noun against disarm strength of the actor;
 	if test result is true:
-		say "[roman type] [The noun] see[s] it coming in time, and manage[s] to keep the weapon out of [possessive of the actor] reach.";
+		say "[roman type] [The noun] see[s] it coming in time, and manage[s] to keep [the X] out of [possessive of the actor] reach.";
 	otherwise:
 		say second disarm text of the actor;
 		now X is not readied;
