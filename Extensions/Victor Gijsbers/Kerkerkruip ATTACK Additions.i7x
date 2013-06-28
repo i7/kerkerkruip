@@ -8,6 +8,13 @@ Check concentrating (this is the do not concentrate outside of combat rule):
 	if combat status is peace:
 		say "You can only concentrate in a combat situation." instead.
 
+Section - No readying what you don't have
+
+First check readying (this is the do not ready weapons on the ground rule):
+	unless the player encloses the noun:
+		take no time;
+		say "You will have to get [the noun] first." instead.
+
 Section - Attacking when the combat status is peace (Nomos, slaves)
 
 [Nomos. Attack slaves.]
