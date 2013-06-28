@@ -750,6 +750,118 @@ Every turn (this is the reduce disintegrate cooldown of the main actor rule):
 		
 
 
+Chapter - Stunning
+
+[To make a rogue a stunner, just set its stun probability > 0; at n, the rogue will attempt to stun n% of the time when attacking a not-stunned enemy.]
+
+[Stun-related prose in the attacking rule must be supplied by hand. If this is not done, the player cannot see whether an enemy attempts to stun or not.]
+
+A person has a number called the stun probability. The stun probability of a person is usually 0.
+
+
+Section - Stunning blow
+
+Stunning is an action applying to one thing. Understand "stun [person]" as stunning.
+
+Stunning is attacklike behaviour.
+
+Does the player mean stunning an alive person: it is very likely.
+Does the player mean stunning the player: it is unlikely.
+
+A person can be at-stun. A person is usually not at-stun.
+
+First check stunning:
+	if Power of Miranda is not granted:
+		take no time;
+		say "You do not have that power." instead.
+
+Check stunning (this is the stun yourself rule):
+	if the noun is the player:
+		take no time;
+		say "You can't bring yourself to do it." instead.
+
+Check stunning:
+	let item be a random readied weapon had by the player;
+	if item is ranged:
+		take no time;
+		say "You cannot stun with ranged weapons." instead.
+
+Check stunning:
+	abide by the check attacking rules.
+
+Carry out an actor stunning:
+	now the actor is at-stun;
+	try the actor attacking the noun instead.
+
+A damage modifier rule (this is the less damage when stunning rule):
+	if the global attacker is at-stun and global attacker weapon is not ranged and global attacker weapon is not stunning-weapon and global attacker weapon is not a natural weapon:
+		if the numbers boolean is true, say " - 1 (stunning)[run paragraph on]";
+		decrease the attack damage by 1.
+
+Check an actor attacking:
+	if the noun is not stunned and the actor is not at-stun and the actor is not the player:
+		let n be stun probability of the actor;
+		if a random chance of n in 100 succeeds:
+			try the actor stunning the noun instead.
+
+Aftereffects rule (this is the stunning rule):
+	if (the global attacker is at-stun and the global defender is not dead) or global attacker weapon is stunning-weapon:
+		if the attack damage is greater than 0 and global attacker weapon is not ranged:
+			let m be 0;
+			if global attacker is at-stun:
+				increase m by final mind of the global attacker;
+			if global attacker weapon is stunning-weapon: 
+				increase m by 3;
+			if stun count of the global defender is less than m:
+				now the stun count of the global defender is m;
+			let n be 0;
+			if global attacker is at-stun:
+				increase n by final mind of the global attacker divided by 2;
+			if global attacker weapon is stunning-weapon: 
+				increase n by 3;
+			if stun strength of the global defender is less than n:
+				now stun strength of the global defender is n;
+			say "[if global defender is player]You are[otherwise][The global defender] is[end if] [bold type]stunned[roman type], receiving a -1 attack penalty and a -[stun strength of the global defender] penalty to all faculties for [stun count of the global defender] turns!";
+	now the global attacker is not at-stun.
+
+Status attribute rule (this is the stunned status rule):
+	if the player is stunned:
+		if long status is true:
+			say "You are [bold type]stunned[roman type]: -1 to attack, -[stun strength of the player] to body, mind and spirit.[line break][run paragraph on]";
+		otherwise:
+			say "[@ check initial position of attribute]stunned[run paragraph on]";
+
+
+Section - Stunned
+
+A person has a number called the stun count. The stun count of a person is usually 0.
+A person has a number called the stun strength.
+
+Definition: a person is stunned if his stun count is greater than 0.
+
+An attack modifier rule (this is the attack roll stunned bonus rule):
+	if the global attacker is stunned:
+		if the numbers boolean is true, say " - 1 (stunned)[run paragraph on]";
+		decrease the attack strength by 1.
+
+Chance to win rule (this is the CTW stun penalty rule):
+	if the main actor is stunned:
+		decrease the chance-to-win by 1.
+
+A faculty bonus rule (this is the stunning faculty penalty rule):
+	if test subject is stunned:
+		decrease faculty bonus score by stun strength of the test subject.
+
+Every turn (this is the stun wears off rule):
+	if the main actor is stunned:
+		decrease stun count of main actor by 1;
+		if stun count of main actor is 0:
+			now stun strength of main actor is 0;
+			if main actor is player:
+				say "You are [bold type]no longer stunned[roman type].";
+			otherwise if main actor is visible:
+				say "[The main actor] [if the main actor is plural-named]are[otherwise]is[end if] [bold type]no longer stunned[roman type].".
+
 
 
 
