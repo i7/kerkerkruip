@@ -2432,7 +2432,7 @@ Section - Sneaking sword (monster)
 
 [Mouser carries it]
 
-There is a sword called sneaking sword. The description of sneaking sword is "This sword is especially suitable for making sneaky attacks, dealing [blood magic level of sneaking sword] extra damage. This damage bonus will increase by 1 if the sword is fed."
+There is a sword called sneaking sword. The description of sneaking sword is "This sword is especially suitable for making sneaky attacks, dealing [blood magic level of sneaking sword] extra damage. This damage bonus will increase by 1 if the sword is fed." Sneaking sword is not proper-named.
 
 The special weapon info of the sneaking sword is "; +[blood magic level of sneaking sword] damage when hidden[run paragraph on]"
 
