@@ -2703,7 +2703,7 @@ The description of the vampiric dagger is "This sleek dagger will magically tran
 The special weapon info of the vampiric dagger is "; leeches some health (works much better for vampires)[run paragraph on]".
 
 The damage die of the vampiric dagger is 3.
-The weapon attack bonus of the vampiric dagger is 1.
+The weapon attack bonus of the vampiric dagger is 0.
 The dodgability of the vampiric dagger is 3.
 The passive parry max of the vampiric dagger is 1.
 The active parry max of the vampiric dagger is 1.
