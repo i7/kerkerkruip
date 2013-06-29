@@ -28,6 +28,7 @@ Section - Glimmr or Flexible Windows
 
 [Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. Be sure to comment in Flexible Windows + Fixed Points Maths instead!]
 [Include Kerkerkruip Glimmr Additions by Erik Temple.]
+
 Include Flexible Windows by Jon Ingold.
 
 
@@ -44,7 +45,7 @@ Use undo prevention.
 
 Section - Include ATTACK
 
-Include version 4/130420 of Inform ATTACK by Victor Gijsbers.
+Include version 4/130629 of Inform ATTACK by Victor Gijsbers.
 [You can get the latest ATTACK at https://github.com/i7/ATTACK ]
 
 Section - Include all the Kerkerkruip extensions
@@ -90,9 +91,9 @@ Generation info is a truth state that varies. Generation info is [true]false.
 Section - Testing - Not for release
 
 [Last when play begins:
-	move mummified priest to location of Malygris.
+	move mummified priest to location of Malygris.]
 	
-The player carries one scroll of psycholocation and one scroll of mapping.]
+[The player carries one scroll of psycholocation and one scroll of mapping.]
 
 [One scroll of the blade is in Entrance Hall.]
 [The Zen room is testobject.
