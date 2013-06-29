@@ -53,8 +53,8 @@ Every turn when the player is hidden (this is the possible detection rule):
 			now hiding roll is a roll of the dice;
 			say "[italic type]You roll a hiding check of [hiding roll] [run paragraph on]";
 			consider the detection rules;
-			say "= [hiding roll] against the target number of 2.[roman type] [run paragraph on]";
-			if hiding roll > 1:
+			say "= [hiding roll], which must be positive.[roman type] [run paragraph on]";
+			if hiding roll > 0:
 				say "You [bold type]remain hidden[roman type].";
 			otherwise:
 				say "You are [bold type]detected[roman type]!";
@@ -66,7 +66,7 @@ Every turn when the player is hidden (this is the possible detection rule):
 Section - Detection rules
 	
 A detection rule (this is the tension increases probability of detection rule):
-	let n be (tension / 2);
+	let n be ((tension + 1) / 2);
 	say " - ", n, " (tension)[run paragraph on]";
 	decrease hiding roll by n.
 
