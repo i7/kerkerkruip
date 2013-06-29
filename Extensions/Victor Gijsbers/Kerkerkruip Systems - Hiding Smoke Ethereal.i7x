@@ -44,109 +44,102 @@ First check an actor hitting (this is the stop hitting if the defender is hidden
 		stop the action.
 	
 
-[
-An aftereffects rule (this is the attacking breaks hidden rule):
-	if the global attacker is the player:
-		now the player is not hidden.]
-
-The detection probability is a number that varies. The detection probability is 0.
+Hiding roll is a number that varies.
 The detection rules are a rulebook.
 
-This is the possibly detected rule:   [TODO: turn into a starting the combat round rule?]
- [allies don't increase probability of detection]
-	consider the detection rules;
-	let n be a random number between 1 and 100;
-[	say "Roll: [n] against [detection probability]."; [TEST]]
-	if the detection probability is greater than n:
-		now the player is not hidden;
-		if the main actor is not the player:
-			say "[The main actor] [if main actor is plural-named]have[otherwise]has[end if] detected you!";
-		otherwise:
-			say "You have been revealed!";
-		repeat with guy running through visible persons:
-			if the faction of guy hates the faction of the player:
-				now guy is on-the-lookout;
-	now detection probability is 0.
-
-Starting the combat round rule:
-	if the player is hidden:
-		if the faction of the main actor hates the faction of the player:	
-			follow the possibly detected rule.
-	
-[Every turn when the player is hidden:
-	if the combat status is not peace and the player is the main actor:
-		consider the possibly detected rule;
-	now detection probability is 0.]
-
-[
-
-A starting the combat round rule (this is the possible detection rule):
-	if the player is hidden and the player is not the main actor and the faction of the main actor hates the faction of the player:
-		now the detection probability is 3; [base chance]
-		consider the detection rules;
-[		say "TEST: [detection probability].";]
-		let n be a random number between 1 and 100;
-		if the detection probability is greater than n or the main actor is unnaturally aware:
-			now the player is not hidden;
-			say "[The main actor] [if main actor is plural-named]have[otherwise]has[end if] detected you!";
-			repeat with guy running through visible persons:
-				if the faction of guy hates the faction of the player:
-					now guy is on-the-lookout.
-	]
+Every turn when the player is hidden (this is the possible detection rule):
+	if main actor is the player:
+		if at least one person enclosed by the location opposes the player:
+			now hiding roll is a roll of the dice;
+			say "[italic type]You roll a hiding check of [hiding roll] [run paragraph on]";
+			consider the detection rules;
+			say "= [hiding roll] against the target number of 2.[roman type] [run paragraph on]";
+			if hiding roll > 1:
+				say "You [bold type]remain hidden[roman type].";
+			otherwise:
+				say "You are [bold type]detected[roman type]!";
+				now the player is not hidden;
+				repeat with guy running through visible persons:
+					if the faction of guy hates the faction of the player:
+						now guy is on-the-lookout.
 
 Section - Detection rules
-
-A detection rule (this is the base probability of detection rule):
-	increase the detection probability by 3.
 	
 A detection rule (this is the tension increases probability of detection rule):
-	increase the detection probability by the tension.
+	let n be (tension / 2);
+	say " - ", n, " (tension)[run paragraph on]";
+	decrease hiding roll by n.
 
-A detection rule (this is the spirit probability of detection rule):
-	unless the main actor is the player:
-		let n be spirit score of the main actor / 2;
-		increase the detection probability by n.
+A detection rule (this is the number of enemies increases probability of detection rule):
+	let n be 0;
+	repeat with guy running through people in the location:
+		if guy opposes the player:
+			unless guy is blind:
+				increase n by 1;
+	if n is not 0:
+		say " - [n] (number of not blind enemies)[run paragraph on]";
+		decrease the hiding roll by n.
 
 A detection rule (this is the on-the-lookout increases probability of detection rule):
-	unless the main actor is the player:
-		if the main actor is on-the-lookout:
-			increase the detection probability by 5.
-
-A detection rule (this is the blindness decreases probability of detection rule):
-	unless the main actor is the player:
-		if the main actor is blind:
-			decrease the detection probability by 3.
+	let boolean be false;
+	repeat with guy running through people in the location:
+		if guy opposes the player and guy is on-the-lookout:
+			now boolean is true;
+	if boolean is true:
+		say " - 1 (enemies on the lookout)[run paragraph on]";
+		decrease the hiding roll by 1.
 
 A detection rule (this is the unnatural awareness detection rule):
-	unless the main actor is the player:
-		if the main actor is unnaturally aware:
-			increase the detection probability by 1000.
+	repeat with guy running through people in the location:
+		if guy opposes the player and guy is unnaturally aware:
+			say " - 100 ([the guy] supernaturally detects you)[run paragraph on]";
+			decrease hiding roll by 100.
+
 
 Section - Action rules
 
+Hiding action penalty is a number that varies.
+Hiding action penalty text is a text that varies.
+
+A detection rule (this is the action detection rule):
+	if hiding action penalty is not 0:
+		say " - [hiding action penalty] ([hiding action penalty text])[run paragraph on]";
+		decrease hiding roll by hiding action penalty;
+		now hiding action penalty is 0.
+
+Last every turn (this is the remove hiding action penalty rule):
+	now hiding action penalty is 0.
+
 Carry out attacking:
-	increase detection probability by 70.
+	now hiding action penalty is 5;
+	now hiding action penalty text is "attacking".
 
 An aftereffects rule (this is the be detected after successful attack rule):
 	if the global attacker is the player and the attack damage is greater than 0:
-		increase detection probability by 250.
+		now hiding action penalty is 10;
+		now hiding action penalty text is "successfully attacking".
 
 Carry out concentrating:
-	increase detection probability by 50;
+	now hiding action penalty is 3;
+	now hiding action penalty text is "concentrating";
 	if the player is hidden:
 		say "You shift your attention away from remaining hidden. [run paragraph on]".
 
 Carry out reading a scroll:
-	increase detection probability by 50.
+	now hiding action penalty is 5;
+	now hiding action penalty text is "reading out loud".
 
 Carry out dropping:
-	increase detection probability by 20.
+	now hiding action penalty is 2;
+	now hiding action penalty text is "dropping stuff".
 
 Carry out taking:
-	increase detection probability by 20.
+	now hiding action penalty is 2;
+	now hiding action penalty text is "picking stuff up".
 
 Carry out singing:
-	increase detection probability by 100.
+	now hiding action penalty is 10;
+	now hiding action penalty text is "singing".
 	
 
 Section - No perceived threat
@@ -157,14 +150,6 @@ To decide whether there is no perceived threat for (guy - a person):
 			if guy2 is not hidden or guy is unnaturally aware:
 				decide no;
 	decide yes.
-[
-Section - Action restrictions when hidden
-
-Check concentrating (this is the cannot concentrate while hidden rule):
-	if the player is hidden:
-		take no time;
-		say "You need all your concentration just to stay hidden." instead.]
-
 
 Section - Hiding
 
@@ -172,14 +157,6 @@ To hide:
 	if the combat status is peace:
 		say "You blend into the shadows.";
 		now the player is hidden;
-[	otherwise:
-		consider the detection rules;
-		increase detection probability by 50;
-		let n be a random number between 1 and 100;
-[		say "Roll: [n] against [detection probability]."; [TEST]]
-		unless the detection probability is greater than n:
-			say "You blend into the shadows.";
-			now the player is hidden;]
 	otherwise:
 		say "You fail to hide."
 
@@ -308,8 +285,15 @@ To decide if the attacker is affected by smoke:
 	yes;
 
 A detection rule (this is the smoke lessens probability of detection rule):
-	unless main actor is smoke immune:
-		decrease the detection probability by smoke penalty of the location.
+	let n be smoke penalty of the location;
+	if n > 0:
+		let boolean be false;
+		repeat with guy running through people in the location:
+			if guy opposes the player and guy is smoke immune:
+				now boolean is true;
+		if boolean is false:
+			say " + [n] (smoke)[run paragraph on]";
+			increase the hiding roll by n.
 
 An attack modifier rule (this is the thick smoke makes attacking a little harder rule):
 	if the attacker is affected by smoke:
@@ -410,7 +394,8 @@ First impeded movement rule (this is the can always move when ethereal rule):
 		
 A detection rule (this is the ethereal makes hiding easier rule):
 	if player is ethereal:
-		decrease the detection probability by 25.
+		say " + 2 (ethereal)[run paragraph on]";
+		increase the hiding roll by 2.
 
 Section - Moving through rock
 

@@ -466,9 +466,14 @@ A dungeon interest rule (this is the change weapon sizes rule):
 Section - Other effects of size
 
 A detection rule (this is the size increases probability of detection rule):
-	let n be the size difference of (the standard measure) and (the player);
-	now n is n * 3;
-	increase the detection probability by n.
+	let n be the size difference of (the player) and (the standard measure);
+	if n > 0:
+		say " + ", n, " ([size of the player])[run paragraph on]";
+	if n < 0:
+		let m be -1 * n;
+		say " - [m] ([size of the player])[run paragraph on]";
+	increase hiding roll by n.
+	
 
 
 
@@ -1442,7 +1447,7 @@ Section - Ghost
 Status attribute rule (this is the ghost status rule):
 	if current form is ghost-form:
 		if long status is true:
-			say "You are a [bold type]ghost[roman type]: all attacks by and against you have an additional 50% chance of missing; you get a large bonus to hiding.[line break][run paragraph on]".
+			say "You are a [bold type]ghost[roman type]: all attacks by and against you have an additional 50% chance of missing; you get a +3 bonus to hiding.[line break][run paragraph on]".
 
 Last check an actor hitting (this is the ghost form rule):
 	if current form is ghost-form:
@@ -1452,7 +1457,8 @@ Last check an actor hitting (this is the ghost form rule):
 
 Detection rule (this is the ghost detection rule):
 	if the current form is ghost-form:
-		decrease the detection probability by 30.
+		say " + 3 (ghost form)[run paragraph on]";
+		increase the hiding roll by 3.
 
 Section - Lich
 
@@ -1490,7 +1496,7 @@ This is the turn-vampire rule:
 Status attribute rule (this is the vampire status rule):
 	if current form is vampire-form:
 		if long status is true:
-			say "You are a [bold type]vampire[roman type]: +4 mind, +2 attack, -2 defence, modest bonus to hiding.[line break][run paragraph on]".
+			say "You are a [bold type]vampire[roman type]: +4 mind, +2 attack, -2 defence, +1 bonus to hiding.[line break][run paragraph on]".
 
 A mind bonus rule (this is the mind bonus of vampire rule):
 	if the test subject is the player and the current form is vampire-form:
@@ -1511,7 +1517,8 @@ Chance to win rule when the global defender is the player and current form is va
 		
 Detection rule (this is the vampire detection rule):
 	if the current form is vampire-form:
-		decrease the detection probability by 5.
+		say " + 1 (vampire form)[run paragraph on]";
+		increase the hiding roll by 1.
 
 To unvampirise the player:
 	now the faction of the player is friendly;
@@ -1526,7 +1533,7 @@ This is the turn-vampire-bat rule:
 Status attribute rule (this is the vampire bat status rule):
 	if current form is vampirebat-form:
 		if long status is true:
-			say "You are a [bold type]vampire bat[roman type]: +2 defence, -2 attack, large bonus to hiding, bonus to running away, flying, cannot use weapons or clothing.[line break][run paragraph on]".
+			say "You are a [bold type]vampire bat[roman type]: +2 defence, -2 attack, +2 bonus to hiding, bonus to running away, flying, cannot use weapons or clothing.[line break][run paragraph on]".
 
 An attack modifier rule (this is the vampire bat has less chance to be hit rule):
 	if the global defender is the player and current form is vampirebat-form:
@@ -1543,7 +1550,8 @@ An attack modifier rule (this is the vampire bat has less chance to hit rule):
 
 Detection rule (this is the vampire bat detection rule):
 	if the current form is vampirebat-form:
-		decrease the detection probability by 20.
+		say " + 2 (vampire bat form)[run paragraph on]";
+		increase the hiding roll by 2.
 
 A flying rule (this is the vampire bat flies rule):
 	if test subject is player and the current form is vampirebat-form:

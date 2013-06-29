@@ -1000,7 +1000,8 @@ Soft slippers are civilised.
 
 Detection rule (this is the soft slippers detection rule):
 	if the player wears the soft slippers:
-		decrease detection probability by 5.
+		say " + 1 (soft slippers)[run paragraph on]";
+		increase the hiding roll by 1.
 
 
 Section - Boots of the war dance (major)
@@ -2462,7 +2463,8 @@ Every turn (this is the singing sword fun rule):
 
 Detection rule (this is the singing sword detection rule):
 	if the singing sword is readied and the player encloses the singing sword and the singing sword is not tamed:
-		increase detection probability by 30.
+		say " - 5 (singing sword)[run paragraph on]";
+		decrease the hiding roll by 5.
 
 The singing sword can be tamed. The singing sword is not tamed.
 The singing contest is a number that varies. The singing contest is 0.
@@ -2518,9 +2520,10 @@ The holy sword is a sword. The description of the holy sword is "This sword shin
 
 The special weapon info of the holy sword is "; deals extra damage to undead and demons; shines with light, making it harder to hide[run paragraph on]".
 
-Detection rule (this is the hiky sword detection rule):
+Detection rule (this is the holy sword detection rule):
 	if the holy sword is readied and the player encloses the holy sword:
-		increase detection probability by 5.
+		say " - 2 (holy sword)[run paragraph on]";
+		decrease the hiding roll by 2.
 
 A damage modifier rule (this is the holy sword damage bonus rule):
 	if the global attacker weapon is the holy sword:

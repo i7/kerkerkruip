@@ -2607,7 +2607,8 @@ An impeded movement rule (this is the being grappled impedes movement rule):
 
 A detection rule (this is the cannot hide when grappled rule):
 	if someone grapples the player:
-		increase detection probability by 1000.
+		say " - 20 (being grappled)[run paragraph on]";
+		decrease the hiding roll by 20.
 
 Section - and the tentacle constricts
 

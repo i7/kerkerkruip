@@ -174,8 +174,8 @@ The description of the flickering lamps is "Because of the constantly shifting p
 
 Last detection rule (this is the flickering lamps detection rule):
 	if the location encloses the flickering lamps:
-		let n be the detection probability divided by 2;
-		now the detection probability is n.
+		say " + 2 (flickering lamps)[run paragraph on]";
+		increase the hiding roll by 2.
 
 
 Chapter - Tungausy Totem
