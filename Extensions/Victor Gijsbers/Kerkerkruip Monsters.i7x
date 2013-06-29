@@ -1096,7 +1096,7 @@ Chapter - Level 2 - Chain Golem
 
 Section - Definitions
 
-The chain golem is a monster. "The room is dominated by a chain golem, a moving mass of [if chain golem is iron]iron and copper[otherwise][material-adjective of material of chain golem][end if] chains, both thick and thin, that hulks in its center[if the concentration of the chain golem is not 0]. The golem is spinning [end if][if the concentration of the chain golem is 1]slowly[otherwise if the concentration of the chain golem is 2]wildly[otherwise if the concentration of the chain golem is 3]furiously[end if]."
+The chain golem is a monster. "Hulking in the centre of the room is a chain golem, a moving mass of [if chain golem is iron]iron and copper[otherwise][material-adjective of material of chain golem][end if] chains, both thick and thin[if the concentration of the chain golem is not 0]. The golem is spinning [end if][if the concentration of the chain golem is 1]slowly[otherwise if the concentration of the chain golem is 2]wildly[otherwise if the concentration of the chain golem is 3]furiously[end if]."
 
 The level of the chain golem is 2.
 The ID of the chain golem is 5.
