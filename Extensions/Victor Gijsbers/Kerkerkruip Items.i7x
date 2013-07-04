@@ -1269,6 +1269,8 @@ A grenade is a kind of thing.
 A grenade is usually alchemical.
 A grenade is usually iron.
 
+A grenade is either damaging or not-damaging. A grenade is usually not-damaging.
+
 Exploding-location is a room that varies.
 Exploding-grenade is a thing that varies.
 
@@ -1330,7 +1332,7 @@ Carry out directional throwing:
 	otherwise:
 		say "You throw [the noun] [second noun], where you hear it explode.";
 		follow the exploding rules;
-		if a random chance of 1 in 2 succeeds:
+		if exploding-grenade is damaging and a random chance of 1 in 2 succeeds:
 			repeat with guy running through alive persons in exploding-location:
 				now guy is follower;
 				if follower percentile chance of guy is less than 90:
@@ -1354,6 +1356,7 @@ Section - Flash grenades
 
 A flash grenade is a kind of grenade. The description of a flash grenade is "When thrown, this magical grenade emits a pulse of searing light so strong that it will blind anyone in its vicinity, even if they close their eyes. The device is universally judged to be Metastasio's most useless invention.".
 A flash grenade is iron.
+A flash grenade is damaging.
 
 A person has a number called the flash-grenade-timer.
 
@@ -1427,6 +1430,7 @@ Section - Fragmentation grenade
 
 A fragmentation grenade is a kind of grenade. The description of a fragmentation grenade is "When thrown, the [if the fragmentation grenade is silver]silver [end if]fragmentation grenade will explode into many sharp fragments. These are guaranteed to deal damage to everyone in the location[if the fragmentation grenade is silver], but especially to undead and demons[end if]. You cannot handle these items without a feeling of national pride; for it was this invention of Metastasio's that allowed the outnumbered forces of Louis VIII to defeat the Algirian hordes.".
 A fragmentation grenade is iron.
+A fragmentation grenade is damaging.
 Understand "frag" as a fragmentation grenade.
 
 An exploding rule:
