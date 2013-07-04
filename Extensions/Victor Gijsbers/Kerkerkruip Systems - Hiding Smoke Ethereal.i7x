@@ -140,6 +140,10 @@ Carry out taking:
 Carry out singing:
 	now hiding action penalty is 10;
 	now hiding action penalty text is "singing".
+
+Carry out searching:
+	now hiding action penalty is 2;
+	now hiding action penalty text is "searching".	
 	
 
 Section - No perceived threat
