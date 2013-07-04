@@ -67,12 +67,14 @@ A fragmentation rule (this is the basic fragmentation damage rule):
 		decrease m by pdr;
 		if m is less than 0, now m is 0;			
 		decrease health of guy by m;
-		say "[if n is 1 and original n is not 1]and [end if][m] damage to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive and m is not 0] (which breaks [possessive of the guy] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
+		if fragmentation-place is the location:
+			say "[if n is 1 and original n is not 1]and [end if][m] damage to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive and m is not 0] (which breaks [possessive of the guy] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
 		unless m is 0:
 			now concentration of the guy is 0;
 		decrease n by 1;
 		if n is 0:
-			say ""; [For an extra newline. Don't ask.]
+			if fragmentation-place is the location:
+				say ""; [For an extra newline. Don't ask.]
 		if health of guy is less than 1:
 			clean the table of delayed actions for guy;
 	if health of the player is less than 1:

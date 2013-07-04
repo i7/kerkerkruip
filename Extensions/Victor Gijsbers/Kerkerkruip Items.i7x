@@ -1273,6 +1273,13 @@ A grenade is a kind of thing.
 A grenade is usually alchemical.
 A grenade is usually iron.
 
+Exploding-location is a room that varies.
+Exploding-grenade is a thing that varies.
+
+The exploding rules are a rulebook.
+
+Section - Normal throwing
+
 Instead of throwing a grenade at something:
 	try throwing the noun instead.
 
@@ -1286,7 +1293,66 @@ Check throwing:
 		say "You throw [the noun] away." instead.
 
 Carry out throwing:
-	say "Apparently, the programmer has forgotten to implement this type of grenade, because nothing happens!".
+	now exploding-location is the location;
+	now exploding-grenade is the noun;
+	follow the exploding rules.
+	
+Section - Throwing in a direction
+
+Directional throwing is an action applying to one carried thing and one visible thing. Understand "throw [something] [a direction]" and "throw [something] to [a direction]" as directional throwing.
+
+Check directional throwing:
+	if the noun is not a grenade:
+		take no time;
+		say "That is only possible with grenades." instead.
+		
+Check directional throwing:		
+	if the second noun is not a direction:
+		take no time;
+		say "You can either simply throw a grenade, or throw it in one of the cardinal directions (north, west, south, east, up, down)." instead.
+		
+Check directional throwing:
+	let place be the room second noun from the location;
+	unless place is a room:
+		take no time;
+		say "There is no passage in that direction." instead.
+
+Grenade-return-percentage is a number that varies.
+The grenade returning rules are a rulebook.
+	
+Carry out directional throwing:
+	now exploding-location is the room second noun from the location;
+	now exploding-grenade is the noun;
+	if the number of alive persons in exploding-location is 0:
+		now grenade-return-percentage is 0;
+	otherwise:
+		follow the grenade returning rules;
+	if a random chance of grenade-return-percentage in 100 succeeds:
+		say "You throw [the noun] [second noun] -- but before it can explode, it is thrown back towards you!";
+		now exploding-location is the location;
+		follow the exploding rules;		
+	otherwise:
+		say "You throw [the noun] [second noun], where you hear it explode.";
+		follow the exploding rules;
+		if a random chance of 1 in 2 succeeds:
+			repeat with guy running through alive persons in exploding-location:
+				now guy is follower;
+				if follower percentile chance of guy is less than 90:
+					increase follower percentile chance of guy by 10.
+	
+First grenade returning rule:
+	now grenade-return-percentage is 25.
+
+Grenade returning rule (this is the people throw back grenades rule):
+	let q be the number of alive persons in exploding-location;
+	increase grenade-return-percentage by (10 * q).
+	
+Grenade returning rule (this is the up and down direction grenade throwing rule):
+	if direction from exploding-location to location is down:
+		increase grenade-return-percentage by 20;
+	if direction from exploding-location to location is up:
+		decrease grenade-return-percentage by 20.
+	
 
 Section - Flash grenades
 
@@ -1306,48 +1372,60 @@ A blindness rule (this is the blind if flashed rule):
 	if flash-grenade-timer of test subject is greater than 0:
 		rule succeeds.				
 
-Instead of throwing a flash grenade:
-	if the noun is rusted and a random chance of 1 in 2 succeeds:
-		say "You throw the flash grenade, but there is only a feeble explosion. The rust must have rendered it useless.";
-	otherwise:
-		let lijst be a list of person;
-		repeat with guy running through alive persons in the location:
-			unless guy is blind:
-				let n be 15;
-				decrease n by (final body of guy / 3);
-				unless guy is smoke immune:
-					decrease n by smoke penalty of the location;
-				if n is less than 0:
-					now n is 0;
-				if n is not 0:
-					add guy to lijst;
-					now flash-grenade-timer of guy is n;
-		say "You throw the flash grenade, and a blinding light [unless lijst is empty]burns away the retinae of anyone unlucky enough to see it clearly, namely, [lijst with definite articles][otherwise]flashes through the room[end if].";
-	remove noun from play.
+An exploding rule:
+	if the exploding-grenade is a flash grenade:
+		if the noun is rusted and a random chance of 1 in 2 succeeds:
+			if exploding-location is the location:
+				say "There is only a feeble explosion. The rust must have rendered the flash grenade useless.";
+			otherwise:
+				say "The explosion does seem to be very feeble, though.";
+		otherwise:
+			let lijst be a list of person;
+			repeat with guy running through alive persons in exploding-location:
+				unless guy is blind:
+					let n be 15;
+					decrease n by (final body of guy / 3);
+					unless guy is smoke immune:
+						decrease n by smoke penalty of the exploding-location;
+					if n is less than 0:
+						now n is 0;
+					if n is not 0:
+						add guy to lijst;
+						now flash-grenade-timer of guy is n;
+			if exploding-location is location:
+				say "The flash grenade explodes, and a blinding light [unless lijst is empty]burns away the retinae of anyone unlucky enough to see it clearly, namely, [lijst with definite articles][otherwise]flashes through the room[end if].";
+		remove exploding-grenade from play.
 
 Section - Rust grenade
 
 A rust grenade is a kind of grenade. The description of a rust grenade is "When thrown, this grenade will release a thick cloud of rust spores -- a nasty fungus that rusts away iron. Its use is forbidden in all civilised and most uncivilised countries.".
 A rust grenade is iron.
 
-Instead of throwing a rust grenade:
-	say "You throw the rust grenade, and it immediately releases a cloud of rust spores!";
-	remove noun from play;
-	now the location is rust-spored.
+An exploding rule:
+	if the exploding-grenade is a rust grenade:
+		if exploding-location is the location:
+			say "The rust grenade explodes, and it immediately releases a cloud of rust spores!";
+		remove noun from play;
+		now the exploding-location is rust-spored.
 
 Section - Smoke grenade
 
 A smoke grenade is a kind of grenade. The description of a smoke grenade is "When thrown, this grenade will release thick clouds of smoke. You once used such devices to help the prince escape from a confrontation with the henchmen of the vengeful countess of Poitier; that was long before your relationship soured.".
 A smoke grenade is iron.
 
-Instead of throwing a smoke grenade:
-	if the noun is rusted and a random chance of 1 in 2 succeeds:
-		say "You throw the smoke grenade, but there is only a feeble explosion. The rust must have rendered it useless.";
-	otherwise:
-		say "You throw the smoke grenade, and it immediately explodes into a large cloud of smoke.";
-		let n be a random number between 6 and 8;
-		increase the smoke timer of the location by n;
-	remove noun from play;.
+An exploding rule:
+	if the exploding-grenade is a smoke grenade:
+		if the noun is rusted and a random chance of 1 in 2 succeeds:
+			if exploding-location is the location:
+				say "There is only a feeble explosion. The rust must have rendered the smoke grenade useless.";
+			otherwise:
+				say "The explosion does seem to be very feeble, though.";
+		otherwise:
+			if exploding-location is location:
+				say "The smoke grenade explodes, releasing a large cloud of smoke.";
+			let n be a random number between 6 and 8;
+			increase the smoke timer of the exploding-location by n;
+		remove noun from play.
 
 Section - Fragmentation grenade
 
@@ -1355,33 +1433,43 @@ A fragmentation grenade is a kind of grenade. The description of a fragmentation
 A fragmentation grenade is iron.
 Understand "frag" as a fragmentation grenade.
 
-Instead of throwing a fragmentation grenade:
-	if the noun is rusted and a random chance of 1 in 2 succeeds:
-		say "You throw the fragmentation grenade, but there is only a feeble explosion. The rust must have rendered it useless.";
-		remove the noun from play;
-	otherwise:
-		say "The grenade explodes, dealing [run paragraph on]";
-		have a fragmentation event in location with noun by player.
+An exploding rule:
+	if the exploding-grenade is a fragmentation grenade:
+		if the noun is rusted and a random chance of 1 in 2 succeeds:
+			if exploding-location is the location:
+				say "There is only a feeble explosion. The rust must have rendered the fragmentation grenade useless.";
+			otherwise:
+				say "The explosion does seem to be very feeble, though.";
+		otherwise:
+			if exploding-location is the location:
+				say "The grenade explodes, dealing [run paragraph on]";
+			have a fragmentation event in exploding-location with noun by player.
 
 Section - Blessed Grenade (major)
 
 The Blessed Grenade is a major grenade. The indefinite article of the Blessed Grenade is "the". The description of Blessed Grenade is "This grenade is rumoured to be extremely effective against undead.".
 
-Instead of throwing the Blessed Grenade:
-	if the noun is rusted and a random chance of 1 in 2 succeeds:
-		say "You throw the Blessed Grenade, but there is only a feeble explosion. The rust must have rendered it useless.";
-	otherwise:
-		if the number of alive undead persons in the location is less than 1:
-			say "As the grenade explodes you hear the singing of angels. But nothing further appears to happen.";
+An exploding rule:
+	if the exploding-grenade is a Blessed Grenade:
+		if the noun is rusted and a random chance of 1 in 2 succeeds:	
+			if exploding-location is the location:
+				say "There is only a feeble explosion. The rust must have rendered the Blessed Grenade useless.";
+			otherwise:
+				say "The explosion does seem to be very feeble, though.";
 		otherwise:
-			let K be the list of alive undead persons in the location;
-			say "As the grenade explodes you hear the singing of angels, several of whom swoop down from the heavens with huge swords and eviscerate [K with definite articles].";
-			repeat with guy running through K:
-				now health of guy is -1;
-				clean the table of delayed actions for the guy;
-			if the player is dead:
-				end the story saying "The undead should not seek blessings.";
-	remove the noun from play.
+			if the number of alive undead persons in the exploding-location is less than 1:
+				if the location is the exploding-location:
+					say "As the grenade explodes you hear the singing of angels. But nothing further appears to happen.";
+			otherwise:
+				let K be the list of alive undead persons in the location;
+				if the location is the exploding-location:
+					say "As the grenade explodes you hear the singing of angels, several of whom swoop down from the heavens with huge swords and eviscerate [K with definite articles].";
+				repeat with guy running through K:
+					now health of guy is -1;
+					clean the table of delayed actions for the guy;
+				if the player is dead:
+					end the story saying "The undead should not seek blessings.";
+		remove the noun from play.
 
 Section - Grenade packs
 
