@@ -682,21 +682,17 @@ To do the claim of the demon:
 	move the demonic mistress to the location.
 
 
-[
 
-[Currently boring, so I'm commenting it out. Should do something with grenades.]
 
 Section - Metastasio's hat (minor)
 
-Metastasio's hat is a minor hat. The description of Metastasio's hat is "Metastasio envisioned whole armies that would lob grenades at the enemy and would then run away as fast as they could. This hat was meant as a prototype piece of equipment to help with the latter. But the generals of Averoigne did not share Metastasio's ideas, and Louis VIII expressly forbade further production of these hats, a decision the chroniclers have all lauded.". Metastasio's hat is proper-named.
+Metastasio's hat is a minor hat. The description of Metastasio's hat is "Metastasio envisioned whole armies that would lob grenades at the enemy, and he designed this hat to help soldiers succeed. When worn, it decreases the chance that grenades get thrown back at you by 15%.". Metastasio's hat is proper-named.
 Metastasio's hat is alchemical.
 Metastasio's hat is cloth.
 
-An attack modifier rule (this is the Metastasio's hat grants worse attack and better retreat rule):
-	if the player wears Metastasio's hat:
-		if the global attacker is the player or (the global defender is the player and the player is retreater):
-			say " - 2 (your cowardice)[run paragraph on]";
-			decrease the attack strength by 2.]
+Grenade returning rule (this is the Metastasio's hat rule):
+	if player wears Metastasio's hat:
+		decrease grenade-return-percentage by 15.
 
 
 Section - Crown of the god-king (major)
