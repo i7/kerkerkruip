@@ -561,7 +561,7 @@ First AI action selection rule for a person (called P) (this is the consider hea
 				now greatest injury is heal power of the running AI; [now m becomes the maximum amount of damage the global attacker can heal]
 			choose a blank Row in the Table of AI Action Options;
 			now the Option entry is the action of P healing;
-			now the Action Weight entry is 5 plus greatest injury;
+			now the Action Weight entry is 8 plus greatest injury;
 
 Carry out an actor healing:
 	let m be 0;
