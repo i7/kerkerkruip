@@ -1771,7 +1771,7 @@ First killing rule (this is the demon of rage set the stage rule):
 Last killing rule (this is the demon of rage gets stronger rule):
 	if demon of rage is not off-stage:
 		if killed-guy is not the demon of rage and killed-guy is not the player:
-			if x-coordinate of demon-of-rage-stored-location is not 100: [these rooms, such as the maze, are not part of the dungeon]
+			if x-coordinate of demon-of-rage-stored-location is not 100 and x-coordinate of the location is not 100: [these rooms, such as the maze, are not part of the dungeon]
 				do the demon of rage power-up.
 
 To do the demon of rage power-up:
@@ -2057,6 +2057,146 @@ An AI action selection rule for the hound (this is the hound likes to counterstr
 		choose row with an Option of the action of the hound parrying in the Table of AI Action Options;
 		now the Action Weight entry is -1000;
 
+
+
+
+
+Chapter - Level 2 - Angel of Compassion
+
+An angel of compassion is a monster. "An angel hovers here, [if angel-of-compassion-strength > 3]enveloped in blinding and overwhelming radiance[otherwise if angel-of-compassion-strength is 3]shining with divine glory[otherwise if angel-of-compassion-strength is 2]lessened by grief, but still majestic[otherwise if angel-of-compassion-strength is 1]saddened and wizened[otherwise]enveloped in sadness and all its glory gone[end if]."
+
+The level of the angel of compassion is 2.
+The ID of the angel of compassion is 33.
+The angel of compassion is medium.
+The unlock level of the angel of compassion is 7.
+The unlock hidden switch of the angel of compassion is false.
+The unlock text of the angel of compassion is "an angelic being that grows weaker whenever someone dies".
+The angel of compassion is talker.
+Angel of compassion is flyer.
+Radiation of angel of compassion is 4.
+
+Angel-of-compassion-strength is a number that varies. Angel-of-compassion-strength is 4.
+
+
+The description of the angel of compassion is "This beautiful angel grieves for the deaths of others. Its current brightness is [if angel-of-compassion-strength > 3]overwhelming[otherwise if angel-of-compassion-strength is 3]strong[otherwise if angel-of-compassion-strength is 2]quite strong[otherwise if angel-of-compassion-strength is 1]weak[otherwise]negligible[end if]."
+
+
+
+The health of the angel of compassion is 25.
+The melee of the angel of compassion is 0.
+The defence of the angel of compassion is 6.
+
+The body score of the angel of compassion is 10.
+The mind score of the angel of compassion is 10.
+The spirit score of the angel of compassion is 12.
+
+
+When play begins:
+	let X be a random natural weapon part of the angel of compassion;
+	now dodgability of X is 2;
+	now damage die of X is 4;	
+	now passive parry max of X is 2;
+	now active parry max of X is 0;
+	now printed name of X is "angel's fists".
+
+
+
+Section - Equipment
+
+The angel of compassion carries the sword of light.
+
+Section - Getting weaker
+
+[The demon of rage gets stronger whenever someone dies.]
+
+Angel-of-compassion-stored-location is a room that varies.
+
+First killing rule (this is the angel of compassion set the stage rule):
+	now angel-of-compassion-stored-location is the location of killed-guy.
+		
+Last killing rule (this is the angel of compassion gets stronger rule):
+	if angel of compassion is not off-stage:
+		if killed-guy is not the angel of compassion and killed-guy is not the player:
+			if x-coordinate of angel-of-compassion-stored-location is not 100 and x-coordinate of the location is not 100: [these rooms, such as the maze, are not part of the dungeon]
+				do the angel of compassion power-down.
+
+To do the angel of compassion power-down:
+	if angel-of-compassion-strength > 0:
+		decrease angel-of-compassion-strength by 1;
+		decrease radiation of angel of compassion by 1;
+		decrease body score of angel of compassion by 2;
+		decrease mind score of angel of compassion by 2;
+		decrease spirit score of angel of compassion by 2;
+		if angel of compassion is in the location:
+			say "The [bold type]angel of compassion[roman type] wails in grief and seems to diminish in brightness!";
+		otherwise:
+			let way be the best route from the location of player to the location of the angel of compassion;
+			if way is a direction:
+				say "You hear a [bold type]tortured wail[roman type] [way].";
+			otherwise:
+				say "You hear a [bold type]tortured wail[roman type] somewhere in the dungeon.".
+
+Section - Angel of Compassion images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of angel of compassion is Figure of map_monster_hound.
+The legend-label of angel of compassion is Figure of map_legend_hound.
+
+Section - Prose
+
+Report an actor hitting the dead angel of compassion:
+	say "The angel disappears in a flash of light!";
+	rule succeeds.
+
+Report the angel of compassion hitting a dead pc:
+	say "'I am so sorry,' the angel whispers as it kills you. ";
+	rule succeeds.
+
+Report the angel of compassion concentrating:
+	say "[if concentration of the angel of compassion is 1]The angel prays softly.[otherwise if concentration of the angel of compassion is 2]The angel fixes [the chosen target] with its stare, hardening itself for the attack.[otherwise if concentration of the angel of compassion is 3]'Sul will absolve me,' the angel declares, reaching a state of maximal concentration.[end if]";
+	rule succeeds.
+
+Report the angel of compassion attacking:
+	unless the actor is the noun:
+		say "With an apologetic smile, the angel of compassion swings at [the noun].";
+	otherwise:
+		say "'Life is too hard. I must kill myself,' the angel of compassion sighs.";
+	rule succeeds.
+
+Report the angel of compassion dodging:
+	say "The angel flies aside.";
+	rule succeeds.
+
+Report the angel of compassion waiting when the angel of compassion is insane:
+	say "'Once I have killed everyone, there will be no more grieving!' the angel of compassion says, smiling.";
+	rule succeeds.
+
+
+Section - Power
+
+The power of compassion is a power. The angel of compassion grants the power of compassion.
+The power level of power of compassion is 2.
+The command text of power of compassion is "".
+The description of power of compassion is "Type: passive ability.[paragraph break]Command: none.[paragraph break]After you are attacked, with a probability of (mind - 2) / mind, you get a chance for an immediate counterstrike. If this happens, you will automatically win the initiative for that turn. You can perform any action you wish, just as normal, but if you do choose to retaliate against your attacker, you get a +2 attack and +2 damage bonus. Any action that leads to an attack will count as a counterstrike (including the special pierce and stun powers)."
+The power-name of power of compassion is "power of compassion".
+
+Status skill rule (this is the power of compassion status skill rule):
+	if power of compassion is granted:
+		say "Like the great hound, you are always prepared for an immediate [bold type]counterstrike[roman type]. [italic type](Level 2)[roman type][line break][run paragraph on]";
+
+Absorbing power of compassion:
+	increase melee of the player by 1;
+	increase defence of the player by 1;
+	let n be 5 + (2 * angel-of-compassion-strength);
+	increase permanent health of the player by n;
+	increase radiation of player by angel-of-compassion-strength;
+	say "As the angel dies, its radiance and compassion become yours. ([bold type]Power of compassion[roman type]: +1 attack, +1 defence, +[n] health, +[angel-of-compassion-strength] levels of radiance, and something I still need to think up.)[paragraph break]";
+
+Repelling power of compassion:
+	decrease melee of the player by 1;
+	decrease defence of the player by 1;
+	let n be 5 + (2 * angel-of-compassion-strength);
+	decrease permanent health of the player by n;
+	decrease radiation of player by angel-of-compassion-strength.
 
 
 
