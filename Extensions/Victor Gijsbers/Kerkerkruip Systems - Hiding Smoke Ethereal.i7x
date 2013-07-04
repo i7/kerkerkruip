@@ -53,7 +53,7 @@ Every turn when the player is hidden (this is the possible detection rule):
 			now hiding roll is a roll of the dice;
 			say "[italic type]You roll a hiding check of [hiding roll] [run paragraph on]";
 			consider the detection rules;
-			say "= [hiding roll], which must be positive.[roman type] [run paragraph on]";
+			say " = [hiding roll], which must be positive.[roman type] [run paragraph on]";
 			if hiding roll > 0:
 				say "You [bold type]remain hidden[roman type].";
 			otherwise:
