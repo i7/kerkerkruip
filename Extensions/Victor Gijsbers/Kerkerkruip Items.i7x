@@ -2896,7 +2896,7 @@ The special weapon info of the executioner's axe is "; better tension damage bon
 
 Section - Minotaur's axe (monster)
 
-The minotaur's axe is an axe. The description of the minotaur's axe is "A huge axe covered in mystic runes.".
+The minotaur's axe is an axe. The description of the minotaur's axe is "A [size of minotaur's axe] axe covered in mystic runes.".
 
 The minotaur's axe is large.
 
