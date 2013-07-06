@@ -2176,12 +2176,13 @@ Section - Power
 The power of compassion is a power. The angel of compassion grants the power of compassion.
 The power level of power of compassion is 2.
 The command text of power of compassion is "".
-The description of power of compassion is "Type: passive ability.[paragraph break]Command: none.[paragraph break]After you are attacked, with a probability of (mind - 2) / mind, you get a chance for an immediate counterstrike. If this happens, you will automatically win the initiative for that turn. You can perform any action you wish, just as normal, but if you do choose to retaliate against your attacker, you get a +2 attack and +2 damage bonus. Any action that leads to an attack will count as a counterstrike (including the special pierce and stun powers)."
+The description of power of compassion is "Type: active ability.[paragraph break]Command: grief.[paragraph break]As an action or reaction, you can start or stop projecting an aura of grief. While the aura of grief is active, all attack made by or against you suffer a penalty equal to (you spirit + number of dead people) / 4."
 The power-name of power of compassion is "power of compassion".
 
-Status skill rule (this is the power of compassion status skill rule):
-	if power of compassion is granted:
-		say "Like the great hound, you are always prepared for an immediate [bold type]counterstrike[roman type]. [italic type](Level 2)[roman type][line break][run paragraph on]";
+
+Status skill rule (this is the compassion status skill rule):
+	if the power of compassion is granted:
+		say "You can turn on or off an aura of [bold type]grief[roman type], which weakens all attacks by and against you. [italic type](Level 2)[roman type][line break][run paragraph on]".
 
 Absorbing power of compassion:
 	increase melee of the player by 1;
@@ -2189,16 +2190,56 @@ Absorbing power of compassion:
 	let n be 5 + (2 * angel-of-compassion-strength);
 	increase permanent health of the player by n;
 	increase radiation of player by angel-of-compassion-strength;
-	say "As the angel dies, its radiance and compassion become yours. ([bold type]Power of compassion[roman type]: +1 attack, +1 defence, +[n] health, +[angel-of-compassion-strength] levels of radiance, and something I still need to think up.)[paragraph break]";
+	say "As the angel dies, its radiance and compassion become yours. ([bold type]Power of compassion[roman type]: +1 attack, +1 defence, +[n] health, +[angel-of-compassion-strength] levels of radiance, and you can protect an aura of grief.)[paragraph break]";
 
 Repelling power of compassion:
 	decrease melee of the player by 1;
 	decrease defence of the player by 1;
 	let n be 5 + (2 * angel-of-compassion-strength);
 	decrease permanent health of the player by n;
-	decrease radiation of player by angel-of-compassion-strength.
+	decrease radiation of player by angel-of-compassion-strength;
+	now aura of grief is false.
 
 
+Section - Aura of grief
+
+Aura of grief is a truth state that varies.
+
+Grieving is an action applying to nothing. Understand "grief" and "grieve" as grieving.
+
+An attack modifier rule (this is the aura of grief rule):
+	if aura of grief is true:
+		if the global attacker is the player or the global defender is the player:
+			let n be the final spirit of the player plus the number of not alive people;
+			now n is n divided by 4;
+			if the numbers boolean is true, say " - [n] (aura of grief)[run paragraph on]";
+			decrease attack strength by n.
+
+Check grieving:
+	if power of compassion is not granted:
+		take no time;
+		say "You do not possess that power." instead.
+
+Carry out grieving:
+	if aura of grief is true:
+		say "You stop projecting an aura of grief.";
+		now aura of grief is false;
+	otherwise:
+		say "You start projecting an aura of grief.";
+		now aura of grief is true.
+
+Status attribute rule (this is the aura of grief status rule):
+	if aura of grief is true:
+		if long status is true:
+			say "You project an [bold type]aura of grief[roman type].[line break][run paragraph on]";
+		otherwise:
+			say "[@ check initial position of attribute]projecting an aura of grief[run paragraph on]";
+
+Chance to win rule (this is the CTW aura of grief penalty rule):
+	if aura of grief is true and the global defender is the player:
+		let n be the final spirit of the player plus the number of not alive people;
+		now n is n divided by 4;	
+		decrease the chance-to-win by n.
 
 
 
