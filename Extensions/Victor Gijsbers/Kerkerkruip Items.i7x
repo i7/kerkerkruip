@@ -2645,9 +2645,20 @@ Check attacking (this is the attacking with the demon blade is a bad idea rule):
 			say "The [bold type]demonic blade[roman type] turns on you!";
 			try the player hitting the player instead;
 
+Section - Sword of light (monster)
 
+[Carried by the angel of compassion.]
 
+The sword of light is a sword. It is radiance. The description of the sword of light is "It seems to consist of pure radiance.".
 
+The special weapon info of the sword of light is "; damage increases with the wielder's angelic radiance[run paragraph on]".
+
+A damage modifier rule (this is the sword of light damage bonus rule):
+	if the global attacker weapon is the sword of light:
+		let n be radiation of the global attacker;
+		if n > 0:
+			say " + ", n, " (sword of light radiance bonus)[run paragraph on]";
+			increase the attack damage by n.
 
 
 Chapter - Rapier
