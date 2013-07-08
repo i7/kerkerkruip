@@ -3018,7 +3018,7 @@ Last aftereffects rule (this is the minotaur's axe maze rule):
 		if the global attacker is the minotaur or (the global attacker is the player and the power of the minotaur is granted):
 			if the attack damage is greater than 0:
 				if the location of the player is not the maze:
-					maze the actor and the noun.
+					maze the global attacker and the global defender.
 					
 
 

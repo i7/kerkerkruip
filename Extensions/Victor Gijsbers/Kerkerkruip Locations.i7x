@@ -1633,7 +1633,7 @@ To maze (the first guy - a person) and (the second guy - a person):
 				move the player to the maze;
 				move second guy to maze-waiting-room;
 				now maze-sound is northwest; [you cannot go nw]
-			otherwise: [when the player is not involved, we stimulate a combat]
+			otherwise: [when the player is not involved, we simulate a combat]
 				let n be level of first guy plus level of second guy;
 				increase n by 4;
 				let m be level of first guy;
