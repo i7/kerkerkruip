@@ -4067,7 +4067,7 @@ Overmind-calling is an action applying to nothing.
 An AI action selection rule for the overmind (this is the overmind considers calling rule):
 	choose a blank Row in the Table of AI Action Options;
 	now the Option entry is the action of the overmind overmind-calling;
-	now the Action Weight entry is a random number between 0 and 5;
+	now the Action Weight entry is a random number between 0 and 10;
 	increase Action Weight entry by (2 * concentration of the overmind);
 	let n be potential overmind allies;
 	if n is greater than 2:
