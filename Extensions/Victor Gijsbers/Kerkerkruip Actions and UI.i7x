@@ -736,7 +736,7 @@ Instead of asking something for:
 	say "You enjoy an idle boast as much as the next person, but this is hardly the time for an in-depth conversation.".
 
 Report talking to:
-	say "'[one of]I'll get back at the prince.[or]I will defeat all my enemies![or]I am immortal.[or]Pride cometh before the fall.[at random]', you say[if the player is hidden], revealing your presence[end if].[run paragraph on][line break][paragraph break]";
+	say "'[one of]I'll get back at the prince.[run paragraph on][or]I will defeat all my enemies![run paragraph on][or]I am immortal.[run paragraph on][or]Pride cometh before the fall.[run paragraph on][at random]', you say[if the player is hidden], revealing your presence[end if].[run paragraph on][line break][paragraph break]";
 	now the player is not hidden.
 
 
