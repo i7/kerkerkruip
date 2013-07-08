@@ -117,6 +117,12 @@ An AI action selection rule for a person (called P) when the chosen weapon is no
 	choose row with an Option of the action of P readying the chosen weapon in the Table of AI Action Options;
 	decrease the Action Weight entry by 1000.
 
+Chapter - Thrower
+
+[Throwers can throw. Currently used for grenades.]
+
+A person can be a thrower. A person is usually a thrower.
+
 Chapter - Talker
 
 [Talkers can speak. Currently used for flavour; could at a later stage be used for substantial things.]

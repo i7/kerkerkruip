@@ -1321,7 +1321,7 @@ The grenade returning rules are a rulebook.
 Carry out directional throwing:
 	now exploding-location is the room second noun from the location;
 	now exploding-grenade is the noun;
-	if the number of alive persons in exploding-location is 0:
+	if the number of alive thrower persons in exploding-location is 0:
 		now grenade-return-percentage is 0;
 	otherwise:
 		follow the grenade returning rules;
@@ -1332,7 +1332,7 @@ Carry out directional throwing:
 	otherwise:
 		say "You throw [the noun] [second noun], where you hear it explode.";
 		follow the exploding rules;
-		if exploding-grenade is damaging and a random chance of 1 in 2 succeeds:
+		if (exploding-grenade is damaging and a random chance of 2 in 7 succeeds) or a random chance of 1 in 15 succeeds:
 			repeat with guy running through alive persons in exploding-location:
 				now guy is follower;
 				if follower percentile chance of guy is less than 90:
@@ -1342,7 +1342,7 @@ First grenade returning rule:
 	now grenade-return-percentage is 25.
 
 Grenade returning rule (this is the people throw back grenades rule):
-	let q be the number of alive persons in exploding-location;
+	let q be the number of alive thrower persons in exploding-location;
 	increase grenade-return-percentage by (10 * q).
 	
 Grenade returning rule (this is the up and down direction grenade throwing rule):
@@ -1356,7 +1356,6 @@ Section - Flash grenades
 
 A flash grenade is a kind of grenade. The description of a flash grenade is "When thrown, this magical grenade emits a pulse of searing light so strong that it will blind anyone in its vicinity, even if they close their eyes. The device is universally judged to be Metastasio's most useless invention.".
 A flash grenade is iron.
-A flash grenade is damaging.
 
 A person has a number called the flash-grenade-timer.
 

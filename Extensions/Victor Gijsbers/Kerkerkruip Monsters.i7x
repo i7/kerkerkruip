@@ -127,6 +127,7 @@ The material of the swarm of daggers is iron.
 The swarm of daggers is emotionless.
 The swarm of daggers is flyer.
 The swarm of daggers is not talker.
+The swarm of daggers is thrower.
 
 The health of the swarm of daggers is 14.
 The melee of the swarm of daggers is 3.
@@ -304,6 +305,7 @@ The level of the blood ape is 1.
 The ID of the blood ape is 2.
 The blood ape is small.
 The blood ape is not talker.
+The blood ape is thrower.
 
 The health of the blood ape is 10.
 The melee of the blood ape is 0.
@@ -488,6 +490,7 @@ The level of ravenous armadillo is 1.
 The ID of the ravenous armadillo is 3.
 The ravenous armadillo is medium.
 The ravenous armadillo is not talker.
+The ravenous armadillo is thrower.
 
 The unlock level of the ravenous armadillo is 3.
 The unlock text of the ravenous armadillo is "a monster that searches the dungeon for anything it can eat".
@@ -747,6 +750,7 @@ The level of Miranda is 1.
 The ID of Miranda is 4.
 Miranda is medium.
 Miranda is talker.
+Miranda is thrower.
 
 The description of Miranda is "Although she is currently working as one of Malygris's guards, Miranda dreams about a bright future as a famous adventurer.".
 
@@ -886,6 +890,7 @@ The level of the wisps of pain is 1.
 The ID of the wisps of pain is 30.
 The wisps of pain are tiny.
 The wisps of pain are not talker.
+The wisps of pain are not thrower.
 
 The description of the wisps of pain is "Dark spots of necromantic magic move through the air. They deal pain and torment, and can permanently cripple anyone foolish enough to oppose them.".
 
@@ -1102,6 +1107,7 @@ The level of the chain golem is 2.
 The ID of the chain golem is 5.
 The chain golem is large.
 The chain golem is not talker.
+The chain golem is thrower.
 
 The chain golem is eyeless.
 The chain golem is iron.
@@ -1332,6 +1338,7 @@ The level of jumping Bomb is 2.
 The ID of the jumping Bomb is 6.
 The jumping bomb is small.
 The jumping bomb is not talker.
+The jumping bomb is not thrower.
 
 The jumping bomb is eyeless.
 The jumping bomb is emotionless.
@@ -1542,6 +1549,7 @@ The level of the Reaper is 2.
 The ID of the Reaper is 7.
 The Reaper is medium.
 The Reaper is talker.
+The Reaper is thrower.
 
 The description of the reaper is "He once used to be a man like any other, but his vocation has left him unnaturally pale and gaunt.".
 
@@ -1731,6 +1739,7 @@ The demon of rage is medium.
 The unlock level of the demon of rage is 2.
 The unlock hidden switch of the demon of rage is true.
 The demon of rage is talker.
+The demon of rage is thrower.
 
 The description of the demon of rage is "An amorphous swirl of red and black light, this demonic creature is the spirit of rage incarnate.".
 Instead of listening to the demon of rage:
@@ -1919,6 +1928,7 @@ The level of the hound is 2.
 The ID of the hound is 9.
 The hound is large.
 The hound is not talker.
+The hound is not thrower.
 
 The description of the hound is "The black hound is ever watchful, ready to punish its prey for any wrong move."
 
@@ -2072,6 +2082,7 @@ The unlock level of the angel of compassion is 7.
 The unlock hidden switch of the angel of compassion is false.
 The unlock text of the angel of compassion is "an angelic being that grows weaker whenever someone dies".
 The angel of compassion is talker.
+The angel of compassion is thrower.
 Angel of compassion is flyer.
 Radiation of angel of compassion is 4.
 
@@ -2253,6 +2264,7 @@ The level of the mindslug is 3.
 The ID of the mindslug is 10.
 The mindslug is huge.
 The mindslug is not talker.
+The mindslug is not thrower.
 
 The mindslug is group leading.
 The mindslug is defeated individually.
@@ -2373,6 +2385,7 @@ Fafhrd carries the claymore.
 Follower percentile chance of Fafhrd is 75.
 Fafhrd is weapon user.
 Fafhrd is talker.
+Fafhrd is thrower.
 
 Mouser is a mindslug-enslaved man. The description of Mouser is "Mouser is a small, fast man. You know his type from the alleys and alehouses of Montenoir.".
 The ID of Mouser is 12.
@@ -2385,6 +2398,7 @@ Health of Mouser is 10.
 Defence of Mouser is 9.
 Mouser is medium.
 Mouser is talker.
+Mouser is thrower.
 
 When play begins:
 	let X be a random natural weapon part of Mouser;
@@ -2680,6 +2694,7 @@ The level of giant tentacle is 3.
 The ID of the giant tentacle is 13.
 The giant tentacle is huge.
 The giant tentacle is not talker.
+The giant tentacle is thrower.
 
 The health of giant tentacle is 35.
 The melee of giant tentacle is 3.
@@ -3023,6 +3038,7 @@ The level of the minotaur is 3.
 The ID of the minotaur is 14.
 The minotaur is large.
 The minotaur is not talker.
+The minotaur is thrower.
 
 The unlock level of the minotaur is 2.
 The unlock hidden switch of the minotaur is true.
@@ -3151,6 +3167,7 @@ The healer of Aite is Aite-loved.
 The healer of Aite carries the holy sword.
 
 Healer of Aite is weapon user.
+Healer of Aite is thrower.
 
 When play begins:
 	let X be a random natural weapon part of healer of Aite;
@@ -3214,6 +3231,7 @@ The tormentor of Aite is Aite-loved.
 The tormentor of Aite carries a staff of pain.
 
 Tormentor of Aite is weapon user.
+Tormentor of Aite is thrower.
 
 When play begins:
 	let X be a random natural weapon part of tormentor of Aite;
@@ -3258,6 +3276,7 @@ The ID of the defender of Aite is 18.
 The defender of Aite is medium.
 
 The defender of Aite is talker.
+Defender of Aite is thrower.
 
 The level of the defender of Aite is 4.
 
@@ -3374,6 +3393,7 @@ The level of Bodmall is 4.
 The ID of Bodmall is 19.
 Bodmall is medium.
 Bodmall is talker.
+Bodmall is thrower.
 
 The health of Bodmall is 35.
 The melee of Bodmall is 5.
@@ -3972,6 +3992,7 @@ The level of the overmind is 4.
 The ID of the overmind is 31.
 The overmind is huge.
 The overmind is talker.
+The overmind is thrower.
 
 The unlock level of the overmind is 16.
 The unlock text of the overmind is "a psionic machine that strenghtens all its allies".
@@ -4202,6 +4223,7 @@ The level of Malygris is 5.
 The ID of Malygris is 20.
 Malygris is medium.
 Malygris is talker.
+Malygris is thrower.
 
 The health of Malygris is 55.
 The melee of Malygris is 7.
@@ -4398,6 +4420,7 @@ The level of demonic assassin is 0.
 The ID of the demonic assassin is 21.
 The demonic assassin is medium.
 The demonic assassin is talker.
+The demonic assassin is thrower.
 
 The demonic assassin is demonic.
 
@@ -4470,6 +4493,7 @@ The level of Nameless Horror is 10.
 The ID of the Nameless Horror is 22.
 The Nameless Horror is gargantuan.
 The Nameless Horror is not talker.
+The Nameless Horror is thrower.
 
 The health of Nameless Horror is 1000.
 The melee of Nameless Horror is 50.
@@ -4580,6 +4604,7 @@ The rotting corpse is an undead undead-faction monster. "An animated corpse sham
 The rotting corpse is emotionless.
 The rotting corpse is eyeless.
 The rotting corpse is not talker.
+The rotting corpse is thrower.
 
 The level of rotting corpse is 0.
 The ID of the rotting corpse is 23.
@@ -4664,6 +4689,8 @@ An aftereffects rule (this is the rotting corpse loses limbs rule):
 			decrease damage die of X by 1;
 			if item is rotting left arm or item is rotting right arm:
 				decrease damage die of X by 1;
+				if arms of the rotting corpse is 0:
+					now rotting corpse is not thrower;
 			if item is rotting left leg or item is rotting right leg:
 				decrease follower percentile chance of rotting corpse by 40.
 
@@ -4734,6 +4761,7 @@ Chapter - Aswang
 As-shape is a kind of value. The as-shapes are as-witch, as-bird and as-dog.
 The aswang has an as-shape. The as-shape of the aswang is as-witch.
 The aswang is talker.
+The aswang is thrower.
 
 The aswang is an undead undead-faction monster. "An aswang is here, having taken the shape of [if as-shape of aswang is as-witch]an ugly old woman[otherwise if as-shape of aswang is as-bird]a huge owl-like bird[otherwise]a ferocious black dog[end if]."
 Understand "witch" and "dog" and "hound" and "bird" and "owl" and "woman" and "ugly" and "old" as the aswang.
@@ -4942,6 +4970,7 @@ Chapter - Abyss of the Soul
 The abyss of the soul is an undead undead-faction monster. "Before you floats an abyss of the soul; it looks like a [size of the abyss of the soul] sphere of utter darkness."
 The abyss of the soul is small.
 The abyss of the soul is not talker.
+The abyss of the soul is not thrower.
 
 The description of the Abyss of the Soul is "This [size of the abyss of the soul] sphere of utter darkness is an abyss of the soul, one of the most fearsome of undead monsters. Not only does it sap the strength of all nearby living creatures, it also feeds on the souls of the recently departed.".
 
@@ -5048,6 +5077,7 @@ The description of the mummified priest is "Ancient embalming techniques have sa
 The mummified priest is emotionless.
 The mummified priest is eyeless.
 The mummified priest is talker.
+The mummified priest is thrower.
 
 The level of mummified priest is 0.
 The ID of the mummified priest is 29.
@@ -5146,6 +5176,8 @@ The zombie toad is an undead undead-faction monster.
 The description of the zombie toad is "This toad wasn't pretty when it was alive, and undeath hasn't improved its looks. Raising toads is a favourite pastime of very young necromancers once they've progressed beyond the stage of insects. Fortunately, a zombie toad isn't a real menace to anyone who is not a zombie fly."
 
 The zombie toad is emotionless.
+The zombie toad is not talker.
+The zombie toad is not thrower.
 
 The level of zombie toad is 0.
 The ID of the zombie toad is 32.
@@ -5219,6 +5251,7 @@ The level of the smoke demon is 0.
 The ID of the smoke demon is 26.
 The smoke demon is large.
 The smoke demon is not talker.
+The smoke demon is thrower.
 
 The smoke demon is smoke attuned.
 The smoke demon is flyer.
@@ -5395,6 +5428,7 @@ The imp is demonic. The level of the imp is 0.
 The ID of the imp is 27.
 The imp is small.
 The imp is talker.
+The imp is thrower.
 
 The imp is flyer.
 
@@ -5534,6 +5568,7 @@ The level of demonic mistress is 0.
 The ID of the demonic mistress is 28.
 The demonic mistress is medium.
 The demonic mistress is talker.
+The demonic mistress is thrower.
 
 The demonic mistress is demonic.
 
