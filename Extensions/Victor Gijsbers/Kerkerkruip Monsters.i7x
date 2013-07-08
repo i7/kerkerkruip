@@ -5500,7 +5500,7 @@ Carry out the imp imp-grabbing:
 	if lijst is empty:
 		try the imp teleporting instead.
 
-Carry out an actor teleporting (this is the imp teleporting rule):
+This is the imp teleporting rule:
 	if the actor is the imp:
 		if the location of the imp is the Lair of the Imp:
 			if location is teleportable:
@@ -5509,6 +5509,9 @@ Carry out an actor teleporting (this is the imp teleporting rule):
 				now teleportation-destination is location of the imp;
 		otherwise:
 			now teleportation-destination is Lair of the Imp;
+
+The imp teleporting rule is listed before the teleportation beacon rule in the carry out teleporting rules.
+
 
 Every turn when the imp is on-stage (this is the imp not absent AI rule):
 	if main actor is the player:
