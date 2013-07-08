@@ -10,7 +10,7 @@ Chapter - Retreating
 Section - Retreating action
 
 Retreating is an action applying to nothing.
-Understand "retreat" and "flee" as retreating.
+Understand "retreat" and "flee" and "run away" as retreating.
 
 A person can be a retreater. A person is usually not a retreater.
 
@@ -699,9 +699,11 @@ Understand "use [clothing]" as wearing.
 Understand "use [scroll]" as reading.
 Understand "use [grenade]" as throwing.
 Understand "use [fungicide contraption]" as spraying.
+Understand "use [weapon]" as readying.
 
 Understand "activate [something]" as switching on.
 Understand "deactivate [something]" as switching off.
+
 
 Chapter - New standard responses
 
@@ -802,8 +804,6 @@ Carry out asking for help:
 	try looking;
 	report the main action again;
 
-
-
 Chapter - Credits menu
 
 Understand "credit" or "credits" or "copyright" or "copyrights" or "licence" or "license" as requesting the story file version.
@@ -821,8 +821,7 @@ Carry out requesting the story file version:
 	clear only the main screen;
 	say "[variable letter spacing][total credits][paragraph break]";
 	pause the game;
-	end the displaying activity;
-
+	end the displaying activity; 
 
 
 Chapter - Replacing "You can see" is not a joke

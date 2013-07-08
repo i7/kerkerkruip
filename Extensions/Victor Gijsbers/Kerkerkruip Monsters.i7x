@@ -741,7 +741,7 @@ Section - Definitions
 
 Miranda is a monster. "A stunning young woman in a simple monk's robe awaits you."
 
-Miranda is proper-named. Miranda is female. Miranda is not neuter. Understand "woman" and "stunning" and "monk" as Miranda.
+Miranda is proper-named. Miranda is female. Miranda is not neuter. Understand "young" and "woman" and "stunning" and "monk" as Miranda.
 
 The level of Miranda is 1.
 The ID of Miranda is 4.
