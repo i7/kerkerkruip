@@ -2190,7 +2190,7 @@ Absorbing power of compassion:
 	let n be 5 + (2 * angel-of-compassion-strength);
 	increase permanent health of the player by n;
 	increase radiation of player by angel-of-compassion-strength;
-	say "As the angel dies, its radiance and compassion become yours. ([bold type]Power of compassion[roman type]: +1 attack, +1 defence, +[n] health, +[angel-of-compassion-strength] levels of radiance, and you can protect an aura of grief.)[paragraph break]";
+	say "As the angel dies, its radiance and compassion become yours. ([bold type]Power of compassion[roman type]: +1 attack, +1 defence, +[n] health, +[angel-of-compassion-strength] levels of radiance, and you can project an aura of grief.)[paragraph break]";
 
 Repelling power of compassion:
 	decrease melee of the player by 1;
