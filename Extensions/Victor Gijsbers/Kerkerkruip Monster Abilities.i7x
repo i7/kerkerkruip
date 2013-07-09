@@ -642,7 +642,7 @@ First carry out an actor teleporting (this is the choose a destination rule):
 	let destination be a random placed placeable teleportable room;
 	while destination is the location of the actor:
 		let destination be a random placed placeable teleportable room;
-	now teleportation-destination is destination;
+	now teleportation-destination is destination.	
 
 Last carry out an actor teleporting (this is the actually do the teleportation rule):
 	move actor to teleportation-destination;

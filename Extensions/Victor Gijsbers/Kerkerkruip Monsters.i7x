@@ -5465,7 +5465,11 @@ Imp-grabbing is an action applying to nothing.
 An AI action selection rule for the imp (this is the imp considers imping rule):
 	choose a blank Row in the Table of AI Action Options;
 	now the Option entry is the action of the imp imping;
-	now the Action Weight entry is a random number between 0 and 80.
+	now the Action Weight entry is a random number between 0 and 80;
+	if combat state of the imp is at-React:
+		if location is not Lair of the Imp:
+			unless imp is teleport impossible aware:
+				increase Action Weight entry by 1000.
 
 Carry out the imp imping:
 [	say "TEST: [combat state of the imp].";]
@@ -5500,7 +5504,7 @@ Carry out the imp imp-grabbing:
 	if lijst is empty:
 		try the imp teleporting instead.
 
-This is the imp teleporting rule:
+Carry out an actor teleporting (this is the imp teleporting rule):
 	if the actor is the imp:
 		if the location of the imp is the Lair of the Imp:
 			if location is teleportable:
@@ -5508,7 +5512,7 @@ This is the imp teleporting rule:
 			otherwise:
 				now teleportation-destination is location of the imp;
 		otherwise:
-			now teleportation-destination is Lair of the Imp;
+			now teleportation-destination is Lair of the Imp.
 
 The imp teleporting rule is listed before the teleportation beacon rule in the carry out teleporting rules.
 
