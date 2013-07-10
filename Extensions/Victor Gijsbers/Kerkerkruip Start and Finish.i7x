@@ -135,67 +135,52 @@ Chapter - Introduction Menu
 Figure opening figure is the file "smallercover.jpg".
 
 Rule for showing the title screen (this is the text title screen rule):
+	close the status window;[in case we've come to the menu with it open]
+	display the text menu;
 	while 1 is 1:
-		close the status window;[in case we've come to the menu with it open]
-		clear the screen;
-		[redraw status line;
-		say paragraph break;]	
-		if glulx text-buffer graphics is supported:
-			display figure opening figure[ centered];
-		otherwise:
-			say "[bold type]Kerkerkruip[roman type] -- by Victor Gijsbers";
-		say paragraph break;			
-		say fixed letter spacing;		
-		[say "'[story title]' by [story author]";
-		say paragraph break;]
-		say " SCORES:[line break]";
-		say "   Current level                :  [difficulty level difficulty] ([difficulty])[paragraph break]";
-		let best-level be data value 3;
-		say "   Highest level achieved       :  [difficulty level best-level] ([best-level])[line break][paragraph break]";
-		say "   Your total victories         :  [ data value 1][line break]";		
+		let key be the chosen letter;
+		let action be the rule produced by the menu command rules for key;
+		if the outcome of the rulebook is the start the game outcome:
+			close the text menu;
+			make no decision;
+		if rule succeeded:
+			close the text menu;
+			consider action;
+			display the text menu;
+
+To display the text menu:
+	clear the screen;
+	[redraw status line;
+	say paragraph break;]	
+	if glulx text-buffer graphics is supported:
+		display figure opening figure[ centered];
+	otherwise:
+		say "[bold type]Kerkerkruip[roman type] -- by Victor Gijsbers";
+	say paragraph break;			
+	say fixed letter spacing;		
+	[say "'[story title]' by [story author]";
+	say paragraph break;]
+	say " SCORES:[line break]";
+	say "   Current level                :  [difficulty level difficulty] ([difficulty])[paragraph break]";
+	let best-level be data value 3;
+	say "   Highest level achieved       :  [difficulty level best-level] ([best-level])[line break][paragraph break]";
+	say "   Your total victories         :  [ data value 1][line break]";		
 [		say "   Your current winning streak  :    [unless winning-streak is greater than 9] [end if][unless winning-streak is greater than 99] [end if] [winning-streak][line break]";
-		say "   Your best winning streak     :  [unless best-winning-streak is greater than 9] [end if][unless best-winning-streak is greater than 99] [end if]   [best-winning-streak][paragraph break]";]
-		say paragraph break;
-		say " ACTIONS:[line break]";
-		say "   [if the file of save data exists]Continue the game[otherwise]New game         [end if]            :    (SPACE)[line break]";
-		if the file of save data exists:
-			say "   New game                     :       N[line break]";
-		if difficulty is 0:
-			say "   Skip to Apprentice level     :       S[line break]";	
-		say "   Display menu                 :       M[line break]";
-		say "   Options                      :       O[line break]";
-		say "   Quit                         :       Q[line break]";  
-		say variable letter spacing;
-		let redraw be 0;
-		while redraw is 0:
-			let k be the chosen letter;
-			[ Space/Enter/C/N: continue ]
-			if k is 32 or k is -6 or k is 67 or k is 99 or k is 110 or k is 78:
-				if file of save data exists and (k is 110 or k is 78):
-					delete file of save data;
-					unless difficulty is less than 2:
-						set difficulty to (difficulty - 1);
-				clear the screen;
-				make no decision;	
-			[ S: skip to apprentice level]	
-			otherwise if (k is 115 or k is 83) and difficulty is 0:
-				set difficulty to 1;
-				delete file of save data;
-				clear the screen; 
-				make no decision;
-			[ Q: quit ]
-			otherwise if k is 113 or k is 81:
-				stop game abruptly;
-			[ O: options menu ]
-			otherwise if k is 111 or k is 79:
-				now the current menu is Table of Options Menu;
-				carry out the displaying activity;
-				now redraw is 1;
-			[ M: menu ]
-			otherwise if k is 109 or k is 77:
-				now the current menu is Table of Kerkerkruip Help;
-				carry out the displaying activity;
-				now redraw is 1;
+	say "   Your best winning streak     :  [unless best-winning-streak is greater than 9] [end if][unless best-winning-streak is greater than 99] [end if]   [best-winning-streak][paragraph break]";]
+	say paragraph break;
+	say " ACTIONS:[line break]";
+	say "   [if the file of save data exists]Continue the game[otherwise]New game         [end if]            :    (SPACE)[line break]";
+	if the file of save data exists:
+		say "   New game                     :       N[line break]";
+	if difficulty is 0:
+		say "   Skip to Apprentice level     :       S[line break]";	
+	say "   Display menu                 :       M[line break]";
+	say "   Options                      :       O[line break]";
+	say "   Quit                         :       Q[line break]";  
+	say variable letter spacing;
+
+To close the text menu:
+	clear the screen; 
 
 To say difficulty level (m - a number):
 	if m is 0:
@@ -222,6 +207,76 @@ To say difficulty level (m - a number):
 		say "ANGEL[run paragraph on]";
 	if m is greater than 10:
 		say "[if player is not female]GOD[otherwise]GODDESS[end if][run paragraph on]".
+
+Section - Menu commands
+
+The menu command rules are a number based rulebook producing a rule. The menu command rules have outcomes start the game.
+
+[ N: new ]
+Definition: a number is new:
+	if it is 110, yes;
+	if it is 78, yes;
+	no.
+Menu command new:
+	if file of save data exists:
+		delete file of save data;
+		unless difficulty is less than 2:
+			set difficulty to (difficulty - 1);
+	start the game;
+
+[ Space/Enter/C: continue ]
+Definition: a number is continue:
+	if it is 32, yes;
+	if it is -6, yes;
+	if it is 67, yes;
+	if it is 99, yes;
+	no.
+Menu command continue:
+	start the game;
+	
+[ S: skip to apprentice level ]
+Definition: a number is skip:
+	if it is 115, yes;
+	if it is 83, yes;
+	no.
+Menu command skip:
+	if difficulty is 0:
+		set difficulty to 1;
+		delete file of save data;
+		start the game;
+
+[ Q: quit ]
+Definition: a number is quit:
+	if it is 113, yes;
+	if it is 81, yes;
+	no.
+Menu command quit:
+	stop the game abruptly;
+
+[ O: options menu / can't call it options as it conflicts with the table name ]
+Definition: a number is settings:
+	if it is 111, yes;
+	if it is 79, yes;
+	no.
+Menu command settings:
+	rule succeeds with result the show the options menu rule;
+
+This is the show the options menu rule:
+	now the current menu is Table of Options Menu;
+	carry out the displaying activity;
+
+[ M: menu ]
+Definition: a number is menu:
+	if it is 109, yes;
+	if it is 77, yes;
+	no.
+Menu command menu:
+	rule succeeds with result the show the menu rule;
+
+This is the show the menu rule:
+	now the current menu is Table of Kerkerkruip Help;
+	carry out the displaying activity;
+
 
 
 Section - Options Menu
