@@ -688,11 +688,14 @@ Carry out direction-jumping:
 
 Chapter - More synonyms
 
-Understand "jump in [something]" as entering.
-Understand "jump into [something]" as entering.
-Understand "throw [something] in [something]" as inserting it into.
-Understand "throw [something] into [something]" as inserting it into.
-Understand "drop [something] in [something]" as inserting it into.
+Understand "jump in/into [something]" as entering.
+Understand "throw [something] in/into [something]" as inserting it into.
+Understand "drop [something] in/into [something]" as inserting it into.
+
+[ Allow "insert noun" to automatically choose the appropriate machine. ]
+Understand "insert [something] into/in [something]" as inserting it into.
+Does the player mean inserting into a container:
+	it is likely.
 
 Understand the command "equip" as "use".
 Understand "use [clothing]" as wearing.
@@ -703,6 +706,7 @@ Understand "use [weapon]" as readying.
 
 Understand "activate [something]" as switching on.
 Understand "deactivate [something]" as switching off.
+
 
 
 Chapter - New standard responses
