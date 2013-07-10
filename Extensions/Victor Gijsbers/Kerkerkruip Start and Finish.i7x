@@ -143,7 +143,9 @@ Rule for showing the title screen (this is the text title screen rule):
 		if the outcome of the rulebook is the start the game outcome:
 			close the text menu;
 			make no decision;
-		if rule succeeded:
+		otherwise if the outcome of the rulebook is the quit outcome:
+			stop the game abruptly;
+		otherwise if rule succeeded:
 			close the text menu;
 			consider action;
 			display the text menu;
@@ -210,7 +212,7 @@ To say difficulty level (m - a number):
 
 Section - Menu commands
 
-The menu command rules are a number based rulebook producing a rule. The menu command rules have outcomes start the game.
+The menu command rules are a number based rulebook producing a rule. The menu command rules have outcomes quit and start the game.
 
 [ N: new ]
 Definition: a number is new:
@@ -251,7 +253,7 @@ Definition: a number is quit:
 	if it is 81, yes;
 	no.
 Menu command quit:
-	stop the game abruptly;
+	quit;
 
 [ O: options menu / can't call it options as it conflicts with the table name ]
 Definition: a number is settings:
@@ -265,8 +267,10 @@ This is the show the options menu rule:
 	now the current menu is Table of Options Menu;
 	carry out the displaying activity;
 
-[ M: menu ]
+[ H/M: menu ]
 Definition: a number is menu:
+	if it is 104, yes;
+	if it is 72, yes;
 	if it is 109, yes;
 	if it is 77, yes;
 	no.

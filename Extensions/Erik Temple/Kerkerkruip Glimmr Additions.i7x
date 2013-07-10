@@ -1045,85 +1045,56 @@ Glulx character input rule when the graphics-window is g-present (this is the gr
 		#if utilizing animation debugging;
 		say "[>console][CA]Key pressed ([key]).[<]";
 		#end if;
-		if key means continue or key means new game:
-			if file of save data exists and key means new game:
-				follow the graphlink processing rules for New_Game;
-			otherwise unless file of save data exists:
-				follow the graphlink processing rules for New_Game;
-			otherwise:
-				follow the graphlink processing rules for Continue_Game;
-		if key means show help menu:
-			follow the graphlink processing rules for Help_Button;
-		if key means show options:
-			follow the graphlink processing rules for Options_Button;
-		if key means quit game:
-			follow the graphlink processing rules for Quit_Game;
-		if key means skip novice mode and difficulty is 0:
-			follow the graphlink processing rules for Skip_Button;
-		if key means show score info tooltip:
-			follow the graphlink processing rules for ScoreInfo_Button.
+		handle graphical key code key;
+
+To handle graphical key code (key - a number):
+	let action be the rule produced by the menu command rules for key;
+	if rule succeeded:
+		cease animating all tracks but the button-press track;
+	if the outcome of the rulebook is the start the game outcome:
+		move on from main menu, deactivating it;
+	otherwise if the outcome of the rulebook is the quit outcome:
+		now menu-active is false;
+		menu-quit game;
+	otherwise if rule succeeded:
+		close title screen;
+		consider action;
+		move on from main menu;
 
 
 Section - Key codes
 
-To decide whether (keypress - a number) means continue:
-	if keypress is 32 or keypress is 67 or keypress is 99 or keypress is -6:
-		decide yes.
-	
-To decide whether (keypress - a number) means new game[N(ew) or space]:
-	if keypress is 78 or keypress is 110, decide yes.
-
-To decide whether (keypress - a number) means show options:[O(ptions)]
-	if keypress is 79 or keypress is 111, decide yes.
-	
-To decide whether (keypress - a number) means show help menu:[H(elp) or M(enu)]
-	if keypress is 72 or keypress is 104 or keypress is 77 or keypress is 109, decide yes.
-	
-To decide whether (keypress - a number) means quit game:[Q(uit)]
-	if keypress is 81 or keypress is 113, decide yes.
-	
-To decide whether (keypress - a number) means skip novice mode:[S(kip)]
-	if keypress is 83 or keypress is 115 and difficulty is 0, decide yes.
-
-To decide whether (keypress - a number) means show score info tooltip:[(I)nfo]
-	if keypress is 73 or keypress is 105, decide yes.
-	
-[To decide whether (keypress - a number) means reset victories:[R(eset)]
-	if keypress is 82 or keypress is 114, decide yes.
-
-To decide whether (keypress - a number) means unlock all content:[U(nlock)]
-	if keypress is 85 or keypress is 117 and (data value 4) is not 100, decide yes.]
+[ I: info tooltip ]
+Definition: a number is info:
+	if it is 73, yes;
+	if it is 105, yes;
+	no.
+Menu command info:
+	follow the graphlink processing rules for ScoreInfo_Button;
 
 
 Section - Graphic links
 
 Graphlink processing rule for New_Game:
-	cease animating all tracks but the button-press track;
-	menu-start new game;
-	move on from main menu, deactivating it.
+	handle graphical key code 78;
 	
 Graphlink processing rule for Continue_Game:
-	cease animating all tracks but the button-press track;
-	move on from main menu, deactivating it.
+	handle graphical key code 32;
 	
 Graphlink processing rule for Quit_Game:
-	cease animating all tracks but the button-press track;
-	now menu-active is false;
-	menu-quit game.
+	handle graphical key code 81;
 
 Graphlink processing rule for Options_Button:
-	cease animating all tracks but the button-press track;
-	menu-request options menu;
-	move on from main menu.
+	handle graphical key code 79;
 
 Graphlink processing rule for Help_Button:
-	cease animating all tracks but the button-press track;
-	menu-request help menu;
-	move on from main menu.
+	handle graphical key code 72;
 
 Graphlink processing rule for Skip_Button:
-	menu-skip novice;
-	animate the button-fade track as a fade animation targeting the Skip_Button and using the Black-fader from 0 percent to 100 percent at 8 fps with a duration of 3 frames.
+	handle graphical key code 83;
+
+First menu command skip:
+	animate the button-fade track as a fade animation targeting the Skip_Button and using the Black-fader from 0 percent to 100 percent at 8 fps with a duration of 3 frames;
 
 The button-fade track is an animation track. The animation-callback is "[@ process visuals after skipping difficulty]".
 
