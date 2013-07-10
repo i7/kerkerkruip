@@ -2,7 +2,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Product Id="*"
 		Name="Kerkerkruip" Manufacturer="Victor Gijsbers"
-		Version="7.0.0.0"
+		Version="8.0.0.0"
 		Language="1033" UpgradeCode="d4ad0fbc-7903-4637-af41-d701e38117d1">
 		<Package
 			InstallerVersion="300"
@@ -19,7 +19,7 @@
 				<Directory Id="INSTALLDIR" Name="Kerkerkruip">
 				
 					<!-- Gargoyle! -->
-					<Component Id="Gargoyle" Guid="b051e1d0-3ab3-4747-ae1d-6b94beb65b19">
+					<Component Id="Gargoyle" Guid="265442E0-1950-4BB3-880C-9F79AC1D1E64">
 						<File Source="gargoyle\git.exe"/>
 						<File Source="gargoyle\freetype6.dll"/>
 						<File Source="gargoyle\libgarglk.dll"/>
@@ -38,7 +38,7 @@
 					</Component>
 					
 					<!-- Kerkerkruip! -->
-					<Component Id="Kerkerkruip" Guid="322e78b2-00ce-443d-8b31-bb331103ed8b">
+					<Component Id="Kerkerkruip" Guid="0F1DA9AC-7C49-47A5-A08F-856C4FBF51FB">
 						<File Source="Kerkerkruip.gblorb"/>
 						<File Source="..\..\Projects\Kerkerkruip Materials\Kerkerkruip.ini"/>
 						<RegistryValue Root="HKCU" Key="Software\Kerkerkruip" Name="Kerkerkruip" Type="string" Value="[ProductVersion]" KeyPath="yes"/>
@@ -50,12 +50,13 @@
 			
 			<Directory Id="ProgramMenuFolder">
 				<Directory Id="ProgramMenuSubfolder" Name="Kerkerkruip">
-					<Component Id="ApplicationShortcuts" Guid="a09c1970-eb88-484b-a01b-4de1c43f9d5c">
+					<Component Id="ApplicationShortcuts" Guid="9DC9AE1B-A481-43C2-820C-A65C7AF93F8B">
 						<Shortcut Id="ApplicationShortcut1"
 							Name="Kerkerkruip"
 							Target="[INSTALLDIR]git.exe"
 							Arguments="Kerkerkruip.gblorb"
-							WorkingDirectory="INSTALLDIR"/>
+							WorkingDirectory="INSTALLDIR"
+							Show="maximized"/>
 						<RegistryValue Root="HKCU" Key="Software\Kerkerkruip" Name="Shortcut" Type="string" Value="[ProductVersion]" KeyPath="yes"/>
 						<RemoveFolder Id="ProgramMenuSubfolder" On="uninstall"/>
 					</Component>

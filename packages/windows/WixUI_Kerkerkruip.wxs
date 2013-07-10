@@ -32,7 +32,7 @@
 				<Control Id="BottomLine" Type="Line" X="0" Y="234" Width="370" Height="0" />
 				<Control Id="Title" Type="Text" X="135" Y="20" Width="220" Height="60" Transparent="yes" NoPrefix="yes" Text="{\WixUI_Font_Bigger}Kerkerkruip has been installed!" />
 				<Control Id="Description" Type="Text" X="135" Y="70" Width="220" Height="40" Transparent="yes" NoPrefix="yes" Text="The dungeon awaits you..." />
-				<Control Id="Finish" Type="PushButton" X="130" Y="243" Width="120" Height="17" Default="yes" Text="Play Kerkerkruip Now">
+				<Control Id="Finish" Type="PushButton" X="130" Y="243" Width="0" Height="0" Default="yes" Text="Play Kerkerkruip Now">
 					<Publish Event="DoAction" Value="LaunchApplication">1</Publish>
 				</Control>
 				<Control Id="Cancel" Type="PushButton" X="304" Y="243" Width="56" Height="17" Cancel="yes" Text="Close">
