@@ -1531,7 +1531,7 @@ The large-teleportation-grenade-pack is a major treasure pack. Two teleportation
 The large-teleportation-grenade-pack is magical.
 
 The first-misc-grenade-pack is a major treasure pack. One fragmentation grenade is in the first-misc-grenade-pack. One teleportation grenade is in the first-misc-grenade-pack. One flash grenade is in the first-misc-grenade-pack.
-
+The first-misc-grenade-pack is alchemical.
 
 
 
