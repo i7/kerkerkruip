@@ -4029,7 +4029,7 @@ The legend-label of overmind is Figure of map_legend_overmind.
 Section - Overmind can break concentration
 
 Overmind is concentration-breaking reactor.
-Cbr strength of overmind is 10.
+Cbr strength of overmind is 12.
 
 First cbr text of overmind is "The overmind quickly launches a tiny sphere of metal, attempting to break [possessive of the noun] concentration. [italic type][run paragraph on]".
 Cbr fail text of overmind is "[roman type] The sphere misses, and [possessive of the noun] attack continues unhampered.[paragraph break]".
