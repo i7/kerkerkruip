@@ -833,7 +833,7 @@ Report Miranda parrying:
 	rule succeeds.
 
 Report Miranda dodging:
-	say "Miranda [if Miranda is not at-roll]jumps aside[otherwise] rolls towards [the main actor][end if].";
+	say "Miranda [if Miranda is not at-roll]jumps aside[otherwise]rolls towards [the main actor][end if].";
 	rule succeeds.
 
 Report Miranda concentrating:
