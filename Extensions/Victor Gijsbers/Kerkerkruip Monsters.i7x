@@ -1875,7 +1875,7 @@ Repelling power of rage:
 
 Status skill rule (this is the rage power status skill rule):
 	if power of rage is granted:
-		say "You can [bold type]howl[roman type] in rage. Your attack bonus increases by 4 for the next attack, and your damage increased by an amount that depends on your mind score. However, your defence permanently decreases by 1. [italic type](Level 2)[roman type][line break][run paragraph on]".
+		say "You can [bold type]howl[roman type] in rage. Your attack bonus increases by 4 for the next attack, and your damage increased by 2 + mind/3. However, your defence permanently decreases by 1. [italic type](Level 2)[roman type][line break][run paragraph on]".
 
 Section - Howling
 
@@ -1911,7 +1911,9 @@ Aftereffects rule (this is the take away howling rule):
 Status attribute rule (this is the howling status rule):
 	if the player is at-howl:
 		if long status is true:
-			say "You are [bold type]howling[roman type]: +4 to attack, +4 to damage.[line break][run paragraph on]";
+			let n be final mind of the player / 3;
+			increase n by 2;		
+			say "You are [bold type]howling[roman type]: +4 to attack, +[n] to damage.[line break][run paragraph on]";
 		otherwise:
 			say "[@ check initial position of attribute]howling[run paragraph on]";
 
