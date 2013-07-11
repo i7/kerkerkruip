@@ -5479,7 +5479,7 @@ An AI action selection rule for the imp (this is the imp considers imping rule):
 Carry out the imp imping:
 [	say "TEST: [combat state of the imp].";]
 	if the combat state of the imp is at-React:
-		if a random chance of 1 in 2 succeeds:
+		if (the location of the imp is not Lair of the Imp) and (the imp is not teleport impossible aware):
 			try the imp teleporting instead;
 		otherwise:
 			try the imp dodging instead;
