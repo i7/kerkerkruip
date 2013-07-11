@@ -2739,7 +2739,7 @@ A contact rule (this is the evil dagger bonus rule):
 	if the global attacker weapon is the evil dagger:
 		if a random chance of (1 + blood magic level of evil dagger) in 100 succeeds:
 			now health of global defender is -1;
-			say "[roman type]The evil magic of the dagger [bold type]immediately kills[roman type] [the global defender]!";
+			say "[roman type]The evil magic of the dagger [bold type]immediately kills[roman type] [no dead property][the global defender][dead property]!";
 			rule fails.
 
 Section - Dagger of the double strike (major)
