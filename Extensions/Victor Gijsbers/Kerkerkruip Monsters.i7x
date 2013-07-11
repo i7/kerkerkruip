@@ -4026,6 +4026,14 @@ Section - Overmind images for the map (for use with Kerkerkruip Glimmr Additions
 The avatar of overmind is Figure of map_monster_overmind.
 The legend-label of overmind is Figure of map_legend_overmind.
 
+Section - Overmind can break concentration
+
+Overmind is concentration-breaking reactor.
+Cbr strength of overmind is 10.
+
+First cbr text of overmind is "The overmind quickly launches a tiny sphere of metal, attempting to break [possessive of the noun] concentration. [italic type][run paragraph on]".
+Cbr fail text of overmind is "[roman type] The sphere misses, and [possessive of the noun] attack continues unhampered.[paragraph break]".
+Cbr success text of overmind is "[roman type] The sphere hits, making [bold type][the noun] lose concentration[roman type]![paragraph break]".
 
 Section - Overmind bonus
 
