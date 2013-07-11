@@ -2748,7 +2748,7 @@ The dagger of the double strike is a major dagger.
 The dagger of the double strike is civilised.
 The dagger of the double strike is iron.
 
-The damage die of the dagger of the double strike is 1.
+The damage die of the dagger of the double strike is 2.
 The weapon attack bonus of the dagger of double strike is -2.
 
 The description of the dagger of the double strike is "The dagger looks dull and far from dangerous. But appearances deceive, for this weapon has been imbued with a dangerous magic.".
