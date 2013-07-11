@@ -1178,7 +1178,7 @@ To find the corpse:
 		move putrefying arm to player;
 	now pile search count is -2; [ Account for the increment ]
 
-The putrefying arm is a 	weapon.
+The putrefying arm is a weapon.
 The description of putrefying arm is "Although it smells terribly, this arm is actually quite sturdy. You could beat people with it.".
 The damage die of putrefying arm is 8.
 The weapon attack bonus of putrefying arm is 1.

@@ -3970,7 +3970,10 @@ Fruit-launching shimmering fruit:
 			let n be teleport amount of guy;
 			try the guy teleporting;
 			now teleport amount of guy is n; [compensating]
-	teleport the player.
+	unless teleportation is impossible for the player:
+		teleport the player;
+	otherwise:
+		say "Something has stopped you from teleporting.";
 
 [Section - Testing
 

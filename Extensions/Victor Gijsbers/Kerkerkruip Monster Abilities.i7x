@@ -634,7 +634,7 @@ Check an actor teleporting (this is the teleport impossible rule):
 	if teleportation is impossible for the actor:
 		now the actor is teleport impossible aware;
 		if the actor is visible:
-			say "[The actor] tries to teleport away, but something makes this impossible!" instead;
+			say "For a moment, [the actor] seems to teleport away, but some force interrupts the process!" instead;
 		otherwise:
 			do nothing instead.
 

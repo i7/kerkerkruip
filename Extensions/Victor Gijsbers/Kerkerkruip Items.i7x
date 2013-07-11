@@ -1470,6 +1470,37 @@ An exploding rule:
 					end the story saying "The undead should not seek blessings.";
 		remove the noun from play.
 
+Section - Teleportation grenade
+
+A teleportation grenade is a kind of grenade. The description of a teleportation grenade is "When thrown, this grenade will release powerful magic that randomly teleports everyone in the room.".
+A teleportation grenade is iron.
+Understand "tele" and "teleport" as a teleportation grenade.
+
+An exploding rule:
+	if the exploding-grenade is a teleportation grenade:
+		if the noun is rusted and a random chance of 1 in 2 succeeds:
+			if exploding-location is the location:
+				say "There is only a feeble explosion. The rust must have rendered the teleportation grenade useless.";
+			otherwise:
+				say "The explosion does seem to be very feeble, though.";
+		otherwise:
+			if exploding-location is location:
+				say "The teleportation grenade explodes in a dazzling, multi-coloured flash!";
+			repeat with guy running through alive people in exploding-location:
+				if guy is not the player:
+					let n be teleport amount of guy;
+					try the guy teleporting;
+					now teleport amount of guy is n; [compensating]
+					if follower percentile chance of guy is greater than 20:
+						decrease follower percentile chance of guy by 10; [disoriented]
+			if exploding-location is location:
+				unless teleportation is impossible for the player:
+					teleport the player;
+				otherwise:
+					say "Something has stopped you from teleporting.";
+		remove noun from play.
+
+
 Section - Grenade packs
 
 The small-flash-grenade-pack is a minor treasure pack. Two flash grenades are in the small-flash-grenade-pack.
@@ -1493,9 +1524,13 @@ The small-fragmentation-grenade-pack is alchemical.
 The large-fragmentation-grenade-pack is a major treasure pack. Two fragmentation grenades are in the large-fragmentation-grenade-pack.
 The large-fragmentation-grenade-pack is alchemical.
 
+The small-teleportation-grenade-pack is a minor treasure pack. One teleportation grenade is in the small-teleportation-grenade-pack.
+The small-teleportation-grenade-pack is magical.
 
+The large-teleportation-grenade-pack is a major treasure pack. Two teleportation grenades are in the large-teleportation-grenade-pack.
+The large-teleportation-grenade-pack is magical.
 
-
+The first-misc-grenade-pack is a major treasure pack. One fragmentation grenade is in the first-misc-grenade-pack. One teleportation grenade is in the first-misc-grenade-pack. One flash grenade is in the first-misc-grenade-pack.
 
 
 
