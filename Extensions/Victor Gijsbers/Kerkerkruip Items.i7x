@@ -3309,7 +3309,7 @@ The description of the glass cannon is "At first sight this seems to be nothing 
 
 The damage die of the glass cannon is 0.
 The weapon attack bonus of the glass cannon is 3.
-The weapon damage bonus of the glass cannon is 12.
+The weapon damage bonus of the glass cannon is 10.
 The dodgability of the glass cannon is 2.
 The passive parry max of the glass cannon is 0.
 The active parry max of the glass cannon is 3.
