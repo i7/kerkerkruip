@@ -559,7 +559,7 @@ Miranda's amulet is a necklace. Miranda's amulet is proper-named.
 Miranda's amulet is magical.
 Miranda's amulet is silver.
 
-The description of Miranda's amulet is "This silver amulet, shaped like the sun and imbued with magic, was given to Miranda by her father when she set out on a live of adventure. It will reflect ranged attacks back to the attacker 10% of the time.".
+The description of Miranda's amulet is "This silver amulet, shaped like the sun and imbued with magic, was given to Miranda by her father when she set out on a life of adventure. It will reflect ranged attacks back to the attacker 10% of the time.".
 
 Check an actor hitting when the noun wears Miranda's amulet (this is the Miranda's amulet rule):
 	if the global attacker weapon is ranged:
