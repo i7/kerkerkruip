@@ -11,7 +11,7 @@ Include version 4/121111 of Menus by Emily Short. [Get this at https://github.co
 Include Basic Screen Effects by Emily Short. 
 Include Numbered Disambiguation Choices by Aaron Reed.
 Include Glulx Entry Points by Emily Short.
-Include Dynamic Objects by Jesse McGrew.
+Include version 7/130712 of Dynamic Objects by Jesse McGrew. [Get this at https://github.com/i7/extensions]
 Include Glulx Status Window Control by Erik Temple.
 Include Fixed Point Maths by Michael Callaghan.
 Include Questions by Michael Callaghan.
