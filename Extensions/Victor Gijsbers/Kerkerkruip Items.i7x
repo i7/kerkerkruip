@@ -1276,11 +1276,9 @@ Exploding-grenade is a thing that varies.
 
 The exploding rules are a rulebook.
 
-Last exploding rule (this is the exploding wakes people up rule):
+First exploding rule (this is the exploding wakes people up rule):
 	repeat with guy running through asleep persons in exploding-location:
-		now guy is not asleep;
-		if player is in exploding-location:
-			say "[The main actor] [bold type]wake[s] up[roman type]!".
+		now guy is not asleep.
 
 Section - Normal throwing
 
@@ -1506,6 +1504,27 @@ An exploding rule:
 					say "Something has stopped you from teleporting.";
 		remove noun from play.
 
+Section - Morphean grenade
+
+A Morphean grenade is a kind of grenade. The description of a Morphean grenade is "When thrown, this grenade will release a sleeping gas that drives everyone into the embrace of Morpheus."
+A Morphean grenade is iron.
+
+An exploding rule:
+	if the exploding-grenade is a Morphean grenade:
+		if the noun is rusted and a random chance of 1 in 2 succeeds:
+			if exploding-location is the location:
+				say "There is only a feeble explosion. The rust must have rendered the Morphean grenade useless.";
+			otherwise:
+				say "The explosion does seem to be very feeble, though.";
+		otherwise:
+			if exploding-location is location:
+				say "The Morphean grenade explodes, and you are immediately engulfed in dreams. Joyous dreams, terrible dreams, dreams that seem to be more real than they have any right to be. An indefinite amount of time later, you awake -- and nothing seems to have changed."; [Opportunity for COOL STUFF (TM).]
+			otherwise:
+				repeat with guy running through alive people in exploding-location:
+					now guy is asleep;
+					say "TEST: [guy] asleep.";
+		remove noun from play.
+
 
 Section - Grenade packs
 
@@ -1536,10 +1555,17 @@ The small-teleportation-grenade-pack is magical.
 The large-teleportation-grenade-pack is a major treasure pack. Two teleportation grenades are in the large-teleportation-grenade-pack.
 The large-teleportation-grenade-pack is magical.
 
+The small-Morphean-grenade-pack is a minor treasure pack. One Morphean grenade is in the small-Morphean-grenade-pack.
+The small-Morphean-grenade-pack is magical.
+
+The large-Morphean-grenade-pack is a major treasure pack. Two Morphean grenades are in the large-Morphean-grenade-pack.
+The large-Morphean-grenade-pack is magical.
+
 The first-misc-grenade-pack is a major treasure pack. One fragmentation grenade is in the first-misc-grenade-pack. One teleportation grenade is in the first-misc-grenade-pack. One flash grenade is in the first-misc-grenade-pack.
 The first-misc-grenade-pack is alchemical.
 
-
+The second-misc-grenade-pack is a major treasure pack. One fragmentation grenade is in the second-misc-grenade-pack. One Morphean grenade is in the second-misc-grenade-pack. One rust grenade is in the second-misc-grenade-pack.
+The second-misc-grenade-pack is alchemical.
 
 
 
