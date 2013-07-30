@@ -810,18 +810,18 @@ Last check inserting something into the curious machine:
 	if the noun is a grenade:
 		say "The machine beeps angrily and rejects [the noun].";
 	otherwise:
-		if more than zero grenades are off-stage:
-			let chosen grenade be a random flash grenade;
-			let m be a random number between 1 and 4;
-			if m is 2, now chosen grenade is a random rust grenade;
-			if m is 3, now chosen grenade is a random fragmentation grenade;
-			if m is 4, now chosen grenade is a random smoke grenade;
-			let item be a new object cloned from chosen grenade;
-			move item to the location;
-			remove the noun from play;
-			say "You put [the noun] in the curious machine. It starts clicking and beeping, and after a short while, [an item] drops on the ground.";
-		otherwise:
-			say "You put [the noun] in the curious machine, but when nothing happens, you take it out again.";
+		let chosen grenade be a random flash grenade;
+		let m be a random number between 1 and 6;
+		if m is 2, now chosen grenade is a random rust grenade;
+		if m is 3, now chosen grenade is a random fragmentation grenade;
+		if m is 4, now chosen grenade is a random smoke grenade;
+		if m is 5, now chosen grenade is a random teleportation grenade;
+		if m is 6, now chosen grenade is a random Morphean grenade;
+		if a random chance of 1 in 100 succeeds, now chosen grenade is the Blessed Grenade;
+		let item be a new object cloned from chosen grenade;
+		move item to the location;
+		remove the noun from play;
+		say "You put [the noun] in the curious machine. It starts clicking and beeping, and after a short while, [an item] drops on the ground.";
 	rule succeeds.
 
 
