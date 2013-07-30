@@ -12,6 +12,7 @@ There is a god called Aite. Aite is female.
 There is a god called Nomos. Nomos is male.
 There is a god called Sul. Sul is female.
 There is a god called Chton. Chton is male.
+There is a god called Herm. Herm is male.
 
 Section - Worship
 
@@ -697,6 +698,65 @@ To have Chton intervene:
 		say "no damage to anyone.";
 	if health of the player is less than 1:
 		end the story saying "Quem di diligunt, adolescens moritur".	
+
+
+
+Chapter - Herm
+
+Herm-treasure-chest is a container.
+One scroll of knowledge and one scroll of mapping are in Herm-treasure-chest.
+
+Herm-backup-chest is a container.
+Six scrolls of shadows, three scrolls of psycholocation, and two scrolls of shadows are in Herm-backup-chest.
+
+To do a Herm gift:
+	let item be a random thing in Herm-treasure-chest;
+	move item to player;
+	if at least one thing is in Herm-backup-chest:
+		let item be a random thing in Herm-backup-chest;
+		move item to Herm-treasure-chest.
+
+Favour rule for Herm (this is the Herm favour 1 rule):
+	if divine favour is 1:
+		say "The subtle Herm welcomes you, and gifts you two scrolls.";
+		do a Herm gift;
+		do a Herm gift.
+
+Favour rule for Herm (this is the Herm favour 3 rule):
+	if divine favour is 3:
+		say "Herm gifts you two scrolls and a permanent +1 bonus to hiding.";
+		do a Herm gift;
+		do a Herm gift.
+
+Favour rule for Herm (this is the Herm favour 6 rule):
+	if divine favour is 6:
+		say "Herm gifts you three scrolls[unless player encloses magical spade] and a magical spade; and increases your hiding bonus to +2.";
+		do a Herm gift;
+		do a Herm gift;
+		do a Herm gift;
+		unless player encloses magical spade:
+			move magical spade to player.
+
+Favour rule for Herm (this is the Herm favour 9 rule):
+	if divine favour is 9:
+		say "Herm gifts you three scrolls and the caduceus; and increases your hiding bonus to +3.";
+		do a Herm gift;
+		do a Herm gift;
+		do a Herm gift;
+		move caduceus to player.
+
+A detection rule (this is the Herm worship decreases probability of detection rule):
+	if the player worships Herm:
+		let n be 0;
+		if divine favour > 2:
+			now n is 1;
+		if divine favour > 5:
+			now n is 2;
+		if divine favour > 8:
+			now n is 3;
+		if n > 0:
+			say " + [n] (worshipping Herm)[run paragraph on]";
+			increase the hiding roll by n.
 
 			
 Kerkerkruip Religion ends here.

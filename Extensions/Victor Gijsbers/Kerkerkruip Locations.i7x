@@ -521,6 +521,31 @@ Section - Temple of Chton label for the map (for use with Kerkerkruip Glimmr Add
 The map-label of Temple of Chton is Figure of map_label_Chton.
 
 
+Chapter - Temple of Herm
+
+The temple of Herm is a room. "Shadows are everywhere, and you feel that the subtle god Herm might be hiding in any of them -- or in none. Warriors despise, for they assume that Herm is cowardly; mages respect him, for he is a source of knowlegde; but only those unwilling or too weak to fight truly love him."
+
+Temple of Herm is dedicated to Herm.
+
+Temple of Herm is connectable.
+Temple of Herm is connection-inviting.
+Temple of Herm is placeable.
+Temple of Herm is habitable.
+Temple of Herm is treasurable.
+Temple of Herm is extra-accepting.
+Temple of Herm is consecrated.
+Temple of Herm is vp-agnostic.
+Temple of Herm is religious.
+
+Last detection rule (this is the Temple of Herm detection rule):
+	if the location is the Temple of Herm:
+		say " + 2 (Temple of Herm)[run paragraph on]";
+		increase the hiding roll by 2.
+
+Section - Temple of Herm label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Temple of Herm is Figure of map_label_Chton. [TODO!!]
+
 
 Chapter - The Crypt
 

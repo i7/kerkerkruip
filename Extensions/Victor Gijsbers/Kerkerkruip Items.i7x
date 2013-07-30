@@ -3218,6 +3218,29 @@ A spirit bonus rule (this is the spirit bonus of the was sceptre rule):
 	if the test subject carries the readied was sceptre:
 		increase faculty bonus score by 4.
 
+Section - Caduceus  (Herm gift)
+
+The caduceus is a weapon. The indefinite article of the caduceus is "the".
+
+The description of the caduceus is "A short staff entwined by two serpents and surmounted by wings. [italic type]Anyone hit by the caduceus has a chance equal to (attacker's mind * 2)% to fall asleep.[roman type]".
+
+The caduceus is wood.
+
+The damage die of the caduceus is 4.
+The weapon attack bonus of the caduceus is 2.
+The dodgability of the caduceus is 2.
+The active parry max of the caduceus is 3.
+The passive parry max of the caduceus is 2.
+The weapon damage bonus of the caduceus is 0.
+
+Aftereffects rule (this is the caduceus may put people asleep rule):
+	if the global attacker weapon is the caduceus and the global defender is not the player:
+		if the attack damage is greater than 0:
+			let n be final mind of the global attacker;
+			if a random chance of n in 50 succeeds:
+				say "[The global defender] [bold type]fall[s] asleep[roman type]!";
+				now global defender is asleep.
+
 
 Chapter - Maces
 
