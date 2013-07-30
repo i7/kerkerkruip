@@ -1276,6 +1276,12 @@ Exploding-grenade is a thing that varies.
 
 The exploding rules are a rulebook.
 
+Last exploding rule (this is the exploding wakes people up rule):
+	repeat with guy running through asleep persons in exploding-location:
+		now guy is not asleep;
+		if player is in exploding-location:
+			say "[The main actor] [bold type]wake[s] up[roman type]!".
+
 Section - Normal throwing
 
 Instead of throwing a grenade at something:

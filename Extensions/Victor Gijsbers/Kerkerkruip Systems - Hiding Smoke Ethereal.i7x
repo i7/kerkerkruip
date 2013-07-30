@@ -75,9 +75,10 @@ A detection rule (this is the number of enemies increases probability of detecti
 	repeat with guy running through people in the location:
 		if guy opposes the player:
 			unless guy is blind:
-				increase n by 1;
+				unless guy is asleep:
+					increase n by 1;
 	if n is not 0:
-		say " - [n] (number of not blind enemies)[run paragraph on]";
+		say " - [n] (number of perceiving enemies)[run paragraph on]";
 		decrease the hiding roll by n.
 
 A detection rule (this is the on-the-lookout increases probability of detection rule):

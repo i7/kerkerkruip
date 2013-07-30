@@ -537,8 +537,79 @@ To calculate the pdr for (guy - a person):
 	consider the physical damage reduction rules.
 
 
+Chapter - Asleep
 
+A person can be sleeper. A person is usually sleeper. [A sleeper can be asleep.]
+A person has a number called the initial sleep chance. The initial sleep chance of a person is usually 5. [Small chance that a given monster starts out asleep.]
+A person can be asleep. A person is usually not asleep. [Whether someone is asleep.]
 
+Dungeon interest rule (this is the put people asleep rule):
+	repeat with guy running through not off-stage sleeper people:
+		if a random chance of initial sleep chance of guy in 100 succeeds:
+			now guy is asleep.
+
+Aftereffects rule (this is the being attacked wakes people up rule):
+	if the global defender is asleep and the global defender is alive:
+		now the global defender is not asleep;
+		say "[The global defender] [bold type]wake[s] up[roman type]!".
+
+This is the asleep rule:
+	if the main actor is asleep and combat status is combat:
+		unless a random chance of tension in 50 succeeds:
+			say "[The main actor] sleep[s] peacefully[roman type].";
+			now combat status is concluding;
+		otherwise:
+			say "[The main actor] [bold type]wake[s] up[roman type]!";
+			now main actor is not asleep.
+
+The asleep rule is listed before the the main actor chooses an action rule in the combat round rules.
+
+This is the asleep reactions rule:
+	repeat with guy running through at-React persons:
+		if guy is asleep:
+			now combat state of guy is at-Inactive.
+
+The asleep reactions rule is listed before the the reactors choose reactions rule in the combat round rules.
+
+For printing a locale paragraph about a thing (called the item)
+	(this is the use initial appearance in room descriptions except when asleep rule):
+	if the item is not mentioned:
+		if the item provides the property initial appearance and the
+			item is not handled and the initial appearance of the item is
+			not "":
+			increase the locale paragraph count by 1;
+			if item is a person:
+				if item is asleep:
+					say "[The item] lie[s] on the ground, sleeping.[run paragraph on]";
+					say "[paragraph break]";
+				otherwise:
+					say "[initial appearance of the item]";
+					say "[paragraph break]";
+			otherwise:
+				say "[initial appearance of the item]";
+				say "[paragraph break]";
+			if a locale-supportable thing is on the item:
+				repeat with possibility running through things on the item:
+					now the possibility is marked for listing;
+					if the possibility is mentioned:
+						now the possibility is not marked for listing;
+				say "On [the item] ";
+				list the contents of the item, as a sentence, including contents,
+					giving brief inventory information, tersely, not listing
+					concealed items, prefacing with is/are, listing marked items only;
+				say ".[paragraph break]";
+			now the item is mentioned;
+	continue the activity.
+
+The use initial appearance in room descriptions except when asleep rule is listed before the use initial appearance in room descriptions rule in the for printing a locale paragraph about rules.
+The use initial appearance in room descriptions rule is not listed in any rulebook.
+
+After printing the name of an asleep person while listing contents of a room:
+	say " (sleeping)[run paragraph on]".
+
+A followers rule (this is the asleep follower cannot follow rule):
+	if test subject is asleep:
+		rule fails.
 
 Part - Abilities
 
