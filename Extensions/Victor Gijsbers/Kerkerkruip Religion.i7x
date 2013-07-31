@@ -730,10 +730,12 @@ Favour rule for Herm (this is the Herm favour 3 rule):
 
 Favour rule for Herm (this is the Herm favour 6 rule):
 	if divine favour is 6:
-		say "Herm gifts you three scrolls[unless player encloses magical spade] and a magical spade; and increases your hiding bonus to +2.";
+		say "Herm gifts you two scrolls[unless player encloses magical spade], a magical spade[end if] and a Morphean grenade; and increases your hiding bonus to +2.";
 		do a Herm gift;
 		do a Herm gift;
-		do a Herm gift;
+		let chosen grenade be a random Morphean grenade;
+		let item be a new object cloned from chosen grenade;
+		move item to the player;
 		unless player encloses magical spade:
 			move magical spade to player.
 
