@@ -1521,8 +1521,8 @@ An exploding rule:
 				say "The Morphean grenade explodes, and you are immediately engulfed in dreams. Joyous dreams, terrible dreams, dreams that seem to be more real than they have any right to be. An indefinite amount of time later, you awake -- and nothing seems to have changed."; [Opportunity for COOL STUFF (TM).]
 			otherwise:
 				repeat with guy running through alive people in exploding-location:
-					now guy is asleep;
-					say "TEST: [guy] asleep.";
+					if guy is sleeper:
+						now guy is asleep;
 		remove noun from play.
 
 
@@ -3235,7 +3235,7 @@ The weapon damage bonus of the caduceus is 0.
 
 Aftereffects rule (this is the caduceus may put people asleep rule):
 	if the global attacker weapon is the caduceus and the global defender is not the player:
-		if the attack damage is greater than 0:
+		if the attack damage is greater than 0 and the global defender is sleeper:
 			let n be final mind of the global attacker;
 			if a random chance of n in 50 succeeds:
 				say "[The global defender] [bold type]fall[s] asleep[roman type]!";
@@ -3816,6 +3816,21 @@ First special set attack strength rule (this is the tome of law attack roll rule
 	if the tome-of-law-number is not 0:
 		now attack strength is tome-of-law-number;
 		rule succeeds.
+
+
+Section - Tome of Briar Roses
+
+The Tome of Briar Roses is a tome.
+Tome of Briar Roses is paper.
+Tome of Briar Roses is magical.
+
+Carry out reading Tome of Briar Roses:
+	remove Tome of Briar Roses from play;
+	say "Magical sleep descends on the world.";
+	repeat with guy running through not off-stage persons:
+		if guy is sleeper:
+			now guy is asleep.
+
 
 
 Kerkerkruip Items ends here.
