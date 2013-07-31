@@ -85,7 +85,7 @@ Last check going (this is the going and retreating in combat rule):
 		if player is retreater:
 			unless forced-action is true:
 				say "Deciding that discretion is the better part of valour, you bravely run away.";
-			repeat with X running through alive persons in the location:
+			repeat with X running through alive not asleep persons in the location:
 				if the player is alive and the player is not hidden:
 					if X presses the player or the player presses X or the concentration of X is greater than 0:
 						now X does not press the player;
@@ -98,7 +98,7 @@ Last check going (this is the going and retreating in combat rule):
 			unless forced-action is true:
 				say "You decide to run past your enemies.";
 			now the player is runner;
-			repeat with X running through alive persons in the location:
+			repeat with X running through alive not asleep persons in the location:
 				now X does not press the player;
 				now the player does not press X;
 				if the player is alive:
