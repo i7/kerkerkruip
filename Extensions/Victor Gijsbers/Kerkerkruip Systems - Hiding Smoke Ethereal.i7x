@@ -50,18 +50,19 @@ The detection rules are a rulebook.
 Every turn when the player is hidden (this is the possible detection rule):
 	if main actor is the player:
 		if at least one person enclosed by the location opposes the player:
-			now hiding roll is a roll of the dice;
-			say "[italic type]You roll a hiding check of [hiding roll] [run paragraph on]";
-			consider the detection rules;
-			say " = [hiding roll], which must be positive.[roman type] [run paragraph on]";
-			if hiding roll > 0:
-				say "You [bold type]remain hidden[roman type].";
-			otherwise:
-				say "You are [bold type]detected[roman type]!";
-				now the player is not hidden;
-				repeat with guy running through visible persons:
-					if the faction of guy hates the faction of the player:
-						now guy is on-the-lookout.
+			unless all enemies are asleep:
+				now hiding roll is a roll of the dice;
+				say "[italic type]You roll a hiding check of [hiding roll] [run paragraph on]";
+				consider the detection rules;
+				say " = [hiding roll], which must be positive.[roman type] [run paragraph on]";
+				if hiding roll > 0:
+					say "You [bold type]remain hidden[roman type].";
+				otherwise:
+					say "You are [bold type]detected[roman type]!";
+					now the player is not hidden;
+					repeat with guy running through visible persons:
+						if the faction of guy hates the faction of the player:
+							now guy is on-the-lookout.
 
 Section - Detection rules
 	
