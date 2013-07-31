@@ -543,6 +543,13 @@ A person can be sleeper. A person is usually sleeper. [A sleeper can be asleep.]
 A person has a number called the initial sleep chance. The initial sleep chance of a person is usually 5. [Small chance that a given monster starts out asleep.]
 A person can be asleep. A person is usually not asleep. [Whether someone is asleep.]
 
+To decide whether all enemies are asleep:
+	repeat with guy running through people in the location:
+		if faction of the guy hates faction of the player:
+			if guy is not asleep:
+				decide on false;
+	decide on true.
+
 Dungeon interest rule (this is the put people asleep rule):
 	repeat with guy running through not off-stage sleeper people:
 		if a random chance of initial sleep chance of guy in 100 succeeds:
