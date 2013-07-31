@@ -4507,6 +4507,7 @@ The ID of the Nameless Horror is 22.
 The Nameless Horror is gargantuan.
 The Nameless Horror is not talker.
 The Nameless Horror is thrower.
+The Nameless Horror is not sleeper.
 
 The health of Nameless Horror is 1000.
 The melee of Nameless Horror is 50.
@@ -4984,6 +4985,7 @@ The abyss of the soul is an undead undead-faction monster. "Before you floats an
 The abyss of the soul is small.
 The abyss of the soul is not talker.
 The abyss of the soul is not thrower.
+The abyss of the soul is not sleeper.
 
 The description of the Abyss of the Soul is "This [size of the abyss of the soul] sphere of utter darkness is an abyss of the soul, one of the most fearsome of undead monsters. Not only does it sap the strength of all nearby living creatures, it also feeds on the souls of the recently departed.".
 
