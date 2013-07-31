@@ -1785,6 +1785,7 @@ Last killing rule (this is the demon of rage gets stronger rule):
 				do the demon of rage power-up.
 
 To do the demon of rage power-up:
+	now demon of rage is not asleep;
 	increase demon-of-rage-number by 1;
 	increase melee of demon of rage by 1;
 	increase defence of demon of rage by 1;
@@ -2136,6 +2137,7 @@ Last killing rule (this is the angel of compassion gets stronger rule):
 
 To do the angel of compassion power-down:
 	if angel-of-compassion-strength > 0:
+		now angel of compassion is not asleep;
 		decrease angel-of-compassion-strength by 1;
 		decrease radiation of angel of compassion by 1;
 		decrease body score of angel of compassion by 2;
@@ -5349,6 +5351,7 @@ An aftereffects rule (this is the set smoke demon time-out rule):
 		now smoke demon time-out is a random number between 5 and 18.
 
 To have the smoke demon appear:
+	now smoke demon is not asleep;
 	now health of the smoke demon is 10;
 	now faction of the smoke demon is horrific-faction;
 	now concentration of the smoke demon is 0;
