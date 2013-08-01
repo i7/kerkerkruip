@@ -607,7 +607,7 @@ Treasure placement rule (this is the fill the sarcophagus rule):
 		if a random chance of 1 in 12 succeeds:
 			place 1 of epic things in the sarcophagus;
 		if a random chance of 3 in 7 succeeds:
-			let X be a random off-stage undead person;
+			let X be a random off-stage not super-undead undead person;
 			now sarcophagus-inhabitant is X.
 
 Report opening the sarcophagus:

@@ -35,6 +35,9 @@ Status attribute rule (this is the undead status rule):
 		if long status is true:
 			say "You are [bold type]undead[roman type]: other undead are your allies; other potential allies may be your enemies instead; absorbing a soul may heal you only partially.[line break][run paragraph on]";
 
+Chapter - Subtypes
+
+A person can be super-undead. A person is usually not super-undead.
 
 Chapter - New factions
 

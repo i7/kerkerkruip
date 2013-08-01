@@ -1992,8 +1992,8 @@ The description of a scroll of summoning is "Reading this scroll will summon an 
 The plural of scroll of summoning is scrolls of summoning.
 
 Carry out reading a scroll of summoning:
-	if at least one alive undead person is off-stage:
-		let guy be a random alive off-stage undead person;
+	if at least one alive not super-undead undead person is off-stage:
+		let guy be a random alive off-stage not super-undead undead person;
 		move guy to location of the player;
 		say "You speak the awful spell, and [a guy] appears before you!";
 		now guy is follower;
