@@ -760,6 +760,59 @@ Check reading when the player is blind (this is the cannot read when blind rule)
 	say "[The noun] has not been written in braille." instead.
 
 
+Chapter - Taking from sleepers
+
+The can't take living people's possessions rule is not listed in any rulebook.
+
+Check an actor taking (this is the can't take living awake people's possessions rule):
+	let the local ceiling be the common ancestor of the actor with the noun;
+	let H be the not-counting-parts holder of the noun;
+	while H is not nothing and H is not the local ceiling:
+		if H is an alive not asleep person:
+			stop the action with library message taking action number 6 for H;
+		let H be the not-counting-parts holder of H;
+
+Last check an actor taking (this is the pickpocket rule):
+	if an asleep person encloses the noun:
+		if a pickpocket check fails:
+			do nothing instead;
+		otherwise:
+			if the noun is a weapon:
+				now the noun is not readied.
+
+Pickpocket chance is a number that varies.
+The pickpocket rules are a rulebook.
+
+To decide whether a pickpocket check fails:
+	now pickpocket chance is 30;
+	consider the pickpocket rules;
+	say "You have a [pickpocket chance]% chance of successfully stealing [the noun] ... [run paragraph on]";
+	if a random chance of pickpocket chance in 100 succeeds:
+		say "success!";
+		decide on false; [This is success.]
+	otherwise:
+		let guy be a random person enclosing the noun;
+		now guy is not asleep;
+		say "but you fail, waking [the guy]!";
+		decide on true. [This is failure.]
+
+A pickpocket rule (this is the increase by your faculties rule):
+	increase pickpocket chance by final body of the player;
+	increase pickpocket chance by final mind of the player;
+	increase pickpocket chance by final spirit of the player.	
+
+A pickpocket rule (this is the worn clothing pickpocket rule):
+	if the noun is clothing:
+		if at least one person wears the noun:
+			decrease pickpocket chance by 20.
+
+A pickpocket rule (this is the readied weapons pickpocket rule):
+	if the noun is a weapon:
+		if the noun is readied:
+			decrease pickpocket chance by 10.
+
+
+
 Chapter - Achievements Menu
 
 Achievemenuing is an action out of world. Achievemenuing is in-game menu-checking.
