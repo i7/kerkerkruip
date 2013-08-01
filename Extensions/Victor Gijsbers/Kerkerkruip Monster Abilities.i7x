@@ -580,6 +580,10 @@ This is the asleep reactions rule:
 
 The asleep reactions rule is listed before the the reactors choose reactions rule in the combat round rules.
 
+First check an actor hitting (this is the stop hitting if the attacker is asleep rule):
+	if the global attacker is asleep:
+		stop the action.
+
 An attack modifier rule (this is the asleep gives attack bonus rule):
 	if the global defender is just-woken:
 		say " + 3 (defender was asleep)[run paragraph on]";
@@ -637,6 +641,8 @@ Every turn when the player is asleep (this is the please replace me player aslee
 	now the player is not asleep;
 	say "You have dreamt, and now wake up.".
 	
+
+[For stealing items when someone is asleep, see Kerkerkruip Actions and UI.]
 	
 
 Part - Abilities
