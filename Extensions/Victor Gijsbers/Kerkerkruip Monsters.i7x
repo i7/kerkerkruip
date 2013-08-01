@@ -5253,6 +5253,113 @@ Report the zombie toad waiting when the zombie toad is insane:
 
 
 
+Chapter - Malignant chanter
+
+The malignant chanter is a male not neuter undead undead-faction monster. 
+
+The description of the malignant chanter is "This man must once have been one of the proud battle bards of Algir, but now he has been reduced to a putrefying corpse animated by magic. His chant can still inspire his undead allies, though."
+
+The malignant chanter is emotionless.
+The malignant chanter is talker.
+The malignant chanter is thrower.
+
+The level of malignant chanter is 0.
+The ID of the malignant chanter is 33.
+The malignant chanter is medium.
+
+The health of malignant chanter is 25.
+The melee of malignant chanter is -2.
+The defence of malignant chanter is 11.
+
+The body score of malignant chanter is 5.
+The mind score of malignant chanter is 8.
+The spirit score of malignant chanter is 10. 
+
+When play begins:
+	let X be a random natural weapon part of the malignant chanter;
+	now the printed name of X is "putrefying fists".
+
+Section - Malignant Chanter images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of malignant chanter is Figure of map_monster_zombie_toad. [TODO]
+The legend-label ofmalignant chanter is Figure of map_legend_zombie_toad. [TODO]
+
+
+Section - Special and AI
+
+An attack modifier rule (this is the malignant chanter attack bonus rule):
+	if the location encloses the malignant chanter:
+		if the global attacker is undead and the global attacker is not the malignant chanter:
+			if concentration of the malignant chanter is greater than 0:
+				if the numbers boolean is true, say " + [concentration of the malignant chanter] (malignant chanter)[run paragraph on]";
+				increase the attack strength by concentration of the malignant chanter.
+
+A damage modifier rule (this is the malignant chanter damage bonus rule):
+	if the location encloses the malignant chanter:
+		if the global attacker is undead and the global attacker is not the malignant chanter:
+			if concentration of the malignant chanter is greater than 0:
+				if the numbers boolean is true, say " + [concentration of the malignant chanter] (malignant chanter)[run paragraph on]";
+				increase the attack damage by concentration of the malignant chanter.
+		
+Chance to win rule when the location encloses the malignant chanter (this is the CTW malignant chanter rule):
+	if the global attacker is undead and the global attacker is not the malignant chanter:
+		increase the chance-to-win by concentration of the malignant chanter.		
+
+An AI action selection rule for the at-Act malignant chanter (this is the malignant chanter AI rule):
+	if the location of the malignant chanter encloses at least two undead persons:
+		choose row with an Option of the action of the malignant chanter attacking the chosen target in the Table of AI Action Options;
+		decrease the Action Weight entry by 100;
+		if concentration of the malignant chanter is 3:
+			choose row with an Option of the action of the malignant chanter waiting in the Table of AI Action Options;
+			now Action Weight entry is 100.
+
+
+Section - Prose				
+
+Report an actor hitting the dead malignant chanter:
+	say "[The actor] reduce[s] the malignant chanter to eternal silence.";
+	rule succeeds.
+
+Report the malignant chanter hitting a dead pc:
+	say "You die with the awful songs of the chanter in your ears. They will accompany you for all eternity.";
+	rule succeeds.
+
+Report the malignant chanter attacking:
+	unless the actor is the noun:
+		say "The malignant chanter feebly attempts to punch [the noun].";
+	otherwise:
+		say "The malignant chanter tries to bite off its own hand.";
+	rule succeeds.
+
+Report the malignant chanter dodging:
+	say "Jumping aside with surprising speed, the malginant chanter tries to evade the attack.";
+	rule succeeds.
+
+Report the malignant chanter parrying:
+	say "The malignant chanter attempts to ward off the attack.";
+	rule succeeds.
+				
+Report the malignant chanter waiting:
+	if the malignant chanter is insane:
+		say "The malignant chanter sings [one of]a sleepy lullaby[or]a droll song about the fidelity of women[or]a catchy tune advertising Yahvinnian wine[or]an impassioned serenade implying that he wants to marry you[at random].";
+		rule succeeds;
+	otherwise:
+		if the concentration of the malignant chanter is not 0:
+			say "The malignant chanter continues to sing.";
+			rule succeeds.
+
+Report the malignant chanter concentrating:
+	if the concentration of the actor is:
+		-- 1:
+			say "The malignant chanter starts to sing.";
+		-- 2:
+			say "Slowly the volume of the chanter's song rises.";
+		-- 3:
+			say "The malignant chanter's song rises to a fevered pitch.";
+	rule succeeds.
+
+
+
 Chapter - Smoke demons
 
 [The smoke demon is a bit special. It is immortal, and can only be killed by removing smoke. Multiple smoke demons can exist in different rooms; we just move them to any room where they should be.]
