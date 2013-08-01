@@ -567,6 +567,8 @@ To decide whether the player is victorious:
 		decide yes;
 	if Malygris-lover is true:
 		decide yes;
+	if Drakul-victory is true:
+		decide yes;
 	decide no.
 
 Every turn (this is the victory rule):
@@ -586,7 +588,7 @@ Victory message rule (this is the enslaved Malygris message rule):
 	if Malygris is player-enslaved:		
 		end the story saying "You have turned Malygris into your slave!";
 		rule succeeds.
-	
+
 To do the level 10 victory with (guy - a person):
 	say "In slaying [the guy], you have done the impossible. You absorb its soul, and though this process leaves little of your own personality intact, your powers increase a thousandfold. Even the gods bow to you.";
 	end the story saying "You reign eternally!".

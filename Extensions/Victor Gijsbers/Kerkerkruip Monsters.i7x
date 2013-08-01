@@ -5282,7 +5282,7 @@ When play begins:
 Section - Malignant Chanter images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
 The avatar of malignant chanter is Figure of map_monster_zombie_toad. [TODO]
-The legend-label ofmalignant chanter is Figure of map_legend_zombie_toad. [TODO]
+The legend-label of malignant chanter is Figure of map_legend_zombie_toad. [TODO]
 
 
 Section - Special and AI
@@ -5357,6 +5357,139 @@ Report the malignant chanter concentrating:
 		-- 3:
 			say "The malignant chanter's song rises to a fevered pitch.";
 	rule succeeds.
+
+
+
+Chapter - Drakul
+
+Drakul is a male not neuter undead super-undead undead-faction monster.
+Drakul is proper-named.
+
+The description of Drakul is "This man must once have been one of the proud battle bards of Algir, but now he has been reduced to a putrefying corpse animated by magic. His chant can still inspire his undead allies, though."
+
+Drakul is medium.
+Drakul is talker.
+Drakul is thrower.
+
+The level of Drakul is 0.
+The ID of Drakul is 34.
+
+The health of Drakul is 30.
+The melee of Drakul is 4.
+The defence of Drakul is 12.
+
+The body score of Drakul is 8.
+The mind score of Drakul is 15.
+The spirit score of Drakul is 6. 
+
+When play begins:
+	let X be a random natural weapon part of Drakul;
+	now damage die of X is 5;
+	now dodgability of X is 2;
+	now passive parry max of X is 2;
+	now active parry max of X is 0;	
+	now the printed name of X is "sharp teeth".
+
+Section - Drakul images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of Drakul is Figure of map_monster_zombie_toad. [TODO]
+The legend-label of Drakul is Figure of map_legend_zombie_toad. [TODO]
+
+
+Section - Drakul drains the living
+
+Aftereffects rule (this is the Drakul drinks blood rule):
+	if the global attacker is Drakul and the global defender is not undead:
+		if the attack damage is greater than 0:
+			if Drakul-victory is false:
+				say "Drakul [bold type]drinks [possessive of the global defender] blood[roman type], gaining [attack damage] health!";
+				increase health of Drakul by attack damage.
+
+Section - Drakul uses mind games
+
+Drakul-mindgaming is an action applying to nothing.
+
+An AI action selection rule for at-React Drakul (this is the Drakul considers mindgaming rule):
+	choose a blank Row in the Table of AI Action Options;
+	now the Option entry is the action of Drakul Drakul-mindgaming;
+	now the Action Weight entry is a random number between 0 and 50;
+	decrease Action Weight entry by (2 * final mind of the main actor).
+
+Carry out Drakul Drakul-mindgaming:
+	let guy be a random alive person in the location;
+	repeat with counter running from 1 to 5:
+		unless guy opposes Drakul or guy is main actor:
+			now guy is a random alive person in the location;
+	unless guy opposes Drakul:
+		now guy is the main actor;
+	say "Drakul fixes his entrancing eyes on [the main actor]. 'I am your friend,' he whipsers. 'Your real enemy is [if the main actor is guy]your own self[otherwise if guy is the player]this foolish adventurer[otherwise][the guy][end if].'[italic type] [run paragraph on]";
+	let n be (2 + final mind of Drakul);
+	test the mind of the main actor against n; 
+	say "[roman type]";
+	if test result is true:
+		say " [The main actor] scoff[s] at the suggestion.";
+	otherwise:
+		say " [The main actor] nod[s] slavishly.";
+		repeat through the Table of Delayed Actions:
+			if action entry is the action of the main actor hitting Drakul:
+				now Action entry is the action of the main actor hitting guy.
+
+Section - Prose				
+
+Report an actor hitting the dead Drakul:
+	if Drakul's lifeblood is off-stage:
+		say "As [the actor] destroys the infamous vampire, a small vial of blood drops on the floor.";
+	otherwise:
+		say "[The actor] destroys the infamous vampire, who crumbles away into ashes.";
+	rule succeeds.
+
+Drakul-victory is a truth state that varies. Drakul-victory is false.
+
+Report Drakul hitting a dead pc:
+	if the player is not undead and a random chance of 1 in 2 succeeds:
+		say "'Don't be afraid of death, my child,' Drakul chuckles. 'For I have decided that you will rise again as my child! Combining my power and your ability to absorb souls, we will be invincible. And I will finally rule the world!'";
+		now health of the player is 1;
+		now Drakul-victory is true;
+	otherwise:
+		say "'Will I make [if the player is male]him[otherwise if the player is female]her[otherwise]it[end if] my slave?' Drakul wonders as he holds your corpse. 'Hm. No. Far too ugly -- I don't want to look at that face for the rest of eternity.'";
+	rule succeeds.
+
+Victory message rule (this is the Drakul victory message rule):
+	if Drakul-victory is true:
+		end the story saying "You live on as a vampire, eternally enslaved to your master Drakul. Together, you quickly kill Malygris -- which means that you are technically victorious!";
+		rule succeeds.
+
+Report Drakul attacking:
+	unless the actor is the noun:
+		say "Drakul flashes his sharp, shiny teeth at [the noun].";
+	otherwise:
+		say "Drakul looks at his own arm with evident thirst.";
+	rule succeeds.
+
+Report Drakul dodging:
+	say "Drakul laughs as he steps aside.";
+	rule succeeds.
+
+Report Drakul parrying:
+	say "Smiling disdainfully, Drakul raises his weapon.";
+	rule succeeds.
+				
+Report Drakul waiting when Drakul is insane:
+		say "Drakul yawns in boredom.";
+		rule succeeds.
+
+Report Drakul concentrating:
+	if the concentration of the actor is:
+		-- 1:
+			say "'You mortals are so weak,' Drakul whispers.";
+		-- 2:
+			say "'I will drink your blood', Drakul says as he concentrates more deeply.";
+		-- 3:
+			say "Drakul attains the highest state of concentration. 'It feels so good to be alive! Even when you are undead.'";
+	rule succeeds.
+
+
+
 
 
 
