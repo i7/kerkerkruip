@@ -142,18 +142,6 @@ The basic fatal player flavour rule is not listed in any rulebook.
 The basic fatal flavour rule is not listed in any rulebook.
 The basic flavour rule is not listed in any rulebook.
 
-The standard lose concentration prose rule is not listed in any rulebook.
-
-Last lose concentration prose rule for a person (called P) (this is the new lose concentration prose rule):
-	if P is the player:
-		say "You lose your [bold type]concentration[roman type]!";
-	otherwise:
-		say "[The P] loses [bold type]concentration[roman type]!".
-	
-Report the player hitting a dead pc (this is the report player suicide rule):
-	say "Your attack ends your own life.";
-	rule succeeds;
-
 
 
 Section - Other stuff
@@ -165,10 +153,6 @@ Understand "creature" as a person.
 
 Check switching the numbers off:
 	say "The numerical representation of combat cannot be switched off in this game." instead.
-
-After reading a command (this is the d might mean dodge rule):
-	if the player's command matches "d" and the player is at-React:
-		say "[italic type](Perhaps you wanted to dodge? The abbreviation for that is 'do'.)[roman type][paragraph break]".
 
 
 
@@ -188,40 +172,6 @@ Section - Because sometimes one can attack outside combat
 [As I write this, this is only possible when the player attacks himself when commanded by Nomos.]
 First carry out attacking the player when the combat status is peace (this is the attack self when not in combat rule):
 	try the actor hitting the noun instead;
-	
-
-
-Chapter - More actions that take no time
-
-Section - Vaguely going
-
-The block vaguely going rule is not listed in any rulebook.
-
-Rule for supplying a missing noun while an actor going (this is the alternative block vaguely going rule):
-	take no time;
-	issue library message going action number 7.
-
-Section - Going nowhere
-
-The can't go that way rule is not listed in any rulebook.
-
-Check an actor going when the room gone to is nothing (this is the alternative can't go that way rule):
-	take no time;
-	if the door gone through is nothing:
-		stop the action with library message going action number 2 for the room gone from;
-	stop the action with library message going action number 6 for the door gone through;
-
-Section - Taking what is already carried
-
-The can't take what's already taken rule is not listed in any rulebook.
-
-Check an actor taking (this is the alternative can't take what's already taken rule):
-	if the actor is carrying the noun:
-		take no time;
-		stop the action with library message taking action number 5 for the noun;
-	if the actor is wearing the noun:
-		take no time;
-		stop the action with library message taking action number 5 for the noun.
 
 
 
