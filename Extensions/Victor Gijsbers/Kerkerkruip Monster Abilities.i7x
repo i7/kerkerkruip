@@ -542,6 +542,7 @@ Chapter - Asleep
 A person can be sleeper. A person is usually sleeper. [A sleeper can be asleep.]
 A person has a number called the initial sleep chance. The initial sleep chance of a person is usually 5. [Small chance that a given monster starts out asleep.]
 A person can be asleep. A person is usually not asleep. [Whether someone is asleep.]
+A person can be just-woken. A person is usually not just-woken.
 
 To decide whether all enemies are asleep:
 	repeat with guy running through people in the location:
@@ -555,10 +556,11 @@ Dungeon interest rule (this is the put people asleep rule):
 		if a random chance of initial sleep chance of guy in 100 succeeds:
 			now guy is asleep.
 
-Aftereffects rule (this is the being attacked wakes people up rule):
+First carry out an actor hitting (this is the being attacked wakes people up rule):  [Before the attack because then the prose describing the attack will generally make more sense]
 	if the global defender is asleep and the global defender is alive:
 		now the global defender is not asleep;
-		say "[The global defender] [bold type]wake[s] up[roman type]!".
+		say "[The global defender] [bold type]wake[s] up[roman type], surprised by the attack!";
+		now global defender is just-woken.
 
 This is the asleep rule:
 	if the main actor is asleep and combat status is combat:
@@ -577,6 +579,19 @@ This is the asleep reactions rule:
 			now combat state of guy is at-Inactive.
 
 The asleep reactions rule is listed before the the reactors choose reactions rule in the combat round rules.
+
+An attack modifier rule (this is the asleep gives attack bonus rule):
+	if the global defender is just-woken:
+		say " + 3 (defender was asleep)[run paragraph on]";
+		increase attack strength by 3.
+
+A damage modifier rule (this is the asleep damage bonus rule):
+	if global defender is just-woken:
+		say " + 2 (defender was asleep)[run paragraph on]";
+		increase the attack damage by 2.
+
+Last carry out an actor hitting (this is the remove just-woken rule):
+	now global defender is not just-woken.
 
 For printing a locale paragraph about a thing (called the item)
 	(this is the use initial appearance in room descriptions except when asleep rule):

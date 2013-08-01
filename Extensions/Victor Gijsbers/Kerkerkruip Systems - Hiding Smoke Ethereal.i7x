@@ -19,7 +19,7 @@ Status attribute rule (this is the hidden status rule):
 			say "[@ check initial position of attribute]hidden[run paragraph on]";
 
 An attack modifier rule (this is the hidden gives a small attack bonus rule):
-	if the global attacker is hidden:
+	if the global attacker is hidden and the global defender is not asleep: [you'll already get the asleep bonus]
 		say " + 2 (hidden)[run paragraph on]";
 		increase attack strength by 2.
 
