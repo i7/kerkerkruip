@@ -256,7 +256,7 @@ An attack modifier rule (this is the unholy symbols attack bonus rule):
 		
 Chance to win rule when the location encloses the unholy symbols (this is the CTW unholy symbols rule):
 	if the global attacker is undead or the global attacker is demonic:
-		decrease the chance-to-win by 2.		
+		increase the chance-to-win by 2.		
 
 
 
