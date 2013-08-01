@@ -655,15 +655,16 @@ Every turn when the armadillo is not off-stage (this is the armadillo eats when 
 Section - Armadillo moves around
 
 Every turn when the armadillo is not off-stage (this is the armadillo moves when the player is not around rule):
-	if the location of the player is not the location of the ravenous armadillo or there is no perceived threat for the ravenous armadillo:
-		if a random chance of 1 in 20 succeeds:
-			if at least one room is adjacent to the location of the ravenous armadillo:
-				let place2 be the location of the ravenous armadillo; [needed because of a bug in inform]
-				let place be a random room which is adjacent to place2;
-[				let place be a random room which is adjacent to the location of the ravenous armadillo;]
-				let way be the direction from the location of the ravenous armadillo to place;
-				[say "TEST CODE: trying the armadillo going [way].";]
-				try the ravenous armadillo going way.
+	unless the armadillo is asleep:
+		if the location of the player is not the location of the ravenous armadillo or there is no perceived threat for the ravenous armadillo:
+			if a random chance of 1 in 20 succeeds:
+				if at least one room is adjacent to the location of the ravenous armadillo:
+					let place2 be the location of the ravenous armadillo; [needed because of a bug in inform]
+					let place be a random room which is adjacent to place2;
+	[				let place be a random room which is adjacent to the location of the ravenous armadillo;]
+					let way be the direction from the location of the ravenous armadillo to place;
+					[say "TEST CODE: trying the armadillo going [way].";]
+					try the ravenous armadillo going way.
 
 Section - Power of the Armadillo
 
