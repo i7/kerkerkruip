@@ -26,7 +26,7 @@ Every turn (this is the mark items as seen every turn rule):
 
 Section - Glimmr or Flexible Windows
 
-[Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. Be sure to comment in Flexible Windows + Fixed Points Maths instead!]
+[Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. Be sure to comment in Flexible Windows instead!]
 [Include Kerkerkruip Glimmr Additions by Erik Temple.]
 
 Include Flexible Windows by Jon Ingold.
@@ -64,6 +64,7 @@ Include Kerkerkruip Locations by Victor Gijsbers.
 Include Kerkerkruip Scenery by Victor Gijsbers.
 Include Kerkerkruip Monsters by Victor Gijsbers.
 Include Kerkerkruip Events and Specials by Victor Gijsbers.
+Include Kerkerkruip Dreams by Victor Gijsbers.
 Include Kerkerkruip Ugly Special Cases by Victor Gijsbers.
 Include Kerkerkruip Start and Finish by Victor Gijsbers.
 Include Kerkerkruip Tests by Victor Gijsbers.
@@ -90,16 +91,21 @@ Generation info is a truth state that varies. Generation info is [true]false.
 
 Section - Testing - Not for release
 
+[Lair of the Imp is testobject.]
+
 [Last when play begins:
-	move mummified priest to location of Malygris.]
+	move Fafhrd to Entrance Hall;
+	now Fafhrd is asleep.]
 	
 [The player carries one scroll of psycholocation and one scroll of mapping.]
+
+[The player carries six Morphean grenades.]
 
 [One scroll of the blade is in Entrance Hall.]
 [The Zen room is testobject.
 Entrance to the Arena is testobject.]
 
-[The healer of Aite is testobject.]
+[Angel of compassion is testobject.]
 	
 [Last when play begins:
 	increase mind score of the player by 40.]
@@ -127,3 +133,12 @@ Section - Defining perform syntax (not for use with Glimmr Canvas Animation by E
 
 To say perform/@ (ph - phrase): (- if (0==0) {ph} -).
 
+
+Section - Plurality fix
+
+[Let's see whether this works.]
+
+To decide whether (item - an object) acts plural: 
+	if the item is plural-named:
+		yes;
+	no.
