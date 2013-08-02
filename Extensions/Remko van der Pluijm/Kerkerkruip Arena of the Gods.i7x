@@ -88,8 +88,9 @@ Carry out ChosenFighting:
 				repeat with Godnaam running through gods:
 					unless player worships Godnaam:
 						if Godnaam is incarnated by a monster:
-							add (monsteravatar of Godnaam) to Chosenlijst;
-							add the printed name of Godnaam to Godlijst;
+							if ((monsteravatar of Godnaam) is off-stage) and ((monsteravatar of Godnaam) is not dead):
+								add (monsteravatar of Godnaam) to Chosenlijst;
+								add the printed name of Godnaam to Godlijst;
 				add "do not fight a Chosen One" to Godlijst;
 				now current question menu is Godlijst;
 				ask a closed question, in menu mode;
@@ -120,14 +121,14 @@ A menu question rule (this is the ChosenFighting rule):
 					repeat with guy running through persons in the Arena-waiting-room:
 						challenge guy;
 						move guy to the Arena of the Gods;
-						say "The heavy doors open, where the angry [guy] awaits, prepared to fight for the honour of [entry m of Godlijst]!";
+						say "The heavy doors open, where the angry [guy] awaits, prepared to fight for the honour of [Godname]!";
 					move the player to the Arena of the Gods;
 					now the Godfight boolean is true;
 				otherwise:
 					now the chosenname is the printed name of Pers;
 					challenge Pers;
 					move Pers to the Arena of the Gods;
-					say "The heavy doors open, where the angry [Pers] awaits, prepared to fight for the honour of [entry m of Godlijst]!";
+					say "The heavy doors open, where the angry [Pers] awaits, prepared to fight for the honour of [Godname]!";
 					move the player to the Arena of the Gods;
 					now the Godfight boolean is true;
 			otherwise:
@@ -146,7 +147,7 @@ Every turn when the location is the
 		have Godname arena-intervene. 
 
 To have (guy - a text) arena-intervene:
-	[TODO stuff]
+	[TODO stuff].
 	
 
 Section - Awarding divine power 
