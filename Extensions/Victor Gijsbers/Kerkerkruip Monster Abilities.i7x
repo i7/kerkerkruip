@@ -87,9 +87,14 @@ Hate rule (this is the nonstandard hate rule):
 
 Every turn when the player is undead (this is the undead follow undead rule):
 	repeat with guy running through undead not follower persons in the location:
-		now guy is follower;
-		if follower percentile chance of guy is less than 50:
-			now follower percentile chance of guy is 50.
+		if guy is not super-undead or player form is lich-form:
+			now guy is follower;
+			if follower percentile chance of guy is less than 50:
+				now follower percentile chance of guy is 50;
+	unless player form is lich-form:
+		repeat with guy running through undead super-undead follower persons:
+			now guy is not follower.
+		
 
 
 
