@@ -618,6 +618,7 @@ Report opening the sarcophagus:
 	if the sarcophagus-inhabitant is not yourself:
 		move sarcophagus-inhabitant to the location of the sarcophagus;
 		now the player is not hidden;
+		now the sarcophagus-inhabitant is not asleep;
 		have the parser notice the sarcophagus-inhabitant;
 		if N is 0:
 			say "As you open the sarcophagus, [a sarcophagus-inhabitant] jumps out!";
@@ -1468,6 +1469,71 @@ Section - Hidden Treasury label for the map (for use with Kerkerkruip Glimmr Add
 The map-label of Hidden Treasury is Figure of map_label_Treasury.
 
 
+Chapter - The Mausoleum
+
+The mausoleum is a room. "The walls are adorned with rich gems and gold -- more in a display of wealth than of sound aesthetic judgment. In the middle of the room stands the marble tomb of an ancient king."
+
+Mausoleum is connectable.
+Mausoleum is not connection-inviting.
+Mausoleum is not placeable.
+Mausoleum is not habitable.
+Mausoleum is treasurable.
+Mausoleum is not teleportable.
+Mausoleum is vp-agnostic.
+Mausoleum is deathly.
+
+The tomb of the ancient king is scenery in the mausoleum. The tomb of the ancient king is a closed openable container. Understand "marble" and "screw" and "screws" and "lid" and "sculptures" and "sculpted" and "head" and "heads" as the tomb of the ancient king. The description of the tomb of the ancient king is "The tomb is made of richly sculpted marble. Some of the sculptures serve as screws to hold the tomb closed.".
+
+Tomb-ancient-king-counter is a number that varies. Tomb-ancient-king-counter is 0.
+
+Last check opening the tomb of the ancient king:
+	if combat status is peace:
+		if tomb-ancient-king-counter greater than 0:
+			say "With combat no longer on your mind, you easily unscrew the lid.";
+		otherwise:
+			say "Unscrew the lid turns out to be a lot of work, but not difficult.";
+	otherwise:
+		if tomb-ancient-king-counter is 10:
+			say "With a sigh, you remove the last of the marble screws.";
+		otherwise:
+			increase tomb-ancient-king-counter by 1;
+			say "Marble screws with sculpted heads hold the tomb closed. You painstakingly unscrew one that looks like a [one of]gargoyle[or]mermaid[or]skeleton[or]naked woman[or]phallus[or]horse[or]minotaur[or]fairy[or]priest[or]wizard[or]chained slave[or]blood ape[or]copulating man and woman[or]bull impregnating a human woman[or]double-bladed axe[or]man with wings[at random]." instead.
+
+A dungeon interest rule (this is the potentially add the Mausoleum rule):
+	if Mausoleum is not placed:
+		if a random chance of 1 in 10 succeeds:
+			put Mausoleum in a near location;
+			people the Mausoleum;
+		otherwise:
+			if a random chance of 1 in 10 succeeds: [TODO]
+				let place be a random placed connectable room;
+				place mausoleum next to place;
+				people the mausoleum.
+
+To people the mausoleum:
+	if (a random chance of 2 in 5 succeeds) and (at least one super-undead person is off-stage):
+		let guy be a random super-undead off-stage person;
+		move guy to the mausoleum;
+	otherwise:
+		if at least one undead person is off-stage:
+			let guy be a random off-stage undead person; [can be super-undead!]
+			move guy to the mausoleum;
+		if at least one undead person is off-stage:
+			let guy be a random off-stage undead person; [can be super-undead!]
+			move guy to the mausoleum;
+	if at least one epic thing is off-stage:
+		let item be a random epic thing;
+		now item is in tomb of the ancient king;
+	if a random chance of 1 in 4 succeeds:
+		if at least one epic thing is off-stage:
+			let item be a random epic thing;
+			now item is in tomb of the ancient king.
+			
+Section - Mausoleum label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The map-label of Mausoleum is Figure of map_label_Treasury. [TODO]
+
+			
 
 Chapter - Cavern of Rust
 
