@@ -10,9 +10,10 @@ Section - Incarnating (for use with Kerkerkruip Religion by Victor Gijsbers)
 Incarnating relates one monster (called the monsteravatar) to one god. The verb to incarnate (he incarnates, they incarnate, he is incarnated by it, it is incarnated, it is incarnating) implies the incarnating relation.
 
 The Healer of Aite incarnates Aite.
-The Overmind incarnates Nomos.
-Bodmall  incarnates Sul.
-Aswang incarnates Chton.
+The Overmind incarnates Herm.
+Bodmall incarnates Sul.
+Drakul incarnates Chton.
+
 
 Book - Location additions
 
@@ -53,7 +54,7 @@ Godfightame2 is a text that varies.
 To decide which text is the random fight text:
 	Let L be a list of objects;
 	repeat with g running through gods:
-		if the player does not worship g:
+		if (the player does not worship g) and (there is a monster incarnating g):
 			add the monsteravatar of g to L;
 	sort L in random order;
 	now Godfightame1 is the printed name of entry 1 of L;
@@ -67,6 +68,7 @@ To decide which text is the random fight text:
 The Godfight boolean is a truth state variable that varies. The Godfight boolean is false.
 
 Chosenname is a text that varies.
+Godname is a text that varies.
 Chosenlijst is a list of monsters that varies.
 Godlijst is a list of texts that varies.
 
@@ -85,8 +87,9 @@ Carry out ChosenFighting:
 				now current question is  "The Chosen One of which god do you wish to fight? (Please enter a number):";
 				repeat with Godnaam running through gods:
 					unless player worships Godnaam:
-						add (monsteravatar of Godnaam) to Chosenlijst;
-						add the printed name of Godnaam to Godlijst;
+						if Godnaam is incarnated by a monster:
+							add (monsteravatar of Godnaam) to Chosenlijst;
+							add the printed name of Godnaam to Godlijst;
 				add "do not fight a Chosen One" to Godlijst;
 				now current question menu is Godlijst;
 				ask a closed question, in menu mode;
@@ -99,7 +102,6 @@ Carry out ChosenFighting:
 		say "A roaring voice answers your call:'YOU CANNOT DEFEND ANY HEATHEN RELIGION YOU MIGHT WORSHIP AT THIS HOLY PLACE, INFIDEL!' A ball of lightning shoots from the sky, doing [x] damage to you!";
 		if the health of the player is less than 1:
 			end the story saying "The Gods do not appreciate heathen worship. The dvine ball of lighting deprives you of your live.".
-			.
 		
 A menu question rule (this is the ChosenFighting rule):
 	if the current question is "The Chosen One of which god do you wish to fight? (Please enter a number):":
@@ -111,6 +113,7 @@ A menu question rule (this is the ChosenFighting rule):
 				if Pers is group leading and Pers is not defeated individually:
 					move Pers to the Arena-waiting-room;
 					now chosenname is the printed name of Pers;
+					now Godname is entry m of Godlijst;
 					if Pers is initially accompanied:
 						repeat with X running through people who accompany Pers:
 							move X to the location of Pers;
@@ -131,13 +134,27 @@ A menu question rule (this is the ChosenFighting rule):
 				say "You decide it is best to defend the honour of your God another time...".
 
 
+Section - Godly intervention
+[For each God, I'll be implementing some form of godly intervention here based on Victor's divine interventions
+This system assumes that the divine favour of the monster is quite high and fixed; it then takes the difference 
+between the monsters divine favour and the players and then checks whether the god will intervene for the monster]
+Every turn when the location is the 
+	let m be a random number between 1 and 20;
+	increase m by 9;
+	decrease m by the divine favour;
+	If a random chance of m in 100 succeeds:
+		have Godname arena-intervene. 
+
+To have (guy - a text) arena-intervene:
+	[TODO stuff]
+	
 
 Section - Awarding divine power 
 
 ArenaAwardGranted is a truth state variable that varies. ArenaAwardGranted is false.
 
 Every turn (this is the alternative award at the Arena of the Gods rule):
-	if the location is the Arena of the Gods:
+	if (the location is the Arena of the Gods) and (combat status is peace) and (ArenaAwardGranted is false):
 		repeat with guy running through dead not off-stage persons:
 			have guy disappear;
 			if guy is grouper and guy is not group leading:
@@ -151,7 +168,7 @@ Every turn (this is the alternative award at the Arena of the Gods rule):
 					say "Your God grants you 2 divine favour!".
 
 Killing rule (this is the killingalternative award at the Arena of the Gods rule):
-	if the killer-guy is the player and the location is the Arena of the Gods and ArenaAwardGranted is false:
+	if (the killer-guy is the player) and (the location is the Arena of the Gods) and (ArenaAwardGranted is false):
 		Increase divine favour by 2;
 		now ArenaAwardGranted is true;
 		have the killer-guy disappear;
