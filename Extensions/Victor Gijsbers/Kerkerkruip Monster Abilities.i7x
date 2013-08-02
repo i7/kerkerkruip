@@ -557,7 +557,8 @@ To decide whether all enemies are asleep:
 Dungeon interest rule (this is the put people asleep rule):
 	repeat with guy running through not off-stage sleeper people:
 		if a random chance of initial sleep chance of guy in 100 succeeds:
-			now guy is asleep.
+			if guy is not the player:
+				now guy is asleep.
 
 First carry out an actor hitting (this is the being attacked wakes people up rule):  [Before the attack because then the prose describing the attack will generally make more sense]
 	if the global defender is asleep and the global defender is alive:
