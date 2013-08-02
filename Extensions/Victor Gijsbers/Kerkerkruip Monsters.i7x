@@ -5264,7 +5264,7 @@ The malignant chanter is talker.
 The malignant chanter is thrower.
 
 The level of malignant chanter is 0.
-The ID of the malignant chanter is 33.
+The ID of the malignant chanter is 35.
 The malignant chanter is medium.
 
 The health of malignant chanter is 25.
@@ -5365,7 +5365,7 @@ Chapter - Drakul
 Drakul is a male not neuter undead super-undead undead-faction monster.
 Drakul is proper-named.
 
-The description of Drakul is "This man must once have been one of the proud battle bards of Algir, but now he has been reduced to a putrefying corpse animated by magic. His chant can still inspire his undead allies, though."
+The description of Drakul is "While he might pass for a classy gentleman in civilised society, Drakul is in fact one of the oldest and most dangerous vampires the worls has ever known. And he always smiles. Always."
 
 Drakul is medium.
 Drakul is talker.
