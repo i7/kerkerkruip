@@ -51,11 +51,9 @@ Chapter - Assets
 
 A figure name has a number called the y-offset. The y-offset of a figure-name is usually 0.[It is not necessary for all figure-names to get this property, but a bug in Inform--http://inform7.com/mantis/view.php?id=1067--prevents us from referring to the property if it is not defined in this way.]
 
-[Section - Sounds
+Section - Sounds
 
-Sound of Klezmer is the file "Los_Jekes_-_Klezmer_de_Coiro.ogg".
-Sound of Persian is the file "Christian__Kiane__Fromentin_-_Ilk_Bahar.ogg".
-Sound of Spanish gypsy is the file "Los_Jekes_-_Romani.ogg".][****]
+Sound of Music is the file "Kerkerkruip Main Theme.ogg".
 
 
 Section - Minimovies
@@ -655,7 +653,6 @@ Redraw-menu is a truth state variable. Redraw-menu is false.
 					decide on tune.]
 
 For showing the title screen when full graphics support is true and data value 5 is 1 (this is the graphic title screen rule):
-	[let theme music be the music selected by the player;]
 	close the status window;[needed on restart]
 	close side windows;[needed on restart]
 	let session flag be false;
@@ -773,7 +770,7 @@ The title-container is a sprite. It is center-aligned. The origin is {330, 359}.
 To show the title:
 	now the associated canvas of the graphics-window is the title-screen;
 	animate the title-animation as a reel animation targeting the title-container at 8 fps;
-	[play sound of music;]
+	play the theme music;
 	delay input until all animations are complete.[Input is not allowed during the title animation.]
 
 
@@ -848,7 +845,6 @@ To fade in the main menu:
 	repeat with el running through card-type-containers:
 		deactivate el;[hides type slug for cards; they will be turned on when card display begins]
 	animate the menu fade-up track as a fade animation targeting the main-menu and using the Black-Fader from 100 % to 0 % at 8 fps with a duration of 6 frames;
-	[play sound of music;]
 	wait for main menu input until all animations are complete.[Input is allowed once we are fading in to the menu.]
 
 To prepare central zone:
@@ -1149,8 +1145,8 @@ To close title screen:
 	if menu-active is false:
 		now fade-length is the maximum sound volume;
 	animate the window-fading track as a fade animation targeting the graphics-window and using the Black-Fader from 0 % to 100 % at 8 fps with a duration of (fade-length) frames;
-	[if menu-active is false:[fade out music only if we're leaving menu for good.]
-		animate the music-fading track as a custom animation at 8 fps with a duration of (fade-length) frames;][****]
+	if menu-active is false:[fade out music only if we're leaving menu for good.]
+		animate the music-fading track as a custom animation at 8 fps with a duration of (fade-length) frames;
 	delay input until all animations are complete;
 	now the display-layer of the black-fader is 9999;
 	shut down the graphics-window;
@@ -1178,7 +1174,7 @@ Foreground and background are sound-channels.
 
 To play the theme music:
 	set up sound channels;
-	[play sound of Persian in background channel, looping.][****]
+	play sound of music in background channel, looping.
 
 To say resource number of (S - a sound name):
 	(- print ResourceIDsOfSounds-->{S} ; -).
