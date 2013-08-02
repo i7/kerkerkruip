@@ -543,17 +543,21 @@ Rule for starting the virtual machine (this is the graphics support rule):
 		now full graphics support is true.
 
 Before showing the title screen (this is the request graphics preferences rule):
-	if data value 5 is 0[i.e., no value] and full graphics support is true:
-		say "[italic type]If you are using a screen reader to play the game, you should answer NO. The main menu graphics are not compatible with screen readers. The graphics preference can also be changed from the Options menu.[roman type][paragraph break]";
-		say "[bold type]Would you like menu graphics?[roman type] ";
-		if the player consents:
-			set data value 5 to 1;
-		otherwise:
-			set data value 5 to -1;
-			set data value 7 to 1;[also disable information panels]
-		clear the main-window.
+	if data value 5 is 0 [i.e., no value] and full graphics support is true:
+		say "[Kerkerkruip] has a graphical main menu, which cannot be used with screen readers.[paragraph break][bold type]Disable[roman type] the graphical interface? Please enter:  [bold type]Y[roman type]es or [bold type]N[roman type]o[paragraph break]This choice can later be changed from the Options menu.[paragraph break][paragraph break]";
+		while 1 is 1:
+			let key be the chosen letter;
+			if key is 89 or key is 121: [Y]
+				set data value 5 to -1;
+				set data value 7 to 1;[also disable information panels]
+				break;
+			if key is 78 or key is 110: [N]
+				set data value 5 to 1;
+				break;
+		clear the main-window;
 
 The request graphics preferences rule is listed after the load the file of data storage rule in the before showing the title screen rules.
+
 
 
 Section - Setting graphics preferences from the command line
