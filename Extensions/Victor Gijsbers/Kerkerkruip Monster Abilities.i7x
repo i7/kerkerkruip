@@ -646,11 +646,6 @@ A followers rule (this is the asleep follower cannot follow rule):
 	if test subject is asleep:
 		rule fails.
 
-Every turn when the player is asleep (this is the please replace me player asleep rule):
-	now the player is not asleep;
-	say "You have dreamt, and now wake up.".
-	
-
 [For stealing items when someone is asleep, see Kerkerkruip Actions and UI.]
 	
 

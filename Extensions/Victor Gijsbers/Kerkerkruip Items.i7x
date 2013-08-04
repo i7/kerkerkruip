@@ -1518,7 +1518,10 @@ An exploding rule:
 				say "The explosion does seem to be very feeble, though.";
 		otherwise:
 			if exploding-location is location:
-				say "The Morphean grenade explodes, and you are immediately engulfed in dreams. Joyous dreams, terrible dreams, dreams that seem to be more real than they have any right to be. An indefinite amount of time later, you awake -- and nothing seems to have changed."; [Opportunity for COOL STUFF (TM).]
+				say "The Morphean grenade explodes, and you are immediately overwhelmed by sleep.";
+				repeat with guy running through alive people in exploding-location:
+					if guy is sleeper:
+						now guy is asleep;
 			otherwise:
 				repeat with guy running through alive people in exploding-location:
 					if guy is sleeper:
