@@ -139,16 +139,116 @@ Section - Godly intervention
 [For each God, I'll be implementing some form of godly intervention here based on Victor's divine interventions
 This system assumes that the divine favour of the monster is quite high and fixed; it then takes the difference 
 between the monsters divine favour and the players and then checks whether the god will intervene for the monster]
-Every turn when the location is the 
-	let m be a random number between 1 and 20;
-	increase m by 9;
+Every turn when (the location is the Arena of the Gods) and (the combat status is not peace):
+	let m be 30;
 	decrease m by the divine favour;
 	If a random chance of m in 100 succeeds:
 		have Godname arena-intervene. 
 
+
+Arena-turncounter is a number that varies. Arena-turncounter is -1.
+OppNomos is a person that varies.
+OppNomosDetermined is a truth state variable that varies. OppNomosDetermined is false.
+OppNomosBonus is a truth state variable that varies. OppNomosBonus is false.
+
 To have (guy - a text) arena-intervene:
-	[TODO stuff].
-	
+	if at least one hostile alive person is enclosed by the location:
+		If guy is "Aite":
+			let n be a random number between 3 and 50;
+			increase n by a random number between 1 and 9;[Healer of Aite is seen as a champion]
+			increase n by a random number between 1 and 9;
+			increase n by 5; [half of wrath state]
+			if the Healer of Aite is alive:
+				let X be the permanent health of the Healer of Aite;
+			otherwise:
+				let X be a random number between 16 and 23; [health average between the three fanatics]
+			now X is X divided by 10;
+			if a chance of the final spirit of the Healer of Aite in 50 succeeds:
+				increase X by 2;
+			Let Y be (X times 3) divided by 2;
+			let opp be a random hostile alive person enclosed by the location;
+			if n < 10:
+				say "A gigantic [one of]sword[or]spear[or]pike[at random] bursts out of the ground, impaling [the opp] for [bold type][Y] damage[roman type]!";
+				decrease the health of the opp by Y;
+				unless guy is dead:
+					let the opp lose concentration;
+				if the health of the guy is less than 1:
+					say "Clearly, it doesn't always pay off to serve the mad goddess.";
+			otherwise if n < 20:
+				say "A huge [one of]sword[or]spear[or]pike[at random] bursts out of the ground, impaling [the opp] for [bold type][X] damage[roman type]!";
+				decrease the health of the guy by X;
+				unless guy is dead:
+					let the guy lose concentration;
+				if the health of the guy is less than 1:
+					say "Clearly, it doesn't always pay off to serve the mad goddess.";
+			otherwise if n < 30:
+				if the concentration of the player is less than 3:
+					say "You suddenly feel divinely inspired and [bold type]highly concentrated[roman type].";
+					now the concentration of the player is 3;
+			otherwise if n < 40:
+					if the concentration of the opp is less than 3:
+						say "[the opp] suddenly fights with renewed rigour, as if divinely inspired.";
+						now the concentration of the player is 3;
+			otherwise if n < 50:
+				say "A huge [one of]sword[or]spear[or]pike[at random] bursts out of the ground, skewering you for [bold type][X] damage[roman type]!";
+					decrease the health of the player by X;
+					unless the player is dead:
+						let the player lose concentration;
+					if the player is hidden:
+						now the player is not hidden;
+						say "Your cry of pain reveals your presence.";
+					if health of the player is less than 1:
+						end the story saying "A maddening laughter of the Goddess is the last sound you'll ever hear.";
+			otherwise:
+				say "A gigantic [one of]sword[or]spear[or]pike[at random] bursts out of the ground, skewering you for [bold type][Y] damage[roman type]!";
+					decrease the health of the player by Y;
+					unless the player is dead:
+						let the player lose concentration;
+					if the player is hidden:
+						now the player is not hidden;
+						say "Your cry of pain reveals your presence.";
+					if health of the player is less than 1:
+						end the story saying "A maddening laughter of the Goddess is the last sound you'll ever hear.";
+			If guy is "Nomos":
+				if OppNomosDetermined is false:
+					now oppNomos is a random hostile alive person enclosed by the location;
+					now OppNomosDetermined is true;
+				if Arena-turncounter is less than 1:
+					now Arena-turncounter is a random number between 1 and 4;
+					say "The god of Law speaks out loud: 'Attack in [Arena-turncounter] turns and my strength will guide you!'";
+					choose row with an Option of the action of oppNomos waiting in the Table of AI Action Options;
+					increase Action Weight entry by 1000;
+			If guy is "Sul":
+			If guy is "Chton":
+			If guy is "Herm":
+			[Todo stuff].
+
+
+
+Every turn when (the location is the Arena of the Gods) and (Godname is "Nomos") and (combat status is not peace):
+	if Arena-turncounter is greater than -1:
+		decrease Arena-turncounter by 1;
+	if Arena-turncounter is 0:
+		choose row with an Option of the action of oppNomos waiting in the Table of AI Action Options;
+		decrease Action Weight entry by 1000;
+		choose row with an Option of the action of oppNomos attacking in the Table of AI Action Options;
+		increase Action Weight entry by 1500;
+		now OppNomosBonus is true;
+		say "[oppNomos] follows the rules of his God, and prepares to attack!";
+	If Arena-Turncounter is -1:
+		choose row with an Option of the action of oppNomos attacking in the Table of AI Action Options;
+		decrease Action Weight entry by 1500;
+		now OppNomosBonus is false.
+
+An attack modifier rule (this is the Nomos attack bonus rule):
+	if OppNomosBonus is true and the global attacker is oppNomos:
+		if the numbers boolean is true, say " + 4 (the law is with [the oppNomos])[run paragraph on]";
+		increase the attack strength by 4.
+
+A damage modifier rule (this is the Nomos damage bonus rule):
+	if OppNomosBonus is true and the global attacker is the oppNomos:
+		if the numbers boolean is true, say " + 4 (the law is with [the opppNomos])[run paragraph on]";
+		increase the attack damage by nomos piety.
 
 Section - Awarding divine power 
 
