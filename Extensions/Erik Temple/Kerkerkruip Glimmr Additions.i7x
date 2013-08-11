@@ -343,20 +343,20 @@ Figure of card-Armadillo is the file "card_Armadillo.jpg".
 Figure of card-Chain_Golem is the file "card_Chain-Golem.jpg".
 Figure of card-Daggers is the file "card_Daggers.jpg".
 Figure of card-Mindslug is the file "card_Mindslug.jpg".
+Figure of card_Minotaur is the file "card_Minotaur.jpg".
 Figure of card-Miranda is the file "card_Miranda.jpg".
 Figure of card-Reaper is the file "card_Reaper.jpg".
 Figure of card-Tentacle is the file "card_Tentacle.jpg".
+Figure of card_Wisps-of-Pain is the file "card_Wisps-of-Pain.jpg".
 
 [Placeholders]
 Figure of card_Malygris is the file "card_Malygris.jpg".
 Figure of card_Bodmall is the file "card_Bodmall.jpg".
 Figure of card_Fanatics-of-Aite is the file "card_Fanatics-of-Aite.jpg".
-Figure of card_Minotaur is the file "card_Minotaur.jpg".
 Figure of card_Hound is the file "card_Hound.jpg".
 Figure of card_Demon-of-Rage is the file "card_Demon-of-Rage.jpg".
 Figure of card_Blood-Ape is the file "card_Blood-Ape.jpg".
 Figure of card_Jumping-Bomb is the file "card_Jumping-Bomb.jpg".
-Figure of card_Wisps-of-Pain is the file "card_Wisps-of-Pain.jpg".
 
 
 Section - Map
