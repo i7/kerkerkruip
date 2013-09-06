@@ -2155,8 +2155,8 @@ To do the angel of compassion power-down:
 
 Section - Angel of Compassion images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
-The avatar of angel of compassion is Figure of map_monster_hound.
-The legend-label of angel of compassion is Figure of map_legend_hound.
+The avatar of angel_of_compassion is Figure of map_monster_angel_of_compassion.
+The legend-label of angel_of_compassion is Figure of map_legend_angel_of_compassion.
 
 Section - Prose
 
@@ -5281,8 +5281,8 @@ When play begins:
 
 Section - Malignant Chanter images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
-The avatar of malignant chanter is Figure of map_monster_zombie_toad. [TODO]
-The legend-label of malignant chanter is Figure of map_legend_zombie_toad. [TODO]
+The avatar of malignant_chanter is Figure of map_monster_malignant_chanter.
+The legend-label of malignant_chanter is Figure of map_legend_malignant_chanter.
 
 
 Section - Special and AI
@@ -5392,8 +5392,8 @@ When play begins:
 
 Section - Drakul images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
-The avatar of Drakul is Figure of map_monster_zombie_toad. [TODO]
-The legend-label of Drakul is Figure of map_legend_zombie_toad. [TODO]
+The avatar of Drakul is Figure of map_monster_Drakul.
+The legend-label of Drakul is Figure of map_legend_Drakul.
 
 
 Section - Drakul drains the living

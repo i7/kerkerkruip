@@ -383,6 +383,7 @@ Figure of map_label_Lava_lake is the file "map_label_Lava_lake.png".
 Figure of map_label_Bridge is the file "map_label_Bridge.png".
 Figure of map_label_Nomos is the file "map_label_Nomos.png".
 Figure of map_label_Aite is the file "map_label_Aite.png".
+Figure of map_label_Herm is the file "map_label_Herm.png".
 Figure of map_label_Sul is the file "map_label_Sul.png".
 Figure of map_label_Chton is the file "map_label_Chton.png".
 Figure of map_label_Crypt is the file "map_label_Crypt.png".
@@ -408,6 +409,7 @@ Figure of map_label_Vault is the file "map_label_Vault.png".
 Figure of map_label_Smoke is the file "map_label_Smoke.png".
 Figure of map_label_Arena is the file "map_label_Arena.png".
 Figure of map_label_Zen is the file "map_label_Zen.png".
+Figure of map_label_Mausoleum is the file "map_label_Mausoleum.png".
 
 [Enemy labels]
 Figure of map_monster_Miranda is the file "map_monster_Miranda.png".
@@ -419,6 +421,7 @@ Figure of map_monster_chain_golem is the file "map_monster_chain_golem.png".
 Figure of map_monster_reaper is the file "map_monster_reaper.png".
 Figure of map_monster_jumping_bomb is the file "map_monster_jumping_bomb.png".
 Figure of map_monster_hound is the file "map_monster_hound.png".
+Figure of map_monster_angel_of_compassion is the file "map_monster_angel_of_compassion.png".
 Figure of map_monster_demon_of_rage is the file "map_monster_demon_of_rage.png".
 Figure of map_monster_mindslug is the file "map_monster_mindslug.png".
 Figure of map_monster_minotaur is the file "map_monster_minotaur.png".
@@ -437,6 +440,8 @@ Figure of map_monster_aswang is the file "map_monster_aswang.png".
 Figure of map_monster_mummified_priest is the file "map_monster_mummified_priest.png".
 Figure of map_monster_abyss_of_the_soul is the file "map_monster_abyss_of_the_soul.png".
 Figure of map_monster_zombie_toad is the file "map_monster_zombie_toad.png".
+Figure of map_monster_Drakul is the file "map_monster_Drakul.png".
+Figure of map_monster_malignant_chanter is the file "map_monster_malignant_chanter.png".
 Figure of map_monster_demonic_assassin is the file "map_monster_demonic_assassin.png".
 Figure of map_monster_smoke_demon is the file "map_monster_smoke_demon.png".
 Figure of map_monster_imp is the file "map_monster_imp.png".
@@ -453,6 +458,7 @@ Figure of map_legend_reaper is the file "map_legend_reaper.png".
 Figure of map_legend_jumping_bomb is the file "map_legend_jumping_bomb.png".
 Figure of map_legend_hound is the file "map_legend_hound.png".
 Figure of map_legend_demon_of_rage is the file "map_legend_demon_of_rage.png".
+Figure of map_legend_angel_of_compassion is the file "map_legend_angel_of_compassion.png".
 Figure of map_legend_mindslug is the file "map_legend_mindslug.png".
 Figure of map_legend_minotaur is the file "map_legend_minotaur.png".
 Figure of map_legend_giant_tentacle is the file "map_legend_giant_tentacle.png".
@@ -470,6 +476,8 @@ Figure of map_legend_aswang is the file "map_legend_aswang.png".
 Figure of map_legend_mummified_priest is the file "map_legend_mummified_priest.png".
 Figure of map_legend_abyss_of_the_soul is the file "map_legend_abyss_of_the_soul.png".
 Figure of map_legend_zombie_toad is the file "map_legend_zombie_toad.png".
+Figure of map_legend_Drakul is the file "map_legend_Drakul.png".
+Figure of map_legend_malignant_chanter is the file "map_legend_malignant_chanter.png".
 Figure of map_legend_demonic_assassin is the file "map_legend_demonic_assassin.png".
 Figure of map_legend_smoke_demon is the file "map_legend_smoke_demon.png".
 Figure of map_legend_imp is the file "map_legend_imp.png".

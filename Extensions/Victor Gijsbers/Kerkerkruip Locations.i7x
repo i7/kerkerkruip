@@ -544,7 +544,7 @@ Last detection rule (this is the Temple of Herm detection rule):
 
 Section - Temple of Herm label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
-The map-label of Temple of Herm is Figure of map_label_Chton. [TODO!!]
+The map-label of Temple of Herm is Figure of map_label_Herm.
 
 
 Chapter - The Crypt
@@ -1531,7 +1531,7 @@ To people the mausoleum:
 			
 Section - Mausoleum label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
-The map-label of Mausoleum is Figure of map_label_Treasury. [TODO]
+The map-label of Mausoleum is Figure of map_label_Mausoleum.
 
 			
 
