@@ -2050,7 +2050,7 @@ Section - Comfy chair
 The comfy chair is a chair and scenery in the Zen Room. The description of the comfy chair is "A leather, well worn chair, but quite cozy to look at[if chairinheritor is alive and chairinheritor is not off-stage]. Somehow, you feel it is owned by [the chairinheritor][end if]." Understand "comfortable looking","well worn" and "leather" as the comfy chair.
  
 Report entering the comfy chair:
-	if the comfy chair is in the Zen room and chairinheritor is not in the Zen room and chairinheritor is alive and chairinheritor is not off-stage:
+	if the comfy chair is in the Zen room and chairinheritor is not in the Zen room and chairinheritor is alive and chairinheritor is not off-stage and the chairinheritor is not asleep:
 		if the best route from the Zen room to the location of the chairinheritor is a direction:
 			let chair-route be a list of rooms;
 			let place be the Zen room;
@@ -2064,6 +2064,7 @@ Report entering the comfy chair:
 					now retreat location is place; [will end up being the last room before the final room]
 			move the comfy chair to the location of chairinheritor;
 			now comfy chair is not scenery;
+			now player is not hidden;
 			say "You hear [the chairinheritor] screaming: '[if player is male]He[otherwise if player is female]She[otherwise]It[end if]'ll probably be in the Zen Room!' Suddenly, you feel yourself, and the chair, moving at a breakneck speed[if chair-route is not empty] through [chair-route with definite articles][end if]. A few moments later you find yourself in [the printed name of the location]. 'Well, well, well,' [the chairinheritor] smirks, 'look who we have here. We meet at last, Adventurer!'";
 			take no time;
 			rule succeeds.
