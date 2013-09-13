@@ -1937,7 +1937,7 @@ The hound is not thrower.
 
 The description of the hound is "The black hound is ever watchful, ready to punish its prey for any wrong move."
 
-The health of the hound is 19.
+The health of the hound is 17.
 The melee of the hound is 2.
 The defence of the hound is 9.
 
