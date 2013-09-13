@@ -1340,7 +1340,16 @@ Carry out directional throwing:
 			repeat with guy running through alive persons in exploding-location:
 				now guy is follower;
 				if follower percentile chance of guy is less than 90:
-					increase follower percentile chance of guy by 10.
+					increase follower percentile chance of guy by 10;
+	if the room second noun of location collapses location:
+		if a random chance of 1 in 20 succeeds:
+			let X be room second noun of location;
+			change the second noun exit of location to nothing;
+			let reverse be the opposite of second noun;
+			change the reverse exit of X to nothing;
+			say "That grenade seems to have hit the walls of the passage [second noun] with a little too much force. With a huge crash, the [if second noun is up or second noun is down]staircase[otherwise]corridor[end if] [bold type]collapses[roman type]!";
+			now X does not collapse location;
+			now location does not collapse X.
 	
 First grenade returning rule:
 	now grenade-return-percentage is 25.
