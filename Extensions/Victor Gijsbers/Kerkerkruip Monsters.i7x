@@ -4339,7 +4339,7 @@ An AI action selection rule for at-Act Israfel (this is the Israfel considers Is
 Section - Israfel's attack
 
 An aftereffects rule (this is the Israfel's blinding attack rule):
-	if the global attacker is Israfel and attack damage is greater than 0:
+	if the global attacker is Israfel and attack damage is greater than 0 and global defender is alive:
 		unless global defender is blind:
 			unless flash-grenade-timer of global defender > 6:
 				now flash-grenade-timer of global defender is 6;
@@ -4349,7 +4349,7 @@ An aftereffects rule (this is the Israfel's burning defence rule):
 	if the global defender is Israfel and attack damage is greater than 0:
 		unless global attacker weapon is ranged:
 			decrease health of global attacker by 3;
-			say "Israfel's flames [bold type]burn[roman type] [the global attacker] [if global attacker is alive]for [bold type]3 damage[roman type][otherwise][bold type]to death[roman type].";
+			say "Israfel's flames [bold type]burn[roman type] [the global attacker] [if global attacker is alive]for [bold type]3 damage[roman type][otherwise][bold type]to death[roman type][end if].";
 			if global attacker is the player and the player is not alive:
 				end the story saying "You will burn in Heaven.".
 
@@ -4397,7 +4397,7 @@ The level of Isra is 0.
 
 The health of Isra is 20.
 The melee of Isra is 0.
-The defence of Isra is 11.
+The defence of Isra is 10.
 
 The body score of Isra is 5.
 The mind score of Isra is 12.
@@ -4414,7 +4414,53 @@ When play begins:
 Isra is angelic.
 Radiation of Isra is 3.
 
+Section - Isra specials and AI
 
+An aftereffects rule (this is the Isra's burning defence rule):
+	if the global defender is Isra and attack damage is greater than 0:
+		unless global attacker weapon is ranged:
+			decrease health of global attacker by 2;
+			say "Isra's flames [bold type]burn[roman type] [the global attacker] [if global attacker is alive]for [bold type]2 damage[roman type][otherwise][bold type]to death[roman type][end if].";
+			if global attacker is the player and the player is not alive:
+				end the story saying "You will burn in Heaven.".
+
+An AI action selection rule for the at-Act Isra (this is the Isra doesn't like attacking rule):
+	choose row with an Option of the action of Isra attacking the chosen target in the Table of AI Action Options;
+	decrease action weight entry by 5;
+	if concentration of Isra is 3:
+		decrease action weight entry by 100;
+		choose row with an Option of the action of Isra waiting in the Table of AI Action Options;
+		now action weight entry is 20.
+
+An AI action selection rule for Isra (this is the Isra concentration select rule):
+	choose row with an Option of the action of Isra concentrating in the Table of AI Action Options;
+	increase the Action Weight entry by 5.
+	
+Section - Isra prose
+
+Report Isra hitting a dead pc:
+	say "'May the fires of Heaven receive you,' Isra whispers.";
+	rule succeeds.
+
+Report Isra attacking:
+	unless the actor is the noun:
+		say "Israfel projects his fires towards [the noun].";
+	otherwise:
+		say "'Mystic union with the feminine principle is overrated,' Isra whispers as he tries to strangle himself.";
+	rule succeeds.
+
+Report Isra dodging:
+	say "Smiling, Isra glides aside.";
+	rule succeeds.
+
+Report Isra parrying:
+	say "Flames surround Isra.";
+	rule succeeds.
+
+Report Isra waiting when Isra is insane:
+	say "Isra furiously rubs his phallus while singing about the times that Fell ate it.";
+	rule succeeds.
+	
 Section - Fell
 
 Fell is a female monster. "Fell radiates death."
@@ -4428,7 +4474,7 @@ Fell is thrower.
 The level of Fell is 0.
 
 The health of Fell is 20.
-The melee of Fell is 4.
+The melee of Fell is 3.
 The defence of Fell is 10.
 
 The body score of Fell is 12.
@@ -4437,7 +4483,7 @@ The spirit score of Fell is 7.
 
 When play begins:
 	let X be a random natural weapon part of Fell;
-	now damage die of X is 8;
+	now damage die of X is 5;
 	now the passive parry max of X is 0;
 	now the active parry max of X is 0;
 	now the dodgability of X is 2;
@@ -4446,10 +4492,78 @@ When play begins:
 Fell is angelic.
 Radiation of Fell is 1.
 
+Section - Fell specials and AI
+
+An aftereffects rule (this is the Fell's blinding attack rule):
+	if the global attacker is Fell and attack damage is greater than 0 and global defender is alive:
+		unless global defender is blind:
+			unless flash-grenade-timer of global defender > 3:
+				now flash-grenade-timer of global defender is 3;
+				say "Fell's nails strike [possessive of the global defender] eyes, [bold type]blinding[roman type] [the global defender] for 3 turns.".
+
+Section - Fell prose
+
+Report Fell hitting a dead pc:
+	say "'May the infinite void have mercy on you,' Fell giggles.";
+	rule succeeds.
+
+Report Fell attacking:
+	unless the actor is the noun:
+		say "Fell jumps towards [the noun], flashing her teeth.";
+	otherwise:
+		say "'I'm so beautiful I could eat myself,' Fell states, and starts doing so.";
+	rule succeeds.
+
+Report Fell dodging:
+	say "Snarling, Fell throws herself out of the way.";
+	rule succeeds.
+
+Report Fell parrying:
+	say "With an icy laugh, Fell parries the attack.";
+	rule succeeds.
+
+Report Fell waiting when Isra is insane:
+	say "'The darkness between my legs yearns to devour you,' Fell moans.";
+	rule succeeds.
+
 Section - Fell shares in Isra's concentration
 
 When play begins (this is the link isra to fell rule):
 	now Isra is linked to Fell.
+
+Section - Reuniting
+
+Every turn when Isra is in the location or Fell is in the location (this is the Isra and Fell reunite rule):
+	if Isra is not alive or Fell is not alive or (health of Isra < 3) or (health of Fell < 3):
+		reunite Israfel.
+
+To reunite Israfel:
+	now Israfel is not asleep;
+	let n be health of Isra;
+	if n < 0:
+		now n is 0;
+	let m be health of Fell;
+	if m < 0:
+		now m is 0;
+	now health of Israfel is (n + m);
+	now faction of Israfel is hostile;
+	now concentration of Israfel is 0;
+	now Israfel is not at dodge;
+	now Israfel is not at parry;
+	now stun count of Israfel is 0;
+	now stun strength of Israfel is 0;
+	now Israfel is unseen;
+	now last-seen-location of Israfel is Null-Room;
+	move Israfel to the location;
+	remove Isra from play;
+	remove Fell from play;
+	say "Motes of light swirl through the room in a freakish tornado, and suddenly [bold type]Israfel has reformed[roman type].".
+	
+Every turn when Isra is not alive and Fell is not alive and Israfel is alive (this is the Isra and Fell both dead rule):
+	move Israfel to the location;
+	say "Israfel's dying cry shakes the foundations of the world.";
+	now health of Israfel is -10.
+
 
 Section - Link
 
@@ -4491,12 +4605,37 @@ Status attribute rule (this is the link status rule):
 		if long status is true:
 			say "You have [bold type]linked[roman type] yourself to [the linked guy of the player].[line break][run paragraph on]".
 
+Chance to win rule (this is the CTW link concentration bonus rule):
+	if an alive not off-stage person is linked to the running AI:
+		if the concentration of linked guy of the running AI is:
+			-- 1:
+				increase the chance-to-win by 2;
+			-- 2:
+				increase the chance-to-win by 4;
+			-- 3:
+				increase the chance-to-win by 8;
+
+Every turn when a person is linked to the player (this is the unravelling link rule):
+	let guy be linked guy of the player;
+	if guy is not alive or guy is off-stage:
+		say "Your link with [the guy] [bold type]disappears[roman type].";
+		now nobody is linked to the player;
+	otherwise:
+		let n be 10;
+		let m be (final spirit of the player / 3);
+		if m > 9:
+			now m is 9;
+		decrease n by m;
+		if a random chance of n in 100 succeeds:
+			say "Your link with [the guy] [bold type]unravels[roman type].";
+			now nobody is linked to the player.
+
 Section - Power of Israfel
 
 The power of Israfel is a power. Israfel grants power of Israfel.
 The power level of power of Israfel is 4.
 The command text of power of Israfel is "link".
-The description of power of Israfel is "Type: active ability.[paragraph break]Command: link [italic type]someone[roman type].[paragraph break]The 'link' command will link your spirit to that of another person. Until you link to someone else, you will benefit from the concentration of the person you linked to just as if it were your own. Every turn, the link has a 10% probability of unravelling; but this probability is decreased by 1% for every 3 points of spirit you have."
+The description of power of Israfel is "Type: active ability.[paragraph break]Command: link [italic type]someone[roman type].[paragraph break]The 'link' command will link your spirit to that of another person. Until you link to someone else, you will benefit from the concentration of the person you linked to just as if it were your own. Every turn, the link has a 10% probability of unravelling; but this probability is decreased by 1% for every 3 points of spirit you have, to a minimun of 1% at 27 spirit."
 The power-name of power of Israfel is "power of Israfel".
 
 Absorbing power of Israfel:
@@ -4536,6 +4675,8 @@ Check linking:
 Carry out linking:
 	now noun is linked to the player;
 	say "You forge a spiritual link which will allow you to benefit from [possessive of the noun] concentration."
+
+
 
 
 
