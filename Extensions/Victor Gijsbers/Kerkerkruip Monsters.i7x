@@ -1591,7 +1591,7 @@ The legend-label of reaper is Figure of map_legend_reaper.
 Section - The Reaper follows you!
 
 Every turn when the Reaper is in the location and the Reaper is not follower (this is the Reaper starts following rule):
-	if the player is not hidden:
+	if the player is not hidden and the reaper is not asleep:
 		say "'Do not be afraid, for I will end your suffering!' the Reaper exclaims.";
 		now the Reaper is follower.
 	
