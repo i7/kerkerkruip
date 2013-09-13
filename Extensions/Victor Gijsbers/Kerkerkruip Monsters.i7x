@@ -2088,6 +2088,7 @@ The unlock hidden switch of the angel of compassion is false.
 The unlock text of the angel of compassion is "an angelic being that grows weaker whenever someone dies".
 The angel of compassion is talker.
 The angel of compassion is thrower.
+The angel of compassion is angelic.
 Angel of compassion is flyer.
 Radiation of angel of compassion is 4.
 
@@ -4228,6 +4229,255 @@ Carry out calling:
 			say "[The noun] [has-have] no way to reach you!";
 	otherwise:
 		say "Something prevents [the noun] from following your command.".
+
+
+
+
+Chapter - Level 4 - Israfel
+
+
+Israfel is a neuter monster. "The fires of heaven envelop the terrible, androgynous angel known to mortals as Israfel."
+Understand "terrible" and "androgynous" and "angel" and "fires" and "heaven" and "fires of heaven" as Israfel.
+The description of Israfel is "Every angel is terror; and to see such beauty and nobleness is to know that one's own existence means nothing.".
+The ID of Israfel is 36.
+Israfel is huge.
+Israfel is talker.
+Israfel is thrower.
+
+The level of Israfel is 4.
+
+The health of Israfel is 40.
+The melee of Israfel is 2.
+The defence of Israfel is 10.
+
+The body score of Israfel is 7.
+The mind score of Israfel is 7.
+The spirit score of Israfel is 12. 
+
+When play begins:
+	let X be a random natural weapon part of Israfel;
+	now damage die of X is 6;
+	now the passive parry max of X is 0;
+	now the active parry max of X is 0;
+	now the dodgability of X is 2;
+	now printed name of X is "blinding flame".
+
+Israfel is angelic.
+Radiation of Israfel is 4.
+
+Section - Israfel's healing trance
+
+Israfel-trance is a number that varies. Israfel-trance is 0.
+
+Israfel-trancing is an action applying to nothing.
+
+Carry out Israfel Israfel-trancing:
+	increase Israfel-trance by 1;
+	let n be (permanent health of Israfel - health of Israfel);
+	if n > Israfel-trance:
+		now n is Israfel-trance;
+	increase health of Israfel by n;
+	say "[if Israfel-trance is 1]Israfel falls into a restorative trance[otherwise]Israfel deepens its trance[end if], [bold type]increasing its health by [n][roman type].".
+
+Aftereffects rule (this is the Israfel getting hit rule):
+	if Israfel is the global defender and the attack damage is greater than 0:
+		say "Israfel's [bold type]healing trance is broken[roman type].";
+		now Israfel-trance is 0.
+
+An AI action selection rule for at-Act Israfel (this is the Israfel considers trancing rule):
+	choose a blank Row in the Table of AI Action Options;
+	now the Option entry is the action of Israfel Israfel-trancing;
+	let n be (permanent health of Israfel - health of Israfel);
+	now the Action Weight entry is n;
+	if Israfel-trance > n:
+		increase Action Weight entry by n;
+	otherwise:
+		increase Action Weight entry by Israfel-trance;
+	if n < 2:
+		decrease Action Weight entry by 10;
+	if n is 0:
+		decrease Action Weight entry by 100.
+
+Section - Israfel splitting
+
+Israfel-splitting is an action applying to nothing.
+
+Carry out Israfel Israfel-splitting:
+	say "With a loud bang, the angel [bold type]Israfel bursts apart[roman type]. Two creatures -- Isra and Fell -- stand where the single angel was standing a moment before.";
+	let n be health of Israfel;
+	increase n by 1;
+	now n is (n divided by 2);
+	now Isra is not asleep;
+	now health of Isra is n;
+	now faction of Isra is hostile;
+	now concentration of Isra is 0;
+	now Isra is not at dodge;
+	now Isra is not at parry;
+	now stun count of Isra is 0;
+	now stun strength of Isra is 0;
+	now Isra is unseen;
+	now last-seen-location of Isra is Null-Room;
+	move Isra to the location;
+	now Fell is not asleep;
+	now health of Fell is n;
+	now faction of Fell is hostile;
+	now concentration of Fell is 0;
+	now Fell is not at dodge;
+	now Fell is not at parry;
+	now stun count of Fell is 0;
+	now stun strength of Fell is 0;
+	now Fell is unseen;
+	now last-seen-location of Fell is Null-Room;
+	move Fell to the location;
+	remove Israfel from play.
+
+An AI action selection rule for at-Act Israfel (this is the Israfel considers Israfel-splitting rule):
+	choose a blank Row in the Table of AI Action Options;
+	now the Option entry is the action of Israfel Israfel-splitting;
+	now the Action Weight entry is a random number between 1 and 10.
+
+Section - Israfel's attack
+
+An aftereffects rule (this is the Israfel's blinding attack rule):
+	if the global attacker is Israfel and attack damage is greater than 0:
+		unless global defender is blind:
+			unless flash-grenade-timer of global defender > 6:
+				now flash-grenade-timer of global defender is 6;
+				say "Israfel's flaming attack [bold type]blinds[roman type] [the global defender].".
+				
+An aftereffects rule (this is the Israfel's burning defence rule):
+	if the global defender is Israfel and attack damage is greater than 0:
+		unless global attacker weapon is ranged:
+			decrease health of global attacker by 3;
+			say "Israfel's flames [bold type]burn[roman type] [the global attacker] [if global attacker is alive]for [bold type]3 damage[roman type][otherwise][bold type]to death[roman type].";
+			if global attacker is the player and the player is not alive:
+				end the story saying "You will burn in Heaven.".
+
+
+Section - Israfel prose
+
+Report the Israfel hitting a dead pc:
+	say "'We are but thoughts in the mind of god, and thus, like all thoughts, ephemeral.'";
+	rule succeeds.
+
+Report the Israfel attacking:
+	unless the actor is the noun:
+		say "Israfel projects its fires towards [the noun].";
+	otherwise:
+		say "'Creation was a mistake,' Israfel whispers as it tries to strangle itself.";
+	rule succeeds.
+
+Report Israfel dodging:
+	say "Impassive, Israfel glides aside.";
+	rule succeeds.
+
+Report Israfel parrying:
+	say "Flames surround Israfel.";
+	rule succeeds.
+
+Report Israfel waiting when Israfel is insane:
+	let guy be a random alive person;
+	let guy2 be a random alive person;
+	while guy is guy2:
+		let guy2 be a random alive person;		
+	say "'After several million years of contemplation,' Israfel says, 'I am now ready to announce the truth: [the guy] [is-are] the creator of Heaven and Earth, and [the guy2] [is-are] the ruler of darkness!'";
+	rule succeeds.
+
+
+Section - Isra
+
+Isra is a male monster. "Isra contemplates the nature of god."
+The description of Isra is "His wise face burns like the sun, but he seems more interested in contemplating the nature of god than in physical combat.".
+The ID of Isra is 37.
+Isra is large.
+Isra is talker.
+Isra is thrower.
+
+The level of Isra is 0.
+
+The health of Isra is 20.
+The melee of Isra is 0.
+The defence of Isra is 11.
+
+The body score of Isra is 5.
+The mind score of Isra is 12.
+The spirit score of Isra is 12. 
+
+When play begins:
+	let X be a random natural weapon part of Isra;
+	now damage die of X is 4;
+	now the passive parry max of X is 0;
+	now the active parry max of X is 0;
+	now the dodgability of X is 2;
+	now printed name of X is "cleansing flame".
+
+Isra is angelic.
+Radiation of Isra is 3.
+
+
+Section - Fell
+
+Fell is a female monster. "Fell radiates death."
+Understand "claws" and "fangs" and "moonlight" as Fell.
+The description of Fell is "All claws and fangs that glimmer like silver in moonlight. She is here to bring death, and yet you are drawn to her beauty.".
+The ID of Fell is 38.
+Fell is medium.
+Fell is talker.
+Fell is thrower.
+
+The level of Fell is 0.
+
+The health of Fell is 20.
+The melee of Fell is 4.
+The defence of Fell is 10.
+
+The body score of Fell is 12.
+The mind score of Fell is 7.
+The spirit score of Fell is 7. 
+
+When play begins:
+	let X be a random natural weapon part of Fell;
+	now damage die of X is 8;
+	now the passive parry max of X is 0;
+	now the active parry max of X is 0;
+	now the dodgability of X is 2;
+	now printed name of X is "claws and fangs".
+
+Fell is angelic.
+Radiation of Fell is 1.
+
+Section - Fell shares in Isra's concentration
+
+An attack modifier rule (this is the Fell concentration attack modifier rule):
+	if the actor is Fell:
+		let the bonus be 0;
+		if the concentration of Isra is:
+			-- 0:
+				make no decision;
+			-- 1:
+				now the bonus is 2;
+			-- 2:
+				now the bonus is 4;
+			-- 3:
+				now the bonus is 8;
+		if the numbers boolean is true:
+			say " + ", the bonus, " (Isra's concentration)[run paragraph on]";
+		increase the attack strength by the bonus.
+
+Rule for damage modifier (this is the Fell concentration damage modifier rule):
+	if the actor is Fell:
+		let the bonus be 0;
+		if the concentration of Isra is:
+			-- 2:
+				now the bonus is 2;
+			-- 3:
+				now the bonus is 4;
+			-- otherwise:
+				make no decision;
+		if the numbers boolean is true:
+			say " + ", the bonus, " (Isra's concentration)[run paragraph on]";
+		increase the attack damage by the bonus.
+
 
 
 Chapter - Level 5 - Malygris
