@@ -682,8 +682,6 @@ To do the claim of the demon:
 	move the demonic mistress to the location.
 
 
-
-
 Section - Metastasio's hat (minor)
 
 Metastasio's hat is a minor hat. The description of Metastasio's hat is "Metastasio envisioned whole armies that would lob grenades at the enemy, and he designed this hat to help soldiers succeed. When worn, it decreases the chance that grenades get thrown back at you by 15%.". Metastasio's hat is proper-named.
@@ -711,6 +709,7 @@ A faculty bonus rule (this is the crown of the god-king bonus rule):
 	if the test subject wears the crown of the god-king:
 		increase faculty bonus score by blood magic level of the crown of the god-king.
 
+
 Section - The inquisitor's hood (special)
 
 [Gifted by Nomos.]
@@ -721,6 +720,25 @@ A remain concentrated rule (this is the inquisitor's hood concentration rule):
 	if global defender wears the inquisitor's hood:
 		increase remain concentrated chance by 15.
 
+
+Section - Pale phylactery
+
+The pale phylactery is an epic hat.
+The pale phylactery is magical.
+The pale phylactery is silver.
+
+The description of the pale phylactery is "A small silver amulet inlaid with colourless stones that were not formed on our planet. When worn on the forehead, the phylactery gives you a +10% chance of remaining concentrated when damaged. But its true power is only revealed when you are under the influence of ment: for in that state, it ensures that you do not lose your concentration when you attack.".
+
+A remain concentrated rule (this is the pale phylactery concentration rule):
+	if global defender wears the pale phylactery:
+		increase remain concentrated chance by 10.
+
+After an actor hitting (this is the alternative lose concentration after attacking rule):
+	unless (global attacker is the player and player wears pale phylactery and ment timer is greater than 0):
+		now the concentration of the global attacker is 0;
+		continue the action.
+
+The lose concentration after attacking rule is not listed in any rulebook.
 
 
 Chapter - Shirts
