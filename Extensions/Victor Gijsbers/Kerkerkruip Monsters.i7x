@@ -4448,10 +4448,18 @@ Radiation of Fell is 1.
 
 Section - Fell shares in Isra's concentration
 
-An attack modifier rule (this is the Fell concentration attack modifier rule):
-	if the actor is Fell:
+When play begins (this is the link isra to fell rule):
+	now Isra is linked to Fell.
+
+Section - Link
+
+Concentration link relates one person (called the linked guy) to one person.
+The verb to be linked to implies the concentration link relation. 
+
+An attack modifier rule (this is the link concentration attack modifier rule):
+	if an alive not off-stage person is linked to the actor:
 		let the bonus be 0;
-		if the concentration of Isra is:
+		if the concentration of linked guy of the actor is:
 			-- 0:
 				make no decision;
 			-- 1:
@@ -4461,13 +4469,13 @@ An attack modifier rule (this is the Fell concentration attack modifier rule):
 			-- 3:
 				now the bonus is 8;
 		if the numbers boolean is true:
-			say " + ", the bonus, " (Isra's concentration)[run paragraph on]";
+			say " + ", the bonus, " ([possessive of linked guy of the actor] concentration)[run paragraph on]";
 		increase the attack strength by the bonus.
 
-Rule for damage modifier (this is the Fell concentration damage modifier rule):
-	if the actor is Fell:
+Rule for damage modifier (this is the link concentration damage modifier rule):
+	if an alive not off-stage person is linked to the actor:
 		let the bonus be 0;
-		if the concentration of Isra is:
+		if the concentration of linked guy of the actor is:
 			-- 2:
 				now the bonus is 2;
 			-- 3:
@@ -4475,8 +4483,59 @@ Rule for damage modifier (this is the Fell concentration damage modifier rule):
 			-- otherwise:
 				make no decision;
 		if the numbers boolean is true:
-			say " + ", the bonus, " (Isra's concentration)[run paragraph on]";
+			say " + ", the bonus, " ([possessive of linked guy of the actor] concentration)[run paragraph on]";
 		increase the attack damage by the bonus.
+
+Status attribute rule (this is the link status rule):
+	if an alive not off-stage person is linked to the player:
+		if long status is true:
+			say "You have [bold type]linked[roman type] yourself to [the linked guy of the player].[line break][run paragraph on]".
+
+Section - Power of Israfel
+
+The power of Israfel is a power. Israfel grants power of Israfel.
+The power level of power of Israfel is 4.
+The command text of power of Israfel is "link".
+The description of power of Israfel is "Type: active ability.[paragraph break]Command: link [italic type]someone[roman type].[paragraph break]The 'link' command will link your spirit to that of another person. Until you link to someone else, you will benefit from the concentration of the person you linked to just as if it were your own. Every turn, the link has a 10% probability of unravelling; but this probability is decreased by 1% for every 3 points of spirit you have."
+The power-name of power of Israfel is "power of Israfel".
+
+Absorbing power of Israfel:
+	increase melee of the player by 4;
+	increase defence of the player by 4;
+	increase permanent health of the player by 20;
+	say "As Israfel dies, you feel its soul absorbed into your own body. ([bold type]Power of Israfel[roman type]: +4 attack, +4 defence, +20 health, and you can [italic type]link[roman type] to people, benefitting from their concentration.[paragraph break]".
+
+Repelling power of Israfel:
+	decrease melee of the player by 4;
+	decrease defence of the player by 4;
+	decrease permanent health of the player by 20;
+	if a person is linked to the player:
+		now nobody is linked to the player.
+
+Status skill rule (this is the Israfel status skill rule):
+	if power of Israfel is granted:
+		say "You have the power of Israfel, which allows you to [bold type]link[roman type] to people and benefit from their concentration. [italic type](Level 4)[roman type][line break][run paragraph on]".
+
+Linking is an action applying to one thing. Understand "link [thing]" and "link to [thing]" as linking.
+
+Check linking:
+	if the power of Israfel is not granted:
+		take no time;
+		say "You do not possess that power." instead.
+
+Check linking:
+	if the noun is not a person:
+		take no time;
+		say "You can only link to persons.".
+
+Check linking:
+	if the noun is the player:
+		take no time;
+		say "Nice try, but you already benefit from your own concentration." instead.
+
+Carry out linking:
+	now noun is linked to the player;
+	say "You forge a spiritual link which will allow you to benefit from [possessive of the noun] concentration."
 
 
 
