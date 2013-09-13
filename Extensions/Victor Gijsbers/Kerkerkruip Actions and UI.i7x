@@ -81,6 +81,7 @@ Last check going (this is the treat going as retreat when possible rule):
 A person can be a runner. A person is usually not a runner.
 
 Last check going (this is the going and retreating in combat rule):
+	let current-location be the location;
 	if the player is not hidden and the combat status is not peace:
 		if player is retreater:
 			unless forced-action is true:
@@ -111,7 +112,9 @@ Last check going (this is the going and retreating in combat rule):
 		if the player is dead:
 			do nothing instead;
 		unless the player can move:
-			do nothing instead.
+			do nothing instead;
+		if location is not current-location:
+			do nothing instead. [Something has changed the location, and we shouldn't do the move. For example, being mazed by the minotaur while retreating.]
 
 Check looking when the player is dead:
 	do nothing instead.
