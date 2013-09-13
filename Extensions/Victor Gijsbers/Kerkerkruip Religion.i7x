@@ -138,7 +138,7 @@ Favour rule for Aite (this is the Aite favour 3 rule):
 	if divine favour is 3:
 		say "Aite grants you survival instincts!";
 		let n be body score of player + mind score of player + spirit score of player;
-		increase n by a random number between 2 and 4;
+		increase n by a random number between 4 and 6;
 		let a be a random number between 1 and n;
 		now n is n - a;
 		let b be a random number between 1 and n;
@@ -514,7 +514,7 @@ Favour rule for Sul (this is the Sul favour 6 rule):
 			say "Sul makes you a demon slayer; she also attempts to bless [the item], but unfortunately it resists the attempt.";
 		otherwise:
 			say "Sul makes you a demon slayer, and blesses [the item], making it more accurate, more deadly, and imbuing it with the purifying power of fire.";
-			increase damage die of item by 1;
+			increase damage die of item by 2;
 			increase weapon attack bonus of item by 1;
 			increase internal heat of item by 3.
 
@@ -760,5 +760,12 @@ A detection rule (this is the Herm worship decreases probability of detection ru
 			say " + [n] (worshipping Herm)[run paragraph on]";
 			increase the hiding roll by n.
 
+
+Section - Herm's intervention
+
+Before an actor hitting the player when the player worships Herm:
+	if a random chance of divine favour in 20 succeeds:
+		say "[bold type]Herm[roman type] bends space and time around you and [the actor], and you suddenly find yourself in the role of attacker!";
+		try the player hitting the actor instead.
 			
 Kerkerkruip Religion ends here.
