@@ -1347,8 +1347,8 @@ The jumping bomb is emotionless.
 
 The description of the jumping bomb is "Connoisseurs consider these jumping balls of red meat to be among the most exciting spectacles of Yahvinna's annual Feast of Flesh. To the slaves and convicts down in the arena, whose limbs the spectators hope to have blown into their lap, the jumping bombs also bring excitement, though of a wholly different type.".
 
-The health of the jumping bomb is 20.
-The melee of the jumping bomb is -1.
+The health of the jumping bomb is 22.
+The melee of the jumping bomb is 0.
 The defence of the jumping bomb is 7.
 
 The body score of the jumping bomb is 8.
@@ -1387,15 +1387,22 @@ An AI action selection rule for the at-React jumping bomb (this is the jumping b
 	choose row with an Option of the action of the bomb parrying in the Table of AI Action Options;
 	decrease the Action Weight entry by 100.
 
+Bomb-escape is a truth state that varies. Bomb-escape is true.
+
 A contact rule when the global attacker is the jumping bomb (this is the jumping bomb kamikaze rule):
-	say "[roman type]When the jumping bomb hits [the global defender], it explodes with a terrible bang. [if the global defender is the player]Not even all the king's horses and all the king's men will be able to put the thousand pieces of your body back together[otherwise][The global defender] is killed instantly[end if].";
-	now the health of the global attacker is -10;
-	now the health of the global defender is -10;
-	have an event of the global attacker killing the global defender;		
-	if the player is not alive:
-		end the story saying "You exploded";
+	if the global defender is the player and bomb-escape is true:
+		say "[roman type]The jumping bomb almost touches you, but you [bold type]save yourself[roman type] with a last desperate dodge. You might not want to try that again.";
+		now bomb-escape is false;
 		rule fails;
-	rule fails.
+	otherwise:
+		say "[roman type]When the jumping bomb hits [the global defender], it explodes with a terrible bang. [if the global defender is the player]Not even all the king's horses and all the king's men will be able to put the thousand pieces of your body back together[otherwise][The global defender] is killed instantly[end if].";
+		now the health of the global attacker is -10;
+		now the health of the global defender is -10;
+		have an event of the global attacker killing the global defender;		
+		if the player is not alive:
+			end the story saying "You exploded";
+			rule fails;
+		rule fails.
 
 First report an actor hitting (this is the don't show normal death prose when jumping bomb kills someone rule):
 	if the global attacker is the jumping bomb and the global defender is dead:
