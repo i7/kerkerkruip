@@ -3271,6 +3271,37 @@ Aftereffects rule (this is the caduceus may put people asleep rule):
 				say "[The global defender] [bold type]fall[s] asleep[roman type]!";
 				now global defender is asleep.
 
+Section - Staff of insanity (epic)
+
+The staff of insanity is an epic wood magical weapon. The description of the staff of insanity is "Swirling bands of red, blue, orange and green dazzle the eyes and boggle the mind. Wielding this weapon is immensely distracting, but if you do manage to hit someone with it, they will become insane.".
+
+The special weapon info of the staff of insanity is "; -2 attack and defence penalty; -3 penalty to body, mind and spirit; anyone damaged by it becomes insane[run paragraph on]".
+
+The damage die of the staff of insanity is 2.
+The weapon attack bonus of the staff of insanity is 0.
+The dodgability of the staff of insanity is 2.
+The active parry max of the staff of insanity is 2.
+The passive parry max of the staff of insanity is 2.
+The weapon damage bonus of the staff of insanity is 0.
+
+Aftereffects rule (this is the staff of insanity makes people insane rule):
+	if the global attacker weapon is the staff of insanity and the global defender is not the player:
+		if the attack damage is greater than 0:
+			say "As soon as the bizarre staff strikes, [the global defender] goes [bold type]insane[roman type]!";
+			now faction of the global defender is insane.
+
+An attack modifier rule (this is the staff of insanity weakens the wielder rule):
+	if the global defender encloses the staff of insanity and the staff of insanity is readied:
+		say " + 2 (defender wields staff of insanity)[run paragraph on]";
+		increase the attack strength by 2;
+	if the global attacker encloses the staff of insanity and the staff of insanity is readied:
+		say " - 2 (attacker wields staff of insanity)[run paragraph on]";
+		decrease the attack strength by 2.	
+
+A faculty bonus rule (this is the staff of insanity faculty penalty rule):
+	if the test subject encloses the staff of insanity and the staff of insanity is readied:
+		decrease faculty bonus score by 3.
+
 
 Chapter - Maces
 

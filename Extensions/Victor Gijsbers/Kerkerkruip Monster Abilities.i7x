@@ -511,7 +511,7 @@ Last AI action selection rule (this is the insane randomise the action result ru
 
 A damage modifier rule (this is the insane people sometimes get insane damage bonus rule):
 	if global attacker is insane and global attacker weapon is not size-agnostic:
-		if a random chance of 1 in 5 succeeds:
+		if a random chance of 1 in 8 succeeds:
 			if the numbers boolean is true, say " + 10 (insane burst of strength)[run paragraph on]";
 			increase the attack damage by 10.
 
