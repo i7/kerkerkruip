@@ -1388,13 +1388,18 @@ An AI action selection rule for the at-React jumping bomb (this is the jumping b
 	decrease the Action Weight entry by 100.
 
 A contact rule when the global attacker is the jumping bomb (this is the jumping bomb kamikaze rule):
-	say "[roman type]When the jumping bomb hits [the global defender], it explodes with a terrible bang. [if the global defender is the player]Not even all the king's horses and all the king's men will be able to put the thousand pieces of your body back together[otherwise][The global defender] is killed instantly[end if][italic type].";
+	say "[roman type]When the jumping bomb hits [the global defender], it explodes with a terrible bang. [if the global defender is the player]Not even all the king's horses and all the king's men will be able to put the thousand pieces of your body back together[otherwise][The global defender] is killed instantly[end if].";
 	now the health of the global attacker is -10;
 	now the health of the global defender is -10;
 	have an event of the global attacker killing the global defender;		
 	if the player is not alive:
 		end the story saying "You exploded";
-		rule fails.
+		rule fails;
+	rule fails.
+
+First report an actor hitting (this is the don't show normal death prose when jumping bomb kills someone rule):
+	if the global attacker is the jumping bomb and the global defender is dead:
+		rule succeeds.
 
 An attack modifier rule (this is the jumping bomb concentration attack modifier rule):
 	if the global attacker is the jumping bomb and the concentration of the jumping bomb is greater than 0:
