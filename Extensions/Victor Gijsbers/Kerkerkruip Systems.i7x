@@ -1207,6 +1207,18 @@ Every turn (this is the remove forced action rule):
 
 
 
+Part - Person stuff
+
+Chapter - Seen
+
+[ We don't need the full Epistemology extension - just a single property for people is enough for us. ]
+
+A person can be either seen or unseen. A person is usually unseen.
+
+Every turn (this is the mark people as seen every turn rule):
+	now all people in the location are seen;
+
+
 
 Chapter - Death blessing and death curse
 
