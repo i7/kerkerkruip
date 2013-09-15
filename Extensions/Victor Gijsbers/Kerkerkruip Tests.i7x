@@ -4,6 +4,21 @@ Use authorial modesty.
 
 [ Tests for various things ]
 
+Chapter - Phrases
+
+To #ifdef DEBUG:
+	(- #ifdef DEBUG; -).
+
+To #endif DEBUG:
+	(- #endif; -).
+
+To #if DEBUG say (x - sayable value):
+	#ifdef DEBUG;
+	say x;
+	#endif DEBUG;
+
+
+
 Chapter - Tests (not for release)
 
 
@@ -68,6 +83,8 @@ Section - Testing Person IDs
 
 Last when play begins (this is the check person IDs rule):
 	repeat with X running through npc people:
+		if X is a god:
+			next;
 		if the ID of X is 0:
 			say "[X] does not have an ID.[line break]";
 		otherwise:

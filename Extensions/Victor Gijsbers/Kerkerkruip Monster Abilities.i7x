@@ -995,7 +995,7 @@ Section - Disarm power
 
 Disarming is an action applying to one thing.
 Disarm-actor is a person that varies.
-Disarm-weapon is a person that varies.
+Disarm-weapon is a weapon that varies.
 
 An AI action selection rule for an at-Act disarmer person (called P) (this is the disarmers considers disarming rule):	
 	if chosen target carries at least one readied artificial weapon:

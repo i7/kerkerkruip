@@ -44,7 +44,7 @@ A person has a number called kill count. [ The number of times the person has ki
 Table of Monster Statistics
 ColID (a number)	ColSeen [encountered] (a truth state)	died (a number)	kill (a number)
 --	--	--	--
-with 36 blank rows [ Don't forget to update this when monsters are added! We include a buffer incase the player goes back to an older version. ]
+with 50 blank rows [ Don't forget to update this when monsters are added! We include a buffer incase the player goes back to an older version. ]
 
 The File Of Monster Statistics is called "KerkerkruipStats".
 
@@ -91,18 +91,22 @@ Section - Died and Kill counts
 Killing rule (this is the increment died and kill stats rule):
 	if killed-guy is the player:
 		increment the kill count of the killer-guy;
+		#if DEBUG say "[italic type](Kill recorded for [the killer-guy].)[roman type][line break]";
 		[ Award a kill to the leader of a group ]
 		if the killer-guy is a grouper:
 			if the leader of the killer-guy is kills claiming:
-				increment the kill count of the killer-guy;
+				increment the kill count of the leader of the killer-guy;
+				#if DEBUG say "[italic type](Kill recorded for [the leader of the killer-guy].)[roman type][line break]";
 	otherwise:
 		[ Mark a defeat only if the person stands alone or the whole group has been defeated ]
 		if the killed-guy is not group leading or killed-guy is defeated individually or the group of killed-guy has been defeated:
 			increment the died count of the killed-guy;
+			#if DEBUG say "[italic type](Defeat recorded for [the name of killed-guy].)[roman type][line break]";
 		[ If a leader was killed before all their groupers then their died count will need to be incremented when the last grouper dies ]
 		if the killed-guy is a grouper:
 			if the group of the leader of the killed-guy has been defeated:
 				increment the died count of the leader of the killed-guy;
+				#if DEBUG say "[italic type](Defeat recorded for [the name of leader of the killed-guy].)[roman type][line break]";
 	update the monster statistics.
 
 
@@ -110,6 +114,9 @@ Section - Monster avatars for the map (for use with Kerkerkruip Glimmr Additions
 
 A person has a figure name called the avatar. The avatar of a person is usually Figure of Null.
 A person has a figure name called the legend-label. The legend-label of a person is usually Figure of Null.
+
+
+
 
 
 Chapter - Level 1 - Swarm of Daggers
@@ -4016,6 +4023,10 @@ The overmind is huge.
 The overmind is talker.
 The overmind is thrower.
 
+The overmind is group leading.
+The overmind is not initially accompanied.
+The overmind is defeated individually.
+
 The unlock level of the overmind is 16.
 The unlock text of the overmind is "a psionic machine that strenghtens all its allies".
 
@@ -4135,12 +4146,17 @@ Carry out the overmind overmind-calling:
 			call an ally;
 		otherwise:
 			call all allies;
+		[ Make overmind allies in the location accompany the overmind ]
+		repeat with guy running through all npc alive people in the location of the overmind:
+			if level of guy is less than 4 and guy does not oppose the overmind:
+				now guy accompanies the overmind;
 	now concentration of the overmind is 0.
 
 To call an ally:
 	let guy be a random overmind-ally person;
 	let the way be the best route from the location of guy to the location of the overmind;
-	if way is a direction, try guy going the way;
+	if way is a direction:
+		try guy going the way;
 	if location of the overmind is location of the player:
 		say "You briefly see an image of [the guy] flickering above the overmind, and a weird buzzing sound fills the dungeon[if way is a direction]. In the image, [the guy] move[s] to [the location of the guy][end if].".
 
@@ -4149,7 +4165,8 @@ To call all allies:
 		say "All the wheels and circles of the overmind suddenly come to a complete halt, and it emits a piercing wail of alarm that must have reached even the farthest reaches of the dungeon.";
 	repeat with guy running through overmind-ally persons:
 		let the way be the best route from the location of guy to the location of the overmind;
-		if way is a direction, try guy going the way.
+		if way is a direction:
+			try guy going the way.
 	
 Section - Overmind prose
 
@@ -4247,7 +4264,6 @@ Carry out calling:
 
 Chapter - Level 4 - Israfel
 
-
 Israfel is a neuter monster. "The fires of heaven envelop the terrible, androgynous angel known to mortals as Israfel."
 Understand "terrible" and "androgynous" and "angel" and "fires" and "heaven" and "fires of heaven" as Israfel.
 The description of Israfel is "Every angel is terror; and to see such beauty and nobleness is to know that one's own existence means nothing.".
@@ -4257,6 +4273,10 @@ Israfel is talker.
 Israfel is thrower.
 
 The level of Israfel is 4.
+
+Israfel is group leading.
+Israfel is not initially accompanied.
+Israfel is not defeated individually.
 
 The health of Israfel is 40.
 The melee of Israfel is 2.
