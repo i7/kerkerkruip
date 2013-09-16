@@ -19,6 +19,145 @@ To #if DEBUG say (x - sayable value):
 
 
 
+Chapter - Requesting test objects (not for release)
+
+[ Test objects are things which will be ensured that they are included in the dungeon. There is a console where you can specify them: type ~ in the main menu. ]
+
+Section - Dungeon generation rules
+
+An object can be testobject. An object is usually not testobject.
+
+First resetting the map rule (this is the remove rarity from testobjects rule):
+	repeat with item running through testobject rooms:
+		now rarity of item is 0;
+		now unlock level of item is 0;
+	repeat with item running through testobject things:
+		now rarity of item is 0;
+		now unlock level of item is 0.
+
+A placement scoring rule (this is the testobject placement scoring rule):
+	if considered room is testobject:
+		increase current room score by 100.
+
+A monster placement possible rule (this is the prefer testobject monsters rule):
+	repeat with guy running through testobject off-stage monsters:
+		if level of guy is global monster level:
+			if considered monster is not testobject:
+				rule fails.
+		
+A monster placement scoring rule (this is the testobject monster scoring rule):
+	if considered monster is testobject:
+		increase current monster score by 100.
+
+Last treasure placement rule (this is the place non-person testobjects rule):
+	if generation info is true, print generation message "    Placing testobjects...";
+	now all off-stage testobject things are in the Entrance Hall;
+
+Section - The test object file
+
+The File of Test Objects is called "KerkerkruipTestObjects".
+
+Table of Requested Test Objects
+Object name (indexed text)
+with 100 blank rows
+
+Before showing the title screen (this is the load the file of test objects rule):
+	if File of Test Objects exists:
+		read File of Test Objects into the Table of Requested Test Objects;
+
+After showing the title screen (this is the mark test objects from file rule):
+	let test text be an indexed text;
+	repeat through the Table of Requested Test Objects:
+		repeat with R running through rooms:
+			now test text is "[printed name of R]";
+			if the Object name entry is test text:
+				now R is testobject;
+				break;
+		repeat with R running through things:
+			now test text is "[printed name of R]";
+			if the Object name entry is test text:
+				if R is a grenade or R is a scroll:
+					let new toy be a new object cloned from R;
+					now new toy is testobject;
+					now new toy is in the Entrance Hall;
+				otherwise:
+					now R is testobject;
+				break;
+
+Last when play begins rule (this is the identify test object scrolls rule):
+	repeat with T running through testobject scrolls in the Entrance Hall:
+		identify T;
+
+Section - The test object console
+
+The early in turn sequence flag is a truth state variable. The early in turn sequence flag variable translates into I6 as "EarlyInTurnSequence".
+The test object console is a truth state variable.
+
+Definition: a number is console:
+	if it is 96, yes;
+	if it is 126, yes;
+	no.
+Menu command console:
+	rule succeeds with result the show the console rule;
+
+[ By utilising the parse command rule we can use the parser without actually running any actions. Convenient! ]
+
+Adding is an action applying to one visible object.
+Understand "add [any thing]" as adding while the test object console is true.
+Understand "add [any room]" as adding while the test object console is true.
+
+Deleting is an action applying to one visible object.
+Understand "del/delete [any thing]" as deleting while the test object console is true.
+Understand "del/delete [any room]" as deleting while the test object console is true.
+
+Emptying is an action applying to nothing.
+Understand "empty" as emptying while the test object console is true.
+
+This is the show the console rule:
+	open the status window;
+	now the early in turn sequence flag is true;
+	now the test object console is true;
+	while 1 is 1:
+		clear the main-window;
+		say "[bold type]The following things will be forcibly included in dungeons:[roman type][paragraph break]";
+		repeat through the Table of Requested Test Objects:
+			say "[the Object name entry][line break]";
+		say "[line break]Commands: ADD THING, DELETE THING, EMPTY (the whole list), QUIT[paragraph break]";
+		consider the parse command rule;
+		set the parser variables manually;
+		if quitting the game:
+			break;
+		if emptying:
+			blank out the whole of Table of Requested Test Objects;
+		if adding:
+			choose a blank row in Table of Requested Test Objects;
+			now the Object name entry is the printed name of the noun;
+		if deleting:
+			repeat through the Table of Requested Test Objects:
+				if the Object name entry is the printed name of the noun:
+					blank out the whole row;
+					break;
+	write File of Test Objects from Table of Requested Test Objects;
+	now the early in turn sequence flag is false;
+	now the test object console is false;
+	close the status window;
+
+[ Unfortunately these variables are set in the Generate Action Rule. Not to worry, we can set them ourselves! ]
+To set the parser variables manually:
+	(- action = parser_results-->ACTION_PRES; noun = parser_results-->INP1_PRES; -).
+
+Rule for constructing the status line while the test object console is true:
+	fill status bar with Table of Console Status;
+	rule succeeds;
+
+Table of Console Status
+left	central	right
+""	"The Kerkerkruip console"	""
+
+
+
+
+
 Chapter - Tests (not for release)
 
 
