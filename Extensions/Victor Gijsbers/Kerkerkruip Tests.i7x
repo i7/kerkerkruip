@@ -107,8 +107,10 @@ Understand "add [any thing]" as adding while the test object console is true.
 Understand "add [any room]" as adding while the test object console is true.
 
 Deleting is an action applying to one visible object.
-Understand "del/delete [any thing]" as deleting while the test object console is true.
-Understand "del/delete [any room]" as deleting while the test object console is true.
+Understand "delete [any thing]" as deleting while the test object console is true.
+Understand "delete [any room]" as deleting while the test object console is true.
+Understand "del [any thing]" as deleting while the test object console is true.
+Understand "del [any room]" as deleting while the test object console is true.
 
 Emptying is an action applying to nothing.
 Understand "empty" as emptying while the test object console is true.
