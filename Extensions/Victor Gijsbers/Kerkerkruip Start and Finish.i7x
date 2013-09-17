@@ -422,6 +422,7 @@ To say total credits:
 	[line break][the hand written list of extensions]
 	[paragraph break]You can get the source code for [Kerkerkruip] at https://github.com/i7/kerkerkruip
 	[paragraph break]The cover image is a photo by Captain Orange, modified by Victor Gijsbers. It is used with permission for this game, but should not be used for other games. (Unless you get permission yourself.)
+	[paragraph break][the monster portrait credits]
 	[paragraph break][bold type]Afterword by Victor Gijsbers[roman type]
 	[line break]I would like to thank the makers of Inform 7, everyone whose extensions I have used or misused, and everyone who has helped me on the forums and the newsgroups -- there are a lot of you, and you may know who you are. Andrew Plotkin has answered perhaps more of my technical questions than anyone else, so a special thanks to him.[paragraph break]This game has been inspired by many works of interactive fiction, computer roleplaying games and roguelikes. I want to single out [italic type]Desktop Dungeons[roman type] for special mention, since it was that game that gave me the idea of making a 'coffee break' roguelike -- finally a project I could finish! Apart from the fact that a roguelike is never finished, of course --";
 
@@ -437,6 +438,18 @@ To say the hand written list of extensions:
 	[line break]Flexible Windows by Jon Ingold
 	[line break]Fixed Point Maths by Michael Callaghan
 	[line break]Questions by Michael Callaghan";
+
+To say the monster portrait credits:
+	say "[bold type]Art Credits[roman type]
+	[paragraph break]All illustrations by Erik Temple. The rogue portraits utilize other art, as follows:
+	[paragraph break]Armadillo: Background texture courtesy of Shadowhouse Creations (shadowhousecreations.blogspot.com);
+	[line break]Mindslug: Background texture courtesy of Flickr user rubyblossom (CC BY-NC-SA 2.0);
+	[line break]Minotaur: Background texture in the public domain, courtesy photos-public-domain.com;
+	[line break]Miranda: Background texture courtesy of deviantART user Esther-Sanz;
+	[line break]Reaper: Background texture courtesy of wildtextures (wildtextures.com);
+	[line break]Tentacle of Tooloo: Background texture courtesy of deviantART user Insan-Stock;
+	[line break]Wisps of Pain: Background image of microalgae courtesy Flickr user Learn 2 Teach, Teach 2 Learn (CC BY-NC 2.0);
+	[line break]Placeholder cards: Background texture courtesy of deviantART user Esther-Sanz;";
 
 To say contact text:
 	say "This is where stuff is going on:[paragraph break]* Updates to the game are announced on the current website, which is also where you can find the latest version of the game: http://lilith.cc/~victor/?q=content/kerkerkruip[line break]* Updates are also announced on the IFDB, which is the ideal venue for reviewing interactive fiction: http://ifdb.tads.org[line break]* The source code and current design discussions can be found on github: https://github.com/i7/kerkerkruip[line break]* Design discussions, programming tutorials and help from other gamers are at the IF Forum: http://www.intfiction.org/forum/index.php[paragraph break]Github and the forum are the preferred places for interaction, but you can also contact Victor with comments, bug reports, and anything else at victor@lilith.cc."
