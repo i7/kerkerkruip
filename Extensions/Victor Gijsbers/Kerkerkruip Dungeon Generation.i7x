@@ -163,10 +163,6 @@ Creating the map rule (this is the locate and connect all rooms rule):
 		if the space at x by y by z is free:
 			let chosen room be a suitable room from place at x by y by z;
 			place chosen room from place at x by y by z;
-	while more than one testobject room is not placed:
-		let place be a random not placed testobject room;
-		let place2 be a random placed room;
-		place place next to place2.
 
 Section - Adding tunnels
 

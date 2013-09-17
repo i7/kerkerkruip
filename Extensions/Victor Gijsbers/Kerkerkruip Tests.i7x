@@ -39,6 +39,12 @@ A placement scoring rule (this is the testobject placement scoring rule):
 	if considered room is testobject:
 		increase current room score by 100.
 
+Creating the map rule (this is the place all testobject rooms rule):
+	while more than one testobject room is not placed:
+		let place be a random not placed testobject room;
+		let place2 be a random placed room;
+		place place next to place2.
+
 A monster placement possible rule (this is the prefer testobject monsters rule):
 	repeat with guy running through testobject off-stage monsters:
 		if level of guy is global monster level:
