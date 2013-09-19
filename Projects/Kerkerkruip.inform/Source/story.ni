@@ -37,7 +37,7 @@ Use undo prevention.
 
 Section - Include ATTACK
 
-Include version 5/130915 of Inform ATTACK by Victor Gijsbers.
+Include version 5/130919 of Inform ATTACK by Victor Gijsbers.
 [You can get the latest ATTACK at https://github.com/i7/ATTACK ]
 
 Section - Include all the Kerkerkruip extensions
