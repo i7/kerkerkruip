@@ -396,5 +396,32 @@ A killing rule (this is the don't do delayed action with killed guy rule):
 
 
 
+Section - Blocking
+
+[In Kerkerkruip, blocking is only available if you are wearing a shield!]
+
+Check blocking (this is the cannot block when not wearing a shield rule):
+	if the player is not wearing a shield:
+		take no time;
+		say "You cannot block when you're not wearing a shield." instead.
+
+An AI action selection rule for an at-React person (called P) (this is the AI block without shields rule):
+	choose row with an Option of the action of P blocking in the Table of AI Action Options;
+	if P does not wear a shield:
+		decrease Action Weight entry by 1000.
+
+An attack modifier rule (this is the block defence bonus rule):
+	if the global defender is at-block:
+		if the global defender encloses a worn shield:
+			let item be a random shield worn by the global defender;
+			let n be block bonus of item;
+			decrease the attack strength by n;
+			if the numbers boolean is true:
+				if n is greater than 0:
+					say " - ", n, " (block bonus)[run paragraph on]";
+				if n is less than 0:
+					now n is (0 - n);
+					say " + ", n, " (block penalty)[run paragraph on]";
+
 
 Kerkerkruip ATTACK Additions ends here.

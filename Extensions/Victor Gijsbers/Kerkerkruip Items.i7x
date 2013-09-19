@@ -376,6 +376,7 @@ A belt is a kind of clothing.
 Gauntlets are a kind of clothing.
 A mask is a kind of clothing. [Includes masks, goggles, and anything else that covers the face.]
 A suit is a kind of clothing. [Suits include hat, shirt, shoes, trousers, gauntlets. Furthermore, you cannot put on a suit if you wear a cursed cloak or a cursed belt.]
+A shield is a kind of clothing.  A shield has a number called the block bonus. The block bonus of a shield is usually 1.
 
 Last check wearing a necklace:
 	if the player wears a necklace:
@@ -481,6 +482,10 @@ Last check wearing a suit:
 		let item be a random gauntlets worn by the player;
 		take no time;
 		say "You will first have to take off [the item]." instead;]
+	if the player wears a cursed shield:
+		let item be a random shield worn by the player;
+		take no time;
+		say "You will first have to uncurse [the item]." instead;		
 	abide by the suit check rule. 
 	
 This is the suit check rule:
@@ -498,7 +503,17 @@ Last check taking off a suit:
 	if the player wears a cursed belt:
 		let item be a random belt worn by the player;
 		take no time;
-		say "You will first have to uncurse [the item]." instead.
+		say "You will first have to uncurse [the item]." instead;
+	if the player wears a cursed shield:
+		let item be a random shield worn by the player;
+		take no time;
+		say "You will first have to uncurse [the item]." instead;.
+
+Last check wearing a shield:
+	if the player wears a shield:
+		let item be a random shield worn by the player;
+		take no time;
+		say "You will first have to take off [the item]." instead. 
 
 Does the player mean taking off something worn:
 	it is very likely.
@@ -1266,11 +1281,27 @@ Every turn when the main actor wears the dragon armour:
 
 
 
+Chapter - Shields
 
+Section - Wooden buckler (minor)
 
+The wooden buckler is a minor shield.
+The wooden buckler is civilised.
+The wooden buckler is wood.
 
+The block bonus of wooden buckler is 1.
 
+The description of the wooden buckler is "No warrior could be proud of this small, unimpressive shield. Nonetheless, wearing it will allow you to block incoming attacks. [italic type]Block bonus: +1[roman type].".
 
+Section - Adamantine shield (major)
+
+The adamantine shield is a major shield.
+The adamantine shield is civilised.
+The adamantine shield is adamant.
+
+The block bonus of adamantine shield is 2.
+
+The description of adamantine shield is "Three serpents are eating each other on the intricate design of this indestructible shield. [italic type]Block bonus: +2[roman type].".
 
 
 
