@@ -376,19 +376,7 @@ Last report examining a weapon (this is the extra weapon info rule):
 	say "[italic type]Combat statistics: 1d[damage die of the noun] + [weapon damage bonus of the noun] damage; [if weapon attack bonus of the noun is less than 0]-[otherwise]+[end if][absolute value of weapon attack bonus of the noun] attack modifier[if the noun is ranged]; ranged[end if][parry and dodge info of the noun][if the noun is silver]; good against undead and demons[end if][special weapon info of the noun][roman type].[run paragraph on][line break][paragraph break]"
 			
 To say parry and dodge info of (item - a weapon):
-	say "; can be parried for [passive parry max of item]; can parry for [active parry max of item]; can be dodged for [dodgability of item][run paragraph on]".
-[	if passive parry max of item is less than 2:
-		say "; hard to parry[run paragraph on]";
-	if passive parry max of item is greater than 3:
-		say "; easy to parry[run paragraph on]";
-	if active parry max of item is less than 2:
-		say "; bad at parrying[run paragraph on]";
-	if active parry max of item is greater than 3:
-		say "; good at parrying[run paragraph on]";
-	if dodgability of item is less than 2:
-		say "; hard to dodge[run paragraph on]";
-	if dodgability of item is greater than 3:
-		say "; easy to dodge[run paragraph on]".]
+	say "; the wielder gets a [parry-with bonus of item] bonus when parrying with [it-them of item]; others get a [parry-against bonus of item] bonus when parrying and a [dodge bonus of item] bonus when dodging against [it-them of item][run paragraph on]".
 
 A weapon has some text called the special weapon info. The special weapon info of a weapon is usually "".
 
@@ -481,7 +469,7 @@ First carry out an actor dodging (this is the some actors will roll instead rule
 		if a random chance of saved-CTW of actor in 5 succeeds:
 			now the actor is at-roll.
 
-
+[
 Section - Blocking
 
 Blocking is an action applying to nothing. Understand "block" as blocking.
@@ -519,6 +507,6 @@ Every turn when block modifier of main actor is not 0:
 	now block modifier of main actor is 0.
 
 Every turn when main actor is at-block:
-	now main actor is not at-block.
+	now main actor is not at-block.]
 
 Kerkerkruip ATTACK Additions ends here.

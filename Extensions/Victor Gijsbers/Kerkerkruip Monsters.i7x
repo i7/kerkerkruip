@@ -146,10 +146,11 @@ The spirit score of the swarm of daggers is 6.
 When play begins:
 	let X be a random natural weapon part of the swarm of daggers;
 	now damage die of X is 4;
-	now dodgability of X is 3;
-	now passive parry max of X is 0;
-	now active parry max of X is 0;
-	now the printed name of X is "sharp points".
+	now dodge bonus of X is 1;
+	now parry-with bonus of X is -2;
+	now parry-against bonus of X is -2;
+	now the printed name of X is "sharp points";
+	now X is plural-named.
 
 The description of the swarm of daggers is "Animated by some dark magic, these daggers purposefully seek to undo [if faction of the swarm of daggers hates faction of the player]you[otherwise]their enemies[end if].".
 
@@ -325,10 +326,11 @@ The spirit score of the blood ape is 4.
 When play begins:
 	let X be a random natural weapon part of the blood ape;
 	now damage die of X is 6;
-	now dodgability of X is 1;
-	now passive parry max of X is 3;
-	now active parry max of X is 0;
-	now printed name of X is "ape's [size of blood ape] fists".
+	now dodge bonus of X is -1;
+	now parry-against bonus of X is 1;
+	now parry-with bonus of X is -2;
+	now printed name of X is "ape's [size of blood ape] fists";
+	now X is plural-named.
 
 Aftereffects rule (this is the blood ape grows in size when hit rule):
 	if the global attacker is the blood ape and the attack damage is greater than 0:
@@ -342,17 +344,17 @@ Aftereffects rule (this is the blood ape grows in size when hit rule):
 				increase melee of blood ape by 1;
 			let X be a random natural weapon part of the blood ape;
 			if the blood ape is medium:
-				now dodgability of X is 2;
-				now passive parry max of X is 2;
+				now dodge bonus of X is 0;
+				now parry-against bonus of X is 0;
 			if the blood ape is large:
-				now dodgability of X is 3;
-				now passive parry max of X is 1;
+				now dodge bonus of X is 1;
+				now parry-against bonus of X is -1;
 			if the blood ape is huge:
-				now dodgability of X is 4;
-				now passive parry max of X is 0;
+				now dodge bonus of X is 2;
+				now parry-against bonus of X is -2;
 			if the blood ape is gargantuan:
-				now dodgability of X is 5;
-				now passive parry max of X is 0;
+				now dodge bonus of X is 3;
+				now parry-against bonus of X is -3;
 		otherwise:
 			say "Sensing perhaps that it cannot grow further in its current confines, the ape does not lick of the blood.".
 			
@@ -526,9 +528,9 @@ A physical damage reduction rule (this is the armadillo physical damage reductio
 When play begins:
 	let X be a random natural weapon part of the ravenous armadillo;
 	now damage die of X is 4;
-	now dodgability of X is 3;
-	now passive parry max of X is 1;
-	now active parry max of X is 3;
+	now dodge bonus of X is 1;
+	now parry-against bonus of X is -1;
+	now parry-with bonus of X is 1;
 	now the printed name of X is "bony tail club".		
 
 
@@ -775,10 +777,11 @@ Miranda is weapon user.
 When play begins:
 	let X be a random natural weapon part of Miranda;
 	now damage die of X is 5;
-	now dodgability of X is 2;
-	now passive parry max of X is 2;
-	now active parry max of X is 0;
-	now the printed name of X is "fists".	
+	now dodge bonus of X is 0;
+	now parry-against bonus of X is 0;
+	now parry-with bonus of X is -2;
+	now the printed name of X is "fists";
+	now X is plural-named.	
 
 
 Section - Miranda images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)	
@@ -918,6 +921,13 @@ A damage modifier rule (this is the wisps of pain take less damage rule):
 		say " - 5 (hard to damage)[run paragraph on]";
 		decrease the attack damage by 5.
 
+When play begins:
+	let X be a random natural weapon part of the wisps of pain;
+	now damage die of X is 0;
+	now dodge bonus of X is 0;
+	now parry-against bonus of X is 0;
+	now parry-with bonus of X is -2;
+	now the printed name of X is "necromantic magic".	
 
 Section - Wisps of pain images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)	
 
@@ -1135,11 +1145,12 @@ The spirit score of the chain golem is 7.
 When play begins:
 	let X be a random natural weapon part of the chain golem;
 	now damage die of X is 2;
-	now dodgability of X is 2;
-	now passive parry max of X is 2;
-	now active parry max of X is 3;
+	now dodge bonus of X is 0;
+	now parry-against bonus of X is 0;
+	now parry-with bonus of X is 1;
 	now the printed name of X is "lashing chains";
-	now X is ranged.
+	now X is ranged;
+	now X is plural-named.
 
 First carry out an actor attacking the chain golem (this is the attack a spinning chain golem rule):
 	let W be a random readied weapon held by the actor;
@@ -1368,10 +1379,11 @@ When play begins:
 
 When play begins:
 	let X be a random natural weapon part of the jumping bomb;
-	now dodgability of X is 3;
-	now passive parry max of X is 0;
-	now active parry max of X is 0;
-	now printed name of X is "bomb's detonating surface".
+	now dodge bonus of X is 1;
+	now parry-against bonus of X is -3;
+	now parry-with bonus of X is -2;
+	now printed name of X is "bomb's detonating surface";
+	now special weapon info of X is "kills instantly".
 
 Initiative update rule when the jumping bomb is enclosed by the location (this is the jumping bomb has slightly less initiative rule):
 	if a random chance of 1 in 5 succeeds:
@@ -1584,7 +1596,11 @@ The spirit score of the Reaper is 7.
 
 When play begins:
 	let X be a random natural weapon part of the Reaper;
-	now printed name of X is "Reaper's knuckles".
+	now dodge bonus of X is 0;
+	now parry-against bonus of X is 0;
+	now parry-with bonus of X is -2;
+	now printed name of X is "Reaper's knuckles";
+	now X is plural-named.
 
 The reaper is a weapon user.
 
@@ -1776,11 +1792,12 @@ The spirit score of the demon of rage is 6.
 
 When play begins:
 	let X be a random natural weapon part of the demon of rage;
-	now dodgability of X is 2;
 	now damage die of X is 6;	
-	now passive parry max of X is 2;
-	now active parry max of X is 0;
-	now printed name of X is "demon's fiery tendrils".
+	now dodge bonus of X is 0;
+	now parry-against bonus of X is 0;
+	now parry-with bonus of X is -2;
+	now printed name of X is "demon's fiery tendrils";
+	now X is plural-named.
 
 
 Section - Demon of Rage images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
@@ -1966,11 +1983,12 @@ The spirit score of the hound is 5.
 
 When play begins:
 	let X be a random natural weapon part of the hound;
-	now dodgability of X is 2;
 	now damage die of X is 7; [Its bite is worse than its bark!]
-	now passive parry max of X is 2;
-	now active parry max of X is 0.
-
+	now dodge bonus of X is 0;
+	now parry-against bonus of X is 0;
+	now parry-with bonus of X is -2;
+	now printed name of X is "teeth";
+	now X is plural-named.
 
 Section - Hound images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
@@ -2129,11 +2147,12 @@ The spirit score of the angel of compassion is 12.
 
 When play begins:
 	let X be a random natural weapon part of the angel of compassion;
-	now dodgability of X is 2;
 	now damage die of X is 4;	
-	now passive parry max of X is 2;
-	now active parry max of X is 0;
-	now printed name of X is "angel's fists".
+	now dodge bonus of X is 0;
+	now parry-against bonus of X is 0;
+	now parry-with bonus of X is -2;
+	now printed name of X is "angel's fists";
+	now X is plural-named.
 
 
 
@@ -2307,9 +2326,9 @@ The spirit score of the mindslug is 7.
 
 When play begins:
 	let X be a random natural weapon part of the mindslug;
-	now dodgability of X is 3;
-	now passive parry max of X is 2;
-	now active parry max of X is 0;
+	now dodge bonus of X is 1;
+	now parry-against bonus of X is 0;
+	now parry-with bonus of X is -2;
 	now printed name of X is "slug's crushing body".
 
 
@@ -2404,7 +2423,11 @@ Melee of Fafhrd is 1.
 
 When play begins:
 	let X be a random natural weapon part of Fafhrd;
-	now printed name of X is "Fafhrd's fists".
+	now dodge bonus of X is 0;
+	now parry-against bonus of X is 0;
+	now parry-with bonus of X is -2;
+	now printed name of X is "Fafhrd's fists";
+	now X is plural-named.
 
 Fafhrd carries the claymore.
 
@@ -2428,7 +2451,11 @@ Mouser is thrower.
 
 When play begins:
 	let X be a random natural weapon part of Mouser;
-	now printed name of X is "Mouser's fists".
+	now dodge bonus of X is 0;
+	now parry-against bonus of X is 0;
+	now parry-with bonus of X is -2;
+	now printed name of X is "Mouser's fists";
+	now X is plural-named.
 
 Follower percentile chance of Mouser is 85.
 Mouser is weapon user.
@@ -2732,8 +2759,12 @@ The spirit score of giant tentacle is 6.
 
 When play begins:
 	let X be a random natural weapon part of giant tentacle;
+	now dodge bonus of X is 0;
+	now parry-against bonus of X is 0;
+	now parry-with bonus of X is -2;	
+	now the damage die of X is 0;
 	now printed name of X is "tentacle";
-	now the damage die of X is 0.
+	now X is plural-named.
 
 The giant tentacle is eyeless.
 
@@ -3079,7 +3110,11 @@ The mind score of minotaur is 6.
 
 When play begins:
 	let X be a random natural weapon part of minotaur;
-	now printed name of X is "minotaur's fist";
+	now dodge bonus of X is 0;
+	now parry-against bonus of X is 0;
+	now parry-with bonus of X is -2;	
+	now printed name of X is "minotaur's fists";
+	now X is plural-named;
 	now the damage die of X is 6.
 
 Minotaur is a weapon user.
@@ -3197,6 +3232,10 @@ Healer of Aite is thrower.
 
 When play begins:
 	let X be a random natural weapon part of healer of Aite;
+	now dodge bonus of X is 0;
+	now parry-against bonus of X is 0;
+	now parry-with bonus of X is -2;
+	now X is plural-named;	
 	now printed name of X is "healer's fists".
 
 Report an actor hitting the dead healer of Aite:
@@ -3261,6 +3300,10 @@ Tormentor of Aite is thrower.
 
 When play begins:
 	let X be a random natural weapon part of tormentor of Aite;
+	now dodge bonus of X is 0;
+	now parry-against bonus of X is 0;
+	now parry-with bonus of X is -2;
+	now X is plural-named;
 	now printed name of X is "tormentor's fists".
 
 Report an actor hitting the dead tormentor of Aite:
@@ -3326,6 +3369,10 @@ Defender of Aite is weapon user.
 
 When play begins:
 	let X be a random natural weapon part of defender of Aite;
+	now dodge bonus of X is 0;
+	now parry-against bonus of X is 0;
+	now parry-with bonus of X is -2;
+	now X is plural-named;
 	now printed name of X is "defender's fists".
 
 Report an actor hitting the dead defender of Aite:
@@ -3435,9 +3482,9 @@ When play begins:
 	now X is size-agnostic;
 	now X is not armour-stoppable;
 	now damage die of X is 10;
-	now the passive parry max of X is 0;
-	now the active parry max of X is 0;
-	now the dodgability of X is 3;
+	now dodge bonus of X is 1;
+	now parry-against bonus of X is -2;
+	now parry-with bonus of X is -2;
 	now printed name of X is "lightning bolt".
 
 
@@ -4043,9 +4090,9 @@ When play begins:
 	now X is ranged;
 	now X is size-agnostic;
 	now damage die of X is 1;
-	now the passive parry max of X is 0;
-	now the active parry max of X is 0;
-	now the dodgability of X is 2;	
+	now dodge bonus of X is 0;
+	now parry-against bonus of X is 0;
+	now parry-with bonus of X is -2;
 	now printed name of X is "small nail".
 
 
@@ -4289,9 +4336,9 @@ The spirit score of Israfel is 12.
 When play begins:
 	let X be a random natural weapon part of Israfel;
 	now damage die of X is 6;
-	now the passive parry max of X is 0;
-	now the active parry max of X is 0;
-	now the dodgability of X is 2;
+	now dodge bonus of X is 0;
+	now parry-against bonus of X is -2;
+	now parry-with bonus of X is -2;
 	now printed name of X is "blinding flame".
 
 Israfel is angelic.
@@ -4438,9 +4485,9 @@ The spirit score of Isra is 12.
 When play begins:
 	let X be a random natural weapon part of Isra;
 	now damage die of X is 4;
-	now the passive parry max of X is 0;
-	now the active parry max of X is 0;
-	now the dodgability of X is 2;
+	now dodge bonus of X is 0;
+	now parry-against bonus of X is -2;
+	now parry-with bonus of X is -2;
 	now printed name of X is "cleansing flame".
 
 Isra is angelic.
@@ -4516,10 +4563,11 @@ The spirit score of Fell is 7.
 When play begins:
 	let X be a random natural weapon part of Fell;
 	now damage die of X is 5;
-	now the passive parry max of X is 0;
-	now the active parry max of X is 0;
-	now the dodgability of X is 2;
-	now printed name of X is "claws and fangs".
+	now dodge bonus of X is 0;
+	now parry-against bonus of X is -1;
+	now parry-with bonus of X is -2;
+	now printed name of X is "claws and fangs";
+	now X is plural-named.
 
 Fell is angelic.
 Radiation of Fell is 1.
@@ -4734,7 +4782,9 @@ The spirit score of Malygris is 11.
 
 When play begins:
 	let X be a random natural weapon part of Malygris;
-	now printed name of X is "Malygris's innate magical powers".
+	now printed name of X is "Malygris's innate magical powers";
+	now damage die of X is 6;
+	now X is plural-named.
 
 Malygris is weapon user.
 
@@ -4937,7 +4987,8 @@ The demonic assassin is unnaturally aware.
 
 When play begins:
 	let X be a random natural weapon part of the demonic assassin;
-	now the printed name of X is "claws".
+	now the printed name of X is "hardened claws";
+	now X is plural-named.
 	
 Demonic assassin is weapon user.
 
@@ -5010,10 +5061,11 @@ The Nameless Horror is emotionless.
 When play begins:
 	let X be a random natural weapon part of the nameless horror;
 	now damage die of X is 50;
-	now dodgability of X is 2;
-	now passive parry max of X is 0;
-	now active parry max of X is 0;
-	now printed name of X is "countless teeth and claws".
+	now dodge bonus of X is 0;
+	now parry-against bonus of X is -2;
+	now parry-with bonus of X is -2;
+	now printed name of X is "countless teeth and claws";
+	now X is plural-named.
 
 Follower percentile chance of Nameless Horror is 60.
 
@@ -5121,10 +5173,11 @@ The spirit score of rotting corpse is 4.
 When play begins:
 	let X be a random natural weapon part of the rotting corpse;
 	now damage die of X is 7;
-	now dodgability of X is 3;
-	now passive parry max of X is 3;
-	now active parry max of X is 0;	
-	now the printed name of X is "rotting appendages".
+	now dodge bonus of X is 1;
+	now parry-against bonus of X is 1;
+	now parry-with bonus of X is -2;
+	now the printed name of X is "rotting appendages";
+	now X is plural-named.
 
 A rotting limb is a kind of thing.
 The material of a rotting limb is usually flesh.
@@ -5283,10 +5336,11 @@ The spirit score of the aswang is 6.
 When play begins:
 	let X be a random natural weapon part of the aswang;
 	now damage die of X is 6;
-	now dodgability of X is 2;
-	now passive parry max of X is 2;
-	now active parry max of X is 0;	
-	now the printed name of X is "[if as-shape of aswang is as-witch]razor-sharp fingernails[otherwise if as-shape of aswang is as-bird]beak[otherwise]teeth[end if]".
+	now dodge bonus of X is 0;
+	now parry-against bonus of X is 0;
+	now parry-with bonus of X is -2;
+	now the printed name of X is "[if as-shape of aswang is as-witch]razor-sharp fingernails[otherwise if as-shape of aswang is as-bird]beak and claws[otherwise]teeth[end if]";
+	now X is plural-named.
 
 
 Section - Aswang images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
@@ -5594,7 +5648,11 @@ The spirit score of mummified priest is 6.
 
 When play begins:
 	let X be a random natural weapon part of the mummified priest;
-	now the printed name of X is "bandaged fists".
+	now dodge bonus of X is 0;
+	now parry-against bonus of X is 0;
+	now parry-with bonus of X is -2;	
+	now the printed name of X is "bandaged fists";
+	now X is plural-named.
 
 The mummified priest carries the was sceptre.
 
@@ -5694,6 +5752,9 @@ The spirit score of zombie toad is 3.
 
 When play begins:
 	let X be a random natural weapon part of the zombie toad;
+	now dodge bonus of X is 0;
+	now parry-against bonus of X is 0;
+	now parry-with bonus of X is -2;	
 	now the printed name of X is "tongue";
 	now the damage die of X is 1.
 
@@ -5759,7 +5820,11 @@ The spirit score of malignant chanter is 10.
 
 When play begins:
 	let X be a random natural weapon part of the malignant chanter;
-	now the printed name of X is "putrefying fists".
+	now dodge bonus of X is 0;
+	now parry-against bonus of X is 0;
+	now parry-with bonus of X is -2;	
+	now the printed name of X is "putrefying fists";
+	now X is plural-named.
 
 Section - Malignant Chanter images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
@@ -5867,10 +5932,11 @@ The spirit score of Drakul is 6.
 When play begins:
 	let X be a random natural weapon part of Drakul;
 	now damage die of X is 5;
-	now dodgability of X is 2;
-	now passive parry max of X is 2;
-	now active parry max of X is 0;	
-	now the printed name of X is "sharp teeth".
+	now dodge bonus of X is 0;
+	now parry-against bonus of X is 0;
+	now parry-with bonus of X is -2;
+	now the printed name of X is "sharp teeth";
+	now X is plural-named.
 
 Section - Drakul images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
@@ -6011,10 +6077,11 @@ When play begins:
 	let X be a random natural weapon part of the smoke demon;
 	now X is size-agnostic;
 	now damage die of X is 4;
-	now dodgability of X is 2;
-	now passive parry max of X is 2;
-	now active parry max of X is 0;	
-	now the printed name of X is "tendrils".
+	now dodge bonus of X is 0;
+	now parry-against bonus of X is 0;
+	now parry-with bonus of X is -2;
+	now the printed name of X is "tendrils";
+	now X is plural-named.
 
 Understand "tendrils" as the smoke demon.
 
@@ -6185,10 +6252,11 @@ The mind score of the imp is 4.
 When play begins:
 	let X be a random natural weapon part of the imp;
 	now damage die of X is 3;
-	now dodgability of X is 2;
-	now passive parry max of X is 2;
-	now active parry max of X is 0;	
-	now the printed name of X is "claws".
+	now dodge bonus of X is 0;
+	now parry-against bonus of X is 0;
+	now parry-with bonus of X is -2;	
+	now the printed name of X is "claws";
+	now X is plural-named.
 
 Understand "claws" as the imp.
 
@@ -6336,7 +6404,11 @@ The demonic mistress is unnaturally aware.
 
 When play begins:
 	let X be a random natural weapon part of the demonic mistress;
-	now the printed name of X is "claws".
+	now dodge bonus of X is 0;
+	now parry-against bonus of X is 0;
+	now parry-with bonus of X is -2;	
+	now the printed name of X is "claws";
+	now X is plural-named.
 	
 Demonic mistress is weapon user.
 

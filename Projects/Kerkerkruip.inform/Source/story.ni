@@ -37,7 +37,7 @@ Use undo prevention.
 
 Section - Include ATTACK
 
-Include version 4/130801 of Inform ATTACK by Victor Gijsbers.
+Include version 5/130915 of Inform ATTACK by Victor Gijsbers.
 [You can get the latest ATTACK at https://github.com/i7/ATTACK ]
 
 Section - Include all the Kerkerkruip extensions
@@ -83,9 +83,21 @@ Generation info is a truth state that varies. Generation info is [true]false.
 
 Section - Testing - Not for release
 
+[Lair of the Imp is testobject.]
+
 [Last when play begins:
 	move Fafhrd to Entrance Hall;
 	now Fafhrd is asleep.]
+	
+[The player carries one scroll of psycholocation and one scroll of mapping.]
+
+[The player carries six Morphean grenades.]
+
+[One scroll of the blade is in Entrance Hall.]
+[The Zen room is testobject.
+Entrance to the Arena is testobject.]
+
+[Angel of compassion is testobject.]
 	
 [Last when play begins:
 	increase mind score of the player by 40.]

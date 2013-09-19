@@ -1025,11 +1025,9 @@ Boots of the war dance are civilised.
 
 This is the boots of the wardance rule:
 	if the global defender is at dodge and the global defender wears the boots of the war dance:
-		let n be the dodgability of global attacker weapon;
-		if n is greater than 0:
-			if the numbers boolean is true:
-				say " - 1 (boots of the war dance)[run paragraph on]";
-			decrease the attack strength by 1.
+		if the numbers boolean is true:
+			say " - 1 (boots of the war dance)[run paragraph on]";
+		decrease the attack strength by 1.
 
 The boots of the wardance rule is listed before the standard tension attack modifier rule in the attack modifier rules.
 		
@@ -1073,12 +1071,10 @@ The description of the gauntlets of grip is "These sturdy armoured gloves make i
 
 This is the gauntlets of grip rule:
 	if the global defender is at parry and the global defender wears the gauntlets of grip:
-		let n be the passive parry max of global attacker weapon; [active parry max doesn't matter, since gauntlets could be used themselves]
-		if n is greater than 0:
-			if the gauntlets of grip are not rusted:
-				if the numbers boolean is true:
-					say " - 1 (gauntlets of grip)[run paragraph on]";
-				decrease the attack strength by 1.
+		if the gauntlets of grip are not rusted:
+			if the numbers boolean is true:
+				say " - 1 (gauntlets of grip)[run paragraph on]";
+			decrease the attack strength by 1.
 
 The gauntlets of grip rule is listed before the dodge defence bonus rule in the attack modifier rules.
 
@@ -1098,7 +1094,7 @@ Last aftereffects rule (this is the greasy gauntlets rule):
 			if a random chance of 1 in 6 succeeds:
 				do the grease drop with the global attacker;
 	if the global defender wears the greasy gauntlets and the global defender is at parry and the attack damage is 0:
-		if the passive parry max of the global attacker weapon is not 0:
+		if the parry-against bonus of the global attacker weapon is greater than -1:
 			if a random chance of 1 in 4 succeeds:
 				do the grease drop with the global defender.
 
@@ -1672,9 +1668,9 @@ The large-unguentum-argenti-pack is alchemical.
 
 Section - Unguentum crescendi (minor)
 
-[Because growing and shrinking are not exact reverses in terms of combat statistics, we'll make it so that you cannot go back and implement a system of immunity. Also useful for stuff like the mace of the ape king.] 
-A weapon can be crescendied. A weapon is usually not crescendied.
-A weapon can be diminuendied. A weapon is usually not diminuendied.
+[Growing and shrinking are now reversible, so we can allow the player to use both salves on the same weapon. We keep immunities for stuff like the mace of the ape king.] 
+
+A thing can be crescendi-immune. A thing is usually not crescendi-immune.
 
 An unguentum crescendi is a kind of salve. The plural of unguentum crescendi is unguenta crescendi. The description of unguentum crescendi is "An expensive alchemical salve that can be rubbed on weapons to make them grow. It can be used multiple times.". Understand "salve" as unguentum crescendi.
 
@@ -1687,19 +1683,20 @@ Carry out applying unguentum crescendi to something:
 			say "You cannot make that any bigger.";
 			take no time;
 		otherwise:
-			if second noun is diminuendied:
-				say "Some magic seems to protect this weapon against the unguentum crescendi.";
+			if the second noun is crescendi-immune:
+				say "Some magic seems to protect [the second noun] from the salve.";
 			otherwise:
 				say "You carefully apply the salve to [the second noun], ";
 				increase the size of the second noun;
 				say "turning it [size of the second noun].";
-				now the second noun is crescendied;
 	rule succeeds.
 
 The small-unguentum-crescendi-pack is a minor treasure pack. One unguentum crescendi is in the small-unguentum-crescendi-pack.
 The small-unguentum-crescendi-pack is alchemical.
 
 Section - Unguentum diminuendi (minor)
+
+A thing can be diminuendi-immune. A thing is usually not diminuendi-immune.
 
 An unguentum diminuendi is a kind of salve. The plural of unguentum diminuendi is unguenta diminuendi. The description of unguentum diminuendi is "An expensive alchemical salve that can be rubbed on weapons to make them shrink. It can be used multiple times.". Understand "salve" as unguentum diminuendi.
 
@@ -1712,13 +1709,12 @@ Carry out applying unguentum diminuendi to something:
 			say "You cannot make that any smaller.";
 			take no time;
 		otherwise:
-			if second noun is crescendied:
-				say "Some magic seems to protect this weapon against the unguentum diminuendi.";
-			otherwise:
+			if the second noun is diminuendi-immune:
+				say "Some magic seems to protect [the second noun] from the salve.";
+			otherwise:		
 				say "You carefully apply the salve to [the second noun], ";
 				decrease the size of the second noun;
 				say "turning it [size of the second noun].";
-				now the second noun is diminuendied;
 	rule succeeds.
 
 The small-unguentum-diminuendi-pack is a minor treasure pack. One unguentum diminuendi is in the small-unguentum-diminuendi-pack.
@@ -2080,9 +2076,9 @@ To do the adamantine blade shuffle:
 	now the damage die of the adamantine blade is a random number between 5 and 10;
 	now the weapon attack bonus of the adamantine blade is a random number between -1 and 4;
 	now the weapon damage bonus of the adamantine blade is a random number between 0 and 2;
-	now the dodgability of the adamantine blade is a random number between 1 and 4;
-	now the passive parry max of the adamantine blade is a random number between 1 and 4;
-	now the active parry max of the adamantine blade is a random number between 1 and 4;
+	now the dodge bonus of the adamantine blade is a random number between -1 and 2;
+	now the parry-against bonus of the adamantine blade is a random number between -1 and 2;
+	now the parry-with bonus of the adamantine blade is a random number between -1 and 2;
 	now the adamantine blade timer is a random number between 12 and 20.
 
 Every turn when the adamantine blade is not off-stage (this is the adamantine blade countdown rule):
@@ -2583,7 +2579,7 @@ Chapter - Sword
 
 A sword is a kind of weapon. 
 A sword is usually iron.
-The active parry max of a sword is usually 4.
+The parry-with bonus of a sword is usually 1.
 
 Understand "blade" as a sword.
 
@@ -2764,7 +2760,6 @@ A rapier is usually iron.
 
 Understand "blade" as a rapier.
 
-The active parry max of a rapier is usually 3.
 The damage die of a rapier is usually 5.
 
 Section - Gilded rapier
@@ -2785,9 +2780,9 @@ A dagger is usually iron.
 
 The damage die of a dagger is usually 3.
 The weapon attack bonus of a dagger is usually -1.
-The dodgability of a dagger is usually 3.
-The passive parry max of a dagger is usually 1.
-The active parry max of a dagger is usually 1.
+The dodge bonus of a dagger is usually 1.
+The parry-with bonus of a dagger is usually -1.
+The parry-against bonus of a dagger is usually -1.
 The weapon damage bonus of a dagger is usually 0.
 
 An attack modifier rule (this is the dagger extra tension attack bonus rule):
@@ -2902,9 +2897,6 @@ The special weapon info of the vampiric dagger is "; leeches some health (works 
 
 The damage die of the vampiric dagger is 3.
 The weapon attack bonus of the vampiric dagger is 0.
-The dodgability of the vampiric dagger is 3.
-The passive parry max of the vampiric dagger is 1.
-The active parry max of the vampiric dagger is 1.
 The weapon damage bonus of the vampiric dagger is 0.
 
 An aftereffects rule (this is the vampiric dagger leeches rule):
@@ -2993,9 +2985,9 @@ An axe is usually iron.
 The damage die of an axe is usually 4.
 The weapon attack bonus of an axe is usually -1.
 The weapon damage bonus of an axe is usually 2.
-The dodgability of an axe is usually 3.
-The passive parry max of an axe is usually 1.
-The active parry max of an axe is usually 2.
+The dodge bonus of an axe is usually 1.
+The parry-against bonus of an axe is usually -2.
+
 
 Section - Fearsome axe (minor)
 
@@ -3004,7 +2996,7 @@ The fearsome axe is deathly.
 The fearsome axe is iron.
 
 The damage die of the fearsome axe is 5.
-The active parry max of the fearsome axe is 1.
+The parry-with bonus of the fearsome axe is -1.
 
 The description of the fearsome axe is "While not exactly a nimble weapon, this axe is certainly able to deal out some punishment. It also has a chance of striking fear in the hearts of your enemies. (When you attack with the fearsome axe, there is a chance that they will not be able to react. The probability of this happening is (your mind - their mind) * 4%.)".
 
@@ -3028,7 +3020,7 @@ Section - Fearful axe (cursed)
 The fearful axe is a cursed curse-identified axe. The fearful axe is iron.
 
 The damage die of the fearful axe is 5.
-The active parry max of the fearful axe is 1.
+The parry-with bonus of the fearful axe is -1.
 
 The description of the fearful axe is "While not exactly a nimble weapon, this axe is certainly able to deal out some punishment. Unfortunately, the weapon is cursed with an enchantment that sometimes strikes fear into the heart of the wielder, making him forego his attack. (The probability of not attacking because of fear is (20 - your mind)%.)".
 
@@ -3066,8 +3058,7 @@ Carry out feeding (this is the feed the executioner's axe rule):
 
 The damage die of the executioner's axe is 7.
 The weapon damage bonus of the executioner's axe is 4.
-The active parry max of the executioner's axe is 0.
-The dodgability of the executioner's axe is 3.
+The parry-with bonus of the executioner's axe is -2.
 The weapon attack bonus of the executioner's axe is -3.
 
 A damage modifier rule (this is the executioner's axe extra tension damage bonus rule):
@@ -3098,9 +3089,8 @@ The minotaur's axe is large.
 The damage die of the minotaur's axe is 6.
 The weapon attack bonus of the minotaur's axe is -3.
 The weapon damage bonus of the minotaur's axe is 3.
-The dodgability of the minotaur's axe is 3.
-The passive parry max of the minotaur's axe is 0.
-The active parry max of the minotaur's axe is 1.
+The parry-with bonus of the minotaur's axe is -2.
+
 
 An attack modifier rule:
 	if the location of the global attacker is the maze and the global attacker weapon is the minotaur's axe:
@@ -3126,9 +3116,9 @@ A scythe is usually iron.
 
 The damage die of a scythe is usually 10.
 The weapon attack bonus of a scythe is usually -2.
-The dodgability of a scythe is usually 3.
-The passive parry max of a scythe is usually 1.
-The active parry max of a scythe is usually 1.
+The dodge bonus of a scythe is usually 1.
+The parry-with bonus of a scythe is usually -1.
+The parry-against bonus of a scythe is usually -1.
 The weapon damage bonus of a scythe is usually 0.
 
 
@@ -3162,7 +3152,7 @@ An aftereffects rule (this is the scythe of oxidation rusts stuff rule):
 				now the global defender weapon is rusted;
 	if the global defender weapon is the scythe of oxidation:
 		if the global defender is at parry and the attack damage is 0:
-			if the global attacker weapon is iron and the global attacker weapon is not rusted and the passive parry max of the global attacker weapon is not 0:
+			if the global attacker weapon is iron and the global attacker weapon is not rusted:
 				if the global attacker weapon is not a part of the global attacker:
 					say "Having been in contact with the scythe of oxidation, [the global attacker weapon] [bold type]rusts[roman type].";
 					now the global attacker weapon is rusted;
@@ -3193,9 +3183,9 @@ The description of a staff of pain is "The staff of pain wounds with magic that 
 
 The damage die of a staff of pain is usually 4.
 The weapon attack bonus of a staff of pain is usually 0.
-The dodgability of a staff of pain is usually 0.
-The active parry max of a staff of pain is usually 1.
-The passive parry max of a staff of pain is usually 0.
+The dodge bonus of a staff of pain is usually -2.
+The parry-with bonus of a staff of pain is usually -1.
+The parry-against bonus of a staff of pain is usually -2.
 The weapon damage bonus of a staff of pain is usually 0.
 
 
@@ -3209,9 +3199,9 @@ The druidic staff is wood.
 
 The damage die of the druidic staff is 6.
 The weapon attack bonus of the druidic staff is 1.
-The dodgability of the druidic staff is 2.
-The active parry max of the druidic staff is 3.
-The passive parry max of the druidic staff is 2.
+The dodge bonus of the druidic staff is 0.
+The parry-with bonus of the druidic staff is 1.
+The parry-against bonus of the druidic staff is 0.
 The weapon damage bonus of the druidic staff is 1.
 
 Section - Was sceptre (monster)
@@ -3231,9 +3221,6 @@ A dungeon interest rule (this is the maybe curse was sceptre rule):
 
 The damage die of the was sceptre is 4.
 The weapon attack bonus of the was sceptre is 0.
-The dodgability of the was sceptre is 2.
-The active parry max of the was sceptre is 2.
-The passive parry max of the was sceptre is 2.
 The weapon damage bonus of the was sceptre is 0.
 
 A body bonus rule (this is the body penalty of the was sceptre rule):
@@ -3258,9 +3245,7 @@ The caduceus is wood.
 
 The damage die of the caduceus is 4.
 The weapon attack bonus of the caduceus is 2.
-The dodgability of the caduceus is 2.
-The active parry max of the caduceus is 3.
-The passive parry max of the caduceus is 2.
+The parry-with bonus of the caduceus is 1.
 The weapon damage bonus of the caduceus is 0.
 
 Aftereffects rule (this is the caduceus may put people asleep rule):
@@ -3279,9 +3264,6 @@ The special weapon info of the staff of insanity is "; -2 attack and defence pen
 
 The damage die of the staff of insanity is 2.
 The weapon attack bonus of the staff of insanity is 0.
-The dodgability of the staff of insanity is 2.
-The active parry max of the staff of insanity is 2.
-The passive parry max of the staff of insanity is 2.
 The weapon damage bonus of the staff of insanity is 0.
 
 Aftereffects rule (this is the staff of insanity makes people insane rule):
@@ -3311,9 +3293,9 @@ A mace is usually iron.
 The damage die of a mace is usually 5.
 The weapon attack bonus of a mace is usually 0.
 The weapon damage bonus of a mace is usually 1.
-The dodgability of a mace is usually 2.
-The passive parry max of a mace is usually 2.
-The active parry max of a mace is usually 2.
+The dodge bonus of a mace is usually 0.
+The parry-with bonus of a mace is usually 0.
+The parry-against bonus of a mace is usually 0.
 
 Section - Spiked mace of the ape king (major)
 
@@ -3321,22 +3303,22 @@ The spiked mace of the ape king is a major mace.
 The spiked mace of the ape king is barren.
 The spiked mace of the ape king is iron.
 
-The spiked mace of the ape king is crescendied. The spiked mace of the ape king is diminuendied.
+The spiked mace of the ape king is crescendi-immune. The spiked mace of the ape king is diminuendi-immune.
 
 Table of Spiked Mace of the Ape King
-Blood	Dam	WDB	DOD	PPM		APM	Size
-0		3		0		1		2		2		tiny
-1		3		0		1		2		2		tiny
-2		4		0		1		2		2		small
-3		5		1		1		2		2		small
-4		5		1		1		2		2		medium
-5		6		2		2		2		2		medium
-6		7		2		2		2		1		large
-7		8		3		2		1		1		large
-8		8		3		3		1		1		huge
-9		9		4		3		1		0		huge
-10		10		4		3		1		0		gargantuan
-11		11		4		3		0		0		gargantuan
+Blood	Dam	WDB	DOD	PAB		PWB	Size
+0		3		0		-1		0		0		tiny
+1		3		0		-1		0		0		tiny
+2		4		0		0		0		0		small
+3		5		1		0		0		0		small
+4		5		1		0		0		0		medium
+5		6		2		0		0		0		medium
+6		7		2		0		0		-1		large
+7		8		3		1		-1		-1		large
+8		8		3		1		-1		-1		huge
+9		9		4		1		-1		-2		huge
+10		10		4		1		-2		-2		gargantuan
+11		11		4		1		-2		-2		gargantuan
 
 Spiked-mace-blood is a number that varies. Spiked-mace-blood is 0.
 
@@ -3347,9 +3329,9 @@ To set stats for the spiked mace of the ape king:
 		choose row with a blood of spiked-mace-blood in the Table of Spiked Mace of the Ape King;
 		now the damage die of the spiked mace of the ape king is Dam entry;
 		now the weapon damage bonus of the spiked mace of the ape king is WDB entry;
-		now the dodgability of the spiked mace of the ape king is DOD entry;
-		now the passive parry max of the spiked mace of the ape king is PPM entry;
-		now the active parry max of the spiked mace of the ape king is APM entry;
+		now the dodge bonus of the spiked mace of the ape king is DOD entry;
+		now the parry-with bonus of the spiked mace of the ape king is PWB entry;
+		now the parry-against bonus of the spiked mace of the ape king is PAB entry;
 		now the size of the spiked mace of the ape king is Size entry;
 	otherwise:
 		let guy be a random person who has the spiked mace of the ape king;
@@ -3391,9 +3373,9 @@ A hammer is usually iron.
 The damage die of a hammer is usually 4.
 The weapon attack bonus of a hammer is usually -1.
 The weapon damage bonus of a hammer is usually 2.
-The dodgability of a hammer is usually 3.
-The passive parry max of a hammer is usually 1.
-The active parry max of a hammer is usually 1.
+The dodge bonus of a hammer is usually 1.
+The parry-with bonus of a hammer is usually -1.
+The parry-against bonus of a hammer is usually -1.
 
 A hammer is usually stunning-weapon.
 The special weapon info of a hammer is usually "; stuns opponents[run paragraph on]".
@@ -3441,9 +3423,9 @@ The unlock text of the magical pickaxe is "an item that functions both as a weap
 The damage die of the pickaxe is 5.
 The weapon attack bonus of the pickaxe is -1.
 The weapon damage bonus of the pickaxe is 2.
-The dodgability of the pickaxe is 3.
-The passive parry max of the pickaxe is 1.
-The active parry max of the pickaxe is 2.
+The dodge bonus of the pickaxe is 1.
+The parry-against bonus of the pickaxe is -1.
+The parry-with bonus of the pickaxe is 0.
 
 Section - Glass Cannon (epic)
 
@@ -3461,9 +3443,9 @@ The description of the glass cannon is "At first sight this seems to be nothing 
 The damage die of the glass cannon is 0.
 The weapon attack bonus of the glass cannon is 3.
 The weapon damage bonus of the glass cannon is 10.
-The dodgability of the glass cannon is 2.
-The passive parry max of the glass cannon is 0.
-The active parry max of the glass cannon is 3.
+The dodge bonus of the glass cannon is 0.
+The parry-with bonus of the glass cannon is 2.
+The parry-against bonus of the glass cannon is -5.
 
 An attack modifier rule (this is the being a glass cannon rule):
 	if the global defender weapon is the glass cannon:
@@ -3483,9 +3465,13 @@ After readying the glass cannon:
 
 An aftereffects rule (this is the glass cannon shatters when used to parry rule):
 	if the global defender weapon is the glass cannon:
-		if the global defender is at parry and the the attack damage is 0:
-			say "The impact shatters the glass cannon.";
-			remove the glass cannon from play.
+		if the global defender is at parry and the attack damage is 0:
+			if a random chance of attack damage in 10 succeeds:
+				say "The impact [bold type]shatters the glass cannon[roman type].";
+				remove the glass cannon from play;
+			otherwise:
+				say "The glass cannon [bold type]survives the impact[roman type], but barely.";
+				decrease weapon damage bonus of glass cannon by 2.
 
 The special weapon info of the glass cannon is "; makes you easier to hit; halves your health[run paragraph on]".
 
@@ -3495,7 +3481,7 @@ Section - Nunchuck (monster)
 
 The pair of nunchucks are a weapon. The pair of nunchucks is wood. Understand "nunchuck" and "nunchuk" and "nunchuks" as the pair of nunchucks. The pair of nunchucks is ambiguously plural.
 The description of the pair of nunchucks is "These two pieces of wood with a metal chain between them can be surprisingly dangerous.".
-The active parry max of the pair of nunchucks is 4.
+The parry-with bonus of the pair of nunchucks is 1.
 
 Section - Demon whip (monster)
 
@@ -3508,9 +3494,9 @@ The demon whip is ranged.
 The damage die of the demon whip is 3.
 The weapon attack bonus of the demon whip is 1.
 The weapon damage bonus of the demon whip is 2.
-The dodgability of the demon whip is 2.
-The passive parry max of the demon whip is 1.
-The active parry max of the demon whip is 0.
+The dodge bonus of the demon whip is 0.
+The parry-against bonus of the demon whip is -1.
+The parry-with bonus of the demon whip is -2.
 
 The demon whip is cursed.
 

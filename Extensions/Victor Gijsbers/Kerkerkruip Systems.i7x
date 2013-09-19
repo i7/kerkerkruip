@@ -425,7 +425,7 @@ An attack modifier rule (this is the weapon size attack modifier rule):
 
 Section - Size of weapons
 
-[These operations are not reversible. Better not have the player play with them!]
+[These operations are now reversible.]
 
 To increase the size of (item - a weapon):
 	unless the size of item is gargantuan:
@@ -433,23 +433,19 @@ To increase the size of (item - a weapon):
 		unless item is size-agnostic:
 			increase weapon damage bonus of item by 1;
 			increase damage die of item by 1;
-			if a random chance of 1 in 2 succeeds:
-				if passive parry max of item is greater than 1:
-					decrease passive parry max of item by 1;
-				increase dodgability of item by 1.
+			if size of item is small or size of item is large or size of item is gargantuan:
+				decrease parry-against bonus of item by 1;
+				increase dodge bonus of item by 1.
 	
 To decrease the size of (item - a weapon):
 	unless the size of item is tiny:
 		now the size of item is the size before the size of item;
 		unless item is size-agnostic:
-			if weapon damage bonus of item is greater than 0:
-				decrease weapon damage bonus of item by 1;
-			if damage die of item is greater than 1:
-				decrease damage die of item by 1;
-			if a random chance of 1 in 2 succeeds:
-				increase passive parry max of item by 1;
-				if dodgability of item is greater than 0:
-					decrease dodgability of item by 1.
+			decrease weapon damage bonus of item by 1;
+			decrease damage die of item by 1;
+			if size of item is tiny or size of item is medium or size of item is huge:
+				increase parry-against bonus of item by 1;
+				decrease dodge bonus of item by 1.
 	
 A dungeon interest rule (this is the change weapon sizes rule):
 	repeat with item running through not off-stage not non-treasure not carried not size-agnostic weapons:
