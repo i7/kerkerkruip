@@ -356,6 +356,9 @@ Status combat stats rule (this is the status concentration rule):
 		otherwise:
 			say "[bold type]Concentration[roman type]: [if n is 1]+2[else if n is 2]+4[else if n is 3]+8[end if] attack, [if n is 1]no[else if n is 2]+2[else if n is 3]+4[end if] damage[line break][run paragraph on]";
 
+Status combat stats rule (this is the status flow rule):
+	say "[bold type]Offensive/defensive flow[roman type]: [offensive flow of the player]/[defensive flow of the player][line break][run paragraph on]";
+
 Status combat stats rule (this is the status tension rule):
 	if tension is greater than 1:
 		if long status is true:
@@ -388,7 +391,7 @@ Last carry out examining a person:
 		let item be a random readied weapon enclosed by the noun;
 		if item is a natural weapon:
 			say " [The noun] attack[s] using [item]: 1d[damage die of item] + [weapon damage bonus of the item] damage; [if weapon attack bonus of the item is less than 0]-[otherwise]+[end if][absolute value of weapon attack bonus of the item] attack modifier[if the item is ranged]; ranged[end if][natural parry and dodge info of the item][if the item is silver]; good against undead and demons[end if][special weapon info of the item][roman type].[run paragraph on]";
-		say "[paragraph break][The noun] [is-are] of [size of the noun] size, and [has-have] [health of the noun] of [permanent health of the noun] health left.[run paragraph on]" ;
+		say "[paragraph break][The noun] [has-have] [concentration of the noun] concentration, [offensive flow of the noun] offensive flow, and [defensive flow of the noun] defensive flow. [The noun] [is-are] of [size of the noun] size, and [has-have] [health of the noun] of [permanent health of the noun] health left.[run paragraph on]" ;
 		say "[paragraph break]".
 		
 To say natural parry and dodge info of (item - a weapon):
@@ -960,7 +963,7 @@ Include Basic Screen Effects by Emily Short.
 Table of Fancy Status
 left	central	right
 " [bold type][status location][roman type]"	"Tension: [tension]"	"Health: [health of the player]/[permanent health of the player]"
-" Special powers: [powers of the player]"
+" Special powers: [powers of the player]"	""	"C/O/D: [concentration of the player]/[offensive flow of the player]/[defensive flow of the player]"
 
 To say status location:
 	 let phrase be indexed text;
