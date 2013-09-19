@@ -799,8 +799,6 @@ A dungeon interest rule (this is the setting up Miranda rule):
 	otherwise:
 		now Miranda is concentration-breaking reactor;
 		now cbr strength of Miranda is 9;
-	if a random chance of 1 in 2 succeeds:
-		now Miranda is roll-user;
 	if a random chance of 3 in 4 succeeds:
 		move pair of nunchucks to Miranda;
 		now pair of nunchucks is readied;
@@ -4346,7 +4344,7 @@ Radiation of Israfel is 4.
 
 Section - Israfel's healing trance
 
-Israfel-trance is a number that varies. Israfel-trance is 0.
+Israfel-trance is a number that varies. Israfel-trance is 1.
 
 Israfel-trancing is an action applying to nothing.
 
@@ -4361,17 +4359,22 @@ Carry out Israfel Israfel-trancing:
 Aftereffects rule (this is the Israfel getting hit rule):
 	if Israfel is the global defender and the attack damage is greater than 0:
 		say "Israfel's [bold type]healing trance is broken[roman type].";
-		now Israfel-trance is 0.
+		now Israfel-trance is 1.
+
+After an actor hitting (this is the Israfel losing trance when attacking rule):
+	if Israfel is the global attacker:
+		now Israfel-trance is 1.
 
 An AI action selection rule for at-Act Israfel (this is the Israfel considers trancing rule):
 	choose a blank Row in the Table of AI Action Options;
 	now the Option entry is the action of Israfel Israfel-trancing;
 	let n be (permanent health of Israfel - health of Israfel);
 	now the Action Weight entry is n;
-	if Israfel-trance > n:
+	let m be Israfel-trance + 2;
+	if m > n:
 		increase Action Weight entry by n;
 	otherwise:
-		increase Action Weight entry by Israfel-trance;
+		increase Action Weight entry by m;
 	if n < 2:
 		decrease Action Weight entry by 10;
 	if n is 0:
@@ -4613,11 +4616,63 @@ When play begins (this is the link isra to fell rule):
 
 Section - Reuniting
 
-Every turn when Isra is in the location or Fell is in the location (this is the Isra and Fell reunite rule):
-	if Isra is not alive or Fell is not alive or (health of Isra < 3) or (health of Fell < 3):
-		reunite Israfel.
+Israfel-reuniting is an action applying to nothing.
+Israfel-reuniting-initiator is a person that varies. Israfel-reuniting-initiator is Israfel.
+
+An AI action selection rule for at-Act Isra (this is the Isra considers Israfel-reuniting rule):
+	choose a blank Row in the Table of AI Action Options;
+	now the Option entry is the action of Isra Israfel-reuniting;
+	if Fell is not alive or (health of Isra < 3) or (health of Fell < 3):
+		now the Action Weight entry is a random number between 1 and 30;
+	otherwise if health of Isra < 6:
+		now the Action Weight entry is a random number between 1 and 5;
+	otherwise:
+		now the Action Weight entry is -1000.
+
+An AI action selection rule for at-Act Fell (this is the Fell considers Israfel-reuniting rule):
+	choose a blank Row in the Table of AI Action Options;
+	now the Option entry is the action of Fell Israfel-reuniting;
+	if Isra is not alive or (health of Isra < 3) or (health of Fell < 3):
+		now the Action Weight entry is a random number between 1 and 20;
+	otherwise:
+		now the Action Weight entry is -1000.
+
+Carry out an actor Israfel-reuniting:
+	now Israfel-reuniting-initiator is the actor;
+	if Isra is alive and Fell is alive:
+		say "Isra and Fell are suddenly surrounded by a deep blue light. Both seem frozen in place.";
+	otherwise if Isra is alive:
+		say "Isra is suddenly surrounded by a deep blue light. He seems frozen in place.";
+	otherwise:
+		say "Fell is suddenly surrounded by a deep blue light. She seems frozen in place.".
+		
+This is the Isra and Fell reactions rule:
+	repeat with guy running through at-React persons:
+		if guy is Isra or guy is Fell:
+			if Israfel-reuniting-initiator is Isra or Israfel-reuniting-initiator is Fell:
+				now combat state of guy is at-Inactive.
+
+The Isra and Fell reactions rule is listed before the the reactors choose reactions rule in the combat round rules.
+
+This is the Israfel reunites rule:
+	if main actor is Isra or main actor is Fell:
+		if Israfel-reuniting-initiator is Isra or Israfel-reuniting-initiator is Fell:
+			if Israfel-reuniting-initiator is main actor:
+				now combat status is concluding;
+				reunite Israfel;
+			otherwise:
+				if Israfel-reuniting-initiator is not alive:
+					now combat status is concluding;
+					reunite Israfel;
+				otherwise:
+					say "[The main actor] remains frozen in place as the blue light becomes stronger.";
+					now combat status is concluding.
+				
+				
+The Israfel reunites rule is listed before the the main actor chooses an action rule in the combat round rules.
 
 To reunite Israfel:
+	now Israfel-trance is 1;
 	now Israfel is not asleep;
 	let n be health of Isra;
 	if n < 0:
@@ -4714,8 +4769,8 @@ Section - Power of Israfel
 
 The power of Israfel is a power. Israfel grants power of Israfel.
 The power level of power of Israfel is 4.
-The command text of power of Israfel is "link".
-The description of power of Israfel is "Type: active ability.[paragraph break]Command: link [italic type]someone[roman type].[paragraph break]The 'link' command will link your spirit to that of another person. Until you link to someone else, you will benefit from the concentration of the person you linked to just as if it were your own. Every turn, the link has a 10% probability of unravelling; but this probability is decreased by 1% for every 3 points of spirit you have, to a minimun of 1% at 27 spirit."
+The command text of power of Israfel is "link, reform".
+The description of power of Israfel is "Type: active ability.[paragraph break]Command: link [italic type]someone[roman type].[paragraph break]The 'link' command will link your spirit to that of another person. Until you link to someone else, you will benefit from the concentration of the person you linked to just as if it were your own. Every turn, the link has a 10% probability of unravelling; but this probability is decreased by 1% for every 3 points of spirit you have, to a minimun of 1% at 27 spirit.[paragraph break]Command: reform.[paragraph break]You immediately heal for an amount of damage equal to your spirit score. However, your spirit score permanently drops by 5 points."
 The power-name of power of Israfel is "power of Israfel".
 
 Absorbing power of Israfel:
@@ -4734,6 +4789,8 @@ Repelling power of Israfel:
 Status skill rule (this is the Israfel status skill rule):
 	if power of Israfel is granted:
 		say "You have the power of Israfel, which allows you to [bold type]link[roman type] to people and benefit from their concentration. [italic type](Level 4)[roman type][line break][run paragraph on]".
+
+Section - Power of Israfel - Link
 
 Linking is an action applying to one thing. Understand "link [thing]" and "link to [thing]" as linking.
 
@@ -4756,8 +4813,31 @@ Carry out linking:
 	now noun is linked to the player;
 	say "You forge a spiritual link which will allow you to benefit from [possessive of the noun] concentration."
 
+Section - Power of Israfel - Reform
 
+Reforming is an action applying to nothing. Understand "reform" as reforming.
 
+Check reforming:
+	if the power of Israfel is not granted:
+		take no time;
+		say "You do not possess that power." instead.
+
+Carry out reforming:
+	let n be (permanent health of player - health of player);
+	if n < 0:
+		now n is 0;	
+	let m be final spirit of the player;
+	if n > m:
+		now n is m;
+	increase health of the player by n;
+	decrease spirit score of the player by 5;
+	if n < 0:
+		now n is (0 - n);
+		say "You foolishly sacrifice 5 spirit to lose [n] health.";
+		if player is not alive:
+			end the story saying "Your body follows your spirit into the void.";
+	otherwise:
+		say "You sacrifice 5 spirit and regain [n] health.".
 
 
 Chapter - Level 5 - Malygris
