@@ -4363,7 +4363,8 @@ Aftereffects rule (this is the Israfel getting hit rule):
 
 After an actor hitting (this is the Israfel losing trance when attacking rule):
 	if Israfel is the global attacker:
-		now Israfel-trance is 1.
+		now Israfel-trance is 1;
+	continue the action.
 
 An AI action selection rule for at-Act Israfel (this is the Israfel considers trancing rule):
 	choose a blank Row in the Table of AI Action Options;
