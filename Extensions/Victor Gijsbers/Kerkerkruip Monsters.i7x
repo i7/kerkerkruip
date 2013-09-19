@@ -2192,8 +2192,8 @@ To do the angel of compassion power-down:
 
 Section - Angel of Compassion images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
-The avatar of angel_of_compassion is Figure of map_monster_angel_of_compassion.
-The legend-label of angel_of_compassion is Figure of map_legend_angel_of_compassion.
+The avatar of angel of compassion is Figure of map_monster_angel_of_compassion.
+The legend-label of angel of compassion is Figure of map_legend_angel_of_compassion.
 
 Section - Prose
 
@@ -5908,8 +5908,8 @@ When play begins:
 
 Section - Malignant Chanter images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
-The avatar of malignant_chanter is Figure of map_monster_malignant_chanter.
-The legend-label of malignant_chanter is Figure of map_legend_malignant_chanter.
+The avatar of malignant chanter is Figure of map_monster_malignant_chanter.
+The legend-label of malignant chanter is Figure of map_legend_malignant_chanter.
 
 
 Section - Special and AI
@@ -5959,7 +5959,7 @@ Report the malignant chanter attacking:
 	rule succeeds.
 
 Report the malignant chanter dodging:
-	say "Jumping aside with surprising speed, the malginant chanter tries to evade the attack.";
+	say "Jumping aside with surprising speed, the malignant chanter tries to evade the attack.";
 	rule succeeds.
 
 Report the malignant chanter parrying:
