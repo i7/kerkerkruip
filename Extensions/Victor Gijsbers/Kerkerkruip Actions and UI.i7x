@@ -825,6 +825,19 @@ A pickpocket rule (this is the readied weapons pickpocket rule):
 
 
 
+Chapter - Options menu
+
+Optionsmenuing is an action out of world. Optionsmenuing is in-game menu-checking.
+
+Understand "options" and "settings" as Optionsmenuing.
+
+Carry out optionsmenuing:
+	display the (Table of Options Menu) menu with title "Options";
+	try looking;
+	report the main action again;
+
+
+
 Chapter - Achievements Menu
 
 Achievemenuing is an action out of world. Achievemenuing is in-game menu-checking.

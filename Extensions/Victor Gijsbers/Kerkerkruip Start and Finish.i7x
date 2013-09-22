@@ -284,41 +284,44 @@ This is the show the menu rule:
 Section - Options Menu
 
 Table of Options Menu
-title	rule
-"Reset number of victories"	the resetting rule
-"Reset achievements"	the achievement resetting rule
-"Unlock everything"	the unlock everything rule
-"Toggle information panels"	the toggle info panels rule
+title	order	rule
+"[bold type]Interface options"	1	--
+"Information panels: [bold type][if data value 7 is 1]Off[otherwise]On[end if]"	2	the toggle info panels rule
+""	20	--
+"[bold type]Reset"	21	--
+"[if difficulty is 0 and data value 1 is 0 and data value 3 is 0 or data value 4 is 0][italic type](Reset the number of victories)[otherwise]Reset the number of victories"	22	the resetting rule
+"[if the Table of Held Achievements is empty][italic type](Reset achievements)[otherwise]Reset achievements"	23	the achievement resetting rule
+"[if data value 4 > 99][italic type](Unlock everything)[otherwise]Unlock everything"	24	the unlock everything rule
+
+Before showing the title screen:
+	sort the Table of Options Menu in (order) order;
 
 This is the resetting rule:
 	set difficulty to 0;
 	set data value 1 to 0, table only;
 	set data value 3 to 0, table only;
 	set data value 4 to 0;
-	leave the current menu;
 
 This is the achievement resetting rule:
 	blank out the whole of the Table of Held Achievements;
 	write File of Achievements from Table of Held Achievements;
-	leave the current menu;
 
 This is the unlock everything rule:
 	set data value 4 to 100;
-	leave the current menu;
 
 This is the toggle info panels rule:
 	if data value 7 is 0:
 		set data value 7 to 1;
 	otherwise:
 		set data value 7 to 0;
-	leave the current menu;
+
 
 
 Section - Adding menu screen graphics to the Options menu (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
 Table of Options Menu (continued)
-title	rule
-"Toggle menu graphics"	the toggle menu graphics rule
+title	order	rule
+"Menu graphics: [bold type][if data value 5 is 1]Off[otherwise]On[end if][roman type]"	11	the toggle menu graphics rule
 
 This is the toggle menu graphics rule:
 	if data value 5 is 1:
@@ -336,14 +339,16 @@ Section - Help Menu
 	
 Table of Kerkerkruip Help
 title	submenu	text	rule
-"[bold type]Playing Kerkerkruip[roman type]"	--	--	--
+"[bold type]Playing Kerkerkruip"	--	--	--
 "Players new to Interactive Fiction"	Table of Newest Player Help	--	--
 "Players new to [Kerkerkruip]"	Table of New Player Help	--	--
 "Advanced concepts"	Table of Advanced Help	--	--
 ""	--	--	--
-"[bold type]Dungeon almanac[roman type]"	--	--	--
+"[bold type]Dungeon almanac"	--	--	--
 "Enemies and powers"	Table of Power Help	--	[the show the table of enemies and powers rule]
 "Achievements"	Table of Achievement Menu	--	--
+""	--	--	--
+"Options"	Table of Options Menu	--	--
 ""	--	--	--
 "Credits, Copyright & Afterword"	--	"[total credits]"	--
 "Contact"	--	"[contact text]"	--
@@ -384,22 +389,30 @@ title	text
 Table of Power Help
 title	text
 "Body, mind, and spirit"	"Your character has three basic faculties: body, mind, and spirit. They influence your performance in two ways. First, each of the faculties has its own individual effect. Second, all powers in the game depend upon one or more of the faculties for their effect.[paragraph break][bold type]Body[roman type] is a measure of your physical strength and agility. Whenever you are attacked, you have a body * 2% chance of receiving a +3 defence bonus.[paragraph break][bold type]Mind[roman type] is a measure of your intelligence and willpower. Whenever damage is dealt to you, each point of mind increases your chance of remaining concentrated by 2%.[paragraph break][bold type]Spirit[roman type] measures how attuned you are to magic and the souls of others. Every point of spirit gives you a 2.5% chance of receiving an intiative bonus on any combat turn.[paragraph break]Truly exceptional feats are only possible for those who [bold type]balance[roman type] body, mind and spirit. Whenever a random number is rolled for an attack or a faculty check, your chance of rolling 20 is a percentage equal to the [italic type]lowest[roman type] of your three faculties."
-"Level 1 -- Swarm of daggers (body & spirit)"	"Type: active combat ability.[paragraph break]Command: pierce [italic type]someone[roman type].[paragraph break]Effect: You attack the target. A successful hit deals 2 + body/5 extra damage. This ability has a cooldown of 12 - spirit/3 turns."
-"Level 1 -- Blood ape (body)"	"Type: passive ability.[paragraph break]Command: none.[paragraph break]Effect: Whenever one of your attacks deals damage, you grow. This growth lasts until the end of combat, and you can never grow bigger than the blood ape was when you killed it. In addition to the usual benefits and penalties of growing, you regain 1 + body/3 points of health whenever you grow."
-"Level 1 -- Ravenous armadillo (body & spirit)"	"Type: reactive combat ability.[paragraph break]Command: scales.[paragraph break]Effect: As a reaction, you can use the scales skill to cover yourself in damage absorbing scales. The damage of the current attack will be reduced by 5 + body/3 points. This ability has a cooldown of 10 - spirit/4 turns."
-"Level 1 -- Miranda (mind)"	"Type: active combat ability.[paragraph break]Command: stun [italic type]someone[roman type].[paragraph break]Effect: You attack the target. A successful hit deals 1 less damage, but it stuns the target for a number of turns equal to your mind score. A stunned person has a -1 attack penalty, and a penalty on body, mind and spirit equal to your mind/2. Extra effective when used in combination with a stunning weapon."
-"Level 1 -- Wisps of pain (spirit)"	"Type: active ability.[paragraph break]Command: torment.[paragraph break]Effect: A wave of torment will pass through the room, breaking everyone's concentration. (A person has a 2% chance of resisting this effect per point of mind.) This ability has a cooldown of 12 - spirit/3 turns."
-"Level 2 -- Chain golem (spirit)"	"Type: reactive combat ability.[paragraph break]Command: lash.[paragraph break]Effect: As a reaction, you attack your attacker. Whether you get to strike first is determined randomly, but the probability increases with your spirit score. (It is 50% at a spirit score of 8.) This ability has a cooldown of 10 - spirit/5 turns."
-"Level 2 -- Jumping bomb (body)"	"Type: passive ability.[paragraph break]Command: none.[paragraph break]Effect: If you are killed by someone's attack, your body will explode and deal damage to the lowest health enemy in the room who might give you a soul upon death. The amount of damage dealt is a random number between 5 and your body score. (But it is never less than 5, even if your body is less than 5.) If the amount of damage you deal is enough to kill your victim, you will absorb the soul and survive."
-"Level 2 -- Reaper (spirit)"	"Type: active ability.[paragraph break]Command: reap [italic type]someone[roman type].[paragraph break]Effect: You can reap anyone you have seen, and this ability will instantly teleport you to their location. It can even be used as a reaction in combat. Reaping will reduce your health and maximum health by an amount equal to the level of the highest power you have absorbed; but you have a spirit * 3% probability of avoiding that penalty."
-"Level 2 -- Demon of rage (mind)"	"Type: active ability.[paragraph break]Command: howl.[paragraph break]Effect: You make your next attack with a +4 attack bonus and a damage bonus equal to 2 + mind/3. Your defence is permanently decreased by 1 point."
-"Level 2 -- Hound (mind)"	"Type: passive ability.[paragraph break]Command: none.[paragraph break]After you are attacked, with a probability of (mind - 2) / mind, you get a chance to immediately retaliate. If this happens, you will automatically win the initiative for that turn. You can perform any action you wish, just as normal, but if you do choose to retaliate against your attacker, you get a +2 attack and +2 damage bonus. Any action that leads to an attack will count as a retaliation (including the special pierce and stun powers)."
-"Level 3 -- Mindslug (mind & spirit)"	"Type: active ability.[paragraph break]Command: enslave [italic type]someone[roman type].[paragraph break]Effect: You attempt to enslave an enemy, turning him or her into your thrall. Your attempt is successful if you succeed at a mind check against 5 + mind of your enemy + health of your enemy + (2 * concentration of your enemy) - (2 * your concentration). In general, it will be necessary to decrease your enemy's health before trying to enslave him or her. This ability has a cooldown of 9 - (spirit / 3) turns."
-"Level 3 -- Giant tentacle (mind)"	"Type: active ability.[paragraph break]Command: sprout [italic type]a number[roman type].[paragraph break]Effect: You sprout between 1 and 4 horrifying tentacles, which may turn anyone else in the room insane. You yourself will permanently lose as many points of mind as you sprout tentacles. Everyone else has to make a mind check against 4 + (4 * number of tentacles) - (that person's health / 3) + your concentration. If they fail the mind check, they go insane, and will start attacking random people including themselves. As additional effects, if you sprout at least 2 tentacles, everyone will lose their concentration; if you sprout at least 3 tentacles, all current attacks against you will be interrupted; and if you sprout 4 tentacles, everyone except for yourself will be stunned for 6 turns."
-"Level 3 -- Minotaur (body)"	"Type: passive ability.[paragraph break]Command: none.[paragraph break]Effect: You can use the minotaur's axe to maze people. In the maze, you will get a +3 bonus to body, mind and spirit. Furthermore and independent of your location, you get special proficiency with axes, granting you a (your body)% probability of dealing 10 bonus damage when you hit someone with an axe."
-"Level 4 -- Fanatics of Aite (spirit)"	"Type: active and passive ability.[paragraph break]Command: sacrifice (while not in another god's temple).[paragraph break]Effect: You can sacrifice to Aite even when you are not in her temple, though the effect will not work in the temples of other gods. Once you worship Aite, the probability that her combat interventions will occur increases, the probability that they will benefit you increases, and they start dealing more damage. All these effects scale with your spirit score."
-"Level 4 -- Bodmall (body)"	"Type: active combat ability.[paragraph break]Command: brambles; launch.[paragraph break]The 'brambles' command will summon bushes of thorns that impede the movement of your enemies, giving them a -2 attack penalty. After a few turns, these branches will start growing thorns. If you wait longer, they will also grow different types of fruit.[paragraph break]The 'launch' command launches these thorns and fruit at your enemies (or, for some fruits, yourself). The thorns will deal between 1 and [italic type]n[roman type] damage, where [italic type]n[roman type] is the number of times the thorns have grown (tiny = 1, terrible = 5). In addition, the thorns have an [italic type]n[roman type] * 20% chance of breaking concentration. Different types of fruits have different effects; experiment with them! Both the brambles and the launch command can be used as an action or a reaction.[paragraph break]Your body score has several effects on how fast the thorns and the fruit will grow; a higher body score means that both will appear sooner and have less chance of disappearing again.[paragraph break]In addition, as a druid you are immune to smoke, and get a +1 attack bonus with wooden weapons."
-"Level 4 -- Overmind (mind)"	"Type: active and passive ability.[paragraph break]Command: call [italic type]someone[roman type].[paragraph break]You can call any person in the game, except Malygris. Calling someone will make that person move one room towards you, if possible.[paragraph break]In addition, the power of the overmind makes your allies more powerful. They get an attack and defence bonus equal to mind/5."
+""	--
+"[bold type]Level 1"	--
+"Swarm of daggers (body & spirit)"	"Level: 1[paragraph break]Type: active combat ability.[paragraph break]Command: pierce [italic type]someone[roman type].[paragraph break]Effect: You attack the target. A successful hit deals 2 + body/5 extra damage. This ability has a cooldown of 12 - spirit/3 turns."
+"Blood ape (body)"	"Level: 1[paragraph break]Type: passive ability.[paragraph break]Command: none.[paragraph break]Effect: Whenever one of your attacks deals damage, you grow. This growth lasts until the end of combat, and you can never grow bigger than the blood ape was when you killed it. In addition to the usual benefits and penalties of growing, you regain 1 + body/3 points of health whenever you grow."
+"Ravenous armadillo (body & spirit)"	"Level: 1[paragraph break]Type: reactive combat ability.[paragraph break]Command: scales.[paragraph break]Effect: As a reaction, you can use the scales skill to cover yourself in damage absorbing scales. The damage of the current attack will be reduced by 5 + body/3 points. This ability has a cooldown of 10 - spirit/4 turns."
+"Miranda (mind)"	"Level: 1[paragraph break]Type: active combat ability.[paragraph break]Command: stun [italic type]someone[roman type].[paragraph break]Effect: You attack the target. A successful hit deals 1 less damage, but it stuns the target for a number of turns equal to your mind score. A stunned person has a -1 attack penalty, and a penalty on body, mind and spirit equal to your mind/2. Extra effective when used in combination with a stunning weapon."
+"Wisps of pain (spirit)"	"Level: 1[paragraph break]Type: active ability.[paragraph break]Command: torment.[paragraph break]Effect: A wave of torment will pass through the room, breaking everyone's concentration. (A person has a 2% chance of resisting this effect per point of mind.) This ability has a cooldown of 12 - spirit/3 turns."
+""	--
+"[bold type]Level 2"	--
+"Chain golem (spirit)"	"Level: 2[paragraph break]Type: reactive combat ability.[paragraph break]Command: lash.[paragraph break]Effect: As a reaction, you attack your attacker. Whether you get to strike first is determined randomly, but the probability increases with your spirit score. (It is 50% at a spirit score of 8.) This ability has a cooldown of 10 - spirit/5 turns."
+"Jumping bomb (body)"	"Level: 2[paragraph break]Type: passive ability.[paragraph break]Command: none.[paragraph break]Effect: If you are killed by someone's attack, your body will explode and deal damage to the lowest health enemy in the room who might give you a soul upon death. The amount of damage dealt is a random number between 5 and your body score. (But it is never less than 5, even if your body is less than 5.) If the amount of damage you deal is enough to kill your victim, you will absorb the soul and survive."
+"Reaper (spirit)"	"Level: 2[paragraph break]Type: active ability.[paragraph break]Command: reap [italic type]someone[roman type].[paragraph break]Effect: You can reap anyone you have seen, and this ability will instantly teleport you to their location. It can even be used as a reaction in combat. Reaping will reduce your health and maximum health by an amount equal to the level of the highest power you have absorbed; but you have a spirit * 3% probability of avoiding that penalty."
+"Demon of rage (mind)"	"Level: 2[paragraph break]Type: active ability.[paragraph break]Command: howl.[paragraph break]Effect: You make your next attack with a +4 attack bonus and a damage bonus equal to 2 + mind/3. Your defence is permanently decreased by 1 point."
+"Hound (mind)"	"Level: 2[paragraph break]Type: passive ability.[paragraph break]Command: none.[paragraph break]After you are attacked, with a probability of (mind - 2) / mind, you get a chance to immediately retaliate. If this happens, you will automatically win the initiative for that turn. You can perform any action you wish, just as normal, but if you do choose to retaliate against your attacker, you get a +2 attack and +2 damage bonus. Any action that leads to an attack will count as a retaliation (including the special pierce and stun powers)."
+""	--
+"[bold type]Level 3"	--
+"Mindslug (mind & spirit)"	"Level: 3[paragraph break]Type: active ability.[paragraph break]Command: enslave [italic type]someone[roman type].[paragraph break]Effect: You attempt to enslave an enemy, turning him or her into your thrall. Your attempt is successful if you succeed at a mind check against 5 + mind of your enemy + health of your enemy + (2 * concentration of your enemy) - (2 * your concentration). In general, it will be necessary to decrease your enemy's health before trying to enslave him or her. This ability has a cooldown of 9 - (spirit / 3) turns."
+"Giant tentacle (mind)"	"Level: 3[paragraph break]Type: active ability.[paragraph break]Command: sprout [italic type]a number[roman type].[paragraph break]Effect: You sprout between 1 and 4 horrifying tentacles, which may turn anyone else in the room insane. You yourself will permanently lose as many points of mind as you sprout tentacles. Everyone else has to make a mind check against 4 + (4 * number of tentacles) - (that person's health / 3) + your concentration. If they fail the mind check, they go insane, and will start attacking random people including themselves. As additional effects, if you sprout at least 2 tentacles, everyone will lose their concentration; if you sprout at least 3 tentacles, all current attacks against you will be interrupted; and if you sprout 4 tentacles, everyone except for yourself will be stunned for 6 turns."
+"Minotaur (body)"	"Level: 3[paragraph break]Type: passive ability.[paragraph break]Command: none.[paragraph break]Effect: You can use the minotaur's axe to maze people. In the maze, you will get a +3 bonus to body, mind and spirit. Furthermore and independent of your location, you get special proficiency with axes, granting you a (your body)% probability of dealing 10 bonus damage when you hit someone with an axe."
+""	--
+"[bold type]Level 4"	--
+"Fanatics of Aite (spirit)"	"Level: 4[paragraph break]Type: active and passive ability.[paragraph break]Command: sacrifice (while not in another god's temple).[paragraph break]Effect: You can sacrifice to Aite even when you are not in her temple, though the effect will not work in the temples of other gods. Once you worship Aite, the probability that her combat interventions will occur increases, the probability that they will benefit you increases, and they start dealing more damage. All these effects scale with your spirit score."
+"Bodmall (body)"	"Level: 4[paragraph break]Type: active combat ability.[paragraph break]Command: brambles; launch.[paragraph break]The 'brambles' command will summon bushes of thorns that impede the movement of your enemies, giving them a -2 attack penalty. After a few turns, these branches will start growing thorns. If you wait longer, they will also grow different types of fruit.[paragraph break]The 'launch' command launches these thorns and fruit at your enemies (or, for some fruits, yourself). The thorns will deal between 1 and [italic type]n[roman type] damage, where [italic type]n[roman type] is the number of times the thorns have grown (tiny = 1, terrible = 5). In addition, the thorns have an [italic type]n[roman type] * 20% chance of breaking concentration. Different types of fruits have different effects; experiment with them! Both the brambles and the launch command can be used as an action or a reaction.[paragraph break]Your body score has several effects on how fast the thorns and the fruit will grow; a higher body score means that both will appear sooner and have less chance of disappearing again.[paragraph break]In addition, as a druid you are immune to smoke, and get a +1 attack bonus with wooden weapons."
+"Overmind (mind)"	"Level: 4[paragraph break]Type: active and passive ability.[paragraph break]Command: call [italic type]someone[roman type].[paragraph break]You can call any person in the game, except Malygris. Calling someone will make that person move one room towards you, if possible.[paragraph break]In addition, the power of the overmind makes your allies more powerful. They get an attack and defence bonus equal to mind/5."
 
 [To say system requirements text:
 	say "[italic type]Kerkerkruip[roman type] is a much more computation intensive game than the average piece of interactive fiction. Both the random dungeon generation at the beginning of the game and the different systems that run every turn take some computing power. While [italic type]Kerkerkruip[roman type] runs well on all reasonably recent computers, including netbooks and even tablets and some phones, older hardware and smaller devices may not be able to run it.[paragraph break]If [italic type]Kerkerkruip[roman type] turns out to be too slow for your computer, there are a few things you can try. First, closing some other programs may help. Second, using another interpreter can make a difference: for instance, currently [italic type]Gargoyle[roman type] runs the game faster than [italic type]Spatterlight[roman type] and [italic type]Filfre[roman type] (but that may have changed when you read this). Using a mobile interpreter like [italic type]Glulxe[roman type] is not recommended! If neither of these strategies work, your device is not powerful enough to run [italic type]Kerkerkruip[roman type]. My apologies.".]
@@ -419,7 +432,8 @@ To say total credits:
 	[paragraph break][Kerkerkruip] includes many other extensions, which are used under the Creative Commons Attribution licence:
 	[line break][the hand written list of extensions]
 	[paragraph break]You can get the source code for [Kerkerkruip] at https://github.com/i7/kerkerkruip
-	[paragraph break]The cover image is a photo by Captain Orange, modified by Victor Gijsbers. It is used with permission for this game, but should not be used for other games. (Unless you get permission yourself.)
+	[paragraph break][bold type]Art credits[roman type]
+	[line break]The cover image is a photo by Captain Orange, modified by Victor Gijsbers. It is used with permission for this game, but should not be used for other games. (Unless you get permission yourself.)
 	[paragraph break][the monster portrait credits]
 	[paragraph break][bold type]Afterword by Victor Gijsbers[roman type]
 	[line break]I would like to thank the makers of Inform 7, everyone whose extensions I have used or misused, and everyone who has helped me on the forums and the newsgroups -- there are a lot of you, and you may know who you are. Andrew Plotkin has answered perhaps more of my technical questions than anyone else, so a special thanks to him.[paragraph break]This game has been inspired by many works of interactive fiction, computer roleplaying games and roguelikes. I want to single out [italic type]Desktop Dungeons[roman type] for special mention, since it was that game that gave me the idea of making a 'coffee break' roguelike -- finally a project I could finish! Apart from the fact that a roguelike is never finished, of course --";
@@ -438,8 +452,7 @@ To say the hand written list of extensions:
 	[line break]Questions by Michael Callaghan";
 
 To say the monster portrait credits:
-	say "[bold type]Art Credits[roman type]
-	[paragraph break]All illustrations by Erik Temple. The rogue portraits utilize other art, as follows:
+	say "All other illustrations by Erik Temple. The rogue portraits incorporate the following resources:
 	[paragraph break]Armadillo: Background texture courtesy of Shadowhouse Creations (shadowhousecreations.blogspot.com);
 	[line break]Mindslug: Background texture courtesy of Flickr user rubyblossom (CC BY-NC-SA 2.0);
 	[line break]Minotaur: Background texture in the public domain, courtesy photos-public-domain.com;
@@ -457,12 +470,12 @@ To say contact text:
 
 Section - Enemies and powers
 
-Table of Enemy Descriptions
+[Table of Enemy Descriptions
 title	toggle	enemy
 --	--	(a person)
 with 30 blank rows
 
-[This is the show the table of enemies and powers rule:
+This is the show the table of enemies and powers rule:
 	let temp be indexed text;
 	blank out the whole of Table of Enemy Descriptions;
 	repeat with X running through npc people:
@@ -500,25 +513,25 @@ Section - Achievements menu
 
 Table of Achievement Menu
 title	text
-"[run paragraph on][setup achievement menu]Assistant Dungeoneer    [achievement assistant dungeoneer]"	"Kill a level 1 creature."
-"Adventurer              [achievement adventurer]"	"Kill a level 2 creature."
-"Hunter                  [achievement hunter]"	"Kill a level 3 creature."
-"Destroyer               [achievement destroyer]"	"Kill a level 4 creature."
-"Mageslayer              [achievement mageslayer]"	"Kill Malygris, the wizard of Kerkerkruip."
-"Deathblow               [achievement deathblow]"	"Deal at least 20 damage with a single blow."
-"I return to serve       [achievement I return to serve]"	"Have an undead creature that is allied to you kill someone."
-"From the shadows I come [achievement From the shadows I come]"	"Kill an enemy at full health with one hit, while striking from the shadows."
+"[run paragraph on][setup achievement menu][fixed letter spacing]Assistant Dungeoneer    [achievement assistant dungeoneer]"	"Kill a level 1 creature."
+"[fixed letter spacing]Adventurer              [achievement adventurer]"	"Kill a level 2 creature."
+"[fixed letter spacing]Hunter                  [achievement hunter]"	"Kill a level 3 creature."
+"[fixed letter spacing]Destroyer               [achievement destroyer]"	"Kill a level 4 creature."
+"[fixed letter spacing]Mageslayer              [achievement mageslayer]"	"Kill Malygris, the wizard of Kerkerkruip."
+"[fixed letter spacing]Deathblow               [achievement deathblow]"	"Deal at least 20 damage with a single blow."
+"[fixed letter spacing]I return to serve       [achievement I return to serve]"	"Have an undead creature that is allied to you kill someone."
+"[fixed letter spacing]From the shadows I come [achievement From the shadows I come]"	"Kill an enemy at full health with one hit, while striking from the shadows."
 ["Stunning performance    [achievement Stunning performance]"	"Stun three different creatures in a single game."]
-"Detox                   [achievement detox]"	"Win the game without using ment."
-"Injury to insult        [achievement injury to insult]"	"Kill Malygris with your bare hands."
+"[fixed letter spacing]Detox                   [achievement detox]"	"Win the game without using ment."
+"[fixed letter spacing]Injury to insult        [achievement injury to insult]"	"Kill Malygris with your bare hands."
 ["Unmoved                 [achievement unmoved]"	"Win the game without using 'dodge' and 'parry'."]
-"Nature's fragile vessel [achievement nature's fragile vessel]"	"Win the game with less than 15 maximum health."
-"Make love not war       [achievement make love not war]"	"Achieve the romantic ending."
-"Twice fallen            [achievement twice fallen]"	"Achieve victory in the Arena of the Fallen."
-"Give them blood         [achievement give them blood]"	"Feed 50 blood to blood magic items in a single game."
-"Royal fruit             [achievement royal fruit]"	"Receive the fabled Fruit of Kings."
-"Sixth heaven            [achievement sixth heaven]"	"Get a +6 ment bonus."
-"Durin's bane            [achievement durin's bane]"	"Wake up an unbeatable foe."
+"[fixed letter spacing]Nature's fragile vessel [achievement nature's fragile vessel]"	"Win the game with less than 15 maximum health."
+"[fixed letter spacing]Make love not war       [achievement make love not war]"	"Achieve the romantic ending."
+"[fixed letter spacing]Twice fallen            [achievement twice fallen]"	"Achieve victory in the Arena of the Fallen."
+"[fixed letter spacing]Give them blood         [achievement give them blood]"	"Feed 50 blood to blood magic items in a single game."
+"[fixed letter spacing]Royal fruit             [achievement royal fruit]"	"Receive the fabled Fruit of Kings."
+"[fixed letter spacing]Sixth heaven            [achievement sixth heaven]"	"Get a +6 ment bonus."
+"[fixed letter spacing]Durin's bane            [achievement durin's bane][variable letter spacing]"	"Wake up an unbeatable foe."
 
 To say setup achievement menu:
 	if Table of Held Achievements is empty:
