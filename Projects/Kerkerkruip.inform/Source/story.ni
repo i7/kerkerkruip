@@ -7,7 +7,7 @@ Release along with [cover art and] a file of "Gargoyle config file" called "Kerk
 
 Section - 3rd Party Inclusions
 	
-Include version 4/121111 of Menus by Emily Short. [Get this at https://github.com/i7/extensions]
+Include version 1/130922 of Menus by Dannii Willis. [Get this at https://github.com/i7/extensions]
 Include Basic Screen Effects by Emily Short. 
 Include Numbered Disambiguation Choices by Aaron Reed.
 Include Glulx Entry Points by Emily Short.

@@ -832,9 +832,7 @@ Achievemenuing is an action out of world. Achievemenuing is in-game menu-checkin
 Understand "achieve" and "achievements" as achievemenuing.
 
 Carry out achievemenuing:
-	now the current menu is the Table of Achievement Menu;
-	carry out the displaying activity;
-	clear the screen;
+	display the (Table of Achievement Menu) menu with title "Achievements";
 	try looking;
 	report the main action again;
 
@@ -846,10 +844,7 @@ Powermenuing is an action out of world. Powermenuing is in-game menu-checking.
 Understand "enemies" and "powers" as powermenuing.
 
 Carry out powermenuing:
-	[consider the show the table of enemies and powers rule;]
-	now the current menu is the Table of Power Help;
-	carry out the displaying activity;
-	clear the screen;
+	display the Table of Power Help menu with title "Enemies and powers";
 	try looking;
 	report the main action again;
 
@@ -867,9 +862,7 @@ Understand "menu" as asking for help.
 The help request rule is not listed in any rulebook.
 
 Carry out asking for help:
-	now the current menu is the Table of Kerkerkruip Help;
-	carry out the displaying activity;
-	clear the screen;
+	display the Table of Kerkerkruip Help menu with title "Help menu";
 	try looking;
 	report the main action again;
 
@@ -882,15 +875,7 @@ Requesting the story file version is in-game menu-checking.
 The announce the story file version rule is not listed in any rulebook.
 
 Carry out requesting the story file version:
-	begin the displaying activity;
-	now the current menu title is "Credits, Copyright & Afterword";
-	now the endnode flag is 1;
-	redraw status line;
-	now the endnode flag is 0;
-	clear only the main screen;
-	say "[variable letter spacing][total credits][paragraph break]";
-	pause the game;
-	end the displaying activity; 
+	show menu page "[variable letter spacing][total credits][paragraph break]" with title "Credits, Copyright & Afterword";
 
 
 Chapter - Replacing "You can see" is not a joke
