@@ -5,17 +5,6 @@ The story genre is "dungeon crawl".
 The release number is 9.
 Release along with [cover art and] a file of "Gargoyle config file" called "Kerkerkruip.ini".
 
-Section - 3rd Party Inclusions
-	
-Include version 1/130922 of Menus by Dannii Willis. [Get this at https://github.com/i7/extensions]
-Include Basic Screen Effects by Emily Short. 
-Include Numbered Disambiguation Choices by Aaron Reed.
-Include Glulx Entry Points by Emily Short.
-Include version 7/130712 of Dynamic Objects by Jesse McGrew. [Get this at https://github.com/i7/extensions]
-Include Glulx Status Window Control by Erik Temple.
-Include Fixed Point Maths by Michael Callaghan.
-Include Questions by Michael Callaghan.
-
 Section - Glimmr or Flexible Windows
 
 [Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. Be sure to comment in Flexible Windows instead!]
@@ -26,6 +15,19 @@ Include Flexible Windows by Jon Ingold.
 
 Include Kerkerkruip Windows by Erik Temple.
 [Include Extended Debugging by Erik Temple.]
+
+Section - 3rd Party Inclusions
+	
+Include version 1/130923 of Menus by Dannii Willis. [Get this at https://github.com/i7/extensions]
+Include Basic Screen Effects by Emily Short. 
+Include Numbered Disambiguation Choices by Aaron Reed.
+Include Glulx Entry Points by Emily Short.
+Include version 7/130712 of Dynamic Objects by Jesse McGrew. [Get this at https://github.com/i7/extensions]
+Include Glulx Status Window Control by Erik Temple.
+Include Fixed Point Maths by Michael Callaghan.
+Include Questions by Michael Callaghan.
+
+
 
 
 Section - Include Permadeath
@@ -115,11 +117,6 @@ Section - Relist rock validation rule (not for release)
 
 The rock validation rule is not listed in the when play begins rules. The rock validation rule is listed before the show the title screen rule in the startup rules.
 
-
-Section - Menu code adjustments
-
-Before displaying:
-	open the status window.
 
 
 Section - Defining perform syntax (not for use with Glimmr Canvas Animation by Erik Temple)

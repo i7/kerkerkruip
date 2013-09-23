@@ -277,7 +277,7 @@ Menu command menu:
 	rule succeeds with result the show the menu rule;
 
 This is the show the menu rule:
-	display the Table of Kerkerkruip Help menu with title "Help menu";
+	display the Table of Kerkerkruip Help menu with title "Kerkerkruip";
 
 
 

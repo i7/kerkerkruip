@@ -825,6 +825,8 @@ A pickpocket rule (this is the readied weapons pickpocket rule):
 
 
 
+
+
 Chapter - Options menu
 
 Optionsmenuing is an action out of world. Optionsmenuing is in-game menu-checking.
@@ -833,10 +835,7 @@ Understand "options" and "settings" as Optionsmenuing.
 
 Carry out optionsmenuing:
 	display the (Table of Options Menu) menu with title "Options";
-	try looking;
-	report the main action again;
-
-
+	say "Ok.";
 
 Chapter - Achievements Menu
 
@@ -846,9 +845,7 @@ Understand "achieve" and "achievements" as achievemenuing.
 
 Carry out achievemenuing:
 	display the (Table of Achievement Menu) menu with title "Achievements";
-	try looking;
-	report the main action again;
-
+	say "Ok.";
 
 Chapter - Enemies and Powers Menu
 
@@ -858,9 +855,7 @@ Understand "enemies" and "powers" as powermenuing.
 
 Carry out powermenuing:
 	display the Table of Power Help menu with title "Enemies and powers";
-	try looking;
-	report the main action again;
-
+	say "Ok.";
 
 Chapter - The asking for help action (for use without Basic Help Menu by Emily Short)
 
@@ -875,9 +870,8 @@ Understand "menu" as asking for help.
 The help request rule is not listed in any rulebook.
 
 Carry out asking for help:
-	display the Table of Kerkerkruip Help menu with title "Help menu";
-	try looking;
-	report the main action again;
+	display the Table of Kerkerkruip Help menu with title "Kerkerkruip";
+	say "Ok.";
 
 Chapter - Credits menu
 
@@ -888,7 +882,11 @@ Requesting the story file version is in-game menu-checking.
 The announce the story file version rule is not listed in any rulebook.
 
 Carry out requesting the story file version:
-	show menu page "[variable letter spacing][total credits][paragraph break]" with title "Credits, Copyright & Afterword";
+	show menu page "[total credits]" with title "Credits, Copyright & Afterword";
+	say "Ok.";
+
+
+
 
 
 Chapter - Replacing "You can see" is not a joke

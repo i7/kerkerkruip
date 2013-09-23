@@ -389,13 +389,23 @@ This is the open up game windows rule:
 	open side windows;
 	open the status window.
 
+
+
+Section - Menus & windows
+
 [We need to close and open the side windows when we visit the in-game help menus. "In-game menu checking" is a kind of action that identifies the way we get to the menus while playing the game.]
-Before displaying when in-game menu-checking:
-	close side windows.
-	
-After displaying when in-game menu-checking:
+
+Before displaying:
+	close side windows;
+	open the status window;
+
+Last after displaying:
 	close the status window;
-	consider the open up game windows rule.
+	if in-game menu-checking:
+		open side windows;
+		open the status window;
+
+
 
 [We also need to reset the windows when a game is restored.]
 After restoring from a saved game:
