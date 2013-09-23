@@ -40,7 +40,7 @@ Before reading a command when roguelike mode is true (this is the automatically 
 	continue the action.
 
 When play begins when roguelike mode is true (this is the restore when play begins rule):
-	if the file of save data exists:
+	if the file of save data exists as a saved game:
 		read file of save data into memory.
 
 

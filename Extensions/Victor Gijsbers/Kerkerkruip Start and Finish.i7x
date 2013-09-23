@@ -171,8 +171,8 @@ To display the text menu:
 	say "   Your best winning streak     :  [unless best-winning-streak is greater than 9] [end if][unless best-winning-streak is greater than 99] [end if]   [best-winning-streak][paragraph break]";]
 	say paragraph break;
 	say " ACTIONS:[line break]";
-	say "   [if the file of save data exists]Continue the game[otherwise]New game         [end if]            :    (SPACE)[line break]";
-	if the file of save data exists:
+	say "   [if the file of save data exists as a saved game]Continue the game[otherwise]New game         [end if]            :    (SPACE)[line break]";
+	if the file of save data exists as a saved game:
 		say "   New game                     :       N[line break]";
 	if difficulty is 0:
 		say "   Skip to Apprentice level     :       S[line break]";	
@@ -220,7 +220,7 @@ Definition: a number is new:
 	if it is 78, yes;
 	no.
 Menu command new:
-	if file of save data exists:
+	if file of save data exists as a saved game:
 		delete file of save data;
 		unless difficulty is less than 2:
 			set difficulty to (difficulty - 1);

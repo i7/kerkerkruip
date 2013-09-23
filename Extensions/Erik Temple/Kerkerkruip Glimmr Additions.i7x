@@ -705,7 +705,7 @@ To jump to redraw_menu:
 	(- jump RedrawMenu; -)
 
 To menu-start new game:
-	if the file of save data exists:
+	if the file of save data exists as a saved game:
 		delete file of save data;
 		unless difficulty is less than 2:
 			set difficulty to (difficulty - 1);
@@ -939,7 +939,7 @@ To decide what number is vertical-offset of (F - figure-name):
 Section - Preparing menu display
 
 To prepare type slugs:
-	if the file of save data exists:
+	if the file of save data exists as a saved game:
 		activate Continue_Game;
 	otherwise:
 		deactivate Continue_Game;
