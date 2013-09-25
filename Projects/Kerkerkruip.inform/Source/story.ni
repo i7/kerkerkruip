@@ -21,11 +21,17 @@ Include Questions by Michael Callaghan.
 
 Section - Graphics and Windows
 
-[Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. It is not necessary to comment out Flexible Windows when Glimmr is commented in.]
-Include Flexible Windows by Jon Ingold.
+[ Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. It is not necessary to comment out Flexible Windows when Glimmr is commented in.
+
+Check https://github.com/i7/extensions if the I7 site only has older versions ]
+
+Include version 13/130925 of Flexible Windows by Jon Ingold.
+
 [Include Kerkerkruip Glimmr Additions by Erik Temple.]
-Include version 1/130922 of Menus by Dannii Willis. [Get this at https://github.com/i7/extensions]
+
+Include version 1/130925 of Menus by Dannii Willis.
 Include Kerkerkruip Windows by Erik Temple.
+
 [Include Extended Debugging by Erik Temple.]
 
 
@@ -119,13 +125,6 @@ The initial hyperlink request rule is not listed in the when play begins rules. 
 Section - Relist rock validation rule (not for release)
 
 The rock validation rule is not listed in the when play begins rules. The rock validation rule is listed before the show the title screen rule in the startup rules.
-
-
-
-Section - Menu code adjustments
-
-Before displaying:
-	open the status window.
 
 
 
