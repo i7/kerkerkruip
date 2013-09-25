@@ -215,6 +215,14 @@ Carry out winning:
 	say "Sure.";
 	now health of Malygris is -2.
 
+Restartnowing is an action applying to nothing. Understand "restart now" as restartnowing.
+
+Carry out restartnowing:
+	restart immediately.
+
+To restart immediately: 
+	(- @restart; -).
+
 
 Section - Granting powers
 

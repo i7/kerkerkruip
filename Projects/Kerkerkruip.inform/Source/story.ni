@@ -5,15 +5,19 @@ The story genre is "dungeon crawl".
 The release number is 9.
 Release along with [cover art and] a file of "Gargoyle config file" called "Kerkerkruip.ini".
 
+
+
 Section - 3rd Party Inclusions
 	
 Include Basic Screen Effects by Emily Short. 
 Include Numbered Disambiguation Choices by Aaron Reed.
 Include Glulx Entry Points by Emily Short.
-Include version 7/130712 of Dynamic Objects by Jesse McGrew. [Get this at https://github.com/i7/extensions]
+Include version 7/130712 of Dynamic Objects by Jesse McGrew.
 Include Glulx Status Window Control by Erik Temple.
 Include Fixed Point Maths by Michael Callaghan.
 Include Questions by Michael Callaghan.
+
+
 
 Section - Graphics and Windows
 
@@ -25,20 +29,17 @@ Include Kerkerkruip Windows by Erik Temple.
 [Include Extended Debugging by Erik Temple.]
 
 
-Section - Include Permadeath
-		
-Include Kerkerkruip Permadeath by Victor Gijsbers.
-The binary file of save data is called "KerkerkruipSaves".
-
-Use undo prevention.
 
 Section - Include ATTACK
 
+[ Get the latest ATTACK at https://github.com/i7/ATTACK ]
 Include version 5/130919 of Inform ATTACK by Victor Gijsbers.
-[You can get the latest ATTACK at https://github.com/i7/ATTACK ]
+
+
 
 Section - Include all the Kerkerkruip extensions
 
+Include Kerkerkruip Permadeath by Victor Gijsbers.
 Include Kerkerkruip Persistent Data by Victor Gijsbers.
 Include Kerkerkruip Dungeon Generation by Victor Gijsbers.
 Include Kerkerkruip Events by Victor Gijsbers.
@@ -59,6 +60,8 @@ Include Kerkerkruip Start and Finish by Victor Gijsbers.
 Include Kerkerkruip Tests by Victor Gijsbers.
 Include Kerkerkruip Final Declarations by Victor Gijsbers.
 
+
+
 Section - Increase memory settings
 
 Use MAX_PROP_TABLE_SIZE of 800000.
@@ -68,14 +71,19 @@ Use MAX_OBJECTS of 800.
 Use MAX_SYMBOLS of 30000.
 Use MAX_ACTIONS of 250.
 
+
+
 Section - Score
 
 The maximum score is 18. [1 + 1 + 2 + 2 + 3 + 4 + 5 = 18]
 The notify score changes rule is not listed in any rulebook.
 
+
+
 Section - Generation info
 
 Generation info is a truth state that varies. Generation info is [true]false.
+
 
 
 Section - Testing - Not for release
@@ -113,15 +121,18 @@ Section - Relist rock validation rule (not for release)
 The rock validation rule is not listed in the when play begins rules. The rock validation rule is listed before the show the title screen rule in the startup rules.
 
 
+
 Section - Menu code adjustments
 
 Before displaying:
 	open the status window.
 
 
+
 Section - Defining perform syntax (not for use with Glimmr Canvas Animation by Erik Temple)
 
 To say perform/@ (ph - phrase): (- if (0==0) {ph} -).
+
 
 
 Section - Plurality fix
