@@ -2230,7 +2230,7 @@ Section - Power
 The power of compassion is a power. The angel of compassion grants the power of compassion.
 The power level of power of compassion is 2.
 The command text of power of compassion is "".
-The description of power of compassion is "Type: active ability.[paragraph break]Command: grief.[paragraph break]As an action or reaction, you can start or stop projecting an aura of grief. While the aura of grief is active, all attack made by or against you suffer a penalty equal to (you spirit + number of dead people) / 4."
+The description of power of compassion is "Type: active ability.[paragraph break]Command: grief.[paragraph break]As an action or reaction, you can start or stop projecting an aura of grief. While the aura of grief is active, all attack made by or against you suffer a penalty equal to (your spirit + number of dead people) / 4."
 The power-name of power of compassion is "power of compassion".
 
 
