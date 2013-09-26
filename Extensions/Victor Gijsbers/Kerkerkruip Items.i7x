@@ -1646,7 +1646,7 @@ Check applying it to:
 		let guy be a random person enclosing the second noun;
 		if faction of the guy hates faction of the player:
 			take no time;
-			say "You cannot rub a salve on the weapon held by someone who is hostile to you." instead.
+			say "You cannot rub a salve on a weapon held by someone who is hostile to you." instead.
 
 Before applying something to a person (this is the putting a salve on someone is risky rule):
 	if the faction of the second noun hates the faction of the player:
@@ -1703,23 +1703,23 @@ Section - Unguentum crescendi (minor)
 
 A thing can be crescendi-immune. A thing is usually not crescendi-immune.
 
-An unguentum crescendi is a kind of salve. The plural of unguentum crescendi is unguenta crescendi. The description of unguentum crescendi is "An expensive alchemical salve that can be rubbed on weapons to make them grow. It can be used multiple times.". Understand "salve" as unguentum crescendi.
+An unguentum crescendi is a kind of salve. The plural of unguentum crescendi is unguenta crescendi. The description of unguentum crescendi is "An expensive alchemical salve that can be rubbed on weapons or people to make them grow. It can be used multiple times.". Understand "salve" as unguentum crescendi.
 
 Carry out applying unguentum crescendi to something:
-	unless the second noun is a weapon:
-		say "The salve will only work on weapons.";
+	unless the second noun is a weapon or the second noun is a person:
+		say "The salve will only work on weapons and persons.";
 		take no time;
 	otherwise:
 		if the second noun is gargantuan:
-			say "You cannot make that any bigger.";
+			say "You cannot make [if the second noun is the player]yourself[otherwise][the second noun][end if] any bigger.";
 			take no time;
 		otherwise:
 			if the second noun is crescendi-immune:
 				say "Some magic seems to protect [the second noun] from the salve.";
 			otherwise:
-				say "You carefully apply the salve to [the second noun], ";
+				say "You carefully apply the salve to [if the second noun is the player]yourself[otherwise][the second noun][end if], ";
 				increase the size of the second noun;
-				say "turning it [size of the second noun].";
+				say "turning [it-them of second noun] [size of the second noun].";
 	rule succeeds.
 
 The small-unguentum-crescendi-pack is a minor treasure pack. One unguentum crescendi is in the small-unguentum-crescendi-pack.
@@ -1729,23 +1729,23 @@ Section - Unguentum diminuendi (minor)
 
 A thing can be diminuendi-immune. A thing is usually not diminuendi-immune.
 
-An unguentum diminuendi is a kind of salve. The plural of unguentum diminuendi is unguenta diminuendi. The description of unguentum diminuendi is "An expensive alchemical salve that can be rubbed on weapons to make them shrink. It can be used multiple times.". Understand "salve" as unguentum diminuendi.
+An unguentum diminuendi is a kind of salve. The plural of unguentum diminuendi is unguenta diminuendi. The description of unguentum diminuendi is "An expensive alchemical salve that can be rubbed on weapons or people to make them shrink. It can be used multiple times.". Understand "salve" as unguentum diminuendi.
 
 Carry out applying unguentum diminuendi to something:
-	unless the second noun is a weapon:
-		say "The salve will only work on weapons.";
+	unless the second noun is a weapon or the second noun is a person:
+		say "The salve will only work on weapons and persons.";
 		take no time;
 	otherwise:
 		if the second noun is tiny:
-			say "You cannot make that any smaller.";
+			say "You cannot make [if the second noun is the player]yourself[otherwise][the second noun][end if] any smaller.";
 			take no time;
 		otherwise:
 			if the second noun is diminuendi-immune:
 				say "Some magic seems to protect [the second noun] from the salve.";
 			otherwise:		
-				say "You carefully apply the salve to [the second noun], ";
+				say "You carefully apply the salve to [if the second noun is the player]yourself[otherwise][the second noun][end if], ";
 				decrease the size of the second noun;
-				say "turning it [size of the second noun].";
+				say "turning [it-them of second noun] [size of the second noun].";
 	rule succeeds.
 
 The small-unguentum-diminuendi-pack is a minor treasure pack. One unguentum diminuendi is in the small-unguentum-diminuendi-pack.
