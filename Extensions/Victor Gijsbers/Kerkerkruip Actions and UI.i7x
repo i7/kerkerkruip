@@ -357,7 +357,18 @@ Status combat stats rule (this is the status concentration rule):
 			say "[bold type]Concentration[roman type]: [if n is 1]+2[else if n is 2]+4[else if n is 3]+8[end if] attack, [if n is 1]no[else if n is 2]+2[else if n is 3]+4[end if] damage[line break][run paragraph on]";
 
 Status combat stats rule (this is the status flow rule):
-	say "[bold type]Offensive/defensive flow[roman type]: [offensive flow of the player]/[defensive flow of the player][line break][run paragraph on]";
+	if offensive flow of the player is not 0:
+		let n be offensive flow of the player;
+		if long status is true:
+			say "[bold type]Offensive flow[roman type]: +[n] attack, +[n] damage[line break][run paragraph on]";
+		otherwise:
+			say "[bold type]Offensive flow[roman type]: [n][line break][run paragraph on]";
+	if defensive flow of the player is not 0:
+		let n be defensive flow of the player;
+		if long status is true:
+			say "[bold type]Defensive flow[roman type]: +[n] defence, -[n] enemy damage[line break][run paragraph on]";
+		otherwise:
+			say "[bold type]Defensive flow[roman type]: [n][line break][run paragraph on]";	
 
 Status combat stats rule (this is the status tension rule):
 	if tension is greater than 1:
