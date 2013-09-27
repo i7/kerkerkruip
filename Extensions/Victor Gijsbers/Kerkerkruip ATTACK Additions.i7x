@@ -14,6 +14,28 @@ First check readying (this is the do not ready weapons on the ground rule):
 	unless the player encloses the noun:
 		take no time;
 		say "You will have to get [the noun] first." instead.
+		
+Section - No wearing what you don't have
+
+First check wearing (this is the do not wear things on the ground rule):
+	unless the player encloses the noun:
+		take no time;
+		say "You will have to get [the noun] first." instead.
+		
+Section - No reading what you don't have
+
+First check reading (this is the do not read things on the ground rule):
+	unless the player encloses the noun:
+		take no time;
+		say "You will have to get [the noun] first." instead.
+		
+Section - No snorting what you don't have
+
+First check snorting (this is the do not snort things on the ground rule):
+	unless the player encloses the noun:
+		take no time;
+		say "You will have to get [the noun] first." instead.
+						
 
 Section - Attacking when the combat status is peace (Nomos, slaves)
 
