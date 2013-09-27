@@ -6410,23 +6410,24 @@ The imp teleporting rule is listed before the teleportation beacon rule in the c
 
 Every turn when the imp is on-stage (this is the imp not absent AI rule):
 	unless the imp is asleep:
-		if main actor is the player:
-			if location of the imp is not location of the player:
-				if location of the imp is not Lair of the Imp:
-					try the imp teleporting;
-				otherwise:
-					repeat with item running through things carried by the imp:
-						move item to location of the imp;
-					if a random chance of 1 in 5 succeeds:
-						let lijst be a list of things; [Don't teleport if there is nothing to steal!]
-						repeat with item running through things carried by the player:
-							if item is not readied and item is not worn:
-								add item to lijst;
-						repeat with item running through things in the location:
-							if item is not a person and item is not fixed in place and item is not scenery and item is not readied and item is not worn:
-								add item to lijst;
-						unless lijst is empty:
-							try the imp teleporting.
+		unless combat status is peace:
+			if main actor is the player:
+				if location of the imp is not location of the player:
+					if location of the imp is not Lair of the Imp:
+						try the imp teleporting;
+					otherwise:
+						repeat with item running through things carried by the imp:
+							move item to location of the imp;
+						if a random chance of 1 in 5 succeeds:
+							let lijst be a list of things; [Don't teleport if there is nothing to steal!]
+							repeat with item running through things carried by the player:
+								if item is not readied and item is not worn:
+									add item to lijst;
+							repeat with item running through things in the location:
+								if item is not a person and item is not fixed in place and item is not scenery and item is not readied and item is not worn:
+									add item to lijst;
+							unless lijst is empty:
+								try the imp teleporting.
 			
 
 Section - Prose				
