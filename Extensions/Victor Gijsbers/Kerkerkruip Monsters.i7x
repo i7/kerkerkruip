@@ -3077,8 +3077,8 @@ Carry out sprouting:
 				say "[paragraph break]";
 	now concentration of the player is 0;
 	decrease mind score of the player by n;
-	if mind score of the player is less than 1:
-		end the story saying "That was too unspeakable for your mind to bear!".
+	if final mind of the player is less than 1:
+		end the story saying "The horror was too great for your weak mind: you go utterly mad.".
 
 
 
