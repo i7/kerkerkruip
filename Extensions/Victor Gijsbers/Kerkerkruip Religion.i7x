@@ -510,8 +510,6 @@ Favour rule for Sul (this is the Sul favour 6 rule):
 		let item be a random readied weapon enclosed by the player;
 		if item is a natural weapon:
 			say "Sul makes you a demon slayer; she also attempts to bless your weapon, but you aren't wielding any.";
-		otherwise if item is incorruptible:
-			say "Sul makes you a demon slayer; she also attempts to bless [the item], but unfortunately it resists the attempt.";
 		otherwise:
 			say "Sul makes you a demon slayer, and blesses [the item], making it more accurate, more deadly, and imbuing it with the purifying power of fire.";
 			increase damage die of item by 2;
