@@ -316,18 +316,20 @@ A rage rule:
 Status attribute rule (this is the rage status rule):
 	if player is raging:
 		if long status is true:
-			say "You are [bold type]raging[roman type], and will not retreat.[line break][run paragraph on]";
+			say "You are [bold type]raging[roman type], and will not retreat (unless fully concentrated).[line break][run paragraph on]";
 		otherwise:
 			say "[@ check initial position of attribute]enraged[run paragraph on]";
 
 This is the do not go in combat when raging rule:
 	if the player is raging and the combat status is not peace:
-		let Y be the player;
-		repeat with X running through persons in the location:
-			if the faction of X hates the faction of the player:
-				now Y is X;
-		take no time;
-		say "And allow [the Y] to live? Never!" instead.
+		if concentration of the player < 3:
+			let Y be the player;
+			repeat with X running through persons in the location:
+				if the faction of X hates the faction of the player:
+					now Y is X;
+			take no time;
+			say "And allow [the Y] to live? Never![paragraph break][italic type](While enraged, you can only leave combat if you have 3 levels of concentration.)[roman type][line break]" instead.
+		
 
 The do not go in combat when raging rule is listed before the going and retreating in combat rule in the check going rules.
 The do not go in combat when raging rule is listed in the check retreating rules.
