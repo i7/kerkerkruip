@@ -4357,7 +4357,7 @@ Carry out Israfel Israfel-trancing:
 	say "[if Israfel-trance is 1]Israfel falls into a restorative trance[otherwise]Israfel deepens its trance[end if], [bold type]increasing its health by [n][roman type].".
 
 Aftereffects rule (this is the Israfel getting hit rule):
-	if Israfel is the global defender and the attack damage is greater than 0:
+	if Israfel is the global defender and the attack damage is greater than 0 and Israfel is alive:
 		say "Israfel's [bold type]healing trance is broken[roman type].";
 		now Israfel-trance is 1.
 
