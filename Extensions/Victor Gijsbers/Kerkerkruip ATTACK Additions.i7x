@@ -26,8 +26,9 @@ Section - No reading what you don't have
 
 First check reading (this is the do not read things on the ground rule):
 	unless the player encloses the noun:
-		take no time;
-		say "You will have to get [the noun] first." instead.
+		unless the noun is a tome:
+			take no time;
+			say "You will have to get [the noun] first." instead.
 		
 Section - No snorting what you don't have
 
