@@ -523,7 +523,7 @@ The map-label of Temple of Chton is Figure of map_label_Chton.
 
 Chapter - Temple of Herm
 
-The temple of Herm is a room. "Shadows are everywhere, and you feel that the subtle god Herm might be hiding in any of them -- or in none. Warriors despise, for they assume that Herm is cowardly; mages respect him, for he is a source of knowlegde; but only those unwilling or too weak to fight truly love him."
+The temple of Herm is a room. "Shadows are everywhere, and you feel that the subtle god Herm might be hiding in any of them -- or in none. Warriors despise him, for they assume that Herm is cowardly; mages respect him, for he is a source of knowlegde; but only those either unwilling or too weak to fight truly love him."
 
 Temple of Herm is dedicated to Herm.
 
