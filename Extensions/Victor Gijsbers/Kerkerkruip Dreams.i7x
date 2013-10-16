@@ -38,6 +38,7 @@ Every turn when the player is asleep:
 Table of Candidate Dreams
 Candidate
 Dream of briar roses
+Dream of Tungausy Shaman
 with 20 blank rows
 	
 To do a dream:
@@ -125,6 +126,55 @@ A menu question rule (this is the sleeping beauty rule):
 			say "The secret promise that you never doubted; the certainty that every ill will lead to good, that no matter how hard and difficult the path, love and life lie at the end of it -- that promise and that certainty are shattered as you look at the skull grinning from your lover's bed. You scream, and wake to the harsh world of Kerkerkruip.[paragraph break][bold type]The meaninglessness of existence will haunt your thoughts forever: -10 mind.[roman type][paragraph break]";
 			wake the player up;
 		exit.
+
+Chapter - Dream of Tungausy Shaman
+
+Dream of Tungausy Shaman is a dream.
+
+The start of the dream rule of dream of Tungausy Shaman is the start dream of Tungausy Shaman rule.
+This is the start dream of Tungausy Shaman rule:
+	move player to front of the meditation hut.
+
+Front of the meditation hut is a room. "Located in the vast barren wastes the Tungausy call their homeland, the loud drum sounds coming out of the meditation hut are enchanting and soothening in a creepy kind of way."
+Front of the meditation hut is not placeable.
+
+The barren wastes are scenery in Front of the meditation hut. Understand "homeland" as the barren wastes. The description of the barren wastes is "A vast, barren landscape, with the exception of some large rock formations."
+The large rock formations are scenery in Front of the meditation hut. The description of the large rock formations is "Some of them are natural, others are said to house the spirits of ancestors."
+The soothing drums are scenery in Front of the meditation hut. Understand "music" and "soothing" and "enchanting" and "sounds" and "drums" as the soothing drums. The description of the soothing drums is "The slow, monotonous sound of the drums seems to bring your soul to ease."
+The lodge is scenery in Front of the meditation hut. Understand "hut" and "meditation hut" as the lodge. The description of the lodge is "The indigeneous herbs bring about a soft, smooth and entrancing smell seems to lure you into the hut. It probably also relieves the hut of strong bodily odours."
+The indigeneous herbs is scenery in Front of the meditation hut. Understand "indigeneous" and "herbs" as the indegeneous herbs. The description of the indigeneous herbs is "The mixture of local herbs smell remarkably familiar, as if you've been here often."
+
+Instead of smelling the indigeneous herbs:
+	try examining the indigeneous herbs instead.
+
+Instead of entering the lodge:
+	try going to the lodge instead.
+	
+Instead of going to the lodge:
+	say "Even though you are somewhat soothed by the meditative drums, with shaking knees you slowly walk into the hut.";
+	wait for any key;
+	say "Entering the hut, you see a Tungausy shaman, sitting on the hides of slain animals. He lulled himself into a deep state of trance due to the monotonous humming of the drums. In the middle of the hut, next to the shama, is a large pool of water, which slowly vibrates on the rhythm of the drums.[paragraph break]Slowly, you try to sneak closer to the pool without interupting in this without doubt important ceremony. As you stare into the vibrating pool, you can clearly discern:";
+	wait for any key;
+	now current question is "(What do you discern from the pool?)";
+	now current question menu is ("... a figment of yourself, slightly floating above the ground.", "... The shaman, rising above you, slowly becoming a figment himself.");
+	ask a closed question, in menu mode.
+
+A menu question rule (this is the vibrating pool rule):
+	if the current question is "(What do you discern from the pool?)":
+		let m be the number understood;
+		if m is 1:
+			decrease body score of the player by 10;
+			increase spirit score of the player by 5;
+			say "You slowly start floating towards the shaman, entranced by his humming. You know that you need to fulfill your task: 'I will lend you my strength, if you lend me your spirit'. After all, you are a Sülde, a guardian spirit to the chief shaman. Slowly, you transfer your strength towards the shaman, who is now capable to defend his tribe in the Everlasting War. Slowly, you awake, feeling terribly weakened from the power sapped away. [paragraph break][bold type]Your constitution weakened heavily from the energy sapped away: -10 body. However, the shaman's soothing drums strengthened your spirit: +5 spirit.[roman type][paragraph break]";
+			wake the player up;
+		if m is 2:
+			decrease spirit score of the player by 10;
+			increase body score of the player by 5;
+			say "In  a flash, you find yourself sitting where the shaman sat. You continue to play the drums in its monotonous rhythm while the shaman floats above you. He starts to speak to you in a slow voice:'I will lend you my strenght, if you lend me your spirit'. With a force, the shaman ancestor forces himself into you! You wake up with a loud scream, invigorated but without the will to fight.[paragraph break][bold type]The stressful event deprived you of your spirit:-10 spirit. However, your consitution is strenghtened by the shaman spirit: +5 body.[roman type][paragraph break]";
+			wake the player up;
+		exit.
+			
+
 
 
 Kerkerkruip Dreams ends here.
