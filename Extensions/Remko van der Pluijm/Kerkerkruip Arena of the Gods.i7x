@@ -10,10 +10,10 @@ Section - Incarnating (for use with Kerkerkruip Religion by Victor Gijsbers)
 Incarnating relates one monster (called the monsteravatar) to one god. The verb to incarnate (he incarnates, they incarnate, he is incarnated by it, it is incarnated, it is incarnating) implies the incarnating relation.
 
 The Healer of Aite incarnates Aite.
-The Overmind incarnates Herm.
-Bodmall incarnates Sul.
+Israfel incarnates Sul.
 Drakul incarnates Chton.
-
+[   incarnates Herm.
+    incarnates Nomos.]
 
 Book - Location additions
 
@@ -87,7 +87,7 @@ Carry out ChosenFighting:
 				now current question is  "The Chosen One of which god do you wish to fight? (Please enter a number):";
 				repeat with Godnaam running through gods:
 					unless player worships Godnaam:
-						if Godnaam is incarnated by a monster:
+						if  a monster incarnates Godnaam:
 							if ((monsteravatar of Godnaam) is off-stage) and ((monsteravatar of Godnaam) is not dead):
 								add (monsteravatar of Godnaam) to Chosenlijst;
 								add the printed name of Godnaam to Godlijst;
@@ -139,17 +139,21 @@ Section - Godly intervention
 [For each God, I'll be implementing some form of godly intervention here based on Victor's divine interventions
 This system assumes that the divine favour of the monster is quite high and fixed; it then takes the difference 
 between the monsters divine favour and the players and then checks whether the god will intervene for the monster]
-Every turn when (the location is the Arena of the Gods) and (the combat status is not peace):
-	let m be 30;
-	decrease m by the divine favour;
-	If a random chance of m in 100 succeeds:
-		have Godname arena-intervene. 
+
+Every turn:
+	if (the location is the Arena of the Gods) and (the combat status is not peace):
+		let m be 30;
+		decrease m by the divine favour;
+		If a random chance of m in 100 succeeds:
+			have Godname arena-intervene. 
 
 
 Arena-turncounter is a number that varies. Arena-turncounter is -1.
 OppNomos is a person that varies.
+OppHerm is a person that varies.
 OppNomosDetermined is a truth state variable that varies. OppNomosDetermined is false.
 OppNomosBonus is a truth state variable that varies. OppNomosBonus is false.
+OppHermBonus is a number that varies. OppHermbonus is 0.
 
 To have (guy - a text) arena-intervene:
 	if at least one hostile alive person is enclosed by the location:
@@ -158,70 +162,97 @@ To have (guy - a text) arena-intervene:
 			increase n by a random number between 1 and 9;[Healer of Aite is seen as a champion]
 			increase n by a random number between 1 and 9;
 			increase n by 5; [half of wrath state]
+			let X be a random number between 16 and 23; [health average between the three fanatics]
 			if the Healer of Aite is alive:
-				let X be the permanent health of the Healer of Aite;
-			otherwise:
-				let X be a random number between 16 and 23; [health average between the three fanatics]
-			now X is X divided by 10;
-			if a chance of the final spirit of the Healer of Aite in 50 succeeds:
+				now  X is the permanent health of the Healer of Aite;
+			now X is (X divided by 10);
+			if a random chance of the final spirit of the Healer of Aite in 50 succeeds:
 				increase X by 2;
 			Let Y be (X times 3) divided by 2;
 			let opp be a random hostile alive person enclosed by the location;
 			if n < 10:
-				say "A gigantic [one of]sword[or]spear[or]pike[at random] bursts out of the ground, impaling [the opp] for [bold type][Y] damage[roman type]!";
+				say "A gigantic [one of]sword[or]spear[or]pike[at random] bursts out of the ground, impaling [opp] for [bold type][Y] damage[roman type]!";
 				decrease the health of the opp by Y;
-				unless guy is dead:
+				unless opp is dead:
 					let the opp lose concentration;
-				if the health of the guy is less than 1:
+				if the health of the opp is less than 1:
 					say "Clearly, it doesn't always pay off to serve the mad goddess.";
 			otherwise if n < 20:
-				say "A huge [one of]sword[or]spear[or]pike[at random] bursts out of the ground, impaling [the opp] for [bold type][X] damage[roman type]!";
-				decrease the health of the guy by X;
-				unless guy is dead:
-					let the guy lose concentration;
-				if the health of the guy is less than 1:
+				say "A huge [one of]sword[or]spear[or]pike[at random] bursts out of the ground, impaling [opp] for [bold type][X] damage[roman type]!";
+				decrease the health of opp by X;
+				unless opp is dead:
+					let the opp lose concentration;
+				if the health of the opp is less than 1:
 					say "Clearly, it doesn't always pay off to serve the mad goddess.";
 			otherwise if n < 30:
 				if the concentration of the player is less than 3:
 					say "You suddenly feel divinely inspired and [bold type]highly concentrated[roman type].";
 					now the concentration of the player is 3;
 			otherwise if n < 40:
-					if the concentration of the opp is less than 3:
-						say "[the opp] suddenly fights with renewed rigour, as if divinely inspired.";
-						now the concentration of the player is 3;
+				if the concentration of the opp is less than 3:
+					say "[the opp] suddenly fights with renewed rigour, as if divinely inspired.";
+					now the concentration of the player is 3;
 			otherwise if n < 50:
 				say "A huge [one of]sword[or]spear[or]pike[at random] bursts out of the ground, skewering you for [bold type][X] damage[roman type]!";
-					decrease the health of the player by X;
-					unless the player is dead:
-						let the player lose concentration;
-					if the player is hidden:
-						now the player is not hidden;
-						say "Your cry of pain reveals your presence.";
-					if health of the player is less than 1:
-						end the story saying "A maddening laughter of the Goddess is the last sound you'll ever hear.";
+				decrease the health of the player by X;
+				unless health of the player is less than 1:
+					let the player lose concentration;
+				if the player is hidden:
+					now the player is not hidden;
+					say "Your cry of pain reveals your presence.";
+				if health of the player is less than 1:
+					end the story saying "A maddening laughter of the Goddess is the last sound you'll ever hear.";
 			otherwise:
 				say "A gigantic [one of]sword[or]spear[or]pike[at random] bursts out of the ground, skewering you for [bold type][Y] damage[roman type]!";
-					decrease the health of the player by Y;
-					unless the player is dead:
-						let the player lose concentration;
-					if the player is hidden:
-						now the player is not hidden;
-						say "Your cry of pain reveals your presence.";
-					if health of the player is less than 1:
-						end the story saying "A maddening laughter of the Goddess is the last sound you'll ever hear.";
-			If guy is "Nomos":
-				if OppNomosDetermined is false:
-					now oppNomos is a random hostile alive person enclosed by the location;
-					now OppNomosDetermined is true;
-				if Arena-turncounter is less than 1:
-					now Arena-turncounter is a random number between 1 and 4;
-					say "The god of Law speaks out loud: 'Attack in [Arena-turncounter] turns and my strength will guide you!'";
-					choose row with an Option of the action of oppNomos waiting in the Table of AI Action Options;
-					increase Action Weight entry by 1000;
-			If guy is "Sul":
-			If guy is "Chton":
-			If guy is "Herm":
-			[Todo stuff].
+				decrease the health of the player by Y;
+				unless health of the player is less than 1:
+					let the player lose concentration;
+				if the player is hidden:
+					now the player is not hidden;
+					say "Your cry of pain reveals your presence.";
+				if health of the player is less than 1:
+					end the story saying "A maddening laughter of the Goddess is the last sound you'll ever hear.";
+		otherwise if guy is "Nomos":
+			if OppNomosDetermined is false:
+				now oppNomos is a random hostile alive person enclosed by the location;
+				now OppNomosDetermined is true;
+			if Arena-turncounter is less than 1:
+				now Arena-turncounter is a random number between 1 and 4;
+				say "The god of Law speaks out loud: 'Attack in [Arena-turncounter] turns and my strength will guide you!'";
+				choose row with an Option of the action of oppNomos waiting in the Table of AI Action Options;
+				increase Action Weight entry by 1000;
+		otherwise if guy is "Sul":
+			if (the player is undead) and (a random chance of 1 in 4 succeeds):
+				let oppSul be a random hostile alive person enclosed by the location;
+				increase the radiation of oppSul by 1;
+				say "As he sees your decaying flesh, the God of Light imbues [oppSul] with holy power to reverse this wrongdoing.";
+		otherwise if guy is "Chton":
+			say "Chton suddenly sends a [bold type]wave of unholy energy[roman type] through the room, dealing [run paragraph on]";
+			let n be the number of alive not undead persons in the location;
+			let original n be n;
+			if n is greater than 0:
+				repeat with sire running through all alive not undead persons in the location:
+					let m be a random number between 2 and 5;
+					if sire is deathly-resistant:
+						decrease m by 2;
+					decrease health of sire by m;
+					say "[if n is 1 and original n is not 1]and [end if][m] damage to [the name of the sire][if sire is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the sire is greater than 0 and sire is alive] (which breaks [possessive of the sire] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
+					now concentration of the sire is 0;
+					decrease n by 1;
+					if n is 0:
+						say ""; [For an extra newline. Don't ask.]
+			otherwise:
+				say "no damage to anyone.";
+			if health of the player is less than 1:
+				end the story saying "Quem di diligunt, adolescens moritur";
+		otherwise if guy is "Herm":
+			if OppNomosDetermined is false:
+				now oppHerm is a random hostile alive person enclosed by the location;
+				now OppNomosDetermined is true;
+			if Arena-turncounter is less than 0:
+				now Arena-turncounter is a random number between 1 and 3;
+				now oppHermBonus is a random number between 2 and 4;
+				say "Suddenly, your opponent blurs and is much harder to discern in this environment!".
 
 
 
@@ -240,15 +271,21 @@ Every turn when (the location is the Arena of the Gods) and (Godname is "Nomos")
 		decrease Action Weight entry by 1500;
 		now OppNomosBonus is false.
 
-An attack modifier rule (this is the Nomos attack bonus rule):
-	if OppNomosBonus is true and the global attacker is oppNomos:
+An attack modifier rule (this is the Nomos Arena attack bonus rule):
+	if OppNomosBonus is true and the global attacker is oppNomos and the location is the Arena of the Gods:
 		if the numbers boolean is true, say " + 4 (the law is with [the oppNomos])[run paragraph on]";
 		increase the attack strength by 4.
 
-A damage modifier rule (this is the Nomos damage bonus rule):
-	if OppNomosBonus is true and the global attacker is the oppNomos:
-		if the numbers boolean is true, say " + 4 (the law is with [the opppNomos])[run paragraph on]";
+A damage modifier rule (this is the Nomos Arena damage bonus rule):
+	if (OppNomosBonus is true) and (the global attacker is the oppNomos) and (the location is the Arena of the Gods):
+		if the numbers boolean is true, say " + 4 (the law is with [the oppNomos])[run paragraph on]";
 		increase the attack damage by nomos piety.
+
+An attack modifier rule (this is the much harder to discern by Herm bonus rule):
+	if (the Arena-turncounter is greater than 0) and (the global defender is oppHerm) and (the location is the Arena of the Gods):
+		if the numbers boolean is true, say " - [oppHermBonus] (Herm's blur bonus) [run paragraph on]";
+		decrease attack strength by oppHermBonus;
+		decrease Arena-turncounter by 1.
 
 Section - Awarding divine power 
 
