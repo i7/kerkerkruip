@@ -3578,25 +3578,42 @@ Last dungeon interest rule (this is the extra magical spade placement rule):
 
 Section - Vial of Purification (minor)
 
-The vial of purification is a minor religious glass thing. Understand "water" and "waters" as vial of purification. The description of vial of purification is "Drinking the water in this small vial might cure you of some unfortunate afflictions.".
+The vial of purification is a minor religious glass thing. Understand "holy" and "water" and "waters" as vial of purification. The description of vial of purification is "Drinking the holy water in this small vial might cure you of some unfortunate afflictions.".
 
 Instead of eating vial of purification:
 	try drinking vial of purification.
 	
 Instead of drinking vial of purification:
 	remove noun from play;
-	unless the player worships Chton:
-		say "The waters purify you of all undead influences.";
+	let n be 0;
+	if the player worships Chton:
+		say "Chton prevents the vial of purification from doing its work; but your attempt at escaping undeath did not amuse him. A wave of extreme cold racks your body, dealing [bold type]15 damage[roman type]!";
+		decrease health of player by 15;
+		if the player is dead:
+			end the story saying "Don't worry; Chton will soon raise you as a mindless zombie.";
+	otherwise:
+		let m be 0;
 		repeat with shape running through player forms:
 			choose a row with player form of shape in Table of Form Properties;
 			if turn-type entry is undead:
 				now shape is not form-active;
-		turn the player into human-form;
-	otherwise:
-		say "Chton prevents the vial of purification from doing its work; but your attempt at escaping undeath did not amuse him. A wave of extreme cold racks your body, dealing [bold type]15 damage[roman type]!";
-		decrease health of player by 15;
-		if the player is dead:
-			end the story saying "Don't worry; Chton will soon raise you as a mindless zombie.".
+		choose a row with player form of current form in Table of Form Properties;
+		if turn-type entry is undead:
+			turn the player into human-form;
+			now m is 1;
+		if m is 1:
+			say "The waters purify you of all undead influences.";
+			now n is 1;
+		if the player is blinded:
+			now the player is not blinded;
+			say "The waters cure you of your blindness.";
+			now n is 1;
+		if disintegrating flesh is adapted:
+			unmutate disintegrating flesh;
+			now n is 1;
+		if n is 0:
+			say "The holy water turns out to be powerless against your problems.".
+
 
 Section - Rod of the Master Builder (epic)
 
