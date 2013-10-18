@@ -1757,7 +1757,7 @@ Mutations can be adapted. Mutations are usually not adapted.
 Table of Player Mutations
 mutation	mutate-text	unmutate-text
 wings	"You grow [bold type]wings[roman type] and gain the power of flight!"	"You lose your wings."
-darkvision	"You gain the ability to [bold type]see in total darkness[roman type]!"	"You lose your darkvision."
+eyeless vision	"You gain the ability to [bold type]see without eyes[roman type]!"	"You lose your eyeless vision."
 pseudopods	"Hundreds of apparently useless [bold type]pseudopods[roman type] grow from your skin."	"The pseudopods that covered you disappear."
 disintegrating flesh	"Your [bold type]flesh[roman type] loses much of its consistency!"	"Your flesh returns to its normal solidity."
 metallic scales	"Your body is covered in [bold type]metallic scales[roman type]!"	"The metallic scales disappear from your body."
@@ -1810,10 +1810,10 @@ A flying rule (this is the wings flying rule):
 	if test subject is player and wings is adapted:
 		rule succeeds.
 
-Section - Darkvision
+Section - Eyeless vision
 
 First blindness rule (this is the not blind if darkvision rule):
-	if test subject is player and darkvision is adapted:
+	if test subject is player and eyeless vision is adapted:
 		rule fails.
 
 Section - Pseudopods
