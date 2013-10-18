@@ -560,8 +560,51 @@ Last when play begins (this is the introduction rule):
 	say "[paragraph break]When you claimed that you were tough enough to take on Malygris single-handedly, everyone knew you had been drinking much more than was good for you. And the prince is not one to let an opportunity pass. Before you could so much as protest, his court mage opened a portal and you were shoved through. Predictably, the portal immediately disappeared. You doubt they're going to open it up again -- but at least you can try to make good on your boast and kill Malygris, the Wizard of Kerkerkruip!";
 	now started boolean is true. [See section Victory message below.]
 
+Section - Starting kits
 
+Option-2-chest is a container. Option-2-chest contains a scroll of shadows.
+Option-3-chest is a container. Option-3-chest contains a scroll or protection and a scroll of the blade.
+Option-4-chest is a container. Option-4-chest contains a scroll of death.
+Option-5-chest is a container. Option-5-chest contains two fragmentation grenades and a Morphean grenade.
+Option-6-chest is a container. Option-6-chest contains a scroll of mapping.
+Option-7-chest is a container. Option-7-chest contains a scroll of teleportation.
 
+Last when play begins:
+	let n be a random number between 1 and 7;
+	if n is 1:
+		move gilded rapier to the player;
+		now gilded rapier is readied;
+		now the player wears the buckler;
+	if n is 2:
+		move gorgeous dagger to the player;
+		now gorgeous dagger is readied;
+		equip player from option-2-chest;
+	if n is 3:
+		equip player from option-3-chest;
+	if n is 4:
+		move evil dagger to the player;
+		now evil dagger is readied;
+		equip player from option-4-chest;
+	if n is 5:
+		equip player from option-5-chest;
+		now the player wears Metastasio's hat;
+	if n is 6:
+		move pickaxe to player;
+		now pickaxe is readied;
+		equip player from option-6-chest;
+	if n is 7:
+		move gilded rapier to player;
+		now gilded rapier is readied;
+		equip player from option-7-chest; 
+	repeat with item running through things enclosed by the player:
+		if item is a weapon or item is clothing:
+			now item is not cursed.
+
+To equip player from (box - a container):
+	repeat with item running through things enclosed by box:
+		move item to player;
+		if item is a scroll:
+			identify item.
 
 
 Chapter - The end

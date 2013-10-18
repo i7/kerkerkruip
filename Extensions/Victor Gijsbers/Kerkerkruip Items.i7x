@@ -166,7 +166,7 @@ Check inserting it into (this is the cannot insert a cursed readied weapon rule)
 
 A treasure placement rule:
 	repeat with item running through corruptible weapons:
-		unless item is the gilded rapier or item is a natural weapon:
+		unless item is a natural weapon:
 			if a random chance of 1 in 10 succeeds and a random chance of difficulty in 5 succeeds:
 				now item is cursed;
 				if generation info is true, say "* Cursed [item].";
@@ -2797,7 +2797,7 @@ The damage die of a rapier is usually 5.
 
 Section - Gilded rapier
 
-The gilded rapier is a rapier. The player carries the gilded rapier. The gilded rapier is readied.
+The gilded rapier is a rapier. [The player carries the gilded rapier. ]The gilded rapier is readied.
 The gilded rapier is iron.
 
 The description of the gilded rapier is "You took it from the body of the young Count of Poitier, that fateful night in Maurice's whorehouse. He would nevermore plot against you.".
