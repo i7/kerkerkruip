@@ -131,7 +131,7 @@ Chapter - Dream of Tungausy Shaman
 
 Dream of Tungausy Shaman is a dream.
 
-The start of the dream rule of dream of Tungausy Shaman is the start dream of Tungausy Shaman rule.
+The start the dream rule of dream of Tungausy Shaman is the start dream of Tungausy Shaman rule.
 This is the start dream of Tungausy Shaman rule:
 	move player to front of the meditation hut.
 
@@ -141,8 +141,8 @@ Front of the meditation hut is not placeable.
 The barren wastes are scenery in Front of the meditation hut. Understand "homeland" as the barren wastes. The description of the barren wastes is "A vast, barren landscape, with the exception of some large rock formations."
 The large rock formations are scenery in Front of the meditation hut. The description of the large rock formations is "Some of them are natural, others are said to house the spirits of ancestors."
 The soothing drums are scenery in Front of the meditation hut. Understand "music" and "soothing" and "enchanting" and "sounds" and "drums" as the soothing drums. The description of the soothing drums is "The slow, monotonous sound of the drums seems to bring your soul to ease."
-The lodge is scenery in Front of the meditation hut. Understand "hut" and "meditation hut" as the lodge. The description of the lodge is "The indigeneous herbs bring about a soft, smooth and entrancing smell seems to lure you into the hut. It probably also relieves the hut of strong bodily odours."
-The indigeneous herbs is scenery in Front of the meditation hut. Understand "indigeneous" and "herbs" as the indegeneous herbs. The description of the indigeneous herbs is "The mixture of local herbs smell remarkably familiar, as if you've been here often."
+A thing called the lodge is scenery in Front of the meditation hut. Understand "hut" and "meditation hut" as the lodge. The description of the lodge is "The indigeneous herbs bring about a soft, smooth and entrancing smell seems to lure you into the hut. It probably also relieves the hut of strong bodily odours."
+The indigeneous herbs are scenery in Front of the meditation hut. Understand "indigeneous" and "herbs" as the indigeneous herbs. The description of the indigeneous herbs is "The mixture of local herbs smell remarkably familiar, as if you've been here often."
 
 Instead of smelling the indigeneous herbs:
 	try examining the indigeneous herbs instead.
@@ -156,7 +156,7 @@ Instead of going to the lodge:
 	say "Entering the hut, you see a Tungausy shaman, sitting on the hides of slain animals. He lulled himself into a deep state of trance due to the monotonous humming of the drums. In the middle of the hut, next to the shama, is a large pool of water, which slowly vibrates on the rhythm of the drums.[paragraph break]Slowly, you try to sneak closer to the pool without interupting in this without doubt important ceremony. As you stare into the vibrating pool, you can clearly discern:";
 	wait for any key;
 	now current question is "(What do you discern from the pool?)";
-	now current question menu is ("... a figment of yourself, slightly floating above the ground.", "... The shaman, rising above you, slowly becoming a figment himself.");
+	now current question menu is {"... a figment of yourself, slightly floating above the ground.", "... The shaman, rising above you, slowly becoming a figment himself."};
 	ask a closed question, in menu mode.
 
 A menu question rule (this is the vibrating pool rule):
