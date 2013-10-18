@@ -70,11 +70,16 @@ To dream (item - a dream):
 			
 To wake the player up:
 	wait for any key;
+	clear the screen;
 	repeat with guy running through asleep people in the location:
 		if a random chance of 1 in 4 succeeds:
 			now guy is not asleep;
 	now the player is not asleep;
-	move the player to dreamer-location.
+	now the player is yourself;
+	if the player is not in dreamer-location:
+		move the player to dreamer-location;
+	otherwise:
+		try looking.
 
 			
 
@@ -129,48 +134,52 @@ A menu question rule (this is the sleeping beauty rule):
 
 Chapter - Dream of Tungausy Shaman
 
-Dream of Tungausy Shaman is a dream.
+Dream of Tungausy Shaman is a dream. Dream of Tungausy Shaman is current-test-dream.
 
 The start the dream rule of dream of Tungausy Shaman is the start dream of Tungausy Shaman rule.
+
 This is the start dream of Tungausy Shaman rule:
-	move player to front of the meditation hut.
+	now player is the tungausy warrior;
+	try looking.
 
-Front of the meditation hut is a room. "Located in the vast barren wastes the Tungausy call their homeland, the loud drum sounds coming out of the meditation hut are enchanting and soothening in a creepy kind of way."
-Front of the meditation hut is not placeable.
+Before the meditation hut is a room. "Around you are the barren wastes of the Tungausy homeland. The sound of loud drum comes from the meditation hut. It sooths and enchants you."
+Before the meditation hut is not placeable.
 
-The barren wastes are scenery in Front of the meditation hut. Understand "homeland" as the barren wastes. The description of the barren wastes is "A vast, barren landscape, with the exception of some large rock formations."
-The large rock formations are scenery in Front of the meditation hut. The description of the large rock formations is "Some of them are natural, others are said to house the spirits of ancestors."
-The soothing drums are scenery in Front of the meditation hut. Understand "music" and "soothing" and "enchanting" and "sounds" and "drums" as the soothing drums. The description of the soothing drums is "The slow, monotonous sound of the drums seems to bring your soul to ease."
-A thing called the lodge is scenery in Front of the meditation hut. Understand "hut" and "meditation hut" as the lodge. The description of the lodge is "The indigeneous herbs bring about a soft, smooth and entrancing smell seems to lure you into the hut. It probably also relieves the hut of strong bodily odours."
-The indigeneous herbs are scenery in Front of the meditation hut. Understand "indigeneous" and "herbs" as the indigeneous herbs. The description of the indigeneous herbs is "The mixture of local herbs smell remarkably familiar, as if you've been here often."
+A person called the Tungausy warrior is in Before the meditation hut. The description of the tungausy warrior is "Your body is strong. Your spirit is even stronger.". The body score of the Tungausy warrior is 10. The spirit score of the Tungausy warrior is 15.
 
-Instead of smelling the indigeneous herbs:
-	try examining the indigeneous herbs instead.
+The barren wastes are scenery in Before the meditation hut. Understand "homeland" as the barren wastes. The description of the barren wastes is "A vast, barren landscape. The monotony is only broken by large rock formations in the distance."
+The large rock formations are scenery in Before the meditation hut. The description of the large rock formations is "The gods created them to house the spirits of ancestors."
+The soothing drums are scenery in Before the meditation hut. Understand "music" and "soothing" and "enchanting" and "sounds" and "drums" as the soothing drums. The description of the soothing drums is "The slow, monotonous sound of the drums eases your soul." Instead of listening to in Before the meditation hut: try examining the soothing drums.
+A thing called the lodge is scenery in Before the meditation hut. Understand "hut" and "meditation hut" as the lodge. The description of the lodge is "The enticing smell of spicy herbs lures you to the hut."
+The indigenous herbs are scenery in Before the meditation hut. The description of the indigenous herbs is "These herbs smell familiar. You have been here often." Instead of smelling in Before the meditation hut: try examining the indigenous herbs.
+
+Instead of smelling the indigenous herbs:
+	try examining the indigenous herbs instead.
 
 Instead of entering the lodge:
 	try going to the lodge instead.
 	
 Instead of going to the lodge:
-	say "Even though you are somewhat soothed by the meditative drums, with shaking knees you slowly walk into the hut.";
+	say "Though the drums and herbs sooth and encourage you, your knees still shake as you walk into the hut.";
 	wait for any key;
-	say "Entering the hut, you see a Tungausy shaman, sitting on the hides of slain animals. He lulled himself into a deep state of trance due to the monotonous humming of the drums. In the middle of the hut, next to the shama, is a large pool of water, which slowly vibrates on the rhythm of the drums.[paragraph break]Slowly, you try to sneak closer to the pool without interupting in this without doubt important ceremony. As you stare into the vibrating pool, you can clearly discern:";
+	say "The shaman is sitting on a pile of hides, each of them ripped from the carcass of a ferocious beast. He is deep in a trance, and takes no notice of you. A large pool of water, vibrating slowly to the rhythm of invisible drums, beckons you forward. As you bend towards it, you can clearly discern an image.";
 	wait for any key;
-	now current question is "(What do you discern from the pool?)";
-	now current question menu is {"... a figment of yourself, slightly floating above the ground.", "... The shaman, rising above you, slowly becoming a figment himself."};
+	now current question is "(What do you see in the pool?)";
+	now current question menu is {"Your spirit floating away from your shrivelled body.", "Your body fighting the tribe's enemies, unable to feel anything."};
 	ask a closed question, in menu mode.
 
 A menu question rule (this is the vibrating pool rule):
-	if the current question is "(What do you discern from the pool?)":
+	if the current question is "(What do you see in the pool?)":
 		let m be the number understood;
 		if m is 1:
-			decrease body score of the player by 10;
-			increase spirit score of the player by 5;
-			say "You slowly start floating towards the shaman, entranced by his humming. You know that you need to fulfill your task: 'I will lend you my strength, if you lend me your spirit'. After all, you are a Sülde, a guardian spirit to the chief shaman. Slowly, you transfer your strength towards the shaman, who is now capable to defend his tribe in the Everlasting War. Slowly, you awake, feeling terribly weakened from the power sapped away. [paragraph break][bold type]Your constitution weakened heavily from the energy sapped away: -10 body. However, the shaman's soothing drums strengthened your spirit: +5 spirit.[roman type][paragraph break]";
+			decrease body score of yourself by 5;
+			increase spirit score of yourself by 5;
+			say "You walk towards the shaman, knowing what you must sacrifice and what you will gain. 'I will give you my strength, in exchange for your spirit.' The shaman eagerly puts his hands on your biceps. His muscles grow beyond human proportion while yours shrink to nothing. He will now be able to defend the tribe in the Everlasting War, while you will join the ancestor spirits.[paragraph break][bold type]You have lost much of your bodily strength: -5 body. But you have sapped much of the shaman's spirit: +5 spirit.[roman type][paragraph break]";
 			wake the player up;
 		if m is 2:
-			decrease spirit score of the player by 10;
-			increase body score of the player by 5;
-			say "In  a flash, you find yourself sitting where the shaman sat. You continue to play the drums in its monotonous rhythm while the shaman floats above you. He starts to speak to you in a slow voice:'I will lend you my strenght, if you lend me your spirit'. With a force, the shaman ancestor forces himself into you! You wake up with a loud scream, invigorated but without the will to fight.[paragraph break][bold type]The stressful event deprived you of your spirit:-10 spirit. However, your consitution is strenghtened by the shaman spirit: +5 body.[roman type][paragraph break]";
+			decrease spirit score of yourself by 5;
+			increase body score of yourself by 5;
+			say "You walk towards the shaman, knowing what you must sacrifice and what you will gain. 'I will give you my spirit, in exchange for your strength.' The shaman eagerly puts his hands on your breast. As he absorbs your spirit, you see your muscles growing beyond human proportions. You will now be able to defend the tribe in the Everlasting War, but you will never join the ancestor spirits.[paragraph break][bold type]You have lost your soul: -5 spirit. Your muscles have grown exceedingly strong: +5 body.[roman type][paragraph break]";
 			wake the player up;
 		exit.
 			
