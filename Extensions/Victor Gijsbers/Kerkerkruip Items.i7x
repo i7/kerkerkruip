@@ -340,7 +340,9 @@ The description of the essence of addiction is "This small metal bottle contains
 
 Carry out inhaling the essence of addiction:
 	say " You feel very [if ment timer is less than 1]low[otherwise]high[end if]!";
-	increase ment addiction by 2.
+	increase ment addiction by 2;
+	if ment addiction is 6:
+		award achievement Sixth heaven.
 
 
 
@@ -3759,9 +3761,8 @@ Carry out snorting a package of ment:
 		say "You take a small mirror, a razor and a straw from one of your pockets, and carefully cut the ment on the surface of the mirror. The light blue powder is looking very good. Using the straw, you manage to get almost all of it in your nose. You inhale sharply a few times -- and feel the ment do its awesome work.[paragraph break]Everything becomes clear, sharp, easy. You feel strong. You feel focused.";
 	otherwise:
 		say "You repeat the ritual: cutting, forming into a line, snorting through the straw, inhaling sharply. The ment kicks in immediately.";
-	have the ment kick in;
-	if ment addiction is 6:
-		award achievement Sixth heaven.
+	remove the noun from play;
+	have the ment kick in.
 
 To have the ment kick in:
 	increase the ment addiction by 1;
@@ -3772,7 +3773,8 @@ To have the ment kick in:
 			otherwise:
 				end the game saying "You OD'ed.";
 	now the ment timer is a random number between 10 and 15;
-	remove the noun from play.
+	if ment addiction is 6:
+		award achievement Sixth heaven.
 	
 
 
