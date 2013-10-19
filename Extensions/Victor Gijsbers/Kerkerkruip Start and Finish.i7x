@@ -563,7 +563,7 @@ Last when play begins (this is the introduction rule):
 Section - Starting kits
 
 Option-2-chest is a container. Option-2-chest contains a scroll of shadows.
-Option-3-chest is a container. Option-3-chest contains a scroll or protection and a scroll of the blade.
+Option-3-chest is a container. Option-3-chest contains a scroll of protection and a scroll of the blade.
 Option-4-chest is a container. Option-4-chest contains a scroll of death.
 Option-5-chest is a container. Option-5-chest contains two fragmentation grenades and a Morphean grenade.
 Option-6-chest is a container. Option-6-chest contains a scroll of mapping.
