@@ -738,6 +738,40 @@ A remain concentrated rule (this is the inquisitor's hood concentration rule):
 		increase remain concentrated chance by 15.
 
 
+Section - Antler of the Tungausy Shaman (epic)
+
+The antler of the tungausy shaman is an epic hat. The indefinite article is "the".
+The antler of the tungausy shaman is religious.
+The antler of the tugausy shaman is silver.
+
+The blood magic cost of antler of the tungausy shaman is 2.
+The blood magic level of antler of the tungausy shaman is 0.
+The blood magic maximum of antler of the tungausy shaman is 6.
+
+The description of the antler of the tungausy shaman is "Resembling the antler of a deer, this jewelry is used by the Tungausy Shaman to have the spirits help him in his quest. However, if not handled carefully, the spirits may be mischievous with dire consequences. [italic type](has currently [50 + 5 times blood magic level of the antler of the tungausy shaman] percent chance to correctly foresee the attack result of the opponent. You can increase this chance by 5 percent if you feed the antler [current blood cost of the antler of the tungausy shaman] blood.) [roman type]".
+
+antlerattackstrength is a number that varies.
+
+Carry out an npc attacking (this is the antlerattack rule):
+	if the player wears the antler of the tungausy shaman and the ment timer is greater than 0:
+		if the global defender is the player:
+			now the antlerattackstrength is a roll of the dice;
+			let x be 50;
+			increase x by 5 times the blood magic level of antler of the tungausy shaman;
+			if a random  chance of x in 100 succeeds:
+				say "The shamanic spirits envision [main actor]'s attack to be [if periapt attack strength is less than 4]weak[otherwise if periapt attack strength is less than 8]average[otherwise if periapt attack strength is not 20]strong[otherwise]heroic[end if].";
+			otherwise:
+				say "The shamanic spirits envision [main actor]'s attack to be [one of]weak[or]average[or]strong[or]heroic[purely at random].".
+
+
+
+A special set attack strength rule (this is the antler attack roll rule):
+	if the player wears the antler of the tungausy shaman and the ment timer is greater than 0:
+		if the main actor is not the player:
+			now attack strength is antlerattackstrength.
+
+
+
 Section - Pale phylactery
 
 The pale phylactery is an epic hat.
