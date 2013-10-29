@@ -755,7 +755,10 @@ antlerattackstrength is a number that varies.
 Carry out an npc attacking (this is the antlerattack rule):
 	if the player wears the antler of the tungausy shaman and the ment timer is greater than 0:
 		if the global defender is the player:
-			now the antlerattackstrength is a roll of the dice;
+			if tome-of-law-number is not 0:
+				now the antlerattackstrength is tome-of-law-number;
+			otherwise:
+				now the antlerattackstrength is a roll of the dice;
 			let x be 50;
 			increase x by 5 times the blood magic level of antler of the tungausy shaman;
 			if a random  chance of x in 100 succeeds:
@@ -3935,7 +3938,7 @@ Section - Tome of Law
 
 The Tome of Law is a tome.
 Tome of Law is paper.
-Tome of Low is magical.
+Tome of Law is magical.
 
 Tome-of-law-number is a number that varies. Tome-of-law-number is 0.
 
