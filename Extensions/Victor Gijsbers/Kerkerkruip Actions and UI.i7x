@@ -589,50 +589,14 @@ Carry out sensing when the psycholocation boolean is true:
 	repeat with adversary running through alive not off-stage persons:
 		if the adversary is not the player and (the level of the adversary is greater than 0 or adversary is soul-reflected):
 			increment count;
-			choose row with enemy of adversary in the Table of Soul Descriptions;
 			if the location of the player is the location of the adversary:
-				say " - [italic type]the soul of [the adversary][roman type] here with you, like [power-text entry][line break]";
+				say " - [italic type]the soul of [the adversary][roman type] here with you, like [soul description of adversary][line break]";
 				next;
 			let the way be the best route from the location of player to the location of the adversary;
 			if way is a direction:
-				say " - [italic type][power-text entry][roman type], [if way is not up and way is not down]from the [end if][way][line break]";
+				say " - [italic type][soul description of adversary][roman type], [if way is not up and way is not down]from the [end if][way][line break]";
 			otherwise:
-				say " - [italic type][power-text entry][roman type], somewhere [general direction from location of the player to location of the adversary][line break]".
-
-Table of Soul Descriptions
-enemy	power-text
-daggers	"an aura like sharpened steel"
-blood ape	"a zone of tautened, reddened air"
-ravenous armadillo	"energy like a screen of scales"
-Miranda	"a cloud of staggering purple"
-chain golem	"lashings of steel"
-jumping bomb	"a pulsating bundle of glowing embers"
-Reaper	"a black hood hanging in air"
-demon of rage	"a squall of fury, all blacks and reds"
-hound	"a sharp yellow eye, narrowed and alert"
-mindslug	"inspiralling reflections in green ooze"
-Fafhrd	"frozen honour"
-Mouser	"dreams of gold and women"
-giant tentacle	"amputated horror"
-minotaur	"a skein of twisting passages"
-healer of Aite	"a deadly snake curled around a staff"
-tormentor of Aite	"savage stabs of pain"
-defender of Aite	"a bronze shield, dented and spiked"
-Bodmall	"spreading thorns dripping with dew--or blood"
-Malygris	"a bolt of black shot through with a blaze of hot white[if Malygris-love-affair is greater than 0], to which you find yourself quite attracted[end if]"
-demonic assassin	"a dagger forged in the depths of Gehenna"
-nameless horror	"a turning in on itself of space and time, on which you cannot bear to focus your attention"
-rotting corpse		"putrefying matter swimming in slime"
-aswang		"a chaos of teeth, wings and nails"
-abyss of the soul	"an awful non-being that seems to negate all existence"
-smoke demon	"smothering clouds"
-imp		"a small claw grasping at gold"
-demonic mistress	"a burning whip"
-mummified priest	"the head of a jackal, cursing"
-wisps of pain	"dark stains of tormented energy"
-overmind	"a flickering clockwork mechanism, an orrery perhaps?"
-
-
+				say " - [italic type][soul description of adversary][roman type], somewhere [general direction from location of the player to location of the adversary][line break]".
 
 Carry out sensing when the psycholocation boolean is false:		
 	if greatest power of the player is less than 3:

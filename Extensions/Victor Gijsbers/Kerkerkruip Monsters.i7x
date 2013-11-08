@@ -115,9 +115,9 @@ Section - Monster avatars for the map (for use with Kerkerkruip Glimmr Additions
 A person has a figure name called the avatar. The avatar of a person is usually Figure of Null.
 A person has a figure name called the legend-label. The legend-label of a person is usually Figure of Null.
 
+Section - Soul Descriptions for Sensing with Psycholocation
 
-
-
+A person has a text called the soul description. The soul description of a person is usually "an unfamiliar presence".
 
 Chapter - Level 1 - Swarm of Daggers
 
@@ -153,6 +153,8 @@ When play begins:
 	now X is plural-named.
 
 The description of the swarm of daggers is "Animated by some dark magic, these daggers purposefully seek to undo [if faction of the swarm of daggers hates faction of the player]you[otherwise]their enemies[end if].".
+
+The soul description of the swarm of daggers is "an aura like sharpened steel".
 
 An AI action selection rule for the swarm of daggers (this is the daggers do not concentrate rule):
 	choose row with an Option of the action of the swarm of daggers concentrating in the Table of AI Action Options;
@@ -308,6 +310,8 @@ Section - Definitions
 A blood ape is a monster. "A [if the size of the blood ape is not medium][size of the blood ape] [end if]simian creature aggressively [if player is not hidden][one of]shows you its teeth[or]displays its strength[or]screams at you[at random][otherwise]paces through the room[end if]." Understand "monkey" and "gorilla" and "simian" as the blood ape.
 
 The description of the blood ape is "It looks like a gorilla, except that is has an intensely red fur and is perhaps even more muscular. [if the blood ape is small]Thankfully, the ape is somewhat smaller than you are[otherwise if the blood ape is medium]The blood ape has grown to the proportion of a very broad-chested human[otherwise if the blood ape is large]The blood ape now stands taller than you, and its fists have grown bigger than your head[otherwise if the blood ape is huge]The massive blood ape towers above you, having grown to the size of an elephant[otherwise if the blood ape is gargantuan]The blood ape has grown to colossal proportions, hardly fitting in the room. You fear it could easily crush you[end if]."
+
+The soul description of the blood ape is "a zone of tautened, reddened air".
 
 The level of the blood ape is 1.
 The ID of the blood ape is 2.
@@ -505,6 +509,8 @@ The unlock level of the ravenous armadillo is 3.
 The unlock text of the ravenous armadillo is "a monster that searches the dungeon for anything it can eat".
 
 The description of ravenous armadillo is "As their name suggests, ravenous armadillos will eat anything. They may seem slow and easy to hit, but their tough scales ensure that they can shrug off most damage, and their bony tail club packs a considerable punch.".
+
+The soul description of the ravenous armadillo is "energy like a screen of scales".
 
 The health of the ravenous armadillo is 12.
 The melee of the ravenous armadillo is -2.
@@ -765,6 +771,8 @@ Miranda is thrower.
 
 The description of Miranda is "Although she is currently working as one of Malygris's guards, Miranda dreams about a bright future as a famous adventurer.".
 
+The soul description of Miranda is "a cloud of staggering purple".
+
 The health of Miranda is 14.
 The melee of Miranda is 0.
 The defence of Miranda is 7.
@@ -903,6 +911,8 @@ The wisps of pain are not talker.
 The wisps of pain are not thrower.
 
 The description of the wisps of pain is "Dark spots of necromantic magic move through the air. They deal pain and torment, and can permanently cripple anyone foolish enough to oppose them.".
+
+The soul description of the wisps of pain is "dark stains of tormented energy".
 
 The health of the wisps of pain is 14.
 The melee of the wisps of pain is 0.
@@ -1131,6 +1141,8 @@ The chain golem is iron.
 The chain golem is emotionless.
 
 The description of the chain golem is "A hulking form made of [if chain golem is iron]metal[otherwise][material-adjective of material of chain golem][end if] chains and animated by a soul bound to it through dark magics.".
+
+The soul description of the chain golem is "lashings of steel".
 
 The health of the chain golem is 26.
 The melee of the chain golem is 1.
@@ -1363,6 +1375,8 @@ The jumping bomb is emotionless.
 
 The description of the jumping bomb is "Connoisseurs consider these jumping balls of red meat to be among the most exciting spectacles of Yahvinna's annual Feast of Flesh. To the slaves and convicts down in the arena, whose limbs the spectators hope to have blown into their lap, the jumping bombs also bring excitement, though of a wholly different type.".
 
+The soul description of the jumping bomb is "a pulsating bundle of glowing embers".
+
 The health of the jumping bomb is 22.
 The melee of the jumping bomb is 0.
 The defence of the jumping bomb is 7.
@@ -1584,6 +1598,8 @@ The Reaper is thrower.
 
 The description of the reaper is "He once used to be a man like any other, but his vocation has left him unnaturally pale and gaunt.".
 
+The soul description of the Reaper is "a black hood hanging in air".
+
 The health of the Reaper is 26.
 The melee of the Reaper is 1.
 The defence of the Reaper is 8.
@@ -1779,6 +1795,8 @@ The demon of rage is thrower.
 The description of the demon of rage is "An amorphous swirl of red and black light, this demonic creature is the spirit of rage incarnate.".
 Instead of listening to the demon of rage:
 	say "In its fierce wailing, you hear the voices of all your victims.".
+    
+The soul description of the demon of rage is "a squall of fury, all blacks and reds".
 
 The health of the demon of rage is 21.
 The melee of the demon of rage is 0.
@@ -1971,6 +1989,8 @@ The hound is not thrower.
 
 The description of the hound is "The black hound is ever watchful, ready to punish its prey for any wrong move."
 
+The soul description of the hound is "a sharp yellow eye, narrowed and alert".
+
 The health of the hound is 17.
 The melee of the hound is 2.
 The defence of the hound is 9.
@@ -2132,7 +2152,7 @@ Angel-of-compassion-strength is a number that varies. Angel-of-compassion-streng
 
 The description of the angel of compassion is "This beautiful angel grieves for the deaths of others. Its current brightness is [if angel-of-compassion-strength > 3]overwhelming[otherwise if angel-of-compassion-strength is 3]strong[otherwise if angel-of-compassion-strength is 2]quite strong[otherwise if angel-of-compassion-strength is 1]weak[otherwise]negligible[end if]."
 
-
+The soul description of the angel of compassion is "a luminous arc of sorrow".
 
 The health of the angel of compassion is 25.
 The melee of the angel of compassion is 0.
@@ -2314,6 +2334,8 @@ The mindslug is defeated individually.
 
 The description of the mindslug is "It is of the dreaded race of mindslugs, abominations that use their telepathic powers to enslave others.".
 
+The soul description of the mindslug is "inspiralling reflections in green ooze".
+
 The health of the mindslug is 28.
 The melee of the mindslug is 2.
 The defence of the mindslug is 8.
@@ -2412,6 +2434,9 @@ Report the mindslug waiting when the mindslug is insane:
 Section - Slaves
 
 Fafhrd is a mindslug-enslaved man. The description of Fafhrd is "This male barbarian is strong and muscular. He looks like an able and shrewd fighter.".
+
+The soul description of Fafhrd is "frozen honour".
+
 The ID of Fafhrd is 11.
 Fafhrd is medium.
 Fafhrd accompanies the mindslug.
@@ -2435,6 +2460,9 @@ Fafhrd is talker.
 Fafhrd is thrower.
 
 Mouser is a mindslug-enslaved man. The description of Mouser is "Mouser is a small, fast man. You know his type from the alleys and alehouses of Montenoir.".
+
+The soul description of the Mouser is "dreams of gold and women".
+
 The ID of Mouser is 12.
 Mouser accompanies the mindslug.
 
@@ -2740,6 +2768,8 @@ Chapter - Level 3 - Giant tentacle
 The giant tentacle is a monster. "A single giant tentacle guards against intruders."
 
 The description of the giant tentacle is "Aeons ago, the Knight of the Dawn fought and killed a great tentacled horror known as Tooloo. So great was Tooloo's tenacity, however, that each of his tentacles continued to live on separately -- and this is one of them.".
+
+The soul description of the giant tentacle is "amputated horror".
 
 The level of giant tentacle is 3.
 The ID of the giant tentacle is 13.
@@ -3089,6 +3119,8 @@ The minotaur is a male monster. "A ferocious minotaur[if the minotaur carries th
 
 The description of the minotaur is "Fruit of the mad monk Mendele's vile experiments, he wields an axe rumoured to possess mystical powers.".
 
+The soul description of the minotaur is "a skein of twisting passages".
+
 The level of the minotaur is 3.
 The ID of the minotaur is 14.
 The minotaur is large.
@@ -3202,6 +3234,8 @@ Section - Healer of Aite
 A healer of Aite is a male monster. The healer of Aite is not neuter. "A white-robed healer of Aite is chanting in praise of his goddess."
 Understand "white-robed" as the Healer of Aite.
 The description of the healer of Aite is "This white-robed priest is a healer of Aite. Their task is to support the other fanatics in their never-ending crusade.".
+
+The soul description of the healer of Aite is "a deadly snake curled around a staff".
 The ID of the Healer of Aite is 16.
 The Healer of Aite is medium.
 The Healer of Aite is talker.
@@ -3271,6 +3305,9 @@ Section - Tormentor of Aite
 A tormentor of Aite is a female monster. The tormentor of Aite is not neuter. "A black-robed mage stalks through the room."
 Understand "black-robed" and "mage" as the Tormentor of Aite.
 The description of the tormentor of Aite is "You immediately recognise the black-robed mage as a tormentor of Aite, savage priests who specialise in inflicting pain on all who oppose their faith.".
+
+The soul description of the tormentor of Aite is "savage stabs of pain".
+
 The ID of the Tormentor of Aite is 17.
 The Tormentor of Aite is medium.
 The Tormentor of Aite is talker.
@@ -3339,6 +3376,9 @@ Section - Defender of Aite
 A defender of Aite is a male monster. The defender of Aite is not neuter. "Equipped with a small sword and a huge shield, a heavily armoured man awaits any attacks."
 Understand "armoured" and "man" as the defender of Aite.
 The description of the defender of Aite is "This heavily armoured priest is a defender of Aite, one of the front-line troops of the armies of this horrible faith.".
+
+The soul description of the defender of Aite is "a bronze shield, dented and spiked".
+
 The ID of the defender of Aite is 18.
 The defender of Aite is medium.
 
@@ -3457,6 +3497,8 @@ A beloved of Aite rule (this is the aite loves the bearer of her power rule):
 Chapter - Level 4 - Bodmall
 
 Bodmall is a monster. Bodmall is proper-named. Bodmall is female and not neuter. "A pale druidess stands here, murmuring to herself in a language you have never heard." The description of Bodmall is "Why the great druidess Bodmall has chosen to work together with Malygris is a subject of much speculation among scholars of the occult -- but here she is, standing between you and victory. She is a very powerful foe.".
+
+The soul description of Bodmall is "spreading thorns dripping with dew--or blood".
 
 Understand "druid" and "druidess" and "witch" as Bodmall.
 
@@ -4060,6 +4102,8 @@ Chapter - Level 4 - Overmind
 
 The overmind is a monster. "An infernal machine fills this room with shrieks of steam and clangs of metal, while a wizened old homunculus sit inside it, pulling levers. This must be the overmind." The description of the overmind is "A little man with a long wide beard sits in the midst of an incredibly complicated and fast-moving contraption. Whistles blow and big flat pieces of metal bang together in a horrific symphony. Gleaming metal circles revolve around and through each other in a chaotic dance that appears to be a parody of a planetarium. Or perhaps it is a real planetarium representing a world made by a mad god.".
 
+The soul description of the overmind is "a flickering clockwork mechanism, an orrery perhaps?".
+
 Understand "homunculus" as the overmind. The indefinite article of the overmind is "the".
 
 The level of the overmind is 4.
@@ -4312,6 +4356,9 @@ Chapter - Level 4 - Israfel
 Israfel is a neuter monster. "The fires of heaven envelop the terrible, androgynous angel known to mortals as Israfel."
 Understand "terrible" and "androgynous" and "angel" and "fires" and "heaven" and "fires of heaven" as Israfel.
 The description of Israfel is "Every angel is terror; and to see such beauty and nobleness is to know that one's own existence means nothing.".
+
+The soul description of Israfel is "a forked bolt from the heavens".
+
 The ID of Israfel is 36.
 Israfel is huge.
 Israfel is talker.
@@ -4471,6 +4518,9 @@ Section - Isra
 
 Isra is a male monster. "Isra contemplates the nature of god."
 The description of Isra is "His wise face burns like the sun, but he seems more interested in contemplating the nature of god than in physical combat.".
+
+The soul description of Isra is "frozen lightning".
+
 The ID of Isra is 37.
 Isra is large.
 Isra is talker.
@@ -4549,6 +4599,9 @@ Section - Fell
 Fell is a female monster. "Fell radiates death."
 Understand "claws" and "fangs" and "moonlight" as Fell.
 The description of Fell is "All claws and fangs that glimmer like silver in moonlight. She is here to bring death, and yet you are drawn to her beauty.".
+
+The soul description of Fell is "molten thunder".
+
 The ID of Fell is 38.
 Fell is medium.
 Fell is talker.
@@ -4845,6 +4898,8 @@ Chapter - Level 5 - Malygris
 
 Malygris is a monster. Malygris is proper-named. Malygris is male and not neuter. "Malygris, perhaps the greatest of all living sorcerers, is standing here." The description of Malygris is "His white eyebrows are contracted to a single line on the umber parchment of his face, and beneath them his eyes are cold and green as the ice of ancient floes; his beard, half white, half of a black with glaucous gleams, falls nearly to his knees and hides many of the writhing serpentine characters inscribed in woven silver athwart the bosom of his violet robe. -- Clark Ashton Smith, [italic type]The Last Incantation[roman type].".
 
+The soul description of Malygris is "a bolt of black shot through with a blaze of hot white[if Malygris-love-affair is greater than 0], to which you find yourself quite attracted[end if]".
+
 Understand "sorcerer" and "mage" and "wizard" and "him" as the Malygris.
 
 The level of Malygris is 5.
@@ -5046,6 +5101,8 @@ Chapter - Demonic assassin
 
 The demonic assassin is a monster. "A horned figure stalks through the room." Understand "horned" and "figure" as the demonic assassin. The description of the demonic assassin is "A being summoned by Malygris from the depths of Hell, this demon has only one purpose: to stop you from reaching its master.".
 
+The soul description of the demonic assassin is "a dagger forged in the depths of Gehenna".
+
 The level of demonic assassin is 0.
 The ID of the demonic assassin is 21.
 The demonic assassin is medium.
@@ -5115,6 +5172,8 @@ Report the demonic assassin waiting when the demonic assassin is insane:
 Chapter - Nameless Horror
 
 The Nameless Horror is a horrific horrific-faction monster. "Screams rip from your throat as soon as you become aware of the mindbogglingly hideous monster that resides here, an abomination referred to only as the Nameless Horror." The indefinite article of the nameless horror is "the". The description of the Nameless Horror is "A vast dark mass sprouting teeth and claws at random -- you cannot force yourself to look at it.".
+
+The soul description of the nameless horror is "a turning in on itself of space and time, on which you cannot bear to focus your attention".
 
 A final monster placement rule (this is the Nameless Horror in Eternal Prison rule):
 	 if eternal prison is placed:
@@ -5302,6 +5361,8 @@ To decide what number is the arms of the rotting corpse:
 
 The description of the rotting corpse is "This corpse has definitely seen better times[unless limbs of the rotting corpse is 5]:[end if] [if the rotting head is not part of the rotting corpse]it has no head, [end if][if the legs of the rotting corpse is 1]it misses a leg, [end if][if the legs of the rotting corpse is 0]it misses both legs, [end if][if the arms of the rotting corpse is 1]one of its arms has fallen off, [end if][if the arms of the rotting corpse is 0]both of its arms have fallen off, [end if]and it smells awful."
 
+The soul description of the rotting corpse is "a foul smell".
+
 Instead of smelling when the rotting corpse is in the location:
 	say "The smell of rotting meat fills your nostrils.".
 
@@ -5401,6 +5462,8 @@ The aswang is an undead undead-faction monster. "An aswang is here, having taken
 Understand "witch" and "dog" and "hound" and "bird" and "owl" and "woman" and "ugly" and "old" as the aswang.
 
 The description of the aswang is "The undead monster has currently taken the form of [if as-shape of aswang is as-witch]an ugly old woman with long, dirty hair and completely white eyes[otherwise if as-shape of aswang is as-bird]a huge owl-like bird with leathery wings[otherwise]a ferocious black dog with blood-shot eyes[end if].".
+
+The soul description of the aswang is "a hollowed form, shifting from one shape to another".
 
 The level of the aswang is 0.
 The ID of the aswang is 24.
@@ -5610,6 +5673,8 @@ The abyss of the soul is not sleeper.
 
 The description of the Abyss of the Soul is "This [size of the abyss of the soul] sphere of utter darkness is an abyss of the soul, one of the most fearsome of undead monsters. Not only does it sap the strength of all nearby living creatures, it also feeds on the souls of the recently departed.".
 
+The soul description of the abyss of the soul is "an awful non-being that seems to negate all existence".
+
 The level of the abyss of the soul is 0.
 The ID of the abyss of the soul is 25.
 
@@ -5709,6 +5774,8 @@ The mummified priest is a male not neuter undead undead-faction monster.
 Understand "mummy" as the mummified priest.
 
 The description of the mummified priest is "Ancient embalming techniques have saved this priest's body from decomposition. Dark magics have returned a semblance of life to his remains."
+
+The soul description of the mummified priest is "the head of a jackal, cursing".
 
 The mummified priest is emotionless.
 The mummified priest is eyeless.
@@ -5815,6 +5882,8 @@ The zombie toad is an undead undead-faction monster.
 
 The description of the zombie toad is "This toad wasn't pretty when it was alive, and undeath hasn't improved its looks. Raising toads is a favourite pastime of very young necromancers once they've progressed beyond the stage of insects. Fortunately, a zombie toad isn't a real menace to anyone who is not a zombie fly."
 
+The soul description of the zombie toad is "a swampy odor".
+
 The zombie toad is emotionless.
 The zombie toad is not talker.
 The zombie toad is not thrower.
@@ -5882,6 +5951,8 @@ Chapter - Malignant chanter
 The malignant chanter is a male not neuter undead undead-faction monster. 
 
 The description of the malignant chanter is "This man must once have been one of the proud battle bards of Algir, but now he has been reduced to a putrefying corpse animated by magic. His chant can still inspire his undead allies, though."
+
+The soul description of the malignant chanter is "a discordant threnody".
 
 The malignant chanter is emotionless.
 The malignant chanter is talker.
@@ -5993,7 +6064,9 @@ Chapter - Drakul
 Drakul is a male not neuter undead super-undead undead-faction monster.
 Drakul is proper-named.
 
-The description of Drakul is "While he might pass for a classy gentleman in civilised society, Drakul is in fact one of the oldest and most dangerous vampires the worls has ever known. And he always smiles. Always."
+The description of Drakul is "While he might pass for a classy gentleman in civilised society, Drakul is in fact one of the oldest and most dangerous vampires the world has ever known. And he always smiles. Always."
+
+The soul description of Drakul is "sophisticated malice".
 
 Drakul is medium.
 Drakul is talker.
@@ -6131,6 +6204,8 @@ Section - Statistics
 A smoke demon is a monster. 
 
 The description of the smoke demon is "It is hard to say exactly which features of the smoky form show it to be sentient, but there is not the slightest doubt in your mind that it is.".
+
+The soul description of the smoke demon is "smothering clouds".
 
 The smoke demon is demonic.
 The smoke demon is horrific-faction. [Attacks even other demons.]
@@ -6314,6 +6389,8 @@ There is a monster called an imp.
 
 The description of the imp is "Imps are minor demons with unnaturally small wings. They rarely engage in combat, prefering to teleport or fly away from danger.".
 
+The soul description of the imp is "flittering wings".
+
 The imp is demonic. The level of the imp is 0.
 The ID of the imp is 27.
 The imp is small.
@@ -6463,6 +6540,8 @@ Chapter - The demonic mistress
 [The demoness can appear when the player wears the demon lord's diadem.]
 
 The demonic mistress is a female monster. "A horned figure stalks through the room." Understand "horned" and "figure" and "demon" and "demoness" as the demonic mistress. The description of the demonic mistress is "A being summoned by Malygris from the depths of Hell, this demon has only one purpose: to stop you from reaching its master.".
+
+The soul description of the demonic mistress is "a burning whip".
 
 The level of demonic mistress is 0.
 The ID of the demonic mistress is 28.
