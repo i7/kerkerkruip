@@ -1,4 +1,4 @@
-# We first ignore all projects and extensions so that we can simply copy our I7 directory into the repository.
+# Ignore a bunch of stuff so that we can simply copy our I7 directory into the repository
 *~
 *.blurb
 *Build
@@ -8,11 +8,7 @@
 *Index
 *manifest.plist
 *Release
+*Reserved
+*.rtf
 *.skein
-
-# The stuff we want to include is listed here, prefixed with !
-!Extensions/Victor Gijsbers/Kerkerkruip*
-!Extensions/Erik Temple/Kerkerkruip*
-!Projects/Kerkerkruip Materials/Figures/
-
-Reserved
+*.tiff
