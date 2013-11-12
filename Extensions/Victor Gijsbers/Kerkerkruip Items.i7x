@@ -1612,13 +1612,9 @@ An exploding rule:
 		otherwise:
 			if exploding-location is location:
 				say "The Morphean grenade explodes, and you are immediately overwhelmed by sleep.";
-				repeat with guy running through alive people in exploding-location:
-					if guy is sleeper:
-						now guy is asleep;
-			otherwise:
-				repeat with guy running through alive people in exploding-location:
-					if guy is sleeper:
-						now guy is asleep;
+			repeat with guy running through alive people in exploding-location:
+				if guy is sleeper:
+					now guy is asleep;
 		remove noun from play.
 
 

@@ -102,6 +102,7 @@ Section - Testing - Not for release
 	
 [The player carries one scroll of psycholocation and one scroll of mapping.]
 
+[Dream of Tungausy Shaman is current-test-dream.]
 [The player carries six Morphean grenades.]
 
 [One scroll of the blade is in Entrance Hall.]

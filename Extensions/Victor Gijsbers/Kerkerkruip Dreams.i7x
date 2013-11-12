@@ -134,7 +134,7 @@ A menu question rule (this is the sleeping beauty rule):
 
 Chapter - Dream of Tungausy Shaman
 
-Dream of Tungausy Shaman is a dream. Dream of Tungausy Shaman is current-test-dream.
+Dream of Tungausy Shaman is a dream.
 
 The start the dream rule of dream of Tungausy Shaman is the start dream of Tungausy Shaman rule.
 
@@ -155,6 +155,9 @@ The indigenous herbs are scenery in Before the meditation hut. The description o
 
 Instead of smelling the indigenous herbs:
 	try examining the indigenous herbs instead.
+
+Instead of going inside in Before the meditation hut:
+	try going to the lodge.
 
 Instead of entering the lodge:
 	try going to the lodge instead.
