@@ -9,31 +9,36 @@ A dream can be redreamable. A dream is usually not redreamable. [Redreamable dre
 
 Definition: a scene is dreamt rather than undreamt if it has happened.
 
-Dreamable test boolean is a truth state that varies.
+Section - Dreamability
 
-A scene has a rule called the dreamable rule.
-The dreamable rule of a scene is usually the simple dreamable rule.
+Dreamability rules is a scene based rulebook. Dreamability rules have outcomes it could be dreamed (success) and it couldn't be dreamed (failure).
 
-This is the simple dreamable rule:
-	now dreamable test boolean is true.
+Dreamability rule for a scene (called the potential dream) (this is the can only dream dreams rule):
+	if the potential dream is not dream, it couldn't be dreamed;
 
-Definition: a scene (called potential dream) is dreamable:
-	if potential dream is not dream, decide on false;
-	if potential dream is dreamt and potential dream is not recurring:
-		decide on false;
-	otherwise:
-		consider dreamable rule of potential dream;
-		decide on dreamable test boolean.
+Dreamability rule for a scene (called the potential dream) (this is the can't dream non-recurring dreams twice rule):
+	if the potential dream is dreamt and the potential dream is not recurring, it couldn't be dreamed;
 
-The selected dream is a scene that varies. 
+Dreamability rule for a scene (this is the default dreamability rule):
+	it could be dreamed.
 
-Definition: a scene is ready to dream if the player is asleep and it is the selected dream.
+The can only dream dreams rule is listed first in the dreamability rules.
+The can't dream non-recurring dreams twice rule is listed last in the dreamability rules.
+The default dreamability rule is listed last in the dreamability rules.
+
+Definition: a scene (called the potential dream) is dreamable:
+	consider the dreamability rules for the potential dream;
+	decide on whether or not the outcome of the rulebook is the it could be dreamed outcome.
 
 Section - Special option for testing
 
 A scene can be current-test-dream. [Make a dream current-test-dream for guaranteed dreaming of it. Best to make it recurring as well, or there may be trouble]
 	
 Section - Starting dreams
+
+The selected dream is a scene that varies. 
+
+Definition: a scene is ready to dream if the player is asleep and it is the selected dream.
 
 Every turn when the player is asleep:
 	select a dream.
@@ -183,5 +188,72 @@ A menu question rule (this is the vibrating pool rule):
 			say "You walk towards the shaman, knowing what you must sacrifice and what you will gain. 'I will give you my spirit, in exchange for your strength.' The shaman eagerly puts his hands on your breast. As he absorbs your spirit, you see your muscles growing beyond human proportions. You will now be able to defend the tribe in the Everlasting War, but you will never join the ancestor spirits.[paragraph break][bold type]You have lost your soul: -5 spirit. Your muscles have grown exceedingly strong: +5 body.[roman type][paragraph break]";
 			wake the player up;
 		exit.
+
+Chapter - Dream of the Banquet
+
+The Banquet is a recurring dream scene. The Banquet begins when The Banquet is ready to dream. The Banquet ends when The Banquet is over.
+
+Dreamability rule for The Banquet:
+	if the number of seen people who are in the land of the living is less than two, it couldn't be dreamed.
+
+When The Banquet begins:
+	now player is the Chef;
+	try looking.
+
+Definition: a room is in the land of the living if it is placed.
+Definition: the maze is in the land of the living: yes.
+
+Definition: a person is in the land of the living if it is alive and the location of it is in the land of the living.
+
+Definition: a person is banquet-dining if it is in the land of the living and it opposes yourself.
+
+The Dining Hall is a room. "A massive oaken table is before you, with places set for [the number of banquet-dining people in words]. Among the names, you recognize [the list of seen banquet-dining people]."
+
+The Dining Hall is not placeable.
+
+A person called the Chef is in The Dining Hall. The description of the Chef is "You are elegantly dressed, and ready to plan the menu for tonight's feast.". 
+
+banquet-menu is a list of texts that varies;
+banquet-items is a list of people that varies;
+
+Every turn when Banquet is happening:
+	say "A blood-spattered servant approaches you. 'Which guest are we serving tonight?' [one of]he[or]she[at random] asks.";
+	now the current question is "Your reply:";
+	now banquet-menu is {};
+	now banquet-items is {};
+	repeat with entree running through seen banquet-dining people:
+		add entree to banquet-items;
+		add printed name of entree to banquet-menu;
+	now the current question menu is banquet-menu;
+	ask a closed question, in menu mode.
+
+A menu question rule (this is the banquet selection rule):
+	if the current question is "Your reply:":
+		Let m be the number understood;
+		if m > 0 and m <= (the number of entries in banquet-items):
+			let entree be entry m of banquet-items;
+			prepare a feast of the entree;
+			wake the player up;
+			exit.
+
+To prepare a feast of (the entree - a person):
+	say "You make your choice, and two large butchers carrying heavy cleavers approach [bold type][the entree][roman type]. They take hold of [it-them] and stretch [it-them] out on the table.[paragraph break]The other denizens of Kerkerkruip file in and take their places at the table. As the butchers hack off pieces of [the entree], the guests grab them eagerly and stuff them into their drooling orifices. [paragraph break]";
+	Let m be a random number between 5 and 10;
+	let overflow be m - health of entree;
+	decrease health of entree by m;
+	if overflow > 0:
+		say "The guests consume their victim completely, and then they [bold type]turn on you![roman type][paragraph break]";
+		decrease health of yourself by overflow;
+	say "[The entree] suffers [bold type][m] damage[roman type][if entree is dead], which is [bold type]lethal[roman type][end if]";
+	if overflow > 0:
+		say ". In addition, you suffer [bold type][overflow] damage[roman type]";
+	if yourself is dead:
+		say ", which [bold type]kills you[roman type].";
+		end the game saying "You have been consumed.";
+	otherwise:
+		say ". All of the diners [bold type]gain [m] health![roman type]";
+	Repeat with guy running through banquet-dining people who are not the entree:
+		increase health of guy by m;
+		
 
 Kerkerkruip Dreams ends here.
