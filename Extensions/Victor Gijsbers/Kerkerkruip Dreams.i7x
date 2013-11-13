@@ -38,12 +38,6 @@ Section - Starting dreams
 Every turn when the player is asleep:
 	select a dream.
 	
-[Table of Candidate Dreams
-Candidate
-Briar Roses
-dream-of-tungausy-shaman
-with 20 blank rows]
-	
 To decide which scene is the null dream: (- 0 -);
 
 To select a dream:
