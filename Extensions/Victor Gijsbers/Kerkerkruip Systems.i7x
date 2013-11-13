@@ -463,6 +463,20 @@ A dungeon interest rule (this is the change weapon sizes rule):
 						increase the size of item;
 				if generation info is true, say "* Now [item] is [size of item].".
 
+Section - Size of People
+
+To increase the size of (guy - a person):
+	unless the base size of guy is gargantuan:
+		now the base size of guy is the size after the base size of guy;
+	unless the size of guy is gargantuan:
+		now the size of guy is the size after the size of guy;
+	
+To decrease the size of (guy - a person):
+	unless the base size of guy is tiny:
+		now the base size of guy is the size before the base size of guy;
+	unless the size of guy is tiny:
+		now the size of guy is the size before the size of guy;
+
 Section - Other effects of size
 
 A detection rule (this is the size increases probability of detection rule):
@@ -473,9 +487,6 @@ A detection rule (this is the size increases probability of detection rule):
 		let m be -1 * n;
 		say " - [m] ([size of the player])[run paragraph on]";
 	increase hiding roll by n.
-	
-
-
 
 
 Chapter - Powers
