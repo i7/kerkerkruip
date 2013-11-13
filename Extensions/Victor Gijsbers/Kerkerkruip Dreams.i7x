@@ -4,92 +4,98 @@ Use authorial modesty.
 
 Section - The dream kind
 
-A dream is a kind of object. A dream can be dreamt or undreamt. A dream is usually undreamt. [Dreamt once dream.]
-A dream can be redreamable. A dream is usually not redreamable. [Redreamable dreams can be dreamt more than once.]
+A scene can be dream. [A dream can be dreamt or undreamt. A dream is usually undreamt. [Dreamt once dream.]
+A dream can be redreamable. A dream is usually not redreamable. [Redreamable dreams can be dreamt more than once.]]
+
+Definition: a scene is dreamt rather than undreamt if it has happened.
 
 Dreamable test boolean is a truth state that varies.
 
-A dream has a rule called the dreamable rule.
-The dreamable rule of a dream is usually the simple dreamable rule.
+A scene has a rule called the dreamable rule.
+The dreamable rule of a scene is usually the simple dreamable rule.
 
 This is the simple dreamable rule:
 	now dreamable test boolean is true.
 
-To decide whether (potential dream - a dream) is dreamable:
-	if potential dream is dreamt and potential dream is not redreamable:
+Definition: a scene (called potential dream) is dreamable:
+	if potential dream is not dream, decide on false;
+	if potential dream is dreamt and potential dream is not recurring:
 		decide on false;
 	otherwise:
 		consider dreamable rule of potential dream;
 		decide on dreamable test boolean.
 
-A dream has a rule called the start the dream rule.
+The selected dream is a scene that varies. 
+
+Definition: a scene is ready to dream if the player is asleep and it is the selected dream.
 
 Section - Special option for testing
 
-[But not "only for testing", because I reference it below.]
-
-A dream can be current-test-dream. [Make a dream current-test-dream for guaranteed dreaming of it.]
+A scene can be current-test-dream. [Make a dream current-test-dream for guaranteed dreaming of it. Best to make it recurring as well, or there may be trouble]
 	
 Section - Starting dreams
 
 Every turn when the player is asleep:
-	do a dream.
+	select a dream.
 	
-Table of Candidate Dreams
+[Table of Candidate Dreams
 Candidate
-Dream of briar roses
-Dream of Tungausy Shaman
-with 20 blank rows
+Briar Roses
+dream-of-tungausy-shaman
+with 20 blank rows]
 	
-To do a dream:
-	if at least one dream is current-test-dream:
-		let item be a random current-test-dream dream;
-		dream item;
+To decide which scene is the null dream: (- 0 -);
+
+To select a dream:
+	if at least one scene is current-test-dream:
+		let item be a random current-test-dream scene;
+		now the selected dream is item;
 	otherwise:
-		blank out the whole of the Table of Candidate Dreams;
-		repeat with item running through dreams:
-			if item is dreamable:
-				choose a blank row in Table of Candidate Dreams;
-				now candidate entry is item;
-		if number of filled rows in Table of Candidate Dreams is 0:
+		now the selected dream is a random dreamable scene;
+		if the selected dream is the null dream:
 			say "You sleep a dreamless sleep.";
-		otherwise:
-			sort Table of Candidate Dreams in random order;
-			choose row 1 in Table of Candidate Dreams;
-			dream Candidate entry.
+			now the player is not asleep;
 
 Dreamer-location is a room that varies.
 
-To dream (item - a dream):
+First when a dream scene begins:
 	now player is not asleep;
 	now dreamer-location is the location;
 	say "You are pulled towards a dream ...";
 	wait for any key;
 	clear the screen;
-	consider start the dream rule of item.
 			
-To wake the player up:
+Last when a dream scene ends:
 	wait for any key;
 	clear the screen;
 	repeat with guy running through asleep people in the location:
 		if a random chance of 1 in 4 succeeds:
 			now guy is not asleep;
-	now the player is not asleep;
 	now the player is yourself;
 	if the player is not in dreamer-location:
 		move the player to dreamer-location;
 	otherwise:
 		try looking.
 
-			
+Section - Ending Dreams
+
+[This mechanism only allows one dream at a time - no dreams within dreams]
+
+Definition: a scene is over:
+	if it is dream and it is not the selected dream, yes;
+	no;
+
+To wake the player up:
+	Now the selected dream is the null dream;
+	Follow the scene changing rules;
 
 Chapter - Dream of Briar Roses
 
-Dream of briar roses is a dream.
+dream-of-briar-roses is a dream scene.
 
-The start the dream rule of dream of briar roses is the start dream of briar roses rule.
+dream-of-briar-roses begins when dream-of-briar-roses is ready to dream. dream-of-briar-roses ends when dream-of-briar-roses is over.
 
-This is the start dream of briar roses rule:
+When dream-of-briar-roses begins:
 	move player to garden of thorns.
 	
 Garden of thorns is a room. "Roses scale the castle walls, all the way up to the window above, behind which your true love lies sleeping."
@@ -134,12 +140,10 @@ A menu question rule (this is the sleeping beauty rule):
 
 Chapter - Dream of Tungausy Shaman
 
-Dream of Tungausy Shaman is a dream.
+dream-of-tungausy-shaman is a recurring dream scene. dream-of-tungausy-shaman begins when dream-of-tungausy-shaman is ready to dream. dream-of-tungausy-shaman ends when dream-of-tungausy-shaman is over.
 
-The start the dream rule of dream of Tungausy Shaman is the start dream of Tungausy Shaman rule.
-
-This is the start dream of Tungausy Shaman rule:
-	now player is the tungausy warrior;
+When dream-of-tungausy-shaman begins:
+	now player is the Tungausy warrior;
 	try looking.
 
 Before the meditation hut is a room. "Around you are the barren wastes of the Tungausy homeland. The sound of loud drum comes from the meditation hut. It sooths and enchants you."
@@ -185,8 +189,5 @@ A menu question rule (this is the vibrating pool rule):
 			say "You walk towards the shaman, knowing what you must sacrifice and what you will gain. 'I will give you my spirit, in exchange for your strength.' The shaman eagerly puts his hands on your breast. As he absorbs your spirit, you see your muscles growing beyond human proportions. You will now be able to defend the tribe in the Everlasting War, but you will never join the ancestor spirits.[paragraph break][bold type]You have lost your soul: -5 spirit. Your muscles have grown exceedingly strong: +5 body.[roman type][paragraph break]";
 			wake the player up;
 		exit.
-			
-
-
 
 Kerkerkruip Dreams ends here.
