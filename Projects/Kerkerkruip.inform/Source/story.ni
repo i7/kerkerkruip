@@ -102,8 +102,11 @@ Section - Testing - Not for release
 	
 [The player carries one scroll of psycholocation and one scroll of mapping.]
 
-Every turn when Banquet is dreamable:
-	Now Banquet is current-test-dream.
+Every turn:
+	if Banquet is dreamable:
+		Now Banquet is current-test-dream;
+	otherwise:
+		now Banquet is not current-test-dream;
 
 [One scroll of the blade is in Entrance Hall.]
 [The Zen room is testobject.
@@ -111,8 +114,8 @@ Entrance to the Arena is testobject.]
 
 [Angel of compassion is testobject.]
 	
-[Last when play begins:
-	increase mind score of the player by 40.]
+Last when play begins:
+	now health of the player is 1.
 
 
 

@@ -197,6 +197,8 @@ Dreamability rule for The Banquet:
 	if the number of seen people who are in the land of the living is less than two, it couldn't be dreamed.
 
 When The Banquet begins:
+	now the health of Chef is the health of the player;
+	now the permanent health of Chef is the health of the player;
 	now player is the Chef;
 	try looking.
 
@@ -218,7 +220,7 @@ banquet-items is a list of people that varies;
 
 Every turn when Banquet is happening:
 	say "A blood-spattered servant approaches you. 'Which guest are we serving tonight?' [one of]he[or]she[at random] asks.";
-	now the current question is "Your reply:";
+	now the current question is "(Which enemy do you select?)";
 	now banquet-menu is {};
 	now banquet-items is {};
 	repeat with entree running through seen banquet-dining people:
@@ -228,7 +230,7 @@ Every turn when Banquet is happening:
 	ask a closed question, in menu mode.
 
 A menu question rule (this is the banquet selection rule):
-	if the current question is "Your reply:":
+	if the current question is "(Which enemy do you select?)":
 		Let m be the number understood;
 		if m > 0 and m <= (the number of entries in banquet-items):
 			let entree be entry m of banquet-items;
@@ -237,7 +239,7 @@ A menu question rule (this is the banquet selection rule):
 			exit.
 
 To prepare a feast of (the entree - a person):
-	say "You make your choice, and two large butchers carrying heavy cleavers approach [bold type][the entree][roman type]. They take hold of [it-them] and stretch [it-them] out on the table.[paragraph break]The other denizens of Kerkerkruip file in and take their places at the table. As the butchers hack off pieces of [the entree], the guests grab them eagerly and stuff them into their drooling orifices. [paragraph break]";
+	say "You make your choice, and two large butchers enter carrying a large serving platter with [bold type][the entree][roman type] strapped to it. They set the platter down on the table.[paragraph break]The other denizens of Kerkerkruip file in behind and take their places. As the butchers hack off pieces of [the entree] with heavy cleavers, the guests grab them eagerly and stuff them into their drooling orifices. [paragraph break]";
 	Let m be a random number between 5 and 10;
 	let overflow be m - health of entree;
 	decrease health of entree by m;
