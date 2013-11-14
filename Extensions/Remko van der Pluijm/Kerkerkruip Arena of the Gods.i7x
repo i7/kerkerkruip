@@ -289,32 +289,11 @@ An attack modifier rule (this is the much harder to discern by Herm bonus rule):
 
 Section - Awarding divine power 
 
-ArenaAwardGranted is a truth state variable that varies. ArenaAwardGranted is false.
-
-Every turn (this is the alternative award at the Arena of the Gods rule):
-	if (the location is the Arena of the Gods) and (combat status is peace) and (ArenaAwardGranted is false):
-		repeat with guy running through dead not off-stage persons:
-			have guy disappear;
-			if guy is grouper and guy is not group leading:
-				let guy2 be a random person accompanied by guy; [Redirect absorption to group leader]
-				unless guy2 is defeated individually:
-					now guy is guy2;
-			if guy is not group leading or group of guy has been defeated or guy is defeated individually:
-				if  ArenaAwardGranted is false:
-					Increase divine favour by 2;
-					now ArenaAwardGranted is true;
-					say "Your God grants you 2 divine favour!".
-
-Killing rule (this is the killingalternative award at the Arena of the Gods rule):
-	if (the killer-guy is the player) and (the location is the Arena of the Gods) and (ArenaAwardGranted is false):
+An absorption stopping rule (this is the alternative award at the Arena of the Gods rule):
+	If the location is the Arena of the Gods:
 		Increase divine favour by 2;
-		now ArenaAwardGranted is true;
-		have the killer-guy disappear;
 		say "Your God grants you 2 divine favour!";
-		rule fails.
-
-The alternative award at the Arena of the Gods rule is listed before the remove all killed monsters from play rule in the every turn rules.
-The killingalternative award at the Arena of the Gods rule is listed before the grant powers when a monster is slain rule in the killing rules.
+		rule succeeds.
 
 Section - Getting out of the Arena
 
