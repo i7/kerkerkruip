@@ -246,14 +246,14 @@ To prepare a feast of (the entree - a person):
 	if overflow > 0:
 		say "The guests consume their victim completely, and then they [bold type]turn on you![roman type][paragraph break]";
 		decrease health of yourself by overflow;
-		now the permanent health of yourself is the health of yourself;
 	say "[The entree] suffers [bold type][m] damage[roman type][if entree is dead], which is [bold type]lethal[roman type][end if]";
 	if overflow > 0:
 		say ". In addition, you suffer [bold type][overflow] damage[roman type]";
 		if yourself is dead:
 			say ", which [bold type]kills you[roman type].";
 			end the game saying "You have been consumed.";
-		otherwise:
+		otherwise if health of yourself < permanent health of yourself:
+			now the permanent health of yourself is the health of yourself;
 			say ", reducing your permanent health to [permanent health of yourself]";
 	if yourself is not dead:
 		say ". All of the diners [bold type]gain [m] health![roman type]";
