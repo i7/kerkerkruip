@@ -264,7 +264,7 @@ To prepare a feast of (the entree - a person):
 	if overflow > 0:
 		say "The guests consume their victim completely, and then they [bold type]turn on you![roman type][paragraph break]";
 		decrease health of yourself by overflow;
-	say "[The entree] suffers [bold type][serving size] damage[roman type][if entree is dead], which is [bold type]lethal[roman type][end if]";
+	say "[The name of the entree] suffers [bold type][serving size] damage[roman type][if entree is dead], which is [bold type]lethal[roman type][end if]";
 	if overflow > 0:
 		say ". In addition, you suffer [bold type][overflow] damage[roman type]";
 		if yourself is dead:
@@ -276,6 +276,13 @@ To prepare a feast of (the entree - a person):
 		say ". All of the diners [bold type]gain [serving size] health![roman type]";
 	Repeat with guy running through banquet-dining people who are not the entree:
 		increase health of guy by the serving size;
+	if yourself is not dead, follow the remove all killed monsters from play rule.
 		
+An absorption stopping rule (this is the chef can't absorb souls rule):
+	if the player is chef:
+		wait for any key;
+		clear the screen;
+		say "As you come unmoored from your dream, you feel the soul of [the test subject] slipping past you, to be lost between worlds...";
+		rule succeeds;
 
 Kerkerkruip Dreams ends here.
