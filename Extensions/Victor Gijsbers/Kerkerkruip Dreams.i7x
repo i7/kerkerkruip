@@ -211,6 +211,7 @@ This is the start the dream of the banquet rule:
 		now the kitchen servant is male;
 	otherwise:
 		now the kitchen servant is female;
+	now every person in Dining Hall is not asleep;
 	try looking.
 
 The Dining Hall is a room. "Cold drafts flow through this vast, gloomy hall. In the center, a single chandelier casts a pool of light over a massive oaken table."
@@ -219,11 +220,11 @@ A chandelier is scenery in the dining hall. The description is "Ancient and orna
 
 A massive oaken table is scenery in the Dining Hall. The description is "There are places set for [the number of banquet-dining people in words]. Among the names, you recognize [the list of seen banquet-dining people]." Understand "chair/chairs" as the table.
 
-The nametags are scenery in the Dining Hall. The description is "There are nametags arranged at places around the table. The names include [the list of seen banquet-dining people][if there is at least one not seen banquet-dining person], and [the number of not seen banquet-dining people in words] that you can't read[end if].". Understand "name/names" and "nametags/tag/tags" as the nametags. Understand "[something related by place-naming]" as the nametags.
+The nametags are scenery in the Dining Hall. The description is "There are nametags arranged at places around the table. The names include [the list of seen banquet-dining people][if there is at least one not seen banquet-dining person], and [the number of not seen banquet-dining people in words] that you can't read[end if].". Understand "name/names" and "nametags/tag/tags" as the nametags. Understand "[something related by table-place-naming]" as the nametags.
 
 A kitchen servant is a person in Dining Hall. "A kitchen servant stands at the edge of the light, awaiting your instructions."
 
-place-naming relates a thing (called the identifier) to a person (called the guest) when the guest is banquet-dining and the identifier is the nametags.
+table-place-naming relates a thing (called the identifier) to a person (called the guest) when the guest is banquet-dining and the identifier is the nametags.
 
 The Dining Hall is not placeable.
 
