@@ -1610,15 +1610,19 @@ An exploding rule:
 			otherwise:
 				say "The explosion does seem to be very feeble, though.";
 		otherwise:
-			if exploding-location is location:
-				say "The Morphean grenade explodes, and you are immediately overwhelmed by sleep.";
-				repeat with guy running through alive people in exploding-location:
-					if guy is sleeper:
-						now guy is asleep;
+			if dreaming is false:
+				if exploding-location is location:
+					say "The Morphean grenade explodes, and you are immediately overwhelmed by sleep.";
+					repeat with guy running through alive people in exploding-location:
+						if guy is sleeper:
+							now guy is asleep;
+				otherwise:
+					repeat with guy running through alive people in exploding-location:
+						if guy is sleeper:
+							now guy is asleep;
 			otherwise:
-				repeat with guy running through alive people in exploding-location:
-					if guy is sleeper:
-						now guy is asleep;
+				if exploding-location is location:
+					say "The grenade doesn't seem to do anything -- and for a moment, you remember that you are already dreaming.";
 		remove noun from play.
 
 

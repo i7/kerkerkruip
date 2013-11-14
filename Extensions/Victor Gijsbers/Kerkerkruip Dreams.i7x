@@ -60,8 +60,10 @@ To do a dream:
 
 Dreamer-location is a room that varies.
 
+Dreaming is a truth state that varies. Dreaming is false.
+
 To dream (item - a dream):
-	now player is not asleep;
+	now dreaming is true;
 	now dreamer-location is the location;
 	say "You are pulled towards a dream ...";
 	wait for any key;
@@ -74,12 +76,15 @@ To wake the player up:
 	repeat with guy running through asleep people in the location:
 		if a random chance of 1 in 4 succeeds:
 			now guy is not asleep;
-	now the player is not asleep;
+	now dreaming is false;
 	now the player is yourself;
+	now the player is not asleep;
+	now main actor is yourself;
 	if the player is not in dreamer-location:
 		move the player to dreamer-location;
 	otherwise:
-		try looking.
+		try looking;
+	now the take no time boolean is false.
 
 			
 
@@ -134,12 +139,13 @@ A menu question rule (this is the sleeping beauty rule):
 
 Chapter - Dream of Tungausy Shaman
 
-Dream of Tungausy Shaman is a dream. Dream of Tungausy Shaman is current-test-dream.
+Dream of Tungausy Shaman is a dream. [Dream of Tungausy Shaman is current-test-dream.]
 
 The start the dream rule of dream of Tungausy Shaman is the start dream of Tungausy Shaman rule.
 
 This is the start dream of Tungausy Shaman rule:
 	now player is the tungausy warrior;
+	now main actor is tungausy warrior;
 	try looking.
 
 Before the meditation hut is a room. "Around you are the barren wastes of the Tungausy homeland. The sound of loud drum comes from the meditation hut. It sooths and enchants you."
