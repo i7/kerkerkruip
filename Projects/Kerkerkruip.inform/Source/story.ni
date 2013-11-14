@@ -104,12 +104,10 @@ Every turn:
 	otherwise:
 		now Banquet is not current-test-dream;
 
+[Dream of Briar Roses is current-test-dream;]
+
 Last when play begins:
 	Now every medium banquet-dining person is seen;
-
-Last when play begins:
-	now health of the player is 1.
-
 
 Section - Flexible Windows relisting
 

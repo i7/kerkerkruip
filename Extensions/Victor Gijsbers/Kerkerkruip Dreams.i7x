@@ -222,9 +222,9 @@ A massive oaken table is scenery in the Dining Hall. The description is "There a
 
 The nametags are scenery in the Dining Hall. The description is "There are nametags arranged at places around the table. The names include [the list of seen banquet-dining people][if there is at least one not seen banquet-dining person], and [the number of not seen banquet-dining people in words] that you can't read[end if].". Understand "name/names" and "nametags/tag/tags" as the nametags. Understand "[something related by table-place-naming]" as the nametags.
 
-A kitchen servant is a person in Dining Hall. "A kitchen servant stands at the edge of the light, awaiting your instructions."
-
 table-place-naming relates a thing (called the identifier) to a person (called the guest) when the guest is banquet-dining and the identifier is the nametags.
+
+A kitchen servant is a person in Dining Hall. "A kitchen servant stands at the edge of the light, awaiting your instructions." Understand "slave", "boy/girl", "waiter/waitress" as the kitchen servant.
 
 The Dining Hall is not placeable.
 
@@ -250,8 +250,11 @@ A menu question rule (this is the banquet selection rule):
 		if m > 0 and m <= (the number of entries in banquet-items):
 			let entree be entry m of banquet-items;
 			prepare a feast of the entree;
-			wake the player up;
-			exit.
+			if yourself is not dead:
+				wake the player up;
+				exit;
+			otherwise:
+				end the game saying "You have been consumed.";
 
 To prepare a feast of (the entree - a person):
 	say "You make your choice, and two large butchers enter carrying a large serving platter with [bold type][the entree][roman type] strapped to it. They set the platter down on the table.[paragraph break]The other denizens of Kerkerkruip file in behind and take their places. As the butchers hack off pieces of [the entree] with heavy cleavers, the guests grab them eagerly and stuff them into their drooling orifices. [paragraph break]";
@@ -266,7 +269,6 @@ To prepare a feast of (the entree - a person):
 		say ". In addition, you suffer [bold type][overflow] damage[roman type]";
 		if yourself is dead:
 			say ", which [bold type]kills you[roman type].";
-			end the game saying "You have been consumed.";
 		otherwise if health of yourself < permanent health of yourself:
 			now the permanent health of yourself is the health of yourself;
 			say ", reducing your permanent health to [permanent health of yourself]";
