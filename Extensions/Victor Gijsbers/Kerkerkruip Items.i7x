@@ -2153,13 +2153,15 @@ To do the adamantine blade shuffle:
 
 Every turn when the adamantine blade is not off-stage (this is the adamantine blade countdown rule):
 	if the main actor is the player:
-		now adamantine blade timer is adamantine blade timer minus 1;
-		if the adamantine blade timer is less than 1:
-			if the adamantine blade is enclosed by the player and the adamantine blade is readied:
-				say "The adamantine blade [bold type]vanishes[roman type] as suddenly as it appeared!";
-			otherwise if the adamantine blade is visible:
-				say "The adamantine blade suddenly vanishes.";
-			remove the adamantine blade from play.
+		now world test subject is player;
+		if adamantine blade is worldsharer:
+			now adamantine blade timer is adamantine blade timer minus 1;
+			if the adamantine blade timer is less than 1:
+				if the adamantine blade is enclosed by the player and the adamantine blade is readied:
+					say "The adamantine blade [bold type]vanishes[roman type] as suddenly as it appeared!";
+				otherwise if the adamantine blade is visible:
+					say "The adamantine blade suddenly vanishes.";
+				remove the adamantine blade from play.
 
 
 Section - Scroll of Protection
@@ -3961,7 +3963,8 @@ Tome of Briar Roses is magical.
 Carry out reading Tome of Briar Roses:
 	remove Tome of Briar Roses from play;
 	say "Magical sleep descends on the world.";
-	repeat with guy running through not off-stage persons:
+	now world test subject is player;
+	repeat with guy running through worldsharer persons:
 		if guy is sleeper:
 			now guy is asleep.
 

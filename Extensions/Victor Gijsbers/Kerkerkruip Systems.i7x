@@ -13,6 +13,46 @@ The test object is an object that varies.
 
 
 
+Part - Keeping track of where things are
+
+Section - Denizen
+
+Definition: a person is a denizen if it is not off-stage and the location of it is placed and it is alive.
+
+Section - World sharing
+
+To decide whether (guy - a thing) and (other guy - a thing) share a world:
+	if guy is a person:
+		if guy is not alive:
+			decide no;
+	if other guy is a person:
+		if other guy is not alive:
+			decide no;
+	if guy is off-stage or other guy is off-stage:
+		decide no;
+	if location of guy is placed and location of other guy is placed:
+		decide yes;
+	let way be best route from (location of guy) to (location of other guy);
+	if way is a direction:
+		decide yes;
+	repeat with wherever running through regions:
+		if location of guy is in wherever:
+			if location of other guy is in wherever:
+				decide yes;
+	decide no.
+
+Section - Worldsharer
+
+[ALWAYS set the world test subject before asking about worldsharers.]
+
+World test subject is a thing that varies. World test subject is yourself.
+
+Definition: a thing is worldsharer if it and world test subject share a world.
+
+
+
+
+
 Part - Properties of rooms
 
 [Standard set of properties:
@@ -798,7 +838,8 @@ A thing can be flaming. A thing is usually not flaming.
 Understand the flaming property as describing a thing. Understand "burning" as flaming.
 
 Every turn (this is the flaming items burn away rule):
-	repeat with item running through flaming not off-stage corruptible things:
+	now world test subject is player;
+	repeat with item running through flaming not off-stage corruptible worldsharer things:
 		if a random chance of 1 in 4 succeeds or destroying heat of material of item + 2 is not greater than heat strength of item:
 			now heat strength of item is 0;
 			now item is not flaming;
@@ -812,7 +853,8 @@ Before printing the name of a flaming thing (called item):
 		say "burning [run paragraph on]".
 
 Every turn (this is the heat destroys items rule):
-	repeat with item running through hot not flaming not off-stage corruptible things:
+	now world test subject is player;
+	repeat with item running through hot not flaming not off-stage corruptible worldsharer things:
 		let n be heat strength of item;
 		let m be destroying heat of the material of item;
 		if m is not greater than n:

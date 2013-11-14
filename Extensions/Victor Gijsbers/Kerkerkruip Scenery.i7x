@@ -131,7 +131,8 @@ Instead of switching off the teleportation beacon:
 
 
 Carry out an actor teleporting (this is the teleportation beacon rule):
-	unless the teleportation beacon is off-stage:
+	now world test subject is actor;
+	if the teleportation beacon is worldsharer:
 		if teleportation-beacon-on is true:
 			now teleportation-destination is location of teleportation beacon.
 

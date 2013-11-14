@@ -549,6 +549,7 @@ Considered monster is a monster that varies. [The monster we are considering.]
 Current monster score is a number that varies. [Tracks how appropriate the current monster is.]
 
 
+
 Chapter - Main routines
 
 Section - The Table of monsters
