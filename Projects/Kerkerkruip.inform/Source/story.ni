@@ -98,11 +98,15 @@ Section - Testing - Not for release
 	move Fafhrd to Entrance Hall;
 	now Fafhrd is asleep.]
 
-Every turn:
+[Every turn:
 	if Banquet is dreamable:
 		Now Banquet is current-test-dream;
 	otherwise:
-		now Banquet is not current-test-dream;
+		now Banquet is not current-test-dream;]
+
+Last when play begins:
+	now Banquet is current-test-dream;
+	Now every medium banquet-dining person is seen;
 
 [Last when play begins:
 	now health of the player is 1.]

@@ -207,9 +207,23 @@ This is the start the dream of the banquet rule:
 	now the health of Chef is the health of the player;
 	now the permanent health of Chef is the health of the player;
 	now player is the Chef;
+	if a random chance of 1 in 2 succeeds:
+		now the kitchen servant is male;
+	otherwise:
+		now the kitchen servant is female;
 	try looking.
 
-The Dining Hall is a room. "A massive oaken table is before you, with places set for [the number of banquet-dining people in words]. Among the names, you recognize [the list of seen banquet-dining people]."
+The Dining Hall is a room. "Cold drafts flow through this vast, gloomy hall. In the center, a single chandelier casts a pool of light over a massive oaken table."
+
+A chandelier is scenery in the dining hall. The description is "Ancient and ornate, this chandelier is wrought from solid silver, with fat candles burning all around it.". Understand "silver", "candle/candles", "light/lamp" as the chandelier.
+
+A massive oaken table is scenery in the Dining Hall. The description is "There are places set for [the number of banquet-dining people in words]. Among the names, you recognize [the list of seen banquet-dining people]." Understand "chair/chairs" as the table.
+
+The nametags are scenery in the Dining Hall. The description is "There are nametags arranged at places around the table. The names include [the list of seen banquet-dining people][if there is at least one not seen banquet-dining person], and [the number of not seen banquet-dining people in words] that you can't read[end if].". Understand "name/names" and "nametags/tag/tags" as the nametags. Understand "[something related by place-naming]" as the nametags.
+
+A kitchen servant is a person in Dining Hall. "A kitchen servant stands at the edge of the light, awaiting your instructions."
+
+place-naming relates a thing (called the identifier) to a person (called the guest) when the guest is banquet-dining and the identifier is the nametags.
 
 The Dining Hall is not placeable.
 
@@ -218,8 +232,8 @@ A person called the Chef is in The Dining Hall. The description of the Chef is "
 banquet-menu is a list of texts that varies;
 banquet-items is a list of people that varies;
 
-Every turn in The Dining Hall:
-	say "A blood-spattered servant approaches you. 'Which guest are we serving tonight?' [one of]he[or]she[at random] asks.";
+Instead of doing anything when the current action involves the kitchen servant:
+	say "The servant approaches you. 'Which guest are we serving tonight?' [it-they of kitchen servant] asks.";
 	now the current question is "(Which enemy do you select?)";
 	now banquet-menu is {};
 	now banquet-items is {};
@@ -240,13 +254,13 @@ A menu question rule (this is the banquet selection rule):
 
 To prepare a feast of (the entree - a person):
 	say "You make your choice, and two large butchers enter carrying a large serving platter with [bold type][the entree][roman type] strapped to it. They set the platter down on the table.[paragraph break]The other denizens of Kerkerkruip file in behind and take their places. As the butchers hack off pieces of [the entree] with heavy cleavers, the guests grab them eagerly and stuff them into their drooling orifices. [paragraph break]";
-	Let m be a random number between 5 and 10;
-	let overflow be m - health of entree;
-	decrease health of entree by m;
+	Let the serving size be a random number between 5 and 10;
+	let overflow be the serving size - health of entree;
+	decrease health of entree by the serving size;
 	if overflow > 0:
 		say "The guests consume their victim completely, and then they [bold type]turn on you![roman type][paragraph break]";
 		decrease health of yourself by overflow;
-	say "[The entree] suffers [bold type][m] damage[roman type][if entree is dead], which is [bold type]lethal[roman type][end if]";
+	say "[The entree] suffers [bold type][serving size] damage[roman type][if entree is dead], which is [bold type]lethal[roman type][end if]";
 	if overflow > 0:
 		say ". In addition, you suffer [bold type][overflow] damage[roman type]";
 		if yourself is dead:
@@ -256,9 +270,9 @@ To prepare a feast of (the entree - a person):
 			now the permanent health of yourself is the health of yourself;
 			say ", reducing your permanent health to [permanent health of yourself]";
 	if yourself is not dead:
-		say ". All of the diners [bold type]gain [m] health![roman type]";
+		say ". All of the diners [bold type]gain [serving size] health![roman type]";
 	Repeat with guy running through banquet-dining people who are not the entree:
-		increase health of guy by m;
+		increase health of guy by the serving size;
 		
 
 Kerkerkruip Dreams ends here.
