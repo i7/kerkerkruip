@@ -219,7 +219,8 @@ The followers rules are a rulebook.
 
 Every turn (this is the have followers follow rule):
 	if main actor is the player:
-		repeat with guy running through alive not off-stage follower persons:
+		now world test subject is player;
+		repeat with guy running through worldsharer follower persons:
 			if the location of guy is not the location of the player:
 				now test subject is guy;
 				consider the followers rules;
@@ -725,9 +726,7 @@ To decide whether teleportation is impossible for (guy - a person):
 		decide no.
 
 A teleport impossible rule (this is the no teleportation outside the dungeon rule):
-	if test subject is off-stage:
-		rule succeeds;
-	otherwise if x-coordinate of (the location of the test subject) is 100:
+	unless test subject is denizen:
 		rule succeeds.
 
 [Finally, it need not be obvious to a person that teleportation is impossible. If a person is a teleport impossible aware, he does.]
@@ -801,7 +800,8 @@ An AI action selection rule for an at-Act person (called P) (this is the telepor
 		increase the Action Weight entry by 35.
 
 Every turn (this is the spontaneous teleport rule):
-	repeat with guy running through spontaneous teleporter not off-stage persons:
+	now world test subject is player;
+	repeat with guy running through spontaneous teleporter worldsharer persons:
 		if teleport amount of guy is not 0:
 			let n be the teleport eagerness of guy;
 			if a random chance of n in 100 succeeds:

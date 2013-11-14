@@ -444,9 +444,9 @@ Carry out remembering:
 				say ", ";
 			otherwise:
 				say ".";
-	if at least two seen not off-stage persons are alive: [because one of them is the player]
+	if at least two seen denizen persons are alive: [because one of them is the player]
 		say "[line break]You have seen the following creatures in these locations:[line break]";
-		repeat with guy running through alive seen not off-stage persons:
+		repeat with guy running through seen denizen persons:
 			unless player is guy:
 				unless last-seen-location of guy is Null-Room:
 					say "- [italic type][the guy][roman type] (level [if group level of the guy is not 0][group level of the guy][otherwise][level of the guy][end if]) in [italic type][the last-seen-location of the guy][roman type] ([if last-seen-location of the guy is not the location]which lies [the road to last-seen-location of the guy] from here[otherwise]where you currently are[end if])[line break]";
@@ -584,19 +584,22 @@ To decide whether (guy - a person) is soul-reflected:
 	decide no.
 
 Carry out sensing when the psycholocation boolean is true:
-	say "As if with a third eye, you can sense:[paragraph break]";
-	let count be 0;
-	repeat with adversary running through alive not off-stage persons:
-		if the adversary is not the player and (the level of the adversary is greater than 0 or adversary is soul-reflected):
-			increment count;
-			if the location of the player is the location of the adversary:
-				say " - [italic type]the soul of [the adversary][roman type] here with you, like [soul description of adversary][line break]";
-				next;
-			let the way be the best route from the location of player to the location of the adversary;
-			if way is a direction:
-				say " - [italic type][soul description of adversary][roman type], [if way is not up and way is not down]from the [end if][way][line break]";
-			otherwise:
-				say " - [italic type][soul description of adversary][roman type], somewhere [general direction from location of the player to location of the adversary][line break]".
+	if player is denizen:
+		say "As if with a third eye, you can sense:[paragraph break]";
+		let count be 0;
+		repeat with adversary running through denizen persons:
+			if the adversary is not the player and (the level of the adversary is greater than 0 or adversary is soul-reflected):
+				increment count;
+				if the location of the player is the location of the adversary:
+					say " - [italic type]the soul of [the adversary][roman type] here with you, like [soul description of adversary][line break]";
+					next;
+				let the way be the best route from the location of player to the location of the adversary;
+				if way is a direction:
+					say " - [italic type][soul description of adversary][roman type], [if way is not up and way is not down]from the [end if][way][line break]";
+				otherwise:
+					say " - [italic type][soul description of adversary][roman type], somewhere [general direction from location of the player to location of the adversary][line break]";
+	otherwise:
+		say "Your psycholocation doesn't seem to work in your current location.".
 
 Carry out sensing when the psycholocation boolean is false:		
 	if greatest power of the player is less than 3:
@@ -613,14 +616,16 @@ Carry out sensing when the psycholocation boolean is false:
 				say "There seems to be no available route towards Malygris.[line break]";
 
 Carry out sensing:
-	if greatest power of the player is greater than 3:
-		repeat with item running through not off-stage epic things:
-			if location of item is not location of the player and location of item is placed:
-				let the way be the best route from the location of player to the location of item;
-				if way is a direction:
-					say "[line break]You sense an epic artefact that can be found by going [way] from here.[line break]";
-				otherwise:
-					say "[line break]You sense an epic artefact that is currently unreachable, but lies somewhere [general direction from location of the player to location of the item].[line break]".
+	if player is denizen:
+		if greatest power of the player is greater than 3:
+			now world test subject is player;
+			repeat with item running through worldsharer epic things:
+				if location of item is not location of the player and location of item is placed:
+					let the way be the best route from the location of player to the location of item;
+					if way is a direction:
+						say "[line break]You sense an epic artefact that can be found by going [way] from here.[line break]";
+					otherwise:
+						say "[line break]You sense an epic artefact that is currently unreachable, but lies somewhere [general direction from location of the player to location of the item].[line break]".
 
 To say general direction from (place1 - a room) to (place2 - a room):
 	let K be a list of directions;

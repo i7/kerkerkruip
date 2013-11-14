@@ -94,13 +94,9 @@ Generation info is a truth state that varies. Generation info is [true]false.
 
 Section - Testing - Not for release
 
-[Lair of the Imp is testobject.]
-
 [Last when play begins:
 	move Fafhrd to Entrance Hall;
 	now Fafhrd is asleep.]
-	
-[The player carries one scroll of psycholocation and one scroll of mapping.]
 
 Every turn:
 	if Banquet is dreamable:
@@ -108,15 +104,8 @@ Every turn:
 	otherwise:
 		now Banquet is not current-test-dream;
 
-[One scroll of the blade is in Entrance Hall.]
-[The Zen room is testobject.
-Entrance to the Arena is testobject.]
-
-[Angel of compassion is testobject.]
-	
-Last when play begins:
-	now health of the player is 1.
-
+[Last when play begins:
+	now health of the player is 1.]
 
 
 Section - Flexible Windows relisting

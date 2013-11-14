@@ -1062,7 +1062,7 @@ The fascinating drawing is scenery in the drawing room. Understand "painting" an
 
 Instead of examining the fascinating drawing:
 	let X be a list of persons;
-	repeat with guy running through alive not off-stage persons:
+	repeat with guy running through denizen persons:
 		unless guy is Malygris or guy is Nameless Horror:
 			add guy to X;
 	let n be the number of dead persons;
@@ -1080,7 +1080,7 @@ Instead of examining the fascinating drawing:
 Adjusted scope for the drawing room is a truth state that varies.
 
 After deciding the scope of the player while adjusted scope for the drawing room is true:
-	repeat with guy running through alive not off-stage persons:
+	repeat with guy running through denizen persons:
 		unless guy is Nameless Horror:   [TODO!!! This is an ugly hack.]
 			place guy in scope.
 
@@ -1993,7 +1993,7 @@ The Zen Room is not extra-accepting.
 The Zen Room is vp-agnostic.
 The Zen Room is civilised.
 
-The rarity of Zen Room is 5.
+The rarity of Zen Room is 6.
 
 The Zen drawings are scenery and plural-named. The Zen drawings are in the Zen room. Understand "drawing" and "beautiful" and "mandala" and "Buddha" as the Zen drawings.
 Instead of examining the Zen drawings, say "Mandalas and pictures of the Buddha. You've never had much respect for these pacifistic religions."
@@ -2003,7 +2003,7 @@ The chairinheritor is a person that varies. The chairinheritor is Malygris.
 When play begins:
 	if a random chance of 1 in 4 succeeds:
 		let X be a list of persons;
-		repeat with guy running through alive talker not off-stage not friendly persons:
+		repeat with guy running through talker denizen not friendly persons:
 			add guy to X;
 		sort X in random order;
 		now chairinheritor is entry 1 of X.
@@ -2047,7 +2047,7 @@ Last check rolling when the player is on a chair (this is the roll out of a chai
 
 Section - Comfy chair
 
-The comfy chair is a chair and scenery in the Zen Room. The description of the comfy chair is "A leather, well worn chair, but quite cozy to look at[if chairinheritor is alive and chairinheritor is not off-stage]. Somehow, you feel it is owned by [the chairinheritor][end if]." Understand "comfortable looking","well worn" and "leather" as the comfy chair.
+The comfy chair is a chair and scenery in the Zen Room. The description of the comfy chair is "A leather, well worn chair, but quite cozy to look at[if chairinheritor and comfy chair share a world]. Somehow, you feel it is owned by [the chairinheritor][end if]." Understand "comfortable looking","well worn" and "leather" as the comfy chair.
  
 Report entering the comfy chair:
 	if the comfy chair is in the Zen room and chairinheritor is not in the Zen room and chairinheritor is alive and chairinheritor is not off-stage and the chairinheritor is not asleep:

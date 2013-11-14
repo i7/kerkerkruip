@@ -627,7 +627,7 @@ To decide whether the player is victorious:
 	if started boolean is false:
 		decide no;
 	let counter be 0;
-	repeat with guy running through alive not off-stage monsters:
+	repeat with guy running through denizen monsters:
 		if the level of guy is 5:
 			unless guy is player-enslaved:
 				now counter is 1;

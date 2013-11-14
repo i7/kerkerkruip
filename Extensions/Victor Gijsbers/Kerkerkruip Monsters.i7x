@@ -641,7 +641,7 @@ Section - The armadillo stomach
 The armadillo stomach is a closed opaque container. The armadillo stomach is part of the ravenous armadillo.
 
 Dungeon interest rule (this is the fill the stomach rule):
-	if ravenous armadillo is not off-stage:
+	if ravenous armadillo is denizen:
 		let item be a random off-stage minor thing;
 		unless item is nothing:
 			move item to the armadillo stomach;
@@ -661,7 +661,7 @@ The armadillo stomach is privately-named.
 
 Section - Armadillo also eats when the player is not around
 
-Every turn when the armadillo is not off-stage (this is the armadillo eats when the player is not around rule):
+Every turn when the armadillo is denizen (this is the armadillo eats when the player is not around rule):
 	unless the ravenous armadillo is asleep:
 		if the location of the player is not the location of the ravenous armadillo:
 			if a random chance of 1 in 5 succeeds:
@@ -669,7 +669,7 @@ Every turn when the armadillo is not off-stage (this is the armadillo eats when 
 
 Section - Armadillo moves around
 
-Every turn when the armadillo is not off-stage (this is the armadillo moves when the player is not around rule):
+Every turn when the armadillo is denizen (this is the armadillo moves when the player is not around rule):
 	unless the armadillo is asleep:
 		if the location of the player is not the location of the ravenous armadillo or there is no perceived threat for the ravenous armadillo:
 			if a random chance of 1 in 20 succeeds:
@@ -1563,9 +1563,9 @@ Killing rule (this is the explode after death rule):
 				if m is less than 5, now m is 5;
 				let n be a random number between 5 and m;
 				if health of the explosion victim is not greater than n:
-					say "Your body explodes vehemently, killing [the explosion victim][if the abyss of the soul is alive and the abyss of the soul is not off-stage]. Your soul attempts to swallow that of your enemy, but before this can happen, you are both sucked into the abyss of the soul[otherwise if the level of the explosion victim is greater than 4]. Your soul attempts to swallow that of your enemy, but [the explosion victim] is quicker and far more powerful, swallowing yours and thus coming back to life. You, however, are destroyed for all eternity[otherwise]! As your soul swallows that of your enemy whole, you feel your body reconstituting itself[end if].[paragraph break]";
+					say "Your body explodes vehemently, killing [the explosion victim][if the abyss of the soul and the player share a world]. Your soul attempts to swallow that of your enemy, but before this can happen, you are both sucked into the abyss of the soul[otherwise if the level of the explosion victim is greater than 4]. Your soul attempts to swallow that of your enemy, but [the explosion victim] is quicker and far more powerful, swallowing yours and thus coming back to life. You, however, are destroyed for all eternity[otherwise]! As your soul swallows that of your enemy whole, you feel your body reconstituting itself[end if].[paragraph break]";
 					if the level of the explosion victim is not greater than 5:
-						unless (the abyss of the soul is alive and the abyss of the soul is not off-stage):
+						unless the abyss of the soul and the player share a world:
 							now the health of the player is 1;
 							now the health of the explosion victim is -1;
 							have an event of the player killing explosion victim;
@@ -1832,10 +1832,9 @@ First killing rule (this is the demon of rage set the stage rule):
 	now demon-of-rage-stored-location is the location of killed-guy.
 		
 Last killing rule (this is the demon of rage gets stronger rule):
-	if demon of rage is not off-stage:
+	if demon of rage and killer-guy share a world:
 		if killed-guy is not the demon of rage and killed-guy is not the player:
-			if x-coordinate of demon-of-rage-stored-location is not 100 and x-coordinate of the location is not 100: [these rooms, such as the maze, are not part of the dungeon]
-				do the demon of rage power-up.
+			do the demon of rage power-up.
 
 To do the demon of rage power-up:
 	now demon of rage is not asleep;
@@ -2188,10 +2187,9 @@ First killing rule (this is the angel of compassion set the stage rule):
 	now angel-of-compassion-stored-location is the location of killed-guy.
 		
 Last killing rule (this is the angel of compassion gets stronger rule):
-	if angel of compassion is not off-stage:
+	if angel of compassion and killer-guy share a world:
 		if killed-guy is not the angel of compassion and killed-guy is not the player:
-			if x-coordinate of angel-of-compassion-stored-location is not 100 and x-coordinate of the location is not 100: [these rooms, such as the maze, are not part of the dungeon]
-				do the angel of compassion power-down.
+			do the angel of compassion power-down.
 
 To do the angel of compassion power-down:
 	if angel-of-compassion-strength > 0:
@@ -3739,7 +3737,7 @@ Carry out summoning brambles:
 
 Section - Unsummoning brambles
 
-Every turn when brambles are not off-stage:
+Every turn when brambles and the player share a world:
 	if combat status is peace:
 		if brambles are in the location of the player:
 			say "The brambles [bold type]wither and die[roman type].";
@@ -4157,14 +4155,13 @@ Section - Overmind bonus
 To decide which number is the overmind bonus of (guy - a person):
 	if guy is off-stage:
 		decide on 0;
-	otherwise if the overmind is not off-stage:
+	otherwise if guy and the overmind share a world:
 		unless the faction of the overmind hates faction of guy:
 			unless level of guy is greater than 3:
-				unless x-coordinate of location of guy is 100: [not in normal dungeon]
-					let n be level of guy;
-					if group level of guy > n:
-						now n is group level of guy;
-					decide on n;
+				let n be level of guy;
+				if group level of guy > n:
+					now n is group level of guy;
+				decide on n;
 	otherwise if power of the overmind is granted:
 		if guy is not the player:
 			unless faction of the player hates faction of guy:
@@ -4173,11 +4170,11 @@ To decide which number is the overmind bonus of (guy - a person):
 	decide on 0.
 
 A faculty bonus rule (this is the overmind faculty bonus rule):
-	if the overmind is not off-stage or power of the overmind is granted:
+	if (the overmind and the test subject share a world) or power of the overmind is granted:
 		increase faculty bonus score by overmind bonus of test subject.
 
 An attack modifier rule (this is the overmind attack and defence bonus rule):
-	if the overmind is not off-stage or power of the overmind is granted:
+	if (the overmind and the global attacker share a world) or power of the overmind is granted:
 		if (overmind bonus of the global attacker) is greater than 0:
 			if the numbers boolean is true, say " + [overmind bonus of the global attacker] (overmind)[run paragraph on]";
 			increase the attack strength by overmind bonus of the global attacker;
@@ -4315,7 +4312,7 @@ Check calling:
 		say "You do not possess that power." instead.
 
 Check calling:
-	if the noun is off-stage or the noun is not alive:
+	unless the player and the noun share a world:
 		take no time;
 		say "[The noun] [is-are] not available for calling." instead.
 
@@ -4760,7 +4757,8 @@ Concentration link relates one person (called the linked guy) to one person.
 The verb to be linked to implies the concentration link relation. 
 
 An attack modifier rule (this is the link concentration attack modifier rule):
-	if an alive not off-stage person is linked to the actor:
+	now world test subject is the actor;
+	if a worldsharer person is linked to the actor:
 		let the bonus be 0;
 		if the concentration of linked guy of the actor is:
 			-- 0:
@@ -4776,7 +4774,8 @@ An attack modifier rule (this is the link concentration attack modifier rule):
 		increase the attack strength by the bonus.
 
 Rule for damage modifier (this is the link concentration damage modifier rule):
-	if an alive not off-stage person is linked to the actor:
+	now world test subject is the actor;
+	if a worldsharer person is linked to the actor:
 		let the bonus be 0;
 		if the concentration of linked guy of the actor is:
 			-- 2:
@@ -4790,12 +4789,14 @@ Rule for damage modifier (this is the link concentration damage modifier rule):
 		increase the attack damage by the bonus.
 
 Status attribute rule (this is the link status rule):
-	if an alive not off-stage person is linked to the player:
+	now world test subject is the player;
+	if a worldsharer person is linked to the player:
 		if long status is true:
 			say "You have [bold type]linked[roman type] yourself to [the linked guy of the player].[line break][run paragraph on]".
 
 Chance to win rule (this is the CTW link concentration bonus rule):
-	if an alive not off-stage person is linked to the running AI:
+	now world test subject is the running AI;
+	if a worldsharer person is linked to the running AI:
 		if the concentration of linked guy of the running AI is:
 			-- 1:
 				increase the chance-to-win by 2;
@@ -4806,7 +4807,7 @@ Chance to win rule (this is the CTW link concentration bonus rule):
 
 Every turn when a person is linked to the player (this is the unravelling link rule):
 	let guy be linked guy of the player;
-	if guy is not alive or guy is off-stage:
+	unless guy and the player share a world:
 		say "Your link with [the guy] [bold type]disappears[roman type].";
 		now nobody is linked to the player;
 	otherwise:
@@ -5740,7 +5741,7 @@ Carry out the abyss of the soul pulsating:
 Section - Growing
 
 An absorption stopping rule (this is the abyss of the soul absorbs all souls rule):
-	if the abyss of the soul is alive and the abyss of the soul is not off-stage:
+	if the abyss of the soul and test subject share a world:
 		if the level of test subject is not 0 and the level of test subject is not 10:
 			if the abyss of the soul is not gargantuan:
 				now the abyss of the soul is the size after the size of the abyss of the soul;

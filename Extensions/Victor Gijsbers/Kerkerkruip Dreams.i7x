@@ -4,97 +4,97 @@ Use authorial modesty.
 
 Section - The dream kind
 
-A scene can be dream. [A dream can be dreamt or undreamt. A dream is usually undreamt. [Dreamt once dream.]
-A dream can be redreamable. A dream is usually not redreamable. [Redreamable dreams can be dreamt more than once.]]
+A dream is a kind of object. A dream can be dreamt or undreamt. A dream is usually undreamt. [Dreamt once dream.]
+A dream can be redreamable. A dream is usually not redreamable. [Redreamable dreams can be dreamt more than once.]
 
-Definition: a scene is dreamt rather than undreamt if it has happened.
+Dreamable test boolean is a truth state that varies.
 
-Section - Dreamability
+A dream has a rule called the dreamable rule.
+The dreamable rule of a dream is usually the simple dreamable rule.
 
-Dreamability rules is a scene based rulebook. Dreamability rules have outcomes it could be dreamed (success) and it couldn't be dreamed (failure).
+This is the simple dreamable rule:
+	now dreamable test boolean is true.
 
-Dreamability rule for a scene (called the potential dream) (this is the can only dream dreams rule):
-	if the potential dream is not dream, it couldn't be dreamed;
+To decide whether (potential dream - a dream) is dreamable:
+	if potential dream is dreamt and potential dream is not redreamable:
+		decide on false;
+	otherwise:
+		consider dreamable rule of potential dream;
+		decide on dreamable test boolean.
 
-Dreamability rule for a scene (called the potential dream) (this is the can't dream non-recurring dreams twice rule):
-	if the potential dream is dreamt and the potential dream is not recurring, it couldn't be dreamed;
-
-Dreamability rule for a scene (this is the default dreamability rule):
-	it could be dreamed.
-
-The can only dream dreams rule is listed first in the dreamability rules.
-The can't dream non-recurring dreams twice rule is listed last in the dreamability rules.
-The default dreamability rule is listed last in the dreamability rules.
-
-Definition: a scene (called the potential dream) is dreamable:
-	consider the dreamability rules for the potential dream;
-	decide on whether or not the outcome of the rulebook is the it could be dreamed outcome.
+A dream has a rule called the start the dream rule.
 
 Section - Special option for testing
 
-A scene can be current-test-dream. [Make a dream current-test-dream for guaranteed dreaming of it. Best to make it recurring as well, or there may be trouble]
+[But not "only for testing", because I reference it below.]
+
+A dream can be current-test-dream. [Make a dream current-test-dream for guaranteed dreaming of it.]
 	
 Section - Starting dreams
 
-The selected dream is a scene that varies. 
-
-Definition: a scene is ready to dream if the player is asleep and it is the selected dream.
-
 Every turn when the player is asleep:
-	select a dream.
+	do a dream.
 	
-To decide which scene is the null dream: (- 0 -);
-
-To select a dream:
-	if at least one scene is current-test-dream:
-		let item be a random current-test-dream scene;
-		now the selected dream is item;
+Table of Candidate Dreams
+Candidate
+Dream of briar roses
+Dream of Tungausy Shaman
+with 20 blank rows
+	
+To do a dream:
+	if at least one dream is current-test-dream:
+		let item be a random current-test-dream dream;
+		dream item;
 	otherwise:
-		now the selected dream is a random dreamable scene;
-		if the selected dream is the null dream:
+		blank out the whole of the Table of Candidate Dreams;
+		repeat with item running through dreams:
+			if item is dreamable:
+				choose a blank row in Table of Candidate Dreams;
+				now candidate entry is item;
+		if number of filled rows in Table of Candidate Dreams is 0:
 			say "You sleep a dreamless sleep.";
-			now the player is not asleep;
+		otherwise:
+			sort Table of Candidate Dreams in random order;
+			choose row 1 in Table of Candidate Dreams;
+			dream Candidate entry.
 
 Dreamer-location is a room that varies.
 
-First when a dream scene begins:
-	now player is not asleep;
+Dreaming is a truth state that varies. Dreaming is false.
+
+To dream (item - a dream):
+	now dreaming is true;
 	now dreamer-location is the location;
 	say "You are pulled towards a dream ...";
 	wait for any key;
 	clear the screen;
+	consider start the dream rule of item.
 			
-Last when a dream scene ends:
+To wake the player up:
 	wait for any key;
 	clear the screen;
 	repeat with guy running through asleep people in the location:
 		if a random chance of 1 in 4 succeeds:
 			now guy is not asleep;
+	now dreaming is false;
 	now the player is yourself;
+	now the player is not asleep;
+	now main actor is yourself;
 	if the player is not in dreamer-location:
 		move the player to dreamer-location;
 	otherwise:
-		try looking.
+		try looking;
+	now the take no time boolean is false.
 
-Section - Ending Dreams
-
-[This mechanism only allows one dream at a time - no dreams within dreams]
-
-Definition: a scene is over:
-	if it is dream and it is not the selected dream, yes;
-	no;
-
-To wake the player up:
-	Now the selected dream is the null dream;
-	Follow the scene changing rules;
+			
 
 Chapter - Dream of Briar Roses
 
-dream-of-briar-roses is a dream scene.
+Dream of briar roses is a dream.
 
-dream-of-briar-roses begins when dream-of-briar-roses is ready to dream. dream-of-briar-roses ends when dream-of-briar-roses is over.
+The start the dream rule of dream of briar roses is the start dream of briar roses rule.
 
-When dream-of-briar-roses begins:
+This is the start dream of briar roses rule:
 	move player to garden of thorns.
 	
 Garden of thorns is a room. "Roses scale the castle walls, all the way up to the window above, behind which your true love lies sleeping."
@@ -139,10 +139,13 @@ A menu question rule (this is the sleeping beauty rule):
 
 Chapter - Dream of Tungausy Shaman
 
-dream-of-tungausy-shaman is a recurring dream scene. dream-of-tungausy-shaman begins when dream-of-tungausy-shaman is ready to dream. dream-of-tungausy-shaman ends when dream-of-tungausy-shaman is over.
+Dream of Tungausy Shaman is a dream. [Dream of Tungausy Shaman is current-test-dream.]
 
-When dream-of-tungausy-shaman begins:
-	now player is the Tungausy warrior;
+The start the dream rule of dream of Tungausy Shaman is the start dream of Tungausy Shaman rule.
+
+This is the start dream of Tungausy Shaman rule:
+	now player is the tungausy warrior;
+	now main actor is tungausy warrior;
 	try looking.
 
 Before the meditation hut is a room. "Around you are the barren wastes of the Tungausy homeland. The sound of loud drum comes from the meditation hut. It sooths and enchants you."
@@ -157,13 +160,13 @@ A thing called the lodge is scenery in Before the meditation hut. Understand "hu
 The indigenous herbs are scenery in Before the meditation hut. The description of the indigenous herbs is "These herbs smell familiar. You have been here often." Instead of smelling in Before the meditation hut: try examining the indigenous herbs.
 
 Instead of smelling the indigenous herbs:
-	try examining the indigenous herbs instead.
+	try examining the indigenous herbs.
 
-Instead of going inside in Before the meditation hut:
+Instead of going inside in before the meditation hut:
 	try going to the lodge.
 
 Instead of entering the lodge:
-	try going to the lodge instead.
+	try going to the lodge.
 	
 Instead of going to the lodge:
 	say "Though the drums and herbs sooth and encourage you, your knees still shake as you walk into the hut.";
@@ -188,26 +191,23 @@ A menu question rule (this is the vibrating pool rule):
 			say "You walk towards the shaman, knowing what you must sacrifice and what you will gain. 'I will give you my spirit, in exchange for your strength.' The shaman eagerly puts his hands on your breast. As he absorbs your spirit, you see your muscles growing beyond human proportions. You will now be able to defend the tribe in the Everlasting War, but you will never join the ancestor spirits.[paragraph break][bold type]You have lost your soul: -5 spirit. Your muscles have grown exceedingly strong: +5 body.[roman type][paragraph break]";
 			wake the player up;
 		exit.
+			
+
 
 Chapter - Dream of the Banquet
 
-The Banquet is a recurring dream scene. The Banquet begins when The Banquet is ready to dream. The Banquet ends when The Banquet is over.
+Dream of the Banquet is a dream. Dream of the Banquet is redreamable. The dreamable rule of Dream of the Banquet is the must see two diners before dreaming rule. The start the dream rule of Dream of the Banquet is the start the dream of the banquet rule.
 
-Dreamability rule for The Banquet:
-	if the number of seen people who are in the land of the living is less than two, it couldn't be dreamed.
+Definition: a person (called guy) is banquet-dining if guy opposes yourself and (guy and yourself share a world).
 
-When The Banquet begins:
+This is the must see two diners before dreaming rule:
+	Now dreamable test boolean is whether or not the number of seen banquet-dining people is at least two;
+
+This is the start the dream of the banquet rule:
 	now the health of Chef is the health of the player;
 	now the permanent health of Chef is the health of the player;
 	now player is the Chef;
 	try looking.
-
-Definition: a room is in the land of the living if it is placed.
-Definition: the maze is in the land of the living: yes.
-
-Definition: a person is in the land of the living if it is alive and the location of it is in the land of the living.
-
-Definition: a person is banquet-dining if it is in the land of the living and it opposes yourself.
 
 The Dining Hall is a room. "A massive oaken table is before you, with places set for [the number of banquet-dining people in words]. Among the names, you recognize [the list of seen banquet-dining people]."
 
@@ -218,7 +218,7 @@ A person called the Chef is in The Dining Hall. The description of the Chef is "
 banquet-menu is a list of texts that varies;
 banquet-items is a list of people that varies;
 
-Every turn when Banquet is happening:
+Every turn in The Dining Hall:
 	say "A blood-spattered servant approaches you. 'Which guest are we serving tonight?' [one of]he[or]she[at random] asks.";
 	now the current question is "(Which enemy do you select?)";
 	now banquet-menu is {};
@@ -246,13 +246,16 @@ To prepare a feast of (the entree - a person):
 	if overflow > 0:
 		say "The guests consume their victim completely, and then they [bold type]turn on you![roman type][paragraph break]";
 		decrease health of yourself by overflow;
+		now the permanent health of yourself is the health of yourself;
 	say "[The entree] suffers [bold type][m] damage[roman type][if entree is dead], which is [bold type]lethal[roman type][end if]";
 	if overflow > 0:
 		say ". In addition, you suffer [bold type][overflow] damage[roman type]";
-	if yourself is dead:
-		say ", which [bold type]kills you[roman type].";
-		end the game saying "You have been consumed.";
-	otherwise:
+		if yourself is dead:
+			say ", which [bold type]kills you[roman type].";
+			end the game saying "You have been consumed.";
+		otherwise:
+			say ", reducing your permanent health to [permanent health of yourself]";
+	if yourself is not dead:
 		say ". All of the diners [bold type]gain [m] health![roman type]";
 	Repeat with guy running through banquet-dining people who are not the entree:
 		increase health of guy by m;
