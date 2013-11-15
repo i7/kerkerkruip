@@ -98,16 +98,17 @@ Section - Testing - Not for release
 	move Fafhrd to Entrance Hall;
 	now Fafhrd is asleep.]
 
+[Last when play begins:
+	Now every medium banquet-dining person is seen;
+
 Every turn:
 	if Banquet is dreamable:
 		Now Banquet is current-test-dream;
 	otherwise:
-		now Banquet is not current-test-dream;
+		now Banquet is not current-test-dream;]
 
-[Dream of Briar Roses is current-test-dream;] 
+Dream of Briar Roses is current-test-dream;
 
-Last when play begins:
-	Now every medium banquet-dining person is seen;
 
 Section - Flexible Windows relisting
 

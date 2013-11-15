@@ -32,7 +32,7 @@ A dream can be current-test-dream. [Make a dream current-test-dream for guarante
 	
 Section - Starting dreams
 
-Every turn when the player is asleep:
+Every turn when the player is asleep and dreaming is false:
 	do a dream.
 	
 Table of Candidate Dreams
@@ -200,6 +200,8 @@ Dream of the Banquet is a dream. Dream of the Banquet is redreamable. The dreama
 
 Definition: a person (called guy) is banquet-dining if guy opposes yourself and (guy and yourself share a world).
 
+Definition: Malygris is banquet-dining if Malygris is not dead and the location of Malygris is the location of yourself.
+
 This is the must see two diners before dreaming rule:
 	Now dreamable test boolean is whether or not the number of seen banquet-dining people is at least two;
 
@@ -269,14 +271,12 @@ To prepare a feast of (the entree - a person):
 		say ". In addition, you suffer [bold type][overflow] damage[roman type]";
 		if yourself is dead:
 			say ", which [bold type]kills you[roman type].";
-		otherwise if health of yourself < permanent health of yourself:
-			now the permanent health of yourself is the health of yourself;
-			say ", reducing your permanent health to [permanent health of yourself]";
-	if yourself is not dead:
-		say ". All of the diners [bold type]gain [serving size] health![roman type]";
 	Repeat with guy running through banquet-dining people who are not the entree:
 		increase health of guy by the serving size;
-	if yourself is not dead, follow the remove all killed monsters from play rule.
+	if yourself is not dead:
+		say ". All of the diners [bold type]gain [serving size] health![roman type]";
+		[a bit of a hack - allowing every turn rules to run normally might be better here:]
+		follow the remove all killed monsters from play rule.
 		
 An absorption stopping rule (this is the chef can't absorb souls rule):
 	if the player is chef:
