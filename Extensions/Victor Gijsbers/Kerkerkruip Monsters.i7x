@@ -123,21 +123,11 @@ Section - Table of Enemy Powers
 
 Table of Enemy Powers
 power	faculty1	faculty2
-power of the armadillo	body	spirit
-power of the ape	body	--
-power of the daggers	spirit	body
-power of Miranda	mind	--
-power of the wisps	spirit	--
-power of the chains	spirit	--
-power of the bomb	body	--
-power of the Reaper	spirit	--
-power of rage	mind	--
-power of the hound	mind	--
-power of the mindslug	mind	spirit
-power of the tentacle	mind	--
-power of the minotaur	body	--
-power of the Fanatics of Aite	spirit	--
-power of Bodmall	body	--
+(a power)	(a faculty)	(a faculty)
+
+
+
+
 
 Chapter - Level 1 - Swarm of Daggers
 
@@ -244,6 +234,10 @@ The power level of power of the daggers is 1.
 The command text of power of the daggers is "pierce[if pierce-cooldown is not 0] ([pierce-cooldown])[end if]".
 The description of power of the daggers is "Type: active combat ability.[paragraph break]Command: pierce [italic type]someone[roman type].[paragraph break]Effect: You attack the target. A successful hit deals 2 + body/5 extra damage. This ability has a cooldown of 12 - spirit/3 turns."
 The power-name of power of the daggers is "power of the daggers".
+
+Table of Enemy Powers (continued)
+power	faculty1	faculty2
+power of the daggers	spirit	body
 
 Absorbing power of the daggers:
 	increase melee of the player by 2;
@@ -425,12 +419,14 @@ Section - Power
 
 The power of the ape is a power. Blood ape grants power of the ape.
 The power level of power of the ape is 1.
-
 The maximum ape power is a size that varies.
-
 The command text of power of the ape is "[if maximum ape power is not tiny and maximum ape power is not small and maximum ape power is not medium]ape power[end if]".
 The description of power of the ape is "Type: passive ability.[paragraph break]Command: none.[paragraph break]Effect: Whenever one of your attacks deals damage, you grow. This growth lasts until the end of combat, and you can never grow bigger than the blood ape was when you killed it. In addition to the usual benefits and penalties of growing, you regain 1 + body/3 points of health whenever you grow."
 The power-name of power of the ape is "power of the ape".
+
+Table of Enemy Powers (continued)
+power	faculty1	faculty2
+power of the ape		body	--
 
 Absorbing power of the ape:
 	now maximum ape power is size of the blood ape;
@@ -709,6 +705,10 @@ The command text of power of the armadillo is "scales[if scales-cooldown is not 
 The description of power of the armadillo is "Type: reactive combat ability.[paragraph break]Command: scales.[paragraph break]Effect: As a reaction, you can use the scales skill to cover yourself in damage absorbing scales. The damage of the current attack will be reduced by 5 + body/3 points. This ability has a cooldown of 10 - spirit/4 turns."
 The power-name of power of the armadillo is "power of the armadillo".
 
+Table of Enemy Powers (continued)
+power	faculty1	faculty2
+power of the armadillo	body	spirit
+
 Absorbing power of the armadillo:
 	increase melee of the player by 1;
 	increase permanent health of the player by 5;
@@ -898,6 +898,11 @@ The power level of power of Miranda is 1.
 The command text of power of Miranda is "stun".
 The description of power of Miranda is "Type: active combat ability.[paragraph break]Command: stun [italic type]someone[roman type].[paragraph break]Effect: You attack the target. A successful hit deals 1 less damage, but it stuns the target for a number of turns equal to your mind score. A stunned person has a -1 attack penalty, and a penalty on body, mind and spirit equal to your mind/2."
 The power-name of power of Miranda is "power of Miranda".
+
+Table of Enemy Powers (continued)
+power	faculty1	faculty2
+power of Miranda		mind	--
+
 
 Absorbing power of Miranda:
 	increase melee of the player by 1;
@@ -1101,6 +1106,10 @@ The command text of power of the wisps is "torment[if torment-cooldown is not 0]
 The description of power of the wisps is "Type: active ability.[paragraph break]Command: torment.[paragraph break]Effect: A wave of torment will pass through the room, breaking everyone's concentration. (A person has a 2% chance of resisting this effect per point of mind.) This ability has a cooldown of 12 - spirit/3 turns."
 The power-name of power of the wisps is "power of the wisps".
 The power of the wisps is not sacrificable.
+
+Table of Enemy Powers (continued)
+power	faculty1	faculty2
+power of the wisps		spirit	--
 
 Wisp-strength is a number that varies. Wisp-strength is 0.
 
@@ -1311,6 +1320,10 @@ The power level of power of the chains is 2.
 The command text of power of the chains is "lash[if lash-cooldown is not 0] ([lash-cooldown])[end if]".
 The description of power of the chains is "Type: reactive combat ability.[paragraph break]Command: lash.[paragraph break]Effect: As a reaction, you attack your attacker. Whether you get to strike first is determined randomly, but the probability increases with your spirit score. (It is 50% at a spirit score of 8.) This ability has a cooldown of 10 - spirit/5 turns."
 The power-name of power of the chains is "power of the chains".
+
+Table of Enemy Powers (continued)
+power	faculty1	faculty2
+power of the chains	spirit	--
 
 Absorbing power of the chains:
 	increase melee of the player by 2;
@@ -1524,6 +1537,10 @@ The command text of power of the bomb is "explode on death".
 The description of power of the bomb is "Type: passive ability.[paragraph break]Command: none.[paragraph break]Effect: If you are killed by someone's attack, your body will explode and deal damage to the lowest health enemy in the room who might give you a soul upon death. The amount of damage dealt is a random number between 5 and your body score. (But it is never less than 5, even if your body is less than 5.) If the amount of damage you deal is enough to kill your victim, you will absorb the soul and survive."
 The power-name of power of the bomb is "power of the bomb".
 
+Table of Enemy Powers (continued)
+power	faculty1	faculty2
+power of the bomb	body	--
+
 Absorbing power of the bomb:
 	increase melee of the player by 2;
 	increase defence of the player by 2;
@@ -1712,6 +1729,10 @@ The power level of power of the Reaper is 2.
 The command text of power of the Reaper is "reap".
 The description of power of the Reaper is "Type: active ability.[paragraph break]Command: reap [italic type]someone[roman type].[paragraph break]Effect: You can reap anyone you have seen, and this ability will instantly teleport you to their location. It can even be used as a reaction in combat. Reaping will reduce your health and maximum health by an amount equal to the level of the highest power you have absorbed; but you have a spirit * 3% probability of avoiding that penalty."
 The power-name of power of the Reaper is "power of the Reaper".
+
+Table of Enemy Powers (continued)
+power	faculty1	faculty2
+power of the Reaper	spirit	--
 
 Absorbing power of the Reaper:
 	increase melee of the player by 2;
@@ -1934,6 +1955,10 @@ The command text of power of rage is "howl".
 The description of power of rage is "Type: active ability.[paragraph break]Command: howl.[paragraph break]Effect: You make your next attack with a +4 attack bonus and a damage bonus equal to 2 + mind/3. Your defence is permanently decreased by 1 point."
 The power-name of power of rage is "power of rage".
 
+Table of Enemy Powers (continued)
+power	faculty1	faculty2
+power of rage		mind	--
+
 Absorbing power of rage:
 	increase melee of the player by 2;
 	increase permanent health of the player by 10;
@@ -2070,6 +2095,10 @@ The command text of power of the hound is "counterstrike".
 The description of power of the hound is "Type: passive ability.[paragraph break]Command: none.[paragraph break]After you are attacked, with a probability of (mind - 2) / mind, you get a chance for an immediate counterstrike. If this happens, you will automatically win the initiative for that turn. You can perform any action you wish, just as normal, but if you do choose to retaliate against your attacker, you get a +2 attack and +2 damage bonus. Any action that leads to an attack will count as a counterstrike (including the special pierce and stun powers)."
 The power-name of power of the hound is "power of the hound".
 Understand "counterstrike" as a mistake ("[if the power of the hound is granted and the player is at-React]You will retaliate soon, but now you must react to [possessive of the main actor]'s attack![otherwise if the power of the hound is granted]You are prepared to make counterstrikes, but only after you have been attacked.[otherwise]You do not have the power of the hound.").
+
+Table of Enemy Powers (continued)
+power	faculty1	faculty2
+power of the hound	mind	--
 
 Status skill rule (this is the power of the hound status skill rule):
 	if power of the hound is granted:
@@ -2268,9 +2297,12 @@ Section - Power
 The power of compassion is a power. The angel of compassion grants the power of compassion.
 The power level of power of compassion is 2.
 The command text of power of compassion is "grief".
-The description of power of compassion is "Type: active ability.[paragraph break]Command: grief.[paragraph break]As an action or reaction, you can start or stop projecting an aura of grief. While the aura of grief is active, all attack made by or against you suffer a penalty equal to (your spirit + number of dead people) / 4."
+The description of power of compassion is "Type: active ability.[paragraph break]Command: grief.[paragraph break]As an action or reaction, you can start or stop projecting an aura of grief. While the aura of grief is active, all attacks made by or against you suffer a penalty equal to (your spirit + number of dead people) / 4."
 The power-name of power of compassion is "power of compassion".
 
+Table of Enemy Powers (continued)
+power	faculty1	faculty2
+power of compassion	spirit	--
 
 Status skill rule (this is the compassion status skill rule):
 	if the power of compassion is granted:
@@ -2643,6 +2675,10 @@ The power level of power of the mindslug is 3.
 The command text of power of the mindslug is "enslave[if enslave-cooldown is not 0] ([enslave-cooldown])[end if]".
 The description of power of the mindslug is "Type: active ability.[paragraph break]Command: enslave [italic type]someone[roman type].[paragraph break]Effect: You attempt to enslave an enemy, turning him or her into your thrall. Your attempt is successful if you succeed at a mind check against 5 + mind of your enemy + health of your enemy + (2 * concentration of your enemy) - (2 * your concentration). In general, it will be necessary to decrease your enemy's health before trying to enslave him or her. This ability has a cooldown of 9 - (spirit / 3) turns."
 The power-name of power of the mindslug is "power of the mindslug".
+
+Table of Enemy Powers (continued)
+power	faculty1	faculty2
+power of the mindslug	mind	spirit
 
 Absorbing power of the mindslug:
 	increase melee of the player by 3;
@@ -3051,6 +3087,10 @@ The command text of power of the tentacle is "sprout".
 The description of power of the tentacle is "Type: active ability.[paragraph break]Command: sprout [italic type]a number[roman type].[paragraph break]Effect: You sprout between 1 and 4 horrifying tentacles, which may turn anyone else in the room insane. You yourself will permanently lose as many points of mind as you sprout tentacles. Everyone else has to make a mind check against 4 + (4 * number of tentacles) - (that person's health / 3) + your concentration. If they fail the mind check, they go insane, and will start attacking random people including themselves. As additional effects, if you sprout at least 2 tentacles, everyone will lose their concentration; if you sprout at least 3 tentacles, all current attacks against you will be interrupted; and if you sprout 4 tentacles, everyone except for yourself will be stunned for 6 turns."
 The power-name of power of the tentacle is "power of the tentacle".
 
+Table of Enemy Powers (continued)
+power	faculty1	faculty2
+power of the tentacle	mind	--
+
 Absorbing power of the tentacle:
 	increase melee of the player by 3;
 	increase defence of the player by 3;
@@ -3209,6 +3249,10 @@ The power level of power of the minotaur is 3.
 The command text of power of the minotaur is "axe proficiency".
 The description of power of the minotaur is "Type: passive ability.[paragraph break]Command: none.[paragraph break]Effect: You can use the minotaur's axe to maze people. In the maze, you will get a +3 bonus to body, mind and spirit. Furthermore and independent of your location, you get special proficiency with axes, granting you a (your body)% probability of dealing 10 bonus damage when you hit someone with an axe."
 The power-name of power of the minotaur is "power of the minotaur".
+
+Table of Enemy Powers (continued)
+power	faculty1	faculty2
+power of the minotaur	body	--
 
 Absorbing power of minotaur:
 	increase melee of the player by 3;
@@ -3473,6 +3517,11 @@ The command text of power of the fanatics of Aite is "sacrifice".
 The description of power of the fanatics of Aite is "Type: active and passive ability.[paragraph break]Command: sacrifice (while not in another god's temple).[paragraph break]Effect: You can sacrifice to Aite even when you are not in her temple, though the effect will not work in the temples of other gods. Once you worship Aite, the probability that her combat interventions will occur increases, the probability that they will benefit you increases, and they start dealing more damage. All these effects scale with your spirit score."
 The power-name of power of the fanatics of Aite is "power of the fanatics".
 
+Table of Enemy Powers (continued)
+power	faculty1	faculty2
+power of the Fanatics of Aite	spirit	--
+
+
 Absorbing power of the Fanatics of Aite:
 	increase melee of the player by 4;
 	increase defence of the player by 4;
@@ -3663,6 +3712,11 @@ The power level of power of Bodmall is 4.
 The command text of power of Bodmall is "[if brambles are not in the location]brambles[otherwise]launch[end if]".
 The description of power of Bodmall is "Type: active combat ability.[paragraph break]Command: brambles; launch.[paragraph break]The 'brambles' command will summon bushes of thorns that impede the movement of your enemies, giving them a -2 attack penalty. After a few turns, these branches will start growing thorns. If you wait longer, they will also grow different types of fruit.[paragraph break]The 'launch' command launches these thorns and fruit at your enemies (or, for some fruits, yourself). The thorns will deal between 1 and [italic type]n[roman type] damage, where [italic type]n[roman type] is the number of times the thorns have grown (tiny = 1, terrible = 5). In addition, the thorns have an [italic type]n[roman type] * 20% chance of breaking concentration. Different types of fruits have different effects; experiment with them! Both the brambles and the launch command can be used as an action or a reaction.[paragraph break]Your body score has several effects on how fast the thorns and the fruit will grow; a higher body score means that both will appear sooner and have less chance of disappearing again.[paragraph break]In addition, as a druid you are immune to smoke, and get a +1 attack bonus with wooden weapons."
 The power-name of power of Bodmall is "power of Bodmall".
+
+Table of Enemy Powers (continued)
+power	faculty1	faculty2
+power of Bodmall		body	--
+
 
 The druid is a person that varies. The druid is Bodmall. [The person whose scores determine how the brambles work.]
 	
@@ -4306,6 +4360,10 @@ The power level of power of the overmind is 4.
 The command text of power of the overmind is "call".
 The description of power of the overmind is "Type: active and passive ability.[paragraph break]Command: call [italic type]someone[roman type].[paragraph break]You can call any person in the game, except Malygris. Calling someone will make that person move one room towards you, if possible.[paragraph break]In addition, the power of the overmind makes your allies more powerful. They get an attack and defence bonus equal to mind/5."
 The power-name of power of the overmind is "power of the overmind".
+
+Table of Enemy Powers (continued)
+power	faculty1	faculty2
+power of the overmind	mind	--
 	
 Absorbing power of the overmind:
 	increase melee of the player by 2;
@@ -4848,6 +4906,10 @@ The command text of power of Israfel is "link, reform".
 The description of power of Israfel is "Type: active ability.[paragraph break]Command: link [italic type]someone[roman type].[paragraph break]The 'link' command will link your spirit to that of another person. Until you link to someone else, you will benefit from the concentration of the person you linked to just as if it were your own. Every turn, the link has a 10% probability of unravelling; but this probability is decreased by 1% for every 3 points of spirit you have, to a minimun of 1% at 27 spirit.[paragraph break]Command: reform.[paragraph break]You immediately heal for an amount of damage equal to your spirit score. However, your spirit score permanently drops by 5 points."
 The power-name of power of Israfel is "power of Israfel".
 
+Table of Enemy Powers (continued)
+power	faculty1	faculty2
+power of Israfel	spirit	--
+
 Absorbing power of Israfel:
 	increase melee of the player by 4;
 	increase defence of the player by 4;
@@ -4913,6 +4975,8 @@ Carry out reforming:
 			end the story saying "Your body follows your spirit into the void.";
 	otherwise:
 		say "You sacrifice 5 spirit and regain [n] health.".
+
+
 
 
 Chapter - Level 5 - Malygris
