@@ -107,8 +107,7 @@ Every turn:
 	otherwise:
 		now Banquet is not current-test-dream;]
 
-Dream of Briar Roses is current-test-dream;
-
+[Dream of Briar Roses is current-test-dream;]
 
 Section - Flexible Windows relisting
 
