@@ -438,6 +438,12 @@ An attack modifier rule (this is the radiance attack bonus rule):
 				say " - ", n, " (radiance)[run paragraph on]";
 				decrease the attack strength by n.
 
+A detection rule (this is the radiance makes it harder to hide detection rule):
+	if player is radiant:
+		let n be radiation of the player;
+		say " - ", n, " (radiance)[run paragraph on]";
+		decrease hiding roll by n.
+
 Section - Status
 
 Status attribute rule (this is the radiance status rule):
