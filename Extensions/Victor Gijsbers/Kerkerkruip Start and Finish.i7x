@@ -574,16 +574,19 @@ Last when play begins:
 	if n is 1:
 		move gilded rapier to the player;
 		now gilded rapier is readied;
+		unready fists;
 		now the player wears the buckler;
 	if n is 2:
 		move gorgeous dagger to the player;
 		now gorgeous dagger is readied;
+		unready fists;		
 		equip player from option-2-chest;
 	if n is 3:
 		equip player from option-3-chest;
 	if n is 4:
 		move evil dagger to the player;
 		now evil dagger is readied;
+		unready fists;		
 		equip player from option-4-chest;
 	if n is 5:
 		equip player from option-5-chest;
@@ -591,10 +594,12 @@ Last when play begins:
 	if n is 6:
 		move pickaxe to player;
 		now pickaxe is readied;
+		unready fists;		
 		equip player from option-6-chest;
 	if n is 7:
 		move gilded rapier to player;
 		now gilded rapier is readied;
+		unready fists;		
 		equip player from option-7-chest; 
 	repeat with item running through things enclosed by the player:
 		if item is a weapon or item is clothing:
@@ -605,6 +610,13 @@ To equip player from (box - a container):
 		move item to player;
 		if item is a scroll:
 			identify item.
+
+To unready fists:
+	let X be a random natural weapon enclosed by the player;
+	now X is not readied.
+
+Last report looking for the first time:
+	say "Your meager possessions consist of [a list of things had by the player]."
 
 
 Chapter - The end
