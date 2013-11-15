@@ -261,24 +261,6 @@ Window-drawing rule for the powers-header-window when the powers-header-window i
 	say run paragraph on;
 	return to main screen.
 
-Table of Enemy Powers
-power	faculty1	faculty2
-power of the armadillo	body	spirit
-power of the ape	body	--
-power of the daggers	spirit	body
-power of Miranda	mind	--
-power of the wisps	spirit	--
-power of the chains	spirit	--
-power of the bomb	body	--
-power of the Reaper	spirit	--
-power of rage	mind	--
-power of the hound	mind	--
-power of the mindslug	mind	spirit
-power of the tentacle	mind	--
-power of the minotaur	body	--
-power of the Fanatics of Aite	spirit	--
-power of Bodmall	body	--
-
 
 To decide what number is (O - an object) typecast to a number:
 	(- {O} -).
