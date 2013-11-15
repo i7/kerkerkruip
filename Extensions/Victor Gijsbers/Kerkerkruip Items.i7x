@@ -2840,7 +2840,7 @@ The damage die of a rapier is usually 5.
 
 Section - Gilded rapier
 
-The gilded rapier is a rapier. [The player carries the gilded rapier. ]The gilded rapier is readied.
+The gilded rapier is a rapier. [The player carries the gilded rapier. The gilded rapier is readied.]
 The gilded rapier is iron.
 
 The description of the gilded rapier is "You took it from the body of the young Count of Poitier, that fateful night in Maurice's whorehouse. He would nevermore plot against you.".

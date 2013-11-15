@@ -94,28 +94,20 @@ Generation info is a truth state that varies. Generation info is [true]false.
 
 Section - Testing - Not for release
 
-[Lair of the Imp is testobject.]
-
 [Last when play begins:
 	move Fafhrd to Entrance Hall;
 	now Fafhrd is asleep.]
-	
-[The player carries one scroll of psycholocation and one scroll of mapping.]
 
-[Dream of Tungausy Shaman is current-test-dream.]
-[The player carries six Morphean grenades.]
-[The player carries one unguentum crescendi and one unguentum diminuendi.]
-
-[One scroll of the blade is in Entrance Hall.]
-[The Zen room is testobject.
-Entrance to the Arena is testobject.]
-
-[Angel of compassion is testobject.]
-	
 [Last when play begins:
-	increase mind score of the player by 40.]
+	Now every medium banquet-dining person is seen;
 
+Every turn:
+	if Banquet is dreamable:
+		Now Banquet is current-test-dream;
+	otherwise:
+		now Banquet is not current-test-dream;]
 
+[Dream of Briar Roses is current-test-dream;]
 
 Section - Flexible Windows relisting
 
