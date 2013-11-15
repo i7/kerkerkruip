@@ -151,7 +151,7 @@ This is the start dream of Tungausy Shaman rule:
 Before the meditation hut is a room. "Around you are the barren wastes of the Tungausy homeland. The sound of loud drum comes from the meditation hut. It sooths and enchants you."
 Before the meditation hut is not placeable.
 
-A person called the Tungausy warrior is in Before the meditation hut. The description of the tungausy warrior is "Your body is strong. Your spirit is even stronger.". The body score of the Tungausy warrior is 10. The spirit score of the Tungausy warrior is 15.
+A person called the Tungausy warrior is in Before the meditation hut. The description of the tungausy warrior is "Your body is strong. Your spirit is even stronger.". The body score of the Tungausy warrior is 10. The spirit score of the Tungausy warrior is 15. The ID of the Tungausy warrior is 39.
 
 The barren wastes are scenery in Before the meditation hut. Understand "homeland" as the barren wastes. The description of the barren wastes is "A vast, barren landscape. The monotony is only broken by large rock formations in the distance."
 The large rock formations are scenery in Before the meditation hut. The description of the large rock formations is "The gods created them to house the spirits of ancestors."
@@ -200,10 +200,10 @@ Dream of the Banquet is a dream. Dream of the Banquet is redreamable. The dreama
 
 Definition: a person (called guy) is banquet-dining if guy opposes yourself and (guy and yourself share a world).
 
-Definition: Malygris is banquet-dining if Malygris is not dead and the location of Malygris is the location of yourself.
+Definition: Malygris is banquet-dining if Malygris is not dead and the location of Malygris is the location of the player.
 
 This is the must see two diners before dreaming rule:
-	Now dreamable test boolean is whether or not the number of seen banquet-dining people is at least two;
+	now dreamable test boolean is whether or not the number of seen banquet-dining people is at least two;
 
 This is the start the dream of the banquet rule:
 	now the health of Chef is the health of the player;
@@ -216,21 +216,21 @@ This is the start the dream of the banquet rule:
 	now every person in Dining Hall is not asleep;
 	try looking.
 
-The Dining Hall is a room. "Cold drafts flow through this vast, gloomy hall. In the center, a single chandelier casts a pool of light over a massive oaken table."
+The Dining Hall is a room. "Cold drafts flow through this vast, gloomy hall. In the centre, a single chandelier casts a pool of light over a massive oaken table."
 
-A chandelier is scenery in the dining hall. The description is "Ancient and ornate, this chandelier is wrought from solid silver, with fat candles burning all around it.". Understand "silver", "candle/candles", "light/lamp" as the chandelier.
+A chandelier is scenery in the dining hall. The description is "Ancient and ornate, this chandelier is wrought from solid silver. It supports dozens of fat candles.". Understand "silver", "candle/candles", "light/lamp", "fat" as the chandelier.
 
-A massive oaken table is scenery in the Dining Hall. The description is "There are places set for [the number of banquet-dining people in words]. Among the names, you recognize [the list of seen banquet-dining people]." Understand "chair/chairs" as the table.
+A massive oaken table is scenery in the Dining Hall. The description is "There are places set for [the number of banquet-dining people in words]. Among the names, you recognize [the list of seen banquet-dining people]." Understand "chair/chairs" and "places" as the table.
 
-The nametags are scenery in the Dining Hall. The description is "There are nametags arranged at places around the table. The names include [the list of seen banquet-dining people][if there is at least one not seen banquet-dining person], and [the number of not seen banquet-dining people in words] that you can't read[end if].". Understand "name/names" and "nametags/tag/tags" as the nametags. Understand "[something related by table-place-naming]" as the nametags.
+The nametags are scenery in the Dining Hall. The description is "There are nametags arranged at places around the table. The names are [the list of seen banquet-dining people][if there is at least one not seen banquet-dining person], and [the number of not seen banquet-dining people in words] that you can't read[end if].". Understand "name/names" and "nametags/tag/tags" as the nametags. Understand "[something related by table-place-naming]" as the nametags.
 
 table-place-naming relates a thing (called the identifier) to a person (called the guest) when the guest is banquet-dining and the identifier is the nametags.
 
-A kitchen servant is a person in Dining Hall. "A kitchen servant stands at the edge of the light, awaiting your instructions." Understand "slave", "boy/girl", "waiter/waitress" as the kitchen servant.
+A kitchen servant is a person in Dining Hall. "A kitchen servant stands at the edge of the light, awaiting your instructions." Understand "slave", "boy/girl", "waiter/waitress" as the kitchen servant. The ID of kitchen servant is 40.
 
 The Dining Hall is not placeable.
 
-A person called the Chef is in The Dining Hall. The description of the Chef is "You are elegantly dressed, and ready to plan the menu for tonight's feast.". 
+A person called the Chef is in The Dining Hall. The description of the Chef is "You are elegantly dressed, and ready to plan the menu for tonight's feast.". The ID of Chef is 41.
 
 banquet-menu is a list of texts that varies;
 banquet-items is a list of people that varies;
@@ -260,7 +260,7 @@ A menu question rule (this is the banquet selection rule):
 
 To prepare a feast of (the entree - a person):
 	say "You make your choice, and two large butchers enter carrying a large serving platter with [bold type][the entree][roman type] strapped to it. They set the platter down on the table.[paragraph break]The other denizens of Kerkerkruip file in behind and take their places. As the butchers hack off pieces of [the entree] with heavy cleavers, the guests grab them eagerly and stuff them into their drooling orifices. [paragraph break]";
-	Let the serving size be a random number between 5 and 10;
+	let the serving size be a random number between 5 and 10;
 	let overflow be the serving size - health of entree;
 	decrease health of entree by the serving size;
 	if overflow > 0:
