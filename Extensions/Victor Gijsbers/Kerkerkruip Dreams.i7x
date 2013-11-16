@@ -200,7 +200,7 @@ Dream of the Banquet is a dream. Dream of the Banquet is redreamable. The dreama
 
 Definition: a person (called guy) is banquet-dining if guy opposes yourself and (guy and yourself share a world).
 
-Definition: Malygris is banquet-dining if Malygris is not dead and the location of Malygris is the location of the player.
+Definition: Malygris is banquet-dining if Malygris is not dead and the location of Malygris is the location of yourself.
 
 This is the must see two diners before dreaming rule:
 	now dreamable test boolean is whether or not the number of seen banquet-dining people is at least two;
