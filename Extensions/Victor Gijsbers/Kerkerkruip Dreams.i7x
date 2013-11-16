@@ -336,7 +336,7 @@ Instead of opening a container in Monty Hall:
 		say "As you carefully open [the noun], a fierce growl emanates from within. You hesitate, but the lid continues to rise even without your assistance. Inside the chest, you see a beautiful shield with the head of a lion painted on it. As you grab the shield, the lion's tongue comes out and licks your affectionately.";
 	otherwise:
 		now permanent health of yourself is 1;
-		now health of the player is 1;
+		now health of yourself is 1;
 		say "As you carefully open [the noun], the glow of gold and gems welcomes you. Filled with joy you throw open the lid -- and a demonic being with golden skin and flowing eyes jumps out and starts tearing you apart with its monstrous claws.[paragraph break][bold type]When you wake up, the wounds have not healed.[roman type][paragraph break]";
 	wake the player up.
 
