@@ -167,6 +167,9 @@ Instead of going inside in before the meditation hut:
 
 Instead of entering the lodge:
 	try going to the lodge.
+
+Does the player mean entering the lodge:
+	it is very likely.
 	
 Instead of going to the lodge:
 	say "Though the drums and herbs sooth and encourage you, your knees still shake as you walk into the hut.";
@@ -284,5 +287,62 @@ An absorption stopping rule (this is the chef can't absorb souls rule):
 		clear the screen;
 		say "As you come unmoored from your dream, you feel the soul of [the test subject] slipping past you, to be lost between worlds...";
 		rule succeeds;
+
+
+
+Chapter - Dream of Monty Hall
+
+Monty Hall is a room. "The large, circular hall is completely empty except for [if Monty-Hall-voice is not 2]three[otherwise]two[end if] chests[if the marble black chest is in Monty Hall]. One chest is made of black marble[end if][if the pure gold chest is in Monty Hall]. One chest is made of pure gold[end if][if the iridiscent pearl chest is in Monty Hall]. One chest is made of iridiscent pearl[end if]."
+Monty Hall is not placeable.
+
+Dream of Monty Hall is a dream.
+
+The start the dream rule of dream of Monty Hall is the start dream of Monty Hall rule.
+
+This is the start dream of Monty Hall rule:
+	move player to Monty Hall.
+
+Monty-Hall-voice is a number that varies. Monty-Hall-voice is 0.
+	
+Every turn when in Monty Hall:
+	if Monty-Hall-voice is 0:
+		now Monty-Hall-voice is 1;
+		say "'Welcome to my game show, puny mortal!' a deep, disembodied voice announces. 'You must open one of these chests. One of them contains a great treasure, while two of them contain [bold type]death[roman type]! So choose wisely.'[paragraph break]After a few seconds it adds: 'Admittedly, I've put the treasure in a completely random chest, so your wisdom isn't going to be any help. But hey, nobody promised that life would be fair.'"
+		
+The marble black chest is a scenery closed openable container in Monty Hall. The description of the marble black chest is "This chest is cool and smooth to the touch. Patterns in the marble suggest fantastic landscapes full of horror and wonder.".
+
+The iridiscent pearl chest is a scenery closed openable container in Monty Hall. The description of the iridiscent pearl chest is "This chest flaunts a million shades of colour, like a peacock. Its smooth whiteness promises both everlasting beauty and death.".
+
+The pure gold chest is a scenery closed openable container in Monty Hall. The description of the pure gold chest is "This chest has been polished so well that you can see your own face in it, made infinitely more precious by the noble metal. People would die for such richness.".
+
+The Monty-list is a list of things that varies. The Monty-list is {marble black chest, iridiscent pearl chest, pure gold chest}.
+
+When play begins:
+	sort Monty-list in random order.
+
+Before opening a container in Monty Hall:
+	if Monty-Hall-voice < 2:
+		now Monty-Hall-voice is 2;
+		let item be entry 2 in Monty-list;
+		if item is noun:
+			let item be entry 3 in Monty-list;
+		remove item from play;
+		say "'You're going to open [the noun]? A fine choice, absolutely fine. But I've decided to make things a little fairer for you, so I will pick one of the other chests -- one that contains death -- and I will remove it. It's up to you to decide whether to open your original choice, or the other remaining chest!'[paragraph break]With a soft sucking sound, [the item] disappears." instead.
+
+Instead of opening a container in Monty Hall:
+	let winning chest be entry 1 in Monty-list;
+	if the noun is winning chest:
+		move the lion's shield to the player;
+		say "As you carefully open [the noun], a fierce growl emanates from within. You hesitate, but the lid continues to rise even without your assistance. Inside the chest, you see a beautiful shield with the head of a lion painted on it. As you grab the shield, the lion's tongue comes out and licks your affectionately.";
+	otherwise:
+		now permanent health of yourself is 1;
+		now health of the player is 1;
+		say "As you carefully open [the noun], the glow of gold and gems welcomes you. Filled with joy you throw open the lid -- and a demonic being with golden skin and flowing eyes jumps out and starts tearing you apart with its monstrous claws.[paragraph break][bold type]When you wake up, the wounds have not healed.[roman type][paragraph break]";
+	wake the player up.
+
+
+
+
+
 
 Kerkerkruip Dreams ends here.

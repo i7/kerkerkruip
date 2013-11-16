@@ -1342,7 +1342,22 @@ The block bonus of adamantine shield is 2.
 
 The description of adamantine shield is "Three serpents are eating each other on the intricate design of this indestructible shield. [italic type]Block bonus: +2[roman type].".
 
+Section - Lion's shield (special)
 
+[The reward from the Dream of Monty Hall.]
+
+The lion's shield is a shield.
+The lion's shield is iron.
+
+The block bonus of the lion's shield is 2.
+
+The description of the lion's shield is "A lion's head has been painted on this magnificent shield. It is extremely lifelike -- so lifelike, in fact, that it will bite your enemies if you successfully block. [italic type]Block bonus: +2. Deals 2 damage on a successful block[roman type].".
+
+Aftereffects rule (this is the lion's shield rule):
+	if the global defender wears the lion's shield and the global defender is at-block:
+		if the attack damage is 0:
+			decrease health of the global attacker by 2;
+			say "The lion on the shield strikes out, and bites [the global attacker] for [bold type]2 damage[roman type][if health of global attacker is less than 1], which is [bold type]lethal[roman type][end if].".
 
 
 Chapter - Grenades
