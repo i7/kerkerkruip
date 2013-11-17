@@ -257,11 +257,17 @@ A menu question rule (this is the banquet selection rule):
 		if m > 0 and m <= (the number of entries in banquet-items):
 			let entree be entry m of banquet-items;
 			prepare a feast of the entree;
-			if yourself is not dead:
-				wake the player up;
-				exit;
+			if Malygris is dead:
+				if yourself is dead:
+					end the game saying "You and Malygris have both been consumed. Technically, that counts as a win.";
+				otherwise:
+					end the game saying "Malygris has been consumed by his own minions!"; 
 			otherwise:
-				end the game saying "You have been consumed.";
+				if yourself is dead:
+					end the game saying "You have been consumed.";
+				otherwise:
+					wake the player up;
+					exit;
 
 To prepare a feast of (the entree - a person):
 	say "You make your choice, and two large butchers enter carrying a large serving platter with [bold type][the entree][roman type] strapped to it. They set the platter down on the table.[paragraph break]The other denizens of Kerkerkruip file in behind and take their places. As the butchers hack off pieces of [the entree] with heavy cleavers, the guests grab them eagerly and stuff them into their drooling orifices. [paragraph break]";
