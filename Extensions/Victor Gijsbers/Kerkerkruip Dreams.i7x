@@ -203,10 +203,12 @@ Dream of the Banquet is a dream. Dream of the Banquet is redreamable. The dreama
 
 Definition: a person (called guy) is banquet-dining if guy opposes yourself and (guy and yourself share a world).
 
-Definition: Malygris is banquet-dining if Malygris is not dead and the location of Malygris is the location of yourself.
+Definition: a person (called guy) is banquet-menu if guy is seen and guy is banquet-dining.
+
+Definition: Malygris is banquet-menu if Malygris is banquet-dining and the location of Malygris is the location of yourself.
 
 This is the must see two diners before dreaming rule:
-	now dreamable test boolean is whether or not the number of seen banquet-dining people is at least two;
+	now dreamable test boolean is whether or not the number of banquet-menu people is at least two;
 
 This is the start the dream of the banquet rule:
 	now the health of Chef is the health of the player;
@@ -223,9 +225,9 @@ The Dining Hall is a room. "Cold drafts flow through this vast, gloomy hall. In 
 
 A chandelier is scenery in the dining hall. The description is "Ancient and ornate, this chandelier is wrought from solid silver. It supports dozens of fat candles.". Understand "silver", "candle/candles", "light/lamp", "fat" as the chandelier.
 
-A massive oaken table is scenery in the Dining Hall. The description is "There are places set for [the number of banquet-dining people in words]. Among the names, you recognize [the list of seen banquet-dining people]." Understand "chair/chairs" and "places" as the table.
+A massive oaken table is scenery in the Dining Hall. The description is "There are places set for [the number of banquet-dining people in words]. Among the names, you recognize [the list of banquet-menu people]." Understand "chair/chairs" and "places" as the table.
 
-The nametags are scenery in the Dining Hall. The description is "There are nametags arranged at places around the table. The names are [the list of seen banquet-dining people][if there is at least one not seen banquet-dining person], and [the number of not seen banquet-dining people in words] that you can't read[end if].". Understand "name/names" and "nametags/tag/tags" as the nametags. Understand "[something related by table-place-naming]" as the nametags.
+The nametags are scenery in the Dining Hall. The description is "There are nametags arranged at places around the table. The names are [the list of banquet-menu people][if there is at least one not banquet-menu person], and [the number of not banquet-menu people in words] that you can't read[end if].". Understand "name/names" and "nametags/tag/tags" as the nametags. Understand "[something related by table-place-naming]" as the nametags.
 
 table-place-naming relates a thing (called the identifier) to a person (called the guest) when the guest is banquet-dining and the identifier is the nametags.
 
@@ -235,18 +237,18 @@ The Dining Hall is not placeable.
 
 A person called the Chef is in The Dining Hall. The description of the Chef is "You are elegantly dressed, and ready to plan the menu for tonight's feast.". The ID of Chef is 41.
 
-banquet-menu is a list of texts that varies;
+banquet-menu-text is a list of texts that varies;
 banquet-items is a list of people that varies;
 
 Instead of doing anything when the current action involves the kitchen servant:
 	say "The servant approaches you. 'Which guest are we serving tonight?' [it-they of kitchen servant] asks.";
 	now the current question is "(Which enemy do you select?)";
-	now banquet-menu is {};
+	now banquet-menu-text is {};
 	now banquet-items is {};
-	repeat with entree running through seen banquet-dining people:
+	repeat with entree running through banquet-menu people:
 		add entree to banquet-items;
-		add printed name of entree to banquet-menu;
-	now the current question menu is banquet-menu;
+		add printed name of entree to banquet-menu-text;
+	now the current question menu is banquet-menu-text;
 	ask a closed question, in menu mode.
 
 A menu question rule (this is the banquet selection rule):

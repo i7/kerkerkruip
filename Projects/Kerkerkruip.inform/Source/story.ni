@@ -89,32 +89,25 @@ The notify score changes rule is not listed in any rulebook.
 Section - Generation info
 
 Generation info is a truth state that varies. Generation info is [true]false.
- 
+
 
 
 Section - Testing - Not for release
 
-[Lair of the Imp is testobject.]
-
 [Last when play begins:
 	move Fafhrd to Entrance Hall;
 	now Fafhrd is asleep.]
-	
-[The player carries one scroll of psycholocation and one scroll of mapping.]
 
-[Dream of Tungausy Shaman is current-test-dream.
-The player carries six Morphean grenades.]
-[The player carries one unguentum crescendi and one unguentum diminuendi.]
-
-[One scroll of the blade is in Entrance Hall.]
-[The Zen room is testobject.
-Entrance to the Arena is testobject.]
-
-[Angel of compassion is testobject.]
-	
 [Last when play begins:
-	increase mind score of the player by 40.]
+	Now every medium banquet-dining person is seen;
 
+Every turn:
+	if Banquet is dreamable:
+		Now Banquet is current-test-dream;
+	otherwise:
+		now Banquet is not current-test-dream;]
+
+[Dream of Briar Roses is current-test-dream;]
 
 Section - Flexible Windows relisting
 
@@ -143,27 +136,3 @@ To decide whether (item - an object) acts plural:
 	if the item is plural-named:
 		yes;
 	no.
-	
-Section - Questions fix (in place of Section 4 - Processing menu questions in Questions by Michael Callaghan)
-
-[If you quit while in a question, it won't reprint the question on reloading. Not a problem if you're not using Permadeath, which makes it possible to save inside a closed question, but certainly a problem if you are.]
-
-After reading a command when menu question mode is true:
-	follow the menu question rules;
-	if the outcome of the rulebook is the exit outcome:
-		deactivate menu question mode;
-		follow the every turn rules;
-		follow the advance time rule;
-		reject the player's command;
-	if the outcome of the rulebook is the retry outcome:
-		say "[current question][line break]";
-		repeat with counter running from 1 to the number of entries in the current question menu:
-			say "[counter] - [entry counter of the current question menu][line break]";
-		reject the player's command;
-	if the outcome of the rulebook is the parse outcome:
-		deactivate menu question mode.
-
-
-
-
-	
