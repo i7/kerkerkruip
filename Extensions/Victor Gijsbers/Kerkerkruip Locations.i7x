@@ -24,7 +24,7 @@ Part - The rooms themselves
 
 Chapter - Entrance Hall
 
-The entrance hall is a room. "The vast entrance hall is empty, silent, foreboding. Skull-sized rubies project a red light far too bright for the eyes of a human."
+The entrance hall is a room. "The vast entrance hall is empty, silent, foreboding. Skull-sized rubies project a red light far too bright for the eyes of a human[initial-possessions]."
 
 Entrance Hall is not habitable.
 Entrance Hall is connectable.
@@ -34,6 +34,15 @@ Entrance Hall is vp-agnostic.
 Entrance Hall is treasurable.
 Entrance Hall is extra-accepting.
 Entrance Hall is civilised.
+
+
+Say-possessions is a truth state that varies. Say-possessions is true.
+
+To say initial-possessions:
+	if say-possessions is true:
+		now say-possessions is false;
+		say ".[paragraph break]You possess [a list of things had by the player][run paragraph on]"
+
 
 The skull-sized rubies are in entrance hall. The skull-sized rubies are scenery and plural-named. The description of the skull-sized rubies is "They have been filled with the power of suns long extinct, and are now fixed to the ceiling of the wizard's domain. You cannot bear to look at them.". Check taking the skull-sized rubies: say "They are secured to the ceiling by magic more powerful than you can break." instead.
 

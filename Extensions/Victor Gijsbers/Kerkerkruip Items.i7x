@@ -738,23 +738,23 @@ A remain concentrated rule (this is the inquisitor's hood concentration rule):
 		increase remain concentrated chance by 15.
 
 
-Section - Antler of the Tungausy Shaman (epic)
+Section - Antler of the Tungausy Shaman (major)
 
-The antler of the tungausy shaman is an epic hat. The indefinite article is "the".
+The antler of the tungausy shaman is a major hat. The indefinite article is "the".
 The antler of the tungausy shaman is religious.
-The antler of the tugausy shaman is silver.
+The antler of the tungausy shaman is silver.
 
 The blood magic cost of antler of the tungausy shaman is 2.
 The blood magic level of antler of the tungausy shaman is 0.
 The blood magic maximum of antler of the tungausy shaman is 6.
 
-The description of the antler of the tungausy shaman is "Resembling the antler of a deer, this jewelry is used by the Tungausy Shaman to have the spirits help him in his quest. However, if not handled carefully, the spirits may be mischievous with dire consequences. [italic type](has currently [50 + 5 times blood magic level of the antler of the tungausy shaman] percent chance to correctly foresee the attack result of the opponent. You can increase this chance by 5 percent if you feed the antler [current blood cost of the antler of the tungausy shaman] blood.) [roman type]".
+The description of the antler of the tungausy shaman is "Resembling the antler of a deer, this piece of jewelry is used by the Tungausy shaman to have the spirits help him in his quest. The spirits may be mischievous, however, so be careful. [italic type](When you are under the influence of ment, it has a [50 + 5 times blood magic level of the antler of the tungausy shaman] percent chance to correctly predict the attack strenght of the opponent[unless blood magic level of the antler of the tungausy shaman is blood magic maximum of the antler of the tungausy shaman]. You can increase this chance by 5 percent if you feed the antler [current blood cost of the antler of the tungausy shaman] blood[end if].) [roman type]".
 
 antlerattackstrength is a number that varies.
 
-Carry out an npc attacking (this is the antlerattack rule):
+This is the antlerattack rule:
 	if the player wears the antler of the tungausy shaman and the ment timer is greater than 0:
-		if the global defender is the player:
+		if the combat status is player choosing and the player is at-React:
 			if tome-of-law-number is not 0:
 				now the antlerattackstrength is tome-of-law-number;
 			otherwise:
@@ -762,11 +762,11 @@ Carry out an npc attacking (this is the antlerattack rule):
 			let x be 50;
 			increase x by 5 times the blood magic level of antler of the tungausy shaman;
 			if a random  chance of x in 100 succeeds:
-				say "The shamanic spirits envision [main actor]'s attack to be [if periapt attack strength is less than 4]weak[otherwise if periapt attack strength is less than 8]average[otherwise if periapt attack strength is not 20]strong[otherwise]heroic[end if].";
+				say "The shamanic spirits predict that [the main actor]'s attack to be [if antlerattackstrength is less than 4]weak[otherwise if antlerattackstrength is less than 8]average[otherwise if antlerattackstrength is not 20]strong[otherwise]heroic[end if].";
 			otherwise:
-				say "The shamanic spirits envision [main actor]'s attack to be [one of]weak[or]average[or]strong[or]heroic[purely at random].".
+				say "The shamanic spirits predict that [the main actor]'s attack to be [one of]weak[or]average[or]strong[or]heroic[purely at random].".
 
-
+The antlerattack rule is listed before the  player chooses an action or reaction rule  in the combat round rules.
 
 A special set attack strength rule (this is the antler attack roll rule):
 	if the player wears the antler of the tungausy shaman and the ment timer is greater than 0:
@@ -1351,13 +1351,14 @@ The lion's shield is iron.
 
 The block bonus of the lion's shield is 2.
 
-The description of the lion's shield is "A lion's head has been painted on this magnificent shield. It is extremely lifelike -- so lifelike, in fact, that it will bite your enemies if you successfully block. [italic type]Block bonus: +2. Deals 2 damage on a successful block[roman type].".
+The description of the lion's shield is "A lion's head has been painted on this magnificent shield. It is extremely lifelike -- so lifelike, in fact, that it will bite your enemies if you successfully block a non-ranged attack. [italic type]Block bonus: +2. Deals 2 damage on a successful block[roman type].".
 
 Aftereffects rule (this is the lion's shield rule):
 	if the global defender wears the lion's shield and the global defender is at-block:
 		if the attack damage is 0:
-			decrease health of the global attacker by 2;
-			say "The lion on the shield strikes out, and bites [the global attacker] for [bold type]2 damage[roman type][if health of global attacker is less than 1], which is [bold type]lethal[roman type][end if].".
+			if the global attacker weapon is not ranged or the global attacker weapon is a natural weapon:
+				decrease health of the global attacker by 2;
+				say "The lion on the shield strikes out, and bites [the global attacker] for [bold type]2 damage[roman type][if health of global attacker is less than 1], which is [bold type]lethal[roman type][end if].".
 
 
 Chapter - Grenades
