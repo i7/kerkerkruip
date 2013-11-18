@@ -30,6 +30,18 @@ Section - Special option for testing
 
 A dream can be current-test-dream. [Make a dream current-test-dream for guaranteed dreaming of it.]
 	
+Section - What is Real, What is a Dream
+
+Dreamer-location is a room that varies.
+Dreamer is a person that varies.
+
+Dreaming is a truth state that varies. Dreaming is false.
+
+To decide which person is the/-- true body of (guy - a person):
+	if guy is the player and dreaming is true:
+		decide on the dreamer;
+	decide on guy;
+
 Section - Starting dreams
 
 Every turn when the player is asleep and dreaming is false:
@@ -58,11 +70,6 @@ To do a dream:
 			choose row 1 in Table of Candidate Dreams;
 			dream Candidate entry.
 
-Dreamer-location is a room that varies.
-Dreamer is a person that varies.
-
-Dreaming is a truth state that varies. Dreaming is false.
-
 To dream (item - a dream):
 	now dreaming is true;
 	now dreamer-location is the location;
@@ -87,8 +94,6 @@ To wake the player up:
 	otherwise:
 		try looking;
 	now the take no time boolean is false.
-
-			
 
 Chapter - Dream of Briar Roses
 
@@ -203,17 +208,11 @@ Chapter - Dream of the Banquet
 
 Dream of the Banquet is a dream. Dream of the Banquet is redreamable. The dreamable rule of Dream of the Banquet is the must see two diners before dreaming rule. The start the dream rule of Dream of the Banquet is the start the dream of the banquet rule.
 
-To decide which person is the banquet-definer:
-	if the player is not in the Dining Hall:
-		decide on the player;
-	otherwise:
-		decide on the dreamer.
-
-Definition: a person (called guy) is banquet-dining if guy opposes banquet-definer and (guy and banquet-definer share a world).
+Definition: a person (called guy) is banquet-dining if guy opposes the true body of the player and (guy and the true body of the player share a world).
 
 Definition: a person (called guy) is banquet-menu if guy is seen and guy is banquet-dining.
 
-Definition: Malygris is banquet-menu if Malygris is banquet-dining and the location of Malygris is the location of banquet-definer.
+Definition: Malygris is banquet-menu if Malygris is banquet-dining and the location of Malygris is the location of the true body of the player.
 
 
 
@@ -237,9 +236,9 @@ A chandelier is scenery in the dining hall. The description is "Ancient and orna
 
 A massive oaken table is scenery in the Dining Hall. The description is "There are places set for [the number of banquet-dining people in words]. Among the names, you recognize [the list of banquet-menu people]." Understand "chair/chairs" and "places" as the table.
 
-The nametags are scenery in the Dining Hall. The description is "There are nametags arranged at places around the table. The names are [the list of banquet-menu people][if there is at least one not banquet-menu person], and [the number of not banquet-menu people in words] that you can't read[end if].". Understand "name/names" and "nametags/tag/tags" as the nametags. Understand "[something related by table-place-naming]" as the nametags.
+The nametags are scenery in the Dining Hall. The description is "There are nametags arranged at places around the table. The names are [the list of banquet-menu people][if there is at least one not banquet-menu person], and [the number of banquet-dining not banquet-menu people in words] that you can't read[end if].". Understand "name/names" and "nametags/tag/tags" as the nametags. Understand "[something related by table-place-naming]" as the nametags.
 
-table-place-naming relates a thing (called the identifier) to a person (called the guest) when the guest is banquet-dining and the identifier is the nametags.
+table-place-naming relates a thing (called the identifier) to a person (called the guest) when the guest is banquet-menu and the identifier is the nametags.
 
 A kitchen servant is a person in Dining Hall. "A kitchen servant stands at the edge of the light, awaiting your instructions." Understand "slave", "boy/girl", "waiter/waitress" as the kitchen servant. The ID of kitchen servant is 40.
 
@@ -268,12 +267,12 @@ A menu question rule (this is the banquet selection rule):
 			let entree be entry m of banquet-items;
 			prepare a feast of the entree;
 			if Malygris is dead:
-				if yourself is dead:
+				if the true body of the player is dead:
 					end the game saying "You and Malygris have both been consumed. Technically, that counts as a win.";
 				otherwise:
 					end the game saying "Malygris has been consumed by his own minions!"; 
 			otherwise:
-				if yourself is dead:
+				if the true body of the player is dead:
 					end the game saying "You have been consumed.";
 				otherwise:
 					wake the player up;
@@ -286,15 +285,15 @@ To prepare a feast of (the entree - a person):
 	decrease health of entree by the serving size;
 	if overflow > 0:
 		say "The guests consume their victim completely, and then they [bold type]turn on you![roman type][paragraph break]";
-		decrease health of yourself by overflow;
+		decrease health of the true body of the player by overflow;
 	say "[The entree] suffers [bold type][serving size] damage[roman type][if entree is dead], which is [bold type]lethal[roman type][end if]";
 	if overflow > 0:
 		say ". In addition, you suffer [bold type][overflow] damage[roman type]";
-		if yourself is dead:
+		if the true body of the player is dead:
 			say ", which [bold type]kills you[roman type].";
 	Repeat with guy running through banquet-dining people who are not the entree:
 		increase health of guy by the serving size;
-	if yourself is not dead:
+	if the true body of the player is not dead:
 		say ". All of the diners [bold type]gain [serving size] health![roman type]";
 		[a bit of a hack - allowing every turn rules to run normally might be better here:]
 		follow the remove all killed monsters from play rule.
