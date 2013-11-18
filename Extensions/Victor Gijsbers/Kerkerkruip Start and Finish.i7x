@@ -617,11 +617,6 @@ To unready fists:
 	let X be a random natural weapon enclosed by the player;
 	now X is not readied.
 
-Say-possessions is a truth state that varies. Say-possessions is true.
-
-Last report looking when say-possessions is true:
-	now say-possessions is false;
-	say "You possess [a list of things had by the player]."
 
 
 Chapter - The end
