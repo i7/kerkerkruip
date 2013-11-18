@@ -422,7 +422,8 @@ To say total credits:
 	[paragraph break][bold type]The Kerkerkruip team[roman type]
 	[line break][italic type]created by[roman type] Victor Gijsbers
 	[line break][italic type]with[roman type] Dannii Willis, 
-	[line break]Erik Temple, 
+	[line break]Erik Temple,
+	[line break]Wade Clark, 
 	[line break]Remko van der Pluijm [italic type]and[roman type]
 	[line break]Mike Ciul
 	[paragraph break][bold type]Testers[roman type]
@@ -616,8 +617,11 @@ To unready fists:
 	let X be a random natural weapon enclosed by the player;
 	now X is not readied.
 
-Last report looking for the first time:
-	say "Your meager possessions consist of [a list of things had by the player]."
+Say-possessions is a truth state that varies. Say-possessions is true.
+
+Last report looking when say-possessions is true:
+	now say-possessions is false;
+	say "You possess [a list of things had by the player]."
 
 
 Chapter - The end
