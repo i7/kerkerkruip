@@ -59,12 +59,14 @@ To do a dream:
 			dream Candidate entry.
 
 Dreamer-location is a room that varies.
+Dreamer is a person that varies.
 
 Dreaming is a truth state that varies. Dreaming is false.
 
 To dream (item - a dream):
 	now dreaming is true;
 	now dreamer-location is the location;
+	now the dreamer is the player;
 	say "You are pulled towards a dream ...";
 	wait for any key;
 	clear the screen;
@@ -77,9 +79,9 @@ To wake the player up:
 		if a random chance of 1 in 4 succeeds:
 			now guy is not asleep;
 	now dreaming is false;
-	now the player is yourself;
+	now the player is the dreamer;
 	now the player is not asleep;
-	now main actor is yourself;
+	now main actor is the player;
 	if the player is not in dreamer-location:
 		move the player to dreamer-location;
 	otherwise:
@@ -184,13 +186,13 @@ A menu question rule (this is the vibrating pool rule):
 	if the current question is "(What do you see in the pool?)":
 		let m be the number understood;
 		if m is 1:
-			decrease body score of yourself by 5;
-			increase spirit score of yourself by 5;
+			decrease body score of the dreamer by 5;
+			increase spirit score of the dreamer by 5;
 			say "You walk towards the shaman, knowing what you must sacrifice and what you will gain. 'I will give you my strength, in exchange for your spirit.' The shaman eagerly puts his hands on your biceps. His muscles grow beyond human proportion while yours shrink to nothing. He will now be able to defend the tribe in the Everlasting War, while you will join the ancestor spirits.[paragraph break][bold type]You have lost much of your bodily strength: -5 body. But you have sapped much of the shaman's spirit: +5 spirit.[roman type][paragraph break]";
 			wake the player up;
 		if m is 2:
-			decrease spirit score of yourself by 5;
-			increase body score of yourself by 5;
+			decrease spirit score of the dreamer by 5;
+			increase body score of the dreamer by 5;
 			say "You walk towards the shaman, knowing what you must sacrifice and what you will gain. 'I will give you my spirit, in exchange for your strength.' The shaman eagerly puts his hands on your breast. As he absorbs your spirit, you see your muscles growing beyond human proportions. You will now be able to defend the tribe in the Everlasting War, but you will never join the ancestor spirits.[paragraph break][bold type]You have lost your soul: -5 spirit. Your muscles have grown exceedingly strong: +5 body.[roman type][paragraph break]";
 			wake the player up;
 		exit.
@@ -201,11 +203,19 @@ Chapter - Dream of the Banquet
 
 Dream of the Banquet is a dream. Dream of the Banquet is redreamable. The dreamable rule of Dream of the Banquet is the must see two diners before dreaming rule. The start the dream rule of Dream of the Banquet is the start the dream of the banquet rule.
 
-Definition: a person (called guy) is banquet-dining if guy opposes yourself and (guy and yourself share a world).
+To decide which person is the banquet-definer:
+	if the player is not in the Dining Hall:
+		decide on the player;
+	otherwise:
+		decide on the dreamer.
+
+Definition: a person (called guy) is banquet-dining if guy opposes banquet-definer and (guy and banquet-definer share a world).
 
 Definition: a person (called guy) is banquet-menu if guy is seen and guy is banquet-dining.
 
-Definition: Malygris is banquet-menu if Malygris is banquet-dining and the location of Malygris is the location of yourself.
+Definition: Malygris is banquet-menu if Malygris is banquet-dining and the location of Malygris is the location of banquet-definer.
+
+
 
 This is the must see two diners before dreaming rule:
 	now dreamable test boolean is whether or not the number of banquet-menu people is at least two;
@@ -277,7 +287,7 @@ To prepare a feast of (the entree - a person):
 	if overflow > 0:
 		say "The guests consume their victim completely, and then they [bold type]turn on you![roman type][paragraph break]";
 		decrease health of yourself by overflow;
-	say "[The name of the entree] suffers [bold type][serving size] damage[roman type][if entree is dead], which is [bold type]lethal[roman type][end if]";
+	say "[The entree] suffers [bold type][serving size] damage[roman type][if entree is dead], which is [bold type]lethal[roman type][end if]";
 	if overflow > 0:
 		say ". In addition, you suffer [bold type][overflow] damage[roman type]";
 		if yourself is dead:
@@ -343,8 +353,8 @@ Instead of opening a container in Monty Hall:
 		move the lion's shield to the player;
 		say "As you carefully open [the noun], a fierce growl emanates from within. You hesitate, but the lid continues to rise even without your assistance. Inside the chest, you see a beautiful shield with the head of a lion painted on it. As you grab the shield, the lion's tongue comes out and licks your affectionately.";
 	otherwise:
-		now permanent health of yourself is 1;
-		now health of yourself is 1;
+		now permanent health of the dreamer is 1;
+		now health of the dreamer is 1;
 		say "As you carefully open [the noun], the glow of gold and gems welcomes you. Filled with joy you throw open the lid -- and a demonic being with golden skin and flowing eyes jumps out and starts tearing you apart with its monstrous claws.[paragraph break][bold type]When you wake up, the wounds have not healed.[roman type][paragraph break]";
 	wake the player up.
 
