@@ -1645,7 +1645,9 @@ Every turn when the current form is vampirebat-form (this is the unready readied
 		repeat with X running through readied weapons enclosed by the player:
 			unless X is a natural weapon:
 				say "Your claws cannot effectively wield [the X].";
-				now X is not readied.
+				now X is not readied;
+	let X be a random natural weapon enclosed by the player;
+	now X is readied.
 
 
 Section - Commands for turning into forms
