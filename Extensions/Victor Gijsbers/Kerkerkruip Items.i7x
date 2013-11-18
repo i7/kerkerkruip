@@ -1351,13 +1351,14 @@ The lion's shield is iron.
 
 The block bonus of the lion's shield is 2.
 
-The description of the lion's shield is "A lion's head has been painted on this magnificent shield. It is extremely lifelike -- so lifelike, in fact, that it will bite your enemies if you successfully block. [italic type]Block bonus: +2. Deals 2 damage on a successful block[roman type].".
+The description of the lion's shield is "A lion's head has been painted on this magnificent shield. It is extremely lifelike -- so lifelike, in fact, that it will bite your enemies if you successfully block a non-ranged attack. [italic type]Block bonus: +2. Deals 2 damage on a successful block[roman type].".
 
 Aftereffects rule (this is the lion's shield rule):
 	if the global defender wears the lion's shield and the global defender is at-block:
 		if the attack damage is 0:
-			decrease health of the global attacker by 2;
-			say "The lion on the shield strikes out, and bites [the global attacker] for [bold type]2 damage[roman type][if health of global attacker is less than 1], which is [bold type]lethal[roman type][end if].".
+			if the global attacker weapon is not ranged or the global attacker weapon is a natural weapon:
+				decrease health of the global attacker by 2;
+				say "The lion on the shield strikes out, and bites [the global attacker] for [bold type]2 damage[roman type][if health of global attacker is less than 1], which is [bold type]lethal[roman type][end if].".
 
 
 Chapter - Grenades
