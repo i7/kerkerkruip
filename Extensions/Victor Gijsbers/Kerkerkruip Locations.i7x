@@ -1668,6 +1668,8 @@ The maze-waiting-room is not extra-accepting.
 The maze-waiting-room is vp-agnostic.
 The maze-waiting-room is magical.
 
+Greater-maze is a region. Maze and maze-waiting-room are in greater-maze.
+
 Maze-sound is a direction that varies.
 
 Instead of going in the maze when the player can move:

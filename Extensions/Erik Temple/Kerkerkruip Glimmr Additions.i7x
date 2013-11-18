@@ -1770,12 +1770,12 @@ An element display rule for the map-legend (this is the map legend display rule)
 	let x be (width of the map-window - legend-width of the map-legend) + 10;
 	let y be 93;
 	display Figure of map_text_legend_title in the map-window at ((x - 10) + (legend-width of the map-legend / 2) - (image-width of Figure of map_text_legend_title / 2)) by (y - 90);
-	repeat with villain running through alive seen not off-stage persons:
+	repeat with villain running through alive seen denizen persons:
 		unless the villain is the player:
 			display the legend-label of the villain in the map-window at x by y;
 			increase y by the image-height of the legend-label of the villain plus 0;
 	unless the number of dead persons is 0:
-		if the number of alive seen not off-stage persons is greater than 0 and y is less than (height of map-window / 2):
+		if the number of alive seen denizen persons is greater than 0 and y is less than (height of map-window / 2):
 			increase y by 12;
 		repeat with villain running through dead seen persons:
 			let offset be the image-height of the legend-label of the villain / 2;

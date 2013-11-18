@@ -569,7 +569,7 @@ To decide whether all enemies are asleep:
 	decide on true.
 
 Dungeon interest rule (this is the put people asleep rule):
-	repeat with guy running through not off-stage sleeper people:
+	repeat with guy running through denizen sleeper people:
 		if a random chance of initial sleep chance of guy in 100 succeeds:
 			if guy is not the player:
 				now guy is asleep.
