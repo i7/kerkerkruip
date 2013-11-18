@@ -422,10 +422,11 @@ To say total credits:
 	[paragraph break][bold type]The Kerkerkruip team[roman type]
 	[line break][italic type]created by[roman type] Victor Gijsbers
 	[line break][italic type]with[roman type] Dannii Willis, 
-	[line break]Erik Temple [italic type]and[roman type]
-	[line break]Remko van der Pluijm
+	[line break]Erik Temple, 
+	[line break]Remko van der Pluijm [italic type]and[roman type]
+	[line break]Mike Ciul
 	[paragraph break][bold type]Testers[roman type]
-	[line break]Thank you to our alpha- and beta-testers: Bora Bosna, Captain Mikee, Lance Camelot, Matt Weiner, Michael Fransioli, Michiel Hermes, Vyacheslav Dobranov, and Wasse Asmlash. (If we've forgotten you, let us know!) Any work of interactive fiction needs testers, but one as complicated as [Kerkerkruip] doubly so.
+	[line break]Thank you to our alpha- and beta-testers: Bora Bosna, Lance Camelot, Matt Weiner, Michael Fransioli, Michiel Hermes, Vyacheslav Dobranov, and Wasse Asmlash. (If we've forgotten you, let us know!) Any work of interactive fiction needs testers, but one as complicated as [Kerkerkruip] doubly so.
 	[paragraph break][bold type]Free software[roman type]
 	[line break][Kerkerkruip] is free and open source software. It is copyright 2013 and released under the GNU GPL version 3 licence, or any later version.
 	[paragraph break]At the core of [Kerkerkruip] is Inform ATTACK, a combat library for Inform 7, by Victor Gijsbers. It too is released under the GNU GPL 3.
