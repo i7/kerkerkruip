@@ -244,16 +244,17 @@ tip
 Table of Expert Tips
 tip
 "You can now snort ment in combat."
-"Examining a monster will reveal its health."
+"Examining a monster will reveal its health and tell you what weapon it wields."
 "Balance body, mind and spirit to maximise your chance of rolling 20."
 "Most scrolls won't hurt you, so experimenting can pay off."
 "The goddess Sul can help you with cursed items."
 "Fragmentation grenades will break people's concentration."
 "The power of the bomb will automatically choose the best victim."
 "If you want to see all items and monsters, use the unlock everything option in the menu."
-"The [italic type]roll[roman type] action is a more risky, but potentially more rewarding, version of the [italic type]dodge[roman type] action."
-"You can sacrifice your concentration for a more powerful [italic type]parry[roman type] by choosing the [italic type]block[roman type] action."
-
+"The [italic type]roll[roman type] reaction is a more risky, but potentially more rewarding, version of the [italic type]dodge[roman type] reaction."
+"If you wear a shield, you can [italic type]block[roman type] attacks, converting offensive flow to defensive flow."
+"You can [italic type]expose[roman type] yourself to an attack if you actually want to get hit."
+"Offensive flow and defensive flow can never total more than 3."
 
 Window-drawing rule for the powers-header-window when the powers-header-window is g-present (this is the construct powers header window rule):
 	move focus to powers-header-window, clearing the window;
