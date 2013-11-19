@@ -72,6 +72,7 @@ To do a dream:
 
 To dream (item - a dream):
 	now dreaming is true;
+	now item is dreamt;
 	now dreamer-location is the location;
 	now the dreamer is the player;
 	say "You are pulled towards a dream ...";
