@@ -36,10 +36,10 @@ To decide whether (guy - a thing) and (other guy - a thing) share a world:
 	[The rest really is necessary:]
 	if guy is denizen and other guy is denizen:
 		decide yes;
-	if guy is a backdrop or other guy is a backdrop:
-		showme location of guy;
-		[avoid testing the location of a backdrop]
-		[this will not work correctly if the backdrop is present somewhere besides the main dungeon]
+	if location of guy is nothing:
+		[possible if guy is a backdrop]
+		decide no;
+	if location of other guy is nothing:
 		decide no;
 	let way be best route from (location of guy) to (location of other guy);
 	if way is a direction:
