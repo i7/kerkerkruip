@@ -19,9 +19,12 @@ Section - Denizen
 
 Definition: a person is a denizen if it is not off-stage and the location of it is placed and it is alive.
 
+Definition: a thing is denizen if it is not off-stage and the location of it is placed.
+
 Section - World sharing
 
 To decide whether (guy - a thing) and (other guy - a thing) share a world:
+	[These shouldn't be necessary, but they might make it faster:]
 	if guy is a person:
 		if guy is not alive:
 			decide no;
@@ -30,8 +33,14 @@ To decide whether (guy - a thing) and (other guy - a thing) share a world:
 			decide no;
 	if guy is off-stage or other guy is off-stage:
 		decide no;
-	if location of guy is placed and location of other guy is placed:
+	[The rest really is necessary:]
+	if guy is denizen and other guy is denizen:
 		decide yes;
+	if guy is a backdrop or other guy is a backdrop:
+		showme location of guy;
+		[avoid testing the location of a backdrop]
+		[this will not work correctly if the backdrop is present somewhere besides the main dungeon]
+		decide no;
 	let way be best route from (location of guy) to (location of other guy);
 	if way is a direction:
 		decide yes;
@@ -48,9 +57,6 @@ Section - Worldsharer
 World test subject is a thing that varies. World test subject is yourself.
 
 Definition: a thing is worldsharer if it and world test subject share a world.
-
-
-
 
 
 Part - Properties of rooms
@@ -1059,6 +1065,8 @@ Chance to win rule when the global attacker is rusted (this is the CTW rusted mo
 Section - Rust spores
 
 A room can be rust-spored. A room is usually not rust-spored.
+
+Definition: rust spores are denizen if a placed room is rust-spored.
 
 Rust spores is a backdrop. Rust spores is everywhere. Rust spores is plural-named. Understand "brown" and "moss" and "spore" as rust spores.
 
