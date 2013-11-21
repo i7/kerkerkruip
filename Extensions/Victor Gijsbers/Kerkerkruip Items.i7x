@@ -578,11 +578,12 @@ Miranda's amulet is silver.
 
 The description of Miranda's amulet is "This silver amulet, shaped like the sun and imbued with magic, was given to Miranda by her father when she set out on a life of adventure. It will reflect ranged attacks back to the attacker 10% of the time.".
 
-Check an actor hitting when the noun wears Miranda's amulet (this is the Miranda's amulet rule):
+Last check an actor hitting when the noun wears Miranda's amulet (this is the Miranda's amulet rule):
 	if the global attacker weapon is ranged:
-		unless the actor is the noun: [No infinite reflection cascade!]
+		unless reflection-attack is true: [No infinite reflection cascade!]
 			if a random chance of 1 in 10 succeeds:
 				say "The magic of Miranda's amulet [bold type]reflects[roman type] the attack back to [the actor]!";
+				now reflection-attack is true;
 				try the actor hitting the actor instead.
 
 
@@ -1008,12 +1009,13 @@ To decide which number is the cloak of reflection percentage:
 
 The description of the cloak of reflection is "A piece of silk with thousands of small magical mirrors sewn on it, this cloak is both beautiful and useful. It will reflect ranged attacks back to the attacker [cloak of reflection percentage]% of the time[if blood magic level of cloak of reflection is not blood magic maximum of cloak of reflection]. This will increase by 15% if the cloak is fed[end if].".
 
-Check an actor hitting when the noun wears the cloak of reflection (this is the cloak of reflection rule):
+Last check an actor hitting when the noun wears the cloak of reflection (this is the cloak of reflection rule):
 	if the global attacker weapon is ranged:
-		unless the actor is the noun: [No infinite reflections]
+		unless reflection-attack is true: [No infinite reflections]
 			let n be 15 * (1 + blood magic level of cloak of reflection);
-			if a random chance of n in 100 succeeds:
+			if a random chance of n in 10 succeeds:
 				say "[if the noun is the player]The[otherwise][Possessive of the noun][end if] cloak of reflection [bold type]reflects[roman type] the attack back to [the actor]!";
+				now reflection-attack is true;
 				try the actor hitting the actor instead.
 
 A dungeon interest rule (this is the Malygris sometimes wears the cloak of reflection rule):

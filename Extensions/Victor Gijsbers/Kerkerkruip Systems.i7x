@@ -1263,6 +1263,15 @@ Every turn (this is the remove forced action rule):
 
 
 
+Chapter - Reflection
+
+[Some checks for hitting should not be carried out when the attack was reflected. Reflection happens during check hitting; should remain true during the check hitting for the reflected attack; and should then be stopped.]
+
+Reflection-attack is a truth state that varies. Reflection-attack is false.
+
+First carry out an actor hitting:
+	now reflection-attack is false.
+
 
 Part - Person stuff
 

@@ -99,15 +99,16 @@ Check an actor hitting when the location is Hall of Mirrors (this is the sometim
 	unless the global attacker is blind:
 		unless the global attacker grapples the global defender:
 			unless the global defender grapples the global attacker:
-				test the mind of global attacker against 10;
-				if test result is false:
-					say " Confused by the mirrors, [if global attacker is the player]you start[otherwise][the global attacker] starts[end if] attacking a reflection before realising [if global attacker is the player]your[otherwise]its[end if] mistake.";
-					if the concentration of the global attacker is greater than 1:
-						now the concentration of the global attacker is 1; 
-					rule fails;
-	[				consider the take away until attack circumstances rules;]
-				otherwise:
-					say " Seeing through the illusion created by the mirrors, [if global attacker is the player]you attack[otherwise][the global attacker] attacks[end if] the real [if global defender is not the player][global defender][otherwise]you[end if].".
+				unless reflection-attack is true:
+					test the mind of global attacker against 10;
+					if test result is false:
+						say " Confused by the mirrors, [if global attacker is the player]you start[otherwise][the global attacker] starts[end if] attacking a reflection before realising [if global attacker is the player]your[otherwise]its[end if] mistake.";
+						if the concentration of the global attacker is greater than 1:
+							now the concentration of the global attacker is 1; 
+						rule fails;
+		[				consider the take away until attack circumstances rules;]
+					otherwise:
+						say " Seeing through the illusion created by the mirrors, [if global attacker is the player]you attack[otherwise][the global attacker] attacks[end if] the real [if global defender is not the player][global defender][otherwise]you[end if].".
 
 An AI action selection rule for a person (called P) when the location is Hall of Mirrors (this is the concentration is more important in the Hall of Mirrors rule):
 	choose row with an Option of the action of P concentrating in the Table of AI Action Options;
