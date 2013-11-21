@@ -2139,9 +2139,17 @@ Every turn when hound status > 0:
 		now the initiative of the main actor is saved initiative;
 	decrease hound status by 1.
 
+Hound-preparedness-possible is a truth state that varies.
+
+First carry out hitting (this is the remember whether preparedness was possible rule):
+	if the noun is asleep or the actor is hidden:
+		now hound-preparedness-possible is false;
+	otherwise:
+		now hound-preparedness-possible is true.
+
 An aftereffects rule (this is the set up the power of the hound rule):
 	[ Check that we're not running from a battle - the power isn't used in that circumstance! ]
-	if the global defender is at-React:
+	if the global defender is at-React and hound-preparedness-possible is true:
 		if the global defender is the hound and the hound is alive:
 			now hound status is 2;
 			now the hound provoker is the global attacker;
