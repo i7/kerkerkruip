@@ -473,8 +473,8 @@ Definition: a person (called guy) is dreadful if (dreadful presence of guy > 0).
 Section - Dreadful presence effect
 
 This is the dreadful presence effect rule:
-	if combat status is combat and main actor is not undead:
-		repeat with guy running through alive people in the location:
+	if combat status is combat and main actor is not undead and the main actor is not asleep:
+		repeat with guy running through alive not hidden not asleep people in the location:
 			if faction of guy hates faction of main actor:
 				let n be dreadful presence of guy;
 				if n > 0:
