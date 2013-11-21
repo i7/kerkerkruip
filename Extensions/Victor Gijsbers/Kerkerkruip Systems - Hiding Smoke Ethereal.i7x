@@ -245,11 +245,6 @@ Section - The backdrop
 
 Clouds of smoke is a backdrop. Clouds of smoke is everywhere. Clouds of smoke is plural-named. Understand "cloud" and "fog" and "vapour" and "vaopurs" and "vapor" and "vapors" as clouds of smoke.
 
-Definition: clouds of smoke are denizen:
-	Repeat with place running through placed rooms:
-		if the smoke timer of place is at least 1, yes;
-	no.
-
 Instead of doing anything with clouds of smoke when the smoke timer of the location is less than 1:
 		say "This place is free of smoke.".
 

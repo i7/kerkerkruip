@@ -15,32 +15,25 @@ The test object is an object that varies.
 
 Part - Keeping track of where things are
 
+Section - Worldsharable
+
+Definition: a thing is worldsharable if it is not off-stage.
+
+Definition: a backdrop is worldsharable: no.
+
+Definition: a person is worldsharable if it is not off-stage and it is alive.
+
 Section - Denizen
 
-Definition: a person is a denizen if it is not off-stage and the location of it is placed and it is alive.
-
-Definition: a thing is denizen if it is not off-stage and the location of it is placed.
+Definition: a thing is denizen if it is worldsharable and the location of it is placed.
 
 Section - World sharing
 
 To decide whether (guy - a thing) and (other guy - a thing) share a world:
-	[These shouldn't be necessary, but they might make it faster:]
-	if guy is a person:
-		if guy is not alive:
-			decide no;
-	if other guy is a person:
-		if other guy is not alive:
-			decide no;
-	if guy is off-stage or other guy is off-stage:
+	if guy is not worldsharable or other guy is not worldsharable:
 		decide no;
-	[The rest really is necessary:]
 	if guy is denizen and other guy is denizen:
 		decide yes;
-	if location of guy is nothing:
-		[possible if guy is a backdrop]
-		decide no;
-	if location of other guy is nothing:
-		decide no;
 	let way be best route from (location of guy) to (location of other guy);
 	if way is a direction:
 		decide yes;
@@ -57,7 +50,6 @@ Section - Worldsharer
 World test subject is a thing that varies. World test subject is yourself.
 
 Definition: a thing is worldsharer if it and world test subject share a world.
-
 
 Part - Properties of rooms
 
@@ -1065,8 +1057,6 @@ Chance to win rule when the global attacker is rusted (this is the CTW rusted mo
 Section - Rust spores
 
 A room can be rust-spored. A room is usually not rust-spored.
-
-Definition: rust spores are denizen if a placed room is rust-spored.
 
 Rust spores is a backdrop. Rust spores is everywhere. Rust spores is plural-named. Understand "brown" and "moss" and "spore" as rust spores.
 
