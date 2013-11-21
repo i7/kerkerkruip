@@ -5825,14 +5825,16 @@ Carry out the abyss of the soul pulsating:
 Section - Growing
 
 An absorption stopping rule (this is the abyss of the soul absorbs all souls rule):
-	if the abyss of the soul and test subject share a world:
+	if the abyss of the soul and the player share a world:
 		if the level of test subject is not 0 and the level of test subject is not 10:
+			let grown-boolean be false;
 			if the abyss of the soul is not gargantuan:
+				now grown-boolean is true;
 				now the abyss of the soul is the size after the size of the abyss of the soul;
 				now base size of the abyss of the soul is the size of the abyss of the soul;
 			increase health of the abyss of the soul by 15;
 			increase abyss of the soul strength by 1;
-			say "You attempt to absorb the soul of [the test subject], but feel how it disappears into the [bold type]deadly abyss[roman type][if test subject is Malygris]. The abyss of the soul immediately grows to gigantic proportions, obliterating the entire dungeon[end if].";
+			say "You attempt to absorb the soul of [the test subject], but feel how it disappears into the [bold type]deadly abyss[roman type][if the abyss of the soul is visible and grown-boolean is true], which immediately grows to [size of the abyss of the soul] size[end if][if test subject is Malygris]. The abyss of the soul immediately grows to gigantic proportions, obliterating the entire dungeon[end if].";
 			if the level of test subject is 5:
 				end the story saying "Malygris is dead, and so are you. Technically, that counts as a victory.";
 			rule succeeds;
