@@ -651,12 +651,12 @@ Understand "trophy" and "trophies" and "list trophies" as requesting the score.
 The announce the score rule is not listed in the carry out requesting the score rules.
 Carry out requesting the score:
 	if the number of dead persons is 0:
-		say "You have not yet killed anyone, taking [turn count] turn[s] to do so.";
+		say "You have not yet killed anyone, taking [turn count] turn[s] to do so, on difficulty level [difficulty level difficulty].[line break][paragraph break]";
 	otherwise:
 		say "The following beings have been vanquished:";
 		repeat with guy running through dead seen persons:
 			say "[line break]- [italic type][the name of the guy][roman type] (level [if group level of the guy is not 0][group level of the guy][otherwise][level of the guy][end if])";
-		say "[paragraph break]You have accomplished this in [turn count] turn[s]!";
+		say "[paragraph break]You have accomplished this in [turn count] turn[s], on difficulty level [difficulty level difficulty].[line break][paragraph break]";
 
 Chapter - Commands command
 
