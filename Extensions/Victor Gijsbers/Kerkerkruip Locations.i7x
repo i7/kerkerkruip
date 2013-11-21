@@ -1752,7 +1752,7 @@ To maze (the first guy - a person) and (the second guy - a person):
 Section - Getting out of the maze
 
 
-Every turn when the location is the maze:
+Last every turn when the location is the maze:
 	update the combat status;
 	if no person is in the maze-waiting-room and combat status is peace:
 		say "You are [bold type]transported back[roman type] from the maze.";
