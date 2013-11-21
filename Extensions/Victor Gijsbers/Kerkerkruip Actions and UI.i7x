@@ -975,25 +975,54 @@ Carry out taking inventory:
 
 Stock-taking is an activity.
 
+Inventory-avoid-more is a truth state that varies.
+Inventory-shown-items-max is a number that varies. Inventory-shown-items-max is 27.
+
 Carry out taking inventory (this is the full inventory rule):
 	if the number of things had by the player is 0, say "You are empty-handed." instead;
+	now inventory-avoid-more is false;
+	carry out the stock-taking activity.
+
+This is the full panel inventory rule:
+	if the number of things had by the player is 0, say "You are empty-handed." instead;
+	now inventory-avoid-more is true;
 	carry out the stock-taking activity.
 
 After printing the name of a readied weapon while stock-taking (this is the readied stock listing rule):
 	say " (readied)".
 
 For stock-taking:
+	let m be the number of things enclosed by the player;
+	let abbreviate be false;
+	if  inventory-avoid-more is true and (m > inventory-shown-items-max):
+		now abbreviate is true;
 	unless the number of weapons enclosed by the player is the number of natural weapons enclosed by the player:
+		let n be 0;
 		say "You are carrying[line break][italic type]-weapons[roman type]: [line break]";
 		now all things enclosed by the player are unmarked for listing; 
 		now all weapons enclosed by the player are marked for listing; 
 		now all natural weapons enclosed by the player are unmarked for listing;
+		if abbreviate is true and (the number of marked for listing not readied weapons enclosed by the player > 1):
+			repeat with item running through marked for listing weapons enclosed by the player:
+				unless item is readied:
+					now item is unmarked for listing;
+					increase n by 1;
 		list the contents of the player, with newlines, indented, giving inventory information, including contents, with extra indentation, listing marked items only;
+		if abbreviate is true and n > 0:
+			say "  [n in words] unreadied weapons[line break]";
 	unless the number of clothing enclosed by the player is 0:
+		let n be 0;
 		say "[italic type]-clothing[roman type]:[line break]";
 		now all things enclosed by the player are unmarked for listing; 
 		now all clothing enclosed by the player are marked for listing; 
+		if abbreviate is true and (the number of marked for listing not worn clothing enclosed by the player > 1):
+			repeat with item running through marked for listing clothing enclosed by the player:
+				unless item is worn:
+					now item is unmarked for listing;
+					increase n by 1;
 		list the contents of the player, with newlines, indented, giving inventory information, including contents, with extra indentation, listing marked items only;
+		if abbreviate is true and n > 0:
+			say "  [n in words] unworn items[line break]";
 	unless the number of scrolls enclosed by the player is 0:
 		say "[italic type]-scrolls[roman type]:[line break]";
 		now all things enclosed by the player are unmarked for listing; 
@@ -1004,7 +1033,6 @@ For stock-taking:
 		now all things enclosed by the player are unmarked for listing; 
 		now all grenades enclosed by the player are marked for listing; 
 		list the contents of the player, with newlines, indented, giving inventory information, including contents, with extra indentation, listing marked items only;
-	let m be the number of things enclosed by the player;
 	decrease m by the number of weapons enclosed by the player;
 	decrease m by the number of clothing enclosed by the player;
 	decrease m by the number of scrolls enclosed by the player;
