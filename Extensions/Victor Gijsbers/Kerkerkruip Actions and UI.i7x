@@ -712,7 +712,13 @@ When play begins:
 Instead of singing:
 	say "You hum a battle hymn.".
 
-
+Instead of swearing obscenely:
+	take no time;
+	say "Yeah.".
+	
+Instead of swearing mildly:
+	take no time;
+	say "Sure.".
 
 
 Chapter - Talking
