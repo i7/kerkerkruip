@@ -160,7 +160,9 @@ To say phantasmagoria show:
 				say "three bull-men getting eaten by a horrendous swamp monster".
 
 Every turn when the location is the phantasmagoria and the combat status is not peace:
-	if a random chance of 1 in 5 succeeds:
+	let n be the number of alive persons in phantasmagoria;
+	now n is (3 times n);
+	if a random chance of 1 in n succeeds:
 		let lijst be a list of persons;
 		repeat with guy running through alive persons enclosed by the location:
 			unless guy is blind:
