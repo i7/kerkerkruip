@@ -2704,7 +2704,7 @@ To unmake helpers followers:
 
 To release slaves:
 	if at least one alive person is player-enslaved:
-		say "[if at least two alive persons are player-enslaved]Your slaves are[otherwise]Your slave is[end if] [bold type]released[roman type] from bondage!";
+		say "[if at least two alive persons are player-enslaved]Your slaves are[otherwise]Your slave is[end if] [bold type]released[roman type] from bondage![paragraph break]";
 		repeat with guy running through player-enslaved people:
 			now faction of guy is hostile.
 
