@@ -843,7 +843,7 @@ Alchemical Laboratory is alchemical.
 The curious machine is scenery in alchemical laboratory. The curious machine is an open container. The material of the curious machine is iron. The description of the curious machine is "You have no idea how this machine works, but it seems that you can insert an item into it.".
 
 Last check inserting something into the curious machine:
-	if the noun is a grenade:
+	if the noun is a grenade or the noun is incorruptible:
 		say "The machine beeps angrily and rejects [the noun].";
 	otherwise:
 		let chosen grenade be a random flash grenade;
