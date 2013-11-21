@@ -844,6 +844,8 @@ Alchemical Laboratory is alchemical.
 
 The curious machine is scenery in alchemical laboratory. The curious machine is an open container. The material of the curious machine is iron. The description of the curious machine is "You have no idea how this machine works, but it seems that you can insert an item into it.".
 
+The machine-counter is a number that varies. The machine-counter is 0.
+
 Last check inserting something into the curious machine:
 	if the noun is a grenade or the noun is incorruptible:
 		say "The machine beeps angrily and rejects [the noun].";
@@ -858,8 +860,19 @@ Last check inserting something into the curious machine:
 		if a random chance of 1 in 100 succeeds, now chosen grenade is the Blessed Grenade;
 		let item be a new object cloned from chosen grenade;
 		move item to the location;
+		have the parser notice the item;
+		increase machine-counter by 1;
 		remove the noun from play;
-		say "You put [the noun] in the curious machine. It starts clicking and beeping, and after a short while, [an item] drops on the ground.";
+		let explode-boolean be false;
+		if a random chance of machine-counter in 50 succeeds:
+			now explode-boolean is true;
+			now machine-counter is 0;
+		say "You put [the noun] in the curious machine. It starts clicking and beeping, and after a short while, [an item] drops on the ground[if explode-boolean is true]. Something seems to have gone wrong, though, and it immediately explodes[end if].";
+		if explode-boolean is true:
+			now exploding-location is the location;
+			now exploding-grenade is the item;
+			follow the exploding rules;
+			remove item from play;
 	rule succeeds.
 
 
