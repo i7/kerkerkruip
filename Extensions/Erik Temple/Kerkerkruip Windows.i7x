@@ -377,7 +377,7 @@ Section - Menus & windows
 
 [We need to close and open the side windows when we visit the in-game help menus. "In-game menu checking" is a kind of action that identifies the way we get to the menus while playing the game.]
 
-Before displaying:
+First before displaying (this is the fix our windows rule before displaying rule):
 	close side windows;
 	open the status window;
 
