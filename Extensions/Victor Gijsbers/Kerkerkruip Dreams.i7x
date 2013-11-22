@@ -338,7 +338,12 @@ The Monty-list is a list of things that varies. The Monty-list is {marble black 
 When play begins:
 	sort Monty-list in random order.
 
-Before opening a container in Monty Hall:
+Instead of taking a scenery container in Monty Hall:
+	try opening the noun.
+
+Understand "choose [text]" as a mistake ("To choose a chest, open it.") when the location is Monty Hall. 
+
+Before opening a scenery container in Monty Hall:
 	if Monty-Hall-voice < 2:
 		now Monty-Hall-voice is 2;
 		let item be entry 2 in Monty-list;
@@ -355,7 +360,7 @@ Instead of opening a container in Monty Hall:
 	otherwise:
 		now permanent health of the dreamer is 1;
 		now health of the dreamer is 1;
-		say "As you carefully open [the noun], the glow of gold and gems welcomes you. Filled with joy you throw open the lid -- and a demonic being with golden skin and flowing eyes jumps out and starts tearing you apart with its monstrous claws.[paragraph break][bold type]When you wake up, the wounds have not healed.[roman type][paragraph break]";
+		say "As you carefully open [the noun], the glow of gold and gems welcomes you. Filled with joy you throw open the lid -- and a demonic being with golden skin and glowing eyes jumps out and starts tearing you apart with its monstrous claws.[paragraph break][bold type]When you wake up, the wounds have not healed.[roman type][paragraph break]";
 	wake the player up.
 
 
