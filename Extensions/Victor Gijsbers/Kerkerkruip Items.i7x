@@ -923,7 +923,7 @@ The indefinite article of the robe of the dead mage is "the".
 The unlock level of the robe of the dead mage is 7.
 The unlock text of the robe of the dead mage is "a piece of clothing that allows you to remain concentrated when hit... at a price".
 
-The description of the robe of the dead mage is "Dominique, marquis of Savon, one of the great mages of his generation, was so fed up with losing his concentration when he was hit that he developed this robe. When the wearer is damaged in combat, he will not lose his concentration; but the protection comes from his life force, and the damage dealt to him is increased by 25% for every level of concentration. Nobody ever died with as much concentration as Dominique.".
+The description of the robe of the dead mage is "Dominique, marquis of Savon, one of the great mages of his generation, was so fed up with losing his concentration when he was hit that he developed this robe. When the wearer is damaged in combat, he gains 1 defence and will not lose his concentration. However, the protection comes from his life force, and the damage dealt to him is increased by 25% for every level of concentration. The say nobody ever died with as much concentration as Dominique.".
 
 A damage multiplier rule when the global defender wears the robe of the dead mage (this is the robe of the dead mage damage multiplier rule):
 	if concentration of the global defender is:
