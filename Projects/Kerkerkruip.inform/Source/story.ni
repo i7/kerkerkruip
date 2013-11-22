@@ -39,7 +39,7 @@ Include Kerkerkruip Windows by Erik Temple.
 Section - Include ATTACK
 
 [ Get the latest ATTACK at https://github.com/i7/ATTACK ]
-Include version 5/130930 of Inform ATTACK by Victor Gijsbers.
+Include version 5/131118 of Inform ATTACK by Victor Gijsbers.
 
 
 
