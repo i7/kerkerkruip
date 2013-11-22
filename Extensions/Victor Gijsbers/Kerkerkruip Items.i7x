@@ -1359,8 +1359,15 @@ Aftereffects rule (this is the lion's shield rule):
 	if the global defender wears the lion's shield and the global defender is at-block:
 		if the attack damage is 0:
 			if the global attacker weapon is not ranged or the global attacker weapon is a natural weapon:
-				decrease health of the global attacker by 2;
-				say "The lion on the shield strikes out, and bites [the global attacker] for [bold type]2 damage[roman type][if health of global attacker is less than 1], which is [bold type]lethal[roman type][end if].".
+				let m be 2;
+				calculate the pdr for global attacker;
+				decrease m by pdr;
+				if m is less than 0, now m is 0;
+				if m is 0:
+					say "The lion on the shield strikes out, biting [the global attacker]. But the lion's teeth are not sharp enough to penetrate and do damage.";
+				otherwise:
+					say "The lion on the shield strikes out, and bites [the global attacker] for [bold type][m] damage[roman type][if health of global attacker is less than (m + 1)], which is [bold type]lethal[roman type][end if].";
+				decrease health of the global attacker by m.
 
 
 Chapter - Grenades
