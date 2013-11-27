@@ -1967,7 +1967,7 @@ Hall of Gods is a room. "A long hall, adorned with great statues of the [number 
 	
 Hall of Gods is connectable.
 Hall of Gods is not connection-inviting.
-Hall of Gods is not placeable.
+Hall of Gods is placeable.
 Hall of Gods is not habitable.
 Hall of Gods is not treasurable.
 Hall of Gods is extra-accepting.
