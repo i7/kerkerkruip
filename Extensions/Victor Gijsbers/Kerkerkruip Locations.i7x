@@ -1778,7 +1778,7 @@ Last every turn when the location is the maze:
 
 Chapter - Arena of the Fallen
 
-Entrance to the Arena is a room. "A large, black dome seen from the outside towers over you -- though you find it impossible to say in which direction, as if the normal rules of space do not obtain here. The outer wall of the dome, which must be the legendary Arena of the Fallen, is adorned with high reliefs of battle scenes. The scene depicted above the entrance, which seems hermetically closed, shows [if triumphing boolean is false]Victor triumphing over Malygris[otherwise] [the name of the player] triumphing over [oppname][end if]. Some inscriptions are engraved on the wall[if soulchest is in Arena of the Fallen], and a large soulchest is at your feet[end if]."
+Entrance to the Arena is a room. "A large, black dome seen from the outside towers over you -- though you find it impossible to say in which direction, as if the normal rules of space do not obtain here. The outer wall of the dome, which must be the legendary Arena of the Fallen, is adorned with high reliefs of battle scenes. The scene depicted above the entrance, which seems hermetically closed, shows [if triumphing boolean is false]Victor triumphing over Malygris[otherwise] [the name of the player] triumphing over [oppname][end if]. Some inscriptions are engraved on the wall."
 	
 Entrance to the Arena is connectable.
 Entrance to the Arena is not connection-inviting.
@@ -1819,63 +1819,64 @@ The Arena-waiting-room is magical.
 
 The black dome is scenery in the Entrance to the Arena. Understand "Arena" and "large" and "black" and "of the fallen" as the black dome. The description of the black dome is "You feel uneasy looking at it, as it seems to be formed of unholy energies that defy all the laws of your own world."
 
-The scribblings are scenery in the Entrance to the Arena and plural-named. Understand "writings" and "inscriptions" and "inscription" as the scribblings. The description of the scribblings is "[if triumphing boolean is false]As you start to read the text, it lights up in a dark crimson: [italic type] If you wish, you can relive a battle you fought before, but it will become the most challenging fight you ever had. To start the fight, simply [roman type]smash[italic type] the appropriate shard with a weapon[otherwise]Writings glowing with an eerie red light celebrate your victory: 'Hail to our last victor!'[end if].".
+The scribblings are scenery in the Entrance to the Arena and plural-named. Understand "writings" and "inscriptions" and "inscription" as the scribblings. The description of the scribblings is "[if triumphing boolean is false]As you start to read the text, it lights up in a dark crimson: [italic type] If you wish, you can relive a battle you fought before, but it will become the most challenging fight you ever had. To start the fight, simply [roman type]REVIVE[italic type][otherwise]Writings glowing with an eerie red light celebrate your victory: 'Hail to our last victor!'[end if].".
 
 Instead of reading the scribblings:
 	try examining the scribblings.
 
-The soulchest is a scenery, opaque, openable, open, fixed in place container in Entrance to the Arena. Understand "chest" and "ruby" and "rubies" as the soulchest. The description of the soulchest is "A large chest, adorned with a number of crimson rubies." 
-
-A soulfragment is a kind of thing with description "A shard of a lost soul. You could smash it to resurrect the being it belongs to.".
-Soulcatching relates a person to a soulfragment. The verb to soulcatch (he soulcatches, it soulcatches, they soulcatch, it is soulcatched, it has been soulcatched, it was soulcatched) implies the soulcatching relation.
-Every person soulcatches a soulfragment (called its shard). 
 
 The triumphing boolean is a truth state variable that varies. The triumphing boolean is false.
 The fighting boolean is a truth state variable that varies. The fighting boolean is false.
 The oppname is a text that varies. The oppname is "".
+Challengelijst is a list of texts that varies.
+Beestlijst is a list of monsters that varies.
 
-Before doing anything in Entrance to the Arena:
-	if soulchest is not off-stage:
-		consider the soulshards to chest rule.
+Reviving is an action applying to nothing. Understand "revive" as reviving.
 
-This is the soulshards to chest rule:
-	repeat with guy running through all dead not grouper persons:
-		if guy is not group leading or the group of guy has been defeated: 
-			repeat with P running through powers granted by guy:
-				if P is not granted:
-					let soulfrag be a random soulfragment soulcatched by guy;
-					move soulfrag to the soulchest.
-
-Shardsmashing is an action applying to one thing.
-
-Instead of attacking a soulfragment:
-	try shardsmashing the noun.
-
-Carry out shardsmashing:
+Carry out reviving:
 	if the player is in the Entrance to the Arena:
-		repeat with Pers running through monsters who soulcatches the noun:
-			if Pers is group leading and Pers is not defeated individually:
-				move Pers to the Arena-waiting-room;
-				now oppname is the printed name of Pers;
-				if Pers is initially accompanied:
-					repeat with X running through people who accompany Pers:
-						challenge X;
-						move X to the location of Pers;
-				repeat with guy running through persons in the Arena-waiting-room:
-					challenge guy;
-					say "The heavy doors open, where the angry [guy] awaits, strengthened by evil magic!";
-				now the fighting boolean is true;
-				move the player to the Arena of the Fallen;
-			otherwise:
-				now the oppname is the printed name of Pers;
-				challenge Pers;
-				say "The heavy doors open, where the angry [Pers] awaits, strengthened by evil magic!";
-				move the player to the Arena of the Fallen;
-				now the fighting boolean is true;
-	otherwise:
-		say "You have already challenged someone. The Arena can only be used once.";
-		take no time.
+		take no time;
+		now Challengelijst is {};
+		now Beestlijst is {};
+		now current question is  "Which fallen warrior do you wish to fight? (Please enter a number):";
+		repeat with Beest running through all dead not grouper persons:
+			if Beest is not group leading or the group of Beest has been defeated: 
+				repeat with P running through powers granted by Beest:
+					if P is not granted:
+						add Beest to Beestlijst;
+						add printed name of Beest to Challengelijst;
+		add "do not fight a Chosen One" to Challengelijst;
+		now current question menu is Challengelijst;
+		ask a closed question, in menu mode.
 
+
+A menu question rule (this is the FallenFighting rule):
+	if the current question is "Which fallen warrior do you wish to fight? (Please enter a number):":
+		let n be the number of entries in Challengelijst;
+		let m be the number understood;
+		if m > 0:
+			if m < n:
+				let Pers be entry m of Beestlijst;
+				if Pers is group leading and Pers is not defeated individually:
+					move Pers to the Arena-waiting-room;
+					now oppname is the printed name of Pers;
+					if Pers is initially accompanied:
+						repeat with X running through people who accompany Pers:
+							challenge X;
+							move X to the location of Pers;
+					repeat with guy running through persons in the Arena-waiting-room:
+						challenge guy;
+						move guy to the Arena of the Fallen;
+						say "The heavy doors open, where the angry [guy] awaits, strengthened by evil magic!";
+					now the fighting boolean is true;
+					move the player to the Arena of the Fallen;
+				otherwise:
+					now the oppname is the printed name of Pers;
+					challenge Pers;
+					move Pers to the Arena of the Fallen;
+					say "The heavy doors open, where the angry [Pers] awaits, strengthened by evil magic!";
+					move the player to the Arena of the Fallen;
+					now the fighting boolean is true.
 
 To challenge (the guy - a person):
 	let x be level of the guy;
@@ -1890,7 +1891,6 @@ To challenge (the guy - a person):
 	increase the spirit score of guy by g;
 	increase the melee of guy by 3;
 	increase the defence of guy by 3;
-	move the guy to the Arena of the Fallen;
 	restore the health of the guy.
 
 The demon boredom is a number which varies. The demon boredom is 0.
@@ -1954,7 +1954,6 @@ Every turn when the location is the Arena of the Fallen:
 		repeat with item running through things in the Arena of the Fallen:
 			unless (item is player or item is backdrop):
 				move item to Entrance to the Arena;
-		now soulchest is off-stage;
 		move player to Entrance to the Arena;
 		award achievement Twice fallen.
 
