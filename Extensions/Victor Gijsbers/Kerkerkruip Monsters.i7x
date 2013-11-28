@@ -1753,6 +1753,8 @@ Section - Reaping
 
 Reaping is an action applying to one thing. Understand "reap [any person]" as reaping.
 
+Reaping is bypassing-scope.
+
 [Thanks Aaron A. Reed, for the following two bits code -- Stolen from Remembering]
 
 The allow reaping faraway things rule is listed instead of the basic accessibility rule in the action-processing rules.
@@ -4391,6 +4393,8 @@ Status skill rule (this is the vermind status skill rule):
 Section - Calling
 
 Calling is an action applying to one visible thing. Understand "call [any person]" as calling.
+
+Calling is bypassing-scope.
 
 Check calling:
 	if power of the overmind is not granted:

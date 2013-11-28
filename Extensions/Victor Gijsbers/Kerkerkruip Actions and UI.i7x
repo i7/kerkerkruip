@@ -140,6 +140,8 @@ Going to is an action applying to one object.
 Understand "go to [any visited room]" and "go [any visited room]" and "[any visited room]" as going to.
 Understand "go to [any seen person]" and "go [any seen person]" and "[any seen person]" as going to.
 
+Going to is bypassing-scope.
+
 Does the player mean going to a not alive person: it is unlikely.
 [ Should we also allow going to things? ]
 
@@ -175,7 +177,7 @@ Carry out going to a thing:
 	let way be the best route from the location of player to location-to-go through visited safe rooms;
 	unless way is a direction:
 		take no time;
-		say "You don't know a safe path towards [it-them]." instead;
+		say "You don't know a safe path towards [it-them of noun]." instead;
 	say "You last saw [the noun] in [the location-to-go], so you [one of]strike out[or]head[at random] towards there.";
 	try going way instead;
 

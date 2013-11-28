@@ -1091,16 +1091,11 @@ Instead of examining the fascinating drawing:
 		unless guy is Malygris or guy is Nameless Horror:
 			add guy to X;
 	let n be the number of dead persons;
-	let item be a random readied weapon carried by the player;
 	if the number of entries in X is greater than 1:
 		say "The artist has skillfully drawn a battle scene involving [X with indefinite articles]. [if n is greater than 2]Several figures seem to have been smudged out. [end if]In the background, Malygris rises triumphant over all[if Eternal Prison is placed] -- unless the huge shadow behind him is a creature threatening to consume even him[end if]. You could further [italic type]examine[roman type] the individual creatures, if you wanted to.";
 	otherwise:
 		say "The artist has skillfully drawn a battle scene between you and Malygris, where you are evidently being crushed by the mighty wizard. Large portions of the drawing have been wiped out.".
 
-[After deciding the scope of the player while the location is the Drawing Room:
-	repeat with guy running through alive not off-stage persons:
-		unless guy is Nameless Horror:   [TODO!!! This is an ugly hack.]
-			place guy in scope.]
 
 Adjusted scope for the drawing room is a truth state that varies.
 
@@ -1116,14 +1111,17 @@ After taking a player action:
 	now adjusted scope for the drawing room is false.
 
 
+Examining is bypassing-scope.
+[ See more in Monsters ]
 
-Before doing anything except examining or reaping or going to in Drawing Room:
-	if the noun is a person and the location of the noun is not the location of the player:
-		take no time;
-		say "It is only a drawing." instead;
-	if the second noun is a person and the location of the second noun is not the location of the player:
-		take no time;
-		say "It is only a drawing." instead;
+Before doing something in the Drawing Room:
+	if not bypassing-scope:
+		if the noun is a person and the location of the noun is not the location of the player:
+			take no time;
+			say "It is only a drawing." instead;
+		if the second noun is a person and the location of the second noun is not the location of the player:
+			take no time;
+			say "It is only a drawing." instead;
 	continue the action.
 
 Persuasion rule for asking people to try doing something when the player is in Drawing Room:
