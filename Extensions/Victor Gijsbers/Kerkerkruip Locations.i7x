@@ -1936,6 +1936,9 @@ Every turn when the location is the Arena of the Fallen and the combat status is
 		now the current dissatisfaction is 0;
 		increase the demon boredom by 2.
 
+A teleport impossible rule (this is the no teleportation in Arena of the Fallen rule):
+	if the location of the test subject is the Arena of the Fallen:
+		rule succeeds.
 		
 
 Section - Entrance to the Arena label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
@@ -1960,7 +1963,7 @@ Every turn when the location is the Arena of the Fallen:
 
 Chapter - Arena of the Gods
 
-Hall of Gods is a room. "A long hall, adorned with great statues of the [number of gods in words] great gods are here, together with pictures of the great battles already fought in this room. The last picture mentions [if Godfight boolean is true]you triumphing over [Chosenname][otherwise][random fight text][end if]. [if the Godfight boolean is false] If you are willing to fight, stand on the empty pedestal.[end if] Agnosticists and Atheists will not be tolerated!" 
+Hall of Gods is a room. "A long hall, adorned with great statues of the [number of gods in words] great gods are here, together with pictures of the great battles already fought in this room. The last picture mentions [if Godfight boolean is true]you triumphing over [Chosenname][otherwise][random fight text][end if]. [if the Godfight boolean is false]While this fight may not let you harvest the soul of the opponent, your victory will be hailed upon by your god [italic type](+2 divine favour)[roman type]. If you are willing to fight, stand on the empty pedestal.[end if] Agnosticists and Atheists will not be tolerated!" 
 	
 Hall of Gods is connectable.
 Hall of Gods is not connection-inviting.
@@ -1988,7 +1991,7 @@ The Arena of the Gods is religious.
 
 The godfight pedestal is an enterable supporter and scenery in the Hall of Gods. Understand "pedestal" and "empty pedestal" as the godfight pedestal.
 
-Godfightame1 is a text that varies.
+Godfightname1 is a text that varies.
 Godfightame2 is a text that varies.
 
 
@@ -1998,10 +2001,10 @@ To decide which text is the random fight text:
 		if (the player does not worship g) and (there is a monster incarnating g):
 			add the monsteravatar of g to L;
 	sort L in random order;
-	now Godfightame1 is the printed name of entry 1 of L;
-	now Godfightame2 is the printed name of entry 2 of L;
+	now Godfightname1 is the printed name of entry 1 of L;
+	now Godfightname2 is the printed name of entry 2 of L;
 	let z be a text;
-	now z is "[Godfightame1] triumphing over [Godfightame2]";
+	now z is "[Godfightname1] triumphing over [Godfightname2]";
 	decide on z.
 	
 Section - Incarnating 
@@ -2085,6 +2088,11 @@ A menu question rule (this is the ChosenFighting rule):
 			otherwise:
 				say "You decide it is best to defend the honour of your God another time...".
 
+Section - no teleporting
+
+A teleport impossible rule (this is the no teleportation in Arena of the Gods rule):
+	if the location of the test subject is the Arena of the Gods:
+		rule succeeds.
 
 Section - Godly intervention
 [For each God, I'll be implementing some form of godly intervention here based on Victor's divine interventions
@@ -2251,6 +2259,7 @@ An absorption stopping rule (this is the alternative award at the Arena of the G
 		say "Your God grants you 2 divine favour!";
 		rule succeeds.
 
+
 Section - Getting out of the Arena
 
 Every turn when the location is the Arena of the Gods(this is the teleport after killing rule):
@@ -2261,6 +2270,7 @@ Every turn when the location is the Arena of the Gods(this is the teleport after
 		repeat with item running through things in the Arena of the Gods:
 			unless (item is player or item is backdrop):
 				move item to Hall of Gods;
+				remove the godfight pedestal from play;
 		move player to Hall of Gods.
 
 Section - Hall of Gods label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
