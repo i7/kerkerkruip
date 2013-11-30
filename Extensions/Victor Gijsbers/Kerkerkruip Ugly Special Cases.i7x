@@ -24,6 +24,22 @@ Last carry out the ravenous armadillo armadillo-eating:
 
 Kerkerkruip Ugly Special Cases ends here.
 
+Chapter - ghoulification in the Arena of the Gods
+
+[This is the special report when Drakul is the opponent in the Arena of the Gods and the player reads the scroll of ghoulification. It informs the player that battle will still continue even though both are undead]
+
+Last carry out reading a scroll of ghoulification when the location is the Arena of the Gods:
+	now the playeroriginalfaction is the faction of the player;
+	now the faction of the player is arena-faction.
+
+Last report reading a scroll of ghoulification when the location is the Arena of the Gods:
+	let godtest be a random god;
+	repeat with pers running through gods:
+		if the printed name of pers is godname:
+			now godtest is pers;
+	if godtest is Chton:
+		say "Both [Random god worshipped by the player] and Chton won't accept a friendship! the battle continues!".
+
 
 
 Chapter - Fixing Numbered Disambiguation Choices (for use with Numbered Disambiguation Choices by Aaron Reed)

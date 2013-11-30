@@ -1830,6 +1830,7 @@ The fighting boolean is a truth state variable that varies. The fighting boolean
 The oppname is a text that varies. The oppname is "".
 Challengelijst is a list of texts that varies.
 Beestlijst is a list of monsters that varies.
+Playeroriginalfaction is a faction that varies.
 
 Reviving is an action applying to nothing. Understand "revive" as reviving.
 
@@ -1856,6 +1857,8 @@ A menu question rule (this is the FallenFighting rule):
 		let m be the number understood;
 		if m > 0:
 			if m < n:
+				now playeroriginalfaction is the faction of the player;
+				now the faction of the player is arena-faction;
 				let Pers be entry m of Beestlijst;
 				if Pers is group leading and Pers is not defeated individually:
 					move Pers to the Arena-waiting-room;
@@ -1953,6 +1956,7 @@ Every turn when the location is the Arena of the Fallen:
 	update the combat status;
 	if no person is in the Arena-waiting-room and combat status is peace:
 		now the triumphing boolean is true;
+		now the faction of the player is the playeroriginalfaction;
 		say "You are [bold type]transported back[roman type] to the Entrance of the Arena.";
 		repeat with item running through things in the Arena of the Fallen:
 			unless (item is player or item is backdrop):
@@ -1992,7 +1996,7 @@ The Arena of the Gods is religious.
 The godfight pedestal is an enterable supporter and scenery in the Hall of Gods. Understand "pedestal" and "empty pedestal" as the godfight pedestal.
 
 Godfightname1 is a text that varies.
-Godfightame2 is a text that varies.
+Godfightname2 is a text that varies.
 
 
 To decide which text is the random fight text:
@@ -2063,6 +2067,8 @@ A menu question rule (this is the ChosenFighting rule):
 		let m be the number understood;
 		if m > 0:
 			if m < n:
+				now playeroriginalfaction is the faction of the player;
+				now faction of the player is arena-faction;
 				Let Pers be entry m of Chosenlijst;
 				if Pers is group leading and Pers is not defeated individually:
 					move Pers to the Arena-waiting-room;
@@ -2251,12 +2257,11 @@ An attack modifier rule (this is the much harder to discern by Herm bonus rule):
 		decrease attack strength by oppHermBonus;
 		decrease Arena-turncounter by 1.
 
+
 Section - Awarding divine power 
 
 An absorption stopping rule (this is the alternative award at the Arena of the Gods rule):
 	If the location is the Arena of the Gods:
-		Increase divine favour by 2;
-		say "Your God grants you 2 divine favour!";
 		rule succeeds.
 
 
@@ -2266,6 +2271,9 @@ Every turn when the location is the Arena of the Gods(this is the teleport after
 	update the combat status;
 	if no person is in the Arena-waiting-room and combat status is peace:
 		now the Godfight boolean is true;
+		now the faction of the player is playeroriginalfaction;
+		Increase divine favour by 2;
+		say "Your God grants you 2 divine favour!";
 		say "You are [bold type]transported back[roman type] to the Hall of Gods.";
 		repeat with item running through things in the Arena of the Gods:
 			unless (item is player or item is backdrop):
