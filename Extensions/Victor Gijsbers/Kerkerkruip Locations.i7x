@@ -2128,61 +2128,13 @@ Every turn when (the location is the Arena of the Gods) and (the combat status i
 				if the printed name of pers is godname:
 					now godtest is pers;
 			If godtest is :
-				-- Aite: 
-					let n be a random number between 3 and 50;
-					increase n by a random number between 1 and 9;[Healer of Aite is seen as a champion]
-					increase n by a random number between 1 and 9;
-					increase n by 5; [half of wrath state]
-					let X be a random number between 16 and 23; [health average between the three fanatics]
-					if the Healer of Aite is alive:
-						now  X is the permanent health of the Healer of Aite;
-					now X is (X divided by 10);
-					if a random chance of the final spirit of the Healer of Aite in 50 succeeds:
-						increase X by 2;
-					Let Y be (X times 3) divided by 2;
-					let opp be a random hostile alive person enclosed by the location;
-					if n < 10:
-						say "A gigantic [one of]sword[or]spear[or]pike[at random] bursts out of the ground, impaling [opp] for [bold type][Y] damage[roman type]!";
-						decrease the health of the opp by Y;
-						unless opp is dead:
-							let the opp lose concentration;
-						if the health of the opp is less than 1:
-							say "Clearly, it doesn't always pay off to serve the mad goddess.";
-					otherwise if n < 20:
-						say "A huge [one of]sword[or]spear[or]pike[at random] bursts out of the ground, impaling [opp] for [bold type][X] damage[roman type]!";
-						decrease the health of opp by X;
-						unless opp is dead:
-							let the opp lose concentration;
-						if the health of the opp is less than 1:
-							say "Clearly, it doesn't always pay off to serve the mad goddess.";
-					otherwise if n < 30:
-						if the concentration of the player is less than 3:
-							say "You suddenly feel divinely inspired and [bold type]highly concentrated[roman type].";
-							now the concentration of the player is 3;
-					otherwise if n < 40:
-						if the concentration of the opp is less than 3:
-							say "[the opp] suddenly fights with renewed rigour, as if divinely inspired.";
-							now the concentration of the player is 3;
-					otherwise if n < 50:
-						say "A huge [one of]sword[or]spear[or]pike[at random] bursts out of the ground, skewering you for [bold type][X] damage[roman type]!";
-						decrease the health of the player by X;
-						unless health of the player is less than 1:
-							let the player lose concentration;
-						if the player is hidden:
-							now the player is not hidden;
-							say "Your cry of pain reveals your presence.";
-						if health of the player is less than 1:
-							end the story saying "A maddening laughter of the Goddess is the last sound you'll ever hear.";
-					otherwise:
-						say "A gigantic [one of]sword[or]spear[or]pike[at random] bursts out of the ground, skewering you for [bold type][Y] damage[roman type]!";
-						decrease the health of the player by Y;
-						unless health of the player is less than 1:
-							let the player lose concentration;
-						if the player is hidden:
-							now the player is not hidden;
-							say "Your cry of pain reveals your presence.";
-						if health of the player is less than 1:
-							end the story saying "A maddening laughter of the Goddess is the last sound you'll ever hear.";
+				-- Aite:
+					if healer of Aite is alive:
+						have Aite intervene on behalf of the healer of Aite;
+					otherwise if tormentor of Aite is alive:
+						have Aite intervene on behalf of the tormentor of Aite;
+					otherwise if defender of Aite is alive:
+						have Aite intervene on behalf of the defender of Aite;
 				-- Nomos:
 					if OppNomosDetermined is false:
 						now oppNomos is a random hostile alive person enclosed by the location;

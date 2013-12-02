@@ -45,8 +45,19 @@ Status combat stats rule (this is the religion status rule):
 			say "Worshipping [bold type][a random god worshipped by the player][roman type], with [divine favour] favour.";
 
 
+Section - Intervention
 
+[Not all interventions will work this way, but interventions triggered by every turn rules should]
 
+To have (benefactor - a god) intervene on behalf of (guy - a person):
+	say "[bracket]Error: unimplemented intervention of [the benefactor] on behalf of [the guy][close bracket][command clarification break]";
+
+To decide what number is the current favour of (guy - a person):
+	if guy is the player, decide on divine favour;
+	[all hostile beings are considered champions for purposes of Arena of the Gods battles]
+	[if this is tested elsewhere, more refactoring will be needed]
+	if guy is hostile, decide on 9;
+	decide on 0;
 
 Chapter - Commands
 
@@ -264,75 +275,88 @@ Every turn when the player worships Aite (this is the Aite intervenes in combat 
 			if power of the fanatics of Aite is granted:
 				increase n by (final spirit of the player / 3);
 			if a random chance of n in 100 succeeds:
-				have Aite intervene.
+				have Aite intervene on behalf of the player.
 
-To have Aite intervene:
+To deal (X - a number) points of Aite-damage to (guy - a person) on behalf of (the supplicant - a person), plus gigantic damage:
+	Let Y be X;
+	if plus gigantic damage:
+		now Y is (X times 3) divided by 2;
+		say "A gigantic ";
+	otherwise:
+		say "A huge ";
+	say "[one of]sword[or]spear[or]pike[at random] bursts out of the ground, skewering [if the guy is the player]you[otherwise][the guy] for [bold type][Y] damage[roman type]!";
+	decrease the health of the guy by Y;
+	unless the guy is dead:
+		let the guy lose concentration;
+		if the guy is the player and the player is hidden:
+			now the player is not hidden;
+			say "Your cry of pain reveals your presence.";
+	if health of the guy is less than 1:
+		if the guy is the player:
+			if the player is the supplicant:
+				end the story saying "Aite is a dangerous mistress";
+			otherwise:
+				end the story saying "A maddening laughter of the Goddess is the last sound you'll ever hear";
+		otherwise:
+			if the supplicant is the player:
+				if plus gigantic damage:
+					now killer-guy is the player;
+					now killed-guy is the guy;
+				otherwise:
+					now the global attacker is the player;
+					now the global defender is the guy;
+			otherwise if the guy is beloved of Aite:
+				say "Clearly, it doesn't always pay off to serve the mad goddess.";
+			consider the grant powers when a monster is slain rule;
+
+To have Aite grant concentration to (guy - a person):
+	if the concentration of the guy is at least 3:
+		stop;
+	now the concentration of the guy is 3;
+	if the guy is the player:
+		say "You suddenly feel divinely inspired and [bold type]highly concentrated[roman type].";
+	otherwise:
+		say "[The guy] suddenly looks [bold type]highly concentrated[roman type], as if divinely inspired.";
+
+To have (benefactor - Aite) intervene on behalf of (guy - a person):
 	let n be a random number between 3 and 50;
-	increase n by a random number between 1 and divine favour;
-	increase n by a random number between 1 and divine favour;
-	if power of the fanatics of Aite is granted:
-		increase n by 3;
-	if Aite wrath state is 1:
-		increase n by 10;
-	if Aite wrath state is -1:
-		decrease n by 10;
-	if at least one hostile alive person is enclosed by the location:
-		repeat with guy running through hostile alive persons enclosed by the location:
-			if guy is beloved of Aite:
-				decrease n by 4;
-	let X be permanent health of the player;
+	increase n by a random number between 1 and current favour of guy;
+	increase n by a random number between 1 and current favour of guy;
+	if guy is the player:
+		if power of the fanatics of Aite is granted:
+			increase n by 3;
+		if Aite wrath state is 1:
+			increase n by 10;
+		if Aite wrath state is -1:
+			decrease n by 10;
+		if at least one hostile alive person is enclosed by the location:
+			repeat with opp running through hostile alive persons enclosed by the location:
+				if opp is beloved of Aite:
+					decrease n by 4;
+	otherwise:
+		increase n by 5;
+	let opp be the player;
+	if the guy is friendly:
+		now opp is a random hostile alive person enclosed by the location;
+	let X be permanent health of the guy;
 	now X is X divided by 10; [the standard unit of damage is 10% of the maximum health of the player, rounded down]
 	increase X by a random number between 0 and 2;
-	if power of the fanatics of Aite is granted:
-		if a random chance of final spirit of the player in 50 succeeds:
+	if power of the fanatics of Aite is granted or guy is not the player:
+		if a random chance of final spirit of the guy in 50 succeeds:
 			increase X by 2;
-	let guy be a random hostile alive person enclosed by the location;
+	let opp be a random hostile alive person enclosed by the location;
 	if n < 10:
-		let Y be (X times 3) divided by 2;
-		say "A gigantic [one of]sword[or]spear[or]pike[at random] bursts out of the ground, skewering you for [bold type][Y] damage[roman type]!";
-		decrease the health of the player by Y;
-		unless the player is dead:
-			let the player lose concentration;
-			if the player is hidden:
-				now the player is not hidden;
-				say "Your cry of pain reveals your presence.";
-		if health of the player is less than 1:
-			end the story saying "Aite is a dangerous mistress";
+		deal X points of Aite-damage to the guy on behalf of the guy, plus gigantic damage;
 	otherwise if n < 20:
-		say "A huge [one of]sword[or]spear[or]pike[at random] bursts out of the ground, impaling you for [bold type][X] damage[roman type]!";
-		decrease the health of the player by X;
-		unless the player is dead:
-			let the player lose concentration;
-		if health of the player is less than 1:
-			end the story saying "Aite is a dangerous mistress";
+		deal X points of Aite-damage to the guy on behalf of the guy;
 	otherwise if n < 30:
-		if the concentration of the guy is less than 3:
-			say "[The guy] suddenly looks [bold type]highly concentrated[roman type], as if divinely inspired.";
-			now the concentration of the guy is 3;
+		have Aite grant concentration to the opp;
 	otherwise if n < 40:
-		if the concentration of the player is less than 3:
-			say "You suddenly feel divinely inspired and [bold type]highly concentrated[roman type].";
-			now the concentration of the player is 3;
+		have Aite grant concentration to the guy;
 	otherwise if n < 50:
-		say "A huge [one of]sword[or]spear[or]pike[at random] bursts out of the ground, impaling [the guy] for [bold type][X] damage[roman type]!";
-		decrease the health of the guy by X;
-		unless guy is dead:
-			let the guy lose concentration;			
-		if health of the guy is less than 1:
-			now the global attacker is the player;
-			now the global defender is the guy;
-			consider the grant powers when a monster is slain rule;
+		deal X points of Aite-damage to the opp on behalf of the guy;
 	otherwise:
-		let Y be (X times 3) divided by 2;
-		say "A gigantic [one of]sword[or]spear[or]pike[at random] bursts out of the ground, impaling [the guy] for [bold type][Y] damage[roman type]!";
-		decrease the health of the guy by Y;
-		unless guy is dead:
-			let the guy lose concentration;			
-		if health of the guy is less than 1:
-			now killer-guy is the player;
-			now killed-guy is the guy;
-			consider the grant powers when a monster is slain rule.
-
+		deal X points of Aite-damage to the opp on behalf of the guy, plus gigantic damage;
 
 Chapter - Nomos
 
