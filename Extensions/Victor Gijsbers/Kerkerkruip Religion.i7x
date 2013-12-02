@@ -284,7 +284,7 @@ To deal (X - a number) points of Aite-damage to (guy - a person) on behalf of (t
 		say "A gigantic ";
 	otherwise:
 		say "A huge ";
-	say "[one of]sword[or]spear[or]pike[at random] bursts out of the ground, skewering [if the guy is the player]you[otherwise][the guy] for [bold type][Y] damage[roman type]!";
+	say "[one of]sword[or]spear[or]pike[at random] bursts out of the ground, skewering [if the guy is the player]you[otherwise][the guy][end if] for [bold type][Y] damage[roman type]!";
 	decrease the health of the guy by Y;
 	unless the guy is dead:
 		let the guy lose concentration;
@@ -344,7 +344,6 @@ To have (benefactor - Aite) intervene on behalf of (guy - a person):
 	if power of the fanatics of Aite is granted or guy is not the player:
 		if a random chance of final spirit of the guy in 50 succeeds:
 			increase X by 2;
-	let opp be a random hostile alive person enclosed by the location;
 	if n < 10:
 		deal X points of Aite-damage to the guy on behalf of the guy, plus gigantic damage;
 	otherwise if n < 20:
