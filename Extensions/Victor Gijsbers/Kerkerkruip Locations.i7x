@@ -2019,6 +2019,9 @@ The Healer of Aite incarnates Aite.
 Israfel incarnates Sul.
 Drakul incarnates Chton.
 
+[for testing:]
+The Overmind incarnates Nomos.
+Bodmall incarnates Herm.
 
 Section - Choosing an avatar
 

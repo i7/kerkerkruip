@@ -444,6 +444,8 @@ To deactivate Nomos bonus:
 		decrease Action Weight entry by 1500;
 
 To have (beneficiary - Nomos) intervene on behalf of (supplicant - a person):
+	if the Nomos counter > 0 or the Nomos bonus is true:
+		stop;
 	now the Nomos attacker is the supplicant;
 	now Nomos counter is a random number between 1 and 5;
 	if Nomos counter is 1 or Nomos counter is 2:
