@@ -33,11 +33,7 @@ Last carry out reading a scroll of ghoulification when the location is the Arena
 	now the faction of the player is arena-faction.
 
 Last report reading a scroll of ghoulification when the location is the Arena of the Gods:
-	let godtest be a random god;
-	repeat with pers running through gods:
-		if the printed name of pers is godname:
-			now godtest is pers;
-	if godtest is Chton:
+	if the challenged god is Chton:
 		say "Both [Random god worshipped by the player] and Chton won't accept a friendship! the battle continues!".
 
 

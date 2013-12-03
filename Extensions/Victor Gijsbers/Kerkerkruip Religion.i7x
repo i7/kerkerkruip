@@ -20,7 +20,13 @@ Worshipping relates various persons to one god. The verb to worship (he worships
 
 Section - Divine favour
 
-Divine favour is a number that varies. Divine favour is 0.
+A person has a number called the favour. The favour of a person is usually 0.
+
+To decide which number is the divine favour: decide on the favour of the player.
+
+To decide which number is the favour of (guy - a person) with (benefactor - a god):
+	if guy does not worship benefactor, decide on 0;
+	decide on favour of guy;
 
 Section - Dedication
 
@@ -51,13 +57,6 @@ Section - Intervention
 
 To have (benefactor - a god) intervene on behalf of (guy - a person):
 	say "[bracket]Error: unimplemented intervention of [the benefactor] on behalf of [the guy][close bracket][command clarification break]";
-
-To decide what number is the current favour of (guy - a person):
-	if guy is the player, decide on divine favour;
-	[all hostile beings are considered champions for purposes of Arena of the Gods battles]
-	[if this is tested elsewhere, more refactoring will be needed]
-	if guy is hostile, decide on 9;
-	decide on 0;
 
 Chapter - Commands
 
@@ -127,8 +126,8 @@ A menu question rule (this is the sacrifice rule):
 				say "You sacrifice the [power-name of stuff] to [guy], gaining [power level of stuff in words] divine favour (for a total of [q in words] favour).[paragraph break]";
 				follow the repelling rules for stuff;
 				now stuff is not granted;
-				while q > divine favour:
-					increase divine favour by 1;
+				while q > the favour of the player:
+					increase the favour of the player by 1;
 					consider the favour rules for guy;
 			otherwise if m is n:
 				say "You decide to not sacrifice a power.";
@@ -320,8 +319,8 @@ To have Aite grant concentration to (guy - a person):
 
 To have (benefactor - Aite) intervene on behalf of (guy - a person):
 	let n be a random number between 3 and 50;
-	increase n by a random number between 1 and current favour of guy;
-	increase n by a random number between 1 and current favour of guy;
+	repeat with i running from 1 to 2:
+		increase n by a random number between 1 and the favour of guy with Aite;
 	if guy is the player:
 		if power of the fanatics of Aite is granted:
 			increase n by 3;
@@ -415,10 +414,10 @@ Section - Nomos's engagement in combat
 
 Every turn when the player worships Nomos (this is the Nomos intervenes in combat rule):
 	if combat status is not peace and Nomos counter is 0 and main actor is the player:
-		let n be divine favour;
-		if a random chance of n in 40 succeeds:
-			have Nomos intervene.
+		if a random chance of divine favour in 40 succeeds:
+			have Nomos intervene on behalf of the player.
 
+The Nomos attacker is a person that varies. The Nomos attacker is yourself.
 The Nomos counter is a number that varies. The Nomos counter is 0.
 The Nomos bonus is a truth state that varies. The Nomos bonus is false.
 
@@ -427,23 +426,44 @@ Every turn (this is the decrease the Nomos counter rule):
 		if Nomos counter is greater than 0:
 			decrease Nomos counter by 1;
 			if Nomos counter is 0:
-				now Nomos bonus is true.
+				activate Nomos bonus;
 
-To have Nomos intervene:
+To activate Nomos bonus:
+	now Nomos bonus is true;
+	if the Nomos attacker is not the player:
+		choose row with an Option of the action of the Nomos attacker waiting in the Table of AI Action Options;
+		decrease Action Weight entry by 1000;
+		choose row with an Option of the action of the Nomos attacker attacking in the Table of AI Action Options;
+		increase Action Weight entry by 1500;
+		say "[The Nomos attacker] follow[s] the rules of [its-their] God, and prepare[s] to attack!";
+
+To deactivate Nomos bonus:
+	now Nomos bonus is false;
+	if the Nomos attacker is not the player:
+		choose row with an Option of the action of the Nomos attacker attacking in the Table of AI Action Options;
+		decrease Action Weight entry by 1500;
+
+To have (beneficiary - Nomos) intervene on behalf of (supplicant - a person):
+	now the Nomos attacker is the supplicant;
 	now Nomos counter is a random number between 1 and 5;
 	if Nomos counter is 1 or Nomos counter is 2:
 		if a random chance of 1 in 2 succeeds:
 			increase Nomos counter by 1;
-	say "A deep voice inside your head speaks: 'You will attack [bold type][Nomos counter] turns[roman type] from now. The law will be with you.'".
+	if the Nomos attacker is the player:
+		say "A deep voice inside your head speaks: 'You will attack [bold type][Nomos counter] turns[roman type] from now. The law will be with you.'";
+	otherwise:
+		say "The god of Law speaks out loud: '[bold type][Nomos attacker][roman type], attack in [bold type][Nomos counter] turns[roman type] and my strength will guide you!'";
+		choose row with an Option of the action of the supplicant waiting in the Table of AI Action Options;
+		increase Action Weight entry by 1000;
 
 Before reading a command (this is the planning notification rule):
-	if the main actor is the player:
+	if the main actor is the player and the Nomos attacker is the player:
 		if the Nomos bonus is true:
 			say "[bold type](Remember: Nomos has told you to attack this turn.)[roman type][line break]".		
 
 First every turn rule (this is the Nomos bonus is false rule):
-	if the main actor is the player:
-		now Nomos bonus is false.
+	if the main actor is the Nomos attacker:
+		deactivate Nomos bonus.
 
 Before not attacklike behaviour:
 	if Nomos bonus is true:
@@ -480,29 +500,28 @@ Before attacklike behaviour when Nomos counter is greater than 0:
 			-- 5: say "contemplating the inevitability of Death instead." instead.
 
 An attack modifier rule (this is the Nomos attack bonus rule):
-	if Nomos bonus is true and the global attacker is the player:
-		if the numbers boolean is true, say " + [nomos piety] (the law is with you)[run paragraph on]";
-		increase the attack strength by nomos piety.
+	if Nomos bonus is true and the global attacker is the Nomos attacker:
+		if the numbers boolean is true, say " + [nomos piety] (the law is with [the Nomos attacker])[run paragraph on]";
+		increase the attack strength by nomos piety of the Nomos attacker.
 
 A damage modifier rule (this is the Nomos damage bonus rule):
 	if Nomos bonus is true and the global attacker is the player:
-		if the numbers boolean is true, say " + [nomos piety] (the law is with you)[run paragraph on]";
-		increase the attack damage by nomos piety.
+		if the numbers boolean is true, say " + [nomos piety] (the law is with [the Nomos attacker])[run paragraph on]";
+		increase the attack damage by nomos piety of the Nomos attacker.
 			
-To decide which number is Nomos piety:
-	if player worships Nomos:
-		if divine favour > 8:
-			decide on 4;
-		if divine favour > 5:
-			decide on 3;
+To decide which number is the Nomos piety:
+	decide on the Nomos piety of the player;
+
+To decide which number is Nomos piety of (guy - a person):
+	Let f be the favour of guy with Nomos;
+	if f > 8:
+		decide on 4;
+	if f > 5:
+		decide on 3;
+	if f > 0:
 		decide on 2;
 	decide on 0.
-
-
-
-
-
-
+	
 Chapter - Sul
 
 Check sacrificing (this is the cannot sacrifice to Sul when undead rule):
@@ -550,7 +569,7 @@ Favour rule for Sul (this is the Sul favour 9 rule):
 Section - Protection from curses
 
 Every turn when the player worships Sul:
-	if the player encloses an uncurseable thing and divine favour > 0:
+	if the player encloses an uncurseable thing and the favour of the player with Sul > 0:
 		let K be a list of things;
 		repeat with item running through uncurseable things had by the player:
 			if hidden identity of item is not non-thing and hidden identity of item is corruptible:
@@ -596,7 +615,7 @@ Section - Radiance
 Section - Undead slayer
 
 An attack modifier rule (this is the undead slayer attack bonus rule):
-	if the global attacker is the player and the player worships sul and the global defender is undead and divine favour > 2:
+	if the favour of the global attacker with Sul > 2 and the global defender is undead:
 		say " + 2 (undead slayer)[run paragraph on]";
 		increase the attack strength by 2.
 

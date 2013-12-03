@@ -2013,7 +2013,7 @@ To decide which text is the random fight text:
 	
 Section - Incarnating 
 
-Incarnating relates one monster (called the monsteravatar) to one god. The verb to incarnate (he incarnates, they incarnate, he is incarnated by it, it is incarnated, it is incarnating) implies the incarnating relation.
+Incarnating relates one monster (called the monsteravatar) to one god. The verb to incarnate (he incarnates, they incarnate, he incarnated, it is incarnated, it is incarnating) implies the incarnating relation.
 
 The Healer of Aite incarnates Aite.
 Israfel incarnates Sul.
@@ -2025,9 +2025,13 @@ Section - Choosing an avatar
 The Godfight boolean is a truth state variable that varies. The Godfight boolean is false.
 
 Chosenname is a text that varies.
-Godname is a text that varies.
 Chosenlijst is a list of monsters that varies.
 Godlijst is a list of texts that varies.
+
+To decide which object is the challenged god:
+	Let champion be a random monster in the Arena of the Gods who worships a god;
+	if the champion is a monster, decide on a random god worshipped by the champion;
+	decide on nothing;
 
 ChosenFighting is an action applying to nothing.
 
@@ -2067,32 +2071,36 @@ A menu question rule (this is the ChosenFighting rule):
 		let m be the number understood;
 		if m > 0:
 			if m < n:
+				Let Pers be entry m of Chosenlijst;
+				let the benefactor be a random god incarnated by Pers;
 				now playeroriginalfaction is the faction of the player;
 				now faction of the player is arena-faction;
-				Let Pers be entry m of Chosenlijst;
 				if Pers is group leading and Pers is not defeated individually:
 					move Pers to the Arena-waiting-room;
 					now chosenname is the printed name of Pers;
-					now godname is entry m of Godlijst;
 					if Pers is initially accompanied:
 						repeat with X running through people who accompany Pers:
 							move X to the location of Pers;
 					repeat with guy running through persons in the Arena-waiting-room:
-						challenge guy;
+						challenge guy to fight for the benefactor;
 						move guy to the Arena of the Gods;
-					say "The heavy doors open, where the angry group, consisting of [list of persons in the Arena of the Gods], prepare themselves to fight for the honour of [godname]!";
+					say "The heavy doors open, where the angry group, consisting of [list of persons in the Arena of the Gods], prepare themselves to fight for the honour of [the benefactor]!";
 					move the player to the Arena of the Gods;
 					now the Godfight boolean is true;
 				otherwise:
 					now the chosenname is the printed name of Pers;
-					now godname is entry m of Godlijst;
-					challenge Pers;
+					challenge Pers to fight for the benefactor;
 					move Pers to the Arena of the Gods;
-					say "The heavy doors open, where the angry [chosenname] awaits, preparing [if Pers is male]himself[otherwise if Pers is female]herself[otherwise]itself[end if] to fight for the honour of [Godname]!";
+					say "The heavy doors open, where the angry [chosenname] awaits, preparing [if Pers is male]himself[otherwise if Pers is female]herself[otherwise]itself[end if] to fight for the honour of [the benefactor]!";
 					move the player to the Arena of the Gods;
 					now the Godfight boolean is true;
 			otherwise:
 				say "You decide it is best to defend the honour of your God another time...".
+
+To challenge (guy - a person) to fight for (benefactor - a god):
+	challenge guy;
+	now guy worships benefactor;
+	now the favour of guy is 9;
 
 Section - no teleporting
 
@@ -2106,40 +2114,26 @@ This system assumes that the divine favour of the monster is quite high and fixe
 between the monsters divine favour and the players and then checks whether the god will intervene for the monster]
 
 Arena-turncounter is a number that varies. Arena-turncounter is -1.
-OppNomos is a person that varies.
 OppHerm is a person that varies.
-OppNomosDetermined is a truth state variable that varies. OppNomosDetermined is false.
-OppNomosBonus is a truth state variable that varies. OppNomosBonus is false.
 OppHermBonus is a number that varies. OppHermbonus is 0.
 
 
 Every turn when (the location is the Arena of the Gods) and (the combat status is not peace):
 	let m be 60;
-	let x be the divine favour;
-	now x is x times 5;
+	let x be the divine favour times 5;
 	if x is greater than m:
 		now m is 0;
 	otherwise:
-		decrease m by x;;
+		decrease m by x;
 	if a random chance of m in 100 succeeds:
 		if at least one alive monster is enclosed by the Arena of the Gods:
 			Let the supplicant be a random alive monster enclosed by the Arena of the Gods;
-			let godtest be a random god;
-			repeat with pers running through gods:
-				if the printed name of pers is godname:
-					now godtest is pers;
-			If godtest is :
+			Let the benefactor be a random god worshipped by the supplicant;
+			If the benefactor is:
 				-- Aite:
 					have Aite intervene on behalf of the supplicant;
 				-- Nomos:
-					if OppNomosDetermined is false:
-						now oppNomos is a random hostile alive person enclosed by the location;
-						now OppNomosDetermined is true;
-					if Arena-turncounter is less than 1:
-						now Arena-turncounter is a random number between 1 and 4;
-						say "The god of Law speaks out loud: 'Attack in [Arena-turncounter] turns and my strength will guide you!'";
-						choose row with an Option of the action of oppNomos waiting in the Table of AI Action Options;
-						increase Action Weight entry by 1000;
+					have Nomos intervene on behalf of the supplicant;
 				-- Sul:
 					if (the player is undead) and (a random chance of 1 in 4 succeeds):
 						let oppSul be a random hostile alive person enclosed by the location;
@@ -2148,39 +2142,11 @@ Every turn when (the location is the Arena of the Gods) and (the combat status i
 				-- Chton:
 					have Chton intervene on behalf of the supplicant;
 				-- Herm:
-					if OppNomosDetermined is false:
-						now oppHerm is a random hostile alive person enclosed by the location;
-						now OppNomosDetermined is true;
+					now oppHerm is a random hostile alive person enclosed by the location;
 					if Arena-turncounter is less than 0:
 						now Arena-turncounter is a random number between 1 and 3;
 						now oppHermBonus is a random number between 2 and 4;
 						say "Suddenly, your opponent blurs and is much harder to discern in this environment!".
-
-
-Every turn when (the location is the Arena of the Gods) and (Godname is "Nomos") and (combat status is not peace):
-	if Arena-turncounter is greater than -1:
-		decrease Arena-turncounter by 1;
-	if Arena-turncounter is 0:
-		choose row with an Option of the action of oppNomos waiting in the Table of AI Action Options;
-		decrease Action Weight entry by 1000;
-		choose row with an Option of the action of oppNomos attacking in the Table of AI Action Options;
-		increase Action Weight entry by 1500;
-		now OppNomosBonus is true;
-		say "[oppNomos] follows the rules of his God, and prepares to attack!";
-	If Arena-Turncounter is -1:
-		choose row with an Option of the action of oppNomos attacking in the Table of AI Action Options;
-		decrease Action Weight entry by 1500;
-		now OppNomosBonus is false.
-
-An attack modifier rule (this is the Nomos Arena attack bonus rule):
-	if OppNomosBonus is true and the global attacker is oppNomos and the location is the Arena of the Gods:
-		if the numbers boolean is true, say " + 4 (the law is with [the oppNomos])[run paragraph on]";
-		increase the attack strength by 4.
-
-A damage modifier rule (this is the Nomos Arena damage bonus rule):
-	if (OppNomosBonus is true) and (the global attacker is the oppNomos) and (the location is the Arena of the Gods):
-		if the numbers boolean is true, say " + 4 (the law is with [the oppNomos])[run paragraph on]";
-		increase the attack damage by nomos piety.
 
 An attack modifier rule (this is the much harder to discern by Herm bonus rule):
 	if (the Arena-turncounter is greater than 0) and (the global defender is oppHerm) and (the location is the Arena of the Gods):
@@ -2198,12 +2164,12 @@ An absorption stopping rule (this is the alternative award at the Arena of the G
 
 Section - Getting out of the Arena
 
-Every turn when the location is the Arena of the Gods(this is the teleport after killing rule):
+Every turn when the location is the Arena of the Gods and the player is alive (this is the teleport after killing rule):
 	update the combat status;
 	if no person is in the Arena-waiting-room and combat status is peace:
 		now the Godfight boolean is true;
 		now the faction of the player is playeroriginalfaction;
-		Increase divine favour by 2;
+		Increase favour of the player by 2;
 		say "Your God grants you 2 divine favour!";
 		say "You are [bold type]transported back[roman type] to the Hall of Gods.";
 		repeat with item running through things in the Arena of the Gods:
