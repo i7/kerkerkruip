@@ -698,15 +698,17 @@ Every turn when the player worships Chton (this is the Chton intervenes in comba
 			if n < 1:
 				now n is 1;
 			if a random chance of n in 100 succeeds:
-				have Chton intervene.
+				have Chton intervene on behalf of the player.
 
-To have Chton intervene:
+To have (benefactor - Chton) intervene on behalf of (supplicant - a person):
 	say "Chton suddenly sends a [bold type]wave of unholy energy[roman type] through the room, dealing [run paragraph on]";
 	let n be the number of alive not undead persons in the location;
 	let original n be n;
 	if n is greater than 0:
 		repeat with guy running through all alive not undead persons in the location:
-			let m be a random number between 3 and 6;
+			let m be a random number between 2 and 5;
+			if supplicant is the player:
+				increase m by 1;
 			if guy is deathly-resistant:
 				decrease m by 2;
 			decrease health of guy by m;

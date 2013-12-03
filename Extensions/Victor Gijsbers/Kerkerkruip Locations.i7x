@@ -2123,18 +2123,14 @@ Every turn when (the location is the Arena of the Gods) and (the combat status i
 		decrease m by x;;
 	if a random chance of m in 100 succeeds:
 		if at least one alive monster is enclosed by the Arena of the Gods:
+			Let the supplicant be a random alive monster enclosed by the Arena of the Gods;
 			let godtest be a random god;
 			repeat with pers running through gods:
 				if the printed name of pers is godname:
 					now godtest is pers;
 			If godtest is :
 				-- Aite:
-					if healer of Aite is alive:
-						have Aite intervene on behalf of the healer of Aite;
-					otherwise if tormentor of Aite is alive:
-						have Aite intervene on behalf of the tormentor of Aite;
-					otherwise if defender of Aite is alive:
-						have Aite intervene on behalf of the defender of Aite;
+					have Aite intervene on behalf of the supplicant;
 				-- Nomos:
 					if OppNomosDetermined is false:
 						now oppNomos is a random hostile alive person enclosed by the location;
@@ -2150,24 +2146,7 @@ Every turn when (the location is the Arena of the Gods) and (the combat status i
 						increase the radiation of oppSul by 1;
 						say "As he sees your decaying flesh, the God of Light imbues [oppSul] with holy power to reverse this wrongdoing.";
 				-- Chton:
-					say "Chton suddenly sends a [bold type]wave of unholy energy[roman type] through the room, dealing [run paragraph on]";
-					let n be the number of alive not undead persons in the location;
-					let original n be n;
-					if n is greater than 0:
-						repeat with sire running through all alive not undead persons in the location:
-							let m be a random number between 2 and 5;
-							if sire is deathly-resistant:
-								decrease m by 2;
-							decrease health of sire by m;
-							say "[if n is 1 and original n is not 1]and [end if][m] damage to [the name of the sire][if sire is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the sire is greater than 0 and sire is alive] (which breaks [possessive of the sire] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
-							now concentration of the sire is 0;
-							decrease n by 1;
-							if n is 0:
-								say ""; [For an extra newline. Don't ask.]
-					otherwise:
-						say "no damage to anyone.";
-					if health of the player is less than 1:
-						end the story saying "Quem di diligunt, adolescens moritur";
+					have Chton intervene on behalf of the supplicant;
 				-- Herm:
 					if OppNomosDetermined is false:
 						now oppHerm is a random hostile alive person enclosed by the location;
