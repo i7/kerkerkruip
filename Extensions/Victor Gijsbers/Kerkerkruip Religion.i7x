@@ -433,14 +433,14 @@ To activate Nomos bonus:
 	if the Nomos attacker is not the player:
 		choose row with an Option of the action of the Nomos attacker waiting in the Table of AI Action Options;
 		decrease Action Weight entry by 1000;
-		choose row with an Option of the action of the Nomos attacker attacking in the Table of AI Action Options;
+		choose row with an Option of the action of the Nomos attacker attacking the chosen target in the Table of AI Action Options;
 		increase Action Weight entry by 1500;
 		say "[The Nomos attacker] follow[s] the rules of [its-their] God, and prepare[s] to attack!";
 
 To deactivate Nomos bonus:
 	now Nomos bonus is false;
 	if the Nomos attacker is not the player:
-		choose row with an Option of the action of the Nomos attacker attacking in the Table of AI Action Options;
+		choose row with an Option of the action of the Nomos attacker attacking the chosen target in the Table of AI Action Options;
 		decrease Action Weight entry by 1500;
 
 To have (beneficiary - Nomos) intervene on behalf of (supplicant - a person):
