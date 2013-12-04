@@ -245,7 +245,7 @@ This is the must see two diners before dreaming rule:
 
 This is the start the dream of the banquet rule:
 	now the health of Chef is the health of the player;
-	now the permanent health of Chef is the health of the player;
+	now the permanent health of Chef is permanent health of the player;
 	now player is the Chef;
 	if a random chance of 1 in 2 succeeds:
 		now the kitchen servant is male;
