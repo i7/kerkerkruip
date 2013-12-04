@@ -433,12 +433,12 @@ Carry out remembering:
 						if place is the room the way of further place:
 							say " - the [way] exit of [the further place] ([if further place is not the location]which lies [the road to further place] from here[otherwise]where you currently are[end if])[line break]";
 	say "[line break]You have visited the following rooms: ";
-	let m be the number of visited rooms minus the number of visited tunnels;
+	let m be the number of visited placed rooms minus the number of visited tunnels;
 	[ Sort the rooms in alphabetical order ]
 	[let R be the list of visited rooms;
 	sort R in printed name order;
 	repeat with X running through R:]
-	repeat with X running through visited rooms:
+	repeat with X running through visited placed rooms:
 		unless X is a tunnel:
 			say "[the X] ([the road to X])[run paragraph on]";
 			decrease m by 1;
