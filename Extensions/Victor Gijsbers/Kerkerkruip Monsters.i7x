@@ -925,7 +925,7 @@ Chapter - Level 1 - Wisps of pain
 
 Section - Definitions
 
-The wisps of pain are a monster. "Wisps of pain hover in the air[if the wisp-target is not the wisps of pain], close around [the wisp-target][end if]."
+The wisps of pain are a monster. "Wisps of pain hover in the air[if the wisp-target is not the wisps of pain and wisp-target is alive and location of wisp-target is location of wisps of pain], close around [the wisp-target][end if]."
 
 The wisps of pain are plural-named. Understand "wisp" as the wisps of pain.
 
