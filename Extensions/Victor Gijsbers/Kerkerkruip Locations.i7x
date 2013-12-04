@@ -1981,7 +1981,7 @@ Hall of Gods is religious.
 The rarity of Hall of Gods is 5. 
 The unlock level of Hall of Gods is 2.
 
-The Arena of the Gods is a room. "The divine Arena; a plaything for the Gods, too numb to fight on their own, to let their Chosen Ones fight it out. Fighting here is at the whim of the Gods, who will regularly intervene when they think the battle becomes dull ([italic type]divine intervention is determined by the tension."
+The Arena of the Gods is a room. "The divine Arena; a plaything for the Gods, too numb to fight on their own, to let their Chosen Ones fight it out. Fighting here is at the whim of the Gods, who will regularly intervene when they think the battle becomes dull ([italic type]divine intervention is determined by the tension[roman type])."
 
 The Arena of the Gods is not connectable.
 The Arena of the Gods is not connection-inviting.
