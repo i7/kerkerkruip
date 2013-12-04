@@ -16,7 +16,7 @@ There is a god called Herm. Herm is male.
 
 Section - Worship
 
-Worshipping relates various persons to one god. The verb to worship (he worships, they worship, he worshipped it, it is worshipped, it is worshipping) implies the worshipping relation.
+Worshipping relates various persons to one god (called the patron). The verb to worship (he worships, they worship, he worshipped it, it is worshipped, it is worshipping) implies the worshipping relation.
 
 Section - Divine favour
 
@@ -581,6 +581,8 @@ Every turn when the player worships Sul:
 
 Section - Unable to use deathly magic
 
+[TODO: see if we can change this to one rule, "Last check reading an unhealthy scroll"]
+
 Last check reading a scroll of death:
 	if player worships Sul:
 		remove noun from play;
@@ -614,48 +616,56 @@ Section - Radiance
 
 Section - Undead slayer
 
+Definition: A person is undead-slayer if the favour of it with Sul is greater than 2.
+
 An attack modifier rule (this is the undead slayer attack bonus rule):
-	if the favour of the global attacker with Sul > 2 and the global defender is undead:
+	if the global attacker is undead-slayer and the global defender is undead:
 		say " + 2 (undead slayer)[run paragraph on]";
 		increase the attack strength by 2.
 
 A damage modifier rule (this is the undead slayer damage bonus rule):
-	if the global attacker is the player and the player worships sul and the global defender is undead and divine favour > 2:
+	if the global attacker is undead-slayer and the global defender is undead:
 		say " + 2 (undead slayer)[run paragraph on]";
 		increase the attack damage by 2.
 		
 Status attribute rule (this is the undead slayer status rule):
-	if player worships sul and divine favour > 2:
+	if player is undead-slayer:
 		if long status is true:
 			say "[bold type]Undead slayer[roman type]: +2 to attack and damage against undead.[line break][run paragraph on]".		
 
 Section - Demon slayer
 
+Definition: A person is demon-slayer if the favour of it with Sul is greater than 5.
+
 An attack modifier rule (this is the demon slayer attack bonus rule):
-	if the global attacker is the player and the player worships sul and the global defender is demonic and divine favour > 5:
+	if the global attacker is demon-slayer and the global defender is demonic:
 		say " + 2 (demon slayer)[run paragraph on]";
 		increase the attack strength by 2.
 
 A damage modifier rule (this is the demon slayer damage bonus rule):
-	if the global attacker is the player and the player worships sul and the global defender is demonic and divine favour > 5:
+	if the global attacker is demon-slayer and the global defender is demonic:
 		say " + 2 (demon slayer)[run paragraph on]";
 		increase the attack damage by 2.
 		
 Status attribute rule (this is the demon slayer status rule):
-	if player worships sul and divine favour > 5:
+	if player is demon-slayer:
 		if long status is true:
 			say "[bold type]Demon slayer[roman type]: +2 to attack and damage against demons.[line break][run paragraph on]".				
 
 Section - Sul's intervention
 
-A damage multiplier rule when the player worships sul (this is the sul sometimes prevents damage rule):
-	unless faction of global defender hates faction of player:
-		unless global defender is undead or global defender is demonic:
-			if a random chance of divine favour in 40 succeeds:
-				say "[bold type] - 100% (Sul intervenes)[roman type][run paragraph on]";
-				now the attack damage is 0.
-
-
+A damage multiplier rule when someone worships sul (this is the sul sometimes prevents damage rule):
+	if the global defender is undead or the global defender is demonic:
+		make no decision;
+	Let the intercessor be a random person who worships sul;
+	[Don't check that the intercessor is undead or demonic - they can still intercede as long as the defender isn't]
+	if the the intercessor opposes the global defender:
+		make no decision;
+	[Assume that everyone who worships sul is in alliance]
+	Let the current favour be the favour of the intercessor with sul;
+	if a random chance of current favour in 40 succeeds:
+		say "[bold type] - 100% (Sul intervenes)[roman type][run paragraph on]";
+		now the attack damage is 0.
 
 
 Chapter - Chton

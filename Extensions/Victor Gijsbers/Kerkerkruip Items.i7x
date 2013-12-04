@@ -1717,7 +1717,9 @@ Check applying it to:
 			say "You cannot rub a salve on a weapon held by someone who is hostile to you." instead.
 
 Before applying something to a person (this is the putting a salve on someone is risky rule):
-	if the faction of the second noun hates the faction of the player:
+	if the player is the second noun, make no decision;
+	[in an arena, the player becomes arena-faction, and opposes herself. Otherwise this should apply:]
+	if the second noun opposes the player:
 		if player is not hidden:
 			say "The salve at the ready, you attempt to reach [the second noun].";
 			now player is risky;

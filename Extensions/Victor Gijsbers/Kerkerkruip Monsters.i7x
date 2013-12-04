@@ -4528,6 +4528,8 @@ Carry out Israfel Israfel-splitting:
 	now health of Isra is n;
 	now faction of Isra is hostile;
 	now concentration of Isra is 0;
+	now patron of Isra is patron of Israfel;
+	now favour of Isra is favour of Israfel;
 	now Isra is not at dodge;
 	now Isra is not at parry;
 	now stun count of Isra is 0;
@@ -4539,6 +4541,8 @@ Carry out Israfel Israfel-splitting:
 	now health of Fell is n;
 	now faction of Fell is hostile;
 	now concentration of Fell is 0;
+	now patron of Fell is patron of Israfel;
+	now favour of Fell is favour of Israfel;
 	now Fell is not at dodge;
 	now Fell is not at parry;
 	now stun count of Fell is 0;
