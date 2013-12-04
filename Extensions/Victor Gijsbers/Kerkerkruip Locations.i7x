@@ -1981,7 +1981,7 @@ Hall of Gods is religious.
 The rarity of Hall of Gods is 5. 
 The unlock level of Hall of Gods is 2.
 
-The Arena of the Gods is a room. "The divine Arena; a plaything for the Gods, too numb to fight on their own, to let their Chosen Ones fight it out."
+The Arena of the Gods is a room. "The divine Arena; a plaything for the Gods, too numb to fight on their own, to let their Chosen Ones fight it out. Fighting here is at the whim of the Gods, who will regularly intervene when they think the battle becomes dull ([italic type]divine intervention is determined by the tension[roman type])."
 
 The Arena of the Gods is not connectable.
 The Arena of the Gods is not connection-inviting.
@@ -2122,7 +2122,9 @@ OppHermBonus is a number that varies. OppHermbonus is 0.
 
 
 Every turn when (the location is the Arena of the Gods) and (the combat status is not peace):
-	let m be 60;
+	let m be the tension;
+	now m is m times 2;
+	increase m by 35;
 	let x be the divine favour times 5;
 	if x is greater than m:
 		now m is 0;
