@@ -478,7 +478,7 @@ Section - Dreadful presence effect
 
 This is the dreadful presence effect rule:
 	if combat status is combat and main actor is not undead and the main actor is not asleep:
-		repeat with guy running through alive not hidden not asleep people in the location:
+		repeat with guy running through alive not hidden not asleep people in the location who are not the main actor:
 			if faction of guy hates faction of main actor:
 				let n be dreadful presence of guy;
 				if n > 0:
