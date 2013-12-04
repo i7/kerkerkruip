@@ -2029,7 +2029,7 @@ Godlijst is a list of texts that varies.
 
 To decide which object is the challenged god:
 	Let champion be a random monster in the Arena of the Gods who worships a god;
-	if the champion is a monster, decide on a random god worshipped by the champion;
+	if the champion is a monster, decide on the patron of the champion;
 	decide on nothing;
 
 ChosenFighting is an action applying to nothing.
@@ -2055,7 +2055,7 @@ Carry out ChosenFighting:
 				now current question menu is Godlijst;
 				ask a closed question, in menu mode;
 		otherwise:
-			say "You have already fought for the honour of [a random god worshipped by the player]!  [If a random god worshipped by the player is female]She[else]He[end if] isn't willing to sit through another fight again.";
+			say "You have already fought for the honour of [the patron of the player]!  [If the patron of the player is female]She[else]He[end if] isn't willing to sit through another fight again.";
 			take no time;
 	otherwise:
 		let x be a random number between 3 and 7;
@@ -2129,7 +2129,7 @@ Every turn when (the location is the Arena of the Gods) and (the combat status i
 	if a random chance of m in 100 succeeds:
 		if at least one alive monster is enclosed by the Arena of the Gods:
 			Let the supplicant be a random alive monster enclosed by the Arena of the Gods;
-			Let the benefactor be a random god worshipped by the supplicant;
+			Let the benefactor be the patron of the supplicant;
 			If the benefactor is:
 				-- Aite:
 					have Aite intervene on behalf of the supplicant;
