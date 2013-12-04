@@ -283,11 +283,12 @@ To have (benefactor - Aite) intervene on behalf of (guy - a person):
 			increase n by a random number between 1 and the favour of guy with Aite;
 		if guy is the player:
 			if power of the fanatics of Aite is granted:
-				increase n by 3;
+				let m be (final spirit of the player / 3);
+				increase n by a random number between 0 and m;
 			if Aite wrath state is 1:
-				increase n by 10;
+				increase n by 5;
 			if Aite wrath state is -1:
-				decrease n by 10;
+				decrease n by 5;
 			now opposition test subject is guy;
 			repeat with opp running through alive opposer persons enclosed by the location:
 				if opp is beloved of Aite:
