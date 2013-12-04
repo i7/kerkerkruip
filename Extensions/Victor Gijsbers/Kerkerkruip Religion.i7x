@@ -430,20 +430,20 @@ Every turn (this is the decrease the Nomos counter rule):
 
 To activate Nomos bonus:
 	now Nomos bonus is true;
-	if the Nomos attacker is not the player:
-		choose row with an Option of the action of the Nomos attacker waiting in the Table of AI Action Options;
-		decrease Action Weight entry by 1000;
+	if the Nomos attacker is not the player, say "[The Nomos attacker] follow[s] the rules of [its-their] God, and prepare[s] to attack!";
+
+An AI action selection rule for an at-Act person who is the Nomos attacker (this is the Nomos attacker AI should obey Nomos rule):
+	if Nomos bonus is true:
 		choose row with an Option of the action of the Nomos attacker attacking the chosen target in the Table of AI Action Options;
 		increase Action Weight entry by 1500;
-		say "[The Nomos attacker] follow[s] the rules of [its-their] God, and prepare[s] to attack!";
-
-To deactivate Nomos bonus:
-	now Nomos bonus is false;
-	if the Nomos attacker is not the player:
+	otherwise if the Nomos Counter > 0:
 		choose row with an Option of the action of the Nomos attacker attacking the chosen target in the Table of AI Action Options;
 		decrease Action Weight entry by 1500;
 
-To have (beneficiary - Nomos) intervene on behalf of (supplicant - a person):
+To deactivate Nomos bonus:
+	now Nomos bonus is false;
+		
+To have (benefactor - Nomos) intervene on behalf of (supplicant - a person):
 	if the Nomos counter > 0 or the Nomos bonus is true:
 		stop;
 	now the Nomos attacker is the supplicant;
@@ -455,8 +455,6 @@ To have (beneficiary - Nomos) intervene on behalf of (supplicant - a person):
 		say "A deep voice inside your head speaks: 'You will attack [bold type][Nomos counter] turns[roman type] from now. The law will be with you.'";
 	otherwise:
 		say "The god of Law speaks out loud: '[bold type][Nomos attacker][roman type], attack in [bold type][Nomos counter] turns[roman type] and my strength will guide you!'";
-		choose row with an Option of the action of the supplicant waiting in the Table of AI Action Options;
-		increase Action Weight entry by 1000;
 
 Before reading a command (this is the planning notification rule):
 	if the main actor is the player and the Nomos attacker is the player:
@@ -504,15 +502,15 @@ Before attacklike behaviour when Nomos counter is greater than 0:
 An attack modifier rule (this is the Nomos attack bonus rule):
 	if Nomos bonus is true and the global attacker is the Nomos attacker:
 		if the numbers boolean is true, say " + [nomos piety] (the law is with [the Nomos attacker])[run paragraph on]";
-		increase the attack strength by nomos piety of the Nomos attacker.
+		increase the attack strength by nomos piety.
 
 A damage modifier rule (this is the Nomos damage bonus rule):
-	if Nomos bonus is true and the global attacker is the player:
+	if Nomos bonus is true and the global attacker is the Nomos attacker:
 		if the numbers boolean is true, say " + [nomos piety] (the law is with [the Nomos attacker])[run paragraph on]";
-		increase the attack damage by nomos piety of the Nomos attacker.
+		increase the attack damage by nomos piety.
 			
 To decide which number is the Nomos piety:
-	decide on the Nomos piety of the player;
+	decide on the Nomos piety of the Nomos attacker;
 
 To decide which number is Nomos piety of (guy - a person):
 	Let f be the favour of guy with Nomos;
