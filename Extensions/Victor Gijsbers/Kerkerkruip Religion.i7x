@@ -269,12 +269,49 @@ Section - Aite's engagement in combat
 
 Every turn when the player worships Aite (this is the Aite intervenes in combat rule):
 	if combat status is not peace:
-		if at least one hostile alive person is enclosed by the location:
-			let n be divine favour;
+		let n be divine favour;
+		if power of the fanatics of Aite is granted:
+			increase n by (final spirit of the player / 3);
+		if a random chance of n in 100 succeeds:
+			have Aite intervene on behalf of the player.
+
+To have (benefactor - Aite) intervene on behalf of (guy - a person):
+	now opposition test subject is guy;
+	if at least one alive opposer person is enclosed by the location:
+		let n be a random number between 3 and 52;
+		repeat with i running from 1 to 2:
+			increase n by a random number between 1 and the favour of guy with Aite;
+		if guy is the player:
 			if power of the fanatics of Aite is granted:
-				increase n by (final spirit of the player / 3);
-			if a random chance of n in 100 succeeds:
-				have Aite intervene on behalf of the player.
+				increase n by 3;
+			if Aite wrath state is 1:
+				increase n by 10;
+			if Aite wrath state is -1:
+				decrease n by 10;
+			now opposition test subject is guy;
+			repeat with opp running through alive opposer persons enclosed by the location:
+				if opp is beloved of Aite:
+					decrease n by 4;
+		now opposition test subject is guy;
+		let opp be a random alive opposer person enclosed by the location;
+		let X be permanent health of the guy;
+		now X is X divided by 10; [the standard unit of damage is 10% of the maximum health of the player, rounded down]
+		increase X by a random number between 1 and 2;
+		if power of the fanatics of Aite is granted and guy is the player:
+			if a random chance of final spirit of the guy in 50 succeeds:
+				increase X by 2;
+		if n < 10:
+			deal X points of Aite-damage to the guy on behalf of the guy, plus gigantic damage;
+		otherwise if n < 20:
+			deal X points of Aite-damage to the guy on behalf of the guy;
+		otherwise if n < 30:
+			have Aite grant concentration to the opp;
+		otherwise if n < 40:
+			have Aite grant concentration to the guy;
+		otherwise if n < 50:
+			deal X points of Aite-damage to the opp on behalf of the guy;
+		otherwise:
+			deal X points of Aite-damage to the opp on behalf of the guy, plus gigantic damage;
 
 To deal (X - a number) points of Aite-damage to (guy - a person) on behalf of (the supplicant - a person), plus gigantic damage:
 	Let Y be X;
@@ -317,44 +354,6 @@ To have Aite grant concentration to (guy - a person):
 	otherwise:
 		say "[The guy] suddenly looks [bold type]highly concentrated[roman type], as if divinely inspired.";
 
-To have (benefactor - Aite) intervene on behalf of (guy - a person):
-	let n be a random number between 3 and 50;
-	repeat with i running from 1 to 2:
-		increase n by a random number between 1 and the favour of guy with Aite;
-	if guy is the player:
-		if power of the fanatics of Aite is granted:
-			increase n by 3;
-		if Aite wrath state is 1:
-			increase n by 10;
-		if Aite wrath state is -1:
-			decrease n by 10;
-		if at least one hostile alive person is enclosed by the location:
-			repeat with opp running through hostile alive persons enclosed by the location:
-				if opp is beloved of Aite:
-					decrease n by 4;
-	otherwise:
-		increase n by 5;
-	let opp be the player;
-	if the guy is friendly:
-		now opp is a random hostile alive person enclosed by the location;
-	let X be permanent health of the guy;
-	now X is X divided by 10; [the standard unit of damage is 10% of the maximum health of the player, rounded down]
-	increase X by a random number between 0 and 2;
-	if power of the fanatics of Aite is granted or guy is not the player:
-		if a random chance of final spirit of the guy in 50 succeeds:
-			increase X by 2;
-	if n < 10:
-		deal X points of Aite-damage to the guy on behalf of the guy, plus gigantic damage;
-	otherwise if n < 20:
-		deal X points of Aite-damage to the guy on behalf of the guy;
-	otherwise if n < 30:
-		have Aite grant concentration to the opp;
-	otherwise if n < 40:
-		have Aite grant concentration to the guy;
-	otherwise if n < 50:
-		deal X points of Aite-damage to the opp on behalf of the guy;
-	otherwise:
-		deal X points of Aite-damage to the opp on behalf of the guy, plus gigantic damage;
 
 Chapter - Nomos
 
@@ -469,8 +468,9 @@ Before not attacklike behaviour:
 	if Nomos bonus is true:
 		if combat state of the actor is not at-react:
 			if the main actor is the player and the actor is the player:
-				if at least one hostile alive person is enclosed by the location:
-					let X be a random hostile person enclosed by the location;
+				now opposition test subject is player;
+				if at least one opposer alive person is enclosed by the location:
+					let X be a random opposer person enclosed by the location;
 					say "You plan on [current action], but find yourself attacking [the X] instead.";
 					try attacking X instead;
 				otherwise:
@@ -716,18 +716,17 @@ Section - Chton's intervention
 
 Every turn when the player worships Chton (this is the Chton intervenes in combat rule):
 	if combat status is not peace:
-		if at least one hostile alive person is enclosed by the location:
-			let n be divine favour;
-			if current form is ghost-form:
-				increase n by 2;
-			if current form is lich-form:
-				increase n by 5;
-			increase n by 6;
-			decrease n by (3 times (the number of people in the location));
-			if n < 1:
-				now n is 1;
-			if a random chance of n in 100 succeeds:
-				have Chton intervene on behalf of the player.
+		let n be divine favour;
+		if current form is ghost-form:
+			increase n by 2;
+		if current form is lich-form:
+			increase n by 5;
+		increase n by 6;
+		decrease n by (3 times (the number of people in the location));
+		if n < 1:
+			now n is 1;
+		if a random chance of n in 100 succeeds:
+			have Chton intervene on behalf of the player.
 
 To have (benefactor - Chton) intervene on behalf of (supplicant - a person):
 	say "Chton suddenly sends a [bold type]wave of unholy energy[roman type] through the room, dealing [run paragraph on]";
