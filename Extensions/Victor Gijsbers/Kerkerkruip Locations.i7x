@@ -2019,10 +2019,6 @@ The Healer of Aite incarnates Aite.
 Israfel incarnates Sul.
 Drakul incarnates Chton.
 
-[for testing:]
-The Overmind incarnates Nomos.
-Bodmall incarnates Herm.
-
 Section - Choosing an avatar
 
 The Godfight boolean is a truth state variable that varies. The Godfight boolean is false.
