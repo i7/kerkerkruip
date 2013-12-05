@@ -315,20 +315,23 @@ To have (benefactor - Aite) intervene on behalf of (guy - a person):
 			deal X points of Aite-damage to the opp on behalf of the guy, plus gigantic damage;
 
 To deal (X - a number) points of Aite-damage to (guy - a person) on behalf of (the supplicant - a person), plus gigantic damage:
-	Let Y be X;
+	Let the size factor be 2;
 	if plus gigantic damage:
-		now Y is (X times 3) divided by 2;
+		now the size factor is 3;
 		say "A gigantic ";
 	otherwise:
 		say "A huge ";
 	say "[one of]sword[or]spear[or]pike[at random] bursts out of the ground[run paragraph on]";
 	if guy is flying:
-		say " in front of [the guy]. [It-they] crash[es] into it for [Y] ";
-		decrease Y by (Y divided by 2);
-		say "- 50% (flying) = [bold type][Y] damage[roman type]!";
+		say " in front of [the guy][run paragraph on]";
+		if a random chance of 1 in the size factor succeeds:
+			say "! [It-they] fl[ies] [if plus gigantic damage]around[otherwise]over[end if] it, narrowly avoiding the sharp point.";
+			stop;
+		say ". [It-they] crash[es] into it for [bold type][X] damage[roman type]!";
 	otherwise:
-		say ", skewering [the guy] for [bold type][Y] damage[roman type]!";
-	decrease the health of the guy by Y;
+		now X is X times the size factor divided by 2;
+		say ", skewering [the guy] for [bold type][X] damage[roman type]!";
+	decrease the health of the guy by X;
 	unless the guy is dead:
 		let the guy lose concentration;
 		if the guy is the player and the player is hidden:
