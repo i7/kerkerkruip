@@ -2135,11 +2135,7 @@ Every turn when (the location is the Arena of the Gods) and (the combat status i
 					have Aite intervene on behalf of the supplicant;
 				-- Nomos:
 					have Nomos intervene on behalf of the supplicant;
-				-- Sul:
-					if (the player is undead) and (a random chance of 1 in 4 succeeds):
-						let oppSul be a random hostile alive person enclosed by the location;
-						increase the radiation of oppSul by 1;
-						say "As he sees your decaying flesh, the God of Light imbues [oppSul] with holy power to reverse this wrongdoing.";
+				[-- Sul: Sul's interventions are not every turn effects]
 				-- Chton:
 					have Chton intervene on behalf of the supplicant;
 				-- Herm:
