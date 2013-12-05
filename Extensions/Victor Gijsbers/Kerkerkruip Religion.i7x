@@ -480,9 +480,11 @@ Before not attacklike behaviour:
 					let X be a random opposer person enclosed by the location;
 					say "You plan on [current action], but find yourself attacking [the X] instead.";
 					try attacking X instead;
+					deactivate Nomos bonus;
 				otherwise:
 					say "You plan on [current action], but find your body attacking itself instead!";
 					try the player hitting the player instead;
+					deactivate Nomos bonus;
 					if the player is dead:
 						end the story saying "Nomos is not to be toyed with.".
 
