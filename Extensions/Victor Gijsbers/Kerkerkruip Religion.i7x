@@ -28,6 +28,15 @@ To decide which number is the favour of (guy - a person) with (benefactor - a go
 	if guy does not worship benefactor, decide on 0;
 	decide on favour of guy;
 
+To raise the/-- favour of (guy - a person) by (N - a number):
+	repeat with i running from 1 to N:
+		increase favour of the guy by 1;
+		consider the favour rules for the patron of the guy;
+
+To raise the/-- favour of (guy - a person) to (N - a number):
+	while the favour of the guy is less than N:
+		raise favour of guy by 1;
+
 Section - Dedication
 
 [Being dedicated to a god means that you can sacrifice your powers there.]
@@ -126,9 +135,7 @@ A menu question rule (this is the sacrifice rule):
 				say "You sacrifice the [power-name of stuff] to [guy], gaining [power level of stuff in words] divine favour (for a total of [q in words] favour).[paragraph break]";
 				follow the repelling rules for stuff;
 				now stuff is not granted;
-				while q > the favour of the player:
-					increase the favour of the player by 1;
-					consider the favour rules for guy;
+				raise favour of the player to q;
 			otherwise if m is n:
 				say "You decide to not sacrifice a power.";
 			exit.
@@ -622,10 +629,7 @@ Last check reading a scroll of ghoulification:
 
 Before drinking Drakul's lifeblood when the player worships Sul:
 	say "As you gulp down the blood, you feel Sul changing it into wine. She is extremely pleased with your assistance in destroying this unholy item, and grants you two points of favour.";
-	increase the favour of the player by 1;
-	consider the favour rules for Sul;
-	increase the favour of the player by 1;
-	consider the favour rules for Sul;
+	raise the favour of the player by 2;
 	remove Drakul's lifeblood from play;
 	stop the action.
 		
