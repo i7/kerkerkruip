@@ -1811,23 +1811,8 @@ Section - Entrance to the Arena label for the map (for use with Kerkerkruip Glim
 The map-label of Entrance to the Arena is Figure of map_label_Arena.
 				
 
-Section - Getting out of the Arena
 
-
-Every turn when the location is the Arena of the Fallen:
-	update the combat status;
-	if no person is in the Arena-waiting-room and combat status is peace:
-		now the triumphing boolean is true;
-		now the faction of the player is the playeroriginalfaction;
-		say "You are [bold type]transported back[roman type] to the Entrance of the Arena.";
-		repeat with item running through things in the Arena of the Fallen:
-			unless (item is player or item is backdrop):
-				move item to Entrance to the Arena;
-		move player to Entrance to the Arena;
-		award achievement Twice fallen.
-
-
-Chapter - Arena of the Gods
+Chapter - Hall of the Gods
 
 Hall of Gods is a room. "A long hall, adorned with great statues of the [number of gods in words] great gods are here, together with pictures of the great battles already fought in this room. The last picture mentions [if Godfight boolean is true]you triumphing over [Chosenname][otherwise][random fight text][end if]. [if the Godfight boolean is false]While this fight may not let you harvest the soul of the opponent, your victory will be hailed upon by your god [italic type](+2 divine favour)[roman type]. If you are willing to fight, stand on the empty pedestal.[end if] Agnosticists and Atheists will not be tolerated!" 
 	
@@ -1844,25 +1829,6 @@ The rarity of Hall of Gods is 5.
 The unlock level of Hall of Gods is 2.
 
 [See Arena of the Fallen in Kerkerkruip Events and Specials.]
-
-
-
-
-Section - Getting out of the Arena
-
-Every turn when the location is the Arena of the Gods and the player is alive (this is the teleport after killing rule):
-	update the combat status;
-	if no person is in the Arena-waiting-room and combat status is peace:
-		now the Godfight boolean is true;
-		now the faction of the player is playeroriginalfaction;
-		Increase favour of the player by 2;
-		say "Your God grants you 2 divine favour!";
-		say "You are [bold type]transported back[roman type] to the Hall of Gods.";
-		repeat with item running through things in the Arena of the Gods:
-			unless (item is player or item is backdrop):
-				move item to Hall of Gods;
-				remove the godfight pedestal from play;
-		move player to Hall of Gods.
 
 Section - Hall of Gods label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 		
