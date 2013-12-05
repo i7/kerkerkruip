@@ -132,31 +132,34 @@ A menu question rule (this is the FallenFighting rule):
 	if the current question is "Which fallen warrior do you wish to fight? (Please enter a number):":
 		let n be the number of entries in Challengelijst;
 		let m be the number understood;
+		if m is n:
+			say "You decide to let your fallen enemies enjoy eternal rest.";
 		if m > 0:
 			if m < n:
-				now playeroriginalfaction is the faction of the player;
-				now the faction of the player is arena-faction;
 				let Pers be entry m of Beestlijst;
 				if Pers is group leading and Pers is not defeated individually:
 					move Pers to the Arena-waiting-room;
+					now the faction of Pers is arena-faction;
 					now oppname is the printed name of Pers;
 					if Pers is initially accompanied:
 						repeat with X running through people who accompany Pers:
-							challenge X;
+							[challenge X;] [this line is a bug, right?]
 							move X to the location of Pers;
+							now the faction of X is arena-faction;
 					repeat with guy running through persons in the Arena-waiting-room:
 						challenge guy;
 						move guy to the Arena of the Fallen;
-						say "The heavy doors open, where the angry [guy] awaits, strengthened by evil magic!";
-					now the fighting boolean is true;
+					say "The heavy doors open, where [if the number of people enclosed by the Arena of the Fallen is 1]the angry [Pers] awaits[otherwise][list of people enclosed by the Arena of the Fallen with definite articles] await[end if], strengthened by evil magic!";
 					move the player to the Arena of the Fallen;
+					now the fighting boolean is true;					
 				otherwise:
 					now the oppname is the printed name of Pers;
 					challenge Pers;
+					now the faction of Pers is arena-faction;
 					move Pers to the Arena of the Fallen;
 					say "The heavy doors open, where the angry [Pers] awaits, strengthened by evil magic!";
 					move the player to the Arena of the Fallen;
-					now the fighting boolean is true.
+					now the fighting boolean is true.					
 
 To challenge (the guy - a person):
 	let x be level of the guy;
@@ -227,7 +230,6 @@ Every turn when the location is the Arena of the Fallen:
 	update the combat status;
 	if no person is in the Arena-waiting-room and combat status is peace:
 		now the triumphing boolean is true;
-		now the faction of the player is the playeroriginalfaction;
 		say "You are [bold type]transported back[roman type] to the Entrance of the Arena.";
 		repeat with item running through things in the Arena of the Fallen:
 			unless (item is player or item is backdrop):
@@ -331,8 +333,6 @@ A menu question rule (this is the ChosenFighting rule):
 			if m < n:
 				Let Pers be entry m of Chosenlijst;
 				let the benefactor be a random god incarnated by Pers;
-				now playeroriginalfaction is the faction of the player;
-				now faction of the player is arena-faction;
 				if Pers is group leading and Pers is not defeated individually:
 					move Pers to the Arena-waiting-room;
 					now chosenname is the printed name of Pers;
@@ -357,6 +357,7 @@ A menu question rule (this is the ChosenFighting rule):
 
 To challenge (guy - a person) to fight for (benefactor - a god):
 	challenge guy;
+	now faction of guy is arena-faction;
 	now guy worships benefactor;
 	now the favour of guy is 9;
 

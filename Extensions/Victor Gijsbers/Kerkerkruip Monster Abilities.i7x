@@ -58,8 +58,9 @@ When play begins (this is the set factions rule):
 	repeat with X running through factions:
 		now horrific-faction hates X;
 		now X hates horrific-faction;
-		now arena-faction hates X;
-		now X hates arena-faction;
+		unless X is arena-faction:
+			now arena-faction hates X;
+			now X hates arena-faction;
 		now insane hates X;
 		now X hates insane;
 		unless X is undead-faction:
