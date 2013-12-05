@@ -2144,11 +2144,7 @@ Every turn when (the location is the Arena of the Gods) and (the combat status i
 						say "The god of Law speaks out loud: 'Attack in [Arena-turncounter] turns and my strength will guide you!'";
 						choose row with an Option of the action of oppNomos waiting in the Table of AI Action Options;
 						increase Action Weight entry by 1000;
-				-- Sul:
-					if (the player is undead) and (a random chance of 1 in 4 succeeds):
-						let oppSul be a random hostile alive person enclosed by the location;
-						increase the radiation of oppSul by 1;
-						say "As he sees your decaying flesh, the God of Light imbues [oppSul] with holy power to reverse this wrongdoing.";
+				[-- Sul: Sul's interventions are not every turn effects]
 				-- Chton:
 					say "Chton suddenly sends a [bold type]wave of unholy energy[roman type] through the room, dealing [run paragraph on]";
 					let n be the number of alive not undead persons in the location;

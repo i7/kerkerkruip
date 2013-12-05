@@ -284,7 +284,13 @@ To deal (X - a number) points of Aite-damage to (guy - a person) on behalf of (t
 		say "A gigantic ";
 	otherwise:
 		say "A huge ";
-	say "[one of]sword[or]spear[or]pike[at random] bursts out of the ground, skewering [if the guy is the player]you[otherwise][the guy][end if] for [bold type][Y] damage[roman type]!";
+	say "[one of]sword[or]spear[or]pike[at random] bursts out of the ground[run paragraph on]";
+	if guy is flying:
+		say " in front of [the guy]. [It-they] crash[es] into it for [Y] ";
+		decrease Y by (Y divided by 2);
+		say "- 50% (flying) = [bold type][Y] damage[roman type]!";
+	otherwise:
+		say ", skewering [the guy] for [bold type][Y] damage[roman type]!";
 	decrease the health of the guy by Y;
 	unless the guy is dead:
 		let the guy lose concentration;
