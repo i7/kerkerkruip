@@ -1550,7 +1550,12 @@ To people the mausoleum:
 	if a random chance of 1 in 4 succeeds:
 		if at least one epic thing is off-stage:
 			let item be a random epic thing;
-			now item is in tomb of the ancient king.
+			now item is in tomb of the ancient king;
+	if abyss of the soul is in the mausoleum:
+		if at least one undead person is off-stage:
+			let guy be a random off-stage undead person; [can be super-undead!]
+			move guy to the mausoleum;
+		remove abyss of the soul from play.
 			
 Section - Mausoleum label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 

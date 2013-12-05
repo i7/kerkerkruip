@@ -619,6 +619,15 @@ Last check reading a scroll of ghoulification:
 		if the player is dead:
 			end the story saying "And you will know My name is the Lady when I lay My vengeance upon thee. ";
 		rule fails.
+
+Before drinking Drakul's lifeblood when the player worships Sul:
+	say "As you gulp down the blood, you feel Sul changing it into wine. She is extremely pleased with your assistance in destroying this unholy item, and grants you two points of favour.";
+	increase the favour of the player by 1;
+	consider the favour rules for Sul;
+	increase the favour of the player by 1;
+	consider the favour rules for Sul;
+	remove Drakul's lifeblood from play;
+	stop the action.
 		
 Section - Radiance
 
