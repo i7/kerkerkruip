@@ -3524,7 +3524,7 @@ Section - Power of the Fanatics of Aite
 The power of the Fanatics of Aite is a power. Healer of Aite grants power of the Fanatics of Aite.
 The power level of power of the Fanatics of Aite is 4.
 The command text of power of the fanatics of Aite is "sacrifice".
-The description of power of the fanatics of Aite is "Type: active and passive ability.[paragraph break]Command: sacrifice (while not in another god's temple).[paragraph break]Effect: You can sacrifice to Aite even when you are not in her temple, though the effect will not work in the temples of other gods. Once you worship Aite, the probability that her combat interventions will occur increases, the probability that they will benefit you increases, and they start dealing more damage. All these effects scale with your spirit score."
+The description of power of the fanatics of Aite is "Type: active and passive ability.[paragraph break]Command: sacrifice (while not in another god's temple).[paragraph break]Effect: You can sacrifice to Aite even when you are not in her temple, though the effect will not work in the temples of other gods. Once you worship Aite, the probability that her combat interventions will occur increases, the probability that they will benefit you increases, and they deal more damage. All these effects scale with your spirit score."
 The power-name of power of the fanatics of Aite is "power of the fanatics".
 
 Table of Enemy Powers (continued)
@@ -4325,10 +4325,10 @@ Carry out the overmind overmind-calling:
 To call an ally:
 	let guy be a random overmind-ally person;
 	let the way be the best route from the location of guy to the location of the overmind;
-	if way is a direction:
-		try guy going the way;
 	if location of the overmind is location of the player:
-		say "You briefly see an image of [the guy] flickering above the overmind, and a weird buzzing sound fills the dungeon[if way is a direction]. In the image, [the guy] move[s] to [the location of the guy][end if].".
+		say "You briefly see an image of [the guy] flickering above the overmind, and a weird buzzing sound fills the dungeon[if way is a direction]. In the image, [the guy] move[s] to [the location of the guy][end if].";
+	if way is a direction:
+		try guy going the way.
 
 To call all allies:
 	if location of the overmind is location of the player:
