@@ -356,7 +356,6 @@ A menu question rule (this is the ChosenFighting rule):
 				say "You decide it is best to defend the honour of your God another time...".
 
 To challenge (guy - a person) to fight for (benefactor - a god):
-	challenge guy;
 	now faction of guy is arena-faction;
 	now guy worships benefactor;
 	now the favour of guy is 9;
