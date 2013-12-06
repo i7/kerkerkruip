@@ -410,6 +410,13 @@ An attack modifier rule (this is the much harder to discern by Herm bonus rule):
 		decrease attack strength by oppHermBonus;
 		decrease Arena-turncounter by 1.
 
+Section - Faction interactions
+
+For describing form change when the challenged god is Chton and the faction of the player is undead-faction:
+	Let the opponent be a random person in the location who worships Chton; [Drakul]
+	say "You turn into a [form-name of current form], but your opponent do[es of the opponent]n't care that you're undead. [It-they of the opponent] fight[s] on for the honour of Chton!";
+
+[handle summoning here too?]
 
 Section - Awarding divine power 
 

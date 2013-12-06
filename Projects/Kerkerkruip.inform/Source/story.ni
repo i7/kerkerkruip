@@ -50,9 +50,9 @@ Include Kerkerkruip Persistent Data by Victor Gijsbers.
 Include Kerkerkruip Dungeon Generation by Victor Gijsbers.
 Include Kerkerkruip Events by Victor Gijsbers.
 Include Kerkerkruip ATTACK Additions by Victor Gijsbers.
+Include Kerkerkruip Monster Abilities by Victor Gijsbers.
 Include Kerkerkruip Systems by Victor Gijsbers.
 Include Kerkerkruip Systems - Hiding Smoke Ethereal by Victor Gijsbers.
-Include Kerkerkruip Monster Abilities by Victor Gijsbers.
 Include Kerkerkruip Actions and UI by Victor Gijsbers.
 Include Kerkerkruip Items by Victor Gijsbers.
 Include Kerkerkruip Religion by Victor Gijsbers.

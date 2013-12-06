@@ -3666,11 +3666,9 @@ Instead of drinking vial of purification:
 	otherwise:
 		let m be 0;
 		repeat with shape running through player forms:
-			choose a row with player form of shape in Table of Form Properties;
-			if turn-type entry is undead:
+			if shape is undead:
 				now shape is not form-active;
-		choose a row with player form of current form in Table of Form Properties;
-		if turn-type entry is undead:
+		if current form is undead:
 			turn the player into human-form;
 			now m is 1;
 		if m is 1:
