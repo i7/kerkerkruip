@@ -1436,7 +1436,8 @@ A form change rule when the current form is undead (this is the turn-undead rule
 Describing form change is an activity.
 
 For describing form change (this is the standard describe form change rule):
-	say the turn-text of the current form.
+	say the turn-text of the current form;
+	say line break;
  
 This is the short player form status rule:
 	if long status is false:
