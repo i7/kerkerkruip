@@ -18,6 +18,8 @@ Section - Worship
 
 Worshipping relates various persons to one god (called the patron). The verb to worship (he worships, they worship, he worshipped it, it is worshipped, it is worshipping) implies the worshipping relation.
 
+Definition: A person is worshipper if it worships a god.
+
 Section - Divine favour
 
 A person has a number called the favour. The favour of a person is usually 0.

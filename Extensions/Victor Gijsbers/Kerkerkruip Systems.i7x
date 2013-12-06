@@ -1480,7 +1480,6 @@ To turn the player into (X - a player form):
 		now current form is X;
 		follow the form change rules;
 		carry out the describing form change activity;
-		say "[line break]";
 	otherwise:
 		say "You don't seem to change.".
 
