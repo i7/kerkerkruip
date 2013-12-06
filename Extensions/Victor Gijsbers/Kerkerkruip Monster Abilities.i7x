@@ -48,6 +48,7 @@ horrific-faction is a faction.
 mindslug-enslaved is a faction.
 player-enslaved is a faction.
 insane is a faction.
+arena-faction is a faction.
 
 Definition: a person is enslaved if its faction is mindslug-enslaved or its faction is player-enslaved.
 
@@ -57,6 +58,9 @@ When play begins (this is the set factions rule):
 	repeat with X running through factions:
 		now horrific-faction hates X;
 		now X hates horrific-faction;
+		unless X is arena-faction:
+			now arena-faction hates X;
+			now X hates arena-faction;
 		now insane hates X;
 		now X hates insane;
 		unless X is undead-faction:
@@ -85,7 +89,8 @@ Hate rule (this is the nonstandard hate rule):
 	if target is the running AI:
 		decrease the Weight entry by 2000.]
 
-Every turn when the player is undead (this is the undead follow undead rule):
+		
+Every turn when the player is undead and the faction of the player is undead-faction (this is the undead follow undead rule):
 	repeat with guy running through undead not follower persons in the location:
 		if guy is not super-undead or player form is lich-form:
 			now guy is follower;
@@ -473,8 +478,8 @@ Definition: a person (called guy) is dreadful if (dreadful presence of guy > 0).
 Section - Dreadful presence effect
 
 This is the dreadful presence effect rule:
-	if combat status is combat and main actor is not undead:
-		repeat with guy running through alive people in the location:
+	if combat status is combat and main actor is not undead and the main actor is not asleep:
+		repeat with guy running through alive not hidden not asleep people in the location who are not the main actor:
 			if faction of guy hates faction of main actor:
 				let n be dreadful presence of guy;
 				if n > 0:

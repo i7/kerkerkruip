@@ -925,7 +925,7 @@ Chapter - Level 1 - Wisps of pain
 
 Section - Definitions
 
-The wisps of pain are a monster. "Wisps of pain hover in the air[if the wisp-target is not the wisps of pain], close around [the wisp-target][end if]."
+The wisps of pain are a monster. "Wisps of pain hover in the air[if the wisp-target is not the wisps of pain and wisp-target is alive and location of wisp-target is location of wisps of pain], close around [the wisp-target][end if]."
 
 The wisps of pain are plural-named. Understand "wisp" as the wisps of pain.
 
@@ -1753,6 +1753,8 @@ Section - Reaping
 
 Reaping is an action applying to one thing. Understand "reap [any person]" as reaping.
 
+Reaping is bypassing-scope.
+
 [Thanks Aaron A. Reed, for the following two bits code -- Stolen from Remembering]
 
 The allow reaping faraway things rule is listed instead of the basic accessibility rule in the action-processing rules.
@@ -2139,9 +2141,17 @@ Every turn when hound status > 0:
 		now the initiative of the main actor is saved initiative;
 	decrease hound status by 1.
 
+Hound-preparedness-possible is a truth state that varies.
+
+First carry out hitting (this is the remember whether preparedness was possible rule):
+	if the noun is asleep or the actor is hidden:
+		now hound-preparedness-possible is false;
+	otherwise:
+		now hound-preparedness-possible is true.
+
 An aftereffects rule (this is the set up the power of the hound rule):
 	[ Check that we're not running from a battle - the power isn't used in that circumstance! ]
-	if the global defender is at-React:
+	if the global defender is at-React and hound-preparedness-possible is true:
 		if the global defender is the hound and the hound is alive:
 			now hound status is 2;
 			now the hound provoker is the global attacker;
@@ -2704,7 +2714,7 @@ To unmake helpers followers:
 
 To release slaves:
 	if at least one alive person is player-enslaved:
-		say "[if at least two alive persons are player-enslaved]Your slaves are[otherwise]Your slave is[end if] [bold type]released[roman type] from bondage!";
+		say "[if at least two alive persons are player-enslaved]Your slaves are[otherwise]Your slave is[end if] [bold type]released[roman type] from bondage![paragraph break]";
 		repeat with guy running through player-enslaved people:
 			now faction of guy is hostile.
 
@@ -3514,7 +3524,7 @@ Section - Power of the Fanatics of Aite
 The power of the Fanatics of Aite is a power. Healer of Aite grants power of the Fanatics of Aite.
 The power level of power of the Fanatics of Aite is 4.
 The command text of power of the fanatics of Aite is "sacrifice".
-The description of power of the fanatics of Aite is "Type: active and passive ability.[paragraph break]Command: sacrifice (while not in another god's temple).[paragraph break]Effect: You can sacrifice to Aite even when you are not in her temple, though the effect will not work in the temples of other gods. Once you worship Aite, the probability that her combat interventions will occur increases, the probability that they will benefit you increases, and they start dealing more damage. All these effects scale with your spirit score."
+The description of power of the fanatics of Aite is "Type: active and passive ability.[paragraph break]Command: sacrifice (while not in another god's temple).[paragraph break]Effect: You can sacrifice to Aite even when you are not in her temple, though the effect will not work in the temples of other gods. Once you worship Aite, the probability that her combat interventions will occur increases, the probability that they will benefit you increases, and they deal more damage. All these effects scale with your spirit score."
 The power-name of power of the fanatics of Aite is "power of the fanatics".
 
 Table of Enemy Powers (continued)
@@ -4315,10 +4325,10 @@ Carry out the overmind overmind-calling:
 To call an ally:
 	let guy be a random overmind-ally person;
 	let the way be the best route from the location of guy to the location of the overmind;
-	if way is a direction:
-		try guy going the way;
 	if location of the overmind is location of the player:
-		say "You briefly see an image of [the guy] flickering above the overmind, and a weird buzzing sound fills the dungeon[if way is a direction]. In the image, [the guy] move[s] to [the location of the guy][end if].".
+		say "You briefly see an image of [the guy] flickering above the overmind, and a weird buzzing sound fills the dungeon[if way is a direction]. In the image, [the guy] move[s] to [the location of the guy][end if].";
+	if way is a direction:
+		try guy going the way.
 
 To call all allies:
 	if location of the overmind is location of the player:
@@ -4383,6 +4393,8 @@ Status skill rule (this is the vermind status skill rule):
 Section - Calling
 
 Calling is an action applying to one visible thing. Understand "call [any person]" as calling.
+
+Calling is bypassing-scope.
 
 Check calling:
 	if power of the overmind is not granted:
@@ -4516,6 +4528,8 @@ Carry out Israfel Israfel-splitting:
 	now health of Isra is n;
 	now faction of Isra is hostile;
 	now concentration of Isra is 0;
+	now patron of Isra is patron of Israfel;
+	now favour of Isra is favour of Israfel;
 	now Isra is not at dodge;
 	now Isra is not at parry;
 	now stun count of Isra is 0;
@@ -4527,6 +4541,8 @@ Carry out Israfel Israfel-splitting:
 	now health of Fell is n;
 	now faction of Fell is hostile;
 	now concentration of Fell is 0;
+	now patron of Fell is patron of Israfel;
+	now favour of Fell is favour of Israfel;
 	now Fell is not at dodge;
 	now Fell is not at parry;
 	now stun count of Fell is 0;
@@ -5825,14 +5841,16 @@ Carry out the abyss of the soul pulsating:
 Section - Growing
 
 An absorption stopping rule (this is the abyss of the soul absorbs all souls rule):
-	if the abyss of the soul and test subject share a world:
+	if the abyss of the soul and the player share a world:
 		if the level of test subject is not 0 and the level of test subject is not 10:
+			let grown-boolean be false;
 			if the abyss of the soul is not gargantuan:
+				now grown-boolean is true;
 				now the abyss of the soul is the size after the size of the abyss of the soul;
 				now base size of the abyss of the soul is the size of the abyss of the soul;
 			increase health of the abyss of the soul by 15;
 			increase abyss of the soul strength by 1;
-			say "You attempt to absorb the soul of [the test subject], but feel how it disappears into the [bold type]deadly abyss[roman type][if test subject is Malygris]. The abyss of the soul immediately grows to gigantic proportions, obliterating the entire dungeon[end if].";
+			say "You attempt to absorb the soul of [the test subject], but feel how it disappears into the [bold type]deadly abyss[roman type][if the abyss of the soul is visible and grown-boolean is true], which immediately grows to [size of the abyss of the soul] size[end if][if test subject is Malygris]. The abyss of the soul immediately grows to gigantic proportions, obliterating the entire dungeon[end if].";
 			if the level of test subject is 5:
 				end the story saying "Malygris is dead, and so are you. Technically, that counts as a victory.";
 			rule succeeds;

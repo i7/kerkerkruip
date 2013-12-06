@@ -16,11 +16,26 @@ There is a god called Herm. Herm is male.
 
 Section - Worship
 
-Worshipping relates various persons to one god. The verb to worship (he worships, they worship, he worshipped it, it is worshipped, it is worshipping) implies the worshipping relation.
+Worshipping relates various persons to one god (called the patron). The verb to worship (he worships, they worship, he worshipped it, it is worshipped, it is worshipping) implies the worshipping relation.
 
 Section - Divine favour
 
-Divine favour is a number that varies. Divine favour is 0.
+A person has a number called the favour. The favour of a person is usually 0.
+
+To decide which number is the divine favour: decide on the favour of the player.
+
+To decide which number is the favour of (guy - a person) with (benefactor - a god):
+	if guy does not worship benefactor, decide on 0;
+	decide on favour of guy;
+
+To raise the/-- favour of (guy - a person) by (N - a number):
+	repeat with i running from 1 to N:
+		increase favour of the guy by 1;
+		consider the favour rules for the patron of the guy;
+
+To raise the/-- favour of (guy - a person) to (N - a number):
+	while the favour of the guy is less than N:
+		raise favour of guy by 1;
 
 Section - Dedication
 
@@ -45,8 +60,12 @@ Status combat stats rule (this is the religion status rule):
 			say "Worshipping [bold type][a random god worshipped by the player][roman type], with [divine favour] favour.";
 
 
+Section - Intervention
 
+[Not all interventions will work this way, but interventions triggered by every turn rules should]
 
+To have (benefactor - a god) intervene on behalf of (guy - a person):
+	say "[bracket]Error: unimplemented intervention of [the benefactor] on behalf of [the guy][close bracket][command clarification break]";
 
 Chapter - Commands
 
@@ -116,9 +135,7 @@ A menu question rule (this is the sacrifice rule):
 				say "You sacrifice the [power-name of stuff] to [guy], gaining [power level of stuff in words] divine favour (for a total of [q in words] favour).[paragraph break]";
 				follow the repelling rules for stuff;
 				now stuff is not granted;
-				while q > divine favour:
-					increase divine favour by 1;
-					consider the favour rules for guy;
+				raise favour of the player to q;
 			otherwise if m is n:
 				say "You decide to not sacrifice a power.";
 			exit.
@@ -259,79 +276,100 @@ Section - Aite's engagement in combat
 
 Every turn when the player worships Aite (this is the Aite intervenes in combat rule):
 	if combat status is not peace:
-		if at least one hostile alive person is enclosed by the location:
-			let n be divine favour;
-			if power of the fanatics of Aite is granted:
-				increase n by (final spirit of the player / 3);
-			if a random chance of n in 100 succeeds:
-				have Aite intervene.
+		let n be divine favour;
+		if power of the fanatics of Aite is granted:
+			increase n by (final spirit of the player / 3);
+		if a random chance of n in 100 succeeds:
+			have Aite intervene on behalf of the player.
 
-To have Aite intervene:
-	let n be a random number between 3 and 50;
-	increase n by a random number between 1 and divine favour;
-	increase n by a random number between 1 and divine favour;
-	if power of the fanatics of Aite is granted:
-		increase n by 3;
-	if Aite wrath state is 1:
-		increase n by 10;
-	if Aite wrath state is -1:
-		decrease n by 10;
-	if at least one hostile alive person is enclosed by the location:
-		repeat with guy running through hostile alive persons enclosed by the location:
-			if guy is beloved of Aite:
-				decrease n by 4;
-	let X be permanent health of the player;
-	now X is X divided by 10; [the standard unit of damage is 10% of the maximum health of the player, rounded down]
-	increase X by a random number between 0 and 2;
-	if power of the fanatics of Aite is granted:
-		if a random chance of final spirit of the player in 50 succeeds:
-			increase X by 2;
-	let guy be a random hostile alive person enclosed by the location;
-	if n < 10:
-		let Y be (X times 3) divided by 2;
-		say "A gigantic [one of]sword[or]spear[or]pike[at random] bursts out of the ground, skewering you for [bold type][Y] damage[roman type]!";
-		decrease the health of the player by Y;
-		unless the player is dead:
-			let the player lose concentration;
-			if the player is hidden:
-				now the player is not hidden;
-				say "Your cry of pain reveals your presence.";
-		if health of the player is less than 1:
-			end the story saying "Aite is a dangerous mistress";
-	otherwise if n < 20:
-		say "A huge [one of]sword[or]spear[or]pike[at random] bursts out of the ground, impaling you for [bold type][X] damage[roman type]!";
-		decrease the health of the player by X;
-		unless the player is dead:
-			let the player lose concentration;
-		if health of the player is less than 1:
-			end the story saying "Aite is a dangerous mistress";
-	otherwise if n < 30:
-		if the concentration of the guy is less than 3:
-			say "[The guy] suddenly looks [bold type]highly concentrated[roman type], as if divinely inspired.";
-			now the concentration of the guy is 3;
-	otherwise if n < 40:
-		if the concentration of the player is less than 3:
-			say "You suddenly feel divinely inspired and [bold type]highly concentrated[roman type].";
-			now the concentration of the player is 3;
-	otherwise if n < 50:
-		say "A huge [one of]sword[or]spear[or]pike[at random] bursts out of the ground, impaling [the guy] for [bold type][X] damage[roman type]!";
-		decrease the health of the guy by X;
-		unless guy is dead:
-			let the guy lose concentration;			
-		if health of the guy is less than 1:
-			now the global attacker is the player;
-			now the global defender is the guy;
-			consider the grant powers when a monster is slain rule;
+To have (benefactor - Aite) intervene on behalf of (guy - a person):
+	now opposition test subject is guy;
+	if at least one alive opposer person is enclosed by the location:
+		let n be a random number between 3 and 52;
+		repeat with i running from 1 to 2:
+			increase n by a random number between 1 and the favour of guy with Aite;
+		if guy is the player:
+			if power of the fanatics of Aite is granted:
+				let m be (final spirit of the player / 3);
+				increase n by a random number between 0 and m;
+			if Aite wrath state is 1:
+				increase n by 5;
+			if Aite wrath state is -1:
+				decrease n by 5;
+			now opposition test subject is guy;
+			repeat with opp running through alive opposer persons enclosed by the location:
+				if opp is beloved of Aite:
+					decrease n by 4;
+		now opposition test subject is guy;
+		let opp be a random alive opposer person enclosed by the location;
+		let X be permanent health of the guy;
+		now X is X divided by 10; [the standard unit of damage is 10% of the maximum health of the player, rounded down]
+		increase X by a random number between 1 and 2;
+		if power of the fanatics of Aite is granted and guy is the player:
+			if a random chance of final spirit of the guy in 50 succeeds:
+				increase X by 2;
+		if n < 10:
+			deal X points of Aite-damage to the guy on behalf of the guy, plus gigantic damage;
+		otherwise if n < 20:
+			deal X points of Aite-damage to the guy on behalf of the guy;
+		otherwise if n < 30:
+			have Aite grant concentration to the opp;
+		otherwise if n < 40:
+			have Aite grant concentration to the guy;
+		otherwise if n < 50:
+			deal X points of Aite-damage to the opp on behalf of the guy;
+		otherwise:
+			deal X points of Aite-damage to the opp on behalf of the guy, plus gigantic damage;
+
+To deal (X - a number) points of Aite-damage to (guy - a person) on behalf of (the supplicant - a person), plus gigantic damage:
+	Let the size factor be 2;
+	if plus gigantic damage:
+		now the size factor is 3;
+		say "A gigantic ";
 	otherwise:
-		let Y be (X times 3) divided by 2;
-		say "A gigantic [one of]sword[or]spear[or]pike[at random] bursts out of the ground, impaling [the guy] for [bold type][Y] damage[roman type]!";
-		decrease the health of the guy by Y;
-		unless guy is dead:
-			let the guy lose concentration;			
-		if health of the guy is less than 1:
-			now killer-guy is the player;
-			now killed-guy is the guy;
-			consider the grant powers when a monster is slain rule.
+		say "A huge ";
+	say "[one of]sword[or]spear[or]pike[at random] bursts out of the ground[run paragraph on]";
+	if guy is flying:
+		say " in front of [the guy][run paragraph on]";
+		if a random chance of 1 in the size factor succeeds:
+			say "! [It-they] fl[ies] [if plus gigantic damage]around[otherwise]over[end if] it, narrowly avoiding the sharp point.";
+			stop;
+		say ". [It-they] crash[es] into it for [bold type][X] damage[roman type]!";
+	otherwise:
+		now X is X times the size factor divided by 2;
+		say ", skewering [the guy] for [bold type][X] damage[roman type]!";
+	decrease the health of the guy by X;
+	unless the guy is dead:
+		let the guy lose concentration;
+		if the guy is the player and the player is hidden:
+			now the player is not hidden;
+			say "Your cry of pain reveals your presence.";
+	if health of the guy is less than 1:
+		if the guy is the player:
+			if the player is the supplicant:
+				end the story saying "Aite is a dangerous mistress";
+			otherwise:
+				end the story saying "A maddening laughter of the Goddess is the last sound you'll ever hear";
+		otherwise:
+			if the supplicant is the player:
+				if plus gigantic damage:
+					now killer-guy is the player;
+					now killed-guy is the guy;
+				otherwise:
+					now the global attacker is the player;
+					now the global defender is the guy;
+			otherwise if the guy is beloved of Aite:
+				say "Clearly, it doesn't always pay off to serve the mad goddess.";
+			consider the grant powers when a monster is slain rule;
+
+To have Aite grant concentration to (guy - a person):
+	if the concentration of the guy is at least 3:
+		stop;
+	now the concentration of the guy is 3;
+	if the guy is the player:
+		say "You suddenly feel divinely inspired and [bold type]highly concentrated[roman type].";
+	otherwise:
+		say "[The guy] suddenly looks [bold type]highly concentrated[roman type], as if divinely inspired.";
 
 
 Chapter - Nomos
@@ -392,10 +430,10 @@ Section - Nomos's engagement in combat
 
 Every turn when the player worships Nomos (this is the Nomos intervenes in combat rule):
 	if combat status is not peace and Nomos counter is 0 and main actor is the player:
-		let n be divine favour;
-		if a random chance of n in 40 succeeds:
-			have Nomos intervene.
+		if a random chance of divine favour in 40 succeeds:
+			have Nomos intervene on behalf of the player.
 
+The Nomos attacker is a person that varies. The Nomos attacker is yourself.
 The Nomos counter is a number that varies. The Nomos counter is 0.
 The Nomos bonus is a truth state that varies. The Nomos bonus is false.
 
@@ -404,35 +442,59 @@ Every turn (this is the decrease the Nomos counter rule):
 		if Nomos counter is greater than 0:
 			decrease Nomos counter by 1;
 			if Nomos counter is 0:
-				now Nomos bonus is true.
+				activate Nomos bonus;
 
-To have Nomos intervene:
+To activate Nomos bonus:
+	now Nomos bonus is true;
+	if the Nomos attacker is not the player, say "[The Nomos attacker] follow[s] the rules of [its-their] God, and prepare[s] to attack!";
+
+An AI action selection rule for an at-Act person who is the Nomos attacker (this is the Nomos attacker AI should obey Nomos rule):
+	if Nomos bonus is true:
+		choose row with an Option of the action of the Nomos attacker attacking the chosen target in the Table of AI Action Options;
+		increase Action Weight entry by 1500;
+	otherwise if the Nomos Counter > 0:
+		choose row with an Option of the action of the Nomos attacker attacking the chosen target in the Table of AI Action Options;
+		decrease Action Weight entry by 1500;
+
+To deactivate Nomos bonus:
+	now Nomos bonus is false;
+		
+To have (benefactor - Nomos) intervene on behalf of (supplicant - a person):
+	if the Nomos counter > 0 or the Nomos bonus is true:
+		stop;
+	now the Nomos attacker is the supplicant;
 	now Nomos counter is a random number between 1 and 5;
 	if Nomos counter is 1 or Nomos counter is 2:
 		if a random chance of 1 in 2 succeeds:
 			increase Nomos counter by 1;
-	say "A deep voice inside your head speaks: 'You will attack [bold type][Nomos counter] turns[roman type] from now. The law will be with you.'".
+	if the Nomos attacker is the player:
+		say "A deep voice inside your head speaks: 'You will attack [bold type][Nomos counter] turns[roman type] from now. The law will be with you.'";
+	otherwise:
+		say "The god of Law speaks out loud: '[bold type][Nomos attacker][roman type], attack in [bold type][Nomos counter] turns[roman type] and my strength will guide you!'";
 
 Before reading a command (this is the planning notification rule):
-	if the main actor is the player:
+	if the main actor is the player and the Nomos attacker is the player:
 		if the Nomos bonus is true:
 			say "[bold type](Remember: Nomos has told you to attack this turn.)[roman type][line break]".		
 
 First every turn rule (this is the Nomos bonus is false rule):
-	if the main actor is the player:
-		now Nomos bonus is false.
+	if the main actor is the Nomos attacker:
+		deactivate Nomos bonus.
 
 Before not attacklike behaviour:
 	if Nomos bonus is true:
 		if combat state of the actor is not at-react:
 			if the main actor is the player and the actor is the player:
-				if at least one hostile alive person is enclosed by the location:
-					let X be a random hostile person enclosed by the location;
+				now opposition test subject is player;
+				if at least one opposer alive person is enclosed by the location:
+					let X be a random opposer person enclosed by the location;
 					say "You plan on [current action], but find yourself attacking [the X] instead.";
 					try attacking X instead;
+					deactivate Nomos bonus;
 				otherwise:
 					say "You plan on [current action], but find your body attacking itself instead!";
 					try the player hitting the player instead;
+					deactivate Nomos bonus;
 					if the player is dead:
 						end the story saying "Nomos is not to be toyed with.".
 
@@ -457,29 +519,28 @@ Before attacklike behaviour when Nomos counter is greater than 0:
 			-- 5: say "contemplating the inevitability of Death instead." instead.
 
 An attack modifier rule (this is the Nomos attack bonus rule):
-	if Nomos bonus is true and the global attacker is the player:
-		if the numbers boolean is true, say " + [nomos piety] (the law is with you)[run paragraph on]";
+	if Nomos bonus is true and the global attacker is the Nomos attacker:
+		if the numbers boolean is true, say " + [nomos piety] (the law is with [the Nomos attacker])[run paragraph on]";
 		increase the attack strength by nomos piety.
 
 A damage modifier rule (this is the Nomos damage bonus rule):
-	if Nomos bonus is true and the global attacker is the player:
-		if the numbers boolean is true, say " + [nomos piety] (the law is with you)[run paragraph on]";
+	if Nomos bonus is true and the global attacker is the Nomos attacker:
+		if the numbers boolean is true, say " + [nomos piety] (the law is with [the Nomos attacker])[run paragraph on]";
 		increase the attack damage by nomos piety.
 			
-To decide which number is Nomos piety:
-	if player worships Nomos:
-		if divine favour > 8:
-			decide on 4;
-		if divine favour > 5:
-			decide on 3;
+To decide which number is the Nomos piety:
+	decide on the Nomos piety of the Nomos attacker;
+
+To decide which number is Nomos piety of (guy - a person):
+	Let f be the favour of guy with Nomos;
+	if f > 8:
+		decide on 4;
+	if f > 5:
+		decide on 3;
+	if f > 0:
 		decide on 2;
 	decide on 0.
-
-
-
-
-
-
+	
 Chapter - Sul
 
 Check sacrificing (this is the cannot sacrifice to Sul when undead rule):
@@ -527,7 +588,7 @@ Favour rule for Sul (this is the Sul favour 9 rule):
 Section - Protection from curses
 
 Every turn when the player worships Sul:
-	if the player encloses an uncurseable thing and divine favour > 0:
+	if the player encloses an uncurseable thing and the favour of the player with Sul > 0:
 		let K be a list of things;
 		repeat with item running through uncurseable things had by the player:
 			if hidden identity of item is not non-thing and hidden identity of item is corruptible:
@@ -538,6 +599,8 @@ Every turn when the player worships Sul:
 		say "Sul uncurses [K with definite articles].".
 
 Section - Unable to use deathly magic
+
+[TODO: see if we can change this to one rule, "Last check reading an unhealthy scroll"]
 
 Last check reading a scroll of death:
 	if player worships Sul:
@@ -565,6 +628,12 @@ Last check reading a scroll of ghoulification:
 		if the player is dead:
 			end the story saying "And you will know My name is the Lady when I lay My vengeance upon thee. ";
 		rule fails.
+
+Before drinking Drakul's lifeblood when the player worships Sul:
+	say "As you gulp down the blood, you feel Sul changing it into wine. She is extremely pleased with your assistance in destroying this unholy item, and grants you two points of favour.";
+	raise the favour of the player by 2;
+	remove Drakul's lifeblood from play;
+	stop the action.
 		
 Section - Radiance
 
@@ -572,48 +641,56 @@ Section - Radiance
 
 Section - Undead slayer
 
+Definition: A person is undead-slayer if the favour of it with Sul is greater than 2.
+
 An attack modifier rule (this is the undead slayer attack bonus rule):
-	if the global attacker is the player and the player worships sul and the global defender is undead and divine favour > 2:
+	if the global attacker is undead-slayer and the global defender is undead:
 		say " + 2 (undead slayer)[run paragraph on]";
 		increase the attack strength by 2.
 
 A damage modifier rule (this is the undead slayer damage bonus rule):
-	if the global attacker is the player and the player worships sul and the global defender is undead and divine favour > 2:
+	if the global attacker is undead-slayer and the global defender is undead:
 		say " + 2 (undead slayer)[run paragraph on]";
 		increase the attack damage by 2.
 		
 Status attribute rule (this is the undead slayer status rule):
-	if player worships sul and divine favour > 2:
+	if player is undead-slayer:
 		if long status is true:
 			say "[bold type]Undead slayer[roman type]: +2 to attack and damage against undead.[line break][run paragraph on]".		
 
 Section - Demon slayer
 
+Definition: A person is demon-slayer if the favour of it with Sul is greater than 5.
+
 An attack modifier rule (this is the demon slayer attack bonus rule):
-	if the global attacker is the player and the player worships sul and the global defender is demonic and divine favour > 5:
+	if the global attacker is demon-slayer and the global defender is demonic:
 		say " + 2 (demon slayer)[run paragraph on]";
 		increase the attack strength by 2.
 
 A damage modifier rule (this is the demon slayer damage bonus rule):
-	if the global attacker is the player and the player worships sul and the global defender is demonic and divine favour > 5:
+	if the global attacker is demon-slayer and the global defender is demonic:
 		say " + 2 (demon slayer)[run paragraph on]";
 		increase the attack damage by 2.
 		
 Status attribute rule (this is the demon slayer status rule):
-	if player worships sul and divine favour > 5:
+	if player is demon-slayer:
 		if long status is true:
 			say "[bold type]Demon slayer[roman type]: +2 to attack and damage against demons.[line break][run paragraph on]".				
 
 Section - Sul's intervention
 
-A damage multiplier rule when the player worships sul (this is the sul sometimes prevents damage rule):
-	unless faction of global defender hates faction of player:
-		unless global defender is undead or global defender is demonic:
-			if a random chance of divine favour in 40 succeeds:
-				say "[bold type] - 100% (Sul intervenes)[roman type][run paragraph on]";
-				now the attack damage is 0.
-
-
+A damage multiplier rule when someone worships sul (this is the sul sometimes prevents damage rule):
+	if the global defender is undead or the global defender is demonic:
+		make no decision;
+	Let the intercessor be a random person who worships sul;
+	[Don't check that the intercessor is undead or demonic - they can still intercede as long as the defender isn't]
+	if the the intercessor opposes the global defender:
+		make no decision;
+	[Assume that everyone who worships sul is in alliance]
+	Let the current favour be the favour of the intercessor with sul;
+	if a random chance of current favour in 40 succeeds:
+		say "[bold type] - 100% (Sul intervenes)[roman type][run paragraph on]";
+		now the attack damage is 0.
 
 
 Chapter - Chton
@@ -664,26 +741,27 @@ Section - Chton's intervention
 
 Every turn when the player worships Chton (this is the Chton intervenes in combat rule):
 	if combat status is not peace:
-		if at least one hostile alive person is enclosed by the location:
-			let n be divine favour;
-			if current form is ghost-form:
-				increase n by 2;
-			if current form is lich-form:
-				increase n by 5;
-			increase n by 6;
-			decrease n by (3 times (the number of people in the location));
-			if n < 1:
-				now n is 1;
-			if a random chance of n in 100 succeeds:
-				have Chton intervene.
+		let n be divine favour;
+		if current form is ghost-form:
+			increase n by 2;
+		if current form is lich-form:
+			increase n by 5;
+		increase n by 6;
+		decrease n by (3 times (the number of people in the location));
+		if n < 1:
+			now n is 1;
+		if a random chance of n in 100 succeeds:
+			have Chton intervene on behalf of the player.
 
-To have Chton intervene:
+To have (benefactor - Chton) intervene on behalf of (supplicant - a person):
 	say "Chton suddenly sends a [bold type]wave of unholy energy[roman type] through the room, dealing [run paragraph on]";
 	let n be the number of alive not undead persons in the location;
 	let original n be n;
 	if n is greater than 0:
 		repeat with guy running through all alive not undead persons in the location:
-			let m be a random number between 3 and 6;
+			let m be a random number between 2 and 5;
+			if supplicant is the player:
+				increase m by 1;
 			if guy is deathly-resistant:
 				decrease m by 2;
 			decrease health of guy by m;
@@ -761,9 +839,11 @@ A detection rule (this is the Herm worship decreases probability of detection ru
 
 Section - Herm's intervention
 
-Before an actor hitting the player when the player worships Herm:
-	if a random chance of divine favour in 20 succeeds:
-		say "[bold type]Herm[roman type] bends space and time around you and [the actor], and you suddenly find yourself in the role of attacker!";
-		try the player hitting the actor instead.
+Before an actor hitting someone who worships Herm:
+	if the actor worships Herm, make no decision; [this should never happen, but we want to avoid infinite loops]
+	Let the current favour be the favour of the noun with Herm;
+	if a random chance of the current favour in 20 succeeds:
+		say "[bold type]Herm[roman type] bends space and time around [the noun] and [the actor], and you suddenly find [if the noun is the player]yourself in the role of attacker[otherwise]that [the noun] is attacking [the actor] instead[end if]!";
+		try the noun hitting the actor instead.
 			
 Kerkerkruip Religion ends here.

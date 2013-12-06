@@ -578,11 +578,12 @@ Miranda's amulet is silver.
 
 The description of Miranda's amulet is "This silver amulet, shaped like the sun and imbued with magic, was given to Miranda by her father when she set out on a life of adventure. It will reflect ranged attacks back to the attacker 10% of the time.".
 
-Check an actor hitting when the noun wears Miranda's amulet (this is the Miranda's amulet rule):
+Last check an actor hitting when the noun wears Miranda's amulet (this is the Miranda's amulet rule):
 	if the global attacker weapon is ranged:
-		unless the actor is the noun: [No infinite reflection cascade!]
+		unless reflection-attack is true: [No infinite reflection cascade!]
 			if a random chance of 1 in 10 succeeds:
 				say "The magic of Miranda's amulet [bold type]reflects[roman type] the attack back to [the actor]!";
+				now reflection-attack is true;
 				try the actor hitting the actor instead.
 
 
@@ -922,7 +923,7 @@ The indefinite article of the robe of the dead mage is "the".
 The unlock level of the robe of the dead mage is 7.
 The unlock text of the robe of the dead mage is "a piece of clothing that allows you to remain concentrated when hit... at a price".
 
-The description of the robe of the dead mage is "Dominique, marquis of Savon, one of the great mages of his generation, was so fed up with losing his concentration when he was hit that he developed this robe. When the wearer is damaged in combat, he will not lose his concentration; but the protection comes from his life force, and the damage dealt to him is increased by 25% for every level of concentration. Nobody ever died with as much concentration as Dominique.".
+The description of the robe of the dead mage is "Dominique, marquis of Savon, one of the great mages of his generation, was so fed up with losing his concentration when he was hit that he developed this robe. When the wearer is damaged in combat, he gains 1 defence and will not lose his concentration. However, the protection comes from his life force, and the damage dealt to him is increased by 25% for every level of concentration. The say nobody ever died with as much concentration as Dominique.".
 
 A damage multiplier rule when the global defender wears the robe of the dead mage (this is the robe of the dead mage damage multiplier rule):
 	if concentration of the global defender is:
@@ -1008,12 +1009,13 @@ To decide which number is the cloak of reflection percentage:
 
 The description of the cloak of reflection is "A piece of silk with thousands of small magical mirrors sewn on it, this cloak is both beautiful and useful. It will reflect ranged attacks back to the attacker [cloak of reflection percentage]% of the time[if blood magic level of cloak of reflection is not blood magic maximum of cloak of reflection]. This will increase by 15% if the cloak is fed[end if].".
 
-Check an actor hitting when the noun wears the cloak of reflection (this is the cloak of reflection rule):
+Last check an actor hitting when the noun wears the cloak of reflection (this is the cloak of reflection rule):
 	if the global attacker weapon is ranged:
-		unless the actor is the noun: [No infinite reflections]
+		unless reflection-attack is true: [No infinite reflections]
 			let n be 15 * (1 + blood magic level of cloak of reflection);
-			if a random chance of n in 100 succeeds:
+			if a random chance of n in 10 succeeds:
 				say "[if the noun is the player]The[otherwise][Possessive of the noun][end if] cloak of reflection [bold type]reflects[roman type] the attack back to [the actor]!";
+				now reflection-attack is true;
 				try the actor hitting the actor instead.
 
 A dungeon interest rule (this is the Malygris sometimes wears the cloak of reflection rule):
@@ -1357,8 +1359,15 @@ Aftereffects rule (this is the lion's shield rule):
 	if the global defender wears the lion's shield and the global defender is at-block:
 		if the attack damage is 0:
 			if the global attacker weapon is not ranged or the global attacker weapon is a natural weapon:
-				decrease health of the global attacker by 2;
-				say "The lion on the shield strikes out, and bites [the global attacker] for [bold type]2 damage[roman type][if health of global attacker is less than 1], which is [bold type]lethal[roman type][end if].".
+				let m be 2;
+				calculate the pdr for global attacker;
+				decrease m by pdr;
+				if m is less than 0, now m is 0;
+				if m is 0:
+					say "The lion on the shield strikes out, biting [the global attacker]. But the lion's teeth are not sharp enough to penetrate and do damage.";
+				otherwise:
+					say "The lion on the shield strikes out, and bites [the global attacker] for [bold type][m] damage[roman type][if health of global attacker is less than (m + 1)], which is [bold type]lethal[roman type][end if].";
+				decrease health of the global attacker by m.
 
 
 Chapter - Grenades
@@ -1708,7 +1717,9 @@ Check applying it to:
 			say "You cannot rub a salve on a weapon held by someone who is hostile to you." instead.
 
 Before applying something to a person (this is the putting a salve on someone is risky rule):
-	if the faction of the second noun hates the faction of the player:
+	if the player is the second noun, make no decision;
+	[in an arena, the player becomes arena-faction, and opposes herself. Otherwise this should apply:]
+	if the second noun opposes the player:
 		if player is not hidden:
 			say "The salve at the ready, you attempt to reach [the second noun].";
 			now player is risky;

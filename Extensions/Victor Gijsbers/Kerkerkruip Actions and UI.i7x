@@ -140,6 +140,8 @@ Going to is an action applying to one object.
 Understand "go to [any visited room]" and "go [any visited room]" and "[any visited room]" as going to.
 Understand "go to [any seen person]" and "go [any seen person]" and "[any seen person]" as going to.
 
+Going to is bypassing-scope.
+
 Does the player mean going to a not alive person: it is unlikely.
 [ Should we also allow going to things? ]
 
@@ -175,7 +177,7 @@ Carry out going to a thing:
 	let way be the best route from the location of player to location-to-go through visited safe rooms;
 	unless way is a direction:
 		take no time;
-		say "You don't know a safe path towards [it-them]." instead;
+		say "You don't know a safe path towards [it-them of noun]." instead;
 	say "You last saw [the noun] in [the location-to-go], so you [one of]strike out[or]head[at random] towards there.";
 	try going way instead;
 
@@ -431,12 +433,12 @@ Carry out remembering:
 						if place is the room the way of further place:
 							say " - the [way] exit of [the further place] ([if further place is not the location]which lies [the road to further place] from here[otherwise]where you currently are[end if])[line break]";
 	say "[line break]You have visited the following rooms: ";
-	let m be the number of visited rooms minus the number of visited tunnels;
+	let m be the number of visited placed rooms minus the number of visited tunnels;
 	[ Sort the rooms in alphabetical order ]
 	[let R be the list of visited rooms;
 	sort R in printed name order;
 	repeat with X running through R:]
-	repeat with X running through visited rooms:
+	repeat with X running through visited placed rooms:
 		unless X is a tunnel:
 			say "[the X] ([the road to X])[run paragraph on]";
 			decrease m by 1;
@@ -651,12 +653,12 @@ Understand "trophy" and "trophies" and "list trophies" as requesting the score.
 The announce the score rule is not listed in the carry out requesting the score rules.
 Carry out requesting the score:
 	if the number of dead persons is 0:
-		say "You have not yet killed anyone, taking [turn count] turn[s] to do so.";
+		say "You have not yet killed anyone, taking [turn count] turn[s] to do so, on difficulty level [difficulty level difficulty].[line break][paragraph break]";
 	otherwise:
 		say "The following beings have been vanquished:";
 		repeat with guy running through dead seen persons:
 			say "[line break]- [italic type][the name of the guy][roman type] (level [if group level of the guy is not 0][group level of the guy][otherwise][level of the guy][end if])";
-		say "[paragraph break]You have accomplished this in [turn count] turn[s]!";
+		say "[paragraph break]You have accomplished this in [turn count] turn[s], on difficulty level [difficulty level difficulty].[line break][paragraph break]";
 
 Chapter - Commands command
 
@@ -712,7 +714,13 @@ When play begins:
 Instead of singing:
 	say "You hum a battle hymn.".
 
-
+Instead of swearing obscenely:
+	take no time;
+	say "Yeah.".
+	
+Instead of swearing mildly:
+	take no time;
+	say "Sure.".
 
 
 Chapter - Talking
@@ -975,25 +983,54 @@ Carry out taking inventory:
 
 Stock-taking is an activity.
 
+Inventory-avoid-more is a truth state that varies.
+Inventory-shown-items-max is a number that varies. Inventory-shown-items-max is 27.
+
 Carry out taking inventory (this is the full inventory rule):
 	if the number of things had by the player is 0, say "You are empty-handed." instead;
+	now inventory-avoid-more is false;
+	carry out the stock-taking activity.
+
+This is the full panel inventory rule:
+	if the number of things had by the player is 0, say "You are empty-handed." instead;
+	now inventory-avoid-more is true;
 	carry out the stock-taking activity.
 
 After printing the name of a readied weapon while stock-taking (this is the readied stock listing rule):
 	say " (readied)".
 
 For stock-taking:
+	let m be the number of things enclosed by the player;
+	let abbreviate be false;
+	if  inventory-avoid-more is true and (m > inventory-shown-items-max):
+		now abbreviate is true;
 	unless the number of weapons enclosed by the player is the number of natural weapons enclosed by the player:
+		let n be 0;
 		say "You are carrying[line break][italic type]-weapons[roman type]: [line break]";
 		now all things enclosed by the player are unmarked for listing; 
 		now all weapons enclosed by the player are marked for listing; 
 		now all natural weapons enclosed by the player are unmarked for listing;
+		if abbreviate is true and (the number of marked for listing not readied weapons enclosed by the player > 1):
+			repeat with item running through marked for listing weapons enclosed by the player:
+				unless item is readied:
+					now item is unmarked for listing;
+					increase n by 1;
 		list the contents of the player, with newlines, indented, giving inventory information, including contents, with extra indentation, listing marked items only;
+		if abbreviate is true and n > 0:
+			say "  [n in words] unreadied weapons[line break]";
 	unless the number of clothing enclosed by the player is 0:
+		let n be 0;
 		say "[italic type]-clothing[roman type]:[line break]";
 		now all things enclosed by the player are unmarked for listing; 
 		now all clothing enclosed by the player are marked for listing; 
+		if abbreviate is true and (the number of marked for listing not worn clothing enclosed by the player > 1):
+			repeat with item running through marked for listing clothing enclosed by the player:
+				unless item is worn:
+					now item is unmarked for listing;
+					increase n by 1;
 		list the contents of the player, with newlines, indented, giving inventory information, including contents, with extra indentation, listing marked items only;
+		if abbreviate is true and n > 0:
+			say "  [n in words] unworn items[line break]";
 	unless the number of scrolls enclosed by the player is 0:
 		say "[italic type]-scrolls[roman type]:[line break]";
 		now all things enclosed by the player are unmarked for listing; 
@@ -1004,7 +1041,6 @@ For stock-taking:
 		now all things enclosed by the player are unmarked for listing; 
 		now all grenades enclosed by the player are marked for listing; 
 		list the contents of the player, with newlines, indented, giving inventory information, including contents, with extra indentation, listing marked items only;
-	let m be the number of things enclosed by the player;
 	decrease m by the number of weapons enclosed by the player;
 	decrease m by the number of clothing enclosed by the player;
 	decrease m by the number of scrolls enclosed by the player;

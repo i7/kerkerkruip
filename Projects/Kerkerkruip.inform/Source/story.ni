@@ -39,7 +39,7 @@ Include Kerkerkruip Windows by Erik Temple.
 Section - Include ATTACK
 
 [ Get the latest ATTACK at https://github.com/i7/ATTACK ]
-Include version 5/130930 of Inform ATTACK by Victor Gijsbers.
+Include version 5/131204 of Inform ATTACK by Victor Gijsbers.
 
 
 
@@ -73,7 +73,7 @@ Section - Increase memory settings
 Use MAX_PROP_TABLE_SIZE of 800000.
 Use MAX_OBJ_PROP_COUNT of 256.
 Use MAX_STATIC_DATA of 500000.
-Use MAX_OBJECTS of 800.
+Use MAX_OBJECTS of 1000.
 Use MAX_SYMBOLS of 30000.
 Use MAX_ACTIONS of 250.
 

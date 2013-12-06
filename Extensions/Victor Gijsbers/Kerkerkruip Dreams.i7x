@@ -95,6 +95,29 @@ To wake the player up:
 	otherwise:
 		try looking;
 	now the take no time boolean is false.
+[
+Section - Stripping player of possessions
+
+The dream-chest is a container.
+
+To strip the dreamer:
+	repeat with item running through things enclosed by the dreamer:
+		unless item is part of the dreamer:
+			move item to dream-chest.
+
+To restore the dreamer:
+	repeat with item running through things enclosed by the player:
+		if item is a weapon:
+			if at least one readied weapon is in dream-chest:
+				now item is not readied;
+		if item is clothing:
+			if at least one worn clothing is in dream-chest:
+				now item is not worn;
+	repeat with item running through things in the dream-chest:
+		move item to the dreamer.
+
+]
+
 
 Chapter - Dream of Briar Roses
 
@@ -222,7 +245,7 @@ This is the must see two diners before dreaming rule:
 
 This is the start the dream of the banquet rule:
 	now the health of Chef is the health of the player;
-	now the permanent health of Chef is the health of the player;
+	now the permanent health of Chef is permanent health of the player;
 	now player is the Chef;
 	if a random chance of 1 in 2 succeeds:
 		now the kitchen servant is male;
@@ -338,7 +361,12 @@ The Monty-list is a list of things that varies. The Monty-list is {marble black 
 When play begins:
 	sort Monty-list in random order.
 
-Before opening a container in Monty Hall:
+Instead of taking a scenery container in Monty Hall:
+	try opening the noun.
+
+Understand "choose [text]" as a mistake ("To choose a chest, open it.") when the location is Monty Hall. 
+
+Before opening a scenery container in Monty Hall:
 	if Monty-Hall-voice < 2:
 		now Monty-Hall-voice is 2;
 		let item be entry 2 in Monty-list;
@@ -355,11 +383,39 @@ Instead of opening a container in Monty Hall:
 	otherwise:
 		now permanent health of the dreamer is 1;
 		now health of the dreamer is 1;
-		say "As you carefully open [the noun], the glow of gold and gems welcomes you. Filled with joy you throw open the lid -- and a demonic being with golden skin and flowing eyes jumps out and starts tearing you apart with its monstrous claws.[paragraph break][bold type]When you wake up, the wounds have not healed.[roman type][paragraph break]";
+		say "As you carefully open [the noun], the glow of gold and gems welcomes you. Filled with joy you throw open the lid -- and a demonic being with golden skin and glowing eyes jumps out and starts tearing you apart with its monstrous claws.[paragraph break][bold type]When you wake up, the wounds have not healed.[roman type][paragraph break]";
 	wake the player up.
+[
 
+Chapter - Dream of the Rapier
 
+[The rapier's description is "You took it from the body of the young Count of Poitier, that fateful night in Maurice's whorehouse. He would nevermore plot against you." That is what this dream is going to be about.]
 
+Dream of the rapier is a dream.
+
+The start the dream rule of dream of the rapier is the start dream of the rapier rule.
+
+This is the start dream of the rapier rule:
+	strip the dreamer;
+	say "You had already noticed that Julian was tenser than usual, not his normal easy-going self. Well. We all have our off-days. But when you see him glancing towards the door, as if he's expecting someone to burst in, you realise what's going on. With a quick and silent movement, you get off of him. He opens his mouth as if to say something, but you clasp your hand over his face and whisper ...";
+	now current question is "(What do you whisper to Julian?)";
+	now current question menu is {"'One sound and I will break your neck. You know I can.'", "'Who has paid you?'", "'Keep grunting and panting.'"};
+	ask a closed question, in menu mode.
+	
+Julian's room is a room. "Maurice's whorehouse isn't the most classy establishment in town, but it is the favourite of more adventurous pleasure seekers. Julian's bedroom is entirely draped in pink satin."
+Julian's room is not placeable.
+
+A menu question rule (this is the ordering Julian rule):
+	if the current question is "(What do you say to Julian?)":
+		let m be the number understood;
+		if m is 1:
+			say "";
+		if m is 2:
+			say "";
+		if m is 3:
+			say "";
+		move the player to Julian's room;
+		exit.]
 
 
 

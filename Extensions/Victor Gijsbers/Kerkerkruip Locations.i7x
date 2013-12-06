@@ -99,15 +99,16 @@ Check an actor hitting when the location is Hall of Mirrors (this is the sometim
 	unless the global attacker is blind:
 		unless the global attacker grapples the global defender:
 			unless the global defender grapples the global attacker:
-				test the mind of global attacker against 10;
-				if test result is false:
-					say " Confused by the mirrors, [if global attacker is the player]you start[otherwise][the global attacker] starts[end if] attacking a reflection before realising [if global attacker is the player]your[otherwise]its[end if] mistake.";
-					if the concentration of the global attacker is greater than 1:
-						now the concentration of the global attacker is 1; 
-					rule fails;
-	[				consider the take away until attack circumstances rules;]
-				otherwise:
-					say " Seeing through the illusion created by the mirrors, [if global attacker is the player]you attack[otherwise][the global attacker] attacks[end if] the real [if global defender is not the player][global defender][otherwise]you[end if].".
+				unless reflection-attack is true:
+					test the mind of global attacker against 10;
+					if test result is false:
+						say " Confused by the mirrors, [if global attacker is the player]you start[otherwise][the global attacker] starts[end if] attacking a reflection before realising [if global attacker is the player]your[otherwise]its[end if] mistake.";
+						if the concentration of the global attacker is greater than 1:
+							now the concentration of the global attacker is 1; 
+						rule fails;
+		[				consider the take away until attack circumstances rules;]
+					otherwise:
+						say " Seeing through the illusion created by the mirrors, [if global attacker is the player]you attack[otherwise][the global attacker] attacks[end if] the real [if global defender is not the player][global defender][otherwise]you[end if].".
 
 An AI action selection rule for a person (called P) when the location is Hall of Mirrors (this is the concentration is more important in the Hall of Mirrors rule):
 	choose row with an Option of the action of P concentrating in the Table of AI Action Options;
@@ -159,7 +160,9 @@ To say phantasmagoria show:
 				say "three bull-men getting eaten by a horrendous swamp monster".
 
 Every turn when the location is the phantasmagoria and the combat status is not peace:
-	if a random chance of 1 in 5 succeeds:
+	let n be the number of alive persons in phantasmagoria;
+	now n is (3 times n);
+	if a random chance of 1 in n succeeds:
 		let lijst be a list of persons;
 		repeat with guy running through alive persons enclosed by the location:
 			unless guy is blind:
@@ -841,8 +844,10 @@ Alchemical Laboratory is alchemical.
 
 The curious machine is scenery in alchemical laboratory. The curious machine is an open container. The material of the curious machine is iron. The description of the curious machine is "You have no idea how this machine works, but it seems that you can insert an item into it.".
 
+The machine-counter is a number that varies. The machine-counter is 0.
+
 Last check inserting something into the curious machine:
-	if the noun is a grenade:
+	if the noun is a grenade or the noun is incorruptible:
 		say "The machine beeps angrily and rejects [the noun].";
 	otherwise:
 		let chosen grenade be a random flash grenade;
@@ -855,8 +860,19 @@ Last check inserting something into the curious machine:
 		if a random chance of 1 in 100 succeeds, now chosen grenade is the Blessed Grenade;
 		let item be a new object cloned from chosen grenade;
 		move item to the location;
+		have the parser notice the item;
+		increase machine-counter by 1;
 		remove the noun from play;
-		say "You put [the noun] in the curious machine. It starts clicking and beeping, and after a short while, [an item] drops on the ground.";
+		let explode-boolean be false;
+		if a random chance of machine-counter in 50 succeeds:
+			now explode-boolean is true;
+			now machine-counter is 0;
+		say "You put [the noun] in the curious machine. It starts clicking and beeping, and after a short while, [an item] drops on the ground[if explode-boolean is true]. Something seems to have gone wrong, though, and it immediately explodes[end if].";
+		if explode-boolean is true:
+			now exploding-location is the location;
+			now exploding-grenade is the item;
+			follow the exploding rules;
+			remove item from play;
 	rule succeeds.
 
 
@@ -1075,16 +1091,11 @@ Instead of examining the fascinating drawing:
 		unless guy is Malygris or guy is Nameless Horror:
 			add guy to X;
 	let n be the number of dead persons;
-	let item be a random readied weapon carried by the player;
 	if the number of entries in X is greater than 1:
 		say "The artist has skillfully drawn a battle scene involving [X with indefinite articles]. [if n is greater than 2]Several figures seem to have been smudged out. [end if]In the background, Malygris rises triumphant over all[if Eternal Prison is placed] -- unless the huge shadow behind him is a creature threatening to consume even him[end if]. You could further [italic type]examine[roman type] the individual creatures, if you wanted to.";
 	otherwise:
 		say "The artist has skillfully drawn a battle scene between you and Malygris, where you are evidently being crushed by the mighty wizard. Large portions of the drawing have been wiped out.".
 
-[After deciding the scope of the player while the location is the Drawing Room:
-	repeat with guy running through alive not off-stage persons:
-		unless guy is Nameless Horror:   [TODO!!! This is an ugly hack.]
-			place guy in scope.]
 
 Adjusted scope for the drawing room is a truth state that varies.
 
@@ -1100,14 +1111,17 @@ After taking a player action:
 	now adjusted scope for the drawing room is false.
 
 
+Examining is bypassing-scope.
+[ See more in Monsters ]
 
-Before doing anything except examining or reaping or going to in Drawing Room:
-	if the noun is a person and the location of the noun is not the location of the player:
-		take no time;
-		say "It is only a drawing." instead;
-	if the second noun is a person and the location of the second noun is not the location of the player:
-		take no time;
-		say "It is only a drawing." instead;
+Before doing something in the Drawing Room:
+	if not bypassing-scope:
+		if the noun is a person and the location of the noun is not the location of the player:
+			take no time;
+			say "It is only a drawing." instead;
+		if the second noun is a person and the location of the second noun is not the location of the player:
+			take no time;
+			say "It is only a drawing." instead;
 	continue the action.
 
 Persuasion rule for asking people to try doing something when the player is in Drawing Room:
@@ -1536,7 +1550,12 @@ To people the mausoleum:
 	if a random chance of 1 in 4 succeeds:
 		if at least one epic thing is off-stage:
 			let item be a random epic thing;
-			now item is in tomb of the ancient king.
+			now item is in tomb of the ancient king;
+	if abyss of the soul is in the mausoleum:
+		if at least one undead person is off-stage:
+			let guy be a random off-stage undead person; [can be super-undead!]
+			move guy to the mausoleum;
+		remove abyss of the soul from play.
 			
 Section - Mausoleum label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
@@ -1752,7 +1771,7 @@ To maze (the first guy - a person) and (the second guy - a person):
 Section - Getting out of the maze
 
 
-Every turn when the location is the maze:
+Last every turn when the location is the maze:
 	update the combat status;
 	if no person is in the maze-waiting-room and combat status is peace:
 		say "You are [bold type]transported back[roman type] from the maze.";
@@ -1762,9 +1781,9 @@ Every turn when the location is the maze:
 		move player to pre-maze-location.
 
 
-Chapter - Arena of the Fallen
+Chapter - Entrance to the Arena
 
-Entrance to the Arena is a room. "A large, black dome seen from the outside towers over you -- though you find it impossible to say in which direction, as if the normal rules of space do not obtain here. The outer wall of the dome, which must be the legendary Arena of the Fallen, is adorned with high reliefs of battle scenes. The scene depicted above the entrance, which seems hermetically closed, shows [if triumphing boolean is false]Victor triumphing over Malygris[otherwise] [the name of the player] triumphing over [oppname][end if]. Some inscriptions are engraved on the wall[if soulchest is in Arena of the Fallen], and a large soulchest is at your feet[end if]."
+Entrance to the Arena is a room. "A large, black dome seen from the outside towers over you -- though you find it impossible to say in which direction, as if the normal rules of space do not obtain here. The outer wall of the dome, which must be the legendary Arena of the Fallen, is adorned with high reliefs of battle scenes. The scene depicted above the entrance, which seems hermetically closed, shows [if triumphing boolean is false]Victor triumphing over Malygris[otherwise] [the name of the player] triumphing over [oppname][end if]. Some inscriptions are engraved on the wall."
 	
 Entrance to the Arena is connectable.
 Entrance to the Arena is not connection-inviting.
@@ -1777,174 +1796,42 @@ Entrance to the Arena is magical.
 
 The rarity of Entrance to the Arena is 5. 
 
-
-The Arena of the Fallen is a room. "The ruins of a formerly great arena. The ground is littered with remains, and there is definitely something unholy about this place. Playing around with the souls of the departed is probably not for the faint of heart. All around you demonic spectators cheer gleefully, excited once again to witness the game of death. You'd better keep them entertained and the blood flowing ..."
-
-The Arena of the Fallen is not connectable.
-The Arena of the Fallen is not connection-inviting.
-The Arena of the Fallen is not placeable.
-The Arena of the Fallen is not habitable.
-The Arena of the Fallen is not treasurable.
-The Arena of the Fallen is not teleportable.
-The Arena of the Fallen is not extra-accepting.
-The Arena of the Fallen is vp-agnostic.
-The Arena of the Fallen is magical.
-
-The Arena-waiting-room is a room. "BUG: the player should never end up here."
-
-The Arena-waiting-room is not connectable.
-The Arena-waiting-room is not connection-inviting.
-The Arena-waiting-room is not placeable.
-The Arena-waiting-room is not habitable.
-The Arena-waiting-room is not treasurable.
-The Arena-waiting-room is not teleportable.
-The Arena-waiting-room is not extra-accepting.
-The Arena-waiting-room is vp-agnostic.
-The Arena-waiting-room is magical.
-
-
 The black dome is scenery in the Entrance to the Arena. Understand "Arena" and "large" and "black" and "of the fallen" as the black dome. The description of the black dome is "You feel uneasy looking at it, as it seems to be formed of unholy energies that defy all the laws of your own world."
 
-The scribblings are scenery in the Entrance to the Arena and plural-named. Understand "writings" and "inscriptions" and "inscription" as the scribblings. The description of the scribblings is "[if triumphing boolean is false]As you start to read the text, it lights up in a dark crimson: [italic type] If you wish, you can relive a battle you fought before, but it will become the most challenging fight you ever had. To start the fight, simply [roman type]smash[italic type] the appropriate shard with a weapon[otherwise]Writings glowing with an eerie red light celebrate your victory: 'Hail to our last victor!'[end if].".
+The scribblings are scenery in the Entrance to the Arena and plural-named. Understand "writings" and "inscriptions" and "inscription" as the scribblings. The description of the scribblings is "[if triumphing boolean is false]As you start to read the text, it lights up in a dark crimson: [italic type] If you wish, you can relive a battle you fought before, but it will become the most challenging fight you ever had. To start the fight, simply [roman type]REVIVE[italic type][otherwise]Writings glowing with an eerie red light celebrate your victory: 'Hail to our last victor!'[end if].".
 
 Instead of reading the scribblings:
 	try examining the scribblings.
 
-The soulchest is a scenery, opaque, openable, open, fixed in place container in Entrance to the Arena. Understand "chest" and "ruby" and "rubies" as the soulchest. The description of the soulchest is "A large chest, adorned with a number of crimson rubies." 
-
-A soulfragment is a kind of thing with description "A shard of a lost soul. You could smash it to resurrect the being it belongs to.".
-Soulcatching relates a person to a soulfragment. The verb to soulcatch (he soulcatches, it soulcatches, they soulcatch, it is soulcatched, it has been soulcatched, it was soulcatched) implies the soulcatching relation.
-Every person soulcatches a soulfragment (called its shard). 
-
-The triumphing boolean is a truth state variable that varies. The triumphing boolean is false.
-The fighting boolean is a truth state variable that varies. The fighting boolean is false.
-The oppname is a text that varies. The oppname is "".
-
-Before doing anything in Entrance to the Arena:
-	if soulchest is not off-stage:
-		consider the soulshards to chest rule.
-
-This is the soulshards to chest rule:
-	repeat with guy running through all dead not grouper persons:
-		if guy is not group leading or the group of guy has been defeated: 
-			repeat with P running through powers granted by guy:
-				if P is not granted:
-					let soulfrag be a random soulfragment soulcatched by guy;
-					move soulfrag to the soulchest.
-
-Shardsmashing is an action applying to one thing.
-
-Instead of attacking a soulfragment:
-	try shardsmashing the noun.
-
-Carry out shardsmashing:
-	if the player is in the Entrance to the Arena:
-		repeat with Pers running through monsters who soulcatches the noun:
-			if Pers is group leading and Pers is not defeated individually:
-				move Pers to the Arena-waiting-room;
-				now oppname is the printed name of Pers;
-				if Pers is initially accompanied:
-					repeat with X running through people who accompany Pers:
-						challenge X;
-						move X to the location of Pers;
-				repeat with guy running through persons in the Arena-waiting-room:
-					challenge guy;
-					say "The heavy doors open, where the angry [guy] awaits, strengthened by evil magic!";
-				now the fighting boolean is true;
-				move the player to the Arena of the Fallen;
-			otherwise:
-				now the oppname is the printed name of Pers;
-				challenge Pers;
-				say "The heavy doors open, where the angry [Pers] awaits, strengthened by evil magic!";
-				move the player to the Arena of the Fallen;
-				now the fighting boolean is true;
-	otherwise:
-		say "You have already challenged someone. The Arena can only be used once.";
-		take no time.
-
-
-To challenge (the guy - a person):
-	let x be level of the guy;
-	now x is x times 3 divided by 2 to the nearest 2;
-	let d be a random number between 2 and 8;
-	let g be a random number between 1 and 3;
-	let hm be d times x;
-	let s be g plus x;
-	increase the permanent health of guy by hm;
-	increase the body score of guy by g;
-	increase the mind score of guy by g;
-	increase the spirit score of guy by g;
-	increase the melee of guy by 3;
-	increase the defence of guy by 3;
-	move the guy to the Arena of the Fallen;
-	restore the health of the guy.
-
-The demon boredom is a number which varies. The demon boredom is 0.
-The current dissatisfaction is a number which varies. The current dissatisfaction is 0.
-
-After not attacklike behaviour:
-	if the location is the Arena of the Fallen:
-		increase current dissatisfaction by 1;
-	continue the action.
-
-After attacklike behaviour:
-	if the location is the Arena of the Fallen:
-		decrease current dissatisfaction by 1;
-	continue the action.
-
-To decide which number is the distractionchance:
-	let x be the current dissatisfaction;
-	increase x by the demon boredom;
-	let N be a random number between -5 and x;
-	decide on N.
-
-Every turn when the location is the Arena of the Fallen and the combat status is not peace:
-	let guy be a random alive person in the Arena of the Fallen;
-	if distractionchance > 3:
-		if the concentration of guy > 0:
-			decrease the concentration of guy by 1;
-			say "Distracted by [one of]the strong sulfur smell[or]hundreds of prying, crimson eyes[or]gripping claws[or]the black figure towering above you[or]gruesome howling[purely at random], [if guy is the player]you are[otherwise][guy] [is-are][end if] unable to maintain this level of concentration. [if guy is the player]Your[otherwise][Possessive of guy][end if] current concentration is";
-			if the concentration of guy is:
-				-- 0:
-					say " unconcentrated.";
-				-- 1:
-					say " mildly concentrated.";
-				-- 2:
-					say " quite concentrated.";
-				-- 3:
-					say " maximally concentrated.";
-			now the current dissatisfaction is 0;
-			increase the demon boredom by 2;
-	otherwise if distractionchance > 6:
-		let X be a random number between 1 and distractionchance - 2;
-		decrease the health of guy by X;
-		say "Disgruntled by  lack of blood, the spectators decide to lend a helping hand. [one of]Grippling claws tears away at[or]A small dagger, coated with a bit of blood, slices[or]Noxious fumes envelop[or]A small rock is flinged at[purely at random] you[if guy is not the player]r opponent[end if], doing [X] damage[if health of guy is less than 1] and killing [the guy][end if]!";
-		now the current dissatisfaction is 0;
-		increase the demon boredom by 2.
-
+[See Arena of the Fallen in Kerkerkruip Events and Specials.]
+		
 
 Section - Entrance to the Arena label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
 The map-label of Entrance to the Arena is Figure of map_label_Arena.
 				
 
-Section - Getting out of the Arena
 
+Chapter - Hall of the Gods
 
-Every turn when the location is the Arena of the Fallen:
-	update the combat status;
-	if no person is in the Arena-waiting-room and combat status is peace:
-		now the triumphing boolean is true;
-		say "You are [bold type]transported back[roman type] to the Entrance of the Arena.";
-		repeat with item running through things in the Arena of the Fallen:
-			unless (item is player or item is backdrop):
-				move item to Entrance to the Arena;
-		now soulchest is off-stage;
-		move player to Entrance to the Arena;
-		award achievement Twice fallen.
+Hall of Gods is a room. "A long hall, adorned with great statues of the [number of gods in words] great gods are here, together with pictures of the great battles already fought in this room. The last picture mentions [if Godfight boolean is true]you triumphing over [Chosenname][otherwise][random fight text][end if]. [if the Godfight boolean is false]While this fight may not let you harvest the soul of the opponent, your victory will be hailed upon by your god [italic type](+2 divine favour)[roman type]. If you are willing to fight, stand on the empty pedestal.[end if] Agnosticists and Atheists will not be tolerated!" 
+	
+Hall of Gods is connectable.
+Hall of Gods is not connection-inviting.
+Hall of Gods is placeable.
+Hall of Gods is not habitable.
+Hall of Gods is not treasurable.
+Hall of Gods is extra-accepting.
+Hall of Gods is vp-agnostic.
+Hall of Gods is religious.
 
+The rarity of Hall of Gods is 5. 
+The unlock level of Hall of Gods is 2.
 
+[See Arena of the Fallen in Kerkerkruip Events and Specials.]
 
+Section - Hall of Gods label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+		
 
 
 Chapter - The Arcane Vault
