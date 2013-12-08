@@ -4476,6 +4476,13 @@ When play begins:
 Israfel is angelic.
 Radiation of Israfel is 4.
 
+
+Section - Israfel images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of Israfel is Figure of map_monster_Israfel.
+The legend-label of Israfel is Figure of map_legend_Israfel.
+
+
 Section - Israfel's healing trance
 
 Israfel-trance is a number that varies. Israfel-trance is 1.
@@ -4638,6 +4645,13 @@ When play begins:
 Isra is angelic.
 Radiation of Isra is 3.
 
+
+Section - Isra images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of Isra is Figure of map_monster_Isra.
+The legend-label of Isra is Figure of map_legend_Isra.
+
+
 Section - Isra specials and AI
 
 An aftereffects rule (this is the Isra's burning defence rule):
@@ -4719,6 +4733,13 @@ When play begins:
 
 Fell is angelic.
 Radiation of Fell is 1.
+
+
+Section - Fell images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of Fell is Figure of map_monster_Fell.
+The legend-label of Fell is Figure of map_legend_Fell.
+
 
 Section - Fell specials and AI
 

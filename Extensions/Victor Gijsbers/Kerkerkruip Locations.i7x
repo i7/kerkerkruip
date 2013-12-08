@@ -1817,7 +1817,6 @@ Section - Entrance to the Arena label for the map (for use with Kerkerkruip Glim
 The map-label of Entrance to the Arena is Figure of map_label_Arena.
 				
 
-
 Chapter - Hall of the Gods
 
 Hall of Gods is a room. "A long hall, adorned with great statues of the [number of gods in words] great gods are here, together with pictures of the great battles already fought in this room. The last picture mentions [if Godfight boolean is true]you triumphing over [Chosenname][otherwise][random fight text][end if]. [if the Godfight boolean is false]While this fight may not let you harvest the soul of the opponent, your victory will be hailed upon by your god [italic type](+2 divine favour)[roman type]. If you are willing to fight, stand on the empty pedestal.[end if] Agnosticists and Atheists will not be tolerated!" 
@@ -1837,7 +1836,8 @@ The unlock level of Hall of Gods is 2.
 [See Arena of the Fallen in Kerkerkruip Events and Specials.]
 
 Section - Hall of Gods label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
-		
+
+The map-label of Hall of Gods is Figure of map_label_Hall_of_Gods.
 
 
 Chapter - The Arcane Vault

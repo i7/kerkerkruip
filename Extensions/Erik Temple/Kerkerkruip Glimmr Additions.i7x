@@ -411,6 +411,7 @@ Figure of map_label_Smoke is the file "map_label_Smoke.png".
 Figure of map_label_Arena is the file "map_label_Arena.png".
 Figure of map_label_Zen is the file "map_label_Zen.png".
 Figure of map_label_Mausoleum is the file "map_label_Mausoleum.png".
+Figure of map_label_Hall_of_Gods is the file "map_label_Hall_of_Gods.png".
 
 [Enemy labels]
 Figure of map_monster_Miranda is the file "map_monster_Miranda.png".
@@ -431,6 +432,9 @@ Figure of map_monster_Bodmall is the file "map_monster_Bodmall.png".
 Figure of map_monster_healer_of_Aite is the file "map_monster_healer_of_Aite.png".
 Figure of map_monster_tormentor_of_Aite is the file "map_monster_tormentor_of_Aite.png".
 Figure of map_monster_defender_of_Aite is the file "map_monster_defender_of_Aite.png".
+Figure of map_monster_Fell is the file "map_monster_Fell.png".	
+Figure of map_monster_Isra is the file "map_monster_Isra.png".
+Figure of map_monster_Israfel is the file "map_monster_Israfel.png".
 Figure of map_monster_overmind is the file "map_monster_overmind.png".
 Figure of map_monster_Malygris is the file "map_monster_Malygris.png".
 Figure of map_monster_Fafhrd is the file "map_monster_Fafhrd.png".
@@ -467,6 +471,9 @@ Figure of map_legend_Bodmall is the file "map_legend_Bodmall.png".
 Figure of map_legend_healer_of_Aite is the file "map_legend_healer_of_Aite.png".
 Figure of map_legend_tormentor_of_Aite is the file "map_legend_tormentor_of_Aite.png".
 Figure of map_legend_defender_of_Aite is the file "map_legend_defender_of_Aite.png".
+Figure of map_legend_Fell is the file "map_legend_Fell.png".
+Figure of map_legend_Isra is the file "map_legend_Isra.png".
+Figure of map_legend_Israfel is the file "map_legend_Israfel.png".
 Figure of map_legend_overmind is the file "map_legend_overmind.png".
 Figure of map_legend_Malygris is the file "map_legend_Malygris.png".
 Figure of map_legend_Fafhrd is the file "map_legend_Fafhrd.png".
@@ -1913,6 +1920,9 @@ Bodmall (level 4)	B
 Healer of Aite (level 4)	H
 Tormentor of Aite (level 4)	T
 Defender of Aite (level 4)	D
+Israfel (level 4)	I
+Isra (level 0/4)	i
+Fell (level 0/4)	f
 Overmind (level 4)	O
 Malygris (level 5)	M
 
