@@ -369,6 +369,7 @@ Figure of map_room_stairs_up_down is the file "map_room_stairs_up_down.png".
 Figure of map_room_stairs_up is the file "map_room_stairs_up.png".
 Figure of map_room is the file "map_room.png".
 Figure of map_room_lava is the file "map_room_lava.png".
+Figure of map_temple_overlay is the file "map_temple_overlay.png".
 Figure of map_tile is the file "map_tile.png".
 Figure of map_tunnel_stairs_down is the file "map_tunnel_stairs_down.png".
 Figure of map_tunnel_stairs_up_down is the file "map_tunnel_stairs_up_down.png".
@@ -1487,6 +1488,8 @@ An element display rule for the map-renderer (this is the map display rule):
 					display the image (appropriate graphic for place) in map-window at screen-x coordinate for (grid-x - 1) and (grid-y + 1) by y-coord;
 				otherwise:
 					draw tunnel for place using Figure of map_tile at grid-x by grid-y with offsets 0 and 0;
+				if place is a temple:
+					display the image (appropriate temple-overlay for place) in map-window at screen-x coordinate for (grid-x - 1) and (grid-y + 1) by (y-coord - 9)[9 is the vertical offset for the basic temple overlay];
 				if the room east of place is a not nogo room:
 					display the image Figure of map_tile in map-window at screen-x coordinate for (grid-x + 3) and (grid-y + 1) by screen-y coordinate for (grid-x + 3) and (grid-y + 1);
 				if the room south of place is a not nogo room:
@@ -1659,6 +1662,9 @@ To decide what figure name is the appropriate graphic for (place - room):
 	if place is tunnel-drawn:
 		decide on Figure of map_tunnel;
 	decide on Figure of map_room.
+
+To decide which figure name is the appropriate temple-overlay for (place - a room):
+	decide on Figure of map_temple_overlay.
 
 
 Section - Small Map Window

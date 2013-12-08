@@ -22,6 +22,12 @@ The Bridge of Doom is tunnel-drawn. The map-background of Bridge of Doom is Figu
 Part - The rooms themselves
 
 
+Chapter - Temple type
+[Initially, at least, the only role of the temple kind is to enable easy display of the temple overlay on the graphical map.]
+
+A temple is a kind of a room.
+
+
 Chapter - Entrance Hall
 
 The entrance hall is a room. "The vast entrance hall is empty, silent, foreboding. Skull-sized rubies project a red light far too bright for the eyes of a human[initial-possessions]."
@@ -356,7 +362,7 @@ The map-label of Bridge of Doom is Figure of map_label_Bridge.
 
 Chapter - Temple of Nomos
 
-The temple of Nomos is a room. "The exactly elliptical room is dominated by a towering statue of Nomos, built out of harsh geometrical forms."
+The temple of Nomos is a temple. "The exactly elliptical room is dominated by a towering statue of Nomos, built out of harsh geometrical forms."
 
 Temple of Nomos is dedicated to Nomos.
 
@@ -402,7 +408,7 @@ The map-label of Temple of Nomos is Figure of map_label_Nomos.
 
 Chapter - Temple of Aite
 
-The temple of Aite is a room. "The black stones have been scratched in a million fights, and will nevermore lose the faint colour of blood. This is the temple of Aite, whose laughing statue rises above all."
+The temple of Aite is a temple. "The black stones have been scratched in a million fights, and will nevermore lose the faint colour of blood. This is the temple of Aite, whose laughing statue rises above all."
 
 Temple of Aite is dedicated to Aite.
 
@@ -455,7 +461,7 @@ The map-label of Temple of Aite is Figure of map_label_Aite.
 
 Chapter - Temple of Sul
 
-The temple of Sul is a room. "The only feature breaking the monotony of the circular room made of polished white marble is a huge [if the statue of Sul is in the Temple of Sul]statue. Hewn from flawless mountain crystal, it portrays the goddess Sul[otherwise]pile of fragments of the broken statue[end if]."
+The temple of Sul is a temple. "The only feature breaking the monotony of the circular room made of polished white marble is a huge [if the statue of Sul is in the Temple of Sul]statue. Hewn from flawless mountain crystal, it portrays the goddess Sul[otherwise]pile of fragments of the broken statue[end if]."
 
 Temple of Sul is dedicated to Sul.
 
@@ -497,7 +503,7 @@ The map-label of Temple of Sul is Figure of map_label_Sul.
 
 Chapter - Temple of Chton
 
-The temple of Chton is a room. "This austere alabaster chamber is a temple to Chton, the god of death. You do not expect the dead to be particularly meek here. A smooth grey statue of Chton silently watches you." [Allusions are to Emily Dickinson, "Safe in their alabaster chambres."]
+The temple of Chton is a temple. "This austere alabaster chamber is a temple to Chton, the god of death. You do not expect the dead to be particularly meek here. A smooth grey statue of Chton silently watches you." [Allusions are to Emily Dickinson, "Safe in their alabaster chambres."]
 
 Temple of Chton is dedicated to Chton.
 
@@ -535,7 +541,7 @@ The map-label of Temple of Chton is Figure of map_label_Chton.
 
 Chapter - Temple of Herm
 
-The temple of Herm is a room. "Shadows are everywhere, and you feel that the subtle god Herm might be hiding in any of them -- or in none. Warriors despise him, for they assume that Herm is cowardly; mages respect him, for he is a source of knowledge; but only those either unwilling or too weak to fight truly love him."
+The temple of Herm is a temple. "Shadows are everywhere, and you feel that the subtle god Herm might be hiding in any of them -- or in none. Warriors despise him, for they assume that Herm is cowardly; mages respect him, for he is a source of knowledge; but only those either unwilling or too weak to fight truly love him."
 
 Temple of Herm is dedicated to Herm.
 
