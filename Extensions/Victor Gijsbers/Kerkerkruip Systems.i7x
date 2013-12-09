@@ -1416,27 +1416,30 @@ Current form is human-form.
 A player form can be form-active. A player form is usually not form-active.
 Human-form is form-active.
 
-The form change rules are a rulebook.
+Changing form to is an action applying to one player form.
 
-A form change rule (this is the set creature type for new form rule):
+Check changing form to the current form (this is the can't change to the current form rule):
+	say "You don't seem to change.";
+	stop the action.
+
+Carry out changing form to (this is the set player form and creature type rule):
+	now the current form is the player form understood;
 	now the creature-type of the player is the creature-type of the current form;
 
-A form change rule when the current form is living (this is the turn-living rule):
+Carry out changing form to a living player form (this is the turn-living rule):
 	now undead-faction hates friendly;
 	now friendly hates undead-faction;
 	now undead-faction hates player-enslaved;
 	now player-enslaved hates undead-faction.
 	
-A form change rule when the current form is undead (this is the turn-undead rule):
+Carry out changing form to an undead player form (this is the turn-undead rule):
 	now undead-faction does not hate friendly;
 	now friendly does not hate undead-faction;
 	now undead-faction does not hate player-enslaved;
 	now player-enslaved does not hate undead-faction.
 
-Describing form change is an activity.
-
-For describing form change (this is the standard describe form change rule):
-	say the turn-text of the current form;
+Report changing form to (this is the standard describe form change rule):
+	say the turn-text of the player form understood;
 	say line break;
  
 This is the short player form status rule:
@@ -1475,16 +1478,6 @@ To find the trump of (Y - a player form):
 	unless target form is Y:
 		find the trump of target form.]
 
-To turn the player into (X - a player form):
-[	find the trump of X;]
-	unless X is current form:
-		now current form is X;
-		follow the form change rules;
-		carry out the describing form change activity;
-	otherwise:
-		say "You don't seem to change.".
-
-
 Section - Human
 
 [No specials.]
@@ -1496,7 +1489,7 @@ To ghoulify the player:
 	now ghoul-form is form-active;
 	unless the player worships Chton:
 		now human-form is not form-active;
-	turn the player into ghoul-form.
+	try changing form to ghoul-form.
 
 An attack modifier rule (this is the ghoul has less chance to hit rule):
 	if the global attacker is the player and current form is ghoul-form:
@@ -1521,7 +1514,7 @@ To unghoulify the player:
 	unless player worships Chton:
 		now ghoul-form is not form-active;
 	now human-form is form-active;
-	turn the player into human-form.
+	try changing form to human-form.
 
 
 Section - Ghost
@@ -1570,7 +1563,7 @@ To vampirise the player:
 	unless player worships chton:
 		now human-form is not form-active;
 		now ghoul-form is not form-active;
-	turn the player into vampire-form.
+	try changing form to vampire-form.
 
 This is the turn-vampire rule:
 	say "".
@@ -1680,7 +1673,7 @@ Check turning human:
 		say "You already are in human form." instead.
 
 Carry out turning human:
-	turn the player into human-form.
+	try changing form to human-form.
 	
 
 Turning ghoul is an action applying to nothing. Understand "ghoul" and "turn ghoul" and "turn into ghoul" as turning ghoul.
@@ -1694,7 +1687,7 @@ Check turning ghoul:
 		say "You already are in ghoul form." instead.
 
 Carry out turning ghoul:
-	turn the player into ghoul-form.	
+	try changing form to ghoul-form.	
 
 
 Turning ghost is an action applying to nothing. Understand "ghost" and "turn ghost" and "turn into ghost" as turning ghost.
@@ -1708,7 +1701,7 @@ Check turning ghost:
 		say "You already are in ghost form." instead.
 
 Carry out turning ghost:
-	turn the player into ghost-form.	
+	try changing form to ghost-form.	
 
 
 Turning lich is an action applying to nothing. Understand "lich" and "turn lich" and "turn into lich" as turning lich.
@@ -1722,7 +1715,7 @@ Check turning lich:
 		say "You already are in lich form." instead.
 
 Carry out turning lich:
-	turn the player into lich-form.	
+	try changing form to lich-form.	
 
 
 Turning vampire is an action applying to nothing. Understand "vampire" and "turn vampire" and "turn into vampire" as turning vampire.
@@ -1736,7 +1729,7 @@ Check turning vampire:
 		say "You already are in vampire form." instead;
 
 Carry out turning vampire:
-	turn the player into vampire-form.
+	try changing form to vampire-form.
 
 
 Turning bat is an action applying to nothing. Understand "bat" and "bat form" and "vampire bat" and "turn into bat" and "turn into vampire bat" as turning bat.
@@ -1750,7 +1743,9 @@ Check turning bat:
 		say "You already are in vampire bat form." instead;
 
 Carry out turning bat:
-	turn the player into vampirebat-form;
+	try changing form to vampirebat-form;
+
+Carry out changing form to vampirebat-form (this is the get naked when changing to bat form rule):
 	repeat with X running through weapons enclosed by the player:
 		now X is not readied;
 	repeat with X running through clothing enclosed by the player:

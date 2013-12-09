@@ -412,7 +412,7 @@ An attack modifier rule (this is the much harder to discern by Herm bonus rule):
 
 Section - Faction interactions
 
-For describing form change when the challenged god is Chton and the player is undead:
+After changing form to an undead player form when the challenged god is Chton:
 	Let the opponent be a random alive arena-faction person who worships Chton; [Drakul]
 	say "You turn into a [form-name of current form], but your opponent do[es of the opponent]n't care that you're undead. [It-they of the opponent] fight[s] on for the honour of Chton!";
 

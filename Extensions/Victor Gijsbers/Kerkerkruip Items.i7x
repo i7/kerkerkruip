@@ -3669,7 +3669,7 @@ Instead of drinking vial of purification:
 			if shape is undead:
 				now shape is not form-active;
 		if current form is undead:
-			turn the player into human-form;
+			try changing form to human-form;
 			now m is 1;
 		if m is 1:
 			say "The waters purify you of all undead influences.";
