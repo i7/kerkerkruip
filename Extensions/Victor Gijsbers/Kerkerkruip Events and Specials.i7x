@@ -289,7 +289,7 @@ Chosenlijst is a list of monsters that varies.
 Godlijst is a list of texts that varies.
 
 To decide which object is the challenged god:
-	Let champion be a random monster in the Arena of the Gods who worships a god;
+	Let champion be a random worshipper monster in the Arena of the Gods;
 	if the champion is a monster, decide on the patron of the champion;
 	decide on nothing;
 
@@ -410,6 +410,13 @@ An attack modifier rule (this is the much harder to discern by Herm bonus rule):
 		decrease attack strength by oppHermBonus;
 		decrease Arena-turncounter by 1.
 
+Section - Faction interactions
+
+After changing form to an undead player form when the challenged god is Chton:
+	Let the opponent be a random alive arena-faction person who worships Chton; [Drakul]
+	say "You turn into a [form-name of current form], but your opponent do[es of the opponent]n't care that you're undead. [It-they of the opponent] fight[s] on for the honour of Chton!";
+
+[handle summoning here too?]
 
 Section - Awarding divine power 
 
