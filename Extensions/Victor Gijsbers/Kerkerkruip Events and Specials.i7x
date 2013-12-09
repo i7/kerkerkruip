@@ -226,7 +226,7 @@ A teleport impossible rule (this is the no teleportation in Arena of the Fallen 
 Section - Getting out of the Arena
 
 
-Every turn when the location is the Arena of the Fallen:
+Last every turn when the location is the Arena of the Fallen:
 	update the combat status;
 	if no person is in the Arena-waiting-room and combat status is peace:
 		now the triumphing boolean is true;
@@ -426,7 +426,7 @@ An absorption stopping rule (this is the alternative award at the Arena of the G
 
 Section - Getting out of the Arena
 
-Every turn when the location is the Arena of the Gods and the player is alive (this is the teleport after killing rule):
+Last every turn when the location is the Arena of the Gods and the player is alive (this is the teleport after killing rule):
 	update the combat status;
 	if no person is in the Arena-waiting-room and combat status is peace:
 		now the Godfight boolean is true;
