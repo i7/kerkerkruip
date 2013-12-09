@@ -65,7 +65,7 @@ Include Kerkerkruip Ugly Special Cases by Victor Gijsbers.
 Include Kerkerkruip Start and Finish by Victor Gijsbers.
 Include Kerkerkruip Tests by Victor Gijsbers.
 Include Kerkerkruip Final Declarations by Victor Gijsbers.
-
+Include Kerkerkruip Help and Hints by Victor Gijsbers.
 
 
 Section - Increase memory settings

@@ -452,7 +452,8 @@ Carry out remembering:
 			unless player is guy:
 				unless last-seen-location of guy is Null-Room:
 					say "- [italic type][the guy][roman type] (level [if group level of the guy is not 0][group level of the guy][otherwise][level of the guy][end if]) in [italic type][the last-seen-location of the guy][roman type] ([if last-seen-location of the guy is not the location]which lies [the road to last-seen-location of the guy] from here[otherwise]where you currently are[end if])[line break]";
-	say "[line break][italic type]Tip[roman type]: [one of]additional information can be gotten with 'status', 'trophies' and (once you have defeated enough monsters) 'sense'[or]you can move one room towards a location by typing 'go to [italic type]location[roman type]'[or]'look', 'examine' and 'inventory' are free actions, so use them often[or]if a fight proves too much for you, try to 'retreat'. On entering a room for the first time, you can always retreat for free[or]remember how powers work. If you kill a level 3 creature, you will lose all powers of level 3 and lower; so if you want to have more than one power at the same time, you'll have to kill a lower level creature after defeating a higher level creature[at random].".
+	Let the tip text be the next tip text;
+	say "[line break][italic type]Tip[roman type]: [tip text][paragraph break]".
 
 A person has a room called the last-seen-location. The last-seen-location of a person is usually Null-Room.
 

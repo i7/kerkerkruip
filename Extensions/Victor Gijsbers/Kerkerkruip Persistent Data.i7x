@@ -62,7 +62,11 @@ To set data value (X - a number) to (Y - a number), table only (this is data-val
 	if not table only:
 		write File of Data Storage from Table of Data Storage;
 
+To decide which number is the number of victories: decide on data value 1.
 
+To decide which number is the best level: decide on data value 3.
+
+To decide which number is the number of victories for the purpose of unlocking: decide on data value 4;
 
 Chapter - Achievements
 
