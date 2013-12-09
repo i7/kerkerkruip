@@ -221,7 +221,7 @@ Window-drawing rule for the powers-window when the powers-window is g-present (t
 			say "[line break]";
 	if pow < 3 and (turn count is 1 or the remainder after dividing turn count by 30 is 0):
 		now power-tip-text is the next tip text;
-		say "[line break][italic type]Tip:[roman type] [power-tip-text]";
+	say "[line break][italic type]Tip:[roman type] [power-tip-text]";
 	say "[line break][run paragraph on]";
 	return to main screen.
 
