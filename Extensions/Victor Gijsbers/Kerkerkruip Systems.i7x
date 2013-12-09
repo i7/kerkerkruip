@@ -1422,9 +1422,10 @@ Check changing form to the current form (this is the can't change to the current
 	say "You don't seem to change.";
 	stop the action.
 
-Carry out changing form to (this is the set player form and creature type rule):
+Carry out changing form to (this is the standard change form rule):
 	now the current form is the player form understood;
 	now the creature-type of the player is the creature-type of the current form;
+	now the current form is form-active;
 
 Carry out changing form to a living player form (this is the turn-living rule):
 	now undead-faction hates friendly;
@@ -1446,37 +1447,6 @@ This is the short player form status rule:
 	if long status is false:
 		say "You are [if current form is ghoul-form]a ghoul[else if current form is vampire-form]a vampire[else if current form is vampirebat-form]a vampire bat[else if current form is ghost-form]a ghost[else if current form is lich-form]a lich[else if the player is undead]undead[else]human[end if]. [run paragraph on]";
 
-[
-Section - Trumping relation
-
-[Trumping: if A trumps B, and A is active, then when the player would turn into B, she turns into A instead. For instance, ghoul form trumps human form. If the player were to switch from vampire form back to human form, but ghoul form is active, she'll return to being a ghoul instead.]
-
-Trumping relates various player forms to various player forms.
-
-The verb to trump (he trumps, they trump, he trumped, it is trumped, he is trumping) implies the trumping relation. 
-
-Ghoul-form trumps human-form.
-Vampire-form trumps human-form.
-Vampire-form trumps ghoul-form.
-Vampirebat-form trumps human-form.
-Vampirebat-form trumps ghoul-form.
-
-[Please don't make circular trumping relations. This will lead to infinite loops.]
-
-]
-
-Section - Changing form
-
-[Target form is a player form that varies.
-
-To find the trump of (Y - a player form):
-	now target form is Y;
-	repeat with X running through player forms:
-		if X is form-active and X trumps target form:
-			unless current form trumps target form and X is not current form: [Prefer staying the same. Works only one level deep; can be changed if necessary, but would be costly and useless at the moment.]
-				now target form is X;
-	unless target form is Y:
-		find the trump of target form.]
 
 Section - Human
 
@@ -1486,7 +1456,6 @@ Section - Human
 Section - Ghoul
 
 To ghoulify the player:
-	now ghoul-form is form-active;
 	unless the player worships Chton:
 		now human-form is not form-active;
 	try changing form to ghoul-form.
@@ -1513,7 +1482,6 @@ Status attribute rule (this is the ghoul status rule):
 To unghoulify the player:
 	unless player worships Chton:
 		now ghoul-form is not form-active;
-	now human-form is form-active;
 	try changing form to human-form.
 
 
@@ -1558,7 +1526,6 @@ Section - Vampire
 
 
 To vampirise the player:
-	now vampire-form is form-active;
 	now vampirebat-form is form-active;
 	unless player worships chton:
 		now human-form is not form-active;

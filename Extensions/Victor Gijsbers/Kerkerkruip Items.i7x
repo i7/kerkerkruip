@@ -3665,9 +3665,7 @@ Instead of drinking vial of purification:
 			end the story saying "Don't worry; Chton will soon raise you as a mindless zombie.";
 	otherwise:
 		let m be 0;
-		repeat with shape running through player forms:
-			if shape is undead:
-				now shape is not form-active;
+		now every undead player form is not form-active;
 		now human-form is form-active;
 		if current form is undead:
 			try changing form to human-form;
