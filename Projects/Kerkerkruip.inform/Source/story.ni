@@ -107,7 +107,7 @@ Every turn:
 	otherwise:
 		now Banquet is not current-test-dream;]
 
-[Dream of Briar Roses is current-test-dream;]
+[Dream of Tungausy Shaman is current-test-dream.]
 
 Section - Flexible Windows relisting
 
@@ -136,3 +136,24 @@ To decide whether (item - an object) acts plural:
 	if the item is plural-named:
 		yes;
 	no.
+	
+Section - Questions fix (in place of Section 4 - Processing menu questions in Questions by Michael Callaghan)
+
+[We need to end the turn after a menu, otherwise no rules run.]
+
+After reading a command when menu question mode is true:
+	follow the menu question rules;
+	if the outcome of the rulebook is the exit outcome:
+		deactivate menu question mode;
+		follow the every turn rules;
+		follow the advance time rule;
+		change the text of the player's command to "dontparse";
+	if the outcome of the rulebook is the retry outcome:
+		reject the player's command;
+	if the outcome of the rulebook is the parse outcome:
+		deactivate menu question mode.
+
+Dontparsing is an action applying to nothing. Understand "dontparse" as dontparsing.
+
+Carry out dontparsing:
+	do nothing instead.
