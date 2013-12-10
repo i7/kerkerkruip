@@ -105,7 +105,7 @@ Carry out reviving:
 				if P is not granted:
 					add Beest to Beestlijst;
 					add printed name of Beest to Challengelijst;
-	add "do not fight a Chosen One" to Challengelijst;
+	add "do not fight a fallen warrior" to Challengelijst;
 	now current question menu is Challengelijst;
 	ask a closed question, in menu mode.
 
@@ -114,18 +114,20 @@ A menu question rule (this is the FallenFighting rule):
 	if the current question is "Which fallen warrior do you wish to fight? (Please enter a number):":
 		let n be the number of entries in Challengelijst;
 		let m be the number understood;
-		if m is n:
-			say "You decide to let your fallen enemies enjoy eternal rest.";
 		if m > 0:
 			if m < n:
-				have the player and entry m of Beestlijst fight in Arena of the Fallen.
+				have the player and entry m of Beestlijst fight in Arena of the Fallen;
+			otherwise if m is n:
+				say "You decide to let your fallen enemies enjoy eternal rest.";
+			exit.
+
 
 For arena setup of Arena of the Fallen:
 	Let Pers be the challenged opponent;
 	now oppname is the printed name of Pers;
-	say "The heavy doors open, where [if the number of people enclosed by the Arena-waiting-room is 1]the angry [Pers] awaits[otherwise][list of people enclosed by the Arena-waiting-room with definite articles] await[end if], strengthened by evil magic!";
 	repeat with guy running through persons in the Arena-waiting-room:
 		challenge guy;
+	say "The heavy doors open, where [if the number of people enclosed by the Arena-waiting-room is 1]the angry [Pers] awaits[otherwise][list of people enclosed by the Arena-waiting-room with definite articles] await[end if], strengthened by evil magic!";
 
 To challenge (the guy - a person):
 	let x be level of the guy;
@@ -291,14 +293,14 @@ For arena setup of Arena of the Gods:
 	Let Pers be the challenged opponent;
 	now chosenname is the printed name of Pers;
 	Let the benefactor be a random god incarnated by Pers;
+	repeat with guy running through persons in the Arena-waiting-room:
+		challenge guy to fight for the benefactor;
 	say "You are transported to the Arena of the Gods, where the angry ";
 	if the number of people in Arena-waiting-room is greater than 1:
 		say "group, consisting of [list of persons in the Arena-waiting-room], prepare themselves ";
 	otherwise:
 		say "[Pers] awaits, preparing [it-them]self"; 
 	say "to fight for the honour of [the benefactor]!";
-	repeat with guy running through persons in the Arena-waiting-room:
-		challenge guy to fight for the benefactor;
 
 To challenge (guy - a person) to fight for (benefactor - a god):
 	now faction of guy is arena-faction;

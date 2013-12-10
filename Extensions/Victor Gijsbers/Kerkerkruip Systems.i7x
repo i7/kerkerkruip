@@ -383,7 +383,7 @@ The challenged opponent is an object that varies;
 The selected arena is an object that varies;
 
 To have (first guy - a person) and (second guy - a person) fight in (place - an arena):
-	unless first guy opposes second guy and first guy is alive and second guy is alive:
+	unless first guy opposes second guy:
 		stop; [if they're not enemies, we do nothing]
 	if second guy is the player:
 		now second guy is first guy;
@@ -436,11 +436,12 @@ Section - Getting out of an Arena
 
 Arena exit of something is an activity on objects.
 
-Last every turn when the location is an arena (this is the check for completed arena battle rule):
+Last every turn when the location is an arena and the player is alive (this is the check for completed arena battle rule):
 	update the combat status;
-	[come up with a loop to check if we've been sent back to an arena]
-	if no person is in the waiting area of the location and combat status is peace and the player is alive:
-		carry out the arena exit activity with the location.
+	while the location is an arena and no person is in the waiting area of the location and combat status is peace:
+		[any bugs here, such as failing to exit the arena, can cause infinite loops]
+		carry out the arena exit activity with the location;
+		update the combat status;
 
 Before arena exit of an arena (called place) (this is the clean up conquered arena rule):
 	Now the place is conquered;

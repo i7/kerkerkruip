@@ -1724,7 +1724,9 @@ Section - Getting mazed
 Pre-maze-location is a room that varies.
 
 To maze (the first guy - a person) and (the second guy - a person):
-	unless first guy is in the maze, have first guy and second guy fight in the maze.
+	if first guy is in the maze, stop;
+	if first guy is not alive or second guy is not alive, stop;
+	have first guy and second guy fight in the maze.
 
 For arena setup of the maze:
 	say "You suddenly find yourself transported to...";
