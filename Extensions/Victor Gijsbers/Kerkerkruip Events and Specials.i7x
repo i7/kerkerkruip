@@ -279,7 +279,7 @@ A menu question rule (this is the ChosenFighting rule):
 	if the current question is "The Chosen One of which god do you wish to fight? (Please enter a number):":
 		let n be the number of entries in Godlijst;
 		let m be the number understood;
-		if m > 0 and if m < n:
+		if m > 0 and m < n:
 			have the player and entry m of Chosenlijst fight in Arena of the Gods;
 		otherwise:
 			say "You decide it is best to defend the honour of your God another time...".
@@ -287,6 +287,7 @@ A menu question rule (this is the ChosenFighting rule):
 For arena setup of Arena of the Gods:
 	Let Pers be the challenged opponent;
 	now chosenname is the printed name of Pers;
+	Let the benefactor be a random god incarnated by Pers;
 	say "You are transported to the Arena of the Gods, where the angry ";
 	if the number of people in Arena-waiting-room is greater than 1:
 		say "group, consisting of [list of persons in the Arena-waiting-room], prepare themselves ";

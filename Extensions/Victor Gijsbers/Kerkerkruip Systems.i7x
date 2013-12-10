@@ -450,7 +450,7 @@ Before arena exit of an arena (called place) (this is the clean up conquered are
 For arena exit of an arena (called place) (this is the standard for arena exit rule):
 	say "You are [bold type]transported back[roman type] from the [place].";
 
-After arena exit of an arena (called place (this is the finally return the player from the arena rule):
+After arena exit of an arena (called place) (this is the finally return the player from the arena rule):
 	move player to the challenge site of the place.
 
 Section - Actions in an Arena
