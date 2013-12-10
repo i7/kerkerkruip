@@ -438,6 +438,7 @@ Arena exit of something is an activity on objects.
 
 Last every turn when the location is an arena (this is the check for completed arena battle rule):
 	update the combat status;
+	[come up with a loop to check if we've been sent back to an arena]
 	if no person is in the waiting area of the location and combat status is peace and the player is alive:
 		carry out the arena exit activity with the location.
 

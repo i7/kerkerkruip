@@ -256,12 +256,13 @@ Check ChosenFighting (this is the can't ChosenFight twice rule):
 		stop the action.	
 
 Check ChosenFighting (this is the must be religious to fight gods rule):
-	let x be a random number between 3 and 7;
-	decrease the health of the player by x;
-	say "A roaring voice answers your call:'YOU CANNOT DEFEND ANY HEATHEN RELIGION YOU MIGHT WORSHIP AT THIS HOLY PLACE, INFIDEL!' A ball of lightning shoots from the sky, doing [x] damage to you!";
-	if the health of the player is less than 1:
-		end the story saying "The Gods do not appreciate heathen worship. The dvine ball of lighting deprives you of your live.";
-	stop the action.
+	if the player does not worship a god:
+		let x be a random number between 3 and 7;
+		decrease the health of the player by x;
+		say "A roaring voice answers your call: 'YOU CANNOT DEFEND ANY RELIGION YOU MIGHT WORSHIP AT THIS HOLY PLACE, INFIDEL!' A ball of lightning shoots from the sky, doing [x] damage to you!";
+		if the health of the player is less than 1:
+			end the story saying "The Gods do not appreciate nonbelievers. The divine ball of lightning deprives you of your life.";
+		stop the action.
 
 Carry out ChosenFighting:
 	take no time;
