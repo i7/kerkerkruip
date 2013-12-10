@@ -197,9 +197,11 @@ Chapter - Arena of the Gods
 
 The Arena of the Gods is an arena. "The divine Arena; a plaything for the Gods, too numb to fight on their own, to let their Chosen Ones fight it out. Fighting here is at the whim of the Gods, who will regularly intervene when they think the battle becomes dull ([italic type]divine intervention is determined by the tension[roman type])."
 
+The waiting area of Arena of the Gods is Arena-waiting-room.
 The Arena of the Gods is faction-imposing.
+The Arena of the Gods is challenged-group-inviting.
 
-The godfight pedestal is an enterable supporter and scenery in the Hall of Gods. Understand "pedestal" and "empty pedestal" as the godfight pedestal.
+The godfight pedestal is an enterable supporter and scenery in the Hall of Gods. Understand "pedestal" and "empty pedestal" and "platform" as the godfight pedestal.
 
 Godfightname1 is a text that varies.
 Godfightname2 is a text that varies.
