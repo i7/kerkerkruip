@@ -185,10 +185,6 @@ Every turn when the location is the Arena of the Fallen and the combat status is
 		now the current dissatisfaction is 0;
 		increase the demon boredom by 2.
 
-A teleport impossible rule (this is the no teleportation in Arena of the Fallen rule):
-	if the location of the test subject is the Arena of the Fallen:
-		rule succeeds.
-
 Section - Getting out of the Arena
 
 
@@ -305,12 +301,6 @@ To challenge (guy - a person) to fight for (benefactor - a god):
 	now guy worships benefactor;
 	now the favour of guy is 9;
 
-Section - no teleporting
-
-A teleport impossible rule (this is the no teleportation in Arena of the Gods rule):
-	if the location of the test subject is the Arena of the Gods:
-		rule succeeds.
-
 Section - Godly intervention
 [For each God, I'll be implementing some form of godly intervention here based on Victor's divine interventions
 This system assumes that the divine favour of the monster is quite high and fixed; it then takes the difference 
@@ -371,22 +361,10 @@ An absorption stopping rule (this is the alternative award at the Arena of the G
 
 Section - Getting out of the Arena
 
-Last every turn when the location is the Arena of the Gods and the player is alive (this is the teleport after killing rule):
-	update the combat status;
-	if no person is in the Arena-waiting-room and combat status is peace:
-		now the Godfight boolean is true;
-		say "Your God grants you 2 divine favour!";
-		let guy be a random god worshipped by the player;
-		increase the favour of the player by 1;
-		consider the favour rules for guy;
-		increase the favour of the player by 1;
-		consider the favour rules for guy;
-		say "You are [bold type]transported back[roman type] to the Hall of Gods.";
-		repeat with item running through things in the Arena of the Gods:
-			unless (item is player or item is backdrop):
-				move item to Hall of Gods;
-				remove the godfight pedestal from play;
-		move player to Hall of Gods.
-
+For arena exit of Arena of the Gods:
+	say "Your God grants you 2 divine favour!";
+	raise the favour of the player by 2;
+	say "You are [bold type]transported back[roman type] to the Hall of Gods.";
+	remove the godfight pedestal from play;
 
 Kerkerkruip Events and Specials ends here.

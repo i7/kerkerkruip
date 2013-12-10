@@ -1674,129 +1674,13 @@ Section - Lair of the Imp label for the map (for use with Kerkerkruip Glimmr Add
 
 The map-label of Lair of the Imp is Figure of map_label_Imp_s_Lair.
 
-Chapter - Arenas
-
-Section - Arena and Waiting Area Kinds
-
-An arena is a kind of room. An arena has a room called the challenge site. An arena can be conquered.
-
-An arena can be faction-imposing. An arena is usually not faction-imposing.
-An arena can be initially peaceful. An arena is usually not initially peaceful.
-An arena can be challenged-group-inviting. An arena is usually not challenged-group-inviting.
-
-An arena is usually not connectable.
-An arena is usually not connection-inviting.
-An arena is usually not placeable.
-An arena is usually not habitable.
-An arena is usually not treasurable.
-An arena is usually not teleportable.
-An arena is usually not extra-accepting.
-An arena is usually vp-agnostic.
-An arena is usually magical.
-
-A holding cell is a kind of room. The description of a holding cell is usually "BUG: the player should never end up here." 
-
-A holding cell is usually not connectable.
-A holding cell is usually not connection-inviting.
-A holding cell is usually not placeable.
-A holding cell is usually not habitable.
-A holding cell is usually not treasurable.
-A holding cell is usually not teleportable.
-A holding cell is usually not extra-accepting.
-A holding cell is usually vp-agnostic.
-A holding cell is usually magical.
-
-An arena has a holding cell called the waiting area.
-
-Section - Having a fight in an Arena
-
-The challenged opponent is an object that varies;
-The selected arena is an object that varies;
-
-To have (first guy - a person) and (second guy - a person) fight in (place - an arena):
-	unless first guy opposes second guy and first guy is alive and second guy is alive:
-		stop; [if they're not enemies, we do nothing]
-	if second guy is the player:
-		now second guy is first guy;
-		now first guy is the player; [we switch them, so the player comes first]
-	if first guy is the player:
-		now the challenged opponent is the second guy;
-		carry out the arena setup activity with the place;
-	otherwise: [when the player is not involved, we simulate a combat]
-		let n be level of first guy plus level of second guy;
-		increase n by 4;
-		let m be level of first guy;
-		increase m by 2;
-		while first guy is alive and second guy is alive:
-			if a random chance of m in n succeeds:  [chance is: LVL1 + 2 / (LVL1 + 2 + LVL2 + 2); creatures of the same level: 1/2; level 4 vs level 3: 6/11; level 4 vs level 2: 6/10; level 4 vs level 0: 6/8.]
-				decrease health of second guy by 2;
-			otherwise:
-				decrease health of first guy by 2;
-		if location of first guy is location of the player:
-			say "[The name of the first guy] and [the name of the second guy] guy briefly flicker in and out of existence. When they become solid once more, [bold type][if first guy is not alive][the name of the first guy][otherwise][the name of the second guy][end if] has been killed[roman type]!"
-	
-
-Arena setup of something is an activity on objects.
-
-Before arena setup for an arena (called the place) (this is the remember challenge site rule):
-	now the challenge site of the place is the location of the player;
-
-Before arena setup for an arena (called the place) (this is the invite challenged opponents rule):
-	now the challenged opponent is in the waiting area of the place;
-	
-Last before arena setup of a challenged-group-inviting arena (called place):
-	Let the staging area be the waiting area of the place;
-	Let Pers be the challenged opponent;
-	if Pers is group leading and Pers is not defeated individually:
-		if Pers is initially accompanied:
-			repeat with X running through people who accompany Pers:
-				move X to the staging area;
-
-First after arena setup for a faction-imposing arena (called the place) (this is the impose arena-faction rule):
-	Repeat with guy running through people in the waiting area of the place:
-		now the faction of guy is arena-faction;
-
-After arena setup for a not initially peaceful arena (called the place) (this is the start the arena fight right away rule):
-	Repeat with guy running through people in the waiting area of the place:
-		move guy to the place.
-
-After arena setup for an arena (called the place) (this is the move the player to the arena rule):
-	move the player to the place;
-
-Section - Getting out of an Arena
-
-Arena exit of something is an activity on objects.
-
-Last every turn when the location is an arena (this is the check for completed arena battle rule):
-	update the combat status;
-	if no person is in the waiting area of the location and combat status is peace:
-		carry out the arena exit activity with the location.
-
-Before arena exit of an arena (called place):
-	Now the place is conquered;
-	repeat with item running through things in the place:
-		unless (the item is the player or the item is a backdrop):
-			move item to the challenge site of the place;
-
-For arena exit of an arena (called place):
-	say "You are [bold type]transported back[roman type] from the [place].";
-
-After arena exit of an arena (called place):
-	move player to the challenge site of the place.
-
-Section - Actions in an Arena
-
-Instead of digging in an arena:
-	take no time;
-	say "The magical walls resist your efforts at digging.".
-
-A teleport impossible rule (this is the no teleportation in arena rule):
-	if the location of the test subject is an arena:
-		rule succeeds.
-
 Chapter - The maze
 
 The maze is an arena. "You are in a maze of twisty little passages, all alike. Exits lead in all directions."
+
+The maze is not faction-imposing.
+The maze is initially peaceful.
+The maze is not challenged-group-inviting.
 
 The maze-waiting-room is a holding cell. The waiting area of the maze is the maze-waiting-room.
 
