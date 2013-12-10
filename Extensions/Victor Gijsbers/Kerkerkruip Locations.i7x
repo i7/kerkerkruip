@@ -1674,33 +1674,131 @@ Section - Lair of the Imp label for the map (for use with Kerkerkruip Glimmr Add
 
 The map-label of Lair of the Imp is Figure of map_label_Imp_s_Lair.
 
+Chapter - Arenas
 
+Section - Arena and Waiting Area Kinds
+
+An arena is a kind of room. An arena has a room called the challenge site. An arena can be conquered.
+
+An arena can be faction-imposing. An arena is usually not faction-imposing.
+An arena can be initially peaceful. An arena is usually not initially peaceful.
+An arena can be challenged-group-inviting. An arena is usually not challenged-group-inviting.
+
+An arena is usually not connectable.
+An arena is usually not connection-inviting.
+An arena is usually not placeable.
+An arena is usually not habitable.
+An arena is usually not treasurable.
+An arena is usually not teleportable.
+An arena is usually not extra-accepting.
+An arena is usually vp-agnostic.
+An arena is usually magical.
+
+A holding cell is a kind of room. The description of a holding cell is usually "BUG: the player should never end up here." 
+
+A holding cell is usually not connectable.
+A holding cell is usually not connection-inviting.
+A holding cell is usually not placeable.
+A holding cell is usually not habitable.
+A holding cell is usually not treasurable.
+A holding cell is usually not teleportable.
+A holding cell is usually not extra-accepting.
+A holding cell is usually vp-agnostic.
+A holding cell is usually magical.
+
+An arena has a holding cell called the waiting area.
+
+Section - Having a fight in an Arena
+
+The challenged opponent is an object that varies;
+The selected arena is an object that varies;
+
+To have (first guy - a person) and (second guy - a person) fight in (place - an arena):
+	unless first guy opposes second guy and first guy is alive and second guy is alive:
+		stop; [if they're not enemies, we do nothing]
+	if second guy is the player:
+		now second guy is first guy;
+		now first guy is the player; [we switch them, so the player comes first]
+	if first guy is the player:
+		now the challenged opponent is the second guy;
+		carry out the arena setup activity with the place;
+	otherwise: [when the player is not involved, we simulate a combat]
+		let n be level of first guy plus level of second guy;
+		increase n by 4;
+		let m be level of first guy;
+		increase m by 2;
+		while first guy is alive and second guy is alive:
+			if a random chance of m in n succeeds:  [chance is: LVL1 + 2 / (LVL1 + 2 + LVL2 + 2); creatures of the same level: 1/2; level 4 vs level 3: 6/11; level 4 vs level 2: 6/10; level 4 vs level 0: 6/8.]
+				decrease health of second guy by 2;
+			otherwise:
+				decrease health of first guy by 2;
+		if location of first guy is location of the player:
+			say "[The name of the first guy] and [the name of the second guy] guy briefly flicker in and out of existence. When they become solid once more, [bold type][if first guy is not alive][the name of the first guy][otherwise][the name of the second guy][end if] has been killed[roman type]!"
+	
+
+Arena setup of something is an activity on objects.
+
+Before arena setup for an arena (called the place) (this is the remember challenge site rule):
+	now the challenge site of the place is the location of the player;
+
+Before arena setup for an arena (called the place) (this is the invite challenged opponents rule):
+	now the challenged opponent is in the waiting area of the place;
+	
+Last before arena setup of a challenged-group-inviting arena (called place):
+	Let the staging area be the waiting area of the place;
+	Let Pers be the challenged opponent;
+	if Pers is group leading and Pers is not defeated individually:
+		if Pers is initially accompanied:
+			repeat with X running through people who accompany Pers:
+				move X to the staging area;
+
+First after arena setup for a faction-imposing arena (called the place) (this is the impose arena-faction rule):
+	Repeat with guy running through people in the waiting area of the place:
+		now the faction of guy is arena-faction;
+
+After arena setup for a not initially peaceful arena (called the place) (this is the start the arena fight right away rule):
+	Repeat with guy running through people in the waiting area of the place:
+		move guy to the place.
+
+After arena setup for an arena (called the place) (this is the move the player to the arena rule):
+	move the player to the place;
+
+Section - Getting out of an Arena
+
+Arena exit of something is an activity on objects.
+
+Last every turn when the location is an arena (this is the check for completed arena battle rule):
+	update the combat status;
+	if no person is in the waiting area of the location and combat status is peace:
+		carry out the arena exit activity with the location.
+
+Before arena exit of an arena (called place):
+	Now the place is conquered;
+	repeat with item running through things in the place:
+		unless (the item is the player or the item is a backdrop):
+			move item to the challenge site of the place;
+
+For arena exit of an arena (called place):
+	say "You are [bold type]transported back[roman type] from the [place].";
+
+After arena exit of an arena (called place):
+	move player to the challenge site of the place.
+
+Section - Actions in an Arena
+
+Instead of digging in an arena:
+	take no time;
+	say "The magical walls resist your efforts at digging.".
+
+A teleport impossible rule (this is the no teleportation in arena rule):
+	if the location of the test subject is an arena:
+		rule succeeds.
 
 Chapter - The maze
 
-The maze is a room. "You are in a maze of twisty little passages, all alike. Exits lead in all directions."
+The maze is an arena. "You are in a maze of twisty little passages, all alike. Exits lead in all directions."
 
-The maze is not connectable.
-The maze is not connection-inviting.
-The maze is not placeable.
-The maze is not habitable.
-The maze is not treasurable.
-The maze is not teleportable.
-The maze is not extra-accepting.
-The maze is vp-agnostic.
-The maze is magical.
-
-The maze-waiting-room is a room. "BUG: the player should never end up here."
-
-The maze-waiting-room is not connectable.
-The maze-waiting-room is not connection-inviting.
-The maze-waiting-room is not placeable.
-The maze-waiting-room is not habitable.
-The maze-waiting-room is not treasurable.
-The maze-waiting-room is not teleportable.
-The maze-waiting-room is not extra-accepting.
-The maze-waiting-room is vp-agnostic.
-The maze-waiting-room is magical.
+The maze-waiting-room is a holding cell. The waiting area of the maze is the maze-waiting-room.
 
 Greater-maze is a region. Maze and maze-waiting-room are in greater-maze.
 
@@ -1730,18 +1828,11 @@ To do the maze move:
 			say "[line break]A sound comes from somewhere [bold type][maze-sound][roman type] from here.";
 	try looking.
 
-Instead of digging in the maze:
-	take no time;
-	say "The magical walls resist your efforts at digging.".
-
-A teleport impossible rule (this is the no teleportation in maze rule):
-	if the location of the test subject is the maze:
-		rule succeeds.
-
 
 Section - Maze label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
 The map-label of Maze is Figure of map_label_Maze.
+
 
 
 Section - Getting mazed
@@ -1749,47 +1840,15 @@ Section - Getting mazed
 Pre-maze-location is a room that varies.
 
 To maze (the first guy - a person) and (the second guy - a person):
-	unless first guy is in the maze:
-		if first guy opposes second guy and first guy is alive and second guy is alive: [if they're not enemies, we do nothing]
-			if second guy is the player:
-				now second guy is first guy;
-				now first guy is the player; [we switch them, so the player comes first]
-			if first guy is the player:
-				now pre-maze-location is location of the player;
-				say "You suddenly find yourself transported to...";
-				move the player to the maze;
-				move second guy to maze-waiting-room;
-				now maze-sound is northwest; [you cannot go nw]
-			otherwise: [when the player is not involved, we simulate a combat]
-				let n be level of first guy plus level of second guy;
-				increase n by 4;
-				let m be level of first guy;
-				increase m by 2;
-				while first guy is alive and second guy is alive:
-					if a random chance of m in n succeeds:  [chance is: LVL1 + 2 / (LVL1 + 2 + LVL2 + 2); creatures of the same level: 1/2; level 4 vs level 3: 6/11; level 4 vs level 2: 6/10; level 4 vs level 0: 6/8.]
-						decrease health of second guy by 2;
-					otherwise:
-						decrease health of first guy by 2;
-				if location of first guy is location of the player:
-					say "[The name of the first guy] and [the name of the second guy] guy briefly flicker in and out of existence. When they become solid once more, [bold type][if first guy is not alive][the name of the first guy][otherwise][the name of the second guy][end if] has been killed[roman type]!"
+	unless first guy is in the maze, have first guy and second guy fight in the maze.
 
-
-Section - Getting out of the maze
-
-
-Last every turn when the location is the maze:
-	update the combat status;
-	if no person is in the maze-waiting-room and combat status is peace:
-		say "You are [bold type]transported back[roman type] from the maze.";
-		repeat with item running through things in the maze:
-			unless item is player:
-				move item to pre-maze-location;
-		move player to pre-maze-location.
-
+For arena setup of the maze:
+	say "You suddenly find yourself transported to...";
+	now maze-sound is northwest; [you cannot go nw]
 
 Chapter - Entrance to the Arena
 
-Entrance to the Arena is a room. "A large, black dome seen from the outside towers over you -- though you find it impossible to say in which direction, as if the normal rules of space do not obtain here. The outer wall of the dome, which must be the legendary Arena of the Fallen, is adorned with high reliefs of battle scenes. The scene depicted above the entrance, which seems hermetically closed, shows [if triumphing boolean is false]a nameless hero triumphing over Malygris[otherwise] [the name of the player] triumphing over [oppname][end if]. Some inscriptions are engraved on the wall."
+Entrance to the Arena is a room. "A large, black dome seen from the outside towers over you -- though you find it impossible to say in which direction, as if the normal rules of space do not obtain here. The outer wall of the dome, which must be the legendary Arena of the Fallen, is adorned with high reliefs of battle scenes. The scene depicted above the entrance, which seems hermetically closed, shows [if the Arena of the Fallen is not conquered]a nameless hero triumphing over Malygris[otherwise] [the name of the player] triumphing over [oppname][end if]. Some inscriptions are engraved on the wall."
 	
 Entrance to the Arena is connectable.
 Entrance to the Arena is not connection-inviting.
@@ -1804,7 +1863,7 @@ The rarity of Entrance to the Arena is 5.
 
 The black dome is scenery in the Entrance to the Arena. Understand "Arena" and "large" and "black" and "of the fallen" as the black dome. The description of the black dome is "You feel uneasy looking at it, as it seems to be formed of unholy energies that defy all the laws of your own world."
 
-The scribblings are scenery in the Entrance to the Arena and plural-named. Understand "writings" and "inscriptions" and "inscription" as the scribblings. The description of the scribblings is "[if triumphing boolean is false]As you start to read the text, it lights up in a dark crimson: [italic type] If you wish, you can relive a battle you fought before, but it will become the most challenging fight you ever had. To start the fight, simply [roman type]REVIVE[italic type][otherwise]Writings glowing with an eerie red light celebrate your victory: 'Hail to our last victor!'[end if].".
+The scribblings are scenery in the Entrance to the Arena and plural-named. Understand "writings" and "inscriptions" and "inscription" as the scribblings. The description of the scribblings is "[if the Arena of the Fallen is not conquered]As you start to read the text, it lights up in a dark crimson: [italic type] If you wish, you can relive a battle you fought before, but it will become the most challenging fight you ever had. To start the fight, simply [roman type]REVIVE[italic type][otherwise]Writings glowing with an eerie red light celebrate your victory: 'Hail to our last victor!'[end if].".
 
 Instead of reading the scribblings:
 	try examining the scribblings.

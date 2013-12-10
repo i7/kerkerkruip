@@ -76,56 +76,38 @@ The map-label of Elemental Plane of Smoke is Figure of map_label_Smoke.
 
 Chapter - Arena of the Fallen
 
-The Arena of the Fallen is a room. "The ruins of a formerly great arena. The ground is littered with remains, and there is definitely something unholy about this place. Playing around with the souls of the departed is probably not for the faint of heart. All around you demonic spectators cheer gleefully, excited once again to witness the game of death. You'd better keep them entertained and the blood flowing ..."
+The Arena of the Fallen is an arena. "The ruins of a formerly great arena. The ground is littered with remains, and there is definitely something unholy about this place. Playing around with the souls of the departed is probably not for the faint of heart. All around you demonic spectators cheer gleefully, excited once again to witness the game of death. You'd better keep them entertained and the blood flowing ..."
 
-The Arena of the Fallen is not connectable.
-The Arena of the Fallen is not connection-inviting.
-The Arena of the Fallen is not placeable.
-The Arena of the Fallen is not habitable.
-The Arena of the Fallen is not treasurable.
-The Arena of the Fallen is not teleportable.
-The Arena of the Fallen is not extra-accepting.
-The Arena of the Fallen is vp-agnostic.
-The Arena of the Fallen is magical.
+The Arena of the Fallen is faction-imposing.
+The Arena of the Fallen is challenged-group-inviting.
 
-The Arena-waiting-room is a room. "BUG: the player should never end up here."
+The Arena-waiting-room is a holding cell. The waiting area of the Arena of the Fallen is the Arena-waiting-room.
 
-The Arena-waiting-room is not connectable.
-The Arena-waiting-room is not connection-inviting.
-The Arena-waiting-room is not placeable.
-The Arena-waiting-room is not habitable.
-The Arena-waiting-room is not treasurable.
-The Arena-waiting-room is not teleportable.
-The Arena-waiting-room is not extra-accepting.
-The Arena-waiting-room is vp-agnostic.
-The Arena-waiting-room is magical.
-
-
-
-The triumphing boolean is a truth state variable that varies. The triumphing boolean is false.
-The fighting boolean is a truth state variable that varies. The fighting boolean is false.
 The oppname is a text that varies. The oppname is "".
 Challengelijst is a list of texts that varies.
 Beestlijst is a list of monsters that varies.
-Playeroriginalfaction is a faction that varies.
 
 Reviving is an action applying to nothing. Understand "revive" as reviving.
 
+Check reviving when the player is not in the Entrance to the Arena:
+	take no time;
+	say "You don't have the power to revive the fallen here.";
+	stop the action.
+
 Carry out reviving:
-	if the player is in the Entrance to the Arena:
-		take no time;
-		now Challengelijst is {};
-		now Beestlijst is {};
-		now current question is  "Which fallen warrior do you wish to fight? (Please enter a number):";
-		repeat with Beest running through all dead not grouper persons:
-			if Beest is not group leading or the group of Beest has been defeated: 
-				repeat with P running through powers granted by Beest:
-					if P is not granted:
-						add Beest to Beestlijst;
-						add printed name of Beest to Challengelijst;
-		add "do not fight a Chosen One" to Challengelijst;
-		now current question menu is Challengelijst;
-		ask a closed question, in menu mode.
+	take no time;
+	now Challengelijst is {};
+	now Beestlijst is {};
+	now current question is  "Which fallen warrior do you wish to fight? (Please enter a number):";
+	repeat with Beest running through all dead not grouper persons:
+		if Beest is not group leading or the group of Beest has been defeated: 
+			repeat with P running through powers granted by Beest:
+				if P is not granted:
+					add Beest to Beestlijst;
+					add printed name of Beest to Challengelijst;
+	add "do not fight a Chosen One" to Challengelijst;
+	now current question menu is Challengelijst;
+	ask a closed question, in menu mode.
 
 
 A menu question rule (this is the FallenFighting rule):
@@ -136,30 +118,14 @@ A menu question rule (this is the FallenFighting rule):
 			say "You decide to let your fallen enemies enjoy eternal rest.";
 		if m > 0:
 			if m < n:
-				let Pers be entry m of Beestlijst;
-				if Pers is group leading and Pers is not defeated individually:
-					move Pers to the Arena-waiting-room;
-					now the faction of Pers is arena-faction;
-					now oppname is the printed name of Pers;
-					if Pers is initially accompanied:
-						repeat with X running through people who accompany Pers:
-							[challenge X;] [this line is a bug, right?]
-							move X to the location of Pers;
-							now the faction of X is arena-faction;
-					repeat with guy running through persons in the Arena-waiting-room:
-						challenge guy;
-						move guy to the Arena of the Fallen;
-					say "The heavy doors open, where [if the number of people enclosed by the Arena of the Fallen is 1]the angry [Pers] awaits[otherwise][list of people enclosed by the Arena of the Fallen with definite articles] await[end if], strengthened by evil magic!";
-					move the player to the Arena of the Fallen;
-					now the fighting boolean is true;					
-				otherwise:
-					now the oppname is the printed name of Pers;
-					challenge Pers;
-					now the faction of Pers is arena-faction;
-					move Pers to the Arena of the Fallen;
-					say "The heavy doors open, where the angry [Pers] awaits, strengthened by evil magic!";
-					move the player to the Arena of the Fallen;
-					now the fighting boolean is true.					
+				have the player and entry m of Beestlijst fight in Arena of the Fallen.
+
+For arena setup of Arena of the Fallen:
+	Let Pers be the challenged opponent;
+	now oppname is the printed name of Pers;
+	say "The heavy doors open, where [if the number of people enclosed by the Arena-waiting-room is 1]the angry [Pers] awaits[otherwise][list of people enclosed by the Arena-waiting-room with definite articles] await[end if], strengthened by evil magic!";
+	repeat with guy running through persons in the Arena-waiting-room:
+		challenge guy;
 
 To challenge (the guy - a person):
 	let x be level of the guy;
@@ -226,33 +192,16 @@ A teleport impossible rule (this is the no teleportation in Arena of the Fallen 
 Section - Getting out of the Arena
 
 
-Last every turn when the location is the Arena of the Fallen:
-	update the combat status;
-	if no person is in the Arena-waiting-room and combat status is peace:
-		now the triumphing boolean is true;
-		say "You are [bold type]transported back[roman type] to the Entrance of the Arena.";
-		repeat with item running through things in the Arena of the Fallen:
-			unless (item is player or item is backdrop):
-				move item to Entrance to the Arena;
-		move player to Entrance to the Arena;
-		award achievement Twice fallen.
-
-
+For arena exit of Arena of the Fallen:
+	say "You are [bold type]transported back[roman type] to the Entrance of the Arena.";
+	award achievement Twice fallen.
 
 
 Chapter - Arena of the Gods
 
-The Arena of the Gods is a room. "The divine Arena; a plaything for the Gods, too numb to fight on their own, to let their Chosen Ones fight it out. Fighting here is at the whim of the Gods, who will regularly intervene when they think the battle becomes dull ([italic type]divine intervention is determined by the tension[roman type])."
+The Arena of the Gods is an arena. "The divine Arena; a plaything for the Gods, too numb to fight on their own, to let their Chosen Ones fight it out. Fighting here is at the whim of the Gods, who will regularly intervene when they think the battle becomes dull ([italic type]divine intervention is determined by the tension[roman type])."
 
-The Arena of the Gods is not connectable.
-The Arena of the Gods is not connection-inviting.
-The Arena of the Gods is not placeable.
-The Arena of the Gods is not habitable.
-The Arena of the Gods is not treasurable.
-The Arena of the Gods is not teleportable.
-The Arena of the Gods is not extra-accepting.
-The Arena of the Gods is vp-agnostic.
-The Arena of the Gods is religious.
+The Arena of the Gods is faction-imposing.
 
 The godfight pedestal is an enterable supporter and scenery in the Hall of Gods. Understand "pedestal" and "empty pedestal" as the godfight pedestal.
 
@@ -282,8 +231,6 @@ Drakul incarnates Chton.
 
 Section - Choosing an avatar
 
-The Godfight boolean is a truth state variable that varies. The Godfight boolean is false.
-
 Chosenname is a text that varies.
 Chosenlijst is a list of monsters that varies.
 Godlijst is a list of texts that varies.
@@ -298,62 +245,60 @@ ChosenFighting is an action applying to nothing.
 Instead of entering the godfight pedestal:
 	try ChosenFighting instead.
 
+Check ChosenFighting (this is the how did we find the pedestal rule):
+	if the location is not Hall of Gods:
+		take no time;
+		say "ERROR: The player should never be able to ChosenFight here.";
+		stop the action.
+
+Check ChosenFighting (this is the can't ChosenFight twice rule):
+	if the Arena of the Gods is conquered:
+		take no time;
+		say "You have already fought for the honour of [the patron of the player]!  [It-they] [is-are]n't willing to sit through another fight again.";
+		stop the action.	
+
+Check ChosenFighting (this is the must be religious to fight gods rule):
+	let x be a random number between 3 and 7;
+	decrease the health of the player by x;
+	say "A roaring voice answers your call:'YOU CANNOT DEFEND ANY HEATHEN RELIGION YOU MIGHT WORSHIP AT THIS HOLY PLACE, INFIDEL!' A ball of lightning shoots from the sky, doing [x] damage to you!";
+	if the health of the player is less than 1:
+		end the story saying "The Gods do not appreciate heathen worship. The dvine ball of lighting deprives you of your live.";
+	stop the action.
+
 Carry out ChosenFighting:
-	if the player worships a god:
-		if the Godfight boolean is false:
-			if the location is the Hall of Gods:
-				take no time;
-				now Chosenlijst is {};
-				now Godlijst is {};
-				now current question is  "The Chosen One of which god do you wish to fight? (Please enter a number):";
-				repeat with Godnaam running through gods:
-					unless player worships Godnaam:
-						if  a monster incarnates Godnaam:
-							if ((monsteravatar of Godnaam) is off-stage) and ((monsteravatar of Godnaam) is not dead):
-								add (monsteravatar of Godnaam) to Chosenlijst;
-								add printed name of Godnaam to Godlijst;
+	take no time;
+	now Chosenlijst is {};
+	now Godlijst is {};
+	now current question is  "The Chosen One of which god do you wish to fight? (Please enter a number):";
+	repeat with Godnaam running through gods:
+		unless player worships Godnaam:
+			if an alive off-stage monster incarnates Godnaam:
+				add (monsteravatar of Godnaam) to Chosenlijst;
+				add printed name of Godnaam to Godlijst;
 				add "do not fight a Chosen One" to Godlijst;
 				now current question menu is Godlijst;
 				ask a closed question, in menu mode;
-		otherwise:
-			say "You have already fought for the honour of [the patron of the player]!  [If the patron of the player is female]She[else]He[end if] isn't willing to sit through another fight again.";
-			take no time;
-	otherwise:
-		let x be a random number between 3 and 7;
-		decrease the health of the player by x;
-		say "A roaring voice answers your call:'YOU CANNOT DEFEND ANY HEATHEN RELIGION YOU MIGHT WORSHIP AT THIS HOLY PLACE, INFIDEL!' A ball of lightning shoots from the sky, doing [x] damage to you!";
-		if the health of the player is less than 1:
-			end the story saying "The Gods do not appreciate heathen worship. The dvine ball of lighting deprives you of your live.".
 		
 A menu question rule (this is the ChosenFighting rule):
 	if the current question is "The Chosen One of which god do you wish to fight? (Please enter a number):":
 		let n be the number of entries in Godlijst;
 		let m be the number understood;
-		if m > 0:
-			if m < n:
-				Let Pers be entry m of Chosenlijst;
-				let the benefactor be a random god incarnated by Pers;
-				if Pers is group leading and Pers is not defeated individually:
-					move Pers to the Arena-waiting-room;
-					now chosenname is the printed name of Pers;
-					if Pers is initially accompanied:
-						repeat with X running through people who accompany Pers:
-							move X to the location of Pers;
-					repeat with guy running through persons in the Arena-waiting-room:
-						challenge guy to fight for the benefactor;
-						move guy to the Arena of the Gods;
-					say "The heavy doors open, where the angry group, consisting of [list of persons in the Arena of the Gods], prepare themselves to fight for the honour of [the benefactor]!";
-					move the player to the Arena of the Gods;
-					now the Godfight boolean is true;
-				otherwise:
-					now the chosenname is the printed name of Pers;
-					challenge Pers to fight for the benefactor;
-					move Pers to the Arena of the Gods;
-					say "The heavy doors open, where the angry [chosenname] awaits, preparing [if Pers is male]himself[otherwise if Pers is female]herself[otherwise]itself[end if] to fight for the honour of [the benefactor]!";
-					move the player to the Arena of the Gods;
-					now the Godfight boolean is true;
-			otherwise:
-				say "You decide it is best to defend the honour of your God another time...".
+		if m > 0 and if m < n:
+			have the player and entry m of Chosenlijst fight in Arena of the Gods;
+		otherwise:
+			say "You decide it is best to defend the honour of your God another time...".
+
+For arena setup of Arena of the Gods:
+	Let Pers be the challenged opponent;
+	now chosenname is the printed name of Pers;
+	say "You are transported to the Arena of the Gods, where the angry ";
+	if the number of people in Arena-waiting-room is greater than 1:
+		say "group, consisting of [list of persons in the Arena-waiting-room], prepare themselves ";
+	otherwise:
+		say "[Pers] awaits, preparing [it-them]self"; 
+	say "to fight for the honour of [the benefactor]!";
+	repeat with guy running through persons in the Arena-waiting-room:
+		challenge guy to fight for the benefactor;
 
 To challenge (guy - a person) to fight for (benefactor - a god):
 	now faction of guy is arena-faction;
@@ -430,7 +375,6 @@ Last every turn when the location is the Arena of the Gods and the player is ali
 	update the combat status;
 	if no person is in the Arena-waiting-room and combat status is peace:
 		now the Godfight boolean is true;
-		now the faction of the player is playeroriginalfaction;
 		say "Your God grants you 2 divine favour!";
 		let guy be a random god worshipped by the player;
 		increase the favour of the player by 1;
