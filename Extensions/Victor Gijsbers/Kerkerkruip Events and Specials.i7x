@@ -142,7 +142,11 @@ To challenge (the guy - a person):
 	increase the spirit score of guy by g;
 	increase the melee of guy by 3;
 	increase the defence of guy by 3;
-	restore the health of the guy.
+	restore the health of the guy;
+	now the concentration of the guy is 0;
+	now offensive flow of the guy is 0;
+	now defensive flow of the guy is 0;
+	now guy is at-Inactive;
 
 The demon boredom is a number which varies. The demon boredom is 0.
 The current dissatisfaction is a number which varies. The current dissatisfaction is 0.
@@ -276,18 +280,20 @@ Carry out ChosenFighting:
 			if an alive off-stage monster incarnates Godnaam:
 				add (monsteravatar of Godnaam) to Chosenlijst;
 				add printed name of Godnaam to Godlijst;
-				add "do not fight a Chosen One" to Godlijst;
-				now current question menu is Godlijst;
-				ask a closed question, in menu mode;
+	add "do not fight a Chosen One" to Godlijst;
+	now current question menu is Godlijst;
+	ask a closed question, in menu mode;
 		
 A menu question rule (this is the ChosenFighting rule):
 	if the current question is "The Chosen One of which god do you wish to fight? (Please enter a number):":
 		let n be the number of entries in Godlijst;
 		let m be the number understood;
-		if m > 0 and m < n:
-			have the player and entry m of Chosenlijst fight in Arena of the Gods;
-		otherwise:
-			say "You decide it is best to defend the honour of your God another time...".
+		if m > 0:
+			if m < n:
+				have the player and entry m of Chosenlijst fight in Arena of the Gods;
+			otherwise if m is n:
+				say "You decide it is best to defend the honour of your God another time...";
+			exit.
 
 For arena setup of Arena of the Gods:
 	Let Pers be the challenged opponent;
