@@ -1679,10 +1679,20 @@ Chapter - The maze
 The maze is an arena. "You are in a maze of twisty little passages, all alike. Exits lead in all directions."
 
 The maze is not faction-imposing.
-The maze is initially peaceful.
 The maze is not challenged-group-inviting.
+The staging area of the maze is the maze-waiting-room.
 
-The maze-waiting-room is a holding cell. The waiting area of the maze is the maze-waiting-room.
+The maze-waiting-room is a room. "BUG: the player should never end up here." 
+
+The maze-waiting-room is not connectable.
+The maze-waiting-room is not connection-inviting.
+The maze-waiting-room is not placeable.
+The maze-waiting-room is not habitable.
+The maze-waiting-room is not treasurable.
+The maze-waiting-room is not teleportable.
+The maze-waiting-room is not extra-accepting.
+The maze-waiting-room is vp-agnostic.
+The maze-waiting-room is magical.
 
 Greater-maze is a region. Maze and maze-waiting-room are in greater-maze.
 
@@ -1728,13 +1738,13 @@ To maze (the first guy - a person) and (the second guy - a person):
 	if first guy is not alive or second guy is not alive, stop;
 	have first guy and second guy fight in the maze.
 
-For arena setup of the maze:
+Before arena arrival of the maze:
 	say "You suddenly find yourself transported to...";
 	now maze-sound is northwest; [you cannot go nw]
 
 Chapter - Entrance to the Arena
 
-Entrance to the Arena is a room. "A large, black dome seen from the outside towers over you -- though you find it impossible to say in which direction, as if the normal rules of space do not obtain here. The outer wall of the dome, which must be the legendary Arena of the Fallen, is adorned with high reliefs of battle scenes. The scene depicted above the entrance, which seems hermetically closed, shows [if the Arena of the Fallen is not conquered]a nameless hero triumphing over Malygris[otherwise] [the name of the player] triumphing over [oppname][end if]. Some inscriptions are engraved on the wall."
+Entrance to the Arena is a room. "A large, black dome seen from the outside towers over you -- though you find it impossible to say in which direction, as if the normal rules of space do not obtain here. The outer wall of the dome, which must be the legendary Arena of the Fallen, is adorned with high reliefs of battle scenes. The scene depicted above the entrance, which seems hermetically closed, shows [if the Arena of the Fallen is not conquered]a nameless hero triumphing over Malygris[otherwise][the name of the player] triumphing over [oppname][end if]. Some inscriptions are engraved on the wall."
 	
 Entrance to the Arena is connectable.
 Entrance to the Arena is not connection-inviting.

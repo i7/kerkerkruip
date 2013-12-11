@@ -81,7 +81,7 @@ The Arena of the Fallen is an arena. "The ruins of a formerly great arena. The g
 The Arena of the Fallen is faction-imposing.
 The Arena of the Fallen is challenged-group-inviting.
 
-The Arena-waiting-room is a holding cell. The waiting area of the Arena of the Fallen is the Arena-waiting-room.
+[The Arena-waiting-room is a holding cell.] The staging area of the Arena of the Fallen is Arena of the Fallen.
 
 The oppname is a text that varies. The oppname is "".
 Challengelijst is a list of texts that varies.
@@ -122,12 +122,17 @@ A menu question rule (this is the FallenFighting rule):
 			exit.
 
 
-For arena setup of Arena of the Fallen:
-	Let Pers be the challenged opponent;
-	now oppname is the printed name of Pers;
-	repeat with guy running through persons in the Arena-waiting-room:
+Carry out challenging someone in Arena of the Fallen:
+	now oppname is the printed name of the noun.
+
+Before arena arrival of Arena of the Fallen:
+	repeat with guy running through persons in the Arena of the Fallen:
 		challenge guy;
-	say "The heavy doors open, where [if the number of people enclosed by the Arena-waiting-room is 1]the angry [Pers] awaits[otherwise][list of people enclosed by the Arena-waiting-room with definite articles] await[end if], strengthened by evil magic!";
+	Let count be the number of people enclosed by the Arena of the Fallen;
+	say "The heavy doors open, where [if count is 1]the angry [end if][list of people enclosed by the Arena of the Fallen] await[if count is 1]s[end if], strengthened by evil magic!";
+
+Carry out challenging someone in Arena of the Fallen:
+	now oppname is the printed name of the noun;
 
 To challenge (the guy - a person):
 	let x be level of the guy;
@@ -203,7 +208,7 @@ Chapter - Arena of the Gods
 
 The Arena of the Gods is an arena. "The divine Arena; a plaything for the Gods, too numb to fight on their own, to let their Chosen Ones fight it out. Fighting here is at the whim of the Gods, who will regularly intervene when they think the battle becomes dull ([italic type]divine intervention is determined by the tension[roman type])."
 
-The waiting area of Arena of the Gods is Arena-waiting-room.
+The staging area of Arena of the Gods is Arena of the Gods.
 The Arena of the Gods is faction-imposing.
 The Arena of the Gods is challenged-group-inviting.
 
@@ -239,10 +244,7 @@ Chosenname is a text that varies.
 Chosenlijst is a list of monsters that varies.
 Godlijst is a list of texts that varies.
 
-To decide which object is the challenged god:
-	Let champion be a random worshipper monster in the Arena of the Gods;
-	if the champion is a monster, decide on the patron of the champion;
-	decide on nothing;
+The challenged god is an object that varies.
 
 ChosenFighting is an action applying to nothing.
 
@@ -295,18 +297,19 @@ A menu question rule (this is the ChosenFighting rule):
 				say "You decide it is best to defend the honour of your God another time...";
 			exit.
 
-For arena setup of Arena of the Gods:
-	Let Pers be the challenged opponent;
-	now chosenname is the printed name of Pers;
-	Let the benefactor be a random god incarnated by Pers;
-	repeat with guy running through persons in the Arena-waiting-room:
-		challenge guy to fight for the benefactor;
+Carry out challenging someone in Arena of the Gods:
+	now chosenname is the printed name of the noun;
+	now the challenged god is a random god incarnated by the noun.
+	
+Before arena arrival of Arena of the Gods:
+	repeat with guy running through persons in the Arena of the Gods:
+		challenge guy to fight for the challenged god;
 	say "You are transported to the Arena of the Gods, where the angry ";
-	if the number of people in Arena-waiting-room is greater than 1:
-		say "group, consisting of [list of persons in the Arena-waiting-room], prepare themselves ";
+	if the number of people in Arena of the Gods is greater than 1:
+		say "group, consisting of [list of persons in the Arena of the Gods], prepare themselves ";
 	otherwise:
-		say "[Pers] awaits, preparing [it-them]self"; 
-	say "to fight for the honour of [the benefactor]!";
+		say "[random person in Arena of the Gods] awaits, preparing [it-them]self"; 
+	say "to fight for the honour of [the challenged god]!";
 
 To challenge (guy - a person) to fight for (benefactor - a god):
 	now faction of guy is arena-faction;
@@ -378,5 +381,6 @@ For arena exit of Arena of the Gods:
 	raise the favour of the player by 2;
 	say "You are [bold type]transported back[roman type] to the Hall of Gods.";
 	remove the godfight pedestal from play;
+	now the challenged god is nothing.
 
 Kerkerkruip Events and Specials ends here.

@@ -36,7 +36,6 @@ To decide whether (guy - a thing) and (other guy - a thing) share a world:
 	if guy is denizen and other guy is denizen:
 		decide yes;
 	if guy is a backdrop or other guy is a backdrop:
-		showme location of guy;
 		[avoid testing the location of a backdrop]
 		[this will not work correctly if the backdrop is present somewhere besides the main dungeon]
 		decide no;
@@ -350,7 +349,6 @@ Section - Arena and Holding Cell Kinds
 An arena is a kind of room. An arena has a room called the challenge site. An arena can be conquered.
 
 An arena can be faction-imposing. An arena is usually not faction-imposing.
-An arena can be initially peaceful. An arena is usually not initially peaceful.
 An arena can be challenged-group-inviting. An arena is usually not challenged-group-inviting.
 
 An arena is usually not connectable.
@@ -375,62 +373,80 @@ A holding cell is usually not extra-accepting.
 A holding cell is usually vp-agnostic.
 A holding cell is usually magical.
 
-An arena has a holding cell called the waiting area.
+An arena has a room called the staging area.
 
 Section - Having a fight in an Arena
 
-The challenged opponent is an object that varies;
-The selected arena is an object that varies;
+[The challenged opponent is an object that varies;] [the noun]
+[The selected arena is an object that varies;] [the second noun]
 
 To have (first guy - a person) and (second guy - a person) fight in (place - an arena):
-	unless first guy opposes second guy:
-		stop; [if they're not enemies, we do nothing]
-	if second guy is the player:
-		now second guy is first guy;
-		now first guy is the player; [we switch them, so the player comes first]
-	if first guy is the player:
-		now the challenged opponent is the second guy;
-		carry out the arena setup activity with the place;
-	otherwise: [when the player is not involved, we simulate a combat]
-		let n be level of first guy plus level of second guy;
-		increase n by 4;
-		let m be level of first guy;
-		increase m by 2;
-		while first guy is alive and second guy is alive:
-			if a random chance of m in n succeeds:  [chance is: LVL1 + 2 / (LVL1 + 2 + LVL2 + 2); creatures of the same level: 1/2; level 4 vs level 3: 6/11; level 4 vs level 2: 6/10; level 4 vs level 0: 6/8.]
-				decrease health of second guy by 2;
-			otherwise:
-				decrease health of first guy by 2;
-		if location of first guy is location of the player:
-			say "[The name of the first guy] and [the name of the second guy] guy briefly flicker in and out of existence. When they become solid once more, [bold type][if first guy is not alive][the name of the first guy][otherwise][the name of the second guy][end if] has been killed[roman type]!"
-	
+	try the first guy trying challenging the second guy in the place;
 
-Arena setup of something is an activity on objects.
+Challenging it in is an action applying to one visible thing and one visible object.
+			
+Check an actor challenging someone in (this is the must be enemies to challenge rule):
+	unless the person asked opposes the noun:
+		stop the action; [silently]
+	if the person asked is the noun:
+		stop the action; [silently]
 
-Before arena setup for an arena (called the place) (this is the remember challenge site rule):
-	now the challenge site of the place is the location of the player;
+Check an actor challenging someone in (this is the player should be the actor when challenging rule):
+	if the noun is the player:
+		instead try challenging the person asked in the second noun;
 
-Before arena setup for an arena (called the place) (this is the invite challenged opponents rule):
-	now the challenged opponent is in the waiting area of the place;
-	
-Last before arena setup of a challenged-group-inviting arena (called place):
-	Let the staging area be the waiting area of the place;
-	Let Pers be the challenged opponent;
-	if Pers is group leading and Pers is not defeated individually:
-		if Pers is initially accompanied:
-			repeat with X running through people who accompany Pers:
-				move X to the staging area;
+Check an actor challenging someone in (this is the NPCs simulate arena battle rule):
+	if the person asked is the player:
+		continue the action;
+	let n be level of the actor plus level of the noun;
+	increase n by 4;
+	let m be level of the person asked;
+	increase m by 2;
+	while the person asked is alive and the noun is alive:
+		if a random chance of m in n succeeds:  [chance is: LVL1 + 2 / (LVL1 + 2 + LVL2 + 2); creatures of the same level: 1/2; level 4 vs level 3: 6/11; level 4 vs level 2: 6/10; level 4 vs level 0: 6/8.]
+			decrease health of the noun by 2;
+		otherwise:
+			decrease health of the person asked by 2;
+	if location of the person asked is location of the player:
+		Let the defeated be the noun;
+		if the person asked is not alive:
+			now the defeated is the person asked;
+		say "[The name of the person asked] and [the name of the noun] briefly flicker in and out of existence. When they become solid once more, [bold type][the name of the defeated] has been killed[roman type]!";
+	stop the action.
 
-First after arena setup for a faction-imposing arena (called the place) (this is the impose arena-faction rule):
-	Repeat with guy running through people in the waiting area of the place:
-		now the faction of guy is arena-faction;
+The player should be the actor when challenging rule is listed first in the check challenging it in rules.
 
-Last after arena setup for a not initially peaceful arena (called the place) (this is the start the arena fight right away rule):
-	Repeat with guy running through people in the waiting area of the place:
-		move guy to the place.
+The must be enemies to challenge rule is listed first in the check challenging it in rules.
 
-Last after arena setup for an arena (called the place) (this is the move the player to the arena rule):
-	move the player to the place;
+The NPCs simulate arena battle rule is listed last in the check challenging it in rules.
+
+Carry out an actor challenging someone in (this is the remember the challenge site rule):
+	now the challenge site of the second noun is the location of the person asked;
+
+Carry out an actor challenging someone in (this is the place challenged opponents in staging area rule):
+	move the noun to the staging area of the second noun;
+	if the second noun is a challenged-group-inviting arena and the noun is group leading and the noun is not defeated individually and the noun is initially accompanied:
+		repeat with the guy running through people who accompany the noun:
+			move the guy to the location of the noun;
+
+Carry out an actor challenging someone in (this is the impose arena faction rule):
+	if the second noun is a faction-imposing arena (called the place) (this is the impose arena-faction rule):
+		Repeat with guy running through people in the staging area of the second noun:
+			now the faction of guy is arena-faction;
+
+Carry out an actor challenging someone in (this is the arena arrival rule):
+	carry out the arena arrival activity with the second noun;
+
+The place challenged opponents in staging area rule is listed first in the carry out challenging it in rules.
+
+The impose arena faction rule is listed last in the carry out challenging it in rules.
+
+The arena arrival rule is listed last in the carry out challenging it in rules.
+
+Arena arrival of something is an activity on objects.
+
+For arena arrival of an arena (called destination) (this is the move the challenger to the arena rule):
+	move the person asked to the destination.
 
 Section - Getting out of an Arena
 
@@ -438,7 +454,9 @@ Arena exit of something is an activity on objects.
 
 Last every turn when the location is an arena and the player is alive (this is the check for completed arena battle rule):
 	update the combat status;
-	while the location is an arena and no person is in the waiting area of the location and combat status is peace:
+	while the location is an arena and combat status is peace:
+		if the staging area of the location is not the location and someone is in the staging area of the location:
+			make no decision;
 		[any bugs here, such as failing to exit the arena, can cause infinite loops]
 		carry out the arena exit activity with the location;
 		update the combat status;
