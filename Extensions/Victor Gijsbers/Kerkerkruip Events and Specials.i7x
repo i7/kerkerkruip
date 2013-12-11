@@ -360,13 +360,18 @@ An attack modifier rule (this is the much harder to discern by Herm bonus rule):
 		decrease attack strength by oppHermBonus;
 		decrease Arena-turncounter by 1.
 
-Section - Faction interactions
+Section - Interactions with Other Systems
 
 After changing form to an undead player form when the challenged god is Chton:
 	Let the opponent be a random alive arena-faction person who worships Chton; [Drakul]
 	say "You turn into a [form-name of current form], but your opponent do[es of the opponent]n't care that you're undead. [It-they of the opponent] fight[s] on for the honour of Chton!";
 
 [handle summoning here too?]
+
+Check an actor challenging someone in the Maze when the location is Arena of the Gods:
+	say "Space and time begin to twist around the minotaur's axe, and then untwist again as the gods stop [the global attacker] and [the global defender] from being transported to the maze!";
+	[insert punishments here?]
+	stop the action;
 
 Section - Awarding divine power 
 
