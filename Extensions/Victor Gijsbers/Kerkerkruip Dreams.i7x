@@ -290,6 +290,8 @@ A menu question rule (this is the banquet selection rule):
 		if m > 0 and m <= (the number of entries in banquet-items):
 			let entree be entry m of banquet-items;
 			prepare a feast of the entree;
+			if the entree is dead:
+				have an event of the true body of the player killing the entree;
 			if Malygris is dead:
 				if the true body of the player is dead:
 					end the game saying "You and Malygris have both been consumed. Technically, that counts as a win.";
@@ -326,7 +328,7 @@ An absorption stopping rule (this is the chef can't absorb souls rule):
 	if the player is chef:
 		wait for any key;
 		clear the screen;
-		say "As you come unmoored from your dream, you feel the soul of [the test subject] slipping past you, to be lost between worlds...";
+		say "As you come unmoored from your dream, you feel the soul of [the name of the test subject] slipping past you, to be lost between worlds...";
 		rule succeeds;
 
 
