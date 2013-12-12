@@ -109,6 +109,36 @@ Killing rule (this is the increment died and kill stats rule):
 				#if DEBUG say "[italic type](Defeat recorded for [the name of leader of the killed-guy].)[roman type][line break]";
 	update the monster statistics.
 
+Section - Resetting Monsters
+
+[this duplicates a sudden combat reset rule - consider running all these rules from the killing rules]
+A killing rule (this is the ungrapple killed guy rule):
+	while someone grapples killed-guy:
+		let guy be a random person who grapples the killed-guy;
+		now guy does not grapple the killed-guy;
+
+[
+
+To have the smoke demon appear:
+	now smoke demon is not asleep;
+	now health of the smoke demon is 10;
+	now faction of the smoke demon is horrific-faction;
+	now concentration of the smoke demon is 0;
+	now melee of the smoke demon is 2;
+	now defence of the smoke demon is 5;
+	now body score of the smoke demon is 7;
+	now mind score of the smoke demon is 7;
+	now spirit score of the smoke demon is 7;
+	now size of smoke demon is medium;
+	now smoke demon is not at dodge;
+	now smoke demon is not at parry;
+	now stun count of the smoke demon is 0;
+	now stun strength of the smoke demon is 0;
+	now smoke demon is unseen;
+	now last-seen-location of the smoke demon is Null-Room;
+	move smoke demon to the location;
+	say "The smoke coalesces to [bold type]form a smoke demon[roman type]!".]
+
 
 Section - Monster avatars for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
@@ -1010,6 +1040,14 @@ An AI action selection rule for the wisps of pain (this is the wisps of pain con
 			increase Action Weight entry by (2 * n);
 	otherwise:
 		decrease Action Weight entry by 100.
+
+Section - Resetting wisp-target
+
+A sudden combat reset rule for a person (called guy) (this is the reset wisps rule):
+	if guy is the wisps of pain or guy is the wisp-target:
+		now the wisp-target is the wisps of pain;
+
+[sometimes this rule will get invoked an extra time if everybody in the room gets reset. Oh well.]
 
 Section - Redirecting attacking + changing wisp-target
 
@@ -2940,11 +2978,10 @@ Status attribute rule (this is the grappled status rule):
 		otherwise:
 			say "[@ check initial position of attribute]grappled by [the X][run paragraph on]";
 		
-A sudden combat reset rule (this is the sudden grapple reset rule):
-	repeat with guy running through alive persons in the location:
-		while someone grapples guy:
-			let X be a random person grappling guy;
-			now X does not grapple guy.
+A sudden combat reset rule for a person (called guy) (this is the sudden grapple reset rule):
+	while someone grapples guy:
+		let X be a random person grappling guy;
+		now X does not grapple guy.
 
 An impeded movement rule (this is the being grappled impedes movement rule):
 	if someone grapples the test subject:
@@ -6407,12 +6444,9 @@ Every turn (this is the tweak smoke demon rule):
 		now defence of the smoke demon is n.
 
 To have the smoke demon disappear from (place - a room):
-	clean the table of delayed actions for the smoke demon;
+	follow the sudden combat reset rules for the smoke demon;
 	remove smoke demon from play;
 	now smoke demon time-out is a random number between 5 and 10;
-	while someone grapples the smoke demon:
-		let guy be a random person who grapples the smoke demon;
-		now guy does not grapple the smoke demon;
 	if place is the location:
 		say "With an eery cry, the [bold type]smoke demon dissipates[roman type]!".
 

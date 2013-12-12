@@ -763,15 +763,17 @@ First carry out an actor teleporting (this is the choose a destination rule):
 	let destination be a random placed placeable teleportable room;
 	while destination is the location of the actor:
 		let destination be a random placed placeable teleportable room;
-	now teleportation-destination is destination.	
+	now teleportation-destination is destination.
+
+First carry out an actor teleporting (this is the teleport away from combat rule):
+	unless teleportation-from is the location and teleportation-destination is the location:
+		consider the sudden combat reset rules for the actor.	
 
 Last carry out an actor teleporting (this is the actually do the teleportation rule):
 	move actor to teleportation-destination;
 	now concentration of actor is 0;
 	unless teleport amount of actor is -1 or teleport amount of actor is 0:
 		decrease teleport amount of actor by 1;
-	unless teleportation-from is the location and teleportation-destination is the location:
-		clean the table of delayed actions for the actor;
 
 Report an npc teleporting:
 	if teleportation-from is the location and teleportation-destination is the location:
@@ -787,7 +789,6 @@ To teleport the player:
 	say "A sickening feeling, and then you find yourself in --[paragraph break]";
 	try the player teleporting;
 	now retreat location is teleportation-destination;
-	consider the sudden combat reset rules;
 	now the take no time boolean is false;
 
 

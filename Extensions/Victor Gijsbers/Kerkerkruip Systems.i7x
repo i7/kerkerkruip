@@ -1381,17 +1381,25 @@ Chapter - Sudden combat reset
 
 [After teleportation, and other sudden move actions of the player, concentration and so on ought to be reset. They work on the location of the player, so should be called _before_ the move.]
 
-The sudden combat reset rules are a rulebook.
+The sudden combat reset rules are an object based rulebook.
 
-A sudden combat reset rule (this is the sudden concentration reset rule):
-	repeat with guy running through alive persons enclosed by the location:
-		now concentration of guy is 0.
+A sudden combat reset rule for a person (called the deserter) (this is the sudden concentration reset rule):
+	if the deserter is the player:
+		repeat with guy running through alive persons enclosed by the location:
+			now concentration of guy is 0;
+	otherwise:
+		now concentration of the deserter is 0;
 
-A sudden combat reset rule (this is the reset the player to at-Inactive rule):
-	now the player is at-Inactive;
+A sudden combat reset rule for a person (called the deserter) (this is the reset the deserter to at-Inactive rule):
+	now the deserter is at-Inactive;
 
-				
-
+A sudden combat reset rule for a person (called the deserter) (this is the sudden delayed actions reset rule):
+	if the deserter is the player:
+		repeat with guy running through alive persons enclosed by the location:
+			clean the table of delayed actions for the guy;
+	otherwise:
+		clean the table of delayed actions for the deserter;
+ 
 Chapter - Forced action
 
 Forced-action is a truth state that varies. Forced-action is false. [When it is true, we don't say anything about a player's motivation. Currently used for the boots of wandering.]
@@ -1493,8 +1501,7 @@ Stage 3: Does something in the destination room want to give a custom effect to 
 Stage 4: Otherwise, we apply standard damage in the LAST FALLING RULE.]
 
 Falling rule (this is the move the falling person to the destination rule):
-	if falling-test-person is the player:
-		consider the sudden combat reset rules;
+	consider the sudden combat reset rules for falling-test-person;
 	move falling-test-person to falling-destination.
 
 Last falling rule (this is the standard deal falling damage rule):
@@ -1521,8 +1528,6 @@ Last falling rule (this is the standard deal falling damage rule):
 				now concentration of the falling-test-person is 0;
 				if the location of falling-test-person is the location of the player and m is not 0:
 					say "[The falling-test-person] receives [m] damage from the fall.";
-			clean the table of delayed actions for the falling-test-person.
-
 
 
 Chapter - Player forms

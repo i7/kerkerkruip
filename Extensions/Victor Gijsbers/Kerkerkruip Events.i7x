@@ -76,7 +76,7 @@ A fragmentation rule (this is the basic fragmentation damage rule):
 			if fragmentation-place is the location:
 				say ""; [For an extra newline. Don't ask.]
 		if health of guy is less than 1:
-			clean the table of delayed actions for guy;
+			have an event of fragmentation-guy killing the guy;
 		now guy is not asleep;
 	if health of the player is less than 1:
 		if fragmentation-guy is the player:
