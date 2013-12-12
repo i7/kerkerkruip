@@ -170,7 +170,7 @@ Chapter - Tests (not for release)
 
 
 
-Section - Cheats - Plunk, plonk, rambo, meatboy, reduce
+Section - Cheats - Plunk, plonk, rambo, meatboy, butterfly, reduce
 
 Plunking is an action applying to one thing.
 Understand "plunk [something]" as plunking.
@@ -208,6 +208,12 @@ Reducing is an action applying to one thing. Understand "reduce [person]" as red
 Carry out reducing:
 	say "Set to 1 HP.";
 	now health of the noun is 1.
+
+Butterflying is an action applying to nothing. Understand "butterfly" as butterflying.
+
+Carry out butterflying:
+	say "Float like a butterfly, sting like a bee! No one can hit you now.";
+	now defence of the player is 100;
 
 Winning is an action applying to nothing. Understand "win" as winning.
 

@@ -353,16 +353,10 @@ To deal (X - a number) points of Aite-damage to (guy - a person) on behalf of (t
 			otherwise:
 				end the story saying "A maddening laughter of the Goddess is the last sound you'll ever hear";
 		otherwise:
-			if the supplicant is the player:
-				if plus gigantic damage:
-					now killer-guy is the player;
-					now killed-guy is the guy;
-				otherwise:
-					now the global attacker is the player;
-					now the global defender is the guy;
-			otherwise if the guy is beloved of Aite:
+			if the guy is beloved of Aite:
 				say "Clearly, it doesn't always pay off to serve the mad goddess.";
-			consider the grant powers when a monster is slain rule;
+		have an event of the supplicant killing the guy;
+
 
 To have Aite grant concentration to (guy - a person):
 	if the concentration of the guy is at least 3:
