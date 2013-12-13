@@ -60,9 +60,10 @@ This is the alternative do not attack friendly people rule:
 			now faction of the noun is hostile;
 		otherwise:
 			if the Nomos bonus is true:
-				if combat status is peace:
-					now attacking-from-peace is true;
-				now faction of the noun is hostile;
+				unless the noun is the player:
+					if combat status is peace:
+						now attacking-from-peace is true;
+					now faction of the noun is hostile;
 			otherwise:
 				take no time;
 				say "[The noun] is your friend, not your enemy!" instead.
