@@ -1324,6 +1324,12 @@ Every turn when the main actor wears the dragon armour:
 
 Chapter - Shields
 
+Check readying a shield:
+	try wearing the noun instead.
+	
+Check unreadying a shield:
+	try taking off the noun instead.
+
 Section - Wooden buckler (minor)
 
 The wooden buckler is a minor shield.
