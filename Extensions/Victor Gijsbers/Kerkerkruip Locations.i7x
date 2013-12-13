@@ -359,6 +359,9 @@ Section - Bridge of Doom label for the map (for use with Kerkerkruip Glimmr Addi
 The map-label of Bridge of Doom is Figure of map_label_Bridge.
 
 
+[Chapter - Some Temple ]
+
+
 
 Chapter - Temple of Nomos
 
@@ -481,13 +484,20 @@ The pile of fragments is scenery. The description of the pile of fragments is "T
 
 
 Instead of attacking the statue of Sul:
-	say "As soon as you strike the statue, it shatters into a thousand pieces.";
-	remove the statue of Sul from play;
-	move the pile of fragments to the temple of sul;
-	repeat with item running through things:
-		if a random chance of 9 in 10 succeeds:
-			unless item is incorruptible, now item is cursed. 
-
+	unless the player worships Sul:
+		say "As soon as you strike the statue, it shatters into a thousand pieces.";
+		remove the statue of Sul from play;
+		move the pile of fragments to the temple of sul;
+		repeat with item running through things:
+			if a random chance of 1 in 2 succeeds:
+				if item is a weapon and item is not a natural weapon:
+					unless item is incorruptible, now item is cursed;
+				if item is clothing:
+					unless item is incorruptible, now item is cursed;
+	otherwise:
+		say "You strike the statue, but it remains perfect and whole.".
+					
+					
 Instead of touching the statue of Sul:
 	try climbing the statue of Sul.
 
