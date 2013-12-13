@@ -769,14 +769,14 @@ The rarity of Space-Time Discontinuum is 1. [Placed less often.]
 The unlock level of Space-Time Discontinuum is 10.
 The unlock text of Space-Time Discontinuum is "a weird place where time functions differently than elsewhere".
 
-STC-firstturn is a truth state that varies. STC-firstturn is true. [To ensure that the player can always retreat.]
+STD-firstturn is a truth state that varies. STD-firstturn is true. [To ensure that the player can always retreat.]
 
 An initiative update rule (this is the initiative is almost completely random in Space-Time Discontinuum rule):
-	if STC-firstturn is false:
+	if STD-firstturn is false:
 		if location is Space-Time Discontinuum and the location is not initiative-conferring:
 			repeat with X running through all alive persons enclosed by the location:				
 				now the initiative of X is a random number between 0 and 100;
-	now STC-firstturn is false.
+			now STD-firstturn is false.
 
 
 Section - Space-Time Discontinuum label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
