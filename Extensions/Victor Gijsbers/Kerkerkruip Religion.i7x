@@ -158,9 +158,9 @@ Favour rule for Aite (this is the Aite favour 3 rule):
 		say "Aite grants you survival instincts!";
 		let n be body score of player + mind score of player + spirit score of player;
 		increase n by a random number between 4 and 6;
-		let a be a random number between 1 and n;
+		let a be a random number between 3 and (n minus 4);
 		now n is n - a;
-		let b be a random number between 1 and n;
+		let b be a random number between 2 and (n minus 2);
 		if b is less than 1, now b is 1;
 		let c be n - b;
 		if c is less than 1, now c is 1;
@@ -204,10 +204,10 @@ Favour rule for Aite (this is the Aite favour 9 rule):
 		say "Your defence score changes from [defence of the player] to [defence of the player + n]. ";
 		increase defence of the player by n;
 		now n is body score of player + mind score of player + spirit score of player;
-		increase n by a random number between -2 and 10;
-		let a be a random number between 1 and n;
+		increase n by a random number between 1 and 10;
+		let a be a random number between 3 and (n minus 6);
 		now n is n - a;
-		let b be a random number between 1 and n;
+		let b be a random number between 3 and (n minus 3);
 		if b is less than 1, now b is 1;
 		let c be n - b;
 		if c is less than 1, now c is 1;
@@ -294,10 +294,6 @@ To have (benefactor - Aite) intervene on behalf of (guy - a person):
 			if power of the fanatics of Aite is granted:
 				let m be (final spirit of the player / 3);
 				increase n by a random number between 0 and m;
-			if Aite wrath state is 1:
-				increase n by 5;
-			if Aite wrath state is -1:
-				decrease n by 5;
 			now opposition test subject is guy;
 			repeat with opp running through alive opposer persons enclosed by the location:
 				if opp is beloved of Aite:
@@ -434,7 +430,7 @@ The Nomos counter is a number that varies. The Nomos counter is 0.
 The Nomos bonus is a truth state that varies. The Nomos bonus is false.
 
 Every turn (this is the decrease the Nomos counter rule):
-	if the main actor is the player:
+	if (the main actor is the player) and (the current action is not the action of the player dontparsing):
 		if Nomos counter is greater than 0:
 			decrease Nomos counter by 1;
 			if Nomos counter is 0:
