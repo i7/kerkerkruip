@@ -4325,10 +4325,13 @@ Carry out the overmind overmind-calling:
 To call an ally:
 	let guy be a random overmind-ally person;
 	let the way be the best route from the location of guy to the location of the overmind;
-	if location of the overmind is location of the player:
-		say "You briefly see an image of [the guy] flickering above the overmind, and a weird buzzing sound fills the dungeon[if way is a direction]. In the image, [the guy] move[s] to [the location of the guy][end if].";
 	if way is a direction:
-		try guy going the way.
+		let place be the room way of the location of the guy;
+		if location of the overmind is location of the player:
+			say "You briefly see an image of [the guy] flickering above the overmind, and a weird buzzing sound fills the dungeon. In the image, [the guy] move[s] to [place].";
+		try guy going the way;
+	otherwise:
+		say "You briefly see an image of [the guy] flickering above the overmind, and a weird buzzing sound fills the dungeon.".
 
 To call all allies:
 	if location of the overmind is location of the player:
