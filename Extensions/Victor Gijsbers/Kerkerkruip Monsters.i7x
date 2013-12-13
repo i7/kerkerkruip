@@ -1411,8 +1411,8 @@ The description of the jumping bomb is "Connoisseurs consider these jumping ball
 The soul description of the jumping bomb is "a pulsating bundle of glowing embers".
 
 The health of the jumping bomb is 22.
-The melee of the jumping bomb is 0.
-The defence of the jumping bomb is 7.
+The melee of the jumping bomb is 1.
+The defence of the jumping bomb is 8.
 
 The body score of the jumping bomb is 8.
 The spirit score of the jumping bomb is 3. 
