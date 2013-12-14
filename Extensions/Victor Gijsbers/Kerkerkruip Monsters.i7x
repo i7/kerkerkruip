@@ -4809,9 +4809,9 @@ An AI action selection rule for at-Act Fell (this is the Fell considers Israfel-
 
 Carry out an actor Israfel-reuniting:
 	now Israfel-reuniting-initiator is the actor;
-	if Isra is alive and Fell is alive:
+	if Isra is alive and Fell is alive and (location of Isra is location of Fell):
 		say "Isra and Fell are suddenly surrounded by a deep blue light. Both seem frozen in place.";
-	otherwise if Isra is alive:
+	otherwise if the actor is Isra:
 		say "Isra is suddenly surrounded by a deep blue light. He seems frozen in place.";
 	otherwise:
 		say "Fell is suddenly surrounded by a deep blue light. She seems frozen in place.".
