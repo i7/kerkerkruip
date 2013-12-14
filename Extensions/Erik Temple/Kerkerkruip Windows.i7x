@@ -332,7 +332,7 @@ Last when play begins (this is the check info panel capacity rule):
 	if data value 7 is 1:
 		say "[bracket]Information panels are disabled. Type PANELS to enable them.[close bracket][line break][run paragraph on]";
 	if data value 7 is 0:
-		if width of the main-window is less than 102 or height of the main-window is less than 34:
+		if width of the main-window is less than 102 or height of the main-window is less than 30:
 			say "[bracket]Your game window is too small for you to use the information panels comfortably. Maximize your window, then type PANELS to enable them.[close bracket][line break][run paragraph on]";
 			set data value 7 to 1;
 	follow the open up game windows rule.
