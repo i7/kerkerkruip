@@ -3535,7 +3535,8 @@ power of the Fanatics of Aite	spirit	--
 Absorbing power of the Fanatics of Aite:
 	increase melee of the player by 4;
 	increase defence of the player by 4;
-	increase permanent health of the player by 20.
+	increase permanent health of the player by 20;
+	say "As soon as the fanatics of Aite are all dead, you feel their souls absorbed into your own body. ([bold type]Power of the fanatics[roman type]: +4 attack, +4 defence, +20 health, you can [italic type]sacrifice[roman type] to Aite even when you're not in her temple, and Aite's interventions will be better for you.)[paragraph break]".
 
 Repelling power of the Fanatics of Aite:
 	decrease melee of the player by 4;
