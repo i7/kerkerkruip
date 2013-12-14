@@ -4588,11 +4588,11 @@ An aftereffects rule (this is the Israfel's burning defence rule):
 
 Section - Israfel prose
 
-Report the Israfel hitting a dead pc:
+Report Israfel hitting a dead pc:
 	say "'We are but thoughts in the mind of god, and thus, like all thoughts, ephemeral.'";
 	rule succeeds.
 
-Report the Israfel attacking:
+Report Israfel attacking:
 	unless the actor is the noun:
 		say "Israfel projects its fires towards [the noun].";
 	otherwise:
@@ -4686,7 +4686,7 @@ Report Isra hitting a dead pc:
 
 Report Isra attacking:
 	unless the actor is the noun:
-		say "Israfel projects his fires towards [the noun].";
+		say "Isra projects his fires towards [the noun].";
 	otherwise:
 		say "'Mystic union with the feminine principle is overrated,' Isra whispers as he tries to strangle himself.";
 	rule succeeds.
