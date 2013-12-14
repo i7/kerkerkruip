@@ -833,6 +833,8 @@ Section - Herm's intervention
 
 Before an actor hitting someone who worships Herm:
 	if the actor worships Herm, make no decision; [this should never happen, but we want to avoid infinite loops]
+	if the noun is not conscious, make no decision;
+	if the location of the actor is not the location of the noun, make no decision;
 	Let the current favour be the favour of the noun with Herm;
 	if a random chance of the current favour in 20 succeeds:
 		say "[bold type]Herm[roman type] bends space and time around [the noun] and [the actor], and you suddenly find [if the noun is the player]yourself in the role of attacker[otherwise]that [the noun] is attacking [the actor] instead[end if]!";

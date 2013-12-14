@@ -106,6 +106,11 @@ Every turn when the player is undead and the faction of the player is undead-fac
 
 Part - Simple attributes
 
+Chapter - Conscious
+
+Definition: a person (called guy) is conscious if (guy is alive) and (guy is not asleep).
+Definition: a person (called guy) is unconscious if guy is not conscious.
+
 Chapter - Emotionless
 
 [Some persons have no emotions, and are immune to, for instance, being dominated.]
