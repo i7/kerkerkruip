@@ -1449,8 +1449,8 @@ The description of the jumping bomb is "Connoisseurs consider these jumping ball
 The soul description of the jumping bomb is "a pulsating bundle of glowing embers".
 
 The health of the jumping bomb is 22.
-The melee of the jumping bomb is 0.
-The defence of the jumping bomb is 7.
+The melee of the jumping bomb is 1.
+The defence of the jumping bomb is 8.
 
 The body score of the jumping bomb is 8.
 The spirit score of the jumping bomb is 3. 
@@ -3574,7 +3574,8 @@ power of the Fanatics of Aite	spirit	--
 Absorbing power of the Fanatics of Aite:
 	increase melee of the player by 4;
 	increase defence of the player by 4;
-	increase permanent health of the player by 20.
+	increase permanent health of the player by 20;
+	say "As soon as the fanatics of Aite are all dead, you feel their souls absorbed into your own body. ([bold type]Power of the fanatics[roman type]: +4 attack, +4 defence, +20 health, you can [italic type]sacrifice[roman type] to Aite even when you're not in her temple, and Aite's interventions will be better for you.)[paragraph break]".
 
 Repelling power of the Fanatics of Aite:
 	decrease melee of the player by 4;
@@ -4364,10 +4365,13 @@ Carry out the overmind overmind-calling:
 To call an ally:
 	let guy be a random overmind-ally person;
 	let the way be the best route from the location of guy to the location of the overmind;
-	if location of the overmind is location of the player:
-		say "You briefly see an image of [the guy] flickering above the overmind, and a weird buzzing sound fills the dungeon[if way is a direction]. In the image, [the guy] move[s] to [the location of the guy][end if].";
 	if way is a direction:
-		try guy going the way.
+		let place be the room way of the location of the guy;
+		if location of the overmind is location of the player:
+			say "You briefly see an image of [the guy] flickering above the overmind, and a weird buzzing sound fills the dungeon. In the image, [the guy] move[s] to [place].";
+		try guy going the way;
+	otherwise:
+		say "You briefly see an image of [the guy] flickering above the overmind, and a weird buzzing sound fills the dungeon.".
 
 To call all allies:
 	if location of the overmind is location of the player:
@@ -4623,11 +4627,11 @@ An aftereffects rule (this is the Israfel's burning defence rule):
 
 Section - Israfel prose
 
-Report the Israfel hitting a dead pc:
+Report Israfel hitting a dead pc:
 	say "'We are but thoughts in the mind of god, and thus, like all thoughts, ephemeral.'";
 	rule succeeds.
 
-Report the Israfel attacking:
+Report Israfel attacking:
 	unless the actor is the noun:
 		say "Israfel projects its fires towards [the noun].";
 	otherwise:
@@ -4721,7 +4725,7 @@ Report Isra hitting a dead pc:
 
 Report Isra attacking:
 	unless the actor is the noun:
-		say "Israfel projects his fires towards [the noun].";
+		say "Isra projects his fires towards [the noun].";
 	otherwise:
 		say "'Mystic union with the feminine principle is overrated,' Isra whispers as he tries to strangle himself.";
 	rule succeeds.
@@ -4844,9 +4848,9 @@ An AI action selection rule for at-Act Fell (this is the Fell considers Israfel-
 
 Carry out an actor Israfel-reuniting:
 	now Israfel-reuniting-initiator is the actor;
-	if Isra is alive and Fell is alive:
+	if Isra is alive and Fell is alive and (location of Isra is location of Fell):
 		say "Isra and Fell are suddenly surrounded by a deep blue light. Both seem frozen in place.";
-	otherwise if Isra is alive:
+	otherwise if the actor is Isra:
 		say "Isra is suddenly surrounded by a deep blue light. He seems frozen in place.";
 	otherwise:
 		say "Fell is suddenly surrounded by a deep blue light. She seems frozen in place.".
@@ -4877,6 +4881,7 @@ This is the Israfel reunites rule:
 The Israfel reunites rule is listed before the the main actor chooses an action rule in the combat round rules.
 
 To reunite Israfel:
+	now Israfel-reuniting-initiator is Israfel;
 	now Israfel-trance is 1;
 	now Israfel is not asleep;
 	let n be health of Isra;

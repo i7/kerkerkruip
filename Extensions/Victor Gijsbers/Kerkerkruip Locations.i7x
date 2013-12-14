@@ -359,13 +359,49 @@ Section - Bridge of Doom label for the map (for use with Kerkerkruip Glimmr Addi
 The map-label of Bridge of Doom is Figure of map_label_Bridge.
 
 
-[Chapter - Some Temple ]
+Chapter - Some Temple Stuff
 
+An idol is a kind of thing. A temple has an idol called the resident idol. An idol is usually scenery.
+
+After examining an idol:
+	if the noun is the resident idol of the location:
+		unless the player worships a god:
+			say "You feel that you could [italic type]sacrifice[roman type] your powers here.".
+
+Check sacrificing (this is the cannot sacrifice in a temple when statue is not present rule):
+	if location of the player is a temple:
+		let item be resident idol of the location of the player;
+		unless item is enclosed by location of the player:
+			take no time;
+			say "This place has been profaned." instead.
+
+To profane (place - a temple):
+	remove resident idol of place from play;
+	let angry guy be a random god who infuses the location of the player;
+	if player worships a god:
+		let guy be a random god worshipped by the player;
+		if place is dedicated to guy:
+			end the game saying "Wise people do not anger their own gods. You were not wise.";
+		otherwise:
+			say "[line break][Guy] appreciates your profaning of the holy place of [angry guy], and grants you 1 favour!";
+			raise favour of the player by 1.
+
+Definition: a temple (called the place) is profaned if the resident idol of place is not enclosed by place.
+
+Every turn (this is the gods suggest profaning rule):
+	if the location of the player is a temple:
+		if combat status is peace:
+			if player worships a god:
+				if resident idol of the location is enclosed by the location:
+					if a random chance of 1 in 10 succeeds:
+						let guy be a random god who infuses the location of the player;			
+						unless player worships guy:
+							say "You are given to understand that [a random god worshipped by the player] would like you to attack the statue of [guy]."
 
 
 Chapter - Temple of Nomos
 
-The temple of Nomos is a temple. "The exactly elliptical room is dominated by a towering statue of Nomos, built out of harsh geometrical forms."
+The temple of Nomos is a temple. "The exactly elliptical room [if the statue of Nomos is enclosed by the temple of Nomos]is dominated by a towering statue of Nomos, built out of harsh geometrical forms[otherwise]used to be dominated by a towering statue of Nomos[end if]."
 
 Temple of Nomos is dedicated to Nomos.
 
@@ -379,16 +415,23 @@ Temple of Nomos is consecrated.
 Temple of Nomos is vp-agnostic.
 Temple of Nomos is religious.
 
-The statue of Nomos is scenery in Temple of Nomos. The description of the statue of Nomos is "While neither cruel nor evil, Nature as Law is the most uncaring and least merciful of all gods. His dictates are obeyed, not out of fear, but out of necessity. Praying to Nomos can be beneficial -- if you are willing to submit to his commands." Understand "god" and "deity" as the statue of Nomos.
+The statue of Nomos is an idol in Temple of Nomos. The resident idol of the Temple of Nomos is the statue of Nomos. The description of the statue of Nomos is "While neither cruel nor evil, Nature as Law is the most uncaring and least merciful of all gods. His dictates are obeyed, not out of fear, but out of necessity. Praying to Nomos can be beneficial -- if you are willing to submit to his commands." Understand "god" and "deity" as the statue of Nomos.
 
-Instead of attacking the statue of Nomos:
+[Instead of attacking the statue of Nomos:
 	say "For aeons, warmth and coldness, air and water, and all the internal material tensions have wrought their slow changes on the atomic structure of the statue of Nomos. This is the exact moment when the critical limit is reached, and Nomos[apostrophe] massive marble fist breaks free and surrenders itself to the laws of gravity. Your body underneath is forced to surrender as well.";
-	end the story saying "You were crushed". 
-
+	end the story saying "You were crushed". ]  [I like it ... but we need something else now!]
+	
+Instead of attacking the statue of Nomos:
+	say "For aeons, warmth and coldness, air and water, and whatever internal tensions there were have wrought their slow changes on the atomic structure of the statue of Nomos. This is the exact moment when the critical limit is reached, and as you hit the statue, Nomos[apostrophe] massive marble body breaks apart and surrenders itself to the laws of gravity.";
+	if the player worships Nomos:
+		say "[line break]You attempt to jump aside, but one of Nomos[apostrophe] fists falls right on top of you, crushing you into a pile of unidentifiable goo.";
+	otherwise:
+		now the Nomos wrath counter is a random number between 70 and 100;
+		say "[line break]The booming voice of Nomos fills the temple. 'You will be punished, puny mortal! In exactly [Nomos wrath counter] turns, you will die.'";
+	profane the Temple of Nomos.
+	
 Instead of climbing the statue of Nomos:
 	say "It is far too smooth for you to climb.".
-
-
 
 [Doesn't do anything right now, but we might want to reuse it.]
 The Nomos wrath counter is a number that varies. The Nomos wrath counter is 0.			
@@ -411,7 +454,7 @@ The map-label of Temple of Nomos is Figure of map_label_Nomos.
 
 Chapter - Temple of Aite
 
-The temple of Aite is a temple. "The black stones have been scratched in a million fights, and will nevermore lose the faint colour of blood. This is the temple of Aite, whose laughing statue rises above all."
+The temple of Aite is a temple. "The black stones have been scratched in a million fights, and will nevermore lose the faint colour of blood. This is the temple of Aite[if the statue of Aite is enclosed by the temple of Aite], whose laughing statue rises above all[end if]."
 
 Temple of Aite is dedicated to Aite.
 
@@ -425,16 +468,18 @@ Temple of Aite is consecrated.
 Temple of Aite is vp-agnostic.
 Temple of Aite is religious.
 
-The statue of Aite is scenery in Temple of Aite. The description of the statue of Aite is "A vast statue made of razor sharp weapons. The goddess of chaos and destruction is a dangerous one to worship -- but it can be worth it.". Understand "god" and "deity" as the statue of Aite.
-
-The Aite wrath state is a number that varies. The Aite wrath state is 0. [-1: angry; +1 pleased]
+The statue of Aite is an idol in Temple of Aite. The resident idol of the Temple of Aite is the statue of Aite. The description of the statue of Aite is "A vast statue made of razor sharp weapons. The goddess of chaos and destruction is a dangerous one to worship -- but it can be worth it.". Understand "god" and "deity" as the statue of Aite.
 
 Instead of attacking the statue of Aite:
-	say "You experimentally whack the statue a couple of times, but it doesn't seem to budge. Has this pleased the goddess, or angered her?";
-	if a random chance of 4 in 9 succeeds:
-		now the Aite wrath state is 1; [good]
+	say "You experimentally whack the statue a couple of times, but it doesn't seem to budge. You hit it once more, when it suddenly shatters into a thousand iron swords that rain down all around you.";
+	if the player worships Aite:
+		say "[line break]You attempt to dodge the weapons, but you are no match for the goddess.";
 	otherwise:
-		now the Aite wrath state is -1. [bad]
+		say "[line break]Miraculously, you manage to dodge all the weapons. But Aite's voice screams through the dungeon, promising you a painful death at the hands of your enemies!";
+		repeat with guy running through denizen people:
+			if guy opposes player:
+				increase melee of guy by 2;
+	profane the Temple of Aite.	
 
 Instead of touching the statue of Aite:
 	try climbing the statue of Aite.
@@ -478,25 +523,24 @@ Temple of Sul is consecrated.
 Temple of Sul is vp-agnostic.
 Temple of Sul is religious.
 
-The statue of Sul is scenery in Temple of Sul. The description of the statue of Sul is "This is the crystal-clear statue of Sul, goddess of blessings and purification. She has been known to lift curses; but she has also been rumoured to hate spurious prayers.". Understand "god" and "deity" and "crystal" as the statue of Sul.
+The statue of Sul is an idol in Temple of Sul. The resident idol of the Temple of Sul is the statue of Sul. The description of the statue of Sul is "This is the crystal-clear statue of Sul, goddess of blessings and purification. She has been known to lift curses; but she has also been rumoured to hate spurious prayers.". Understand "god" and "deity" and "crystal" as the statue of Sul.
 
-The pile of fragments is scenery. The description of the pile of fragments is "This crystal rubble is all that is left of the proud statue of Sul.". Instead of taking the pile of fragments: say "For reasons that cannot be merely physical, you are unable to move the rubble". Understand "rubble" and "broken" and "statue" and "crystal" as the pile of fragments.
-
+The pile of fragments is scenery. The description of the pile of fragments is "This crystal rubble is all that is left of the once proud statue of Sul.". Instead of taking the pile of fragments: say "For reasons that cannot be merely physical, you are unable to move the rubble". Understand "rubble" and "broken" and "statue" and "crystal" as the pile of fragments.
 
 Instead of attacking the statue of Sul:
-	unless the player worships Sul:
-		say "As soon as you strike the statue, it shatters into a thousand pieces.";
-		remove the statue of Sul from play;
-		move the pile of fragments to the temple of sul;
+	say "As soon as you strike the statue, it shatters into a thousand pieces.";
+	move the pile of fragments to the temple of Sul;
+	if the player worships Sul:
+		say "[line break]At the same moment, your own body starts growing. It becomes stiff and cold, and you feel your consciousness slipping away. Before you understand that Sul is fashioning you into a new statue of herself, you die.";
+	otherwise:
+		say "[line break]You feel Sul's curses raining down around you.";
 		repeat with item running through things:
-			if a random chance of 1 in 2 succeeds:
+			if a random chance of 2 in 3 succeeds:
 				if item is a weapon and item is not a natural weapon:
 					unless item is incorruptible, now item is cursed;
 				if item is clothing:
 					unless item is incorruptible, now item is cursed;
-	otherwise:
-		say "You strike the statue, but it remains perfect and whole.".
-					
+	profane the Temple of Sul.						
 					
 Instead of touching the statue of Sul:
 	try climbing the statue of Sul.
@@ -527,10 +571,25 @@ Temple of Chton is consecrated.
 Temple of Chton is vp-agnostic.
 Temple of Chton is religious.
 
-The statue of Chton is scenery in Temple of Chton. The description of the statue of Chton is "Strangers to your country are always surprised that Chton is depicted as a good-looking youth rather than as an old man or a skeletal figure. They don't understand that death is the opposite and the abolition of age, illness, decay -- nothing could be more beautiful and seductive.". Understand "smooth" and "grey" as the statue of Chton.
+The statue of Chton is an idol in Temple of Chton. The resident idol of the Temple of Chton is the statue of Chton. The description of the statue of Chton is "Strangers to your country are always surprised that Chton is depicted as a good-looking youth rather than as an old man or a skeletal figure. They don't understand that death is the opposite and the abolition of age, illness, decay -- nothing could be more beautiful and seductive.". Understand "smooth" and "grey" as the statue of Chton.
 
 Instead of attacking the statue of Chton:
-	say "With strange aeons even death may die -- but for now this statue seems indestructible.". 
+	say "You grab hold of the statue of Chton, and pull it over with a mighty heave. As it hits the ground, it smashes into thousands of small pieces.";
+	if the player worships Chton:
+		say "[line break]'So you think you can insult me with impunity?' the seductive voice of Chton asks. 'I'm afraid you are wrong. Well -- if you won't be my obedient servant alive, you at least will be my obedient servant dead.' As his words fade, your body starts to rot. Consciousness leaves you as you turn into a mindless zombie.";
+	otherwise:
+		say "[line break]'So you think you can insult me with impunity?' the seductive voice of Chton asks. 'You are wrong, frail mortal.'";
+		now Chton-killing is true;
+	profane the Temple of Chton.	
+	
+Chton-killing is a truth state that varies. Chton-killing is false.
+
+A damage modifier rule (this is the Chton-killing rule):
+	if Chton-killing is true:
+		if the global defender is the player:
+			if the numbers boolean is true:
+				say " + 2 (the deadly cold of Chton's wrath)[run paragraph on]";
+			increase the attack damage by 2.
 
 Instead of touching the statue of Chton:
 	say "It feels as cold as death.".
@@ -565,10 +624,17 @@ Temple of Herm is consecrated.
 Temple of Herm is vp-agnostic.
 Temple of Herm is religious.
 
+The statue of Herm is an idol in Temple of Herm. The resident idol of the Temple of Herm is the statue of Herm.
+
+Instead of doing anything with the statue of Herm:
+	take no time;
+	say "It seems to be hidden.".
+
 Last detection rule (this is the Temple of Herm detection rule):
 	if the location is the Temple of Herm:
 		say " + 2 (Temple of Herm)[run paragraph on]";
 		increase the hiding roll by 2.
+
 
 Section - Temple of Herm label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
@@ -723,10 +789,14 @@ The rarity of Space-Time Discontinuum is 1. [Placed less often.]
 The unlock level of Space-Time Discontinuum is 10.
 The unlock text of Space-Time Discontinuum is "a weird place where time functions differently than elsewhere".
 
+STD-firstturn is a truth state that varies. STD-firstturn is true. [To ensure that the player can always retreat.]
+
 An initiative update rule (this is the initiative is almost completely random in Space-Time Discontinuum rule):
-	if location is Space-Time Discontinuum and the location is not initiative-conferring:
-		repeat with X running through all alive persons enclosed by the location:				
-			now the initiative of X is a random number between 0 and 100.
+	if STD-firstturn is false:
+		if location is Space-Time Discontinuum and the location is not initiative-conferring:
+			repeat with X running through all alive persons enclosed by the location:				
+				now the initiative of X is a random number between 0 and 100;
+			now STD-firstturn is false.
 
 
 Section - Space-Time Discontinuum label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)

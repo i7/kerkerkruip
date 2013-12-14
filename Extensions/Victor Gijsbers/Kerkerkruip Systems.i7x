@@ -1149,7 +1149,9 @@ Chapter - Rust
 Section - The property
 
 A thing can be rusted. A thing is usually not rusted.
+Understand the rusted property as describing a thing.
 Understand "rusted" as a thing when the item described is rusted.
+Understand "not-rusted" and "not rusted" and "unrusted" as a thing when the item described is not rusted.
 
 Not-mentioning-rust is a truth state that varies. Not-mentioning-rust is false.
 
@@ -1161,7 +1163,10 @@ To turn on mentioning rust:
 
 Before printing the name of a rusted thing:
 	if not-mentioning-rust is false, say "rusted [run paragraph on]".
-
+	
+Before printing the plural name of a rusted thing:
+	if not-mentioning-rust is false, say "rusted [run paragraph on]".
+	
 First attack modifier rule:
 	turn off mentioning rust.
 

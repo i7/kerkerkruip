@@ -25,11 +25,11 @@ Section - Graphics and Windows
 
 Check https://github.com/i7/extensions if the I7 site only has older versions ]
 
-Include version 13/130925 of Flexible Windows by Jon Ingold.
+Include version 13/131208 of Flexible Windows by Jon Ingold.
 
 [Include Kerkerkruip Glimmr Additions by Erik Temple.]
 
-Include version 1/130925 of Menus by Dannii Willis.
+Include version 1/131214 of Menus by Dannii Willis.
 Include Kerkerkruip Windows by Erik Temple.
 
 [Include Extended Debugging by Erik Temple.]

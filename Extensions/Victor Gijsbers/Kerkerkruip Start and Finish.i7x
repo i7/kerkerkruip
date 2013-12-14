@@ -134,11 +134,16 @@ Chapter - Introduction Menu
 
 Figure opening figure is the file "smallercover.jpg".
 
+Showing the text title screen is a truth state variable.
+
 Rule for showing the title screen (this is the text title screen rule):
 	close the status window;[in case we've come to the menu with it open]
 	display the text menu;
 	while 1 is 1:
+		now showing the text title screen is true;
 		let key be the chosen letter;
+		cancel character input in the main window;
+		now showing the text title screen is false;
 		let action be the rule produced by the menu command rules for key;
 		if the outcome of the rulebook is the start the game outcome:
 			close the text menu;
@@ -151,6 +156,7 @@ Rule for showing the title screen (this is the text title screen rule):
 			display the text menu;
 
 To display the text menu:
+	cancel character input in the main window;
 	clear the screen;
 	[redraw status line;
 	say paragraph break;]	
@@ -171,15 +177,39 @@ To display the text menu:
 	say "   Your best winning streak     :  [unless best-winning-streak is greater than 9] [end if][unless best-winning-streak is greater than 99] [end if]   [best-winning-streak][paragraph break]";]
 	say paragraph break;
 	say " ACTIONS:[line break]";
-	say "   [if the file of save data exists]Continue the game[otherwise]New game         [end if]            :    (SPACE)[line break]";
-	if the file of save data exists:
-		say "   New game                     :       N[line break]";
-	if difficulty is 0:
-		say "   Skip to Apprentice level     :       S[line break]";	
-	say "   Display menu                 :       M[line break]";
-	say "   Options                      :       O[line break]";
-	say "   Quit                         :       Q[line break]";  
+	if data value 8 is 1:
+		set menu hyperlink for 32;
+		say "   [if the file of save data exists]Continue the game[otherwise]New game         [end if]            :    (SPACE)[line break]";
+		end menu hyperlink;
+		if the file of save data exists:
+			set menu hyperlink for 78;
+			say "   New game                     :       N   [line break]";
+		if difficulty is 0:
+			set menu hyperlink for 83;
+			say "   Skip to Apprentice level     :       S   [line break]";
+		set menu hyperlink for 77;
+		say "   Display menu                 :       M   [line break]";
+		set menu hyperlink for 79;
+		say "   Options                      :       O   [line break]";
+		set menu hyperlink for 81;
+		say "   Quit                         :       Q   [line break]";
+		end menu hyperlink;
+	otherwise:
+		say "   [if the file of save data exists]Continue the game[otherwise]New game         [end if]            :    (SPACE)[line break]";
+		if the file of save data exists:
+			say "   New game                     :       N[line break]";
+		if difficulty is 0:
+			say "   Skip to Apprentice level     :       S[line break]";
+		say "   Display menu                 :       M[line break]";
+		say "   Options                      :       O[line break]";
+		say "   Quit                         :       Q[line break]";
 	say variable letter spacing;
+
+A glulx input handling rule for a hyperlink-event while showing the text title screen is true (this is the intercept the main menu hyperlinks rule):
+	if data value 8 is 1:
+		convert the hyperlink code to the character code;
+		request hyperlink input again;
+		replace player input;
 
 To close the text menu:
 	clear the screen; 
@@ -287,6 +317,7 @@ Table of Options Menu
 title	order	rule
 "[bold type]Interface options"	1	--
 "Information panels: [bold type][if data value 7 is 1]Off[otherwise]On[end if]"	2	the toggle info panels rule
+"Clickable menus: [bold type][if data value 8 is 1]On[otherwise]Off[end if][unless glulx hyperlinks are supported][italic type] (note: not supported in this interpreter)[roman type][end if]"	3	the toggle menu hyperlinks rule
 ""	20	--
 "[bold type]Reset"	21	--
 "[if difficulty is 0 and data value 1 is 0 and data value 3 is 0 or data value 4 is 0][italic type](Reset the number of victories)[otherwise]Reset the number of victories"	22	the resetting rule
@@ -314,6 +345,21 @@ This is the toggle info panels rule:
 		set data value 7 to 1;
 	otherwise:
 		set data value 7 to 0;
+
+This is the toggle menu hyperlinks rule:
+	if data value 8 is 0:
+		set data value 8 to 1;
+		if glulx hyperlinks are supported:
+			now enable menu hyperlinks is true;
+	otherwise:
+		set data value 8 to 0;
+		now enable menu hyperlinks is false;
+
+Before displaying:
+	if glulx hyperlinks are supported and data value 8 is 1:
+		now enable menu hyperlinks is true;
+	otherwise:
+		now enable menu hyperlinks is false;
 
 
 
