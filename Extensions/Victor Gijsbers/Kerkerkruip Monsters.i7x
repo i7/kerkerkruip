@@ -4842,6 +4842,7 @@ This is the Israfel reunites rule:
 The Israfel reunites rule is listed before the the main actor chooses an action rule in the combat round rules.
 
 To reunite Israfel:
+	now Israfel-reuniting-initiator is Israfel;
 	now Israfel-trance is 1;
 	now Israfel is not asleep;
 	let n be health of Isra;
