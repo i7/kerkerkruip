@@ -363,6 +363,11 @@ Chapter - Some Temple Stuff
 
 An idol is a kind of thing. A temple has an idol called the resident idol. An idol is usually scenery.
 
+After examining an idol:
+	if the noun is the resident idol of the location:
+		unless the player worships a god:
+			say "You feel that you could [italic type]sacrifice[roman type] your powers here.".
+
 Check sacrificing (this is the cannot sacrifice in a temple when statue is not present rule):
 	if location of the player is a temple:
 		let item be resident idol of the location of the player;
@@ -376,7 +381,7 @@ To profane (place - a temple):
 	if player worships a god:
 		let guy be a random god worshipped by the player;
 		if place is dedicated to guy:
-			end the game saying "Angering your own god is never wise.";
+			end the game saying "Wise people do not anger their own gods. You were not wise.";
 		otherwise:
 			say "[line break][Guy] appreciates your profaning of the holy place of [angry guy], and grants you 1 favour!";
 			raise favour of the player by 1.
@@ -569,7 +574,22 @@ Temple of Chton is religious.
 The statue of Chton is an idol in Temple of Chton. The resident idol of the Temple of Chton is the statue of Chton. The description of the statue of Chton is "Strangers to your country are always surprised that Chton is depicted as a good-looking youth rather than as an old man or a skeletal figure. They don't understand that death is the opposite and the abolition of age, illness, decay -- nothing could be more beautiful and seductive.". Understand "smooth" and "grey" as the statue of Chton.
 
 Instead of attacking the statue of Chton:
-	say "With strange aeons even death may die -- but for now this statue seems indestructible.". 
+	say "You grab hold of the statue of Chton, and pull it over with a mighty heave. As it hits the ground, it smashes into thousands of small pieces.";
+	if the player worships Chton:
+		say "[line break]'So you think you can insult me with impunity?' the seductive voice of Chton asks. 'I'm afraid you are wrong. Well -- if you won't be my obedient servant alive, you at least will be my obedient servant dead.' As his words fade, your body starts to rot. Consciousness leaves you as you turn into a mindless zombie.";
+	otherwise:
+		say "[line break]'So you think you can insult me with impunity?' the seductive voice of Chton asks. 'You are wrong, frail mortal.'";
+		now Chton-killing is true;
+	profane the Temple of Chton.	
+	
+Chton-killing is a truth state that varies. Chton-killing is false.
+
+A damage modifier rule (this is the Chton-killing rule):
+	if Chton-killing is true:
+		if the global defender is the player:
+			if the numbers boolean is true:
+				say " + 2 (the deadly cold of Chton's wrath)[run paragraph on]";
+			increase the attack damage by 2.
 
 Instead of touching the statue of Chton:
 	say "It feels as cold as death.".
