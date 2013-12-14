@@ -86,27 +86,12 @@ Last check going (this is the going and retreating in combat rule):
 		if player is retreater:
 			unless forced-action is true:
 				say "[if all enemies are asleep]You sneak back[otherwise]Deciding that discretion is the better part of valour, you bravely run away[end if].";
-			repeat with X running through alive not asleep persons in the location:
-				if the player is alive and the player is not hidden:
-					if X presses the player or the player presses X or the concentration of X is greater than 0:
-						now X does not press the player;
-						now the player does not press X;
-						if the faction of X hates the faction of the player:
-							unless X is non-attacker:
-								try X hitting the player;
-				now concentration of X is 0;
+			extract the player from combat, giving enemies a chance to hit;
 		otherwise:			
 			unless forced-action is true:
 				say "[if all enemies are asleep]You sneak past your enemies[otherwise]You decide to run past your enemies[end if].";
 			now the player is runner;
-			repeat with X running through alive not asleep persons in the location:
-				now X does not press the player;
-				now the player does not press X;
-				if the player is alive:
-					if the faction of X hates the faction of the player:
-						unless X is non-attacker:
-							try X hitting the player;
-				now concentration of X is 0;
+			extract the player from combat, giving enemies a chance to hit;
 		now the player is not runner;
 		now the player is not retreater;				
 		if the player is dead:
@@ -118,7 +103,6 @@ Last check going (this is the going and retreating in combat rule):
 
 Check looking when the player is dead:
 	do nothing instead.
-	
 
 An attack modifier rule (this is the running is risky rule):
 	if the global defender is a runner pc:

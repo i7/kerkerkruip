@@ -1627,7 +1627,7 @@ Smoke rule (this is the smoke at the Portal of Smoke rule):
 The portal to the elemental plane of smoke is stone scenery in Portal of Smoke. Understand "entrance" as portal to the elemental plane of smoke. The description of the portal to the elemental plane of smoke is "You cannot make out any details, given all the smoke that is coming from it; but you could enter the portal if you really wanted to.".
 
 Instead of entering the portal to the elemental plane of smoke when the player can move:
-	consider the sudden combat reset rules for the player;
+	extract the player from combat;
 	let item be portal to Kerkerkruip;
 	move item to Elemental Plane of Smoke;
 	move player to Elemental Plane of Smoke;

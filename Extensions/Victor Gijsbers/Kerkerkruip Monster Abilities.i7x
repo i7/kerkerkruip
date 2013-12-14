@@ -767,7 +767,7 @@ First carry out an actor teleporting (this is the choose a destination rule):
 
 First carry out an actor teleporting (this is the teleport away from combat rule):
 	unless teleportation-from is the location and teleportation-destination is the location:
-		consider the sudden combat reset rules for the actor.	
+		extract the actor from combat;	
 
 Last carry out an actor teleporting (this is the actually do the teleportation rule):
 	move actor to teleportation-destination;

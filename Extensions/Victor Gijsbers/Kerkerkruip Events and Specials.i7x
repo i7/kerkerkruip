@@ -59,7 +59,7 @@ Instead of exiting in Elemental Plane of Smoke when the player can move:
 		say "If only you could find that portal again!".
 
 Instead of entering the portal to Kerkerkruip when the player can move:
-	consider the sudden combat reset rules for the player;
+	extract the player from combat;
 	move player to Portal of Smoke;
 	now the take no time boolean is false.
 			

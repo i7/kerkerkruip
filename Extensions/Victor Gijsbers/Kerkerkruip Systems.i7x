@@ -219,21 +219,16 @@ Carry out digging:
 
 To do the dig move:
 	if the player can move:
-		if the combat status is not peace and the player is not hidden:
+		if the combat status is not peace:
 			now the player is runner;
-			repeat with X running through alive persons in the location:
-				now X does not press the player;
-				now the player does not press X;
-				if the player is alive:
-					if the faction of X hates the faction of the player:
-						try X hitting the player;
-				now concentration of X is 0;
+			extract the player from combat, giving enemies a chance to hit;
 			now the player is not runner;
 		if the player is alive and the player can move:
 			let place be the room noun of location;
 			now retreat location is location;
 			move the player to place;
 			now the take no time boolean is false.
+
 
 Last carry out looking when the location is a tunnel (this is the hint about other rooms rule):
 	let K be a list of directions;
@@ -427,6 +422,7 @@ Carry out an actor challenging someone in (this is the place challenged opponent
 	move the noun to the staging area of the second noun;
 	if the second noun is a challenged-group-inviting arena and the noun is group leading and the noun is not defeated individually and the noun is initially accompanied:
 		repeat with the guy running through people who accompany the noun:
+			extract the guy from combat;
 			move the guy to the location of the noun;
 
 Carry out an actor challenging someone in (this is the impose arena faction rule):
@@ -446,6 +442,7 @@ The arena arrival rule is listed last in the carry out challenging it in rules.
 Arena arrival of something is an activity on objects.
 
 For arena arrival of an arena (called destination) (this is the move the challenger to the arena rule):
+	extract the person asked from combat;
 	move the person asked to the destination.
 
 Section - Getting out of an Arena
@@ -471,6 +468,7 @@ For arena exit of an arena (called place) (this is the standard for arena exit r
 	say "You are [bold type]transported back[roman type] from the [place].";
 
 After arena exit of an arena (called place) (this is the finally return the player from the arena rule):
+	[there should never be combat at this point, so we shouldn't need to extract the player from combat]
 	move player to the challenge site of the place.
 
 Section - Actions in an Arena
@@ -1379,27 +1377,60 @@ Before printing the locale description of a room (this is the environmental effe
 
 Chapter - Sudden combat reset
 
+Section - To Extract From Combat
+
+Last chance to hit is a truth state that varies.
+
+To extract (guy - a person) from combat, giving enemies a chance to hit:
+	if the guy is off-stage, stop;
+	if giving enemies a chance to hit and the guy is not hidden:
+		now last chance to hit is true;
+	follow the sudden combat reset rules for guy;
+	now last chance to hit is false;
+
+Section - The Sudden Combat Reset Rules
+
 [After teleportation, and other sudden move actions of the player, concentration and so on ought to be reset. They work on the location of the player, so should be called _before_ the move.]
 
 The sudden combat reset rules are an object based rulebook.
 
-A sudden combat reset rule for a person (called the deserter) (this is the sudden concentration reset rule):
-	if the deserter is the player:
-		repeat with guy running through alive persons enclosed by the location:
-			now concentration of guy is 0;
-	otherwise:
-		now concentration of the deserter is 0;
+[This could be a whole rulebook in itself...]
+To decide whether (fighter - a person) would take a parting shot at (deserter - a person):
+	if last chance to hit is false, no;
+	unless deserter is the player, no;
+	if fighter is the player or fighter is the deserter, no;
+	if fighter is non-attacker or fighter is asleep or fighter is not alive, no;
+	unless fighter opposes deserter, no;
+	if deserter is runner, yes;
+	if concentration of fighter is greater than 0, yes;
+	if fighter presses deserter or deserter presses fighter, yes;
+	no.
 
+A first sudden combat reset rule for a person (called the deserter) (this is the last chance to hit the deserter rule):
+	[this rule could use optimizing if things get slow - watch out for teleportation grenades in rooms with hundreds of people!]
+	repeat with X running through alive persons in the location of the deserter:
+		if X would take a parting shot at the deserter:
+			try X hitting the deserter;
+		now X does not press the deserter;
+		now the deserter does not press X;
+	
 A sudden combat reset rule for a person (called the deserter) (this is the reset the deserter to at-Inactive rule):
 	now the deserter is at-Inactive;
 
-A sudden combat reset rule for a person (called the deserter) (this is the sudden delayed actions reset rule):
+A last sudden combat reset rule for a person (called the deserter) (this is the sudden delayed actions reset rule):
 	if the deserter is the player:
 		repeat with guy running through alive persons enclosed by the location:
 			clean the table of delayed actions for the guy;
 	otherwise:
 		clean the table of delayed actions for the deserter;
  
+A last sudden combat reset rule for a person (called the deserter) (this is the sudden concentration reset rule):
+	if the deserter is the player:
+		repeat with guy running through alive persons enclosed by the location:
+			now concentration of guy is 0;
+	otherwise:
+		now concentration of the deserter is 0;
+
 Chapter - Forced action
 
 Forced-action is a truth state that varies. Forced-action is false. [When it is true, we don't say anything about a player's motivation. Currently used for the boots of wandering.]
@@ -1501,7 +1532,7 @@ Stage 3: Does something in the destination room want to give a custom effect to 
 Stage 4: Otherwise, we apply standard damage in the LAST FALLING RULE.]
 
 Falling rule (this is the move the falling person to the destination rule):
-	consider the sudden combat reset rules for falling-test-person;
+	extract falling-test-person from combat;
 	move falling-test-person to falling-destination.
 
 Last falling rule (this is the standard deal falling damage rule):

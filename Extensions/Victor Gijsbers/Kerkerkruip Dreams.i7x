@@ -54,6 +54,7 @@ Dream of Tungausy Shaman
 with 20 blank rows
 	
 To do a dream:
+	extract the player from combat;
 	if at least one dream is current-test-dream:
 		let item be a random current-test-dream dream;
 		dream item;
@@ -90,6 +91,7 @@ To wake the player up:
 	now the player is the dreamer;
 	now the player is not asleep;
 	now main actor is the player;
+	extract the player from combat;
 	if the player is not in dreamer-location:
 		move the player to dreamer-location;
 	otherwise:
@@ -416,6 +418,9 @@ A menu question rule (this is the ordering Julian rule):
 			say "";
 		if m is 3:
 			say "";
+		[Hi Remko! Consider using this new phrase before moving a person:
+		extract the player from combat;
+		-- Mike]
 		move the player to Julian's room;
 		exit.]
 

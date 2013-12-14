@@ -1847,6 +1847,8 @@ Carry out reaping:
 			say "You attempt to reap [the noun], but the strain is too much for your weak body." instead;
 	unless teleportation is impossible for the player:
 		let destination be the location of the noun;
+		if destination is not the location:
+			extract the player from combat;
 		say "You live in the aging cells of an infant's face, and your voice can be heard in the silence after each heartbeat. Death attends on us always, and in his guise you find yourself poised to reap [the noun] --[paragraph break]";
 		now retreat location is destination;
 		move player to destination;
@@ -6444,7 +6446,7 @@ Every turn (this is the tweak smoke demon rule):
 		now defence of the smoke demon is n.
 
 To have the smoke demon disappear from (place - a room):
-	follow the sudden combat reset rules for the smoke demon;
+	extract the smoke demon from combat;
 	remove smoke demon from play;
 	now smoke demon time-out is a random number between 5 and 10;
 	if place is the location:
