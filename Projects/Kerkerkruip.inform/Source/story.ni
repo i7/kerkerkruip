@@ -166,6 +166,6 @@ Section - Numbered Disambiguation Fix
 Definition: an object (called item) is still-disambiguable if disambiguation ID of item > 0.
 
 Before looking or taking inventory (this is the reset disambiguation IDs rule):
-	repeat with item running through still-disambiguable objects:
+	repeat with item running through still-disambiguable things:
 		now disambiguation ID of item is 0.
 
