@@ -87,7 +87,7 @@ Report wearing:
 		now the player is wearing the hidden identity of the noun;
 		set pronouns from the hidden identity of the noun;
 		remove the noun from play;
-		say "As soon as you put on [the noun], your flesh crawls. You realise that [the noun] [is-are] actually the [bold type][hidden identity of the noun][roman type]!" instead.
+		say "As soon as you put on [the noun], your flesh crawls. You realise that [the noun] [is-are] actually [bold type][the hidden identity of the noun][roman type]!" instead.
 
 Report readying:
 	unless the hidden identity of the noun is the non-thing:
@@ -96,7 +96,7 @@ Report readying:
 		now the player carries the hidden identity of the noun;
 		now the hidden identity of the noun is readied;
 		set pronouns from the hidden identity of the noun;
-		say "As soon as you ready [the noun], a chilling feeling goes through your arms. [The noun] [is-are] actually the [bold type][hidden identity of the noun][roman type]!" instead.
+		say "As soon as you ready [the noun], a chilling feeling goes through your arms. [The noun] [is-are] actually [bold type][the hidden identity of the noun][roman type]!" instead.
 
 Last dungeon interest rule (this is the hidden identities also revealed by enemies rule):
 	repeat with item running through wearable hidden-identifiable things:
@@ -2732,7 +2732,7 @@ Section - Sneaking sword (monster)
 
 [Mouser carries it]
 
-There is a sword called sneaking sword. The description of sneaking sword is "This sword is especially suitable for making sneaky attacks, dealing [blood magic level of sneaking sword] extra damage. This damage bonus will increase by 1 if the sword is fed." Sneaking sword is not proper-named.
+There is a sword called the sneaking sword. The description of sneaking sword is "This sword is especially suitable for making sneaky attacks, dealing [blood magic level of sneaking sword] extra damage. This damage bonus will increase by 1 if the sword is fed."
 
 The special weapon info of the sneaking sword is "; +[blood magic level of sneaking sword] damage when hidden[run paragraph on]"
 
@@ -2980,8 +2980,9 @@ Last after reporting an actor hitting (this is the hit again with the dagger of 
 
 Section - The backstabber (cursed)
 
-The backstabber is a cursed curse-identified dagger. The backstabber is proper-named.
+There is a cursed curse-identified dagger called the backstabber.
 The backstabber is iron.
+Understand "dagger" as the backstabber.
 
 A treasure placement rule (this is the double strike can be backstabber rule):
 	if a random chance of 1 in 4 succeeds:
