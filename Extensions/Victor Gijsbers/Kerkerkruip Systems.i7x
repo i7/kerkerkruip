@@ -493,9 +493,14 @@ Last when play begins (this is the set base size rule):
 	repeat with guy running through persons:
 		now base size of guy is size of guy.
 
-Understand the size property as describing a thing.
+Understand the size property as describing a weapon.
+Understand the size property as describing a person.
 
 Before printing the name of a weapon (called item):
+	if item is not medium:
+		say "[size of item] ".
+
+Before printing the plural name of a weapon (called item):
 	if item is not medium:
 		say "[size of item] ".
 
@@ -859,6 +864,11 @@ Before printing the name of a thing (called item):
 		if item is not proper-named:
 			say "[material-adjective of material of item] ".
 
+Before printing the plural name of a thing (called item):
+	if material of item is not original material of item:
+		if item is not proper-named:
+			say "[material-adjective of material of item] ".
+
 First after printing the name of a thing (called item):
 	if material of item is not original material of item:
 		if item is proper-named:
@@ -945,6 +955,15 @@ Before printing the name of hot not flaming thing (called item):
 			say "very hot [run paragraph on]";
 		otherwise:
 			say "blazingly hot [run paragraph on]".
+
+Before printing the plural name of hot not flaming thing (called item):
+	unless not-mentioning-hotness is true:
+		if heat strength of item is less than 3:
+			say "hot [run paragraph on]";
+		otherwise if heat strength of item is less than 6:
+			say "very hot [run paragraph on]";
+		otherwise:
+			say "blazingly hot [run paragraph on]".
 		
 Understand "hot" as a thing when the heat strength of the item described is greater than 0.	
 Understand "very hot" as a thing when the heat strength of the item described is greater than 2.
@@ -991,6 +1010,10 @@ Every turn (this is the flaming items burn away rule):
 			remove the item from play.
 			
 Before printing the name of a flaming thing (called item):
+	unless not-mentioning-flaming is true:
+		say "burning [run paragraph on]".
+
+Before printing the plural name of a flaming thing (called item):
 	unless not-mentioning-flaming is true:
 		say "burning [run paragraph on]".
 

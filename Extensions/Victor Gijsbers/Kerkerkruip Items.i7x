@@ -118,7 +118,14 @@ Section - Cursed
 A thing can be cursed. A thing is usually not cursed.
 A thing can be curse-identified. A thing is usually not curse-identified.
 
-Understand the cursed property as describing a thing.
+Understand the curse-identified property as describing a thing.
+
+Definition: a thing (called item) is improperly-curse-identified if item is not cursed and item is curse-identified.
+
+Before looking or taking inventory (this is the fix curse-idenfication before showing lists of items rule):
+	repeat with item running through improperly-curse-identified things:
+		now item is not curse-identified.
+
 
 Section - Cursed clothing
 
@@ -131,6 +138,9 @@ After wearing a cursed not curse-identified thing:
 	now the noun is curse-identified.
 		
 Before printing the name of a cursed curse-identified thing:
+	say "cursed ".
+
+Before printing the plural name of a cursed curse-identified thing:
 	say "cursed ".
 
 A treasure placement rule:
