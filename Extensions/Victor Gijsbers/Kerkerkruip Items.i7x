@@ -759,7 +759,7 @@ The blood magic cost of antler of the tungausy shaman is 2.
 The blood magic level of antler of the tungausy shaman is 0.
 The blood magic maximum of antler of the tungausy shaman is 6.
 
-The description of the antler of the tungausy shaman is "Resembling the antler of a deer, this piece of jewelry is used by the Tungausy shaman to have the spirits help him in his quest. The spirits may be mischievous, however, so be careful. [italic type](When you are under the influence of ment, it has a [50 + 5 times blood magic level of the antler of the tungausy shaman] percent chance to correctly predict the attack strenght of the opponent[unless blood magic level of the antler of the tungausy shaman is blood magic maximum of the antler of the tungausy shaman]. You can increase this chance by 5 percent if you feed the antler [current blood cost of the antler of the tungausy shaman] blood[end if].) [roman type]".
+The description of the antler of the tungausy shaman is "Resembling the antler of a deer, this piece of jewelry is used by the Tungausy shaman to have the spirits help him in his quest. The spirits may be mischievous, however, so be careful. [italic type](When you are under the influence of ment, it has a [50 + 5 times blood magic level of the antler of the tungausy shaman] percent chance to correctly predict the attack strength of the opponent[unless blood magic level of the antler of the tungausy shaman is blood magic maximum of the antler of the tungausy shaman]. You can increase this chance by 5 percent if you feed the antler [current blood cost of the antler of the tungausy shaman] blood[end if].) [roman type]".
 
 antlerattackstrength is a number that varies.
 
