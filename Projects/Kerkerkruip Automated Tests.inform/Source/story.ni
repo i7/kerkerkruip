@@ -19,7 +19,7 @@ Include version 5/131204 of Inform ATTACK by Victor Gijsbers.
 
 Section - Include all the Kerkerkruip extensions
 
-Include Kerkerkruip Permadeath by Victor Gijsbers.
+[Include Kerkerkruip Permadeath by Victor Gijsbers.]
 [Include Kerkerkruip Persistent Data by Victor Gijsbers.]
 Include Kerkerkruip Dungeon Generation by Victor Gijsbers.
 Include Kerkerkruip Events by Victor Gijsbers.
@@ -41,6 +41,9 @@ Include Kerkerkruip Start and Finish by Victor Gijsbers.
 Include Kerkerkruip Final Declarations by Victor Gijsbers.
 Include Kerkerkruip Help and Hints by Victor Gijsbers.
 
+Section - Testing extensions
+
+Include Autoundo for Object Response Tests by Mike Ciul.
 
 Section - Increase memory settings
 
@@ -247,3 +250,36 @@ Section - Limited Help (In place of Section - Help in Kerkerkruip Help and Hints
 
 Section - No Achievements (in place of Section - Achievements in Kerkerkruip Help and Hints by Victor Gijsbers)
 
+Volume - The Tests
+
+Chapter - Testing the tests
+
+A test set is a kind of value. Red set and blue set are test sets.
+
+The current test set is a test set that varies.
+
+Done testing is a truth state that varies.
+
+To decide whether testing (T - a test set):
+	if done testing is true, no;
+	decide on whether or not the current test set is T;
+
+First when play begins (this is the run all tests rule):
+	Repeat with T running through test sets:
+		now the current test set is T;
+		say "Now testing [T].";
+		wait for any key;
+		if current save-restore status is failure to save, now current save-restore status is the result of saving undo state;
+		If current save-restore status is successful save, stop;
+	say "done testing.";
+	wait for any key;
+	now done testing is true;
+
+Before reading a command:
+	restore undo state.
+	
+Last when play begins when testing red set:
+	say "red.";
+	
+Last when play begins when testing blue set:
+	say "blue.";

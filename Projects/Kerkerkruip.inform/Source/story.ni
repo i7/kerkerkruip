@@ -94,7 +94,6 @@ Generation info is a truth state that varies. Generation info is [true]false.
 
 Section - Testing - Not for release
 
-
 [Last when play begins:
 	move Fafhrd to Entrance Hall;
 	now Fafhrd is asleep.]
@@ -158,14 +157,3 @@ Dontparsing is an action applying to nothing. Understand "dontparse" as dontpars
 
 Carry out dontparsing:
 	do nothing instead.
-	
-Section - Numbered Disambiguation Fix
-
-[Not sure if this is necessary, but it won't do any harm!]
-
-Definition: an object (called item) is still-disambiguable if disambiguation ID of item > 0.
-
-Before looking or taking inventory (this is the reset disambiguation IDs rule):
-	repeat with item running through still-disambiguable things:
-		now disambiguation ID of item is 0.
-
