@@ -264,22 +264,35 @@ To decide whether testing (T - a test set):
 	if done testing is true, no;
 	decide on whether or not the current test set is T;
 
-First when play begins (this is the run all tests rule):
+To start the/-- next test:
 	Repeat with T running through test sets:
 		now the current test set is T;
-		say "Now testing [T].";
-		wait for any key;
-		if current save-restore status is failure to save, now current save-restore status is the result of saving undo state;
+		now current save-restore status is the result of saving undo state;
 		If current save-restore status is successful save, stop;
 	say "done testing.";
 	wait for any key;
 	now done testing is true;
 
+First when play begins:
+	start the next test;
+	if done testing is false, consider the scenario rules.
+	
+Last when play begins:
+	if done testing is false, consider the test case rules.
+	
+The scenario rules are a rulebook.
+
+The test case rules are a rulebook.
+
 Before reading a command when done testing is false:
 	restore undo state.
 	
-Last when play begins when testing red set:
+A scenario rule:
+	say "Now testing [the current test set].";
+	wait for any key;
+	
+Test case when testing red set:
 	say "red.";
 	
-Last when play begins when testing blue set:
+Test case when testing blue set:
 	say "blue.";
