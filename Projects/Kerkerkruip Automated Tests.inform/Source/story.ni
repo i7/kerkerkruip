@@ -275,7 +275,7 @@ First when play begins (this is the run all tests rule):
 	wait for any key;
 	now done testing is true;
 
-Before reading a command:
+Before reading a command when done testing is false:
 	restore undo state.
 	
 Last when play begins when testing red set:
