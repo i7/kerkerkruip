@@ -37,13 +37,14 @@ Include Kerkerkruip Events and Specials by Victor Gijsbers.
 Include Kerkerkruip Dreams by Victor Gijsbers.
 Include Kerkerkruip Ugly Special Cases by Victor Gijsbers.
 Include Kerkerkruip Start and Finish by Victor Gijsbers.
-[Include Kerkerkruip Tests by Victor Gijsbers.]
+Include Kerkerkruip Tests by Victor Gijsbers.
 Include Kerkerkruip Final Declarations by Victor Gijsbers.
 Include Kerkerkruip Help and Hints by Victor Gijsbers.
 
 Section - Testing extensions
 
 Include Autoundo for Object Response Tests by Mike Ciul.
+Include Simple Unit Tests by Dannii Willis.
 
 Section - Increase memory settings
 
@@ -250,11 +251,13 @@ Section - Limited Help (In place of Section - Help in Kerkerkruip Help and Hints
 
 Section - No Achievements (in place of Section - Achievements in Kerkerkruip Help and Hints by Victor Gijsbers)
 
+Section - No Menu Command Console (in place of Section - The test object console in Kerkerkruip Tests by Victor Gijsbers)
+
 Volume - The Tests
 
-Chapter - Testing the tests
+Chapter - Test Sets
 
-A test set is a kind of value. Red set and blue set are test sets.
+A test set is a kind of value. Aite champions vs bat is a test set.
 
 The current test set is a test set that varies.
 
@@ -264,16 +267,8 @@ To decide whether testing (T - a test set):
 	if done testing is true, no;
 	decide on whether or not the current test set is T;
 
-To start the/-- next test:
-	Repeat with T running through test sets:
-		now the current test set is T;
-		now current save-restore status is the result of saving undo state;
-		If current save-restore status is successful save, stop;
-	say "done testing.";
-	wait for any key;
-	now done testing is true;
-
 First when play begins:
+	try switching the story transcript on;
 	start the next test;
 	if done testing is false, consider the scenario rules.
 	
@@ -284,15 +279,91 @@ The scenario rules are a rulebook.
 
 The test case rules are a rulebook.
 
-Before reading a command when done testing is false:
+Chapter - Resetting the Game After Each Test Set (in place of Chapter - The Unit test rules unindexed in Simple Unit Tests by Dannii Willis)
+
+The current unit test name is an indexed text variable.
+
+To start the/-- next test:
+	Repeat with T running through test sets:
+		now the current test set is T;
+		if the result of saving undo state is successful save, stop;
+	stop capturing text;
+	say "done testing.";
+	wait for any key;
+	now done testing is true;
+
+For reading a command when done testing is false:
+	stop capturing text;
 	restore undo state.
 	
-A scenario rule:
+Chapter - Helpful phrases
+
+To extract (guy - a person) to (place - a room):
+	extract guy from combat;
+	move guy to place;
+	
+To have (guy - a person) defeat (loser - a person):
+	Now the health of loser is -1;
+	Have an event of guy killing loser;
+	
+To have the player sacrifice (stuff - a power):
+	now the current question is "Which power do you want to sacrifice? (Please enter a number.)";
+	now sacrifice-lijst-2 is {};
+	add stuff to sacrifice-lijst-2;
+	now sacrifice-lijst is {"sacrifice", "don't sacrifice"};
+	now the number understood is 1;
+	follow the sacrifice rule.
+
+Chapter - Test Cases
+
+A first scenario rule:
+	stop capturing text;
 	say "Now testing [the current test set].";
+	Now the current unit test name is "[the current test set]";
 	wait for any key;
-	
-Test case when testing red set:
-	say "red.";
-	
-Test case when testing blue set:
-	say "blue.";
+
+A scenario rule when testing Aite champions vs bat:
+	now Bodmall is testobject;
+	now Hall of Gods is testobject;
+	now Drakul's lifeblood is testobject;
+	now Temple of Chton is testobject;
+		
+A test case when testing Aite champions vs bat:
+	try butterflying;
+	try meatboying;
+	extract the player to the location of Drakul's lifeblood;
+	try taking Drakul's lifeblood;
+	extract the player to the location of Bodmall;
+	have the player defeat Bodmall;
+	extract the player to temple of Chton;
+	have the player sacrifice a random granted power;
+	assert that the favour of the player with Chton is 4;
+	stop capturing text;
+	extract the player to Hall of Gods;
+	have the player and the healer of aite fight in Arena of the Gods;
+	try drinking Drakul's lifeblood;
+	try turning bat;
+	let tested player damage be false;
+	let tested gigantic player escape be false;
+	let tested huge player escape be false;
+	while tested player damage is false or tested gigantic player escape is false or tested huge player escape is false:
+		now the health of the healer of Aite is 100;
+		let previous health be the health of the player;
+		start capturing text;
+		have Aite intervene on behalf of the healer of Aite;
+		stop capturing text;
+		let the message be an indexed text;
+		now the message is "[the captured text]";
+		if the message matches the regular expression "you":
+			showme the message;
+			assert that the message matches the regular expression "in front of";
+			if the previous health is greater than the health of the player:
+				now tested player damage is true;
+				assert that the message matches the regular expression "crash into";
+			otherwise:
+				if the message matches the regular expression "gigantic":
+					now tested gigantic player escape is true;
+					assert that the message matches the regular expression "fly around";
+				otherwise:
+					now tested huge player escape is true;
+					assert that the message matches the regular expression "fly over";
