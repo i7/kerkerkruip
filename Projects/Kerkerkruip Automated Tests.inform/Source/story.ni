@@ -315,7 +315,8 @@ To display test results:
 	Repeat through Table of Test Results:
 		if failures entry is at least 1:
 			say "[line break]Failures for [test set entry as a test set]:[paragraph break]";
-			say failure messages entry;
+			say failure messages entry;	
+	say "To view a full transcript of all tests, see the file 'testtranscript.glkdata' in the project directory.";
 	wait for any key;
 	
 Chapter - Test Sets
