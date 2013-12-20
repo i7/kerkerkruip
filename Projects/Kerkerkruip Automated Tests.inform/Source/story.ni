@@ -46,6 +46,8 @@ Section - Testing extensions
 Include Autoundo for Object Response Tests by Mike Ciul.
 Include Simple Unit Tests by Dannii Willis.
 
+Use maximum capture buffer length of at least 5280.
+
 Section - Increase memory settings
 
 Use MAX_PROP_TABLE_SIZE of 800000.
@@ -255,11 +257,75 @@ Section - No Menu Command Console (in place of Section - The test object console
 
 Volume - The Tests
 
+Chapter - Persistent data
+
+The file of test transcript is called "testtranscript".
+
+To log (T - an indexed text):
+	transcribe and stop capturing text;
+	append "**** [T][line break]" to file of test transcript;
+	start capturing text;
+	
+To transcribe and stop capturing text/--:
+	stop capturing text;
+	append "[the captured text]" to file of test transcript;
+	 
+To transcribe and restart capturing text/--:
+	transcribe and stop capturing text;
+	start capturing text;
+	
+The file of test results is called "testresults".
+
+Table of Test Results
+Test Set (number)	Total (number)	Failures (number)	Failure Messages (indexed text)
+with 100 blank rows
+
+To record a test attempt:
+	increment the test assertion count;
+	increment the total assertion count;
+	Let testnum be current test set as a number;
+	if there is a test set of testnum in Table of Test Results:
+		choose row with test set of testnum in Table of Test Results;
+	otherwise:
+		choose a blank row in Table of Test Results;
+		now test set entry is testnum;
+		now total entry is 0;
+		now failures entry is 0;
+		now failure messages entry is "";
+	increment the total entry;
+	
+To record a/-- failure of/-- (msg - an indexed text):
+	Let testnum be current test set as a number;
+	choose row with test set of testnum in Table of Test Results;	
+	increment the assertion failures count;
+	increment the failures entry;
+	now the failure messages entry is "[failure messages entry]Failure for test: [the current test set], assertion [the test assertion count]: [msg][paragraph break]";
+	log msg;
+	
+To display test results:
+	say "Test results:[paragraph break]";
+	let grand test total be 0;
+	let grand test failures be 0;
+	Repeat through Table of Test Results:
+		now grand test total is grand test total plus total entry;
+		now grand test failures is grand test failures plus failures entry;
+		say "[test set entry as a test set]: [total entry] tests, [failures entry] failures[line break]";
+	say line break;
+	say "Total: [grand test total] tests, [grand test failures] failures.";
+	Repeat through Table of Test Results:
+		if failures entry is at least 1:
+			say "[line break]Failures for [test set entry as a test set]:[paragraph break]";
+			say failure messages entry;
+	wait for any key;
+	
 Chapter - Test Sets
 
 A test set is a kind of value. Aite champions vs bat is a test set.
 
 The current test set is a test set that varies.
+
+To decide what number is (T - a test set) as a number: (- {T} -);
+To decide what test set is (T - a number) as a test set: (- {T} -);
 
 Done testing is a truth state that varies.
 
@@ -268,7 +334,7 @@ To decide whether testing (T - a test set):
 	decide on whether or not the current test set is T;
 
 First when play begins:
-	try switching the story transcript on;
+	write "Test transcript for Kerkerkruip.[line break]" to file of test transcript;
 	start the next test;
 	if done testing is false, consider the scenario rules.
 	
@@ -304,9 +370,8 @@ To decide whether (O - a random outcome) became the/-- possibility:
 	no.
 	
 To mark the/-- outcome as/-- achieved:
-	stop capturing text;
-	say "achieved outcome [the outcome being tested].";
-	now the outcome being tested is achieved.
+	[say "achieved outcome [the outcome being tested].";]
+	now the outcome being tested is achieved;
 	
 To test (E - a randomized event):
 	now the event being tested is E;
@@ -314,18 +379,53 @@ To test (E - a randomized event):
 		if every possible random outcome is achieved, stop;
 		follow the randomized event testing rules for E;
 		follow the random outcome testing rules;
-	stop capturing text;
-	Let N be the number of not achieved possible random outcomes;
-	now the total assertion count is the total assertion count + N;
-	now the test assertion count is the test assertion count + N;
-	now the assertion failures count is the assertion failures count + N;
-	say "After [the maximum number of random event iterations] iterations, [the list of not achieved possible random outcomes] were still not tested."
+	Repeat with the attempt running through not achieved possible random outcomes:
+		record a test attempt;
+		let msg be indexed text;
+		now msg is "After [the maximum number of random event iterations] iterations of [the event being tested], [the attempt] was still not tested.";
+		record a failure of msg;
 
 Randomized event testing is a randomized event based rulebook.
 
 Random outcome testing is a rulebook.
 
 The event description is an indexed text that varies.
+
+Chapter - The assert phrase (in place of Chapter - The assert phrase in Simple Unit Tests by Dannii Willis)
+
+The test assertion count is a number variable.
+The total assertion count is a number variable.
+The assertion failures count is a number variable.
+
+[ Assert that two values are the same ]
+To assert that/-- (A - a value) is (B - a value):
+	stop capturing text;
+	record a test attempt;
+	unless A is B:
+		Let error_msg be an indexed text;
+		now error_msg is "Expected: [B], Got: [A][line break]";
+		record a failure of error_msg;
+	start capturing text;
+
+[ Assert that any condition is true, but with less information on failure ]
+To assert that/-- (C - a condition):
+	(- Assert_Condition({C}); -).
+
+Include (-
+[ Assert_Condition C;
+	EndCapture();
+	(+ the test assertion count +)++;
+	(+ the total assertion count +)++;
+	if (~~(C))
+	{
+		(+ the assertion failures count +)++;
+		print "Failure for test: ";
+		print (INDEXED_TEXT_TY_Say) (+ the current unit test name +);
+		print ", assertion: ", (+ the test assertion count +), ". (Asserted condition is false)^";
+	}
+	StartCapture();
+];
+-).
 
 Chapter - Resetting the Game After Each Test Set (in place of Chapter - The Unit test rules unindexed in Simple Unit Tests by Dannii Willis)
 
@@ -335,13 +435,14 @@ To start the/-- next test:
 	Repeat with T running through test sets:
 		now the current test set is T;
 		if the result of saving undo state is successful save, stop;
+		read file of test results into Table of Test Results;
 	stop capturing text;
-	say "done testing.";
-	wait for any key;
 	now done testing is true;
+	display test results;
 
 For reading a command when done testing is false:
-	stop capturing text;
+	transcribe and stop capturing text;
+	write file of test results from Table of Test Results;
 	restore undo state.
 	
 Chapter - Helpful phrases
@@ -363,21 +464,17 @@ To have the player sacrifice (stuff - a power):
 	follow the sacrifice rule.
 
 To assert that (message - an indexed text) includes (pattern - an indexed text):
-	stop capturing text;
-	increment the test assertion count;
-	increment the total assertion count;
+	record a test attempt;
 	unless message matches the regular expression pattern:
-		increment the assertion failures count;
-		say "Failure for test: [the current unit test name], assertion: [the test assertion count]. Regular expression '[pattern]' was not found in the text: [message][line break]";
-	start capturing text;
+		Let error_msg be an indexed text;
+		now error_msg is "Regular expression '[pattern]' was not found in the text:[paragraph break]'[message]'[line break]";
+		record a failure of error_msg;
 
 Chapter - Test Cases
 
 A first scenario rule:
-	stop capturing text;
-	say "Now testing [the current test set].";
 	Now the current unit test name is "[the current test set]";
-	wait for any key;
+	log "Now testing [the current test set].";
 
 A scenario rule when testing Aite champions vs bat:
 	now Bodmall is testobject;
@@ -400,7 +497,6 @@ A test case when testing Aite champions vs bat:
 	extract the player to temple of Chton;
 	have the player sacrifice a random granted power;
 	assert that the favour of the player with Chton is 4;
-	stop capturing text;
 	extract the player to Hall of Gods;
 	have the player and the healer of aite fight in Arena of the Gods;
 	try drinking Drakul's lifeblood;
@@ -417,19 +513,19 @@ Randomized event testing for aite spike vs bat:
 	let previous health be the health of the player;
 	now player-damaged is false;
 	now player-targeted is false;
-	start capturing text;
+	transcribe and restart capturing;
 	have Aite intervene on behalf of the healer of Aite;
-	stop capturing text;
+	transcribe and stop capturing;
 	now the event description is "[the captured text]";
+	start capturing text;
 	if the health of the player is less than the previous health, now player-damaged is true;
-	showme the event description;
 	if the event description matches the regular expression "you":
 		now player-targeted is true;
 		assert that the event description includes "in front of";
 	
-Bat crashing into spike is a random outcome. It results from Aite spike vs bat.
-Bat avoiding huge spike is a random outcome. It results from Aite spike vs bat.
-Bat avoiding gigantic spike is a random outcome. It results from Aite spike vs bat.
+bat crashing into spike is a random outcome. It results from Aite spike vs bat.
+bat avoiding huge spike is a random outcome. It results from Aite spike vs bat.
+bat avoiding gigantic spike is a random outcome. It results from Aite spike vs bat.
 
 Random outcome testing when bat crashing into spike became the possibility:
 	if player-damaged is false, make no decision;
