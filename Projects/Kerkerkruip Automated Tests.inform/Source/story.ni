@@ -279,6 +279,47 @@ The scenario rules are a rulebook.
 
 The test case rules are a rulebook.
 
+Chapter - Randomized Events
+
+A randomized event is a kind of value. Aite spike vs bat is a randomized event.
+
+A random outcome is a kind of value. Bat crashing into spike, bat avoiding huge spike, and bat avoiding gigantic spike are random outcomes.
+
+A random outcome can be achieved.
+
+Event resolution relates various random outcomes to one randomized event. The verb to result from (he results from, they result from, it is required, it is resulting from) implies the event resolution relation.
+
+The event being tested is a randomized event that varies.
+
+The outcome being tested is a random outcome that varies.
+
+Definition: a random outcome is possible if it results from the event being tested;
+
+To decide whether (O - a random outcome) became the/-- possible outcome/--:
+	if O is not achieved and O is possible:
+		now the outcome being tested is O;
+		yes;
+	no.
+	
+To mark the/-- outcome as/-- achieved:
+	stop capturing text;
+	say "achieved outcome [the outcome being tested].";
+	now the outcome being tested is achieved.
+	
+To test (E - a randomized event):
+	now the event being tested is E;
+	Repeat with i running from 1 to 100:
+		if every possible random outcome is achieved, stop;
+		follow the randomized event testing rules for E;
+		follow the random outcome testing rules;
+	say "After 100 iterations, [the list of not achieved possible random outcomes] were still not tested."
+
+Randomized event testing is a randomized event based rulebook.
+
+Random outcome testing is a rulebook.
+
+The event description is an indexed text that varies.
+
 Chapter - Resetting the Game After Each Test Set (in place of Chapter - The Unit test rules unindexed in Simple Unit Tests by Dannii Willis)
 
 The current unit test name is an indexed text variable.
@@ -328,6 +369,11 @@ A scenario rule when testing Aite champions vs bat:
 	now Drakul's lifeblood is testobject;
 	now Temple of Chton is testobject;
 		
+[TODO: create randomized test cases
+attempt rulebook does something that might make the test qualify
+application rulebook check if the test applies and marks it as completed - or chooses which test to run based on attempt outcome
+assertion rulebook runs the test's assertions]
+
 A test case when testing Aite champions vs bat:
 	try butterflying;
 	try meatboying;
@@ -343,27 +389,48 @@ A test case when testing Aite champions vs bat:
 	have the player and the healer of aite fight in Arena of the Gods;
 	try drinking Drakul's lifeblood;
 	try turning bat;
-	let tested player damage be false;
-	let tested gigantic player escape be false;
-	let tested huge player escape be false;
-	while tested player damage is false or tested gigantic player escape is false or tested huge player escape is false:
-		now the health of the healer of Aite is 100;
-		let previous health be the health of the player;
-		start capturing text;
-		have Aite intervene on behalf of the healer of Aite;
-		stop capturing text;
-		let the message be an indexed text;
-		now the message is "[the captured text]";
-		if the message matches the regular expression "you":
-			showme the message;
-			assert that the message matches the regular expression "in front of";
-			if the previous health is greater than the health of the player:
-				now tested player damage is true;
-				assert that the message matches the regular expression "crash into";
-			otherwise:
-				if the message matches the regular expression "gigantic":
-					now tested gigantic player escape is true;
-					assert that the message matches the regular expression "fly around";
-				otherwise:
-					now tested huge player escape is true;
-					assert that the message matches the regular expression "fly over";
+	test aite spike vs bat;
+	
+Player-targeted is a truth state that varies.
+Player-damaged is a truth state that varies.
+
+Randomized event testing for aite spike vs bat:
+	now the health of the healer of Aite is 100;
+	let previous health be the health of the player;
+	now player-damaged is false;
+	now player-targeted is false;
+	start capturing text;
+	have Aite intervene on behalf of the healer of Aite;
+	stop capturing text;
+	now the event description is "[the captured text]";
+	if the health of the player is less than the previous health, now player-damaged is true;
+	showme the event description;
+	if the event description matches the regular expression "you":
+		now player-targeted is true;
+		assert that the event description matches the regular expression "in front of";
+	
+Bat crashing into spike results from Aite spike vs bat.
+Bat avoiding huge spike results from Aite spike vs bat.
+Bat avoiding gigantic spike results from Aite spike vs bat.
+
+Random outcome testing when bat crashing into spike became possible:
+	if player-targeted is false, make no decision;
+	if player-damaged is false, make no decision;
+	mark the outcome achieved;
+	assert that the event description matches the regular expression "crash into";
+	
+Random outcome testing when bat avoiding huge spike became possible:
+	if player-targeted is false, make no decision;
+	if player-damaged is true, make no decision;
+	unless the event description matches the regular expression "huge", make no decision;
+	mark the outcome achieved;
+	assert that the event description matches the regular expression "fly over";
+	
+Random outcome testing when bat avoiding gigantic spike became possible:
+	if player-targeted is false, make no decision;
+ 	if player-damaged is true, make no decision;
+	unless the event description matches the regular expression "gigantic", make no decision;
+	mark the outcome achieved;
+	assert that the event description matches the regular expression "fly around";
+	
+[lose concentration sometimes?]
