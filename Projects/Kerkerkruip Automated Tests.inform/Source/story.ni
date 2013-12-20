@@ -281,9 +281,11 @@ The test case rules are a rulebook.
 
 Chapter - Randomized Events
 
-A randomized event is a kind of value. Aite spike vs bat is a randomized event.
+The maximum number of random event iterations is a number that varies. The maximum number of random event iterations is 100.
 
-A random outcome is a kind of value. Bat crashing into spike, bat avoiding huge spike, and bat avoiding gigantic spike are random outcomes.
+A randomized event is a kind of value. boring lack of events is a randomized event.
+
+A random outcome is a kind of value. boring lack of results is a random outcome.
 
 A random outcome can be achieved.
 
@@ -295,7 +297,7 @@ The outcome being tested is a random outcome that varies.
 
 Definition: a random outcome is possible if it results from the event being tested;
 
-To decide whether (O - a random outcome) became the/-- possible outcome/--:
+To decide whether (O - a random outcome) became the/-- possibility:
 	if O is not achieved and O is possible:
 		now the outcome being tested is O;
 		yes;
@@ -308,11 +310,16 @@ To mark the/-- outcome as/-- achieved:
 	
 To test (E - a randomized event):
 	now the event being tested is E;
-	Repeat with i running from 1 to 100:
+	Repeat with i running from 1 to the maximum number of random event iterations:
 		if every possible random outcome is achieved, stop;
 		follow the randomized event testing rules for E;
 		follow the random outcome testing rules;
-	say "After 100 iterations, [the list of not achieved possible random outcomes] were still not tested."
+	stop capturing text;
+	Let N be the number of not achieved possible random outcomes;
+	now the total assertion count is the total assertion count + N;
+	now the test assertion count is the test assertion count + N;
+	now the assertion failures count is the assertion failures count + N;
+	say "After [the maximum number of random event iterations] iterations, [the list of not achieved possible random outcomes] were still not tested."
 
 Randomized event testing is a randomized event based rulebook.
 
@@ -355,6 +362,15 @@ To have the player sacrifice (stuff - a power):
 	now the number understood is 1;
 	follow the sacrifice rule.
 
+To assert that (message - an indexed text) includes (pattern - an indexed text):
+	stop capturing text;
+	increment the test assertion count;
+	increment the total assertion count;
+	unless message matches the regular expression pattern:
+		increment the assertion failures count;
+		say "Failure for test: [the current unit test name], assertion: [the test assertion count]. Regular expression '[pattern]' was not found in the text: [message][line break]";
+	start capturing text;
+
 Chapter - Test Cases
 
 A first scenario rule:
@@ -394,6 +410,8 @@ A test case when testing Aite champions vs bat:
 Player-targeted is a truth state that varies.
 Player-damaged is a truth state that varies.
 
+Aite spike vs bat is a randomized event.
+
 Randomized event testing for aite spike vs bat:
 	now the health of the healer of Aite is 100;
 	let previous health be the health of the player;
@@ -407,30 +425,29 @@ Randomized event testing for aite spike vs bat:
 	showme the event description;
 	if the event description matches the regular expression "you":
 		now player-targeted is true;
-		assert that the event description matches the regular expression "in front of";
+		assert that the event description includes "in front of";
 	
-Bat crashing into spike results from Aite spike vs bat.
-Bat avoiding huge spike results from Aite spike vs bat.
-Bat avoiding gigantic spike results from Aite spike vs bat.
+Bat crashing into spike is a random outcome. It results from Aite spike vs bat.
+Bat avoiding huge spike is a random outcome. It results from Aite spike vs bat.
+Bat avoiding gigantic spike is a random outcome. It results from Aite spike vs bat.
 
-Random outcome testing when bat crashing into spike became possible:
-	if player-targeted is false, make no decision;
+Random outcome testing when bat crashing into spike became the possibility:
 	if player-damaged is false, make no decision;
 	mark the outcome achieved;
-	assert that the event description matches the regular expression "crash into";
+	assert that the event description includes "crash into";
 	
-Random outcome testing when bat avoiding huge spike became possible:
+Random outcome testing when bat avoiding huge spike became the possibility:
 	if player-targeted is false, make no decision;
 	if player-damaged is true, make no decision;
 	unless the event description matches the regular expression "huge", make no decision;
 	mark the outcome achieved;
-	assert that the event description matches the regular expression "fly over";
+	assert that the event description includes "fly over";
 	
-Random outcome testing when bat avoiding gigantic spike became possible:
+Random outcome testing when bat avoiding gigantic spike became the possibility:
 	if player-targeted is false, make no decision;
  	if player-damaged is true, make no decision;
 	unless the event description matches the regular expression "gigantic", make no decision;
 	mark the outcome achieved;
-	assert that the event description matches the regular expression "fly around";
+	assert that the event description includes "fly around";
 	
 [lose concentration sometimes?]
