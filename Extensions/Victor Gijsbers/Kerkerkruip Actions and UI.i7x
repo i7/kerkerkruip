@@ -796,6 +796,21 @@ A pickpocket rule (this is the readied weapons pickpocket rule):
 		if the noun is readied:
 			decrease pickpocket chance by 10.
 
+Section - Awaking
+
+Awaking is an action applying to one thing.
+Understand "wake [person]" and "wake up [person]" and "wake [person] up" and "awake [person]" and "awaken [person]" as awaking.
+
+Check awaking:
+	if the noun is not asleep:
+		take no time;
+		say "You can only awaken sleeping persons." instead.
+
+Carry out awaking:
+	now noun is not asleep.
+	
+Report awaking:
+	say "With a swift kick, you wake up [the noun]. Not very subtle, perhaps, but it is certainly effective.".
 
 
 
