@@ -88,21 +88,21 @@ To give the player a stat penalty:
 Section - Applying the difficulty
 
 After showing the title screen (this is the apply the difficulty rule):
-	if difficulty is 0:
+[	if difficulty is 0:
 		increase health of the player by 5;
 		increase permanent health of the player by 5;
 		increase melee of the player by 1;
-		increase defence of the player by 2;
-	if difficulty is 1:
+		increase defence of the player by 2;]
+	if difficulty is 0:
 		increase health of the player by 3;
 		increase permanent health of the player by 3;
 		increase melee of the player by 1;		
 		increase defence of the player by 1;
-	if difficulty is 2:
+	if difficulty is 1:
 		increase health of the player by 1;
 		increase permanent health of the player by 1;
 		increase defence of the player by 1;
-	let k be 6 + difficulty;
+	let k be 7 + difficulty;
 	repeat with guy running through monsters:
 		now health of guy is (k times health of guy) / 10;
 	if difficulty is greater than 2:
