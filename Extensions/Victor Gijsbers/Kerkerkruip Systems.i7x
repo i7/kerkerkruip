@@ -186,6 +186,10 @@ Check digging (this is the only dig in connectable rooms rule):
 	unless location is connectable:
 		say "A magical force prevents you from digging." instead.
 
+Check digging (this is the only dig in placed rooms rule):
+	unless location is placed:
+		say "A magical force prevents you from digging." instead.
+
 Check an at-React pc digging (this is the cannot dig as reaction rule):
 	take no time;
 	say "You cannot dig as a reaction." instead.
