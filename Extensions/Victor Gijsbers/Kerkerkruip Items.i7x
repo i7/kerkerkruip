@@ -2897,6 +2897,8 @@ Chapter - Dagger
 A dagger is a kind of weapon. 
 A dagger is usually iron.
 
+Understand "dagger" as a dagger.
+
 The damage die of a dagger is usually 3.
 The weapon attack bonus of a dagger is usually -1.
 The dodge bonus of a dagger is usually 1.
