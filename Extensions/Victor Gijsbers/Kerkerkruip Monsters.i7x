@@ -5082,6 +5082,8 @@ The body score of Malygris is 11.
 The mind score of Malygris is 11.
 The spirit score of Malygris is 11. 
 
+The initial sleep chance of Malygris is 1.
+
 When play begins:
 	let X be a random natural weapon part of Malygris;
 	now printed name of X is "Malygris's innate magical powers";
@@ -5363,6 +5365,8 @@ The Nameless Horror is horrific.
 The Nameless Horror is eyeless.
 The Nameless Horror is unnaturally aware.
 The Nameless Horror is emotionless.
+
+The initial sleep chance of Nameless Horror is 0.
 
 When play begins:
 	let X be a random natural weapon part of the nameless horror;

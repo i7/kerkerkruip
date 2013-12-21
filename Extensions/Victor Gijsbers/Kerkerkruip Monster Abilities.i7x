@@ -567,7 +567,7 @@ To calculate the pdr for (guy - a person):
 Chapter - Asleep
 
 A person can be sleeper. A person is usually sleeper. [A sleeper can be asleep.]
-A person has a number called the initial sleep chance. The initial sleep chance of a person is usually 5. [Small chance that a given monster starts out asleep.]
+A person has a number called the initial sleep chance. The initial sleep chance of a person is usually 3. [Small chance that a given monster starts out asleep.]
 A person can be asleep. A person is usually not asleep. [Whether someone is asleep.]
 A person can be just-woken. A person is usually not just-woken.
 
@@ -596,8 +596,14 @@ This is the asleep rule:
 			say "[The main actor] sleep[s] peacefully[roman type].";
 			now combat status is concluding;
 		otherwise:
-			say "[The main actor] [bold type]wake[s] up[roman type]!";
+			say "[The main actor] [bold type]wake[s] up[roman type], apparently feeling the tension!";
 			now main actor is not asleep.
+
+Aftereffects rule (this is the wake people when fighting rule):
+	repeat with guy running through asleep people in the location:
+		if a random chance of 1 in 5 succeeds:
+			say "The sounds of combat [bold type]wake [the guy][roman type]!";
+			now guy is not asleep.
 
 The asleep rule is listed before the the main actor chooses an action rule in the combat round rules.
 
