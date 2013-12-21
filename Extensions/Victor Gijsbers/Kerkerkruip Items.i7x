@@ -751,9 +751,9 @@ A remain concentrated rule (this is the inquisitor's hood concentration rule):
 
 Section - Antler of the Tungausy Shaman (major)
 
-The antler of the tungausy shaman is a major hat. The indefinite article is "the".
-The antler of the tungausy shaman is religious.
-The antler of the tungausy shaman is silver.
+The antler of the Tungausy shaman is a major hat. The indefinite article is "the".
+The antler of the Tungausy shaman is religious.
+The antler of the Tungausy shaman is silver.
 
 The blood magic cost of antler of the tungausy shaman is 2.
 The blood magic level of antler of the tungausy shaman is 0.
@@ -773,7 +773,7 @@ This is the antlerattack rule:
 			let x be 50;
 			increase x by 5 times the blood magic level of antler of the tungausy shaman;
 			if a random  chance of x in 100 succeeds:
-				say "The shamanic spirits predict that [the main actor]'s attack to be [if antlerattackstrength is less than 4]weak[otherwise if antlerattackstrength is less than 8]average[otherwise if antlerattackstrength is not 20]strong[otherwise]heroic[end if].";
+				say "The shamanic spirits predict that [the main actor]'s attack will be [if antlerattackstrength is less than 4]weak[otherwise if antlerattackstrength is less than 8]average[otherwise if antlerattackstrength is not 20]strong[otherwise]heroic[end if].";
 			otherwise:
 				say "The shamanic spirits predict that [the main actor]'s attack to be [one of]weak[or]average[or]strong[or]heroic[purely at random].".
 
