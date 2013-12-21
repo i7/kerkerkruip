@@ -2616,6 +2616,7 @@ Every turn (this is the free slaves of the mindslug when it is killed rule):
 	if the number of mindslug-enslaved alive persons in the location is greater than 0 and the mindslug is dead:
 		repeat with guy running through mindslug-enslaved alive persons in the location:
 			now guy is friendly;
+			now guy is not asleep;
 			if guy is undead:
 				now guy is undead-faction;
 			if guy is horrific:
