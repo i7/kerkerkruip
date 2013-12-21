@@ -395,7 +395,7 @@ The event description is an indexed text that varies.
 Chapter - Turn-based Events
 
 A turn-based event is a kind of value. boring waiting turn is a turn-based event.
-A turn-based event has a stored action called the scheduled action.
+A turn-based event has a stored action called the scheduled action. The scheduled action of a turn-based event is usually the action of waiting.
 A turn-based event can be generated.
 
 The scheduled event is a turn-based event that varies. The scheduled event is the boring waiting turn.
