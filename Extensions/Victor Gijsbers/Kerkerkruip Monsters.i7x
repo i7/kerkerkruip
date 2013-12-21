@@ -6320,7 +6320,7 @@ Report an actor hitting the dead Drakul:
 Drakul-victory is a truth state that varies. Drakul-victory is false.
 
 Report Drakul hitting a dead pc:
-	if the player is not undead and a random chance of 1 in 2 succeeds:
+	if the player is not undead and a random chance of 1 in 3 succeeds:
 		say "'Don't be afraid of death, my child,' Drakul chuckles. 'For I have decided that you will rise again as my child! Combining my power and your ability to absorb souls, we will be invincible. And I will finally rule the world!'";
 		now health of the player is 1;
 		now Drakul-victory is true;
