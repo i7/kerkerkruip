@@ -165,7 +165,8 @@ Section - Some ATTACK prose rules
 The basic fatal player flavour rule is not listed in any rulebook.
 The basic fatal flavour rule is not listed in any rulebook.
 The basic flavour rule is not listed in any rulebook.
-
+The the improper print dead property rule is not listed in any rulebook.
+The proper print dead property rule is not listed in any rulebook.
 
 
 Section - Other stuff
