@@ -46,11 +46,10 @@ Section - Starting dreams
 
 Every turn when the player is asleep and dreaming is false:
 	do a dream.
-	
+
 Table of Candidate Dreams
 Candidate
-Dream of briar roses
-Dream of Tungausy Shaman
+(a dream)
 with 20 blank rows
 	
 To do a dream:
