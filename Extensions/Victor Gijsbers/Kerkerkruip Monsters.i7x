@@ -4702,7 +4702,7 @@ An aftereffects rule (this is the Isra's burning defence rule):
 	if the global defender is Isra and attack damage is greater than 0:
 		unless global attacker weapon is ranged:
 			decrease health of global attacker by 2;
-			say "Isra's flames [bold type]burn[roman type] [the global attacker] [if global attacker is alive]for [bold type]2 damage[roman type][otherwise][bold type]to death[roman type][end if].";
+			say "Isra's flames [bold type]burn[roman type] [no dead property][the global attacker][dead property] [if global attacker is alive]for [bold type]2 damage[roman type][otherwise][bold type]to death[roman type][end if].";
 			if global attacker is the player and the player is not alive:
 				end the story saying "You will burn in Heaven.".
 
