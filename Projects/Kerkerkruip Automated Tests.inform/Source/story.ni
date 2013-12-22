@@ -394,11 +394,11 @@ The event description is an indexed text that varies.
 
 Chapter - Turn-based Events
 
-A turn-based event is a kind of value. boring waiting turn is a turn-based event.
+A turn-based event is a kind of value. normal keyboard input is a turn-based event.
 A turn-based event has a stored action called the scheduled action. The scheduled action of a turn-based event is usually the action of waiting.
 A turn-based event can be generated.
 
-The scheduled event is a turn-based event that varies. The scheduled event is the boring waiting turn.
+The scheduled event is a turn-based event that varies. The scheduled event is the normal keyboard input.
 
 Choosing a player reaction is a rulebook.
 
@@ -408,10 +408,10 @@ The action in progress variable translates into I6 as "action".
 Before taking a player action when the scheduled event is generated:
 	now the scheduled event is not generated;
 	Let the completed event be the scheduled event;
-	now the scheduled event is the boring waiting turn;
+	now the scheduled event is the normal keyboard input;
 	follow the testing a turn-based event rules for the completed event;
 	
-For taking a player action when the scheduled event is not the boring waiting turn:
+For taking a player action when the scheduled event is not the normal keyboard input:
 	if the player is at-React:
 		follow the choosing a player reaction rules;
 	otherwise:
