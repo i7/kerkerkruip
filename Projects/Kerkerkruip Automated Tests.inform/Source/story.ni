@@ -340,11 +340,11 @@ First when play begins:
 	if done testing is false, consider the scenario rules.
 	
 Last when play begins:
-	if done testing is false, consider the test case rules.
+	if done testing is false, consider the test play rules.
 	
 The scenario rules are a rulebook.
 
-The test case rules are a rulebook.
+The test play rules are a rulebook.
 
 Chapter - Randomized Events
 
@@ -406,19 +406,26 @@ The action in progress is an action name that varies.
 The action in progress variable translates into I6 as "action".
 
 Before taking a player action when the scheduled event is generated:
+	log "testing effects of [the scheduled event]";
 	now the scheduled event is not generated;
 	Let the completed event be the scheduled event;
 	now the scheduled event is the normal keyboard input;
+	transcribe and stop capturing;
+	now the event description is "[the captured text]";
+	start capturing text;
 	follow the testing a turn-based event rules for the completed event;
 	
-For taking a player action when the scheduled event is not the normal keyboard input:
+For taking a player action when the scheduled event is not the normal keyboard input (this is the turn-based event player action rule):
 	if the player is at-React:
 		follow the choosing a player reaction rules;
 	otherwise:
 		generate a player action of the scheduled action of the scheduled event;
 		now the scheduled event is generated.
 		
+The turn-based event player action rule is listed before the parse command rule in the for taking a player action rulebook.
+		
 To generate a player action of (the desired action - a stored action):
+	log "generating [the desired action]";
 	now the person asked is the player;
 	now the action in progress is the action name part of the desired action;
 	now the noun is the noun part of the desired action;
@@ -428,6 +435,11 @@ Last choosing a player reaction:
 	generate a player action of the action of waiting.
 	
 testing a turn-based event rules are a turn-based event based rulebook.
+
+To schedule (the event described - a turn-based event):
+	transcribe and restart capturing text;
+	now the event described is not generated;
+	now the scheduled event is the event described;
 	
 Chapter - The assert phrase (in place of Chapter - The assert phrase in Simple Unit Tests by Dannii Willis)
 
@@ -508,7 +520,9 @@ To assert that (message - an indexed text) includes (pattern - an indexed text):
 		now error_msg is "Regular expression '[pattern]' was not found in the text:[paragraph break]'[message]'[line break]";
 		record a failure of error_msg;
 
-Chapter - Test Cases
+Chapter - test plays
+
+Section - Aite Champions vs Bat
 
 A first scenario rule:
 	Now the current unit test name is "[the current test set]";
@@ -520,12 +534,12 @@ A scenario rule when testing Aite champions vs bat:
 	now Drakul's lifeblood is testobject;
 	now Temple of Chton is testobject;
 		
-[TODO: create randomized test cases
+[TODO: create randomized test plays
 attempt rulebook does something that might make the test qualify
 application rulebook check if the test applies and marks it as completed - or chooses which test to run based on attempt outcome
 assertion rulebook runs the test's assertions]
 
-A test case when testing Aite champions vs bat:
+A test play when testing Aite champions vs bat:
 	try butterflying;
 	try meatboying;
 	extract the player to the location of Drakul's lifeblood;
@@ -583,5 +597,34 @@ Random outcome testing when bat avoiding gigantic spike became the possibility:
 	unless the event description matches the regular expression "gigantic", make no decision;
 	mark the outcome achieved;
 	assert that the event description includes "fly around";
+	
+Section - Parting Shots
+	
+parting shots is a test set.
+
+A scenario rule when testing parting shots:
+	now mindslug is testobject;
+	now armadillo is testobject;
+	now cloak of shadows is testobject;
+	
+A test play when testing parting shots:
+	now the player carries the cloak of shadows;
+	try wearing the cloak of shadows;
+	try butterflying;
+	While the location is not the location of mindslug:
+		let the way be the best route from the location to the location of mindslug;
+		record a test attempt;
+		if the way is a direction:
+			try going the way;
+		otherwise:
+			record failure "Can't find a route to mindslug.";
+			rule fails;
+	try taking off the cloak of shadows;
+	schedule fanatics-retreat;
+	
+fanatics-retreat is a turn-based event. The scheduled action of fanatics-retreat is the action of retreating.
+
+Testing a turn-based event for fanatics-retreat:
+	assert that the event description includes "mindslug attacks";
 	
 [lose concentration sometimes?]
