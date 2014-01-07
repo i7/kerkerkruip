@@ -305,7 +305,6 @@ To record a/-- failure of/-- (msg - an indexed text):
 	log msg;
 	
 To display test results:
-	transcribe and stop capturing;
 	say "Test results:[paragraph break]";
 	let grand test total be 0;
 	let grand test failures be 0;
@@ -320,6 +319,7 @@ To display test results:
 			say "[line break]Failures for [test set entry as a test set]:[paragraph break]";
 			say failure messages entry;	
 	say "To view a full transcript of all tests, see the file 'testtranscript.glkdata' in the project directory.";
+	transcribe and stop capturing;
 	wait for any key;
 	
 Chapter - Test Sets
@@ -499,7 +499,6 @@ To start the/-- next test:
 		now the current test set is T;
 		if the result of saving undo state is successful save, stop;
 		read file of test results into Table of Test Results;
-	transcribe and stop capturing text;
 	now done testing is true;
 	display test results;
 
@@ -639,33 +638,24 @@ A test play when testing parting shots:
 		otherwise:
 			record failure "Can't find a route to mindslug.";
 			rule fails;
+	now every person enclosed by the location is not asleep;
 	schedule mindslug-reveal;
 	
 mindslug-reveal is a turn-based event. The scheduled action of mindslug-reveal is the action of taking off the shadows cloak. ["the action of taking of the cloak of shadows" doesn't parse  ]
 
 mindslug-retreat is a turn-based event.  The next move of mindslug-reveal is mindslug-retreat. The scheduled action of mindslug-retreat is the action of retreating.
 
-mindslug-pressing is a truth state that varies;
-fafhrd-pressing is a truth state that varies;
-mouser-pressing is a truth state that varies;
-
 Before taking a player action when mindslug-retreat is the scheduled event:
-	now mindslug-pressing is whether or not the mindslug presses the player;
-	now fafhrd-pressing is whether or not fafhrd presses the player;
-	now mouser-pressing is whether or not mouser presses the player;
+	now mindslug presses the player;
+	now concentration of mindslug is 0;
+	now fafhrd does not press the player;
+	now concentration of fafhrd is 1;
+	now mouser does not press the player;
+	now concentration of mouser is 0;
 	
 Testing a turn-based event for mindslug-retreat:
-	if mindslug-pressing is true:
-		assert that the event description includes "mindslug does not overcome";
-	otherwise:
-		assert that the event description does not include "mindslug does not overcome";
-	if mouser-pressing is true:
-		assert that the event description includes "Mouser does not overcome";
-	otherwise:
-		assert that the event description does not include "Mouser does not overcome";
-	if fafhrd-pressing is true:
-		assert that the event description includes "Fafhrd does not overcome";
-	otherwise:
-		assert that the event description does not include "Fafhrd does not overcome";
+	assert that the event description includes "mindslug does not overcome";
+	assert that the event description includes "Fafhrd does not overcome";
+	assert that the event description does not include "Mouser does not overcome";
 	
 [lose concentration sometimes?]
