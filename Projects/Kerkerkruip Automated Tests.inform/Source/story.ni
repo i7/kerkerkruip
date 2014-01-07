@@ -262,9 +262,11 @@ Chapter - Persistent data
 The file of test transcript is called "testtranscript".
 
 To log (T - an indexed text):
-	transcribe and stop capturing text;
+	let currently capturing be whether or not text capturing is active;
+	if currently capturing is true, transcribe and stop capturing text;
+	say "[T][line break]";
 	append "**** [T][line break]" to file of test transcript;
-	start capturing text;
+	if currently capturing is true, start capturing text;
 	
 To transcribe and stop capturing text/--:
 	stop capturing text;
@@ -396,22 +398,21 @@ Chapter - Turn-based Events
 
 A turn-based event is a kind of value. normal keyboard input is a turn-based event.
 A turn-based event has a stored action called the scheduled action. The scheduled action of a turn-based event is usually the action of waiting.
+A turn-based event has a turn-based event called the next move. The next move of a turn-based event is usually normal keyboard input.
+
 A turn-based event can be generated.
 
 The scheduled event is a turn-based event that varies. The scheduled event is the normal keyboard input.
 
 Choosing a player reaction is a rulebook.
 
-The action in progress is an action name that varies. 
-The action in progress variable translates into I6 as "action".
-
 Before taking a player action when the scheduled event is generated:
+	transcribe and stop capturing;
+	now the event description is "[the captured text]";
 	log "testing effects of [the scheduled event]";
 	now the scheduled event is not generated;
 	Let the completed event be the scheduled event;
-	now the scheduled event is the normal keyboard input;
-	transcribe and stop capturing;
-	now the event description is "[the captured text]";
+	schedule the next move of the completed event;
 	start capturing text;
 	follow the testing a turn-based event rules for the completed event;
 	
@@ -424,13 +425,24 @@ For taking a player action when the scheduled event is not the normal keyboard i
 		
 The turn-based event player action rule is listed before the parse command rule in the for taking a player action rulebook.
 		
+[I7 names borrowed from Ron Newcomb's Original Parser]
+The action in progress is an action name that varies. 
+The person requesting is a person that varies. 
+The action in progress variable translates into I6 as "action".
+The person requesting variable translates into I6 as "act_requester".
+
+To begin the current action: (- BeginAction(action, noun, second); -)
+
 To generate a player action of (the desired action - a stored action):
 	log "generating [the desired action]";
-	now the person asked is the player;
 	now the action in progress is the action name part of the desired action;
+	now the person asked is the actor part of the desired action;
+	now the person requesting is nothing;
+	if the person asked is not the player, now the person requesting is the player;
 	now the noun is the noun part of the desired action;
 	now the second noun is the second noun part of the desired action;
-		
+	begin the current action;
+
 Last choosing a player reaction:
 	generate a player action of the action of waiting.
 	
@@ -619,12 +631,15 @@ A test play when testing parting shots:
 		otherwise:
 			record failure "Can't find a route to mindslug.";
 			rule fails;
-	try taking off the cloak of shadows;
-	schedule fanatics-retreat;
+	schedule mindslug-reveal;
 	
-fanatics-retreat is a turn-based event. The scheduled action of fanatics-retreat is the action of retreating.
+mindslug-reveal is a turn-based event. The scheduled action of mindslug-reveal is the action of taking off the shadows cloak. ["the action of taking of the cloak of shadows" doesn't parse  ]
 
-Testing a turn-based event for fanatics-retreat:
-	assert that the event description includes "mindslug attacks";
+mindslug-retreat is a turn-based event.  The next move of mindslug-reveal is mindslug-retreat. The scheduled action of mindslug-retreat is the action of retreating.
+
+Testing a turn-based event for mindslug-retreat:
+	assert that the event description includes "mindslug does not overcome";
+	assert that the event description includes "Mouser does not overcome";
+	assert that the event description includes "Fafhrd does not overcome";
 	
 [lose concentration sometimes?]
