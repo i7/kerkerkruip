@@ -305,6 +305,7 @@ To record a/-- failure of/-- (msg - an indexed text):
 	log msg;
 	
 To display test results:
+	transcribe and stop capturing;
 	say "Test results:[paragraph break]";
 	let grand test total be 0;
 	let grand test failures be 0;
@@ -461,7 +462,7 @@ The assertion failures count is a number variable.
 
 [ Assert that two values are the same ]
 To assert that/-- (A - a value) is (B - a value):
-	stop capturing text;
+	transcribe and stop capturing text;
 	record a test attempt;
 	unless A is B:
 		Let error_msg be an indexed text;
@@ -498,7 +499,7 @@ To start the/-- next test:
 		now the current test set is T;
 		if the result of saving undo state is successful save, stop;
 		read file of test results into Table of Test Results;
-	stop capturing text;
+	transcribe and stop capturing text;
 	now done testing is true;
 	display test results;
 
@@ -530,6 +531,13 @@ To assert that (message - an indexed text) includes (pattern - an indexed text):
 	unless message matches the regular expression pattern:
 		Let error_msg be an indexed text;
 		now error_msg is "Regular expression '[pattern]' was not found in the text:[paragraph break]'[message]'[line break]";
+		record a failure of error_msg;
+		
+To assert that (message - an indexed text) does not include (pattern - an indexed text):
+	record a test attempt;
+	if message matches the regular expression pattern:
+		Let error_msg be an indexed text;
+		now error_msg is "Regular expression '[pattern]' should not have been found in the text:[paragraph break]'[message]'[line break]";
 		record a failure of error_msg;
 
 Chapter - test plays
@@ -637,9 +645,27 @@ mindslug-reveal is a turn-based event. The scheduled action of mindslug-reveal i
 
 mindslug-retreat is a turn-based event.  The next move of mindslug-reveal is mindslug-retreat. The scheduled action of mindslug-retreat is the action of retreating.
 
+mindslug-pressing is a truth state that varies;
+fafhrd-pressing is a truth state that varies;
+mouser-pressing is a truth state that varies;
+
+Before taking a player action when mindslug-retreat is the scheduled event:
+	now mindslug-pressing is whether or not the mindslug presses the player;
+	now fafhrd-pressing is whether or not fafhrd presses the player;
+	now mouser-pressing is whether or not mouser presses the player;
+	
 Testing a turn-based event for mindslug-retreat:
-	assert that the event description includes "mindslug does not overcome";
-	assert that the event description includes "Mouser does not overcome";
-	assert that the event description includes "Fafhrd does not overcome";
+	if mindslug-pressing is true:
+		assert that the event description includes "mindslug does not overcome";
+	otherwise:
+		assert that the event description does not include "mindslug does not overcome";
+	if mouser-pressing is true:
+		assert that the event description includes "Mouser does not overcome";
+	otherwise:
+		assert that the event description does not include "Mouser does not overcome";
+	if fafhrd-pressing is true:
+		assert that the event description includes "Fafhrd does not overcome";
+	otherwise:
+		assert that the event description does not include "Fafhrd does not overcome";
 	
 [lose concentration sometimes?]
