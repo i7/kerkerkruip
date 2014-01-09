@@ -1428,7 +1428,6 @@ The sudden combat reset rules are an object based rulebook.
 
 [This could be a whole rulebook in itself...]
 To decide whether (fighter - a person) would take a parting shot at (deserter - a person):
-	say "Would [fighter] take a parting shot at [deserter]?";
 	if last chance to hit is false, no;
 	unless deserter is the player, no;
 	if fighter is the player or fighter is the deserter, no;
