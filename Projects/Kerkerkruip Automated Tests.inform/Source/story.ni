@@ -255,7 +255,7 @@ Section - No Achievements (in place of Section - Achievements in Kerkerkruip Hel
 
 Section - No Menu Command Console (in place of Section - The test object console in Kerkerkruip Tests by Victor Gijsbers)
 
-Section - Capture-aware Spacing and Pausing (in place of Section 1 - Spacing and Pausing in Basic Screen Effects by Emily Short)
+Section 1 - Capture-aware Spacing and Pausing (in place of Section 1 - Spacing and Pausing in Basic Screen Effects by Emily Short)
 
 Include (-
 
@@ -282,16 +282,29 @@ Include (-
 	return i;
 ];
 
+[ AwareClearScreen;
+	 if (~capture_active) {VM_ClearScreen(0);}
+];
+
+
+[ AwareClearMainScreen;
+	 if (~capture_active) {VM_ClearScreen(2);}
+];
+
+
+[ AwareClearStatus;
+	 if (~capture_active) {VM_ClearScreen(1);}
+];
 -)
 
 To clear the/-- screen:
-	(- VM_ClearScreen(0); -)
+	(- AwareClearScreen(); -)
 
 To clear only the/-- main screen:
-	(- VM_ClearScreen(2); -)
+	(- AwareClearMainScreen(); -)
 
 To clear only the/-- status line:
-	(- VM_ClearScreen(1); -).
+	(- AwareClearStatus(); -).
 
 To wait for any key:
 	(- KeyPause(); -)
@@ -493,7 +506,7 @@ To display test results:
 			log "[line break]Failures for [test set entry as a test set]:[paragraph break]";
 			log "[failure messages entry]";	
 	say "To view a full transcript of all tests, see the file 'testtranscript.glkdata' in the project directory.";
-	wait for any key;
+	pause the game;
 	
 Chapter - Turn-based Events
 
@@ -574,10 +587,13 @@ To decide whether testing (T - a test set):
 First when play begins:
 	write "Test transcript for Kerkerkruip.[line break]" to file of test transcript;
 	start the next test;
+	start capturing text;
 	if done testing is false:
 		Now the current unit test name is "[the current test set]";
 		log "Now testing [the current test set].";
-		consider the scenario rules.
+		consider the scenario rules;
+	otherwise:
+		transcribe and stop capturing.
 	
 Last when play begins:
 	if done testing is false:
@@ -682,6 +698,7 @@ Chapter - Resetting the Game After Each Test Set (in place of Chapter - The Unit
 The current unit test name is an indexed text variable.
 
 To start the/-- next test:
+	transcribe and stop capturing;
 	Repeat with T running through test sets:
 		now the current test set is T;
 		if the result of saving undo state is successful save, stop;
@@ -829,15 +846,23 @@ A test play when testing Chton champion vs bat:
 	
 arena-vampire-joining is a turn-based event. The first move of Chton champion vs bat is arena-vampire-joining. The scheduled action of arena-vampire-joining is the action of drinking Drakul's lifeblood;
 
+The summoned creature is an object that varies;
+
 Testing a turn-based event for arena-vampire-joining:
 	assert that the event description includes "You turn into a vampire, but your opponent doesn't care";
 	update the combat status;
 	assert that the combat status is combat;
 	try reading a random scroll of summoning enclosed by the player;
-	let the summoned creature be a random visible undead not super-undead person who is not the player;
+	now the summoned creature is a random visible undead not super-undead person who is not the player;
 	assert truth of whether or not the summoned creature does not oppose the player with message "summoned creature shouldn't oppose undead player";
 	assert truth of whether or not the summoned creature opposes drakul with message "summoned creature should oppose drakul (unless Remko says this test is wrong)";
 
+chton-arena-cheating is a turn-based event. The next move of arena-vampire-joining is chton-arena-cheating. The scheduled action of chton-arena-cheating is the action of plunking drakul.
+
+Testing a turn-based event for chton-arena-cheating:
+	assert that the event description includes "transported back to the Hall of Gods";
+	assert that the location of the summoned creature is Hall of Gods;
+	
 Section - Parting Shots
 	
 parting shots is a test set.
