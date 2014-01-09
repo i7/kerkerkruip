@@ -255,6 +255,181 @@ Section - No Achievements (in place of Section - Achievements in Kerkerkruip Hel
 
 Section - No Menu Command Console (in place of Section - The test object console in Kerkerkruip Tests by Victor Gijsbers)
 
+Section - Capture-aware Spacing and Pausing (in place of Section 1 - Spacing and Pausing in Basic Screen Effects by Emily Short)
+
+Include (-
+
+[ KeyPause i; 
+	if (capture_active) {
+		rfalse;
+	}
+	i = VM_KeyChar(); 
+	rfalse;
+];
+
+[ SPACEPause i;
+	if (capture_active) {
+		rfalse;
+	}
+	while (i ~= 13 or 31 or 32)
+	{
+		i = VM_KeyChar();	
+	}
+];
+
+[ GetKey i;
+	i = VM_KeyChar(); 
+	return i;
+];
+
+-)
+
+To clear the/-- screen:
+	(- VM_ClearScreen(0); -)
+
+To clear only the/-- main screen:
+	(- VM_ClearScreen(2); -)
+
+To clear only the/-- status line:
+	(- VM_ClearScreen(1); -).
+
+To wait for any key:
+	(- KeyPause(); -)
+
+To wait for the/-- SPACE key:
+	(- SPACEPause(); -)
+
+To decide what number is the chosen letter:
+	(- GetKey() -)
+
+To pause the/-- game: 
+	say "[paragraph break]Please press SPACE to continue.";
+	wait for the SPACE key;
+	clear the screen.
+	
+To center (quote - text):
+	(- CenterPrintComplex({quote}); -);
+
+To center (quote - text) at the/-- row (depth - a number):
+	(- CenterPrint({quote}, {depth}); -);
+	
+To stop the/-- game abruptly:
+	(- quit; -)
+	
+To show the/-- current quotation:
+	(- ClearBoxedText(); -);
+
+
+Include (-
+
+#ifndef printed_text;
+Array printed_text --> 64;
+#endif;
+
+[ CenterPrint str depth i j;
+	font off;
+	i = VM_ScreenWidth();
+			VM_PrintToBuffer(printed_text, 63, str);
+	j = (i-(printed_text-->0))/2; 
+	j = j-1;
+	VM_MoveCursorInStatusLine(depth, j);
+	print (I7_string) str; 
+	font on;
+];
+
+[ CenterPrintComplex str i j;
+	font off;
+	print "^"; 
+	i = VM_ScreenWidth();
+			VM_PrintToBuffer(printed_text, 63, str);
+	j = (i-(printed_text-->0))/2; 
+	spaces j-1;
+	print (I7_string) str; 
+	font on;
+];
+
+-)
+
+To decide what number is screen width:
+	(- VM_ScreenWidth() -);
+
+To decide what number is screen height:
+	(- I7ScreenHeight() -);
+
+Include (-
+
+[ I7ScreenHeight i screen_height;
+	i = 0->32;
+		  if (screen_height == 0 or 255) screen_height = 18;
+		  screen_height = screen_height - 7;
+	return screen_height;
+];
+
+-)
+
+To deepen the/-- status line to (depth - a number) rows:
+	(- DeepStatus({depth}); -);
+
+To move the/-- cursor to (depth - a number):
+	(- I7VM_MoveCursorInStatusLine({depth}); -)
+
+To right align the/-- cursor to (depth - a number):
+	(- RightAlign({depth}); -)
+
+Include (- 
+
+[ DeepStatus depth i screen_width;
+    VM_StatusLineHeight(depth);
+    screen_width = VM_ScreenWidth();
+    #ifdef TARGET_GLULX;
+        VM_ClearScreen(1);
+    #ifnot;
+        style reverse;
+        for (i=1:i<depth+1:i++)
+        {
+             @set_cursor i 1;
+             spaces(screen_width);
+        } 
+    #endif;
+]; 
+
+[ I7VM_MoveCursorInStatusLine depth;
+	VM_MoveCursorInStatusLine(depth, 1);
+];
+
+[ RightAlign depth screen_width o n;
+	screen_width = VM_ScreenWidth(); 
+	n = (+ right alignment depth +);
+	o = screen_width - n;
+	VM_MoveCursorInStatusLine(depth, o);
+];
+
+-)
+
+Table of Ordinary Status
+left	central	right
+"[location]"	""	"[score]/[turn count]" 
+
+Status bar table is a table-name that varies. Status bar table is the Table of Ordinary Status.
+
+To fill the/-- status bar/line with (selected table - a table-name):
+	let __n be the number of rows in the selected table;
+	deepen status line to __n rows;
+	let __index be 1;
+	repeat through selected table
+	begin;
+		move cursor to __index; 
+		say "[left entry]";
+		center central entry at row __index;
+		right align cursor to __index;
+		say "[right entry]";
+		increase __index by 1;
+	end repeat.
+
+Right alignment depth is a number that varies. Right alignment depth is 14.
+
+
+
 Volume - The Tests
 
 Chapter - Persistent data
@@ -305,26 +480,85 @@ To record a/-- failure of/-- (msg - an indexed text):
 	log msg;
 	
 To display test results:
-	say "Test results:[paragraph break]";
+	log "Test results:[line break]";
 	let grand test total be 0;
 	let grand test failures be 0;
 	Repeat through Table of Test Results:
 		now grand test total is grand test total plus total entry;
 		now grand test failures is grand test failures plus failures entry;
-		say "[test set entry as a test set]: [total entry] tests, [failures entry] failures[line break]";
-	say line break;
-	say "Total: [grand test total] tests, [grand test failures] failures.";
+		log "[test set entry as a test set]: [total entry] tests, [failures entry] failures[line break]";
+	log "Total: [grand test total] tests, [grand test failures] failures.";
 	Repeat through Table of Test Results:
 		if failures entry is at least 1:
-			say "[line break]Failures for [test set entry as a test set]:[paragraph break]";
-			say failure messages entry;	
+			log "[line break]Failures for [test set entry as a test set]:[paragraph break]";
+			log "[failure messages entry]";	
 	say "To view a full transcript of all tests, see the file 'testtranscript.glkdata' in the project directory.";
-	transcribe and stop capturing;
 	wait for any key;
+	
+Chapter - Turn-based Events
+
+A turn-based event is a kind of value. normal keyboard input is a turn-based event.
+A turn-based event has a stored action called the scheduled action. The scheduled action of a turn-based event is usually the action of waiting.
+A turn-based event has a turn-based event called the next move. The next move of a turn-based event is usually normal keyboard input.
+
+A turn-based event can be generated.
+
+The scheduled event is a turn-based event that varies. The scheduled event is the normal keyboard input.
+
+Choosing a player reaction is a rulebook.
+
+Before taking a player action when the scheduled event is generated:
+	transcribe and stop capturing;
+	now the event description is "[the captured text]";
+	log "  testing effects of [the scheduled event]";
+	now the scheduled event is not generated;
+	Let the completed event be the scheduled event;
+	schedule the next move of the completed event;
+	start capturing text;
+	follow the testing a turn-based event rules for the completed event;
+	
+For taking a player action when the scheduled event is not the normal keyboard input (this is the turn-based event player action rule):
+	if the player is at-React:
+		follow the choosing a player reaction rules;
+	otherwise:
+		generate a player action of the scheduled action of the scheduled event;
+		now the scheduled event is generated.
+		
+The turn-based event player action rule is listed before the parse command rule in the for taking a player action rulebook.
+		
+[I7 names borrowed from Ron Newcomb's Original Parser]
+The action in progress is an action name that varies. 
+The person requesting is a person that varies. 
+The action in progress variable translates into I6 as "action".
+The person requesting variable translates into I6 as "act_requester".
+
+To begin the current action: (- BeginAction(action, noun, second); -)
+
+To generate a player action of (the desired action - a stored action):
+	say "[bracket]Player action: [the desired action][close bracket]";
+	now the action in progress is the action name part of the desired action;
+	now the person asked is the actor part of the desired action;
+	now the person requesting is nothing;
+	if the person asked is not the player, now the person requesting is the player;
+	now the noun is the noun part of the desired action;
+	now the second noun is the second noun part of the desired action;
+	begin the current action;
+
+Last choosing a player reaction:
+	generate a player action of the action of waiting.
+	
+testing a turn-based event rules are a turn-based event based rulebook.
+
+To schedule (the event described - a turn-based event):
+	transcribe and restart capturing text;
+	now the event described is not generated;
+	now the scheduled event is the event described;
 	
 Chapter - Test Sets
 
 A test set is a kind of value. Aite champions vs bat is a test set.
+
+A test set has a turn-based event called the first move. The first move of a test set is usually normal keyboard input.
 
 The current test set is a test set that varies.
 
@@ -340,10 +574,15 @@ To decide whether testing (T - a test set):
 First when play begins:
 	write "Test transcript for Kerkerkruip.[line break]" to file of test transcript;
 	start the next test;
-	if done testing is false, consider the scenario rules.
+	if done testing is false:
+		Now the current unit test name is "[the current test set]";
+		log "Now testing [the current test set].";
+		consider the scenario rules.
 	
 Last when play begins:
-	if done testing is false, consider the test play rules.
+	if done testing is false:
+		consider the test play rules;
+		schedule the first move of the current test set;
 	
 The scenario rules are a rulebook.
 
@@ -395,65 +634,6 @@ Random outcome testing is a rulebook.
 
 The event description is an indexed text that varies.
 
-Chapter - Turn-based Events
-
-A turn-based event is a kind of value. normal keyboard input is a turn-based event.
-A turn-based event has a stored action called the scheduled action. The scheduled action of a turn-based event is usually the action of waiting.
-A turn-based event has a turn-based event called the next move. The next move of a turn-based event is usually normal keyboard input.
-
-A turn-based event can be generated.
-
-The scheduled event is a turn-based event that varies. The scheduled event is the normal keyboard input.
-
-Choosing a player reaction is a rulebook.
-
-Before taking a player action when the scheduled event is generated:
-	transcribe and stop capturing;
-	now the event description is "[the captured text]";
-	log "testing effects of [the scheduled event]";
-	now the scheduled event is not generated;
-	Let the completed event be the scheduled event;
-	schedule the next move of the completed event;
-	start capturing text;
-	follow the testing a turn-based event rules for the completed event;
-	
-For taking a player action when the scheduled event is not the normal keyboard input (this is the turn-based event player action rule):
-	if the player is at-React:
-		follow the choosing a player reaction rules;
-	otherwise:
-		generate a player action of the scheduled action of the scheduled event;
-		now the scheduled event is generated.
-		
-The turn-based event player action rule is listed before the parse command rule in the for taking a player action rulebook.
-		
-[I7 names borrowed from Ron Newcomb's Original Parser]
-The action in progress is an action name that varies. 
-The person requesting is a person that varies. 
-The action in progress variable translates into I6 as "action".
-The person requesting variable translates into I6 as "act_requester".
-
-To begin the current action: (- BeginAction(action, noun, second); -)
-
-To generate a player action of (the desired action - a stored action):
-	log "generating [the desired action]";
-	now the action in progress is the action name part of the desired action;
-	now the person asked is the actor part of the desired action;
-	now the person requesting is nothing;
-	if the person asked is not the player, now the person requesting is the player;
-	now the noun is the noun part of the desired action;
-	now the second noun is the second noun part of the desired action;
-	begin the current action;
-
-Last choosing a player reaction:
-	generate a player action of the action of waiting.
-	
-testing a turn-based event rules are a turn-based event based rulebook.
-
-To schedule (the event described - a turn-based event):
-	transcribe and restart capturing text;
-	now the event described is not generated;
-	now the scheduled event is the event described;
-	
 Chapter - The assert phrase (in place of Chapter - The assert phrase in Simple Unit Tests by Dannii Willis)
 
 The test assertion count is a number variable.
@@ -470,6 +650,13 @@ To assert that/-- (A - a value) is (B - a value):
 		record a failure of error_msg;
 	start capturing text;
 
+To assert truth of/-- (C - a truth state) with message (T - an indexed text):
+	transcribe and stop capturing text;
+	record a test attempt;
+	unless C is true:
+		record a failure of T;
+	start capturing text;
+	
 [ Assert that any condition is true, but with less information on failure ]
 To assert that/-- (C - a condition):
 	(- Assert_Condition({C}); -).
@@ -543,10 +730,6 @@ Chapter - test plays
 
 Section - Aite Champions vs Bat
 
-A first scenario rule:
-	Now the current unit test name is "[the current test set]";
-	log "Now testing [the current test set].";
-
 A scenario rule when testing Aite champions vs bat:
 	now Bodmall is testobject;
 	now Hall of Gods is testobject;
@@ -617,6 +800,44 @@ Random outcome testing when bat avoiding gigantic spike became the possibility:
 	mark the outcome achieved;
 	assert that the event description includes "fly around";
 	
+Section - Chton Champion vs Bat
+
+Chton champion vs bat is a test set.
+
+A scenario rule when testing Chton champion vs bat:
+	now Hall of Gods is testobject;
+	now Bodmall is testobject;
+	now Drakul's lifeblood is testobject;
+	now Temple of Herm is testobject;
+	now a random scroll of summoning is testobject;
+
+A test play when testing Chton champion vs bat:
+	try butterflying;
+	try meatboying;
+	extract the player to the location of Drakul's lifeblood;
+	try taking Drakul's lifeblood;
+	let the item be a random not off-stage scroll of summoning;
+	extract the player to the location of the item;
+	try taking the item;
+	extract the player to the location of Bodmall;
+	have the player defeat Bodmall;
+	extract the player to temple of Herm;
+	have the player sacrifice a random granted power;
+	assert that the favour of the player with Herm is 4;
+	extract the player to Hall of Gods;
+	have the player and Drakul fight in Arena of the Gods;
+	
+arena-vampire-joining is a turn-based event. The first move of Chton champion vs bat is arena-vampire-joining. The scheduled action of arena-vampire-joining is the action of drinking Drakul's lifeblood;
+
+Testing a turn-based event for arena-vampire-joining:
+	assert that the event description includes "You turn into a vampire, but your opponent doesn't care";
+	update the combat status;
+	assert that the combat status is combat;
+	try reading a random scroll of summoning enclosed by the player;
+	let the summoned creature be a random visible undead not super-undead person who is not the player;
+	assert truth of whether or not the summoned creature does not oppose the player with message "summoned creature shouldn't oppose undead player";
+	assert truth of whether or not the summoned creature opposes drakul with message "summoned creature should oppose drakul (unless Remko says this test is wrong)";
+
 Section - Parting Shots
 	
 parting shots is a test set.
@@ -639,9 +860,8 @@ A test play when testing parting shots:
 			record failure "Can't find a route to mindslug.";
 			rule fails;
 	now every person enclosed by the location is not asleep;
-	schedule mindslug-reveal;
 	
-mindslug-reveal is a turn-based event. The scheduled action of mindslug-reveal is the action of taking off the shadows cloak. ["the action of taking of the cloak of shadows" doesn't parse  ]
+mindslug-reveal is a turn-based event. The first move of parting shots is mindslug-reveal. The scheduled action of mindslug-reveal is the action of taking off the shadows cloak. ["the action of taking of the cloak of shadows" doesn't parse  ]
 
 mindslug-retreat is a turn-based event.  The next move of mindslug-reveal is mindslug-retreat. The scheduled action of mindslug-retreat is the action of retreating.
 
@@ -654,8 +874,23 @@ Before taking a player action when mindslug-retreat is the scheduled event:
 	now concentration of mouser is 0;
 	
 Testing a turn-based event for mindslug-retreat:
+	assert that the event description includes "bravely run away";
 	assert that the event description includes "mindslug does not overcome";
 	assert that the event description includes "Fafhrd does not overcome";
 	assert that the event description does not include "Mouser does not overcome";
+	
+mindslug-runner is a turn-based event. The next move of mindslug-retreat is mindslug-runner.
+
+Before taking a player action when mindslug-runner is the scheduled event:
+	let the way be the best route from the location of the mindslug to the location;
+	now the scheduled action of mindslug-runner is the action of going the way;
+	extract the player to the location of the mindslug;
+	update the combat status;
+	
+Testing a turn-based event for mindslug-runner:
+	assert that the event description includes "run past your enemies";
+	assert that the event description includes "mindslug does not overcome";
+	assert that the event description includes "Fafhrd does not overcome";
+	assert that the event description includes "Mouser does not overcome";
 	
 [lose concentration sometimes?]
