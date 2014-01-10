@@ -449,6 +449,8 @@ Chapter - Persistent data
 
 The file of test transcript is called "testtranscript".
 
+The event description is an indexed text that varies.
+
 To log (T - an indexed text):
 	let currently capturing be whether or not text capturing is active;
 	if currently capturing is true, transcribe and stop capturing text;
@@ -461,8 +463,12 @@ To transcribe and stop capturing text/--:
 	append "[the captured text]" to file of test transcript;
 	 
 To transcribe and restart capturing text/--:
-	transcribe and stop capturing text;
+	if text capturing is active, transcribe and stop capturing text;
 	start capturing text;
+	
+To stop and save event description:
+	transcribe and stop capturing text;
+	now the event description is "[the captured text]";
 	
 The file of test results is called "testresults".
 
@@ -521,14 +527,13 @@ The scheduled event is a turn-based event that varies. The scheduled event is th
 Choosing a player reaction is a rulebook.
 
 Before taking a player action when the scheduled event is generated:
-	transcribe and stop capturing;
-	now the event description is "[the captured text]";
-	log "  testing effects of [the scheduled event]";
+	stop and save event description;
+	log "testing effects of [the scheduled event]";
 	now the scheduled event is not generated;
 	Let the completed event be the scheduled event;
-	schedule the next move of the completed event;
-	start capturing text;
 	follow the testing a turn-based event rules for the completed event;
+	schedule the next move of the completed event;
+	transcribe and restart capturing text;
 	
 For taking a player action when the scheduled event is not the normal keyboard input (this is the turn-based event player action rule):
 	if the player is at-React:
@@ -563,7 +568,6 @@ Last choosing a player reaction:
 testing a turn-based event rules are a turn-based event based rulebook.
 
 To schedule (the event described - a turn-based event):
-	transcribe and restart capturing text;
 	now the event described is not generated;
 	now the scheduled event is the event described;
 	
@@ -587,7 +591,7 @@ To decide whether testing (T - a test set):
 First when play begins:
 	write "Test transcript for Kerkerkruip.[line break]" to file of test transcript;
 	start the next test;
-	start capturing text;
+	transcribe and restart capturing text;
 	if done testing is false:
 		Now the current unit test name is "[the current test set]";
 		log "Now testing [the current test set].";
@@ -648,7 +652,6 @@ Randomized event testing is a randomized event based rulebook.
 
 Random outcome testing is a rulebook.
 
-The event description is an indexed text that varies.
 
 Chapter - The assert phrase (in place of Chapter - The assert phrase in Simple Unit Tests by Dannii Willis)
 
@@ -664,14 +667,14 @@ To assert that/-- (A - a value) is (B - a value):
 		Let error_msg be an indexed text;
 		now error_msg is "Expected: [B], Got: [A][line break]";
 		record a failure of error_msg;
-	start capturing text;
+	transcribe and restart capturing text;
 
 To assert truth of/-- (C - a truth state) with message (T - an indexed text):
 	transcribe and stop capturing text;
 	record a test attempt;
 	unless C is true:
 		record a failure of T;
-	start capturing text;
+	transcribe and restart capturing text;
 	
 [ Assert that any condition is true, but with less information on failure ]
 To assert that/-- (C - a condition):
@@ -749,6 +752,7 @@ Section - Aite Champions vs Bat
 
 A scenario rule when testing Aite champions vs bat:
 	now Bodmall is testobject;
+	now mindslug is testobject;
 	now Hall of Gods is testobject;
 	now Drakul's lifeblood is testobject;
 	now Temple of Chton is testobject;
@@ -768,11 +772,20 @@ A test play when testing Aite champions vs bat:
 	extract the player to temple of Chton;
 	have the player sacrifice a random granted power;
 	assert that the favour of the player with Chton is 4;
+	extract the player to the location of the mindslug;
+	have the player defeat the mindslug;
+	now the mind score of the player is 100;
 	extract the player to Hall of Gods;
 	have the player and the healer of aite fight in Arena of the Gods;
 	try drinking Drakul's lifeblood;
 	try turning bat;
 	test aite spike vs bat;
+	transcribe and restart capturing;
+	try enslaving the tormentor of aite;
+	stop and save event description;
+	assert that the event description includes "will do your bidding";
+	have the player defeat the defender of aite;
+	have the player defeat the healer of aite;
 	
 Player-targeted is a truth state that varies.
 Player-damaged is a truth state that varies.
@@ -786,13 +799,12 @@ Randomized event testing for aite spike vs bat:
 	now player-targeted is false;
 	transcribe and restart capturing;
 	have Aite intervene on behalf of the healer of Aite;
-	transcribe and stop capturing;
-	now the event description is "[the captured text]";
-	start capturing text;
+	stop and save event description;
 	if the health of the player is less than the previous health, now player-damaged is true;
 	if the event description matches the regular expression "you":
 		now player-targeted is true;
 		assert that the event description includes "in front of";
+	transcribe and restart capturing;
 	
 bat crashing into spike is a random outcome. It results from Aite spike vs bat.
 bat avoiding huge spike is a random outcome. It results from Aite spike vs bat.
