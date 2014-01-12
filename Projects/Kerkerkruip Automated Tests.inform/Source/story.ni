@@ -47,6 +47,7 @@ Include Autoundo for Object Response Tests by Mike Ciul.
 Include Simple Unit Tests by Dannii Willis.
 
 Use maximum capture buffer length of at least 5280.
+Use maximum indexed text length of at least 5280. 
 
 Section - Increase memory settings
 
