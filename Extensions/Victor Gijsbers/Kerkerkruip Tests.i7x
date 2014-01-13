@@ -25,7 +25,7 @@ Chapter - Requesting test objects (not for release)
 
 Section - Dungeon generation rules
 
-An object can be testobject. An object is usually not testobject.
+An object can be randomly included, bannedobject, or testobject. An object is usually randomly included.
 
 First resetting the map rule (this is the remove rarity from testobjects rule):
 	repeat with item running through testobject rooms:
@@ -35,9 +35,13 @@ First resetting the map rule (this is the remove rarity from testobjects rule):
 		now rarity of item is 0;
 		now unlock level of item is 0.
 
+A placement possible rule (this is the don't place banned rooms rule):
+	if considered room is bannedobject:
+		rule fails;
+
 A placement scoring rule (this is the testobject placement scoring rule):
 	if considered room is testobject:
-		increase current room score by 100.
+		increase current room score by 100;
 
 Creating the map rule (this is the place all testobject rooms rule):
 	while more than one testobject room is not placed:
@@ -46,6 +50,8 @@ Creating the map rule (this is the place all testobject rooms rule):
 		place place next to place2.
 
 A monster placement possible rule (this is the prefer testobject monsters rule):
+	if considered monster is bannedobject:
+		rule fails;
 	repeat with guy running through testobject off-stage monsters:
 		if level of guy is global monster level:
 			if considered monster is not testobject:
@@ -54,6 +60,10 @@ A monster placement possible rule (this is the prefer testobject monsters rule):
 A monster placement scoring rule (this is the testobject monster scoring rule):
 	if considered monster is testobject:
 		increase current monster score by 100.
+
+First treasure placement rule (this is the remove bannedobject treasures rule):
+	Repeat with item running through not non-treasure things:
+		if item is bannedobject, now item is non-treasure.
 
 Last treasure placement rule (this is the place non-person testobjects rule):
 	if generation info is true, print generation message "    Placing testobjects...";
@@ -170,7 +180,7 @@ Chapter - Tests (not for release)
 
 
 
-Section - Cheats - Plunk, plonk, rambo, meatboy, butterfly, reduce
+Section - Cheats - Plunk, plonk, smite, rambo, meatboy, butterfly, reduce
 
 Plunking is an action applying to one thing.
 Understand "plunk [something]" as plunking.
@@ -187,6 +197,29 @@ Carry out plonking:
 	repeat with X running through all alive persons enclosed by the location:
 		if the faction of the player hates the faction of X:
 			now the health of X is -5.
+
+
+Smiting is an action applying to one thing.
+Understand "smite [something]" as smiting.
+
+A person can be smiter.
+
+Carry out an actor smiting:
+	Now the actor is smiter;
+	Try the actor hitting the noun;
+	Now the actor is not smiter;
+
+Attack modifier rule (this is the smiting guarantees hit rule):
+	If the global attacker is smiter:
+		say " + 100 (smiting)[run paragraph on]";
+		increase the attack strength by 100;
+
+Last damage multiplier rule (this is the smiting overrides damage multiplier rule):
+	if the global attacker is smiter:
+		say " (reset to 100 by smiting)[run paragraph on]";
+		now the attack damage is 100;
+
+The standard show the attack damage dealt rule is listed after the smiting overrides damage multiplier rule in the damage multiplier rules.
 
 Ramboing is an action applying to nothing. Understand "rambo" as ramboing.
 

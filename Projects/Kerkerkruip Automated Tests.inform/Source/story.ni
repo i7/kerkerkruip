@@ -723,7 +723,7 @@ To extract (guy - a person) to (place - a room):
 	
 To have (guy - a person) defeat (loser - a person):
 	Now the health of loser is -1;
-	Have an event of guy killing loser;
+	Have an event of guy killing loser;	
 	
 To have the player sacrifice (stuff - a power):
 	now the current question is "Which power do you want to sacrifice? (Please enter a number.)";
@@ -931,4 +931,16 @@ Testing a turn-based event for mindslug-runner:
 	assert that the event description includes "Fafhrd does not overcome";
 	assert that the event description includes "Mouser does not overcome";
 	
-[lose concentration sometimes?]
+Section - Killing Drakul Reward
+
+killing drakul reward is a test set.
+
+parting shots is a test set.
+
+A scenario rule when testing parting shots:
+	now mindslug is testobject;
+	now armadillo is testobject;
+	now cloak of shadows is testobject;
+	
+A test play when testing parting shots:
+	

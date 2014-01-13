@@ -128,7 +128,6 @@ Section - Defining perform syntax (not for use with Glimmr Canvas Animation by E
 To say perform/@ (ph - phrase): (- if (0==0) {ph} -).
 
 
-
 Section - Plurality fix
 
 [Let's see whether this works.]

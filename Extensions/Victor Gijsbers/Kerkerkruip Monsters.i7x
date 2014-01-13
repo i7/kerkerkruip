@@ -6313,10 +6313,16 @@ Section - Prose
 
 Report an actor hitting the dead Drakul:
 	if Drakul's lifeblood is off-stage:
-		say "As [the actor] destroys the infamous vampire, a small vial of blood drops on the floor.";
+		say "As [the actor] [kills Drakul], a small vial of blood drops on the floor.";
 	otherwise:
-		say "[The actor] destroys the infamous vampire, who crumbles away into ashes.";
+		say "[The actor] [kills Drakul], [if the actor is Drakul]and[otherwise]who[end if] crumbles away into ashes.";
 	rule succeeds.
+
+To say kills Drakul:
+	if the prior named noun is Drakul:
+	 	say "drains his own blood";
+	otherwise:
+		say "destroy[s] the infamous vampire";
 
 Drakul-victory is a truth state that varies. Drakul-victory is false.
 
