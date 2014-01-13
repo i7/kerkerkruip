@@ -119,7 +119,8 @@ Carry out attacking:
 An aftereffects rule (this is the be detected after successful attack rule):
 	if the global attacker is the player and the attack damage is greater than 0:
 		now hiding action penalty is 10;
-		now hiding action penalty text is "successfully attacking".
+		now hiding action penalty text is "successfully attacking";
+		now global defender is on-the-lookout.
 
 Carry out concentrating:
 	now hiding action penalty is 3;
