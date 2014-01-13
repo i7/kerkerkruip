@@ -160,6 +160,7 @@ To decide whether there is no perceived threat for (guy - a person):
 Section - Hiding
 
 To hide:
+	update the combat status;
 	if the combat status is peace:
 		say "You blend into the shadows.";
 		now the player is hidden;

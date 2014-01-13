@@ -991,6 +991,7 @@ The cloak of shadows is cloth.
 The description of the cloak of shadows is "Wearing this powerful cloak allows you to become hidden and sneak through the dungeon undetected. You cannot hide in the presence of enemies, though.".
 
 Every turn when the player wears the cloak of shadows (this is the blend into shadows rule):
+	update the combat status;
 	if combat status is peace:
 		if the player is not hidden and the player is alive and the player is the main actor:
 			hide.
