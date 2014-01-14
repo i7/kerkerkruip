@@ -1026,14 +1026,16 @@ Random outcome testing when drakul going insane became the possibility:
 	
 insane drakul statements is a randomized event.
 
-[TODO: find out why this doesn't happen]
 Randomized event testing for insane drakul statements:
 	transcribe and restart capturing;
 	try drakul waiting;
 	stop and save event description;
 	transcribe and restart capturing;
 	
-simple drakul identity is a random outcome. nested conditionals is a random outcome. nested belief is a random outcome.
+[some of these appear too unlikey to happen within 100 iterations. Increase iterations?]
+simple drakul identity is a random outcome. simple drakul identity results from insane drakul statement.
+nested conditionals is a random outcome. nested conditionals results from insane drakul statements. 
+nested belief is a random outcome. nested belief results from insane drakul statements.
 
 random outcome testing when simple drakul identity became the possibility:
 	if the event description matches the regular expression "^I am ":
