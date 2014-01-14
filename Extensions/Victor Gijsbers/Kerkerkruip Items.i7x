@@ -3232,7 +3232,7 @@ The minotaur's axe is an axe. The description of the minotaur's axe is "A [size 
 The minotaur's axe is large.
 
 The damage die of the minotaur's axe is 6.
-The weapon attack bonus of the minotaur's axe is -3.
+The weapon attack bonus of the minotaur's axe is -2.
 The weapon damage bonus of the minotaur's axe is 3.
 The parry-with bonus of the minotaur's axe is -2.
 
