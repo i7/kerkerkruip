@@ -6332,8 +6332,12 @@ To say kills Drakul:
 
 Drakul-victory is a truth state that varies. Drakul-victory is false.
 
+Drakul-favour is a truth state that varies.
+When play begins:
+	now Drakul-favour is whether or not a random chance of 1 in 3 succeeds.
+
 Report Drakul hitting a dead pc:
-	if the player is not undead and a random chance of 1 in 3 succeeds:
+	if the player is not undead and Drakul-favour is true:
 		say "'Don't be afraid of death, my child,' Drakul chuckles. 'For I have decided that you will rise again as my child! Combining my power and your ability to absorb souls, we will be invincible. And I will finally rule the world!'";
 		now health of the player is 1;
 		now Drakul-victory is true;

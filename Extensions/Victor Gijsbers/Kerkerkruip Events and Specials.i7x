@@ -416,7 +416,7 @@ Definition: A person (called guy) is human:
 
 Definition: a person is sane if it is not insane.
 
-Section - Say Phrases
+Section - General Say Phrases
 
 [Most of these phrases involve a truth state parameter, which will toggle whether they say something true or something false. The parameter is called condition for lack of a better word]
 
@@ -450,7 +450,7 @@ To say not four:
 [TODO: add dungeon truth/lie statements e.g. there is a hidden room, epic artifact, monster, sarcophagus contains an undead creature, abyss of the soul is in the dungeon]
 
 To say actually (condition - a truth state) Drakul statement:
-	say "[one of]two plus two is [if condition is true]four[otherwise][not four][end if][or][Actually condition I Drakul statement][or]you are [actually condition noun predicate of player][at random]";
+	say "[one of]two plus two is [if condition is true]four[otherwise][not four][end if][or][Actually condition I Drakul statement][or]you are [actually condition noun predicate of player][or][actually condition Drakul hint][at random]";
 	[TODO: add lowercase recursive lie/truth?]
 		
 To say actually (condition - a truth state) I Drakul statement:
@@ -568,6 +568,38 @@ To say actually (condition - a truth state) compound identity of (guy - a person
 		now second condition is true;
 	say "a[if first condition is whether or not guy is insane]n in[otherwise] [end if]sane [actually second condition vampiric identity of guy]";
 
+Section - Drakul Hints
 
+To say actually (condition - a truth state) Drakul hint:
+	if vampire-form is not form-active and a random chance of 1 in 2 succeeds:
+		say actually condition lifeblood hint;
+		stop;
+	say actually condition vampire-turning hint;
 
+Definition: a room is lifeblood-free if it is not the location of drakul's lifeblood;
+
+To say actually (condition - a truth state) lifeblood hint:
+	if condition is whether or not drakul's lifeblood is off-stage:
+		say "I am carrying a vial of my lifeblood";
+		stop;
+	Let vial-location be the location of drakul's lifeblood;
+	If condition is false:
+		now vial-location is a random placed lifeblood-free room;
+	say "a vial of my lifeblood";
+	if vial-location is a room:	
+		if vial-location is the location:
+			say " is in this room";
+		otherwise if vial-location is a visited room:
+			say " is in [vial-location]";
+		otherwise if vial-location is a placed room:
+			say " [directions to vial-location]";
+	otherwise:
+		say " is somewhere in Kerkerkruip";
+
+To say actually (condition - a truth state) vampire-turning hint:
+	if Drakul-favour is condition:
+		say "I intend to vanquish Malygris after I make you my vampire-slave";
+	otherwise:
+		say "you will never be my vampire-slave";
+		
 Kerkerkruip Events and Specials ends here.

@@ -608,12 +608,16 @@ Carry out sensing:
 			now world test subject is player;
 			repeat with item running through worldsharer epic things:
 				if location of item is not location of the player and location of item is placed:
-					let the way be the best route from the location of player to the location of item;
-					if way is a direction:
-						say "[line break]You sense an epic artefact that can be found by going [way] from here.[line break]";
-					otherwise:
-						say "[line break]You sense an epic artefact that is currently unreachable, but lies somewhere [general direction from location of the player to location of the item].[line break]".
+					say "[line break]You sense an epic artefact that [directions to location of item].[line break]";
+					
 
+To say directions to (destination - a room):
+	let the way be the best route from the location of player to destination;
+	if way is a direction:
+		say "can be found by going [way] from here";
+	otherwise:
+		say "is currently unreachable, but lies somewhere [general direction from location of the player to destination]".
+	
 To say general direction from (place1 - a room) to (place2 - a room):
 	let K be a list of directions;
 	if x-coordinate of place1 is less than x-coordinate of place2:

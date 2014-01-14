@@ -1037,6 +1037,8 @@ Randomized event testing for insane drakul statements:
 simple drakul identity is a random outcome. simple drakul identity results from insane drakul statements.
 nested conditionals is a random outcome. nested conditionals results from insane drakul statements. 
 nested belief is a random outcome. nested belief results from insane drakul statements.
+lifeblood-hinting is a random outcome. lifeblood-hinting results from insane drakul statements.
+vampire-turning-hinting is a random outcome. vampire-turning-hinting results from insane drakul statements.
 
 random outcome testing when simple drakul identity became the possibility:
 	if the event description matches the regular expression "Drakul says, 'I am ":
@@ -1053,3 +1055,11 @@ random outcome testing when nested belief became the possibility:
 	unless the event description matches the regular expression "I believe that I believe", make no decision;
 	mark the outcome achieved;
 		
+random outcome testing when lifeblood-hinting became the possibility:
+	unless the event description matches the regular expression "a vial of my lifeblood\b", make no decision;
+	mark the outcome achieved;
+	assert that the event description includes "I am carrying| is in | can be found | is currently unreachable ";
+	
+random outcome testing when vampire-turning-hinting became the possibility:
+	unless the event description matches the regular expression "\bI intend to vanquish Malygris after I make you my vampire-slave\b|\byou will never be my vampire-slave\b", make no decision;
+	mark the outcome achieved;
