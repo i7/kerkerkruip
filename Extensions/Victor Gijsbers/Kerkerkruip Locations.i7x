@@ -106,11 +106,12 @@ Check an actor hitting when the location is Hall of Mirrors (this is the sometim
 		unless the global attacker grapples the global defender:
 			unless the global defender grapples the global attacker:
 				unless reflection-attack is true:
-					test the mind of global attacker against 10;
+					test the mind of global attacker against (14 - tension);
 					if test result is false:
 						say " Confused by the mirrors, [if global attacker is the player]you start[otherwise][the global attacker] starts[end if] attacking a reflection before realising [if global attacker is the player]your[otherwise]its[end if] mistake.";
 						if the concentration of the global attacker is greater than 1:
 							now the concentration of the global attacker is 1; 
+						consider the special dagger of double strike rule;
 						rule fails;
 		[				consider the take away until attack circumstances rules;]
 					otherwise:

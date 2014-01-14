@@ -2981,6 +2981,20 @@ Last after reporting an actor hitting (this is the hit again with the dagger of 
 					try the global attacker hitting the global defender;
 					now making-double-strike is false.
 
+This is the special dagger of double strike rule:
+	if the main actor is the player:
+		if the dagger of double strike is readied and the player encloses the dagger of the double strike:
+			if making-double-strike is false:
+				if the player is alive and the noun is alive:
+					now making-double-strike is true;
+					say "The dagger of the double strike slashes out again!";
+					try the player hitting the noun;
+					now making-double-strike is false.
+
+Every turn:
+	now making-double-strike is false.
+
+
 Section - The backstabber (cursed)
 
 There is a cursed curse-identified dagger called the backstabber.
