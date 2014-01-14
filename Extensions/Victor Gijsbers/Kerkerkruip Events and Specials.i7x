@@ -246,6 +246,8 @@ Godlijst is a list of texts that varies.
 
 The challenged god is an object that varies.
 
+Definition: A person is god-champion if it worships the challenged god.
+
 ChosenFighting is an action applying to nothing.
 
 Instead of entering the godfight pedestal:
@@ -263,13 +265,18 @@ Check ChosenFighting (this is the can't ChosenFight twice rule):
 		say "You have already fought for the honour of [the patron of the player]!  [It-they] [is-are]n't willing to sit through another fight again.";
 		stop the action.	
 
+To say Divine lightning strikes (guy - a person):
+	let x be a random number between 3 and 7;
+	say "A ball of lightning shoots from the sky, doing [x] damage to [the guy]";
+	decrease the health of the guy by x;
+	if the guy is dead:
+		say ", [bold type]killing [it-them][roman type]";
+
 Check ChosenFighting (this is the must be religious to fight gods rule):
 	if the player does not worship a god:
-		let x be a random number between 3 and 7;
-		decrease the health of the player by x;
-		say "A roaring voice answers your call: 'YOU CANNOT DEFEND ANY RELIGION YOU MIGHT WORSHIP AT THIS HOLY PLACE, INFIDEL!' A ball of lightning shoots from the sky, doing [x] damage to you!";
+		say "A roaring voice answers your call: 'YOU CANNOT DEFEND ANY RELIGION YOU MIGHT WORSHIP AT THIS HOLY PLACE, INFIDEL!' [Divine lightning strikes the player]!";
 		if the health of the player is less than 1:
-			end the story saying "The Gods do not appreciate nonbelievers. The divine ball of lightning deprives you of your life.";
+			end the story saying "The Gods do not appreciate nonbelievers.";
 		stop the action.
 
 Carry out ChosenFighting:
@@ -372,6 +379,15 @@ Check an actor challenging someone in the Maze when the location is Arena of the
 	say "Space and time begin to twist around the minotaur's axe, and then untwist again as the gods stop [the global attacker] and [the global defender] from being transported to the maze!";
 	[insert punishments here?]
 	stop the action;
+
+First every turn when the location is Arena of the Gods:
+	Repeat with offender running through god-champion people who do not oppose the player:
+		if offender does not oppose the player:
+			say "[The challenged god] is angered by [possessive of the offender] lack of faith! [Divine lightning strikes offender].";
+			if offender is alive:
+				now offender is arena-faction;
+				now arena-faction hates the faction of the player;
+				say "[line break][The offender] prostrates [it-them]self. 'I beg for your mercy, O great [challenged god],' [it-they] pray[s]. Then [it-they] rise[s] to fight you again!";
 
 Section - Awarding divine power 
 

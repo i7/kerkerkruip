@@ -50,7 +50,7 @@ Use maximum capture buffer length of at least 8192.
 Use maximum indexed text length of at least 8192. 
 
 First when play begins (this is the random seed rule):
-	seed the random-number generator with 7.
+	seed the random-number generator with 6.
 
 The random seed rule is listed before the reaper carries a random scythe rule in the when play begins rules.
 
@@ -790,11 +790,6 @@ A test play when testing Aite champions vs bat:
 	try turning bat;
 	test aite spike vs bat;
 	transcribe and restart capturing;
-	try enslaving the tormentor of aite;
-	stop and save event description;
-	assert that the event description includes "will do your bidding";
-	have the player defeat the defender of aite;
-	have the player defeat the healer of aite;
 	
 Player-targeted is a truth state that varies.
 Player-damaged is a truth state that varies.
@@ -837,6 +832,18 @@ Random outcome testing when bat avoiding gigantic spike became the possibility:
 	unless the event description matches the regular expression "gigantic", make no decision;
 	mark the outcome achieved;
 	assert that the event description includes "fly around";
+
+Arena-tormentor-enslaving is a turn-based event. The first move of Aite champions vs bat is Arena-tormentor-enslaving. The scheduled action of Arena-tormentor-enslaving is the action of enslaving the tormentor of Aite.
+
+Testing a turn-based event of Arena-tormentor-enslaving:
+	assert that the event description includes "will do your bidding";
+	assert that the event description includes "ball of lightning .* damage to the tormentor of Aite";
+	if the tormentor of Aite is alive:
+		assert that the event description includes "The tormentor of Aite prostrates herself. 'I beg for your mercy, O great Aite,' she prays. Then she rises to fight you again!";
+		assert that the tormentor of Aite opposes the player;
+	otherwise:
+		assert that the event description includes ", killing her";
+
 	
 Section - Chton Champion vs Bat
 
@@ -953,8 +960,6 @@ Testing a turn-based event for mindslug-runner:
 	assert hit-attempt by fafhrd;
 	assert hit-attempt by mouser;
 	
-Section - Smiting Drakul Reward
-
 Section - Insane Drakul
 
 insane drakul is a test set.
@@ -1063,3 +1068,5 @@ random outcome testing when lifeblood-hinting became the possibility:
 random outcome testing when vampire-turning-hinting became the possibility:
 	unless the event description matches the regular expression "\bI intend to vanquish Malygris after I make you my vampire-slave\b|\byou will never be my vampire-slave\b", make no decision;
 	mark the outcome achieved;
+	
+Section - Attempting to Maze Someone in Arena of the Gods
