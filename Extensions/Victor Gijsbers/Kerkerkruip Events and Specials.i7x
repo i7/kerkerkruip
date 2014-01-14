@@ -418,17 +418,17 @@ Definition: a person is sane if it is not insane.
 
 Section - General Say Phrases
 
-[Most of these phrases involve a truth state parameter, which will toggle whether they say something true or something false. The parameter is called condition for lack of a better word]
+[Most of these phrases involve a truth state parameter, which will toggle whether they say something true or something false. The parameter is called honest for lack of a better word]
 
-To say Actually (condition - a truth state) Drakul statement:
+To say Actually (honest - a truth state) Drakul statement:
 	if a random chance of 1 in 20 succeeds:
-		if condition is true:
+		if honest is true:
 			Let N be a random number from 1 to 10;
 			say "[N in sentence case] plus [N in words] is [N + N in words]";
 		otherwise:	
 			say "Two plus two is [not four]";
 	otherwise:
-		say "[one of][Actually condition recursive statement][or][Actually condition I Drakul statement][or]You are [actually condition noun predicate of player][as decreasingly likely outcomes]";
+		say "[one of][Actually honest recursive statement][or][Actually honest I Drakul statement][or]You are [actually honest noun predicate of player][as decreasingly likely outcomes]";
 	
 To say (N - a number) in sentence case:
 	if N is:
@@ -449,70 +449,70 @@ To say not four:
 	
 [TODO: add dungeon truth/lie statements e.g. there is a hidden room, epic artifact, monster, sarcophagus contains an undead creature, abyss of the soul is in the dungeon]
 
-To say actually (condition - a truth state) Drakul statement:
-	say "[one of]two plus two is [if condition is true]four[otherwise][not four][end if][or][Actually condition I Drakul statement][or]you are [actually condition noun predicate of player][or][actually condition Drakul hint][at random]";
+To say actually (honest - a truth state) Drakul statement:
+	say "[one of]two plus two is [if honest is true]four[otherwise][not four][end if][or][Actually honest I Drakul statement][or]you are [actually honest noun predicate of player][or][actually honest Drakul hint][at random]";
 	[TODO: add lowercase recursive lie/truth?]
 		
-To say actually (condition - a truth state) I Drakul statement:
+To say actually (honest - a truth state) I Drakul statement:
 	if a random chance of 3 in 5 succeeds:
-		say Drakul's condition belief;
+		say Drakul's honest belief;
 	otherwise:
-		say "I am [actually condition noun predicate of Drakul]";
+		say "I am [actually honest noun predicate of Drakul]";
 	
-To say Drakul's (condition - a truth state) belief:
+To say Drakul's (honest - a truth state) belief:
 	say "I believe that ";
-	if (Drakul is sane and condition is false) or (Drakul is insane and condition is true):
+	if (Drakul is sane and honest is false) or (Drakul is insane and honest is true):
 		say actually false Drakul statement;
 	otherwise:
 		say actually true Drakul statement;
 	
-To say actually (condition - a truth state) noun predicate of (guy - a person):
-	Let negated condition be whether or not condition is false;
-	say "[one of][actually condition identity of guy][or]not [actually negated condition identity of guy][at random]";
+To say actually (honest - a truth state) noun predicate of (guy - a person):
+	Let lying be whether or not honest is false;
+	say "[one of][actually honest identity of guy][or]not [actually lying identity of guy][at random]";
 				
-To say Actually (condition - a truth state) recursive statement:
+To say Actually (honest - a truth state) recursive statement:
 	[TODO: add more]
-	say "[one of][Actually condition if-statement][or][Actually condition or-statement][or][Actually condition paired statement][or][Actually condition and-statement][as decreasingly likely outcomes]";
+	say "[one of][Actually honest if-statement][or][Actually honest or-statement][or][Actually honest paired statement][or][Actually honest and-statement][as decreasingly likely outcomes]";
 	
-To say Actually (condition - a truth state) if-statement:
-	Let first condition be a random truth state;
-	Let second condition be a random truth state;
-	If condition is false, now first condition is true;
-	If first condition is true, now second condition is condition;
-	say "If [actually first condition Drakul statement], then [actually second condition Drakul statement]";
+To say Actually (honest - a truth state) if-statement:
+	Let first honesty be a random truth state;
+	Let second honesty be a random truth state;
+	If honest is false, now first honesty is true;
+	If first honesty is true, now second honesty is honest;
+	say "If [actually first honesty Drakul statement], then [actually second honesty Drakul statement]";
 	
-To say Actually (condition - a truth state) or-statement:
-	Let first condition be a random truth state;
-	Let second condition be a random truth state;
-	If condition is true:
+To say Actually (honest - a truth state) or-statement:
+	Let first honesty be a random truth state;
+	Let second honesty be a random truth state;
+	If honest is true:
 		if a random chance of 1 in 2 succeeds:
-			now first condition is true;
+			now first honesty is true;
 		otherwise:
-			now second condition is true;
+			now second honesty is true;
 	otherwise:
-		now first condition is false;
-		now second condition is false;
-	say "[Actually first condition Drakul statement], or [actually second condition Drakul statement]";
+		now first honesty is false;
+		now second honesty is false;
+	say "[Actually first honesty Drakul statement], or [actually second honesty Drakul statement]";
 	
-To say Actually (condition - a truth state) and-statement:
-	Let first condition be a random truth state;
-	Let second condition be a random truth state;
-	If condition is true:
-		now first condition is true;
-		now second condition is true;
+To say Actually (honest - a truth state) and-statement:
+	Let first honesty be a random truth state;
+	Let second honesty be a random truth state;
+	If honest is true:
+		now first honesty is true;
+		now second honesty is true;
 	otherwise:
 		if a random chance of 1 in 2 succeeds:
-			now first condition is false;
+			now first honesty is false;
 		otherwise:
-			now second condition is false;
-	say "[Actually first condition Drakul statement], and [actually second condition Drakul statement]";
+			now second honesty is false;
+	say "[Actually first honesty Drakul statement], and [actually second honesty Drakul statement]";
 	
-To say Actually (condition - a truth state) paired statement:
-	Let first condition be a random truth state;
-	Let second condition be a random truth state;
-	Let linking condition be whether or not first condition is second condition;
-	Let reported link be whether or not condition is linking condition;
-	say "If you were to ask me whether [actually first condition Drakul statement], and then you were to ask me whether [actually second condition Drakul statement], I would give you ";
+To say Actually (honest - a truth state) paired statement:
+	Let first honesty be a random truth state;
+	Let second honesty be a random truth state;
+	Let linking condition be whether or not first honesty is second honesty;
+	Let reported link be whether or not honesty is linking condition;
+	say "If you were to ask me whether [actually first honesty Drakul statement], and then you were to ask me whether [actually second honesty Drakul statement], I would give you ";
 	if reported link is true:
 		say "the same answer both times";
 	otherwise:
@@ -523,67 +523,67 @@ Definition: A person (called guy) is Smullyan-reliable:
 		decide on whether or not guy is insane;
 	decide on whether or not guy is sane;
 	
-To say actually (condition - a truth state) identity of (guy - a person):
-	say "[one of][actually condition reliability of guy][or][actually condition compound identity of guy][or][actually condition vampiric identity of guy with indefinite article][or][actually condition sanity of guy][at random]";
+To say actually (honest - a truth state) identity of (guy - a person):
+	say "[one of][actually honest reliability of guy][or][actually honest compound identity of guy][or][actually honest vampiric identity of guy with indefinite article][or][actually honest sanity of guy][at random]";
 	
-To say actually (condition - a truth state) vampiric identity of (guy - a person):
-	if condition is true and guy is not vampire:
+To say actually (honest - a truth state) vampiric identity of (guy - a person):
+	if honest is true and guy is not vampire:
 		say "[if guy is human]human[otherwise]being[end if]";
-	otherwise if condition is whether or not guy is vampire:
+	otherwise if honest is whether or not guy is vampire:
 		say "vampire";
 	otherwise:
 		say "human";
 
-To say actually (condition - a truth state) vampiric identity of (guy - a person) with indefinite article:
-	if condition is whether or not guy is human:
+To say actually (honest - a truth state) vampiric identity of (guy - a person) with indefinite article:
+	if honest is whether or not guy is human:
 		say "human";
-	otherwise if condition is true and guy is not vampire:
+	otherwise if honest is true and guy is not vampire:
 		say "[if guy is undead]undead[otherwise if guy is alive]living[otherwise]dead[end if]";
 	otherwise:
-		say "a [actually condition vampiric identity of guy]";
+		say "a [actually honest vampiric identity of guy]";
 				
-To say actually (condition - a truth state) sanity of (guy - a person):
-	if condition is whether or not guy is insane:
+To say actually (honest - a truth state) sanity of (guy - a person):
+	if honest is whether or not guy is insane:
 		say "in";
 	say "sane";
 
-To say actually (condition - a truth state) reliability of (guy - a person):
-	if condition is true and guy is not Drakul:
+To say actually (honest - a truth state) reliability of (guy - a person):
+	if honest is true and guy is not Drakul:
 		say "someone who might sometimes [one of]lie[or]tell the truth[at random]";
-	otherwise if condition is whether or not guy is Smullyan-reliable:
+	otherwise if honest is whether or not guy is Smullyan-reliable:
 		say "someone who always tells the truth";
 	otherwise:
 		say "someone who always lies";
 	
-To say actually (condition - a truth state) compound identity of (guy - a person):
-	Let first condition be a random truth state;
-	Let second condition be a random truth state;
-	if condition is false:
+To say actually (honest - a truth state) compound identity of (guy - a person):
+	Let first honesty be a random truth state;
+	Let second honesty be a random truth state;
+	if honest is false:
 		if a random chance of 1 in 2 succeeds:
-			now first condition is false;
+			now first honesty is false;
 		otherwise:
-			now second condition is false;
+			now second honesty is false;
 	otherwise:
-		now first condition is true;
-		now second condition is true;
-	say "a[if first condition is whether or not guy is insane]n in[otherwise] [end if]sane [actually second condition vampiric identity of guy]";
+		now first honesty is true;
+		now second honesty is true;
+	say "a[if first honesty is whether or not guy is insane]n in[otherwise] [end if]sane [actually second honesty vampiric identity of guy]";
 
 Section - Drakul Hints
 
-To say actually (condition - a truth state) Drakul hint:
+To say actually (honest - a truth state) Drakul hint:
 	if vampire-form is not form-active and a random chance of 1 in 2 succeeds:
-		say actually condition lifeblood hint;
+		say actually honest lifeblood hint;
 		stop;
-	say actually condition vampire-turning hint;
+	say actually honest vampire-turning hint;
 
 Definition: a room is lifeblood-free if it is not the location of drakul's lifeblood;
 
-To say actually (condition - a truth state) lifeblood hint:
-	if condition is whether or not drakul's lifeblood is off-stage:
+To say actually (honest - a truth state) lifeblood hint:
+	if honest is whether or not drakul's lifeblood is off-stage:
 		say "I am carrying a vial of my lifeblood";
 		stop;
 	Let vial-location be the location of drakul's lifeblood;
-	If condition is false:
+	If honest is false:
 		now vial-location is a random placed lifeblood-free room;
 	say "a vial of my lifeblood";
 	if vial-location is a room:	
@@ -596,8 +596,8 @@ To say actually (condition - a truth state) lifeblood hint:
 	otherwise:
 		say " is somewhere in Kerkerkruip";
 
-To say actually (condition - a truth state) vampire-turning hint:
-	if Drakul-favour is condition:
+To say actually (honest - a truth state) vampire-turning hint:
+	if Drakul-favour is honest:
 		say "I intend to vanquish Malygris after I make you my vampire-slave";
 	otherwise:
 		say "you will never be my vampire-slave";

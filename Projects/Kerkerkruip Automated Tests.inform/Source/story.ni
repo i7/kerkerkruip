@@ -1058,7 +1058,7 @@ random outcome testing when nested belief became the possibility:
 random outcome testing when lifeblood-hinting became the possibility:
 	unless the event description matches the regular expression "a vial of my lifeblood\b", make no decision;
 	mark the outcome achieved;
-	assert that the event description includes "I am carrying| is in | can be found | is currently unreachable ";
+	assert that the event description includes "I am carrying| is in | can be found | is currently unreachable, ";
 	
 random outcome testing when vampire-turning-hinting became the possibility:
 	unless the event description matches the regular expression "\bI intend to vanquish Malygris after I make you my vampire-slave\b|\byou will never be my vampire-slave\b", make no decision;
