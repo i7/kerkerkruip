@@ -1289,7 +1289,11 @@ Understand "armor" as the suit of dragon armour.
 
 [The difficulty level of suit of dragon armour is 3.]
 
-The description of the suit of dragon armour is "This lovely suit has been made of dragon leather, the most durable and most magical substance known to man. It protects the wearer against most kinds of damage, but continuously drains his or her health. Use with extreme caution.".
+The blood magic cost of suit of dragon armour is 3.
+The blood magic level of suit of dragon armour is 2.
+The blood magic maximum of suit of dragon armour is 99.
+
+The description of the suit of dragon armour is "This lovely suit has been made of dragon leather, the most durable and most magical substance known to man. Whenever the wearer is hit, the suit absorbs between 0 and [blood magic level of suit of dragon armour] damage. The maximum will increase by 1 when the suit is fed.".
 			
 Heat resistance rule (this is the dragon armour heat resistance rule):
 	if test subject is wearing the suit of dragon armour:
@@ -1299,18 +1303,22 @@ Heat resistance rule (this is the dragon armour heat resistance rule):
 
 A damage modifier rule (this is the dragon armour damage modifiers rule):
 	if the global defender is wearing the suit of dragon armour:
-		if the main actor is not undead:
+		let n be a random number between 0 and blood magic level of suit of dragon armour;
+		say " - [n] (dragon armour)[run paragraph on]";
+		decrease the attack damage by n;
+[		if the main actor is not undead:
 			say " - 4 (dragon armour)[run paragraph on]";
 			decrease the attack damage by 4;
 		otherwise:
 			say " - 2 (dragon armour)[run paragraph on]";
-			decrease the attack damage by 2.
+			decrease the attack damage by 2.]
 
 A physical damage reduction rule (this is the dragon armour damage reduction rule):
 	if the test subject is wearing the dragon armour:
-		increase the pdr by 2;
-		if the test subject is not undead:
-			increase the pdr by 2.
+		let n be a random number between 0 and blood magic level of suit of dragon armour;
+		increase the pdr by n;
+		[if the test subject is not undead:
+			increase the pdr by 2].
 
 [Before printing the name of suit of dragon armour:
 	now not-mentioning-hotness is true.
@@ -1323,13 +1331,13 @@ An AI action selection rule for a person (called P) (this is the concentrate to 
 		choose row with an Option of the action of P concentrating in the Table of AI Action Options;
 		increase the Action Weight entry by 4.
 
-Every turn when the main actor wears the dragon armour:
+[Every turn when the main actor wears the dragon armour:
 	if the health of the main actor is greater than 0:
 		if the main actor is not undead or a random chance of 1 in 3 succeeds:
 			if a random chance of 1 in 2 succeeds:
 				decrease the health of the main actor by 1;
 		if the health of the main actor is less than 1:
-			end the story saying "The dragon armour has claimed your life".
+			end the story saying "The dragon armour has claimed your life".]
 
 
 
