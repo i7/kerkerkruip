@@ -714,7 +714,7 @@ Favour rule for Chton (this is the Chton favour 6 rule):
 
 Favour rule for Chton (this is the Chton favour 9 rule):
 	if divine favour is 9:
-		say "Chton grants you the ability to switch to lich form, and gifst you three more scrolls.";
+		say "Chton grants you the ability to switch to lich form, and gifts you three more scrolls.";
 		do a Chton gift;
 		do a Chton gift;
 		do a Chton gift;
