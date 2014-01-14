@@ -1033,19 +1033,23 @@ Randomized event testing for insane drakul statements:
 	transcribe and restart capturing;
 	
 [some of these appear too unlikey to happen within 100 iterations. Increase iterations?]
-simple drakul identity is a random outcome. simple drakul identity results from insane drakul statement.
+simple drakul identity is a random outcome. simple drakul identity results from insane drakul statements.
 nested conditionals is a random outcome. nested conditionals results from insane drakul statements. 
 nested belief is a random outcome. nested belief results from insane drakul statements.
 
 random outcome testing when simple drakul identity became the possibility:
-	if the event description matches the regular expression "^I am ":
+	if the event description matches the regular expression "Drakul says, 'I am ":
+		if the event description matches the regular expression "not", make no decision;
+		if the event description matches the regular expression "someone who", make no decision;
 		mark the outcome achieved;
 		assert that the event description includes "vampire|insane";
 		
 random outcome testing when nested conditionals became the possibility:
-	unless the event description matches the regular expression "^If .*,", make no decision;
+	unless the event description matches the regular expression "Drakul says, 'If .*,", make no decision;
 	if the event description matches the regular expression "I would give you", make no decision;
-	mark the outcome achieved;
-	assert that the event description includes ", if|, and|, or";
+	if the event description matches the regular expression ", if|, and|, or", mark the outcome achieved;
 		
+random outcome testing when nested belief became the possibility:
+	unless the event description matches the regular expression "I believe that I believe", make no decision;
+	mark the outcome achieved;
 		

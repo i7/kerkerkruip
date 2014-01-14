@@ -537,6 +537,8 @@ To say actually (condition - a truth state) vampiric identity of (guy - a person
 To say actually (condition - a truth state) vampiric identity of (guy - a person) with indefinite article:
 	if condition is whether or not guy is human:
 		say "human";
+	otherwise if condition is true and guy is not vampire:
+		say "[if guy is undead]undead[otherwise if guy is alive]living[otherwise]dead[end if]";
 	otherwise:
 		say "a [actually condition vampiric identity of guy]";
 				
