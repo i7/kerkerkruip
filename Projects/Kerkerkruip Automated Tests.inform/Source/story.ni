@@ -879,7 +879,8 @@ Testing a turn-based event for arena-vampire-joining:
 chton-arena-cheating is a turn-based event. The next move of arena-vampire-joining is chton-arena-cheating. The scheduled action of chton-arena-cheating is the action of smiting drakul.
 
 Testing a turn-based event for chton-arena-cheating:
-	assert that the event description includes "infamous vampire, who crumbles away into ashes";
+	[should the lifeblood appear a second time just because drinking it removes it from play?]
+	assert that the event description includes ["infamous vampire, who crumbles away into ashes"] "infamous vampire, a small vial";
 	assert that the event description includes "transported back to the Hall of Gods";
 	assert that the location of the summoned creature is Hall of Gods;
 	
@@ -1039,8 +1040,7 @@ nested belief is a random outcome. nested belief results from insane drakul stat
 
 random outcome testing when simple drakul identity became the possibility:
 	if the event description matches the regular expression "Drakul says, 'I am ":
-		if the event description matches the regular expression "not", make no decision;
-		if the event description matches the regular expression "someone who", make no decision;
+		if the event description matches the regular expression "not|someone who|, and|, or", make no decision;
 		mark the outcome achieved;
 		assert that the event description includes "vampire|insane";
 		
