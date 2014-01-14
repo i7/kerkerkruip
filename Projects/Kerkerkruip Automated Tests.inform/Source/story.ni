@@ -496,6 +496,7 @@ To record a test attempt:
 		now failures entry is 0;
 		now failure messages entry is "";
 	increment the total entry;
+	say ". "
 	
 To record a/-- failure of/-- (msg - an indexed text):
 	Let testnum be current test set as a number;
@@ -825,7 +826,7 @@ Random outcome testing when bat avoiding huge spike became the possibility:
 	unless the event description matches the regular expression "huge", make no decision;
 	mark the outcome achieved;
 	assert that the event description includes "fly over";
-	
+
 Random outcome testing when bat avoiding gigantic spike became the possibility:
 	if player-targeted is false, make no decision;
  	if player-damaged is true, make no decision;

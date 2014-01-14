@@ -532,7 +532,7 @@ To say Actually (honest - a truth state) paired statement:
 	if reported link is true:
 		say "the same answer both times";
 	otherwise:
-		say "I would give you two different answers";
+		say "two different answers";
 		 
 Definition: A person (called guy) is Smullyan-reliable:
 	if guy is vampire:
