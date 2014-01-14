@@ -511,7 +511,7 @@ To say Actually (honest - a truth state) paired statement:
 	Let first honesty be a random truth state;
 	Let second honesty be a random truth state;
 	Let linking condition be whether or not first honesty is second honesty;
-	Let reported link be whether or not honesty is linking condition;
+	Let reported link be whether or not honest is linking condition;
 	say "If you were to ask me whether [actually first honesty Drakul statement], and then you were to ask me whether [actually second honesty Drakul statement], I would give you ";
 	if reported link is true:
 		say "the same answer both times";
