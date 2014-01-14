@@ -46,8 +46,14 @@ Section - Testing extensions
 Include Autoundo for Object Response Tests by Mike Ciul.
 Include Simple Unit Tests by Dannii Willis.
 
-Use maximum capture buffer length of at least 5280.
-Use maximum indexed text length of at least 5280. 
+Use maximum capture buffer length of at least 8192.
+Use maximum indexed text length of at least 8192. 
+
+First when play begins (this is the random seed rule):
+	seed the random-number generator with 7.
+
+The random seed rule is listed before the reaper carries a random scythe rule in the when play begins rules.
+
 
 Section - Increase memory settings
 
@@ -589,7 +595,7 @@ To decide whether testing (T - a test set):
 	if done testing is true, no;
 	decide on whether or not the current test set is T;
 
-First when play begins:
+First when play begins (this is the run all tests rule):
 	write "Test transcript for Kerkerkruip.[line break]" to file of test transcript;
 	start the next test;
 	transcribe and restart capturing text;
@@ -599,6 +605,8 @@ First when play begins:
 		consider the scenario rules;
 	otherwise:
 		transcribe and stop capturing.
+
+The random seed rule is listed before the run all tests rule in the when play begins rules.
 	
 Last when play begins:
 	if done testing is false:
@@ -639,6 +647,7 @@ To mark the/-- outcome as/-- achieved:
 	
 To test (E - a randomized event):
 	now the event being tested is E;
+	log "Testing random outcomes of [E].";
 	Repeat with i running from 1 to the maximum number of random event iterations:
 		if every possible random outcome is achieved, stop;
 		follow the randomized event testing rules for E;
@@ -766,8 +775,7 @@ assertion rulebook runs the test's assertions]
 A test play when testing Aite champions vs bat:
 	try butterflying;
 	try meatboying;
-	extract the player to the location of Drakul's lifeblood;
-	try taking Drakul's lifeblood;
+	now the player carries Drakul's lifeblood;
 	extract the player to the location of Bodmall;
 	have the player defeat Bodmall;
 	extract the player to temple of Chton;
@@ -844,11 +852,9 @@ A scenario rule when testing Chton champion vs bat:
 A test play when testing Chton champion vs bat:
 	try butterflying;
 	try meatboying;
-	extract the player to the location of Drakul's lifeblood;
-	try taking Drakul's lifeblood;
+	now the player carries Drakul's lifeblood;
 	let the item be a random not off-stage scroll of summoning;
-	extract the player to the location of the item;
-	try taking the item;
+	now the player carries the item;
 	extract the player to the location of Bodmall;
 	have the player defeat Bodmall;
 	extract the player to temple of Herm;
@@ -870,9 +876,10 @@ Testing a turn-based event for arena-vampire-joining:
 	assert truth of whether or not the summoned creature does not oppose the player with message "summoned creature shouldn't oppose undead player";
 	assert truth of whether or not the summoned creature opposes drakul with message "summoned creature should oppose drakul (unless Remko says this test is wrong)";
 
-chton-arena-cheating is a turn-based event. The next move of arena-vampire-joining is chton-arena-cheating. The scheduled action of chton-arena-cheating is the action of plunking drakul.
+chton-arena-cheating is a turn-based event. The next move of arena-vampire-joining is chton-arena-cheating. The scheduled action of chton-arena-cheating is the action of smiting drakul.
 
 Testing a turn-based event for chton-arena-cheating:
+	assert that the event description includes "infamous vampire, who crumbles away into ashes";
 	assert that the event description includes "transported back to the Hall of Gods";
 	assert that the location of the summoned creature is Hall of Gods;
 	
@@ -903,6 +910,17 @@ mindslug-reveal is a turn-based event. The first move of parting shots is mindsl
 
 mindslug-retreat is a turn-based event.  The next move of mindslug-reveal is mindslug-retreat. The scheduled action of mindslug-retreat is the action of retreating.
 
+A person can be attempting to hit.
+
+First before an actor hitting:
+	now the actor is attempting to hit.
+	
+To assert hit-attempt by (guy - a person):
+	assert truth of whether or not guy is attempting to hit with message "[The guy] should have tried hitting.";
+	
+To assert absence of hit-attempt by (guy - a person):
+	assert truth of whether or not guy is not attempting to hit with message "[The guy] should not have tried hitting.";
+	
 Before taking a player action when mindslug-retreat is the scheduled event:
 	now mindslug presses the player;
 	now concentration of mindslug is 0;
@@ -910,12 +928,15 @@ Before taking a player action when mindslug-retreat is the scheduled event:
 	now concentration of fafhrd is 1;
 	now mouser does not press the player;
 	now concentration of mouser is 0;
-	
+
+Before taking a player action:
+	now every person is not attempting to hit.
+		
 Testing a turn-based event for mindslug-retreat:
 	assert that the event description includes "bravely run away";
-	assert that the event description includes "mindslug does not overcome";
-	assert that the event description includes "Fafhrd does not overcome";
-	assert that the event description does not include "Mouser does not overcome";
+	assert hit-attempt by mindslug;
+	assert hit-attempt by fafhrd;
+	assert absence of hit-attempt by mouser;
 	
 mindslug-runner is a turn-based event. The next move of mindslug-retreat is mindslug-runner.
 
@@ -927,20 +948,102 @@ Before taking a player action when mindslug-runner is the scheduled event:
 	
 Testing a turn-based event for mindslug-runner:
 	assert that the event description includes "run past your enemies";
-	assert that the event description includes "mindslug does not overcome";
-	assert that the event description includes "Fafhrd does not overcome";
-	assert that the event description includes "Mouser does not overcome";
+	assert hit-attempt by mindslug;
+	assert hit-attempt by fafhrd;
+	assert hit-attempt by mouser;
 	
-Section - Killing Drakul Reward
+Section - Smiting Drakul Reward
 
-killing drakul reward is a test set.
+Section - Insane Drakul
+
+insane drakul is a test set.
 
 parting shots is a test set.
 
-A scenario rule when testing parting shots:
-	now mindslug is testobject;
-	now armadillo is testobject;
-	now cloak of shadows is testobject;
+A scenario rule when testing insane drakul:
+	Now drakul's lifeblood is bannedobject;
+	Now drakul is testobject;
+	Now staff of insanity is testobject;
 	
-A test play when testing parting shots:
+A test play when testing insane drakul:
+	try butterflying;
+	try ramboing;
+	extract the player to the location of drakul;
+	now the player carries staff of insanity;
+	try readying staff of insanity;
+	transcribe and restart capturing;
+	try Drakul concentrating;
+	stop and save event description;
+	assert that the event description includes "Drakul smiles a little wider";
+	transcribe and restart capturing;
+	try Drakul concentrating;
+	stop and save event description;
+	assert that the event description includes "'There is no need to fear me,' Drakul says as he concentrates more deeply\.";
+	transcribe and restart capturing;
+	try Drakul concentrating;
+	stop and save event description;
+	assert that the event description includes "Drakul attains the highest state of concentration. 'It feels so good to be alive!'";
+	transcribe and restart capturing;
+	test driving drakul insane;
+	now the concentration of drakul is 0;
+	transcribe and restart capturing;
+	try Drakul concentrating;
+	stop and save event description;
+	assert that the event description includes "Drakul smiles a little wider";
+	transcribe and restart capturing;
+	try Drakul concentrating;
+	stop and save event description;
+	assert that the event description includes "'An insane vampire always tells the truth\. And I tell you: You should fear me!' Drakul says as he concentrates more deeply.";
+	transcribe and restart capturing;
+	try Drakul concentrating;
+	stop and save event description;
+	assert that the event description includes "Drakul attains the highest state of concentration\. 'It feels so good to be alive - but I am undead!'";
+	transcribe and restart capturing;
+	test insane drakul statements;
+	now the health of drakul is 1;
+	now the melee of drakul is 100;
+	transcribe and restart capturing;
+	try drakul hitting drakul;
+	stop and save event description;
+	assert that the event description includes "drains his own blood, a small vial";
+	transcribe and restart capturing;
 	
+Driving Drakul insane is a randomized event.
+
+Randomized event testing for driving drakul insane:
+	now the health of the Drakul is 100;
+	transcribe and restart capturing;
+	try the player hitting drakul;
+	stop and save event description;
+	transcribe and restart capturing;
+	
+drakul going insane is a random outcome. It results from driving drakul insane.
+
+Random outcome testing when drakul going insane became the possibility:
+	if drakul is not insane, make no decision;
+	mark the outcome achieved;
+	assert that the event description includes "Drakul goes insane";
+	
+insane drakul statements is a randomized event.
+
+[TODO: find out why this doesn't happen]
+Randomized event testing for insane drakul statements:
+	transcribe and restart capturing;
+	try drakul waiting;
+	stop and save event description;
+	transcribe and restart capturing;
+	
+simple drakul identity is a random outcome. nested conditionals is a random outcome. nested belief is a random outcome.
+
+random outcome testing when simple drakul identity became the possibility:
+	if the event description matches the regular expression "^I am ":
+		mark the outcome achieved;
+		assert that the event description includes "vampire|insane";
+		
+random outcome testing when nested conditionals became the possibility:
+	unless the event description matches the regular expression "^If .*,", make no decision;
+	if the event description matches the regular expression "I would give you", make no decision;
+	mark the outcome achieved;
+	assert that the event description includes ", if|, and|, or";
+		
+		

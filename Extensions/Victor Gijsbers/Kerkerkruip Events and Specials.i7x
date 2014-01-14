@@ -388,4 +388,184 @@ For arena exit of Arena of the Gods:
 	remove the godfight pedestal from play;
 	now the challenged god is nothing.
 
+Chapter - Insane Vampire Talk
+
+[This little easter egg is inspired by Raymond Smullyan's book "What is the name of this book? The Riddle of Dracula and Other Logical Puzzles."
+
+In Smullyan's stories of Transylvania, all humans always tell the truth, as they believe it, and all vampires always lie, based on their beliefs. Everyone is either sane or insane, and sane people believe only true statments, while insane people believe only false statements. So it follows that sane humans and insane vampires always tell the truth.
+
+There's an additional wrinkle that in the court of Count Dracula, 'Bal' and 'Da' mean yes and no, but not necessarily in that order. I was unable to include any meaningful statements involving 'bal' and 'da,' but perhaps that's for the best!
+
+- Mike Ciul
+]
+
+Section - Definitions of human and vampire
+
+Definition: A person (called guy) is vampire:
+	if guy is the player and the current form is vampire-form, yes;
+	no.
+
+Definition: Drakul is vampire: yes.
+
+Definition: A person (called guy) is human:
+	if guy is not talker, no;
+	if guy is angelic or guy is demonic or guy is undead, no;
+	if guy is not medium, no;
+	if guy is vampire, no;
+	yes.
+
+Definition: a person is sane if it is not insane.
+
+Section - Say Phrases
+
+[Most of these phrases involve a truth state parameter, which will toggle whether they say something true or something false. The parameter is called condition for lack of a better word]
+
+To say Actually (condition - a truth state) Drakul statement:
+	if a random chance of 1 in 20 succeeds:
+		if condition is true:
+			Let N be a random number from 1 to 10;
+			say "[N in sentence case] plus [N in words] is [N + N in words]";
+		otherwise:	
+			say "Two plus two is [not four]";
+	otherwise:
+		say "[one of][Actually condition recursive statement][or][Actually condition I Drakul statement][or]You are [actually condition noun predicate of player][as decreasingly likely outcomes]";
+	
+To say (N - a number) in sentence case:
+	if N is:
+		-- 1: say "One";
+		-- 2: say "Two";
+		-- 3: say "Three";
+		-- 4: say "Four";
+		-- 5: say "Five";
+		-- 6: say "Six";
+		-- 7: say "Seven";
+		-- 8: say "Eight";
+		-- 9: say "Nine";
+		-- 10: say "Ten";
+		-- otherwise: say "[N]";
+		
+To say not four:
+	say "[one of]five[or][a random number from 6 to 100 in words][or][a random number from 101 to 20000 in words][at random]";
+	
+[TODO: add dungeon truth/lie statements e.g. there is a hidden room, epic artifact, monster, sarcophagus contains an undead creature, abyss of the soul is in the dungeon]
+
+To say actually (condition - a truth state) Drakul statement:
+	say "[one of]two plus two is [if condition is true]four[otherwise][not four][end if][or][Actually condition I Drakul statement][or]you are [actually condition noun predicate of player][at random]";
+	[TODO: add lowercase recursive lie/truth?]
+		
+To say actually (condition - a truth state) I Drakul statement:
+	if a random chance of 3 in 5 succeeds:
+		say Drakul's condition belief;
+	otherwise:
+		say "I am [actually condition noun predicate of Drakul]";
+	
+To say Drakul's (condition - a truth state) belief:
+	say "I believe that ";
+	if (Drakul is sane and condition is false) or (Drakul is insane and condition is true):
+		say actually false Drakul statement;
+	otherwise:
+		say actually true Drakul statement;
+	
+To say actually (condition - a truth state) noun predicate of (guy - a person):
+	Let negated condition be whether or not condition is false;
+	say "[one of][actually condition identity of guy][or]not [actually negated condition identity of guy][at random]";
+				
+To say Actually (condition - a truth state) recursive statement:
+	[TODO: add more]
+	say "[one of][Actually condition if-statement][or][Actually condition or-statement][or][Actually condition paired statement][or][Actually condition and-statement][as decreasingly likely outcomes]";
+	
+To say Actually (condition - a truth state) if-statement:
+	Let first condition be a random truth state;
+	Let second condition be a random truth state;
+	If condition is false, now first condition is true;
+	If first condition is true, now second condition is condition;
+	say "If [actually first condition Drakul statement], then [actually second condition Drakul statement]";
+	
+To say Actually (condition - a truth state) or-statement:
+	Let first condition be a random truth state;
+	Let second condition be a random truth state;
+	If condition is true:
+		if a random chance of 1 in 2 succeeds:
+			now first condition is true;
+		otherwise:
+			now second condition is true;
+	otherwise:
+		now first condition is false;
+		now second condition is false;
+	say "[Actually first condition Drakul statement], or [actually second condition Drakul statement]";
+	
+To say Actually (condition - a truth state) and-statement:
+	Let first condition be a random truth state;
+	Let second condition be a random truth state;
+	If condition is true:
+		now first condition is true;
+		now second condition is true;
+	otherwise:
+		if a random chance of 1 in 2 succeeds:
+			now first condition is false;
+		otherwise:
+			now second condition is false;
+	say "[Actually first condition Drakul statement], and [actually second condition Drakul statement]";
+	
+To say Actually (condition - a truth state) paired statement:
+	Let first condition be a random truth state;
+	Let second condition be a random truth state;
+	Let linking condition be whether or not first condition is second condition;
+	Let reported link be whether or not condition is linking condition;
+	say "If you were to ask me whether [actually first condition Drakul statement], and then you were to ask me whether [actually second condition Drakul statement], I would give you ";
+	if reported link is true:
+		say "the same answer both times";
+	otherwise:
+		say "I would give you two different answers";
+		 
+Definition: A person (called guy) is Smullyan-reliable:
+	if guy is vampire:
+		decide on whether or not guy is insane;
+	decide on whether or not guy is sane;
+	
+To say actually (condition - a truth state) identity of (guy - a person):
+	say "[one of][actually condition reliability of guy][or][actually condition compound identity of guy][or][actually condition vampiric identity of guy with indefinite article][or][actually condition sanity of guy][at random]";
+	
+To say actually (condition - a truth state) vampiric identity of (guy - a person):
+	if condition is true and guy is not vampire:
+		say "[if guy is human]human[otherwise]being[end if]";
+	otherwise if condition is whether or not guy is vampire:
+		say "vampire";
+	otherwise:
+		say "human";
+
+To say actually (condition - a truth state) vampiric identity of (guy - a person) with indefinite article:
+	if condition is whether or not guy is human:
+		say "human";
+	otherwise:
+		say "a [actually condition vampiric identity of guy]";
+				
+To say actually (condition - a truth state) sanity of (guy - a person):
+	if condition is whether or not guy is insane:
+		say "in";
+	say "sane";
+
+To say actually (condition - a truth state) reliability of (guy - a person):
+	if condition is true and guy is not Drakul:
+		say "someone who might sometimes [one of]lie[or]tell the truth[at random]";
+	otherwise if condition is whether or not guy is Smullyan-reliable:
+		say "someone who always tells the truth";
+	otherwise:
+		say "someone who always lies";
+	
+To say actually (condition - a truth state) compound identity of (guy - a person):
+	Let first condition be a random truth state;
+	Let second condition be a random truth state;
+	if condition is false:
+		if a random chance of 1 in 2 succeeds:
+			now first condition is false;
+		otherwise:
+			now second condition is false;
+	otherwise:
+		now first condition is true;
+		now second condition is true;
+	say "a[if first condition is whether or not guy is insane]n in[otherwise] [end if]sane [actually second condition vampiric identity of guy]";
+
+
+
 Kerkerkruip Events and Specials ends here.
