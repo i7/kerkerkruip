@@ -6376,8 +6376,8 @@ Report Drakul concentrating:
 	rule succeeds.
 
 Report Drakul waiting:
-	Let condition be whether or not Drakul is insane;
-	say "Drakul says, '[Actually condition Drakul statement].'";
+	Let honesty be whether or not Drakul is insane;
+	say "Drakul says, '[Actually honesty Drakul statement].'";
 	rule succeeds;
 
 
