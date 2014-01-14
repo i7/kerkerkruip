@@ -3239,7 +3239,7 @@ The unlock level of the minotaur is 2.
 The unlock hidden switch of the minotaur is true.
 
 The health of minotaur is 35.
-The melee of minotaur is 3.
+The melee of minotaur is 2.
 The defence of minotaur is 11.
 
 The body score of minotaur is 10.
