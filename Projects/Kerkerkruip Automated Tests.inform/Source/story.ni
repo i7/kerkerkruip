@@ -901,35 +901,85 @@ A scenario rule when testing parting shots:
 	now armadillo is testobject;
 	now cloak of shadows is testobject;
 	
-A test play when testing parting shots:
-	now the player carries the cloak of shadows;
+A detection rule when testing parting shots:
+	say "+ 1000 (for testing purposes)[run paragraph on]";
+	increase hiding roll by 100;
+	
+To force the cloak of shadows to work:
+	if the player does not enclose the cloak of shadows, now the player carries the cloak of shadows;
 	try wearing the cloak of shadows;
+	now the player is hidden;
+		
+The way-to-the-mindslug is a direction that varies;
+The way-from-the-mindslug is a direction that varies;
+
+A person has a number called the hitting count.
+
+First before an actor hitting:
+	increment the hitting count of the actor.
+	
+To assert (N - a number) hit/hits by (guy - a person):
+	Let msg be indexed text;
+	Now msg is "Expected hitting count for [The guy]: [N] Got: [hitting count of the guy].";
+	assert truth of whether or not N is hitting count of the guy with message msg;
+	
+A test play when testing parting shots:
+	force the cloak of shadows to work;
 	try butterflying;
 	While the location is not the location of mindslug:
-		let the way be the best route from the location to the location of mindslug;
+		now the way-to-the-mindslug is the best route from the location to the location of mindslug;
 		record a test attempt;
-		if the way is a direction:
-			try going the way;
+		if the way-to-the-mindslug is a direction:
+			try going the way-to-the-mindslug;
 		otherwise:
 			record failure "Can't find a route to mindslug.";
 			rule fails;
+	now the way-from-the-mindslug is the best route from the location to the retreat location;
 	now every person enclosed by the location is not asleep;
 	
-mindslug-reveal is a turn-based event. The first move of parting shots is mindslug-reveal. The scheduled action of mindslug-reveal is the action of taking off the shadows cloak. ["the action of taking of the cloak of shadows" doesn't parse  ]
+mindslug-hiding-check is a turn-based event. The first move of parting shots is mindslug-hiding-check. The scheduled action of mindslug-hiding-check is the action of waiting.
+
+Testing a turn-based event for mindslug-hiding-check:
+	assert that the event description includes ", which must be positive\. You remain hidden\.";
+	
+mindslug-hidden-retreat is a turn-based event. The next move of mindslug-hiding-check is mindslug-hidden-retreat. The scheduled action of mindslug-hidden-retreat is the action of retreating.
+	
+To assert that (item - a thing) is in (place - an object):
+	Let msg be indexed text;
+	Now msg is "Expected location of [the item]: [place]. Got: [location of the item].";
+	assert truth of whether or not the location of item is place with message msg;
+	
+Before taking a player action when mindslug-hidden-retreat is the scheduled event:
+	assert that the mindslug is in the location;
+	assert that fafhrd is in the location;
+	assert that mouser is in the location;
+	update the combat status;
+	assert that the combat status is combat;
+	assert truth of whether or not the player is hidden with message "the player should be hidden";
+	
+Testing a turn-based event for mindslug-hidden-retreat:
+	assert zero hits by mindslug;
+	assert zero hits by fafhrd;
+	assert zero hits by mouser;
+	
+mindslug-hidden-runner is a turn-based event. The next move of mindslug-hidden-retreat is mindslug-hidden-runner. 
+
+Before taking a player action when mindslug-hidden-runner is the scheduled event:
+	extract the player to the location of the mindslug;
+	now the scheduled action of mindslug-hidden-runner is the action of going way-from-the-mindslug.
+	
+Testing a turn-based event for mindslug-hidden-runner:
+	assert zero hits by mindslug;
+	assert zero hits by fafhrd;
+	assert zero hits by mouser;
+	
+mindslug-reveal is a turn-based event. The next move of mindslug-hidden-runner is mindslug-reveal. The scheduled action of mindslug-reveal is the action of taking off the shadows cloak. ["the action of taking of the cloak of shadows" doesn't parse  ]
+
+Before taking a player action when mindslug-reveal is the scheduled event:
+	try going way-to-the-mindslug;
 
 mindslug-retreat is a turn-based event.  The next move of mindslug-reveal is mindslug-retreat. The scheduled action of mindslug-retreat is the action of retreating.
 
-A person can be attempting to hit.
-
-First before an actor hitting:
-	now the actor is attempting to hit.
-	
-To assert hit-attempt by (guy - a person):
-	assert truth of whether or not guy is attempting to hit with message "[The guy] should have tried hitting.";
-	
-To assert absence of hit-attempt by (guy - a person):
-	assert truth of whether or not guy is not attempting to hit with message "[The guy] should not have tried hitting.";
-	
 Before taking a player action when mindslug-retreat is the scheduled event:
 	now mindslug presses the player;
 	now concentration of mindslug is 0;
@@ -939,27 +989,26 @@ Before taking a player action when mindslug-retreat is the scheduled event:
 	now concentration of mouser is 0;
 
 Before taking a player action:
-	now every person is not attempting to hit.
+	Repeat with guy running through people:
+		Now the hitting count of guy is 0.
 		
 Testing a turn-based event for mindslug-retreat:
 	assert that the event description includes "bravely run away";
-	assert hit-attempt by mindslug;
-	assert hit-attempt by fafhrd;
-	assert absence of hit-attempt by mouser;
+	assert one hit by mindslug;
+	assert one hit by fafhrd;
+	assert zero hits by mouser;
 	
 mindslug-runner is a turn-based event. The next move of mindslug-retreat is mindslug-runner.
 
 Before taking a player action when mindslug-runner is the scheduled event:
-	let the way be the best route from the location of the mindslug to the location;
-	now the scheduled action of mindslug-runner is the action of going the way;
+	now the scheduled action of mindslug-runner is the action of going the way-from-the-mindslug;
 	extract the player to the location of the mindslug;
-	update the combat status;
 	
 Testing a turn-based event for mindslug-runner:
 	assert that the event description includes "run past your enemies";
-	assert hit-attempt by mindslug;
-	assert hit-attempt by fafhrd;
-	assert hit-attempt by mouser;
+	assert one hit by mindslug;
+	assert one hit by fafhrd;
+	assert one hit by mouser;
 	
 Section - Insane Drakul
 
