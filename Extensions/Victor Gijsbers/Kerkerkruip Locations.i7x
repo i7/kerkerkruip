@@ -992,9 +992,9 @@ Hall of Vapours is alchemical.
 
 Understand "vapours" and "vapour" as the clouds of smoke.
 
-The large pipes are scenery in Hall of Vapours. The description of large pipes is "You wonder whether these are actual chimneys or tiny portals to some smoke-filled hell.". The large pipes are iron.
+The large pipes are scenery in Hall of Vapours. The description of large pipes is "You wonder whether these are actual chimneys or tiny portals to some smoke-filled hell. They are currently [if pipes-open is true]spewing vapours into the room[otherwise]shut off[end if].". The large pipes are iron.
 
-The big wheel is part of the pipes. The description of the big wheel is "This wheel can be turned to open or close the pipes.".
+The big wheel is part of the pipes. The description of the big wheel is "This wheel can be turned to open or close the pipes, which are currently [if pipes-open is true]open[otherwise]closed[end if].".
 
 Instead of opening the pipes:
 	if pipes-open is true:

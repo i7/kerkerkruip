@@ -1241,12 +1241,39 @@ Before taking a player action when the scheduled event is Player-cowering:
 Testing a turn-based event of player-cowering:
 	move on if there was enough cowering.
 
+
+Section - Controlling pipes
+
+Controlling pipes is a test set.
+
+Scenario when testing controlling pipes:
+	now Hall of Vapours is testobject;
 	
-[create a statistical test for dreadful presence? maybe able to use randomized events
-
-test whether insane people cower before their own dreadful presence
-
-test dreadful PC and NPC
-]
+Test play when testing controlling pipes:
+	extract the player to Hall of Vapours;
+	now pipes-open is true;
+	transcribe and restart capturing;
+	try looking;
+	stop and save event description;
+	assert that the event description includes "Several large pipes continuously spew forth vapours into this room\. A big wheel is attached";
+	transcribe and restart capturing;
+	try examining the pipes;
+	stop and save event description;
+	assert that the event description includes " They are currently spewing vapours into the room\.";
+	transcribe and restart capturing;
+	try examining the wheel;
+	stop and save event description;
+	assert that the event description includes "which are currently open\.";
+	transcribe and restart capturing;
+	try turning the wheel;
+	transcribe and restart capturing;
+	try examining the pipes;
+	stop and save event description;
+	assert that the event description includes " They are currently shut off\.";
+	transcribe and restart capturing;
+	try examining the wheel;
+	stop and save event description;
+	assert that the event description includes "which are currently closed\.";
+	transcribe and restart capturing;	
 
 Section - Attempting to Maze Someone in Arena of the Gods
