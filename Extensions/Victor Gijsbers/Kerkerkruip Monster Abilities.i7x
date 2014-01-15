@@ -111,6 +111,15 @@ Chapter - Conscious
 Definition: a person (called guy) is conscious if (guy is alive) and (guy is not asleep).
 Definition: a person (called guy) is unconscious if guy is not conscious.
 
+Chapter - Active-Opposer
+
+[This adjective uses the opposition test subject in the same way as the opposer adjective]
+
+Definition: a person (called guy) is active-opposer:
+	if guy is not conscious, no;
+	if guy is opposition test subject and guy is not insane, no;
+	Decide on whether or not guy is opposer;
+
 Chapter - Emotionless
 
 [Some persons have no emotions, and are immune to, for instance, being dominated.]
@@ -484,21 +493,21 @@ Section - Dreadful presence effect
 
 This is the dreadful presence effect rule:
 	if combat status is combat and main actor is not undead and the main actor is not asleep:
-		repeat with guy running through alive not hidden not asleep people in the location who are not the main actor:
-			if faction of guy hates faction of main actor:
-				let n be dreadful presence of guy;
-				if n > 0:
-					let m be 10 times n;
-					increase m by 5;
-					decrease m by final mind of main actor;
-					decrease m by level of main actor;
-					if m > 40:
-						now m is 40;
-					if m < 0:
-						now m is 0;
-					if a random chance of m in 100 succeeds:
-						say "[The main actor] cower[s] before [possessive of guy] [bold type]dreadful presence[roman type]!";
-						now combat status is concluding.
+		now the opposition test subject is the main actor;
+		repeat with guy running through not hidden active-opposer people in the location:
+			let n be dreadful presence of guy;
+			if n > 0:
+				let m be 10 times n;
+				increase m by 5;
+				decrease m by final mind of main actor;
+				decrease m by level of main actor;
+				if m > 40:
+					now m is 40;
+				if m < 0:
+					now m is 0;
+				if a random chance of m in 100 succeeds:
+					say "[The main actor] cower[s] before [possessive of guy] [bold type]dreadful presence[roman type]!";
+					now combat status is concluding.
 
 The dreadful presence effect rule is listed before the the main actor chooses an action rule in the combat round rules.
 

@@ -757,7 +757,7 @@ Check an actor taking (this is the can't take living awake people's possessions 
 	let the local ceiling be the common ancestor of the actor with the noun;
 	let H be the not-counting-parts holder of the noun;
 	while H is not nothing and H is not the local ceiling:
-		if H is an alive not asleep person:
+		if H is a conscious person:
 			stop the action with library message taking action number 6 for H;
 		let H be the not-counting-parts holder of H;
 

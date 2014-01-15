@@ -4279,7 +4279,7 @@ An attack modifier rule (this is the overmind attack and defence bonus rule):
 
 Section - Useful overmind stuff
 
-Definition: a person is overmind-ally if (it is alive) and (it is not off-stage) and (level of it is less than 4) and (faction of it does not hate faction of the overmind) and (location of the overmind is not location of it) and (the best route from the location of the overmind to the location of it is a direction) and (it is not asleep).
+Definition: a person is overmind-ally if (it is conscious) and (it is not off-stage) and (level of it is less than 4) and (faction of it does not hate faction of the overmind) and (location of the overmind is not location of it) and (the best route from the location of the overmind to the location of it is a direction).
 
 To decide which number is the potential overmind allies:
 	let n be the number of overmind-ally persons;

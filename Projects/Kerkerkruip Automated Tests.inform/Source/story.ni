@@ -50,7 +50,7 @@ Use maximum capture buffer length of at least 8192.
 Use maximum indexed text length of at least 8192. 
 
 First when play begins (this is the random seed rule):
-	seed the random-number generator with 6.
+	seed the random-number generator with 4.
 
 The random seed rule is listed before the reaper carries a random scythe rule in the when play begins rules.
 
@@ -730,6 +730,7 @@ Chapter - Helpful phrases
 To extract (guy - a person) to (place - a room):
 	extract guy from combat;
 	move guy to place;
+	update the combat status;
 	
 To have (guy - a person) defeat (loser - a person):
 	Now the health of loser is -1;
@@ -1119,8 +1120,6 @@ random outcome testing when vampire-turning-hinting became the possibility:
 	unless the event description matches the regular expression "\bI intend to vanquish Malygris after I make you my vampire-slave\b|\byou will never be my vampire-slave\b", make no decision;
 	mark the outcome achieved;
 	
-Section - Attempting to Maze Someone in Arena of the Gods
-
 Section - Enemies should always start out awake in Arena of the Fallen
 
 Sleeping Fallen is a test set.
@@ -1142,3 +1141,112 @@ Test play when testing Sleeping Fallen:
 	have the player and the blood ape fight in Arena of the Fallen;
 	assert truth of whether or not the blood ape is not asleep with message "the blood ape should be awake";
 	
+Section - Dreadful Presence
+
+Dreadful-Presence-Test is a test set.
+
+Scenario when testing Dreadful-Presence-Test:
+	now the blood ape is testobject;
+	now the zombie toad is testobject;
+	
+A person has a number called the cower count;
+A person has a number called the act count;
+
+A combat round rule (this is the count combat actions rule):
+	increment the act count of the main actor;
+	
+The count combat actions rule is listed before the dreadful presence effect rule in the combat round rules.
+	
+Test play when testing Dreadful-Presence-Test:
+	repeat with guy running through denizen people:
+		now the defence of guy is 100;
+	now the mind score of the player is 10;
+	now the player worships Nomos;
+	raise the favour of the player to 9;
+	try wearing the gown of the red court;
+	try readying the malleus;
+  	extract the player to the location of the blood ape;
+	extract the zombie toad to the location;
+	assert that the dreadful presence of the player is 2;
+	assert that the final mind of the blood ape is 5;
+	assert that the target cower percentage of the blood ape is 19;
+  	assert that the target cower percentage of the player is 0;
+	assert that the target cower percentage of the zombie toad is 0;
+	
+To decide which number is the target cower percentage of (guy - a person):
+	if guy is undead, decide on 0;
+	if guy is the player and the player is not insane, decide on 0;
+	let n be dreadful presence of the player;
+	let m be 10 times n;
+	increase m by 5;
+	decrease m by final mind of guy;
+	decrease m by level of guy;
+	if m > 40:
+		now m is 40;
+	if m < 0:
+		now m is 0;
+	decide on m;
+
+The delayed move is a turn-based event that varies.
+
+To check if (guy - a person) cowered this turn:
+	let pattern be indexed text;
+	now pattern is "[The guy] cower[s] before your dreadful presence";
+	if the event description matches the regular expression pattern:
+		increment cower count of the guy;
+	
+To decide whether (guy - a person) is within (delta - a number) percent of cowering target:
+	if the act count of guy is 0, decide no;
+	let cower percentage be cower count of guy times 100 divided by the act count of guy;
+	let percent difference be cower percentage minus the target cower percentage of guy;
+	if the percent difference is less than 0, now the percent difference is 0 minus the percent difference;
+	decide on whether or not the percent difference not greater than delta;
+		
+To move on if there was enough cowering:
+	let try again be true;
+	if the next move of the scheduled event is not the scheduled event:
+		now the delayed move is the next move of the scheduled event;
+		now the next move of the scheduled event is the scheduled event;
+	Let success count be 0;
+	Repeat with guy running through people in the location:
+		check if guy cowered this turn;
+		if guy is within 5 percent of cowering target, increment success count;	
+	if the act count of the player is at least 20 and success count is the number of people in the location:
+		assert truth of true with message "success";
+		now try again is false;
+	if the act count of the player is at least 100:
+		Repeat with guy running through people in the location:
+			Let msg be indexed text;
+			Now msg is "After [act count of guy] rounds, [the guy] cowered [cower count of guy] times versus a target of [target cower percentage of guy] percent.";
+			assert truth of whether or not guy is within 5 percent of cowering target with message msg;
+		now try again is false;
+	if try again is false:
+		now the next move of the scheduled event is the delayed move;
+		repeat with guy running through people in the location:
+			now the act count of guy is 0;
+			now the cower count of guy is 0;
+		
+	
+Ape-cowering is a turn-based event. The first move of Dreadful-Presence-Test is Ape-cowering. The scheduled action of Ape-cowering is the action of waiting.
+
+Testing a turn-based event of Ape-cowering:
+	move on if there was enough cowering.
+		
+Player-cowering is a turn-based event. The next move of Ape-cowering is Player-cowering. The scheduled action of player-cowering is the action of waiting.
+
+Before taking a player action when the scheduled event is Player-cowering:
+	now the player is insane;
+	assert that the target cower percentage of the player is 15; 
+	
+Testing a turn-based event of player-cowering:
+	move on if there was enough cowering.
+
+	
+[create a statistical test for dreadful presence? maybe able to use randomized events
+
+test whether insane people cower before their own dreadful presence
+
+test dreadful PC and NPC
+]
+
+Section - Attempting to Maze Someone in Arena of the Gods
