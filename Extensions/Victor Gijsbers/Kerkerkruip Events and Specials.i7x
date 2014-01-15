@@ -147,11 +147,7 @@ To challenge (the guy - a person):
 	increase the spirit score of guy by g;
 	increase the melee of guy by 3;
 	increase the defence of guy by 3;
-	restore the health of the guy;
-	now the concentration of the guy is 0;
-	now offensive flow of the guy is 0;
-	now defensive flow of the guy is 0;
-	now guy is at-Inactive;
+	revive the guy in the location of the guy;
 
 The demon boredom is a number which varies. The demon boredom is 0.
 The current dissatisfaction is a number which varies. The current dissatisfaction is 0.

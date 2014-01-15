@@ -1120,3 +1120,25 @@ random outcome testing when vampire-turning-hinting became the possibility:
 	mark the outcome achieved;
 	
 Section - Attempting to Maze Someone in Arena of the Gods
+
+Section - Enemies should always start out awake in Arena of the Fallen
+
+Sleeping Fallen is a test set.
+
+Scenario when testing Sleeping Fallen:
+	now the blood ape is testobject;
+	now Entrance to the Arena is testobject;
+	now a random scroll of death is testobject;
+	
+Test play when testing Sleeping Fallen:
+	now the blood ape is asleep;
+	extract the player to the location of the blood ape;
+	Let the snuffer be a random not off-stage scroll of death;
+	now the player carries the snuffer;
+	now the health of the blood ape is 1;
+	try reading the snuffer;
+	assert truth of whether or not the blood ape is asleep with message "the blood ape should be asleep";
+	assert truth of whether or not the blood ape is dead with message "the blood ape should be dead";
+	have the player and the blood ape fight in Arena of the Fallen;
+	assert truth of whether or not the blood ape is not asleep with message "the blood ape should be awake";
+	

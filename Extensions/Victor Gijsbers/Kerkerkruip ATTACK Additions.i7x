@@ -413,10 +413,8 @@ To clean the table of delayed actions for (guy - a person):
 		if the actor part of the action entry is the guy or the noun part of the action entry is the guy:
 			blank out the whole row.
 
-[should we just run all of the sudden combat update rules here?]
-A killing rule (this is the don't do delayed action with killed guy rule):
-	clean the table of delayed actions for killed-guy.
-
+A killing rule (this is the reset killed-guy rule):
+	follow the sudden combat reset rules for killed-guy.
 
 
 Section - Blocking

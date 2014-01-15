@@ -109,37 +109,6 @@ Killing rule (this is the increment died and kill stats rule):
 				#if DEBUG say "[italic type](Defeat recorded for [the name of leader of the killed-guy].)[roman type][line break]";
 	update the monster statistics.
 
-Section - Resetting Monsters
-
-[this duplicates a sudden combat reset rule - consider running all these rules from the killing rules]
-A killing rule (this is the ungrapple killed guy rule):
-	while someone grapples killed-guy:
-		let guy be a random person who grapples the killed-guy;
-		now guy does not grapple the killed-guy;
-
-[
-
-To have the smoke demon appear:
-	now smoke demon is not asleep;
-	now health of the smoke demon is 10;
-	now faction of the smoke demon is horrific-faction;
-	now concentration of the smoke demon is 0;
-	now melee of the smoke demon is 2;
-	now defence of the smoke demon is 5;
-	now body score of the smoke demon is 7;
-	now mind score of the smoke demon is 7;
-	now spirit score of the smoke demon is 7;
-	now size of smoke demon is medium;
-	now smoke demon is not at dodge;
-	now smoke demon is not at parry;
-	now stun count of the smoke demon is 0;
-	now stun strength of the smoke demon is 0;
-	now smoke demon is unseen;
-	now last-seen-location of the smoke demon is Null-Room;
-	move smoke demon to the location;
-	say "The smoke coalesces to [bold type]form a smoke demon[roman type]!".]
-
-
 Section - Monster avatars for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
 A person has a figure name called the avatar. The avatar of a person is usually Figure of Null.
@@ -4572,36 +4541,18 @@ Israfel-splitting is an action applying to nothing.
 
 Carry out Israfel Israfel-splitting:
 	say "With a loud bang, the angel [bold type]Israfel bursts apart[roman type]. Two creatures -- Isra and Fell -- stand where the single angel was standing a moment before.";
+	replace half of Israfel with Isra;
+	replace half of Israfel with Fell;
+	remove Israfel from play.
+
+To replace half of Israfel with (guy - a person):
+	revive guy in the location;	
 	let n be health of Israfel;
 	increase n by 1;
 	now n is (n divided by 2);
-	now Isra is not asleep;
-	now health of Isra is n;
-	now faction of Isra is hostile;
-	now concentration of Isra is 0;
-	now patron of Isra is patron of Israfel;
-	now favour of Isra is favour of Israfel;
-	now Isra is not at dodge;
-	now Isra is not at parry;
-	now stun count of Isra is 0;
-	now stun strength of Isra is 0;
-	now Isra is unseen;
-	now last-seen-location of Isra is Null-Room;
-	move Isra to the location;
-	now Fell is not asleep;
-	now health of Fell is n;
-	now faction of Fell is hostile;
-	now concentration of Fell is 0;
-	now patron of Fell is patron of Israfel;
-	now favour of Fell is favour of Israfel;
-	now Fell is not at dodge;
-	now Fell is not at parry;
-	now stun count of Fell is 0;
-	now stun strength of Fell is 0;
-	now Fell is unseen;
-	now last-seen-location of Fell is Null-Room;
-	move Fell to the location;
-	remove Israfel from play.
+	now health of guy is n;
+	now patron of guy is patron of Israfel;
+	now favour of guy is favour of Israfel;
 
 An AI action selection rule for at-Act Israfel (this is the Israfel considers Israfel-splitting rule):
 	choose a blank Row in the Table of AI Action Options;
@@ -4882,9 +4833,9 @@ This is the Israfel reunites rule:
 The Israfel reunites rule is listed before the the main actor chooses an action rule in the combat round rules.
 
 To reunite Israfel:
+	revive Israfel in the location;
 	now Israfel-reuniting-initiator is Israfel;
 	now Israfel-trance is 1;
-	now Israfel is not asleep;
 	let n be health of Isra;
 	if n < 0:
 		now n is 0;
@@ -4892,15 +4843,6 @@ To reunite Israfel:
 	if m < 0:
 		now m is 0;
 	now health of Israfel is (n + m);
-	now faction of Israfel is hostile;
-	now concentration of Israfel is 0;
-	now Israfel is not at dodge;
-	now Israfel is not at parry;
-	now stun count of Israfel is 0;
-	now stun strength of Israfel is 0;
-	now Israfel is unseen;
-	now last-seen-location of Israfel is Null-Room;
-	move Israfel to the location;
 	remove Isra from play;
 	remove Fell from play;
 	say "Motes of light swirl through the room in a freakish tornado, and suddenly [bold type]Israfel has reformed[roman type].".
@@ -6480,23 +6422,12 @@ An aftereffects rule (this is the set smoke demon time-out rule):
 		now smoke demon time-out is a random number between 5 and 18.
 
 To have the smoke demon appear:
-	now smoke demon is not asleep;
-	now health of the smoke demon is 10;
-	now faction of the smoke demon is horrific-faction;
-	now concentration of the smoke demon is 0;
 	now melee of the smoke demon is 2;
 	now defence of the smoke demon is 5;
 	now body score of the smoke demon is 7;
 	now mind score of the smoke demon is 7;
 	now spirit score of the smoke demon is 7;
-	now size of smoke demon is medium;
-	now smoke demon is not at dodge;
-	now smoke demon is not at parry;
-	now stun count of the smoke demon is 0;
-	now stun strength of the smoke demon is 0;
-	now smoke demon is unseen;
-	now last-seen-location of the smoke demon is Null-Room;
-	move smoke demon to the location;
+	revive the smoke demon in the location;
 	say "The smoke coalesces to [bold type]form a smoke demon[roman type]!".
 
 

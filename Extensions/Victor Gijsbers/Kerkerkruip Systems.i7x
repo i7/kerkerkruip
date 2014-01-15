@@ -1407,7 +1407,7 @@ Before printing the locale description of a room (this is the environmental effe
 		say "The air is full of the tiny brown spores of the [bold type]rust moss[roman type].".
 
 
-Chapter - Sudden combat reset
+Chapter - Resetting Fighters
 
 Section - To Extract From Combat
 
@@ -1446,22 +1446,45 @@ A first sudden combat reset rule for a person (called the deserter) (this is the
 		now X does not press the deserter;
 		now the deserter does not press X;
 	
-A sudden combat reset rule for a person (called the deserter) (this is the reset the deserter to at-Inactive rule):
-	now the deserter is at-Inactive;
+A last sudden combat reset rule for a person (called the deserter) (this is the sudden reset action stats rule):
+	if the deserter is the player:
+		repeat with guy running through alive persons enclosed by the location:
+			reset combat action stats of the guy;
+	otherwise:
+		reset combat action stats of the deserter;
 
-A last sudden combat reset rule for a person (called the deserter) (this is the sudden delayed actions reset rule):
-	if the deserter is the player:
-		repeat with guy running through alive persons enclosed by the location:
-			clean the table of delayed actions for the guy;
-	otherwise:
-		clean the table of delayed actions for the deserter;
- 
-A last sudden combat reset rule for a person (called the deserter) (this is the sudden concentration reset rule):
-	if the deserter is the player:
-		repeat with guy running through alive persons enclosed by the location:
-			now concentration of guy is 0;
-	otherwise:
-		now concentration of the deserter is 0;
+To reset combat action stats of (guy - a person):
+	now concentration of the guy is 0;
+	now offensive flow of the guy is 0;
+	now defensive flow of the guy is 0;
+	now the guy is at-Inactive;
+	now the guy is not at dodge;
+	now the guy is not at parry;
+	now the guy is not at-block;
+	now the guy is not at-roll;
+	clean the table of delayed actions for the guy;
+
+Section - Reviving
+
+[This phrase is used by the smoke demon and Israfel, and in arenas]
+
+A person has a faction called the original faction.
+
+When play begins (this is the remember original factions rule):
+	Repeat with guy running through people:
+		now the original faction of guy is the faction of guy.
+
+To revive (guy - a person) in (place - a room):
+	reset combat action stats of guy; 
+	now guy is not asleep;
+	now the stun count of guy is 0;
+	now the stun strength of guy is 0;
+	now the size of guy is the base size of guy;
+	now the faction of guy is the original faction of guy;
+	now guy is unseen;
+	now last-seen-location of guy is Null-Room;
+	move guy to place;
+	restore the health of guy;
 
 Chapter - Forced action
 
