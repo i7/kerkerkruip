@@ -73,7 +73,7 @@ highest achieved difficulty	3	1	0
 unlocking victories [victories for the purpose of unlocking]	4	1	0
 main menu graphics	5	1	-1
 session flag	6	1	0
-window information panels	7	0	1
+window panels	7	0	1
 menu hyperlinks	8	1	0
 
 To decide which number is (P - a data storage parameter) as a number: (- {P} -);

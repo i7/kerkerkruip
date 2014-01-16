@@ -565,7 +565,7 @@ Before showing the title screen (this is the request graphics preferences rule):
 			let key be the chosen letter;
 			if key is 89 or key is 121: [Y]
 				disable main menu graphics;
-				disable window information panels;
+				disable window panels;
 				break;
 			if key is 78 or key is 110: [N]
 				enable main menu graphics;
@@ -957,7 +957,7 @@ To prepare difficulty levels for display:
 	now the image-ID of Difficulty-slug is the proper slug for the difficulty;
 	now entry 1 of the origin of current-difficulty is 144 + (image-width of the image-ID of Difficulty-slug);
 	now the text-string of current-difficulty is "([difficulty])";
-	let best-level be level of highest achieved difficulty;
+	let best-level be setting of highest achieved difficulty;
 	now the image-ID of Best-Difficulty-slug is the the proper slug for best-level;
 	now entry 1 of the origin of highest-difficulty is 416 + (image-width of the image-ID of Best-Difficulty-slug);
 	now the text-string of highest-difficulty is "([best-level])";

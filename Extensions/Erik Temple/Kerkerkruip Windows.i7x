@@ -130,7 +130,7 @@ Chapter - Window-drawing rules
 [There are two primary places where we need to redraw the windows. First, before reading a command should handle all in-game situations. But we also need the stats to reflect the last turn of the game when we've won, since this will most often be a combat turn that we have lost. For that, we hook into the activity for printing the player's "obituary".]
 
 To redraw subsidiary content windows:
-	if window information panels are enabled:
+	if window panels are enabled:
 		follow the window-drawing rules for the stats-window;
 		follow the window-drawing rules for the powers-window;
 		follow the window-drawing rules for the inventory-window.
@@ -275,18 +275,18 @@ Chapter - Opening and closing windows
 
 Toggling window panels is an action out of world. Understand "toggle info panels" or "info panels" or "toggle information panels" or "information panels" or "panels" as toggling window panels.
 
-Understand "disable panels" or "disable info panels" or "disable information panels" as toggling window panels when window information panels are enabled.
+Understand "disable panels" or "disable info panels" or "disable information panels" as toggling window panels when window panels are enabled.
 
-Understand "enable panels" or "enable info panels" or "enable information panels" as toggling window panels when window information panels are disabled.
+Understand "enable panels" or "enable info panels" or "enable information panels" as toggling window panels when window panels are disabled.
 
-Understand "disable panels" or "disable info panels" or "disable information panels" as a mistake ("The information panels are already disabled.") when window information panels are disabled.
+Understand "disable panels" or "disable info panels" or "disable information panels" as a mistake ("The information panels are already disabled.") when window panels are disabled.
 
-Understand "enable panels" or "enable info panels" or "enable information panels" as a mistake ("The information panels are already enabled.") when window information panels are enabled.
+Understand "enable panels" or "enable info panels" or "enable information panels" as a mistake ("The information panels are already enabled.") when window panels are enabled.
 
 Carry out toggling window panels:
 	close the status window;
-	toggle window information panels;
-	if window information panels are enabled:
+	toggle window panels;
+	if window panels are enabled:
 		open side windows;
 		open the status window;
 		say "The information panels have been enabled. Type PANELS to disable them again.";
@@ -297,7 +297,7 @@ Carry out toggling window panels:
 
 	
 To open side windows:
-	if window information panels are disabled, rule fails;	
+	if window panels are disabled, rule fails;	
 	set the Gargoyle background color to the color g-white;
 	set up styles for side windows;
 	open up the stats-window;
@@ -328,12 +328,12 @@ To close side windows:
 Section - Events
 
 Last when play begins (this is the check info panel capacity rule):
-	if window information panels are disabled:
+	if window panels are disabled:
 		say "[bracket]Information panels are disabled. Type PANELS to enable them.[close bracket][line break][run paragraph on]";
-	if window information panels are enabled:
+	if window panels are enabled:
 		if width of the main-window is less than 102 or height of the main-window is less than 30:
 			say "[bracket]Your game window is too small for you to use the information panels comfortably. Maximize your window, then type PANELS to enable them.[close bracket][line break][run paragraph on]";
-			disable window information panels;
+			disable window panels;
 	follow the open up game windows rule.
 
 This is the open up game windows rule:

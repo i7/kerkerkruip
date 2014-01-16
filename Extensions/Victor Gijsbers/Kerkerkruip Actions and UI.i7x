@@ -959,7 +959,7 @@ To say status location:
 	 say "[phrase][run paragraph on]".
 
 [Rule for constructing the status line:
-	if window information panels are disabled:
+	if window panels are disabled:
 		fill status bar with Table of Fancy Status;
 	otherwise:
 		center "[bold type][status location][roman type]" at row 1;

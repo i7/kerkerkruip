@@ -316,8 +316,8 @@ Section - Options Menu
 Table of Options Menu
 title	order	rule
 "[bold type]Interface options"	1	--
-"Information panels: [bold type][if window information panels are disabled]Off[otherwise]On[end if]"	2	the toggle info panels rule
-"Clickable menus: [bold type][menu hyperlinks are enabled]On[otherwise]Off[end if][unless glulx hyperlinks are supported][italic type] (note: not supported in this interpreter)[roman type][end if]"	3	the toggle menu hyperlinks rule
+"Information panels: [bold type][if window panels are disabled]Off[otherwise]On[end if]"	2	the toggle info panels rule
+"Clickable menus: [bold type][if menu hyperlinks are enabled]On[otherwise]Off[end if][unless glulx hyperlinks are supported][italic type] (note: not supported in this interpreter)[roman type][end if]"	3	the toggle menu hyperlinks rule
 ""	20	--
 "[bold type]Reset"	21	--
 "[if difficulty is 0 and number of total victories is 0 and setting of highest achieved difficulty is 0 or number of unlocking victories is 0][italic type](Reset the number of victories)[otherwise]Reset the number of victories"	22	the resetting rule
@@ -341,7 +341,7 @@ This is the unlock everything rule:
 	set unlocking victories to 100;
 
 This is the toggle info panels rule:
-	toggle window information panels;
+	toggle window panels;
 
 This is the toggle menu hyperlinks rule:
 	toggle menu hyperlinks;

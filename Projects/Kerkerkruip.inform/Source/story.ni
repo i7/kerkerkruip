@@ -1,4 +1,5 @@
 
+
 "Kerkerkruip - Release 9 - Alpha" by Victor Gijsbers
 
 The story headline is "An IF roguelike".
@@ -77,6 +78,9 @@ Use MAX_STATIC_DATA of 500000.
 Use MAX_OBJECTS of 1000.
 Use MAX_SYMBOLS of 30000.
 Use MAX_ACTIONS of 250.
+[ needed these to compile with Glimmr):
+Use MAX_LABELS of 20000.
+Use ALLOC_CHUNK_SIZE of 32768.]
 
 
 
