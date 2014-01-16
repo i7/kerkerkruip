@@ -559,16 +559,16 @@ Rule for starting the virtual machine (this is the graphics support rule):
 		now full graphics support is true.
 
 Before showing the title screen (this is the request graphics preferences rule):
-	if data value 5 is 0 [i.e., no value] and full graphics support is true:
+	if main menu graphics is unset and full graphics support is true:
 		say "[Kerkerkruip] has a graphical main menu, which cannot be used with screen readers.[paragraph break][bold type]Disable[roman type] the graphical interface? Please enter:  [bold type]Y[roman type]es or [bold type]N[roman type]o[paragraph break]This choice can later be changed from the Options menu.[paragraph break][paragraph break]";
 		while 1 is 1:
 			let key be the chosen letter;
 			if key is 89 or key is 121: [Y]
-				set data value 5 to -1;
-				set data value 7 to 1;[also disable information panels]
+				disable main menu graphics;
+				disable window information panels;
 				break;
 			if key is 78 or key is 110: [N]
-				set data value 5 to 1;
+				enable main menu graphics;
 				break;
 		clear the main-window;
 
@@ -581,11 +581,11 @@ Section - Setting graphics preferences from the command line
 Setting graphics on is an action out of world. Understand "graphics on" as setting graphics on.
 
 Carry out setting graphics on:
-	if data value 5 is 1:
+	if main menu graphics are enabled:
 		say "Graphics are already turned on.";
 	otherwise:
-		set data value 5 to 1;
-		if data value 5 is not 1:
+		enable main menu graphics;
+		unless main menu graphics are enabled:
 			say "Warning: Could not set graphics preference.";
 		otherwise:
 			say "Graphics will be used to display the main menu."
@@ -593,11 +593,11 @@ Carry out setting graphics on:
 Setting graphics off is an action out of world. Understand "graphics off" as setting graphics off.
 
 Carry out setting graphics off:
-	if data value 5 is -1:
+	if main menu graphics are disabled:
 		say "Graphics are already turned off.";
 	otherwise:
-		set data value 5 to -1;
-		if data value 5 is not -1:
+		disable main menu graphics;
+		unless main menu graphics are disabled:
 			say "Warning: Could not set graphics preference.";
 		otherwise:
 			say "Graphics will no longer be used to display the main menu."
@@ -607,7 +607,7 @@ Chapter - Session flag
 
 Carry out restarting the game (this is the set session flag on restart rule):
 	[This sets a flag that we can check--and reset--to decide whether or not to show the title animation before the main menu.]
-	set data value 6 to 1.
+	enable session flag.
 
 [We need to do the same thing in the immediately restart the game rule, which is a bit trickier since it is an I6 rule in the template layer. We need to replace the template rule with a routine that will set the session flag.]
 
@@ -620,7 +620,7 @@ Include (-
 
 First carry out quitting the game (this is the set session flag on quit rule):
 	[We set the session flag to 0 on quit. This will almost never be necessary, but it helps assure that we will see the animated title on starting a new session.]
-	set data value 6 to 0.
+	disable session flag.
 
 
 Chapter - Set up the graphics window
@@ -672,15 +672,12 @@ Redraw-menu is a truth state variable. Redraw-menu is false.
 				if k is count:
 					decide on tune.]
 
-For showing the title screen when full graphics support is true and data value 5 is 1 (this is the graphic title screen rule):
+For showing the title screen when full graphics support is true and main menu graphics are enabled (this is the graphic title screen rule):
 	close the status window;[needed on restart]
 	close side windows;[needed on restart]
-	let session flag be false;
 	open up the graphics-window;
-	if data value 6 is 1:
-		now session flag is true;
-		set data value 6 to 0;
-	if session flag is false:
+	if session flag is enabled:
+		disable session flag;
 		show a minimovie;	
 		[play the theme music;][****]
 		show the title;
@@ -960,11 +957,11 @@ To prepare difficulty levels for display:
 	now the image-ID of Difficulty-slug is the proper slug for the difficulty;
 	now entry 1 of the origin of current-difficulty is 144 + (image-width of the image-ID of Difficulty-slug);
 	now the text-string of current-difficulty is "([difficulty])";
-	let best-level be data value 3;
+	let best-level be level of highest achieved difficulty;
 	now the image-ID of Best-Difficulty-slug is the the proper slug for best-level;
 	now entry 1 of the origin of highest-difficulty is 416 + (image-width of the image-ID of Best-Difficulty-slug);
 	now the text-string of highest-difficulty is "([best-level])";
-	now the text-string of total-victories is "[data value 1]";
+	now the text-string of total-victories is "[number of total victories]";
 
 To decide which figure name is the proper slug for (n - a number):
 	if n is 0:

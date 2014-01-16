@@ -79,7 +79,7 @@ Section - Unlock level
 The unlock score is a number variable.
 
 After showing the title screen:
-	now the unlock score is data value 4;
+	now the unlock score is number of unlocking victories;
 
 An object has a number called the unlock level. The unlock level of an object is usually 0.
 

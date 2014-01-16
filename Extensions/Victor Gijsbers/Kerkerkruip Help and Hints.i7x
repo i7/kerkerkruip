@@ -212,7 +212,7 @@ tip
 "Offensive flow and defensive flow can never total more than 3."
 
 To decide which text is the next tip text:
-	if a random chance of 3 in ((number of victories) + 4) succeeds: [Expert tips show up more often when number of victories is higher.]
+	if a random chance of 3 in ((number of total victories) + 4) succeeds: [Expert tips show up more often when number of victories is higher.]
 		choose a random row from the Table of Beginner Tips;
 		decide on tip entry;
 	otherwise:

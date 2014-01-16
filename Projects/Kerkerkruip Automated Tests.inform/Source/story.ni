@@ -20,7 +20,7 @@ Include version 5/131204 of Inform ATTACK by Victor Gijsbers.
 Section - Include all the Kerkerkruip extensions
 
 [Include Kerkerkruip Permadeath by Victor Gijsbers.]
-[Include Kerkerkruip Persistent Data by Victor Gijsbers.]
+Include Kerkerkruip Persistent Data by Victor Gijsbers.
 Include Kerkerkruip Dungeon Generation by Victor Gijsbers.
 Include Kerkerkruip Events by Victor Gijsbers.
 Include Kerkerkruip ATTACK Additions by Victor Gijsbers.
@@ -50,7 +50,7 @@ Use maximum capture buffer length of at least 8192.
 Use maximum indexed text length of at least 8192. 
 
 First when play begins (this is the random seed rule):
-	seed the random-number generator with 4.
+	seed the random-number generator with 2.
 
 The random seed rule is listed before the reaper carries a random scythe rule in the when play begins rules.
 
@@ -168,79 +168,6 @@ Chapter - No Enemies and Powers Menu (in place of Chapter - Enemies and Powers M
 
 Chapter - No Help Menu (in place of Chapter - Help Menu in Kerkerkruip Actions and UI by Victor Gijsbers)
 
-Chapter - Achievements (for use without Kerkerkruip Persistent Data by Victor Gijsbers)
-
-An achievement is a kind of value. Some achievements are defined by the Table of Achievements.
-
-Table of Achievements
-achievement
-Assistant dungeoneer
-Adventurer
-Hunter
-Destroyer
-Mageslayer
-Deathblow
-I return to serve
-From the shadows I come
-Stunning performance
-Detox
-Injury to insult
-Unmoved
-Nature's fragile vessel
-Durin's bane
-Make love not war
-Twice fallen
-Give them blood
-Royal fruit
-Sixth heaven
-
-Table of Held Achievements
-held achievement	held difficulty
-(an achievement)	(number)
-with 20 blank rows [ Include some buffer rows in case the player goes back to an old version ]
-
-To award achievement (current achievement - an achievement):
-	if there is a held achievement of current achievement in the Table of Held Achievements:
-		choose row with a held achievement of current achievement in the Table of Held Achievements;
-	otherwise:
-		choose a blank row in the Table of Held Achievements;
-		now the held achievement entry is current achievement;
-	if there is no held difficulty entry or the held difficulty entry is less than the difficulty:
-		now held difficulty entry is difficulty;
-		say "[line break]You have been awarded the [bold type][current achievement][roman type] achievement!";
-
-Chapter - General Data Storage (for use without Kerkerkruip Persistent Data by Victor Gijsbers)
-
-Table of Data Storage
-key (number)	value (number)
---	--
-with 14 blank rows
-
-Table of Victories
-Victories	Level	Best-Level
-0	0	0
-
-To decide which number is data value (X - a number):
-	if there is a key of X in the Table of Data Storage:
-		choose row with a key of X in the Table of Data Storage;
-		decide on the value entry;
-	otherwise:
-		decide on 0;
-
-To set data value (X - a number) to (Y - a number), table only (this is data-value setting):
-	if there is a key of X in the Table of Data Storage:
-		choose row with a key of X in the Table of Data Storage;
-	otherwise:
-		choose a blank row in the Table of Data Storage;
-		now the key entry is X;
-	now the value entry is Y;
-
-To decide which number is the number of victories: decide on data value 1.
-
-To decide which number is the best level: decide on data value 3.
-
-To decide which number is the number of victories for the purpose of unlocking: decide on data value 4;
-
 Chapter - Missing Windows Phrases (for use without Kerkerkruip Windows by Erik Temple)
 
 Attribute printed is a truth state variable. Attribute printed is false.
@@ -253,6 +180,11 @@ To check initial position of attribute:
 		say ", [run paragraph on]".
 			
 Chapter - Miscellaneous Patches to Kerkerkruip Extensions
+
+Section - Not Loading Data Values (in place of Section - Loading Data Values in Kerkerkruip Persistent Data by Victor Gijsbers)
+
+To save data storage:
+	do nothing;
 
 Section - No Died and Kill Counts (in place of Section - Died and Kill counts in Kerkerkruip Monsters by Victor Gijsbers)
 
@@ -536,7 +468,10 @@ Choosing a player reaction is a rulebook.
 
 Before taking a player action when the scheduled event is generated:
 	stop and save event description;
-	log "testing effects of [the scheduled event]";
+	if the next move of the scheduled event is the scheduled event:
+		say "* [run paragraph on]";
+	otherwise:
+		log "testing effects of [the scheduled event]";
 	now the scheduled event is not generated;
 	Let the completed event be the scheduled event;
 	follow the testing a turn-based event rules for the completed event;
@@ -1202,7 +1137,7 @@ To decide whether (guy - a person) is within (delta - a number) percent of cower
 	if the percent difference is less than 0, now the percent difference is 0 minus the percent difference;
 	decide on whether or not the percent difference not greater than delta;
 		
-To move on if there was enough cowering:
+To move on if cowering was within (N - a number) percent after (T - a number) turns:
 	let try again be true;
 	if the next move of the scheduled event is not the scheduled event:
 		now the delayed move is the next move of the scheduled event;
@@ -1210,15 +1145,15 @@ To move on if there was enough cowering:
 	Let success count be 0;
 	Repeat with guy running through people in the location:
 		check if guy cowered this turn;
-		if guy is within 5 percent of cowering target, increment success count;	
+		if guy is within N percent of cowering target, increment success count;	
 	if the act count of the player is at least 20 and success count is the number of people in the location:
 		assert truth of true with message "success";
 		now try again is false;
-	if the act count of the player is at least 100:
+	if the act count of the player is at least T:
 		Repeat with guy running through people in the location:
 			Let msg be indexed text;
-			Now msg is "After [act count of guy] rounds, [the guy] cowered [cower count of guy] times versus a target of [target cower percentage of guy] percent.";
-			assert truth of whether or not guy is within 5 percent of cowering target with message msg;
+			Now msg is "After [act count of guy] rounds, [the guy] cowered [cower count of guy] times versus a target of [target cower percentage of guy] percent ([target cower percentage of guy times act count of guy divided by 100]).";
+			assert truth of whether or not guy is within N percent of cowering target with message msg;
 		now try again is false;
 	if try again is false:
 		now the next move of the scheduled event is the delayed move;
@@ -1230,16 +1165,17 @@ To move on if there was enough cowering:
 Ape-cowering is a turn-based event. The first move of Dreadful-Presence-Test is Ape-cowering. The scheduled action of Ape-cowering is the action of waiting.
 
 Testing a turn-based event of Ape-cowering:
-	move on if there was enough cowering.
+	move on if cowering was within 5 percent after 200 turns.
 		
 Player-cowering is a turn-based event. The next move of Ape-cowering is Player-cowering. The scheduled action of player-cowering is the action of waiting.
 
 Before taking a player action when the scheduled event is Player-cowering:
-	now the player is insane;
-	assert that the target cower percentage of the player is 15; 
+	if the next move of the scheduled event is not Player-cowering:
+		now the player is insane;
+		assert that the target cower percentage of the player is 15; 
 	
 Testing a turn-based event of player-cowering:
-	move on if there was enough cowering.
+	move on if cowering was within 5 percent after 200 turns.
 
 
 Section - Controlling pipes

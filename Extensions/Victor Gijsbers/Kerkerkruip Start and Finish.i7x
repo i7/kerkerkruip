@@ -33,11 +33,11 @@ Section - The difficulty level
 The difficulty is a number that varies.
 
 Before showing the title screen:
-	now difficulty is data value 2;
+	now difficulty is setting of current difficulty;
 
 To set difficulty to (x - number):
 	now difficulty is x;
-	set data value 2 to difficulty;
+	set current difficulty to difficulty;
 
 
 Section - Player stats
@@ -170,14 +170,14 @@ To display the text menu:
 	say paragraph break;]
 	say " SCORES:[line break]";
 	say "   Current level                :  [difficulty level difficulty] ([difficulty])[paragraph break]";
-	let best-level be data value 3;
+	let best-level be setting of highest achieved difficulty;
 	say "   Highest level achieved       :  [difficulty level best-level] ([best-level])[line break][paragraph break]";
-	say "   Your total victories         :  [ data value 1][line break]";		
+	say "   Your total victories         :  [number of total victories][line break]";		
 [		say "   Your current winning streak  :    [unless winning-streak is greater than 9] [end if][unless winning-streak is greater than 99] [end if] [winning-streak][line break]";
 	say "   Your best winning streak     :  [unless best-winning-streak is greater than 9] [end if][unless best-winning-streak is greater than 99] [end if]   [best-winning-streak][paragraph break]";]
 	say paragraph break;
 	say " ACTIONS:[line break]";
-	if data value 8 is 1:
+	if menu hyperlinks are enabled:
 		set menu hyperlink for 32;
 		say "   [if the file of save data exists]Continue the game[otherwise]New game         [end if]            :    (SPACE)[line break]";
 		end menu hyperlink;
@@ -206,7 +206,7 @@ To display the text menu:
 	say variable letter spacing;
 
 A glulx input handling rule for a hyperlink-event while showing the text title screen is true (this is the intercept the main menu hyperlinks rule):
-	if data value 8 is 1:
+	if menu hyperlinks are enabled:
 		convert the hyperlink code to the character code;
 		request hyperlink input again;
 		replace player input;
@@ -316,65 +316,53 @@ Section - Options Menu
 Table of Options Menu
 title	order	rule
 "[bold type]Interface options"	1	--
-"Information panels: [bold type][if data value 7 is 1]Off[otherwise]On[end if]"	2	the toggle info panels rule
-"Clickable menus: [bold type][if data value 8 is 1]On[otherwise]Off[end if][unless glulx hyperlinks are supported][italic type] (note: not supported in this interpreter)[roman type][end if]"	3	the toggle menu hyperlinks rule
+"Information panels: [bold type][if window information panels are disabled]Off[otherwise]On[end if]"	2	the toggle info panels rule
+"Clickable menus: [bold type][menu hyperlinks are enabled]On[otherwise]Off[end if][unless glulx hyperlinks are supported][italic type] (note: not supported in this interpreter)[roman type][end if]"	3	the toggle menu hyperlinks rule
 ""	20	--
 "[bold type]Reset"	21	--
-"[if difficulty is 0 and data value 1 is 0 and data value 3 is 0 or data value 4 is 0][italic type](Reset the number of victories)[otherwise]Reset the number of victories"	22	the resetting rule
+"[if difficulty is 0 and number of total victories is 0 and setting of highest achieved difficulty is 0 or number of unlocking victories is 0][italic type](Reset the number of victories)[otherwise]Reset the number of victories"	22	the resetting rule
 "[if the Table of Held Achievements is empty][italic type](Reset achievements)[otherwise]Reset achievements"	23	the achievement resetting rule
-"[if data value 4 > 99][italic type](Unlock everything)[otherwise]Unlock everything"	24	the unlock everything rule
+"[if number of unlocking victories > 99][italic type](Unlock everything)[otherwise]Unlock everything"	24	the unlock everything rule
 
 Before showing the title screen:
 	sort the Table of Options Menu in (order) order;
 
 This is the resetting rule:
 	set difficulty to 0;
-	set data value 1 to 0, table only;
-	set data value 3 to 0, table only;
-	set data value 4 to 0;
+	set total victories to 0, table only;
+	set highest achieved difficulty to 0, table only;
+	set unlocking victories to 0;
 
 This is the achievement resetting rule:
 	blank out the whole of the Table of Held Achievements;
 	write File of Achievements from Table of Held Achievements;
 
 This is the unlock everything rule:
-	set data value 4 to 100;
+	set unlocking victories to 100;
 
 This is the toggle info panels rule:
-	if data value 7 is 0:
-		set data value 7 to 1;
-	otherwise:
-		set data value 7 to 0;
+	toggle window information panels;
 
 This is the toggle menu hyperlinks rule:
-	if data value 8 is 0:
-		set data value 8 to 1;
-		if glulx hyperlinks are supported:
-			now enable menu hyperlinks is true;
-	otherwise:
-		set data value 8 to 0;
-		now enable menu hyperlinks is false;
+	toggle menu hyperlinks;
+	consider the figure out whether to enable hyperlinks rule;
 
-Before displaying:
-	if glulx hyperlinks are supported and data value 8 is 1:
+Before displaying (this is the figure out whether to enable hyperlinks rule):
+	if glulx hyperlinks are supported and menu hyperlinks are enabled:
 		now enable menu hyperlinks is true;
 	otherwise:
 		now enable menu hyperlinks is false;
-
 
 
 Section - Adding menu screen graphics to the Options menu (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
 Table of Options Menu (continued)
 title	order	rule
-"Menu graphics: [bold type][if data value 5 is 1]Off[otherwise]On[end if][roman type]"	11	the toggle menu graphics rule
+"Menu graphics: [bold type][if main menu graphics are enabled]Off[otherwise]On[end if][roman type]"	11	the toggle menu graphics rule
 
 This is the toggle menu graphics rule:
-	if data value 5 is 1:
-		set data value 5 to -1, table only;
-	otherwise:
-		set data value 5 to 1, table only;
-	set data value 6 to 0;
+	toggle main menu graphics, table only;
+	disable session flag;
 	restart immediately.
 
 To restart immediately: 
@@ -506,21 +494,21 @@ Section - What happens after the obituary
 
 After printing the player's obituary (this is the update the difficulty rule):
 	if the player is victorious:
-		set data value 1 to (data value 1) + 1, table only; [ number of victories ]
-		set data value 4 to (data value 4) + 1, table only; [ number of victories for the purpose of unlocking ]
+		increase the total victories by 1, table only;
+		increase unlocking victories by 1, table only;
 		increase difficulty by 1; [We want to go from easy to normal difficulty.]
 		if difficulty is 1:
 			say "[paragraph break][bold type]You have defeated Malygris on easy mode, proving that you understand the basics of the game! Next time, Kerkerkruip will start in normal mode. From now on, new items, monsters and locations will be available. Have fun![roman type][paragraph break]";
-		if difficulty is greater than data value 3: [ best level ]
-			set data value 3 to difficulty, table only;
+		if difficulty is greater than setting of highest achieved difficulty:
+			set highest achieved difficulty to difficulty, table only;
 	otherwise:
 		unless difficulty is less than 2:
 			decrease difficulty by 1;
-	set data value 2 to difficulty;
+	set current difficulty to difficulty;
 
 Last after printing the player's obituary (this is the list unlocked stuff rule):
 	if the player is victorious:
-		let number-of-victories be data value 4;
+		let number-of-victories be number of unlocking victories;
 		if number-of-victories > 99 or number-of-victories < 2:
 			stop;
 		let X be a list of objects; [We cannot repeat through objects, so:]

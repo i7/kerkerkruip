@@ -130,7 +130,7 @@ Chapter - Window-drawing rules
 [There are two primary places where we need to redraw the windows. First, before reading a command should handle all in-game situations. But we also need the stats to reflect the last turn of the game when we've won, since this will most often be a combat turn that we have lost. For that, we hook into the activity for printing the player's "obituary".]
 
 To redraw subsidiary content windows:
-	if data value 7 is 0:
+	if window information panels are enabled:
 		follow the window-drawing rules for the stats-window;
 		follow the window-drawing rules for the powers-window;
 		follow the window-drawing rules for the inventory-window.
@@ -275,30 +275,29 @@ Chapter - Opening and closing windows
 
 Toggling window panels is an action out of world. Understand "toggle info panels" or "info panels" or "toggle information panels" or "information panels" or "panels" as toggling window panels.
 
-Understand "disable panels" or "disable info panels" or "disable information panels" as toggling window panels when data value 7 is 0.
+Understand "disable panels" or "disable info panels" or "disable information panels" as toggling window panels when window information panels are enabled.
 
-Understand "enable panels" or "enable info panels" or "enable information panels" as toggling window panels when data value 7 is 1.
+Understand "enable panels" or "enable info panels" or "enable information panels" as toggling window panels when window information panels are disabled.
 
-Understand "disable panels" or "disable info panels" or "disable information panels" as a mistake ("The information panels are already disabled.") when data value 7 is 1.
+Understand "disable panels" or "disable info panels" or "disable information panels" as a mistake ("The information panels are already disabled.") when window information panels are disabled.
 
-Understand "enable panels" or "enable info panels" or "enable information panels" as a mistake ("The information panels are already enabled.") when data value 7 is 0.
+Understand "enable panels" or "enable info panels" or "enable information panels" as a mistake ("The information panels are already enabled.") when window information panels are enabled.
 
 Carry out toggling window panels:
 	close the status window;
-	if data value 7 is 1:
-		set data value 7 to 0;
+	toggle window information panels;
+	if window information panels are enabled:
 		open side windows;
 		open the status window;
 		say "The information panels have been enabled. Type PANELS to disable them again.";
 	otherwise:
-		set data value 7 to 1;
 		close side windows;
 		open the status window;
 		say "The information panels have been disabled. Type PANELS to re-enable them."
 
 	
 To open side windows:
-	if data value 7 is 1, rule fails;	
+	if window information panels are disabled, rule fails;	
 	set the Gargoyle background color to the color g-white;
 	set up styles for side windows;
 	open up the stats-window;
@@ -329,12 +328,12 @@ To close side windows:
 Section - Events
 
 Last when play begins (this is the check info panel capacity rule):
-	if data value 7 is 1:
+	if window information panels are disabled:
 		say "[bracket]Information panels are disabled. Type PANELS to enable them.[close bracket][line break][run paragraph on]";
-	if data value 7 is 0:
+	if window information panels are enabled:
 		if width of the main-window is less than 102 or height of the main-window is less than 30:
 			say "[bracket]Your game window is too small for you to use the information panels comfortably. Maximize your window, then type PANELS to enable them.[close bracket][line break][run paragraph on]";
-			set data value 7 to 1;
+			disable window information panels;
 	follow the open up game windows rule.
 
 This is the open up game windows rule:

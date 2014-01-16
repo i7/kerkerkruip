@@ -10,21 +10,28 @@ Chapter - General data storage
 
 [ We store data in a table (and file). Both keys and values are integers. Keys can be skipped freely.
 
-The table length should be longer than we need in order to have a buffer in case the player decides to go back to an older version.
+The table length should be longer than we need in order to have a buffer in case the player decides to go back to an older version.]
 
-Data entries (careful, may not be up to date!):
-	1: total victories count
-	2: current difficulty level
-	3: highest level achieved
-	4: victories count for the purpose of unlocking content
-	5: main menu graphics desired (1 = yes, -1 = no) [code in Kerkerkruip Glimmr Additions.i7x]
-	6: session flag [code in Kerkerkruip Glimmr Additions.i7x]
-	7: window panels disabled (0 = enabled, 1 = disabled)
-	8: menu hyperlinks (1 = enabled, 0 = disabled)
-]
+Section - Loading Data Values
 
 The File of Data Storage is called "KerkerkruipStorage".
 The File of Legacy Storage is called "KerkerkruipData".
+
+Before showing the title screen (this is the load the file of data storage rule):
+	if File of Data Storage exists:
+		read File Of Data Storage into the Table of Data Storage;
+	otherwise if File of Legacy Storage exists:
+		read File Of Legacy Storage into the Table of Victories;
+		choose row 1 in Table of Victories;
+		set total victories to the Victories entry, table only;
+		set current difficulty to the Level entry, table only;
+		set highest achieved difficulty to the Best-Level entry, table only;
+		set unlocking victories to the Victories entry;
+
+To save data storage:
+	write File of Data Storage from Table of Data Storage;
+
+Section - Low-level Access to Data Values
 
 Table of Data Storage
 key (number)	value (number)
@@ -34,17 +41,6 @@ with 14 blank rows
 Table of Victories
 Victories	Level	Best-Level
 0	0	0
-
-Before showing the title screen (this is the load the file of data storage rule):
-	if File of Data Storage exists:
-		read File Of Data Storage into the Table of Data Storage;
-	otherwise if File of Legacy Storage exists:
-		read File Of Legacy Storage into the Table of Victories;
-		choose row 1 in Table of Victories;
-		set data value 1 to the Victories entry, table only;
-		set data value 2 to the Level entry, table only;
-		set data value 3 to the Best-Level entry, table only;
-		set data value 4 to the Victories entry;
 
 To decide which number is data value (X - a number):
 	if there is a key of X in the Table of Data Storage:
@@ -61,13 +57,76 @@ To set data value (X - a number) to (Y - a number), table only (this is data-val
 		now the key entry is X;
 	now the value entry is Y;
 	if not table only:
-		write File of Data Storage from Table of Data Storage;
+		save data storage;
 
-To decide which number is the number of victories: decide on data value 1.
+Section - Accessing Data Values
 
-To decide which number is the best level: decide on data value 3.
+data storage parameter is a kind of value. The data storage parameters are defined by the Table of Data Value Labels.
 
-To decide which number is the number of victories for the purpose of unlocking: decide on data value 4;
+A data storage parameter has a number called enabled value. A data storage parameter has a number called disabled value. A data storage parameter has a number called data value index.
+
+Table of Data Value Labels
+data storage parameter	data value index	enabled value	disabled value
+total victories	1	1	0
+current difficulty	2	1	0
+highest achieved difficulty	3	1	0
+unlocking victories [victories for the purpose of unlocking]	4	1	0
+main menu graphics	5	1	-1
+session flag	6	1	0
+window information panels	7	0	1
+menu hyperlinks	8	1	0
+
+To decide which number is (P - a data storage parameter) as a number: (- {P} -);
+
+To decide which number is the/-- number/setting of (P - a data storage parameter):
+	decide on data value (P as a number);
+
+To decide whether (P - a data storage parameter) is/are unset:
+	if disabled value of P is 0 or enabled value of P is 0, no;
+	Decide on whether or not number of P is 0;
+
+To decide whether (P - a data storage parameter) is/are enabled:
+	decide on whether or not number of P is enabled value of P;
+
+To decide whether (P - a data storage parameter) is/are disabled:
+	decide on whether or not number of P is disabled value of P;
+
+To increase the/-- (param - a data storage parameter) by (N - a number), table only:
+	if table only:
+		set param to (number of param) + N, table only;
+	otherwise:
+		set param to (number of param) + N;
+
+To set the/-- (param - a data storage parameter) to (N - a number), table only:
+	let P be param as a number;
+	if table only:
+		set data value P to N, table only;
+	otherwise:
+		set data value P to N;
+
+To enable (param - a data storage parameter), table only:
+	if table only:
+		set param to enabled value of param, table only;
+	otherwise:
+		set param to enabled value of param;
+
+To disable (param - a data storage parameter), table only:
+	if table only:
+		set param to disabled value of param, table only;
+	otherwise:
+		set param to disabled value of param;
+
+To toggle (param - a data storage parameter), table only:
+	if param is enabled:
+		if table only:
+			disable param, table only;
+		otherwise:
+			disable param;
+	otherwise:
+		if table only:
+			enable param, table only;
+		otherwise:
+			enable param;
 
 Chapter - Achievements
 
