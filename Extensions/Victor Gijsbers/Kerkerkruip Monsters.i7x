@@ -3533,7 +3533,7 @@ Section - Power of the Fanatics of Aite
 The power of the Fanatics of Aite is a power. Healer of Aite grants power of the Fanatics of Aite.
 The power level of power of the Fanatics of Aite is 4.
 The command text of power of the fanatics of Aite is "sacrifice".
-The description of power of the fanatics of Aite is "Type: active and passive ability.[paragraph break]Command: sacrifice (while not in another god's temple).[paragraph break]Effect: You can sacrifice to Aite even when you are not in her temple, though the effect will not work in the temples of other gods. Once you worship Aite, the probability that her combat interventions will occur increases, the probability that they will benefit you increases, and they deal more damage. All these effects scale with your spirit score."
+The description of power of the fanatics of Aite is "Type: active and passive ability.[paragraph break]Command: sacrifice.[paragraph break]Effect: If you are not in a temple, you can still sacrifice powers. If you don't worhsip a god, you can sacrificy to Aite in this way; otherwise, you will worship to the god you're already worshipping. The probability that your god's combat interventions will occur also increases. If you worship Aite, the probability that her interventions will benefit you increases, and they deal more damage. These effects scale with your spirit score."
 The power-name of power of the fanatics of Aite is "power of the fanatics".
 
 Table of Enemy Powers (continued)
@@ -3554,7 +3554,7 @@ Repelling power of the Fanatics of Aite:
 
 Status skill rule (this is the fanatics of aite status skill rule):
 	if power of the fanatics of aite is granted:
-		say "You have the power of the fanatics of Aite, which allows you to [bold type]sacrifice[roman type] to the goddess even when you are not in her temple. This power does not work in the temples of other gods. [italic type](Level 4)[roman type][line break][run paragraph on]".
+		say "You have the power of the fanatics of Aite, which allows you to [bold type]sacrifice[roman type] even when you are not in a temple. Divine interventions on your behalf also become more frequent. [italic type](Level 4)[roman type][line break][run paragraph on]".
 	
 A room can be temporary-Aite-temple. A room is usually not temporary-Aite-temple.
 		
