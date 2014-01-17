@@ -470,7 +470,8 @@ To decide whether the player is victorious:
 Every turn (this is the victory rule):
 	if the player is victorious:
 		consider the victory message rules.
-		
+
+	
 Last victory message rule (this is the normal victory message rule):		
 	end the story saying "You have defeated Malygris! With his immense magical powers now at your disposal, it is time to teleport back to Montenoir and pay a little visit to the prince.";
 	rule succeeds.
@@ -491,6 +492,9 @@ To do the level 10 victory with (guy - a person):
 
 
 Section - What happens after the obituary
+
+First after printing the player's obituary (this is the reset prompt for death or victory rule):
+	now the command prompt is the peaceful prompt.
 
 After printing the player's obituary (this is the update the difficulty rule):
 	if the player is victorious:
