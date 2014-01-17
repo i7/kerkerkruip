@@ -1375,6 +1375,7 @@ Section - Lion's shield (special)
 
 The lion's shield is a shield.
 The lion's shield is iron.
+Understand "lion" as the lion's shield.
 
 The block bonus of the lion's shield is 2.
 
