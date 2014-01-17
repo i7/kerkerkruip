@@ -2502,7 +2502,8 @@ Report the mindslug waiting when the mindslug is insane:
 
 Section - Slaves
 
-Fafhrd is a mindslug-enslaved man. The description of Fafhrd is "This male barbarian is strong and muscular. He looks like an able and shrewd fighter.".
+Fafhrd is a mindslug-enslaved man. "Fafhrd, the huge but sympathetic barbarian adventurer, strolls through the room[if Fafhrd is mindslug-enslaved]. He doesn't seem to be himself, though[end if]."
+The description of Fafhrd is "This male barbarian is strong and muscular. He looks like an able and shrewd fighter.".
 
 The soul description of Fafhrd is "frozen honour".
 
@@ -2528,7 +2529,8 @@ Fafhrd is weapon user.
 Fafhrd is talker.
 Fafhrd is thrower.
 
-Mouser is a mindslug-enslaved man. The description of Mouser is "Mouser is a small, fast man. You know his type from the alleys and alehouses of Montenoir.".
+Mouser is a mindslug-enslaved man. "The sneak thief Mouser looks around with greedy eyes[if Fafhrd is mindslug-enslaved]. He appears to be under some kind of spell[end if]."
+The description of Mouser is "Mouser is a small, fast man. You know his type from the alleys and alehouses of Montenoir.".
 
 The soul description of the Mouser is "dreams of gold and women".
 
@@ -5889,8 +5891,8 @@ Report the abyss of the soul waiting when the abyss of the soul is insane:
 
 Chapter - Mummified priest
 
-The mummified priest is a male not neuter undead undead-faction monster. 
-Understand "mummy" as the mummified priest.
+The mummified priest is a male not neuter undead undead-faction monster. "An ancient priest, completely covered in bandages, is here."
+Understand "mummy" and "ancient" and "bandages" as the mummified priest.
 
 The description of the mummified priest is "Ancient embalming techniques have saved this priest's body from decomposition. Dark magics have returned a semblance of life to his remains."
 
@@ -5997,7 +5999,7 @@ Report the mummified priest waiting when the mummified priest is insane:
 
 Chapter - Zombie toad
 
-The zombie toad is an undead undead-faction monster. 
+The zombie toad is an undead undead-faction monster. "A zombie toad hops pathetically around."
 
 The description of the zombie toad is "This toad wasn't pretty when it was alive, and undeath hasn't improved its looks. Raising toads is a favourite pastime of very young necromancers once they've progressed beyond the stage of insects. Fortunately, a zombie toad isn't a real menace to anyone who is not a zombie fly."
 
@@ -6067,7 +6069,7 @@ Report the zombie toad waiting when the zombie toad is insane:
 
 Chapter - Malignant chanter
 
-The malignant chanter is a male not neuter undead undead-faction monster. 
+The malignant chanter is a male not neuter undead undead-faction monster. "A malignant chanter poisons the atmosphere with his eery singing."
 
 The description of the malignant chanter is "This man must once have been one of the proud battle bards of Algir, but now he has been reduced to a putrefying corpse animated by magic. His chant can still inspire his undead allies, though."
 
@@ -6180,7 +6182,7 @@ Report the malignant chanter concentrating:
 
 Chapter - Drakul
 
-Drakul is a male not neuter undead super-undead undead-faction monster. "The vampire Drakul glides back and forth silently before you.".
+Drakul is a male not neuter undead super-undead undead-faction monster. "The vampire Drakul silently glides back and forth before you.".
 
 Drakul is proper-named.
 
@@ -6333,7 +6335,7 @@ Chapter - Smoke demons
 
 Section - Statistics
 
-A smoke demon is a monster. 
+A smoke demon is a monster. "The smoke here has taken the form of a smoke demon."
 
 The description of the smoke demon is "It is hard to say exactly which features of the smoky form show it to be sentient, but there is not the slightest doubt in your mind that it is.".
 
@@ -6503,7 +6505,8 @@ Chapter - Imp
 
 Section - Statistics
 
-There is a monster called an imp.
+There is a monster called an imp. "A little devil flies around the room."
+Understand "little" and "devil" as the imp.
 
 The description of the imp is "Imps are minor demons with unnaturally small wings. They rarely engage in combat, prefering to teleport or fly away from danger.".
 
