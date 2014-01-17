@@ -422,7 +422,10 @@ Section - Nomos's engagement in combat
 
 Every turn when the player worships Nomos (this is the Nomos intervenes in combat rule):
 	if combat status is not peace and Nomos counter is 0 and main actor is the player:
-		if a random chance of divine favour in 40 succeeds:
+		let n be divine favour;
+		if power of the fanatics of Aite is granted:
+			increase n by 2;
+		if a random chance of n in 40 succeeds:
 			have Nomos intervene on behalf of the player.
 
 The Nomos attacker is a person that varies. The Nomos attacker is yourself.
@@ -679,7 +682,9 @@ A damage multiplier rule when someone worships sul (this is the sul sometimes pr
 	if the the intercessor opposes the global defender:
 		make no decision;
 	[Assume that everyone who worships sul is in alliance]
-	Let the current favour be the favour of the intercessor with sul;
+	let the current favour be the favour of the intercessor with sul;
+	if the intercessor is the player and the power of the fanatics of Aite is granted:
+		increase current favour by 2;
 	if a random chance of current favour in 40 succeeds:
 		say "[bold type] - 100% (Sul intervenes)[roman type][run paragraph on]";
 		now the attack damage is 0.
@@ -739,6 +744,8 @@ Every turn when the player worships Chton (this is the Chton intervenes in comba
 		if current form is lich-form:
 			increase n by 5;
 		increase n by 6;
+		if power of the fanatics of Aite is granted:
+			increase n by 2;
 		decrease n by (3 times (the number of people in the location));
 		if n < 1:
 			now n is 1;
@@ -836,6 +843,8 @@ Before an actor hitting someone who worships Herm:
 	if the noun is not conscious, make no decision;
 	if the location of the actor is not the location of the noun, make no decision;
 	Let the current favour be the favour of the noun with Herm;
+	if the noun is the player and the power of the fanatics of Aite is granted:
+		increase current favour by 2;
 	if a random chance of the current favour in 20 succeeds:
 		say "[bold type]Herm[roman type] bends space and time around [the noun] and [the actor], and you suddenly find [if the noun is the player]yourself in the role of attacker[otherwise]that [the noun] is attacking [the actor] instead[end if]!";
 		try the noun hitting the actor instead.
