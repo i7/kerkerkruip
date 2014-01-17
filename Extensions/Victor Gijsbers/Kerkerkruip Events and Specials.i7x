@@ -383,7 +383,7 @@ First every turn when the location is Arena of the Gods:
 			if offender is alive:
 				now offender is arena-faction;
 				now arena-faction hates the faction of the player;
-				say "[line break][The offender] prostrates [it-them]self. 'I beg for your mercy, O great [challenged god],' [it-they] pray[s]. Then [it-they] rise[s] to fight you again!";
+				say "[line break][The offender] prostrates [it-them]self. 'I beg for your mercy, O great [challenged god],' [it-they of offender] pray[s]. Then [it-they] rise[s] to fight you again!";
 
 Section - Awarding divine power 
 

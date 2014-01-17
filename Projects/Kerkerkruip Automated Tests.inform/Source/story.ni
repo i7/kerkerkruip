@@ -483,7 +483,7 @@ For taking a player action when the scheduled event is not the normal keyboard i
 		follow the choosing a player reaction rules;
 	otherwise:
 		generate a player action of the scheduled action of the scheduled event;
-		now the scheduled event is generated.
+		now the scheduled event is generated;
 		
 The turn-based event player action rule is listed before the parse command rule in the for taking a player action rulebook.
 		
@@ -513,6 +513,7 @@ testing a turn-based event rules are a turn-based event based rulebook.
 To schedule (the event described - a turn-based event):
 	now the event described is not generated;
 	now the scheduled event is the event described;
+	transcribe and restart capturing;
 	
 Chapter - Test Sets
 
@@ -726,7 +727,6 @@ A test play when testing Aite champions vs bat:
 	try drinking Drakul's lifeblood;
 	try turning bat;
 	test aite spike vs bat;
-	transcribe and restart capturing;
 	
 Player-targeted is a truth state that varies.
 Player-damaged is a truth state that varies.
@@ -782,6 +782,54 @@ Testing a turn-based event of Arena-tormentor-enslaving:
 		assert that the event description includes ", killing her";
 
 	
+Section - Enslaving the Defender
+
+Defender-enslaving is a test set.
+
+A scenario rule when testing Defender-enslaving:
+	now Bodmall is testobject;
+	now mindslug is testobject;
+	now Hall of Gods is testobject;
+	now Temple of Sul is testobject;
+	
+A test play when testing Defender-enslaving:
+	try butterflying;
+	try meatboying;
+	extract the player to the location of Bodmall;
+	have the player defeat Bodmall;
+	extract the player to temple of Sul;
+	have the player sacrifice a random granted power;
+	assert that the favour of the player with Sul is 4;
+	extract the player to the location of the mindslug;
+	have the player defeat the mindslug;
+	now the mind score of the player is 1000;
+	extract the player to Hall of Gods;
+	have the player and the healer of aite fight in Arena of the Gods;
+	try smiting the tormentor of Aite;
+	try smiting the healer of Aite;
+	now the health of Defender of Aite is 100;
+	
+Arena-defender-enslaving is a turn-based event. The first move of Defender-enslaving is Arena-defender-enslaving. The scheduled action of Arena-defender-enslaving is the action of enslaving the defender of Aite.
+
+Testing a turn-based event of Arena-defender-enslaving:
+	assert that the event description includes "will do your bidding";
+	assert that the event description includes "ball of lightning .* damage to the defender of Aite";
+	assert that the event description includes "The defender of Aite prostrates himself. 'I beg for your mercy, O great Aite,' he prays. Then he rises to fight you again!";
+	assert that the defender of Aite opposes the player;
+
+Arena-defender-re-enslaving is a turn-based event. The next move of Arena-defender-enslaving is Arena-defender-re-enslaving. The scheduled action of Arena-defender-re-enslaving is the action of enslaving the defender of Aite;
+
+Before taking a player action when Arena-defender-re-enslaving is the scheduled event:
+	now the health of Defender of Aite is 1;
+	[how to prevent Aite spikes?]
+	now enslave-cooldown is 0;
+	
+Testing a turn-based event of Arena-defender-re-enslaving:
+	assert that the event description includes "will do your bidding";
+	assert that the event description includes "ball of lightning .* damage to the defender of Aite, killing him";
+	assert that the location is Hall of Gods;
+	assert truth of whether or not defender of Aite is off-stage with message "the defender of Aite should be off-stage"
+		
 Section - Chton Champion vs Bat
 
 Chton champion vs bat is a test set.
