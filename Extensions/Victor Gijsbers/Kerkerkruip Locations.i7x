@@ -1601,7 +1601,7 @@ Last check opening the tomb of the ancient king:
 		if tomb-ancient-king-counter greater than 0:
 			say "With combat no longer on your mind, you easily unscrew the lid.";
 		otherwise:
-			say "Unscrew the lid turns out to be a lot of work, but not difficult.";
+			say "Unscrewing the lid turns out to be a lot of work, but not difficult.";
 	otherwise:
 		if tomb-ancient-king-counter is 10:
 			say "With a sigh, you remove the last of the marble screws.";
