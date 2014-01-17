@@ -2828,7 +2828,7 @@ Section - Holy sword (monster)
 
 [The healer of Aite carries it.]						
 
-The holy sword is a sword. The description of the holy sword is "This sword shines with a clear white light. It deals additional damage to undead and demons. (It deals 1 extra damage for each 6 points of spirit; i.e., 1 damage at 6 spirit, 2 damage at 12 spirit, and so on.)".
+The holy sword is a sword. The description of the holy sword is "This sword shines with a clear white light. It deals additional damage to undead and demons. (It deals 1 extra damage for each 4 points of spirit; i.e., 1 damage at 4 spirit, 2 damage at 8 spirit, and so on.)".
 
 The special weapon info of the holy sword is "; deals extra damage to undead and demons; shines with light, making it harder to hide[run paragraph on]".
 
@@ -2840,7 +2840,7 @@ Detection rule (this is the holy sword detection rule):
 A damage modifier rule (this is the holy sword damage bonus rule):
 	if the global attacker weapon is the holy sword:
 		if the global defender is undead or global defender is demonic:
-			let n be (final spirit of global attacker / 6);
+			let n be (final spirit of global attacker / 4);
 			if n > 0:
 				say " + ", n, " (holiness)[run paragraph on]";
 				increase the attack damage by n.
