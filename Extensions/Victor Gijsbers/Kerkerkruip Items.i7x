@@ -2851,6 +2851,7 @@ Section - Immaculate sword (monster)
 
 The immaculate sword is a sword. The description of the immaculate sword is "Absolutely stainless."
 The immaculate sword is incorruptible.
+Damage die of the immaculate sword is 8.
 
 The special weapon info of the immaculate sword is "; cannot be corrupted[run paragraph on]".
 

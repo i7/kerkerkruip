@@ -3473,7 +3473,7 @@ The defender of Aite accompanies the healer of Aite.
 
 The health of the Defender of Aite is 23.
 The melee of the Defender of Aite is 1.
-The defence of the Defender of Aite is 12.
+The defence of the Defender of Aite is 11.
 
 The body score of Defender of Aite is 12.
 The mind score of Defender of Aite is 10.
