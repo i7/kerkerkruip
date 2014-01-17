@@ -801,7 +801,7 @@ A remain concentrated rule (this is the pale phylactery concentration rule):
 After an actor hitting (this is the alternative lose concentration after attacking rule):
 	unless (global attacker is the player and player wears pale phylactery and ment timer is greater than 0):
 		now the concentration of the global attacker is 0;
-		continue the action.
+	continue the action.
 
 The lose concentration after attacking rule is not listed in any rulebook.
 
