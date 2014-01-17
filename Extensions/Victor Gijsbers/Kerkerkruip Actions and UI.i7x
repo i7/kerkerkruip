@@ -388,6 +388,8 @@ Last carry out examining a person:
 		let item be a random readied weapon enclosed by the noun;
 		if item is a natural weapon:
 			say " [The noun] attack[s] using [item]: 1d[damage die of item] + [weapon damage bonus of the item] damage; [if weapon attack bonus of the item is less than 0]-[otherwise]+[end if][absolute value of weapon attack bonus of the item] attack modifier[if the item is ranged]; ranged[end if][natural parry and dodge info of the item][if the item is silver]; good against undead and demons[end if][special weapon info of the item][roman type].[run paragraph on]";
+		otherwise:
+			say " [The noun] attack[s] using [the item].[run paragraph on]";
 		say "[paragraph break][The noun] [has-have] [concentration of the noun] concentration, [offensive flow of the noun] offensive flow, and [defensive flow of the noun] defensive flow. [The noun] [is-are] of [size of the noun] size, and [has-have] [health of the noun] of [permanent health of the noun] health left.[run paragraph on]" ;
 		say "[paragraph break]".
 		
