@@ -702,6 +702,11 @@ Every turn (this is the remove all killed monsters from play rule):
 		unless guy is the player:
 			do the absorption with guy.
 
+A person can be already-granted. A person is usually not already-granted.
+Every turn (this is the remove already-granted rule):
+	repeat with guy running through already-granted people:
+		now guy is not already-granted.
+
 To do the absorption with (guy - a person):
 	have the guy disappear;
 	if guy is grouper and guy is not group leading:
@@ -709,12 +714,14 @@ To do the absorption with (guy - a person):
 		unless guy2 is defeated individually:
 			now guy is guy2;
 	if guy is not group leading or group of guy has been defeated or guy is defeated individually:
-		increase score by level of guy;
-		now test subject is guy;
-		unless absorption is stopped:
-			do power transferral with the guy;
-			heal fully because the guy is slain;
-		do achievement awarding for the guy.
+		unless guy is already-granted:
+			increase score by level of guy;
+			now test subject is guy;
+			unless absorption is stopped:
+				do power transferral with the guy;
+				heal fully because the guy is slain;
+				now guy is already-granted;
+			do achievement awarding for the guy.
 
 To do power transferral with (guy - a person):
 	repeat with X running through powers:
