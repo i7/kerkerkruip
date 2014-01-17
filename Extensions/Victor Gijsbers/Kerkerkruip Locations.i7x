@@ -1855,7 +1855,7 @@ The map-label of Entrance to the Arena is Figure of map_label_Arena.
 
 Chapter - Hall of the Gods
 
-Hall of Gods is a room. "A long hall, adorned with great statues of the [number of gods in words] great gods are here, together with pictures of the great battles already fought in this room. The last picture mentions [if Arena of the Gods is conquered]you triumphing over [Chosenname][otherwise][random fight text][end if]. [if Arena of the Gods is not conquered]While this fight may not let you harvest the soul of the opponent, your victory will be hailed upon by your god [italic type](+2 divine favour)[roman type]. If you are willing to fight, stand on the empty pedestal.[end if] Agnosticists and Atheists will not be tolerated!" 
+Hall of Gods is a room. "A long hall, adorned with great statues of the [number of gods in words] great gods are here, together with pictures of the great battles already fought in this room. The last picture mentions [if Arena of the Gods is conquered]you triumphing over [Chosenname][otherwise][random fight text][end if]. [if Arena of the Gods is not conquered]While this fight may not let you harvest the soul of the opponent, your victory will be hailed upon by your god [italic type](+2 divine favour)[roman type]. If you are willing to fight, stand on the empty pedestal. The faithless will not be tolerated!" 
 	
 Hall of Gods is connectable.
 Hall of Gods is not connection-inviting.
