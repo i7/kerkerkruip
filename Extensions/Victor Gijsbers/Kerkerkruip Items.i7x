@@ -81,6 +81,8 @@ The non-thing is incorruptible.
 A thing has a thing called the hidden identity. The hidden identity of a thing is usually the non-thing.
 Definition: a thing (called item) is hidden-identifiable if hidden identity of item is not the non-thing.
 
+A thing can be superhidden-identity. A thing is usually not superhidden-identity. [Use this for items that are always used by others, and shoulnd't function as their hidden identity. It bypasses the "hidden identities also revealed by enemies rule".]
+
 Report wearing:
 	unless the hidden identity of the noun is the non-thing:
 		now the hidden identity of the noun is curse-identified;
@@ -99,7 +101,7 @@ Report readying:
 		say "As soon as you ready [the noun], a chilling feeling goes through your arms. [The noun] [is-are] actually [bold type][the hidden identity of the noun][roman type]!" instead.
 
 Last dungeon interest rule (this is the hidden identities also revealed by enemies rule):
-	repeat with item running through wearable hidden-identifiable things:
+	repeat with item running through wearable hidden-identifiable not superhidden-identity things:
 		if a person wears item:
 			let guy be a random person wearing item;
 			now guy is wearing hidden identity of item;
@@ -2758,7 +2760,8 @@ A damage modifier rule (this is the sneaking sword damage bonus rule):
 
 A treasure placement rule (this is the sneaking sword can be singing sword rule):
 	if a random chance of 1 in 5 succeeds:
-		now the hidden identity of the sneaking sword is the singing sword.
+		now the hidden identity of the sneaking sword is the singing sword;
+		now sneaking sword is superhidden-identity. [Mouser has tamed it.]
 
 Section - Singing sword (cursed)
 
