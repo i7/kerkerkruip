@@ -58,6 +58,7 @@ First fragmentation rule (this is the remove item from play rule):
 A fragmentation rule (this is the basic fragmentation damage rule):
 	let n be the number of alive persons in fragmentation-place;
 	let original n be n;
+	let kill-list be a list of persons;
 	repeat with guy running through all alive persons in fragmentation-place:
 		let m be a random number between 2 and 5;
 		if fragmentation-item is silver:
@@ -76,8 +77,10 @@ A fragmentation rule (this is the basic fragmentation damage rule):
 			if fragmentation-place is the location:
 				say ""; [For an extra newline. Don't ask.]
 		if health of guy is less than 1:
-			have an event of fragmentation-guy killing the guy;
+			add guy to kill-list;
 		now guy is not asleep;
+	repeat with guy running through kill-list:
+		have an event of fragmentation-guy killing the guy;
 	if health of the player is less than 1:
 		if fragmentation-guy is the player:
 			end the story saying "You have blown yourself to pieces";
