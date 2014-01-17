@@ -3556,18 +3556,22 @@ Status skill rule (this is the fanatics of aite status skill rule):
 	if power of the fanatics of aite is granted:
 		say "You have the power of the fanatics of Aite, which allows you to [bold type]sacrifice[roman type] even when you are not in a temple. Divine interventions on your behalf also become more frequent. [italic type](Level 4)[roman type][line break][run paragraph on]".
 	
-A room can be temporary-Aite-temple. A room is usually not temporary-Aite-temple.
+A room can be temporary-temple. A room is usually not temporary-temple.
 		
-First check sacrificing (this is the turn every location into a temple of Aite rule):
-	if location is temporary-Aite-temple:
-		now location is not dedicated to Aite;
-		now location is not temporary-Aite-temple;
+First check sacrificing (this is the fanatics turn every location into a temple of your god rule):
+	if location is temporary-temple:
+		repeat with guy running through gods:
+			now location is not dedicated to guy;
+		now location is not temporary-temple;
 	if no god infuses location:
 		if power of the fanatics of Aite is granted:
-			now location is dedicated to Aite;
-			now location is temporary-Aite-temple.
+			now location is temporary-temple;
+			let guy be Aite;
+			if the player worships a god:
+				now guy is a random god worshipped by the player;
+			now location is dedicated to guy.
 
-	
+
 	
 
 Section - Beloved of Aite
