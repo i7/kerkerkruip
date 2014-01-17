@@ -958,12 +958,12 @@ To say status location:
 	 now phrase is printed name of location of the player in title case;
 	 say "[phrase][run paragraph on]".
 
-[Rule for constructing the status line:
+Rule for constructing the status line:
 	if window panels are disabled:
 		fill status bar with Table of Fancy Status;
 	otherwise:
 		center "[bold type][status location][roman type]" at row 1;
-	rule succeeds. ]
+	rule succeeds. 
 
 To say powers of the player:
 	let n be 0;
