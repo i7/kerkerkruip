@@ -68,6 +68,21 @@ Section - Intervention
 
 To have (benefactor - a god) intervene on behalf of (guy - a person):
 	say "[bracket]Error: unimplemented intervention of [the benefactor] on behalf of [the guy][close bracket][command clarification break]";
+	
+Section - intervention bonus	
+	
+The intervention bonus rules are a rulebook.
+The intervention-guy is a person that varies.
+The intervention-god is a god that varies.
+The intervention-bonus is a number that varies.
+
+To decide which number is the intervention bonus for (guy - a person) with (divinity - a god):
+	now intervention-bonus is 0;
+	now intervention-guy is guy;
+	now intervention-god is divinity;
+	consider the intervention bonus rules;
+	decide on intervention-bonus.
+	
 
 Chapter - Commands
 
@@ -279,8 +294,7 @@ Section - Aite's engagement in combat
 Every turn when the player worships Aite (this is the Aite intervenes in combat rule):
 	if combat status is not peace:
 		let n be divine favour;
-		if power of the fanatics of Aite is granted:
-			increase n by (final spirit of the player / 3);
+		increase n by the intervention bonus for the player with Aite;
 		if a random chance of n in 100 succeeds:
 			have Aite intervene on behalf of the player.
 
@@ -423,8 +437,7 @@ Section - Nomos's engagement in combat
 Every turn when the player worships Nomos (this is the Nomos intervenes in combat rule):
 	if combat status is not peace and Nomos counter is 0 and main actor is the player:
 		let n be divine favour;
-		if power of the fanatics of Aite is granted:
-			increase n by 2;
+		increase n by the intervention bonus for the player with Nomos;
 		if a random chance of n in 40 succeeds:
 			have Nomos intervene on behalf of the player.
 
@@ -683,8 +696,7 @@ A damage multiplier rule when someone worships sul (this is the sul sometimes pr
 		make no decision;
 	[Assume that everyone who worships sul is in alliance]
 	let the current favour be the favour of the intercessor with sul;
-	if the intercessor is the player and the power of the fanatics of Aite is granted:
-		increase current favour by 2;
+	increase current favour by the intervention bonus for the player with Sul;
 	if a random chance of current favour in 40 succeeds:
 		say "[bold type] - 100% (Sul intervenes)[roman type][run paragraph on]";
 		now the attack damage is 0.
@@ -744,8 +756,7 @@ Every turn when the player worships Chton (this is the Chton intervenes in comba
 		if current form is lich-form:
 			increase n by 5;
 		increase n by 6;
-		if power of the fanatics of Aite is granted:
-			increase n by 2;
+		increase n by the intervention bonus for the player with Chton;
 		decrease n by (3 times (the number of people in the location));
 		if n < 1:
 			now n is 1;
@@ -843,8 +854,7 @@ Before an actor hitting someone who worships Herm:
 	if the noun is not conscious, make no decision;
 	if the location of the actor is not the location of the noun, make no decision;
 	Let the current favour be the favour of the noun with Herm;
-	if the noun is the player and the power of the fanatics of Aite is granted:
-		increase current favour by 2;
+	increase current favour by the intervention bonus for the player with Herm;
 	if a random chance of the current favour in 20 succeeds:
 		say "[bold type]Herm[roman type] bends space and time around [the noun] and [the actor], and you suddenly find [if the noun is the player]yourself in the role of attacker[otherwise]that [the noun] is attacking [the actor] instead[end if]!";
 		try the noun hitting the actor instead.

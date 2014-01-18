@@ -3535,7 +3535,7 @@ Section - Power of the Fanatics of Aite
 The power of the Fanatics of Aite is a power. Healer of Aite grants power of the Fanatics of Aite.
 The power level of power of the Fanatics of Aite is 4.
 The command text of power of the fanatics of Aite is "sacrifice".
-The description of power of the fanatics of Aite is "Type: active and passive ability.[paragraph break]Command: sacrifice.[paragraph break]Effect: If you are not in a temple, you can still sacrifice powers. If you don't worhsip a god, you can sacrificy to Aite in this way; otherwise, you will worship to the god you're already worshipping. The probability that your god's combat interventions will occur also increases. If you worship Aite, the probability that her interventions will benefit you increases, and they deal more damage. These effects scale with your spirit score."
+The description of power of the fanatics of Aite is "Type: active and passive ability.[paragraph break]Command: sacrifice.[paragraph break]Effect: If you are not in a temple, you can still sacrifice powers. If you don't worhsip a god, you can sacrificy to Aite in this way; otherwise, you will worship to the god you're already worshipping. The probability that your god's combat interventions will occur increases as if your piety were spirit/4 higher than it actually is. If you worship Aite, the probability that her interventions will benefit you increases, and they deal more damage."
 The power-name of power of the fanatics of Aite is "power of the fanatics".
 
 Table of Enemy Powers (continued)
@@ -3547,7 +3547,7 @@ Absorbing power of the Fanatics of Aite:
 	increase melee of the player by 4;
 	increase defence of the player by 4;
 	increase permanent health of the player by 20;
-	say "As soon as the fanatics of Aite are all dead, you feel their souls absorbed into your own body. ([bold type]Power of the fanatics[roman type]: +4 attack, +4 defence, +20 health, you can [italic type]sacrifice[roman type] to Aite even when you're not in her temple, and Aite's interventions will be better for you.)[paragraph break]".
+	say "As soon as the fanatics of Aite are all dead, you feel their souls absorbed into your own body. ([bold type]Power of the fanatics[roman type]: +4 attack, +4 defence, +20 health, you can [italic type]sacrifice[roman type] even when you're not in a temple, and your god's interventions will occur more often.)[paragraph break]".
 
 Repelling power of the Fanatics of Aite:
 	decrease melee of the player by 4;
@@ -3573,7 +3573,11 @@ First check sacrificing (this is the fanatics turn every location into a temple 
 				now guy is a random god worshipped by the player;
 			now location is dedicated to guy.
 
-
+An intervention bonus rule (this is the power of Aite intervention bonus rule):
+	if intervention-guy is the player and power of the fanatics of Aite is granted:
+		if player worships intervention-god:
+			let n be (final spirit of the player) / 4;
+			increase intervention-bonus by n.
 	
 
 Section - Beloved of Aite
