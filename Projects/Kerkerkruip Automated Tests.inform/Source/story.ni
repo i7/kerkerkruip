@@ -50,7 +50,7 @@ Use maximum capture buffer length of at least 8192.
 Use maximum indexed text length of at least 8192. 
 
 First when play begins (this is the random seed rule):
-	seed the random-number generator with 2.
+	seed the random-number generator with 1.
 
 The random seed rule is listed before the reaper carries a random scythe rule in the when play begins rules.
 

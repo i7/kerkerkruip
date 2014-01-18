@@ -204,6 +204,10 @@ Understand "smite [something]" as smiting.
 
 A person can be smiter.
 
+A blindness rule (this is the smiting is blind rule):
+	if test subject is smiter:
+		rule succeeds.
+
 Carry out an actor smiting:
 	Now the actor is smiter;
 	Try the actor hitting the noun;

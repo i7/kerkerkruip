@@ -18,7 +18,8 @@ Section - Worship
 
 Worshipping relates various persons to one god (called the patron). The verb to worship (he worships, they worship, he worshipped it, it is worshipped, it is worshipping) implies the worshipping relation.
 
-Definition: A person is worshipper if it worships a god.
+The worship test god is an object that varies.
+Definition: A person is worshipper if it worships the worship test god.
 
 Section - Divine favour
 
@@ -69,6 +70,28 @@ Section - Intervention
 To have (benefactor - a god) intervene on behalf of (guy - a person):
 	say "[bracket]Error: unimplemented intervention of [the benefactor] on behalf of [the guy][close bracket][command clarification break]";
 
+The percent chance of intervention is a number that varies.
+
+To decide whether (guy - a person) will receive divine intervention:
+	unless the guy worships a god, no;
+	Now the percent chance of intervention is 0;
+	follow the intervention probability rules for guy;
+	Decide on whether or not a random chance of the percent chance of intervention in 100 succeeds.
+
+To decide which object is the/-- recipient of intervention by (boss - a god):
+	Now worship test god is boss;
+	Let the recipient be a random worshipper person in the location;
+	decide on the recipient;
+
+Intervention probability is an object-based rulebook.
+
+Every turn when the combat status is not peace (this is the spontaneous divine intervention rule):
+	Repeat with boss running through gods:
+		Let the supplicant be the recipient of intervention by boss;
+		unless the supplicant is a person, next;
+		if the supplicant will receive divine intervention:
+			have the patron of supplicant intervene on behalf of supplicant;
+		
 Chapter - Commands
 
 Section - Praying
@@ -276,13 +299,10 @@ A beloved of Aite rule (this is the worshippers are beloved of Aite rule):
 
 Section - Aite's engagement in combat
 
-Every turn when the player worships Aite (this is the Aite intervenes in combat rule):
-	if combat status is not peace:
-		let n be divine favour;
-		if power of the fanatics of Aite is granted:
-			increase n by (final spirit of the player / 3);
-		if a random chance of n in 100 succeeds:
-			have Aite intervene on behalf of the player.
+Intervention probability for a person (called guy) who worships Aite:
+	now percent chance of intervention is the favour of guy with Aite;
+	if guy is the player and power of the fanatics of Aite is granted:
+		increase percent chance of intervention by (final spirit of the player / 3);
 
 To have (benefactor - Aite) intervene on behalf of (guy - a person):
 	now opposition test subject is guy;
@@ -420,10 +440,11 @@ Section - Tome of Law
 
 Section - Nomos's engagement in combat
 
-Every turn when the player worships Nomos (this is the Nomos intervenes in combat rule):
-	if combat status is not peace and Nomos counter is 0 and main actor is the player:
-		if a random chance of divine favour in 40 succeeds:
-			have Nomos intervene on behalf of the player.
+Intervention probability for a person (called guy) who worships Nomos:
+	unless the Nomos counter is 0:
+		now the percent chance of intervention is 0;
+		rule succeeds;
+	now the percent chance of intervention is (favour of guy with Nomos) times 5 divided by 2;
 
 The Nomos attacker is a person that varies. The Nomos attacker is yourself.
 The Nomos counter is a number that varies. The Nomos counter is 0.
@@ -671,16 +692,22 @@ Status attribute rule (this is the demon slayer status rule):
 
 Section - Sul's intervention
 
-A damage multiplier rule when someone worships sul (this is the sul sometimes prevents damage rule):
+To decide whether Sul will protect the global defender:
+	Repeat with intercessor running through people in the location who worship Sul:
+		if the intercessor will receive divine intervention, yes;
+	no.
+	
+Intervention probability for someone (called intercessor) who worships sul:
+	unless an actor hitting:
+		make no decision;
 	if the global defender is undead or the global defender is demonic:
 		make no decision;
-	Let the intercessor be a random person who worships sul;
-	[Don't check that the intercessor is undead or demonic - they can still intercede as long as the defender isn't]
-	if the the intercessor opposes the global defender:
+	if the intercessor opposes the global defender:
 		make no decision;
-	[Assume that everyone who worships sul is in alliance]
-	Let the current favour be the favour of the intercessor with sul;
-	if a random chance of current favour in 40 succeeds:
+	increase the percent chance of intervention by (the favour of the intercessor with sul) times 5 divided by 2.
+
+A damage multiplier rule when someone worships sul (this is the sul sometimes prevents damage rule):
+	if Sul will protect the global defender:
 		say "[bold type] - 100% (Sul intervenes)[roman type][run paragraph on]";
 		now the attack damage is 0.
 
@@ -731,19 +758,17 @@ To do a Chton gift:
 
 Section - Chton's intervention
 
-Every turn when the player worships Chton (this is the Chton intervenes in combat rule):
-	if combat status is not peace:
-		let n be divine favour;
+Intervention probability for a person (called guy) who worships Chton:
+	let the percent chance of intervention be the favour of guy with Chton;
+	if guy is the player:
 		if current form is ghost-form:
-			increase n by 2;
+			increase the percent chance of intervention by 2;
 		if current form is lich-form:
-			increase n by 5;
-		increase n by 6;
-		decrease n by (3 times (the number of people in the location));
-		if n < 1:
-			now n is 1;
-		if a random chance of n in 100 succeeds:
-			have Chton intervene on behalf of the player.
+			increase the percent chance of intervention by 5;
+	increase the percent chance of intervention by 6;
+	decrease the percent chance of intervention by (3 times (the number of people in the location));
+	if the percent chance of intervention < 1:
+		now the percent chance of intervention is 1;
 
 To have (benefactor - Chton) intervene on behalf of (supplicant - a person):
 	say "Chton suddenly sends a [bold type]wave of unholy energy[roman type] through the room, dealing [run paragraph on]";

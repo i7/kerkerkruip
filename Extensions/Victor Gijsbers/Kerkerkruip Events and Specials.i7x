@@ -328,16 +328,13 @@ Arena-turncounter is a number that varies. Arena-turncounter is -1.
 OppHerm is a person that varies.
 OppHermBonus is a number that varies. OppHermbonus is 0.
 
+Last intervention probability when the location is Arena of the Gods (this is the more intervention in Arena of the Gods rule):
+	if the percent chance of intervention is greater than 0, increase the percent chance of intervention by (the tension times 2);
 
-Every turn when (the location is the Arena of the Gods) and (the combat status is not peace):
+[Every turn when (the location is the Arena of the Gods) and (the combat status is not peace):
 	let m be the tension;
 	now m is m times 2;
-	increase m by 35;
-	let x be the divine favour times 5;
-	if x is greater than m:
-		now m is 0;
-	otherwise:
-		decrease m by x;
+	increase m by 10;
 	if a random chance of m in 100 succeeds:
 		if at least one alive monster is enclosed by the Arena of the Gods:
 			Let the supplicant be a random alive monster enclosed by the Arena of the Gods;
@@ -355,7 +352,7 @@ Every turn when (the location is the Arena of the Gods) and (the combat status i
 					if Arena-turncounter is less than 0:
 						now Arena-turncounter is a random number between 1 and 3;
 						now oppHermBonus is a random number between 2 and 4;
-						say "Suddenly, your opponent blurs and is much harder to discern in this environment!".
+						say "Suddenly, your opponent blurs and is much harder to discern in this environment!".]
 
 An attack modifier rule (this is the much harder to discern by Herm bonus rule):
 	if (the Arena-turncounter is greater than 0) and (the global defender is oppHerm) and (the location is the Arena of the Gods):
