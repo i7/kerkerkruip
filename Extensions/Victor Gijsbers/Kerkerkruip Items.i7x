@@ -1120,7 +1120,15 @@ Before doing anything when the player wears the boots of wandering (this is the 
 				try going way instead.
 
 
+Section - Sandals of the prophet (major)
 
+The sandals of the prophet are major shoes. The sandals of the prophet are plural-named. The indefinite article of the sandals of the prophet is "the". The description of the sandals of the prophet is "Simple sandals, but they have been imbued with special significance ever since the great prophet Habamia was beaten to death with them. Wearing these slippers will significantly increase the probability of your god intervening on your behalf -- interventions will come as if your favour were 3 points higher."
+Sandals of the prophet are religious.
+
+An intervention bonus rule (this is the sandals of the prophet intervention bonus rule):
+	if intervention-guy wears the sandals of the prophet:
+		if intervention-guy worships intervention-god:
+			increase intervention-bonus by 3.
 
 
 Chapter - Trousers
@@ -1361,6 +1369,46 @@ The block bonus of wooden buckler is 1.
 
 The description of the wooden buckler is "No warrior could be proud of this small, unimpressive shield. Nonetheless, wearing it will allow you to block incoming attacks. [italic type]Block bonus: +1[roman type].".
 
+
+Section - Bulwark of faith (major)
+
+There is a major shield called the bulwark of faith.
+The bulwark of faith is religious.
+The bulwark of faith is radiance.
+
+The block bonus of the bulwark of faith is 0.
+
+Instead of examining the bulwark of faith:
+	if the bulwark of faith is worn:
+		let guy be a random person enclosing the bulwark of faith;
+		if guy is a person:
+			calculate the block bonus of the bulwark of faith;
+			say "This shield of shimmering [if the guy worships aite]red light[otherwise if the guy worships sul]golden light[otherwise if the guy worships nomos]silver light[otherwise if the guy worships chton]darkness[otherwise if the guy worships herm]shadows[otherwise]light[end if] gains its power from [possessive of guy] devotion to [if guy worships a god][a random god worshipped by guy][otherwise]a god[end if]. It's block bonus is equal to (favour + 3) / 4. Wearing it also slightly increases the chance of divine interventions on [possessive of guy] behalf. [italic type]Current block bonus: +[block bonus of the bulwark of faith][roman type]." instead;
+	say "This shield of shimmering light gains its power from the wearer's devotion to a god. It's block bonus is equal to (favour + 3) / 4. Wearing it also slightly increases the chance of divine interventions on your behalf.".
+		
+To calculate the block bonus of the bulwark of faith:
+	if the bulwark of faith is worn:
+		let guy be a random person enclosing the bulwark of faith;
+		if guy is a person:
+			let n be favour of guy;
+			increase n by 3;
+			now n is (n / 4);
+			now block bonus of the bulwark of faith is n;
+		otherwise:
+			now block bonus of the bulwark of faith is 0;
+	otherwise:
+		now block bonus of the bulwark of faith is 0.
+
+First carry out an actor blocking (this is the bulwark of faith must be updated rule):
+	if the actor encloses the bulwark of faith:
+		calculate the block bonus of the bulwark of faith.
+
+An intervention bonus rule (this is the bulwark of faith intervention bonus rule):
+	if intervention-guy wears the bulwark of faith:
+		if intervention-guy worships intervention-god:
+			increase intervention-bonus by 1.		
+
+
 Section - Adamantine shield (major)
 
 The adamantine shield is a major shield.
@@ -1370,6 +1418,7 @@ The adamantine shield is adamant.
 The block bonus of adamantine shield is 2.
 
 The description of adamantine shield is "Three serpents are eating each other on the intricate design of this indestructible shield. [italic type]Block bonus: +2[roman type].".
+
 
 Section - Lion's shield (special)
 
