@@ -1,5 +1,3 @@
-
-
 "Kerkerkruip - Release 9 - Alpha" by Victor Gijsbers
 
 The story headline is "An IF roguelike".
@@ -41,7 +39,7 @@ Include Kerkerkruip Windows by Erik Temple.
 Section - Include ATTACK
 
 [ Get the latest ATTACK at https://github.com/i7/ATTACK ]
-Include version 5/131204 of Inform ATTACK by Victor Gijsbers.
+Include version 5/140118 of Inform ATTACK by Victor Gijsbers.
 
 
 
@@ -78,9 +76,6 @@ Use MAX_STATIC_DATA of 500000.
 Use MAX_OBJECTS of 1000.
 Use MAX_SYMBOLS of 30000.
 Use MAX_ACTIONS of 250.
-[ needed these to compile with Glimmr):
-Use MAX_LABELS of 20000.
-Use ALLOC_CHUNK_SIZE of 32768.]
 
 
 
@@ -98,6 +93,7 @@ Generation info is a truth state that varies. Generation info is [true]false.
 
 
 Section - Testing - Not for release
+
 
 [Last when play begins:
 	move Fafhrd to Entrance Hall;
@@ -132,6 +128,7 @@ Section - Defining perform syntax (not for use with Glimmr Canvas Animation by E
 To say perform/@ (ph - phrase): (- if (0==0) {ph} -).
 
 
+
 Section - Plurality fix
 
 [Let's see whether this works.]
@@ -161,3 +158,14 @@ Dontparsing is an action applying to nothing. Understand "dontparse" as dontpars
 
 Carry out dontparsing:
 	do nothing instead.
+	
+Section - Numbered Disambiguation Fix
+
+[Not sure if this is necessary, but it won't do any harm!]
+
+Definition: an object (called item) is still-disambiguable if disambiguation ID of item > 0.
+
+Before looking or taking inventory (this is the reset disambiguation IDs rule):
+	repeat with item running through still-disambiguable things:
+		now disambiguation ID of item is 0.
+
