@@ -33,7 +33,10 @@ First Standard AI rule for a person (called P) (this is the do nothing when all 
 				if X is not hidden:
 					now detected is true;
 	if conflict is true and detected is false:
-		say "[The P] [one of]remains unaware of your presence[or]does not notice you[or]does not detect your presence[at random].";
+		if P is unnaturally aware:
+			say "[The P] slowly turns in your direction.";
+		otherwise:
+			say "[The P] [one of]remains unaware of your presence[or]does not notice you[or]does not detect your presence[at random].";
 		rule succeeds.
 	
 An AI target selection rule for a hidden person (this is the do not prefer hidden people rule):

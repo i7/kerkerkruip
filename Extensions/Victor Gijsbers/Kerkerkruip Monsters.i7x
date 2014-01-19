@@ -2502,7 +2502,8 @@ Report the mindslug waiting when the mindslug is insane:
 
 Section - Slaves
 
-Fafhrd is a mindslug-enslaved man. The description of Fafhrd is "This male barbarian is strong and muscular. He looks like an able and shrewd fighter.".
+Fafhrd is a mindslug-enslaved man. "Fafhrd, the huge but sympathetic barbarian adventurer, strolls through the room[if Fafhrd is mindslug-enslaved]. He doesn't seem to be himself, though[end if]."
+The description of Fafhrd is "This male barbarian is strong and muscular. He looks like an able and shrewd fighter.".
 
 The soul description of Fafhrd is "frozen honour".
 
@@ -2528,7 +2529,8 @@ Fafhrd is weapon user.
 Fafhrd is talker.
 Fafhrd is thrower.
 
-Mouser is a mindslug-enslaved man. The description of Mouser is "Mouser is a small, fast man. You know his type from the alleys and alehouses of Montenoir.".
+Mouser is a mindslug-enslaved man. "The sneak thief Mouser looks around with greedy eyes[if Fafhrd is mindslug-enslaved]. He appears to be under some kind of spell[end if]."
+The description of Mouser is "Mouser is a small, fast man. You know his type from the alleys and alehouses of Montenoir.".
 
 The soul description of the Mouser is "dreams of gold and women".
 
@@ -3473,7 +3475,7 @@ The defender of Aite accompanies the healer of Aite.
 
 The health of the Defender of Aite is 23.
 The melee of the Defender of Aite is 1.
-The defence of the Defender of Aite is 12.
+The defence of the Defender of Aite is 11.
 
 The body score of Defender of Aite is 12.
 The mind score of Defender of Aite is 10.
@@ -3533,7 +3535,7 @@ Section - Power of the Fanatics of Aite
 The power of the Fanatics of Aite is a power. Healer of Aite grants power of the Fanatics of Aite.
 The power level of power of the Fanatics of Aite is 4.
 The command text of power of the fanatics of Aite is "sacrifice".
-The description of power of the fanatics of Aite is "Type: active and passive ability.[paragraph break]Command: sacrifice (while not in another god's temple).[paragraph break]Effect: You can sacrifice to Aite even when you are not in her temple, though the effect will not work in the temples of other gods. Once you worship Aite, the probability that her combat interventions will occur increases, the probability that they will benefit you increases, and they deal more damage. All these effects scale with your spirit score."
+The description of power of the fanatics of Aite is "Type: active and passive ability.[paragraph break]Command: sacrifice.[paragraph break]Effect: If you are not in a temple, you can still sacrifice powers. If you don't worhsip a god, you can sacrificy to Aite in this way; otherwise, you will worship to the god you're already worshipping. The probability that your god's combat interventions will occur increases as if your piety were spirit/4 higher than it actually is. If you worship Aite, the probability that her interventions will benefit you increases, and they deal more damage."
 The power-name of power of the fanatics of Aite is "power of the fanatics".
 
 Table of Enemy Powers (continued)
@@ -3545,7 +3547,7 @@ Absorbing power of the Fanatics of Aite:
 	increase melee of the player by 4;
 	increase defence of the player by 4;
 	increase permanent health of the player by 20;
-	say "As soon as the fanatics of Aite are all dead, you feel their souls absorbed into your own body. ([bold type]Power of the fanatics[roman type]: +4 attack, +4 defence, +20 health, you can [italic type]sacrifice[roman type] to Aite even when you're not in her temple, and Aite's interventions will be better for you.)[paragraph break]".
+	say "As soon as the fanatics of Aite are all dead, you feel their souls absorbed into your own body. ([bold type]Power of the fanatics[roman type]: +4 attack, +4 defence, +20 health, you can [italic type]sacrifice[roman type] even when you're not in a temple, and your god's interventions will occur more often.)[paragraph break]".
 
 Repelling power of the Fanatics of Aite:
 	decrease melee of the player by 4;
@@ -3554,20 +3556,28 @@ Repelling power of the Fanatics of Aite:
 
 Status skill rule (this is the fanatics of aite status skill rule):
 	if power of the fanatics of aite is granted:
-		say "You have the power of the fanatics of Aite, which allows you to [bold type]sacrifice[roman type] to the goddess even when you are not in her temple. This power does not work in the temples of other gods. [italic type](Level 4)[roman type][line break][run paragraph on]".
+		say "You have the power of the fanatics of Aite, which allows you to [bold type]sacrifice[roman type] even when you are not in a temple. Divine interventions on your behalf also become more frequent. [italic type](Level 4)[roman type][line break][run paragraph on]".
 	
-A room can be temporary-Aite-temple. A room is usually not temporary-Aite-temple.
+A room can be temporary-temple. A room is usually not temporary-temple.
 		
-First check sacrificing (this is the turn every location into a temple of Aite rule):
-	if location is temporary-Aite-temple:
-		now location is not dedicated to Aite;
-		now location is not temporary-Aite-temple;
+First check sacrificing (this is the fanatics turn every location into a temple of your god rule):
+	if location is temporary-temple:
+		repeat with guy running through gods:
+			now location is not dedicated to guy;
+		now location is not temporary-temple;
 	if no god infuses location:
 		if power of the fanatics of Aite is granted:
-			now location is dedicated to Aite;
-			now location is temporary-Aite-temple.
+			now location is temporary-temple;
+			let guy be Aite;
+			if the player worships a god:
+				now guy is a random god worshipped by the player;
+			now location is dedicated to guy.
 
-	
+An intervention bonus rule (this is the power of Aite intervention bonus rule):
+	if intervention-guy is the player and power of the fanatics of Aite is granted:
+		if player worships intervention-god:
+			let n be (final spirit of the player) / 4;
+			increase intervention-bonus by n.
 	
 
 Section - Beloved of Aite
@@ -4309,7 +4319,7 @@ Overmind-calling is an action applying to nothing.
 An AI action selection rule for the overmind (this is the overmind considers calling rule):
 	choose a blank Row in the Table of AI Action Options;
 	now the Option entry is the action of the overmind overmind-calling;
-	now the Action Weight entry is a random number between 0 and 10;
+	now the Action Weight entry is a random number between 2 and 10;
 	increase Action Weight entry by (2 * concentration of the overmind);
 	let n be potential overmind allies;
 	if n is greater than 2:
@@ -5885,8 +5895,8 @@ Report the abyss of the soul waiting when the abyss of the soul is insane:
 
 Chapter - Mummified priest
 
-The mummified priest is a male not neuter undead undead-faction monster. 
-Understand "mummy" as the mummified priest.
+The mummified priest is a male not neuter undead undead-faction monster. "An ancient priest, completely covered in bandages, is here."
+Understand "mummy" and "ancient" and "bandages" as the mummified priest.
 
 The description of the mummified priest is "Ancient embalming techniques have saved this priest's body from decomposition. Dark magics have returned a semblance of life to his remains."
 
@@ -5993,7 +6003,7 @@ Report the mummified priest waiting when the mummified priest is insane:
 
 Chapter - Zombie toad
 
-The zombie toad is an undead undead-faction monster. 
+The zombie toad is an undead undead-faction monster. "A zombie toad hops pathetically around."
 
 The description of the zombie toad is "This toad wasn't pretty when it was alive, and undeath hasn't improved its looks. Raising toads is a favourite pastime of very young necromancers once they've progressed beyond the stage of insects. Fortunately, a zombie toad isn't a real menace to anyone who is not a zombie fly."
 
@@ -6063,7 +6073,7 @@ Report the zombie toad waiting when the zombie toad is insane:
 
 Chapter - Malignant chanter
 
-The malignant chanter is a male not neuter undead undead-faction monster. 
+The malignant chanter is a male not neuter undead undead-faction monster. "A malignant chanter poisons the atmosphere with his eery singing."
 
 The description of the malignant chanter is "This man must once have been one of the proud battle bards of Algir, but now he has been reduced to a putrefying corpse animated by magic. His chant can still inspire his undead allies, though."
 
@@ -6176,7 +6186,7 @@ Report the malignant chanter concentrating:
 
 Chapter - Drakul
 
-Drakul is a male not neuter undead super-undead undead-faction monster. "The vampire Drakul glides back and forth silently before you.".
+Drakul is a male not neuter undead super-undead undead-faction monster. "The vampire Drakul silently glides back and forth before you.".
 
 Drakul is proper-named.
 
@@ -6329,7 +6339,7 @@ Chapter - Smoke demons
 
 Section - Statistics
 
-A smoke demon is a monster. 
+A smoke demon is a monster. "The smoke here has taken the form of a smoke demon."
 
 The description of the smoke demon is "It is hard to say exactly which features of the smoky form show it to be sentient, but there is not the slightest doubt in your mind that it is.".
 
@@ -6499,7 +6509,8 @@ Chapter - Imp
 
 Section - Statistics
 
-There is a monster called an imp.
+There is a monster called an imp. "A little devil flies around the room."
+Understand "little" and "devil" as the imp.
 
 The description of the imp is "Imps are minor demons with unnaturally small wings. They rarely engage in combat, prefering to teleport or fly away from danger.".
 

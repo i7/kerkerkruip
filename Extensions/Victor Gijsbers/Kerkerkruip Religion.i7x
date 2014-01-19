@@ -14,6 +14,8 @@ There is a god called Sul. Sul is female.
 There is a god called Chton. Chton is male.
 There is a god called Herm. Herm is male.
 
+A god has a number called the intervention rarity. The intervention rarity of a god is usually 100.
+
 Section - Worship
 
 Worshipping relates various persons to one god (called the patron). The verb to worship (he worships, they worship, he worshipped it, it is worshipped, it is worshipping) implies the worshipping relation.
@@ -69,27 +71,47 @@ Section - Intervention
 
 To have (benefactor - a god) intervene on behalf of (guy - a person):
 	say "[bracket]Error: unimplemented intervention of [the benefactor] on behalf of [the guy][close bracket][command clarification break]";
+	
+Section - Intervention possible
 
-The percent chance of intervention is a number that varies.
+The intervention possible rules are an object-based rulebook.
 
-To decide whether (guy - a person) will receive divine intervention:
-	unless the guy worships a god, no;
-	Now the percent chance of intervention is 0;
-	follow the intervention probability rules for guy;
-	Decide on whether or not a random chance of the percent chance of intervention in 100 succeeds.
+To decide whether (guy - a person) can receive intervention:
+	unless guy worships a god, no;
+	consider the intervention possible rules for guy;
+	if rule succeeded, yes;
+	no.
 
-To decide which object is the/-- recipient of intervention by (boss - a god):
-	Now worship test god is boss;
-	Let the recipient be a random worshipper person in the location;
-	decide on the recipient;
+Section - intervention bonus	
+	
+The intervention bonus rules are a rulebook.
+The intervention-guy is a person that varies.
+The intervention-god is a god that varies.
+The intervention-bonus is a number that varies.
 
-Intervention probability is an object-based rulebook.
+To decide which number is the intervention bonus for (guy - a person) with (divinity - a god):
+	now intervention-bonus is 0;
+	now intervention-guy is guy;
+	now intervention-god is divinity;
+	consider the intervention bonus rules;
+	decide on intervention-bonus.
+	
+To decide whether (guy - a person) gets intervention:
+	unless the guy can receive intervention, no;
+	Let divinity be the patron of guy;
+	Let the guy's chances be the favour of guy with the divinity;
+	Increase the guy's chances by the intervention bonus for guy with the divinity;
+	if the guy's chances < 1:
+		now the guy's chances is 1;
+	Let N be intervention rarity of the divinity;
+	Decide on whether or not a random chance of the guy's chances in (intervention rarity of the divinity) succeeds.
 
-Every turn when the combat status is not peace (this is the spontaneous divine intervention rule):
+Every turn when the combat status is not peace (this is the spontaneous combat intervention rule):
 	Repeat with boss running through gods:
-		Let the supplicant be the recipient of intervention by boss;
+		now worship test god is boss;
+		Let the supplicant be a random worshipper person in the location;
 		unless the supplicant is a person, next;
-		if the supplicant will receive divine intervention:
+		if the supplicant gets intervention:
 			have the patron of supplicant intervene on behalf of supplicant;
 		
 Chapter - Commands
@@ -299,10 +321,8 @@ A beloved of Aite rule (this is the worshippers are beloved of Aite rule):
 
 Section - Aite's engagement in combat
 
-Intervention probability for a person (called guy) who worships Aite:
-	now percent chance of intervention is the favour of guy with Aite;
-	if guy is the player and power of the fanatics of Aite is granted:
-		increase percent chance of intervention by (final spirit of the player / 3);
+Intervention possible for someone who worships Aite:
+	rule succeeds.
 
 To have (benefactor - Aite) intervene on behalf of (guy - a person):
 	now opposition test subject is guy;
@@ -440,11 +460,11 @@ Section - Tome of Law
 
 Section - Nomos's engagement in combat
 
-Intervention probability for a person (called guy) who worships Nomos:
-	unless the Nomos counter is 0:
-		now the percent chance of intervention is 0;
-		rule succeeds;
-	now the percent chance of intervention is (favour of guy with Nomos) times 5 divided by 2;
+Intervention possible for someone who worships Nomos:
+	if the Nomos counter is 0, rule succeeds;
+	rule fails.
+
+The intervention rarity of Nomos is 40.
 
 The Nomos attacker is a person that varies. The Nomos attacker is yourself.
 The Nomos counter is a number that varies. The Nomos counter is 0.
@@ -692,19 +712,18 @@ Status attribute rule (this is the demon slayer status rule):
 
 Section - Sul's intervention
 
+Intervention possible for someone (called guy) who worships Sul:
+	unless an actor hitting, rule fails;
+	if the global defender is undead or the global defender is demonic, rule fails;
+	if the global defender opposes guy and the global defender is not guy, rule fails;
+	rule succeeds.
+
 To decide whether Sul will protect the global defender:
 	Repeat with intercessor running through people in the location who worship Sul:
-		if the intercessor will receive divine intervention, yes;
+		if the intercessor gets intervention, yes;
 	no.
 	
-Intervention probability for someone (called intercessor) who worships sul:
-	unless an actor hitting:
-		make no decision;
-	if the global defender is undead or the global defender is demonic:
-		make no decision;
-	if the intercessor opposes the global defender:
-		make no decision;
-	increase the percent chance of intervention by (the favour of the intercessor with sul) times 5 divided by 2.
+The intervention rarity of Sul is 40.
 
 A damage multiplier rule when someone worships sul (this is the sul sometimes prevents damage rule):
 	if Sul will protect the global defender:
@@ -758,17 +777,17 @@ To do a Chton gift:
 
 Section - Chton's intervention
 
-Intervention probability for a person (called guy) who worships Chton:
-	let the percent chance of intervention be the favour of guy with Chton;
-	if guy is the player:
+Intervention possible for a person (called guy) who worships Chton:
+	rule succeeds.
+
+Intervention bonus when intervention-god is Chton:
+	if intervention-guy is the player:
 		if current form is ghost-form:
-			increase the percent chance of intervention by 2;
+			increase intervention-bonus by 2;
 		if current form is lich-form:
-			increase the percent chance of intervention by 5;
-	increase the percent chance of intervention by 6;
-	decrease the percent chance of intervention by (3 times (the number of people in the location));
-	if the percent chance of intervention < 1:
-		now the percent chance of intervention is 1;
+			increase intervention-bonus by 5;
+	increase the intervention-bonus by 6;
+	decrease intervention-bonus by (3 times (the number of people in the location));
 
 To have (benefactor - Chton) intervene on behalf of (supplicant - a person):
 	say "Chton suddenly sends a [bold type]wave of unholy energy[roman type] through the room, dealing [run paragraph on]";
@@ -856,13 +875,18 @@ A detection rule (this is the Herm worship decreases probability of detection ru
 
 Section - Herm's intervention
 
+Intervention possible for someone (called guy) who worships Herm:
+	unless an actor hitting, rule fails;
+	unless the global defender is guy, rule fails;
+	unless the global defender is conscious, rule fails;
+	unless the location of the global attacker is the location of the global defender, rule fails;
+	rule succeeds.
+
+The intervention rarity of Herm is 20;
+
 Before an actor hitting someone who worships Herm:
-	if the actor worships Herm, make no decision; [this should never happen, but we want to avoid infinite loops]
-	if the noun is not conscious, make no decision;
-	if the location of the actor is not the location of the noun, make no decision;
-	Let the current favour be the favour of the noun with Herm;
-	if a random chance of the current favour in 20 succeeds:
-		say "[bold type]Herm[roman type] bends space and time around [the noun] and [the actor], and you suddenly find [if the noun is the player]yourself in the role of attacker[otherwise]that [the noun] is attacking [the actor] instead[end if]!";
-		try the noun hitting the actor instead.
+	unless the global defender gets intervention, make no decision;
+	say "[bold type]Herm[roman type] bends space and time around [the noun] and [the actor], and you suddenly find [if the noun is the player]yourself in the role of attacker[otherwise]that [the noun] is attacking [the actor] instead[end if]!";
+	try the noun hitting the actor instead.
 			
 Kerkerkruip Religion ends here.

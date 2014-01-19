@@ -81,6 +81,8 @@ The non-thing is incorruptible.
 A thing has a thing called the hidden identity. The hidden identity of a thing is usually the non-thing.
 Definition: a thing (called item) is hidden-identifiable if hidden identity of item is not the non-thing.
 
+A thing can be superhidden-identity. A thing is usually not superhidden-identity. [Use this for items that are always used by others, and shoulnd't function as their hidden identity. It bypasses the "hidden identities also revealed by enemies rule".]
+
 Report wearing:
 	unless the hidden identity of the noun is the non-thing:
 		now the hidden identity of the noun is curse-identified;
@@ -99,7 +101,7 @@ Report readying:
 		say "As soon as you ready [the noun], a chilling feeling goes through your arms. [The noun] [is-are] actually [bold type][the hidden identity of the noun][roman type]!" instead.
 
 Last dungeon interest rule (this is the hidden identities also revealed by enemies rule):
-	repeat with item running through wearable hidden-identifiable things:
+	repeat with item running through wearable hidden-identifiable not superhidden-identity things:
 		if a person wears item:
 			let guy be a random person wearing item;
 			now guy is wearing hidden identity of item;
@@ -933,7 +935,7 @@ The indefinite article of the robe of the dead mage is "the".
 The unlock level of the robe of the dead mage is 7.
 The unlock text of the robe of the dead mage is "a piece of clothing that allows you to remain concentrated when hit... at a price".
 
-The description of the robe of the dead mage is "Dominique, marquis of Savon, one of the great mages of his generation, was so fed up with losing his concentration when he was hit that he developed this robe. When the wearer is damaged in combat, he gains 1 defence and will not lose his concentration. However, the protection comes from his life force, and the damage dealt to him is increased by 25% for every level of concentration. The say nobody ever died with as much concentration as Dominique.".
+The description of the robe of the dead mage is "Dominique, marquis of Savon, one of the great mages of his generation, was so fed up with losing his concentration when he was hit that he developed this robe. It increases the wearer's defence by 1; and when the wearer is damaged in combat, he will not lose his concentration. However, the protection comes from his life force, and the damage dealt to him is increased by 25% for every level of concentration. The say nobody ever died with as much concentration as Dominique.".
 
 A damage multiplier rule when the global defender wears the robe of the dead mage (this is the robe of the dead mage damage multiplier rule):
 	if concentration of the global defender is:
@@ -1118,7 +1120,15 @@ Before doing anything when the player wears the boots of wandering (this is the 
 				try going way instead.
 
 
+Section - Sandals of the prophet (major)
 
+The sandals of the prophet are major shoes. The sandals of the prophet are plural-named. The indefinite article of the sandals of the prophet is "the". The description of the sandals of the prophet is "Simple sandals, but they have been imbued with special significance ever since the great prophet Habamia was beaten to death with them. Wearing these slippers will significantly increase the probability of your god intervening on your behalf -- interventions will come as if your favour were 3 points higher."
+Sandals of the prophet are religious.
+
+An intervention bonus rule (this is the sandals of the prophet intervention bonus rule):
+	if intervention-guy wears the sandals of the prophet:
+		if intervention-guy worships intervention-god:
+			increase intervention-bonus by 3.
 
 
 Chapter - Trousers
@@ -1359,6 +1369,46 @@ The block bonus of wooden buckler is 1.
 
 The description of the wooden buckler is "No warrior could be proud of this small, unimpressive shield. Nonetheless, wearing it will allow you to block incoming attacks. [italic type]Block bonus: +1[roman type].".
 
+
+Section - Bulwark of faith (major)
+
+There is a major shield called the bulwark of faith.
+The bulwark of faith is religious.
+The bulwark of faith is radiance.
+
+The block bonus of the bulwark of faith is 0.
+
+Instead of examining the bulwark of faith:
+	if the bulwark of faith is worn:
+		let guy be a random person enclosing the bulwark of faith;
+		if guy is a person:
+			calculate the block bonus of the bulwark of faith;
+			say "This shield of shimmering [if the guy worships aite]red light[otherwise if the guy worships sul]golden light[otherwise if the guy worships nomos]silver light[otherwise if the guy worships chton]darkness[otherwise if the guy worships herm]shadows[otherwise]light[end if] gains its power from [possessive of guy] devotion to [if guy worships a god][a random god worshipped by guy][otherwise]a god[end if]. It's block bonus is equal to (favour + 3) / 4. Wearing it also slightly increases the chance of divine interventions on [possessive of guy] behalf. [italic type]Current block bonus: +[block bonus of the bulwark of faith][roman type]." instead;
+	say "This shield of shimmering light gains its power from the wearer's devotion to a god. It's block bonus is equal to (favour + 3) / 4. Wearing it also slightly increases the chance of divine interventions on your behalf.".
+		
+To calculate the block bonus of the bulwark of faith:
+	if the bulwark of faith is worn:
+		let guy be a random person enclosing the bulwark of faith;
+		if guy is a person:
+			let n be favour of guy;
+			increase n by 3;
+			now n is (n / 4);
+			now block bonus of the bulwark of faith is n;
+		otherwise:
+			now block bonus of the bulwark of faith is 0;
+	otherwise:
+		now block bonus of the bulwark of faith is 0.
+
+First carry out an actor blocking (this is the bulwark of faith must be updated rule):
+	if the actor encloses the bulwark of faith:
+		calculate the block bonus of the bulwark of faith.
+
+An intervention bonus rule (this is the bulwark of faith intervention bonus rule):
+	if intervention-guy wears the bulwark of faith:
+		if intervention-guy worships intervention-god:
+			increase intervention-bonus by 1.		
+
+
 Section - Adamantine shield (major)
 
 The adamantine shield is a major shield.
@@ -1369,12 +1419,14 @@ The block bonus of adamantine shield is 2.
 
 The description of adamantine shield is "Three serpents are eating each other on the intricate design of this indestructible shield. [italic type]Block bonus: +2[roman type].".
 
+
 Section - Lion's shield (special)
 
 [The reward from the Dream of Monty Hall.]
 
 The lion's shield is a shield.
 The lion's shield is iron.
+Understand "lion" as the lion's shield.
 
 The block bonus of the lion's shield is 2.
 
@@ -2757,7 +2809,8 @@ A damage modifier rule (this is the sneaking sword damage bonus rule):
 
 A treasure placement rule (this is the sneaking sword can be singing sword rule):
 	if a random chance of 1 in 5 succeeds:
-		now the hidden identity of the sneaking sword is the singing sword.
+		now the hidden identity of the sneaking sword is the singing sword;
+		now sneaking sword is superhidden-identity. [Mouser has tamed it.]
 
 Section - Singing sword (cursed)
 
@@ -2824,7 +2877,7 @@ Section - Holy sword (monster)
 
 [The healer of Aite carries it.]						
 
-The holy sword is a sword. The description of the holy sword is "This sword shines with a clear white light. It deals additional damage to undead and demons. (It deals 1 extra damage for each 6 points of spirit; i.e., 1 damage at 6 spirit, 2 damage at 12 spirit, and so on.)".
+The holy sword is a sword. The description of the holy sword is "This sword shines with a clear white light. It deals additional damage to undead and demons. (It deals 1 extra damage for each 4 points of spirit; i.e., 1 damage at 4 spirit, 2 damage at 8 spirit, and so on.)".
 
 The special weapon info of the holy sword is "; deals extra damage to undead and demons; shines with light, making it harder to hide[run paragraph on]".
 
@@ -2836,7 +2889,7 @@ Detection rule (this is the holy sword detection rule):
 A damage modifier rule (this is the holy sword damage bonus rule):
 	if the global attacker weapon is the holy sword:
 		if the global defender is undead or global defender is demonic:
-			let n be (final spirit of global attacker / 6);
+			let n be (final spirit of global attacker / 4);
 			if n > 0:
 				say " + ", n, " (holiness)[run paragraph on]";
 				increase the attack damage by n.
@@ -2847,6 +2900,7 @@ Section - Immaculate sword (monster)
 
 The immaculate sword is a sword. The description of the immaculate sword is "Absolutely stainless."
 The immaculate sword is incorruptible.
+Damage die of the immaculate sword is 8.
 
 The special weapon info of the immaculate sword is "; cannot be corrupted[run paragraph on]".
 
@@ -3080,7 +3134,7 @@ A damage modifier rule (this is the Giantbane damage bonus rule):
 	if the global attacker weapon is Giantbane:
 		let n be the size difference of the global attacker and the global defender;
 		if n is greater than 0:
-			now n is n * 2;
+			now n is n * 3;
 			say " + ", n, " (Giantbane's special)[run paragraph on]";
 			increase the attack damage by n.
 
@@ -3618,7 +3672,7 @@ An aftereffects rule (this is the glass cannon shatters when used to parry rule)
 				say "The glass cannon [bold type]survives the impact[roman type], but barely.";
 				decrease weapon damage bonus of glass cannon by 2.
 
-The special weapon info of the glass cannon is "; makes you easier to hit; halves your health[run paragraph on]".
+The special weapon info of the glass cannon is "; makes you easier to hit; halves your health when readied[run paragraph on]".
 
 Section - Nunchuck (monster)
 

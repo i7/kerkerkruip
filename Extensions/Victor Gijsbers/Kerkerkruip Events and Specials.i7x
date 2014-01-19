@@ -328,8 +328,8 @@ Arena-turncounter is a number that varies. Arena-turncounter is -1.
 OppHerm is a person that varies.
 OppHermBonus is a number that varies. OppHermbonus is 0.
 
-Last intervention probability when the location is Arena of the Gods (this is the more intervention in Arena of the Gods rule):
-	if the percent chance of intervention is greater than 0, increase the percent chance of intervention by (the tension times 2);
+Intervention bonus when the location is Arena of the Gods (this is the more intervention in Arena of the Gods rule):
+	increase the intervention-bonus by (the tension times 2);
 
 [Every turn when (the location is the Arena of the Gods) and (the combat status is not peace):
 	let m be the tension;
