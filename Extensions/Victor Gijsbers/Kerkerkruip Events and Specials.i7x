@@ -305,6 +305,8 @@ Carry out challenging someone in Arena of the Gods:
 	now the challenged god is a random god incarnated by the noun.
 	
 Before arena arrival of Arena of the Gods:
+	say "It pleases your God to have a champion fight in the Arena. [It-they of the patron of the player] grant[s] you 2 divine favour![paragraph break]";
+	raise the favour of the player by 2;
 	repeat with guy running through persons in the Arena of the Gods:
 		challenge guy to fight for the challenged god;
 	say "You are transported to the Arena of the Gods, where the angry ";
@@ -391,8 +393,6 @@ An absorption stopping rule (this is the alternative award at the Arena of the G
 Section - Getting out of the Arena
 
 For arena exit of Arena of the Gods:
-	say "Your God grants you 2 divine favour!";
-	raise the favour of the player by 2;
 	say "You are [bold type]transported back[roman type] to the Hall of Gods.";
 	remove the godfight pedestal from play;
 	now the challenged god is nothing.
