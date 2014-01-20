@@ -388,6 +388,14 @@ Section - Awarding divine power
 
 An absorption stopping rule (this is the alternative award at the Arena of the Gods rule):
 	if the location is the Arena of the Gods:
+		say "[The patron of the player] accepts the soul of [possessive of the challenged god] champion, and [bold type]";
+		if the player is undead and (the permanent health of the player - the health of the player) > 32:
+			say "restores some of your health";
+			heal the player for 32 health;
+		otherwise:
+			say "fully heals you";
+			fully heal the player;
+		say "[roman type]!";
 		rule succeeds.
 
 Section - Getting out of the Arena
