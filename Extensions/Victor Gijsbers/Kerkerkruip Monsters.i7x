@@ -1201,39 +1201,40 @@ When play begins:
 	now X is plural-named.
 
 First carry out an actor attacking the chain golem (this is the attack a spinning chain golem rule):
-	let W be a random readied weapon held by the actor;
-	unless W is ranged:
-		say "[The actor] attempt[s] to duck under the whirling chains. [run paragraph on]";
-		let n be the concentration of the chain golem;
-		increase n by 7;
-		if a random chance of 1 in 2 succeeds:
-			decrease n by 1;
-		test the body of the actor against n;
-		if test result is false:
-			let n be two times the concentration of the chain golem;
-			calculate the pdr for the actor;
-			decrease n by pdr;
-			if n is less than 0:
-				now n is 0;
-			unless n is 0:
-				say " One of the chains catches [the actor] with a loud smack, dealing [bold type][n] damage[roman type][run paragraph on]";
-				decrease the health of the actor by n;
-				if the actor is alive:
-					if the concentration of the actor is not zero:
-						say " and breaking [possessive of the actor] concentration.";
-						now concentration of the actor is 0;
+	if the chain golem is conscious:
+		let W be a random readied weapon held by the actor;
+		unless W is ranged:
+			say "[The actor] attempt[s] to duck under the whirling chains. [run paragraph on]";
+			let n be the concentration of the chain golem;
+			increase n by 7;
+			if a random chance of 1 in 2 succeeds:
+				decrease n by 1;
+			test the body of the actor against n;
+			if test result is false:
+				let n be two times the concentration of the chain golem;
+				calculate the pdr for the actor;
+				decrease n by pdr;
+				if n is less than 0:
+					now n is 0;
+				unless n is 0:
+					say " One of the chains catches [the actor] with a loud smack, dealing [bold type][n] damage[roman type][run paragraph on]";
+					decrease the health of the actor by n;
+					if the actor is alive:
+						if the concentration of the actor is not zero:
+							say " and breaking [possessive of the actor] concentration.";
+							now concentration of the actor is 0;
+						otherwise:
+							say ".";
 					otherwise:
-						say ".";
+						say "[if the actor is the player] and killing you.[otherwise] [The actor] immediately dies.[end if]";
+						have an event of the chain golem killing the actor;
+						if the player is dead:
+							end the story saying "You died valiantly, but in vain";
+						rule fails;
 				otherwise:
-					say "[if the actor is the player] and killing you.[otherwise] [The actor] immediately dies.[end if]";
-					have an event of the chain golem killing the actor;
-					if the player is dead:
-						end the story saying "You died valiantly, but in vain";
-					rule fails;
+					say " One of the chains catches [the actor] with a loud smack, but it deals no damage[roman type].";
 			otherwise:
-				say " One of the chains catches [the actor] with a loud smack, but it deals no damage[roman type].";
-		otherwise:
-			say "[paragraph break]".
+				say "[paragraph break]".
 
 A damage modifier rule (this is the chain golem damage depends on concentration rule):
 	if the global attacker is the chain golem and the concentration of the chain golem is not 0:
@@ -1488,7 +1489,7 @@ An attack modifier rule (this is the jumping bomb concentration attack modifier 
 		decrease the attack strength by n.
 			
 An attack modifier rule (this is the jumping bomb concentration defence modifier rule):
-	if the global defender is the jumping bomb and the concentration of the jumping bomb is greater than 0:
+	if the global defender is the jumping bomb and the concentration of the jumping bomb is greater than 0 and the jumping bomb is conscious:
 		let n be the concentration of the jumping bomb;
 		say " - ", n, " (speed of the jumping bomb)[run paragraph on]";
 		decrease the attack strength by n.	
@@ -1686,7 +1687,7 @@ The legend-label of reaper is Figure of map_legend_reaper.
 Section - The Reaper follows you!
 
 Every turn when the Reaper is in the location and the Reaper is not follower (this is the Reaper starts following rule):
-	if the player is not hidden and the reaper is not asleep:
+	if the player is not hidden and the reaper is conscious:
 		say "'Do not be afraid, for I will end your suffering!' the Reaper exclaims.";
 		now the Reaper is follower.
 	
