@@ -1461,7 +1461,6 @@ A last sudden combat reset rule for a person (called the deserter) (this is the 
 		reset combat action stats of the deserter;
 
 To reset combat action stats of (guy - a person):
-	say "Resetting action stats for [guy].";
 	now concentration of the guy is 0;
 	now offensive flow of the guy is 0;
 	now defensive flow of the guy is 0;
