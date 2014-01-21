@@ -1316,7 +1316,7 @@ isra-defended-by-sul is a randomized event;]
 
 Section - Bug 210
 
-bug-210 is a test set. bug-210 is isolated.
+bug-210 is a test set. [bug-210 is isolated.]
 
 A scenario rule when testing bug-210:
 	now the mindslug is testobject;
