@@ -504,7 +504,7 @@ To generate a player action of (the desired action - a stored action):
 	say "[bracket]Player action: [the desired action][close bracket]";
 	now the action in progress is the action name part of the desired action;
 	now the person asked is the actor part of the desired action;
-	now the person requesting is nothing;
+	[now the person requesting is nothing;] [not allowed in I7?]
 	if the person asked is not the player, now the person requesting is the player;
 	now the noun is the noun part of the desired action;
 	now the second noun is the second noun part of the desired action;
@@ -1314,4 +1314,54 @@ player-defended-by-herm is a randomized event;
 
 isra-defended-by-sul is a randomized event;]
 
+Section - Bug 210
+
+bug-210 is a test set. bug-210 is isolated.
+
+A scenario rule when testing bug-210:
+	now the mindslug is testobject;
+	now a random scroll of death is testobject;
+	
+A test play when testing bug-210:
+	Let the death-scroll be a random not off-stage scroll of death;
+	Now the player carries the death-scroll;
+	extract the player to the location of the mindslug;
+	now the health of the mindslug is 1;
+	now the weapon damage bonus of the claymore is 100;
+	now the melee of fafhrd is 100;
+	update the combat status;
+	assert truth of whether or not fafhrd carries the claymore with message "fafhrd should carry the claymore";
+	assert truth of whether or not the claymore is readied with message "the claymore should be readied";
+	assert truth of whether or not the number of readied weapons enclosed by fafhrd is 1 with message "fafhrd should only have one weapon readied";
+	
+waiting-for-fafhrd-attack is a turn-based event. The first move of bug-210 is waiting-for-fafhrd-attack. The scheduled action of waiting-for-fafhrd-attack is the action of waiting.
+
+A last AI action selection rule for an at-Act person (called P) when waiting-for-fafhrd-attack is the scheduled event:
+	unless P is Fafhrd, make no decision;
+	choose row with an Option of the action of P attacking the chosen target in the Table of AI Action Options;
+	now the Action Weight entry is 1000.
+	
+reaction-mindslug-killing is a turn-based event. The next move of waiting-for-fafhrd-attack is reaction-mindslug-killing. The scheduled action of reaction-mindslug-killing is the action of waiting.
+
+Testing a turn-based event of waiting-for-fafhrd-attack:
+	if the player is at-react:
+		now the next move of waiting-for-fafhrd-attack is reaction-mindslug-killing;
+	otherwise if the act count of the player < 100:
+		now the next move of waiting-for-fafhrd-attack is waiting-for-fafhrd-attack;
+	otherwise:
+		assert truth of false with message "Fafhrd didn't attack after 100 turns";
+		now the next move of waiting-for-fafhrd-attack is normal keyboard input;
+		
+Choosing a player reaction when reaction-mindslug-killing is the scheduled event:
+	assert truth of whether or not the mindslug is alive with message "the mindslug should be alive";
+	if the player carries a scroll of death:
+		let the death-scroll be a random carried scroll of death;
+		generate a player action of the action of reading the death-scroll;
+
+Testing a turn-based event of reaction-mindslug-killing:
+	assert that the event description includes "The contemplative northern barbarian ends your life, with what seems to be a hint of sadness in his face";
+	assert that the event description includes "As the mindslug dies, you feel its powerful intelligence absorbed into your own body";
+	assert truth of whether or not the mindslug is dead with message "the mindslug should be dead";
+	assert truth of whether or not (the player is not at-react) with message "the player should not be at-react"; [probably redundant]
+	
 Section - Attempting to Maze Someone in Arena of the Gods
