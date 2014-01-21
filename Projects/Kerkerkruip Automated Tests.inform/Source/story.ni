@@ -1298,6 +1298,9 @@ A test play when testing Sul Champion vs Herm worshipper:
 	extract the player to the location of Bodmall;
 	try smiting Bodmall;
 	extract the player to Temple of Herm;
+	have the player sacrifice a random granted power;
+	extract the player to Hall of Gods;
+	have the player and Israfel fight in Arena of the Gods;
 	now the melee of the player is 100;
 	now the melee of israfel is 100;
 	test israfel-defended-by-sul;
