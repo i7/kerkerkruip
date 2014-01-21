@@ -46,6 +46,8 @@ ColID (a number)	ColSeen [encountered] (a truth state)	died (a number)	kill (a n
 --	--	--	--
 with 50 blank rows [ Don't forget to update this when monsters are added! We include a buffer incase the player goes back to an older version. ]
 
+Section - File of Monster Statistics
+
 The File Of Monster Statistics is called "KerkerkruipStats".
 
 Before showing the title screen (this is the load monster statistics rule):
@@ -6272,6 +6274,7 @@ Section - Prose
 Report an actor hitting the dead Drakul:
 	if Drakul's lifeblood is off-stage:
 		say "As [the actor] [kills Drakul], a small vial of blood drops on the floor.";
+		now Drakul's lifeblood is in the location;
 	otherwise:
 		say "[The actor] [kills Drakul], [if the actor is Drakul]and[otherwise]who[end if] crumbles away into ashes.";
 	rule succeeds.

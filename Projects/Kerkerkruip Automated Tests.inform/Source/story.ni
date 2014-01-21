@@ -186,13 +186,18 @@ Section - Not Loading Data Values (in place of Section - Loading Data Values in 
 To save data storage:
 	do nothing;
 
-Section - No Died and Kill Counts (in place of Section - Died and Kill counts in Kerkerkruip Monsters by Victor Gijsbers)
+Section - No File of Monster Statistics (in place of Section - File of Monster Statistics in Kerkerkruip Monsters by Victor Gijsbers)
 
+To update the monster statistics:
+	do nothing;
+	
 Section - Limited Help (In place of Section - Help in Kerkerkruip Help and Hints by Victor Gijsbers)
 
 Section - No Achievements (in place of Section - Achievements in Kerkerkruip Help and Hints by Victor Gijsbers)
 
-Section - No Menu Command Console (in place of Section - The test object console in Kerkerkruip Tests by Victor Gijsbers)
+Section - No Test Object File (in place of Section - The test object file in Kerkerkruip Tests by Victor Gijsbers)
+
+Section - No Menu Console (in place of Section - The test object console in Kerkerkruip Tests by Victor Gijsbers)
 
 Section 1 - Capture-aware Spacing and Pausing (in place of Section 1 - Spacing and Pausing in Basic Screen Effects by Emily Short)
 
@@ -519,6 +524,12 @@ Chapter - Test Sets
 
 A test set is a kind of value. Aite champions vs bat is a test set.
 
+A test set can be isolated.
+
+Definition: A test set (called the procedure) is enabled:
+	If no test set is isolated, yes;
+	decide on whether or not the procedure is isolated.
+
 A test set has a turn-based event called the first move. The first move of a test set is usually normal keyboard input.
 
 The current test set is a test set that varies.
@@ -649,7 +660,7 @@ The current unit test name is an indexed text variable.
 
 To start the/-- next test:
 	transcribe and stop capturing;
-	Repeat with T running through test sets:
+	Repeat with T running through enabled test sets:
 		now the current test set is T;
 		if the result of saving undo state is successful save, stop;
 		read file of test results into Table of Test Results;
@@ -821,18 +832,25 @@ Arena-defender-re-enslaving is a turn-based event. The next move of Arena-defend
 
 Before taking a player action when Arena-defender-re-enslaving is the scheduled event:
 	now the health of Defender of Aite is 1;
-	[how to prevent Aite spikes?]
+	now the health of the player is 1;
+	now the permanent health of the player is 100;
 	now enslave-cooldown is 0;
+	
+[prevent Aite spikes]
+Intervention possible when Arena-defender-re-enslaving is the scheduled event:
+	rule fails.
 	
 Testing a turn-based event of Arena-defender-re-enslaving:
 	assert that the event description includes "will do your bidding";
 	assert that the event description includes "ball of lightning .* damage to the defender of Aite, killing him";
 	assert that the location is Hall of Gods;
+	assert that the event description includes "receives the soul";
+	assert that the health of the player is 100;
 	assert truth of whether or not defender of Aite is off-stage with message "the defender of Aite should be off-stage"
 		
 Section - Chton Champion vs Bat
 
-Chton champion vs bat is a test set.
+Chton champion vs bat is a test set. [Chton champion vs bat is isolated.]
 
 A scenario rule when testing Chton champion vs bat:
 	now Hall of Gods is testobject;
@@ -870,11 +888,18 @@ Testing a turn-based event for arena-vampire-joining:
 
 chton-arena-cheating is a turn-based event. The next move of arena-vampire-joining is chton-arena-cheating. The scheduled action of chton-arena-cheating is the action of smiting drakul.
 
+Before taking a player action when the scheduled event is chton-arena-cheating:
+	Now the health of the player is 1;
+	Now the permanent health of the player is 100;
+	
 Testing a turn-based event for chton-arena-cheating:
 	[should the lifeblood appear a second time just because drinking it removes it from play?]
 	assert that the event description includes ["infamous vampire, who crumbles away into ashes"] "infamous vampire, a small vial";
+	assert that the event description includes "receives the blood";
+	assert that the health of the player is 33;
 	assert that the event description includes "transported back to the Hall of Gods";
 	assert that the location of the summoned creature is Hall of Gods;
+	assert that drakul's lifeblood is in Hall of Gods;
 	
 Section - Parting Shots
 	

@@ -719,9 +719,10 @@ Intervention possible for someone (called guy) who worships Sul:
 	rule succeeds.
 
 To decide whether Sul will protect the global defender:
-	Repeat with intercessor running through people in the location who worship Sul:
-		if the intercessor gets intervention, yes;
-	no.
+	Now the opposition test subject is the global defender;
+	Let the intercessor be a random not opposer person in the location who worships Sul;
+	Unless the intercessor is a person, no;
+	Decide on whether or not the intercessor gets intervention;
 	
 The intervention rarity of Sul is 40.
 

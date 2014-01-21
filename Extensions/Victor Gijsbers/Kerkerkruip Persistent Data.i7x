@@ -130,7 +130,15 @@ To toggle (param - a data storage parameter), table only:
 
 Chapter - Achievements
 
+Section - File of Achievements
+
 The File Of Achievements is called "KerkerkruipAchievements".
+
+Before showing the title screen (this is the load achievements rule):
+	if File of Achievements exists:
+		read File Of Achievements into the Table of Held Achievements;
+
+Section - Table of Achievements
 
 An achievement is a kind of value. Some achievements are defined by the Table of Achievements.
 
@@ -160,10 +168,6 @@ Table of Held Achievements
 held achievement	held difficulty
 (an achievement)	(number)
 with 20 blank rows [ Include some buffer rows in case the player goes back to an old version ]
-
-Before showing the title screen (this is the load achievements rule):
-	if File of Achievements exists:
-		read File Of Achievements into the Table of Held Achievements;
 
 To award achievement (current achievement - an achievement):
 	if there is a held achievement of current achievement in the Table of Held Achievements:
