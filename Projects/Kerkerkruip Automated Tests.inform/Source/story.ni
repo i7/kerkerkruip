@@ -1285,4 +1285,30 @@ Test play when testing controlling pipes:
 	assert that the event description includes "which are currently closed\.";
 	transcribe and restart capturing;	
 
+Section - Sul Champion vs Herm worshipper
+
+[Sul Champion vs Herm worshipper is a test set. [Sul Champion vs Herm worshipper vs bat is isolated.]
+
+A scenario rule when testing Sul Champion vs Herm worshipper:
+	now Hall of Gods is testobject;
+	now Bodmall is testobject;
+	now Temple of Herm is testobject;
+
+A test play when testing Sul Champion vs Herm worshipper:
+	extract the player to the location of Bodmall;
+	try smiting Bodmall;
+	extract the player to Temple of Herm;
+	now the melee of the player is 100;
+	now the melee of israfel is 100;
+	test israfel-defended-by-sul;
+	test player-defended-by-herm;
+	try israfel israfel-splitting;
+	test isra-defended-by-sul;
+	
+israfel-defended-by-sul is a randomized event;
+
+player-defended-by-herm is a randomized event;
+
+isra-defended-by-sul is a randomized event;]
+
 Section - Attempting to Maze Someone in Arena of the Gods
