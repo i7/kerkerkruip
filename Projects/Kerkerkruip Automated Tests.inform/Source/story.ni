@@ -1321,7 +1321,7 @@ bug-210 is a test set. bug-210 is isolated.
 A scenario rule when testing bug-210:
 	now the mindslug is testobject;
 	now a random scroll of death is testobject;
-	
+
 A test play when testing bug-210:
 	Let the death-scroll be a random not off-stage scroll of death;
 	Now the player carries the death-scroll;
@@ -1340,6 +1340,9 @@ A last AI action selection rule for an at-Act person (called P) when waiting-for
 	unless P is Fafhrd, make no decision;
 	choose row with an Option of the action of P attacking the chosen target in the Table of AI Action Options;
 	now the Action Weight entry is 1000.
+	
+First carry out an actor attacking:
+	say "[The actor] is attacking [the noun]";
 	
 reaction-mindslug-killing is a turn-based event. The next move of waiting-for-fafhrd-attack is reaction-mindslug-killing. The scheduled action of reaction-mindslug-killing is the action of waiting.
 

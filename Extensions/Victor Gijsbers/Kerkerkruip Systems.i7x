@@ -1457,10 +1457,11 @@ A last sudden combat reset rule for a person (called the deserter) (this is the 
 	if the deserter is the player:
 		repeat with guy running through alive persons enclosed by the location:
 			reset combat action stats of the guy;
-	otherwise:
+	if the deserter is not the player or the deserter is dead:
 		reset combat action stats of the deserter;
 
 To reset combat action stats of (guy - a person):
+	say "Resetting action stats for [guy].";
 	now concentration of the guy is 0;
 	now offensive flow of the guy is 0;
 	now defensive flow of the guy is 0;
