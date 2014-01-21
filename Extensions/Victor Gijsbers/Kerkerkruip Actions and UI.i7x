@@ -348,13 +348,13 @@ Status combat stats rule (this is the status flow rule):
 		if long status is true:
 			say "[bold type]Offensive flow[roman type]: +[n] attack, +[n] damage[line break][run paragraph on]";
 		otherwise:
-			say "[bold type]Offensive flow[roman type]: [n][line break][run paragraph on]";
+			say "[bold type]Offensive flow[roman type]: +[n] attack, +[n] damage[line break][run paragraph on]";
 	if defensive flow of the player is not 0:
 		let n be defensive flow of the player;
 		if long status is true:
-			say "[bold type]Defensive flow[roman type]: +[n] defence, -[n] enemy damage[line break][run paragraph on]";
+			say "[bold type]Defensive flow[roman type]: +[n] defence[line break][run paragraph on]";
 		otherwise:
-			say "[bold type]Defensive flow[roman type]: [n][line break][run paragraph on]";	
+			say "[bold type]Defensive flow[roman type]: +[n] defence[line break][run paragraph on]";	
 
 Status combat stats rule (this is the status tension rule):
 	if tension is greater than 1:
