@@ -464,7 +464,7 @@ Last every turn when the location is an arena and the player is alive (this is t
 
 Before arena exit of an arena (called place) (this is the clean up conquered arena rule):
 	Now the place is conquered;
-	repeat with item running through things in the place:
+	repeat with item running through things enclosed by the place:
 		unless (the item is the player or the item is a backdrop):
 			move item to the challenge site of the place;
 
