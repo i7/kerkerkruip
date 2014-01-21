@@ -4216,6 +4216,8 @@ The overmind is huge.
 The overmind is talker.
 The overmind is thrower.
 
+The rarity of the overmind is 1.
+
 The overmind is group leading.
 The overmind is not initially accompanied.
 The overmind is defeated individually.
@@ -4301,14 +4303,14 @@ Section - AI
 
 An AI action selection rule for the at-Act overmind (this is the overmind doesnt like attacking rule):
 	choose row with an Option of the action of the overmind attacking the chosen target in the Table of AI Action Options;
-	decrease the Action Weight entry by a random number between 0 and 50.
+	decrease the Action Weight entry by a random number between 0 and 20.
 
 An AI action selection rule for the overmind (this is the overmind concentration select rule):
 	choose row with an Option of the action of the overmind concentrating in the Table of AI Action Options;
-	if a random chance of 2 in 3 succeeds:
+	if a random chance of 1 in 2 succeeds:
 		increase the Action Weight entry by (2 * potential overmind allies);
 	if concentration of the overmind is 2:
-		increase Action weight entry by 4.
+		increase Action weight entry by 10.
 
 An AI action selection rule for the at-React overmind (this is the overmind doesnt like dodging rule):
 	choose row with an Option of the action of the overmind dodging in the Table of AI Action Options;
