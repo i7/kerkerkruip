@@ -1129,7 +1129,19 @@ An intervention bonus rule (this is the sandals of the prophet intervention bonu
 	if intervention-guy wears the sandals of the prophet:
 		if intervention-guy worships intervention-god:
 			increase intervention-bonus by 3.
+			
+A treasure placement rule (this is the sandals can be heretical rule):
+	if a random chance of 1 in 4 succeeds:
+		now the hidden identity of the sandals of the prophet is sandals of the heretic.			
 
+Section - Sandals of the heretic (cursed)
+
+The sandals of the heretic are cursed curse-identified shoes. The sandals of the heretic are plural-named. The indefinite article of the sandals of the heretic is "the". The description of the sandals of the heretic is "Simple sandals, but they have been imbued with special significance ever since the infamous heretic Volter used them to trample a high priest. Wearing these slippers will make it impossible to sacrifice powers to the gods.".
+
+Check sacrificing (this is the cannot sacrifice when wearing heretical sandals rule):
+	if the player wears the sandals of the heretic:
+		take no time;
+		say "The gods will not listen to your prayers while you are wearing such heretical footwear." instead.
 
 Chapter - Trousers
 
