@@ -285,4 +285,41 @@ An absorption stopping rule (this is the chef can't absorb souls rule):
 		say "As you come unmoored from your dream, you feel the soul of [the test subject] slipping past you, to be lost between worlds...";
 		rule succeeds;
 
+Chapter - Dream of Sleeping
+
+Dream of Sleeping is a dream. Dream of Sleeping is redreamable. The start the dream rule of Dream of Sleeping is the waking up into a dream rule.
+
+This is the waking up into a dream rule:
+	Say "Dark, churning nightmares suck you down into a troubled sleep. But at last the sun rises the fears of the night slough away. You awake, glad that you are alive and the torment is over.";
+	Now the player is the untroubled sleeper.
+
+Bedroom is a room. "Warm sunlight streams through the window and across your bed. Your chamber in the Inn is sparsely appointed, but provides all of the simple comforts you desire."
+
+The bed is an enterable scenery supporter in Bedroom. "Your bed is large and exceedingly soft and piled high with warm blankets. It is so comfortable that it makes rising in the morning a daily challenge.". Understand "blanket/blankets/sheet/sheets" as the bed.
+
+The untroubled sleeper is a person. "You are in your night-dress, comfortably tucked underneath the covers of your sumptuous bed. You're not really ready to get up." The untroubled sleeper is on the bed.
+
+Instead of getting off the bed:
+	say "You attempt to throw off the covers, but they are heavier than you anticipated. Your arms, too, are heavy, and so is your head. As you try again to lift yourself, you find that your eyes are not even open! You strain to open them, but you're not even sure these eyes are your own. At last, a voice calls you back to your own body. The voice is cold and cruel...";
+	wait for any key;
+	clear the screen;
+	say "You awake, for real this time, to find Malygris standing over you[if Malygris is asleep and Malygris is enclosed by dreamer-location]. He has woken up before you[end if], and he is quite concentrated. '[if Malygris is enclosed by dreamer-location]You seem to have drifted off in the middle of our contest[otherwise]Look who I found napping in my dungeon[end if]!' he chuckles.";
+	now Malygris is not asleep;
+	move Malygris to dreamer-location;
+	now the concentration of Malygris is 2;
+	now the true body of the player is just-woken;
+	wake the player.
+
+Instead of sleeping when the player is on the bed:
+	say "You close your eyes again, postponing the cold of the outside for another moment's rest. But as you drift away, the nightmares return. Perhaps you had better get out of bed after all.";
+
+Instead of waking the player when the player is on the bed:
+	try waking up;
+
+Instead of waking up when the player is on the bed:
+	try getting off the bed.
+
+Instead of waiting when the player is on the bed:
+	try sleeping;
+
 Kerkerkruip Dreams ends here.
