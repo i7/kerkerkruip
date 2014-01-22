@@ -110,7 +110,7 @@ Every turn:
 	otherwise:
 		now Banquet is not current-test-dream;]
 
-[Dream of Tungausy Shaman is current-test-dream.]
+Dream of Sleeping is current-test-dream.
 
 Section - Flexible Windows relisting
 

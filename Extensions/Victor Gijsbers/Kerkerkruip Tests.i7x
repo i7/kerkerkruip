@@ -280,15 +280,23 @@ Carry out cheatgranting:
 Section - Testing Person IDs
 
 Last when play begins (this is the check person IDs rule):
+	Let the available id be 1;
+	Let id-needed be false;
 	repeat with X running through npc people:
 		if X is a god:
 			next;
 		if the ID of X is 0:
 			say "[X] does not have an ID.[line break]";
+			now id-needed is true;
 		otherwise:
 			repeat with Y running through npc people:
+				if the id of Y is the available id:
+					increase the available id by 1;
 				if X is not Y and the ID of X is the ID of Y:
 					say "[X] has the same ID as [Y].[line break]";
+					now id-needed is true;
+	if id-needed is true:
+		say "ID [available id] is available."
 
 
 Section - Testing IDs

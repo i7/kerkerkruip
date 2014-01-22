@@ -257,6 +257,8 @@ This is the start the dream of the banquet rule:
 
 The Dining Hall is a room. "Cold drafts flow through this vast, gloomy hall. In the centre, a single chandelier casts a pool of light over a massive oaken table."
 
+The Dining Hall is not placeable.
+
 A chandelier is scenery in the dining hall. The description is "Ancient and ornate, this chandelier is wrought from solid silver. It supports dozens of fat candles.". Understand "silver", "candle/candles", "light/lamp", "fat" as the chandelier.
 
 A massive oaken table is scenery in the Dining Hall. The description is "There are places set for [the number of banquet-dining people in words]. Among the names, you recognize [the list of banquet-menu people]." Understand "chair/chairs" and "places" as the table.
@@ -267,7 +269,6 @@ table-place-naming relates a thing (called the identifier) to a person (called t
 
 A kitchen servant is a person in Dining Hall. "A kitchen servant stands at the edge of the light, awaiting your instructions." Understand "slave", "boy/girl", "waiter/waitress" as the kitchen servant. The ID of kitchen servant is 40.
 
-The Dining Hall is not placeable.
 
 A person called the Chef is in The Dining Hall. The description of the Chef is "You are elegantly dressed, and ready to plan the menu for tonight's feast.". The ID of Chef is 41.
 
@@ -424,25 +425,30 @@ Chapter - Dream of Sleeping
 Dream of Sleeping is a dream. Dream of Sleeping is redreamable. The start the dream rule of Dream of Sleeping is the waking up into a dream rule.
 
 This is the waking up into a dream rule:
-	Say "Dark, churning nightmares suck you down into a troubled sleep. But at last the sun rises the fears of the night slough away. You awake, glad that you are alive and the torment is over.";
-	Now the player is the untroubled sleeper.
+	Say "Dark, churning nightmares suck you down into a troubled sleep. But at last the sun rises and the fears of the night slough away. You awake, glad that you are above ground and the torment is over.";
+	Now the player is the untroubled sleeper;
+	try looking.
 
 Bedroom is a room. "Warm sunlight streams through the window and across your bed. Your chamber in the Inn is sparsely appointed, but provides all of the simple comforts you desire."
 
+Bedroom is not placeable.
+
 The bed is an enterable scenery supporter in Bedroom. "Your bed is large and exceedingly soft and piled high with warm blankets. It is so comfortable that it makes rising in the morning a daily challenge.". Understand "blanket/blankets/sheet/sheets" as the bed.
 
-The untroubled sleeper is a person. "You are in your night-dress, comfortably tucked underneath the covers of your sumptuous bed. You're not really ready to get up." The untroubled sleeper is on the bed.
+The untroubled sleeper is a person. "You are in your night-dress, comfortably tucked underneath the covers of your sumptuous bed. You're not really ready to get up." The untroubled sleeper is on the bed. The id of the untroubled sleeper is 15;
+
+The bedroom window is scenery in the Bedroom. "The curtains are closed, but blindingly bright sunlight illuminates them from outside and casts a yellow glow around the room."; Understand "curtains", "window", "sun", and "sunlight" as the bedroom window.
 
 Instead of getting off the bed:
 	say "You attempt to throw off the covers, but they are heavier than you anticipated. Your arms, too, are heavy, and so is your head. As you try again to lift yourself, you find that your eyes are not even open! You strain to open them, but you're not even sure these eyes are your own. At last, a voice calls you back to your own body. The voice is cold and cruel...";
-	wait for any key;
-	clear the screen;
-	say "You awake, for real this time, to find Malygris standing over you[if Malygris is asleep and Malygris is enclosed by dreamer-location]. He has woken up before you[end if], and he is quite concentrated. '[if Malygris is enclosed by dreamer-location]You seem to have drifted off in the middle of our contest[otherwise]Look who I found napping in my dungeon[end if]!' he chuckles.";
+	Let Malygris-woke be whether or not Malygris is asleep;
+	let Malygris-moved be whether or not Malygris is not enclosed by dreamer-location;
 	now Malygris is not asleep;
 	move Malygris to dreamer-location;
+	wake the player up;
+	say "You awake, for real this time, to find Malygris standing over you[if Malygris-woke is true and malygris-moved is false]. He has woken up before you[end if], and he is [bold type]quite concentrated[roman type]. '[if Malygris-moved is true]Look who I found napping in my dungeon[otherwise]You seem to have drifted off in the middle of our contest[end if]!' he chuckles.";
 	now the concentration of Malygris is 2;
 	now the true body of the player is just-woken;
-	wake the player.
 
 Instead of sleeping when the player is on the bed:
 	say "You close your eyes again, postponing the cold of the outside for another moment's rest. But as you drift away, the nightmares return. Perhaps you had better get out of bed after all.";
