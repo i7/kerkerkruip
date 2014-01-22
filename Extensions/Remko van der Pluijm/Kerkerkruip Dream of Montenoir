@@ -86,7 +86,7 @@ Section - Tankard [The player may only fight with a tankard full of grog]
 
 The tankard of grog is a weapon.
 
-The description of the tankard of grog is "A heavy, stone beer stein, engraved with the shield of Montenoir. In it, [If the drunkstate of the player is sober and the tankard is not empty]you find a rancid, foul smelling liquid. But perhaps it tastes better than it looks?[otherwise if the drunkstate of the player is tipsy and the tankard is not empty]you find something certainly not equal to a good wine, but you've had worse.[otherwise if the drunkstate of the player is drunk and the tankard is not empty]you find... wow... heavy stuff... [otherwise] a few drops of that heavy stuff.[end if] Drinking the liquid will make you hit your enemy harder, but will also make it harder to defend yourself.". Understand "beer stein" and "stein" and "grog" as the tankard of grog.
+The description of the tankard of grog is "A heavy, stone beer tankard, engraved with the shield of Montenoir. In it, [If the drunkstate of the player is sober and the tankard is not empty]you find a rancid, foul smelling liquid. But perhaps it tastes better than it looks?[otherwise if the drunkstate of the player is tipsy and the tankard is not empty]you find something certainly not equal to a good wine, but you've had worse.[otherwise if the drunkstate of the player is drunk and the tankard is not empty]you find... wow... heavy stuff... [otherwise] a few drops of that heavy stuff.[end if] Drinking the liquid will make you hit your enemy harder, but will also make it harder to defend yourself.". Understand "grog" as the tankard of grog.
 
 The damage die of the tankard is 6.
 The weapon attack bonus of the tankard is -2.
@@ -143,13 +143,13 @@ Instead of talking to numerous guests:
 	say "They are all to occupied to engage in any activity with you.".
 
 Instead of attacking numerous guests:
-	say "You enter a bar fight which is already going on. You notice one of the guests lying down. He's looking at you, deadly scared and at the same time glad you claimed the attentino. A large guy takes up your challenge and starts pushing you through the bar...[paragraph break]";
+	say "You enter a bar fight which is already going on: one of the guests lying down. He's looking at you, deadly scared and at the same time glad you claimed the attentino. A large guy takes up your challenge and starts pushing you through the bar...[paragraph break]";
 	create a riot.
 
 The buffet is a supporter and scenery in a bar in Montenoir. Its description is "A large, wooden buffet, filled with [list of things on the buffet] from the [numerous guests] sitting here. You have the feeling that stealing wouldn't be appreciated.". 
-Filled tankards are on the buffet and plural-named. Its indefinite article is "numerous". "Loads of [filled tankards] from the guests around here. They are filled to the brim.".
+Filled steins are on the buffet and plural-named. Its indefinite article is "numerous". "Loads of [filled steins] from the guests around here. They are filled to the brim.". Understand "stein" and "filled stein" as filled steins.
 
-Instead of taking the filled tankards:
+Instead of taking the filled steins:
 	say "Your little snatch is caught! You hear a buldering voice saying 'This will be your last steal forever!'. After looking up, you realise it's the local brute who was just extorting another customer. The customer is looking gratefully at you, aware of the mess he just got out of by your action.[paragraph break]";
 	create a riot.
  
@@ -180,9 +180,8 @@ Every turn when the location is a bar in Montenoir:
 		--drunk:
 			decrease x by 20; 
 	if a random chance of x in 100 succeeds:
-		if the tankard of grog is not empty:
-			say "[one of]Your throat feels sore...[or]You're bone-dry...[or]You're craving for some booze...[or]You've been juiceless for some time...[or]You feel cottonmouthed...[or]You're sure that tankard couldn't be that empty, but hell...[or]You surely could use some of that grog in there...[purely at random]";
-			try drinking tankard of grog.
+		say "[one of]Your throat feels sore...[or]You're bone-dry...[or]You're craving for some booze...[or]You've been juiceless for some time...[or]You feel cottonmouthed...[or]You're sure that tankard couldn't be that empty, but hell...[or]You surely could use some of that grog in there...[purely at random]";
+		try drinking tankard of grog.
 
 To create a riot:
 	wait for any key;
@@ -300,7 +299,7 @@ To create the Unnamed prisoner:
 			now the specialskill of unnamed prisoner is "deformed";
 		--4:
 			now unnamed prisoner is insane;
-			now the description of unnamed prisone is "The long stay in the horrid circumstances within this small prison cell has taken its toll for [printed name of unnamed prisoner]. [if unnamed prisoner is male]He[otherwise]She[end if] is only able to reason like a madman.".
+			now the description of unnamed prisoner is "The long stay in the horrid circumstances within this small prison cell has taken its toll for [printed name of unnamed prisoner]. [if unnamed prisoner is male]He[otherwise]She[end if] is only able to reason like a madman.".
 	
 
 To say unnamed-disarm-1: say "[printed name of unnamed prisoner] executes a fast attack, targeting the [disarm-weapon].".
@@ -333,7 +332,7 @@ Report unnamed prisoner hitting a dead pc:
 Report unnamed prisoner dodging:
 	if the specialskill of unnamed prisoner is:
 		--stunner: say "[printed name of unnamed prisoner] hops aside.";
-	    --disarmer: say "[printed name of unnamed prisoner] prepares for evasive manoeuvres.";
+	    	--disarmer: say "[printed name of unnamed prisoner] prepares for evasive manoeuvres.";
 		--deformed: say "[printed name of unnamed prisoner] leaps aside.";
 		--insane: say "[printed name of unnamed prisoner] seems quite scared as he jumps away.";
 		--otherwise: say "[printed name of unnamed prisoner] decides to dodge.";
@@ -342,7 +341,7 @@ Report unnamed prisoner dodging:
 Report unnamed prisoner parrying:
 	if the specialskill of unnamed prisoner is:
 		--stunner: say "[printed name of unnamed prisoner] watches the opponent carefully, readying his weapon.";
-    --disarmer: say "[printed name of unnamed prisoner] braces himself for impact, ready to use his supreme weapon skills to parry the attack.";
+    		--disarmer: say "[printed name of unnamed prisoner] braces himself for impact, ready to use his supreme weapon skills to parry the attack.";
 		--deformed: say "[printed name of unnamed prisoner] attempts to parry the blow.";
 		--otherwise: say "[printed name of unnamed prisoner] parries.";
 	rule succeeds.
@@ -358,8 +357,8 @@ Report unnamed prisoner attacking:
 			--disarmer: say "[printed name of unnamed prisoner] places a secure attack to the [one of]head[or]leg[or]arm[or]body[purely at random].";
 			--deformed: say "[printed name of unnamed prisoner] lumbers forward.";
 			--otherwise: say "[printed name of unnamed prisoner] charges.";
-	otherwise:
-		say "'I cannot stand myself anymore', [printed name of unnamed prisoner] exclaims!";
+		otherwise:
+			say "'I cannot stand myself anymore', [printed name of unnamed prisoner] exclaims!";
 	rule succeeds.
 
 	
