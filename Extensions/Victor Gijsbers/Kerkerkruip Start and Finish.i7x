@@ -358,7 +358,7 @@ Section - Adding menu screen graphics to the Options menu (for use with Kerkerkr
 
 Table of Options Menu (continued)
 title	order	rule
-"Menu graphics: [bold type][if main menu graphics are enabled]Off[otherwise]On[end if][roman type]"	11	the toggle menu graphics rule
+"Menu graphics: [bold type][if main menu graphics are enabled]On[otherwise]Off[end if][roman type]"	11	the toggle menu graphics rule
 
 This is the toggle menu graphics rule:
 	toggle main menu graphics, table only;
