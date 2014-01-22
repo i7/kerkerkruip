@@ -1,5 +1,3 @@
-
-
 "Kerkerkruip - Release 9 - Alpha" by Victor Gijsbers
 
 The story headline is "An IF roguelike".
@@ -27,10 +25,11 @@ Section - Graphics and Windows
 
 Check https://github.com/i7/extensions if the I7 site only has older versions ]
 
-Include version 13/131208 of Flexible Windows by Jon Ingold.
+Include version 13/130925 of Flexible Windows by Jon Ingold.
 
 [Include Kerkerkruip Glimmr Additions by Erik Temple.]
-Include version 1/131214 of Menus by Dannii Willis.
+
+Include version 1/130925 of Menus by Dannii Willis.
 Include Kerkerkruip Windows by Erik Temple.
 
 [Include Extended Debugging by Erik Temple.]
@@ -40,7 +39,7 @@ Include Kerkerkruip Windows by Erik Temple.
 Section - Include ATTACK
 
 [ Get the latest ATTACK at https://github.com/i7/ATTACK ]
-Include version 5/131204 of Inform ATTACK by Victor Gijsbers.
+Include version 5/130930 of Inform ATTACK by Victor Gijsbers.
 
 
 
@@ -66,7 +65,7 @@ Include Kerkerkruip Ugly Special Cases by Victor Gijsbers.
 Include Kerkerkruip Start and Finish by Victor Gijsbers.
 Include Kerkerkruip Tests by Victor Gijsbers.
 Include Kerkerkruip Final Declarations by Victor Gijsbers.
-Include Kerkerkruip Help and Hints by Victor Gijsbers.
+
 
 
 Section - Increase memory settings
@@ -74,12 +73,10 @@ Section - Increase memory settings
 Use MAX_PROP_TABLE_SIZE of 800000.
 Use MAX_OBJ_PROP_COUNT of 256.
 Use MAX_STATIC_DATA of 500000.
-Use MAX_OBJECTS of 1000.
+Use MAX_OBJECTS of 800.
 Use MAX_SYMBOLS of 30000.
 Use MAX_ACTIONS of 250.
-[ needed these to compile with Glimmr):]
-Use MAX_LABELS of 20000.
-Use ALLOC_CHUNK_SIZE of 32768.
+
 
 
 Section - Score
@@ -110,7 +107,7 @@ Every turn:
 	otherwise:
 		now Banquet is not current-test-dream;]
 
-[Dream of Tungausy Shaman is current-test-dream.]
+[Dream of Briar Roses is current-test-dream;]
 
 Section - Flexible Windows relisting
 
@@ -130,6 +127,7 @@ Section - Defining perform syntax (not for use with Glimmr Canvas Animation by E
 To say perform/@ (ph - phrase): (- if (0==0) {ph} -).
 
 
+
 Section - Plurality fix
 
 [Let's see whether this works.]
@@ -138,24 +136,3 @@ To decide whether (item - an object) acts plural:
 	if the item is plural-named:
 		yes;
 	no.
-	
-Section - Questions fix (in place of Section 4 - Processing menu questions in Questions by Michael Callaghan)
-
-[We need to end the turn after a menu, otherwise no rules run.]
-
-After reading a command when menu question mode is true:
-	follow the menu question rules;
-	if the outcome of the rulebook is the exit outcome:
-		deactivate menu question mode;
-		follow the every turn rules;
-		follow the advance time rule;
-		change the text of the player's command to "dontparse";
-	if the outcome of the rulebook is the retry outcome:
-		reject the player's command;
-	if the outcome of the rulebook is the parse outcome:
-		deactivate menu question mode.
-
-Dontparsing is an action applying to nothing. Understand "dontparse" as dontparsing.
-
-Carry out dontparsing:
-	do nothing instead.
