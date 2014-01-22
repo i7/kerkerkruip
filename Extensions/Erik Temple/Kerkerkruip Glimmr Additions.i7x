@@ -676,8 +676,10 @@ For showing the title screen when full graphics support is true and main menu gr
 	close the status window;[needed on restart]
 	close side windows;[needed on restart]
 	open up the graphics-window;
-	if session flag is enabled:
-		disable session flag;
+	open up the graphics-window;
+	if the session flag is enabled:
+		disable the session flag;
+	otherwise:
 		show a minimovie;	
 		[play the theme music;][****]
 		show the title;

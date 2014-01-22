@@ -30,7 +30,6 @@ Check https://github.com/i7/extensions if the I7 site only has older versions ]
 Include version 13/131208 of Flexible Windows by Jon Ingold.
 
 [Include Kerkerkruip Glimmr Additions by Erik Temple.]
-
 Include version 1/131214 of Menus by Dannii Willis.
 Include Kerkerkruip Windows by Erik Temple.
 
@@ -78,10 +77,9 @@ Use MAX_STATIC_DATA of 500000.
 Use MAX_OBJECTS of 1000.
 Use MAX_SYMBOLS of 30000.
 Use MAX_ACTIONS of 250.
-[ needed these to compile with Glimmr):
+[ needed these to compile with Glimmr):]
 Use MAX_LABELS of 20000.
-Use ALLOC_CHUNK_SIZE of 32768.]
-
+Use ALLOC_CHUNK_SIZE of 32768.
 
 
 Section - Score

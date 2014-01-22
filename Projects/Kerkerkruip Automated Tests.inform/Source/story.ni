@@ -1287,7 +1287,7 @@ Test play when testing controlling pipes:
 
 Section - Sul Champion vs Herm worshipper
 
-[Sul Champion vs Herm worshipper is a test set. [Sul Champion vs Herm worshipper vs bat is isolated.]
+[Sul Champion vs Herm worshipper is a test set. [Sul Champion vs Herm worshipper is isolated.]
 
 A scenario rule when testing Sul Champion vs Herm worshipper:
 	now Hall of Gods is testobject;
