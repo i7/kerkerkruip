@@ -699,18 +699,19 @@ First AI action selection rule for a person (called P) (this is the consider hea
 	if the heal power of P is greater than 0 and the current heal cooldown of P is less than 1:
 		let someone needs healing be false;
 		let greatest injury be 0;
-		repeat with X running through alive persons enclosed by the location not opposed by P:
-			let injury be permanent health of X minus health of X; 
-			if injury is greater than 0:
-				now someone needs healing is true;
-				if greatest injury is less than injury:
-					now greatest injury is injury;
+		repeat with X running through alive persons enclosed by the location:
+			unless P opposes X:
+				let injury be permanent health of X minus health of X; 
+				if injury is greater than 0:
+					now someone needs healing is true;
+					if greatest injury is less than injury:
+						now greatest injury is injury;
 		if someone needs healing is true:
 			if greatest injury is greater than heal power of the running AI:
 				now greatest injury is heal power of the running AI; [now m becomes the maximum amount of damage the global attacker can heal]
 			choose a blank Row in the Table of AI Action Options;
 			now the Option entry is the action of P healing;
-			now the Action Weight entry is 8 plus greatest injury;
+			now the Action Weight entry is 15 plus greatest injury;
 
 Carry out an actor healing:
 	let m be 0;
