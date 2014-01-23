@@ -1110,14 +1110,15 @@ The boots of wandering are cursed curse-identified shoes. The boots of wandering
 
 Before doing anything when the player wears the boots of wandering (this is the boots of wandering weirdness rule):
 	if the player can move:
-		if a random chance of 1 in 40 succeeds:
-			if at least one room is adjacent to the location of the player:
-				let place2 be the location of the player; [needed because of a bug in inform]
-				let place be a random room which is adjacent to place2;
-				let way be the direction from the location of the player to place;
-				say "Before you can do anything, the [bold type]boots of wandering[roman type] attempt to run [way]!";
-				now forced-action is true;
-				try going way instead.
+		unless the combat state of the player is at-React:
+			if a random chance of 1 in 40 succeeds:
+				if at least one room is adjacent to the location of the player:
+					let place2 be the location of the player; [needed because of a bug in inform]
+					let place be a random room which is adjacent to place2;
+					let way be the direction from the location of the player to place;
+					say "Before you can do anything, the [bold type]boots of wandering[roman type] attempt to run [way]!";
+					now forced-action is true;
+					try going way instead.
 
 
 Section - Sandals of the prophet (major)
