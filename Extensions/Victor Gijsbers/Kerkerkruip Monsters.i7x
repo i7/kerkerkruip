@@ -149,7 +149,7 @@ The swarm of daggers is thrower.
 
 The health of the swarm of daggers is 14.
 The melee of the swarm of daggers is 3.
-The defence of the swarm of daggers is 4.
+The defence of the swarm of daggers is 5.
 The body score of the swarm of daggers is 6.
 The mind score of the swarm of daggers is 3.
 The spirit score of the swarm of daggers is 6. 
