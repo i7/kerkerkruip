@@ -245,7 +245,7 @@ Absorbing power of the daggers:
 	increase inherent damage modifier of the player by 2;
 	decrease defence of the player by 1;
 	increase permanent health of the player by 6;
-	say "As the daggers fall down, you feel the soul that animated them absorbed into your own body. You are sharp. You are deadly. ([bold type]Power of the daggers[roman type]: +2 attack, +1 damage, -1 defence, +6 health, and the [italic type]pierce[roman type] skill.)[paragraph break]".
+	say "As the daggers fall down, you feel the soul that animated them absorbed into your own body. You are sharp. You are deadly. ([bold type]Power of the daggers[roman type]: +2 attack, +2 damage, -1 defence, +6 health, and the [italic type]pierce[roman type] skill.)[paragraph break]".
 
 Repelling power of the daggers:
 	decrease melee of the player by 2;
