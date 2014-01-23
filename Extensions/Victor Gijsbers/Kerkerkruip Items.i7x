@@ -3147,7 +3147,7 @@ A damage modifier rule (this is the Giantbane damage bonus rule):
 	if the global attacker weapon is Giantbane:
 		let n be the size difference of the global attacker and the global defender;
 		if n is greater than 0:
-			now n is n * 3;
+			now n is n + 2;
 			say " + ", n, " (Giantbane's special)[run paragraph on]";
 			increase the attack damage by n.
 
