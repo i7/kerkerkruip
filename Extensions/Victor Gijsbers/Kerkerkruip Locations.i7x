@@ -1836,7 +1836,7 @@ Entrance to the Arena is extra-accepting.
 Entrance to the Arena is vp-agnostic.
 Entrance to the Arena is magical.
 
-The rarity of Entrance to the Arena is 5. 
+The rarity of Entrance to the Arena is 4. 
 
 The black dome is scenery in the Entrance to the Arena. Understand "Arena" and "large" and "black" and "of the fallen" as the black dome. The description of the black dome is "You feel uneasy looking at it, as it seems to be formed of unholy energies that defy all the laws of your own world."
 
@@ -1866,7 +1866,7 @@ Hall of Gods is extra-accepting.
 Hall of Gods is vp-agnostic.
 Hall of Gods is religious.
 
-The rarity of Hall of Gods is 5. 
+The rarity of Hall of Gods is 4. 
 The unlock level of Hall of Gods is 2.
 
 [See Arena of the Fallen in Kerkerkruip Events and Specials.]
