@@ -718,7 +718,6 @@ To find the greatest injury to allies of (guy - a person):
 	Now the greatest injury is 0;
 	repeat with X running through healing-candidate people:
 		if the injury of X is greater than the greatest injury:
-			say "greatest injury: [the greatest injury] [possessive of X] injury: [injury of X].";
 			now the greatest injury is the injury of X;
 	
 First AI action selection rule for a person (called P) (this is the consider healing rule):
@@ -734,13 +733,11 @@ First AI action selection rule for a person (called P) (this is the consider hea
 Carry out an actor healing:
 	find the greatest injury to allies of the actor;
 	Let the chosen one be a random most-injured healing-candidate person;
-	say "Begin [The actor] move [act count of the actor] - injury of [the chosen one]: [injury of the chosen one] - current cooldown=[current heal cooldown of the actor].";
 	if the greatest injury is greater than heal power of the actor:
 		now the greatest injury is heal power of the actor;
 	say "[The actor] casts a spell of magical healing on [the chosen one], removing [the greatest injury] points of damage.";
 	heal chosen one for the greatest injury health;
 	now current heal cooldown of the actor is heal cooldown of the actor;
-	say "End [The actor] move [act count of the actor] - injury of [the chosen one]: [injury of the chosen one] - current cooldown=[current heal cooldown of the actor].";
 
 Every turn (this is the reduce heal cooldown of the main actor rule):
 	if the current heal cooldown of the main actor is greater than 0:
