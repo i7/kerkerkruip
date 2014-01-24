@@ -3213,7 +3213,7 @@ The parry-with bonus of the fearsome axe is -1.
 The description of the fearsome axe is "While not exactly a nimble weapon, this axe is certainly able to deal out some punishment. It also has a chance of striking fear in the hearts of your enemies. (When you attack with the fearsome axe, there is a chance that they will not be able to react. The probability of this happening is (your mind - their mind) * 4%.)".
 
 Last carry out an actor attacking (this is the fearsome axe rule):
-	if the actor encloses the fearsome axe and the fearsome axe is readied:
+	if the actor encloses the fearsome axe and the fearsome axe is readied and the noun is conscious:
 		let n be the final mind of the actor;
 		decrease n by the final mind of the noun;
 		if n is greater than 0:
