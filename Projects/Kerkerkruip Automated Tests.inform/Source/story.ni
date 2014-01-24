@@ -540,6 +540,20 @@ To generate a player action of (the desired action - a stored action):
 	now the noun is the noun part of the desired action;
 	now the second noun is the second noun part of the desired action;
 	begin the current action;
+	
+The compelled action is a stored action that varies. The compelled action is the action of waiting.
+
+To compel (the desired action - a stored action):
+	say "[bracket]compelling [the desired action][close bracket]";
+	Now the compelled action is the desired action.
+	
+A last AI action selection rule for an at-Act person (called P) when the compelled action is not the action of waiting:
+	unless P is the actor part of the compelled action, make no decision;
+	blank out the whole of the Table of AI Action Options;
+	choose a blank row in the Table of AI Action Options;
+	now the Option entry is the compelled action;
+	now the Action Weight entry is 1000;
+	now the compelled action is the action of waiting.
 
 Last choosing a player reaction:
 	generate a player action of the action of waiting.
@@ -1356,10 +1370,8 @@ A test play when testing bug-210:
 	
 waiting-for-fafhrd-attack is a turn-based event. The first move of bug-210 is waiting-for-fafhrd-attack.
 
-A last AI action selection rule for an at-Act person (called P) when waiting-for-fafhrd-attack is the scheduled event:
-	unless P is Fafhrd, make no decision;
-	choose row with an Option of the action of P attacking the chosen target in the Table of AI Action Options;
-	now the Action Weight entry is 1000.
+Initial scheduling of waiting-for-fafhrd-attack:
+	compel the action of fafhrd attacking the player;
 	
 reaction-mindslug-killing is a turn-based event. The next move of waiting-for-fafhrd-attack is reaction-mindslug-killing.
 
@@ -1383,5 +1395,41 @@ Testing a turn-based event of reaction-mindslug-killing:
 	assert that the event description includes "As the mindslug dies, you feel its powerful intelligence absorbed into your own body";
 	assert truth of whether or not the mindslug is dead with message "the mindslug should be dead";
 	assert truth of whether or not (the player is not at-react) with message "the player should not be at-react"; [probably redundant]
+	
+Section - Dream of Sleeping
+
+dream-of-sleeping-test is a test set. [dream-of-sleeping-test is isolated.]
+
+Scenario when testing dream-of-sleeping-test:
+	now the dream of sleeping is current-test-dream;
+	now a random morphean grenade is testobject;
+	
+Test play when testing dream-of-sleeping-test:
+	let M be a random morphean grenade;
+	now the player carries M;
+	Now the scheduled action of sleeping-dream-dreaming is the action of throwing M;
+
+Sleeping-dream-dreaming is a turn-based event. The first move of dream-of-sleeping-test is sleeping-dream-dreaming.
+
+Sleeping-dream-waking is a turn-based event. The next move of sleeping-dream-dreaming is sleeping-dream-waking. The scheduled action of sleeping-dream-waking is the action of the untroubled sleeper trying exiting.
+
+Testing a turn-based event of sleeping-dream-waking:
+	assert that the event description includes "Malygris standing over you";
+	assert that the concentration of Malygris is 2;
+	assert truth of whether or not the player is just-woken with message "the player should be just-woken";
+	
+Waiting-for-Malygris-attack is a repeatable turn-based event. The next move of sleeping-dream-waking is waiting-for-Malygris-attack. 
+
+Initial scheduling of waiting-for-Malygris-attack:
+	compel the action of Malygris attacking the player;
+	
+Carry out Malygris hitting the player when waiting-for-Malygris-attack is the scheduled event:
+	now waiting-for-Malygris-attack is not repeatable.
+	
+Testing a turn-based event of waiting-for-Malygris-attack:
+	if waiting-for-Malygris-attack is repeatable, make no decision;
+	assert that the event description includes "defender was asleep";
+	assert truth of whether or not the player is not just-woken with message "the player should not be just-woken anymore";
+	
 	
 Section - Attempting to Maze Someone in Arena of the Gods
