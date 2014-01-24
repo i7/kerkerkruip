@@ -465,24 +465,55 @@ A turn-based event is a kind of value. normal keyboard input is a turn-based eve
 A turn-based event has a stored action called the scheduled action. The scheduled action of a turn-based event is usually the action of waiting.
 A turn-based event has a turn-based event called the next move. The next move of a turn-based event is usually normal keyboard input.
 
+A turn-based event can be repeatable. A turn-based event has a number called the maximum repeats. The maximum repeats of a turn-based event is usually 100.
+
+The repeated moves is a number that varies;
+
+A turn-based event has a text called the maxed out report. The maxed out report of a turn-based event is usually "[The item described] repeated [repeated moves] times without resolution."
+
 A turn-based event can be generated.
 
 The scheduled event is a turn-based event that varies. The scheduled event is the normal keyboard input.
 
-Choosing a player reaction is a rulebook.
+Initial scheduling rules are a turn-based event based rulebook.
 
+Initial scheduling for a turn-based event (this is the reset act counts rule):
+	repeat with guy running through people:
+		now the act count of guy is 0;
+			
+To schedule (the event described - a turn-based event):
+	if the event described is not the scheduled event:
+		follow the initial scheduling rules for the event described;
+		now the repeated moves is 0;
+	otherwise:
+		increment the repeated moves;
+	now the event described is not generated;
+	now the scheduled event is the event described;
+	transcribe and restart capturing;
+	
 Before taking a player action when the scheduled event is generated:
 	stop and save event description;
-	if the next move of the scheduled event is the scheduled event:
+	Let repeat be whether or not (the scheduled event is repeatable) and (the repeated moves > 0);
+	now the scheduled event is not generated;
+	if repeat is true:
 		say "* [run paragraph on]";
 	otherwise:
 		log "testing effects of [the scheduled event]";
-	now the scheduled event is not generated;
-	Let the completed event be the scheduled event;
-	follow the testing a turn-based event rules for the completed event;
-	schedule the next move of the completed event;
+	follow the testing a turn-based event rules for the scheduled event;
+	Let repeat be whether or not the scheduled event is [still] repeatable;
+	if repeat is true and the repeated moves is not less than the maximum repeats of the scheduled event:
+		now repeat is false;
+		Let T be indexed text;
+		Let T be the maxed out report of the scheduled event;
+		assert truth of false with message T;
+	if repeat is true:
+		schedule the scheduled event;
+	otherwise:
+		schedule the next move of the scheduled event;
 	transcribe and restart capturing text;
 	
+Choosing a player reaction is a rulebook.
+
 For taking a player action when the scheduled event is not the normal keyboard input (this is the turn-based event player action rule):
 	if the player is at-React:
 		follow the choosing a player reaction rules;
@@ -515,11 +546,6 @@ Last choosing a player reaction:
 	
 testing a turn-based event rules are a turn-based event based rulebook.
 
-To schedule (the event described - a turn-based event):
-	now the event described is not generated;
-	now the scheduled event is the event described;
-	transcribe and restart capturing;
-	
 Chapter - Test Sets
 
 A test set is a kind of value. Aite champions vs bat is a test set.
@@ -633,6 +659,10 @@ To assert truth of/-- (C - a truth state) with message (T - an indexed text):
 	unless C is true:
 		record a failure of T;
 	transcribe and restart capturing text;
+	
+To record a/-- success of (E - a turn-based event):
+	now E is not repeatable;
+	assert truth of true with message "success."
 	
 [ Assert that any condition is true, but with less information on failure ]
 To assert that/-- (C - a condition):
@@ -946,7 +976,7 @@ A test play when testing parting shots:
 	now the way-from-the-mindslug is the best route from the location to the retreat location;
 	now every person enclosed by the location is not asleep;
 	
-mindslug-hiding-check is a turn-based event. The first move of parting shots is mindslug-hiding-check. The scheduled action of mindslug-hiding-check is the action of waiting.
+mindslug-hiding-check is a turn-based event. The first move of parting shots is mindslug-hiding-check.
 
 Testing a turn-based event for mindslug-hiding-check:
 	assert that the event description includes ", which must be positive\. You remain hidden\.";
@@ -1195,8 +1225,6 @@ To decide which number is the target cower percentage of (guy - a person):
 		now m is 0;
 	decide on m;
 
-The delayed move is a turn-based event that varies.
-
 To check if (guy - a person) cowered this turn:
 	let pattern be indexed text;
 	now pattern is "[The guy] cower[s] before your dreadful presence";
@@ -1210,46 +1238,38 @@ To decide whether (guy - a person) is within (delta - a number) percent of cower
 	if the percent difference is less than 0, now the percent difference is 0 minus the percent difference;
 	decide on whether or not the percent difference not greater than delta;
 		
-To move on if cowering was within (N - a number) percent after (T - a number) turns:
-	let try again be true;
-	if the next move of the scheduled event is not the scheduled event:
-		now the delayed move is the next move of the scheduled event;
-		now the next move of the scheduled event is the scheduled event;
+To say cower report:
+	Repeat with guy running through people in the location:
+		say "After [act count of guy] rounds, [the guy] cowered [cower count of guy] times versus a target of [target cower percentage of guy] percent ([target cower percentage of guy times act count of guy divided by 100]).";
+	
+A turn-based event can be cower-counting.
+
+A cower-counting turn-based event is usually repeatable.
+
+When play begins:
+	repeat with E running through cower-counting turn-based events:
+		now the maxed out report of E is "[cower report]";
+		now the maximum repeats of E is 200;
+	
+initial scheduling for a cower-counting turn-based event:
+	repeat with guy running through people:
+		now the cower count of guy is 0;
+	
+Testing a turn-based event of a cower-counting turn-based event:
 	Let success count be 0;
 	Repeat with guy running through people in the location:
 		check if guy cowered this turn;
-		if guy is within N percent of cowering target, increment success count;	
-	if the act count of the player is at least 20 and success count is the number of people in the location:
-		assert truth of true with message "success";
-		now try again is false;
-	if the act count of the player is at least T:
-		Repeat with guy running through people in the location:
-			Let msg be indexed text;
-			Now msg is "After [act count of guy] rounds, [the guy] cowered [cower count of guy] times versus a target of [target cower percentage of guy] percent ([target cower percentage of guy times act count of guy divided by 100]).";
-			assert truth of whether or not guy is within N percent of cowering target with message msg;
-		now try again is false;
-	if try again is false:
-		now the next move of the scheduled event is the delayed move;
-		repeat with guy running through people in the location:
-			now the act count of guy is 0;
-			now the cower count of guy is 0;
+		if guy is within 5 percent of cowering target, increment success count;	
+	if the repeated moves is at least 20 and success count is the number of people in the location:
+		record success of the scheduled event;
+
+Ape-cowering is a cower-counting turn-based event. The first move of Dreadful-Presence-Test is Ape-cowering.
 		
-	
-Ape-cowering is a turn-based event. The first move of Dreadful-Presence-Test is Ape-cowering. The scheduled action of Ape-cowering is the action of waiting.
+Player-cowering is a cower-counting turn-based event. The next move of Ape-cowering is Player-cowering.
 
-Testing a turn-based event of Ape-cowering:
-	move on if cowering was within 5 percent after 200 turns.
-		
-Player-cowering is a turn-based event. The next move of Ape-cowering is Player-cowering. The scheduled action of player-cowering is the action of waiting.
-
-Before taking a player action when the scheduled event is Player-cowering:
-	if the next move of the scheduled event is not Player-cowering:
-		now the player is insane;
-		assert that the target cower percentage of the player is 15; 
-	
-Testing a turn-based event of player-cowering:
-	move on if cowering was within 5 percent after 200 turns.
-
+initial scheduling for Player-cowering:
+	now the player is insane;
+	assert that the target cower percentage of the player is 15; 
 
 Section - Controlling pipes
 
@@ -1334,19 +1354,19 @@ A test play when testing bug-210:
 	assert truth of whether or not the claymore is readied with message "the claymore should be readied";
 	assert truth of whether or not the number of readied weapons enclosed by fafhrd is 1 with message "fafhrd should only have one weapon readied";
 	
-waiting-for-fafhrd-attack is a turn-based event. The first move of bug-210 is waiting-for-fafhrd-attack. The scheduled action of waiting-for-fafhrd-attack is the action of waiting.
+waiting-for-fafhrd-attack is a turn-based event. The first move of bug-210 is waiting-for-fafhrd-attack.
 
 A last AI action selection rule for an at-Act person (called P) when waiting-for-fafhrd-attack is the scheduled event:
 	unless P is Fafhrd, make no decision;
 	choose row with an Option of the action of P attacking the chosen target in the Table of AI Action Options;
 	now the Action Weight entry is 1000.
 	
-reaction-mindslug-killing is a turn-based event. The next move of waiting-for-fafhrd-attack is reaction-mindslug-killing. The scheduled action of reaction-mindslug-killing is the action of waiting.
+reaction-mindslug-killing is a turn-based event. The next move of waiting-for-fafhrd-attack is reaction-mindslug-killing.
 
 Testing a turn-based event of waiting-for-fafhrd-attack:
 	if the player is at-react:
 		now the next move of waiting-for-fafhrd-attack is reaction-mindslug-killing;
-	otherwise if the act count of the player < 100:
+	otherwise if the repeated moves < 100:
 		now the next move of waiting-for-fafhrd-attack is waiting-for-fafhrd-attack;
 	otherwise:
 		assert truth of false with message "Fafhrd didn't attack after 100 turns";
