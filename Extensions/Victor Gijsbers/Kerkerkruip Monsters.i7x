@@ -610,12 +610,12 @@ Armadillo-eating is an action applying to nothing.
 An AI action selection rule for the ravenous armadillo (this is the ravenous armadillo considers eating rule):
 	choose a blank Row in the Table of AI Action Options;
 	now the Option entry is the action of the ravenous armadillo armadillo-eating;
-	now the Action Weight entry is 0;
+	now the Action Weight entry is -100;
 	if a random chance of 1 in 2 succeeds:
 		if there is a good item for the armadillo to eat:
-			increase Action Weight entry by 12;
+			now Action Weight entry is 12;
 		otherwise if a random chance of 1 in 10 succeeds:
-			increase Action Weight entry by 10.
+			now Action Weight entry is 10.
 
 To decide whether there is a good item for the armadillo to eat:
 	repeat with item running through things in the location of the ravenous armadillo:
