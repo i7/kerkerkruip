@@ -435,7 +435,7 @@ To record a test attempt:
 	increment the total entry;
 	say ". "
 	
-To record a/-- failure of/-- (msg - an indexed text):
+To record a/-- failure report of/-- (msg - an indexed text):
 	Let testnum be current test set as a number;
 	choose row with test set of testnum in Table of Test Results;	
 	increment the assertion failures count;
@@ -465,11 +465,11 @@ A turn-based event is a kind of value. normal keyboard input is a turn-based eve
 A turn-based event has a stored action called the scheduled action. The scheduled action of a turn-based event is usually the action of waiting.
 A turn-based event has a turn-based event called the next move. The next move of a turn-based event is usually normal keyboard input.
 
-A turn-based event can be repeatable. A turn-based event has a number called the maximum repeats. The maximum repeats of a turn-based event is usually 100.
+A turn-based event can be repeatable. A turn-based event has a number called the maximum repeats. The maximum repeats of a turn-based event is usually 100. A turn-based event can be uneventful.
 
 The repeated moves is a number that varies;
 
-A turn-based event has a text called the maxed out report. The maxed out report of a turn-based event is usually "[The item described] repeated [repeated moves] times without resolution."
+A turn-based event has a text called the maxed out report. The maxed out report of a turn-based event is usually "[The scheduled event] repeated [repeated moves] times without resolution."
 
 A turn-based event can be generated.
 
@@ -503,9 +503,12 @@ Before taking a player action when the scheduled event is generated:
 	Let repeat be whether or not the scheduled event is [still] repeatable;
 	if repeat is true and the repeated moves is not less than the maximum repeats of the scheduled event:
 		now repeat is false;
-		Let T be indexed text;
-		Let T be the maxed out report of the scheduled event;
-		assert truth of false with message T;
+		if the scheduled event is uneventful:
+			record success of the scheduled event;
+		otherwise:
+			Let T be indexed text;
+			Let T be the maxed out report of the scheduled event;
+			assert truth of false with message T;
 	if repeat is true:
 		schedule the scheduled event;
 	otherwise:
@@ -644,7 +647,7 @@ To test (E - a randomized event):
 		record a test attempt;
 		let msg be indexed text;
 		now msg is "After [the maximum number of random event iterations] iterations of [the event being tested], [the attempt] was still not tested.";
-		record a failure of msg;
+		record a failure report of msg;
 
 Randomized event testing is a randomized event based rulebook.
 
@@ -664,19 +667,23 @@ To assert that/-- (A - a value) is (B - a value):
 	unless A is B:
 		Let error_msg be an indexed text;
 		now error_msg is "Expected: [B], Got: [A][line break]";
-		record a failure of error_msg;
+		record a failure report of error_msg;
 	transcribe and restart capturing text;
 
 To assert truth of/-- (C - a truth state) with message (T - an indexed text):
 	transcribe and stop capturing text;
 	record a test attempt;
 	unless C is true:
-		record a failure of T;
+		record a failure report of T;
 	transcribe and restart capturing text;
 	
 To record a/-- success of (E - a turn-based event):
 	now E is not repeatable;
 	assert truth of true with message "success."
+
+To record a/-- failure of/-- (E - a turn-based event) with message (M - an indexed text):
+	now E is not repeatable;
+	assert truth of false with message M;
 	
 [ Assert that any condition is true, but with less information on failure ]
 To assert that/-- (C - a condition):
@@ -740,14 +747,14 @@ To assert that (message - an indexed text) includes (pattern - an indexed text):
 	unless message matches the regular expression pattern:
 		Let error_msg be an indexed text;
 		now error_msg is "Regular expression '[pattern]' was not found in the text:[paragraph break]'[message]'[line break]";
-		record a failure of error_msg;
+		record a failure report of error_msg;
 		
 To assert that (message - an indexed text) does not include (pattern - an indexed text):
 	record a test attempt;
 	if message matches the regular expression pattern:
 		Let error_msg be an indexed text;
 		now error_msg is "Regular expression '[pattern]' should not have been found in the text:[paragraph break]'[message]'[line break]";
-		record a failure of error_msg;
+		record a failure report of error_msg;
 
 Chapter - test plays
 
@@ -985,7 +992,7 @@ A test play when testing parting shots:
 		if the way-to-the-mindslug is a direction:
 			try going the way-to-the-mindslug;
 		otherwise:
-			record failure "Can't find a route to mindslug.";
+			record failure report "Can't find a route to mindslug.";
 			rule fails;
 	now the way-from-the-mindslug is the best route from the location to the retreat location;
 	now every person enclosed by the location is not asleep;
@@ -1371,29 +1378,20 @@ A test play when testing bug-210:
 	assert truth of whether or not the claymore is readied with message "the claymore should be readied";
 	assert truth of whether or not the number of readied weapons enclosed by fafhrd is 1 with message "fafhrd should only have one weapon readied";
 	
-waiting-for-fafhrd-attack is a turn-based event. The first move of bug-210 is waiting-for-fafhrd-attack.
-
-Initial scheduling of waiting-for-fafhrd-attack:
+Initial scheduling of reaction-mindslug-killing:
 	compel the action of fafhrd attacking the player;
 	
-reaction-mindslug-killing is a turn-based event. The next move of waiting-for-fafhrd-attack is reaction-mindslug-killing.
+reaction-mindslug-killing is a repeatable turn-based event. The first move of bug-210 is reaction-mindslug-killing.
 
-Testing a turn-based event of waiting-for-fafhrd-attack:
-	if the player is at-react:
-		now the next move of waiting-for-fafhrd-attack is reaction-mindslug-killing;
-	otherwise if the repeated moves < 100:
-		now the next move of waiting-for-fafhrd-attack is waiting-for-fafhrd-attack;
-	otherwise:
-		assert truth of false with message "Fafhrd didn't attack after 100 turns";
-		now the next move of waiting-for-fafhrd-attack is normal keyboard input;
-		
 Choosing a player reaction when reaction-mindslug-killing is the scheduled event:
 	assert truth of whether or not the mindslug is alive with message "the mindslug should be alive";
 	if the player carries a scroll of death:
 		let the death-scroll be a random carried scroll of death;
 		generate a player action of the action of reading the death-scroll;
+		now the scheduled event is not repeatable;
 
 Testing a turn-based event of reaction-mindslug-killing:
+	if the scheduled event is repeatable, make no decision;
 	assert that the event description includes "The contemplative northern barbarian ends your life, with what seems to be a hint of sadness in his face";
 	assert that the event description includes "As the mindslug dies, you feel its powerful intelligence absorbed into your own body";
 	assert truth of whether or not the mindslug is dead with message "the mindslug should be dead";
@@ -1434,5 +1432,46 @@ Testing a turn-based event of waiting-for-Malygris-attack:
 	assert that the event description includes "defender was asleep";
 	assert truth of whether or not the player is not just-woken with message "the player should not be just-woken anymore";
 	
+	
+Section - Healer of Aite Healing
+
+aite-healing is a test set. aite-healing is isolated.
+
+Scenario when testing aite-healing:
+	now healer of aite is testobject.
+	
+Test play when testing aite-healing:
+	extract the player to the location of healer of aite;
+	Repeat with guy running through people:
+		now the defence of guy is 100;
+	decrease the health of healer of Aite by 3;
+	decrease the health of the player by 3;
+	
+healer-not-healing is a repeatable turn-based event. The first move of aite-healing is healer-not-healing. The maximum repeats of healer-not-healing is 20.
+	
+Before the healer of Aite doing anything when healer-not-healing is the scheduled event:
+	now healer-not-healing is uneventful;
+	
+Testing a turn-based event of healer-not-healing:
+	unless the injury of the healer of Aite is 3:
+		record failure of the scheduled event with message "the healer should still be damaged for 3 health";
+	unless the injury of the player is 3:
+		record failure of the scheduled event with message "the player should still be damaged for 3 health";
+		
+healer-healing-defender is a repeatable turn-based event. The next move of healer-not-healing is healer-healing-defender. The maximum repeats of healer-healing-defender is 20.
+
+Initial scheduling of healer-healing-defender:
+	decrease the health of the tormentor of aite by 3;
+	decrease the health of the defender of aite by 4;
+	
+Testing a turn-based event of healer-healing-defender:
+	if the injury of defender of Aite is less than 4:
+		record success of healer-healing-defender;
+		
+healer-healing-tormentor is a repeatable turn-based event. The next move of healer-healing-defender is healer-healing-tormentor. The maximum repeats of healer-healing-tormentor is 100.
+
+Testing a turn-based event of healer-healing-tormentor:
+	if the injury of tormentor of Aite is less than 3:
+		record success of healer-healing-tormentor.
 	
 Section - Attempting to Maze Someone in Arena of the Gods

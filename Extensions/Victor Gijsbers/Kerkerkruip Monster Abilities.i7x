@@ -694,19 +694,37 @@ Healing is an action applying to nothing. [Obviously, it will apply to someone, 
 A person has a number called the heal power. The heal power of a person is usually 0.
 A person has a number called the heal cooldown. The heal cooldown of a person is usually 3.
 A person has a number called the current heal cooldown. The current heal cooldown of a person is usually 0.
-			
+		
+The greatest injury is a number that varies.
+ 
+To decide what number is the injury of (guy - a person):
+	Let injury be the permanent health of guy minus the health of guy;
+	if injury is less than 0, decide on 0;
+	decide on injury;
+
+[This phrase requires opposition test subject to be set]
+Definition: A person (called guy) is healing-candidate:
+	if guy is not enclosed by the location, no;
+	if guy is opposer, no;
+	if guy is opposition test subject, no;
+	if guy is not alive, no;
+	yes.
+
+Definition: A person is most-injured if the injury of it is the greatest injury.
+
+[this phrase sets two global variables - opposition test subject and greatest injury]
+To find the greatest injury to allies of (guy - a person):
+	Now opposition test subject is guy;
+	Now the greatest injury is 0;
+	repeat with X running through healing-candidate people:
+		if the injury of X is greater than the greatest injury:
+			say "greatest injury: [the greatest injury] [possessive of X] injury: [injury of X].";
+			now the greatest injury is the injury of X;
+	
 First AI action selection rule for a person (called P) (this is the consider healing rule):
 	if the heal power of P is greater than 0 and the current heal cooldown of P is less than 1:
-		let someone needs healing be false;
-		let greatest injury be 0;
-		repeat with X running through alive persons enclosed by the location:
-			unless P opposes X:
-				let injury be permanent health of X minus health of X; 
-				if injury is greater than 0:
-					now someone needs healing is true;
-					if greatest injury is less than injury:
-						now greatest injury is injury;
-		if someone needs healing is true:
+		find the greatest injury to allies of P;
+		if the greatest injury is greater than 0:
 			if greatest injury is greater than heal power of the running AI:
 				now greatest injury is heal power of the running AI; [now m becomes the maximum amount of damage the global attacker can heal]
 			choose a blank Row in the Table of AI Action Options;
@@ -714,20 +732,15 @@ First AI action selection rule for a person (called P) (this is the consider hea
 			now the Action Weight entry is 10 plus greatest injury;
 
 Carry out an actor healing:
-	let m be 0;
-	let chosen one be the actor;
-	repeat with guy running through alive persons enclosed by the location:
-		if the faction of guy does not hate the faction of the actor and guy is not the actor:
-			let n be permanent health of guy minus health of guy; 
-			if n is greater than 0:
-				if m is less than n:
-					now chosen one is guy;
-					now m is n;
-	if m is greater than heal power of the actor:
-		now m is heal power of the actor;
-	say "[The actor] casts a spell of magical healing on [the chosen one], removing [m] points of damage.";
-	heal chosen one for m health;
-	now current heal cooldown of the actor is heal cooldown of the actor. 
+	find the greatest injury to allies of the actor;
+	Let the chosen one be a random most-injured healing-candidate person;
+	say "Begin [The actor] move [act count of the actor] - injury of [the chosen one]: [injury of the chosen one] - current cooldown=[current heal cooldown of the actor].";
+	if the greatest injury is greater than heal power of the actor:
+		now the greatest injury is heal power of the actor;
+	say "[The actor] casts a spell of magical healing on [the chosen one], removing [the greatest injury] points of damage.";
+	heal chosen one for the greatest injury health;
+	now current heal cooldown of the actor is heal cooldown of the actor;
+	say "End [The actor] move [act count of the actor] - injury of [the chosen one]: [injury of the chosen one] - current cooldown=[current heal cooldown of the actor].";
 
 Every turn (this is the reduce heal cooldown of the main actor rule):
 	if the current heal cooldown of the main actor is greater than 0:
