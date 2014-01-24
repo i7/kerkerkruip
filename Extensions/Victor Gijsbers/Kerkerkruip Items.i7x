@@ -3685,7 +3685,7 @@ An aftereffects rule (this is the glass cannon shatters when used to parry rule)
 				say "The glass cannon [bold type]survives the impact[roman type], but barely.";
 				decrease weapon damage bonus of glass cannon by 2.
 
-The special weapon info of the glass cannon is "; makes you easier to hit; halves your health when readied[run paragraph on]".
+The special weapon info of the glass cannon is "; makes you easier to hit; permanently halves your health when readied[run paragraph on]".
 
 Section - Nunchuck (monster)
 
