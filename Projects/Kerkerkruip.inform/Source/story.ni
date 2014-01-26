@@ -1,5 +1,3 @@
-
-
 "Kerkerkruip - Release 9 - Alpha" by Victor Gijsbers
 
 The story headline is "An IF roguelike".
@@ -159,3 +157,10 @@ Dontparsing is an action applying to nothing. Understand "dontparse" as dontpars
 
 Carry out dontparsing:
 	do nothing instead.
+	
+Section - Auto-transcript while testing (not for release)
+
+Last when play begins:
+	try switching the story transcript on;
+	try asking status;
+	try taking inventory.
