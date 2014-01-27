@@ -1308,6 +1308,14 @@ Every turn when at least one placed room is rust-spored (this is the spread rust
 		if player is enclosed by place:
 			say "Clouds of [bold type]rust spores[roman type] drift into the room.".
 
+Every turn when at least three placed room are rust-spored (this is the kill rust spores rule):
+	let n be the number of rust-spored rooms;
+	if a random chance of n in 1000 succeeds:
+		repeat with place running through rust-spored rooms:
+			now place is not rust-spored;
+			if place is the location:
+				say "Suddenly, the [bold type]rust spores blacken and wither[roman type]."
+
 [Every turn when at least one placed room is fungi-killer (this is the kill the rust spores rule):
 	repeat with place running through placed rust-spored fungi-killer rooms:
 		now place is not rust-spored;
