@@ -387,16 +387,18 @@ First every turn when the location is Arena of the Gods:
 Section - Awarding divine power 
 
 An absorption stopping rule (this is the alternative award at the Arena of the Gods rule):
-	if the location is the Arena of the Gods:
-		say "[The patron of the player] receives the [if the level of test subject is greater than 0]soul[otherwise]blood[end if] of [possessive of the challenged god] champion, and [bold type]";
-		if the player is undead and (the permanent health of the player - the health of the player) > 32:
-			say "restores some of your health";
-			heal the player for 32 health;
-		otherwise:
-			say "fully heals you";
-			fully heal the player;
-		say "[roman type]!";
-		rule succeeds.
+	unless the location is Arena of the Gods, make no decision;
+	update the combat status;
+	unless the combat status is peace, make no decision;
+	say "[The patron of the player] receives the [if the level of test subject is greater than 0]soul[otherwise]blood[end if] of [possessive of the challenged god] champion, and [bold type]";
+	if the player is undead and (the permanent health of the player - the health of the player) > 32:
+		say "restores some of your health";
+		heal the player for 32 health;
+	otherwise:
+		say "fully heals you";
+		fully heal the player;
+	say "[roman type]!";
+	rule succeeds.
 
 Section - Getting out of the Arena
 

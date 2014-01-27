@@ -63,8 +63,7 @@ Use MAX_STATIC_DATA of 500000.
 Use MAX_OBJECTS of 1000.
 Use MAX_SYMBOLS of 30000.
 Use MAX_ACTIONS of 250.
-
-
+Use ALLOC_CHUNK_SIZE of 32768.
 
 Section - Score
 
@@ -1476,7 +1475,7 @@ Testing a turn-based event of healer-healing-tormentor:
 		
 Section - Sul's intervention
 
-sul-intervention-test is a test set. [sul-intervention-test is isolated]
+sul-intervention-test is a test set [for issue #227]. [sul-intervention-test is isolated]
 
 Scenario when testing sul-intervention-test:
 	now Temple of Sul is testobject;
@@ -1485,7 +1484,7 @@ Scenario when testing sul-intervention-test:
 	
 Test play when testing sul-intervention-test:
 	extract the player to the location of bodmall;
-	try smiting bodmall;
+	have the player defeat Bodmall;
 	extract the player to the temple of sul;
 	have the player sacrifice a random granted power;
 	extract the player to the location of the swarm of daggers;
@@ -1503,6 +1502,44 @@ Test play when testing sul-intervention-test:
 	assert that the event description does not include "Programming error";
 	[TODO: check frequency of intervention]
 	
+Section - Reward in Arena of the Gods
 
+divine reward is a test set [for issue #228]. [divine reward is isolated.]
+
+scenario when testing divine reward:
+	now Temple of Nomos is testobject;
+	now Bodmall is testobject;
+	now Hall of Gods is testobject;
+	
+Intervention possible when testing divine reward:
+	rule fails;
+	
+Test play when testing divine reward:
+	extract the player to the location of bodmall;
+	have the player defeat Bodmall;
+	extract the player to temple of Nomos;
+	have the player sacrifice a random granted power;
+	assert that the favour of the player with Nomos is 4;
+	extract the player to Hall of Gods;
+	have the player and Israfel fight in Arena of the Gods;
+	now the health of the player is the permanent health of the player - 1;
+	try Israfel Israfel-splitting;
+	transcribe and restart capturing;
+	
+isra-only-killing is a turn-based event. The first move of divine reward is isra-only-killing. The scheduled action of isra-only-killing is the action of smiting isra.
+
+Testing a turn-based event of isra-only-killing:
+	assert truth of whether or not Isra is dead with message "Isra should be dead";
+	assert truth of whether or not Fell is not dead with message "Fell should be alive";
+	assert truth of whether or not the health of the player is less than the permanent health of the player with message "The player should not be healed";
+	assert that the event description does not include "Nomos receives .* and fully heals you";
+	
+fell-also-killing is a turn-based event. The next move of isra-only-killing is fell-also-killing. The scheduled action of fell-also-killing is the action of smiting fell.
+
+Testing a turn-based event of fell-also-killing:
+	assert that the location is Hall of Gods;
+	assert that the event description includes "receives the soul";
+	assert that the health of the player is the permanent health of the player;
+	
 	
 Section - Attempting to Maze Someone in Arena of the Gods
