@@ -210,9 +210,8 @@ The Arena of the Gods is challenged-group-inviting.
 
 The godfight pedestal is an enterable supporter and scenery in the Hall of the Gods. Understand "pedestal" and "empty pedestal" and "platform" as the godfight pedestal.
 
-Godfightname1 is a text that varies.
-Godfightname2 is a text that varies.
-
+Godfight1 is a person that varies.
+Godfight2 is a person that varies.
 
 To decide which text is the random fight text:
 	Let L be a list of objects;
@@ -220,10 +219,10 @@ To decide which text is the random fight text:
 		if (the player does not worship g) and (there is a monster incarnating g):
 			add the monsteravatar of g to L;
 	sort L in random order;
-	now Godfightname1 is the printed name of entry 1 of L;
-	now Godfightname2 is the printed name of entry 2 of L;
+	now Godfight1 is entry 1 of L;
+	now Godfight2 is entry 2 of L;
 	let z be a text;
-	now z is "[Godfightname1] triumphing over [Godfightname2]";
+	now z is "[the Godfight1] triumphing over [the Godfight2]";
 	decide on z.
 	
 Section - Incarnating 
