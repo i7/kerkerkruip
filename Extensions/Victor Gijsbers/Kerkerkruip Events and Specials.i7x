@@ -208,7 +208,7 @@ The staging area of Arena of the Gods is Arena of the Gods.
 The Arena of the Gods is faction-imposing.
 The Arena of the Gods is challenged-group-inviting.
 
-The godfight pedestal is an enterable supporter and scenery in the Hall of the Gods. Understand "pedestal" and "empty pedestal" and "platform" as the godfight pedestal.
+The godfight pedestal is an enterable supporter and scenery in the Hall of the Gods. Understand "pedestal" and "empty pedestal" and "platform" as the godfight pedestal. The printed name of the godfight pedestal is "pedestal". The description of the godfight pedestal is "A smooth marble pedestal, easily large enough to stand on.".
 
 Godfight1 is a person that varies.
 Godfight2 is a person that varies.
