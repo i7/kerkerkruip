@@ -497,14 +497,13 @@ This is the dreadful presence effect rule:
 		repeat with guy running through not hidden active-opposer people in the location:
 			let n be dreadful presence of guy;
 			if n > 0:
-				let m be 10 times n;
-				increase m by 5;
-				decrease m by final mind of main actor;
-				decrease m by level of main actor;
+				let m be 12 times n;
+[				decrease m by final mind of main actor;]
+				decrease m by (3  times level of main actor);
 				if m > 40:
 					now m is 40;
 				if m < 0:
-					now m is 0;
+					now m is 1;
 				if a random chance of m in 100 succeeds:
 					say "[The main actor] cower[s] before [possessive of guy] [bold type]dreadful presence[roman type]!";
 					now combat status is concluding.

@@ -740,16 +740,19 @@ A faculty bonus rule (this is the crown of the god-king bonus rule):
 		increase faculty bonus score by blood magic level of the crown of the god-king.
 
 
-Section - The inquisitor's hood (special)
+Section - The inquisitor's hood (Nomos)
 
 [Gifted by Nomos.]
 
-The inquisitor's hood is a hat. The description of the inquisitor's hood is "Dedication to Nomos requires discipline and concentration. To avoid being distracted by the blows of their enemies and the screams of tortured heretics, the inquisitors wear these magical hoods. This particular one gives you a +15% chance of remaining concentrated when damaged."
+The inquisitor's hood is a hat. The description of the inquisitor's hood is "Dedication to Nomos requires discipline and concentration. To avoid being distracted by the blows of their enemies and the screams of tortured heretics, the inquisitors wear these magical hoods. This particular one gives you a +15% chance of remaining concentrated when damaged. It also increases your dreadful presence by 1."
 
 A remain concentrated rule (this is the inquisitor's hood concentration rule):
 	if global defender wears the inquisitor's hood:
 		increase remain concentrated chance by 15.
 
+A dread rule (this is the inquisitor's hood dread rule):
+	if test subject wears inquisitor's hood:
+		increase dread dummy by 1.
 
 Section - Antler of the Tungausy Shaman (major)
 
@@ -3592,7 +3595,7 @@ The parry-against bonus of a hammer is usually -1.
 A hammer is usually stunning-weapon.
 The special weapon info of a hammer is usually "; stuns opponents[run paragraph on]".
 
-Section - Malleus Maleficarum
+Section - Malleus Maleficarum (Nomos)
 
 The Malleus Maleficarum is a hammer. The indefinite article is "the". The description of the Malleus Maleficarum is "To kill witches and other creatures of chaos, one needs to be accurate and methodical. This hammer is an excellent tool for the task." Understand "hammer" as the Malleus Maleficarum.
 
