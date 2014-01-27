@@ -1402,7 +1402,7 @@ The map-label of Hall of the Raging Banshees is Figure of map_label_Banshees.
 
 Chapter - Tungausy Sweat Lodge 
 
-The Tungausy sweat lodge is a room. "The penetrating scent of dozens of indigenous herbs pervades your nostrils as you enter the Tungausy Sweat Lodge.  A large group of men wearing skull masks encircles you, chanting monotonously in an ancient tongue.  At each of the four cardinal directions, incense burners produce a grey, thick smoke. While you may feel feeble due to the intense smoke within this hall, the incense places your soul in a state of trance, assisting you in the use of certain powers. [italic type](Current tension modifier: +[incensemod] spirit, -[incensemod] on attacks.)[roman type]"
+The Tungausy sweat lodge is a room. "The penetrating scent of herbs pervades your nostrils as you enter the Tungausy Sweat Lodge.  Men wearing skull masks encircle you, chanting monotonously in an ancient tongue.  Incense burners produce a grey, thick smoke. Though you may feel feeble due to the intense smoke, the incense places your soul in a state of trance, assisting you in the use of certain powers. [italic type](Current tension modifier: +[incensemod] spirit, -[incensemod] on attacks.)[roman type]"
 
 The Tungausy Sweat Lodge is connectable.
 The Tungausy Sweat Lodge is not connection-inviting.
