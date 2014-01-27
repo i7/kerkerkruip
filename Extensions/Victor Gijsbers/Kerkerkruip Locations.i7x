@@ -1855,25 +1855,25 @@ The map-label of Entrance to the Arena is Figure of map_label_Arena.
 
 Chapter - Hall of the Gods
 
-Hall of Gods is a room. "A long hall, adorned with great statues of the [number of gods in words] great gods are here, together with pictures of the great battles already fought in this room. The last picture mentions [if Arena of the Gods is conquered]you triumphing over [Chosenname][otherwise][random fight text][end if]. [if Arena of the Gods is not conquered]While this fight may not let you harvest the soul of the opponent, your victory will be hailed upon by your god [italic type](+2 divine favour)[roman type]. If you are willing to fight, stand on the empty pedestal. The faithless will not be tolerated!" 
+Hall of the Gods is a room. "A long hall, adorned with great statues of the [number of gods in words] great gods are here, together with pictures of the great battles already fought in this room. The last picture mentions [if Arena of the Gods is conquered]you triumphing over [Chosenname][otherwise][random fight text][end if]. [if Arena of the Gods is not conquered]While this fight may not let you harvest the soul of the opponent, your victory will be hailed upon by your god [italic type](+2 divine favour)[roman type]. If you are willing to fight, stand on the empty pedestal. The faithless will not be tolerated!" 
 	
-Hall of Gods is connectable.
-Hall of Gods is not connection-inviting.
-Hall of Gods is placeable.
-Hall of Gods is not habitable.
-Hall of Gods is not treasurable.
-Hall of Gods is extra-accepting.
-Hall of Gods is vp-agnostic.
-Hall of Gods is religious.
+Hall of the Gods is connectable.
+Hall of the Gods is not connection-inviting.
+Hall of the Gods is placeable.
+Hall of the Gods is not habitable.
+Hall of the Gods is not treasurable.
+Hall of the Gods is extra-accepting.
+Hall of the Gods is vp-agnostic.
+Hall of the Gods is religious.
 
-The rarity of Hall of Gods is 4. 
-The unlock level of Hall of Gods is 2.
+The rarity of Hall of the Gods is 4. 
+The unlock level of Hall of the Gods is 2.
 
 [See Arena of the Fallen in Kerkerkruip Events and Specials.]
 
 Section - Hall of Gods label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
-The map-label of Hall of Gods is Figure of map_label_Hall_of_Gods.
+The map-label of Hall of the Gods is Figure of map_label_Hall_of_Gods.
 
 
 Chapter - The Arcane Vault

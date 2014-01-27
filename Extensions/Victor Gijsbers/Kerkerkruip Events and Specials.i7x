@@ -208,7 +208,7 @@ The staging area of Arena of the Gods is Arena of the Gods.
 The Arena of the Gods is faction-imposing.
 The Arena of the Gods is challenged-group-inviting.
 
-The godfight pedestal is an enterable supporter and scenery in the Hall of Gods. Understand "pedestal" and "empty pedestal" and "platform" as the godfight pedestal.
+The godfight pedestal is an enterable supporter and scenery in the Hall of the Gods. Understand "pedestal" and "empty pedestal" and "platform" as the godfight pedestal.
 
 Godfightname1 is a text that varies.
 Godfightname2 is a text that varies.
@@ -250,7 +250,7 @@ Instead of entering the godfight pedestal:
 	try ChosenFighting instead.
 
 Check ChosenFighting (this is the how did we find the pedestal rule):
-	if the location is not Hall of Gods:
+	if the location is not Hall of the Gods:
 		take no time;
 		say "ERROR: The player should never be able to ChosenFight here.";
 		stop the action.
@@ -403,7 +403,7 @@ An absorption stopping rule (this is the alternative award at the Arena of the G
 Section - Getting out of the Arena
 
 For arena exit of Arena of the Gods:
-	say "You are [bold type]transported back[roman type] to the Hall of Gods.";
+	say "You are [bold type]transported back[roman type] to the Hall of the Gods.";
 	remove the godfight pedestal from play;
 	now the challenged god is nothing.
 
