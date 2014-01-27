@@ -720,7 +720,8 @@ Intervention possible for someone (called guy) who worships Sul:
 
 To decide whether Sul will protect the global defender:
 	Now the opposition test subject is the global defender;
-	Let the intercessor be a random not opposer person in the location who worships Sul;
+	Now the worship test god is Sul;
+	Let the intercessor be a random worshipper not opposer person in the location;
 	Unless the intercessor is a person, no;
 	Decide on whether or not the intercessor gets intervention;
 	

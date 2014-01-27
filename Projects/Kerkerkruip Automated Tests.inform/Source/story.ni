@@ -1435,7 +1435,7 @@ Testing a turn-based event of waiting-for-Malygris-attack:
 	
 Section - Healer of Aite Healing
 
-aite-healing is a test set. aite-healing is isolated.
+aite-healing is a test set. [aite-healing is isolated.]
 
 Scenario when testing aite-healing:
 	now healer of aite is testobject.
@@ -1473,5 +1473,36 @@ healer-healing-tormentor is a repeatable turn-based event. The next move of heal
 Testing a turn-based event of healer-healing-tormentor:
 	if the injury of tormentor of Aite is less than 3:
 		record success of healer-healing-tormentor.
+		
+Section - Sul's intervention
+
+sul-intervention-test is a test set. [sul-intervention-test is isolated]
+
+Scenario when testing sul-intervention-test:
+	now Temple of Sul is testobject;
+	now Bodmall is testobject;
+	now the swarm of daggers is testobject;
+	
+Test play when testing sul-intervention-test:
+	extract the player to the location of bodmall;
+	try smiting bodmall;
+	extract the player to the temple of sul;
+	have the player sacrifice a random granted power;
+	extract the player to the location of the swarm of daggers;
+	now the melee of the swarm of daggers is 100;
+	transcribe and restart capturing;
+	try the swarm of daggers hitting the player;
+	stop and save event description;
+	assert that the event description includes "swarm of daggers deals";
+	assert that the event description does not include "Programming error";
+	now the melee of the player is 100;
+	transcribe and restart capturing;
+	try the player hitting the swarm of daggers;
+	stop and save event description;
+	assert that the event description includes "You deal";
+	assert that the event description does not include "Programming error";
+	[TODO: check frequency of intervention]
+	
+
 	
 Section - Attempting to Maze Someone in Arena of the Gods
