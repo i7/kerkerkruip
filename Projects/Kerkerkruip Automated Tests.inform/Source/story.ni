@@ -50,7 +50,7 @@ Use maximum capture buffer length of at least 8192.
 Use maximum indexed text length of at least 8192. 
 
 First when play begins (this is the random seed rule):
-	seed the random-number generator with 9.
+	seed the random-number generator with 10.
 
 The random seed rule is listed before the reaper carries a random scythe rule in the when play begins rules.
 
@@ -947,7 +947,7 @@ Testing a turn-based event for chton-arena-cheating:
 	assert that the event description includes ["infamous vampire, who crumbles away into ashes"] "infamous vampire, a small vial";
 	assert that the event description includes "receives the blood";
 	assert that the health of the player is 33;
-	assert that the event description includes "transported back to the Hall of Gods";
+	assert that the event description includes "transported back to the Hall of the Gods";
 	assert that the location of the summoned creature is Hall of Gods;
 	assert that drakul's lifeblood is in Hall of Gods;
 	
@@ -1507,11 +1507,15 @@ scenario when testing divine reward:
 	now Temple of Nomos is testobject;
 	now Bodmall is testobject;
 	now Hall of Gods is testobject;
+	now the glass cannon is testobject;
 	
 Intervention possible when testing divine reward:
 	rule fails;
 	
 Test play when testing divine reward:
+	now the player carries the glass cannon;
+	try readying the glass cannon;
+	now the defence of the player is 100;
 	extract the player to the location of bodmall;
 	have the player defeat Bodmall;
 	extract the player to temple of Nomos;
@@ -1537,6 +1541,7 @@ Testing a turn-based event of fell-also-killing:
 	assert that the location is Hall of Gods;
 	assert that the event description includes "receives the soul";
 	assert that the health of the player is the permanent health of the player;
-	
+	assert truth of whether or not the player carries the glass cannon with message "the glass cannon should still be carried";
+	assert truth of whether or not the glass cannon is readied with message "the glass cannon should still be readied";
 	
 Section - Attempting to Maze Someone in Arena of the Gods
