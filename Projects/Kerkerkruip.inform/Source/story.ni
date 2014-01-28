@@ -8,7 +8,7 @@ Release along with [cover art and] a file of "Gargoyle config file" called "Kerk
 
 
 Section - 3rd Party Inclusions
-	
+
 Include Basic Screen Effects by Emily Short. 
 Include Numbered Disambiguation Choices by Aaron Reed.
 Include Glulx Entry Points by Emily Short.

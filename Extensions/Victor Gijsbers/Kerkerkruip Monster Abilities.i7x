@@ -703,10 +703,9 @@ To decide what number is the injury of (guy - a person):
 
 [This phrase requires opposition test subject to be set]
 Definition: A person (called guy) is healing-candidate:
+	if guy is not alive, no;
 	if guy is not enclosed by the location, no;
 	if guy is opposer, no;
-	if guy is opposition test subject, no;
-	if guy is not alive, no;
 	yes.
 
 Definition: A person is most-injured if the injury of it is the greatest injury.

@@ -1443,7 +1443,6 @@ Test play when testing aite-healing:
 	extract the player to the location of healer of aite;
 	Repeat with guy running through people:
 		now the defence of guy is 100;
-	decrease the health of healer of Aite by 3;
 	decrease the health of the player by 3;
 	
 healer-not-healing is a repeatable turn-based event. The first move of aite-healing is healer-not-healing. The maximum repeats of healer-not-healing is 20.
@@ -1452,26 +1451,24 @@ Before the healer of Aite doing anything when healer-not-healing is the schedule
 	now healer-not-healing is uneventful;
 	
 Testing a turn-based event of healer-not-healing:
-	unless the injury of the healer of Aite is 3:
-		record failure of the scheduled event with message "the healer should still be damaged for 3 health";
 	unless the injury of the player is 3:
 		record failure of the scheduled event with message "the player should still be damaged for 3 health";
 		
 healer-healing-defender is a repeatable turn-based event. The next move of healer-not-healing is healer-healing-defender. The maximum repeats of healer-healing-defender is 20.
 
 Initial scheduling of healer-healing-defender:
-	decrease the health of the tormentor of aite by 3;
+	decrease the health of the healer of aite by 3;
 	decrease the health of the defender of aite by 4;
 	
 Testing a turn-based event of healer-healing-defender:
 	if the injury of defender of Aite is less than 4:
 		record success of healer-healing-defender;
 		
-healer-healing-tormentor is a repeatable turn-based event. The next move of healer-healing-defender is healer-healing-tormentor. The maximum repeats of healer-healing-tormentor is 100.
+healer-healing-self is a repeatable turn-based event. The next move of healer-healing-defender is healer-healing-self. The maximum repeats of healer-healing-self is 100.
 
-Testing a turn-based event of healer-healing-tormentor:
-	if the injury of tormentor of Aite is less than 3:
-		record success of healer-healing-tormentor.
+Testing a turn-based event of healer-healing-self:
+	if the injury of healer of Aite is less than 3:
+		record success of healer-healing-self.
 		
 Section - Sul's intervention
 
