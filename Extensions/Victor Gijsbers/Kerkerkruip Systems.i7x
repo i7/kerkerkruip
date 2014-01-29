@@ -2185,6 +2185,7 @@ Carry out feeding:
 	otherwise:
 		say "You feed [n] health to [the noun], increasing [its-theirs] power[if concentration of the player is greater than 0] (and losing your concentration)[end if]!";
 		increase blood magic level of the noun by 1;
+		reset the blood timer of the noun;
 		now concentration of the player is 0;
 		increase total blood magic by n;
 		if total blood magic is greater than 49:
@@ -2195,10 +2196,31 @@ After printing the name of a thing (called item) while stock-taking:
 		if blood magic level of item is not blood magic maximum of item:
 			say " (can be fed [current blood cost of item] blood)".
 
+Section - Temporary Blood Magic
 
+A thing has a number called the minimum blood timeout. The minimum blood timeout of a thing is usually 1.
+A thing has a number called the maximum blood timeout. The maximum blood timeout of a thing is usually 0.
+A thing has a number called the blood timer. The blood timer of a thing is usually 0.
 
+To decide whether (item - a thing) has temporary blood magic:
+	decide on whether or not the maximum blood timeout of the item is greater than the minimum blood timeout of the item.
 
+Definition: a thing is temporarily blood-enhanced if the blood timer of it is at least 1;
 
+To reset the blood timer of (item - a thing):
+	if the item has temporary blood magic and the item is not temporarily blood-enhanced:
+		now the blood timer of item is a random number from the minimum blood timeout of the item to the maximum blood timeout of the item.
+
+Every turn (this is the count down blood timers rule):
+	Repeat with the item running through temporarily blood-enhanced things:
+		decrease the blood timer of the item by 1;
+		if the blood timer of the item < 1:
+			decrease the blood magic level of the item by 1;
+			if the blood magic level of the item < 1:
+				if the location of the item is the location, say "The blood power of [the item] wears off completely.";
+			otherwise:
+				reset the blood timer of the item;
+				if the location of the item is the location, say "Some of the blood power of [the item] wears off.";
 
 
 

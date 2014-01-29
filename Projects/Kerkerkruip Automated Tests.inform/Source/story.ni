@@ -50,7 +50,7 @@ Use maximum capture buffer length of at least 8192.
 Use maximum indexed text length of at least 8192. 
 
 First when play begins (this is the random seed rule):
-	seed the random-number generator with 10.
+	seed the random-number generator with 11.
 
 The random seed rule is listed before the reaper carries a random scythe rule in the when play begins rules.
 
@@ -755,6 +755,16 @@ To assert that (message - an indexed text) does not include (pattern - an indexe
 		now error_msg is "Regular expression '[pattern]' should not have been found in the text:[paragraph break]'[message]'[line break]";
 		record a failure report of error_msg;
 
+To pause and assert that the event description includes (pattern - an indexed text):
+	stop and save event description;
+	assert that the event description includes pattern;
+	transcribe and restart capturing;
+	
+To pause and assert that the event description does not include (pattern - an indexed text):
+	stop and save event description;
+	assert that the event description does not include pattern;
+	transcribe and restart capturing.
+
 Chapter - test plays
 
 Section - Aite Champions vs Bat
@@ -1088,40 +1098,26 @@ A test play when testing insane drakul:
 	try readying staff of insanity;
 	transcribe and restart capturing;
 	try Drakul concentrating;
-	stop and save event description;
-	assert that the event description includes "Drakul smiles a little wider";
-	transcribe and restart capturing;
+	pause and assert that the event description includes "Drakul smiles a little wider";
 	try Drakul concentrating;
-	stop and save event description;
-	assert that the event description includes "'There is no need to fear me,' Drakul says as he concentrates more deeply\.";
-	transcribe and restart capturing;
+	pause and assert that the event description includes "'There is no need to fear me,' Drakul says as he concentrates more deeply\.";
 	try Drakul concentrating;
-	stop and save event description;
-	assert that the event description includes "Drakul attains the highest state of concentration. 'It feels so good to be alive!'";
-	transcribe and restart capturing;
+	pause and assert that the event description includes "Drakul attains the highest state of concentration. 'It feels so good to be alive!'";
 	test driving drakul insane;
 	now the concentration of drakul is 0;
 	transcribe and restart capturing;
 	try Drakul concentrating;
-	stop and save event description;
-	assert that the event description includes "Drakul smiles a little wider";
-	transcribe and restart capturing;
+	pause and assert that the event description includes "Drakul smiles a little wider";
 	try Drakul concentrating;
-	stop and save event description;
-	assert that the event description includes "'An insane vampire always tells the truth\. And I tell you: You should fear me!' Drakul says as he concentrates more deeply.";
-	transcribe and restart capturing;
+	pause and assert that the event description includes "'An insane vampire always tells the truth\. And I tell you: You should fear me!' Drakul says as he concentrates more deeply.";
 	try Drakul concentrating;
-	stop and save event description;
-	assert that the event description includes "Drakul attains the highest state of concentration\. 'It feels so good to be alive - but I am undead!'";
-	transcribe and restart capturing;
+	pause and assert that the event description includes "Drakul attains the highest state of concentration\. 'It feels so good to be alive - but I am undead!'";
 	test insane drakul statements;
 	now the health of drakul is 1;
 	now the melee of drakul is 100;
 	transcribe and restart capturing;
 	try drakul hitting drakul;
-	stop and save event description;
-	assert that the event description includes "drains his own blood, a small vial";
-	transcribe and restart capturing;
+	pause and assert that the event description includes "drains his own blood, a small vial";
 	
 Driving Drakul insane is a randomized event.
 
@@ -1306,27 +1302,17 @@ Test play when testing controlling pipes:
 	now pipes-open is true;
 	transcribe and restart capturing;
 	try looking;
-	stop and save event description;
-	assert that the event description includes "Several large pipes continuously spew forth vapours into this room\. A big wheel is attached";
-	transcribe and restart capturing;
+	pause and assert that the event description includes "Several large pipes continuously spew forth vapours into this room\. A big wheel is attached";
 	try examining the pipes;
-	stop and save event description;
-	assert that the event description includes " They are currently spewing vapours into the room\.";
-	transcribe and restart capturing;
+	pause and assert that the event description includes " They are currently spewing vapours into the room\.";
 	try examining the wheel;
-	stop and save event description;
-	assert that the event description includes "which are currently open\.";
-	transcribe and restart capturing;
+	pause and assert that the event description includes "which are currently open\.";
 	try turning the wheel;
 	transcribe and restart capturing;
 	try examining the pipes;
-	stop and save event description;
-	assert that the event description includes " They are currently shut off\.";
-	transcribe and restart capturing;
+	pause and assert that the event description includes " They are currently shut off\.";
 	try examining the wheel;
-	stop and save event description;
-	assert that the event description includes "which are currently closed\.";
-	transcribe and restart capturing;	
+	pause and assert that the event description includes "which are currently closed\.";
 
 Section - Sul Champion vs Herm worshipper
 
@@ -1544,4 +1530,64 @@ Testing a turn-based event of fell-also-killing:
 	assert truth of whether or not the player carries the glass cannon with message "the glass cannon should still be carried";
 	assert truth of whether or not the glass cannon is readied with message "the glass cannon should still be readied";
 	
+Section - Temporary Blood Magic from Nomos
+
+temporary Nomos blood magic is a test set. [temporary Nomos blood magic is isolated.]
+
+Scenario when testing temporary Nomos blood magic:
+	now Bodmall is testobject;
+	now the Temple of Nomos is testobject;
+
+The gown-timer is a number that varies;
+	
+Test play when testing temporary Nomos blood magic:
+	extract the player to the location of bodmall;
+	try smiting bodmall;
+	extract the player to the temple of nomos;
+	have the player sacrifice a random granted power;
+	assert truth of whether or not the player carries the gown of the red court with message "the gown of the red court should be carried";
+	assert that the dreadful presence of the player is 0;
+	now the health of the player is 1000;
+	try feeding the gown of the red court;
+	Now the gown-timer is the blood timer of the gown of the red court;
+	assert truth of whether or not the gown-timer is at least 2 and the gown-timer is at most 10 with message "The blood timer of the gown of the red court should be between 2 and 10, but it is [the gown-timer]";
+	transcribe and restart capturing;
+	try examining the gown of the red court;
+	stop and save event description;
+	assert that the event description includes "Wearing the gown gives you two levels of dreadful presence";
+	assert that the dreadful presence of the player is 0;
+	try wearing the gown of the red court;
+	assert that the dreadful presence of the player is 2;
+	transcribe and restart capturing;
+	
+second-gown-feeding is a turn-based event. The first move of temporary Nomos blood magic is second-gown-feeding. The scheduled action of second-gown-feeding is the action of feeding the gown of the red court.
+
+Testing a turn-based event of second-gown-feeding:
+	assert that the blood magic level of the gown of the red court is 2;
+	assert that the dreadful presence of the player is 3;
+	decrease the gown-timer by 1;
+	assert that the blood timer of the gown of the red court is the gown-timer;
+	now the maximum repeats of first-gown-timeout is gown-timer;
+		
+first-gown-timeout is a repeatable turn-based event. The next move of second-gown-feeding is first-gown-timeout.
+
+Testing a turn-based event of first-gown-timeout:
+	if the blood magic level of the gown of the red court > 1:
+		assert truth of whether or not the blood timer of the gown of the red court is (gown-timer - the act count of the player) with message "Blood timer of [blood timer of the gown of the red court] should have been ([gown-timer] - [act count of the player] = [gown-timer - act count of the player])";
+	otherwise:
+		assert that the event description includes "Some of the blood power of the gown of the red court wears off";
+		now gown-timer is the blood timer of the gown of the red court;
+		assert truth of whether or not gown-timer is at least 2 and gown-timer is at most 10 with message "When the blood magic level has fallen to 1, the blood timer of the gown of the red court should be between 2 and 10, but it is [gown-timer]";
+		now the maximum repeats of second-gown-timeout is gown-timer;
+		now first-gown-timeout is not repeatable
+	
+second-gown-timeout is a repeatable turn-based event. The next move of first-gown-timeout is second-gown-timeout.
+
+Testing a turn-based event of second-gown-timeout:
+	assert that the blood timer of the gown of the red court is (gown-timer - the act count of the player);
+	if the blood timer of the gown of the red court is 0:
+		assert that the blood magic level of the gown of the red court is 0;
+		assert that the event description includes "The blood power of the gown of the red court wears off completely";
+		now second-gown-timeout is not repeatable.
+
 Section - Attempting to Maze Someone in Arena of the Gods
