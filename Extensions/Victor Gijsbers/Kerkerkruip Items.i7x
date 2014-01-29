@@ -3604,13 +3604,18 @@ The special weapon info of a hammer is usually "; stuns opponents[run paragraph 
 
 Section - Malleus Maleficarum (Nomos)
 
-The Malleus Maleficarum is a hammer. The indefinite article is "the". The description of the Malleus Maleficarum is "To kill witches and other creatures of chaos, one needs to be accurate and methodical. This hammer is an excellent tool for the task." Understand "hammer" as the Malleus Maleficarum.
+The Malleus Maleficarum is a hammer. The indefinite article is "the". The description of the Malleus Maleficarum is "To kill witches and other creatures of chaos, one needs to be accurate and methodical. This hammer is an excellent tool for the task. [italic type]Feeding [current blood cost of Malleus maleficarum] blood to the Malleus Maleficarum will give it a[if blood magic level of malleus maleficarum is at least 1]n additional[end if] temporary bonus of +1 attack and +1 damage[roman type]." Understand "hammer" as the Malleus Maleficarum.
 
 The weapon attack bonus of Malleus Maleficarum is 1.
 The damage die of Malleus Maleficarum is 5.
 The weapon damage bonus of Malleus Maleficarum is 3.
 
-The special weapon info of the Malleus Maleficarum is "; stuns opponents; does not benefit from tension; grants one level of dreadful presence[run paragraph on]".
+The blood magic cost of Malleus Maleficarum is 1.
+The blood magic maximum of Malleus Maleficarum is 20.
+The minimum blood timeout of Malleus Maleficarum is 4.
+The maximum blood timeout of Malleus Maleficarum is 10.
+
+The special weapon info of the Malleus Maleficarum is "; [if malleus maleficarum is temporarily blood-enhanced]temporary blood bonus of +[blood magic level of malleus maleficarum] attack and +[blood magic level of malleus maleficarum] damage; [end if]stuns opponents; does not benefit from tension; grants one level of dreadful presence[run paragraph on]".
 
 Malleus-tension-dummy is a number that varies.
 
@@ -3627,7 +3632,20 @@ A dread rule (this is the malleus dread rule):
 	if test subject carries Malleus Maleficarum and Malleus Maleficarum is readied:
 		increase dread dummy by 1.
 		
+Attack modifier rule (this is the Malleus blood attack bonus rule):
+	if global attacker weapon is Malleus Maleficarum:
+		let bonus be the blood magic level of Malleus Maleficarum;
+		if the bonus is greater than 0:
+			say " + [bonus] (Malleus Maleficarum blood)[run paragraph on]";
+			increase the attack strength by bonus;
 
+Damage modifier rule (this is the Malleus blood damage bonus rule):
+	if the global attacker weapon is Malleus Maleficarum:
+		let bonus be the blood magic level of Malleus Maleficarum;
+		if the bonus is greater than 0:
+			say " + [bonus] (Malleus Maleficarum blood)[run paragraph on]";
+			increase the attack damage by bonus.
+		
 Chapter - Other weapons
 
 Section - Magical pickaxe (major)

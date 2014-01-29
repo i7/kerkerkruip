@@ -755,6 +755,9 @@ To assert that (message - an indexed text) does not include (pattern - an indexe
 		now error_msg is "Regular expression '[pattern]' should not have been found in the text:[paragraph break]'[message]'[line break]";
 		record a failure report of error_msg;
 
+To assert that (N - a number) is between (A - a number) and (B - a number):
+	assert truth of whether or not N is at least A and N is at most B with message "[N] is not between [A] and [B]";
+	
 To pause and assert that the event description includes (pattern - an indexed text):
 	stop and save event description;
 	assert that the event description includes pattern;
@@ -1536,6 +1539,8 @@ temporary Nomos blood magic is a test set. [temporary Nomos blood magic is isola
 
 Scenario when testing temporary Nomos blood magic:
 	now Bodmall is testobject;
+	now the jumping bomb is testobject;
+	now the swarm of daggers is testobject;
 	now the Temple of Nomos is testobject;
 
 The gown-timer is a number that varies;
@@ -1550,7 +1555,7 @@ Test play when testing temporary Nomos blood magic:
 	now the health of the player is 1000;
 	try feeding the gown of the red court;
 	Now the gown-timer is the blood timer of the gown of the red court;
-	assert truth of whether or not the gown-timer is at least 2 and the gown-timer is at most 10 with message "The blood timer of the gown of the red court should be between 2 and 10, but it is [the gown-timer]";
+	assert that gown-timer is between 2 and 10;
 	transcribe and restart capturing;
 	try examining the gown of the red court;
 	stop and save event description;
@@ -1577,7 +1582,7 @@ Testing a turn-based event of first-gown-timeout:
 	otherwise:
 		assert that the event description includes "Some of the blood power of the gown of the red court wears off";
 		now gown-timer is the blood timer of the gown of the red court;
-		assert truth of whether or not gown-timer is at least 2 and gown-timer is at most 10 with message "When the blood magic level has fallen to 1, the blood timer of the gown of the red court should be between 2 and 10, but it is [gown-timer]";
+		assert that gown-timer is between 2 and 10;
 		now the maximum repeats of second-gown-timeout is gown-timer;
 		now first-gown-timeout is not repeatable
 	
@@ -1589,5 +1594,38 @@ Testing a turn-based event of second-gown-timeout:
 		assert that the blood magic level of the gown of the red court is 0;
 		assert that the event description includes "The blood power of the gown of the red court wears off completely";
 		now second-gown-timeout is not repeatable.
+		
+[This shouldn't need to be repeatable but something weird is going on with turn structure]
+malleus-feeding is a repeatable turn-based event. The next move of second-gown-timeout is malleus-feeding. The scheduled action of malleus-feeding is the action of attacking the swarm of daggers.
 
+Initial scheduling for malleus-feeding:
+	extract the player to the location of the jumping bomb;
+	try smiting the jumping bomb;
+	extract the player to temple of nomos;
+	have the player sacrifice a random granted power;
+	now the health of the player is 1000;
+	now the health of the swarm of daggers is 100;
+	now the melee of the player is 100;
+	extract the player to the location of the swarm of daggers;
+	try readying the malleus maleficarum;
+	assert truth of whether or not the player carries the malleus maleficarum with message "the malleus should be carried";
+	assert truth of whether or not the malleus maleficarum is readied with message "the malleus maleficarum should be readied";
+	transcribe and restart capturing;
+	try examining the malleus maleficarum;
+	pause and assert that the event description includes "Feeding 1 blood to the Malleus Maleficarum will give it a temporary bonus of \+1 attack and \+1 damage.* when dodging against it; stuns opponents";
+	try feeding the malleus maleficarum;
+	transcribe and restart capturing;
+	try examining the malleus maleficarum;
+	pause and assert that the event description includes "Feeding 2 blood to the Malleus Maleficarum will give it an additional temporary bonus of \+1 attack and \+1 damage.* when dodging against it; temporary blood bonus of \+1 attack and \+1 damage";
+	assert that the blood timer of the malleus maleficarum is between 4 and 10;
+	now the maximum repeats of malleus-feeding is the blood timer of the malleus maleficarum.
+	
+Testing a turn-based event of malleus-feeding:
+	if the swarm of daggers is at-react, make no decision;
+	assert that the blood magic level of malleus maleficarum is at least 1;
+	assert that the event description includes " \+ 1 \(Malleus Maleficarum blood\) <^\n>* defence rating";
+	assert that the event description includes " \+ 1 \(Malleus Maleficarum blood\) <^\n>* damage";
+	now malleus-feeding is not repeatable.
+	
+	
 Section - Attempting to Maze Someone in Arena of the Gods
