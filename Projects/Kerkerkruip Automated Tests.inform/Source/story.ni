@@ -50,7 +50,7 @@ Use maximum capture buffer length of at least 8192.
 Use maximum indexed text length of at least 8192. 
 
 First when play begins (this is the random seed rule):
-	seed the random-number generator with 11.
+	seed the random-number generator with 12.
 
 The random seed rule is listed before the reaper carries a random scythe rule in the when play begins rules.
 
@@ -546,7 +546,12 @@ To generate a player action of (the desired action - a stored action):
 The compelled action is a stored action that varies. The compelled action is the action of waiting.
 
 To compel (the desired action - a stored action):
-	say "[bracket]compelling [the desired action][close bracket]";
+	say "[bracket]compelling [the desired action]";
+	Let the guy be the actor part of the desired action;
+	if the guy is asleep:
+		say " and waking up [the guy]";
+		now the guy is not asleep;
+	say "[close bracket][command clarification break]";
 	Now the compelled action is the desired action.
 	
 A last AI action selection rule for an at-Act person (called P) when the compelled action is not the action of waiting:
@@ -1084,7 +1089,7 @@ Testing a turn-based event for mindslug-runner:
 	
 Section - Insane Drakul
 
-insane drakul is a test set.
+insane drakul is an [isolated] test set.
 
 parting shots is a test set.
 
@@ -1096,8 +1101,11 @@ A scenario rule when testing insane drakul:
 A test play when testing insane drakul:
 	try butterflying;
 	try ramboing;
+	now the mind score of the player is 100;  
 	extract the player to the location of drakul;
 	now the player carries staff of insanity;
+	while the size of the staff of insanity is less than medium:
+		increase the size of the staff of insanity;
 	try readying staff of insanity;
 	transcribe and restart capturing;
 	try Drakul concentrating;
@@ -1125,7 +1133,7 @@ A test play when testing insane drakul:
 Driving Drakul insane is a randomized event.
 
 Randomized event testing for driving drakul insane:
-	now the health of the Drakul is 100;
+	now the health of Drakul is 100;
 	transcribe and restart capturing;
 	try the player hitting drakul;
 	stop and save event description;
@@ -1348,7 +1356,7 @@ isra-defended-by-sul is a randomized event;]
 
 Section - Bug 210
 
-bug-210 is a test set. [bug-210 is isolated.]
+bug-210 is an [isolated] test set. 
 
 A scenario rule when testing bug-210:
 	now the mindslug is testobject;
@@ -1367,6 +1375,7 @@ A test play when testing bug-210:
 	assert truth of whether or not the number of readied weapons enclosed by fafhrd is 1 with message "fafhrd should only have one weapon readied";
 	
 Initial scheduling of reaction-mindslug-killing:
+	now the mind score of fafhrd is 100; [protects against mirror confusion]
 	compel the action of fafhrd attacking the player;
 	
 reaction-mindslug-killing is a repeatable turn-based event. The first move of bug-210 is reaction-mindslug-killing.
@@ -1535,7 +1544,7 @@ Testing a turn-based event of fell-also-killing:
 	
 Section - Temporary Blood Magic from Nomos
 
-temporary Nomos blood magic is a test set. [temporary Nomos blood magic is isolated.]
+temporary Nomos blood magic is an [isolated] test set.
 
 Scenario when testing temporary Nomos blood magic:
 	now Bodmall is testobject;
@@ -1544,15 +1553,37 @@ Scenario when testing temporary Nomos blood magic:
 	now the Temple of Nomos is testobject;
 
 The gown-timer is a number that varies;
+
+To decide what number is the chance of (guy - a person) remaining concentrated:
+	let the previous defender be the global defender;
+	now the global defender is guy;
+	now the remain concentrated chance is 0;
+	consider the remain concentrated rules;
+	now the global defender is previous defender;
+	decide on the remain concentrated chance.
 	
 Test play when testing temporary Nomos blood magic:
+	now the health of the player is 1000;
+	now the defence of the player is 100;
 	extract the player to the location of bodmall;
 	try smiting bodmall;
 	extract the player to the temple of nomos;
 	have the player sacrifice a random granted power;
 	assert truth of whether or not the player carries the gown of the red court with message "the gown of the red court should be carried";
+	assert truth of whether or not the player carries the inquisitor's hood with message "the inquisitor's hood should be carried";
+	transcribe and restart capturing;
+	try examining the inquisitor's hood;
+	pause and assert that the event description includes "This particular one gives you a \+15% chance of remaining concentrated when damaged\. It also increases your dreadful presence by 1\. Feeding 5 blood to the hood will temporarily add 5% to the chance of remaining concentrated";
+	let the base chance be the chance of the player remaining concentrated;
+	try wearing the inquisitor's hood;
+	assert that (the chance of the player remaining concentrated - the base chance) is 15;
+	try feeding the inquisitor's hood;
+	transcribe and restart capturing;
+	try examining the inquisitor's hood;
+	pause and assert that the event description includes "This particular one gives you a \+20% chance of remaining concentrated when damaged\. It also increases your dreadful presence by 1\. Feeding 10 blood to the hood will temporarily add 5% to the chance of remaining concentrated";
+	assert that (the chance of the player remaining concentrated - the base chance) is 20;
+	try taking off the inquisitor's hood;
 	assert that the dreadful presence of the player is 0;
-	now the health of the player is 1000;
 	try feeding the gown of the red court;
 	Now the gown-timer is the blood timer of the gown of the red court;
 	assert that gown-timer is between 2 and 10;
@@ -1578,7 +1609,7 @@ first-gown-timeout is a repeatable turn-based event. The next move of second-gow
 
 Testing a turn-based event of first-gown-timeout:
 	if the blood magic level of the gown of the red court > 1:
-		assert truth of whether or not the blood timer of the gown of the red court is (gown-timer - the act count of the player) with message "Blood timer of [blood timer of the gown of the red court] should have been ([gown-timer] - [act count of the player] = [gown-timer - act count of the player])";
+		assert truth of whether or not the blood timer of the gown of the red court is (gown-timer - (the repeated moves + 1)) with message "Blood timer of [blood timer of the gown of the red court] should have been ([gown-timer] - [repeated moves + 1] = [gown-timer - (repeated moves + 1)])";
 	otherwise:
 		assert that the event description includes "Some of the blood power of the gown of the red court wears off";
 		now gown-timer is the blood timer of the gown of the red court;
@@ -1589,7 +1620,7 @@ Testing a turn-based event of first-gown-timeout:
 second-gown-timeout is a repeatable turn-based event. The next move of first-gown-timeout is second-gown-timeout.
 
 Testing a turn-based event of second-gown-timeout:
-	assert that the blood timer of the gown of the red court is (gown-timer - the act count of the player);
+	assert that the blood timer of the gown of the red court is (gown-timer - (the repeated moves + 1));
 	if the blood timer of the gown of the red court is 0:
 		assert that the blood magic level of the gown of the red court is 0;
 		assert that the event description includes "The blood power of the gown of the red court wears off completely";

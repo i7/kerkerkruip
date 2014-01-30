@@ -2212,15 +2212,16 @@ To reset the blood timer of (item - a thing):
 		now the blood timer of item is a random number from the minimum blood timeout of the item to the maximum blood timeout of the item.
 
 Every turn (this is the count down blood timers rule):
-	Repeat with the item running through temporarily blood-enhanced things:
-		decrease the blood timer of the item by 1;
-		if the blood timer of the item < 1:
-			decrease the blood magic level of the item by 1;
-			if the blood magic level of the item < 1:
-				if the location of the item is the location, say "The blood power of [the item] wears off completely.";
-			otherwise:
-				reset the blood timer of the item;
-				if the location of the item is the location, say "Some of the blood power of [the item] wears off.";
+	if (the main actor is the player) and (the current action is not the action of the player dontparsing):
+		Repeat with the item running through temporarily blood-enhanced things:
+			decrease the blood timer of the item by 1;
+			if the blood timer of the item < 1:
+				decrease the blood magic level of the item by 1;
+				if the blood magic level of the item < 1:
+					if the location of the item is the location, say "The blood power of [the item] wears off completely.";
+				otherwise:
+					reset the blood timer of the item;
+					if the location of the item is the location, say "Some of the blood power of [the item] wears off.";
 
 
 
