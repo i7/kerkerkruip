@@ -4978,7 +4978,7 @@ Check linking:
 Check linking:
 	if the noun is not a person:
 		take no time;
-		say "You can only link to persons.".
+		say "You can only link to persons." instead.
 
 Check linking:
 	if the noun is the player:

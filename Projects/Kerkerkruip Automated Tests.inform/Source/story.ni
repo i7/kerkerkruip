@@ -50,7 +50,7 @@ Use maximum capture buffer length of at least 8192.
 Use maximum indexed text length of at least 8192. 
 
 First when play begins (this is the random seed rule):
-	seed the random-number generator with 12.
+	seed the random-number generator with 13.
 
 The random seed rule is listed before the reaper carries a random scythe rule in the when play begins rules.
 
@@ -1658,5 +1658,36 @@ Testing a turn-based event of malleus-feeding:
 	assert that the event description includes " \+ 1 \(Malleus Maleficarum blood\) <^\n>* damage";
 	now malleus-feeding is not repeatable.
 	
+Section - bug 234
+
+bug-234 is an [isolated] test set.
+
+Scenario when testing bug-234:
+	Now Israfel is testobject;
+	Now the swarm of daggers is testobject;
+	Now temple of Herm is testobject;
+	Now Hall of Gods is testobject;
+	
+Test play when testing bug-234:
+	extract the player to the location of Israfel;
+	try smiting israfel;
+	extract the player to the location of the swarm of daggers;
+	try smiting the swarm of daggers;
+	extract the player to temple of herm;
+	have the player sacrifice the power of the daggers;
+	extract the player to Hall of Gods;
+	now the health of the player is 1000;
+	have the player and the healer of Aite fight in Arena of the Gods;
+	[also test bug 235]
+	transcribe and restart capturing;
+	try linking the holy sword;
+	pause and assert that the event description includes "You can only link to persons";
+	assert that the event description does not include "You forge a spiritual link";
+
+still-linking is a repeatable turn-based event. The first move of bug-234 is still-linking. The maximum repeats of still-linking is 20. The scheduled action of still-linking is the action of linking the healer of Aite.
+
+Testing a turn-based event of still-linking:
+	if the healer of Aite is linked to the player:
+		record success of still-linking;
 	
 Section - Attempting to Maze Someone in Arena of the Gods

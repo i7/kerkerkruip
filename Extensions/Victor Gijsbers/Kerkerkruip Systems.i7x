@@ -33,6 +33,8 @@ Section - World sharing
 To decide whether (guy - a thing) and (other guy - a thing) share a world:
 	if guy is not worldsharable or other guy is not worldsharable:
 		decide no;
+	if the location of guy is the location of other guy:
+		decide yes;
 	if guy is denizen and other guy is denizen:
 		decide yes;
 	if guy is a backdrop or other guy is a backdrop:
