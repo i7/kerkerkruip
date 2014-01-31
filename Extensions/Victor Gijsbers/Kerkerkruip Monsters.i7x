@@ -5229,7 +5229,7 @@ Book - Other Monsters
 
 Chapter - Demonic assassin
 
-The demonic assassin is a monster. "A horned figure stalks through the room." Understand "horned" and "figure" as the demonic assassin. The description of the demonic assassin is "A being summoned by Malygris from the depths of Hell, this demon has only one purpose: to stop you from reaching its master.".
+The demonic assassin is a monster. "A horned figure stalks through the room." Understand "horned" and "figure" and "demon" as the demonic assassin. The description of the demonic assassin is "A being summoned by Malygris from the depths of Hell, this demon has only one purpose: to stop you from reaching its master.".
 
 The soul description of the demonic assassin is "a dagger forged in the depths of Gehenna".
 
