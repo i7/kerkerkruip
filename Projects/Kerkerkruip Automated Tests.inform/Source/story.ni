@@ -1695,7 +1695,7 @@ Testing a turn-based event of still-linking:
 	
 Section - Attempting to Maze Someone in Arena of the Gods
 
-challenger-mazing is an isolated test set.
+challenger-mazing is an [isolated] test set.
 
 Scenario when testing challenger-mazing:
 	Now Bodmall is testobject;
