@@ -2041,8 +2041,8 @@ Status attribute rule (this is the howling status rule):
 
 Chapter - Level 2 - Hound
 
-The hound is a monster. "A gigantic hound [one of]snarls[or]growls[at random] [if player is not hidden and the faction of the hound hates the faction of the player]at you [end if]across the room."
-Understand "gigantic" and "huge" and "dog" as the hound.
+The hound is a monster. "A [size of the hound] hound [one of]snarls[or]growls[at random] [if player is not hidden and the faction of the hound hates the faction of the player]at you [end if]across the room."
+Understand "dog" as the hound.
 The level of the hound is 2.
 The ID of the hound is 9.
 The hound is large.
