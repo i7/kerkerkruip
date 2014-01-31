@@ -4157,13 +4157,13 @@ Last when play begins (this is the create shimmering items rule):
 	repeat with guy running through people:
 		unless guy is the player:
 			repeat with item running through things held by guy:
-				if item is a weapon:
+				if item is a weapon and item is not a natural weapon:
 					if item is readied:
 						let new-weapon be a new object cloned from item;
 						now new-weapon is shimmering;
 						now shimmer-owner of new-weapon is guy;
 				if item is clothing:
-					if item is worn:
+					if guy wears item:
 						let new-cloth be a new object cloned from item;
 						now new-cloth is shimmering;
 						now shimmer-owner of new-cloth is guy.

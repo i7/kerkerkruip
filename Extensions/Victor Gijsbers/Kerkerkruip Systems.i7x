@@ -469,7 +469,7 @@ Last every turn when the location is an arena and the player is alive (this is t
 Before arena exit of an arena (called place) (this is the clean up conquered arena rule):
 	Now the place is conquered;
 	repeat with item running through things in the place:
-		unless (the item is the player or the item is a backdrop):
+		unless (the item is the player or the item is a backdrop or the item is shimmering):
 			move item to the challenge site of the place;
 
 For arena exit of an arena (called place) (this is the standard for arena exit rule):
@@ -2222,10 +2222,10 @@ Every turn (this is the count down blood timers rule):
 			if the blood timer of the item < 1:
 				decrease the blood magic level of the item by 1;
 				if the blood magic level of the item < 1:
-					if the location of the item is the location, say "The blood power of [the item] [bold type]wears off completely[roman type].";
+					if the location of the item is the location, say "The blood power of [the item] wears off completely.";
 				otherwise:
 					reset the blood timer of the item;
-					if the location of the item is the location, say "Some of the blood power of [the item] [bold type]wears off[roman type].";
+					if the location of the item is the location, say "Some of the blood power of [the item] wears off.";
 
 
 
