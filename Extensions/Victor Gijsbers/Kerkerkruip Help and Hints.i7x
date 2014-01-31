@@ -117,7 +117,6 @@ To say the hand written list of extensions:
 	[line break]Numbered Disambiguation Choices by Aaron Reed
 	[line break]Glulx Text Effects by Emily Short
 	[line break]the Glimmr suite by Erik Temple
-	[line break]Glulx Status Window Control by Erik Temple
 	[line break]Undo Output Control by Erik Temple
 	[line break]Dynamic Objects by Jesse McGrew
 	[line break]Dynamic Tables by Jesse McGrew

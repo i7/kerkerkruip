@@ -106,13 +106,13 @@ Check looking when the player is dead:
 
 An attack modifier rule (this is the running is risky rule):
 	if the global defender is a runner pc:
-		say " + 4 (you are running)[run paragraph on]";
-		increase the attack strength by 4.
+		say " + 3 (you are running)[run paragraph on]";
+		increase the attack strength by 3.
 
 A damage modifier rule (this is the running is very risky rule):
 	if the global defender is a runner pc:
-		say " + 2 (you are running)[run paragraph on]";
-		increase the attack damage by 2.
+		say " + 1 (you are running)[run paragraph on]";
+		increase the attack damage by 1.
 
 
 

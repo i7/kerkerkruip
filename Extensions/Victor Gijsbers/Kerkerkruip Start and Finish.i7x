@@ -28,6 +28,30 @@ Last after showing the title screen:
 
 
 
+Section - Detecting whether or not the Gargoyle config file has been applied
+
+[ We can detect whether or not the Gargoyle config file has been applied by checking whether one of the text colours has been changed. Warning, user style 2 will be pretty ugly if it has! ]
+
+The Gargoyle config file was used is a truth state variable.
+
+First before showing the title screen (this is the detect whether the config file has been applied rule):
+	detect the gargoyle config file;
+
+To detect the gargoyle config file:
+	(- DetectGargoyleConfigFile(); -).
+
+Include (-
+[ DetectGargoyleConfigFile	res;
+	res = glk_style_measure( gg_mainwin, style_User2, stylehint_TextColor, gg_arguments );
+	if ( res && gg_arguments-->0 == $F400A1 )
+	{
+		(+ the Gargoyle config file was used +) = 1;
+	}
+];
+-).
+
+
+
 Section - The difficulty level
 
 The difficulty is a number that varies.
@@ -137,7 +161,7 @@ Figure opening figure is the file "smallercover.jpg".
 Showing the text title screen is a truth state variable.
 
 Rule for showing the title screen (this is the text title screen rule):
-	close the status window;[in case we've come to the menu with it open]
+	shut down the status-window;[in case we've come to the menu with it open]
 	display the text menu;
 	while 1 is 1:
 		now showing the text title screen is true;
@@ -317,12 +341,15 @@ Table of Options Menu
 title	order	rule
 "[bold type]Interface options"	1	--
 "Information panels: [bold type][if window panels are disabled]Off[otherwise]On[end if]"	2	the toggle info panels rule
-"Clickable menus: [bold type][if menu hyperlinks are enabled]On[otherwise]Off[end if][unless glulx hyperlinks are supported][italic type] (note: not supported in this interpreter)[roman type][end if]"	3	the toggle menu hyperlinks rule
+"[hyperlinks options]"	3	the toggle menu hyperlinks rule
 ""	20	--
 "[bold type]Reset"	21	--
 "[if difficulty is 0 and number of total victories is 0 and setting of highest achieved difficulty is 0 or number of unlocking victories is 0][italic type](Reset the number of victories)[otherwise]Reset the number of victories"	22	the resetting rule
 "[if the Table of Held Achievements is empty][italic type](Reset achievements)[otherwise]Reset achievements"	23	the achievement resetting rule
 "[if number of unlocking victories > 99][italic type](Unlock everything)[otherwise]Unlock everything"	24	the unlock everything rule
+
+To say hyperlinks options:
+	say "Clickable menus: [bold type][if menu hyperlinks are enabled]On[otherwise]Off[end if][italic type][unless glulx hyperlinks are supported] (note: not supported in this interpreter)[otherwise if menu hyperlinks are disabled and enable menu hyperlinks is true] (note: will take affect once you leave this menu)[end if]";
 
 Before showing the title screen:
 	sort the Table of Options Menu in (order) order;
@@ -343,15 +370,38 @@ This is the unlock everything rule:
 This is the toggle info panels rule:
 	toggle window panels;
 
-This is the toggle menu hyperlinks rule:
-	toggle menu hyperlinks;
-	consider the figure out whether to enable hyperlinks rule;
-
-Before displaying (this is the figure out whether to enable hyperlinks rule):
-	if glulx hyperlinks are supported and menu hyperlinks are enabled:
-		now enable menu hyperlinks is true;
+[ Menu hyperlinks: try to detect if we can use them, but also allow the user to change the option ]
+Before showing the title screen (this is the enable menu hyperlinks rule):
+	if glulx hyperlinks are supported:
+		if the number of menu hyperlinks is 0:
+			if the Gargoyle config file was used is true:
+				enable menu hyperlinks;
+			otherwise:
+				disable menu hyperlinks;
+		if menu hyperlinks are enabled:
+			now enable menu hyperlinks is true;
+		otherwise:
+			now enable menu hyperlinks is false;
 	otherwise:
 		now enable menu hyperlinks is false;
+
+[ If we turn on hyperlinks, turn them on immediately. If turning them off, wait until we leave the menu, which the next rule handles ]
+This is the toggle menu hyperlinks rule:
+	if menu hyperlinks are enabled:
+		disable menu hyperlinks;
+	otherwise:
+		enable menu hyperlinks;
+		if glulx hyperlinks are supported:
+			now enable menu hyperlinks is true;
+
+A first glulx input handling rule for a hyperlink-event while displaying (this is the update the enable menu hyperlinks option rule):
+	if the chosen menu option for the link number of the selected hyperlink is -1:
+		if the submenu in row menu depth of the Table of Menu history is the Table of Options Menu:
+			if menu hyperlinks are disabled:
+				now enable menu hyperlinks is false;
+				convert the hyperlink code to the character code;
+				request hyperlink input again;
+				replace player input;
 
 
 Section - Adding menu screen graphics to the Options menu (for use with Kerkerkruip Glimmr Additions by Erik Temple)
@@ -361,7 +411,7 @@ title	order	rule
 "Menu graphics: [bold type][if main menu graphics are enabled]On[otherwise]Off[end if][roman type]"	11	the toggle menu graphics rule
 
 This is the toggle menu graphics rule:
-	toggle main menu graphics, table only;
+	toggle main menu graphics;
 	disable session flag;
 	restart immediately.
 

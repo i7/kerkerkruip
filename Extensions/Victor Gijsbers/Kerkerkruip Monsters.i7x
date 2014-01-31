@@ -1354,6 +1354,10 @@ Lashing is an action applying to nothing. Understand "lash" and "lash out" as la
 
 Lashing is attacklike behaviour.
 
+Before lashing when Nomos counter is greater than 0:
+	take no time;
+	say "You cannot lash out, since that would break the command of Nomos.".
+
 Check lashing:
 	if power of the chains is not granted:
 		take no time;
@@ -1421,7 +1425,7 @@ The description of the jumping bomb is "Connoisseurs consider these jumping ball
 The soul description of the jumping bomb is "a pulsating bundle of glowing embers".
 
 The health of the jumping bomb is 22.
-The melee of the jumping bomb is 1.
+The melee of the jumping bomb is 2.
 The defence of the jumping bomb is 8.
 
 The body score of the jumping bomb is 8.
@@ -2037,8 +2041,8 @@ Status attribute rule (this is the howling status rule):
 
 Chapter - Level 2 - Hound
 
-The hound is a monster. "A gigantic hound [one of]snarls[or]growls[at random] [if player is not hidden and the faction of the hound hates the faction of the player]at you [end if]across the room."
-Understand "gigantic" and "huge" and "dog" as the hound.
+The hound is a monster. "A [size of the hound] hound [one of]snarls[or]growls[at random] [if player is not hidden and the faction of the hound hates the faction of the player]at you [end if]across the room."
+Understand "dog" as the hound.
 The level of the hound is 2.
 The ID of the hound is 9.
 The hound is large.
@@ -2250,7 +2254,7 @@ The angel of compassion carries the sword of light.
 
 Section - Getting weaker
 
-[The demon of rage gets stronger whenever someone dies.]
+[The angel of compassion gets weaker whenever someone dies.]
 
 Angel-of-compassion-stored-location is a room that varies.
 
@@ -4923,19 +4927,24 @@ Chance to win rule (this is the CTW link concentration bonus rule):
 				increase the chance-to-win by 8;
 
 Every turn when a person is linked to the player (this is the unravelling link rule):
-	let guy be linked guy of the player;
-	unless guy and the player share a world:
-		say "Your link with [the guy] [bold type]disappears[roman type].";
-		now nobody is linked to the player;
-	otherwise:
-		let n be 10;
-		let m be (final spirit of the player / 3);
-		if m > 9:
-			now m is 9;
-		decrease n by m;
-		if a random chance of n in 100 succeeds:
-			say "Your link with [the guy] [bold type]unravels[roman type].";
-			now nobody is linked to the player.
+	let x be the number of people enclosed by the location;
+	now x is (x times 2);
+	if (a random chance of 3 in x succeeds): [75% for 2 people; 30% for 5 people; the check is run 1.5 times per player turn]
+		let guy be linked guy of the player;
+		unless guy and the player share a world:
+			say "Your link with [the guy] [bold type]disappears[roman type].";
+			now nobody is linked to the player;
+		otherwise:
+			let n be 10;
+			let m be (final spirit of the player / 3);
+			if m > 9:
+				now m is 9;
+			decrease n by m;
+			say "TEST: [n]";
+			if a random chance of n in 100 succeeds:
+				say "success...";
+				say "Your link with [the guy] [bold type]unravels[roman type].";
+				now nobody is linked to the player.
 
 Section - Power of Israfel
 
@@ -5225,7 +5234,7 @@ Book - Other Monsters
 
 Chapter - Demonic assassin
 
-The demonic assassin is a monster. "A horned figure stalks through the room." Understand "horned" and "figure" as the demonic assassin. The description of the demonic assassin is "A being summoned by Malygris from the depths of Hell, this demon has only one purpose: to stop you from reaching its master.".
+The demonic assassin is a monster. "A horned figure stalks through the room." Understand "horned" and "figure" and "demon" as the demonic assassin. The description of the demonic assassin is "A being summoned by Malygris from the depths of Hell, this demon has only one purpose: to stop you from reaching its master.".
 
 The soul description of the demonic assassin is "a dagger forged in the depths of Gehenna".
 
@@ -5301,7 +5310,7 @@ The Nameless Horror is a horrific horrific-faction monster. "Screams rip from yo
 
 The soul description of the nameless horror is "a turning in on itself of space and time, on which you cannot bear to focus your attention".
 
-A final monster placement rule (this is the Nameless Horror in Eternal Prison rule):
+A dungeon finish rule (this is the Nameless Horror in Eternal Prison rule):
 	 if eternal prison is placed:
 		now Nameless horror is in eternal prison.
 
@@ -5380,11 +5389,7 @@ An AI action selection rule for the at-React Nameless Horror (this is the Namele
 		
 An AI action selection rule for the at-React Nameless Horror (this is the Nameless Horror does not dodge rule):
 	choose row with an Option of the action of the Nameless Horror dodging in the Table of AI Action Options;
-	decrease the Action Weight entry by 1000.		
-
-An AI action selection rule for the Nameless Horror (this is the Nameless Horror considers waiting rule):
-	choose a blank Row in the Table of AI Action Options;
-	now the Option entry is the action of the Nameless Horror waiting;
+	decrease the Action Weight entry by 1000.
 
 Instead of the Nameless Horror waiting:
 	say "[one of]The Nameless Horror emits a maddening shriek[or]Darkness coalesces around the Nameless Horror[or]The world shakes as the Nameless Horror roars in defiance[at random].".

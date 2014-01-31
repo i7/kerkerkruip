@@ -40,73 +40,99 @@ The inventory-header-window is a text-buffer g-window spawned by the inventory-w
 
 
 Section - Border windows
-[These windows will only be visible in interpreters that support graphics, and are not essential to the interface.]
+
+[ These windows will only be visible in interpreters that support graphics, and are not essential to the interface. ]
 
 To place border (win - a graphics g-window):
 	[do nothing.]
 	if glulx graphics is supported:
 		open up win.
 
+[ The status window ]
+
 The border-1-window is a graphics g-window spawned by the main-window. The measurement is 6. The position is g-placeright. The scale method is g-fixed-size.  The back-colour is g-white.
-
-The border-2-window is a graphics g-window spawned by the stats-window. The measurement is 6. The position is g-placebelow. The scale method is g-fixed-size.  The back-colour is g-white.
-
 The border-3-window is a graphics g-window spawned by the stats-window. The measurement is 2. The position is g-placeright. The scale method is g-fixed-size.  The back-colour is g-white.
-
-The border-4-window is a graphics g-window spawned by the powers-window. The measurement is 2. The position is g-placebelow. The scale method is g-fixed-size.  The back-colour is g-white.
-
 The border-5-window is a graphics g-window spawned by the stats-window. The measurement is 1. The position is g-placeabove. The scale method is g-fixed-size.  The back-colour is g-humanist-crimson.
 
+After constructing the stats-window:
+	place border border-3-window;
+	place border border-1-window;
+	[apply justification of center-justified to bold-style;][doesn't work in Gargoyle]
+	open up the stat-header-window;
+	place border border-5-window;
+
+After window-shutting the stats-window:
+	shut down border-1-window;
+
+[ The powers window ]
+
+The border-2-window is a graphics g-window spawned by the stats-window. The measurement is 6. The position is g-placebelow. The scale method is g-fixed-size.  The back-colour is g-white.
+The border-4-window is a graphics g-window spawned by the powers-window. The measurement is 2. The position is g-placebelow. The scale method is g-fixed-size.  The back-colour is g-white.
 The border-6-window is a graphics g-window spawned by the powers-window. The measurement is 1. The position is g-placeabove. The scale method is g-fixed-size.  The back-colour is g-humanist-crimson.
 
+After constructing the powers-window:
+	place border border-2-window;
+	place border border-4-window;
+	[apply justification of center-justified to bold-style;][doesn't work in Gargoyle]
+	open up the powers-header-window;
+	place border border-6-window;
+
+After window-shutting the powers-window:
+	shut down border-2-window;
+
+[ The status window ]
+
 The border-7-window is a graphics g-window spawned by the main-window. The measurement is 1. The position is g-placeabove. The scale method is g-fixed-size.  The back-colour is g-humanist-crimson.
+The border-12-window is a graphics g-window spawned by the main-window. The measurement is 7. The position is g-placeabove. The scale method is g-fixed-size.  The back-colour is g-header-color.
+The border-13-window is a graphics g-window spawned by the main-window. The measurement is 7. The position is g-placeabove. The scale method is g-fixed-size.  The back-colour is g-header-color.
+
+Before constructing the status-window:
+	if the Gargoyle config file was used is true:
+		now the status-window is g-unrequired;
+		place border border-12-window;
+		now the status-window is g-required;
+
+After constructing the status-window:
+	if the Gargoyle config file was used is true:
+		place border border-13-window;
+	place border border-7-window;
+
+After window-shutting the status-window:
+	shut down border-7-window;
+	shut down border-12-window;
+	shut down border-13-window;
+
+[ The inventory window ]
 
 The border-8-window is a graphics g-window spawned by the inventory-window. The measurement is 1. The position is g-placeabove. The scale method is g-fixed-size.  The back-colour is g-humanist-crimson.
-
 The border-9-window is a graphics g-window spawned by the inventory-window. The measurement is 2. The position is g-placeleft. The scale method is g-fixed-size.  The back-colour is g-white.
-
 The border-10-window is a graphics g-window spawned by the inventory-window. The measurement is 6. The position is g-placeright. The scale method is g-fixed-size.  The back-colour is g-white.
-
 The border-11-window is a graphics g-window spawned by the inventory-window. The measurement is 2. The position is g-placebelow. The scale method is g-fixed-size.  The back-colour is g-white.
+
+After constructing the inventory-window:
+	place border border-9-window;
+	place border border-10-window;
+	place border border-11-window;
+	open up the inventory-header-window;
+	place border border-8-window;
+
 
 
 Section - Window styling
 
-The back-colour of the main-window is g-white.[For CocoaGlk]
+The back-colour of the main-window is g-white. [ For CocoaGlk ]
 
-To set styles for the status window:
-	set the background of the status window to colored;
-	set the background color of the status window to g-header-color;
-	set the text color of the status window to g-black;[just for completeness, will be the default in most Glk implementations]
-	[apply bold-weight boldness to bold-style;]
-	apply color (assigned number of g-humanist-crimson) to bold-style for grid windows.
-
-To decide which special-style is normal-style:
-	(- 0 -).
-
-To open the/-- status window:
-	shut down border-7-window;[just in case it's already open]
-	if the status window is already open, rule fails;
-	set styles for the status window;
-	initialize the status window;
-	place border border-7-window.
-
-To close the/-- status window:
-	shut status win;
-	shut down border-7-window.
-
-To shut status win:
-	(- if (gg_statuswin) glk_window_close(gg_statuswin, 0); gg_statuswin = 0; -)
-
-To apply color (N - a number) to (chosen style - a special-style) for grid windows:
-	(- glk_stylehint_set(wintype_TextGrid, {chosen style}, stylehint_TextColor, {N}); -)
+The back-colour of the status-window is g-header-color. 
 
 To set up styles for side windows:
 	apply assigned number of g-humanist-crimson color to special-style-1;
 	apply bold-weight boldness to special-style-1.
 
 
+
 Section - Setting standard text colors
+
+[ Note we don't set user style 2 so that it can be used to detect whether or not the Gargoyle config file has been applied - see Start and Finish ]
 
 To set basic text color to (col - a glulx color value):
 	(- SetBasicTextColor({col}); -)
@@ -116,7 +142,7 @@ Include (-
 	[ SetBasicTextColor col i;
 		if (col == (+g-placenullcol+)) rfalse;
 		col = ColVal(col);
-		for (i = 0: i < style_NUMSTYLES : i++)
+		for (i = 0: i < (style_NUMSTYLES - 1) : i++)
  	 		glk_stylehint_set(wintype_Textbuffer, i, stylehint_TextColor, 0);
 	];
 
@@ -284,45 +310,31 @@ Understand "disable panels" or "disable info panels" or "disable information pan
 Understand "enable panels" or "enable info panels" or "enable information panels" as a mistake ("The information panels are already enabled.") when window panels are enabled.
 
 Carry out toggling window panels:
-	close the status window;
-	toggle window panels;
-	if window panels are enabled:
+	shut down the status-window;
+	if window panels are disabled:
+		enable window panels;
 		open side windows;
-		open the status window;
+		open up the status-window;
 		say "The information panels have been enabled. Type PANELS to disable them again.";
 	otherwise:
+		disable window panels;
 		close side windows;
-		open the status window;
+		open up the status-window;
 		say "The information panels have been disabled. Type PANELS to re-enable them."
 
 	
 To open side windows:
-	if window panels are disabled, rule fails;	
+	if window panels are disabled:
+		rule fails;	
 	set the Gargoyle background color to the color g-white;
-	set up styles for side windows;
+	[set up styles for side windows;]
 	open up the stats-window;
-	place border border-3-window;
-	place border border-1-window;
-	[apply justification of center-justified to bold-style;][doesn't work in Gargoyle]
-	open up the stat-header-window;
-	place border border-5-window;
 	open up the powers-window;
-	place border border-2-window;
-	place border border-4-window;
-	[apply justification of center-justified to bold-style;][doesn't work in Gargoyle]
-	open up the powers-header-window;
-	place border border-6-window;
 	open up the inventory-window;
-	place border border-9-window;
-	place border border-10-window;
-	place border border-11-window;
-	open up the inventory-header-window;
-	place border border-8-window.
 	
 To close side windows:
 	shut down the stats-window;
 	shut down the inventory-window;
-	shut down the border-1-window.
 	
 
 Section - Events
@@ -338,7 +350,7 @@ Last when play begins (this is the check info panel capacity rule):
 
 This is the open up game windows rule:
 	open side windows;
-	open the status window.
+	open up the status-window.
 
 
 
@@ -348,19 +360,19 @@ Section - Menus & windows
 
 First before displaying (this is the fix our windows rule before displaying rule):
 	close side windows;
-	open the status window;
+	open up the status-window;
 
 Last after displaying:
-	close the status window;
+	shut down the status-window;
 	if in-game menu-checking:
 		open side windows;
-		open the status window;
+		open up the status-window;
 
 
 
 [We also need to reset the windows when a game is restored.]
 After restoring from a saved game:
-	close the status window;
+	shut down the status-window;
 	close side windows;
 	consider the check info panel capacity rule.
 

@@ -1,4 +1,6 @@
-"Kerkerkruip - Release 9 - Alpha" by Victor Gijsbers
+"Kerkerkruip" by Victor Gijsbers
+
+["Kerkerkruip - Release 9 - Alpha" by Victor Gijsbers]
 
 The story headline is "An IF roguelike".
 The story genre is "dungeon crawl".
@@ -9,11 +11,11 @@ Release along with [cover art and] a file of "Gargoyle config file" called "Kerk
 
 Section - 3rd Party Inclusions
 
+[Include version 1/131215 of Alternative Startup Rules by Dannii Willis.]
 Include Basic Screen Effects by Emily Short. 
 Include Numbered Disambiguation Choices by Aaron Reed.
 Include Glulx Entry Points by Emily Short.
 Include version 7/130712 of Dynamic Objects by Jesse McGrew.
-Include Glulx Status Window Control by Erik Temple.
 Include Fixed Point Maths by Michael Callaghan.
 Include Questions by Michael Callaghan.
 
@@ -136,7 +138,9 @@ To decide whether (item - an object) acts plural:
 	if the item is plural-named:
 		yes;
 	no.
-	
+
+
+
 Section - Questions fix (in place of Section 4 - Processing menu questions in Questions by Michael Callaghan)
 
 [We need to end the turn after a menu, otherwise no rules run.]
