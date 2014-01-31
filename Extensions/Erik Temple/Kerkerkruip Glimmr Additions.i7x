@@ -673,8 +673,8 @@ Redraw-menu is a truth state variable. Redraw-menu is false.
 					decide on tune.]
 
 For showing the title screen when full graphics support is true and main menu graphics are enabled (this is the graphic title screen rule):
-	close the status window;[needed on restart]
-	close side windows;[needed on restart]
+	shut down the status-window; [needed on restart]
+	close side windows; [needed on restart]
 	open up the graphics-window;
 	open up the graphics-window;
 	if the session flag is enabled:
@@ -686,7 +686,7 @@ For showing the title screen when full graphics support is true and main menu gr
 	set JUMP POINT redraw_menu;
 	now menu-active is true;
 	now redraw-menu is false;
-	close the status window;[for returning from a text menu]
+	shut down the status-window; [for returning from a text menu]
 	close side windows;[probably not necessary here, but added for future-proofing.]
 	open up the graphics-window;[it is possible that it may be closed on return from a menu]
 	fade in the main menu;
@@ -911,7 +911,7 @@ To animate monster cards:
 		activate item;
 	let index be 0;
 	while menu-active is true:
-		close the status window;[on returning from a text menu]
+		shut down the status-window; [on returning from a text menu]
 		close side windows;[probably not necessary, but included for future-proofing]
 		open up the graphics-window;[it is possible that it may be closed on return from a menu]
 		increase index by 1;
@@ -1278,7 +1278,7 @@ Check showing the map:
 
 Carry out showing the map:
 	follow the dungeon extent calculation rules;
-	close the status window;
+	shut down the status-window;
 	close side windows;
 	set the Gargoyle background color to the color g-black;
 	open up the map-window;
@@ -1324,7 +1324,7 @@ Report showing the map:
 	shut down the map-window;
 	set the Gargoyle background color to the color g-white;
 	open side windows;
-	open the status window;
+	open up the status-window;
 	if there is a display-inactive size-sensitive g-element[i.e., if we have had to hide any of the UI elements, the map window was too small]:
 		say "[bracket]The window was too small to show the map comfortably. Try increasing the size of your game window.[close bracket][line break]";
 	say "Map consulted.";

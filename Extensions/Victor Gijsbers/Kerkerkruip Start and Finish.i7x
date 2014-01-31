@@ -373,7 +373,7 @@ This is the toggle info panels rule:
 [ Menu hyperlinks: try to detect if we can use them, but also allow the user to change the option ]
 Before showing the title screen (this is the enable menu hyperlinks rule):
 	if glulx hyperlinks are supported:
-		if menu hyperlinks as a number is 0:
+		if the number of menu hyperlinks is 0:
 			if the Gargoyle config file was used is true:
 				enable menu hyperlinks;
 			otherwise:
@@ -411,7 +411,7 @@ title	order	rule
 "Menu graphics: [bold type][if main menu graphics are enabled]On[otherwise]Off[end if][roman type]"	11	the toggle menu graphics rule
 
 This is the toggle menu graphics rule:
-	toggle main menu graphics, table only;
+	toggle main menu graphics;
 	disable session flag;
 	restart immediately.
 
