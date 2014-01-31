@@ -497,6 +497,8 @@ To have (benefactor - Nomos) intervene on behalf of (supplicant - a person):
 		stop;
 	now the Nomos attacker is the supplicant;
 	now Nomos counter is a random number between 1 and 4;
+	if a random chance of concentration of supplicant in 5 succeeds:
+		now Nomos counter is a random number between 1 and 3;
 	if Nomos counter is 1 or Nomos counter is 2:
 		if a random chance of 1 in 2 succeeds:
 			increase Nomos counter by 1;
