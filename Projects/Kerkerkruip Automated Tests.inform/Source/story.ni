@@ -15,7 +15,7 @@ Include Glulx Entry Points by Emily Short.
 
 Section - Include ATTACK
 
-Include version 5/131204 of Inform ATTACK by Victor Gijsbers.
+Include version 5/140131  of Inform ATTACK by Victor Gijsbers.
 
 Section - Include all the Kerkerkruip extensions
 
