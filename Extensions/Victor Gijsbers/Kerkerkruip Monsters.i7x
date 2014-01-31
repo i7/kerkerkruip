@@ -5380,11 +5380,7 @@ An AI action selection rule for the at-React Nameless Horror (this is the Namele
 		
 An AI action selection rule for the at-React Nameless Horror (this is the Nameless Horror does not dodge rule):
 	choose row with an Option of the action of the Nameless Horror dodging in the Table of AI Action Options;
-	decrease the Action Weight entry by 1000.		
-
-An AI action selection rule for the Nameless Horror (this is the Nameless Horror considers waiting rule):
-	choose a blank Row in the Table of AI Action Options;
-	now the Option entry is the action of the Nameless Horror waiting;
+	decrease the Action Weight entry by 1000.
 
 Instead of the Nameless Horror waiting:
 	say "[one of]The Nameless Horror emits a maddening shriek[or]Darkness coalesces around the Nameless Horror[or]The world shakes as the Nameless Horror roars in defiance[at random].".
