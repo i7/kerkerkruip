@@ -1575,7 +1575,7 @@ To decide whether (guy - a person) can fall:
 The falling-test rules are a rulebook.
 
 A falling-test rule (this is the fliers cannot fall rule):
-	if falling-test-person is flying:
+	if falling-test-person is flying and falling-reason is not 2:
 		rule succeeds.
 
 A falling-test rule (this is the non-moving persons cannot fall rule):
