@@ -2254,7 +2254,7 @@ The angel of compassion carries the sword of light.
 
 Section - Getting weaker
 
-[The demon of rage gets stronger whenever someone dies.]
+[The angel of compassion gets weaker whenever someone dies.]
 
 Angel-of-compassion-stored-location is a room that varies.
 
