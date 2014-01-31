@@ -93,8 +93,9 @@ The reflections are scenery in Hall of Mirrors. Before attacking the reflections
 
 Fragmentation rule (this is the hall of mirrors fragmentation rule):
 	if fragmentation-place is Hall of Mirrors:
-		say "All the mirrors are blown to pieces and fall down like a rain of ice and light. But after a few seconds,  the shards of glass start moving up and reform the mirrors. Not a crack can be seen.";
-		rule succeeds.
+		if player is in Hall of Mirrors:
+			say "All the mirrors are blown to pieces and fall down like a rain of ice and light. But after a few seconds,  the shards of glass start moving up and reform the mirrors. Not a crack can be seen.";
+			rule succeeds.
 
 After printing the name of something while looking when the location is the Hall of Mirrors:
 	say "[run paragraph on]";
