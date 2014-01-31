@@ -4927,19 +4927,24 @@ Chance to win rule (this is the CTW link concentration bonus rule):
 				increase the chance-to-win by 8;
 
 Every turn when a person is linked to the player (this is the unravelling link rule):
-	let guy be linked guy of the player;
-	unless guy and the player share a world:
-		say "Your link with [the guy] [bold type]disappears[roman type].";
-		now nobody is linked to the player;
-	otherwise:
-		let n be 10;
-		let m be (final spirit of the player / 3);
-		if m > 9:
-			now m is 9;
-		decrease n by m;
-		if a random chance of n in 100 succeeds:
-			say "Your link with [the guy] [bold type]unravels[roman type].";
-			now nobody is linked to the player.
+	let x be the number of people enclosed by the location;
+	now x is (x times 2);
+	if (a random chance of 3 in x succeeds): [75% for 2 people; 30% for 5 people; the check is run 1.5 times per player turn]
+		let guy be linked guy of the player;
+		unless guy and the player share a world:
+			say "Your link with [the guy] [bold type]disappears[roman type].";
+			now nobody is linked to the player;
+		otherwise:
+			let n be 10;
+			let m be (final spirit of the player / 3);
+			if m > 9:
+				now m is 9;
+			decrease n by m;
+			say "TEST: [n]";
+			if a random chance of n in 100 succeeds:
+				say "success...";
+				say "Your link with [the guy] [bold type]unravels[roman type].";
+				now nobody is linked to the player.
 
 Section - Power of Israfel
 
