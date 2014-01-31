@@ -50,7 +50,7 @@ Use maximum capture buffer length of at least 8192.
 Use maximum indexed text length of at least 8192. 
 
 First when play begins (this is the random seed rule):
-	seed the random-number generator with 13.
+	seed the random-number generator with 14.
 
 The random seed rule is listed before the reaper carries a random scythe rule in the when play begins rules.
 
@@ -1596,7 +1596,7 @@ Test play when testing sul-intervention-test:
 	
 Section - Reward in Arena of the Gods
 
-divine reward is a test set [for issue #228]. [divine reward is isolated.]
+divine reward is a test set [for issue #228].
 
 scenario when testing divine reward:
 	now Temple of Nomos is testobject;
@@ -1624,6 +1624,9 @@ Test play when testing divine reward:
 	
 isra-only-killing is a turn-based event. The first move of divine reward is isra-only-killing. The scheduled action of isra-only-killing is the action of smiting isra.
 
+initial scheduling of isra-only-killing:
+	now fell is asleep;
+
 Testing a turn-based event of isra-only-killing:
 	assert truth of whether or not Isra is dead with message "Isra should be dead";
 	assert truth of whether or not Fell is not dead with message "Fell should be alive";
@@ -1631,7 +1634,7 @@ Testing a turn-based event of isra-only-killing:
 	assert that the event description does not include "Nomos receives .* and fully heals you";
 	
 fell-also-killing is a turn-based event. The next move of isra-only-killing is fell-also-killing. The scheduled action of fell-also-killing is the action of smiting fell.
-
+	
 Testing a turn-based event of fell-also-killing:
 	assert that the location is Hall of Gods;
 	assert that the event description includes "receives the soul";
@@ -1641,7 +1644,7 @@ Testing a turn-based event of fell-also-killing:
 	
 Section - Temporary Blood Magic from Nomos
 
-temporary Nomos blood magic is an [isolated] test set.
+temporary Nomos blood magic is an test set.
 
 Scenario when testing temporary Nomos blood magic:
 	now Bodmall is testobject;
@@ -1728,6 +1731,7 @@ malleus-feeding is a repeatable turn-based event. The next move of second-gown-t
 
 Initial scheduling for malleus-feeding:
 	extract the player to the location of the jumping bomb;
+	now the nomos counter is 0;
 	try smiting the jumping bomb;
 	extract the player to temple of nomos;
 	have the player sacrifice a random granted power;
@@ -1749,7 +1753,7 @@ Initial scheduling for malleus-feeding:
 	
 Testing a turn-based event of malleus-feeding:
 	if the swarm of daggers is at-react, make no decision;
-	assert that the blood magic level of malleus maleficarum is at least 1;
+	assert that the blood magic level of malleus maleficarum is 0;
 	assert that the event description includes " \+ 1 \(Malleus Maleficarum blood\) <^\n>* defence rating";
 	assert that the event description includes " \+ 1 \(Malleus Maleficarum blood\) <^\n>* damage";
 	now malleus-feeding is not repeatable.
