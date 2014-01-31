@@ -1801,7 +1801,7 @@ Testing a turn-based event of still-linking:
 	
 Section - Attempting to Maze Someone in Arena of the Gods
 
-challenger-mazing is an [isolated] test set.
+challenger-mazing is an test set.
 
 Scenario when testing challenger-mazing:
 	Now Bodmall is testobject;
@@ -1822,6 +1822,7 @@ Test play when testing challenger-mazing:
 	have the player and the healer of aite fight in the arena of the gods;
 	Now Nomos bonus is true;
 	now the melee of the player is 100;
+	now the health of the defender of Aite is 100;
 	transcribe and restart capturing;
 	try hitting the defender of aite;
 	pause and assert that the event description includes "you beat the defender of Aite's defence";
