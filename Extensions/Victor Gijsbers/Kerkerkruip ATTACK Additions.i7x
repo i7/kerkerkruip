@@ -38,6 +38,19 @@ First check snorting (this is the do not snort things on the ground rule):
 		say "You will have to get [the noun] first." instead.
 						
 
+Section - Losing concentration only for worldsharers
+
+This is the new everyone loses concentration when combat status is peace rule:
+	if combat status is peace:
+		if concentration of the player is not 0:
+			now concentration of the player is 0;
+			say "You relax your concentration.";
+		now world test subject is the player;
+		repeat with guy running through alive worldsharer people:
+			now concentration of guy is 0.
+			
+new everyone loses concentration when combat status is peace rule is listed instead of the everyone loses concentration when combat status is peace rule in the combat round rules.
+
 Section - Attacking when the combat status is peace (Nomos, slaves)
 
 [Nomos. Attack slaves.]
