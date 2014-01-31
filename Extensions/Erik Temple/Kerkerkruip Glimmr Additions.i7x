@@ -1824,7 +1824,7 @@ Carry out revealing the entire map:
 	try showing the map.
 
 
-Section - Testing for map assets (for use with Extended Debugging by Erik Temple)
+Section - Testing for graphics assets (for use with Extended Debugging by Erik Temple)
 
 Last when play begins:
 	repeat with place running through rooms:
@@ -1836,6 +1836,9 @@ Last when play begins:
 				say "[place] does not provide the map-label property. Check to be sure that it will be labeled properly on the map.";
 	repeat with villain running through persons:
 		if villain is not the player and villain is not a god:
+			if villain provides the property card and (level of villain > 0 and level of villain < 6):
+				if the card of the villain is Figure of Null:
+					say "[villain] has no card image.";
 			if villain provides the property avatar:
 				if the avatar of villain is Figure of Null:
 					say "[villain] has no avatar image.";
