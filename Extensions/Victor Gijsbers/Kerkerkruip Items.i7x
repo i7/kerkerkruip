@@ -3621,7 +3621,6 @@ The weapon damage bonus of Malleus Maleficarum is 3.
 The blood magic cost of Malleus Maleficarum is 1.
 The blood magic maximum of Malleus Maleficarum is 20.
 
-
 The special weapon info of the Malleus Maleficarum is "; stuns opponents; does not benefit from tension; grants one level of dreadful presence[if blood magic level of Malleus maleficarum is at least 1]; blood bonus of +[blood magic level of malleus maleficarum] attack and +[blood magic level of malleus maleficarum] damage[end if][run paragraph on]".
 
 Malleus-tension-dummy is a number that varies.
@@ -4144,5 +4143,40 @@ Carry out reading Tome of Briar Roses:
 			now guy is asleep.
 
 
+
+Chapter - Shimmering Items
+
+A thing can be shimmering. A thing is usually not shimmering.
+Understand the shimmering property as describing a thing.
+Understand "shimmering" as a thing when the item described is shimmering.
+Understand "not-shimmering" and "not shimmering" and "unshimmering" as a thing when the item described is not shimmering.
+
+A thing has a person called the shimmer-owner. The shimmer-owner of a thing is usually yourself.
+
+Last when play begins (this is the create shimmering items rule):
+	repeat with guy running through people:
+		unless guy is the player:
+			repeat with item running through things held by guy:
+				if item is a weapon and item is not a natural weapon:
+					if item is readied:
+						let new-weapon be a new object cloned from item;
+						now new-weapon is shimmering;
+						now shimmer-owner of new-weapon is guy;
+				if item is clothing:
+					if guy wears item:
+						let new-cloth be a new object cloned from item;
+						now new-cloth is shimmering;
+						now shimmer-owner of new-cloth is guy.
+
+Before printing the name of a shimmering thing:
+	say "shimmering [run paragraph on]".
+	
+Before printing the plural name of a shimmering thing:
+	say "shimmering [run paragraph on]".	
+
+Every turn when the player encloses a shimmering thing:
+	repeat with item running through shimmering things enclosed by the player:
+		say "[The item] suddenly disappears, as if it were only a dream.";
+		remove item from play.
 
 Kerkerkruip Items ends here.

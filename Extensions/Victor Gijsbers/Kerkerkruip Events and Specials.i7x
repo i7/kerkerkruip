@@ -98,7 +98,7 @@ Carry out reviving:
 	take no time;
 	now Challengelijst is {};
 	now Beestlijst is {};
-	now current question is  "Which fallen warrior do you wish to fight? (Please enter a number):";
+	now current question is  "Which fallen warrior do you wish to fight?";
 	repeat with Beest running through all dead not grouper persons:
 		if Beest is not group leading or the group of Beest has been defeated: 
 			repeat with P running through powers granted by Beest:
@@ -111,7 +111,7 @@ Carry out reviving:
 
 
 A menu question rule (this is the FallenFighting rule):
-	if the current question is "Which fallen warrior do you wish to fight? (Please enter a number):":
+	if the current question is "Which fallen warrior do you wish to fight?":
 		let n be the number of entries in Challengelijst;
 		let m be the number understood;
 		if m > 0:
@@ -148,6 +148,18 @@ To challenge (the guy - a person):
 	increase the melee of guy by 3;
 	increase the defence of guy by 3;
 	revive the guy in the location of the guy;
+	return shimmering items to guy;
+	
+To return shimmering items to (guy - a person):
+	repeat with item running through shimmering things:
+		if shimmer-owner of item is guy:
+			move item to guy;
+			if item is a weapon:
+				now item is readied;
+				let stuff be a random natural weapon part of guy;
+				now stuff is not readied;
+			if item is clothing:
+				now guy is wearing item.
 
 The demon boredom is a number which varies. The demon boredom is 0.
 The current dissatisfaction is a number which varies. The current dissatisfaction is 0.
@@ -278,7 +290,7 @@ Carry out ChosenFighting:
 	take no time;
 	now Chosenlijst is {};
 	now Godlijst is {};
-	now current question is  "The Chosen One of which god do you wish to fight? (Please enter a number):";
+	now current question is  "The Chosen One of which god do you wish to fight?";
 	repeat with Godnaam running through gods:
 		unless player worships Godnaam:
 			if an alive off-stage monster incarnates Godnaam:
@@ -289,7 +301,7 @@ Carry out ChosenFighting:
 	ask a closed question, in menu mode;
 		
 A menu question rule (this is the ChosenFighting rule):
-	if the current question is "The Chosen One of which god do you wish to fight? (Please enter a number):":
+	if the current question is "The Chosen One of which god do you wish to fight?":
 		let n be the number of entries in Godlijst;
 		let m be the number understood;
 		if m > 0:

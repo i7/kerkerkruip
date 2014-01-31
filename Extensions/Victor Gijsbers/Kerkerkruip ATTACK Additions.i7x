@@ -182,6 +182,22 @@ The the improper print dead property rule is not listed in any rulebook.
 The proper print dead property rule is not listed in any rulebook.
 
 
+Section - Using question prompts
+
+[A combat round rule when the combat status is peace (this is the not quite business as usual rule):
+	now the main actor is the player;
+	unless closed question mode is true:
+		now the command prompt is the peaceful prompt;
+	carry out the taking a player action activity;
+
+The not quite business as usual rule is listed instead of the business as usual rule in the combat round rules.]
+
+Before taking a player action:
+	if closed question mode is true and menu question mode is true:
+		now the command prompt is the saved question prompt;
+		if repeat-question is true:
+			ask a closed question, in menu mode.
+
 Section - Other stuff
 
 An AI target selection rule (this is the randomise the target result more rule):

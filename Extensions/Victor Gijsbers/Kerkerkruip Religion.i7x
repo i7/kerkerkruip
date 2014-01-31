@@ -160,7 +160,7 @@ Carry out sacrificing:
 	now sacrifice-powers is the number of granted sacrificable powers;
 	now sacrifice-lijst is {};
 	now sacrifice-lijst-2 is {};
-	now current question is "Which power do you want to sacrifice? (Please enter a number.)";
+	now current question is "Which power do you want to sacrifice?";
 	repeat with stuff running through powers:
 		if stuff is granted and stuff is sacrificable:
 			add stuff to sacrifice-lijst-2;
@@ -170,7 +170,7 @@ Carry out sacrificing:
 	ask a closed question, in menu mode.
 
 A menu question rule (this is the sacrifice rule):
-	if the current question is "Which power do you want to sacrifice? (Please enter a number.)":
+	if the current question is "Which power do you want to sacrifice?":
 		let n be number of entries in sacrifice-lijst;
 		let m be the number understood;
 		if m > 0:

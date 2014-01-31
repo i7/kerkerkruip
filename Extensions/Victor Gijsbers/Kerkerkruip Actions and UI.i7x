@@ -698,7 +698,11 @@ Understand "deactivate [something]" as switching off.
 
 Chapter - New standard responses
 
-The description of yourself is "[if greatest power of the player is 0]You have fought many men and quite a few women, but fighting Malygris is something else. Your hairs are raised on end, and your body quivers with fear[otherwise if greatest power of the player is 1]Your victory, though small, has given you a little confidence. Perhaps you can survive long enough to escape this dungeon[otherwise if greatest power of the player is 2]This is going better than expected. Could it be that Malygris is not as invulnerable as you used to believe? You dare not yet hope[otherwise if greatest power of the player is 3]Flushed with success, you go boldly through the dungeon[otherwise if greatest power of the player is 4]History will remember you as one of the greatest of warriors! If you kill Malygris and manage to find a historian, that is[end if].".
+The description of yourself is "[if greatest power of the player is 0]You have fought many men and quite a few women, but fighting Malygris is something else. Your hairs are raised on end, and your body quivers with fear[otherwise if greatest power of the player is 1]Your victory, though small, has given you a little confidence. Perhaps you can survive long enough to escape this dungeon[otherwise if greatest power of the player is 2]This is going better than expected. Could it be that Malygris is not as invulnerable as you used to believe? You dare not yet hope[otherwise if greatest power of the player is 3]Flushed with success, you go boldly through the dungeon[otherwise if greatest power of the player is 4]History will remember you as one of the greatest of warriors! If you kill Malygris and manage to find a historian, that is[end if].[if a random natural weapon part of the player is readied or the player does not enclose a readied weapon][paragraph break][player natural attack].[line break][end if]".
+
+To say player natural attack:
+	let item be a random natural weapon part of the player;
+	say "You currently attack using [item]: 1d[damage die of item] + [weapon damage bonus of the item] damage; [if weapon attack bonus of the item is less than 0]-[otherwise]+[end if][absolute value of weapon attack bonus of the item] attack modifier[if the item is ranged]; ranged[end if][natural parry and dodge info of the item][if the item is silver]; good against undead and demons[end if][special weapon info of the item][roman type]".
 
 When play begins:
 	let X be a random natural weapon part of yourself;

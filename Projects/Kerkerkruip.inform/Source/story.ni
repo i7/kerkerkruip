@@ -1,6 +1,4 @@
-"Kerkerkruip" by Victor Gijsbers
-
-["Kerkerkruip - Release 9 - Alpha" by Victor Gijsbers]
+"Kerkerkruip - Release 9 - Beta 1" by Victor Gijsbers
 
 The story headline is "An IF roguelike".
 The story genre is "dungeon crawl".
@@ -12,10 +10,12 @@ Release along with [cover art and] a file of "Gargoyle config file" called "Kerk
 Section - 3rd Party Inclusions
 
 [Include version 1/131215 of Alternative Startup Rules by Dannii Willis.]
+	
 Include Basic Screen Effects by Emily Short. 
 Include Numbered Disambiguation Choices by Aaron Reed.
 Include Glulx Entry Points by Emily Short.
 Include version 7/130712 of Dynamic Objects by Jesse McGrew.
+Include Glulx Status Window Control by Erik Temple.
 Include Fixed Point Maths by Michael Callaghan.
 Include Questions by Michael Callaghan.
 
@@ -30,6 +30,7 @@ Check https://github.com/i7/extensions if the I7 site only has older versions ]
 Include version 13/131208 of Flexible Windows by Jon Ingold.
 
 [Include Kerkerkruip Glimmr Additions by Erik Temple.]
+
 Include version 1/131214 of Menus by Dannii Willis.
 Include Kerkerkruip Windows by Erik Temple.
 
@@ -40,7 +41,7 @@ Include Kerkerkruip Windows by Erik Temple.
 Section - Include ATTACK
 
 [ Get the latest ATTACK at https://github.com/i7/ATTACK ]
-Include version 5/131204 of Inform ATTACK by Victor Gijsbers.
+Include version 5/140131 of Inform ATTACK by Victor Gijsbers.
 
 
 
@@ -77,9 +78,9 @@ Use MAX_STATIC_DATA of 500000.
 Use MAX_OBJECTS of 1000.
 Use MAX_SYMBOLS of 30000.
 Use MAX_ACTIONS of 250.
-[ needed these to compile with Glimmr):]
 Use MAX_LABELS of 20000.
 Use ALLOC_CHUNK_SIZE of 32768.
+
 
 
 Section - Score
@@ -97,6 +98,7 @@ Generation info is a truth state that varies. Generation info is [true]false.
 
 Section - Testing - Not for release
 
+
 [Last when play begins:
 	move Fafhrd to Entrance Hall;
 	now Fafhrd is asleep.]
@@ -110,7 +112,8 @@ Every turn:
 	otherwise:
 		now Banquet is not current-test-dream;]
 
-[Dream of Sleeping is current-test-dream.]
+[Dream of Tungausy Shaman is current-test-dream.]
+
 
 Section - Flexible Windows relisting
 
@@ -130,6 +133,7 @@ Section - Defining perform syntax (not for use with Glimmr Canvas Animation by E
 To say perform/@ (ph - phrase): (- if (0==0) {ph} -).
 
 
+
 Section - Plurality fix
 
 [Let's see whether this works.]
@@ -141,12 +145,45 @@ To decide whether (item - an object) acts plural:
 
 
 
+
+Chapter - Questions fixes
+
+[This needs a lot of tweaks!]
+
+Section - Rules for menu questions (in place of Section 3 - Rules for menu questions in Questions by Michael Callaghan)
+
+Menu question rules is a rulebook.
+
+The menu question rules have outcomes exit (success), retry (failure), menu (failure) and parse (failure).
+
+The first menu question rule (this is the invalid menu reply rule):
+	if the player's command matches "help" or the player's command matches "menu" or the player's command matches "hint" or the player's command matches "info":
+		if closed question mode is true and menu question mode is true:
+			menu;		
+	if the player's command does not match "[number]":
+		if closed question mode is true:
+			retry;
+		if closed question mode is false:
+			parse;
+	if the number understood is less than 1:
+		retry;
+	if the number understood is greater than the number of entries in the current question menu:
+		retry.
+
+The last menu question rule (this is the default menu question rule):
+	exit.
+
+	
 Section - Questions fix (in place of Section 4 - Processing menu questions in Questions by Michael Callaghan)
 
 [We need to end the turn after a menu, otherwise no rules run.]
 
+Repeat-question is a truth state that varies. Repeat-question is false.
+
 After reading a command when menu question mode is true:
 	follow the menu question rules;
+	if the outcome of the rulebook is the menu outcome:	
+		now repeat-question is true;
 	if the outcome of the rulebook is the exit outcome:
 		deactivate menu question mode;
 		follow the every turn rules;
@@ -156,12 +193,57 @@ After reading a command when menu question mode is true:
 		reject the player's command;
 	if the outcome of the rulebook is the parse outcome:
 		deactivate menu question mode.
-
+		
 Dontparsing is an action applying to nothing. Understand "dontparse" as dontparsing.
 
 Carry out dontparsing:
 	do nothing instead.
+
+Section - Another Questions fix (in place of Section 4 - Phrase used to ask questions in closed mode in Questions by Michael Callaghan)
+
+The saved question prompt is text that varies.
+
+To ask a closed question, in number mode, in menu mode, in yes/no mode, in gender mode or in text mode:
+	now closed question mode is true;
+	now saved prompt is the command prompt;
+	if in number mode:
+		now the command prompt is the closed number prompt;
+		now number question mode is true;
+	if in menu mode:
+		now the command prompt is the closed menu prompt;
+		now menu question mode is true;
+	if in yes/no mode:
+		now the command prompt is the closed yes/no prompt;
+		now yes/no question mode is true;
+	if in gender mode:
+		now the command prompt is the closed gender prompt;
+		now gender question mode is true;
+	if in text mode:
+		now the command prompt is the closed text prompt;
+		now text question mode is true;
+	if current question is not "":
+		say "[current question][line break]";
+	now saved question prompt is the command prompt;
+	if in menu mode:
+		repeat with counter running from 1 to the number of entries in the current question menu:
+			say "[counter] - [entry counter of the current question menu][line break]".
+
+
+
+
+
+
 	
+Section - Numbered Disambiguation Fix
+
+[Not sure if this is necessary, but it won't do any harm!]
+
+Definition: an object (called item) is still-disambiguable if disambiguation ID of item > 0.
+
+Before looking or taking inventory (this is the reset disambiguation IDs rule):
+	repeat with item running through still-disambiguable things:
+		now disambiguation ID of item is 0.
+
 Section - Auto-transcript while testing (not for release)
 
 Last when play begins:
