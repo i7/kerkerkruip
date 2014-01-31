@@ -39,6 +39,8 @@ To decide whether (guy - a thing) and (other guy - a thing) share a world:
 		[avoid testing the location of a backdrop]
 		[this will not work correctly if the backdrop is present somewhere besides the main dungeon]
 		decide no;
+	if location of guy is location of other guy:
+		decide yes;
 	let way be best route from (location of guy) to (location of other guy);
 	if way is a direction:
 		decide yes;
