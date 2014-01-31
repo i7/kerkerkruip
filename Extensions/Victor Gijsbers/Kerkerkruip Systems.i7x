@@ -231,7 +231,7 @@ To do the dig move:
 			now the player is runner;
 			extract the player from combat, giving enemies a chance to hit;
 			now the player is not runner;
-		if the player is alive and the player can move:
+		if the player is mobile:
 			let place be the room noun of location;
 			now retreat location is location;
 			move the player to place;
@@ -1462,6 +1462,7 @@ A first sudden combat reset rule for a person (called the deserter) (this is the
 	repeat with X running through alive persons in the location of the deserter:
 		if X would take a parting shot at the deserter:
 			try X hitting the deserter;
+			if the deserter is not mobile, rule fails;
 		now X does not press the deserter;
 		now the deserter does not press X;
 	

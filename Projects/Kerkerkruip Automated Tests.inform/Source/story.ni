@@ -766,6 +766,11 @@ To assert that (message - an indexed text) does not include (pattern - an indexe
 To assert that (N - a number) is between (A - a number) and (B - a number):
 	assert truth of whether or not N is at least A and N is at most B with message "[N] is not between [A] and [B]";
 	
+To assert that (item - a thing) is in (place - an object):
+	Let msg be indexed text;
+	Now msg is "Expected location of [the item]: [place]. Got: [location of the item].";
+	assert truth of whether or not the location of item is place with message msg;
+	
 To pause and assert that the event description includes (pattern - an indexed text):
 	stop and save event description;
 	assert that the event description includes pattern;
@@ -973,25 +978,46 @@ Testing a turn-based event for chton-arena-cheating:
 	assert that drakul's lifeblood is in Hall of Gods;
 	
 Section - Parting Shots
-	
-parting shots is a test set.
 
-A scenario rule when testing parting shots:
-	now mindslug is testobject;
-	now armadillo is testobject;
-	now cloak of shadows is testobject;
-	
-A detection rule when testing parting shots:
-	say "+ 1000 (for testing purposes)[run paragraph on]";
+Traveling sneakily is a truth state that varies.
+
+A detection rule when traveling sneakily is true:
+	say "+ 100 (traveling sneakily for testing purposes)[run paragraph on]";
 	increase hiding roll by 100;
+
+The way-to-get-back is a direction that varies.
+The way-to-get-there is a direction that varies.
+
+To force the cloak of shadows to work:
+	if the player does not enclose the cloak of shadows, now the player carries the cloak of shadows;
+	try wearing the cloak of shadows;
+	now the player is hidden;
+		
+To travel sneakily to (place - a room):
+	force the cloak of shadows to work;
+	While the location is not the place:
+		now the way-to-get-there is the best route from the location to the place;
+		record a test attempt;
+		if the way-to-get-there is a direction:
+			now traveling sneakily is true;
+			try going the way-to-get-there;
+			now traveling sneakily is false;
+		otherwise:
+			record failure report "Can't find a route to [place].";
+			stop;
+	now the way-to-get-back is the best route from the location to the retreat location;
 	
 To force the cloak of shadows to work:
 	if the player does not enclose the cloak of shadows, now the player carries the cloak of shadows;
 	try wearing the cloak of shadows;
 	now the player is hidden;
 		
-The way-to-the-mindslug is a direction that varies;
-The way-from-the-mindslug is a direction that varies;
+parting shots is an [isolated] test set.
+
+A scenario rule when testing parting shots:
+	now mindslug is testobject;
+	now armadillo is testobject;
+	now cloak of shadows is testobject;
 
 A person has a number called the hitting count.
 
@@ -1006,28 +1032,20 @@ To assert (N - a number) hit/hits by (guy - a person):
 A test play when testing parting shots:
 	force the cloak of shadows to work;
 	try butterflying;
-	While the location is not the location of mindslug:
-		now the way-to-the-mindslug is the best route from the location to the location of mindslug;
-		record a test attempt;
-		if the way-to-the-mindslug is a direction:
-			try going the way-to-the-mindslug;
-		otherwise:
-			record failure report "Can't find a route to mindslug.";
-			rule fails;
-	now the way-from-the-mindslug is the best route from the location to the retreat location;
+	Travel sneakily to the location of the mindslug;
 	now every person enclosed by the location is not asleep;
 	
-mindslug-hiding-check is a turn-based event. The first move of parting shots is mindslug-hiding-check.
+A turn-based event can be hiding-check.
 
-Testing a turn-based event for mindslug-hiding-check:
+mindslug-hiding-check is a hiding-check turn-based event. The first move of parting shots is mindslug-hiding-check.
+
+initial scheduling for a turn-based event (called the current move):
+	now traveling sneakily is whether or not the current move is hiding-check;
+
+Testing a turn-based event for a hiding-check turn-based event:
 	assert that the event description includes ", which must be positive\. You remain hidden\.";
 	
 mindslug-hidden-retreat is a turn-based event. The next move of mindslug-hiding-check is mindslug-hidden-retreat. The scheduled action of mindslug-hidden-retreat is the action of retreating.
-	
-To assert that (item - a thing) is in (place - an object):
-	Let msg be indexed text;
-	Now msg is "Expected location of [the item]: [place]. Got: [location of the item].";
-	assert truth of whether or not the location of item is place with message msg;
 	
 Before taking a player action when mindslug-hidden-retreat is the scheduled event:
 	assert that the mindslug is in the location;
@@ -1046,27 +1064,34 @@ mindslug-hidden-runner is a turn-based event. The next move of mindslug-hidden-r
 
 Before taking a player action when mindslug-hidden-runner is the scheduled event:
 	extract the player to the location of the mindslug;
-	now the scheduled action of mindslug-hidden-runner is the action of going way-from-the-mindslug.
+	now the scheduled action of mindslug-hidden-runner is the action of going way-to-get-back.
 	
 Testing a turn-based event for mindslug-hidden-runner:
 	assert zero hits by mindslug;
 	assert zero hits by fafhrd;
 	assert zero hits by mouser;
 	
-mindslug-reveal is a turn-based event. The next move of mindslug-hidden-runner is mindslug-reveal. The scheduled action of mindslug-reveal is the action of taking off the shadows cloak. ["the action of taking of the cloak of shadows" doesn't parse  ]
+A turn-based event can be hiding-reveal.
+	
+mindslug-reveal is a hiding-reveal turn-based event. The next move of mindslug-hidden-runner is mindslug-reveal.
 
-Before taking a player action when mindslug-reveal is the scheduled event:
-	try going way-to-the-mindslug;
+First when play begins:
+	Repeat with E running through hiding-reveal turn-based events:
+		Now the scheduled action of E is the action of taking off the shadows cloak. ["the action of taking of the cloak of shadows" doesn't parse  ]
+
+Initial scheduling for mindslug-reveal:
+	try going way-to-get-there;
 
 mindslug-retreat is a turn-based event.  The next move of mindslug-reveal is mindslug-retreat. The scheduled action of mindslug-retreat is the action of retreating.
 
-Before taking a player action when mindslug-retreat is the scheduled event:
+Before taking a player action [or reaction] when mindslug-retreat is the scheduled event:
 	now mindslug presses the player;
 	now concentration of mindslug is 0;
 	now fafhrd does not press the player;
 	now concentration of fafhrd is 1;
 	now mouser does not press the player;
 	now concentration of mouser is 0;
+	showme concentration of mouser;
 
 Before taking a player action:
 	Repeat with guy running through people:
@@ -1081,7 +1106,7 @@ Testing a turn-based event for mindslug-retreat:
 mindslug-runner is a turn-based event. The next move of mindslug-retreat is mindslug-runner.
 
 Before taking a player action when mindslug-runner is the scheduled event:
-	now the scheduled action of mindslug-runner is the action of going the way-from-the-mindslug;
+	now the scheduled action of mindslug-runner is the action of going the way-to-get-back;
 	extract the player to the location of the mindslug;
 	
 Testing a turn-based event for mindslug-runner:
@@ -1090,11 +1115,79 @@ Testing a turn-based event for mindslug-runner:
 	assert one hit by fafhrd;
 	assert one hit by mouser;
 	
+Section - Retreating from the Tentacle
+
+[maybe this could be factored into systems?]
+Definition: a direction (called way) is diggable:
+	if way is not cardinal, no;
+	let x be the x way of location;
+	let y be the y way of location;
+	let z be the z way of location;
+	if the space at x by y by z is free:
+		decide on whether or not there is at least one not placed tunnel;
+	otherwise:
+		let item be the room at x by y by z;
+		if item is the room way from the location: 
+			no;
+		otherwise:
+			decide on whether or not item is connectable;
+
+tentacle-grab is an [isolated] test set.
+
+Scenario when testing tentacle-grab:
+	Now the giant tentacle is testobject;
+	now the cloak of shadows is testobject;
+	now the hall of mirrors is bannedobject;
+	Now the pickaxe is testobject;
+	
+A test play when testing tentacle-grab:
+	now the player carries the pickaxe;
+	force the cloak of shadows to work;
+	try butterflying;
+	Travel sneakily to the location of the tentacle;
+	now every person enclosed by the location is not asleep;
+	
+tentacle-hiding-check is a hiding-check turn-based event. The first move of tentacle-grab is tentacle-hiding-check.
+
+Tentacle-reveal is a hiding-reveal turn-based event. The next move of tentacle-hiding-check is tentacle-reveal.
+
+tentacle-retreat is a turn-based event.  The next move of tentacle-reveal is tentacle-retreat. The scheduled action of tentacle-retreat is the action of retreating.
+
+Before taking a player action when testing tentacle-grab:
+	if the player is at-react:
+		now the defence of the player is 100;
+	otherwise:
+		now the defence of the player is 0;
+		
+Initial scheduling for tentacle-retreat:
+	now tentacle presses the player;
+	now concentration of tentacle is 3;
+	now the melee of the tentacle is 50;
+	now the health of the player is 100;
+		
+Testing a turn-based event for tentacle-retreat:
+	assert that the event description includes "bravely run away";
+	assert one hit by tentacle;
+	assert that the player is grappled by the tentacle;
+	assert that the location of the player is the location of the tentacle;
+
+tentacle-dig-retreat is a turn-based event. The next move of tentacle-retreat is tentacle-dig-retreat.
+
+initial scheduling for tentacle-dig-retreat:
+	now the tentacle does not grapple the player;
+	now the scheduled action of tentacle-dig-retreat is the action of digging a random diggable direction.
+	
+Testing a turn-based event for tentacle-dig-retreat:
+	assert that the event description includes "magically create a tunnel";
+	assert one hit by tentacle;
+	assert that the player is grappled by the tentacle;
+	assert that the location of the player is the location of the tentacle;
+	
+
 Section - Insane Drakul
 
 insane drakul is an [isolated] test set.
 
-parting shots is a test set.
 
 A scenario rule when testing insane drakul:
 	Now drakul's lifeblood is bannedobject;
@@ -1224,7 +1317,7 @@ A combat round rule (this is the count combat actions rule):
 	increment the act count of the main actor;
 	
 The count combat actions rule is listed before the dreadful presence effect rule in the combat round rules.
-	
+
 Test play when testing Dreadful-Presence-Test:
 	repeat with guy running through denizen people:
 		now the defence of guy is 100;

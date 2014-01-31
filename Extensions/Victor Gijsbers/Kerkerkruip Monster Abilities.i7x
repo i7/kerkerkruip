@@ -183,6 +183,8 @@ To decide whether (guy - a person) can move:
 		decide no;
 	decide yes.
 
+Definition: A person is mobile if it is conscious and it can move.
+
 Check entering when not the player can move (this is the cannot enter when unable to move rule):
 	take no time;
 	say "You are unable to move." instead.

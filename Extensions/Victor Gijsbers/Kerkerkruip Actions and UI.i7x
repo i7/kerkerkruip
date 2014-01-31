@@ -86,17 +86,14 @@ Last check going (this is the going and retreating in combat rule):
 		if player is retreater:
 			unless forced-action is true:
 				say "[if all enemies are asleep]You sneak back[otherwise]Deciding that discretion is the better part of valour, you bravely run away[end if].";
-			extract the player from combat, giving enemies a chance to hit;
 		otherwise:			
 			unless forced-action is true:
 				say "[if all enemies are asleep]You sneak past your enemies[otherwise]You decide to run past your enemies[end if].";
 			now the player is runner;
-			extract the player from combat, giving enemies a chance to hit;
+		extract the player from combat, giving enemies a chance to hit;
 		now the player is not runner;
 		now the player is not retreater;				
-		if the player is dead:
-			do nothing instead;
-		unless the player can move:
+		if the player is not mobile:
 			do nothing instead;
 		if location is not current-location:
 			do nothing instead. [Something has changed the location, and we shouldn't do the move. For example, being mazed by the minotaur while retreating.]
