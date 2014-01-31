@@ -2222,10 +2222,10 @@ Every turn (this is the count down blood timers rule):
 			if the blood timer of the item < 1:
 				decrease the blood magic level of the item by 1;
 				if the blood magic level of the item < 1:
-					if the location of the item is the location, say "The blood power of [the item] wears off completely.";
+					if the location of the item is the location, say "The blood power of [the item] [bold type]wears off completely[roman type].";
 				otherwise:
 					reset the blood timer of the item;
-					if the location of the item is the location, say "Some of the blood power of [the item] wears off.";
+					if the location of the item is the location, say "Some of the blood power of [the item] [bold type]wears off[roman type].";
 
 
 

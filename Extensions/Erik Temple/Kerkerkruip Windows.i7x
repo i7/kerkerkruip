@@ -142,7 +142,7 @@ Include (-
 	[ SetBasicTextColor col i;
 		if (col == (+g-placenullcol+)) rfalse;
 		col = ColVal(col);
-		for (i = 0: i < (style_NUMSTYLES - 1) : i++)
+		for (i = 0: i < (style_NUMSTYLES) : i++)
  	 		glk_stylehint_set(wintype_Textbuffer, i, stylehint_TextColor, 0);
 	];
 
