@@ -405,6 +405,11 @@ Section - Memory
 
 Remembering is an action out of world. Understand "memory" and "remember" and "r" as remembering.
 
+Check remembering:
+	if the player is not denizen:
+		take no time;
+		say "You're not in the main Kerkerkruip dungeon right now." instead.
+
 Carry out remembering:
 	if the number of unvisited placed placeable not nogo rooms is zero:
 		say "All locations have been explored. [Map description]";
