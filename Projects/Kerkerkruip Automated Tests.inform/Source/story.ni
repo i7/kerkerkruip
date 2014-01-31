@@ -1282,7 +1282,7 @@ A cower-counting turn-based event is usually repeatable.
 When play begins:
 	repeat with E running through cower-counting turn-based events:
 		now the maxed out report of E is "[cower report]";
-		now the maximum repeats of E is 200;
+		now the maximum repeats of E is 300;
 	
 initial scheduling for a cower-counting turn-based event:
 	repeat with guy running through people:
@@ -1473,7 +1473,7 @@ Testing a turn-based event of healer-healing-self:
 		
 Section - Sul's intervention
 
-sul-intervention-test is a test set [for issue #227]. [sul-intervention-test is isolated]
+sul-intervention-test is an [isolated] test set [for issue #227].
 
 Scenario when testing sul-intervention-test:
 	now Temple of Sul is testobject;
@@ -1485,6 +1485,7 @@ Test play when testing sul-intervention-test:
 	have the player defeat Bodmall;
 	extract the player to the temple of sul;
 	have the player sacrifice a random granted power;
+	now the swarm of daggers is not asleep;
 	extract the player to the location of the swarm of daggers;
 	now the melee of the swarm of daggers is 100;
 	transcribe and restart capturing;
@@ -1646,13 +1647,12 @@ Initial scheduling for malleus-feeding:
 	assert truth of whether or not the malleus maleficarum is readied with message "the malleus maleficarum should be readied";
 	transcribe and restart capturing;
 	try examining the malleus maleficarum;
-	pause and assert that the event description includes "Feeding 1 blood to the Malleus Maleficarum will give it a temporary bonus of \+1 attack and \+1 damage.* when dodging against it; stuns opponents";
+	pause and assert that the event description includes "Feeding 1 blood to the Malleus Maleficarum will give it a bonus of \+1 attack and \+1 damage on your next attack.* dreadful presence\.";
 	try feeding the malleus maleficarum;
 	transcribe and restart capturing;
 	try examining the malleus maleficarum;
-	pause and assert that the event description includes "Feeding 2 blood to the Malleus Maleficarum will give it an additional temporary bonus of \+1 attack and \+1 damage.* when dodging against it; temporary blood bonus of \+1 attack and \+1 damage";
-	assert that the blood timer of the malleus maleficarum is between 4 and 10;
-	now the maximum repeats of malleus-feeding is the blood timer of the malleus maleficarum.
+	pause and assert that the event description includes "Feeding 2 blood to the Malleus Maleficarum will give it an additional bonus of \+1 attack and \+1 damage on your next attack.* dreadful presence; blood bonus of \+1 attack and \+1 damage";
+	now the maximum repeats of malleus-feeding is the Nomos counter + 1.
 	
 Testing a turn-based event of malleus-feeding:
 	if the swarm of daggers is at-react, make no decision;
@@ -1694,3 +1694,32 @@ Testing a turn-based event of still-linking:
 		record success of still-linking;
 	
 Section - Attempting to Maze Someone in Arena of the Gods
+
+challenger-mazing is an isolated test set.
+
+Scenario when testing challenger-mazing:
+	Now Bodmall is testobject;
+	Now the minotaur is testobject;
+	Now temple of Herm is testobject;
+	Now Hall of Gods is testobject;
+
+Test play when testing challenger-mazing:
+	extract the player to the location of Bodmall;
+	try smiting Bodmall;
+	extract the player to the temple of Nomos;
+	have the player sacrifice a random granted power;
+	extract the player to the location of the minotaur;
+	try smiting the minotaur;
+	try taking the minotaur's axe;
+	try readying the minotaur's axe;
+	extract the player to hall of gods;
+	have the player and the healer of aite fight in the arena of the gods;
+	Now Nomos bonus is true;
+	now the melee of the player is 100;
+	transcribe and restart capturing;
+	try hitting the defender of aite;
+	pause and assert that the event description includes "you beat the defender of Aite's defence";
+	assert that the event description does not include "You plan on challenging the defender of Aite in the maze";
+	assert that the event description includes "Space and time begin to twist";
+	assert that the location is Arena of the Gods.
+	

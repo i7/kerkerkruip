@@ -512,7 +512,7 @@ Before reading a command (this is the planning notification rule):
 		if the Nomos bonus is true:
 			say "[bold type](Remember: Nomos has told you to attack this turn.)[roman type][line break]".		
 
-First every turn rule (this is the Nomos bonus is false rule):
+Aftereffects rule (this is the Nomos bonus is false rule):
 	if the main actor is the Nomos attacker:
 		deactivate Nomos bonus.
 
