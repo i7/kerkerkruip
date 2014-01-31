@@ -64,6 +64,7 @@ Use MAX_OBJECTS of 1000.
 Use MAX_SYMBOLS of 30000.
 Use MAX_ACTIONS of 250.
 Use ALLOC_CHUNK_SIZE of 32768.
+Use MAX_LABELS of 20000.
 
 Section - Score
 
@@ -197,6 +198,8 @@ Section - No Achievements (in place of Section - Achievements in Kerkerkruip Hel
 Section - No Test Object File (in place of Section - The test object file in Kerkerkruip Tests by Victor Gijsbers)
 
 Section - No Menu Console (in place of Section - The test object console in Kerkerkruip Tests by Victor Gijsbers)
+
+Section - Not Detecting whether or not the Gargoyle config file has been applied (in place of Section - Detecting whether or not the Gargoyle config file has been applied in Kerkerkruip Start and Finish by Victor Gijsbers)
 
 Section 1 - Capture-aware Spacing and Pausing (in place of Section 1 - Spacing and Pausing in Basic Screen Effects by Emily Short)
 
