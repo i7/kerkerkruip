@@ -201,6 +201,8 @@ Section - No Menu Console (in place of Section - The test object console in Kerk
 
 Section - Not Detecting whether or not the Gargoyle config file has been applied (in place of Section - Detecting whether or not the Gargoyle config file has been applied in Kerkerkruip Start and Finish by Victor Gijsbers)
 
+Section - No Question Prompts (in place of Section - Using question prompts in Kerkerkruip ATTACK Additions by Victor Gijsbers)
+
 Section 1 - Capture-aware Spacing and Pausing (in place of Section 1 - Spacing and Pausing in Basic Screen Effects by Emily Short)
 
 Include (-
@@ -742,12 +744,18 @@ To have (guy - a person) defeat (loser - a person):
 	Have an event of guy killing loser;	
 	
 To have the player sacrifice (stuff - a power):
-	now the current question is "Which power do you want to sacrifice? (Please enter a number.)";
+	Let the power-level be the power level of stuff;
+	assert truth of whether or not power-level > 0 with message "power level of sacrificed ability should be positive";
+	Let divinity be a random god who infuses the location;
+	say "[bracket]Sacrificing [stuff] to [divinity][close bracket][command clarification break]";
+	now the current question is "Which power do you want to sacrifice?";
 	now sacrifice-lijst-2 is {};
 	add stuff to sacrifice-lijst-2;
 	now sacrifice-lijst is {"sacrifice", "don't sacrifice"};
 	now the number understood is 1;
-	follow the sacrifice rule.
+	let the previous favour be the favour of the player with divinity;
+	follow the sacrifice rule;
+	assert that the favour of the player with divinity is the previous favour + the power-level;
 
 To assert that (message - an indexed text) includes (pattern - an indexed text):
 	record a test attempt;
@@ -1669,6 +1677,7 @@ Test play when testing temporary Nomos blood magic:
 	try smiting bodmall;
 	extract the player to the temple of nomos;
 	have the player sacrifice a random granted power;
+	assert that the holder of the gown of the red court is the player;
 	assert truth of whether or not the player carries the gown of the red court with message "the gown of the red court should be carried";
 	assert truth of whether or not the player carries the inquisitor's hood with message "the inquisitor's hood should be carried";
 	transcribe and restart capturing;
