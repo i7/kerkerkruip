@@ -5301,7 +5301,7 @@ The Nameless Horror is a horrific horrific-faction monster. "Screams rip from yo
 
 The soul description of the nameless horror is "a turning in on itself of space and time, on which you cannot bear to focus your attention".
 
-A final monster placement rule (this is the Nameless Horror in Eternal Prison rule):
+A dungeon finish rule (this is the Nameless Horror in Eternal Prison rule):
 	 if eternal prison is placed:
 		now Nameless horror is in eternal prison.
 
