@@ -1602,12 +1602,12 @@ Stage 3: Does something in the destination room want to give a custom effect to 
 Stage 4: Otherwise, we apply standard damage in the LAST FALLING RULE.]
 
 Falling rule (this is the move the falling person to the destination rule):
-	extract falling-test-person from combat;
-	move falling-test-person to falling-destination.
+	extract falling-guy from combat;
+	move falling-guy to falling-destination.
 
 Last falling rule (this is the standard deal falling damage rule):
-	unless falling-test-person is flying:
-		unless falling-test-person is ethereal:
+	unless falling-guy is flying:
+		unless falling-guy is ethereal:
 			let m be a random number between 2 and 5;
 			if falling-reason is 2:
 				decrease m by 1; [small bonus for voluntary jumping]
@@ -1617,7 +1617,7 @@ Last falling rule (this is the standard deal falling damage rule):
 			decrease m by pdr;
 			if m is less than 0:
 				now m is 0;
-			if falling-test-person is the player:
+			if falling-guy is the player:
 				say "With a loud smack, you land in [the location], [if m is 0]receiving no damage[otherwise]receiving [bold type][m] damage[roman type][end if].";
 				decrease health of player by m;
 				now concentration of player is 0;
@@ -1625,10 +1625,10 @@ Last falling rule (this is the standard deal falling damage rule):
 				if player is dead:
 					end the story saying "Your death was not particularly heroic.";
 			otherwise:
-				decrease the health of the falling-test-person by m;
-				now concentration of the falling-test-person is 0;
-				if the location of falling-test-person is the location of the player and m is not 0:
-					say "[The falling-test-person] receives [m] damage from the fall.";
+				decrease the health of the falling-guy by m;
+				now concentration of the falling-guy is 0;
+				if the location of falling-guy is the location of the player and m is not 0:
+					say "[The falling-guy] receives [m] damage from the fall.";
 
 
 Chapter - Player forms

@@ -881,6 +881,11 @@ Check direction-jumping down in Vast Staircase:
 		take no time;
 		say "Right now, you cannot move." instead.
 
+Check direction-jumping down in Vast Staircase:
+	unless the player can fall:
+		take no time;
+		say "You currently cannot fall." instead.
+
 Carry out direction-jumping down in Vast Staircase:
 	say "You jump down the vast staircase.";
 	have a falling event with actor falling in Vast Staircase for reason 2;
