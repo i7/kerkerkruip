@@ -1354,6 +1354,10 @@ Lashing is an action applying to nothing. Understand "lash" and "lash out" as la
 
 Lashing is attacklike behaviour.
 
+Before lashing when Nomos counter is greater than 0:
+	take no time;
+	say "You cannot lash out, since that would break the command of Nomos.".
+
 Check lashing:
 	if power of the chains is not granted:
 		take no time;
