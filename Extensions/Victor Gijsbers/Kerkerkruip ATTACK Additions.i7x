@@ -194,7 +194,9 @@ The not quite business as usual rule is listed instead of the business as usual 
 
 Before taking a player action:
 	if closed question mode is true and menu question mode is true:
-		now the command prompt is the saved question prompt.
+		now the command prompt is the saved question prompt;
+		if repeat-question is true:
+			ask a closed question, in menu mode.
 
 Section - Other stuff
 

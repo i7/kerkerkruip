@@ -98,7 +98,7 @@ Carry out reviving:
 	take no time;
 	now Challengelijst is {};
 	now Beestlijst is {};
-	now current question is  "Which fallen warrior do you wish to fight? (Please enter a number):";
+	now current question is  "Which fallen warrior do you wish to fight?";
 	repeat with Beest running through all dead not grouper persons:
 		if Beest is not group leading or the group of Beest has been defeated: 
 			repeat with P running through powers granted by Beest:
@@ -111,7 +111,7 @@ Carry out reviving:
 
 
 A menu question rule (this is the FallenFighting rule):
-	if the current question is "Which fallen warrior do you wish to fight? (Please enter a number):":
+	if the current question is "Which fallen warrior do you wish to fight?":
 		let n be the number of entries in Challengelijst;
 		let m be the number understood;
 		if m > 0:
@@ -290,7 +290,7 @@ Carry out ChosenFighting:
 	take no time;
 	now Chosenlijst is {};
 	now Godlijst is {};
-	now current question is  "The Chosen One of which god do you wish to fight? (Please enter a number):";
+	now current question is  "The Chosen One of which god do you wish to fight?";
 	repeat with Godnaam running through gods:
 		unless player worships Godnaam:
 			if an alive off-stage monster incarnates Godnaam:
@@ -301,7 +301,7 @@ Carry out ChosenFighting:
 	ask a closed question, in menu mode;
 		
 A menu question rule (this is the ChosenFighting rule):
-	if the current question is "The Chosen One of which god do you wish to fight? (Please enter a number):":
+	if the current question is "The Chosen One of which god do you wish to fight?":
 		let n be the number of entries in Godlijst;
 		let m be the number understood;
 		if m > 0:
