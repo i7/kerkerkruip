@@ -986,7 +986,7 @@ An AI action selection rule for an at-Act person (called P) (this is the robe of
 
 Section - Gown of the red court (Nomos)
 
-The gown of the red court is a shirt. The gown of the red court is cloth. The description of the gown of the red court is "Citizens of Montenoir who have been accused of a capital offence are always judged by a special court comprised of their female relatives. Foreigners often scoff at this system, assuming that nobody is ever convicted. They do not understand that the love of law is greater than the love of family, and that the sight of one's own mother or wife in the blood red judge's gown will make even the most hardened criminals tremble. [italic type](Wearing the gown gives you [the gown's current bonus in words] level[s] of dreadful presence. You can feed the gown blood to temporarily increase the bonus.)[roman type]".
+The gown of the red court is a shirt. The gown of the red court is cloth. The description of the gown of the red court is "Citizens of Montenoir who have been accused of a capital offence are always judged by a special court comprised of their female relatives. Foreigners often scoff at this system, assuming that nobody is ever convicted. They do not understand that the love of law is greater than the love of family, and that the sight of one's own mother or wife in the blood red judge's gown will make even the most hardened criminals tremble. [italic type](Wearing the gown gives you [the gown's current bonus in words] level[s] of dreadful presence. You can feed the gown [current blood cost of the gown of the red court] blood to temporarily increase the bonus.)[roman type]".
 
 To decide which number is the/-- gown's current bonus:
 	decide on 1 + the blood magic level of the gown of the red court;
