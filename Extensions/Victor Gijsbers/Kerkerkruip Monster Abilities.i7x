@@ -144,6 +144,17 @@ An AI action selection rule for a person (called P) when the chosen weapon is no
 	choose row with an Option of the action of P readying the chosen weapon in the Table of AI Action Options;
 	decrease the Action Weight entry by 1000.
 
+An AI action selection rule for a person (called P) when the chosen weapon is not readied (this is the new don't attack or concentrate with an unreadied weapon rule):
+	if P is weapon user:
+		if P is at-Act:
+			choose row with an Option of the action of P attacking the chosen target in the Table of AI Action Options;
+			now the Action Weight entry is -1000;
+		choose row with an Option of the action of P concentrating in the Table of AI Action Options;
+		now the Action Weight entry is -100;
+
+The new don't attack or concentrate with an unreadied weapon rule is listed instead of the don't attack or concentrate with an unreadied weapon rule in the AI action selection rules.
+
+
 Chapter - Thrower
 
 [Throwers can throw. Currently used for grenades.]

@@ -139,6 +139,19 @@ To decide which number is a roll of the dice:
 9: 2/28
 10: 1/28]
 
+Section - Adjust AI
+
+[Since there's always a small chance of rolling 20, attacking is never useless.]
+
+An AI action selection rule for an at-Act person (called P) (this is the new standard attack select rule):
+	choose row with an Option of the action of the main actor attacking the chosen target in the Table of AI Action Options;
+	if the normalised chance-to-win is 0:
+		now the Action Weight entry is -20;
+	decrease the Action Weight entry by 5;
+	increase the Action Weight entry by the normalised chance-to-win;
+
+The new standard attack select rule is listed instead of the standard attack select rule in the AI action selection rules.
+
 
 [ Kerkerkruip has no reloadable weapons ]
 Chapter - No reloadable weapons (in place of Chapter - Reloadable Weapons (Standard Plug-in) in Inform ATTACK by Victor Gijsbers)
