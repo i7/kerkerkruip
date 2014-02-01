@@ -28,6 +28,51 @@ Last after showing the title screen:
 
 
 
+Section - Detecting CocoaGlk
+
+[ The code in the next section, for detecting the Gargoyle configuration file, runs into Inform bug 1189 under CocoaGlk.  Therefore, we need to detect CocoaGlk before attempting that test.  This code is base on https://github.com/i7/i7grip/blob/ae7df20ffcf8c1746c478a2a7a5a8fa0aecd8e5e/Low-Level%20Operations.i7x. ]
+
+CocoaGlk detected is a truth state that varies.  CocoaGlk detected is false.
+
+Include (-
+	Array cocoaKeyWindowCheck --> 1;
+	[ detectCocoaGlk
+		root nonroot firstWindow secondWindow iosystem iorock;
+		@getiosys iosystem iorock;
+		@setiosys 2 0;
+		! Detect CocoaGlk via Inform bug 819, without falling afoul of Inform bug 961.
+		(+ CocoaGlk detected +) = false;
+		root = glk_window_get_root();
+		if (root) {
+			for (nonroot = 0: nonroot = glk_window_iterate(nonroot, 0):) {
+				if (nonroot ~= root) {
+					break;
+				}
+			}
+			if (nonroot) {
+				firstWindow = glk_window_open(nonroot, winmethod_Below | winmethod_Proportional, 50, wintype_TextBuffer, 0);
+			}
+			! Otherwise we're in a catch-22: if we check whether we're running under CocoaGlk, we might trip a CocoaGlk bug (961) that will make the whole story invisible.  However, we know that Kerkerkruip under CocoaGlk should never leave the interpreter in a state with only one open window, so we carry on, effectively assuming that CocoaGlk is not present.
+		} else {
+			firstWindow = glk_window_open(0, 0, 0, wintype_TextBuffer, 0);
+		}
+		if (firstWindow) {
+			secondWindow = glk_window_open(firstWindow, winmethod_Below | winmethod_Proportional, 50, wintype_TextBuffer, 0);
+			if (secondWindow) {
+				glk_window_get_arrangement(glk_window_get_parent(firstWindow), 0, 0, cocoaKeyWindowCheck);
+				(+ CocoaGlk detected +) = (cocoaKeyWindowCheck-->0) == firstWindow;
+				glk_window_close(secondWindow, 0);
+			}
+			glk_window_close(firstWindow, 0);
+		}
+		@setiosys iosystem iorock;
+		rfalse;
+	];
+-).
+
+The detect CocoaGlk rule translates into I6 as "detectCocoaGlk".
+The detect CocoaGlk rule is listed before the virtual machine startup rule in the startup rules.
+
 Section - Detecting whether or not the Gargoyle config file has been applied
 
 [ We can detect whether or not the Gargoyle config file has been applied by checking whether one of the text colours has been changed. Warning, user style 2 will be pretty ugly if it has! ]
@@ -42,6 +87,9 @@ To detect the gargoyle config file:
 
 Include (-
 [ DetectGargoyleConfigFile	res;
+	if ((+ CocoaGlk detected +)) {
+		rfalse;
+	}
 	res = glk_style_measure( gg_mainwin, style_User2, stylehint_TextColor, gg_arguments );
 	if ( res && gg_arguments-->0 == $F400A1 )
 	{
