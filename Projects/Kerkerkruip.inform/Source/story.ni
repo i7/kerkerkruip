@@ -1,4 +1,4 @@
-"Kerkerkruip - Release 9 - Beta 1" by Victor Gijsbers
+"Kerkerkruip" by Victor Gijsbers
 
 The story headline is "An IF roguelike".
 The story genre is "dungeon crawl".
@@ -13,7 +13,7 @@ Section - 3rd Party Inclusions
 	
 Include Basic Screen Effects by Emily Short. 
 Include Numbered Disambiguation Choices by Aaron Reed.
-Include Glulx Entry Points by Emily Short.
+Include version 10/140201 of Glulx Entry Points by Emily Short.
 Include version 7/130712 of Dynamic Objects by Jesse McGrew.
 Include Glulx Status Window Control by Erik Temple.
 Include Fixed Point Maths by Michael Callaghan.
