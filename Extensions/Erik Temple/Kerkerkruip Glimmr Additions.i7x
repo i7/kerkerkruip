@@ -679,9 +679,9 @@ For showing the title screen when full graphics support is true and main menu gr
 	open up the graphics-window;
 	if the session flag is enabled:
 		disable the session flag;
+		play the theme music;
 	otherwise:
 		show a minimovie;	
-		[play the theme music;][****]
 		show the title;
 	set JUMP POINT redraw_menu;
 	now menu-active is true;
@@ -1186,13 +1186,16 @@ Chapter - Sound
 The maximum sound volume is a number variable. The maximum sound volume is 10.
 
 A sound-channel is a kind of thing.
-A sound-channel has a number called the ref-number. 
+A sound-channel has a number called the ref-number. [Ref-number is linked to an I6 property by code in Flexible Windows]
 A sound-channel has a number called the volume. The volume of a sound-channel is usually 10.
+A sound-channel has a number called the initial volume. The initial volume of a sound-channel is usually 10.
 
 Foreground and background are sound-channels.
 
 To play the theme music:
 	set up sound channels;
+	now the volume of the background is the initial volume of the background;
+	set simple volume for background channel to initial volume of background;
 	play sound of music in background channel, looping.
 
 To say resource number of (S - a sound name):
@@ -1200,12 +1203,12 @@ To say resource number of (S - a sound name):
 
 To set up sound channels:
 	repeat with item running through sound-channels:
-		now the ref-number of item is the internal number of item.
+		now the ref-number of item is the internal number of item;
 
-To decide what number is internal number of (foreground - a sound-channel):
+To decide what number is internal number of (C - foreground):
 	(- gg_foregroundchan -);
 
-To decide what number is internal number of (background - a sound-channel):
+To decide what number is internal number of (C - background):
 	(- gg_backgroundchan -);
 
 To play (sound - a sound-name) in (channel - a sound-channel) channel, looping, with notification:
@@ -1220,9 +1223,9 @@ To stop (channel - a sound-channel) channel:
 
 Include (- 
 
-[ SoundPlay sound chan loop notify;
+[ SoundPlay sound chan options;
 	if (glk_gestalt(gestalt_Sound,0)) {
-		glk_schannel_play_ext(chan.ref_number,sound,0-loop,notify); 
+		glk_schannel_play_ext(chan.ref_number, sound, -(options & 1), options & 2); 
 	}
 ];
 
