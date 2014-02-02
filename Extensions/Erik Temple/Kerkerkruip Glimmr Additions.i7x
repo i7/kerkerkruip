@@ -357,6 +357,7 @@ Figure of card_Hound is the file "card_Hound.jpg".
 Figure of card_Demon-of-Rage is the file "card_Demon-of-Rage.jpg".
 Figure of card_Blood-Ape is the file "card_Blood-Ape.jpg".
 Figure of card_Jumping-Bomb is the file "card_Jumping-Bomb.jpg".
+Figure of card_Overmind is the file "card_Overmind.jpg".Figure of card_Israfel is the file "card_Israfel.jpg".Figure of card_Angel-of-Compassion is the file "card_Angel-of-Compassion.jpg".
 
 
 Section - Map
@@ -1008,20 +1009,21 @@ A person has a figure-name called the card. The card of a person is usually Figu
 The card of Miranda is figure of card-Miranda.
 The card of the swarm of daggers is figure of card-Daggers.
 The card of the ravenous armadillo is figure of card-Armadillo.
+The card of the wisps of pain is figure of card_Wisps-of-Pain.
 The card of the chain golem is figure of card-Chain_Golem.
 The card of the mindslug is the figure of card-Mindslug.
+The card of the minotaur is figure of card_Minotaur.
 The card of the reaper is the figure of card-Reaper.
 The card of the giant tentacle is the figure of card-Tentacle.
 [placeholders]
 The card of Malygris is the figure of card_Malygris.
 The card of Bodmall is the figure of card_Bodmall.
 The card of the healer of Aite is figure of card_Fanatics-of-Aite.
-The card of the minotaur is figure of card_Minotaur.
 The card of the hound is figure of card_Hound.
 The card of the demon of rage is figure of card_Demon-of-Rage.
 The card of the blood ape is figure of card_Blood-Ape.
 The card of the jumping bomb is figure of card_Jumping-Bomb.
-The card of the wisps of pain is figure of card_Wisps-of-Pain.
+The card of the overmind is figure of card_Overmind.The card of Israfel is the figure of card_Israfel.The card of the angel of compassion is the figure of card_Angel-of-Compassion.
 
 The monster-card queue is a list of people variable.
 
