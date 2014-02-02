@@ -98,7 +98,7 @@ Include (-
 -).
 
 The detect CocoaGlk rule translates into I6 as "detectCocoaGlk".
-The detect CocoaGlk rule is listed before the virtual machine startup rule in the startup rules.
+The detect CocoaGlk rule is listed first in the Glulx zeroing-reference rulebook.
 
 Section - Detecting whether or not the Gargoyle config file has been applied
 
