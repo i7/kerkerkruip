@@ -1373,13 +1373,19 @@ To decide which number is the bansheemod:
 		increase x by 1;
 	decide on x.
 
-Every turn when the location is the Hall of the Raging Banshees (this is the activate banshees rule):
+[These rules should run after the tension is updated]
+
+Last every turn when the location is the Hall of the Raging Banshees (this is the activate banshees rule):
 	if (the tension is greater than 9) and the living banshees boolean is false:
 		say "The [bold type]banshees[roman type] suddenly break loose from the onyx walls!  They start to incite all creatures in the hall, screaming and flying around them.";
 		now the living banshees boolean is true;
-	otherwise if (4 is greater than the tension) and the living banshees boolean is true:
-		say "Bored by a lack of tension, the [bold type]banshees[roman type] recede into the walls, leaving with a last, horrifying scream.";
+
+Last every turn when the living banshees boolean is true (this is the deactivate banshees rule):
+	if 4 is greater than the tension:
+		if the location is the Hall of the Raging Banshees:
+			say "Bored by a lack of tension, the [bold type]banshees[roman type] recede into the walls, leaving with a last, horrifying scream.";
 		now the living banshees boolean is false.
+
 
 Check an actor concentrating when the living banshees boolean is true:
 	let y be the tension;

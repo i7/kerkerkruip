@@ -408,7 +408,7 @@ To log (T - an indexed text):
 	
 To transcribe and stop capturing text/--:
 	stop capturing text;
-	append "[the captured text]" to file of test transcript;
+	append "*** [current test set] turn [the turn count], assertion count=[test assertion count] ***[line break][the captured text]" to file of test transcript;
 	 
 To transcribe and restart capturing text/--:
 	if text capturing is active, transcribe and stop capturing text;
@@ -510,16 +510,13 @@ Before taking a player action when the scheduled event is generated:
 		if the scheduled event is uneventful:
 			record success of the scheduled event;
 		otherwise:
-			Let T be indexed text;
-			Let T be the maxed out report of the scheduled event;
-			assert truth of false with message T;
+			assert "[the maxed out report of the scheduled event]" based on false;
 	if repeat is true:
 		schedule the scheduled event;
 	otherwise:
 		schedule the next move of the scheduled event;
-	transcribe and restart capturing text;
 	
-Choosing a player reaction is a rulebook.
+Choosing a player reaction is a rulebook. The choosing a player reaction rules have default success.
 
 For taking a player action when the scheduled event is not the normal keyboard input (this is the turn-based event player action rule):
 	if the player is at-React:
@@ -671,20 +668,19 @@ The assertion failures count is a number variable.
 
 [ Assert that two values are the same ]
 To assert that/-- (A - a value) is (B - a value):
-	transcribe and stop capturing text;
 	record a test attempt;
 	unless A is B:
 		Let error_msg be an indexed text;
 		now error_msg is "Expected: [B], Got: [A][line break]";
 		record a failure report of error_msg;
-	transcribe and restart capturing text;
 
 To assert truth of/-- (C - a truth state) with message (T - an indexed text):
-	transcribe and stop capturing text;
 	record a test attempt;
 	unless C is true:
 		record a failure report of T;
-	transcribe and restart capturing text;
+	
+To assert (T - an indexed text) based on (C - a truth state):
+	assert truth of C with message T;
 	
 To record a/-- success of (E - a turn-based event):
 	now E is not repeatable;
@@ -1830,3 +1826,84 @@ Test play when testing challenger-mazing:
 	assert that the event description includes "Space and time begin to twist";
 	assert that the location is Arena of the Gods.
 	
+Section - Banshees Gone Wild - bug 248
+
+banshees gone wild is an test set.
+
+To swap the occupants of (first place - a room) and (second place - a room):
+	Let the swap place be a random not placed placeable room;
+	Repeat with guy running through people in first place:
+		extract guy to the swap place;
+	Repeat with guy running through people in second place:
+		extract guy to first place;
+	Repeat with guy running through people in swap place:
+		extract guy to second place;
+		
+Scenario when testing banshees gone wild:
+	now Hall of Raging Banshees is testobject;
+	now the blood ape is testobject;
+	now a random scroll of death is testobject;
+	
+Test play when testing banshees gone wild:
+	Let the death-scroll be a random not off-stage scroll of death;
+	Now the player carries the death-scroll;
+	swap the occupants of the location of the blood ape and the Hall of Raging Banshees;
+	travel sneakily to Hall of Raging Banshees;
+	try taking off the cloak of shadows;
+	now the tension is 10;
+	now the health of the blood ape is 1;
+	now the defence of the player is 100;
+	now the health of the player is 100;
+	
+Waiting-for-banshees is a turn-based event. The first move of banshees gone wild is waiting-for-banshees.
+
+Testing a turn-based event of waiting-for-banshees:
+	assert that the event description includes "banshees suddenly break loose";
+	assert that the living banshees boolean is true;
+
+banshee-fleeing is a turn-based event. The next move of waiting-for-banshees is banshee-fleeing.
+
+Initial scheduling for banshee-fleeing:
+	Let the way be the best route from the location to the retreat location;
+	Now the scheduled action of banshee-fleeing is the action of going the way.
+
+Testing a turn-based event of banshee-fleeing:
+	assert "we should no longer be in Hall of the Raging Banshees" based on whether or not the location is not Hall of Raging Banshees;
+	assert that the tension is 0;
+	assert that the living banshees boolean is false;
+	
+banshee-returning is a turn-based event. The next move of banshee-fleeing is banshee-returning.
+
+Initial scheduling for banshee-returning:
+	Let the way be the best route from the location to the hall of raging banshees;
+	now the scheduled action of banshee-returning is the action of going the way;
+
+banshee-return-waiting is a turn-based event. The next move of banshee-returning is banshee-return-waiting.
+	
+Initial scheduling for banshee-return-waiting:
+	now the tension is 10;
+	
+Testing a turn-based event of banshee-return-waiting:
+	assert that the tension is 11;
+	assert that the event description includes "banshees suddenly break loose";
+	assert that the living banshees boolean is true;
+	
+reaction-ape-killing is a turn-based event. The next move of banshee-return-waiting is reaction-ape-killing. 
+
+Initial scheduling of reaction-ape-killing:
+	compel the action of the blood ape attacking the player;
+	Let the way be the best route from the location to the retreat location;
+	Now the scheduled action of reaction-ape-killing is the action of going the way.
+	
+Choosing a player reaction when reaction-ape-killing is the scheduled event:
+	if the player carries a scroll of death:
+		let the death-scroll be a random carried scroll of death;
+		generate a player action of the action of reading the death-scroll;
+		now the scheduled event is not repeatable;
+
+Testing a turn-based event of reaction-ape-killing:
+	if the scheduled event is repeatable, make no decision;
+	assert "the blood ape should be dead" based on whether or not the blood ape is dead;
+	assert that the event description includes "Bored by a lack of tension";
+	assert that the living banshees boolean is false;
+
