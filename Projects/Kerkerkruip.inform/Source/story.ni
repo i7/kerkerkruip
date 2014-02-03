@@ -17,7 +17,6 @@ Include Basic Screen Effects by Emily Short.
 Include Numbered Disambiguation Choices by Aaron Reed.
 Include version 10/140201 of Glulx Entry Points by Emily Short.
 Include version 7/130712 of Dynamic Objects by Jesse McGrew.
-Include Glulx Status Window Control by Erik Temple.
 Include Fixed Point Maths by Michael Callaghan.
 Include Questions by Michael Callaghan.
 
