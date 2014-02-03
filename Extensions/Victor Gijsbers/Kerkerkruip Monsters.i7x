@@ -4940,7 +4940,6 @@ Every turn when a person is linked to the player (this is the unravelling link r
 			if m > 9:
 				now m is 9;
 			decrease n by m;
-			say "TEST: [n]";
 			if a random chance of n in 100 succeeds:
 				say "success...";
 				say "Your link with [the guy] [bold type]unravels[roman type].";
