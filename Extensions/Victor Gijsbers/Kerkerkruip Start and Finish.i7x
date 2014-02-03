@@ -28,6 +28,78 @@ Last after showing the title screen:
 
 
 
+Section - Detecting CocoaGlk
+
+[ The code in the next section, for detecting the Gargoyle configuration file, runs into Inform bug 1189 under CocoaGlk.  Therefore, we need to detect CocoaGlk before attempting that test.  This code is based on https://github.com/i7/i7grip/blob/ae7df20ffcf8c1746c478a2a7a5a8fa0aecd8e5e/Low-Level%20Operations.i7x. ]
+
+CocoaGlk detected is a truth state that varies.  CocoaGlk detected is false.
+
+Include (-
+	Array cocoaKeyWindowCheck --> 1;
+	[ detectCocoaGlk
+		root nonroot firstWindow secondWindow;
+		! Detect CocoaGlk via Inform bug 819, without falling afoul of Inform bug 961.
+		(+ CocoaGlk detected +) = false;
+		! To identify bug 819 we need two related windows whose circumstances of creation we know about.
+		! (So that we can be sure that one should be the key window of the other.)
+		! We do not want to rely on anything the story has done previously, so we will create these windows ourselves and destroy them later.
+		! Windows are created by establishing a root or by splitting, depending on whether a root already exists.
+		! Therefore, test for a root.
+		root = glk_window_get_root();
+		if (root) {
+			! A root already exists, so we must split.
+			! Under 961, closing a window split off of the root without also closing the root can make the story invisible.
+			! Consequently, we cannot safely split the root itself.
+			! So we look for a nonroot window.
+			for (nonroot = 0: nonroot = glk_window_iterate(nonroot, 0):) {
+				if (nonroot ~= root) {
+					break;
+				}
+			}
+			! If we found a window to split, the loop terminated by a break and set nonroot to that window.
+			! Otherwise nonroot is zero, from the end of the glk_window_iterate cycle.
+			if (nonroot) {
+				! Since we found a window, split it.
+				firstWindow = glk_window_open(nonroot, winmethod_Below | winmethod_Proportional, 50, wintype_TextBuffer, 0);
+			} else {
+				! Otherwise we know that there is exactly one window open.
+				! Kerkerkruip under CocoaGlk should never leave the interpreter in such a state.
+				! (Under other Glk implementations, notably those that only allow one window, it may.)
+				! So we conclude that CocoaGlk is not present and return.
+				! (Though the return here is not strictly necessary, since no further conditionals will trigger.)
+				rfalse;
+			}
+		} else {
+			! A root does not exist, so we may create one.
+			firstWindow = glk_window_open(0, 0, 0, wintype_TextBuffer, 0);
+		}
+		! Root creation and window splitting may fail under some Glk implementations, but not CocoaGlk.
+		! If we saw a failure, we can skip the rest of this detection process.
+		if (firstWindow) {
+			! Now there must be a root, and we are sure that firstWindow is safe to split.
+			! Split it.
+			secondWindow = glk_window_open(firstWindow, winmethod_Below | winmethod_Proportional, 50, wintype_TextBuffer, 0);
+			! Again, window splitting may fail under some Glk implementations, but not CocoaGlk.
+			! If we saw a failure, we can skip the rest of this detection process, except for cleaning up the window we did create.
+			if (secondWindow) {
+				! Finally, we have our two windows whose circumstances of creation we know about.
+				! We ask the Glk implementation for the key of firstWindow, expecting it to be secondWindow.
+				glk_window_get_arrangement(glk_window_get_parent(firstWindow), 0, 0, cocoaKeyWindowCheck);
+				! If, instead, we got a result of firstWindow, that's bug 819, and we're dealing with CocoaGlk.
+				(+ CocoaGlk detected +) = (cocoaKeyWindowCheck-->0) == firstWindow;
+				! Now clean up the second window.
+				glk_window_close(secondWindow, 0);
+			}
+			! And clean up the first window.
+			glk_window_close(firstWindow, 0);
+		}
+		rfalse;
+	];
+-).
+
+The detect CocoaGlk rule translates into I6 as "detectCocoaGlk".
+The detect CocoaGlk rule is listed first in the Glulx zeroing-reference rulebook.
+
 Section - Detecting whether or not the Gargoyle config file has been applied
 
 [ We can detect whether or not the Gargoyle config file has been applied by checking whether one of the text colours has been changed. Warning, user style 2 will be pretty ugly if it has! ]
@@ -42,6 +114,9 @@ To detect the gargoyle config file:
 
 Include (-
 [ DetectGargoyleConfigFile	res;
+	if ((+ CocoaGlk detected +)) {
+		rfalse;
+	}
 	res = glk_style_measure( gg_mainwin, style_User2, stylehint_TextColor, gg_arguments );
 	if ( res && gg_arguments-->0 == $F400A1 )
 	{
