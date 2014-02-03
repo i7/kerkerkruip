@@ -4941,7 +4941,6 @@ Every turn when a person is linked to the player (this is the unravelling link r
 				now m is 9;
 			decrease n by m;
 			if a random chance of n in 100 succeeds:
-				say "success...";
 				say "Your link with [the guy] [bold type]unravels[roman type].";
 				now nobody is linked to the player.
 
