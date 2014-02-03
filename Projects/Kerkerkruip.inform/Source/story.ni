@@ -9,6 +9,8 @@ Release along with [cover art and] a file of "Gargoyle config file" called "Kerk
 
 Section - 3rd Party Inclusions
 
+[ Check https://github.com/i7/extensions if the I7 site only has older versions ]
+
 [Include version 1/131215 of Alternative Startup Rules by Dannii Willis.]
 	
 Include Basic Screen Effects by Emily Short. 
@@ -23,9 +25,7 @@ Include Questions by Michael Callaghan.
 
 Section - Graphics and Windows
 
-[ Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. It is not necessary to comment out Flexible Windows when Glimmr is commented in.
-
-Check https://github.com/i7/extensions if the I7 site only has older versions ]
+[ Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. It is not necessary to comment out Flexible Windows when Glimmr is commented in. ]
 
 Include version 13/131208 of Flexible Windows by Jon Ingold.
 

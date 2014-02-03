@@ -98,6 +98,8 @@ To say total credits:
 	[line break]Wade Clark, 
 	[line break]Remko van der Pluijm [italic type]and[roman type]
 	[line break]Mike Ciul
+	[paragraph break][bold type]Additional contributions by[roman type]
+	[line break]Brady Garvin
 	[paragraph break][bold type]Testers[roman type]
 	[line break]Thank you to our alpha- and beta-testers: Bora Bosna, Lance Camelot, Matt Weiner, Michael Fransioli, Michiel Hermes, Vyacheslav Dobranov, and Wasse Asmlash. (If we've forgotten you, let us know!) Any work of interactive fiction needs testers, but one as complicated as [Kerkerkruip] doubly so.
 	[paragraph break][bold type]Free software[roman type]

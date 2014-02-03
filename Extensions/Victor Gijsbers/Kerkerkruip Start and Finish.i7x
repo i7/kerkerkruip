@@ -100,6 +100,8 @@ Include (-
 The detect CocoaGlk rule translates into I6 as "detectCocoaGlk".
 The detect CocoaGlk rule is listed first in the Glulx zeroing-reference rulebook.
 
+
+
 Section - Detecting whether or not the Gargoyle config file has been applied
 
 [ We can detect whether or not the Gargoyle config file has been applied by checking whether one of the text colours has been changed. Warning, user style 2 will be pretty ugly if it has! ]
@@ -448,7 +450,7 @@ This is the toggle info panels rule:
 [ Menu hyperlinks: try to detect if we can use them, but also allow the user to change the option ]
 Before showing the title screen (this is the enable menu hyperlinks rule):
 	if glulx hyperlinks are supported:
-		if the number of menu hyperlinks is 0:
+		if menu hyperlinks are unset:
 			if the Gargoyle config file was used is true:
 				enable menu hyperlinks;
 			otherwise:
