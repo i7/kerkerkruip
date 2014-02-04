@@ -309,19 +309,19 @@ Section - Testing faculties
 
 The tested faculty is a faculty that varies.
 
-To test the body of (guy - a person) against (n - a number):
+To test the body of (guy - a person) against (n - a number) described as (target description - some text):
 	now tested faculty is body;
-	test the faculty of guy against n.
+	test the faculty of guy against n described as the target description.
 
-To test the mind of (guy - a person) against (n - a number):
+To test the mind of (guy - a person) against (n - a number) described as (target description - some text):
 	now tested faculty is mind;
-	test the faculty of guy against n.
+	test the faculty of guy against n described as the target description.
 
-To test the spirit of (guy - a person) against (n - a number):
+To test the spirit of (guy - a person) against (n - a number) described as (target description - some text):
 	now tested faculty is spirit;
-	test the faculty of guy against n.
+	test the faculty of guy against n described as the target description.
 
-To test the faculty of (guy - a person) against (n - a number):
+To test the faculty of (guy - a person) against (n - a number) described as (target description - some text):
 	now test subject is guy;
 	now roller is the guy;
 	now test score is a roll of the dice;
@@ -338,7 +338,7 @@ To test the faculty of (guy - a person) against (n - a number):
 		let k be final spirit of guy;
 		say "[k] (spirit)[run paragraph on]";
 		increase test score by k;		
-	say " = [test score] against a target number of ", n, "[run paragraph on]";
+	say " = [test score] against a target number of ", n, "[unless the target description is empty] ([the target description])[end unless][run paragraph on]";
 	if test score is less than n:
 		say ", failing the [tested faculty] check.[run paragraph on]";
 		now test result is false;
@@ -346,6 +346,20 @@ To test the faculty of (guy - a person) against (n - a number):
 		say ", succeeding at the [tested faculty] check.[run paragraph on]";
 		now test result is true.
 
+To test the body of (guy - a person) against (n - a number):
+	now tested faculty is body;
+	test the faculty of guy against n described as "".
+
+To test the mind of (guy - a person) against (n - a number):
+	now tested faculty is mind;
+	test the faculty of guy against n described as "".
+
+To test the spirit of (guy - a person) against (n - a number):
+	now tested faculty is spirit;
+	test the faculty of guy against n described as "".
+
+To test the faculty of (guy - a person) against (n - a number):
+	test the faculty of guy against n described as "":
 
 Section - Faculty increase
 

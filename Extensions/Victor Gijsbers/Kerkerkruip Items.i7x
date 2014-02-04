@@ -2226,6 +2226,7 @@ A scroll of summoning is summoning.
 The description of a scroll of summoning is "Reading this scroll will summon an undead monster. Be careful, for it does not make the creature friendly."
 The plural of scroll of summoning is scrolls of summoning.
 
+The monster summoned as a shield is a monster that varies.
 Carry out reading a scroll of summoning:
 	if at least one alive not super-undead undead person is off-stage:
 		let guy be a random alive off-stage not super-undead undead person;
@@ -2234,9 +2235,20 @@ Carry out reading a scroll of summoning:
 		now guy is follower;
 		unless the follower percentile chance of guy is greater than 60:
 			now follower percentile chance of guy is 60;
+		if the combat state of the player is at-React:
+			now the monster summoned as a shield is the guy;
+			let the target for summons avoidance be eleven plus (three times the size difference of the standard measure and the guy);
+			test the spirit of the main actor against the target for summons avoidance described as "[the monster summoned as a shield] is [the size of the monster summoned as a shield]";
+			if the test result is true:
+				say " [Possessive of the guy] sudden appearance does not interfere with [its-their of the main actor] attack.";
+			otherwise:
+				say " [Possessive of the guy] sudden appearance [bold type]interferes[roman type] with [its-their of the main actor] attack.";
+				have the main actor start pressing the guy;
+				let the attack be the action of the main actor hitting the player;
+				choose the row with an action of the attack in the Table of Delayed Actions;
+				now the action entry is the action of the main actor hitting the guy;
 	otherwise:
 		say "You speak the awful spell, but nothing happens. The planes must not be well-aligned.";
-
 
 [Section - Scroll of fireworks
 

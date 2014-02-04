@@ -157,7 +157,7 @@ To say phantasmagoria show:
 		-- 4: say "fountains of fire erupting in the middle of a contingent of archers";
 		-- 5: say "flaming bolts, fired by huge ballistae, flying right over your head";
 		-- 6: say "several knights in plate armour struggling to reach the shores of a swamp, while the land retreats before them as if it were alive";
-		-- 7: say "shrieking ghosts being whipped into a frenzy by a necromancer thousands of years old";
+		-- 7: say "a necromancer sheltering from a volley of arrows behind a freshly summoned giant's corpse";
 		-- 8: say "an elated thief running towards a huge pile of treasure, which then opens a maw and devours him";
 		-- 9: say "a hopeful party of sixteen year old adventurers getting slaughtered by [the name of a random monster]";
 		-- 10:
@@ -178,7 +178,7 @@ Every turn when the location is the phantasmagoria and the combat status is not 
 					if a random number between 1 and 5 is greater than the concentration of guy:
 						add guy to lijst;
 						now concentration of guy is 0;
-		say "Suddenly, [one of]a disintegrating skeletal warrior[or]a blast of dragon's fire[or]a naked male slave screaming in fear[or]a naked female slave fleeing in tears[or]a huge fountain of fire[or]a crashing ballista bolt[or]a drowning knight, crying for his god,[or]a ghost devouring the flesh of a still living man[or]a frenzied bull elephant[or]a shrieking princess in the claws of a demon[or]an obese king carried by seven blind eunuchs[at random] appears. [unless lijst is empty]While only an image that flickers and then disappears, it [bold type]startles [lijst with definite articles][roman type][otherwise]The illusions do not affect anyone[end if].".
+		say "Suddenly, [one of]a disintegrating skeletal warrior appears[or]a blast of dragon's fire appears[or]a naked male slave appears, screaming in fear[or]a naked female slave appears, fleeing in tears[or]a huge fountain of fire appears[or]a crashing ballista bolt appears[or]a drowning knight appears, crying for his god[or]a ghost appears, devouring the flesh of a still living man[or]a frenzied bull elephant appears[or]a shrieking princess appears in the claws of a demon[or]an obese king carried by seven blind eunuchs appears[or]a newly reanimated soldier appears, taking a blow for his necromancing comrade[at random]. [unless lijst is empty]While only an image that flickers and then disappears, it [bold type]startles [lijst with definite articles][roman type][otherwise]The illusions do not affect anyone[end if].".
 
 An AI action selection rule for a person (called P) when the location is Phantasmagoria (this is the concentration is often futile in Phantasmagoria rule):
 	unless P is blind:
