@@ -3678,8 +3678,8 @@ Understand "axe" as the pickaxe.
 
 The description of the pickaxe is "Used by wizards to construct their dungeons, a magical pickaxe can be used to dig tunnels in whatever direction you wish. Just dig north, for instance. In a pinch, it can also serve as a weapon.".
 
-The unlock level of the magical pickaxe is 9.
-The unlock text of the magical pickaxe is "an item that functions both as a weapon and as a tool for digging tunnels".
+[The unlock level of the magical pickaxe is 9.
+The unlock text of the magical pickaxe is "an item that functions both as a weapon and as a tool for digging tunnels".]
 
 The damage die of the pickaxe is 5.
 The weapon attack bonus of the pickaxe is -1.
