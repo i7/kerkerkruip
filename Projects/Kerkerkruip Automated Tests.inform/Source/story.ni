@@ -1904,7 +1904,7 @@ Initial scheduling for banshee-return-waiting:
 	now the tension is 10;
 	
 Testing a turn-based event of banshee-return-waiting:
-	assert that the tension is 11;
+	assert "Tension should be at least 10" based on whether or not the tension is at least 10;
 	assert that the event description includes "banshees suddenly break loose";
 	assert that the living banshees boolean is true;
 	
@@ -1990,7 +1990,7 @@ Testing a turn-based event of remembering-daggers:
 meeting-malygris is a hiding-check turn-based event. The next move of remembering-daggers is meeting-malygris. The location-target of meeting-malygris is Malygris.
 
 Testing a turn-based event of meeting-malygris:
-	assert that the event description includes "Malygris does not notice you";
+	assert that the event description includes "Malygris (does not notice you|remains unaware of your presence)";
 	
 moving-malygris is a repeatable hiding-reveal turn-based event. The next move of meeting-malygris is moving-malygris. The maximum repeats of moving-malygris is 20.
 
