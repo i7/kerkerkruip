@@ -1933,7 +1933,7 @@ Section - Remembering Text
 [Should say something reasonable when all seen creatures have moved]
 [Should say something helpful when psycholocating]
 
-remembering-text is an isolated test set.
+remembering-text is an test set.
 
 Scenario when testing remembering-text:
 	now Bodmall is testobject;
@@ -1998,7 +1998,6 @@ Initial scheduling for moving-malygris:
 	Compel the action of Malygris teleporting.
 	
 Testing a turn-based event of moving-malygris:
-	log "Malygris is now in [the location of Malygris]";
 	if the location of Malygris is the location:
 		now the scheduled action of moving-malygris is the action of waiting;
 		make no decision;
