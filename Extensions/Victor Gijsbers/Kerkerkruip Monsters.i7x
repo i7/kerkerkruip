@@ -147,9 +147,9 @@ The swarm of daggers is flyer.
 The swarm of daggers is not talker.
 The swarm of daggers is thrower.
 
-The health of the swarm of daggers is 14.
-The melee of the swarm of daggers is 3.
-The defence of the swarm of daggers is 5.
+The health of the swarm of daggers is 16.
+The melee of the swarm of daggers is 4.
+The defence of the swarm of daggers is 6.
 The body score of the swarm of daggers is 6.
 The mind score of the swarm of daggers is 3.
 The spirit score of the swarm of daggers is 6. 
@@ -179,22 +179,26 @@ The legend-label of swarm of daggers is Figure of map_legend_swarm_of_daggers.
 
 Section - Scattering
 
-Dagger-scattered is a truth state that varies. Dagger-scattered is false.
+Dagger-scattered is a number that varies. Dagger-scattered is 0.
 
 An aftereffects rule (this is the scatter the daggers rule):
 	if the global defender is the swarm of daggers and the attack damage is greater than 0 and the swarm of daggers is not dead:
-		say "The impact of the blow [italic type]scatters[roman type] the swarm of daggers. They will need to spend one action regrouping themselves.";
-		now dagger-scattered is true.
+		say "The impact of the blow [italic type]scatters[roman type] the swarm of daggers. They will need to spend two actions regrouping themselves.";
+		now dagger-scattered is 2.
 
-An AI action selection rule for the swarm of daggers when dagger-scattered is true (this is the daggers must wait if scattered rule):
+An AI action selection rule for the swarm of daggers when dagger-scattered is not 0 (this is the daggers must wait if scattered rule):
 	choose row with an Option of the action of the swarm of daggers waiting in the Table of AI Action Options;
 	now the Action Weight entry is 1000.
 
-Check the swarm of daggers waiting when dagger-scattered is true (this is the daggers regroup rule):
-	now dagger-scattered is false;
-	say "The swarm of daggers regroups." instead.
+Check the swarm of daggers waiting when dagger-scattered is not 0 (this is the daggers regroup rule):
+	if dagger-scattered > 1:
+		now dagger-scattered is 1;
+		say "The swarm of daggers starts to regroup." instead;
+	otherwise:
+		now dagger-scattered is 0;
+		say "The swarm of daggers regroups." instead.
 
-Check the swarm of daggers hitting when dagger-scattered is true:
+Check the swarm of daggers hitting when dagger-scattered is not 0:
 	stop the action;
 
 
