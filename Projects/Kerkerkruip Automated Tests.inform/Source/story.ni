@@ -406,6 +406,12 @@ To log (T - an indexed text):
 	append "**** [T][line break]" to file of test transcript;
 	if currently capturing is true, start capturing text;
 	
+To transcribe (T - an indexed text):
+	let currently capturing be whether or not text capturing is active;
+	if currently capturing is false, start capturing text;
+	say "[bracket][T][close bracket][command clarification break]";
+	if currently capturing is false, transcribe and stop capturing text;
+	
 To transcribe and stop capturing text/--:
 	stop capturing text;
 	append "*** [current test set] turn [the turn count], assertion count=[test assertion count] ***[line break][the captured text]" to file of test transcript;
@@ -486,6 +492,7 @@ Initial scheduling for a turn-based event (this is the reset act counts rule):
 		now the act count of guy is 0;
 			
 To schedule (the event described - a turn-based event):
+	transcribe and restart capturing;
 	if the event described is not the scheduled event:
 		follow the initial scheduling rules for the event described;
 		now the repeated moves is 0;
@@ -503,7 +510,9 @@ Before taking a player action when the scheduled event is generated:
 		say "* [run paragraph on]";
 	otherwise:
 		log "testing effects of [the scheduled event]";
+	start capturing text;
 	follow the testing a turn-based event rules for the scheduled event;
+	transcribe and stop capturing;
 	Let repeat be whether or not the scheduled event is [still] repeatable;
 	if repeat is true and the repeated moves is not less than the maximum repeats of the scheduled event:
 		now repeat is false;
@@ -536,7 +545,7 @@ The person requesting variable translates into I6 as "act_requester".
 To begin the current action: (- BeginAction(action, noun, second); -)
 
 To generate a player action of (the desired action - a stored action):
-	say "[bracket]Player action: [the desired action][close bracket]";
+	transcribe "Player action: [the desired action]";
 	now the action in progress is the action name part of the desired action;
 	now the person asked is the actor part of the desired action;
 	[now the person requesting is nothing;] [not allowed in I7?]
@@ -548,12 +557,9 @@ To generate a player action of (the desired action - a stored action):
 The compelled action is a stored action that varies. The compelled action is the action of waiting.
 
 To compel (the desired action - a stored action):
-	say "[bracket]compelling [the desired action]";
 	Let the guy be the actor part of the desired action;
-	if the guy is asleep:
-		say " and waking up [the guy]";
-		now the guy is not asleep;
-	say "[close bracket][command clarification break]";
+	transcribe "compelling [the desired action][if the guy is asleep] and waking up [the guy]";
+	now the guy is not asleep;
 	Now the compelled action is the desired action.
 	
 A last AI action selection rule for an at-Act person (called P) when the compelled action is not the action of waiting:
@@ -743,7 +749,7 @@ To have the player sacrifice (stuff - a power):
 	Let the power-level be the power level of stuff;
 	assert truth of whether or not power-level > 0 with message "power level of sacrificed ability should be positive";
 	Let divinity be a random god who infuses the location;
-	say "[bracket]Sacrificing [stuff] to [divinity][close bracket][command clarification break]";
+	transcribe "Sacrificing [stuff] to [divinity]";
 	now the current question is "Which power do you want to sacrifice?";
 	now sacrifice-lijst-2 is {};
 	add stuff to sacrifice-lijst-2;
@@ -1010,12 +1016,7 @@ To travel sneakily to (place - a room):
 			record failure report "Can't find a route to [place].";
 			stop;
 	now the way-to-get-back is the best route from the location to the retreat location;
-	
-To force the cloak of shadows to work:
-	if the player does not enclose the cloak of shadows, now the player carries the cloak of shadows;
-	try wearing the cloak of shadows;
-	now the player is hidden;
-		
+			
 parting shots is an [isolated] test set.
 
 A scenario rule when testing parting shots:
@@ -1055,9 +1056,12 @@ After taking a player action (this is the assume all actions are fast until ever
 First every turn (this is the remember if the last turn took time rule):
 	now previously-fast is false;
 
-Testing a turn-based event for a hiding-check turn-based event:
-	if (the combat status is not peace) and (previously-fast is false):
-		assert that the event description includes ", which must be positive\. You remain hidden\.";
+Testing a turn-based event for a hiding-check turn-based event (called the current move):
+	[a move can be hiding-check and hiding-reveal if it involves sneaking to a location and then revealing yourself]
+	if the current move is hiding-reveal, make no decision;
+	if the combat status is peace, make no decision;
+	if previously-fast is true, make no decision;
+	assert that the event description includes ", which must be positive\. You remain hidden\.";
 	
 mindslug-hidden-retreat is a turn-based event. The next move of mindslug-hiding-check is mindslug-hidden-retreat. The scheduled action of mindslug-hidden-retreat is the action of retreating.
 	
@@ -1940,6 +1944,8 @@ Scenario when testing remembering-text:
 	now the blood ape is testobject;
 	now the library is testobject;
 	now the cloak of shadows is testobject;
+	now the teleportation beacon is bannedobject;
+	now the dimensional anchor is bannedobject;
 	[several scrolls of psycholocation]
 	
 Test play when testing remembering-text:
@@ -1980,6 +1986,47 @@ remembering-daggers is a hiding-check turn-based event. The next move of nothing
 	
 Testing a turn-based event of remembering-daggers:
 	assert that the event description includes "You have visited the following rooms:.*You have seen the following creatures in these locations:.*- the swarm of daggers \(level 1\) in [the location] \(where you currently are\)"
+	
+meeting-malygris is a hiding-check turn-based event. The next move of remembering-daggers is meeting-malygris. The location-target of meeting-malygris is Malygris.
+
+Testing a turn-based event of meeting-malygris:
+	assert that the event description includes "Malygris does not notice you";
+	
+moving-malygris is a repeatable hiding-reveal turn-based event. The next move of meeting-malygris is moving-malygris. The maximum repeats of moving-malygris is 20.
+
+Initial scheduling for moving-malygris:
+	Compel the action of Malygris teleporting.
+	
+Testing a turn-based event of moving-malygris:
+	log "Malygris is now in [the location of Malygris]";
+	if the location of Malygris is the location:
+		now the scheduled action of moving-malygris is the action of waiting;
+		make no decision;
+	assert that the event description includes "Malygris suddenly teleports away";
+	now moving-malygris is not repeatable.
+	
+remembering-malygris is a turn-based event. The next move of moving-malygris is remembering-malygris. The scheduled action of remembering-malygris is the action of remembering.
+
+Testing a turn-based event of remembering-malygris:
+	assert that the event description includes "You have seen the following creatures in these locations:.*You have also seen Malygris, but you don't know where he is now"
+	
+dungeon-clearing is a turn-based event. The next move of remembering-malygris is dungeon-clearing.
+
+Initial scheduling for dungeon-clearing:
+	Repeat with guy running through denizen persons:
+		if guy is Malygris or guy is the player, next;
+		now the health of guy is -1;
+		
+Testing a turn-based event of dungeon-clearing:
+	assert that the number of denizen persons is 2;
+	assert that Malygris is denizen;
+	assert that the player is denizen.
+	
+Malygris-only-remembering is a turn-based event. The next move of dungeon-clearing is malygris-only-remembering. The scheduled action of malygris-only-remembering is the action of remembering.
+
+Testing a turn-based event of Malygris-only-remembering:
+	assert that the event description does not include "You have seen the following creatures in these locations";
+	assert that the event description includes "You have also seen Malygris, but you don't know where he is now"
 	
 [You have not yet explored:\n( - the <a-w>+ exit of <^\n>+\n)+\n]
 [visit all room]
