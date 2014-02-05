@@ -534,7 +534,7 @@ The description of ravenous armadillo is "As their name suggests, ravenous armad
 The soul description of the ravenous armadillo is "energy like a screen of scales".
 
 The health of the ravenous armadillo is 12.
-The melee of the ravenous armadillo is -1.
+The melee of the ravenous armadillo is 0.
 The defence of the ravenous armadillo is 5.
 
 The body score of the ravenous armadillo is 6.
