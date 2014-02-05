@@ -183,8 +183,11 @@ Dagger-scattered is a number that varies. Dagger-scattered is 0.
 
 An aftereffects rule (this is the scatter the daggers rule):
 	if the global defender is the swarm of daggers and the attack damage is greater than 0 and the swarm of daggers is not dead:
-		say "The impact of the blow [italic type]scatters[roman type] the swarm of daggers. They will need to spend two actions regrouping themselves.";
-		now dagger-scattered is 2.
+		let n be a random number between 1 and 2;
+		if dagger-scattered is 2:
+			now n is 2;
+		now dagger-scattered is n;
+		say "The impact of the blow [italic type]scatters[roman type] the swarm of daggers. They will need to spend [if dagger-scattered is 1]one action[otherwise]two actions[end if] regrouping themselves.".
 
 An AI action selection rule for the swarm of daggers when dagger-scattered is not 0 (this is the daggers must wait if scattered rule):
 	choose row with an Option of the action of the swarm of daggers waiting in the Table of AI Action Options;
