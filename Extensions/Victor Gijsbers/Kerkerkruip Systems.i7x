@@ -26,8 +26,6 @@ Section - Denizen
 
 Definition: a thing is denizen if it is worldsharable and the location of it is placed.
 
-Definition: a thing is denizen if it is not off-stage and the location of it is placed.
-
 Section - World sharing
 
 To decide whether (guy - a thing) and (other guy - a thing) share a world:

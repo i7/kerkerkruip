@@ -50,7 +50,7 @@ Use maximum capture buffer length of at least 8192.
 Use maximum indexed text length of at least 8192. 
 
 First when play begins (this is the random seed rule):
-	seed the random-number generator with 14.
+	seed the random-number generator with 15.
 
 The random seed rule is listed before the reaper carries a random scythe rule in the when play begins rules.
 
@@ -1043,11 +1043,21 @@ A turn-based event can be hiding-check.
 
 mindslug-hiding-check is a hiding-check turn-based event. The first move of parting shots is mindslug-hiding-check.
 
+previously-fast is a truth state that varies.
+
 initial scheduling for a turn-based event (called the current move):
 	now traveling sneakily is whether or not the current move is hiding-check;
+	if traveling sneakily is true, force the cloak of shadows to work;
+	
+After taking a player action (this is the assume all actions are fast until every turn runs rule):
+	now previously-fast is true;
+	
+First every turn (this is the remember if the last turn took time rule):
+	now previously-fast is false;
 
 Testing a turn-based event for a hiding-check turn-based event:
-	assert that the event description includes ", which must be positive\. You remain hidden\.";
+	if (the combat status is not peace) and (previously-fast is false):
+		assert that the event description includes ", which must be positive\. You remain hidden\.";
 	
 mindslug-hidden-retreat is a turn-based event. The next move of mindslug-hiding-check is mindslug-hidden-retreat. The scheduled action of mindslug-hidden-retreat is the action of retreating.
 	
@@ -1648,7 +1658,7 @@ Testing a turn-based event of fell-also-killing:
 	
 Section - Temporary Blood Magic from Nomos
 
-temporary Nomos blood magic is an test set.
+temporary Nomos blood magic is a test set.
 
 Scenario when testing temporary Nomos blood magic:
 	now Bodmall is testobject;
@@ -1759,8 +1769,9 @@ Initial scheduling for malleus-feeding:
 Testing a turn-based event of malleus-feeding:
 	if the swarm of daggers is at-react, make no decision;
 	assert that the blood magic level of malleus maleficarum is 0;
-	assert that the event description includes " \+ 1 \(Malleus Maleficarum blood\) <^\n>* defence rating";
-	assert that the event description includes " \+ 1 \(Malleus Maleficarum blood\) <^\n>* damage";
+	[I'd like to match "not a newline," but the character class <^\n> actually matches anything besides backslash and n]
+	assert that the event description includes " \+ 1 \(Malleus Maleficarum blood\) = <0-9>+, you beat the swarm of daggers[']s defence rating";
+	assert that the event description includes " \+ 1 \(Malleus Maleficarum blood\) = <0-9>+ damage";
 	now malleus-feeding is not repeatable.
 	
 Section - bug 234
@@ -1830,14 +1841,17 @@ Section - Banshees Gone Wild - bug 248
 
 banshees gone wild is an test set.
 
+Definition: A room is occupied rather than unoccupied if it encloses a person.
+
 To swap the occupants of (first place - a room) and (second place - a room):
-	Let the swap place be a random not placed placeable room;
+	Let swap place be a random unoccupied room;
 	Repeat with guy running through people in first place:
 		extract guy to the swap place;
-	Repeat with guy running through people in second place:
-		extract guy to first place;
-	Repeat with guy running through people in swap place:
-		extract guy to second place;
+	if the second place is not the swap place:
+		Repeat with guy running through people in second place:
+			extract guy to first place;
+		Repeat with guy running through people in swap place:
+			extract guy to second place;
 		
 Scenario when testing banshees gone wild:
 	now Hall of Raging Banshees is testobject;
@@ -1849,6 +1863,8 @@ Test play when testing banshees gone wild:
 	Now the player carries the death-scroll;
 	swap the occupants of the location of the blood ape and the Hall of Raging Banshees;
 	travel sneakily to Hall of Raging Banshees;
+	if the retreat location is occupied:
+		swap the occupants of the retreat location and a random unoccupied placed room;
 	try taking off the cloak of shadows;
 	now the tension is 10;
 	now the health of the blood ape is 1;
@@ -1907,3 +1923,63 @@ Testing a turn-based event of reaction-ape-killing:
 	assert that the event description includes "Bored by a lack of tension";
 	assert that the living banshees boolean is false;
 
+Section - Remembering Text
+
+[Should say something reasonable when all locations are explored]
+[Should say something reasonable when all seen creatures have moved]
+[Should say something helpful when psycholocating]
+
+remembering-text is an isolated test set.
+
+Scenario when testing remembering-text:
+	now Bodmall is testobject;
+	now the minotaur is testobject;
+	now the angel of compassion is testobject;
+	now the demon of rage is testobject;
+	now the swarm of daggers is testobject;
+	now the blood ape is testobject;
+	now the library is testobject;
+	now the cloak of shadows is testobject;
+	[several scrolls of psycholocation]
+	
+Test play when testing remembering-text:
+	do nothing.
+	
+A turn-based event has an object called the location-target. The location-target of a turn-based event is usually Null-room.
+
+To decide which room is the action-destination of (current move - a turn-based event):
+	Let the current destination be the location-target of the current move;
+	if the current destination is nothing, decide on Null-room;
+	if the current destination is a room, decide on the current destination;
+	decide on the location of the current destination.
+
+The delayed action is a stored action that varies. The delayed action is the action of waiting.
+
+For taking a player action (this is the move to the destination of a turn-based event rule):
+	if the player is at-React:
+		make no decision;
+	Let the place be the action-destination of the scheduled event;
+	if the place is the location:
+		transcribe and restart capturing;
+	if the place is Null-room or the place is the location:
+		make no decision;
+	Let the way be the best route from the location to the place;
+	if the way is not a direction:
+		record failure of  the scheduled event with message "No available route to [the location-target of the scheduled event] (in [the place])";
+		make no decision;
+	generate a player action of the action of going the way;
+		
+The move to the destination of a turn-based event rule is listed before the turn-based event player action rule in the for taking a player action rulebook.
+
+nothing-to-remember is a turn-based event. The first move of remembering-text is nothing-to-remember. The scheduled action of nothing-to-remember is the action of remembering. 
+
+Testing a turn-based event of nothing-to-remember:
+	assert that the event description includes "You have not yet explored:\n( - the <a-w>+ exit of the entrance hall \(where you currently are\)\n)+\nYou have visited the following rooms: the entrance hall \(here\)\.\n\nTip:"
+	
+remembering-daggers is a hiding-check turn-based event. The next move of nothing-to-remember is remembering-daggers. The scheduled action of remembering-daggers is the action of remembering. The location-target of remembering-daggers is the swarm of daggers.
+	
+Testing a turn-based event of remembering-daggers:
+	assert that the event description includes "You have visited the following rooms:.*You have seen the following creatures in these locations:.*- the swarm of daggers \(level 1\) in [the location] \(where you currently are\)"
+	
+[You have not yet explored:\n( - the <a-w>+ exit of <^\n>+\n)+\n]
+[visit all room]

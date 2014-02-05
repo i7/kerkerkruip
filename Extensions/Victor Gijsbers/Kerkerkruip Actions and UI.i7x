@@ -434,14 +434,31 @@ Carry out remembering:
 				say ", ";
 			otherwise:
 				say ".";
-	if at least two seen denizen persons are alive: [because one of them is the player]
+	if at least one person is memory-locatable: [because one of them is the player]
 		say "[line break]You have seen the following creatures in these locations:[line break]";
-		repeat with guy running through seen denizen persons:
-			unless player is guy:
-				unless last-seen-location of guy is Null-Room:
-					say "- [italic type][the guy][roman type] (level [if group level of the guy is not 0][group level of the guy][otherwise][level of the guy][end if]) in [italic type][the last-seen-location of the guy][roman type] ([if last-seen-location of the guy is not the location]which lies [the road to last-seen-location of the guy] from here[otherwise]where you currently are[end if])[line break]";
+		repeat with guy running through memory-locatable persons:
+			say "- [italic type][the guy][roman type] (level [if group level of the guy is not 0][group level of the guy][otherwise][level of the guy][end if]) [remembered location of the guy][line break]";
+	if at least one memorable person is not memory-locatable:
+		say "[line break]You have also seen [the list of memorable not memory-locatable people], but you don't know where [if the number of memorable not memory-locatable people is 1][it-they of a random memorable not memory-locatable person] [is-are][otherwise]are[end if] now.";
 	Let the tip text be the next tip text;
 	say "[line break][italic type]Tip[roman type]: [tip text][paragraph break]".
+
+Definition: a person (called guy) is memorable:
+	if the guy is the player, no;
+	if the guy is not denizen, no;
+	if the guy is not seen, no;
+	yes.
+
+Definition: a person (called guy) is memory-locatable:
+	if the guy is not memorable, no;
+	if the last-seen-location of the guy is Null-Room, no;
+	yes.
+
+To say remembered location of (guy - a person):
+	if the last-seen-location of the guy is Null-Room:
+		say "not where you last saw [it-them of the guy]";
+	otherwise:
+		say "in [italic type][the last-seen-location of the guy][roman type] ([if last-seen-location of the guy is not the location]which lies [the road to last-seen-location of the guy] from here[otherwise]where you currently are[end if])"
 
 A person has a room called the last-seen-location. The last-seen-location of a person is usually Null-Room.
 
@@ -574,7 +591,7 @@ To decide whether (guy - a person) is soul-reflected:
 				decide yes;
 	decide no.
 
-Carry out sensing when the psycholocation boolean is true:
+Carry out sensing when psycholocation is active:
 	if player is denizen:
 		say "As if with a third eye, you can sense:[paragraph break]";
 		let count be 0;
@@ -584,13 +601,37 @@ Carry out sensing when the psycholocation boolean is true:
 				if the location of the player is the location of the adversary:
 					say " - [italic type]the soul of [the adversary][roman type] here with you, like [soul description of adversary][line break]";
 					next;
-				let the way be the best route from the location of player to the location of the adversary;
-				if way is a direction:
-					say " - [italic type][soul description of adversary][roman type], [if way is not up and way is not down]from the [end if][way][line break]";
 				otherwise:
-					say " - [italic type][soul description of adversary][roman type], somewhere [general direction from location of the player to location of the adversary][line break]";
+					say " - [italic type][soul description of adversary][roman type], [soul directions to adversary][line break]";
 	otherwise:
 		say "Your psycholocation doesn't seem to work in your current location.".
+
+To decide what object is the point of departure for (place - a room):
+	Let the last point be the location;
+	while the last point is not the place:
+		Let the way be the best route from the last point to the place;
+		if the way is not a direction:
+			decide on nothing;
+		Let the next point be the room way from the last point;
+		If the next point is not visited:
+			decide on the last point;
+		Now the last point is the next point;
+	decide on the place;
+
+To say soul directions to (adversary - a person):
+	Let the destination be the location of the adversary;
+	if the destination is a visited room:
+		say "in [remembered location of the adversary]";
+		stop;
+	let the waystation be the point of departure for the destination;
+	if the waystation is a room and the waystation is not the location:
+		say "[the best route from the waystation to the destination] from [the waystation] (which lies [the road to the waystation] from here)";
+		stop;
+	let the way be the best route from the location to the destination;
+	if way is a direction:
+		say "[if way is not up and way is not down]from the [end if][way]";
+	otherwise:
+		say "somewhere [general direction from location of the player to location of the adversary]";
 
 Carry out sensing when the psycholocation boolean is false:		
 	if greatest power of the player is less than 3:
