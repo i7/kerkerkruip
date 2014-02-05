@@ -494,9 +494,13 @@ Initial scheduling for a turn-based event (this is the reset act counts rule):
 To schedule (the event described - a turn-based event):
 	transcribe and restart capturing;
 	if the event described is not the scheduled event:
+		log "first scheduling [the event described]";
 		follow the initial scheduling rules for the event described;
 		now the repeated moves is 0;
 	otherwise:
+		transcribe and stop capturing;
+		say "_";
+		start capturing text;
 		increment the repeated moves;
 	now the event described is not generated;
 	now the scheduled event is the event described;
@@ -1933,7 +1937,7 @@ Section - Remembering Text
 [Should say something reasonable when all seen creatures have moved]
 [Should say something helpful when psycholocating]
 
-remembering-text is an test set.
+remembering-text is an isolated test set.
 
 Scenario when testing remembering-text:
 	now Bodmall is testobject;
@@ -1946,12 +1950,21 @@ Scenario when testing remembering-text:
 	now the cloak of shadows is testobject;
 	now the teleportation beacon is bannedobject;
 	now the dimensional anchor is bannedobject;
+	now bridge of doom is testobject;
+	now Arcane Vault is bannedobject; [prevent normal placement to simulate conditions for bug 244]
+	now a random scroll of mapping is testobject;
 	[several scrolls of psycholocation]
 	
-Test play when testing remembering-text:
-	do nothing.
+A first dungeon interest rule when testing remembering-text:
+	put Arcane Vault in a near location;
 	
-A turn-based event has an object called the location-target. The location-target of a turn-based event is usually Null-room.
+Test play when testing remembering-text:
+	Let the item be a random not off-stage scroll of mapping;
+	Now the player carries the item;
+	assert "Lake of Lava should be placed" based on whether or not the lake of lava is placed;
+	assert "Lake of Lava should not be denizen" based on whether or not the lake of lava is not denizen;
+	
+A turn-based event has an object called the location-target.
 
 To decide which room is the action-destination of (current move - a turn-based event):
 	Let the current destination be the location-target of the current move;
@@ -2012,14 +2025,15 @@ Testing a turn-based event of remembering-malygris:
 dungeon-clearing is a turn-based event. The next move of remembering-malygris is dungeon-clearing.
 
 Initial scheduling for dungeon-clearing:
+	now the health of the demonic assassin is -1;
 	Repeat with guy running through denizen persons:
-		if guy is Malygris or guy is the player, next;
+		if guy is the player or the level of guy is at least 5, next;
 		now the health of guy is -1;
 		
 Testing a turn-based event of dungeon-clearing:
-	assert that the number of denizen persons is 2;
-	assert that Malygris is denizen;
-	assert that the player is denizen.
+	assert that the number of reachable persons is 2;
+	assert "Malygris should be reachable" based on whether or not Malygris is reachable;
+	assert "The player should be reachable" based on whether or not the player is reachable.
 	
 Malygris-only-remembering is a turn-based event. The next move of dungeon-clearing is malygris-only-remembering. The scheduled action of malygris-only-remembering is the action of remembering.
 
@@ -2027,5 +2041,34 @@ Testing a turn-based event of Malygris-only-remembering:
 	assert that the event description does not include "You have seen the following creatures in these locations";
 	assert that the event description includes "You have also seen Malygris, but you don't know where he is now"
 	
+exploring-everywhere is a repeatable hiding-check turn-based event. The next move of malygris-only-remembering is exploring-everywhere.
+
+Definition: A room (called place) is reachable:
+	if the place is the location, yes;
+	if the place is nogo, no;
+	decide on whether or not the best route from the location to the place is a direction.
+
+Definition: A thing is reachable if the location of it is a reachable room.
+
+Initial scheduling for exploring-everywhere:
+	log "Rooms to explore: [the list of unvisited reachable rooms]";
+	Now the location-target of exploring-everywhere is a random unvisited reachable room.
+	
+Testing a turn-based event of exploring-everywhere:
+	Now the location-target of exploring-everywhere is a random unvisited reachable room;
+	if the location-target of exploring-everywhere is nothing:
+		assert that the number of unvisited reachable rooms is 0;
+		assert "Arcane Vault should be secretly placed" based on whether or not the arcane vault is secretly placed;
+		assert "Arcane Vault should be denizen" based on whether or not the arcane vault is denizen;
+		assert "Arcane Vault should not be reachable" based on whether or not the arcane vault is not reachable;
+		assert "There should be at least 1 unvisited secret room" based on whether or not the number of unvisited denizen rooms is at least 1;
+		now exploring-everywhere is not repeatable;
+	
+remembering-everything-reachable is a turn-based event. The next move of exploring-everywhere is remembering-everything-reachable. The scheduled action of remembering-everything-reachable is the action of remembering.
+
+Testing a turn-based event of remembering-everything-reachable:
+	assert that the event description does not include "You have not yet explored";
+	 
+
 [You have not yet explored:\n( - the <a-w>+ exit of <^\n>+\n)+\n]
 [visit all room]

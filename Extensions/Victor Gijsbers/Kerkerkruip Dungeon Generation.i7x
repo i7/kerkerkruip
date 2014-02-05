@@ -173,10 +173,10 @@ Last creating the map rule (this is the potentially add a tunnel rule):
 		create a tunnel.
 		
 To create a tunnel:
-	let P be a random placed placeable connectable room;
+	let P be a random normally placed connectable room;
 	let Q be P;
 	while Q is P:
-		now Q is a random placed placeable connectable room;
+		now Q is a random normally placed connectable room;
 	if generation info is true, say "* Building a tunnel between [P] and [Q].[line break][run paragraph on]";			
 	let R be false;
 	while R is false:
@@ -364,7 +364,7 @@ To place (new place - a room) from (original place - a room) at (x - a number) b
 		change the way exit of original place to new place;
 		let reverse be the opposite of way;
 		change the reverse exit of new place to original place;
-		now new place is placed;
+		mark new place as normally placed;
 		if generation info is true, say "* [Way] of [original place] ([x-coordinate of original place], [y-coordinate of original place], [z-coordinate of original place]) is [new place] ([x], [y], [z]).[line break][run paragraph on]";
 		now additional considered room is new place;
 		now additional original room is original place;
@@ -386,7 +386,7 @@ To place (a - a room) next to (b - a room):
 				change the way exit of b to a;
 				let reverse be the opposite of way;
 				change the reverse exit of a to b;
-				now a is placed;
+				mark a as normally placed;
 				if generation info is true, say "* Placed [a] [way] of [b].[line break][run paragraph on]".
 			
 Chapter - Other routines

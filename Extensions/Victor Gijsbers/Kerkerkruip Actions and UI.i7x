@@ -408,32 +408,31 @@ Check remembering:
 		say "You're not in the main Kerkerkruip dungeon right now." instead.
 
 Carry out remembering:
-	if the number of unvisited placed placeable not nogo rooms is zero:
+	if the number of unvisited memorable rooms is zero:
 		say "All locations have been explored. [Map description]";
 	otherwise:
 		if the mapping boolean is true:
 			say "[Map description]";
 		say "You have not yet explored:[line break]";
-		repeat with place running through placed unvisited not nogo rooms:
+		repeat with place running through unvisited memorable rooms:
 			repeat with further place running through placed visited rooms:
 				if absolute distance between place and further place is 1:
 					repeat with way running through cardinal directions:
 						if place is the room the way of further place:
 							say " - the [way] exit of [the further place] ([if further place is not the location]which lies [the road to further place] from here[otherwise]where you currently are[end if])[line break]";
 	say "[line break]You have visited the following rooms: ";
-	let m be the number of visited placed rooms minus the number of visited tunnels;
+	let m be the number of visited memorable rooms;
 	[ Sort the rooms in alphabetical order ]
 	[let R be the list of visited rooms;
 	sort R in printed name order;
 	repeat with X running through R:]
-	repeat with X running through visited placed rooms:
-		unless X is a tunnel:
-			say "[the X] ([the road to X])[run paragraph on]";
-			decrease m by 1;
-			if m is greater than 0:
-				say ", ";
-			otherwise:
-				say ".";
+	repeat with X running through visited memorable rooms:
+		say "[the X] ([the road to X])[run paragraph on]";
+		decrease m by 1;
+		if m is greater than 0:
+			say ", ";
+		otherwise:
+			say ".";
 	if at least one person is memory-locatable: [because one of them is the player]
 		say "[line break]You have seen the following creatures in these locations:[line break]";
 		repeat with guy running through memory-locatable persons:

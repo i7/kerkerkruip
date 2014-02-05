@@ -1524,7 +1524,7 @@ To put (place - a room) in a near location:
 	now x-coordinate of place is considered-x;
 	now y-coordinate of place is considered-y;
 	now z-coordinate of place is considered-z;
-	now place is placed;
+	mark place as secretly placed;
 	if generation info is true, say "* Added [place] ([x-coordinate of place], [y-coordinate of place], [z-coordinate of place]).[line break][run paragraph on]".
 	
 To do a random step:
@@ -1908,7 +1908,6 @@ A dungeon interest rule (this is the potentially add the Arcane Vault rule):
 	if Arcane Vault is not placed:
 		if a random chance of 1 in 30 succeeds:
 			put Arcane Vault in a near location;
-			now Arcane Vault is not teleportable.
 
 Instead of listening to the Arcane Vault:
 	say "All sounds seem muffled and unreal.".
