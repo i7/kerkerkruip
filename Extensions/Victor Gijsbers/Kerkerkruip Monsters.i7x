@@ -2069,7 +2069,7 @@ The spirit score of the hound is 5.
 
 When play begins:
 	let X be a random natural weapon part of the hound;
-	now damage die of X is 7; [Its bite is worse than its bark!]
+	now damage die of X is 6; [Its bite is worse than its bark!]
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
