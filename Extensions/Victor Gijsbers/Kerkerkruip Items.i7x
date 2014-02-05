@@ -3678,8 +3678,8 @@ Understand "axe" as the pickaxe.
 
 The description of the pickaxe is "Used by wizards to construct their dungeons, a magical pickaxe can be used to dig tunnels in whatever direction you wish. Just dig north, for instance. In a pinch, it can also serve as a weapon.".
 
-The unlock level of the magical pickaxe is 9.
-The unlock text of the magical pickaxe is "an item that functions both as a weapon and as a tool for digging tunnels".
+[The unlock level of the magical pickaxe is 9.
+The unlock text of the magical pickaxe is "an item that functions both as a weapon and as a tool for digging tunnels".]
 
 The damage die of the pickaxe is 5.
 The weapon attack bonus of the pickaxe is -1.
@@ -3702,7 +3702,7 @@ The glass cannon is size-agnostic.
 The description of the glass cannon is "At first sight this seems to be nothing but a foot-long tube of glass. However, it is a very powerful weapon, the shots of which can quickly destroy even the most powerful enemy. But be warned: not only does the glass cannon make you an easier target, it is also the case that when you ready the weapon, you [bold type]permanently[roman type] lose half of your health.".
 
 The damage die of the glass cannon is 0.
-The weapon attack bonus of the glass cannon is 3.
+The weapon attack bonus of the glass cannon is 2.
 The weapon damage bonus of the glass cannon is 10.
 The dodge bonus of the glass cannon is 0.
 The parry-with bonus of the glass cannon is 2.

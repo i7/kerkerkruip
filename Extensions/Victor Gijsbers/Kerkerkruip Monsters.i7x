@@ -147,9 +147,9 @@ The swarm of daggers is flyer.
 The swarm of daggers is not talker.
 The swarm of daggers is thrower.
 
-The health of the swarm of daggers is 14.
-The melee of the swarm of daggers is 3.
-The defence of the swarm of daggers is 5.
+The health of the swarm of daggers is 16.
+The melee of the swarm of daggers is 4.
+The defence of the swarm of daggers is 6.
 The body score of the swarm of daggers is 6.
 The mind score of the swarm of daggers is 3.
 The spirit score of the swarm of daggers is 6. 
@@ -179,22 +179,26 @@ The legend-label of swarm of daggers is Figure of map_legend_swarm_of_daggers.
 
 Section - Scattering
 
-Dagger-scattered is a truth state that varies. Dagger-scattered is false.
+Dagger-scattered is a number that varies. Dagger-scattered is 0.
 
 An aftereffects rule (this is the scatter the daggers rule):
 	if the global defender is the swarm of daggers and the attack damage is greater than 0 and the swarm of daggers is not dead:
-		say "The impact of the blow [italic type]scatters[roman type] the swarm of daggers. They will need to spend one action regrouping themselves.";
-		now dagger-scattered is true.
+		say "The impact of the blow [italic type]scatters[roman type] the swarm of daggers. They will need to spend two actions regrouping themselves.";
+		now dagger-scattered is 2.
 
-An AI action selection rule for the swarm of daggers when dagger-scattered is true (this is the daggers must wait if scattered rule):
+An AI action selection rule for the swarm of daggers when dagger-scattered is not 0 (this is the daggers must wait if scattered rule):
 	choose row with an Option of the action of the swarm of daggers waiting in the Table of AI Action Options;
 	now the Action Weight entry is 1000.
 
-Check the swarm of daggers waiting when dagger-scattered is true (this is the daggers regroup rule):
-	now dagger-scattered is false;
-	say "The swarm of daggers regroups." instead.
+Check the swarm of daggers waiting when dagger-scattered is not 0 (this is the daggers regroup rule):
+	if dagger-scattered > 1:
+		now dagger-scattered is 1;
+		say "The swarm of daggers starts to regroup." instead;
+	otherwise:
+		now dagger-scattered is 0;
+		say "The swarm of daggers regroups." instead.
 
-Check the swarm of daggers hitting when dagger-scattered is true:
+Check the swarm of daggers hitting when dagger-scattered is not 0:
 	stop the action;
 
 
@@ -530,7 +534,7 @@ The description of ravenous armadillo is "As their name suggests, ravenous armad
 The soul description of the ravenous armadillo is "energy like a screen of scales".
 
 The health of the ravenous armadillo is 12.
-The melee of the ravenous armadillo is -1.
+The melee of the ravenous armadillo is 0.
 The defence of the ravenous armadillo is 5.
 
 The body score of the ravenous armadillo is 6.
@@ -1898,8 +1902,10 @@ Last killing rule (this is the demon of rage gets stronger rule):
 To do the demon of rage power-up:
 	now demon of rage is not asleep;
 	increase demon-of-rage-number by 1;
-	increase melee of demon of rage by 1;
-	increase defence of demon of rage by 1;
+	if a random chance of 2 in 3 succeeds:
+		increase melee of demon of rage by 1;
+	if a random chance of 2 in 3 succeeds:
+		increase defence of demon of rage by 1;
 	increase health of demon of rage by 3;
 	increase permanent health of demon of rage by 3;
 	increase body score of demon of rage by 1;
@@ -2063,7 +2069,7 @@ The spirit score of the hound is 5.
 
 When play begins:
 	let X be a random natural weapon part of the hound;
-	now damage die of X is 7; [Its bite is worse than its bark!]
+	now damage die of X is 6; [Its bite is worse than its bark!]
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
