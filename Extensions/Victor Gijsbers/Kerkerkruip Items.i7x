@@ -768,16 +768,18 @@ The antler of the Tungausy shaman is a major hat. The indefinite article is "the
 The antler of the Tungausy shaman is religious.
 The antler of the Tungausy shaman is silver.
 
+Rarity of the antler of the Tungausy shaman is 2.
+
 The blood magic cost of antler of the tungausy shaman is 2.
 The blood magic level of antler of the tungausy shaman is 0.
-The blood magic maximum of antler of the tungausy shaman is 6.
+The blood magic maximum of antler of the tungausy shaman is 8.
 
-The description of the antler of the tungausy shaman is "Resembling the antler of a deer, this piece of jewelry is used by the Tungausy shaman to have the spirits help him in his quest. The spirits may be mischievous, however, so be careful. [italic type](When you are under the influence of ment, it has a [50 + 5 times blood magic level of the antler of the tungausy shaman] percent chance to correctly predict the attack strength of the opponent[unless blood magic level of the antler of the tungausy shaman is blood magic maximum of the antler of the tungausy shaman]. You can increase this chance by 5 percent if you feed the antler [current blood cost of the antler of the tungausy shaman] blood[end if].) [roman type]".
+The description of the antler of the tungausy shaman is "Resembling the antler of a deer, this piece of jewelry is used by the Tungausy shaman to have the spirits help him in his quest. The spirits may be mischievous, however, so be careful. [italic type](It has a [50 + 5 times blood magic level of the antler of the tungausy shaman] percent chance to correctly predict the attack strength of the opponent[unless blood magic level of the antler of the tungausy shaman is blood magic maximum of the antler of the tungausy shaman]. You can increase this chance by 5 percent if you feed the antler [current blood cost of the antler of the tungausy shaman] blood[end if].) [roman type]".
 
 antlerattackstrength is a number that varies.
 
 This is the antlerattack rule:
-	if the player wears the antler of the tungausy shaman and the ment timer is greater than 0:
+	if the player wears the antler of the tungausy shaman:
 		if the combat status is player choosing and the player is at-React:
 			if tome-of-law-number is not 0:
 				now the antlerattackstrength is tome-of-law-number;
@@ -788,12 +790,12 @@ This is the antlerattack rule:
 			if a random  chance of x in 100 succeeds:
 				say "The shamanic spirits predict that [the main actor]'s attack will be [if antlerattackstrength is less than 4]weak[otherwise if antlerattackstrength is less than 8]average[otherwise if antlerattackstrength is not 20]strong[otherwise]heroic[end if].";
 			otherwise:
-				say "The shamanic spirits predict that [the main actor]'s attack to be [one of]weak[or]average[or]strong[or]heroic[purely at random].".
+				say "The shamanic spirits predict that [the main actor]'s attack will be [one of]weak[or]average[or]strong[or]heroic[purely at random].".
 
-The antlerattack rule is listed before the  player chooses an action or reaction rule  in the combat round rules.
+The antlerattack rule is listed before the player chooses an action or reaction rule  in the combat round rules.
 
 A special set attack strength rule (this is the antler attack roll rule):
-	if the player wears the antler of the tungausy shaman and the ment timer is greater than 0:
+	if the player wears the antler of the tungausy shaman:
 		if the main actor is not the player:
 			now attack strength is antlerattackstrength.
 
