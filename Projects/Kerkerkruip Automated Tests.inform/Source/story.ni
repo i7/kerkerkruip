@@ -2097,7 +2097,37 @@ Testing a turn-based event of map-remembering:
 	Assert that the number of secretly placed rooms is 2;
 	assert that the event description includes "Based on the map you found.*secret rooms in the dungeon, one <^[line break]>+, one <^[line break]>+.";
 	
+getting-close-to-vault is a hiding-check turn-based event. The next move of map-remembering is getting-close-to-vault.
 
+Initial scheduling of getting-close-to-vault:
+	Let the closest place be Null-room;
+	Let the shortest distance be 1000;
+	Repeat with the place running through reachable rooms:
+		Let the candidate distance be the absolute distance between the place and the Arcane Vault;
+		if the candidate distance is less than the shortest distance:
+			now the shortest distance is the candidate distance;
+			now the closest place is the place;
+	now the location-target of getting-close-to-vault is the closest place.
+			
+digging-to-vault is a repeatable hiding-check turn-based event. The next move of getting-close-to-vault is digging-to-vault;
+
+To schedule digging to (place - a room) for (current move - a turn-based event):
+	Now the scheduled action of the current move is the action of digging the general direction from the location to place.
+	
+Initial scheduling of digging-to-vault:
+	schedule digging to the Arcane Vault for digging-to-vault;
+	
+Testing a turn-based event of digging-to-vault:
+	if the location is Arcane Vault:
+		record success of digging-to-vault;
+	otherwise:
+		schedule digging to the Arcane Vault for digging-to-vault;
+	
+secret-room-remembering is a turn-based event. The next move of digging-to-vault is secret-room-remembering. The scheduled action of secret-room-remembering is the action of remembering.
+
+Testing a turn-based event of secret-room-remembering:
+	assert that the event description includes "Based on the map you found.*a secret room in the dungeon, <a-z>";
+	assert that the event description does not include "secret room in the dungeon, one";
 	
 [make sure tunnels don't show up when they shouldn't, make sure they do show up in unexplored list]
 
