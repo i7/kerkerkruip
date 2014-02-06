@@ -1482,7 +1482,7 @@ Columnated Ruins is extra-accepting.
 Columnated Ruins is vp-agnostic.
 Columnated Ruins is civilised.
 
-The rarity of Collumnated Ruins is 1.
+The rarity of Columnated Ruins is 1.
 
 The pillars are scenery in columnated ruins. The description of the pillars is "Larger creatures will have trouble navigating the dense forest of pillars, while smaller creatures will find many easy spots to duck away.". Understand "column" and "pillar" and "columns" as the pillars.
 
@@ -1536,7 +1536,20 @@ To do a random step:
 	if q is 5, increase considered-z by 1;
 	if q is 6, decrease considered-z by 1.
 	
-
+[Set secretly placeable and secret-placement rarity of rooms to have them included here.
+Populate them with monsters and treasure in the dungeon finish rules.]
+A dungeon interest rule (this is the place secret rooms rule):
+	let the normal rarity multiplier be the rarity multiplier;
+	Repeat with the place running through secretly placeable rooms:
+		if the place is placed, next;
+		now the rarity multiplier is the secret-rarity multiplier of the place;
+		now original room is Null-room;
+		now considered room is the place;
+		consider the placement possible rules;
+		if rule succeeded:
+			put the place in a near location;
+	now the rarity multiplier is the normal rarity multiplier.
+		
 Chapter - Eternal Prison
 
 The eternal prison is a room. "The sense of evil emanating from the very stone of this room is almost overpowering."
@@ -1544,6 +1557,7 @@ The eternal prison is a room. "The sense of evil emanating from the very stone o
 Eternal Prison is connectable.
 Eternal Prison is not connection-inviting.
 Eternal Prison is not placeable.
+Eternal Prison is secretly placeable.
 Eternal Prison is not habitable.
 Eternal Prison is not treasurable.
 Eternal Prison is not extra-accepting.
@@ -1551,9 +1565,8 @@ Eternal prison is not teleportable.
 Eternal Prison is vp-underground.
 Eternal Prison is barren.
 
-A dungeon interest rule (this is the potentially add the Eternal Prison rule):
-	if a random chance of 1 in 5 succeeds:
-		put Eternal Prison in a near location.
+The rarity of Eternal Prison is 1.
+The secret-rarity multiplier of Eternal Prison is 5. [ (1/5)^1 = a 1 in 5 chance ]
 
 
 Section - Eternal Prison label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
@@ -1569,17 +1582,20 @@ The hidden treasury is a room. "On a raised portion of the floor stands a huge c
 Hidden Treasury is connectable.
 Hidden Treasury is not connection-inviting.
 Hidden Treasury is not placeable.
+Hidden Treasury is secretly placeable.
 Hidden Treasury is not habitable.
 Hidden Treasury is not treasurable.
 Hidden Treasury is not teleportable.
 Hidden Treasury is vp-agnostic.
 Hidden Treasury is civilised.
 
+The rarity of Hidden Treasury is 1.
+The secret-rarity multiplier of Hidden Treasury is 5.
+
 The ornate chest is scenery in Hidden Treasury. The ornate chest is a closed openable container. Understand "gems" and "precious" and "metals" as the ornate chest.
 
-A dungeon interest rule (this is the potentially add the Hidden Treasury rule):
-	if a random chance of 1 in 5 succeeds:
-		put Hidden Treasury in a near location;
+A dungeon finish rule (this is the fill the Hidden Treasury rule):
+	if the Hidden Treasury is placed:
 		place 3 of minor things in ornate chest;
 		place 1 of major things in ornate chest;
 		if a random chance of 1 in 3 succeeds:
@@ -1598,11 +1614,15 @@ The mausoleum is a room. "The walls are adorned with rich gems and gold -- more 
 Mausoleum is connectable.
 Mausoleum is not connection-inviting.
 Mausoleum is not placeable.
+Mausoleum is secretly placeable.
 Mausoleum is not habitable.
 Mausoleum is treasurable.
 Mausoleum is not teleportable.
 Mausoleum is vp-agnostic.
 Mausoleum is deathly.
+
+The rarity of Mausoleum is 1.
+The secret-rarity multiplier of Mausoleum is 10.
 
 The tomb of the ancient king is scenery in the mausoleum. The tomb of the ancient king is a closed openable container. Understand "marble" and "screw" and "screws" and "lid" and "sculptures" and "sculpted" and "head" and "heads" as the tomb of the ancient king. The description of the tomb of the ancient king is "The tomb is made of richly sculpted marble. Some of the sculptures serve as screws to hold the tomb closed.".
 
@@ -1621,18 +1641,14 @@ Last check opening the tomb of the ancient king:
 			increase tomb-ancient-king-counter by 1;
 			say "Marble screws with sculpted heads hold the tomb closed. You painstakingly unscrew one that looks like a [one of]gargoyle[or]mermaid[or]skeleton[or]naked woman[or]phallus[or]horse[or]minotaur[or]fairy[or]priest[or]wizard[or]chained slave[or]blood ape[or]copulating man and woman[or]bull impregnating a human woman[or]double-bladed axe[or]man with wings[at random]." instead.
 
-A dungeon interest rule (this is the potentially add the Mausoleum rule):
-	if Mausoleum is not placed:
-		if a random chance of 1 in 10 succeeds:
-			put Mausoleum in a near location;
-			people the Mausoleum;
-		otherwise:
-			if a random chance of 1 in 10 succeeds: [TODO]
-				let place be a random placed connectable room;
-				place mausoleum next to place;
-				people the mausoleum.
+A last dungeon interest rule (this is the potentially connect the Mausoleum rule):
+	if Mausoleum is not placed and a random chance of 1 in 10 succeeds: [TODO]
+		let place be a random placed connectable room;
+		place mausoleum next to place;
 
-To people the mausoleum:
+A dungeon finish rule (this is the people the Mausoleum rule):
+	if the Mausoleum is not placed:
+		make no decision;
 	if (a random chance of 2 in 5 succeeds) and (at least one super-undead person is off-stage):
 		let guy be a random super-undead off-stage person;
 		move guy to the mausoleum;
@@ -1669,6 +1685,7 @@ The cavern of rust is a room. "The walls of this cavern are covered with the spo
 Cavern of Rust is connectable.
 Cavern of Rust is not connection-inviting.
 Cavern of Rust is not placeable.
+Cavern of Rust is secretly placeable.
 Cavern of Rust is not habitable.
 Cavern of Rust is treasurable.
 Cavern of Rust is not teleportable.
@@ -1677,9 +1694,8 @@ Cavern of Rust is barren.
 
 Cavern of Rust is rust-spored.
 
-A dungeon interest rule (this is the potentially add the Cavern of Rust rule):
-	if a random chance of 1 in 5 succeeds:
-		put Cavern of Rust in a near location.
+The rarity of Cavern of Rust is 1.
+The secret-rarity multiplier of Cavern of Rust is 5.
 
 
 Section - Cavern of Rust label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
@@ -1695,12 +1711,16 @@ The portal of smoke is a room. "Huge clouds of smoke pour forth from a magical p
 Portal of Smoke is connectable.
 Portal of Smoke is not connection-inviting.
 Portal of Smoke is not placeable.
+Portal of Smoke is secretly placeable.
 Portal of Smoke is not habitable.
 Portal of Smoke is not treasurable.
 Portal of Smoke is not teleportable.
 Portal of Smoke is not extra-accepting.
 Portal of Smoke is vp-agnostic.
 Portal of Smoke is elemental.
+
+The rarity of Portal of Smoke is 1;
+The secret-rarity multiplier of Portal of Smoke is 5;
 
 Smoke rule (this is the smoke at the Portal of Smoke rule):
 	if test room is Portal of Smoke:
@@ -1721,9 +1741,8 @@ Does the player mean entering the portal to the elemental plane of smoke: it is 
 Instead of going inside in Portal of Smoke:
 	try entering the portal to the elemental plane of smoke.
 
-A dungeon interest rule (this is the potentially add the Portal of Smoke rule):
-	if a random chance of 1 in 5 succeeds:
-		put Portal of Smoke in a near location;
+A dungeon finish rule (this is the populate the Plane of Smoke rule):
+	if the Portal of Smoke is placed:
 		place 3 of minor things in Elemental Plane of Smoke Storage;
 		place 1 of major things in Elemental Plane of Smoke Storage;
 		if a random chance of 1 in 3 succeeds:
@@ -1895,6 +1914,7 @@ The arcane vault is a room. "An oppressive silence pervades the marble hall, as 
 The Arcane Vault is connectable.
 The Arcane Vault is not connection-inviting.
 The Arcane Vault is placeable.
+The Arcane Vault is secretly placeable.
 The Arcane Vault is not habitable.
 The Arcane Vault is not treasurable.
 The Arcane Vault is teleportable.
@@ -1903,11 +1923,7 @@ The Arcane Vault is vp-agnostic.
 The Arcane Vault is magical.
 
 The rarity of Arcane Vault is 5.
-
-A dungeon interest rule (this is the potentially add the Arcane Vault rule):
-	if Arcane Vault is not placed:
-		if a random chance of 1 in 30 succeeds:
-			put Arcane Vault in a near location;
+The secret-rarity multiplier of Arcane Vault is 2.
 
 Instead of listening to the Arcane Vault:
 	say "All sounds seem muffled and unreal.".

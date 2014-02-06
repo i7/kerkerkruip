@@ -510,11 +510,8 @@ Before taking a player action when the scheduled event is generated:
 	stop and save event description;
 	Let repeat be whether or not (the scheduled event is repeatable) and (the repeated moves > 0);
 	now the scheduled event is not generated;
-	if repeat is true:
-		say "* [run paragraph on]";
-	otherwise:
-		log "testing effects of [the scheduled event]";
-	start capturing text;
+	say "* [run paragraph on]";
+ 	start capturing text;
 	follow the testing a turn-based event rules for the scheduled event;
 	transcribe and stop capturing;
 	Let repeat be whether or not the scheduled event is [still] repeatable;
@@ -1951,16 +1948,22 @@ Scenario when testing remembering-text:
 	now the teleportation beacon is bannedobject;
 	now the dimensional anchor is bannedobject;
 	now bridge of doom is testobject;
-	now Arcane Vault is bannedobject; [prevent normal placement to simulate conditions for bug 244]
+	now every secretly placeable room is bannedobject; [prevent normal placement of Arcane Vault to simulate conditions for bug 244]
+	now Hidden Treasury is testobject;
 	now a random scroll of mapping is testobject;
+	now the rod of the master builder is testobject;
+	now generation info is true;
 	[several scrolls of psycholocation]
 	
-A first dungeon interest rule when testing remembering-text:
-	put Arcane Vault in a near location;
-	
+First dungeon interest rule (this is the force Arcane Vault to be secretly placed rule):
+	now Arcane Vault is testobject;
+	now the rarity of Arcane Vault is 0;
+		
 Test play when testing remembering-text:
 	Let the item be a random not off-stage scroll of mapping;
 	Now the player carries the item;
+	Now the player carries the rod of the master builder;
+	assert "Hidden Treasury should be secretly placed" based on whether or not the hidden treasury is secretly placed;
 	assert "Lake of Lava should be placed" based on whether or not the lake of lava is placed;
 	assert "Lake of Lava should not be denizen" based on whether or not the lake of lava is not denizen;
 	
@@ -2000,10 +2003,12 @@ remembering-daggers is a hiding-check turn-based event. The next move of nothing
 Testing a turn-based event of remembering-daggers:
 	assert that the event description includes "You have visited the following rooms:.*You have seen the following creatures in these locations:.*- the swarm of daggers \(level 1\) in [the location] \(where you currently are\)"
 	
-meeting-malygris is a hiding-check turn-based event. The next move of remembering-daggers is meeting-malygris. The location-target of meeting-malygris is Malygris.
+meeting-malygris is a repeatable hiding-check turn-based event. The next move of remembering-daggers is meeting-malygris. The location-target of meeting-malygris is Malygris.
 
 Testing a turn-based event of meeting-malygris:
-	assert that the event description includes "Malygris (does not notice you|remains unaware of your presence)";
+	if the act count of Malygris is at least 1:
+		assert that the event description includes "Malygris (does not (detect|notice)|remains unaware of) you(r presence)?";
+		now meeting-malygris is not repeatable;
 	
 moving-malygris is a repeatable hiding-reveal turn-based event. The next move of meeting-malygris is moving-malygris. The maximum repeats of moving-malygris is 20.
 
@@ -2051,7 +2056,6 @@ Definition: A room (called place) is reachable:
 Definition: A thing is reachable if the location of it is a reachable room.
 
 Initial scheduling for exploring-everywhere:
-	log "Rooms to explore: [the list of unvisited reachable rooms]";
 	Now the location-target of exploring-everywhere is a random unvisited reachable room.
 	
 Testing a turn-based event of exploring-everywhere:
@@ -2069,6 +2073,23 @@ remembering-everything-reachable is a turn-based event. The next move of explori
 Testing a turn-based event of remembering-everything-reachable:
 	assert that the event description does not include "You have not yet explored";
 	 
+map-reading is a turn-based event. The next move of remembering-everything-reachable is map-reading.
 
-[You have not yet explored:\n( - the <a-w>+ exit of <^\n>+\n)+\n]
-[visit all room]
+Initial scheduling of map-reading:
+	Let M be a random scroll of mapping carried by the player;
+	now the scheduled action of map-reading is the action of reading M;
+	
+Testing a turn-based event of map-reading:
+	assert that the event description includes "a complete floor plan of the dungeon of Kerkerkruip imprints itself on your mind"
+	
+map-remembering is a turn-based event. The next move of map-reading is map-remembering. The scheduled action of map-remembering is the action of remembering.
+
+Testing a turn-based event of map-remembering:
+	Assert that the number of secretly placed rooms is 2;
+	assert that the event description includes "Based on the map you found.*secret rooms in the dungeon, one <^[line break]>+, one <^[line break]>+.";
+	
+
+	
+[make sure tunnels don't show up when they shouldn't, make sure they do show up in unexplored list]
+
+[psycholocation + sense]

@@ -29,6 +29,7 @@ To create the dungeon:
 	if generation info is true, say "[paragraph break]";
 	print generation message "Placing treasures...";
 	stock the dungeon;
+	print generation message "Making the dungeon more interesting...";
 	make the dungeon interesting;
 	print generation message "Finishing the dungeon...";
 	finish the dungeon;
@@ -63,10 +64,12 @@ An object has a number called the rarity. The rarity of an object is usually 0.
 
 Definition: an object (called item) is rare if rarity of item is greater than 0.
 
+The rarity multiplier is a number that varies. The rarity multiplier is 2. [This number can be used to globally increase the rarity of everything on a linear scale]
+
 To decide if (stuff - an object) is too rare:
 	let n be rarity of stuff;
 	while n is greater than 0:
-		if a random chance of 1 in 2 succeeds:
+		if a random chance of 1 in the rarity multiplier succeeds:
 			decide on true;
 		decrease n by 1;
 	decide on false.
@@ -226,8 +229,8 @@ Section - Additional connections and collapsable passages
 Collapse relates rooms to each other. The verb to collapse (he collapses, they collapse, he collapsed, it is collapsed, he is collapsing) implies the collapse relation.
 			
 Last creating the map (this is the possibly adding some further connections rule):
-	repeat with place running through placed connectable rooms:
-		repeat with further place running through placed connectable rooms:
+	repeat with place running through normally placed connectable rooms:
+		repeat with further place running through normally placed connectable rooms:
 			let way be the direction from place to further place;
 			if way is not northwest:
 				if further place is not the room way of place:
@@ -336,17 +339,15 @@ To decide which room is a suitable room from (place - a room) at (x - a number) 
 	sort Table of Suitable rooms in reverse Room Score order;
 [	repeat through Table of Suitable Rooms:
 		say "[Candidate entry] at [Room score entry] points.";]
-	let max be the number of filled rows in Table of Suitable Rooms;
-	if max is 0:
+	let the worst choice be the number of filled rows in Table of Suitable Rooms;
+	if the worst choice is 0:
 		decide on Entrance Hall;
 	otherwise:
-		let pos1 be a random number between 1 and max;
-		let pos2 be a random number between 1 and max;
-		let pos3 be a random number between 1 and max;
-		if pos2 is less than pos1, now pos1 is pos2;
-		if pos3 is less than pos1, now pos1 is pos3;
-[		say "[pos1] of [max]";]
-		choose row pos1 in the Table of Suitable rooms;
+		let the choice be the worst choice;
+		repeat with improvement running from 1 to 3:
+			let the better choice be a random number between 1 and the worst choice;
+			if the better choice is less than the choice, now the choice is the better choice;
+		choose row choice in the Table of Suitable rooms;
 		decide on Candidate entry.
 
 Part - Additional Routines
@@ -862,7 +863,6 @@ The dungeon interest rules are a rulebook.
 
 To make the dungeon interesting:
 	consider the dungeon interest rules.
-
 
 Book - Finising the dungeon
 

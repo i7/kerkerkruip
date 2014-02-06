@@ -73,11 +73,15 @@ X is civilised/religious/barren/deathly/elemental/magical/alchemical]
 
 Section - Placement properties
 
-A room can be connectable. A room is usually connectable. [Additional connections can be made in the last stage of making the map.]
+A room can be connectable. A room is usually connectable. [Additional connections can be made in the last stage of making the map, and digging is allowed.]
 
 A room can be connection-inviting. A room is usually not connection-inviting. [If connection-inviting (and connectable), all possible connections to this room will be made.]
 
 A room can be placeable. A room is usually placeable. [Not placeable rooms are not considered during the normal dungeon creation.]
+
+A room can be secretly placeable. A room is usually not secretly placeable. [A room can be both placeable and secretly placeable. If so, it has a chance to be placed in the main dungeon and another outside the connected dungeon.]
+
+A room has a number called the secret-rarity multiplier. The secret-rarity multiplier of a room is usually 1. [If a secretly placeable room was not placed normally, the rarity multiplier is set to this number. See Kerkerkruip Dungeon Generation]
 
 A room can be habitable. A room is usually habitable. [Monsters can be placed in it.]
 
