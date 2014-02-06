@@ -767,6 +767,8 @@ A person can be a spontaneous teleporter. A person is usually not a spontaneous 
 
 A room can be teleportable. A room is usually teleportable. [A teleportable room is one you can teleport TO.]
 
+Definition: a room is teleport-receiving if it is normally placed and it is teleportable and it is not nogo. [Teleport-receiving means you can teleport to it right now]
+
 [We have teleport rules which check whether a person can teleport.]
 The teleport impossible rules are a rulebook.
 
@@ -802,9 +804,9 @@ Check an actor teleporting (this is the teleport impossible rule):
 			do nothing instead.
 
 First carry out an actor teleporting (this is the choose a destination rule):
-	let destination be a random placed placeable teleportable room;
+	let destination be a random teleport-receiving room;
 	while destination is the location of the actor:
-		let destination be a random placed placeable teleportable room;
+		let destination be a random teleport-receiving room;
 	now teleportation-destination is destination.
 
 First carry out an actor teleporting (this is the teleport away from combat rule):

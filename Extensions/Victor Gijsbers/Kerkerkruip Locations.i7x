@@ -199,6 +199,7 @@ Lake of Lava is nogo.
 Lake of Lava is not connectable.
 Lake of Lava is not connection-inviting.
 Lake of Lava is not placeable.
+Lake of Lava is not teleportable.
 Lake of Lava is not habitable.
 Lake of Lava is not treasurable.
 Lake of Lava is not extra-accepting.

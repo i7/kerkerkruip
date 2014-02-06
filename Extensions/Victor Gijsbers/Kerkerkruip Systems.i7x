@@ -93,16 +93,16 @@ A room can be nogo. A room is usually not nogo. [Nogo rooms are not listed in ex
 
 To mark (place - a room) as normally placed:
 	now place is placed;
-	now place is placeable;
+	now place is not secretly placeable;
 
 To mark (place - a room) as secretly placed:
 	now place is placed;
-	now place is not placeable;
+	now place is secretly placeable;
 	now place is not teleportable;
 
 Section - Derived Properties of Rooms
 
-Definition: A room is secretly placed if it is placed and it is not placeable.
+Definition: A room is secretly placed if it is placed and it is secretly placeable.
 
 Definition: A room is normally placed if it is placed and it is placeable.
 

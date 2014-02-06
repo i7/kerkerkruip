@@ -1004,15 +1004,19 @@ To force the cloak of shadows to work:
 	try wearing the cloak of shadows;
 	now the player is hidden;
 		
+Carry out taking off the cloak of shadows:
+	now traveling sneakily is false;
+	
 To travel sneakily to (place - a room):
 	force the cloak of shadows to work;
 	While the location is not the place:
 		now the way-to-get-there is the best route from the location to the place;
 		record a test attempt;
 		if the way-to-get-there is a direction:
+			let already sneaking be traveling sneakily;
 			now traveling sneakily is true;
 			try going the way-to-get-there;
-			now traveling sneakily is false;
+			now traveling sneakily is already sneaking;
 		otherwise:
 			record failure report "Can't find a route to [place].";
 			stop;
@@ -1591,6 +1595,7 @@ Scenario when testing sul-intervention-test:
 	now Temple of Sul is testobject;
 	now Bodmall is testobject;
 	now the swarm of daggers is testobject;
+	now the hall of mirrors is bannedobject; 
 	
 Test play when testing sul-intervention-test:
 	extract the player to the location of bodmall;
@@ -1958,7 +1963,7 @@ Scenario when testing remembering-text:
 First dungeon interest rule (this is the force Arcane Vault to be secretly placed rule):
 	now Arcane Vault is testobject;
 	now the rarity of Arcane Vault is 0;
-		
+	
 Test play when testing remembering-text:
 	Let the item be a random not off-stage scroll of mapping;
 	Now the player carries the item;
@@ -1966,6 +1971,10 @@ Test play when testing remembering-text:
 	assert "Hidden Treasury should be secretly placed" based on whether or not the hidden treasury is secretly placed;
 	assert "Lake of Lava should be placed" based on whether or not the lake of lava is placed;
 	assert "Lake of Lava should not be denizen" based on whether or not the lake of lava is not denizen;
+	assert "Lake of Lava should not be teleportable" based on whether or not the lake of lava is not teleportable;
+	assert "Lake of Lava should be nogo" based on whether or not the lake of lava is nogo;
+	assert "Lake of Lava should not be secretly placed" based on whether or not lake of lava is not secretly placed;
+	assert "Lake of Lava should not be placeable" based on whether or not lake of lava is not placeable;
 	
 A turn-based event has an object called the location-target.
 
@@ -2037,8 +2046,8 @@ Initial scheduling for dungeon-clearing:
 		
 Testing a turn-based event of dungeon-clearing:
 	assert that the number of reachable persons is 2;
-	assert "Malygris should be reachable" based on whether or not Malygris is reachable;
-	assert "The player should be reachable" based on whether or not the player is reachable.
+	assert "Malygris (in [the location of Malygris]) should be reachable from [the location]" based on whether or not Malygris is reachable;
+	assert "The player (in [the location of the player]) should be reachable" based on whether or not the player is reachable.
 	
 Malygris-only-remembering is a turn-based event. The next move of dungeon-clearing is malygris-only-remembering. The scheduled action of malygris-only-remembering is the action of remembering.
 
