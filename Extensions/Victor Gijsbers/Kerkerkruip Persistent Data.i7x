@@ -75,6 +75,7 @@ main menu graphics	5	1	-1
 session flag	6	1	0
 window panels	7	0	1
 menu hyperlinks	8	1	-1
+sound	9	1	-1
 
 To decide which number is (P - a data storage parameter) as a number: (- {P} -);
 

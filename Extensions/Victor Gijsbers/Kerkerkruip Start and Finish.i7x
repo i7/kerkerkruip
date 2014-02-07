@@ -128,6 +128,10 @@ Include (-
 -).
 
 
+Section - Sounds
+
+Sound of Music is the file "Kerkerkruip Main Theme.ogg".
+
 
 Section - The difficulty level
 
@@ -240,6 +244,7 @@ Showing the text title screen is a truth state variable.
 Rule for showing the title screen (this is the text title screen rule):
 	shut down the status-window;[in case we've come to the menu with it open]
 	display the text menu;
+	play the theme music;
 	while 1 is 1:
 		now showing the text title screen is true;
 		let key be the chosen letter;
@@ -247,9 +252,11 @@ Rule for showing the title screen (this is the text title screen rule):
 		now showing the text title screen is false;
 		let action be the rule produced by the menu command rules for key;
 		if the outcome of the rulebook is the start the game outcome:
+			fade out the theme music;
 			close the text menu;
 			make no decision;
 		otherwise if the outcome of the rulebook is the quit outcome:
+			stop the background channel;
 			stop the game abruptly;
 		otherwise if rule succeeded:
 			close the text menu;
@@ -419,6 +426,7 @@ title	order	rule
 "[bold type]Interface options"	1	--
 "Information panels: [bold type][if window panels are disabled]Off[otherwise]On[end if]"	2	the toggle info panels rule
 "[hyperlinks options]"	3	the toggle menu hyperlinks rule
+"Sound: [bold type][if sound is enabled]On[otherwise]Off[end if][roman type]"	12	the toggle theme music rule
 ""	20	--
 "[bold type]Reset"	21	--
 "[if difficulty is 0 and number of total victories is 0 and setting of highest achieved difficulty is 0 or number of unlocking victories is 0][italic type](Reset the number of victories)[otherwise]Reset the number of victories"	22	the resetting rule
@@ -446,6 +454,19 @@ This is the unlock everything rule:
 
 This is the toggle info panels rule:
 	toggle window panels;
+
+This is the toggle theme music rule:
+	toggle sound;
+	toggle the theme music.
+
+To toggle the theme music:
+	if sound is disabled:
+		pause background channel;
+	otherwise:
+		if new glulx sound features are supported:
+			unpause the background channel;
+		otherwise:
+			play sound of music in background channel, looping.
 
 [ Menu hyperlinks: try to detect if we can use them, but also allow the user to change the option ]
 Before showing the title screen (this is the enable menu hyperlinks rule):
@@ -487,6 +508,7 @@ Table of Options Menu (continued)
 title	order	rule
 "Menu graphics: [bold type][if main menu graphics are enabled]On[otherwise]Off[end if][roman type]"	11	the toggle menu graphics rule
 
+
 This is the toggle menu graphics rule:
 	toggle main menu graphics;
 	disable session flag;
@@ -494,7 +516,6 @@ This is the toggle menu graphics rule:
 
 To restart immediately: 
 	(- @restart; -).
-
 
 
 Chapter - Start
@@ -682,11 +703,189 @@ When play begins:
 	now final question wording entry is "start a NEW game";
 
 
+Section - Quitting
+[I7's quitting the game action is a bit odd in that there is no hook for when the player actually quits the game. Any interventions in the carry out quitting the game rule happen before the player confirms quitting. So we create a new hook.]
+
+Include (-
+
+[ QUIT_THE_GAME_R;    if (actor ~= player) rfalse;    GL__M(##Quit, 2); if (YesOrNo()~=0) FollowRulebook( (+finally quitting the game rules+) ) ;];
+
+-) instead of "Quit The Game Rule" in "Glulx.i6t".
+
+Finally quitting the game is a rulebook.
+
+The last finally quitting the game rule:
+	follow the immediately quit rule.
+
+To stop the/-- game abruptly:
+	[overrides the same phrase defined in Basic Screen Effects]
+	follow the finally quitting the game rules.
+
+
 Section - Lower the difficulty when restarting
 
 First carry out restarting the game (this is the lower difficulty on restart rule):
 	unless player is victorious:
 		unless difficulty is less than 2:
 			set difficulty to (difficulty - 1);
+
+
+Chapter - Sound
+
+Before showing the title screen (this is the setting up sound rule):
+	if glulx sound is supported:
+		if sound is unset:
+			enable sound.
+
+To play the theme music:
+	set up sound channels;
+	now the volume of the background is the initial volume of the background;
+	set simple volume for background channel to initial volume of background;
+	play sound of music in background channel, looping;
+	if sound is disabled:
+		pause background channel;[the music is always "playing", but if we've disabled it, it plays on a paused channel--if the interpreter supports it]
+
+Finally quitting the game (this is the stop sounds on quit rule):
+	[Gargoyle's handling of sounds is buggy; if you quit the game and close the terp window, sounds may continue playing. It can't hurt to stop all sounds when the game is quit, so we do that here]
+	repeat with selected running through sound-channels:
+		stop selected channel.
+
+
+Section - Fading out the theme music A (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+To fade out the theme music:
+	animate the music-fading track as a custom animation at 8 fps with a duration of (initial volume of the background) frames;
+	delay input until all animations are complete.
+
+
+
+Section - Fading out the theme music B (for use without Kerkerkruip Glimmr Additions by Erik Temple)
+[This is used only for the text menu--the graphics menu uses an animation track.]
+
+Fading music is a truth state variable. Fading music is false.
+
+To fade out the theme music:
+	now fading music is true;
+	start a 130 millisecond timer.
+
+A glulx timed activity rule when fading music is true (this is the fade theme music rule):
+	decrement the volume of the background;
+	set simple volume for background channel to volume of background;
+	if volume of the background is 0:
+		now fading music is false;
+		stop the timer.
+
+To start a/-- (T - a number) millisecond timer:
+	(- if (glk_gestalt(gestalt_Timer, 0)) glk_request_timer_events({T});  -)
+	
+To stop the/-- timer:
+	(- if (glk_gestalt(gestalt_Timer, 0)) glk_request_timer_events(0); -)
+
+
+Section - Basic sound support
+[Adds support for looping, the background sound channel, pausing, and volume control.]
+
+The maximum sound volume is a number variable. The maximum sound volume is 10.
+
+A sound-channel is a kind of thing.
+A sound-channel has a number called the ref-number. [Ref-number is linked to an I6 property by code in Flexible Windows]
+A sound-channel has a number called the volume. The volume of a sound-channel is usually 10.
+A sound-channel has a number called the initial volume. The initial volume of a sound-channel is usually 10.
+
+Foreground and background are sound-channels.
+
+To say resource number of (S - a sound name):
+	(- print ResourceIDsOfSounds-->{S} ; -).
+
+To set up sound channels:
+	repeat with item running through sound-channels:
+		now the ref-number of item is the internal number of item;
+
+To decide what number is internal number of (C - foreground):
+	(- gg_foregroundchan -)
+
+To decide what number is internal number of (C - background):
+	(- gg_backgroundchan -)
+
+To play (sound - a sound-name) in (channel - a sound-channel) channel, looping, with notification:
+	(- SoundPlay(ResourceIDsOfSounds-->{sound},{channel},{phrase options}); -)
+
+To set simple volume for (channel - a sound-channel) channel to (volume - a number):
+	(- SetVolume({channel},{volume}); -)
+
+To stop (channel - a sound-channel) channel:
+	(- SoundCease({channel}); -)
+
+To decide whether new glulx sound features are supported:
+	(- ( glk_gestalt(gestalt_Sound2, 0) ) -)
+
+To pause (channel - a sound-channel) channel:
+	(- SoundPause({channel}); -)
+
+To unpause (channel - a sound-channel) channel:
+	(- SoundUnpause({channel}); -)
+
+
+Include (- 
+
+[ SoundPlay sound chan options;
+	if (glk_gestalt(gestalt_Sound,0)) {
+		glk_schannel_play_ext(chan.ref_number, sound, -(options & 1), options & 2); 
+	}
+];
+
+[ SetVolume chan vol;
+	if (glk_gestalt(gestalt_SoundVolume,0)) {
+		if ((vol <= (+ maximum sound volume +)) && (vol > 0)) {
+			glk_schannel_set_volume(chan.ref_number, (vol * (65535 / (+ maximum sound volume +)))+1);
+		}
+		else {
+			glk_schannel_set_volume(chan.ref_number, 0);
+		}
+	}
+];
+
+[ SoundCease chan;
+	if (glk_gestalt(gestalt_Sound,0)) {
+		glk_schannel_stop(chan.ref_number);
+	}
+];
+
+[ SoundPause chan;
+	if (glk_gestalt(gestalt_Sound2,0)) {
+		glk_schannel_pause(chan.ref_number);
+	}
+	else {
+		SoundCease(chan);
+	}
+];
+
+[ SoundUnpause chan;
+	if (glk_gestalt(gestalt_Sound2,0)) {
+		glk_schannel_unpause(chan.ref_number);
+	}
+];
+
+-) after "Figures.i6t".
+
+
+Include (-
+
+Constant gestalt_Sound2	21;
+
+[ glk_schannel_pause _vararg_count ret;
+! glk_schannel_pause(chan);
+@glk 254 _vararg_count ret;
+return ret;
+];
+
+[ glk_schannel_unpause _vararg_count ret;
+! glk_schannel_unpause(chan);
+@glk 255 _vararg_count ret;
+return ret;
+];
+
+-) after "Infglk" in "Glulx.i6t".
+
 
 Kerkerkruip Start and Finish ends here.
