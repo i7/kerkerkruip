@@ -50,7 +50,7 @@ Use maximum capture buffer length of at least 8192.
 Use maximum indexed text length of at least 8192. 
 
 First when play begins (this is the random seed rule):
-	seed the random-number generator with 15.
+	seed the random-number generator with 20.
 
 The random seed rule is listed before the reaper carries a random scythe rule in the when play begins rules.
 
@@ -446,7 +446,7 @@ To record a test attempt:
 		now failure messages entry is "";
 	increment the total entry;
 	say ". "
-	
+
 To record a/-- failure report of/-- (msg - an indexed text):
 	Let testnum be current test set as a number;
 	choose row with test set of testnum in Table of Test Results;	
@@ -454,7 +454,7 @@ To record a/-- failure report of/-- (msg - an indexed text):
 	increment the failures entry;
 	now the failure messages entry is "[failure messages entry]Failure for test: [the current test set], assertion [the test assertion count]: [msg][paragraph break]";
 	log msg;
-	
+
 To display test results:
 	log "Test results:[line break]";
 	let grand test total be 0;
@@ -1994,10 +1994,6 @@ Testing a turn-based event of reaction-ape-killing:
 
 Section - Remembering Text
 
-[Should say something reasonable when all locations are explored]
-[Should say something reasonable when all seen creatures have moved]
-[Should say something helpful when psycholocating]
-
 remembering-text is an isolated test set.
 
 Scenario when testing remembering-text:
@@ -2007,7 +2003,6 @@ Scenario when testing remembering-text:
 	now the demon of rage is testobject;
 	now the swarm of daggers is testobject;
 	now the blood ape is testobject;
-	now the library is testobject;
 	now the cloak of shadows is testobject;
 	now the teleportation beacon is bannedobject;
 	now the dimensional anchor is bannedobject;
@@ -2048,6 +2043,11 @@ nothing-to-remember is a turn-based event. The first move of remembering-text is
 Testing a turn-based event of nothing-to-remember:
 	assert that the event description includes "You have not yet explored:\n( - the <a-w>+ exit of the entrance hall \(where you currently are\)\n)+\nYou have visited the following rooms: the entrance hall \(here\)\.\n\nTip:"
 	
+dumb-sensing is a turn-based event. The scheduled action of dumb-sensing is the action of sensing;
+
+Testing a turn-based event of dumb-sensing:
+	assert "Powerless sensing should not take time" based on previously-fast;
+	
 A turn-based event can be psy-scroll-reading;
 
 early-psycholocation is a psy-scroll-reading turn-based event.
@@ -2058,6 +2058,7 @@ Initial scheduling of a psy-scroll-reading turn-based event (called the current 
 Testing a turn-based event of psy-scroll-reading turn-based event:
 	[TODO: text that sensing takes no time]
 	assert "The player should be psycholocating now" based on the psycholocation boolean;
+	assert that the event description includes "When you are psycholocating, sensing does not take time"
 
 unexplored-sensing is a turn-based event. The scheduled action of unexplored-sensing is the action of sensing.
 
@@ -2094,6 +2095,12 @@ Testing a turn-based event of meeting-malygris:
 		assert that the event description includes "Malygris (does not (detect|notice)|remains unaware of) you(r presence)?";
 		now meeting-malygris is not repeatable;
 	
+psycholocation-expiring is a repeatable hiding-check turn-based event.
+
+Testing a turn-based event of psycholocation-expiring:
+	if psycholocation is inactive:
+		record success of psycholocation-expiring;
+		
 moving-malygris is a repeatable hiding-reveal turn-based event. The maximum repeats of moving-malygris is 20.
 
 Initial scheduling for moving-malygris:
@@ -2130,6 +2137,14 @@ Testing a turn-based event of Malygris-only-remembering:
 	assert that the event description does not include "You have seen the following creatures in these locations";
 	assert that the event description includes "You have also seen Malygris, but you don't know where he is now"
 	
+slow-sensing is a turn-based event. The scheduled action of slow-sensing is the action of sensing.
+
+Initial scheduling of slow-sensing:
+	assert "psycholocation should be inactive" based on whether or not psycholocation is inactive;
+	
+Testing a turn-based event of slow-sensing:
+	assert "sensing without psycholocation should take time" based on whether or not previously-fast is false;
+	
 exploring-everywhere is a repeatable hiding-check turn-based event. 
 
 Definition: A room (called place) is reachable:
@@ -2155,8 +2170,25 @@ Testing a turn-based event of exploring-everywhere:
 remembering-everything-reachable is a turn-based event. The scheduled action of remembering-everything-reachable is the action of remembering.
 
 Testing a turn-based event of remembering-everything-reachable:
+	assert that the event description includes "All locations have been explored";
 	assert that the event description does not include "You have not yet explored";
 	 
+explored-psycholocating is a hiding-check psy-scroll-reading turn-based event.
+
+Initial scheduling for explored-psycholocating:
+	if the location is the location of Malygris:
+		now the location-target of explored-psycholocating is a random reachable room that does not enclose Malygris;
+
+malygris-sensing is a turn-based event. The scheduled action of malygris-sensing is the action of sensing.
+
+Initial scheduling of malygris-sensing:
+	[make sure psycholocating works even when remembering doesn't]
+	Now the last-seen-location of Malygris is null-room;
+
+Testing a turn-based event of malygris-sensing:
+	assert that the event description includes "[soul description of malygris], in [the location of Malygris]";
+	assert "psycholocation sensing should not take time" based on previously-fast;
+
 map-reading is a turn-based event.
 
 Initial scheduling of map-reading:
@@ -2171,6 +2203,7 @@ map-remembering is a turn-based event. The scheduled action of map-remembering i
 Testing a turn-based event of map-remembering:
 	Assert that the number of secretly placed rooms is 2;
 	assert that the event description includes "Based on the map you found.*secret rooms in the dungeon, one <^[line break]>+, one <^[line break]>+.";
+	assert that the event description includes "You have also seen Malygris, but you don't know where he is. With your powers of psycholocation, you might be able to SENSE it";
 	
 getting-close-to-vault is a hiding-check turn-based event.
 

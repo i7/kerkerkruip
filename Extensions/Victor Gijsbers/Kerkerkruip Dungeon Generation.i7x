@@ -271,7 +271,7 @@ A map approval rule (this is the beginning shouldn't be too narrow rule):
 		if distance of place is 1, increase distance-1 by 1;
 		if distance of place is 2, increase distance-2 by 1;
 	if distance-1 plus distance-2 is not greater than 4:
-		if generation info is true, say "There are only [distance-1] rooms next to Entrance Hall and only [distance-2] rooms within two moves of Entrance Hall. ";
+		if generation info is true, say "There are only [distance-1] rooms next to Entrance Hall and only [distance-2] room[s] that [is-are] two moves of Entrance Hall. ";
 		rule fails;
 
 

@@ -2500,7 +2500,7 @@ Carry out reading a scroll of psycholocation (this is the reveal enemies rule):
 				now place is enemy-revealed;
 				increment adversary-count;
 	if the adversary-count is greater than 0:
-		say "You enter a weird clairvoyant state: The psyche[if adversary-count is greater than 1]s[end if] of your enemies call[if adversary-count is less than 2]s[end if] out to you. For a short time, you will be able to sense the presence and location of creatures whose souls you can absorb. If there are other creatures in the same space, you will see them via soul-reflection. Type [if the map can be shown]MAP[otherwise]SENSE[end if] to psycholocate.";
+		say "You enter a weird clairvoyant state: The psyche[if adversary-count is greater than 1]s[end if] of your enemies call[if adversary-count is less than 2]s[end if] out to you. For a short time, you will be able to sense the presence and location of creatures whose souls you can absorb. If there are other creatures in the same space, you will see them via soul-reflection. Type [if the map can be shown]MAP or [end if]SENSE to psycholocate. When you are psycholocating, sensing does not take time.";
 		now the psycholocation boolean is true;
 		psycholocator peters out in 10 turns from now;
 	otherwise:
@@ -2520,6 +2520,9 @@ To decide whether psycholocation is active:
 		decide yes;
 	otherwise:
 		decide no.	
+
+To decide whether psycholocation is inactive:
+	decide on whether or not not psycholocation is active;
 
 A psycholocation rule (this is the psycholocation boolean rule):
 	if psycholocation boolean is true:

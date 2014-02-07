@@ -419,7 +419,7 @@ Carry out remembering:
 				if absolute distance between place and further place is 1:
 					repeat with way running through cardinal directions:
 						if place is the room the way of further place:
-							say " - the [way] exit of [the further place] ([if further place is not the location]which lies [the road to further place] from here[otherwise]where you currently are[end if])[line break]";
+							say " - the [way] exit of [place-memory of the further place][line break]";
 	say "[line break]You have visited the following rooms: ";
 	let m be the number of visited memorable rooms;
 	[ Sort the rooms in alphabetical order ]
@@ -437,8 +437,16 @@ Carry out remembering:
 		say "[line break]You have seen the following creatures in these locations:[line break]";
 		repeat with guy running through memory-locatable persons:
 			say "- [italic type][the guy][roman type] (level [if group level of the guy is not 0][group level of the guy][otherwise][level of the guy][end if]) [remembered location of the guy][line break]";
-	if at least one memorable person is not memory-locatable:
-		say "[line break]You have also seen [the list of memorable not memory-locatable people], but you don't know where [if the number of memorable not memory-locatable people is 1][it-they of a random memorable not memory-locatable person] [is-are][otherwise]are[end if] now.";
+	if at least one person is memory-lost:
+		say "[line break]You have also seen [the list of memorable not memory-locatable people], but you don't know where ";
+		if the number of memory-lost people is 1:
+			say "[it-they of a random memory-lost person] [is-are][run paragraph on]";
+		otherwise:
+			say "are[run paragraph on]";
+		if psycholocation is active:
+			say ". With your powers of psycholocation, you might be able to SENSE it.";
+		otherwise:
+			say " now.";
 	Let the tip text be the next tip text;
 	say "[line break][italic type]Tip[roman type]: [tip text][paragraph break]".
 
@@ -453,11 +461,19 @@ Definition: a person (called guy) is memory-locatable:
 	if the last-seen-location of the guy is Null-Room, no;
 	yes.
 
+Definition: a person (called guy) is memory-lost:
+	if the guy is not memorable, no;
+	if the guy is memory-locatable, no;
+	yes.
+
 To say remembered location of (guy - a person):
 	if the last-seen-location of the guy is Null-Room:
 		say "not where you last saw [it-them of the guy]";
 	otherwise:
-		say "in [italic type][the last-seen-location of the guy][roman type] ([if last-seen-location of the guy is not the location]which lies [the road to last-seen-location of the guy] from here[otherwise]where you currently are[end if])"
+		say "in [place-memory of the last-seen-location of the guy]"
+
+To say place-memory of (place - a room):
+	say "[the place] ([if place is not the location]which lies [the road to place] from here[otherwise]where you currently are[end if])";
 
 A person has a room called the last-seen-location. The last-seen-location of a person is usually Null-Room.
 
@@ -590,18 +606,24 @@ To decide whether (guy - a person) is soul-reflected:
 				decide yes;
 	decide no.
 
+Definition: A person (called guy) is psycholocation-revealed:
+	if guy is the player, no;
+	if guy is not denizen, no;
+	if the level of guy is greater than 0, yes;
+	if guy is soul-reflected, yes;
+	no.
+
 Carry out sensing when psycholocation is active:
+	take no time;
 	if player is denizen:
 		say "As if with a third eye, you can sense:[paragraph break]";
 		let count be 0;
-		repeat with adversary running through denizen persons:
-			if the adversary is not the player and (the level of the adversary is greater than 0 or adversary is soul-reflected):
-				increment count;
-				if the location of the player is the location of the adversary:
-					say " - [italic type]the soul of [the adversary][roman type] here with you, like [soul description of adversary][line break]";
-					next;
-				otherwise:
-					say " - [italic type][soul description of adversary][roman type], [soul directions to adversary][line break]";
+		repeat with adversary running through psycholocation-revealed persons:
+			increment count;
+			if the location of the player is the location of the adversary:
+				say " - [italic type]the soul of [the adversary][roman type] here with you, like [soul description of adversary][line break]";
+			otherwise:
+				say " - [italic type][soul description of adversary][roman type], [soul directions to adversary][line break]";
 	otherwise:
 		say "Your psycholocation doesn't seem to work in your current location.".
 
@@ -620,7 +642,7 @@ To decide what object is the point of departure for (place - a room):
 To say soul directions to (adversary - a person):
 	Let the destination be the location of the adversary;
 	if the destination is a visited room:
-		say "in [remembered location of the adversary]";
+		say "in [place-memory of the destination]";
 		stop;
 	let the waystation be the point of departure for the destination;
 	if the waystation is a room and the waystation is not the location:
@@ -632,7 +654,7 @@ To say soul directions to (adversary - a person):
 	otherwise:
 		say "somewhere [general direction from location of the player to location of the adversary]";
 
-Carry out sensing when the psycholocation boolean is false:		
+Carry out sensing when psycholocation is inactive:		
 	if greatest power of the player is less than 3:
 		take no time;
 		say "You are not yet powerful enough to magically sense anything.";
