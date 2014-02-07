@@ -473,17 +473,25 @@ To display test results:
 	
 Chapter - Turn-based Events
 
-A turn-based event is a kind of value. normal keyboard input is a turn-based event.
+Section - Properties
+
+A turn-based event is a kind of value. Some turn-based events are defined by the Table of Turn-based Events.
 A turn-based event has a stored action called the scheduled action. The scheduled action of a turn-based event is usually the action of waiting.
 A turn-based event has a turn-based event called the next move. The next move of a turn-based event is usually normal keyboard input.
 
 A turn-based event can be repeatable. A turn-based event has a number called the maximum repeats. The maximum repeats of a turn-based event is usually 100. A turn-based event can be uneventful.
 
-The repeated moves is a number that varies;
+Table of Turn-based Events
+turn-based event
+normal keyboard input
 
 A turn-based event has a text called the maxed out report. The maxed out report of a turn-based event is usually "[The scheduled event] repeated [repeated moves] times without resolution."
 
 A turn-based event can be generated.
+
+Section - Scheduling
+
+The repeated moves is a number that varies;
 
 The scheduled event is a turn-based event that varies. The scheduled event is the normal keyboard input.
 
@@ -528,7 +536,7 @@ Before taking a player action when the scheduled event is generated:
 	otherwise:
 		schedule the next move of the scheduled event;
 	
-Choosing a player reaction is a rulebook. The choosing a player reaction rules have default success.
+Section - Generating Actions
 
 For taking a player action when the scheduled event is not the normal keyboard input (this is the turn-based event player action rule):
 	if the player is at-React:
@@ -539,6 +547,34 @@ For taking a player action when the scheduled event is not the normal keyboard i
 		
 The turn-based event player action rule is listed before the parse command rule in the for taking a player action rulebook.
 		
+A turn-based event has an object called the location-target.
+
+To decide which room is the action-destination of (current move - a turn-based event):
+	Let the current destination be the location-target of the current move;
+	if the current destination is nothing, decide on Null-room;
+	if the current destination is a room, decide on the current destination;
+	decide on the location of the current destination.
+
+The delayed action is a stored action that varies. The delayed action is the action of waiting.
+
+For taking a player action (this is the move to the destination of a turn-based event rule):
+	if the player is at-React:
+		make no decision;
+	Let the place be the action-destination of the scheduled event;
+	if the place is the location:
+		transcribe and restart capturing;
+	if the place is Null-room or the place is the location:
+		make no decision;
+	Let the way be the best route from the location to the place;
+	if the way is not a direction:
+		record failure of  the scheduled event with message "No available route to [the location-target of the scheduled event] (in [the place])";
+		make no decision;
+	generate a player action of the action of going the way;
+		
+The move to the destination of a turn-based event rule is listed before the turn-based event player action rule in the for taking a player action rulebook.
+
+Choosing a player reaction is a rulebook. The choosing a player reaction rules have default success.
+
 [I7 names borrowed from Ron Newcomb's Original Parser]
 The action in progress is an action name that varies. 
 The person requesting is a person that varies. 
@@ -580,13 +616,15 @@ testing a turn-based event rules are a turn-based event based rulebook.
 
 Chapter - Test Sets
 
-A test set is a kind of value. Aite champions vs bat is a test set.
+A test set is a kind of value. null-test is a test set.
 
 A test set can be isolated.
 
 Definition: A test set (called the procedure) is enabled:
 	If no test set is isolated, yes;
 	decide on whether or not the procedure is isolated.
+
+Definition: the null-test is enabled: no.
 
 A test set has a turn-based event called the first move. The first move of a test set is usually normal keyboard input.
 
@@ -603,6 +641,7 @@ To decide whether testing (T - a test set):
 
 First when play begins (this is the run all tests rule):
 	write "Test transcript for Kerkerkruip.[line break]" to file of test transcript;
+	initialize turn-based events;
 	start the next test;
 	transcribe and restart capturing text;
 	if done testing is false:
@@ -613,6 +652,22 @@ First when play begins (this is the run all tests rule):
 		transcribe and stop capturing.
 
 The random seed rule is listed before the run all tests rule in the when play begins rules.
+	
+To decide which test set is the initiator of (the event -  a turn-based event):
+	Repeat with the candidate running through test sets:
+		if the event is the first move of the candidate, decide on the candidate;
+	Decide on the null-test.
+	
+To initialize turn-based events:
+	Let the current set be the null-test;
+	Let the last event be normal keyboard input;
+	Repeat with the next event running through turn-based events:
+		Let the new test set be the initiator of the next event;
+		if the new test set is not the null-test:
+			now the current set is the new test set;
+		otherwise if the last event is not normal keyboard input:
+			now the next move of the last event is the next event;
+		now the last event is the next event;
 	
 Last when play begins:
 	if done testing is false:
@@ -797,6 +852,8 @@ To pause and assert that the event description does not include (pattern - an in
 Chapter - test plays
 
 Section - Aite Champions vs Bat
+
+Aite champions vs bat is a test set.
 
 A scenario rule when testing Aite champions vs bat:
 	now Bodmall is testobject;
@@ -1941,7 +1998,7 @@ Section - Remembering Text
 [Should say something reasonable when all seen creatures have moved]
 [Should say something helpful when psycholocating]
 
-remembering-text is an test set.
+remembering-text is an isolated test set.
 
 Scenario when testing remembering-text:
 	now Bodmall is testobject;
@@ -1956,11 +2013,18 @@ Scenario when testing remembering-text:
 	now the dimensional anchor is bannedobject;
 	now bridge of doom is testobject;
 	now every secretly placeable room is bannedobject; [prevent normal placement of Arcane Vault to simulate conditions for bug 244]
-	now Hidden Treasury is testobject;
+	now Eternal Prison is testobject;
 	now a random scroll of mapping is testobject;
 	now the rod of the master builder is testobject;
 	now generation info is true;
-	[several scrolls of psycholocation]
+	Now the reusable item is a random scroll of psycholocation;
+	now the reusable item is testobject;
+	
+The reusable item is an object that varies.
+
+Before taking a player action:
+	if the reusable item is a thing and the reusable item is not carried:
+		now the player carries the reusable item;
 	
 First dungeon interest rule (this is the force Arcane Vault to be secretly placed rule):
 	now Arcane Vault is testobject;
@@ -1970,7 +2034,7 @@ Test play when testing remembering-text:
 	Let the item be a random not off-stage scroll of mapping;
 	Now the player carries the item;
 	Now the player carries the rod of the master builder;
-	assert "Hidden Treasury should be secretly placed" based on whether or not the hidden treasury is secretly placed;
+	assert "Eternal Prison should be secretly placed" based on whether or not the eternal prison is secretly placed;
 	assert "Lake of Lava should be placed" based on whether or not the lake of lava is placed;
 	assert "Lake of Lava should not be denizen" based on whether or not the lake of lava is not denizen;
 	assert "Lake of Lava should not be teleportable" based on whether or not the lake of lava is not teleportable;
@@ -1978,50 +2042,48 @@ Test play when testing remembering-text:
 	assert "Lake of Lava should not be secretly placed" based on whether or not lake of lava is not secretly placed;
 	assert "Lake of Lava should not be placeable" based on whether or not lake of lava is not placeable;
 	
-A turn-based event has an object called the location-target.
-
-To decide which room is the action-destination of (current move - a turn-based event):
-	Let the current destination be the location-target of the current move;
-	if the current destination is nothing, decide on Null-room;
-	if the current destination is a room, decide on the current destination;
-	decide on the location of the current destination.
-
-The delayed action is a stored action that varies. The delayed action is the action of waiting.
-
-For taking a player action (this is the move to the destination of a turn-based event rule):
-	if the player is at-React:
-		make no decision;
-	Let the place be the action-destination of the scheduled event;
-	if the place is the location:
-		transcribe and restart capturing;
-	if the place is Null-room or the place is the location:
-		make no decision;
-	Let the way be the best route from the location to the place;
-	if the way is not a direction:
-		record failure of  the scheduled event with message "No available route to [the location-target of the scheduled event] (in [the place])";
-		make no decision;
-	generate a player action of the action of going the way;
-		
-The move to the destination of a turn-based event rule is listed before the turn-based event player action rule in the for taking a player action rulebook.
-
 nothing-to-remember is a turn-based event. The first move of remembering-text is nothing-to-remember. The scheduled action of nothing-to-remember is the action of remembering. 
 
 Testing a turn-based event of nothing-to-remember:
 	assert that the event description includes "You have not yet explored:\n( - the <a-w>+ exit of the entrance hall \(where you currently are\)\n)+\nYou have visited the following rooms: the entrance hall \(here\)\.\n\nTip:"
 	
-remembering-daggers is a hiding-check turn-based event. The next move of nothing-to-remember is remembering-daggers. The scheduled action of remembering-daggers is the action of remembering. The location-target of remembering-daggers is the swarm of daggers.
+early-psycholocation is a turn-based event.
+
+Initial scheduling of early-psycholocation:
+	now the scheduled action of early-psycholocation is the action of reading the reusable item;
+	
+Testing a turn-based event of early-psycholocation:
+	[TODO: text that sensing takes no time]
+	assert "The player should be psycholocating now" based on the psycholocation boolean;
+
+unexplored-sensing is a turn-based event. The scheduled action of unexplored-sensing is the action of sensing.
+
+Testing a turn-based event of unexplored-sensing:
+	Repeat with the enemy running through {swarm of daggers, blood ape, demon of rage, angel of compassion, minotaur, bodmall, malygris}:
+		assert that the event description includes "[soul description of the enemy], (from the )?[best route from the location to the location of the enemy][line break]";
+	assert that the event description includes "- a turning in on itself of space and time, on which you cannot bear to focus your attention, somewhere [general direction from the location to the Eternal Prison][line break]"
+
+[ - a bolt of black shot through with a blaze of hot white, from the south
+ - an aura like sharpened steel, from the east
+ - a zone of tautened, reddened air, from the west
+ - a squall of fury, all blacks and reds, from the south
+ - a luminous arc of sorrow, from the south
+ - a skein of twisting passages, from the south
+ - spreading thorns dripping with dew--or blood, from the wes]
+	
+remembering-daggers is a hiding-check turn-based event. The scheduled action of remembering-daggers is the action of remembering. The location-target of remembering-daggers is the swarm of daggers.
 	
 Testing a turn-based event of remembering-daggers:
 	assert that the event description includes "You have visited the following rooms:.*You have seen the following creatures in these locations:.*- the swarm of daggers \(level 1\) in [the location] \(where you currently are\)"
 	
-meeting-malygris is a repeatable hiding-check turn-based event. The next move of remembering-daggers is meeting-malygris. The location-target of meeting-malygris is Malygris.
+meeting-malygris is a repeatable hiding-check turn-based event. The location-target of meeting-malygris is Malygris.
 
 Testing a turn-based event of meeting-malygris:
 	if the act count of Malygris is at least 1:
 		assert that the event description includes "Malygris (does not (detect|notice)|remains unaware of) you(r presence)?";
 		now meeting-malygris is not repeatable;
 	
-moving-malygris is a repeatable hiding-reveal turn-based event. The next move of meeting-malygris is moving-malygris. The maximum repeats of moving-malygris is 20.
+moving-malygris is a repeatable hiding-reveal turn-based event. The maximum repeats of moving-malygris is 20.
 
 Initial scheduling for moving-malygris:
 	Compel the action of Malygris teleporting.
@@ -2033,12 +2095,12 @@ Testing a turn-based event of moving-malygris:
 	assert that the event description includes "Malygris suddenly teleports away";
 	now moving-malygris is not repeatable.
 	
-remembering-malygris is a turn-based event. The next move of moving-malygris is remembering-malygris. The scheduled action of remembering-malygris is the action of remembering.
+remembering-malygris is a turn-based event. The scheduled action of remembering-malygris is the action of remembering.
 
 Testing a turn-based event of remembering-malygris:
 	assert that the event description includes "You have seen the following creatures in these locations:.*You have also seen Malygris, but you don't know where he is now"
 	
-dungeon-clearing is a turn-based event. The next move of remembering-malygris is dungeon-clearing.
+dungeon-clearing is a turn-based event.
 
 Initial scheduling for dungeon-clearing:
 	now the health of the demonic assassin is -1;
@@ -2051,13 +2113,13 @@ Testing a turn-based event of dungeon-clearing:
 	assert "Malygris (in [the location of Malygris]) should be reachable from [the location]" based on whether or not Malygris is reachable;
 	assert "The player (in [the location of the player]) should be reachable" based on whether or not the player is reachable.
 	
-Malygris-only-remembering is a turn-based event. The next move of dungeon-clearing is malygris-only-remembering. The scheduled action of malygris-only-remembering is the action of remembering.
+Malygris-only-remembering is a turn-based event. The scheduled action of malygris-only-remembering is the action of remembering.
 
 Testing a turn-based event of Malygris-only-remembering:
 	assert that the event description does not include "You have seen the following creatures in these locations";
 	assert that the event description includes "You have also seen Malygris, but you don't know where he is now"
 	
-exploring-everywhere is a repeatable hiding-check turn-based event. The next move of malygris-only-remembering is exploring-everywhere.
+exploring-everywhere is a repeatable hiding-check turn-based event. 
 
 Definition: A room (called place) is reachable:
 	if the place is the location, yes;
@@ -2079,12 +2141,12 @@ Testing a turn-based event of exploring-everywhere:
 		assert "There should be at least 1 unvisited secret room" based on whether or not the number of unvisited denizen rooms is at least 1;
 		now exploring-everywhere is not repeatable;
 	
-remembering-everything-reachable is a turn-based event. The next move of exploring-everywhere is remembering-everything-reachable. The scheduled action of remembering-everything-reachable is the action of remembering.
+remembering-everything-reachable is a turn-based event. The scheduled action of remembering-everything-reachable is the action of remembering.
 
 Testing a turn-based event of remembering-everything-reachable:
 	assert that the event description does not include "You have not yet explored";
 	 
-map-reading is a turn-based event. The next move of remembering-everything-reachable is map-reading.
+map-reading is a turn-based event.
 
 Initial scheduling of map-reading:
 	Let M be a random scroll of mapping carried by the player;
@@ -2093,13 +2155,13 @@ Initial scheduling of map-reading:
 Testing a turn-based event of map-reading:
 	assert that the event description includes "a complete floor plan of the dungeon of Kerkerkruip imprints itself on your mind"
 	
-map-remembering is a turn-based event. The next move of map-reading is map-remembering. The scheduled action of map-remembering is the action of remembering.
+map-remembering is a turn-based event. The scheduled action of map-remembering is the action of remembering.
 
 Testing a turn-based event of map-remembering:
 	Assert that the number of secretly placed rooms is 2;
 	assert that the event description includes "Based on the map you found.*secret rooms in the dungeon, one <^[line break]>+, one <^[line break]>+.";
 	
-getting-close-to-vault is a hiding-check turn-based event. The next move of map-remembering is getting-close-to-vault.
+getting-close-to-vault is a hiding-check turn-based event.
 
 Initial scheduling of getting-close-to-vault:
 	Let the closest place be Null-room;
@@ -2111,10 +2173,10 @@ Initial scheduling of getting-close-to-vault:
 			now the closest place is the place;
 	now the location-target of getting-close-to-vault is the closest place.
 			
-digging-to-vault is a repeatable hiding-check turn-based event. The next move of getting-close-to-vault is digging-to-vault. The maximum repeats of digging-to-vault is 20.
+digging-to-vault is a repeatable hiding-check turn-based event. The maximum repeats of digging-to-vault is 20.
 
 To schedule digging to (place - a room) for (current move - a turn-based event):
-	Now the scheduled action of the current move is the action of digging the general direction from the location to place.
+	Now the scheduled action of the current move is the action of digging a single general direction from the location to place.
 	
 Initial scheduling of digging-to-vault:
 	schedule digging to the Arcane Vault for digging-to-vault;
@@ -2125,7 +2187,7 @@ Testing a turn-based event of digging-to-vault:
 	otherwise:
 		schedule digging to the Arcane Vault for digging-to-vault;
 	
-secret-room-remembering is a turn-based event. The next move of digging-to-vault is secret-room-remembering. The scheduled action of secret-room-remembering is the action of remembering.
+secret-room-remembering is a turn-based event. The scheduled action of secret-room-remembering is the action of remembering.
 
 Testing a turn-based event of secret-room-remembering:
 	assert that the event description includes "Based on the map you found.*a secret room in the dungeon, <a-z>";

@@ -200,7 +200,7 @@ To create a tunnel:
 					place building block next to P;
 					now P is building block;
 				otherwise:
-					let way be the general direction from P to Q;
+					let way be a single general direction from P to Q;
 					let x be the x way of P;
 					let y be the y way of P;
 					let z be the z way of P;
@@ -431,7 +431,7 @@ To decide which direction is the direction from (a - a room) to (b - a room):
 
 [The randoms below are to make the choice of direction fair.]
 
-To decide which direction is the general direction from (a - a room) to (b - a room):
+To decide which direction is a single general direction from (a - a room) to (b - a room):
 	if a random chance of 1 in 3 succeeds:
 		if x-coordinate of a is greater than x-coordinate of b:
 			decide on south;
