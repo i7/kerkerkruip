@@ -7,10 +7,10 @@ Include Glimmr Canvas Animation by Erik Temple.
 Include Glimmr Bitmap Font by Erik Temple.
 Include Kerkerkruip Image Fonts by Erik Temple.
 Include Glimmr Animation Fader - Black by Erik Temple.
-[Include Glimmr Debugging Console by Erik Temple.
+[Include Glimmr Debugging Console by Erik Temple.]
 
 [Use animation debugging.]
-Use Glimmr debugging.
+[Use Glimmr debugging.
 
 To say >console:
 	say echo stream of main-window.
@@ -50,10 +50,6 @@ Before window-shutting the graphics-window:
 Chapter - Assets
 
 A figure name has a number called the y-offset. The y-offset of a figure-name is usually 0.[It is not necessary for all figure-names to get this property, but a bug in Inform--http://inform7.com/mantis/view.php?id=1067--prevents us from referring to the property if it is not defined in this way.]
-
-Section - Sounds
-
-Sound of Music is the file "Kerkerkruip Main Theme.ogg".
 
 
 Section - Minimovies
@@ -307,6 +303,9 @@ Figure of button-Options_pressed is the file "button-Options_pressed.png".
 Figure of button-Quit_pressed is the file "button-Quit_pressed.png".
 Figure of button-Score-Info_pressed is the file "button-Score-Info_pressed.png".
 Figure of button-Skip-to-Apprentice_pressed is the file "button-Skip-to-Apprentice_pressed.png".
+[Toggles]
+Figure of Toggle-Sound_On is the file "toggle-Sound_On.png".
+Figure of Toggle-Sound_Off is the file "toggle-Sound_Off.png".
 
 [Type slugs for main menu]
 Figure of Score-Slug is the file "slug-Score.png".
@@ -619,7 +618,7 @@ Include (-
 ];
 -) instead of "Immediately Restart VM Rule" in "OrderOfPlay.i6t".
 
-First carry out quitting the game (this is the set session flag on quit rule):
+First finally quitting the game rule (this is the set session flag on quit rule):
 	[We set the session flag to 0 on quit. This will almost never be necessary, but it helps assure that we will see the animated title on starting a new session.]
 	disable session flag.
 
@@ -628,6 +627,12 @@ Chapter - Set up the graphics window
 [We don't want to see the main text window at all until the game proper begins. Strictly speaking, we should probably hack the Inform library to allow for this--but that is not a minor undertaking. Instead, we will simply open the graphics window so that it covers the main text window entirely (note the 100 measurement below--this indicates that the graphics window will be split off from the main window at 100% of the latter's height). The Glulx Status Window Control extension suppresses the opening of the status window; we will open it later, only after closing the graphics window.]
 
 The graphics-window is a graphics g-window spawned by the main-window. The position of the graphics-window is g-placeabove. The measurement of the graphics-window is 100. The back-colour of the graphics-window is g-black. The graphics-window is g-graphlinked.
+
+[These rules prevent any graphics window from updating during animation other than the graphics-window. This is to prevent border windows, which are graphics windows, from being animated during music fadeouts, principally when graphics are not enabled but the player's interpreter is capable of using them.]
+The animation window-updating rule is not listed in any rulebook.
+
+For updating graphics windows for animation (this is the specific animation window-updating rule):
+	Follow the window-drawing rules for the graphics-window.
 
 
 Chapter - Animation code support
@@ -825,6 +830,13 @@ Skip_Button	Figure of Button-Skip Apprentice	{63, 670}	Figure of button-Skip-to-
 [Reset_Victories	Figure of Button-Reset	{521, 674}[without a modal confirmation, it seems best to leave this for the Options menu]]
 
 
+A toggle-switch is a kind of sprite. The associated canvas of a toggle-switch is the main-menu. A toggle-switch has a figure name called the enabled-state. A toggle-switch has a figure name called the disabled-state. The display status of a toggle-switch is g-active. The graphlink status of a toggle-switch is g-active. The display-layer of a toggle-switch is 3. Some toggle-switches are defined by the Table of Toggles.
+
+Table of Toggles
+sprite	image-ID	origin	enabled-state	disabled-state
+Sound_Toggle	Figure of Toggle-Sound_On	{580, 49}	Figure of Toggle-Sound_On	Figure of Toggle-Sound_Off
+	
+
 A type-container is a kind of image-rendered string. The associated canvas of a type-container is the main-menu. Some type-containers are defined by the Table of Image String Boxes. The display-layer of a type-container is 3.
 
 Table of Image String Boxes
@@ -954,7 +966,8 @@ To prepare type slugs:
 	if difficulty is 0:
 		activate Skip_Button;
 	otherwise:
-		deactivate Skip_Button.
+		deactivate Skip_Button;
+	set display for the Sound_Toggle.
 
 To prepare difficulty levels for display:
 	now the image-ID of Difficulty-slug is the proper slug for the difficulty;
@@ -1110,6 +1123,20 @@ Graphlink processing rule for Help_Button:
 Graphlink processing rule for Skip_Button:
 	handle graphical key code 83;
 
+Graphlink processing rule for Sound_Toggle:
+	toggle sound;
+	implement sound settings.	
+
+To implement sound settings:
+	set display for the Sound_Toggle;
+	toggle the theme music.
+
+To set display for (item - the Sound_Toggle):
+	if sound is enabled:
+		now the image-ID of the item is the enabled-state of the item;
+	otherwise:
+		now the image-ID of the item is the disabled-state of the item.
+
 First menu command skip:
 	animate the button-fade track as a fade animation targeting the Skip_Button and using the Black-fader from 0 percent to 100 percent at 8 fps with a duration of 3 frames;
 
@@ -1147,7 +1174,7 @@ A tooltip is a kind of sprite. The associated canvas of a tooltip is the main-me
 
 Table of Tool-Tips
 sprite	image-ID	origin
-Score-Tip	Figure of Tooltip-Score	{343, 474}[482]
+Score-Tip	Figure of Tooltip-Score	{343, 474}
 
 
 Chapter - Closing the title screen
@@ -1164,7 +1191,7 @@ To close title screen:
 	now the display-layer of the black-fader is 10001;[need to put fader above transition container to fade out whole menu]
 	let fade-length be 6;
 	if menu-active is false:
-		now fade-length is the maximum sound volume;
+		now fade-length is the initial volume of the background;
 	animate the window-fading track as a fade animation targeting the graphics-window and using the Black-Fader from 0 % to 100 % at 8 fps with a duration of (fade-length) frames;
 	if menu-active is false:[fade out music only if we're leaving menu for good.]
 		animate the music-fading track as a custom animation at 8 fps with a duration of (fade-length) frames;
@@ -1181,74 +1208,6 @@ To cease animating all tracks but (target - an animation track):
 Animation rule for the music-fading track:
 	decrement the volume of the background;
 	set simple volume for background channel to volume of background.
-
-
-Chapter - Sound
-
-The maximum sound volume is a number variable. The maximum sound volume is 10.
-
-A sound-channel is a kind of thing.
-A sound-channel has a number called the ref-number. [Ref-number is linked to an I6 property by code in Flexible Windows]
-A sound-channel has a number called the volume. The volume of a sound-channel is usually 10.
-A sound-channel has a number called the initial volume. The initial volume of a sound-channel is usually 10.
-
-Foreground and background are sound-channels.
-
-To play the theme music:
-	set up sound channels;
-	now the volume of the background is the initial volume of the background;
-	set simple volume for background channel to initial volume of background;
-	play sound of music in background channel, looping.
-
-To say resource number of (S - a sound name):
-	(- print ResourceIDsOfSounds-->{S} ; -).
-
-To set up sound channels:
-	repeat with item running through sound-channels:
-		now the ref-number of item is the internal number of item;
-
-To decide what number is internal number of (C - foreground):
-	(- gg_foregroundchan -);
-
-To decide what number is internal number of (C - background):
-	(- gg_backgroundchan -);
-
-To play (sound - a sound-name) in (channel - a sound-channel) channel, looping, with notification:
-	(- SoundPlay(ResourceIDsOfSounds-->{sound},{channel},{phrase options}); -)
-
-To set simple volume for (channel - a sound-channel) channel to (volume - a number):
-	(- SetVolume({channel},{volume}); -)
-
-To stop (channel - a sound-channel) channel:
-	(- SoundCease({channel}); -)
-
-
-Include (- 
-
-[ SoundPlay sound chan options;
-	if (glk_gestalt(gestalt_Sound,0)) {
-		glk_schannel_play_ext(chan.ref_number, sound, -(options & 1), options & 2); 
-	}
-];
-
-[ SetVolume chan vol;
-	if (glk_gestalt(gestalt_SoundVolume,0)) {
-		if ((vol <= (+ maximum sound volume +)) && (vol > 0)) {
-			glk_schannel_set_volume(chan.ref_number, (vol * (65535 / (+ maximum sound volume +)))+1);
-		}
-		else {
-			glk_schannel_set_volume(chan.ref_number, 0);
-		}
-	}
-];
-
-[ SoundCease chan;
-	if (glk_gestalt(gestalt_Sound,0)) {
-		glk_schannel_stop(chan.ref_number);
-	}
-];
-
--) after "Figures.i6t".
 
 
 Chapter - The map window
