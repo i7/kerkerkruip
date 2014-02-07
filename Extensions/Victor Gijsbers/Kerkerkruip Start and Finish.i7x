@@ -460,13 +460,14 @@ This is the toggle theme music rule:
 	toggle the theme music.
 
 To toggle the theme music:
-	if sound is disabled:
-		pause background channel;
-	otherwise:
-		if new glulx sound features are supported:
-			unpause the background channel;
+	if the showing the title screen activity is going on:
+		if sound is disabled:
+			pause background channel;
 		otherwise:
-			play sound of music in background channel, looping.
+			if new glulx sound features are supported:
+				unpause the background channel;
+			otherwise:
+				play sound of music in background channel, looping.
 
 [ Menu hyperlinks: try to detect if we can use them, but also allow the user to change the option ]
 Before showing the title screen (this is the enable menu hyperlinks rule):
