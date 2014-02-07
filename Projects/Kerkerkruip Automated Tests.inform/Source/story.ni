@@ -158,6 +158,8 @@ To say difficulty level (m - a number):
 	if m is greater than 10:
 		say "[if player is not female]GOD[otherwise]GODDESS[end if][run paragraph on]".
 
+Chapter - No Sound (in place of Chapter - Sound in Kerkerkruip Start and Finish by Victor Gijsbers)
+
 Chapter - No Credits Menu (in place of Chapter - Credits menu in Kerkerkruip Actions and UI by Victor Gijsbers)
 
 Chapter - No Options Menu (in place of Chapter - Options menu in Kerkerkruip Actions and UI by Victor Gijsbers)
@@ -1939,7 +1941,7 @@ Section - Remembering Text
 [Should say something reasonable when all seen creatures have moved]
 [Should say something helpful when psycholocating]
 
-remembering-text is an isolated test set.
+remembering-text is an test set.
 
 Scenario when testing remembering-text:
 	now Bodmall is testobject;
@@ -2102,14 +2104,14 @@ getting-close-to-vault is a hiding-check turn-based event. The next move of map-
 Initial scheduling of getting-close-to-vault:
 	Let the closest place be Null-room;
 	Let the shortest distance be 1000;
-	Repeat with the place running through reachable rooms:
+	Repeat with the place running through connectable reachable rooms:
 		Let the candidate distance be the absolute distance between the place and the Arcane Vault;
 		if the candidate distance is less than the shortest distance:
 			now the shortest distance is the candidate distance;
 			now the closest place is the place;
 	now the location-target of getting-close-to-vault is the closest place.
 			
-digging-to-vault is a repeatable hiding-check turn-based event. The next move of getting-close-to-vault is digging-to-vault;
+digging-to-vault is a repeatable hiding-check turn-based event. The next move of getting-close-to-vault is digging-to-vault. The maximum repeats of digging-to-vault is 20.
 
 To schedule digging to (place - a room) for (current move - a turn-based event):
 	Now the scheduled action of the current move is the action of digging the general direction from the location to place.
