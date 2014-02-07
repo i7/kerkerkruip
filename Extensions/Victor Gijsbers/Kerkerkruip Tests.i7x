@@ -43,15 +43,14 @@ A placement scoring rule (this is the testobject placement scoring rule):
 	if considered room is testobject:
 		increase current room score by 100;
 
-Creating the map rule (this is the place all testobject rooms rule):
-	while at least one testobject room is not placed:
-		let place be a random not placed testobject room;
-		[if a room is both bannedobject and testobject, it will be placed secretly]
-		if place is placeable:
-			let place2 be a random placed room;
-			place place next to place2;
-		otherwise:
-			put place in a near location;
+Last creating the map rule (this is the place all secret testobject rooms rule):
+	while there is a secretly placeable not placed testobject room (called place):
+		put place in a near location;
+
+A map approval rule (this is the reject map if not all testobject rooms are placed rule):
+	if a testobject room is not placed:
+		if generation info is true, say "Required for testing, but not placed: [The list of not placed testobject rooms]. ";
+		rule fails.
 
 A monster placement possible rule (this is the prefer testobject monsters rule):
 	if considered monster is bannedobject:

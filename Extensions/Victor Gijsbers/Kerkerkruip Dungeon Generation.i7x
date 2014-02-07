@@ -23,7 +23,7 @@ To create the dungeon:
 		if generation info is true, say "[paragraph break]";
 		approve the map;
 		if map approved is false:
-			print generation message "    Map rejected. ";
+			print generation message "Map rejected. ";
 	print generation message "Placing monsters...";
 	place monsters;
 	if generation info is true, say "[paragraph break]";
@@ -252,25 +252,27 @@ Resetting the map rule (this is the reset collapse rule):
 						
 Chapter - Approving the map
 
-[This routine checks whether the beginning of the map isn't too narrow: we want to branch out quickly so the player has choices.]
+Distance-1 and distance-2 are numbers that vary.
+	
+To approve the map:
+	consider the map approval rules;
+	unless rule failed, now map approved is true.
+								
+The map approval rules are a rulebook.
 
 To decide which number is the distance of (place - a room):
 	decide on the number of moves from place to Entrance Hall.
 
-Distance-1 and distance-2 are numbers that vary.
-	
-To approve the map:
+[we want to branch out quickly so the player has choices.]
+A map approval rule (this is the beginning shouldn't be too narrow rule):			
 	now distance-1 is 0;
 	now distance-2 is 0;
 	repeat with place running through placed rooms:
 		if distance of place is 1, increase distance-1 by 1;
 		if distance of place is 2, increase distance-2 by 1;
-	if distance-1 plus distance-2 is greater than 4:
-		now map approved is true;
-	otherwise:
-		if generation info is true, say "Map rejected. Regenerating.".
-								
-						
+	if distance-1 plus distance-2 is not greater than 4:
+		if generation info is true, say "There are only [distance-1] rooms next to Entrance Hall and only [distance-2] rooms within two moves of Entrance Hall. ";
+		rule fails;
 
 
 Section - Additional placement rules

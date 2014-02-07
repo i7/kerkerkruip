@@ -2012,6 +2012,7 @@ Scenario when testing remembering-text:
 	now the teleportation beacon is bannedobject;
 	now the dimensional anchor is bannedobject;
 	now bridge of doom is testobject;
+	now hall of vapours is bannedobject;
 	now every secretly placeable room is bannedobject; [prevent normal placement of Arcane Vault to simulate conditions for bug 244]
 	now Eternal Prison is testobject;
 	now a random scroll of mapping is testobject;
@@ -2047,12 +2048,14 @@ nothing-to-remember is a turn-based event. The first move of remembering-text is
 Testing a turn-based event of nothing-to-remember:
 	assert that the event description includes "You have not yet explored:\n( - the <a-w>+ exit of the entrance hall \(where you currently are\)\n)+\nYou have visited the following rooms: the entrance hall \(here\)\.\n\nTip:"
 	
-early-psycholocation is a turn-based event.
+A turn-based event can be psy-scroll-reading;
 
-Initial scheduling of early-psycholocation:
-	now the scheduled action of early-psycholocation is the action of reading the reusable item;
+early-psycholocation is a psy-scroll-reading turn-based event.
+
+Initial scheduling of a psy-scroll-reading turn-based event (called the current event):
+	now the scheduled action of the current event is the action of reading the reusable item;
 	
-Testing a turn-based event of early-psycholocation:
+Testing a turn-based event of psy-scroll-reading turn-based event:
 	[TODO: text that sensing takes no time]
 	assert "The player should be psycholocating now" based on the psycholocation boolean;
 
@@ -2076,6 +2079,14 @@ remembering-daggers is a hiding-check turn-based event. The scheduled action of 
 Testing a turn-based event of remembering-daggers:
 	assert that the event description includes "You have visited the following rooms:.*You have seen the following creatures in these locations:.*- the swarm of daggers \(level 1\) in [the location] \(where you currently are\)"
 	
+middle-psycholocating is a hiding-check psy-scroll-reading turn-based event. 
+
+partial-explored-sensing is a hiding-check turn-based event. The scheduled action of partial-explored-sensing is the action of sensing.
+
+Testing a turn-based event of partial-explored-sensing:
+	assert that the event description includes "the soul of the swarm of daggers here with you, like an aura like sharpened steel[line break]";
+	assert that the event description includes ", <a-w>+ from <^[line break]>+ \(which lies <a-w>+ from here\)[line break]"
+
 meeting-malygris is a repeatable hiding-check turn-based event. The location-target of meeting-malygris is Malygris.
 
 Testing a turn-based event of meeting-malygris:

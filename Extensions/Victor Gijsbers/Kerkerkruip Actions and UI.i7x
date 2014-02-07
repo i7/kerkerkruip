@@ -624,7 +624,7 @@ To say soul directions to (adversary - a person):
 		stop;
 	let the waystation be the point of departure for the destination;
 	if the waystation is a room and the waystation is not the location:
-		say "[the best route from the waystation to the destination] from [the waystation] (which lies [the road to the waystation] from here)";
+		say "[best route from the waystation to the destination] from [the waystation] (which lies [the road to the waystation] from here)";
 		stop;
 	let the way be the best route from the location to the destination;
 	if way is a direction:
