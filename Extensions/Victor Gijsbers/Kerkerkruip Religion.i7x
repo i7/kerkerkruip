@@ -104,7 +104,10 @@ To decide whether (guy - a person) gets intervention:
 	if the guy's chances < 1:
 		now the guy's chances is 1;
 	Let N be intervention rarity of the divinity;
-	Decide on whether or not a random chance of the guy's chances in (intervention rarity of the divinity) succeeds.
+	repeat with i running from 1 to the guy's chances:
+		if a random chance of 1 in N succeeds:
+			yes;
+	no;
 
 Every turn when the combat status is not peace (this is the spontaneous combat intervention rule):
 	Repeat with boss running through gods:
