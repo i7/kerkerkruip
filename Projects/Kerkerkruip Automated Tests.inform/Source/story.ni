@@ -2118,6 +2118,14 @@ remembering-malygris is a turn-based event. The scheduled action of remembering-
 Testing a turn-based event of remembering-malygris:
 	assert that the event description includes "You have seen the following creatures in these locations:.*You have also seen Malygris, but you don't know where he is now"
 	
+remembering-lost-plural is a turn-based event. The scheduled action of remembering-lost-plural is the action of remembering.
+
+Initial scheduling of remembering-lost-plural:
+	now the last-seen-location of the swarm of daggers is null-room.
+	
+Testing a turn-based event of remembering-lost-plural:
+	assert that the event description includes "You have also seen (Malygris|the swarm of daggers) and (Malygris|the swarm of daggers), but you don't know where they are now"
+	 
 dungeon-clearing is a turn-based event.
 
 Initial scheduling for dungeon-clearing:

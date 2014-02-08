@@ -442,7 +442,7 @@ Carry out remembering:
 		if the number of memory-lost people is 1:
 			say "[it-they of a random memory-lost person] [is-are][run paragraph on]";
 		otherwise:
-			say "are[run paragraph on]";
+			say "they are[run paragraph on]";
 		if psycholocation is active:
 			say ". With your powers of psycholocation, you might be able to SENSE it.";
 		otherwise:
