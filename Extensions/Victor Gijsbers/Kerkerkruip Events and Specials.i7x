@@ -214,7 +214,7 @@ For arena exit of Arena of the Fallen:
 
 Chapter - Arena of the Gods
 
-The Arena of the Gods is an arena. "The divine Arena; a plaything for the Gods, too numb to fight on their own, to let their Chosen Ones fight it out. Fighting here is at the whim of the Gods, who will regularly intervene when they think the battle becomes dull ([italic type]divine intervention is determined by the tension[roman type])."
+The Arena of the Gods is an arena. "The divine Arena; a plaything for the Gods, too numb to fight on their own, to let their Chosen Ones fight it out. The Arena is a conduit for divine power, and gods will intervene more frequently here than elsewhere, whenever there is some tension."
 
 The staging area of Arena of the Gods is Arena of the Gods.
 The Arena of the Gods is faction-imposing.
@@ -342,7 +342,9 @@ OppHerm is a person that varies.
 OppHermBonus is a number that varies. OppHermbonus is 0.
 
 Intervention bonus when the location is Arena of the Gods (this is the more intervention in Arena of the Gods rule):
-	increase the intervention-bonus by (the tension times 2);
+	Let m be (the tension times 2);
+	if m > 6, now m is 6;
+	increase the intervention-bonus by m;
 
 [Every turn when (the location is the Arena of the Gods) and (the combat status is not peace):
 	let m be the tension;
