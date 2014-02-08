@@ -50,7 +50,7 @@ Use maximum capture buffer length of at least 8192.
 Use maximum indexed text length of at least 8192. 
 
 First when play begins (this is the random seed rule):
-	seed the random-number generator with 20.
+	seed the random-number generator with 21.
 
 The random seed rule is listed before the reaper carries a random scythe rule in the when play begins rules.
 
@@ -996,7 +996,7 @@ Testing a turn-based event of Arena-defender-re-enslaving:
 		
 Section - Chton Champion vs Bat
 
-Chton champion vs bat is a test set. [Chton champion vs bat is isolated.]
+Chton champion vs bat is a isolated test set.
 
 A scenario rule when testing Chton champion vs bat:
 	now Hall of Gods is testobject;
@@ -1017,7 +1017,9 @@ A test play when testing Chton champion vs bat:
 	have the player sacrifice a random granted power;
 	assert that the favour of the player with Herm is 4;
 	extract the player to Hall of Gods;
+	transcribe and restart capturing;
 	have the player and Drakul fight in Arena of the Gods;
+	pause and assert that the event description includes "grants you 2 divine favour![line break][line break]Herm gifts you two scrolls, a magical spade and a Morphean grenade; and increases your hiding bonus to \+2\.[line break][line break]You are transported to the Arena of the Gods, where the angry Drakul awaits, preparing himself to"
 	
 arena-vampire-joining is a turn-based event. The first move of Chton champion vs bat is arena-vampire-joining. The scheduled action of arena-vampire-joining is the action of drinking Drakul's lifeblood;
 

@@ -316,15 +316,17 @@ Carry out challenging someone in Arena of the Gods:
 	now the challenged god is a random god incarnated by the noun.
 	
 Before arena arrival of Arena of the Gods:
-	say "It pleases your God to have a champion fight in the Arena. [It-they of the patron of the player] grant[s] you 2 divine favour![paragraph break]";
+	say "It pleases your God to have a champion fight in the Arena. [It-they of the patron of the player] grant[s] you 2 divine favour!";
+	say conditional paragraph break;
 	raise the favour of the player by 2;
+	say conditional paragraph break;
 	repeat with guy running through persons in the Arena of the Gods:
 		challenge guy to fight for the challenged god;
 	say "You are transported to the Arena of the Gods, where the angry ";
 	if the number of people in Arena of the Gods is greater than 1:
 		say "group, consisting of [list of persons in the Arena of the Gods], prepare themselves ";
 	otherwise:
-		say "[random person in Arena of the Gods] awaits, preparing [it-them]self"; 
+		say "[random person in Arena of the Gods] awaits, preparing [it-them]self "; 
 	say "to fight for the honour of [the challenged god]!";
 
 To challenge (guy - a person) to fight for (benefactor - a god):
