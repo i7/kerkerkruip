@@ -95,7 +95,7 @@ To say total credits:
 	[line break][italic type]created by[roman type] Victor Gijsbers
 	[line break][italic type]with[roman type] Dannii Willis, 
 	[line break]Erik Temple,
-	[line break]Wade Clark, 
+	[line break]Wade Clarke, 
 	[line break]Remko van der Pluijm [italic type]and[roman type]
 	[line break]Mike Ciul
 	[paragraph break][bold type]Additional contributions by[roman type]

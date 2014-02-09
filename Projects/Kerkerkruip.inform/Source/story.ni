@@ -20,6 +20,7 @@ Include version 10/140201 of Glulx Entry Points by Emily Short.
 Include version 7/130712 of Dynamic Objects by Jesse McGrew.
 Include Fixed Point Maths by Michael Callaghan.
 Include Questions by Michael Callaghan.
+Include version 1/140209 of Interpreter Sniffing by Friends of I7.
 
 
 
@@ -31,7 +32,7 @@ Include version 13/131208 of Flexible Windows by Jon Ingold.
 
 [Include Kerkerkruip Glimmr Additions by Erik Temple.]
 
-Include version 1/131214 of Menus by Dannii Willis.
+Include version 1/140209 of Menus by Dannii Willis.
 Include Kerkerkruip Windows by Erik Temple.
 
 [Include Extended Debugging by Erik Temple.]
