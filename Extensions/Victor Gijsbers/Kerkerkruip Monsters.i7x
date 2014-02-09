@@ -3540,7 +3540,7 @@ Report the defender of Aite waiting when the defender of Aite is insane:
 	rule succeeds.	
 
 
-Section - Tormentor of Aite images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+Section - Defender of Aite images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
 The avatar of defender of Aite is Figure of map_monster_defender_of_Aite.
 The legend-label of defender of Aite is Figure of map_legend_defender_of_Aite.
