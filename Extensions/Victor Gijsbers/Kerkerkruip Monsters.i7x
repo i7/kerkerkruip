@@ -3638,7 +3638,7 @@ When play begins:
 	now dodge bonus of X is 1;
 	now parry-against bonus of X is -2;
 	now parry-with bonus of X is -2;
-	now printed name of X is "lightning bolt".
+	now printed name of X is "a lightning bolt".
 
 
 Section - Bodmall images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
