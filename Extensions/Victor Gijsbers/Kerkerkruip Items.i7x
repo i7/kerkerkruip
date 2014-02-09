@@ -1602,7 +1602,7 @@ A blindness rule (this is the blind if flashed rule):
 	if flash-grenade-timer of test subject is greater than 0:
 		rule succeeds.				
 
-An exploding rule:
+An exploding rule (this is the flash grenade explodes rule):
 	if the exploding-grenade is a flash grenade:
 		if the noun is rusted and a random chance of 1 in 2 succeeds:
 			if exploding-location is the location:
@@ -1631,7 +1631,7 @@ Section - Rust grenade
 A rust grenade is a kind of grenade. The description of a rust grenade is "When thrown, this grenade will release a thick cloud of rust spores -- a nasty fungus that rusts away iron. Its use is forbidden in all civilised and most uncivilised countries.".
 A rust grenade is iron.
 
-An exploding rule:
+An exploding rule (this is the rust grenade explodes rule):
 	if the exploding-grenade is a rust grenade:
 		if exploding-location is the location:
 			say "The rust grenade explodes, and it immediately releases a cloud of rust spores!";
@@ -1664,7 +1664,7 @@ A fragmentation grenade is iron.
 A fragmentation grenade is damaging.
 Understand "frag" as a fragmentation grenade.
 
-An exploding rule:
+An exploding rule (this is the fragmentation grenade explodes rule):
 	if the exploding-grenade is a fragmentation grenade:
 		if the noun is rusted and a random chance of 1 in 2 succeeds:
 			if exploding-location is the location:
@@ -1680,7 +1680,9 @@ Section - Blessed Grenade (major)
 
 The Blessed Grenade is a major grenade. The indefinite article of the Blessed Grenade is "the". The description of Blessed Grenade is "This grenade is rumoured to be extremely effective against undead.".
 
-An exploding rule:
+To decide which number is the grenade-id of (G - a grenade): (- {G} -);
+
+An exploding rule (this is the Blessed Grenade explodes rule):
 	if the exploding-grenade is a Blessed Grenade:
 		if the noun is rusted and a random chance of 1 in 2 succeeds:	
 			if exploding-location is the location:
@@ -1708,7 +1710,7 @@ A teleportation grenade is a kind of grenade. The description of a teleportation
 A teleportation grenade is iron.
 Understand "tele" and "teleport" as a teleportation grenade.
 
-An exploding rule:
+An exploding rule (this is the teleportation grenade explodes rule):
 	if the exploding-grenade is a teleportation grenade:
 		if the noun is rusted and a random chance of 1 in 2 succeeds:
 			if exploding-location is the location:
@@ -1737,7 +1739,7 @@ Section - Morphean grenade
 A Morphean grenade is a kind of grenade. The description of a Morphean grenade is "When thrown, this grenade will release a sleeping gas that drives everyone into the embrace of Morpheus."
 A Morphean grenade is iron.
 
-An exploding rule:
+An exploding rule (this is the Morphean grenade explodes rule):
 	if the exploding-grenade is a Morphean grenade:
 		if the noun is rusted and a random chance of 1 in 2 succeeds:
 			if exploding-location is the location:

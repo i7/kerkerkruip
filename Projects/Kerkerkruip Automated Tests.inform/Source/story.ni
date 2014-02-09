@@ -567,7 +567,7 @@ For taking a player action (this is the move to the destination of a turn-based 
 		make no decision;
 	Let the way be the best route from the location to the place;
 	if the way is not a direction:
-		record failure of  the scheduled event with message "No available route to [the location-target of the scheduled event] (in [the place])";
+		record failure of  the scheduled event with message "No available route from [the location] to [the location-target of the scheduled event] (in [the place])";
 		make no decision;
 	generate a player action of the action of going the way;
 		
@@ -996,7 +996,7 @@ Testing a turn-based event of Arena-defender-re-enslaving:
 		
 Section - Chton Champion vs Bat
 
-Chton champion vs bat is a isolated test set.
+Chton champion vs bat is a test set.
 
 A scenario rule when testing Chton champion vs bat:
 	now Hall of Gods is testobject;
@@ -1122,12 +1122,22 @@ After taking a player action (this is the assume all actions are fast until ever
 First every turn (this is the remember if the last turn took time rule):
 	now previously-fast is false;
 
+start-of-turn combat is a truth state that varies.
+
+After taking a player action when the scheduled event is a hiding-check turn-based event: 
+	now opposition test subject is the player;
+	Now start-of-turn combat is whether or not the location encloses an opposer person;
+	
 Testing a turn-based event for a hiding-check turn-based event (called the current move):
 	[a move can be hiding-check and hiding-reveal if it involves sneaking to a location and then revealing yourself]
 	if the current move is hiding-reveal, make no decision;
-	if the combat status is peace, make no decision;
+	if start-of-turn combat is false, make no decision;
 	if previously-fast is true, make no decision;
-	assert that the event description includes ", which must be positive\. You remain hidden\.";
+	Now opposition test subject is the player;
+	if the location encloses a not asleep opposer person:
+		assert that the event description includes ", which must be positive\. You remain hidden\.|((does not (detect|notice)|remains unaware of) you(r presence)?)";
+	otherwise:
+		assert that the event description includes "sleeps peacefully";
 	
 mindslug-hidden-retreat is a turn-based event. The next move of mindslug-hiding-check is mindslug-hidden-retreat. The scheduled action of mindslug-hidden-retreat is the action of retreating.
 	
@@ -1270,7 +1280,7 @@ Testing a turn-based event for tentacle-dig-retreat:
 
 Section - Insane Drakul
 
-insane drakul is an [isolated] test set.
+insane drakul is an test set.
 
 
 A scenario rule when testing insane drakul:
@@ -1650,7 +1660,7 @@ Testing a turn-based event of healer-healing-self:
 		
 Section - Sul's intervention
 
-sul-intervention-test is an [isolated] test set [for issue #227].
+sul-intervention-test is an test set [for issue #227].
 
 Scenario when testing sul-intervention-test:
 	now Temple of Sul is testobject;
@@ -1847,7 +1857,7 @@ Testing a turn-based event of malleus-feeding:
 	
 Section - bug 234
 
-bug-234 is an [isolated] test set.
+bug-234 is an test set.
 
 Scenario when testing bug-234:
 	Now Israfel is testobject;
@@ -2092,9 +2102,12 @@ Testing a turn-based event of partial-explored-sensing:
 
 meeting-malygris is a repeatable hiding-check turn-based event. The location-target of meeting-malygris is Malygris.
 
+To say doesn't see you pattern:
+	say "(does not (detect|notice)|remains unaware of) you(r presence)?";
+	
 Testing a turn-based event of meeting-malygris:
 	if the act count of Malygris is at least 1:
-		assert that the event description includes "Malygris (does not (detect|notice)|remains unaware of) you(r presence)?";
+		assert that the event description includes "Malygris [doesn't see you pattern]";
 		now meeting-malygris is not repeatable;
 	
 psycholocation-expiring is a repeatable hiding-check turn-based event.
@@ -2250,3 +2263,51 @@ Testing a turn-based event of secret-room-remembering:
 [make sure tunnels don't show up when they shouldn't, make sure they do show up in unexplored list]
 
 [psycholocation + sense]
+
+Section - Blessed Grenade - bug #261
+
+blessed-grenade-test is a isolated test set.
+
+Scenario when testing blessed-grenade-test:
+	now Drakul is testobject;
+	now the war mask is testobject;
+	now the Alchemical Laboratory is testobject;
+	
+Test play when testing blessed-grenade-test:
+	now the defence of the player is 100;
+	now the reusable item is the blessed grenade;
+	now the player carries the reusable item;
+	Now the reusable item is the war mask;
+	Now the player carries the war mask;
+	Now every room is not rust-spored;
+
+blessed-grenade-alchemy is a repeatable hiding-check turn-based event. The first move of blessed-grenade-test is blessed-grenade-alchemy. The location-target of blessed-grenade-alchemy is the Alchemical Laboratory; The scheduled action of blessed-grenade-alchemy is the action of inserting the war mask into the curious machine. The maximum repeats of blessed-grenade-alchemy is 300.
+
+Testing a turn-based event of blessed-grenade-alchemy:
+	unless the event description matches the regular expression "Blessed Grenade":
+		make no decision;
+	now blessed-grenade-alchemy is not repeatable;
+	Repeat with the item running through grenades:
+		Let name be indexed text;
+		Now name is the printed name of the item;
+		if the name is "Blessed Grenade":
+			assert "[The item] in [holder of the item] looks like a blessed grenade, but it isn't" based on whether or not the item is a blessed grenade;
+			if the item is in the location:
+				now the reusable item is the item;
+				record success of blessed-grenade-alchemy;
+		
+First every turn when the scheduled event is blessed-grenade-alchemy:
+	Now the health of the player is 100;
+	Now the player is not asleep;
+	Now the player is hidden;
+
+throwing-blessed is a turn-based event.
+
+Initial scheduling of throwing-blessed:
+	assert "The reusable item should now be a grenade, but it is [the reusable item]" based on whether or not the reusable item is a grenade;
+	extract the player to the location of Drakul;
+	now the scheduled action of throwing-blessed is the action of throwing the reusable item;
+	
+Testing a turn-based event of throwing-blessed:
+	assert that Drakul is dead;
+	assert that the event description includes "As the grenade explodes you hear the singing of angels, several of whom swoop down from the heavens with huge swords and eviscerate <^[line break]>*Drakul";
