@@ -3517,7 +3517,7 @@ The weapon damage bonus of the staff of insanity is 0.
 
 Aftereffects rule (this is the staff of insanity makes people insane rule):
 	if the global attacker weapon is the staff of insanity and the global defender is not the player:
-		if the attack damage is greater than 0:
+		if the attack damage is greater than 0 and the faction of the global defender is not insane and the global defender is not dead:
 			say "As soon as the bizarre staff strikes, [the global defender] goes [bold type]insane[roman type]!";
 			now faction of the global defender is insane.
 
