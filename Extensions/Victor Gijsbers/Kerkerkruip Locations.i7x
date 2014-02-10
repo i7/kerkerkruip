@@ -951,8 +951,11 @@ Last check inserting something into the curious machine:
 		if m is 4, now chosen grenade is a random smoke grenade;
 		if m is 5, now chosen grenade is a random teleportation grenade;
 		if m is 6, now chosen grenade is a random Morphean grenade;
-		if a random chance of 1 in 100 succeeds, now chosen grenade is the Blessed Grenade;
-		let item be a new object cloned from chosen grenade;
+		if a random chance of 1 in 100 succeeds and there is a not placed custom grenade:
+			now the chosen grenade is a random not placed custom grenade;
+		Let item be the chosen grenade;
+		Unless the chosen grenade is a custom grenade:
+			now item is a new object cloned from chosen grenade;
 		move item to the location;
 		have the parser notice the item;
 		increase machine-counter by 1;

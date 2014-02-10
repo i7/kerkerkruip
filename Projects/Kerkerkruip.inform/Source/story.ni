@@ -232,8 +232,6 @@ To ask a closed question, in number mode, in menu mode, in yes/no mode, in gende
 
 
 
-
-
 	
 Section - Numbered Disambiguation Fix
 

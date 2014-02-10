@@ -567,7 +567,7 @@ For taking a player action (this is the move to the destination of a turn-based 
 		make no decision;
 	Let the way be the best route from the location to the place;
 	if the way is not a direction:
-		record failure of  the scheduled event with message "No available route from [the location] to [the location-target of the scheduled event] (in [the place])";
+		record failure of the scheduled event with message "No available route from [the location] to [the location-target of the scheduled event] (in [the place])";
 		make no decision;
 	generate a player action of the action of going the way;
 		
@@ -1136,8 +1136,9 @@ Testing a turn-based event for a hiding-check turn-based event (called the curre
 	Now opposition test subject is the player;
 	if the location encloses a not asleep opposer person:
 		assert that the event description includes ", which must be positive\. You remain hidden\.|((does not (detect|notice)|remains unaware of) you(r presence)?)";
-	otherwise:
-		assert that the event description includes "sleeps peacefully";
+	repeat with guy running through asleep opposer persons in the location:
+		if the act count of guy is at least 1:
+			assert that the event description includes "[The guy] sleeps peacefully";
 	
 mindslug-hidden-retreat is a turn-based event. The next move of mindslug-hiding-check is mindslug-hidden-retreat. The scheduled action of mindslug-hidden-retreat is the action of retreating.
 	
@@ -1474,7 +1475,7 @@ When play begins:
 initial scheduling for a cower-counting turn-based event:
 	repeat with guy running through people:
 		now the cower count of guy is 0;
-	
+
 Testing a turn-based event of a cower-counting turn-based event:
 	Let success count be 0;
 	Repeat with guy running through people in the location:
@@ -2266,7 +2267,7 @@ Testing a turn-based event of secret-room-remembering:
 
 Section - Blessed Grenade - bug #261
 
-blessed-grenade-test is a isolated test set.
+blessed-grenade-test is a test set.
 
 Scenario when testing blessed-grenade-test:
 	now Drakul is testobject;
@@ -2275,13 +2276,15 @@ Scenario when testing blessed-grenade-test:
 	
 Test play when testing blessed-grenade-test:
 	now the defence of the player is 100;
-	now the reusable item is the blessed grenade;
 	now the player carries the reusable item;
 	Now the reusable item is the war mask;
 	Now the player carries the war mask;
 	Now every room is not rust-spored;
+	Now every thing is not rusted;
 
-blessed-grenade-alchemy is a repeatable hiding-check turn-based event. The first move of blessed-grenade-test is blessed-grenade-alchemy. The location-target of blessed-grenade-alchemy is the Alchemical Laboratory; The scheduled action of blessed-grenade-alchemy is the action of inserting the war mask into the curious machine. The maximum repeats of blessed-grenade-alchemy is 300.
+A turn-based event can be grenade-producing.
+
+blessed-grenade-alchemy is a repeatable hiding-check grenade-producing turn-based event. The first move of blessed-grenade-test is blessed-grenade-alchemy. The location-target of blessed-grenade-alchemy is the Alchemical Laboratory. The maximum repeats of blessed-grenade-alchemy is 300.
 
 Testing a turn-based event of blessed-grenade-alchemy:
 	unless the event description matches the regular expression "Blessed Grenade":
@@ -2291,23 +2294,39 @@ Testing a turn-based event of blessed-grenade-alchemy:
 		Let name be indexed text;
 		Now name is the printed name of the item;
 		if the name is "Blessed Grenade":
-			assert "[The item] in [holder of the item] looks like a blessed grenade, but it isn't" based on whether or not the item is a blessed grenade;
+			assert "[The item] in [holder of the item] looks like a blessed grenade, but it isn't" based on whether or not the item is the blessed grenade;
 			if the item is in the location:
-				now the reusable item is the item;
 				record success of blessed-grenade-alchemy;
 		
-First every turn when the scheduled event is blessed-grenade-alchemy:
+Initial scheduling of a grenade-producing turn-based event (called the current move):
+	now the scheduled action of the current move is the action of inserting the war mask into the curious machine.
+
+First every turn when the scheduled event is a grenade-producing turn-based event (called the current move):
 	Now the health of the player is 100;
 	Now the player is not asleep;
-	Now the player is hidden;
+	If the current move is hiding-check, now the player is hidden;
+	Now every room is not rust-spored;
+	Now every thing is not rusted;
 
+no-extra-blessed-grenade is an uneventful repeatable hiding-check grenade-producing turn-based event. The maximum repeats of no-extra-blessed-grenade is 100. [This number could be higher, but it's a slow test]
+
+Testing a turn-based event of no-extra-blessed-grenade:
+	if the event description matches the regular expression "Blessed Grenade":
+		record failure of no-extra-blessed-grenade with message "The machine produced an extra blessed grenade, impossibly".
+	
 throwing-blessed is a turn-based event.
 
 Initial scheduling of throwing-blessed:
-	assert "The reusable item should now be a grenade, but it is [the reusable item]" based on whether or not the reusable item is a grenade;
+	now the player carries the blessed grenade;
 	extract the player to the location of Drakul;
-	now the scheduled action of throwing-blessed is the action of throwing the reusable item;
+	now the scheduled action of throwing-blessed is the action of throwing the blessed grenade;
 	
 Testing a turn-based event of throwing-blessed:
 	assert that Drakul is dead;
 	assert that the event description includes "As the grenade explodes you hear the singing of angels, several of whom swoop down from the heavens with huge swords and eviscerate <^[line break]>*Drakul";
+	
+no-new-blessed-grenade is an uneventful repeatable hiding-check grenade-producing turn-based event. The maximum repeats of no-new-blessed-grenade is 100.
+
+Testing a turn-based event of no-new-blessed-grenade:
+	if the blessed grenade is not off-stage:
+		record failure of no-new-blessed-grenade with message "The blessed grenade should be off-stage".

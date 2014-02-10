@@ -1479,6 +1479,9 @@ Aftereffects rule (this is the lion's shield rule):
 					say "The lion on the shield strikes out, and bites [the global attacker] for [bold type][m] damage[roman type][if health of global attacker is less than (m + 1)], which is [bold type]lethal[roman type][end if].";
 				decrease health of the global attacker by m.
 
+Chapter - Cloneable
+
+Definition: A thing is cloneable: no. [Lots of things can be cloned, but most things don't need to be cloned. Cloneable means we shouldn't use the original]
 
 Chapter - Grenades
 
@@ -1487,6 +1490,8 @@ Section - The grenades kind
 A grenade is a kind of thing.
 A grenade is usually alchemical.
 A grenade is usually iron.
+
+Definition: a grenade is cloneable: yes.
 
 A grenade is either damaging or not-damaging. A grenade is usually not-damaging.
 
@@ -1678,31 +1683,40 @@ An exploding rule (this is the fragmentation grenade explodes rule):
 
 Section - Blessed Grenade (major)
 
-The Blessed Grenade is a major grenade. The indefinite article of the Blessed Grenade is "the". The description of Blessed Grenade is "This grenade is rumoured to be extremely effective against undead.".
+A custom grenade is a kind of grenade. The indefinite article of a custom grenade is usually "the". A custom grenade can be exploded. A custom grenade is usually major. [a custom grenade is unique, and can only appear in the dungeon once]
 
-To decide which number is the grenade-id of (G - a grenade): (- {G} -);
+Definition: A custom grenade is cloneable: no.
+
+Definition: A custom grenade is placed if it is not off-stage or it is exploded.
+
+The Blessed Grenade is a custom grenade. The description of the Blessed Grenade is "This grenade is rumoured to be extremely effective against undead."
 
 An exploding rule (this is the Blessed Grenade explodes rule):
-	if the exploding-grenade is a Blessed Grenade:
-		if the noun is rusted and a random chance of 1 in 2 succeeds:	
-			if exploding-location is the location:
-				say "There is only a feeble explosion. The rust must have rendered the Blessed Grenade useless.";
-			otherwise:
-				say "The explosion does seem to be very feeble, though.";
+	unless the exploding-grenade is a custom grenade:
+		make no decision;
+	if the noun is rusted and a random chance of 1 in 2 succeeds:	
+		if exploding-location is the location:
+			say "There is only a feeble explosion. The rust must have rendered [the noun] useless.";
 		otherwise:
-			if the number of alive undead persons in the exploding-location is less than 1:
-				if the location is the exploding-location:
-					say "As the grenade explodes you hear the singing of angels. But nothing further appears to happen.";
-			otherwise:
-				let K be the list of alive undead persons in the location;
-				if the location is the exploding-location:
-					say "As the grenade explodes you hear the singing of angels, several of whom swoop down from the heavens with huge swords and eviscerate [K with definite articles].";
-				repeat with guy running through K:
-					now health of guy is -1;
-					have an event of the player killing guy;
-				if the player is dead:
-					end the story saying "The undead should not seek blessings.";
-		remove the noun from play.
+			say "The explosion does seem to be very feeble, though.";
+	if the exploding-grenade is the Blessed Grenade:
+		if the number of alive undead persons in the exploding-location is less than 1:
+			if the location is the exploding-location:
+				say "As the grenade explodes you hear the singing of angels. But nothing further appears to happen.";
+		otherwise:
+			let K be the list of alive undead persons in the location;
+			if the location is the exploding-location:
+				say "As the grenade explodes you hear the singing of angels, several of whom swoop down from the heavens with huge swords and eviscerate [K with definite articles].";
+			repeat with guy running through K:
+				now health of guy is -1;
+				have an event of the player killing guy;
+			if the player is dead:
+				end the story saying "The undead should not seek blessings.";
+	otherwise:
+		say "[The noun] explodes, but nothing happens. It must be one of those prank grenades that you see in magic shops.";
+	now the noun is exploded;
+	remove the noun from play;
+
 
 Section - Teleportation grenade
 
@@ -1982,6 +1996,8 @@ A scroll is usually paper.
 A scroll is readable.
 Understand "scroll" as a scroll.
 Understand "scrolls" as the plural of a scroll.
+
+Definition: A scroll is cloneable: yes.
 
 Carry out reading a scroll:
 	remove the noun from play.

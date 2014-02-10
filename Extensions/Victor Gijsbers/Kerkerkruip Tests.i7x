@@ -95,7 +95,7 @@ After showing the title screen (this is the mark test objects from file rule):
 		repeat with R running through things:
 			now test text is "[printed name of R]";
 			if the Object name entry is test text:
-				if R is a grenade or R is a scroll:
+				if R is cloneable:
 					let new toy be a new object cloned from R;
 					now new toy is testobject;
 					now new toy is in the Entrance Hall;
