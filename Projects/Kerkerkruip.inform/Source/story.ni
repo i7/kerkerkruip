@@ -1,4 +1,3 @@
-
 "Kerkerkruip" by Victor Gijsbers
 
 The story headline is "An IF roguelike".
