@@ -1132,10 +1132,11 @@ Testing a turn-based event for a hiding-check turn-based event (called the curre
 	[a move can be hiding-check and hiding-reveal if it involves sneaking to a location and then revealing yourself]
 	if the current move is hiding-reveal, make no decision;
 	if start-of-turn combat is false, make no decision;
+	assert "the player should be hidden" based on whether or not the player is hidden;
 	if previously-fast is true, make no decision;
 	Now opposition test subject is the player;
 	if the location encloses a not asleep opposer person:
-		assert that the event description includes ", which must be positive\. You remain hidden\.|((does not (detect|notice)|remains unaware of) you(r presence)?)";
+		assert that the event description includes ", which must be positive\. You remain hidden\.|([doesn't see you pattern])";
 	repeat with guy running through asleep opposer persons in the location:
 		if the act count of guy is at least 1:
 			assert that the event description includes "[The guy] sleeps peacefully";
@@ -1227,7 +1228,7 @@ Definition: a direction (called way) is diggable:
 		otherwise:
 			decide on whether or not item is connectable;
 
-tentacle-grab is an [isolated] test set.
+tentacle-grab is a test set.
 
 Scenario when testing tentacle-grab:
 	Now the giant tentacle is testobject;
@@ -1547,7 +1548,7 @@ isra-defended-by-sul is a randomized event;]
 
 Section - Bug 210
 
-bug-210 is an [isolated] test set. 
+bug-210 is a test set. 
 
 A scenario rule when testing bug-210:
 	now the mindslug is testobject;
@@ -1587,7 +1588,7 @@ Testing a turn-based event of reaction-mindslug-killing:
 	
 Section - Dream of Sleeping
 
-dream-of-sleeping-test is a test set. [dream-of-sleeping-test is isolated.]
+dream-of-sleeping-test is a test set.
 
 Scenario when testing dream-of-sleeping-test:
 	now the dream of sleeping is current-test-dream;
@@ -2104,7 +2105,7 @@ Testing a turn-based event of partial-explored-sensing:
 meeting-malygris is a repeatable hiding-check turn-based event. The location-target of meeting-malygris is Malygris.
 
 To say doesn't see you pattern:
-	say "(does not (detect|notice)|remains unaware of) you(r presence)?";
+	say "(does not (detect|notice)|remains unaware of) you(r presence)?[run paragraph on]";
 	
 Testing a turn-based event of meeting-malygris:
 	if the act count of Malygris is at least 1:

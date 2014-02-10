@@ -954,7 +954,7 @@ Last check inserting something into the curious machine:
 		if a random chance of 1 in 100 succeeds and there is a not placed custom grenade:
 			now the chosen grenade is a random not placed custom grenade;
 		Let item be the chosen grenade;
-		Unless the chosen grenade is a custom grenade:
+		if the chosen grenade is cloneable:
 			now item is a new object cloned from chosen grenade;
 		move item to the location;
 		have the parser notice the item;
