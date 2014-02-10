@@ -3540,7 +3540,7 @@ Report the defender of Aite waiting when the defender of Aite is insane:
 	rule succeeds.	
 
 
-Section - Tormentor of Aite images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+Section - Defender of Aite images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
 The avatar of defender of Aite is Figure of map_monster_defender_of_Aite.
 The legend-label of defender of Aite is Figure of map_legend_defender_of_Aite.
@@ -3638,7 +3638,7 @@ When play begins:
 	now dodge bonus of X is 1;
 	now parry-against bonus of X is -2;
 	now parry-with bonus of X is -2;
-	now printed name of X is "lightning bolt".
+	now printed name of X is "a lightning bolt".
 
 
 Section - Bodmall images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)

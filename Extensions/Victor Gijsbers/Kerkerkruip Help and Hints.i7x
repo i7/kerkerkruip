@@ -130,14 +130,15 @@ To say the monster portrait credits:
 	say "All other illustrations by Erik Temple. The rogue portraits incorporate the following resources:
 	[paragraph break]Armadillo: Background texture courtesy of Shadowhouse Creations (shadowhousecreations.blogspot.com);
 	[line break]Chain Golem: Background texture courtesy of Got3d - 3d Models and Textures (http://www.got3d.com/index.html);
+	[line break]Fanatics of Aite: Background texture courtesy of deviantArt user cloaks (MIchelle Bretland, cloaks.deviantart.com);
 	[line break]Mindslug: Background texture courtesy of Flickr user rubyblossom (CC BY-NC-SA 2.0);
 	[line break]Minotaur: Background texture in the public domain, courtesy photos-public-domain.com;
-	[line break]Miranda: Background texture courtesy of deviantART user Esther-Sanz;
+	[line break]Miranda: Background texture courtesy of deviantART user Esther-Sanz (esther-sanz.deviantart.com);
 	[line break]Reaper: Background texture courtesy of wildtextures (wildtextures.com);
 	[line break]Swarm of Daggers: Background texture courtesy of Dalibor Levíček, Flickr user daliborlev (CC BY-NC-SA 2.0);
-	[line break]Tentacle of Tooloo: Background texture courtesy of deviantART user Insan-Stock;
+	[line break]Tentacle of Tooloo: Background texture courtesy of deviantART user Insan-Stock (insan-stock.deviantart.com);
 	[line break]Wisps of Pain: Background image of microalgae courtesy Flickr user Learn 2 Teach, Teach 2 Learn (CC BY-NC 2.0);
-	[line break]Placeholder cards: Background texture courtesy of deviantART user Esther-Sanz.";
+	[line break]Placeholder cards: Background texture courtesy of deviantART user Esther-Sanz (esther-sanz.deviantart.com).";
 
 To say contact text:
 	say "This is where stuff is going on:[paragraph break]* Updates to the game are announced on the current website, which is also where you can find the latest version of the game: http://lilith.cc/~victor/?q=content/kerkerkruip[line break]* Updates are also announced on the IFDB, which is the ideal venue for reviewing interactive fiction: http://ifdb.tads.org[line break]* The source code and current design discussions can be found on github: https://github.com/i7/kerkerkruip[line break]* Design discussions, programming tutorials and help from other gamers are at the IF Forum: http://www.intfiction.org/forum/index.php[paragraph break]Github and the forum are the preferred places for interaction, but you can also contact Victor with comments, bug reports, and anything else at victor@lilith.cc."

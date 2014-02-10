@@ -2081,7 +2081,7 @@ disintegrating flesh	"Your [bold type]flesh[roman type] loses much of its consis
 metallic scales	"Your body is covered in [bold type]metallic scales[roman type]!"	"The metallic scales disappear from your body."
 tunneling claws	"Your hands turn into [bold type]tunneling claws[roman type]!"	"Your tunneling claws disappear."
 flexible muscles	"Your muscles become [bold type]flexible[roman type]!"		"Your muscles regain their normal flexibility."
-an iron will		"A change in your brain increases you [bold type]willpower[roman type]!"	"Your willpower returns to its normal strength."
+an iron will		"A change in your brain increases your [bold type]willpower[roman type]!"	"Your willpower returns to its normal strength."
 astral sensitivity	"A physiological change makes you [bold type]astrally sensitive[roman type], increasing your spirit score."	"You lose your astral sensitivity."
 psychic powers	"You gain [bold type]psychic powers[roman type]!"		"You lose your psychic powers."
 
