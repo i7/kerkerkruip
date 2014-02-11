@@ -1650,6 +1650,10 @@ A last dungeon interest rule (this is the potentially connect the Mausoleum rule
 		let place be a random placed connectable room;
 		place mausoleum next to place;
 
+Definition: a person is mausoleum-inhabitant if it is undead.
+
+Definition: the abyss of the soul is mausoleum-inhabitant: no.
+
 A dungeon finish rule (this is the people the Mausoleum rule):
 	if the Mausoleum is not placed:
 		make no decision;
@@ -1657,24 +1661,14 @@ A dungeon finish rule (this is the people the Mausoleum rule):
 		let guy be a random super-undead off-stage person;
 		move guy to the mausoleum;
 	otherwise:
-		if at least one undead person is off-stage:
-			let guy be a random off-stage undead person; [can be super-undead!]
-			move guy to the mausoleum;
-		if at least one undead person is off-stage:
-			let guy be a random off-stage undead person; [can be super-undead!]
-			move guy to the mausoleum;
-	if at least one epic thing is off-stage:
-		let item be a random epic thing;
-		now item is in tomb of the ancient king;
+		repeat with i running from 1 to 2:
+			if at least one mausoleum-inhabitant person is off-stage:
+				let guy be a random off-stage mausoleum-inhabitant person; [can be super-undead!]
+				move guy to the mausoleum;
+	place 1 of epic things in the tomb of the ancient king;
 	if a random chance of 1 in 4 succeeds:
-		if at least one epic thing is off-stage:
-			let item be a random epic thing;
-			now item is in tomb of the ancient king;
-	if abyss of the soul is in the mausoleum:
-		if at least one undead person is off-stage:
-			let guy be a random off-stage undead person; [can be super-undead!]
-			move guy to the mausoleum;
-		remove abyss of the soul from play.
+		place 1 [more] of epic things in tomb of the ancient king;
+
 			
 Section - Mausoleum label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 

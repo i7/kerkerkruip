@@ -50,7 +50,7 @@ Use maximum capture buffer length of at least 8192.
 Use maximum indexed text length of at least 8192. 
 
 First when play begins (this is the random seed rule):
-	seed the random-number generator with 21.
+	seed the random-number generator with 23.
 
 The random seed rule is listed before the reaper carries a random scythe rule in the when play begins rules.
 
@@ -1282,7 +1282,7 @@ Testing a turn-based event for tentacle-dig-retreat:
 
 Section - Insane Drakul
 
-insane-drakul is an isolated test set.
+insane-drakul is an test set.
 
 A scenario rule when testing insane-drakul:
 	Now drakul's lifeblood is bannedobject;
@@ -2353,10 +2353,37 @@ Test play when testing maze-resetting:
 	assert "the minotaur's axe should be readied" based on whether or not the minotaur's axe is readied;
 	now the defence of the player is 100;
 	now the melee of the player is 100;
-	
+
 overmind-meeting is a hiding-check hiding-reveal turn-based event. The first move of maze-resetting is overmind-meeting. The location-target of overmind-meeting is the overmind.
 
 overmind-mazing is a turn-based event. The scheduled action of overmind-mazing is the action of attacking the overmind.
 	
 Testing a turn-based event of overmind-mazing:
 	assert that the combat state of the overmind is at-inactive.
+	
+Section - bug 262
+
+[this bug will not happen with normal testobject placement, so this is a bit of a gamble]
+
+bug-262 is a isolated test set.
+
+Scenario when testing bug-262:
+	now generation info is true;
+	now every secretly placeable room is bannedobject;
+	
+First dungeon interest rule when testing bug-262:
+	now every secretly placeable room is testobject;
+	repeat with item running through things that are not treasure packs:
+		now item is non-treasure;
+	
+First dungeon finish rule:
+	showme whether or not generation info is true;
+	log "dungeon finish rule";
+	
+Test play when testing bug-262:
+	if portal of smoke is not placed and hidden treasury is not placed and mausoleum is not placed:
+		log "nothing to test for bug 262, but testing anyway!";
+	Repeat with item running through treasure packs:
+		assert "[The item] should be off-stage, but it is in [the holder of the item][if holder of the item is not a room] (in [location of the item])" based on whether or not item is off-stage;
+
+	
