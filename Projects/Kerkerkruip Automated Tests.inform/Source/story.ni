@@ -2331,3 +2331,29 @@ no-new-blessed-grenade is an uneventful repeatable hiding-check grenade-producin
 Testing a turn-based event of no-new-blessed-grenade:
 	if the blessed grenade is not off-stage:
 		record failure of no-new-blessed-grenade with message "The blessed grenade should be off-stage".
+		
+Section - At-react after getting mazed - bug 210
+
+maze-resetting is a isolated  test set.
+
+Scenario when testing maze-resetting:
+	now the minotaur is testobject;
+	now the overmind is testobject;
+	now the hall of mirrors is bannedobject;
+	
+Test play when testing maze-resetting:
+	extract the player to the location of the minotaur;
+	try smiting the minotaur;
+	try taking the minotaur's axe;
+	assert "the minotaur's axe should be carried" based on whether or not the minotaur's axe is carried;
+	try readying the minotaur's axe;
+	assert "the minotaur's axe should be readied" based on whether or not the minotaur's axe is readied;
+	now the defence of the player is 100;
+	now the melee of the player is 100;
+	
+overmind-meeting is a hiding-check hiding-reveal turn-based event. The first move of maze-resetting is overmind-meeting. The location-target of overmind-meeting is the overmind.
+
+overmind-mazing is a turn-based event. The scheduled action of overmind-mazing is the action of attacking the overmind.
+	
+Testing a turn-based event of overmind-mazing:
+	assert that the combat state of the overmind is at-inactive.

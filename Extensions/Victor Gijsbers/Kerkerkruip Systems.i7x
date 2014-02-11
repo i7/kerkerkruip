@@ -454,6 +454,7 @@ Carry out an actor challenging someone in (this is the remember the challenge si
 	now the challenge site of the second noun is the location of the person asked;
 
 Carry out an actor challenging someone in (this is the place challenged opponents in staging area rule):
+	extract the noun from combat;
 	move the noun to the staging area of the second noun;
 	if the second noun is a challenged-group-inviting arena and the noun is group leading and the noun is not defeated individually and the noun is initially accompanied:
 		repeat with the guy running through people who accompany the noun:
