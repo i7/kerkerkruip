@@ -1542,7 +1542,7 @@ To do a random step:
 	
 [Set secretly placeable and secret-placement rarity of rooms to have them included here.
 Populate them with monsters and treasure in the dungeon finish rules.]
-A dungeon interest rule (this is the place secret rooms rule):
+A last creating the map rule (this is the place secret rooms rule):
 	let the normal rarity multiplier be the rarity multiplier;
 	Repeat with the place running through secretly placeable rooms:
 		if the place is placed, next;
@@ -1598,7 +1598,7 @@ The secret-rarity multiplier of Hidden Treasury is 5.
 
 The ornate chest is scenery in Hidden Treasury. The ornate chest is a closed openable container. Understand "gems" and "precious" and "metals" as the ornate chest.
 
-A dungeon finish rule (this is the fill the Hidden Treasury rule):
+A treasure placement rule (this is the fill the Hidden Treasury rule):
 	if the Hidden Treasury is placed:
 		place 3 of minor things in ornate chest;
 		place 1 of major things in ornate chest;
@@ -1745,7 +1745,7 @@ Does the player mean entering the portal to the elemental plane of smoke: it is 
 Instead of going inside in Portal of Smoke:
 	try entering the portal to the elemental plane of smoke.
 
-A dungeon finish rule (this is the populate the Plane of Smoke rule):
+A treasure placement rule (this is the populate the Plane of Smoke rule):
 	if the Portal of Smoke is placed:
 		place 3 of minor things in Elemental Plane of Smoke Storage;
 		place 1 of major things in Elemental Plane of Smoke Storage;

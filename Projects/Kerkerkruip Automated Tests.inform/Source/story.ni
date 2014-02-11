@@ -50,7 +50,7 @@ Use maximum capture buffer length of at least 8192.
 Use maximum indexed text length of at least 8192. 
 
 First when play begins (this is the random seed rule):
-	seed the random-number generator with 21.
+	seed the random-number generator with 22.
 
 The random seed rule is listed before the reaper carries a random scythe rule in the when play begins rules.
 
@@ -1282,7 +1282,7 @@ Testing a turn-based event for tentacle-dig-retreat:
 
 Section - Insane Drakul
 
-insane-drakul is an isolated test set.
+insane-drakul is an test set.
 
 A scenario rule when testing insane-drakul:
 	Now drakul's lifeblood is bannedobject;
