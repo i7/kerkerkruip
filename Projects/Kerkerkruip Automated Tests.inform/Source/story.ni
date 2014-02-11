@@ -50,7 +50,7 @@ Use maximum capture buffer length of at least 8192.
 Use maximum indexed text length of at least 8192. 
 
 First when play begins (this is the random seed rule):
-	seed the random-number generator with 23.
+	seed the random-number generator with 24.
 
 The random seed rule is listed before the reaper carries a random scythe rule in the when play begins rules.
 
@@ -2365,24 +2365,32 @@ Section - bug 262
 
 [this bug will not happen with normal testobject placement, so this is a bit of a gamble]
 
-bug-262 is a isolated test set.
+bug-262 is a test set.
 
 Scenario when testing bug-262:
 	now generation info is true;
 	now every secretly placeable room is bannedobject;
 	
-First dungeon interest rule when testing bug-262:
+First creating the map rule when testing bug-262:
 	now every secretly placeable room is testobject;
-	repeat with item running through things that are not treasure packs:
-		now item is non-treasure;
 	
 First dungeon finish rule:
-	showme whether or not generation info is true;
-	log "dungeon finish rule";
+	repeat with pack running through not non-treasure things:
+		repeat with item running through things enclosed by pack:
+			now the valuation of item is the valuation of pack;
 	
+Definition: a room is secret-treasure-stash if it is Mausoleum or it is Hidden Treasury or it is Elemental Plane of Smoke Storage.
+
 Test play when testing bug-262:
 	if portal of smoke is not placed and hidden treasury is not placed and mausoleum is not placed:
-		log "nothing to test for bug 262, but testing anyway!";
+		log "no treasure-containing secret rooms to test for bug 262, but testing anyway!";
+	let something to test be false;
+	repeat with place running through secret-treasure-stash rooms:
+		if place encloses a not non-treasure thing:
+			now something to test is true;
+			break;
+	unless something to test is true:
+		log "no treasure in any secretly placed rooms, but testing anyway";
 	Repeat with item running through treasure packs:
 		assert "[The item] should be off-stage, but it is in [the holder of the item][if holder of the item is not a room] (in [location of the item])" based on whether or not item is off-stage;
 
