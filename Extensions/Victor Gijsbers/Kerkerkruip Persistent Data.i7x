@@ -164,6 +164,7 @@ Twice fallen
 Give them blood
 Royal fruit
 Sixth heaven
+Blood never lies
 
 Table of Held Achievements
 held achievement	held difficulty
@@ -282,7 +283,9 @@ Section - Sixth Heaven
 
 [Handled by ment code in Kerkerkruip Items]
 
+Section - Blood Never Lies
 
+[Handled by Drakul code in Kerkerkruip Events and Specials]
 
 
 Kerkerkruip Persistent Data ends here.

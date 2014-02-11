@@ -604,6 +604,8 @@ To say actually (honest - a truth state) compound identity of (guy - a person):
 
 Section - Drakul Hints
 
+Drakul's plans revealed is a truth state that varies.
+
 To say actually (honest - a truth state) Drakul hint:
 	if vampire-form is not form-active and a random chance of 1 in 2 succeeds:
 		say actually honest lifeblood hint;
@@ -635,5 +637,9 @@ To say actually (honest - a truth state) vampire-turning hint:
 		say "I intend to vanquish Malygris after I make you my vampire-slave";
 	otherwise:
 		say "you will never be my vampire-slave";
+	now drakul's plans revealed is true;
+
+Every turn when drakul's plans revealed is true:
+	award achievement Blood never lies. 
 		
 Kerkerkruip Events and Specials ends here.

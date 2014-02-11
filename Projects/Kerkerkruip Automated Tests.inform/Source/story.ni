@@ -1284,7 +1284,6 @@ Section - Insane Drakul
 
 insane-drakul is an isolated test set.
 
-
 A scenario rule when testing insane-drakul:
 	Now drakul's lifeblood is bannedobject;
 	Now drakul is testobject;
@@ -1322,6 +1321,11 @@ randomized outcome testing when drakul going insane became the possibility:
 insane drakul statements is a turn-based event.
 
 Initial scheduling of insane drakul statements:
+	if there is a held achievement of Blood never lies in the Table of Held Achievements:
+		do nothing;
+		[this causes a glk error:
+		choose row with held achievement of Blood never lies in the Table of Held Achievements;
+		blank out the whole row;]
 	now the concentration of drakul is 0;
 	transcribe and restart capturing;
 	try Drakul concentrating;
@@ -1363,6 +1367,8 @@ randomized outcome testing when lifeblood-hinting became the possibility:
 	
 randomized outcome testing when vampire-turning-hinting became the possibility:
 	unless the event description matches the regular expression "\bI intend to vanquish Malygris after I make you my vampire-slave\b|\byou will never be my vampire-slave\b", make no decision;
+	[this doesn't compile:
+	assert "Blood never lies achievement should be held" based on whether not there is a held achievement of Blood never lies in the Table of Held Achievements;]
 	mark the outcome achieved;
 
 Drakul suicide is a turn-based event.

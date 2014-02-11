@@ -166,6 +166,7 @@ title	text
 "[fixed letter spacing]Royal fruit             [achievement royal fruit]"	"Receive the fabled Fruit of Kings."
 "[fixed letter spacing]Sixth heaven            [achievement sixth heaven]"	"Get a +6 ment bonus."
 "[fixed letter spacing]Durin's bane            [achievement durin's bane][variable letter spacing]"	"Wake up an unbeatable foe."
+"[fixed letter spacing]Blood never lies            [achievement blood never lies][variable letter spacing]"	"Get a vampire to reveal his plans."
 
 To say setup achievement menu:
 	if Table of Held Achievements is empty:
