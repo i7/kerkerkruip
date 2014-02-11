@@ -72,21 +72,24 @@ Section - Intervention
 To have (benefactor - a god) intervene on behalf of (guy - a person):
 	say "[bracket]Error: unimplemented intervention of [the benefactor] on behalf of [the guy][close bracket][command clarification break]";
 	
+The intervention-guy is a person that varies.
+The intervention-god is a god that varies.
+
 Section - Intervention possible
 
-The intervention possible rules are an object-based rulebook.
+The intervention possible rules are rulebook.
 
 To decide whether (guy - a person) can receive intervention:
 	unless guy worships a god, no;
-	consider the intervention possible rules for guy;
+	now intervention-guy is guy;
+	now intervention-god is the patron of guy;
+	consider the intervention possible rules;
 	if rule succeeded, yes;
 	no.
 
 Section - intervention bonus	
 	
 The intervention bonus rules are a rulebook.
-The intervention-guy is a person that varies.
-The intervention-god is a god that varies.
 The intervention-bonus is a number that varies.
 
 To decide which number is the intervention bonus for (guy - a person) with (divinity - a god):
@@ -324,7 +327,7 @@ A beloved of Aite rule (this is the worshippers are beloved of Aite rule):
 
 Section - Aite's engagement in combat
 
-Intervention possible for someone who worships Aite:
+Intervention possible when intervention-god is Aite:
 	rule succeeds.
 
 To have (benefactor - Aite) intervene on behalf of (guy - a person):
@@ -463,7 +466,7 @@ Section - Tome of Law
 
 Section - Nomos's engagement in combat
 
-Intervention possible for someone who worships Nomos:
+Intervention possible when intervention-god is Nomos:
 	if the Nomos counter is 0, rule succeeds;
 	rule fails.
 
@@ -717,10 +720,10 @@ Status attribute rule (this is the demon slayer status rule):
 
 Section - Sul's intervention
 
-Intervention possible for someone (called guy) who worships Sul:
+Intervention possible when intervention-god is Sul:
 	unless an actor hitting, rule fails;
 	if the global defender is undead or the global defender is demonic, rule fails;
-	if the global defender opposes guy and the global defender is not guy, rule fails;
+	if the global defender opposes intervention-guy and the global defender is not intervention-guy, rule fails;
 	rule succeeds.
 
 To decide whether Sul will protect the global defender:
@@ -784,7 +787,7 @@ To do a Chton gift:
 
 Section - Chton's intervention
 
-Intervention possible for a person (called guy) who worships Chton:
+Intervention possible for when intervention-god is Chton:
 	rule succeeds.
 
 Intervention bonus when intervention-god is Chton:
@@ -882,9 +885,9 @@ A detection rule (this is the Herm worship decreases probability of detection ru
 
 Section - Herm's intervention
 
-Intervention possible for someone (called guy) who worships Herm:
+Intervention possible when intervention-god is Herm:
 	unless an actor hitting, rule fails;
-	unless the global defender is guy, rule fails;
+	unless the global defender is intervention-guy, rule fails;
 	unless the global defender is conscious, rule fails;
 	unless the location of the global attacker is the location of the global defender, rule fails;
 	rule succeeds.

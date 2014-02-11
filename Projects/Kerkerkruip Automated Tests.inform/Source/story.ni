@@ -531,6 +531,8 @@ Before taking a player action when the scheduled event is generated:
 			record success of the scheduled event;
 		otherwise:
 			assert "[the maxed out report of the scheduled event]" based on false;
+			Repeat with the attempt running through not achieved possible randomized outcomes:
+				assert "After [the scheduled event], [the attempt] was still not tested" based on false;
 	if repeat is true:
 		schedule the scheduled event;
 	otherwise:
@@ -601,13 +603,21 @@ To compel (the desired action - a stored action):
 	now the guy is not asleep;
 	Now the compelled action is the desired action.
 	
-A last AI action selection rule for an at-Act person (called P) when the compelled action is not the action of waiting:
+A Standard AI rule for a person (called P) (this is the compel an action rule):
+	if P is at-Act and the actor part of the compelled action is P:
+		try the compelled action;
+		now the compelled action is the action of waiting;
+		rule succeeds.
+	
+The compel an action rule is listed before the insane people attack themselves rule in the standard AI rulebook.
+	
+[A last AI action selection rule for an at-Act person (called P) when the compelled action is not the action of waiting:
 	unless P is the actor part of the compelled action, make no decision;
 	blank out the whole of the Table of AI Action Options;
 	choose a blank row in the Table of AI Action Options;
 	now the Option entry is the compelled action;
 	now the Action Weight entry is 1000;
-	now the compelled action is the action of waiting.
+	now the compelled action is the action of waiting.]
 
 Last choosing a player reaction:
 	generate a player action of the action of waiting.
@@ -680,23 +690,17 @@ The test play rules are a rulebook.
 
 Chapter - Randomized Events
 
-The maximum number of random event iterations is a number that varies. The maximum number of random event iterations is 100.
+A randomized outcome is a kind of value. boring lack of results is a randomized outcome.
 
-A randomized event is a kind of value. boring lack of events is a randomized event.
+A randomized outcome can be achieved.
 
-A random outcome is a kind of value. boring lack of results is a random outcome.
+Event resolution relates various randomized outcomes to one turn-based event. The verb to result from (he results from, they result from, it is required, it is resulting from) implies the event resolution relation.
 
-A random outcome can be achieved.
+The outcome being tested is a randomized outcome that varies.
 
-Event resolution relates various random outcomes to one randomized event. The verb to result from (he results from, they result from, it is required, it is resulting from) implies the event resolution relation.
+Definition: a randomized outcome is possible if it results from the scheduled event;
 
-The event being tested is a randomized event that varies.
-
-The outcome being tested is a random outcome that varies.
-
-Definition: a random outcome is possible if it results from the event being tested;
-
-To decide whether (O - a random outcome) became the/-- possibility:
+To decide whether (O - a randomized outcome) became the/-- possibility:
 	if O is not achieved and O is possible:
 		now the outcome being tested is O;
 		yes;
@@ -706,22 +710,15 @@ To mark the/-- outcome as/-- achieved:
 	[say "achieved outcome [the outcome being tested].";]
 	now the outcome being tested is achieved;
 	
-To test (E - a randomized event):
-	now the event being tested is E;
-	log "Testing random outcomes of [E].";
-	Repeat with i running from 1 to the maximum number of random event iterations:
-		if every possible random outcome is achieved, stop;
-		follow the randomized event testing rules for E;
-		follow the random outcome testing rules;
-	Repeat with the attempt running through not achieved possible random outcomes:
-		record a test attempt;
-		let msg be indexed text;
-		now msg is "After [the maximum number of random event iterations] iterations of [the event being tested], [the attempt] was still not tested.";
-		record a failure report of msg;
+Testing a turn-based event:
+	unless a randomized outcome is possible, make no decision;
+  	follow the randomized outcome testing rules;
+	if every possible randomized outcome is achieved:
+		record success of the scheduled event;
+	otherwise:
+		now the scheduled event is repeatable;
 
-Randomized event testing is a randomized event based rulebook.
-
-Random outcome testing is a rulebook.
+randomized outcome testing is a rulebook.
 
 
 Chapter - The assert phrase (in place of Chapter - The assert phrase in Simple Unit Tests by Dannii Willis)
@@ -868,8 +865,6 @@ application rulebook check if the test applies and marks it as completed - or ch
 assertion rulebook runs the test's assertions]
 
 A test play when testing Aite champions vs bat:
-	try butterflying;
-	try meatboying;
 	now the player carries Drakul's lifeblood;
 	extract the player to the location of Bodmall;
 	have the player defeat Bodmall;
@@ -883,51 +878,56 @@ A test play when testing Aite champions vs bat:
 	have the player and the healer of aite fight in Arena of the Gods;
 	try drinking Drakul's lifeblood;
 	try turning bat;
-	test aite spike vs bat;
-	
+	Repeat with guy running through people in Arena of the Gods:
+		now the defence of guy is 100;
+
 Player-targeted is a truth state that varies.
 Player-damaged is a truth state that varies.
 
-Aite spike vs bat is a randomized event.
+Aite spike vs bat is a turn-based event. The first move of Aite champions vs bat is aite spike vs bat.
 
-Randomized event testing for aite spike vs bat:
-	now the health of the healer of Aite is 100;
-	let previous health be the health of the player;
+After taking a player action when the scheduled event is aite spike vs bat:
+	repeat with guy running through people in the location:
+		now health of guy is 100;
 	now player-damaged is false;
 	now player-targeted is false;
-	transcribe and restart capturing;
-	have Aite intervene on behalf of the healer of Aite;
-	stop and save event description;
-	if the health of the player is less than the previous health, now player-damaged is true;
-	if the event description matches the regular expression "you":
-		now player-targeted is true;
-		assert that the event description includes "in front of";
-	transcribe and restart capturing;
 	
-bat crashing into spike is a random outcome. It results from Aite spike vs bat.
-bat avoiding huge spike is a random outcome. It results from Aite spike vs bat.
-bat avoiding gigantic spike is a random outcome. It results from Aite spike vs bat.
+Intervention possible when the scheduled event is aite spike vs bat:
+	unless the main actor is the player and intervention-god is Aite, rule fails;
+	
+Intervention bonus when the scheduled event is aite spike vs bat:
+	if the main actor is the player, increase the intervention-bonus by 100;
+	
+Testing a turn-based event of aite spike vs bat:
+	now player-damaged is whether or not the health of the player is less than 100;
+	if the event description matches the regular expression "bursts out of the ground<^[line break]>+ you":
+		now player-targeted is true;
+		assert that the event description includes "bursts out of the ground in front of you";
+	
+bat crashing into spike is a randomized outcome. It results from Aite spike vs bat.
+bat avoiding huge spike is a randomized outcome. It results from Aite spike vs bat.
+bat avoiding gigantic spike is a randomized outcome. It results from Aite spike vs bat.
 
-Random outcome testing when bat crashing into spike became the possibility:
+randomized outcome testing when bat crashing into spike became the possibility:
 	if player-damaged is false, make no decision;
 	mark the outcome achieved;
 	assert that the event description includes "crash into";
 	
-Random outcome testing when bat avoiding huge spike became the possibility:
+randomized outcome testing when bat avoiding huge spike became the possibility:
 	if player-targeted is false, make no decision;
 	if player-damaged is true, make no decision;
 	unless the event description matches the regular expression "huge", make no decision;
 	mark the outcome achieved;
 	assert that the event description includes "fly over";
 
-Random outcome testing when bat avoiding gigantic spike became the possibility:
+randomized outcome testing when bat avoiding gigantic spike became the possibility:
 	if player-targeted is false, make no decision;
  	if player-damaged is true, make no decision;
 	unless the event description matches the regular expression "gigantic", make no decision;
 	mark the outcome achieved;
 	assert that the event description includes "fly around";
 
-Arena-tormentor-enslaving is a turn-based event. The first move of Aite champions vs bat is Arena-tormentor-enslaving. The scheduled action of Arena-tormentor-enslaving is the action of enslaving the tormentor of Aite.
+Arena-tormentor-enslaving is a turn-based event. The scheduled action of Arena-tormentor-enslaving is the action of enslaving the tormentor of Aite.
 
 Testing a turn-based event of Arena-tormentor-enslaving:
 	assert that the event description includes "will do your bidding";
@@ -1282,15 +1282,15 @@ Testing a turn-based event for tentacle-dig-retreat:
 
 Section - Insane Drakul
 
-insane drakul is an test set.
+insane-drakul is an isolated test set.
 
 
-A scenario rule when testing insane drakul:
+A scenario rule when testing insane-drakul:
 	Now drakul's lifeblood is bannedobject;
 	Now drakul is testobject;
 	Now staff of insanity is testobject;
 	
-A test play when testing insane drakul:
+A test play when testing insane-drakul:
 	try butterflying;
 	try ramboing;
 	now the mind score of the player is 100;  
@@ -1306,7 +1306,22 @@ A test play when testing insane drakul:
 	pause and assert that the event description includes "'There is no need to fear me,' Drakul says as he concentrates more deeply\.";
 	try Drakul concentrating;
 	pause and assert that the event description includes "Drakul attains the highest state of concentration. 'It feels so good to be alive!'";
-	test driving drakul insane;
+	
+Driving Drakul insane is a turn-based event. The first move of insane-drakul is driving Drakul insane. The scheduled action of driving drakul insane is the action of attacking drakul;
+
+After taking a player action when the scheduled event is driving drakul insane:
+	now the health of Drakul is 100;
+	
+drakul going insane is a randomized outcome. It results from driving drakul insane.
+
+randomized outcome testing when drakul going insane became the possibility:
+	if drakul is not insane, make no decision;
+	mark the outcome achieved;
+	assert that the event description includes "Drakul goes insane";
+	
+insane drakul statements is a turn-based event.
+
+Initial scheduling of insane drakul statements:
 	now the concentration of drakul is 0;
 	transcribe and restart capturing;
 	try Drakul concentrating;
@@ -1315,67 +1330,49 @@ A test play when testing insane drakul:
 	pause and assert that the event description includes "'An insane vampire always tells the truth\. And I tell you: You should fear me!' Drakul says as he concentrates more deeply.";
 	try Drakul concentrating;
 	pause and assert that the event description includes "Drakul attains the highest state of concentration\. 'It feels so good to be alive - but I am undead!'";
-	test insane drakul statements;
-	now the health of drakul is 1;
-	now the melee of drakul is 100;
-	transcribe and restart capturing;
-	try drakul hitting drakul;
-	pause and assert that the event description includes "drains his own blood, a small vial";
-	
-Driving Drakul insane is a randomized event.
 
-Randomized event testing for driving drakul insane:
-	now the health of Drakul is 100;
-	transcribe and restart capturing;
-	try the player hitting drakul;
-	stop and save event description;
-	transcribe and restart capturing;
-	
-drakul going insane is a random outcome. It results from driving drakul insane.
-
-Random outcome testing when drakul going insane became the possibility:
-	if drakul is not insane, make no decision;
-	mark the outcome achieved;
-	assert that the event description includes "Drakul goes insane";
-	
-insane drakul statements is a randomized event.
-
-Randomized event testing for insane drakul statements:
-	transcribe and restart capturing;
-	try drakul waiting;
-	stop and save event description;
-	transcribe and restart capturing;
+After taking a player action when the scheduled event is insane drakul statements:
+	compel the action of drakul waiting;
 	
 [some of these appear too unlikey to happen within 100 iterations. Increase iterations?]
-simple drakul identity is a random outcome. simple drakul identity results from insane drakul statements.
-nested conditionals is a random outcome. nested conditionals results from insane drakul statements. 
-nested belief is a random outcome. nested belief results from insane drakul statements.
-lifeblood-hinting is a random outcome. lifeblood-hinting results from insane drakul statements.
-vampire-turning-hinting is a random outcome. vampire-turning-hinting results from insane drakul statements.
+simple drakul identity is a randomized outcome. simple drakul identity results from insane drakul statements.
+nested conditionals is a randomized outcome. nested conditionals results from insane drakul statements. 
+nested belief is a randomized outcome. nested belief results from insane drakul statements.
+lifeblood-hinting is a randomized outcome. lifeblood-hinting results from insane drakul statements.
+vampire-turning-hinting is a randomized outcome. vampire-turning-hinting results from insane drakul statements.
 
-random outcome testing when simple drakul identity became the possibility:
+randomized outcome testing when simple drakul identity became the possibility:
 	if the event description matches the regular expression "Drakul says, 'I am ":
 		if the event description matches the regular expression "not|someone who|, and|, or", make no decision;
 		mark the outcome achieved;
 		assert that the event description includes "vampire|insane";
 		
-random outcome testing when nested conditionals became the possibility:
+randomized outcome testing when nested conditionals became the possibility:
 	unless the event description matches the regular expression "Drakul says, 'If .*,", make no decision;
 	if the event description matches the regular expression "I would give you", make no decision;
 	if the event description matches the regular expression ", if|, and|, or", mark the outcome achieved;
 		
-random outcome testing when nested belief became the possibility:
+randomized outcome testing when nested belief became the possibility:
 	unless the event description matches the regular expression "I believe that I believe", make no decision;
 	mark the outcome achieved;
 		
-random outcome testing when lifeblood-hinting became the possibility:
+randomized outcome testing when lifeblood-hinting became the possibility:
 	unless the event description matches the regular expression "a vial of my lifeblood\b", make no decision;
 	mark the outcome achieved;
 	assert that the event description includes "I am carrying| is in | can be found | is currently unreachable, ";
 	
-random outcome testing when vampire-turning-hinting became the possibility:
+randomized outcome testing when vampire-turning-hinting became the possibility:
 	unless the event description matches the regular expression "\bI intend to vanquish Malygris after I make you my vampire-slave\b|\byou will never be my vampire-slave\b", make no decision;
 	mark the outcome achieved;
+
+Drakul suicide is a turn-based event.
+
+Initial scheduling of drakul suicide:
+	now the health of drakul is 1;
+	now the melee of drakul is 100;
+	transcribe and restart capturing;
+	try drakul hitting drakul;
+	pause and assert that the event description includes "drains his own blood, a small vial";
 	
 Section - Enemies should always start out awake in Arena of the Fallen
 
@@ -2334,7 +2331,7 @@ Testing a turn-based event of no-new-blessed-grenade:
 		
 Section - At-react after getting mazed - bug 210
 
-maze-resetting is a isolated  test set.
+maze-resetting is a test set.
 
 Scenario when testing maze-resetting:
 	now the minotaur is testobject;
