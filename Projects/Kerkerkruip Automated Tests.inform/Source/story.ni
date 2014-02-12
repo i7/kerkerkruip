@@ -50,7 +50,9 @@ Use maximum capture buffer length of at least 16384.
 Use maximum indexed text length of at least 16384. 
 
 First when play begins (this is the random seed rule):
-	seed the random-number generator with 28.
+	Let the seed be 20;
+	log "Seeding random number generator with [seed]";
+	seed the random-number generator with the seed.
 
 The random seed rule is listed before the reaper carries a random scythe rule in the when play begins rules.
 
@@ -880,7 +882,7 @@ A test play when testing Aite champions vs bat:
 	assert that the favour of the player with Chton is 4;
 	extract the player to the location of the mindslug;
 	have the player defeat the mindslug;
-	now the mind score of the player is 100;
+	now the mind score of the player is 200;
 	extract the player to Hall of Gods;
 	have the player and the healer of aite fight in Arena of the Gods;
 	try drinking Drakul's lifeblood;
@@ -1712,7 +1714,7 @@ scenario when testing divine reward:
 	now Hall of Gods is testobject;
 	now the glass cannon is testobject;
 	
-Intervention possible when testing divine reward:
+First intervention possible when testing divine reward:
 	rule fails;
 	
 Test play when testing divine reward:
@@ -1728,13 +1730,16 @@ Test play when testing divine reward:
 	have the player and Israfel fight in Arena of the Gods;
 	now the health of the player is the permanent health of the player - 1;
 	try Israfel Israfel-splitting;
-	transcribe and restart capturing;
 	
 isra-only-killing is a turn-based event. The first move of divine reward is isra-only-killing. The scheduled action of isra-only-killing is the action of smiting isra.
 
 initial scheduling of isra-only-killing:
 	now fell is asleep;
 
+testing a turn-based event of a turn-based event (called the current move) when testing divine reward:
+	assert "Nomos counter should be zero on [the current move]" based on whether or not the nomos counter is zero;
+	assert "Nomos bonus should be false on [the current move]" based on whether or not the nomos bonus is false;
+	
 Testing a turn-based event of isra-only-killing:
 	assert truth of whether or not Isra is dead with message "Isra should be dead";
 	assert truth of whether or not Fell is not dead with message "Fell should be alive";
