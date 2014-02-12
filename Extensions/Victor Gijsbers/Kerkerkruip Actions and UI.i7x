@@ -629,7 +629,6 @@ Carry out sensing when psycholocation is active:
 
 To decide what object is the point of departure for (place - a room):
 	Let the last point be the location;
-	let count be 1;
 	while the last point is not the place:
 		Let the way be the best route from the last point to the place;
 		if the way is not a direction:
@@ -638,7 +637,6 @@ To decide what object is the point of departure for (place - a room):
 		If the next point is not visited:
 			decide on the last point;
 		Now the last point is the next point;
-		increment count;
 	decide on the last point;
 
 To say soul directions to (adversary - a person):

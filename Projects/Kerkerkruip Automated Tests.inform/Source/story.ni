@@ -2019,7 +2019,7 @@ Testing a turn-based event of reaction-ape-killing:
 
 Section - Remembering Text
 
-remembering-text is an isolated test set.
+remembering-text is an test set.
 
 Scenario when testing remembering-text:
 	now Bodmall is testobject;
