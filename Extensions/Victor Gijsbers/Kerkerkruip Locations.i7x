@@ -1529,7 +1529,7 @@ To put (place - a room) in a near location:
 	now y-coordinate of place is considered-y;
 	now z-coordinate of place is considered-z;
 	mark place as secretly placed;
-	if generation info is true, say "* Added [place] ([x-coordinate of place], [y-coordinate of place], [z-coordinate of place]).[line break][run paragraph on]".
+	if generation info is true, say "* Secretly added [place] ([x-coordinate of place], [y-coordinate of place], [z-coordinate of place]).[line break][run paragraph on]".
 	
 To do a random step:
 	let q be a random number between 1 and 6;

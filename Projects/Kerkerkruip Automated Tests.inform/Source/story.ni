@@ -46,11 +46,11 @@ Section - Testing extensions
 Include Autoundo for Object Response Tests by Mike Ciul.
 Include Simple Unit Tests by Dannii Willis.
 
-Use maximum capture buffer length of at least 8192.
-Use maximum indexed text length of at least 8192. 
+Use maximum capture buffer length of at least 16384.
+Use maximum indexed text length of at least 16384. 
 
 First when play begins (this is the random seed rule):
-	seed the random-number generator with 24.
+	seed the random-number generator with 28.
 
 The random seed rule is listed before the reaper carries a random scythe rule in the when play begins rules.
 
@@ -59,7 +59,7 @@ Section - Increase memory settings
 
 Use MAX_PROP_TABLE_SIZE of 800000.
 Use MAX_OBJ_PROP_COUNT of 256.
-Use MAX_STATIC_DATA of 500000.
+Use MAX_STATIC_DATA of 1000000.
 Use MAX_OBJECTS of 1000.
 Use MAX_SYMBOLS of 30000.
 Use MAX_ACTIONS of 250.
@@ -207,6 +207,8 @@ Section - No Question Prompts (in place of Section - Using question prompts in K
 
 Section 1 - Capture-aware Spacing and Pausing (in place of Section 1 - Spacing and Pausing in Basic Screen Effects by Emily Short)
 
+Allowing screen effects is a truth state that varies. Allowing screen effects is false.
+
 Include (-
 
 [ KeyPause i; 
@@ -233,17 +235,17 @@ Include (-
 ];
 
 [ AwareClearScreen;
-	 if (~capture_active) {VM_ClearScreen(0);}
+	 if (~capture_active && (+ allowing screen effects +)) {VM_ClearScreen(0);}
 ];
 
 
 [ AwareClearMainScreen;
-	 if (~capture_active) {VM_ClearScreen(2);}
+	 if (~capture_active && (+ allowing screen effects +)) {VM_ClearScreen(2);}
 ];
 
 
 [ AwareClearStatus;
-	 if (~capture_active) {VM_ClearScreen(1);}
+	 if (~capture_active && (+ allowing screen effects +)) {VM_ClearScreen(1);}
 ];
 -)
 
@@ -489,6 +491,11 @@ A turn-based event has a text called the maxed out report. The maxed out report 
 
 A turn-based event can be generated.
 
+Section - Enabling screen effects when testing is done
+
+Initial scheduling of normal keyboard input:
+	now allowing screen effects is true.
+	
 Section - Scheduling
 
 The repeated moves is a number that varies;
@@ -679,7 +686,7 @@ To initialize turn-based events:
 			now the next move of the last event is the next event;
 		now the last event is the next event;
 	
-Last when play begins:
+Last when play begins (this is the start the next test rule):
 	if done testing is false:
 		consider the test play rules;
 		schedule the first move of the current test set;
@@ -1122,24 +1129,25 @@ After taking a player action (this is the assume all actions are fast until ever
 First every turn (this is the remember if the last turn took time rule):
 	now previously-fast is false;
 
-start-of-turn combat is a truth state that varies.
+[start-of-turn combat is a truth state that varies.
 
 After taking a player action when the scheduled event is a hiding-check turn-based event: 
 	now opposition test subject is the player;
-	Now start-of-turn combat is whether or not the location encloses an opposer person;
+	Now start-of-turn combat is whether or not the location encloses an opposer person;]
 	
 Testing a turn-based event for a hiding-check turn-based event (called the current move):
 	[a move can be hiding-check and hiding-reveal if it involves sneaking to a location and then revealing yourself]
 	if the current move is hiding-reveal, make no decision;
-	if start-of-turn combat is false, make no decision;
 	assert "the player should be hidden" based on whether or not the player is hidden;
+	[ These tests are too slow, and they run way too often.
+	if start-of-turn combat is false, make no decision;
 	if previously-fast is true, make no decision;
 	Now opposition test subject is the player;
 	if the location encloses a not asleep opposer person:
 		assert that the event description includes ", which must be positive\. You remain hidden\.|([doesn't see you pattern])";
 	repeat with guy running through asleep opposer persons in the location:
 		if the act count of guy is at least 1:
-			assert that the event description includes "[The guy] sleeps peacefully";
+			assert that the event description includes "[The guy] sleeps peacefully";]
 	
 mindslug-hidden-retreat is a turn-based event. The next move of mindslug-hiding-check is mindslug-hidden-retreat. The scheduled action of mindslug-hidden-retreat is the action of retreating.
 	
@@ -2011,7 +2019,7 @@ Testing a turn-based event of reaction-ape-killing:
 
 Section - Remembering Text
 
-remembering-text is an test set.
+remembering-text is an isolated test set.
 
 Scenario when testing remembering-text:
 	now Bodmall is testobject;
@@ -2025,8 +2033,6 @@ Scenario when testing remembering-text:
 	now the dimensional anchor is bannedobject;
 	now bridge of doom is testobject;
 	now hall of vapours is bannedobject;
-	now every secretly placeable room is bannedobject; [prevent normal placement of Arcane Vault to simulate conditions for bug 244]
-	now Eternal Prison is testobject;
 	now a random scroll of mapping is testobject;
 	now the rod of the master builder is testobject;
 	now generation info is true;
@@ -2039,9 +2045,17 @@ Before taking a player action:
 	if the reusable item is a thing and the reusable item is not carried:
 		now the player carries the reusable item;
 	
-First dungeon interest rule (this is the force Arcane Vault to be secretly placed rule):
+[in case the first map is rejected, Arcane Vault must be switched back from testobject to bannedobject every time]
+first creating the map rule when testing remembering-text:
+	now every secretly placeable room is bannedobject; [prevent normal placement of Arcane Vault to simulate conditions for bug 244]
+	now Eternal Prison is testobject;
+
+last creating the map rule when testing remembering-text (this is the force Arcane Vault to be secretly placed rule):
+	assert "Arcane Vault should not yet be placed" based on whether or not Arcane Vault is not placed;
 	now Arcane Vault is testobject;
 	now the rarity of Arcane Vault is 0;
+	
+The place all secret testobject rooms rule is listed after the force Arcane Vault to be secretly placed rule in the creating the map rules;
 	
 Test play when testing remembering-text:
 	Let the item be a random not off-stage scroll of mapping;
@@ -2096,14 +2110,46 @@ remembering-daggers is a hiding-check turn-based event. The scheduled action of 
 	
 Testing a turn-based event of remembering-daggers:
 	assert that the event description includes "You have visited the following rooms:.*You have seen the following creatures in these locations:.*- the swarm of daggers \(level 1\) in [the location] \(where you currently are\)"
+
+[before we can get the partway-path psycholocating message, we have to put a visited room between us and an unseen creature. Find one that's at least two moves away and then go 1 move towards it.]
+
+The sensing-place is a room that varies;
+The on-the-way place is a room that varies;
+The faraway enemy is an object that varies;
+
+partway-visiting is a hiding-check psy-scroll-reading turn-based event.
 	
+To decide which object is the next stop from (origin - a room) to (destination - a room):
+	let the way be the best route from origin to destination;
+	if the way is not a direction:
+		decide on nothing;
+	decide on the room way from origin;
+	
+Initial scheduling of partway-visiting:
+	now the sensing-place is the location;
+	now the faraway enemy is nothing;
+	Repeat with guy running through denizen persons:
+		If the number of moves from the location to the location of guy is at least 2 and the location of guy is not visited:
+			now the faraway enemy is guy;
+			break;
+	assert "there should be an enemy in an unvisited room at least 2 moves away" based on whether or not the faraway enemy is a person;
+	let the target be the location of the faraway enemy;
+	now the on-the-way place is the next stop from the location to the target;
+	if the on-the-way place is not visited:
+		now the location-target of partway-visiting is the on-the-way place;
+	while the next stop from the on-the-way place to the target is a visited room:
+		now the on-the-way place is the next stop from the on-the-way place to the target.
+
 middle-psycholocating is a hiding-check psy-scroll-reading turn-based event. 
+
+Initial scheduling of middle-psycholocating:
+	now the location-target of middle-psycholocating is the sensing-place.
 
 partial-explored-sensing is a hiding-check turn-based event. The scheduled action of partial-explored-sensing is the action of sensing.
 
 Testing a turn-based event of partial-explored-sensing:
 	assert that the event description includes "the soul of the swarm of daggers here with you, like an aura like sharpened steel[line break]";
-	assert that the event description includes ", <a-w>+ from <^[line break]>+ \(which lies <a-w>+ from here\)[line break]"
+	assert that the event description includes "[soul description of the faraway enemy], [best route from on-the-way place to location of the faraway enemy] from [the on-the-way place] \(which lies [best route from the location to on-the-way place] from here\)[line break]"
 
 meeting-malygris is a repeatable hiding-check turn-based event. The location-target of meeting-malygris is Malygris.
 
