@@ -940,22 +940,34 @@ The curious machine is scenery in alchemical laboratory. The curious machine is 
 
 The machine-counter is a number that varies. The machine-counter is 0.
 
+To decide which object is an available (O - a description of objects):
+	Let the acceptable choice be nothing;
+	Repeat with item running through O:
+		if item is off-stage, decide on item;
+		now the acceptable choice is item;
+	decide on the acceptable choice;
+
+To decide which object is a usable copy of (item - an object):
+	if item is off-stage:
+		decide on item;
+	decide on a new object cloned from item;
+
 Last check inserting something into the curious machine:
 	if the noun is a grenade or the noun is incorruptible:
 		say "The machine beeps angrily and rejects [the noun].";
 	otherwise:
 		let chosen grenade be a random flash grenade;
 		let m be a random number between 1 and 6;
-		if m is 2, now chosen grenade is a random rust grenade;
-		if m is 3, now chosen grenade is a random fragmentation grenade;
-		if m is 4, now chosen grenade is a random smoke grenade;
-		if m is 5, now chosen grenade is a random teleportation grenade;
-		if m is 6, now chosen grenade is a random Morphean grenade;
+		if m is 2, now chosen grenade is an available rust grenade;
+		if m is 3, now chosen grenade is an available fragmentation grenade;
+		if m is 4, now chosen grenade is an available smoke grenade;
+		if m is 5, now chosen grenade is an available teleportation grenade;
+		if m is 6, now chosen grenade is an available Morphean grenade;
 		if a random chance of 1 in 100 succeeds and there is a not placed custom grenade:
 			now the chosen grenade is a random not placed custom grenade;
 		Let item be the chosen grenade;
 		if the chosen grenade is cloneable:
-			now item is a new object cloned from chosen grenade;
+			now item is a usable copy of chosen grenade;
 		move item to the location;
 		have the parser notice the item;
 		increase machine-counter by 1;

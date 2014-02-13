@@ -408,7 +408,7 @@ The event description is an indexed text that varies.
 To log (T - an indexed text):
 	let currently capturing be whether or not text capturing is active;
 	if currently capturing is true, transcribe and stop capturing text;
-	say "[T][line break]";
+	say "[line break][T]";
 	append "**** [T][line break]" to file of test transcript;
 	if currently capturing is true, start capturing text;
 	
@@ -420,7 +420,8 @@ To transcribe (T - an indexed text):
 	
 To transcribe and stop capturing text/--:
 	stop capturing text;
-	append "*** [current test set] turn [the turn count], assertion count=[test assertion count] ***[line break][the captured text]" to file of test transcript;
+	if the captured text is not "":
+		append "*** [current test set], [scheduled event] turn [the turn count], assertion count=[test assertion count] ***[line break][the captured text]" to file of test transcript;
 	 
 To transcribe and restart capturing text/--:
 	if text capturing is active, transcribe and stop capturing text;
@@ -449,14 +450,14 @@ To record a test attempt:
 		now failures entry is 0;
 		now failure messages entry is "";
 	increment the total entry;
-	say ". "
+	say ": "
 
 To record a/-- failure report of/-- (msg - an indexed text):
 	Let testnum be current test set as a number;
 	choose row with test set of testnum in Table of Test Results;	
 	increment the assertion failures count;
 	increment the failures entry;
-	now the failure messages entry is "[failure messages entry]Failure for test: [the current test set], assertion [the test assertion count]: [msg][paragraph break]";
+	now the failure messages entry is "[failure messages entry]Failure for test: [the current test set], step: [the scheduled event], assertion [the test assertion count]: [msg][paragraph break]";
 	log msg;
 
 To display test results:
@@ -475,23 +476,23 @@ To display test results:
 	say "To view a full transcript of all tests, see the file 'testtranscript.glkdata' in the project directory.";
 	pause the game;
 	
-Chapter - Turn-based Events
+Chapter - test steps
 
 Section - Properties
 
-A turn-based event is a kind of value. Some turn-based events are defined by the Table of Turn-based Events.
-A turn-based event has a stored action called the scheduled action. The scheduled action of a turn-based event is usually the action of waiting.
-A turn-based event has a turn-based event called the next move. The next move of a turn-based event is usually normal keyboard input.
+A test step is a kind of value. Some test steps are defined by the Table of test steps.
+A test step has a stored action called the scheduled action. The scheduled action of a test step is usually the action of waiting.
+A test step has a test step called the next move. The next move of a test step is usually normal keyboard input.
 
-A turn-based event can be repeatable. A turn-based event has a number called the maximum repeats. The maximum repeats of a turn-based event is usually 100. A turn-based event can be uneventful.
+A test step can be repeatable. A test step has a number called the maximum repeats. The maximum repeats of a test step is usually 100. A test step can be uneventful.
 
-Table of Turn-based Events
-turn-based event
+Table of test steps
+test step
 normal keyboard input
 
-A turn-based event has a text called the maxed out report. The maxed out report of a turn-based event is usually "[The scheduled event] repeated [repeated moves] times without resolution."
+A test step has a text called the maxed out report. The maxed out report of a test step is usually "[The scheduled event] repeated [repeated moves] times without resolution."
 
-A turn-based event can be generated.
+A test step can be generated.
 
 Section - Enabling screen effects when testing is done
 
@@ -502,23 +503,27 @@ Section - Scheduling
 
 The repeated moves is a number that varies;
 
-The scheduled event is a turn-based event that varies. The scheduled event is the normal keyboard input.
+The scheduled event is a test step that varies. The scheduled event is the normal keyboard input.
 
-Initial scheduling rules are a turn-based event based rulebook.
+Initial scheduling rules are a test step based rulebook.
 
-Initial scheduling for a turn-based event (this is the reset act counts rule):
+Initial scheduling for a test step (this is the reset act counts rule):
 	repeat with guy running through people:
 		now the act count of guy is 0;
 			
-To schedule (the event described - a turn-based event):
+To schedule (the event described - a test step):
 	transcribe and restart capturing;
 	if the event described is not the scheduled event:
-		log "first scheduling [the event described]";
+		if the event described is normal keyboard input:
+			transcribe and stop capturing;
+			say line break;
+			start capturing text;
+		otherwise:
+			log "  next step:  [the event described]";
 		follow the initial scheduling rules for the event described;
 		now the repeated moves is 0;
 	otherwise:
 		transcribe and stop capturing;
-		say "_";
 		start capturing text;
 		increment the repeated moves;
 	now the event described is not generated;
@@ -529,9 +534,9 @@ Before taking a player action when the scheduled event is generated:
 	stop and save event description;
 	Let repeat be whether or not (the scheduled event is repeatable) and (the repeated moves > 0);
 	now the scheduled event is not generated;
-	say "* [run paragraph on]";
+	say " .[run paragraph on]";
  	start capturing text;
-	follow the testing a turn-based event rules for the scheduled event;
+	follow the testing effects rules for the scheduled event;
 	transcribe and stop capturing;
 	Let repeat be whether or not the scheduled event is [still] repeatable;
 	if repeat is true and the repeated moves is not less than the maximum repeats of the scheduled event:
@@ -549,18 +554,18 @@ Before taking a player action when the scheduled event is generated:
 	
 Section - Generating Actions
 
-For taking a player action when the scheduled event is not the normal keyboard input (this is the turn-based event player action rule):
+For taking a player action when the scheduled event is not the normal keyboard input (this is the test step player action rule):
 	if the player is at-React:
 		follow the choosing a player reaction rules;
 	otherwise:
 		generate a player action of the scheduled action of the scheduled event;
 		now the scheduled event is generated;
 		
-The turn-based event player action rule is listed before the parse command rule in the for taking a player action rulebook.
+The test step player action rule is listed before the parse command rule in the for taking a player action rulebook.
 		
-A turn-based event has an object called the location-target.
+A test step has an object called the location-target.
 
-To decide which room is the action-destination of (current move - a turn-based event):
+To decide which room is the action-destination of (current move - a test step):
 	Let the current destination be the location-target of the current move;
 	if the current destination is nothing, decide on Null-room;
 	if the current destination is a room, decide on the current destination;
@@ -568,7 +573,7 @@ To decide which room is the action-destination of (current move - a turn-based e
 
 The delayed action is a stored action that varies. The delayed action is the action of waiting.
 
-For taking a player action (this is the move to the destination of a turn-based event rule):
+For taking a player action (this is the move to the destination of a test step rule):
 	if the player is at-React:
 		make no decision;
 	Let the place be the action-destination of the scheduled event;
@@ -582,7 +587,7 @@ For taking a player action (this is the move to the destination of a turn-based 
 		make no decision;
 	generate a player action of the action of going the way;
 		
-The move to the destination of a turn-based event rule is listed before the turn-based event player action rule in the for taking a player action rulebook.
+The move to the destination of a test step rule is listed before the test step player action rule in the for taking a player action rulebook.
 
 Choosing a player reaction is a rulebook. The choosing a player reaction rules have default success.
 
@@ -631,7 +636,7 @@ The compel an action rule is listed before the insane people attack themselves r
 Last choosing a player reaction:
 	generate a player action of the action of waiting.
 	
-testing a turn-based event rules are a turn-based event based rulebook.
+testing effects rules are a test step based rulebook.
 
 Chapter - Test Sets
 
@@ -645,7 +650,7 @@ Definition: A test set (called the procedure) is enabled:
 
 Definition: the null-test is enabled: no.
 
-A test set has a turn-based event called the first move. The first move of a test set is usually normal keyboard input.
+A test set has a test step called the first move. The first move of a test set is usually normal keyboard input.
 
 The current test set is a test set that varies.
 
@@ -660,7 +665,7 @@ To decide whether testing (T - a test set):
 
 First when play begins (this is the run all tests rule):
 	write "Test transcript for Kerkerkruip.[line break]" to file of test transcript;
-	initialize turn-based events;
+	initialize test steps;
 	start the next test;
 	transcribe and restart capturing text;
 	if done testing is false:
@@ -672,15 +677,15 @@ First when play begins (this is the run all tests rule):
 
 The random seed rule is listed before the run all tests rule in the when play begins rules.
 	
-To decide which test set is the initiator of (the event -  a turn-based event):
+To decide which test set is the initiator of (the event -  a test step):
 	Repeat with the candidate running through test sets:
 		if the event is the first move of the candidate, decide on the candidate;
 	Decide on the null-test.
 	
-To initialize turn-based events:
+To initialize test steps:
 	Let the current set be the null-test;
 	Let the last event be normal keyboard input;
-	Repeat with the next event running through turn-based events:
+	Repeat with the next event running through test steps:
 		Let the new test set be the initiator of the next event;
 		if the new test set is not the null-test:
 			now the current set is the new test set;
@@ -703,7 +708,7 @@ A randomized outcome is a kind of value. boring lack of results is a randomized 
 
 A randomized outcome can be achieved.
 
-Event resolution relates various randomized outcomes to one turn-based event. The verb to result from (he results from, they result from, it is required, it is resulting from) implies the event resolution relation.
+Event resolution relates various randomized outcomes to one test step. The verb to result from (he results from, they result from, it is required, it is resulting from) implies the event resolution relation.
 
 The outcome being tested is a randomized outcome that varies.
 
@@ -719,7 +724,7 @@ To mark the/-- outcome as/-- achieved:
 	[say "achieved outcome [the outcome being tested].";]
 	now the outcome being tested is achieved;
 	
-Testing a turn-based event:
+testing effects:
 	unless a randomized outcome is possible, make no decision;
   	follow the randomized outcome testing rules;
 	if every possible randomized outcome is achieved:
@@ -752,11 +757,11 @@ To assert truth of/-- (C - a truth state) with message (T - an indexed text):
 To assert (T - an indexed text) based on (C - a truth state):
 	assert truth of C with message T;
 	
-To record a/-- success of (E - a turn-based event):
+To record a/-- success of (E - a test step):
 	now E is not repeatable;
 	assert truth of true with message "success."
 
-To record a/-- failure of/-- (E - a turn-based event) with message (M - an indexed text):
+To record a/-- failure of/-- (E - a test step) with message (M - an indexed text):
 	now E is not repeatable;
 	assert truth of false with message M;
 	
@@ -855,6 +860,74 @@ To pause and assert that the event description does not include (pattern - an in
 	assert that the event description does not include pattern;
 	transcribe and restart capturing.
 
+Section - hiding-check and hiding-reveal
+
+Traveling sneakily is a truth state that varies.
+
+A detection rule when traveling sneakily is true:
+	say "+ 100 (traveling sneakily for testing purposes)[run paragraph on]";
+	increase hiding roll by 100;
+
+The way-to-get-back is a direction that varies.
+The way-to-get-there is a direction that varies.
+
+To force the cloak of shadows to work:
+	if the player does not enclose the cloak of shadows, now the player carries the cloak of shadows;
+	try wearing the cloak of shadows;
+	now the player is hidden;
+		
+Carry out taking off the cloak of shadows:
+	now traveling sneakily is false;
+	
+To travel sneakily to (place - a room):
+	force the cloak of shadows to work;
+	While the location is not the place:
+		now the way-to-get-there is the best route from the location to the place;
+		record a test attempt;
+		if the way-to-get-there is a direction:
+			let already sneaking be traveling sneakily;
+			now traveling sneakily is true;
+			try going the way-to-get-there;
+			now traveling sneakily is already sneaking;
+		otherwise:
+			record failure report "Can't find a route to [place].";
+			stop;
+	now the way-to-get-back is the best route from the location to the retreat location;
+			
+previously-fast is a truth state that varies.
+
+A test step can be hiding-check.
+
+initial scheduling for a test step (called the current move):
+	now traveling sneakily is whether or not the current move is hiding-check;
+	if traveling sneakily is true, force the cloak of shadows to work;
+	
+After taking a player action (this is the assume all actions are fast until every turn runs rule):
+	now previously-fast is true;
+	
+First every turn (this is the remember if the last turn took time rule):
+	now previously-fast is false;
+
+[start-of-turn combat is a truth state that varies.
+
+After taking a player action when the scheduled event is a hiding-check test step: 
+	now opposition test subject is the player;
+	Now start-of-turn combat is whether or not the location encloses an opposer person;]
+	
+testing effects for a hiding-check test step (called the current move):
+	[a move can be hiding-check and hiding-reveal if it involves sneaking to a location and then revealing yourself]
+	if the current move is hiding-reveal, make no decision;
+	assert "the player should be hidden" based on whether or not the player is hidden;
+	[ These tests are too slow, and they run way too often.
+	if start-of-turn combat is false, make no decision;
+	if previously-fast is true, make no decision;
+	Now opposition test subject is the player;
+	if the location encloses a not asleep opposer person:
+		assert that the event description includes ", which must be positive\. You remain hidden\.|([doesn't see you pattern])";
+	repeat with guy running through asleep opposer persons in the location:
+		if the act count of guy is at least 1:
+			assert that the event description includes "[The guy] sleeps peacefully";]
+	
 Chapter - test plays
 
 Section - Aite Champions vs Bat
@@ -893,7 +966,7 @@ A test play when testing Aite champions vs bat:
 Player-targeted is a truth state that varies.
 Player-damaged is a truth state that varies.
 
-Aite spike vs bat is a turn-based event. The first move of Aite champions vs bat is aite spike vs bat.
+Aite spike vs bat is a test step. The first move of Aite champions vs bat is aite spike vs bat.
 
 After taking a player action when the scheduled event is aite spike vs bat:
 	repeat with guy running through people in the location:
@@ -907,7 +980,7 @@ Intervention possible when the scheduled event is aite spike vs bat:
 Intervention bonus when the scheduled event is aite spike vs bat:
 	if the main actor is the player, increase the intervention-bonus by 100;
 	
-Testing a turn-based event of aite spike vs bat:
+testing effects of aite spike vs bat:
 	now player-damaged is whether or not the health of the player is less than 100;
 	if the event description matches the regular expression "bursts out of the ground<^[line break]>+ you":
 		now player-targeted is true;
@@ -936,9 +1009,9 @@ randomized outcome testing when bat avoiding gigantic spike became the possibili
 	mark the outcome achieved;
 	assert that the event description includes "fly around";
 
-Arena-tormentor-enslaving is a turn-based event. The scheduled action of Arena-tormentor-enslaving is the action of enslaving the tormentor of Aite.
+Arena-tormentor-enslaving is a test step. The scheduled action of Arena-tormentor-enslaving is the action of enslaving the tormentor of Aite.
 
-Testing a turn-based event of Arena-tormentor-enslaving:
+testing effects of Arena-tormentor-enslaving:
 	assert that the event description includes "will do your bidding";
 	assert that the event description includes "ball of lightning .* damage to the tormentor of Aite";
 	if the tormentor of Aite is alive:
@@ -975,15 +1048,15 @@ A test play when testing Defender-enslaving:
 	try smiting the healer of Aite;
 	now the health of Defender of Aite is 100;
 	
-Arena-defender-enslaving is a turn-based event. The first move of Defender-enslaving is Arena-defender-enslaving. The scheduled action of Arena-defender-enslaving is the action of enslaving the defender of Aite.
+Arena-defender-enslaving is a test step. The first move of Defender-enslaving is Arena-defender-enslaving. The scheduled action of Arena-defender-enslaving is the action of enslaving the defender of Aite.
 
-Testing a turn-based event of Arena-defender-enslaving:
+testing effects of Arena-defender-enslaving:
 	assert that the event description includes "will do your bidding";
 	assert that the event description includes "ball of lightning .* damage to the defender of Aite";
 	assert that the event description includes "The defender of Aite prostrates himself. 'I beg for your mercy, O great Aite,' he prays. Then he rises to fight you again!";
 	assert that the defender of Aite opposes the player;
 
-Arena-defender-re-enslaving is a turn-based event. The next move of Arena-defender-enslaving is Arena-defender-re-enslaving. The scheduled action of Arena-defender-re-enslaving is the action of enslaving the defender of Aite;
+Arena-defender-re-enslaving is a test step. The next move of Arena-defender-enslaving is Arena-defender-re-enslaving. The scheduled action of Arena-defender-re-enslaving is the action of enslaving the defender of Aite;
 
 Before taking a player action when Arena-defender-re-enslaving is the scheduled event:
 	now the health of Defender of Aite is 1;
@@ -995,7 +1068,7 @@ Before taking a player action when Arena-defender-re-enslaving is the scheduled 
 Intervention possible when Arena-defender-re-enslaving is the scheduled event:
 	rule fails.
 	
-Testing a turn-based event of Arena-defender-re-enslaving:
+testing effects of Arena-defender-re-enslaving:
 	assert that the event description includes "will do your bidding";
 	assert that the event description includes "ball of lightning .* damage to the defender of Aite, killing him";
 	assert that the location is Hall of Gods;
@@ -1030,11 +1103,11 @@ A test play when testing Chton champion vs bat:
 	have the player and Drakul fight in Arena of the Gods;
 	pause and assert that the event description includes "grants you 2 divine favour![line break][line break]Herm gifts you two scrolls, a magical spade and a Morphean grenade; and increases your hiding bonus to \+2\.[line break][line break]You are transported to the Arena of the Gods, where the angry Drakul awaits, preparing himself to"
 	
-arena-vampire-joining is a turn-based event. The first move of Chton champion vs bat is arena-vampire-joining. The scheduled action of arena-vampire-joining is the action of drinking Drakul's lifeblood;
+arena-vampire-joining is a test step. The first move of Chton champion vs bat is arena-vampire-joining. The scheduled action of arena-vampire-joining is the action of drinking Drakul's lifeblood;
 
 The summoned creature is an object that varies;
 
-Testing a turn-based event for arena-vampire-joining:
+testing effects for arena-vampire-joining:
 	assert that the event description includes "You turn into a vampire, but your opponent doesn't care";
 	update the combat status;
 	assert that the combat status is combat;
@@ -1043,13 +1116,13 @@ Testing a turn-based event for arena-vampire-joining:
 	assert truth of whether or not the summoned creature does not oppose the player with message "summoned creature shouldn't oppose undead player";
 	assert truth of whether or not the summoned creature opposes drakul with message "summoned creature should oppose drakul (unless Remko says this test is wrong)";
 
-chton-arena-cheating is a turn-based event. The next move of arena-vampire-joining is chton-arena-cheating. The scheduled action of chton-arena-cheating is the action of smiting drakul.
+chton-arena-cheating is a test step. The next move of arena-vampire-joining is chton-arena-cheating. The scheduled action of chton-arena-cheating is the action of smiting drakul.
 
 Before taking a player action when the scheduled event is chton-arena-cheating:
 	Now the health of the player is 1;
 	Now the permanent health of the player is 100;
 	
-Testing a turn-based event for chton-arena-cheating:
+testing effects for chton-arena-cheating:
 	[should the lifeblood appear a second time just because drinking it removes it from play?]
 	assert that the event description includes ["infamous vampire, who crumbles away into ashes"] "infamous vampire, a small vial";
 	assert that the event description includes "receives the blood";
@@ -1060,39 +1133,7 @@ Testing a turn-based event for chton-arena-cheating:
 	
 Section - Parting Shots
 
-Traveling sneakily is a truth state that varies.
-
-A detection rule when traveling sneakily is true:
-	say "+ 100 (traveling sneakily for testing purposes)[run paragraph on]";
-	increase hiding roll by 100;
-
-The way-to-get-back is a direction that varies.
-The way-to-get-there is a direction that varies.
-
-To force the cloak of shadows to work:
-	if the player does not enclose the cloak of shadows, now the player carries the cloak of shadows;
-	try wearing the cloak of shadows;
-	now the player is hidden;
-		
-Carry out taking off the cloak of shadows:
-	now traveling sneakily is false;
-	
-To travel sneakily to (place - a room):
-	force the cloak of shadows to work;
-	While the location is not the place:
-		now the way-to-get-there is the best route from the location to the place;
-		record a test attempt;
-		if the way-to-get-there is a direction:
-			let already sneaking be traveling sneakily;
-			now traveling sneakily is true;
-			try going the way-to-get-there;
-			now traveling sneakily is already sneaking;
-		otherwise:
-			record failure report "Can't find a route to [place].";
-			stop;
-	now the way-to-get-back is the best route from the location to the retreat location;
-			
-parting shots is an [isolated] test set.
+parting shots is an test set.
 
 A scenario rule when testing parting shots:
 	now mindslug is testobject;
@@ -1115,43 +1156,9 @@ A test play when testing parting shots:
 	Travel sneakily to the location of the mindslug;
 	now every person enclosed by the location is not asleep;
 	
-A turn-based event can be hiding-check.
+mindslug-hiding-check is a hiding-check test step. The first move of parting shots is mindslug-hiding-check.
 
-mindslug-hiding-check is a hiding-check turn-based event. The first move of parting shots is mindslug-hiding-check.
-
-previously-fast is a truth state that varies.
-
-initial scheduling for a turn-based event (called the current move):
-	now traveling sneakily is whether or not the current move is hiding-check;
-	if traveling sneakily is true, force the cloak of shadows to work;
-	
-After taking a player action (this is the assume all actions are fast until every turn runs rule):
-	now previously-fast is true;
-	
-First every turn (this is the remember if the last turn took time rule):
-	now previously-fast is false;
-
-[start-of-turn combat is a truth state that varies.
-
-After taking a player action when the scheduled event is a hiding-check turn-based event: 
-	now opposition test subject is the player;
-	Now start-of-turn combat is whether or not the location encloses an opposer person;]
-	
-Testing a turn-based event for a hiding-check turn-based event (called the current move):
-	[a move can be hiding-check and hiding-reveal if it involves sneaking to a location and then revealing yourself]
-	if the current move is hiding-reveal, make no decision;
-	assert "the player should be hidden" based on whether or not the player is hidden;
-	[ These tests are too slow, and they run way too often.
-	if start-of-turn combat is false, make no decision;
-	if previously-fast is true, make no decision;
-	Now opposition test subject is the player;
-	if the location encloses a not asleep opposer person:
-		assert that the event description includes ", which must be positive\. You remain hidden\.|([doesn't see you pattern])";
-	repeat with guy running through asleep opposer persons in the location:
-		if the act count of guy is at least 1:
-			assert that the event description includes "[The guy] sleeps peacefully";]
-	
-mindslug-hidden-retreat is a turn-based event. The next move of mindslug-hiding-check is mindslug-hidden-retreat. The scheduled action of mindslug-hidden-retreat is the action of retreating.
+mindslug-hidden-retreat is a hiding-check test step. The scheduled action of mindslug-hidden-retreat is the action of retreating.
 	
 Before taking a player action when mindslug-hidden-retreat is the scheduled event:
 	assert that the mindslug is in the location;
@@ -1159,36 +1166,35 @@ Before taking a player action when mindslug-hidden-retreat is the scheduled even
 	assert that mouser is in the location;
 	update the combat status;
 	assert that the combat status is combat;
-	assert truth of whether or not the player is hidden with message "the player should be hidden";
 	
-Testing a turn-based event for mindslug-hidden-retreat:
+testing effects for mindslug-hidden-retreat:
 	assert zero hits by mindslug;
 	assert zero hits by fafhrd;
 	assert zero hits by mouser;
 	
-mindslug-hidden-runner is a turn-based event. The next move of mindslug-hidden-retreat is mindslug-hidden-runner. 
+mindslug-hidden-runner is a hiding-check test step.
 
 Before taking a player action when mindslug-hidden-runner is the scheduled event:
 	extract the player to the location of the mindslug;
 	now the scheduled action of mindslug-hidden-runner is the action of going way-to-get-back.
 	
-Testing a turn-based event for mindslug-hidden-runner:
+testing effects for mindslug-hidden-runner:
 	assert zero hits by mindslug;
 	assert zero hits by fafhrd;
 	assert zero hits by mouser;
 	
-A turn-based event can be hiding-reveal.
+A test step can be hiding-reveal.
 	
-mindslug-reveal is a hiding-reveal turn-based event. The next move of mindslug-hidden-runner is mindslug-reveal.
+mindslug-reveal is a hiding-reveal test step. The next move of mindslug-hidden-runner is mindslug-reveal.
 
 First when play begins:
-	Repeat with E running through hiding-reveal turn-based events:
+	Repeat with E running through hiding-reveal test steps:
 		Now the scheduled action of E is the action of taking off the shadows cloak. ["the action of taking of the cloak of shadows" doesn't parse  ]
 
 Initial scheduling for mindslug-reveal:
 	try going way-to-get-there;
 
-mindslug-retreat is a turn-based event.  The next move of mindslug-reveal is mindslug-retreat. The scheduled action of mindslug-retreat is the action of retreating.
+mindslug-retreat is a test step.  The next move of mindslug-reveal is mindslug-retreat. The scheduled action of mindslug-retreat is the action of retreating.
 
 Before taking a player action [or reaction] when mindslug-retreat is the scheduled event:
 	now mindslug presses the player;
@@ -1203,19 +1209,20 @@ Before taking a player action:
 	Repeat with guy running through people:
 		Now the hitting count of guy is 0.
 		
-Testing a turn-based event for mindslug-retreat:
+testing effects for mindslug-retreat:
 	assert that the event description includes "bravely run away";
 	assert one hit by mindslug;
 	assert one hit by fafhrd;
 	assert zero hits by mouser;
 	
-mindslug-runner is a turn-based event. The next move of mindslug-retreat is mindslug-runner.
+mindslug-runner is a test step.
 
 Before taking a player action when mindslug-runner is the scheduled event:
 	now the scheduled action of mindslug-runner is the action of going the way-to-get-back;
 	extract the player to the location of the mindslug;
+	now retreat location is the location of the mindslug;
 	
-Testing a turn-based event for mindslug-runner:
+testing effects for mindslug-runner:
 	assert that the event description includes "run past your enemies";
 	assert one hit by mindslug;
 	assert one hit by fafhrd;
@@ -1253,11 +1260,11 @@ A test play when testing tentacle-grab:
 	Travel sneakily to the location of the tentacle;
 	now every person enclosed by the location is not asleep;
 	
-tentacle-hiding-check is a hiding-check turn-based event. The first move of tentacle-grab is tentacle-hiding-check.
+tentacle-hiding-check is a hiding-check test step. The first move of tentacle-grab is tentacle-hiding-check.
 
-Tentacle-reveal is a hiding-reveal turn-based event. The next move of tentacle-hiding-check is tentacle-reveal.
+Tentacle-reveal is a hiding-reveal test step. The next move of tentacle-hiding-check is tentacle-reveal.
 
-tentacle-retreat is a turn-based event.  The next move of tentacle-reveal is tentacle-retreat. The scheduled action of tentacle-retreat is the action of retreating.
+tentacle-retreat is a test step.  The next move of tentacle-reveal is tentacle-retreat. The scheduled action of tentacle-retreat is the action of retreating.
 
 Before taking a player action when testing tentacle-grab:
 	if the player is at-react:
@@ -1271,19 +1278,19 @@ Initial scheduling for tentacle-retreat:
 	now the melee of the tentacle is 50;
 	now the health of the player is 100;
 		
-Testing a turn-based event for tentacle-retreat:
+testing effects for tentacle-retreat:
 	assert that the event description includes "bravely run away";
 	assert one hit by tentacle;
 	assert that the player is grappled by the tentacle;
 	assert that the location of the player is the location of the tentacle;
 
-tentacle-dig-retreat is a turn-based event. The next move of tentacle-retreat is tentacle-dig-retreat.
+tentacle-dig-retreat is a test step. The next move of tentacle-retreat is tentacle-dig-retreat.
 
 initial scheduling for tentacle-dig-retreat:
 	now the tentacle does not grapple the player;
 	now the scheduled action of tentacle-dig-retreat is the action of digging a random diggable direction.
 	
-Testing a turn-based event for tentacle-dig-retreat:
+testing effects for tentacle-dig-retreat:
 	assert that the event description includes "magically create a tunnel";
 	assert one hit by tentacle;
 	assert that the player is grappled by the tentacle;
@@ -1316,7 +1323,7 @@ A test play when testing insane-drakul:
 	try Drakul concentrating;
 	pause and assert that the event description includes "Drakul attains the highest state of concentration. 'It feels so good to be alive!'";
 	
-Driving Drakul insane is a turn-based event. The first move of insane-drakul is driving Drakul insane. The scheduled action of driving drakul insane is the action of attacking drakul;
+Driving Drakul insane is a test step. The first move of insane-drakul is driving Drakul insane. The scheduled action of driving drakul insane is the action of attacking drakul;
 
 After taking a player action when the scheduled event is driving drakul insane:
 	now the health of Drakul is 100;
@@ -1328,7 +1335,7 @@ randomized outcome testing when drakul going insane became the possibility:
 	mark the outcome achieved;
 	assert that the event description includes "Drakul goes insane";
 	
-insane drakul statements is a turn-based event.
+insane drakul statements is a test step.
 
 Initial scheduling of insane drakul statements:
 	if there is a held achievement of Blood never lies in the Table of Held Achievements:
@@ -1381,7 +1388,7 @@ randomized outcome testing when vampire-turning-hinting became the possibility:
 	assert "Blood never lies achievement should be held" based on whether not there is a held achievement of Blood never lies in the Table of Held Achievements;]
 	mark the outcome achieved;
 
-Drakul suicide is a turn-based event.
+Drakul suicide is a test step.
 
 Initial scheduling of drakul suicide:
 	now the health of drakul is 1;
@@ -1477,20 +1484,20 @@ To say cower report:
 	Repeat with guy running through people in the location:
 		say "After [act count of guy] rounds, [the guy] cowered [cower count of guy] times versus a target of [target cower percentage of guy] percent ([target cower percentage of guy times act count of guy divided by 100]).";
 	
-A turn-based event can be cower-counting.
+A test step can be cower-counting.
 
-A cower-counting turn-based event is usually repeatable.
+A cower-counting test step is usually repeatable.
 
 When play begins:
-	repeat with E running through cower-counting turn-based events:
+	repeat with E running through cower-counting test steps:
 		now the maxed out report of E is "[cower report]";
 		now the maximum repeats of E is 300;
 	
-initial scheduling for a cower-counting turn-based event:
+initial scheduling for a cower-counting test step:
 	repeat with guy running through people:
 		now the cower count of guy is 0;
 
-Testing a turn-based event of a cower-counting turn-based event:
+testing effects of a cower-counting test step:
 	Let success count be 0;
 	Repeat with guy running through people in the location:
 		check if guy cowered this turn;
@@ -1498,9 +1505,9 @@ Testing a turn-based event of a cower-counting turn-based event:
 	if the repeated moves is at least 20 and success count is the number of people in the location:
 		record success of the scheduled event;
 
-Ape-cowering is a cower-counting turn-based event. The first move of Dreadful-Presence-Test is Ape-cowering.
+Ape-cowering is a cower-counting test step. The first move of Dreadful-Presence-Test is Ape-cowering.
 		
-Player-cowering is a cower-counting turn-based event. The next move of Ape-cowering is Player-cowering.
+Player-cowering is a cower-counting test step. The next move of Ape-cowering is Player-cowering.
 
 initial scheduling for Player-cowering:
 	now the player is insane;
@@ -1583,7 +1590,7 @@ Initial scheduling of reaction-mindslug-killing:
 	now the mind score of fafhrd is 100; [protects against mirror confusion]
 	compel the action of fafhrd attacking the player;
 	
-reaction-mindslug-killing is a repeatable turn-based event. The first move of bug-210 is reaction-mindslug-killing.
+reaction-mindslug-killing is a repeatable test step. The first move of bug-210 is reaction-mindslug-killing.
 
 Choosing a player reaction when reaction-mindslug-killing is the scheduled event:
 	assert truth of whether or not the mindslug is alive with message "the mindslug should be alive";
@@ -1592,7 +1599,7 @@ Choosing a player reaction when reaction-mindslug-killing is the scheduled event
 		generate a player action of the action of reading the death-scroll;
 		now the scheduled event is not repeatable;
 
-Testing a turn-based event of reaction-mindslug-killing:
+testing effects of reaction-mindslug-killing:
 	if the scheduled event is repeatable, make no decision;
 	assert that the event description includes "The contemplative northern barbarian ends your life, with what seems to be a hint of sadness in his face";
 	assert that the event description includes "As the mindslug dies, you feel its powerful intelligence absorbed into your own body";
@@ -1612,16 +1619,16 @@ Test play when testing dream-of-sleeping-test:
 	now the player carries M;
 	Now the scheduled action of sleeping-dream-dreaming is the action of throwing M;
 
-Sleeping-dream-dreaming is a turn-based event. The first move of dream-of-sleeping-test is sleeping-dream-dreaming.
+Sleeping-dream-dreaming is a test step. The first move of dream-of-sleeping-test is sleeping-dream-dreaming.
 
-Sleeping-dream-waking is a turn-based event. The next move of sleeping-dream-dreaming is sleeping-dream-waking. The scheduled action of sleeping-dream-waking is the action of the untroubled sleeper trying exiting.
+Sleeping-dream-waking is a test step. The next move of sleeping-dream-dreaming is sleeping-dream-waking. The scheduled action of sleeping-dream-waking is the action of the untroubled sleeper trying exiting.
 
-Testing a turn-based event of sleeping-dream-waking:
+testing effects of sleeping-dream-waking:
 	assert that the event description includes "Malygris standing over you";
 	assert that the concentration of Malygris is 2;
 	assert truth of whether or not the player is just-woken with message "the player should be just-woken";
 	
-Waiting-for-Malygris-attack is a repeatable turn-based event. The next move of sleeping-dream-waking is waiting-for-Malygris-attack. 
+Waiting-for-Malygris-attack is a repeatable test step. The next move of sleeping-dream-waking is waiting-for-Malygris-attack. 
 
 Initial scheduling of waiting-for-Malygris-attack:
 	compel the action of Malygris attacking the player;
@@ -1629,7 +1636,7 @@ Initial scheduling of waiting-for-Malygris-attack:
 Carry out Malygris hitting the player when waiting-for-Malygris-attack is the scheduled event:
 	now waiting-for-Malygris-attack is not repeatable.
 	
-Testing a turn-based event of waiting-for-Malygris-attack:
+testing effects of waiting-for-Malygris-attack:
 	if waiting-for-Malygris-attack is repeatable, make no decision;
 	assert that the event description includes "defender was asleep";
 	assert truth of whether or not the player is not just-woken with message "the player should not be just-woken anymore";
@@ -1648,28 +1655,28 @@ Test play when testing aite-healing:
 		now the defence of guy is 100;
 	decrease the health of the player by 3;
 	
-healer-not-healing is a repeatable turn-based event. The first move of aite-healing is healer-not-healing. The maximum repeats of healer-not-healing is 20.
+healer-not-healing is a repeatable test step. The first move of aite-healing is healer-not-healing. The maximum repeats of healer-not-healing is 20.
 	
 Before the healer of Aite doing anything when healer-not-healing is the scheduled event:
 	now healer-not-healing is uneventful;
 	
-Testing a turn-based event of healer-not-healing:
+testing effects of healer-not-healing:
 	unless the injury of the player is 3:
 		record failure of the scheduled event with message "the player should still be damaged for 3 health";
 		
-healer-healing-defender is a repeatable turn-based event. The next move of healer-not-healing is healer-healing-defender. The maximum repeats of healer-healing-defender is 20.
+healer-healing-defender is a repeatable test step. The next move of healer-not-healing is healer-healing-defender. The maximum repeats of healer-healing-defender is 20.
 
 Initial scheduling of healer-healing-defender:
 	decrease the health of the healer of aite by 3;
 	decrease the health of the defender of aite by 4;
 	
-Testing a turn-based event of healer-healing-defender:
+testing effects of healer-healing-defender:
 	if the injury of defender of Aite is less than 4:
 		record success of healer-healing-defender;
 		
-healer-healing-self is a repeatable turn-based event. The next move of healer-healing-defender is healer-healing-self. The maximum repeats of healer-healing-self is 100.
+healer-healing-self is a repeatable test step. The next move of healer-healing-defender is healer-healing-self. The maximum repeats of healer-healing-self is 100.
 
-Testing a turn-based event of healer-healing-self:
+testing effects of healer-healing-self:
 	if the injury of healer of Aite is less than 3:
 		record success of healer-healing-self.
 		
@@ -1731,24 +1738,24 @@ Test play when testing divine reward:
 	now the health of the player is the permanent health of the player - 1;
 	try Israfel Israfel-splitting;
 	
-isra-only-killing is a turn-based event. The first move of divine reward is isra-only-killing. The scheduled action of isra-only-killing is the action of smiting isra.
+isra-only-killing is a test step. The first move of divine reward is isra-only-killing. The scheduled action of isra-only-killing is the action of smiting isra.
 
 initial scheduling of isra-only-killing:
 	now fell is asleep;
 
-testing a turn-based event of a turn-based event (called the current move) when testing divine reward:
+testing effects of a test step (called the current move) when testing divine reward:
 	assert "Nomos counter should be zero on [the current move]" based on whether or not the nomos counter is zero;
 	assert "Nomos bonus should be false on [the current move]" based on whether or not the nomos bonus is false;
 	
-Testing a turn-based event of isra-only-killing:
+testing effects of isra-only-killing:
 	assert truth of whether or not Isra is dead with message "Isra should be dead";
 	assert truth of whether or not Fell is not dead with message "Fell should be alive";
 	assert truth of whether or not the health of the player is less than the permanent health of the player with message "The player should not be healed";
 	assert that the event description does not include "Nomos receives .* and fully heals you";
 	
-fell-also-killing is a turn-based event. The next move of isra-only-killing is fell-also-killing. The scheduled action of fell-also-killing is the action of smiting fell.
+fell-also-killing is a test step. The next move of isra-only-killing is fell-also-killing. The scheduled action of fell-also-killing is the action of smiting fell.
 	
-Testing a turn-based event of fell-also-killing:
+testing effects of fell-also-killing:
 	assert that the location is Hall of Gods;
 	assert that the event description includes "receives the soul";
 	assert that the health of the player is the permanent health of the player;
@@ -1810,18 +1817,18 @@ Test play when testing temporary Nomos blood magic:
 	assert that the dreadful presence of the player is 2;
 	transcribe and restart capturing;
 	
-second-gown-feeding is a turn-based event. The first move of temporary Nomos blood magic is second-gown-feeding. The scheduled action of second-gown-feeding is the action of feeding the gown of the red court.
+second-gown-feeding is a test step. The first move of temporary Nomos blood magic is second-gown-feeding. The scheduled action of second-gown-feeding is the action of feeding the gown of the red court.
 
-Testing a turn-based event of second-gown-feeding:
+testing effects of second-gown-feeding:
 	assert that the blood magic level of the gown of the red court is 2;
 	assert that the dreadful presence of the player is 3;
 	decrease the gown-timer by 1;
 	assert that the blood timer of the gown of the red court is the gown-timer;
 	now the maximum repeats of first-gown-timeout is gown-timer;
 		
-first-gown-timeout is a repeatable turn-based event. The next move of second-gown-feeding is first-gown-timeout.
+first-gown-timeout is a repeatable test step. The next move of second-gown-feeding is first-gown-timeout.
 
-Testing a turn-based event of first-gown-timeout:
+testing effects of first-gown-timeout:
 	if the blood magic level of the gown of the red court > 1:
 		assert truth of whether or not the blood timer of the gown of the red court is (gown-timer - (the repeated moves + 1)) with message "Blood timer of [blood timer of the gown of the red court] should have been ([gown-timer] - [repeated moves + 1] = [gown-timer - (repeated moves + 1)])";
 	otherwise:
@@ -1831,9 +1838,9 @@ Testing a turn-based event of first-gown-timeout:
 		now the maximum repeats of second-gown-timeout is gown-timer;
 		now first-gown-timeout is not repeatable
 	
-second-gown-timeout is a repeatable turn-based event. The next move of first-gown-timeout is second-gown-timeout.
+second-gown-timeout is a repeatable test step. The next move of first-gown-timeout is second-gown-timeout.
 
-Testing a turn-based event of second-gown-timeout:
+testing effects of second-gown-timeout:
 	assert that the blood timer of the gown of the red court is (gown-timer - (the repeated moves + 1));
 	if the blood timer of the gown of the red court is 0:
 		assert that the blood magic level of the gown of the red court is 0;
@@ -1841,7 +1848,7 @@ Testing a turn-based event of second-gown-timeout:
 		now second-gown-timeout is not repeatable.
 		
 [This shouldn't need to be repeatable but something weird is going on with turn structure]
-malleus-feeding is a repeatable turn-based event. The next move of second-gown-timeout is malleus-feeding. The scheduled action of malleus-feeding is the action of attacking the swarm of daggers.
+malleus-feeding is a repeatable test step. The next move of second-gown-timeout is malleus-feeding. The scheduled action of malleus-feeding is the action of attacking the swarm of daggers.
 
 Initial scheduling for malleus-feeding:
 	extract the player to the location of the jumping bomb;
@@ -1865,7 +1872,7 @@ Initial scheduling for malleus-feeding:
 	pause and assert that the event description includes "Feeding 2 blood to the Malleus Maleficarum will give it an additional bonus of \+1 attack and \+1 damage on your next attack.* dreadful presence; blood bonus of \+1 attack and \+1 damage";
 	now the maximum repeats of malleus-feeding is the Nomos counter + 1.
 	
-Testing a turn-based event of malleus-feeding:
+testing effects of malleus-feeding:
 	if the swarm of daggers is at-react, make no decision;
 	assert that the blood magic level of malleus maleficarum is 0;
 	[I'd like to match "not a newline," but the character class <^\n> actually matches anything besides backslash and n]
@@ -1899,9 +1906,9 @@ Test play when testing bug-234:
 	pause and assert that the event description includes "You can only link to persons";
 	assert that the event description does not include "You forge a spiritual link";
 
-still-linking is a repeatable turn-based event. The first move of bug-234 is still-linking. The maximum repeats of still-linking is 20. The scheduled action of still-linking is the action of linking the healer of Aite.
+still-linking is a repeatable test step. The first move of bug-234 is still-linking. The maximum repeats of still-linking is 20. The scheduled action of still-linking is the action of linking the healer of Aite.
 
-Testing a turn-based event of still-linking:
+testing effects of still-linking:
 	if the healer of Aite is linked to the player:
 		record success of still-linking;
 	
@@ -1970,40 +1977,40 @@ Test play when testing banshees gone wild:
 	now the defence of the player is 100;
 	now the health of the player is 100;
 	
-Waiting-for-banshees is a turn-based event. The first move of banshees gone wild is waiting-for-banshees.
+Waiting-for-banshees is a test step. The first move of banshees gone wild is waiting-for-banshees.
 
-Testing a turn-based event of waiting-for-banshees:
+testing effects of waiting-for-banshees:
 	assert that the event description includes "banshees suddenly break loose";
 	assert that the living banshees boolean is true;
 
-banshee-fleeing is a turn-based event. The next move of waiting-for-banshees is banshee-fleeing.
+banshee-fleeing is a test step. The next move of waiting-for-banshees is banshee-fleeing.
 
 Initial scheduling for banshee-fleeing:
 	Let the way be the best route from the location to the retreat location;
 	Now the scheduled action of banshee-fleeing is the action of going the way.
 
-Testing a turn-based event of banshee-fleeing:
+testing effects of banshee-fleeing:
 	assert "we should no longer be in Hall of the Raging Banshees" based on whether or not the location is not Hall of Raging Banshees;
 	assert that the tension is 0;
 	assert that the living banshees boolean is false;
 	
-banshee-returning is a turn-based event. The next move of banshee-fleeing is banshee-returning.
+banshee-returning is a test step. The next move of banshee-fleeing is banshee-returning.
 
 Initial scheduling for banshee-returning:
 	Let the way be the best route from the location to the hall of raging banshees;
 	now the scheduled action of banshee-returning is the action of going the way;
 
-banshee-return-waiting is a turn-based event. The next move of banshee-returning is banshee-return-waiting.
+banshee-return-waiting is a test step. The next move of banshee-returning is banshee-return-waiting.
 	
 Initial scheduling for banshee-return-waiting:
 	now the tension is 10;
 	
-Testing a turn-based event of banshee-return-waiting:
+testing effects of banshee-return-waiting:
 	assert "Tension should be at least 10" based on whether or not the tension is at least 10;
 	assert that the event description includes "banshees suddenly break loose";
 	assert that the living banshees boolean is true;
 	
-reaction-ape-killing is a turn-based event. The next move of banshee-return-waiting is reaction-ape-killing. 
+reaction-ape-killing is a test step. The next move of banshee-return-waiting is reaction-ape-killing. 
 
 Initial scheduling of reaction-ape-killing:
 	compel the action of the blood ape attacking the player;
@@ -2016,7 +2023,7 @@ Choosing a player reaction when reaction-ape-killing is the scheduled event:
 		generate a player action of the action of reading the death-scroll;
 		now the scheduled event is not repeatable;
 
-Testing a turn-based event of reaction-ape-killing:
+testing effects of reaction-ape-killing:
 	if the scheduled event is repeatable, make no decision;
 	assert "the blood ape should be dead" based on whether or not the blood ape is dead;
 	assert that the event description includes "Bored by a lack of tension";
@@ -2074,31 +2081,31 @@ Test play when testing remembering-text:
 	assert "Lake of Lava should not be secretly placed" based on whether or not lake of lava is not secretly placed;
 	assert "Lake of Lava should not be placeable" based on whether or not lake of lava is not placeable;
 	
-nothing-to-remember is a turn-based event. The first move of remembering-text is nothing-to-remember. The scheduled action of nothing-to-remember is the action of remembering. 
+nothing-to-remember is a test step. The first move of remembering-text is nothing-to-remember. The scheduled action of nothing-to-remember is the action of remembering. 
 
-Testing a turn-based event of nothing-to-remember:
+testing effects of nothing-to-remember:
 	assert that the event description includes "You have not yet explored:\n( - the <a-w>+ exit of the entrance hall \(where you currently are\)\n)+\nYou have visited the following rooms: the entrance hall \(here\)\.\n\nTip:"
 	
-dumb-sensing is a turn-based event. The scheduled action of dumb-sensing is the action of sensing;
+dumb-sensing is a test step. The scheduled action of dumb-sensing is the action of sensing;
 
-Testing a turn-based event of dumb-sensing:
+testing effects of dumb-sensing:
 	assert "Powerless sensing should not take time" based on previously-fast;
 	
-A turn-based event can be psy-scroll-reading;
+A test step can be psy-scroll-reading;
 
-early-psycholocation is a psy-scroll-reading turn-based event.
+early-psycholocation is a psy-scroll-reading test step.
 
-Initial scheduling of a psy-scroll-reading turn-based event (called the current event):
+Initial scheduling of a psy-scroll-reading test step (called the current event):
 	now the scheduled action of the current event is the action of reading the reusable item;
 	
-Testing a turn-based event of psy-scroll-reading turn-based event:
+testing effects of psy-scroll-reading test step:
 	[TODO: text that sensing takes no time]
 	assert "The player should be psycholocating now" based on the psycholocation boolean;
 	assert that the event description includes "When you are psycholocating, sensing does not take time"
 
-unexplored-sensing is a turn-based event. The scheduled action of unexplored-sensing is the action of sensing.
+unexplored-sensing is a test step. The scheduled action of unexplored-sensing is the action of sensing.
 
-Testing a turn-based event of unexplored-sensing:
+testing effects of unexplored-sensing:
 	Repeat with the enemy running through {swarm of daggers, blood ape, demon of rage, angel of compassion, minotaur, bodmall, malygris}:
 		assert that the event description includes "[soul description of the enemy], (from the )?[best route from the location to the location of the enemy][line break]";
 	assert that the event description includes "- a turning in on itself of space and time, on which you cannot bear to focus your attention, somewhere [general direction from the location to the Eternal Prison][line break]"
@@ -2111,9 +2118,9 @@ Testing a turn-based event of unexplored-sensing:
  - a skein of twisting passages, from the south
  - spreading thorns dripping with dew--or blood, from the wes]
 	
-remembering-daggers is a hiding-check turn-based event. The scheduled action of remembering-daggers is the action of remembering. The location-target of remembering-daggers is the swarm of daggers.
+remembering-daggers is a hiding-check test step. The scheduled action of remembering-daggers is the action of remembering. The location-target of remembering-daggers is the swarm of daggers.
 	
-Testing a turn-based event of remembering-daggers:
+testing effects of remembering-daggers:
 	assert that the event description includes "You have visited the following rooms:.*You have seen the following creatures in these locations:.*- the swarm of daggers \(level 1\) in [the location] \(where you currently are\)"
 
 [before we can get the partway-path psycholocating message, we have to put a visited room between us and an unseen creature. Find one that's at least two moves away and then go 1 move towards it.]
@@ -2122,7 +2129,7 @@ The sensing-place is a room that varies;
 The on-the-way place is a room that varies;
 The faraway enemy is an object that varies;
 
-partway-visiting is a hiding-check psy-scroll-reading turn-based event.
+partway-visiting is a hiding-check psy-scroll-reading test step.
 	
 To decide which object is the next stop from (origin - a room) to (destination - a room):
 	let the way be the best route from origin to destination;
@@ -2145,59 +2152,59 @@ Initial scheduling of partway-visiting:
 	while the next stop from the on-the-way place to the target is a visited room:
 		now the on-the-way place is the next stop from the on-the-way place to the target.
 
-middle-psycholocating is a hiding-check psy-scroll-reading turn-based event. 
+middle-psycholocating is a hiding-check psy-scroll-reading test step. 
 
 Initial scheduling of middle-psycholocating:
 	now the location-target of middle-psycholocating is the sensing-place.
 
-partial-explored-sensing is a hiding-check turn-based event. The scheduled action of partial-explored-sensing is the action of sensing.
+partial-explored-sensing is a hiding-check test step. The scheduled action of partial-explored-sensing is the action of sensing.
 
-Testing a turn-based event of partial-explored-sensing:
+testing effects of partial-explored-sensing:
 	assert that the event description includes "the soul of the swarm of daggers here with you, like an aura like sharpened steel[line break]";
 	assert that the event description includes "[soul description of the faraway enemy], [best route from on-the-way place to location of the faraway enemy] from [the on-the-way place] \(which lies [best route from the location to on-the-way place] from here\)[line break]"
 
-meeting-malygris is a repeatable hiding-check turn-based event. The location-target of meeting-malygris is Malygris.
+meeting-malygris is a repeatable hiding-check test step. The location-target of meeting-malygris is Malygris.
 
 To say doesn't see you pattern:
 	say "(does not (detect|notice)|remains unaware of) you(r presence)?[run paragraph on]";
 	
-Testing a turn-based event of meeting-malygris:
+testing effects of meeting-malygris:
 	if the act count of Malygris is at least 1:
 		assert that the event description includes "Malygris [doesn't see you pattern]";
 		now meeting-malygris is not repeatable;
 	
-psycholocation-expiring is a repeatable hiding-check turn-based event.
+psycholocation-expiring is a repeatable hiding-check test step.
 
-Testing a turn-based event of psycholocation-expiring:
+testing effects of psycholocation-expiring:
 	if psycholocation is inactive:
 		record success of psycholocation-expiring;
 		
-moving-malygris is a repeatable hiding-reveal turn-based event. The maximum repeats of moving-malygris is 20.
+moving-malygris is a repeatable hiding-reveal test step. The maximum repeats of moving-malygris is 20.
 
 Initial scheduling for moving-malygris:
 	Compel the action of Malygris teleporting.
 	
-Testing a turn-based event of moving-malygris:
+testing effects of moving-malygris:
 	if the location of Malygris is the location:
 		now the scheduled action of moving-malygris is the action of waiting;
 		make no decision;
 	assert that the event description includes "Malygris suddenly teleports away";
 	now moving-malygris is not repeatable.
 	
-remembering-malygris is a turn-based event. The scheduled action of remembering-malygris is the action of remembering.
+remembering-malygris is a test step. The scheduled action of remembering-malygris is the action of remembering.
 
-Testing a turn-based event of remembering-malygris:
+testing effects of remembering-malygris:
 	assert that the event description includes "You have seen the following creatures in these locations:.*You have also seen Malygris, but you don't know where he is now"
 	
-remembering-lost-plural is a turn-based event. The scheduled action of remembering-lost-plural is the action of remembering.
+remembering-lost-plural is a test step. The scheduled action of remembering-lost-plural is the action of remembering.
 
 Initial scheduling of remembering-lost-plural:
 	now the last-seen-location of the swarm of daggers is null-room.
 	
-Testing a turn-based event of remembering-lost-plural:
+testing effects of remembering-lost-plural:
 	assert that the event description includes "You have also seen (Malygris|the swarm of daggers) and (Malygris|the swarm of daggers), but you don't know where they are now"
 	 
-dungeon-clearing is a turn-based event.
+dungeon-clearing is a test step.
 
 Initial scheduling for dungeon-clearing:
 	now the health of the demonic assassin is -1;
@@ -2205,26 +2212,26 @@ Initial scheduling for dungeon-clearing:
 		if guy is the player or the level of guy is at least 5, next;
 		now the health of guy is -1;
 		
-Testing a turn-based event of dungeon-clearing:
+testing effects of dungeon-clearing:
 	assert that the number of reachable persons is 2;
 	assert "Malygris (in [the location of Malygris]) should be reachable from [the location]" based on whether or not Malygris is reachable;
 	assert "The player (in [the location of the player]) should be reachable" based on whether or not the player is reachable.
 	
-Malygris-only-remembering is a turn-based event. The scheduled action of malygris-only-remembering is the action of remembering.
+Malygris-only-remembering is a test step. The scheduled action of malygris-only-remembering is the action of remembering.
 
-Testing a turn-based event of Malygris-only-remembering:
+testing effects of Malygris-only-remembering:
 	assert that the event description does not include "You have seen the following creatures in these locations";
 	assert that the event description includes "You have also seen Malygris, but you don't know where he is now"
 	
-slow-sensing is a turn-based event. The scheduled action of slow-sensing is the action of sensing.
+slow-sensing is a test step. The scheduled action of slow-sensing is the action of sensing.
 
 Initial scheduling of slow-sensing:
 	assert "psycholocation should be inactive" based on whether or not psycholocation is inactive;
 	
-Testing a turn-based event of slow-sensing:
+testing effects of slow-sensing:
 	assert "sensing without psycholocation should take time" based on whether or not previously-fast is false;
 	
-exploring-everywhere is a repeatable hiding-check turn-based event. 
+exploring-everywhere is a repeatable hiding-check test step. 
 
 Definition: A room (called place) is reachable:
 	if the place is the location, yes;
@@ -2236,7 +2243,7 @@ Definition: A thing is reachable if the location of it is a reachable room.
 Initial scheduling for exploring-everywhere:
 	Now the location-target of exploring-everywhere is a random unvisited reachable room.
 	
-Testing a turn-based event of exploring-everywhere:
+testing effects of exploring-everywhere:
 	Now the location-target of exploring-everywhere is a random unvisited reachable room;
 	if the location-target of exploring-everywhere is nothing:
 		assert that the number of unvisited reachable rooms is 0;
@@ -2246,45 +2253,53 @@ Testing a turn-based event of exploring-everywhere:
 		assert "There should be at least 1 unvisited secret room" based on whether or not the number of unvisited denizen rooms is at least 1;
 		now exploring-everywhere is not repeatable;
 	
-remembering-everything-reachable is a turn-based event. The scheduled action of remembering-everything-reachable is the action of remembering.
+remembering-everything-reachable is a test step. The scheduled action of remembering-everything-reachable is the action of remembering.
 
-Testing a turn-based event of remembering-everything-reachable:
+testing effects of remembering-everything-reachable:
 	assert that the event description includes "All locations have been explored";
 	assert that the event description does not include "You have not yet explored";
 	 
-explored-psycholocating is a hiding-check psy-scroll-reading turn-based event.
+explored-psycholocating is a hiding-check psy-scroll-reading test step.
+
+Definition: a room is unoccupied if it does not enclose a person;
 
 Initial scheduling for explored-psycholocating:
 	if the location is the location of Malygris:
-		now the location-target of explored-psycholocating is a random reachable room that does not enclose Malygris;
+		now the location-target of explored-psycholocating is a random unoccupied reachable room;
+		if location-target of explored-psycholocating is a room:
+			assert "location-target ([location-target of explored-psycholocating]) is not reachable" based on whether or not location-target of explored-psycholocating is a reachable room;
+			assert "location-target ([location-target of explored-psycholocating]) should not be where Malygris is" based on whether or not location-target of explored-psycholocating is not the location of Malygris;
+		otherwise:
+			assert "location-target ([location-target of explored-psycholocating]) is not a room" based on false;
 
-malygris-sensing is a turn-based event. The scheduled action of malygris-sensing is the action of sensing.
+
+malygris-sensing is a test step. The scheduled action of malygris-sensing is the action of sensing.
 
 Initial scheduling of malygris-sensing:
 	[make sure psycholocating works even when remembering doesn't]
 	Now the last-seen-location of Malygris is null-room;
 
-Testing a turn-based event of malygris-sensing:
+testing effects of malygris-sensing:
 	assert that the event description includes "[soul description of malygris], in [the location of Malygris]";
 	assert "psycholocation sensing should not take time" based on previously-fast;
 
-map-reading is a turn-based event.
+map-reading is a test step.
 
 Initial scheduling of map-reading:
 	Let M be a random scroll of mapping carried by the player;
 	now the scheduled action of map-reading is the action of reading M;
 	
-Testing a turn-based event of map-reading:
+testing effects of map-reading:
 	assert that the event description includes "a complete floor plan of the dungeon of Kerkerkruip imprints itself on your mind"
 	
-map-remembering is a turn-based event. The scheduled action of map-remembering is the action of remembering.
+map-remembering is a test step. The scheduled action of map-remembering is the action of remembering.
 
-Testing a turn-based event of map-remembering:
+testing effects of map-remembering:
 	Assert that the number of secretly placed rooms is 2;
 	assert that the event description includes "Based on the map you found.*secret rooms in the dungeon, one <^[line break]>+, one <^[line break]>+.";
 	assert that the event description includes "You have also seen Malygris, but you don't know where he is. With your powers of psycholocation, you might be able to SENSE it";
 	
-getting-close-to-vault is a hiding-check turn-based event.
+getting-close-to-vault is a hiding-check test step.
 
 Initial scheduling of getting-close-to-vault:
 	Let the closest place be Null-room;
@@ -2296,23 +2311,23 @@ Initial scheduling of getting-close-to-vault:
 			now the closest place is the place;
 	now the location-target of getting-close-to-vault is the closest place.
 			
-digging-to-vault is a repeatable hiding-check turn-based event. The maximum repeats of digging-to-vault is 20.
+digging-to-vault is a repeatable hiding-check test step. The maximum repeats of digging-to-vault is 20.
 
-To schedule digging to (place - a room) for (current move - a turn-based event):
+To schedule digging to (place - a room) for (current move - a test step):
 	Now the scheduled action of the current move is the action of digging a single general direction from the location to place.
 	
 Initial scheduling of digging-to-vault:
 	schedule digging to the Arcane Vault for digging-to-vault;
 	
-Testing a turn-based event of digging-to-vault:
+testing effects of digging-to-vault:
 	if the location is Arcane Vault:
 		record success of digging-to-vault;
 	otherwise:
 		schedule digging to the Arcane Vault for digging-to-vault;
 	
-secret-room-remembering is a turn-based event. The scheduled action of secret-room-remembering is the action of remembering.
+secret-room-remembering is a test step. The scheduled action of secret-room-remembering is the action of remembering.
 
-Testing a turn-based event of secret-room-remembering:
+testing effects of secret-room-remembering:
 	assert that the event description includes "Based on the map you found.*a secret room in the dungeon, <a-z>";
 	assert that the event description does not include "secret room in the dungeon, one";
 	
@@ -2337,11 +2352,11 @@ Test play when testing blessed-grenade-test:
 	Now every room is not rust-spored;
 	Now every thing is not rusted;
 
-A turn-based event can be grenade-producing.
+A test step can be grenade-producing.
 
-blessed-grenade-alchemy is a repeatable hiding-check grenade-producing turn-based event. The first move of blessed-grenade-test is blessed-grenade-alchemy. The location-target of blessed-grenade-alchemy is the Alchemical Laboratory. The maximum repeats of blessed-grenade-alchemy is 300.
+blessed-grenade-alchemy is a repeatable hiding-check grenade-producing test step. The first move of blessed-grenade-test is blessed-grenade-alchemy. The location-target of blessed-grenade-alchemy is the Alchemical Laboratory. The maximum repeats of blessed-grenade-alchemy is 300.
 
-Testing a turn-based event of blessed-grenade-alchemy:
+testing effects of blessed-grenade-alchemy:
 	unless the event description matches the regular expression "Blessed Grenade":
 		make no decision;
 	now blessed-grenade-alchemy is not repeatable;
@@ -2353,36 +2368,40 @@ Testing a turn-based event of blessed-grenade-alchemy:
 			if the item is in the location:
 				record success of blessed-grenade-alchemy;
 		
-Initial scheduling of a grenade-producing turn-based event (called the current move):
+Initial scheduling of a grenade-producing test step (called the current move):
 	now the scheduled action of the current move is the action of inserting the war mask into the curious machine.
 
-First every turn when the scheduled event is a grenade-producing turn-based event (called the current move):
+First every turn when the scheduled event is a grenade-producing test step (called the current move):
 	Now the health of the player is 100;
 	Now the player is not asleep;
 	If the current move is hiding-check, now the player is hidden;
 	Now every room is not rust-spored;
 	Now every thing is not rusted;
+	
+Last testing effects of a grenade-producing test step:
+	Repeat with item running through grenades in the location:
+		remove item from play;
 
-no-extra-blessed-grenade is an uneventful repeatable hiding-check grenade-producing turn-based event. The maximum repeats of no-extra-blessed-grenade is 100. [This number could be higher, but it's a slow test]
+no-extra-blessed-grenade is an uneventful repeatable hiding-check grenade-producing test step. The maximum repeats of no-extra-blessed-grenade is 100. [This number could be higher, but it's a slow test]
 
-Testing a turn-based event of no-extra-blessed-grenade:
+testing effects of no-extra-blessed-grenade:
 	if the event description matches the regular expression "Blessed Grenade":
 		record failure of no-extra-blessed-grenade with message "The machine produced an extra blessed grenade, impossibly".
 	
-throwing-blessed is a turn-based event.
+throwing-blessed is a test step.
 
 Initial scheduling of throwing-blessed:
 	now the player carries the blessed grenade;
 	extract the player to the location of Drakul;
 	now the scheduled action of throwing-blessed is the action of throwing the blessed grenade;
 	
-Testing a turn-based event of throwing-blessed:
+testing effects of throwing-blessed:
 	assert that Drakul is dead;
 	assert that the event description includes "As the grenade explodes you hear the singing of angels, several of whom swoop down from the heavens with huge swords and eviscerate <^[line break]>*Drakul";
 	
-no-new-blessed-grenade is an uneventful repeatable hiding-check grenade-producing turn-based event. The maximum repeats of no-new-blessed-grenade is 100.
+no-new-blessed-grenade is an uneventful repeatable hiding-check grenade-producing test step. The maximum repeats of no-new-blessed-grenade is 100.
 
-Testing a turn-based event of no-new-blessed-grenade:
+testing effects of no-new-blessed-grenade:
 	if the blessed grenade is not off-stage:
 		record failure of no-new-blessed-grenade with message "The blessed grenade should be off-stage".
 		
@@ -2405,11 +2424,11 @@ Test play when testing maze-resetting:
 	now the defence of the player is 100;
 	now the melee of the player is 100;
 
-overmind-meeting is a hiding-check hiding-reveal turn-based event. The first move of maze-resetting is overmind-meeting. The location-target of overmind-meeting is the overmind.
+overmind-meeting is a hiding-check hiding-reveal test step. The first move of maze-resetting is overmind-meeting. The location-target of overmind-meeting is the overmind.
 
-overmind-mazing is a turn-based event. The scheduled action of overmind-mazing is the action of attacking the overmind.
+overmind-mazing is a test step. The scheduled action of overmind-mazing is the action of attacking the overmind.
 	
-Testing a turn-based event of overmind-mazing:
+testing effects of overmind-mazing:
 	assert that the combat state of the overmind is at-inactive.
 	
 Section - bug 262
