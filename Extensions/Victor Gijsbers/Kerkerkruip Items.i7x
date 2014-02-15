@@ -807,7 +807,7 @@ The pale phylactery is an epic hat.
 The pale phylactery is magical.
 The pale phylactery is silver.
 
-The description of the pale phylactery is "A small silver amulet inlaid with colourless stones that were not formed on our planet. When worn on the forehead, the phylactery gives you a +10% chance of remaining concentrated when damaged. But its true power is only revealed when you are under the influence of ment: for in that state, it ensures that you do not lose your concentration when you attack.".
+The description of the pale phylactery is "A small silver amulet inlaid with colourless stones that were not formed on our planet. When worn on the forehead, the phylactery gives you a +10% chance of remaining concentrated when damaged. But its true power is only revealed when you are under the influence of ment: for in that state, it ensures that you lose only one level of concentration when you attack.".
 
 A remain concentrated rule (this is the pale phylactery concentration rule):
 	if global defender wears the pale phylactery:
@@ -816,6 +816,10 @@ A remain concentrated rule (this is the pale phylactery concentration rule):
 After an actor hitting (this is the alternative lose concentration after attacking rule):
 	unless (global attacker is the player and player wears pale phylactery and ment timer is greater than 0):
 		now the concentration of the global attacker is 0;
+	otherwise:
+		now concentration of the global attacker is (concentration of the global attacker - 1);
+		if concentration of the global attacker < 0:
+			now the concentration of the global attacker is 0;
 	continue the action.
 
 The lose concentration after attacking rule is not listed in any rulebook.
