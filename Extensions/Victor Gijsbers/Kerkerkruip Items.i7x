@@ -1691,16 +1691,16 @@ An exploding rule (this is the fragmentation grenade explodes rule):
 
 Section - Blessed Grenade (major)
 
-A custom grenade is a kind of grenade. The indefinite article of a custom grenade is usually "the". A custom grenade can be exploded. A custom grenade is usually major. [a custom grenade is unique, and can only appear in the dungeon once]
+A custom-grenade is a kind of grenade. The indefinite article of a custom-grenade is usually "the". A custom-grenade can be exploded. A custom-grenade is usually major. [a custom-grenade is unique, and can only appear in the dungeon once]
 
-Definition: A custom grenade is cloneable: no.
+Definition: A custom-grenade is cloneable: no.
 
-Definition: A custom grenade is placed if it is not off-stage or it is exploded.
+Definition: A custom-grenade is placed if it is not off-stage or it is exploded.
 
-The Blessed Grenade is a custom grenade. The description of the Blessed Grenade is "This grenade is rumoured to be extremely effective against undead."
+The Blessed Grenade is a custom-grenade. The description of the Blessed Grenade is "This grenade is rumoured to be extremely effective against undead."
 
 An exploding rule (this is the Blessed Grenade explodes rule):
-	unless the exploding-grenade is a custom grenade:
+	unless the exploding-grenade is a custom-grenade:
 		make no decision;
 	if the noun is rusted and a random chance of 1 in 2 succeeds:	
 		if exploding-location is the location:
