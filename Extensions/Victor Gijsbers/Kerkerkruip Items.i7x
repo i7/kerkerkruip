@@ -3067,7 +3067,7 @@ The gorgeous dagger is a minor dagger.
 The gorgeous dagger is civilised.
 The gorgeous dagger is iron.
 
-The description of the gorgeous dagger is "Adorned with gold and a large emerald at the end of the hilt, this dagger is not only beautiful, but also perfect for precise attacks in tense situations. The decadence of its design proves it to be of Yahvinnean origin.".
+The description of the gorgeous dagger is "Adorned with gold and a large emerald at the end of the hilt, this dagger is not only beautiful, but also perfect for precise attacks in tense situations. The decadence of its design proves it to be of Yahvinnan origin.".
 
 Section - Evil dagger (major)
 
@@ -3079,7 +3079,7 @@ The blood magic cost of evil dagger is 1.
 The blood magic level of evil dagger is 2.
 The blood magic maximum of evil dagger is 99.
 
-The description of evil dagger is "This dagger was once used as a ritual weapon by a Yahvinnean death cult. Whenever it hits someone, its evil magic has a [blood magic level of evil dagger]% chance of killing the target outright. This percentage will increase by 1% when the dagger is fed."
+The description of evil dagger is "This dagger was once used as a ritual weapon by a Yahvinnan death cult. Whenever it hits someone, its evil magic has a [blood magic level of evil dagger]% chance of killing the target outright. This percentage will increase by 1% when the dagger is fed."
 
 A contact rule (this is the evil dagger bonus rule):
 	if the global attacker weapon is the evil dagger:
