@@ -156,7 +156,7 @@ The spirit score of the swarm of daggers is 6.
 
 When play begins:
 	let X be a random natural weapon part of the swarm of daggers;
-	now damage die of X is 4;
+	now damage die of X is 5;
 	now dodge bonus of X is 1;
 	now parry-with bonus of X is -2;
 	now parry-against bonus of X is -2;
@@ -538,7 +538,7 @@ The soul description of the ravenous armadillo is "energy like a screen of scale
 
 The health of the ravenous armadillo is 12.
 The melee of the ravenous armadillo is 0.
-The defence of the ravenous armadillo is 5.
+The defence of the ravenous armadillo is 6.
 
 The body score of the ravenous armadillo is 6.
 The mind score of the ravenous armadillo is 4.
@@ -546,14 +546,14 @@ The spirit score of the ravenous armadillo is 5.
 
 A damage modifier rule (this is the ravenous armadillo takes less damage rule):
 	if the global defender is the ravenous armadillo:
-		say " - 3 (tough scales)[run paragraph on]";
-		decrease the attack damage by 3.
+		say " - 4 (tough scales)[run paragraph on]";
+		decrease the attack damage by 4.
 
 The intrinsic heat resistance of the ravenous armadillo is 3.
 
 A physical damage reduction rule (this is the armadillo physical damage reduction rule):
 	if the test subject is the ravenous armadillo:
-		increase the pdr by 3.
+		increase the pdr by 4.
 		
 When play begins:
 	let X be a random natural weapon part of the ravenous armadillo;
