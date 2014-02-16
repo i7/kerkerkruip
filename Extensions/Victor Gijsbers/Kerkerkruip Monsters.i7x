@@ -5303,7 +5303,7 @@ Report the demonic assassin dodging:
 	rule succeeds.
 
 Report the demonic assassin parrying:
-	say "The assassing raises his blade.";
+	say "The assassin raises his blade.";
 	rule succeeds.
 
 Report the demonic assassin waiting when the demonic assassin is insane:
