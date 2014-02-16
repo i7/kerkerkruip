@@ -420,7 +420,7 @@ To transcribe (T - an indexed text):
 	
 To transcribe and stop capturing text/--:
 	stop capturing text;
-	if the captured text is not "":
+	if "[the captured text]" matches the regular expression ".":
 		append "*** [current test set], [scheduled event] turn [the turn count], assertion count=[test assertion count] ***[line break][the captured text]" to file of test transcript;
 	 
 To transcribe and restart capturing text/--:
@@ -450,7 +450,9 @@ To record a test attempt:
 		now failures entry is 0;
 		now failure messages entry is "";
 	increment the total entry;
-	say ": "
+	transcribe and stop capturing;
+	say ": ";
+	start capturing text;
 
 To record a/-- failure report of/-- (msg - an indexed text):
 	Let testnum be current test set as a number;
@@ -998,7 +1000,7 @@ randomized outcome testing when bat crashing into spike became the possibility:
 randomized outcome testing when bat avoiding huge spike became the possibility:
 	if player-targeted is false, make no decision;
 	if player-damaged is true, make no decision;
-	unless the event description matches the regular expression "huge", make no decision;
+	unless the event description matches the regular expression "huge <a-z>+ bursts out of the ground", make no decision;
 	mark the outcome achieved;
 	assert that the event description includes "fly over";
 
@@ -1817,7 +1819,7 @@ Test play when testing temporary Nomos blood magic:
 	assert that the dreadful presence of the player is 2;
 	transcribe and restart capturing;
 	
-second-gown-feeding is a test step. The first move of temporary Nomos blood magic is second-gown-feeding. The scheduled action of second-gown-feeding is the action of feeding the gown of the red court.
+second-gown-feeding is a hiding-check test step. The first move of temporary Nomos blood magic is second-gown-feeding. The scheduled action of second-gown-feeding is the action of feeding the gown of the red court.
 
 testing effects of second-gown-feeding:
 	assert that the blood magic level of the gown of the red court is 2;
@@ -1826,7 +1828,7 @@ testing effects of second-gown-feeding:
 	assert that the blood timer of the gown of the red court is the gown-timer;
 	now the maximum repeats of first-gown-timeout is gown-timer;
 		
-first-gown-timeout is a repeatable test step. The next move of second-gown-feeding is first-gown-timeout.
+first-gown-timeout is a repeatable hiding-check test step. The next move of second-gown-feeding is first-gown-timeout.
 
 testing effects of first-gown-timeout:
 	if the blood magic level of the gown of the red court > 1:
@@ -1838,7 +1840,7 @@ testing effects of first-gown-timeout:
 		now the maximum repeats of second-gown-timeout is gown-timer;
 		now first-gown-timeout is not repeatable
 	
-second-gown-timeout is a repeatable test step. The next move of first-gown-timeout is second-gown-timeout.
+second-gown-timeout is a repeatable hiding-check test step. The next move of first-gown-timeout is second-gown-timeout.
 
 testing effects of second-gown-timeout:
 	assert that the blood timer of the gown of the red court is (gown-timer - (the repeated moves + 1));

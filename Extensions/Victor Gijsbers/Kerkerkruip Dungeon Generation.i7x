@@ -64,12 +64,10 @@ An object has a number called the rarity. The rarity of an object is usually 0.
 
 Definition: an object (called item) is rare if rarity of item is greater than 0.
 
-The rarity multiplier is a number that varies. The rarity multiplier is 2. [This number can be used to globally increase the rarity of everything on a linear scale]
-
 To decide if (stuff - an object) is too rare:
 	let n be rarity of stuff;
 	while n is greater than 0:
-		if a random chance of 1 in the rarity multiplier succeeds:
+		if a random chance of 1 in 2 succeeds:
 			decide on true;
 		decrease n by 1;
 	decide on false.

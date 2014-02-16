@@ -963,8 +963,8 @@ Last check inserting something into the curious machine:
 		if m is 4, now chosen grenade is an available smoke grenade;
 		if m is 5, now chosen grenade is an available teleportation grenade;
 		if m is 6, now chosen grenade is an available Morphean grenade;
-		if a random chance of 1 in 100 succeeds and there is a not placed custom grenade:
-			now the chosen grenade is a random not placed custom grenade;
+		if a random chance of 1 in 100 succeeds and there is a not placed custom-grenade:
+			now the chosen grenade is a random not placed custom-grenade;
 		Let item be the chosen grenade;
 		if the chosen grenade is cloneable:
 			now item is a usable copy of chosen grenade;
@@ -1555,16 +1555,13 @@ To do a random step:
 [Set secretly placeable and secret-placement rarity of rooms to have them included here.
 Populate them with monsters and treasure in the dungeon finish rules.]
 A last creating the map rule (this is the place secret rooms rule):
-	let the normal rarity multiplier be the rarity multiplier;
 	Repeat with the place running through secretly placeable rooms:
 		if the place is placed, next;
-		now the rarity multiplier is the secret-rarity multiplier of the place;
 		now original room is Null-room;
 		now considered room is the place;
 		consider the placement possible rules;
 		if rule succeeded:
 			put the place in a near location;
-	now the rarity multiplier is the normal rarity multiplier.
 		
 Chapter - Eternal Prison
 
@@ -1581,8 +1578,7 @@ Eternal prison is not teleportable.
 Eternal Prison is vp-underground.
 Eternal Prison is barren.
 
-The rarity of Eternal Prison is 1.
-The secret-rarity multiplier of Eternal Prison is 5. [ (1/5)^1 = a 1 in 5 chance ]
+The rarity of Eternal Prison is 3.
 
 
 Section - Eternal Prison label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
@@ -1605,8 +1601,7 @@ Hidden Treasury is not teleportable.
 Hidden Treasury is vp-agnostic.
 Hidden Treasury is civilised.
 
-The rarity of Hidden Treasury is 1.
-The secret-rarity multiplier of Hidden Treasury is 5.
+The rarity of Hidden Treasury is 3.
 
 The ornate chest is scenery in Hidden Treasury. The ornate chest is a closed openable container. Understand "gems" and "precious" and "metals" as the ornate chest.
 
@@ -1637,8 +1632,7 @@ Mausoleum is not teleportable.
 Mausoleum is vp-agnostic.
 Mausoleum is deathly.
 
-The rarity of Mausoleum is 1.
-The secret-rarity multiplier of Mausoleum is 10.
+The rarity of Mausoleum is 4.
 
 The tomb of the ancient king is scenery in the mausoleum. The tomb of the ancient king is a closed openable container. Understand "marble" and "screw" and "screws" and "lid" and "sculptures" and "sculpted" and "head" and "heads" as the tomb of the ancient king. The description of the tomb of the ancient king is "The tomb is made of richly sculpted marble. Some of the sculptures serve as screws to hold the tomb closed.".
 
@@ -1657,16 +1651,18 @@ Last check opening the tomb of the ancient king:
 			increase tomb-ancient-king-counter by 1;
 			say "Marble screws with sculpted heads hold the tomb closed. You painstakingly unscrew one that looks like a [one of]gargoyle[or]mermaid[or]skeleton[or]naked woman[or]phallus[or]horse[or]minotaur[or]fairy[or]priest[or]wizard[or]chained slave[or]blood ape[or]copulating man and woman[or]bull impregnating a human woman[or]double-bladed axe[or]man with wings[at random]." instead.
 
-A last dungeon interest rule (this is the potentially connect the Mausoleum rule):
+A last creating the map rule (this is the potentially connect the Mausoleum rule):
 	if Mausoleum is not placed and a random chance of 1 in 10 succeeds: [TODO]
 		let place be a random placed connectable room;
 		place mausoleum next to place;
+
+The potentially connect the Mausoleum rule is listed after the place secret rooms rule in the creating the map rules.
 
 Definition: a person is mausoleum-inhabitant if it is undead.
 
 Definition: the abyss of the soul is mausoleum-inhabitant: no.
 
-A dungeon finish rule (this is the people the Mausoleum rule):
+A treasure placement rule (this is the people the Mausoleum rule):
 	if the Mausoleum is not placed:
 		make no decision;
 	if (a random chance of 2 in 5 succeeds) and (at least one super-undead person is off-stage):
@@ -1704,8 +1700,7 @@ Cavern of Rust is barren.
 
 Cavern of Rust is rust-spored.
 
-The rarity of Cavern of Rust is 1.
-The secret-rarity multiplier of Cavern of Rust is 5.
+The rarity of Cavern of Rust is 3.
 
 
 Section - Cavern of Rust label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
@@ -1729,8 +1724,7 @@ Portal of Smoke is not extra-accepting.
 Portal of Smoke is vp-agnostic.
 Portal of Smoke is elemental.
 
-The rarity of Portal of Smoke is 1;
-The secret-rarity multiplier of Portal of Smoke is 5;
+The rarity of Portal of Smoke is 3;
 
 Smoke rule (this is the smoke at the Portal of Smoke rule):
 	if test room is Portal of Smoke:
@@ -1932,8 +1926,7 @@ The Arcane Vault is not extra-accepting.
 The Arcane Vault is vp-agnostic.
 The Arcane Vault is magical.
 
-The rarity of Arcane Vault is 5.
-The secret-rarity multiplier of Arcane Vault is 2.
+The rarity of Arcane Vault is 4.
 
 Instead of listening to the Arcane Vault:
 	say "All sounds seem muffled and unreal.".
