@@ -503,6 +503,9 @@ Initial scheduling of normal keyboard input:
 	
 Section - Scheduling
 
+To decide whether testing (T - a test step):
+	decide on whether or not the scheduled event is T;
+
 The repeated moves is a number that varies;
 
 The scheduled event is a test step that varies. The scheduled event is the normal keyboard input.
@@ -516,6 +519,7 @@ Initial scheduling for a test step (this is the reset act counts rule):
 To schedule (the event described - a test step):
 	transcribe and restart capturing;
 	if the event described is not the scheduled event:
+		now the scheduled event is the event described;
 		if the event described is normal keyboard input:
 			transcribe and stop capturing;
 			say line break;
@@ -529,7 +533,6 @@ To schedule (the event described - a test step):
 		start capturing text;
 		increment the repeated moves;
 	now the event described is not generated;
-	now the scheduled event is the event described;
 	transcribe and restart capturing;
 	
 Before taking a player action when the scheduled event is generated:
@@ -929,6 +932,24 @@ testing effects for a hiding-check test step (called the current move):
 	repeat with guy running through asleep opposer persons in the location:
 		if the act count of guy is at least 1:
 			assert that the event description includes "[The guy] sleeps peacefully";]
+
+Section - Counting Actions
+
+A person has a number called the act count;
+
+A person has a number called the reaction count.
+
+Initial scheduling of a test step:
+	Repeat with guy running through people:
+		now the reaction count of guy is 0;
+		
+A combat round rule (this is the count combat actions rule):
+	increment the act count of the main actor;
+
+Before an at-react person doing something (this is the count reactions rule):
+	increment the reaction count of the actor;
+	
+The count combat actions rule is listed before the dreadful presence effect rule in the combat round rules.
 	
 Chapter - test plays
 
@@ -1429,12 +1450,6 @@ Scenario when testing Dreadful-Presence-Test:
 	now the zombie toad is testobject;
 	
 A person has a number called the cower count;
-A person has a number called the act count;
-
-A combat round rule (this is the count combat actions rule):
-	increment the act count of the main actor;
-	
-The count combat actions rule is listed before the dreadful presence effect rule in the combat round rules.
 
 Test play when testing Dreadful-Presence-Test:
 	repeat with guy running through denizen people:
@@ -1600,6 +1615,7 @@ Choosing a player reaction when reaction-mindslug-killing is the scheduled event
 		let the death-scroll be a random carried scroll of death;
 		generate a player action of the action of reading the death-scroll;
 		now the scheduled event is not repeatable;
+		rule succeeds;
 
 testing effects of reaction-mindslug-killing:
 	if the scheduled event is repeatable, make no decision;
@@ -2024,6 +2040,7 @@ Choosing a player reaction when reaction-ape-killing is the scheduled event:
 		let the death-scroll be a random carried scroll of death;
 		generate a player action of the action of reading the death-scroll;
 		now the scheduled event is not repeatable;
+		rule succeeds;
 
 testing effects of reaction-ape-killing:
 	if the scheduled event is repeatable, make no decision;
@@ -2466,4 +2483,52 @@ Test play when testing bug-262:
 	Repeat with item running through treasure packs:
 		assert "[The item] should be off-stage, but it is in [the holder of the item][if holder of the item is not a room] (in [location of the item])" based on whether or not item is off-stage;
 
+Section - bug 245
+
+bug-245 is a isolated test set.
+
+Scenario when testing bug-245:
+	now the blood ape is testobject;
+	now bodmall is testobject;
+	now the hall of mirrors is bannedobject;
 	
+Initial scheduling of ape-growing:
+	now the defence of the player is 0;
+	now the health of the player is 1000;
+	now the melee of the player is 100;
+	
+ape-growing is a hiding-check hiding-reveal repeatable test step. The first move of bug-245 is ape-growing. The location-target of ape-growing is the blood ape. 
+
+testing effects of ape-growing:
+	if the size of the blood ape is greater than medium:
+		record success of ape-growing;
+		make no decision;
+	compel the action of the blood ape attacking the player;
+	
+Choosing a player reaction when testing ape-growing:
+	generate a player action of the action of exposing;
+	rule succeeds.
+
+ape-smiting is a test step. The scheduled action of ape-smiting is the action of smiting the blood ape;
+
+testing effects of ape-smiting:
+	assert "the power of the ape should be granted" based on whether or not the power of the ape is granted;
+
+bodmall-meeting is a hiding-check hiding-reveal test step. The location-target of bodmall-meeting is bodmall.
+
+Initial scheduling of bodmall-meeting:
+	now the health of bodmall is 1000;
+	now bodmall is not asleep;
+	
+bodmall-bleeding is a test step. The scheduled action of bodmall-bleeding is the action of attacking bodmall.
+
+Initial scheduling of bodmall-bleeding:
+	now the initiative of Bodmall is -2;
+	
+last initiative update rule when testing bodmall-bleeding:
+	now the initiative of Bodmall is -2;
+	
+testing effects of bodmall-bleeding:
+	assert "the player should now be bigger than medium, but [it-they of the player] is [size of the player]" based on whether or not the size of the player is greater than medium;
+	assert "bodmall should have reacted exactly once, but she reacted [reaction count of bodmall] times" based on whether or not the reaction count of Bodmall is 1;
+	assert "bodmall should be at-inactive, but she is [combat state of bodmall]" based on whether or not bodmall is at-inactive;
