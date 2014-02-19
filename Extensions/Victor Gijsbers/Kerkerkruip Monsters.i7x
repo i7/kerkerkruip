@@ -484,8 +484,8 @@ Aftereffects rule (this is the increase ape damage rule):
 	if global attacker is the player and the attack damage is greater than 0:
 		if power of the ape is granted:
 			if size of the player < maximum ape power:
-				update the combat status;
-				if combat status is not peace:
+				["hate is present" is deprecated, but it's not safe to update the combat status here, because this can happen when combat status needs to be concluding]
+				if hate is present:
 					now the size of the player is the size after the size of the player;
 					let n be 0;
 					if health of the player < permanent health of the player:
