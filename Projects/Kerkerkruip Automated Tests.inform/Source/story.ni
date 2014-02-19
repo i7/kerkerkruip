@@ -506,6 +506,10 @@ Section - Scheduling
 To decide whether testing (T - a test step):
 	decide on whether or not the scheduled event is T;
 
+To decide whether testing (D - a description of test steps):
+	Repeat with T running through D:
+		decide on whether or not testing T;
+
 The repeated moves is a number that varies;
 
 The scheduled event is a test step that varies. The scheduled event is the normal keyboard input.
@@ -2537,6 +2541,12 @@ Section - Maze Moving
 
 [Moving around in the maze - check that all people have 0 concentration and are at-inactive. Check that the right thing happens when retreating or running from an opponent in the maze. Maybe check grenade-throwing effects in the maze]
 
+To assert that (guy - a person) is located in (place - a room):
+	assert "[The guy] should be in [place], but [it-they of guy] is in [location of guy]" based on whether or not the location of guy is place.
+	
+To assert that (guy - a person) has (N - a number) levels of concentration:
+	assert "[The guy] has [concentration of guy] levels of concentration, but [it-they of guy] should have [N] levels" based on whether or not concentration of guy is N.
+	
 maze-moving is a isolated test set.
 
 Scenario when testing maze-moving:
@@ -2563,7 +2573,7 @@ Testing effects of getting-mazed:
 	assert that the location is Maze;
 	assert "the player should be at-inactive, but [it-they of player] [is-are] [combat state of the player]" based on whether or not the player is at-inactive;
 	assert "the minotaur should be at-inactive, but he is [combat state of the minotaur]" based on whether or not the minotaur is at-inactive;
-	assert that the location of the minotaur is maze-waiting-room;
+	assert that the minotaur is located in maze-waiting-room;
 	assert that maze-sound is northwest;
 	
 directionless-throwing is a test step.
@@ -2588,7 +2598,6 @@ Initial scheduling of maze-summoning:
 	now the the reusable item is a random scroll of summoning;
 	now the player carries the reusable item;
 	now the scheduled action of maze-summoning is the action of reading the reusable item.
-	
 
 Testing effects of maze-summoning:
 	assert that the event description includes "[a monster summoned] appears before you"
@@ -2600,11 +2609,63 @@ Initial scheduling of summoned-fleeing:
 	now the concentration of the player is 3;
 	now the concentration of the monster summoned is 3;
 	
+Definition: a person is not-yet-active if the act count of it is 0.
+
+First combat round rule when testing summoned-fleeing:
+	stop and save event description;
+	if every person who is not the player is not-yet-active:
+		assert that the event description includes "You move through the tunnels, quickly losing all sense of direction.[line break][line break][The monster summoned] follows you towards the sound.";
+	if the act count of the main actor is 0:
+		[this assertion can interrupt the event description]
+		assert that the main actor has 0 levels of concentration;
+	start capturing text;
+
 testing effects of summoned-fleeing:
-	assert "[the monster summoned] should be in the maze waiting room, but it is in [the location of the monster summoned]" based on whether or not the location of the monster summoned is maze-waiting-room;
-	assert "The minotaur should now be in the maze, but it is in [the location of the minotaur]" based on whether or not the location of the minotaur is the maze;
-	assert "the player has [concentration of the player] instead of none" based on whether or not the concentration of the player is 0;
-	assert "[the monster summoned] has [concentration of the monster summoned] instead of none" based on whether or not the concentration of the monster summoned is 0;
+	assert that the monster summoned is located in the maze;
+	assert that the minotaur is located in the maze;
+	if the act count of the monster summoned is 0:
+		assert that the monster summoned has 0 levels of concentration;
+	if the act count of the minotaur is 0:
+		assert that the minotaur has 0 levels of concentration;
+	
+multiple-fleeing is a test step. The scheduled action of multiple-fleeing is the action of going north.
+
+Initial scheduling of multiple-fleeing:
+	now the concentration of the minotaur is 3;
+	now the concentration of the monster summoned is 3;
+	
+Testing effects of multiple-fleeing:
+	assert that the minotaur has 0 levels of concentration;
+	assert that the monster summoned has 0 levels of concentration;
+	assert that the minotaur is located in maze-waiting-room;
+	assert that the monster summoned is located in maze-waiting-room;
+	
+multiple-sound-seeking is a repeatable test step. The scheduled action of multiple-sound-seeking is the action of going north.
+
+Testing effects of multiple-sound-seeking:
+	if the maze-sound is a cardinal direction:
+		assert that the number of people in maze-waiting-room is 2;
+		record success of multiple-sound-seeking.
+		
+first-rejoining is a test step.
+
+Initial scheduling of first-rejoining:
+	now the scheduled action of first-rejoining is the action of going maze-sound.
+	
+Testing effects of first-rejoining:
+	assert that the number of people in maze-waiting-room is 1;
+	assert that the number of people in maze [including the player] is 2;
+	
+first-maze-smiting is a test step.
+
+Initial scheduling of first-maze-smiting:
+	now opposition test subject is the player;
+	Let the enemy be a random opposer person enclosed by the location;
+	now the scheduled action of first-maze-smiting is the action of smiting the enemy.
+	
+Testing effects of first-maze-smiting:
+	assert that the player is located in the maze;
+	assert that the combat status is peace.
 	
 Section - Summoning too many monsters
 

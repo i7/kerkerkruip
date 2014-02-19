@@ -1820,15 +1820,18 @@ Instead of going in the maze when the player can move:
 [Am I right in saying that this code means you can always retreat for free in the maze?]
 
 To do the maze move:
-	now concentration of the player is 0;
+	extract the player from combat;
+	say "You move through the tunnels, quickly losing all sense of direction.";
 	repeat with item running through things in the maze:
 		unless item is the player:
 			unless item is a person:
 				remove item from play;
 			otherwise:
 				extract item from combat;
-				move item to maze-waiting-room;
-	say "You move through the tunnels, quickly losing all sense of direction.";
+				if maze-waiting-room encloses a person and the noun is maze-sound:
+					say "[conditional paragraph break][The item] follows you towards the sound.";
+				otherwise:
+					move item to maze-waiting-room;
 	if noun is maze-sound:
 		let guy be a random person in maze-waiting-room;
 		extract guy from combat [should be redundant, but won't do any harm];
