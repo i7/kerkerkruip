@@ -2485,7 +2485,7 @@ Test play when testing bug-262:
 
 Section - bug 245
 
-bug-245 is a isolated test set.
+bug-245 is a test set.
 
 Scenario when testing bug-245:
 	now the blood ape is testobject;
@@ -2532,3 +2532,7 @@ testing effects of bodmall-bleeding:
 	assert "the player should now be bigger than medium, but [it-they of the player] is [size of the player]" based on whether or not the size of the player is greater than medium;
 	assert "bodmall should have reacted exactly once, but she reacted [reaction count of bodmall] times" based on whether or not the reaction count of Bodmall is 1;
 	assert "bodmall should be at-inactive, but she is [combat state of bodmall]" based on whether or not bodmall is at-inactive;
+	
+Section - Maze Moving
+
+[Moving around in the maze - check that all people have 0 concentration and are at-inactive. Check that the right thing happens when retreating or running from an opponent in the maze. Maybe check grenade-throwing effects in the maze]
