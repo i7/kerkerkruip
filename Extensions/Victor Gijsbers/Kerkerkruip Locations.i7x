@@ -1841,6 +1841,9 @@ To do the maze move:
 			say "[line break]A sound comes from somewhere [bold type][maze-sound][roman type] from here.";
 	try looking.
 
+Instead of throwing something to in the maze:
+	take no time;
+	say "There is no point throwing [if the noun is a grenade]grenades[otherwise]things[end if] into twisty little passages.";
 
 Section - Maze label for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 

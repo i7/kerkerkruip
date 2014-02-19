@@ -1529,19 +1529,19 @@ Carry out throwing:
 	
 Section - Throwing in a direction
 
-Directional throwing is an action applying to one carried thing and one visible thing. Understand "throw [something] [a direction]" and "throw [something] to [a direction]" as directional throwing.
+Throwing it to is an action applying to one carried thing and one visible thing. Understand "throw [something] [a direction]" and "throw [something] to [a direction]" as throwing it to.
 
-Check directional throwing:
+Check throwing something to:
 	if the noun is not a grenade:
 		take no time;
 		say "That is only possible with grenades." instead.
 		
-Check directional throwing:		
+Check throwing something to:		
 	if the second noun is not a direction:
 		take no time;
 		say "You can either simply throw a grenade, or throw it in one of the cardinal directions (north, west, south, east, up, down)." instead.
 		
-Check directional throwing:
+Check throwing something to:
 	let place be the room second noun from the location;
 	unless place is a room:
 		take no time;
@@ -1550,7 +1550,7 @@ Check directional throwing:
 Grenade-return-percentage is a number that varies.
 The grenade returning rules are a rulebook.
 	
-Carry out directional throwing:
+Carry out throwing something to:
 	now exploding-location is the room second noun from the location;
 	now exploding-grenade is the noun;
 	if the number of alive thrower persons in exploding-location is 0:
@@ -2254,7 +2254,7 @@ A scroll of summoning is summoning.
 The description of a scroll of summoning is "Reading this scroll will summon an undead monster. Be careful, for it does not make the creature friendly."
 The plural of scroll of summoning is scrolls of summoning.
 
-The monster summoned as a shield is a monster that varies.
+The monster summoned is a monster that varies.
 Carry out reading a scroll of summoning:
 	if at least one alive not super-undead undead person is off-stage:
 		let guy be a random alive off-stage not super-undead undead person;
@@ -2263,10 +2263,10 @@ Carry out reading a scroll of summoning:
 		now guy is follower;
 		unless the follower percentile chance of guy is greater than 60:
 			now follower percentile chance of guy is 60;
+		now the monster summoned is guy;
 		if the combat state of the player is at-React:
-			now the monster summoned as a shield is the guy;
 			let the target for summons avoidance be eleven plus (three times the size difference of the standard measure and the guy);
-			test the spirit of the main actor against the target for summons avoidance described as "[the monster summoned as a shield] is [the size of the monster summoned as a shield]";
+			test the spirit of the main actor against the target for summons avoidance described as "[the monster summoned] is [the size of the monster summoned]";
 			if the test result is true:
 				say " [Possessive of the guy] sudden appearance does not interfere with [its-their of the main actor] attack.";
 			otherwise:

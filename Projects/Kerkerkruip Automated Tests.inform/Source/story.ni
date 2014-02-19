@@ -2536,3 +2536,75 @@ testing effects of bodmall-bleeding:
 Section - Maze Moving
 
 [Moving around in the maze - check that all people have 0 concentration and are at-inactive. Check that the right thing happens when retreating or running from an opponent in the maze. Maybe check grenade-throwing effects in the maze]
+
+maze-moving is a isolated test set.
+
+Scenario when testing maze-moving:
+	now the minotaur is testobject;
+	now the hall of mirrors is bannedobject;
+	now the reusable item is a random flash grenade;
+	
+minotaur-meeting is a hiding-check hiding-reveal test step. The first move of maze-moving is minotaur-meeting. The location-target of minotaur-meeting is the minotaur.
+
+Initial scheduling of minotaur-meeting:
+	now the health of the player is 1000;
+	now the defence of the player is 0;
+	
+getting-mazed is a repeatable test step.
+
+Initial scheduling of getting-mazed:
+	compel the action of the minotaur attacking the player.
+
+Testing effects of getting-mazed:
+	if the event description matches the regular expression "minotaur deals":
+		now getting-mazed is not repeatable;
+	otherwise:
+		make no decision;
+	assert that the location is Maze;
+	assert "the player should be at-inactive, but [it-they of player] [is-are] [combat state of the player]" based on whether or not the player is at-inactive;
+	assert "the minotaur should be at-inactive, but he is [combat state of the minotaur]" based on whether or not the minotaur is at-inactive;
+	assert that the location of the minotaur is maze-waiting-room;
+	assert that maze-sound is northwest;
+	
+directionless-throwing is a test step.
+
+Initial scheduling of directionless-throwing:
+	now the scheduled action of directionless-throwing is the action of throwing the reusable item to north;
+
+Testing effects of directionless-throwing:
+	assert that the event description includes "There is no point throwing grenades into twisty little passages";
+	assert "Trying to throw things in the maze should not take time" based on whether or not the take no time boolean is true;
+	assert that the reusable item is carried.
+	
+sound-finding is a repeatable test step. The scheduled action of sound-finding is the action of going north.
+
+Testing effects of sound-finding:
+	if maze-sound is a cardinal direction:
+		record success of sound-finding.
+		
+maze-summoning is a test step.
+
+Initial scheduling of maze-summoning:
+	now the the reusable item is a random scroll of summoning;
+	now the player carries the reusable item;
+	now the scheduled action of maze-summoning is the action of reading the reusable item.
+	
+
+Testing effects of maze-summoning:
+	assert that the event description includes "[a monster summoned] appears before you"
+	
+summoned-fleeing is a test step.
+
+Initial scheduling of summoned-fleeing:
+	now the scheduled action of summoned-fleeing is the action of going maze-sound;
+	now the concentration of the player is 3;
+	now the concentration of the monster summoned is 3;
+	
+testing effects of summoned-fleeing:
+	assert "[the monster summoned] should be in the maze waiting room, but it is in [the location of the monster summoned]" based on whether or not the location of the monster summoned is maze-waiting-room;
+	assert "The minotaur should now be in the maze, but it is in [the location of the minotaur]" based on whether or not the location of the minotaur is the maze;
+	assert "the player has [concentration of the player] instead of none" based on whether or not the concentration of the player is 0;
+	assert "[the monster summoned] has [concentration of the monster summoned] instead of none" based on whether or not the concentration of the monster summoned is 0;
+	
+Section - Summoning too many monsters
+
