@@ -166,10 +166,10 @@ Section - Hiding
 To hide:
 	["hate is present" is deprecated, but I don't think it's safe to update the combat status here, because this can happen when combat status needs to be concluding]
 	if hate is present:
-		say "You fail to hide."
+		say "You fail to hide.";
 	otherwise:
 		say "You blend into the shadows.";
-		now the player is hidden;
+		now the player is hidden
 
 Part - Smoke
 
