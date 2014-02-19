@@ -164,14 +164,12 @@ To decide whether there is no perceived threat for (guy - a person):
 Section - Hiding
 
 To hide:
-	update the combat status;
-	if the combat status is peace:
-		say "You blend into the shadows.";
-		now the player is hidden;
+	["hate is present" is deprecated, but I don't think it's safe to update the combat status here, because this can happen when combat status needs to be concluding]
+	if hate is present:
+		say "You fail to hide.";
 	otherwise:
-		say "You fail to hide."
-
-
+		say "You blend into the shadows.";
+		now the player is hidden
 
 Part - Smoke
 
