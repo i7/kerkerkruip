@@ -1817,6 +1817,8 @@ Maze-sound is a direction that varies.
 Instead of going in the maze when the player can move:
 	do the maze move.		
 
+[Am I right in saying that this code means you can always retreat for free in the maze?]
+
 To do the maze move:
 	now concentration of the player is 0;
 	repeat with item running through things in the maze:
@@ -1824,12 +1826,13 @@ To do the maze move:
 			unless item is a person:
 				remove item from play;
 			otherwise:
+				extract item from combat;
 				move item to maze-waiting-room;
 	say "You move through the tunnels, quickly losing all sense of direction.";
 	if noun is maze-sound:
 		let guy be a random person in maze-waiting-room;
+		extract guy from combat [should be redundant, but won't do any harm];
 		move guy to maze;
-		now concentration of guy is 0;
 	now maze-sound is northwest;
 	update the combat status;
 	if combat status is peace:
