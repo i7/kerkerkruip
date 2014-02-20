@@ -2328,7 +2328,9 @@ To do the adamantine blade shuffle:
 	now the dodge bonus of the adamantine blade is a random number between -1 and 2;
 	now the parry-against bonus of the adamantine blade is a random number between -1 and 2;
 	now the parry-with bonus of the adamantine blade is a random number between -1 and 2;
-	now the adamantine blade timer is a random number between 12 and 20.
+	now the adamantine blade timer is a random number between 12 and 20;
+	now the adamantine blade is not rusted;
+	now the heat strength of the adamantine blade is 0.
 
 Every turn when the adamantine blade is not off-stage (this is the adamantine blade countdown rule):
 	if the main actor is the player:
