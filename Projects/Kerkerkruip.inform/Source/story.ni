@@ -1,4 +1,3 @@
-
 "Kerkerkruip" by Victor Gijsbers
 
 The story headline is "An IF roguelike".
@@ -23,7 +22,6 @@ Include Questions by Michael Callaghan.
 Include version 1/140209 of Interpreter Sniffing by Friends of I7.
 
 
-
 Section - Graphics and Windows
 
 [ Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. It is not necessary to comment out Flexible Windows when Glimmr is commented in. ]
@@ -42,7 +40,7 @@ Include Kerkerkruip Windows by Erik Temple.
 Section - Include ATTACK
 
 [ Get the latest ATTACK at https://github.com/i7/ATTACK ]
-Include version 5/140131 of Inform ATTACK by Victor Gijsbers.
+Include version 5/140220 of Inform ATTACK by Victor Gijsbers.
 
 
 
@@ -228,6 +226,8 @@ To ask a closed question, in number mode, in menu mode, in yes/no mode, in gende
 	if in menu mode:
 		repeat with counter running from 1 to the number of entries in the current question menu:
 			say "[counter] - [entry counter of the current question menu][line break]".
+
+
 
 
 
