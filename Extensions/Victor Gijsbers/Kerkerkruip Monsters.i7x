@@ -4958,7 +4958,7 @@ Section - Power of Israfel
 The power of Israfel is a power. Israfel grants power of Israfel.
 The power level of power of Israfel is 4.
 The command text of power of Israfel is "link, reform".
-The description of power of Israfel is "Type: active ability.[paragraph break]Command: link [italic type]someone[roman type].[paragraph break]The 'link' command will link your spirit to that of another person. Until you link to someone else, you will benefit from the concentration of the person you linked to just as if it were your own. Every turn, the link has a 10% probability of unravelling; but this probability is decreased by 1% for every 3 points of spirit you have, to a minimun of 1% at 27 spirit.[paragraph break]Command: reform.[paragraph break]You immediately heal for an amount of damage equal to your spirit score. However, your spirit score permanently drops by 5 points."
+The description of power of Israfel is "Type: active ability.[paragraph break]Command: link [italic type]someone[roman type].[paragraph break]The 'link' command will link your spirit to that of another person. Until you link to someone else, you will benefit from the concentration of the person you linked to just as if it were your own. Every turn, the link has a 10% probability of unravelling; but this probability is decreased by 1% for every 3 points of spirit you have, to a minimum of 1% at 27 spirit.[paragraph break]Command: reform.[paragraph break]You immediately heal for an amount of damage equal to your spirit score. However, your spirit score permanently drops by 5 points."
 The power-name of power of Israfel is "power of Israfel".
 
 Table of Enemy Powers (continued)
