@@ -1622,7 +1622,7 @@ Killing rule (this is the explode after death rule):
 				let n be a random number between 5 and m;
 				if health of the explosion victim is not greater than n:
 					say "Your body explodes vehemently, killing [the explosion victim][if the abyss of the soul and the player share a world]. Your soul attempts to swallow that of your enemy, but before this can happen, you are both sucked into the abyss of the soul[otherwise if the level of the explosion victim is greater than 4]. Your soul attempts to swallow that of your enemy, but [the explosion victim] is quicker and far more powerful, swallowing yours and thus coming back to life. You, however, are destroyed for all eternity[otherwise]! As your soul swallows that of your enemy whole, you feel your body reconstituting itself[end if].[paragraph break]";
-					if the level of the explosion victim is not greater than 5:
+					if the level of the explosion victim is not greater than 4:
 						unless the abyss of the soul and the player share a world:
 							now the health of the player is 1;
 							now the health of the explosion victim is -1;
