@@ -1820,8 +1820,11 @@ Instead of going in the maze when the player can move:
 [Am I right in saying that this code means you can always retreat for free in the maze?]
 
 To do the maze move:
-	extract the player from combat;
-	say "You move through the tunnels, quickly losing all sense of direction.";
+	if hate is present:
+		now the player is runner;
+	extract the player from combat, giving enemies a chance to hit;
+	say "You [if the player is runner]flee[otherwise]move[end if] through the tunnels, quickly losing all sense of direction.";
+	now the player is not runner;
 	repeat with item running through things in the maze:
 		unless item is the player:
 			unless item is a person:

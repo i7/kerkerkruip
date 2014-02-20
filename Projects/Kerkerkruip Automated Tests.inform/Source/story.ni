@@ -815,11 +815,13 @@ For reading a command when done testing is false:
 Chapter - Helpful phrases
 
 To extract (guy - a person) to (place - a room):
+	log "moving [guy] to [place]";
 	extract guy from combat;
 	move guy to place;
 	update the combat status;
 	
 To have (guy - a person) defeat (loser - a person):
+	log "having [guy] defeat [loser]";
 	Now the health of loser is -1;
 	Have an event of guy killing loser;	
 	
@@ -1980,10 +1982,15 @@ To swap the occupants of (first place - a room) and (second place - a room):
 			extract guy to first place;
 		Repeat with guy running through people in swap place:
 			extract guy to second place;
+			
+To set the tension to (N - a number):
+	log "Setting tension to [N]";
+	now the tension is N;
 		
 Scenario when testing banshees gone wild:
 	now Hall of Raging Banshees is testobject;
 	now the blood ape is testobject;
+	now the reaper is testobject;
 	now a random scroll of death is testobject;
 	
 Test play when testing banshees gone wild:
@@ -1994,7 +2001,7 @@ Test play when testing banshees gone wild:
 	if the retreat location is occupied:
 		swap the occupants of the retreat location and a random unoccupied placed room;
 	try taking off the cloak of shadows;
-	now the tension is 10;
+	set the tension to 10;
 	now the health of the blood ape is 1;
 	now the defence of the player is 100;
 	now the health of the player is 100;
@@ -2021,29 +2028,34 @@ banshee-returning is a test step. The next move of banshee-fleeing is banshee-re
 Initial scheduling for banshee-returning:
 	Let the way be the best route from the location to the hall of raging banshees;
 	now the scheduled action of banshee-returning is the action of going the way;
+	extract the reaper to the location [to keep the tension from dissipating];
+	set the tension to 10.
+
+testing effects of banshee-returning:
+	assert "Tension should be at least 10" based on whether or not the tension is at least 10;
 
 banshee-return-waiting is a test step. The next move of banshee-returning is banshee-return-waiting.
 	
-Initial scheduling for banshee-return-waiting:
-	now the tension is 10;
+[Initial scheduling for banshee-return-waiting:
+	 set the tension to 10;]
 	
 testing effects of banshee-return-waiting:
 	assert "Tension should be at least 10" based on whether or not the tension is at least 10;
 	assert that the event description includes "banshees suddenly break loose";
 	assert that the living banshees boolean is true;
 	
-reaction-ape-killing is a test step. The next move of banshee-return-waiting is reaction-ape-killing. 
+reaction-ape-killing is a repeatable test step. The next move of banshee-return-waiting is reaction-ape-killing. 
 
 Initial scheduling of reaction-ape-killing:
 	compel the action of the blood ape attacking the player;
-	Let the way be the best route from the location to the retreat location;
-	Now the scheduled action of reaction-ape-killing is the action of going the way.
 	
 Choosing a player reaction when reaction-ape-killing is the scheduled event:
 	if the player carries a scroll of death:
 		let the death-scroll be a random carried scroll of death;
 		generate a player action of the action of reading the death-scroll;
 		now the scheduled event is not repeatable;
+		Let the way be the best route from the location to the retreat location;
+		Now the scheduled action of reaction-ape-killing is the action of going the way;
 		rule succeeds;
 
 testing effects of reaction-ape-killing:
@@ -2614,7 +2626,11 @@ Definition: a person is not-yet-active if the act count of it is 0.
 First combat round rule when testing summoned-fleeing:
 	stop and save event description;
 	if every person who is not the player is not-yet-active:
-		assert that the event description includes "You move through the tunnels, quickly losing all sense of direction.[line break][line break][The monster summoned] follows you towards the sound.";
+		assert that the event description includes "You flee through the tunnels, quickly losing all sense of direction.[line break][line break][The monster summoned] follows you towards the sound.";
+		if the monster summoned is non-attacker:
+			assert 0 hits by the monster summoned;
+		otherwise:
+			assert 1 hit by the monster summoned;
 	if the act count of the main actor is 0:
 		[this assertion can interrupt the event description]
 		assert that the main actor has 0 levels of concentration;
@@ -2627,7 +2643,7 @@ testing effects of summoned-fleeing:
 		assert that the monster summoned has 0 levels of concentration;
 	if the act count of the minotaur is 0:
 		assert that the minotaur has 0 levels of concentration;
-	
+
 multiple-fleeing is a test step. The scheduled action of multiple-fleeing is the action of going north.
 
 Initial scheduling of multiple-fleeing:
@@ -2639,6 +2655,7 @@ Testing effects of multiple-fleeing:
 	assert that the monster summoned has 0 levels of concentration;
 	assert that the minotaur is located in maze-waiting-room;
 	assert that the monster summoned is located in maze-waiting-room;
+	assert 1 hit by the minotaur;
 	
 multiple-sound-seeking is a repeatable test step. The scheduled action of multiple-sound-seeking is the action of going north.
 
