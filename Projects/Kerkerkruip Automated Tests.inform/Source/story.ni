@@ -413,15 +413,18 @@ To log (T - an indexed text):
 	if currently capturing is true, start capturing text;
 	
 To transcribe (T - an indexed text):
-	let currently capturing be whether or not text capturing is active;
-	if currently capturing is false, start capturing text;
-	say "[bracket][T][close bracket][command clarification break]";
-	if currently capturing is false, transcribe and stop capturing text;
+	let message be indexed text;
+	now message is "[bracket][T][close bracket][command clarification break]";
+	if text capturing is active:
+		say message;
+	otherwise:
+		append "[message]" to file of test transcript;
 	
 To transcribe and stop capturing text/--:
 	stop capturing text;
 	if "[the captured text]" matches the regular expression ".":
-		append "*** [current test set], [scheduled event] turn [the turn count], assertion count=[test assertion count] ***[line break][the captured text]" to file of test transcript;
+		transcribe "[current test set], [scheduled event] turn [the turn count], assertion count=[test assertion count]";
+		append "[the captured text]" to file of test transcript;
 	 
 To transcribe and restart capturing text/--:
 	if text capturing is active, transcribe and stop capturing text;
@@ -815,13 +818,13 @@ For reading a command when done testing is false:
 Chapter - Helpful phrases
 
 To extract (guy - a person) to (place - a room):
-	log "moving [guy] to [place]";
+	transcribe "moving [guy] to [place]";
 	extract guy from combat;
 	move guy to place;
 	update the combat status;
 	
 To have (guy - a person) defeat (loser - a person):
-	log "having [guy] defeat [loser]";
+	transcribe "having [guy] defeat [loser]";
 	Now the health of loser is -1;
 	Have an event of guy killing loser;	
 	
@@ -1971,6 +1974,8 @@ Section - Banshees Gone Wild - bug 248
 
 banshees gone wild is an test set.
 
+[First every turn: say "Every turn rules run.";]
+
 Definition: A room is occupied rather than unoccupied if it encloses a person.
 
 To swap the occupants of (first place - a room) and (second place - a room):
@@ -1984,7 +1989,7 @@ To swap the occupants of (first place - a room) and (second place - a room):
 			extract guy to second place;
 			
 To set the tension to (N - a number):
-	log "Setting tension to [N]";
+	transcribe "Setting tension to [N]";
 	now the tension is N;
 		
 Scenario when testing banshees gone wild:
@@ -2559,7 +2564,7 @@ To assert that (guy - a person) is located in (place - a room):
 To assert that (guy - a person) has (N - a number) levels of concentration:
 	assert "[The guy] has [concentration of guy] levels of concentration, but [it-they of guy] should have [N] levels" based on whether or not concentration of guy is N.
 	
-maze-moving is a isolated test set.
+maze-moving is a test set.
 
 Scenario when testing maze-moving:
 	now the minotaur is testobject;
