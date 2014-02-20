@@ -139,6 +139,9 @@ Before showing the title screen (this is the load achievements rule):
 	if File of Achievements exists:
 		read File Of Achievements into the Table of Held Achievements;
 
+To save achievements:
+	write File of Achievements from Table of Held Achievements;
+
 Section - Table of Achievements
 
 An achievement is a kind of value. Some achievements are defined by the Table of Achievements.
@@ -180,7 +183,7 @@ To award achievement (current achievement - an achievement):
 	if there is no held difficulty entry or the held difficulty entry is less than the difficulty:
 		now held difficulty entry is difficulty;
 		say "[line break]You have been awarded the [bold type][current achievement][roman type] achievement!";
-		write File of Achievements from Table of Held Achievements;
+		save achievements;
 
 
 

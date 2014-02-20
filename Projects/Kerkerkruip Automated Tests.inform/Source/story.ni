@@ -50,7 +50,7 @@ Use maximum capture buffer length of at least 16384.
 Use maximum indexed text length of at least 16384. 
 
 First when play begins (this is the random seed rule):
-	Let the seed be 20;
+	Let the seed be 21;
 	log "Seeding random number generator with [seed]";
 	seed the random-number generator with the seed.
 
@@ -197,6 +197,11 @@ To update the monster statistics:
 	
 Section - Limited Help (In place of Section - Help in Kerkerkruip Help and Hints by Victor Gijsbers)
 
+Section - No File of Acheivements (in place of Section - File of Achievements in Kerkerkruip Persistent Data by Victor Gijsbers)
+
+To save achievements:
+	do nothing.
+	
 Section - No Achievements (in place of Section - Achievements in Kerkerkruip Help and Hints by Victor Gijsbers)
 
 Section - No Test Object File (in place of Section - The test object file in Kerkerkruip Tests by Victor Gijsbers)
@@ -2691,7 +2696,7 @@ Testing effects of first-maze-smiting:
 	
 Section - Hiding Penalites
 
-hiding-penalties is a isolated test set.
+hiding-penalties is a test set.
 
 scenario when testing hiding-penalties:
 	now bodmall is testobject;
@@ -2728,6 +2733,6 @@ Testing effects of malygris-robbing:
 	assert that bodmall is located in the location;
 	assert that the event description includes "Something has stopped you from teleporting";
 	assert that the event description includes "picking stuff up";
-	
+
 Section - Summoning too many monsters
 
