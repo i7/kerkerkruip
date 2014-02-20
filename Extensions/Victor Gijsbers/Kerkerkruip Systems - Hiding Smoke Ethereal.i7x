@@ -151,6 +151,8 @@ Carry out searching:
 	now hiding action penalty is 2;
 	now hiding action penalty text is "searching".	
 	
+Sudden combat reset rule (this is the reset hiding penalties when leaving the room rule):
+	now hiding action penalty is 0.
 
 Section - No perceived threat
 

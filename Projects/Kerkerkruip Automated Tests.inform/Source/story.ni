@@ -2558,8 +2558,8 @@ Section - Maze Moving
 
 [Moving around in the maze - check that all people have 0 concentration and are at-inactive. Check that the right thing happens when retreating or running from an opponent in the maze. Maybe check grenade-throwing effects in the maze]
 
-To assert that (guy - a person) is located in (place - a room):
-	assert "[The guy] should be in [place], but [it-they of guy] is in [location of guy]" based on whether or not the location of guy is place.
+To assert that (item - a thing) is located in (place - a room):
+	assert "[The item] should be in [place], but [it-they of item] is in [location of item]" based on whether or not the location of item is place.
 	
 To assert that (guy - a person) has (N - a number) levels of concentration:
 	assert "[The guy] has [concentration of guy] levels of concentration, but [it-they of guy] should have [N] levels" based on whether or not concentration of guy is N.
@@ -2688,6 +2688,46 @@ Initial scheduling of first-maze-smiting:
 Testing effects of first-maze-smiting:
 	assert that the player is located in the maze;
 	assert that the combat status is peace.
+	
+Section - Hiding Penalites
+
+hiding-penalties is a isolated test set.
+
+scenario when testing hiding-penalties:
+	now bodmall is testobject;
+	
+bodmall-sneaking is a hiding-check test step. the first move of hiding-penalties is bodmall-sneaking. The location-target of bodmall-sneaking is bodmall.
+
+Initial scheduling of bodmall-sneaking:
+	Let G be a random teleportation grenade;
+	now G is in the location of Bodmall;
+	now the teleportation beacon is in the location of Malygris;
+	now the dimensional anchor is in the location of Malygris;
+	now teleportation-beacon-on is true;
+	now the scheduled action of bodmall-sneaking is the action of throwing G;
+	
+Testing effects of bodmall-sneaking:
+	assert that the event description includes "first taking the teleportation grenade";
+	assert that the event description includes "Malygris, perhaps the greatest of all living sorcerers, is standing here";
+	assert that the event description does not include "picking stuff up";
+	
+malygris-robbing is a hiding-check test step.
+
+Initial scheduling of malygris-robbing:
+	Let G be a random teleportation grenade;
+	now G is in the location;
+	now the scheduled action of malygris-robbing is the action of throwing G;
+	repeat with guy running through people in the location:
+		assert "teleportation should be impossible for [guy]" based on whether or not teleportation is impossible for guy;
+	
+[if the player teleports away but reappears in the same room, their hiding penalty will be wiped out. This could be considered a bug, but I don't think it's worth fixing. Anyway, we can avoid it for testing purposes by using the dimensional anchor.]
+
+Testing effects of malygris-robbing:
+	assert that the teleportation beacon is located in the location;
+	assert that malygris is located in the location;
+	assert that bodmall is located in the location;
+	assert that the event description includes "Something has stopped you from teleporting";
+	assert that the event description includes "picking stuff up";
 	
 Section - Summoning too many monsters
 
