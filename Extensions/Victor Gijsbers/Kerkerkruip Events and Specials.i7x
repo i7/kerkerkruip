@@ -40,7 +40,11 @@ Instead of going in Elemental Plane of Smoke when the player can move:
 			move item to Elemental Plane of Smoke;
 			add item to lijst;
 			have the parser notice item;
-	say "[if lijst is not empty]Running through the smoke, you stumble across [a list of things that list-inhabit lijst][otherwise][one of]You stumble blindly through the smoke[or]You run through an endless world of clouds[or]Nothing appears to change, no matter how long you run[as decreasingly likely outcomes][end if].".
+	let lijst2 be a list of person;
+	repeat with guy running through persons in Elemental Plane of Smoke:
+		unless guy is the player:
+			add guy to lijst2;
+	say "[if lijst is not empty]Running through the smoke, you stumble across [a list of things that list-inhabit lijst][otherwise][one of]You stumble blindly through the smoke[or]You run through an endless world of clouds[or]Nothing appears to change, no matter how long you run[as decreasingly likely outcomes][end if][if lijst2 is not empty]. You feel that you are being followed by [the list of things that list-inhabit lijst2][end if].".
 			
 Elemental Plane of Smoke Storage is a room.
 Elemental Plane of Smoke Storage is not placeable.
