@@ -718,7 +718,9 @@ After printing the name of an asleep person while listing contents of a room:
 	say " (sleeping)[run paragraph on]".
 
 A followers rule (this is the follower must be able to act independently rule):
-	abide by the independent action rules;
+	consider the independent action rules;
+	if rule failed:
+		rule fails;
 
 [For stealing items when someone is asleep, see Kerkerkruip Actions and UI.]
 	
