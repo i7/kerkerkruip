@@ -1796,8 +1796,11 @@ testing effects of fell-also-killing:
 	
 Section - Temporary Blood Magic from Nomos
 
-temporary Nomos blood magic is a test set.
+temporary Nomos blood magic is a isolated test set.
 
+first intervention possible when testing temporary Nomos blood magic:
+	rule fails.
+	
 Scenario when testing temporary Nomos blood magic:
 	now Bodmall is testobject;
 	now the jumping bomb is testobject;
