@@ -111,6 +111,10 @@ Chapter - Conscious
 Definition: a person (called guy) is conscious if (guy is alive) and (guy is not asleep).
 Definition: a person (called guy) is unconscious if guy is not conscious.
 
+Chapter - Elsewhere
+
+Definition: a person (called guy) is elsewhere if the location of guy is not the location of the player.
+
 Chapter - Active-Opposer
 
 [This adjective uses the opposition test subject in the same way as the opposer adjective]
@@ -240,6 +244,31 @@ Status attribute rule (this is the flying status rule):
 		otherwise:
 			say "[@ check initial position of attribute]winged and flying[run paragraph on]";
 
+Chapter - Independent Action
+
+[The independent action rules use the same test subject as the followers rules. You can set it once for both, but don't change it in between!]
+
+To decide whether (guy - a person) is acting independently:
+	now test subject is guy;
+	consider the independent action rules;
+	if rule failed, no;
+	yes.
+
+The independent action rules are a rulebook.
+
+A first independent action rule (this is the can't act independently when unconscious rule):
+	if the test subject is not conscious, rule fails;
+
+A first independent action rule (this is the must share player's world to act independently rule):
+	unless the player and test subject share a world, rule fails;
+
+[This is a more permissive alternative to the must share player's world to act independently rule:]
+[A first independent action rule (this is the can't act independently off-stage rule):
+	if the test subject is off-stage, rule fails;]
+
+A last independent action rule (this is the don't normally act independently when the player can see you rule):
+	if the location of the test subject is the location of the player, rule fails;
+
 Chapter - Followers
 
 [Followers consider the follower rules. If these do not fail, they attempt to move one room towards the player.]
@@ -253,7 +282,7 @@ Every turn (this is the have followers follow rule):
 	if main actor is the player:
 		now world test subject is player;
 		repeat with guy running through worldsharer follower persons:
-			if the location of guy is not the location of the player:
+			if guy is elsewhere:
 				now test subject is guy;
 				consider the followers rules;
 				unless rule failed:
@@ -688,9 +717,8 @@ The use initial appearance in room descriptions rule is not listed in any rulebo
 After printing the name of an asleep person while listing contents of a room:
 	say " (sleeping)[run paragraph on]".
 
-A followers rule (this is the asleep follower cannot follow rule):
-	if test subject is asleep:
-		rule fails.
+A followers rule (this is the follower must be able to act independently rule):
+	abide by the independent action rules;
 
 [For stealing items when someone is asleep, see Kerkerkruip Actions and UI.]
 	

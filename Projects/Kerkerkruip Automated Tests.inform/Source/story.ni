@@ -2734,5 +2734,68 @@ Testing effects of malygris-robbing:
 	assert that the event description includes "Something has stopped you from teleporting";
 	assert that the event description includes "picking stuff up";
 
+Section - Imp Teleporting Into Dreams
+
+bug-280 is a isolated test set.
+
+Scenario when testing bug-280:
+	now the reaper is testobject;
+	now the lair of the imp is testobject;
+	now the dimensional anchor is bannedobject;
+	now the teleportation beacon is bannedobject; [test with the imp?]
+	now the dream of briar roses is current-test-dream;
+	now the reusable item is a random morphean grenade.
+	
+reaper-seeking is a hiding-check hiding-reveal test step. The  first move of bug-280 is reaper-seeking. The location-target of reaper-seeking is the reaper.
+
+Initial scheduling of reaper-seeking:
+	assert "Lair of the imp should be placed" based on whether or not lair of the imp is placed;
+	assert "Imp should be denizen" based on whether or not the imp is denizen;
+	assert "Dimensional anchor is in [location of the dimensional anchor]" based on whether or not the dimensional anchor is off-stage;
+	now the health of the player is 1000.
+	
+Testing effects of reaper-seeking:
+	assert "the combat status should not be peace" based on whether or not the combat status is not peace;
+
+imp-dreaming is a repeatable uneventful test step. The maximum repeats of imp-dreaming is 20.
+
+Initial scheduling of imp-dreaming:
+	now the scheduled action of imp-dreaming is the action of throwing the reusable item.
+
+Testing effects of imp-dreaming:
+	assert that the location is garden of thorns;
+	if the location of the imp is the location:
+		record failure of imp-dreaming with message "The imp teleported into the dream (act count=[act count of the imp])";
+	wake the player up;
+	update the combat status; [risky?]
+	assert "we should be with the reaper in [location of the reaper] but we are in [the location]" based on whether or not the location is the location of the reaper;
+	assert "the combat status should not be peace" based on whether or not the combat status is not peace;
+	
+imp-appearing is a repeatable test step.
+
+Testing effects of imp-appearing:
+	if the location of the imp is the location:
+		record success of imp-appearing;
+		
+imp-thieving is a repeatable test step.
+
+Testing effects of imp-thieving:
+	if the event description matches the regular expression "The imp grabs the package of ment with its thieving little claws":
+		record success of imp-thieving;
+		
+imp-vanishing is a repeatable test step. The scheduled action of imp-vanishing is the action of attacking the imp;
+
+Testing effects of imp-vanishing:
+	if the location of the imp is lair of the imp:
+		record success of imp-vanishing;
+		
+imp-stashing is a repeatable test step. The maximum repeats of imp-stashing is 2.
+
+Testing effects of imp-stashing:
+	if a package of ment is in the lair of the imp:
+		record success of imp-stashing;
+
+[TODO: test armadillo and reaper following]
+
 Section - Summoning too many monsters
 

@@ -394,7 +394,7 @@ Check an actor challenging someone in the Maze when the location is Arena of the
 	[insert punishments here?]
 	stop the action;
 
-First every turn when the location is Arena of the Gods:
+First every turn when the location is Arena of the Gods (this is the reject enslavement in Arena of the Gods rule):
 	Repeat with offender running through god-champion people who do not oppose the player:
 		if offender does not oppose the player:
 			say "[The challenged god] is angered by [possessive of the offender] lack of faith! [Divine lightning strikes offender].";

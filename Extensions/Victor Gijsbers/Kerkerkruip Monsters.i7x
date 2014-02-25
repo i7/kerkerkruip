@@ -685,25 +685,25 @@ The armadillo stomach is privately-named.
 
 Section - Armadillo also eats when the player is not around
 
-Every turn when the armadillo is denizen (this is the armadillo eats when the player is not around rule):
-	unless the ravenous armadillo is asleep:
-		if the location of the player is not the location of the ravenous armadillo:
-			if a random chance of 1 in 5 succeeds:
-				try the ravenous armadillo armadillo-eating.
+Independent action rule when test subject is the ravenous armadillo (this is the armadillo acts when it can't see the player rule):
+	if there is no perceived threat for the ravenous armadillo, rule succeeds;
+
+Every turn when the ravenous armadillo is acting independently (this is the armadillo eats when the player is not around rule):
+	if the ravenous armadillo is elsewhere:
+		if a random chance of 1 in 5 succeeds:
+			try the ravenous armadillo armadillo-eating.
 
 Section - Armadillo moves around
 
-Every turn when the armadillo is denizen (this is the armadillo moves when the player is not around rule):
-	unless the armadillo is asleep:
-		if the location of the player is not the location of the ravenous armadillo or there is no perceived threat for the ravenous armadillo:
-			if a random chance of 1 in 20 succeeds:
-				if at least one room is adjacent to the location of the ravenous armadillo:
-					let place2 be the location of the ravenous armadillo; [needed because of a bug in inform]
-					let place be a random room which is adjacent to place2;
-	[				let place be a random room which is adjacent to the location of the ravenous armadillo;]
-					let way be the direction from the location of the ravenous armadillo to place;
-					[say "TEST CODE: trying the armadillo going [way].";]
-					try the ravenous armadillo going way.
+Every turn when the ravenous armadillo is acting independently (this is the armadillo moves when the player is not around rule):
+	if a random chance of 1 in 20 succeeds:
+		if at least one room is adjacent to the location of the ravenous armadillo:
+			let place2 be the location of the ravenous armadillo; [needed because of a bug in inform]
+			let place be a random room which is adjacent to place2;
+	[		let place be a random room which is adjacent to the location of the ravenous armadillo;]
+			let way be the direction from the location of the ravenous armadillo to place;
+			[say "TEST CODE: trying the armadillo going [way].";]
+			try the ravenous armadillo going way.
 
 Section - Power of the Armadillo
 
@@ -6627,27 +6627,31 @@ Carry out an actor teleporting (this is the imp teleporting rule):
 
 The imp teleporting rule is listed before the teleportation beacon rule in the carry out teleporting rules.
 
-
-Every turn when the imp is on-stage (this is the imp not absent AI rule):
-	unless the imp is asleep:
-		unless combat status is peace:
-			if main actor is the player:
-				if location of the imp is not location of the player:
-					if location of the imp is not Lair of the Imp:
-						try the imp teleporting;
-					otherwise:
-						repeat with item running through things carried by the imp:
-							move item to location of the imp;
-						if a random chance of 1 in 5 succeeds:
-							let lijst be a list of things; [Don't teleport if there is nothing to steal!]
-							repeat with item running through things carried by the player:
-								if item is not readied and item is not worn:
-									add item to lijst;
-							repeat with item running through things in the location:
-								if item is not a person and item is not fixed in place and item is not scenery and item is not readied and item is not worn:
-									add item to lijst;
-							unless lijst is empty:
-								try the imp teleporting.
+Independent action rule when test subject is the imp (this is the imp acts when the player is in worldsharing combat rule):
+	if combat status is peace:
+		rule fails;
+	if the main actor is not the player:
+		rule fails;
+	[if we decide to use the can't act independently off-stage rule instead of the must share player's world to act independently rule, we'll need this:
+	unless the player and the imp share a world:
+		rule fails;]
+	
+Every turn when the imp is acting independently (this is the imp not absent AI rule):
+	if location of the imp is not Lair of the Imp:
+		try the imp teleporting;
+	otherwise:
+		repeat with item running through things carried by the imp:
+			move item to location of the imp;
+		if a random chance of 1 in 5 succeeds:
+			let lijst be a list of things; [Don't teleport if there is nothing to steal!]
+			repeat with item running through things carried by the player:
+				if item is not readied and item is not worn:
+					add item to lijst;
+			repeat with item running through things in the location:
+				if item is not a person and item is not fixed in place and item is not scenery and item is not readied and item is not worn:
+					add item to lijst;
+			unless lijst is empty:
+				try the imp teleporting.
 			
 
 Section - Prose				

@@ -44,7 +44,7 @@ To decide which person is the/-- true body of (guy - a person):
 
 Section - Starting dreams
 
-Every turn when the player is asleep and dreaming is false:
+Every turn when the player is asleep and dreaming is false (this is the start a dream rule):
 	do a dream.
 
 Table of Candidate Dreams
