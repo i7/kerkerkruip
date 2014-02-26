@@ -760,10 +760,13 @@ The assertion failures count is a number variable.
 
 [ Assert that two values are the same ]
 To assert that/-- (A - a value) is (B - a value):
+	assert that A is B with label "value";
+	
+To assert that/-- (A - a value) is (B - a value) with label (T - an indexed text):
 	record a test attempt;
 	unless A is B:
 		Let error_msg be an indexed text;
-		now error_msg is "Expected: [B], Got: [A][line break]";
+		now error_msg is "Expected [T]: [B], Got: [A][line break]";
 		record a failure report of error_msg;
 
 To assert truth of/-- (C - a truth state) with message (T - an indexed text):
@@ -1819,6 +1822,7 @@ To decide what number is the chance of (guy - a person) remaining concentrated:
 	decide on the remain concentrated chance.
 	
 Test play when testing temporary Nomos blood magic:
+	now every room is not rust-spored;
 	now the health of the player is 1000;
 	now the defence of the player is 100;
 	extract the player to the location of bodmall;
@@ -1884,11 +1888,10 @@ testing effects of second-gown-timeout:
 		now second-gown-timeout is not repeatable.
 		
 [This shouldn't need to be repeatable but something weird is going on with turn structure]
-malleus-feeding is a repeatable test step. The next move of second-gown-timeout is malleus-feeding. The scheduled action of malleus-feeding is the action of attacking the swarm of daggers.
+malleus-feeding is a repeatable test step. The next move of second-gown-timeout is malleus-feeding. The scheduled action of malleus-feeding is the action of examining the malleus maleficarum.
 
 Initial scheduling for malleus-feeding:
 	extract the player to the location of the jumping bomb;
-	now the nomos counter is 0;
 	try smiting the jumping bomb;
 	extract the player to temple of nomos;
 	have the player sacrifice a random granted power;
@@ -1906,14 +1909,15 @@ Initial scheduling for malleus-feeding:
 	transcribe and restart capturing;
 	try examining the malleus maleficarum;
 	pause and assert that the event description includes "Feeding 2 blood to the Malleus Maleficarum will give it an additional bonus of \+1 attack and \+1 damage on your next attack.* dreadful presence; blood bonus of \+1 attack and \+1 damage";
-	now the maximum repeats of malleus-feeding is the Nomos counter + 1.
+	now the nomos bonus is true;
 	
 testing effects of malleus-feeding:
-	if the swarm of daggers is at-react, make no decision;
-	assert that the blood magic level of malleus maleficarum is 0;
+	assert that the event description includes "plan on examining the Malleus Maleficarum, but find yourself attacking the swarm of daggers instead";
+	assert that the hitting count of the player is 1 with label "player's hitting count (bug #281)";
+	assert that the blood magic level of malleus maleficarum is 0 with label "malleus blood magic level";
 	[I'd like to match "not a newline," but the character class <^\n> actually matches anything besides backslash and n]
-	assert that the event description includes " \+ 1 \(Malleus Maleficarum blood\) = <0-9>+, you beat the swarm of daggers[']s defence rating";
-	assert that the event description includes " \+ 1 \(Malleus Maleficarum blood\) = <0-9>+ damage";
+	assert that the event description includes " \+ 1 \(Malleus Maleficarum blood\) \+ 3 \(the law is with you\) = <0-9>+, you beat the swarm of daggers[']s defence rating";
+	assert that the event description includes " \+ 1 \(Malleus Maleficarum blood\) \+ 3 \(the law is with you\) = <0-9>+ damage";
 	now malleus-feeding is not repeatable.
 	
 Section - bug 234
