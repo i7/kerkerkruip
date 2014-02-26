@@ -1289,6 +1289,7 @@ Scenario when testing tentacle-grab:
 	now the cloak of shadows is testobject;
 	now the hall of mirrors is bannedobject;
 	Now the pickaxe is testobject;
+	Now every not connectable room is bannedobject; [the bridge of doom stops digging]
 	
 A test play when testing tentacle-grab:
 	now the player carries the pickaxe;
@@ -1796,7 +1797,7 @@ testing effects of fell-also-killing:
 	
 Section - Temporary Blood Magic from Nomos
 
-temporary Nomos blood magic is a isolated test set.
+temporary Nomos blood magic is a test set.
 
 first intervention possible when testing temporary Nomos blood magic:
 	rule fails.
@@ -2118,6 +2119,7 @@ last creating the map rule when testing remembering-text (this is the force Arca
 The place all secret testobject rooms rule is listed after the force Arcane Vault to be secretly placed rule in the creating the map rules;
 	
 Test play when testing remembering-text:
+	Now every room is not rust-spored;
 	Let the item be a random not off-stage scroll of mapping;
 	Now the player carries the item;
 	Now the player carries the rod of the master builder;
