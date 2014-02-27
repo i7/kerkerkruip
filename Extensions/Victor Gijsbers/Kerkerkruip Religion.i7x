@@ -522,6 +522,10 @@ Aftereffects rule (this is the Nomos bonus is false rule):
 	if the main actor is the Nomos attacker:
 		deactivate Nomos bonus.
 
+After attacklike behaviour (this is the attacking is never fast rule):
+	now the take no time boolean is false;
+	continue the action;
+
 Before not attacklike behaviour:
 	if Nomos bonus is true:
 		if combat state of the actor is not at-react:

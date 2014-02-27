@@ -1800,7 +1800,7 @@ testing effects of fell-also-killing:
 	
 Section - Temporary Blood Magic from Nomos
 
-temporary Nomos blood magic is a test set.
+temporary Nomos blood magic is a isolated test set.
 
 first intervention possible when testing temporary Nomos blood magic:
 	rule fails.
@@ -2826,16 +2826,17 @@ Testing effects of waiting-for-armadillo-move:
 		
 Section - Heal power of Malygris
 
-malygris-heal-power is an isolated test set.
+malygris-heal-power is an test set.
 
-the generation minimum is a number that varies. The generation minimum is 20.
+the generation minimum is a number that varies. 
 
 Scenario when testing malygris-heal-power:
-	now generation info is true.
+	now generation info is true;
+	now the generation minimum is 20.
 	
 malygris-heal-max is a number that varies.
 
-Last map approval rule:
+Last map approval rule when testing malygris-heal-power:
 	decrement generation minimum;
 	now the heal power of Malygris is 0;
 	make the dungeon interesting [usually done after approval];
