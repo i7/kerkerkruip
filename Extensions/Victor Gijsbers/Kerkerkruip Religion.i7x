@@ -526,24 +526,39 @@ After attacklike behaviour (this is the attacking is never fast rule):
 	now the take no time boolean is false;
 	continue the action;
 
-Before not attacklike behaviour:
-	if Nomos bonus is true:
-		if combat state of the actor is not at-react:
-			if the main actor is the player and the actor is the player:
-				now opposition test subject is player;
-				if at least one opposer alive person is enclosed by the location:
-					let X be a random opposer person enclosed by the location;
-					say "You plan on [current action], but find yourself attacking [the X] instead.";
-					try attacking X instead;
-					deactivate Nomos bonus;
-				otherwise:
-					say "You plan on [current action], but find your body attacking itself instead!";
-					try the player hitting the player instead;
-					deactivate Nomos bonus;
-					if the player is dead:
-						end the story saying "Nomos is not to be toyed with.".
+To say itself-themselves:
+	if the prior named noun is the player:
+		say "yourself";
+	otherwise if the prior named noun acts plural:
+		say "themselves";
+	otherwise if the prior named noun is neuter:
+		say "itself";
+	otherwise if the prior named noun is female:
+		say "herself";
+	otherwise:
+		say "himself";
 
-Before attacklike behaviour when Nomos counter is greater than 0:
+Before not attacklike behaviour (this is the Nomos makes you attack rule):
+	if Nomos bonus is false or the take no time boolean is true:
+		make no decision;
+	if the actor is not the Nomos attacker:
+		make no decision;
+	if the actor is not the main actor or the combat state of the actor is at-react:
+		make no decision;
+	now opposition test subject is the Nomos attacker;
+	if at least one opposer alive person is enclosed by the location:
+		let X be a random opposer person enclosed by the location;
+		say "[The actor] plan[s] on [current action], but find[s] [itself-themselves] attacking [the X] instead.";
+		try attacking X instead;
+		deactivate Nomos bonus;
+	otherwise:
+		say "[The actor] plan[s] on [current action], but find[s] [its-their] body attacking itself instead!";
+		try the player hitting the player instead;
+		deactivate Nomos bonus;
+		if the player is dead:
+			end the story saying "Nomos is not to be toyed with.".
+
+Before attacklike behaviour when Nomos counter is greater than 0 (this is the Nomos stops you from attacking rule):
 	say "Deciding to break the command of Nomos, you plan on attacking [the noun]. However, you find yourself ";
 	if player is not the main actor:
 		say "doing nothing instead." instead;

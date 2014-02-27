@@ -845,7 +845,7 @@ First carry out an actor teleporting (this is the teleport away from combat rule
 
 Last carry out an actor teleporting (this is the actually do the teleportation rule):
 	move actor to teleportation-destination;
-	now concentration of actor is 0;
+	now concentration of actor is 0; [redundant? extract from combat should do this]
 	unless teleport amount of actor is -1 or teleport amount of actor is 0:
 		decrease teleport amount of actor by 1;
 

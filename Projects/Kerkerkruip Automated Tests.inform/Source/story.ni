@@ -652,7 +652,7 @@ The compel an action rule is listed before the insane people attack themselves r
 
 Last choosing a player reaction:
 	generate a player action of the action of waiting.
-	
+
 testing effects rules are a test step based rulebook.
 
 Chapter - Test Sets
@@ -1800,7 +1800,7 @@ testing effects of fell-also-killing:
 	
 Section - Temporary Blood Magic from Nomos
 
-temporary Nomos blood magic is a isolated test set.
+temporary Nomos blood magic is a test set.
 
 first intervention possible when testing temporary Nomos blood magic:
 	rule fails.
@@ -1887,39 +1887,52 @@ testing effects of second-gown-timeout:
 		assert that the event description includes "The blood power of the gown of the red court wears off completely";
 		now second-gown-timeout is not repeatable.
 		
-[This shouldn't need to be repeatable but something weird is going on with turn structure]
-malleus-feeding is a repeatable test step. The next move of second-gown-timeout is malleus-feeding. The scheduled action of malleus-feeding is the action of examining the malleus maleficarum.
+malleus-earning is a hiding-check test step. The location-target of malleus-earning is the temple of nomos.
 
-Initial scheduling for malleus-feeding:
-	extract the player to the location of the jumping bomb;
-	try smiting the jumping bomb;
-	extract the player to temple of nomos;
+Testing effects of malleus-earning:
+	have the player defeat the jumping bomb;
 	have the player sacrifice a random granted power;
+	assert truth of whether or not the player carries the malleus maleficarum with message "the malleus should be carried";
+	try readying the malleus maleficarum;
+	assert truth of whether or not the malleus maleficarum is readied with message "the malleus maleficarum should be readied";
+	try examining the malleus maleficarum;
+	pause and assert that the event description includes "Feeding 1 blood to the Malleus Maleficarum will give it a bonus of \+1 attack and \+1 damage on your next attack.* dreadful presence\.";
+	
+daggers-meeting is a hiding-check test step. The location-target of daggers-meeting is the swarm of daggers.
+
+Testing effects of daggers-meeting:
 	now the health of the player is 1000;
 	now the health of the swarm of daggers is 100;
 	now the melee of the player is 100;
-	extract the player to the location of the swarm of daggers;
-	try readying the malleus maleficarum;
-	assert truth of whether or not the player carries the malleus maleficarum with message "the malleus should be carried";
-	assert truth of whether or not the malleus maleficarum is readied with message "the malleus maleficarum should be readied";
-	transcribe and restart capturing;
-	try examining the malleus maleficarum;
-	pause and assert that the event description includes "Feeding 1 blood to the Malleus Maleficarum will give it a bonus of \+1 attack and \+1 damage on your next attack.* dreadful presence\.";
+
+nomos-bonus-examining is a test step. The scheduled action of nomos-bonus-examining is the action of examining the swarm of daggers.
+
+Initial scheduling of nomos-bonus-examining:
+	now the nomos bonus is true;
+
+Testing effects of nomos-bonus-examining:
+	assert that the event description includes "swarm of daggers attacks using sharp points";
+
+malleus-bonus-attacking is a hiding-check test step. The scheduled action of malleus-bonus-attacking is the action of swearing obscenely. 
+
+[swearing obscenely is not acting fast, but a rule sets the take no time boolean for it. This will be too late to stop the nomos bonus from changing our action]
+
+Initial scheduling for malleus-bonus-attacking:
+	assert that the nomos bonus is true with label "nomos bonus";
+	now the nomos bonus is false;
 	try feeding the malleus maleficarum;
 	transcribe and restart capturing;
 	try examining the malleus maleficarum;
 	pause and assert that the event description includes "Feeding 2 blood to the Malleus Maleficarum will give it an additional bonus of \+1 attack and \+1 damage on your next attack.* dreadful presence; blood bonus of \+1 attack and \+1 damage";
 	now the nomos bonus is true;
 	
-testing effects of malleus-feeding:
-	assert that the event description includes "plan on examining the Malleus Maleficarum, but find yourself attacking the swarm of daggers instead";
+testing effects of malleus-bonus-attacking:
+	assert that the event description includes "You plan on swearing obscenely, but find yourself attacking the swarm of daggers instead";
 	assert that the hitting count of the player is 1 with label "player's hitting count (bug #281)";
 	assert that the blood magic level of malleus maleficarum is 0 with label "malleus blood magic level";
-	[I'd like to match "not a newline," but the character class <^\n> actually matches anything besides backslash and n]
 	assert that the event description includes " \+ 1 \(Malleus Maleficarum blood\) \+ 3 \(the law is with you\) = <0-9>+, you beat the swarm of daggers[']s defence rating";
 	assert that the event description includes " \+ 1 \(Malleus Maleficarum blood\) \+ 3 \(the law is with you\) = <0-9>+ damage";
-	now malleus-feeding is not repeatable.
-	
+
 Section - bug 234
 
 bug-234 is an test set.
