@@ -2823,6 +2823,34 @@ Initial scheduling of waiting-for-armadillo-move:
 Testing effects of waiting-for-armadillo-move:
 	if the location of the armadillo is not armadillo-start:
 		record success of waiting-for-armadillo-move.
+		
+Section - Heal power of Malygris
 
+malygris-heal-power is an isolated test set.
+
+the generation minimum is a number that varies. The generation minimum is 20.
+
+Scenario when testing malygris-heal-power:
+	now generation info is true.
+	
+malygris-heal-max is a number that varies.
+
+Last map approval rule:
+	decrement generation minimum;
+	now the heal power of Malygris is 0;
+	make the dungeon interesting [usually done after approval];
+	let max healing be (heal power of Malygris) * 60 / (heal cooldown of Malygris);
+	if max healing is greater than malygris-heal-max:
+		now malygris-heal-max is max healing;
+	if max healing is at least 1:
+		say "* Malygris can heal [max healing divided by 60] and [remainder after dividing max healing by 60] 60ths per turn[line break]";
+	if (max healing) is greater than (60 times 3):
+		assert "[max healing divided by 60] and [remainder after dividing max healing by 60] 60ths is too much healing for Malygris" based on false;
+		now generation minimum is 0;
+	if generation minimum > 0:
+		say "[generation minimum] more dungeons to generate for this test";
+		rule fails;
+	assert "Malygris should be able to heal sometimes" based on whether or not the malygris-heal-max is at least 1.
+		
 Section - Summoning too many monsters
 
