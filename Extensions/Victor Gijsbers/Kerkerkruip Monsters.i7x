@@ -5170,10 +5170,10 @@ Section - Special power - Healing
 
 A randomise Malygris rule (this is the randomise Malygris healing rule):
 	if a random chance of 1 in 5 succeeds:
-		now heal power of Malygris is a random number between 3 and 7;
-		if a random chance of 1 in 3 succeeds:
-			increase heal power of Malygris by 10;
-		now heal cooldown of Malygris is a random number between 1 and 5;
+		now heal cooldown of Malygris is a random number between 2 and 5;
+		now heal power of Malygris is a random number between 3 and 5;
+		if a random chance of 1 in 2 succeeds:
+			increase heal power of Malygris by (heal cooldown of Malygris times 2);
 		if generation info is true, say "* Malygris has heal power of [heal power of Malygris] and heal cooldown of [heal cooldown of Malygris].".
 				
 
