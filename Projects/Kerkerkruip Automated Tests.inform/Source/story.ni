@@ -1173,9 +1173,10 @@ testing effects for chton-arena-cheating:
 	
 Section - Parting Shots
 
-parting shots is an test set.
+parting shots is an isolated test set.
 
 A scenario rule when testing parting shots:
+	now israfel is testobject;
 	now mindslug is testobject;
 	now armadillo is testobject;
 	now cloak of shadows is testobject;
@@ -1268,6 +1269,52 @@ testing effects for mindslug-runner:
 	assert one hit by fafhrd;
 	assert one hit by mouser;
 	
+israfel-meeting is a hiding-check hiding-reveal test step. The location-target of israfel-meeting is Israfel.
+
+Initial scheduling of israfel-meeting:
+	now the health of israfel is 1000;
+	compel the action of israfel israfel-splitting;
+	
+fell-freezing is a test step.
+
+Initial scheduling of fell-freezing:
+	Now Fell presses the player;
+	compel the action of fell israfel-reuniting;
+	
+Last carry out an actor israfel-reuniting when testing parting shots:
+	now the initiative of the actor is -2;
+	
+frozen-fell-fleeing is a test step. The scheduled action of frozen-fell-fleeing is the action of retreating.
+
+testing effects of frozen-fell-fleeing:
+	assert that israfel-reuniting-initiator is Fell with label "the reuniting initiator";
+	assert that the hitting count of Fell is 0 with label "hitting count of Fell";
+	
+israfel-rejoining is a test step. The location-target of israfel-rejoining is fell.
+
+before taking a player action when testing israfel-rejoining:
+	if fell is off-stage:
+		now the location-target of israfel-rejoining is israfel.
+
+initial scheduling of israfel-rejoining:
+	compel the action of israfel waiting;
+	
+testing effects of israfel-rejoining:
+	assert that israfel is in the location;
+	
+israfel-resplitting is a test step.
+
+Initial scheduling of israfel-resplitting:
+	compel the action of israfel israfel-splitting;
+	
+unfrozen-fell-fleeing is a test step. The scheduled action of unfrozen-fell-fleeing is the action of retreating.
+
+initial scheduling of unfrozen-fell-fleeing:
+	now fell presses the player;
+
+testing effects of unfrozen-fell-fleeing:
+	assert that the hitting count of fell is 1;
+	 
 Section - Retreating from the Tentacle
 
 [maybe this could be factored into systems?]

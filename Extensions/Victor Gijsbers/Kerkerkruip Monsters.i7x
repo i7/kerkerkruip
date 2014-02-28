@@ -4581,6 +4581,7 @@ To replace half of Israfel with (guy - a person):
 	now health of guy is n;
 	now patron of guy is patron of Israfel;
 	now favour of guy is favour of Israfel;
+	now guy is not non-attacker;
 
 An AI action selection rule for at-Act Israfel (this is the Israfel considers Israfel-splitting rule):
 	choose a blank Row in the Table of AI Action Options;
@@ -4828,6 +4829,8 @@ An AI action selection rule for at-Act Fell (this is the Fell considers Israfel-
 
 Carry out an actor Israfel-reuniting:
 	now Israfel-reuniting-initiator is the actor;
+	now Isra is non-attacker;
+	now Fell is non-attacker;
 	if Isra is alive and Fell is alive and (location of Isra is location of Fell):
 		say "Isra and Fell are suddenly surrounded by a deep blue light. Both seem frozen in place.";
 	otherwise if the actor is Isra:
