@@ -311,13 +311,14 @@ Understand "enable panels" or "enable info panels" or "enable information panels
 
 Carry out toggling window panels:
 	shut down the status-window;
-	if window panels are disabled:
-		enable window panels;
+	toggle window panels;
+	if window panels are enabled:
+[		enable window panels;]
 		open side windows;
 		open up the status-window;
 		say "The information panels have been enabled. Type PANELS to disable them again.";
 	otherwise:
-		disable window panels;
+[		disable window panels;]
 		close side windows;
 		open up the status-window;
 		say "The information panels have been disabled. Type PANELS to re-enable them."
