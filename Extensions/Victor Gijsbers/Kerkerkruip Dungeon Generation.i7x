@@ -77,11 +77,6 @@ Section - Unlock level
 
 [Objects with an unlock level on N will onleybe placed after the player has won at least N games. Winning the Nth game will display a message telling the player that the object has been unlocked.]
 
-The unlock score is a number variable.
-
-After showing the title screen:
-	now the unlock score is number of unlocking victories;
-
 An object has a number called the unlock level. The unlock level of an object is usually 0.
 
 Definition: an object is unlockable if its unlock level is greater than 0.
@@ -306,8 +301,8 @@ Placement possible rule (this is the adjust rooms for rarity rule):
 	if considered room is too rare:
 		rule fails.
 
-Placement possible rule (this is the do not use rooms that are not yet unlocked rule):
-	if the unlock level of considered room is greater than the unlock score:
+Placement possible rule (this is the do not place advanced rooms in novice mode rule):
+	if the difficulty is 0 and advanced content is disabled:
 		rule fails.
 
 Last placement possible rule:
@@ -684,8 +679,8 @@ First monster placement possible rule (this is the only monsters of the right le
 	if the level of considered monster is not global monster level:
 		rule fails.
 
-Monster placement possible rule (this is the do not use monsters that are not yet unlocked rule):
-	if the unlock level of considered monster is greater than the unlock score:
+Monster placement possible rule (this is the do not place advanced monsters in novice mode rule):
+	if the difficulty is 0 and advanced content is disabled:
 		rule fails.
 		
 Monster placement possible rule (this is the do not use groupers rule):
@@ -721,7 +716,7 @@ Section - Treasure placement
 
 Considered treasure is a thing that varies.
 
-Definition: a thing (called item) is not-too-difficult if the unlock level of item is not greater than the unlock score.
+Definition: a thing (called item) is not-too-difficult if the difficulty > 0 or the unlock level of item > 0.
 
 First treasure placement rule (this is the remove rare items rule):
 	repeat with X running through rare not non-treasure things:

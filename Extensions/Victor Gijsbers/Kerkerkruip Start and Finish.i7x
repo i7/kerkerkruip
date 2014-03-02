@@ -62,7 +62,7 @@ Section - The difficulty level
 
 The difficulty is a number that varies.
 
-Before showing the title screen:
+Before showing the title screen (this is the set difficulty rule):
 	now difficulty is setting of current difficulty;
 
 To set difficulty to (x - number):
@@ -344,55 +344,27 @@ This is the show the menu rule:
 
 
 
-Section - Options Menu
+Chapter - Options Menu
 
 Table of Options Menu
-title	order	rule
-"[bold type]Interface options"	1	--
-"Information panels: [bold type][if window panels are disabled]Off[otherwise]On[end if]"	2	the toggle info panels rule
-"[hyperlinks options]"	3	the toggle menu hyperlinks rule
-"Sound: [bold type][if sound is enabled]On[otherwise]Off[end if][roman type]"	12	the toggle theme music rule
-""	20	--
-"[bold type]Reset"	21	--
-"[if difficulty is 0 and number of total victories is 0 and setting of highest achieved difficulty is 0 or number of unlocking victories is 0][italic type](Reset the number of victories)[otherwise]Reset the number of victories"	22	the resetting rule
-"[if the Table of Held Achievements is empty][italic type](Reset achievements)[otherwise]Reset achievements"	23	the achievement resetting rule
-"[if number of unlocking victories > 99][italic type](Unlock everything)[otherwise]Unlock everything"	24	the unlock everything rule
-
-To say hyperlinks options:
-	say "Clickable menus: [bold type][if menu hyperlinks are enabled]On[otherwise]Off[end if][italic type][unless glulx hyperlinks are supported] (note: not supported in this interpreter)[otherwise if menu hyperlinks are disabled and enable menu hyperlinks is true] (note: will take affect once you leave this menu)[end if]";
-
-Before showing the title screen:
-	sort the Table of Options Menu in (order) order;
-
-This is the resetting rule:
-	set difficulty to 0;
-	set total victories to 0, table only;
-	set highest achieved difficulty to 0, table only;
-	set unlocking victories to 0;
-
-This is the achievement resetting rule:
-	blank out the whole of the Table of Held Achievements;
-	write File of Achievements from Table of Held Achievements;
-
-This is the unlock everything rule:
-	set unlocking victories to 100;
+title	order	rule	hidden-row
+"[bold type]Interface options"	1	--	--
+"Information panels: [bold type][if window panels are disabled]Off[otherwise]On[end if]"	2	the toggle info panels rule		
 
 This is the toggle info panels rule:
 	toggle window panels;
 
-This is the toggle theme music rule:
-	toggle sound;
-	toggle the theme music.
+To hide option (N - a number):
+	now the hidden-row corresponding to order of N in Table of Options Menu is true;
 
-To toggle the theme music:
-	if the showing the title screen activity is going on:
-		if sound is disabled:
-			pause background channel;
-		otherwise:
-			if new glulx sound features are supported:
-				unpause the background channel;
-			otherwise:
-				play sound of music in background channel, looping.
+To show option (N - a number):
+	[blank out the hidden-row corresponding to order of N in Table of Options Menu;] [Inform has a bug which means it can't do this :(]
+	repeat through Table of Options Menu:
+		if the order entry is N:
+			blank out the hidden-row entry;
+			stop;
+
+Section - Menu hyperlinks
 
 [ Menu hyperlinks: try to detect if we can use them, but also allow the user to change the option ]
 Before showing the title screen (this is the enable menu hyperlinks rule):
@@ -409,6 +381,13 @@ Before showing the title screen (this is the enable menu hyperlinks rule):
 	otherwise:
 		now enable menu hyperlinks is false;
 
+Table of Options Menu (continued)
+title	order	rule	
+"[hyperlinks options]"	3	the toggle menu hyperlinks rule	
+
+To say hyperlinks options:
+	say "Clickable menus: [bold type][if menu hyperlinks are enabled]On[otherwise]Off[end if][italic type][unless glulx hyperlinks are supported] (note: not supported in this interpreter)[otherwise if menu hyperlinks are disabled and enable menu hyperlinks is true] (note: will take affect once you leave this menu)[end if]";
+
 [ If we turn on hyperlinks, turn them on immediately. If turning them off, wait until we leave the menu, which the next rule handles ]
 This is the toggle menu hyperlinks rule:
 	if menu hyperlinks are enabled:
@@ -418,30 +397,237 @@ This is the toggle menu hyperlinks rule:
 		if glulx hyperlinks are supported:
 			now enable menu hyperlinks is true;
 
-A first glulx input handling rule for a hyperlink-event while displaying (this is the update the enable menu hyperlinks option rule):
-	if the chosen menu option for the link number of the selected hyperlink is -1:
-		if the submenu in row menu depth of the Table of Menu history is the Table of Options Menu:
-			if menu hyperlinks are disabled:
-				now enable menu hyperlinks is false;
-				convert the hyperlink code to the character code;
-				request hyperlink input again;
-				replace player input;
+An exiting a menu rule for the Table of Options Menu (this is the disable hyperlinks rule):
+	if menu hyperlinks are disabled:
+		now enable menu hyperlinks is false;
 
+Section - Menu graphics (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
-Section - Adding menu screen graphics to the Options menu (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+Changed graphics option is a truth state variable.
 
 Table of Options Menu (continued)
 title	order	rule
 "Menu graphics: [bold type][if main menu graphics are enabled]On[otherwise]Off[end if][roman type]"	11	the toggle menu graphics rule
 
-
 This is the toggle menu graphics rule:
 	toggle main menu graphics;
-	disable session flag;
-	restart immediately.
+	now changed graphics option is true;
+
+A last exiting a menu rule (this is the restart if graphics were changed rule):
+	if changed graphics option is true and the showing the title screen activity is going on and menu depth is 1:
+		enable session flag;
+		restart immediately;
 
 To restart immediately: 
 	(- @restart; -).
+
+Section - Sound
+
+Table of Options Menu (continued)
+title	order	rule
+"Sound: [bold type][if sound is enabled]On[otherwise]Off[end if]"	12	the toggle theme music rule
+
+This is the toggle theme music rule:
+	toggle sound;
+	toggle the theme music.
+
+To toggle the theme music:
+	if the showing the title screen activity is going on:
+		if sound is disabled:
+			pause background channel;
+		otherwise:
+			if new glulx sound features are supported:
+				unpause the background channel;
+			otherwise:
+				play sound of music in background channel, looping.
+
+Section - Victories
+
+[ Reset victories with the option to undo. If playing a game the option to undo is available until the player ends their game. ]
+
+Reset the victories is a truth state variable.
+
+Table of Options Menu (continued)
+title	order	rule
+""	20	--
+"[bold type]Game records"	21	--
+"Total victories: [if reset the victories is false][number of total victories][otherwise]0[end if]"	22	--
+"Reset your victory records"	23	the resetting rule
+[""	24	--]
+"Your victories records have been reset"	25	--
+"Undo"	26	the resetting rule
+
+An entering a menu rule for the Table of Options Menu (this is the show victories reset rows rule):
+	if reset the victories is false:
+		if the number of total victories > 0:
+			show option 23;
+			[show option 24;]
+		otherwise:
+			hide option 23;
+			[hide option 24;]
+		hide option 25;
+		hide option 26;
+
+This is the resetting rule:
+	if reset the victories is false:
+		now reset the victories is true;
+		hide option 23;
+		[hide option 24;]
+		show option 25;
+		show option 26;
+	otherwise:
+		now reset the victories is false;
+		show option 23;
+		[show option 24;]
+		hide option 25;
+		hide option 26;
+	show the level rows;
+
+An exiting a menu rule for the Table of Options Menu (this is the reset victories immediately if not in a game rule):
+	if the showing the title screen activity is going on:
+		if reset the victories is true or number of total victories is 0:
+			now reset the victories is false;
+			set total victories to 0, table only;
+			set highest achieved difficulty to 0, table only;
+			if difficulty is not novice option:
+				set difficulty to novice option;
+				delete file of save data;
+
+First after printing the player's obituary (this is the reset victories rule):
+	if reset the victories is true or number of total victories is 0:
+		set total victories to 0, table only;
+		set highest achieved difficulty to 0, table only;
+		unless the player is victorious:
+			set difficulty to novice option;
+
+The reset victories rule is listed before the lower difficulty on restart rule in the carry out restarting the game rules.
+
+Section - Difficulty level
+
+Novice option is a number variable. Novice option is 0. [ 0 = novice, 1 = apprentice ]
+
+Last before showing the title screen (this is the set novice option rule):
+	if the number of total victories is 0 and difficulty > 0:
+		now novice option is 1;
+
+Table of Options Menu (continued)
+title	order	rule
+""	30	--
+"[difficulty level intro]"	31	--
+"If you like you can"	32	--
+"Skip ahead to Apprentice level"	33	the skip ahead to apprentice level rule
+"Return to Novice level"	34	the skip ahead to apprentice level rule
+"Unlock advanced content while staying at Novice level: [bold type][if advanced content is enabled]On[otherwise]Off"	35	the unlock everything rule
+
+To say difficulty level intro:
+	say "[if the showing the title screen activity is going on]Your difficulty level is: [otherwise]In your next game (unless you win) your difficulty level will be reset to: [end if][bold type][if novice option is 0]Novice[otherwise]Apprentice";
+
+To show the level rows:
+	if the number of total victories > 0 and reset the victories is false:
+		repeat with N running from 30 to 35:
+			hide option N;
+	otherwise:
+		show option 30;
+		show option 31;
+		show option 32;
+		if novice option is 0:
+			show option 33;
+			hide option 34;
+			show option 35;
+		otherwise:
+			hide option 33;
+			show option 34;
+			hide option 35;
+
+An entering a menu rule for the Table of Options Menu (this is the show level rows rule):
+	show the level rows
+
+This is the skip ahead to apprentice level rule:
+	if novice option is 0:
+		now novice option is 1;
+	otherwise:
+		now novice option is 0;
+	show the level rows;
+
+This is the unlock everything rule:
+	toggle advanced content;
+				
+Section - Achievements
+
+Reset the achievements is a truth state variable.
+
+Table of Options Menu (continued)
+title	order	rule
+""	40	--
+"Reset achievements"	41	the achievement resetting rule
+"Achievements have been reset"	42	--
+"Undo"	43	the achievement resetting rule
+
+An entering a menu rule for the Table of Options Menu (this is the show achievements rows rule):
+	if Table of Held Achievements is empty:
+		hide option 40;
+		hide option 41;
+	hide option 42;
+	hide option 43;
+	now reset the achievements is false;
+
+This is the achievement resetting rule:
+	if reset the achievements is false:
+		now reset the achievements is true;
+		hide option 41;
+		show option 42;
+		show option 43;
+	otherwise:
+		now reset the achievements is false;
+		show option 41;
+		hide option 42;
+		hide option 43;
+
+An exiting a menu rule for the Table of Options Menu (this is the reset achievements rule):
+	if reset the achievements is true:
+		blank out the whole of the Table of Held Achievements;
+		write File of Achievements from Table of Held Achievements;
+				
+Section - Rogue stats
+
+Reset the rogue stats is a truth state variable.
+
+Table of Options Menu (continued)
+title	order	rule
+""	50	--
+"Reset rogue statistics"	51	the rogue statistics resetting rule
+"Rogue statistics have been reset"	52	--
+"Undo"	53	the rogue statistics resetting rule
+
+An entering a menu rule for the Table of Options Menu (this is the show rogue statistics rows rule):
+	if the number of encountered npc people is 0:
+		hide option 50;
+		hide option 51;
+	hide option 52;
+	hide option 53;
+	now reset the rogue stats is false;
+
+This is the rogue statistics resetting rule:
+	if reset the rogue stats is false:
+		now reset the rogue stats is true;
+		hide option 51;
+		show option 52;
+		show option 53;
+	otherwise:
+		now reset the rogue stats is false;
+		show option 51;
+		hide option 52;
+		hide option 53;
+
+An exiting a menu rule for the Table of Options Menu (this is the reset rogue stats rule):
+	if reset the rogue stats is true:
+		repeat with X running through npc people:
+			if the ID of X is not 0:
+				now X is not encountered;
+				now the died count of X is 0;
+				now the kill count of X is 0;
+		update the monster statistics;
+
 
 
 Chapter - Start
@@ -573,10 +759,9 @@ First after printing the player's obituary (this is the reset prompt for death o
 After printing the player's obituary (this is the update the difficulty rule):
 	if the player is victorious:
 		increase the total victories by 1, table only;
-		increase unlocking victories by 1, table only;
 		increase difficulty by 1; [We want to go from easy to normal difficulty.]
 		if difficulty is 1:
-			say "[paragraph break][bold type]You have defeated Malygris on easy mode, proving that you understand the basics of the game! Next time, Kerkerkruip will start in normal mode. From now on, new items, monsters and locations will be available. Have fun![roman type][paragraph break]";
+			say "[paragraph break][bold type]You have defeated Malygris on easy mode, proving that you understand the basics of the game! Next time, Kerkerkruip will start in normal mode. From now on new items, rogues and places will be available. Have fun![roman type][paragraph break]";
 		if difficulty is greater than setting of highest achieved difficulty:
 			set highest achieved difficulty to difficulty, table only;
 	otherwise:
@@ -584,30 +769,6 @@ After printing the player's obituary (this is the update the difficulty rule):
 			decrease difficulty by 1;
 	set current difficulty to difficulty;
 
-Last after printing the player's obituary (this is the list unlocked stuff rule):
-	if the player is victorious:
-		let number-of-victories be number of unlocking victories;
-		if number-of-victories > 99 or number-of-victories < 2:
-			stop;
-		let X be a list of objects; [We cannot repeat through objects, so:]
-		repeat with Y running through rooms:
-			if unlock level of Y is number-of-victories:
-				if unlock hidden switch of Y is not true:
-					add Y to X;
-		repeat with Y running through persons:
-			if unlock level of Y is number-of-victories:
-				if unlock hidden switch of Y is not true:		
-					add Y to X;
-		repeat with Y running through things:
-			if Y is not a person:
-				if unlock level of Y is number-of-victories:
-					if unlock hidden switch of Y is not true:			
-						add Y to X;
-		if X is not empty:
-			say "[line break]You have [bold type]unlocked[roman type] new content:[line break][run paragraph on]";
-			repeat with item running through X:
-				say "* [the item] ([unlock text of item])[line break]";
-			say "[line break]";
 
 
 Section - The final question
@@ -689,6 +850,7 @@ To fade out the theme music:
 
 
 Section - Fading out the theme music B (for use without Kerkerkruip Glimmr Additions by Erik Temple)
+
 [This is used only for the text menu--the graphics menu uses an animation track.]
 
 Fading music is a truth state variable. Fading music is false.
