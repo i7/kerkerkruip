@@ -25,8 +25,7 @@ Before showing the title screen (this is the load the file of data storage rule)
 		choose row 1 in Table of Victories;
 		set total victories to the Victories entry, table only;
 		set current difficulty to the Level entry, table only;
-		set highest achieved difficulty to the Best-Level entry, table only;
-		set unlocking victories to the Victories entry;
+		set highest achieved difficulty to the Best-Level entry;
 
 To save data storage:
 	write File of Data Storage from Table of Data Storage;
@@ -67,10 +66,10 @@ A data storage parameter has a number called enabled value. A data storage param
 
 Table of Data Value Labels
 data storage parameter	data value index	enabled value	disabled value
-total victories	1	1	0
-current difficulty	2	1	0
-highest achieved difficulty	3	1	0
-unlocking victories [victories for the purpose of unlocking]	4	1	0
+total victories	1	--	--
+current difficulty	2	--	--
+highest achieved difficulty	3	--	--
+advanced content	4	1	0
 main menu graphics	5	1	-1
 session flag	6	1	0
 window panels	7	0	1
@@ -172,7 +171,7 @@ Blood never lies
 Table of Held Achievements
 held achievement	held difficulty
 (an achievement)	(number)
-with 20 blank rows [ Include some buffer rows in case the player goes back to an old version ]
+with 30 blank rows [ Include some buffer rows in case the player goes back to an old version ]
 
 To award achievement (current achievement - an achievement):
 	if there is a held achievement of current achievement in the Table of Held Achievements:

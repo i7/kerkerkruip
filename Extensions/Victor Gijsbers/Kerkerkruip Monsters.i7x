@@ -73,6 +73,8 @@ To update the monster statistics:
 			choose row with a ColID of ID of X in the Table of Monster Statistics;
 			if X is encountered:
 				now the ColSeen entry is true;
+			otherwise:
+				blank out the ColSeen entry;
 			now the died entry is the died count of X;
 			now the kill entry is the kill count of X;
 	write File of Monster Statistics from Table of Monster Statistics;

@@ -32,7 +32,7 @@ Include version 13/131208 of Flexible Windows by Jon Ingold.
 
 [Include Kerkerkruip Glimmr Additions by Erik Temple.]
 
-Include version 1/140209 of Menus by Dannii Willis.
+Include version 1/140221 of Menus by Dannii Willis.
 Include Kerkerkruip Windows by Erik Temple.
 
 [Include Extended Debugging by Erik Temple.]
