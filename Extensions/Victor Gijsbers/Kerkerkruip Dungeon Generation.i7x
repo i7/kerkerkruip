@@ -305,7 +305,7 @@ Placement possible rule (this is the adjust rooms for rarity rule):
 		rule fails.
 
 Placement possible rule (this is the do not place advanced rooms in novice mode rule):
-	if the difficulty is 0 and advanced content is disabled:
+	if considered room is unlockable and the difficulty is 0 and advanced content is disabled:
 		rule fails.
 
 Last placement possible rule:
@@ -683,7 +683,7 @@ First monster placement possible rule (this is the only monsters of the right le
 		rule fails.
 
 Monster placement possible rule (this is the do not place advanced monsters in novice mode rule):
-	if the difficulty is 0 and advanced content is disabled:
+	if the considered monster is unlockable and difficulty is 0 and advanced content is disabled:
 		rule fails.
 		
 Monster placement possible rule (this is the do not use groupers rule):
@@ -719,7 +719,14 @@ Section - Treasure placement
 
 Considered treasure is a thing that varies.
 
-Definition: a thing (called item) is not-too-difficult if the difficulty > 0 or the unlock level of item > 0.
+Definition: a thing (called item) is not-too-difficult:
+	if advanced content is enabled:
+		yes;
+	if the difficulty > 0:
+		yes;
+	if the unlock level of item is 0:
+		yes;
+	no.
 
 First treasure placement rule (this is the remove rare items rule):
 	repeat with X running through rare not non-treasure things:

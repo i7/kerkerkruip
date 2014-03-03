@@ -2902,5 +2902,36 @@ Last map approval rule when testing malygris-heal-power:
 		rule fails;
 	assert "Malygris should be able to heal sometimes" based on whether or not the malygris-heal-max is at least 1.
 		
+Section - Unlocking - issue 243
+
+unlocking-behavior is a isolated test set.
+
+to assert that placement possibility is (allowable - a truth state) when (conditions - indexed text):
+	now the rarity of Space-Time Discontinuum is 0;
+	now the considered room is Space-Time Discontinuum;
+	consider the placement possible rules;
+	assert "Space-Time Discontinuum should be [if allowable is false]im[end if]possible to place [conditions]" based on whether or not allowable is (whether or not the rule succeeded);
+	now global monster level is 1;
+	now the considered monster is the ravenous armadillo;
+	consider the monster placement possible rules;
+	assert "The armadillo should be [if allowable is false]im[end if]possible to place [conditions]" based on whether or not allowable is (whether or not the rule succeeded);
+	assert "The smoky blade should [if allowable is false]not [end if]be not-too-difficult" based on whether or not allowable is (whether or not the smoky blade is not-too-difficult);
+	
+	
+Scenario when testing unlocking-behavior:
+	assert that setting of current difficulty is 0 with label "current difficulty setting";
+	assert that difficulty is 0 with label "difficulty";
+	assert "advanced content should be disabled" based on whether or not advanced content is disabled;
+	now the considered room is Space-Time Discontinuum;
+	assert that placement possibility is false when "in novice level";
+	enable advanced content;
+	assert that placement possibility is true when "in novice level with advanced content enabled";
+	set the current difficulty to 1;
+	now difficulty is 1;
+	disable advanced content;
+	assert that placement possibility is true when "in apprentice level";
+	enable advanced content;
+	assert that placement possibility is true when "in apprentice level when advanced content is enabled";
+	
 Section - Summoning too many monsters
 
