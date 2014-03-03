@@ -6,7 +6,7 @@ Use authorial modesty.
 
 Volume - Creating the Dungeon
 
-When play begins:
+When play begins (this is the create the dungeon rule):
 	create the dungeon;
 	consider the further generation rules.
 	
@@ -158,7 +158,10 @@ Creating the map rule (this is the locate and connect all rooms rule):
 		let z be the z way of place;
 		if the space at x by y by z is free:
 			let chosen room be a suitable room from place at x by y by z;
-			place chosen room from place at x by y by z;
+			if chosen room is Entrance Hall:
+				if generation info is true, say "* No suitable rooms found. Trying again...";
+			otherwise:
+				place chosen room from place at x by y by z;
 
 Section - Adding tunnels
 
@@ -257,7 +260,7 @@ To decide which number is the distance of (place - a room):
 	decide on the number of moves from place to Entrance Hall.
 
 [we want to branch out quickly so the player has choices.]
-A map approval rule (this is the beginning shouldn't be too narrow rule):			
+A map approval rule (this is the beginning shouldn't be too narrow rule):
 	now distance-1 is 0;
 	now distance-2 is 0;
 	repeat with place running through placed rooms:
