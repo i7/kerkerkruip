@@ -389,572 +389,6 @@ Right alignment depth is a number that varies. Right alignment depth is 14.
 
 
 
-Volume - The Tests
-
-Chapter - Persistent data
-
-The file of test transcript is called "testtranscript".
-
-The event description is an indexed text that varies.
-
-To log (T - an indexed text):
-	let currently capturing be whether or not text capturing is active;
-	if currently capturing is true, transcribe and stop capturing text;
-	say "[line break][T]";
-	append "**** [T][line break]" to file of test transcript;
-	if currently capturing is true, start capturing text;
-	
-To transcribe (T - an indexed text):
-	let message be indexed text;
-	now message is "[bracket][T][close bracket][command clarification break]";
-	if text capturing is active:
-		say message;
-	otherwise:
-		append "[message]" to file of test transcript;
-	
-To transcribe and stop capturing text/--:
-	stop capturing text;
-	if "[the captured text]" matches the regular expression ".":
-		transcribe "[current test set], [scheduled event] turn [the turn count], assertion count=[test assertion count]";
-		append "[the captured text]" to file of test transcript;
-	 
-To transcribe and restart capturing text/--:
-	if text capturing is active, transcribe and stop capturing text;
-	start capturing text;
-	
-To stop and save event description:
-	transcribe and stop capturing text;
-	now the event description is "[the captured text]";
-	
-The file of test results is called "testresults".
-
-Table of Test Results
-Test Set (number)	Total (number)	Failures (number)	Failure Messages (indexed text)
-with 100 blank rows
-
-To record a test attempt:
-	increment the test assertion count;
-	increment the total assertion count;
-	Let testnum be current test set as a number;
-	if there is a test set of testnum in Table of Test Results:
-		choose row with test set of testnum in Table of Test Results;
-	otherwise:
-		choose a blank row in Table of Test Results;
-		now test set entry is testnum;
-		now total entry is 0;
-		now failures entry is 0;
-		now failure messages entry is "";
-	increment the total entry;
-	transcribe and stop capturing;
-	say ": ";
-	start capturing text;
-
-To record a/-- failure report of/-- (msg - an indexed text):
-	Let testnum be current test set as a number;
-	choose row with test set of testnum in Table of Test Results;	
-	increment the assertion failures count;
-	increment the failures entry;
-	now the failure messages entry is "[failure messages entry]Failure for test: [the current test set], step: [the scheduled event], assertion [the test assertion count]: [msg][paragraph break]";
-	log msg;
-
-To display test results:
-	log "Test results:[line break]";
-	let grand test total be 0;
-	let grand test failures be 0;
-	Repeat through Table of Test Results:
-		now grand test total is grand test total plus total entry;
-		now grand test failures is grand test failures plus failures entry;
-		log "[test set entry as a test set]: [total entry] tests, [failures entry] failures[line break]";
-	log "Total: [grand test total] tests, [grand test failures] failures.";
-	Repeat through Table of Test Results:
-		if failures entry is at least 1:
-			log "[line break]Failures for [test set entry as a test set]:[paragraph break]";
-			log "[failure messages entry]";	
-	say "To view a full transcript of all tests, see the file 'testtranscript.glkdata' in the project directory.";
-	pause the game;
-	
-Chapter - test steps
-
-Section - Properties
-
-A test step is a kind of value. Some test steps are defined by the Table of test steps.
-A test step has a stored action called the scheduled action. The scheduled action of a test step is usually the action of waiting.
-A test step has a test step called the next move. The next move of a test step is usually normal keyboard input.
-
-A test step can be repeatable. A test step has a number called the maximum repeats. The maximum repeats of a test step is usually 100. A test step can be uneventful.
-
-Table of test steps
-test step
-normal keyboard input
-
-A test step has a text called the maxed out report. The maxed out report of a test step is usually "[The scheduled event] repeated [repeated moves] times without resolution."
-
-A test step can be generated.
-
-Section - Enabling screen effects when testing is done
-
-Initial scheduling of normal keyboard input:
-	now allowing screen effects is true.
-	
-Section - Scheduling
-
-To decide whether testing (T - a test step):
-	decide on whether or not the scheduled event is T;
-
-To decide whether testing (D - a description of test steps):
-	Repeat with T running through D:
-		decide on whether or not testing T;
-
-The repeated moves is a number that varies;
-
-The scheduled event is a test step that varies. The scheduled event is the normal keyboard input.
-
-Initial scheduling rules are a test step based rulebook.
-
-Initial scheduling for a test step (this is the reset act counts rule):
-	repeat with guy running through people:
-		now the act count of guy is 0;
-			
-To schedule (the event described - a test step):
-	transcribe and restart capturing;
-	if the event described is not the scheduled event:
-		now the scheduled event is the event described;
-		if the event described is normal keyboard input:
-			transcribe and stop capturing;
-			say line break;
-			start capturing text;
-		otherwise:
-			log "  next step:  [the event described]";
-		follow the initial scheduling rules for the event described;
-		now the repeated moves is 0;
-	otherwise:
-		transcribe and stop capturing;
-		start capturing text;
-		increment the repeated moves;
-	now the event described is not generated;
-	transcribe and restart capturing;
-	
-Before taking a player action when the scheduled event is generated:
-	stop and save event description;
-	Let repeat be whether or not (the scheduled event is repeatable) and (the repeated moves > 0);
-	now the scheduled event is not generated;
-	say " .[run paragraph on]";
- 	start capturing text;
-	follow the testing effects rules for the scheduled event;
-	transcribe and stop capturing;
-	Let repeat be whether or not the scheduled event is [still] repeatable;
-	if repeat is true and the repeated moves is not less than the maximum repeats of the scheduled event:
-		now repeat is false;
-		if the scheduled event is uneventful:
-			record success of the scheduled event;
-		otherwise:
-			assert "[the maxed out report of the scheduled event]" based on false;
-			Repeat with the attempt running through not achieved possible randomized outcomes:
-				assert "After [the scheduled event], [the attempt] was still not tested" based on false;
-	if repeat is true:
-		schedule the scheduled event;
-	otherwise:
-		schedule the next move of the scheduled event;
-	
-Section - Generating Actions
-
-For taking a player action when the scheduled event is not the normal keyboard input (this is the test step player action rule):
-	if the player is at-React:
-		follow the choosing a player reaction rules;
-	otherwise:
-		generate a player action of the scheduled action of the scheduled event;
-		now the scheduled event is generated;
-		
-The test step player action rule is listed before the parse command rule in the for taking a player action rulebook.
-		
-A test step has an object called the location-target.
-
-To decide which room is the action-destination of (current move - a test step):
-	Let the current destination be the location-target of the current move;
-	if the current destination is nothing, decide on Null-room;
-	if the current destination is a room, decide on the current destination;
-	decide on the location of the current destination.
-
-The delayed action is a stored action that varies. The delayed action is the action of waiting.
-
-For taking a player action (this is the move to the destination of a test step rule):
-	if the player is at-React:
-		make no decision;
-	Let the place be the action-destination of the scheduled event;
-	if the place is the location:
-		transcribe and restart capturing;
-	if the place is Null-room or the place is the location:
-		make no decision;
-	Let the way be the best route from the location to the place;
-	if the way is not a direction:
-		record failure of the scheduled event with message "No available route from [the location] to [the location-target of the scheduled event] (in [the place])";
-		make no decision;
-	generate a player action of the action of going the way;
-		
-The move to the destination of a test step rule is listed before the test step player action rule in the for taking a player action rulebook.
-
-Choosing a player reaction is a rulebook. The choosing a player reaction rules have default success.
-
-[I7 names borrowed from Ron Newcomb's Original Parser]
-The action in progress is an action name that varies. 
-The person requesting is a person that varies. 
-The action in progress variable translates into I6 as "action".
-The person requesting variable translates into I6 as "act_requester".
-
-To begin the current action: (- BeginAction(action, noun, second); -)
-
-To generate a player action of (the desired action - a stored action):
-	transcribe "Player action: [the desired action]";
-	now the action in progress is the action name part of the desired action;
-	now the person asked is the actor part of the desired action;
-	[now the person requesting is nothing;] [not allowed in I7?]
-	if the person asked is not the player, now the person requesting is the player;
-	now the noun is the noun part of the desired action;
-	now the second noun is the second noun part of the desired action;
-	begin the current action;
-	
-The compelled action is a stored action that varies. The compelled action is the action of waiting.
-
-To compel (the desired action - a stored action):
-	Let the guy be the actor part of the desired action;
-	transcribe "compelling [the desired action][if the guy is asleep] and waking up [the guy]";
-	now the guy is not asleep;
-	Now the compelled action is the desired action.
-	
-A Standard AI rule for a person (called P) (this is the compel an action rule):
-	if P is at-Act and the actor part of the compelled action is P:
-		try the compelled action;
-		now the compelled action is the action of waiting;
-		rule succeeds.
-	
-The compel an action rule is listed before the insane people attack themselves rule in the standard AI rulebook.
-	
-[A last AI action selection rule for an at-Act person (called P) when the compelled action is not the action of waiting:
-	unless P is the actor part of the compelled action, make no decision;
-	blank out the whole of the Table of AI Action Options;
-	choose a blank row in the Table of AI Action Options;
-	now the Option entry is the compelled action;
-	now the Action Weight entry is 1000;
-	now the compelled action is the action of waiting.]
-
-Last choosing a player reaction:
-	generate a player action of the action of waiting.
-
-testing effects rules are a test step based rulebook.
-
-Chapter - Test Sets
-
-A test set is a kind of value. null-test is a test set.
-
-A test set can be isolated.
-
-Definition: A test set (called the procedure) is enabled:
-	If no test set is isolated, yes;
-	decide on whether or not the procedure is isolated.
-
-Definition: the null-test is enabled: no.
-
-A test set has a test step called the first move. The first move of a test set is usually normal keyboard input.
-
-The current test set is a test set that varies.
-
-To decide what number is (T - a test set) as a number: (- {T} -);
-To decide what test set is (T - a number) as a test set: (- {T} -);
-
-Done testing is a truth state that varies.
-
-To decide whether testing (T - a test set):
-	if done testing is true, no;
-	decide on whether or not the current test set is T;
-
-First when play begins (this is the run all tests rule):
-	write "Test transcript for Kerkerkruip.[line break]" to file of test transcript;
-	initialize test steps;
-	start the next test;
-	transcribe and restart capturing text;
-	if done testing is false:
-		Now the current unit test name is "[the current test set]";
-		log "Now testing [the current test set].";
-		consider the scenario rules;
-	otherwise:
-		transcribe and stop capturing.
-
-The random seed rule is listed before the run all tests rule in the when play begins rules.
-	
-To decide which test set is the initiator of (the event -  a test step):
-	Repeat with the candidate running through test sets:
-		if the event is the first move of the candidate, decide on the candidate;
-	Decide on the null-test.
-	
-To initialize test steps:
-	Let the current set be the null-test;
-	Let the last event be normal keyboard input;
-	Repeat with the next event running through test steps:
-		Let the new test set be the initiator of the next event;
-		if the new test set is not the null-test:
-			now the current set is the new test set;
-		otherwise if the last event is not normal keyboard input:
-			now the next move of the last event is the next event;
-		now the last event is the next event;
-	
-Last when play begins (this is the start the next test rule):
-	if done testing is false:
-		consider the test play rules;
-		schedule the first move of the current test set;
-	
-The scenario rules are a rulebook.
-
-The test play rules are a rulebook.
-
-Chapter - Randomized Events
-
-A randomized outcome is a kind of value. boring lack of results is a randomized outcome.
-
-A randomized outcome can be achieved.
-
-Event resolution relates various randomized outcomes to one test step. The verb to result from (he results from, they result from, it is required, it is resulting from) implies the event resolution relation.
-
-The outcome being tested is a randomized outcome that varies.
-
-Definition: a randomized outcome is possible if it results from the scheduled event;
-
-To decide whether (O - a randomized outcome) became the/-- possibility:
-	if O is not achieved and O is possible:
-		now the outcome being tested is O;
-		yes;
-	no.
-	
-To mark the/-- outcome as/-- achieved:
-	[say "achieved outcome [the outcome being tested].";]
-	now the outcome being tested is achieved;
-	
-testing effects:
-	unless a randomized outcome is possible, make no decision;
-  	follow the randomized outcome testing rules;
-	if every possible randomized outcome is achieved:
-		record success of the scheduled event;
-	otherwise:
-		now the scheduled event is repeatable;
-
-randomized outcome testing is a rulebook.
-
-
-Chapter - The assert phrase (in place of Chapter - The assert phrase in Simple Unit Tests by Dannii Willis)
-
-The test assertion count is a number variable.
-The total assertion count is a number variable.
-The assertion failures count is a number variable.
-
-[ Assert that two values are the same ]
-To assert that/-- (A - a value) is (B - a value):
-	assert that A is B with label "value";
-	
-To assert that/-- (A - a value) is (B - a value) with label (T - an indexed text):
-	record a test attempt;
-	unless A is B:
-		Let error_msg be an indexed text;
-		now error_msg is "Expected [T]: [B], Got: [A][line break]";
-		record a failure report of error_msg;
-
-To assert truth of/-- (C - a truth state) with message (T - an indexed text):
-	record a test attempt;
-	unless C is true:
-		record a failure report of T;
-	
-To assert (T - an indexed text) based on (C - a truth state):
-	assert truth of C with message T;
-	
-To record a/-- success of (E - a test step):
-	now E is not repeatable;
-	assert truth of true with message "success."
-
-To record a/-- failure of/-- (E - a test step) with message (M - an indexed text):
-	now E is not repeatable;
-	assert truth of false with message M;
-	
-[ Assert that any condition is true, but with less information on failure ]
-To assert that/-- (C - a condition):
-	(- Assert_Condition({C}); -).
-
-Include (-
-[ Assert_Condition C;
-	EndCapture();
-	(+ the test assertion count +)++;
-	(+ the total assertion count +)++;
-	if (~~(C))
-	{
-		(+ the assertion failures count +)++;
-		print "Failure for test: ";
-		print (INDEXED_TEXT_TY_Say) (+ the current unit test name +);
-		print ", assertion: ", (+ the test assertion count +), ". (Asserted condition is false)^";
-	}
-	StartCapture();
-];
--).
-
-Chapter - Resetting the Game After Each Test Set (in place of Chapter - The Unit test rules unindexed in Simple Unit Tests by Dannii Willis)
-
-The current unit test name is an indexed text variable.
-
-To start the/-- next test:
-	transcribe and stop capturing;
-	Repeat with T running through enabled test sets:
-		now the current test set is T;
-		if the result of saving undo state is successful save, stop;
-		read file of test results into Table of Test Results;
-	now done testing is true;
-	display test results;
-
-For reading a command when done testing is false:
-	transcribe and stop capturing text;
-	write file of test results from Table of Test Results;
-	restore undo state.
-	
-Chapter - Helpful phrases
-
-To extract (guy - a person) to (place - a room):
-	transcribe "moving [guy] to [place]";
-	extract guy from combat;
-	move guy to place;
-	update the combat status;
-	
-To have (guy - a person) defeat (loser - a person):
-	transcribe "having [guy] defeat [loser]";
-	Now the health of loser is -1;
-	Have an event of guy killing loser;	
-	
-To have the player sacrifice (stuff - a power):
-	Let the power-level be the power level of stuff;
-	assert truth of whether or not power-level > 0 with message "power level of sacrificed ability should be positive";
-	Let divinity be a random god who infuses the location;
-	transcribe "Sacrificing [stuff] to [divinity]";
-	now the current question is "Which power do you want to sacrifice?";
-	now sacrifice-lijst-2 is {};
-	add stuff to sacrifice-lijst-2;
-	now sacrifice-lijst is {"sacrifice", "don't sacrifice"};
-	now the number understood is 1;
-	let the previous favour be the favour of the player with divinity;
-	follow the sacrifice rule;
-	assert that the favour of the player with divinity is the previous favour + the power-level;
-
-To assert that (message - an indexed text) includes (pattern - an indexed text):
-	record a test attempt;
-	unless message matches the regular expression pattern:
-		Let error_msg be an indexed text;
-		now error_msg is "Regular expression '[pattern]' was not found in the text:[paragraph break]'[message]'[line break]";
-		record a failure report of error_msg;
-		
-To assert that (message - an indexed text) does not include (pattern - an indexed text):
-	record a test attempt;
-	if message matches the regular expression pattern:
-		Let error_msg be an indexed text;
-		now error_msg is "Regular expression '[pattern]' should not have been found in the text:[paragraph break]'[message]'[line break]";
-		record a failure report of error_msg;
-
-To assert that (N - a number) is between (A - a number) and (B - a number):
-	assert truth of whether or not N is at least A and N is at most B with message "[N] is not between [A] and [B]";
-	
-To assert that (item - a thing) is in (place - an object):
-	Let msg be indexed text;
-	Now msg is "Expected location of [the item]: [place]. Got: [location of the item].";
-	assert truth of whether or not the location of item is place with message msg;
-	
-To pause and assert that the event description includes (pattern - an indexed text):
-	stop and save event description;
-	assert that the event description includes pattern;
-	transcribe and restart capturing;
-	
-To pause and assert that the event description does not include (pattern - an indexed text):
-	stop and save event description;
-	assert that the event description does not include pattern;
-	transcribe and restart capturing.
-
-Section - hiding-check and hiding-reveal
-
-Traveling sneakily is a truth state that varies.
-
-A detection rule when traveling sneakily is true:
-	say "+ 100 (traveling sneakily for testing purposes)[run paragraph on]";
-	increase hiding roll by 100;
-
-The way-to-get-back is a direction that varies.
-The way-to-get-there is a direction that varies.
-
-To force the cloak of shadows to work:
-	if the player does not enclose the cloak of shadows, now the player carries the cloak of shadows;
-	try wearing the cloak of shadows;
-	now the player is hidden;
-		
-Carry out taking off the cloak of shadows:
-	now traveling sneakily is false;
-	
-To travel sneakily to (place - a room):
-	force the cloak of shadows to work;
-	While the location is not the place:
-		now the way-to-get-there is the best route from the location to the place;
-		record a test attempt;
-		if the way-to-get-there is a direction:
-			let already sneaking be traveling sneakily;
-			now traveling sneakily is true;
-			try going the way-to-get-there;
-			now traveling sneakily is already sneaking;
-		otherwise:
-			record failure report "Can't find a route to [place].";
-			stop;
-	now the way-to-get-back is the best route from the location to the retreat location;
-			
-previously-fast is a truth state that varies.
-
-A test step can be hiding-check.
-
-initial scheduling for a test step (called the current move):
-	now traveling sneakily is whether or not the current move is hiding-check;
-	if traveling sneakily is true, force the cloak of shadows to work;
-	
-After taking a player action (this is the assume all actions are fast until every turn runs rule):
-	now previously-fast is true;
-	
-First every turn (this is the remember if the last turn took time rule):
-	now previously-fast is false;
-
-[start-of-turn combat is a truth state that varies.
-
-After taking a player action when the scheduled event is a hiding-check test step: 
-	now opposition test subject is the player;
-	Now start-of-turn combat is whether or not the location encloses an opposer person;]
-	
-testing effects for a hiding-check test step (called the current move):
-	[a move can be hiding-check and hiding-reveal if it involves sneaking to a location and then revealing yourself]
-	if the current move is hiding-reveal, make no decision;
-	assert "the player should be hidden" based on whether or not the player is hidden;
-	[ These tests are too slow, and they run way too often.
-	if start-of-turn combat is false, make no decision;
-	if previously-fast is true, make no decision;
-	Now opposition test subject is the player;
-	if the location encloses a not asleep opposer person:
-		assert that the event description includes ", which must be positive\. You remain hidden\.|([doesn't see you pattern])";
-	repeat with guy running through asleep opposer persons in the location:
-		if the act count of guy is at least 1:
-			assert that the event description includes "[The guy] sleeps peacefully";]
-
-Section - Counting Actions
-
-A person has a number called the act count;
-
-A person has a number called the reaction count.
-
-Initial scheduling of a test step:
-	Repeat with guy running through people:
-		now the reaction count of guy is 0;
-		
-A combat round rule (this is the count combat actions rule):
-	increment the act count of the main actor;
-
-Before an at-react person doing something (this is the count reactions rule):
-	increment the reaction count of the actor;
-	
-The count combat actions rule is listed before the dreadful presence effect rule in the combat round rules.
-	
 Chapter - test plays
 
 Section - Aite Champions vs Bat
@@ -974,7 +408,6 @@ application rulebook check if the test applies and marks it as completed - or ch
 assertion rulebook runs the test's assertions]
 
 A test play when testing Aite champions vs bat:
-	log "begin test play";
 	now the player carries Drakul's lifeblood;
 	extract the player to the location of Bodmall;
 	have the player defeat Bodmall;
@@ -990,7 +423,6 @@ A test play when testing Aite champions vs bat:
 	try turning bat;
 	Repeat with guy running through people in Arena of the Gods:
 		now the defence of guy is 100;
-	log "done test play";
 
 Player-targeted is a truth state that varies.
 Player-damaged is a truth state that varies.
@@ -1027,19 +459,22 @@ randomized outcome testing when bat crashing into spike became the possibility:
 randomized outcome testing when bat avoiding huge spike became the possibility:
 	if player-targeted is false, make no decision;
 	if player-damaged is true, make no decision;
-	unless the event description matches the regular expression "huge <a-z>+ bursts out of the ground", make no decision;
+	unless the event description matches the regular expression "huge <a-z>+ bursts out of the ground in front of you", make no decision;
 	mark the outcome achieved;
-	assert that the event description includes "fly over";
+	assert that the event description includes "You fly over";
 
 randomized outcome testing when bat avoiding gigantic spike became the possibility:
 	if player-targeted is false, make no decision;
  	if player-damaged is true, make no decision;
-	unless the event description matches the regular expression "gigantic", make no decision;
+	unless the event description matches the regular expression "gigantic <a-z>+ bursts out of the ground in front of you", make no decision;
 	mark the outcome achieved;
-	assert that the event description includes "fly around";
+	assert that the event description includes "You fly around";
 
-Arena-tormentor-enslaving is a test step. The scheduled action of Arena-tormentor-enslaving is the action of enslaving the tormentor of Aite.
+Arena-tormentor-enslaving is a test step.
 
+Choosing a player action when testing Arena-tormentor-enslaving:
+	generate the action of enslaving the tormentor of Aite.
+	
 testing effects of Arena-tormentor-enslaving:
 	assert that the event description includes "will do your bidding";
 	assert that the event description includes "ball of lightning .* damage to the tormentor of Aite";
@@ -1077,7 +512,10 @@ A test play when testing Defender-enslaving:
 	try smiting the healer of Aite;
 	now the health of Defender of Aite is 100;
 	
-Arena-defender-enslaving is a test step. The first move of Defender-enslaving is Arena-defender-enslaving. The scheduled action of Arena-defender-enslaving is the action of enslaving the defender of Aite.
+Arena-defender-enslaving is a test step. The first move of Defender-enslaving is Arena-defender-enslaving. 
+
+Choosing a player action when testing Arena-defender-enslaving:
+	generate the action of enslaving the defender of Aite.
 
 testing effects of Arena-defender-enslaving:
 	assert that the event description includes "will do your bidding";
@@ -1085,7 +523,10 @@ testing effects of Arena-defender-enslaving:
 	assert that the event description includes "The defender of Aite prostrates himself. 'I beg for your mercy, O great Aite,' he prays. Then he rises to fight you again!";
 	assert that the defender of Aite opposes the player;
 
-Arena-defender-re-enslaving is a test step. The next move of Arena-defender-enslaving is Arena-defender-re-enslaving. The scheduled action of Arena-defender-re-enslaving is the action of enslaving the defender of Aite;
+Arena-defender-re-enslaving is a test step. The next move of Arena-defender-enslaving is Arena-defender-re-enslaving.   
+
+Choosing a player action when testing Arena-defender-re-enslaving:
+	generate the action of enslaving the defender of Aite;
 
 Before taking a player action when Arena-defender-re-enslaving is the scheduled event:
 	now the health of Defender of Aite is 1;
@@ -1132,7 +573,10 @@ A test play when testing Chton champion vs bat:
 	have the player and Drakul fight in Arena of the Gods;
 	pause and assert that the event description includes "grants you 2 divine favour![line break][line break]Herm gifts you two scrolls, a magical spade and a Morphean grenade; and increases your hiding bonus to \+2\.[line break][line break]You are transported to the Arena of the Gods, where the angry Drakul awaits, preparing himself to"
 	
-arena-vampire-joining is a test step. The first move of Chton champion vs bat is arena-vampire-joining. The scheduled action of arena-vampire-joining is the action of drinking Drakul's lifeblood;
+arena-vampire-joining is a test step. The first move of Chton champion vs bat is arena-vampire-joining.   
+
+Choosing a player action when testing arena-vampire-joining:
+	generate the action of drinking Drakul's lifeblood;
 
 The summoned creature is an object that varies;
 
@@ -1145,7 +589,10 @@ testing effects for arena-vampire-joining:
 	assert truth of whether or not the summoned creature does not oppose the player with message "summoned creature shouldn't oppose undead player";
 	assert truth of whether or not the summoned creature opposes drakul with message "summoned creature should oppose drakul (unless Remko says this test is wrong)";
 
-chton-arena-cheating is a test step. The next move of arena-vampire-joining is chton-arena-cheating. The scheduled action of chton-arena-cheating is the action of smiting drakul.
+chton-arena-cheating is a test step. The next move of arena-vampire-joining is chton-arena-cheating.   
+
+Choosing a player action when testing chton-arena-cheating:
+	generate the action of smiting drakul.
 
 Before taking a player action when the scheduled event is chton-arena-cheating:
 	Now the health of the player is 1;
@@ -1188,7 +635,10 @@ A test play when testing parting shots:
 	
 mindslug-hiding-check is a hiding-check test step. The first move of parting shots is mindslug-hiding-check.
 
-mindslug-hidden-retreat is a hiding-check test step. The scheduled action of mindslug-hidden-retreat is the action of retreating.
+mindslug-hidden-retreat is a hiding-check test step.   
+
+Choosing a player action when testing mindslug-hidden-retreat:
+	generate the action of retreating.
 	
 Before taking a player action when mindslug-hidden-retreat is the scheduled event:
 	assert that the mindslug is in the location;
@@ -1204,27 +654,26 @@ testing effects for mindslug-hidden-retreat:
 	
 mindslug-hidden-runner is a hiding-check test step.
 
-Before taking a player action when mindslug-hidden-runner is the scheduled event:
+initial scheduling of mindslug-hidden-runner:
 	extract the player to the location of the mindslug;
-	now the scheduled action of mindslug-hidden-runner is the action of going way-to-get-back.
+	
+Choosing a player action when testing mindslug-hidden-runner:
+	generate the action of going way-to-get-back.
 	
 testing effects for mindslug-hidden-runner:
 	assert zero hits by mindslug;
 	assert zero hits by fafhrd;
 	assert zero hits by mouser;
 	
-A test step can be hiding-reveal.
-	
 mindslug-reveal is a hiding-reveal test step. The next move of mindslug-hidden-runner is mindslug-reveal.
-
-First when play begins:
-	Repeat with E running through hiding-reveal test steps:
-		Now the scheduled action of E is the action of taking off the shadows cloak. ["the action of taking of the cloak of shadows" doesn't parse  ]
 
 Initial scheduling for mindslug-reveal:
 	try going way-to-get-there;
 
-mindslug-retreat is a test step.  The next move of mindslug-reveal is mindslug-retreat. The scheduled action of mindslug-retreat is the action of retreating.
+mindslug-retreat is a test step.  The next move of mindslug-reveal is mindslug-retreat.   
+
+Choosing a player action when testing mindslug-retreat:
+	generate the action of retreating.
 
 Before taking a player action [or reaction] when mindslug-retreat is the scheduled event:
 	now mindslug presses the player;
@@ -1247,10 +696,12 @@ testing effects for mindslug-retreat:
 	
 mindslug-runner is a test step.
 
-Before taking a player action when mindslug-runner is the scheduled event:
-	now the scheduled action of mindslug-runner is the action of going the way-to-get-back;
+Initial scheduling of mindslug-runner:
 	extract the player to the location of the mindslug;
 	now retreat location is the location of the mindslug;
+
+Choosing a player action when testing mindslug-runner:
+	generate the action of going the way-to-get-back;
 	
 testing effects for mindslug-runner:
 	assert that the event description includes "run past your enemies";
@@ -1273,7 +724,10 @@ Initial scheduling of fell-freezing:
 Last carry out an actor israfel-reuniting when testing parting shots:
 	now the initiative of the actor is -2;
 	
-frozen-fell-fleeing is a test step. The scheduled action of frozen-fell-fleeing is the action of retreating.
+frozen-fell-fleeing is a test step.   
+
+Choosing a player action when testing frozen-fell-fleeing:
+	generate the action of retreating.
 
 testing effects of frozen-fell-fleeing:
 	assert that israfel-reuniting-initiator is Fell with label "the reuniting initiator";
@@ -1296,7 +750,10 @@ israfel-resplitting is a test step.
 Initial scheduling of israfel-resplitting:
 	compel the action of israfel israfel-splitting;
 	
-unfrozen-fell-fleeing is a test step. The scheduled action of unfrozen-fell-fleeing is the action of retreating.
+unfrozen-fell-fleeing is a test step.   
+
+Choosing a player action when testing unfrozen-fell-fleeing:
+	generate the action of retreating.
 
 initial scheduling of unfrozen-fell-fleeing:
 	now fell presses the player;
@@ -1332,7 +789,6 @@ Scenario when testing tentacle-grab:
 	
 A test play when testing tentacle-grab:
 	now the player carries the pickaxe;
-	force the cloak of shadows to work;
 	try butterflying;
 	Travel sneakily to the location of the tentacle;
 	now every person enclosed by the location is not asleep;
@@ -1341,7 +797,10 @@ tentacle-hiding-check is a hiding-check test step. The first move of tentacle-gr
 
 Tentacle-reveal is a hiding-reveal test step. The next move of tentacle-hiding-check is tentacle-reveal.
 
-tentacle-retreat is a test step.  The next move of tentacle-reveal is tentacle-retreat. The scheduled action of tentacle-retreat is the action of retreating.
+tentacle-retreat is a test step.  The next move of tentacle-reveal is tentacle-retreat.   
+
+Choosing a player action when testing tentacle-retreat:
+	generate the action of retreating.
 
 Before taking a player action when testing tentacle-grab:
 	if the player is at-react:
@@ -1365,7 +824,9 @@ tentacle-dig-retreat is a test step. The next move of tentacle-retreat is tentac
 
 initial scheduling for tentacle-dig-retreat:
 	now the tentacle does not grapple the player;
-	now the scheduled action of tentacle-dig-retreat is the action of digging a random diggable direction.
+	
+choosing a player action when testing tentacle-dig-retreat:
+	generate the action of digging a random diggable direction.
 	
 testing effects for tentacle-dig-retreat:
 	assert that the event description includes "magically create a tunnel";
@@ -1400,7 +861,10 @@ A test play when testing insane-drakul:
 	try Drakul concentrating;
 	pause and assert that the event description includes "Drakul attains the highest state of concentration. 'It feels so good to be alive!'";
 	
-Driving Drakul insane is a test step. The first move of insane-drakul is driving Drakul insane. The scheduled action of driving drakul insane is the action of attacking drakul;
+Driving Drakul insane is a test step. The first move of insane-drakul is driving Drakul insane.   
+
+Choosing a player action when testing driving drakul insane:
+	generate the action of attacking drakul;
 
 After taking a player action when the scheduled event is driving drakul insane:
 	now the health of Drakul is 100;
@@ -1667,7 +1131,7 @@ Choosing a player reaction when reaction-mindslug-killing is the scheduled event
 	assert truth of whether or not the mindslug is alive with message "the mindslug should be alive";
 	if the player carries a scroll of death:
 		let the death-scroll be a random carried scroll of death;
-		generate a player action of the action of reading the death-scroll;
+		generate the action of reading the death-scroll;
 		now the scheduled event is not repeatable;
 		rule succeeds;
 
@@ -1684,16 +1148,14 @@ dream-of-sleeping-test is a test set.
 
 Scenario when testing dream-of-sleeping-test:
 	now the dream of sleeping is current-test-dream;
-	now a random morphean grenade is testobject;
+	now the reusable item is a random morphean grenade;
 	
-Test play when testing dream-of-sleeping-test:
-	let M be a random morphean grenade;
-	now the player carries M;
-	Now the scheduled action of sleeping-dream-dreaming is the action of throwing M;
+Sleeping-dream-dreaming is an item-throwing test step. The first move of dream-of-sleeping-test is sleeping-dream-dreaming.
 
-Sleeping-dream-dreaming is a test step. The first move of dream-of-sleeping-test is sleeping-dream-dreaming.
+Sleeping-dream-waking is a test step. The next move of sleeping-dream-dreaming is sleeping-dream-waking.   
 
-Sleeping-dream-waking is a test step. The next move of sleeping-dream-dreaming is sleeping-dream-waking. The scheduled action of sleeping-dream-waking is the action of the untroubled sleeper trying exiting.
+Choosing a player action when testing sleeping-dream-waking:
+	generate the action of exiting.
 
 testing effects of sleeping-dream-waking:
 	assert that the event description includes "Malygris standing over you";
@@ -1810,7 +1272,10 @@ Test play when testing divine reward:
 	now the health of the player is the permanent health of the player - 1;
 	try Israfel Israfel-splitting;
 	
-isra-only-killing is a test step. The first move of divine reward is isra-only-killing. The scheduled action of isra-only-killing is the action of smiting isra.
+isra-only-killing is a test step. The first move of divine reward is isra-only-killing.   
+
+Choosing a player action when testing isra-only-killing:
+	generate the action of smiting isra.
 
 initial scheduling of isra-only-killing:
 	now fell is asleep;
@@ -1825,7 +1290,10 @@ testing effects of isra-only-killing:
 	assert truth of whether or not the health of the player is less than the permanent health of the player with message "The player should not be healed";
 	assert that the event description does not include "Nomos receives .* and fully heals you";
 	
-fell-also-killing is a test step. The next move of isra-only-killing is fell-also-killing. The scheduled action of fell-also-killing is the action of smiting fell.
+fell-also-killing is a test step. The next move of isra-only-killing is fell-also-killing.   
+
+Choosing a player action when testing fell-also-killing:
+	generate the action of smiting fell.
 	
 testing effects of fell-also-killing:
 	assert that the location is Hall of Gods;
@@ -1893,7 +1361,10 @@ Test play when testing temporary Nomos blood magic:
 	assert that the dreadful presence of the player is 2;
 	transcribe and restart capturing;
 	
-second-gown-feeding is a hiding-check test step. The first move of temporary Nomos blood magic is second-gown-feeding. The scheduled action of second-gown-feeding is the action of feeding the gown of the red court.
+second-gown-feeding is a hiding-check test step. The first move of temporary Nomos blood magic is second-gown-feeding.   
+
+Choosing a player action when testing second-gown-feeding:
+	generate the action of feeding the gown of the red court.
 
 testing effects of second-gown-feeding:
 	assert that the blood magic level of the gown of the red court is 2;
@@ -1941,7 +1412,10 @@ Testing effects of daggers-meeting:
 	now the health of the swarm of daggers is 100;
 	now the melee of the player is 100;
 
-nomos-bonus-examining is a test step. The scheduled action of nomos-bonus-examining is the action of examining the swarm of daggers.
+nomos-bonus-examining is a test step.   
+
+Choosing a player action when testing nomos-bonus-examining:
+	Generate the action of examining the swarm of daggers.
 
 Initial scheduling of nomos-bonus-examining:
 	now the nomos bonus is true;
@@ -1949,7 +1423,10 @@ Initial scheduling of nomos-bonus-examining:
 Testing effects of nomos-bonus-examining:
 	assert that the event description includes "swarm of daggers attacks using sharp points";
 
-malleus-bonus-attacking is a hiding-check test step. The scheduled action of malleus-bonus-attacking is the action of swearing obscenely. 
+malleus-bonus-attacking is a hiding-check test step.   
+
+Choosing a player action when testing malleus-bonus-attacking:
+	Generate the action of swearing obscenely. 
 
 [swearing obscenely is not acting fast, but a rule sets the take no time boolean for it. This will be too late to stop the nomos bonus from changing our action]
 
@@ -1995,7 +1472,10 @@ Test play when testing bug-234:
 	pause and assert that the event description includes "You can only link to persons";
 	assert that the event description does not include "You forge a spiritual link";
 
-still-linking is a repeatable test step. The first move of bug-234 is still-linking. The maximum repeats of still-linking is 20. The scheduled action of still-linking is the action of linking the healer of Aite.
+still-linking is a repeatable test step. The first move of bug-234 is still-linking. The maximum repeats of still-linking is 20.   
+
+Choosing a player action when testing still-linking:
+	Generate the action of linking the healer of Aite.
 
 testing effects of still-linking:
 	if the healer of Aite is linked to the player:
@@ -2081,9 +1561,9 @@ testing effects of waiting-for-banshees:
 
 banshee-fleeing is a test step. The next move of waiting-for-banshees is banshee-fleeing.
 
-Initial scheduling for banshee-fleeing:
+Choosing a player action when testing banshee-fleeing:
 	Let the way be the best route from the location to the retreat location;
-	Now the scheduled action of banshee-fleeing is the action of going the way.
+	generate the action of going the way.
 
 testing effects of banshee-fleeing:
 	assert "we should no longer be in Hall of the Raging Banshees" based on whether or not the location is not Hall of Raging Banshees;
@@ -2093,10 +1573,12 @@ testing effects of banshee-fleeing:
 banshee-returning is a test step. The next move of banshee-fleeing is banshee-returning.
 
 Initial scheduling for banshee-returning:
-	Let the way be the best route from the location to the hall of raging banshees;
-	now the scheduled action of banshee-returning is the action of going the way;
 	extract the reaper to the location [to keep the tension from dissipating];
 	set the tension to 10.
+	
+Choosing a player action when testing banshee-returning:
+	Let the way be the best route from the location to the hall of raging banshees;
+	generate the action of going the way;
 
 testing effects of banshee-returning:
 	assert "Tension should be at least 10" based on whether or not the tension is at least 10;
@@ -2119,11 +1601,14 @@ Initial scheduling of reaction-ape-killing:
 Choosing a player reaction when reaction-ape-killing is the scheduled event:
 	if the player carries a scroll of death:
 		let the death-scroll be a random carried scroll of death;
-		generate a player action of the action of reading the death-scroll;
+		generate the action of reading the death-scroll;
 		now the scheduled event is not repeatable;
-		Let the way be the best route from the location to the retreat location;
-		Now the scheduled action of reaction-ape-killing is the action of going the way;
-		rule succeeds;
+		
+Choosing a player action when testing reaction-ape-killing:
+	if reaction-ape-killing is repeatable:
+		make no decision;
+	Let the way be the best route from the location to the retreat location;
+	generate the action of going the way;
 
 testing effects of reaction-ape-killing:
 	if the scheduled event is repeatable, make no decision;
@@ -2153,12 +1638,6 @@ Scenario when testing remembering-text:
 	Now the reusable item is a random scroll of psycholocation;
 	now the reusable item is testobject;
 	
-The reusable item is an object that varies.
-
-Before taking a player action:
-	if the reusable item is a thing and the reusable item is not carried:
-		now the player carries the reusable item;
-	
 [in case the first map is rejected, Arcane Vault must be switched back from testobject to bannedobject every time]
 first creating the map rule when testing remembering-text:
 	now every secretly placeable room is bannedobject; [prevent normal placement of Arcane Vault to simulate conditions for bug 244]
@@ -2184,12 +1663,18 @@ Test play when testing remembering-text:
 	assert "Lake of Lava should not be secretly placed" based on whether or not lake of lava is not secretly placed;
 	assert "Lake of Lava should not be placeable" based on whether or not lake of lava is not placeable;
 	
-nothing-to-remember is a test step. The first move of remembering-text is nothing-to-remember. The scheduled action of nothing-to-remember is the action of remembering. 
+nothing-to-remember is a test step. The first move of remembering-text is nothing-to-remember.   
+
+Choosing a player action when testing nothing-to-remember:
+	Generate the action of remembering. 
 
 testing effects of nothing-to-remember:
 	assert that the event description includes "You have not yet explored:\n( - the <a-w>+ exit of the entrance hall \(where you currently are\)\n)+\nYou have visited the following rooms: the entrance hall \(here\)\.\n\nTip:"
 	
-dumb-sensing is a test step. The scheduled action of dumb-sensing is the action of sensing;
+dumb-sensing is a test step.   
+
+Choosing a player action when testing dumb-sensing:
+	Generate the action of sensing;
 
 testing effects of dumb-sensing:
 	assert "Powerless sensing should not take time" based on previously-fast;
@@ -2198,15 +1683,18 @@ A test step can be psy-scroll-reading;
 
 early-psycholocation is a psy-scroll-reading test step.
 
-Initial scheduling of a psy-scroll-reading test step (called the current event):
-	now the scheduled action of the current event is the action of reading the reusable item;
+choosing a player action when testing a psy-scroll-reading test step:
+	generate the action of reading the reusable item;
 	
 testing effects of psy-scroll-reading test step:
 	[TODO: text that sensing takes no time]
 	assert "The player should be psycholocating now" based on the psycholocation boolean;
 	assert that the event description includes "When you are psycholocating, sensing does not take time"
 
-unexplored-sensing is a test step. The scheduled action of unexplored-sensing is the action of sensing.
+unexplored-sensing is a test step.   
+
+Choosing a player action when testing unexplored-sensing:
+	Generate the action of sensing.
 
 testing effects of unexplored-sensing:
 	Repeat with the enemy running through {swarm of daggers, blood ape, demon of rage, angel of compassion, minotaur, bodmall, malygris}:
@@ -2221,8 +1709,11 @@ testing effects of unexplored-sensing:
  - a skein of twisting passages, from the south
  - spreading thorns dripping with dew--or blood, from the wes]
 	
-remembering-daggers is a hiding-check test step. The scheduled action of remembering-daggers is the action of remembering. The location-target of remembering-daggers is the swarm of daggers.
-	
+remembering-daggers is a hiding-check test step.  The location-target of remembering-daggers is the swarm of daggers.
+
+Choosing a player action when testing remembering-daggers:
+	Generate the action of remembering.
+		
 testing effects of remembering-daggers:
 	assert that the event description includes "You have visited the following rooms:.*You have seen the following creatures in these locations:.*- the swarm of daggers \(level 1\) in [the location] \(where you currently are\)"
 
@@ -2260,7 +1751,10 @@ middle-psycholocating is a hiding-check psy-scroll-reading test step.
 Initial scheduling of middle-psycholocating:
 	now the location-target of middle-psycholocating is the sensing-place.
 
-partial-explored-sensing is a hiding-check test step. The scheduled action of partial-explored-sensing is the action of sensing.
+partial-explored-sensing is a hiding-check test step.   
+
+Choosing a player action when testing partial-explored-sensing:
+	Generate the action of sensing.
 
 testing effects of partial-explored-sensing:
 	assert that the event description includes "the soul of the swarm of daggers here with you, like an aura like sharpened steel[line break]";
@@ -2289,17 +1783,29 @@ Initial scheduling for moving-malygris:
 	
 testing effects of moving-malygris:
 	if the location of Malygris is the location:
-		now the scheduled action of moving-malygris is the action of waiting;
 		make no decision;
 	assert that the event description includes "Malygris suddenly teleports away";
 	now moving-malygris is not repeatable.
 	
-remembering-malygris is a test step. The scheduled action of remembering-malygris is the action of remembering.
+First choosing a player action when testing moving-malygris:
+	if the location of Malygris is not the location:
+		make no decision;
+	if the cloak of shadows is worn:
+		make no decision;
+	generate the action of waiting;
+	
+remembering-malygris is a test step.   
+
+Choosing a player action when testing remembering-malygris:
+	Generate the action of remembering.
 
 testing effects of remembering-malygris:
 	assert that the event description includes "You have seen the following creatures in these locations:.*You have also seen Malygris, but you don't know where he is now"
 	
-remembering-lost-plural is a test step. The scheduled action of remembering-lost-plural is the action of remembering.
+remembering-lost-plural is a test step.   
+
+Choosing a player action when testing remembering-lost-plural:
+	Generate the action of remembering.
 
 Initial scheduling of remembering-lost-plural:
 	now the last-seen-location of the swarm of daggers is null-room.
@@ -2320,13 +1826,19 @@ testing effects of dungeon-clearing:
 	assert "Malygris (in [the location of Malygris]) should be reachable from [the location]" based on whether or not Malygris is reachable;
 	assert "The player (in [the location of the player]) should be reachable" based on whether or not the player is reachable.
 	
-Malygris-only-remembering is a test step. The scheduled action of malygris-only-remembering is the action of remembering.
+Malygris-only-remembering is a test step.   
+
+Choosing a player action when testing malygris-only-remembering:
+	generate the action of remembering.
 
 testing effects of Malygris-only-remembering:
 	assert that the event description does not include "You have seen the following creatures in these locations";
 	assert that the event description includes "You have also seen Malygris, but you don't know where he is now"
 	
-slow-sensing is a test step. The scheduled action of slow-sensing is the action of sensing.
+slow-sensing is a test step.   
+
+Choosing a player action when testing slow-sensing:
+	generate the action of sensing.
 
 Initial scheduling of slow-sensing:
 	assert "psycholocation should be inactive" based on whether or not psycholocation is inactive;
@@ -2356,7 +1868,10 @@ testing effects of exploring-everywhere:
 		assert "There should be at least 1 unvisited secret room" based on whether or not the number of unvisited denizen rooms is at least 1;
 		now exploring-everywhere is not repeatable;
 	
-remembering-everything-reachable is a test step. The scheduled action of remembering-everything-reachable is the action of remembering.
+remembering-everything-reachable is a test step.   
+
+Choosing a player action when testing remembering-everything-reachable:
+	generate the action of remembering.
 
 testing effects of remembering-everything-reachable:
 	assert that the event description includes "All locations have been explored";
@@ -2376,7 +1891,10 @@ Initial scheduling for explored-psycholocating:
 			assert "location-target ([location-target of explored-psycholocating]) is not a room" based on false;
 
 
-malygris-sensing is a test step. The scheduled action of malygris-sensing is the action of sensing.
+malygris-sensing is a test step.   
+
+Choosing a player action when testing malygris-sensing:
+	generate the action of sensing.
 
 Initial scheduling of malygris-sensing:
 	[make sure psycholocating works even when remembering doesn't]
@@ -2388,14 +1906,17 @@ testing effects of malygris-sensing:
 
 map-reading is a test step.
 
-Initial scheduling of map-reading:
+choosing a player action when testing map-reading:
 	Let M be a random scroll of mapping carried by the player;
-	now the scheduled action of map-reading is the action of reading M;
+	generate the action of reading M;
 	
 testing effects of map-reading:
 	assert that the event description includes "a complete floor plan of the dungeon of Kerkerkruip imprints itself on your mind"
 	
-map-remembering is a test step. The scheduled action of map-remembering is the action of remembering.
+map-remembering is a test step.   
+
+Choosing a player action when testing map-remembering:
+	generate the action of remembering.
 
 testing effects of map-remembering:
 	Assert that the number of secretly placed rooms is 2;
@@ -2416,19 +1937,18 @@ Initial scheduling of getting-close-to-vault:
 			
 digging-to-vault is a repeatable hiding-check test step. The maximum repeats of digging-to-vault is 20.
 
-To schedule digging to (place - a room) for (current move - a test step):
-	Now the scheduled action of the current move is the action of digging a single general direction from the location to place.
-	
-Initial scheduling of digging-to-vault:
-	schedule digging to the Arcane Vault for digging-to-vault;
-	
+Choosing a player action when testing digging-to-vault:
+	Generate the action of digging a single general direction from the location to Arcane Vault.
+		
 testing effects of digging-to-vault:
-	if the location is Arcane Vault:
+	if the location is a secretly placed room:
+		[it doesn't actually have to be the vault - if we hit another secret room on the way we should stop]
 		record success of digging-to-vault;
-	otherwise:
-		schedule digging to the Arcane Vault for digging-to-vault;
 	
-secret-room-remembering is a test step. The scheduled action of secret-room-remembering is the action of remembering.
+secret-room-remembering is a test step.   
+
+Choosing a player action when testing secret-room-remembering:
+	generate the action of remembering.
 
 testing effects of secret-room-remembering:
 	assert that the event description includes "Based on the map you found.*a secret room in the dungeon, <a-z>";
@@ -2471,8 +1991,8 @@ testing effects of blessed-grenade-alchemy:
 			if the item is in the location:
 				record success of blessed-grenade-alchemy;
 		
-Initial scheduling of a grenade-producing test step (called the current move):
-	now the scheduled action of the current move is the action of inserting the war mask into the curious machine.
+Choosing a player action when testing a grenade-producing test step:
+	generate the action of inserting the war mask into the curious machine.
 
 First every turn when the scheduled event is a grenade-producing test step (called the current move):
 	Now the health of the player is 100;
@@ -2496,7 +2016,9 @@ throwing-blessed is a test step.
 Initial scheduling of throwing-blessed:
 	now the player carries the blessed grenade;
 	extract the player to the location of Drakul;
-	now the scheduled action of throwing-blessed is the action of throwing the blessed grenade;
+	
+Choosing a player action when testing throwing-blessed:
+	generate the action of throwing the blessed grenade;
 	
 testing effects of throwing-blessed:
 	assert that Drakul is dead;
@@ -2529,7 +2051,10 @@ Test play when testing maze-resetting:
 
 overmind-meeting is a hiding-check hiding-reveal test step. The first move of maze-resetting is overmind-meeting. The location-target of overmind-meeting is the overmind.
 
-overmind-mazing is a test step. The scheduled action of overmind-mazing is the action of attacking the overmind.
+overmind-mazing is a test step.   
+
+Choosing a player action when testing overmind-mazing:
+	generate the action of attacking the overmind.
 	
 testing effects of overmind-mazing:
 	assert that the combat state of the overmind is at-inactive.
@@ -2590,10 +2115,13 @@ testing effects of ape-growing:
 	compel the action of the blood ape attacking the player;
 	
 Choosing a player reaction when testing ape-growing:
-	generate a player action of the action of exposing;
+	generate the action of exposing;
 	rule succeeds.
 
-ape-smiting is a test step. The scheduled action of ape-smiting is the action of smiting the blood ape;
+ape-smiting is a test step.   
+
+Choosing a player action when testing ape-smiting:
+	generate the action of smiting the blood ape;
 
 testing effects of ape-smiting:
 	assert "the power of the ape should be granted" based on whether or not the power of the ape is granted;
@@ -2604,7 +2132,10 @@ Initial scheduling of bodmall-meeting:
 	now the health of bodmall is 1000;
 	now bodmall is not asleep;
 	
-bodmall-bleeding is a test step. The scheduled action of bodmall-bleeding is the action of attacking bodmall.
+bodmall-bleeding is a test step.   
+
+Choosing a player action when testing bodmall-bleeding:
+	generate the action of attacking bodmall.
 
 Initial scheduling of bodmall-bleeding:
 	now the initiative of Bodmall is -2;
@@ -2658,37 +2189,43 @@ Testing effects of getting-mazed:
 	
 directionless-throwing is a test step.
 
-Initial scheduling of directionless-throwing:
-	now the scheduled action of directionless-throwing is the action of throwing the reusable item to north;
+Choosing a player action when testing directionless-throwing:
+	generate the action of throwing the reusable item to north;
 
 Testing effects of directionless-throwing:
 	assert that the event description includes "There is no point throwing grenades into twisty little passages";
 	assert "Trying to throw things in the maze should not take time" based on whether or not the take no time boolean is true;
 	assert that the reusable item is carried.
 	
-sound-finding is a repeatable test step. The scheduled action of sound-finding is the action of going north.
+sound-finding is a repeatable test step.   
+
+Choosing a player action when testing sound-finding:
+	generate the action of going north.
 
 Testing effects of sound-finding:
 	if maze-sound is a cardinal direction:
 		record success of sound-finding.
 		
-maze-summoning is a test step.
+maze-summoning is an item-reading test step.
 
 Initial scheduling of maze-summoning:
 	now the the reusable item is a random scroll of summoning;
 	now the player carries the reusable item;
-	now the scheduled action of maze-summoning is the action of reading the reusable item.
-
+	
 Testing effects of maze-summoning:
 	assert that the event description includes "[a monster summoned] appears before you"
 	
-summoned-fleeing is a test step.
+A test step can be sound-following.
+
+summoned-fleeing is a sound-following test step.
 
 Initial scheduling of summoned-fleeing:
-	now the scheduled action of summoned-fleeing is the action of going maze-sound;
 	now the concentration of the player is 3;
 	now the concentration of the monster summoned is 3;
 	
+Choosing a player action when testing a sound-following test step:
+	generate the action of going maze-sound;
+
 Definition: a person is not-yet-active if the act count of it is 0.
 
 First combat round rule when testing summoned-fleeing:
@@ -2712,7 +2249,10 @@ testing effects of summoned-fleeing:
 	if the act count of the minotaur is 0:
 		assert that the minotaur has 0 levels of concentration;
 
-multiple-fleeing is a test step. The scheduled action of multiple-fleeing is the action of going north.
+multiple-fleeing is a test step.   
+
+Choosing a player action when testing multiple-fleeing:
+	generate the action of going north.
 
 Initial scheduling of multiple-fleeing:
 	now the concentration of the minotaur is 3;
@@ -2725,28 +2265,28 @@ Testing effects of multiple-fleeing:
 	assert that the monster summoned is located in maze-waiting-room;
 	assert 1 hit by the minotaur;
 	
-multiple-sound-seeking is a repeatable test step. The scheduled action of multiple-sound-seeking is the action of going north.
+multiple-sound-seeking is a repeatable test step.   
+
+Choosing a player action when testing multiple-sound-seeking:
+	generate the action of going north.
 
 Testing effects of multiple-sound-seeking:
 	if the maze-sound is a cardinal direction:
 		assert that the number of people in maze-waiting-room is 2;
 		record success of multiple-sound-seeking.
 		
-first-rejoining is a test step.
+first-rejoining is a sound-following test step.
 
-Initial scheduling of first-rejoining:
-	now the scheduled action of first-rejoining is the action of going maze-sound.
-	
 Testing effects of first-rejoining:
 	assert that the number of people in maze-waiting-room is 1;
 	assert that the number of people in maze [including the player] is 2;
 	
 first-maze-smiting is a test step.
 
-Initial scheduling of first-maze-smiting:
+Choosing a player action when testing first-maze-smiting:
 	now opposition test subject is the player;
 	Let the enemy be a random opposer person enclosed by the location;
-	now the scheduled action of first-maze-smiting is the action of smiting the enemy.
+	generate the action of smiting the enemy.
 	
 Testing effects of first-maze-smiting:
 	assert that the player is located in the maze;
@@ -2762,12 +2302,14 @@ scenario when testing hiding-penalties:
 bodmall-sneaking is a hiding-check test step. the first move of hiding-penalties is bodmall-sneaking. The location-target of bodmall-sneaking is bodmall.
 
 Initial scheduling of bodmall-sneaking:
-	Let G be a random teleportation grenade;
-	now G is in the location of Bodmall;
 	now the teleportation beacon is in the location of Malygris;
 	now the dimensional anchor is in the location of Malygris;
 	now teleportation-beacon-on is true;
-	now the scheduled action of bodmall-sneaking is the action of throwing G;
+	
+Choosing a player action when testing bodmall-sneaking:
+	Let G be a random teleportation grenade;
+	now G is in the location of Bodmall;
+	generate the action of throwing G;
 	
 Testing effects of bodmall-sneaking:
 	assert that the event description includes "first taking the teleportation grenade";
@@ -2777,11 +2319,13 @@ Testing effects of bodmall-sneaking:
 malygris-robbing is a hiding-check test step.
 
 Initial scheduling of malygris-robbing:
-	Let G be a random teleportation grenade;
-	now G is in the location;
-	now the scheduled action of malygris-robbing is the action of throwing G;
 	repeat with guy running through people in the location:
 		assert "teleportation should be impossible for [guy]" based on whether or not teleportation is impossible for guy;
+
+Choosing a player action when testing malygris-robbing:
+	Let G be a random teleportation grenade;
+	now G is in the location;
+	generate the action of throwing G;
 	
 [if the player teleports away but reappears in the same room, their hiding penalty will be wiped out. This could be considered a bug, but I don't think it's worth fixing. Anyway, we can avoid it for testing purposes by using the dimensional anchor.]
 
@@ -2815,10 +2359,7 @@ Initial scheduling of reaper-seeking:
 Testing effects of reaper-seeking:
 	assert "the combat status should not be peace" based on whether or not the combat status is not peace;
 
-imp-dreaming is a repeatable uneventful test step. The maximum repeats of imp-dreaming is 20.
-
-Initial scheduling of imp-dreaming:
-	now the scheduled action of imp-dreaming is the action of throwing the reusable item.
+imp-dreaming is a repeatable uneventful item-throwing test step. The maximum repeats of imp-dreaming is 20.
 
 Testing effects of imp-dreaming:
 	assert that the location is garden of thorns;
@@ -2841,7 +2382,10 @@ Testing effects of imp-thieving:
 	if the event description matches the regular expression "The imp grabs the package of ment with its thieving little claws":
 		record success of imp-thieving;
 		
-imp-vanishing is a repeatable test step. The scheduled action of imp-vanishing is the action of attacking the imp;
+imp-vanishing is a repeatable test step.   
+
+Choosing a player action when testing imp-vanishing:
+	generate the action of attacking the imp;
 
 Testing effects of imp-vanishing:
 	if the location of the imp is lair of the imp:
@@ -2904,7 +2448,7 @@ Last map approval rule when testing malygris-heal-power:
 		
 Section - Unlocking - issue 243
 
-unlocking-behavior is a isolated test set.
+unlocking-behavior is a test set.
 
 to assert that placement possibility is (allowable - a truth state) when (conditions - indexed text):
 	now the rarity of Space-Time Discontinuum is 0;
