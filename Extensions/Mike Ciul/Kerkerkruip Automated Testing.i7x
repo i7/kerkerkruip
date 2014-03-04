@@ -609,3 +609,112 @@ Choosing a player action when testing an item-throwing test step:
 	generate the action of throwing the reusable item.
 
 Kerkerkruip Automated Testing ends here.
+
+---- DOCUMENTATION ----
+
+Chapter: Basics
+
+Section: Introduction
+
+Kerkerkruip Automated Testing provides a framework for creating detailed playthroughs and testing that they behave as expected. Each playthrough, called a "test set" starts before dungeon generation and goes turn by turn until we run out of tests. When running the "Kerkerkruip Automated Tests" project, all test sets will execute when the game begins, and normal play won't start until they're finished. A summary of tests will be output in the game console, but a detailed transcript will also be written to a file called "testtranscript."
+
+Kerkerkrup Automated Testing is built on the foundation of Simple Unit Tests by Dannii Willis, and makes heavy use of Text Capture by Eric Eve and Autoundo for Object Response Tests by Mike Ciul. Special credit should go to Jesse McGrew for the Hypothetical Questions extension.
+
+Section: Assertions
+
+To perform the tests, we have a wide variety of assertion phrases.
+
+First, there's a simple "X is Y" assertion, but we can give it a label so the output will be clear about what we're comparing:
+
+	assert that the body score of the player is 5 with label "body score of the player";
+
+If we aren't looking for exact equality, we can use this phrase to test any truth state:
+
+	assert "the body score of the player should be at least 5, but it is [body score of the player]" based on whether or not the body score of the player is at least 5;
+
+During the normal turn sequence, all the text that was output during the turn is saved in the indexed text, "event description." It has several phrases associated with it. Here are a couple:
+
+	assert that the event description includes "You deal .*, killing [the global defender]";
+	assert that the event description does not include "You lose concentration";
+
+Section: Test Sets
+
+To make a test, we create a "test set:"
+
+	bug-xyz is a test set.
+
+Each test set will start a fresh game with a new dungeon. We can use the phrase "when testing bug-xyz" in our rules.
+
+There is a rulebook that runs before dungeon generation called the scenario rules. We can use this to set things as testobject. We can also set them as bannedobject, to prevent them from appearing in the dungeon.
+
+	Scenario when testing bug-xyz:
+		now the swarm of daggers is testobject;
+		now the Hall of Mirrors is bannedobject.
+
+We can set the "isolated" property for exactly one test set. This will cause the test set to run by itself, skipping every other test set. This is useful when we want to fix just one thing at a time - running all the tests can take 20 minutes or more!
+
+Section: Test Steps
+
+To have things happen during play, create a "test step," or more than one. A test step is a kind of value, and they run in the order that they were declared in the source. We must specify which test step is the first one of the test set, and the rest will follow automatically:
+
+	starting-out is a test step. The first move of bug-xyz is starting-out.
+
+	second-move is a test step.
+
+A test step corresponds to a turn, or multiple turns. It has a few rulebooks. The main ones are "initial scheduling" and "testing effects." These are test-step based rulebooks. There are also "choosing a player action" and "choosing a player reaction," which we will need if we want to actually do anything during a turn. Since these rulebooks are NOT test-step based, we will need to use the "testing (move - a test step)" phrase to invoke these at the proper time.
+
+A test step can be "repeatable," which means it will still be current on the next turn - but the initial scheduling will not run again. The maximum repeats property says how many times it can repeat before it fails. If we make it "uneventful" it will succeed instead when the maximum repeats are reached. To make a test step stop repeating, we can:
+
+	record success of starting-out;
+or
+	record failure of starting-out with message "we never got the frobulator";
+
+Section: Initial scheduling
+
+	initial scheduling of starting-out:
+    		now the defence of the player is 100.
+
+Initial scheduling runs as soon as the test step first becomes active, and it doesn't run again even if the step repeats.
+
+Section: Testing effects
+
+Testing effects runs at the very end of each turn, right before the next test step is scheduled - even if the same test step repeats.
+
+	Testing effects of starting-out:
+		assert that the location is Bridge of Doom with label "the player's location";
+		assert that the event description includes "dodging would be suicidal";
+
+Section: Player and NPC actions
+
+There are two rulebooks for making the player do something: "Choosing a player action" and "Choosing a player reaction." These rulebooks, which have default success, have a default rule at the end that makes the player wait. Both should make use of the "generate (action - a stored action)" phrase.
+
+	Choosing a player action when testing starting-out:
+		generate the action of going the best route from the location to the location of the swarm of daggers.
+
+	Choosing a player reaction when testing dagger-strike:
+		generate the action of dodging.
+
+To make other people do things, we can use the "compel (action - a stored action)" phrase.
+
+	Initial scheduling of dagger-strike:
+		compel the action of the swarm of daggers attacking the player.
+
+Section: Other properties of test steps
+
+TODO. (There are lots more properties of test steps - look through the code to see what they do. Location-target and hiding-check are useful for getting around the dungeon, for example.)
+
+Chapter: Advanced usage
+
+Section: Controlling text capture
+
+Usually the event description contains all the text that was generated during the previous turn. But we can manipulate what is saved.
+
+This phrase stops text capturing:
+
+	stop and save event description
+
+And this restarts it:
+
+	Transcribe and start capturing;
+
+It's important to use the "transcribe" version of this phrase so that our transcript output will contain everything.
