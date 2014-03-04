@@ -188,6 +188,8 @@ To decide which room is the action-destination of (current move - a test step):
 
 The delayed action is a stored action that varies. The delayed action is the action of waiting.
 
+A test step can be extracting.
+
 For taking a player action (this is the move to the destination of a test step rule):
 	if the player is at-React:
 		make no decision;
@@ -196,6 +198,10 @@ For taking a player action (this is the move to the destination of a test step r
 		transcribe and restart capturing;
 	if the place is Null-room or the place is the location:
 		make no decision;
+	if the scheduled event is extracting:
+		extract the player to the place;
+		generate the action of waiting;
+		rule succeeds;
 	Let the way be the best route from the location to the place;
 	if the way is not a direction:
 		record failure of the scheduled event with message "No available route from [the location] to [the location-target of the scheduled event] (in [the place])";
@@ -485,7 +491,7 @@ To pause and assert that the event description does not include (pattern - an in
 	assert that the event description does not include pattern;
 	transcribe and restart capturing.
 
-Section - hiding-check and hiding-reveal
+Section - hiding-check, hidden-traveling and hiding-reveal
 
 Traveling sneakily is a truth state that varies.
 
@@ -525,8 +531,10 @@ previously-fast is a truth state that varies.
 
 A test step can be hiding-check.
 
+A test step can be hidden-traveling. A hiding-check test step is usually hidden-traveling.
+
 initial scheduling for a test step (called the current move):
-	now traveling sneakily is whether or not the current move is hiding-check;
+	now traveling sneakily is whether or not the current move is hidden-traveling;
 	if traveling sneakily is true, force the cloak of shadows to work;
 	
 After taking a player action (this is the assume all actions are fast until every turn runs rule):

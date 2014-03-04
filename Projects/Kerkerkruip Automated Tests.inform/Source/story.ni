@@ -709,7 +709,7 @@ testing effects for mindslug-runner:
 	assert one hit by fafhrd;
 	assert one hit by mouser;
 	
-israfel-meeting is a hiding-check hiding-reveal test step. The location-target of israfel-meeting is Israfel.
+israfel-meeting is a hidden-traveling extracting hiding-reveal test step. The location-target of israfel-meeting is Israfel.
 
 Initial scheduling of israfel-meeting:
 	now the health of israfel is 1000;
@@ -1361,7 +1361,7 @@ Test play when testing temporary Nomos blood magic:
 	assert that the dreadful presence of the player is 2;
 	transcribe and restart capturing;
 	
-second-gown-feeding is a hiding-check test step. The first move of temporary Nomos blood magic is second-gown-feeding.   
+second-gown-feeding is a hidden-traveling test step. The first move of temporary Nomos blood magic is second-gown-feeding.   
 
 Choosing a player action when testing second-gown-feeding:
 	generate the action of feeding the gown of the red court.
@@ -1373,7 +1373,7 @@ testing effects of second-gown-feeding:
 	assert that the blood timer of the gown of the red court is the gown-timer;
 	now the maximum repeats of first-gown-timeout is gown-timer;
 		
-first-gown-timeout is a repeatable hiding-check test step. The next move of second-gown-feeding is first-gown-timeout.
+first-gown-timeout is a repeatable hidden-traveling test step.
 
 testing effects of first-gown-timeout:
 	if the blood magic level of the gown of the red court > 1:
@@ -1385,7 +1385,7 @@ testing effects of first-gown-timeout:
 		now the maximum repeats of second-gown-timeout is gown-timer;
 		now first-gown-timeout is not repeatable
 	
-second-gown-timeout is a repeatable hiding-check test step. The next move of first-gown-timeout is second-gown-timeout.
+second-gown-timeout is a repeatable hidden-traveling test step. The next move of first-gown-timeout is second-gown-timeout.
 
 testing effects of second-gown-timeout:
 	assert that the blood timer of the gown of the red court is (gown-timer - (the repeated moves + 1));
@@ -1394,7 +1394,7 @@ testing effects of second-gown-timeout:
 		assert that the event description includes "The blood power of the gown of the red court wears off completely";
 		now second-gown-timeout is not repeatable.
 		
-malleus-earning is a hiding-check test step. The location-target of malleus-earning is the temple of nomos.
+malleus-earning is a extracting test step. The location-target of malleus-earning is the temple of nomos.
 
 Testing effects of malleus-earning:
 	have the player defeat the jumping bomb;
@@ -1405,7 +1405,7 @@ Testing effects of malleus-earning:
 	try examining the malleus maleficarum;
 	pause and assert that the event description includes "Feeding 1 blood to the Malleus Maleficarum will give it a bonus of \+1 attack and \+1 damage on your next attack.* dreadful presence\.";
 	
-daggers-meeting is a hiding-check test step. The location-target of daggers-meeting is the swarm of daggers.
+daggers-meeting is a extracting test step. The location-target of daggers-meeting is the swarm of daggers.
 
 Testing effects of daggers-meeting:
 	now the health of the player is 1000;
@@ -1423,7 +1423,7 @@ Initial scheduling of nomos-bonus-examining:
 Testing effects of nomos-bonus-examining:
 	assert that the event description includes "swarm of daggers attacks using sharp points";
 
-malleus-bonus-attacking is a hiding-check test step.   
+malleus-bonus-attacking is a hidden-traveling test step.   
 
 Choosing a player action when testing malleus-bonus-attacking:
 	Generate the action of swearing obscenely. 
@@ -1709,7 +1709,7 @@ testing effects of unexplored-sensing:
  - a skein of twisting passages, from the south
  - spreading thorns dripping with dew--or blood, from the wes]
 	
-remembering-daggers is a hiding-check test step.  The location-target of remembering-daggers is the swarm of daggers.
+remembering-daggers is a hidden-traveling test step.  The location-target of remembering-daggers is the swarm of daggers.
 
 Choosing a player action when testing remembering-daggers:
 	Generate the action of remembering.
@@ -1723,7 +1723,7 @@ The sensing-place is a room that varies;
 The on-the-way place is a room that varies;
 The faraway enemy is an object that varies;
 
-partway-visiting is a hiding-check psy-scroll-reading test step.
+partway-visiting is a hidden-traveling psy-scroll-reading test step.
 	
 To decide which object is the next stop from (origin - a room) to (destination - a room):
 	let the way be the best route from origin to destination;
@@ -1746,12 +1746,12 @@ Initial scheduling of partway-visiting:
 	while the next stop from the on-the-way place to the target is a visited room:
 		now the on-the-way place is the next stop from the on-the-way place to the target.
 
-middle-psycholocating is a hiding-check psy-scroll-reading test step. 
+middle-psycholocating is a extracting psy-scroll-reading test step. 
 
 Initial scheduling of middle-psycholocating:
 	now the location-target of middle-psycholocating is the sensing-place.
 
-partial-explored-sensing is a hiding-check test step.   
+partial-explored-sensing is a hidden-traveling test step.   
 
 Choosing a player action when testing partial-explored-sensing:
 	Generate the action of sensing.
@@ -1760,7 +1760,7 @@ testing effects of partial-explored-sensing:
 	assert that the event description includes "the soul of the swarm of daggers here with you, like an aura like sharpened steel[line break]";
 	assert that the event description includes "[soul description of the faraway enemy], [best route from on-the-way place to location of the faraway enemy] from [the on-the-way place] \(which lies [best route from the location to on-the-way place] from here\)[line break]"
 
-meeting-malygris is a repeatable hiding-check test step. The location-target of meeting-malygris is Malygris.
+meeting-malygris is a repeatable hidden-traveling test step. The location-target of meeting-malygris is Malygris.
 
 To say doesn't see you pattern:
 	say "(does not (detect|notice)|remains unaware of) you(r presence)?[run paragraph on]";
@@ -1770,7 +1770,7 @@ testing effects of meeting-malygris:
 		assert that the event description includes "Malygris [doesn't see you pattern]";
 		now meeting-malygris is not repeatable;
 	
-psycholocation-expiring is a repeatable hiding-check test step.
+psycholocation-expiring is a repeatable hidden-traveling test step.
 
 testing effects of psycholocation-expiring:
 	if psycholocation is inactive:
@@ -1846,7 +1846,7 @@ Initial scheduling of slow-sensing:
 testing effects of slow-sensing:
 	assert "sensing without psycholocation should take time" based on whether or not previously-fast is false;
 	
-exploring-everywhere is a repeatable hiding-check test step. 
+exploring-everywhere is a repeatable extracting hidden-traveling test step. 
 
 Definition: A room (called place) is reachable:
 	if the place is the location, yes;
@@ -1877,7 +1877,7 @@ testing effects of remembering-everything-reachable:
 	assert that the event description includes "All locations have been explored";
 	assert that the event description does not include "You have not yet explored";
 	 
-explored-psycholocating is a hiding-check psy-scroll-reading test step.
+explored-psycholocating is a hidden-traveling extracting psy-scroll-reading test step.
 
 Definition: a room is unoccupied if it does not enclose a person;
 
@@ -1923,7 +1923,7 @@ testing effects of map-remembering:
 	assert that the event description includes "Based on the map you found.*secret rooms in the dungeon, one <^[line break]>+, one <^[line break]>+.";
 	assert that the event description includes "You have also seen Malygris, but you don't know where he is. With your powers of psycholocation, you might be able to SENSE it";
 	
-getting-close-to-vault is a hiding-check test step.
+getting-close-to-vault is a hidden-traveling extracting test step.
 
 Initial scheduling of getting-close-to-vault:
 	Let the closest place be Null-room;
@@ -1935,7 +1935,7 @@ Initial scheduling of getting-close-to-vault:
 			now the closest place is the place;
 	now the location-target of getting-close-to-vault is the closest place.
 			
-digging-to-vault is a repeatable hiding-check test step. The maximum repeats of digging-to-vault is 20.
+digging-to-vault is a repeatable hidden-traveling test step. The maximum repeats of digging-to-vault is 20.
 
 Choosing a player action when testing digging-to-vault:
 	Generate the action of digging a single general direction from the location to Arcane Vault.
@@ -1977,7 +1977,7 @@ Test play when testing blessed-grenade-test:
 
 A test step can be grenade-producing.
 
-blessed-grenade-alchemy is a repeatable hiding-check grenade-producing test step. The first move of blessed-grenade-test is blessed-grenade-alchemy. The location-target of blessed-grenade-alchemy is the Alchemical Laboratory. The maximum repeats of blessed-grenade-alchemy is 300.
+blessed-grenade-alchemy is a repeatable hidden-traveling extracting grenade-producing test step. The first move of blessed-grenade-test is blessed-grenade-alchemy. The location-target of blessed-grenade-alchemy is the Alchemical Laboratory. The maximum repeats of blessed-grenade-alchemy is 300.
 
 testing effects of blessed-grenade-alchemy:
 	unless the event description matches the regular expression "Blessed Grenade":
@@ -1997,7 +1997,7 @@ Choosing a player action when testing a grenade-producing test step:
 First every turn when the scheduled event is a grenade-producing test step (called the current move):
 	Now the health of the player is 100;
 	Now the player is not asleep;
-	If the current move is hiding-check, now the player is hidden;
+	If the current move is hidden-traveling, now the player is hidden;
 	Now every room is not rust-spored;
 	Now every thing is not rusted;
 	
@@ -2005,7 +2005,7 @@ Last testing effects of a grenade-producing test step:
 	Repeat with item running through grenades in the location:
 		remove item from play;
 
-no-extra-blessed-grenade is an uneventful repeatable hiding-check grenade-producing test step. The maximum repeats of no-extra-blessed-grenade is 100. [This number could be higher, but it's a slow test]
+no-extra-blessed-grenade is an uneventful repeatable hidden-traveling grenade-producing test step. The maximum repeats of no-extra-blessed-grenade is 100. [This number could be higher, but it's a slow test]
 
 testing effects of no-extra-blessed-grenade:
 	if the event description matches the regular expression "Blessed Grenade":
@@ -2024,7 +2024,7 @@ testing effects of throwing-blessed:
 	assert that Drakul is dead;
 	assert that the event description includes "As the grenade explodes you hear the singing of angels, several of whom swoop down from the heavens with huge swords and eviscerate <^[line break]>*Drakul";
 	
-no-new-blessed-grenade is an uneventful repeatable hiding-check grenade-producing test step. The maximum repeats of no-new-blessed-grenade is 100.
+no-new-blessed-grenade is an uneventful repeatable hidden-traveling grenade-producing test step. The maximum repeats of no-new-blessed-grenade is 100.
 
 testing effects of no-new-blessed-grenade:
 	if the blessed grenade is not off-stage:
@@ -2049,7 +2049,7 @@ Test play when testing maze-resetting:
 	now the defence of the player is 100;
 	now the melee of the player is 100;
 
-overmind-meeting is a hiding-check hiding-reveal test step. The first move of maze-resetting is overmind-meeting. The location-target of overmind-meeting is the overmind.
+overmind-meeting is a extracting hiding-reveal test step. The first move of maze-resetting is overmind-meeting. The location-target of overmind-meeting is the overmind.
 
 overmind-mazing is a test step.   
 
@@ -2106,7 +2106,7 @@ Initial scheduling of ape-growing:
 	now the health of the player is 1000;
 	now the melee of the player is 100;
 	
-ape-growing is a hiding-check hiding-reveal repeatable test step. The first move of bug-245 is ape-growing. The location-target of ape-growing is the blood ape. 
+ape-growing is a extracting hidden-traveling hiding-reveal repeatable test step. The first move of bug-245 is ape-growing. The location-target of ape-growing is the blood ape. 
 
 testing effects of ape-growing:
 	if the size of the blood ape is greater than medium:
@@ -2126,7 +2126,7 @@ Choosing a player action when testing ape-smiting:
 testing effects of ape-smiting:
 	assert "the power of the ape should be granted" based on whether or not the power of the ape is granted;
 
-bodmall-meeting is a hiding-check hiding-reveal test step. The location-target of bodmall-meeting is bodmall.
+bodmall-meeting is a hidden-traveling extracting hiding-reveal test step. The location-target of bodmall-meeting is bodmall.
 
 Initial scheduling of bodmall-meeting:
 	now the health of bodmall is 1000;
@@ -2165,7 +2165,7 @@ Scenario when testing maze-moving:
 	now the hall of mirrors is bannedobject;
 	now the reusable item is a random flash grenade;
 	
-minotaur-meeting is a hiding-check hiding-reveal test step. The first move of maze-moving is minotaur-meeting. The location-target of minotaur-meeting is the minotaur.
+minotaur-meeting is a hidden-traveling extracting hiding-reveal test step. The first move of maze-moving is minotaur-meeting. The location-target of minotaur-meeting is the minotaur.
 
 Initial scheduling of minotaur-meeting:
 	now the health of the player is 1000;
@@ -2299,7 +2299,7 @@ hiding-penalties is a test set.
 scenario when testing hiding-penalties:
 	now bodmall is testobject;
 	
-bodmall-sneaking is a hiding-check test step. the first move of hiding-penalties is bodmall-sneaking. The location-target of bodmall-sneaking is bodmall.
+bodmall-sneaking is a hidden-traveling extracting test step. the first move of hiding-penalties is bodmall-sneaking. The location-target of bodmall-sneaking is bodmall.
 
 Initial scheduling of bodmall-sneaking:
 	now the teleportation beacon is in the location of Malygris;
@@ -2316,7 +2316,7 @@ Testing effects of bodmall-sneaking:
 	assert that the event description includes "Malygris, perhaps the greatest of all living sorcerers, is standing here";
 	assert that the event description does not include "picking stuff up";
 	
-malygris-robbing is a hiding-check test step.
+malygris-robbing is a hidden-traveling test step.
 
 Initial scheduling of malygris-robbing:
 	repeat with guy running through people in the location:
@@ -2348,7 +2348,7 @@ Scenario when testing bug-280:
 	now the dream of briar roses is current-test-dream;
 	now the reusable item is a random morphean grenade.
 	
-reaper-seeking is a hiding-check hiding-reveal test step. The  first move of bug-280 is reaper-seeking. The location-target of reaper-seeking is the reaper.
+reaper-seeking is a hidden-traveling extracting hiding-reveal test step. The  first move of bug-280 is reaper-seeking. The location-target of reaper-seeking is the reaper.
 
 Initial scheduling of reaper-seeking:
 	assert "Lair of the imp should be placed" based on whether or not lair of the imp is placed;
