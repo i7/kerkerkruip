@@ -2477,5 +2477,39 @@ Scenario when testing unlocking-behavior:
 	enable advanced content;
 	assert that placement possibility is true when "in apprentice level when advanced content is enabled";
 	
+Section - Bloodlust - issue 279
+
+bloodlust-279 is a isolated test set.
+
+Scenario when testing bloodlust-279:
+	now the swarm of daggers is testobject;
+	now the hall of mirrors is bannedobject;
+	
+meeting-daggers is an extracting test step. The first move of bloodlust-249 is meeting-daggers. The location-target of meeting-daggers is the swarm of daggers.
+
+Initial scheduling of meeting-daggers:
+	now the melee of the player is 100;
+	now the defence of the player is 100;
+	now the health of the swarm of daggers is 50;
+	
+hitting-daggers is a test step. 
+
+choosing a player action when testing hitting-daggers:
+	generate the action of attacking the swarm of daggers.
+	
+Testing effects of hitting-daggers:
+	assert "the player should be bloodlusting after hitting, but you are [person condition of the player]" based on whether or not the player is bloodlusting.
+	
+smiting-daggers is a test step.
+
+choosing a player action when testing smiting-daggers:
+	generate the action of smiting the swarm of daggers.
+	
+Testing effects of smiting-daggers:
+	assert that the combat status is peace with label "combat status";
+	assert "the player should not be notlusting during peace, but you are [person condition of the player]" based on whether or not the player is notlusting.
+	
+[If we can think of any tricky cases where the combat status changes during the every turn stage, we should test those]
+		
 Section - Summoning too many monsters
 

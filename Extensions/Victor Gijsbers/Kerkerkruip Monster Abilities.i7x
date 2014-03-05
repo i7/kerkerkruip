@@ -409,7 +409,7 @@ Aftereffects rule (this is the aftereffect bloodlusting rule):
 		now global attacker is about-to-bloodlust.
 
 Every turn (this is the bloodlusting rule):
-	if main actor is about-to-bloodlust:
+	if main actor is about-to-bloodlust and hate is present:
 		now main actor is bloodlusting;
 	otherwise:
 		now main actor is notlusting.
