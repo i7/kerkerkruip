@@ -2481,11 +2481,16 @@ Section - Bloodlust - issue 279
 
 bloodlust-279 is a isolated test set.
 
+to assert that bloodlusting is (active - a truth state) when (condition - indexed text):
+	assert "the player should [if active is false]not [end if]be bloodlusting [condition], but you are [person condition of the player]" based on whether or not active is (whether or not the player is bloodlusting).
+	
 Scenario when testing bloodlust-279:
 	now the swarm of daggers is testobject;
+	now the blood ape is testobject;
+	now the mindslug is testobject;
 	now the hall of mirrors is bannedobject;
 	
-meeting-daggers is an extracting test step. The first move of bloodlust-249 is meeting-daggers. The location-target of meeting-daggers is the swarm of daggers.
+meeting-daggers is an extracting test step. The first move of bloodlust-279 is meeting-daggers. The location-target of meeting-daggers is the swarm of daggers.
 
 Initial scheduling of meeting-daggers:
 	now the melee of the player is 100;
@@ -2498,7 +2503,7 @@ choosing a player action when testing hitting-daggers:
 	generate the action of attacking the swarm of daggers.
 	
 Testing effects of hitting-daggers:
-	assert "the player should be bloodlusting after hitting, but you are [person condition of the player]" based on whether or not the player is bloodlusting.
+	assert that bloodlusting is true when "after hitting";
 	
 smiting-daggers is a test step.
 
@@ -2507,9 +2512,40 @@ choosing a player action when testing smiting-daggers:
 	
 Testing effects of smiting-daggers:
 	assert that the combat status is peace with label "combat status";
-	assert "the player should not be notlusting during peace, but you are [person condition of the player]" based on whether or not the player is notlusting.
+	assert that bloodlusting is false when "after killing the daggers".
 	
 [If we can think of any tricky cases where the combat status changes during the every turn stage, we should test those]
 		
+meeting-ape is an extracting test step. The location-target of meeting-ape is the blood ape.
+
+Initial scheduling of meeting-ape:
+	have the player defeat the mindslug;
+	extract fafhrd to the location of the blood ape;
+	now the health of the blood ape is 100;
+	
+hitting-ape is a test step.
+
+choosing a player action when testing hitting-ape:
+	generate the action of attacking the blood ape;
+	
+testing effects of hitting-ape:
+	assert that bloodlusting is true when "after hitting the ape the first time";
+	
+fafhrd-killing-ape is a test step.
+
+initial scheduling of fafhrd-killing-ape:
+	now the melee of fafhrd is 100;
+
+choosing a player action when testing fafhrd-killing-ape:
+	compel the action of fafhrd attacking the blood ape;
+	generate the action of attacking the blood ape;
+
+before fafhrd hitting the blood ape when testing fafhrd-killing-ape:
+	transcribe "reducing the ape's health to 1";
+	now the health of the blood ape is 1;
+	
+testing effects of fafhrd-killing-ape:
+	assert that bloodlusting is false when "after Fafhrd kills the ape".
+	
 Section - Summoning too many monsters
 

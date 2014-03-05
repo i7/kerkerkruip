@@ -409,10 +409,18 @@ Aftereffects rule (this is the aftereffect bloodlusting rule):
 		now global attacker is about-to-bloodlust.
 
 Every turn (this is the bloodlusting rule):
-	if main actor is about-to-bloodlust and hate is present:
+	if main actor is about-to-bloodlust:
 		now main actor is bloodlusting;
 	otherwise:
 		now main actor is notlusting.
+
+Combat round rule (this is the everyone loses bloodlust when combat is over rule):
+	if combat status is peace:
+		now world test subject is the player;
+		repeat with guy running through alive worldsharer people:
+			now guy is notlusting.
+		
+The everyone loses bloodlust when combat is over rule is listed before the business as usual rule in the combat round rules.
 
 Section - Bloodlust rules
 
