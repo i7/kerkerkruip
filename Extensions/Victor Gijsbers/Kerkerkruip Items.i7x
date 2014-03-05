@@ -744,15 +744,15 @@ Section - The inquisitor's hood (Nomos)
 
 [Gifted by Nomos.]
 
-The inquisitor's hood is a hat. The description of the inquisitor's hood is "Dedication to Nomos requires discipline and concentration. To avoid being distracted by the blows of their enemies and the screams of tortured heretics, the inquisitors wear these magical hoods. This particular one gives you a +[current hood bonus]% chance of remaining concentrated when damaged. It also increases your dreadful presence by 1. [italic type]Feeding [current blood cost of the inquisitor's hood] blood to the hood will temporarily add 5% to the chance of remaining concentrated[roman type]."
+The inquisitor's hood is a hat. The description of the inquisitor's hood is "Dedication to Nomos requires discipline and concentration. To avoid being distracted by the blows of their enemies and the screams of tortured heretics, the inquisitors wear these magical hoods. This particular one gives you a +[current hood bonus]% chance of remaining concentrated when damaged. It also increases your dreadful presence by 1. [italic type]Feeding [current blood cost of the inquisitor's hood] blood to the hood will temporarily add 10% to the chance of remaining concentrated[roman type]."
 
 The blood magic cost of the inquisitor's hood is 5.
 The minimum blood timeout of the inquisitor's hood is 10.
 The maximum blood timeout of the inquisitor's hood is 15.
-The blood magic maximum of the hood is 16.
+The blood magic maximum of the hood is 8.
 
 To decide what number is the current hood bonus:
-	Decide on 15 + (blood magic level of the inquisitor's hood * 5);
+	Decide on 15 + (blood magic level of the inquisitor's hood * 10);
 
 A remain concentrated rule (this is the inquisitor's hood concentration rule):
 	if global defender wears the inquisitor's hood:

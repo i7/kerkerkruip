@@ -1338,15 +1338,15 @@ Test play when testing temporary Nomos blood magic:
 	assert truth of whether or not the player carries the inquisitor's hood with message "the inquisitor's hood should be carried";
 	transcribe and restart capturing;
 	try examining the inquisitor's hood;
-	pause and assert that the event description includes "This particular one gives you a \+15% chance of remaining concentrated when damaged\. It also increases your dreadful presence by 1\. Feeding 5 blood to the hood will temporarily add 5% to the chance of remaining concentrated";
+	pause and assert that the event description includes "This particular one gives you a \+15% chance of remaining concentrated when damaged\. It also increases your dreadful presence by 1\. Feeding 5 blood to the hood will temporarily add 10% to the chance of remaining concentrated";
 	let the base chance be the chance of the player remaining concentrated;
 	try wearing the inquisitor's hood;
 	assert that (the chance of the player remaining concentrated - the base chance) is 15;
 	try feeding the inquisitor's hood;
 	transcribe and restart capturing;
 	try examining the inquisitor's hood;
-	pause and assert that the event description includes "This particular one gives you a \+20% chance of remaining concentrated when damaged\. It also increases your dreadful presence by 1\. Feeding 10 blood to the hood will temporarily add 5% to the chance of remaining concentrated";
-	assert that (the chance of the player remaining concentrated - the base chance) is 20;
+	pause and assert that the event description includes "This particular one gives you a \+25% chance of remaining concentrated when damaged\. It also increases your dreadful presence by 1\. Feeding 10 blood to the hood will temporarily add 10% to the chance of remaining concentrated";
+	assert that (the chance of the player remaining concentrated - the base chance) is 25;
 	try taking off the inquisitor's hood;
 	assert that the dreadful presence of the player is 0;
 	try feeding the gown of the red court;
@@ -2479,7 +2479,7 @@ Scenario when testing unlocking-behavior:
 	
 Section - Bloodlust - issue 279
 
-bloodlust-279 is a isolated test set.
+bloodlust-279 is a test set.
 
 to assert that bloodlusting is (active - a truth state) when (condition - indexed text):
 	assert "the player should [if active is false]not [end if]be bloodlusting [condition], but you are [person condition of the player]" based on whether or not active is (whether or not the player is bloodlusting).
