@@ -243,6 +243,17 @@ To compel (the desired action - a stored action):
 	now the guy is not asleep;
 	Now the compelled action is the desired action.
 	
+The automated menu question answer is a number that varies.
+
+First for reading a command when the automated menu question answer is greater than 0:
+	change the text of the player's command to "[the automated menu question answer]".
+
+To select menu question answer (N - a number):
+	transcribe "Selecting answer [N]";
+	now the automated menu question answer is N;
+	carry out the reading a command activity;
+	now the automated menu question answer is 0;
+
 A Standard AI rule for a person (called P) (this is the compel an action rule):
 	if P is at-Act and the actor part of the compelled action is P:
 		try the compelled action;
@@ -686,7 +697,7 @@ Testing effects runs at the very end of each turn, right before the next test st
 
 Section: Player and NPC actions
 
-There are two rulebooks for making the player do something: "Choosing a player action" and "Choosing a player reaction." These rulebooks, which have default success, have a default rule at the end that makes the player wait. Both should make use of the "generate (action - a stored action)" phrase.
+There are two rulebooks for making the player take an action: "Choosing a player action" and "Choosing a player reaction." These rulebooks, which have default success, have a default rule at the end that makes the player wait. Both should make use of the "generate (action - a stored action)" phrase.
 
 	Choosing a player action when testing starting-out:
 		generate the action of going the best route from the location to the location of the swarm of daggers.
@@ -698,6 +709,16 @@ To make other people do things, we can use the "compel (action - a stored action
 
 	Initial scheduling of dagger-strike:
 		compel the action of the swarm of daggers attacking the player.
+
+Kerkerkruip occasionally asks the player questions. If we want the player to answer a menu question instead of taking an action, we can use the "select menu question answer (N - a number)" phrase:
+
+	Choosing a player action when testing entree-selection:
+		Let m be 0;
+		repeat with entree running through banquet-items:
+			increment m;
+			if the entree is the overmind:
+				break;
+		select menu question answer m;
 
 Section: Other properties of test steps
 

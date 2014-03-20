@@ -732,6 +732,21 @@ A followers rule (this is the follower must be able to act independently rule):
 
 [For stealing items when someone is asleep, see Kerkerkruip Actions and UI.]
 	
+A combat round rule (this is the wake up fully when combat is over rule):
+	if combat status is peace:
+		repeat with guy running through just-woken people:
+			if the guy is the player and dreaming is false:
+				say "The last fog of sleep falls away from your mind.";
+			now guy is not just-woken.
+
+The wake up fully when combat is over rule is listed before the business as usual rule in the combat round rules.
+
+Status attribute rule (this is the just-woken status rule):
+	if the player is just-woken:
+		if long status is true:
+			say "You are [bold type]just-woken[roman type]: The next attack against you gets a +3 bonus and +2 damage.[line break][run paragraph on]";
+		otherwise:
+			say "[@ check initial position of attribute]just-woken[run paragraph on]";
 
 Part - Abilities
 

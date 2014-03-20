@@ -947,6 +947,12 @@ Scenario when testing Sleeping Fallen:
 	now Entrance to the Arena is testobject;
 	now a random scroll of death is testobject;
 	
+To assert that (guy - a person) is asleep:
+	assert "[The guy] should be asleep" based on whether or not the guy is asleep;
+	
+To assert that (guy - a person) is awake:
+	assert "[The guy] should be awake" based on whether or not the guy is not asleep;
+	
 Test play when testing Sleeping Fallen:
 	now the blood ape is asleep;
 	extract the player to the location of the blood ape;
@@ -954,10 +960,10 @@ Test play when testing Sleeping Fallen:
 	now the player carries the snuffer;
 	now the health of the blood ape is 1;
 	try reading the snuffer;
-	assert truth of whether or not the blood ape is asleep with message "the blood ape should be asleep";
+	assert that the blood ape is asleep;;
 	assert truth of whether or not the blood ape is dead with message "the blood ape should be dead";
 	have the player and the blood ape fight in Arena of the Fallen;
-	assert truth of whether or not the blood ape is not asleep with message "the blood ape should be awake";
+	assert that the blood ape is awake;
 	
 Section - Dreadful Presence
 
@@ -1152,6 +1158,9 @@ Scenario when testing dream-of-sleeping-test:
 	
 Sleeping-dream-dreaming is an item-throwing test step. The first move of dream-of-sleeping-test is sleeping-dream-dreaming.
 
+Initial scheduling of sleeping-dream-dreaming:
+	Now Malygris is asleep;
+
 Sleeping-dream-waking is a test step. The next move of sleeping-dream-dreaming is sleeping-dream-waking.   
 
 Choosing a player action when testing sleeping-dream-waking:
@@ -1159,6 +1168,7 @@ Choosing a player action when testing sleeping-dream-waking:
 
 testing effects of sleeping-dream-waking:
 	assert that the event description includes "Malygris standing over you";
+	assert that Malygris is awake;
 	assert that the concentration of Malygris is 2;
 	assert truth of whether or not the player is just-woken with message "the player should be just-woken";
 	
@@ -1174,7 +1184,7 @@ testing effects of waiting-for-Malygris-attack:
 	if waiting-for-Malygris-attack is repeatable, make no decision;
 	assert that the event description includes "defender was asleep";
 	assert truth of whether or not the player is not just-woken with message "the player should not be just-woken anymore";
-	
+		
 	
 Section - Healer of Aite Healing
 
@@ -2546,6 +2556,98 @@ before fafhrd hitting the blood ape when testing fafhrd-killing-ape:
 	
 testing effects of fafhrd-killing-ape:
 	assert that bloodlusting is false when "after Fafhrd kills the ape".
+	
+Section - bug 291
+
+bug-291 is a isolated test set.
+
+Scenario when testing bug-291:
+	now the healer of aite is testobject;
+	now the dream of tungausy shaman is current-test-dream;
+	now the reusable item is a random morphean grenade;
+	now the swarm of daggers is testobject;
+	now the hall of mirrors is bannedobject;
+
+sleepy-throwing is an extracting item-throwing test step. The first move of bug-291 is sleepy-throwing. The location-target of sleepy-throwing is the healer of aite.
+
+Initial scheduling of sleepy-throwing:
+	now the player is just-woken.
+	
+Testing effects of sleepy-throwing:
+	assert that the player is tungausy warrior with label "identity of the player";
+	assert that the event description does not include "fog of sleep";
+	
+hut-entering is a test step.
+
+Choosing a player action when testing hut-entering:
+	generate the action of going inside.
+	
+shaman-choosing is a test step.
+
+Choosing a player action when testing shaman-choosing:
+	select menu question answer 1;
+	
+To assert that (guy - a person) is fully alert:
+	assert "[The guy] should not be just-woken" based on whether or not the guy is not just-woken.
+	
+To assert that (guy - a person) is just-woken:
+	assert "[The guy] should be just-woken" based on whether or not the guy is just-woken.
+	
+Testing effects of shaman-choosing:
+	Now opposition test subject is the player;
+	Repeat with guy running through opposer people in the location:
+		assert that guy is asleep;
+	assert that the player is the true body of the player with label "true body of the player";
+	assert that the player is awake;
+	assert that the player is fully alert;
+	assert that the event description does not include "fog of sleep";
+	
+teleport-waking is a repeatable test step. The maximum repeats of teleport-waking is 3.
+
+initial scheduling of teleport-waking:
+	now the reusable item is a random scroll of teleportation;
+	now the healer of aite is not asleep;
+	compel the action of the healer of aite attacking the player;
+	now the teleportation beacon is in a random unoccupied placed room;
+	now teleportation-beacon-on is true;	
+	
+Choosing a player reaction when testing teleport-waking:
+	now the player is just-woken;
+	generate the action of reading the reusable item.
+	
+Testing effects of teleport-waking:
+	unless the act count of the healer of aite is at least 1, make no decision;
+	if the player is at-react, make no decision;
+	assert that the player is fully alert;
+	assert that the event description includes "fog of sleep";
+	record success of teleport-waking;
+	
+sleepy-teleport is a hidden-traveling item-reading test step.
+
+Initial scheduling of sleepy-teleport:
+	now the teleportation beacon is in the location of the swarm of daggers;
+	now the player is just-woken;
+	
+Testing effects of sleepy-teleport:
+	assert that the player is just-woken;
+	assert that the event description does not include "fog of sleep";
+	
+sleepy-status is a test step.
+
+Choosing a player action when testing sleepy-status:
+	generate the action of asking status.
+	
+Testing effects of sleepy-status:
+	assert that the event description includes "You are just-woken: The next attack against you gets a \+3 bonus and \+2 damage\.";
+	
+sleepy-slaying is a hidden-traveling test step.
+
+choosing a player action when testing sleepy-slaying:
+	generate the action of smiting the swarm of daggers;
+	
+testing effects of sleepy-slaying:
+	assert that the event description includes "fog of sleep";
+	assert that the player is fully alert.
 	
 Section - Summoning too many monsters
 
