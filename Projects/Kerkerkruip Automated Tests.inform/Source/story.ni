@@ -2541,7 +2541,7 @@ choosing a player action when testing hitting-ape:
 testing effects of hitting-ape:
 	assert that bloodlusting is true when "after hitting the ape the first time";
 	
-fafhrd-killing-ape is a test step.
+fafhrd-killing-ape is a repeatable test step.
 
 initial scheduling of fafhrd-killing-ape:
 	now the melee of fafhrd is 100;
@@ -2555,11 +2555,14 @@ before fafhrd hitting the blood ape when testing fafhrd-killing-ape:
 	now the health of the blood ape is 1;
 	
 testing effects of fafhrd-killing-ape:
-	assert that bloodlusting is false when "after Fafhrd kills the ape".
+	if the blood ape is alive:
+		make no decision;
+	assert that bloodlusting is false when "after Fafhrd kills the ape";
+	now fafhrd-killing-ape is not repeatable.
 	
 Section - bug 291
 
-bug-291 is a isolated test set.
+bug-291 is a test set.
 
 Scenario when testing bug-291:
 	now the healer of aite is testobject;
