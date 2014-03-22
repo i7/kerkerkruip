@@ -1,7 +1,3 @@
-
-
-
-
 "Kerkerkruip" by Victor Gijsbers
 
 The story headline is "An IF roguelike".
@@ -30,7 +26,7 @@ Section - Graphics and Windows
 
 [ Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. It is not necessary to comment out Flexible Windows when Glimmr is commented in. ]
 
-Include version 13/131208 of Flexible Windows by Jon Ingold.
+Include version 14/140322 of Flexible Windows by Jon Ingold.
 
 [Include Kerkerkruip Glimmr Additions by Erik Temple.]
 
