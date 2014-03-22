@@ -143,13 +143,18 @@ Include (-
 		if (col == (+g-placenullcol+)) rfalse;
 		col = ColVal(col);
 		for (i = 0: i < (style_NUMSTYLES - 1) : i++)
- 	 		glk_stylehint_set(wintype_Textbuffer, i, stylehint_TextColor, 0);
+ 	 		glk_stylehint_set( wintype_AllTypes, i, stylehint_TextColor, 0 );
 	];
 
 -)
 
-Before starting the virtual machine:
+First before starting the virtual machine:
 	set basic text color to g-black.
+
+[ But lets make input be crimson ]
+Table of User Styles (continued)
+style name	glulx color
+input-style	g-humanist-crimson
 
 
 Chapter - Window-drawing rules
@@ -283,7 +288,7 @@ Hyperlink processing rule when the current hyperlink window is the powers-window
 
 
 Section - Inventory window
-	
+
 Window-drawing rule for the inventory-window when the inventory-window is g-present (this is the construct inventory window rule):
 	move focus to inventory-window, clearing the window;
 	consider the full inventory rule; 
