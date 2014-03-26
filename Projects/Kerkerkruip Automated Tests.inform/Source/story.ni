@@ -41,8 +41,6 @@ Include Kerkerkruip Tests by Victor Gijsbers.
 Include Kerkerkruip Final Declarations by Victor Gijsbers.
 Include Kerkerkruip Help and Hints by Victor Gijsbers.
 
-
-
 Section - Increase memory settings
 
 Use MAX_PROP_TABLE_SIZE of 800000.
@@ -709,9 +707,9 @@ testing effects for mindslug-runner:
 	assert one hit by fafhrd;
 	assert one hit by mouser;
 	
-israfel-meeting is a hidden-traveling extracting hiding-reveal test step. The location-target of israfel-meeting is Israfel.
+israfel-meeting-ps is a hidden-traveling extracting hiding-reveal test step. The location-target of israfel-meeting-ps is Israfel.
 
-Initial scheduling of israfel-meeting:
+Initial scheduling of israfel-meeting-ps:
 	now the health of israfel is 1000;
 	compel the action of israfel israfel-splitting;
 	
@@ -2652,5 +2650,73 @@ testing effects of sleepy-slaying:
 	assert that the event description includes "fog of sleep";
 	assert that the player is fully alert.
 	
+Section - bug 293 - Sensing Isra and Fell
+
+bug-293 is a test set
+
+scenario when testing bug-293:
+	now the reusable item is a random teleportation grenade;
+	now israfel is testobject;
+	
+israfel-meeting-293 is an extracting test step. The first move of bug-293 is israfel-meeting-293. The location-target of israfel-meeting-293 is israfel.
+
+israfel-splitting-293 is a repeatable test step. 
+
+initial scheduling of israfel-splitting-293:
+	assert "isra should be off-stage" based on whether or not isra is off-stage;
+	assert "fell should be off-stage" based on whether or not fell is off-stage;
+	compel the action of israfel israfel-splitting.
+	
+Testing effects of israfel-splitting-293:
+	if isra is off-stage, make no decision;
+	record success of the scheduled event.
+	
+isra-and-fell-scattering is a hidden-traveling item-throwing test step.
+
+Testing effects of isra-and-fell-scattering:
+	assert "isra should be onstage" based on whether or not isra is not off-stage;
+	if the location of Isra is the location:
+		extract Isra to a random unoccupied room;
+	assert "fell should be onstage" based on whether or not fell is not off-stage;
+	if the location of Fell is the location:
+		extract Fell to the location of Isra;
+	repeat with guy running through people in the location of isra:
+		if guy is not isra and guy is not Fell:
+			extract guy to the location;
+	repeat with guy running through people in the location of fell:
+		if guy is not fell and guy is not Isra:
+			extract guy to the location;
+	
+psycholocating-293 is a hidden-traveling item-reading test step.
+
+initial scheduling of psycholocating-293:
+	now the reusable item is a random scroll of psycholocation.
+	
+sensing-293 is a hidden-traveling test step.
+
+Choosing a player action when testing sensing-293:
+	generate the action of sensing.
+	
+Testing effects of sensing-293:
+	assert that the event description includes "frozen lightning";
+	assert that the event description includes "molten thunder";
+	
+isra-defeating-293 is a test step.
+
+initial scheduling of isra-defeating-293:
+	have the player defeat isra;
+	
+Testing effects of isra-defeating-293:
+	assert "power of israfel should not be granted" based on whether or not the power of israfel is not granted;
+	
+fell-defeating-293 is a test step.
+
+initial scheduling of fell-defeating-293:
+	have the player defeat fell;
+	
+Testing effects of fell-defeating-293:
+	assert that the event description includes "Israfel's dying cry shakes the foundations of the world";
+	assert "power of israfel should be granted" based on whether or not the power of israfel is granted.
+		
 Section - Summoning too many monsters
 

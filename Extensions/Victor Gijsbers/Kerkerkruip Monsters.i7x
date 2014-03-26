@@ -4640,7 +4640,7 @@ Report Israfel waiting when Israfel is insane:
 
 Section - Isra
 
-Isra is a male monster. "Isra contemplates the nature of god."
+Isra is a male monster. "Isra contemplates the nature of god here."
 The description of Isra is "His wise face burns like the sun, but he seems more interested in contemplating the nature of god than in physical combat.".
 
 The soul description of Isra is "frozen lightning".
@@ -4650,7 +4650,9 @@ Isra is large.
 Isra is talker.
 Isra is thrower.
 
-The level of Isra is 0.
+The level of Isra is 4.
+Isra is not defeated individually.
+Isra accompanies Israfel.
 
 The health of Isra is 20.
 The melee of Isra is 0.
@@ -4725,9 +4727,14 @@ Report Isra waiting when Isra is insane:
 	say "Isra furiously rubs his phallus while singing about the times that Fell ate it.";
 	rule succeeds.
 	
+Report Isra waiting:
+	if the concentration of Isra is 3:
+		say "Isra [one of]rests, glowing with an intense charge of concentration[or]holds his concentration[or]continues to maintain maximum concentration[or]waits patiently, still concentrated[cycling].";
+		rule succeeds.
+
 Section - Fell
 
-Fell is a female monster. "Fell radiates death."
+Fell is a female monster. "Fell radiates death here."
 Understand "claws" and "fangs" and "moonlight" as Fell.
 The description of Fell is "All claws and fangs that glimmer like silver in moonlight. She is here to bring death, and yet you are drawn to her beauty.".
 
@@ -4738,7 +4745,9 @@ Fell is medium.
 Fell is talker.
 Fell is thrower.
 
-The level of Fell is 0.
+The level of Fell is 4.
+Fell is not defeated individually.
+Fell accompanies Israfel.
 
 The health of Fell is 20.
 The melee of Fell is 3.
