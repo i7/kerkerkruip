@@ -372,7 +372,7 @@ To place (new place - a room) from (original place - a room) at (x - a number) b
 Section - Placing a room next to another room			
 
 To place (a - a room) next to (b - a room):
-	unless the number of rooms surrounding considered-x by considered-y by considered-z is the number of cardinal directions:
+	unless the number of rooms surrounding x-coordinate of b by y-coordinate of b by z-coordinate of b is the number of cardinal directions:
 		while a is not placed:			
 			let way be a random cardinal direction;
 			let x be the x way of b;
