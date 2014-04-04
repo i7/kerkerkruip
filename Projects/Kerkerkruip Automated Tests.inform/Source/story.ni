@@ -2730,11 +2730,11 @@ Section - bug 244
 
 [This test is not catching the bug I saw. I have no idea how to reproduce it.]
 
-bug-244 is an isolated test set.
+bug-244 is an test set.
 
 Scenario when testing bug-244:
 	now generation info is true;
-	now the generation minimum is 1;
+	now the generation minimum is 100;
 	now the rarity of the mausoleum is 0;
 
 Map approval rule when testing bug-244 (this is the only approve secret mausoleum maps rule):

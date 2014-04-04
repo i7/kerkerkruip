@@ -81,8 +81,6 @@ A room can be placeable. A room is usually placeable. [Not placeable rooms are n
 
 A room can be secretly placeable. A room is usually not secretly placeable. [A room can be both placeable and secretly placeable. If so, it has a chance to be placed in the main dungeon and another outside the connected dungeon.]
 
-A room has a number called the secret-rarity multiplier. The secret-rarity multiplier of a room is usually 1. [If a secretly placeable room was not placed normally, the rarity multiplier is set to this number. See Kerkerkruip Dungeon Generation]
-
 A room can be habitable. A room is usually habitable. [Monsters can be placed in it.]
 
 A room can be treasurable. A room is usually treasurable. [Treasures can be placed in it.]
