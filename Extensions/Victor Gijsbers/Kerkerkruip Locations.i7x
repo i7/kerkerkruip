@@ -473,16 +473,22 @@ Temple of Aite is religious.
 
 The statue of Aite is an idol in Temple of Aite. The resident idol of the Temple of Aite is the statue of Aite. The description of the statue of Aite is "A vast statue made of razor sharp weapons. The goddess of chaos and destruction is a dangerous one to worship -- but it can be worth it.". Understand "god" and "deity" as the statue of Aite.
 
+Aite-wrath is a truth state that varies. Aite-wrath is false.
+
 Instead of attacking the statue of Aite:
 	say "You experimentally whack the statue a couple of times, but it doesn't seem to budge. You hit it once more, when it suddenly shatters into a thousand iron swords that rain down all around you.";
 	if the player worships Aite:
 		say "[line break]You attempt to dodge the weapons, but you are no match for the goddess.";
 	otherwise:
 		say "[line break]Miraculously, you manage to dodge all the weapons. But Aite's voice screams through the dungeon, promising you a painful death at the hands of your enemies!";
-		repeat with guy running through denizen people:
-			if guy opposes player:
-				increase melee of guy by 2;
+		now Aite-wrath is true;
 	profane the Temple of Aite.	
+
+An attack modifier rule (this is the Aite wrath attack modifier rule):
+	if Aite-wrath is true:
+		if the global defender is the player and the global attacker is not the player: [Aite isn't cool enough to make you hit yourself harder in case of a Nomos intervention or some such]
+			if the numbers boolean is true, say " + 2 (Aite's wrath)[run paragraph on]";
+			increase the attack strength by 2.
 
 Instead of touching the statue of Aite:
 	try climbing the statue of Aite.
