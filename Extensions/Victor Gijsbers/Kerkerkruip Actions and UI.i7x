@@ -409,13 +409,20 @@ Check remembering:
 		say "You're not in the main Kerkerkruip dungeon right now." instead.
 
 Carry out remembering:
-	if the number of unvisited memorable rooms is zero:
+	let n be 0;
+	repeat with place running through unvisited rooms:
+		repeat with further place running through placed visited rooms:
+			if absolute distance between place and further place is 1:
+				repeat with way running through cardinal directions:
+					if place is the room the way of further place:
+						now n is 1;
+	if n is 0:
 		say "All locations have been explored. [Map description]";
 	otherwise:
 		if the mapping boolean is true:
 			say "[Map description]";
 		say "You have not yet explored:[line break]";
-		repeat with place running through unvisited memorable rooms:
+		repeat with place running through unvisited rooms:
 			repeat with further place running through placed visited rooms:
 				if absolute distance between place and further place is 1:
 					repeat with way running through cardinal directions:
