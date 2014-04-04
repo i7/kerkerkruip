@@ -71,7 +71,7 @@ Use maximum capture buffer length of at least 16384.
 Use maximum indexed text length of at least 16384. 
 
 First when play begins (this is the random seed rule):
-	Let the seed be 22;
+	Let the seed be 26;
 	log "Seeding random number generator with [seed]";
 	seed the random-number generator with the seed.
 
@@ -2429,16 +2429,26 @@ Section - Heal power of Malygris
 
 malygris-heal-power is an test set.
 
-the generation minimum is a number that varies. 
+the generation minimum is a number that varies.
 
+the generation count is a number that varies.
+
+The generation test rules is a rulebook.
+
+Last map approval rule:
+	increment generation count;
+	follow the generation test rules;
+	if generation count < generation minimum:
+		say "* [generation minimum - generation count] more dungeons to generate for [the current test set]";
+		rule fails;
+		
 Scenario when testing malygris-heal-power:
 	now generation info is true;
 	now the generation minimum is 20.
 	
 malygris-heal-max is a number that varies.
 
-Last map approval rule when testing malygris-heal-power:
-	decrement generation minimum;
+Generation test when testing malygris-heal-power:
 	now the heal power of Malygris is 0;
 	make the dungeon interesting [usually done after approval];
 	let max healing be (heal power of Malygris) * 60 / (heal cooldown of Malygris);
@@ -2449,11 +2459,9 @@ Last map approval rule when testing malygris-heal-power:
 	if (max healing) is greater than (60 times 3):
 		assert "[max healing divided by 60] and [remainder after dividing max healing by 60] 60ths is too much healing for Malygris" based on false;
 		now generation minimum is 0;
-	if generation minimum > 0:
-		say "[generation minimum] more dungeons to generate for this test";
-		rule fails;
-	assert "Malygris should be able to heal sometimes" based on whether or not the malygris-heal-max is at least 1.
-		
+	if generation count is generation minimum:
+		assert "Malygris should be able to heal sometimes" based on whether or not the malygris-heal-max is at least 1.
+			
 Section - Unlocking - issue 243
 
 unlocking-behavior is a test set.
@@ -2718,5 +2726,32 @@ Testing effects of fell-defeating-293:
 	assert that the event description includes "Israfel's dying cry shakes the foundations of the world";
 	assert "power of israfel should be granted" based on whether or not the power of israfel is granted.
 		
+Section - bug 244
+
+[This test is not catching the bug I saw. I have no idea how to reproduce it.]
+
+bug-244 is an isolated test set.
+
+Scenario when testing bug-244:
+	now generation info is true;
+	now the generation minimum is 1;
+	now the rarity of the mausoleum is 0;
+
+Map approval rule when testing bug-244 (this is the only approve secret mausoleum maps rule):
+	if the mausoleum is not placed:
+		rule fails;
+	let the path be the best route from Entrance Hall to the mausoleum;
+	if the path is a direction:
+		rule fails;
+	
+Generation test when testing bug-244:
+	assert "The mausoleum should be placed" based on whether or not the mausoleum is placed;
+	assert "The mausoleum should be marked secretly placeable" based on whether or not the mausoleum is secretly placeable;
+	
+final-generation-test is a test step. The first move of bug-244 is final-generation-test.
+
+Testing effects of final-generation-test:
+	assert "The mausoleum should be marked secretly placeable" based on whether or not the mausoleum is secretly placeable;
+
 Section - Summoning too many monsters
 
