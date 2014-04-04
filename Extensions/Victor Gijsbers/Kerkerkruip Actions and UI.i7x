@@ -34,6 +34,7 @@ Check retreating (this is the cannot retreat when in the retreat location rule):
 		say "There is nowhere to retreat to." instead.
 		
 Check retreating when the combat status is peace (this is the cannot retreat when there are no enemies rule):
+	take no time;
 	say "There's nothing here to retreat from." instead.
 		
 Check an at-React pc retreating (this is the cannot retreat as reaction rule):
