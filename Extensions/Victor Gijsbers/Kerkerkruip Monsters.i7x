@@ -5162,16 +5162,19 @@ Section - Special power - Unghouling
 Unghouling is an action applying to nothing.
 
 Malygris-unghouling is a truth state that varies.
+Malygris-unghouled-times is a number that varies. Malygris-unghouled-times is 0.
 
 An AI action selection rule for Malygris when Malygris-unghouling is true (this is the consider unghouling rule):
 	if the current form is ghoul-form and at least two undead persons are in the location:
 		choose a blank Row in the Table of AI Action Options;
 		now the Option entry is the action of Malygris unghouling;
-		now the Action Weight entry is a random number between 0 and 30.
+		now the Action Weight entry is a random number between 0 and 30;
+		decrease Action Weight entry by (20 times Malygris-unghouled-times). [If the player can change at will, Malygris shouldn't keep doing this.]
 
 Carry out Malygris unghouling:
 	say "As Malygris casts a complex spell, and you feel your flesh [bold type]returning to normal[roman type]!";
-	unghoulify the player.
+	unghoulify the player;
+	increase Malygris-unghouled-times by 1.
 
 A randomise Malygris rule (this is the randomise Malygris unghouling rule):
 	if a random chance of 1 in 2 succeeds:
