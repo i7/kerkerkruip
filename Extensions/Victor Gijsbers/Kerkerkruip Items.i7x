@@ -2315,6 +2315,7 @@ Carry out reading a scroll of the blade:
 		say "A magical sword formed of adamant suddenly appears in your hands!";
 	otherwise:
 		say "A magical sword formed of adamant suddenly appears in your hands -- and falls through them to the ground!";
+		now adamantine blade is not readied;
 		move adamantine blade to the location;
 
 The adamantine blade is an adamant weapon. The description of the adamantine blade is "This is a magical blade made of the hardest substance in the universe. You wonder how long the spell will last." Understand "sword" as the adamantine blade.
@@ -2330,7 +2331,13 @@ To do the adamantine blade shuffle:
 	now the parry-with bonus of the adamantine blade is a random number between -1 and 2;
 	now the adamantine blade timer is a random number between 12 and 20;
 	now the adamantine blade is not rusted;
-	now the heat strength of the adamantine blade is 0.
+	now the heat strength of the adamantine blade is 0;
+	now adamantine blade is medium;
+	while the size difference of adamantine blade and the player > 0:
+		increase the size of adamantine blade;
+	while the size difference of adamantine blade and the player < 0:
+		decrease the size of adamantine blade.
+		
 
 Every turn when the adamantine blade is not off-stage (this is the adamantine blade countdown rule):
 	if the main actor is the player:
