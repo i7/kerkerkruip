@@ -2212,7 +2212,8 @@ An AI action selection rule for the hound (this is the hound likes to counterstr
 		choose row with an Option of the action of the hound parrying in the Table of AI Action Options;
 		now the Action Weight entry is -1000;
 
-
+Carry out an actor challenging someone in (this is the remove hound status when moving to an arena rule):
+	now hound status is 0.
 
 
 
