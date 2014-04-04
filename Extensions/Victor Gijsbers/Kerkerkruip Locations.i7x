@@ -1336,7 +1336,9 @@ To find the corpse:
 	if rotting corpse is off-stage and rotting corpse is alive:
 		say "As you search the pile, a rotting corpse jumps out!";
 		move rotting corpse to location of the large pile of body parts;
-		now the player is not hidden;
+		if the player is hidden:
+			say "[line break]Startled, you jump back. A curse escapes your lips, thus blowing your cover.";
+			now the player is not hidden;
 	otherwise:
 		say "The most valuable thing you find is a putrefying arm that might function as a club.";
 		move putrefying arm to player;
