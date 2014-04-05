@@ -1226,7 +1226,7 @@ To do the grease drop with (guy - a person):
 Chapter - Masks
 [Includes masks, goggles, and anything else that covers the face.]
 
-Section - War mask (minor)
+[Section - War mask (minor)
 
 The war mask is a minor mask. The description of the war mask is "This warlike metal mask is painted with the holy symbols of Aite, and is a sacred object of her religion.".
 The war mask is religious.
@@ -1234,7 +1234,7 @@ The war mask is iron.
 
 A beloved of Aite rule (this is the war mask Aite rule):
 	if the test subject wears the war mask:
-		rule succeeds.
+		rule succeeds.]
 
 Section - Blindfold (minor)
 
