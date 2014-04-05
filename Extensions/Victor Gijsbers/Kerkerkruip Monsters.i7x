@@ -1868,7 +1868,7 @@ The soul description of the demon of rage is "a squall of fury, all blacks and r
 
 The health of the demon of rage is 21.
 The melee of the demon of rage is 0.
-The defence of the demon of rage is 8.
+The defence of the demon of rage is 7.
 
 The body score of the demon of rage is 6.
 The mind score of the demon of rage is 6.
