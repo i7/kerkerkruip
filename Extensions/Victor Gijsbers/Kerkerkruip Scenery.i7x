@@ -101,7 +101,7 @@ A dungeon interest rule (this is the teleportation-beacon-on rule):
 
 The teleportation beacon is a magical stone fixed in place extra thing. "You recognise a complicated stone contraption in a corner as a teleportation beacon. It seems to be [if teleportation-beacon-on is false]in[end if]active." Understand "complicated" and "stone" and "contraption" as the teleportation beacon.
 
-The description of the teleportation beacon is "When turned on, this beacon will ensure that all teleportations in Kerkerkruip lead to this room.".
+The description of the teleportation beacon is "When turned on, this beacon will ensure that all teleportations in Kerkerkruip lead to this room. It currently seems to be [if teleportation-beacon-on is false]in[end if]active.".
 
 Does the player mean switching on the teleportation beacon: it is likely.
 Does the player mean switching off the teleportation beacon: it is likely.
