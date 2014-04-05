@@ -649,6 +649,8 @@ Option-7-chest is a container. Option-7-chest contains a scroll of teleportation
 
 Last when play begins:
 	let n be a random number between 1 and 7;
+	if difficulty is 0 and advanced content is disabled:
+		now n is 1; [Novice players without advanced content always have the same starting kit.]
 	if n is 1:
 		move gilded rapier to the player;
 		now gilded rapier is readied;
