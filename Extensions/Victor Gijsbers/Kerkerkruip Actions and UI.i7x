@@ -410,7 +410,7 @@ Check remembering:
 
 Carry out remembering:
 	let n be 0;
-	repeat with place running through unvisited rooms:
+	repeat with place running through unvisited not nogo rooms:
 		repeat with further place running through placed visited rooms:
 			if absolute distance between place and further place is 1:
 				repeat with way running through cardinal directions:
@@ -422,7 +422,7 @@ Carry out remembering:
 		if the mapping boolean is true:
 			say "[Map description]";
 		say "You have not yet explored:[line break]";
-		repeat with place running through unvisited rooms:
+		repeat with place running through unvisited not nogo rooms:
 			repeat with further place running through placed visited rooms:
 				if absolute distance between place and further place is 1:
 					repeat with way running through cardinal directions:
