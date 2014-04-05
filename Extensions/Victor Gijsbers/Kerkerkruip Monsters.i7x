@@ -4370,6 +4370,7 @@ To call an ally:
 		let place be the room way of the location of the guy;
 		if location of the overmind is location of the player:
 			say "You briefly see an image of [the guy] flickering above the overmind, and a weird buzzing sound fills the dungeon. In the image, [the guy] move[s] to [place].";
+			now last-seen-location of the guy is place;
 		try guy going the way;
 	otherwise:
 		say "You briefly see an image of [the guy] flickering above the overmind, and a weird buzzing sound fills the dungeon.".
