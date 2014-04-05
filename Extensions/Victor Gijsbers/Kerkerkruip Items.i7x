@@ -1584,7 +1584,7 @@ First grenade returning rule:
 
 Grenade returning rule (this is the people throw back grenades rule):
 	let q be the number of alive thrower persons in exploding-location;
-	increase grenade-return-percentage by (10 * q).
+	increase grenade-return-percentage by (5 * q).
 	
 Grenade returning rule (this is the up and down direction grenade throwing rule):
 	if direction from exploding-location to location is down:
