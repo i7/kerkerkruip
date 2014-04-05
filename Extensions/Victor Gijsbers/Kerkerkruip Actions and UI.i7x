@@ -441,7 +441,7 @@ Carry out remembering:
 			say ", ";
 		otherwise:
 			say ".";
-	if at least one person is memory-locatable: [because one of them is the player]
+	if at least one person is memory-locatable:
 		say "[line break]You have seen the following creatures in these locations:[line break]";
 		repeat with guy running through memory-locatable persons:
 			say "- [italic type][the guy][roman type] (level [if group level of the guy is not 0][group level of the guy][otherwise][level of the guy][end if]) [remembered location of the guy][line break]";
