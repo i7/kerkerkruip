@@ -5170,7 +5170,8 @@ An AI action selection rule for Malygris when Malygris-unghouling is true (this 
 		choose a blank Row in the Table of AI Action Options;
 		now the Option entry is the action of Malygris unghouling;
 		now the Action Weight entry is a random number between 0 and 30;
-		decrease Action Weight entry by (20 times Malygris-unghouled-times). [If the player can change at will, Malygris shouldn't keep doing this.]
+		if ghoul-form is form-active:
+			decrease Action Weight entry by (20 times Malygris-unghouled-times). [If the player can change at will, Malygris shouldn't keep doing this.]
 
 Carry out Malygris unghouling:
 	say "As Malygris casts a complex spell, and you feel your flesh [bold type]returning to normal[roman type]!";
