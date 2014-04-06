@@ -4,5 +4,5 @@ Type=Application
 Terminal=false
 Exec=kerkerkruip
 Name=Kerkerkruip
-Icon=terminal
+Icon=kerkerkruip
 Categories=Game;AdventureGame;RolePlaying;

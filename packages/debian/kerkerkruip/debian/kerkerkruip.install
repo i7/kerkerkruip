@@ -2,4 +2,6 @@ kerkerkruip /usr/games
 kerkerkruip.desktop /usr/share/applications
 kerkerkruip.6 /usr/share/man/man6
 Kerkerkruip.gblorb /usr/share/kerkerkruip/
+kerkerkruip.png /usr/share/icons/hicolor/16x16/apps
+kerkerkruip.svg /usr/share/icons/hicolor/scalable/apps
 ../../../Projects/Kerkerkruip*Materials/Kerkerkruip.ini /usr/share/kerkerkruip/
