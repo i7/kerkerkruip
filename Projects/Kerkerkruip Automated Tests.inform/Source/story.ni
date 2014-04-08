@@ -1255,7 +1255,7 @@ Test play when testing sul-intervention-test:
 	
 Section - Reward in Arena of the Gods
 
-divine reward is a test set [for issue #228].
+divine reward is a isolated test set [for issue #228].
 
 scenario when testing divine reward:
 	now Temple of Nomos is testobject;
@@ -1291,21 +1291,22 @@ initial scheduling of isra-only-killing:
 testing effects of a test step (called the current move) when testing divine reward:
 	assert "Nomos counter should be zero on [the current move]" based on whether or not the nomos counter is zero;
 	assert "Nomos bonus should be false on [the current move]" based on whether or not the nomos bonus is false;
-	
+
 testing effects of isra-only-killing:
 	assert truth of whether or not Isra is dead with message "Isra should be dead";
 	assert truth of whether or not Fell is not dead with message "Fell should be alive";
 	assert truth of whether or not the health of the player is less than the permanent health of the player with message "The player should not be healed";
 	assert that the event description does not include "Nomos receives .* and fully heals you";
-	
+
 fell-also-killing is a test step. The next move of isra-only-killing is fell-also-killing.   
 
 Choosing a player action when testing fell-also-killing:
 	generate the action of smiting fell.
-	
+
 testing effects of fell-also-killing:
 	assert that the location is Hall of Gods;
 	assert that the event description includes "receives the soul";
+	assert that the event description does not include "receives the soul.* receives the soul";
 	assert that the health of the player is the permanent health of the player;
 	assert truth of whether or not the player carries the glass cannon with message "the glass cannon should still be carried";
 	assert truth of whether or not the glass cannon is readied with message "the glass cannon should still be readied";
@@ -1626,7 +1627,7 @@ testing effects of reaction-ape-killing:
 
 Section - Remembering Text
 
-remembering-text is an test set.
+remembering-text is an isolated test set.
 
 Scenario when testing remembering-text:
 	now Bodmall is testobject;
@@ -1972,14 +1973,12 @@ blessed-grenade-test is a test set.
 
 Scenario when testing blessed-grenade-test:
 	now Drakul is testobject;
-	now the war mask is testobject;
 	now the Alchemical Laboratory is testobject;
 	
 Test play when testing blessed-grenade-test:
 	now the defence of the player is 100;
 	now the player carries the reusable item;
-	Now the reusable item is the war mask;
-	Now the player carries the war mask;
+	Now the reusable item is the staff of insanity;
 	Now every room is not rust-spored;
 	Now every thing is not rusted;
 
@@ -2000,7 +1999,7 @@ testing effects of blessed-grenade-alchemy:
 				record success of blessed-grenade-alchemy;
 		
 Choosing a player action when testing a grenade-producing test step:
-	generate the action of inserting the war mask into the curious machine.
+	generate the action of inserting the reusable item into the curious machine.
 
 First every turn when the scheduled event is a grenade-producing test step (called the current move):
 	Now the health of the player is 100;

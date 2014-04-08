@@ -738,6 +738,7 @@ Every turn (this is the remove already-granted rule):
 		now guy is not already-granted.
 
 To do the absorption with (guy - a person):
+	say "doing the absorption with [guy] - health of Israfel is [health of Israfel].";
 	have the guy disappear;
 	if guy is grouper and guy is not group leading:
 		let guy2 be a random person accompanied by guy; [Redirect absorption to group leader]
