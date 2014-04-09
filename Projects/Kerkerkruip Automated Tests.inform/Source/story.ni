@@ -680,7 +680,6 @@ Before taking a player action [or reaction] when mindslug-retreat is the schedul
 	now concentration of fafhrd is 1;
 	now mouser does not press the player;
 	now concentration of mouser is 0;
-	showme concentration of mouser;
 
 Before taking a player action:
 	Repeat with guy running through people:
@@ -743,13 +742,20 @@ initial scheduling of israfel-rejoining:
 testing effects of israfel-rejoining:
 	assert that israfel is in the location;
 	
-israfel-resplitting is a test step.
+israfel-resplitting is repeatable test step.
 
 Initial scheduling of israfel-resplitting:
 	compel the action of israfel israfel-splitting;
 	
+Testing effects of israfel-resplitting:
+	if israfel is off-stage:
+		record success of israfel-resplitting.
+		
 unfrozen-fell-fleeing is a test step.   
 
+Initial scheduling of unfrozen-fell-fleeing:
+	compel the action of fell waiting;
+	
 Choosing a player action when testing unfrozen-fell-fleeing:
 	generate the action of retreating.
 
@@ -757,7 +763,7 @@ initial scheduling of unfrozen-fell-fleeing:
 	now fell presses the player;
 
 testing effects of unfrozen-fell-fleeing:
-	assert that the hitting count of fell is 1;
+	assert that the hitting count of fell is 1 with label "hitting count of fell";
 	 
 Section - Retreating from the Tentacle
 
@@ -1078,7 +1084,7 @@ Test play when testing controlling pipes:
 
 Section - Sul Champion vs Herm worshipper
 
-[Sul Champion vs Herm worshipper is a test set. [Sul Champion vs Herm worshipper is isolated.]
+[Sul Champion vs Herm worshipper is a test set.
 
 A scenario rule when testing Sul Champion vs Herm worshipper:
 	now Hall of Gods is testobject;
@@ -1186,7 +1192,7 @@ testing effects of waiting-for-Malygris-attack:
 	
 Section - Healer of Aite Healing
 
-aite-healing is a test set. [aite-healing is isolated.]
+aite-healing is a test set.
 
 Scenario when testing aite-healing:
 	now healer of aite is testobject.
@@ -1255,7 +1261,7 @@ Test play when testing sul-intervention-test:
 	
 Section - Reward in Arena of the Gods
 
-divine reward is a isolated test set [for issue #228].
+divine reward is a test set [for issue #228].
 
 scenario when testing divine reward:
 	now Temple of Nomos is testobject;
@@ -1627,7 +1633,7 @@ testing effects of reaction-ape-killing:
 
 Section - Remembering Text
 
-remembering-text is an isolated test set.
+remembering-text is a test set.
 
 Scenario when testing remembering-text:
 	now Bodmall is testobject;
@@ -2353,7 +2359,8 @@ Scenario when testing bug-280:
 	now the dimensional anchor is bannedobject;
 	now the teleportation beacon is bannedobject; [test with the imp?]
 	now the dream of briar roses is current-test-dream;
-	now the reusable item is a random morphean grenade.
+	now the reusable item is a random morphean grenade;
+	now the vast staircase is bannedobject.
 	
 reaper-seeking is a hidden-traveling extracting hiding-reveal test step. The  first move of bug-280 is reaper-seeking. The location-target of reaper-seeking is the reaper.
 
@@ -2722,7 +2729,10 @@ initial scheduling of fell-defeating-293:
 	have the player defeat fell;
 	
 Testing effects of fell-defeating-293:
-	assert that the event description includes "Israfel's dying cry shakes the foundations of the world";
+	assert "isra should be dead" based on whether or not isra is dead;
+	assert "fell should be dead" based on whether or not fell is dead;
+	assert "israfel should be off-stage" based on whether or not israfel is off-stage;
+	[assert that the event description includes "Israfel's dying cry shakes the foundations of the world";]
 	assert "power of israfel should be granted" based on whether or not the power of israfel is granted.
 		
 Section - bug 244

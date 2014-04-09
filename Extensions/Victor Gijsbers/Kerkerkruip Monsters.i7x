@@ -4892,10 +4892,11 @@ To reunite Israfel:
 	remove Fell from play;
 	say "Motes of light swirl through the room in a freakish tornado, and suddenly [bold type]Israfel has reformed[roman type].".
 	
+[This appears to be completely unnecessary
 Every turn when Isra is not alive and Fell is not alive and Israfel is alive (this is the Isra and Fell both dead rule):
 	move Israfel to the location;
 	say "Israfel's dying cry shakes the foundations of the world.";
-	now health of Israfel is -10.
+	now health of Israfel is -10.]
 
 
 Section - Link
