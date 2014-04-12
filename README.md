@@ -3,7 +3,7 @@ Kerkerkruip
 
 http://kerkerkruip.org
 
-Kerkerkruip is a short-form roguelike in the interactive fiction medium, featuring great tactical and strategic depth, innovative game play, zero grinding, and a sword & sorcery setting that does not rehash tired clichés.
+Kerkerkruip is a short-form roguelike in the interactive fiction medium, featuring meaningful tactical and strategic depth, innovative game play, zero grinding, and a sword & sorcery setting that does not rehash tired clichés.
 
 Setting up Kerkerkruip for development
 --------------------------------------

@@ -18,7 +18,7 @@
 		
 		<MajorUpgrade AllowDowngrades="yes"/>
 		
-		<Icon Id="Kicon.ico" SourceFile="..\cross-platform images\Kicon.ico" />
+		<Icon Id="kerkerkruip.ico" SourceFile="..\cross-platform images\kerkerkruip.ico" />
 		<Property Id="ARPPRODUCTICON" Value="Kicon.ico" />
 		
 		<Directory Id="TARGETDIR" Name="SourceDir">
@@ -26,7 +26,7 @@
 				<Directory Id="INSTALLDIR" Name="Kerkerkruip">
 				
 					<!-- Gargoyle! -->
-					<Component Id="Gargoyle" Guid="14db895a-3320-468c-82b9-5d49d3735998"> <!-- This code must be updated each version -->
+					<Component Id="Gargoyle" Guid="0f6c2e23-9967-4c93-859b-1a955a67a763"> <!-- This code must be updated each version -->
 						<File Source="git.exe"/>
 						<File Source="gargoyle\freetype6.dll"/>
 						<File Source="gargoyle\libgarglk.dll"/>
@@ -45,7 +45,7 @@
 					</Component>
 					
 					<!-- Kerkerkruip! -->
-					<Component Id="Kerkerkruip" Guid="af0c6d1c-95d5-43d3-aaea-2a959f2fe147"> <!-- This code must be updated each version -->
+					<Component Id="Kerkerkruip" Guid="95cf3787-b185-4bcf-9a75-d6c978cb3e0d"> <!-- This code must be updated each version -->
 						<File Source="Kerkerkruip.gblorb"/>
 						<File Source="..\..\Projects\Kerkerkruip Materials\Kerkerkruip.ini"/>
 						<RegistryValue Root="HKCU" Key="Software\Kerkerkruip" Name="Kerkerkruip" Type="string" Value="[ProductVersion]" KeyPath="yes"/>
@@ -62,7 +62,7 @@
 							Name="Kerkerkruip"
 							Target="[INSTALLDIR]git.exe"
 							Arguments="Kerkerkruip.gblorb"
-							Icon="Kicon.ico"
+							Icon="kerkerkruip.ico"
 							WorkingDirectory="INSTALLDIR"
 							Show="maximized"/>
 						<RegistryValue Root="HKCU" Key="Software\Kerkerkruip" Name="Shortcut" Type="string" Value="[ProductVersion]" KeyPath="yes"/>
