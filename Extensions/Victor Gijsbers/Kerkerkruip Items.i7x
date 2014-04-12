@@ -1606,10 +1606,11 @@ Every turn (this is the recover from flash rule):
 		if flash-grenade-timer of the main actor is 0:
 			unless main actor is blind:
 				if the main actor is alive:
-					if the main actor is conscious:
-						say "[The main actor] can [bold type]see again[roman type]!";
-					otherwise:
-						say "[Possessive of the main actor] [bold type]eyes function again[roman type].".
+					if the location of the main actor is the location of the player:
+						if the main actor is conscious:
+							say "[The main actor] can [bold type]see again[roman type]!";
+						otherwise:
+							say "[Possessive of the main actor] [bold type]eyes function again[roman type].".
 				
 A blindness rule (this is the blind if flashed rule):
 	if flash-grenade-timer of test subject is greater than 0:
