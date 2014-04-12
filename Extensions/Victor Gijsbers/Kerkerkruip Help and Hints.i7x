@@ -110,8 +110,7 @@ To say total credits:
 	[line break][the hand written list of extensions]
 	[paragraph break]You can get the source code for [Kerkerkruip] at https://github.com/i7/kerkerkruip
 	[paragraph break][bold type]Art credits[roman type]
-	[line break]The cover image is a photo by Captain Orange, modified by Victor Gijsbers. It is used with permission for this game, but should not be used for other games. (Unless you get permission yourself.)
-	[paragraph break][the monster portrait credits]
+	[line break][the monster portrait credits]
 	[paragraph break][bold type]Afterword by Victor Gijsbers[roman type]
 	[line break]I would like to thank the makers of Inform 7, everyone whose extensions I have used or misused, and everyone who has helped me on the forums and the newsgroups -- there are a lot of you, and you may know who you are. Andrew Plotkin has answered perhaps more of my technical questions than anyone else, so a special thanks to him.[paragraph break]This game has been inspired by many works of interactive fiction, computer roleplaying games and roguelikes. I want to single out [italic type]Desktop Dungeons[roman type] for special mention, since it was that game that gave me the idea of making a 'coffee break' roguelike -- finally a project I could finish! Apart from the fact that a roguelike is never finished, of course --";
 
@@ -128,7 +127,7 @@ To say the hand written list of extensions:
 	[line break]Questions by Michael Callaghan";
 
 To say the monster portrait credits:
-	say "All other illustrations by Erik Temple. The rogue portraits incorporate the following resources:
+	say "All illustrations by Erik Temple. The rogue portraits incorporate the following resources:
 	[paragraph break]Armadillo: Background texture courtesy of Shadowhouse Creations (shadowhousecreations.blogspot.com);
 	[line break]Chain Golem: Background texture courtesy of Got3d - 3d Models and Textures (http://www.got3d.com/index.html);
 	[line break]Fanatics of Aite: Background texture courtesy of deviantArt user cloaks (Michelle Bretland, cloaks.deviantart.com);

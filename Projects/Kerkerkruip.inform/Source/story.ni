@@ -3,7 +3,7 @@
 The story headline is "An IF roguelike".
 The story genre is "dungeon crawl".
 The release number is 9.
-Release along with [cover art and] a file of "Gargoyle config file" called "Kerkerkruip.ini".
+Release along with cover art and a file of "Gargoyle config file" called "Kerkerkruip.ini".
 
 
 
