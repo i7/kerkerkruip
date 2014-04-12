@@ -1,4 +1,4 @@
-"Kerkerkruip" by Victor Gijsbers
+"Kerkerkruip 9" by Victor Gijsbers
 
 The story headline is "An IF roguelike".
 The story genre is "dungeon crawl".
@@ -31,7 +31,7 @@ Use no status line.
 
 Include version 14/140322 of Flexible Windows by Jon Ingold.
 
-[Include Kerkerkruip Glimmr Additions by Erik Temple.]
+Include Kerkerkruip Glimmr Additions by Erik Temple.
 
 Include version 1/140221 of Menus by Dannii Willis.
 Include Kerkerkruip Windows by Erik Temple.

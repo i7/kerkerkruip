@@ -90,20 +90,21 @@ title	text
 
 
 To say total credits:
-	say "[banner text]https://github.com/i7/kerkerkruip
+	say "[banner text]http://kerkerkruip.org
 	[paragraph break][bold type]The Kerkerkruip team[roman type]
 	[line break][italic type]created by[roman type] Victor Gijsbers
-	[line break][italic type]with[roman type] Dannii Willis, 
-	[line break]Erik Temple,
-	[line break]Wade Clarke, 
-	[line break]Remko van der Pluijm [italic type]and[roman type]
-	[line break]Mike Ciul
+	[line break][italic type]with[roman type] Mike Ciul, 
+	[line break]Dannii Willis, 
+	[line break]Erik Temple [italic type]and[roman type]
+	[line break]Remko van der Pluijm
 	[paragraph break][bold type]Additional contributions by[roman type]
 	[line break]Brady Garvin
+	[paragraph break][bold type]Kerkerkruip theme music[roman type]
+	[line break][italic type]an original composition by[roman type] Wade Clarke
 	[paragraph break][bold type]Testers[roman type]
 	[line break]Thank you to our alpha- and beta-testers: Bora Bosna, Lance Camelot, Matt Weiner, Michael Fransioli, Michiel Hermes, Vyacheslav Dobranov, and Wasse Asmlash. (If we've forgotten you, let us know!) Any work of interactive fiction needs testers, but one as complicated as [Kerkerkruip] doubly so.
 	[paragraph break][bold type]Free software[roman type]
-	[line break][Kerkerkruip] is free and open source software. It is copyright 2013 and released under the GNU GPL version 3 licence, or any later version.
+	[line break][Kerkerkruip] is free and open source software. It is copyright 2014 and released under the GNU GPL version 3 licence, or any later version.
 	[paragraph break]At the core of [Kerkerkruip] is Inform ATTACK, a combat library for Inform 7, by Victor Gijsbers. It too is released under the GNU GPL 3.
 	[paragraph break][Kerkerkruip] includes many other extensions, which are used under the Creative Commons Attribution licence:
 	[line break][the hand written list of extensions]
@@ -130,7 +131,7 @@ To say the monster portrait credits:
 	say "All other illustrations by Erik Temple. The rogue portraits incorporate the following resources:
 	[paragraph break]Armadillo: Background texture courtesy of Shadowhouse Creations (shadowhousecreations.blogspot.com);
 	[line break]Chain Golem: Background texture courtesy of Got3d - 3d Models and Textures (http://www.got3d.com/index.html);
-	[line break]Fanatics of Aite: Background texture courtesy of deviantArt user cloaks (MIchelle Bretland, cloaks.deviantart.com);
+	[line break]Fanatics of Aite: Background texture courtesy of deviantArt user cloaks (Michelle Bretland, cloaks.deviantart.com);
 	[line break]Mindslug: Background texture courtesy of Flickr user rubyblossom (CC BY-NC-SA 2.0);
 	[line break]Minotaur: Background texture in the public domain, courtesy photos-public-domain.com;
 	[line break]Miranda: Background texture courtesy of deviantART user Esther-Sanz (esther-sanz.deviantart.com);
@@ -141,7 +142,7 @@ To say the monster portrait credits:
 	[line break]Placeholder cards: Background texture courtesy of deviantART user Esther-Sanz (esther-sanz.deviantart.com).";
 
 To say contact text:
-	say "This is where stuff is going on:[paragraph break]* Updates to the game are announced on the current website, which is also where you can find the latest version of the game: http://lilith.cc/~victor/?q=content/kerkerkruip[line break]* Updates are also announced on the IFDB, which is the ideal venue for reviewing interactive fiction: http://ifdb.tads.org[line break]* The source code and current design discussions can be found on github: https://github.com/i7/kerkerkruip[line break]* Design discussions, programming tutorials and help from other gamers are at the IF Forum: http://www.intfiction.org/forum/index.php[paragraph break]Github and the forum are the preferred places for interaction, but you can also contact Victor with comments, bug reports, and anything else at victor@lilith.cc."
+	say "This is where stuff is going on:[paragraph break]* Updates to the game are announced on the current website, which is also where you can find the latest version of the game: http://kerkerkruip.org[line break]* Updates are also announced on the IFDB, which is the ideal venue for reviewing interactive fiction: http://ifdb.tads.org[line break]* The source code and current design discussions can be found on github: https://github.com/i7/kerkerkruip[line break]* Design discussions, programming tutorials and help from other gamers are at the IF Forum: http://www.intfiction.org/forum/index.php[paragraph break]Github and the forum are the preferred places for interaction, but you can also contact Victor with comments, bug reports, and anything else at victor@lilith.cc."
 
 Section - Achievements
 
