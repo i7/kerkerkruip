@@ -689,12 +689,12 @@ A spirit bonus rule (this is the spirit bonus of the demon lord's diadem rule):
 	if the test subject wears the demon lord's diadem:
 		increase faculty bonus score by 4.
 
-The description of the demon lord's diadem is "Everyone agreed that this magical necklace helped Marcia Gracewood rise to the rank of high priestess, but only her enemies believed the rumours that if was gifted to her by a powerful demon lord in exchange for her eternal service. The manner of her 'death' proved them right in the most dramatic way possible. [italic type](It grants a +4 spirit bonus. As for the demon... well... who knows?)[roman type]".
+The description of the demon lord's diadem is "Everyone agreed that this magical diadem helped Marcia Gracewood rise to the rank of high priestess, but only her enemies believed the rumours that if was gifted to her by a powerful demon lord in exchange for her eternal service. The manner of her 'death' proved them right in the most dramatic way possible. [italic type](It grants a +4 spirit bonus. As for the demon... well... who knows?)[roman type]".
 
 The demon-diadem-number is a number that varies.
 
 A treasure placement rule (this is the demon's diadem calibration rule):
-	if a random chance of 1 in 3 succeeds:
+	if a random chance of 1 in 4 succeeds:
 		now the demon-diadem-number is 0;
 	otherwise:
 		now the demon-diadem-number is a random number between 10 and 80.
