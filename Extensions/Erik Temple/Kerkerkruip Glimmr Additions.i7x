@@ -356,7 +356,9 @@ Figure of card_Hound is the file "card_Hound.jpg".
 Figure of card_Demon-of-Rage is the file "card_Demon-of-Rage.jpg".
 Figure of card_Blood-Ape is the file "card_Blood-Ape.jpg".
 Figure of card_Jumping-Bomb is the file "card_Jumping-Bomb.jpg".
-Figure of card_Overmind is the file "card_Overmind.jpg".Figure of card_Israfel is the file "card_Israfel.jpg".Figure of card_Angel-of-Compassion is the file "card_Angel-of-Compassion.jpg".
+Figure of card_Overmind is the file "card_Overmind.jpg".
+Figure of card_Israfel is the file "card_Israfel.jpg".
+Figure of card_Angel-of-Compassion is the file "card_Angel-of-Compassion.jpg".
 
 
 Section - Map
@@ -560,7 +562,7 @@ Rule for starting the virtual machine (this is the graphics support rule):
 
 Before showing the title screen (this is the request graphics preferences rule):
 	if main menu graphics is unset and full graphics support is true:
-		say "[Kerkerkruip] has a graphical main menu, which cannot be used with screen readers.[paragraph break][bold type]Disable[roman type] the graphical interface? Please enter:  [bold type]Y[roman type]es or [bold type]N[roman type]o[paragraph break]This choice can later be changed from the Options menu.[paragraph break][paragraph break]";
+		say "[Kerkerkruip]'s graphical main menu can be disabled for player using text-only interpreters.[paragraph break][bold type]Disable[roman type] the graphical interface? Please enter:  [bold type]Y[roman type]es or [bold type]N[roman type]o[paragraph break]This choice can later be changed from the Options menu.[paragraph break][paragraph break]";
 		while 1 is 1:
 			let key be the chosen letter;
 			if key is 89 or key is 121: [Y]
@@ -1036,7 +1038,9 @@ The card of the hound is figure of card_Hound.
 The card of the demon of rage is figure of card_Demon-of-Rage.
 The card of the blood ape is figure of card_Blood-Ape.
 The card of the jumping bomb is figure of card_Jumping-Bomb.
-The card of the overmind is figure of card_Overmind.The card of Israfel is the figure of card_Israfel.The card of the angel of compassion is the figure of card_Angel-of-Compassion.
+The card of the overmind is figure of card_Overmind.
+The card of Israfel is the figure of card_Israfel.
+The card of the angel of compassion is the figure of card_Angel-of-Compassion.
 
 The monster-card queue is a list of people variable.
 
