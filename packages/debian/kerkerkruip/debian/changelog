@@ -1,17 +1,13 @@
-kerkerkruip (8) unstable; urgency=low
+kerkerkruip (9) unstable; urgency=low
 
-  * New upstream release
+  Version 9 has been released! Highlights include:
 
- -- Dannii Willis <curiousdannii@gmail.com>  Thu, 27 Jun 2013 15:43:45 +1000
+  * New original theme music by Wade Clarke
+  * A reworked reaction system adds a new layer of tactical depth
+  * Sacrificing powers to the gods allows you to gain religious benefits,
+    including divine interventions
+  * Throw grenades into adjacent rooms, but beware of the arms of Morpheus!
+  * Face Israfel, a terrible angel that can split into two smaller beings for
+    increased combat effectiveness before reuniting to heal
 
-kerkerkruip (7) unstable; urgency=low
-
-  * New upstream release
-
- -- Dannii Willis <curiousdannii@gmail.com>  Thu, 10 Jan 2013 20:27:12 +1000
-
-kerkerkruip (6) unstable; urgency=low
-
-  * Initial release.
-
- -- Dannii Willis <curiousdannii@gmail.com>  Thu, 22 Nov 2012 22:17:18 +1000
+ -- Dannii Willis <curiousdannii@gmail.com>  Sun, 13 Apr 2014 09:24:17 +1000
