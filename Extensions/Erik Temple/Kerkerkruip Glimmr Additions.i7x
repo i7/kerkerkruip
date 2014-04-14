@@ -562,6 +562,10 @@ Rule for starting the virtual machine (this is the graphics support rule):
 
 Before showing the title screen (this is the request graphics preferences rule):
 	if main menu graphics is unset and full graphics support is true:
+		[ If we're running in Gargoyle then we don't need to ask because you can't use a screen reader with one ]
+		if the current IO implementation is GarGlk:
+			enable main menu graphics;
+			rule succeeds;
 		say "[Kerkerkruip]'s graphical main menu can be disabled for player using text-only interpreters.[paragraph break][bold type]Disable[roman type] the graphical interface? Please enter:  [bold type]Y[roman type]es or [bold type]N[roman type]o[paragraph break]This choice can later be changed from the Options menu.[paragraph break][paragraph break]";
 		while 1 is 1:
 			let key be the chosen letter;

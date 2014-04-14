@@ -87,13 +87,13 @@ The border-12-window is a graphics g-window spawned by the main-window. The meas
 The border-13-window is a graphics g-window spawned by the main-window. The measurement is 7. The position is g-placeabove. The scale method is g-fixed-size.  The back-colour is g-header-color.
 
 Before constructing the status-window:
-	if the Gargoyle config file was used is true:
+	if the current IO implementation is GarGlk:
 		now the status-window is g-unrequired;
 		place border border-12-window;
 		now the status-window is g-required;
 
 After constructing the status-window:
-	if the Gargoyle config file was used is true:
+	if the current IO implementation is GarGlk:
 		place border border-13-window;
 	place border border-7-window;
 

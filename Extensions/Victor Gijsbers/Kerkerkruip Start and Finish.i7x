@@ -32,24 +32,25 @@ Section - Detecting whether or not the Gargoyle config file has been applied
 
 [ We can detect whether or not the Gargoyle config file has been applied by checking whether one of the text colours has been changed. Warning, user style 2 will be pretty ugly if it has! ]
 
-The Gargoyle config file was used is a truth state variable.
+GarGlk is an IO implementation.
 
-First before showing the title screen (this is the detect whether the config file has been applied rule):
-	unless the current IO implementation is CocoaGlk:
-		detect the gargoyle config file;
-
-To detect the gargoyle config file:
-	(- DetectGargoyleConfigFile(); -).
+To decide whether the gargoyle config file was used:
+	(- DetectGargoyleConfigFile() -).
 
 Include (-
-[ DetectGargoyleConfigFile	res;
-	res = glk_style_measure( gg_mainwin, style_User2, stylehint_TextColor, gg_arguments );
-	if ( res && gg_arguments-->0 == $F400A1 )
+[ DetectGargoyleConfigFile res;
+	! Don't test the style in CocoaGlk because it will crash
+	if ( ~~(+ CocoaGlk detection flag +) )
 	{
-		(+ the Gargoyle config file was used +) = 1;
+		res = glk_style_measure( gg_mainwin, style_User2, stylehint_TextColor, gg_arguments );
 	}
+	return res && gg_arguments-->0 == $F400A1;
 ];
 -).
+
+An IO implementation detection rule (this is the test for GarGlk rule):
+	if the Gargoyle config file was used:
+		rule succeeds with result GarGlk;
 
 
 
@@ -370,7 +371,7 @@ Section - Menu hyperlinks
 Before showing the title screen (this is the enable menu hyperlinks rule):
 	if glulx hyperlinks are supported:
 		if menu hyperlinks are unset:
-			if the Gargoyle config file was used is true:
+			if the current IO implementation is GarGlk:
 				enable menu hyperlinks;
 			otherwise:
 				disable menu hyperlinks;
