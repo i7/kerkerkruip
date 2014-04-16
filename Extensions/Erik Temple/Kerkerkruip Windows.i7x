@@ -304,30 +304,40 @@ Window-drawing rule for the inventory-header-window when the inventory-header-wi
 
 Chapter - Opening and closing windows
 
-Toggling window panels is an action out of world. Understand "toggle info panels" or "info panels" or "toggle information panels" or "information panels" or "panels" as toggling window panels.
+The information panels are an option. Understand "panels" and "side panels" as the information panels.
+Understand "info [option]" as toggling.
 
-Understand "disable panels" or "disable info panels" or "disable information panels" as toggling window panels when window panels are enabled.
-
-Understand "enable panels" or "enable info panels" or "enable information panels" as toggling window panels when window panels are disabled.
-
-Understand "disable panels" or "disable info panels" or "disable information panels" as a mistake ("The information panels are already disabled.") when window panels are disabled.
-
-Understand "enable panels" or "enable info panels" or "enable information panels" as a mistake ("The information panels are already enabled.") when window panels are enabled.
-
-Carry out toggling window panels:
-	shut down the status-window;
-	toggle window panels;
+Check toggling the information panels:
 	if window panels are enabled:
-[		enable window panels;]
-		open side windows;
-		open up the status-window;
-		say "The information panels have been enabled. Type PANELS to disable them again.";
+		try disabling the information panels;
 	otherwise:
-[		disable window panels;]
-		close side windows;
-		open up the status-window;
-		say "The information panels have been disabled. Type PANELS to re-enable them."
+		try enabling the information panels;
 
+Check enabling the information panels:
+	if screen reader mode is enabled:
+		say "Information panels are disabled in screen reader mode." instead;
+	if window panels are enabled:
+		say "The information panels are already enabled." instead;
+		
+Check disabling the information panels:
+	if screen reader mode is enabled:
+		say "Information panels are disabled in screen reader mode." instead;
+	if window panels are disabled:
+		say "The information panels are already disabled." instead;
+
+Carry out enabling the information panels:
+	enable the window panels flag;
+	shut down the status-window;
+	open side windows;
+	open up the status-window;
+	say "The information panels have been enabled. Type PANELS to disable them again." instead;
+
+Carry out disabling the information panels:
+	disable the window panels flag;
+	shut down the status-window;
+	close side windows;
+	open up the status-window;
+	say "The information panels have been disabled. Type PANELS to re-enable them." instead;
 	
 To open side windows:
 	if window panels are disabled:
@@ -346,12 +356,14 @@ To close side windows:
 Section - Events
 
 Last when play begins (this is the check info panel capacity rule):
+	if screen reader mode is enabled:
+		stop;
 	if window panels are disabled:
 		say "[bracket]Information panels are disabled. Type PANELS to enable them.[close bracket][line break][run paragraph on]";
 	if window panels are enabled:
 		if width of the main-window is less than 102 or height of the main-window is less than 30:
 			say "[bracket]Your game window is too small for you to use the information panels comfortably. Maximize your window, then type PANELS to enable them.[close bracket][line break][run paragraph on]";
-			disable window panels;
+			disable window panels flag;
 	follow the open up game windows rule.
 
 This is the open up game windows rule:

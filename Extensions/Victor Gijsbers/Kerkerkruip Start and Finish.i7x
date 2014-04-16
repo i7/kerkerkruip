@@ -54,6 +54,40 @@ An IO implementation detection rule (this is the test for GarGlk rule):
 
 
 
+Section - Screen reader mode
+
+[ Take care of screen reader mode, graphics and hyperlinks ]
+Before showing the title screen (this is the check screen reader rule):
+	if screen reader mode is unset:
+		if the current IO implementation is GarGlk:
+			if main menu graphics flag are unset:
+				enable main menu graphics flag, table only;
+			if menu hyperlinks are unset:
+				enable menu hyperlinks, table only;
+			disable screen reader mode;
+			continue the activity;
+		say "[Kerkerkruip] has a mode optimised for those using a screen reader.[paragraph break][bold type]Enable[roman type] the screen reader mode? Please enter:  [bold type]Y[roman type]es or [bold type]N[roman type]o[paragraph break]This option, as well as other interface options, can be changed later from the Options menu.[paragraph break][paragraph break]";
+		while 1 is 1:
+			let key be the chosen letter;
+			if key is 89 or key is 121: [Y]
+				enable screen reader mode, table only;
+				if menu hyperlinks are unset:
+					enable menu hyperlinks, table only;
+				disable main menu graphics flag, table only;
+				disable window panels flag, table only;
+				enable screen reader mode;
+				break;
+			if key is 78 or key is 110: [N]
+				if main menu graphics flag are unset:
+					enable main menu graphics flag, table only;
+				if menu hyperlinks are unset:
+					disable menu hyperlinks, table only;
+				disable screen reader mode;
+				break;
+		clear the main-window;
+
+
+
 Section - Sounds
 
 Sound of Music is the file "Kerkerkruip Main Theme.ogg".
@@ -350,10 +384,6 @@ Chapter - Options Menu
 Table of Options Menu
 title	order	rule	hidden-row
 "[bold type]Interface options"	1	--	--
-"Information panels: [bold type][if window panels are disabled]Off[otherwise]On[end if]"	2	the toggle info panels rule		
-
-This is the toggle info panels rule:
-	toggle window panels;
 
 To hide option (N - a number):
 	now the hidden-row corresponding to order of N in Table of Options Menu is true;
@@ -365,26 +395,97 @@ To show option (N - a number):
 			blank out the hidden-row entry;
 			stop;
 
+Section - Screen reader mode
+
+Before showing the title screen (this is the screen reader mode rule):
+	if screen reader mode is enabled:
+		now disable the popover menu window is true;
+	otherwise:
+		now disable the popover menu window is false;
+
+Table of Options Menu (continued)
+title	order	rule
+"Screen reader mode: [bold type][if screen reader mode is disabled]Off[otherwise]On[end if]"	10	the toggle screen reader mode rule	
+
+This is the toggle screen reader mode rule:
+	toggle screen reader mode;
+	if screen reader mode is enabled:
+		hide option 20;
+		show option 21;
+		hide option 30;
+		show option 31;
+	otherwise:
+		show option 20;
+		hide option 21;
+		show option 30;
+		hide option 31;
+
+The update the disable the popover menu window setting rule is listed after the switch back to the main-window rule in the after displaying rules.
+Last after displaying rule (this is the update the disable the popover menu window setting rule):
+	if screen reader mode is enabled:
+		now disable the popover menu window is true;
+	otherwise:
+		now disable the popover menu window is false;
+
+Section - Menu graphics (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+Changed graphics option is a truth state variable.
+
+Table of Options Menu (continued)
+title	order	rule
+"Menu graphics: [bold type][if main menu graphics flag are enabled]On[otherwise]Off[end if][roman type]"	20	the toggle menu graphics rule
+"Menu graphics: [italic type]Disabled by screen reader mode"	21	--
+
+An entering a menu rule for the Table of Options Menu (this is the show graphics rows rule):
+	if screen reader mode is enabled:
+		hide option 20;
+		show option 21;
+	otherwise:
+		show option 20;
+		hide option 21;
+
+This is the toggle menu graphics rule:
+	toggle main menu graphics flag;
+	now changed graphics option is true;
+
+A last exiting a menu rule (this is the restart if graphics were changed rule):
+	if changed graphics option is true and the showing the title screen activity is going on and menu depth is 1:
+		enable session flag;
+		restart immediately;
+
+To restart immediately: 
+	(- @restart; -).
+
+Section - Info panels
+
+Table of Options Menu (continued)
+title	order	rule
+"Information panels: [bold type][if window panels flag are disabled]Off[otherwise]On[end if]"	30	the toggle info panels rule
+"Information panels: [italic type]Disabled by screen reader mode"	31	--
+
+An entering a menu rule for the Table of Options Menu (this is the show panels rows rule):
+	if screen reader mode is enabled:
+		hide option 30;
+		show option 31;
+	otherwise:
+		show option 30;
+		hide option 31;
+
+This is the toggle info panels rule:
+	toggle window panels flag;
+
 Section - Menu hyperlinks
 
-[ Menu hyperlinks: try to detect if we can use them, but also allow the user to change the option ]
+[ Menu hyperlinks are automatically enabled or disable above in the screen reader rule, but the user can also change the option if they want ]
 Before showing the title screen (this is the enable menu hyperlinks rule):
-	if glulx hyperlinks are supported:
-		if menu hyperlinks are unset:
-			if the current IO implementation is GarGlk:
-				enable menu hyperlinks;
-			otherwise:
-				disable menu hyperlinks;
-		if menu hyperlinks are enabled:
-			now enable menu hyperlinks is true;
-		otherwise:
-			now enable menu hyperlinks is false;
+	if glulx hyperlinks are supported and menu hyperlinks are enabled:
+		now enable menu hyperlinks is true;
 	otherwise:
 		now enable menu hyperlinks is false;
 
 Table of Options Menu (continued)
 title	order	rule	
-"[hyperlinks options]"	3	the toggle menu hyperlinks rule	
+"[hyperlinks options]"	40	the toggle menu hyperlinks rule
 
 To say hyperlinks options:
 	say "Clickable menus: [bold type][if menu hyperlinks are enabled]On[otherwise]Off[end if][italic type][unless glulx hyperlinks are supported] (note: not supported in this interpreter)[otherwise if menu hyperlinks are disabled and enable menu hyperlinks is true] (note: will take affect once you leave this menu)[end if]";
@@ -402,31 +503,11 @@ An exiting a menu rule for the Table of Options Menu (this is the disable hyperl
 	if menu hyperlinks are disabled:
 		now enable menu hyperlinks is false;
 
-Section - Menu graphics (for use with Kerkerkruip Glimmr Additions by Erik Temple)
-
-Changed graphics option is a truth state variable.
-
-Table of Options Menu (continued)
-title	order	rule
-"Menu graphics: [bold type][if main menu graphics are enabled]On[otherwise]Off[end if][roman type]"	11	the toggle menu graphics rule
-
-This is the toggle menu graphics rule:
-	toggle main menu graphics;
-	now changed graphics option is true;
-
-A last exiting a menu rule (this is the restart if graphics were changed rule):
-	if changed graphics option is true and the showing the title screen activity is going on and menu depth is 1:
-		enable session flag;
-		restart immediately;
-
-To restart immediately: 
-	(- @restart; -).
-
 Section - Sound
 
 Table of Options Menu (continued)
 title	order	rule
-"Sound: [bold type][if sound is enabled]On[otherwise]Off[end if]"	12	the toggle theme music rule
+"Sound: [bold type][if sound is enabled]On[otherwise]Off[end if]"	50	the toggle theme music rule
 
 This is the toggle theme music rule:
 	toggle sound;
@@ -450,38 +531,38 @@ Reset the victories is a truth state variable.
 
 Table of Options Menu (continued)
 title	order	rule
-""	20	--
-"[bold type]Game records"	21	--
-"Total victories: [if reset the victories is false][number of total victories][otherwise]0[end if]"	22	--
-"Reset your victory records"	23	the resetting rule
-[""	24	--]
-"Your victories records have been reset"	25	--
-"Undo"	26	the resetting rule
+""	60	--
+"[bold type]Game records"	61	--
+"Total victories: [if reset the victories is false][number of total victories][otherwise]0[end if]"	62	--
+"Reset your victory records"	63	the resetting rule
+[""	64	--]
+"Your victories records have been reset"	65	--
+"Undo"	66	the resetting rule
 
 An entering a menu rule for the Table of Options Menu (this is the show victories reset rows rule):
 	if reset the victories is false:
 		if the number of total victories > 0:
-			show option 23;
-			[show option 24;]
+			show option 63;
+			[show option 64;]
 		otherwise:
-			hide option 23;
-			[hide option 24;]
-		hide option 25;
-		hide option 26;
+			hide option 63;
+			[hide option 64;]
+		hide option 65;
+		hide option 66;
 
 This is the resetting rule:
 	if reset the victories is false:
 		now reset the victories is true;
-		hide option 23;
-		[hide option 24;]
-		show option 25;
-		show option 26;
+		hide option 63;
+		[hide option 64;]
+		show option 65;
+		show option 66;
 	otherwise:
 		now reset the victories is false;
-		show option 23;
-		[show option 24;]
-		hide option 25;
-		hide option 26;
+		show option 63;
+		[show option 64;]
+		hide option 65;
+		hide option 66;
 	show the level rows;
 
 An exiting a menu rule for the Table of Options Menu (this is the reset victories immediately if not in a game rule):
@@ -513,32 +594,32 @@ Last before showing the title screen (this is the set novice option rule):
 
 Table of Options Menu (continued)
 title	order	rule
-""	30	--
-"[difficulty level intro]"	31	--
-"If you like you can"	32	--
-"Skip ahead to Apprentice level"	33	the skip ahead to apprentice level rule
-"Return to Novice level"	34	the skip ahead to apprentice level rule
-"Unlock advanced content while staying at Novice level: [bold type][if advanced content is enabled]On[otherwise]Off"	35	the unlock everything rule
+""	70	--
+"[difficulty level intro]"	71	--
+"If you like you can"	72	--
+"Skip ahead to Apprentice level"	73	the skip ahead to apprentice level rule
+"Return to Novice level"	74	the skip ahead to apprentice level rule
+"Unlock advanced content while staying at Novice level: [bold type][if advanced content is enabled]On[otherwise]Off"	75	the unlock everything rule
 
 To say difficulty level intro:
 	say "[if the showing the title screen activity is going on]Your difficulty level is: [otherwise]In your next game (unless you win) your difficulty level will be reset to: [end if][bold type][if novice option is 0]Novice[otherwise]Apprentice";
 
 To show the level rows:
 	if the number of total victories > 0 and reset the victories is false:
-		repeat with N running from 30 to 35:
+		repeat with N running from 70 to 75:
 			hide option N;
 	otherwise:
-		show option 30;
-		show option 31;
-		show option 32;
+		show option 70;
+		show option 71;
+		show option 72;
 		if novice option is 0:
-			show option 33;
-			hide option 34;
-			show option 35;
+			show option 73;
+			hide option 74;
+			show option 75;
 		otherwise:
-			hide option 33;
-			show option 34;
-			hide option 35;
+			hide option 73;
+			show option 74;
+			hide option 75;
 
 An entering a menu rule for the Table of Options Menu (this is the show level rows rule):
 	show the level rows
@@ -559,30 +640,30 @@ Reset the achievements is a truth state variable.
 
 Table of Options Menu (continued)
 title	order	rule
-""	40	--
-"Reset achievements"	41	the achievement resetting rule
-"Achievements have been reset"	42	--
-"Undo"	43	the achievement resetting rule
+""	80	--
+"Reset achievements"	81	the achievement resetting rule
+"Achievements have been reset"	82	--
+"Undo"	83	the achievement resetting rule
 
 An entering a menu rule for the Table of Options Menu (this is the show achievements rows rule):
 	if Table of Held Achievements is empty:
-		hide option 40;
-		hide option 41;
-	hide option 42;
-	hide option 43;
+		hide option 80;
+		hide option 81;
+	hide option 82;
+	hide option 83;
 	now reset the achievements is false;
 
 This is the achievement resetting rule:
 	if reset the achievements is false:
 		now reset the achievements is true;
-		hide option 41;
-		show option 42;
-		show option 43;
+		hide option 81;
+		show option 82;
+		show option 83;
 	otherwise:
 		now reset the achievements is false;
-		show option 41;
-		hide option 42;
-		hide option 43;
+		show option 81;
+		hide option 82;
+		hide option 83;
 
 An exiting a menu rule for the Table of Options Menu (this is the reset achievements rule):
 	if reset the achievements is true:
@@ -595,30 +676,30 @@ Reset the rogue stats is a truth state variable.
 
 Table of Options Menu (continued)
 title	order	rule
-""	50	--
-"Reset rogue statistics"	51	the rogue statistics resetting rule
-"Rogue statistics have been reset"	52	--
-"Undo"	53	the rogue statistics resetting rule
+""	90	--
+"Reset rogue statistics"	91	the rogue statistics resetting rule
+"Rogue statistics have been reset"	92	--
+"Undo"	93	the rogue statistics resetting rule
 
 An entering a menu rule for the Table of Options Menu (this is the show rogue statistics rows rule):
 	if the number of encountered npc people is 0:
-		hide option 50;
-		hide option 51;
-	hide option 52;
-	hide option 53;
+		hide option 90;
+		hide option 91;
+	hide option 92;
+	hide option 93;
 	now reset the rogue stats is false;
 
 This is the rogue statistics resetting rule:
 	if reset the rogue stats is false:
 		now reset the rogue stats is true;
-		hide option 51;
-		show option 52;
-		show option 53;
+		hide option 91;
+		show option 92;
+		show option 93;
 	otherwise:
 		now reset the rogue stats is false;
-		show option 51;
-		hide option 52;
-		hide option 53;
+		show option 91;
+		hide option 92;
+		hide option 93;
 
 An exiting a menu rule for the Table of Options Menu (this is the reset rogue stats rule):
 	if reset the rogue stats is true:

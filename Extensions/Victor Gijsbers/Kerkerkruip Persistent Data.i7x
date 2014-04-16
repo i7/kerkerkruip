@@ -17,7 +17,7 @@ Section - Loading Data Values
 The File of Data Storage is called "KerkerkruipStorage".
 The File of Legacy Storage is called "KerkerkruipData".
 
-Before showing the title screen (this is the load the file of data storage rule):
+First before showing the title screen (this is the load the file of data storage rule):
 	if File of Data Storage exists:
 		read File Of Data Storage into the Table of Data Storage;
 	otherwise if File of Legacy Storage exists:
@@ -70,11 +70,12 @@ total victories	1	--	--
 current difficulty	2	--	--
 highest achieved difficulty	3	--	--
 advanced content	4	1	0
-main menu graphics	5	1	-1
+main menu graphics flag	5	1	-1
 session flag	6	1	0
-window panels	7	0	1
+window panels flag	7	0	1
 menu hyperlinks	8	1	-1
 sound	9	1	-1
+screen reader mode	10	1	-1
 
 To decide which number is (P - a data storage parameter) as a number: (- {P} -);
 
@@ -90,6 +91,22 @@ To decide whether (P - a data storage parameter) is/are enabled:
 
 To decide whether (P - a data storage parameter) is/are disabled:
 	decide on whether or not number of P is disabled value of P;
+
+To decide whether main menu graphics is/are enabled:
+	if screen reader mode is enabled, no;
+	decide on whether or not main menu graphics flag is enabled;
+
+To decide whether window panels is/are enabled:
+	if screen reader mode is enabled, no;
+	decide on whether or not window panels flag is enabled;
+
+To decide whether main menu graphics is/are disabled:
+	if screen reader mode is enabled, yes;
+	decide on whether or not main menu graphics flag is disabled;
+
+To decide whether window panels is/are disabled:
+	if screen reader mode is enabled, yes;
+	decide on whether or not window panels flag is disabled;
 
 To increase the/-- (param - a data storage parameter) by (N - a number), table only:
 	if table only:

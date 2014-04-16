@@ -552,7 +552,7 @@ Section - Rogues Gallery transition
 The gallery-transition is an animation track. The image-reel is {Figure of transition_RoguesGallery_00001, Figure of transition_RoguesGallery_00002, Figure of transition_RoguesGallery_00003, Figure of transition_RoguesGallery_00004, Figure of transition_RoguesGallery_00005, Figure of transition_RoguesGallery_00006, Figure of transition_RoguesGallery_00007, Figure of transition_RoguesGallery_00008, Figure of transition_RoguesGallery_00009, Figure of transition_RoguesGallery_00010, Figure of transition_RoguesGallery_00011, Figure of transition_RoguesGallery_00012, Figure of transition_RoguesGallery_00013, Figure of transition_RoguesGallery_00014, Figure of transition_RoguesGallery_00015, Figure of transition_RoguesGallery_00016, Figure of transition_RoguesGallery_00017, Figure of transition_RoguesGallery_00018, Figure of transition_RoguesGallery_00019, Figure of transition_RoguesGallery_00020, Figure of transition_RoguesGallery_00021, Figure of transition_RoguesGallery_00022, Figure of transition_RoguesGallery_00023, Figure of transition_RoguesGallery_00024, Figure of transition_RoguesGallery_00025, Figure of transition_RoguesGallery_00026, Figure of transition_RoguesGallery_00027, Figure of transition_RoguesGallery_00028, Figure of transition_RoguesGallery_00029, Figure of transition_RoguesGallery_00030, Figure of transition_RoguesGallery_00031, Figure of transition_RoguesGallery_00032, Figure of transition_RoguesGallery_00033, Figure of transition_RoguesGallery_00034, Figure of transition_RoguesGallery_00035, Figure of transition_RoguesGallery_00036, Figure of transition_RoguesGallery_00037}.
 
 
-Chapter - Graphics support and preferences
+Chapter - Graphics support
 
 Full graphics support is a truth state variable.
 
@@ -560,53 +560,39 @@ Rule for starting the virtual machine (this is the graphics support rule):
 	if glulx graphics is supported and glulx graphic-window mouse input is supported and glulx timekeeping is supported and glulx PNG transparency is supported:
 		now full graphics support is true.
 
-Before showing the title screen (this is the request graphics preferences rule):
-	if main menu graphics is unset and full graphics support is true:
-		[ If we're running in Gargoyle then we don't need to ask because you can't use a screen reader with one ]
-		if the current IO implementation is GarGlk:
-			enable main menu graphics;
-			rule succeeds;
-		say "[Kerkerkruip]'s graphical main menu can be disabled for player using text-only interpreters.[paragraph break][bold type]Disable[roman type] the graphical interface? Please enter:  [bold type]Y[roman type]es or [bold type]N[roman type]o[paragraph break]This choice can later be changed from the Options menu.[paragraph break][paragraph break]";
-		while 1 is 1:
-			let key be the chosen letter;
-			if key is 89 or key is 121: [Y]
-				disable main menu graphics;
-				disable window panels;
-				break;
-			if key is 78 or key is 110: [N]
-				enable main menu graphics;
-				break;
-		clear the main-window;
-
-The request graphics preferences rule is listed after the load the file of data storage rule in the before showing the title screen rules.
-
 
 
 Section - Setting graphics preferences from the command line
 
-Setting graphics on is an action out of world. Understand "graphics on" as setting graphics on.
+The main menu graphics are an option. Understand "graphics" as the main menu graphics.
+Understand "menu [option]" as toggling.
 
-Carry out setting graphics on:
+Check toggling the main menu graphics:
 	if main menu graphics are enabled:
-		say "Graphics are already turned on.";
+		try disabling the main menu graphics;
 	otherwise:
-		enable main menu graphics;
-		unless main menu graphics are enabled:
-			say "Warning: Could not set graphics preference.";
-		otherwise:
-			say "Graphics will be used to display the main menu."
+		try enabling the main menu graphics;
 
-Setting graphics off is an action out of world. Understand "graphics off" as setting graphics off.
-
-Carry out setting graphics off:
+Check enabling the main menu graphics:
+	if screen reader mode is enabled:
+		say "Information panels are disabled in screen reader mode." instead;
+	if main menu graphics are enabled:
+		say "The menu graphics are already turned on." instead;
+		
+Check disabling the main menu graphics:
+	if screen reader mode is enabled:
+		say "Information panels are disabled in screen reader mode." instead;
 	if main menu graphics are disabled:
-		say "Graphics are already turned off.";
-	otherwise:
-		disable main menu graphics;
-		unless main menu graphics are disabled:
-			say "Warning: Could not set graphics preference.";
-		otherwise:
-			say "Graphics will no longer be used to display the main menu."
+		say "The menu graphics are already turned off." instead;
+
+Carry out enabling the main menu graphics:
+	enable the main menu graphics flag;
+	say "Graphics will be used to display the main menu." instead;
+
+Carry out disabling the main menu graphics:
+	disable the main menu graphics flag;
+	say "Graphics will no longer be used to display the main menu." instead;
+
 
 
 Chapter - Session flag

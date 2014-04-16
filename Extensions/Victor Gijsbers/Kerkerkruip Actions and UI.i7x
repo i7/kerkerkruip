@@ -763,6 +763,36 @@ Understand "use [weapon]" as readying.
 
 Understand "activate [something]" as switching on.
 Understand "deactivate [something]" as switching off.
+Understand the command "enable" as "activate".
+Understand the command "disable" as "deactivate".
+Understand the command "toggle" as "switch".
+
+
+
+Chapter - Option commands
+
+[An option is a kind of value.
+The invalid option is an option.]
+
+Understand "[option]" and "the [option]" as "[option token]".
+
+Enabling is an action out of world applying to one option.
+Understand "activate [option token]" as enabling.
+Understand "turn [option token] on" as enabling.
+Understand "turn on [option token]" as enabling.
+Understand "switch on [option token]" as enabling.
+Understand "switch [option token] on" as enabling.
+
+Disabling is an action out of world applying to one option.
+Understand "deactivate [option token]" as disabling.
+Understand "turn [option token] off" as disabling.
+Understand "turn off [option token]" as disabling.
+Understand "switch off [option token]" as disabling.
+Understand "switch [option token] off" as disabling.
+
+Toggling is an action out of world applying to one option.
+Understand "switch [option token]" as toggling.
+Understand "[option]" as toggling.
 
 
 

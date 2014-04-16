@@ -1,4 +1,4 @@
-"Kerkerkruip 9" by Victor Gijsbers
+"Kerkerkruip 9.0.1" by Victor Gijsbers
 
 The story headline is "An IF roguelike".
 The story genre is "dungeon crawl".
@@ -22,6 +22,12 @@ Include Questions by Michael Callaghan.
 Include version 1/140209 of Interpreter Sniffing by Friends of I7.
 
 
+
+[ This belongs in Actions, but it has to be defined before the Glimmr and Windows extensions. We should move this somewhere sensible later, and maybe use it for all the options? ]
+An option is a kind of value.
+
+
+
 Section - Graphics and Windows
 
 [ Disable the status line purely to prevent reverse mode from being switched on. This doesn't prevent us from opening the status line manually, which we already had to do. ]
@@ -29,11 +35,11 @@ Use no status line.
 
 [ Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. It is not necessary to comment out Flexible Windows when Glimmr is commented in. ]
 
-Include version 14/140322 of Flexible Windows by Jon Ingold.
+Include version 14/140416 of Flexible Windows by Jon Ingold.
 
 Include Kerkerkruip Glimmr Additions by Erik Temple.
 
-Include version 1/140221 of Menus by Dannii Willis.
+Include version 1/140416 of Menus by Dannii Willis.
 Include Kerkerkruip Windows by Erik Temple.
 
 [Include Extended Debugging by Erik Temple.]
