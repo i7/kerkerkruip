@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 
-	<!-- When building a new installer, update the Version code and the Component Guids -->
+	<!-- When building a new installer, update the Version number and the Component Guids -->
 
 	<Product Id="*"
 		Name="Kerkerkruip" Manufacturer="Victor Gijsbers"
-		Version="9.0.0"
+		Version="9.0.1"
 		Language="1033"
 		UpgradeCode="d4ad0fbc-7903-4637-af41-d701e38117d1" > <!-- Do not change the UpgradeCode, ever! -->
 		<Package
@@ -26,7 +26,7 @@
 				<Directory Id="INSTALLDIR" Name="Kerkerkruip">
 				
 					<!-- Gargoyle! -->
-					<Component Id="Gargoyle" Guid="0f6c2e23-9967-4c93-859b-1a955a67a763"> <!-- This code must be updated each version -->
+					<Component Id="Gargoyle" Guid="38363bb3-8d8c-4501-82fc-afad32d7ec63"> <!-- This code must be updated each version -->
 						<File Source="git.exe"/>
 						<File Source="gargoyle\freetype6.dll"/>
 						<File Source="gargoyle\libgarglk.dll"/>
@@ -45,7 +45,7 @@
 					</Component>
 					
 					<!-- Kerkerkruip! -->
-					<Component Id="Kerkerkruip" Guid="95cf3787-b185-4bcf-9a75-d6c978cb3e0d"> <!-- This code must be updated each version -->
+					<Component Id="Kerkerkruip" Guid="aebba69a-6b9e-42bb-8e87-6ea9b1294a31"> <!-- This code must be updated each version -->
 						<File Source="Kerkerkruip.gblorb"/>
 						<File Source="..\..\Projects\Kerkerkruip Materials\Kerkerkruip.ini"/>
 						<RegistryValue Root="HKCU" Key="Software\Kerkerkruip" Name="Kerkerkruip" Type="string" Value="[ProductVersion]" KeyPath="yes"/>

@@ -3,6 +3,7 @@
 The story headline is "An IF roguelike".
 The story genre is "dungeon crawl".
 The release number is 9.
+The story description is "Kerkerkruip is a short-form roguelike in the interactive fiction medium, featuring meaningful tactical and strategic depth, innovative game play, zero grinding, and a sword & sorcery setting that does not rehash tired clichés."
 Release along with cover art and a file of "Gargoyle config file" called "Kerkerkruip.ini".
 
 

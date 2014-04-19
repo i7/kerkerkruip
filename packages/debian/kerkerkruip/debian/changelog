@@ -1,3 +1,10 @@
+kerkerkruip (9.0.1) unstable; urgency=low
+
+  * Added a screen reader mode - note Gargoyle is not screen reader compatible
+  * Fixed a couple of bugs in the windows code
+
+ -- Dannii Willis <curiousdannii@gmail.com>  Sat, 19 Apr 2014 21:33:55 +1000
+ 
 kerkerkruip (9) unstable; urgency=low
 
   Version 9 has been released! Highlights include:
