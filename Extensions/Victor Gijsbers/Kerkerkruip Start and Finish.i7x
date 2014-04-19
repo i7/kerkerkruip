@@ -70,7 +70,6 @@ Before showing the title screen (this is the check screen reader rule):
 		while 1 is 1:
 			let key be the chosen letter;
 			if key is 89 or key is 121: [Y]
-				enable screen reader mode, table only;
 				if menu hyperlinks are unset:
 					enable menu hyperlinks, table only;
 				disable main menu graphics flag, table only;
@@ -410,15 +409,15 @@ title	order	rule
 This is the toggle screen reader mode rule:
 	toggle screen reader mode;
 	if screen reader mode is enabled:
-		hide option 20;
-		show option 21;
 		hide option 30;
 		show option 31;
 	otherwise:
-		show option 20;
-		hide option 21;
 		show option 30;
 		hide option 31;
+	update graphical menu rows;
+
+To update graphical menu rows:
+	do nothing;
 
 The update the disable the popover menu window setting rule is listed after the switch back to the main-window rule in the after displaying rules.
 Last after displaying rule (this is the update the disable the popover menu window setting rule):
@@ -433,16 +432,24 @@ Changed graphics option is a truth state variable.
 
 Table of Options Menu (continued)
 title	order	rule
-"Menu graphics: [bold type][if main menu graphics flag are enabled]On[otherwise]Off[end if][roman type]"	20	the toggle menu graphics rule
-"Menu graphics: [italic type]Disabled by screen reader mode"	21	--
+"Graphical menu: [bold type][if main menu graphics flag are enabled]On[otherwise]Off[end if][roman type]"	20	the toggle menu graphics rule
+"Graphical menu: [italic type]Disabled in screen reader mode"	21	--
+"Graphical menu: [italic type]Not possible in this interpreter"	22	--
 
 An entering a menu rule for the Table of Options Menu (this is the show graphics rows rule):
+	update graphical menu rows;
+
+To update graphical menu rows:
+	hide option 20;
+	hide option 21;
+	hide option 22;
 	if screen reader mode is enabled:
-		hide option 20;
 		show option 21;
 	otherwise:
-		show option 20;
-		hide option 21;
+		if full graphics support is true:
+			show option 20;
+		otherwise:
+			show option 22;
 
 This is the toggle menu graphics rule:
 	toggle main menu graphics flag;
@@ -461,7 +468,7 @@ Section - Info panels
 Table of Options Menu (continued)
 title	order	rule
 "Information panels: [bold type][if window panels flag are disabled]Off[otherwise]On[end if]"	30	the toggle info panels rule
-"Information panels: [italic type]Disabled by screen reader mode"	31	--
+"Information panels: [italic type]Disabled in screen reader mode"	31	--
 
 An entering a menu rule for the Table of Options Menu (this is the show panels rows rule):
 	if screen reader mode is enabled:

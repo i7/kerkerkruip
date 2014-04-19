@@ -564,7 +564,7 @@ Rule for starting the virtual machine (this is the graphics support rule):
 
 Section - Setting graphics preferences from the command line
 
-The main menu graphics are an option. Understand "graphics" as the main menu graphics.
+The main menu graphics are an option. Understand "graphics" and "graphical menu" as the main menu graphics.
 Understand "menu [option]" as toggling.
 
 Check toggling the main menu graphics:
@@ -574,24 +574,28 @@ Check toggling the main menu graphics:
 		try enabling the main menu graphics;
 
 Check enabling the main menu graphics:
+	if full graphics support is false:
+		say "Unfortunately your interpreter can't display the graphical menu." instead;
 	if screen reader mode is enabled:
-		say "Information panels are disabled in screen reader mode." instead;
+		say "The graphical menu is disabled in screen reader mode." instead;
 	if main menu graphics are enabled:
-		say "The menu graphics are already turned on." instead;
+		say "The graphical menu is already turned on." instead;
 		
 Check disabling the main menu graphics:
+	if full graphics support is false:
+		say "Unfortunately your interpreter can't display the graphical menu." instead;
 	if screen reader mode is enabled:
-		say "Information panels are disabled in screen reader mode." instead;
+		say "The graphical menu is disabled in screen reader mode." instead;
 	if main menu graphics are disabled:
-		say "The menu graphics are already turned off." instead;
+		say "The graphical menu is already turned off." instead;
 
 Carry out enabling the main menu graphics:
 	enable the main menu graphics flag;
-	say "Graphics will be used to display the main menu." instead;
+	say "The graphical menu is now turned on." instead;
 
 Carry out disabling the main menu graphics:
 	disable the main menu graphics flag;
-	say "Graphics will no longer be used to display the main menu." instead;
+	say "The graphical menu is now turned off." instead;
 
 
 

@@ -357,10 +357,11 @@ Section - Events
 
 Last when play begins (this is the check info panel capacity rule):
 	if screen reader mode is enabled:
-		stop;
+		open up the status-window;
+		make no decision;
 	if window panels are disabled:
 		say "[bracket]Information panels are disabled. Type PANELS to enable them.[close bracket][line break][run paragraph on]";
-	if window panels are enabled:
+	otherwise:
 		if width of the main-window is less than 102 or height of the main-window is less than 30:
 			say "[bracket]Your game window is too small for you to use the information panels comfortably. Maximize your window, then type PANELS to enable them.[close bracket][line break][run paragraph on]";
 			disable window panels flag;
