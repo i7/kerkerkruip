@@ -4,6 +4,9 @@ The story headline is "Testing suite".
 The story genre is "dungeon crawl".
 The release number is 9.
 
+[ This belongs in Actions, but it has to be defined before the Glimmr and Windows extensions. We should move this somewhere sensible later, and maybe use it for all the options? ]
+An option is a kind of value.
+
 Section - 3rd Party Inclusions
 
 Include Numbered Disambiguation Choices by Aaron Reed.
