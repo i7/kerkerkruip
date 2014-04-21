@@ -5,7 +5,7 @@ The story genre is "dungeon crawl".
 The release number is 9.
 
 [ This belongs in Actions, but it has to be defined before the Glimmr and Windows extensions. We should move this somewhere sensible later, and maybe use it for all the options? ]
-An option is a kind of value.
+An option is a kind of value. The null option is an option.
 
 Section - 3rd Party Inclusions
 
@@ -13,6 +13,7 @@ Include Numbered Disambiguation Choices by Aaron Reed.
 Include version 7/130712 of Dynamic Objects by Jesse McGrew.
 Include Fixed Point Maths by Michael Callaghan.
 Include Questions by Michael Callaghan.
+Include version 1/140209 of Interpreter Sniffing by Friends of I7.
 Include Glulx Entry Points by Emily Short.
 
 
@@ -148,10 +149,20 @@ To say difficulty level (m - a number):
 
 Chapter - No Sound (in place of Chapter - Sound in Kerkerkruip Start and Finish by Victor Gijsbers)
 
+Chapter - No title screen activity (in place of Chapter - The title screen activity in Kerkerkruip Start and Finish by Victor Gijsbers)
+
+Section - The difficulty level
+
+The difficulty is a number that varies.
+
+To set difficulty to (x - number):
+	now difficulty is x;
+	set current difficulty to difficulty;
+	
 Chapter - No Credits Menu (in place of Chapter - Credits menu in Kerkerkruip Actions and UI by Victor Gijsbers)
 
 Chapter - No Options Menu (in place of Chapter - Options menu in Kerkerkruip Start and Finish by Victor Gijsbers)
-
+			
 Chapter - No Options Menu Command (in place of Chapter - Options menu in Kerkerkruip Actions and UI by Victor Gijsbers)
 
 Chapter - No Achievements Menu (in place of Chapter - Achievements Menu in Kerkerkruip Actions and UI by Victor Gijsbers)
@@ -2764,6 +2775,62 @@ final-generation-test is a test step. The first move of bug-244 is final-generat
 
 Testing effects of final-generation-test:
 	assert "The mausoleum should be marked secretly placeable" based on whether or not the mausoleum is secretly placeable;
+
+Section - Bug 301 Redux
+
+bug-301-aite is a isolated test set.
+
+scenario when testing bug-301-aite:
+	now Temple of Sul is testobject;
+	now Bodmall is testobject;
+	now Hall of Gods is testobject;
+	now the reusable item is a random fragmentation grenade;
+	
+First intervention possible when testing bug-301-aite:
+	rule fails;
+	
+bug-301-setup is a test step. The first move of bug-301-aite is bug-301-setup.
+	
+Initial scheduling of bug-301-setup:
+	Now every room is not rust-spored;
+	Now every thing is not rusted;
+	now the defence of the player is 100;
+	extract the player to the location of bodmall;
+	have the player defeat Bodmall;
+	extract the player to temple of Sul;
+	have the player sacrifice a random granted power;
+	assert that the favour of the player with Sul is 4;
+	extract the player to Hall of Gods;
+	have the player and healer of Aite fight in Arena of the Gods;
+	
+healer-first-killing is a test step. 
+
+Initial scheduling of healer-first-killing:
+	now the health of the player is the permanent health of the player - 1; 
+
+Choosing a player action when testing healer-first-killing:
+	generate the action of smiting the healer of aite.
+	
+Testing effects of healer-first-killing:
+	assert truth of whether or not the healer of Aite is dead with message "The healer should be dead";
+	assert truth of whether or not the tormentor of Aite is alive with message "The tormentor of Aite should be alive";
+	assert truth of whether or not the defender of Aite is alive with message "The defender should be alive";
+	assert truth of whether or not the health of the player is less than the permanent health of the player with message "The player should not be healed";
+	assert that the event description does not include "Sul receives .* and fully heals you";
+	
+other-fanatics-killing is an item-throwing test step.
+
+Initial scheduling of other-fanatics-killing:
+	now the health of the tormentor of Aite is 1;
+	now the health of the defender of Aite is 1;
+
+testing effects of other-fanatics-killing:
+	assert truth of whether or not the tormentor of Aite is dead with message "The tormentor should be dead";
+	assert truth of whether or not the defender of Aite is dead with message "The defender should be dead";
+	assert that the location is Hall of Gods;
+	assert that the event description includes "receives the soul";
+	assert that the event description does not include "receives the soul.* receives the soul";
+	assert that the health of the player is the permanent health of the player;
 
 Section - Summoning too many monsters
 
