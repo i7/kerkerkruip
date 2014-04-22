@@ -1193,6 +1193,7 @@ testing effects of sleeping-dream-waking:
 Waiting-for-Malygris-attack is a repeatable test step. The next move of sleeping-dream-waking is waiting-for-Malygris-attack. 
 
 Initial scheduling of waiting-for-Malygris-attack:
+	now the health of the player is 1000;
 	compel the action of Malygris attacking the player;
 	
 Carry out Malygris hitting the player when waiting-for-Malygris-attack is the scheduled event:
@@ -2778,7 +2779,7 @@ Testing effects of final-generation-test:
 
 Section - Bug 301 Redux
 
-bug-301-aite is a isolated test set.
+bug-301-aite is a test set.
 
 scenario when testing bug-301-aite:
 	now Temple of Sul is testobject;
