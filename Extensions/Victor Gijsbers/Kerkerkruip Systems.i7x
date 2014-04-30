@@ -925,15 +925,27 @@ Last when play begins:
 
 Section - Silver
 
-A damage modifier rule (this is the silver damage rule):
+[A damage modifier rule (this is the silver damage rule):
 	if the global attacker weapon is silver:
 		if the global defender is not undead and the global defender is not demonic:
 			say " - 2 (silver weapon)[run paragraph on]";
 			decrease the attack damage by 2;
 		otherwise:
 			say " + 4 (silver weapon)[run paragraph on]";
-			increase the attack damage by 4;
+			increase the attack damage by 4;]
 
+A specific damage rule (this is the silver damage rule):
+	if damage-material is silver:
+		if physical damage is activated:
+			now damage comment is true;
+			if victim is not undead and victim is not demonic:
+				unless damage silence is true:
+					say " - 1 (silver)[run paragraph on]";
+				deal -1 points of physical damage;
+			otherwise:
+				unless damage silence is true:
+					say " + 4 (silver)[run paragraph on]";
+				deal 4 points of physical damage.
 
 
 Chapter - Attacklike behaviour

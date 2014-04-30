@@ -14,6 +14,8 @@ Divine damage is a damage type.
 
 Damage-material is a material that varies.
 
+A damage type can be activated or not activated.
+
 Section - Rulebooks and globals
 
 The specific damage rules are a rulebook. [For rules pertaining to specific types of damage.]
@@ -24,7 +26,9 @@ The after damage rules are a rulebook. [For things like losing concentration.]
 
 The victim is a person that varies.
 The total damage is a number that varies.
+
 Damage comment is a truth state that varies.
+Damage silence is a truth state that varies.
 
 Section - The damage profile
 
@@ -51,9 +55,22 @@ Section - Inflicting damage
 
 [Always call this when you're inflicting damage!]
 
-To inflict damage to (guy - a person):
+To inflict damage to (guy - a person), silently:
 	now the victim is guy;
 	now damage comment is false;
+	if silently:
+		now damage silence is true;
+	otherwise:
+		now damage silence is false;
+	now total damage is 0;
+	repeat with type running through damage types:
+		if harm of type is 0:
+			now type is not activated;
+		otherwise:
+			now type is activated; [if we deal 2 heat damage, and a rule distracts 2, other rules should still know that heat damage is being dealt and might need to be changed]
+			increase total damage by harm of type;
+	unless silently:
+		say "[total damage][run paragraph on]";
 	consider the specific damage rules;
 	consider the specific multiplying damage rules;
 	now total damage is 0;
@@ -64,10 +81,11 @@ To inflict damage to (guy - a person):
 	consider the general multiplying damage rules;
 	if total damage is less than 0:
 		now total damage is 0;
-	[if damage comment is true:
-		say " = [bold type]", total damage, " damage[roman type][run paragraph on]";
-	otherwise:
-		say " damage[roman type][run paragraph on]";]
+	unless silently:
+		if damage comment is true:
+			say " = [bold type]", total damage, " damage[roman type][run paragraph on]";
+		otherwise:
+			say " damage[roman type][run paragraph on]";
 	decrease health of the victim by total damage;
 	consider the after damage rules;
 	reset the damage profile.
