@@ -1,4 +1,4 @@
-"Kerkerkruip 9.0.1" by Victor Gijsbers
+"Kerkerkruip 10" by Victor Gijsbers
 
 The story headline is "An IF roguelike".
 The story genre is "dungeon crawl".
@@ -38,7 +38,7 @@ Use no status line.
 
 Include version 14/140419 of Flexible Windows by Jon Ingold.
 
-Include Kerkerkruip Glimmr Additions by Erik Temple.
+[Include Kerkerkruip Glimmr Additions by Erik Temple.]
 
 Include version 1/140416 of Menus by Dannii Willis.
 Include Kerkerkruip Windows by Erik Temple.
@@ -64,6 +64,7 @@ Include Kerkerkruip ATTACK Additions by Victor Gijsbers.
 Include Kerkerkruip Monster Abilities by Victor Gijsbers.
 Include Kerkerkruip Systems by Victor Gijsbers.
 Include Kerkerkruip Systems - Hiding Smoke Ethereal by Victor Gijsbers.
+Include Kerkerkruip Damage by Victor Gijsbers.
 Include Kerkerkruip Actions and UI by Victor Gijsbers.
 Include Kerkerkruip Items by Victor Gijsbers.
 Include Kerkerkruip Religion by Victor Gijsbers.
@@ -107,7 +108,11 @@ Generation info is a truth state that varies. Generation info is [true]false.
 
 Section - Testing - Not for release
 
+[The player carries three fragmentation grenades.
+The player carries an unguentum argenti.
 
+The rotting corpse is in the Entrance Hall.
+]
 [Last when play begins:
 	move Fafhrd to Entrance Hall;
 	now Fafhrd is asleep.]
