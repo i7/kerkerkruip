@@ -2013,33 +2013,33 @@ Some scroll names are defined by the Table of Scroll Names.
 
 Table of Scroll Names
 scroll name	printed name	obfuscated	unhealthy
-mort	"MORT EILYSH"	true	false
-naar	"NAAR OD ERAE"	true
-dolp	"DOLP ZEEZ"	true
-chetnak	"CHETNAK"	true
-cistrob	"CISTROB JIRSGEV"	true
-twan	"TWAN METIER"	true
-hermei	"HERMEI LE SCHIM"	true
-lonsifira	"LONSIFIRA"	true
-kripmeteel	"KRIPMETEEL"	true
-souspenot	"SOUSPENOT"	true
-shalm	"SHALM SAWESAS"	true
-petrichor	"PETRICHOR"	true
-malleote	"MALLEOTE"	true
-paven	"PAVEN"	true
-ancholain	"ANCHOLAIN"	true
+mort	"MORT EILYSH"	true	false  [Emily Short]
+cemil	"CEMIL KUI"	true  [Mike Ciul]
+ban	"BAN GNAD"	true   [Angband]
+chetnak	"CHETNAK"	true   [Nethack]
+cistrob	"CISTROB JIRSGEV"	true   [Victor Gijsbers]
+rebogu	"REBOGU"	true  [Brogue]
+hermei	"HERMEI LE SCHIM"	true   [Michiel Hermes]
+lonsifira	"LONSIFIRA"	true   [?]
+kripmeteel	"KRIPMETEEL"	true   [Erik Temple]
+souspenot	"SOUSPENOT"	true   [?]
+krome	"KROME"	true    [Remko]
+petrichor	"PETRICHOR"	true    [?]
+malleote	"MALLEOTE"	true    [?]
+sliwi lidinna	"SLIWI LIDINNA"	true   [Dannii Willis]
+clawe	"CLAWE DARKE"	true   [Wade Clarke]
 
 Definition: a scroll name is obfuscated if obfuscated of it is true.
 Definition: a scroll name is unhealthy if unhealthy of it is true.
 Definition: a scroll name is healthy if obfuscated of it is false and unhealthy of it is false.
 
 Understand "mort" and "eilysh" as mort.
-Understand "naar" and "od" and "erae" as naar.
-Understand "dolp" and "zeez" as dolp.
+Understand "cemil" and "kui" as cemil.
+Understand "ban" and "gnad" as ban.
 Understand "cistrob" and "jirsgev" as cistrob.
-Understand "twan" and "metier" as twan.
 Understand "hermei" and "le" and "schim" as hermei.
-Understand "shalm" and "sawesas" as shalm.
+Understand "sliwi" and "lidinna" as sliwi.
+Understand "clawe" and "darke" as shalm.
 
 A scroll is usually privately-named.
 A scroll can be identified or unidentified. A scroll is usually identified.
