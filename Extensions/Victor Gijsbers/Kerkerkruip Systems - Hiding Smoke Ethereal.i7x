@@ -400,9 +400,15 @@ Status attribute rule (this is the ethereal status rule):
 		otherwise:
 			say "[@ check initial position of attribute]ethereal[run paragraph on]";
 
-A physical damage reduction rule (this is the no physical damage when ethereal rule):
-	if test subject is ethereal:
-		increase pdr by 100.
+A specific multiplying damage rule (this is the no physical damage when ethereal rule):
+	if the victim is ethereal:
+		if physical damage is activated:
+			let n be harm of physical damage;
+			if n is greater than 0:
+				now harm of physical damage is 0;
+				unless damage silence is true:
+					say " - [n] (ethereal)[run paragraph on]";
+					now damage comment is true.
 		
 First impeded movement rule (this is the can always move when ethereal rule):
 	if test subject is ethereal:

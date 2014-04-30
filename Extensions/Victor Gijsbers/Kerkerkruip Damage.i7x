@@ -30,6 +30,8 @@ The total damage is a number that varies.
 Damage comment is a truth state that varies.
 Damage silence is a truth state that varies.
 
+Damage-by-hitting is a truth state that varies. [Set to true when dealing damage from an attack, so rules know that global attacker/defender and weapon properties are available.]
+
 Section - The damage profile
 
 [Every damage type has a number. When we wish to deal harm, we first add harm of the appropriate damage type(s), and then we inflict the damage.]
@@ -55,7 +57,7 @@ Section - Inflicting damage
 
 [Always call this when you're inflicting damage!]
 
-To inflict damage to (guy - a person), silently:
+To inflict damage on (guy - a person), silently:
 	now the victim is guy;
 	now damage comment is false;
 	if silently:
@@ -88,7 +90,8 @@ To inflict damage to (guy - a person), silently:
 			say " damage[roman type][run paragraph on]";
 	decrease health of the victim by total damage;
 	consider the after damage rules;
-	reset the damage profile.
+	reset the damage profile;
+	now damage-by-hitting is false.
 
 
 
@@ -103,6 +106,6 @@ Testdamaging is an action applying to nothing. Understand "testdamage" as testda
 Carry out testdamaging:
 	deal 2 points of physical damage;
 	deal 3 points of divine damage;
-	inflict damage to player.
+	inflict damage on player.
 
 Kerkerkruip Damage ends here.

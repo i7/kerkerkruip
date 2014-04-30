@@ -427,24 +427,30 @@ Favour rule for Nomos (this is the Nomos favour 3 rule):
 
 Favour rule for Nomos (this is the Nomos favour 6 rule):
 	if divine favour is 6:
-		say "Nomos grants you another point of physical damage reduction, and the Malleus Maleficarum.";
+		say "Nomos grants you a total of two physical damage reduction, and the Malleus Maleficarum.";
 		move Malleus Maleficarum to the player.
 
 Favour rule for Nomos (this is the Nomos favour 9 rule):
 	if divine favour is 9:
-		say "Nomos grants you a further two points of physical damage reduction, and the Tome of Law!";
+		say "Nomos grants you a total of four physical damage reduction, and the Tome of Law!";
 		move Tome of Law to the player.
 
 Section - Damage reduction
 
-A physical damage reduction rule (this is the worshipping Nomos damage reduction rule):
-	if the test subject is the player and the player worships Nomos:
+A specific damage rule (this is the worshipping Nomos damage reduction rule):
+	let n be 0;
+	if the victim is the player and the player worships Nomos:
 		if divine favour is greater than 2:
-			increase pdr by 1;
+			increase n by 1;
 		if divine favour is greater than 5:
-			increase pdr by 1;
+			increase n by 1; [total 2]
 		if divine favour is greater than 8:
-			increase pdr by 2.
+			increase n by 2; [total 4]
+	if physical damage is activated:
+		decrease harm of physical damage by n;
+		unless damage silence is true:
+			say " - [n] (Nomos)[run paragraph on]";
+		now damage comment is true.
 
 
 

@@ -1656,22 +1656,18 @@ Last falling rule (this is the standard deal falling damage rule):
 				decrease m by 1; [small bonus for voluntary jumping]
 			if a random chance of 1 in 10 succeeds: [make it slightly dangerous]
 				increase m by 5;
-			calculate the pdr for falling-guy;
-			decrease m by pdr;
-			if m is less than 0:
-				now m is 0;
+			deal m points of physical damage;
+			inflict damage on falling-guy;
 			if falling-guy is the player:
-				say "With a loud smack, you land in [the location], [if m is 0]receiving no damage[otherwise]receiving [bold type][m] damage[roman type][end if].";
-				decrease health of player by m;
+				say "With a loud smack, you land in [the location], [if total damage is 0]receiving no damage[otherwise]receiving [bold type][total damage] damage[roman type][end if].";
 				now concentration of player is 0;
 				now the take no time boolean is false;
 				if player is dead:
 					end the story saying "Your death was not particularly heroic.";
 			otherwise:
-				decrease the health of the falling-guy by m;
 				now concentration of the falling-guy is 0;
-				if the location of falling-guy is the location of the player and m is not 0:
-					say "[The falling-guy] receives [m] damage from the fall.";
+				if the location of falling-guy is the location of the player and total damage is not 0:
+					say "[The falling-guy] receives [total damage] damage from the fall.";
 
 
 Chapter - Player forms
@@ -1754,19 +1750,23 @@ An attack modifier rule (this is the ghoul has less chance to hit rule):
 		say " - 1 (ghoul)[run paragraph on]";
 		decrease the attack strength by 1.
 
-A damage modifier rule (this is the ghoul gives damage resistance rule):
+[A damage modifier rule (this is the ghoul gives damage resistance rule):
 	if the global defender is the player and current form is ghoul-form:
 		say " - 1 (you are a ghoul)[run paragraph on]";
-		decrease the attack damage by 1.
+		decrease the attack damage by 1.]
 
-A physical damage reduction rule (this is the ghoul damage reduction rule):
-	if the test subject is the player and the current form is ghoul-form:
-		increase the pdr by 1.
+A specific damage rule (this is the ghoul damage reduction rule):
+	if the victim is the player and the current form is ghoul-form:
+		if physical damage is activated:
+			decrease harm of physical damage by 1;
+			unless damage silence is true:
+				say " - 1 (ghoul)[run paragraph on]";
+			now damage comment is true.
 
 Status attribute rule (this is the ghoul status rule):
 	if current form is ghoul-form:
 		if long status is true:
-			say "You are a [bold type]ghoul[roman type]: -1 attack; +1 damage resistance.[line break][run paragraph on]".
+			say "You are a [bold type]ghoul[roman type]: -1 attack; +1 physical damage resistance.[line break][run paragraph on]".
 
 To unghoulify the player:
 	unless player worships Chton:
@@ -2159,15 +2159,13 @@ A damage modifier rule (this is the disintegrating flesh damage modifier rule):
 
 Section - Metallic scales
 
-A physical damage reduction rule (this is the metallic scales damage reduction rule):
-	if the test subject is the player and metallic scales is adapted:
-		increase the pdr by 1.
-
-A damage modifier rule (this is the metallic scales damage modifier rule):
-	if the global defender is the player and metallic scales is adapted:
-		if the global attacker weapon is armour-stoppable:
-			say " - 1 (metallic scales)[run paragraph on]";
-			decrease the attack damage by 1.
+A specific damage rule (this is the metallic scales damage reduction rule):
+	if the victim is the player and metallic scales is adapted:
+		if physical damage is activated:
+			decrease harm of physical damage by 1;
+			unless damage silence is true:
+				say " - 1 (metallic scales)[run paragraph on]";
+			now damage comment is true.
 
 Section - Tunneling claws
 

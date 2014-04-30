@@ -610,17 +610,6 @@ A beloved of Aite rule (this is the Aite-loved rule):
 	if test subject is Aite-loved:
 		rule succeeds.
 
-Chapter - Physical damage reduction
-
-The physical damage reduction rules are a rulebook. [To be used by all physical damage effects which should be stopped by stuff like armour.]
-
-The pdr is a number that varies.
-
-To calculate the pdr for (guy - a person):
-	now pdr is 0;
-	now test subject is guy;
-	consider the physical damage reduction rules.
-
 
 Chapter - Asleep
 

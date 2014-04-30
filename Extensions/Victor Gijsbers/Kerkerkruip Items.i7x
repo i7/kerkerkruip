@@ -1287,7 +1287,7 @@ Suit of plate mail is iron.
 
 Constriction prevention of suit of plate mail is 3.
 
-The description of the suit of plate mail is "Functional rather than beautiful, this suit has been made for a true warrior. It will protect you from harm, although it also slows you down. [italic type](-2 damage from attacks, -1 attack, -2 body.)[roman type]".			
+The description of the suit of plate mail is "Functional rather than beautiful, this suit has been made for a true warrior. It will protect you from harm, although it also slows you down. [italic type](-2 physical damage, -1 attack, -2 body.)[roman type]".
 			
 A damage modifier rule (this is the plate mail damage modifiers rule):
 	if the global defender is wearing the suit of plate mail:
@@ -1295,10 +1295,14 @@ A damage modifier rule (this is the plate mail damage modifiers rule):
 			say " - 2 (plate mail)[run paragraph on]";
 			decrease the attack damage by 2.
 
-A physical damage reduction rule (this is the plate mail physical damage reduction rule):
-	if the test subject is wearing the suit of plate mail:
-		increase the pdr by 2.
-
+A specific damage rule (this is the plate mail physical damage reduction rule):
+	if the victim is wearing the suit of plate mail:
+		if physical damage is activated:
+			decrease harm of physical damage by 2;
+			unless damage silence is true:
+				say " - 2 (plate mail)[run paragraph on]";
+			now damage comment is true.
+			
 An attack modifier rule (this is the plate mail attack modifiers rule):
 	if the global defender wears suit of plate mail:
 		if the global defender is retreater or the global defender is runner:
@@ -1348,24 +1352,14 @@ Heat resistance rule (this is the dragon armour heat resistance rule):
 
 [The internal heat of the suit of dragon armour is 4.]
 
-A damage modifier rule (this is the dragon armour damage modifiers rule):
-	if the global defender is wearing the suit of dragon armour:
-		let n be a random number between 0 and blood magic level of suit of dragon armour;
-		say " - [n] (dragon armour)[run paragraph on]";
-		decrease the attack damage by n;
-[		if the main actor is not undead:
-			say " - 4 (dragon armour)[run paragraph on]";
-			decrease the attack damage by 4;
-		otherwise:
-			say " - 2 (dragon armour)[run paragraph on]";
-			decrease the attack damage by 2.]
-
-A physical damage reduction rule (this is the dragon armour damage reduction rule):
-	if the test subject is wearing the dragon armour:
-		let n be a random number between 0 and blood magic level of suit of dragon armour;
-		increase the pdr by n;
-		[if the test subject is not undead:
-			increase the pdr by 2].
+A specific damage rule (this is the dragon armour damage reduction rule):
+	if the victim is wearing the dragon armour:
+		if physical damage is activated:
+			let n be a random number between 0 and blood magic level of suit of dragon armour;
+			decrease harm of physical damage by n;
+			unless damage silence is true:
+				say " - [n] (dragon armour)[run paragraph on]";
+			now damage comment is true.
 
 [Before printing the name of suit of dragon armour:
 	now not-mentioning-hotness is true.
@@ -1473,15 +1467,12 @@ Aftereffects rule (this is the lion's shield rule):
 	if the global defender wears the lion's shield and the global defender is at-block:
 		if the attack damage is 0:
 			if the global attacker weapon is not ranged or the global attacker weapon is a natural weapon:
-				let m be 2;
-				calculate the pdr for global attacker;
-				decrease m by pdr;
-				if m is less than 0, now m is 0;
-				if m is 0:
+				deal 2 points of physical damage;
+				inflict damage on global attacker, silently;
+				if total damage is 0:
 					say "The lion on the shield strikes out, biting [the global attacker]. But the lion's teeth are not sharp enough to penetrate and do damage.";
 				otherwise:
-					say "The lion on the shield strikes out, and bites [the global attacker] for [bold type][m] damage[roman type][if health of global attacker is less than (m + 1)], which is [bold type]lethal[roman type][end if].";
-				decrease health of the global attacker by m.
+					say "The lion on the shield strikes out, and bites [the global attacker] for [bold type][total damage] damage[roman type][if health of global attacker is less than 1], which is [bold type]lethal[roman type][end if].".
 
 Chapter - Cloneable
 
@@ -4142,13 +4133,17 @@ Brightest-flame-counter is a number that varies. Brightest-flame-counter is 0.
 
 Carry out reading the tome of the brightest flame:
 	say "You have chosen fame over a long life. Achieve it while you may!";
-	now hit protection of the player is 50;
 	now brightest-flame-counter is 31;
 	remove tome of the brightest flame from play.
 	
-A physical damage reduction rule (this is the brightest flame damage reduction rule):
-	if the test subject is the player and brightest-flame-counter is not 0:
-		increase the pdr by 100.	
+A general damage rule (this is the brightest flame damage reduction rule):
+	if the victim is the player and brightest-flame-counter is not 0:
+		let n be total damage;
+		if n is greater than 0:
+			now total damage is 0;
+			unless damage silence is true:
+				say " - [n] (brightest flame)[run paragraph on]";
+				now damage comment is true.
 	
 Every turn when brightest-flame-counter is not 0:
 	if main actor is the player:

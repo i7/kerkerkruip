@@ -546,16 +546,15 @@ The body score of the ravenous armadillo is 6.
 The mind score of the ravenous armadillo is 4.
 The spirit score of the ravenous armadillo is 5. 
 
-A damage modifier rule (this is the ravenous armadillo takes less damage rule):
-	if the global defender is the ravenous armadillo:
-		say " - 4 (tough scales)[run paragraph on]";
-		decrease the attack damage by 4.
-
 The intrinsic heat resistance of the ravenous armadillo is 3.
 
-A physical damage reduction rule (this is the armadillo physical damage reduction rule):
-	if the test subject is the ravenous armadillo:
-		increase the pdr by 4.
+A specific damage rule (this is the armadillo physical damage reduction rule):
+	if the victim is the ravenous armadillo:
+		if physical damage is activated:
+			decrease harm of physical damage by 4;
+			unless damage silence is true:
+				say " - 4 (tough scales)[run paragraph on]";
+			now damage comment is true.
 		
 When play begins:
 	let X be a random natural weapon part of the ravenous armadillo;
@@ -1221,13 +1220,10 @@ First carry out an actor attacking the chain golem (this is the attack a spinnin
 			test the body of the actor against n;
 			if test result is false:
 				let n be two times the concentration of the chain golem;
-				calculate the pdr for the actor;
-				decrease n by pdr;
-				if n is less than 0:
-					now n is 0;
 				unless n is 0:
-					say " One of the chains catches [the actor] with a loud smack, dealing [bold type][n] damage[roman type][run paragraph on]";
-					decrease the health of the actor by n;
+					say " One of the chains catches [the actor] with a loud smack, dealing ";
+					deal n points of physical damage;
+					inflict damage on the actor;
 					if the actor is alive:
 						if the concentration of the actor is not zero:
 							say " and breaking [possessive of the actor] concentration.";
@@ -3954,16 +3950,10 @@ To launch the thorns:
 	let concentest be false;
 	repeat with guy running through all alive not druidic persons in location:
 		let m be a random number between 1 and brambles strength;
-		calculate the pdr for guy;
-		decrease m by pdr;
-		if m is less than 0, now m is 0;			
-		decrease health of guy by m;
-		now concentest is false;
-		if concentration of the guy is greater than 0 and guy is alive and m is not 0:
-			if a random chance of brambles strength in 5 succeeds:
-				now concentration of the guy is 0;
-				now concentest is true;
-		say "[if n is 1 and original n is not 1]and [end if][m] damage to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentest is true] (which breaks [possessive of the guy] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
+		deal m points of physical damage;
+		say "[if n is 1 and original n is not 1]and [end if][run paragraph on]";
+		inflict damage on guy;
+		say " to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive and m is not 0] (which breaks [possessive of the guy] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
 		decrease n by 1;
 		if n is 0:
 			say ""; [For an extra newline. Don't ask.]
