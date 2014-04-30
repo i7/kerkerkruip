@@ -2026,7 +2026,7 @@ souspenot	"SOUSPENOT"	true   [?]
 krome	"KROME"	true    [Remko]
 petrichor	"PETRICHOR"	true    [?]
 malleote	"MALLEOTE"	true    [?]
-sliwi lidinna	"SLIWI LIDINNA"	true   [Dannii Willis]
+sliwi 	"SLIWI LIDINNA"	true   [Dannii Willis]
 clawe	"CLAWE DARKE"	true   [Wade Clarke]
 
 Definition: a scroll name is obfuscated if obfuscated of it is true.
@@ -2039,7 +2039,7 @@ Understand "ban" and "gnad" as ban.
 Understand "cistrob" and "jirsgev" as cistrob.
 Understand "hermei" and "le" and "schim" as hermei.
 Understand "sliwi" and "lidinna" as sliwi.
-Understand "clawe" and "darke" as shalm.
+Understand "clawe" and "darke" as clawe.
 
 A scroll is usually privately-named.
 A scroll can be identified or unidentified. A scroll is usually identified.
@@ -2555,6 +2555,27 @@ A psycholocation rule (this is the psycholocation boolean rule):
 	if psycholocation boolean is true:
 		rule succeeds.
 
+Section - Scroll of Enchantment
+
+Table of Scroll Names (continued)
+scroll name
+enchantment
+
+A scroll of enchantment is a kind of scroll.
+A scroll of enchantment is enchantment.
+The description of a scroll of enchantment is "Reading this scroll will permanently improve the weapon you are wielding."
+The plural of scroll of enchantment is scrolls of enchantment.
+
+
+Carry out reading a scroll of alteration:
+	let item be a random readied weapon enclosed by the player;
+	if item is a natural weapon:
+		say "You aren't wielding a weapon, so the scroll of enchantment fizzles.";
+	otherwise:
+		increase weapon attack bonus of item by 1;
+		increase weapon damage bonus of item by 1;
+		say "A flash of golden light comes from [the item]! It seems deadlier and more accurate."
+
 
 Chapter - Scroll packs
 
@@ -2702,7 +2723,7 @@ The unlock level of large-scroll-of-death-pack is 1.
 The unlock hidden switch of the large-scroll-of-death-pack is true.
 Two scrolls of death are in the large-scroll-of-death-pack.
 
-Section - Alteration, small (minor)
+Section - Alteration, small and large (minor)
 
 The small-scroll-of-alteration-pack is a minor treasure pack.
 The small-scroll-of-alteration-pack is magical.
@@ -2711,6 +2732,17 @@ One scroll of alteration is in the small-scroll-of-alteration-pack.
 The large-scroll-of-alteration-pack is a minor treasure pack.
 The large-scroll-of-alteration-pack is magical.
 Two scrolls of alteration are in the large-scroll-of-alteration-pack.
+
+Section - Enchantment, small (major)
+
+The small-scroll-of-enchantment-pack is a major treasure pack.
+The small-scroll-of-enchantment-pack is magical.
+One scroll of enchantment is in the small-scroll-of-enchantment-pack.
+
+The other-small-scroll-of-enchantment-pack is a major treasure pack.
+The other-small-scroll-of-enchantment-pack is magical.
+One scroll of enchantment is in the other-small-scroll-of-enchantment-pack.
+
 
 Section - Deathly [summon, ghoul, death], (major)
 
@@ -2746,6 +2778,7 @@ The knowing-scroll-pack is civilised.
 One scroll of knowledge is in the knowing-scroll-pack.
 One scroll of mapping is in the knowing-scroll-pack.
 One scroll of psycholocation is in the knowing-scroll-pack.
+
 
 
 Chapter - Magical guides
