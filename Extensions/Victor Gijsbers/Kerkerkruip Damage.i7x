@@ -29,9 +29,25 @@ To decide whether (type - a damage type) is physical-body-only: [Immune when eth
 
 Section - Rulebooks and globals
 
-The specific damage rules are a rulebook. [For rules pertaining to specific types of damage.]
+[We need a whole bunch of rulebooks.
+
+1. Add damage of specific types.
+2. Remove damage of specific types. (Can't go below 0, which is why we must add first.
+3. Multiply specific types as appropriate. (E.g., "double heat damage".)
+
+We then count al specific damage types, and get the total damage.
+
+4. Add general damage. -- This should be used sparingly or not at all, because damage ought to be of a specific type.
+5. Remove general damage.
+6. Multiply general damage.
+
+Deal damage!]
+
+The add specific damage rules are a rulebook. [For rules pertaining to specific types of damage.]
+The remove specific damage rules are a rulebook. [For rules pertaining to specific types of damage.]
 The specific damage multiplier rules are a rulebook. [Idem, but rules that multiply the damage by a constant.]
-The general damage rules are a rulebook. [Next two rulebooks idem, but for general damage.]
+The add general damage rules are a rulebook. [Next three rulebooks idem, but for general damage.]
+The remove general damage rules are a rulebook.
 The general damage multiplier rules are a rulebook.
 The after damage rules are a rulebook. [For things like losing concentration.]
 
@@ -57,12 +73,29 @@ To reset the damage profile:
 	repeat with q running through damage types:
 		now the harm of q is 0.
 
-Section - Adding damage to the damage profile
+Section - Dealing damage
 
 [Invoke with phrases like "deal 2 points of fire damage".]
 
 To deal (n - a number) points of (type - a damage type):
 	increase the harm of type by n.
+
+Section - Removing damage from the damage profile
+
+[Any effect that removes, say, 2 fire damage, should do it using this phrase. It makes sure that the damage type doesn't drop below 0. "Removed damage" returns the total damage done, if needed. The reason is shown between brackets.]
+
+Removed damage is a number that varies.
+
+To remove (n - a number) points of (type - a damage type) with reason (reason - some text):
+	if type is activated:
+		if harm of type is less than n:
+			now n is harm of type;
+		decrease harm of type by n;
+		now removed damage is n;
+		unless removed damage is 0:
+			unless damage silence is true:
+				say " - [removed damage] ([reason])[run paragraph on]";
+				now damage comment is true.
 
 Section - Inflicting damage
 
@@ -84,13 +117,15 @@ To inflict damage on (guy - a person), silently:
 			increase total damage by harm of type;
 	unless silently:
 		say "[total damage][run paragraph on]";
-	consider the specific damage rules;
+	consider the add specific damage rules;
+	consider the remove specific damage rules;	
 	consider the specific damage multiplier rules;
 	now total damage is 0;
 	repeat with type running through damage types:
 		unless harm of type is less than 0:
 			increase total damage by harm of type;
-	consider the general damage rules;
+	consider the add general damage rules;
+	consider the remove general damage rules;	
 	consider the general damage multiplier rules;
 	if total damage is less than 0:
 		now total damage is 0;

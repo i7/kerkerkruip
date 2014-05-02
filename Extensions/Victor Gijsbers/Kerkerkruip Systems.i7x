@@ -934,18 +934,21 @@ Section - Silver
 			say " + 4 (silver weapon)[run paragraph on]";
 			increase the attack damage by 4;]
 
-A specific damage rule (this is the silver damage rule):
+An add specific damage rule (this is the undead silver damage rule):
 	if damage-material is silver:
 		if physical damage is activated:
 			now damage comment is true;
-			if victim is not undead and victim is not demonic:
-				unless damage silence is true:
-					say " - 1 (silver)[run paragraph on]";
-				deal -1 points of physical damage;
-			otherwise:
+			if victim is undead or victim is demonic:
+				deal 4 points of physical damage;
 				unless damage silence is true:
 					say " + 4 (silver)[run paragraph on]";
-				deal 4 points of physical damage.
+					now damage comment is true.
+
+A remove specific damage rule (this is the non-undead silver damage rule):
+	if damage-material is silver:
+		if victim is not undead and victim is not demonic:
+			remove 1 points of physical damage with reason "silver".
+
 
 
 Chapter - Attacklike behaviour
@@ -1755,13 +1758,9 @@ An attack modifier rule (this is the ghoul has less chance to hit rule):
 		say " - 1 (you are a ghoul)[run paragraph on]";
 		decrease the attack damage by 1.]
 
-A specific damage rule (this is the ghoul damage reduction rule):
+A remove specific damage rule (this is the ghoul damage reduction rule):
 	if the victim is the player and the current form is ghoul-form:
-		if physical damage is activated:
-			decrease harm of physical damage by 1;
-			unless damage silence is true:
-				say " - 1 (ghoul)[run paragraph on]";
-			now damage comment is true.
+		remove 1 points of physical damage with reason "ghoul".
 
 Status attribute rule (this is the ghoul status rule):
 	if current form is ghoul-form:
@@ -2159,13 +2158,9 @@ A damage modifier rule (this is the disintegrating flesh damage modifier rule):
 
 Section - Metallic scales
 
-A specific damage rule (this is the metallic scales damage reduction rule):
+A remove specific damage rule (this is the metallic scales damage reduction rule):
 	if the victim is the player and metallic scales is adapted:
-		if physical damage is activated:
-			decrease harm of physical damage by 1;
-			unless damage silence is true:
-				say " - 1 (metallic scales)[run paragraph on]";
-			now damage comment is true.
+		remove 1 points of physical damage with reason "metallic scales".
 
 Section - Tunneling claws
 

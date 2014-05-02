@@ -1297,19 +1297,9 @@ Constriction prevention of suit of plate mail is 3.
 
 The description of the suit of plate mail is "Functional rather than beautiful, this suit has been made for a true warrior. It will protect you from harm, although it also slows you down. [italic type](-2 physical damage, -1 attack, -2 body.)[roman type]".
 			
-A damage modifier rule (this is the plate mail damage modifiers rule):
-	if the global defender is wearing the suit of plate mail:
-		if the global attacker weapon is armour-stoppable:
-			say " - 2 (plate mail)[run paragraph on]";
-			decrease the attack damage by 2.
-
-A specific damage rule (this is the plate mail physical damage reduction rule):
+A remove specific damage rule (this is the plate mail physical damage reduction rule):
 	if the victim is wearing the suit of plate mail:
-		if physical damage is activated:
-			decrease harm of physical damage by 2;
-			unless damage silence is true:
-				say " - 2 (plate mail)[run paragraph on]";
-			now damage comment is true.
+		remove 2 points of physical damage with reason "plate mail".
 			
 An attack modifier rule (this is the plate mail attack modifiers rule):
 	if the global defender wears suit of plate mail:
@@ -1360,14 +1350,10 @@ Heat resistance rule (this is the dragon armour heat resistance rule):
 
 [The internal heat of the suit of dragon armour is 4.]
 
-A specific damage rule (this is the dragon armour damage reduction rule):
+A remove specific damage rule (this is the dragon armour damage reduction rule):
 	if the victim is wearing the dragon armour:
-		if physical damage is activated:
-			let n be a random number between 0 and blood magic level of suit of dragon armour;
-			decrease harm of physical damage by n;
-			unless damage silence is true:
-				say " - [n] (dragon armour)[run paragraph on]";
-			now damage comment is true.
+		let n be a random number between 0 and blood magic level of suit of dragon armour;
+		remove n points of physical damage with reason "dragon armour".
 
 [Before printing the name of suit of dragon armour:
 	now not-mentioning-hotness is true.
@@ -4180,7 +4166,7 @@ Carry out reading the tome of the brightest flame:
 	now brightest-flame-counter is 31;
 	remove tome of the brightest flame from play.
 	
-A general damage rule (this is the brightest flame damage reduction rule):
+A remove general damage rule (this is the brightest flame damage reduction rule):
 	if the victim is the player and brightest-flame-counter is not 0:
 		let n be total damage;
 		if n is greater than 0:

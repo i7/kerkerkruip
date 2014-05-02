@@ -548,13 +548,9 @@ The spirit score of the ravenous armadillo is 5.
 
 The intrinsic heat resistance of the ravenous armadillo is 3.
 
-A specific damage rule (this is the armadillo physical damage reduction rule):
+A remove specific damage rule (this is the armadillo physical damage reduction rule):
 	if the victim is the ravenous armadillo:
-		if physical damage is activated:
-			decrease harm of physical damage by 4;
-			unless damage silence is true:
-				say " - 4 (tough scales)[run paragraph on]";
-			now damage comment is true.
+		remove 4 points of physical damage with reason "tough scales".
 		
 When play begins:
 	let X be a random natural weapon part of the ravenous armadillo;

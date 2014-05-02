@@ -437,7 +437,7 @@ Favour rule for Nomos (this is the Nomos favour 9 rule):
 
 Section - Damage reduction
 
-A specific damage rule (this is the worshipping Nomos damage reduction rule):
+A remove specific damage rule (this is the worshipping Nomos damage reduction rule):
 	let n be 0;
 	if the victim is the player and the player worships Nomos:
 		if divine favour is greater than 2:
@@ -446,11 +446,7 @@ A specific damage rule (this is the worshipping Nomos damage reduction rule):
 			increase n by 1; [total 2]
 		if divine favour is greater than 8:
 			increase n by 2; [total 4]
-	if physical damage is activated:
-		decrease harm of physical damage by n;
-		unless damage silence is true:
-			say " - [n] (Nomos)[run paragraph on]";
-		now damage comment is true.
+	remove n points of physical damage with reason "Nomos".
 
 
 
