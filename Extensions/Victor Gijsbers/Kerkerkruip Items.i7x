@@ -952,23 +952,31 @@ The indefinite article of the robe of the dead mage is "the".
 The unlock level of the robe of the dead mage is 7.
 The unlock text of the robe of the dead mage is "a piece of clothing that allows you to remain concentrated when hit... at a price".
 
-The description of the robe of the dead mage is "Dominique, marquis of Savon, one of the great mages of his generation, was so fed up with losing his concentration when he was hit that he developed this robe. It increases the wearer's defence by 1; and when the wearer is damaged in combat, he will not lose his concentration. However, the protection comes from his life force, and the damage dealt to him is increased by 25% for every level of concentration. They say nobody ever died with as much concentration as Dominique.".
+The description of the robe of the dead mage is "Dominique, marquis of Savon, one of the great mages of his generation, was so fed up with losing his concentration when he was hit that he developed this robe. It increases the wearer's defence by 1; and when the wearer is damaged, he will not lose his concentration. However, the protection comes from his life force, and the damage dealt to him is increased by 25% for every level of concentration. They say nobody ever died with as much attention as Dominique.".
 
-A damage multiplier rule when the global defender wears the robe of the dead mage (this is the robe of the dead mage damage multiplier rule):
+A general damage multiplier rule when the victim wears the robe of the dead mage (this is the robe of the dead mage damage multiplier rule):
 	if concentration of the global defender is:
 		-- 1:
-			say " + 25% (robe of the dead mage)[run paragraph on]";
+			unless damage silence is true:
+				say " + 25% (robe of the dead mage)[run paragraph on]";
+				now damage comment is true;
 			increase the attack damage by the attack damage divided by 4;
 		-- 2:
-			say " +50% (robe of the dead mage)[run paragraph on]";
+			unless damage silence is true:
+				say " +50% (robe of the dead mage)[run paragraph on]";
+				now damage comment is true;
 			increase the attack damage by the attack damage divided by 2;		
 		-- 3:
-			say " + 75% (robe of the dead mage)[run paragraph on]";
+			unless damage silence is true:
+				say " + 75% (robe of the dead mage)[run paragraph on]";
+				now damage comment is true;
 			let n be the attack damage divided by 4;
 			now the attack damage is the attack damage times 2;
 			decrease the attack damage by n;
 		-- 4:
-			say " + 100% (robe of the dead mage)[run paragraph on]";
+			unless damage silence is true:
+				say " + 100% (robe of the dead mage)[run paragraph on]";
+				now damage comment is true;
 			now the attack damage is the attack damage times 2.
 
 An attack modifier rule (this is the robe of the dead mage protects you rule):
@@ -2367,14 +2375,17 @@ Carry out reading a scroll of protection:
 Status attribute rule (this is the protection status rule):
 	if hit protection of the player is greater than 0:
 		if long status is true:
-			say "You are [bold type]protected[roman type] from damage dealt by attacks.[line break][run paragraph on]";
+			say "You are [bold type]protected[roman type] from damage.[line break][run paragraph on]";
 		otherwise:
 			say "[@ check initial position of attribute]protected from damage[run paragraph on]";
 
-A damage multiplier rule when the hit protection of the global defender is greater than 0 (this is the hit protection damage multiplier rule):
-	say " - 100% (protection)[run paragraph on]";
-	now the attack damage is 0;
-	decrease hit protection of the global defender by 1.
+A general damage multiplier rule when the hit protection of the victim is greater than 0 (this is the protection damage multiplier rule):
+	if total damage greater than 0:
+		unless damage silence is true:
+			say " - 100% (protection)[run paragraph on]";
+			now damage comment is true;
+		now total damage is 0;
+		decrease hit protection of the global defender by 1.
 
 
 [Section - Scroll of Etherealness

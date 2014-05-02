@@ -16,12 +16,23 @@ Damage-material is a material that varies.
 
 A damage type can be activated or not activated.
 
+Section - Grouping damage types
+
+[We do it here so we don't forget to update when adding a damage type.]
+
+To decide whether (type - a damage type) is physical-body-only: [Immune when ethereal.]
+	if type is physical damage and damage-material is radiance, decide no;
+	if type is necromantic damage, decide no;
+	if type is divine damage, decide no;
+	decide yes.
+
+
 Section - Rulebooks and globals
 
 The specific damage rules are a rulebook. [For rules pertaining to specific types of damage.]
-The specific multiplying damage rules are a rulebook. [Idem, but rules that multiply the damage by a constant.]
+The specific damage multiplier rules are a rulebook. [Idem, but rules that multiply the damage by a constant.]
 The general damage rules are a rulebook. [Next two rulebooks idem, but for general damage.]
-The general multiplying damage rules are a rulebook.
+The general damage multiplier rules are a rulebook.
 The after damage rules are a rulebook. [For things like losing concentration.]
 
 The victim is a person that varies.
@@ -74,13 +85,13 @@ To inflict damage on (guy - a person), silently:
 	unless silently:
 		say "[total damage][run paragraph on]";
 	consider the specific damage rules;
-	consider the specific multiplying damage rules;
+	consider the specific damage multiplier rules;
 	now total damage is 0;
 	repeat with type running through damage types:
 		unless harm of type is less than 0:
 			increase total damage by harm of type;
 	consider the general damage rules;
-	consider the general multiplying damage rules;
+	consider the general damage multiplier rules;
 	if total damage is less than 0:
 		now total damage is 0;
 	unless silently:

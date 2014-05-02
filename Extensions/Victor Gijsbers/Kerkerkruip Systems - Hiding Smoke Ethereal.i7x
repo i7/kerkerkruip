@@ -383,16 +383,6 @@ Before ethereal-forbidden-second when the player is ethereal:
 		take no time;
 		say "You cannot do that while you are ethereal." instead.
 
-A damage multiplier rule (this is the ethereal damage multiplier rule):
-	if the global defender is ethereal and the global attacker is not ethereal:
-		say " - 100% (defender ethereal)[run paragraph on]";
-		now the attack damage is 0;
-		decrease hit protection of the global defender by 1;
-	otherwise if the global attacker is ethereal:
-		say " - 100% (attacker ethereal)[run paragraph on]";
-		now the attack damage is 0;
-		decrease hit protection of the global defender by 1.
-
 Status attribute rule (this is the ethereal status rule):
 	if player is ethereal:
 		if long status is true:
@@ -400,15 +390,19 @@ Status attribute rule (this is the ethereal status rule):
 		otherwise:
 			say "[@ check initial position of attribute]ethereal[run paragraph on]";
 
-A specific multiplying damage rule (this is the no physical damage when ethereal rule):
-	if the victim is ethereal:
-		if physical damage is activated:
-			let n be harm of physical damage;
-			if n is greater than 0:
-				now harm of physical damage is 0;
-				unless damage silence is true:
-					say " - [n] (ethereal)[run paragraph on]";
-					now damage comment is true.
+[Being ethereal protects against ]
+
+A specific damage multiplier rule (this is the ethereal damage immunity rule):
+	if the victim is ethereal or (damage-by-hitting is true and global attacker is ethereal):
+		let n be 0;
+		repeat with type running through damage types:
+			if type is physical-body-only:
+				increase n by harm of type;
+				now harm of type is 0;
+		if n is greater than 0:
+			unless damage silence is true:
+				say " - [n] ([if victim is not ethereal]attacker[end if] ethereal)[run paragraph on]";
+				now damage comment is true.
 		
 First impeded movement rule (this is the can always move when ethereal rule):
 	if test subject is ethereal:
