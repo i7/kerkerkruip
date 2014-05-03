@@ -80,9 +80,22 @@ Section - Dealing damage
 To deal (n - a number) points of (type - a damage type):
 	increase the harm of type by n.
 
+Section - Adding damage to the damage profile
+
+[Effects that add damage to an already established damage profile should do so using this phrase. You can add damage normally, which means conditional on damage of that type already being dealt; or unconditionally, which means that it should be dealt anyway. Heat vulnerability -- which adds 2 damage when heat damage is being dealt -- should add 2 points of heat damage; while a curse that adds 2 heat damage to any damage you get from any source should add the damage unconditionally.]
+
+To add (n - a number) points of (type - a damage type) with reason (reason - some text), unconditionally:
+	if unconditionally or type is activated:
+		increase harm of type by n;
+		unless n is 0:
+			unless damage silence is true:
+				say " + [n] ([reason])[run paragraph on]";
+				now damage comment is true.
+
+
 Section - Removing damage from the damage profile
 
-[Any effect that removes, say, 2 fire damage, should do it using this phrase. It makes sure that the damage type doesn't drop below 0. "Removed damage" returns the total damage done, if needed. The reason is shown between brackets.]
+[Any effect that removes, say, 2 fire damage, should do so using this phrase. It makes sure that the damage type doesn't drop below 0. "Removed damage" returns the total damage done, if needed. The reason is shown between brackets.]
 
 Removed damage is a number that varies.
 

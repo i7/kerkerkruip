@@ -936,13 +936,8 @@ Section - Silver
 
 An add specific damage rule (this is the undead silver damage rule):
 	if damage-material is silver:
-		if physical damage is activated:
-			now damage comment is true;
-			if victim is undead or victim is demonic:
-				deal 4 points of physical damage;
-				unless damage silence is true:
-					say " + 4 (silver)[run paragraph on]";
-					now damage comment is true.
+		if victim is undead or victim is demonic:
+			add 4 points of physical damage with reason "silver".
 
 A remove specific damage rule (this is the non-undead silver damage rule):
 	if damage-material is silver:
