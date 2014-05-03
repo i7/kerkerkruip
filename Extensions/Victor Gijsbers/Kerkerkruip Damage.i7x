@@ -80,7 +80,7 @@ Section - Dealing damage
 To deal (n - a number) points of (type - a damage type):
 	increase the harm of type by n.
 
-Section - Adding damage to the damage profile
+Section - Adding specific damage
 
 [Effects that add damage to an already established damage profile should do so using this phrase. You can add damage normally, which means conditional on damage of that type already being dealt; or unconditionally, which means that it should be dealt anyway. Heat vulnerability -- which adds 2 damage when heat damage is being dealt -- should add 2 points of heat damage; while a curse that adds 2 heat damage to any damage you get from any source should add the damage unconditionally.]
 
@@ -93,7 +93,7 @@ To add (n - a number) points of (type - a damage type) with reason (reason - som
 				now damage comment is true.
 
 
-Section - Removing damage from the damage profile
+Section - Removing specific damage
 
 [Any effect that removes, say, 2 fire damage, should do so using this phrase. It makes sure that the damage type doesn't drop below 0. "Removed damage" returns the total damage done, if needed. The reason is shown between brackets.]
 
@@ -109,6 +109,60 @@ To remove (n - a number) points of (type - a damage type) with reason (reason - 
 			unless damage silence is true:
 				say " - [removed damage] ([reason])[run paragraph on]";
 				now damage comment is true.
+
+Section - multiplying specific damage
+
+[Any effect that, say, doubles fire damage should do so using this phrase.]
+
+[We're using Glulx, so we should never meet the limit of the naturals -- about 2 billion -- even if we multiply by 100. But we do want to be in the situation that  x 50% x 200% = x 100%, which we cannot completely guarantuee without using reals. We could add the full fixed point math extension, but I'm happy with an easy hack here.]
+
+A damage type has a number called the rounding error.
+
+To multiply (type - a damage type) by (percentage - a number) percent with reason (reason - some text):
+	if harm of type is not 0:
+		let n be harm of type;
+		now n is n times percentage;
+		increase n by ((percentage times rounding error of type) divided by 100);
+		let m be n divided by 100;
+		let p be m times 100;
+		now rounding error of type is (n - p);
+		let change be (harm of type minus m);
+		now harm of type is m;
+		unless damage silence is true:
+			if change is less than 0:
+				now change is (0 - change);
+				say " - [change] ([reason])[run paragraph on]";
+			otherwise:
+				say " + [change] ([reason])[run paragraph on]";
+			now damage comment is true.
+
+First specific damage multiplier rule (this is the reset rounding error rule):
+	reset rounding errors.
+	
+To reset rounding errors:
+	repeat with type running through damage types:
+		now rounding error of type is 0.
+
+[Example caculation. Heat damage is 7. Percentage is 50.
+n = 7
+n = 350
+n = 350 + 0 = 350
+m = 3
+p = 300
+rounding error = 50
+heat damage = 3
+
+Percentage is 200.
+n = 3
+n = 600
+n = 600 + ((50 * 200)/100) = 700
+m = 7
+p = 700
+rounding error = 0
+heat damage = 7
+
+As expected.]
+
 
 Section - Inflicting damage
 
