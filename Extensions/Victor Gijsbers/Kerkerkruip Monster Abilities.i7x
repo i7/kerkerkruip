@@ -670,10 +670,10 @@ An attack modifier rule (this is the asleep gives attack bonus rule):
 		say " + 3 (defender was asleep)[run paragraph on]";
 		increase attack strength by 3.
 
-A damage modifier rule (this is the asleep damage bonus rule):
-	if global defender is just-woken:
-		say " + 2 (defender was asleep)[run paragraph on]";
-		increase the attack damage by 2.
+An add specific damage rule (this is the asleep damage bonus rule):
+	if damage-by-hitting is true: [this only works for attacks]
+		if victim is just-woken:
+			add 2 points of physical damage with reason "defender was asleep".
 
 Last carry out an actor hitting (this is the remove just-woken rule):
 	now global defender is not just-woken.

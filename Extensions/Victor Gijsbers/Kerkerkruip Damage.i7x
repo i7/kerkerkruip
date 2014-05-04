@@ -271,14 +271,14 @@ Carry out an actor hitting (this is the set up attack damage rule):
 	now damage-by-hitting is true;	
 	inflict damage on the global defender;  [The crucial line.]
 	if the the total damage is less than 1:
-		say "allowing [the global defender] to escape unscathed.[run paragraph on]";
+		say ", allowing [the global defender] to escape unscathed.[run paragraph on]";
 	otherwise:
 		[non-fatal]
-		if the health of the global defender is less than 1:
-			say "wounding [the global defender] to ", health of the global defender, " health.[run paragraph on]" ;
+		if the health of the global defender is greater than 0:
+			say ", wounding [the global defender] to ", health of the global defender, " health.[run paragraph on]" ;
 		[fatal]
 		otherwise:
-			say "killing [the name of the global defender].[run paragraph on]";
+			say ", killing [the name of the global defender].[run paragraph on]";
 	say "[roman type][paragraph break]".
 
 
