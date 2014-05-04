@@ -110,7 +110,7 @@ To remove (n - a number) points of (type - a damage type) with reason (reason - 
 				say " - [removed damage] ([reason])[run paragraph on]";
 				now damage comment is true.
 
-Section - multiplying specific damage
+Section - Multiplying specific damage
 
 [Any effect that, say, doubles fire damage should do so using this phrase.]
 
@@ -161,7 +161,52 @@ p = 700
 rounding error = 0
 heat damage = 7
 
-As expected.]
+As expected, since 0.5 x 2 = 1.]
+
+[What we do not compensate for is this. Suppose I get 5 heat damage and 5 physical damage. Both are halved. I will then get 2 + 2 = 4 damage, rather than 5. We could add up remaining rounding errors and see that another point of damage ought to be dealt; but what type is it supposed to have, and how are we to indicate to the player what is happening? Better just ignore it. It's a feature, not a bug.]
+
+Section - Adding total damage
+
+To add (n - a number) points of general damage with reason (reason - some text):
+	increase total damage by n;
+	unless n is 0:
+		unless damage silence is true:
+			say " + [n] ([reason])[run paragraph on]";
+			now damage comment is true.
+
+Section - Removing total damage
+
+To remove (n - a number) points of general damage with reason (reason - some text):
+	if total damage is less than n:
+		now n is total damage;
+	decrease total damage by n;
+	now removed damage is n;
+	unless removed damage is 0:
+		unless damage silence is true:
+			say " - [removed damage] ([reason])[run paragraph on]";
+			now damage comment is true.
+
+Section - Multiplying total damage
+
+The general damage rounding error is a number that varies.
+
+To multiply general damage by (percentage - a number) percent with reason (reason - some text):
+	if total damage is not 0:
+		let n be total damage;
+		now n is n times percentage;
+		increase n by ((percentage times general damage rounding error) divided by 100);
+		let m be n divided by 100;
+		let p be m times 100;
+		now general damage rounding error is (n - p);
+		now total damage is m;
+		unless damage silence is true:
+			say " x [percentage]% ([reason])[run paragraph on]";
+			now damage comment is true.
+
+First general damage multiplier rule (this is the reset general rounding error rule):
+	now general damage rounding error is 0.
+	
+
 
 
 Section - Inflicting damage
