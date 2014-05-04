@@ -227,8 +227,6 @@ To inflict damage on (guy - a person), silently:
 		otherwise:
 			now type is activated; [if we deal 2 heat damage, and a rule distracts 2, other rules should still know that heat damage is being dealt and might need to be changed]
 			increase total damage by harm of type;
-	unless silently:
-		say "[total damage][run paragraph on]";
 	consider the add specific damage rules;
 	consider the remove specific damage rules;	
 	consider the specific damage multiplier rules;
@@ -253,6 +251,33 @@ To inflict damage on (guy - a person), silently:
 
 
 
+Section - Merging our new damage system with ATTACK
+
+The consider the damage modifier rules rule is not listed in any rulebook.
+The consider the damage multiplier rules rule is not listed in any rulebook.
+The standard show the attack damage dealt rule is not listed in any rulebook.
+The subtract damage from health rule is not listed in any rulebook.
+
+Carry out an actor hitting (this is the set up attack damage rule):
+	unless damage die of the global attacker weapon is less than 1:
+		now the attack damage is a random number between 1 and the damage die of the global attacker weapon;
+	increase the attack damage by weapon damage bonus of the global attacker weapon; [1d(damage die) + WDB]
+	if the numbers boolean is true:
+		say "[The global attacker] deal[s] ", the attack damage, "[run paragraph on]";
+	now harm of physical damage is attack damage;
+	now damage-material is material of the global attacker weapon;
+	now damage-by-hitting is true;	
+	inflict damage on the global defender;  [The crucial line.]
+	if the the total damage is less than 1:
+		say "allowing [the global defender] to escape unscathed.[run paragraph on]";
+	otherwise:
+		[non-fatal]
+		if the health of the global defender is less than 1:
+			say "wounding [the global defender] to ", health of the global defender, " health.[run paragraph on]" ;
+		[fatal]
+		otherwise:
+			say "killing [the name of the global defender].[run paragraph on]";
+	say "[roman type][paragraph break]".
 
 
 
