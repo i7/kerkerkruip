@@ -43,6 +43,7 @@ We then count al specific damage types, and get the total damage.
 
 Deal damage!]
 
+The before damage rules are a rulebook. [Probably used sparingly.]
 The add specific damage rules are a rulebook. [For rules pertaining to specific types of damage.]
 The remove specific damage rules are a rulebook. [For rules pertaining to specific types of damage.]
 The specific damage multiplier rules are a rulebook. [Idem, but rules that multiply the damage by a constant.]
@@ -221,6 +222,7 @@ To inflict damage on (guy - a person), silently:
 	otherwise:
 		now damage silence is false;
 	now total damage is 0;
+	consider the before damage rules;
 	repeat with type running through damage types:
 		if harm of type is 0:
 			now type is not activated;

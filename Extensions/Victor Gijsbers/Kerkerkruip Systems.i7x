@@ -1037,10 +1037,10 @@ First attack modifier rule:
 Last attack modifier rule:
 	turn on mentioning hotness.
 
-First damage modifier rule:
+Before damage rule:
 	turn off mentioning hotness.
 
-Last damage modifier rule:
+After damage rule:
 	turn on mentioning hotness.
 
 
@@ -1247,10 +1247,10 @@ First attack modifier rule:
 Last attack modifier rule:
 	turn on mentioning rust.
 
-First damage modifier rule:
+Before damage rule:
 	turn off mentioning rust.
 
-Last damage modifier rule:
+After damage rule:
 	turn on mentioning rust.
 
 
@@ -1557,7 +1557,7 @@ Chapter - Reflection
 
 Reflection-attack is a truth state that varies. Reflection-attack is false.
 
-First carry out an actor hitting:
+First carry out an actor hitting (this is the reset reflection rule):
 	now reflection-attack is false.
 
 
