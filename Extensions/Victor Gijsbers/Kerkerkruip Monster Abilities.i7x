@@ -1009,7 +1009,7 @@ Carry out an actor stunning:
 	try the actor attacking the noun instead.
 
 A remove specific damage rule (this is the less damage when stunning rule):
-	of damage-by-hitting is true:
+	if damage-by-hitting is true:
 		if the global attacker is at-stun and global attacker weapon is not ranged and global attacker weapon is not stunning-weapon and global attacker weapon is not a natural weapon:
 			remove 1 points of physical damage with reason "stunning".
 

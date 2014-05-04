@@ -628,9 +628,9 @@ A remove specific damage rule (this is the size damage decrease rule):
 			if the global attacker weapon is not size-agnostic:
 				if the size of the global attacker is:
 					-- tiny:
-						remove 2 points of physical damage with reason "tiny attacker", unconditionally;
+						remove 2 points of physical damage with reason "tiny attacker";
 					-- small:
-						remove 1 points of physical damage with reason "small attacker", unconditionally.
+						remove 1 points of physical damage with reason "small attacker".
 						
 An attack modifier rule (this is the weapon size attack modifier rule):
 	if global attacker weapon is not size-agnostic:
