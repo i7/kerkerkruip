@@ -265,7 +265,7 @@ Carry out an actor hitting (this is the set up attack damage rule):
 		now the attack damage is a random number between 1 and the damage die of the global attacker weapon;
 	increase the attack damage by weapon damage bonus of the global attacker weapon; [1d(damage die) + WDB]
 	if the numbers boolean is true:
-		say "[The global attacker] deal[s] ", the attack damage, "[run paragraph on]";
+		say "[roman type][The global attacker] deal[s] ", the attack damage, "[run paragraph on]";
 	now harm of physical damage is attack damage;
 	now damage-material is material of the global attacker weapon;
 	now damage-by-hitting is true;	
@@ -281,7 +281,13 @@ Carry out an actor hitting (this is the set up attack damage rule):
 			say ", killing [the name of the global defender].[run paragraph on]";
 	say "[roman type][paragraph break]".
 
+The standard damage roll rule is not listed in any rulebook.
+The offensive flow damage modifier rule is not listed in any rulebook.
 
+An add specific damage rule (this is the new offensive flow damage modifier rule):
+	if damage-by-hitting is true:
+		let bonus be offensive flow of the global attacker;
+		add bonus points of physical damage with reason "offensive flow".
 
 
 Section - Testing

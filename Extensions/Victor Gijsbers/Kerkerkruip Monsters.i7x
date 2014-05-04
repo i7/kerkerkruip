@@ -3785,7 +3785,7 @@ Section - Power of Bodmall
 The power of Bodmall is a power. Bodmall grants power of Bodmall.
 The power level of power of Bodmall is 4.
 The command text of power of Bodmall is "[if brambles are not in the location]brambles[otherwise]launch[end if]".
-The description of power of Bodmall is "Type: active combat ability.[paragraph break]Command: brambles; launch.[paragraph break]The 'brambles' command will summon bushes of thorns that impede the movement of your enemies, giving them a -2 attack penalty. After a few turns, these branches will start growing thorns. If you wait longer, they will also grow different types of fruit.[paragraph break]The 'launch' command launches these thorns and fruit at your enemies (or, for some fruits, yourself). The thorns will deal between 1 and [italic type]n[roman type] damage, where [italic type]n[roman type] is the number of times the thorns have grown (tiny = 1, terrible = 5). In addition, the thorns have an [italic type]n[roman type] * 20% chance of breaking concentration. Different types of fruits have different effects; experiment with them! Both the brambles and the launch command can be used as an action or a reaction.[paragraph break]Your body score has several effects on how fast the thorns and the fruit will grow; a higher body score means that both will appear sooner and have less chance of disappearing again.[paragraph break]In addition, as a druid you are immune to smoke, and get a +1 attack bonus with wooden weapons."
+The description of power of Bodmall is "Type: active combat ability.[paragraph break]Command: brambles; launch.[paragraph break]The 'brambles' command will summon bushes of thorns that impede the movement of your enemies, giving them a -2 attack penalty. After a few turns, these branches will start growing thorns. If you wait longer, they will also grow different types of fruit.[paragraph break]The 'launch' command launches these thorns and fruit at your enemies (or, for some fruits, yourself). The thorns will deal between 1 and [italic type]n[roman type] damage, where [italic type]n[roman type] is the number of times the thorns have grown (tiny = 1, terrible = 5). In addition, the thorns have an [italic type]n[roman type] * 20% chance of breaking concentration. Different types of fruits have different effects; experiment with them! Both the brambles and the launch command can be used as an action or a reaction.[paragraph break]Your body score has several effects on how fast the thorns and the fruit will grow; a higher body score means that both will appear sooner and have less chance of disappearing again.[paragraph break]In addition, as a druid you are immune to smoke, you get a +1 attack bonus with wooden weapons, and wooden, bone and vapourous weapons deal less damage to you."
 The power-name of power of Bodmall is "power of Bodmall".
 
 Table of Enemy Powers (continued)
@@ -3826,6 +3826,12 @@ An attack modifier rule (this is the druid using wooden weapon attack modifier r
 	if the global attacker is druidic and the global attacker weapon is wood:
 		say " + 1 (druid using wooden weapon)[run paragraph on]";
 		increase attack strength by 1.		
+
+A remove specific damage rule (this is the druid is dealt less damage by natural materials rule):
+	if damage-material is wood or damage-material is bone:
+		remove 1 points of physical damage with reason "druid resistant to [damage-material]";
+	if damage-material is vapour:
+		remove 3 points of physical damage with reason "druid resistant to [damage-material]".
 	
 
 Chapter - The brambles
@@ -6570,11 +6576,6 @@ Report the smoke demon concentrating:
 		-- 3:
 			say "The smoke demon becomes even denser and now seems almost material.";
 	rule succeeds.
-
-A damage modifier rule when the global attacker is the smoke demon (this is the less damage when smoke demon attacks druid rule):
-	if the global defender is druidic:
-		if the numbers boolean is true, say " - 4 (druid resistant to smoke)[run paragraph on]";
-		decrease the attack damage by 4.
 
 A damage multiplier rule when the global defender is the smoke demon (this is the smoke demon denseness multiplier rule):
 	if concentration of the smoke demon is:
