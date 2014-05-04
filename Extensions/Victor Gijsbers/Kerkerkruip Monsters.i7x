@@ -163,6 +163,7 @@ When play begins:
 	now parry-with bonus of X is -2;
 	now parry-against bonus of X is -2;
 	now the printed name of X is "sharp points";
+	now material of X is iron;
 	now X is plural-named.
 
 The description of the swarm of daggers is "Animated by some dark magic, these daggers purposefully seek to undo [if faction of the swarm of daggers hates faction of the player]you[otherwise]their enemies[end if].".
@@ -358,6 +359,7 @@ When play begins:
 	now parry-against bonus of X is 1;
 	now parry-with bonus of X is -2;
 	now printed name of X is "ape's [size of blood ape] fists";
+	now material of X is flesh;
 	now X is plural-named.
 
 Aftereffects rule (this is the blood ape grows in size when hit rule):
@@ -530,6 +532,7 @@ The ID of the ravenous armadillo is 3.
 The ravenous armadillo is medium.
 The ravenous armadillo is not talker.
 The ravenous armadillo is thrower.
+Material of ravenous armadillo is bone. [Other objects will interact primarily with its bone scales.]
 
 The unlock level of the ravenous armadillo is 3.
 The unlock text of the ravenous armadillo is "a monster that searches the dungeon for anything it can eat".
@@ -558,6 +561,7 @@ When play begins:
 	now dodge bonus of X is 1;
 	now parry-against bonus of X is -1;
 	now parry-with bonus of X is 1;
+	now material of X is bone;
 	now the printed name of X is "bony tail club".		
 
 
@@ -793,6 +797,7 @@ The ID of Miranda is 4.
 Miranda is medium.
 Miranda is talker.
 Miranda is thrower.
+Material of Miranda is flesh.
 
 The description of Miranda is "Although she is currently working as one of Malygris's guards, Miranda dreams about a bright future as a famous adventurer.".
 
@@ -814,6 +819,7 @@ When play begins:
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
 	now the printed name of X is "fists";
+	now material of X is flesh;
 	now X is plural-named.	
 
 
@@ -939,6 +945,7 @@ The ID of the wisps of pain is 30.
 The wisps of pain are tiny.
 The wisps of pain are not talker.
 The wisps of pain are not thrower.
+The material of the wisps of pain is darkness.
 
 The description of the wisps of pain is "Dark spots of necromantic magic move through the air. They deal pain and torment, and can permanently cripple anyone foolish enough to oppose them.".
 
@@ -965,7 +972,8 @@ When play begins:
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
-	now the printed name of X is "necromantic magic".	
+	now the printed name of X is "necromantic magic";
+	now material of X is darkness.	
 
 Section - Wisps of pain images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)	
 
@@ -1179,7 +1187,7 @@ The chain golem is not talker.
 The chain golem is thrower.
 
 The chain golem is eyeless.
-The chain golem is iron.
+Materail of the chain golem is iron.
 The chain golem is emotionless.
 
 The description of the chain golem is "A hulking form made of [if chain golem is iron]metal[otherwise][material-adjective of material of chain golem][end if] chains and animated by a soul bound to it through dark magics.".
@@ -1420,6 +1428,7 @@ The jumping bomb is not thrower.
 
 The jumping bomb is eyeless.
 The jumping bomb is emotionless.
+Material of the jumping bomb is flesh.
 
 The description of the jumping bomb is "Connoisseurs consider these jumping balls of red meat to be among the most exciting spectacles of Yahvinna's annual Feast of Flesh. To the slaves and convicts down in the arena, whose limbs the spectators hope to have blown into their lap, the jumping bombs also bring excitement, though of a wholly different type.".
 
@@ -1443,7 +1452,8 @@ When play begins:
 	now parry-against bonus of X is -3;
 	now parry-with bonus of X is -2;
 	now printed name of X is "bomb's detonating surface";
-	now special weapon info of X is "kills instantly".
+	now special weapon info of X is "kills instantly";
+	now material of X is flesh.
 
 Initiative update rule when the jumping bomb is enclosed by the location (this is the jumping bomb has slightly less initiative rule):
 	if a random chance of 1 in 5 succeeds:
@@ -1647,6 +1657,7 @@ The ID of the Reaper is 7.
 The Reaper is medium.
 The Reaper is talker.
 The Reaper is thrower.
+Material of the Reaper is flesh.
 
 The description of the reaper is "He once used to be a man like any other, but his vocation has left him unnaturally pale and gaunt.".
 
@@ -1666,7 +1677,8 @@ When play begins:
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
 	now printed name of X is "Reaper's knuckles";
-	now X is plural-named.
+	now X is plural-named;
+	now material of X is flesh. [He'd want it to be bone, but alas.]
 
 The reaper is a weapon user.
 
@@ -1851,6 +1863,7 @@ The unlock level of the demon of rage is 2.
 The unlock hidden switch of the demon of rage is true.
 The demon of rage is talker.
 The demon of rage is thrower.
+The material of the demon of rage is darkness.
 
 The description of the demon of rage is "An amorphous swirl of red and black light, this demonic creature is the spirit of rage incarnate.".
 Instead of listening to the demon of rage:
@@ -1873,7 +1886,8 @@ When play begins:
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
 	now printed name of X is "demon's fiery tendrils";
-	now X is plural-named.
+	now X is plural-named;
+	now material of X is fire.
 
 
 Section - Demon of Rage images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
@@ -2051,6 +2065,7 @@ The ID of the hound is 9.
 The hound is large.
 The hound is not talker.
 The hound is not thrower.
+Material of the hound is flesh.
 
 The description of the hound is "The black hound is ever watchful, ready to punish its prey for any wrong move."
 
@@ -2071,6 +2086,7 @@ When play begins:
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
 	now printed name of X is "teeth";
+	now material of X is bone;
 	now X is plural-named.
 
 Section - Hound images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
@@ -2222,6 +2238,7 @@ The unlock text of the angel of compassion is "an angelic being that grows weake
 The angel of compassion is talker.
 The angel of compassion is thrower.
 The angel of compassion is angelic.
+Material of angel of compassion is radiance.
 Angel of compassion is flyer.
 Radiation of angel of compassion is 4.
 
@@ -2248,7 +2265,8 @@ When play begins:
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
 	now printed name of X is "angel's fists";
-	now X is plural-named.
+	now X is plural-named;
+	now material of X is radiance.
 
 
 
@@ -2408,6 +2426,7 @@ The ID of the mindslug is 10.
 The mindslug is huge.
 The mindslug is not talker.
 The mindslug is not thrower.
+Material of the mindslug is flesh.
 
 The mindslug is group leading.
 The mindslug is defeated individually.
@@ -2429,7 +2448,8 @@ When play begins:
 	now dodge bonus of X is 1;
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
-	now printed name of X is "slug's crushing body".
+	now printed name of X is "slug's crushing body";
+	now material of X is flesh.
 
 
 Section - Mindslug images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
@@ -2531,7 +2551,8 @@ When play begins:
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
 	now printed name of X is "Fafhrd's fists";
-	now X is plural-named.
+	now X is plural-named;
+	now material of X is flesh.
 
 Fafhrd carries the claymore.
 
@@ -2539,6 +2560,7 @@ Follower percentile chance of Fafhrd is 75.
 Fafhrd is weapon user.
 Fafhrd is talker.
 Fafhrd is thrower.
+Material of Fafhrd is flesh.
 
 Mouser is a mindslug-enslaved man. "The sneak thief Mouser looks around with greedy eyes[if Fafhrd is mindslug-enslaved]. He appears to be under some kind of spell[end if]."
 The description of Mouser is "Mouser is a small, fast man. You know his type from the alleys and alehouses of Montenoir.".
@@ -2556,6 +2578,7 @@ Defence of Mouser is 9.
 Mouser is medium.
 Mouser is talker.
 Mouser is thrower.
+Material of Mouser is flesh.
 
 When play begins:
 	let X be a random natural weapon part of Mouser;
@@ -2563,7 +2586,8 @@ When play begins:
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
 	now printed name of X is "Mouser's fists";
-	now X is plural-named.
+	now X is plural-named;
+	now material of X is flesh.
 
 Follower percentile chance of Mouser is 85.
 Mouser is weapon user.
@@ -2863,6 +2887,7 @@ The ID of the giant tentacle is 13.
 The giant tentacle is huge.
 The giant tentacle is not talker.
 The giant tentacle is thrower.
+Material of the giant tentacle is flesh.
 
 The health of giant tentacle is 35.
 The melee of giant tentacle is 3.
@@ -2879,7 +2904,7 @@ When play begins:
 	now parry-with bonus of X is -2;	
 	now the damage die of X is 0;
 	now printed name of X is "tentacle";
-	now X is plural-named.
+	now material of X is flesh.
 
 The giant tentacle is eyeless.
 
@@ -3216,6 +3241,7 @@ The ID of the minotaur is 14.
 The minotaur is large.
 The minotaur is not talker.
 The minotaur is thrower.
+Material of the minotaur is flesh.
 
 The unlock level of the minotaur is 2.
 The unlock hidden switch of the minotaur is true.
@@ -3235,7 +3261,8 @@ When play begins:
 	now parry-with bonus of X is -2;	
 	now printed name of X is "minotaur's fists";
 	now X is plural-named;
-	now the damage die of X is 6.
+	now the damage die of X is 6;
+	now material of X is flesh.
 
 Minotaur is a weapon user.
 
@@ -3333,6 +3360,7 @@ The soul description of the healer of Aite is "a deadly snake curled around a st
 The ID of the Healer of Aite is 16.
 The Healer of Aite is medium.
 The Healer of Aite is talker.
+Material of the Healer of Aite is flesh.
 
 The level of the healer of Aite is 4.
 
@@ -3362,7 +3390,8 @@ When play begins:
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
 	now X is plural-named;	
-	now printed name of X is "healer's fists".
+	now printed name of X is "healer's fists";
+	now material of X is flesh.
 
 Report an actor hitting the dead healer of Aite:
 	say "The healer stares in disbelief at his fatal wounds before he topples over.";
@@ -3405,6 +3434,7 @@ The soul description of the tormentor of Aite is "savage stabs of pain".
 The ID of the Tormentor of Aite is 17.
 The Tormentor of Aite is medium.
 The Tormentor of Aite is talker.
+Material of the Tormentor of Aite is flesh.
 
 The level of the tormentor of Aite is 4.
 
@@ -3433,7 +3463,8 @@ When play begins:
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
 	now X is plural-named;
-	now printed name of X is "tormentor's fists".
+	now printed name of X is "tormentor's fists";
+	now material of X is flesh.
 
 Report an actor hitting the dead tormentor of Aite:
 	say "The tormentor cries in pain and rage as her body's vital functions fail.";
@@ -3475,9 +3506,9 @@ The soul description of the defender of Aite is "a bronze shield, dented and spi
 
 The ID of the defender of Aite is 18.
 The defender of Aite is medium.
-
 The defender of Aite is talker.
 Defender of Aite is thrower.
+Material of the defender of Aite is flesh.
 
 The level of the defender of Aite is 4.
 
@@ -3505,7 +3536,8 @@ When play begins:
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
 	now X is plural-named;
-	now printed name of X is "defender's fists".
+	now printed name of X is "defender's fists";
+	now material of X is flesh.
 
 Report an actor hitting the dead defender of Aite:
 	say "The defender falls to the ground with a smash, never to stand up again.";
@@ -3615,6 +3647,7 @@ The ID of Bodmall is 19.
 Bodmall is medium.
 Bodmall is talker.
 Bodmall is thrower.
+Material of Bodmall is flesh.
 
 The health of Bodmall is 35.
 The melee of Bodmall is 5.
@@ -3633,7 +3666,8 @@ When play begins:
 	now dodge bonus of X is 1;
 	now parry-against bonus of X is -2;
 	now parry-with bonus of X is -2;
-	now printed name of X is "a lightning bolt".
+	now printed name of X is "a lightning bolt";
+	now material of X is electricity.
 
 
 Section - Bodmall images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
@@ -4218,6 +4252,7 @@ The ID of the overmind is 31.
 The overmind is huge.
 The overmind is talker.
 The overmind is thrower.
+Material of the overmind is iron.
 
 The rarity of the overmind is 1.
 
@@ -4244,7 +4279,8 @@ When play begins:
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
-	now printed name of X is "small nail".
+	now printed name of X is "small nail";
+	now material of X is iron.
 
 
 Section - Overmind images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
@@ -4482,6 +4518,7 @@ The ID of Israfel is 36.
 Israfel is huge.
 Israfel is talker.
 Israfel is thrower.
+Material of Israfel is radiance.
 
 The level of Israfel is 4.
 
@@ -4503,7 +4540,8 @@ When play begins:
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is -2;
 	now parry-with bonus of X is -2;
-	now printed name of X is "blinding flame".
+	now printed name of X is "blinding flame";
+	now material of X is fire.
 
 Israfel is angelic.
 Radiation of Israfel is 4.
@@ -4638,6 +4676,7 @@ The ID of Isra is 37.
 Isra is large.
 Isra is talker.
 Isra is thrower.
+Material of Isra is radiance.
 
 The level of Isra is 4.
 Isra is not defeated individually.
@@ -4657,7 +4696,8 @@ When play begins:
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is -2;
 	now parry-with bonus of X is -2;
-	now printed name of X is "cleansing flame".
+	now printed name of X is "cleansing flame";
+	now material of X is fire.
 
 Isra is angelic.
 Radiation of Isra is 3.
@@ -4733,6 +4773,7 @@ The ID of Fell is 38.
 Fell is medium.
 Fell is talker.
 Fell is thrower.
+Material of Fell is radiance.
 
 The level of Fell is 4.
 Fell is not defeated individually.
@@ -4753,7 +4794,8 @@ When play begins:
 	now parry-against bonus of X is -1;
 	now parry-with bonus of X is -2;
 	now printed name of X is "claws and fangs";
-	now X is plural-named.
+	now X is plural-named;
+	now material of X is radiance.
 
 Fell is angelic.
 Radiation of Fell is 1.
@@ -5051,6 +5093,7 @@ The ID of Malygris is 20.
 Malygris is medium.
 Malygris is talker.
 Malygris is thrower.
+Material of Malygris is flesh.
 
 The health of Malygris is 55.
 The melee of Malygris is 7.
@@ -5064,9 +5107,10 @@ The initial sleep chance of Malygris is 1.
 
 When play begins:
 	let X be a random natural weapon part of Malygris;
-	now printed name of X is "Malygris's innate magical powers";
+	now printed name of X is "fists crackling with lightning";
 	now damage die of X is 6;
-	now X is plural-named.
+	now X is plural-named;
+	now material of X is electricity.
 
 Malygris is weapon user.
 
@@ -5244,6 +5288,10 @@ Victory message rule (this is the Malygris lover message rule):
 		end the story saying "You have found true love and infinite pleasure!";
 		rule succeeds.	
 
+
+
+
+
 Book - Other Monsters
 
 Chapter - Demonic assassin
@@ -5257,6 +5305,7 @@ The ID of the demonic assassin is 21.
 The demonic assassin is medium.
 The demonic assassin is talker.
 The demonic assassin is thrower.
+Material of the demonic assassin is darkness.
 
 The demonic assassin is demonic.
 
@@ -5275,7 +5324,8 @@ The demonic assassin is unnaturally aware.
 When play begins:
 	let X be a random natural weapon part of the demonic assassin;
 	now the printed name of X is "hardened claws";
-	now X is plural-named.
+	now X is plural-named;
+	now material of X is darkness.
 	
 Demonic assassin is weapon user.
 
@@ -5334,6 +5384,7 @@ The Nameless Horror is gargantuan.
 The Nameless Horror is not talker.
 The Nameless Horror is thrower.
 The Nameless Horror is not sleeper.
+Material of the Nameless Horror is darkness.
 
 The health of Nameless Horror is 1000.
 The melee of Nameless Horror is 50.
@@ -5356,7 +5407,8 @@ When play begins:
 	now parry-against bonus of X is -2;
 	now parry-with bonus of X is -2;
 	now printed name of X is "countless teeth and claws";
-	now X is plural-named.
+	now X is plural-named;
+	now material of X is darkness.
 
 Follower percentile chance of Nameless Horror is 60.
 
@@ -5444,6 +5496,7 @@ The rotting corpse is emotionless.
 The rotting corpse is eyeless.
 The rotting corpse is not talker.
 The rotting corpse is thrower.
+Material of the rotting corpse is flesh.
 
 The level of rotting corpse is 0.
 The ID of the rotting corpse is 23.
@@ -5464,7 +5517,8 @@ When play begins:
 	now parry-against bonus of X is 1;
 	now parry-with bonus of X is -2;
 	now the printed name of X is "rotting appendages";
-	now X is plural-named.
+	now X is plural-named;
+	now material of X is flesh.
 
 A rotting limb is a kind of thing.
 The material of a rotting limb is usually flesh.
@@ -5604,6 +5658,7 @@ As-shape is a kind of value. The as-shapes are as-witch, as-bird and as-dog.
 The aswang has an as-shape. The as-shape of the aswang is as-witch.
 The aswang is talker.
 The aswang is thrower.
+Material of the aswang is flesh.
 
 The aswang is an undead undead-faction monster. "An aswang is here, having taken the shape of [if as-shape of aswang is as-witch]an ugly old woman[otherwise if as-shape of aswang is as-bird]a huge owl-like bird[otherwise]a ferocious black dog[end if]."
 Understand "witch" and "dog" and "hound" and "bird" and "owl" and "woman" and "ugly" and "old" as the aswang.
@@ -5631,7 +5686,8 @@ When play begins:
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
 	now the printed name of X is "[if as-shape of aswang is as-witch]razor-sharp fingernails[otherwise if as-shape of aswang is as-bird]beak and claws[otherwise]teeth[end if]";
-	now X is plural-named.
+	now X is plural-named;
+	now material of X is bone.
 
 
 Section - Aswang images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
@@ -5817,6 +5873,7 @@ The abyss of the soul is small.
 The abyss of the soul is not talker.
 The abyss of the soul is not thrower.
 The abyss of the soul is not sleeper.
+Materiall of the abyss of the soul is darkness.
 
 The description of the Abyss of the Soul is "This [size of the abyss of the soul] sphere of utter darkness is an abyss of the soul, one of the most fearsome of undead monsters. Not only does it sap the strength of all nearby living creatures, it also feeds on the souls of the recently departed.".
 
@@ -5930,6 +5987,7 @@ The mummified priest is emotionless.
 The mummified priest is eyeless.
 The mummified priest is talker.
 The mummified priest is thrower.
+Material of the mummified priest is flesh.
 
 The level of mummified priest is 0.
 The ID of the mummified priest is 29.
@@ -5949,7 +6007,8 @@ When play begins:
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;	
 	now the printed name of X is "bandaged fists";
-	now X is plural-named.
+	now X is plural-named;
+	now material of X is cloth.
 
 The mummified priest carries the was sceptre.
 
@@ -6036,6 +6095,7 @@ The soul description of the zombie toad is "a swampy odor".
 The zombie toad is emotionless.
 The zombie toad is not talker.
 The zombie toad is not thrower.
+Material of the zombie toad is flesh.
 
 The level of zombie toad is 0.
 The ID of the zombie toad is 32.
@@ -6055,7 +6115,8 @@ When play begins:
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;	
 	now the printed name of X is "tongue";
-	now the damage die of X is 1.
+	now the damage die of X is 1;
+	now material of X is flesh.
 
 
 Section - Zombie Toad images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
@@ -6106,6 +6167,7 @@ The soul description of the malignant chanter is "a discordant threnody".
 The malignant chanter is emotionless.
 The malignant chanter is talker.
 The malignant chanter is thrower.
+Material of the malignant chanter is flesh.
 
 The level of malignant chanter is 0.
 The ID of the malignant chanter is 35.
@@ -6125,7 +6187,8 @@ When play begins:
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;	
 	now the printed name of X is "putrefying fists";
-	now X is plural-named.
+	now X is plural-named;
+	now material of X is flesh.
 
 Section - Malignant Chanter images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
@@ -6221,6 +6284,7 @@ The soul description of Drakul is "sophisticated malice".
 Drakul is medium.
 Drakul is talker.
 Drakul is thrower.
+Material of Drakul is flesh.
 
 The level of Drakul is 0.
 The ID of Drakul is 34.
@@ -6240,7 +6304,8 @@ When play begins:
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
 	now the printed name of X is "sharp teeth";
-	now X is plural-named.
+	now X is plural-named;
+	now material of X is bone.
 
 Section - Drakul images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
@@ -6383,6 +6448,7 @@ The smoke demon is smoke attuned.
 The smoke demon is flyer.
 The smoke demon is emotionless.
 The smoke demon is eyeless.
+The material of the smoke demon is vapour.
 
 The health of the smoke demon is 10.
 The melee of the smoke demon is 2.
@@ -6400,7 +6466,8 @@ When play begins:
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
 	now the printed name of X is "tendrils";
-	now X is plural-named.
+	now X is plural-named;
+	now material of X is vapour.
 
 Understand "tendrils" as the smoke demon.
 
@@ -6546,6 +6613,7 @@ The ID of the imp is 27.
 The imp is small.
 The imp is talker.
 The imp is thrower.
+Material of imp is darkness.
 
 The imp is flyer.
 
@@ -6564,7 +6632,8 @@ When play begins:
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;	
 	now the printed name of X is "claws";
-	now X is plural-named.
+	now X is plural-named;
+	now material of X is darkness.
 
 Understand "claws" as the imp.
 
@@ -6702,6 +6771,7 @@ The ID of the demonic mistress is 28.
 The demonic mistress is medium.
 The demonic mistress is talker.
 The demonic mistress is thrower.
+Material of demonic mistress is darkness.
 
 The demonic mistress is demonic.
 
@@ -6723,7 +6793,8 @@ When play begins:
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;	
 	now the printed name of X is "claws";
-	now X is plural-named.
+	now X is plural-named;
+	now material of X is darkness.
 	
 Demonic mistress is weapon user.
 

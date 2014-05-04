@@ -853,11 +853,9 @@ A weapon can be size-agnostic. A weapon is usually not size-agnostic.
 
 Chapter - Materials
 
-Material is a kind of value. [The materials are other-material, iron, silver, paper, cloth, wood, glass, leather, flesh, dragon skin, stone, radiance, adamant. ][Understand "wooden" as wood.]
-[
-A material has some text called the material-adjective.
-A material has a number called the destroying heat.
-A material has a number called the corrosion resistance. [Percentile chance, because we are working with some small probabilities here -- they come up every turn, and get large quickly.]]
+Material is a kind of value.
+
+[A material has a number called the corrosion resistance. [Percentile chance, because we are working with some small probabilities here -- they come up every turn, and get large quickly.]]
 Heat-behaviour is a kind of value. The heat-behaviours are burner and melter. [A material has a heat-behaviour.]
 
 The materials are defined by the Table of Materials.
@@ -872,12 +870,16 @@ cloth	"cloth"	1	burner	950
 wood	"wooden"	3	burner	970
 leather	"leather"	3	burner	980
 flesh	"flesh"	2	burner	900
+bone	"bone"	4	burner	940
 glass	"glass"	6	melter	999
 stone	"stone"	15	melter	998
 dragon skin	"dragon skin"	20	burner	999
-radiance	"radiant"	99	melter	1000
+radiance	"radiant"	999	melter	1000
+darkness	"dark"	999	melter	1000
 adamant	"adamantine"	999	melter	1000
 vapour	"vapourous"	999	burner	1000
+fire		"fiery"	999		burner	1000
+electricity	"electric"		999		burner	1000
 
 Understand the material property as describing a thing.
 [Understand the material-adjective property as describing a material.]
@@ -914,6 +916,10 @@ First after printing the name of a thing (called item):
 	if material of item is not original material of item:
 		if item is proper-named:
 			say " (now [material-adjective of material of item])".
+
+
+
+
 
 
 [Section - Test other-material - Not for Release
