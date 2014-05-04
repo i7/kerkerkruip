@@ -610,26 +610,28 @@ Chance to win rule when the global defender is not medium (this is the CTW defen
 	if the global defender is gargantuan:
 		increase the chance-to-win by 3.
 
-A damage modifier rule (this is the weapon size damage modifier rule):
-	if the global attacker is not medium or the global attacker weapon is not medium:
-		if the global attacker weapon is not size-agnostic:
-			if the size of the global attacker is:
-				-- tiny:
-					if the numbers boolean is true, say " - 2 (tiny attacker)[run paragraph on]";
-					decrease the attack damage by 2;			
-				-- small:
-					if the numbers boolean is true, say " - 1 (small attacker)[run paragraph on]";
-					decrease the attack damage by 1;
-				-- large:
-					if the numbers boolean is true, say " + 1 (large attacker)[run paragraph on]";
-					increase the attack damage by 1;
-				-- huge:
-					if the numbers boolean is true, say " + 2 (huge attacker)[run paragraph on]";
-					increase the attack damage by 2;
-				-- gargantuan:
-					if the numbers boolean is true, say " + 4 (gargantuan attacker)[run paragraph on]";
-					increase the attack damage by 4;
-
+An add specific damage rule (this is the size damage increase rule):
+	if damage-by-hitting is true:
+		if the global attacker is not medium:
+			if the global attacker weapon is not size-agnostic:
+				if the size of the global attacker is:
+					-- large:
+						add 1 points of physical damage with reason "large attacker", unconditionally;
+					-- huge:
+						add 2 points of physical damage with reason "huge attacker", unconditionally;
+					-- gargantuan:
+						add 4 points of physical damage with reason "gargantuan attacker", unconditionally.
+						
+A remove specific damage rule (this is the size damage decrease rule):
+	if damage-by-hitting is true:
+		if the global attacker is not medium:
+			if the global attacker weapon is not size-agnostic:
+				if the size of the global attacker is:
+					-- tiny:
+						remove 2 points of physical damage with reason "tiny attacker", unconditionally;
+					-- small:
+						remove 1 points of physical damage with reason "small attacker", unconditionally.
+						
 An attack modifier rule (this is the weapon size attack modifier rule):
 	if global attacker weapon is not size-agnostic:
 		if the global attacker weapon is not a natural weapon part of the global attacker:

@@ -1187,7 +1187,7 @@ The chain golem is not talker.
 The chain golem is thrower.
 
 The chain golem is eyeless.
-Materail of the chain golem is iron.
+Material of the chain golem is iron.
 The chain golem is emotionless.
 
 The description of the chain golem is "A hulking form made of [if chain golem is iron]metal[otherwise][material-adjective of material of chain golem][end if] chains and animated by a soul bound to it through dark magics.".

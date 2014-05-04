@@ -287,7 +287,15 @@ The offensive flow damage modifier rule is not listed in any rulebook.
 An add specific damage rule (this is the new offensive flow damage modifier rule):
 	if damage-by-hitting is true:
 		let bonus be offensive flow of the global attacker;
-		add bonus points of physical damage with reason "offensive flow".
+		add bonus points of physical damage with reason "offensive flow", unconditionally.
+
+The standard tension damage modifier rule is not listed in any rulebook.
+
+An add general damage rule (this is the new tension damage modifier rule):
+	if damage-by-hitting is true:
+		let the bonus be the tension divided by 3;
+		if the bonus is not 0:
+			add bonus points of general damage with reason "tension".
 
 
 Section - Testing

@@ -62,7 +62,7 @@ An add specific damage rule (this is the new concentration damage modifier rule)
 				let the first dummy be 0;
 				if the concentration of the global attacker is 2, now the first dummy is 2;
 				if the concentration of the global attacker is 3, now the first dummy is 4;
-				add first dummy points of physical damage with reason "concentration".
+				add first dummy points of physical damage with reason "concentration", unconditionally.
 
 The concentration damage modifier rule is not listed in any rulebook.
 
@@ -461,10 +461,10 @@ Section - Inherent damage modifier
 A person has a number called the inherent damage modifier. The inherent damage modifier of a person is usually 0.
 
 [ TODO: Should this be a standard part of ATTACK? ]
-A damage modifier rule (this is the inherent damage modifier rule):
-	if the inherent damage modifier of the global attacker is not 0:
-		say " + ", inherent damage modifier of the global attacker, " (inherent bonus)[run paragraph on]";
-		increase the attack damage by the inherent damage modifier of the global attacker;
+An add specific damage rule (this is the inherent damage modifier rule):
+	if damage-by-hitting is true:
+		if the inherent damage modifier of the global attacker is not 0:
+			add (inherent damage modifier of the global attacker) points of physical damage with reason "inherent bonus", unconditionally.
 
 
 Section - Weapon descriptions
