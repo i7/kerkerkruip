@@ -1016,23 +1016,28 @@ The maximum blood timeout of the gown of the red court is 8;
 
 Chapter - Cloaks
 
-Section - Cloak of shadows (epic)
+Section - Fuligin cloak (epic)
 
-The cloak of shadows is an epic cloak.
-The cloak of shadows is civilised.
-The cloak of shadows is cloth.
+The fuligin cloak is an epic cloak. [An homage to the Book of the New Sun.]
+The fuligin cloak is civilised.
+The fuligin cloak is cloth.
 
-The description of the cloak of shadows is "Wearing this powerful cloak allows you to become hidden and sneak through the dungeon undetected. You cannot hide in the presence of enemies, though.".
+The description of the fuligin cloak is "Fuligin, the colour that is darker than black. Wearing this powerful cloak allows you to become hidden and sneak through the dungeon undetected. It also makes you somewhat resistant to radiant damage.".
 
-Every turn when the player wears the cloak of shadows (this is the blend into shadows rule):
+Every turn when the player wears the fuligin cloak (this is the blend into shadows rule):
 	update the combat status;
 	if combat status is peace:
 		if the player is not hidden and the player is alive and the player is the main actor:
 			hide.
 
-After taking off the cloak of shadows when the player is hidden:
+After taking off the fuligin cloak when the player is hidden:
 	now player is not hidden;
 	say "You reveal your presence to the world.".
+	
+A remove specific damage rule (this is the fuligin cloak removes radiant damage rule):
+	if the victim wears the fuligin cloak:
+		if damage-material is radiance:
+			remove 2 points of physical damage with reason "fuligin cloak".
 
 Section - Cloak of reflection (minor)
 
