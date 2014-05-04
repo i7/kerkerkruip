@@ -1245,22 +1245,14 @@ First carry out an actor attacking the chain golem (this is the attack a spinnin
 			otherwise:
 				say "[paragraph break]".
 
-A damage modifier rule (this is the chain golem damage depends on concentration rule):
-	if the global attacker is the chain golem and the concentration of the chain golem is not 0:
-		let n be the concentration of the chain golem times 2;
-		if the numbers boolean is true, say " + [n] (golem spinning)[run paragraph on]";
-		increase the attack damage by n.	
+The chain golem is abnormal-concentrating.
 
-This is the new concentration damage modifier rule:
-	unless global attacker is the chain golem:
-		if the concentration of the global attacker is greater than 1:
-			let the first dummy be 0;
-			if the concentration of the global attacker is 2, now the first dummy is 2;
-			if the concentration of the global attacker is 3, now the first dummy is 4;
-			if the numbers boolean is true, say " + ", the first dummy, " (concentration)[run paragraph on]";
-			increase the attack damage by the first dummy.
-The new concentration damage modifier rule is listed instead of the concentration damage modifier rule in the damage modifier rulebook.
-						
+An add specific damage rule (this is the chain golem damage depends on concentration rule):
+	if damage-by-hitting is true:
+		if the global attacker is the chain golem and the concentration of the chain golem is not 0:
+			let n be the concentration of the chain golem times 2;
+			add n points of physical damage with reason "golem spinning".
+
 An AI action selection rule for the chain golem (this is the chain golem likes to concentrate rule):
 	unless a random chance of 1 in 10 succeeds:
 		choose row with an Option of the action of the chain golem concentrating in the Table of AI Action Options;

@@ -51,6 +51,22 @@ This is the new everyone loses concentration when combat status is peace rule:
 			
 new everyone loses concentration when combat status is peace rule is listed instead of the everyone loses concentration when combat status is peace rule in the combat round rules.
 
+Section - Replacing concentration
+
+A person can be normal-concentrating or abnormal-concentrating. A person is usually normal-concentrating.
+
+An add specific damage rule (this is the new concentration damage modifier rule):
+	if damage-by-hitting is true:
+		if global attacker is normal-concentrating:
+			if the concentration of the global attacker is greater than 1:
+				let the first dummy be 0;
+				if the concentration of the global attacker is 2, now the first dummy is 2;
+				if the concentration of the global attacker is 3, now the first dummy is 4;
+				add first dummy points of physical damage with reason "concentration".
+
+The concentration damage modifier rule is not listed in any rulebook.
+
+
 Section - Attacking when the combat status is peace (Nomos, slaves)
 
 [Nomos. Attack slaves.]
