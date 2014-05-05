@@ -2838,7 +2838,7 @@ Section - Battle Magic of Beginners (minor)
 Battle Magic for Beginners is a minor magical guide. Battle Magic for Beginners is proper-named.
 Battle Magic for Beginners is magical.
 
-The guide list of Battle Magic for Beginners is {the-blade, protection}.
+The guide list of Battle Magic for Beginners is {the-blade, protection, enchantment}.
 
 Section - Handbook of Subtle Magics (minor)
 
@@ -2860,10 +2860,21 @@ When play begins:
 	add (entry 3 of names) to guide list of Miscellanea Magica.
 
 
+Chapter - Other readables
 
+Section - Ancient papyrus
 
+The ancient papyrus is a minor thing. The ancient papyrus is paper and readable.
 
+The description of the ancient papyrus is "This almost crumbling document contains a spell that may bless you or curse you. There's no way of knowing which without reading it -- and even then, the effects may not be immediately apparent.".
 
+Carry out reading the ancient papyrus:
+	say "You unroll the papyrus and take in the weird hieroglyphs. As the scroll crumbles in your hands, you feel a magical force settling down on you -- but you have no idea whether it is for better or for worse.";
+	remove the noun from play;
+	if a random chance of 2 in 3 succeeds: [Needs to be bigger than 50%, because being cursed is generally worse than being blessed.]
+		now the player is death-blessed; 
+	otherwise:
+		now the player is death-cursed.
 
 
 

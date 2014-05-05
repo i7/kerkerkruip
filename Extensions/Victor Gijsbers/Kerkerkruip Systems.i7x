@@ -1566,21 +1566,19 @@ Chapter - Death blessing and death curse
 A person can be death-blessed.
 A person can be death-cursed.
 
-A damage modifier rule (this is the death-blessed rule):
-	if the global defender is death-blessed:
-		if a random chance of 1 in 10 succeeds:
-			say " - 10 (blessing of life)[run paragraph on]";
-			decrease the attack damage by 10;
+A remove general damage rule (this is the death-blessed rule):
+	if the victim is death-blessed:
+		if a random chance of 1 in 15 succeeds:
+			remove 10 points of general damage with reason "blessing of life";
 			if a random chance of 1 in 2 succeeds:
-				now the global defender is not death-blessed.
+				now the victim is not death-blessed.
 
-A damage modifier rule (this is the death-cursed rule):
-	if the global defender is death-cursed:
+An add general damage rule (this is the death-cursed rule):
+	if victim is death-cursed:
 		if a random chance of 1 in 20 succeeds:
-			say " + 10 (curse of death)[run paragraph on]";
-			increase the attack damage by 10;
+			add 10 points of general damage with reason "curse of death";
 			if a random chance of 1 in 2 succeeds:
-				now the global defender is not death-cursed.
+				now the victim is not death-cursed.
 
 
 
