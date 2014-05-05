@@ -585,10 +585,10 @@ An attack modifier rule (this is the Nomos attack bonus rule):
 		if the numbers boolean is true, say " + [nomos piety] (the law is with [the Nomos attacker])[run paragraph on]";
 		increase the attack strength by nomos piety.
 
-A damage modifier rule (this is the Nomos damage bonus rule):
-	if Nomos bonus is true and the global attacker is the Nomos attacker:
-		if the numbers boolean is true, say " + [nomos piety] (the law is with [the Nomos attacker])[run paragraph on]";
-		increase the attack damage by nomos piety.
+An add specific damage rule (this is the Nomos damage bonus rule):
+	if damage-by-hitting is true:
+		if Nomos bonus is true and the global attacker is the Nomos attacker:
+			add nomos piety points of divine damage with reason "the law is with [the Nomos attacker]".
 			
 To decide which number is the Nomos piety:
 	decide on the Nomos piety of the Nomos attacker;
@@ -710,10 +710,10 @@ An attack modifier rule (this is the undead slayer attack bonus rule):
 		say " + 2 (undead slayer)[run paragraph on]";
 		increase the attack strength by 2.
 
-A damage modifier rule (this is the undead slayer damage bonus rule):
-	if the global attacker is undead-slayer and the global defender is undead:
-		say " + 2 (undead slayer)[run paragraph on]";
-		increase the attack damage by 2.
+An add specific damage rule (this is the undead slayer damage bonus rule):
+	if damage-by-hitting is true:
+		if the global attacker is undead-slayer and the global defender is undead:
+			add 2 points of divine damage with reason "undead slayer".
 		
 Status attribute rule (this is the undead slayer status rule):
 	if player is undead-slayer:
@@ -729,10 +729,10 @@ An attack modifier rule (this is the demon slayer attack bonus rule):
 		say " + 2 (demon slayer)[run paragraph on]";
 		increase the attack strength by 2.
 
-A damage modifier rule (this is the demon slayer damage bonus rule):
-	if the global attacker is demon-slayer and the global defender is demonic:
-		say " + 2 (demon slayer)[run paragraph on]";
-		increase the attack damage by 2.
+An add specific damage rule (this is the demon slayer damage bonus rule):
+	if damage-by-hitting is true:
+		if the global attacker is demon-slayer and the global defender is demonic:
+			add 2 points of divine damage with reason "demon slayer".		
 		
 Status attribute rule (this is the demon slayer status rule):
 	if player is demon-slayer:

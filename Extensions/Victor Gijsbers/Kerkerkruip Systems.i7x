@@ -616,11 +616,11 @@ An add specific damage rule (this is the size damage increase rule):
 			if the global attacker weapon is not size-agnostic:
 				if the size of the global attacker is:
 					-- large:
-						add 1 points of physical damage with reason "large attacker", unconditionally;
+						add 1 points of physical damage with reason "large attacker";
 					-- huge:
-						add 2 points of physical damage with reason "huge attacker", unconditionally;
+						add 2 points of physical damage with reason "huge attacker";
 					-- gargantuan:
-						add 4 points of physical damage with reason "gargantuan attacker", unconditionally.
+						add 4 points of physical damage with reason "gargantuan attacker".
 						
 A remove specific damage rule (this is the size damage decrease rule):
 	if damage-by-hitting is true:
@@ -1138,7 +1138,7 @@ A person has a number called the intrinsic heat resistance. The intrinsic heat r
 
 An add specific damage rule (this is the intrinsic heat vulnerability rule):
 	if intrinsic heat resistance of victim is less than 0:
-		add (intrinsic heat resistance of victim) points of heat damage with reason "intrinsic heat vulnerability". [Not unconditionally!]
+		add (intrinsic heat resistance of victim) points of heat damage with reason "intrinsic heat vulnerability", conditionally.
 
 A remove specific damage rule (this is the intrinsic heat resistance rule):
 	if intrinsic heat resistance of victim is greater than 0:

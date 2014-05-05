@@ -3385,13 +3385,13 @@ The weapon damage bonus of the executioner's axe is 4.
 The parry-with bonus of the executioner's axe is -2.
 The weapon attack bonus of the executioner's axe is -3.
 
-A damage modifier rule (this is the executioner's axe extra tension damage bonus rule):
-	if the global attacker weapon is the executioner's axe:
-		let n be 0;
-		now n is the tension divided by 3;
-		if n is not 0:
-			if the numbers boolean is true, say " + ", n, " (executioner's axe benefits from tension)[run paragraph on]";
-			increase the attack damage by n.
+An add general damage rule (this is the executioner's axe extra tension damage bonus rule):
+	if damage-by-hitting is true:
+		if damage-source is the executioner's axe:
+			let n be 0;
+			now n is the tension divided by 3;
+			if n is not 0:
+				add n points of general damage with reason "executioner's axe benefits from tension".
 
 An attack modifier rule (this is the executioner's axe is better in temple of Nomos rule):
 	if the global attacker weapon is the executioner's axe and the location is the Temple of Nomos:
@@ -3439,7 +3439,7 @@ A scythe is a kind of weapon.
 A scythe is usually iron.
 
 The damage die of a scythe is usually 10.
-The weapon attack bonus of a scythe is usually -2.
+The weapon attack bonus of a scythe is usually -1.
 The dodge bonus of a scythe is usually 1.
 The parry-with bonus of a scythe is usually -1.
 The parry-against bonus of a scythe is usually -1.
@@ -3455,10 +3455,10 @@ Section - Scythe of slaying (monster)
 
 The scythe of slaying is a scythe. The scythe of slaying is silver. The description of the scythe of slaying is "Ages ago, the monks of Averoigne forged these weapons, imbuing them with powerful enchantments against the living dead.".
 
-A damage modifier rule (this is the scythe of slaying deals great damage to undead rule):
-	if global attacker weapon is the scythe of slaying and global defender is undead:
-		if the numbers boolean is true, say " + 5 (slaying undead)[run paragraph on]";
-		increase the attack damage by 5.
+An add general damage rule (this is the scythe of slaying deals great damage to undead rule):
+	if damage-by-hitting is true:
+		if damage-source is the scythe of slaying and victim is undead:
+			add 5 points of general damage with reason "slaying undead".
 
 The special weapon info of the scythe of slaying is "; massive damage against undead[run paragraph on]".
 
@@ -3729,7 +3729,7 @@ First aftereffects rule (this is the Malleus reset tension rule):
 		now tension is malleus-tension-dummy.
 
 Aftereffects rule (this is the Malleus blood spent rule):
-	Now the blood magic level of Malleus Maleficarum is 0.
+	now the blood magic level of Malleus Maleficarum is 0.
 	
 A dread rule (this is the malleus dread rule):
 	if test subject carries Malleus Maleficarum and Malleus Maleficarum is readied:
@@ -3742,12 +3742,12 @@ Attack modifier rule (this is the Malleus blood attack bonus rule):
 			say " + [bonus] (Malleus Maleficarum blood)[run paragraph on]";
 			increase the attack strength by bonus;
 
-Damage modifier rule (this is the Malleus blood damage bonus rule):
-	if the global attacker weapon is Malleus Maleficarum:
-		let bonus be the blood magic level of Malleus Maleficarum;
-		if the bonus is greater than 0:
-			say " + [bonus] (Malleus Maleficarum blood)[run paragraph on]";
-			increase the attack damage by bonus.
+An add specific damage rule (this is the Malleus blood damage bonus rule):
+	if damage-by-hitting is true:
+		if damage-source is Malleus Maleficarum:
+			let bonus be the blood magic level of Malleus Maleficarum;
+			if the bonus is greater than 0:
+				add bonus points of physical damage with reason "Malleus Maleficarum blood bonus".
 		
 Chapter - Other weapons
 
@@ -4030,15 +4030,16 @@ Chance to win rule (this is the CTW ment penalty rule): [To make sure the AI cor
 	if the ment timer is greater than 0:
 		decrease the chance-to-win by ment bonus.			
 
-A damage modifier rule (this is the ment damage bonus rule):
-	if the global attacker is the player:
+An add general damage rule (this is the ment damage bonus rule):
+	if damage-by-hitting is true:
+		if the global attacker is the player:
+			if ment timer is greater than 0:
+				add ment bonus points of general damage with reason "ment".
+			
+A remove general damage rule (this is the ment damage protection rule):
+	if victim is the player:
 		if ment timer is greater than 0:
-			if the numbers boolean is true, say " + [ment bonus] (ment)[run paragraph on]";
-			increase the attack damage by ment bonus;
-	if the global defender is the player:
-		if ment timer is greater than 0:
-			if the numbers boolean is true, say " - [ment bonus] (ment makes you shrug off damage)[run paragraph on]";
-			decrease the attack damage by ment bonus.
+			remove ment bonus points of general damage with reason "ment".
 
 An attack modifier rule (this is the feeling down attack penalty rule):
 	if the global attacker is the player:
@@ -4088,9 +4089,9 @@ To have the ment kick in:
 Status combat stats rule (this is the ment status rule):
 	if ment timer is greater than 0:
 		if long status is true:
-			say "You are under the influence of [bold type]ment[roman type]: +[ment bonus] attack, +[ment bonus] damage, -[ment bonus] enemy damage, +[ment bonus] defence, +[ment bonus] to all abilities.[line break][run paragraph on]";
+			say "You are under the influence of [bold type]ment[roman type]: +[ment bonus] attack, +[ment bonus] damage, +[ment bonus] damage resistance, +[ment bonus] defence, +[ment bonus] to all abilities.[line break][run paragraph on]";
 		otherwise:
-			say "[bold type]Ment[roman type]: +[ment bonus] attack, +[ment bonus] damage, -[ment bonus] enemy damage, +[ment bonus] defence, +[ment bonus] abilities.[line break][run paragraph on]";
+			say "[bold type]Ment[roman type]: +[ment bonus] attack, +[ment bonus] damage, -[ment bonus] damage resistance, +[ment bonus] defence, +[ment bonus] abilities.[line break][run paragraph on]";
 	if ment timer is 0 and ment addiction is greater than 0:
 		if long status is true:
 			say "You feel [bold type]down[roman type]: -[ment addiction] attack, -[ment addiction] to all abilities[line break][run paragraph on]";

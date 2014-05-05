@@ -311,12 +311,12 @@ Carry out piercing:
 	now pierce-cooldown is o;
 	try the actor attacking the noun instead.
 
-A damage modifier rule (this is the more damage when piercing rule):
-	if the global attacker is at-pierce:
-		let n be the final body of the global attacker divided by 5;
-		increase n by 2;
-		if the numbers boolean is true, say " + [n] (piercing)[run paragraph on]";
-		increase the attack damage by n.
+An add specific damage rule (this is the more damage when piercing rule):
+	if damage-by-hitting is true:
+		if the global attacker is at-pierce:
+			let n be the final body of the global attacker divided by 5;
+			increase n by 2;
+			add n points of physical damage with reason "piercing".
 
 
 
@@ -723,10 +723,9 @@ Absorbing power of the armadillo:
 	increase permanent health of the player by 5;
 	say "As the armadillo succumbs, you feel its soul absorbed into your own body. ([bold type]Power of the armadillo[roman type]: +1 attack, +1 damage resistance, +5 health, and the [italic type]scales[roman type] skill, which allows you to cover yourself in hard scales.)[paragraph break]".
 
-A damage modifier rule (this is the power of the armadillo gives damage resistance rule):
-	if the global defender is the player and the power of the armadillo is granted:
-		if the numbers boolean is true, say " - 1 (armadillo)[run paragraph on]";
-		decrease the attack damage by 1.
+A remove general damage rule (this is the power of the armadillo gives damage resistance rule):
+	if the victim is the player and the power of the armadillo is granted:
+		remove 1 points of general damage with reason "armadillo".
 
 Repelling power of the armadillo:
 	decrease melee of the player by 1;
@@ -736,12 +735,11 @@ Section - The scales skill
 
 A person can be at-scale. A person is usually not at-scale.
 
-A damage modifier rule (this is the scales gives damage resistance rule):
-	if the global defender is at-scale:
-		let n be the final body of the global defender divided by 3;
+A remove general damage rule (this is the scales gives damage resistance rule):
+	if victim is at-scale:
+		let n be the final body of the victim divided by 3;
 		increase n by 5;
-		if the numbers boolean is true, say " - [n] (scales)[run paragraph on]";
-		decrease the attack damage by n.
+		remove n points of general damage with reason "scales".
 
 Scaling is an action applying to nothing. Understand "scale" and "scales" as scaling.
 
@@ -961,10 +959,9 @@ The spirit score of the wisps of pain is 9.
 The unlock level of the wisps of pain is 12.
 The unlock text of the wisps of pain is "terrible creatures that weaken their enemies permanently".
 
-A damage modifier rule (this is the wisps of pain take less damage rule):
-	if the global defender is the wisps of pain:
-		say " - 5 (hard to damage)[run paragraph on]";
-		decrease the attack damage by 5.
+A remove general damage rule (this is the wisps of pain take less damage rule):
+	if victim is the wisps of pain:
+		remove 5 points of general damage with reason "hard to damage".
 
 When play begins:
 	let X be a random natural weapon part of the wisps of pain;
@@ -973,7 +970,7 @@ When play begins:
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
 	now the printed name of X is "necromantic magic";
-	now material of X is darkness.	
+	now material of X is darkness.
 
 Section - Wisps of pain images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)	
 
@@ -1657,7 +1654,7 @@ The description of the reaper is "He once used to be a man like any other, but h
 
 The soul description of the Reaper is "a black hood hanging in air".
 
-The health of the Reaper is 26.
+The health of the Reaper is 23.
 The melee of the Reaper is 1.
 The defence of the Reaper is 8.
 
@@ -2026,12 +2023,12 @@ An attack modifier rule (this is the howl attack bonus rule rule):
 		if the numbers boolean is true, say " + 4 (howling)[run paragraph on]";
 		increase the attack strength by 4.	
 
-A damage modifier rule (this is the howl damage bonus rule):
-	if the global attacker is at-howl:
-		let n be final mind of the player / 3;
-		increase n by 2;
-		if the numbers boolean is true, say " + [n] (howling)[run paragraph on]";
-		increase the attack damage by n.
+An add general damage rule (this is the howl damage bonus rule):
+	if damage-by-hitting is true:
+		if the global attacker is at-howl:
+			let n be final mind of the global attacker / 3;
+			increase n by 2;
+			add n points of general damage with reason "howling".
 			
 Aftereffects rule (this is the take away howling rule):
 	now the global attacker is not at-howl.
@@ -2198,10 +2195,10 @@ An attack modifier rule (this is the power of the hound attack modifier rule):
 		say " + 2 (counterstrike)[run paragraph on]";
 		increase the attack strength by 2;
 
-A damage modifier rule (this is the power of the hound damage modifier rule):
-	if hound status is 1 and the global defender is the hound provoker:
-		say " + 2 (counterstrike)[run paragraph on]";
-		increase the attack damage by 2;
+An add specific damage rule (this is the power of the hound damage modifier rule):
+	if damage-by-hitting is true:
+		if hound status is 1 and the victim is the hound provoker:
+			add 2 points of physical damage with reason "counterstrike".
 
 An AI action selection rule for the hound (this is the hound likes to counterstrike but never parries rule):
 	[ Attack with the instant response turn]
@@ -2846,10 +2843,10 @@ An attack modifier rule (this is the betrayal attack modifier rule):
 		if the numbers boolean is true, say " + 6 (betrayed by [master])[run paragraph on]";
 		increase the attack strength by 6.
 
-A damage modifier rule (this is the betrayel damage bonus rule):
-	if the global defender is betrayed:
-		if the numbers boolean is true, say " + 4 (betrayed by [master])[run paragraph on]";
-		increase the attack damage by 4.
+An add specific damage rule (this is the betrayel damage bonus rule):
+	if damage-by-hitting is true:
+		if the victim is betrayed:
+			add 4 points of physical damage with reason "betrayed by [master]".
 
 AI action selection rule for a person (called P) (this is the betrayed people always wait rule):
 	if P is betrayed:
@@ -3313,12 +3310,12 @@ Absorbing power of minotaur:
 	increase permanent health of the player by 17;
 	say "As the minotaur dies, you feel its soul absorbed into your own body. ([bold type]Power of the minotaur[roman type]: +3 attack,  +2 defence, +17 health; ability to use the minotaur's axe; faculty bonus in the maze; a (your body)% chance of dealing 10 bonus damage when attacking with an axe.)[paragraph break]".
 
-A damage modifier rule (this is the power of the minotaur damage bonus rule):
-	if the power of the minotaur is granted and the actor is the player and the global attacker weapon is an axe:
-		let n be final body of the player;
-		if a random chance of n in 100 succeeds:
-			if the numbers boolean is true, say " + 10 (axe proficiency)[run paragraph on]";
-			increase the attack damage by 10.
+An add specific damage rule (this is the power of the minotaur damage bonus rule):
+	if damage-by-hitting is true:
+		if the power of the minotaur is granted and the actor is the player and the global attacker weapon is an axe:
+			let n be final body of the player;
+			if a random chance of n in 100 succeeds:
+				add 10 points of physical damage with reason "axe proficiency".
 
 A faculty bonus rule (this is the power of the minotaur faculty bonus rule):
 	if location of the test subject is the maze:
@@ -3685,15 +3682,6 @@ An attack modifier rule (this is the do not parry with metal weapons against Bod
 				say " + 5 ([global defender weapon] acts as a lightning rod)[run paragraph on]";
 			increase the attack strength by 5.
 
-A damage modifier rule (this is the iron or silver suit acts as a faraday cage rule):
-	if the global attacker is Bodmall:
-		if the global defender wears an iron suit or the global defender wears a silver suit:
-			let X be a random suit worn by the global defender;
-			if the numbers boolean is true:
-				say " - 3 ([the X] acts as a Faraday cage)[run paragraph on]";
-			decrease the attack damage by 3.
-
-
 
 Section - Bodmall power - Barkskin
 
@@ -3711,11 +3699,10 @@ Carry out Bodmall Bodmall-barkskinning:
 
 A person can be barkskinned. A person is usually not barkskinned.
 
-A damage modifier rule (this is the barkskin decreases damage rule):
-	if the global defender is barkskinned:
-		unless the global attacker weapon is an axe:
-			if the numbers boolean is true, say " - 1 (barkskin)[run paragraph on]";
-			decrease the attack damage by 1.
+A remove specific damage rule (this is the barkskin decreases damage rule):
+	if the victim is barkskinned:
+		unless ((damage-by-hitting is true) and (the global attacker weapon is an axe)):
+			remove 1 points of physical damage with reason "barkskin".
 
 Barkskin is a part of Bodmall. Understand "skin" and "bark" as barkskin.
 
@@ -4949,20 +4936,19 @@ An attack modifier rule (this is the link concentration attack modifier rule):
 			say " + ", the bonus, " ([possessive of linked guy of the actor] concentration)[run paragraph on]";
 		increase the attack strength by the bonus.
 
-Rule for damage modifier (this is the link concentration damage modifier rule):
-	now world test subject is the actor;
-	if a worldsharer person is linked to the actor:
-		let the bonus be 0;
-		if the concentration of linked guy of the actor is:
-			-- 2:
-				now the bonus is 2;
-			-- 3:
-				now the bonus is 4;
-			-- otherwise:
-				make no decision;
-		if the numbers boolean is true:
-			say " + ", the bonus, " ([possessive of linked guy of the actor] concentration)[run paragraph on]";
-		increase the attack damage by the bonus.
+An add specific damage rule (this is the link concentration damage modifier rule):
+	if damage-by-hitting is true:
+		now world test subject is the actor;
+		if a worldsharer person is linked to the actor:
+			let the bonus be 0;
+			if the concentration of linked guy of the actor is:
+				-- 2:
+					now the bonus is 2;
+				-- 3:
+					now the bonus is 4;
+				-- otherwise:
+					make no decision;
+			add bonus points of physical damage with reason "link".
 
 Status attribute rule (this is the link status rule):
 	now world test subject is the player;
@@ -6205,12 +6191,12 @@ An attack modifier rule (this is the malignant chanter attack bonus rule):
 				if the numbers boolean is true, say " + [concentration of the malignant chanter] (malignant chanter)[run paragraph on]";
 				increase the attack strength by concentration of the malignant chanter.
 
-A damage modifier rule (this is the malignant chanter damage bonus rule):
-	if the location encloses the malignant chanter:
-		if the global attacker is undead and the global attacker is not the malignant chanter:
-			if concentration of the malignant chanter is greater than 0:
-				if the numbers boolean is true, say " + [concentration of the malignant chanter] (malignant chanter)[run paragraph on]";
-				increase the attack damage by concentration of the malignant chanter.
+An add specific damage rule (this is the malignant chanter damage bonus rule):
+	if damage-by-hitting is true:
+		if the location encloses the malignant chanter:
+			if the global attacker is undead and the global attacker is not the malignant chanter:
+				if concentration of the malignant chanter is greater than 0:
+					add (concentration of the malignant chanter) points of physical damage with reason "malignant chanter".
 		
 Chance to win rule when the location encloses the malignant chanter (this is the CTW malignant chanter rule):
 	if the global attacker is undead and the global attacker is not the malignant chanter:

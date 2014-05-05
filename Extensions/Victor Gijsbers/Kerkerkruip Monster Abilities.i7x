@@ -447,7 +447,7 @@ An add specific damage rule (this is the bloodlusting damage bonus rule):
 		if the global attacker is bloodlusting:
 			let n be bloodlust of global attacker;
 			if n is not 0:
-				add n points of physical damage with reason "bloodlust", unconditionally.
+				add n points of physical damage with reason "bloodlust".
 
 Section - Status
 
@@ -590,7 +590,7 @@ An add specific damage rule (this is the insane people sometimes get insane dama
 	if damage-by-hitting is true:
 		if global attacker is insane and global attacker weapon is not size-agnostic:
 			if a random chance of 1 in 8 succeeds:
-				add 10 points of physical damage with reason "insane burst of strength", unconditionally.
+				add 10 points of physical damage with reason "insane burst of strength".
 
 Chapter - Beloved of Aite
 
@@ -673,7 +673,7 @@ An attack modifier rule (this is the asleep gives attack bonus rule):
 An add specific damage rule (this is the asleep damage bonus rule):
 	if damage-by-hitting is true: [this only works for attacks]
 		if victim is just-woken:
-			add 2 points of physical damage with reason "defender was asleep", unconditionally.
+			add 2 points of physical damage with reason "defender was asleep".
 
 Last carry out an actor hitting (this is the remove just-woken rule):
 	now global defender is not just-woken.

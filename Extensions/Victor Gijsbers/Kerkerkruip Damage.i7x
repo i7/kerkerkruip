@@ -85,10 +85,10 @@ To deal (n - a number) points of (type - a damage type):
 
 Section - Adding specific damage
 
-[Effects that add damage to an already established damage profile should do so using this phrase. You can add damage normally, which means conditional on damage of that type already being dealt; or unconditionally, which means that it should be dealt anyway. Heat vulnerability -- which adds 2 damage when heat damage is being dealt -- should add 2 points of heat damage; while a curse that adds 2 heat damage to any damage you get from any source should add the damage unconditionally.]
+[Effects that add damage to an already established damage profile should do so using this phrase. You can add damage normally, which means the damage is always added; or conditional on damage of that type already being dealt. Heat vulnerability -- which adds 2 damage when heat damage is being dealt -- should add 2 points of heat damage conditionally; while a curse that adds 2 heat damage to any damage you get from any source should add the damage normally.]
 
-To add (n - a number) points of (type - a damage type) with reason (reason - some text), unconditionally:
-	if unconditionally or type is activated:
+To add (n - a number) points of (type - a damage type) with reason (reason - some text), conditionally:
+	if not conditionally or type is activated:
 		increase harm of type by n;
 		unless n is 0:
 			unless damage silence is true:
@@ -290,7 +290,7 @@ The offensive flow damage modifier rule is not listed in any rulebook.
 An add specific damage rule (this is the new offensive flow damage modifier rule):
 	if damage-by-hitting is true:
 		let bonus be offensive flow of the global attacker;
-		add bonus points of physical damage with reason "offensive flow", unconditionally.
+		add bonus points of physical damage with reason "offensive flow".
 
 The standard tension damage modifier rule is not listed in any rulebook.
 
@@ -301,7 +301,22 @@ An add general damage rule (this is the new tension damage modifier rule):
 			add bonus points of general damage with reason "tension".
 
 
-Section - Testing
+
+
+Chapter - Special damage rules
+
+A remove specific damage rule (this is the iron or silver suit acts as a faraday cage rule):
+	if material of damage-source is electricity:
+		if the victim wears an iron suit or the victim wears a silver suit:
+			remove 3 points of physical damage with reason "suit acts as a Faraday cage".
+
+
+
+
+
+
+
+Chapter - Testing
 
 Testdamaging is an action applying to nothing. Understand "testdamage" as testdamaging.
 

@@ -593,12 +593,10 @@ Instead of attacking the statue of Chton:
 	
 Chton-killing is a truth state that varies. Chton-killing is false.
 
-A damage modifier rule (this is the Chton-killing rule):
+An add specific damage rule (this is the Chton-killing rule):
 	if Chton-killing is true:
-		if the global defender is the player:
-			if the numbers boolean is true:
-				say " + 2 (the deadly cold of Chton's wrath)[run paragraph on]";
-			increase the attack damage by 2.
+		if the victim is the player:
+			add 2 points of divine damage with reason "Chton's wrath pulls you to your grave".
 
 Instead of touching the statue of Chton:
 	say "It feels as cold as death.".
