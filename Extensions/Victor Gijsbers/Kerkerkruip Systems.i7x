@@ -1240,19 +1240,13 @@ After damage rule:
 	turn on mentioning rust.
 
 
-Section - Weapon penalty
+Section - Damage penalty
 
-A damage modifier rule (this is the rust decreases damage rule):
-	if the global attacker weapon is rusted:
-		say " - 2 (rust)[run paragraph on]";
-		decrease the attack damage by 2.
+A remove specific damage rule (this is the rust decreases damage rule):
+	if damage-source is rusted:
+		remove 2 points of physical damage with reason "rust".
 
 Section - Rusted monster penalty
-
-A damage modifier rule (this is the rusted monster decreases damage rule):
-	if the global attacker is rusted:
-		say " - 2 (rust)[run paragraph on]";
-		decrease the attack damage by 2.
 
 An attack modifier rule (this is the rusted monster decreases attack rule):
 	if the global attacker is rusted:
@@ -1290,12 +1284,17 @@ Every turn (this is the rust spores rust iron rule):
 		repeat with item running through iron not rusted corruptible things enclosed by place: [iron mentioned for speed]
 			unless item is enclosed by a closed container:
 				if item can rust:
-					if a random chance of 1 in 6 succeeds:
-						now item is rusted;
-						if player can see item:
-							turn off mentioning rust;
-							say "As rust spores whirl around the room, [the item] rust[unless item is plural-named][s][end if].";
-							turn on mentioning rust.
+					unless (item is a natural weapon and item is part of an iron person):
+						if a random chance of 1 in 6 succeeds:
+							now item is rusted;
+							if item is a person:
+								let X be a random natural weapon part of item;
+								if X is iron:
+									now X is rusted;
+							if player can see item:
+								turn off mentioning rust;
+								say "As rust spores whirl around the room, [the item] rust[unless item is plural-named][s][end if].";
+								turn on mentioning rust.
 
 
 Section - Rusting rules

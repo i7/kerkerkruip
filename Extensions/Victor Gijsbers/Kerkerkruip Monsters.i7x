@@ -1210,7 +1210,8 @@ When play begins:
 	now parry-with bonus of X is 1;
 	now the printed name of X is "lashing chains";
 	now X is ranged;
-	now X is plural-named.
+	now X is plural-named;
+	now material of X is iron.
 
 First carry out an actor attacking the chain golem (this is the attack a spinning chain golem rule):
 	if the chain golem is conscious:
