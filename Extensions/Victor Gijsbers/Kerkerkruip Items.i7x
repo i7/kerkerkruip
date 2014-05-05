@@ -1174,12 +1174,16 @@ A treasure placement rule (this is the sandals can be heretical rule):
 
 Section - Sandals of the heretic (cursed)
 
-The sandals of the heretic are cursed curse-identified shoes. The sandals of the heretic are plural-named. The indefinite article of the sandals of the heretic is "the". The description of the sandals of the heretic is "Simple sandals, but they have been imbued with special significance ever since the infamous heretic Volter used them to trample a high priest. Wearing these slippers will make it impossible to sacrifice powers to the gods.".
+The sandals of the heretic are cursed curse-identified shoes. The sandals of the heretic are plural-named. The indefinite article of the sandals of the heretic is "the". The description of the sandals of the heretic is "Simple sandals, but they have been imbued with special significance ever since the infamous heretic Volter used them to trample a high priest. Wearing these slippers will make it impossible to sacrifice powers to the gods, but does grant you 2 resistance against divine damage.".
 
 Check sacrificing (this is the cannot sacrifice when wearing heretical sandals rule):
 	if the player wears the sandals of the heretic:
 		take no time;
 		say "The gods will not listen to your prayers while you are wearing such heretical footwear." instead.
+		
+A remove specific damage rule (this is the sandals of the heretic rule):
+	if victim wears sandals of the heretic:
+		remove 2 points of divine damage with reason "sandals of the heretic".
 
 Chapter - Trousers
 
