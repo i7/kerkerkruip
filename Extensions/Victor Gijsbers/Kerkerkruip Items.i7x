@@ -2926,11 +2926,12 @@ The blood magic cost of sneaking sword is 2.
 The blood magic level of sneaking sword is 1.
 The blood magic maximum of sneaking sword is 99.
 
-A damage modifier rule (this is the sneaking sword damage bonus rule):
-	if the global attacker weapon is the sneaking sword:
-		if the global attacker is hidden:
-			say " + [blood magic level of sneaking sword] (sneaky attack)[run paragraph on]";
-			increase the attack damage by blood magic level of sneaking sword.
+An add specific damage rule (this is the sneaking sword damage bonus rule):
+	if damage-by-hitting is true:
+		if damage-source is the sneaking sword:
+			if the global attacker is hidden:
+				let n be blood magic level of sneaking sword;
+				add n points of physical damage with reason "sneaky attack".
 
 A treasure placement rule (this is the sneaking sword can be singing sword rule):
 	if a random chance of 1 in 5 succeeds:
@@ -3011,13 +3012,13 @@ Detection rule (this is the holy sword detection rule):
 		say " - 2 (holy sword)[run paragraph on]";
 		decrease the hiding roll by 2.
 
-A damage modifier rule (this is the holy sword damage bonus rule):
-	if the global attacker weapon is the holy sword:
-		if the global defender is undead or global defender is demonic:
-			let n be (final spirit of global attacker / 4);
-			if n > 0:
-				say " + ", n, " (holiness)[run paragraph on]";
-				increase the attack damage by n.
+An add specific damage rule (this is the holy sword damage bonus rule):
+	if damage-by-hitting is true:
+		if damage-source is the holy sword:
+			if the global defender is undead or global defender is demonic:
+				let n be (final spirit of global attacker / 4);
+				if n > 0:
+					add n points of divine damage with reason "holiness".
 
 Section - Immaculate sword (monster)
 
@@ -3052,12 +3053,12 @@ The sword of light is a sword. It is radiance. The description of the sword of l
 
 The special weapon info of the sword of light is "; damage increases with the wielder's angelic radiance[run paragraph on]".
 
-A damage modifier rule (this is the sword of light damage bonus rule):
-	if the global attacker weapon is the sword of light:
-		let n be radiation of the global attacker;
-		if n > 0:
-			say " + ", n, " (sword of light radiance bonus)[run paragraph on]";
-			increase the attack damage by n.
+An add specific damage rule (this is the sword of light damage bonus rule):
+	if damage-by-hitting is true:
+		if the damage-source is the sword of light and damage-material is radiance:
+			let n be radiation of the global attacker;
+			if n > 0:
+				add n points of physical damage with reason "sword of light radiance bonus".
 
 
 Chapter - Rapier
@@ -3106,13 +3107,12 @@ Chance to win rule when the chosen weapon is a dagger (this is the CTW dagger co
 	let n be the tension divided by 2;
 	increase the chance-to-win by n.
 		
-A damage modifier rule (this is the dagger extra tension damage bonus rule):
-	if the global attacker weapon is a dagger:
-		let n be 0;
-		now n is the tension divided by 4;
-		if n is not 0:
-			say " + ", n, " (dagger benefits from tension)[run paragraph on]";
-			increase the attack damage by n.
+An add general damage rule (this is the dagger extra tension damage bonus rule):
+	if damage-by-hitting is true:
+		if the damage-source is a dagger:
+			let n be the tension divided by 4;
+			if n is not 0:
+				add n points of general damage with reason "dagger benefits from tension".
 
 The special weapon info of a dagger is usually "; benefits from tension[run paragraph on]".
 
@@ -3255,13 +3255,13 @@ A dungeon interest rule (this is the set giantbane size rule):
 
 The description of Giantbane is "This dagger deals massive damage to big creatures, the damage bonus increasing as the size of the wielder and that of the victim differ more.".
 
-A damage modifier rule (this is the Giantbane damage bonus rule):
-	if the global attacker weapon is Giantbane:
-		let n be the size difference of the global attacker and the global defender;
-		if n is greater than 0:
-			now n is n + 2;
-			say " + ", n, " (Giantbane's special)[run paragraph on]";
-			increase the attack damage by n.
+An add specific damage rule (this is the Giantbane damage bonus rule):
+	if damage-by-hitting is true:
+		if damage-source is Giantbane:
+			let n be the size difference of the global attacker and the global defender;
+			if n is greater than 0:
+				now n is n + 2;
+				add n points of physical damage with reason "Giantbane's special".
 
 			
 Section - Dagger of draining (monster)

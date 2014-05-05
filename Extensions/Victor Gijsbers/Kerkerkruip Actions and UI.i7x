@@ -107,10 +107,10 @@ An attack modifier rule (this is the running is risky rule):
 		say " + 3 (you are running)[run paragraph on]";
 		increase the attack strength by 3.
 
-A damage modifier rule (this is the running is very risky rule):
-	if the global defender is a runner pc:
-		say " + 1 (you are running)[run paragraph on]";
-		increase the attack damage by 1.
+An add specific damage rule (this is the running is very risky rule):
+	if damage-by-hitting is true:
+		if the victim is a runner pc:
+			add 1 points of physical damage with reason "you are running".
 
 
 

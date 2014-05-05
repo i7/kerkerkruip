@@ -2128,10 +2128,9 @@ Section - Pseudopods
 
 Section - Disintegrating flesh
 
-A damage modifier rule (this is the disintegrating flesh damage modifier rule):
-	if the global defender is the player and disintegrating flesh is adapted:
-		say " + 1 (disintegrating flesh)[run paragraph on]";
-		increase the attack damage by 1.
+An add specific damage rule (this is the disintegrating flesh damage modifier rule):
+	if the victim is the player and disintegrating flesh is adapted:
+		add 1 points of physical damage with reason "disintegrating flesh".
 
 
 Section - Metallic scales
