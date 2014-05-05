@@ -747,8 +747,8 @@ Intervention possible when intervention-god is Sul:
 	if the global defender opposes intervention-guy and the global defender is not intervention-guy, rule fails;
 	rule succeeds.
 
-To decide whether Sul will protect the global defender:
-	Now the opposition test subject is the global defender;
+To decide whether Sul will protect (guy - a person):
+	Now the opposition test subject is guy;
 	Now the worship test god is Sul;
 	Let the intercessor be a random worshipper not opposer person in the location;
 	Unless the intercessor is a person, no;
@@ -756,10 +756,9 @@ To decide whether Sul will protect the global defender:
 	
 The intervention rarity of Sul is 40.
 
-A damage multiplier rule when someone worships sul (this is the sul sometimes prevents damage rule):
-	if Sul will protect the global defender:
-		say "[bold type] - 100% (Sul intervenes)[roman type][run paragraph on]";
-		now the attack damage is 0.
+A general damage multiplier rule when someone worships sul (this is the sul sometimes prevents damage rule):
+	if Sul will protect the victim:
+		multiply general damage by 0 percent with reason "Sul intervenes".
 
 
 Chapter - Chton

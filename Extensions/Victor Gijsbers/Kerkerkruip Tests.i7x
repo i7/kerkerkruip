@@ -221,12 +221,11 @@ Attack modifier rule (this is the smiting guarantees hit rule):
 		say " + 100 (smiting)[run paragraph on]";
 		increase the attack strength by 100;
 
-Last damage multiplier rule (this is the smiting overrides damage multiplier rule):
-	if the global attacker is smiter:
-		say " (reset to 100 by smiting)[run paragraph on]";
-		now the attack damage is 100;
-
-The standard show the attack damage dealt rule is listed after the smiting overrides damage multiplier rule in the damage multiplier rules.
+Last general damage multiplier rule (this is the smiting overrides damage multiplier rule):
+	if damage-by-hitting is true:
+		if the global attacker is smiter:
+			say " (reset to 100 by smiting)[run paragraph on]";
+			now total damage is 100;
 
 Ramboing is an action applying to nothing. Understand "rambo" as ramboing.
 

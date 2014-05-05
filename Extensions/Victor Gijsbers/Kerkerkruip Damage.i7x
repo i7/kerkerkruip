@@ -264,25 +264,30 @@ The consider the damage multiplier rules rule is not listed in any rulebook.
 The standard show the attack damage dealt rule is not listed in any rulebook.
 The subtract damage from health rule is not listed in any rulebook.
 
+Override-normal-attack-damage-rule is a truth state that varies. Override-normal-attack-damage-rule is false.
+
 Carry out an actor hitting (this is the set up attack damage rule):
-	unless damage die of the global attacker weapon is less than 1:
-		now the attack damage is a random number between 1 and the damage die of the global attacker weapon;
-	increase the attack damage by weapon damage bonus of the global attacker weapon; [1d(damage die) + WDB]
-	if the numbers boolean is true:
-		say "[roman type][The global attacker] deal[s] ", the attack damage, "[run paragraph on]";
-	now harm of physical damage is attack damage;
-	now damage-by-hitting is true;	
-	have global attacker weapon inflict damage on the global defender;  [The crucial line.]
-	if the the total damage is less than 1:
-		say ", allowing [the global defender] to escape unscathed.[run paragraph on]";
-	otherwise:
-		[non-fatal]
-		if the health of the global defender is greater than 0:
-			say ", wounding [the global defender] to ", health of the global defender, " health.[run paragraph on]" ;
-		[fatal]
+	if override-normal-attack-damage-rule is false:
+		unless damage die of the global attacker weapon is less than 1:
+			now the attack damage is a random number between 1 and the damage die of the global attacker weapon;
+		increase the attack damage by weapon damage bonus of the global attacker weapon; [1d(damage die) + WDB]
+		if the numbers boolean is true:
+			say "[roman type][The global attacker] deal[s] ", the attack damage, "[run paragraph on]";
+		now harm of physical damage is attack damage;
+		now damage-by-hitting is true;	
+		have global attacker weapon inflict damage on the global defender;  [The crucial line.]
+		if the the total damage is less than 1:
+			say ", allowing [the global defender] to escape unscathed.[run paragraph on]";
 		otherwise:
-			say ", killing [the name of the global defender].[run paragraph on]";
-	say "[roman type][paragraph break]".
+			[non-fatal]
+			if the health of the global defender is greater than 0:
+				say ", wounding [the global defender] to ", health of the global defender, " health.[run paragraph on]" ;
+			[fatal]
+			otherwise:
+				say ", killing [the name of the global defender].[run paragraph on]";
+		say "[roman type][paragraph break]";
+	otherwise:
+		now override-normal-attack-damage-rule is false.
 
 The standard damage roll rule is not listed in any rulebook.
 The offensive flow damage modifier rule is not listed in any rulebook.
@@ -300,8 +305,8 @@ An add general damage rule (this is the new tension damage modifier rule):
 		if the bonus is not 0:
 			add bonus points of general damage with reason "tension".
 
-
-
+The can't deal negative damage rule is not listed in any rulebook.
+The standard show the attack damage dealt rule is not listed in any rulebook.
 
 Chapter - Special damage rules
 

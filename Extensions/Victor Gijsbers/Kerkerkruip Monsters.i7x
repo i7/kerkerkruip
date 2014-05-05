@@ -3108,22 +3108,33 @@ Report giant tentacle waiting when giant tentacle is insane:
 	say "The giant tentacle tries to hide by imitating a leaf of grass.";
 	rule succeeds.	
 
-[ This is almost the same as the standard show the attack damage dealt rule, except with the option to mention that the tentacle still holds on to the defender. ]
-Last damage multiplier rule when the global attacker is the giant tentacle (this is the show the damage dealt by the giant tentacle rule):
-	say " = [bold type]", the attack damage, " damage[roman type][italic type], ";
-	if the attack damage is less than 1: [no damage]
-		unless the giant tentacle grapples the global defender:
-			say "allowing [the global defender] to escape unscathed.[run paragraph on]";
+[ This is almost the same as the set up attack damage rule, except with the option to mention that the tentacle still holds on to the defender. ]
+Carry out an actor hitting (this is the show the damage dealt by the giant tentacle rule):
+	if global attacker is the giant tentacle:
+		now override-normal-attack-damage-rule is true;
+		unless damage die of the global attacker weapon is less than 1:
+			now the attack damage is a random number between 1 and the damage die of the global attacker weapon;
+		increase the attack damage by weapon damage bonus of the global attacker weapon; [1d(damage die) + WDB]
+		if the numbers boolean is true:
+			say "[roman type][The global attacker] deal[s] ", the attack damage, "[run paragraph on]";
+		now harm of physical damage is attack damage;
+		now damage-by-hitting is true;	
+		have global attacker weapon inflict damage on the global defender;  [The crucial line.]
+		if the the total damage is less than 1:
+			unless the giant tentacle grapples the global defender:
+				say "allowing [the global defender] to escape unscathed.[run paragraph on]";
+			otherwise:
+				say "but holds on to [the global defender].[run paragraph on]";
 		otherwise:
-			say "but holds on to [the global defender].[run paragraph on]";
-	otherwise:
-		if the attack damage is less than the health of the global defender: [non-fatal]
-			say "wounding [the global defender] to ", health of the global defender minus the attack damage, " health.[run paragraph on]" ;
-		otherwise: [fatal]
-			say "killing [the name of the global defender].[run paragraph on]";
-	say "[roman type][paragraph break]";
-	rule succeeds.
-The standard show the attack damage dealt rule is listed after the show the damage dealt by the giant tentacle rule in the damage multiplier rules.
+			[non-fatal]
+			if the health of the global defender is greater than 0:
+				say ", wounding [the global defender] to ", health of the global defender, " health.[run paragraph on]" ;
+			[fatal]
+			otherwise:
+				say ", killing [the name of the global defender].[run paragraph on]";
+		say "[roman type][paragraph break]".
+
+The show the damage dealt by the giant tentacle rule is listed before the set up attack damage rule in the carry out hitting rules.
 
 
 
@@ -5599,10 +5610,10 @@ An attack modifier rule (this is the rotting corpse defense modifier rule):
 			say " + 4 (corpse missing both legs)[run paragraph on]";
 			increase the attack strength by 4.
 
-A damage multiplier rule (this is the limbless rotting corpse can't attack rule):
-	if the global attacker is the rotting corpse and limbs of the rotting corpse is 0:
-		say " - 100% (no means of attack)[run paragraph on]";
-		now the attack damage is 0.
+A general damage multiplier rule (this is the limbless rotting corpse can't attack rule):
+	if damage-by-hitting is true:
+		if the global attacker is the rotting corpse and limbs of the rotting corpse is 0:
+			multiply general damage by 0 percent with reason "no means of attack".
 
 
 Section - Rotting corpse images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
@@ -6557,23 +6568,16 @@ Report the smoke demon concentrating:
 			say "The smoke demon becomes even denser and now seems almost material.";
 	rule succeeds.
 
-A damage multiplier rule when the global defender is the smoke demon (this is the smoke demon denseness multiplier rule):
+A specific damage multiplier rule when the victim is the smoke demon (this is the smoke demon denseness multiplier rule):
 	if concentration of the smoke demon is:
 		-- 1:
-			say " + 25% (smoke demon is somewhat dense)[run paragraph on]";
-			increase the attack damage by the attack damage divided by 4;
+			multiply physical damage by 125 percent with reason "smoke demon is somewhat dense";
 		-- 2:
-			say " +50% (smoke demon is quite dense)[run paragraph on]";
-			increase the attack damage by the attack damage divided by 2;		
+			multiply physical damage by 150 percent with reason "smoke demon is quite dense";
 		-- 3:
-			say " + 75% (smoke demon is very dense)[run paragraph on]";
-			let n be the attack damage divided by 4;
-			now the attack damage is the attack damage times 2;
-			decrease the attack damage by n;
+			multiply physical damage by 175 percent with reason "smoke demon is very dense";
 		-- 4:
-			say " + 100% (smoke demon is extremely dense)[run paragraph on]";
-			now the attack damage is the attack damage times 2.
-
+			multiply physical damage by 200 percent with reason "smoke demon is extremely dense".
 
 
 

@@ -2865,6 +2865,7 @@ Chapter - Other readables
 Section - Ancient papyrus
 
 The ancient papyrus is a minor thing. The ancient papyrus is paper and readable.
+The ancient papyrus is deathly.
 
 The description of the ancient papyrus is "This almost crumbling document contains a spell that may bless you or curse you. There's no way of knowing which without reading it -- and even then, the effects may not be immediately apparent.".
 
@@ -3941,10 +3942,10 @@ An attack modifier rule (this is the rod of master builder attack modifiers rule
 			say " - 2 (rod of the master builder)[run paragraph on]";
 			decrease the attack strength by 2.
 
-A damage multiplier rule when the player has the rod of the master builder (this is the rod of master builder damage multiplier rule):
-	if the global defender is the player and (the player is retreater or the player is runner):
-		say " - 50% (rod of the master builder)[run paragraph on]";
-		now the attack damage is the attack damage divided by 2.
+A general damage multiplier rule when the player has the rod of the master builder (this is the rod of master builder damage multiplier rule):
+	if damage-by-hitting is true:
+		if the victim is the player and (the player is retreater or the player is runner):
+			multiply general damage by 50 percent with reason "rod of the master builder".
 
 Instead of readying the rod of the master builder:
 	say "It is not weapon. You can use it without readying it.".
