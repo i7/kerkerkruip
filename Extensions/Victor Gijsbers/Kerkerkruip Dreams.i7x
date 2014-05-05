@@ -147,7 +147,7 @@ Instead of going up in garden of thorns:
 		end the game saying "You never abandoned your true love. Few people can say that.";
 	otherwise:
 		say "You must climb the roses. You must. What is life worth if a [if the player is male]man[otherwise if the player is female]woman[otherwise]being[end if] gives up the attempt to find [if the player is male]his[otherwise if the player is female]her[otherwise]its[end if] true love? So you start climbing. The thorns prick you, and soon blood trickles down your hands and arms. But you climb on ...[paragraph break]";
-		decrease health of the player by 3;
+		decrease health of the player by 3;  [Not using the damage system; this dream damage bypasses all effects.]
 		wait for any key;
 		let n be a random number between 1 and 2;
 		say "At long last you reach the window, and collapse into the tower room. There, on the stately bed, lies the [if n is 1]man[otherwise]woman[end if] you have been longing for all your life. And [if n is 1]his[otherwise]her[end if] beauty is ...[paragraph break]";
@@ -309,7 +309,7 @@ A menu question rule (this is the banquet selection rule):
 To prepare a feast of (the entree - a person):
 	say "You make your choice, and two large butchers enter carrying a large serving platter with [bold type][the entree][roman type] strapped to it. They set the platter down on the table.[paragraph break]The other denizens of Kerkerkruip file in behind and take their places. As the butchers hack off pieces of [the entree] with heavy cleavers, the guests grab them eagerly and stuff them into their drooling orifices. [paragraph break]";
 	let the serving size be a random number between 5 and 10;
-	let overflow be the serving size - health of entree;
+	let overflow be the serving size - health of entree; [Not using the damage system; dream damage bypasses all realistic systems.]
 	decrease health of entree by the serving size;
 	if overflow > 0:
 		say "The guests consume their victim completely, and then they [bold type]turn on you![roman type][paragraph break]";
@@ -383,7 +383,7 @@ Instead of opening a container in Monty Hall:
 		move the lion's shield to the player;
 		say "As you carefully open [the noun], a fierce growl emanates from within. You hesitate, but the lid continues to rise even without your assistance. Inside the chest, you see a beautiful shield with the head of a lion painted on it. As you grab the shield, the lion's tongue comes out and licks your affectionately.";
 	otherwise:
-		now permanent health of the dreamer is 1;
+		now permanent health of the dreamer is 1;  [Bypassing the damage system.]
 		now health of the dreamer is 1;
 		say "As you carefully open [the noun], the glow of gold and gems welcomes you. Filled with joy you throw open the lid -- and a demonic being with golden skin and glowing eyes jumps out and starts tearing you apart with its monstrous claws.[paragraph break][bold type]When you wake up, the wounds have not healed.[roman type][paragraph break]";
 	wake the player up.

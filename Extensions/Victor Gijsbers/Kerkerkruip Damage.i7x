@@ -306,7 +306,6 @@ An add general damage rule (this is the new tension damage modifier rule):
 			add bonus points of general damage with reason "tension".
 
 The can't deal negative damage rule is not listed in any rulebook.
-The standard show the attack damage dealt rule is not listed in any rulebook.
 
 Chapter - Special damage rules
 

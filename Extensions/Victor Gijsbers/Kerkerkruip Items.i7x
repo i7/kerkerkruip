@@ -1375,13 +1375,6 @@ An AI action selection rule for a person (called P) (this is the concentrate to 
 		choose row with an Option of the action of P concentrating in the Table of AI Action Options;
 		increase the Action Weight entry by 4.
 
-[Every turn when the main actor wears the dragon armour:
-	if the health of the main actor is greater than 0:
-		if the main actor is not undead or a random chance of 1 in 3 succeeds:
-			if a random chance of 1 in 2 succeeds:
-				decrease the health of the main actor by 1;
-		if the health of the main actor is less than 1:
-			end the story saying "The dragon armour has claimed your life".]
 
 
 
@@ -1711,7 +1704,7 @@ An exploding rule (this is the Blessed Grenade explodes rule):
 			if the location is the exploding-location:
 				say "As the grenade explodes you hear the singing of angels, several of whom swoop down from the heavens with huge swords and eviscerate [K with definite articles].";
 			repeat with guy running through K:
-				now health of guy is -1;
+				now health of guy is -1;  [Bypassing the damage system; this is an insta-kill effect.]
 				have an event of the player killing guy;
 			if the player is dead:
 				end the story saying "The undead should not seek blessings.";
@@ -2447,11 +2440,12 @@ An unholy wave rule (this is the standard unholy wave rule):
 	if n is greater than 0:
 		repeat with guy running through all alive not undead persons in the location:
 			let m be a random number between 3 and 6;
-			if guy is deathly-resistant:
-				decrease m by 2;
-			decrease health of guy by m;
-			say "[if n is 1 and original n is not 1]and [end if][m] damage to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive] (which breaks [possessive of the guy] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
-			now concentration of the guy is 0;
+			deal m points of necromantic damage;
+			say "[if n is 1 and original n is not 1]and [end if][run paragraph on]";
+			have no-source inflict damage on guy;
+			say "[m] damage to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive] (which breaks [possessive of the guy] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
+			unless total damage is 0:
+				now concentration of the guy is 0;
 			decrease n by 1;
 			if n is 0:
 				say ""; [For an extra newline. Don't ask.]
@@ -3225,8 +3219,8 @@ The weapon attack bonus of the vampiric dagger is 0.
 The weapon damage bonus of the vampiric dagger is 0.
 
 An aftereffects rule (this is the vampiric dagger leeches rule):
-	if the global attacker weapon is the vampiric dagger and the the attack damage is greater than 0:
-		let n be a random number between 1 and the attack damage;
+	if the global attacker weapon is the vampiric dagger and the total damage is greater than 0:
+		let n be a random number between 1 and the total damage;
 		unless the global attacker is the player and the current form is vampire-form:
 			if n is greater than 1:
 				now n is a random number between 1 and 2;
@@ -3901,7 +3895,7 @@ Instead of drinking vial of purification:
 	let n be 0;
 	if the player worships Chton:
 		say "Chton prevents the vial of purification from doing its work; but your attempt at escaping undeath did not amuse him. A wave of extreme cold racks your body, dealing [bold type]15 damage[roman type]!";
-		decrease health of player by 15;
+		decrease health of player by 15;  [Bypasses damage system.]
 		if the player is dead:
 			end the story saying "Don't worry; Chton will soon raise you as a mindless zombie.";
 	otherwise:

@@ -203,7 +203,7 @@ Every turn when the location is the Arena of the Fallen and the combat status is
 			increase the demon boredom by 2;
 	otherwise if distractionchance > 6:
 		let X be a random number between 1 and distractionchance - 2;
-		decrease the health of guy by X;
+		decrease the health of guy by X;  [The spectators bypass the normal damage system.]
 		say "Disgruntled by  lack of blood, the spectators decide to lend a helping hand. [one of]Grippling claws tears away at[or]A small dagger, coated with a bit of blood, slices[or]Noxious fumes envelop[or]A small rock is flinged at[purely at random] you[if guy is not the player]r opponent[end if], doing [X] damage[if health of guy is less than 1] and killing [the guy][end if]!";
 		now the current dissatisfaction is 0;
 		increase the demon boredom by 2.
@@ -273,13 +273,15 @@ Check ChosenFighting (this is the how did we find the pedestal rule):
 Check ChosenFighting (this is the can't ChosenFight twice rule):
 	if the Arena of the Gods is conquered:
 		take no time;
-		say "You have already fought for the honour of [the patron of the player]!  [It-they] [is-are]n't willing to sit through another fight again.";
+		say "You have already fought for the honour of [the patron of the player]!  [It-they] [is-are]n't willing to sit through another fight.";
 		stop the action.	
 
 To say Divine lightning strikes (guy - a person):
 	let x be a random number between 3 and 7;
-	say "A ball of lightning shoots from the sky, doing [x] damage to [the guy]";
-	decrease the health of the guy by x;
+	say "A ball of lightning shoots from the sky, doing [x][run paragraph on]";
+	deal x points of divine damage;
+	have no-source inflict damage on the guy;
+	say " to [the guy]";
 	if the guy is dead:
 		say ", [bold type]killing [it-them][roman type]";
 

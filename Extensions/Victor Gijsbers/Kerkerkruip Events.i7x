@@ -62,21 +62,14 @@ A fragmentation rule (this is the basic fragmentation damage rule):
 	repeat with guy running through all alive persons in fragmentation-place:
 		let m be a random number between 2 and 5;
 		deal m points of physical damage;
-		[if fragmentation-item is silver:
-			if the guy is undead or the guy is demonic:
-				increase m by 3;]
-		[calculate the pdr for guy;
-		decrease m by pdr;
-		if m is less than 0, now m is 0;	]		
-		[decrease health of guy by m;]
 		if fragmentation-place is the location:
 			say "[if n is 1 and original n is not 1]and [end if][run paragraph on]";
 			have fragmentation-item inflict damage on guy;
 			say " to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive and m is not 0] (which breaks [possessive of the guy] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
 		otherwise:
 			have fragmentation-item inflict damage on guy, silently;	
-		[unless m is 0:
-			now concentration of the guy is 0;]
+		unless m is 0:
+			now concentration of the guy is 0;
 		decrease n by 1;
 		if n is 0:
 			if fragmentation-place is the location:
