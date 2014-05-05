@@ -1227,7 +1227,8 @@ First carry out an actor attacking the chain golem (this is the attack a spinnin
 				unless n is 0:
 					say " One of the chains catches [the actor] with a loud smack, dealing ";
 					deal n points of physical damage;
-					inflict damage on the actor;
+					let X be a random natural weapon enclosed by the chain golem;
+					have X inflict damage on the actor;
 					if the actor is alive:
 						if the concentration of the actor is not zero:
 							say " and breaking [possessive of the actor] concentration.";
@@ -3833,7 +3834,7 @@ The brambles strength is a number that varies. The brambles strength is 0.
 
 Section - The brambles object
 
-The brambles are a thing. "Huge brambles are everywhere." The brambles are plural-named and fixed in place. Understand "bush" and "thorn" and "thorns" and "huge" and "brambles" and "bramble" as the brambles.
+The brambles are a thing. "Huge brambles are everywhere." The brambles are plural-named and fixed in place. Understand "bush" and "thorn" and "thorns" and "huge" and "brambles" and "bramble" as the brambles. The material of the brambles is wood.
 
 The description of the brambles is "Moving through these brambles is possible, but will not be easy[if the power of Bodmall is granted], except for you[end if][if brambles strength is not 0]. There are [thorns size] thorns all over the bushes[end if][if at least one fruit is part of the brambles]. There are also [list of fruits that are part of the brambles] hanging on the branches[end if].".
 
@@ -3980,7 +3981,7 @@ To launch the thorns:
 		let m be a random number between 1 and brambles strength;
 		deal m points of physical damage;
 		say "[if n is 1 and original n is not 1]and [end if][run paragraph on]";
-		inflict damage on guy;
+		have the brambles inflict damage on guy;
 		say " to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive and m is not 0] (which breaks [possessive of the guy] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
 		decrease n by 1;
 		if n is 0:

@@ -1347,11 +1347,11 @@ The blood magic cost of suit of dragon armour is 3.
 The blood magic level of suit of dragon armour is 2.
 The blood magic maximum of suit of dragon armour is 99.
 
-The description of the suit of dragon armour is "This lovely suit has been made of dragon leather, the most durable and most magical substance known to man. Whenever the wearer is hit, the suit absorbs between 0 and [blood magic level of suit of dragon armour] damage. The maximum will increase by 1 when the suit is fed.".
+The description of the suit of dragon armour is "This lovely suit has been made of dragon leather, the most durable and most magical substance known to man. Whenever the wearer is hit, the suit absorbs between 0 and [blood magic level of suit of dragon armour] damage. The maximum will increase by 1 when the suit is fed. Additionally, the armour makes the wearer highly resistant to heat.".
 			
-Heat resistance rule (this is the dragon armour heat resistance rule):
-	if test subject is wearing the suit of dragon armour:
-		increase temp-heat by 4.			
+A remove specific damage rule (this is the dragon armour heat resistance rule):
+	if victim is wearing the suit of dragon armour:
+		remove 4 points of heat damage with reason "dragon armour protects against heat".
 
 [The internal heat of the suit of dragon armour is 4.]
 
@@ -1467,7 +1467,7 @@ Aftereffects rule (this is the lion's shield rule):
 		if the attack damage is 0:
 			if the global attacker weapon is not ranged or the global attacker weapon is a natural weapon:
 				deal 2 points of physical damage;
-				inflict damage on global attacker, silently;
+				have lion's shield inflict damage on global attacker, silently;
 				if total damage is 0:
 					say "The lion on the shield strikes out, biting [the global attacker]. But the lion's teeth are not sharp enough to penetrate and do damage.";
 				otherwise:

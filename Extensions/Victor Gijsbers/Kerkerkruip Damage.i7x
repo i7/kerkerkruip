@@ -12,7 +12,9 @@ Acid damage is a damage type.
 Necromantic damage is a damage type.
 Divine damage is a damage type.
 
+Damage-source is a thing that varies.
 Damage-material is a material that varies.
+No-source is a thing. The material of no-source is other-material.
 
 A damage type can be activated or not activated.
 
@@ -214,8 +216,10 @@ Section - Inflicting damage
 
 [Always call this when you're inflicting damage!]
 
-To inflict damage on (guy - a person), silently:
+To have (source - a thing) inflict damage on (guy - a person), silently:
 	now the victim is guy;
+	now damage-source is source;
+	now damage-material is material of source;
 	now damage comment is false;
 	if silently:
 		now damage silence is true;
@@ -267,9 +271,8 @@ Carry out an actor hitting (this is the set up attack damage rule):
 	if the numbers boolean is true:
 		say "[roman type][The global attacker] deal[s] ", the attack damage, "[run paragraph on]";
 	now harm of physical damage is attack damage;
-	now damage-material is material of the global attacker weapon;
 	now damage-by-hitting is true;	
-	inflict damage on the global defender;  [The crucial line.]
+	have global attacker weapon inflict damage on the global defender;  [The crucial line.]
 	if the the total damage is less than 1:
 		say ", allowing [the global defender] to escape unscathed.[run paragraph on]";
 	otherwise:
@@ -305,6 +308,6 @@ Testdamaging is an action applying to nothing. Understand "testdamage" as testda
 Carry out testdamaging:
 	deal 2 points of physical damage;
 	deal 3 points of divine damage;
-	inflict damage on player.
+	have no-source inflict damage on player.
 
 Kerkerkruip Damage ends here.

@@ -1093,17 +1093,15 @@ Every turn (this is the heat destroys items rule):
 				turn on mentioning hotness;				
 				remove the item from play.
 
+Section - Damage
 
+An add specific damage rule (this is the heat increases damage rule):
+	if the damage-source is hot:
+		unless (damage-by-hitting is true and global attacker weapon is ranged):
+			let n be heat strength of damage-source;
+			add n points of heat damage with reason "[damage-source] [is-are] hot".
 
 Section - Weapons
-
-A damage modifier rule (this is the heat increases damage rule):
-	if the global attacker weapon is hot and the global attacker weapon is not ranged:
-		let n be heat strength of the global attacker weapon;
-		decrease n by heat resistance of global defender;
-		if n greater than 0:
-			say " + [n] (heat)[run paragraph on]";
-			increase the attack damage by n.
 
 An aftereffects rule (this is the heat can cause weapons to break rule):
 	let n be heat strength of the global attacker weapon;
@@ -1126,45 +1124,25 @@ An aftereffects rule (this is the heat can cause weapons to break rule):
 					remove global defender weapon from play.
 
 
-Section - Heat resistance
+Section - Material heat resistance
 
-Temp-heat is a number that varies.
-The heat resistance rules are a rulebook.
+A remove specific damage rule (this is the material heat resistance rule):
+	let n be destroying heat of the material of victim - 2;
+	if n is less than 0:
+		now n is 0;
+	remove n points of heat damage with reason "victim made of [material of victim]".
 
-To decide what number is the heat resistance of (guy - a person):
-	now test subject is guy;
-	now temp-heat is 0;
-	consider the heat resistance rules;
-	decide on temp-heat.
-
-Heat resistance rule (this is the material heat resistance rule):
-	increase temp-heat by destroying heat of the material of the test subject - 1.
+Section - Intrinsic heat resistance
 
 A person has a number called the intrinsic heat resistance. The intrinsic heat resistance of a person is usually 0.
 
-Heat resistance rule (this is the intrinsic heat resistance rule):
-	increase temp-heat by intrinsic heat resistance of the test subject.
+An add specific damage rule (this is the intrinsic heat vulnerability rule):
+	if intrinsic heat resistance of victim is less than 0:
+		add (intrinsic heat resistance of victim) points of heat damage with reason "intrinsic heat vulnerability". [Not unconditionally!]
 
-[
-Section - Being damaged by hot objects
-
-Every turn when a hot object is enclosed by the location (this is the hot objects deal damage rule):
-	repeat with guy running through alive persons enclosed by the location:
-		if guy has a hot object:
-			let K be a list of things;
-			let m be 0;
-			repeat with item running through things had by guy:
-				if item is hot and item is not a readied weapon:
-					let n be heat strength of item;
-					decrease n by heat resistance of guy;
-					if n greater than 0:
-						add item to K;
-						increase m by n;
-			if m is greater than 0:
-				decrease health of guy by m;
-				turn off mentioning hotness;
-				say "Because of [if number of entries in K is not greater than 1]its[otherwise]their[end if] extreme heat, [K with definite articles] deal[if number of entries in K is not greater than 1]s[end if] [m] damage to [the guy][if guy is killed and guy is player], killing you[otherwise if guy is killed], killing it[end if].";
-				turn on mentioning hotness.]
+A remove specific damage rule (this is the intrinsic heat resistance rule):
+	if intrinsic heat resistance of victim is greater than 0:
+		remove (intrinsic heat resistance of victim) points of heat damage with reason "intrinsic heat resistance".
 
 Section - Internal heat
 
@@ -1663,7 +1641,7 @@ Last falling rule (this is the standard deal falling damage rule):
 			if a random chance of 1 in 10 succeeds: [make it slightly dangerous]
 				increase m by 5;
 			deal m points of physical damage;
-			inflict damage on falling-guy;
+			have no-source inflict damage on falling-guy;
 			if falling-guy is the player:
 				say "With a loud smack, you land in [the location], [if total damage is 0]receiving no damage[otherwise]receiving [bold type][total damage] damage[roman type][end if].";
 				now concentration of player is 0;
