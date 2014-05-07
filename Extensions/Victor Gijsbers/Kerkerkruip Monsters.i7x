@@ -125,9 +125,8 @@ A person has a text called the soul description. The soul description of a perso
 Section - Table of Enemy Powers
 
 Table of Enemy Powers
-power	faculty1	faculty2
-(a power)	(a faculty)	(a faculty)
-
+power (a power)	faculty1 (a faculty)	faculty2 (a faculty)
+--	--	--
 
 
 

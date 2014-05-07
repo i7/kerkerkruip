@@ -808,16 +808,13 @@ When play begins:
 	let X be a random natural weapon part of yourself;
 	now printed name of X is "your fists".
 
-Instead of singing:
-	say "You hum a battle hymn.".
 
-Instead of swearing obscenely:
-	take no time;
-	say "Yeah.".
-	
-Instead of swearing mildly:
-	take no time;
-	say "Sure.".
+Chapter - Singing
+
+Singing is an action applying to nothing. Understand "sing" and "hum" as singing.
+
+Carry out singing:
+	say "You hum a battle hymn.".
 
 
 Chapter - Talking

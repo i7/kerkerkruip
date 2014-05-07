@@ -392,11 +392,11 @@ Chapter - Other routines
 
 Section - Absolute distance
 
-[This routine stolen from Fixed Point Maths version 5 by Michael Callaghan.]
-To decide which number is the absolute value of (N - a number):
+[This routine stolen from Fixed Point Maths version 5 by Michael Callaghan.] [Made obsolete by 6L02]
+[To decide which number is the absolute value of (N - a number):
 	if N is less than 0:
 		let N be 0 minus N;
-	decide on N.
+	decide on N.]
 
 To decide which number is the absolute distance between (a - a room) and (b - a room):
 	let count be 0;
