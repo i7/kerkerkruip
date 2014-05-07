@@ -4,7 +4,8 @@
 
 * Get this things to compile!
 * Make sure the Questions replacement below works.
-* Check the relationship at the start of Monsters.]
+* Check the relationship at the start of Monsters.
+* Check out [is-are] like stiff everywhere, including in ATTACK, to comply with new Inform.]
 
 
 
@@ -58,7 +59,7 @@ Include Kerkerkruip Windows by Erik Temple.
 Section - Include ATTACK
 
 [ Get the latest ATTACK at https://github.com/i7/ATTACK ]
-Include version 5/140220 of Inform ATTACK by Victor Gijsbers.
+Include version 5/140507 of Inform ATTACK by Victor Gijsbers.
 
 
 
