@@ -108,11 +108,6 @@ Generation info is a truth state that varies. Generation info is [true]false.
 
 Section - Testing - Not for release
 
-[The player carries three fragmentation grenades.
-The player carries an unguentum argenti.
-
-The rotting corpse is in the Entrance Hall.
-]
 [Last when play begins:
 	move Fafhrd to Entrance Hall;
 	now Fafhrd is asleep.]
@@ -142,7 +137,7 @@ The rock validation rule is not listed in the when play begins rules. The rock v
 
 
 
-Section - Defining perform syntax (not for use with Glimmr Canvas Animation by Erik Temple)
+Section - Defining perform syntax (for use without Glimmr Canvas Animation by Erik Temple)
 
 To say perform/@ (ph - phrase): (- if (0==0) {ph} -).
 
