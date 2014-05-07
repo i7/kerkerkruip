@@ -1,5 +1,13 @@
 "Kerkerkruip 10" by Victor Gijsbers
 
+[INFORM 7 update TODO list:
+
+* Get this things to compile!
+* Make sure the Questions replacement below works.
+* Check the relationship at the start of Monsters.]
+
+
+
 The story headline is "An IF roguelike".
 The story genre is "dungeon crawl".
 The release number is 9.
@@ -208,7 +216,7 @@ Dontparsing is an action applying to nothing. Understand "dontparse" as dontpars
 Carry out dontparsing:
 	do nothing instead.
 
-Section - Another Questions fix (in place of Section 4 - Phrase used to ask questions in closed mode in Questions by Michael Callaghan)
+[Section - Another Questions fix (in place of Section 4 - Phrase used to ask questions in closed mode in Questions by Michael Callaghan)
 
 The saved question prompt is text that varies.
 
@@ -235,7 +243,7 @@ To ask a closed question, in number mode, in menu mode, in yes/no mode, in gende
 	now saved question prompt is the command prompt;
 	if in menu mode:
 		repeat with counter running from 1 to the number of entries in the current question menu:
-			say "[counter] - [entry counter of the current question menu][line break]".
+			say "[counter] - [entry counter of the current question menu][line break]".]
 
 
 
