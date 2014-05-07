@@ -272,8 +272,8 @@ A kitchen servant is a person in Dining Hall. "A kitchen servant stands at the e
 
 A person called the Chef is in The Dining Hall. The description of the Chef is "You are elegantly dressed, and ready to plan the menu for tonight's feast.". The ID of Chef is 41.
 
-banquet-menu-text is a list of texts that varies;
-banquet-items is a list of people that varies;
+banquet-menu-text is a list of texts that varies.
+banquet-items is a list of people that varies.
 
 Instead of doing anything when the current action involves the kitchen servant:
 	say "The servant approaches you. 'Which guest are we serving tonight?' [it-they of kitchen servant] asks.";
@@ -437,7 +437,7 @@ The bed is an enterable scenery supporter in Bedroom. "Your bed is large and exc
 
 The untroubled sleeper is a person. "You are in your night-dress, comfortably tucked underneath the covers of your sumptuous bed. You're not really ready to get up." The untroubled sleeper is on the bed. The id of the untroubled sleeper is 15;
 
-The bedroom window is scenery in the Bedroom. "The curtains are closed, but blindingly bright sunlight illuminates them from outside and casts a yellow glow around the room."; Understand "curtains", "window", "sun", and "sunlight" as the bedroom window.
+The bedroom window is scenery in the Bedroom. "The curtains are closed, but blindingly bright sunlight illuminates them from outside and casts a yellow glow around the room." Understand "curtains", "window", "sun", and "sunlight" as the bedroom window.
 
 Instead of getting off the bed:
 	say "You attempt to throw off the covers, but they are heavier than you anticipated. Your arms, too, are heavy, and so is your head. As you try again to lift yourself, you find that your eyes are not even open! You strain to open them, but you're not even sure these eyes are your own. At last, a voice calls you back to your own body. The voice is cold and cruel...";

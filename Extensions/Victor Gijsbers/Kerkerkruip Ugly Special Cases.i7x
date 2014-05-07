@@ -22,8 +22,6 @@ Last carry out the ravenous armadillo armadillo-eating:
 		now faction of ravenous armadillo is undead-faction.
 
 
-Kerkerkruip Ugly Special Cases ends here.
-
 Chapter - Fixing Numbered Disambiguation Choices (for use with Numbered Disambiguation Choices by Aaron Reed)
 
 [Hopefully, we can kick this out when Inform is updated!
@@ -120,3 +118,6 @@ Include (-
 ];
 
 -) instead of "Parsing Descriptors" in "Parser.i6t".
+
+
+Kerkerkruip Ugly Special Cases ends here.
