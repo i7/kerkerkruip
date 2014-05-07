@@ -411,7 +411,7 @@ Section - Having a fight in an Arena
 To have (first guy - a person) and (second guy - a person) fight in (place - an arena):
 	try the first guy trying challenging the second guy in the place;
 
-Challenging it in is an action applying to one visible thing and one visible object.
+Challenging it in is an action applying to one visible thing and one visible thing.
 			
 Check an actor challenging someone in (this is the must be enemies to challenge rule):
 	unless the person asked opposes the noun:

@@ -121,11 +121,11 @@ Menu command console:
 
 [ By utilising the parse command rule we can use the parser without actually running any actions. Convenient! ]
 
-Adding is an action applying to one visible object.
+Adding is an action applying to one visible thing.
 Understand "add [any thing]" as adding while the test object console is true.
 Understand "add [any room]" as adding while the test object console is true.
 
-Deleting is an action applying to one visible object.
+Deleting is an action applying to one visible thing.
 Understand "delete [any thing]" as deleting while the test object console is true.
 Understand "delete [any room]" as deleting while the test object console is true.
 Understand "del [any thing]" as deleting while the test object console is true.
