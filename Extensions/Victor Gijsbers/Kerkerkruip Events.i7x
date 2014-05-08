@@ -20,9 +20,9 @@ To have a falling event with (guy - a person) falling in (place - a room) for re
 	now falling-guy is guy;
 	now falling-place is place;
 	now falling-reason is reason;
-	consider the falling destination rules;
-	consider the preempt falling rules;
-	consider the falling rules.
+	follow the falling destination rules;
+	follow the preempt falling rules;
+	follow the falling rules.
 	
 The falling destination rules are a rulebook.
 The preempt falling rules are a rulebook. [For late effects that happen when we start falling.]
@@ -46,7 +46,7 @@ To have a fragmentation event in (place - a room) with (item - a thing) by (guy 
 	now fragmentation-place is place;
 	now fragmentation-guy is guy;
 	now fragmentation-item is item;		
-	consider the fragmentation rules.
+	follow the fragmentation rules.
 
 The fragmentation rules are a rulebook.
 
@@ -102,7 +102,7 @@ Killed-guy is a person that varies.
 To have an event of (guy - a person) killing (guy2 - a person):
 	now killer-guy is guy;
 	now killed-guy is guy2;
-	consider the killing rules.
+	follow the killing rules.
 
 The killing rules are a rulebook.
 
@@ -115,7 +115,7 @@ Shatter-item is a thing that varies.
 
 To have a shatter event with (item - a thing):
 	now shatter-item is item;
-	consider the shatter rules.
+	follow the shatter rules.
 
 The shatter rules are a rulebook.
 

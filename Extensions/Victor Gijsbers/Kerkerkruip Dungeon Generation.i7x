@@ -18,8 +18,8 @@ To create the dungeon:
 	now map approved is false;
 	while map approved is false:
 		print generation message "Generating map...";
-		consider the resetting the map rules;
-		consider the creating the map rules;
+		follow the resetting the map rules;
+		follow the creating the map rules;
 		if generation info is true, say "[paragraph break]";
 		approve the map;
 		if map approved is false:
@@ -251,7 +251,7 @@ Chapter - Approving the map
 Distance-1 and distance-2 are numbers that vary.
 	
 To approve the map:
-	consider the map approval rules;
+	follow the map approval rules;
 	unless rule failed, now map approved is true.
 								
 The map approval rules are a rulebook.
@@ -291,7 +291,7 @@ To fill the Table of Suitable Rooms:
 	repeat with place running through placeable not placed rooms:
 [		say place, " ";]
 		now considered room is place;
-		consider the placement possible rules;
+		follow the placement possible rules;
 		if rule succeeded:
 			[say "! ";]
 			choose a blank row in the Table of Suitable Rooms;
@@ -318,7 +318,7 @@ To score the suitable rooms:
 	repeat through the Table of Suitable Rooms:
 		now considered room is the Candidate entry;
 		now current room score is 0;
-		consider the placement scoring rules;
+		follow the placement scoring rules;
 		now the Room Score entry is current room score.
 
 The placement scoring rules are a rulebook.
@@ -367,7 +367,7 @@ To place (new place - a room) from (original place - a room) at (x - a number) b
 		if generation info is true, say "* [Way] of [original place] ([x-coordinate of original place], [y-coordinate of original place], [z-coordinate of original place]) is [new place] ([x], [y], [z]).[line break][run paragraph on]";
 		now additional considered room is new place;
 		now additional original room is original place;
-		consider the additional placement rules.
+		follow the additional placement rules.
 
 Section - Placing a room next to another room			
 
@@ -393,19 +393,20 @@ Chapter - Other routines
 Section - Absolute distance
 
 [This routine stolen from Fixed Point Maths version 5 by Michael Callaghan.] [Made obsolete by 6L02]
-[To decide which number is the absolute value of (N - a number):
+
+To decide which number is the integer absolute value of (N - a number):
 	if N is less than 0:
 		let N be 0 minus N;
-	decide on N.]
+	decide on N.
 
 To decide which number is the absolute distance between (a - a room) and (b - a room):
 	let count be 0;
 	let temp be x-coordinate of a minus x-coordinate of b;
-	increase count by the absolute value of temp;
+	increase count by the integer absolute value of temp;
 	let temp be y-coordinate of a minus y-coordinate of b;
-	increase count by the absolute value of temp;
+	increase count by the integer absolute value of temp;
 	let temp be z-coordinate of a minus z-coordinate of b;
-	increase count by the absolute value of temp;
+	increase count by the integer absolute value of temp;
 	decide on count.
 	
 Section - Direction between rooms	
@@ -467,11 +468,11 @@ To decide which number is the number of rooms surrounding (a - a number) by (b -
 	repeat with place running through placed rooms:
 		let count-2 be 0;
 		let temp be x-coordinate of place minus a;
-		increase count-2 by the absolute value of temp;
+		increase count-2 by the integer absolute value of temp;
 		let temp be y-coordinate of place minus b;
-		increase count-2 by the absolute value of temp;
+		increase count-2 by the integer absolute value of temp;
 		let temp be z-coordinate of place minus c;
-		increase count-2 by the absolute value of temp;
+		increase count-2 by the integer absolute value of temp;
 		if count-2 is 1:
 			increase count-1 by 1;
 	decide on count-1.
@@ -568,7 +569,7 @@ To place monsters:
 	set up Table of Monster Rooms;
 	fill the Table of Monster Rooms;
 	put monsters in the rooms;
-	consider the final monster placement rules.
+	follow the final monster placement rules.
 	
 	
 Section - Clearing all monsters
@@ -667,7 +668,7 @@ To fill the Table of Suitable Monsters:
 	repeat with guy running through off-stage monsters:
 	[		say guy, " ";]
 		now considered monster is guy;
-		consider the monster placement possible rules;
+		follow the monster placement possible rules;
 		if rule succeeded:
 			[say "! ";]
 			choose a blank row in the Table of Suitable Monsters;
@@ -699,7 +700,7 @@ To score the suitable monsters:
 	repeat through the Table of Suitable Monsters:
 		now considered monster is the Applicant entry;
 		now current monster score is 0;
-		consider the monster placement scoring rules;
+		follow the monster placement scoring rules;
 		now the Monster Score entry is current monster score.
 
 The monster placement scoring rules are a rulebook.
@@ -709,7 +710,7 @@ The monster placement scoring rules are a rulebook.
 Book -Treasures
 
 To stock the dungeon:
-	consider the treasure placement rules;
+	follow the treasure placement rules;
 	if generation info is true, say "[paragraph break][paragraph break]".
 	
 The treasure placement rules are a rulebook.
@@ -839,7 +840,7 @@ To score the suitable rooms for treasure:
 	repeat through the Table of Suitable Rooms:
 		now considered room is the Candidate entry;
 		now current room score is 0;
-		consider the treasure scoring rules;
+		follow the treasure scoring rules;
 		[say "[considered treasure]; [considered room]; [current room score]";]
 		now the Room Score entry is current room score.
 
@@ -867,14 +868,14 @@ Book - Making the dungeon interesting
 The dungeon interest rules are a rulebook.
 
 To make the dungeon interesting:
-	consider the dungeon interest rules.
+	follow the dungeon interest rules.
 
 Book - Finising the dungeon
 
 The dungeon finish rules are a rulebook.
 
 To finish the dungeon:
-	consider the dungeon finish rules.
+	follow the dungeon finish rules.
 
 
 Kerkerkruip Dungeon Generation ends here.

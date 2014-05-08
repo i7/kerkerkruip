@@ -219,7 +219,7 @@ Rule for showing the title screen (this is the text title screen rule):
 			stop the game abruptly;
 		otherwise if rule succeeded:
 			close the text menu;
-			consider action;
+			follow action;
 			display the text menu;
 
 To display the text menu:

@@ -276,7 +276,7 @@ The smoke immunity rules are a rulebook.
 
 To decide whether (guy - a person) is smoke immune:
 	now test subject is guy;
-	consider the smoke immunity rules;
+	follow the smoke immunity rules;
 	if rule succeeded:
 		decide yes;
 	otherwise:

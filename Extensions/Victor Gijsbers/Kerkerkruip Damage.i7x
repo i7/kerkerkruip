@@ -226,23 +226,23 @@ To have (source - a thing) inflict damage on (guy - a person), silently:
 	otherwise:
 		now damage silence is false;
 	now total damage is 0;
-	consider the before damage rules;
+	follow the before damage rules;
 	repeat with type running through damage types:
 		if harm of type is 0:
 			now type is not activated;
 		otherwise:
 			now type is activated; [if we deal 2 heat damage, and a rule distracts 2, other rules should still know that heat damage is being dealt and might need to be changed]
 			increase total damage by harm of type;
-	consider the add specific damage rules;
-	consider the remove specific damage rules;	
-	consider the specific damage multiplier rules;
+	follow the add specific damage rules;
+	follow the remove specific damage rules;	
+	follow the specific damage multiplier rules;
 	now total damage is 0;
 	repeat with type running through damage types:
 		unless harm of type is less than 0:
 			increase total damage by harm of type;
-	consider the add general damage rules;
-	consider the remove general damage rules;	
-	consider the general damage multiplier rules;
+	follow the add general damage rules;
+	follow the remove general damage rules;	
+	follow the general damage multiplier rules;
 	if total damage is less than 0:
 		now total damage is 0;
 	unless silently:
@@ -251,7 +251,7 @@ To have (source - a thing) inflict damage on (guy - a person), silently:
 		otherwise:
 			say " damage[roman type][run paragraph on]";
 	decrease health of the victim by total damage;
-	consider the after damage rules;
+	follow the after damage rules;
 	reset the damage profile;
 	now damage-by-hitting is false.
 

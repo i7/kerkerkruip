@@ -283,7 +283,7 @@ To say Divine lightning strikes (guy - a person):
 	have no-source inflict damage on the guy;
 	say " to [the guy]";
 	if the guy is dead:
-		say ", [bold type]killing [it-them][roman type]";
+		say ", [bold type]killing [regarding the guy][them][roman type]";
 
 Check ChosenFighting (this is the must be religious to fight gods rule):
 	if the player does not worship a god:

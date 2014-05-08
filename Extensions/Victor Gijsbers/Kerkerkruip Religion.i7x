@@ -36,7 +36,7 @@ To decide which number is the favour of (guy - a person) with (benefactor - a go
 To raise the/-- favour of (guy - a person) by (N - a number):
 	repeat with i running from 1 to N:
 		increase favour of the guy by 1;
-		consider the favour rules for the patron of the guy;
+		follow the favour rules for the patron of the guy;
 
 To raise the/-- favour of (guy - a person) to (N - a number):
 	while the favour of the guy is less than N:
@@ -83,7 +83,7 @@ To decide whether (guy - a person) can receive intervention:
 	unless guy worships a god, no;
 	now intervention-guy is guy;
 	now intervention-god is the patron of guy;
-	consider the intervention possible rules;
+	follow the intervention possible rules;
 	if rule succeeded, yes;
 	no.
 
@@ -96,7 +96,7 @@ To decide which number is the intervention bonus for (guy - a person) with (divi
 	now intervention-bonus is 0;
 	now intervention-guy is guy;
 	now intervention-god is divinity;
-	consider the intervention bonus rules;
+	follow the intervention bonus rules;
 	decide on intervention-bonus.
 	
 To decide whether (guy - a person) gets intervention:
@@ -376,9 +376,9 @@ To deal (X - a number) points of Aite-damage to (guy - a person) on behalf of (t
 	if guy is flying:
 		say " in front of [the guy][run paragraph on]";
 		if a random chance of 1 in the size factor succeeds:
-			say "! [It-they] fl[ies] [if plus gigantic damage]around[otherwise]over[end if] it, narrowly avoiding the sharp point.";
+			say "! [regarding the guy][They] [fly] [if plus gigantic damage]around[otherwise]over[end if] it, narrowly avoiding the sharp point.";
 			stop;
-		say ". [It-they] crash[es] into it for [bold type][X] damage[roman type]!";
+		say ". [regarding the guy][They] [crash] into it for [bold type][X] damage[roman type]!";
 	otherwise:
 		now X is X times the size factor divided by 2;
 		say ", skewering [the guy] for [bold type][X] damage[roman type]!";
@@ -487,7 +487,7 @@ Every turn (this is the decrease the Nomos counter rule):
 
 To activate Nomos bonus:
 	now Nomos bonus is true;
-	if the Nomos attacker is not the player, say "[The Nomos attacker] follow[s] the rules of [its-their] God, and prepare[s] to attack!";
+	if the Nomos attacker is not the player, say "[The Nomos attacker] follow[s] the rules of [their] God, and prepare[s] to attack!";
 
 An AI action selection rule for an at-Act person who is the Nomos attacker (this is the Nomos attacker AI should obey Nomos rule):
 	if Nomos bonus is true:
@@ -528,7 +528,7 @@ After attacklike behaviour (this is the attacking is never fast rule):
 	now the take no time boolean is false;
 	continue the action;
 
-To say itself-themselves:
+[To say itself-themselves:
 	if the prior named noun is the player:
 		say "yourself";
 	otherwise if the prior named noun acts plural:
@@ -538,7 +538,7 @@ To say itself-themselves:
 	otherwise if the prior named noun is female:
 		say "herself";
 	otherwise:
-		say "himself";
+		say "himself";]
 
 Before doing anything (this is the Nomos makes you attack rule):
 	if the current action is unattacklike:
@@ -551,7 +551,7 @@ Before doing anything (this is the Nomos makes you attack rule):
 		now opposition test subject is the Nomos attacker;
 		if at least one opposer alive person is enclosed by the location:
 			let X be a random opposer person enclosed by the location;
-			say "[The actor] plan[s] on [current action], but find[s] [itself-themselves] attacking [the X] instead.";
+			say "[The actor] plan[s] on [current action], but find[s] [themselves] attacking [the X] instead.";
 			try attacking X instead;
 			deactivate Nomos bonus;
 		otherwise:
@@ -832,7 +832,7 @@ To have (benefactor - Chton) intervene on behalf of (supplicant - a person):
 			if guy is deathly-resistant:
 				decrease m by 2;
 			decrease health of guy by m;
-			say "[if n is 1 and original n is not 1]and [end if][m] damage to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive] (which breaks [possessive of the guy] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
+			say "[if n is 1 and original n is not 1]and [end if][m] damage to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive] (which breaks [regarding the guy][possessive] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
 			now concentration of the guy is 0;
 			decrease n by 1;
 			if n is 0:

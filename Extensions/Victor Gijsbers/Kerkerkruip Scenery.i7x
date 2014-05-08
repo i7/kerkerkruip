@@ -59,7 +59,7 @@ To score the suitable rooms for extra:
 	repeat through the Table of Suitable Rooms:
 		now considered room is the Candidate entry;
 		now current room score is 0;
-		consider the extra scoring rules;
+		follow the extra scoring rules;
 		[say "[considered extra]; [considered room]; [current room score]";]
 		now the Room Score entry is current room score.
 

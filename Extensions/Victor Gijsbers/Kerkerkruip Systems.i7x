@@ -460,7 +460,7 @@ Carry out an actor challenging someone in (this is the place challenged opponent
 			move the guy to the location of the noun;
 
 Carry out an actor challenging someone in (this is the impose arena faction rule):
-	if the second noun is a faction-imposing arena (called the place) (this is the impose arena-faction rule):
+	if the second noun is a faction-imposing arena:
 		Repeat with guy running through people in the staging area of the second noun:
 			now the faction of guy is arena-faction;
 
@@ -786,7 +786,7 @@ To heal fully because (guy - a person) is slain:
 		do the level 10 victory with guy.
 
 To have (guy - a person) disappear:
-	consider the disappearing rules for guy;
+	follow the disappearing rules for guy;
 	let X be the holder of guy;
 	unless X is nothing:
 		repeat with Y running through things had by guy:
@@ -825,7 +825,7 @@ Section - Whether absorption is stopped
 The absorption stopping rules are a rulebook.
 
 To decide whether absorption is stopped:
-	consider the absorption stopping rules;
+	follow the absorption stopping rules;
 	if rule succeeded:
 		decide yes;
 	otherwise:
@@ -1103,7 +1103,7 @@ An add specific damage rule (this is the heat increases damage rule):
 	if the damage-source is hot:
 		unless (damage-by-hitting is true and global attacker weapon is ranged):
 			let n be heat strength of damage-source;
-			add n points of heat damage with reason "[damage-source] [is-are] hot".
+			add n points of heat damage with reason "[damage-source] [are] hot".
 
 Section - Weapons
 
@@ -1307,7 +1307,7 @@ The rusting rules are a rulebook.
 
 To decide whether (item - a thing) can rust:
 	now test object is item;
-	consider the rusting rules;
+	follow the rusting rules;
 	if rule failed:
 		decide no;
 	otherwise:
@@ -1415,7 +1415,7 @@ The corroding rules are a rulebook.
 
 To decide whether (item - a thing) corrodes:
 	now test object is item;
-	consider the corroding rules;
+	follow the corroding rules;
 	if rule succeeded:
 		decide yes;
 	otherwise:
@@ -1594,7 +1594,7 @@ Falling-test-person is a person that varies.
 
 To decide whether (guy - a person) can fall:
 	now falling-test-person is guy;
-	consider the falling-test rules;
+	follow the falling-test rules;
 	if rule succeeded:
 		decide no;
 	otherwise:

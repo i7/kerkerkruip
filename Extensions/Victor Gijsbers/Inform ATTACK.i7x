@@ -69,7 +69,7 @@ Check an actor taking (this is the can't take living people's possessions rule):
 	while H is not nothing and H is not the local ceiling:
 		if H is an alive person:
 			if the actor is the player:
-				say "[regarding the noun][Those] [seem] to belong to [the owner]." (A);
+				say "[regarding the noun][Those] [seem] to belong to [the H]." (A);
 		let H be the not-counting-parts holder of H;
 
 After examining a dead person (this is the give list of possession on dead person rule):

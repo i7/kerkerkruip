@@ -853,8 +853,8 @@ A dungeon interest rule (this is the setting up Miranda rule):
 
 Section - Miranda's shuriken attack
 
-First cbr text of Miranda is "Miranda quickly throws a shuriken, attempting to break [possessive of the noun] concentration. [italic type][run paragraph on]".
-Cbr fail text of Miranda is "[roman type] The shuriken misses, and [possessive of the noun] attack continues unhampered.[paragraph break]".
+First cbr text of Miranda is "Miranda quickly throws a shuriken, attempting to break [regarding the noun][possessive] concentration. [italic type][run paragraph on]".
+Cbr fail text of Miranda is "[roman type] The shuriken misses, and [regarding the noun][possessive] attack continues unhampered.[paragraph break]".
 Cbr success text of Miranda is "[roman type] The shuriken hits, making [bold type][the noun] lose concentration[roman type]![paragraph break]".
 
 Section - Miranda's Prose
@@ -1275,10 +1275,10 @@ The chain golem is disarmer.
 Disarm strength of chain golem is 13.
 
 First disarm text of the chain golem is "[chain-disarm-1]".
-To say chain-disarm-1: say "[The chain golem] suddenly launches several of its chains in an attempt to grab [possessive of the noun] weapon. [italic type][run paragraph on]".
+To say chain-disarm-1: say "[The chain golem] suddenly launches several of its chains in an attempt to grab [regarding the noun][possessive] weapon. [italic type][run paragraph on]".
 
 Second disarm text of the chain golem is "[chain-disarm-2]".
-To say chain-disarm-2: say "[roman type] [The noun] realise[s] what is happening only when it is too late, and a chain has already wrapped itself around [possessive of the noun] [disarm-weapon], pulls sharply, and [bold type]sends the weapon flying[roman type] across the room.".
+To say chain-disarm-2: say "[roman type] [The noun] realise[s] what is happening only when it is too late, and a chain has already wrapped itself around [regarding the noun][possessive] [disarm-weapon], pulls sharply, and [bold type]sends the weapon flying[roman type] across the room.".
 
 Section - Prose
 
@@ -2121,7 +2121,7 @@ The power level of power of the hound is 2.
 The command text of power of the hound is "counterstrike".
 The description of power of the hound is "Type: passive ability.[paragraph break]Command: none.[paragraph break]After you are attacked, with a probability of (mind - 2) / mind, you get a chance for an immediate counterstrike. If this happens, you will automatically win the initiative for that turn. You can perform any action you wish, just as normal, but if you do choose to retaliate against your attacker, you get a +2 attack and +2 damage bonus. Any action that leads to an attack will count as a counterstrike (including the special pierce and stun powers)."
 The power-name of power of the hound is "power of the hound".
-Understand "counterstrike" as a mistake ("[if the power of the hound is granted and the player is at-React]You will retaliate soon, but now you must react to [possessive of the main actor]'s attack![otherwise if the power of the hound is granted]You are prepared to make counterstrikes, but only after you have been attacked.[otherwise]You do not have the power of the hound.").
+Understand "counterstrike" as a mistake ("[if the power of the hound is granted and the player is at-React]You will retaliate soon, but now you must react to [regarding the main actor][possessive] attack![otherwise if the power of the hound is granted]You are prepared to make counterstrikes, but only after you have been attacked.[otherwise]You do not have the power of the hound.").
 
 Table of Enemy Powers (continued)
 power	faculty1	faculty2
@@ -3980,7 +3980,7 @@ To launch the thorns:
 		deal m points of physical damage;
 		say "[if n is 1 and original n is not 1]and [end if][run paragraph on]";
 		have the brambles inflict damage on guy;
-		say " to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive and m is not 0] (which breaks [possessive of the guy] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
+		say " to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive and m is not 0] (which breaks [regarding the guy][possessive] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
 		decrease n by 1;
 		if n is 0:
 			say ""; [For an extra newline. Don't ask.]
@@ -4290,8 +4290,8 @@ Section - Overmind can break concentration
 Overmind is concentration-breaking reactor.
 Cbr strength of overmind is 12.
 
-First cbr text of overmind is "The overmind quickly launches a tiny sphere of metal, attempting to break [possessive of the noun] concentration. [italic type][run paragraph on]".
-Cbr fail text of overmind is "[roman type] The sphere misses, and [possessive of the noun] attack continues unhampered.[paragraph break]".
+First cbr text of overmind is "The overmind quickly launches a tiny sphere of metal, attempting to break [regarding the noun][possessive] concentration. [italic type][run paragraph on]".
+Cbr fail text of overmind is "[roman type] The sphere misses, and [regarding the noun][possessive] attack continues unhampered.[paragraph break]".
 Cbr success text of overmind is "[roman type] The sphere hits, making [bold type][the noun] lose concentration[roman type]![paragraph break]".
 
 Section - Overmind bonus
@@ -6354,7 +6354,10 @@ Carry out Drakul Drakul-mindgaming:
 
 Section - Prose				
 
+Drakul-killer is a person that varies.
+
 Report an actor hitting the dead Drakul:
+	now Drakul-killer is the actor;
 	if Drakul's lifeblood is off-stage:
 		say "As [the actor] [kills Drakul], a small vial of blood drops on the floor.";
 		now Drakul's lifeblood is in the location;
@@ -6363,10 +6366,10 @@ Report an actor hitting the dead Drakul:
 	rule succeeds.
 
 To say kills Drakul:
-	if the prior named noun is Drakul:
+	if Drakul-killer is Drakul:
 	 	say "drains his own blood";
 	otherwise:
-		say "destroy[s] the infamous vampire";
+		say "[regarding Drakul-killer]destroy[s] the infamous vampire";
 
 Drakul-victory is a truth state that varies. Drakul-victory is false.
 

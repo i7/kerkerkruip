@@ -19,7 +19,7 @@ To decide whether (potential dream - a dream) is dreamable:
 	if potential dream is dreamt and potential dream is not redreamable:
 		decide on false;
 	otherwise:
-		consider dreamable rule of potential dream;
+		follow dreamable rule of potential dream;
 		decide on dreamable test boolean.
 
 A dream has a rule called the start the dream rule.
@@ -48,7 +48,7 @@ Every turn when the player is asleep and dreaming is false (this is the start a 
 	do a dream.
 
 Table of Candidate Dreams
-Candidate
+Candidate Dream
 (a dream)
 with 20 blank rows
 	
@@ -62,13 +62,13 @@ To do a dream:
 		repeat with item running through dreams:
 			if item is dreamable:
 				choose a blank row in Table of Candidate Dreams;
-				now candidate entry is item;
+				now candidate dream entry is item;
 		if number of filled rows in Table of Candidate Dreams is 0:
 			say "You sleep a dreamless sleep.";
 		otherwise:
 			sort Table of Candidate Dreams in random order;
 			choose row 1 in Table of Candidate Dreams;
-			dream Candidate entry.
+			dream Candidate dream entry.
 
 To dream (item - a dream):
 	now dreaming is true;
@@ -78,7 +78,7 @@ To dream (item - a dream):
 	say "You are pulled towards a dream ...";
 	wait for any key;
 	clear the screen;
-	consider start the dream rule of item.
+	follow start the dream rule of item.
 			
 To wake the player up:
 	wait for any key;

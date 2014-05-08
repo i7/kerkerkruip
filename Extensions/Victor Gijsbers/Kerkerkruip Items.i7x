@@ -2046,8 +2046,8 @@ A scroll has a scroll name called true name.
 Understand the scroll name property as describing a scroll.
 Understand the obfuscated name property as describing a scroll.
 
-Understand "labelled" as a scroll when the scroll is unidentified.
-Understand "of" as a scroll when the scroll is identified.
+Understand "labelled" as a scroll when the item described is unidentified.
+Understand "of" as a scroll when the item described is identified.
 
 Rule for printing the name of a scroll (called S) (this is the printing the name of scrolls rule):
 	let name be printed name of scroll name of S;
@@ -2103,7 +2103,8 @@ To repeat with (loopvar - nonexisting K variable) running through the/-- kinds o
 To repeat with (loopvar - nonexisting object variable) running through the/-- instances of (kind - object) begin -- end:
 	(- objectloop( {loopvar} && {loopvar} ofclass {kind} ) -).
 
-When play begins (this is the obfuscate scrolls rule):
+[TODO -- comment this back in!!]
+[When play begins (this is the obfuscate scrolls rule):
 	let names be the list of obfuscated scroll names;
 	sort names in random order;
 	repeat with S running through the kinds of scroll:
@@ -2113,7 +2114,7 @@ When play begins (this is the obfuscate scrolls rule):
 			now I is unidentified;
 			now the true name of I is the scroll name of I;
 			now the obfuscated name of I is N;
-			now the scroll name of I is N;
+			now the scroll name of I is N;]
 
 To identify (S - a scroll):
 	repeat with I running through the instances of the kind of S:
@@ -2173,11 +2174,12 @@ The plural of scroll of knowledge is scrolls of knowledge.
 
 Carry out reading a scroll of knowledge:
 	say "The nature of scrolls suddenly becomes clear to you.";
-	repeat with S running through the kinds of scroll:
+[	repeat with S running through the kinds of scroll:
 		repeat with I running through the instances of S:
 			if I is unidentified:
 				identify I;
-				break;
+				break;]
+[TODO -- comment this back in!!]
 
 
 Section -  Scroll of Curse Removal
@@ -2542,7 +2544,7 @@ At the time when the psycholocator peters out:
 The psycholocation rules are a rulebook.
 
 To decide whether psycholocation is active:
-	consider the psycholocation rules;
+	follow the psycholocation rules;
 	if rule succeeded:
 		decide yes;
 	otherwise:
@@ -2799,12 +2801,13 @@ Instead of examining a magical guide:
 
 Carry out reading a magical guide:
 	say "From now on, you will recognise scrolls of [readable guide list of the noun].";
-	repeat with S running through the kinds of scroll:
+[	repeat with S running through the kinds of scroll:
 		repeat with I running through the instances of S:
 			if true name of I is listed in guide list of noun:
 				if I is unidentified:
 					identify I;
-					break.
+					break.]
+[TODO -- comment this back in!!]
 
 To say readable (list-to-print - a list of scroll names):
 	let n be the number of entries in list-to-print;
@@ -4074,7 +4077,7 @@ To have the ment kick in:
 			if the OD timer is 0:
 				now the OD timer is 12;
 			otherwise:
-				end the game saying "You OD'ed.";
+				end the story saying "You OD'ed.";
 	now the ment timer is a random number between 10 and 15;
 	if ment addiction is 6:
 		award achievement Sixth heaven.

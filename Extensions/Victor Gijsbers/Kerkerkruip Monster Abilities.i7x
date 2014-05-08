@@ -193,7 +193,7 @@ The impeded movement rules are a rulebook.
 
 To decide whether (guy - a person) can move:
 	now test subject is the guy;
-	consider the impeded movement rules;
+	follow the impeded movement rules;
 	if rule failed:
 		decide no;
 	decide yes.
@@ -227,7 +227,7 @@ The flying rules are a rulebook.
 
 To decide whether (guy - a person) is flying:
 	now test subject is guy;
-	consider the flying rules;
+	follow the flying rules;
 	if rule succeeded:
 		decide yes;
 	otherwise:
@@ -250,7 +250,7 @@ Chapter - Independent Action
 
 To decide whether (guy - a person) is acting independently:
 	now test subject is guy;
-	consider the independent action rules;
+	follow the independent action rules;
 	if rule failed, no;
 	yes.
 
@@ -271,7 +271,7 @@ A last independent action rule (this is the don't normally act independently whe
 
 Chapter - Followers
 
-[Followers consider the follower rules. If these do not fail, they attempt to move one room towards the player.]
+[Followers follow the follower rules. If these do not fail, they attempt to move one room towards the player.]
 
 A person can be a follower. A person is usually not a follower.
 A person has a number called the follower percentile chance. The follower percentile chance of a person is usually 100.
@@ -313,7 +313,7 @@ The blindness rules are a rulebook.
 
 To decide whether (guy - a person) is blind:
 	now test subject is guy;
-	consider the blindness rules;
+	follow the blindness rules;
 	if rule succeeded:
 		decide yes;
 	otherwise:
@@ -365,7 +365,7 @@ The rage rules are a rulebook.
 
 To decide whether (guy - a person) is raging:
 	now test subject is guy;
-	consider the rage rules;
+	follow the rage rules;
 	if rule succeeded:
 		decide yes;
 	otherwise:
@@ -430,7 +430,7 @@ The bloodlust dummy is a number that varies.
 To decide which number is bloodlust of (guy - a person):
 	now test subject is guy;
 	now bloodlust dummy is 0;
-	consider the bloodlust rules;
+	follow the bloodlust rules;
 	decide on bloodlust dummy.
 
 Section - Attack and damage bonus
@@ -534,7 +534,7 @@ The dread dummy is a number that varies.
 To decide which number is dreadful presence of (guy - a person):
 	now test subject is guy;
 	now dread dummy is 0;
-	consider the dread rules;
+	follow the dread rules;
 	decide on dread dummy.
 
 Definition: a person (called guy) is dreadful if (dreadful presence of guy > 0).
@@ -598,7 +598,7 @@ The beloved of Aite rules are a rulebook.
 
 To decide whether (guy - a person) is beloved of Aite:
 	now test subject is guy;
-	consider the beloved of Aite rules;
+	follow the beloved of Aite rules;
 	if rule succeeded:
 		decide yes;
 	otherwise:
@@ -816,7 +816,7 @@ The teleport impossible rules are a rulebook.
 
 To decide whether teleportation is impossible for (guy - a person):
 	now test subject is guy;
-	consider the teleport impossible rules;
+	follow the teleport impossible rules;
 	if rule succeeded:
 		decide yes;
 	otherwise:
@@ -1089,7 +1089,7 @@ A person has some text called the first disarm text. The first disarm text of a 
 To say disarm-1: say "[The disarm-actor] tries to disarm [the noun]. [italic type][run paragraph on]".
 
 A person has some text called the second disarm text. The second disarm text of a person is usually "[disarm-2]".
-To say disarm-2: say "[roman type] [The noun] realise[s] what is happening only when it is too late, and [bold type][the disarm-weapon] [is-are] sent flying[roman type] across the room."
+To say disarm-2: say "[roman type] [The noun] realise[s] what is happening only when it is too late, and [bold type][the disarm-weapon] [are] sent flying[roman type] across the room."
 
 Section - Disarm power
 

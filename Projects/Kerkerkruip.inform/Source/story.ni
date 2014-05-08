@@ -5,7 +5,7 @@
 * Get this things to compile!
 * Make sure the Questions replacement below works.
 * Check the relationship at the start of Monsters.
-* Check out [is-are] like stiff everywhere, including in ATTACK, to comply with new Inform.]
+* Fix unidentified scrolls, scroll of knowledge and magical guides.]
 
 
 
@@ -14,6 +14,7 @@ The story genre is "dungeon crawl".
 The release number is 9.
 The story description is "Kerkerkruip is a short-form roguelike in the interactive fiction medium, featuring meaningful tactical and strategic depth, innovative game play, zero grinding, and a sword & sorcery setting that does not rehash tired clichés."
 Release along with cover art and a file of "Gargoyle config file" called "Kerkerkruip.ini".
+
 
 
 
@@ -27,7 +28,7 @@ Include Basic Screen Effects by Emily Short.
 Include Numbered Disambiguation Choices by Aaron Reed.
 Include version 10/140201 of Glulx Entry Points by Emily Short.
 Include version 7/130712 of Dynamic Objects by Jesse McGrew.
-Include Fixed Point Maths by Michael Callaghan.
+[Include Fixed Point Maths by Michael Callaghan.] [I guess we don't need this anymore. Also, it doesn't compile with 6L02.]
 Include Questions by Michael Callaghan.
 Include version 1/140209 of Interpreter Sniffing by Friends of I7.
 
@@ -104,6 +105,7 @@ Use ALLOC_CHUNK_SIZE of 32768.
 
 Section - Score
 
+Use scoring.
 The maximum score is 18. [1 + 1 + 2 + 2 + 3 + 4 + 5 = 18]
 The notify score changes rule is not listed in any rulebook.
 
@@ -246,7 +248,7 @@ To ask a closed question, in number mode, in menu mode, in yes/no mode, in gende
 		repeat with counter running from 1 to the number of entries in the current question menu:
 			say "[counter] - [entry counter of the current question menu][line break]".]
 
-
+The saved question prompt is text that varies. [TODO - remove when above has been fixed.]
 
 
 

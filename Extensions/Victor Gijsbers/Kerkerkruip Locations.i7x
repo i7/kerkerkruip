@@ -384,7 +384,7 @@ To profane (place - a temple):
 	if player worships a god:
 		let guy be a random god worshipped by the player;
 		if place is dedicated to guy:
-			end the game saying "Wise people do not anger their own gods. You were not wise.";
+			end the story saying "Wise people do not anger their own gods. You were not wise.";
 		otherwise:
 			say "[line break][Guy] appreciates your profaning of the holy place of [angry guy], and grants you 1 favour!";
 			raise favour of the player by 1.
@@ -1327,7 +1327,7 @@ To find a scroll of type (N - scroll name):
 			break;
 	let the new scroll be a new object cloned from the template;
 	now the new scroll is carried by the player;
-	have the parser notice the new scroll;
+	set pronouns from the new scroll;
 	say "You have found [a new scroll][one of] in between the body parts[or] buried in the pile[at random]. It's slightly [one of]wet and smelly[or]covered in slime[at random], but it looks like it will still work, so you scoop it up.";
 
 To find the corpse:

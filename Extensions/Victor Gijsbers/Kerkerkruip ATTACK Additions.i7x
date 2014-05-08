@@ -142,7 +142,7 @@ To decide which number is a roll of the dice:
 	let m be a random number between 0 and 3;
 	let x be n + m;
 	now natural twenty chance is 0;
-	consider the natural twenty rules;
+	follow the natural twenty rules;
 	if a random chance of natural twenty chance in 100 succeeds:
 		now x is 20;
 	decide on x.
@@ -473,7 +473,7 @@ Last report examining a weapon (this is the extra weapon info rule):
 	say "[italic type]Combat statistics: 1d[damage die of the noun] + [weapon damage bonus of the noun] damage; [if weapon attack bonus of the noun is less than 0]-[otherwise]+[end if][absolute value of weapon attack bonus of the noun] attack modifier[if the noun is ranged]; ranged[end if][parry and dodge info of the noun][if the noun is silver]; good against undead and demons[end if][special weapon info of the noun][roman type].[run paragraph on][line break][paragraph break]"
 			
 To say parry and dodge info of (item - a weapon):
-	say "; the wielder gets a [parry-with bonus of item] bonus when parrying with [it-them of item]; others get a [parry-against bonus of item] bonus when parrying and a [dodge bonus of item] bonus when dodging against [it-them of item][run paragraph on]".
+	say "; the wielder gets a [parry-with bonus of item] bonus when parrying with [regarding the item][them]; others get a [parry-against bonus of item] bonus when parrying and a [dodge bonus of item] bonus when dodging against [them][run paragraph on]".
 
 A weapon has some text called the special weapon info. The special weapon info of a weapon is usually "".
 

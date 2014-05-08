@@ -8,6 +8,8 @@ Chapter - New cosmetic verbs
 
 To squash is a verb.
 To ready is a verb.
+To fly is a verb.
+To crash is a verb.
 
 Volume - Special actions
 
@@ -483,7 +485,7 @@ Definition: a person (called guy) is memory-lost:
 
 To say remembered location of (guy - a person):
 	if the last-seen-location of the guy is Null-Room:
-		say "not where you last saw [it-them of the guy]";
+		say "not where you last saw [regarding the guy][them]";
 	otherwise:
 		say "in [place-memory of the last-seen-location of the guy]"
 
@@ -543,18 +545,19 @@ To say map description:
 			say ". [run paragraph on]";
 	say "[line break]"
 
+[I'm just commenting out all the fixed/real stuff below. Hope that works in 6L02!]
 To decide what number is (N - a number) grid-compared to (L - a number):
 	if L is 1:
 		decide on 0;[we're always at the center if the extent is 1.]
 	if L is 2:
 		decide on N - (3 - N);[there is no center with an extent of 2--we're on one side or the other.]
-	let split be L / 3 as a fixed point number;
+	let split be L / 3[ as a fixed point number];
 	let spread be 0.0000;
 	if L is even:
 		now spread is 1.0000;[even widths will have a wider central zone]
-	if N is real greater than split and (N is real less than spread real plus (split real times 2) or N real equals spread real plus (split real times 2)):
+	if (N is [real ]greater than split) and ((N is [real ]less than (spread [real ]plus (split [real ]times 2))) or (N [real ]is (spread [real ]plus (split [real ]times 2)))):
 		decide on 0;
-	if N is real less than split or N real equals split:
+	if N is [real ]less than split or N [real ]is split:
 		decide on -1;
 	decide on 1.
 
@@ -574,7 +577,7 @@ To say triaxial way from (A - a room) to (B - a room):
 		now U-D is "up";
 	if z-coordinate of A minus z-coordinate of B is greater than 0:
 		now U-D is "down";
-	let vertical-distance be the absolute value of the z-coordinate of A minus the z-coordinate of B;
+	let vertical-distance be the integer absolute value of the z-coordinate of A minus the z-coordinate of B;
 	if U-D is not "":
 		say "[if vertical-distance is greater than 1][vertical-distance in words] floors [end if][U-D][run paragraph on]";
 		if N-S is "" and E-W is "":
@@ -888,7 +891,7 @@ The pickpocket rules are a rulebook.
 
 To decide whether a pickpocket check fails:
 	now pickpocket chance is 30;
-	consider the pickpocket rules;
+	follow the pickpocket rules;
 	say "You have a [pickpocket chance]% chance of successfully stealing [the noun] ... [run paragraph on]";
 	if a random chance of pickpocket chance in 100 succeeds:
 		say "success!";
