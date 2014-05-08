@@ -867,11 +867,13 @@ The can't take living people's possessions rule is not listed in any rulebook.
 
 Check an actor taking (this is the can't take living awake people's possessions rule):
 	let the local ceiling be the common ancestor of the actor with the noun;
-	let H be the not-counting-parts holder of the noun;
-	while H is not nothing and H is not the local ceiling:
-		if H is a conscious person:
-			stop the action with library message taking action number 6 for H;
-		let H be the not-counting-parts holder of H;
+	let the owner be the not-counting-parts holder of the noun;
+	while the owner is not nothing and the owner is not the local ceiling:
+		if the owner is a conscious person:
+			if the actor is the player:
+				say "[regarding the noun][Those] [seem] to belong to [the owner]." (A);
+			stop the action;
+		let the owner be the not-counting-parts holder of the owner;
 
 Last check an actor taking (this is the pickpocket rule):
 	if an asleep person encloses the noun:
@@ -1198,7 +1200,10 @@ Carry out looking (this is the alternative room description heading rule):
 	say roman type;
 	let intermediate level be the visibility-holder of the actor;
 	repeat with intermediate level count running from 2 to the visibility level count:
-		issue library message looking action number 8 for the intermediate level;
+		if the intermediate level is a supporter or the intermediate level is an animal:
+			say " (on [the intermediate level])" (B);
+		otherwise:
+			say " (in [the intermediate level])" (C);
 		let the intermediate level be the visibility-holder of the intermediate level;
 	say line break;
 	say run paragraph on with special look spacing;

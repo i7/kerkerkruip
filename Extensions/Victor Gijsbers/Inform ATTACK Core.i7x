@@ -462,7 +462,7 @@ The block vaguely going rule is not listed in any rulebook.
 
 Rule for supplying a missing noun while an actor going (this is the block vaguely going and take no time rule):
 	take no time;
-	issue library message going action number 7.
+	say "You'll have to say which compass direction to go in." (A).
 
 Section - Going nowhere
 
@@ -471,22 +471,24 @@ The can't go that way rule is not listed in any rulebook.
 Check an actor going (this is the can't go that way and take no time rule):
 	if the room gone to is nothing:
 		take no time;
-		if the door gone through is nothing, stop the action with library
-			message going action number 2 for the room gone from;
-		stop the action with library message going action number 6 for the door gone through;
+		if the door gone through is nothing:
+			if the actor is the player:
+				say "[We] [can't go] that way." (A);
+			stop the action;
+		if the actor is the player:
+			say "[We] [can't], since [the door gone through] [lead] nowhere." (B);
+		stop the action.
 
 Section - Taking what is already carried
 
 The can't take what's already taken rule is not listed in any rulebook.
 
 Check an actor taking (this is the can't take what's already taken and take no time rule):
-	if the actor is carrying the noun:
-		take no time;
-		stop the action with library message taking action number 5 for the noun;
-	if the actor is wearing the noun:
-		take no time;
-		stop the action with library message taking action number 5 for the noun.
-
+	if the actor is carrying the noun or the actor is wearing the noun:
+		if the actor is the player:
+			take no time;
+			say "[We] already [have] [regarding the noun][those]." (A);
+		stop the action.
 
 
 Volume - AI
