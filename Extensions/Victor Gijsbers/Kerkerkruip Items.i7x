@@ -2098,13 +2098,12 @@ To decide what object is the kind of (obj - object):
 	(-  KindOfObj( {obj} ) -).
 
 To repeat with (loopvar - nonexisting K variable) running through the/-- kinds of (kind - name of kind of value of kind K) begin -- end:
-	(- objectloop( {loopvar} && metaclass({loopvar}) == Class && TestSubkind({loopvar}, KindOfObj({-default-value-for:kind})) ) -).
+	(- objectloop( {loopvar} && metaclass({loopvar}) == Class && TestSubkind({loopvar}, KindOfObj({-new:K})) ) -).
 	
 To repeat with (loopvar - nonexisting object variable) running through the/-- instances of (kind - object) begin -- end:
 	(- objectloop( {loopvar} && {loopvar} ofclass {kind} ) -).
 
-[TODO -- comment this back in!!]
-[When play begins (this is the obfuscate scrolls rule):
+When play begins (this is the obfuscate scrolls rule):
 	let names be the list of obfuscated scroll names;
 	sort names in random order;
 	repeat with S running through the kinds of scroll:
@@ -2114,7 +2113,7 @@ To repeat with (loopvar - nonexisting object variable) running through the/-- in
 			now I is unidentified;
 			now the true name of I is the scroll name of I;
 			now the obfuscated name of I is N;
-			now the scroll name of I is N;]
+			now the scroll name of I is N;
 
 To identify (S - a scroll):
 	repeat with I running through the instances of the kind of S:
@@ -2174,12 +2173,12 @@ The plural of scroll of knowledge is scrolls of knowledge.
 
 Carry out reading a scroll of knowledge:
 	say "The nature of scrolls suddenly becomes clear to you.";
-[	repeat with S running through the kinds of scroll:
+	repeat with S running through the kinds of scroll:
 		repeat with I running through the instances of S:
 			if I is unidentified:
 				identify I;
-				break;]
-[TODO -- comment this back in!!]
+[				break.]
+
 
 
 Section -  Scroll of Curse Removal
@@ -2569,7 +2568,7 @@ The description of a scroll of enchantment is "Reading this scroll will permanen
 The plural of scroll of enchantment is scrolls of enchantment.
 
 
-Carry out reading a scroll of alteration:
+Carry out reading a scroll of enchantment:
 	let item be a random readied weapon enclosed by the player;
 	if item is a natural weapon:
 		say "You aren't wielding a weapon, so the scroll of enchantment fizzles.";
@@ -2801,13 +2800,12 @@ Instead of examining a magical guide:
 
 Carry out reading a magical guide:
 	say "From now on, you will recognise scrolls of [readable guide list of the noun].";
-[	repeat with S running through the kinds of scroll:
+	repeat with S running through the kinds of scroll:
 		repeat with I running through the instances of S:
 			if true name of I is listed in guide list of noun:
 				if I is unidentified:
 					identify I;
-					break.]
-[TODO -- comment this back in!!]
+[					break.]
 
 To say readable (list-to-print - a list of scroll names):
 	let n be the number of entries in list-to-print;
