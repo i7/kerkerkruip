@@ -2,6 +2,13 @@ Kerkerkruip Actions and UI by Victor Gijsbers begins here.
 
 Use authorial modesty.
 
+Chapter - New cosmetic verbs
+
+[For Inform to conjugate.]
+
+To squash is a verb.
+To ready is a verb.
+
 Volume - Special actions
 
 Chapter - Retreating
@@ -139,7 +146,7 @@ Check going to a room:
 Check going to a thing:
 	if the location of the noun is the location:
 		take no time;
-		say "[It-they]['s-'re] right here!" instead.
+		say "[They]['re] right here!" instead.
 
 Definition: a room (called place) is safe if place is safe-1 and place is not nogo.
 Definition: a room (called place) is safe-1 if the number of alive hater persons in place is 0 or place is the location or place is location-to-go. [We do not count the starting and end points.]
@@ -159,7 +166,7 @@ Carry out going to a thing:
 	let way be the best route from the location of player to location-to-go through visited safe rooms;
 	unless way is a direction:
 		take no time;
-		say "You don't know a safe path towards [it-them of noun]." instead;
+		say "You don't know a safe path towards [regarding the noun][them]." instead;
 	say "You last saw [the noun] in [the location-to-go], so you [one of]strike out[or]head[at random] towards there.";
 	try going way instead;
 
@@ -322,9 +329,9 @@ Carry out asking status (this is the show basic stats rule):
 	say "[bold type]Spirit[roman type]: [run paragraph on][fs][if fs is greater than spirit score of the player] ([spirit score of the player] inherent + [sb] bonus)[end if][if fs is less than spirit score of the player] ([spirit score of the player] inherent - [sb * -1] penalty)[end if][line break][run paragraph on]";
 
 Carry out asking status:
-	consider the status combat stats rules;
-	consider the status attribute rules;
-	consider the status skill rules;
+	follow the status combat stats rules;
+	follow the status attribute rules;
+	follow the status skill rules;
 	say "[line break][run paragraph on]".
 	
 The status combat stats rules are a rulebook.
@@ -448,7 +455,7 @@ Carry out remembering:
 	if at least one person is memory-lost:
 		say "[line break]You have also seen [the list of memorable not memory-locatable people], but you don't know where ";
 		if the number of memory-lost people is 1:
-			say "[it-they of a random memory-lost person] [is-are][run paragraph on]";
+			say "[regarding a random memory-lost person][they] [are][run paragraph on]";
 		otherwise:
 			say "they are[run paragraph on]";
 		if psycholocation is active:

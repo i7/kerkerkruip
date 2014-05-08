@@ -1054,7 +1054,7 @@ Wisphurting is an action applying to one thing.
 
 Carry out the wisps of pain wisphurting:
 	let n be a random number between 1 and 3;
-	say "The wisps of pain launch themselves at [if the noun is not the player][the noun][otherwise]you[end if], passing right through [if the noun is not the player][possessive of the noun][otherwise]your[end if] body and dealing 1 point of permanent [bold type][if n is 1]body[otherwise if n is 2]mind[otherwise]spirit[end if] damage[roman type]. They then spread out through the room.";
+	say "The wisps of pain launch themselves at [if the noun is not the player][the noun][otherwise]you[end if], passing right through [if the noun is not the player][regarding the noun][possessive][otherwise]your[end if] body and dealing 1 point of permanent [bold type][if n is 1]body[otherwise if n is 2]mind[otherwise]spirit[end if] damage[roman type]. They then spread out through the room.";
 	if n is 1:
 		decrease body score of the noun by 1;
 	if n is 2:
@@ -2187,7 +2187,7 @@ An aftereffects rule (this is the set up the power of the hound rule):
 			otherwise:
 				now hound status is 2;
 				now the hound provoker is the global attacker;
-				say "[one of]Anticipating[or]Prepared for[at random] [one of]the attack[or][possessive of the hound provoker] move[at random][one of], you respond instantly![or], your response is immediate![at random]";
+				say "[one of]Anticipating[or]Prepared for[at random] [one of]the attack[or][regarding the hound provoker][possessive] move[at random][one of], you respond instantly![or], your response is immediate![at random]";
 
 An attack modifier rule (this is the power of the hound attack modifier rule):
 	if hound status is 1 and the global defender is the hound provoker:
@@ -2480,7 +2480,7 @@ Carry out the mindslug mindblasting:
 		say " [The noun] resist[s] the mindslug's influence!";
 	otherwise:
 		decrease mind score of the noun by 1;
-		say " [The noun] fail[s] to resist the mindslug's mental blast, and [possessive of the noun] mind score decreases to [mind score of the noun].";
+		say " [The noun] fail[s] to resist the mindslug's mental blast, and [regarding the noun][possessive] mind score decreases to [mind score of the noun].";
 		if mind score of the noun is less than 1:
 			if the noun is the player:
 				end the story saying "You live on as the unquestioning slave of a giant slug";
@@ -3051,7 +3051,7 @@ Carry out the giant tentacle tentacle-shaking:
 	if test result is true:
 		say " [The main actor] remain[s] [if the concentration of the main actor is greater than 0]concentrated[otherwise]sharp[end if].";
 	otherwise:
-		say " [The main actor] [is-are] horrified and confused![run paragraph on]";
+		say " [The main actor] [are] horrified and confused![run paragraph on]";
 		now the main actor is tentacle-confused;
 		if the concentration of the main actor is greater than 0:
 			say " [run paragraph on]";
@@ -3070,7 +3070,7 @@ Chance to win rule when the global attacker is tentacle-confused (this is the CT
 	decrease the chance-to-win by 2.
 
 Aftereffects rule when the global attacker is tentacle-confused (this is the no longer tentacle-confused after attacking rule):
-	say "[The global attacker] [is-are] no longer confused.";
+	say "[The global attacker] [are] no longer confused.";
 	now the global attacker is not tentacle-confused.
 
 Status attribute rule (this is the tentacle-confused status rule):
@@ -4469,7 +4469,7 @@ Check calling:
 Check calling:
 	unless the player and the noun share a world:
 		take no time;
-		say "[The noun] [is-are] not available for calling." instead.
+		say "[The noun] [are] not available for calling." instead.
 
 Check calling:
 	if the noun is not seen:
@@ -4479,12 +4479,12 @@ Check calling:
 Check calling:
 	if the level of the noun is greater than 4:
 		take no time;
-		say "[The noun] [is-are] too powerful to be called." instead.
+		say "[The noun] [are] too powerful to be called." instead.
 
 Check calling:
 	if the location of the noun is the location of the player:
 		take no time;
-		say "[The noun] [is-are] already here." instead.
+		say "[The noun] [are] already here." instead.
 
 Carry out calling:
 	if the noun can move:
@@ -4496,7 +4496,7 @@ Carry out calling:
 				say "[The noun] move[s] from [the place] to [the location of the noun].";
 				now last-seen-location of the noun is location of the noun;
 		otherwise:
-			say "[The noun] [has-have] no way to reach you!";
+			say "[The noun] [have] no way to reach you!";
 	otherwise:
 		say "Something prevents [the noun] from following your command.".
 
@@ -4811,7 +4811,7 @@ An aftereffects rule (this is the Fell's blinding attack rule):
 		unless global defender is blind:
 			unless flash-grenade-timer of global defender > 3:
 				now flash-grenade-timer of global defender is 3;
-				say "Fell's nails strike [possessive of the global defender] eyes, [bold type]blinding[roman type] [the global defender] for 3 turns.".
+				say "Fell's nails strike [regarding the global defender][possessive] eyes, [bold type]blinding[roman type] [them] for 3 turns.".
 
 Section - Fell prose
 
@@ -4943,7 +4943,7 @@ An attack modifier rule (this is the link concentration attack modifier rule):
 			-- 3:
 				now the bonus is 8;
 		if the numbers boolean is true:
-			say " + ", the bonus, " ([possessive of linked guy of the actor] concentration)[run paragraph on]";
+			say " + ", the bonus, " ([regarding linked guy of the actor][possessive] concentration)[run paragraph on]";
 		increase the attack strength by the bonus.
 
 An add specific damage rule (this is the link concentration damage modifier rule):
@@ -5045,7 +5045,7 @@ Check linking:
 
 Carry out linking:
 	now noun is linked to the player;
-	say "You forge a spiritual link which will allow you to benefit from [possessive of the noun] concentration."
+	say "You forge a spiritual link which will allow you to benefit from [regarding the noun][possessive] concentration."
 
 Section - Power of Israfel - Reform
 
@@ -5764,7 +5764,7 @@ Carry out the aswang aswang-hexing:
 	let n be 11 + concentration of the aswang;
 	test the mind of the noun against n;
 	if test result is false:
-		say " [roman type][The noun] [is-are] now [bold type]hexed[roman type].";
+		say " [roman type][The noun] [are] now [bold type]hexed[roman type].";
 		now the noun is hexed;
 	otherwise:
 		say " [roman type][The noun] [bold type]resist[s] the hex[roman type].";
@@ -6124,7 +6124,7 @@ The legend-label of zombie toad is Figure of map_legend_zombie_toad.
 Section - Prose				
 
 Report an actor hitting the dead zombie toad:
-	say "[The actor] squash[es] the toad.";
+	say "[The actor] [squash] the toad.";
 	rule succeeds.
 
 Report the zombie toad hitting a dead pc:
@@ -6315,7 +6315,7 @@ Aftereffects rule (this is the Drakul drinks blood rule):
 	if the global attacker is Drakul and the global defender is not undead:
 		if the attack damage is greater than 0:
 			if Drakul-victory is false:
-				say "Drakul [bold type]drinks [possessive of the global defender] blood[roman type], gaining [attack damage] health!";
+				say "Drakul [bold type]drinks [regarding the global defender][possessive] blood[roman type], gaining [attack damage] health!";
 				increase health of Drakul by attack damage.
 
 Section - Drakul uses mind games

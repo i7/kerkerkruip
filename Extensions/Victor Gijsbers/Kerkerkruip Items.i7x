@@ -938,7 +938,7 @@ The description of Mendele's robe is "The mad monk Mendele gained notoriety for 
 Last absorbing a power (called the granted power):
 	if the player wears Mendele's robe:
 		say "The robe of the mad monk lights up in a flash of mutagenic glow.[paragraph break]";
-		consider the mutating rules.
+		follow the mutating rules.
 
 
 Section - Robe of the Dead Mage (epic)
@@ -1064,7 +1064,7 @@ Last check an actor hitting when the noun wears the cloak of reflection (this is
 		unless reflection-attack is true: [No infinite reflections]
 			let n be 15 * (1 + blood magic level of cloak of reflection);
 			if a random chance of n in 10 succeeds:
-				say "[if the noun is the player]The[otherwise][Possessive of the noun][end if] cloak of reflection [bold type]reflects[roman type] the attack back to [the actor]!";
+				say "[if the noun is the player]The[otherwise][regarding the noun][Possessive][end if] cloak of reflection [bold type]reflects[roman type] the attack back to [the actor]!";
 				now reflection-attack is true;
 				try the actor hitting the actor instead.
 
@@ -1911,7 +1911,7 @@ Carry out applying unguentum crescendi to something:
 			otherwise:
 				say "You carefully apply the salve to [if the second noun is the player]yourself[otherwise][the second noun][end if], ";
 				increase the size of the second noun;
-				say "turning [it-them of second noun] [size of the second noun].";
+				say "turning [regarding the second noun][them] [size of the second noun].";
 	rule succeeds.
 
 The small-unguentum-crescendi-pack is a minor treasure pack. One unguentum crescendi is in the small-unguentum-crescendi-pack.
@@ -1937,7 +1937,7 @@ Carry out applying unguentum diminuendi to something:
 			otherwise:		
 				say "You carefully apply the salve to [if the second noun is the player]yourself[otherwise][the second noun][end if], ";
 				decrease the size of the second noun;
-				say "turning [it-them of second noun] [size of the second noun].";
+				say "turning [regarding the second noun][them] [size of the second noun].";
 	rule succeeds.
 
 The small-unguentum-diminuendi-pack is a minor treasure pack. One unguentum diminuendi is in the small-unguentum-diminuendi-pack.
@@ -2256,9 +2256,9 @@ Carry out reading a scroll of summoning:
 			let the target for summons avoidance be eleven plus (three times the size difference of the standard measure and the guy);
 			test the spirit of the main actor against the target for summons avoidance described as "[the monster summoned] is [the size of the monster summoned]";
 			if the test result is true:
-				say " [Possessive of the guy] sudden appearance does not interfere with [its-their of the main actor] attack.";
+				say " [regarding the guy][Possessive] sudden appearance does not interfere with [regarding the main actor][their] attack.";
 			otherwise:
-				say " [Possessive of the guy] sudden appearance [bold type]interferes[roman type] with [its-their of the main actor] attack.";
+				say " [regarding the guy][Possessive] sudden appearance [bold type]interferes[roman type] with [regarding the main actor][their] attack.";
 				have the main actor start pressing the guy;
 				let the attack be the action of the main actor hitting the player;
 				choose the row with an action of the attack in the Table of Delayed Actions;
@@ -2443,7 +2443,7 @@ An unholy wave rule (this is the standard unholy wave rule):
 			deal m points of necromantic damage;
 			say "[if n is 1 and original n is not 1]and [end if][run paragraph on]";
 			have no-source inflict damage on guy;
-			say "[m] damage to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive] (which breaks [possessive of the guy] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
+			say "[m] damage to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive] (which breaks [regarding the guy][possessive] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
 			unless total damage is 0:
 				now concentration of the guy is 0;
 			decrease n by 1;
@@ -2464,7 +2464,7 @@ The description of a scroll of death is "Reading this scroll will deal damage to
 The plural of scroll of death is scrolls of death.
 
 Carry out reading a scroll of death:
-	consider the unholy wave rules;
+	follow the unholy wave rules;
 
 
 Section - Scroll of Alteration
@@ -2481,7 +2481,7 @@ The plural of scroll of alteration is scrolls of alteration.
 
 
 Carry out reading a scroll of alteration:
-	consider the mutating rules;
+	follow the mutating rules;
 	if mutated boolean is false:
 		say "Nothing happened!".
 	
@@ -3275,19 +3275,19 @@ An aftereffects rule (this is the dagger of draining aftereffects rule):
 			-- 1:
 				decrease defence of the global defender by 1;
 				increase defence of the global attacker by 1;
-				say "[possessive of the global defender] defensive reflexes, transferring them to [the global attacker].";
+				say "[regarding the global defender][possessive] defensive reflexes, transferring them to [the global attacker].";
 			-- 2:
 				decrease mind score of the global defender by 1;
 				increase mind score of the global attacker by 1;
-				say "[possessive of the global defender] mind score, transferring it to [the global attacker].";
+				say "[regarding the global defender][possessive] mind score, transferring it to [the global attacker].";
 			-- 3:
 				decrease body score of the global defender by 1;
 				increase body score of the global attacker by 1;
-				say "[possessive of the global defender] body score, transferring it to [the global attacker].";
+				say "[regarding the global defender][possessive] body score, transferring it to [the global attacker].";
 			-- 4:
 				decrease spirit score of the global defender by 1;
 				increase spirit score of the global attacker by 1;
-				say "[possessive of the global defender] spirit score, transferring it to [the global attacker].";.
+				say "[regarding the global defender][possessive] spirit score, transferring it to [the global attacker].";.
 
 An AI weapon selection rule for the dagger of draining (this is the Malygris prefers the dagger of draining rule):
 	increase the Weight by 10.
@@ -3844,12 +3844,12 @@ An aftereffects rule (this is the demon whip rule):
 	if the global attacker weapon is the demon whip:
 		if the attack damage is greater than 0:
 			if the global defender is alive:
-				say "The demon whip [bold type]breaks [possessive of the global defender] will[roman type] (-2 mind score)![paragraph break]";
+				say "The demon whip [bold type]breaks [regarding the global defender][possessive] will[roman type] (-2 mind score)![paragraph break]";
 				decrease mind score of global defender by 2;
 				if global defender is the player and global attacker is the demonic mistress:
 					if final mind of the player is less than 1:
 						say "'Come. You will serve my master,' the demon mistress breathes in your ear. Your will broken entirely, you meekly kneel as she chains your hands together, puts a collar around your neck, and pulls you along into the depths of hell.";
-						end the game saying "This is infinitely worse than being enslaved by a mindslug.";
+						end the story saying "This is infinitely worse than being enslaved by a mindslug.";
 						rule fails.
 
 

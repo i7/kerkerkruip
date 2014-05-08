@@ -65,10 +65,10 @@ A fragmentation rule (this is the basic fragmentation damage rule):
 		if fragmentation-place is the location:
 			say "[if n is 1 and original n is not 1]and [end if][run paragraph on]";
 			have fragmentation-item inflict damage on guy;
-			say " to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive and m is not 0] (which breaks [possessive of the guy] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
+			say " to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive and m is not 0] (which breaks [regarding the guy][possessive] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
 		otherwise:
 			have fragmentation-item inflict damage on guy, silently;	
-		unless m is 0:
+		unless total damage is 0:
 			now concentration of the guy is 0;
 		decrease n by 1;
 		if n is 0:

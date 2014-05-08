@@ -273,7 +273,7 @@ Check ChosenFighting (this is the how did we find the pedestal rule):
 Check ChosenFighting (this is the can't ChosenFight twice rule):
 	if the Arena of the Gods is conquered:
 		take no time;
-		say "You have already fought for the honour of [the patron of the player]!  [It-they] [is-are]n't willing to sit through another fight.";
+		say "You have already fought for the honour of [the patron of the player]!  [They] [aren't] willing to sit through another fight.";
 		stop the action.	
 
 To say Divine lightning strikes (guy - a person):
@@ -322,7 +322,7 @@ Carry out challenging someone in Arena of the Gods:
 	now the challenged god is a random god incarnated by the noun.
 	
 Before arena arrival of Arena of the Gods:
-	say "It pleases your God to have a champion fight in the Arena. [It-they of the patron of the player] grant[s] you 2 divine favour!";
+	say "It pleases your God to have a champion fight in the Arena. [regarding the patron of the player][They] grant[s] you 2 divine favour!";
 	say conditional paragraph break;
 	raise the favour of the player by 2;
 	say conditional paragraph break;
@@ -332,7 +332,7 @@ Before arena arrival of Arena of the Gods:
 	if the number of people in Arena of the Gods is greater than 1:
 		say "group, consisting of [list of persons in the Arena of the Gods], prepare themselves ";
 	otherwise:
-		say "[random person in Arena of the Gods] awaits, preparing [it-them]self "; 
+		say "[random person in Arena of the Gods] awaits, preparing [themselves] "; 
 	say "to fight for the honour of [the challenged god]!";
 
 To challenge (guy - a person) to fight for (benefactor - a god):
@@ -413,7 +413,7 @@ An absorption stopping rule (this is the alternative award at the Arena of the G
 	if hate is present, make no decision;
 	if the test subject is already-granted, make no decision;
 	now the test subject is already-granted;
-	say "[The patron of the player] receives the [if the level of test subject is greater than 0]soul[otherwise]blood[end if] of [possessive of the challenged god] champion, and [bold type]";
+	say "[The patron of the player] receives the [if the level of test subject is greater than 0]soul[otherwise]blood[end if] of [regarding the challenged god][possessive] champion, and [bold type]";
 	if the player is undead and (the permanent health of the player - the health of the player) > 32:
 		say "restores some of your health";
 		heal the player for 32 health;

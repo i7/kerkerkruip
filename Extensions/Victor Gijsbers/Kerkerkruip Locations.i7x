@@ -112,7 +112,7 @@ Check an actor hitting when the location is Hall of Mirrors (this is the sometim
 						say " Confused by the mirrors, [if global attacker is the player]you start[otherwise][the global attacker] starts[end if] attacking a reflection before realising [if global attacker is the player]your[otherwise]its[end if] mistake.";
 						if the concentration of the global attacker is greater than 1:
 							now the concentration of the global attacker is 1; 
-						consider the special dagger of double strike rule;
+						follow the special dagger of double strike rule;
 						rule fails;
 		[				consider the take away until attack circumstances rules;]
 					otherwise:
@@ -1413,7 +1413,7 @@ Check an actor concentrating when the living banshees boolean is true:
 	let y be the tension;
 	now y is y times 4 plus 20;
 	if a random chance of y in 100 succeeds:
-		say "The wailing of the banshees disturbs [possessive of the actor] attempt to concentrate." instead.
+		say "The wailing of the banshees disturbs [regarding the actor][possessive] attempt to concentrate." instead.
 
 An AI action selection rule for a person (called P) when the location is Hall of the Raging Banshees (this is the less concentration when banshees howl rule):
 	if the living banshees boolean is true:
@@ -1565,7 +1565,7 @@ A last creating the map rule (this is the place secret rooms rule):
 		if the place is placed, next;
 		now original room is Null-room;
 		now considered room is the place;
-		consider the placement possible rules;
+		follow the placement possible rules;
 		if rule succeeded:
 			put the place in a near location;
 		

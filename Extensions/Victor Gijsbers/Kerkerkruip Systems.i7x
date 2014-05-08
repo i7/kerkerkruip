@@ -1766,7 +1766,7 @@ Last check an actor hitting (this is the ghost form rule):
 	if current form is ghost-form:
 		if global attacker is player or global defender is player:
 			if a random chance of 1 in 2 succeeds:
-				say "Due to your [bold type]insubstantiality[roman type], [possessive of the global attacker] attack passes harmlessly through [the global defender]." instead.
+				say "Due to your [bold type]insubstantiality[roman type], [regarding the global attacker][possessive] attack passes harmlessly through [the global defender]." instead.
 
 Detection rule (this is the ghost detection rule):
 	if the current form is ghost-form:
@@ -2191,16 +2191,16 @@ Check feeding:
 	if blood magic cost of the noun is 0:
 		say "You cannot feed [the noun]." instead;
 	if blood magic level of the noun is blood magic maximum of the noun:
-		say "[The noun] [is-are] satiated." instead.
+		say "[The noun] [are] satiated." instead.
 
 Carry out feeding:
 	let n be current blood cost of the noun;
 	decrease health of the player by n;
 	if health of the player is less than 1:
 		say "You feed [n] health to [the noun], which is more than your body can handle.";
-		end the game saying "Foolish people should not dabble in blood magic.";
+		end the story saying "Foolish people should not dabble in blood magic.";
 	otherwise:
-		say "You feed [n] health to [the noun], increasing [its-theirs] power[if concentration of the player is greater than 0] (and losing your concentration)[end if]!";
+		say "You feed [n] health to [the noun], increasing [their] power[if concentration of the player is greater than 0] (and losing your concentration)[end if]!";
 		increase blood magic level of the noun by 1;
 		reset the blood timer of the noun;
 		now concentration of the player is 0;

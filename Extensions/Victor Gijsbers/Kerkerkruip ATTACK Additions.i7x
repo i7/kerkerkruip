@@ -127,7 +127,7 @@ The special set attack strength rules are a rulebook. [Used for periapt of proph
 An attack modifier rule (this is the alternative attack roll rule):
 	now roller is the global attacker;
 	now the attack strength is 0;
-	consider the special set attack strength rules;
+	follow the special set attack strength rules;
 	if attack strength is 0: [nothing intervened]
 		now the attack strength is a roll of the dice;
 	say "[italic type]Rolling ", the attack strength, "[run paragraph on]".
@@ -184,7 +184,7 @@ The remain concentrated rules are a rulebook.
 An aftereffects rule (this is the alternative lose concentration when hit rule):
 	if the the attack damage is greater than 0 and the global defender is alive and the concentration of the global defender is not 0:
 		now the remain concentrated chance is 0;
-		consider the remain concentrated rules;
+		follow the remain concentrated rules;
 		unless a random chance of remain concentrated chance in 100 succeeds:
 			let the global defender lose concentration;
 		otherwise:

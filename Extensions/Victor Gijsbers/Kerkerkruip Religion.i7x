@@ -276,7 +276,7 @@ Favour rule for Aite (this is the Aite favour 9 rule):
 			now mind score of the player is a;
 			now spirit score of the player is b;			
 		say "Aite shuffles your faculties -- you now have [body score of the player] body, [mind score of the player] mind, and [spirit score of the player] spirit. ";		
-		consider the mutating rules;
+		follow the mutating rules;
 		follow the consider mutations rule;
 		follow the consider mutations rule.
 

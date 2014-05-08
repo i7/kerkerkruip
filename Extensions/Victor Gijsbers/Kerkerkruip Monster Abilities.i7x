@@ -715,7 +715,7 @@ After printing the name of an asleep person while listing contents of a room:
 	say " (sleeping)[run paragraph on]".
 
 A followers rule (this is the follower must be able to act independently rule):
-	consider the independent action rules;
+	follow the independent action rules;
 	if rule failed:
 		rule fails;
 
@@ -1113,7 +1113,7 @@ Carry out a person disarming:
 	say first disarm text of the actor;
 	test the spirit of the noun against disarm strength of the actor;
 	if test result is true:
-		say "[roman type] [The noun] see[s] it coming in time, and manage[s] to keep [the X] out of [possessive of the actor] reach.";
+		say "[roman type] [The noun] see[s] it coming in time, and manage[s] to keep [the X] out of [regarding the actor][possessive] reach.";
 	otherwise:
 		say second disarm text of the actor;
 		now X is not readied;

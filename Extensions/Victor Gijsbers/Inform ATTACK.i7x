@@ -44,7 +44,7 @@ A specific action-processing rule (this is the after reporting stage rule):
 Section - New verbs
 
 To lunge is a verb.
-
+To miss is a verb.
 
 
 Volume - The Main System
@@ -286,7 +286,7 @@ Section - Calculating the attack roll
 The attack modifier rules are a rulebook.
 
 Carry out an actor hitting (this is the consider the attack modifier rules rule):
-	consider the attack modifier rules;
+	follow the attack modifier rules;
 
 First attack modifier rule (this is the standard attack roll rule):
 	now the attack strength is a random number between 1 and 10;
@@ -318,10 +318,10 @@ Carry out an actor hitting (this is the abide by the contact rules rule):
 First contact rule (this is the standard whether the attack hit rule):
 	if the attack strength is greater than the defence of the global defender:
 		if the numbers boolean is true:
-			say "[the global attacker] beat[s] [possessive of global defender] defence rating of ", the defence of the global defender, ".";
+			say "[the global attacker] beat[s] [regarding the global defender][possessive] defence rating of ", the defence of the global defender, ".";
 	otherwise:
 		if the numbers boolean is true:
-			say "[the global attacker] do[es] not overcome [possessive of global defender] defence rating of ", the defence of the global defender, "[roman type].";
+			say "[the global attacker] [do] not overcome [regarding the global defender][possessive] defence rating of ", the defence of the global defender, "[roman type].";
 		rule fails;
 
 
@@ -332,7 +332,7 @@ The damage modifier rules are a rulebook.
 The damage multiplier rules are a rulebook.
 
 Carry out an actor hitting (this is the consider the damage modifier rules rule):
-	consider the damage modifier rules;
+	follow the damage modifier rules;
 
 First damage modifier rule (this is the standard damage roll rule):
 	unless damage die of the global attacker weapon is less than 1:
@@ -342,7 +342,7 @@ First damage modifier rule (this is the standard damage roll rule):
 		say "[The global attacker] deal[s] ", the attack damage, "[run paragraph on]".
 
 Carry out an actor hitting (this is the consider the damage multiplier rules rule):
-	consider the damage multiplier rules;
+	follow the damage multiplier rules;
 
 Last damage multiplier rule (this is the can't deal negative damage rule):
 	if the attack damage is less than 0:
@@ -374,7 +374,7 @@ Report an actor hitting an alive person (this is the basic flavour rule):
 	if the attack damage is greater than 0:
 		say "[The global attacker] hit[s] [the global defender].[run paragraph on]";
 	otherwise:
-		say "[The global attacker] miss[es] [the global defender].[run paragraph on]";
+		say "[The global attacker] [miss] [the global defender].[run paragraph on]";
 
 Report an actor hitting a dead pc (this is the basic fatal player flavour rule):
 	say "You are killed by [the global attacker].[run paragraph on]";
@@ -394,7 +394,7 @@ The aftereffects rules is a rulebook.
 
 After reporting an actor hitting (this is the consider the aftereffects rules rule):
 	if the player is alive:
-		consider the aftereffects rules;
+		follow the aftereffects rules;
 
 An aftereffects rule when the global defender is dead (this is the unready weapons of dead person rule):
 	now all readied weapons enclosed by the global defender are not readied;
@@ -523,7 +523,7 @@ Last carry out an actor readying (this is the unready all other weapons rule):
 
 Last report an actor readying (this is the standard report readying rule):
 	if the noun is readied:
-		say "[The actor] read[ies] [the noun].";
+		say "[The actor] [ready] [the noun].";
 	otherwise:
 		if the actor encloses the noun:
 			say "[The actor] fool[s] around with [the noun], but fail[s] to ready it.";
@@ -617,7 +617,7 @@ Carry out an actor concentrating (this is the standard carry out concentrating r
 		now the concentration of the actor is 3;
 	
 Report an actor concentrating (this is the standard concentrating prose rule):
-	say "[The actor] concentrate[s], and [is-are]";
+	say "[The actor] concentrate[s], and [are]";
 	if the concentration of the actor is:
 		-- 1:
 			say " now mildly concentrated.";
@@ -667,7 +667,7 @@ After an actor hitting (this is the lose concentration after attacking rule):
 To let (the defender - a person) lose concentration:
 	if the concentration of the defender > 0:
 		now the concentration of the defender is 0;
-		consider the lose concentration prose rules for the defender;
+		follow the lose concentration prose rules for the defender;
 
 The lose concentration prose rules are a person based rulebook.
 

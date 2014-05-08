@@ -144,7 +144,7 @@ This is the show the console rule:
 		repeat through the Table of Requested Test Objects:
 			say "[the Object name entry][line break]";
 		say "[line break]Commands: ADD THING, DELETE THING, EMPTY (the whole list), QUIT[paragraph break]";
-		consider the parse command rule;
+		follow the parse command rule;
 		set the parser variables manually;
 		if quitting the game:
 			break;
