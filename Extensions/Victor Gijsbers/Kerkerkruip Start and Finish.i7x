@@ -1052,24 +1052,4 @@ Include (-
 
 -) after "Figures.i6t".
 
-
-Include (-
-
-Constant gestalt_Sound2	21;
-
-[ glk_schannel_pause _vararg_count ret;
-! glk_schannel_pause(chan);
-@glk 254 _vararg_count ret;
-return ret;
-];
-
-[ glk_schannel_unpause _vararg_count ret;
-! glk_schannel_unpause(chan);
-@glk 255 _vararg_count ret;
-return ret;
-];
-
--) after "Infglk" in "Glulx.i6t".
-
-
 Kerkerkruip Start and Finish ends here.
