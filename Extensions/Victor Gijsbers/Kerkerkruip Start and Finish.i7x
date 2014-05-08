@@ -24,7 +24,7 @@ This is the show the title screen rule:
 	carry out the showing the title screen activity;
 
 Last after showing the title screen:
-	consider the when play begins rules;
+	follow the when play begins rules;
 
 
 
@@ -364,13 +364,13 @@ This is the show the options menu rule:
 	display the (Table of Options Menu) menu with title "Options";
 
 [ H/M: menu ]
-Definition: a number is menu:
+Definition: a number is showmenu:
 	if it is 104, yes;
 	if it is 72, yes;
 	if it is 109, yes;
 	if it is 77, yes;
 	no.
-Menu command menu:
+Menu command showmenu:
 	rule succeeds with result the show the menu rule;
 
 This is the show the menu rule:
@@ -589,7 +589,9 @@ First after printing the player's obituary (this is the reset victories rule):
 		unless the player is victorious:
 			set difficulty to novice option;
 
-The reset victories rule is listed before the lower difficulty on restart rule in the carry out restarting the game rules.
+This is the other reset victories rule:
+	follow the reset victories rule.
+The other reset victories rule is listed before the lower difficulty on restart rule in the carry out restarting the game rules.
 
 Section - Difficulty level
 
@@ -820,7 +822,7 @@ To decide whether the player is victorious:
 
 Every turn (this is the victory rule):
 	if the player is victorious:
-		consider the victory message rules.
+		follow the victory message rules.
 
 	
 Last victory message rule (this is the normal victory message rule):		

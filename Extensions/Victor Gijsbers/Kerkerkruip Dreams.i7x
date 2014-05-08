@@ -144,7 +144,7 @@ Instead of going up in garden of thorns:
 		wait for any key;
 		say "You climb, and climb, but the window seems to grow no nearer. Blood streams down your forehead and into your eyes. You cannot feel the pain in your hands any more. And when your fingers refuse to go on, when your hands can no longer maintain their grip, when you topple backwards and fall down into the courtyard below, when you feel the air rush past you for the last few seconds of your life -- at that moment, you feel happy.";
 		now health of the player is 0;
-		end the game saying "You never abandoned your true love. Few people can say that.";
+		end the story saying "You never abandoned your true love. Few people can say that.";
 	otherwise:
 		say "You must climb the roses. You must. What is life worth if a [if the player is male]man[otherwise if the player is female]woman[otherwise]being[end if] gives up the attempt to find [if the player is male]his[otherwise if the player is female]her[otherwise]its[end if] true love? So you start climbing. The thorns prick you, and soon blood trickles down your hands and arms. But you climb on ...[paragraph break]";
 		decrease health of the player by 3;  [Not using the damage system; this dream damage bypasses all effects.]
@@ -276,7 +276,7 @@ banquet-menu-text is a list of texts that varies.
 banquet-items is a list of people that varies.
 
 Instead of doing anything when the current action involves the kitchen servant:
-	say "The servant approaches you. 'Which guest are we serving tonight?' [it-they of kitchen servant] asks.";
+	say "The servant approaches you. 'Which guest are we serving tonight?' [regarding the kitchen servant][they] ask[s].";
 	now the current question is "(Which enemy do you select?)";
 	now banquet-menu-text is {};
 	now banquet-items is {};
@@ -296,12 +296,12 @@ A menu question rule (this is the banquet selection rule):
 				have an event of the true body of the player killing the entree;
 			if Malygris is dead:
 				if the true body of the player is dead:
-					end the game saying "You and Malygris have both been consumed. Technically, that counts as a win.";
+					end the story saying "You and Malygris have both been consumed. Technically, that counts as a win.";
 				otherwise:
-					end the game saying "Malygris has been consumed by his own minions!"; 
+					end the story saying "Malygris has been consumed by his own minions!"; 
 			otherwise:
 				if the true body of the player is dead:
-					end the game saying "You have been consumed.";
+					end the story saying "You have been consumed.";
 				otherwise:
 					wake the player up;
 					exit;
@@ -347,7 +347,7 @@ This is the start dream of Monty Hall rule:
 
 Monty-Hall-voice is a number that varies. Monty-Hall-voice is 0.
 	
-Every turn when in Monty Hall:
+Every turn when the location is Monty Hall:
 	if Monty-Hall-voice is 0:
 		now Monty-Hall-voice is 1;
 		say "'Welcome to my game show, puny mortal!' a deep, disembodied voice announces. 'You must open one of these chests. One of them contains a great treasure, while two of them contain [bold type]death[roman type]! So choose wisely.'[paragraph break]After a few seconds it adds: 'Admittedly, I've put the treasure in a completely random chest, so your wisdom isn't going to be any help. But hey, nobody promised that life would be fair.'"

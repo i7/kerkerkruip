@@ -110,8 +110,8 @@ Last report attacking:
 		now combat state of the noun is at-React;
 		run the AI rules for the noun;
 		now the combat status is concluding;
-		consider the run delayed actions rule;
-		consider the conclude the combat round rule.
+		follow the run delayed actions rule;
+		follow the conclude the combat round rule.
 
 
 

@@ -720,14 +720,14 @@ Report opening the sarcophagus:
 		move sarcophagus-inhabitant to the location of the sarcophagus;
 		now the player is not hidden;
 		now the sarcophagus-inhabitant is not asleep;
-		have the parser notice the sarcophagus-inhabitant;
+		set pronouns from the sarcophagus-inhabitant;
 		if N is 0:
 			say "As you open the sarcophagus, [a sarcophagus-inhabitant] jumps out!";
 		otherwise:
 			say "As you open the sarcophagus, you see [a list of things enclosed by the sarcophagus]; but also [a sarcophagus-inhabitant] jumping out of it!";
 	otherwise if N > 0:
 		say "The sarcophagus contains [a list of things enclosed by the sarcophagus]. You pick [if N is 1]it[otherwise]them[end if] up.";
-		have the parser notice a random thing enclosed by the sarcophagus;
+		set pronouns from a random thing enclosed by the sarcophagus;
 		now the player carries everything enclosed by the sarcophagus;
 	otherwise:
 		say "The sarcophagus is disappointingly empty. Some other grave robber must have been here before you.";
@@ -973,7 +973,7 @@ Last check inserting something into the curious machine:
 		if the chosen grenade is cloneable:
 			now item is a usable copy of chosen grenade;
 		move item to the location;
-		have the parser notice the item;
+		set pronouns from the item;
 		increase machine-counter by 1;
 		remove the noun from play;
 		let explode-boolean be false;
@@ -1227,7 +1227,7 @@ After taking a player action:
 Examining is bypassing-scope.
 [ See more in Monsters ]
 
-Before doing something in the Drawing Room:
+Before doing something when the location is the Drawing Room:
 	if not bypassing-scope:
 		if the noun is a person and the location of the noun is not the location of the player:
 			take no time;

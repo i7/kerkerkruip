@@ -284,7 +284,7 @@ Every turn (this is the have followers follow rule):
 		repeat with guy running through worldsharer follower persons:
 			if guy is elsewhere:
 				now test subject is guy;
-				consider the followers rules;
+				follow the followers rules;
 				unless rule failed:
 					let the way be the best route from the location of guy to the location of the player;
 					if way is a direction, try guy going the way.
@@ -393,7 +393,7 @@ This is the do not go in combat when raging rule:
 			say "And allow [the Y] to live? Never![paragraph break][italic type](While enraged, you can only leave combat if you have 3 levels of concentration.)[roman type][line break]" instead.
 		
 
-The do not go in combat when raging rule is listed before the going and retreating in combat rule in the check going rules.
+The do not go in combat when raging rule is listed before the going and retreating during combat rule in the check going rules.
 The do not go in combat when raging rule is listed in the check retreating rules.
 The do not go in combat when raging rule is listed in the check digging rules.
 
@@ -555,7 +555,7 @@ This is the dreadful presence effect rule:
 				if m < 0:
 					now m is 1;
 				if a random chance of m in 100 succeeds:
-					say "[The main actor] cower[s] before [possessive of guy] [bold type]dreadful presence[roman type]!";
+					say "[The main actor] cower[s] before [regarding the guy][possessive] [bold type]dreadful presence[roman type]!";
 					now combat status is concluding.
 
 The dreadful presence effect rule is listed before the the main actor chooses an action rule in the combat round rules.
@@ -708,7 +708,7 @@ For printing a locale paragraph about a thing (called the item)
 			now the item is mentioned;
 	continue the activity.
 
-The use initial appearance in room descriptions except when asleep rule is listed before the use initial appearance in room descriptions rule in the for printing a locale paragraph about rules.
+The use initial appearance in room descriptions except when asleep rule is listed after the offer items to writing a paragraph about rule in the for printing a locale paragraph about rules. [TODO: changed to make the game compile, see http://inform7.com/mantis/view.php?id=1247 . Check whether it places the rule in the right location.]
 The use initial appearance in room descriptions rule is not listed in any rulebook.
 
 After printing the name of an asleep person while listing contents of a room:

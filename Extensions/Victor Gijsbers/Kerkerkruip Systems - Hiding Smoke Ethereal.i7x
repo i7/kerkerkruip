@@ -56,7 +56,7 @@ Every turn when the player is hidden (this is the possible detection rule):
 			unless all enemies are asleep:
 				now hiding roll is a roll of the dice;
 				say "[italic type]You roll a hiding check of [hiding roll] [run paragraph on]";
-				consider the detection rules;
+				follow the detection rules;
 				say " = [hiding roll], which must be positive.[roman type] [run paragraph on]";
 				if hiding roll > 0:
 					say "You [bold type]remain hidden[roman type].";
@@ -202,7 +202,7 @@ Every turn (this is the reduce smoke timer rule):
 		repeat with place running through rooms:
 			now test room is place;
 			now temporary smoke timer is smoke timer of place;
-			consider the smoke rules;
+			follow the smoke rules;
 			let n be smoke penalty of place;
 			now smoke timer of place is temporary smoke timer;
 			let m be smoke penalty of place;
@@ -240,10 +240,10 @@ Smoke rule (this is the smoke may drift in from another room rule):
 [Now we want to set up the dungeon properly, that is, we want to establish something like an equilibrium situation.]
 
 Last when play begins:
-	consider the smoke rules;
-	consider the smoke rules;
-	consider the smoke rules;
-	consider the smoke rules.		
+	follow the smoke rules;
+	follow the smoke rules;
+	follow the smoke rules;
+	follow the smoke rules.		
 
 
 Section - The backdrop

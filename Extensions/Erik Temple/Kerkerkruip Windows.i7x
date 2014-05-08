@@ -179,13 +179,13 @@ Window-drawing rule for the stats-window when the stats-window is g-present (thi
 	move focus to stats-window, clearing the window;
 	now long status is false;
 	now attribute printed is false;
-	consider the status combat stats rules;
-	consider the short player form status rule;[the player's form]
-	consider the status attribute rules;
+	follow the status combat stats rules;
+	follow the short player form status rule;[the player's form]
+	follow the status attribute rules;
 	say "[if attribute printed is true]. [end if][bracket][link 1]detailed status report[end link][close bracket][line break][run paragraph on]";
-	consider the unallocated faculty short status rule;[shortened message for any unassigned faculty points]
+	follow the unallocated faculty short status rule;[shortened message for any unassigned faculty points]
 	say "[line break][run paragraph on]";
-	consider the show basic stats rule;[show statistics]
+	follow the show basic stats rule;[show statistics]
 	say run paragraph on;
 	now long status is true;
 	return to main screen.
@@ -217,10 +217,10 @@ Section - Statistics window hyperlinks
 Hyperlink processing rule when the current hyperlink window is the stats-window and the current hyperlink ID is 1:
 	move focus to stats-window, clearing the window;
 	say "[link 2]< back[end link][line break][line break][run paragraph on]";
-	consider the show basic stats rule;
-	consider the status combat stats rules;
-	consider the status attribute rules;
-	consider the status skill rules;
+	follow the show basic stats rule;
+	follow the status combat stats rules;
+	follow the status attribute rules;
+	follow the status skill rules;
 	say run paragraph on;
 	return to main screen;
 	rule succeeds.
@@ -291,7 +291,7 @@ Section - Inventory window
 
 Window-drawing rule for the inventory-window when the inventory-window is g-present (this is the construct inventory window rule):
 	move focus to inventory-window, clearing the window;
-	consider the full inventory rule; 
+	follow the full inventory rule; 
 	say run paragraph on;
 	return to main screen.
 
@@ -393,7 +393,7 @@ Last after displaying:
 After restoring from a saved game:
 	shut down the status-window;
 	close side windows;
-	consider the check info panel capacity rule.
+	follow the check info panel capacity rule.
 
 
 Kerkerkruip Windows ends here.

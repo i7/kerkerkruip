@@ -8,7 +8,7 @@ Volume - Creating the Dungeon
 
 When play begins (this is the create the dungeon rule):
 	create the dungeon;
-	consider the further generation rules.
+	follow the further generation rules.
 	
 The further generation rules are a rulebook.
 

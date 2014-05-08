@@ -406,7 +406,7 @@ Report the blood ape hitting a dead pc:
 
 Report the blood ape attacking:
 	unless the noun is the actor:
-		say "The blood ape [one of]swings at [possessive of the noun] head[or]jumps at [the noun] with its fists ready to swing[at random].";
+		say "The blood ape [one of]swings at [regarding the noun][possessive] head[or]jumps at [the noun] with its fists ready to swing[at random].";
 	otherwise:
 		say "The blood ape swings its fists at its own head!";
 	rule succeeds.
@@ -1228,7 +1228,7 @@ First carry out an actor attacking the chain golem (this is the attack a spinnin
 					have X inflict damage on the actor;
 					if the actor is alive:
 						if the concentration of the actor is not zero:
-							say " and breaking [possessive of the actor] concentration.";
+							say " and breaking [regarding the actor][possessive] concentration.";
 							now concentration of the actor is 0;
 						otherwise:
 							say ".";
@@ -2101,7 +2101,7 @@ Report the hound concentrating:
 
 Report the hound attacking:
 	unless the actor is the noun:
-		say "[if hound status is 1 and the noun is the hound provoker][one of]Anticipating [or]Prepared for [at random][possessive of the noun] attack, the hound jumps at [it-them of the noun][otherwise]The hound leaps at [the noun][end if][one of] with a loud growl.[or], its teeth sharp and ready.[or] with unblinking eyes.[at random]";
+		say "[if hound status is 1 and the noun is the hound provoker][one of]Anticipating [or]Prepared for [at random][regarding the noun][possessive] attack, the hound jumps at [them][otherwise]The hound leaps at [the noun][end if][one of] with a loud growl.[or], its teeth sharp and ready.[or] with unblinking eyes.[at random]";
 	otherwise:
 		say "The hound bites down on its own tail.";
 	rule succeeds.
@@ -2625,7 +2625,7 @@ Every turn (this is the free slaves of the mindslug when it is killed rule):
 				say "[The guy] is freed from the mindslug's influence.[paragraph break]"
 
 Check a mindslug-enslaved npc attacking (this is the slaves may be freed from mindslug rule):
-	consider the free slaves of the mindslug when it is killed rule;
+	follow the free slaves of the mindslug when it is killed rule;
 	if actor is not mindslug-enslaved:
 		do nothing instead.
 
@@ -4657,8 +4657,8 @@ Report Israfel waiting when Israfel is insane:
 	let guy be a random alive person;
 	let guy2 be a random alive person;
 	while guy is guy2:
-		let guy2 be a random alive person;		
-	say "'After several million years of contemplation,' Israfel says, 'I am now ready to announce the truth: [the guy] [is-are] the creator of Heaven and Earth, and [the guy2] [is-are] the ruler of darkness!'";
+		let guy2 be a random alive person;	[Israfel and the player must both be alive, so no possibility of an infinite loop here.]	
+	say "'After several million years of contemplation,' Israfel says, 'I am now ready to announce the truth: [the guy] [are] the creator of Heaven and Earth, and [the guy2] [are] the ruler of darkness!'";
 	rule succeeds.
 
 
@@ -5124,7 +5124,7 @@ Section - Randomising Malygris
 The randomise Malygris rules are a rulebook.
 
 Last dungeon interest rule (this is the randomise Malygris rule):
-	consider the randomise Malygris rules.
+	follow the randomise Malygris rules.
 	
 
 Section - Special power - Teleportation

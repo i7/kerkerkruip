@@ -89,7 +89,7 @@ Report wearing:
 		now the player is wearing the hidden identity of the noun;
 		set pronouns from the hidden identity of the noun;
 		remove the noun from play;
-		say "As soon as you put on [the noun], your flesh crawls. You realise that [the noun] [is-are] actually [bold type][the hidden identity of the noun][roman type]!" instead.
+		say "As soon as you put on [the noun], your flesh crawls. You realise that [the noun] [are] actually [bold type][the hidden identity of the noun][roman type]!" instead.
 
 Report readying:
 	unless the hidden identity of the noun is the non-thing:
@@ -98,7 +98,7 @@ Report readying:
 		now the player carries the hidden identity of the noun;
 		now the hidden identity of the noun is readied;
 		set pronouns from the hidden identity of the noun;
-		say "As soon as you ready [the noun], a chilling feeling goes through your arms. [The noun] [is-are] actually [bold type][the hidden identity of the noun][roman type]!" instead.
+		say "As soon as you ready [the noun], a chilling feeling goes through your arms. [The noun] [are] actually [bold type][the hidden identity of the noun][roman type]!" instead.
 
 Last dungeon interest rule (this is the hidden identities also revealed by enemies rule):
 	repeat with item running through wearable hidden-identifiable not superhidden-identity things:
@@ -136,7 +136,7 @@ Check taking off something:
 		say "A curse makes the item unmovable." instead.
 
 After wearing a cursed not curse-identified thing:
-	 say "As soon as you put on [the noun], a chill goes through your body. You realise that [the noun] [is-are] cursed and cannot be removed with normal means.";
+	 say "As soon as you put on [the noun], a chill goes through your body. You realise that [the noun] [are] cursed and cannot be removed with normal means.";
 	now the noun is curse-identified.
 		
 Before printing the name of a cursed curse-identified thing:
@@ -156,7 +156,7 @@ A treasure placement rule:
 Section - Cursed weapons
 
 After readying something cursed:
-	say "As soon as you ready [the noun], a chill goes through your body. You realise that [the noun] [is-are] cursed and that you cannot let go.";
+	say "As soon as you ready [the noun], a chill goes through your body. You realise that [the noun] [are] cursed and that you cannot let go.";
 	now the noun is curse-identified.
 
 Check readying (this is the cannot ready when holding a cursed weapon rule):
@@ -1410,7 +1410,7 @@ Instead of examining the bulwark of faith:
 		let guy be a random person enclosing the bulwark of faith;
 		if guy is a person:
 			calculate the block bonus of the bulwark of faith;
-			say "This shield of shimmering [if the guy worships aite]red light[otherwise if the guy worships sul]golden light[otherwise if the guy worships nomos]silver light[otherwise if the guy worships chton]darkness[otherwise if the guy worships herm]shadows[otherwise]light[end if] gains its power from [possessive of guy] devotion to [if guy worships a god][a random god worshipped by guy][otherwise]a god[end if]. It's block bonus is equal to (favour + 3) / 4. Wearing it also slightly increases the chance of divine interventions on [possessive of guy] behalf. [italic type]Current block bonus: +[block bonus of the bulwark of faith][roman type]." instead;
+			say "This shield of shimmering [if the guy worships aite]red light[otherwise if the guy worships sul]golden light[otherwise if the guy worships nomos]silver light[otherwise if the guy worships chton]darkness[otherwise if the guy worships herm]shadows[otherwise]light[end if] gains its power from [regarding the guy][possessive] devotion to [if guy worships a god][a random god worshipped by guy][otherwise]a god[end if]. It's block bonus is equal to (favour + 3) / 4. Wearing it also slightly increases the chance of divine interventions on [regarding the guy][possessive] behalf. [italic type]Current block bonus: +[block bonus of the bulwark of faith][roman type]." instead;
 	say "This shield of shimmering light gains its power from the wearer's devotion to a god. It's block bonus is equal to (favour + 3) / 4. Wearing it also slightly increases the chance of divine interventions on your behalf.".
 		
 To calculate the block bonus of the bulwark of faith:
@@ -1597,7 +1597,7 @@ Every turn (this is the recover from flash rule):
 						if the main actor is conscious:
 							say "[The main actor] can [bold type]see again[roman type]!";
 						otherwise:
-							say "[Possessive of the main actor] [bold type]eyes function again[roman type].".
+							say "[regarding the main actor][Possessive] [bold type]eyes function again[roman type].".
 				
 A blindness rule (this is the blind if flashed rule):
 	if flash-grenade-timer of test subject is greater than 0:

@@ -81,7 +81,7 @@ Last check going (this is the treat going as retreat when possible rule):
 
 A person can be a runner. A person is usually not a runner.
 
-Last check going (this is the going and retreating in combat rule):
+Last check going (this is the going and retreating during combat rule):
 	let current-location be the location;
 	if the player is not hidden and the combat status is not peace:
 		if player is retreater:
@@ -368,7 +368,7 @@ Chapter - Monster information
 
 Last carry out examining a person:
 	unless the noun is the player:
-		say "[The noun] [is-are] [if level of the noun is not 0]a level [level of the noun in words] [creature-type of the noun] [interesting faction of the noun] creature[otherwise]a levelless [creature-type of the noun] [interesting faction of the noun] creature[end if].[run paragraph on]";
+		say "[The noun] [are] [if level of the noun is not 0]a level [level of the noun in words] [creature-type of the noun] [interesting faction of the noun] creature[otherwise]a levelless [creature-type of the noun] [interesting faction of the noun] creature[end if].[run paragraph on]";
 		if (noun is group leading or noun is grouper) and level of noun is not 0:
 			let guy be noun;
 			if noun is not group leading:
@@ -388,11 +388,11 @@ Last carry out examining a person:
 			say " [The noun] attack[s] using [item]: 1d[damage die of item] + [weapon damage bonus of the item] damage; [if weapon attack bonus of the item is less than 0]-[otherwise]+[end if][absolute value of weapon attack bonus of the item] attack modifier[if the item is ranged]; ranged[end if][natural parry and dodge info of the item][if the item is silver]; good against undead and demons[end if][special weapon info of the item][roman type].[run paragraph on]";
 		otherwise:
 			say " [The noun] attack[s] using [the item].[run paragraph on]";
-		say "[paragraph break][The noun] [has-have] [concentration of the noun] concentration, [offensive flow of the noun] offensive flow, and [defensive flow of the noun] defensive flow. [The noun] [is-are] of [size of the noun] size, and [has-have] [health of the noun] of [permanent health of the noun] health left.[run paragraph on]" ;
+		say "[paragraph break][The noun] [have] [concentration of the noun] concentration, [offensive flow of the noun] offensive flow, and [defensive flow of the noun] defensive flow. [The noun] [are] of [size of the noun] size, and [have] [health of the noun] of [permanent health of the noun] health left.[run paragraph on]" ;
 		say "[paragraph break]".
 		
 To say natural parry and dodge info of (item - a weapon):
-	say "; getting a [parry-with bonus of item] bonus when parrying with [it-them of item]; others get a [parry-against bonus of item] bonus when parrying, and a [dodge bonus of item] bonus when dodging against [it-them of item][run paragraph on]".		
+	say "; getting a [parry-with bonus of item] bonus when parrying with [regarding item][them]; others get a [parry-against bonus of item] bonus when parrying, and a [dodge bonus of item] bonus when dodging against [regarding item][them][run paragraph on]".		
 		
 To say interesting faction of (guy - a person):
 	say "[if faction of the player hates faction of guy and the guy is not enslaved and guy is not insane]hostile[otherwise if the guy is enslaved]enslaved[otherwise if the guy is insane]insane[otherwise]friendly[end if][run paragraph on]".

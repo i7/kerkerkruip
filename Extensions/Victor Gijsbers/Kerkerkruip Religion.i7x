@@ -540,25 +540,26 @@ To say itself-themselves:
 	otherwise:
 		say "himself";
 
-Before not attacklike behaviour (this is the Nomos makes you attack rule):
-	if Nomos bonus is false or the take no time boolean is true:
-		make no decision;
-	if the actor is not the Nomos attacker:
-		make no decision;
-	if the actor is not the main actor or the combat state of the actor is at-react:
-		make no decision;
-	now opposition test subject is the Nomos attacker;
-	if at least one opposer alive person is enclosed by the location:
-		let X be a random opposer person enclosed by the location;
-		say "[The actor] plan[s] on [current action], but find[s] [itself-themselves] attacking [the X] instead.";
-		try attacking X instead;
-		deactivate Nomos bonus;
-	otherwise:
-		say "[The actor] plan[s] on [current action], but find[s] [its-their] body attacking itself instead!";
-		try the player hitting the player instead;
-		deactivate Nomos bonus;
-		if the player is dead:
-			end the story saying "Nomos is not to be toyed with.".
+Before doing anything (this is the Nomos makes you attack rule):
+	if the current action is unattacklike:
+		if Nomos bonus is false or the take no time boolean is true:
+			make no decision;
+		if the actor is not the Nomos attacker:
+			make no decision;
+		if the actor is not the main actor or the combat state of the actor is at-react:
+			make no decision;
+		now opposition test subject is the Nomos attacker;
+		if at least one opposer alive person is enclosed by the location:
+			let X be a random opposer person enclosed by the location;
+			say "[The actor] plan[s] on [current action], but find[s] [itself-themselves] attacking [the X] instead.";
+			try attacking X instead;
+			deactivate Nomos bonus;
+		otherwise:
+			say "[The actor] plan[s] on [current action], but find[s] [their] body attacking itself instead!";
+			try the player hitting the player instead;
+			deactivate Nomos bonus;
+			if the player is dead:
+				end the story saying "Nomos is not to be toyed with.".
 
 Before attacklike behaviour when Nomos counter is greater than 0 (this is the Nomos stops you from attacking rule):
 	say "Deciding to break the command of Nomos, you plan on attacking [the noun]. However, you find yourself ";
@@ -807,7 +808,7 @@ To do a Chton gift:
 
 Section - Chton's intervention
 
-Intervention possible for when intervention-god is Chton:
+Intervention possible when intervention-god is Chton:
 	rule succeeds.
 
 Intervention bonus when intervention-god is Chton:

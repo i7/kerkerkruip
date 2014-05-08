@@ -39,7 +39,7 @@ Instead of going in Elemental Plane of Smoke when the player can move:
 		if a random chance of 1 in 20 succeeds:
 			move item to Elemental Plane of Smoke;
 			add item to lijst;
-			have the parser notice item;
+			set pronouns from item;
 	let lijst2 be a list of person;
 	repeat with guy running through persons in Elemental Plane of Smoke:
 		unless guy is the player:
@@ -168,8 +168,8 @@ To return shimmering items to (guy - a person):
 The demon boredom is a number which varies. The demon boredom is 0.
 The current dissatisfaction is a number which varies. The current dissatisfaction is 0.
 
-After not attacklike behaviour:
-	if the location is the Arena of the Fallen:
+After doing anything when the location is the Arena of the Fallen:
+	if the current action is unattacklike:
 		increase current dissatisfaction by 1;
 	continue the action.
 
@@ -189,7 +189,7 @@ Every turn when the location is the Arena of the Fallen and the combat status is
 	if distractionchance > 3:
 		if the concentration of guy > 0:
 			decrease the concentration of guy by 1;
-			say "Distracted by [one of]the strong sulfur smell[or]hundreds of prying, crimson eyes[or]gripping claws[or]the black figure towering above you[or]gruesome howling[purely at random], [if guy is the player]you are[otherwise][guy] [is-are][end if] unable to maintain this level of concentration. [if guy is the player]Your[otherwise][Possessive of guy][end if] current concentration is";
+			say "Distracted by [one of]the strong sulfur smell[or]hundreds of prying, crimson eyes[or]gripping claws[or]the black figure towering above you[or]gruesome howling[purely at random], [if guy is the player]you are[otherwise][guy] [are][end if] unable to maintain this level of concentration. [if guy is the player]Your[otherwise][regarding the guy][Possessive][end if] current concentration is";
 			if the concentration of guy is:
 				-- 0:
 					say " unconcentrated.";
@@ -387,7 +387,7 @@ Section - Interactions with Other Systems
 
 After changing form to an undead player form when the challenged god is Chton:
 	Let the opponent be a random alive arena-faction person who worships Chton; [Drakul]
-	say "You turn into a [form-name of current form], but your opponent do[es of the opponent]n't care that you're undead. [It-they of the opponent] fight[s] on for the honour of Chton!";
+	say "You turn into a [form-name of current form], but your opponent [regarding the opponent][don't] care that you're undead. [They] fight[s] on for the honour of Chton!";
 
 [handle summoning here too?]
 
@@ -399,11 +399,11 @@ Check an actor challenging someone in the Maze when the location is Arena of the
 First every turn when the location is Arena of the Gods (this is the reject enslavement in Arena of the Gods rule):
 	Repeat with offender running through god-champion people who do not oppose the player:
 		if offender does not oppose the player:
-			say "[The challenged god] is angered by [possessive of the offender] lack of faith! [Divine lightning strikes offender].";
+			say "[The challenged god] is angered by [regarding the offender][possessive] lack of faith! [Divine lightning strikes offender].";
 			if offender is alive:
 				now offender is arena-faction;
 				now arena-faction hates the faction of the player;
-				say "[line break][The offender] prostrates [it-them]self. 'I beg for your mercy, O great [challenged god],' [it-they of offender] pray[s]. Then [it-they] rise[s] to fight you again!";
+				say "[line break][The offender] prostrates [them]self. 'I beg for your mercy, O great [challenged god],' [regarding the offender][they] pray[s]. Then [they] rise[s] to fight you again!";
 
 Section - Awarding divine power 
 

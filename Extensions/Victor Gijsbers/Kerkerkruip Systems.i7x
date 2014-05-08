@@ -959,7 +959,11 @@ Chapter - Attacklike behaviour
 Attacking is attacklike behaviour.
 Hitting is attacklike behaviour.
 
+[Code below needed because Inform 7 has stopped accepting "not attacklike behaviour".]
 
+To decide whether (deed - a stored action) is unattacklike:
+	if deed is attacklike behaviour, no;
+	yes.
 
 Chapter - Doing risky things
 
