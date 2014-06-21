@@ -25,7 +25,7 @@ The reaction prompt is a text variable. The reaction prompt is "React>".
 Section - I6 variables
 
 The meta flag is a truth state variable. The meta flag variable translates into I6 as "meta".
-The yourself text is a text variable. The yourself text variable translates into I6 as "YOURSELF__TX".
+[The yourself text is a text variable. The yourself text variable translates into I6 as "YOURSELF__TX".]
 
 [ Normally you can't set a person variable to no one, but you can like this! ]
 The stand in for no one is a person variable. The stand in for no one variable translates into I6 as "nothing".
@@ -35,10 +35,20 @@ Section - Referring to the player
 [ See manual section 2.1.3 ]
 
 [ When we talk about the player in combat events, we do not want to say "yourself". ]
-When play begins (this is the change the yourself text rule):
-	now the yourself text is "you".
+[When play begins (this is the change the yourself text rule):
+	now the yourself text is "you".]
 
 [ TODO: put back yourself where it is needed! ]
+
+[UGLY. Can we do this better??]
+[Does this automatically override the Standard Rules?]
+
+The print protagonist internal rule translates into I6 as
+	"PRINT_PROTAGONIST_INTERNAL_R" with
+	"[We]" (A),
+	"[us]" (B),
+	"[our] former self" (C).
+
 	
 
 
