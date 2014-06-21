@@ -210,7 +210,9 @@ Include (- [ Keyboard  a_buffer a_table  nw i w w2 x1 x2;
 		!	@push etype; etype = BLANKLINE_PE;
 		!	players_command = 100;
 		!	BeginActivity(PRINTING_A_PARSER_ERROR_ACT);
-		!	if (ForActivity(PRINTING_A_PARSER_ERROR_ACT) == false) L__M(##Miscellany,10);
+		!	if (ForActivity(PRINTING_A_PARSER_ERROR_ACT) == false) {
+		!		PARSER_ERROR_INTERNAL_RM('X', noun); new_line;
+		!	}
 		!	EndActivity(PRINTING_A_PARSER_ERROR_ACT);
 		!	@pull etype;
 		!	continue;
@@ -221,9 +223,9 @@ Include (- [ Keyboard  a_buffer a_table  nw i w w2 x1 x2;
 	
 		w = a_table-->1;
 		if (w == OOPS1__WD or OOPS2__WD or OOPS3__WD) {
-			if (oops_from == 0) { L__M(##Miscellany, 14); continue; }
-			if (nw == 1) { L__M(##Miscellany, 15); continue; }
-			if (nw > 2) { L__M(##Miscellany, 16); continue; }
+			if (oops_from == 0) { PARSER_COMMAND_INTERNAL_RM('A'); new_line; continue; }
+			if (nw == 1) { PARSER_COMMAND_INTERNAL_RM('B'); new_line; continue; }
+			if (nw > 2) { PARSER_COMMAND_INTERNAL_RM('C'); new_line; continue; }
 		
 			! So now we know: there was a previous mistake, and the player has
 			! attempted to correct a single word of it.
@@ -258,7 +260,7 @@ Include (- [ Keyboard  a_buffer a_table  nw i w w2 x1 x2;
 				! If the replacement is longer than the original, move up...
 				for (i=INPUT_BUFFER_LEN-1 : i>=w+x2 : i-- )
 					a_buffer->i = a_buffer->(i-x2+w2);
-
+		
 				! ...increasing buffer size accordingly.
 				#Ifdef TARGET_ZCODE;
 				a_buffer->1 = (a_buffer->1) + (x2-w2);
@@ -293,12 +295,13 @@ Include (- [ Keyboard  a_buffer a_table  nw i w w2 x1 x2;
 			SL_Location(); print "^";
 			! print (name) location, "^";
 			VM_Style(NORMAL_VMSTY);
-			L__M(##Miscellany, 13);
+			IMMEDIATELY_UNDO_RM('E'); new_line;
 			continue;
 		}
 		return nw;
 	}
 ]; -) instead of "Reading the Command" in "Parser.i6t".
+
 
 After reading a command (this is the blank line is go to rule):
 	let T be indexed text;

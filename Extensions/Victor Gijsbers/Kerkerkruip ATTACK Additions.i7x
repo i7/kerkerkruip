@@ -275,7 +275,7 @@ The mind bonus rules are a rulebook.
 The spirit bonus rules are a rulebook.
 The faculty bonus rules are a rulebook.
 
-To process (RL - a rule): (- ProcessRulebook({RL}, 0, true); -).
+To process (RL - a rule): (- FollowRulebook({RL}, 0, true); -).
 
 Faculty bonus score is a number that varies.
 

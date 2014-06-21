@@ -889,10 +889,11 @@ Section - Quitting
 Include (-
 
 [ QUIT_THE_GAME_R;
-    if (actor ~= player) rfalse;
-    GL__M(##Quit, 2); if (YesOrNo()~=0) FollowRulebook( (+finally quitting the game rules+) ) ;
+	if (actor ~= player) rfalse;
+	if ((actor == player) && (untouchable_silence == false))
+		QUIT_THE_GAME_RM('A');
+	if (YesOrNo()~=0) FollowRulebook( (+finally quitting the game rules+) );
 ];
-
 -) instead of "Quit The Game Rule" in "Glulx.i6t".
 
 Finally quitting the game is a rulebook.
