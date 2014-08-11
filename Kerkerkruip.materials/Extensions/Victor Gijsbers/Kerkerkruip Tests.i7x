@@ -107,7 +107,7 @@ Last when play begins rule (this is the identify test object scrolls rule):
 	repeat with T running through testobject scrolls in the Entrance Hall:
 		identify T;
 
-Section - The test object console
+[Section - The test object console
 
 The early in turn sequence flag is a truth state variable. The early in turn sequence flag variable translates into I6 as "EarlyInTurnSequence".
 The test object console is a truth state variable.
@@ -173,7 +173,7 @@ Rule for constructing the status line while the test object console is true:
 
 Table of Console Status
 left	central	right
-""	"The Kerkerkruip console"	""
+""	"The Kerkerkruip console"	""]
 
 
 

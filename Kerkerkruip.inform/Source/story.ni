@@ -27,7 +27,7 @@ Section - 3rd Party Inclusions
 Include Basic Screen Effects by Emily Short. 
 Include Numbered Disambiguation Choices by Aaron Reed.
 Include version 10/140201 of Glulx Entry Points by Emily Short.
-Include version 7/130712 of Dynamic Objects by Jesse McGrew.
+Include version 8/140515 of Dynamic Objects by Jesse McGrew.
 [Include Fixed Point Maths by Michael Callaghan.] [I guess we don't need this anymore. Also, it doesn't compile with 6L02.]
 Include Questions by Michael Callaghan.
 Include version 1/140209 of Interpreter Sniffing by Friends of I7.
@@ -36,25 +36,34 @@ Include version 1/140209 of Interpreter Sniffing by Friends of I7.
 
 [ This belongs in Actions, but it has to be defined before the Glimmr and Windows extensions. We should move this somewhere sensible later, and maybe use it for all the options? ]
 An option is a kind of value.
+The information panels are an option.
 
 
 
 Section - Graphics and Windows
 
 [ Disable the status line purely to prevent reverse mode from being switched on. This doesn't prevent us from opening the status line manually, which we already had to do. ]
-Use no status line.
+[Use no status line.]
 
 [ Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. It is not necessary to comment out Flexible Windows when Glimmr is commented in. ]
 
-Include version 14/140419 of Flexible Windows by Jon Ingold.
+[Include version 14/140419 of Flexible Windows by Jon Ingold.]
 
 [Include Kerkerkruip Glimmr Additions by Erik Temple.]
 
 Include version 1/140416 of Menus by Dannii Willis.
-Include Kerkerkruip Windows by Erik Temple.
+[Include Kerkerkruip Windows by Erik Temple.]
 
 [Include Extended Debugging by Erik Temple.]
 
+Attribute printed is a truth state variable. Attribute printed is false.
+
+To check initial position of attribute:
+	if attribute printed is false:
+		say "You are [run paragraph on]";
+		now attribute printed is true;
+	otherwise:
+		say ", [run paragraph on]".
 
 
 Section - Include ATTACK
@@ -135,7 +144,7 @@ Every turn:
 [Dream of Tungausy Shaman is current-test-dream.]
 
 
-Section - Flexible Windows relisting
+[Section - Flexible Windows relisting
 
 [Kerkerkruip's when play begin rules don't fire until after the menu is cleared. This means that extension such as Flexible Windows that have critical startup code in when play begins need to be adjusted. Due to weaknesses in Inform's extension interactions, this has to be in story.ni rather than the Kerkerkruip Glimmr Additions extension.]
 
@@ -144,7 +153,7 @@ The initial hyperlink request rule is not listed in the when play begins rules. 
 
 Section - Relist rock validation rule (not for release)
 
-The rock validation rule is not listed in the when play begins rules. The rock validation rule is listed before the show the title screen rule in the startup rules.
+The rock validation rule is not listed in the when play begins rules. The rock validation rule is listed before the show the title screen rule in the startup rules.]
 
 
 
