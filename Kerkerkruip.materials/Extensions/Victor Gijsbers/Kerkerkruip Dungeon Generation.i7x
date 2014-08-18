@@ -4,9 +4,57 @@ Use authorial modesty.
 
 
 
-Volume - Creating the Dungeon
+Book - The dungeon generation seed
 
-When play begins (this is the create the dungeon rule):
+[ We use an xorshift generator to produce all random numbers during the dungeon generation process. The dungeon seed is the initial xorshift seed in hexadecimal, and optionally the lower half of the final xorshift seed at the end of the process, which is used to check if the dungeon was correctly generated. So a valid seed will be either 8 or 12 digits long. If we are careful it should be possible to use seeds across minor updates, but not major ones. ]
+
+The dungeon generation seed is a number variable.
+The dungeon generation check is a number variable.
+
+After showing the title screen (this is the seed the xorshift generator rule):
+	[ Seed the xorshift generator ]
+	if the dungeon generation seed is 0:
+		seed the xorshift generator randomly;
+		now the dungeon generation seed is the xorshift seed;
+	otherwise:
+		now the xorshift seed is the dungeon generation seed;
+
+The show the banner and dungeon generation seed rule is listed instead of the display banner rule in the startup rules.
+A startup rule (this is the show the banner and dungeon generation seed rule):
+	say "[banner text]Dungeon seed: [dungeon generation seed in hexadecimal to 8 places][xorshift seed in hexadecimal to 4 places][line break]";
+	if the dungeon generation check is not 0 and the dungeon generation check failed:
+		say "[line break][bold type]Warning:[roman type] The dungeon that has been generated does not match the dungeon seed you entered. Check if the seed you entered is for a different version of [Kerkerkruip].";
+	now the xorshift seed is 0;
+
+To say (value - a number) in hexadecimal to (digits - a number) places:
+	(- say_hex( {value}, {digits} ); -).
+
+Include (-
+[ say_hex value digits i temp;
+	for ( i = digits - 1 : i >= 0 : i-- )
+	{
+		@ushiftr value i temp;
+		temp = temp & $0F;
+		if ( temp > 9 )
+		{
+			print (char) ( temp + 55 );
+		}
+		else
+		{
+			print temp;
+		}
+	}
+];
+-).
+
+To decide if the dungeon generation check failed:
+	(- ( xorshift_seed & $FFFF ~= (+ dungeon generation check +) ) -).
+
+
+
+Book - Creating the Dungeon
+
+A first when play begins rule (this is the create the dungeon rule):
 	create the dungeon;
 	follow the further generation rules.
 	
@@ -707,7 +755,7 @@ The monster placement scoring rules are a rulebook.
 
 
 
-Book -Treasures
+Book - Treasures
 
 To stock the dungeon:
 	follow the treasure placement rules;

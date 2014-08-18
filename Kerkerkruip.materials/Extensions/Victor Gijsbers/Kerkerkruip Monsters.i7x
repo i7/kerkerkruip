@@ -1672,7 +1672,8 @@ When play begins:
 
 The reaper is a weapon user.
 
-First when play begins (this is the Reaper carries a random scythe rule): [first, to stop game from readying another weapon]
+The Reaper carries a random scythe rule is listed before the ready weapons for everyone rule in the when play begins rules.
+When play begins (this is the Reaper carries a random scythe rule):
 	let m be a random number between 1 and 3;
 	if m is 1:
 		move the scythe of flaming to the Reaper;

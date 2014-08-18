@@ -11,7 +11,7 @@
 
 The story headline is "An IF roguelike".
 The story genre is "dungeon crawl".
-The release number is 9.
+The release number is 10.
 The story description is "Kerkerkruip is a short-form roguelike in the interactive fiction medium, featuring meaningful tactical and strategic depth, innovative game play, zero grinding, and a sword & sorcery setting that does not rehash tired clichés."
 Release along with cover art and a file of "Gargoyle config file" called "Kerkerkruip.ini".
 
@@ -28,9 +28,9 @@ Include Basic Screen Effects by Emily Short.
 Include Numbered Disambiguation Choices by Aaron Reed.
 Include version 10/140201 of Glulx Entry Points by Emily Short.
 Include version 8/140515 of Dynamic Objects by Jesse McGrew.
-[Include Fixed Point Maths by Michael Callaghan.] [I guess we don't need this anymore. Also, it doesn't compile with 6L02.]
 Include Questions by Michael Callaghan.
 Include version 1/140209 of Interpreter Sniffing by Friends of I7.
+Include version 1/140818 of Xorshift by Dannii Willis.
 
 
 
