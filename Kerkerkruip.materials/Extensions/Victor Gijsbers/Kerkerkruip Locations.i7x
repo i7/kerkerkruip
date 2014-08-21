@@ -47,7 +47,7 @@ Say-possessions is a truth state that varies. Say-possessions is true.
 To say initial-possessions:
 	if say-possessions is true:
 		now say-possessions is false;
-		say ".[paragraph break]You possess [a list of things had by the player][run paragraph on]"
+		say ".[paragraph break]You possess [a list of things had by the player][if ment timer is not 0], and are [bold type]under the influence of ment[roman type][run paragraph on]"
 
 
 The skull-sized rubies are in entrance hall. The skull-sized rubies are scenery and plural-named. The description of the skull-sized rubies is "They have been filled with the power of suns long extinct, and are now fixed to the ceiling of the wizard's domain. You cannot bear to look at them.". Check taking the skull-sized rubies: say "They are secured to the ceiling by magic more powerful than you can break." instead.

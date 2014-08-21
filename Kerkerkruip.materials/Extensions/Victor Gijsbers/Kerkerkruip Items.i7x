@@ -626,6 +626,19 @@ A special set attack strength rule (this is the periapt attack roll rule):
 		if the main actor is the player:
 			now attack strength is periapt attack strength.
 
+Section - Addict's amulet (special)
+
+[Part of the special addict's starting kit.]
+
+The addict's amulet is a cursed curse-identified necklace.
+The addict's amulet is magical.
+The addict's amulet is silver.
+
+The description of the addict's amulet is "Silver cunningly wrought in the likeness of the fruit of kings, the fruit from which the divine substance known as ment is made. It has been imbued with a magic that makes the wearer's trances last several turns longer.".
+
+[The amulet's logic is inside the "have the ment kick in routine".]
+
+
 
 Chapter - Hats
 
@@ -823,6 +836,8 @@ After an actor hitting (this is the alternative lose concentration after attacki
 	continue the action.
 
 The lose concentration after attacking rule is not listed in any rulebook.
+
+
 
 
 Chapter - Shirts
@@ -4077,9 +4092,11 @@ To have the ment kick in:
 			otherwise:
 				end the story saying "You OD'ed.";
 	now the ment timer is a random number between 10 and 15;
+	if the player wears the addict's amulet:
+		increase ment timer by a random number between 3 and 4;
 	if ment addiction is 6:
 		award achievement Sixth heaven.
-	
+		
 
 
 Status combat stats rule (this is the ment status rule):

@@ -742,6 +742,8 @@ Last when play begins:
 	let n be a random number between 1 and 7;
 	if difficulty is 0 and advanced content is disabled:
 		now n is 1; [Novice players without advanced content always have the same starting kit.]
+	if difficulty is greater than 1 and a random chance of 1 in 20 succeeds:
+		now n is 50;
 	if n is 1:
 		move gilded rapier to the player;
 		now gilded rapier is readied;
@@ -770,12 +772,17 @@ Last when play begins:
 	if n is 7:
 		move gilded rapier to player;
 		now gilded rapier is readied;
-		unready fists;		
+		unready fists;
 		equip player from option-7-chest; 
+	if n is 50:
+		move gilded rapier to player;
+		now gilded rapier is readied;
+		unready fists;
+		now player wears the addict's amulet;		
+		have the ment kick in;
 	repeat with item running through things enclosed by the player:
 		if item is a weapon or item is clothing:
 			now item is not cursed.
-
 To equip player from (box - a container):
 	repeat with item running through things enclosed by box:
 		move item to player;
