@@ -1328,7 +1328,7 @@ A remove specific damage rule (this is the plate mail physical damage reduction 
 An attack modifier rule (this is the plate mail attack modifiers rule):
 	if the global defender wears suit of plate mail:
 		if the global defender is retreater or the global defender is runner:
-			say " + 2 (slowed down by plate mail)[run paragraph on]";
+			say " + 2 (defender slowed down by plate mail)[run paragraph on]";
 			increase the attack strength by 2;
 	if the global attacker wears suit of plate mail:
 		say " - 1 (slowed down by plate mail)[run paragraph on]";
@@ -3910,7 +3910,7 @@ Instead of drinking vial of purification:
 	remove noun from play;
 	let n be 0;
 	if the player worships Chton:
-		say "Chton prevents the vial of purification from doing its work; but your attempt at escaping undeath did not amuse him. A wave of extreme cold racks your body, dealing [run paragraph on]";
+		say "Chton prevents the vial of purification from doing its work; but your attempt at escaping undeath did not amuse him. A wave of extreme cold racks your body, dealing 15[run paragraph on]";
 		deal 15 points of divine damage;
 		have no-source inflict damage on player;
 		say "!";

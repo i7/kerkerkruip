@@ -216,7 +216,7 @@ Falling rule (this is the Lake of Lava kills fallers rule):
 			if falling-guy is player:
 				end the story saying "You fell into the lava";
 			otherwise:
-				now the health of falling-guy is -10;
+				now the health of falling-guy is -10; [Instakill effect, bypasses the damage system.]
 			rule succeeds.
 
 
@@ -494,8 +494,10 @@ Instead of touching the statue of Aite:
 	try climbing the statue of Aite.
 
 Instead of climbing the statue of Aite:
-	say "You cut yourself badly as soon as you touch the statue.";
-	decrease the health of the player by 3;
+	say "You cut yourself as soon as you touch the statue. The weapons deal 3[run paragraph on]";
+	deal 3 points of physical damage;
+	have statue of Aite inflict damage on the player;
+	say ".";
 	if the health of the player is less than 1:
 		end the story saying "You sacrificed yourself to Aite".
 
