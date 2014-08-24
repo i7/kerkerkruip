@@ -1475,8 +1475,8 @@ A contact rule when the global attacker is the jumping bomb (this is the jumping
 		rule fails;
 	otherwise:
 		say "[roman type]When the jumping bomb hits [the global defender], it explodes with a terrible bang. [if the global defender is the player]Not even all the king's horses and all the king's men will be able to put the thousand pieces of your body back together[otherwise][The global defender] is killed instantly[end if].";
-		now the health of the global attacker is -10;
-		now the health of the global defender is -10;
+		now the health of the global attacker is -10; [Bypasses normal damage system.]
+		now the health of the global defender is -10; [Bypasses normal damage system.]
 		have an event of the global attacker killing the global defender;		
 		if the player is not alive:
 			end the story saying "You exploded";
@@ -1614,19 +1614,21 @@ Killing rule (this is the explode after death rule):
 				let m be final body of the player;
 				if m is less than 5, now m is 5;
 				let n be a random number between 5 and m;
-				if health of the explosion victim is not greater than n:
+				deal n points of physical damage;
+				have no-source inflict damage on explosion victim, silently;
+				if health of the explosion victim is less than 1:
 					say "Your body explodes vehemently, killing [the explosion victim][if the abyss of the soul and the player share a world]. Your soul attempts to swallow that of your enemy, but before this can happen, you are both sucked into the abyss of the soul[otherwise if the level of the explosion victim is greater than 4]. Your soul attempts to swallow that of your enemy, but [the explosion victim] is quicker and far more powerful, swallowing yours and thus coming back to life. You, however, are destroyed for all eternity[otherwise]! As your soul swallows that of your enemy whole, you feel your body reconstituting itself[end if].[paragraph break]";
 					if the level of the explosion victim is not greater than 4:
 						unless the abyss of the soul and the player share a world:
 							now the health of the player is 1;
-							now the health of the explosion victim is -1;
+							now the health of the explosion victim is -10;
 							have an event of the player killing explosion victim;
 				otherwise:
 					say "Your body explodes vehemently as you throw yourself at [the explosion victim], but you only deal [n] damage instead of the [health of the explosion victim] damage you needed to deal.[paragraph break]".
 		
 Status skill rule (this is the jumping bomb power status skill rule):
 	if power of the bomb is granted:
-		say "When you die, you [bold type]explode[roman type], dealing an amount of damage to your enemy based on your body score. This gives you a last chance to kill an enemy, and perhaps absorb a soul and come back to life in the process. [italic type](Level 2)[roman type][line break][run paragraph on]".
+		say "When you die, you [bold type]explode[roman type], dealing an amount of physical damage to your enemy based on your body score. This gives you a last chance to kill an enemy, and perhaps absorb a soul and come back to life in the process. [italic type](Level 2)[roman type][line break][run paragraph on]".
 
 
 
@@ -1820,7 +1822,7 @@ Carry out reaping:
 		now concentration of guy is 0;
 	let n be final spirit of the player;
 	unless a random chance of n in 33 succeeds:
-		decrease health of the player by greatest power of the player;
+		decrease health of the player by greatest power of the player; [Bypasses damage system.]
 		decrease permanent health of the player by greatest power of the player;
 		if the health of the player is less than 1:
 			end the story saying "Your dedication to Death went too far.";
@@ -3022,10 +3024,11 @@ Carry out the giant tentacle tentacle-constricting:
 				now preventer is item;
 			now i is constriction prevention of item; [at the end of the repeat, preventer is the item with the largest constriction prevention]
 	if n is greater than m: [constriction prevention < constriction level: normal damage]
-		decrease health of the chosen target by constriction level;
+		deal constriction level points of physical damage;
+		have the giant tentacle inflict damage on the chosen target, silently;
 		if m is greater than 0:
 			remove preventer from play; [and the preventing item gets smashed]
-		say "The giant tentacle tightens its muscles, dealing [bold type][constriction level] damage[roman type] to [the name of the chosen target].[if m is greater than 0] [The preventer] get[s] smashed in the process[end if]";
+		say "The giant tentacle tightens its muscles, dealing [bold type][total damage] damage[roman type] to [the name of the chosen target][if m is greater than 0]. [The preventer] get[s] smashed in the process[end if].";
 		if the chosen target is dead:
 			have an event of the giant tentacle killing the chosen target;
 			now constriction level is 0;
@@ -4111,11 +4114,12 @@ Every turn when the swarm of bees is in the location:
 	if at least one alive not druidic person is in the location:
 		let guy be a random alive not druidic person in the location;
 		let n be a random number between 1 and 3;
-		decrease health of guy by n;
+		deal n points of physical damage;
+		have the swarm of bees inflict damage on guy, silently;
 		say "The swarm of bees attacks [the guy], dealing [bold type][n] damage[roman type][if health of guy is less than 1], which is [bold type]deadly[roman type][otherwise if concentration of guy is greater than 0] and breaking [bold type]concentration[roman type][end if].";
 		now concentration of guy is 0;
 		if guy is the player and health of the player is less than 0:
-			end the story saying "That must sting!".
+			end the story saying "A stinging defeat!".
 			
 Last every turn when the swarm of bees is in the location:
 	if a random chance of 1 in 8 succeeds:
@@ -4627,8 +4631,9 @@ An aftereffects rule (this is the Israfel's blinding attack rule):
 An aftereffects rule (this is the Israfel's burning defence rule):
 	if the global defender is Israfel and attack damage is greater than 0:
 		unless global attacker weapon is ranged:
-			decrease health of global attacker by 3;
-			say "Israfel's flames [bold type]burn[roman type] [the global attacker] [if global attacker is alive]for [bold type]3 damage[roman type][otherwise][bold type]to death[roman type][end if].";
+			deal 3 points of heat damage;
+			have Israfel inflict damage on the global attacker, silently;
+			say "Israfel's flames [bold type]burn[roman type] [the global attacker] [if global attacker is alive]for [bold type][total damage] damage[roman type][otherwise][bold type]to death[roman type][end if].";
 			if global attacker is the player and the player is not alive:
 				end the story saying "You will burn in Heaven.".
 
@@ -4712,8 +4717,9 @@ Section - Isra specials and AI
 An aftereffects rule (this is the Isra's burning defence rule):
 	if the global defender is Isra and attack damage is greater than 0:
 		unless global attacker weapon is ranged:
-			decrease health of global attacker by 2;
-			say "Isra's flames [bold type]burn[roman type] [no dead property][the global attacker][dead property] [if global attacker is alive]for [bold type]2 damage[roman type][otherwise][bold type]to death[roman type][end if].";
+			deal 2 points of heat damage;
+			have Isra inflict damage on global attacker;
+			say "Isra's flames [bold type]burn[roman type] [no dead property][the global attacker][dead property] [if global attacker is alive]for [bold type][total damage] damage[roman type][otherwise][bold type]to death[roman type][end if].";
 			if global attacker is the player and the player is not alive:
 				end the story saying "You will burn in Heaven.".
 
@@ -5430,7 +5436,7 @@ Every turn (this is the Nameless Horror kills all rule):
 			let guy be Nameless Horror;
 			while guy is Nameless Horror:
 				let guy be a random alive person enclosed by the location of Nameless Horror;
-			decrease health of guy by 100;
+			decrease health of guy by 100; [Bypasses the damage system.]
 			if guy is dead:
 				remove guy from play.
 
@@ -5870,7 +5876,7 @@ The abyss of the soul is small.
 The abyss of the soul is not talker.
 The abyss of the soul is not thrower.
 The abyss of the soul is not sleeper.
-Materiall of the abyss of the soul is darkness.
+Material of the abyss of the soul is darkness.
 
 The description of the Abyss of the Soul is "This [size of the abyss of the soul] sphere of utter darkness is an abyss of the soul, one of the most fearsome of undead monsters. Not only does it sap the strength of all nearby living creatures, it also feeds on the souls of the recently departed.".
 
@@ -5918,19 +5924,30 @@ Check the abyss of the soul waiting:
 Pulsating is an action applying to nothing.
 
 Carry out the abyss of the soul pulsating:
-	let n be a random number between 1 and the abyss of the soul strength;
-	let lijst be a list of person;
+	let n be the number of alive not undead persons in the location;
+	let original n be n;
 	let dodenlijst be a list of persons;
 	let achieve-temp be 0;
-	repeat with guy running through alive persons in the location:
-		unless guy is undead:
-			add guy to lijst;
-			decrease health of guy by n;
+	if n is not 0:
+		say "The abyss of the soul pulsates, sending out a wave of negative energy that deals [run paragraph on]";
+		repeat with guy running through alive not undead persons in the location:
+			say "[if n is 1 and original n is not 1]and [end if][run paragraph on]";
+			let m be a random number between 1 and the abyss of the soul strength;
+			deal m points of necromantic damage;
+			say "[bold type][m][run paragraph on]";
+			have no-source inflict damage on the guy;
+			say " [roman type]to [guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive and m is not 0] (which breaks [regarding the guy][possessive] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
+			unless total damage is 0:
+				now concentration of guy is 0;
+			decrease n by 1;
+			if n is 0:
+				say ""; [For an extra newline. Don't ask.]
 			if guy is dead:
 				add guy to dodenlijst;
 				if the player is undead:
 					now achieve-temp is 1;
-	say "The abyss of the soul pulsates, [unless lijst is empty]sending out a wave of negative energy that deals [bold type][n] damage[roman type] to [the names of lijst][otherwise]but its negative energy dissipates harmlessly[end if][unless dodenlijst is empty], killing [the names of dodenlijst][end if].";
+	otherwise:
+		say "The abyss of the soul pulsates, but its negative energy dissipates harmlessly.";
 	unless dodenlijst is empty:
 		repeat with guy running through dodenlijst:
 			have an event of the abyss of the soul killing guy;

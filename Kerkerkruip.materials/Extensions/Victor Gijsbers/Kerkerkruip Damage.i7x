@@ -103,15 +103,14 @@ Section - Removing specific damage
 Removed damage is a number that varies.
 
 To remove (n - a number) points of (type - a damage type) with reason (reason - some text):
-	if type is activated:
-		if harm of type is less than n:
-			now n is harm of type;
-		decrease harm of type by n;
-		now removed damage is n;
-		unless removed damage is 0:
-			unless damage silence is true:
-				say " - [removed damage] ([reason])[run paragraph on]";
-				now damage comment is true.
+	if harm of type is less than n:
+		now n is harm of type;
+	decrease harm of type by n;
+	now removed damage is n;
+	unless removed damage is 0:
+		unless damage silence is true:
+			say " - [removed damage] ([reason])[run paragraph on]";
+			now damage comment is true.
 
 Section - Multiplying specific damage
 
@@ -276,7 +275,7 @@ Carry out an actor hitting (this is the set up attack damage rule):
 		now harm of physical damage is attack damage;
 		now damage-by-hitting is true;	
 		have global attacker weapon inflict damage on the global defender;  [The crucial line.]
-		if the the total damage is less than 1:
+		if the total damage is less than 1:
 			say ", allowing [the global defender] to escape unscathed.[run paragraph on]";
 		otherwise:
 			[non-fatal]
