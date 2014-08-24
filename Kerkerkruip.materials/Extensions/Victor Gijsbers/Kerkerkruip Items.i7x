@@ -1885,7 +1885,7 @@ Carry out applying unguentum argenti to an alive iron person:
 	say "You apply the salve wherever you can, significantly weakening [the second noun].";
 	now the second noun is silver;
 	remove noun from play;
-	now permanent health of the second noun is permanent health of the second noun divided by 2;
+	now permanent health of the second noun is permanent health of the second noun divided by 2;  [Bypasses the damage system.]
 	now health of the second noun is health of the second noun divided by 2;
 	if health of the second noun is less than 1:
 		now health of the second noun is 1;
@@ -3150,7 +3150,7 @@ The description of evil dagger is "This dagger was once used as a ritual weapon 
 A contact rule (this is the evil dagger bonus rule):
 	if the global attacker weapon is the evil dagger:
 		if a random chance of (blood magic level of evil dagger) in 100 succeeds:
-			now health of global defender is -1;
+			now health of global defender is -1; [Instakill effect bypasses the damage system.]
 			say "[roman type]The evil magic of the dagger [bold type]immediately kills[roman type] [no dead property][the global defender][dead property]!";
 			rule fails.
 
@@ -3910,8 +3910,10 @@ Instead of drinking vial of purification:
 	remove noun from play;
 	let n be 0;
 	if the player worships Chton:
-		say "Chton prevents the vial of purification from doing its work; but your attempt at escaping undeath did not amuse him. A wave of extreme cold racks your body, dealing [bold type]15 damage[roman type]!";
-		decrease health of player by 15;  [Bypasses damage system.]
+		say "Chton prevents the vial of purification from doing its work; but your attempt at escaping undeath did not amuse him. A wave of extreme cold racks your body, dealing [run paragraph on]";
+		deal 15 points of divine damage;
+		have no-source inflict damage on player;
+		say "!";
 		if the player is dead:
 			end the story saying "Don't worry; Chton will soon raise you as a mindless zombie.";
 	otherwise:

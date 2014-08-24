@@ -249,7 +249,7 @@ To have (source - a thing) inflict damage on (guy - a person), silently:
 		if damage comment is true:
 			say " = [bold type]", total damage, " damage[roman type][run paragraph on]";
 		otherwise:
-			say " damage[roman type][run paragraph on]";
+			say total damage, " damage[roman type][run paragraph on]";
 	decrease health of the victim by total damage;
 	follow the after damage rules;
 	reset the damage profile;
