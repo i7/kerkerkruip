@@ -209,7 +209,7 @@ Rule for showing the title screen (this is the text title screen rule):
 		let key be the chosen letter;
 		cancel character input in the main window;
 		now showing the text title screen is false;
-		let action be the rule produced by the menu command rules for key;
+		follow the menu command rules for key;
 		if the outcome of the rulebook is the start the game outcome:
 			fade out the theme music;
 			close the text menu;
@@ -217,9 +217,7 @@ Rule for showing the title screen (this is the text title screen rule):
 		otherwise if the outcome of the rulebook is the quit outcome:
 			stop the background channel;
 			stop the game abruptly;
-		otherwise if rule succeeded:
-			close the text menu;
-			follow action;
+		otherwise if the outcome of the rulebook is the redraw the menu outcome:
 			display the text menu;
 
 To display the text menu:
@@ -251,9 +249,8 @@ To display the text menu:
 		if the file of save data exists:
 			set menu hyperlink for 78;
 			say "   New game                     :       N   [line break]";
-		if difficulty is 0:
-			set menu hyperlink for 83;
-			say "   Skip to Apprentice level     :       S   [line break]";
+		set menu hyperlink for 83;
+		say "   Load a specific dungeon seed :       S   [line break]";
 		set menu hyperlink for 77;
 		say "   Display menu                 :       M   [line break]";
 		set menu hyperlink for 79;
@@ -265,8 +262,7 @@ To display the text menu:
 	say "   [if the file of save data exists]Continue the game[otherwise]New game         [end if]            :    (SPACE)[line break]";
 	if the file of save data exists:
 		say "   New game                     :       N[line break]";
-	if difficulty is 0:
-		say "   Skip to Apprentice level     :       S[line break]";
+	say "   Load a specific dungeon seed :       S[line break]";
 	say "   Display menu                 :       M[line break]";
 	say "   Options                      :       O[line break]";
 	say "   Quit                         :       Q[line break]";
@@ -309,7 +305,7 @@ To say difficulty level (m - a number):
 
 Section - Menu commands
 
-The menu command rules are a number based rulebook producing a rule. The menu command rules have outcomes quit and start the game.
+The menu command rules are a number based rulebook. The menu command rules have outcomes redraw the menu, quit and start the game.
 
 [ N: new ]
 Definition: a number is new:
@@ -333,16 +329,106 @@ Definition: a number is continue:
 Menu command continue:
 	start the game;
 	
-[ S: skip to apprentice level ]
-Definition: a number is skip:
+[ S: play a specific dungeon seed ]
+Definition: a number is seed:
 	if it is 115, yes;
 	if it is 83, yes;
 	no.
-Menu command skip:
-	if difficulty is 0:
-		set difficulty to 1;
-		delete file of save data;
-		start the game;
+Menu command seed:
+	clear the screen;
+	say "[line break][bold type]Load a specific dungeon seed[roman type][paragraph break]Please enter a dungeon seed, or press Enter to return to the menu.[paragraph break]";
+	[ Note: also accepts Esc (if supported by the terp ]
+	while 1 is 1:
+		say "> [run paragraph on]";
+		request a seed;
+		let T be "[the player's command]";
+		if T is "":
+			redraw the menu;
+		if number of characters in T is 8 or number of characters in T is 12:
+			if T exactly matches the regular expression "<0-9a-fA-F>+":
+				process the seed for T;
+				if number of characters in T is 12:
+					process the seed check for T;
+				[ Should we decrease the difficulty here like we do when starting a new random game? ]
+				delete file of save data;
+				start the game;
+		say "That is not a valid dungeon seed. Please try again, or press Enter to return to the menu.[paragraph break]";
+
+To request a seed: (- seed_request(); -).
+To process the seed for (T - a text): (- seed_process( {T} ); -).
+To process the seed check for (T - a text): (- seed_process_check( {T} ); -).
+
+Include (-
+
+Array seed_esc_terminator -> 1;
+[ seed_request res;
+	seed_esc_terminator-->0 = keycode_Escape;
+	res = glk_gestalt( gestalt_LineTerminators, 0 );
+	if ( res )
+	{
+		glk_set_terminators_line_event( gg_mainwin, seed_esc_terminator, 1);
+	}
+	KeyboardPrimitive( buffer, parse );
+	players_command = 100 + WordCount();
+	if ( res )
+	{
+		glk_set_terminators_line_event( gg_mainwin, NULL, 0 );
+	}
+];
+
+[ seed_process txt p1 cp1 i ch progress;
+	! Transmute the text
+	cp1 = txt-->0;
+	p1 = TEXT_TY_Temporarily_Transmute( txt );
+	for ( i = 0 : i < 8 : i++ )
+	{
+		! Decode the hex characters
+		ch = BlkValueRead( txt, i );
+		if ( ch > 47 && ch < 58 )
+		{
+			progress = progress * 16 + ch - 48;
+		}
+		else if ( ch > 64 && ch < 71 )
+		{
+			progress = progress * 16 + ch - 55;
+		}
+		else if ( ch > 96 && ch < 103 )
+		{
+			progress = progress * 16 + ch - 87;
+		}
+	}
+	(+ the dungeon generation seed +) = progress;
+	! Clean up
+	TEXT_TY_Untransmute( txt, p1, cp1 );
+];
+
+[ seed_process_check txt p1 cp1 i ch progress;
+	! Transmute the text
+	cp1 = txt-->0;
+	p1 = TEXT_TY_Temporarily_Transmute( txt );
+	for ( i = 8 : i < 12 : i++ )
+	{
+		! Decode the hex characters
+		ch = BlkValueRead( txt, i );
+		if ( ch > 47 && ch < 58 )
+		{
+			progress = progress * 16 + ch - 48;
+		}
+		else if ( ch > 64 && ch < 71 )
+		{
+			progress = progress * 16 + ch - 55;
+		}
+		else if ( ch > 96 && ch < 103 )
+		{
+			progress = progress * 16 + ch - 87;
+		}
+	}
+	(+ the dungeon generation check +) = progress;
+	! Clean up
+	TEXT_TY_Untransmute( txt, p1, cp1 );
+];
+
+-);
 
 [ Q: quit ]
 Definition: a number is quit:
@@ -358,10 +444,8 @@ Definition: a number is settings:
 	if it is 79, yes;
 	no.
 Menu command settings:
-	rule succeeds with result the show the options menu rule;
-
-This is the show the options menu rule:
 	display the (Table of Options Menu) menu with title "Options";
+	redraw the menu;
 
 [ H/M: menu ]
 Definition: a number is showmenu:
@@ -371,10 +455,8 @@ Definition: a number is showmenu:
 	if it is 77, yes;
 	no.
 Menu command showmenu:
-	rule succeeds with result the show the menu rule;
-
-This is the show the menu rule:
 	display the Table of Kerkerkruip Help menu with title "Kerkerkruip";
+	redraw the menu;
 
 
 

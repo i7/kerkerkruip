@@ -31,7 +31,7 @@ To say (value - a number) in hexadecimal to (digits - a number) places:
 
 Include (-
 [ say_hex value digits i temp;
-	for ( i = digits - 1 : i >= 0 : i-- )
+	for ( i = ( digits - 1 ) * 4 : i >= 0 : i = i - 4 )
 	{
 		@ushiftr value i temp;
 		temp = temp & $0F;

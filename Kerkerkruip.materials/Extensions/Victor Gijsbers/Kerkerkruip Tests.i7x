@@ -107,17 +107,18 @@ Last when play begins rule (this is the identify test object scrolls rule):
 	repeat with T running through testobject scrolls in the Entrance Hall:
 		identify T;
 
-[Section - The test object console
+Section - The test object console
 
 The early in turn sequence flag is a truth state variable. The early in turn sequence flag variable translates into I6 as "EarlyInTurnSequence".
-The test object console is a truth state variable.
+[The test object console is a truth state variable.
 
 Definition: a number is console:
 	if it is 96, yes;
 	if it is 126, yes;
 	no.
 Menu command console:
-	rule succeeds with result the show the console rule;
+	follow the show the console rule;
+	redraw the menu;
 
 [ By utilising the parse command rule we can use the parser without actually running any actions. Convenient! ]
 
