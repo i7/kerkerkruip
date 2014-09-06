@@ -47,7 +47,7 @@ Say-possessions is a truth state that varies. Say-possessions is true.
 To say initial-possessions:
 	if say-possessions is true:
 		now say-possessions is false;
-		say ".[paragraph break]You possess [a list of things had by the player][run paragraph on]"
+		say ".[paragraph break]You possess [a list of things had by the player][if ment timer is not 0], and are [bold type]under the influence of ment[roman type][run paragraph on]"
 
 
 The skull-sized rubies are in entrance hall. The skull-sized rubies are scenery and plural-named. The description of the skull-sized rubies is "They have been filled with the power of suns long extinct, and are now fixed to the ceiling of the wizard's domain. You cannot bear to look at them.". Check taking the skull-sized rubies: say "They are secured to the ceiling by magic more powerful than you can break." instead.
@@ -216,7 +216,7 @@ Falling rule (this is the Lake of Lava kills fallers rule):
 			if falling-guy is player:
 				end the story saying "You fell into the lava";
 			otherwise:
-				now the health of falling-guy is -10;
+				now the health of falling-guy is -10; [Instakill effect, bypasses the damage system.]
 			rule succeeds.
 
 
@@ -494,8 +494,10 @@ Instead of touching the statue of Aite:
 	try climbing the statue of Aite.
 
 Instead of climbing the statue of Aite:
-	say "You cut yourself badly as soon as you touch the statue.";
-	decrease the health of the player by 3;
+	say "You cut yourself as soon as you touch the statue. The weapons deal 3[run paragraph on]";
+	deal 3 points of physical damage;
+	have statue of Aite inflict damage on the player;
+	say ".";
 	if the health of the player is less than 1:
 		end the story saying "You sacrificed yourself to Aite".
 

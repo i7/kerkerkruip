@@ -626,6 +626,19 @@ A special set attack strength rule (this is the periapt attack roll rule):
 		if the main actor is the player:
 			now attack strength is periapt attack strength.
 
+Section - Addict's amulet (special)
+
+[Part of the special addict's starting kit.]
+
+The addict's amulet is a cursed curse-identified necklace.
+The addict's amulet is magical.
+The addict's amulet is silver.
+
+The description of the addict's amulet is "Silver cunningly wrought in the likeness of the fruit of kings, the fruit from which the divine substance known as ment is made. It has been imbued with a magic that makes the wearer's trances last several turns longer.".
+
+[The amulet's logic is inside the "have the ment kick in routine".]
+
+
 
 Chapter - Hats
 
@@ -823,6 +836,8 @@ After an actor hitting (this is the alternative lose concentration after attacki
 	continue the action.
 
 The lose concentration after attacking rule is not listed in any rulebook.
+
+
 
 
 Chapter - Shirts
@@ -1313,7 +1328,7 @@ A remove specific damage rule (this is the plate mail physical damage reduction 
 An attack modifier rule (this is the plate mail attack modifiers rule):
 	if the global defender wears suit of plate mail:
 		if the global defender is retreater or the global defender is runner:
-			say " + 2 (slowed down by plate mail)[run paragraph on]";
+			say " + 2 (defender slowed down by plate mail)[run paragraph on]";
 			increase the attack strength by 2;
 	if the global attacker wears suit of plate mail:
 		say " - 1 (slowed down by plate mail)[run paragraph on]";
@@ -1870,7 +1885,7 @@ Carry out applying unguentum argenti to an alive iron person:
 	say "You apply the salve wherever you can, significantly weakening [the second noun].";
 	now the second noun is silver;
 	remove noun from play;
-	now permanent health of the second noun is permanent health of the second noun divided by 2;
+	now permanent health of the second noun is permanent health of the second noun divided by 2;  [Bypasses the damage system.]
 	now health of the second noun is health of the second noun divided by 2;
 	if health of the second noun is less than 1:
 		now health of the second noun is 1;
@@ -3135,7 +3150,7 @@ The description of evil dagger is "This dagger was once used as a ritual weapon 
 A contact rule (this is the evil dagger bonus rule):
 	if the global attacker weapon is the evil dagger:
 		if a random chance of (blood magic level of evil dagger) in 100 succeeds:
-			now health of global defender is -1;
+			now health of global defender is -1; [Instakill effect bypasses the damage system.]
 			say "[roman type]The evil magic of the dagger [bold type]immediately kills[roman type] [no dead property][the global defender][dead property]!";
 			rule fails.
 
@@ -3895,8 +3910,10 @@ Instead of drinking vial of purification:
 	remove noun from play;
 	let n be 0;
 	if the player worships Chton:
-		say "Chton prevents the vial of purification from doing its work; but your attempt at escaping undeath did not amuse him. A wave of extreme cold racks your body, dealing [bold type]15 damage[roman type]!";
-		decrease health of player by 15;  [Bypasses damage system.]
+		say "Chton prevents the vial of purification from doing its work; but your attempt at escaping undeath did not amuse him. A wave of extreme cold racks your body, dealing 15[run paragraph on]";
+		deal 15 points of divine damage;
+		have no-source inflict damage on player;
+		say "!";
 		if the player is dead:
 			end the story saying "Don't worry; Chton will soon raise you as a mindless zombie.";
 	otherwise:
@@ -4077,9 +4094,11 @@ To have the ment kick in:
 			otherwise:
 				end the story saying "You OD'ed.";
 	now the ment timer is a random number between 10 and 15;
+	if the player wears the addict's amulet:
+		increase ment timer by a random number between 3 and 4;
 	if ment addiction is 6:
 		award achievement Sixth heaven.
-	
+		
 
 
 Status combat stats rule (this is the ment status rule):
