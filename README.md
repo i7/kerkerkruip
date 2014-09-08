@@ -3,21 +3,22 @@ Kerkerkruip
 
 http://kerkerkruip.org
 
-Kerkerkruip is a short-form roguelike in the interactive fiction medium, featuring meaningful tactical and strategic depth, innovative game play, zero grinding, and a sword & sorcery setting that does not rehash tired clichés.
+Kerkerkruip is a short-form roguelike in the interactive fiction medium, featuring meaningful tactical and strategic depth, innovative game play, zero grinding, and a sword & sorcery setting that does not rehash tired clichÃ©s.
 
 Setting up Kerkerkruip for development
 --------------------------------------
 
 After cloning the Kerkerkruip Git repository onto your computer you will need to do a few more things to prepare your system for developing it.
 
-1. You will also need to clone the [ATTACK repository](https://github.com/i7/ATTACK)
-2. Copy all the Inform 7 Extensions from both working directories to your own Inform 7 folder (in My Documents/Home etc)
-3. Run this script from the top folder of your Kerkerkruip working directory:
+1. You will need to download a few extensions. Please check the [i7/extensions repository](https://github.com/i7/extensions), the [Inform 7 Public Library](http://www.emshort.com/pl/payloads/) and the old [Inform 7 extensions site](http://inform7.com/write/extensions/) for any missing extensions. Copy them to your Inform 7 extensions folder.
+2. Run this script from the top folder of your Kerkerkruip working directory:
 ```
 ./tools/setup
 ```
 
-Using Inform 7 and Git
-----------------------
+Beta-testing Kerkerkruip
+------------------------
 
-Unfortunately Inform 7 doesn't currently play well with Git (though this will change in the future!) Although the Kerkerkruip.inform folder can be located anywhere, the many Extensions we use can only be found if they're in the user's own Inform 7 folder. So after cloning/pulling changes you will need to copy the files to your Inform 7 folder, and then copy them back before you commit your work.
+If you just want to help beta-test Kerkerkruip you don't need to do that. We use [Travis CI](https://travis-ci.org/i7/kerkerkruip) to automatically build each commit. You will soon be able to download a beta-testing file here.
+
+[![Build Status](https://travis-ci.org/i7/kerkerkruip.svg?branch=master)](https://travis-ci.org/i7/kerkerkruip)
