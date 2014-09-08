@@ -193,7 +193,7 @@ Status attribute rule (this is the deathly-resistant status rule):
 			say "You are somewhat resistant to deathly magic.[line break][run paragraph on]".
 			
 A remove specific damage rule (this is the deathly-resistant rule):
-	if victim is deathly resistant and the victim is not undead:
+	if victim is deathly-resistant and creature-type of victim is not undead:
 		remove 2 points of necromantic damage with reason "resistant to deathly magic".
 			
 

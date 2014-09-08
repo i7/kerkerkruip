@@ -3514,7 +3514,7 @@ Section - Staff of pain (monster)
 A staff of pain is a kind of weapon. The plural of staff of pain is staves of pain.
 A staff of pain is usually wood. A staff of pain is ranged.
 A staff of pain is size-agnostic.
-The description of a staff of pain is "The staff of pain wounds with magic that can be neither parried nor dodged.".
+The description of a staff of pain is "The staff of pain wounds with necromantic magic that can be neither parried nor dodged.".
 
 The damage die of a staff of pain is usually 4.
 The weapon attack bonus of a staff of pain is usually 0.
@@ -3522,6 +3522,10 @@ The dodge bonus of a staff of pain is usually -2.
 The parry-with bonus of a staff of pain is usually -1.
 The parry-against bonus of a staff of pain is usually -2.
 The weapon damage bonus of a staff of pain is usually 0.
+
+A before damage rule (this is the staff of pain rule):
+	now harm of necromantic damage is (harm of necromantic damage + harm of physical damage);
+	now harm of physical damage is 0.
 
 
 Section - Druidic staff (reward)

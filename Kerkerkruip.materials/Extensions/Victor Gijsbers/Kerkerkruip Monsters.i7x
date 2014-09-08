@@ -3823,10 +3823,11 @@ An attack modifier rule (this is the druid using wooden weapon attack modifier r
 		increase attack strength by 1.		
 
 A remove specific damage rule (this is the druid is dealt less damage by natural materials rule):
-	if damage-material is wood or damage-material is bone:
-		remove 1 points of physical damage with reason "druid resistant to [damage-material]";
-	if damage-material is vapour:
-		remove 3 points of physical damage with reason "druid resistant to [damage-material]".
+	if the victim is druidic:
+		if damage-material is wood or damage-material is bone:
+			remove 1 points of physical damage with reason "druid resistant to [damage-material]";
+		if damage-material is vapour:
+			remove 3 points of physical damage with reason "druid resistant to [damage-material]".
 	
 
 Chapter - The brambles

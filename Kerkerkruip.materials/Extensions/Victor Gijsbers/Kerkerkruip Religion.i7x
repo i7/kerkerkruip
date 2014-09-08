@@ -838,7 +838,7 @@ To have (benefactor - Chton) intervene on behalf of (supplicant - a person):
 			let p be health of guy;
 			deal m points of necromantic damage;
 			have Chton inflict damage on guy;
-			let q be (p minus health of guy)
+			let q be (p minus health of guy);
 			say "[if n is 1 and original n is not 1]and [end if][q] damage to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive] (which breaks [regarding the guy][possessive] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
 			now concentration of the guy is 0;
 			decrease n by 1;
