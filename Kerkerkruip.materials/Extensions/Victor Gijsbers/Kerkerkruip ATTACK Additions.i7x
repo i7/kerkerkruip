@@ -482,7 +482,8 @@ Section - Cleaning the Table of Delayed Actions
 
 To clean the table of delayed actions for (guy - a person):
 	repeat through the table of delayed actions:
-		if the actor part of the action entry is the guy or the noun part of the action entry is the guy:
+		let this action be the action to take entry;
+		if the actor part of this action is the guy or the noun part of this action is the guy:
 			blank out the whole row.
 
 A killing rule (this is the reset killed-guy rule):

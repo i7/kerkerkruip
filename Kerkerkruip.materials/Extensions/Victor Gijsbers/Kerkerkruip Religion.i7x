@@ -410,6 +410,7 @@ To have Aite grant concentration to (guy - a person):
 		say "[The guy] suddenly looks [bold type]highly concentrated[roman type], as if divinely inspired.";
 
 
+
 Chapter - Nomos
 
 Section - Favour rules
@@ -475,6 +476,8 @@ Intervention possible when intervention-god is Nomos:
 The intervention rarity of Nomos is 40.
 
 The Nomos attacker is a person that varies. The Nomos attacker is yourself.
+Definition: a person is Nomos-attacker if it is the Nomos attacker. [ Definition for bug #1411 ]
+
 The Nomos counter is a number that varies. The Nomos counter is 0.
 The Nomos bonus is a truth state that varies. The Nomos bonus is false.
 
@@ -489,7 +492,8 @@ To activate Nomos bonus:
 	now Nomos bonus is true;
 	if the Nomos attacker is not the player, say "[The Nomos attacker] follow[s] the rules of [their] God, and prepare[s] to attack!";
 
-An AI action selection rule for an at-Act person who is the Nomos attacker (this is the Nomos attacker AI should obey Nomos rule):
+[An AI action selection rule for an at-Act person who is the Nomos attacker (this is the Nomos attacker AI should obey Nomos rule):] [ bug #1411 ]
+An AI action selection rule for an at-Act Nomos-attacker person (this is the Nomos attacker AI should obey Nomos rule):
 	if Nomos bonus is true:
 		choose row with an Option of the action of the Nomos attacker attacking the chosen target in the Table of AI Action Options;
 		increase Action Weight entry by 1500;

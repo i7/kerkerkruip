@@ -13,7 +13,7 @@ The story headline is "An IF roguelike".
 The story genre is "dungeon crawl".
 The release number is 10.
 The story description is "Kerkerkruip is a short-form roguelike in the interactive fiction medium, featuring meaningful tactical and strategic depth, innovative game play, zero grinding, and a sword & sorcery setting that does not rehash tired clichés."
-Release along with cover art and a file of "Gargoyle config file" called "Kerkerkruip.ini".
+[Release along with cover art and a file of "Gargoyle config file" called "Kerkerkruip.ini".] [bug #1413]
 
 
 
@@ -69,7 +69,7 @@ To check initial position of attribute:
 Section - Include ATTACK
 
 [ Get the latest ATTACK at https://github.com/i7/ATTACK ]
-Include version 5/140507 of Inform ATTACK by Victor Gijsbers.
+Include version 5/140908 of Inform ATTACK by Victor Gijsbers.
 
 
 

@@ -1,4 +1,4 @@
-Version 5/140507 of Inform ATTACK by Victor Gijsbers begins here.
+Version 5/140908 of Inform ATTACK by Victor Gijsbers begins here.
 
 "Inform ATTACK: the Inform Advanced Turn-based TActical Combat Kit"
 
@@ -591,7 +591,7 @@ Check attacking when the player is at-React (this is the cannot attack as reacti
 Carry out an actor attacking (this is the standard carry out an actor attacking rule):
 	choose a blank row in the Table of Delayed Actions;
 	now the Action speed entry is 10;
-	now the Action entry is the action of the actor hitting the noun;
+	now the Action to take entry is the action of the actor hitting the noun;
 	now the combat state of the noun is at-React;
 
 Report an npc attacking (this is the standard report an actor attacking rule):

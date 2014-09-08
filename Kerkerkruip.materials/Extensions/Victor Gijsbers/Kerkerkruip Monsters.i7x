@@ -1373,7 +1373,7 @@ Carry out lashing:
 	let n be 10 - final spirit of the player / 4;
 	let m be a random number between n and 12;
 	now the Action Speed entry is m;
-	now the Action entry is the action of the actor hitting the main actor.
+	now the Action to take entry is the action of the actor hitting the main actor.
 
 Report lashing:
 	say "You will attempt to strike swiftly, before you are hit.".
@@ -2798,7 +2798,7 @@ Carry out enslaving:
 		now follower percentile chance of noun is 95;
 		if combat state of player is at-react:
 			repeat through Table of Delayed Actions:
-				if the action entry is the action of the noun hitting the player:
+				if the action to take entry is the action of the noun hitting the player:
 					blank out the whole row;
 		now concentration of the noun is 0;
 	now concentration of the player is 0;
@@ -3217,7 +3217,7 @@ Carry out sprouting:
 				if n is greater than 2 or guy is insane:
 					if combat state of player is at-react:
 						repeat through Table of Delayed Actions:
-							if the action entry is the action of the guy hitting the player:
+							if the action to take entry is the action of the guy hitting the player:
 								blank out the whole row;
 				if n is greater than 3:
 					if stun count of the guy is less than 6:
@@ -6367,8 +6367,8 @@ Carry out Drakul Drakul-mindgaming:
 	otherwise:
 		say " [The main actor] nod[s] slavishly.";
 		repeat through the Table of Delayed Actions:
-			if action entry is the action of the main actor hitting Drakul:
-				now Action entry is the action of the main actor hitting guy.
+			if action to take entry is the action of the main actor hitting Drakul:
+				now Action to take entry is the action of the main actor hitting guy.
 
 Section - Prose				
 

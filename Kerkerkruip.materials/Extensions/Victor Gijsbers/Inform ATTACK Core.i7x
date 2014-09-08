@@ -1,4 +1,4 @@
-Version 5/140220 of Inform ATTACK Core by Victor Gijsbers begins here.
+Version 5/140908 of Inform ATTACK Core by Victor Gijsbers begins here.
 
 "The core of the Inform ATTACK system, but without the combat specific code. Think of it as the Advanced Turn-based TActical *Conflict* Kit instead."
 
@@ -201,7 +201,7 @@ The combat round rules is a rulebook.
 The starting the combat round rules are a rulebook.
 
 Table of Delayed Actions
-Action speed	Action
+Action speed	Action to take
 a number	a stored action
 with 10 blank rows
 
@@ -279,7 +279,7 @@ A combat round rule when the combat status is concluding (this is the run delaye
 	sort the Table of Delayed Actions in random order;
 	sort the Table of Delayed Actions in Action speed order;
 	repeat through the Table of Delayed Actions:
-		try the Action entry;
+		try the Action to take entry;
 		blank out the whole row;
 
 A combat round rule when the combat status is concluding (this is the conclude the combat round rule):

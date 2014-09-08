@@ -2276,9 +2276,9 @@ Carry out reading a scroll of summoning:
 			otherwise:
 				say " [regarding the guy][Possessive] sudden appearance [bold type]interferes[roman type] with [regarding the main actor][their] attack.";
 				have the main actor start pressing the guy;
-				let the attack be the action of the main actor hitting the player;
-				choose the row with an action of the attack in the Table of Delayed Actions;
-				now the action entry is the action of the main actor hitting the guy;
+				let the attack action be the action of the main actor hitting the player;
+				choose the row with an action to take of the attack action in the Table of Delayed Actions;
+				now the action to take entry is the action of the main actor hitting the guy;
 	otherwise:
 		say "You speak the awful spell, but nothing happens. The planes must not be well-aligned.";
 
