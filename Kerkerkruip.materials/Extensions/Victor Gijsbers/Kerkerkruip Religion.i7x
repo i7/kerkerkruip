@@ -382,7 +382,8 @@ To deal (X - a number) points of Aite-damage to (guy - a person) on behalf of (t
 	otherwise:
 		now X is X times the size factor divided by 2;
 		say ", skewering [the guy] for [bold type][X] damage[roman type]!";
-	decrease the health of the guy by X;
+	deal X points of divine damage;
+	have Aite inflict damage on the guy;
 	unless the guy is dead:
 		let the guy lose concentration;
 		if the guy is the player and the player is hidden:
@@ -612,8 +613,11 @@ Chapter - Sul
 
 Check sacrificing (this is the cannot sacrifice to Sul when undead rule):
 	if the location of the player is dedicated to sul and the player is undead:
-		say "Sul abhors the undead! Divine wrath strikes you instantly, dealing [bold type]10 damage[roman type].";
-		decrease health of player by 10;
+		let m be health of the player;
+		deal 10 points of divine damage;
+		have Sul inflict damage on the player;
+		let n be (m minus health of the player);
+		say "Sul abhors the undead! Divine wrath strikes you instantly, dealing [bold type][n] damage[roman type].";
 		if the player is dead:
 			end the story saying "Your attempt at contrition wasn't appreciated.";
 		rule fails.
@@ -671,30 +675,28 @@ Section - Unable to use deathly magic
 
 Last check reading a scroll of death:
 	if player worships Sul:
-		remove noun from play;
-		say "Before you finish reading it, the scroll burns up in your hands! Sul is not amused by your defiant behaviour, and deals [bold type]10 damage[roman type] to you.";
-		decrease health of player by 10;
-		if the player is dead:
-			end the story saying "And you will know My name is the Lady when I lay My vengeance upon thee.";
+		do the Sul vengance;
 		rule fails.
 
 Last check reading a scroll of summoning:
 	if player worships Sul:
-		remove noun from play;
-		say "Before you finish reading it, the scroll burns up in your hands! Sul is not amused by your defiant behaviour, and deals [bold type]10 damage[roman type] to you.";
-		decrease health of player by 10;
-		if the player is dead:
-			end the story saying "And you will know My name is the Lady when I lay My vengeance upon thee. ";
+		do the Sul vengance;
 		rule fails.
 		
 Last check reading a scroll of ghoulification:
 	if player worships Sul:
-		remove noun from play;
-		say "Before you finish reading it, the scroll burns up in your hands! Sul is not amused by your defiant behaviour, and deals [bold type]10 damage[roman type] to you.";
-		decrease health of player by 10;
-		if the player is dead:
-			end the story saying "And you will know My name is the Lady when I lay My vengeance upon thee. ";
+		do the Sul vengance;
 		rule fails.
+
+To do the Sul vengance:
+	remove noun from play;
+	let m be health of the player;
+	deal 10 points of divine damage;
+	have Sul inflict damage on the player;
+	let n be (m minus health of the player);
+	say "Before you finish reading it, the scroll burns up in your hands! Sul is not amused by your defiant behaviour, and deals [bold type][n]damage[roman type] to you.";
+	if the player is dead:
+		end the story saying "And you will know My name is the Lady when I lay My vengeance upon thee.";
 
 Before drinking Drakul's lifeblood when the player worships Sul:
 	say "As you gulp down the blood, you feel Sul changing it into wine. She is extremely pleased with your assistance in destroying this unholy item, and grants you two points of favour.";
@@ -833,10 +835,11 @@ To have (benefactor - Chton) intervene on behalf of (supplicant - a person):
 			let m be a random number between 2 and 5;
 			if supplicant is the player:
 				increase m by 1;
-			if guy is deathly-resistant:
-				decrease m by 2;
-			decrease health of guy by m;
-			say "[if n is 1 and original n is not 1]and [end if][m] damage to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive] (which breaks [regarding the guy][possessive] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
+			let p be health of guy;
+			deal m points of necromantic damage;
+			have Chton inflict damage on guy;
+			let q be (p minus health of guy)
+			say "[if n is 1 and original n is not 1]and [end if][q] damage to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive] (which breaks [regarding the guy][possessive] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
 			now concentration of the guy is 0;
 			decrease n by 1;
 			if n is 0:

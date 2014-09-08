@@ -35,9 +35,19 @@ Status attribute rule (this is the undead status rule):
 		if long status is true:
 			say "You are [bold type]undead[roman type]: other undead are your allies; other potential allies may be your enemies instead; absorbing a soul may heal you only partially.[line break][run paragraph on]";
 
+		
+Section - Undead rules
+
+A remove specific damage rule (this is the undead immune to necromantic damage rule):
+	if creature-type of victim is undead:
+		remove 1000 points of necromantic damage with reason "undead immune to necromantic damage".
+
 Chapter - Subtypes
 
 A person can be super-undead. A person is usually not super-undead.
+
+
+
 
 Chapter - New factions
 
@@ -99,7 +109,6 @@ Every turn when the player is undead and the faction of the player is undead-fac
 	unless player form is lich-form:
 		repeat with guy running through undead super-undead follower persons:
 			now guy is not follower.
-		
 
 
 
@@ -181,7 +190,12 @@ A person can be deathly-resistant. A person is usually not deathly-resistant.
 Status attribute rule (this is the deathly-resistant status rule):
 	if player is deathly-resistant and player is not undead:
 		if long status is true:
-			say "You are somewhat resistant to deathly magic.[line break][run paragraph on]".;
+			say "You are somewhat resistant to deathly magic.[line break][run paragraph on]".
+			
+A remove specific damage rule (this is the deathly-resistant rule):
+	if victim is deathly resistant and the victim is not undead:
+		remove 2 points of necromantic damage with reason "resistant to deathly magic".
+			
 
 Part - Movement
 
