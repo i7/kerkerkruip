@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# This script will attempt to build Kerkerkruip with Travis CI
+
+#i7 -s blorb=1,zcode=g -c Kerkerkruip.inform
+#if [ -f "Kerkerkruip.inform/Build/auto.inf" ]; then
+#	exit 1
+#fi
+"/usr/local/libexec/ni"  --internal "/usr/local/share/inform7/data" --format=ulx --project "/home/travis/build/i7/kerkerkruip/Kerkerkruip.inform"
