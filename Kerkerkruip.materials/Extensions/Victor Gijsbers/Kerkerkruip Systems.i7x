@@ -432,7 +432,7 @@ Check an actor challenging someone in (this is the NPCs simulate arena battle ru
 	increase m by 2;
 	while the person asked is alive and the noun is alive:
 		if a random chance of m in n succeeds:  [chance is: LVL1 + 2 / (LVL1 + 2 + LVL2 + 2); creatures of the same level: 1/2; level 4 vs level 3: 6/11; level 4 vs level 2: 6/10; level 4 vs level 0: 6/8.]
-			decrease health of the noun by 2;
+			decrease health of the noun by 2;  [bypassing the damage system; this is a very rough approximation anyway]
 		otherwise:
 			decrease health of the person asked by 2;
 	if location of the person asked is location of the player:
@@ -2195,7 +2195,7 @@ Check feeding:
 
 Carry out feeding:
 	let n be current blood cost of the noun;
-	decrease health of the player by n;
+	decrease health of the player by n; [bypassing damage system, of course]
 	if health of the player is less than 1:
 		say "You feed [n] health to [the noun], which is more than your body can handle.";
 		end the story saying "Foolish people should not dabble in blood magic.";
