@@ -166,9 +166,9 @@ After showing the title screen (this is the apply the difficulty rule):
 		increase health of the player by 1;
 		increase permanent health of the player by 1;
 		increase defence of the player by 1;
-	let k be 7 + difficulty;
+	let k be 14 + difficulty;
 	repeat with guy running through monsters:
-		now health of guy is (k times health of guy) / 10;
+		now health of guy is (k times health of guy) / 20;
 	if difficulty is greater than 2:
 		let n be difficulty - 2;
 		repeat with guy running through monsters:
@@ -176,7 +176,7 @@ After showing the title screen (this is the apply the difficulty rule):
 				buff guy.
 			
 To buff (guy - a person):
-	let m be a random number between 1 and 5;
+	let m be a random number between 1 and 8;
 	if m is 1:
 		increase melee of guy by 1;
 	if m is 2:
