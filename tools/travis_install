@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# This script will prepare the Travis CI environment for building Kerkerkruip
+
+wget http://inform7.com/download/content/6L38/I7_6L38_Linux_all.tar.gz &
+wget https://github.com/i7/extensions/archive/master.zip &
+wait
+
+ls

@@ -1,0 +1,3 @@
+language: perl
+install: ./tools/travis_install
+script: true
