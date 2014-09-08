@@ -6,4 +6,11 @@ wget http://inform7.com/download/content/6L38/I7_6L38_Linux_all.tar.gz &
 wget https://github.com/i7/extensions/archive/master.zip &
 wait
 
-ls
+tar -xzf I7_6L38_Linux_all.tar.gz
+unzip -q master.zip
+wait
+
+cd inform7-6L38
+sudo ./install-inform7.sh
+cd ..
+i7 -v
