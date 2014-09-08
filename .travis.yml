@@ -1,3 +1,5 @@
 language: perl
 install: ./tools/travis_install
 script: ./tools/travis_build
+notifications:
+    email: false
