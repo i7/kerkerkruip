@@ -4,8 +4,12 @@
 
 i7 -s blorb=1,zcode=g -c Kerkerkruip.inform
 
+mv Kerkerkruip.inform/Build/output.gblorb Kerkerkruip.gblorb
+mv Kerkerkruip.materials/Kerkerkruip.ini Kerkerkruip.ini
+zip Kerkerkruip-git Kerkerkruip.gblorb Kerkerkruip.ini
+
 sshpass -e sftp -oBatchMode=no -oStrictHostKeyChecking=no -b - ${KUSER}@${KSERVER} << !
 	cd downloads.kerkerkruip.org
-	put Kerkerkruip.inform/Build/output.gblorb
+	put Kerkerkruip-git.zip
 	bye
 !
