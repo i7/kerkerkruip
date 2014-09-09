@@ -265,13 +265,15 @@ The subtract damage from health rule is not listed in any rulebook.
 
 Override-normal-attack-damage-rule is a truth state that varies. Override-normal-attack-damage-rule is false.
 
+To deal is a verb.
+
 Carry out an actor hitting (this is the set up attack damage rule):
 	if override-normal-attack-damage-rule is false:
 		unless damage die of the global attacker weapon is less than 1:
 			now the attack damage is a random number between 1 and the damage die of the global attacker weapon;
 		increase the attack damage by weapon damage bonus of the global attacker weapon; [1d(damage die) + WDB]
 		if the numbers boolean is true:
-			say "[roman type][The global attacker] deal[s] ", the attack damage, "[run paragraph on]";
+			say "[roman type][The global attacker] [deal] ", the attack damage, "[run paragraph on]";
 		now harm of physical damage is attack damage;
 		now damage-by-hitting is true;	
 		have global attacker weapon inflict damage on the global defender;  [The crucial line.]
