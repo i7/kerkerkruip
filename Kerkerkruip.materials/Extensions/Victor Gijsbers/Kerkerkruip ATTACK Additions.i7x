@@ -470,7 +470,7 @@ An add specific damage rule (this is the inherent damage modifier rule):
 Section - Weapon descriptions
 
 Last report examining a weapon (this is the extra weapon info rule):
-	say "[italic type]Combat statistics: 1d[damage die of the noun] + [weapon damage bonus of the noun] damage; [if weapon attack bonus of the noun is less than 0]-[otherwise]+[end if][absolute value of weapon attack bonus of the noun] attack modifier[if the noun is ranged]; ranged[end if][parry and dodge info of the noun][if the noun is silver]; good against undead and demons[end if][special weapon info of the noun][roman type].[run paragraph on][line break][paragraph break]"
+	say "[italic type]Combat statistics: 1d[damage die of the noun] + [weapon damage bonus of the noun] damage; [if weapon attack bonus of the noun is less than 0]-[otherwise]+[end if][absolute value of weapon attack bonus of the noun to the nearest whole number] attack modifier[if the noun is ranged]; ranged[end if][parry and dodge info of the noun][if the noun is silver]; good against undead and demons[end if][special weapon info of the noun][roman type].[run paragraph on][line break][paragraph break]"
 			
 To say parry and dodge info of (item - a weapon):
 	say "; the wielder gets a [parry-with bonus of item] bonus when parrying with [regarding the item][them]; others get a [parry-against bonus of item] bonus when parrying and a [dodge bonus of item] bonus when dodging against [them][run paragraph on]".
