@@ -616,9 +616,11 @@ Carry out an actor concentrating (this is the standard carry out concentrating r
 	increase the concentration of the actor by 1;
 	if the concentration of the actor is greater than 3:
 		now the concentration of the actor is 3;
+
+To concentrate is a verb.
 	
 Report an actor concentrating (this is the standard concentrating prose rule):
-	say "[The actor] concentrate[s], and [are]";
+	say "[The actor] [concentrate], and [are]";
 	if the concentration of the actor is:
 		-- 1:
 			say " now mildly concentrated.";
