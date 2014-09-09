@@ -3,3 +3,9 @@
 # This script will attempt to build Kerkerkruip with Travis CI
 
 i7 -s blorb=1,zcode=g -c Kerkerkruip.inform
+
+sshpass -e sftp -oBatchMode=no -oStrictHostKeyChecking=no -b - ${KUSER}@${KSERVER} << !
+	cd downloads.kerkerkruip.org
+	put Kerkerkruip.inform/Build/output.gblorb
+	bye
+!
