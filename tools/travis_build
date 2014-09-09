@@ -2,7 +2,4 @@
 
 # This script will attempt to build Kerkerkruip with Travis CI
 
-#i7 -s blorb=1,zcode=g -c Kerkerkruip.inform
-"/usr/local/libexec/ni"  --internal "/usr/local/share/inform7/data" --format=ulx --project "/home/travis/build/i7/kerkerkruip/Kerkerkruip.inform"
-"/usr/local/libexec/inform6" -kE2wSDGx "/home/travis/build/i7/kerkerkruip/Kerkerkruip.inform/Build/auto.inf" -o "/home/travis/build/i7/kerkerkruip/Kerkerkruip.inform/Build/output.ulx"
-"/usr/local/libexec/cBlorb" -unix "/home/travis/build/i7/kerkerkruip/Kerkerkruip.inform/Release.blurb" "/home/travis/build/i7/kerkerkruip/Kerkerkruip.inform/Build/output.gblorb"
+i7 -s blorb=1,zcode=g -c Kerkerkruip.inform

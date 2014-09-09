@@ -4,6 +4,7 @@
 
 wget http://inform7.com/download/content/6L38/I7_6L38_Linux_all.tar.gz &
 wget https://github.com/i7/extensions/archive/master.zip &
+wget https://gist.githubusercontent.com/curiousdannii/7b9b21b1fe4748176187/raw/2ba9901d86173cae570ec31c1eca8d93384f7f00/i7 &
 
 wget http://www.emshort.com/pl/payloads/Aaron%20Reed/Numbered%20Disambiguation%20Choices.i7x &
 wget http://inform7.com/extensions/Jesse%20McGrew/Dynamic%20Objects/Dynamic%20Objects.i7x &
@@ -17,11 +18,11 @@ wait
 cd inform7-6L38
 sudo ./install-inform7.sh
 cd ..
+sudo cp i7 /usr/local/bin/
 i7 -v
 
 cp -R -n extensions-master/. "Kerkerkruip.materials/Extensions/"
 mkdir "Kerkerkruip.materials/Extensions/Aaron Reed/"
-mkdir "Kerkerkruip.materials/Extensions/Michael Callaghan/"
 cp "Numbered Disambiguation Choices.i7x" "Kerkerkruip.materials/Extensions/Aaron Reed/"
 cp "Dynamic Objects.i7x" "Kerkerkruip.materials/Extensions/Jesse McGrew/"
 cp "Questions.i7x" "Kerkerkruip.materials/Extensions/Michael Callaghan/"
