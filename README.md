@@ -16,9 +16,11 @@ After cloning the Kerkerkruip Git repository onto your computer you will need to
 ./tools/setup
 ```
 
-Beta-testing Kerkerkruip
+Beta testing Kerkerkruip
 ------------------------
 
-If you just want to help beta-test Kerkerkruip you don't need to do that. We use [Travis CI](https://travis-ci.org/i7/kerkerkruip) to automatically build each commit. You will soon be able to download a beta-testing file here.
+We use [Travis CI](https://travis-ci.org/i7/kerkerkruip) to automatically build each commit. So if you'd like to help beta test the game, just download this file:
+
+[kerkerkruip-git.zip](http://downloads.kerkerkruip.org/kerkerkruip-git.zip)
 
 [![Build Status](https://travis-ci.org/i7/kerkerkruip.svg?branch=master)](https://travis-ci.org/i7/kerkerkruip)
