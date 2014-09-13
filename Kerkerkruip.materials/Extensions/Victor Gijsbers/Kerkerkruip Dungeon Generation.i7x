@@ -9,7 +9,7 @@ Book - The dungeon generation seed
 [ We use an xorshift generator to produce all random numbers during the dungeon generation process. The dungeon seed is the initial xorshift seed in hexadecimal, and optionally the lower half of the final xorshift seed at the end of the process, which is used to check if the dungeon was correctly generated. So a valid seed will be either 8 or 12 digits long. If we are careful it should be possible to use seeds across minor updates, but not major ones. ]
 
 The dungeon generation seed is a number variable.
-The dungeon generation check is a number variable.
+The dungeon generation check is a number variable. 
 
 After showing the title screen (this is the seed the xorshift generator rule):
 	[ Seed the xorshift generator ]

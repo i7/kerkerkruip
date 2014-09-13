@@ -147,10 +147,12 @@ Before printing the plural name of a cursed curse-identified thing:
 
 A treasure placement rule:
 	repeat with item running through corruptible clothing:
+		[ Do the last random chance early so that the number of random numbers generated doesn't depend on the difficulty ]
+		let r be a random number between 1 and 5;
 		if a random chance of 1 in 5 succeeds and a random chance of difficulty in 5 succeeds:
 			now item is cursed;
 			if generation info is true, say "* Cursed [item].";			
-		if item is cursed and a random chance of 1 in 5 succeeds:
+		if item is cursed and r is 1:
 			now item is curse-identified.
 			
 Section - Cursed weapons
@@ -179,10 +181,12 @@ Check inserting it into (this is the cannot insert a cursed readied weapon rule)
 A treasure placement rule:
 	repeat with item running through corruptible weapons:
 		unless item is a natural weapon:
+			[ Do the last random chance early so that the number of random numbers generated doesn't depend on the difficulty ]
+			let r be a random number between 1 and 4;
 			if a random chance of 1 in 10 succeeds and a random chance of difficulty in 5 succeeds:
 				now item is cursed;
 				if generation info is true, say "* Cursed [item].";
-			if item is cursed and a random chance of 1 in 4 succeeds:
+			if item is cursed and r is 1:
 				now item is curse-identified.
 
 

@@ -106,14 +106,16 @@ To set difficulty to (x - number):
 
 Section - Player stats
 
-[ Must be done before showing the title screen as some difficulty labels are gendered! ]
+[ Must be done before showing the title screen as some difficulty labels are gendered! But we do it again after so that it will use the xorshift generator. ]
 Before showing the title screen (this is the set gender rule):
 	if a random chance of 1 in 2 succeeds:
 		now the player is male;
 	otherwise:
 		now the player is female;
 
-First after showing the title screen (this is the set up initial scores for the player rule):
+The set gender rule is listed in the after showing the title screen rules.
+
+After showing the title screen (this is the set up initial scores for the player rule):
 	now permanent health of the player is 13;
 	now melee of the player is 1;
 	now defence of the player is 7;
@@ -166,14 +168,16 @@ After showing the title screen (this is the apply the difficulty rule):
 		increase health of the player by 1;
 		increase permanent health of the player by 1;
 		increase defence of the player by 1;
+	[ This code should be moved to rogue equiping rules ]
 	let k be 14 + difficulty;
 	repeat with guy running through monsters:
 		now health of guy is (k times health of guy) / 20;
 	if difficulty is greater than 2:
 		let n be difficulty - 2;
-		repeat with guy running through monsters:
-			repeat with i running from 1 to n:
-				buff guy.
+		while temporarily disabling the xorshift generator:
+			repeat with guy running through monsters:
+				repeat with i running from 1 to n:
+					buff guy;
 			
 To buff (guy - a person):
 	let m be a random number between 1 and 8;
@@ -349,14 +353,27 @@ Menu command seed:
 				process the seed for T;
 				if number of characters in T is 12:
 					process the seed check for T;
-				[ Should we decrease the difficulty here like we do when starting a new random game? ]
-				delete file of save data;
-				start the game;
+				break;
 		say "That is not a valid dungeon seed. Please try again, or press Enter to return to the menu.[paragraph break]";
+	say "[paragraph break]Please enter a difficulty level, or press Enter to use your current level.[paragraph break]";
+	while 1 is 1:
+		say "> [run paragraph on]";
+		request a seed;
+		let T be "[the player's command]";
+		if T is "":
+			break;
+		if T exactly matches the regular expression "<0-9>+":
+			process the level for T;
+			break;
+		say "Please enter a number, or press Enter to use your current level.[paragraph break]";
+	[ Should we decrease the difficulty here like we do when starting a new random game? ]
+	delete file of save data;
+	start the game;
 
 To request a seed: (- seed_request(); -).
 To process the seed for (T - a text): (- seed_process( {T} ); -).
 To process the seed check for (T - a text): (- seed_process_check( {T} ); -).
+To process the level for (T - a text): (- level_process( {T} ); -).
 
 Include (-
 
@@ -384,15 +401,15 @@ Array seed_esc_terminator -> 1;
 	{
 		! Decode the hex characters
 		ch = BlkValueRead( txt, i );
-		if ( ch > 47 && ch < 58 )
+		if ( ch >= '0' && ch <= '9' )
 		{
-			progress = progress * 16 + ch - 48;
+			progress = progress * 16 + ch - '0';
 		}
-		else if ( ch > 64 && ch < 71 )
+		else if ( ch >= 'A' && ch <= 'F' )
 		{
 			progress = progress * 16 + ch - 55;
 		}
-		else if ( ch > 96 && ch < 103 )
+		else if ( ch >= 'a' && ch <= 'f' )
 		{
 			progress = progress * 16 + ch - 87;
 		}
@@ -410,20 +427,34 @@ Array seed_esc_terminator -> 1;
 	{
 		! Decode the hex characters
 		ch = BlkValueRead( txt, i );
-		if ( ch > 47 && ch < 58 )
+		if ( ch >= '0' && ch <= '9' )
 		{
-			progress = progress * 16 + ch - 48;
+			progress = progress * 16 + ch - '0';
 		}
-		else if ( ch > 64 && ch < 71 )
+		else if ( ch >= 'A' && ch <= 'F' )
 		{
 			progress = progress * 16 + ch - 55;
 		}
-		else if ( ch > 96 && ch < 103 )
+		else if ( ch >= 'a' && ch <= 'f' )
 		{
 			progress = progress * 16 + ch - 87;
 		}
 	}
 	(+ the dungeon generation check +) = progress;
+	! Clean up
+	TEXT_TY_Untransmute( txt, p1, cp1 );
+];
+
+[ level_process txt p1 cp1 dsize i progress;
+	! Transmute the text
+	cp1 = txt-->0;
+	p1 = TEXT_TY_Temporarily_Transmute( txt );
+	dsize = TEXT_TY_CharacterLength( txt );
+	for ( i = 0 : i < dsize : i++ )
+	{
+		progress = progress * 10 + BlkValueRead( txt, i ) - '0';
+	}
+	(+ difficulty +) = progress;
 	! Clean up
 	TEXT_TY_Untransmute( txt, p1, cp1 );
 ];
@@ -821,10 +852,12 @@ Option-6-chest is a container. Option-6-chest contains a scroll of mapping.
 Option-7-chest is a container. Option-7-chest contains a scroll of teleportation.
 
 Last when play begins:
+	[ Generate these numbers now so that the number of random numbers generated doesn't depend on the difficulty ]
 	let n be a random number between 1 and 7;
-	if difficulty is 0 and advanced content is disabled:
+	let n2 be a random number between 1 and 20;
+	if basic game mode is true:
 		now n is 1; [Novice players without advanced content always have the same starting kit.]
-	if difficulty is greater than 1 and a random chance of 1 in 20 succeeds:
+	else if difficulty is greater than 1 and n2 is 20:
 		now n is 50;
 	if n is 1:
 		move gilded rapier to the player;
@@ -865,6 +898,7 @@ Last when play begins:
 	repeat with item running through things enclosed by the player:
 		if item is a weapon or item is clothing:
 			now item is not cursed.
+
 To equip player from (box - a container):
 	repeat with item running through things enclosed by box:
 		move item to player;

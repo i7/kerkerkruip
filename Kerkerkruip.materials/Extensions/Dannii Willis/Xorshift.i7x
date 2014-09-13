@@ -1,4 +1,4 @@
-Version 1/140818 of Xorshift by Dannii Willis begins here.
+Version 1/140913 of Xorshift by Dannii Willis begins here.
 
 "Allows Inform 7's random number generator to be replaced with one that is consistent across all interpreters"
 
@@ -73,7 +73,7 @@ Replace random;
 	}
 ];
 
--) before "Definitions.i6t".
+-) after "Wordsize-Dependent Definitions" in "Definitions.i6t".
 
 The xorshift seed is a number variable.
 The xorshift seed variable translates into I6 as "xorshift_seed".
@@ -81,13 +81,20 @@ The xorshift seed variable translates into I6 as "xorshift_seed".
 To seed the xorshift generator randomly:
 	(- xorshift_seed_randomly(); -).
 
+[ This phrase's wording is a little clumsy, but it works. ]
+To while temporarily disabling the xorshift generator begin -- end conditional:
+	(- @push xorshift_seed;
+	xorshift_seed = 0;
+	if ( 1 ) {-block}
+	@pull xorshift_seed; -).
+
 Xorshift ends here.
 
 ---- DOCUMENTATION ----
 
 Inform allows you to seed the random number generator so that if you use the same seed the same sequence of 'random' numbers will be generated. Unfortunately it isn't consistent when you change interpreters or computers. This extension replaces Inform's built in random number generator with another one called xorshift, which is consistent across all interpreters and computers. (Though not if you switch from the Z-Machine to Glulx or vice versa.) Unlike the other extensions for randomness, this extension will affect every part of Inform that has random behaviour.
 
-The xorshift generator is controlled by the "xorshift seed" variable. To turn it on, set the variable to any number other than 0. To turn it off, set it to 0. If you like, you can use the "seed the xorshift generator random" phrase, which sets the seed using a random number from the built in generator. The seed variable is continually updated as random numbers are generated, so if you want to reuse a seed, you should store it in another variable. Once you have set the seed variable no other code changes are needed.
+The xorshift generator is controlled by the "xorshift seed" variable. To turn it on, set the variable to any number other than 0. To turn it off, set it to 0. If you only need to temporarily switch it off you can use the "while temporarily disabling the xorshift generator" phrase, which introduces a new block (see the example below.) If you like, you can use the "seed the xorshift generator random" phrase, which sets the seed using a random number from the built in generator. The seed variable is continually updated as random numbers are generated, so if you want to reuse a seed, you should store it in another variable. Once you have set the seed variable no other code changes are needed.
 
 	After starting the virtual machine:
 		[ set the seed to a specific number ]
@@ -95,6 +102,8 @@ The xorshift generator is controlled by the "xorshift seed" variable. To turn it
 		[ set the seed to a random number ]
 		seed the xorshift generator randomly;
 		say the xorshift seed;
+		while temporarily disabling the xorshift generator:
+			say "[one of]A[or]B[or]C[purely at random]";
 		[ turn off the xorshift generator ]
 		now the xorshift seed is 0;
 
