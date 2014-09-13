@@ -198,8 +198,7 @@ Section - The Essence Kind
 An essence is a kind of thing. Understand "essence" and "small" and "metal" and "bottle" as an essence.
 An essence is usually magical.
 An essence is usually iron.
-The unlock level of an essence is usually 1.
-The unlock hidden switch of an essence is usually true.
+An essence is usually advanced.
 
 Inhaling is an action applying to one carried thing. Understand "inhale [thing]" as inhaling.
 Does the player mean inhaling an essence: it is very likely.
@@ -303,10 +302,6 @@ The essence of greed is a major essence. The indefinite article is "the".
 The essence of greed is magical.
 The essence of greed is iron.
 
-The unlock level of essence of greed is 4.
-The unlock text of essence of greed is "an essence which allows you to gain more health, at the cost of your safety".
-The unlock hidden switch of essence of greed is false.
-
 A person can be greedy. A person is usually not greedy.
 
 The description of the essence of greed is "This small metal bottle contains the magical essence of greed, distilled from the bones of the legendary thief Mithaldo, whose hunger for treasure was so great that he let himself be swallowed by a dragon in order to get at the jewels the beast had eaten through the centuries. When the dragon was slain some decades later, Mithaldo's bony fingers were found in the dragon's stomach, still clinging to a large diamond. [italic type](When absorbing a soul, the player receives much more health, but permanently loses one or more points of defence.)[roman type]".
@@ -343,10 +338,6 @@ Section - Essence of Addiction (epic)
 The essence of addiction is an epic essence. The indefinite article is "the".
 The essence of addiction is magical.
 The essence of addiction is iron.
-
-The unlock level of essence of addiction is 6.
-The unlock text of essence of addiction is "an essence which will greatly enhance both the positive and negative effects of ment".
-The unlock hidden switch of essence of addiction is false.
 
 The description of the essence of addiction is "This small metal bottle contains the magical essence of addiction, distilled from the brain of a ment user. When inhaled, it greatly increases you addiction to ment -- increasing both the positive effects of a high and the negative effects of a low.".
 
@@ -556,8 +547,7 @@ The blood magic cost of tormenting necklace is 15.
 The blood magic level of tormenting necklace is 0.
 The blood magic maximum of tormenting necklace is 1.
 
-The unlock level of tormenting necklace is 6.
-The unlock text of tormenting necklace is "a necklace that paralyses those who get damaged in combat".
+The tormenting necklace is advanced.
 
 A person has a number called the necklace-torment-counter. The necklace-torment-counter of a person is usually 0.
 Definition: a person (called guy) is necklace-torment-affected if necklace-torment-counter of guy is not 0.
@@ -964,8 +954,7 @@ The robe of the dead mage is an epic shirt.
 The robe of the dead mage is magical.
 The material of the robe of the dead mage is cloth.
 The indefinite article of the robe of the dead mage is "the".
-The unlock level of the robe of the dead mage is 7.
-The unlock text of the robe of the dead mage is "a piece of clothing that allows you to remain concentrated when hit... at a price".
+The robe of the dead mage is advanced.
 
 The description of the robe of the dead mage is "Dominique, marquis of Savon, one of the great mages of his generation, was so fed up with losing his concentration when he was hit that he developed this robe. It increases the wearer's defence by 1; and when the wearer is damaged, he will not lose his concentration. However, the protection comes from his life force, and the damage dealt to him is increased by 25% for every level of concentration. They say nobody ever died with as much attention as Dominique.".
 
@@ -1060,8 +1049,7 @@ The cloak of reflection is a minor cloak.
 The cloak of reflection is magical.
 The cloak of reflection is cloth.
 
-The unlock level of cloak of reflection is 8.
-The unlock text of cloak of reflection is "a cloak that sometimes reflects ranged attacks back to the attacker".
+The cloak of reflection is advanced.
 
 The blood magic cost of cloak of reflection is 4.
 The blood magic level of cloak of reflection is 0.
@@ -2626,8 +2614,7 @@ Section - Ghoulification (minor)
 The small-scroll-of-ghoulification-pack is a minor treasure pack.
 One scroll of ghoulification is in the small-scroll-of-ghoulification-pack.
 The small-scroll-of-ghoulification-pack is civilised.
-The unlock level of the small-scroll-of-ghoulification-pack is 1.
-The unlock hidden switch of the small-scroll-of-ghoulification-pack is true.
+The small-scroll-of-ghoulification-pack is advanced.
 
 Section - Curse removal, small (minor)
 
@@ -2657,7 +2644,6 @@ The large-scroll-of-remove-curse-pack is a major treasure pack.
 The large-scroll-of-remove-curse-pack is civilised.
 Two scrolls of curse removal is in the large-scroll-of-remove-curse-pack.
 The rarity of large-scroll-of-remove-curse-pack is 1.
-The unlock hidden switch of the small-scroll-of-remove-curse-pack is true.
 
 Section - Shadows, small (minor)
 
@@ -2679,8 +2665,7 @@ Section - Summoning (minor)
 
 The small-scroll-of-summoning-pack is a minor treasure pack.
 The small-scroll-of-summoning-pack is magical.	
-The unlock level of the small-scroll-of-summoning-pack is 1.
-The unlock hidden switch of the small-scroll-of-summoning-pack is true.
+The small-scroll-of-summoning-pack is advanced.
 One scroll of summoning is in the small-scroll-of-summoning-pack.
 
 [Section - Fireworks (minor)
@@ -2727,16 +2712,14 @@ Section - Death, small (minor)
 
 The small-scroll-of-death-pack is a minor treasure pack.
 The small-scroll-of-death-pack is civilised.
-The unlock level of small-scroll-of-death-pack is 1.
-The unlock hidden switch of the small-scroll-of-death-pack is true.
+The small-scroll-of-death-pack is advanced.
 One scroll of death is in the small-scroll-of-death-pack.
 
 Section - Death, large (major)
 
 The large-scroll-of-death-pack is a major treasure pack.
 The large-scroll-of-death-pack is civilised.
-The unlock level of large-scroll-of-death-pack is 1.
-The unlock hidden switch of the large-scroll-of-death-pack is true.
+The large-scroll-of-death-pack is advanced.
 Two scrolls of death are in the large-scroll-of-death-pack.
 
 Section - Alteration, small and large (minor)
@@ -2764,8 +2747,7 @@ Section - Deathly [summon, ghoul, death], (major)
 
 The deathly-pack is a major treasure pack.
 The deathly-pack is deathly.
-The unlock level of deathly-pack is 1.
-The unlock hidden switch of the deathly-pack is true.
+The deathly-pack is advanced.
 One scroll of summoning is in the deathly-pack.
 One scroll of ghoulification is in the deathly-pack.
 One scroll of death is in the deathly-pack.
@@ -2781,8 +2763,7 @@ Section - Thief [shadows, teleport, ethereal], (major)
 
 The thief-scroll-pack is a major treasure pack.
 The thief-scroll-pack is civilised.
-The unlock level of thief-scroll-pack is 1.
-The unlock hidden switch of the thief-scroll-pack is true.
+The thief-scroll-pack is advanced.
 Two scrolls of shadows are in the thief-scroll-pack.
 One scroll of teleportation is in the thief-scroll-pack.
 [One scroll of etherealness is in the thief-scroll-pack.]
@@ -2794,6 +2775,8 @@ The knowing-scroll-pack is civilised.
 One scroll of knowledge is in the knowing-scroll-pack.
 One scroll of mapping is in the knowing-scroll-pack.
 One scroll of psycholocation is in the knowing-scroll-pack.
+
+
 
 
 
@@ -2899,6 +2882,8 @@ The parry-with bonus of a sword is usually 1.
 
 Understand "blade" as a sword.
 
+
+
 Section - Smoky blade (minor)
 
 The smoky blade is a minor sword.
@@ -2907,8 +2892,7 @@ The smoky blade is iron.
 
 The description of the smoky blade is "While otherwise a normal sword, it has been enchanted to look like smoke or fog.".
 
-The unlock level of smoky blade is 2.
-The unlock text of smoky blade is "a sword that is hard to see in smoke-filled areas"
+The smoky blade is advanced.
 
 An attack modifier rule (this is the smoky blade is better when smoke rule):
 	if the global attacker weapon is the smoky blade:
@@ -3380,8 +3364,7 @@ The executioner's axe is iron.
 
 The description of the executioner's axe is "This is the blade that chopped off the head of Philip the Traitor after he had been found guilty of murdering his brother, Charles IV. Ever since, pilgrims have flocked to Montenoir's temple of Nomos to see and revere it. How it has ended up in this dungeon is anyone's guess. Feeding the axe will increase its attack modifier by +1.".
 
-The unlock level of the executioner's axe is 10.
-The unlock text of the executioner's axe is "an unwieldy axe that deals massive damage".
+The executioner's axe is advanced.
 
 The blood magic cost of executioner's axe is 15.
 The blood magic level of executioner's axe is 0.
@@ -3968,9 +3951,10 @@ Instead of readying the rod of the master builder:
 			
 Section - Drakul's Lifeblood (epic)
 
-Drakul's lifeblood is an epic deathly glass thing. Understand "blood" and "vial" as Drakul's lifeblood. The description of Drakul's lifeblood is "This small vial holds the blood of a powerful vampire. Drinking it might have far-reaching consequences.".
-The unlock level of Drakul's lifeblood is 11.
-The unlock text of Drakul's lifeblood is "an small vial of blood that can turn you into a vampire".
+Drakul's lifeblood is an epic deathly glass thing.
+Understand "blood" and "vial" as Drakul's lifeblood.
+The description of Drakul's lifeblood is "This small vial holds the blood of a powerful vampire. Drinking it might have far-reaching consequences.".
+Drakul's lifeblood is advanced.
 
 Instead of eating Drakul's lifeblood:
 	try drinking Drakul's lifeblood.

@@ -795,8 +795,7 @@ Space-Time Discontinuum is magical.
 
 The rarity of Space-Time Discontinuum is 1. [Placed less often.]
 
-The unlock level of Space-Time Discontinuum is 10.
-The unlock text of Space-Time Discontinuum is "a weird place where time functions differently than elsewhere".
+The Space-Time Discontinuum is advanced.
 
 STD-firstturn is a truth state that varies. STD-firstturn is true. [To ensure that the player can always retreat.]
 
@@ -1786,8 +1785,7 @@ Rarity of the Lair of the Imp is 3. [Should be special.]
 Instead of smelling the lair of the imp:
 	say "Mostly sulphur, but you'd recognise this smell anywhere -- you used to have a pet imp when you were an apprentice."
 
-The unlock level of Lair of the Imp is 2.
-The unlock hidden switch of the lair of the imp is true.
+The Lair of the Imp is advanced.
 
 Dungeon interest rule (this is the add imp to its lair rule):
 	if Lair of the Imp is placed:
@@ -1922,7 +1920,7 @@ Hall of the Gods is vp-agnostic.
 Hall of the Gods is religious.
 
 The rarity of Hall of the Gods is 4. 
-The unlock level of Hall of the Gods is 2.
+The Hall of the Gods is advanced.
 
 [See Arena of the Fallen in Kerkerkruip Events and Specials.]
 

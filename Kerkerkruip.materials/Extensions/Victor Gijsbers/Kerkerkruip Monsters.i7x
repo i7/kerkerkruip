@@ -533,8 +533,7 @@ The ravenous armadillo is not talker.
 The ravenous armadillo is thrower.
 Material of ravenous armadillo is bone. [Other objects will interact primarily with its bone scales.]
 
-The unlock level of the ravenous armadillo is 3.
-The unlock text of the ravenous armadillo is "a monster that searches the dungeon for anything it can eat".
+The ravenous armadillo is advanced.
 
 The description of ravenous armadillo is "As their name suggests, ravenous armadillos will eat anything. They may seem slow and easy to hit, but their tough scales ensure that they can shrug off most damage, and their bony tail club packs a considerable punch.".
 
@@ -955,8 +954,7 @@ The body score of the wisps of pain is 3.
 The mind score of the wisps of pain is 6.
 The spirit score of the wisps of pain is 9.
 
-The unlock level of the wisps of pain is 12.
-The unlock text of the wisps of pain is "terrible creatures that weaken their enemies permanently".
+The wisps of pain is advanced.
 
 A remove general damage rule (this is the wisps of pain take less damage rule):
 	if victim is the wisps of pain:
@@ -1852,8 +1850,7 @@ Understand "cries" and "inarticulate" as the demon of rage.
 The level of the demon of rage is 2.
 The ID of the demon of rage is 8.
 The demon of rage is medium.
-The unlock level of the demon of rage is 2.
-The unlock hidden switch of the demon of rage is true.
+The demon of rage is advanced.
 The demon of rage is talker.
 The demon of rage is thrower.
 The material of the demon of rage is darkness.
@@ -2225,9 +2222,7 @@ An angel of compassion is a monster. "An angel hovers here, [if angel-of-compass
 The level of the angel of compassion is 2.
 The ID of the angel of compassion is 33.
 The angel of compassion is medium.
-The unlock level of the angel of compassion is 7.
-The unlock hidden switch of the angel of compassion is false.
-The unlock text of the angel of compassion is "an angelic being that grows weaker whenever someone dies".
+The angel of compassion is advanced.
 The angel of compassion is talker.
 The angel of compassion is thrower.
 The angel of compassion is angelic.
@@ -3248,8 +3243,7 @@ The minotaur is not talker.
 The minotaur is thrower.
 Material of the minotaur is flesh.
 
-The unlock level of the minotaur is 2.
-The unlock hidden switch of the minotaur is true.
+The minotaur is advanced.
 
 The health of minotaur is 35.
 The melee of minotaur is 2.
@@ -4263,8 +4257,7 @@ The overmind is group leading.
 The overmind is not initially accompanied.
 The overmind is defeated individually.
 
-The unlock level of the overmind is 16.
-The unlock text of the overmind is "a psionic machine that strenghtens all its allies".
+The overmind is advanced.
 
 The health of the overmind is 38.
 The melee of the overmind is 4.

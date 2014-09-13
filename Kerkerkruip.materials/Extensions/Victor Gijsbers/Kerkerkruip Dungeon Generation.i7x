@@ -55,14 +55,13 @@ To decide if the dungeon generation check failed:
 Book - Creating the Dungeon
 
 A first when play begins rule (this is the create the dungeon rule):
-	create the dungeon;
-	follow the further generation rules.
+	follow the dungeon generation rules.
 	
-The further generation rules are a rulebook.
+The dungeon generation rules are a rulebook.
 
 Map approved is a truth state that varies. Map approved is false.
 
-To create the dungeon:
+A dungeon generation rule (this is the generate the map rule):
 	now map approved is false;
 	while map approved is false:
 		print generation message "Generating map...";
@@ -72,17 +71,27 @@ To create the dungeon:
 		approve the map;
 		if map approved is false:
 			print generation message "Map rejected. ";
-	print generation message "Placing monsters...";
+
+A dungeon generation rule (this is the place rogues rule):
+	print generation message "Placing rogues...";
 	place monsters;
 	if generation info is true, say "[paragraph break]";
+
+A dungeon generation rule (this is the place treasures rule):
 	print generation message "Placing treasures...";
 	stock the dungeon;
+
+A dungeon generation rule (this is the more interesting stuff rule):
 	print generation message "Making the dungeon more interesting...";
 	make the dungeon interesting;
+
+A dungeon generation rule (this is the finish generating rule):
 	print generation message "Finishing the dungeon...";
 	finish the dungeon;
 	unless generation info is true:
 		clear the screen.
+
+
 
 Section - Generation message code (for use with Glimmr Canvas Animation by Erik Temple)
 
@@ -106,7 +115,7 @@ To print generation message (T - text):
 
 Section - Rarity
 
-[Objects have a rarity. The probability of an object being put on the list for possible placement is 1/(2^rarity), i.e., 100% for rartiy 0, 50% for rarity 1, 25% for rarity 2, and so on.]
+[Objects have a rarity. The probability of an object being put on the list for possible placement is 1/(2^rarity), i.e., 100% for rarity 0, 50% for rarity 1, 25% for rarity 2, and so on.]
 
 An object has a number called the rarity. The rarity of an object is usually 0.
 
@@ -119,20 +128,20 @@ To decide if (stuff - an object) is too rare:
 			decide on true;
 		decrease n by 1;
 	decide on false.
-		
 
-Section - Unlock level
 
-[Objects with an unlock level on N will onleybe placed after the player has won at least N games. Winning the Nth game will display a message telling the player that the object has been unlocked.]
 
-An object has a number called the unlock level. The unlock level of an object is usually 0.
+Section - Basic and advanced modes
 
-Definition: an object is unlockable if its unlock level is greater than 0.
+An object can be basic or advanced. An object is usually basic.
 
-An object has some text called the unlock text. The unlock text of an object is usually "which the developers forgot to describe here".
-An object has a truth state called the unlock hidden switch. The unlock hidden switch of an object is usually false. [Set to true if the object should not announce its unlocking.]
+Basic game mode is a truth state variable.
 
-		
+A first dungeon generation rule (this is the decide basic mode rule):
+	if the difficulty is 0 and advanced content is disabled and the dungeon generation seed is 0:
+		now basic game mode is true.
+
+
 
 Book - Creating the Map
 
@@ -353,7 +362,7 @@ Placement possible rule (this is the adjust rooms for rarity rule):
 		rule fails.
 
 Placement possible rule (this is the do not place advanced rooms in novice mode rule):
-	if considered room is unlockable and the difficulty is 0 and advanced content is disabled:
+	if considered room is advanced and basic game mode is true:
 		rule fails.
 
 Last placement possible rule:
@@ -732,7 +741,7 @@ First monster placement possible rule (this is the only monsters of the right le
 		rule fails.
 
 Monster placement possible rule (this is the do not place advanced monsters in novice mode rule):
-	if the considered monster is unlockable and difficulty is 0 and advanced content is disabled:
+	if the considered monster is advanced and basic game mode is true:
 		rule fails.
 		
 Monster placement possible rule (this is the do not use groupers rule):
@@ -768,15 +777,6 @@ Section - Treasure placement
 
 Considered treasure is a thing that varies.
 
-Definition: a thing (called item) is not-too-difficult:
-	if advanced content is enabled:
-		yes;
-	if the difficulty > 0:
-		yes;
-	if the unlock level of item is 0:
-		yes;
-	no.
-
 First treasure placement rule (this is the remove rare items rule):
 	repeat with X running through rare not non-treasure things:
 		if X is too rare:
@@ -787,11 +787,20 @@ First treasure placement rule (this is the remove rare items rule):
 
 A treasure placement rule (this is the stock minor treasure rule):
 	print generation message "    Placing minor treasures...";
-	let n be the number of off-stage not-too-difficult minor things;
+	let n be a number;
+	let stuff be a thing;
+	if basic game mode is true:
+		now n is the number of off-stage basic minor things;
+	otherwise:
+		now n is the number of off-stage minor things;
 	let m be a random number between 7 and 14;
-	if m is greater than n, now m is n;
+	if m is greater than n:
+		now m is n;
 	repeat with i running from 1 to m:
-		let stuff be a random off-stage not-too-difficult minor thing;
+		if basic game mode is true:
+			now stuff is a random off-stage basic minor thing;
+		otherwise:
+			now stuff is a random off-stage minor thing;
 		now considered treasure is stuff;
 		choose a room;
 		move stuff to considered room;
@@ -799,11 +808,19 @@ A treasure placement rule (this is the stock minor treasure rule):
 		
 A treasure placement rule (this is the stock major treasure rule):
 	print generation message "    Placing major treasures...";
-	let n be the number of off-stage not-too-difficult major things;
+	let n be a number;
+	let stuff be a thing;
+	if basic game mode is true:
+		now n is the number of off-stage basic major things;
+	otherwise:
+		now n is the number of off-stage major things;
 	let m be a random number between 4 and 6;
 	if m is greater than n, now m is n;
 	repeat with i running from 1 to m:
-		let stuff be a random off-stage not-too-difficult major thing;
+		if basic game mode is true:
+			now stuff is a random off-stage basic major thing;
+		otherwise:
+			now stuff is a random off-stage major thing;
 [		let place be a random placed placeable room;
 		if distance of place is less than 2:
 			let place be a random placed placeable room; [increasing probability of this treasure being farther from Entrance Hall]
@@ -818,11 +835,19 @@ A treasure placement rule (this is the stock major treasure rule):
 
 A treasure placement rule (this is the stock epic treasure rule):
 	print generation message "    Placing epic treasures (well, you hope)...";
-	let n be the number of off-stage not-too-difficult epic things;
+	let n be a number;
+	let stuff be a thing;
+	if basic game mode is true:
+		now n is the number of off-stage basic epic things;
+	otherwise:
+		now n is the number of off-stage epic things;
 	let m be a random number between 1 and 2;
 	if m is greater than n, now m is n;
 	repeat with i running from 1 to m:
-		let stuff be a random off-stage not-too-difficult epic thing;
+		if basic game mode is true:
+			now stuff is a random off-stage basic epic thing;
+		otherwise:
+			now stuff is a random off-stage epic thing;
 [		let place be a random placed placeable room;
 		if distance of place is less than 3: [increasing probability of this treasure being farther from Entrance Hall]
 			let place be a random placed placeable room;
@@ -839,12 +864,20 @@ A treasure placement rule (this is the stock epic treasure rule):
 
 A treasure placement rule (this is the stock special treasure rule):
 	print generation message "    Placing special treasures...";
-	let n be the number of off-stage not-too-difficult special things;
+	let n be a number;
+	let stuff be a thing;
+	if basic game mode is true:
+		now n is the number of off-stage basic special things;
+	otherwise:
+		now n is the number of off-stage special things;
 	let m be a random number between 0 and 1;
 	if m is greater than n, now m is n;
 	unless m is 0:
 		repeat with i running from 1 to m:
-			let stuff be a random off-stage not-too-difficult special thing;
+			if basic game mode is true:
+				now stuff is a random off-stage basic special thing;
+			otherwise:
+				now stuff is a random off-stage special thing;
 			now considered treasure is stuff;
 			choose a room;
 			move stuff to considered room;		
@@ -895,16 +928,23 @@ To score the suitable rooms for treasure:
 The treasure scoring rules are a rulebook.
 
 
+
 Section - Additional routines
 
-
-
 To place (i - a number) of (worth - a valuation) things in (coffer - an object):
-	let n be the number of off-stage not-too-difficult things valuing worth;
+	let n be a number;
+	let item be a thing;
+	if basic game mode is true:
+		now n is the number of off-stage basic things valuing worth;
+	otherwise:
+		now n is the number of off-stage things valuing worth;
 	let m be i;
 	if m is greater than n, now m is n;
 	while m is greater than 0:
-		let item be a random off-stage not-too-difficult thing valuing worth;
+		if basic game mode is true:
+			now item is a random off-stage basic thing valuing worth;
+		otherwise:
+			now item is a random off-stage thing valuing worth;
 		move item to coffer;
 		if generation info is true, say "* Putting [item] in [coffer].";
 		decrease m by 1.
