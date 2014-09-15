@@ -16,8 +16,6 @@ The story description is "Kerkerkruip is a short-form roguelike in the interacti
 [Release along with cover art and a file of "Gargoyle config file" called "Kerkerkruip.ini".] [bug #1413]
 
 
-
-
 Section - 3rd Party Inclusions
 
 [ Check https://github.com/i7/extensions if the I7 site only has older versions ]

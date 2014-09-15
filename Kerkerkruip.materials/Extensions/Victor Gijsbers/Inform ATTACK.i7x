@@ -316,10 +316,12 @@ The contact rules are a rulebook.
 Carry out an actor hitting (this is the abide by the contact rules rule):
 	abide by the contact rules.
 
+To beat is a verb.
+
 First contact rule (this is the standard whether the attack hit rule):
 	if the attack strength is greater than the defence of the global defender:
 		if the numbers boolean is true:
-			say "[the global attacker] beat[s] [regarding the global defender][possessive] defence rating of ", the defence of the global defender, ".";
+			say "[the global attacker] [beat] [regarding the global defender][possessive] defence rating of ", the defence of the global defender, ".";
 	otherwise:
 		if the numbers boolean is true:
 			say "[the global attacker] [do] not overcome [regarding the global defender][possessive] defence rating of ", the defence of the global defender, "[roman type].";
@@ -335,12 +337,14 @@ The damage multiplier rules are a rulebook.
 Carry out an actor hitting (this is the consider the damage modifier rules rule):
 	follow the damage modifier rules;
 
+To deal is a verb.
+
 First damage modifier rule (this is the standard damage roll rule):
 	unless damage die of the global attacker weapon is less than 1:
 		now the attack damage is a random number between 1 and the damage die of the global attacker weapon;
 	increase the attack damage by weapon damage bonus of the global attacker weapon; [1d(damage die) + WDB]
 	if the numbers boolean is true:
-		say "[The global attacker] deal[s] ", the attack damage, "[run paragraph on]".
+		say "[The global attacker] [deal] ", the attack damage, "[run paragraph on]".
 
 Carry out an actor hitting (this is the consider the damage multiplier rules rule):
 	follow the damage multiplier rules;
@@ -371,9 +375,11 @@ Carry out an actor hitting (this is the subtract damage from health rule):
 
 Section - Report hitting
 
+To hit is a verb. To kill is a verb.
+
 Report an actor hitting an alive person (this is the basic flavour rule):
 	if the attack damage is greater than 0:
-		say "[The global attacker] hit[s] [the global defender].[run paragraph on]";
+		say "[The global attacker] [hit] [the global defender].[run paragraph on]";
 	otherwise:
 		say "[The global attacker] [miss] [the global defender].[run paragraph on]";
 
@@ -381,7 +387,7 @@ Report an actor hitting a dead pc (this is the basic fatal player flavour rule):
 	say "You are killed by [the global attacker].[run paragraph on]";
 
 Report an actor hitting a dead npc (this is the basic fatal flavour rule):
-	say "[The global attacker] kill[s] [the name of the global defender].[run paragraph on]";
+	say "[The global attacker] [kill] [the name of the global defender].[run paragraph on]";
 
 Report the player hitting a dead pc (this is the report player suicide rule):
 	say "Your attack ends your own life.";
@@ -522,14 +528,16 @@ Last carry out an actor readying (this is the unready all other weapons rule):
 			if the item is not the noun and the item is readied:
 				now the item is not readied.
 
+To ready is a verb. To fool is a verb. To attempt is a verb. To fail is a verb.
+
 Last report an actor readying (this is the standard report readying rule):
 	if the noun is readied:
 		say "[The actor] [ready] [the noun].";
 	otherwise:
 		if the actor encloses the noun:
-			say "[The actor] fool[s] around with [the noun], but fail[s] to ready it.";
+			say "[The actor] [fool] around with [the noun], but [fail] to ready it.";
 		otherwise:
-			say "[The actor] attempt[s] to ready [the noun], but cannot get a hold on it.".
+			say "[The actor] [attempt] to ready [the noun], but [cannot] get a hold on it.".
 
 Chapter - Unreadying
 
@@ -710,19 +718,23 @@ Parrying is an action applying to nothing. Understand "parry" and "p" and "pa" a
 
 A person can be at parry. A person is usually not at parry.
 
+To parry is a verb.
+
 Check parrying (this is the cannot parry when not reacting rule):
 	if the combat state of the player is not at-React:
 		take no time;
-		say "You parry, but there is no attack." instead.
+		say "[We] [parry], but [there] [are] no attack." instead.
 
 [Carry out an actor parrying (this is the parrying changes initiative rule):
 	increase the initiative of the actor by 1.]
 	
 Carry out an actor parrying (this is the standard carry out parrying rule):	
 	now the actor is at parry.
-	
+
+To strike is a verb.
+
 Report an actor parrying (this is the standard parry prose rule):	
-	say "[The actor] strike[s] up a defensive pose.".
+	say "[The actor] [strike] up a defensive pose.".
 
 An attack modifier rule (this is the parry defence bonus rule):
 	if the global defender is at parry:
@@ -768,16 +780,18 @@ Dodging is an action applying to nothing. Understand "dodge" and "do" as dodging
 
 A person can be at dodge. A person is usually not at dodge.
 
+To dodge is a verb.
+
 Check dodging (this is the cannot dodge when not reacting rule):
 	if the combat state of the player is not at-React:
 		take no time;
-		say "You dodge, but there is no attack." instead.
+		say "[We] [dodge], but [there] [are] no attack." instead.
 	
 Carry out an actor dodging (this is the standard carry out dodging rule):	
 	now the actor is at dodge.
-	
+
 Report an actor dodging (this is the standard dodge prose rule):
-	say "[The actor] get[s] ready for quick evasive maneuvers.".
+	say "[The actor] [get] ready for quick evasive maneuvers.".
 
 An attack modifier rule (this is the dodge defence bonus rule):
 	if the global defender is at dodge:
@@ -816,16 +830,18 @@ Rolling is an action applying to nothing. Understand "roll" as rolling.
 
 A person can be at-roll. A person is usually not at-roll.
 
+To roll is a verb.
+
 Check rolling (this is the cannot roll when not reacting rule):
 	if the combat state of the player is not at-React:
 		take no time;
-		say "You roll, but there is no attack." instead.
+		say "[We] [roll], but [there] [are] no attack." instead.
 
 Carry out an actor rolling:
 	now the actor is at-roll.
 
 Report an actor rolling (this is the standard roll prose rule):
-	say "[The actor] roll[s] into the thick of combat.".
+	say "[The actor] [roll] into the thick of combat.".
 
 [An attack modifier rule (this is the roll defence bonus rule):
 	if the global defender is at-roll:
@@ -854,10 +870,12 @@ Blocking is an action applying to nothing. Understand "block" as blocking.
 
 A person can be at-block. A person is usually not at-block.
 
+To block is a verb.
+
 Check blocking (this is the cannot block when not reacting rule):
 	if the combat state of the player is not at-React:
 		take no time;
-		say "You block, but there is no attack." instead.
+		say "[We] [block], but [there] [are] no attack." instead.
 
 Carry out an actor blocking:
 	now defensive flow of actor is (offensive flow of actor + defensive flow of actor);
@@ -865,7 +883,7 @@ Carry out an actor blocking:
 	now the actor is at-block.
 
 Report an actor blocking (this is the standard block prose rule):
-	say "[The actor] attempt[s] to block the incoming attack.".
+	say "[The actor] [attempt] to block the incoming attack.".
 	
 [No special defense bonus. Kerkerkruip adds a shield-related rule here.]	
 
@@ -888,16 +906,20 @@ Exposing is an action applying to nothing. Understand "expose" as exposing.
 
 A person can be at-expose. A person is usually not at-expose.
 
+To expose is a verb.
+
 Check exposing (this is the cannot expose when not reacting rule):
 	if the combat state of the player is not at-React:
 		take no time;
-		say "You expose yourself, but there is no attack." instead.
+		say "[We] [expose] [ourselves], but [there] [are] no attack." instead.
 
 Carry out an actor exposing:
 	now the actor is at-expose.
 
+To stand is a verb.
+
 Report an actor exposing (this is the standard expose prose rule):
-	say "[The actor] stand[s] ready to receive the attack.".
+	say "[The actor] [stand] ready to receive the attack.".
 	
 An attack modifier rule (this is the expose defence penalty rule):
 	if the global defender is at-expose:
@@ -1221,17 +1243,19 @@ Understand "reload [held weapon]" as reloading.
 Does the player mean reloading an unloaded readied weapon enclosed by the player: it is very likely.
 Does the player mean reloading an unloaded weapon enclosed by the player: it is likely.
 
+To use is a verb.
+
 Check reloading when the maximum shots of the noun is 0 (this is the cannot reload weapons that use no ammo rule):
 	take no time;
-	say "[The noun] does not use ammunition." instead;
+	say "[The noun] [do not use] ammunition." instead;
 	
 Check reloading when the maximum load time of the noun is -1 (this is the cannot reload unreloadable weapons rule):	
 	take no time;
-	say "[The noun] cannot be [reload stem text of the noun]ed." instead;
+	say "[The noun] [cannot] be [reload stem text of the noun]ed." instead;
 	
 Check reloading when the current shots of the noun is the maximum shots of the noun (this is the cannot reload fully loaded weapons rule):	
 	take no time;
-	say "[The noun] is already loaded." instead.
+	say "[The noun] [are] already loaded." instead.
 
 Carry out an actor reloading a not readied weapon (this is the ready upon reloading rule):
 	silently try readying the noun;
@@ -1244,12 +1268,14 @@ Carry out an actor reloading (this is the standard carry out reloading rule):
 	if the current load time of the noun is less than 1:
 		now the current shots of the noun is the maximum shots of the noun;
 		now the current load time of the noun is the maximum load time of the noun.
-	
+
+To finish is a verb. To start is a verb. To continue is a verb.
+
 Report an actor reloading (this is the standard report reloading rule):
 	if the current load time of the noun is the maximum load time of the noun:
-		say "[The actor] [if the maximum load time of the noun is 1][reload text of the noun][s][otherwise]finish[es] [reload stem text of the noun]ing[end if] [the noun].";
+		say "[The actor] [if the maximum load time of the noun is 1][reload text of the noun][s][otherwise][finish] [reload stem text of the noun]ing[end if] [the noun].";
 	otherwise:
-		say "[The actor] [if the current load time of the noun plus 1 is the maximum load time of the noun]start[s][otherwise]continue[s][end if] [reload stem text of the noun]ing [the noun].".
+		say "[The actor] [if the current load time of the noun plus 1 is the maximum load time of the noun][start][otherwise][continue][end if] [reload stem text of the noun]ing [the noun].".
 
 Section - Reloading and choosing a weapon AI rules
 

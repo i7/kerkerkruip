@@ -331,6 +331,22 @@ Carry out testreadying:
 		let item be a random readied weapon enclosed by guy;
 		say "[guy] - [item][line break]".
 
+Section - Changing Story Tense and Viewpoint
 
+Viewpoint-changing is an action out of world applying to one narrative viewpoint. Understand "viewpoint [a narrative viewpoint]" as viewpoint-changing.
+
+Carry out viewpoint-changing:
+	now the story viewpoint is the narrative viewpoint understood;
+	say "[bracket]Story viewpoint is now [the story viewpoint].[close bracket]";
+	
+Understand "viewpoint [text]" as a mistake ("Viewpoint can only be set to one of the following: [the list of narrative viewpoints].")
+
+Tense-changing is an action out of world applying to one grammatical tense. Understand "tense [a grammatical tense]" as tense-changing.
+
+Understand "tense [text]" as a mistake ("Tense can only be set to one of the following: [the list of grammatical tenses].")
+
+Carry out tense-changing:
+	now the story tense is the grammatical tense understood;
+	say "[bracket]Story tense is now [the story tense].[close bracket]";
 
 Kerkerkruip Tests ends here.

@@ -7,6 +7,8 @@
 		<key>IFSettingNaturalInform</key>
 		<true/>
 	</dict>
+	<key>IFI7OutputSettings</key>
+	<dict/>
 	<key>IFInform6Extensions</key>
 	<dict/>
 	<key>IFLibrarySettings</key>
