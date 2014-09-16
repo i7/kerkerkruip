@@ -389,11 +389,11 @@ Unallocated faculty is a number that varies. Unallocated faculty is 0.
 
 To grant a faculty increase of (n - a number):
 	increase unallocated faculty by n;
-	say "[We] can now increase one of [our] faculties by [bold type][unallocated faculty] point[if unallocated faculty is not 1]s[end if][roman type]. (Type 'body', 'mind', or 'spirit', depending on [our] choice.) [run paragraph on]".
+	say "[We] [can] now increase one of [our] faculties by [bold type][unallocated faculty] point[if unallocated faculty is not 1]s[end if][roman type]. (Type 'body', 'mind', or 'spirit', depending on [our] choice.) [run paragraph on]".
 	
 Last status skill rule (this is the unallocated faculty rule):
 	if unallocated faculty is greater than 0:
-		say "[italic type][We] can increase one of [our] faculties by [bold type][unallocated faculty] point[if unallocated faculty is not 1]s[end if][italic type]. (Type 'body', 'mind', or 'spirit', depending on [our] choice. This action takes no time.)[roman type][line break][run paragraph on]".
+		say "[italic type][We] [can] increase one of [our] faculties by [bold type][unallocated faculty] point[if unallocated faculty is not 1]s[end if][italic type]. (Type 'body', 'mind', or 'spirit', depending on [our] choice. This action takes no time.)[roman type][line break][run paragraph on]".
 
 Increasing body is an action out of world. Understand "body" as increasing body.
 Increasing mind is an action out of world. Understand "mind" as increasing mind.
@@ -401,15 +401,17 @@ Increasing spirit is an action out of world. Understand "spirit" as increasing s
 
 Check increasing body:
 	if unallocated faculty is less than 1:
-		say "[We] do not have any points left!" instead.
+		say "[We] [do not have] any points left!" instead.
 
 Check increasing mind:
 	if unallocated faculty is less than 1:
-		say "[We] do not have any points left!" instead.
+		say "[We] [do not have] any points left!" instead.
 
 Check increasing spirit:
 	if unallocated faculty is less than 1:
-		say "[We] do not have any points left!" instead.
+		say "[We] [do not have] any points left!" instead.
+
+[Okay, this is where I draw the line. My obsession with adaptive text may be extreme, but this would be ridiculous to implement as adaptive - Mike]
 
 Carry out increasing body:
 	increase body score of the player by unallocated faculty;
