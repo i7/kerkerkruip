@@ -682,11 +682,10 @@ To let (the defender - a person) lose concentration:
 
 The lose concentration prose rules are a person based rulebook.
 
+To lose is a verb.
+
 Last lose concentration prose rule for a person (called P) (this is the standard lose concentration prose rule):
-	if P is the player:
-		say "You lose your [bold type]concentration[roman type]!";
-	otherwise:
-		say "[The P] loses [bold type]concentration[roman type]!";
+	say "[The P] [lose] [bold type]concentration[roman type]!";
 
 Chance to win rule (this is the CTW concentration bonus rule):
 	if the concentration of the running AI is:

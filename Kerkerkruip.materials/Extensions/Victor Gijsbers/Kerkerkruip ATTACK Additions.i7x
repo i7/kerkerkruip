@@ -6,21 +6,21 @@ Section - No concentrating outside of combat
 
 Check concentrating (this is the do not concentrate outside of combat rule):
 	if combat status is peace:
-		say "You can only concentrate in a combat situation." instead.
+		say "[We] [can] only concentrate in a combat situation." instead.
 
 Section - No readying what you don't have
 
 First check readying (this is the do not ready weapons on the ground rule):
 	unless the player encloses the noun:
 		take no time;
-		say "You will have to get [the noun] first." instead.
+		say "[We] will [have] to get [the noun] first." instead.
 		
 Section - No wearing what you don't have
 
 First check wearing (this is the do not wear things on the ground rule):
 	unless the player encloses the noun:
 		take no time;
-		say "You will have to get [the noun] first." instead.
+		say "[We] will [have] to get [the noun] first." instead.
 		
 Section - No reading what you don't have
 
@@ -28,23 +28,25 @@ First check reading (this is the do not read things on the ground rule):
 	unless the player encloses the noun:
 		unless the noun is a tome:
 			take no time;
-			say "You will have to get [the noun] first." instead.
+			say "[We] will [have] to get [the noun] first." instead.
 		
 Section - No snorting what you don't have
 
 First check snorting (this is the do not snort things on the ground rule):
 	unless the player encloses the noun:
 		take no time;
-		say "You will have to get [the noun] first." instead.
+		say "[We] will [have] to get [the noun] first." instead.
 						
 
 Section - Losing concentration only for worldsharers
+
+To relax is a verb.
 
 This is the new everyone loses concentration when combat status is peace rule:
 	if combat status is peace:
 		if concentration of the player is not 0:
 			now concentration of the player is 0;
-			say "You relax your concentration.";
+			say "[We] [relax] [our] concentration.";
 		now world test subject is the player;
 		repeat with guy running through alive worldsharer people:
 			now concentration of guy is 0.
@@ -74,7 +76,7 @@ Section - Attacking when the combat status is peace (Nomos, slaves)
 This is the alternative do not kill yourself rule:
 	if the noun is the player and Nomos bonus is false:
 		take no time;
-		say "You are not that desperate!" instead.
+		say "[We] [are] not that desperate!" instead.
 		
 The alternative do not kill yourself rule is listed instead of the do not kill yourself rule in the check attacking rulebook.
 
@@ -95,7 +97,7 @@ This is the alternative do not attack friendly people rule:
 					now faction of the noun is hostile;
 			otherwise:
 				take no time;
-				say "[The noun] is your friend, not your enemy!" instead.
+				say "[The noun] [are] [our] friend, not [our] enemy!" instead.
 				
 The alternative do not attack friendly people rule is listed instead of the do not attack friendly people rule in the check attacking rulebook.
 
@@ -181,6 +183,8 @@ The alternative lose concentration when hit rule is listed instead of the lose c
 The remain concentrated chance is a number that varies.
 The remain concentrated rules are a rulebook.
 
+To remain is a verb.
+
 An aftereffects rule (this is the alternative lose concentration when hit rule):
 	if the the attack damage is greater than 0 and the global defender is alive and the concentration of the global defender is not 0:
 		now the remain concentrated chance is 0;
@@ -188,7 +192,7 @@ An aftereffects rule (this is the alternative lose concentration when hit rule):
 		unless a random chance of remain concentrated chance in 100 succeeds:
 			let the global defender lose concentration;
 		otherwise:
-			say "[The global defender] [bold type]remain[s] concentrated[roman type].";.
+			say "[The global defender] [bold type][remain] concentrated[roman type].";.
 
 A remain concentrated rule (this is the damage penalty for remaining concentrated rule):
 	decrease remain concentrated chance by attack damage.
@@ -341,7 +345,7 @@ To test the faculty of (guy - a person) against (n - a number) described as (tar
 	now test subject is guy;
 	now roller is the guy;
 	now test score is a roll of the dice;
-	say "[The guy] roll[s] ", test score, " + [run paragraph on]";
+	say "[The guy] [roll] ", test score, " + [run paragraph on]";
 	if tested faculty is body:
 		let k be final body of the guy;
 		say "[k] (body)[run paragraph on]";
@@ -385,11 +389,11 @@ Unallocated faculty is a number that varies. Unallocated faculty is 0.
 
 To grant a faculty increase of (n - a number):
 	increase unallocated faculty by n;
-	say "You can now increase one of your faculties by [bold type][unallocated faculty] point[if unallocated faculty is not 1]s[end if][roman type]. (Type 'body', 'mind', or 'spirit', depending on your choice.) [run paragraph on]".
+	say "[We] can now increase one of [our] faculties by [bold type][unallocated faculty] point[if unallocated faculty is not 1]s[end if][roman type]. (Type 'body', 'mind', or 'spirit', depending on [our] choice.) [run paragraph on]".
 	
 Last status skill rule (this is the unallocated faculty rule):
 	if unallocated faculty is greater than 0:
-		say "[italic type]You can increase one of your faculties by [bold type][unallocated faculty] point[if unallocated faculty is not 1]s[end if][italic type]. (Type 'body', 'mind', or 'spirit', depending on your choice. This action takes no time.)[roman type][line break][run paragraph on]".
+		say "[italic type][We] can increase one of [our] faculties by [bold type][unallocated faculty] point[if unallocated faculty is not 1]s[end if][italic type]. (Type 'body', 'mind', or 'spirit', depending on [our] choice. This action takes no time.)[roman type][line break][run paragraph on]".
 
 Increasing body is an action out of world. Understand "body" as increasing body.
 Increasing mind is an action out of world. Understand "mind" as increasing mind.
@@ -397,29 +401,29 @@ Increasing spirit is an action out of world. Understand "spirit" as increasing s
 
 Check increasing body:
 	if unallocated faculty is less than 1:
-		say "You do not have any points left!" instead.
+		say "[We] do not have any points left!" instead.
 
 Check increasing mind:
 	if unallocated faculty is less than 1:
-		say "You do not have any points left!" instead.
+		say "[We] do not have any points left!" instead.
 
 Check increasing spirit:
 	if unallocated faculty is less than 1:
-		say "You do not have any points left!" instead.
+		say "[We] do not have any points left!" instead.
 
 Carry out increasing body:
 	increase body score of the player by unallocated faculty;
-	say "Your basic body increases to [body score of the player]; your effective body is now [run paragraph on][final body of the player].[line break][paragraph break]";
+	say "[Our] basic body increases to [body score of the player]; [our] effective body is now [run paragraph on][final body of the player].[line break][paragraph break]";
 	now unallocated faculty is 0.
 
 Carry out increasing mind:
 	increase mind score of the player by unallocated faculty;
-	say "Your basic mind increases to [mind score of the player][run paragraph on][if mind score of player is not final mind of player]; your effective mind is now [run paragraph on][final mind of the player][end if].[line break][paragraph break]";
+	say "[Our] basic mind increases to [mind score of the player][run paragraph on][if mind score of player is not final mind of player]; [our] effective mind is now [run paragraph on][final mind of the player][end if].[line break][paragraph break]";
 	now unallocated faculty is 0.
 	
 Carry out increasing spirit:
 	increase spirit score of the player by unallocated faculty;
-	say "Your basic spirit increases to [spirit score of the player]; your effective spirit is now [run paragraph on][final spirit of the player].[line break][paragraph break]";
+	say "[Our] basic spirit increases to [spirit score of the player]; [our] effective spirit is now [run paragraph on][final spirit of the player].[line break][paragraph break]";
 	now unallocated faculty is 0.
 
 Section - Direct benefits of faculties
@@ -439,7 +443,7 @@ Initiative update rule (this is the increase initiative based on spirit rule):
 		if a random chance of n in 40 succeeds:
 			increase the initiative of X by a random number between 1 and 3.
 
-[Critical hit chance is determined by the lowest of your three attributes.]
+[Critical hit chance is determined by the lowest of [our] three attributes.]
 A natural twenty rule (this is the faculties natural twenty rule):
 	let n be final body of the roller;
 	let o be final mind of the roller;
@@ -497,7 +501,7 @@ Section - Blocking
 Check blocking (this is the cannot block when not wearing a shield rule):
 	if the player is not wearing a shield:
 		take no time;
-		say "You cannot block when you're not wearing a shield." instead.
+		say "[We] [cannot block] when [we]['re not] wearing a shield." instead.
 
 An AI action selection rule for an at-React person (called P) (this is the AI block without shields rule):
 	choose row with an Option of the action of P blocking in the Table of AI Action Options;
