@@ -6,5 +6,4 @@
 echo Setting some files so that their changes will be ignored
 git update-index --assume-unchanged ./Kerkerkruip.inform/Settings.plist
 git update-index --assume-unchanged ./Kerkerkruip.inform/uuid.txt
-git update-index --assume-unchanged ./Kerkerkruip.inform/Index/Headings.xml
 echo Done!
