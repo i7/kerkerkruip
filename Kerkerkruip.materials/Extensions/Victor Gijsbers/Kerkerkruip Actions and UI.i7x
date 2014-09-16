@@ -10,6 +10,7 @@ To squash is a verb.
 To ready is a verb.
 To fly is a verb.
 To crash is a verb.
+To attack is a verb.
 
 Volume - Special actions
 
@@ -397,9 +398,9 @@ Last carry out examining a person:
 			say " [The noun] wears [a list of things worn by the noun].[run paragraph on]";
 		let item be a random readied weapon enclosed by the noun;
 		if item is a natural weapon:
-			say " [The noun] attack[s] using [item]: 1d[damage die of item] + [weapon damage bonus of the item] damage; [if weapon attack bonus of the item is less than 0]-[otherwise]+[end if][absolute value of weapon attack bonus of the item] attack modifier[if the item is ranged]; ranged[end if][natural parry and dodge info of the item][if the item is silver]; good against undead and demons[end if][special weapon info of the item][roman type].[run paragraph on]";
+			say " [The noun] [attack] using [item]: 1d[damage die of item] + [weapon damage bonus of the item] damage; [if weapon attack bonus of the item is less than 0]-[otherwise]+[end if][absolute value of weapon attack bonus of the item] attack modifier[if the item is ranged]; ranged[end if][natural parry and dodge info of the item][if the item is silver]; good against undead and demons[end if][special weapon info of the item][roman type].[run paragraph on]";
 		otherwise:
-			say " [The noun] attack[s] using [the item].[run paragraph on]";
+			say " [The noun] [attack] using [the item].[run paragraph on]";
 		say "[paragraph break][The noun] [have] [concentration of the noun] concentration, [offensive flow of the noun] offensive flow, and [defensive flow of the noun] defensive flow. [The noun] [are] of [size of the noun] size, and [have] [health of the noun] of [permanent health of the noun] health left.[run paragraph on]" ;
 		say "[paragraph break]".
 		
