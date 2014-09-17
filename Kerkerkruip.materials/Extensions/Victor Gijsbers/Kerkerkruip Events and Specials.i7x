@@ -321,8 +321,10 @@ Carry out challenging someone in Arena of the Gods:
 	now chosenname is the printed name of the noun;
 	now the challenged god is a random god incarnated by the noun.
 	
+To grant is a verb.
+
 Before arena arrival of Arena of the Gods:
-	say "It pleases your God to have a champion fight in the Arena. [regarding the patron of the player][They] grant[s] you 2 divine favour!";
+	say "It pleases your God to have a champion fight in the Arena. [regarding the patron of the player][They] [grant] you 2 divine favour!";
 	say conditional paragraph break;
 	raise the favour of the player by 2;
 	say conditional paragraph break;
@@ -385,9 +387,11 @@ An attack modifier rule (this is the much harder to discern by Herm bonus rule):
 
 Section - Interactions with Other Systems
 
+To fight is a verb.
+
 After changing form to an undead player form when the challenged god is Chton:
 	Let the opponent be a random alive arena-faction person who worships Chton; [Drakul]
-	say "You turn into a [form-name of current form], but your opponent [regarding the opponent][don't] care that you're undead. [They] fight[s] on for the honour of Chton!";
+	say "You turn into a [form-name of current form], but your opponent [regarding the opponent][don't] care that you're undead. [They] [fight] on for the honour of Chton!";
 
 [handle summoning here too?]
 
@@ -396,6 +400,8 @@ Check an actor challenging someone in the Maze when the location is Arena of the
 	[insert punishments here?]
 	stop the action;
 
+To prostrate is a verb. To pray is a verb. To rise is a verb.
+
 First every turn when the location is Arena of the Gods (this is the reject enslavement in Arena of the Gods rule):
 	Repeat with offender running through god-champion people who do not oppose the player:
 		if offender does not oppose the player:
@@ -403,7 +409,7 @@ First every turn when the location is Arena of the Gods (this is the reject ensl
 			if offender is alive:
 				now offender is arena-faction;
 				now arena-faction hates the faction of the player;
-				say "[line break][The offender] prostrates [them]self. 'I beg for your mercy, O great [challenged god],' [regarding the offender][they] pray[s]. Then [they] rise[s] to fight you again!";
+				say "[line break][The offender] [prostrate] [themselves]. 'I beg for your mercy, O great [challenged god],' [regarding the offender][they] [pray]. Then [they] [rise] to fight you again!";
 
 Section - Awarding divine power 
 

@@ -275,8 +275,10 @@ A person called the Chef is in The Dining Hall. The description of the Chef is "
 banquet-menu-text is a list of texts that varies.
 banquet-items is a list of people that varies.
 
+To ask is a verb.
+
 Instead of doing anything when the current action involves the kitchen servant:
-	say "The servant approaches you. 'Which guest are we serving tonight?' [regarding the kitchen servant][they] ask[s].";
+	say "The servant approaches you. 'Which guest are we serving tonight?' [regarding the kitchen servant][they] [ask].";
 	now the current question is "(Which enemy do you select?)";
 	now banquet-menu-text is {};
 	now banquet-items is {};
