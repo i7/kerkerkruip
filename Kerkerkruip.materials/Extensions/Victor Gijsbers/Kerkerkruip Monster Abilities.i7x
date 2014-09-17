@@ -569,7 +569,7 @@ This is the dreadful presence effect rule:
 				if m < 0:
 					now m is 1;
 				if a random chance of m in 100 succeeds:
-					say "[The main actor] cower[s] before [regarding the guy][possessive] [bold type]dreadful presence[roman type]!";
+					say "[The main actor] [cower] before [regarding the guy][possessive] [bold type]dreadful presence[roman type]!";
 					now combat status is concluding.
 
 The dreadful presence effect rule is listed before the the main actor chooses an action rule in the combat round rules.
@@ -645,19 +645,23 @@ Dungeon interest rule (this is the put people asleep rule):
 			if guy is not the player:
 				now guy is asleep.
 
+To wake is a verb.
+
 First carry out an actor hitting (this is the being attacked wakes people up rule):  [Before the attack because then the prose describing the attack will generally make more sense]
 	if the global defender is asleep and the global defender is alive:
 		now the global defender is not asleep;
-		say "[The global defender] [bold type]wake[s] up[roman type], surprised by the attack!";
+		say "[The global defender] [bold type][wake] up[roman type], surprised by the attack!";
 		now global defender is just-woken.
+
+To sleep is a verb.
 
 This is the asleep rule:
 	if the main actor is asleep and combat status is combat:
 		unless a random chance of tension in 50 succeeds:
-			say "[The main actor] sleep[s] peacefully[roman type].";
+			say "[The main actor] [sleep] peacefully[roman type].";
 			now combat status is concluding;
 		otherwise:
-			say "[The main actor] [bold type]wake[s] up[roman type], apparently feeling the tension!";
+			say "[The main actor] [bold type][wake] up[roman type], apparently feeling the tension!";
 			now main actor is not asleep.
 
 Aftereffects rule (this is the wake people when fighting rule):
@@ -692,6 +696,8 @@ An add specific damage rule (this is the asleep damage bonus rule):
 Last carry out an actor hitting (this is the remove just-woken rule):
 	now global defender is not just-woken.
 
+To lie is a verb.
+
 For printing a locale paragraph about a thing (called the item)
 	(this is the use initial appearance in room descriptions except when asleep rule):
 	if the item is not mentioned:
@@ -701,7 +707,7 @@ For printing a locale paragraph about a thing (called the item)
 			increase the locale paragraph count by 1;
 			if item is a person:
 				if item is asleep:
-					say "[The item] lie[s] on the ground, sleeping.[run paragraph on]";
+					say "[The item] [lie] on the ground, sleeping.[run paragraph on]";
 					say "[paragraph break]";
 				otherwise:
 					say "[initial appearance of the item]";
@@ -875,14 +881,16 @@ Last carry out an actor teleporting (this is the actually do the teleportation r
 	unless teleport amount of actor is -1 or teleport amount of actor is 0:
 		decrease teleport amount of actor by 1;
 
+To teleport is a verb. To reappear is a verb.
+
 Report an npc teleporting:
 	if teleportation-from is the location and teleportation-destination is the location:
-		say "[The actor] teleport[s] away, but reappear[s] in the exact same spot.";
+		say "[The actor] [teleport] away, but [reappear] in the exact same spot.";
 	otherwise:
 		if teleportation-from is the location:
-			say "[The actor] suddenly teleport[s] away!";
+			say "[The actor] suddenly [teleport] away!";
 		if  teleportation-destination is the location:
-			say "[The actor] suddenly teleport[s] into the room!";
+			say "[The actor] suddenly [teleport] into the room!";
 
 
 To teleport the player:
@@ -1102,8 +1110,10 @@ A person has a number called the disarm strength. The disarm strength of a perso
 A person has some text called the first disarm text. The first disarm text of a person is usually "[disarm-1]".
 To say disarm-1: say "[The disarm-actor] tries to disarm [the noun]. [italic type][run paragraph on]".
 
+To realise is a verb.
+
 A person has some text called the second disarm text. The second disarm text of a person is usually "[disarm-2]".
-To say disarm-2: say "[roman type] [The noun] realise[s] what is happening only when it is too late, and [bold type][the disarm-weapon] [are] sent flying[roman type] across the room."
+To say disarm-2: say "[roman type] [The noun] [realise] what is happening only when it is too late, and [bold type][the disarm-weapon] [are] sent flying[roman type] across the room."
 
 Section - Disarm power
 
@@ -1120,6 +1130,8 @@ An AI action selection rule for an at-Act disarmer person (called P) (this is th
 		if a random chance of 1 in 10 succeeds:
 			increase the Action Weight entry by 20.
 
+To see is a verb. To manage is a verb.
+
 Carry out a person disarming:
 	now disarm-actor is the actor;
 	let X be a random readied weapon carried by the noun;
@@ -1127,7 +1139,7 @@ Carry out a person disarming:
 	say first disarm text of the actor;
 	test the spirit of the noun against disarm strength of the actor;
 	if test result is true:
-		say "[roman type] [The noun] see[s] it coming in time, and manage[s] to keep [the X] out of [regarding the actor][possessive] reach.";
+		say "[roman type] [The noun] [see] it coming in time, and [manage] to keep [the X] out of [regarding the actor][possessive] reach.";
 	otherwise:
 		say second disarm text of the actor;
 		now X is not readied;
