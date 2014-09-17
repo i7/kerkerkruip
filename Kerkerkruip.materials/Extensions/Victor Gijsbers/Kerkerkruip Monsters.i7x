@@ -1207,11 +1207,13 @@ When play begins:
 	now X is plural-named;
 	now material of X is iron.
 
+To attempt is a verb. To die is a verb.
+
 First carry out an actor attacking the chain golem (this is the attack a spinning chain golem rule):
 	if the chain golem is conscious:
 		let W be a random readied weapon held by the actor;
 		unless W is ranged:
-			say "[The actor] attempt[s] to duck under the whirling chains. [run paragraph on]";
+			say "[The actor] [attempt] to duck under the whirling chains. [run paragraph on]";
 			let n be the concentration of the chain golem;
 			increase n by 7;
 			if a random chance of 1 in 2 succeeds:
@@ -1231,7 +1233,7 @@ First carry out an actor attacking the chain golem (this is the attack a spinnin
 						otherwise:
 							say ".";
 					otherwise:
-						say "[if the actor is the player] and killing you.[otherwise] [The actor] immediately dies.[end if]";
+						say "[if the actor is the player] and killing you.[otherwise] [The actor] immediately [die].[end if]";
 						have an event of the chain golem killing the actor;
 						if the player is dead:
 							end the story saying "You died valiantly, but in vain";
@@ -1275,8 +1277,10 @@ Disarm strength of chain golem is 13.
 First disarm text of the chain golem is "[chain-disarm-1]".
 To say chain-disarm-1: say "[The chain golem] suddenly launches several of its chains in an attempt to grab [regarding the noun][possessive] weapon. [italic type][run paragraph on]".
 
+To realise is a verb.
+
 Second disarm text of the chain golem is "[chain-disarm-2]".
-To say chain-disarm-2: say "[roman type] [The noun] realise[s] what is happening only when it is too late, and a chain has already wrapped itself around [regarding the noun][possessive] [disarm-weapon], pulls sharply, and [bold type]sends the weapon flying[roman type] across the room.".
+To say chain-disarm-2: say "[roman type] [The noun] [realise] what is happening only when it is too late, and a chain has already wrapped itself around [regarding the noun][possessive] [disarm-weapon], pulls sharply, and [bold type]sends the weapon flying[roman type] across the room.".
 
 Section - Prose
 
@@ -2468,6 +2472,8 @@ An AI action selection rule for the at-React mindslug (this is the mindslug does
 	choose row with an Option of the action of the mindslug dodging in the Table of AI Action Options;
 	decrease the Action Weight entry by 100.
 		
+To resist is a verb. To fail is a verb.
+
 Carry out the mindslug mindblasting:
 	say "The mindslug blasts [the noun] with psionic energy. [italic type][run paragraph on]";
 	let n be 10;
@@ -2475,10 +2481,10 @@ Carry out the mindslug mindblasting:
 	test the mind of the noun against n; 
 	say "[roman type]";
 	if test result is true:
-		say " [The noun] resist[s] the mindslug's influence!";
+		say " [The noun] [resist] the mindslug's influence!";
 	otherwise:
 		decrease mind score of the noun by 1;
-		say " [The noun] fail[s] to resist the mindslug's mental blast, and [regarding the noun][possessive] mind score decreases to [mind score of the noun].";
+		say " [The noun] [fail] to resist the mindslug's mental blast, and [regarding the noun][possessive] mind score decreases to [mind score of the noun].";
 		if mind score of the noun is less than 1:
 			if the noun is the player:
 				end the story saying "You live on as the unquestioning slave of a giant slug";
@@ -3006,6 +3012,7 @@ Clothing has a number called the constriction prevention. The constriction preve
 
 Definition: clothing (called item) is constriction-preventing if the constriction prevention of item is greater than 0.
 
+To protect is a verb.
 Carry out the giant tentacle tentacle-constricting:
 	increase constriction level by 1; [constricts tighter]
 	let n be constriction level;
@@ -3023,14 +3030,14 @@ Carry out the giant tentacle tentacle-constricting:
 		have the giant tentacle inflict damage on the chosen target, silently;
 		if m is greater than 0:
 			remove preventer from play; [and the preventing item gets smashed]
-		say "The giant tentacle tightens its muscles, dealing [bold type][total damage] damage[roman type] to [the name of the chosen target][if m is greater than 0]. [The preventer] get[s] smashed in the process[end if].";
+		say "The giant tentacle tightens its muscles, dealing [bold type][total damage] damage[roman type] to [the name of the chosen target][if m is greater than 0]. [The preventer] [get] smashed in the process[end if].";
 		if the chosen target is dead:
 			have an event of the giant tentacle killing the chosen target;
 			now constriction level is 0;
 		if the player is dead:
 			end the story saying "You suffocate in the tentacle's deadly embrace.";
 	otherwise: [constriction prevention >= constriction level: no damage]
-		say "The giant tentacle tightens its muscles, but the [preventer] protect[s] [the chosen target] against the pressure.".
+		say "The giant tentacle tightens its muscles, but the [preventer] [protect] [the chosen target] against the pressure.".
 
 Section - and the tentacle shakes
 
@@ -3042,13 +3049,15 @@ An AI action selection rule for the at-React giant tentacle (this is the tentacl
 		now the Option entry is the action of the the giant tentacle tentacle-shaking;
 		now the Action Weight entry is 15 plus 5 times the concentration of the main actor;
 
+To remain is a verb.
+
 Carry out the giant tentacle tentacle-shaking:
 	say "The giant tentacle vigourously shakes [the main actor] while projecting the horrifying image of Tooloo.[italic type] [run paragraph on]";
 	let n be 12;
 	test the mind of the main actor against n; 
 	say "[roman type]";
 	if test result is true:
-		say " [The main actor] remain[s] [if the concentration of the main actor is greater than 0]concentrated[otherwise]sharp[end if].";
+		say " [The main actor] [remain] [if the concentration of the main actor is greater than 0]concentrated[otherwise]sharp[end if].";
 	otherwise:
 		say " [The main actor] [are] horrified and confused![run paragraph on]";
 		now the main actor is tentacle-confused;
@@ -3106,6 +3115,8 @@ Report giant tentacle waiting when giant tentacle is insane:
 	say "The giant tentacle tries to hide by imitating a leaf of grass.";
 	rule succeeds.	
 
+To deal is a verb.
+
 [ This is almost the same as the set up attack damage rule, except with the option to mention that the tentacle still holds on to the defender. ]
 Carry out an actor hitting (this is the show the damage dealt by the giant tentacle rule):
 	if global attacker is the giant tentacle:
@@ -3114,7 +3125,7 @@ Carry out an actor hitting (this is the show the damage dealt by the giant tenta
 			now the attack damage is a random number between 1 and the damage die of the global attacker weapon;
 		increase the attack damage by weapon damage bonus of the global attacker weapon; [1d(damage die) + WDB]
 		if the numbers boolean is true:
-			say "[roman type][The global attacker] deal[s] ", the attack damage, "[run paragraph on]";
+			say "[roman type][The global attacker] [deal] ", the attack damage, "[run paragraph on]";
 		now harm of physical damage is attack damage;
 		now damage-by-hitting is true;	
 		have global attacker weapon inflict damage on the global defender;  [The crucial line.]
@@ -4381,13 +4392,15 @@ Carry out the overmind overmind-calling:
 				now guy accompanies the overmind;
 	now concentration of the overmind is 0.
 
+To move is a verb.
+
 To call an ally:
 	let guy be a random overmind-ally person;
 	let the way be the best route from the location of guy to the location of the overmind;
 	if way is a direction:
 		let place be the room way of the location of the guy;
 		if location of the overmind is location of the player:
-			say "You briefly see an image of [the guy] flickering above the overmind, and a weird buzzing sound fills the dungeon. In the image, [the guy] move[s] to [place].";
+			say "You briefly see an image of [the guy] flickering above the overmind, and a weird buzzing sound fills the dungeon. In the image, [the guy] [move] to [place].";
 			now last-seen-location of the guy is place;
 			now guy is seen;
 		try guy going the way;
@@ -4492,7 +4505,7 @@ Carry out calling:
 			let place be the location of the noun;
 			try the noun going the way;
 			unless location of the noun is location of the player:
-				say "[The noun] move[s] from [the place] to [the location of the noun].";
+				say "[The noun] [move] from [the place] to [the location of the noun].";
 				now last-seen-location of the noun is location of the noun;
 		otherwise:
 			say "[The noun] [have] no way to reach you!";
@@ -5768,7 +5781,7 @@ Carry out the aswang aswang-hexing:
 		say " [roman type][The noun] [are] now [bold type]hexed[roman type].";
 		now the noun is hexed;
 	otherwise:
-		say " [roman type][The noun] [bold type]resist[s] the hex[roman type].";
+		say " [roman type][The noun] [bold type][resist] the hex[roman type].";
 
 Initiative update rule (this is the decrease initiative when hexed rule):
 	repeat with X running through all alive persons enclosed by the location:
@@ -6062,8 +6075,10 @@ Carry out an actor mummy-cursing:
 
 Section - Prose				
 
+To send is a verb.
+
 Report an actor hitting the dead mummified priest:
-	say "The bandages unravel as [the actor] send[s] the mummified priest back to whatever pyramid-filled hell it came from.";
+	say "The bandages unravel as [the actor] [send] the mummified priest back to whatever pyramid-filled hell it came from.";
 	rule succeeds.
 
 Report the mummified priest hitting a dead pc:
@@ -6235,8 +6250,10 @@ An AI action selection rule for the at-Act malignant chanter (this is the malign
 
 Section - Prose				
 
+To reduce is a verb.
+
 Report an actor hitting the dead malignant chanter:
-	say "[The actor] reduce[s] the malignant chanter to eternal silence.";
+	say "[The actor] [reduce] the malignant chanter to eternal silence.";
 	rule succeeds.
 
 Report the malignant chanter hitting a dead pc:
@@ -6340,6 +6357,8 @@ An AI action selection rule for at-React Drakul (this is the Drakul considers mi
 	now the Action Weight entry is a random number between 0 and 50;
 	decrease Action Weight entry by (2 * final mind of the main actor).
 
+To scoff is a verb. To nod is a verb.
+
 Carry out Drakul Drakul-mindgaming:
 	let guy be a random alive person in the location;
 	repeat with counter running from 1 to 5:
@@ -6357,9 +6376,9 @@ Carry out Drakul Drakul-mindgaming:
 	test the mind of the main actor against n; 
 	say "[roman type]";
 	if test result is true:
-		say " [The main actor] scoff[s] at the suggestion.";
+		say " [The main actor] [scoff] at the suggestion.";
 	otherwise:
-		say " [The main actor] nod[s] slavishly.";
+		say " [The main actor] [nod] slavishly.";
 		repeat through the Table of Delayed Actions:
 			if action to take entry is the action of the main actor hitting Drakul:
 				now Action to take entry is the action of the main actor hitting guy.
@@ -6377,11 +6396,13 @@ Report an actor hitting the dead Drakul:
 		say "[The actor] [kills Drakul], [if the actor is Drakul]and[otherwise]who[end if] crumbles away into ashes.";
 	rule succeeds.
 
+To destroy is a verb.
+
 To say kills Drakul:
 	if Drakul-killer is Drakul:
 	 	say "drains his own blood";
 	otherwise:
-		say "[regarding Drakul-killer]destroy[s] the infamous vampire";
+		say "[regarding Drakul-killer][destroy] the infamous vampire";
 
 Drakul-victory is a truth state that varies. Drakul-victory is false.
 

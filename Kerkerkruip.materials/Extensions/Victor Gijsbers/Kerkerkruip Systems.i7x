@@ -1283,6 +1283,8 @@ Instead of taking rust spores when the location is rust-spored:
 
 Section - Rust spores rust iron items
 
+To rust is a verb.
+
 Every turn (this is the rust spores rust iron rule):
 	repeat with place running through rust-spored rooms:
 		repeat with item running through iron not rusted corruptible things enclosed by place: [iron mentioned for speed]
@@ -1297,7 +1299,7 @@ Every turn (this is the rust spores rust iron rule):
 									now X is rusted;
 							if player can see item:
 								turn off mentioning rust;
-								say "As rust spores whirl around the room, [the item] rust[unless item is plural-named][s][end if].";
+								say "As rust spores whirl around the room, [the item] [rust].";
 								turn on mentioning rust.
 
 

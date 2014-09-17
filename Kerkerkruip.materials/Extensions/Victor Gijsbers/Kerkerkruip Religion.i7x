@@ -489,9 +489,11 @@ Every turn (this is the decrease the Nomos counter rule):
 			if Nomos counter is 0:
 				activate Nomos bonus;
 
+To follow is a verb. To prepare is a verb.
+
 To activate Nomos bonus:
 	now Nomos bonus is true;
-	if the Nomos attacker is not the player, say "[The Nomos attacker] follow[s] the rules of [their] God, and prepare[s] to attack!";
+	if the Nomos attacker is not the player, say "[The Nomos attacker] [follow] the rules of [their] God, and [prepare] to attack!";
 
 [An AI action selection rule for an at-Act person who is the Nomos attacker (this is the Nomos attacker AI should obey Nomos rule):] [ bug #1411 ]
 An AI action selection rule for an at-Act Nomos-attacker person (this is the Nomos attacker AI should obey Nomos rule):
@@ -545,6 +547,8 @@ After attacklike behaviour (this is the attacking is never fast rule):
 	otherwise:
 		say "himself";]
 
+To plan is a verb. To find is a verb.
+
 Before doing anything (this is the Nomos makes you attack rule):
 	if the current action is unattacklike:
 		if Nomos bonus is false or the take no time boolean is true:
@@ -556,11 +560,11 @@ Before doing anything (this is the Nomos makes you attack rule):
 		now opposition test subject is the Nomos attacker;
 		if at least one opposer alive person is enclosed by the location:
 			let X be a random opposer person enclosed by the location;
-			say "[The actor] plan[s] on [current action], but find[s] [themselves] attacking [the X] instead.";
+			say "[The actor] [plan] on [current action], but [find] [themselves] attacking [the X] instead.";
 			try attacking X instead;
 			deactivate Nomos bonus;
 		otherwise:
-			say "[The actor] plan[s] on [current action], but find[s] [their] body attacking itself instead!";
+			say "[The actor] [plan] on [current action], but [find] [their] body attacking itself instead!";
 			try the player hitting the player instead;
 			deactivate Nomos bonus;
 			if the player is dead:
