@@ -309,13 +309,15 @@ After an actor hitting (this is the better not dodge on bridge of doom rule):
 						now player-vulnerable-to-bridge is true;
 	continue the action.
 
+To balance is a verb. To manage is a verb.
+
 An aftereffects rule (this is the hit may send you off the bridge of doom rule):
 	if global defender can fall:
 		if the location is the bridge of doom and the global defender is alive:
 			if the attack damage is greater than 0:
 				let n be a random number between 0 and 12;
 				if n is less than the attack damage:
-					say "Reeling from the blow, [the global defender] balance[s] on the edge of the bridge. [italic type][run paragraph on]";
+					say "Reeling from the blow, [the global defender] [balance] on the edge of the bridge. [italic type][run paragraph on]";
 					let n be a random number between 6 and 10;
 					test the body of the global defender against n;
 					say "[roman type][run paragraph on]";
@@ -332,7 +334,7 @@ An aftereffects rule (this is the hit may send you off the bridge of doom rule):
 							say " [The global defender] slips and falls, disappearing into the lava below.";
 							have a falling event with the global defender falling in Bridge of Doom for reason 1;
 					otherwise:
-						say " [The global defender] manage[s] to stay on the bridge.".
+						say " [The global defender] [manage] to stay on the bridge.".
 
 
 Exceedingly narrow bridge is scenery in Bridge of Doom. The description of exceedingly narrow bridge is "You doubt there is enough room on the bridge to safely dodge an attack.".
@@ -905,7 +907,7 @@ An aftereffects rule (this is the hit may send you off the vast staircase rule):
 				if the attack damage is greater than 0:
 					let n be a random number between 0 and 16;
 					if n is less than the attack damage:
-						say "Reeling from the blow, [the global defender] balance[s] on the edge of the staircase. [italic type][run paragraph on]";
+						say "Reeling from the blow, [the global defender] [balance] on the edge of the staircase. [italic type][run paragraph on]";
 						let n be a random number between 6 and 11;
 						test the body of the global defender against n;
 						say "[roman type]";
@@ -916,7 +918,7 @@ An aftereffects rule (this is the hit may send you off the vast staircase rule):
 								say " [The global defender] slips and falls!";
 							have a falling event with global defender falling in Vast Staircase for reason 1;								
 						otherwise:
-							say " [The global defender] manage[s] to stay on the staircase.".
+							say " [The global defender] [manage] to stay on the staircase.".
 
 A thing called the staircase is scenery in vast Staircase. Understand "stairs" as the staircase. The description of the staircase is "The staircase winds around the wall, leaving the middle of the room empty.". Instead of climbing the staircase: try going up.
 
