@@ -561,9 +561,11 @@ Aftereffects rule (this is the tormenting necklace rule):
 		if the attack damage is greater than 0:
 			now necklace-torment-counter of global defender is (1 + blood magic level of tormenting necklace).
 
+To writhe is a verb.
+
 This is the necklace of torment rule:
 	if necklace-torment-counter of the main actor is not 0 and combat status is combat:
-		say "[The main actor] writhe[s] in [bold type]agony[roman type]!";
+		say "[The main actor] [writhe] in [bold type]agony[roman type]!";
 		decrease necklace-torment-counter of main actor by 1;
 		now combat status is concluding.
 
@@ -1244,7 +1246,7 @@ To do the grease drop with (guy - a person):
 		if guy is the player:
 			say "Because of the force of the blow and the slipperiness of the gauntlets, you [bold type]drop [the item][roman type].";
 		otherwise:
-			say "[The guy] drop[s] [the item].".
+			say "[The guy] [drop] [the item].".
 
 
 Chapter - Masks
@@ -3323,6 +3325,8 @@ The parry-with bonus of the fearsome axe is -1.
 
 The description of the fearsome axe is "While not exactly a nimble weapon, this axe is certainly able to deal out some punishment. It also has a chance of striking fear in the hearts of your enemies. (When you attack with the fearsome axe, there is a chance that they will not be able to react. The probability of this happening is (your mind - their mind) * 4%.)".
 
+To cower is a verb.
+
 Last carry out an actor attacking (this is the fearsome axe rule):
 	if the actor encloses the fearsome axe and the fearsome axe is readied and the noun is conscious:
 		let n be the final mind of the actor;
@@ -3330,7 +3334,7 @@ Last carry out an actor attacking (this is the fearsome axe rule):
 		if n is greater than 0:
 			if a random chance of n in 25 succeeds:
 				now combat state of noun is at-Inactive;
-				say "[The noun] cower[s] in fear before the attack.".
+				say "[The noun] [cower] in fear before the attack.".
 
 The special weapon info of the fearsome axe is "; inspires fear[run paragraph on]".
 
@@ -3574,12 +3578,13 @@ The weapon attack bonus of the caduceus is 2.
 The parry-with bonus of the caduceus is 1.
 The weapon damage bonus of the caduceus is 0.
 
+To fall is a verb.
 Aftereffects rule (this is the caduceus may put people asleep rule):
 	if the global attacker weapon is the caduceus and the global defender is not the player:
 		if the attack damage is greater than 0 and the global defender is sleeper:
 			let n be final mind of the global attacker;
 			if a random chance of n in 50 succeeds:
-				say "[The global defender] [bold type]fall[s] asleep[roman type]!";
+				say "[The global defender] [bold type][fall] asleep[roman type]!";
 				now global defender is asleep.
 
 Section - Staff of insanity (epic)
