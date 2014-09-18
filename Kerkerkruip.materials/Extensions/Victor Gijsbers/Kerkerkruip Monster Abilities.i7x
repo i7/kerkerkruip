@@ -38,7 +38,7 @@ Status attribute rule (this is the undead status rule):
 		
 Section - Undead rules
 
-A remove specific damage rule (this is the undead immune to necromantic damage rule):
+A before damage rule (this is the undead immune to necromantic damage rule):
 	if creature-type of victim is undead:
 		remove 1000 points of necromantic damage with reason "undead immune to necromantic damage".
 

@@ -16,7 +16,6 @@ Damage-source is a thing that varies.
 Damage-material is a material that varies.
 No-source is a thing. The material of no-source is other-material.
 
-A damage type can be activated or not activated.
 
 Section - Grouping damage types
 
@@ -88,7 +87,7 @@ Section - Adding specific damage
 [Effects that add damage to an already established damage profile should do so using this phrase. You can add damage normally, which means the damage is always added; or conditional on damage of that type already being dealt. Heat vulnerability -- which adds 2 damage when heat damage is being dealt -- should add 2 points of heat damage conditionally; while a curse that adds 2 heat damage to any damage you get from any source should add the damage normally.]
 
 To add (n - a number) points of (type - a damage type) with reason (reason - some text), conditionally:
-	if not conditionally or type is activated:
+	if not conditionally or harm of type is greater than 0:
 		increase harm of type by n;
 		unless n is 0:
 			unless damage silence is true:
@@ -225,25 +224,25 @@ To have (source - a thing) inflict damage on (guy - a person), silently:
 	otherwise:
 		now damage silence is false;
 	now total damage is 0;
-	follow the before damage rules;
+	follow the before damage rules; [this is where immunities should be taken care of]
+	let n be 0;
 	repeat with type running through damage types:
-		if harm of type is 0:
-			now type is not activated;
-		otherwise:
-			now type is activated; [if we deal 2 heat damage, and a rule distracts 2, other rules should still know that heat damage is being dealt and might need to be changed]
-			increase total damage by harm of type;
-	follow the add specific damage rules;
-	follow the remove specific damage rules;	
-	follow the specific damage multiplier rules;
-	now total damage is 0;
-	repeat with type running through damage types:
-		unless harm of type is less than 0:
-			increase total damage by harm of type;
-	follow the add general damage rules;
-	follow the remove general damage rules;	
-	follow the general damage multiplier rules;
-	if total damage is less than 0:
+		increase n by harm of type;
+	if n is 0:  [totally immune to our damage]
 		now total damage is 0;
+	otherwise:
+		follow the add specific damage rules;
+		follow the remove specific damage rules;	
+		follow the specific damage multiplier rules;
+		now total damage is 0;
+		repeat with type running through damage types:
+			unless harm of type is less than 0:
+				increase total damage by harm of type;
+		follow the add general damage rules;
+		follow the remove general damage rules;	
+		follow the general damage multiplier rules;
+		if total damage is less than 0:
+			now total damage is 0;
 	unless silently:
 		if damage comment is true:
 			say " = [bold type]", total damage, " damage[roman type][run paragraph on]";
