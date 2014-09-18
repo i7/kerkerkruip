@@ -5941,7 +5941,6 @@ Carry out the abyss of the soul pulsating:
 			say "[if n is 1 and original n is not 1]and [end if][run paragraph on]";
 			let m be a random number between 1 and the abyss of the soul strength;
 			deal m points of necromantic damage;
-			say "[bold type][m][run paragraph on]";
 			have no-source inflict damage on the guy;
 			say " [roman type]to [guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive and m is not 0] (which breaks [regarding the guy][possessive] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
 			unless total damage is 0:

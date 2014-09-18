@@ -2453,7 +2453,7 @@ An unholy wave rule (this is the standard unholy wave rule):
 			deal m points of necromantic damage;
 			say "[if n is 1 and original n is not 1]and [end if][run paragraph on]";
 			have no-source inflict damage on guy;
-			say "[m] damage to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive] (which breaks [regarding the guy][possessive] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
+			say " to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive] (which breaks [regarding the guy][possessive] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
 			unless total damage is 0:
 				now concentration of the guy is 0;
 			decrease n by 1;
