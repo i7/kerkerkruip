@@ -307,6 +307,20 @@ An add general damage rule (this is the new tension damage modifier rule):
 
 The can't deal negative damage rule is not listed in any rulebook.
 
+Setting action variables for hitting (this is the new reset hitting variables rule):
+	now the global attacker is the actor;
+	now the global defender is the noun;
+	ready natural weapons;
+	now the global attacker weapon is a random readied weapon enclosed by the actor;
+	now the global defender weapon is a random readied weapon enclosed by the noun;
+	have the actor start pressing the noun;
+	now the attack strength is 0;
+	now the attack damage is 0;
+	now the total damage is 0;
+	
+The reset hitting variables rule is not listed in any rulebook.
+
+
 Chapter - Special damage rules
 
 A remove specific damage rule (this is the iron or silver suit acts as a faraday cage rule):
