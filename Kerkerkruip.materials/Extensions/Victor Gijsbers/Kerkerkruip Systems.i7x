@@ -895,7 +895,7 @@ The material of a person is usually flesh.
 
 A thing has a material called the original material.
 
-When play begins (this is the set original material rule):
+Last when play begins (this is the set original material rule):
 	repeat with item running through things:
 		now the original material of item is the material of item.
 
