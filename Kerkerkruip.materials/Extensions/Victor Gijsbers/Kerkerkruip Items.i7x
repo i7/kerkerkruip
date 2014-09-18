@@ -1202,6 +1202,19 @@ Chapter - Belts
 
 Chapter - Gauntlets
 
+Section - Gauntlets allow parrying with fists
+
+An attack modifier rule (this is the gauntlet attack modifier rule):
+	if the global defender wears gauntlets:
+		if the global defender is at parry:
+			if global defender weapon is a natural weapon:
+				let n be parry-with bonus of the global defender weapon;
+				let m be 0 minus n;
+				if m is greater than 0:
+					say " - [m] (gauntlets help when parrying with fists)[run paragraph on]";
+					decrease the attack strength by m.
+
+
 Section - Gauntlets of grip (major)
 
 The gauntlets of grip are major gauntlets. The gauntlets of grip are plural-named. The indefinite article is "the".
@@ -1211,15 +1224,16 @@ The description of the gauntlets of grip is "These sturdy armoured gloves make i
 
 This is the gauntlets of grip rule:
 	if the global defender is at parry and the global defender wears the gauntlets of grip:
-		if the gauntlets of grip are not rusted:
-			if the numbers boolean is true:
-				say " - 1 (gauntlets of grip)[run paragraph on]";
-			decrease the attack strength by 1.
+		unless global defender weapon is a natural weapon:
+			if the gauntlets of grip are not rusted:
+				if the numbers boolean is true:
+					say " - 1 (gauntlets of grip)[run paragraph on]";
+				decrease the attack strength by 1.
 
 The gauntlets of grip rule is listed before the dodge defence bonus rule in the attack modifier rules.
 
 A treasure placement rule (this is the grip can be greasy rule):
-	if a random chance of 1 in 4 succeeds:
+	if a random chance of 1 in 6 succeeds:
 		now the hidden identity of the gauntlets of grip is greasy gauntlets.
 
 Section - Greasy gauntlets (cursed)
