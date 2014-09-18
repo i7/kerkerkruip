@@ -558,7 +558,7 @@ Definition: a person (called guy) is necklace-torment-affected if necklace-torme
 
 Aftereffects rule (this is the tormenting necklace rule):
 	if the global defender wears the tormenting necklace or the global attacker wears the tormenting necklace:
-		if the attack damage is greater than 0:
+		if the total damage is greater than 0:
 			now necklace-torment-counter of global defender is (1 + blood magic level of tormenting necklace).
 
 To writhe is a verb.
@@ -1243,11 +1243,11 @@ The greasy gauntlets are iron.
 The description of the greasy gauntlets is "These armoured gloves are supernaturally slick and greasy. It might be hard to hold on to a weapon while wearing them.".
 
 Last aftereffects rule (this is the greasy gauntlets rule):
-	if the global attacker wears the greasy gauntlets and the attack damage is greater than 0:
+	if the global attacker wears the greasy gauntlets and the total damage is greater than 0:
 		if the global attacker weapon is not ranged:
 			if a random chance of 1 in 6 succeeds:
 				do the grease drop with the global attacker;
-	if the global defender wears the greasy gauntlets and the global defender is at parry and the attack damage is 0:
+	if the global defender wears the greasy gauntlets and the global defender is at parry and the total damage is 0:
 		if the parry-against bonus of the global attacker weapon is greater than -1:
 			if a random chance of 1 in 4 succeeds:
 				do the grease drop with the global defender.
@@ -1484,7 +1484,7 @@ The description of the lion's shield is "A lion's head has been painted on this 
 
 Aftereffects rule (this is the lion's shield rule):
 	if the global defender wears the lion's shield and the global defender is at-block:
-		if the attack damage is 0:
+		if the total damage is 0:
 			if the global attacker weapon is not ranged or the global attacker weapon is a natural weapon:
 				deal 2 points of physical damage;
 				have lion's shield inflict damage on global attacker, silently;
@@ -2998,7 +2998,7 @@ The special weapon info of the claymore is "; shatters weapons[run paragraph on]
 
 An aftereffects rule (this is the claymore can cause weapons to break rule):
 	if global attacker weapon is the claymore or global defender weapon is the claymore: [using claymore]
-		if global defender is at parry and attack damage is 0 and global attacker weapon is not ranged: [parry successful]
+		if global defender is at parry and total damage is 0 and global attacker weapon is not ranged: [parry successful]
 			let target be the claymore;
 			let n be 0;
 			if global attacker weapon is the claymore:
@@ -3176,7 +3176,7 @@ Making-double-strike is a truth state that varies. Making-double-strike is false
 Last after reporting an actor hitting (this is the hit again with the dagger of double strike rule):
 	if the global attacker weapon is the dagger of double strike:
 		if making-double-strike is false:
-			if the attack damage is 0:
+			if the total damage is 0:
 				if the global attacker is alive and the global defender is alive:
 					now making-double-strike is true;
 					say "The dagger of the double strike slashes out again!";
@@ -3289,7 +3289,7 @@ The damage die of the dagger of draining is 8.
 The special weapon info of the dagger of draining is "; drains statistics[run paragraph on]".
 
 An aftereffects rule (this is the dagger of draining aftereffects rule):
-	if the global attacker weapon is the dagger of draining and the attack damage is greater than 0:
+	if the global attacker weapon is the dagger of draining and the total damage is greater than 0:
 		say "The magical dagger saps ";
 		if a random number between 1 and 4 is:
 			-- 1:
@@ -3442,7 +3442,7 @@ The special weapon info of the minotaur's axe is "; when damage is dealt and the
 Last aftereffects rule (this is the minotaur's axe maze rule):
 	if the global attacker weapon is the minotaur's axe:
 		if the global attacker is the minotaur or (the global attacker is the player and the power of the minotaur is granted):
-			if the attack damage is greater than 0:
+			if the total damage is greater than 0:
 				if the location of the player is not the maze:
 					maze the global attacker and the global defender.
 					
@@ -3486,12 +3486,12 @@ The special weapon info of the scythe of oxidation is "; rusts weapons[run parag
 
 An aftereffects rule (this is the scythe of oxidation rusts stuff rule):
 	if the global attacker weapon is the scythe of oxidation:
-		if the global defender is at parry and the attack damage is 0:
+		if the global defender is at parry and the total damage is 0:
 			if the global defender weapon is iron and the global defender weapon is not rusted:
 				say "Having been in contact with the scythe of oxidation, [the global defender weapon] [bold type]rusts[roman type].";
 				now the global defender weapon is rusted;
 	if the global defender weapon is the scythe of oxidation:
-		if the global defender is at parry and the attack damage is 0:
+		if the global defender is at parry and the total damage is 0:
 			if the global attacker weapon is iron and the global attacker weapon is not rusted:
 				if the global attacker weapon is not a part of the global attacker:
 					say "Having been in contact with the scythe of oxidation, [the global attacker weapon] [bold type]rusts[roman type].";
@@ -3501,7 +3501,7 @@ An aftereffects rule (this is the scythe of oxidation rusts stuff rule):
 						say "Having hit the scythe of oxidation, [the global defender] [bold type]rusts[roman type]!";			
 						now the global defender is rusted;
 	if the global attacker weapon is the scythe of oxidation:
-		if the global defender is iron and the attack damage is greater than 0:
+		if the global defender is iron and the total damage is greater than 0:
 			if the global defender is not rusted and the global defender is alive:
 				say "Having been hit with the scythe of oxidation, [the global defender] [bold type]rusts[roman type]!";			
 				now the global defender is rusted.
@@ -3595,7 +3595,7 @@ The weapon damage bonus of the caduceus is 0.
 To fall is a verb.
 Aftereffects rule (this is the caduceus may put people asleep rule):
 	if the global attacker weapon is the caduceus and the global defender is not the player:
-		if the attack damage is greater than 0 and the global defender is sleeper:
+		if the total damage is greater than 0 and the global defender is sleeper:
 			let n be final mind of the global attacker;
 			if a random chance of n in 50 succeeds:
 				say "[The global defender] [bold type][fall] asleep[roman type]!";
@@ -3613,7 +3613,7 @@ The weapon damage bonus of the staff of insanity is 0.
 
 Aftereffects rule (this is the staff of insanity makes people insane rule):
 	if the global attacker weapon is the staff of insanity and the global defender is not the player:
-		if the attack damage is greater than 0 and the faction of the global defender is not insane and the global defender is not dead:
+		if the total damage is greater than 0 and the faction of the global defender is not insane and the global defender is not dead:
 			say "As soon as the bizarre staff strikes, [the global defender] goes [bold type]insane[roman type]!";
 			now faction of the global defender is insane.
 
@@ -3697,7 +3697,7 @@ The description of spiked mace of the ape king is "A ball studded with sharp spi
 
 An aftereffects rule (this is the spiked mace grows rule):
 	if the global attacker weapon is the spiked mace of the ape king:
-		if the attack damage is greater than 0:
+		if the total damage is greater than 0:
 			increase spiked-mace-blood by 1;
 			set stats for the spiked mace of the ape king;
 			if spiked-mace-blood is less than 12:
@@ -3829,8 +3829,8 @@ After readying the glass cannon:
 
 An aftereffects rule (this is the glass cannon shatters when used to parry rule):
 	if the global defender weapon is the glass cannon:
-		if the global defender is at parry and the attack damage is 0:
-			if a random chance of attack damage in 10 succeeds:
+		if the global defender is at parry and the total damage is 0:
+			if a random chance of total damage in 10 succeeds:
 				say "The impact [bold type]shatters the glass cannon[roman type].";
 				remove the glass cannon from play;
 			otherwise:
@@ -3868,7 +3868,7 @@ The description of the demon whip is "The demons of the lower hells use these sa
 
 An aftereffects rule (this is the demon whip rule):
 	if the global attacker weapon is the demon whip:
-		if the attack damage is greater than 0:
+		if the total damage is greater than 0:
 			if the global defender is alive:
 				say "The demon whip [bold type]breaks [regarding the global defender][possessive] will[roman type] (-2 mind score)![paragraph break]";
 				decrease mind score of global defender by 2;

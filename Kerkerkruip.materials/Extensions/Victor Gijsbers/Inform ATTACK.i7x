@@ -361,15 +361,15 @@ Last damage multiplier rule (this is the standard show the attack damage dealt r
 			say "allowing [the global defender] to escape unscathed.[run paragraph on]";
 		otherwise:
 			[non-fatal]
-			if the the attack damage is less than the health of the global defender:
-				say "wounding [the global defender] to ", health of the global defender minus the attack damage, " health.[run paragraph on]" ;
+			if the the total damage is less than the health of the global defender:
+				say "wounding [the global defender] to ", health of the global defender minus the total damage, " health.[run paragraph on]" ;
 			[fatal]
 			otherwise:
 				say "killing [the name of the global defender].[run paragraph on]";
 		say "[roman type][paragraph break]";
 
 Carry out an actor hitting (this is the subtract damage from health rule):
-	decrease the health of the global defender by the attack damage;
+	decrease the health of the global defender by the total damage;
 
 
 
@@ -407,7 +407,7 @@ An aftereffects rule when the global defender is dead (this is the unready weapo
 	now all readied weapons enclosed by the global defender are not readied;
 
 An aftereffects rule (this is the modify initiative based on combat results rule):
-	if the attack damage is greater than 0:
+	if the total damage is greater than 0:
 		decrease the initiative of the global defender by 2;
 	otherwise:
 		decrease the initiative of the global attacker by 2;
@@ -459,7 +459,7 @@ Rule for damage modifier (this is the offensive flow damage modifier rule):
 	decrease the attack damage by the bonus.]
 
 An aftereffects rule (this is the lose flow when hit rule):
-	if the attack damage is greater than 0 and the global defender is alive:
+	if the total damage is greater than 0 and the global defender is alive:
 		now offensive flow of global defender is 0;
 		now defensive flow of global defender is 0.
 
@@ -666,7 +666,7 @@ Rule for damage modifier (this is the concentration damage modifier rule):
 	increase the attack damage by the bonus;
 
 An aftereffects rule (this is the lose concentration when hit rule):
-	if the attack damage is greater than 0 and the global defender is alive:
+	if the total damage is greater than 0 and the global defender is alive:
 		let the global defender lose concentration.
 
 After an actor hitting (this is the lose concentration after attacking rule):
@@ -770,7 +770,7 @@ Chance to win rule (this is the CTW parry bonus rule):
 		now the best defence is n.
 
 An aftereffects rule (this is the gain offensive flow from parrying rule):
-	if the attack damage is 0 and the global defender is at parry:
+	if the total damage is 0 and the global defender is at parry:
 		up the offensive flow of global defender.
 
 Chapter - Dodging
@@ -820,7 +820,7 @@ Last after reporting an actor hitting (this is the no longer at dodge after the 
 	continue the action;
 
 An aftereffects rule (this is the gain defensive flow from dodging rule):
-	if the attack damage is 0 and the global defender is at dodge:
+	if the total damage is 0 and the global defender is at dodge:
 		up the defensive flow of global defender.
 
 Section - Rolling
@@ -858,7 +858,7 @@ Last after reporting an actor hitting (this is the no longer at roll after the a
 	continue the action;
 
 An aftereffects rule (this is the switch to offensive flow after rolling rule):
-	if the attack damage is 0 and the global defender is at-roll:
+	if the total damage is 0 and the global defender is at-roll:
 		now offensive flow of the global defender is (offensive flow of the global defender + defensive flow of the global defender);
 		now defensive flow of the global defender is 0;
 		up the offensive flow of global defender.
@@ -891,7 +891,7 @@ Last after reporting an actor hitting (this is the no longer at block after the 
 	continue the action;
 
 An aftereffects rule (this is the gain random flow from blocking rule):
-	if the attack damage is 0 and the global defender is at-block:
+	if the total damage is 0 and the global defender is at-block:
 		if a random chance of 1 in 2 succeeds:
 			if a random chance of 1 in 2 succeeds:
 				up the defensive flow of global defender;
@@ -1360,7 +1360,7 @@ A damage modifier rule (this is the standard tension damage modifier rule):
 			say " + ", the bonus, " (tension)[run paragraph on]";
 		increase the attack damage by the bonus.
 
-An aftereffects rule when the attack damage is greater than 0 (this is the standard reduce tension after hit rule):		
+An aftereffects rule when the total damage is greater than 0 (this is the standard reduce tension after hit rule):		
 	now the tension is the tension minus 4;
 	now the tension is the tension times 8;
 	now the tension is the tension divided by 10;

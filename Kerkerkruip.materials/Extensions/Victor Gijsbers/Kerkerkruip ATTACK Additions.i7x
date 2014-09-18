@@ -195,7 +195,7 @@ An aftereffects rule (this is the alternative lose concentration when hit rule):
 			say "[The global defender] [bold type][remain] concentrated[roman type].";.
 
 A remain concentrated rule (this is the damage penalty for remaining concentrated rule):
-	decrease remain concentrated chance by attack damage.
+	decrease remain concentrated chance by total damage.
 
 Section - Killing
 

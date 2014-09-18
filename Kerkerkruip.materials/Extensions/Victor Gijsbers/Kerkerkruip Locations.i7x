@@ -314,9 +314,9 @@ To balance is a verb. To manage is a verb.
 An aftereffects rule (this is the hit may send you off the bridge of doom rule):
 	if global defender can fall:
 		if the location is the bridge of doom and the global defender is alive:
-			if the attack damage is greater than 0:
+			if the total damage is greater than 0:
 				let n be a random number between 0 and 12;
-				if n is less than the attack damage:
+				if n is less than the total damage:
 					say "Reeling from the blow, [the global defender] [balance] on the edge of the bridge. [italic type][run paragraph on]";
 					let n be a random number between 6 and 10;
 					test the body of the global defender against n;
@@ -904,9 +904,9 @@ An aftereffects rule (this is the hit may send you off the vast staircase rule):
 	if staircase still goes down:
 		if the global defender can fall:
 			if the location is the vast staircase and the global defender is alive:
-				if the attack damage is greater than 0:
+				if the total damage is greater than 0:
 					let n be a random number between 0 and 16;
-					if n is less than the attack damage:
+					if n is less than the total damage:
 						say "Reeling from the blow, [the global defender] [balance] on the edge of the staircase. [italic type][run paragraph on]";
 						let n be a random number between 6 and 11;
 						test the body of the global defender against n;

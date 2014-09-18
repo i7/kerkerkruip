@@ -184,7 +184,7 @@ Section - Scattering
 Dagger-scattered is a number that varies. Dagger-scattered is 0.
 
 An aftereffects rule (this is the scatter the daggers rule):
-	if the global defender is the swarm of daggers and the attack damage is greater than 0 and the swarm of daggers is not dead:
+	if the global defender is the swarm of daggers and the total damage is greater than 0 and the swarm of daggers is not dead:
 		let n be a random number between 1 and 2;
 		if dagger-scattered is 2:
 			now n is 2;
@@ -362,7 +362,7 @@ When play begins:
 	now X is plural-named.
 
 Aftereffects rule (this is the blood ape grows in size when hit rule):
-	if the global attacker is the blood ape and the attack damage is greater than 0:
+	if the global attacker is the blood ape and the total damage is greater than 0:
 		if the blood ape is not gargantuan:
 			now the blood ape is the size after the size of the blood ape;
 			say "The ape immediately licks the blood of its enemy from its knuckles. Nourished by this substance, it grows to [bold type][size of the blood ape][roman type] size!";
@@ -484,7 +484,7 @@ Repelling power of the ape:
 	decrease inherent damage modifier of the player by 1.
 	
 Aftereffects rule (this is the increase ape damage rule):
-	if global attacker is the player and the attack damage is greater than 0:
+	if global attacker is the player and the total damage is greater than 0:
 		if power of the ape is granted:
 			if size of the player < maximum ape power:
 				["hate is present" is deprecated, but it's not safe to update the combat status here, because this can happen when combat status needs to be concluding]
@@ -2960,7 +2960,7 @@ Check attacking (this is the cannot attack when grappled rule):
 			say "Caught in [the X], you are unable to attack anyone else." instead.
 	
 An aftereffects rule (this is the tentacle lets go when damaged rule):
-	if the global defender is the giant tentacle and the attack damage is greater than 0:
+	if the global defender is the giant tentacle and the total damage is greater than 0:
 		if the giant tentacle grapples someone and the giant tentacle is alive:
 			let X be a random person grappled by the giant tentacle;
 			say "Recoiling in pain, the giant tentacle [bold type]lets go[roman type] of [the X].";
@@ -4577,7 +4577,7 @@ Carry out Israfel Israfel-trancing:
 	say "[if Israfel-trance is 1]Israfel falls into a restorative trance[otherwise]Israfel deepens its trance[end if], [bold type]increasing its health by [n][roman type].".
 
 Aftereffects rule (this is the Israfel getting hit rule):
-	if Israfel is the global defender and the attack damage is greater than 0 and Israfel is alive:
+	if Israfel is the global defender and the total damage is greater than 0 and Israfel is alive:
 		say "Israfel's [bold type]healing trance is broken[roman type].";
 		now Israfel-trance is 1.
 
@@ -4629,14 +4629,14 @@ An AI action selection rule for at-Act Israfel (this is the Israfel considers Is
 Section - Israfel's attack
 
 An aftereffects rule (this is the Israfel's blinding attack rule):
-	if the global attacker is Israfel and attack damage is greater than 0 and global defender is alive:
+	if the global attacker is Israfel and total damage is greater than 0 and global defender is alive:
 		unless global defender is blind:
 			unless flash-grenade-timer of global defender > 6:
 				now flash-grenade-timer of global defender is 6;
 				say "Israfel's flaming attack [bold type]blinds[roman type] [the global defender].".
 				
 An aftereffects rule (this is the Israfel's burning defence rule):
-	if the global defender is Israfel and attack damage is greater than 0:
+	if the global defender is Israfel and total damage is greater than 0:
 		unless global attacker weapon is ranged:
 			deal 3 points of heat damage;
 			have Israfel inflict damage on the global attacker, silently;
@@ -4722,7 +4722,7 @@ The legend-label of Isra is Figure of map_legend_Isra.
 Section - Isra specials and AI
 
 An aftereffects rule (this is the Isra's burning defence rule):
-	if the global defender is Isra and attack damage is greater than 0:
+	if the global defender is Isra and total damage is greater than 0:
 		unless global attacker weapon is ranged:
 			deal 2 points of heat damage;
 			have Isra inflict damage on global attacker;
@@ -4821,7 +4821,7 @@ The legend-label of Fell is Figure of map_legend_Fell.
 Section - Fell specials and AI
 
 An aftereffects rule (this is the Fell's blinding attack rule):
-	if the global attacker is Fell and attack damage is greater than 0 and global defender is alive:
+	if the global attacker is Fell and total damage is greater than 0 and global defender is alive:
 		unless global defender is blind:
 			unless flash-grenade-timer of global defender > 3:
 				now flash-grenade-timer of global defender is 3;
@@ -5585,7 +5585,7 @@ Every turn when a rotting limb is enclosed by the location (this is the rotting 
 					remove item from play.
 
 An aftereffects rule (this is the rotting corpse loses limbs rule):
-	if the global defender is alive and the attack damage is greater than 0:
+	if the global defender is alive and the total damage is greater than 0:
 		if the global defender is the rotting corpse and limbs of the rotting corpse is not 0:
 			let item be a random rotting limb part of the rotting corpse;
 			say "As the corpse reels back from the blow, his [item] falls off.";
@@ -6340,10 +6340,10 @@ Section - Drakul drains the living
 
 Aftereffects rule (this is the Drakul drinks blood rule):
 	if the global attacker is Drakul and the global defender is not undead:
-		if the attack damage is greater than 0:
+		if the total damage is greater than 0:
 			if Drakul-victory is false:
-				say "Drakul [bold type]drinks [regarding the global defender][possessive] blood[roman type], gaining [attack damage] health!";
-				increase health of Drakul by attack damage.
+				say "Drakul [bold type]drinks [regarding the global defender][possessive] blood[roman type], gaining [total damage] health!";
+				increase health of Drakul by total damage.
 
 Section - Drakul uses mind games
 

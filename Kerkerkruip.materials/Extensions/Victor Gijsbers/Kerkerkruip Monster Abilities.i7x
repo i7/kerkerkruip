@@ -419,7 +419,7 @@ Section - Bloodlusting
 A person can be bloodlusting, about-to-bloodlust, or notlusting. A person is usually notlusting.
 
 Aftereffects rule (this is the aftereffect bloodlusting rule):
-	if the attack damage is not 0:
+	if the total damage is not 0:
 		now global attacker is about-to-bloodlust.
 
 Every turn (this is the bloodlusting rule):
@@ -1043,7 +1043,7 @@ Check an actor attacking:
 
 Aftereffects rule (this is the stunning rule):
 	if (the global attacker is at-stun and the global defender is not dead) or global attacker weapon is stunning-weapon:
-		if the attack damage is greater than 0 and global attacker weapon is not ranged:
+		if the total damage is greater than 0 and global attacker weapon is not ranged:
 			let m be 0;
 			if global attacker is at-stun:
 				increase m by final mind of the global attacker;

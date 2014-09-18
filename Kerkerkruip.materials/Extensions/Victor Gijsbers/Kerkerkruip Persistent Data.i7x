@@ -215,7 +215,7 @@ Before printing the player's obituary (this is the award Mageslayer achievement 
 Section - Deathblow
 
 Last aftereffects rule (this is the award Deathblow achievement rule):
-	if global attacker is player and the attack damage is greater than 19:
+	if global attacker is player and the total damage is greater than 19:
 		award achievement Deathblow.
 
 Section - I return to serve
