@@ -5175,9 +5175,8 @@ Section - Special power - Summoning the demonic assassin
 
 Every turn when Malygris-summon-countdown is not 0:
 	if the location of Malygris is the location of the player and the player is not hidden:
-		unless the player is hidden:
-			say "Your arrival interrupts [if teleport amount of Malygris is 1]an intricate[otherwise]a hasty[end if] summoning ritual that Malygris was attempting to perform.";
-			now Malygris-summon-countdown is 0; [his attempt at summoning has failed because the player has interrupted it]
+		say "Your arrival interrupts [if teleport amount of Malygris is 1]an intricate[otherwise]a hasty[end if] summoning ritual that Malygris was attempting to perform.";
+		now Malygris-summon-countdown is 0; [his attempt at summoning has failed because the player has interrupted it]
 	otherwise:
 		decrease Malygris-summon-countdown by 1;
 		if Malygris-summon-countdown is 0:
