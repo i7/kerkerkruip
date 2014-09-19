@@ -970,24 +970,24 @@ A general damage multiplier rule when the victim wears the robe of the dead mage
 			unless damage silence is true:
 				say " + 25% (robe of the dead mage)[run paragraph on]";
 				now damage comment is true;
-			increase the attack damage by the attack damage divided by 4;
+			increase the total damage by the total damage divided by 4;
 		-- 2:
 			unless damage silence is true:
 				say " +50% (robe of the dead mage)[run paragraph on]";
 				now damage comment is true;
-			increase the attack damage by the attack damage divided by 2;		
+			increase the total damage by the total damage divided by 2;		
 		-- 3:
 			unless damage silence is true:
 				say " + 75% (robe of the dead mage)[run paragraph on]";
 				now damage comment is true;
-			let n be the attack damage divided by 4;
-			now the attack damage is the attack damage times 2;
-			decrease the attack damage by n;
+			let n be the total damage divided by 4;
+			now the total damage is the total damage times 2;
+			decrease the total damage by n;
 		-- 4:
 			unless damage silence is true:
 				say " + 100% (robe of the dead mage)[run paragraph on]";
 				now damage comment is true;
-			now the attack damage is the attack damage times 2.
+			now the total damage is the total damage times 2.
 
 An attack modifier rule (this is the robe of the dead mage protects you rule):
 	if the global defender wears the robe of the dead mage:
