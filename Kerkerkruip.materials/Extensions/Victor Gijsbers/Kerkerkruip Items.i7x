@@ -3528,7 +3528,7 @@ The parry-with bonus of a staff of pain is usually -1.
 The parry-against bonus of a staff of pain is usually -2.
 The weapon damage bonus of a staff of pain is usually 0.
 
-First before damage rule (this is the staff of pain rule):
+First before damage rule when the damage-source is a staff of pain (this is the staff of pain rule):
 	now harm of necromantic damage is (harm of necromantic damage + harm of physical damage);
 	now harm of physical damage is 0.
 
