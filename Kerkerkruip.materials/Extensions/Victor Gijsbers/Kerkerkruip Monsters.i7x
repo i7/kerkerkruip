@@ -941,6 +941,7 @@ The ID of the wisps of pain is 30.
 The wisps of pain are tiny.
 The wisps of pain are not talker.
 The wisps of pain are not thrower.
+The wisps of pain are flyer.
 The material of the wisps of pain is darkness.
 
 The description of the wisps of pain is "Dark spots of necromantic magic move through the air. They deal pain and torment, and can permanently cripple anyone foolish enough to oppose them.".
