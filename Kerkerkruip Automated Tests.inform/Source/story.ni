@@ -83,11 +83,6 @@ The random seed rule is listed before the reaper carries a random scythe rule in
 
 Volume - Changes to Other Kerkerkruip Extensions
 
-Section - Defining perform syntax (not for use with Glimmr Canvas Animation by Erik Temple)
-
-To say perform/@ (ph - phrase): (- if (0==0) {ph} -).
-
-
 
 Section - Plurality fix
 
@@ -1749,9 +1744,9 @@ testing effects of remembering-daggers:
 
 [before we can get the partway-path psycholocating message, we have to put a visited room between us and an unseen creature. Find one that's at least two moves away and then go 1 move towards it.]
 
-The sensing-place is a room that varies;
-The on-the-way place is a room that varies;
-The faraway enemy is an object that varies;
+The sensing-place is a room that varies.
+The on-the-way place is a room that varies.
+The faraway enemy is an object that varies.
 
 partway-visiting is a hidden-traveling psy-scroll-reading test step.
 	

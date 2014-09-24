@@ -95,7 +95,7 @@ Include Kerkerkruip Start and Finish by Victor Gijsbers.
 Include Kerkerkruip Tests by Victor Gijsbers.
 Include Kerkerkruip Final Declarations by Victor Gijsbers.
 Include Kerkerkruip Help and Hints by Victor Gijsbers.
-
+[Include Kerkerkruip Automated Testing by Mike Ciul.]
 
 Section - Increase memory settings
 

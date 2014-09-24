@@ -1,5 +1,7 @@
 Kerkerkruip Automated Testing by Mike Ciul begins here.
 
+Include Simple Unit Tests by Dannii Willis.
+
 Volume - Test Framework
 
 Chapter - Persistent data
@@ -43,6 +45,21 @@ Table of Test Results
 Test Set (number)	Total (number)	Failures (number)	Failure Messages (indexed text)
 with 100 blank rows
 
+The file of test set queue is called "testqueue"
+
+Table of Test Set Queue
+Test Set (number)
+with 100 blank rows
+
+To queue (T - a test set):
+	choose a blank row in Table of Test Set Queue;
+	Let testnum be T as a number;
+	Now test set entry is T.
+	
+To queue all test sets:
+	Repeat with T running through enabled test sets:
+		queue T.
+		
 To record a test attempt:
 	increment the test assertion count;
 	increment the total assertion count;
@@ -68,7 +85,9 @@ To record a/-- failure report of/-- (msg - an indexed text):
 	now the failure messages entry is "[failure messages entry]Failure for test: [the current test set], step: [the scheduled event], assertion [the test assertion count]: [msg][paragraph break]";
 	log msg;
 
+
 To display test results:
+	If the number of filled rows in Table of Test Results is 0, stop;
 	log "Test results:[line break]";
 	let grand test total be 0;
 	let grand test failures be 0;
@@ -82,6 +101,8 @@ To display test results:
 			log "[line break]Failures for [test set entry as a test set]:[paragraph break]";
 			log "[failure messages entry]";	
 	say "To view a full transcript of all tests, see the file 'testtranscript.glkdata' in the project directory.";
+	Blank out the whole of Table of Test Results;
+	write file of test results from Table of Test Results; 
 	pause the game;
 	
 Chapter - test steps
@@ -176,7 +197,7 @@ For taking a player action when the scheduled event is not the normal keyboard i
 		follow the choosing a player action rules;
 		now the scheduled event is generated;
 		
-The test step player action rule is listed before the parse command rule in the for taking a player action rulebook.
+The test step player action rule is listed before the parse command rule in the take-a-player-action rulebook.
 		
 A test step has an object called the location-target.
 
@@ -301,16 +322,25 @@ To decide whether testing (T - a test set):
 	decide on whether or not the current test set is T;
 
 First when play begins (this is the run all tests rule):
-	write "Test transcript for Kerkerkruip.[line break]" to file of test transcript;
-	initialize test steps;
-	start the next test;
-	transcribe and restart capturing text;
-	if done testing is false:
+	read file of test set queue into Table of Test Set Queue;
+	read file of test results into Table of Test Results;
+	transcribe and stop capturing;
+	if the number of filled rows in Table of Test Set Queue is 0:
+		now done testing is true;
+		display test results;
+	otherwise:
+		initialize test steps;
+		Choose row 1 in Table of Test Set Queue;
+		Let T be the test set entry as a test set;
+		blank out the whole row;
+		now the current test set is T;	
 		Now the current unit test name is "[the current test set]";
 		log "Now testing [the current test set].";
 		consider the scenario rules;
-	otherwise:
-		transcribe and stop capturing.
+		transcribe and restart capturing text;
+	[Move this to the code that initiates testing - blanks out test transcript]
+	[write "Test transcript for Kerkerkruip.[line break]" to file of test transcript;
+	]
 
 The random seed rule is listed before the run all tests rule in the when play begins rules.
 	
@@ -339,6 +369,44 @@ The scenario rules are a rulebook.
 
 The test play rules are a rulebook.
 
+Chapter - Commands to Start Tests
+
+Test queueing is an action out of world applying to one test set. Understand "test [test set]" as test queueing.
+
+Carry out test queueing a test set:
+	queue the test set understood;
+	say "[The test set understood] will run as soon as you press a key.";
+	pause the game;
+	restart immediately.
+
+All-test queuing is an action out of world applying to nothing. Understand "test all" as all-test queuing.
+
+Carry out all-test queuing:
+	queue all test sets;
+	say "All test sets will run as soon as you press a key.";
+	pause the game;
+	restart immediately.
+	
+Understand "test [text]" as a mistake ("You can 'test all' or test one of the following sets: [list test sets]").
+
+To say list test sets:
+	repeat with T running through enabled test sets:
+		say "[line break][T]";
+	say paragraph break.
+
+Chapter - Resetting the Game After Each Test Set (in place of Chapter - The Unit test rules unindexed in Simple Unit Tests by Dannii Willis)
+
+The current unit test name is an indexed text variable.
+
+To start the/-- next test:
+	do nothing;
+
+For reading a command when done testing is false (this is the finish current test set rule):
+	transcribe and stop capturing text;
+	write file of test results from Table of Test Results;
+	restart immediately;
+	[restore undo state.]
+	
 Chapter - Randomized Events
 
 A randomized outcome is a kind of value. boring lack of results is a randomized outcome.
@@ -425,23 +493,7 @@ Include (-
 ];
 -).
 
-Chapter - Resetting the Game After Each Test Set (in place of Chapter - The Unit test rules unindexed in Simple Unit Tests by Dannii Willis)
 
-The current unit test name is an indexed text variable.
-
-To start the/-- next test:
-	transcribe and stop capturing;
-	Repeat with T running through enabled test sets:
-		now the current test set is T;
-		if the result of saving undo state is successful save, stop;
-		read file of test results into Table of Test Results;
-	now done testing is true;
-	display test results;
-
-For reading a command when done testing is false:
-	transcribe and stop capturing text;
-	write file of test results from Table of Test Results;
-	restore undo state.
 	
 Chapter - Helpful phrases
 
@@ -519,8 +571,8 @@ To force the cloak of shadows to work:
 	if the cloak of shadows is not worn, try wearing the cloak of shadows;
 	now the player is hidden;
 		
-Carry out taking off the cloak of shadows:
-	now traveling sneakily is false;
+Carry out taking off:
+	if the noun is the cloak of shadows, now traveling sneakily is false;
 	
 To travel sneakily to (place - a room):
 	transcribe "traveling sneakily to [place]";
