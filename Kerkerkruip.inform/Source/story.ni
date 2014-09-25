@@ -15,6 +15,9 @@ The release number is 10.
 The story description is "Kerkerkruip is a short-form roguelike in the interactive fiction medium, featuring meaningful tactical and strategic depth, innovative game play, zero grinding, and a sword & sorcery setting that does not rehash tired clichés."
 [Release along with cover art and a file of "Gargoyle config file" called "Kerkerkruip.ini".] [bug #1413]
 
+Section - 3rd Part Testing Inclusions (not for release)
+
+Include Text Capture by Eric Eve. [needed for testing only, but must be listed before Basic Screen Effects]
 
 Section - 3rd Party Inclusions
 
@@ -22,7 +25,6 @@ Section - 3rd Party Inclusions
 
 [Include version 1/131215 of Alternative Startup Rules by Dannii Willis.]
 
-Include Text Capture by Eric Eve. [needed for testing only, but must be listed before Basic Screen Effects]
 Include Basic Screen Effects by Emily Short. 
 Include Numbered Disambiguation Choices by Aaron Reed.
 Include version 10/140201 of Glulx Entry Points by Emily Short.

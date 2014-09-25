@@ -1,9 +1,13 @@
 Kerkerkruip Automated Testing by Mike Ciul begins here.
 
-Include Simple Unit Tests by Dannii Willis.
-Include Text Capture by Eric Eve.
+Use authorial modesty.
 
-Volume - Test Framework
+Volume - Test Framework (not for release)
+
+Include Simple Unit Tests by Dannii Willis.
+Include Text Capture by Eric Eve. [Actually, this must be included before Basic Screen Effects]
+
+Use maximum capture buffer length of at least 16384.
 
 Chapter - Persistent data
 
@@ -482,14 +486,12 @@ Carry out all-test queuing:
 	start test transcript with "all test sets".
 		
 To start test transcript with (T - a text):
-	repeat with play running through test sets:
-		say "Test set [play]: [play as a number][line break]";
 	pause the game;
 	write "Test transcript for Kerkerkruip: [T].[line break]" to file of test transcript;
 	start the next test;
 	
 	
-Understand "queue test [text]" as a mistake ("You can 'queue test all' or test one of the following sets: [list test sets]").
+Understand "queue test/tests" and "queue test [text]" as a mistake ("You can 'queue test all' or test one of the following sets: [list test sets]").
 
 To say list test sets:
 	repeat with T running through enabled test sets:
