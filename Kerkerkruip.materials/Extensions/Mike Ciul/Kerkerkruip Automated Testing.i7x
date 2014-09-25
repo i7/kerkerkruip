@@ -419,6 +419,7 @@ Before showing the title screen:
 	if file of test set queue exists, read file of test set queue into Table of Test Set Queue;
 	if file of test results exists, read file of test results into Table of Test Results;
 	if the number of filled rows in Table of Test Set Queue is 0:
+		display test results;
 		now done testing is true;
 
 First for showing the title screen when done testing is false:
@@ -426,20 +427,18 @@ First for showing the title screen when done testing is false:
 		
 First when play begins (this is the run all tests rule):
 	transcribe and stop capturing;
-	if done testing is true:
-		display test results;
-	otherwise:
-		initialize test steps;
-		Choose row 1 in Table of Test Set Queue;
-		if the random-seed entry is not 0:
-			log "Seeding random number generator with [random-seed entry]";
-			seed the random-number generator with the random-seed entry;
-		blank out the whole row;
-		now the current test set is the test set entry;	
-		Now the current unit test name is "[the current test set]";
-		log "Now testing [the current test set].";
-		follow the scenario rules;
-		transcribe and restart capturing text;
+	if done testing is true, make no decision;
+	initialize test steps;
+	Choose row 1 in Table of Test Set Queue;
+	if the random-seed entry is not 0:
+		log "Seeding random number generator with [random-seed entry]";
+		seed the random-number generator with the random-seed entry;
+	now the current test set is the test set entry;	
+	blank out the whole row;
+	Now the current unit test name is "[the current test set]";
+	log "Now testing [the current test set].";
+	follow the scenario rules;
+	transcribe and restart capturing text;
 
 To decide which test set is the initiator of (the event -  a test step):
 	Repeat with the candidate running through test sets:
@@ -473,20 +472,22 @@ Test queueing is an action out of world applying to one test set. Understand "qu
 Carry out test queueing a test set:
 	queue the test set understood;
 	say "[The test set understood] will run now.";
-	pause the game;
-	write "Test transcript for Kerkerkruip: [the test set understood].[line break]" to file of test transcript;
-	write file of test set queue from Table of Test Set Queue;
-	restart immediately.
-
+	start test transcript with "[the test set understood]".
+	
 All-test queuing is an action out of world applying to nothing. Understand "queue test all" as all-test queuing.
 
 Carry out all-test queuing:
 	queue all test sets;
 	say "All test sets will run now.";
+	start test transcript with "all test sets".
+		
+To start test transcript with (T - a text):
+	repeat with play running through test sets:
+		say "Test set [play]: [play as a number][line break]";
 	pause the game;
-	write "Test transcript for Kerkerkruip: all test sets.[line break]" to file of test transcript;
-	write file of test set queue from Table of Test Set Queue;
-	restart immediately.
+	write "Test transcript for Kerkerkruip: [T].[line break]" to file of test transcript;
+	start the next test;
+	
 	
 Understand "queue test [text]" as a mistake ("You can 'queue test all' or test one of the following sets: [list test sets]").
 
@@ -500,13 +501,15 @@ Chapter - Resetting the Game After Each Test Set (in place of Chapter - The Unit
 The current unit test name is an indexed text variable.
 
 To start the/-- next test:
-	do nothing;
+	write file of test set queue from Table of Test Set Queue;
+	if file of save data exists:
+		delete file of save data;
+	restart immediately.
 
 For reading a command when done testing is false (this is the finish current test set rule):
 	transcribe and stop capturing text;
 	write file of test results from Table of Test Results;
-	restart immediately;
-	[restore undo state.]
+	start the next test;
 	
 Chapter - Randomized Events
 
