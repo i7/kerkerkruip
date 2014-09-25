@@ -1,6 +1,7 @@
 Kerkerkruip Automated Testing by Mike Ciul begins here.
 
 Include Simple Unit Tests by Dannii Willis.
+Include Text Capture by Eric Eve.
 
 Volume - Test Framework
 
@@ -42,19 +43,19 @@ To stop and save event description:
 The file of test results is called "testresults".
 
 Table of Test Results
-Test Set (number)	Total (number)	Failures (number)	Failure Messages (indexed text)
+Test Set (test set)	Total (number)	Failures (number)	Failure Messages (indexed text)
 with 100 blank rows
 
 The file of test set queue is called "testqueue"
 
 Table of Test Set Queue
-Test Set (number)
+Test Set (test set)	Random-Seed (number)
 with 100 blank rows
 
 To queue (T - a test set):
 	choose a blank row in Table of Test Set Queue;
-	Let testnum be T as a number;
-	Now test set entry is T.
+	Now test set entry is T;
+	Now the random-seed entry is 26. [TODO: set this manually if desired]
 	
 To queue all test sets:
 	Repeat with T running through enabled test sets:
@@ -63,12 +64,11 @@ To queue all test sets:
 To record a test attempt:
 	increment the test assertion count;
 	increment the total assertion count;
-	Let testnum be current test set as a number;
-	if there is a test set of testnum in Table of Test Results:
-		choose row with test set of testnum in Table of Test Results;
+	if there is a test set of the current test set in Table of Test Results:
+		choose row with test set of current test set in Table of Test Results;
 	otherwise:
 		choose a blank row in Table of Test Results;
-		now test set entry is testnum;
+		now test set entry is the current test set;
 		now total entry is 0;
 		now failures entry is 0;
 		now failure messages entry is "";
@@ -78,8 +78,7 @@ To record a test attempt:
 	start capturing text;
 
 To record a/-- failure report of/-- (msg - an indexed text):
-	Let testnum be current test set as a number;
-	choose row with test set of testnum in Table of Test Results;	
+	choose row with test set of current test set in Table of Test Results;	
 	increment the assertion failures count;
 	increment the failures entry;
 	now the failure messages entry is "[failure messages entry]Failure for test: [the current test set], step: [the scheduled event], assertion [the test assertion count]: [msg][paragraph break]";
@@ -94,11 +93,11 @@ To display test results:
 	Repeat through Table of Test Results:
 		now grand test total is grand test total plus total entry;
 		now grand test failures is grand test failures plus failures entry;
-		log "[test set entry as a test set]: [total entry] tests, [failures entry] failures[line break]";
+		log "[test set entry]: [total entry] tests, [failures entry] failures[line break]";
 	log "Total: [grand test total] tests, [grand test failures] failures.";
 	Repeat through Table of Test Results:
 		if failures entry is at least 1:
-			log "[line break]Failures for [test set entry as a test set]:[paragraph break]";
+			log "[line break]Failures for [test set entry]:[paragraph break]";
 			log "[failure messages entry]";	
 	say "To view a full transcript of all tests, see the file 'testtranscript.glkdata' in the project directory.";
 	Blank out the whole of Table of Test Results;
@@ -121,6 +120,99 @@ normal keyboard input
 A test step has a text called the maxed out report. The maxed out report of a test step is usually "[The scheduled event] repeated [repeated moves] times without resolution."
 
 A test step can be generated.
+
+Allowing screen effects is a truth state that varies. Allowing screen effects is false.
+
+Section - Capture-aware Screen Clearing (in place of Section - Clearing the screen in Basic Screen Effects by Emily Short)
+
+To clear the/-- screen:
+	(- AwareClearScreen(); -)
+
+To clear only the/-- main screen:
+	(- AwareClearMainScreen(); -)
+
+To clear only the/-- status line:
+	(- AwareClearStatus(); -).
+
+Section - Capture-aware waiting for key-presses (in place of Section - Waiting for key-presses, quitting suddenly in Basic Screen Effects by Emily Short)
+
+Include (-
+
+! Wait for a safe non navigating key. The user might press Down/PgDn or use the mouse scroll wheel to scroll a page of text, so we will stop those key codes from continuing.
+[ KeyPause key; 
+	if (capture_active) {
+		rfalse;
+	}
+	while ( 1 )
+	{
+		key = VM_KeyChar();
+		#Ifdef TARGET_ZCODE;
+		if ( key == 63 or 129 or 130 or 132 )
+		{
+			continue;
+		}
+		#Ifnot; ! TARGET_GLULX
+		if ( key == -4 or -5 or -10 or -11 or -12 or -13 )
+		{
+			continue;
+		}
+		#Endif; ! TARGET_
+		rfalse;
+	}
+];
+
+[ SPACEPause i;
+	if (capture_active) {
+		rfalse;
+	}
+	while (i ~= 13 or 31 or 32)
+	{
+		i = VM_KeyChar();	
+	}
+];
+
+! No longer used but included just in case
+[ GetKey;
+	return VM_KeyChar(); 
+];
+
+[ AwareClearScreen;
+	 if (~capture_active && (+ allowing screen effects +)) {VM_ClearScreen(0);}
+];
+
+
+[ AwareClearMainScreen;
+	 if (~capture_active && (+ allowing screen effects +)) {VM_ClearScreen(2);}
+];
+
+
+[ AwareClearStatus;
+	 if (~capture_active && (+ allowing screen effects +)) {VM_ClearScreen(1);}
+];
+-)
+
+[ Note that this no longer waits for *any* key, but only safe keys. The user might press Down/PgDn or use the mouse scroll wheel to scroll a page of text, so we will stop those key codes from continuing. ]
+To wait for any key:
+	(- KeyPause(); -)
+
+To wait for the/-- SPACE key:
+	(- SPACEPause(); -)
+
+Pausing the game is an activity.
+
+To pause the/-- game:
+	carry out the pausing the game activity.
+
+For pausing the game (this is the standard pausing the game rule):
+	say "[paragraph break]Please press SPACE to continue." (A);
+	wait for the SPACE key;
+	clear the screen.
+
+To decide what number is the chosen letter:
+	(- GetKey() -)
+		
+To stop the/-- game abruptly:
+	(- quit; -)
 
 Section - Enabling screen effects when testing is done
 
@@ -197,7 +289,7 @@ For taking a player action when the scheduled event is not the normal keyboard i
 		follow the choosing a player action rules;
 		now the scheduled event is generated;
 		
-The test step player action rule is listed before the parse command rule in the take-a-player-action rulebook.
+The test step player action rule is listed first in the for taking a player action rulebook.
 		
 A test step has an object called the location-target.
 
@@ -321,29 +413,34 @@ To decide whether testing (T - a test set):
 	if done testing is true, no;
 	decide on whether or not the current test set is T;
 
-First when play begins (this is the run all tests rule):
-	read file of test set queue into Table of Test Set Queue;
-	read file of test results into Table of Test Results;
-	transcribe and stop capturing;
+[The random seed rule is listed before the reaper carries a random scythe rule in the when play begins rules.]
+
+Before showing the title screen:
+	if file of test set queue exists, read file of test set queue into Table of Test Set Queue;
+	if file of test results exists, read file of test results into Table of Test Results;
 	if the number of filled rows in Table of Test Set Queue is 0:
 		now done testing is true;
+
+First for showing the title screen when done testing is false:
+	do nothing.
+		
+First when play begins (this is the run all tests rule):
+	transcribe and stop capturing;
+	if done testing is true:
 		display test results;
 	otherwise:
 		initialize test steps;
 		Choose row 1 in Table of Test Set Queue;
-		Let T be the test set entry as a test set;
+		if the random-seed entry is not 0:
+			log "Seeding random number generator with [random-seed entry]";
+			seed the random-number generator with the random-seed entry;
 		blank out the whole row;
-		now the current test set is T;	
+		now the current test set is the test set entry;	
 		Now the current unit test name is "[the current test set]";
 		log "Now testing [the current test set].";
-		consider the scenario rules;
+		follow the scenario rules;
 		transcribe and restart capturing text;
-	[Move this to the code that initiates testing - blanks out test transcript]
-	[write "Test transcript for Kerkerkruip.[line break]" to file of test transcript;
-	]
 
-The random seed rule is listed before the run all tests rule in the when play begins rules.
-	
 To decide which test set is the initiator of (the event -  a test step):
 	Repeat with the candidate running through test sets:
 		if the event is the first move of the candidate, decide on the candidate;
@@ -362,7 +459,7 @@ To initialize test steps:
 	
 Last when play begins (this is the start the next test rule):
 	if done testing is false:
-		consider the test play rules;
+		follow the test play rules;
 		schedule the first move of the current test set;
 	
 The scenario rules are a rulebook.
@@ -371,23 +468,27 @@ The test play rules are a rulebook.
 
 Chapter - Commands to Start Tests
 
-Test queueing is an action out of world applying to one test set. Understand "test [test set]" as test queueing.
+Test queueing is an action out of world applying to one test set. Understand "queue test [test set]" as test queueing.
 
 Carry out test queueing a test set:
 	queue the test set understood;
-	say "[The test set understood] will run as soon as you press a key.";
+	say "[The test set understood] will run now.";
 	pause the game;
+	write "Test transcript for Kerkerkruip: [the test set understood].[line break]" to file of test transcript;
+	write file of test set queue from Table of Test Set Queue;
 	restart immediately.
 
-All-test queuing is an action out of world applying to nothing. Understand "test all" as all-test queuing.
+All-test queuing is an action out of world applying to nothing. Understand "queue test all" as all-test queuing.
 
 Carry out all-test queuing:
 	queue all test sets;
-	say "All test sets will run as soon as you press a key.";
+	say "All test sets will run now.";
 	pause the game;
+	write "Test transcript for Kerkerkruip: all test sets.[line break]" to file of test transcript;
+	write file of test set queue from Table of Test Set Queue;
 	restart immediately.
 	
-Understand "test [text]" as a mistake ("You can 'test all' or test one of the following sets: [list test sets]").
+Understand "queue test [text]" as a mistake ("You can 'queue test all' or test one of the following sets: [list test sets]").
 
 To say list test sets:
 	repeat with T running through enabled test sets:
@@ -486,7 +587,7 @@ Include (-
 	{
 		(+ the assertion failures count +)++;
 		print "Failure for test: ";
-		print (INDEXED_TEXT_TY_Say) (+ the current unit test name +);
+		print (TEXT_TY_Say) (+ the current unit test name +);
 		print ", assertion: ", (+ the test assertion count +), ". (Asserted condition is false)^";
 	}
 	StartCapture();
@@ -565,18 +666,18 @@ A detection rule when traveling sneakily is true:
 The way-to-get-back is a direction that varies.
 The way-to-get-there is a direction that varies.
 
-To force the cloak of shadows to work:
+To force the fuligin cloak to work:
 	transcribe "hiding immediately";
-	if the player does not enclose the cloak of shadows, now the player carries the cloak of shadows;
-	if the cloak of shadows is not worn, try wearing the cloak of shadows;
+	if the player does not enclose the fuligin cloak, now the player carries the fuligin cloak;
+	if the fuligin cloak is not worn, try wearing the fuligin cloak;
 	now the player is hidden;
 		
 Carry out taking off:
-	if the noun is the cloak of shadows, now traveling sneakily is false;
+	if the noun is the fuligin cloak, now traveling sneakily is false;
 	
 To travel sneakily to (place - a room):
 	transcribe "traveling sneakily to [place]";
-	force the cloak of shadows to work;
+	force the fuligin cloak to work;
 	While the location is not the place:
 		now the way-to-get-there is the best route from the location to the place;
 		record a test attempt;
@@ -598,7 +699,7 @@ A test step can be hidden-traveling. A hiding-check test step is usually hidden-
 
 initial scheduling for a test step (called the current move):
 	now traveling sneakily is whether or not the current move is hidden-traveling;
-	if traveling sneakily is true, force the cloak of shadows to work;
+	if traveling sneakily is true, force the fuligin cloak to work;
 	
 After taking a player action (this is the assume all actions are fast until every turn runs rule):
 	now previously-fast is true;
@@ -630,7 +731,7 @@ A test step can be hiding-reveal.
 
 
 Choosing a player action when testing a hiding-reveal test step (this is the hiding-reveal action rule):
-	generate the action of taking off the shadows cloak. ["the action of taking of the cloak of shadows" doesn't parse  ]
+	generate the action of taking off the fuligin cloak.
 
 Testing effects of a hiding-reveal test step:
 	assert "The player should not be hidden" based on whether or not the player is not hidden.
