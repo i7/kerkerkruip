@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 # This script will attempt to build Kerkerkruip with Travis CI
 
 i7 -s blorb=1,zcode=g -c Kerkerkruip.inform
