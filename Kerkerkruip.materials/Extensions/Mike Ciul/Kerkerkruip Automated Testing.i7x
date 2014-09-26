@@ -22,7 +22,6 @@ To log (msg - a text):
 	if currently capturing is true, transcribe and stop capturing text;
 	say "[line break][T]";
 	append "**** [T][line break]" to file of test transcript;
-	if currently capturing is true, say "DEBUG: LOGGED - STARTING CAPTURE [current test description][line break]";
 	if currently capturing is true, start capturing text;
 	
 To transcribe (T - a text):
@@ -40,11 +39,9 @@ To transcribe and stop capturing text/--:
 	if "[the captured text]" matches the regular expression ".":
 		transcribe "[current test description]";
 		append "[the captured text]" to file of test transcript;
-	say "DEBUG: NOT CAPTURING [current test description][line break]";
 	 
 To transcribe and restart capturing text/--:
 	if text capturing is active, transcribe and stop capturing text;
-	say "DEBUG: STARTING NEW CAPTURE [current test description][line break]";
 	start capturing text;
 	
 To stop and save event description:
@@ -85,7 +82,6 @@ To record a test attempt:
 		now failure messages entry is "";
 	increment the total entry;
 	transcribe and stop capturing;
-	say ": DEBUG - STARTING CAPTURE AFTER RECORDING ATTEMPT [current test description][line break]";
 	start capturing text;
 
 To record a/-- failure report of/-- (msg - a text):
@@ -257,7 +253,6 @@ To schedule (the event described - a test step):
 		if the event described is normal keyboard input:
 			transcribe and stop capturing;
 			say line break;
-			say "DEBUG: STARTING CAPTURE - SCHEDULING NORMAL KEYBOARD INPUT[current test description][line break]";
 			start capturing text;
 		otherwise:
 			log "  next step:  [the event described]";
@@ -265,7 +260,6 @@ To schedule (the event described - a test step):
 		now the repeated moves is 0;
 	otherwise:
 		transcribe and stop capturing;
-		say "DEBUG: STARTING CAPTURE - SCHEDULING [current test description][line break]";
 		start capturing text;
 		increment the repeated moves;
 	now the event described is not generated;
@@ -276,7 +270,6 @@ Before taking a player action when the scheduled event is generated:
 	Let repeat be whether or not (the scheduled event is repeatable) and (the repeated moves > 0);
 	now the scheduled event is not generated;
 	say " .[run paragraph on]";
- 	transcribe "DEBUG: START CAPTURE - ABOUT TO TEST EFFECTS for [current test description]";	
 	start capturing text;
 	follow the testing effects rules for the scheduled event;
 	transcribe and stop capturing;
@@ -480,6 +473,12 @@ Last when play begins (this is the start the next test rule):
 The scenario rules are a rulebook.
 
 The test play rules are a rulebook.
+
+Chapter - Preventing Text Capture From Interruptions
+
+The increment died and kill stats rule does nothing if text capturing is active.
+
+[I don't think we can override the "save acheivements" phrase the same way]
 
 Chapter - Commands to Start Tests
 

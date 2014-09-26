@@ -21,15 +21,10 @@ A scenario rule when testing Aite champions vs bat:
 attempt rulebook does something that might make the test qualify
 application rulebook check if the test applies and marks it as completed - or chooses which test to run based on attempt outcome
 assertion rulebook runs the test's assertions]
-
-First killing rule:
-	say "starting out to kill.";
-	
-Last killing rule:
-	say "no more killing."
 	
 A test play when testing Aite champions vs bat:
 	say "updating monster statistics.";
+	[TODO: Why doesn't this interrupt text capture when doing it from the killing rules does?]
 	update the monster statistics;
 	assert "should be capturing text" based on whether or not text capturing is active;
 	say "This should be captured.";
