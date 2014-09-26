@@ -8,41 +8,180 @@ Include Simple Unit Tests by Dannii Willis.
 Include Text Capture by Eric Eve. [Actually, this must be included before Basic Screen Effects]
 
 Use maximum capture buffer length of at least 16384.
+Use maximum text length of at least 16384.
+
+Part - Patches to Text Capture (in place of Part 3 - I6 Code in Text Capture by Eric Eve)
+
+Include (-	Global capture_active = 0;	-) after "Definitions.i6t".
+
+Chapter Z - Z-Machine Version (for Z-Machine Only)
+
+Include (-
+
+Array captured_text -> CAPTURE_BUFFER_LEN + 3;
+
+[ StartCapture;
+	if (capture_active ==1)
+		return;
+	capture_active = 1;
+	@output_stream 3 captured_text;
+];
+
+
+[ EndCapture;
+	if (capture_active == 0)
+		return;
+	capture_active = 0;
+	@output_stream -3;
+	if (captured_text-->0 > CAPTURE_BUFFER_LEN)
+	{
+		print "Error: Overflow in EndCapture.^";
+	}
+];
+
+[ PrintCapture len i;
+	len = captured_text-->0;
+	for ( i = 0 : i < len : i++ )
+	{
+		print (char) captured_text->(i + 2);
+	}
+];
+
+-).
+
+Chapter G - Glulx (for Glulx Only)
+
+Include (-
+
+Array captured_text --> CAPTURE_BUFFER_LEN + 1;
+
+Global text_capture_old_stream = 0;
+Global text_capture_new_stream = 0;
+
+[ StartCapture i;   
+	if (capture_active ==1)
+		return;
+	capture_active = 1;
+	text_capture_old_stream = glk_stream_get_current();
+	text_capture_new_stream = glk_stream_open_memory_uni(captured_text + WORDSIZE, CAPTURE_BUFFER_LEN, 1, 0);
+	glk_stream_set_current(text_capture_new_stream);
+];
+
+[ EndCapture len;
+	if ( capture_active == 0 )
+		return;
+	capture_active = 0;
+	glk_stream_set_current(text_capture_old_stream);
+	@copy $ffffffff sp;
+	@copy text_capture_new_stream sp;
+	@glk $0044 2 0; ! stream_close
+	@copy sp len;
+	@copy sp 0;
+	captured_text-->0 = len;
+	if (len > CAPTURE_BUFFER_LEN)
+	{
+		captured_text-->0 = CAPTURE_BUFFER_LEN;
+	}
+];
+
+[ PrintCapture len i;
+	len = captured_text-->0;
+	for ( i = 0 : i < len : i++ )
+	{
+		glk_put_char_uni(captured_text-->(i + 1));
+	}
+];
+
+-).
+
+Chapter F - FyreVM Support (for Glulx Only) (for use with FyreVM Support by TextFyre)
+
+[ Does OpenOutputBuffer support unicode? Assuming not. ]
+
+Include (-
+
+[ FyreVMStartCapture;
+	if (is_fyrevm)
+	{
+		if (capture_active > 0)
+			return;
+		capture_active = 1;
+		OpenOutputBuffer(captured_text + WORDSIZE, CAPTURE_BUFFER_LEN);
+		return;
+	}
+	StartCapture();     
+];
+
+
+[ FyreVMEndCapture len;
+	if(is_fyrevm)
+	{
+		if (capture_active == 0)
+			return;
+		capture_active = 0;
+		len = CloseOutputBuffer(0);
+		captured_text-->0 = len;
+		if (len > CAPTURE_BUFFER_LEN)
+		{
+			captured_text-->0 = CAPTURE_BUFFER_LEN;
+		}
+		return;
+	}
+	EndCapture(); 
+];
+
+[ FyreVMPrintCapture len i;
+	len = captured_text-->0;
+	for ( i = 0 : i < len : i++ )
+	{
+		print (char) captured_text->(i + 4);
+	}
+];
+
+-).
+
+Part - Original Code
 
 Chapter - Persistent data
 
 The file of test transcript is called "testtranscript".
 
-The event description is an indexed text that varies.
+The event description is a text that varies.
 
-To log (T - an indexed text):
+To log (msg - a text):
+	Let T be the substituted form of msg;
 	let currently capturing be whether or not text capturing is active;
 	if currently capturing is true, transcribe and stop capturing text;
 	say "[line break][T]";
 	append "**** [T][line break]" to file of test transcript;
+	if currently capturing is true, say "DEBUG: LOGGED - STARTING CAPTURE [current test description][line break]";
 	if currently capturing is true, start capturing text;
 	
-To transcribe (T - an indexed text):
-	let message be indexed text;
-	now message is "[bracket][T][close bracket][command clarification break]";
+To transcribe (T - a text):
+	let message be the substituted form of "[bracket][T][close bracket][command clarification break]";
 	if text capturing is active:
 		say message;
 	otherwise:
 		append "[message]" to file of test transcript;
+
+To say current test description:
+	say  "[current test set], [scheduled event] turn [the turn count], assertion count=[test assertion count]";
 	
 To transcribe and stop capturing text/--:
 	stop capturing text;
 	if "[the captured text]" matches the regular expression ".":
-		transcribe "[current test set], [scheduled event] turn [the turn count], assertion count=[test assertion count]";
+		transcribe "[current test description]";
 		append "[the captured text]" to file of test transcript;
+	say "DEBUG: NOT CAPTURING [current test description][line break]";
 	 
 To transcribe and restart capturing text/--:
 	if text capturing is active, transcribe and stop capturing text;
+	say "DEBUG: STARTING NEW CAPTURE [current test description][line break]";
 	start capturing text;
 	
 To stop and save event description:
 	transcribe and stop capturing text;
-	now the event description is "[the captured text]";
+	now the event description is the substituted form of "[the captured text]";
 	
 The file of test results is called "testresults".
 
@@ -78,14 +217,14 @@ To record a test attempt:
 		now failure messages entry is "";
 	increment the total entry;
 	transcribe and stop capturing;
-	say ": ";
+	say ": DEBUG - STARTING CAPTURE AFTER RECORDING ATTEMPT [current test description][line break]";
 	start capturing text;
 
-To record a/-- failure report of/-- (msg - an indexed text):
+To record a/-- failure report of/-- (msg - a text):
 	choose row with test set of current test set in Table of Test Results;	
 	increment the assertion failures count;
 	increment the failures entry;
-	now the failure messages entry is "[failure messages entry]Failure for test: [the current test set], step: [the scheduled event], assertion [the test assertion count]: [msg][paragraph break]";
+	now the failure messages entry is the substituted form of "[failure messages entry]Failure for test: [the current test set], step: [the scheduled event], assertion [the test assertion count]: [msg][paragraph break]";
 	log msg;
 
 
@@ -125,7 +264,7 @@ A test step has a text called the maxed out report. The maxed out report of a te
 
 A test step can be generated.
 
-Allowing screen effects is a truth state that varies. Allowing screen effects is false.
+Allowing screen effects is a truth state that varies.
 
 Section - Capture-aware Screen Clearing (in place of Section - Clearing the screen in Basic Screen Effects by Emily Short)
 
@@ -250,6 +389,7 @@ To schedule (the event described - a test step):
 		if the event described is normal keyboard input:
 			transcribe and stop capturing;
 			say line break;
+			say "DEBUG: STARTING CAPTURE - SCHEDULING NORMAL KEYBOARD INPUT[current test description][line break]";
 			start capturing text;
 		otherwise:
 			log "  next step:  [the event described]";
@@ -257,6 +397,7 @@ To schedule (the event described - a test step):
 		now the repeated moves is 0;
 	otherwise:
 		transcribe and stop capturing;
+		say "DEBUG: STARTING CAPTURE - SCHEDULING [current test description][line break]";
 		start capturing text;
 		increment the repeated moves;
 	now the event described is not generated;
@@ -267,7 +408,8 @@ Before taking a player action when the scheduled event is generated:
 	Let repeat be whether or not (the scheduled event is repeatable) and (the repeated moves > 0);
 	now the scheduled event is not generated;
 	say " .[run paragraph on]";
- 	start capturing text;
+ 	transcribe "DEBUG: START CAPTURE - ABOUT TO TEST EFFECTS for [current test description]";	
+	start capturing text;
 	follow the testing effects rules for the scheduled event;
 	transcribe and stop capturing;
 	Let repeat be whether or not the scheduled event is [still] repeatable;
@@ -420,6 +562,7 @@ To decide whether testing (T - a test set):
 [The random seed rule is listed before the reaper carries a random scythe rule in the when play begins rules.]
 
 Before showing the title screen:
+	now allowing screen effects is true;
 	if file of test set queue exists, read file of test set queue into Table of Test Set Queue;
 	if file of test results exists, read file of test results into Table of Test Results;
 	if the number of filled rows in Table of Test Set Queue is 0:
@@ -432,6 +575,7 @@ First for showing the title screen when done testing is false:
 First when play begins (this is the run all tests rule):
 	transcribe and stop capturing;
 	if done testing is true, make no decision;
+	now allowing screen effects is false;
 	initialize test steps;
 	Choose row 1 in Table of Test Set Queue;
 	if the random-seed entry is not 0:
