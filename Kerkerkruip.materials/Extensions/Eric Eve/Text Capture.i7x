@@ -1,4 +1,4 @@
-Version 8 of Text Capture by Eric Eve begins here.
+Version 8/140926 of Text Capture by Eric Eve begins here.
 
 "Allows the capture of text that would otherwise be sent to the screen, so that the text can be further manipulated, displayed at some other point, or simply discarded. Version 6/120511 allows the use of unicode in Glulx."
 
@@ -36,7 +36,7 @@ To say the/-- captured text:
   
 Part 3 - I6 Code
 
-Include (-	Global capture_active = 0;	-).
+Include (-	Global capture_active = 0;	-) after "Definitions.i6t".
 
 Chapter Z - Z-Machine Version (for Z-Machine Only)
 
