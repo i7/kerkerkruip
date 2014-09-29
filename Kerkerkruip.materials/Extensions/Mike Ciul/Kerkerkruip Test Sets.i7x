@@ -387,6 +387,183 @@ initial scheduling of unfrozen-fell-fleeing:
 testing effects of unfrozen-fell-fleeing:
 	assert that the hitting count of fell is 1 with label "hitting count of fell";
 
+Section - Retreating from the Tentacle
+
+[maybe this could be factored into systems?]
+Definition: a direction (called way) is diggable:
+	if way is not cardinal, no;
+	let x be the x way of location;
+	let y be the y way of location;
+	let z be the z way of location;
+	if the space at x by y by z is free:
+		decide on whether or not there is at least one not placed tunnel;
+	otherwise:
+		let item be the room at x by y by z;
+		if item is the room way from the location: 
+			no;
+		otherwise:
+			decide on whether or not item is connectable;
+
+tentacle-grab is a test set.
+
+Scenario when testing tentacle-grab:
+	Now the giant tentacle is testobject;
+	now the fuligin cloak is testobject;
+	now the hall of mirrors is bannedobject;
+	Now the pickaxe is testobject;
+	Now every not connectable room is bannedobject; [the bridge of doom stops digging]
+	
+A test play when testing tentacle-grab:
+	now the player carries the pickaxe;
+	try butterflying;
+	Travel sneakily to the location of the tentacle;
+	now every person enclosed by the location is not asleep;
+	
+tentacle-hiding-check is a hiding-check test step. The first move of tentacle-grab is tentacle-hiding-check.
+
+Tentacle-reveal is a hiding-reveal test step. The next move of tentacle-hiding-check is tentacle-reveal.
+
+tentacle-retreat is a test step.  The next move of tentacle-reveal is tentacle-retreat.   
+
+Choosing a player action when testing tentacle-retreat:
+	generate the action of retreating.
+
+Before taking a player action when testing tentacle-grab:
+	if the player is at-react:
+		now the defence of the player is 100;
+	otherwise:
+		now the defence of the player is 0;
+		
+Initial scheduling for tentacle-retreat:
+	now tentacle presses the player;
+	now concentration of tentacle is 3;
+	now the melee of the tentacle is 50;
+	now the health of the player is 100;
+		
+testing effects for tentacle-retreat:
+	assert that the event description includes "bravely run away";
+	assert one hit by tentacle;
+	assert that the player is grappled by the tentacle;
+	assert that the location of the player is the location of the tentacle;
+
+tentacle-dig-retreat is a test step. The next move of tentacle-retreat is tentacle-dig-retreat.
+
+initial scheduling for tentacle-dig-retreat:
+	now the tentacle does not grapple the player;
+	
+choosing a player action when testing tentacle-dig-retreat:
+	generate the action of digging a random diggable direction.
+	
+testing effects for tentacle-dig-retreat:
+	assert that the event description includes "magically create a tunnel";
+	assert one hit by tentacle;
+	assert that the player is grappled by the tentacle;
+	assert that the location of the player is the location of the tentacle;
+	
+
+Section - Insane Drakul
+
+insane-drakul is an test set.
+
+A scenario rule when testing insane-drakul:
+	Now drakul's lifeblood is bannedobject;
+	Now drakul is testobject;
+	Now staff of insanity is testobject;
+	
+A test play when testing insane-drakul:
+	try butterflying;
+	try ramboing;
+	now the mind score of the player is 100;  
+	extract the player to the location of drakul;
+	now the player carries staff of insanity;
+	while the size of the staff of insanity is less than medium:
+		increase the size of the staff of insanity;
+	try readying staff of insanity;
+	transcribe and restart capturing;
+	try Drakul concentrating;
+	pause and assert that the event description includes "Drakul smiles a little wider";
+	try Drakul concentrating;
+	pause and assert that the event description includes "'There is no need to fear me,' Drakul says as he concentrates more deeply\.";
+	try Drakul concentrating;
+	pause and assert that the event description includes "Drakul attains the highest state of concentration. 'It feels so good to be alive!'";
+	
+Driving Drakul insane is a test step. The first move of insane-drakul is driving Drakul insane.   
+
+Choosing a player action when testing driving drakul insane:
+	generate the action of attacking drakul;
+
+After taking a player action when the scheduled event is driving drakul insane:
+	now the health of Drakul is 100;
+	
+drakul going insane is a randomized outcome. It results from driving drakul insane.
+
+randomized outcome testing when drakul going insane became the possibility:
+	if drakul is not insane, make no decision;
+	mark the outcome achieved;
+	assert that the event description includes "Drakul goes insane";
+	
+insane drakul statements is a test step.
+
+Initial scheduling of insane drakul statements:
+	if there is a held achievement of Blood never lies in the Table of Held Achievements:
+		do nothing;
+		[this causes a glk error:
+		choose row with held achievement of Blood never lies in the Table of Held Achievements;
+		blank out the whole row;]
+	now the concentration of drakul is 0;
+	transcribe and restart capturing;
+	try Drakul concentrating;
+	pause and assert that the event description includes "Drakul smiles a little wider";
+	try Drakul concentrating;
+	pause and assert that the event description includes "'An insane vampire always tells the truth\. And I tell you: You should fear me!' Drakul says as he concentrates more deeply.";
+	try Drakul concentrating;
+	pause and assert that the event description includes "Drakul attains the highest state of concentration\. 'It feels so good to be alive - but I am undead!'";
+
+After taking a player action when the scheduled event is insane drakul statements:
+	compel the action of drakul waiting;
+	
+[some of these appear too unlikey to happen within 100 iterations. Increase iterations?]
+simple drakul identity is a randomized outcome. simple drakul identity results from insane drakul statements.
+nested conditionals is a randomized outcome. nested conditionals results from insane drakul statements. 
+nested belief is a randomized outcome. nested belief results from insane drakul statements.
+lifeblood-hinting is a randomized outcome. lifeblood-hinting results from insane drakul statements.
+vampire-turning-hinting is a randomized outcome. vampire-turning-hinting results from insane drakul statements.
+
+randomized outcome testing when simple drakul identity became the possibility:
+	if the event description matches the regular expression "Drakul says, 'I am ":
+		if the event description matches the regular expression "not|someone who|, and|, or", make no decision;
+		mark the outcome achieved;
+		assert that the event description includes "vampire|insane";
+		
+randomized outcome testing when nested conditionals became the possibility:
+	unless the event description matches the regular expression "Drakul says, 'If .*,", make no decision;
+	if the event description matches the regular expression "I would give you", make no decision;
+	if the event description matches the regular expression ", if|, and|, or", mark the outcome achieved;
+		
+randomized outcome testing when nested belief became the possibility:
+	unless the event description matches the regular expression "I believe that I believe", make no decision;
+	mark the outcome achieved;
+		
+randomized outcome testing when lifeblood-hinting became the possibility:
+	unless the event description matches the regular expression "a vial of my lifeblood\b", make no decision;
+	mark the outcome achieved;
+	assert that the event description includes "I am carrying| is in | can be found | is currently unreachable, ";
+	
+randomized outcome testing when vampire-turning-hinting became the possibility:
+	unless the event description matches the regular expression "\bI intend to vanquish Malygris after I make you my vampire-slave\b|\byou will never be my vampire-slave\b", make no decision;
+	[this doesn't compile:
+	assert "Blood never lies achievement should be held" based on whether not there is a held achievement of Blood never lies in the Table of Held Achievements;]
+	mark the outcome achieved;
+
+Drakul suicide is a test step.
+
+Initial scheduling of drakul suicide:
+	now the health of drakul is 1;
+	now the melee of drakul is 100;
+	transcribe and restart capturing;
+	try drakul hitting drakul;
+	pause and assert that the event description includes "drains his own blood, a small vial";
+	
 [TODO: test armadillo and reaper following]
 
 Section - Armadillo wandering

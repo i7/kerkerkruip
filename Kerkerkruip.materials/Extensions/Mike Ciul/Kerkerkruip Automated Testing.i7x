@@ -130,7 +130,6 @@ A test step can be generated.
 
 Allowing screen effects is a truth state that varies.
 
-[
 Section - Capture-aware Screen Clearing (in place of Section - Clearing the screen in Basic Screen Effects by Emily Short)
 
 To clear the/-- screen:
@@ -226,8 +225,6 @@ Section - Enabling screen effects when testing is done
 
 Initial scheduling of normal keyboard input:
 	now allowing screen effects is true.
-	
-]
 
 Section - Scheduling
 
