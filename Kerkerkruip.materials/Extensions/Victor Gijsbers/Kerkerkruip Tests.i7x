@@ -72,6 +72,9 @@ Last treasure placement rule (this is the place non-person testobjects rule):
 	if generation info is true, print generation message "    Placing testobjects...";
 	now all off-stage testobject things are in the Entrance Hall;
 
+First dungeon interest rule (this is the ban extra scenery rule):
+	Now every bannedobject thing is not extra.
+		
 Section - The test object file
 
 The File of Test Objects is called "KerkerkruipTestObjects".

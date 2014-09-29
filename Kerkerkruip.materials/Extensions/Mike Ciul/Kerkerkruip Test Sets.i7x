@@ -338,6 +338,7 @@ fell-freezing is a test step.
 
 Initial scheduling of fell-freezing:
 	Now Fell presses the player;
+	now the initiative of Fell is 100;
 	compel the action of fell israfel-reuniting;
 	
 Last carry out an actor israfel-reuniting when testing parting shots:
@@ -680,6 +681,178 @@ initial scheduling for Player-cowering:
 	now the player is insane;
 	assert truth of whether or not the target cower percentage of the player is at least 1 with message "the insane player's target cower percentage should be at least 1"; 
 
+Section - Controlling pipes
+
+Controlling pipes is a test set.
+
+Scenario when testing controlling pipes:
+	now Hall of Vapours is testobject;
+	
+Test play when testing controlling pipes:
+	extract the player to Hall of Vapours;
+	now pipes-open is true;
+	transcribe and restart capturing;
+	try looking;
+	pause and assert that the event description includes "Several large pipes continuously spew forth vapours into this room\. A big wheel is attached";
+	try examining the pipes;
+	pause and assert that the event description includes " They are currently spewing vapours into the room\.";
+	try examining the wheel;
+	pause and assert that the event description includes "which are currently open\.";
+	try turning the wheel;
+	transcribe and restart capturing;
+	try examining the pipes;
+	pause and assert that the event description includes " They are currently shut off\.";
+	try examining the wheel;
+	pause and assert that the event description includes "which are currently closed\.";
+
+Section - Sul Champion vs Herm worshipper
+
+[Sul Champion vs Herm worshipper is a test set.
+
+A scenario rule when testing Sul Champion vs Herm worshipper:
+	now Hall of Gods is testobject;
+	now Bodmall is testobject;
+	now Temple of Herm is testobject;
+
+A test play when testing Sul Champion vs Herm worshipper:
+	extract the player to the location of Bodmall;
+	try smiting Bodmall;
+	extract the player to Temple of Herm;
+	have the player sacrifice a random granted power;
+	extract the player to Hall of Gods;
+	have the player and Israfel fight in Arena of the Gods;
+	now the melee of the player is 100;
+	now the melee of israfel is 100;
+	test israfel-defended-by-sul;
+	test player-defended-by-herm;
+	try israfel israfel-splitting;
+	test isra-defended-by-sul;
+	
+israfel-defended-by-sul is a randomized event;
+
+player-defended-by-herm is a randomized event;
+
+isra-defended-by-sul is a randomized event;]
+
+Section - Bug 210
+
+bug-210 is a test set. 
+
+A scenario rule when testing bug-210:
+	now the mindslug is testobject;
+	now a random scroll of death is testobject;
+
+A test play when testing bug-210:
+	Let the death-scroll be a random not off-stage scroll of death;
+	Now the player carries the death-scroll;
+	extract the player to the location of the mindslug;
+	now the health of the mindslug is 1;
+	now the weapon damage bonus of the claymore is 100;
+	now the melee of fafhrd is 100;
+	update the combat status;
+	assert truth of whether or not fafhrd carries the claymore with message "fafhrd should carry the claymore";
+	assert truth of whether or not the claymore is readied with message "the claymore should be readied";
+	assert truth of whether or not the number of readied weapons enclosed by fafhrd is 1 with message "fafhrd should only have one weapon readied";
+	
+Initial scheduling of reaction-mindslug-killing:
+	now the mind score of fafhrd is 100; [protects against mirror confusion]
+	compel the action of fafhrd attacking the player;
+	
+reaction-mindslug-killing is a repeatable test step. The first move of bug-210 is reaction-mindslug-killing.
+
+Choosing a player reaction when reaction-mindslug-killing is the scheduled event:
+	assert truth of whether or not the mindslug is alive with message "the mindslug should be alive";
+	if the player carries a scroll of death:
+		let the death-scroll be a random carried scroll of death;
+		generate the action of reading the death-scroll;
+		now the scheduled event is not repeatable;
+		rule succeeds;
+
+testing effects of reaction-mindslug-killing:
+	if the scheduled event is repeatable, make no decision;
+	assert that the event description includes "The contemplative northern barbarian ends your life, with what seems to be a hint of sadness in his face";
+	assert that the event description includes "As the mindslug dies, you feel its powerful intelligence absorbed into your own body";
+	assert truth of whether or not the mindslug is dead with message "the mindslug should be dead";
+	assert truth of whether or not (the player is not at-react) with message "the player should not be at-react"; [probably redundant]
+	
+Section - Dream of Sleeping
+
+dream-of-sleeping-test is a test set.
+
+Scenario when testing dream-of-sleeping-test:
+	now the dream of sleeping is current-test-dream;
+	now the reusable item is a random morphean grenade;
+	
+Sleeping-dream-dreaming is an item-throwing test step. The first move of dream-of-sleeping-test is sleeping-dream-dreaming.
+
+Initial scheduling of sleeping-dream-dreaming:
+	Now Malygris is asleep;
+
+Sleeping-dream-waking is a test step. The next move of sleeping-dream-dreaming is sleeping-dream-waking.   
+
+Choosing a player action when testing sleeping-dream-waking:
+	generate the action of exiting.
+
+testing effects of sleeping-dream-waking:
+	assert that the event description includes "Malygris standing over you";
+	assert that Malygris is awake;
+	assert that the concentration of Malygris is 2;
+	assert truth of whether or not the player is just-woken with message "the player should be just-woken";
+	
+Waiting-for-Malygris-attack is a repeatable test step. The next move of sleeping-dream-waking is waiting-for-Malygris-attack. 
+
+Initial scheduling of waiting-for-Malygris-attack:
+	now the health of the player is 1000;
+	compel the action of Malygris attacking the player;
+	
+Carry out Malygris hitting the player when waiting-for-Malygris-attack is the scheduled event:
+	now waiting-for-Malygris-attack is not repeatable.
+	
+testing effects of waiting-for-Malygris-attack:
+	if waiting-for-Malygris-attack is repeatable, make no decision;
+	assert that the event description includes "defender was asleep";
+	assert truth of whether or not the player is not just-woken with message "the player should not be just-woken anymore";
+		
+	
+Section - Healer of Aite Healing
+
+aite-healing is a test set.
+
+Scenario when testing aite-healing:
+	now the statue of shards is bannedobject;
+	now healer of aite is testobject.
+	
+Test play when testing aite-healing:
+	extract the player to the location of healer of aite;
+	Repeat with guy running through people:
+		now the defence of guy is 100;
+	decrease the health of the player by 3;
+	
+healer-not-healing is a repeatable test step. The first move of aite-healing is healer-not-healing. The maximum repeats of healer-not-healing is 20.
+	
+Before the healer of Aite doing anything when healer-not-healing is the scheduled event:
+	now healer-not-healing is uneventful;
+	
+testing effects of healer-not-healing:
+	unless the injury of the player is 3:
+		record failure of the scheduled event with message "the player should still be damaged for 3 health";
+		
+healer-healing-defender is a repeatable test step. The next move of healer-not-healing is healer-healing-defender. The maximum repeats of healer-healing-defender is 20.
+
+Initial scheduling of healer-healing-defender:
+	decrease the health of the healer of aite by 3;
+	decrease the health of the defender of aite by 4;
+	
+testing effects of healer-healing-defender:
+	if the injury of defender of Aite is less than 4:
+		record success of healer-healing-defender;
+		
+healer-healing-self is a repeatable test step. The next move of healer-healing-defender is healer-healing-self. The maximum repeats of healer-healing-self is 100.
+
+testing effects of healer-healing-self:
+	if the injury of healer of Aite is less than 3:
+		record success of healer-healing-self.
+		
 [TODO: test armadillo and reaper following]
 
 Section - Armadillo wandering
