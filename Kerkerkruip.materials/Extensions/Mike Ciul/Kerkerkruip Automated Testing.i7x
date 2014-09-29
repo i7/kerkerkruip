@@ -130,6 +130,7 @@ A test step can be generated.
 
 Allowing screen effects is a truth state that varies.
 
+[
 Section - Capture-aware Screen Clearing (in place of Section - Clearing the screen in Basic Screen Effects by Emily Short)
 
 To clear the/-- screen:
@@ -226,6 +227,8 @@ Section - Enabling screen effects when testing is done
 Initial scheduling of normal keyboard input:
 	now allowing screen effects is true.
 	
+]
+
 Section - Scheduling
 
 To decide whether testing (T - a test step):
@@ -473,17 +476,6 @@ Last when play begins (this is the start the next test rule):
 The scenario rules are a rulebook.
 
 The test play rules are a rulebook.
-
-Chapter - Preventing Text Capture From Interruptions
-
-The increment died and kill stats rule does nothing if text capturing is active.
-
-[I don't think we can override the "save acheivements" phrase the same way... here's a hack that makes sure the achievements won't be awarded during play:]
-
-Last when play begins:
-	if done testing is true, make no decision;
-	Repeat with feat running through achievements:
-		award achievement feat.
 
 Chapter - Commands to Start Tests
 
