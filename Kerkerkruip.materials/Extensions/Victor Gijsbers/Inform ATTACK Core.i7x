@@ -922,26 +922,9 @@ with 20 blank rows
 
 The AI action selection rules are a person based rulebook.
 
-To cautiously blank out (contents - a table name):
-	stop and save event description;
-[	while the number of filled rows in contents > 0:
-		choose a random row in contents;
-		log "blanking out [option entry]: [action weight entry][line break]";
-		blank out the whole row;
-]	blank out the whole of contents;
-	transcribe and restart capturing;
-	
-To say sanity check action options:
-	say "Main actor's action: [sanity check main actor's action][line break]";
-	Repeat through table of AI action options:
-		say "AI action option: [sanity check option entry][line break]";
-		
 A last Standard AI rule for a person (called P) (this is the select an action and do it rule):
-	log "select an action and do it for [P] - [sanity check action options]";
-	cautiously blank out Table of AI Action Options;
-	log "blanked out table of AI Action Options";
+	blank out the whole of the Table of AI Action Options;
 	follow the AI action selection rules for P;
-	log "Now there are [number of filled rows in table of ai action options] action selections";
 	sort the Table of AI Action Options in random order;
 	sort the Table of AI Action Options in reverse Action Weight order;
 	#if debug and showing weightings;

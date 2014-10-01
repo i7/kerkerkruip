@@ -338,6 +338,7 @@ For taking a player action when the scheduled event is not the normal keyboard i
 	otherwise:
 		follow the choosing a player action rules;
 		now the scheduled event is generated;
+	log "done taking a player action";
 		
 The test step player action rule is listed first in the for taking a player action rulebook.
 		
