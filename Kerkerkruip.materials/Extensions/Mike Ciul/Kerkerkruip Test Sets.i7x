@@ -1297,4 +1297,18 @@ Testing effects of waiting-for-armadillo-move:
 	if the location of the armadillo is not armadillo-start:
 		record success of waiting-for-armadillo-move.
 		
+Section - Example failure
+
+example failure is a test set.
+
+passing move is a test step. The first move of example failure is passing move.
+
+Testing effects of passing move:
+	assert "truth is true" based on true.
+
+failing move is a test step.
+
+Testing effects of failing move:
+	assert "truth is false" based on false.
+		
 Kerkerkruip Test Sets ends here.
