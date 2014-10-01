@@ -19,7 +19,7 @@ The event description is a text that varies.
 To log (msg - a text):
 	Let T be the substituted form of msg;
 	let currently capturing be whether or not text capturing is active;
-	if currently capturing is true, transcribe and stop capturing text;
+	if currently capturing is true, transcribe and stop capturing text because "logging message for";
 	say "[line break][T]";
 	append "**** [T][line break]" to file of test transcript;
 	if currently capturing is true, start capturing text;
@@ -35,17 +35,26 @@ To say current test description:
 	say  "[current test set], [scheduled event] turn [the turn count], assertion count=[test assertion count]";
 	
 To transcribe and stop capturing text/--:
+	transcribe and stop capturing because "transcribe and stop capturing";
+	
+To transcribe and stop capturing text/-- because (reason - a text):
 	stop capturing text;
 	if "[the captured text]" matches the regular expression ".":
-		transcribe "[current test description]";
+		transcribe "[reason] [current test description]";
 		append "[the captured text]" to file of test transcript;
 	 
 To transcribe and restart capturing text/--:
-	if text capturing is active, transcribe and stop capturing text;
+	transcribe and stop capturing because "transcribe and restart capturing";
+	
+To transcribe and restart capturing text/-- because (reason - a text):
+	if text capturing is active, transcribe and stop capturing text because reason;
 	start capturing text;
 	
 To stop and save event description:
-	transcribe and stop capturing text;
+	stop and save event description because "stop and save";
+	
+To stop and save event description because (reason - a text):
+	transcribe and stop capturing text because reason;
 	now the event description is the substituted form of "[the captured text]";
 	
 The file of test results is called "testresults".
@@ -81,7 +90,7 @@ To record a test attempt:
 		now failures entry is 0;
 		now failure messages entry is "";
 	increment the total entry;
-	transcribe and stop capturing;
+	transcribe and stop capturing because "recording test attempt for";
 	start capturing text;
 
 To record a/-- failure report of/-- (msg - a text):
@@ -250,11 +259,11 @@ Initial scheduling for a test step (this is the reset act counts rule):
 		now the act count of guy is 0;
 			
 To schedule (the event described - a test step):
-	transcribe and restart capturing;
+	transcribe and restart capturing because "scheduling [the event described] for";
 	if the event described is not the scheduled event:
 		now the scheduled event is the event described;
 		if the event described is normal keyboard input:
-			transcribe and stop capturing;
+			transcribe and stop capturing because "normal keyboard input was the new event of";
 			say line break;
 			start capturing text;
 		otherwise:
@@ -262,20 +271,20 @@ To schedule (the event described - a test step):
 		follow the initial scheduling rules for the event described;
 		now the repeated moves is 0;
 	otherwise:
-		transcribe and stop capturing;
+		transcribe and stop capturing because "repeating";
 		start capturing text;
 		increment the repeated moves;
 	now the event described is not generated;
-	transcribe and restart capturing;
+	transcribe and restart capturing because "done scheduling";
 	
 Before taking a player action when the scheduled event is generated:
-	stop and save event description;
+	stop and save event description because "testing effects of";
 	Let repeat be whether or not (the scheduled event is repeatable) and (the repeated moves > 0);
 	now the scheduled event is not generated;
 	say " .[run paragraph on]";
 	start capturing text;
 	follow the testing effects rules for the scheduled event;
-	transcribe and stop capturing;
+	transcribe and stop capturing because "done testing effects of";
 	Let repeat be whether or not the scheduled event is [still] repeatable;
 	if repeat is true and the repeated moves is not less than the maximum repeats of the scheduled event:
 		now repeat is false;
@@ -298,6 +307,7 @@ For taking a player action when the scheduled event is not the normal keyboard i
 	otherwise:
 		follow the choosing a player action rules;
 		now the scheduled event is generated;
+	log "done taking a player action";
 		
 The test step player action rule is listed first in the for taking a player action rulebook.
 		
@@ -318,7 +328,7 @@ For taking a player action (this is the move to the destination of a test step r
 		make no decision;
 	Let the place be the action-destination of the scheduled event;
 	if the place is the location:
-		transcribe and restart capturing;
+		transcribe and restart capturing because "arrived at destination [the place] for";
 	if the place is Null-room or the place is the location:
 		make no decision;
 	if the scheduled event is extracting:
@@ -446,9 +456,9 @@ Before showing the title screen (this is the run the unit tests rule):
 
 First for showing the title screen when done testing is false:
 	do nothing.
-		
-First when play begins (this is the run all tests rule):
-	transcribe and stop capturing;
+	
+First after showing the title screen (this is the run all tests rule):
+	transcribe and stop capturing because "starting test set with";
 	if done testing is true, make no decision;
 	now allowing screen effects is false;
 	initialize test steps;
@@ -461,7 +471,7 @@ First when play begins (this is the run all tests rule):
 	Now the current unit test name is "[the current test set]";
 	log "Now testing [the current test set].";
 	follow the scenario rules;
-	transcribe and restart capturing text;
+	transcribe and restart capturing text because "done setting scenario for";
 
 To decide which test set is the initiator of (the event -  a test step):
 	Repeat with the candidate running through test sets:
@@ -529,7 +539,7 @@ To start the/-- next test:
 	restart immediately.
 
 For reading a command when done testing is false (this is the finish current test set rule):
-	transcribe and stop capturing text;
+	transcribe and stop capturing text because "finished all tests for set of";
 	write file of test results from Table of Test Results;
 	start the next test;
 	
@@ -671,14 +681,14 @@ To assert that (item - a thing) is in (place - an object):
 	assert truth of whether or not the location of item is place with message msg;
 	
 To pause and assert that the event description includes (pattern - an indexed text):
-	stop and save event description;
+	stop and save event description because "checking output of";
 	assert that the event description includes pattern;
-	transcribe and restart capturing;
+	transcribe and restart capturing because "done output of";
 	
 To pause and assert that the event description does not include (pattern - an indexed text):
-	stop and save event description;
+	stop and save event description because "checking output of";
 	assert that the event description does not include pattern;
-	transcribe and restart capturing.
+	transcribe and restart capturing because "done checking output of".
 
 Section - hiding-check, hidden-traveling and hiding-reveal
 

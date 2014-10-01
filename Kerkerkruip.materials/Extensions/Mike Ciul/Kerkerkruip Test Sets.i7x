@@ -594,6 +594,8 @@ Test play when testing Sleeping Fallen:
 	
 Section - Dreadful Presence
 
+[E91A270C9962]
+
 Dreadful-Presence-Test is a test set.
 
 Scenario when testing Dreadful-Presence-Test:
@@ -637,7 +639,7 @@ To decide which number is the target cower percentage of (guy - a person):
 
 To check if (guy - a person) cowered this turn:
 	let pattern be indexed text;
-	now pattern is "[The guy] cower[s] before your dreadful presence";
+	now pattern is "[The guy] [cower] before your dreadful presence";
 	if the event description matches the regular expression pattern:
 		increment cower count of the guy;
 	
@@ -668,10 +670,13 @@ initial scheduling for a cower-counting test step:
 testing effects of a cower-counting test step:
 	Let success count be 0;
 	Repeat with guy running through people in the location:
+		log "checking if [guy] cowered";
 		check if guy cowered this turn;
+		log "[guy] cowered [cower count of guy] against a target of [target cower percentage of guy] percent";
 		if guy is within 5 percent of cowering target, increment success count;	
 	if the repeated moves is at least 20 and success count is the number of people in the location:
 		record success of the scheduled event;
+	log "done testing effects of cower-counting[if the scheduled event is repeatable] until next turn[end if]";
 
 Ape-cowering is a cower-counting test step. The first move of Dreadful-Presence-Test is Ape-cowering.
 		
@@ -680,6 +685,20 @@ Player-cowering is a cower-counting test step. The next move of Ape-cowering is 
 initial scheduling for Player-cowering:
 	now the player is insane;
 	assert truth of whether or not the target cower percentage of the player is at least 1 with message "the insane player's target cower percentage should be at least 1"; 
+	
+first starting the combat round rule (this is the report the new main actor rule):
+	log "The new main actor is [the main actor]";
+	
+standard AI rule (this is the mark place in round rule):
+	log "Got this far";
+	
+first standard ai rule:
+	log "starting standard AI for [the main actor]";
+	
+last standard ai rule:
+	log "done standard AI for [the main actor]";
+	
+The mark place in round rule is listed before the select an action and do it rule in the standard AI rules.
 
 Section - Controlling pipes
 
@@ -853,6 +872,411 @@ testing effects of healer-healing-self:
 	if the injury of healer of Aite is less than 3:
 		record success of healer-healing-self.
 		
+Section - Sul's intervention
+
+sul-intervention-test is an test set [for issue #227].
+
+Scenario when testing sul-intervention-test:
+	now Temple of Sul is testobject;
+	now Bodmall is testobject;
+	now the swarm of daggers is testobject;
+	now the hall of mirrors is bannedobject; 
+	
+Test play when testing sul-intervention-test:
+	extract the player to the location of bodmall;
+	have the player defeat Bodmall;
+	extract the player to the temple of sul;
+	have the player sacrifice a random granted power;
+	now the swarm of daggers is not asleep;
+	extract the player to the location of the swarm of daggers;
+	now the melee of the swarm of daggers is 100;
+	transcribe and restart capturing;
+	try the swarm of daggers hitting the player;
+	stop and save event description;
+	assert that the event description includes "swarm of daggers deals";
+	assert that the event description does not include "Programming error";
+	now the melee of the player is 100;
+	transcribe and restart capturing;
+	try the player hitting the swarm of daggers;
+	stop and save event description;
+	assert that the event description includes "You deal";
+	assert that the event description does not include "Programming error";
+	[TODO: check frequency of intervention]
+
+Section - Reward in Arena of the Gods
+
+divine reward is a test set [for issue #228].
+
+scenario when testing divine reward:
+	now Temple of Nomos is testobject;
+	now Bodmall is testobject;
+	now Hall of Gods is testobject;
+	now the glass cannon is testobject;
+	
+First intervention possible when testing divine reward:
+	rule fails;
+	
+Test play when testing divine reward:
+	now the player carries the glass cannon;
+	try readying the glass cannon;
+	now the defence of the player is 100;
+	extract the player to the location of bodmall;
+	have the player defeat Bodmall;
+	extract the player to temple of Nomos;
+	have the player sacrifice a random granted power;
+	assert that the favour of the player with Nomos is 4;
+	extract the player to Hall of Gods;
+	have the player and Israfel fight in Arena of the Gods;
+	now the health of the player is the permanent health of the player - 1;
+	try Israfel Israfel-splitting;
+	
+isra-only-killing is a test step. The first move of divine reward is isra-only-killing.   
+
+Choosing a player action when testing isra-only-killing:
+	generate the action of smiting isra.
+
+initial scheduling of isra-only-killing:
+	now fell is asleep;
+
+testing effects of a test step (called the current move) when testing divine reward:
+	assert "Nomos counter should be zero on [the current move]" based on whether or not the nomos counter is zero;
+	assert "Nomos bonus should be false on [the current move]" based on whether or not the nomos bonus is false;
+
+testing effects of isra-only-killing:
+	assert truth of whether or not Isra is dead with message "Isra should be dead";
+	assert truth of whether or not Fell is not dead with message "Fell should be alive";
+	assert truth of whether or not the health of the player is less than the permanent health of the player with message "The player should not be healed";
+	assert that the event description does not include "Nomos receives .* and fully heals you";
+
+fell-also-killing is a test step. The next move of isra-only-killing is fell-also-killing.   
+
+Choosing a player action when testing fell-also-killing:
+	generate the action of smiting fell.
+
+testing effects of fell-also-killing:
+	assert that the location is Hall of Gods;
+	assert that the event description includes "receives the soul";
+	assert that the event description does not include "receives the soul.* receives the soul";
+	assert that the health of the player is the permanent health of the player;
+	assert truth of whether or not the player carries the glass cannon with message "the glass cannon should still be carried";
+	assert truth of whether or not the glass cannon is readied with message "the glass cannon should still be readied";
+	
+Section - Temporary Blood Magic from Nomos
+
+temporary Nomos blood magic is a test set.
+
+first intervention possible when testing temporary Nomos blood magic:
+	rule fails.
+	
+Scenario when testing temporary Nomos blood magic:
+	now Bodmall is testobject;
+	now the jumping bomb is testobject;
+	now the swarm of daggers is testobject;
+	now the Temple of Nomos is testobject;
+	now columnated ruins is bannedobject;
+	now everything is not cursed;
+
+The gown-timer is a number that varies;
+
+To decide what number is the chance of (guy - a person) remaining concentrated:
+	let the previous defender be the global defender;
+	now the global defender is guy;
+	now the remain concentrated chance is 0;
+	follow the remain concentrated rules;
+	now the global defender is previous defender;
+	decide on the remain concentrated chance.
+	
+Test play when testing temporary Nomos blood magic:
+	now every room is not rust-spored;
+	now the health of the player is 1000;
+	now the defence of the player is 100;
+	extract the player to the location of bodmall;
+	try smiting bodmall;
+	extract the player to the temple of nomos;
+	have the player sacrifice a random granted power;
+	assert that the holder of the gown of the red court is the player;
+	assert truth of whether or not the player carries the gown of the red court with message "the gown of the red court should be carried";
+	assert truth of whether or not the player carries the inquisitor's hood with message "the inquisitor's hood should be carried";
+	transcribe and restart capturing;
+	try examining the inquisitor's hood;
+	pause and assert that the event description includes "This particular one gives you a \+15% chance of remaining concentrated when damaged\. It also increases your dreadful presence by 1\. Feeding 5 blood to the hood will temporarily add 10% to the chance of remaining concentrated";
+	let the base chance be the chance of the player remaining concentrated;
+	try wearing the inquisitor's hood;
+	assert that (the chance of the player remaining concentrated - the base chance) is 15;
+	try feeding the inquisitor's hood;
+	transcribe and restart capturing;
+	try examining the inquisitor's hood;
+	pause and assert that the event description includes "This particular one gives you a \+25% chance of remaining concentrated when damaged\. It also increases your dreadful presence by 1\. Feeding 10 blood to the hood will temporarily add 10% to the chance of remaining concentrated";
+	assert that (the chance of the player remaining concentrated - the base chance) is 25;
+	try taking off the inquisitor's hood;
+	assert that the dreadful presence of the player is 0;
+	try feeding the gown of the red court;
+	Now the gown-timer is the blood timer of the gown of the red court;
+	assert that gown-timer is between 2 and 10;
+	transcribe and restart capturing;
+	try examining the gown of the red court;
+	stop and save event description;
+	assert that the event description includes "Wearing the gown gives you two levels of dreadful presence. You can feed the gown 8 blood";
+	assert that the dreadful presence of the player is 0;
+	try wearing the gown of the red court;
+	assert that the dreadful presence of the player is 2;
+	transcribe and restart capturing;
+	
+second-gown-feeding is a hidden-traveling test step. The first move of temporary Nomos blood magic is second-gown-feeding.   
+
+Choosing a player action when testing second-gown-feeding:
+	generate the action of feeding the gown of the red court.
+
+testing effects of second-gown-feeding:
+	assert that the blood magic level of the gown of the red court is 2;
+	assert that the dreadful presence of the player is 3;
+	decrease the gown-timer by 1;
+	assert that the blood timer of the gown of the red court is the gown-timer;
+	now the maximum repeats of first-gown-timeout is gown-timer;
+		
+first-gown-timeout is a repeatable hidden-traveling test step.
+
+testing effects of first-gown-timeout:
+	if the blood magic level of the gown of the red court > 1:
+		assert truth of whether or not the blood timer of the gown of the red court is (gown-timer - (the repeated moves + 1)) with message "Blood timer of [blood timer of the gown of the red court] should have been ([gown-timer] - [repeated moves + 1] = [gown-timer - (repeated moves + 1)])";
+	otherwise:
+		assert that the event description includes "Some of the blood power of the gown of the red court wears off";
+		now gown-timer is the blood timer of the gown of the red court;
+		assert that gown-timer is between 2 and 10;
+		now the maximum repeats of second-gown-timeout is gown-timer;
+		now first-gown-timeout is not repeatable
+	
+second-gown-timeout is a repeatable hidden-traveling test step. The next move of first-gown-timeout is second-gown-timeout.
+
+testing effects of second-gown-timeout:
+	assert that the blood timer of the gown of the red court is (gown-timer - (the repeated moves + 1));
+	if the blood timer of the gown of the red court is 0:
+		assert that the blood magic level of the gown of the red court is 0;
+		assert that the event description includes "The blood power of the gown of the red court wears off completely";
+		now second-gown-timeout is not repeatable.
+		
+malleus-earning is a extracting test step. The location-target of malleus-earning is the temple of nomos.
+
+Testing effects of malleus-earning:
+	have the player defeat the jumping bomb;
+	have the player sacrifice a random granted power;
+	assert truth of whether or not the player carries the malleus maleficarum with message "the malleus should be carried";
+	try readying the malleus maleficarum;
+	assert truth of whether or not the malleus maleficarum is readied with message "the malleus maleficarum should be readied";
+	try examining the malleus maleficarum;
+	pause and assert that the event description includes "Feeding 1 blood to the Malleus Maleficarum will give it a bonus of \+1 attack and \+1 damage on your next attack.* dreadful presence\.";
+	
+daggers-meeting is a extracting test step. The location-target of daggers-meeting is the swarm of daggers.
+
+Testing effects of daggers-meeting:
+	now the health of the player is 1000;
+	now the health of the swarm of daggers is 100;
+	now the melee of the player is 100;
+
+nomos-bonus-examining is a test step.   
+
+Choosing a player action when testing nomos-bonus-examining:
+	Generate the action of examining the swarm of daggers.
+
+Initial scheduling of nomos-bonus-examining:
+	now the nomos bonus is true;
+
+Testing effects of nomos-bonus-examining:
+	assert that the event description includes "swarm of daggers attacks using sharp points";
+
+malleus-bonus-attacking is a hidden-traveling test step.   
+
+Choosing a player action when testing malleus-bonus-attacking:
+	Generate the action of turning human. 
+
+[turning human is not acting fast, but a rule sets the take no time boolean for it. This will be too late to stop the nomos bonus from changing our action]
+
+Initial scheduling for malleus-bonus-attacking:
+	assert that the nomos bonus is true with label "nomos bonus";
+	now the nomos bonus is false;
+	try feeding the malleus maleficarum;
+	transcribe and restart capturing;
+	try examining the malleus maleficarum;
+	pause and assert that the event description includes "Feeding 2 blood to the Malleus Maleficarum will give it an additional bonus of \+1 attack and \+1 damage on your next attack.* dreadful presence; blood bonus of \+1 attack and \+1 damage";
+	now the nomos bonus is true;
+	
+testing effects of malleus-bonus-attacking:
+	assert that the event description includes "You plan on turning human, but find yourself attacking the swarm of daggers instead";
+	assert that the hitting count of the player is 1 with label "player's hitting count (bug #281)";
+	assert that the blood magic level of malleus maleficarum is 0 with label "malleus blood magic level";
+	assert that the event description includes " \+ 1 \(Malleus Maleficarum blood\) \+ 3 \(the law is with you\) = <0-9>+, you beat the swarm of daggers[']s defence rating";
+	assert that the event description includes " \+ 1 \(Malleus Maleficarum blood bonus\) \+ 3 \(the law is with you\) = <0-9>+ damage";
+
+Section - bug 234
+
+bug-234 is an test set.
+
+Scenario when testing bug-234:
+	Now Israfel is testobject;
+	Now the swarm of daggers is testobject;
+	Now temple of Herm is testobject;
+	Now Hall of Gods is testobject;
+	
+Test play when testing bug-234:
+	extract the player to the location of Israfel;
+	try smiting israfel;
+	extract the player to the location of the swarm of daggers;
+	try smiting the swarm of daggers;
+	extract the player to temple of herm;
+	have the player sacrifice the power of the daggers;
+	extract the player to Hall of Gods;
+	now the health of the player is 1000;
+	have the player and the healer of Aite fight in Arena of the Gods;
+	[also test bug 235]
+	transcribe and restart capturing;
+	try linking the holy sword;
+	pause and assert that the event description includes "You can only link to persons";
+	assert that the event description does not include "You forge a spiritual link";
+
+still-linking is a repeatable test step. The first move of bug-234 is still-linking. The maximum repeats of still-linking is 20.   
+
+Choosing a player action when testing still-linking:
+	Generate the action of linking the healer of Aite.
+
+testing effects of still-linking:
+	if the healer of Aite is linked to the player:
+		record success of still-linking;
+	
+Section - Attempting to Maze Someone in Arena of the Gods
+
+challenger-mazing is an test set.
+
+Scenario when testing challenger-mazing:
+	Now Bodmall is testobject;
+	Now the minotaur is testobject;
+	Now temple of Herm is testobject;
+	Now Hall of Gods is testobject;
+
+Test play when testing challenger-mazing:
+	extract the player to the location of Bodmall;
+	try smiting Bodmall;
+	extract the player to the temple of Nomos;
+	have the player sacrifice a random granted power;
+	extract the player to the location of the minotaur;
+	try smiting the minotaur;
+	try taking the minotaur's axe;
+	try readying the minotaur's axe;
+	extract the player to hall of gods;
+	have the player and the healer of aite fight in the arena of the gods;
+	Now Nomos bonus is true;
+	now the melee of the player is 100;
+	now the health of the defender of Aite is 100;
+	transcribe and restart capturing;
+	try hitting the defender of aite;
+	pause and assert that the event description includes "you beat the defender of Aite's defence";
+	assert that the event description does not include "You plan on challenging the defender of Aite in the maze";
+	assert that the event description includes "Space and time begin to twist";
+	assert that the location is Arena of the Gods.
+	
+Section - Banshees Gone Wild - bug 248
+
+banshees gone wild is an test set.
+
+[First every turn: say "Every turn rules run.";]
+
+Definition: A room is occupied rather than unoccupied if it encloses a person.
+
+To swap the occupants of (first place - a room) and (second place - a room):
+	Let swap place be a random unoccupied room;
+	Repeat with guy running through people in first place:
+		extract guy to the swap place;
+	if the second place is not the swap place:
+		Repeat with guy running through people in second place:
+			extract guy to first place;
+		Repeat with guy running through people in swap place:
+			extract guy to second place;
+			
+To set the tension to (N - a number):
+	transcribe "Setting tension to [N]";
+	now the tension is N;
+		
+Scenario when testing banshees gone wild:
+	now Hall of Raging Banshees is testobject;
+	now the blood ape is testobject;
+	now the reaper is testobject;
+	now a random scroll of death is testobject;
+	
+Test play when testing banshees gone wild:
+	Let the death-scroll be a random not off-stage scroll of death;
+	Now the player carries the death-scroll;
+	swap the occupants of the location of the blood ape and the Hall of Raging Banshees;
+	travel sneakily to Hall of Raging Banshees;
+	if the retreat location is occupied:
+		swap the occupants of the retreat location and a random unoccupied placed room;
+	try taking off the fuligin cloak;
+	set the tension to 10;
+	now the health of the blood ape is 1;
+	now the defence of the player is 100;
+	now the health of the player is 100;
+	
+Waiting-for-banshees is a test step. The first move of banshees gone wild is waiting-for-banshees.
+
+testing effects of waiting-for-banshees:
+	assert that the event description includes "banshees suddenly break loose";
+	assert that the living banshees boolean is true;
+
+banshee-fleeing is a test step. The next move of waiting-for-banshees is banshee-fleeing.
+
+Choosing a player action when testing banshee-fleeing:
+	Let the way be the best route from the location to the retreat location;
+	generate the action of going the way.
+
+testing effects of banshee-fleeing:
+	assert "we should no longer be in Hall of the Raging Banshees" based on whether or not the location is not Hall of Raging Banshees;
+	assert that the tension is 0;
+	assert that the living banshees boolean is false;
+	
+banshee-returning is a test step. The next move of banshee-fleeing is banshee-returning.
+
+Initial scheduling for banshee-returning:
+	extract the reaper to the location [to keep the tension from dissipating];
+	set the tension to 10.
+	
+Choosing a player action when testing banshee-returning:
+	Let the way be the best route from the location to the hall of raging banshees;
+	generate the action of going the way;
+
+testing effects of banshee-returning:
+	assert "Tension should be at least 10" based on whether or not the tension is at least 10;
+
+banshee-return-waiting is a test step. The next move of banshee-returning is banshee-return-waiting.
+	
+[Initial scheduling for banshee-return-waiting:
+	 set the tension to 10;]
+	
+testing effects of banshee-return-waiting:
+	assert "Tension should be at least 10" based on whether or not the tension is at least 10;
+	assert that the event description includes "banshees suddenly break loose";
+	assert that the living banshees boolean is true;
+	
+reaction-ape-killing is a repeatable test step. The next move of banshee-return-waiting is reaction-ape-killing. 
+
+Initial scheduling of reaction-ape-killing:
+	compel the action of the blood ape attacking the player;
+	
+Choosing a player reaction when reaction-ape-killing is the scheduled event:
+	if the player carries a scroll of death:
+		let the death-scroll be a random carried scroll of death;
+		generate the action of reading the death-scroll;
+		now the scheduled event is not repeatable;
+		
+Choosing a player action when testing reaction-ape-killing:
+	if reaction-ape-killing is repeatable:
+		make no decision;
+	Let the way be the best route from the location to the retreat location;
+	generate the action of going the way;
+
+testing effects of reaction-ape-killing:
+	if the scheduled event is repeatable, make no decision;
+	assert "the blood ape should be dead" based on whether or not the blood ape is dead;
+	assert that the event description includes "Bored by a lack of tension";
+	assert that the living banshees boolean is false;
+
 [TODO: test armadillo and reaper following]
 
 Section - Armadillo wandering

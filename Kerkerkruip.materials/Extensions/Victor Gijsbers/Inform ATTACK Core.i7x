@@ -637,9 +637,22 @@ with 20 blank rows
 
 The AI action selection rules are a person based rulebook.
 
+To say display action options table:
+	say "[number of filled rows in table of ai action options] rows";
+		
+To cautiously blank out (contents - a table name):
+	while the number of filled rows in contents > 0:
+		choose a random row in contents;
+		log "blanking out [option entry]: [action weight entry][line break]";
+		blank out the whole row;
+		
 A last Standard AI rule for a person (called P) (this is the select an action and do it rule):
-	blank out the whole of the Table of AI Action Options;
+	log "select an action and do it for [P] - [display action options table]";
+[	blank out the whole of the Table of AI Action Options;]
+	cautiously blank out Table of AI Action Options;
+	log "blanked out table of AI Action Options";
 	follow the AI action selection rules for P;
+	log "Now there are [number of filled rows in table of ai action options] action selections";
 	sort the Table of AI Action Options in random order;
 	sort the Table of AI Action Options in reverse Action Weight order;
 	#if debug and showing weightings;
