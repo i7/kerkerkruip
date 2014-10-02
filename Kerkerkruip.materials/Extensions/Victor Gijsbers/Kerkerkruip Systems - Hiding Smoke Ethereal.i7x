@@ -50,6 +50,10 @@ First check an actor hitting (this is the stop hitting if the defender is hidden
 Hiding roll is a number that varies.
 The detection rules are a rulebook.
 
+Just-discovered is a truth state that varies. Just-discovered is false.  [Currently using this for a text effect with Malygris's summoning ritual.]
+Last every turn:
+	now just-discovered is false.
+
 Every turn when the player is hidden (this is the possible detection rule):
 	if main actor is the player:
 		if at least one person enclosed by the location opposes the player:
@@ -63,6 +67,7 @@ Every turn when the player is hidden (this is the possible detection rule):
 				otherwise:
 					say "You are [bold type]detected[roman type]!";
 					now the player is not hidden;
+					now just-discovered is true;
 					repeat with guy running through visible persons:
 						if the faction of guy hates the faction of the player:
 							now guy is on-the-lookout.
