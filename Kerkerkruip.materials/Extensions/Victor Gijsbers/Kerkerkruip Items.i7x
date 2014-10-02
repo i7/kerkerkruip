@@ -3750,7 +3750,8 @@ First aftereffects rule (this is the Malleus reset tension rule):
 		now tension is malleus-tension-dummy.
 
 Aftereffects rule (this is the Malleus blood spent rule):
-	now the blood magic level of Malleus Maleficarum is 0.
+	if global attacker weapon is Malleus Maleficarum:
+		now the blood magic level of Malleus Maleficarum is 0.
 	
 A dread rule (this is the malleus dread rule):
 	if test subject carries Malleus Maleficarum and Malleus Maleficarum is readied:
