@@ -1203,9 +1203,10 @@ A weapon has a number called the current load time. The current load time of a w
 Definition: a weapon is unloaded if its current shots is 0 and its maximum shots is greater than 0.
 Definition: a weapon is waiting to be reloaded if its current shots is 0 and its maximum shots is greater than 0 and its maximum load time is greater than 0.
 
+To reload is a verb.
+
 A weapon has a text called the shots text. The shots text of a weapon is usually "shots".
-A weapon has a text called the reload text. The reload text of a weapon is usually "reload".
-A weapon has a text called the reload stem text. The reload stem text of a weapon is usually "reload".
+A weapon has a verb called the reload verb. The reload verb of a weapon is usually the verb reload.
 A weapon has a text called the out of ammo text. The out of ammo text of a weapon is usually "You pull the trigger, but nothing happens--you're out of ammo!".
 
 [Maximum shots: number of rounds the weapon can be used when fully loaded. Current shots: number of shots still loaded. Maximum load time: number of rounds it takes to load the weapon. Current load time: number of rounds it still takes to load the weapon.]
@@ -1220,9 +1221,9 @@ After printing the name of a weapon (called item) when taking inventory (this is
 			say " ([current shots of item] of [maximum shots of item] [shots text of item] left)";
 		otherwise:
 			if the maximum load time of item is not -1:
-				say " (no [shots text of item] left; [current load time of item] round[if current load time of item is not 1]s[otherwise] to [reload text of item])";
+				say " (no [shots text of item] left; [current load time of item] round[if current load time of item is not 1]s[otherwise] [infinitive of reload verb of item])";
 			otherwise:
-				say " (no [shots text of item] left; cannot be [reload stem text of item]ed)".
+				say " (no [shots text of item] left; cannot be [past participle of reload verb of item])".
 
 After an actor hitting when the maximum shots of the global attacker weapon is greater than 0 (this is the decrease ammo rule):
 	decrease the current shots of the global attacker weapon by 1;
@@ -1250,7 +1251,7 @@ Check reloading when the maximum shots of the noun is 0 (this is the cannot relo
 	
 Check reloading when the maximum load time of the noun is -1 (this is the cannot reload unreloadable weapons rule):	
 	take no time;
-	say "[The noun] [cannot] be [reload stem text of the noun]ed." instead;
+	say "[The noun] [cannot] be [past participle of reload verb of noun]." instead;
 	
 Check reloading when the current shots of the noun is the maximum shots of the noun (this is the cannot reload fully loaded weapons rule):	
 	take no time;
@@ -1272,9 +1273,9 @@ To finish is a verb. To start is a verb. To continue is a verb.
 
 Report an actor reloading (this is the standard report reloading rule):
 	if the current load time of the noun is the maximum load time of the noun:
-		say "[The actor] [if the maximum load time of the noun is 1][reload text of the noun][s][otherwise][finish] [reload stem text of the noun]ing[end if] [the noun].";
+		say "[The actor] [if the maximum load time of the noun is 1][adapt reload text of the noun][otherwise][finish] [present participle of reload verb of the noun][end if] [the noun].";
 	otherwise:
-		say "[The actor] [if the current load time of the noun plus 1 is the maximum load time of the noun][start][otherwise][continue][end if] [reload stem text of the noun]ing [the noun].".
+		say "[The actor] [if the current load time of the noun plus 1 is the maximum load time of the noun][start][otherwise][continue][end if] [present participle of reload verb of the noun] [the noun].".
 
 Section - Reloading and choosing a weapon AI rules
 
