@@ -1221,7 +1221,7 @@ After deciding the scope of the player while adjusted scope for the drawing room
 			place guy in scope.
 
 Before taking a player action when the location is the drawing room:
-	now adjusted scope for the drawing room is true.
+	now adjusted scope for the drawing room is true. [To avoid double message.]
 
 After taking a player action:
 	now adjusted scope for the drawing room is false.

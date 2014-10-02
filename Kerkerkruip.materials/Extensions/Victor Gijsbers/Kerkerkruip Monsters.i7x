@@ -4504,10 +4504,17 @@ Carry out calling:
 		let the way be the best route from the location of the noun to the location of the player;
 		if way is a direction:
 			let place be the location of the noun;
-			try the noun going the way;
-			unless location of the noun is location of the player:
-				say "[The noun] [move] from [the place] to [the location of the noun].";
-				now last-seen-location of the noun is location of the noun;
+			let place2 be the room way of place;
+			unless place2 is location of the player:
+				if adjusted scope for the drawing room is true:
+					say "You issue your call. [run paragraph on]";
+					try the noun going the way;
+				otherwise:
+					try the noun going the way;
+					say "[The noun] [move] from [the place] to [the location of the noun].";
+			otherwise:
+				try the noun going the way;
+			now last-seen-location of the noun is location of the noun;
 		otherwise:
 			say "[The noun] [have] no way to reach you!";
 	otherwise:
