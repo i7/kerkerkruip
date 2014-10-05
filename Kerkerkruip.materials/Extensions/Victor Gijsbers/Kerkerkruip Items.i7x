@@ -1024,6 +1024,49 @@ The blood magic maximum of the gown of the red court is 5.
 The minimum blood timeout of the gown of the red court is 2.
 The maximum blood timeout of the gown of the red court is 8.
 
+
+Section - Armour of thorns (major)
+
+[Armour of thorns, nails, spikes, spears.]
+
+The armour of thorns is a major shirt. The armour of thorns is civilised and iron.
+Understand "thorns" and "nails" and "spikes" and "spears" as the armour of thorns.
+The indefinite article of the armour of thorns is "the".
+
+The description of the armour of thorns is "This leather shirts is covered with [if blood magic level of armour of thorns is 1]tiny thorns[otherwise if blood magic level of armour of thorns is 2]small nails[otherwise if blood magic level of armour of thorns is 3]large spikes[otherwise]huge spears[end if]. Anyone who successfully attacks you in melee will suffer [blood magic level of the armour of thorns] damage[unless blood magic level of the armour of thorns is blood magic maximum of the armour of thorns]. Feeding the armour will increase this by 1[end if]."
+
+Before printing the name of the armour of thorns:
+	if blood magic level of the armour of thorns is 1:
+		now printed name of armour of thorns is "armour of thorns";
+	if blood magic level of the armour of thorns is 2:
+		now printed name of armour of thorns is "armour of nails";
+	if blood magic level of the armour of thorns is 3:
+		now printed name of armour of thorns is "armour of spikes";
+	if blood magic level of the armour of thorns is 4:
+		now printed name of armour of thorns is "armour of spears".
+
+The blood magic cost of the armour of thorns is 6.
+The blood magic level of the armour of thorns is 1.
+The blood magic maximum of the armour of thorns is 4.
+
+An aftereffects rule (this is the armour of thorns rule):
+	if the global defender wears the armour of thorns:
+		if total damage is greater than 0:
+			unless global attacker weapon is ranged:
+				let n be blood magic level of the armour of thorns;
+				if n is greater than 0:
+					say "The [armour of thorns] [if blood magic level of armour of thorns is 1]scratches[otherwise if blood magic level of armour of thorns is 2]pricks[otherwise if blood magic level of armour of thorns is 3]hurts[otherwise]impales[end if] [the global attacker] for[run paragraph on]";
+					deal n points of physical damage;
+					have armour of thorns inflict damage on global attacker;
+					say "[if the global attacker is dead], killing [regarding the global attacker][them][end if].";
+
+A dungeon interest rule (this is the sometimes feed armour of thorns rule):
+	if a random chance of 1 in 10 succeeds:
+		increase blood magic level of the armour of thorns by 1;
+	if a random chance of 1 in 10 succeeds:
+		increase blood magic level of the armour of thorns by 1.
+
+
 Chapter - Cloaks
 
 Section - Fuligin cloak (epic)
