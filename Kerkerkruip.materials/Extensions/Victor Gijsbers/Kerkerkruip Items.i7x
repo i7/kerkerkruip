@@ -3622,13 +3622,11 @@ A spirit bonus rule (this is the spirit bonus of the was sceptre rule):
 	if the test subject carries the readied was sceptre:
 		increase faculty bonus score by 4.
 
-Section - Caduceus  (Herm gift)
+Section - Caduceus  (epic)
 
-The caduceus is a weapon. The indefinite article of the caduceus is "the".
+The caduceus is an epic wood magical weapon. The indefinite article of the caduceus is "the".
 
 The description of the caduceus is "A short staff entwined by two serpents and surmounted by wings. [italic type]Anyone hit by the caduceus has a chance equal to (attacker's mind * 2)% to fall asleep.[roman type]".
-
-The caduceus is wood.
 
 The damage die of the caduceus is 4.
 The weapon attack bonus of the caduceus is 2.
@@ -3813,6 +3811,68 @@ An add specific damage rule (this is the Malleus blood damage bonus rule):
 			let bonus be the blood magic level of Malleus Maleficarum;
 			if the bonus is greater than 0:
 				add bonus points of physical damage with reason "Malleus Maleficarum blood bonus".
+
+
+Chapter - Crossbows
+
+A crossbow is a kind of weapon. 
+A crossbow is usually wood.
+A crossbow is always ranged.
+
+Understand "crossbow" as a crossbow.
+
+The damage die of a crossbow is usually 4.
+The weapon attack bonus of a crossbow is usually 0.
+The dodge bonus of a crossbow is usually 1.
+The parry-with bonus of a crossbow is usually -2.
+The parry-against bonus of a crossbow is usually -2.
+The weapon damage bonus of a crossbow is usually 0.
+
+Chance to win rule when the chosen weapon is a crossbow (this is the CTW crossbow concentration bonus rule):
+	let n be the tension divided by 3;
+	increase the chance-to-win by n.
+		
+An add general damage rule (this is the crossbow extra tension damage bonus rule):
+	if damage-by-hitting is true:
+		if the damage-source is a crossbow:
+			let n be the tension divided by 2;
+			if n is not 0:
+				add n points of general damage with reason "crossbow benefits from tension".
+
+The special weapon info of a crossbow is usually "; damage benefits strongly from tension[run paragraph on]".
+
+The maximum shots of a crossbow is usually 1.
+The current shots of a crossbow is usually 1.
+The maximum load time of a crossbow is usually 2.
+
+Section - Yahvinnian crossbow
+
+The Yahvinnian crossbow is a minor civilised crossbow.
+
+The description of the Yahvinnian crossbow is "The typical Yahvinnian taste for combining life's two great transgressive pleasures--sex and death--is evident from the erotic carvings on this crossbow.".
+
+The erotic carvings are part of the Yahvinnian crossbow. The description of the erotic carvings is "Wait... is [italic type]that[roman type] physically possible? You simply must try that some day, which adds another reason to escape from this barren dungeon."
+
+
+Section - Snipe (Herm gift)
+
+Snipe is a crossbow. Snipe is proper-named.
+
+The damage die of Snipe is 6.
+The weapon attack bonus of Snipe is 1.
+The maximum load time of Snipe is 4.
+
+The description of Snipe is "This small crossbow is made from very dark wood. It carries the blessing of Herm: when you hit someone with it, they'll have a chance to be teleported away equal to 10% times your favour with the hidden god.".
+
+An aftereffects rule (this is the Snipe rule):
+	if the global attacker weapon is Snipe:
+		if the global attacker worships Herm:
+			if total damage is greater than 0:
+				if a random chance of the favour of the global attacker in 10 succeeds:
+					let n be teleport amount of the global defender;
+					try the global defender teleporting;
+					now teleport amount of global defender is n.
+
 		
 Chapter - Other weapons
 

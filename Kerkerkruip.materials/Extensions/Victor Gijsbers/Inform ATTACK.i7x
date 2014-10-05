@@ -1221,7 +1221,7 @@ After printing the name of a weapon (called item) when taking inventory (this is
 			say " ([current shots of item] of [maximum shots of item] [shots text of item] left)";
 		otherwise:
 			if the maximum load time of item is not -1:
-				say " (no [shots text of item] left; [current load time of item] round[if current load time of item is not 1]s[otherwise] [infinitive of reload verb of item])";
+				say " (no [shots text of item] left; [current load time of item] round[if current load time of item is not 1]s[end if] [infinitive of reload verb of item])";
 			otherwise:
 				say " (no [shots text of item] left; cannot be [past participle of reload verb of item])".
 
@@ -1273,7 +1273,7 @@ To finish is a verb. To start is a verb. To continue is a verb.
 
 Report an actor reloading (this is the standard report reloading rule):
 	if the current load time of the noun is the maximum load time of the noun:
-		say "[The actor] [if the maximum load time of the noun is 1][adapt reload text of the noun][otherwise][finish] [present participle of reload verb of the noun][end if] [the noun].";
+		say "[The actor] [if the maximum load time of the noun is 1][adapt reload verb of the noun][otherwise][finish] [present participle of reload verb of the noun][end if] [the noun].";
 	otherwise:
 		say "[The actor] [if the current load time of the noun plus 1 is the maximum load time of the noun][start][otherwise][continue][end if] [present participle of reload verb of the noun] [the noun].".
 

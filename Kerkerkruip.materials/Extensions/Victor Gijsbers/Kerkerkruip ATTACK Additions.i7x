@@ -171,9 +171,6 @@ An AI action selection rule for an at-Act person (called P) (this is the new sta
 The new standard attack select rule is listed instead of the standard attack select rule in the AI action selection rules.
 
 
-[ Kerkerkruip has no reloadable weapons ]
-Chapter - No reloadable weapons (in place of Chapter - Reloadable Weapons (Standard Plug-in) in Inform ATTACK by Victor Gijsbers)
-
 
 
 Section - Losing concentration
