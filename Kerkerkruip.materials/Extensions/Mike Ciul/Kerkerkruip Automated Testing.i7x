@@ -299,37 +299,6 @@ Before taking a player action when the scheduled event is generated:
 	otherwise:
 		schedule the next move of the scheduled event;
 	
-Section - Sanity Checking Stored Actions
-
-To decide what number is the/-- address of (A - a stored action): (- {-by-reference:A} -);
-
-To decide what number is the/-- previous block to (A - a number): (- {-by-reference:A}-->BLK_PREV -);
-
-To decide what number is the/-- next block after (A - a number): (- {-by-reference:A}-->BLK_NEXT -);
-
-To say sanity check (plan - a stored action): [(- StoredActionSanityCheck({plan}); -)]
-	Let A be the address of plan;
-	let P be the previous block to A;
-	let N be the next block after P;
-	say "Stored action [bracket][the plan][close bracket] at [A] is a child of [P], which [if A is N]matches when sanity-checked[otherwise]has a first child of [N] instead[end if].";
-	
-Include (-
-[ StoredActionSanityCheck real_addr prev_addr prevnext_addr;
-	prev_addr=real_addr-->BLK_PREV;
-	prevnext_addr=prev_addr-->BLK_NEXT;
-	print "Stored action [";
-	print (STORED_ACTION_TY_Say) real_addr;
-	print "] at ", real_addr, " is a child of ", prev_addr, ", which ";
-	if (real_addr==prevnext_addr) {
-		print "matches when sanity-checked.^";
-	}
-	else {
-		print "has a first child of ", prevnext_addr, " instead.^";
-	}
-];
-
--);
-
 Section - Generating Actions
 
 For taking a player action when the scheduled event is not the normal keyboard input (this is the test step player action rule):
@@ -338,7 +307,6 @@ For taking a player action when the scheduled event is not the normal keyboard i
 	otherwise:
 		follow the choosing a player action rules;
 		now the scheduled event is generated;
-	log "done taking a player action";
 		
 The test step player action rule is listed first in the for taking a player action rulebook.
 		

@@ -670,13 +670,10 @@ initial scheduling for a cower-counting test step:
 testing effects of a cower-counting test step:
 	Let success count be 0;
 	Repeat with guy running through people in the location:
-		log "checking if [guy] cowered";
 		check if guy cowered this turn;
-		log "[guy] cowered [cower count of guy] against a target of [target cower percentage of guy] percent";
 		if guy is within 5 percent of cowering target, increment success count;	
 	if the repeated moves is at least 20 and success count is the number of people in the location:
 		record success of the scheduled event;
-	log "done testing effects of cower-counting[if the scheduled event is repeatable] until next turn[end if]";
 
 Ape-cowering is a cower-counting test step. The first move of Dreadful-Presence-Test is Ape-cowering.
 		
