@@ -1,0 +1,36 @@
+#!/usr/bin/env node
+
+// This script will run Kerkerkruip's unit tests
+
+var spawn = require('child_process').spawn;
+
+var vm = spawn( '/usr/local/share/inform7/Interpreters/dumb-git', [ 'Kerkerkruip.gblorb' ] );
+
+var commands = [ 'n', '', 'n', '' ];
+
+vm.stdout.on( 'data', function ( data )
+{
+	data = data.toString();
+	console.log( 'stdout: ' + data );
+	if ( data.indexOf( 'Enable the screen reader mode' ) >= 0 )
+	{
+		//sendCommand( 'y' );
+		vm.stdin.write( 'y\n' );
+	}
+	else if ( commands.length )
+	{
+		//sendCommand( commands.shift() );
+		vm.stdin.write( commands.shift() + '\n' );
+	}
+});
+
+function sendCommand( command )
+{
+	setTimeout( function() { console.log( command ); vm.stdin.write( command + '\n' ); }, 100 );
+}
+
+vm.on('close', function (code)
+{
+	console.log('child process exited with code ' + code);
+	process.exit(code);
+});
