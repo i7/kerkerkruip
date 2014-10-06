@@ -851,7 +851,7 @@ Option-5-chest is a container. Option-5-chest contains two fragmentation grenade
 Option-6-chest is a container. Option-6-chest contains a scroll of mapping.
 Option-7-chest is a container. Option-7-chest contains a scroll of teleportation.
 
-Last when play begins:
+Last when play begins (this is the player starting kit rule):
 	[ Generate these numbers now so that the number of random numbers generated doesn't depend on the difficulty ]
 	let n be a random number between 1 and 7;
 	let n2 be a random number between 1 and 20;

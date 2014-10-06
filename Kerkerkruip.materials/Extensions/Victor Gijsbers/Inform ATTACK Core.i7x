@@ -630,6 +630,200 @@ A last AI target selection rule (this is the return the target weight rule):
 
 Chapter - Selecting an action
 
+
+Include (-
+[ CheckTableEntryIsBlank tab col row i at oldv flags;
+	print "CheckTableEntryBlank tab ", tab, " col ", col, " row ", row, "^";
+	if (col >= 100) col = TableFindCol(tab, col);
+	if (col == 0) rtrue;
+	if ((tab-->col)-->(row+COL_HSIZE) ~= TABLE_NOVALUE) {
+		print "*** CTEIB on nonblank value ", tab, " ", col, " ", row, " ***^";
+	}
+	if (((tab-->col)-->1) & TB_COLUMN_NOBLANKBITS) rtrue;
+	row--;
+	at = DT_FindBlankBits(tab, col) + (row/8);
+	if ((at->0) & (CheckTableEntryIsBlank_LU->(row%8))) rtrue;
+	rfalse;
+];
+-) instead of "Testing Blankness" in "Tables.i6t".
+
+Include (-
+[ ForceTableEntryBlank tab col row i at oldv flags;
+	print "ForceTableEntryBlank ";
+	PrintTableName(tab);
+	print "(", tab, ") col ", col, " row ", row, "^"; 
+	if (col >= 100) col = TableFindCol(tab, col);
+	if (col == 0) rtrue;
+	flags = (tab-->col)-->1;
+	oldv = (tab-->col)-->(row+COL_HSIZE);
+	print "flags=",flags, " (TB_COLUMN_ALLOCATED=", TB_COLUMN_ALLOCATED, ") oldv=", oldv, "(TABLE_NOVALUE=",TABLE_NOVALUE,")^";
+	if ((flags & TB_COLUMN_ALLOCATED) && (oldv ~= 0 or TABLE_NOVALUE))
+		FlexFree(oldv);
+	print "freed oldv, now setting entry to TABLE_NOVALUE^";
+	(tab-->col)-->(row+COL_HSIZE) = TABLE_NOVALUE;
+	print "Forcing blank at ";
+	PrintTableName(tab);
+	print "(", tab, ") col ", col, " row ", row, "^"; 
+	if (flags & TB_COLUMN_NOBLANKBITS) return;
+	row--;
+	at = DT_FindBlankBits(tab, col) + (row/8);
+	(at->0) = (at->0) | (CheckTableEntryIsBlank_LU->(row%8));
+];
+-) instead of "Force Entry Blank" in "Tables.i6t".
+
+Include (-
+[ ForceTableEntryNonBlank tab col row i at oldv flags tc kov j;
+	if (col >= 100) col=TableFindCol(tab, col);
+	if (col == 0) rtrue;
+	print "Forcing non blank at ";
+	PrintTableName(tab);
+	print "(", tab, ") col ", col, " row ", row, "^"; 
+	if (((tab-->col)-->1) & TB_COLUMN_NOBLANKBITS) return;
+	flags = (tab-->col)-->1;
+	oldv = (tab-->col)-->(row+COL_HSIZE);
+	if ((flags & TB_COLUMN_ALLOCATED) &&
+		(oldv == 0 or TABLE_NOVALUE)) {
+		kov = UNKNOWN_TY;
+		tc = ((tab-->col)-->1) & TB_COLUMN_NUMBER;
+		kov = TC_KOV(tc);
+		if (kov ~= UNKNOWN_TY) {
+			if (KindBaseArity(kov) > 0) i = KindAtomic(kov); else i = 0;
+			(tab-->col)-->(row+COL_HSIZE) = BlkValueCreate(kov, 0, i);
+		}
+	}
+	row--;
+	at = DT_FindBlankBits(tab, col) + (row/8);
+	(at->0) = (at->0) & (CheckTableEntryIsNonBlank_LU->(row%8));
+];
+-) instead of "Force Entry Non-Blank" in "Tables.i6t".
+
+Include (-
+[ TableSwapBlankBits tab row1 row2 col at1 at2 bit1 bit2;
+	print "TableSwapBlankBits tab ", tab, " row1 ", row1, " row2 ", row2, " col ", col, "^";
+	if (col >= 100) col=TableFindCol(tab, col);
+	if (col == 0) rtrue;
+	if (((tab-->col)-->1) & TB_COLUMN_NOBLANKBITS) return;
+	row1--;
+	at1 = DT_FindBlankBits(tab, col) + (row1/8);
+	row2--;
+	at2 = DT_FindBlankBits(tab, col) + (row2/8);
+	bit1 = ((at1->0) & (CheckTableEntryIsBlank_LU->(row1%8)));
+	bit2 = ((at2->0) & (CheckTableEntryIsBlank_LU->(row2%8)));
+	if (bit1) bit1 = true; 
+	if (bit2) bit2 = true;
+	if (bit1 == bit2) return;
+	if (bit1) {
+		(at1->0)
+			= (at1->0) & (CheckTableEntryIsNonBlank_LU->(row1%8));
+		(at2->0)
+			= (at2->0) | (CheckTableEntryIsBlank_LU->(row2%8));
+	} else {
+		(at1->0)
+			= (at1->0) | (CheckTableEntryIsBlank_LU->(row1%8));
+		(at2->0)
+			= (at2->0) & (CheckTableEntryIsNonBlank_LU->(row2%8));
+	}
+];
+-) instead of "Swapping Blank Bits" in "Tables.i6t".
+
+Include (-
+[ TableMoveBlankBitsDown tab row1 row2 col at atp1 bit rx bba;
+	print "TableMoveBlankBitsDown tab ", tab, " row1 ", row1, " row2 ", row2, " col ", col, "^";
+	if (col >= 100) col=TableFindCol(tab, col);
+	if (col == 0) rtrue;
+	if (((tab-->col)-->1) & TB_COLUMN_NOBLANKBITS) return;
+	row1--; row2--;
+	! Read blank bit for row1:
+	bba = DT_FindBlankBits(tab, col);
+	at = bba + (row1/8);
+	bit = ((at->0) & (CheckTableEntryIsBlank_LU->(row1%8)));
+	if (bit) bit = true;
+	! Loop through, setting each blank bit to the next:
+	for (rx=row1:rx<row2:rx++) {
+		atp1 = bba + ((rx+1)/8);
+		at = bba + (rx/8);
+		if ((atp1->0) & (CheckTableEntryIsBlank_LU->((rx+1)%8))) {
+			(at->0)
+				= (at->0) | (CheckTableEntryIsBlank_LU->(rx%8));
+		} else {
+			(at->0)
+				= (at->0) & (CheckTableEntryIsNonBlank_LU->(rx%8));
+		}
+	}
+	! Write bit to blank bit for row2:
+	at = bba + (row2/8);
+	if (bit) {
+		(at->0)
+			= (at->0) | (CheckTableEntryIsBlank_LU->(row2%8));
+	} else {
+		(at->0)
+			= (at->0) & (CheckTableEntryIsNonBlank_LU->(row2%8));
+	}
+];
+-) instead of "Moving Blank Bits Down" in "Tables.i6t".
+	
+Include (-
+[ PrintTableName T;
+	switch(T) {
+{-call:Tables::Support::compile_print_table_names}
+		default:
+			if (DT_IsFullyDynamic(T))
+				print "** Dynamically created table **";
+			else
+				print "** No such table **";
+	}
+];
+-) instead of "Print Table Name" in "Tables.i6t".
+
+include (-
+[ FlexFree block fromtxb ptxb memsize;
+	@getmemsize memsize;
+	print "FlexFree ", block, " memsize=", memsize, "^";
+	print "^";
+	if (block == 0) return;
+	if ((block->BLK_HEADER_FLAGS) & BLK_FLAG_RESIDENT) return;
+	if ((block->BLK_HEADER_N) & $80) return; ! not a flexible block at all
+	if ((block->BLK_HEADER_FLAGS) & BLK_FLAG_MULTIPLE) {
+		print "Block is multiple^";
+		if (block-->BLK_PREV ~= NULL) (block-->BLK_PREV)-->BLK_NEXT = NULL;
+		fromtxb = block;
+		for (:(block-->BLK_NEXT)~=NULL:block = block-->BLK_NEXT) {
+			print "current block is ", block, ", next=", block-->BLK_NEXT, ", previous=", block-->BLK_PREV, "(NULL=", NULL, ")^";
+		}
+		while (block ~= fromtxb) {
+			print "Freeing component block ", block, "^";
+			ptxb = block-->BLK_PREV; FlexFreeSingleBlockInternal(block); block = ptxb;
+		}
+	}
+	print "Freeing original block ", block, "^";
+	FlexFreeSingleBlockInternal(block);
+];
+
+[ FlexFreeSingleBlockInternal block free nx;
+	block-->BLK_HEADER_KOV = 0;
+	block-->BLK_HEADER_RCOUNT = 0;
+	block->BLK_HEADER_FLAGS = BLK_FLAG_MULTIPLE;
+	for (free = Flex_Heap:free ~= NULL:free = free-->BLK_NEXT) {
+		nx = free-->BLK_NEXT;
+		if (nx == NULL) {
+			free-->BLK_NEXT = block;
+			block-->BLK_PREV = free;
+			block-->BLK_NEXT = NULL;
+			FlexMergeInternal(block);
+			return;
+		}
+		if (UnsignedCompare(nx, block) == 1) {
+			free-->BLK_NEXT = block;
+			block-->BLK_PREV = free;
+			block-->BLK_NEXT = nx;
+			nx-->BLK_PREV = block;
+			FlexMergeInternal(block);
+			return;
+		}
+	}
+];
+-) instead of "Deallocation" in "Flex.i6t".
+
 Table of AI Action Options
 Option	Action Weight
 a stored action	a number
@@ -637,18 +831,22 @@ with 20 blank rows
 
 The AI action selection rules are a person based rulebook.
 
-To say display action options table:
-	say "[number of filled rows in table of ai action options] rows";
-		
 To cautiously blank out (contents - a table name):
-	while the number of filled rows in contents > 0:
+	stop and save event description;
+[	while the number of filled rows in contents > 0:
 		choose a random row in contents;
 		log "blanking out [option entry]: [action weight entry][line break]";
 		blank out the whole row;
+]	blank out the whole of contents;
+	transcribe and restart capturing;
+	
+To say sanity check action options:
+	say "Main actor's action: [sanity check main actor's action][line break]";
+	Repeat through table of AI action options:
+		say "AI action option: [sanity check option entry][line break]";
 		
 A last Standard AI rule for a person (called P) (this is the select an action and do it rule):
-	log "select an action and do it for [P] - [display action options table]";
-[	blank out the whole of the Table of AI Action Options;]
+	log "select an action and do it for [P] - [sanity check action options]";
 	cautiously blank out Table of AI Action Options;
 	log "blanked out table of AI Action Options";
 	follow the AI action selection rules for P;

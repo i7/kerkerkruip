@@ -299,6 +299,19 @@ Before taking a player action when the scheduled event is generated:
 	otherwise:
 		schedule the next move of the scheduled event;
 	
+Section - Sanity Checking Stored Actions
+
+To decide what number is the/-- address of (block - a stored action): (- {block} -);
+
+To decide what number is the/-- previous block to (block - a stored action): (- {block}-->BLK_PREV -);
+
+To decide what number is the/-- previous-next block of (block - a stored action): (- ({block}-->BLK_PREV)-->BLK_NEXT -);
+
+To say sanity check (plan - a stored action):
+	Let A be the address of plan;
+	let N be the previous-next block of plan;
+	say "Stored action [bracket][the plan][close bracket] at [address of plan] is a child of [previous block to plan], which [if A is N]matches when sanity-checked[otherwise]has a first child of [previous-next block of plan] instead[end if].";
+
 Section - Generating Actions
 
 For taking a player action when the scheduled event is not the normal keyboard input (this is the test step player action rule):
@@ -307,7 +320,6 @@ For taking a player action when the scheduled event is not the normal keyboard i
 	otherwise:
 		follow the choosing a player action rules;
 		now the scheduled event is generated;
-	log "done taking a player action";
 		
 The test step player action rule is listed first in the for taking a player action rulebook.
 		
@@ -394,14 +406,6 @@ A Standard AI rule for a person (called P) (this is the compel an action rule):
 		rule succeeds.
 	
 The compel an action rule is listed before the insane people attack themselves rule in the standard AI rulebook.
-	
-[A last AI action selection rule for an at-Act person (called P) when the compelled action is not the action of waiting:
-	unless P is the actor part of the compelled action, make no decision;
-	blank out the whole of the Table of AI Action Options;
-	choose a blank row in the Table of AI Action Options;
-	now the Option entry is the compelled action;
-	now the Action Weight entry is 1000;
-	now the compelled action is the action of waiting.]
 
 Last choosing a player reaction:
 	generate the action of waiting.

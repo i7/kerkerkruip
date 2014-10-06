@@ -244,7 +244,7 @@ Smoke rule (this is the smoke may drift in from another room rule):
 
 [Now we want to set up the dungeon properly, that is, we want to establish something like an equilibrium situation.]
 
-Last when play begins:
+Last when play begins (this is the set up smoke rule):
 	follow the smoke rules;
 	follow the smoke rules;
 	follow the smoke rules;

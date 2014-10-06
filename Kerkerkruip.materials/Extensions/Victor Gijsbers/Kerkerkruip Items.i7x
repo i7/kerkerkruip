@@ -2972,7 +2972,7 @@ Section - Miscellanea Magica (minor)
 Miscellanea Magica is a minor magical guide. Miscellanea Magica is proper-named.
 Miscellanea Magica is magical.
 
-When play begins:
+When play begins (this is the write Miscellanea Magica rule):
 	let names be the list of not obfuscated scroll names;
 	sort names in random order;
 	add (entry 1 of names) to guide list of Miscellanea Magica;
