@@ -308,11 +308,8 @@ To decide what number is the/-- previous block to (A - a number): (- {-by-refere
 To decide what number is the/-- next block after (A - a number): (- {-by-reference:A}-->BLK_NEXT -);
 
 To say sanity check (plan - a stored action): [(- StoredActionSanityCheck({plan}); -)]
-	say "*getting address of the action*";
 	Let A be the address of plan;
-	say "*getting previous address*";
 	let P be the previous block to A;
-	say "*getting next address after previous*";
 	let N be the next block after P;
 	say "Stored action [bracket][the plan][close bracket] at [A] is a child of [P], which [if A is N]matches when sanity-checked[otherwise]has a first child of [N] instead[end if].";
 	

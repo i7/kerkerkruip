@@ -788,7 +788,7 @@ Constant BLKVALUE_TRACE = 1; ! Uncomment this for debugging purposes
 include (-
 [ FlexFree block fromtxb ptxb memsize;
 	@getmemsize memsize;
-	print "FlexFree ", (BlkValueDebug) block, " memsize=", memsize, "^";
+	print "FlexFree ", block, " flags=", (BlkPrintHexadecimal) block->BLK_HEADER_FLAGS, " header_n=", (BlkPrintHexadecimal) block->BLK_HEADER_N, " memsize=", memsize, "^";
 	print "^";
 	if (block == 0) return;
 	if ((block->BLK_HEADER_FLAGS) & BLK_FLAG_RESIDENT) return;
