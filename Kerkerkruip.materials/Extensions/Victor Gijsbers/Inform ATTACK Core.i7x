@@ -776,16 +776,32 @@ Include (-
 -) instead of "Print Table Name" in "Tables.i6t".
 
 include (-
+
+Constant BLK_DATA_MULTI_OFFSET = BLK_DATA_OFFSET + 2*WORDSIZE;
+Constant BLK_NEXT 3;
+Constant BLK_PREV 4;
+
+Constant BLKVALUE_TRACE = 1; ! Uncomment this for debugging purposes
+
+-) instead of "Multiple Blocks" in "Flex.i6t";
+
+include (-
 [ FlexFree block fromtxb ptxb memsize;
 	@getmemsize memsize;
-	print "FlexFree ", block, " memsize=", memsize, "^";
+	print "FlexFree ", (BlkValueDebug) block, " memsize=", memsize, "^";
 	print "^";
 	if (block == 0) return;
 	if ((block->BLK_HEADER_FLAGS) & BLK_FLAG_RESIDENT) return;
 	if ((block->BLK_HEADER_N) & $80) return; ! not a flexible block at all
 	if ((block->BLK_HEADER_FLAGS) & BLK_FLAG_MULTIPLE) {
 		print "Block is multiple^";
-		if (block-->BLK_PREV ~= NULL) (block-->BLK_PREV)-->BLK_NEXT = NULL;
+		if (block-->BLK_PREV ~= NULL) {
+			if ((block-->BLK_PREV)-->BLK_NEXT ~= block) {
+				print "Block ", block, " with previous block ", block-->BLK_PREV, " does not match previous block's next block: ", (block-->BLK_PREV)-->BLK_NEXT, "^";
+				FlexError("contains bad links");
+			}
+			(block-->BLK_PREV)-->BLK_NEXT = NULL;
+		}
 		fromtxb = block;
 		for (:(block-->BLK_NEXT)~=NULL:block = block-->BLK_NEXT) {
 			print "current block is ", block, ", next=", block-->BLK_NEXT, ", previous=", block-->BLK_PREV, "(NULL=", NULL, ")^";
@@ -824,6 +840,81 @@ include (-
 ];
 -) instead of "Deallocation" in "Flex.i6t".
 
+include (-
+[ STORED_ACTION_TY_Support task arg1 arg2 arg3;
+	print "Stored action support task=", task, " arg1=", arg1, " arg2=", arg2, "^";
+	switch(task) {
+		CREATE_KOVS:      return STORED_ACTION_TY_Create(arg2);
+		DESTROY_KOVS:     STORED_ACTION_TY_Destroy(arg1);
+		MAKEMUTABLE_KOVS: return 1;
+		COPYQUICK_KOVS:   rtrue;
+		COPYSB_KOVS:	  BlkValueCopySB1(arg1, arg2);
+		KINDDATA_KOVS:    return 0;
+		EXTENT_KOVS:      return 6;
+		COPY_KOVS:        STORED_ACTION_TY_Copy(arg1, arg2);
+		COMPARE_KOVS:     return STORED_ACTION_TY_Compare(arg1, arg2);
+		HASH_KOVS:        return STORED_ACTION_TY_Hash(arg1);
+		DEBUG_KOVS:       print " = ", (STORED_ACTION_TY_Say) arg1;
+	}
+	! We choose not to respond to: CAST_KOVS, COPYKIND_KOVS, READ_FILE_KOVS, WRITE_FILE_KOVS
+	rfalse;
+];
+-) instead of "KOV Support" in "StoredAction.i6t".
+
+include (-
+[ TEXT_TY_Support task arg1 arg2 arg3;
+	print "Text support task=", task, " arg1=", arg1, " arg2=", arg2, " arg3=", arg3, "^";
+	switch(task) {
+		CREATE_KOVS:      return TEXT_TY_Create(arg2);
+		CAST_KOVS:        TEXT_TY_Cast(arg1, arg2, arg3);
+		MAKEMUTABLE_KOVS: return TEXT_TY_Mutable(arg1);
+		COPYQUICK_KOVS:   rtrue;
+		COPYSB_KOVS:	  TEXT_TY_CopySB(arg1, arg2);
+		KINDDATA_KOVS:    return 0;
+		EXTENT_KOVS:      return TEXT_TY_Extent(arg1);
+		COMPARE_KOVS:     return TEXT_TY_Compare(arg1, arg2);
+		READ_FILE_KOVS:   if (arg3 == -1) rtrue;
+			              return TEXT_TY_ReadFile(arg1, arg2, arg3);
+		WRITE_FILE_KOVS:  return TEXT_TY_WriteFile(arg1);
+		HASH_KOVS:        return TEXT_TY_Hash(arg1);
+		DEBUG_KOVS:       TEXT_TY_Debug(arg1);
+	}
+	! We choose not to respond to: DESTROY_KOVS, COPYKIND_KOVS, COPY_KOVS
+	rfalse;
+];
+
+-) instead of "KOV Support" in "Text.i6t"
+
+include (-
+[ TEXT_TY_Transmute txt;
+	TEXT_TY_Temporarily_Transmute(txt);
+];
+
+[ TEXT_TY_Temporarily_Transmute txt  x;
+	if ((txt) && (txt-->0 & BLK_BVBITMAP_LONGBLOCKMASK == 0)) {
+		x = txt-->1; ! The old value was a packed string
+		
+		txt-->0 = UNPACKED_TEXT_STORAGE;
+		txt-->1 = FlexAllocate(32, TEXT_TY, TEXT_TY_Storage_Flags);
+		if (x ~= EMPTY_TEXT_PACKED) TEXT_TY_CastPrimitive(txt, false, x);
+		
+		return x;
+	}
+	return 0;
+];
+
+[ TEXT_TY_Untransmute txt pk cp x;
+	if ((pk) && (txt-->0 == UNPACKED_TEXT_STORAGE)) {
+		print "Untransmuting unpacked txt=", txt, " pk=", pk, " cp=", cp, "^";
+		x = txt-->1; ! The old value was an unpacked string
+		FlexFree(x);
+		txt-->0 = cp;
+		txt-->1 = pk; ! The value earlier returned by TEXT_TY_Temporarily_Transmute
+	}
+	return txt;
+];
+-) instead of "Transmutation" in "Text.i6t"
+
 Table of AI Action Options
 Option	Action Weight
 a stored action	a number
@@ -846,7 +937,7 @@ To say sanity check action options:
 		say "AI action option: [sanity check option entry][line break]";
 		
 A last Standard AI rule for a person (called P) (this is the select an action and do it rule):
-	log "select an action and do it for [P] - [sanity check action options]";
+	log "select an action and do it for [P]"; [ - [sanity check action options]";]
 	cautiously blank out Table of AI Action Options;
 	log "blanked out table of AI Action Options";
 	follow the AI action selection rules for P;
