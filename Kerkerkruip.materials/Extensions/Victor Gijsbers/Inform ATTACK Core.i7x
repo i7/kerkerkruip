@@ -937,7 +937,7 @@ To say sanity check action options:
 		say "AI action option: [sanity check option entry][line break]";
 		
 A last Standard AI rule for a person (called P) (this is the select an action and do it rule):
-	log "select an action and do it for [P]"; [ - [sanity check action options]";]
+	log "select an action and do it for [P] - [sanity check action options]";
 	cautiously blank out Table of AI Action Options;
 	log "blanked out table of AI Action Options";
 	follow the AI action selection rules for P;

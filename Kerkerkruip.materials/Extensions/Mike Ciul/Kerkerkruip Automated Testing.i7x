@@ -301,20 +301,20 @@ Before taking a player action when the scheduled event is generated:
 	
 Section - Sanity Checking Stored Actions
 
-To decide what number is the/-- address of (A - a stored action): (- {A} -);
+To decide what number is the/-- address of (A - a stored action): (- {-by-reference:A} -);
 
-To decide what number is the/-- previous block to (A - a number): (- {A}-->BLK_PREV -);
+To decide what number is the/-- previous block to (A - a number): (- {-by-reference:A}-->BLK_PREV -);
 
-To decide what number is the/-- next block after (A - a number): (- {A}-->BLK_NEXT -);
+To decide what number is the/-- next block after (A - a number): (- {-by-reference:A}-->BLK_NEXT -);
 
-To say sanity check (plan - a stored action): (- StoredActionSanityCheck({plan}); -)
-	[say "*getting address of the action*";
+To say sanity check (plan - a stored action): [(- StoredActionSanityCheck({plan}); -)]
+	say "*getting address of the action*";
 	Let A be the address of plan;
 	say "*getting previous address*";
 	let P be the previous block to A;
 	say "*getting next address after previous*";
 	let N be the next block after P;
-	say "Stored action [bracket][the plan][close bracket] at [A] is a child of [P], which [if A is N]matches when sanity-checked[otherwise]has a first child of [N] instead[end if].";]
+	say "Stored action [bracket][the plan][close bracket] at [A] is a child of [P], which [if A is N]matches when sanity-checked[otherwise]has a first child of [N] instead[end if].";
 	
 Include (-
 [ StoredActionSanityCheck real_addr prev_addr prevnext_addr;
