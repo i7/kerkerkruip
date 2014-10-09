@@ -109,7 +109,10 @@ To display test results:
 	say "To view a full transcript of all tests, see the file 'testtranscript.glkdata' in the project directory.";
 	Blank out the whole of Table of Test Results;
 	write file of test results from Table of Test Results; 
-	pause the game;
+	if the file of noninteractive tests exists:
+		stop the game abruptly;
+	otherwise:
+		pause the game;
 	
 Chapter - test steps
 
@@ -422,10 +425,19 @@ To decide whether testing (T - a test set):
 
 [The random seed rule is listed before the reaper carries a random scythe rule in the when play begins rules.]
 
-Before showing the title screen:
+The file of noninteractive tests is called "noninteractivetests".
+
+The run the unit tests rule is listed before the load achievements rule in the before showing the title screen rules.
+
+Before showing the title screen (this is the run the unit tests rule):
 	now allowing screen effects is true;
-	if file of test set queue exists, read file of test set queue into Table of Test Set Queue;
-	if file of test results exists, read file of test results into Table of Test Results;
+	if the file of test set queue exists:
+		read file of test set queue into Table of Test Set Queue;
+	if the file of test results exists:
+		read file of test results into Table of Test Results;
+	if the number of filled rows in Table of Test Set Queue is 0 and the number of filled rows in Table of Test Results is 0:
+		if the file of noninteractive tests exists:
+			try all-test queuing;
 	if the number of filled rows in Table of Test Set Queue is 0:
 		display test results;
 		now done testing is true;
@@ -491,7 +503,8 @@ Carry out all-test queuing:
 	start test transcript with "all test sets".
 		
 To start test transcript with (T - a text):
-	pause the game;
+	unless the file of noninteractive tests exists:
+		pause the game;
 	write "Test transcript for Kerkerkruip: [T].[line break]" to file of test transcript;
 	start the next test;
 	

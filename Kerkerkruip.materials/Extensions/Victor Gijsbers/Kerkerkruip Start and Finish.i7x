@@ -1154,7 +1154,7 @@ Include (-
 ];
 
 [ SoundCease chan;
-	if (glk_gestalt(gestalt_Sound,0)) {
+	if ( glk_gestalt(gestalt_Sound,0) && chan.(+ ref-number +) ) {
 		glk_schannel_stop(chan.(+ ref-number +));
 	}
 ];
