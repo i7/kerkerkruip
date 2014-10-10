@@ -2,35 +2,59 @@
 
 // This script will run Kerkerkruip's unit tests
 
-var spawn = require('child_process').spawn;
+console.log( 'Running the Kerkerkruip test suite:' );
 
-var vm = spawn( '/usr/local/share/inform7/Interpreters/dumb-git', [ 'Kerkerkruip.gblorb' ] );
+var fs = require( 'fs' );
+var spawn = require( 'child_process' ).spawn;
 
-var commands = [ 'n', '', 'n', '' ];
+// Create the noninteractivetests file, which will, not entirely unexpectedly, run the tests non-interactively
+var fd = fs.openSync( 'noninteractivetests', 'w' );
+fs.closeSync( fd );
+
+// Use unbuffer to force line buffering (otherwise we'd get all the output in one go)
+var vm = spawn( 'unbuffer', [ '/usr/local/share/inform7/Interpreters/dumb-git', 'Kerkerkruip.gblorb' ] );
+
+var completed = 0, testresults = 0;
 
 vm.stdout.on( 'data', function ( data )
 {
 	data = data.toString();
-	console.log( 'stdout: ' + data );
-	if ( data.indexOf( 'Enable the screen reader mode' ) >= 0 )
+	
+	// We strip out most of the test output, but still print some progress markers
+	if ( data.indexOf( 'Now testing' ) >= 0 )
 	{
-		//sendCommand( 'y' );
-		vm.stdin.write( 'y\n' );
+		process.stdout.write( '.' );
 	}
-	else if ( commands.length )
+	
+	if ( data.indexOf( 'Test results' ) >= 0 )
 	{
-		//sendCommand( commands.shift() );
-		vm.stdin.write( commands.shift() + '\n' );
+		completed = 1;
+		process.stdout.write( '\n\n' );
 	}
-});
-
-function sendCommand( command )
-{
-	setTimeout( function() { console.log( command ); vm.stdin.write( command + '\n' ); }, 100 );
-}
-
-vm.on('close', function (code)
-{
-	console.log('child process exited with code ' + code);
-	process.exit(code);
+	
+	// We're finished!
+	if ( data.indexOf( 'To view a full transcript of all tests' ) >= 0 )
+	{
+		fs.unlinkSync( 'noninteractivetests' );
+		process.exit( testresults );
+	}
+	
+	// Extract the number of failed tests, but don't count the combined total at the end
+	var failures = /^(?!Total).+(\d+) tests, (\d+) failure/m.exec( data );
+	if ( failures && +( failures[2] ) )
+	{
+		testresults = 1;
+	}
+	
+	data = data.replace( /^(?!Total).+0 failures$/gm, '' ).trim();
+	
+	if ( completed && data )
+	{
+		console.log( data );
+	}
+	
+	if ( testresults && data.indexOf( 'Total:' ) == 0 )
+	{
+		process.stdout.write( '\n' );
+	}
 });

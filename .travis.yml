@@ -1,5 +1,7 @@
-language: perl
+language: node_js
 install: ./tools/travis_install
-script: ./tools/travis_build
+script:
+    - ./tools/travis_build
+    - ./tools/travis_tests
 notifications:
     email: false

@@ -4,8 +4,10 @@ set -e -o pipefail
 
 # This script will attempt to build Kerkerkruip with Travis CI
 
-# Inform is a pain and prints the progress markers to stderr, so redirect it to stdout
-i7 -s blorb=1,zcode=g -c Kerkerkruip.inform 2>&1 | grep -Ev "ve also read|\+\+ |::#+"
+#i7 -s blorb=1,zcode=g -c Kerkerkruip.inform #2>&1 | grep -Ev "ve also read|\+\+ |::#+"
+/usr/local/libexec/ni --internal /usr/local/share/inform7/data --noprogress --format=ulx --project Kerkerkruip.inform | grep -Ev "ve also read"
+/usr/local/libexec/inform6 -E2wSDG Kerkerkruip.inform/Build/auto.inf -o Kerkerkruip.inform/Build/output.ulx
+/usr/local/libexec/cBlorb -unix Kerkerkruip.inform/Release.blurb Kerkerkruip.inform/Build/output.gblorb
 
 cp Kerkerkruip.inform/Build/output.gblorb Kerkerkruip.gblorb
 cp Kerkerkruip.materials/Kerkerkruip.ini Kerkerkruip.ini

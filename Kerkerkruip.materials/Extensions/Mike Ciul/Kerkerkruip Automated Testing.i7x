@@ -435,8 +435,10 @@ Before showing the title screen (this is the run the unit tests rule):
 		read file of test set queue into Table of Test Set Queue;
 	if the file of test results exists:
 		read file of test results into Table of Test Results;
-	if the number of filled rows in Table of Test Set Queue is 0 and the number of filled rows in Table of Test Results is 0:
-		if the file of noninteractive tests exists:
+	if the file of noninteractive tests exists:
+		if screen reader mode is unset:
+			enable screen reader mode;
+		if the number of filled rows in Table of Test Set Queue is 0 and the number of filled rows in Table of Test Results is 0:
 			try all-test queuing;
 	if the number of filled rows in Table of Test Set Queue is 0:
 		display test results;
