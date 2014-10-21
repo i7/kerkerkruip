@@ -1,4 +1,4 @@
-Version 5/140908 of Dynamic Tables by Jesse McGrew begins here.
+Version 5/141021 of Dynamic Tables by Jesse McGrew begins here.
 
 "Provides a way to change the capacity of a table during the game."
 
@@ -469,7 +469,7 @@ Include (-
 	flags = (tab-->col)-->1;
 	oldv = (tab-->col)-->(row+COL_HSIZE);
 	if ((flags & TB_COLUMN_ALLOCATED) && (oldv ~= 0 or TABLE_NOVALUE))
-		FlexFree(oldv);
+		BlkValueFree(oldv);
 	(tab-->col)-->(row+COL_HSIZE) = TABLE_NOVALUE;
 	if (flags & TB_COLUMN_NOBLANKBITS) return;
 	row--;
