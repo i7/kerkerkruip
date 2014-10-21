@@ -630,9 +630,15 @@ A last AI target selection rule (this is the return the target weight rule):
 
 Chapter - Selecting an action
 
+Table of AI Action Options
+Option	Action Weight
+a stored action	a number
+with 20 blank rows
+
+The AI action selection rules are a person based rulebook.
+
 A last Standard AI rule for a person (called P) (this is the select an action and do it rule):
-	blank out the whole of Table of AI Action Options;
-	log "blanked out table of AI Action Options";
+	blank out the whole of the Table of AI Action Options;
 	follow the AI action selection rules for P;
 	sort the Table of AI Action Options in random order;
 	sort the Table of AI Action Options in reverse Action Weight order;
