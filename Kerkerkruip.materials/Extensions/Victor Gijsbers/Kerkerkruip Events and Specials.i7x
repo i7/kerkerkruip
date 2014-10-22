@@ -76,6 +76,69 @@ The map-label of Elemental Plane of Smoke is Figure of map_label_Smoke.
 
 
 
+Chapter - Return portal
+
+The portal to Montenoir is a thing. The portal to Montenoir is fixed in place.
+Does the player mean entering the portal to Montenoir: it is likely.
+
+To summon the return portal:
+	if the portal to Montenoir is in the Entrance Hall:
+		say "The scroll fizzles; this portal must already exist.";
+	otherwise:
+		if the player is in the Entrance Hall:
+			say "As you speak the words on the scroll, a big portal starts forming right in the middle of the Entrance Hall. Somehow, you feel highly exposed.";
+		otherwise:
+			say "As you speak the words on the scroll, you experience a brief vision of a portal forming in the Entrance Hall. Somehow, you feel highly exposed.";
+		move (portal to Montenoir) to the Entrance Hall;
+		repeat with guy running through on-stage people:
+			now guy is follower;
+			now follower percentile chance of guy is 100;
+			now guy is unnaturally aware;
+			now guy is not asleep.
+
+
+The Montenoir counter is a number that varies. The Montenoir counter is 0.
+
+Every turn when the portal to Montenoir and the player share a world (this is the make portal more substantial rule):
+	unless the Montenoir counter is 4:
+		if a random chance of 1 in 5 succeeds:
+			increase Montenoir counter by 1;
+			if location of portal to Montenoir is the location:
+				if Montenoir counter is:
+					-- 1: say "The portal to Montenoir is slowly becoming more substantial.";
+					-- 2: say "Vague forms become visible in the portal.";
+					-- 3: say "The portal becomes clearer every second. You can see a room through it, though you can't make out any details yet.";
+					-- 4: say "As the portal loses the final traces of its translucency, you recognise the room beyond as the most expensive suite in Maurice's whorehouse. But why would this scroll ... ? Well, never mind. You can step through the portal to escape, and right now that is all that matters.".
+
+The description of the portal to Montenoir is "The portal to Montenoir is [if Montenoir counter is 0]assembling itself very slowly[otherwise if Montenoir counter is 1]becoming slightly more visible[otherwise if Montenoir counter is 2]starting to look quite substantial[otherwise if Montenoir counter is 3]nearing completion[otherwise]ready for you to step through[end if]."
+
+Montenoir-escape is a truth state that varies. Montenoir-escape is false.
+
+Instead of entering the portal to Montenoir when the player can move:
+	unless Montenoir counter is 4:
+		take no time;
+		say "You'll have to wait until the portal is fully formed.";
+	otherwise:
+		now Montenoir-escape is true;
+		say "You smile as you step through the portal and enter the rooms in which you have spent so many hours of carnal delight.".
+
+Victory message rule (this is the Montenoir escape message rule):
+	if Montenoir-escape is true:	
+		award achievement Stealing away;
+		end the story saying "You're a lover, not a fighter.";
+		rule succeeds.	
+
+[Instead of this, we'll make everyone a follower.]
+[Every turn when the portal to Montenoir is in the Entrance Hall (this is the portal to Montenoir makes everyone go after you rule):
+	repeat with guy running through people:
+		if guy and the player share a world;
+			if faction of guy opposes faction of the player:
+				if location of guy is not location of the player:
+					if guy can move:
+						let the way be the best route from the location of guy to the location of the player;
+						if way is a direction:
+							try the guy going the way.]
+
 
 
 Chapter - Arena of the Fallen

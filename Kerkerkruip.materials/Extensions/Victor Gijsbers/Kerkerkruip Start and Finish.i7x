@@ -941,6 +941,8 @@ To decide whether the player is victorious:
 		decide yes;
 	if Drakul-victory is true:
 		decide yes;
+	if Montenoir-escape is true:
+		decide yes;
 	decide no.
 
 Every turn (this is the victory rule):

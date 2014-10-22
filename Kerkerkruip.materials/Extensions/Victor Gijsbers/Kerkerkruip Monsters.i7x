@@ -6427,6 +6427,7 @@ Report Drakul hitting a dead pc:
 
 Victory message rule (this is the Drakul victory message rule):
 	if Drakul-victory is true:
+		award achievement Welcome to the masquerade;
 		end the story saying "You live on as a vampire, eternally enslaved to your master Drakul. Together, you quickly kill Malygris -- which means that you are technically victorious!";
 		rule succeeds.
 

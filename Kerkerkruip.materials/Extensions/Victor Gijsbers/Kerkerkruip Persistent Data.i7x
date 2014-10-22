@@ -184,6 +184,8 @@ Give them blood
 Royal fruit
 Sixth heaven
 Blood never lies
+Stealing away
+Welcome to the masquerade
 
 Table of Held Achievements
 held achievement	held difficulty
@@ -306,5 +308,12 @@ Section - Blood Never Lies
 
 [Handled by Drakul code in Kerkerkruip Events and Specials]
 
+Section - Stealing away
+
+[handled by Return portal in Kerkerkruip Specials]
+
+Section - Welcome to the masquerade
+
+[handled by Drakul's code in Kerkerkruip Monsters]
 
 Kerkerkruip Persistent Data ends here.

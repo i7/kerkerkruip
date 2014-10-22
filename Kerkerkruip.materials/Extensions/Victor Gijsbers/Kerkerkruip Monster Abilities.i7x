@@ -300,8 +300,9 @@ Every turn (this is the have followers follow rule):
 				now test subject is guy;
 				follow the followers rules;
 				unless rule failed:
-					let the way be the best route from the location of guy to the location of the player;
-					if way is a direction, try guy going the way.
+					if guy can move and guy is not asleep:
+						let the way be the best route from the location of guy to the location of the player;
+						if way is a direction, try guy going the way.
 
 A followers rule (this is the follower percentile chance rule):
 	let n be the follower percentile chance of the test subject;

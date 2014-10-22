@@ -2643,6 +2643,21 @@ Carry out reading a scroll of enchantment:
 		increase weapon damage bonus of item by 1;
 		say "A flash of golden light comes from [the item]! It seems deadlier and more accurate."
 
+Section - Scroll of Return (Malygris)
+
+Table of Scroll Names (continued)
+scroll name
+return
+
+A scroll of return is a kind of scroll.
+A scroll of return is return.
+The description of a scroll of return is "Reading this scroll will open a portal back to Montenoir. It is going to be a slow and noisy process, though."
+The plural of scroll of return is scrolls of return.
+
+Carry out reading scroll of return:
+	summon the return portal. [See Kerkerkruip Specials]
+
+Malygris carries a scroll of return.
 
 Chapter - Scroll packs
 
