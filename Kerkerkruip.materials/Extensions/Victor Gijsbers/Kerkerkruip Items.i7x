@@ -2643,21 +2643,27 @@ Carry out reading a scroll of enchantment:
 		increase weapon damage bonus of item by 1;
 		say "A flash of golden light comes from [the item]! It seems deadlier and more accurate."
 
-Section - Scroll of Return (Malygris)
+Section - Scroll of Afternoon Delights (Malygris)
 
 Table of Scroll Names (continued)
 scroll name
-return
+delights
 
-A scroll of return is a kind of scroll.
-A scroll of return is return.
-The description of a scroll of return is "Reading this scroll will open a portal back to Montenoir. It is going to be a slow and noisy process, though."
-The plural of scroll of return is scrolls of return.
+A scroll of afternoon delights is a kind of scroll.
+A scroll of afternoon delights is delights.
+The description of a scroll of afternoon delights is "You glance at the scroll, and judge that it will probably open a portal. That is going to be a slow and noisy process, though."
+The plural of scroll of afternoon delights is scrolls of afternoon delights.
 
-Carry out reading scroll of return:
+Carry out reading scroll of afternoon delights:
 	summon the return portal. [See Kerkerkruip Specials]
 
-Malygris carries a scroll of return.
+Malygris-scroll-chest is a container.
+Three scrolls of afternoon delights and one scroll of enchantment and one scroll of summoning are in Malygris-scroll-chest.
+
+A dungeon interest rule (this is the sometimes give Malygris afternoon delights rule):
+	let item be a random thing in Malygris-scroll-chest;
+	move item to Malygris.
+		
 
 Chapter - Scroll packs
 
