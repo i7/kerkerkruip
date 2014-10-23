@@ -1838,6 +1838,40 @@ An exploding rule (this is the Morphean grenade explodes rule):
 					say "The grenade doesn't seem to do anything -- and for a moment, you remember that you are already dreaming.";
 		remove noun from play.
 
+Section - Zombie skull grenade
+
+The zombie skull grenade is a grenade. The description of the zombie skull grenade is "This disgusting, rotting head used to belong to an animated corpse. Disconcertingly, its eyes still follow your every move. Who knows what black magic will be activated when you throw it at someone?"
+The zombie skull grenade is flesh.
+
+An exploding rule (this is the zombie skull grenade explosion rule):
+	if the exploding-grenade is the zombie skull grenade:
+		if a random chance of 1 in 2 succeeds: [50%]
+			if exploding-location is the location:
+				say "The head bounces around a couple of times and then disintegrates. The magic must have failed.";
+			otherwise:
+				say "You only hear the wet sound of the rotting head smashing to pieces.";
+		otherwise if a random chance of 4 in 5 succeeds: [40%]
+			now unholy wave location is the exploding-location;
+			if exploding-location is the location:
+				follow the unholy wave rules;
+			otherwise:
+				say "You sense a wave of necromantic magic being released!";
+				follow the unholy wave rules;
+		otherwise: [10%]
+			if at least one alive undead person is off-stage: [can be a super-undead!]
+				let guy be a random alive off-stage undead person;
+				move guy to exploding-location;
+				if exploding-location is the location:
+					say "The head bounces around a couple of times and then explodes in a foul-smelling black cloud. When the cloud dissipates, you see [the guy].";
+				otherwise:
+					say "It seemd to explose, but you're not sure what happened.";
+			otherwise:
+				if exploding-location is the location:
+					say "The head bounces around a couple of times and then disintegrates. The magic must have failed.";
+				otherwise:
+					say "You only hear the wet sound of the rotting head smashing to pieces.";
+
+
 
 Section - Grenade packs
 
@@ -2499,25 +2533,31 @@ A faculty bonus rule (this is the faculty bonus of being skilled rule):
 Section - Scroll of Death
 
 The unholy wave rules are a rulebook.
+The unholy wave location is a room that varies.
 
 An unholy wave rule (this is the standard unholy wave rule):
-	say "A wave of unholy energy is released, dealing [run paragraph on]";
+	if the unholy wave location is the location:
+		say "A wave of unholy energy is released, dealing [run paragraph on]";
 	let n be the number of alive not undead persons in the location;
 	let original n be n;
 	if n is greater than 0:
 		repeat with guy running through all alive not undead persons in the location:
 			let m be a random number between 3 and 6;
 			deal m points of necromantic damage;
-			say "[if n is 1 and original n is not 1]and [end if][run paragraph on]";
-			have no-source inflict damage on guy;
-			say " to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive] (which breaks [regarding the guy][possessive] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
+			if the unholy wave location is the location:
+				say "[if n is 1 and original n is not 1]and [end if][run paragraph on]";
+				have no-source inflict damage on guy;
+				say " to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive] (which breaks [regarding the guy][possessive] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
+			otherwise:
+				have no-source inflict damage on guy, silently;
 			unless total damage is 0:
 				now concentration of the guy is 0;
 			decrease n by 1;
-			if n is 0:
+			if n is 0 and the unholy wave location is the location:
 				say ""; [For an extra newline. Don't ask.]
 	otherwise:
-		say "no damage to anyone.";
+		if the unholy wave location is the location:
+			say "no damage to anyone.";
 	if health of the player is less than 1:
 		end the story saying "Your life force has been negated".
 
@@ -2531,6 +2571,7 @@ The description of a scroll of death is "Reading this scroll will deal damage to
 The plural of scroll of death is scrolls of death.
 
 Carry out reading a scroll of death:
+	now the unholy wave location is the location;
 	follow the unholy wave rules;
 
 

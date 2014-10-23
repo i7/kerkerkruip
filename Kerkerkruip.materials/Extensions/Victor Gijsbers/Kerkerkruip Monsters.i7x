@@ -5537,7 +5537,11 @@ When play begins:
 	now X is plural-named;
 	now material of X is flesh.
 
-A rotting limb is a kind of thing.
+A rotting limb is a kind of weapon.
+The damage die of a rotting limb is usually 7.
+The dodge bonus of a rotting limb is usually 1.
+The weapon attack bonus of a rotting limb is usually -1.
+
 The material of a rotting limb is usually flesh.
 
 The rotting left leg is part of the rotting corpse. It is a rotting limb. The description of the rotting left leg is "It [if the rotting left leg is part of the rotting corpse]belongs[otherwise]used to belong[end if] to the rotting corpse.".
@@ -5550,9 +5554,9 @@ Instead of eating a rotting limb:
 	take no time;
 	say "The smell makes you gag.".
 
-Instead of taking a rotting limb:
-	take no time;
-	say "You will not touch that. You will touch a lot of things, but not that.".
+Report taking a rotting limb:
+	say "You pick up [the noun]. Who knows, it might even serve as a weapon.";
+	rule succeeds.
 
 To decide what number is the limbs of the rotting corpse:
 	let m be 0;
@@ -5587,9 +5591,9 @@ Instead of smelling when the rotting corpse is in the location:
 Every turn when a rotting limb is enclosed by the location (this is the rotting limbs decay rule):
 	repeat with item running through rotting limbs enclosed by the location:
 		unless item is part of the rotting corpse:
-			if a random chance of 1 in 7 succeeds:
+			if a random chance of 1 in 20 succeeds:
 				if item is visible:
-					say "[The item] decays completely.";
+					say "[if the player carries the item][bold type][end if][The item] decays completely[roman type].";
 					remove item from play.
 
 An aftereffects rule (this is the rotting corpse loses limbs rule):
@@ -5605,7 +5609,10 @@ An aftereffects rule (this is the rotting corpse loses limbs rule):
 				if arms of the rotting corpse is 0:
 					now rotting corpse is not thrower;
 			if item is rotting left leg or item is rotting right leg:
-				decrease follower percentile chance of rotting corpse by 40.
+				decrease follower percentile chance of rotting corpse by 40;
+			if item is rotting head:
+				remove rotting head from play;
+				move zombie skull grenade to the location of the rotting corpse.
 
 An AI action selection rule for the rotting corpse (this is the rotting corpse without a head does not concentrate rule):
 	let P be the rotting corpse;
