@@ -12,11 +12,16 @@ set -e -o pipefail
 cp Kerkerkruip.inform/Build/output.gblorb Kerkerkruip.gblorb
 cp Kerkerkruip.materials/Kerkerkruip.ini Kerkerkruip.ini
 
-if [[ $TRAVIS_BRANCH == "master" ]]; then
+upload_zip()
+{
 	zip kerkerkruip-git Kerkerkruip.gblorb Kerkerkruip.ini
 	sshpass -e sftp -oBatchMode=no -oStrictHostKeyChecking=no -b - ${KUSER}@${KSERVER} <<- !
 		cd downloads.kerkerkruip.org
 		put kerkerkruip-git.zip
 		bye
 	!
+}
+
+if [[ $TRAVIS_BRANCH == "master" ]]; then
+	upload_zip || true
 fi

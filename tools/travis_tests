@@ -14,7 +14,7 @@ fs.closeSync( fd );
 // Use unbuffer to force line buffering (otherwise we'd get all the output in one go)
 var vm = spawn( 'unbuffer', [ '/usr/local/share/inform7/Interpreters/dumb-git', 'Kerkerkruip.gblorb' ] );
 
-var completed = 0, testresults = 0;
+var completed = 0, testresults = 1;
 
 vm.stdout.on( 'data', function ( data )
 {
@@ -39,11 +39,10 @@ vm.stdout.on( 'data', function ( data )
 		process.exit( testresults );
 	}
 	
-	// Extract the number of failed tests, but don't count the combined total at the end
-	var failures = /^(?!Total).+(\d+) tests, (\d+) failure/m.exec( data );
-	if ( failures && +( failures[2] ) )
+	// Unless there are 0 total failures the script will exit with 1
+	if ( /Total: (\d+) tests, 0 failures/.test( data ) )
 	{
-		testresults = 1;
+		testresults = 0;
 	}
 	
 	data = data.replace( /^(?!Total).+0 failures$/gm, '' ).trim();
@@ -53,7 +52,7 @@ vm.stdout.on( 'data', function ( data )
 		console.log( data );
 	}
 	
-	if ( testresults && data.indexOf( 'Total:' ) == 0 )
+	if ( data.indexOf( 'Total:' ) == 0 )
 	{
 		process.stdout.write( '\n' );
 	}
