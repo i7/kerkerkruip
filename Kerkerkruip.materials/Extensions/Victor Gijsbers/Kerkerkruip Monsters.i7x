@@ -5544,6 +5544,19 @@ The weapon attack bonus of a rotting limb is usually -1.
 
 The material of a rotting limb is usually flesh.
 
+[Rotting limbs can be turned into permanent items by some special effects.]
+A rotting limb has a truth state called the preservation status. The preservation status of a rotting limb is usually false.
+Carry out reading a scroll of enchantment (this is the enchantment preserves rotting limbs rule):
+	let item be a random readied weapon enclosed by the player;
+	if item is a rotting limb:
+		now preservation status of item is true.
+Favour rule for Sul (this is the Sul favour 6 rotting limb rule):
+	if divine favour is 6:
+		let item be a random readied weapon enclosed by the player;
+		if item is a rotting limb:
+			now preservation status of item is true.
+
+
 The rotting left leg is part of the rotting corpse. It is a rotting limb. The description of the rotting left leg is "It [if the rotting left leg is part of the rotting corpse]belongs[otherwise]used to belong[end if] to the rotting corpse.".
 The rotting right leg is part of the rotting corpse. It is a rotting limb. The description of the rotting right leg is "It [if the rotting right leg is part of the rotting corpse]belongs[otherwise]used to belong[end if] to the rotting corpse.".
 The rotting left arm is part of the rotting corpse. It is a rotting limb. The description of the rotting left arm is "It [if the rotting left arm is part of the rotting corpse]belongs[otherwise]used to belong[end if] to the rotting corpse.".
@@ -5591,10 +5604,11 @@ Instead of smelling when the rotting corpse is in the location:
 Every turn when a rotting limb is enclosed by the location (this is the rotting limbs decay rule):
 	repeat with item running through rotting limbs enclosed by the location:
 		unless item is part of the rotting corpse:
-			if a random chance of 1 in 20 succeeds:
-				if item is visible:
-					say "[if the player carries the item][bold type][end if][The item] decays completely[roman type].";
-					remove item from play.
+			unless preservation status of item is true:
+				if a random chance of 1 in 20 succeeds:
+					if item is visible:
+						say "[if the player carries the item][bold type][end if][The item] decays completely[roman type].";
+						remove item from play.
 
 An aftereffects rule (this is the rotting corpse loses limbs rule):
 	if the global defender is alive and the total damage is greater than 0:
