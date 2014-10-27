@@ -1838,13 +1838,13 @@ An exploding rule (this is the Morphean grenade explodes rule):
 					say "The grenade doesn't seem to do anything -- and for a moment, you remember that you are already dreaming.";
 		remove noun from play.
 
-Section - Zombie skull grenade
+Section - Cranial grenade
 
-The zombie skull grenade is a grenade. The description of the zombie skull grenade is "This disgusting, rotting head used to belong to an animated corpse. Disconcertingly, its eyes still follow your every move. Who knows what black magic will be activated when you throw it at someone?"
-The zombie skull grenade is flesh.
+The cranial grenade is a grenade. The description of the cranial grenade is "This disgusting, rotting head used to belong to an animated corpse. Disconcertingly, its eyes still follow your every move, and it grins all the time as if it is in on some joke you don't know about. Who knows what black magic will be activated when you throw it at someone?"
+The cranial grenade is flesh.
 
-An exploding rule (this is the zombie skull grenade explosion rule):
-	if the exploding-grenade is the zombie skull grenade:
+An exploding rule (this is the cranial grenade explosion rule):
+	if the exploding-grenade is the cranial grenade:
 		if a random chance of 1 in 2 succeeds: [50%]
 			if exploding-location is the location:
 				say "The head bounces around a couple of times and then disintegrates. The magic must have failed.";

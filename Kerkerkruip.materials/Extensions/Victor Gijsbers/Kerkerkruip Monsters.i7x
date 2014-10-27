@@ -5612,7 +5612,7 @@ An aftereffects rule (this is the rotting corpse loses limbs rule):
 				decrease follower percentile chance of rotting corpse by 40;
 			if item is rotting head:
 				remove rotting head from play;
-				move zombie skull grenade to the location of the rotting corpse.
+				move cranial grenade to the location of the rotting corpse.
 
 An AI action selection rule for the rotting corpse (this is the rotting corpse without a head does not concentrate rule):
 	let P be the rotting corpse;
