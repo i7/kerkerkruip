@@ -1864,7 +1864,7 @@ An exploding rule (this is the zombie skull grenade explosion rule):
 				if exploding-location is the location:
 					say "The head bounces around a couple of times and then explodes in a foul-smelling black cloud. When the cloud dissipates, you see [the guy].";
 				otherwise:
-					say "It seemd to explose, but you're not sure what happened.";
+					say "It seems to explode, but you're not sure what happened.";
 			otherwise:
 				if exploding-location is the location:
 					say "The head bounces around a couple of times and then disintegrates. The magic must have failed.";
