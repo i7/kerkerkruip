@@ -2690,6 +2690,8 @@ Table of Scroll Names (continued)
 scroll name
 delights
 
+Understand "afternoon" and "delights" and "afternoon delights" as delights.
+
 A scroll of afternoon delights is a kind of scroll.
 A scroll of afternoon delights is delights.
 The description of a scroll of afternoon delights is "You glance at the scroll, and judge that it will probably open a portal. That is going to be a slow and noisy process, though."
@@ -2704,7 +2706,7 @@ Three scrolls of afternoon delights and one scroll of enchantment and one scroll
 A dungeon interest rule (this is the sometimes give Malygris afternoon delights rule):
 	let item be a random thing in Malygris-scroll-chest;
 	move item to Malygris.
-		
+
 
 Chapter - Scroll packs
 
