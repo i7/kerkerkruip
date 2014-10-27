@@ -4155,11 +4155,69 @@ Instead of drinking Drakul's lifeblood:
 	say "As you gulp down the blood, you feel your whole body changing -- it becomes cold and fragile, but also swift and lean. Magical power courses through your veins.";
 	vampirise the player.
 
+Section - Hand of Glory (special)
 
+[Is sometimes found in the pile of body parts.]
 
+The hand of a glory is a thing. The material of the hand of glory is flesh. Understand "candle" and "flame" and "embalmed" as the hand of glory.
+The description of the hand of glory is "This hand was cut from the body of a criminal on the gibbet; pickled in salt and the urine of man, woman, dog, horse and mare; smoked with herbs and hay for a month; hung on an oak tree for three nights running, then laid at a crossroads, then hung on a church door for one night. When the candle that it grips is lit and you carry the hand, everyone else in the dungeon will remain motionless. But beware -- the candle may melt away very suddenly, and the spell will also be broken as soon as you attack someone.[paragraph break]The hand is currently [if the hand of glory is lit]burning[otherwise]not burning[end if].".
+The hand of glory is not lit.
+Rule for printing inventory details of hand of glory:
+	say " ([if hand of glory is not lit]not [end if]burning)".
 
+Instead of switching on the hand of glory:
+	if the hand of glory is lit:
+		say "The candle is already burning.";
+	otherwise:
+		say "You light the candle on the hand of glory.";
+		now the hand of glory is lit.
 
+Instead of switching off the hand of glory:
+	if the hand of glory is not lit:
+		say "The candle isn't burning.";
+	otherwise:
+		say "You extinguish the candle on the hand of glory, preserving it for further use.";
+		now the hand of glory is not lit.
 
+Instead of burning the hand of glory:
+	try switching on the hand of glory.
+Understand "extinguish [something]" as switching off.
+
+Every turn when the hand of glory is lit (this is the hand of glory melts rule):
+	if hand of glory and the player share a world:
+		if a random chance of 1 in 35 succeeds:
+			do the hand of glory removal.
+
+Last every turn when the hand of glory is lit (this is the no tension with hand of glory rule):
+	if the player and the hand of glory share a world:
+		now tension is 0.
+
+To do the hand of glory removal:			
+	now hand of glory is not lit;
+	if the location of the player is the location of the hand of glory:
+		say "The hand of glory [bold type]suddeny melts away[roman type]!";
+	remove hand of glory from play.
+				
+Last initiative update rule (this is the hand of glory rule):
+	if the hand of glory is lit:
+		if location of the hand of glory is location of the player:
+			if someone carries the hand of glory:
+				repeat with X running through all alive persons enclosed by the location:	
+					if X carries the hand of glory:
+						now initiative of X is 100;
+					otherwise:
+						now initiative of X is 0.
+
+An impeded movement rule (this is the hand of glory impedes movement rule):
+	if the hand of glory is lit:
+		if someone carries the hand of glory:
+			unless the test subject carries the hand of glory:
+				rule fails.
+
+Before attacking (this is the attacking makes the hand of glory melt away rule):
+	if the player carries the hand of glory:
+		if the hand of glory is lit:
+			do the hand of glory removal.
 
 
 Chapter - Ment

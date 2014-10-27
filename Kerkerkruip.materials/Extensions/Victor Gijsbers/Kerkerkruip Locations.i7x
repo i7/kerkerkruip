@@ -1334,15 +1334,19 @@ To find a scroll of type (N - scroll name):
 	say "You have found [a new scroll][one of] in between the body parts[or] buried in the pile[at random]. It's slightly [one of]wet and smelly[or]covered in slime[at random], but it looks like it will still work, so you scoop it up.";
 
 To find the corpse:
-	if rotting corpse is off-stage and rotting corpse is alive:
-		say "As you search the pile, a rotting corpse jumps out!";
-		move rotting corpse to location of the large pile of body parts;
-		if the player is hidden:
-			say "[line break]Startled, you jump back. A curse escapes your lips, thus blowing your cover.";
-			now the player is not hidden;
+	if a random chance of 19 in 20 succeeds:
+		if rotting corpse is off-stage and rotting corpse is alive:
+			say "As you search the pile, a rotting corpse jumps out!";
+			move rotting corpse to location of the large pile of body parts;
+			if the player is hidden:
+				say "[line break]Startled, you jump back. A curse escapes your lips, thus blowing your cover.";
+				now the player is not hidden;
+		otherwise:
+			say "The most valuable thing you find is a putrefying arm that might function as a club.";
+			move putrefying arm to player;
 	otherwise:
-		say "The most valuable thing you find is a putrefying arm that might function as a club.";
-		move putrefying arm to player;
+		say "The most valuable thing you find is an embalmed hand gripping a candle.";
+		move hand of glory to player;
 	now pile search count is -2; [ Account for the increment ]
 
 The putrefying arm is a weapon.
