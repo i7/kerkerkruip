@@ -682,12 +682,6 @@ Player-cowering is a cower-counting test step. The next move of Ape-cowering is 
 initial scheduling for Player-cowering:
 	now the player is insane;
 	assert truth of whether or not the target cower percentage of the player is at least 1 with message "the insane player's target cower percentage should be at least 1"; 
-		
-first standard ai rule:
-	log "starting standard AI for [the main actor]";
-	
-last standard ai rule:
-	log "done standard AI for [the main actor]";
 	
 Section - Controlling pipes
 
