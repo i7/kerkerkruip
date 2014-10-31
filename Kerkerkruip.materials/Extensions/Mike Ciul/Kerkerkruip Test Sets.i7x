@@ -1975,6 +1975,353 @@ Testing effects of malygris-robbing:
 	assert that the event description includes "Something has stopped you from teleporting";
 	assert that the event description includes "picking stuff up";
 
+Section - Imp Teleporting Into Dreams
+
+bug-280 is a test set.
+
+Scenario when testing bug-280:
+	now the reaper is testobject;
+	now the lair of the imp is testobject;
+	now the dimensional anchor is bannedobject;
+	now the teleportation beacon is bannedobject; [test with the imp?]
+	now the dream of briar roses is current-test-dream;
+	now the reusable item is a random morphean grenade;
+	now the vast staircase is bannedobject.
+	
+reaper-seeking is a hidden-traveling extracting hiding-reveal test step. The  first move of bug-280 is reaper-seeking. The location-target of reaper-seeking is the reaper.
+
+Initial scheduling of reaper-seeking:
+	assert "Lair of the imp should be placed" based on whether or not lair of the imp is placed;
+	assert "Imp should be denizen" based on whether or not the imp is denizen;
+	assert "Dimensional anchor is in [location of the dimensional anchor]" based on whether or not the dimensional anchor is off-stage;
+	now the health of the player is 1000.
+	
+Testing effects of reaper-seeking:
+	assert "the combat status should not be peace" based on whether or not the combat status is not peace;
+
+imp-dreaming is a repeatable uneventful item-throwing test step. The maximum repeats of imp-dreaming is 20.
+
+Testing effects of imp-dreaming:
+	assert that the location is garden of thorns;
+	if the location of the imp is the location:
+		record failure of imp-dreaming with message "The imp teleported into the dream (act count=[act count of the imp])";
+	wake the player up;
+	update the combat status; [risky?]
+	assert "we should be with the reaper in [location of the reaper] but we are in [the location]" based on whether or not the location is the location of the reaper;
+	assert "the combat status should not be peace" based on whether or not the combat status is not peace;
+	
+imp-appearing is a repeatable test step.
+
+Testing effects of imp-appearing:
+	if the location of the imp is the location:
+		record success of imp-appearing;
+		
+imp-thieving is a repeatable test step.
+
+Testing effects of imp-thieving:
+	if the event description matches the regular expression "The imp grabs the package of ment with its thieving little claws":
+		record success of imp-thieving;
+		
+imp-vanishing is a repeatable test step.   
+
+Choosing a player action when testing imp-vanishing:
+	generate the action of attacking the imp;
+
+Testing effects of imp-vanishing:
+	if the location of the imp is lair of the imp:
+		record success of imp-vanishing;
+		
+imp-stashing is a repeatable test step. The maximum repeats of imp-stashing is 2.
+
+Testing effects of imp-stashing:
+	if a package of ment is in the lair of the imp:
+		record success of imp-stashing;
+
+Section - Heal power of Malygris
+
+malygris-heal-power is an test set.
+
+the generation minimum is a number that varies.
+
+the generation count is a number that varies.
+
+The generation test rules is a rulebook.
+
+Last map approval rule:
+	increment generation count;
+	follow the generation test rules;
+	if generation count < generation minimum:
+		say "* [generation minimum - generation count] more dungeons to generate for [the current test set]";
+		rule fails;
+		
+Scenario when testing malygris-heal-power:
+	now generation info is true;
+	now the generation minimum is 20.
+	
+malygris-heal-max is a number that varies.
+
+Generation test when testing malygris-heal-power:
+	now the heal power of Malygris is 0;
+	make the dungeon interesting [usually done after approval];
+	let max healing be (heal power of Malygris) * 60 / (heal cooldown of Malygris);
+	if max healing is greater than malygris-heal-max:
+		now malygris-heal-max is max healing;
+	if max healing is at least 1:
+		say "* Malygris can heal [max healing divided by 60] and [remainder after dividing max healing by 60] 60ths per turn[line break]";
+	if (max healing) is greater than (60 times 3):
+		assert "[max healing divided by 60] and [remainder after dividing max healing by 60] 60ths is too much healing for Malygris" based on false;
+		now generation minimum is 0;
+	if generation count is generation minimum:
+		assert "Malygris should be able to heal sometimes" based on whether or not the malygris-heal-max is at least 1.
+				
+Section - Bloodlust - issue 279
+
+bloodlust-279 is a test set.
+
+to assert that bloodlusting is (active - a truth state) when (condition - indexed text):
+	assert "the player should [if active is false]not [end if]be bloodlusting [condition], but you are [person condition of the player]" based on whether or not active is (whether or not the player is bloodlusting).
+	
+Scenario when testing bloodlust-279:
+	now the swarm of daggers is testobject;
+	now the blood ape is testobject;
+	now the mindslug is testobject;
+	now the hall of mirrors is bannedobject;
+	
+meeting-daggers is an extracting test step. The first move of bloodlust-279 is meeting-daggers. The location-target of meeting-daggers is the swarm of daggers.
+
+Initial scheduling of meeting-daggers:
+	now the melee of the player is 100;
+	now the defence of the player is 100;
+	now the health of the swarm of daggers is 50;
+	
+hitting-daggers is a test step. 
+
+choosing a player action when testing hitting-daggers:
+	generate the action of attacking the swarm of daggers.
+	
+Testing effects of hitting-daggers:
+	assert that bloodlusting is true when "after hitting";
+	
+smiting-daggers is a test step.
+
+choosing a player action when testing smiting-daggers:
+	generate the action of smiting the swarm of daggers.
+	
+Testing effects of smiting-daggers:
+	assert that the combat status is peace with label "combat status";
+	assert that bloodlusting is false when "after killing the daggers".
+	
+[If we can think of any tricky cases where the combat status changes during the every turn stage, we should test those]
+		
+meeting-ape is an extracting test step. The location-target of meeting-ape is the blood ape.
+
+Initial scheduling of meeting-ape:
+	have the player defeat the mindslug;
+	extract fafhrd to the location of the blood ape;
+	now the health of the blood ape is 100;
+	
+hitting-ape is a test step.
+
+choosing a player action when testing hitting-ape:
+	generate the action of attacking the blood ape;
+	
+testing effects of hitting-ape:
+	assert that bloodlusting is true when "after hitting the ape the first time";
+	
+fafhrd-killing-ape is a repeatable test step.
+
+initial scheduling of fafhrd-killing-ape:
+	now the melee of fafhrd is 100;
+
+choosing a player action when testing fafhrd-killing-ape:
+	compel the action of fafhrd attacking the blood ape;
+	generate the action of attacking the blood ape;
+
+before fafhrd hitting the blood ape when testing fafhrd-killing-ape:
+	transcribe "reducing the ape's health to 1";
+	now the health of the blood ape is 1;
+	
+testing effects of fafhrd-killing-ape:
+	if the blood ape is alive:
+		make no decision;
+	assert that bloodlusting is false when "after Fafhrd kills the ape";
+	now fafhrd-killing-ape is not repeatable.
+	
+Section - bug 291
+
+bug-291 is a test set.
+
+Scenario when testing bug-291:
+	now the healer of aite is testobject;
+	now the dream of tungausy shaman is current-test-dream;
+	now the reusable item is a random morphean grenade;
+	now the swarm of daggers is testobject;
+	now the hall of mirrors is bannedobject;
+
+sleepy-throwing is an extracting item-throwing test step. The first move of bug-291 is sleepy-throwing. The location-target of sleepy-throwing is the healer of aite.
+
+Initial scheduling of sleepy-throwing:
+	now the player is just-woken.
+	
+Testing effects of sleepy-throwing:
+	assert that the player is tungausy warrior with label "identity of the player";
+	assert that the event description does not include "fog of sleep";
+	
+hut-entering is a test step.
+
+Choosing a player action when testing hut-entering:
+	generate the action of going inside.
+	
+shaman-choosing is a test step.
+
+Choosing a player action when testing shaman-choosing:
+	select menu question answer 1;
+	
+To assert that (guy - a person) is fully alert:
+	assert "[The guy] should not be just-woken" based on whether or not the guy is not just-woken.
+	
+To assert that (guy - a person) is just-woken:
+	assert "[The guy] should be just-woken" based on whether or not the guy is just-woken.
+	
+Testing effects of shaman-choosing:
+	Now opposition test subject is the player;
+	Repeat with guy running through opposer people in the location:
+		assert that guy is asleep;
+	assert that the player is the true body of the player with label "true body of the player";
+	assert that the player is awake;
+	assert that the player is fully alert;
+	assert that the event description does not include "fog of sleep";
+	
+teleport-waking is a repeatable test step. The maximum repeats of teleport-waking is 5.
+
+initial scheduling of teleport-waking:
+	now the reusable item is a random scroll of teleportation;
+	now the healer of aite is not asleep;
+	compel the action of the healer of aite attacking the player;
+	now the teleportation beacon is in a random unoccupied placed room;
+	now teleportation-beacon-on is true;	
+	
+Choosing a player reaction when testing teleport-waking:
+	now the player is just-woken;
+	generate the action of reading the reusable item.
+	
+Testing effects of teleport-waking:
+	unless the act count of the healer of aite is at least 1, make no decision;
+	if the player is at-react, make no decision;
+	assert that the player is fully alert;
+	assert that the event description includes "fog of sleep";
+	record success of teleport-waking;
+	
+sleepy-teleport is a hidden-traveling item-reading test step.
+
+Initial scheduling of sleepy-teleport:
+	now the teleportation beacon is in the location of the swarm of daggers;
+	now the player is just-woken;
+	
+Testing effects of sleepy-teleport:
+	assert that the player is just-woken;
+	assert that the event description does not include "fog of sleep";
+	
+sleepy-status is a test step.
+
+Choosing a player action when testing sleepy-status:
+	generate the action of asking status.
+	
+Testing effects of sleepy-status:
+	assert that the event description includes "You are just-woken: The next attack against you gets a \+3 bonus and \+2 damage\.";
+	
+sleepy-slaying is a hidden-traveling test step.
+
+choosing a player action when testing sleepy-slaying:
+	generate the action of smiting the swarm of daggers;
+	
+testing effects of sleepy-slaying:
+	assert that the event description includes "fog of sleep";
+	assert that the player is fully alert.
+		
+Section - bug 244
+
+[This test is not catching the bug I saw. I have no idea how to reproduce it.]
+
+bug-244 is an test set.
+
+Scenario when testing bug-244:
+	now generation info is true;
+	now the generation minimum is 100;
+	now the rarity of the mausoleum is 0;
+
+Map approval rule when testing bug-244 (this is the only approve secret mausoleum maps rule):
+	if the mausoleum is not placed:
+		rule fails;
+	let the path be the best route from Entrance Hall to the mausoleum;
+	if the path is a direction:
+		rule fails;
+	
+Generation test when testing bug-244:
+	assert "The mausoleum should be placed" based on whether or not the mausoleum is placed;
+	assert "The mausoleum should be marked secretly placeable" based on whether or not the mausoleum is secretly placeable;
+	
+final-generation-test is a test step. The first move of bug-244 is final-generation-test.
+
+Testing effects of final-generation-test:
+	assert "The mausoleum should be marked secretly placeable" based on whether or not the mausoleum is secretly placeable;
+
+Section - Bug 301 Redux
+
+bug-301-aite is a test set.
+
+scenario when testing bug-301-aite:
+	now Temple of Sul is testobject;
+	now Bodmall is testobject;
+	now Hall of Gods is testobject;
+	now the reusable item is a random fragmentation grenade;
+	
+First intervention possible when testing bug-301-aite:
+	rule fails;
+	
+bug-301-setup is a test step. The first move of bug-301-aite is bug-301-setup.
+	
+Initial scheduling of bug-301-setup:
+	Now every room is not rust-spored;
+	Now every thing is not rusted;
+	now the defence of the player is 100;
+	extract the player to the location of bodmall;
+	have the player defeat Bodmall;
+	extract the player to temple of Sul;
+	have the player sacrifice a random granted power;
+	assert that the favour of the player with Sul is 4;
+	extract the player to Hall of Gods;
+	have the player and healer of Aite fight in Arena of the Gods;
+	
+healer-first-killing is a test step. 
+
+Initial scheduling of healer-first-killing:
+	now the health of the player is the permanent health of the player - 1; 
+
+Choosing a player action when testing healer-first-killing:
+	generate the action of smiting the healer of aite.
+	
+Testing effects of healer-first-killing:
+	assert truth of whether or not the healer of Aite is dead with message "The healer should be dead";
+	assert truth of whether or not the tormentor of Aite is alive with message "The tormentor of Aite should be alive";
+	assert truth of whether or not the defender of Aite is alive with message "The defender should be alive";
+	assert truth of whether or not the health of the player is less than the permanent health of the player with message "The player should not be healed";
+	assert that the event description does not include "Sul receives .* and fully heals you";
+	
+other-fanatics-killing is an item-throwing test step.
+
+Initial scheduling of other-fanatics-killing:
+	now the health of the tormentor of Aite is 1;
+	now the health of the defender of Aite is 1;
+
+testing effects of other-fanatics-killing:
+	assert truth of whether or not the tormentor of Aite is dead with message "The tormentor should be dead";
+	assert truth of whether or not the defender of Aite is dead with message "The defender should be dead";
+	assert that the location is Hall of Gods;
+	assert that the event description includes "receives the soul";
+	assert that the event description does not include "receives the soul.* receives the soul";
+	assert that the health of the player is the permanent health of the player;
+
 [TODO: test armadillo and reaper following]
 
 Section - Armadillo wandering
@@ -1994,6 +2341,137 @@ Initial scheduling of waiting-for-armadillo-move:
 Testing effects of waiting-for-armadillo-move:
 	if the location of the armadillo is not armadillo-start:
 		record success of waiting-for-armadillo-move.
+		
+[TODO: test armadillo and reaper following]
+
+Section - Armadillo wandering
+
+armadillo-wandering is a test set.
+
+Scenario when testing armadillo-wandering:
+	now the ravenous armadillo is testobject;
+
+waiting-for-armadillo-move is a repeatable test step. The first move of armadillo-wandering is waiting-for-armadillo-move.
+
+armadillo-start is a room that varies.
+
+Initial scheduling of waiting-for-armadillo-move:
+	now armadillo-start is the location of the ravenous armadillo.
+	
+Testing effects of waiting-for-armadillo-move:
+	if the location of the armadillo is not armadillo-start:
+		record success of waiting-for-armadillo-move.
+					
+Section - Unlocking - issue 243
+
+unlocking-behavior is a test set.
+
+to assert that placement possibility is (allowable - a truth state) when (conditions - indexed text):
+	now basic game mode is false;
+	follow the decide basic mode rule;
+	now the rarity of Space-Time Discontinuum is 0;
+	now the considered room is Space-Time Discontinuum;
+	follow the placement possible rules;
+	assert "Space-Time Discontinuum should be [if allowable is false]im[end if]possible to place [conditions]" based on whether or not allowable is (whether or not the rule succeeded);
+	now global monster level is 1;
+	now the considered monster is the ravenous armadillo;
+	follow the monster placement possible rules;
+	assert "The armadillo should be [if allowable is false]im[end if]possible to place [conditions]" based on whether or not allowable is (whether or not the rule succeeded);
+	[not-too-difficult is no longer used to place treasure - the smoky blade is now placed by the stock minor treasure rule]
+	[assert "The smoky blade should [if allowable is false]not [end if]be not-too-difficult" based on whether or not allowable is (whether or not the smoky blade is not-too-difficult);]
+	
+	
+Scenario when testing unlocking-behavior:
+	set difficulty to 0;
+	disable advanced content;
+	assert that setting of current difficulty is 0 with label "current difficulty setting";
+	assert that difficulty is 0 with label "difficulty";
+	assert "advanced content should be disabled" based on whether or not advanced content is disabled;
+	now the considered room is Space-Time Discontinuum;
+	assert that placement possibility is false when "in novice level";
+	enable advanced content;
+	assert that placement possibility is true when "in novice level with advanced content enabled";
+	set difficulty to 1;
+	assert that setting of current difficulty is 1 with label "current difficulty setting";
+	assert that difficulty is 1 with label "difficulty";
+	disable advanced content;
+	assert that placement possibility is true when "in apprentice level";
+	enable advanced content;
+	assert that placement possibility is true when "in apprentice level when advanced content is enabled";
+		
+Section - bug 293 - Sensing Isra and Fell
+
+bug-293 is a test set
+
+scenario when testing bug-293:
+	now the reusable item is a random teleportation grenade;
+	now israfel is testobject;
+	
+israfel-meeting-293 is an extracting hidden-traveling test step. The first move of bug-293 is israfel-meeting-293. The location-target of israfel-meeting-293 is israfel.
+
+israfel-splitting-293 is a hiding-reveal repeatable test step. 
+
+initial scheduling of israfel-splitting-293:
+	assert "isra should be off-stage" based on whether or not isra is off-stage;
+	assert "fell should be off-stage" based on whether or not fell is off-stage;
+	compel the action of israfel israfel-splitting.
+	
+Testing effects of israfel-splitting-293:
+	if isra is off-stage, make no decision;
+	record success of the scheduled event.
+	
+isra-and-fell-scattering is a hidden-traveling item-throwing test step.
+
+Testing effects of isra-and-fell-scattering:
+	assert "isra should be onstage" based on whether or not isra is not off-stage;
+	if the location of Isra is the location:
+		extract Isra to a random unoccupied reachable room;
+	assert "fell should be onstage" based on whether or not fell is not off-stage;
+	if the location of Fell is the location:
+		extract Fell to the location of Isra;
+	repeat with guy running through people in the location of isra:
+		if guy is not isra and guy is not Fell:
+			extract guy to the location;
+	repeat with guy running through people in the location of fell:
+		if guy is not fell and guy is not Isra:
+			extract guy to the location;
+	
+psycholocating-293 is a hidden-traveling item-reading test step.
+
+initial scheduling of psycholocating-293:
+	now the reusable item is a random scroll of psycholocation.
+	
+sensing-293 is a hidden-traveling test step.
+
+Choosing a player action when testing sensing-293:
+	generate the action of sensing.
+	
+Testing effects of sensing-293:
+	log "Fell is in [the location of fell] - Isra is in [the location of isra]";
+	assert "Isra should be psycholocatable" based on whether or not Isra is psycholocation-revealed;
+	assert "Fell should be psycholocatable" based on whether or not fell is psycholocation-revealed;
+	assert that the event description includes "frozen lightning";
+	assert that the event description includes "molten thunder";
+	
+isra-defeating-293 is a test step.
+
+initial scheduling of isra-defeating-293:
+	have the player defeat isra;
+	
+Testing effects of isra-defeating-293:
+	assert "power of israfel should not be granted" based on whether or not the power of israfel is not granted;
+	
+fell-defeating-293 is a test step.
+
+initial scheduling of fell-defeating-293:
+	have the player defeat fell;
+	
+Testing effects of fell-defeating-293:
+	assert "isra should be dead" based on whether or not isra is dead;
+	assert "fell should be dead" based on whether or not fell is dead;
+	assert "israfel should be off-stage" based on whether or not israfel is off-stage;
+	[assert that the event description includes "Israfel's dying cry shakes the foundations of the world";]
+	assert "power of israfel should be granted" based on whether or not the power of israfel is granted.
 		
 Section - Example failure
 
