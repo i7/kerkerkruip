@@ -480,7 +480,7 @@ A test play when testing insane-drakul:
 	while the size of the staff of insanity is less than medium:
 		increase the size of the staff of insanity;
 	try readying staff of insanity;
-	transcribe and restart capturing;
+	transcribe and restart capturing because "setting up test play";
 	try Drakul concentrating;
 	pause and assert that the event description includes "Drakul smiles a little wider";
 	try Drakul concentrating;

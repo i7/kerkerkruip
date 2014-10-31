@@ -44,7 +44,7 @@ To transcribe and stop capturing text/-- because (reason - a text):
 		append "[the captured text]" to file of test transcript;
 	 
 To transcribe and restart capturing text/--:
-	transcribe and stop capturing because "transcribe and restart capturing";
+	transcribe and restart capturing because "transcribe and restart capturing";
 	
 To transcribe and restart capturing text/-- because (reason - a text):
 	if text capturing is active, transcribe and stop capturing text because reason;
@@ -98,7 +98,7 @@ To record a/-- failure report of/-- (msg - a text):
 	increment the assertion failures count;
 	increment the failures entry;
 	now the failure messages entry is the substituted form of "[failure messages entry]Failure for test: [the current test set], step: [the scheduled event], assertion [the test assertion count]: [msg][paragraph break]";
-	log msg;
+	log the failure messages entry;
 
 
 To display test results:
