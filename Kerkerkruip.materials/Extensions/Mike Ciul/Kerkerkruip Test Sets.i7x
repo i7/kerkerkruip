@@ -1668,6 +1668,313 @@ testing effects of no-new-blessed-grenade:
 	if the blessed grenade is not off-stage:
 		record failure of no-new-blessed-grenade with message "The blessed grenade should be off-stage".
 
+		
+Section - At-react after getting mazed - bug 210
+
+maze-resetting is a test set.
+
+Scenario when testing maze-resetting:
+	now the minotaur is testobject;
+	now the overmind is testobject;
+	now the hall of mirrors is bannedobject;
+	
+Test play when testing maze-resetting:
+	extract the player to the location of the minotaur;
+	try smiting the minotaur;
+	try taking the minotaur's axe;
+	assert "the minotaur's axe should be carried" based on whether or not the minotaur's axe is carried;
+	try readying the minotaur's axe;
+	assert "the minotaur's axe should be readied" based on whether or not the minotaur's axe is readied;
+	now the defence of the player is 100;
+	now the melee of the player is 100;
+
+overmind-meeting is a extracting hiding-reveal test step. The first move of maze-resetting is overmind-meeting. The location-target of overmind-meeting is the overmind.
+
+overmind-mazing is a test step.   
+
+Choosing a player action when testing overmind-mazing:
+	generate the action of attacking the overmind.
+	
+testing effects of overmind-mazing:
+	assert that the combat state of the overmind is at-inactive.
+	
+Section - bug 262
+
+[this bug will not happen with normal testobject placement, so this is a bit of a gamble]
+
+bug-262 is a test set.
+
+Scenario when testing bug-262:
+	now generation info is true;
+	now every secretly placeable room is bannedobject;
+	
+First creating the map rule when testing bug-262:
+	now every secretly placeable room is testobject;
+	
+First dungeon finish rule:
+	repeat with pack running through not non-treasure things:
+		repeat with item running through things enclosed by pack:
+			now the valuation of item is the valuation of pack;
+	
+Definition: a room is secret-treasure-stash if it is Mausoleum or it is Hidden Treasury or it is Elemental Plane of Smoke Storage.
+
+Test play when testing bug-262:
+	if portal of smoke is not placed and hidden treasury is not placed and mausoleum is not placed:
+		log "no treasure-containing secret rooms to test for bug 262, but testing anyway!";
+	let something to test be false;
+	repeat with place running through secret-treasure-stash rooms:
+		if place encloses a not non-treasure thing:
+			now something to test is true;
+			break;
+	unless something to test is true:
+		log "no treasure in any secretly placed rooms, but testing anyway";
+	Repeat with item running through treasure packs:
+		assert "[The item] should be off-stage, but it is in [the holder of the item][if holder of the item is not a room] (in [location of the item])" based on whether or not item is off-stage;
+
+Section - bug 245
+
+bug-245 is a test set.
+
+Scenario when testing bug-245:
+	now the blood ape is testobject;
+	now bodmall is testobject;
+	now the hall of mirrors is bannedobject;
+	
+Initial scheduling of ape-growing:
+	now the defence of the player is 0;
+	now the health of the player is 1000;
+	now the melee of the player is 100;
+	
+ape-growing is a extracting hidden-traveling hiding-reveal repeatable test step. The first move of bug-245 is ape-growing. The location-target of ape-growing is the blood ape. 
+
+testing effects of ape-growing:
+	if the size of the blood ape is greater than medium:
+		record success of ape-growing;
+		make no decision;
+	compel the action of the blood ape attacking the player;
+	
+Choosing a player reaction when testing ape-growing:
+	generate the action of exposing;
+	rule succeeds.
+
+ape-smiting is a test step.   
+
+Choosing a player action when testing ape-smiting:
+	generate the action of smiting the blood ape;
+
+testing effects of ape-smiting:
+	assert "the power of the ape should be granted" based on whether or not the power of the ape is granted;
+
+bodmall-meeting is a hidden-traveling extracting hiding-reveal test step. The location-target of bodmall-meeting is bodmall.
+
+Initial scheduling of bodmall-meeting:
+	now the health of bodmall is 1000;
+	now bodmall is not asleep;
+	
+bodmall-bleeding is a test step.   
+
+Choosing a player action when testing bodmall-bleeding:
+	generate the action of attacking bodmall.
+
+Initial scheduling of bodmall-bleeding:
+	now the initiative of Bodmall is -2;
+	
+last initiative update rule when testing bodmall-bleeding:
+	now the initiative of Bodmall is -2;
+	
+testing effects of bodmall-bleeding:
+	assert "the player should now be bigger than medium, but [regarding the player][they] [are] [size of the player]" based on whether or not the size of the player is greater than medium;
+	assert "bodmall should have reacted exactly once, but she reacted [reaction count of bodmall] times" based on whether or not the reaction count of Bodmall is 1;
+	assert "bodmall should be at-inactive, but she is [combat state of bodmall]" based on whether or not bodmall is at-inactive;
+	
+Section - Maze Moving
+
+[Moving around in the maze - check that all people have 0 concentration and are at-inactive. Check that the right thing happens when retreating or running from an opponent in the maze. Maybe check grenade-throwing effects in the maze]
+
+To assert that (item - a thing) is located in (place - a room):
+	assert "[The item] should be in [place], but [they] is in [location of item]" based on whether or not the location of item is place.
+	
+To assert that (guy - a person) has (N - a number) levels of concentration:
+	assert "[The guy] has [concentration of guy] levels of concentration, but [they] should have [N] levels" based on whether or not concentration of guy is N.
+	
+maze-moving is a test set.
+
+Scenario when testing maze-moving:
+	now the minotaur is testobject;
+	now the hall of mirrors is bannedobject;
+	now the reusable item is a random flash grenade;
+	
+minotaur-meeting is a hidden-traveling extracting hiding-reveal test step. The first move of maze-moving is minotaur-meeting. The location-target of minotaur-meeting is the minotaur.
+
+Initial scheduling of minotaur-meeting:
+	now the health of the player is 1000;
+	now the defence of the player is 0;
+	
+getting-mazed is a repeatable test step.
+
+Initial scheduling of getting-mazed:
+	compel the action of the minotaur attacking the player.
+
+Testing effects of getting-mazed:
+	if the event description matches the regular expression "minotaur deals":
+		now getting-mazed is not repeatable;
+	otherwise:
+		make no decision;
+	assert that the location is Maze;
+	assert "the player should be at-inactive, but [regarding the player][they] [are] [combat state of the player]" based on whether or not the player is at-inactive;
+	assert "the minotaur should be at-inactive, but he is [combat state of the minotaur]" based on whether or not the minotaur is at-inactive;
+	assert that the minotaur is located in maze-waiting-room;
+	assert that maze-sound is northwest;
+	
+directionless-throwing is a test step.
+
+Choosing a player action when testing directionless-throwing:
+	generate the action of throwing the reusable item to north;
+
+Testing effects of directionless-throwing:
+	assert that the event description includes "There is no point throwing grenades into twisty little passages";
+	assert "Trying to throw things in the maze should not take time" based on whether or not the take no time boolean is true;
+	assert that the reusable item is carried.
+	
+sound-finding is a repeatable test step.   
+
+Choosing a player action when testing sound-finding:
+	generate the action of going north.
+
+Testing effects of sound-finding:
+	if maze-sound is a cardinal direction:
+		record success of sound-finding.
+		
+maze-summoning is an item-reading test step.
+
+Initial scheduling of maze-summoning:
+	now the the reusable item is a random scroll of summoning;
+	now the player carries the reusable item;
+	
+Testing effects of maze-summoning:
+	assert that the event description includes "[a monster summoned] appears before you"
+	
+A test step can be sound-following.
+
+summoned-fleeing is a sound-following test step.
+
+Initial scheduling of summoned-fleeing:
+	now the concentration of the player is 3;
+	now the concentration of the monster summoned is 3;
+	
+Choosing a player action when testing a sound-following test step:
+	generate the action of going maze-sound;
+
+Definition: a person is not-yet-active if the act count of it is 0.
+
+First combat round rule when testing summoned-fleeing:
+	stop and save event description;
+	if every person who is not the player is not-yet-active:
+		assert that the event description includes "You flee through the tunnels, quickly losing all sense of direction.[line break][line break][The monster summoned] follows you towards the sound.";
+		if the monster summoned is non-attacker:
+			assert 0 hits by the monster summoned;
+		otherwise:
+			assert 1 hit by the monster summoned;
+	if the act count of the main actor is 0:
+		[this assertion can interrupt the event description]
+		assert that the main actor has 0 levels of concentration;
+	start capturing text;
+
+testing effects of summoned-fleeing:
+	assert that the monster summoned is located in the maze;
+	assert that the minotaur is located in the maze;
+	if the act count of the monster summoned is 0:
+		assert that the monster summoned has 0 levels of concentration;
+	if the act count of the minotaur is 0:
+		assert that the minotaur has 0 levels of concentration;
+
+multiple-fleeing is a test step.   
+
+Choosing a player action when testing multiple-fleeing:
+	generate the action of going north.
+
+Initial scheduling of multiple-fleeing:
+	now the concentration of the minotaur is 3;
+	now the concentration of the monster summoned is 3;
+	
+Testing effects of multiple-fleeing:
+	assert that the minotaur has 0 levels of concentration;
+	assert that the monster summoned has 0 levels of concentration;
+	assert that the minotaur is located in maze-waiting-room;
+	assert that the monster summoned is located in maze-waiting-room;
+	assert 1 hit by the minotaur;
+	
+multiple-sound-seeking is a repeatable test step.   
+
+Choosing a player action when testing multiple-sound-seeking:
+	generate the action of going north.
+
+Testing effects of multiple-sound-seeking:
+	if the maze-sound is a cardinal direction:
+		assert that the number of people in maze-waiting-room is 2;
+		record success of multiple-sound-seeking.
+		
+first-rejoining is a sound-following test step.
+
+Testing effects of first-rejoining:
+	assert that the number of people in maze-waiting-room is 1;
+	assert that the number of people in maze [including the player] is 2;
+	
+first-maze-smiting is a test step.
+
+Choosing a player action when testing first-maze-smiting:
+	now opposition test subject is the player;
+	Let the enemy be a random opposer person enclosed by the location;
+	generate the action of smiting the enemy.
+	
+Testing effects of first-maze-smiting:
+	assert that the player is located in the maze;
+	assert that the combat status is peace.
+	
+Section - Hiding Penalites
+
+hiding-penalties is a test set.
+
+scenario when testing hiding-penalties:
+	now bodmall is testobject;
+	
+bodmall-sneaking is a hidden-traveling extracting test step. the first move of hiding-penalties is bodmall-sneaking. The location-target of bodmall-sneaking is bodmall.
+
+Initial scheduling of bodmall-sneaking:
+	now the teleportation beacon is in the location of Malygris;
+	now the dimensional anchor is in the location of Malygris;
+	now teleportation-beacon-on is true;
+	
+Choosing a player action when testing bodmall-sneaking:
+	Let G be a random teleportation grenade;
+	now G is in the location of Bodmall;
+	generate the action of throwing G;
+	
+Testing effects of bodmall-sneaking:
+	assert that the event description includes "first taking the teleportation grenade";
+	assert that the event description includes "Malygris, perhaps the greatest of all living sorcerers, is standing here";
+	assert that the event description does not include "picking stuff up";
+	
+malygris-robbing is a hidden-traveling test step.
+
+Initial scheduling of malygris-robbing:
+	repeat with guy running through people in the location:
+		assert "teleportation should be impossible for [guy]" based on whether or not teleportation is impossible for guy;
+
+Choosing a player action when testing malygris-robbing:
+	Let G be a random teleportation grenade;
+	now G is in the location;
+	generate the action of throwing G;
+	
+[if the player teleports away but reappears in the same room, their hiding penalty will be wiped out. This could be considered a bug, but I don't think it's worth fixing. Anyway, we can avoid it for testing purposes by using the dimensional anchor.]
+
+Testing effects of malygris-robbing:
+	assert that the teleportation beacon is located in the location;
+	assert that malygris is located in the location;
+	assert that bodmall is located in the location;
+	assert that the event description includes "Something has stopped you from teleporting";
+	assert that the event description includes "picking stuff up";
+
 [TODO: test armadillo and reaper following]
 
 Section - Armadillo wandering
