@@ -277,7 +277,7 @@ To schedule (the event described - a test step):
 	now the event described is not generated;
 	transcribe and restart capturing because "done scheduling";
 	
-Before taking a player action when the scheduled event is generated:
+Before taking a player action when the scheduled event is generated (this is the test event effects rule):
 	stop and save event description because "testing effects of";
 	Let repeat be whether or not (the scheduled event is repeatable) and (the repeated moves > 0);
 	now the scheduled event is not generated;
@@ -302,6 +302,7 @@ Before taking a player action when the scheduled event is generated:
 Section - Generating Actions
 
 For taking a player action when the scheduled event is not the normal keyboard input (this is the test step player action rule):
+	log "generating player action - [combat state of the player]";
 	if the player is at-React:
 		follow the choosing a player reaction rules;
 	otherwise:
@@ -801,6 +802,24 @@ Choosing a player action when testing an item-throwing test step:
 Section - Occupied and Unoccupied
 
 Definition: A room is occupied rather than unoccupied if it encloses a person.
+
+Section - Counting Hits
+
+A person has a number called the hitting count.
+
+After taking a player action (this is the reset hitting counts rule):
+	log "resetting hitting counts";
+	Repeat with guy running through people:
+		Now the hitting count of guy is 0.
+		
+First before an actor hitting (this is the increment hitting count rule):
+	increment the hitting count of the actor;
+	log "incremented hitting count of [the actor] to [hitting count of the actor]";
+	
+To assert (N - a number) hit/hits by (guy - a person):
+	Let msg be indexed text;
+	Now msg is "Expected hitting count for [The guy]: [N] Got: [hitting count of the guy].";
+	assert truth of whether or not N is hitting count of the guy with message msg;
 
 Kerkerkruip Automated Testing ends here.
 

@@ -237,16 +237,6 @@ A scenario rule when testing parting shots:
 	now armadillo is testobject;
 	now fuligin cloak is testobject;
 
-A person has a number called the hitting count.
-
-First before an actor hitting:
-	increment the hitting count of the actor.
-	
-To assert (N - a number) hit/hits by (guy - a person):
-	Let msg be indexed text;
-	Now msg is "Expected hitting count for [The guy]: [N] Got: [hitting count of the guy].";
-	assert truth of whether or not N is hitting count of the guy with message msg;
-	
 A test play when testing parting shots:
 	force the fuligin cloak to work;
 	try butterflying;
@@ -303,10 +293,6 @@ Before taking a player action [or reaction] when mindslug-retreat is the schedul
 	now mouser does not press the player;
 	now concentration of mouser is 0;
 
-Before taking a player action:
-	Repeat with guy running through people:
-		Now the hitting count of guy is 0.
-		
 testing effects for mindslug-retreat:
 	assert that the event description includes "bravely run away";
 	assert one hit by mindslug;
@@ -351,7 +337,7 @@ Choosing a player action when testing frozen-fell-fleeing:
 
 testing effects of frozen-fell-fleeing:
 	assert that israfel-reuniting-initiator is Fell with label "the reuniting initiator";
-	assert that the hitting count of Fell is 0 with label "hitting count of Fell";
+	assert 0 hits by Fell;
 	
 israfel-rejoining is a test step. The location-target of israfel-rejoining is fell.
 
@@ -386,8 +372,8 @@ initial scheduling of unfrozen-fell-fleeing:
 	now fell presses the player;
 
 testing effects of unfrozen-fell-fleeing:
-	assert that the hitting count of fell is 1 with label "hitting count of fell";
-
+	assert 1 hit by Fell;
+	
 Section - Retreating from the Tentacle
 
 [maybe this could be factored into systems?]
@@ -972,7 +958,7 @@ To decide what number is the chance of (guy - a person) remaining concentrated:
 Test play when testing temporary Nomos blood magic:
 	now every room is not rust-spored;
 	now the health of the player is 1000;
-	now the defence of the player is 100;
+	now the defence of the player is 50;
 	extract the player to the location of bodmall;
 	try smiting bodmall;
 	extract the player to the temple of nomos;
@@ -1074,13 +1060,16 @@ Choosing a player action when testing malleus-bonus-attacking:
 
 [turning human is not acting fast, but a rule sets the take no time boolean for it. This will be too late to stop the nomos bonus from changing our action]
 
+to check that the malleus is fed:
+	transcribe and restart capturing;
+	try examining the malleus maleficarum;
+	pause and assert that the event description includes "Feeding 2 blood to the Malleus Maleficarum will give it an additional bonus of \+1 attack and \+1 damage on your next attack.* dreadful presence; blood bonus of \+1 attack and \+1 damage";
+	
 Initial scheduling for malleus-bonus-attacking:
 	assert that the nomos bonus is true with label "nomos bonus";
 	now the nomos bonus is false;
 	try feeding the malleus maleficarum;
-	transcribe and restart capturing;
-	try examining the malleus maleficarum;
-	pause and assert that the event description includes "Feeding 2 blood to the Malleus Maleficarum will give it an additional bonus of \+1 attack and \+1 damage on your next attack.* dreadful presence; blood bonus of \+1 attack and \+1 damage";
+	check that the malleus is fed;
 	now the nomos bonus is true;
 	
 testing effects of malleus-bonus-attacking:
@@ -1089,6 +1078,27 @@ testing effects of malleus-bonus-attacking:
 	assert that the blood magic level of malleus maleficarum is 0 with label "malleus blood magic level";
 	assert that the event description includes " \+ 1 \(Malleus Maleficarum blood\) \+ 3 \(the law is with you\) = <0-9>+, you beat the swarm of daggers[']s defence rating";
 	assert that the event description includes " \+ 1 \(Malleus Maleficarum blood bonus\) \+ 3 \(the law is with you\) = <0-9>+ damage";
+
+early-feeding is a test step.
+
+initial scheduling of early-feeding:
+	generate the action of feeding the malleus maleficarum.
+
+testing effects of early-feeding:
+	check that the malleus is fed.
+	
+bonus-surviving-attack is a repeatable test step. The maximum repeats is 20.
+
+initial scheduling of bonus-surviving-attack:
+	now the melee of the swarm of daggers is 100;
+	now the health of the player is 1000;
+	compel the action of the swarm of daggers attacking the player;
+	
+testing effects of bonus-surviving-attack:
+	if the hitting count of the swarm of daggers is 0, make no decision;
+	assert "the player should be damaged" based on whether or not the health of the player < 1000;
+	check that the malleus is fed;
+	now bonus-surviving-attack is not repeatable;
 
 Section - bug 234
 
