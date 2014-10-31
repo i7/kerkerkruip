@@ -1162,8 +1162,6 @@ banshees gone wild is an test set.
 
 [First every turn: say "Every turn rules run.";]
 
-Definition: A room is occupied rather than unoccupied if it encloses a person.
-
 To swap the occupants of (first place - a room) and (second place - a room):
 	Let swap place be a random unoccupied room;
 	Repeat with guy running through people in first place:
@@ -1259,6 +1257,416 @@ testing effects of reaction-ape-killing:
 	assert "the blood ape should be dead" based on whether or not the blood ape is dead;
 	assert that the event description includes "Bored by a lack of tension";
 	assert that the living banshees boolean is false;
+
+Section - Remembering Text
+
+remembering-text is a test set.
+
+Scenario when testing remembering-text:
+	now Bodmall is testobject;
+	now the minotaur is testobject;
+	now the angel of compassion is testobject;
+	now the demon of rage is testobject;
+	now the swarm of daggers is testobject;
+	now the blood ape is testobject;
+	now the fuligin cloak is testobject;
+	now the teleportation beacon is bannedobject;
+	now the dimensional anchor is bannedobject;
+	now bridge of doom is testobject;
+	now hall of vapours is bannedobject;
+	now a random scroll of mapping is testobject;
+	now the rod of the master builder is testobject;
+	now generation info is true;
+	Now the reusable item is a random scroll of psycholocation;
+	now the reusable item is testobject;
+	
+[in case the first map is rejected, Arcane Vault must be switched back from testobject to bannedobject every time]
+first creating the map rule when testing remembering-text:
+	now every secretly placeable room is bannedobject; [prevent normal placement of Arcane Vault to simulate conditions for bug 244]
+	now Eternal Prison is testobject;
+
+last creating the map rule when testing remembering-text (this is the force Arcane Vault to be secretly placed rule):
+	assert "Arcane Vault should not yet be placed" based on whether or not Arcane Vault is not placed;
+	now Arcane Vault is testobject;
+	now the rarity of Arcane Vault is 0;
+	
+The place all secret testobject rooms rule is listed after the force Arcane Vault to be secretly placed rule in the creating the map rules;
+	
+Test play when testing remembering-text:
+	Now every room is not rust-spored;
+	Let the item be a random not off-stage scroll of mapping;
+	Now the player carries the item;
+	Now the player carries the rod of the master builder;
+	assert "Eternal Prison should be secretly placed" based on whether or not the eternal prison is secretly placed;
+	assert "Lake of Lava should be placed" based on whether or not the lake of lava is placed;
+	assert "Lake of Lava should not be denizen" based on whether or not the lake of lava is not denizen;
+	assert "Lake of Lava should not be teleportable" based on whether or not the lake of lava is not teleportable;
+	assert "Lake of Lava should be nogo" based on whether or not the lake of lava is nogo;
+	assert "Lake of Lava should not be secretly placed" based on whether or not lake of lava is not secretly placed;
+	assert "Lake of Lava should not be placeable" based on whether or not lake of lava is not placeable;
+	
+nothing-to-remember is a test step. The first move of remembering-text is nothing-to-remember.   
+
+Choosing a player action when testing nothing-to-remember:
+	Generate the action of remembering. 
+
+testing effects of nothing-to-remember:
+	assert that the event description includes "You have not yet explored:\n( - the <a-w>+ exit of the entrance hall \(where you currently are\)\n)+\nYou have visited the following rooms: the entrance hall \(here\)\.\n\nTip:"
+	
+dumb-sensing is a test step.   
+
+Choosing a player action when testing dumb-sensing:
+	Generate the action of sensing;
+
+testing effects of dumb-sensing:
+	assert "Powerless sensing should not take time" based on previously-fast;
+	
+A test step can be psy-scroll-reading;
+
+early-psycholocation is a psy-scroll-reading test step.
+
+choosing a player action when testing a psy-scroll-reading test step:
+	generate the action of reading the reusable item;
+	
+testing effects of psy-scroll-reading test step:
+	[TODO: text that sensing takes no time]
+	assert "The player should be psycholocating now" based on the psycholocation boolean;
+	assert that the event description includes "When you are psycholocating, sensing does not take time"
+
+unexplored-sensing is a test step.   
+
+Choosing a player action when testing unexplored-sensing:
+	Generate the action of sensing.
+
+testing effects of unexplored-sensing:
+	Repeat with the enemy running through {swarm of daggers, blood ape, demon of rage, angel of compassion, minotaur, bodmall, malygris}:
+		assert that the event description includes "[soul description of the enemy], (from the )?[best route from the location to the location of the enemy][line break]";
+	assert that the event description includes "- a turning in on itself of space and time, on which you cannot bear to focus your attention, somewhere [general direction from the location to the Eternal Prison][line break]"
+
+[ - a bolt of black shot through with a blaze of hot white, from the south
+ - an aura like sharpened steel, from the east
+ - a zone of tautened, reddened air, from the west
+ - a squall of fury, all blacks and reds, from the south
+ - a luminous arc of sorrow, from the south
+ - a skein of twisting passages, from the south
+ - spreading thorns dripping with dew--or blood, from the wes]
+	
+remembering-daggers is a hidden-traveling test step.  The location-target of remembering-daggers is the swarm of daggers.
+
+Choosing a player action when testing remembering-daggers:
+	Generate the action of remembering.
+		
+testing effects of remembering-daggers:
+	assert that the event description includes "You have visited the following rooms:.*You have seen the following creatures in these locations:.*- the swarm of daggers \(level 1\) in [the location] \(where you currently are\)"
+
+[before we can get the partway-path psycholocating message, we have to put a visited room between us and an unseen creature. Find one that's at least two moves away and then go 1 move towards it.]
+
+The sensing-place is a room that varies.
+The on-the-way place is a room that varies.
+The faraway enemy is an object that varies.
+
+partway-visiting is a hidden-traveling psy-scroll-reading test step.
+	
+To decide which object is the next stop from (origin - a room) to (destination - a room):
+	let the way be the best route from origin to destination;
+	if the way is not a direction:
+		decide on nothing;
+	decide on the room way from origin;
+	
+Initial scheduling of partway-visiting:
+	now the sensing-place is the location;
+	now the faraway enemy is nothing;
+	Repeat with guy running through denizen persons:
+		If the number of moves from the location to the location of guy is at least 2 and the location of guy is not visited:
+			now the faraway enemy is guy;
+			break;
+	assert "there should be an enemy in an unvisited room at least 2 moves away" based on whether or not the faraway enemy is a person;
+	let the target be the location of the faraway enemy;
+	now the on-the-way place is the next stop from the location to the target;
+	if the on-the-way place is not visited:
+		now the location-target of partway-visiting is the on-the-way place;
+	while the next stop from the on-the-way place to the target is a visited room:
+		now the on-the-way place is the next stop from the on-the-way place to the target.
+
+middle-psycholocating is a extracting psy-scroll-reading test step. 
+
+Initial scheduling of middle-psycholocating:
+	now the location-target of middle-psycholocating is the sensing-place.
+
+partial-explored-sensing is a hidden-traveling test step.   
+
+Choosing a player action when testing partial-explored-sensing:
+	Generate the action of sensing.
+
+testing effects of partial-explored-sensing:
+	assert that the event description includes "the soul of the swarm of daggers here with you, like an aura like sharpened steel[line break]";
+	assert that the event description includes "[soul description of the faraway enemy], [best route from on-the-way place to location of the faraway enemy] from [the on-the-way place] \(which lies [best route from the location to on-the-way place] from here\)[line break]"
+
+meeting-malygris is a repeatable hidden-traveling test step. The location-target of meeting-malygris is Malygris.
+
+To say doesn't see you pattern:
+	say "(does not (detect|notice)|remains unaware of) you(r presence)?[run paragraph on]";
+	
+testing effects of meeting-malygris:
+	if the act count of Malygris is at least 1:
+		assert that the event description includes "Malygris [doesn't see you pattern]";
+		now meeting-malygris is not repeatable;
+	
+psycholocation-expiring is a repeatable hidden-traveling test step.
+
+testing effects of psycholocation-expiring:
+	if psycholocation is inactive:
+		record success of psycholocation-expiring;
+		
+moving-malygris is a repeatable hiding-reveal test step. The maximum repeats of moving-malygris is 20.
+
+Initial scheduling for moving-malygris:
+	Compel the action of Malygris teleporting.
+	
+testing effects of moving-malygris:
+	if the location of Malygris is the location:
+		make no decision;
+	assert that the event description includes "Malygris suddenly teleports away";
+	now moving-malygris is not repeatable.
+	
+First choosing a player action when testing moving-malygris:
+	if the location of Malygris is not the location:
+		make no decision;
+	if the fuligin cloak is worn:
+		make no decision;
+	generate the action of waiting;
+	
+remembering-malygris is a test step.   
+
+Choosing a player action when testing remembering-malygris:
+	Generate the action of remembering.
+
+testing effects of remembering-malygris:
+	assert that the event description includes "You have seen the following creatures in these locations:.*You have also seen Malygris, but you don't know where he is now"
+	
+remembering-lost-plural is a test step.   
+
+Choosing a player action when testing remembering-lost-plural:
+	Generate the action of remembering.
+
+Initial scheduling of remembering-lost-plural:
+	now the last-seen-location of the swarm of daggers is null-room.
+	
+testing effects of remembering-lost-plural:
+	assert that the event description includes "You have also seen (Malygris|the swarm of daggers) and (Malygris|the swarm of daggers), but you don't know where they are now"
+	 
+dungeon-clearing is a test step.
+
+Initial scheduling for dungeon-clearing:
+	now the health of the demonic assassin is -1;
+	Repeat with guy running through denizen persons:
+		if guy is the player or the level of guy is at least 5, next;
+		now the health of guy is -1;
+		
+testing effects of dungeon-clearing:
+	assert that the number of reachable persons is 2;
+	assert "Malygris (in [the location of Malygris]) should be reachable from [the location]" based on whether or not Malygris is reachable;
+	assert "The player (in [the location of the player]) should be reachable" based on whether or not the player is reachable.
+	
+Malygris-only-remembering is a test step.   
+
+Choosing a player action when testing malygris-only-remembering:
+	generate the action of remembering.
+
+testing effects of Malygris-only-remembering:
+	assert that the event description does not include "You have seen the following creatures in these locations";
+	assert that the event description includes "You have also seen Malygris, but you don't know where he is now"
+	
+slow-sensing is a test step.   
+
+Choosing a player action when testing slow-sensing:
+	generate the action of sensing.
+
+Initial scheduling of slow-sensing:
+	assert "psycholocation should be inactive" based on whether or not psycholocation is inactive;
+	
+testing effects of slow-sensing:
+	assert "sensing without psycholocation should take time" based on whether or not previously-fast is false;
+	
+exploring-everywhere is a repeatable extracting hidden-traveling test step. 
+
+Definition: A room (called place) is reachable:
+	if the place is the location, yes;
+	if the place is nogo, no;
+	decide on whether or not the best route from the location to the place is a direction.
+
+Definition: A thing is reachable if the location of it is a reachable room.
+
+Initial scheduling for exploring-everywhere:
+	Now the location-target of exploring-everywhere is a random unvisited reachable room.
+	
+testing effects of exploring-everywhere:
+	Now the location-target of exploring-everywhere is a random unvisited reachable room;
+	if the location-target of exploring-everywhere is nothing:
+		assert that the number of unvisited reachable rooms is 0;
+		assert "Arcane Vault should be secretly placed" based on whether or not the arcane vault is secretly placed;
+		assert "Arcane Vault should be denizen" based on whether or not the arcane vault is denizen;
+		assert "Arcane Vault should not be reachable" based on whether or not the arcane vault is not reachable;
+		assert "There should be at least 1 unvisited secret room" based on whether or not the number of unvisited denizen rooms is at least 1;
+		now exploring-everywhere is not repeatable;
+	
+remembering-everything-reachable is a test step.   
+
+Choosing a player action when testing remembering-everything-reachable:
+	generate the action of remembering.
+
+testing effects of remembering-everything-reachable:
+	assert that the event description includes "All locations have been explored";
+	assert that the event description does not include "You have not yet explored";
+	 
+explored-psycholocating is a hidden-traveling extracting psy-scroll-reading test step.
+
+Initial scheduling for explored-psycholocating:
+	if the location is the location of Malygris:
+		now the location-target of explored-psycholocating is a random unoccupied reachable room;
+		if location-target of explored-psycholocating is a room:
+			assert "location-target ([location-target of explored-psycholocating]) is not reachable" based on whether or not location-target of explored-psycholocating is a reachable room;
+			assert "location-target ([location-target of explored-psycholocating]) should not be where Malygris is" based on whether or not location-target of explored-psycholocating is not the location of Malygris;
+		otherwise:
+			assert "location-target ([location-target of explored-psycholocating]) is not a room" based on false;
+
+
+malygris-sensing is a test step.   
+
+Choosing a player action when testing malygris-sensing:
+	generate the action of sensing.
+
+Initial scheduling of malygris-sensing:
+	[make sure psycholocating works even when remembering doesn't]
+	Now the last-seen-location of Malygris is null-room;
+
+testing effects of malygris-sensing:
+	assert that the event description includes "[soul description of malygris], in [the location of Malygris]";
+	assert "psycholocation sensing should not take time" based on previously-fast;
+
+map-reading is a test step.
+
+choosing a player action when testing map-reading:
+	Let M be a random scroll of mapping carried by the player;
+	generate the action of reading M;
+	
+testing effects of map-reading:
+	assert that the event description includes "a complete floor plan of the dungeon of Kerkerkruip imprints itself on your mind"
+	
+map-remembering is a test step.   
+
+Choosing a player action when testing map-remembering:
+	generate the action of remembering.
+
+testing effects of map-remembering:
+	Assert that the number of secretly placed rooms is 2;
+	assert that the event description includes "Based on the map you found.*secret rooms in the dungeon, one <^[line break]>+, one <^[line break]>+.";
+	assert that the event description includes "You have also seen Malygris, but you don't know where he is. With your powers of psycholocation, you might be able to SENSE it";
+	
+getting-close-to-vault is a hidden-traveling extracting test step.
+
+Initial scheduling of getting-close-to-vault:
+	Let the closest place be Null-room;
+	Let the shortest distance be 1000;
+	Repeat with the place running through connectable reachable rooms:
+		Let the candidate distance be the absolute distance between the place and the Arcane Vault;
+		if the candidate distance is less than the shortest distance:
+			now the shortest distance is the candidate distance;
+			now the closest place is the place;
+	now the location-target of getting-close-to-vault is the closest place.
+			
+digging-to-vault is a repeatable hidden-traveling test step. The maximum repeats of digging-to-vault is 20.
+
+Choosing a player action when testing digging-to-vault:
+	Generate the action of digging a single general direction from the location to Arcane Vault.
+		
+testing effects of digging-to-vault:
+	if the location is a secretly placed room:
+		[it doesn't actually have to be the vault - if we hit another secret room on the way we should stop]
+		record success of digging-to-vault;
+	
+secret-room-remembering is a test step.   
+
+Choosing a player action when testing secret-room-remembering:
+	generate the action of remembering.
+
+testing effects of secret-room-remembering:
+	assert that the event description includes "Based on the map you found.*a secret room in the dungeon, <a-z>";
+	assert that the event description does not include "secret room in the dungeon, one";
+	
+[make sure tunnels don't show up when they shouldn't, make sure they do show up in unexplored list]
+
+[psycholocation + sense]
+
+Section - Blessed Grenade - bug #261
+
+blessed-grenade-test is a test set.
+
+Scenario when testing blessed-grenade-test:
+	now Drakul is testobject;
+	now the Alchemical Laboratory is testobject;
+	
+Test play when testing blessed-grenade-test:
+	now the defence of the player is 100;
+	now the player carries the reusable item;
+	Now the reusable item is the staff of insanity;
+	Now every room is not rust-spored;
+	Now every thing is not rusted;
+
+A test step can be grenade-producing.
+
+blessed-grenade-alchemy is a repeatable hidden-traveling extracting grenade-producing test step. The first move of blessed-grenade-test is blessed-grenade-alchemy. The location-target of blessed-grenade-alchemy is the Alchemical Laboratory. The maximum repeats of blessed-grenade-alchemy is 300.
+
+testing effects of blessed-grenade-alchemy:
+	unless the event description matches the regular expression "Blessed Grenade":
+		make no decision;
+	now blessed-grenade-alchemy is not repeatable;
+	Repeat with the item running through grenades:
+		Let name be indexed text;
+		Now name is the printed name of the item;
+		if the name is "Blessed Grenade":
+			assert "[The item] in [holder of the item] looks like a blessed grenade, but it isn't" based on whether or not the item is the blessed grenade;
+			if the item is in the location:
+				record success of blessed-grenade-alchemy;
+		
+Choosing a player action when testing a grenade-producing test step:
+	generate the action of inserting the reusable item into the curious machine.
+
+First every turn when the scheduled event is a grenade-producing test step (called the current move):
+	Now the health of the player is 100;
+	Now the player is not asleep;
+	If the current move is hidden-traveling, now the player is hidden;
+	Now every room is not rust-spored;
+	Now every thing is not rusted;
+	
+Last testing effects of a grenade-producing test step:
+	Repeat with item running through grenades in the location:
+		remove item from play;
+
+no-extra-blessed-grenade is an uneventful repeatable hidden-traveling grenade-producing test step. The maximum repeats of no-extra-blessed-grenade is 100. [This number could be higher, but it's a slow test]
+
+testing effects of no-extra-blessed-grenade:
+	if the event description matches the regular expression "Blessed Grenade":
+		record failure of no-extra-blessed-grenade with message "The machine produced an extra blessed grenade, impossibly".
+	
+throwing-blessed is a test step.
+
+Initial scheduling of throwing-blessed:
+	now the player carries the blessed grenade;
+	extract the player to the location of Drakul;
+	
+Choosing a player action when testing throwing-blessed:
+	generate the action of throwing the blessed grenade;
+	
+testing effects of throwing-blessed:
+	assert that Drakul is dead;
+	assert that the event description includes "As the grenade explodes you hear the singing of angels, several of whom swoop down from the heavens with huge swords and eviscerate <^[line break]>*Drakul";
+	
+no-new-blessed-grenade is an uneventful repeatable hidden-traveling grenade-producing test step. The maximum repeats of no-new-blessed-grenade is 100.
+
+testing effects of no-new-blessed-grenade:
+	if the blessed grenade is not off-stage:
+		record failure of no-new-blessed-grenade with message "The blessed grenade should be off-stage".
 
 [TODO: test armadillo and reaper following]
 

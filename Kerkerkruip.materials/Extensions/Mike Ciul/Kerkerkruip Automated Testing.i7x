@@ -798,6 +798,10 @@ A test step can be item-throwing.
 Choosing a player action when testing an item-throwing test step:
 	generate the action of throwing the reusable item.
 
+Section - Occupied and Unoccupied
+
+Definition: A room is occupied rather than unoccupied if it encloses a person.
+
 Kerkerkruip Automated Testing ends here.
 
 ---- DOCUMENTATION ----
