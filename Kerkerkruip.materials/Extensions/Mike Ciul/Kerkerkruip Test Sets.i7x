@@ -190,7 +190,7 @@ A test play when testing Chton champion vs bat:
 	extract the player to Hall of Gods;
 	transcribe and restart capturing;
 	have the player and Drakul fight in Arena of the Gods;
-	pause and assert that the event description includes "grants you 2 divine favour![line break][line break]Herm gifts you two scrolls, a magical spade and a Morphean grenade; and increases your hiding bonus to \+2\.[line break][line break]You are transported to the Arena of the Gods, where the angry Drakul awaits, preparing himself to"
+	pause and assert that the event description includes "grants you 2 divine favour![line break][line break]Herm gifts you <^\n>+; and increases your hiding bonus to \+2\.[line break][line break]You are transported to the Arena of the Gods, where the angry Drakul awaits, preparing himself to"
 	
 arena-vampire-joining is a test step. The first move of Chton champion vs bat is arena-vampire-joining.   
 
