@@ -803,6 +803,7 @@ Section - Occupied and Unoccupied
 
 Definition: A room is occupied rather than unoccupied if it encloses a person.
 
+[
 Section - Counting Hits
 
 A person has a number called the hitting count.
@@ -820,6 +821,7 @@ To assert (N - a number) hit/hits by (guy - a person):
 	Let msg be indexed text;
 	Now msg is "Expected hitting count for [The guy]: [N] Got: [hitting count of the guy].";
 	assert truth of whether or not N is hitting count of the guy with message msg;
+]
 
 Kerkerkruip Automated Testing ends here.
 

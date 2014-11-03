@@ -226,6 +226,14 @@ testing effects for chton-arena-cheating:
 	assert that the location of the summoned creature is Hall of Gods;
 	assert that drakul's lifeblood is in Hall of Gods;
 	
+Section - Counting Hits
+
+A person has a number called the hitting count.
+
+To assert (N - a number) hit/hits by (guy - a person):
+	Let msg be indexed text;
+	Now msg is "Expected hitting count for [The guy]: [N] Got: [hitting count of the guy].";
+	assert truth of whether or not N is hitting count of the guy with message msg;
 		
 Section - Parting Shots
 
@@ -293,6 +301,14 @@ Before taking a player action [or reaction] when mindslug-retreat is the schedul
 	now mouser does not press the player;
 	now concentration of mouser is 0;
 
+Before taking a player action (this is the reset hitting counts rule):
+	Repeat with guy running through people:
+		Now the hitting count of guy is 0.
+		
+First before an actor hitting (this is the increment hitting count rule):
+	increment the hitting count of the actor;
+	[log "incremented hitting count of [the actor] to [hitting count of the actor]";]
+	
 testing effects for mindslug-retreat:
 	assert that the event description includes "bravely run away";
 	assert one hit by mindslug;
@@ -1061,10 +1077,17 @@ Choosing a player action when testing malleus-bonus-attacking:
 [turning human is not acting fast, but a rule sets the take no time boolean for it. This will be too late to stop the nomos bonus from changing our action]
 
 to check that the malleus is fed:
+<<<<<<< HEAD
 	transcribe and restart capturing;
 	try examining the malleus maleficarum;
 	pause and assert that the event description includes "Feeding 2 blood to the Malleus Maleficarum will give it an additional bonus of \+1 attack and \+1 damage on your next attack.* dreadful presence; blood bonus of \+1 attack and \+1 damage";
 	
+=======
+       transcribe and restart capturing;
+       try examining the malleus maleficarum;
+       pause and assert that the event description includes "Feeding 2 blood to the Malleus Maleficarum will give it an additional bonus of \+1 attack and \+1 damage on your next attack.* dreadful presence; blood bonus of \+1 attack and \+1 damage";
+
+>>>>>>> Trying to recover from train wreck of last week with hitting counts
 Initial scheduling for malleus-bonus-attacking:
 	assert that the nomos bonus is true with label "nomos bonus";
 	now the nomos bonus is false;
@@ -1078,6 +1101,27 @@ testing effects of malleus-bonus-attacking:
 	assert that the blood magic level of malleus maleficarum is 0 with label "malleus blood magic level";
 	assert that the event description includes " \+ 1 \(Malleus Maleficarum blood\) \+ 3 \(the law is with you\) = <0-9>+, you beat the swarm of daggers[']s defence rating";
 	assert that the event description includes " \+ 1 \(Malleus Maleficarum blood bonus\) \+ 3 \(the law is with you\) = <0-9>+ damage";
+        
+early-feeding is a test step.
+
+initial scheduling of early-feeding:
+       generate the action of feeding the malleus maleficarum.
+
+testing effects of early-feeding:
+       check that the malleus is fed.
+       
+bonus-surviving-attack is a repeatable test step. The maximum repeats is 20.
+
+initial scheduling of bonus-surviving-attack:
+       now the melee of the swarm of daggers is 100;
+       now the health of the player is 1000;
+       compel the action of the swarm of daggers attacking the player;
+       
+testing effects of bonus-surviving-attack:
+       if the hitting count of the swarm of daggers is 0, make no decision;
+       assert "the player should be damaged" based on whether or not the health of the player < 1000;
+       check that the malleus is fed;
+       now bonus-surviving-attack is not repeatable;
 
 early-feeding is a test step.
 
