@@ -819,6 +819,23 @@ To reset hitting counts:
 	Repeat with guy running through people:
 		Now the hitting count of guy is 0.
 
+Section - Diggable
+
+[maybe this could be factored into systems?]
+Definition: a direction (called way) is diggable:
+	if way is not cardinal, no;
+	let x be the x way of location;
+	let y be the y way of location;
+	let z be the z way of location;
+	if the space at x by y by z is free:
+		decide on whether or not there is at least one not placed tunnel;
+	otherwise:
+		let item be the room at x by y by z;
+		if item is the room way from the location: 
+			no;
+		otherwise:
+			decide on whether or not item is connectable;
+
 Kerkerkruip Automated Testing ends here.
 
 ---- DOCUMENTATION ----

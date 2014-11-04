@@ -378,23 +378,12 @@ testing effects of unfrozen-fell-fleeing:
 	
 Section - Retreating from the Tentacle
 
-[maybe this could be factored into systems?]
-Definition: a direction (called way) is diggable:
-	if way is not cardinal, no;
-	let x be the x way of location;
-	let y be the y way of location;
-	let z be the z way of location;
-	if the space at x by y by z is free:
-		decide on whether or not there is at least one not placed tunnel;
-	otherwise:
-		let item be the room at x by y by z;
-		if item is the room way from the location: 
-			no;
-		otherwise:
-			decide on whether or not item is connectable;
-
 tentacle-grab is a test set.
 
+Before taking a player action when testing tentacle-grab (this is the reset hitting counts for tentacle-grab rule):
+	[refactor this rule into some kind of retreat-testing property for test sets?]
+	reset hitting counts;
+	
 Scenario when testing tentacle-grab:
 	Now the giant tentacle is testobject;
 	now the fuligin cloak is testobject;
