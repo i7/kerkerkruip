@@ -99,18 +99,21 @@ To record a/-- failure report of/-- (msg - a text):
 	increment the failures entry;
 	now the failure messages entry is the substituted form of "[failure messages entry]Failure for test: [the current test set], step: [the scheduled event], assertion [the test assertion count]: [msg][paragraph break]";
 	log the failure messages entry;
-
-
-To display test results:
-	If the number of filled rows in Table of Test Results is 0, stop;
-	log "Test results:[line break]";
+	
+To say grand test summary:
 	let grand test total be 0;
 	let grand test failures be 0;
 	Repeat through Table of Test Results:
 		now grand test total is grand test total plus total entry;
 		now grand test failures is grand test failures plus failures entry;
+	say "[grand test total] tests in [number of filled rows in Table of Test Results] sets, [grand test failures] failures";
+	
+To display test results:
+	If the number of filled rows in Table of Test Results is 0, stop;
+	log "Test results:[line break]";
+	Repeat through Table of Test Results:	
 		log "[test set entry]: [total entry] tests, [failures entry] failures[line break]";
-	log "Total: [grand test total] tests, [grand test failures] failures.";
+	log "Total: [grand test summary].";
 	Repeat through Table of Test Results:
 		if failures entry is at least 1:
 			log "[line break]Failures for [test set entry]:[paragraph break]";
@@ -460,6 +463,7 @@ First after showing the title screen (this is the run all tests rule):
 	now the current test set is the test set entry;	
 	blank out the whole row;
 	Now the current unit test name is "[the current test set]";
+	log "Completed so far: [grand test summary], with [number of filled rows in Table of Test Set Queue] sets left to test";
 	log "Now testing [the current test set].";
 	follow the scenario rules;
 	transcribe and restart capturing text because "done setting scenario for";
