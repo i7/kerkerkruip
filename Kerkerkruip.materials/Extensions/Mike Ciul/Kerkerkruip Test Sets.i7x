@@ -226,15 +226,6 @@ testing effects for chton-arena-cheating:
 	assert that the location of the summoned creature is Hall of Gods;
 	assert that drakul's lifeblood is in Hall of Gods;
 	
-Section - Counting Hits
-
-A person has a number called the hitting count.
-
-To assert (N - a number) hit/hits by (guy - a person):
-	Let msg be indexed text;
-	Now msg is "Expected hitting count for [The guy]: [N] Got: [hitting count of the guy].";
-	assert truth of whether or not N is hitting count of the guy with message msg;
-		
 Section - Parting Shots
 
 parting shots is an test set.
@@ -301,14 +292,9 @@ Before taking a player action [or reaction] when mindslug-retreat is the schedul
 	now mouser does not press the player;
 	now concentration of mouser is 0;
 
-Before taking a player action (this is the reset hitting counts rule):
-	Repeat with guy running through people:
-		Now the hitting count of guy is 0.
+Before taking a player action when testing parting shots (this is the reset hitting counts for parting shots rule):
+	reset hitting counts;
 		
-First before an actor hitting (this is the increment hitting count rule):
-	increment the hitting count of the actor;
-	[log "incremented hitting count of [the actor] to [hitting count of the actor]";]
-	
 testing effects for mindslug-retreat:
 	assert that the event description includes "bravely run away";
 	assert one hit by mindslug;
@@ -1094,6 +1080,7 @@ Initial scheduling for malleus-bonus-attacking:
 	try feeding the malleus maleficarum;
 	check that the malleus is fed;
 	now the nomos bonus is true;
+	reset hitting counts;
 	
 testing effects of malleus-bonus-attacking:
 	assert that the event description includes "You plan on turning human, but find yourself attacking the swarm of daggers instead";
@@ -1113,9 +1100,12 @@ testing effects of early-feeding:
 bonus-surviving-attack is a repeatable test step. The maximum repeats is 20.
 
 initial scheduling of bonus-surviving-attack:
-       now the melee of the swarm of daggers is 100;
-       now the health of the player is 1000;
-       compel the action of the swarm of daggers attacking the player;
+	now the melee of the swarm of daggers is 100;
+	now the health of the player is 1000;
+	now the hit protection of the player is 0;
+	now dagger-scattered is 0;
+	compel the action of the swarm of daggers attacking the player;
+	reset hitting counts;
        
 testing effects of bonus-surviving-attack:
        if the hitting count of the swarm of daggers is 0, make no decision;
