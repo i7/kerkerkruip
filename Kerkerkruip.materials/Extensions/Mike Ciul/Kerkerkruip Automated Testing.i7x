@@ -818,6 +818,12 @@ First before an actor hitting (this is the increment hitting count rule):
 To reset hitting counts:
 	Repeat with guy running through people:
 		Now the hitting count of guy is 0.
+		
+A last initial scheduling rule (this is the reset hitting counts when scheduling a test step rule):
+	reset hitting counts;
+	
+A first sudden combat reset rule for the player (this is the reset hitting counts before extracting the player rule):
+	reset hitting counts;
 
 Section - Diggable
 

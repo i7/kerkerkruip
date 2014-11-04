@@ -291,9 +291,6 @@ Before taking a player action [or reaction] when mindslug-retreat is the schedul
 	now concentration of fafhrd is 1;
 	now mouser does not press the player;
 	now concentration of mouser is 0;
-
-Before taking a player action when testing parting shots (this is the reset hitting counts for parting shots rule):
-	reset hitting counts;
 		
 testing effects for mindslug-retreat:
 	assert that the event description includes "bravely run away";
@@ -380,10 +377,6 @@ Section - Retreating from the Tentacle
 
 tentacle-grab is a test set.
 
-Before taking a player action when testing tentacle-grab (this is the reset hitting counts for tentacle-grab rule):
-	[refactor this rule into some kind of retreat-testing property for test sets?]
-	reset hitting counts;
-	
 Scenario when testing tentacle-grab:
 	Now the giant tentacle is testobject;
 	now the fuligin cloak is testobject;
@@ -1062,7 +1055,6 @@ Initial scheduling for malleus-bonus-attacking:
 	try feeding the malleus maleficarum;
 	check that the malleus is fed;
 	now the nomos bonus is true;
-	reset hitting counts;
 	
 testing effects of malleus-bonus-attacking:
 	assert that the event description includes "You plan on turning human, but find yourself attacking the swarm of daggers instead";
@@ -1088,7 +1080,6 @@ initial scheduling of bonus-surviving-attack:
 	now the hit protection of the player is 0;
 	now dagger-scattered is 0;
 	compel the action of the swarm of daggers attacking the player;
-	reset hitting counts;
        
 testing effects of bonus-surviving-attack:
        if the hitting count of the swarm of daggers is 0, make no decision;
