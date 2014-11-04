@@ -106,7 +106,7 @@ To say grand test summary:
 	Repeat through Table of Test Results:
 		now grand test total is grand test total plus total entry;
 		now grand test failures is grand test failures plus failures entry;
-	say "[grand test total] tests in [number of filled rows in Table of Test Results] sets, [grand test failures] failures";
+	say "[grand test total] test[s] in [number of filled rows in Table of Test Results] set[s], [grand test failures] failures";
 	
 To display test results:
 	If the number of filled rows in Table of Test Results is 0, stop;
@@ -463,7 +463,7 @@ First after showing the title screen (this is the run all tests rule):
 	now the current test set is the test set entry;	
 	blank out the whole row;
 	Now the current unit test name is "[the current test set]";
-	log "Completed so far: [grand test summary], with [number of filled rows in Table of Test Set Queue] sets left to test";
+	log "Completed so far: [grand test summary], with [number of filled rows in Table of Test Set Queue] set[s] left to test";
 	log "Now testing [the current test set].";
 	follow the scenario rules;
 	transcribe and restart capturing text because "done setting scenario for";
