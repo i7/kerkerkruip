@@ -1097,6 +1097,7 @@ initial scheduling of early-feeding:
 testing effects of early-feeding:
        check that the malleus is fed.
        
+[Test for bug #337]
 bonus-surviving-attack is a repeatable test step. The maximum repeats is 20.
 
 initial scheduling of bonus-surviving-attack:
