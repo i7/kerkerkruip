@@ -106,7 +106,7 @@ To say grand test summary:
 	Repeat through Table of Test Results:
 		now grand test total is grand test total plus total entry;
 		now grand test failures is grand test failures plus failures entry;
-	say "[grand test total] test[s] in [number of filled rows in Table of Test Results] set[s], [grand test failures] failures";
+	say "[grand test total] test[s] in [number of filled rows in Table of Test Results] set[s], [grand test failures] failure[s]";
 	
 To display test results:
 	If the number of filled rows in Table of Test Results is 0, stop;
