@@ -302,7 +302,6 @@ Before taking a player action when the scheduled event is generated (this is the
 Section - Generating Actions
 
 For taking a player action when the scheduled event is not the normal keyboard input (this is the test step player action rule):
-	log "generating player action - [combat state of the player]";
 	if the player is at-React:
 		follow the choosing a player reaction rules;
 	otherwise:

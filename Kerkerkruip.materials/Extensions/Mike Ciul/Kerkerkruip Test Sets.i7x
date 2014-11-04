@@ -1107,27 +1107,6 @@ testing effects of bonus-surviving-attack:
        check that the malleus is fed;
        now bonus-surviving-attack is not repeatable;
 
-early-feeding is a test step.
-
-initial scheduling of early-feeding:
-	generate the action of feeding the malleus maleficarum.
-
-testing effects of early-feeding:
-	check that the malleus is fed.
-	
-bonus-surviving-attack is a repeatable test step. The maximum repeats is 20.
-
-initial scheduling of bonus-surviving-attack:
-	now the melee of the swarm of daggers is 100;
-	now the health of the player is 1000;
-	compel the action of the swarm of daggers attacking the player;
-	
-testing effects of bonus-surviving-attack:
-	if the hitting count of the swarm of daggers is 0, make no decision;
-	assert "the player should be damaged" based on whether or not the health of the player < 1000;
-	check that the malleus is fed;
-	now bonus-surviving-attack is not repeatable;
-
 Section - bug 234
 
 bug-234 is an test set.
