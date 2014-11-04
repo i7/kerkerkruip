@@ -1063,17 +1063,10 @@ Choosing a player action when testing malleus-bonus-attacking:
 [turning human is not acting fast, but a rule sets the take no time boolean for it. This will be too late to stop the nomos bonus from changing our action]
 
 to check that the malleus is fed:
-<<<<<<< HEAD
-	transcribe and restart capturing;
-	try examining the malleus maleficarum;
-	pause and assert that the event description includes "Feeding 2 blood to the Malleus Maleficarum will give it an additional bonus of \+1 attack and \+1 damage on your next attack.* dreadful presence; blood bonus of \+1 attack and \+1 damage";
-	
-=======
        transcribe and restart capturing;
        try examining the malleus maleficarum;
        pause and assert that the event description includes "Feeding 2 blood to the Malleus Maleficarum will give it an additional bonus of \+1 attack and \+1 damage on your next attack.* dreadful presence; blood bonus of \+1 attack and \+1 damage";
 
->>>>>>> Trying to recover from train wreck of last week with hitting counts
 Initial scheduling for malleus-bonus-attacking:
 	assert that the nomos bonus is true with label "nomos bonus";
 	now the nomos bonus is false;
