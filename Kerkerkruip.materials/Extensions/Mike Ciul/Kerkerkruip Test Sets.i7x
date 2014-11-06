@@ -2487,23 +2487,41 @@ initial scheduling of fafhrd-battling:
 	now the defence of the player is 50;
 	now the health of the player is 1000;
 		
+reaction-type is a kind of value. The reaction-types are no reaction, parry reaction, dodge reaction, block reaction, roll reaction.
+
+A reaction-type has a text called the report. The report of a reaction-type is usually "";
+
+The report of the parry reaction is "\(parrying with [the global defender weapon]\)".
+The report of the dodge reaction is "\(defender dodging\)".
+The report of the block reaction is "\(block (bonus|penalty)\)".
+The report of the roll reaction is "\(rolling\)".
+
+To assign (reaction - a reaction-type) to (guy - a person):
+	if reaction is parry reaction:
+		now guy is at parry;
+	else if reaction is dodge reaction:
+		now guy is at dodge;
+	else if reaction is block reaction:
+		now guy is at-block;
+	else if reaction is roll reaction:
+		now guy is at-roll;
+		
+To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit with result (outcome - a text):
+	transcribe and restart capturing;
+	assign reaction to guy;
+	now the melee of the player is strength;
+	now the health of guy is 1000;
+	now the defence of guy is 50;
+	try the player hitting guy;
+	stop and save event description;
+	if report of the reaction is not empty, assert that the event description includes "[report of reaction]";
+	assert that the event description includes "[outcome]";
+		
 Testing effects of fafhrd-battling:
 	assert that the location of Fafhrd is test arena with label "location of Fafhrd";
-	[rapier is intact after hitting Fafhrd]
-	now the defence of Fafhrd is 50;
-	now the melee of the player is 100;
-	now the health of Fafhrd is 1000;
-	transcribe and restart capturing;
-	try the player hitting Fafhrd;
+	have Fafhrd do no reaction to a 100 melee hit with result "You deal";
 	assert "the rapier is intact after Fafhrd is hit" based on whether or not the player carries the gilded rapier;
-	[rapier is intact after Fafhrd dodges]
-	transcribe and restart capturing;
-	now Fafhrd is at dodge;
-	now the melee of the player is 0;
-	try the player hitting Fafhrd;
-	stop and save event description;
-	assert that the event description includes "\(defender dodging\)";
-	assert that the event description includes "you do not overcome Fafhrd";
+	have Fafhrd do a dodge reaction to a 0 melee hit with result "you do not overcome Fafhrd";
 	assert "the rapier is intact after Fafhrd dodges" based on whether or not the player carries the gilded rapier;
 	[claymore parries rapier]
 	transcribe and restart capturing;
@@ -2598,6 +2616,18 @@ Testing effects of parrying-claymore:
 	assert that the rapier is off-stage;
 	now parrying-claymore is not repeatable.
 
+scythe-vs-fafhrd is a test step.
+
+Initial scheduling of scythe-vs-fafhrd:
+	now the player carries the scythe of oxidation;
+	now the body score of fafhrd is 0;
+	generate the action of readying the scythe of oxidation;
+	compel the action of fafhrd waiting;
+	
+Testing effects of scythe-vs-fafhrd:
+	do nothing.
+	
+	
 Section - Example failure
 
 example failure is a test set.
