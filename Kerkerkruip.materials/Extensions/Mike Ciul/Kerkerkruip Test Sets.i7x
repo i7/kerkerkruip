@@ -2491,10 +2491,9 @@ reaction-type is a kind of value. The reaction-types are no reaction, parry reac
 
 A reaction-type has a text called the report. The report of a reaction-type is usually "";
 
-The report of the parry reaction is "\(parrying with [the global defender weapon]\)".
+The report of the parry reaction is "\(defender parrying\)".
 The report of the dodge reaction is "\(defender dodging\)".
 The report of the block reaction is "\(block (bonus|penalty)\)".
-The report of the roll reaction is "\(rolling\)".
 
 To assign (reaction - a reaction-type) to (guy - a person):
 	if reaction is parry reaction:
@@ -2507,12 +2506,15 @@ To assign (reaction - a reaction-type) to (guy - a person):
 		now guy is at-roll;
 		
 To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit with result (outcome - a text):
+	have guy do a reaction to a strength melee hit by the player with result outcome.
+	
+To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit by (aggressor - a person) with result (outcome - a text):
 	transcribe and restart capturing;
 	assign reaction to guy;
 	now the melee of the player is strength;
 	now the health of guy is 1000;
 	now the defence of guy is 50;
-	try the player hitting guy;
+	try the aggressor hitting guy;
 	stop and save event description;
 	if report of the reaction is not empty, assert that the event description includes "[report of reaction]";
 	assert that the event description includes "[outcome]";
@@ -2524,24 +2526,12 @@ Testing effects of fafhrd-battling:
 	have Fafhrd do a dodge reaction to a 0 melee hit with result "you do not overcome Fafhrd";
 	assert "the rapier is intact after Fafhrd dodges" based on whether or not the player carries the gilded rapier;
 	[claymore parries rapier]
-	transcribe and restart capturing;
-	now Fafhrd is at parry;
-	now the melee of the player is 0;
-	try the player hitting Fafhrd;
-	stop and save event description;
-	assert that the event description includes "\(parrying with the claymore\)";
-	assert that the event description includes "The claymore shatters the gilded rapier!";
+	have Fafhrd do a parry reaction to a 0 melee hit with result "The claymore shatters the gilded rapier!";
+	assert that the gilded rapier is off-stage;
 	[claymore parries fists]
-	transcribe and restart capturing;
-	now Fafhrd is at parry;
-	try the player hitting Fafhrd;
-	stop and save event description;
-	assert that the event description includes "\(parrying with the claymore\)";
+	have Fafhrd do a parry reaction to a 0 melee hit with result "you do not overcome Fafhrd";
 	assert that the event description does not include "The claymore shatters";
 	assert that the global attacker weapon is a random natural weapon enclosed by the player with label "global attacker weapon";
-	[make sure Fafhrd is reset]
-	assert "Fafhrd should not be at parry" based on whether or not Fafhrd is not at parry;
-	assert "Fafhrd should not be at dodge" based on whether or not Fafhrd is not at dodge;
 	[restore rapier to the player]
 	transcribe and restart capturing;
 	now the gilded rapier is not readied;
@@ -2625,8 +2615,39 @@ Initial scheduling of scythe-vs-fafhrd:
 	compel the action of fafhrd waiting;
 	
 Testing effects of scythe-vs-fafhrd:
-	do nothing.
+	have fafhrd do no reaction to a 100 melee hit with result "You deal";
+	have fafhrd do a parry reaction to a 100 melee hit with result "You deal";
+	assert "Fafhrd should not be rusted" based on whether or not Fafhrd is not rusted;
+	assert "The claymore should not be rusted" based on whether or not the claymore is not rusted;
+	have fafhrd do a parry reaction to a 0 melee hit with result "Having been in contact with the scythe of oxidation, the claymore rusts";
+	assert "The claymore should be rusted after parrying the scythe of oxidation" based on whether or not the claymore is rusted;
+	now the claymore is not rusted;
+	have the player do a parry reaction to a 0 melee hit by Fafhrd with result "Having been in contact with the scythe of oxidation, the claymore rusts";
+	assert "The claymore should be rusted after being parried by the scythe of oxidation" based on whether or not the claymore is rusted;
 	
+scythe-vs-chains is a test step.
+
+Initial scheduling of scythe-vs-chains:
+	extract Fafhrd from combat;
+	remove Fafhrd from play;
+	generate the action of challenging the chain golem in Test Arena;
+	compel the action of the chain golem waiting;
+	
+Testing effects of scythe-vs-chains:
+	Let the chain-weapon be a random natural weapon enclosed by the chain golem;
+	have the chain golem do a dodge reaction to a 0 melee hit with result "you do not overcome";
+	assert "The chain golem should not be rusted" based on whether or not the chain golem is not rusted;
+	assert "The chain golem's chains should not be rusted" based on whether or not the chain-weapon is not rusted;
+	have the chain golem do a parry reaction to a 0 melee hit with result "Having been in contact with the scythe of oxidation, the lashing chains rust\.";
+	assert "The chain golem's chains should be rusted after parrying the scythe of oxidation" based on whether or not the chain-weapon is rusted;
+	assert "The chain golem should not be rusted even though the lashing chains are rusted" based on whether or not the chain golem is not rusted;
+	now the chain-weapon is not rusted;
+	have the chain golem do a dodge reaction to a 100 melee hit with result "Having been hit with the scythe of oxidation, the chain golem rusts!";
+	assert "The chain golem should be rusted after being hit by the scythe of oxidation" based on whether or not the chain golem is rusted;
+	assert "The lashing chains should not be rusted after the chain golem is hit by the scythe of oxidation" based on whether or not the chain-weapon is not rusted;
+	now the chain golem is not rusted;
+	have the player do a parry reaction to a 0 melee hit by the chain golem with result "Having hit the scythe of oxidation, the lashing chains rust\.";
+	assert "The lashing chains should be rusted after being parried by the scythe of oxidation" based on whether or not the chain-weapon is rusted;
 	
 Section - Example failure
 

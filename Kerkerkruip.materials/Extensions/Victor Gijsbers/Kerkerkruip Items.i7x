@@ -3603,30 +3603,39 @@ The scythe of oxidation is a scythe. The scythe of oxidation is iron. The scythe
 
 The special weapon info of the scythe of oxidation is "; rusts weapons[run paragraph on]".
 
+To rust is a verb.
+
 An aftereffects rule (this is the scythe of oxidation rusts stuff rule):
-	if the global attacker weapon is the scythe of oxidation:
+	Let the target be whatever the scythe of oxidation hit;
+	showme the target;
+	if the target is a thing, showme the material of the target;
+	If the target is a not rusted iron thing:
+		say "Having been [if the target is the global defender]hit[otherwise]in contact[end if] with the scythe of oxidation, [the target] [rust][if the target is a person]![otherwise].[end if]";
+		now the target is rusted;
+
+	[TODO: if the target is a person or a natural weapon, spread the rust between both?]
+	[TODO: if the damage was reduced to 0, still rust the global defender?]
+	
+[	if the global attacker weapon is the scythe of oxidation:
 		if the global defender is at parry and the total damage is 0:
 			if the global defender weapon is iron and the global defender weapon is not rusted:
-				say "Having been in contact with the scythe of oxidation, [the global defender weapon] [bold type]rusts[roman type].";
+				say "Having been in contact with the scythe of oxidation, [the global defender weapon] [bold type][rust][roman type].";
 				now the global defender weapon is rusted;
 	if the global defender weapon is the scythe of oxidation:
 		if the global defender is at parry and the total damage is 0:
 			if the global attacker weapon is iron and the global attacker weapon is not rusted:
 				if the global attacker weapon is not a part of the global attacker:
-					say "Having been in contact with the scythe of oxidation, [the global attacker weapon] [bold type]rusts[roman type].";
+					say "Having been in contact with the scythe of oxidation, [the global attacker weapon] [bold type][rust][roman type].";
 					now the global attacker weapon is rusted;
 				otherwise:
 					if the global defender is not rusted and the global defender is alive:
-						say "Having hit the scythe of oxidation, [the global defender] [bold type]rusts[roman type]!";			
+						say "Having hit the scythe of oxidation, [the global defender] [bold type][rust][roman type]!";			
 						now the global defender is rusted;
 	if the global attacker weapon is the scythe of oxidation:
 		if the global defender is iron and the total damage is greater than 0:
 			if the global defender is not rusted and the global defender is alive:
-				say "Having been hit with the scythe of oxidation, [the global defender] [bold type]rusts[roman type]!";			
-				now the global defender is rusted.
-
-
-
+				say "Having been hit with the scythe of oxidation, [the global defender] [bold type][rust][roman type]!";			
+				now the global defender is rusted.]
 
 
 Chapter - Staves
