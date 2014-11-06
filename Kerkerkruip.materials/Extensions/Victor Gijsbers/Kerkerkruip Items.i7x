@@ -3607,8 +3607,6 @@ To rust is a verb.
 
 An aftereffects rule (this is the scythe of oxidation rusts stuff rule):
 	Let the target be whatever the scythe of oxidation hit;
-	showme the target;
-	if the target is a thing, showme the material of the target;
 	If the target is a not rusted iron thing:
 		say "Having been [if the target is the global defender]hit[otherwise]in contact[end if] with the scythe of oxidation, [the target] [rust][if the target is a person]![otherwise].[end if]";
 		now the target is rusted;
