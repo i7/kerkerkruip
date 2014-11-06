@@ -3125,22 +3125,13 @@ The claymore is a sword. The description of claymore is "This big sword is mainl
 The special weapon info of the claymore is "; shatters weapons[run paragraph on]"
 
 An aftereffects rule (this is the claymore can cause weapons to break rule):
-	if global attacker weapon is the claymore or global defender weapon is the claymore: [using claymore]
-		if global defender is at parry and total damage is 0 and global attacker weapon is not ranged: [parry successful]
-			let target be the claymore;
-			let n be 0;
-			if global attacker weapon is the claymore:
-				now target is global defender weapon;
-				now n is (final body of the global attacker / 4);
-			otherwise:
-				now target is global attacker weapon;
-				now n is (final body of the global defender / 4);
-			if target is corruptible:
-				if target is not a natural weapon:
-[					say "TEST: running with n = [n] and target is [target].";]
-					if a random chance of n in 20 succeeds:
-						say "The claymore [bold type]shatters [the target][roman type]!";
-						remove target from play.
+	Let target be whatever the claymore hit;
+	If target is a corruptible weapon and target is not a natural weapon:
+		Let the wielder be the holder of the claymore;
+		Let the breaking-force be the final body of the wielder / 4;
+		if a random chance of breaking-force in 20 succeeds:
+			say "The claymore [bold type]shatters [the target][roman type]!";
+			remove target from play.
 						
 Section - Holy sword (monster)
 
