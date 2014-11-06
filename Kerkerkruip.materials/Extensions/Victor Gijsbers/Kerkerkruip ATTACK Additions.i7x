@@ -174,7 +174,7 @@ The new standard attack select rule is listed instead of the standard attack sel
 Section - Weapon interactions during aftereffects
 
 To decide what object is whatever (item - a thing) hit:
-	if the total damage is greater than 0:
+	if the attack hit:
 		if item is the global attacker weapon, decide on the global defender;
 		if item is the global defender, decide on the global attacker weapon;
 		decide on nothing;

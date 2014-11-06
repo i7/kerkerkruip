@@ -2511,7 +2511,7 @@ To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength 
 To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit by (aggressor - a person) with result (outcome - a text):
 	transcribe and restart capturing;
 	assign reaction to guy;
-	now the melee of the player is strength;
+	now the melee of the aggressor is strength;
 	now the health of guy is 1000;
 	now the defence of guy is 50;
 	try the aggressor hitting guy;
@@ -2542,69 +2542,18 @@ Testing effects of fafhrd-battling:
 	assert that the event description includes "gilded rapier \(readied\)";
 	assert that the event description does not include "\(readied\).*\(readied\)";
 	assert that the number of readied weapons enclosed by the player is 1 with label "number of player's readied weapons ([the list of readied weapons enclosed by the player])";
-	transcribe and restart capturing;
-
-dodging-claymore is a repeatable test step.
-
-initial scheduling of dodging-claymore:
-	compel the action of fafhrd attacking the player;
-	
-Choosing a player reaction when testing dodging-claymore:
-	generate the action of dodging;
-	
-Testing effects of dodging-claymore:
-	if the hitting count of fafhrd is 0, make no decision;
-	assert that the event description includes "You get ready for quick evasive maneuvers";
-	assert that the event description includes "Fafhrd does not overcome your defence rating";
-	assert that the player carries the gilded rapier;
-	now dodging-claymore is not repeatable;
-
-dodging-claymore-fail is a repeatable test step.
-
-Choosing a player reaction when testing dodging-claymore-fail:
-	generate the action of dodging;
-	
-initial scheduling of dodging-claymore-fail:
-	now the melee of fafhrd is 100;
-	compel the action of fafhrd attacking the player;
-	
-Testing effects of dodging-claymore-fail:
-	if the hitting count of fafhrd is 0, make no decision;
-	assert that the event description includes "You get ready for quick evasive maneuvers";
-	assert that the event description includes "Fafhrd beats your defence rating";
-	assert that the player carries the gilded rapier;
-	now dodging-claymore-fail is not repeatable;
-
-parrying-claymore-fail is a repeatable test step.
-
-Choosing a player reaction when testing parrying-claymore-fail:
-	generate the action of parrying;
-	
-initial scheduling of parrying-claymore-fail:
-	if the player is not at-react, compel the action of fafhrd attacking the player;
-	
-Testing effects of parrying-claymore-fail:
-	if the hitting count of fafhrd is 0, make no decision;
-	assert that the event description includes "You strike up a defensive pose";
-	assert that the event description includes "Fafhrd beats your defence rating";
-	assert that the player carries the gilded rapier;
-	now parrying-claymore-fail is not repeatable;
-	
-parrying-claymore is a test step.
-
-initial scheduling for parrying-claymore:
-	now the melee of fafhrd is 0;
-	compel the action of fafhrd attacking the player;
-	
-choosing a player reaction when testing parrying-claymore:
-	generate the action of parrying;
-	
-Testing effects of parrying-claymore:
-	if the hitting count of fafhrd is 0, make no decision;
-	assert that the event description includes "You strike up a defensive pose";
-	assert that the event description includes "The claymore shatters the gilded rapier!";
-	assert that the rapier is off-stage;
-	now parrying-claymore is not repeatable.
+	have the player do a dodge reaction to a 0 melee hit by Fafhrd with result "Fafhrd does not overcome your defence rating";
+	assert "the rapier should be intact after successfully dodging the claymore" based on whether or not the player carries the gilded rapier;
+	have the player do a dodge reaction to a 100 melee hit by Fafhrd with result "Fafhrd beats your defence rating";
+	assert "the rapier should be intact after failing to dodge the claymore" based on whether or not the player carries the gilded rapier;
+	have the player do a parry reaction to a 100 melee hit by Fafhrd with result "Fafhrd beats your defence rating";
+	assert "the rapier should be intact after failing to parry the claymore" based on whether or not the player carries the gilded rapier;
+	now the hit protection of the player is 1;
+	have the player do a parry reaction to a 100 melee hit by Fafhrd with result "Fafhrd beats your defence rating";
+	assert "the rapier should be intact after the protected player fails to parry the claymore" based on whether or not the player carries the gilded rapier;
+	assert that the hit protection of the player is 0 with label "hit protection of the player";
+	have the player do a parry reaction to a 0 melee hit by Fafhrd with result "The claymore shatters the gilded rapier!";
+	assert "the rapier should be destroyed after parrying the claymore" based on whether or not the gilded rapier is off-stage;
 
 scythe-vs-fafhrd is a test step.
 

@@ -313,6 +313,9 @@ Section - Whether the attack hits
 
 Whether the attack hit is a truth state variable.
 
+To decide whether the attack hit:
+	decide on whether the attack hit.
+	
 The contact rules are a rulebook.
 
 Carry out an actor hitting (this is the abide by the contact rules rule):
