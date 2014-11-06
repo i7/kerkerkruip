@@ -2469,7 +2469,117 @@ Testing effects of fell-defeating-293:
 	assert "israfel should be off-stage" based on whether or not israfel is off-stage;
 	[assert that the event description includes "Israfel's dying cry shakes the foundations of the world";]
 	assert "power of israfel should be granted" based on whether or not the power of israfel is granted.
+	
+Section - Weapon aftereffects
+
+weapon aftereffects is a test set.
+
+Scenario when testing weapon aftereffects:
+	now the body score of fafhrd is 100;
+
+fafhrd-battling is a test step. The first move of weapon aftereffects is fafhrd-battling.
+
+initial scheduling of fafhrd-battling:
+	Now the player carries the gilded rapier;
+	try readying the gilded rapier;
+	generate the action of challenging fafhrd in test arena;
+	compel the action of fafhrd waiting;
+	now the defence of the player is 50;
 		
+Testing effects of fafhrd-battling:
+	assert that the location of Fafhrd is test arena with label "location of Fafhrd";
+	now the defence of Fafhrd is 50;
+	now the melee of the player is 100;
+	now the health of Fafhrd is 1000;
+	transcribe and restart capturing;
+	try the player hitting Fafhrd;
+	assert "the rapier is intact after Fafhrd is hit" based on whether or not the player carries the gilded rapier;
+	transcribe and restart capturing;
+	now Fafhrd is at dodge;
+	now the melee of the player is 0;
+	try the player hitting Fafhrd;
+	stop and save event description;
+	assert that the event description includes "\(defender dodging\)";
+	assert that the event description includes "you do not overcome Fafhrd";
+	assert "the rapier is intact after Fafhrd dodges" based on whether or not the player carries the gilded rapier;
+	transcribe and restart capturing;
+	now Fafhrd is at parry;
+	now the melee of the player is 0;
+	try the player hitting Fafhrd;
+	stop and save event description;
+	assert that the event description includes "\(parrying with the claymore\)";
+	assert that the event description includes "The claymore shatters the gilded rapier!";
+	transcribe and restart capturing;
+	now the player carries the gilded rapier;
+	try taking inventory;
+	stop and save event description;
+	assert that the event description includes "gilded rapier \(readied\)";
+	assert that the event description does not include "\(readied\).*\(readied\)";
+	assert that the number of readied weapons enclosed by the player is 1 with label "number of player's readied weapons";
+	transcribe and restart capturing;
+
+dodging-claymore is a repeatable test step.
+
+initial scheduling of dodging-claymore:
+	compel the action of fafhrd attacking the player;
+	
+Choosing a player reaction when testing dodging-claymore:
+	generate the action of dodging;
+	
+Testing effects of dodging-claymore:
+	if the hitting count of fafhrd is 0, make no decision;
+	assert that the event description includes "You get ready for quick evasive maneuvers";
+	assert that the event description includes "Fafhrd does not overcome your defence rating";
+	assert that the player carries the gilded rapier;
+	now dodging-claymore is not repeatable;
+
+dodging-claymore-fail is a repeatable test step.
+
+Choosing a player reaction when testing dodging-claymore-fail:
+	generate the action of dodging;
+	
+initial scheduling of dodging-claymore-fail:
+	now the melee of fafhrd is 100;
+	compel the action of fafhrd attacking the player;
+	
+Testing effects of dodging-claymore-fail:
+	if the hitting count of fafhrd is 0, make no decision;
+	assert that the event description includes "You get ready for quick evasive maneuvers";
+	assert that the event description includes "Fafhrd beats your defence rating";
+	assert that the player carries the gilded rapier;
+	now dodging-claymore-fail is not repeatable;
+
+parrying-claymore-fail is a repeatable test step.
+
+Choosing a player reaction when testing parrying-claymore-fail:
+	generate the action of parrying;
+	
+initial scheduling of parrying-claymore-fail:
+	compel the action of fafhrd attacking the player;
+	
+Testing effects of parrying-claymore-fail:
+	if the hitting count of fafhrd is 0, make no decision;
+	assert that the event description includes "You strike up a defensive pose";
+	assert that the event description includes "Fafhrd beats your defence rating";
+	assert that the player carries the gilded rapier;
+	now parrying-claymore-fail is not repeatable;
+	
+parrying-claymore is a test step.
+
+initial scheduling for parrying-claymore:
+	now the melee of fafhrd is 0;
+	compel the action of fafhrd attacking the player;
+	
+choosing a player reaction when testing parrying-claymore:
+	generate the action of parrying;
+	
+Testing effects of parrying-claymore:
+	if the hitting count of fafhrd is 0, make no decision;
+	assert that the event description includes "You strike up a defensive pose";
+	assert that the event description includes "The claymore shatters the gilded rapier!";
+	assert that the rapier is off-stage;
+	now parrying-claymore is not repeatable.
+
 Section - Example failure
 
 example failure is a test set.

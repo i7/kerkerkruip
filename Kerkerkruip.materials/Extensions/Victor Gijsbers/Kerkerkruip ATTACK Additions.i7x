@@ -171,7 +171,25 @@ An AI action selection rule for an at-Act person (called P) (this is the new sta
 The new standard attack select rule is listed instead of the standard attack select rule in the AI action selection rules.
 
 
+Section - Weapon interactions during aftereffects
 
+To decide what object is whatever (item - a thing) hit:
+	if the total damage is greater than 0:
+		if item is the global attacker weapon, decide on the global defender;
+		if item is the global defender, decide on the global attacker weapon;
+		decide on nothing;
+	if item is the global attacker weapon:
+		if the global defender is at parry, decide on the global defender weapon;
+		if the global defender is at-block, decide on a random shield worn by the global defender;
+		decide on nothing;
+	if item is the global defender weapon:
+		if the global attacker weapon is ranged, decide on nothing;
+		if the global defender is at parry, decide on the global attacker weapon;
+		decide on nothing;
+	if item is a shield worn by the global defender:
+		if the global defender is at-block, decide on the global attacker weapon;
+		decide on nothing;
+	decide on nothing.
 
 Section - Losing concentration
 

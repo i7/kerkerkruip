@@ -412,8 +412,6 @@ An aftereffects rule (this is the modify initiative based on combat results rule
 	otherwise:
 		decrease the initiative of the global attacker by 2;
 
-
-
 Book - Flow
 
 Chapter - Offensive and Defensive Flow

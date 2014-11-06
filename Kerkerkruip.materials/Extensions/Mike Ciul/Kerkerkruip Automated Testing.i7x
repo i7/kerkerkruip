@@ -56,6 +56,8 @@ To stop and save event description:
 To stop and save event description because (reason - a text):
 	transcribe and stop capturing text because reason;
 	now the event description is the substituted form of "[the captured text]";
+	start capturing text; [clear the captured text]
+	stop capturing text;
 	
 The file of test results is called "testresults".
 
@@ -261,6 +263,8 @@ Initial scheduling for a test step (this is the reset act counts rule):
 	repeat with guy running through people:
 		now the act count of guy is 0;
 			
+rescheduling rules are a test step based rulebook.
+
 To schedule (the event described - a test step):
 	transcribe and restart capturing because "scheduling [the event described] for";
 	if the event described is not the scheduled event:
@@ -276,6 +280,7 @@ To schedule (the event described - a test step):
 	otherwise:
 		transcribe and stop capturing because "repeating";
 		start capturing text;
+		follow the rescheduling rules for the event described;
 		increment the repeated moves;
 	now the event described is not generated;
 	transcribe and restart capturing because "done scheduling";
@@ -845,6 +850,10 @@ Definition: a direction (called way) is diggable:
 			no;
 		otherwise:
 			decide on whether or not item is connectable;
+
+Section - Test Arena
+
+Test Arena is an arena. The staging area of Test Arena is Test Arena.
 
 Kerkerkruip Automated Testing ends here.
 
