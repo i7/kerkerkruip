@@ -311,10 +311,14 @@ Last attack modifier rule (this is the standard show results of the attack roll 
 
 Section - Whether the attack hits
 
+Whether the attack hit is a truth state variable.
+
 The contact rules are a rulebook.
 
 Carry out an actor hitting (this is the abide by the contact rules rule):
-	abide by the contact rules.
+	now whether the attack hit is false;
+	abide by the contact rules;
+	now whether the attack hit is true;
 
 To beat is a verb.
 
