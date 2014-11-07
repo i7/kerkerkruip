@@ -2504,29 +2504,67 @@ To assign (reaction - a reaction-type) to (guy - a person):
 	else if reaction is roll reaction:
 		now guy is at-roll;
 		
+To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit by (aggressor - a person) with result (outcome - a text) in/on (likelihood - a number) out of (total tries - a number) attempts:
+	Let original-defender-weapon be a random readied weapon enclosed by guy;
+	Let original-attacker-weapon be a random readied weapon enclosed by aggressor;
+	Let success count be 0;
+	Let success ratio be 0;
+	Let maximum attempts be 300;
+	Let hit-description be "[guy] doing [reaction] to [strength] melee hit by [aggressor]";
+	[don't repeat if the result should always happen (1/1)]
+	If total tries is 1, now maximum attempts is 1;
+	[only repeat the specified amount if the result should never happen (0/X)]
+	if likelihood is 0, now maximum attempts is total tries;
+	Repeat with attempt count running from 1 to maximum attempts:
+		transcribe and restart capturing;
+		assign reaction to guy;
+		now the melee of the aggressor is strength;
+		now the health of guy is 1000;
+		now the defence of guy is 50;
+		now guy carries original-defender-weapon;
+		if original-defender-weapon is not readied, try guy readying original-defender-weapon;
+		now aggressor carries original-attacker-weapon;
+		if original-attacker-weapon is not readied, try aggressor readying original-attacker-weapon;
+		try the aggressor hitting guy;
+		stop and save event description because "[hit-description] attempt [attempt count] -";
+		if report of the reaction is not empty, assert that the event description includes "[report of reaction]";
+		if the event description matches the regular expression "[outcome]":
+			if the likelihood is 0:
+				assert "After [attempt count] attempts, [hit-description] resulted in '[outcome]'" based on false;
+				stop;
+			increment success count;
+			Let count factor be attempt count / total tries;
+			If count factor is 0, next; [not enough success yet. Keep trying]
+			now success ratio is success count / count factor;
+			if success ratio is likelihood:
+				assert "success" based on true; [record success]
+				[if there are successes, we must exit on one so further tests can be done]
+				stop;
+	assert "After [maximum attempts] attempt[s], [hit-description] resulted in '[outcome]' [success count] time[s] (Never greater than [success ratio] out of [total tries] versus a target of [likelihood])" based on whether or not likelihood is 0;
+
+	
 To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit with result (outcome - a text):
 	have guy do a reaction to a strength melee hit by the player with result outcome.
 	
 To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit by (aggressor - a person) with result (outcome - a text):
-	transcribe and restart capturing;
-	assign reaction to guy;
-	now the melee of the aggressor is strength;
-	now the health of guy is 1000;
-	now the defence of guy is 50;
-	try the aggressor hitting guy;
-	stop and save event description;
-	if report of the reaction is not empty, assert that the event description includes "[report of reaction]";
-	assert that the event description includes "[outcome]";
+	have guy do a reaction to a strength melee hit by aggressor with result outcome in 1 out of 1 attempts.
+		
+To assert that/-- (item - a weapon) readied after (circumstance - a text):
+	assert "[The item] should be readied after [circumstance]" based on whether or not the player holds item and item is readied;
+	
+To assert no weapon after (circumstance - a text):
+	Let the item be a random readied weapon enclosed by the player;
+	assert "Nothing besides a natural weapon should be readied after [circumstance]" based on whether or not the item is nothing or the item is a natural weapon.
 		
 Testing effects of fafhrd-battling:
 	assert that the location of Fafhrd is test arena with label "location of Fafhrd";
 	have Fafhrd do no reaction to a 100 melee hit with result "You deal";
-	assert "the rapier is intact after Fafhrd is hit" based on whether or not the player carries the gilded rapier;
+	assert that the gilded rapier readied after "Fafhrd is hit";
 	have Fafhrd do a dodge reaction to a 0 melee hit with result "you do not overcome Fafhrd";
-	assert "the rapier is intact after Fafhrd dodges" based on whether or not the player carries the gilded rapier;
+	assert that the gilded rapier readied after "Fafhrd dodges";
 	[claymore parries rapier]
 	have Fafhrd do a parry reaction to a 0 melee hit with result "The claymore shatters the gilded rapier!";
-	assert that the gilded rapier is off-stage;
+	assert no weapon after "the claymore parries the rapier";
 	[claymore parries fists]
 	have Fafhrd do a parry reaction to a 0 melee hit with result "you do not overcome Fafhrd";
 	assert that the event description does not include "The claymore shatters";
@@ -2542,17 +2580,17 @@ Testing effects of fafhrd-battling:
 	assert that the event description does not include "\(readied\).*\(readied\)";
 	assert that the number of readied weapons enclosed by the player is 1 with label "number of player's readied weapons ([the list of readied weapons enclosed by the player])";
 	have the player do a dodge reaction to a 0 melee hit by Fafhrd with result "Fafhrd does not overcome your defence rating";
-	assert "the rapier should be intact after successfully dodging the claymore" based on whether or not the player carries the gilded rapier;
+	assert the gilded rapier readied after "successfully dodging the claymore";
 	have the player do a dodge reaction to a 100 melee hit by Fafhrd with result "Fafhrd beats your defence rating";
-	assert "the rapier should be intact after failing to dodge the claymore" based on whether or not the player carries the gilded rapier;
+	assert the gilded rapier readied after "failing to dodge the claymore";
 	have the player do a parry reaction to a 100 melee hit by Fafhrd with result "Fafhrd beats your defence rating";
-	assert "the rapier should be intact after failing to parry the claymore" based on whether or not the player carries the gilded rapier;
+	assert the gilded rapier readied after "failing to parry the claymore";
 	now the hit protection of the player is 1;
 	have the player do a parry reaction to a 100 melee hit by Fafhrd with result "Fafhrd beats your defence rating";
-	assert "the rapier should be intact after the protected player fails to parry the claymore" based on whether or not the player carries the gilded rapier;
+	assert the gilded rapier readied after "the protected player fails to parry the claymore";
 	assert that the hit protection of the player is 0 with label "hit protection of the player";
 	have the player do a parry reaction to a 0 melee hit by Fafhrd with result "The claymore shatters the gilded rapier!";
-	assert "the rapier should be destroyed after parrying the claymore" based on whether or not the gilded rapier is off-stage;
+	assert no weapon after "parrying the claymore";
 
 scythe-vs-fafhrd is a test step.
 
@@ -2596,6 +2634,33 @@ Testing effects of scythe-vs-chains:
 	now the chain golem is not rusted;
 	have the player do a parry reaction to a 0 melee hit by the chain golem with result "Having hit the scythe of oxidation, the lashing chains rust\.";
 	assert "The lashing chains should be rusted after being parried by the scythe of oxidation" based on whether or not the chain-weapon is rusted;
+	
+greasy-gauntlets vs mouser is a test step.
+
+Initial scheduling of greasy-gauntlets vs mouser:
+	now the player wears the greasy gauntlets;
+	now the player carries the gilded rapier;
+	now the gilded rapier is not readied;
+	try readying the gilded rapier;
+	extract the chain golem from combat;
+	remove the chain golem from play;
+	generate the action of challenging mouser in the Test Arena;
+	compel the action of mouser waiting.
+	
+Testing effects of greasy-gauntlets vs mouser:
+	have mouser do a dodge reaction to a 0 melee hit by the player with result "you drop the gilded rapier" in 0 out of 20 attempts;
+	assert the gilded rapier readied after "missing mouser";
+	have mouser do a parry reaction to a 0 melee hit by the player with result "you drop the gilded rapier" in 0 out of 20 attempts;
+	assert the gilded rapier readied after "successfully parried by mouser";
+	have mouser do a dodge reaction to a 100 melee hit by the player with result "you drop the gilded rapier" in 1 out of 6 attempts;
+	assert no weapon after "mouser was hit by the rapier using greasy gauntlets";
+	now the gilded rapier is not readied;
+	now the player carries the gilded rapier;
+	try readying the gilded rapier;
+	have the player do a parry reaction to a 100 melee hit by mouser with result "you drop the gilded rapier" in 0 out of 20 attempts;
+	assert the gilded rapier readied after "failing to parry mouser";
+	have the player do a parry reaction to a 0 melee hit by mouser with result "you drop the gilded rapier" in 1 out of 4 attempts;
+	assert no weapon after "successfully parrying mouser using greasy gauntlets";
 	
 Section - Example failure
 

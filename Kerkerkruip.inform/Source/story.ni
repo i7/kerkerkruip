@@ -246,7 +246,7 @@ To ask a closed question, in number mode, in menu mode, in yes/no mode, in gende
 	if in gender mode:
 		now the command prompt is the closed gender prompt;
 		now gender question mode is true;
-	if in text mode:
+	if in text mode: 
 		now the command prompt is the closed text prompt;
 		now text question mode is true;
 	if current question is not "":
