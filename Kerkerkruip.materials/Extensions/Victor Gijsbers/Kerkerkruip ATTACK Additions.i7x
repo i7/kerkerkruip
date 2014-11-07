@@ -173,7 +173,10 @@ The new standard attack select rule is listed instead of the standard attack sel
 
 Section - Weapon interactions during aftereffects
 
-To decide what object is whatever (item - a thing) hit:
+To decide whether (striker - a thing) struck (stricken - a thing):
+	decide on whether or not stricken is whatever striker struck;
+		
+To decide what object is whatever (item - a thing) struck:
 	if the attack hit:
 		if item is the global attacker weapon, decide on the global defender;
 		if item is the global defender, decide on the global attacker weapon;
@@ -182,13 +185,11 @@ To decide what object is whatever (item - a thing) hit:
 		if the global defender is at parry, decide on the global defender weapon;
 		if the global defender is at-block, decide on a random shield worn by the global defender;
 		decide on nothing;
-	if item is the global defender weapon:
-		if the global attacker weapon is ranged, decide on nothing;
-		if the global defender is at parry, decide on the global attacker weapon;
-		decide on nothing;
-	if item is a shield worn by the global defender:
-		if the global defender is at-block, decide on the global attacker weapon;
-		decide on nothing;
+	[The next line makes this phrase asymmetrical -
+	 the global attacker weapon can hit weapons and shields if it is ranged, but they can't hit it]
+	if the global attacker weapon is ranged and the global attacker weapon is not a natural weapon, decide on nothing;
+	if item is the global defender weapon and the global defender is at parry, decide on the global attacker weapon;
+	if item is a shield worn by the global defender and the global defender is at-block, decide on the global attacker weapon;
 	decide on nothing.
 
 Section - Losing concentration

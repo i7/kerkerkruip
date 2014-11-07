@@ -2632,7 +2632,7 @@ Testing effects of scythe-vs-chains:
 	assert "The chain golem should be rusted after being hit by the scythe of oxidation" based on whether or not the chain golem is rusted;
 	assert "The lashing chains should not be rusted after the chain golem is hit by the scythe of oxidation" based on whether or not the chain-weapon is not rusted;
 	now the chain golem is not rusted;
-	have the player do a parry reaction to a 0 melee hit by the chain golem with result "Having hit the scythe of oxidation, the lashing chains rust\.";
+	have the player do a parry reaction to a 0 melee hit by the chain golem with result "Having been in contact with the scythe of oxidation, the lashing chains rust\.";
 	assert "The lashing chains should be rusted after being parried by the scythe of oxidation" based on whether or not the chain-weapon is rusted;
 	
 greasy-gauntlets vs mouser is a test step.

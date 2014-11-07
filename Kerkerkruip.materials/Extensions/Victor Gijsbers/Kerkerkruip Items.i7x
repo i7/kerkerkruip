@@ -3125,7 +3125,7 @@ The claymore is a sword. The description of claymore is "This big sword is mainl
 The special weapon info of the claymore is "; shatters weapons[run paragraph on]"
 
 An aftereffects rule (this is the claymore can cause weapons to break rule):
-	Let target be whatever the claymore hit;
+	Let target be whatever the claymore struck;
 	If target is a corruptible weapon and target is not a natural weapon:
 		Let the wielder be the holder of the claymore;
 		Let the breaking-force be the final body of the wielder / 4;
@@ -3606,7 +3606,7 @@ The special weapon info of the scythe of oxidation is "; rusts weapons[run parag
 To rust is a verb.
 
 An aftereffects rule (this is the scythe of oxidation rusts stuff rule):
-	Let the target be whatever the scythe of oxidation hit;
+	Let the target be whatever the scythe of oxidation struck;
 	If the target is a not rusted iron thing:
 		say "Having been [if the target is the global defender]hit[otherwise]in contact[end if] with the scythe of oxidation, [the target] [rust][if the target is a person]![otherwise].[end if]";
 		now the target is rusted;
