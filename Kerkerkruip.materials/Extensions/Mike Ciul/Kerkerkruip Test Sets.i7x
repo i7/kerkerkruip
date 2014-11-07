@@ -2444,7 +2444,6 @@ Choosing a player action when testing sensing-293:
 	generate the action of sensing.
 	
 Testing effects of sensing-293:
-	log "Fell is in [the location of fell] - Isra is in [the location of isra]";
 	assert "Isra should be psycholocatable" based on whether or not Isra is psycholocation-revealed;
 	assert "Fell should be psycholocatable" based on whether or not fell is psycholocation-revealed;
 	assert that the event description includes "frozen lightning";
