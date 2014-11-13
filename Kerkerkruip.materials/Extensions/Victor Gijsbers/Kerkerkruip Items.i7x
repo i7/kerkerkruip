@@ -4219,6 +4219,120 @@ Before attacking (this is the attacking makes the hand of glory melt away rule):
 		if the hand of glory is lit:
 			do the hand of glory removal.
 
+Section - Hand of Vecna
+
+The hand of Vecna is a thing. The material of the hand of Vecna is flesh. The description of the hand of Vecna is "Ages ago this mummified hand belonged to Vecna, the greatest undead sorceror the world has ever known... and also the most evil[if hand of Vecna is not part of the player]. Rumour has it that if you cut off your own hand and apply Vecna's to the stump, this mummified thing will become one with your body and grant you incredible powers. But it is also whispered that the hand always betrays its owner sooner rather than later. If you are brave and foolish enough to use the hand, simply type [italic type]wield hand[roman type]. You will permanently lose 10 health in the process[otherwise]. Now that the hand is part of your body, your natural attack consists of a very accurate and highly damaging lightning bolt. In addition, by typing 'gesture', you can stun everyone in the room and make them lose concentration, and by typing 'point at [italic type]someone[roman type]', you can fill them with so much agony that they lose two turns[end if]."
+
+Before readying the hand of Vecna:
+	if the hand of Vecna is not part of the player:
+		say "This is not going to be easy. All your instincts rebel against the very thought of cutting off your own hand ... but the lure of power cannot be resisted. At last you steel yourself, and with one fell swoop you sever your hand from your arm. The pain is incredible, and blood sprays everywhere. You push the hand of Vecna against the bleeding stump, and it immediately grafts itself onto your arm. The bleeding stops, thankfully, but it seems that the pain only grows worse.";
+		now the hand of Vecna is part of the player;
+		let X be a random natural weapon part of the player;
+		now X is ranged;
+		now X is size-agnostic;
+		now X is not armour-stoppable;
+		now damage die of X is 12;
+		now weapon attack bonus of X is 1;
+		now dodge bonus of X is 0;
+		now parry-against bonus of X is -2;
+		now parry-with bonus of X is -2;
+		now printed name of X is "a lightning bolt";
+		now material of X is electricity;
+		now original material of X is electricity;
+		decrease health of the player by 10; [bypass damage system]
+		decrease permanent health of the player by 10;
+		if the player is dead:
+			end the story saying "The pain and the loss of blood were too much for your body to handle.";
+		rule succeeds;
+	otherwise:
+		take no time;
+		say "You already performed that foolish action.";
+		rule succeeds.
+
+Before unreadying the hand of Vecna:
+	if the hand of Vecna is part of the player:
+		say "You try to pull the hand off of your arm, but it doesn't budge!";
+		rule succeeds;
+	otherwise:
+		take no time;
+		say "It's not part of you right now.";
+		rule succeeds.
+
+Vecna-betraying is a truth state that varies. Vecna-betraying is false.
+Vecna-timer is a number that varies. Vecna-timer is 0.
+
+Every turn when the hand of Vecna is part of the player:
+	if the player carries a readied weapon:
+		let X be a random readied weapon carried by the player;
+		now X is not readied;
+		move X to the location;
+		say "The hand of Vecna [bold type]drops [the X][roman type] on the floor!";
+	increase Vecna-timer by 1;
+	if Vecna-timer is greater than 6 and Vecna-betraying is false:
+		if main actor is player or a chance of 1 in 3 succeeds:
+			if a random chance of Vecna-timer in 1000 succeeds:
+				say "The pain in your hand suddenly [bold type]grows far worse[roman type], and the evil spirit of Vecna almost overwhelms you. It seems that those stories about the hand betraying its owner were completely true!";
+				now Vecna-betraying is true;
+	if Vecna-betraying is true:
+		if the number of things carried by the player is not 0:
+			if a random chance of 1 in 10 succeeds:
+				let item be a random thing carried by the player;
+				unless item is a readied weapon:
+					move item to the location;
+					say "The hand of Vecna [bold type]throws [the item][roman type] across the room!".
+
+Check the player hitting when the hand of Vecna is part of the player (this is the hitting with the betraying hand of Vecna rule):
+	if Vecna-betraying is true and making-backstab is false:
+		if a random chance of 3 in 4 succeeds:
+			let X be the noun;
+			if a random chance of 1 in 3 succeeds:
+				now X is a random alive person in the location of the actor;
+			otherwise:
+				now X is the player;
+			unless X is the noun:
+				say "The [bold type]hand of Vecna[roman type] attacks [the X] instead!";
+				now making-backstab is true;
+				try the actor hitting X;
+				now making-backstab is false;
+				stop the action;
+
+Gesturing is an action applying to nothing. Understand "gesture" as gesturing.
+
+Check gesturing:
+	unless the hand of Vecna is part of the player:
+		say "You don't have that power."
+
+Carry out gesturing:
+	if the number of people in the location is one:
+		say "Your gesture has no effect, since you are alone.";
+	otherwise:
+		say "The hand of Vecna gestures a forbidden sign, and everyone arounds you screams in pain -- they have lost their concentration and will be stunned for the next six turns.";
+		repeat with guy running through people in the location:
+			unless guy is player:
+				now concentration of guy is 0;
+				now the stun count of the guy is 6;
+				now the stun strength of the guy is 6.
+
+Pointing at is an action applying to one thing. Understand "point at [something]" as pointing at.
+
+Check pointing at:
+	unless the hand of Vecna is part of the player:
+		say "You don't have that power."
+
+Check pointing at:
+	if the noun is not a person:
+		say "You can only use this power against people."
+
+Carry out pointing at:
+	say "You point your finger at [the noun], causing excruciating agony.";
+	now necklace-torment-counter of the noun is 2.
+
+Before doing anything when Vecna-betraying is true (this is the Vecna causes agony to you rule):
+	if a random chance of 1 in 6 succeeds:
+		say "Before you can do anything, the [bold type]hand of Vecna points at you[roman type]! You are racked with unendurable pains.";
+		now necklace-torment-counter of the player is 2;
+		rule fails.
+
 
 Chapter - Ment
 
