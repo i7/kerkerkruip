@@ -1317,10 +1317,10 @@ Instead of searching the large pile of body parts:
 	increment pile search count;
 
 To find an unhealthy scroll:
-	find a scroll of type random unhealthy scroll name;
+	find a scroll of type random unhealthy findable scroll name;
 
 To find a healthy scroll:
-	find a scroll of type random healthy scroll name;
+	find a scroll of type random healthy findable scroll name;
 
 To find a scroll of type (N - scroll name):
 	let the template be the default value of scroll;

@@ -2108,8 +2108,8 @@ A scroll name is a kind of value.
 Some scroll names are defined by the Table of Scroll Names.
 
 Table of Scroll Names
-scroll name	printed name	obfuscated	unhealthy
-mort	"MORT EILYSH"	true	false  [Emily Short]
+scroll name	printed name	obfuscated	unhealthy	findable
+mort	"MORT EILYSH"	true	false  	true[Emily Short]
 cemil	"CEMIL KUI"	true  [Mike Ciul]
 ban	"BAN GNAD"	true   [Angband]
 chetnak	"CHETNAK"	true   [Nethack]
@@ -2128,6 +2128,7 @@ clawe	"CLAWE DARKE"	true   [Wade Clarke]
 Definition: a scroll name is obfuscated if obfuscated of it is true.
 Definition: a scroll name is unhealthy if unhealthy of it is true.
 Definition: a scroll name is healthy if obfuscated of it is false and unhealthy of it is false.
+Definition: a scroll name is findable if findable of it is true.
 
 Understand "mort" and "eilysh" as mort.
 Understand "cemil" and "kui" as cemil.
@@ -2687,8 +2688,8 @@ Carry out reading a scroll of enchantment:
 Section - Scroll of Afternoon Delights (Malygris)
 
 Table of Scroll Names (continued)
-scroll name
-delights
+scroll name	findable
+delights	false
 
 Understand "afternoon" and "delights" and "afternoon delights" as delights.
 
@@ -4269,7 +4270,7 @@ Every turn when the hand of Vecna is part of the player:
 		say "The hand of Vecna [bold type]drops [the X][roman type] on the floor!";
 	increase Vecna-timer by 1;
 	if Vecna-timer is greater than 6 and Vecna-betraying is false:
-		if main actor is player or a chance of 1 in 3 succeeds:
+		if main actor is player or a random chance of 1 in 3 succeeds:
 			if a random chance of Vecna-timer in 1000 succeeds:
 				say "The pain in your hand suddenly [bold type]grows far worse[roman type], and the evil spirit of Vecna almost overwhelms you. It seems that those stories about the hand betraying its owner were completely true!";
 				now Vecna-betraying is true;
