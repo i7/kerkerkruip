@@ -1840,7 +1840,7 @@ An exploding rule (this is the Morphean grenade explodes rule):
 
 Section - Cranial grenade
 
-The cranial grenade is a grenade. The description of the cranial grenade is "This disgusting, rotting head used to belong to an animated corpse. Disconcertingly, its eyes still follow your every move, and it grins all the time as if it is in on some joke you don't know about. Who knows what black magic will be activated when you throw it at someone?"
+The cranial grenade is a custom-grenade. The description of the cranial grenade is "This disgusting, rotting head used to belong to an animated corpse. Disconcertingly, its eyes still follow your every move, and it grins all the time as if it is in on some joke you don't know about. Who knows what black magic will be activated when you throw it at someone?"
 The cranial grenade is flesh.
 
 An exploding rule (this is the cranial grenade explosion rule):
