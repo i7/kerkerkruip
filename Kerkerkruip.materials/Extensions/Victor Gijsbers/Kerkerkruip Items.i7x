@@ -1561,6 +1561,15 @@ First exploding rule (this is the exploding wakes people up rule):
 	repeat with guy running through asleep persons in exploding-location:
 		now guy is not asleep.
 
+Section - Custom grenade
+
+A custom-grenade is a kind of grenade. The indefinite article of a custom-grenade is usually "the". A custom-grenade can be exploded. [a custom-grenade is unique, and can only appear in the dungeon once]
+
+Definition: A custom-grenade is cloneable: no.
+
+Definition: A custom-grenade is placed if it is not off-stage or it is exploded.
+
+
 Section - Normal throwing
 
 Instead of throwing a grenade at something:
@@ -1702,7 +1711,7 @@ An exploding rule (this is the rust grenade explodes rule):
 	if the exploding-grenade is a rust grenade:
 		if exploding-location is the location:
 			say "The rust grenade explodes, and it immediately releases a cloud of rust spores!";
-		remove noun from play;
+		remove exploding-grenade from play;
 		now the exploding-location is rust-spored.
 
 Section - Smoke grenade
@@ -1722,7 +1731,7 @@ An exploding rule:
 				say "The smoke grenade explodes, releasing a large cloud of smoke.";
 			let n be a random number between 6 and 8;
 			increase the smoke timer of the exploding-location by n;
-		remove noun from play.
+		remove exploding-grenade from play.
 
 Section - Fragmentation grenade
 
@@ -1745,24 +1754,18 @@ An exploding rule (this is the fragmentation grenade explodes rule):
 
 Section - Blessed Grenade (major)
 
-A custom-grenade is a kind of grenade. The indefinite article of a custom-grenade is usually "the". A custom-grenade can be exploded. A custom-grenade is usually major. [a custom-grenade is unique, and can only appear in the dungeon once]
-
-Definition: A custom-grenade is cloneable: no.
-
-Definition: A custom-grenade is placed if it is not off-stage or it is exploded.
-
-The Blessed Grenade is a custom-grenade. The description of the Blessed Grenade is "This grenade is rumoured to be extremely effective against undead."
+The Blessed Grenade is a major custom-grenade. The description of the Blessed Grenade is "This grenade is rumoured to be extremely effective against undead."
 
 An exploding rule (this is the Blessed Grenade explodes rule):
-	unless the exploding-grenade is a custom-grenade:
-		make no decision;
-	if the noun is rusted and a random chance of 1 in 2 succeeds:	
-		if exploding-location is the location:
-			say "There is only a feeble explosion. The rust must have rendered [the noun] useless.";
-		otherwise:
-			say "The explosion does seem to be very feeble, though.";
+[	unless the exploding-grenade is a custom-grenade:
+		make no decision;]
 	if the exploding-grenade is the Blessed Grenade:
-		if the number of alive undead persons in the exploding-location is less than 1:
+		if the noun is rusted and a random chance of 1 in 2 succeeds:	
+			if exploding-location is the location:
+				say "There is only a feeble explosion. The rust must have rendered [the noun] useless.";
+			otherwise:
+				say "The explosion does seem to be very feeble, though.";
+		otherwise if the number of alive undead persons in the exploding-location is less than 1:
 			if the location is the exploding-location:
 				say "As the grenade explodes you hear the singing of angels. But nothing further appears to happen.";
 		otherwise:
@@ -1774,10 +1777,10 @@ An exploding rule (this is the Blessed Grenade explodes rule):
 				have an event of the player killing guy;
 			if the player is dead:
 				end the story saying "The undead should not seek blessings.";
-	otherwise:
-		say "[The noun] explodes, but nothing happens. It must be one of those prank grenades that you see in magic shops.";
-	now the noun is exploded;
-	remove the noun from play;
+[	otherwise:
+		say "[The noun] explodes, but nothing happens. It must be one of those prank grenades that you see in magic shops.";]
+	now the exploding-grenade is exploded;
+	remove the exploding-grenade from play;
 
 
 Section - Teleportation grenade
@@ -1808,7 +1811,7 @@ An exploding rule (this is the teleportation grenade explodes rule):
 					teleport the player;
 				otherwise:
 					say "Something has stopped you from teleporting.";
-		remove noun from play.
+		remove exploding-grenade from play.
 
 Section - Morphean grenade
 
@@ -1836,7 +1839,7 @@ An exploding rule (this is the Morphean grenade explodes rule):
 			otherwise:
 				if exploding-location is location:
 					say "The grenade doesn't seem to do anything -- and for a moment, you remember that you are already dreaming.";
-		remove noun from play.
+		remove exploding-grenade from play.
 
 Section - Cranial grenade
 
@@ -1870,6 +1873,7 @@ An exploding rule (this is the cranial grenade explosion rule):
 					say "The head bounces around a couple of times and then disintegrates. The magic must have failed.";
 				otherwise:
 					say "You only hear the wet sound of the rotting head smashing to pieces.";
+		remove exploding-grenade from play.
 
 
 
