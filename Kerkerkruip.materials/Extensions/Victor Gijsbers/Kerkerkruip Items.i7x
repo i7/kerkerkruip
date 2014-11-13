@@ -1551,6 +1551,7 @@ A grenade is usually iron.
 Definition: a grenade is cloneable: yes.
 
 A grenade is either damaging or not-damaging. A grenade is usually not-damaging.
+A grenade is either reverse-following or not reverse-following. A grenade is usually not reverse-following. [A grenade is reversin-following if people come to you in case they've successfuly throw the grenade back at you, rather than the other way around.]
 
 Exploding-location is a room that varies.
 Exploding-grenade is a thing that varies.
@@ -1621,16 +1622,23 @@ Carry out throwing something to:
 		follow the grenade returning rules;
 	if a random chance of grenade-return-percentage in 100 succeeds:
 		say "You throw [the noun] [second noun] -- but before it can explode, it is thrown back towards you!";
+		if exploding-grenade is reverse-following:
+			if a random chance of 2 in 7 succeeds:
+				repeat with guy running through alive persons in exploding-location:
+					now guy is follower;
+					if follower percentile chance of guy is less than 90:
+						increase follower percentile chance of guy by 10;
 		now exploding-location is the location;
 		follow the exploding rules;		
 	otherwise:
 		say "You throw [the noun] [second noun], where you hear it explode.";
 		follow the exploding rules;
-		if (exploding-grenade is damaging and a random chance of 2 in 7 succeeds) or a random chance of 1 in 15 succeeds:
-			repeat with guy running through alive persons in exploding-location:
-				now guy is follower;
-				if follower percentile chance of guy is less than 90:
-					increase follower percentile chance of guy by 10;
+		unless exploding-grenade is reverse-following:
+			if a random chance of 2 in 7 succeeds:
+				repeat with guy running through alive persons in exploding-location:
+					now guy is follower;
+					if follower percentile chance of guy is less than 90:
+						increase follower percentile chance of guy by 10;
 	if the room second noun of location collapses location:
 		if a random chance of 1 in 20 succeeds:
 			let X be room second noun of location;
@@ -1658,7 +1666,7 @@ Grenade returning rule (this is the up and down direction grenade throwing rule)
 Section - Flash grenades
 
 A flash grenade is a kind of grenade. The description of a flash grenade is "When thrown, this magical grenade emits a pulse of searing light so strong that it will blind anyone in its vicinity, even if they close their eyes. The device is universally judged to be Metastasio's most useless invention.".
-A flash grenade is iron.
+A flash grenade is iron. A flash grenade is reverse-following.
 
 A person has a number called the flash-grenade-timer.
 
@@ -1816,7 +1824,7 @@ An exploding rule (this is the teleportation grenade explodes rule):
 Section - Morphean grenade
 
 A Morphean grenade is a kind of grenade. The description of a Morphean grenade is "When thrown, this grenade will release a sleeping gas that drives everyone into the embrace of Morpheus."
-A Morphean grenade is iron.
+A Morphean grenade is iron.  A Morphean grenade is reverse-following.
 
 An exploding rule (this is the Morphean grenade explodes rule):
 	if the exploding-grenade is a Morphean grenade:
