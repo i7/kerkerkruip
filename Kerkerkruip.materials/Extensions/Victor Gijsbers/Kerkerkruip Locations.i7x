@@ -1334,7 +1334,7 @@ To find a scroll of type (N - scroll name):
 	say "You have found [a new scroll][one of] in between the body parts[or] buried in the pile[at random]. It's slightly [one of]wet and smelly[or]covered in slime[at random], but it looks like it will still work, so you scoop it up.";
 
 To find the corpse:
-	if a random chance of 19 in 20 succeeds:
+	if a random chance of 14 in 15 succeeds:
 		if rotting corpse is off-stage and rotting corpse is alive:
 			say "As you search the pile, a rotting corpse jumps out!";
 			move rotting corpse to location of the large pile of body parts;
