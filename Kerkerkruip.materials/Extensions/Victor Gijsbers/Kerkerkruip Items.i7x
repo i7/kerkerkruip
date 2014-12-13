@@ -208,9 +208,11 @@ Inhaling is an action applying to one carried thing. Understand "inhale [thing]"
 Does the player mean inhaling an essence: it is very likely.
 
 Check inhaling:
+	if the noun is a package of ment:
+		try snorting the noun instead;
 	if the noun is not an essence:
 		take no time;
-		say "Only magical essences can be consumed through inhaling.".
+		say "Only magical essences can be consumed through inhaling." instead.
 
 First carry out inhaling:
 	say "You uncork the little bottle and push its mouth deep into your [one of]left[or]right[at random] nostril, pressing the other side of your nose closed with your fingers. You inhale deeply -- and with a burning sensation, the magical essence flows up and into your brain.[run paragraph on]"
