@@ -590,7 +590,10 @@ Last check an actor hitting when the noun wears Miranda's amulet (this is the Mi
 	if the global attacker weapon is ranged:
 		unless reflection-attack is true: [No infinite reflection cascade!]
 			if a random chance of 1 in 10 succeeds:
-				say "The magic of Miranda's amulet [bold type]reflects[roman type] the attack back to [the actor]!";
+				if noun is not runner or noun is not player:
+					say "The magic of Miranda's amulet [bold type]reflects[roman type] the attack back to [the actor]!";
+				otherwise:
+					say "[The actor] [attack] you, but Miranda's amulet [bold type]reflects[roman type] the attack back!";
 				now reflection-attack is true;
 				try the actor hitting the actor instead.
 
@@ -1116,7 +1119,10 @@ Last check an actor hitting when the noun wears the cloak of reflection (this is
 		unless reflection-attack is true: [No infinite reflections]
 			let n be 15 * (1 + blood magic level of cloak of reflection);
 			if a random chance of n in 10 succeeds:
-				say "[if the noun is the player]The[otherwise][regarding the noun][Possessive][end if] cloak of reflection [bold type]reflects[roman type] the attack back to [the actor]!";
+				if noun is not runner or noun is not player:
+					say "[if the noun is the player]The[otherwise][regarding the noun][Possessive][end if] cloak of reflection [bold type]reflects[roman type] the attack back to [the actor]!";
+				otherwise:
+					say "[The actor] [attack] you, but the cloak of reflection [bold type]reflects[roman type] the attack back!";
 				now reflection-attack is true;
 				try the actor hitting the actor instead.
 

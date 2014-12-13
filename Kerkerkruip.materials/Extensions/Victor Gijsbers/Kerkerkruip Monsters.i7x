@@ -1903,7 +1903,7 @@ First killing rule (this is the demon of rage set the stage rule):
 	now demon-of-rage-stored-location is the location of killed-guy.
 		
 Last killing rule (this is the demon of rage gets stronger rule):
-	if demon of rage and killer-guy share a world:
+	if demon of rage and killer-guy share a world or (demon of rage and a random natural weapon part of killed-guy share a world):
 		if killed-guy is not the demon of rage and killed-guy is not the player:
 			do the demon of rage power-up.
 
@@ -3982,7 +3982,7 @@ Carry out an actor launching:
 	now brambles strength is 0.
 
 To launch the thorns:
-	say "Thorns shoot towards everyone, dealing [run paragraph on]";
+	say "Thorns shoot towards everyone, dealing[run paragraph on]";
 	let n be the number of alive not druidic persons in location;
 	if n is 0:
 		say "no damage to anyone.";
@@ -3991,7 +3991,7 @@ To launch the thorns:
 	repeat with guy running through all alive not druidic persons in location:
 		let m be a random number between 1 and brambles strength;
 		deal m points of physical damage;
-		say "[if n is 1 and original n is not 1]and [end if][run paragraph on]";
+		say "[if n is 1 and original n is not 1]and[end if][run paragraph on]";
 		have the brambles inflict damage on guy;
 		say " to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive and m is not 0] (which breaks [regarding the guy][possessive] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
 		decrease n by 1;
