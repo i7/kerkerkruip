@@ -1206,7 +1206,7 @@ When play begins:
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is 1;
 	now the printed name of X is "lashing chains";
-	now X is ranged;
+	now X is tethered;
 	now X is plural-named;
 	now material of X is iron.
 
@@ -3672,7 +3672,7 @@ The spirit score of Bodmall is 9.
 
 When play begins:
 	let X be a random natural weapon part of Bodmall;
-	now X is ranged;
+	now X is projectile;
 	now X is size-agnostic;
 	now X is not armour-stoppable;
 	now damage die of X is 10;
@@ -4283,7 +4283,7 @@ The spirit score of the overmind is 7.
 
 When play begins:
 	let X be a random natural weapon part of the overmind;
-	now X is ranged;
+	now X is projectile;
 	now X is size-agnostic;
 	now damage die of X is 1;
 	now dodge bonus of X is 0;

@@ -180,17 +180,35 @@ To decide what object is whatever (item - a thing) struck:
 	if the attack hit:
 		if item is the global attacker weapon, decide on the global defender;
 		if item is the global defender, decide on the global attacker weapon;
+		[what about clothing?]
 		decide on nothing;
 	if item is the global attacker weapon:
 		if the global defender is at parry, decide on the global defender weapon;
 		if the global defender is at-block, decide on a random shield worn by the global defender;
 		decide on nothing;
 	[The next line makes this phrase asymmetrical -
-	 the global attacker weapon can hit weapons and shields if it is ranged, but they can't hit it]
-	if the global attacker weapon is ranged and the global attacker weapon is not a natural weapon, decide on nothing;
+	 the global attacker weapon can hit weapons and shields if it is projectile, but they can't hit it]
+	if the global attacker weapon is projectile, decide on nothing;
 	if item is the global defender weapon and the global defender is at parry, decide on the global attacker weapon;
 	if item is a shield worn by the global defender and the global defender is at-block, decide on the global attacker weapon;
 	decide on nothing.
+
+[This is for Israfel's fires, lion's shield, etc]
+To decide whether (guy - a person) came too close to (item - a thing):
+	unless guy is the global attacker, no;
+	if the global attacker weapon is projectile, no;
+	if the global attacker weapon is tethered and the global attacker weapon is not a natural weapon, no;
+	if item is the global defender, yes;
+	if item is not proximity-triggered, no;
+	decide on whether or not the global defender encloses item;
+	
+Definition: a thing is proximity-triggered: no. [maybe there's a better name for this, and if so, maybe it can be applied to parrying weapons and stuff]
+
+Definition: a shield is proximity-triggered:
+	unless the global defender wears it, no;
+	decide on whether or not the global defender is at-block;
+	
+Definition: clothing is proximity-triggered if it is worn;
 
 Section - Losing concentration
 

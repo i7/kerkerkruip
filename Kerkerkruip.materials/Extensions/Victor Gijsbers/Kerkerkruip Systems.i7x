@@ -837,8 +837,10 @@ To decide whether absorption is stopped:
 Chapter - Ranged weapons
 
 [Some specials should or should not happen for ranged weapons. For instance, a heated ranged weapon does not deal extra damage.]
-	
-A weapon can be ranged. A weapon is usually not ranged.
+
+A weapon can be hand-to-hand, tethered, or projectile. A weapon is usually hand-to-hand.
+
+Definition: A weapon is ranged if it is not hand-to-hand.
 
 Chapter - Armour-stoppable
 
@@ -1101,7 +1103,7 @@ Section - Damage
 
 An add specific damage rule (this is the heat increases damage rule):
 	if the damage-source is hot:
-		unless (damage-by-hitting is true and global attacker weapon is ranged):
+		unless (damage-by-hitting is true and global attacker weapon is projectile):
 			let n be heat strength of damage-source;
 			add n points of heat damage with reason "[damage-source] [are] hot".
 
@@ -1111,6 +1113,7 @@ An aftereffects rule (this is the heat can cause weapons to break rule):
 	let n be heat strength of the global attacker weapon;
 	let m be heat strength of the global defender weapon;
 	if n is greater than 0 and global attacker weapon is not ranged:
+		[For now, let's say tethered weapons can't break from heat. It's because they're flexible. Sure.]
 		if the global attacker weapon is corruptible:
 			if the total damage is greater than 0 or defender is at parry:
 				if a random chance of n in 50 succeeds:

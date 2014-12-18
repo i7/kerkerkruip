@@ -1295,7 +1295,7 @@ The description of the greasy gauntlets is "These armoured gloves are supernatur
 
 Last aftereffects rule (this is the greasy gauntlets rule):
 	if the global attacker wears the greasy gauntlets and the total damage is greater than 0:
-		if the global attacker weapon is not ranged:
+		if the global attacker weapon is not projectile:
 			if a random chance of 1 in 6 succeeds:
 				do the grease drop with the global attacker;
 	if the global defender wears the greasy gauntlets and the global defender is at parry and the total damage is 0:
@@ -1531,18 +1531,17 @@ Understand "lion" as the lion's shield.
 
 The block bonus of the lion's shield is 2.
 
-The description of the lion's shield is "A lion's head has been painted on this magnificent shield. It is extremely lifelike -- so lifelike, in fact, that it will bite your enemies if you successfully block a non-ranged attack. [italic type]Block bonus: +2. Deals 2 damage on a successful block[roman type].".
+The description of the lion's shield is "A lion's head has been painted on this magnificent shield. It is extremely lifelike -- so lifelike, in fact, that it will bite your enemies if you successfully block a non-projectile attack. [italic type]Block bonus: +2. Deals 2 damage on a successful block[roman type].".
 
 Aftereffects rule (this is the lion's shield rule):
-	if the global defender wears the lion's shield and the global defender is at-block:
+	if the global attacker came too close to the lion's shield:
 		if the total damage is 0:
-			if the global attacker weapon is not ranged or the global attacker weapon is a natural weapon:
-				deal 2 points of physical damage;
-				have lion's shield inflict damage on global attacker, silently;
-				if total damage is 0:
-					say "The lion on the shield strikes out, biting [the global attacker]. But the lion's teeth are not sharp enough to penetrate and do damage.";
-				otherwise:
-					say "The lion on the shield strikes out, and bites [the global attacker] for [bold type][total damage] damage[roman type][if health of global attacker is less than 1], which is [bold type]lethal[roman type][end if].".
+			deal 2 points of physical damage;
+			have lion's shield inflict damage on global attacker, silently;
+			if total damage is 0:
+				say "The lion on the shield strikes out, biting [the global attacker]. But the lion's teeth are not sharp enough to penetrate and do damage.";
+			otherwise:
+				say "The lion on the shield strikes out, and bites [the global attacker] for [bold type][total damage] damage[roman type][if health of global attacker is less than 1], which is [bold type]lethal[roman type][end if].".
 
 Chapter - Cloneable
 
@@ -3643,7 +3642,7 @@ Section - Staff of pain (monster)
 [One of these is used by the tormentor of Aite.]
 
 A staff of pain is a kind of weapon. The plural of staff of pain is staves of pain.
-A staff of pain is usually wood. A staff of pain is ranged.
+A staff of pain is usually wood. A staff of pain is projectile.
 A staff of pain is size-agnostic.
 The description of a staff of pain is "The staff of pain wounds with necromantic magic that can be neither parried nor dodged.".
 
@@ -3900,7 +3899,7 @@ Chapter - Crossbows
 
 A crossbow is a kind of weapon. 
 A crossbow is usually wood.
-A crossbow is always ranged.
+A crossbow is always projectile.
 
 Understand "crossbow" as a crossbow.
 
@@ -3986,7 +3985,7 @@ The glass cannon is an epic weapon.
 The glass cannon is magical.
 The material of the glass cannon is glass.
 
-The glass cannon is ranged.
+The glass cannon is projectile.
 The glass cannon is size-agnostic.
 
 The description of the glass cannon is "At first sight this seems to be nothing but a foot-long tube of glass. However, it is a very powerful weapon, the shots of which can quickly destroy even the most powerful enemy. But be warned: not only does the glass cannon make you an easier target, it is also the case that when you ready the weapon, you [bold type]permanently[roman type] lose half of your health.".
@@ -4040,7 +4039,7 @@ Section - Demon whip (monster)
 
 
 The demon whip is a weapon.
-The demon whip is ranged.
+The demon whip is tethered.
 
 The damage die of the demon whip is 3.
 The weapon attack bonus of the demon whip is 1.
@@ -4247,7 +4246,7 @@ Before readying the hand of Vecna:
 		say "This is not going to be easy. All your instincts rebel against the very thought of cutting off your own hand ... but the lure of power cannot be resisted. At last you steel yourself, and with one fell swoop you sever your hand from your arm. The pain is incredible, and blood sprays everywhere. You push the hand of Vecna against the bleeding stump, and it immediately grafts itself onto your arm. The bleeding stops, thankfully, but it seems that the pain only grows worse.";
 		now the hand of Vecna is part of the player;
 		let X be a random natural weapon part of the player;
-		now X is ranged;
+		now X is projectile;
 		now X is size-agnostic;
 		now X is not armour-stoppable;
 		now damage die of X is 12;

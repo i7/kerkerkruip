@@ -2504,12 +2504,20 @@ To assign (reaction - a reaction-type) to (guy - a person):
 	else if reaction is roll reaction:
 		now guy is at-roll;
 		
+To prepare a test battle with (guy - a person):
+	Repeat with the old enemy running through people in Test Arena:
+		if the old enemy is not the player:
+			extract the old enemy from combat;
+			remove the old enemy from play;
+	Generate the action of challenging guy in Test Arena;
+	Compel the action of guy waiting;
+	
 To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit by (aggressor - a person) with result (outcome - a text) in/on (likelihood - a number) out of (total tries - a number) attempts:
 	Let original-defender-weapon be a random readied weapon enclosed by guy;
 	Let original-attacker-weapon be a random readied weapon enclosed by aggressor;
 	Let success count be 0;
 	Let success ratio be 0;
-	Let maximum attempts be 300;
+	Let maximum attempts be 500;
 	Let hit-description be "[guy] doing [reaction] to [strength] melee hit by [aggressor]";
 	[don't repeat if the result should always happen (1/1)]
 	If total tries is 1, now maximum attempts is 1;
@@ -2634,6 +2642,38 @@ Testing effects of scythe-vs-chains:
 	now the chain golem is not rusted;
 	have the player do a parry reaction to a 0 melee hit by the chain golem with result "Having been in contact with the scythe of oxidation, the lashing chains rust\.";
 	assert "The lashing chains should be rusted after being parried by the scythe of oxidation" based on whether or not the chain-weapon is rusted;
+
+lionshield-vs-chains is a test step.
+
+Initial scheduling of lionshield-vs-chains:
+	Repeat with S running through shields worn by the player:
+		now the player carries S;
+	now the player carries the lion's shield;
+	now the player wears the lion's shield;
+	compel the action of the chain golem waiting;
+	
+Testing effects of lionshield-vs-chains:
+	now the health of the chain golem is 100;
+	[should the lion's shield bite the chain golem or not? Should it be because the chains are a natural weapon or because they are tethered? or both?]
+	have the player do a dodge reaction to a 0 melee hit by the chain golem with result "the chain golem does not overcome";
+	assert that the event description does not include "The lion on the shield strikes out, and bites the chain golem for 2 damage";
+	assert that the health of the chain golem is 100 with label "health of the chain golem";
+	have the player do a block reaction to a 0 melee hit by the chain golem with result "The lion on the shield strikes out, and bites the chain golem for 2 damage";
+	assert that the health of the chain golem is 98 with label "health of the chain golem";
+
+lionshield-vs-bodmall is a test step.
+	
+Initial scheduling of lionshield-vs-bodmall:
+	prepare a test battle with bodmall;
+	
+[TODO: make sure the lion's shield doesn't work when it's not worn or when not blocking]
+[TODO: same tests for armor of thorns]
+
+Testing effects of lionshield-vs-bodmall:
+	now the health of bodmall is 100;
+	have the player do a block reaction to a 0 melee hit by bodmall with result "Bodmall does not overcome";
+	assert that the event description does not include "lion on the shield strikes out";
+	assert that the health of bodmall is 100 with label "health of bodmall";
 	
 greasy-gauntlets vs mouser is a test step.
 
@@ -2642,8 +2682,8 @@ Initial scheduling of greasy-gauntlets vs mouser:
 	now the player carries the gilded rapier;
 	now the gilded rapier is not readied;
 	try readying the gilded rapier;
-	extract the chain golem from combat;
-	remove the chain golem from play;
+	extract bodmall from combat;
+	remove bodmall from play;
 	generate the action of challenging mouser in the Test Arena;
 	compel the action of mouser waiting.
 	
@@ -2662,6 +2702,8 @@ Testing effects of greasy-gauntlets vs mouser:
 	have the player do a parry reaction to a 0 melee hit by mouser with result "you drop the gilded rapier" in 1 out of 4 attempts;
 	assert no weapon after "successfully parrying mouser using greasy gauntlets";
 	
+[TODO: Hot weapons only do heat damage (or break because of heat)? if not projectile]
+
 Section - Example failure
 
 example failure is a test set.
