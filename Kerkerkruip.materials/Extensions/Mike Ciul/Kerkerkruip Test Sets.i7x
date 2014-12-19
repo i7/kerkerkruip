@@ -2476,16 +2476,6 @@ weapon aftereffects is a test set.
 Scenario when testing weapon aftereffects:
 	now the body score of fafhrd is 100;
 
-fafhrd-battling is a test step. The first move of weapon aftereffects is fafhrd-battling.
-
-initial scheduling of fafhrd-battling:
-	Now the player carries the gilded rapier;
-	try readying the gilded rapier;
-	generate the action of challenging fafhrd in test arena;
-	compel the action of fafhrd waiting;
-	now the defence of the player is 50;
-	now the health of the player is 1000;
-		
 reaction-type is a kind of value. The reaction-types are no reaction, parry reaction, dodge reaction, block reaction, roll reaction.
 
 A reaction-type has a text called the report. The report of a reaction-type is usually "";
@@ -2517,13 +2507,15 @@ To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength 
 	Let original-attacker-weapon be a random readied weapon enclosed by aggressor;
 	Let success count be 0;
 	Let success ratio be 0;
-	Let maximum attempts be 500;
+	Let maximum attempts be 100;
+	Let percent-tolerance be 5;
 	Let hit-description be "[guy] doing [reaction] to [strength] melee hit by [aggressor]";
 	[don't repeat if the result should always happen (1/1)]
 	If total tries is 1, now maximum attempts is 1;
 	[only repeat the specified amount if the result should never happen (0/X)]
 	if likelihood is 0, now maximum attempts is total tries;
 	Repeat with attempt count running from 1 to maximum attempts:
+		Let tolerance be percent-tolerance * attempt count / 100;
 		transcribe and restart capturing;
 		assign reaction to guy;
 		now the melee of the aggressor is strength;
@@ -2544,12 +2536,12 @@ To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength 
 			Let count factor be attempt count / total tries;
 			If count factor is 0, next; [not enough success yet. Keep trying]
 			now success ratio is success count / count factor;
-			if success ratio is likelihood:
+			Let error be the absolute value of (success ratio - likelihood);
+			if error is not greater than tolerance:
 				assert "success" based on true; [record success]
 				[if there are successes, we must exit on one so further tests can be done]
 				stop;
-	assert "After [maximum attempts] attempt[s], [hit-description] resulted in '[outcome]' [success count] time[s] (Never greater than [success ratio] out of [total tries] versus a target of [likelihood])" based on whether or not likelihood is 0;
-
+	assert "After [maximum attempts] attempt[s], [hit-description] resulted in '[outcome]' [success count] time[s] (Never within [percent-tolerance] percent of [success ratio] out of [total tries] versus a target of [likelihood])" based on whether or not likelihood is 0;
 	
 To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit with result (outcome - a text):
 	have guy do a reaction to a strength melee hit by the player with result outcome.
@@ -2563,6 +2555,15 @@ To assert that/-- (item - a weapon) readied after (circumstance - a text):
 To assert no weapon after (circumstance - a text):
 	Let the item be a random readied weapon enclosed by the player;
 	assert "Nothing besides a natural weapon should be readied after [circumstance]" based on whether or not the item is nothing or the item is a natural weapon.
+		
+fafhrd-battling is a test step. The first move of weapon aftereffects is fafhrd-battling.
+
+initial scheduling of fafhrd-battling:
+	Now the player carries the gilded rapier;
+	try readying the gilded rapier;
+	prepare a test battle with fafhrd;
+	now the defence of the player is 50;
+	now the health of the player is 1000;
 		
 Testing effects of fafhrd-battling:
 	assert that the location of Fafhrd is test arena with label "location of Fafhrd";
@@ -2622,10 +2623,7 @@ Testing effects of scythe-vs-fafhrd:
 scythe-vs-chains is a test step.
 
 Initial scheduling of scythe-vs-chains:
-	extract Fafhrd from combat;
-	remove Fafhrd from play;
-	generate the action of challenging the chain golem in Test Arena;
-	compel the action of the chain golem waiting;
+	prepare a test battle with the chain golem;
 	
 Testing effects of scythe-vs-chains:
 	Let the chain-weapon be a random natural weapon enclosed by the chain golem;
@@ -2654,12 +2652,27 @@ Initial scheduling of lionshield-vs-chains:
 	
 Testing effects of lionshield-vs-chains:
 	now the health of the chain golem is 100;
-	[should the lion's shield bite the chain golem or not? Should it be because the chains are a natural weapon or because they are tethered? or both?]
 	have the player do a dodge reaction to a 0 melee hit by the chain golem with result "the chain golem does not overcome";
 	assert that the event description does not include "The lion on the shield strikes out, and bites the chain golem for 2 damage";
 	assert that the health of the chain golem is 100 with label "health of the chain golem";
 	have the player do a block reaction to a 0 melee hit by the chain golem with result "The lion on the shield strikes out, and bites the chain golem for 2 damage";
 	assert that the health of the chain golem is 98 with label "health of the chain golem";
+
+chains-vs-thorns is a test step.
+
+Initial scheduling of chains-vs-thorns:
+	Repeat with item running through suits worn by the player:
+		now the player carries item;
+	Now the player wears the armour of thorns;
+	compel the action of the chain golem waiting;
+	
+Testing effects of chains-vs-thorns:
+	now the health of the chain golem is 100;
+	have the player do a dodge reaction to a 0 melee hit by the the chain golem with result "the chain golem does not overcome";
+	assert that the event description does not include "The armour of thorns scratches the chain golem for 1 damage";
+	assert that the health of the chain golem is 100 with label "health of the chain golem";
+	have the player do a dodge reaction to a 100 melee hit by the the chain golem with result "The armour of thorns scratches the chain golem for 1 damage";
+	assert that the health of the chain golem is 99 with label "health of the chain golem";
 
 lionshield-vs-bodmall is a test step.
 	
@@ -2667,7 +2680,7 @@ Initial scheduling of lionshield-vs-bodmall:
 	prepare a test battle with bodmall;
 	
 [TODO: make sure the lion's shield doesn't work when it's not worn or when not blocking]
-[TODO: same tests for armor of thorns]
+[TODO: test everything with the demonic mistress - tethered but not natural weapon]
 
 Testing effects of lionshield-vs-bodmall:
 	now the health of bodmall is 100;
@@ -2675,6 +2688,22 @@ Testing effects of lionshield-vs-bodmall:
 	assert that the event description does not include "lion on the shield strikes out";
 	assert that the health of bodmall is 100 with label "health of bodmall";
 	
+bodmall-vs-thorns is a test step.
+
+Initial scheduling of bodmall-vs-thorns:
+	[player already wears the armour of thorns]
+	compel the action of bodmall waiting;
+	
+Testing effects of bodmall-vs-thorns:
+	now the health of bodmall is 100;
+	[should the lion's shield bite the chain golem or not? Should it be because the chains are a natural weapon or because they are tethered? or both?]
+	have the player do a dodge reaction to a 0 melee hit by bodmall with result "Bodmall does not overcome";
+	assert that the event description does not include "The armour of thorns scratches Bodmall for 1 damage";
+	assert that the health of Bodmall is 100 with label "health of bodmall";
+	have the player do a dodge reaction to a 100 melee hit by Bodmall with result "Bodmall beats your defence rating";
+	assert that the health of Bodmall is 100 with label "health of Bodmall";
+
+
 greasy-gauntlets vs mouser is a test step.
 
 Initial scheduling of greasy-gauntlets vs mouser:
@@ -2682,11 +2711,8 @@ Initial scheduling of greasy-gauntlets vs mouser:
 	now the player carries the gilded rapier;
 	now the gilded rapier is not readied;
 	try readying the gilded rapier;
-	extract bodmall from combat;
-	remove bodmall from play;
-	generate the action of challenging mouser in the Test Arena;
-	compel the action of mouser waiting.
-	
+	prepare a test battle with mouser;
+		
 Testing effects of greasy-gauntlets vs mouser:
 	have mouser do a dodge reaction to a 0 melee hit by the player with result "you drop the gilded rapier" in 0 out of 20 attempts;
 	assert the gilded rapier readied after "missing mouser";
@@ -2703,6 +2729,27 @@ Testing effects of greasy-gauntlets vs mouser:
 	assert no weapon after "successfully parrying mouser using greasy gauntlets";
 	
 [TODO: Hot weapons only do heat damage (or break because of heat)? if not projectile]
+
+mouser-vs-thorns is a test step.
+
+Initial scheduling of mouser-vs-thorns:
+	[player already wears the armour of thorns]
+	compel the action of mouser waiting;
+	
+Testing effects of mouser-vs-thorns:
+	now the health of mouser is 100;
+	[should the lion's shield bite the chain golem or not? Should it be because the chains are a natural weapon or because they are tethered? or both?]
+	have the player do a dodge reaction to a 0 melee hit by the mouser with result "Mouser does not overcome";
+	assert that the event description does not include "The armour of thorns scratches Mouser for 1 damage";
+	assert that the health of mouser is 100 with label "health of mouser";
+	have the player do a dodge reaction to a 100 melee hit by the mouser with result "The armour of thorns scratches Mouser for 1 damage";
+	assert that the health of mouser is 99 with label "health of mouser";
+
+[TODO: test armor of thorns (started) and Israfel (not started), 
+when hitting with damage (done)
+hitting without damage (not done)
+vs chain golem, bodmall, and hand-to-hand attacker, and missing - (all started)]
+
 
 Section - Example failure
 
