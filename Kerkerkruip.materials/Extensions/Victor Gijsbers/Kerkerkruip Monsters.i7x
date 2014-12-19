@@ -4646,13 +4646,12 @@ An aftereffects rule (this is the Israfel's blinding attack rule):
 				say "Israfel's flaming attack [bold type]blinds[roman type] [the global defender].".
 				
 An aftereffects rule (this is the Israfel's burning defence rule):
-	if the global defender is Israfel and total damage is greater than 0:
-		unless global attacker weapon is ranged:
-			deal 3 points of heat damage;
-			have Israfel inflict damage on the global attacker, silently;
-			say "Israfel's flames [bold type]burn[roman type] [the global attacker] [if global attacker is alive]for [bold type][total damage] damage[roman type][otherwise][bold type]to death[roman type][end if].";
-			if global attacker is the player and the player is not alive:
-				end the story saying "You will burn in Heaven.".
+	if the global attacker came too close to Israfel and total damage is greater than 0:
+		deal 3 points of heat damage;
+		have Israfel inflict damage on the global attacker, silently;
+		say "Israfel's flames [bold type]burn[roman type] [the global attacker] [if global attacker is alive]for [bold type][total damage] damage[roman type][otherwise][bold type]to death[roman type][end if].";
+		if global attacker is the player and the player is not alive:
+			end the story saying "You will burn in Heaven.".
 
 
 Section - Israfel prose
@@ -4732,13 +4731,12 @@ The legend-label of Isra is Figure of map_legend_Isra.
 Section - Isra specials and AI
 
 An aftereffects rule (this is the Isra's burning defence rule):
-	if the global defender is Isra and total damage is greater than 0:
-		unless global attacker weapon is ranged:
-			deal 2 points of heat damage;
-			have Isra inflict damage on global attacker;
-			say "Isra's flames [bold type]burn[roman type] [no dead property][the global attacker][dead property] [if global attacker is alive]for [bold type][total damage] damage[roman type][otherwise][bold type]to death[roman type][end if].";
-			if global attacker is the player and the player is not alive:
-				end the story saying "You will burn in Heaven.".
+	if the global attacker came too close to Isra and total damage is greater than 0:
+		deal 2 points of heat damage;
+		have Isra inflict damage on global attacker;
+		say "Isra's flames [bold type]burn[roman type] [no dead property][the global attacker][dead property] [if global attacker is alive]for [bold type][total damage] damage[roman type][otherwise][bold type]to death[roman type][end if].";
+		if global attacker is the player and the player is not alive:
+			end the story saying "You will burn in Heaven.".
 
 An AI action selection rule for the at-Act Isra (this is the Isra doesn't like attacking rule):
 	choose row with an Option of the action of Isra attacking the chosen target in the Table of AI Action Options;

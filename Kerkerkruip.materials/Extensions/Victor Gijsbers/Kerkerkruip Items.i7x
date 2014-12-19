@@ -1055,15 +1055,14 @@ The blood magic level of the armour of thorns is 1.
 The blood magic maximum of the armour of thorns is 4.
 
 An aftereffects rule (this is the armour of thorns rule):
-	if the global defender wears the armour of thorns:
+	if the global attacker came too close to the armour of thorns:
 		if total damage is greater than 0:
-			unless global attacker weapon is ranged:
-				let n be blood magic level of the armour of thorns;
-				if n is greater than 0:
-					say "The [armour of thorns] [if blood magic level of armour of thorns is 1]scratches[otherwise if blood magic level of armour of thorns is 2]pricks[otherwise if blood magic level of armour of thorns is 3]hurts[otherwise]impales[end if] [the global attacker] for[run paragraph on]";
-					deal n points of physical damage;
-					have armour of thorns inflict damage on global attacker;
-					say "[if the global attacker is dead], killing [regarding the global attacker][them][end if].";
+			let n be blood magic level of the armour of thorns;
+			if n is greater than 0:
+				say "The [armour of thorns] [if blood magic level of armour of thorns is 1]scratches[otherwise if blood magic level of armour of thorns is 2]pricks[otherwise if blood magic level of armour of thorns is 3]hurts[otherwise]impales[end if] [the global attacker] for[run paragraph on]";
+				deal n points of physical damage;
+				have armour of thorns inflict damage on global attacker;
+				say "[if the global attacker is dead], killing [regarding the global attacker][them][end if].";
 
 A dungeon interest rule (this is the sometimes feed armour of thorns rule):
 	if a random chance of 1 in 10 succeeds:
