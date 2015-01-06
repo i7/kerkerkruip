@@ -469,6 +469,9 @@ First after showing the title screen (this is the run all tests rule):
 	blank out the whole row;
 	Now the current unit test name is "[the current test set]";
 	log "Completed so far: [grand test summary], with [number of filled rows in Table of Test Set Queue] set[s] left to test";
+	Repeat through Table of Test Results:
+		if failures entry > 0:
+			log "  [failures entry] failures in [test set entry]";
 	log "Now testing [the current test set].";
 	follow the scenario rules;
 	transcribe and restart capturing text because "done setting scenario for";
