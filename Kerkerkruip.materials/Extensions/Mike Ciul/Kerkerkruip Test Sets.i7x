@@ -1185,7 +1185,7 @@ Test play when testing banshees gone wild:
 	swap the occupants of the location of the blood ape and the Hall of Raging Banshees;
 	travel sneakily to Hall of Raging Banshees;
 	if the retreat location is occupied:
-		swap the occupants of the retreat location and a random unoccupied placed room;
+		swap the occupants of the retreat location and a random unoccupied room;
 	try taking off the fuligin cloak;
 	set the tension to 10;
 	now the health of the blood ape is 1;
@@ -2750,7 +2750,28 @@ when hitting with damage (done)
 hitting without damage (not done)
 vs chain golem, bodmall, and hand-to-hand attacker, and missing - (all started)]
 
+Section - Bug 351 - scroll cloning
 
+bug-351 is a test set.
+
+Scenario when testing bug-351:
+	Now the quartering room is testobject.
+	
+knowledge-gaining is an item-reading test step. The first move of bug-351 is knowledge-gaining.
+
+Initial scheduling of knowledge-gaining:
+	if the quartering room is occupied:
+		swap the occupants of the quartering room and a random unoccupied reachable room;
+	Now the reusable item is a random scroll of knowledge.
+
+Testing effects of knowledge-gaining:
+	transcribe and restart capturing;
+	find a healthy scroll;
+	stop and save event description;
+	assert that the event description includes "You have found a scroll";
+	Repeat with item running through scrolls enclosed by the player:
+		assert "The true name and obfuscated name should be different, but they are both '[true name of item]'" based on whether or not the true name of item is not the obfuscated name of item;
+		
 Section - Example failure
 
 example failure is a test set.
