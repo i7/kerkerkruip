@@ -971,6 +971,7 @@ Test play when testing temporary Nomos blood magic:
 	stop and save event description;
 	assert that the event description includes "Wearing the gown gives you two levels of dreadful presence. You can feed the gown 8 blood";
 	assert that the dreadful presence of the player is 0;
+	now the gown of the red court is not cursed;
 	try wearing the gown of the red court;
 	assert that the dreadful presence of the player is 2;
 	transcribe and restart capturing;
