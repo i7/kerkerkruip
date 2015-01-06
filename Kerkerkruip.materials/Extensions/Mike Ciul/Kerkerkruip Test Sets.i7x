@@ -2773,6 +2773,18 @@ Testing effects of knowledge-gaining:
 	Repeat with item running through scrolls enclosed by the player:
 		assert "The true name and obfuscated name should be different, but they are both '[true name of item]'" based on whether or not the true name of item is not the obfuscated name of item;
 		
+Section - Bug 352 - exploded property
+
+bug-352 is a test set.
+
+throwing-352 is an item-throwing test step. The first move of bug-352 is throwing-352.
+
+Initial scheduling of throwing-352:
+	now the reusable item is a random smoke grenade.
+	
+Testing effects of throwing-352:
+	assert that the event description does not include "Run-time problem"
+	
 Section - Example failure
 
 example failure is a test set.
