@@ -2126,8 +2126,8 @@ A scroll name is a kind of value.
 Some scroll names are defined by the Table of Scroll Names.
 
 Table of Scroll Names
-scroll name	printed name	obfuscated	unhealthy	findable
-mort	"MORT EILYSH"	true	false  	true[Emily Short]
+scroll name	printed name	obfuscated	unhealthy	unfindable
+mort	"MORT EILYSH"	true	false  	false[Emily Short]
 cemil	"CEMIL KUI"	true  [Mike Ciul]
 ban	"BAN GNAD"	true   [Angband]
 chetnak	"CHETNAK"	true   [Nethack]
@@ -2146,7 +2146,7 @@ clawe	"CLAWE DARKE"	true   [Wade Clarke]
 Definition: a scroll name is obfuscated if obfuscated of it is true.
 Definition: a scroll name is unhealthy if unhealthy of it is true.
 Definition: a scroll name is healthy if obfuscated of it is false and unhealthy of it is false.
-Definition: a scroll name is findable if findable of it is true.
+Definition: a scroll name is findable if unfindable of it is false.
 
 Understand "mort" and "eilysh" as mort.
 Understand "cemil" and "kui" as cemil.
@@ -2706,8 +2706,8 @@ Carry out reading a scroll of enchantment:
 Section - Scroll of Afternoon Delights (Malygris)
 
 Table of Scroll Names (continued)
-scroll name	findable
-delights	false
+scroll name	unfindable
+delights	true
 
 Understand "afternoon" and "delights" and "afternoon delights" as delights.
 
