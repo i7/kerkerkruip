@@ -1322,6 +1322,13 @@ To find an unhealthy scroll:
 To find a healthy scroll:
 	find a scroll of type random healthy findable scroll name;
 
+[
+This phrase expects N to be an un-obfuscated scroll name. If it is not, you'll get an obfuscated scroll that can't be identified and does nothing.
+
+Using the "healthy" and "unhealthy" adjectives above prevents that from ever happening, as long as there is at least one real scroll. But it feels like a hack to me. If more bugs are found related to this problem, I might try to refactor.
+
+- Mike Ciul
+]
 To find a scroll of type (N - scroll name):
 	let the template be the default value of scroll;
 	repeat with S running through scrolls:
