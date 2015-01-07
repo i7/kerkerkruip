@@ -1475,10 +1475,9 @@ An aftereffects rule (this is the lose flow when hit rule):
 		now offensive flow of global defender is 0;
 		now defensive flow of global defender is 0.
 
-After an actor hitting (this is the lose flow after unsuccessfully attacking rule):
-	unless the attack strength is greater than the defence of the global defender:
-		now the offensive flow of the global attacker is 0;
-		now the defensive flow of the global attacker is 0;
+After an actor hitting (this is the lose flow after attacking rule):
+	now the offensive flow of the global attacker is 0;
+	now the defensive flow of the global attacker is 0;
 	continue the action;
 
 To up the offensive flow of (guy - a person):
@@ -1834,6 +1833,8 @@ Chance to win rule (this is the CTW parry bonus rule):
 
 An aftereffects rule (this is the gain offensive flow from parrying rule):
 	if the total damage is 0 and the global defender is at parry:
+		now offensive flow of the global defender is (offensive flow of the global defender + defensive flow of the global defender);
+		now defensive flow of the global defender is 0;
 		up the offensive flow of global defender.
 
 Chapter - Dodging
@@ -1882,6 +1883,8 @@ Last after reporting an actor hitting (this is the no longer at dodge after the 
 
 An aftereffects rule (this is the gain defensive flow from dodging rule):
 	if the total damage is 0 and the global defender is at dodge:
+		now defensive flow of the global defender is (offensive flow of the global defender + defensive flow of the global defender);
+		now offensive flow of the global defender is 0;
 		up the defensive flow of global defender.
 
 Section - No More Rolling
@@ -1907,8 +1910,6 @@ Check blocking (this is the cannot block when not reacting rule):
 		say "[We] [block], but [there] [are] no attack." instead.
 
 Carry out an actor blocking:
-	now defensive flow of actor is (offensive flow of actor + defensive flow of actor);
-	now offensive flow of actor is 0;
 	now the actor is at-block.
 
 Report an actor blocking (this is the standard block prose rule):
@@ -1920,14 +1921,6 @@ Last after reporting an actor hitting (this is the no longer at block after the 
 	now the global defender is not at-block;
 	continue the action;
 
-An aftereffects rule (this is the gain random flow from blocking rule):
-	if the total damage is 0 and the global defender is at-block:
-		if a random chance of 1 in 2 succeeds:
-			if a random chance of 1 in 2 succeeds:
-				up the defensive flow of global defender;
-			otherwise:
-				up the offensive flow of the global defender.
-
 An AI action selection rule for an at-React person (called P) (this is the AI block without shields rule):
 	choose row with an Option of the action of P blocking in the Table of AI Action Options;
 	if P does not wear a shield:
@@ -1936,6 +1929,9 @@ An AI action selection rule for an at-React person (called P) (this is the AI bl
 An attack modifier rule (this is the block defence bonus rule):
 	if the global defender is at-block:
 		if the global defender encloses a worn shield:
+			decrease the attack strength by 2;
+			if the numbers boolean is true:
+				say " - 2 (blocking)[run paragraph on]";
 			let item be a random shield worn by the global defender;
 			let n be block bonus of item;
 			decrease the attack strength by n;
