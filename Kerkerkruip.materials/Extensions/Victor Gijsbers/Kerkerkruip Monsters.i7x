@@ -3128,15 +3128,15 @@ Carry out an actor hitting (this is the show the damage dealt by the giant tenta
 			now the attack damage is a random number between 1 and the damage die of the global attacker weapon;
 		increase the attack damage by weapon damage bonus of the global attacker weapon; [1d(damage die) + WDB]
 		if the numbers boolean is true:
-			say "[roman type][The global attacker] [deal] ", the attack damage, "[run paragraph on]";
+			say "[roman type][The global attacker] [deal][run paragraph on]";
 		now harm of physical damage is attack damage;
 		now damage-by-hitting is true;	
 		have global attacker weapon inflict damage on the global defender;  [The crucial line.]
 		if the the total damage is less than 1:
 			unless the giant tentacle grapples the global defender:
-				say "allowing [the global defender] to escape unscathed.[run paragraph on]";
+				say ", allowing [the global defender] to escape unscathed.[run paragraph on]";
 			otherwise:
-				say "but holds on to [the global defender].[run paragraph on]";
+				say " but holds on to [the global defender].[run paragraph on]";
 		otherwise:
 			[non-fatal]
 			if the health of the global defender is greater than 0:

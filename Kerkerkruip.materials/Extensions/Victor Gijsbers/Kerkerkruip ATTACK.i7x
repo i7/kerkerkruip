@@ -937,7 +937,7 @@ To have (source - a thing) inflict damage on (guy - a person), silently:
 		if total damage is less than 0:
 			now total damage is 0;
 	unless silently:
-		if damage comment is true or damage-by-hitting is true:
+		if damage comment is true or (damage-by-hitting is true and override-normal-attack-damage-rule is false):
 			say " = [bold type]", total damage, " damage[roman type][run paragraph on]";
 		otherwise:
 			say " [bold type]", total damage, " damage[roman type][run paragraph on]";
