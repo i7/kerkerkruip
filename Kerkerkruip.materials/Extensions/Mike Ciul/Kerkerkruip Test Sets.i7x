@@ -2477,7 +2477,7 @@ weapon aftereffects is a test set.
 Scenario when testing weapon aftereffects:
 	now the body score of fafhrd is 100;
 
-reaction-type is a kind of value. The reaction-types are no reaction, parry reaction, dodge reaction, block reaction, roll reaction.
+reaction-type is a kind of value. The reaction-types are no reaction, parry reaction, dodge reaction, block reaction.
 
 A reaction-type has a text called the report. The report of a reaction-type is usually "";
 
