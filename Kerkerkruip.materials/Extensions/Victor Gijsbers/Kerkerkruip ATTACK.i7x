@@ -1884,43 +1884,9 @@ An aftereffects rule (this is the gain defensive flow from dodging rule):
 	if the total damage is 0 and the global defender is at dodge:
 		up the defensive flow of global defender.
 
-Section - Rolling
+Section - No More Rolling
 
-Rolling is an action applying to nothing. Understand "roll" as rolling.
-
-A person can be at-roll. A person is usually not at-roll.
-
-Check rolling (this is the cannot roll when not reacting rule):
-	if the combat state of the player is not at-React:
-		take no time;
-		say "[We] [roll], but [there] [are] no attack." instead.
-
-Carry out an actor rolling:
-	now the actor is at-roll.
-
-Report an actor rolling (this is the standard roll prose rule):
-	say "[The actor] [roll] into the thick of combat.".
-
-[An attack modifier rule (this is the roll defence bonus rule):
-	if the global defender is at-roll:
-		let n be dodge bonus of global attacker weapon;
-		decrease the attack strength by n;
-		if the numbers boolean is true:
-			if n is greater than 0:
-				say " - ", n, " ([the global attacker weapon] dodge bonus)[run paragraph on]";
-			if n is less than 0:
-				now n is (0 - n);
-				say " + ", n, " ([the global attacker weapon] dodge penalty)[run paragraph on]";]
-
-Last after reporting an actor hitting (this is the no longer at roll after the attack rule):
-	now the global defender is not at-roll;
-	continue the action;
-
-An aftereffects rule (this is the switch to offensive flow after rolling rule):
-	if the total damage is 0 and the global defender is at-roll:
-		now offensive flow of the global defender is (offensive flow of the global defender + defensive flow of the global defender);
-		now defensive flow of the global defender is 0;
-		up the offensive flow of global defender.
+Understand "roll" as a mistake ("Rolling is no longer an available reaction in Kerkerkruip.").
 
 Section - Blocking
 
@@ -2156,11 +2122,6 @@ First AI action selection rule for an at-React person (called P) (this is the co
 	now the Option entry is the action of P parrying;
 	now the Action Weight entry is 5;
 
-First AI action selection rule for an at-React person (called P) (this is the consider rolling rule):
-	choose a blank Row in the Table of AI Action Options;
-	now the Option entry is the action of P rolling;
-	now the Action Weight entry is 3;
-	
 First AI action selection rule for an at-React person (called P) (this is the consider blocking rule):
 	choose a blank Row in the Table of AI Action Options;
 	now the Option entry is the action of P blocking;
@@ -2247,13 +2208,8 @@ An AI action selection rule for an at-React person (called P) (this is the stand
 			decrease the Action Weight entry by 100;
 		if dodgability is greater than parry rating:
 			decrease the Action Weight entry by 100;
-		choose row with an Option of the action of P rolling in the Table of AI Action Options;
-		if defensive flow of P is less than 1:
-			decrease Action Weight entry by 100;
-		increase the Action Weight entry by dodgability;		
-		if a random chance of 1 in 5 succeeds:
-			increase Action Weight entry by (3 * (defensive flow of P));
 		choose row with an Option of the action of P blocking in the Table of AI Action Options;
+		[TODO: only do this if P wears a shield?]
 		if offensive flow of P is less than 1:
 			decrease Action Weight entry by 100;
 		if a random chance of 1 in 8 succeeds:

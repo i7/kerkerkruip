@@ -2492,8 +2492,6 @@ To assign (reaction - a reaction-type) to (guy - a person):
 		now guy is at dodge;
 	else if reaction is block reaction:
 		now guy is at-block;
-	else if reaction is roll reaction:
-		now guy is at-roll;
 		
 To prepare a test battle with (guy - a person):
 	Repeat with the old enemy running through people in Test Arena:

@@ -1505,7 +1505,6 @@ To reset combat action stats of (guy - a person):
 	now the guy is not at dodge;
 	now the guy is not at parry;
 	now the guy is not at-block;
-	now the guy is not at-roll;
 	clean the table of delayed actions for the guy;
 
 Section - Reviving

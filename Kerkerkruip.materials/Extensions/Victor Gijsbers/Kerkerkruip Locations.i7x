@@ -2040,15 +2040,6 @@ Check retreating (this is the cannot retreat when in a chair rule):
 		take no time;
 		say "You'll have to stand up first." instead.	
 
-Last check rolling when the player is on a chair (this is the roll out of a chair rule):
-	let item be a random chair enclosing the player;
-	silently try getting off the item;
-	if the player is on the item:
-		take no time;
-		say "You can't do that while sitting." instead;
-	otherwise:
-		say "(This action involves getting off [the item].)".
-
 Section - Comfy chair
 
 The comfy chair is a chair and scenery in the Zen Room. The description of the comfy chair is "A leather, well worn chair, but quite cozy to look at[if chairinheritor and comfy chair share a world]. Somehow, you feel it is owned by [the chairinheritor][end if]." Understand "comfortable looking","well worn" and "leather" as the comfy chair.
