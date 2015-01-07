@@ -8,11 +8,6 @@ Kerkerkruip ATTACK by Victor Gijsbers begins here.
 
 Volume - Inform ATTACK Core Introduction
 
-Section - Authorial modesty (for use with Inform ATTACK by Victor Gijsbers)
-
-[ If we're using the full Inform ATTACK extension then we don't need to be listed in the credits. ]
-Use authorial modesty.
-
 Section - Default texts
 
 [ The author may want to change these texts, so they are collected here in one section. ]
@@ -727,7 +722,30 @@ Section - New verbs
 
 To lunge is a verb.
 To miss is a verb.
-
+To beat is a verb.
+To deal is a verb.
+To hit is a verb.
+To kill is a verb.
+To ready is a verb.
+To fool is a verb.
+To attempt is a verb.
+To fail is a verb.
+To concentrate is a verb.
+To lose is a verb.
+To parry is a verb.
+To strike is a verb.
+To dodge is a verb.
+To roll is a verb.
+To block is a verb.
+To expose is a verb.
+To stand is a verb.
+To reload is a verb.
+To use is a verb.
+To finish is a verb.
+To start is a verb.
+To continue is a verb.
+To relax is a verb.
+To remain is a verb.
 
 Volume - Inform ATTACK Main System
 
@@ -1008,8 +1026,6 @@ Carry out an actor hitting (this is the abide by the contact rules rule):
 	abide by the contact rules;
 	now whether the attack hit is true;
 
-To beat is a verb.
-
 First contact rule (this is the standard whether the attack hit rule):
 	if the attack strength is greater than the defence of the global defender:
 		if the numbers boolean is true:
@@ -1028,8 +1044,6 @@ The damage multiplier rules are a rulebook.
 
 Carry out an actor hitting (this is the consider the damage modifier rules rule):
 	follow the damage modifier rules;
-
-To deal is a verb.
 
 First damage modifier rule (this is the standard damage roll rule):
 	unless damage die of the global attacker weapon is less than 1:
@@ -1066,8 +1080,6 @@ Carry out an actor hitting (this is the subtract damage from health rule):
 
 
 Section - Report hitting
-
-To hit is a verb. To kill is a verb.
 
 Report an actor hitting an alive person (this is the basic flavour rule):
 	if the attack damage is greater than 0:
@@ -1218,8 +1230,6 @@ Last carry out an actor readying (this is the unready all other weapons rule):
 			if the item is not the noun and the item is readied:
 				now the item is not readied.
 
-To ready is a verb. To fool is a verb. To attempt is a verb. To fail is a verb.
-
 Last report an actor readying (this is the standard report readying rule):
 	if the noun is readied:
 		say "[The actor] [ready] [the noun].";
@@ -1314,8 +1324,6 @@ Carry out an actor concentrating (this is the standard carry out concentrating r
 	increase the concentration of the actor by 1;
 	if the concentration of the actor is greater than 3:
 		now the concentration of the actor is 3;
-
-To concentrate is a verb.
 	
 Report an actor concentrating (this is the standard concentrating prose rule):
 	say "[The actor] [concentrate], and [are]";
@@ -1372,8 +1380,6 @@ To let (the defender - a person) lose concentration:
 
 The lose concentration prose rules are a person based rulebook.
 
-To lose is a verb.
-
 Last lose concentration prose rule for a person (called P) (this is the standard lose concentration prose rule):
 	say "[The P] [lose] [bold type]concentration[roman type]!";
 
@@ -1407,8 +1413,6 @@ Parrying is an action applying to nothing. Understand "parry" and "p" and "pa" a
 
 A person can be at parry. A person is usually not at parry.
 
-To parry is a verb.
-
 Check parrying (this is the cannot parry when not reacting rule):
 	if the combat state of the player is not at-React:
 		take no time;
@@ -1419,8 +1423,6 @@ Check parrying (this is the cannot parry when not reacting rule):
 	
 Carry out an actor parrying (this is the standard carry out parrying rule):	
 	now the actor is at parry.
-
-To strike is a verb.
 
 Report an actor parrying (this is the standard parry prose rule):	
 	say "[The actor] [strike] up a defensive pose.".
@@ -1468,8 +1470,6 @@ Chapter - Dodging
 Dodging is an action applying to nothing. Understand "dodge" and "do" as dodging.
 
 A person can be at dodge. A person is usually not at dodge.
-
-To dodge is a verb.
 
 Check dodging (this is the cannot dodge when not reacting rule):
 	if the combat state of the player is not at-React:
@@ -1519,8 +1519,6 @@ Rolling is an action applying to nothing. Understand "roll" as rolling.
 
 A person can be at-roll. A person is usually not at-roll.
 
-To roll is a verb.
-
 Check rolling (this is the cannot roll when not reacting rule):
 	if the combat state of the player is not at-React:
 		take no time;
@@ -1559,8 +1557,6 @@ Blocking is an action applying to nothing. Understand "block" as blocking.
 
 A person can be at-block. A person is usually not at-block.
 
-To block is a verb.
-
 Check blocking (this is the cannot block when not reacting rule):
 	if the combat state of the player is not at-React:
 		take no time;
@@ -1595,8 +1591,6 @@ Exposing is an action applying to nothing. Understand "expose" as exposing.
 
 A person can be at-expose. A person is usually not at-expose.
 
-To expose is a verb.
-
 Check exposing (this is the cannot expose when not reacting rule):
 	if the combat state of the player is not at-React:
 		take no time;
@@ -1604,8 +1598,6 @@ Check exposing (this is the cannot expose when not reacting rule):
 
 Carry out an actor exposing:
 	now the actor is at-expose.
-
-To stand is a verb.
 
 Report an actor exposing (this is the standard expose prose rule):
 	say "[The actor] [stand] ready to receive the attack.".
@@ -1893,8 +1885,6 @@ A weapon has a number called the current load time. The current load time of a w
 Definition: a weapon is unloaded if its current shots is 0 and its maximum shots is greater than 0.
 Definition: a weapon is waiting to be reloaded if its current shots is 0 and its maximum shots is greater than 0 and its maximum load time is greater than 0.
 
-To reload is a verb.
-
 A weapon has a text called the shots text. The shots text of a weapon is usually "shots".
 A weapon has a verb called the reload verb. The reload verb of a weapon is usually the verb reload.
 A weapon has a text called the out of ammo text. The out of ammo text of a weapon is usually "You pull the trigger, but nothing happens--you're out of ammo!".
@@ -1933,8 +1923,6 @@ Understand "reload [held weapon]" as reloading.
 Does the player mean reloading an unloaded readied weapon enclosed by the player: it is very likely.
 Does the player mean reloading an unloaded weapon enclosed by the player: it is likely.
 
-To use is a verb.
-
 Check reloading when the maximum shots of the noun is 0 (this is the cannot reload weapons that use no ammo rule):
 	take no time;
 	say "[The noun] [do not use] ammunition." instead;
@@ -1958,8 +1946,6 @@ Carry out an actor reloading (this is the standard carry out reloading rule):
 	if the current load time of the noun is less than 1:
 		now the current shots of the noun is the maximum shots of the noun;
 		now the current load time of the noun is the maximum load time of the noun.
-
-To finish is a verb. To start is a verb. To continue is a verb.
 
 Report an actor reloading (this is the standard report reloading rule):
 	if the current load time of the noun is the maximum load time of the noun:
@@ -2136,8 +2122,6 @@ First check snorting (this is the do not snort things on the ground rule):
 
 Section - Losing concentration only for worldsharers
 
-To relax is a verb.
-
 This is the new everyone loses concentration when combat status is peace rule:
 	if combat status is peace:
 		if concentration of the player is not 0:
@@ -2312,8 +2296,6 @@ The alternative lose concentration when hit rule is listed instead of the lose c
 
 The remain concentrated chance is a number that varies.
 The remain concentrated rules are a rulebook.
-
-To remain is a verb.
 
 An aftereffects rule (this is the alternative lose concentration when hit rule):
 	if the total damage is greater than 0 and the global defender is alive and the concentration of the global defender is not 0:
