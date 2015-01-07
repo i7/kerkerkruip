@@ -73,7 +73,7 @@ Include Kerkerkruip ATTACK by Victor Gijsbers.
 Include Kerkerkruip Monster Abilities by Victor Gijsbers.
 Include Kerkerkruip Systems by Victor Gijsbers.
 Include Kerkerkruip Systems - Hiding Smoke Ethereal by Victor Gijsbers.
-Include Kerkerkruip Damage by Victor Gijsbers.
+[Include Kerkerkruip Damage by Victor Gijsbers.]
 Include Kerkerkruip Actions and UI by Victor Gijsbers.
 Include Kerkerkruip Items by Victor Gijsbers.
 Include Kerkerkruip Religion by Victor Gijsbers.

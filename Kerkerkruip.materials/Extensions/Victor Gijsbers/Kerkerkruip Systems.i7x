@@ -857,16 +857,8 @@ A weapon can be size-agnostic. A weapon is usually not size-agnostic.
 
 Chapter - Materials
 
-Material is a kind of value.
-
-[A material has a number called the corrosion resistance. [Percentile chance, because we are working with some small probabilities here -- they come up every turn, and get large quickly.]]
-Heat-behaviour is a kind of value. The heat-behaviours are burner and melter. [A material has a heat-behaviour.]
-
-The materials are defined by the Table of Materials.
-
-Table of Materials
+Table of Materials (continued)
 material	material-adjective	destroying heat	heat-behaviour	corrosion resistance
-other-material	"nondescript"	5	burner	950					
 iron	"iron"	10	melter	995
 silver	"silver"	7	melter	985
 paper	"paper"	1	burner	950
@@ -892,7 +884,7 @@ Understand "radiant" as radiance.
 Understand "adamantine" as adamant.
 Understand "vapourous" and "vapor" and "vaporous" as vapour.
 
-A thing has a material. The material of a thing is usually other-material.
+The material of a thing is usually other-material.
 The material of a person is usually flesh.
 
 A thing has a material called the original material.
@@ -922,17 +914,6 @@ First after printing the name of a thing (called item):
 			say " (now [material-adjective of material of item])".
 
 
-
-
-
-
-[Section - Test other-material - Not for Release
-
-Last when play begins:
-	repeat with item running through other-material things:
-		say "WARNING: [item] doesn't have a material.".
-]
-
 Section - Silver
 
 [A damage modifier rule (this is the silver damage rule):
@@ -953,7 +934,20 @@ A remove specific damage rule (this is the non-undead silver damage rule):
 	if damage-material is silver:
 		if victim is not undead and victim is not demonic:
 			remove 1 points of physical damage with reason "silver".
+			
+Section - Conductivity of metals
 
+A remove specific damage rule (this is the iron or silver suit acts as a faraday cage rule):
+	if material of damage-source is electricity:
+		if the victim wears an iron suit or the victim wears a silver suit:
+			remove 3 points of physical damage with reason "suit acts as a Faraday cage".
+
+[Section - Test other-material - Not for Release
+
+Last when play begins:
+	repeat with item running through other-material things:
+		say "WARNING: [item] doesn't have a material.".
+]
 
 
 Chapter - Attacklike behaviour
