@@ -80,14 +80,6 @@ To say the names of (L - a list of people):
 	say L with definite articles;
 	now the printing dead property is true;
 
-Before printing the name of a dead person (called body) (this is the improper print dead property rule):
-	if the printing dead property is true and the body is improper-named:
-		say "dead [run paragraph on]".
-
-After printing the name of a dead person (called body) (this is the proper print dead property rule):
-	if the printing dead property is true and the body is proper-named:
-		say "'s [if body is plural-named]bodies[otherwise]body[end if]".
-
 Understand "body/bodies" as a person.
 Understand "body/bodies of" as a person.
 Understand "dead/killed/corpse" as a person when the item described is dead.
@@ -618,10 +610,11 @@ An AI target selection rule for the player (this is the prefer the player rule):
 An AI target selection rule (this is the randomise the target result rule):
 	increase the Weight by a random number between 0 and 4;
 
+An AI target selection rule (this is the randomise the target result more rule):
+	increase the Weight by a random number between 0 and 3;
+
 A last AI target selection rule (this is the return the target weight rule):
 	rule succeeds with result Weight;
-
-
 
 Chapter - Selecting an action
 
@@ -692,6 +685,8 @@ Section - Saying combat numbers
 
 [ See manual section 2.1.2 ]
 
+[TODO: enable this for Kerkerkruip or eliminate all references to the numbers boolean]
+
 [ This variable determines whether we see numerical output. ]
 The numbers boolean is a truth state variable. The numbers boolean is true.
 
@@ -708,6 +703,9 @@ Switching the numbers on is an action out of world. Understand "numbers on" as s
 Carry out switching the numbers on (this is the standard switching the numbers on rule):
 	now the numbers boolean is true;
 	say "You will now see combat-related numbers.".
+
+Check switching the numbers off:
+	say "The numerical representation of combat cannot be switched off in this game." instead.
 
 Section - The After reporting rules
 
@@ -989,11 +987,21 @@ The attack modifier rules are a rulebook.
 Carry out an actor hitting (this is the consider the attack modifier rules rule):
 	follow the attack modifier rules;
 
-First attack modifier rule (this is the standard attack roll rule):
-	now the attack strength is a random number between 1 and 10;
-	if the numbers boolean is true:
-		say "[italic type]Rolling ", the attack strength, "[run paragraph on]".
+[This roll creates a number between 1 and 10, but biased towards the middle values. This makes combat somewhat less random, which benefits the player and makes penalties and bonuses more important. However, we also allow a 10 to turn into a 20, so that everyone has a chance to hit everyone.
 
+Instead of the standard 1d10 of ATTACK, we roll 1d7 + 1d4 - 1.]
+
+The roller is a person that varies. [The guy who is rolling the dice. Used in the natural twenty rules.]
+The special set attack strength rules are a rulebook. [Used for periapt of prophecy]
+
+First attack modifier rule (this is the alternative attack roll rule):
+	now roller is the global attacker;
+	now the attack strength is 0;
+	follow the special set attack strength rules;
+	if attack strength is 0: [nothing intervened]
+		now the attack strength is a roll of the dice;
+	say "[italic type]Rolling ", the attack strength, "[run paragraph on]".
+	
 An attack modifier rule (this is the melee attack bonus rule):
 	let the attacker's melee be the melee of the global attacker;
 	if the numbers boolean is true and the attacker's melee is not 0:
@@ -1007,7 +1015,26 @@ Last attack modifier rule (this is the standard show results of the attack roll 
 	if the numbers boolean is true:
 		say " = ", the attack strength, ", [run paragraph on]";
 
+The natural twenty chance is a number that varies.
+The natural twenty rules are a rulebook.
 
+To decide which number is a roll of the dice:
+	let n be a random number between 1 and 7;
+	let m be a random number between 0 and 3;
+	let x be n + m;
+	now natural twenty chance is 0;
+	follow the natural twenty rules;
+	if a random chance of natural twenty chance in 100 succeeds:
+		now x is 20;
+	decide on x.
+
+[1: 1/28
+2: 2/28
+3: 3/28
+4-7: 4/28
+8: 3/28
+9: 2/28
+10: 1/28]
 
 Section - Whether the attack hits
 
@@ -1078,27 +1105,6 @@ Carry out an actor hitting (this is the subtract damage from health rule):
 	decrease the health of the global defender by the total damage;
 
 
-
-Section - Report hitting
-
-Report an actor hitting an alive person (this is the basic flavour rule):
-	if the attack damage is greater than 0:
-		say "[The global attacker] [hit] [the global defender].[run paragraph on]";
-	otherwise:
-		say "[The global attacker] [miss] [the global defender].[run paragraph on]";
-
-Report an actor hitting a dead pc (this is the basic fatal player flavour rule):
-	say "You are killed by [the global attacker].[run paragraph on]";
-
-Report an actor hitting a dead npc (this is the basic fatal flavour rule):
-	say "[The global attacker] [kill] [the name of the global defender].[run paragraph on]";
-
-Report the player hitting a dead pc (this is the report player suicide rule):
-	say "Your attack ends your own life.";
-	rule succeeds;
-
-
-
 Section - Aftereffects
 
 The aftereffects rules is a rulebook.
@@ -1115,6 +1121,54 @@ An aftereffects rule (this is the modify initiative based on combat results rule
 		decrease the initiative of the global defender by 2;
 	otherwise:
 		decrease the initiative of the global attacker by 2;
+
+Section - Weapon interactions during aftereffects
+
+To decide what object is whatever (item - a thing) struck:
+	if the attack hit:
+		if item is the global attacker weapon, decide on the global defender;
+		if item is the global defender, decide on the global attacker weapon;
+		[what about clothing?]
+		decide on nothing;
+	if item is the global attacker weapon:
+		if the global defender is at parry, decide on the global defender weapon;
+		if the global defender is at-block, decide on a random shield worn by the global defender;
+		decide on nothing;
+	[The next line makes this phrase asymmetrical -
+	 the global attacker weapon can hit weapons and shields if it is projectile, but they can't hit it]
+	if the global attacker weapon is projectile, decide on nothing;
+	if item is the global defender weapon and the global defender is at parry, decide on the global attacker weapon;
+	if item is a shield worn by the global defender and the global defender is at-block, decide on the global attacker weapon;
+	decide on nothing.
+
+[This is for Israfel's fires, lion's shield, etc]
+To decide whether (guy - a person) came too close to (item - a thing):
+	unless guy is the global attacker, no;
+	if the global attacker weapon is projectile, no;
+	if the global attacker weapon is tethered and the global attacker weapon is not a natural weapon, no;
+	if item is the global defender, yes;
+	if item is not proximity-triggered, no;
+	decide on whether or not the global defender encloses item;
+	
+Definition: a thing is proximity-triggered: no. [maybe there's a better name for this, and if so, maybe it can be applied to parrying weapons and stuff]
+
+Definition: a shield is proximity-triggered:
+	unless the global defender wears it, no;
+	decide on whether or not the global defender is at-block;
+	
+Definition: clothing is proximity-triggered if it is worn;
+
+Section - Killing
+
+[Most killing reports are defined with the individual monster's code]
+
+Report the player hitting a dead pc (this is the report player suicide rule):
+	say "Your attack ends your own life.";
+	rule succeeds;
+
+Last after reporting an actor hitting (this is the killing after attack rule):
+	if the global defender is dead:
+		have an event of the global attacker killing the global defender.
 
 Book - Flow
 
@@ -1206,15 +1260,20 @@ Understand "ready [thing]" as readying. Understand "wield [thing]" and "use [wea
 
 Does the player mean readying a readied weapon: it is unlikely.
 
+First check readying (this is the do not ready weapons on the ground rule):
+	unless the player encloses the noun:
+		take no time;
+		say "[We] will [have] to get [the noun] first." instead.
+
 Check readying (this is the cannot ready what is already readied rule):
 	if the noun is readied and the noun is enclosed by the player:
 		take no time;
-		say "You are already wielding [the noun]." instead.
+		say "[We] [are] already wielding [the noun]." instead.
 
 Check readying (this is the cannot ready what is not a weapon rule):
 	if the noun is not a weapon:
 		take no time;
-		say "You can only ready weapons." instead.
+		say "[We] [can] only ready weapons." instead.
 
 First carry out an actor readying (this is the implicit taking when readying rule):
 	if the actor does not enclose the noun:
@@ -1261,6 +1320,8 @@ Carry out an actor unreadying:
 
 Chapter - Attacking
 
+Section - Understanding
+
 The block attacking rule is not listed in any rulebook.
 
 Understand "a [thing]" as attacking.
@@ -1270,31 +1331,67 @@ Does the player mean attacking a dead person:
 Does the player mean attacking a person opposed by the player:
 	it is very likely.
 
+Section - Only attack living persons
+
 Check attacking when the noun is not a person (this is the only attack persons rule):
 	take no time;
-	say "Things are not your enemies." instead.
+	say "Things are not [our] enemies." instead.
 
 Check attacking a dead person (this is the only attack the living rule):
 	take no time;	
-	say "[The noun] is already dead." instead.
+	say "[The noun] [are] already dead." instead.
 
-Check attacking the player (this is the do not kill yourself rule):
-	take no time;
-	say "You are not that desperate!" instead.
+Section - Don't attack yourself
 
-A check attacking rule (this is the do not attack friendly people rule):
-	if the faction of the player is the faction of the noun:
+Check attacking the player (this is the alternative do not kill yourself rule):
+	if the noun is the player and Nomos bonus is false:
 		take no time;
-		say "[The noun] is your friend, not your enemy!" instead.
+		say "[We] [are] not that desperate!" instead.
 
-A check attacking rule (this is the do not attack neutral people rule):
-	if the player does not oppose the noun:
-		take no time;
-		say "[The noun] is not your enemy." instead.
+Section - Attacking when the combat status is peace (Nomos, slaves)
+
+Attacking-from-peace is a truth state that varies. Attacking-from-peace is false.
+
+First check attacking:
+	now attacking-from-peace is false. [If it didn't get reset for some reason.]
+
+A check attacking rule (this is the alternative do not attack friendly people rule):
+	if the faction of the player does not hate the faction of the noun:
+		if the faction of the noun is player-enslaved:
+			now the noun is betrayed;
+			if combat status is peace:
+				now attacking-from-peace is true;
+			now faction of the noun is hostile;
+		otherwise:
+			if the Nomos bonus is true:
+				unless the noun is the player:
+					if combat status is peace:
+						now attacking-from-peace is true;
+					now faction of the noun is hostile;
+			otherwise:
+				take no time;
+				say "[The noun] [are] [our] friend, not [our] enemy!" instead.
+				
+Last report attacking:
+	if attacking-from-peace is true:
+		now attacking-from-peace is false;
+		now combat state of the noun is at-React;
+		run the AI rules for the noun;
+		now the combat status is concluding;
+		follow the run delayed actions rule;
+		follow the conclude the combat round rule.
+
+[As I write this, this is only possible when the player attacks himself when commanded by Nomos.]
+First carry out attacking the player when the combat status is peace (this is the attack self when not in combat rule):
+	try the actor hitting the noun instead;
+
+Section - Don't attack as a reaction
 
 Check attacking when the player is at-React (this is the cannot attack as reaction rule):
 	take no time;
 	say "Attacking is an action, not a reaction." instead.
+
+Section - Carry out and report
 
 Carry out an actor attacking (this is the standard carry out an actor attacking rule):
 	choose a blank row in the Table of Delayed Actions;
@@ -1305,9 +1402,9 @@ Carry out an actor attacking (this is the standard carry out an actor attacking 
 Report an npc attacking (this is the standard report an actor attacking rule):
 	say "[The actor] [lunge] towards [the noun].[paragraph break]".
 
-
-
 Chapter - Concentrating
+
+Section - The Concentrating action
 
 Concentrating is an action applying to nothing. Understand "concentrate" and "c" and "co" as concentrating.
 
@@ -1315,7 +1412,11 @@ A person has a number called concentration. The concentration of a person is usu
 
 Check concentrating when the concentration of the player is 3 (this is the do not concentrate when at maximum rule):
 	take no time;
-	say "You are already maximally concentrated." instead;
+	say "[We] [are] already maximally concentrated." instead;
+
+Check concentrating (this is the do not concentrate outside of combat rule):
+	if combat status is peace:
+		say "[We] [can] only concentrate in a combat situation." instead.
 
 First carry out an actor concentrating (this is the standard concentrating improves initiative rule):
 	increase the initiative of the actor by the concentration of the actor.
@@ -1335,6 +1436,8 @@ Report an actor concentrating (this is the standard concentrating prose rule):
 		-- 3:
 			say " now maximally concentrated.";
 
+Section - Concentration improves attack strength
+
 An attack modifier rule (this is the concentration attack modifier rule):
 	let the bonus be 0;
 	if the concentration of the actor is:
@@ -1350,28 +1453,39 @@ An attack modifier rule (this is the concentration attack modifier rule):
 		say " + ", the bonus, " (concentration)[run paragraph on]";
 	increase the attack strength by the bonus;
 
-Rule for damage modifier (this is the concentration damage modifier rule):
-	let the bonus be 0;
-	if the concentration of the actor is:
-		-- 2:
-			now the bonus is 2;
-		-- 3:
-			now the bonus is 4;
-		-- otherwise:
-			make no decision;
-	if the numbers boolean is true:
-		say " + ", the bonus, " (concentration)[run paragraph on]";
-	increase the attack damage by the bonus;
+Section - Concentration improves attack damage for normal-concentrating people
 
-An aftereffects rule (this is the lose concentration when hit rule):
-	if the total damage is greater than 0 and the global defender is alive:
-		let the global defender lose concentration.
+A person can be normal-concentrating or abnormal-concentrating. A person is usually normal-concentrating.
+
+An add specific damage rule (this is the new concentration damage modifier rule):
+	if damage-by-hitting is true:
+		if global attacker is normal-concentrating:
+			if the concentration of the global attacker is greater than 1:
+				let the first dummy be 0;
+				if the concentration of the global attacker is 2, now the first dummy is 2;
+				if the concentration of the global attacker is 3, now the first dummy is 4;
+				add first dummy points of physical damage with reason "concentration".
+
+Section - Losing Concentration
+
+The remain concentrated chance is a number that varies.
+The remain concentrated rules are a rulebook.
+
+An aftereffects rule (this is the alternative lose concentration when hit rule):
+	if the total damage is greater than 0 and the global defender is alive and the concentration of the global defender is not 0:
+		now the remain concentrated chance is 0;
+		follow the remain concentrated rules;
+		unless a random chance of remain concentrated chance in 100 succeeds:
+			let the global defender lose concentration;
+		otherwise:
+			say "[The global defender] [bold type][remain] concentrated[roman type].";.
+
+A remain concentrated rule (this is the damage penalty for remaining concentrated rule):
+	decrease remain concentrated chance by total damage.
 
 After an actor hitting (this is the lose concentration after attacking rule):
 	now the concentration of the global attacker is 0;
 	continue the action;
-
-[ Losing concentration ]
 
 To let (the defender - a person) lose concentration:
 	if the concentration of the defender > 0:
@@ -1383,6 +1497,22 @@ The lose concentration prose rules are a person based rulebook.
 Last lose concentration prose rule for a person (called P) (this is the standard lose concentration prose rule):
 	say "[The P] [lose] [bold type]concentration[roman type]!";
 
+Carry out an actor going (this is the lose concentration on going rule):
+	now the concentration of the actor is 0.
+
+This is the new everyone loses concentration when combat status is peace rule:
+	if combat status is peace:
+		if concentration of the player is not 0:
+			now concentration of the player is 0;
+			say "[We] [relax] [our] concentration.";
+		now world test subject is the player;
+		repeat with guy running through alive worldsharer people:
+			now concentration of guy is 0.
+			
+new everyone loses concentration when combat status is peace rule is listed before the business as usual rule in the combat round rules.
+
+Section - Concentration improves AI chance to win
+
 Chance to win rule (this is the CTW concentration bonus rule):
 	if the concentration of the running AI is:
 		-- 1:
@@ -1392,21 +1522,6 @@ Chance to win rule (this is the CTW concentration bonus rule):
 		-- 3:
 			increase the chance-to-win by 8;
 	
-Carry out an actor going (this is the lose concentration on going rule):
-	now the concentration of the actor is 0.
-
-
-This is the everyone loses concentration when combat status is peace rule:
-	if combat status is peace:
-		if concentration of the player is not 0:
-			now concentration of the player is 0;
-			say "You relax your concentration.";
-		repeat with guy running through alive people:
-			now concentration of guy is 0.
-			
-The everyone loses concentration when combat status is peace rule is listed before the business as usual rule in the combat round rules.
-
-
 Chapter - Parrying
 
 Parrying is an action applying to nothing. Understand "parry" and "p" and "pa" as parrying.
@@ -1557,6 +1672,13 @@ Blocking is an action applying to nothing. Understand "block" as blocking.
 
 A person can be at-block. A person is usually not at-block.
 
+[In Kerkerkruip, blocking is only available if you are wearing a shield!]
+
+Check blocking (this is the cannot block when not wearing a shield rule):
+	if the player is not wearing a shield:
+		take no time;
+		say "[We] [cannot block] when [we]['re not] wearing a shield." instead.
+
 Check blocking (this is the cannot block when not reacting rule):
 	if the combat state of the player is not at-React:
 		take no time;
@@ -1584,6 +1706,23 @@ An aftereffects rule (this is the gain random flow from blocking rule):
 			otherwise:
 				up the offensive flow of the global defender.
 
+An AI action selection rule for an at-React person (called P) (this is the AI block without shields rule):
+	choose row with an Option of the action of P blocking in the Table of AI Action Options;
+	if P does not wear a shield:
+		decrease Action Weight entry by 1000.
+
+An attack modifier rule (this is the block defence bonus rule):
+	if the global defender is at-block:
+		if the global defender encloses a worn shield:
+			let item be a random shield worn by the global defender;
+			let n be block bonus of item;
+			decrease the attack strength by n;
+			if the numbers boolean is true:
+				if n is greater than 0:
+					say " - ", n, " (block bonus)[run paragraph on]";
+				if n is less than 0:
+					now n is (0 - n);
+					say " + ", n, " (block penalty)[run paragraph on]";
 
 Section - Expose
 
@@ -1810,10 +1949,12 @@ Last chance to win rule (this is the account for the best defence and return the
 
 Section - More action selection rules
 
-An AI action selection rule for an at-Act person (called P) (this is the standard attack select rule):
+[Since there's always a small chance of rolling 20, attacking is never useless.]
+
+An AI action selection rule for an at-Act person (called P) (this is the new standard attack select rule):
 	choose row with an Option of the action of the main actor attacking the chosen target in the Table of AI Action Options;
 	if the normalised chance-to-win is 0:
-		now the Action Weight entry is -100;
+		now the Action Weight entry is -20;
 	decrease the Action Weight entry by 5;
 	increase the Action Weight entry by the normalised chance-to-win;
 
@@ -2084,18 +2225,6 @@ An AI action selection rule for an at-Act person (called P) (this is the tension
 
 Volume - Kerkerkruip Additions
 
-Section - No concentrating outside of combat
-
-Check concentrating (this is the do not concentrate outside of combat rule):
-	if combat status is peace:
-		say "[We] [can] only concentrate in a combat situation." instead.
-
-Section - No readying what you don't have
-
-First check readying (this is the do not ready weapons on the ground rule):
-	unless the player encloses the noun:
-		take no time;
-		say "[We] will [have] to get [the noun] first." instead.
 		
 Section - No wearing what you don't have
 
@@ -2120,213 +2249,6 @@ First check snorting (this is the do not snort things on the ground rule):
 		say "[We] will [have] to get [the noun] first." instead.
 						
 
-Section - Losing concentration only for worldsharers
-
-This is the new everyone loses concentration when combat status is peace rule:
-	if combat status is peace:
-		if concentration of the player is not 0:
-			now concentration of the player is 0;
-			say "[We] [relax] [our] concentration.";
-		now world test subject is the player;
-		repeat with guy running through alive worldsharer people:
-			now concentration of guy is 0.
-			
-new everyone loses concentration when combat status is peace rule is listed instead of the everyone loses concentration when combat status is peace rule in the combat round rules.
-
-Section - Replacing concentration
-
-A person can be normal-concentrating or abnormal-concentrating. A person is usually normal-concentrating.
-
-An add specific damage rule (this is the new concentration damage modifier rule):
-	if damage-by-hitting is true:
-		if global attacker is normal-concentrating:
-			if the concentration of the global attacker is greater than 1:
-				let the first dummy be 0;
-				if the concentration of the global attacker is 2, now the first dummy is 2;
-				if the concentration of the global attacker is 3, now the first dummy is 4;
-				add first dummy points of physical damage with reason "concentration".
-
-The concentration damage modifier rule is not listed in any rulebook.
-
-
-Section - Attacking when the combat status is peace (Nomos, slaves)
-
-[Nomos. Attack slaves.]
-
-This is the alternative do not kill yourself rule:
-	if the noun is the player and Nomos bonus is false:
-		take no time;
-		say "[We] [are] not that desperate!" instead.
-		
-The alternative do not kill yourself rule is listed instead of the do not kill yourself rule in the check attacking rulebook.
-
-Attacking-from-peace is a truth state that varies. Attacking-from-peace is false.
-
-This is the alternative do not attack friendly people rule:
-	if the faction of the player does not hate the faction of the noun:
-		if the faction of the noun is player-enslaved:
-			now the noun is betrayed;
-			if combat status is peace:
-				now attacking-from-peace is true;
-			now faction of the noun is hostile;
-		otherwise:
-			if the Nomos bonus is true:
-				unless the noun is the player:
-					if combat status is peace:
-						now attacking-from-peace is true;
-					now faction of the noun is hostile;
-			otherwise:
-				take no time;
-				say "[The noun] [are] [our] friend, not [our] enemy!" instead.
-				
-The alternative do not attack friendly people rule is listed instead of the do not attack friendly people rule in the check attacking rulebook.
-
-The do not attack neutral people rule is not listed in any rulebook.
-
-First check attacking:
-	now attacking-from-peace is false. [If it didn't get reset for some reason.]
-
-Last report attacking:
-	if attacking-from-peace is true:
-		now attacking-from-peace is false;
-		now combat state of the noun is at-React;
-		run the AI rules for the noun;
-		now the combat status is concluding;
-		follow the run delayed actions rule;
-		follow the conclude the combat round rule.
-
-
-
-Section - New rolling mechanism
-
-[This roll creates a number between 1 and 10, but biased towards the middle values. This makes combat somewhat less random, which benefits the player and makes penalties and bonuses more important. However, we also allow a 10 to turn into a 20, so that everyone has a chance to hit everyone.
-
-Instead of the standard 1d10 of ATTACK, we roll 1d7 + 1d4 - 1.]
-
-The roller is a person that varies. [The guy who is rolling the dice. Used in the natural twenty rules.]
-The special set attack strength rules are a rulebook. [Used for periapt of prophecy]
-
-An attack modifier rule (this is the alternative attack roll rule):
-	now roller is the global attacker;
-	now the attack strength is 0;
-	follow the special set attack strength rules;
-	if attack strength is 0: [nothing intervened]
-		now the attack strength is a roll of the dice;
-	say "[italic type]Rolling ", the attack strength, "[run paragraph on]".
-	
-The alternative attack roll rule is listed instead of the standard attack roll rule in the attack modifier rules.
-
-The natural twenty chance is a number that varies.
-The natural twenty rules are a rulebook.
-
-To decide which number is a roll of the dice:
-	let n be a random number between 1 and 7;
-	let m be a random number between 0 and 3;
-	let x be n + m;
-	now natural twenty chance is 0;
-	follow the natural twenty rules;
-	if a random chance of natural twenty chance in 100 succeeds:
-		now x is 20;
-	decide on x.
-
-[1: 1/28
-2: 2/28
-3: 3/28
-4-7: 4/28
-8: 3/28
-9: 2/28
-10: 1/28]
-
-Section - Adjust AI
-
-[Since there's always a small chance of rolling 20, attacking is never useless.]
-
-An AI action selection rule for an at-Act person (called P) (this is the new standard attack select rule):
-	choose row with an Option of the action of the main actor attacking the chosen target in the Table of AI Action Options;
-	if the normalised chance-to-win is 0:
-		now the Action Weight entry is -20;
-	decrease the Action Weight entry by 5;
-	increase the Action Weight entry by the normalised chance-to-win;
-
-The new standard attack select rule is listed instead of the standard attack select rule in the AI action selection rules.
-
-
-Section - Weapon interactions during aftereffects
-
-To decide whether (striker - a thing) struck (stricken - a thing):
-	decide on whether or not stricken is whatever striker struck;
-		
-To decide what object is whatever (item - a thing) struck:
-	if the attack hit:
-		if item is the global attacker weapon, decide on the global defender;
-		if item is the global defender, decide on the global attacker weapon;
-		[what about clothing?]
-		decide on nothing;
-	if item is the global attacker weapon:
-		if the global defender is at parry, decide on the global defender weapon;
-		if the global defender is at-block, decide on a random shield worn by the global defender;
-		decide on nothing;
-	[The next line makes this phrase asymmetrical -
-	 the global attacker weapon can hit weapons and shields if it is projectile, but they can't hit it]
-	if the global attacker weapon is projectile, decide on nothing;
-	if item is the global defender weapon and the global defender is at parry, decide on the global attacker weapon;
-	if item is a shield worn by the global defender and the global defender is at-block, decide on the global attacker weapon;
-	decide on nothing.
-
-[This is for Israfel's fires, lion's shield, etc]
-To decide whether (guy - a person) came too close to (item - a thing):
-	unless guy is the global attacker, no;
-	if the global attacker weapon is projectile, no;
-	if the global attacker weapon is tethered and the global attacker weapon is not a natural weapon, no;
-	if item is the global defender, yes;
-	if item is not proximity-triggered, no;
-	decide on whether or not the global defender encloses item;
-	
-Definition: a thing is proximity-triggered: no. [maybe there's a better name for this, and if so, maybe it can be applied to parrying weapons and stuff]
-
-Definition: a shield is proximity-triggered:
-	unless the global defender wears it, no;
-	decide on whether or not the global defender is at-block;
-	
-Definition: clothing is proximity-triggered if it is worn;
-
-Section - Losing concentration
-
-The alternative lose concentration when hit rule is listed instead of the lose concentration when hit rule in the aftereffects rules.
-
-The remain concentrated chance is a number that varies.
-The remain concentrated rules are a rulebook.
-
-An aftereffects rule (this is the alternative lose concentration when hit rule):
-	if the total damage is greater than 0 and the global defender is alive and the concentration of the global defender is not 0:
-		now the remain concentrated chance is 0;
-		follow the remain concentrated rules;
-		unless a random chance of remain concentrated chance in 100 succeeds:
-			let the global defender lose concentration;
-		otherwise:
-			say "[The global defender] [bold type][remain] concentrated[roman type].";.
-
-A remain concentrated rule (this is the damage penalty for remaining concentrated rule):
-	decrease remain concentrated chance by total damage.
-
-Section - Killing
-
-Last after reporting an actor hitting (this is the killing after attack rule):
-	if the global defender is dead:
-		have an event of the global attacker killing the global defender.
-
-Section - Some ATTACK prose rules	
-	
-[Last final blow report rule (this is the new end reporting blow with paragraph break rule):
-	if global defender is alive, say "[paragraph break]".]
-
-The basic fatal player flavour rule is not listed in any rulebook.
-The basic fatal flavour rule is not listed in any rulebook.
-The basic flavour rule is not listed in any rulebook.
-The the improper print dead property rule is not listed in any rulebook.
-The proper print dead property rule is not listed in any rulebook.
-
-
 Section - Using question prompts
 
 [A combat round rule when the combat status is peace (this is the not quite business as usual rule):
@@ -2345,15 +2267,7 @@ Before taking a player action:
 
 Section - Other stuff
 
-An AI target selection rule (this is the randomise the target result more rule):
-	increase the Weight by a random number between 0 and 3;
-
 Understand "creature" as a person.
-
-Check switching the numbers off:
-	say "The numerical representation of combat cannot be switched off in this game." instead.
-
-
 
 [This could be fun, but it needs to be an option that can be set to: none, short, medium, long.]
 [The non-standard attack roll rule is listed instead of the standard attack roll rule in the basic attack roll rules.
@@ -2365,14 +2279,6 @@ This is the non-standard attack roll rule:
 	if the numbers boolean is true, say the to-hit roll, "[run paragraph on]";
 	wait 500 milliseconds before continuing, strictly;.
 ]
-
-Section - Because sometimes one can attack outside combat
-
-[As I write this, this is only possible when the player attacks himself when commanded by Nomos.]
-First carry out attacking the player when the combat status is peace (this is the attack self when not in combat rule):
-	try the actor hitting the noun instead;
-
-
 
 Chapter - Faculties
 
@@ -2608,32 +2514,6 @@ A killing rule (this is the reset killed-guy rule):
 	follow the sudden combat reset rules for killed-guy.
 
 
-Section - Blocking
-
-[In Kerkerkruip, blocking is only available if you are wearing a shield!]
-
-Check blocking (this is the cannot block when not wearing a shield rule):
-	if the player is not wearing a shield:
-		take no time;
-		say "[We] [cannot block] when [we]['re not] wearing a shield." instead.
-
-An AI action selection rule for an at-React person (called P) (this is the AI block without shields rule):
-	choose row with an Option of the action of P blocking in the Table of AI Action Options;
-	if P does not wear a shield:
-		decrease Action Weight entry by 1000.
-
-An attack modifier rule (this is the block defence bonus rule):
-	if the global defender is at-block:
-		if the global defender encloses a worn shield:
-			let item be a random shield worn by the global defender;
-			let n be block bonus of item;
-			decrease the attack strength by n;
-			if the numbers boolean is true:
-				if n is greater than 0:
-					say " - ", n, " (block bonus)[run paragraph on]";
-				if n is less than 0:
-					now n is (0 - n);
-					say " + ", n, " (block penalty)[run paragraph on]";
 
 
 Kerkerkruip ATTACK ends here.
