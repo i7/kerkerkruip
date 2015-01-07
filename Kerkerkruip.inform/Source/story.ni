@@ -2,7 +2,6 @@
 
 [INFORM 7 update TODO list:
 
-* Get this things to compile!
 * Make sure the Questions replacement below works.
 * Check the relationship at the start of Monsters.
 * Fix unidentified scrolls, scroll of knowledge and magical guides.]
@@ -64,20 +63,13 @@ To check initial position of attribute:
 		say ", [run paragraph on]".
 
 
-Section - Include ATTACK
-
-[ Get the latest ATTACK at https://github.com/i7/ATTACK ]
-Include version 5/140908 of Inform ATTACK by Victor Gijsbers.
-
-
-
 Section - Include all the Kerkerkruip extensions
 
 Include Kerkerkruip Permadeath by Victor Gijsbers.
 Include Kerkerkruip Persistent Data by Victor Gijsbers.
 Include Kerkerkruip Dungeon Generation by Victor Gijsbers.
 Include Kerkerkruip Events by Victor Gijsbers.
-Include Kerkerkruip ATTACK Additions by Victor Gijsbers.
+Include Kerkerkruip ATTACK by Victor Gijsbers.
 Include Kerkerkruip Monster Abilities by Victor Gijsbers.
 Include Kerkerkruip Systems by Victor Gijsbers.
 Include Kerkerkruip Systems - Hiding Smoke Ethereal by Victor Gijsbers.
