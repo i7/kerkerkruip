@@ -1504,6 +1504,10 @@ This is the everyone loses flow when combat status is peace rule:
 				
 The everyone loses flow when combat status is peace rule is listed before the business as usual rule in the combat round rules.
 
+Section - Flow affects AI chance to win
+
+Chance to win rule (this is the CTW flow bonus rule):
+	increase the chance-to-win by (the offensive flow of the running AI) - (the defensive flow of the chosen target);
 
 Book - Standard Combat Actions
 
@@ -2190,26 +2194,40 @@ An AI action selection rule for an at-React person (called P) (this is the stand
 		let the defendant's weapon be a random readied weapon enclosed by P;
 		let dodgability be (2 + dodge bonus of the attacker's weapon);
 		let parry rating be (2 + parry-against bonus of the attacker's weapon + parry-with bonus of the defendant's weapon);
+		let block rating be 0;
+		Let S be a random shield worn by P;
+		if S is a shield:
+			increase block rating by 2 + block bonus of S;
 		[ Adjust the weight of dodging ]
 		choose row with an Option of the action of P dodging in the Table of AI Action Options;
 		increase the Action Weight entry by dodgability;
 		if dodgability is less than 1:
-			decrease the Action Weight entry by 100;		
-		if parry rating is greater than dodgability:
 			decrease the Action Weight entry by 100;
+			[increase dodgability based on likelihood of getting hit in future attacks (increase defensive flow?)]		
+		if parry rating is greater than dodgability:
+			decrease the Action Weight entry by 50;
+		if block rating is greater than dodgability:
+			decrease the Action Weight entry by 50;
 		[ Adjust the weight of parrying ]
 		choose row with an Option of the action of P parrying in the Table of AI Action Options;
 		increase the Action Weight entry by parry rating;
 		if parry rating is less than 1:
 			decrease the Action Weight entry by 100;
+			[increase action weight based on chance to win of next attack?]
 		if dodgability is greater than parry rating:
-			decrease the Action Weight entry by 100;
+			decrease the Action Weight entry by 50;
+		if block rating is greater than parry rating:
+			decrease the Action Weight entry by 50;
+		if a random chance of 1 in 8 succeeds:
+			increase Action Weight entry by (4 * (defensive flow of P));
 		choose row with an Option of the action of P blocking in the Table of AI Action Options;
 		[TODO: only do this if P wears a shield?]
-		if offensive flow of P is less than 1:
+		if block rating is less than 1:
 			decrease Action Weight entry by 100;
-		if a random chance of 1 in 8 succeeds:
-			increase Action Weight entry by (4 * (offensive flow of P)).
+		if parry rating is greater than block rating:
+			decrease Action Weight entry by 50;
+		if dodgability is greater than block rating:
+			decrease Action Weight entry by 50;
 
 An AI action selection rule for a person (called P) when the chosen weapon is not readied (this is the don't attack or concentrate with an unreadied weapon rule):
 	if P is at-Act:
