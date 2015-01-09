@@ -187,7 +187,7 @@ Chapter - Tests (not for release)
 
 
 
-Section - Cheats - Plunk, plonk, smite, rambo, meatboy, butterfly, reduce
+Section - Cheats - Plunk, plonk, smite, rambo, meatboy, butterfly, reduce, sneak
 
 Plunking is an action applying to one thing.
 Understand "plunk [something]" as plunking.
@@ -272,6 +272,17 @@ Carry out restartnowing:
 To restart immediately: 
 	(- @restart; -).
 
+Sneaking is an action applying to nothing. Understand "sneak" as sneaking.
+
+Carry out sneaking:
+	now traveling sneakily is true;
+	if the player wears a cloak (called the impediment) that is not the fuligin cloak:
+		try taking off the impediment;
+	force the fuligin cloak to work.
+	
+Report sneaking:
+	say "You are now hidden in the fuligin cloak, and you have a +100 hiding bonus. To cancel the bonus, remove the cloak."
+	
 
 Section - Granting powers
 
@@ -351,5 +362,22 @@ Understand "tense [text]" as a mistake ("Tense can only be set to one of the fol
 Carry out tense-changing:
 	now the story tense is the grammatical tense understood;
 	say "[bracket]Story tense is now [the story tense].[close bracket]";
+	
+Section - Test Battles
 
+battling is an action applying to one visible thing. Understand "battle [any person]" as battling.
+
+Carry out battling:
+	try challenging the noun in Test Arena.
+
+recruiting is an action applying to one visible thing. Understand "recruit [any person]" as recruiting.
+
+Carry out recruiting:
+	extract the noun from combat;
+	move the noun to the location;
+	Now the noun is friendly;
+
+Report recruiting:
+	say "[The noun] appears, and joins the friendly faction.";
+	
 Kerkerkruip Tests ends here.
