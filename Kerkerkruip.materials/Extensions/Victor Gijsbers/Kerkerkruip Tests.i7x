@@ -438,4 +438,34 @@ For taking a player action when the fight target is at least 1 (this is the let 
 
 The let test combatants fight rule is listed before the test step player action rule in the for taking a player action rulebook.
 
+Section - Stats
+
+Requesting died-and-killed records is an action out of world applying to nothing. Understand "records" as requesting died-and-killed records.
+
+Carry out requesting died-and-killed records:
+	say "[fixed letter spacing][bold type]Monster       died   killed player[roman type][line break]";
+	Repeat with guy running through monsters:
+		say "[the guy]   [died count of guy]   [kill count of guy][line break]";
+	say "[variable letter spacing][line break]";
+	
+To say name of the (guy - a person) padded to (N - a number) characters:
+	[seemed like it would work, but fixed letter spacing doesn't seem to do anything.]
+	say "[the guy]";
+	say (N - the number of characters in "[the guy]") spaces;
+	
+To say (N - a number) spaces:
+	Repeat with i running from 1 to N:
+		say " ";
+
+Clearing died-and-killed records is an action out of world applying to nothing. Understand "clear records" as clearing died-and-killed records.
+
+Carry out clearing died-and-killed records:
+	Repeat with guy running through monsters:
+		now died count of guy is 0;
+		now kill count of guy is 0;
+	update the monster statistics.
+
+Report clearing died-and-killed records:
+	say "Died and kill counts have been reset to 0 for all monsters."
+		
 Kerkerkruip Tests ends here.
