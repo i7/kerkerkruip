@@ -368,16 +368,74 @@ Section - Test Battles
 battling is an action applying to one visible thing. Understand "battle [any person]" as battling.
 
 Carry out battling:
+	revive the noun in Test Arena;
+	Repeat with guy running through people who accompany the noun:
+		[not sure if this is quite right]
+		now the faction of guy is arena-faction;
 	try challenging the noun in Test Arena.
 
+After arena arrival of Test Arena:
+	Repeat with guy running through people in the staging area of Test Arena:
+		move guy to the location;
+		say "[The guy] appears, ready to fight for [faction of the guy]."
+		
 recruiting is an action applying to one visible thing. Understand "recruit [any person]" as recruiting.
 
 Carry out recruiting:
-	extract the noun from combat;
-	move the noun to the location;
+	revive the noun in the location;
+	Repeat with guy running through people who accompany the noun:
+		now the guy is friendly;
+		now the original faction of guy is friendly; [slightly dangerous hack to keep Isra and Fell on our side]
 	Now the noun is friendly;
+	Now the original faction of the noun is friendly;
 
 Report recruiting:
 	say "[The noun] appears, and joins the friendly faction.";
 	
+fight-testing is an action applying to two visible things. Understand "fighttest [any person] vs [any person]" as fight-testing.
+
+The test-champion is a person variable.
+The test-challenger is a person variable.
+The fight target is a number variable.
+The champion's initial defeats is a number variable.
+The challenger's initial defeats is a number variable.
+
+Carry out fight-testing:
+	now the test-champion is the noun;
+	now the test-challenger is the second noun;
+	now the fight target is 100;
+	try sneaking;
+	try battling the test-challenger;
+	try recruiting the test-champion;
+	now the champion's initial defeats is the died count of the test-champion;
+	now challenger's initial defeats is the died count of the test-challenger;
+	
+To decide what number is the champion's defeats:
+	decide on the died count of the test-champion - the champion's initial defeats.
+	
+To decide what number is the challenger's defeats:
+	decide on the died count of the test-challenger - the challenger's initial defeats.
+	
+Report fight-testing:
+	say "[italic type]When it came time to fight I thought, 'I'll just step aside'[line break] - The Flaming Lips, 'Fight Test'[roman type][paragraph break]"
+	
+For taking a player action when the fight target is at least 1 (this is the let test combatants fight rule):
+	now the health of the player is 1000;
+	if the combat status is not peace and (the number of friendly npc people in the location is at least 1):
+		[continue the fight]
+		rule succeeds;
+	Let the total kills be the champion's defeats + the challenger's defeats;
+	if the total kills is at least the fight target:
+		say "In [the total kills] fights, [the test-champion] was killed [the champion's defeats] times and [the test-challenger] was killed [the challenger's defeats] times.";
+		now the fight target is 0;
+		make no decision;
+	Repeat with guy running through npc people in Test Arena:
+		say "Removing [the guy] from Test Arena.";
+		extract the guy from combat;
+		remove the guy from play;
+	try battling the test-challenger;
+	try recruiting the test-champion;
+
+The let test combatants fight rule is listed before the test step player action rule in the for taking a player action rulebook.
+
 Kerkerkruip Tests ends here.

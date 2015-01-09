@@ -449,7 +449,7 @@ The must be enemies to challenge rule is listed first in the check challenging i
 The NPCs simulate arena battle rule is listed last in the check challenging it in rules.
 
 Carry out an actor challenging someone in (this is the remember the challenge site rule):
-	now the challenge site of the second noun is the location of the person asked;
+	if the second noun is not the location of the person asked, now the challenge site of the second noun is the location of the person asked;
 
 Carry out an actor challenging someone in (this is the place challenged opponents in staging area rule):
 	extract the noun from combat;

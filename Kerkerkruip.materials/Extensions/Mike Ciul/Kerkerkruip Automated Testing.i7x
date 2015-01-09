@@ -856,7 +856,9 @@ Definition: a direction (called way) is diggable:
 
 Section - Test Arena
 
-Test Arena is an arena. The staging area of Test Arena is Test Arena.
+Test Arena is an arena. The staging area of Test Arena is maze-waiting-room.
+
+Test Arena is faction-imposing.
 
 Kerkerkruip Automated Testing ends here.
 
