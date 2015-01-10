@@ -445,7 +445,7 @@ fight-testing is an action applying to two visible things. Understand "fighttest
 
 The test-champion is a person variable.
 The test-challenger is a person variable.
-The fight target is a number variable.
+The fight count is a number variable.
 The champion's initial defeats is a number variable.
 The challenger's initial defeats is a number variable.
 
@@ -454,7 +454,7 @@ Carry out fight-testing:
 	now the test-challenger is the second noun;
 	back up stats of the test-champion;
 	back up stats of the test-challenger;
-	now the fight target is 100;
+	now the fight count is 100;
 	try sneaking;
 	try battling the test-challenger;
 	try recruiting the test-champion;
@@ -470,17 +470,17 @@ To decide what number is the challenger's defeats:
 Report fight-testing:
 	say "[italic type]When it came time to fight I thought, 'I'll just step aside'[line break] - The Flaming Lips, 'Fight Test'[roman type][paragraph break]"
 	
-For taking a player action when the fight target is at least 1 (this is the let test combatants fight rule):
+For taking a player action when the fight count is at least 1 (this is the let test combatants fight rule):
 	now the health of the player is 1000;
 	if the combat status is not peace and (the number of friendly npc people in the location is at least 1):
 		[continue the fight]
 		rule succeeds;
+	decrement the fight count;
 	Let the total kills be the champion's defeats + the challenger's defeats;
-	if the total kills is at least the fight target:
-		say "[The test-champion] was killed [the champion's defeats] times and [the test-challenger] was killed [the challenger's defeats] times.";
-		now the fight target is 0;
+	if the fight count is 0:
+		say "In 100 fights, [The test-champion] was killed [the champion's defeats] times and [the test-challenger] was killed [the challenger's defeats] times.";
 		make no decision;
-	say "So far, [the test-champion] was killed [the champion's defeats] times and [the test-challenger] was killed [the challenger's defeats] times.";
+	say "With [fight count] fights left, [the test-champion] was killed [the champion's defeats] times and [the test-challenger] was killed [the challenger's defeats] times.";
 	Repeat with guy running through npc people in Test Arena:
 		say "Removing [the guy] from Test Arena.";
 		extract the guy from combat;
