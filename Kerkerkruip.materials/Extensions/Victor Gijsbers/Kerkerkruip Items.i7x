@@ -1692,6 +1692,9 @@ A blindness rule (this is the blind if flashed rule):
 	if flash-grenade-timer of test subject is greater than 0:
 		rule succeeds.				
 
+A reviving rule for a person (called guy) (this is the reset flash grenade timer when reviving rule):
+	now the flash-grenade-timer of the guy is 0;
+	
 An exploding rule (this is the flash grenade explodes rule):
 	if the exploding-grenade is a flash grenade:
 		if the noun is rusted and a random chance of 1 in 2 succeeds:
@@ -2495,7 +2498,9 @@ A general damage multiplier rule when the hit protection of the victim is greate
 		now total damage is 0;
 		decrease hit protection of the global defender by 1.
 
-
+A reviving rule for a person (called guy) (this is the no protection when revived rule):
+	now the hit protection of the guy is 0;
+	
 [Section - Scroll of Etherealness
 
 Table of Scroll Names (continued)

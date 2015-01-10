@@ -367,10 +367,58 @@ Section - Test Battles
 
 battling is an action applying to one visible thing. Understand "battle [any person]" as battling.
 
+Table of Backup Stats
+creature	weapon	body	mind	spirit	permanent health	melee	defence	creature material	weapon material	damage die	weapon damage	dodge	parry-against	parry-with
+a person	a weapon	a number	a number	a number	a number	a number	a number	a material	a material	a number	a number	a number	a number	a number
+with 20 blank rows.
+
+To back up stats of (guy - a person):
+	if there is a creature of guy in Table of Backup Stats:
+		stop;
+	choose a blank row in Table of Backup Stats;
+	now creature entry is guy;
+	now weapon entry is a random readied weapon enclosed by guy;
+	if weapon entry is nothing, now weapon entry is a random natural weapon enclosed by guy;
+	now body entry is the body score of guy;
+	now mind entry is the mind score of guy;
+	now spirit entry is the spirit score of guy;
+	now permanent health entry is permanent health of guy;
+	now melee entry is melee of guy;
+	now defence entry is defence of guy;
+	now creature material entry is material of guy;
+	now weapon material entry is material of weapon entry;
+	now damage die entry is damage die of weapon entry;
+	now weapon damage entry is weapon damage bonus of weapon entry;
+	now dodge entry is dodge bonus of weapon entry;
+	now parry-against entry is parry-against bonus of weapon entry;
+	now parry-with entry is parry-with bonus of weapon entry;
+	
+A reviving rule for a person (called guy) (this is the restore stats when reviving rule):
+	unless there is a creature of guy in Table of Backup Stats, make no decision;
+	choose row with creature of guy in Table of Backup Stats;
+	Repeat with item running through readied weapons enclosed by guy:
+		now item is not readied;
+	If weapon entry is not a natural weapon:
+		now guy carries weapon entry;
+	now weapon entry is readied;
+	now the body score of guy is body entry;
+	now the mind score of guy is mind entry;
+	now the spirit score of guy is spirit entry;
+	now permanent health of guy is permanent health entry;
+	now melee of guy is melee entry;
+	now defence of guy is defence entry;
+	now material of guy is creature material entry;
+	now damage die of weapon entry is damage die entry;
+	now weapon damage bonus of weapon entry is weapon damage entry;
+	now dodge bonus of weapon entry is dodge entry;
+	now parry-against bonus of weapon entry is parry-against entry;
+	now parry-with bonus of weapon entry is parry-with entry;
+	
 Carry out battling:
 	revive the noun in Test Arena;
 	Repeat with guy running through people who accompany the noun:
 		[not sure if this is quite right]
+		back up stats of the guy;
 		now the faction of guy is arena-faction;
 	try challenging the noun in Test Arena.
 
@@ -382,6 +430,7 @@ After arena arrival of Test Arena:
 recruiting is an action applying to one visible thing. Understand "recruit [any person]" as recruiting.
 
 Carry out recruiting:
+	back up stats of the noun;
 	revive the noun in the location;
 	Repeat with guy running through people who accompany the noun:
 		now the guy is friendly;
@@ -403,6 +452,8 @@ The challenger's initial defeats is a number variable.
 Carry out fight-testing:
 	now the test-champion is the noun;
 	now the test-challenger is the second noun;
+	back up stats of the test-champion;
+	back up stats of the test-challenger;
 	now the fight target is 100;
 	try sneaking;
 	try battling the test-challenger;
@@ -426,9 +477,10 @@ For taking a player action when the fight target is at least 1 (this is the let 
 		rule succeeds;
 	Let the total kills be the champion's defeats + the challenger's defeats;
 	if the total kills is at least the fight target:
-		say "In [the total kills] fights, [the test-champion] was killed [the champion's defeats] times and [the test-challenger] was killed [the challenger's defeats] times.";
+		say "[The test-champion] was killed [the champion's defeats] times and [the test-challenger] was killed [the challenger's defeats] times.";
 		now the fight target is 0;
 		make no decision;
+	say "So far, [the test-champion] was killed [the champion's defeats] times and [the test-challenger] was killed [the challenger's defeats] times.";
 	Repeat with guy running through npc people in Test Arena:
 		say "Removing [the guy] from Test Arena.";
 		extract the guy from combat;
@@ -438,7 +490,7 @@ For taking a player action when the fight target is at least 1 (this is the let 
 
 The let test combatants fight rule is listed before the test step player action rule in the for taking a player action rulebook.
 
-Section - Stats
+Section - Died and Kill Stats
 
 Requesting died-and-killed records is an action out of world applying to nothing. Understand "records" as requesting died-and-killed records.
 

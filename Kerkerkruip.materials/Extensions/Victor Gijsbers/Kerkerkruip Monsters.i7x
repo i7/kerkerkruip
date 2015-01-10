@@ -2299,6 +2299,10 @@ To do the angel of compassion power-down:
 				say "You hear a [bold type]tortured wail[roman type] [way].";
 			otherwise:
 				say "You hear a [bold type]tortured wail[roman type] somewhere in the dungeon.".
+				
+A reviving rule for the angel of compassion (this is the restore radiant strength when reviving angel of compassion rule):
+	now radiation of angel of compassion is 4;
+	now angel-of-compassion-strength is 4;
 
 Section - Angel of Compassion images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 

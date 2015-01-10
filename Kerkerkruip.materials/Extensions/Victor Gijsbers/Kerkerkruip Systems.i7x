@@ -1518,15 +1518,21 @@ When play begins (this is the remember original factions rule):
 		now the original faction of guy is the faction of guy.
 
 To revive (guy - a person) in (place - a room):
+	follow the reviving rules for guy;
+	move guy to place.
+	
+The reviving rules are an object based rulebook.
+
+Reviving rule for a person (called guy) (this is the basic reviving rule):
 	reset combat action stats of guy; 
 	now guy is not asleep;
+	now guy is not rusted;
 	now the stun count of guy is 0;
 	now the stun strength of guy is 0;
 	now the size of guy is the base size of guy;
 	now the faction of guy is the original faction of guy;
 	now guy is unseen;
 	now last-seen-location of guy is Null-Room;
-	move guy to place;
 	restore the health of guy;
 
 Chapter - Forced action
