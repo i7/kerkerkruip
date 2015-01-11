@@ -1482,8 +1482,8 @@ A contact rule when the global attacker is the jumping bomb (this is the jumping
 		say "[roman type]When the jumping bomb hits [the global defender], it explodes with a terrible bang. [if the global defender is the player]Not even all the king's horses and all the king's men will be able to put the thousand pieces of your body back together[otherwise][The global defender] is killed instantly[end if].";
 		now the health of the global attacker is -10; [Bypasses normal damage system.]
 		now the health of the global defender is -10; [Bypasses normal damage system.]
-		have an event of the global attacker killing the global defender;		
-		if the player is not alive:
+		if the global defender is the player:
+			have an event of the global attacker killing the global defender;		
 			end the story saying "You exploded";
 			rule fails;
 		rule fails.
