@@ -546,6 +546,8 @@ For reading a command when done testing is false (this is the finish current tes
 	write file of test results from Table of Test Results;
 	start the next test;
 	
+[TODO: for asking the final question when done testing is false]
+	
 Chapter - Randomized Events
 
 A randomized outcome is a kind of value. boring lack of results is a randomized outcome.

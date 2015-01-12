@@ -368,15 +368,18 @@ Section - Test Battles
 battling is an action applying to one visible thing. Understand "battle [any person]" as battling.
 
 Table of Backup Stats
-creature	weapon	body	mind	spirit	permanent health	melee	defence	creature material	weapon material	damage die	weapon damage	dodge	parry-against	parry-with
-a person	a weapon	a number	a number	a number	a number	a number	a number	a material	a material	a number	a number	a number	a number	a number
+creature	true faction	weapon	body	mind	spirit	permanent health	melee	defence	creature material	weapon material	damage die	weapon damage	dodge	parry-against	parry-with
+a person	a faction	a weapon	a number	a number	a number	a number	a number	a number	a material	a material	a number	a number	a number	a number	a number
 with 20 blank rows.
+
+[TODO: make a rulebook for equipping all people, and run it in a reviving rule]
 
 To back up stats of (guy - a person):
 	if there is a creature of guy in Table of Backup Stats:
 		stop;
 	choose a blank row in Table of Backup Stats;
 	now creature entry is guy;
+	now true faction entry is original faction of guy;
 	now weapon entry is a random readied weapon enclosed by guy;
 	if weapon entry is nothing, now weapon entry is a random natural weapon enclosed by guy;
 	now body entry is the body score of guy;
@@ -396,9 +399,12 @@ To back up stats of (guy - a person):
 A reviving rule for a person (called guy) (this is the restore stats when reviving rule):
 	unless there is a creature of guy in Table of Backup Stats, make no decision;
 	choose row with creature of guy in Table of Backup Stats;
+	now original faction of guy is true faction entry;
+	now faction of guy is original faction of guy;
 	Repeat with item running through readied weapons enclosed by guy:
 		now item is not readied;
 	If weapon entry is not a natural weapon:
+		[TODO: what if the weapon is in the dungeon? Use shimmer-weapon?]
 		now guy carries weapon entry;
 	now weapon entry is readied;
 	now the body score of guy is body entry;
@@ -414,12 +420,17 @@ A reviving rule for a person (called guy) (this is the restore stats when revivi
 	now parry-against bonus of weapon entry is parry-against entry;
 	now parry-with bonus of weapon entry is parry-with entry;
 	
+To revive (guy - a person) fighting for (side - a faction), with group:
+	back up stats of the guy;
+	follow the reviving rules for guy;
+	now the faction of the guy is side;
+	now the original faction of the guy is side;
+	if with group:
+		repeat with follower running through people who accompany guy:
+			revive follower fighting for side.
+	
 Carry out battling:
-	revive the noun in Test Arena;
-	Repeat with guy running through people who accompany the noun:
-		[not sure if this is quite right]
-		back up stats of the guy;
-		now the faction of guy is arena-faction;
+	revive the noun fighting for arena-faction, with group;
 	try challenging the noun in Test Arena.
 
 After arena arrival of Test Arena:
@@ -430,13 +441,8 @@ After arena arrival of Test Arena:
 recruiting is an action applying to one visible thing. Understand "recruit [any person]" as recruiting.
 
 Carry out recruiting:
-	back up stats of the noun;
-	revive the noun in the location;
-	Repeat with guy running through people who accompany the noun:
-		now the guy is friendly;
-		now the original faction of guy is friendly; [slightly dangerous hack to keep Isra and Fell on our side]
-	Now the noun is friendly;
-	Now the original faction of the noun is friendly;
+	revive the noun fighting for friendly, with group;
+	move the noun to the location.
 
 Report recruiting:
 	say "[The noun] appears, and joins the friendly faction.";
@@ -479,6 +485,7 @@ For taking a player action when the fight count is at least 1 (this is the let t
 	Let the total kills be the champion's defeats + the challenger's defeats;
 	if the fight count is 0:
 		say "In 100 fights, [The test-champion] was killed [the champion's defeats] times and [the test-challenger] was killed [the challenger's defeats] times.";
+		[TODO: reset died and kill counts? Can it be done for groups?]
 		make no decision;
 	say "With [fight count] fights left, [the test-champion] was killed [the champion's defeats] times and [the test-challenger] was killed [the challenger's defeats] times.";
 	Repeat with guy running through npc people in Test Arena:
