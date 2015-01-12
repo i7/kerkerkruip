@@ -461,7 +461,8 @@ Carry out an actor challenging someone in (this is the place challenged opponent
 	extract the noun from combat;
 	move the noun to the staging area of the second noun;
 	if the second noun is a challenged-group-inviting arena:
-		reform the group led by the second noun; 
+		reform the group led by the noun; 
+		
 Carry out an actor challenging someone in (this is the impose arena faction rule):
 	if the second noun is a faction-imposing arena:
 		Repeat with guy running through people in the staging area of the second noun:

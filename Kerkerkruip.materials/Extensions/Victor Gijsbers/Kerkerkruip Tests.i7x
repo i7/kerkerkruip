@@ -399,8 +399,10 @@ To back up stats of (guy - a person):
 A reviving rule for a person (called guy) (this is the restore stats when reviving rule):
 	unless there is a creature of guy in Table of Backup Stats, make no decision;
 	choose row with creature of guy in Table of Backup Stats;
-	now original faction of guy is true faction entry;
-	now faction of guy is original faction of guy;
+	if the fight count is 0:
+		[don't reset factions during a fighttest]
+		now original faction of guy is true faction entry;
+		now faction of guy is original faction of guy;
 	Repeat with item running through readied weapons enclosed by guy:
 		now item is not readied;
 	If weapon entry is not a natural weapon:
@@ -428,8 +430,6 @@ To revive (guy - a person) fighting for (side - a faction), with group:
 	if with group:
 		repeat with follower running through people who accompany guy:
 			revive follower fighting for side;
-		if the location of guy is a challenged-group-inviting arena:
-			reform the group led by guy.
 	
 Carry out battling:
 	revive the noun fighting for arena-faction, with group;
@@ -444,10 +444,13 @@ recruiting is an action applying to one visible thing. Understand "recruit [any 
 
 Carry out recruiting:
 	revive the noun fighting for friendly, with group;
-	move the noun to the location.
+	move the noun to the location;
+	if the location is a challenged-group-inviting arena, reform the group led by the noun;
+
+To appear is a verb. To join is a verb.
 
 Report recruiting:
-	say "[The noun] appears, and joins the friendly faction.";
+	say "[The list of friendly npc people in the location] [appear], and [join] the friendly faction.";
 	
 fight-testing is an action applying to two visible things. Understand "fighttest [any person] vs [any person]" as fight-testing.
 
