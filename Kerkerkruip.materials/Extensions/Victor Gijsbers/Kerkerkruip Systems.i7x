@@ -451,14 +451,17 @@ The NPCs simulate arena battle rule is listed last in the check challenging it i
 Carry out an actor challenging someone in (this is the remember the challenge site rule):
 	if the second noun is not the location of the person asked, now the challenge site of the second noun is the location of the person asked;
 
+To reform the group led by (leader - a person):
+	if the leader is group leading and the leader is not defeated individually and the leader is initially accompanied:
+		repeat with the guy running through people who accompany the leader:
+			extract the guy from combat;
+			move the guy to the location of the leader;
+
 Carry out an actor challenging someone in (this is the place challenged opponents in staging area rule):
 	extract the noun from combat;
 	move the noun to the staging area of the second noun;
-	if the second noun is a challenged-group-inviting arena and the noun is group leading and the noun is not defeated individually and the noun is initially accompanied:
-		repeat with the guy running through people who accompany the noun:
-			extract the guy from combat;
-			move the guy to the location of the noun;
-
+	if the second noun is a challenged-group-inviting arena:
+		reform the group led by the second noun; 
 Carry out an actor challenging someone in (this is the impose arena faction rule):
 	if the second noun is a faction-imposing arena:
 		Repeat with guy running through people in the staging area of the second noun:

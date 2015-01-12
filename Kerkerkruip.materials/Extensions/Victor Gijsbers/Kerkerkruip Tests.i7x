@@ -427,7 +427,9 @@ To revive (guy - a person) fighting for (side - a faction), with group:
 	now the original faction of the guy is side;
 	if with group:
 		repeat with follower running through people who accompany guy:
-			revive follower fighting for side.
+			revive follower fighting for side;
+		if the location of guy is a challenged-group-inviting arena:
+			reform the group led by guy.
 	
 Carry out battling:
 	revive the noun fighting for arena-faction, with group;
@@ -462,6 +464,7 @@ Carry out fight-testing:
 	back up stats of the test-challenger;
 	now the fight count is 100;
 	try sneaking;
+	now the Test Arena is challenged-group-inviting;
 	try battling the test-challenger;
 	try recruiting the test-champion;
 	now the champion's initial defeats is the died count of the test-champion;
@@ -486,6 +489,7 @@ For taking a player action when the fight count is at least 1 (this is the let t
 	if the fight count is 0:
 		say "In 100 fights, [The test-champion] was killed [the champion's defeats] times and [the test-challenger] was killed [the challenger's defeats] times.";
 		[TODO: reset died and kill counts? Can it be done for groups?]
+		now the Test Arena is not challenged-group-inviting;
 		make no decision;
 	say "With [fight count] fights left, [the test-champion] was killed [the champion's defeats] times and [the test-challenger] was killed [the challenger's defeats] times.";
 	Repeat with guy running through npc people in Test Arena:
