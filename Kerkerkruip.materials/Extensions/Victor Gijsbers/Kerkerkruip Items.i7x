@@ -1796,8 +1796,12 @@ An exploding rule (this is the Blessed Grenade explodes rule):
 				end the story saying "The undead should not seek blessings.";
 [	otherwise:
 		say "[The noun] explodes, but nothing happens. It must be one of those prank grenades that you see in magic shops.";]
-	now the exploding-grenade is exploded;
 	remove the exploding-grenade from play;
+	
+An exploding rule (this is the mark custom grenades as exploded rule):
+	if the exploding-grenade is a custom-grenade:
+		now the exploding-grenade is exploded;
+
 
 
 Section - Teleportation grenade
