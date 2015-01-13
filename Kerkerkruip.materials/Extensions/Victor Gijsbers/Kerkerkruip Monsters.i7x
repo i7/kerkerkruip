@@ -110,10 +110,6 @@ Killing rule (this is the increment died and kill stats rule):
 				increment the kill count of the leader of the killer-guy;
 				#if DEBUG say "[italic type](Kill recorded for [the leader of the killer-guy].)[roman type][line break]";
 	otherwise:
-		showme location of isra;
-		showme location of fell;
-		showme killed-guy;
-		showme whether or not killed-guy is a sole survivor;
 		[ Mark a defeat only if the person stands alone or the whole group has been defeated ]
 		if the killed-guy is a sole survivor:
 			increment the died count of the killed-guy;
