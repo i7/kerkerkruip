@@ -466,6 +466,8 @@ Carry out fight-testing:
 	back up stats of the test-champion;
 	back up stats of the test-challenger;
 	now the fight count is 100;
+	say "Fight details are being recorded in testtranscript.glkdata";
+	start capturing text;
 	try sneaking;
 	now the Test Arena is challenged-group-inviting;
 	try battling the test-challenger;
@@ -483,6 +485,7 @@ Report fight-testing:
 	say "[italic type]When it came time to fight I thought, 'I'll just step aside'[line break] - The Flaming Lips, 'Fight Test'[roman type][paragraph break]"
 	
 For taking a player action when the fight count is at least 1 (this is the let test combatants fight rule):
+	transcribe and restart capturing;
 	now the health of the player is 1000;
 	if the combat status is not peace and (the number of friendly npc people in the location is at least 1):
 		[continue the fight]
@@ -490,11 +493,12 @@ For taking a player action when the fight count is at least 1 (this is the let t
 	decrement the fight count;
 	Let the total kills be the champion's defeats + the challenger's defeats;
 	if the fight count is 0:
-		say "In 100 fights, [The test-champion] was killed [the champion's defeats] times and [the test-challenger] was killed [the challenger's defeats] times.";
+		log "In 100 fights, [The test-champion] was killed [the champion's defeats] times and [the test-challenger] was killed [the challenger's defeats] times.";
 		[TODO: reset died and kill counts? Can it be done for groups?]
 		now the Test Arena is not challenged-group-inviting;
+		transcribe and stop capturing;
 		make no decision;
-	say "With [fight count] fights left, [the test-champion] was killed [the champion's defeats] times and [the test-challenger] was killed [the challenger's defeats] times.";
+	log "With [fight count] fights left, [the test-champion] was killed [the champion's defeats] times and [the test-challenger] was killed [the challenger's defeats] times.";
 	Repeat with guy running through npc people in Test Arena:
 		say "Removing [the guy] from Test Arena.";
 		extract the guy from combat;
