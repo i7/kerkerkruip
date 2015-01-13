@@ -4727,7 +4727,7 @@ Section - Isra specials and AI
 An aftereffects rule (this is the Isra's burning defence rule):
 	if the global attacker came too close to Isra and total damage is greater than 0:
 		deal 2 points of heat damage;
-		have Isra inflict damage on global attacker;
+		have Isra inflict damage on global attacker, silently;
 		say "Isra's flames [bold type]burn[roman type] [no dead property][the global attacker][dead property] [if global attacker is alive]for [bold type][total damage] damage[roman type][otherwise][bold type]to death[roman type][end if].";
 		if global attacker is the player and the player is not alive:
 			end the story saying "You will burn in Heaven.".
