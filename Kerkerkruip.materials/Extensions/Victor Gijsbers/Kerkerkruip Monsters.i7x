@@ -110,6 +110,10 @@ Killing rule (this is the increment died and kill stats rule):
 				increment the kill count of the leader of the killer-guy;
 				#if DEBUG say "[italic type](Kill recorded for [the leader of the killer-guy].)[roman type][line break]";
 	otherwise:
+		showme location of isra;
+		showme location of fell;
+		showme killed-guy;
+		showme whether or not killed-guy is a sole survivor;
 		[ Mark a defeat only if the person stands alone or the whole group has been defeated ]
 		if the killed-guy is a sole survivor:
 			increment the died count of the killed-guy;
@@ -4611,12 +4615,12 @@ Israfel-splitting is an action applying to nothing.
 
 Carry out Israfel Israfel-splitting:
 	say "With a loud bang, the angel [bold type]Israfel bursts apart[roman type]. Two creatures -- Isra and Fell -- stand where the single angel was standing a moment before.";
-	replace half of Israfel with Isra;
-	replace half of Israfel with Fell;
-	remove Israfel from play.
+	revive Isra in the location;
+	revive Fell in the location;
 
-To replace half of Israfel with (guy - a person):
-	revive guy in the location;	
+A reviving rule for a person (called guy) (this is the revive isra or fell rule):
+	unless guy is isra or guy is fell, make no decision;
+	remove Israfel from play;
 	let n be health of Israfel;
 	increase n by 1;
 	now n is (n divided by 2);
@@ -4624,7 +4628,7 @@ To replace half of Israfel with (guy - a person):
 	now patron of guy is patron of Israfel;
 	now favour of guy is favour of Israfel;
 	now guy is not non-attacker;
-
+	
 An AI action selection rule for at-Act Israfel (this is the Israfel considers Israfel-splitting rule):
 	choose a blank Row in the Table of AI Action Options;
 	now the Option entry is the action of Israfel Israfel-splitting;
@@ -4676,6 +4680,8 @@ Report Israfel waiting when Israfel is insane:
 		let guy2 be a random alive person;	[Israfel and the player must both be alive, so no possibility of an infinite loop here.]	
 	say "'After several million years of contemplation,' Israfel says, 'I am now ready to announce the truth: [the guy] [are] the creator of Heaven and Earth, and [the guy2] [are] the ruler of darkness!'";
 	rule succeeds.
+
+Section - Reviving Israfel
 
 
 Section - Isra
@@ -4920,8 +4926,6 @@ The Israfel reunites rule is listed before the the main actor chooses an action 
 
 To reunite Israfel:
 	revive Israfel in the location;
-	now Israfel-reuniting-initiator is Israfel;
-	now Israfel-trance is 1;
 	let n be health of Isra;
 	if n < 0:
 		now n is 0;
@@ -4929,16 +4933,13 @@ To reunite Israfel:
 	if m < 0:
 		now m is 0;
 	now health of Israfel is (n + m);
-	remove Isra from play;
-	remove Fell from play;
 	say "Motes of light swirl through the room in a freakish tornado, and suddenly [bold type]Israfel has reformed[roman type].".
 	
-[This appears to be completely unnecessary
-Every turn when Isra is not alive and Fell is not alive and Israfel is alive (this is the Isra and Fell both dead rule):
-	move Israfel to the location;
-	say "Israfel's dying cry shakes the foundations of the world.";
-	now health of Israfel is -10.]
-
+A reviving rule for Israfel (this is the revive Israfel rule):
+	remove isra from play;
+	remove fell from play;
+	now Israfel-reuniting-initiator is Israfel;
+	now Israfel-trance is 1;
 
 Section - Link
 

@@ -2783,6 +2783,24 @@ Initial scheduling of throwing-352:
 Testing effects of throwing-352:
 	assert that the event description does not include "Run-time problem"
 	
+Section - Died Counts
+
+died-count-test is a test set.
+
+[I don't think this bug ever comes up in play, but it happens in test battles]
+
+israfel-slaying is a test step. The first move of died-count-test is israfel-slaying.
+
+Initial scheduling of israfel-slaying:
+	now the challenger's initial defeats is the died count of Israfel;
+	move Isra to Entrance Hall;
+	revive Israfel in Entrance Hall;
+	prepare a test battle with israfel;
+	
+Testing effects of israfel-slaying:
+	try smiting Israfel;
+	assert that the died count of israfel is the challenger's initial defeats + 1 with label "died count of Israfel".
+	
 Section - Example failure
 
 example failure is a test set.
