@@ -2739,9 +2739,7 @@ To clean the table of delayed actions for (guy - a person):
 
 [TODO: move killing rules to Kerkerkruip Events?]
 A killing rule (this is the reset killed-guy rule):
-	say "reset killed-guy rule.";
 	follow the sudden combat reset rules for killed-guy;
-	say "done resetting killed-guy.";
 
 
 
