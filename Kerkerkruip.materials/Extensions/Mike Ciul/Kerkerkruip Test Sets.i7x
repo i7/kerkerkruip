@@ -1613,7 +1613,28 @@ Test play when testing blessed-grenade-test:
 
 A test step can be grenade-producing.
 
-blessed-grenade-alchemy is a repeatable hidden-traveling extracting grenade-producing test step. The first move of blessed-grenade-test is blessed-grenade-alchemy. The location-target of blessed-grenade-alchemy is the Alchemical Laboratory. The maximum repeats of blessed-grenade-alchemy is 300.
+When play begins:
+	repeat with the move running through grenade-producing test steps:
+		now the move is repeatable;
+		now the move is hidden-traveling;
+		now the move is extracting;
+		now the location-target of the move is the alchemical laboratory.
+
+blessed-grenade-alchemy is a grenade-producing test step. The first move of blessed-grenade-test is blessed-grenade-alchemy. The maximum repeats of blessed-grenade-alchemy is 300.
+
+Choosing a player action when testing a grenade-producing test step:
+	generate the action of inserting the reusable item into the curious machine.
+
+First every turn when the scheduled event is a grenade-producing test step (called the current move):
+	Now the health of the player is 100;
+	Now the player is not asleep;
+	If the current move is hidden-traveling, now the player is hidden;
+	Now every room is not rust-spored;
+	Now every thing is not rusted;
+	
+Last testing effects of a grenade-producing test step:
+	Repeat with item running through grenades in the location:
+		if item is not a custom-grenade, remove item from play;
 
 testing effects of blessed-grenade-alchemy:
 	unless the event description matches the regular expression "Blessed Grenade":
@@ -1627,22 +1648,12 @@ testing effects of blessed-grenade-alchemy:
 			if the item is in the location:
 				record success of blessed-grenade-alchemy;
 		
-Choosing a player action when testing a grenade-producing test step:
-	generate the action of inserting the reusable item into the curious machine.
+no-extra-blessed-grenade is an uneventful grenade-producing test step. The maximum repeats of no-extra-blessed-grenade is 100. [This number could be higher, but it's a slow test] 
 
-First every turn when the scheduled event is a grenade-producing test step (called the current move):
-	Now the health of the player is 100;
-	Now the player is not asleep;
-	If the current move is hidden-traveling, now the player is hidden;
-	Now every room is not rust-spored;
-	Now every thing is not rusted;
-	
-Last testing effects of a grenade-producing test step:
-	Repeat with item running through grenades in the location:
-		remove item from play;
-
-no-extra-blessed-grenade is an uneventful repeatable hidden-traveling grenade-producing test step. The maximum repeats of no-extra-blessed-grenade is 100. [This number could be higher, but it's a slow test]
-
+Initial scheduling of no-extra-blessed-grenade:
+	assert that the location of the blessed grenade is Alchemical Laboratory with label "location of the blessed grenade";
+	assert "The blessed grenade should be placed" based on whether or not the blessed grenade is placed;
+	assert "The blessed grenade should not be cloneable" based on whether or not the blessed grenade is not cloneable;
 testing effects of no-extra-blessed-grenade:
 	if the event description matches the regular expression "Blessed Grenade":
 		record failure of no-extra-blessed-grenade with message "The machine produced an extra blessed grenade, impossibly".
@@ -1657,10 +1668,13 @@ Choosing a player action when testing throwing-blessed:
 	generate the action of throwing the blessed grenade;
 	
 testing effects of throwing-blessed:
-	assert that Drakul is dead;
+	assert "Drakul should be dead" based on whether or not Drakul is dead;
+	assert "The blessed grenade should be exploded" based on whether or not the blessed grenade is exploded;
+	assert "The blessed grenade should be placed" based on whether or not the Blessed Grenade is placed;
+	assert "The blessed grenade should be off-stage" based on whether or not the blessed grenade is off-stage;
 	assert that the event description includes "As the grenade explodes you hear the singing of angels, several of whom swoop down from the heavens with huge swords and eviscerate <^[line break]>*Drakul";
 	
-no-new-blessed-grenade is an uneventful repeatable hidden-traveling grenade-producing test step. The maximum repeats of no-new-blessed-grenade is 100.
+no-new-blessed-grenade is an uneventful grenade-producing test step. The maximum repeats of no-new-blessed-grenade is 100.
 
 testing effects of no-new-blessed-grenade:
 	if the blessed grenade is not off-stage:
