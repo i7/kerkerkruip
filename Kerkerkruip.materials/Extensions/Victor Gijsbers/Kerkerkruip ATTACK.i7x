@@ -1434,7 +1434,6 @@ Report the player hitting a dead pc (this is the report player suicide rule):
 [TODO: move event to Kerkerkruip Events]
 Last after reporting an actor hitting (this is the killing after attack rule):
 	if the global defender is dead:
-		say "killing after attack rule: [the global defender] is [if the global defender is not dead]not [end if]dead after attack by [the global attacker].";
 		have an event of the global attacker killing the global defender.
 
 Book - Flow
