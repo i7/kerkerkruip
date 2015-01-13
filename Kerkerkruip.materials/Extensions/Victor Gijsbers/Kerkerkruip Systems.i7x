@@ -732,7 +732,6 @@ A power can be sacrificable. A power is usually sacrificable.
 Granting relates one monster to one power. The verb to grant (he grants, they grant, he granted, it is granted, he is granting) implies the granting relation.
 
 Killing rule (this is the grant powers when a monster is slain rule):
-	say "grant powers when a monster is slain rule.";
 	if the killer-guy is the player and the killed-guy is not the player:
 		do the absorption with killed-guy.
 
