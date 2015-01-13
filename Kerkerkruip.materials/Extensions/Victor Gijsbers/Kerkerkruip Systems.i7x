@@ -453,6 +453,8 @@ Carry out an actor challenging someone in (this is the remember the challenge si
 
 To reform the group led by (leader - a person):
 	if the leader is group leading and the leader is not defeated individually and the leader is initially accompanied:
+		[Why do we check defeated individually here? Is that a relic from Arena of the Fallen?
+		Perhaps we should instead check if the followers still have the same faction.]
 		repeat with the guy running through people who accompany the leader:
 			extract the guy from combat;
 			move the guy to the location of the leader;
@@ -730,6 +732,7 @@ A power can be sacrificable. A power is usually sacrificable.
 Granting relates one monster to one power. The verb to grant (he grants, they grant, he granted, it is granted, he is granting) implies the granting relation.
 
 Killing rule (this is the grant powers when a monster is slain rule):
+	say "grant powers when a monster is slain rule.";
 	if the killer-guy is the player and the killed-guy is not the player:
 		do the absorption with killed-guy.
 
@@ -745,11 +748,10 @@ Every turn (this is the remove already-granted rule):
 
 To do the absorption with (guy - a person):
 	have the guy disappear;
-	if guy is grouper and guy is not group leading:
-		let guy2 be a random person accompanied by guy; [Redirect absorption to group leader]
-		unless guy2 is defeated individually:
-			now guy is guy2;
-	if guy is not group leading or group of guy has been defeated or guy is defeated individually:
+	if the guy is a sole survivor:
+		if guy is grouper and guy is not group leading:
+			[Is is really necessary to check for group leading? If it is, we should do it elsewhere too]
+			now guy is the leader of guy;
 		unless guy is already-granted:
 			increase score by level of guy;
 			now test subject is guy;

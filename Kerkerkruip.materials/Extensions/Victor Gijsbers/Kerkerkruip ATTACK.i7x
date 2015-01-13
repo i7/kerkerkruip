@@ -1431,8 +1431,10 @@ Report the player hitting a dead pc (this is the report player suicide rule):
 	say "Your attack ends your own life.";
 	rule succeeds;
 
+[TODO: move event to Kerkerkruip Events]
 Last after reporting an actor hitting (this is the killing after attack rule):
 	if the global defender is dead:
+		say "killing after attack rule: [the global defender] is [if the global defender is not dead]not [end if]dead after attack by [the global attacker].";
 		have an event of the global attacker killing the global defender.
 
 Book - Flow
@@ -2735,8 +2737,11 @@ To clean the table of delayed actions for (guy - a person):
 		if the actor part of this action is the guy or the noun part of this action is the guy:
 			blank out the whole row.
 
+[TODO: move killing rules to Kerkerkruip Events?]
 A killing rule (this is the reset killed-guy rule):
-	follow the sudden combat reset rules for killed-guy.
+	say "reset killed-guy rule.";
+	follow the sudden combat reset rules for killed-guy;
+	say "done resetting killed-guy.";
 
 
 

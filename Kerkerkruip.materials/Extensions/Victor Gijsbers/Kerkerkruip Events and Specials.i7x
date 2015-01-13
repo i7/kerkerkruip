@@ -166,12 +166,11 @@ Carry out reviving:
 	now Challengelijst is {};
 	now Beestlijst is {};
 	now current question is  "Which fallen warrior do you wish to fight?";
-	repeat with Beest running through all dead not grouper persons:
-		if Beest is not group leading or the group of Beest has been defeated: 
-			repeat with P running through powers granted by Beest:
-				if P is not granted:
-					add Beest to Beestlijst;
-					add printed name of Beest to Challengelijst;
+	repeat with Beest running through all dead sole survivor not grouper persons:
+		repeat with P running through powers granted by Beest:
+			if P is not granted:
+				add Beest to Beestlijst;
+				add printed name of Beest to Challengelijst;
 	add "do not fight a fallen warrior" to Challengelijst;
 	now current question menu is Challengelijst;
 	ask a closed question, in menu mode.

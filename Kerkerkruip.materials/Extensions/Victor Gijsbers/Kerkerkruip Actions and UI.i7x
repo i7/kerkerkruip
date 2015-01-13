@@ -385,7 +385,9 @@ Last carry out examining a person:
 		if (noun is group leading or noun is grouper) and level of noun is not 0:
 			let guy be noun;
 			if noun is not group leading:
-				now guy is a random person accompanied by the noun;
+				[this is inconsistent with other phrases - do we really want group leading
+				to have a meaning independent from the accompaniment relation?]
+				now guy is the leader of the noun;
 			if guy is not defeated individually:
 				let lijst be a list of people;
 				add guy to lijst;

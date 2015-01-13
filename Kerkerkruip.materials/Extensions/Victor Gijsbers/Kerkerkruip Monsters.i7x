@@ -18,14 +18,22 @@ A person can be initially accompanied. A group leading person is usually initial
 A person can be kills claiming. A group leading person is usually kills claiming.
 A person can be defeated individually.
 
-To decide whether the group of (X - a person) has been defeated:
-	if X is alive and X is on-stage:
-		decide no;
-	repeat with F running through the people who accompany X:
-		if F is alive and F is on-stage:
-			decide no;
-	decide yes.
+[This phrase applies even if the guy is dead - in which case, he WAS the sole survivor...]
 
+Definition: a person (called guy) is sole survivor:
+	let the leader be the guy;
+	if the guy is grouper:
+		now the leader is the leader of guy;
+		if the leader is alive and the leader is on-stage:
+			decide no;
+	otherwise:
+		if the guy is defeated individually or the guy is not group leading:
+			decide yes;
+	repeat with follower running through people who accompany the leader:
+		if the follower is alive and the follower is on-stage and the follower is not guy:
+			decide no;
+	yes.
+		
 [ Place all the groupers with their leaders ]
 Final monster placement rule (this is the place accompanying enemies with their leader rule):
 	repeat with X running through on-stage group leading people:
@@ -103,12 +111,11 @@ Killing rule (this is the increment died and kill stats rule):
 				#if DEBUG say "[italic type](Kill recorded for [the leader of the killer-guy].)[roman type][line break]";
 	otherwise:
 		[ Mark a defeat only if the person stands alone or the whole group has been defeated ]
-		if the killed-guy is not group leading or killed-guy is defeated individually or the group of killed-guy has been defeated:
+		if the killed-guy is a sole survivor:
 			increment the died count of the killed-guy;
 			#if DEBUG say "[italic type](Defeat recorded for [the name of killed-guy].)[roman type][line break]";
-		[ If a leader was killed before all their groupers then their died count will need to be incremented when the last grouper dies ]
-		if the killed-guy is a grouper:
-			if the group of the leader of the killed-guy has been defeated:
+			[ If a leader was killed before all their groupers then their died count will need to be incremented when the last grouper dies ]
+			if the killed-guy is a grouper:
 				increment the died count of the leader of the killed-guy;
 				#if DEBUG say "[italic type](Defeat recorded for [the name of leader of the killed-guy].)[roman type][line break]";
 	update the monster statistics.
@@ -1574,28 +1581,11 @@ Repelling power of the bomb:
 
 Section - Explode
 
-Can-grant-soul is a truth state that varies.
-Can-grant-soul-guy is a person that varies.
-
 To decide whether (guy - a person) can grant a soul:
-	if level of guy is 0:
-		now can-grant-soul is false;
-	otherwise:
-		now can-grant-soul is true;
-	if guy is the player:
-		now can-grant-soul is false;
-	if guy is grouper or (guy is group leading and guy is not defeated individually):
-		let X be guy;
-		if guy is grouper:
-			now X is a random person accompanied by guy;
-			if X is alive and X is on-stage:
-				now can-grant-soul is false;
-		repeat with F running through the people who accompany X:
-			if F is alive and F is on-stage and F is not guy:
-				now can-grant-soul is false;
-	now can-grant-soul-guy is guy;
-	decide on can-grant-soul.
-
+	if level of guy is 0 or guy is the player:
+		decide no;
+	decide on whether or not guy is a sole survivor.
+	
 The explosion victim is a person that varies.
 
 To choose the explosion victim:
