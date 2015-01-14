@@ -499,7 +499,7 @@ Report fight-testing:
 For taking a player action when the fight count is at least 1 (this is the let test combatants fight rule):
 	transcribe and restart capturing;
 	now the health of the player is 1000;
-	if the combat status is not peace and (the number of friendly npc people in the location is at least 1):
+	if the combat status is not peace and (the number of friendly not grouper npc people in the location is at least 1):
 		[continue the fight]
 		rule succeeds;
 	decrement the fight count;
