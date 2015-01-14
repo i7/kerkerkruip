@@ -1581,7 +1581,7 @@ Repelling power of the bomb:
 
 Section - Explode
 
-To decide whether (guy - a person) can grant a soul:
+Definition: a person (called guy) is soul-granting:
 	if level of guy is 0 or guy is the player:
 		decide no;
 	decide on whether or not guy is a sole survivor.
@@ -1591,7 +1591,7 @@ The explosion victim is a person that varies.
 To choose the explosion victim:
 	now explosion victim is the player;
 	repeat with guy running through people in the location:
-		if guy can grant a soul:
+		if guy is soul-granting:
 			if explosion victim is the player: [always better than yourself]
 				now explosion victim is guy;
 			if level of explosion victim is greater than 4: [always better than Malygris]
