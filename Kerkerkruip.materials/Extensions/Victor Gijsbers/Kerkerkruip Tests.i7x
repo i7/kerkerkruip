@@ -368,8 +368,8 @@ Section - Test Battles
 battling is an action applying to one visible thing. Understand "battle [any person]" as battling.
 
 Table of Backup Stats
-creature	true faction	weapon	body	mind	spirit	permanent health	melee	defence	creature material	weapon material	damage die	weapon damage	dodge	parry-against	parry-with
-a person	a faction	a weapon	a number	a number	a number	a number	a number	a number	a material	a material	a number	a number	a number	a number	a number
+creature	true faction	location	weapon	body	mind	spirit	permanent health	melee	defence	creature material	weapon material	damage die	weapon damage	dodge	parry-against	parry-with
+a person	a faction	a room	a weapon	a number	a number	a number	a number	a number	a number	a material	a material	a number	a number	a number	a number	a number
 with 20 blank rows.
 
 [TODO: make a rulebook for equipping all people, and run it in a reviving rule]
@@ -380,6 +380,7 @@ To back up stats of (guy - a person):
 	choose a blank row in Table of Backup Stats;
 	now creature entry is guy;
 	now true faction entry is original faction of guy;
+	now location entry is location of guy;
 	now weapon entry is a random readied weapon enclosed by guy;
 	if weapon entry is nothing, now weapon entry is a random natural weapon enclosed by guy;
 	now body entry is the body score of guy;
@@ -422,6 +423,17 @@ A reviving rule for a person (called guy) (this is the restore stats when revivi
 	now parry-against bonus of weapon entry is parry-against entry;
 	now parry-with bonus of weapon entry is parry-with entry;
 	
+To restore loyalties and locations:
+	Repeat through Table of Backup Stats:
+		if the creature entry is dead, next;
+		now the original faction of creature entry is true faction entry;
+		now the faction of creature entry is true faction entry;
+		extract the creature entry from combat;
+		if the location entry is nothing:
+			remove the creature entry from play;
+		otherwise:
+			move the creature entry to the location entry.
+			
 To revive (guy - a person) fighting for (side - a faction), with group:
 	back up stats of the guy;
 	follow the reviving rules for guy;
@@ -497,6 +509,7 @@ For taking a player action when the fight count is at least 1 (this is the let t
 		[TODO: reset died and kill counts? Can it be done for groups?]
 		now the Test Arena is not challenged-group-inviting;
 		transcribe and stop capturing;
+		restore loyalties and locations;
 		make no decision;
 	log "With [fight count] fights left, [the test-champion] was killed [the champion's defeats] times and [the test-challenger] was killed [the challenger's defeats] times.";
 	Repeat with guy running through npc people in Test Arena:

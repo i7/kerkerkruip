@@ -452,12 +452,16 @@ Carry out an actor challenging someone in (this is the remember the challenge si
 	if the second noun is not the location of the person asked, now the challenge site of the second noun is the location of the person asked;
 
 To reform the group led by (leader - a person):
-	if the leader is group leading and the leader is not defeated individually and the leader is initially accompanied:
-		[Why do we check defeated individually here? Is that a relic from Arena of the Fallen?
-		Perhaps we should instead check if the followers still have the same faction.]
+	if the leader is group leading and the leader is initially accompanied:
 		repeat with the guy running through people who accompany the leader:
-			extract the guy from combat;
-			move the guy to the location of the leader;
+			unless guy opposes the leader and the leader is defeated individually:
+				[Don't move living (or dead) ex-followers -
+				The case in mind here is the mindslug: Mouser and Fafhrd shouldn't be removed from the dungeon if the mindslug appears in the Arena of the Fallen. But I've tweaked it so they will come back if they were still mindslug-enslaved when they died, or they somehow come back to the mindslug's side while they're still alive.
+				
+				Another case to consider is if we enslave and then kill one of the Fanatics of Aite. If this happens, they will come back to the Arena of the Fallen still enslaved to us. I'm not totally sure if this is possible, since the fanatics' power would drive out the enslaving ability - but it might be if the enslaved fanatic were not the last one to die.
+				]
+				extract the guy from combat;
+				move the guy to the location of the leader;
 
 Carry out an actor challenging someone in (this is the place challenged opponents in staging area rule):
 	extract the noun from combat;
