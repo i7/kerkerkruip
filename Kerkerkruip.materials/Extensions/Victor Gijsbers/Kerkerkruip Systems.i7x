@@ -440,6 +440,10 @@ Check an actor challenging someone in (this is the NPCs simulate arena battle ru
 		if the person asked is not alive:
 			now the defeated is the person asked;
 		say "[The name of the person asked] and [the name of the noun] briefly flicker in and out of existence. When they become solid once more, [bold type][the name of the defeated] has been killed[roman type]!";
+	if the noun is dead:
+		have an event of the person asked killing the noun;
+	if the person asked is dead:
+		have an event of the noun killing the person asked;
 	stop the action.
 
 The player should be the actor when challenging rule is listed first in the check challenging it in rules.
