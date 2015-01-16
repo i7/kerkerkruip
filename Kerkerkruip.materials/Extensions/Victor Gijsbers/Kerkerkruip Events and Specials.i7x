@@ -214,19 +214,7 @@ To challenge (the guy - a person):
 	increase the melee of guy by 3;
 	increase the defence of guy by 3;
 	revive the guy in the location of the guy;
-	return shimmering items to guy;
 	
-To return shimmering items to (guy - a person):
-	repeat with item running through shimmering things:
-		if shimmer-owner of item is guy:
-			move item to guy;
-			if item is a weapon:
-				now item is readied;
-				let stuff be a random natural weapon part of guy;
-				now stuff is not readied;
-			if item is clothing:
-				now guy is wearing item.
-
 The demon boredom is a number which varies. The demon boredom is 0.
 The current dissatisfaction is a number which varies. The current dissatisfaction is 0.
 

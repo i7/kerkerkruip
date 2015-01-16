@@ -851,7 +851,7 @@ Option-5-chest is a container. Option-5-chest contains two fragmentation grenade
 Option-6-chest is a container. Option-6-chest contains a scroll of mapping.
 Option-7-chest is a container. Option-7-chest contains a scroll of teleportation.
 
-Last when play begins (this is the player starting kit rule):
+Starting kit for the player (this is the player starting kit rule):
 	[ Generate these numbers now so that the number of random numbers generated doesn't depend on the difficulty ]
 	let n be a random number between 1 and 7;
 	let n2 be a random number between 1 and 20;
@@ -860,55 +860,32 @@ Last when play begins (this is the player starting kit rule):
 	else if difficulty is greater than 1 and n2 is 20:
 		now n is 50;
 	if n is 1:
-		move gilded rapier to the player;
-		now gilded rapier is readied;
-		unready fists;
-		now the player wears the buckler;
+		equip the player with the gilded rapier;
+		equip the player with the buckler;
 	if n is 2:
-		move gorgeous dagger to the player;
-		now gorgeous dagger is readied;
-		unready fists;		
+		equip the player with the gorgeous dagger;		
 		equip player from option-2-chest;
 	if n is 3:
 		equip player from option-3-chest;
 	if n is 4:
-		move evil dagger to the player;
-		now evil dagger is readied;
-		unready fists;		
+		equip the player with the evil dagger;		
 		equip player from option-4-chest;
 	if n is 5:
 		equip player from option-5-chest;
-		now the player wears Metastasio's hat;
+		equip the player with Metastasio's hat;
 	if n is 6:
-		move pickaxe to player;
-		now pickaxe is readied;
-		unready fists;		
+		equip the player with the pickaxe;		
 		equip player from option-6-chest;
 	if n is 7:
-		move gilded rapier to player;
-		now gilded rapier is readied;
-		unready fists;
+		equip the player with the gilded rapier;
 		equip player from option-7-chest; 
 	if n is 50:
-		move gilded rapier to player;
-		now gilded rapier is readied;
-		unready fists;
-		now player wears the addict's amulet;		
+		equip the player with the gilded rapier;
+		equip the player with the addict's amulet;		
 		have the ment kick in;
 	repeat with item running through things enclosed by the player:
 		if item is a weapon or item is clothing:
 			now item is not cursed.
-
-To equip player from (box - a container):
-	repeat with item running through things enclosed by box:
-		move item to player;
-		if item is a scroll:
-			identify item.
-
-To unready fists:
-	let X be a random natural weapon enclosed by the player;
-	now X is not readied.
-
 
 
 Chapter - The end

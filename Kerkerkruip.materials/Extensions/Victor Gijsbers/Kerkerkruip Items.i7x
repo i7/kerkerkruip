@@ -2000,6 +2000,8 @@ Carry out applying unguentum argenti to an alive iron person:
 	if health of the second noun is less than 1:
 		now health of the second noun is 1;
 	rule succeeds.
+	
+[TODO: Restore full permanent health when reviving?]
 
 Carry out applying unguentum argenti to an iron thing:
 	say "You carefully apply the salve to [the second noun], turning it into silver.";
@@ -4642,9 +4644,9 @@ Understand the shimmering property as describing a thing.
 Understand "shimmering" as a thing when the item described is shimmering.
 Understand "not-shimmering" and "not shimmering" and "unshimmering" as a thing when the item described is not shimmering.
 
-A thing has a person called the shimmer-owner. The shimmer-owner of a thing is usually yourself.
+A thing has an object called the shimmer-twin. The shimmer-twin of a thing is usually nothing.
 
-Last when play begins (this is the create shimmering items rule):
+[Last when play begins (this is the create shimmering items rule):
 	repeat with guy running through people:
 		unless guy is the player:
 			repeat with item running through things held by guy:
@@ -4657,8 +4659,35 @@ Last when play begins (this is the create shimmering items rule):
 					if guy wears item:
 						let new-cloth be a new object cloned from item;
 						now new-cloth is shimmering;
-						now shimmer-owner of new-cloth is guy.
+						now shimmer-owner of new-cloth is guy.]
+						
+to flicker is a verb.
 
+To decide which object is the original version of (item - a thing):
+	if item is shimmering:
+		decide on the shimmer-twin of item;
+	decide on item.
+	
+To decide which object is the shimmer-clone of (item - a thing):
+	Now item is the original version of item;
+	let new-item be the shimmer-twin of item;
+	if new-item is nothing:
+		now new-item is a new object cloned from item;
+		now new-item is shimmering;
+		now shimmer-twin of new-item is item;
+		now shimmer-twin of item is new-item;
+	if new-item is on-stage:
+		if the location of new-item is the location: [do we need a full scope check here?]
+			say "[The new-item] [flicker] out of existence!";
+		remove the new-item from play;
+	decide on new-item.
+	
+To decide which object is the version of (item - a thing) available to (guy - a person):
+	now item is the original version of item;
+	if item is on-stage and item is not enclosed by guy:
+		decide on the shimmer-clone of item;
+	decide on item.
+		
 Before printing the name of a shimmering thing:
 	say "shimmering [run paragraph on]".
 	

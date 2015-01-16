@@ -1539,6 +1539,9 @@ Reviving rule for a person (called guy) (this is the basic reviving rule):
 	reset combat action stats of guy; 
 	now guy is not asleep;
 	now guy is not rusted;
+	now material of guy is original material of guy;
+	Let X be a random natural weapon enclosed by guy;
+	now material of X is original material of X;
 	now the stun count of guy is 0;
 	now the stun strength of guy is 0;
 	now the size of guy is the base size of guy;

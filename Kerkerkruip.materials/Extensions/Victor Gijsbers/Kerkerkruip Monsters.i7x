@@ -136,8 +136,89 @@ power (a power)	faculty1 (a faculty)	faculty2 (a faculty)
 --	--	--
 
 
+Chapter - Natural Weapons and Starting Kits
 
+Natural weapon setup of something is an activity on objects.
 
+The natural weapon described is an object that varies.
+
+Before natural weapon setup of a person (called guy):
+	Now the natural weapon described is a random natural weapon enclosed by guy;
+	now the material of the natural weapon described is the material of the guy;
+
+When play begins (this is the set up natural weapons rule):
+	repeat with guy running through people:
+		carry out the natural weapon setup activity with guy.
+			
+The starting kit rules are an object-based rulebook.
+
+Definition: a person is encounterable if it is denizen or the level of it is 0.
+
+When play begins (this is the equip all encounterable creatures rule):
+	Repeat with guy running through encounterable people:
+		follow the starting kit rules for guy.
+			
+The equip all encounterable creatures rule is listed before the ready weapons for everyone rule in the when play begins rules;
+
+A last reviving rule for a person (called guy) (this is the re-equip when reviving rule):
+	follow the starting kit rules for guy.
+
+To equip (guy - a person) from (box - a container):
+	repeat with item running through things enclosed by box:
+		move item to guy;
+		if item is a scroll and guy is the player:
+			identify item.
+		
+To equip (guy - a person) with (item - a weapon):
+	repeat with impediment running through readied weapons enclosed by guy:
+		now impediment is not readied;
+		if impediment is not a natural weapon:
+			remove impediment from play;
+	now item is the version of item available to guy;
+	move item to guy;
+	now item is readied;
+	
+To replace (O - a description of objects) on (guy - a person) with (item - clothing):
+	Repeat with impediment running through things worn by guy:
+		if impediment matches O:
+			[uncurse items?]
+			remove impediment from play;
+	now item is the version of item available to guy;
+	now guy wears item.
+		
+To equip (guy - a person) with (item - a necklace):
+	replace necklaces on guy with item;
+		
+To equip (guy - a person) with (item - a hat):
+	replace hats on guy with item;
+		
+To equip (guy - a person) with (item - a shirt):
+	replace shirts on guy with item;
+		
+To equip (guy - a person) with (item - a cloak):
+	replace cloaks on guy with item;
+		
+To equip (guy - a person) with (item - shoes):
+	replace shoes on guy with item;
+		
+To equip (guy - a person) with (item - trousers):
+	replace trousers on guy with item;
+		
+To equip (guy - a person) with (item - belt):
+	replace belts on guy with item;
+		
+To equip (guy - a person) with (item - gauntlets):
+	replace gauntlets on guy with item;
+		
+To equip (guy - a person) with (item - a mask):
+	replace masks on guy with item;
+		
+To equip (guy - a person) with (item - a suit):
+	replace suits on guy with item;
+		
+To equip (guy - a person) with (item - a shield):
+	replace shields on guy with item;
+		
 Chapter - Level 1 - Swarm of Daggers
 
 Section - Definitions
@@ -162,14 +243,13 @@ The body score of the swarm of daggers is 6.
 The mind score of the swarm of daggers is 3.
 The spirit score of the swarm of daggers is 6. 
 
-When play begins:
-	let X be a random natural weapon part of the swarm of daggers;
+For natural weapon setup of the swarm of daggers (this is the daggers' sharp points rule):
+	let X be the natural weapon described;
 	now damage die of X is 5;
 	now dodge bonus of X is 1;
 	now parry-with bonus of X is -2;
 	now parry-against bonus of X is -2;
 	now the printed name of X is "sharp points";
-	now material of X is iron;
 	now X is plural-named.
 
 The description of the swarm of daggers is "Animated by some dark magic, these daggers purposefully seek to undo [if faction of the swarm of daggers hates faction of the player]you[otherwise]their enemies[end if].".
@@ -358,15 +438,17 @@ The body score of the blood ape is 4.
 The mind score of the blood ape is 5.
 The spirit score of the blood ape is 4. 
 
-When play begins:
-	let X be a random natural weapon part of the blood ape;
+For natural weapon setup of the blood ape (this is the blood apes' fists rule):
+	let X be the natural weapon described;
 	now damage die of X is 6;
 	now dodge bonus of X is -1;
 	now parry-against bonus of X is 1;
 	now parry-with bonus of X is -2;
 	now printed name of X is "ape's [size of blood ape] fists";
-	now material of X is flesh;
 	now X is plural-named.
+	
+Starting kit for the blood ape (this is the always reset ape's fists rule):
+	carry out the natural weapon setup activity with the blood ape.
 
 Aftereffects rule (this is the blood ape grows in size when hit rule):
 	if the global attacker is the blood ape and the total damage is greater than 0:
@@ -560,13 +642,12 @@ A remove specific damage rule (this is the armadillo physical damage reduction r
 	if the victim is the ravenous armadillo:
 		remove 4 points of physical damage with reason "tough scales".
 		
-When play begins:
-	let X be a random natural weapon part of the ravenous armadillo;
+For natural weapon setup of the armadillo (this is the armadillo's bony tail club rule):
+	let X be the natural weapon described;
 	now damage die of X is 4;
 	now dodge bonus of X is 1;
 	now parry-against bonus of X is -1;
 	now parry-with bonus of X is 1;
-	now material of X is bone;
 	now the printed name of X is "bony tail club".		
 
 
@@ -670,12 +751,11 @@ Section - The armadillo stomach
 
 The armadillo stomach is a closed opaque container. The armadillo stomach is part of the ravenous armadillo.
 
-Dungeon interest rule (this is the fill the stomach rule):
-	if ravenous armadillo is denizen:
-		let item be a random off-stage minor thing;
-		unless item is nothing:
-			move item to the armadillo stomach;
-			if generation info is true, say "* Moved [item] to the stomach of the armadillo.".
+Starting kit for the armadillo (this is the fill the stomach rule):
+	let item be a random off-stage minor thing;
+	unless item is nothing:
+		move item to the armadillo stomach;
+		if generation info is true, say "* Moved [item] to the stomach of the armadillo.".
 
 Every turn when at least one thing is in the armadillo stomach:
 	repeat with item running through things in the armadillo stomach:
@@ -817,14 +897,13 @@ The spirit score of Miranda is 5.
 
 Miranda is weapon user.
 
-When play begins:
-	let X be a random natural weapon part of Miranda;
+For natural weapon setup of Miranda (this is the Miranda's fists rule):
+	let X be the natural weapon described;
 	now damage die of X is 5;
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
 	now the printed name of X is "fists";
-	now material of X is flesh;
 	now X is plural-named.	
 
 
@@ -835,30 +914,27 @@ The legend-label of Miranda is Figure of map_legend_Miranda.
 
 Section - Setting up Miranda's power and equipment
 
-A dungeon interest rule (this is the setting up Miranda rule):
+Starting kit rule for Miranda (this is the setting up Miranda rule):
 	now stun probability of Miranda is 100;
 	if a random chance of 1 in 2 succeeds:
+		now Miranda is not concentration-breaking reactor;
 		now Miranda is disarmer;
 		now disarm strength of Miranda is 9;
 	otherwise:
+		now Miranda is not Disarmer;
 		now Miranda is concentration-breaking reactor;
 		now cbr strength of Miranda is 9;
 	if a random chance of 3 in 4 succeeds:
-		move pair of nunchucks to Miranda;
-		now pair of nunchucks is readied;
+		now the pair of nunchucks is wood;
+		equip Miranda with the pair of nunchucks;
 		if a random chance of 1 in 20 succeeds:
-			now pair of nunchucks is adamant;
+			now the pair of nunchucks is adamant;
 	otherwise if a random chance of 1 in 2 succeeds:
-		move dagger of the double strike to Miranda;
-		now dagger of the double strike is readied;
-	now Miranda wears monk's robe;
+		equip Miranda with the dagger of the double strike;
+	equip Miranda with the monk's robe;
 	if a random chance of 1 in 5 succeeds:
-		now Miranda wears Miranda's amulet.
-
-
-
-
-
+		equip Miranda with Miranda's amulet.
+		
 Section - Miranda's shuriken attack
 
 First cbr text of Miranda is "Miranda quickly throws a shuriken, attempting to break [regarding the noun][possessive] concentration. [italic type][run paragraph on]".
@@ -970,14 +1046,13 @@ A remove general damage rule (this is the wisps of pain take less damage rule):
 	if victim is the wisps of pain:
 		remove 5 points of general damage with reason "hard to damage".
 
-When play begins:
-	let X be a random natural weapon part of the wisps of pain;
+For natural weapon setup of the wisps of pain (this is the wisps of pain's magic weapon rule):
+	let X be the natural weapon described;
 	now damage die of X is 0;
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
 	now the printed name of X is "necromantic magic";
-	now material of X is darkness.
 
 Section - Wisps of pain images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)	
 
@@ -1206,8 +1281,8 @@ The body score of the chain golem is 7.
 The mind score of the chain golem is 4.
 The spirit score of the chain golem is 7.
 
-When play begins:
-	let X be a random natural weapon part of the chain golem;
+For natural weapon setup of the chain golem (this is the lashing chains rule):
+	let X be the natural weapon described;
 	now damage die of X is 2;
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is 0;
@@ -1215,7 +1290,6 @@ When play begins:
 	now the printed name of X is "lashing chains";
 	now X is tethered;
 	now X is plural-named;
-	now material of X is iron.
 
 To attempt is a verb. To die is a verb.
 
@@ -1448,14 +1522,13 @@ When play begins:
 	if difficulty is 0:
 		decrease melee of the jumping bomb by 1. [Too hard for new players.]
 
-When play begins:
-	let X be a random natural weapon part of the jumping bomb;
+For natural weapon setup of the jumping bomb (this is the bomb's surface rule):
+	let X be the natural weapon described;
 	now dodge bonus of X is 1;
 	now parry-against bonus of X is -3;
 	now parry-with bonus of X is -2;
 	now printed name of X is "bomb's detonating surface";
 	now special weapon info of X is "kills instantly";
-	now material of X is flesh.
 
 Initiative update rule when the jumping bomb is enclosed by the location (this is the jumping bomb has slightly less initiative rule):
 	if a random chance of 1 in 5 succeeds:
@@ -1644,7 +1717,7 @@ The ID of the Reaper is 7.
 The Reaper is medium.
 The Reaper is talker.
 The Reaper is thrower.
-Material of the Reaper is flesh.
+Material of the Reaper is flesh. [He'd want it to be bone, but alas.]
 
 The description of the reaper is "He once used to be a man like any other, but his vocation has left him unnaturally pale and gaunt.".
 
@@ -1658,29 +1731,24 @@ The body score of the Reaper is 6.
 The mind score of the Reaper is 5.
 The spirit score of the Reaper is 7.
 
-When play begins:
-	let X be a random natural weapon part of the Reaper;
+For natural weapon setup of the Reaper (this is the Reaper's knuckles rule):
+	let X be the natural weapon described;
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
 	now printed name of X is "Reaper's knuckles";
-	now X is plural-named;
-	now material of X is flesh. [He'd want it to be bone, but alas.]
+	now X is plural-named;	
 
 The reaper is a weapon user.
 
-The Reaper carries a random scythe rule is listed before the ready weapons for everyone rule in the when play begins rules.
-When play begins (this is the Reaper carries a random scythe rule):
+Starting kit for the Reaper (this is the Reaper carries a random scythe rule):
 	let m be a random number between 1 and 3;
 	if m is 1:
-		move the scythe of flaming to the Reaper;
-		now the scythe of flaming is readied;
+		equip the Reaper with the scythe of flaming;
 	if m is 2:
-		move the scythe of slaying to the Reaper;
-		now the scythe of slaying is readied;
+		equip the Reaper with the scythe of slaying;
 	if m is 3:
-		move the scythe of oxidation to the Reaper;
-		now the scythe of oxidation is readied.
+		equip the Reaper with the scythe of oxidation.
 
 
 Section - Reaper images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
@@ -1866,7 +1934,7 @@ The body score of the demon of rage is 6.
 The mind score of the demon of rage is 6.
 The spirit score of the demon of rage is 6. 
 
-When play begins:
+For natural weapon setup of the demon of rage (this is the demon of rage's tendrils rule):
 	let X be a random natural weapon part of the demon of rage;
 	now damage die of X is 6;	
 	now dodge bonus of X is 0;
@@ -2066,7 +2134,7 @@ The body score of the hound is 7.
 The mind score of the hound is 7.
 The spirit score of the hound is 5.
 
-When play begins:
+For natural weapon setup of the hound (this is the hound's teeth rule):
 	let X be a random natural weapon part of the hound;
 	now damage die of X is 6; [Its bite is worse than its bark!]
 	now dodge bonus of X is 0;
@@ -2243,16 +2311,14 @@ The mind score of the angel of compassion is 10.
 The spirit score of the angel of compassion is 12.
 
 
-When play begins:
-	let X be a random natural weapon part of the angel of compassion;
+For natural weapon setup of the angel of compassion (this is the angel of compassion's fists rule):
+	let X be the natural weapon described;
 	now damage die of X is 4;	
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
 	now printed name of X is "angel's fists";
 	now X is plural-named;
-	now material of X is radiance.
-
 
 
 Section - Equipment
@@ -2432,13 +2498,12 @@ The body score of the mindslug is 3.
 The mind score of the mindslug is 11.
 The spirit score of the mindslug is 7. 
 
-When play begins:
-	let X be a random natural weapon part of the mindslug;
+For natural weapon setup of the mindslug (this is the mindslug's crushing body rule):
+	let X be the natural weapon described;
 	now dodge bonus of X is 1;
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
 	now printed name of X is "slug's crushing body";
-	now material of X is flesh.
 
 
 Section - Mindslug images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
@@ -2536,14 +2601,13 @@ Fafhrd accompanies the mindslug.
 Health of Fafhrd is 14.
 Melee of Fafhrd is 1.
 
-When play begins:
-	let X be a random natural weapon part of Fafhrd;
+For natural weapon setup of Fafhrd (this is the Fafhrd's fists rule):
+	let X be the natural weapon described;
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
 	now printed name of X is "Fafhrd's fists";
 	now X is plural-named;
-	now material of X is flesh.
 
 Fafhrd carries the claymore.
 
@@ -2571,14 +2635,13 @@ Mouser is talker.
 Mouser is thrower.
 Material of Mouser is flesh.
 
-When play begins:
-	let X be a random natural weapon part of Mouser;
+For natural weapon setup of Mouser (this is the Mouser's fists rule):
+	let X be the natural weapon described;
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
 	now printed name of X is "Mouser's fists";
 	now X is plural-named;
-	now material of X is flesh.
 
 Follower percentile chance of Mouser is 85.
 Mouser is weapon user.
@@ -2888,14 +2951,13 @@ The body score of giant tentacle is 8.
 The mind score of giant tentacle is 10.
 The spirit score of giant tentacle is 6. 
 
-When play begins:
-	let X be a random natural weapon part of giant tentacle;
+For natural weapon setup of the giant tentacle (this is the giant tentacle weapon rule):
+	let X be the natural weapon described;
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;	
 	now the damage die of X is 0;
 	now printed name of X is "tentacle";
-	now material of X is flesh.
 
 The giant tentacle is eyeless.
 
@@ -3261,15 +3323,14 @@ The body score of minotaur is 10.
 The spirit score of minotaur is 6. 
 The mind score of minotaur is 6.
 
-When play begins:
-	let X be a random natural weapon part of minotaur;
+For natural weapon setup of the minotaur (this is the minotaur's fists rule):
+	let X be the natural weapon described;
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;	
 	now printed name of X is "minotaur's fists";
 	now X is plural-named;
 	now the damage die of X is 6;
-	now material of X is flesh.
 
 Minotaur is a weapon user.
 
@@ -3391,14 +3452,13 @@ The healer of Aite carries the holy sword.
 Healer of Aite is weapon user.
 Healer of Aite is thrower.
 
-When play begins:
-	let X be a random natural weapon part of healer of Aite;
+For natural weapon setup of the healer of Aite (this is the healer's fists rule):
+	let X be the natural weapon described;
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
 	now X is plural-named;	
 	now printed name of X is "healer's fists";
-	now material of X is flesh.
 
 Report an actor hitting the dead healer of Aite:
 	say "The healer stares in disbelief at his fatal wounds before he topples over.";
@@ -3464,14 +3524,13 @@ The tormentor of Aite carries a staff of pain.
 Tormentor of Aite is weapon user.
 Tormentor of Aite is thrower.
 
-When play begins:
-	let X be a random natural weapon part of tormentor of Aite;
+For natural weapon setup of the tormentor of Aite (this is the tormentor's fists rule):
+	let X be the natural weapon described;
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
 	now X is plural-named;
 	now printed name of X is "tormentor's fists";
-	now material of X is flesh.
 
 Report an actor hitting the dead tormentor of Aite:
 	say "The tormentor cries in pain and rage as her body's vital functions fail.";
@@ -3537,14 +3596,13 @@ The defender of Aite carries the immaculate sword.
 
 Defender of Aite is weapon user.
 
-When play begins:
-	let X be a random natural weapon part of defender of Aite;
+For natural weapon setup of the defender of Aite (this is the defender's fists rule):
+	let X be the natural weapon described;
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
 	now X is plural-named;
 	now printed name of X is "defender's fists";
-	now material of X is flesh.
 
 Report an actor hitting the dead defender of Aite:
 	say "The defender falls to the ground with a smash, never to stand up again.";
@@ -3664,8 +3722,8 @@ The body score of Bodmall is 10.
 The mind score of Bodmall is 9.
 The spirit score of Bodmall is 9. 
 
-When play begins:
-	let X be a random natural weapon part of Bodmall;
+For natural weapon setup of Bodmall (this is the Bodmall's lightning rule):
+	let X be the natural weapon described;
 	now X is projectile;
 	now X is size-agnostic;
 	now X is not armour-stoppable;
@@ -4275,8 +4333,8 @@ The body score of the overmind is 9.
 The mind score of the overmind is 10.
 The spirit score of the overmind is 7. 
 
-When play begins:
-	let X be a random natural weapon part of the overmind;
+For natural weapon setup of the overmind (this is the overmind's nail rule):
+	let X be the natural weapon described;
 	now X is projectile;
 	now X is size-agnostic;
 	now damage die of X is 1;
@@ -4284,7 +4342,6 @@ When play begins:
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
 	now printed name of X is "small nail";
-	now material of X is iron.
 
 
 Section - Overmind images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
@@ -4547,8 +4604,8 @@ The body score of Israfel is 7.
 The mind score of Israfel is 7.
 The spirit score of Israfel is 12. 
 
-When play begins:
-	let X be a random natural weapon part of Israfel;
+For natural weapon setup of Israfel (this is the Israfel's flame rule):
+	let X be the natural weapon described;
 	now damage die of X is 6;
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is -2;
@@ -4705,8 +4762,8 @@ The body score of Isra is 5.
 The mind score of Isra is 12.
 The spirit score of Isra is 12. 
 
-When play begins:
-	let X be a random natural weapon part of Isra;
+For natural weapon setup of Isra (this is the Isra's flame rule):
+	let X be the natural weapon described;
 	now damage die of X is 4;
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is -2;
@@ -4802,15 +4859,14 @@ The body score of Fell is 12.
 The mind score of Fell is 7.
 The spirit score of Fell is 7. 
 
-When play begins:
-	let X be a random natural weapon part of Fell;
+For natural weapon setup of Fell (this is the Fell's claws and fangs rule):
+	let X be the natural weapon described;
 	now damage die of X is 5;
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is -1;
 	now parry-with bonus of X is -2;
 	now printed name of X is "claws and fangs";
 	now X is plural-named;
-	now material of X is radiance.
 
 Fell is angelic.
 Radiation of Fell is 1.
@@ -5114,8 +5170,8 @@ The spirit score of Malygris is 11.
 
 The initial sleep chance of Malygris is 1.
 
-When play begins:
-	let X be a random natural weapon part of Malygris;
+For natural weapon setup of Malygris (this is the Malygris' fists rule):
+	let X be the natural weapon described;
 	now printed name of X is "fists crackling with lightning";
 	now damage die of X is 6;
 	now X is plural-named;
@@ -5131,14 +5187,6 @@ Section - Malygris images for the map (for use with Kerkerkruip Glimmr Additions
 The avatar of Malygris is Figure of map_monster_Malygris.
 The legend-label of Malygris is Figure of map_legend_Malygris.
 
-
-Section - Randomising Malygris
-
-The randomise Malygris rules are a rulebook.
-
-Last dungeon interest rule (this is the randomise Malygris rule):
-	follow the randomise Malygris rules.
-	
 
 Section - Special power - Teleportation
 
@@ -5157,7 +5205,7 @@ After reporting Malygris teleporting:
 			if demonic assassin is alive and demonic assassin is off-stage: [failed to summon last time]
 				now Malygris-summon-countdown is a random number between 4 and 5. [and this time he is faster]
 
-A randomise Malygris rule (this is the randomise Malygris teleporting rule):
+Starting kit for Malygris (this is the randomise Malygris teleporting rule):
 	if a random chance of 1 in 4 succeeds: [teleporting]
 		if a random chance of 1 in 4 succeeds:
 			now teleport amount of Malygris is 0;
@@ -5188,7 +5236,7 @@ Every turn when Malygris-summon-countdown is not 0:
 		
 Section - Special power - Disintegration
 
-A randomise Malygris rule (this is the randomise Malygris disintegration rule):
+Starting kit for Malygris (this is the randomise Malygris disintegration rule):
 	now disintegrate power of Malygris is 10;
 	if a random chance of 1 in 3 succeeds:
 		if a random chance of 2 in 3 succeeds:
@@ -5219,7 +5267,7 @@ Carry out Malygris unghouling:
 	unghoulify the player;
 	increase Malygris-unghouled-times by 1.
 
-A randomise Malygris rule (this is the randomise Malygris unghouling rule):
+Starting kit for Malygris (this is the randomise Malygris unghouling rule):
 	if a random chance of 1 in 2 succeeds:
 		now malygris-unghouling is true;
 		if generation info is true, say "* Malygris can unghoul.";
@@ -5228,7 +5276,7 @@ A randomise Malygris rule (this is the randomise Malygris unghouling rule):
 
 Section - Special power - Healing
 
-A randomise Malygris rule (this is the randomise Malygris healing rule):
+Starting kit for Malygris (this is the randomise Malygris healing rule):
 	if a random chance of 1 in 5 succeeds:
 		now heal cooldown of Malygris is a random number between 1 and 5;
 		repeat with i running from 1 to 3:
@@ -5329,11 +5377,10 @@ The demonic assassin is follower.
 Follower percentile chance of demonic assassin is 100.
 The demonic assassin is unnaturally aware.
 
-When play begins:
-	let X be a random natural weapon part of the demonic assassin;
+For natural weapon setup of the demonic assassin (this is the demonic assassin's claws rule):
+	let X be the natural weapon described;
 	now the printed name of X is "hardened claws";
 	now X is plural-named;
-	now material of X is darkness.
 	
 Demonic assassin is weapon user.
 
@@ -5408,15 +5455,14 @@ The Nameless Horror is emotionless.
 
 The initial sleep chance of Nameless Horror is 0.
 
-When play begins:
-	let X be a random natural weapon part of the nameless horror;
+For natural weapon setup of the Nameless Horror (this is the Nameless Horror's teeth and claws rule):
+	let X be the natural weapon described;
 	now damage die of X is 50;
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is -2;
 	now parry-with bonus of X is -2;
 	now printed name of X is "countless teeth and claws";
 	now X is plural-named;
-	now material of X is darkness.
 
 Follower percentile chance of Nameless Horror is 60.
 
@@ -5518,15 +5564,14 @@ The body score of rotting corpse is 4.
 The mind score of rotting corpse is 4.
 The spirit score of rotting corpse is 4. 
 
-When play begins:
-	let X be a random natural weapon part of the rotting corpse;
+For natural weapon setup of the rotting corpse (this is the setup rotting appendages rule):
+	let X be the natural weapon described;
 	now damage die of X is 7;
 	now dodge bonus of X is 1;
 	now parry-against bonus of X is 1;
 	now parry-with bonus of X is -2;
 	now the printed name of X is "rotting appendages";
 	now X is plural-named;
-	now material of X is flesh.
 
 A rotting limb is a kind of weapon.
 The damage die of a rotting limb is usually 7.
@@ -5619,6 +5664,8 @@ An aftereffects rule (this is the rotting corpse loses limbs rule):
 				remove rotting head from play;
 				move cranial grenade to the location of the rotting corpse.
 
+[TODO: restore limbs when reviving the corpse?]
+
 An AI action selection rule for the rotting corpse (this is the rotting corpse without a head does not concentrate rule):
 	let P be the rotting corpse;
 	if the rotting head is not part of the rotting corpse:
@@ -5708,8 +5755,8 @@ The body score of the aswang is 6.
 The mind score of the aswang is 6.
 The spirit score of the aswang is 6. 
 
-When play begins:
-	let X be a random natural weapon part of the aswang;
+For natural weapon setup of the aswang (this is the equip aswang rule):
+	let X be the natural weapon described;
 	now damage die of X is 6;
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is 0;
@@ -6040,8 +6087,8 @@ The body score of mummified priest is 6.
 The mind score of mummified priest is 6.
 The spirit score of mummified priest is 6. 
 
-When play begins:
-	let X be a random natural weapon part of the mummified priest;
+For natural weapon setup of the mummified priest (this is the setup bandaged fists rule):
+	let X be the natural weapon described;
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;	
@@ -6150,14 +6197,13 @@ The body score of zombie toad is 3.
 The mind score of zombie toad is 3.
 The spirit score of zombie toad is 3. 
 
-When play begins:
-	let X be a random natural weapon part of the zombie toad;
+For natural weapon setup of the zombie toad (this is the toad's tongue rule):
+	let X be the natural weapon described;
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;	
 	now the printed name of X is "tongue";
 	now the damage die of X is 1;
-	now material of X is flesh.
 
 
 Section - Zombie Toad images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
@@ -6222,14 +6268,13 @@ The body score of malignant chanter is 5.
 The mind score of malignant chanter is 8.
 The spirit score of malignant chanter is 10. 
 
-When play begins:
-	let X be a random natural weapon part of the malignant chanter;
+For natural weapon setup of the malignant chanter (this is the chanter's putrefying fists rule):
+	let X be the natural weapon described;
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;	
 	now the printed name of X is "putrefying fists";
 	now X is plural-named;
-	now material of X is flesh.
 
 Section - Malignant Chanter images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
@@ -6340,8 +6385,8 @@ The body score of Drakul is 8.
 The mind score of Drakul is 15.
 The spirit score of Drakul is 6. 
 
-When play begins:
-	let X be a random natural weapon part of Drakul;
+For natural weapon setup of Drakul (this is the Drakul's teeth rule):
+	let X be the natural weapon described;
 	now damage die of X is 5;
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is 0;
@@ -6425,7 +6470,8 @@ To say kills Drakul:
 Drakul-victory is a truth state that varies. Drakul-victory is false.
 
 Drakul-favour is a truth state that varies.
-When play begins:
+
+Starting kit for Drakul (this is the Drakul's intentions rule):
 	now Drakul-favour is whether or not a random chance of 1 in 3 succeeds.
 
 Report Drakul hitting a dead pc:
@@ -6509,8 +6555,8 @@ The body score of the smoke demon is 7.
 The mind score of the smoke demon is 7.
 The spirit score of the smoke demon is 7. 
 
-When play begins:
-	let X be a random natural weapon part of the smoke demon;
+For natural weapon setup of the smoke demon (this is the smoke demon's tendrils rule):
+	let X be the natural weapon described;
 	now X is size-agnostic;
 	now damage die of X is 4;
 	now dodge bonus of X is 0;
@@ -6518,7 +6564,6 @@ When play begins:
 	now parry-with bonus of X is -2;
 	now the printed name of X is "tendrils";
 	now X is plural-named;
-	now material of X is vapour.
 
 Understand "tendrils" as the smoke demon.
 
@@ -6664,15 +6709,14 @@ The body score of the imp is 4.
 The spirit score of the imp is 4. 
 The mind score of the imp is 4.
 
-When play begins:
-	let X be a random natural weapon part of the imp;
+For natural weapon setup of the imp (this is the imp's claws rule):
+	let X be the natural weapon described;
 	now damage die of X is 3;
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;	
 	now the printed name of X is "claws";
 	now X is plural-named;
-	now material of X is darkness.
 
 Understand "claws" as the imp.
 
@@ -6826,14 +6870,13 @@ The demonic mistress is follower.
 Follower percentile chance of demonic mistress is 100.
 The demonic mistress is unnaturally aware.
 
-When play begins:
-	let X be a random natural weapon part of the demonic mistress;
+For natural weapon setup of the demonic mistress (this is the mistresses claws rule):
+	let X be the natural weapon described;
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;	
 	now the printed name of X is "claws";
 	now X is plural-named;
-	now material of X is darkness.
 	
 Demonic mistress is weapon user.
 
