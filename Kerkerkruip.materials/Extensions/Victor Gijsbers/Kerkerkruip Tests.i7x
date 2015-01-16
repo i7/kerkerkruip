@@ -363,22 +363,24 @@ Carry out tense-changing:
 	now the story tense is the grammatical tense understood;
 	say "[bracket]Story tense is now [the story tense].[close bracket]";
 	
-Section - Test Battles
-
-battling is an action applying to one visible thing. Understand "battle [any person]" as battling.
+Section - Backup Stats
 
 Table of Backup Stats
-creature	true faction	location	weapon	body	mind	spirit	permanent health	melee	defence	creature material	weapon material	damage die	weapon damage	dodge	parry-against	parry-with
-a person	a faction	a room	a weapon	a number	a number	a number	a number	a number	a number	a material	a material	a number	a number	a number	a number	a number
+creature	true faction	location	weapon	body	mind	spirit	permanent health	melee	defence	radiation	creature material	weapon material	damage die	weapon damage	dodge	parry-against	parry-with
+a person	a faction	a room	a weapon	a number	a number	a number	a number	a number	a number	a number	a material	a material	a number	a number	a number	a number	a number
 with 20 blank rows.
 
 [TODO: make a rulebook for equipping all people, and run it in a reviving rule]
 
-To back up stats of (guy - a person):
+To back up stats of (guy - a person), overriding previous backups:
 	if there is a creature of guy in Table of Backup Stats:
-		stop;
-	choose a blank row in Table of Backup Stats;
-	now creature entry is guy;
+		if overriding previous backups:
+			choose row with creature of guy in Table of Backup Stats;
+		otherwise:
+			stop;
+	otherwise:
+		choose a blank row in Table of Backup Stats;
+		now creature entry is guy;
 	now true faction entry is original faction of guy;
 	now location entry is location of guy;
 	now weapon entry is a random readied weapon enclosed by guy;
@@ -389,6 +391,7 @@ To back up stats of (guy - a person):
 	now permanent health entry is permanent health of guy;
 	now melee entry is melee of guy;
 	now defence entry is defence of guy;
+	now radiation entry is radiation of guy;
 	now creature material entry is material of guy;
 	now weapon material entry is material of weapon entry;
 	now damage die entry is damage die of weapon entry;
@@ -416,6 +419,7 @@ A reviving rule for a person (called guy) (this is the restore stats when revivi
 	now permanent health of guy is permanent health entry;
 	now melee of guy is melee entry;
 	now defence of guy is defence entry;
+	now radiation of guy is radiation entry;
 	now material of guy is creature material entry;
 	now damage die of weapon entry is damage die entry;
 	now weapon damage bonus of weapon entry is weapon damage entry;
@@ -442,7 +446,41 @@ To revive (guy - a person) fighting for (side - a faction), with group:
 	if with group:
 		repeat with follower running through people who accompany guy:
 			revive follower fighting for side;
+
+Requesting backup stats is an action out of world applying to nothing. Understand "backups" as requesting backup stats.
+
+Carry out requesting backup stats:
+	say "The following monsters have backup data saved:[paragraph break]";
+	repeat through the table of Backup Stats:
+		say "[creature entry]:[line break]";
+		say "  faction: [true faction entry][line break]";
+		say "  location: [location entry][line break]";
+		say "  body score: [body entry][line break]";
+		say "  mind score: [mind entry][line break]";
+		say "  spirit score: [spirit entry][line break]";
+		say "  permanent health: [permanent health entry][line break]";
+		say "  attack strength: [melee entry][line break]";
+		say "  defence: [defence entry][line break]";
+		say "  radiance: [radiation entry][line break]";
+		say "  material: [creature material entry][line break]";
+		say "  [weapon entry] material: [weapon material entry][line break]";
+		say "  [weapon entry] damage: 1d[damage die entry] + [weapon damage entry][line break]";
+		say "  [weapon entry] parry-against: [parry-against entry][line break]";
+		say "  [weapon entry] parry-with: [parry-with entry][line break]";
+		say line break.
+
+Backing up is an action out of world applying to one visible thing. Understand "backup [any person]" as backing up.
+
+Carry out backing up:
+	back up stats of the noun, overriding previous backups.
 	
+Report backing up:
+	say "Backed up stats of [the noun].";
+	
+Section - Test Battles
+
+battling is an action applying to one visible thing. Understand "battle [any person]" as battling.
+
 Carry out battling:
 	revive the noun fighting for arena-faction, with group;
 	try challenging the noun in Test Arena.
