@@ -2783,7 +2783,11 @@ Testing effects of knowledge-gaining:
 	stop and save event description;
 	assert that the event description includes "You have found a scroll";
 	Repeat with item running through scrolls enclosed by the player:
-		assert "The true name and obfuscated name should be different, but they are both '[true name of item]'" based on whether or not the true name of item is not the obfuscated name of item;
+		assert "The true name and obfuscated name of [kind of item] should be different, but they are both '[true name of item]'" based on whether or not the true name of item is not the obfuscated name of item;
+	Repeat with S running through kinds of scroll:
+		Repeat with item running through the instances of S:
+			let item-name be the true name of item;
+			assert "The true name of [kind of item] should not be obfuscated, but it is [true name of item], which is an obfuscated name'" based on whether or not item-name is a not obfuscated scroll name;
 		
 Section - Bug 352 - exploded property
 
