@@ -2112,7 +2112,7 @@ Chapter - Scrolls
 
 Section - The scrolls kind
 
-A scroll is a kind of thing. There is a scroll. [So that iterating through scroll subkinds works!]
+A scroll is a kind of thing. 
 A scroll is usually improper-named.
 A scroll is usually civilised.
 A scroll is usually paper.
@@ -2155,7 +2155,7 @@ clawe	"CLAWE DARKE"	true   [Wade Clarke]
 Definition: a scroll name is obfuscated if obfuscated of it is true.
 Definition: a scroll name is unhealthy if unhealthy of it is true.
 Definition: a scroll name is healthy if obfuscated of it is not true and unhealthy of it is not true.
-Definition: a scroll name is findable if unfindable of it is not false.
+Definition: a scroll name is findable if unfindable of it is not false. [and obfuscated of it is not true?]
 
 Understand "mort" and "eilysh" as mort.
 Understand "cemil" and "kui" as cemil.
@@ -2166,88 +2166,54 @@ Understand "sliwi" and "lidinna" as sliwi.
 Understand "clawe" and "darke" as clawe.
 
 A scroll is usually privately-named.
-A scroll can be identified or unidentified. A scroll is usually identified.
-A scroll has a scroll name.
+Definition: a scroll is identified rather than unidentified if the true name of it is revealed.
 A scroll has a scroll name called obfuscated name.
 A scroll has a scroll name called true name.
+A scroll name can be revealed.
+A scroll name has a scroll name called the alias.
 
-Understand the scroll name property as describing a scroll.
+The verb to be identified as means the true name property.
+
+To decide which scroll name is the known name of (item - a scroll):
+	if item is identified, decide on the true name of item;
+	decide on the obfuscated name of item.
+
+To say label-of (S - a scroll):
+	let name be printed name of known name of S;
+	if S is unidentified:
+		say "labelled [name]";
+	otherwise if the name is not "":
+		say "of [name]";
+	otherwise:
+		say "of [known name of S]";
+	
+Understand the true name property as describing a scroll when the item described is identified.
 Understand the obfuscated name property as describing a scroll.
 
 Understand "labelled" as a scroll when the item described is unidentified.
 Understand "of" as a scroll when the item described is identified.
 
 Rule for printing the name of a scroll (called S) (this is the printing the name of scrolls rule):
-	let name be printed name of scroll name of S;
-	if S is unidentified:
-		say "scroll labelled [name]";
-	otherwise if the name is not "":
-		say "scroll of [name]";
-	otherwise:
-		say "scroll of [scroll name of S]";
+	say "scroll [label-of S]";
 
 Rule for printing the plural name of a scroll (called S) (this is the printing the plural name of scrolls rule):
-	let name be printed name of scroll name of S;
-	if S is unidentified:
-		say "scrolls labelled [name]";
-	otherwise if the printed name of the scroll name of S is not "":
-		say "scrolls of [name]";
-	otherwise:
-		say "scrolls of [scroll name of S]";
+	say "scrolls [label-of S]";
 	
 Instead of examining an unidentified scroll:
 	say "You'll have to read this scroll to find out what it does."
 
-[ Some I6 for iterating through the scroll subkinds ]
-Include (-
-
-! Find the kind of an object
-[ KindOfObj obj;
-	return KindHierarchy-->( ( obj.KD_Count ) * 2 );
-];
-
-! Test if a kind is a subkind of another kind
-[ TestSubkind subclass superclass	i;
-	! These classes are outside the kind heirarchy and must be dealt with first
-	if ( subclass == Class or Object or Routine or String or VPH_Class )
-		rfalse;
-	
-	while (1)
-	{
-		if ( KindHierarchy-->i == subclass )
-			return KindHierarchy-->( KindHierarchy-->(i + 1) * 2 ) == superclass;
-		i = i + 2;
-	}
-];
-
--).
-
-To decide what object is the kind of (obj - object):
-	(-  KindOfObj( {obj} ) -).
-
-To repeat with (loopvar - nonexisting K variable) running through the/-- kinds of (kind - name of kind of value of kind K) begin -- end:
-	(- objectloop( {loopvar} && metaclass({loopvar}) == Class && TestSubkind({loopvar}, KindOfObj({-new:K})) ) -).
-	
-To repeat with (loopvar - nonexisting object variable) running through the/-- instances of (kind - object) begin -- end:
-	(- objectloop( {loopvar} && {loopvar} ofclass {kind} ) -).
-
 When play begins (this is the obfuscate scrolls rule):
 	let names be the list of obfuscated scroll names;
 	sort names in random order;
-	repeat with S running through the kinds of scroll:
-		let N be entry 1 of names;
+	Repeat with S running through not obfuscated scroll names:
+		Let N be entry 1 of names;
 		remove entry 1 from names;
-		repeat with I running through the instances of S:
-			now I is unidentified;
-			now the true name of I is the scroll name of I;
+		repeat with I running through scrolls identified as S:
 			now the obfuscated name of I is N;
-			now the scroll name of I is N;
 
 To identify (S - a scroll):
-	repeat with I running through the instances of the kind of S:
-		now I is identified;
-		now the scroll name of I is the true name of I;
-
+	now the true name of S is revealed.
+	
 First carry out reading an unidentified scroll:
 	identify the noun;
 	say "It is [a noun]!";
@@ -2262,7 +2228,7 @@ scroll name
 teleportation
 
 A scroll of teleportation is a kind of scroll.
-A scroll of teleportation is teleportation.
+The true name of a scroll of teleportation is teleportation.
 The description of a scroll of teleportation is "Reading this scroll will instantaneously transport the reader to another location.".
 The plural of scroll of teleportation is scrolls of teleportation.
 
@@ -2280,7 +2246,7 @@ scroll name	unhealthy
 ghoulification	true
 
 A scroll of ghoulification is a kind of scroll.
-A scroll of ghoulification is ghoulification.
+The true name of a scroll of ghoulification is ghoulification.
 The description of a scroll of ghoulification is "Reading this scroll will turn you into an undead ghoul.".
 The plural of scroll of ghoulification is scrolls of ghoulification.
 
@@ -2295,18 +2261,14 @@ scroll name
 knowledge
 
 A scroll of knowledge is a kind of scroll.
-A scroll of knowledge is knowledge.
+The true name of a scroll of knowledge is knowledge.
 The description of a scroll of knowledge is "Reading this scroll will grant you knowledge about all other scrolls.".
 The plural of scroll of knowledge is scrolls of knowledge.
 
 Carry out reading a scroll of knowledge:
 	say "The nature of scrolls suddenly becomes clear to you.";
-	repeat with S running through the kinds of scroll:
-		repeat with I running through the instances of S:
-			if I is unidentified:
-				identify I;
-[				break.]
-
+	repeat with S running through not obfuscated scroll names:
+		now S is revealed;
 
 
 Section -  Scroll of Curse Removal
@@ -2318,7 +2280,7 @@ curse removal
 Understand "curse" and "removal" as curse removal.
 
 A scroll of curse removal is a kind of scroll.
-A scroll of curse removal is curse removal.
+The true name of a scroll of curse removal is curse removal.
 The description of a scroll of curse removal is "Reading this scroll will remove any curses from the item you are carrying."
 The plural of scroll of curse removal is scrolls of curse removal.
 
@@ -2349,7 +2311,7 @@ shadows-name	"shadows"
 Understand "shadows" and "shadow" as shadows-name.
 
 A scroll of shadows is a kind of scroll.
-A scroll of shadows is shadows-name.
+The true name of a scroll of shadows is shadows-name.
 The description of a scroll of shadows is "Reading this scroll will make you hidden, though it may fail if enemies are nearby."
 The plural of scroll of shadows is scrolls of shadows.
 
@@ -2367,7 +2329,7 @@ scroll name	unhealthy
 summoning	true
 
 A scroll of summoning is a kind of scroll.
-A scroll of summoning is summoning.
+The true name of a scroll of summoning is summoning.
 The description of a scroll of summoning is "Reading this scroll will summon an undead monster. Be careful, for it does not make the creature friendly."
 The plural of scroll of summoning is scrolls of summoning.
 
@@ -2417,7 +2379,7 @@ the-blade	"the blade"
 Understand "blade" and "the blade" as the-blade.
 
 A scroll of the blade is a kind of scroll.
-A scroll of the blade is the-blade.
+The true name of a scroll of the blade is the-blade.
 The description of a scroll of the blade is "Reading this scroll will make a temporary adamantine blade appear in your hands.".
 The plural of scroll of the blade is scrolls of the blade.
 
@@ -2478,7 +2440,7 @@ scroll name
 protection
 
 A scroll of protection is a kind of scroll.
-A scroll of protection is protection.
+The true name of a scroll of protection is protection.
 The description of a scroll of protection is "Reading this scroll will protect you against all damage from the next one or two attacks."
 The plural of scroll of protection is scrolls of protection.
 
@@ -2514,7 +2476,7 @@ scroll name
 etherealness
 
 A scroll of etherealness is a kind of scroll.
-A scroll of etherealness is etherealness.
+The true name of a scroll of etherealness is etherealness.
 The description of a scroll of etherealness is "Reading this scroll will temporarily turn you ethereal."
 The plural of scroll of etherealness is scrolls of etherealness.
 
@@ -2531,7 +2493,7 @@ scroll name
 skill
 
 A scroll of skill is a kind of scroll.
-A scroll of skill is skill.
+The true name of a scroll of skill is skill.
 The description of a scroll of skill is "Reading this scroll will give you a temporary bonus to body, mind and spirit."
 The plural of scroll of skill is scrolls of skill.
 
@@ -2596,7 +2558,7 @@ scroll name	unhealthy
 death	true
 
 A scroll of death is a kind of scroll.
-A scroll of death is death.
+The true name of a scroll of death is death.
 The description of a scroll of death is "Reading this scroll will deal damage to all non-undead creatures in the room."
 The plural of scroll of death is scrolls of death.
 
@@ -2612,7 +2574,7 @@ scroll name
 alteration
 
 A scroll of alteration is a kind of scroll.
-A scroll of alteration is alteration.
+The true name of a scroll of alteration is alteration.
 The description of a scroll of alteration is "Reading this scroll can radically alter your body."
 The plural of scroll of alteration is scrolls of alteration.
 
@@ -2634,7 +2596,7 @@ mapping
 Mapping boolean is a truth state variable.
 
 A scroll of mapping is a kind of scroll.
-A scroll of mapping is mapping.
+The true name of a scroll of mapping is mapping.
 The description of a scroll of mapping is "Reading this scroll will instantaneously reveal the plan of the entire dungeon, including secret rooms ([if the map can be shown]check the MAP to see it, or if you prefer not to use the graphical map, [end if]type REMEMBER for more).".
 The plural of scroll of mapping is scrolls of mapping.
 
@@ -2653,7 +2615,7 @@ psycholocation
 Psycholocation boolean is a truth state variable.
 
 A scroll of psycholocation is a kind of scroll.
-A scroll of psycholocation is psycholocation.
+The true name of a scroll of psycholocation is psycholocation.
 The description of a scroll of psycholocation is "Reading this scroll will grant you the ability to sense all of the creatures whose souls you might be able to absorb (check the MAP to see their locations, or use the SENSE command).".
 The plural of scroll of psycholocation is scrolls of psycholocation.
 
@@ -2700,7 +2662,7 @@ scroll name
 enchantment
 
 A scroll of enchantment is a kind of scroll.
-A scroll of enchantment is enchantment.
+The true name of a scroll of enchantment is enchantment.
 The description of a scroll of enchantment is "Reading this scroll will permanently improve the weapon you are wielding."
 The plural of scroll of enchantment is scrolls of enchantment.
 
@@ -2723,7 +2685,7 @@ delights	true
 Understand "afternoon" and "delights" and "afternoon delights" as delights.
 
 A scroll of afternoon delights is a kind of scroll.
-A scroll of afternoon delights is delights.
+The true name of a scroll of afternoon delights is delights.
 The description of a scroll of afternoon delights is "You glance at the scroll, and judge that it will probably open a portal. That is going to be a slow and noisy process, though."
 The plural of scroll of afternoon delights is scrolls of afternoon delights.
 
@@ -2955,13 +2917,10 @@ Instead of examining a magical guide:
 
 Carry out reading a magical guide:
 	say "From now on, you will recognise scrolls of [readable guide list of the noun].";
-	repeat with S running through the kinds of scroll:
-		repeat with I running through the instances of S:
-			if true name of I is listed in guide list of noun:
-				if I is unidentified:
-					identify I;
-[					break.]
-
+	repeat with S running through not obfuscated scroll names:
+		if S is listed in guide list of noun:
+			now S is revealed;
+				
 To say readable (list-to-print - a list of scroll names):
 	let n be the number of entries in list-to-print;
 	repeat with stuff running through list-to-print:
