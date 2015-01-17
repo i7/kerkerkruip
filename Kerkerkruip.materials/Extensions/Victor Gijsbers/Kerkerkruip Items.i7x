@@ -2170,7 +2170,6 @@ Definition: a scroll is identified rather than unidentified if the true name of 
 A scroll has a scroll name called obfuscated name.
 A scroll has a scroll name called true name.
 A scroll name can be revealed.
-A scroll name has a scroll name called the alias.
 
 The verb to be identified as means the true name property.
 
