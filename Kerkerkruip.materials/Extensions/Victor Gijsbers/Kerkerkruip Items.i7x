@@ -2174,18 +2174,15 @@ A scroll name has a scroll name called the alias.
 
 The verb to be identified as means the true name property.
 
-To decide which scroll name is the known name of (item - a scroll):
-	if item is identified, decide on the true name of item;
-	decide on the obfuscated name of item.
-
 To say label-of (S - a scroll):
-	let name be printed name of known name of S;
 	if S is unidentified:
-		say "labelled [name]";
-	otherwise if the name is not "":
-		say "of [name]";
+		say "labelled [printed name of obfuscated name of S]";
 	otherwise:
-		say "of [known name of S]";
+		let name be printed name of true name of S;
+		if the name is not "":
+			say "of [name]";
+		otherwise:
+			say "of [true name of S]";
 	
 Understand the true name property as describing a scroll when the item described is identified.
 Understand the obfuscated name property as describing a scroll.
