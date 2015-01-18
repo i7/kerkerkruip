@@ -2158,7 +2158,7 @@ clawe	"CLAWE DARKE"	true   [Wade Clarke]
 Definition: a scroll name is obfuscated if obfuscated of it is true.
 Definition: a scroll name is unhealthy if unhealthy of it is true.
 Definition: a scroll name is healthy if obfuscated of it is not true and unhealthy of it is not true.
-Definition: a scroll name is findable if unfindable of it is not false. [and obfuscated of it is not true?]
+Definition: a scroll name is findable if unfindable of it is not true. [and obfuscated of it is not true?]
 
 Understand "mort" and "eilysh" as mort.
 Understand "cemil" and "kui" as cemil.
