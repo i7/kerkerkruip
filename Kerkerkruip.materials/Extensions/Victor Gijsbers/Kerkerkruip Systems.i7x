@@ -173,20 +173,21 @@ A room can be consecrated. A room is usually not consecrated.
 Section - Collapse
 
 First carry out going (this is the collapse rule):
-	if the room noun of location collapses location:
-		let n be greatest power of the player;
-		if a random chance of n in 3 succeeds:
-			let X be room noun of location;
-			change the noun exit of location to nothing;
-			let reverse be the opposite of noun;
-			change the reverse exit of X to nothing;
-			say "With a huge crash, the [if noun is up or noun is down]staircase[otherwise]corridor[end if] [bold type]collapses[roman type] behind you!";
-			now the retreat location is X;
-			now X does not collapse location;
-			now location does not collapse X;
-			wait for any key;
-		otherwise:
-			say "That passage felt a bit unstable -- you feel that it [bold type]might collapse[roman type] in the future.".
+	if the room noun of location is a room:
+		if the room noun of location collapses location:
+			let n be greatest power of the player;
+			if a random chance of n in 3 succeeds:
+				let X be room noun of location;
+				change the noun exit of location to nothing;
+				let reverse be the opposite of noun;
+				change the reverse exit of X to nothing;
+				say "With a huge crash, the [if noun is up or noun is down]staircase[otherwise]corridor[end if] [bold type]collapses[roman type] behind you!";
+				now the retreat location is X;
+				now X does not collapse location;
+				now location does not collapse X;
+				wait for any key;
+			otherwise:
+				say "That passage felt a bit unstable -- you feel that it [bold type]might collapse[roman type] in the future.".
 
 Section - Tunnels
 

@@ -1621,6 +1621,8 @@ The grenade returning rules are a rulebook.
 	
 Carry out throwing something to:
 	now exploding-location is the room second noun from the location;
+	let target-room be exploding-location; [saving this for later use, e.g., after being teleported]
+	let source-room be location; [saving this for later use, e.g., after being teleported]
 	now exploding-grenade is the noun;
 	if the number of alive thrower persons in exploding-location is 0:
 		now grenade-return-percentage is 0;
@@ -1645,13 +1647,14 @@ Carry out throwing something to:
 					now guy is follower;
 					if follower percentile chance of guy is less than 90:
 						increase follower percentile chance of guy by 10;
-	if the room second noun of location collapses location:
+	if target-room collapses source-room:
 		if a random chance of 1 in 20 succeeds:
-			let X be room second noun of location;
-			change the second noun exit of location to nothing;
+			let X be target-room;
+			change the second noun exit of source-room to nothing;
 			let reverse be the opposite of second noun;
 			change the reverse exit of X to nothing;
-			say "That grenade seems to have hit the walls of the passage [second noun] with a little too much force. With a huge crash, the [if second noun is up or second noun is down]staircase[otherwise]corridor[end if] [bold type]collapses[roman type]!";
+			if location is source-room or location is target-room:
+				say "That grenade seems to have hit the walls of the passage [second noun] with a little too much force. With a huge crash, the [if second noun is up or second noun is down]staircase[otherwise]corridor[end if] [bold type]collapses[roman type]!";
 			now X does not collapse location;
 			now location does not collapse X.
 	
