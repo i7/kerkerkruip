@@ -1769,7 +1769,7 @@ An exploding rule (this is the fragmentation grenade explodes rule):
 				say "The explosion does seem to be very feeble, though.";
 		otherwise:
 			if exploding-location is the location:
-				say "The grenade explodes, dealing [run paragraph on]";
+				say "The grenade explodes, dealing[run paragraph on]";
 			have a fragmentation event in exploding-location with noun by player.
 
 Section - Blessed Grenade (major)
