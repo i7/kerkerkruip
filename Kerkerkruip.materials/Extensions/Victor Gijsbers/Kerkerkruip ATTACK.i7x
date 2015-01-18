@@ -749,8 +749,8 @@ The after damage rules are a rulebook. [For things like losing concentration.]
 The victim is a person that varies.
 The total damage is a number that varies.
 
-Damage comment is a truth state that varies.
-Damage silence is a truth state that varies.
+Damage comment is a truth state that varies. [Automatically set to false, then to true by any rules that prints "+ .." or "- ..." damage.]
+Damage silence is a truth state that varies. [Automatically set to true or false depending on whether "silently" is invoked.]
 
 Damage-by-hitting is a truth state that varies. [Set to true when dealing damage from an attack, so rules know that global attacker/defender and weapon properties are available.]
 
@@ -936,11 +936,16 @@ To have (source - a thing) inflict damage on (guy - a person), silently:
 		follow the general damage multiplier rules;
 		if total damage is less than 0:
 			now total damage is 0;
-	unless silently:
+[	unless silently:
 		if damage comment is true or (damage-by-hitting is true and override-normal-attack-damage-rule is false):
 			say " = [bold type]", total damage, " damage[roman type][run paragraph on]";
 		otherwise:
-			say " [bold type]", total damage, " damage[roman type][run paragraph on]";
+			say " [bold type]", total damage, " damage[roman type][run paragraph on]";] [Let's try something else.]
+	unless silently:
+		if damage comment is true:
+			say " = [bold type]", total damage, " damage[roman type][run paragraph on]";
+		otherwise:
+			say " + 0 = [bold type]", total damage, " damage[roman type][run paragraph on]";			
 	decrease health of the victim by total damage;
 	follow the after damage rules;
 	reset the damage profile;
