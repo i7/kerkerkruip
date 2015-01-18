@@ -3255,7 +3255,7 @@ The weapon attack bonus of the dagger of double strike is -2.
 
 The description of the dagger of the double strike is "The dagger looks dull and far from dangerous. But appearances deceive, for this weapon has been imbued with a dangerous magic.".
 
-The special weapon info of the dagger of the double strike is "; allows its wielder to strike again immediately if the first attack did no damage[run paragraph on]".
+The special weapon info of the dagger of the double strike is "; allows its wielder to strike again immediately if the first attack did no damage; benefits from tension[run paragraph on]".
 
 Making-double-strike is a truth state that varies. Making-double-strike is false.
 
@@ -3294,7 +3294,7 @@ A treasure placement rule (this is the double strike can be backstabber rule):
 		now the hidden identity of the dagger of double strike is the backstabber.
 
 The description of the backstabber is "This treacherous blade sometimes strikes out at random people -- including yourself.".
-The special weapon info of the backstabber is "; sometimes attacks a random person instead of the intended target[run paragraph on]"
+The special weapon info of the backstabber is "; sometimes attacks a random person instead of the intended target; benefits from tension[run paragraph on]"
 
 Making-backstab is a truth state that varies. Making-backstab is false.
 
@@ -3318,7 +3318,7 @@ The vampiric dagger is iron.
 
 The description of the vampiric dagger is "This sleek dagger will magically transfer some of the damage dealt to the target as health to its owner.".
 
-The special weapon info of the vampiric dagger is "; leeches some health (works much better for vampires)[run paragraph on]".
+The special weapon info of the vampiric dagger is "; leeches some health (works much better for vampires); benefits from tension[run paragraph on]".
 
 The damage die of the vampiric dagger is 3.
 The weapon attack bonus of the vampiric dagger is 0.
@@ -3372,7 +3372,7 @@ Section - Dagger of draining (monster)
 The dagger of draining is a dagger. The description of the dagger of draining is "This magical dagger saps the powers of any enemy it hits, and transfers it to the wielder.".
 The damage die of the dagger of draining is 8.
 
-The special weapon info of the dagger of draining is "; drains statistics[run paragraph on]".
+The special weapon info of the dagger of draining is "; drains statistics; benefits from tension[run paragraph on]".
 
 An aftereffects rule (this is the dagger of draining aftereffects rule):
 	if the global attacker weapon is the dagger of draining and the total damage is greater than 0:
