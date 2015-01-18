@@ -383,7 +383,7 @@ To deal (X - a number) points of Aite-damage to (guy - a person) on behalf of (t
 		now X is X times the size factor divided by 2;
 		say ", skewering [the guy] for [bold type][X] damage[roman type]!";
 	deal X points of divine damage;
-	have Aite inflict damage on the guy;
+	have Aite inflict damage on the guy, silently;
 	unless the guy is dead:
 		let the guy lose concentration;
 		if the guy is the player and the player is hidden:
