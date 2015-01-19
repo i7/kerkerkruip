@@ -154,11 +154,9 @@ The starting kit rules are an object-based rulebook.
 
 Definition: a person is encounterable if it is denizen or the level of it is 0.
 
-When play begins (this is the equip all encounterable creatures rule):
+A dungeon interest rule (this is the equip all encounterable creatures rule):
 	Repeat with guy running through encounterable people:
 		follow the starting kit rules for guy.
-			
-The equip all encounterable creatures rule is listed before the ready weapons for everyone rule in the when play begins rules;
 
 A last reviving rule for a person (called guy) (this is the re-equip when reviving rule):
 	follow the starting kit rules for guy.

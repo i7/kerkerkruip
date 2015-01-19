@@ -4640,9 +4640,15 @@ To decide which object is the shimmer-clone of (item - a thing):
 		remove the new-item from play;
 	decide on new-item.
 	
+[We want to use a shimmer-clone if somebody has lost their equipment in the dungeon and now it needs to be replaced. But that's a bit complicated to track, so we do something simpler: we assume that non-treasure items belong to npcs, and if they're in the dungeon it's because an npc dropped them.
+	This allows the player to be given an already-placed item at the beginning of the game. They'll never know it was stolen from the dungeon!]
+	
+Definition: a thing is npc-owned if it is non-treasure and it is on-stage.
+Definition: the gilded rapier is npc-owned: no.
+
 To decide which object is the version of (item - a thing) available to (guy - a person):
 	now item is the original version of item;
-	if item is on-stage and item is not enclosed by guy:
+	if item is npc-owned and item is not enclosed by guy:
 		decide on the shimmer-clone of item;
 	decide on item.
 		

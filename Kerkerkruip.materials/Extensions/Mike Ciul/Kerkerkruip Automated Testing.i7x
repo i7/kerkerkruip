@@ -580,6 +580,26 @@ testing effects:
 
 randomized outcome testing is a rulebook.
 
+Chapter - Testing Dungeon Generation
+
+The generation test rules is a rulebook.
+
+the generation count is a number that varies.
+the generation minimum is a number that varies.
+		
+This is the generate many test dungeons rule:
+	while the generation count < the generation minimum:
+		[aw, here we go again. We have to undo all the treasure placement... and what else?]
+		Repeat with guy running through denizen npc people:
+			remove guy from play;
+		Repeat with item running through on-stage not non-treasure things:
+			remove item from play;
+		follow the dungeon generation rules;
+		increment the generation count;
+		follow the generation test rules;
+		say "* [generation minimum - generation count] more dungeons to generate for [the current test set]";
+
+The generate many test dungeons rule substitutes for the create the dungeon rule when the generation minimum is at least 1.
 
 Chapter - The assert phrase (in place of Chapter - The assert phrase in Simple Unit Tests by Dannii Willis)
 

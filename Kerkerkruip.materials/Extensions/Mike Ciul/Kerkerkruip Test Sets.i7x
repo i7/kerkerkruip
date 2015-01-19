@@ -2049,32 +2049,24 @@ Testing effects of imp-stashing:
 	if a package of ment is in the lair of the imp:
 		record success of imp-stashing;
 
-Section - Heal power of Malygris
+Section - Starting Kits
 
-malygris-heal-power is an test set.
+starting-kits-test is an test set.
 
-the generation minimum is a number that varies.
-
-the generation count is a number that varies.
-
-The generation test rules is a rulebook.
-
-Last map approval rule:
-	increment generation count;
-	follow the generation test rules;
-	if generation count < generation minimum:
-		say "* [generation minimum - generation count] more dungeons to generate for [the current test set]";
-		rule fails;
-		
-Scenario when testing malygris-heal-power:
+Scenario when testing starting-kits-test:
 	now generation info is true;
+	now the gilded rapier is testobject;
+	now the gorgeous dagger is testobject;
+	now the evil dagger is testobject;
+	now Metastasio's hat is testobject;
 	now the generation minimum is 20.
 	
 malygris-heal-max is a number that varies.
 
-Generation test when testing malygris-heal-power:
+Generation test when testing starting-kits-test:
 	now the heal power of Malygris is 0;
-	make the dungeon interesting [usually done after approval];
+	follow the equip all encounterable creatures rule [usually done after approval];
+	[Malygris heal power]
 	let max healing be (heal power of Malygris) * 60 / (heal cooldown of Malygris);
 	if max healing is greater than malygris-heal-max:
 		now malygris-heal-max is max healing;
@@ -2084,7 +2076,12 @@ Generation test when testing malygris-heal-power:
 		assert "[max healing divided by 60] and [remainder after dividing max healing by 60] 60ths is too much healing for Malygris" based on false;
 		now generation minimum is 0;
 	if generation count is generation minimum:
-		assert "Malygris should be able to heal sometimes" based on whether or not the malygris-heal-max is at least 1.
+		assert "Malygris should be able to heal sometimes" based on whether or not the malygris-heal-max is at least 1;
+	[no shimmer weapons]
+	[We place all of the player's possible starting kit items in the dungeon, tempting the starting kit rules to make shimmer-copies. But it must resist the temptation!]
+	Repeat with item running through things enclosed by the player:
+		assert "[The item] should not be shimmering" based on whether or not the item is not shimmering;
+	
 				
 Section - Bloodlust - issue 279
 
