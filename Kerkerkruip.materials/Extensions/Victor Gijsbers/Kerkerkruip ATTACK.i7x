@@ -1028,6 +1028,7 @@ To start is a verb.
 To continue is a verb.
 To relax is a verb.
 To remain is a verb.
+To counterattack is a verb.
 
 Volume - Inform ATTACK Main System
 

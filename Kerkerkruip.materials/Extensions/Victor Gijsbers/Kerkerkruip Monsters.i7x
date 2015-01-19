@@ -1451,16 +1451,20 @@ Check lashing:
 		take no time;
 		say "You can only lash as a reaction to an attack." instead.
 
-Carry out lashing:
-	now lash-cooldown is 10 - final spirit of the player / 5;
+Carry out an actor lashing:
+	if the actor is the player:
+		now lash-cooldown is 10 - final spirit of the player / 5;
 	choose a blank row in the Table of Delayed Actions;
-	let n be 10 - final spirit of the player / 4;
+	let n be 10 - final spirit of the actor / 4;
 	let m be a random number between n and 12;
 	now the Action Speed entry is m;
 	now the Action to take entry is the action of the actor hitting the main actor.
 
-Report lashing:
-	say "You will attempt to strike swiftly, before you are hit.".
+Report an actor lashing:
+	if the actor is the player:
+		say "You will attempt to strike swiftly, before you are hit.";
+	otherwise:
+		say "[The actor] [counterattack]."
 
 
 Lash-cooldown is a number that varies. Lash-cooldown is 0.
@@ -5155,6 +5159,7 @@ The ID of Automatos is 42.
 Automatos is huge.
 Automatos is not talker.
 Automatos is not thrower.
+Automatos is not sleeper.
 Material of Automatos is iron.
 
 The health of Automatos is 45.
@@ -5200,10 +5205,14 @@ The select a weapon rule is listed in the Automatos AI rules.
 Automatos AI list is a list of numbers that varies. Automatos AI list is {0, 0, 1, 1, 2, 3}.
 
 A dungeon interest rule (this is the set up Automatos AI list rule):
-	let n be a random number between 0 and 3;
-	add n to Automatos AI list;
-	let p be a random number between 0 and 3;
-	add p to Automatos AI list;
+	if a random chance of 4 in 5 succeeds:
+		let n be a random number between 0 and 3;
+		add n to Automatos AI list;
+	if a random chance of 3 in 5 succeeds:
+		let p be a random number between 0 and 3;
+		if a random chance of difficulty in 5 succeeds:
+			now p is 0;
+		add p to Automatos AI list;
 	sort Automatos AI list in random order.
 
 The Automatos target is a person that varies.
@@ -5216,13 +5225,26 @@ Last Automatos AI rule (this is the make Automatos act rule):
 	let n be entry 1 of Automatos AI list;
 	rotate Automatos AI list backwards;
 	if n is 0:
-		try Automatos attacking the chosen target;  [TO DO: make random who gets to hit first]
+		if Automatos is at-React:
+			try Automatos lashing;
+		otherwise:
+			try Automatos attacking the chosen target;
 	if n is 1:
-		try Automatos concentrating;  [TO DO: what happens when already at the max?]
+		try Automatos concentrating;
 	if n is 2:
-		try Automatos dodging; [TO DO: make sure that it doesn't work when not reacting]
+		if Automatos is at-React:
+			try Automatos dodging;
+		otherwise:
+			say "Automatos suddenly jumps aside, dodging a non-existent attack.";
 	if n is 3:
-		try Automatos blocking [TO DO: make sure that it doesn't work when not reacting; give him a shield].
+		if Automatos is at-React:
+			try Automatos blocking;
+		otherwise:
+			say "Even though nobody is attacking him, Automatos raises one of his armoured fists up like a shield.";
+
+Automatos carries Doomhammer.
+
+
 
 
 

@@ -3864,6 +3864,13 @@ An add specific damage rule (this is the Malleus blood damage bonus rule):
 			if the bonus is greater than 0:
 				add bonus points of physical damage with reason "Malleus Maleficarum blood bonus".
 
+Section - Doomhammer (monster)
+
+The doomhammer is a huge hammer. The doomhammer is iron. The description of the doomhammer is "This [if the doomhammer is huge]fantastically huge [end if]hammer has all the subtlety of a stampede of wild mammoths, and is just as deadly."
+
+The damage die of the doomhammer is 8.
+The weapon damage bonus of the doomhammer is 3.
+
 
 Chapter - Crossbows
 
