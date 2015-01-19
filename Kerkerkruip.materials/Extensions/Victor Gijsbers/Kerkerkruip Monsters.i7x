@@ -4576,7 +4576,7 @@ Carry out calling:
 
 Chapter - Level 4 - Israfel
 
-Israfel is a neuter monster. "The fires of heaven envelop the terrible, androgynous angel known to mortals as Israfel."
+Israfel is a neuter proper-named monster. "The fires of heaven envelop the terrible, androgynous angel known to mortals as Israfel."
 Understand "terrible" and "androgynous" and "angel" and "fires" and "heaven" and "fires of heaven" as Israfel.
 The description of Israfel is "Every angel is terror; and to see such beauty and nobleness is to know that one's own existence means nothing.".
 
@@ -4737,7 +4737,7 @@ Section - Reviving Israfel
 
 Section - Isra
 
-Isra is a male monster. "Isra contemplates the nature of god here."
+Isra is a male proper-named monster. "Isra contemplates the nature of god here."
 The description of Isra is "His wise face burns like the sun, but he seems more interested in contemplating the nature of god than in physical combat.".
 
 The soul description of Isra is "frozen lightning".
@@ -4833,7 +4833,7 @@ Report Isra waiting:
 
 Section - Fell
 
-Fell is a female monster. "Fell radiates death here."
+Fell is a female proper-named monster. "Fell radiates death here."
 Understand "claws" and "fangs" and "moonlight" as Fell.
 The description of Fell is "All claws and fangs that glimmer like silver in moonlight. She is here to bring death, and yet you are drawn to her beauty.".
 
@@ -5140,6 +5140,89 @@ Carry out reforming:
 	otherwise:
 		say "You sacrifice 5 spirit and regain [n] health.".
 
+
+
+Chapter - Level 4 - Automatos
+
+Automatos is a neuter proper-named monster. "A mass of chains and steel, wielding a terrible hammer, moves rigidly around the room."
+Understand "mass" and "chains" and "steel" as Automatos.
+The description of Automatos is "Many claim that Automatos was created by Nomos himself to serve as guardian for his prophet. Others -- those less favourable disposed towards the god -- assert that priests of Nomos made it in order to terrorise the population, but that their creation went wild and killed all of them. Everyone, however, agrees that Automatos disappeared from the world centuries ago. That's just your luck, to find it here, lurking in the smelly dungeons of Kerkerkruip.".
+
+The soul description of Automatos is "gears moving back and forth with machinelike precision".
+
+The level of Automatos is 4.
+The ID of Automatos is 42.
+Automatos is huge.
+Automatos is not talker.
+Automatos is not thrower.
+Material of Automatos is iron.
+
+The health of Automatos is 45.
+The melee of Automatos is 6.
+The defence of Automatos is 13.
+
+The body score of Automatos is 12.
+The mind score of Automatos is 12.
+The spirit score of Automatos is 5. 
+
+For natural weapon setup of Automatos (this is the Automatos fists rule):
+	let X be the natural weapon described;
+	now damage die of X is 10;
+	now dodge bonus of X is 1;
+	now parry-against bonus of X is -1;
+	now parry-with bonus of X is -1;
+	now printed name of X is "heavy iron fists";
+	now material of X is iron.
+
+[Section - Automatos images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of Automatos is Figure of map_monster_Automatos.
+The legend-label of Automatos is Figure of map_legend_Automatos.]
+
+Section - AI for Automatos
+
+Automatos AI rules is a person based rulebook.
+The AI rules of Automatos is the Automatos AI rules.
+
+The do nothing when all enemies hidden rule is listed in the Automatos AI rules.
+The reset AI variables rule is listed in the Automatos AI rules.
+The reactors target the main actor rule is listed in the Automatos AI rules.
+The select a target rule is listed in the Automatos AI rules.
+The compel an action rule is listed in the Automatos AI rules. [TO DO: check whether this makes sense.]
+The insane people attack themselves rule is listed in the Automatos AI rules.
+The select a weapon rule is listed in the Automatos AI rules.
+
+[0 = attack
+1 = concentrate
+2 = dodge
+3 = block]
+
+Automatos AI list is a list of numbers that varies. Automatos AI list is {0, 0, 1, 1, 2, 3}.
+
+A dungeon interest rule (this is the set up Automatos AI list rule):
+	let n be a random number between 0 and 3;
+	add n to Automatos AI list;
+	let p be a random number between 0 and 3;
+	add p to Automatos AI list;
+	sort Automatos AI list in random order.
+
+The Automatos target is a person that varies.
+
+An AI target selection rule for the Automatos target (this is the Automatos always targets the same person rule):
+	if the running AI is Automatos:
+		increase Weight by 100.
+
+Last Automatos AI rule (this is the make Automatos act rule):
+	let n be entry 1 of Automatos AI list;
+	rotate Automatos AI list backwards;
+	if n is 0:
+		try Automatos attacking the chosen target;  [TO DO: make random who gets to hit first]
+	if n is 1:
+		try Automatos concentrating;  [TO DO: what happens when already at the max?]
+	if n is 2:
+		try Automatos dodging; [TO DO: make sure that it doesn't work when not reacting]
+	if n is 3:
+		try Automatos blocking [TO DO: make sure that it doesn't work when not reacting; give him a shield].
 
 
 
