@@ -1655,6 +1655,8 @@ Carry out throwing something to:
 			change the reverse exit of X to nothing;
 			if location is source-room or location is target-room:
 				say "That grenade seems to have hit the walls of the passage [second noun] with a little too much force. With a huge crash, the [if second noun is up or second noun is down]staircase[otherwise]corridor[end if] [bold type]collapses[roman type]!";
+			otherwise:
+				say "You hear a huge crash somewhere in the dungeon, like a [bold type][if second noun is up or second noun is down]staircase[otherwise]corridor[end if] collapsing[roman type].";
 			now X does not collapse location;
 			now location does not collapse X.
 	
