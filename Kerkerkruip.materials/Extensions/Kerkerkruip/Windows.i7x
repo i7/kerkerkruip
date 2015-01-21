@@ -1,6 +1,7 @@
-Kerkerkruip Windows by Erik Temple begins here.
+Windows by Kerkerkruip begins here.
 
 Use authorial modesty.
+
 
 
 Chapter - Parser error fix
@@ -13,153 +14,222 @@ After printing a parser error when the latest parser error is not the noun did n
 
 Chapter - UI Colors
 
-Table of Common Color Values (continued)
-glulx color value	assigned number
-g-window-color	15658734[#EEEEEE]
-g-header-color	14540253[#DDDDDD]
-g-status-color	12369084[#BCBCBC]
-g-humanist-crimson	10231552[#9C1F00]
+White is always "#FFFFFF".
+The window color is always "#EEEEEE".
+The header color is always "#DDDDDD".
+The status color is always "#BCBCBC".
+Humanist crimson is always "#9C1F00".
+
 
 
 Chapter - Window definitions
 
-
 Section - Windows with content
 
-The stats-window is a text-buffer g-window spawned by the main-window. The back-colour is g-window-color. The measurement is 25. The position is g-placeright.
+The stats window is a text buffer g-window spawned by the main window.
+The measurement is 25.
+The position is g-placeright.
+[The back-colour is window color.]
 
-The stat-header-window is a text-buffer g-window spawned by the stats-window. The measurement is 1. The position is g-placeabove. The scale method is g-fixed-size. The back-colour is g-header-color.
+The stats window header is a text buffer g-window spawned by the stats window.
+The measurement is 1.
+The position is g-placeabove.
+The scale method is g-fixed-size.
+[The back-colour is header color.]
 
-The powers-window is a text-buffer g-window spawned by the stats-window. The back-colour is g-window-color. The measurement is 13. The scale method is g-fixed-size. The position is g-placebelow.
+The powers window is a text buffer g-window spawned by the stats window.
+The measurement is 13.
+The position is g-placebelow.
+The scale method is g-fixed-size.
+[The back-colour is window color.]
 
-The powers-header-window is a text-buffer g-window spawned by the powers-window. The measurement is 1. The position is g-placeabove. The scale method is g-fixed-size.  The back-colour is g-header-color.
+The powers window header is a text buffer g-window spawned by the powers window.
+The measurement is 1.
+The position is g-placeabove.
+The scale method is g-fixed-size.
+[The back-colour is header color.]
 
-The inventory-window is a text-buffer g-window spawned by the main-window. The back-colour is g-window-color. The measurement is 30. The position is g-placeleft.
+[ We need the dash because of bug 0001507 ]
+The inventory-window is a text buffer g-window spawned by the main window.
+The measurement is 30.
+The position is g-placeleft.
+[The back-colour is window color.]
 
-The inventory-header-window is a text-buffer g-window spawned by the inventory-window. The measurement is 1. The position is g-placeabove. The scale method is g-fixed-size. The back-colour is g-header-color.
+The inventory-window header is a text buffer g-window spawned by the inventory-window.
+The measurement is 1.
+The position is g-placeabove.
+The scale method is g-fixed-size.
+[The back-colour is header color.]
+
 
 
 Section - Border windows
 
 [ These windows will only be visible in interpreters that support graphics, and are not essential to the interface. ]
 
+A border is a kind of graphics g-window.
+The scale method of a border is usually g-fixed-size.
+[The back-colour of a border is usually white.]
+
 To place border (win - a graphics g-window):
-	[do nothing.]
 	if glulx graphics is supported:
 		open up win.
 
 [ The status window ]
 
-The border-1-window is a graphics g-window spawned by the main-window. The measurement is 6. The position is g-placeright. The scale method is g-fixed-size.  The back-colour is g-white.
-The border-3-window is a graphics g-window spawned by the stats-window. The measurement is 2. The position is g-placeright. The scale method is g-fixed-size.  The back-colour is g-white.
-The border-5-window is a graphics g-window spawned by the stats-window. The measurement is 1. The position is g-placeabove. The scale method is g-fixed-size.  The back-colour is g-humanist-crimson.
+The border-1-window is a border spawned by the main window.
+The measurement is 6.
+The position is g-placeright.
 
-After constructing the stats-window:
+The border-3-window is a border spawned by the stats window.
+The measurement is 2.
+The position is g-placeright.
+
+The border-5-window is a border spawned by the stats window.
+The measurement is 1.
+The position is g-placeabove.
+[The back-colour is humanist crimson.]
+
+After constructing the stats window:
 	place border border-3-window;
 	place border border-1-window;
 	[apply justification of center-justified to bold-style;][doesn't work in Gargoyle]
-	open up the stat-header-window;
+	open up the stats window header;
 	place border border-5-window;
 
-After window-shutting the stats-window:
+After deconstructing the stats window:
 	shut down border-1-window;
 
 [ The powers window ]
 
-The border-2-window is a graphics g-window spawned by the stats-window. The measurement is 6. The position is g-placebelow. The scale method is g-fixed-size.  The back-colour is g-white.
-The border-4-window is a graphics g-window spawned by the powers-window. The measurement is 2. The position is g-placebelow. The scale method is g-fixed-size.  The back-colour is g-white.
-The border-6-window is a graphics g-window spawned by the powers-window. The measurement is 1. The position is g-placeabove. The scale method is g-fixed-size.  The back-colour is g-humanist-crimson.
+The border-2-window is a border spawned by the stats window.
+The measurement is 6.
+The position is g-placebelow.
 
-After constructing the powers-window:
+The border-4-window is a border spawned by the powers window.
+The measurement is 2.
+The position is g-placebelow.
+
+The border-6-window is a border spawned by the powers window.
+The measurement is 1.
+The position is g-placeabove.
+[The back-colour is humanist crimson.]
+
+After constructing the powers window:
 	place border border-2-window;
 	place border border-4-window;
 	[apply justification of center-justified to bold-style;][doesn't work in Gargoyle]
-	open up the powers-header-window;
+	open up the powers window header;
 	place border border-6-window;
 
-After window-shutting the powers-window:
+After deconstructing the powers window:
 	shut down border-2-window;
 
 [ The status window ]
 
-The border-7-window is a graphics g-window spawned by the main-window. The measurement is 1. The position is g-placeabove. The scale method is g-fixed-size.  The back-colour is g-humanist-crimson.
-The border-12-window is a graphics g-window spawned by the main-window. The measurement is 7. The position is g-placeabove. The scale method is g-fixed-size.  The back-colour is g-header-color.
-The border-13-window is a graphics g-window spawned by the main-window. The measurement is 7. The position is g-placeabove. The scale method is g-fixed-size.  The back-colour is g-header-color.
+The border-7-window is a border spawned by the main window.
+The measurement is 1.
+The position is g-placeabove.
+[The back-colour is humanist crimson.]
 
-Before constructing the status-window:
+The border-12-window is a border spawned by the main window.
+The measurement is 7.
+The position is g-placeabove.
+[The back-colour is header color.]
+
+The border-13-window is a border spawned by the main window.
+The measurement is 7.
+The position is g-placeabove.
+[The back-colour is header color.]
+
+Before constructing the status window:
 	if the current IO implementation is GarGlk:
-		now the status-window is g-unrequired;
+		now the status window is g-unrequired;
 		place border border-12-window;
-		now the status-window is g-required;
+		now the status window is g-required;
 
-After constructing the status-window:
+After constructing the status window:
 	if the current IO implementation is GarGlk:
 		place border border-13-window;
 	place border border-7-window;
 
-After window-shutting the status-window:
+After deconstructing the status window:
 	shut down border-7-window;
 	shut down border-12-window;
 	shut down border-13-window;
 
 [ The inventory window ]
 
-The border-8-window is a graphics g-window spawned by the inventory-window. The measurement is 1. The position is g-placeabove. The scale method is g-fixed-size.  The back-colour is g-humanist-crimson.
-The border-9-window is a graphics g-window spawned by the inventory-window. The measurement is 2. The position is g-placeleft. The scale method is g-fixed-size.  The back-colour is g-white.
-The border-10-window is a graphics g-window spawned by the inventory-window. The measurement is 6. The position is g-placeright. The scale method is g-fixed-size.  The back-colour is g-white.
-The border-11-window is a graphics g-window spawned by the inventory-window. The measurement is 2. The position is g-placebelow. The scale method is g-fixed-size.  The back-colour is g-white.
+The border-8-window is a border spawned by the inventory-window.
+The measurement is 1.
+The position is g-placeabove.
+[The back-colour is humanist crimson.]
+
+The border-9-window is a border spawned by the inventory-window.
+The measurement is 2.
+The position is g-placeleft.
+
+The border-10-window is a border spawned by the inventory-window.
+The measurement is 6.
+The position is g-placeright.
+
+The border-11-window is a border spawned by the inventory-window.
+The measurement is 2.
+The position is g-placebelow.
 
 After constructing the inventory-window:
 	place border border-9-window;
 	place border border-10-window;
 	place border border-11-window;
-	open up the inventory-header-window;
+	open up the inventory-window header;
 	place border border-8-window;
 
 
 
 Section - Window styling
 
-The back-colour of the main-window is g-white. [ For CocoaGlk ]
+[ TODO ]
+[The back-colour of the main-window is g-white. [ For CocoaGlk ]
 
-The back-colour of the status-window is g-header-color. 
+The back-colour of the status-window is g-header-color. ]
 
-To set up styles for side windows:
+[ TODO: What is this for?]
+[To set up styles for side windows:
 	apply assigned number of g-humanist-crimson color to special-style-1;
-	apply bold-weight boldness to special-style-1.
+	apply bold-weight boldness to special-style-1.]
 
 
 
 Section - Setting standard text colors
 
 [ Note we don't set user style 2 so that it can be used to detect whether or not the Gargoyle config file has been applied - see Start and Finish ]
+[ TODO: Check if we can simplify this to a table style now that we're using the new Glulx Text Effects. Or maybe we can replace GTE_SetStylehint()? ]
 
-To set basic text color to (col - a glulx color value):
-	(- SetBasicTextColor({col}); -)
+To set basic text color to black:
+	(- SetBasicTextColorToBlack(); -).
 
 Include (-
-
-	[ SetBasicTextColor col i;
-		if (col == (+g-placenullcol+)) rfalse;
-		col = ColVal(col);
-		for (i = 0: i < (style_NUMSTYLES - 1) : i++)
- 	 		glk_stylehint_set( wintype_AllTypes, i, stylehint_TextColor, 0 );
-	];
-
--)
+[ SetBasicTextColorToBlack i;
+	for (i = 0: i < (style_NUMSTYLES - 1) : i++)
+		glk_stylehint_set( wintype_AllTypes, i, stylehint_TextColor, 0 );
+];
+-).
 
 First before starting the virtual machine:
-	set basic text color to g-black.
+	set basic text color to black.
 
 [ But lets make input be crimson ]
 Table of User Styles (continued)
-style name	glulx color
-input-style	g-humanist-crimson
+style name	color
+input-style	humanist crimson
+
 
 
 Chapter - Window-drawing rules
-[There are two primary places where we need to redraw the windows. First, before reading a command should handle all in-game situations. But we also need the stats to reflect the last turn of the game when we've won, since this will most often be a combat turn that we have lost. For that, we hook into the activity for printing the player's "obituary".]
 
+[ There are two primary places where we need to redraw the windows. First, before reading a command should handle all in-game situations. But we also need the stats to reflect the last turn of the game when we've won, since this will most often be a combat turn that we have lost. For that, we hook into the activity for printing the player's "obituary". ]
+
+[TODO:
 To redraw subsidiary content windows:
 	if window panels are enabled:
 		follow the window-drawing rules for the stats-window;
@@ -170,11 +240,12 @@ Before reading a command (this is the refresh side windows rule):
 	redraw subsidiary content windows.
 	
 Before printing the player's obituary (this is the final refresh side windows rule):
-	redraw subsidiary content windows.
+	redraw subsidiary content windows.]
 
 
 Section - Statistics window	
 
+[TODO:
 Window-drawing rule for the stats-window when the stats-window is g-present (this is the construct stats window rule):
 	move focus to stats-window, clearing the window;
 	now long status is false;
@@ -188,7 +259,7 @@ Window-drawing rule for the stats-window when the stats-window is g-present (thi
 	follow the show basic stats rule;[show statistics]
 	say run paragraph on;
 	now long status is true;
-	return to main screen.
+	return to main screen.]
 
 
 Attribute printed is a truth state variable. Attribute printed is false.
@@ -205,15 +276,17 @@ This is the unallocated faculty short status rule:
 		if unallocated faculty is greater than 0:
 			say "[italic type]Increase one of your faculties by typing 'body', 'mind', or 'spirit' ([unallocated faculty] point[if unallocated faculty is greater than 1]s[end if]).[roman type][line break][run paragraph on]".
 	
+[TODO:
 Window-drawing rule for the stat-header-window when the stat-header-window is g-present (this is the construct stat header window rule):
 	move focus to stat-header-window, clearing the window;
 	say "[first custom style]Statistics[roman type]";
 	say run paragraph on;
-	return to main screen.
+	return to main screen.]
 
 
 Section - Statistics window hyperlinks
 
+[ TODO:
 Hyperlink processing rule when the current hyperlink window is the stats-window and the current hyperlink ID is 1:
 	move focus to stats-window, clearing the window;
 	say "[link 2]< back[end link][line break][line break][run paragraph on]";
@@ -227,13 +300,14 @@ Hyperlink processing rule when the current hyperlink window is the stats-window 
 
 Hyperlink processing rule when the current hyperlink window is the stats-window and the current hyperlink ID is 2[i.e., we've hit the back button while reading the full status information.]:
 	follow the window-drawing rules for the stats-window;
-	rule succeeds.	
+	rule succeeds.	]
 
 
 Section - Powers window
 
 Power-tip-text is a text variable.
 	
+[TODO:
 Window-drawing rule for the powers-window when the powers-window is g-present (this is the construct power window rule):
 	move focus to powers-window, clearing the window;
 	let pow be the number of granted powers;
@@ -260,7 +334,7 @@ Window-drawing rule for the powers-header-window when the powers-header-window i
 	move focus to powers-header-window, clearing the window;
 	say "[first custom style]Powers[roman type]";
 	say run paragraph on;
-	return to main screen.
+	return to main screen.]
 
 
 To decide what number is (O - an object) typecast to a number:
@@ -272,6 +346,7 @@ To decide what object is (N - a number) typecast to an object:
 
 Section - Powers window hyperlinks
 
+[ TODO:
 Hyperlink processing rule when the current hyperlink window is the powers-window:
 	let ability be the current hyperlink ID typecast to an object;
 	if ability is a power:
@@ -284,11 +359,12 @@ Hyperlink processing rule when the current hyperlink window is the powers-window
 
 Hyperlink processing rule when the current hyperlink window is the powers-window and the current hyperlink ID is 2[i.e., we've hit the back button while reading the description of some power.]:
 	follow the window-drawing rules for the powers-window;
-	rule succeeds.
+	rule succeeds.]
 
 
 Section - Inventory window
 
+[TODO:
 Window-drawing rule for the inventory-window when the inventory-window is g-present (this is the construct inventory window rule):
 	move focus to inventory-window, clearing the window;
 	follow the full inventory rule; 
@@ -299,7 +375,7 @@ Window-drawing rule for the inventory-header-window when the inventory-header-wi
 	move focus to inventory-header-window, clearing the window;
 	say "[first custom style]Inventory[roman type]";
 	say run paragraph on;
-	return to main screen.
+	return to main screen.]
 
 
 Chapter - Opening and closing windows
@@ -327,29 +403,31 @@ Check disabling the information panels:
 
 Carry out enabling the information panels:
 	enable the window panels flag;
-	shut down the status-window;
+	shut down the status window;
 	open side windows;
-	open up the status-window;
+	open up the status window;
 	say "The information panels have been enabled. Type PANELS to disable them again." instead;
 
 Carry out disabling the information panels:
 	disable the window panels flag;
-	shut down the status-window;
+	shut down the status window;
 	close side windows;
-	open up the status-window;
+	open up the status window;
 	say "The information panels have been disabled. Type PANELS to re-enable them." instead;
 	
 To open side windows:
 	if window panels are disabled:
-		rule fails;	
-	set the Gargoyle background color to the color g-white;
+		rule fails;
+	[ TODO: what is this next line for? ]
+	[set the Gargoyle background color to the color g-white;]
+	[ TODO: what is this next line for? ]
 	[set up styles for side windows;]
-	open up the stats-window;
-	open up the powers-window;
+	open up the stats window;
+	open up the powers window;
 	open up the inventory-window;
 	
 To close side windows:
-	shut down the stats-window;
+	shut down the stats window;
 	shut down the inventory-window;
 	
 
@@ -357,19 +435,20 @@ Section - Events
 
 Last when play begins (this is the check info panel capacity rule):
 	if screen reader mode is enabled:
-		open up the status-window;
+		open up the status window;
 		make no decision;
 	if window panels are disabled:
 		say "[bracket]Information panels are disabled. Type PANELS to enable them.[close bracket][line break][run paragraph on]";
-	otherwise:
-		if width of the main-window is less than 102 or height of the main-window is less than 30:
+	[ TODO add width and height phrases ]
+	[otherwise:
+		if width of the main window is less than 102 or height of the main window is less than 30:
 			say "[bracket]Your game window is too small for you to use the information panels comfortably. Maximize your window, then type PANELS to enable them.[close bracket][line break][run paragraph on]";
-			disable window panels flag;
+			disable window panels flag;]
 	follow the open up game windows rule.
 
 This is the open up game windows rule:
 	open side windows;
-	open up the status-window.
+	open up the status window.
 
 
 
@@ -379,21 +458,22 @@ Section - Menus & windows
 
 First before displaying (this is the fix our windows rule before displaying rule):
 	close side windows;
-	open up the status-window;
+	open up the status window;
 
 Last after displaying:
-	shut down the status-window;
+	shut down the status window;
 	if in-game menu-checking:
 		open side windows;
-		open up the status-window;
+		open up the status window;
 
 
 
 [We also need to reset the windows when a game is restored.]
 After restoring from a saved game:
-	shut down the status-window;
+	shut down the status window;
 	close side windows;
 	follow the check info panel capacity rule.
 
 
-Kerkerkruip Windows ends here.
+
+Windows ends here.

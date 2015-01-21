@@ -44,12 +44,12 @@ Section - Graphics and Windows
 
 [ Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. It is not necessary to comment out Flexible Windows when Glimmr is commented in. ]
 
-[Include version 14/140419 of Flexible Windows by Jon Ingold.]
+Include version 1/150121 of Flexible Windows by Dannii Willis.
 
 [Include Kerkerkruip Glimmr Additions by Erik Temple.]
 
 Include version 1/140416 of Menus by Dannii Willis.
-[Include Kerkerkruip Windows by Erik Temple.]
+Include Windows by Kerkerkruip.
 
 [Include Extended Debugging by Erik Temple.]
 

@@ -129,6 +129,7 @@ Before looking or taking inventory (this is the fix curse-idenfication before sh
 		now item is not curse-identified.
 
 
+
 Section - Cursed clothing
 
 Check taking off something:
