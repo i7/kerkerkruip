@@ -4613,20 +4613,21 @@ Understand "not-shimmering" and "not shimmering" and "unshimmering" as a thing w
 
 A thing has an object called the shimmer-twin. The shimmer-twin of a thing is usually nothing.
 
-[Last when play begins (this is the create shimmering items rule):
-	repeat with guy running through people:
-		unless guy is the player:
-			repeat with item running through things held by guy:
-				if item is a weapon and item is not a natural weapon:
-					if item is readied:
-						let new-weapon be a new object cloned from item;
-						now new-weapon is shimmering;
-						now shimmer-owner of new-weapon is guy;
-				if item is clothing:
-					if guy wears item:
-						let new-cloth be a new object cloned from item;
-						now new-cloth is shimmering;
-						now shimmer-owner of new-cloth is guy.]
+A thing has an object called the original owner.
+
+The verb to be owned by means the original owner property.
+
+[This rule is mainly used for rogues who always start out with the same equipment]
+First starting kit rule for a person (called guy) (this is the record ownership rule):
+	repeat with item running through things held by guy:
+		now the original owner of item is guy.
+			
+Last starting kit rule for a person (called guy) (this is the restore ownership rule):
+	[This rule is only takes effect if other starting kit rules haven't given the guy any items to ready or wear]
+	If guy encloses a readied weapon that is not a natural weapon, make no decision;
+	If guy wears something, make no decision;
+	Repeat with item running through things owned by guy:
+		equip guy with item;
 						
 to flicker is a verb.
 

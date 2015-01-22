@@ -546,9 +546,18 @@ For reading a command when done testing is false (this is the finish current tes
 	write file of test results from Table of Test Results;
 	start the next test;
 	
-[TODO: for asking the final question when done testing is false]
-	
+Before printing the player's obituary when done testing is false (this is the abort the current test set if game over rule):
+	record failure report "the player died";
+	transcribe and stop capturing because "game over at";
+	start the next test.
+		
 Chapter - Randomized Events
+
+[TODO: put all randomized outcomes in a table and save it to a file. Then we can restart the game repeatedly and use randomized outcomes to generate statistics about dungeon generation]
+
+[TODO: give randomized outcomes a target frequency. Allow them to be tested statistically or merely stop if they succeed (or fail) once]
+
+[TODO: throw out relations with randomized outcomes and let them stand on their own. Test steps (and dungeon generation) will always repeat when randomized outcomes are "pending," which happens whenever they are invoked but not resolved. Randomized outcomes have count, minimum occurrence and maximum occurrence and maybe a flag for when they are resolved. Different phrases to invoke them will set these values whether we want to resolve if it ever happens, if it ever doesn't happen, or happens within a specified frequency range]
 
 A randomized outcome is a kind of value. boring lack of results is a randomized outcome.
 

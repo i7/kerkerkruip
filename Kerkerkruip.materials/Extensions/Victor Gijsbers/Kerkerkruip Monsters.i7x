@@ -142,13 +142,13 @@ Natural weapon setup of something is an activity on objects.
 
 The natural weapon described is an object that varies.
 
-Before natural weapon setup of a person (called guy):
-	Now the natural weapon described is a random natural weapon enclosed by guy;
+Before natural weapon setup of a person (called guy) (this is the set the natural weapon described rule):
+	Now the natural weapon described is a random natural weapon part of guy;
 	now the material of the natural weapon described is the material of the guy;
 
 When play begins (this is the set up natural weapons rule):
 	repeat with guy running through people:
-		carry out the natural weapon setup activity with guy.
+   		carry out the natural weapon setup activity with guy.
 			
 The starting kit rules are an object-based rulebook.
 
@@ -167,13 +167,18 @@ To equip (guy - a person) from (box - a container):
 		if item is a scroll and guy is the player:
 			identify item.
 		
+To equip (guy - a person) with (item - a thing):
+	now item is the version of item available to guy;
+	move item to guy;
+	
 To equip (guy - a person) with (item - a weapon):
 	repeat with impediment running through readied weapons enclosed by guy:
 		now impediment is not readied;
 		if impediment is not a natural weapon:
 			remove impediment from play;
-	now item is the version of item available to guy;
-	move item to guy;
+	if item is not a natural weapon:
+		now item is the version of item available to guy;
+		move item to guy;
 	now item is readied;
 	
 To replace (O - a description of objects) on (guy - a person) with (item - clothing):
@@ -1306,7 +1311,7 @@ First carry out an actor attacking the chain golem (this is the attack a spinnin
 				unless n is 0:
 					say " One of the chains catches [the actor] with a loud smack, dealing ";
 					deal n points of physical damage;
-					let X be a random natural weapon enclosed by the chain golem;
+					let X be a random natural weapon part of the chain golem;
 					have X inflict damage on the actor;
 					if the actor is alive:
 						if the concentration of the actor is not zero:
@@ -1520,7 +1525,7 @@ The body score of the jumping bomb is 8.
 The spirit score of the jumping bomb is 3. 
 The mind score of the jumping bomb is 3.
 
-When play begins:
+When play begins (this is the make jumping bomb easier for novices rule):
 	if difficulty is 0:
 		decrease melee of the jumping bomb by 1. [Too hard for new players.]
 
@@ -1768,7 +1773,7 @@ Every turn when the Reaper is in the location and the Reaper is not follower (th
 	
 Follower percentile chance of the Reaper is 5.
 
-When play begins:
+When play begins (This is the stop the reaper from following novices rule):
 	if difficulty is 0:
 		now follower percentile chance of the Reaper is 0. [Too confusing for new players.]
 
@@ -1937,14 +1942,14 @@ The mind score of the demon of rage is 6.
 The spirit score of the demon of rage is 6. 
 
 For natural weapon setup of the demon of rage (this is the demon of rage's tendrils rule):
-	let X be a random natural weapon part of the demon of rage;
+	let X be the natural weapon described;
 	now damage die of X is 6;	
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
 	now printed name of X is "demon's fiery tendrils";
 	now X is plural-named;
-	now material of X is fire.
+	now material of X is fire;
 
 
 Section - Demon of Rage images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
@@ -2137,7 +2142,7 @@ The mind score of the hound is 7.
 The spirit score of the hound is 5.
 
 For natural weapon setup of the hound (this is the hound's teeth rule):
-	let X be a random natural weapon part of the hound;
+	let X be the natural weapon described;
 	now damage die of X is 6; [Its bite is worse than its bark!]
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is 0;

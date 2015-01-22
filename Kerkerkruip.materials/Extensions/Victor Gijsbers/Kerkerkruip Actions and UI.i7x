@@ -820,9 +820,8 @@ To say player natural attack:
 	let item be a random natural weapon part of the player;
 	say "You currently attack using [item]: 1d[damage die of item] + [weapon damage bonus of the item] damage; [if weapon attack bonus of the item is less than 0]-[otherwise]+[end if][absolute value of weapon attack bonus of the item] attack modifier[if the item is ranged]; ranged[end if][natural parry and dodge info of the item][if the item is silver]; good against undead and demons[end if][special weapon info of the item][roman type]".
 
-When play begins:
-	let X be a random natural weapon part of yourself;
-	now printed name of X is "your fists".
+For natural weapon setup for the player:
+	now printed name of the natural weapon described is "your fists".
 
 
 Chapter - Singing

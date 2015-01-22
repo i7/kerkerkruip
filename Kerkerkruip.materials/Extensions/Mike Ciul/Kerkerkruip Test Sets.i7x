@@ -628,7 +628,7 @@ A test step can be cower-counting.
 
 A cower-counting test step is usually repeatable.
 
-When play begins:
+When play begins (this is the set up cower counters rule):
 	repeat with E running through cower-counting test steps:
 		now the maxed out report of E is "[cower report]";
 		now the maximum repeats of E is 300;
@@ -2063,6 +2063,8 @@ Scenario when testing starting-kits-test:
 	
 malygris-heal-max is a number that varies.
 
+
+
 Generation test when testing starting-kits-test:
 	now the heal power of Malygris is 0;
 	follow the equip all encounterable creatures rule [usually done after approval];
@@ -2081,7 +2083,14 @@ Generation test when testing starting-kits-test:
 	[We place all of the player's possible starting kit items in the dungeon, tempting the starting kit rules to make shimmer-copies. But it must resist the temptation!]
 	Repeat with item running through things enclosed by the player:
 		assert "[The item] should not be shimmering" based on whether or not the item is not shimmering;
-	
+		if the item is the addict's amulet:
+			[TODO: test that the addict's amulet is chosen sometimes]
+			assert "the addict's amulet should still be cursed" based on whether or not the addict's amulet is cursed;
+		otherwise:
+			assert "[the item] should not be cursed" based on whether or not the item is not cursed;
+	Assert that the original owner of the sword of light is the angel of compassion with label "original owner of the sword of light";
+	Assert that the original owner of the claymore is fafhrd with label "original owner of the claymore";
+		[TODO: starting kit items should match the player's size?]
 				
 Section - Bloodlust - issue 279
 
