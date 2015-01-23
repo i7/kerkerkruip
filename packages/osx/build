@@ -1,0 +1,9 @@
+#!/bin/sh
+
+echo 'Building OS X package'
+mkdir -p Kerkerkruip.app/Contents/PlugIns
+cp -R Gargoyle.app/Contents/Frameworks/ Kerkerkruip.app/Contents/Frameworks/
+cp -R Gargoyle.app/Contents/Resources/ Kerkerkruip.app/Contents/Resources/
+cp Gargoyle.app/Contents/PlugIns/git Kerkerkruip.app/Contents/PlugIns/
+rm Kerkerkruip.app/Contents/Resources/*.icns
+cp "../cross-platform images/Kicon.icns" Kerkerkruip.app/Contents/Resources/
