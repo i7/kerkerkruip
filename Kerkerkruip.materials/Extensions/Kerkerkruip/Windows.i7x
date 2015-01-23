@@ -29,37 +29,37 @@ Section - Windows with content
 The stats window is a text buffer g-window spawned by the main window.
 The measurement is 25.
 The position is g-placeright.
-[The back-colour is window color.]
+The background color is window color.
 
 The stats window header is a text buffer g-window spawned by the stats window.
 The measurement is 1.
 The position is g-placeabove.
 The scale method is g-fixed-size.
-[The back-colour is header color.]
+The background color is header color.
 
 The powers window is a text buffer g-window spawned by the stats window.
 The measurement is 13.
 The position is g-placebelow.
 The scale method is g-fixed-size.
-[The back-colour is window color.]
+The background color is window color.
 
 The powers window header is a text buffer g-window spawned by the powers window.
 The measurement is 1.
 The position is g-placeabove.
 The scale method is g-fixed-size.
-[The back-colour is header color.]
+The background color is header color.
 
 [ We need the dash because of bug 0001507 ]
 The inventory-window is a text buffer g-window spawned by the main window.
 The measurement is 30.
 The position is g-placeleft.
-[The back-colour is window color.]
+The background color is window color.
 
 The inventory-window header is a text buffer g-window spawned by the inventory-window.
 The measurement is 1.
 The position is g-placeabove.
 The scale method is g-fixed-size.
-[The back-colour is header color.]
+The background color is header color.
 
 
 
@@ -69,7 +69,7 @@ Section - Border windows
 
 A border is a kind of graphics g-window.
 The scale method of a border is usually g-fixed-size.
-[The back-colour of a border is usually white.]
+The background color of a border is usually white.
 
 To place border (win - a graphics g-window):
 	if glulx graphics is supported:
@@ -88,7 +88,7 @@ The position is g-placeright.
 The border-5-window is a border spawned by the stats window.
 The measurement is 1.
 The position is g-placeabove.
-[The back-colour is humanist crimson.]
+The background color is humanist crimson.
 
 After constructing the stats window:
 	place border border-3-window;
@@ -113,7 +113,7 @@ The position is g-placebelow.
 The border-6-window is a border spawned by the powers window.
 The measurement is 1.
 The position is g-placeabove.
-[The back-colour is humanist crimson.]
+The background color is humanist crimson.
 
 After constructing the powers window:
 	place border border-2-window;
@@ -130,17 +130,17 @@ After deconstructing the powers window:
 The border-7-window is a border spawned by the main window.
 The measurement is 1.
 The position is g-placeabove.
-[The back-colour is humanist crimson.]
+The background color is humanist crimson.
 
 The border-12-window is a border spawned by the main window.
 The measurement is 7.
 The position is g-placeabove.
-[The back-colour is header color.]
+The background color is header color.
 
 The border-13-window is a border spawned by the main window.
 The measurement is 7.
 The position is g-placeabove.
-[The back-colour is header color.]
+The background color is header color.
 
 Before constructing the status window:
 	if the current IO implementation is GarGlk:
@@ -163,7 +163,7 @@ After deconstructing the status window:
 The border-8-window is a border spawned by the inventory-window.
 The measurement is 1.
 The position is g-placeabove.
-[The back-colour is humanist crimson.]
+The background color is humanist crimson.
 
 The border-9-window is a border spawned by the inventory-window.
 The measurement is 2.
@@ -188,15 +188,18 @@ After constructing the inventory-window:
 
 Section - Window styling
 
-[ TODO ]
-[The back-colour of the main-window is g-white. [ For CocoaGlk ]
-
-The back-colour of the status-window is g-header-color. ]
+The background color of the main window is white. [ For CocoaGlk ]
+The background color of the status window is header color.
 
 [ TODO: What is this for?]
 [To set up styles for side windows:
 	apply assigned number of g-humanist-crimson color to special-style-1;
 	apply bold-weight boldness to special-style-1.]
+
+Table of User Styles (continued)
+window	style name	color	reversed
+all-windows	input-style	humanist crimson	--
+all-grid-windows	all-styles	--	false
 
 
 
@@ -217,11 +220,6 @@ Include (-
 
 First before starting the virtual machine:
 	set basic text color to black.
-
-[ But lets make input be crimson ]
-Table of User Styles (continued)
-style name	color
-input-style	humanist crimson
 
 
 

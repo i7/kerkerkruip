@@ -2,15 +2,16 @@ Version 1/150121 of Flexible Windows (for Glulx only) by Dannii Willis begins he
 
 "Exposes the Glk windows system so authors can completely control the creation and use of windows"
 
-[ Flexible Windows was originally by Jon Ingold, with many contributions by Erik Temple. This version has been rewritten from scratch for 6L02. ]
+[ Flexible Windows was originally by Jon Ingold, with many contributions by Erik Temple. This version has been essentially rewritten from scratch for 6L38 by Dannii Willis. ]
 
 [ TODO:
-window background colours
 hyperlinks
 window drawing rules (rename?)
 width and height of windows
 gargoyle background colour
 model the quote window too?
+window scaling for minimum windows
+clearing windows
 ]
 
 [ Migration guide from version 14:
@@ -40,6 +41,7 @@ A g-window type is a kind of value.
 The g-window types are g-text-buffer, g-text-grid and g-graphics.
 The specification of a g-window type is "Glk windows are one of these three types."
 A g-window has a g-window type called type.
+Definition: a g-window is graphical rather than textual if the type of it is g-graphics.
 
 A graphics g-window is a kind of g-window.
 The type of a graphics g-window is g-graphics.
@@ -102,13 +104,11 @@ All-grid-windows is a g-window.
 Chapter - The built-in windows
 
 The main window is a text buffer g-window.
-[The rock of the main window is -100.]
 
-The status window is a text grid g-window.
+The status window is a text grid g-window spawned by the main window.
 The position of the status window is g-placeabove.
 The scale method of the status window is g-fixed-size.
 The measurement of the status window is 1.
-The main window spawns the status window.
 
 Use no status line translates as (- Constant USE_NO_STATUS_LINE 1; -).
 [Include (-
@@ -126,7 +126,9 @@ The main window rock variable translates into I6 as "GG_MAINWIN_ROCK".
 The status window rock is a number variable.
 The status window rock variable translates into I6 as "GG_STATUSWIN_ROCK".
 
-[To decide if g-window rocks are unset: 
+[The rock of the main window is -100.
+
+To decide if g-window rocks are unset: 
 	if the rock of the main window is -100:
 		yes;
 	no;]
@@ -179,6 +181,8 @@ Section - Constructing a window
 
 Constructing something is an activity on g-windows.
 
+[ TODO: window scaling? ]
+
 The construct a g-window rule is listed in the for constructing rules.
 The construct a g-window rule translates into I6 as "FW_ConstructGWindow".
 Include (-
@@ -219,7 +223,6 @@ First after constructing a g-window (called win) (this is the check if the windo
 		rule fails;
 	otherwise:
 		now win is g-present;
-		say "success! [printed name of win] ";
 
 
 
@@ -227,7 +230,7 @@ Section - Deconstructing windows - unindexed
 
 Deconstructing something is an activity on g-windows.
 
-For deconstructing a g-window (called win) (this is the basic deconstruct rule):
+For deconstructing a g-window (called win) (this is the basic deconstruction rule):
 	now win is g-unpresent;
 	call glk_window_close for win;
 
@@ -268,10 +271,10 @@ After constructing a g-window (called win) (this is the focus the main window ru
 
 After constructing a g-window (called win) (this is the update built-in windows rule):
 	if win is the main window:
-		now gg_mainwin is the ref number of main window;
+		now gg_mainwin is the ref number of win;
 	if win is the status window:
-		now gg_statuswin is the ref number of status window;
-		[ statuswin_cursize/statuswin_size? ]
+		now gg_statuswin is the ref number of win;
+		[ statuswin_cursize/statuswin_size? - make a rule for deconstructing too? ]
 
 
 
@@ -503,7 +506,7 @@ Before constructing a g-window (called win) (this is the set the window's styles
 		if there is a reversed entry:
 			set reversed of wintype W for the style name entry to the reversed entry;
 
-A first after constructing a g-window (called win) (this is the reset the generic styles rule):
+A first after constructing a g-window (called win) (this is the clear the window's styles rule):
 	let W be a number;
 	let resetting required be a truth state;
 	if the type of win is:
@@ -542,6 +545,28 @@ A first after constructing a g-window (called win) (this is the reset the generi
 	[ I'm not sure if this will be too much of a performance hit, but it's the simplest solution ]
 	if resetting required is true:
 		follow the set generic text styles rule;
+
+
+
+Chapter - Window background colors - unindexed
+
+A g-window has a text called background color.
+
+Before constructing a textual g-window (called win) (this is the set the background color of textual windows rule):
+	if the background color of win is not "":
+		set the background color of wintype 0 for all-styles to the background color of win;
+
+After constructing a textual g-window (called win) (this is the reset the background color of textual windows rule):
+	if the background color of win is not "":
+		clear the background color of wintype 0 for all-styles;
+
+After constructing a graphical g-window (called win) (this is the set the background color of graphics windows rule):
+	if the background color of win is not "":
+		set the background color of win to the background color of win;
+		[TODO: clear win;]
+
+To set the background color of (win - a graphical g-window) to (T - a text):
+	(- glk_window_set_background_color( {win}.(+ ref number +), GTE_ConvertColour( {T} ) ); -).
 
 
 
