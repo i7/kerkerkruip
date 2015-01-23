@@ -8,10 +8,8 @@ Version 1/150121 of Flexible Windows (for Glulx only) by Dannii Willis begins he
 hyperlinks
 window drawing rules (rename?)
 width and height of windows
-gargoyle background colour
 model the quote window too?
 window scaling for minimum windows
-clearing windows
 ]
 
 [ Migration guide from version 14:
@@ -26,6 +24,35 @@ Use authorial modesty.
 Include version 1/140512 of Alternative Startup Rules by Dannii Willis.
 Include version 10/150116 of Glulx Entry Points by Emily Short.
 Include version 5/140516 of Glulx Text Effects by Emily Short.
+
+
+
+Part - Variables and phrases to access the I6 template layer - unindexed
+
+GG_MAINWIN_ROCK is a number variable.
+GG_MAINWIN_ROCK variable translates into I6 as "GG_MAINWIN_ROCK".
+GG_STATUSWIN_ROCK is a number variable.
+GG_STATUSWIN_ROCK variable translates into I6 as "GG_STATUSWIN_ROCK".
+GG_QUOTEWIN_ROCK is a number variable.
+GG_QUOTEWIN_ROCK variable translates into I6 as "GG_QUOTEWIN_ROCK".
+
+gg_mainwin is a number variable.
+The gg_mainwin variable translates into I6 as "gg_mainwin".
+gg_statuswin is a number variable.
+The gg_statuswin variable translates into I6 as "gg_statuswin".
+gg_quotewin is a number variable.
+The gg_quotewin variable translates into I6 as "gg_quotewin".
+
+[ We often wrap a phrase or rule around a core glk function, so that there is no good name to give to the actual function's phrase. So instead let's just define them using the I6 function's name here. This also means we can reduce the number of unindexed sections. ]
+
+To call glk_set_window for (win - a g-window):
+	(- glk_set_window( {win}.(+ ref number +) ); -).
+
+To call glk_window_close for (win - a g-window):
+	(- glk_window_close( {win}.(+ ref number +), 0 ); -).
+
+To set the background color of (win - a g-window) to (T - a text):
+	(- glk_window_set_background_color( {win}.(+ ref number +), GTE_ConvertColour( {-by-reference:T} ) ); -).
 
 
 
@@ -119,12 +146,7 @@ Constant USE_NO_STATUS_LINE 0;
 
 
 
-Chapter - Starting up - unindexed
-
-The main window rock is a number variable.
-The main window rock variable translates into I6 as "GG_MAINWIN_ROCK".
-The status window rock is a number variable.
-The status window rock variable translates into I6 as "GG_STATUSWIN_ROCK".
+Chapter - Starting up
 
 [The rock of the main window is -100.
 
@@ -134,8 +156,8 @@ To decide if g-window rocks are unset:
 	no;]
 
 Before starting the virtual machine (this is the set g-window rocks rule):
-	now the rock of the main window is the main window rock;
-	now the rock of the status window is the status window rock;
+	now the rock of the main window is GG_MAINWIN_ROCK;
+	now the rock of the status window is GG_STATUSWIN_ROCK;
 	let i be 1000;
 	repeat with win running through g-windows:
 		if the rock of win is 0:
@@ -154,11 +176,14 @@ To open up/-- (win - a g-window):
 		now every g-window ancestral to win is g-required;
 		calibrate windows;
 
-To shut down (win - a g-window):
+To close (win - a g-window):
 	if win is g-present:
 		now win is g-unrequired;
 		now every g-window descended from win is g-unrequired;
 		calibrate windows;
+
+To shut down (win - a g-window) (deprecated):
+	close win;
 
 
 
@@ -226,7 +251,7 @@ First after constructing a g-window (called win) (this is the check if the windo
 
 
 
-Section - Deconstructing windows - unindexed
+Section - Deconstructing windows
 
 Deconstructing something is an activity on g-windows.
 
@@ -234,35 +259,28 @@ For deconstructing a g-window (called win) (this is the basic deconstruction rul
 	now win is g-unpresent;
 	call glk_window_close for win;
 
-To call glk_window_close for (win - a g-window):
-	(- glk_window_close( {win}.(+ ref number +), 0 ); -).
+
+
+Chapter - Clearing and redrawing windows
+
+To clear (win - a g-window):
+	(- glk_window_clear( {win}.(+ ref number +) ); -).
 
 
 
 Chapter - Focus and changing the main window
 
-To set/move/shift the/-- focus to (win - a g-window):
+To set/move/shift the/-- focus to (win - a g-window), clearing the window:
 	if win is g-present:
 		[now the current g-window is win;]
-		set cursor to ref number of win;
-		[if clearing the window:
-			clear the current g-window;]
+		call glk_set_window for win;
+		if clearing the window:
+			[clear the current g-window;]
+			clear win;
 
 
 
-Section - I6 to change focus etc - unindexed
-
-To set cursor to the/-- (N - a number):
-	(- glk_set_window( {N} ); -).
-
-
-
-Section - Keeping the built-in windows up to date - unindexed
-
-gg_mainwin is a number variable.
-The gg_mainwin variable translates into I6 as "gg_mainwin".
-gg_statuswin is a number variable.
-The gg_statuswin variable translates into I6 as "gg_statuswin".
+Section - Keeping the built-in windows up to date
 
 After constructing a g-window (called win) (this is the focus the main window rule):
 	if win is the main window:
@@ -346,10 +364,10 @@ Before starting the virtual machine (this is the Flexible Windows sort the Table
 Section - Enhanced phrases for applying styles to specific window types - unindexed
 
 To set the background color of wintype (W - a number) for (style - a glulx text style) to (N - a text):
-	(- GTE_SetStylehint( {W}, {style}, stylehint_BackColor, GTE_ConvertColour( {N} ) ); -).
+	(- GTE_SetStylehint( {W}, {style}, stylehint_BackColor, GTE_ConvertColour( {-by-reference:N} ) ); -).
 
 To set the color of wintype (W - a number) for (style - a glulx text style) to (N - a text):
-	(- GTE_SetStylehint( {W}, {style}, stylehint_TextColor, GTE_ConvertColour( {N} ) ); -).
+	(- GTE_SetStylehint( {W}, {style}, stylehint_TextColor, GTE_ConvertColour( {-by-reference:N} ) ); -).
 
 To set the first line indentation of wintype (W - a number) for (style - a glulx text style) to (N - a number):
 	(- GTE_SetStylehint( {W}, {style}, stylehint_ParaIndentation, {N} ); -).
@@ -469,7 +487,7 @@ Section - Applying window specific styles
 
 [ Apply styles before constructing a window and then clear them afterwards. This is tricky because we must reinstate the generic styles. ]
 
-Before constructing a g-window (called win) (this is the set the window's styles rule):
+Before constructing a g-window (called win) (this is the set the window specific styles rule):
 	let W be a number;
 	let found the window be a truth state;
 	if the type of win is:
@@ -506,7 +524,7 @@ Before constructing a g-window (called win) (this is the set the window's styles
 		if there is a reversed entry:
 			set reversed of wintype W for the style name entry to the reversed entry;
 
-A first after constructing a g-window (called win) (this is the clear the window's styles rule):
+A first after constructing a g-window (called win) (this is the clear the window specific styles rule):
 	let W be a number;
 	let resetting required be a truth state;
 	if the type of win is:
@@ -548,25 +566,33 @@ A first after constructing a g-window (called win) (this is the clear the window
 
 
 
-Chapter - Window background colors - unindexed
+Chapter - Window background colors
 
 A g-window has a text called background color.
 
 Before constructing a textual g-window (called win) (this is the set the background color of textual windows rule):
-	if the background color of win is not "":
+	if the background color of win is not empty:
 		set the background color of wintype 0 for all-styles to the background color of win;
 
-After constructing a textual g-window (called win) (this is the reset the background color of textual windows rule):
-	if the background color of win is not "":
+[ This needs to be run before the clear the window's styles rule so that it doesn't erase the styles reset by the set generic text styles rule ]
+First after constructing a textual g-window (called win) (this is the reset the background color of textual windows rule):
+	if the background color of win is not empty:
 		clear the background color of wintype 0 for all-styles;
 
 After constructing a graphical g-window (called win) (this is the set the background color of graphics windows rule):
-	if the background color of win is not "":
+	if the background color of win is not empty:
 		set the background color of win to the background color of win;
-		[TODO: clear win;]
+		clear win;
 
-To set the background color of (win - a graphical g-window) to (T - a text):
-	(- glk_window_set_background_color( {win}.(+ ref number +), GTE_ConvertColour( {T} ) ); -).
+[ As explained by Ben Cressey (http://groups.google.com/group/rec.arts.int-fiction/msg/b88316e2dcf1bb6b)
+Gargoyle sets the colour of its window padding based on the last background colour style hint given to the normal style. So after clearing all the background colours and styles, we set it based on the background color of the main window, or just set white if it isn't set. ]
+
+After constructing a textual g-window (this is the Gargoyle window padding rule):
+	[ TODO: let the main window be changed ]
+	let T be the background color of the main window;
+	if T is empty:
+		let T be "#FFFFFF";
+	set the background color of wintype 3 for normal-style to T;
 
 
 
@@ -590,10 +616,10 @@ The open the built-in windows using Flexible Windows rule is listed instead of t
 This is the open the built-in windows using Flexible Windows rule:
 	if the main window is g-unpresent:
 		open the main window;
-	[otherwise:
-		clear the main window;]
+	otherwise:
+		clear the main window;
 	if the no status line option is active:
-		shut down the status window;
+		close the status window;
 	otherwise:
 		open the status window;
 	continue the activity;
