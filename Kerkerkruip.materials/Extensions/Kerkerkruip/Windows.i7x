@@ -227,38 +227,34 @@ Chapter - Window-drawing rules
 
 [ There are two primary places where we need to redraw the windows. First, before reading a command should handle all in-game situations. But we also need the stats to reflect the last turn of the game when we've won, since this will most often be a combat turn that we have lost. For that, we hook into the activity for printing the player's "obituary". ]
 
-[TODO:
-To redraw subsidiary content windows:
+To refresh the side panels:
 	if window panels are enabled:
-		follow the window-drawing rules for the stats-window;
-		follow the window-drawing rules for the powers-window;
-		follow the window-drawing rules for the inventory-window.
+		refresh the stats window;
+		refresh the powers window;
+		refresh the inventory-window;
 
 Before reading a command (this is the refresh side windows rule):
-	redraw subsidiary content windows.
+	refresh the side panels;
 	
 Before printing the player's obituary (this is the final refresh side windows rule):
-	redraw subsidiary content windows.]
+	refresh the side panels;
+
 
 
 Section - Statistics window	
 
-[TODO:
-Window-drawing rule for the stats-window when the stats-window is g-present (this is the construct stats window rule):
-	move focus to stats-window, clearing the window;
+Rule for refreshing the stats window:
 	now long status is false;
 	now attribute printed is false;
 	follow the status combat stats rules;
 	follow the short player form status rule;[the player's form]
 	follow the status attribute rules;
-	say "[if attribute printed is true]. [end if][bracket][link 1]detailed status report[end link][close bracket][line break][run paragraph on]";
+	[TODO:say "[if attribute printed is true]. [end if][bracket][link 1]detailed status report[end link][close bracket][line break][run paragraph on]";]
 	follow the unallocated faculty short status rule;[shortened message for any unassigned faculty points]
 	say "[line break][run paragraph on]";
 	follow the show basic stats rule;[show statistics]
 	say run paragraph on;
 	now long status is true;
-	return to main screen.]
-
 
 Attribute printed is a truth state variable. Attribute printed is false.
 
@@ -273,13 +269,11 @@ This is the unallocated faculty short status rule:
 	if long status is false:
 		if unallocated faculty is greater than 0:
 			say "[italic type]Increase one of your faculties by typing 'body', 'mind', or 'spirit' ([unallocated faculty] point[if unallocated faculty is greater than 1]s[end if]).[roman type][line break][run paragraph on]".
-	
-[TODO:
-Window-drawing rule for the stat-header-window when the stat-header-window is g-present (this is the construct stat header window rule):
-	move focus to stat-header-window, clearing the window;
+
+Rule for refreshing the stats window header:
 	say "[first custom style]Statistics[roman type]";
 	say run paragraph on;
-	return to main screen.]
+
 
 
 Section - Statistics window hyperlinks
@@ -301,23 +295,22 @@ Hyperlink processing rule when the current hyperlink window is the stats-window 
 	rule succeeds.	]
 
 
+
 Section - Powers window
 
 Power-tip-text is a text variable.
 	
-[TODO:
-Window-drawing rule for the powers-window when the powers-window is g-present (this is the construct power window rule):
-	move focus to powers-window, clearing the window;
+Rule for refreshing the powers window:
 	let pow be the number of granted powers;
 	if pow is 0:
 		say "[bold type]You have not yet acquired any special powers[roman type].";
 	otherwise:
 		[consider the status skill rules;]
 		repeat with ability running through granted powers:
-			if ability is the power of the ape:
+			[TODO:if ability is the power of the ape:
 				say "[if maximum ape power is not tiny and maximum ape power is not small and maximum ape power is not medium][link (the ability typecast to a number)][command text of the ability in sentence case][end link]: level [power level of the ability] (max [maximum ape power])[otherwise][link (the ability typecast to a number)]Ape power[end link]: level [power level of the ability] (no special ability)[end if][run paragraph on]";
 			otherwise:
-				say "[link (the ability typecast to a number)][command text of the ability in sentence case][end link]: level [power level of the ability][run paragraph on]";
+				say "[link (the ability typecast to a number)][command text of the ability in sentence case][end link]: level [power level of the ability][run paragraph on]";]
 			if there is a power of ability in the Table of Enemy Powers:
 				choose row with power of ability from the Table of Enemy Powers;
 				say " ([faculty1 entry][if there is a faculty2 entry] & [faculty2 entry][end if])[run paragraph on]";
@@ -326,20 +319,17 @@ Window-drawing rule for the powers-window when the powers-window is g-present (t
 		now power-tip-text is the next tip text;
 	say "[line break][italic type]Tip:[roman type] [power-tip-text]";
 	say "[line break][run paragraph on]";
-	return to main screen.
 
-Window-drawing rule for the powers-header-window when the powers-header-window is g-present (this is the construct powers header window rule):
-	move focus to powers-header-window, clearing the window;
+Rule for refreshing the powers window header:
 	say "[first custom style]Powers[roman type]";
 	say run paragraph on;
-	return to main screen.]
-
 
 To decide what number is (O - an object) typecast to a number:
 	(- {O} -).
 
 To decide what object is (N - a number) typecast to an object:
 	(- {N} -).
+
 
 
 Section - Powers window hyperlinks
@@ -360,20 +350,17 @@ Hyperlink processing rule when the current hyperlink window is the powers-window
 	rule succeeds.]
 
 
+
 Section - Inventory window
 
-[TODO:
-Window-drawing rule for the inventory-window when the inventory-window is g-present (this is the construct inventory window rule):
-	move focus to inventory-window, clearing the window;
+Rule for refreshing the inventory-window:
 	follow the full inventory rule; 
 	say run paragraph on;
-	return to main screen.
 
-Window-drawing rule for the inventory-header-window when the inventory-header-window is g-present (this is the construct inventory header window rule):
-	move focus to inventory-header-window, clearing the window;
+Rule for refreshing the inventory-window header:
 	say "[first custom style]Inventory[roman type]";
 	say run paragraph on;
-	return to main screen.]
+
 
 
 Chapter - Opening and closing windows

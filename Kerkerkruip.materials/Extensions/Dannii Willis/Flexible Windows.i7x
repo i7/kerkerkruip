@@ -4,17 +4,17 @@ Version 1/150121 of Flexible Windows (for Glulx only) by Dannii Willis begins he
 
 [ Flexible Windows was originally by Jon Ingold, with many contributions by Erik Temple. This version has been essentially rewritten from scratch for 6L38 by Dannii Willis. ]
 
-[ TODO:
-hyperlinks
-window drawing rules (rename?)
-width and height of windows
-model the quote window too?
-window scaling for minimum windows
-]
-
 [ Migration guide from version 14:
 - Many kinds, properties and the main/status windows have lost their hyphens
 - Colours/styles updated to match GTE
+- The window-drawing rules have been renamed to the refreshing activity. It is no longer necessary to focus or clear the window
+]
+
+[ TODO:
+hyperlinks
+width and height of windows
+model the quote window too?
+window scaling for minimum windows
 ]
 
 
@@ -195,10 +195,10 @@ Definition: a g-window is a next-step if it is the main window or it is spawned 
 
 To calibrate windows:
 	[ close windows that shouldn't be open and then open windows that shouldn't be closed ]
-	while there is a g-unrequired g-present childless g-window (called H):
-		carry out the deconstructing activity with H;
-	while there is a g-required g-unpresent next-step g-window (called H):
-		carry out the constructing activity with H;
+	while there is a g-unrequired g-present childless g-window (called win):
+		carry out the deconstructing activity with win;
+	while there is a g-required g-unpresent next-step g-window (called win):
+		carry out the constructing activity with win;
 
 
 
@@ -261,26 +261,65 @@ For deconstructing a g-window (called win) (this is the basic deconstruction rul
 
 
 
-Chapter - Clearing and redrawing windows
+Chapter - Clearing and refreshing windows
 
 To clear (win - a g-window):
 	(- glk_window_clear( {win}.(+ ref number +) ); -).
+
+To refresh (win - a g-window):
+	carry out the refreshing activity with win;
+
+To refresh all windows:
+	repeat with win running through g-present g-windows:
+		refresh win;
+
+Refreshing something is an activity on g-windows.
+The refreshing activity has a g-window called stored current window.
+
+Before refreshing a g-window (called win) (this is the prepare for refreshing rule):
+	[TODO: now the stored current window is the current window;]
+	clear win;
+	focus win;
+
+A first for refreshing a g-window (called win) (this is the check the window is present rule):
+	if win is g-present:
+		continue the activity;
+
+After refreshing a g-window (this is the refocus the current window rule):
+	[TODO: focus the stored current window;]
+	focus the main window;
+
+After constructing a g-window (called win) (this is the refresh the window rule):
+	refresh win;
+
+A glulx input handling rule for an arrange-event (this is the refresh windows after arranging rule):
+	refresh all windows;
+
+A glulx input handling rule for a redraw-event (this is the refresh graphical windows rule):
+	repeat with win running through g-present graphical g-windows:
+		refresh win;
+
+A glulx object-updating rule (this is the refresh windows after restoring rule):
+	refresh all windows;
 
 
 
 Chapter - Focus and changing the main window
 
-To set/move/shift the/-- focus to (win - a g-window), clearing the window:
+To focus (win - a g-window):
 	if win is g-present:
 		[now the current g-window is win;]
 		call glk_set_window for win;
+
+To set/move/shift the/-- focus to (win - a g-window), clearing the window (deprecated):
+	if win is g-present:
+		focus win;
 		if clearing the window:
-			[clear the current g-window;]
 			clear win;
 
 
 
-Section - Keeping the built-in windows up to date
+Part - Keeping the built-in windows up to date
 
 After constructing a g-window (called win) (this is the focus the main window rule):
 	if win is the main window:
