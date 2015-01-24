@@ -12,9 +12,8 @@ Version 1/150121 of Flexible Windows (for Glulx only) by Dannii Willis begins he
 
 [ TODO:
 hyperlinks
-width and height of windows
 model the quote window too?
-window scaling for minimum windows
+bordered windows
 ]
 
 
@@ -81,6 +80,7 @@ A g-window position is a kind of value.
 The g-window positions are g-placenull, g-placeleft, g-placeright, g-placeabove and g-placebelow.
 The specification of a g-window position is "Specifies which direction a window will be split off from its parent window."
 A g-window has a g-window position called position.
+Definition: a g-window is vertically positioned rather than horizontally positioned if the position of it is at least g-placeabove.
 
 A g-window scale method is a kind of value.
 The g-window scale methods are g-proportional, g-fixed-size and g-using-minimum.
@@ -206,7 +206,31 @@ Section - Constructing a window
 
 Constructing something is an activity on g-windows.
 
-[ TODO: window scaling? ]
+Before constructing a g-window (called win) (this is the fix method and measurement rule):
+	if win is the main window:
+		continue the activity;
+	let the parent be the holder of win;
+	[ Fix broken proportions ]
+	if the scale method of win is g-proportional:
+		if the measurement of win > 100 or the measurement of win < 0:
+			now the scale method of win is g-fixed-size;
+	[ Tile windows automatically ]
+	if the position of win is g-placenull:
+		if the parent is vertically positioned:
+			now the position of win is g-placeright;
+		otherwise:
+			now the position of win is g-placeabove;
+	[ Reset the minimum ]
+	if the scale method of win is g-using-minimum:
+		now the scale method of win is g-proportional;
+	[ Use the minimum size ]
+	if the scale method of win is g-proportional:
+		let the minimum size be 100 multiplied by the minimum size of win;
+		let the calculated size be the measurement of win multiplied by the width of the parent;
+		if win is vertically positioned:
+			now the calculated size is the measurement of win multiplied by the height of the parent;
+		if the minimum size > the calculated size:
+			now the scale method of win is g-using-minimum;
 
 The construct a g-window rule is listed in the for constructing rules.
 The construct a g-window rule translates into I6 as "FW_ConstructGWindow".
@@ -269,7 +293,7 @@ To clear (win - a g-window):
 To refresh (win - a g-window):
 	carry out the refreshing activity with win;
 
-To refresh all windows:
+To refresh all/-- windows:
 	repeat with win running through g-present g-windows:
 		refresh win;
 
@@ -316,6 +340,34 @@ To set/move/shift the/-- focus to (win - a g-window), clearing the window (depre
 		focus win;
 		if clearing the window:
 			clear win;
+
+
+
+Chapter - Window measurements
+
+To decide what number is the height of (win - a g-window):
+	(- FW_WindowSize( {win}, 1 ) -).
+
+To decide what number is the width of (win - a g-window):
+	(- FW_WindowSize( {win}, 1 ) -).
+
+[ Is this useful? ]
+To decide which number is the measure of (win - a g-window) (deprecated):
+	if win is vertically positioned:
+		decide on the height of win;
+	decide on the width of win;
+
+Include (-  
+[ FW_WindowSize win index;
+	! if win is g-present:
+	if ( GetEitherOrProperty( win, (+ g-present +) ) )
+	{
+		glk_window_get_size( win.(+ ref number +), gg_arguments, gg_arguments + WORDSIZE );
+		return gg_arguments-->index;
+	}
+	return 0;
+];
+-).
 
 
 
