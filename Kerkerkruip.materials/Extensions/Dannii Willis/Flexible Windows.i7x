@@ -209,16 +209,23 @@ To shut down (win - a g-window) (deprecated):
 
 Section - Calibrating windows - unindexed
 
+A g-window can be currently being processed.
+
 Definition: a g-window is paternal rather than childless if it spawns a g-present g-window.
 
 Definition: a g-window is a next-step if it is the main window or it is spawned by something g-present.
 
 To calibrate windows:
 	[ close windows that shouldn't be open and then open windows that shouldn't be closed ]
-	while there is a g-unrequired g-present childless g-window (called win):
+	while there is a not currently being processed g-unrequired g-present childless g-window (called win):
+		[ Only run each window once, even if we end up back in this loop (by open/close being called in a before rule), to prevent infinite loops ]
+		now win is currently being processed;
 		carry out the deconstructing activity with win;
-	while there is a g-required g-unpresent next-step g-window (called win):
+		now win is not currently being processed;
+	while there is a not currently being processed g-required g-unpresent next-step g-window (called win):
+		now win is currently being processed;
 		carry out the constructing activity with win;
+		now win is not currently being processed;
 
 
 

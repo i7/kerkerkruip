@@ -144,9 +144,7 @@ The background color is header color.
 
 Before constructing the status window:
 	if the current IO implementation is GarGlk:
-		now the status window is g-unrequired;
 		place border border-12-window;
-		now the status window is g-required;
 
 After constructing the status window:
 	if the current IO implementation is GarGlk:
