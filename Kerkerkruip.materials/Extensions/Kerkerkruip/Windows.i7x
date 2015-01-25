@@ -243,18 +243,37 @@ Before printing the player's obituary (this is the final refresh side windows ru
 
 Section - Statistics window	
 
+Showing detailed status report is a truth state variable.
+Showing detailed status report is false.
+
 Rule for refreshing the stats window:
-	now long status is false;
-	now attribute printed is false;
-	follow the status combat stats rules;
-	follow the short player form status rule;[the player's form]
-	follow the status attribute rules;
-	[TODO:say "[if attribute printed is true]. [end if][bracket][link 1]detailed status report[end link][close bracket][line break][run paragraph on]";]
-	follow the unallocated faculty short status rule;[shortened message for any unassigned faculty points]
-	say "[line break][run paragraph on]";
-	follow the show basic stats rule;[show statistics]
-	say run paragraph on;
-	now long status is true;
+	if showing detailed status report is false:
+		now long status is false;
+		now attribute printed is false;
+		follow the status combat stats rules;
+		follow the short player form status rule;[the player's form]
+		follow the status attribute rules;
+		say "[if attribute printed is true]. [end if][bracket][link 1]detailed status report[end link][close bracket][line break][run paragraph on]";
+		follow the unallocated faculty short status rule;[shortened message for any unassigned faculty points]
+		say "[line break][run paragraph on]";
+		follow the show basic stats rule;[show statistics]
+		say run paragraph on;
+		now long status is true;
+	otherwise:
+		say "[link 2]< back[end link][line break][line break][run paragraph on]";
+		follow the show basic stats rule;
+		follow the status combat stats rules;
+		follow the status attribute rules;
+		follow the status skill rules;
+		say run paragraph on;
+
+Rule for processing hyperlinks for the stats window:
+	if the hyperlink ID is:
+		-- 1:
+			now showing detailed status report is true;
+		-- 2:
+			now showing detailed status report is false;
+	refresh the stats window;
 
 Attribute printed is a truth state variable. Attribute printed is false.
 
@@ -276,49 +295,45 @@ Rule for refreshing the stats window header:
 
 
 
-Section - Statistics window hyperlinks
-
-[ TODO:
-Hyperlink processing rule when the current hyperlink window is the stats-window and the current hyperlink ID is 1:
-	move focus to stats-window, clearing the window;
-	say "[link 2]< back[end link][line break][line break][run paragraph on]";
-	follow the show basic stats rule;
-	follow the status combat stats rules;
-	follow the status attribute rules;
-	follow the status skill rules;
-	say run paragraph on;
-	return to main screen;
-	rule succeeds.
-
-Hyperlink processing rule when the current hyperlink window is the stats-window and the current hyperlink ID is 2[i.e., we've hit the back button while reading the full status information.]:
-	follow the window-drawing rules for the stats-window;
-	rule succeeds.	]
-
-
-
 Section - Powers window
+
+Currently displayed power is a number variable.
 
 Power-tip-text is a text variable.
 	
 Rule for refreshing the powers window:
-	let pow be the number of granted powers;
-	if pow is 0:
-		say "[bold type]You have not yet acquired any special powers[roman type].";
+	if the currently displayed power is not 0:
+		let ability be the currently displayed power typecast to an object;
+		let T be an indexed text;
+		let T be "[ability]" in title case;
+		say "[bold type][T].[roman type][line break][description of the ability] [link 2]< back[end link][run paragraph on]";
 	otherwise:
-		[consider the status skill rules;]
-		repeat with ability running through granted powers:
-			[TODO:if ability is the power of the ape:
-				say "[if maximum ape power is not tiny and maximum ape power is not small and maximum ape power is not medium][link (the ability typecast to a number)][command text of the ability in sentence case][end link]: level [power level of the ability] (max [maximum ape power])[otherwise][link (the ability typecast to a number)]Ape power[end link]: level [power level of the ability] (no special ability)[end if][run paragraph on]";
-			otherwise:
-				say "[link (the ability typecast to a number)][command text of the ability in sentence case][end link]: level [power level of the ability][run paragraph on]";]
-			if there is a power of ability in the Table of Enemy Powers:
-				choose row with power of ability from the Table of Enemy Powers;
-				say " ([faculty1 entry][if there is a faculty2 entry] & [faculty2 entry][end if])[run paragraph on]";
-			say "[line break]";
-	if pow < 3 and (turn count is 1 or the remainder after dividing turn count by 30 is 0):
-		now power-tip-text is the next tip text;
-	say "[line break][italic type]Tip:[roman type] [power-tip-text]";
-	say "[line break][run paragraph on]";
+		let pow be the number of granted powers;
+		if pow is 0:
+			say "[bold type]You have not yet acquired any special powers[roman type].";
+		otherwise:
+			[consider the status skill rules;]
+			repeat with ability running through granted powers:
+				if ability is the power of the ape:
+					say "[if maximum ape power is not tiny and maximum ape power is not small and maximum ape power is not medium][link (the ability typecast to a number)][command text of the ability in sentence case][end link]: level [power level of the ability] (max [maximum ape power])[otherwise][link (the ability typecast to a number)]Ape power[end link]: level [power level of the ability] (no special ability)[end if][run paragraph on]";
+				otherwise:
+					say "[link (the ability typecast to a number)][command text of the ability in sentence case][end link]: level [power level of the ability][run paragraph on]";
+				if there is a power of ability in the Table of Enemy Powers:
+					choose row with power of ability from the Table of Enemy Powers;
+					say " ([faculty1 entry][if there is a faculty2 entry] & [faculty2 entry][end if])[run paragraph on]";
+				say "[line break]";
+		if pow < 3 and (turn count is 1 or the remainder after dividing turn count by 30 is 0):
+			now power-tip-text is the next tip text;
+		say "[line break][italic type]Tip:[roman type] [power-tip-text]";
+		say "[line break][run paragraph on]";
+
+Rule for processing hyperlinks for the powers window:
+	let ability be the hyperlink ID typecast to an object;
+	if ability is a power:
+		now the currently displayed power is the hyperlink ID;
+	otherwise:
+		now the currently displayed power is 0;
+	refresh the powers window;
 
 Rule for refreshing the powers window header:
 	say "[first custom style]Powers[roman type]";
@@ -329,25 +344,6 @@ To decide what number is (O - an object) typecast to a number:
 
 To decide what object is (N - a number) typecast to an object:
 	(- {N} -).
-
-
-
-Section - Powers window hyperlinks
-
-[ TODO:
-Hyperlink processing rule when the current hyperlink window is the powers-window:
-	let ability be the current hyperlink ID typecast to an object;
-	if ability is a power:
-		let T be an indexed text;
-		let T be "[ability]" in title case;
-		move focus to powers-window, clearing the window;
-		say "[bold type][T].[roman type][line break][description of the ability] [link 2]< back[end link][run paragraph on]";
-		return to main screen;
-		rule succeeds.
-
-Hyperlink processing rule when the current hyperlink window is the powers-window and the current hyperlink ID is 2[i.e., we've hit the back button while reading the description of some power.]:
-	follow the window-drawing rules for the powers-window;
-	rule succeeds.]
 
 
 
@@ -424,11 +420,10 @@ Last when play begins (this is the check info panel capacity rule):
 		make no decision;
 	if window panels are disabled:
 		say "[bracket]Information panels are disabled. Type PANELS to enable them.[close bracket][line break][run paragraph on]";
-	[ TODO add width and height phrases ]
-	[otherwise:
+	otherwise:
 		if width of the main window is less than 102 or height of the main window is less than 30:
 			say "[bracket]Your game window is too small for you to use the information panels comfortably. Maximize your window, then type PANELS to enable them.[close bracket][line break][run paragraph on]";
-			disable window panels flag;]
+			disable window panels flag;
 	follow the open up game windows rule.
 
 This is the open up game windows rule:

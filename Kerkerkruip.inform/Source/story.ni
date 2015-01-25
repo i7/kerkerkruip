@@ -23,7 +23,7 @@ Section - 3rd Party Inclusions
 Include 6L38 Patches by Friends of I7.
 Include Basic Screen Effects by Emily Short. 
 Include Numbered Disambiguation Choices by Aaron Reed.
-Include version 10/140201 of Glulx Entry Points by Emily Short.
+Include version 10/150124 of Glulx Entry Points by Emily Short.
 Include version 8/140515 of Dynamic Objects by Jesse McGrew.
 Include Questions by Michael Callaghan.
 Include version 1/140209 of Interpreter Sniffing by Friends of I7.
