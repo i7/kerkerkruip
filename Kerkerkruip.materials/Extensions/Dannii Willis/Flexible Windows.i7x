@@ -28,48 +28,12 @@ Include version 5/140516 of Glulx Text Effects by Emily Short.
 
 
 
-Part - Variables and phrases to access the I6 template layer - unindexed
+Section - Interpreter Sniffing (for use with Interpreter Sniffing by Friends of I7)
 
-GG_MAINWIN_ROCK is a number variable.
-GG_MAINWIN_ROCK variable translates into I6 as "GG_MAINWIN_ROCK".
-GG_STATUSWIN_ROCK is a number variable.
-GG_STATUSWIN_ROCK variable translates into I6 as "GG_STATUSWIN_ROCK".
-GG_QUOTEWIN_ROCK is a number variable.
-GG_QUOTEWIN_ROCK variable translates into I6 as "GG_QUOTEWIN_ROCK".
-
-gg_mainwin is a number variable.
-The gg_mainwin variable translates into I6 as "gg_mainwin".
-gg_statuswin is a number variable.
-The gg_statuswin variable translates into I6 as "gg_statuswin".
-gg_quotewin is a number variable.
-The gg_quotewin variable translates into I6 as "gg_quotewin".
-
-[ We often wrap a phrase or rule around a core glk function, so that there is no good name to give to the actual function's phrase. So instead let's just define them using the I6 function's name here. This also means we can reduce the number of unindexed sections. ]
-
-To call glk_request_hyperlink_event for (win - a g-window):
-	(- glk_request_hyperlink_event( {win}.(+ ref number +) ); -).
-
-To call glk_set_window for (win - a g-window):
-	(- glk_set_window( {win}.(+ ref number +) ); -).
-
-To call glk_window_close for (win - a g-window):
-	(- glk_window_close( {win}.(+ ref number +), 0 ); -).
-
-To set the background color of (win - a g-window) to (T - a text):
-	(- glk_window_set_background_color( {win}.(+ ref number +), GTE_ConvertColour( {-by-reference:T} ) ); -).
-
-To decide which number is the glk event window reference:
-	(- ( gg_event-->1 ) -).
-
-To decide which g-window is the glk event window:
-	let N be the glk event window reference;
-	repeat with win running through g-present g-windows:
-		if N is the ref number of win:
-			decide on win;
-	decide on the acting main window;
-	
-To decide which number is the glk event val1:
-	(- ( gg_event-->2 ) -).
+[ Because we hack the glk_window_open() function, we must delay the resniffing rules until after the initialise memory rule ]
+The resniffing stage rule is not listed in the startup rules.
+Before starting the virtual machine (this is the alternate resniffing stage rule):
+	consider the resniffing rules;
 
 
 
@@ -122,17 +86,13 @@ A g-window is usually g-unpresent.
 
 
 
-Chapter - The spawning relation - unindexed
+Chapter - The spawning relation
 
 [ The most efficient relations use the object tree. Inform will only use the object tree for a few built in relations however, so we piggy back on to the containment relation. ]
 The verb to spawn implies the containment relation.
 
 The verb to be ancestral to implies the enclosure relation.
 The verb to be descended from implies the reversed enclosure relation.
-
-To decide which g-window is the parent of (win - a g-window):
-	if the holder of win is a g-window:
-		decide on the holder of win;
 
 
 
@@ -161,6 +121,113 @@ Use no status line translates as (- Constant USE_NO_STATUS_LINE 1; -).
 Constant USE_NO_STATUS_LINE 0;
 #endif;
 -).]
+
+
+
+Section - Styles for the built-in windows
+
+[ These are the original styles set by Inform in VM_Initialise(). ]
+
+Table of User Styles (continued)
+window	style name	reversed	justification	font weight	italic
+all-buffer-windows	italic-style	--	--	regular-weight	true
+all-buffer-windows	header-style	--	left-justified
+all-grid-windows	all-styles	true
+
+
+
+Section - Open the built-in windows
+
+The open the built-in windows using Flexible Windows rule is listed instead of the open built-in windows rule in the for starting the virtual machine rulebook.
+This is the open the built-in windows using Flexible Windows rule:
+	if the main window is g-unpresent:
+		open the main window;
+	otherwise:
+		clear the main window;
+	if the no status line option is active:
+		close the status window;
+	otherwise:
+		open the status window;
+	continue the activity;
+
+
+
+Part - Variables and phrases to access the I6 template layer - unindexed
+
+GG_MAINWIN_ROCK is a number variable.
+GG_MAINWIN_ROCK variable translates into I6 as "GG_MAINWIN_ROCK".
+GG_STATUSWIN_ROCK is a number variable.
+GG_STATUSWIN_ROCK variable translates into I6 as "GG_STATUSWIN_ROCK".
+GG_QUOTEWIN_ROCK is a number variable.
+GG_QUOTEWIN_ROCK variable translates into I6 as "GG_QUOTEWIN_ROCK".
+
+gg_mainwin is a number variable.
+The gg_mainwin variable translates into I6 as "gg_mainwin".
+gg_statuswin is a number variable.
+The gg_statuswin variable translates into I6 as "gg_statuswin".
+gg_quotewin is a number variable.
+The gg_quotewin variable translates into I6 as "gg_quotewin".
+
+[ We often wrap a phrase or rule around a core glk function, so that there is no good name to give to the actual function's phrase. So instead let's just define them using the I6 function's name here. This also means we can reduce the number of unindexed sections. ]
+
+To call glk_request_hyperlink_event for (win - a g-window):
+	(- glk_request_hyperlink_event( {win}.(+ ref number +) ); -).
+
+To call glk_set_window for (win - a g-window):
+	(- glk_set_window( {win}.(+ ref number +) ); -).
+
+To call FW_glk_window_close for (ref - a number):
+	(- FW_glk_window_close( {ref}, 0 ); -).
+
+Include (-
+[ FW_glk_window_close _vararg_count;
+  ! glk_window_close(window, &{uint, uint})
+  @glk 36 _vararg_count 0;
+  return 0;
+];
+-).
+
+To set the background color of (win - a g-window) to (T - a text):
+	(- glk_window_set_background_color( {win}.(+ ref number +), GTE_ConvertColour( {-by-reference:T} ) ); -).
+
+To decide which number is the glk event window reference:
+	(- ( gg_event-->1 ) -).
+
+To decide which number is the glk event val1:
+	(- ( gg_event-->2 ) -).
+
+
+
+Section - And some phrases to find windows - unindexed
+
+To decide which g-window is the invalid window:
+	(- ( nothing ) -).
+
+To decide which g-window is the parent of (win - a g-window):
+	if the holder of win is a g-window:
+		decide on the holder of win;
+	decide on the invalid window;
+
+To decide which g-window is the glk event window:
+	let N be the glk event window reference;
+	repeat with win running through g-present g-windows:
+		if N is the ref number of win:
+			decide on win;
+	decide on the acting main window;
+
+To decide which g-window is the window with ref (ref - a number):
+	if ref is not 0:
+		repeat with win running through g-windows:
+			if the ref number of win is ref:
+				decide on win;
+	decide on the invalid window;
+
+To decide which g-window is the window with rock (rock - a number):
+	if rock is not 0:
+		repeat with win running through g-windows:
+			if the rock of win is rock:
+				decide on win;
+	decide on the invalid window;
 
 
 
@@ -214,9 +281,9 @@ Section - Constructing a window
 Constructing something is an activity on g-windows.
 
 Before constructing a g-window (called win) (this is the fix method and measurement rule):
-	if win is the main window:
-		continue the activity;
 	let the parent be the parent of win;
+	if parent is the invalid window:
+		continue the activity;
 	[ Fix broken proportions ]
 	if the scale method of win is g-proportional:
 		if the measurement of win > 100 or the measurement of win < 0:
@@ -268,8 +335,14 @@ Include (-
 	}
 	type = win.(+ type +) + 2;
 	rock = win.(+ rock +);
-	win.(+ ref number +) = glk_window_open( parentwin, method, size, type, rock );
+	win.(+ ref number +) = FW_glk_window_open( parentwin, method, size, type, rock );
 	rfalse;
+];
+
+[ FW_glk_window_open _vararg_count ret;
+  ! glk_window_open(window, uint, uint, uint, uint) => window
+  @glk 35 _vararg_count ret;
+  return ret;
 ];
 -).
 
@@ -288,7 +361,7 @@ Deconstructing something is an activity on g-windows.
 
 For deconstructing a g-window (called win) (this is the basic deconstruction rule):
 	now win is g-unpresent;
-	call glk_window_close for win;
+	call FW_glk_window_close for the ref number of win;
 
 
 
@@ -335,7 +408,7 @@ A glulx object-updating rule (this is the refresh windows after restoring rule):
 
 
 
-Chapter - Focus and changing the main window
+Chapter - Focus and changing the acting main window
 
 The current focus window is a g-window variable.
 
@@ -430,19 +503,19 @@ A glulx zeroing-reference rule (this is the reset window properties rule):
 		now win is g-unpresent;
 		now win is not currently being processed;
 
-Definition: a g-window is on call if the rock of it is the current glulx rock.
-
 [ Find all present windows, mark them as present and store their ref numbers. ]
 A glulx resetting-windows rule (this is the find existing windows rule):
-	if the current glulx rock is not 0:
-		while there is an on call g-window (called win):
-			now the ref number of win is the current glulx rock-ref;
-			now win is g-present;
-			break;
+	let win be the window with rock current glulx rock;
+	if win is not the invalid window:
+		now the ref number of win is the current glulx rock-ref;
+		now win is g-present;
 
 A first glulx object-updating rule (this is the recalibrate windows rule):
 	[ I used to think it wasn't safe to calibrate windows here, but I can't really think why now ]
 	calibrate windows;
+	now gg_mainwin is the ref number of the acting main window;
+	now gg_statuswin is the ref number of the status window;
+	focus the current focus window;
 
 
 
@@ -461,12 +534,99 @@ After constructing a textual g-window (called win) (this is the update the I6 wi
 
 Before deconstructing a textual g-window (called win) (this is the fix the current windows rule):
 	let parent be the parent of win;
-	if win is not the main window and win is the acting main window:
+	if parent is the invalid window:
+		continue the activity;
+	if win is the acting main window:
 		set parent as the acting main window;
 	if win is the current focus window:
 		focus parent;
 	if win is the current input window:
 		set the acting main window as the current input window;
+
+
+
+Chapter - Interjecting for windows we don't control - unindexed
+
+[ To account for the template code which creates and destroys windows we will high-jack the I6 glk functions and take over if possible ]
+
+Include (-
+Replace glk_window_open;
+Replace glk_window_close;
+-) before "Glulx.i6t".
+
+Include (-
+[ glk_window_open parent method size type rock result;
+	result = ( (+ handling an unscheduled construction +)-->1 )( parent, method, size, type, rock );
+	if ( result == 0 )
+	{
+		return FW_glk_window_open( parent, method, size, type, rock );
+	}
+	return result;
+];
+
+[ glk_window_close ref;
+	( (+ handling an unscheduled deconstruction +)-->1 )( ref );
+	return 0;
+];
+-) after "Glulx.i6t".
+
+To decide which number is the result from handling an unscheduled construction from (parent - a number) with method (method - a number) and size (size - a number) and type (type - a number) and rock (rock - a number) (this is handling an unscheduled construction):
+	let parent win be the window with ref parent;
+	let win be the window with rock rock;
+	if parent win is the invalid window or win is the invalid window:
+		decide on 0;
+	now win is spawned by parent win;
+	now the position of win is the position from method;
+	now the scale method of win is the scale method from method;
+	now the measurement of win is the size;
+	now the type of win is the type from type;
+	open win;
+	decide on the ref number of win;
+
+To handle an unscheduled deconstruction from (ref - a number) (this is handling an unscheduled deconstruction):
+	let win be the window with ref ref;
+	if win is the invalid window:
+		call FW_glk_window_close for ref;
+	otherwise:
+		close win;
+
+To decide which g-window position is the position from (method - a number):
+	(- FW_PositionFromNum( {method} ) -).
+
+To decide which g-window scale methods is the scale method from (method - a number):
+	(- FW_ScaleMethodFromNum( {method} ) -).
+
+To decide which g-window type is the type from (type - a number):
+	(- FW_TypeFromNum( {type} ) -).
+
+Include (-
+[ FW_PositionFromNum method;
+	switch ( method & winmethod_DirMask )
+	{
+		winmethod_Left: return (+ g-placeleft +);
+		winmethod_Right: return (+ g-placeright +);
+		winmethod_Above: return (+ g-placeabove +);
+		winmethod_Below: return (+ g-placebelow +);
+	}
+];
+
+[ FW_ScaleMethodFromNum method;
+	switch ( method & winmethod_DivisionMask )
+	{
+		winmethod_Fixed: return (+ g-fixed-size +);
+		winmethod_Proportional: return (+ g-proportional +);
+	}
+];
+
+[ FW_TypeFromNum type;
+	switch ( type )
+	{
+		wintype_TextBuffer: return (+ g-text-buffer +);
+		wintype_TextGrid: return (+ g-text-grid +);
+		wintype_Graphics: return (+ g-graphics +);
+	}
+];
+-).
 
 
 
@@ -806,36 +966,6 @@ link ID (number)	replacement (text)
 
 After processing hyperlinks for a g-window (called win) (this is the request hyperlink events again rule):
 	call glk_request_hyperlink_event for win;
-
-
-
-Part - Opening the built-in windows
-
-Chapter - Style the built-in windows
-
-[ These are the original styles set by Inform in VM_Initialise(). ]
-
-Table of User Styles (continued)
-window	style name	reversed	justification	font weight	italic
-all-buffer-windows	italic-style	--	--	regular-weight	true
-all-buffer-windows	header-style	--	left-justified
-all-grid-windows	all-styles	true
-
-
-
-Chapter - Make it happen!
-
-The open the built-in windows using Flexible Windows rule is listed instead of the open built-in windows rule in the for starting the virtual machine rulebook.
-This is the open the built-in windows using Flexible Windows rule:
-	if the main window is g-unpresent:
-		open the main window;
-	otherwise:
-		clear the main window;
-	if the no status line option is active:
-		close the status window;
-	otherwise:
-		open the status window;
-	continue the activity;
 
 
 
