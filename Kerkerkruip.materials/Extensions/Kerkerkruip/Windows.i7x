@@ -216,7 +216,7 @@ Include (-
 ];
 -).
 
-First before starting the virtual machine:
+A first glulx zeroing-reference rule:
 	set basic text color to black.
 
 

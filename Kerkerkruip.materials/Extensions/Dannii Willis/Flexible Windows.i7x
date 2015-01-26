@@ -15,8 +15,6 @@ Version 1/150125 of Flexible Windows (for Glulx only) by Dannii Willis begins he
 model the quote window too?
 bordered windows
 echo streams?
-changing the current window
-changing the acting main window
 input phrases
 ]
 
@@ -68,7 +66,7 @@ To decide which g-window is the glk event window:
 	repeat with win running through g-present g-windows:
 		if N is the ref number of win:
 			decide on win;
-	decide on the main window;
+	decide on the acting main window;
 	
 To decide which number is the glk event val1:
 	(- ( gg_event-->2 ) -).
@@ -124,7 +122,7 @@ A g-window is usually g-unpresent.
 
 
 
-Chapter - The spawning relation
+Chapter - The spawning relation - unindexed
 
 [ The most efficient relations use the object tree. Inform will only use the object tree for a few built in relations however, so we piggy back on to the containment relation. ]
 The verb to spawn implies the containment relation.
@@ -132,9 +130,9 @@ The verb to spawn implies the containment relation.
 The verb to be ancestral to implies the enclosure relation.
 The verb to be descended from implies the reversed enclosure relation.
 
-[To decide which g-window is the parent of (win - a g-window):
+To decide which g-window is the parent of (win - a g-window):
 	if the holder of win is a g-window:
-		decide on the holder of win;]
+		decide on the holder of win;
 
 
 
@@ -166,35 +164,17 @@ Constant USE_NO_STATUS_LINE 0;
 
 
 
-Chapter - Starting up
-
-[The rock of the main window is -100.
-
-To decide if g-window rocks are unset: 
-	if the rock of the main window is -100:
-		yes;
-	no;]
-
-Before starting the virtual machine (this is the set g-window rocks rule):
-	now the rock of the main window is GG_MAINWIN_ROCK;
-	now the rock of the status window is GG_STATUSWIN_ROCK;
-	let i be 1000;
-	repeat with win running through g-windows:
-		if the rock of win is 0:
-			now the rock of win is i;
-			increase i by 10;
-
-
-
 Part - The Flexible Windows API
 
 Chapter - Opening and closing windows
 
-To open up/-- (win - a g-window):
+To open up/-- (win - a g-window), as the acting main window:
 	if win is g-unpresent and (win is the main window or the main window is ancestral to win):
 		now win is g-required;
 		now every g-window ancestral to win is g-required;
 		calibrate windows;
+		if as the acting main window:
+			set win as the acting main window
 
 To close (win - a g-window):
 	if win is g-present:
@@ -216,7 +196,7 @@ Definition: a g-window is paternal rather than childless if it spawns a g-presen
 Definition: a g-window is a next-step if it is the main window or it is spawned by something g-present.
 
 To calibrate windows:
-	[ close windows that shouldn't be open and then open windows that shouldn't be closed ]
+	[ Close windows that shouldn't be open and then open windows that shouldn't be closed ]
 	while there is a not currently being processed g-unrequired g-present childless g-window (called win):
 		[ Only run each window once, even if we end up back in this loop (by open/close being called in a before rule), to prevent infinite loops ]
 		now win is currently being processed;
@@ -236,7 +216,7 @@ Constructing something is an activity on g-windows.
 Before constructing a g-window (called win) (this is the fix method and measurement rule):
 	if win is the main window:
 		continue the activity;
-	let the parent be the holder of win;
+	let the parent be the parent of win;
 	[ Fix broken proportions ]
 	if the scale method of win is g-proportional:
 		if the measurement of win > 100 or the measurement of win < 0:
@@ -328,17 +308,17 @@ Refreshing something is an activity on g-windows.
 The refreshing activity has a g-window called stored current window.
 
 Before refreshing a g-window (called win) (this is the prepare for refreshing rule):
-	[TODO: now the stored current window is the current window;]
-	clear win;
-	focus win;
+	now the stored current window is the current focus window;
+	if win is g-present:
+		clear win;
+		focus win;
 
 A first for refreshing a g-window (called win) (this is the check the window is present rule):
 	if win is g-present:
 		continue the activity;
 
-After refreshing a g-window (this is the refocus the current window rule):
-	[TODO: focus the stored current window;]
-	focus the main window;
+After refreshing a g-window (this is the refocus the current focus window rule):
+	focus the stored current window;
 
 After constructing a g-window (called win) (this is the refresh the window rule):
 	refresh win;
@@ -357,16 +337,47 @@ A glulx object-updating rule (this is the refresh windows after restoring rule):
 
 Chapter - Focus and changing the main window
 
+The current focus window is a g-window variable.
+
+The acting main window is a g-window variable.
+The acting main window is the main window.
+
+The current input window is a g-window variable.
+The current input window is the main window.
+
 To focus (win - a g-window):
 	if win is g-present:
-		[now the current g-window is win;]
+		now the current focus window is win;
 		call glk_set_window for win;
+
+To set (win - a g-present textual g-window) as the acting main window:
+	now the acting main window is win;
+	now the current input window is win;
+	now gg_mainwin is the ref number of win;
+	focus win;
+	let the status window state be whether or not the status window is g-present;
+	close the status window;
+	now the status window is spawned by win;
+	if the status window state is true:
+		open the status window;
+
+[ Not strictly needed, but to allow FW to be controlled solely through phrases rather than variables ]
+To set (win - a g-window) as the current input window:
+	if win is g-present:
+		now the current input window is win;
 
 To set/move/shift the/-- focus to (win - a g-window), clearing the window (deprecated):
 	if win is g-present:
 		focus win;
 		if clearing the window:
 			clear win;
+
+To open up/-- (win - a g-window) as the/-- main/current/-- text/-- output window (deprecated):
+	open win, as the acting main window;
+
+To open up/-- (win - a g-window) as the/-- main/current/-- text/-- input window (deprecated):
+	open win;
+	set win as the current input window;
 
 
 
@@ -400,17 +411,62 @@ Include (-
 
 Part - Keeping the built-in windows up to date
 
-After constructing a g-window (called win) (this is the focus the main window rule):
-	if win is the main window:
-		set focus to the main window;
-	[ Account for changed main windows ]
+Chapter - Handling GGRecoverObjects()
 
-After constructing a g-window (called win) (this is the update built-in windows rule):
-	if win is the main window:
+[ First ensure that window rocks are assigned ]
+A glulx zeroing-reference rule (this is the set g-window rocks rule):
+	if the rock of the main window is 0:
+		now the rock of the main window is GG_MAINWIN_ROCK;
+		now the rock of the status window is GG_STATUSWIN_ROCK;
+		let i be 1000;
+		repeat with win running through g-windows:
+			if the rock of win is 0:
+				now the rock of win is i;
+				increase i by 10;
+
+A glulx zeroing-reference rule (this is the reset window properties rule):
+	repeat with win running through g-windows:
+		now the ref number of win is 0;
+		now win is g-unpresent;
+		now win is not currently being processed;
+
+Definition: a g-window is on call if the rock of it is the current glulx rock.
+
+[ Find all present windows, mark them as present and store their ref numbers. ]
+A glulx resetting-windows rule (this is the find existing windows rule):
+	if the current glulx rock is not 0:
+		while there is an on call g-window (called win):
+			now the ref number of win is the current glulx rock-ref;
+			now win is g-present;
+			break;
+
+A first glulx object-updating rule (this is the recalibrate windows rule):
+	[ I used to think it wasn't safe to calibrate windows here, but I can't really think why now ]
+	calibrate windows;
+
+
+
+Chapter - Updating windows that we control
+
+After constructing a textual g-window (called win) (this is the focus the acting main window rule):
+	if win is the acting main window:
+		focus the acting main window;
+
+After constructing a textual g-window (called win) (this is the update the I6 window variables rule):
+	if win is the acting main window:
 		now gg_mainwin is the ref number of win;
 	if win is the status window:
 		now gg_statuswin is the ref number of win;
 		[ statuswin_cursize/statuswin_size? - make a rule for deconstructing too? ]
+
+Before deconstructing a textual g-window (called win) (this is the fix the current windows rule):
+	let parent be the parent of win;
+	if win is not the main window and win is the acting main window:
+		set parent as the acting main window;
+	if win is the current focus window:
+		focus parent;
+	if win is the current input window:
+		set the acting main window as the current input window;
 
 
 
@@ -565,8 +621,8 @@ Section - Applying the generic styles
 
 [ At this stage only apply the generic (non window specific) styles. ]
 
-The set generic text styles rule is listed instead of the set text styles rule in the before starting the virtual machine rules.
-Last before starting the virtual machine (this is the set generic text styles rule):
+The set text styles rule is not listed in any rulebook.
+A glulx zeroing-reference rule (this is the set generic text styles rule):
 	let W be a number;
 	repeat through the Table of User Styles:
 		if the window entry is:
@@ -605,7 +661,7 @@ Section - Applying window specific styles
 
 [ Apply styles before constructing a window and then clear them afterwards. This is tricky because we must reinstate the generic styles. ]
 
-Before constructing a g-window (called win) (this is the set the window specific styles rule):
+Before constructing a textual g-window (called win) (this is the set the window specific styles rule):
 	let W be a number;
 	let found the window be a truth state;
 	if the type of win is:
@@ -642,7 +698,7 @@ Before constructing a g-window (called win) (this is the set the window specific
 		if there is a reversed entry:
 			set reversed of wintype W for the style name entry to the reversed entry;
 
-A first after constructing a g-window (called win) (this is the clear the window specific styles rule):
+A first after constructing a textual g-window (called win) (this is the clear the window specific styles rule):
 	let W be a number;
 	let resetting required be a truth state;
 	if the type of win is:
@@ -688,7 +744,8 @@ Chapter - Window background colors
 
 A g-window has a text called background color.
 
-Before constructing a textual g-window (called win) (this is the set the background color of textual windows rule):
+[ This needs to run before the set the window specific styles rule so that it won't overwrite any window specific backgrounds. ]
+First before constructing a textual g-window (called win) (this is the set the background color of textual windows rule):
 	if the background color of win is not empty:
 		set the background color of wintype 0 for all-styles to the background color of win;
 
@@ -706,8 +763,7 @@ After constructing a graphical g-window (called win) (this is the set the backgr
 Gargoyle sets the colour of its window padding based on the last background colour style hint given to the normal style. So after clearing all the background colours and styles, we set it based on the background color of the main window, or just set white if it isn't set. ]
 
 After constructing a textual g-window (this is the Gargoyle window padding rule):
-	[ TODO: let the main window be changed ]
-	let T be the background color of the main window;
+	let T be the background color of the acting main window;
 	if T is empty:
 		let T be "#FFFFFF";
 	set the background color of wintype 3 for normal-style to T;
