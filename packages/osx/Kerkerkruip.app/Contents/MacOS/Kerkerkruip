@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+echo "This is a blank script." 1>&2
+exit 1
