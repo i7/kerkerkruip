@@ -844,49 +844,60 @@ Last when play begins (this is the introduction rule):
 
 Section - Starting kits
 
-Option-2-chest is a container. Option-2-chest contains a scroll of shadows.
-Option-3-chest is a container. Option-3-chest contains a scroll of protection and a scroll of the blade.
-Option-4-chest is a container. Option-4-chest contains a scroll of death.
-Option-5-chest is a container. Option-5-chest contains two fragmentation grenades and a Morphean grenade.
-Option-6-chest is a container. Option-6-chest contains a scroll of mapping.
-Option-7-chest is a container. Option-7-chest contains a scroll of teleportation.
+[ We used to generate all random numbers in advance so that the number of random numbers generated doesn't depend on the difficulty... if that's a problem, we can probably just do starting kits later on after all dungeon generation is finished]
 
-Starting kit for the player (this is the player starting kit rule):
-	[ Generate these numbers now so that the number of random numbers generated doesn't depend on the difficulty ]
-	let n be a random number between 1 and 7;
-	let n2 be a random number between 1 and 20;
-	if basic game mode is true:
-		now n is 1; [Novice players without advanced content always have the same starting kit.]
-	else if difficulty is greater than 1 and n2 is 20:
-		now n is 50;
-	if n is 1:
+A starting kit can be rapier-based.
+
+Last starting kit setup for the player (this is the player starting kit rule):
+	if the selected kit of the player is rapier-based:
 		equip the player with the gilded rapier;
-		equip the player with the buckler;
-	if n is 2:
-		equip the player with the gorgeous dagger;		
-		equip player from option-2-chest;
-	if n is 3:
-		equip player from option-3-chest;
-	if n is 4:
-		equip the player with the evil dagger;		
-		equip player from option-4-chest;
-	if n is 5:
-		equip player from option-5-chest;
-		equip the player with Metastasio's hat;
-	if n is 6:
-		equip the player with the pickaxe;		
-		equip player from option-6-chest;
-	if n is 7:
-		equip the player with the gilded rapier;
-		equip player from option-7-chest; 
-	if n is 50:
-		equip the player with the gilded rapier;
-		equip the player with the addict's amulet;		
-		have the ment kick in;
 	repeat with item running through things enclosed by the player:
 		if item is a weapon or item is clothing:
-			now item is not cursed.
+			now item is not cursed;
+			if the difficulty is less than 2:
+				[should we always do this?]
+				now the size of item is the size of the player;
 
+buckler-kit is a rapier-based starting kit. [The only basic kit, so novice players without advanced content always have the same starting kit.]
+
+Starting kit setup when selecting buckler-kit:
+	equip the player with the buckler.
+	
+shadows-kit is an advanced starting kit. shadows-kit contains a scroll of shadows.
+
+Starting kit setup when selecting shadows-kit:
+	equip the player with the gorgeous dagger.
+
+blade-kit is an advanced starting kit. blade-kit contains a scroll of protection and a scroll of the blade.
+
+[blade-kit needs no special rules]
+
+evil-kit is an advanced starting kit. evil-kit contains a scroll of death.
+
+Starting kit setup when selecting evil-kit:
+	equip the player with the evil dagger.
+	
+grenade-kit is an advanced starting kit. grenade-kit contains two fragmentation grenades and a Morphean grenade.
+
+Starting kit setup when selecting grenade-kit:
+	equip the player with Metastasio's hat.
+	
+pickaxe-kit is an advanced starting kit. pickaxe-kit contains a scroll of mapping.
+
+Starting kit setup when selecting pickaxe-kit:
+	equip the player with the pickaxe;		
+	
+teleport-kit is an advanced rapier-based starting kit. teleport-kit contains a scroll of teleportation.
+
+[no special rules needed for teleport-kit]
+
+addict-kit is an advanced rapier-based starting kit. The rarity is 4. [should we also require that the difficulty is at least 1? We may need to implement placement possible rules for starting kits if so]
+	
+Last starting kit setup when selecting addict-kit (this is the cursed amulet stays cursed rule):
+	equip the player with the addict's amulet;
+	have the ment kick in.
+	
+The cursed amulet stays cursed rule is listed after the player starting kit rule in the starting kit setup rules.
 
 Chapter - The end
 

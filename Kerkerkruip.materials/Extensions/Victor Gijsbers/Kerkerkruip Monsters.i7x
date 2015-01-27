@@ -150,27 +150,30 @@ When play begins (this is the set up natural weapons rule):
 	repeat with guy running through people:
    		carry out the natural weapon setup activity with guy.
 			
-The starting kit rules are an object-based rulebook.
-
-Definition: a person is encounterable if it is denizen or the level of it is 0.
-
-A dungeon interest rule (this is the equip all encounterable creatures rule):
-	Repeat with guy running through encounterable people:
-		follow the starting kit rules for guy.
-
 A last reviving rule for a person (called guy) (this is the re-equip when reviving rule):
-	follow the starting kit rules for guy.
-
-To equip (guy - a person) from (box - a container):
-	repeat with item running through things enclosed by box:
-		move item to guy;
-		if item is a scroll and guy is the player:
-			identify item.
-		
+	Repeat with item running through things had by guy:
+		remove item from play;
+	set up a kit for guy.
+	
+To equip (guy - a person) with (box - a container):
+	repeat with item running through things in box:
+		now the original owner of item is the box;
+	[This makes starting kits reusable]
+	repeat with item running through things owned by the box:
+		equip guy with item.
+			
 To equip (guy - a person) with (item - a thing):
 	now item is the version of item available to guy;
 	move item to guy;
 	
+To equip (guy - a person) with (item - a scroll):
+	move item to guy;
+	if guy is the player:
+		identify item.
+		
+To equip (guy - a person) with (item - a grenade):
+	move item to guy;
+		
 To equip (guy - a person) with (item - a weapon):
 	repeat with impediment running through readied weapons enclosed by guy:
 		now impediment is not readied;
@@ -450,7 +453,7 @@ For natural weapon setup of the blood ape (this is the blood apes' fists rule):
 	now printed name of X is "ape's [size of blood ape] fists";
 	now X is plural-named.
 	
-Starting kit for the blood ape (this is the always reset ape's fists rule):
+Starting kit setup for the blood ape (this is the always reset ape's fists rule):
 	carry out the natural weapon setup activity with the blood ape.
 
 Aftereffects rule (this is the blood ape grows in size when hit rule):
@@ -754,7 +757,7 @@ Section - The armadillo stomach
 
 The armadillo stomach is a closed opaque container. The armadillo stomach is part of the ravenous armadillo.
 
-Starting kit for the armadillo (this is the fill the stomach rule):
+Starting kit setup for the armadillo (this is the fill the stomach rule):
 	let item be a random off-stage minor thing;
 	unless item is nothing:
 		move item to the armadillo stomach;
@@ -917,7 +920,20 @@ The legend-label of Miranda is Figure of map_legend_Miranda.
 
 Section - Setting up Miranda's power and equipment
 
-Starting kit rule for Miranda (this is the setting up Miranda rule):
+nunchucks-kit is a starting kit. The recipient is Miranda. nunchucks-kit contains the pair of nunchucks.
+
+double-strike-kit is a starting kit. The rarity is 2. The recipient is Miranda. double-strike-kit contains the dagger of the double strike.
+
+miranda-fists is a starting kit. The rarity is 2. The recipient is Miranda.
+
+Starting kit setup when selecting nunchucks-kit:
+	now the pair of nunchucks is wood;
+	if a random chance of 1 in 20 succeeds:
+		now the pair of nunchucks is adamant;
+	
+[nothing to do for miranda-fists or double-strike-kit]
+
+Starting kit setup for Miranda (this is the setting up Miranda rule):
 	now stun probability of Miranda is 100;
 	if a random chance of 1 in 2 succeeds:
 		now Miranda is not concentration-breaking reactor;
@@ -927,13 +943,6 @@ Starting kit rule for Miranda (this is the setting up Miranda rule):
 		now Miranda is not Disarmer;
 		now Miranda is concentration-breaking reactor;
 		now cbr strength of Miranda is 9;
-	if a random chance of 3 in 4 succeeds:
-		now the pair of nunchucks is wood;
-		equip Miranda with the pair of nunchucks;
-		if a random chance of 1 in 20 succeeds:
-			now the pair of nunchucks is adamant;
-	otherwise if a random chance of 1 in 2 succeeds:
-		equip Miranda with the dagger of the double strike;
 	equip Miranda with the monk's robe;
 	if a random chance of 1 in 5 succeeds:
 		equip Miranda with Miranda's amulet.
@@ -1748,15 +1757,9 @@ For natural weapon setup of the Reaper (this is the Reaper's knuckles rule):
 
 The reaper is a weapon user.
 
-Starting kit for the Reaper (this is the Reaper carries a random scythe rule):
-	let m be a random number between 1 and 3;
-	if m is 1:
-		equip the Reaper with the scythe of flaming;
-	if m is 2:
-		equip the Reaper with the scythe of slaying;
-	if m is 3:
-		equip the Reaper with the scythe of oxidation.
-
+flaming-kit is a starting kit. The recipient is the Reaper. flaming-kit contains the scythe of flaming.
+slaying-kit is a starting kit. The recipient is the Reaper. slaying-kit contains the scythe of slaying.
+oxidation-kit is a starting kit. The recipient is the Reaper. oxidation-kit contains the scythe of oxidation.
 
 Section - Reaper images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
@@ -5313,7 +5316,7 @@ After reporting Malygris teleporting:
 			if demonic assassin is alive and demonic assassin is off-stage: [failed to summon last time]
 				now Malygris-summon-countdown is a random number between 4 and 5. [and this time he is faster]
 
-Starting kit for Malygris (this is the randomise Malygris teleporting rule):
+Starting kit setup for Malygris (this is the randomise Malygris teleporting rule):
 	if a random chance of 1 in 4 succeeds: [teleporting]
 		if a random chance of 1 in 4 succeeds:
 			now teleport amount of Malygris is 0;
@@ -5344,7 +5347,7 @@ Every turn when Malygris-summon-countdown is not 0:
 		
 Section - Special power - Disintegration
 
-Starting kit for Malygris (this is the randomise Malygris disintegration rule):
+starting kit setup for Malygris (this is the randomise Malygris disintegration rule):
 	now disintegrate power of Malygris is 10;
 	if a random chance of 1 in 3 succeeds:
 		if a random chance of 2 in 3 succeeds:
@@ -5375,7 +5378,7 @@ Carry out Malygris unghouling:
 	unghoulify the player;
 	increase Malygris-unghouled-times by 1.
 
-Starting kit for Malygris (this is the randomise Malygris unghouling rule):
+starting kit setup for Malygris (this is the randomise Malygris unghouling rule):
 	if a random chance of 1 in 2 succeeds:
 		now malygris-unghouling is true;
 		if generation info is true, say "* Malygris can unghoul.";
@@ -5384,7 +5387,7 @@ Starting kit for Malygris (this is the randomise Malygris unghouling rule):
 
 Section - Special power - Healing
 
-Starting kit for Malygris (this is the randomise Malygris healing rule):
+starting kit setup for Malygris (this is the randomise Malygris healing rule):
 	if a random chance of 1 in 5 succeeds:
 		now heal cooldown of Malygris is a random number between 1 and 5;
 		repeat with i running from 1 to 3:
@@ -6579,7 +6582,7 @@ Drakul-victory is a truth state that varies. Drakul-victory is false.
 
 Drakul-favour is a truth state that varies.
 
-Starting kit for Drakul (this is the Drakul's intentions rule):
+starting kit setup for Drakul (this is the Drakul's intentions rule):
 	now Drakul-favour is whether or not a random chance of 1 in 3 succeeds.
 
 Report Drakul hitting a dead pc:

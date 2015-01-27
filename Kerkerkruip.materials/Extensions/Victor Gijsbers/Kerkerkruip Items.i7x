@@ -4602,8 +4602,53 @@ Carry out reading Tome of Briar Roses:
 		if guy is sleeper:
 			now guy is asleep.
 
+Chapter - Starting kits
 
+A thing has an object called the original owner. [Set the original owner of a starting kit to assign that kit to a person]
 
+[use rarity like treasure rarity to control when starting kits appear]
+
+Definition: a person is encounterable if it is denizen or the level of it is 0.
+
+A dungeon interest rule (this is the equip all encounterable creatures rule):
+	Repeat with guy running through encounterable people:
+		set up a kit for guy;
+		
+A starting kit is a kind of container. A starting kit has a person called the recipient. The recipient of a starting kit is usually yourself.
+
+A person has an object called the selected kit.
+
+To decide which starting kit is the current kit:
+	Let the owner be the item described; [only works within the starting kit setup rules]
+	If the owner is not a person, decide on nothing;
+	decide on the selected kit of the owner;
+
+To decide whether selecting (item - a starting kit):
+	decide on whether or not the current kit is the item;
+
+[The verb to be equipped by means the selected kit property;]
+
+The starting kit setup rules are an object based rulebook. [on starting kits]
+
+A starting kit can be available.
+		
+To decide whether (item - a starting kit) is available to (guy - a person):
+	unless the recipient of item is the guy, no;
+	if basic game mode is true and item is advanced, no;
+	if item is too rare, no;
+	yes.
+	
+To set up a kit for (guy - a person):
+	repeat with item running through starting kits:
+		if item is available to guy, now item is available;
+		otherwise now item is not available;
+	Now the selected kit of guy is a random available starting kit;
+	Follow the starting kit setup rules for the guy;
+
+Starting kit setup rule for a person (called guy) (this is the unpack starting kit rule):
+	if the selected kit of guy is a starting kit:
+		equip the guy with the selected kit of the guy;
+		
 Chapter - Shimmering Items
 
 A thing can be shimmering. A thing is usually not shimmering.
@@ -4613,19 +4658,15 @@ Understand "not-shimmering" and "not shimmering" and "unshimmering" as a thing w
 
 A thing has an object called the shimmer-twin. The shimmer-twin of a thing is usually nothing.
 
-A thing has an object called the original owner.
-
 The verb to be owned by means the original owner property.
 
-[This rule is mainly used for rogues who always start out with the same equipment]
-First starting kit rule for a person (called guy) (this is the record ownership rule):
-	repeat with item running through things held by guy:
-		now the original owner of item is guy.
-			
-Last starting kit rule for a person (called guy) (this is the restore ownership rule):
-	[This rule is only takes effect if other starting kit rules haven't given the guy any items to ready or wear]
-	If guy encloses a readied weapon that is not a natural weapon, make no decision;
-	If guy wears something, make no decision;
+[This pair of rules is meant to deal with items given to rogues in the source, not with things they receive from starting kits]
+
+First starting kit setup rule for a person (called guy) (this is the note ownership rule):
+	Repeat with item running through things had by guy:
+		now the original owner of item is guy;
+		
+Last starting kit setup rule for a person (called guy) (this is the restore ownership rule):
 	Repeat with item running through things owned by guy:
 		equip guy with item;
 						
