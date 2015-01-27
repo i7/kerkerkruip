@@ -1,4 +1,4 @@
-Version 1/150125 of Flexible Windows (for Glulx only) by Dannii Willis begins here.
+Version 1/150127 of Flexible Windows (for Glulx only) by Dannii Willis begins here.
 
 "Exposes the Glk windows system so authors can completely control the creation and use of windows"
 
@@ -360,8 +360,10 @@ Section - Deconstructing windows
 Deconstructing something is an activity on g-windows.
 
 For deconstructing a g-window (called win) (this is the basic deconstruction rule):
+	say "basic deconstruction rule: [printed name of win] [ref number of win][line break]";
 	now win is g-unpresent;
 	call FW_glk_window_close for the ref number of win;
+	say "basic deconstruction succeeded[line break]";
 
 
 
@@ -496,6 +498,10 @@ A glulx zeroing-reference rule (this is the set g-window rocks rule):
 			if the rock of win is 0:
 				now the rock of win is i;
 				increase i by 10;
+	[enable RulesOnSub;]
+
+To enable RulesOnSub:
+(- if ( glk_window_get_root() ) { RulesOnSub(); } -).
 
 A glulx zeroing-reference rule (this is the reset window properties rule):
 	repeat with win running through g-windows:
@@ -503,7 +509,7 @@ A glulx zeroing-reference rule (this is the reset window properties rule):
 		now win is g-unpresent;
 		now win is not currently being processed;
 
-[ Find all present windows, mark them as present and store their ref numbers. ]
+[ Find all present windows, mark them as present and store their ref numbers. Note this will not run for the built in windows. ]
 A glulx resetting-windows rule (this is the find existing windows rule):
 	let win be the window with rock current glulx rock;
 	if win is not the invalid window:
@@ -511,11 +517,18 @@ A glulx resetting-windows rule (this is the find existing windows rule):
 		now win is g-present;
 
 A first glulx object-updating rule (this is the recalibrate windows rule):
-	[ I used to think it wasn't safe to calibrate windows here, but I can't really think why now ]
+	[ I used to think it wasn't safe to call the calibrate windows phrase here, but I can't really think why now ]
 	calibrate windows;
-	now gg_mainwin is the ref number of the acting main window;
-	now gg_statuswin is the ref number of the status window;
 	focus the current focus window;
+
+A first glulx object-updating rule (this is the find the built in windows rule):
+	if gg_mainwin is not 0:
+		now the ref number of the main window is gg_mainwin;
+		now the main window is g-present;
+		now gg_mainwin is the ref number of the acting main window;
+	if gg_statuswin is not 0:
+		now the ref number of the status window is gg_statuswin;
+		now the status window is g-present;
 
 
 
@@ -940,7 +953,7 @@ To say link (N - a number):
 To say end link:
 	(- if ( GEP_GlkGestaltResults-->gestalt_Hyperlinks ) { glk_set_hyperlink( 0 ); } -).
 
-The processing hyperlinks for something is an activity on g-windows.
+Processing hyperlinks for something is an activity on g-windows.
 The processing hyperlinks activity has a number called the hyperlink ID.
 
 After constructing a textual g-window (called win) (this is the request hyperlink events rule):
