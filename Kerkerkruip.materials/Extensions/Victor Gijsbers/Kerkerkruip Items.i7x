@@ -4604,10 +4604,6 @@ Carry out reading Tome of Briar Roses:
 
 Chapter - Starting kits
 
-A thing has an object called the original owner. [Set the original owner of a starting kit to assign that kit to a person]
-
-[use rarity like treasure rarity to control when starting kits appear]
-
 Definition: a person is encounterable if it is denizen or the level of it is 0.
 
 A dungeon interest rule (this is the equip all encounterable creatures rule):
@@ -4618,7 +4614,7 @@ A starting kit is a kind of container. A starting kit has a person called the re
 
 A person has an object called the selected kit.
 
-To decide which starting kit is the current kit:
+To decide which object is the current kit:
 	Let the owner be the item described; [only works within the starting kit setup rules]
 	If the owner is not a person, decide on nothing;
 	decide on the selected kit of the owner;
@@ -4649,18 +4645,26 @@ Starting kit setup rule for a person (called guy) (this is the unpack starting k
 	if the selected kit of guy is a starting kit:
 		equip the guy with the selected kit of the guy;
 		
-Chapter - Shimmering Items
+Chapter - Returning Items to their Owners
 
-A thing can be shimmering. A thing is usually not shimmering.
+A thing has an object called the original owner. [Set the original owner of a starting kit to assign that kit to a person]
+
+[A thing can be shimmering. A thing is usually not shimmering.
 Understand the shimmering property as describing a thing.
 Understand "shimmering" as a thing when the item described is shimmering.
 Understand "not-shimmering" and "not shimmering" and "unshimmering" as a thing when the item described is not shimmering.
 
-A thing has an object called the shimmer-twin. The shimmer-twin of a thing is usually nothing.
+A thing has an object called the shimmer-twin. The shimmer-twin of a thing is usually nothing.]
 
 The verb to be owned by means the original owner property.
 
-[This pair of rules is meant to deal with items given to rogues in the source, not with things they receive from starting kits]
+When play begins (this is the set original owner to container rule):
+	[This makes starting kits reusable]
+	Repeat with box running through containers:
+		Repeat with item running through things in box:
+			now the original owner of item is box;
+			
+The set original owner to container rule is listed before the place treasures rule in the dungeon generation rules.
 
 First starting kit setup rule for a person (called guy) (this is the note ownership rule):
 	Repeat with item running through things had by guy:
@@ -4670,15 +4674,14 @@ Last starting kit setup rule for a person (called guy) (this is the restore owne
 	Repeat with item running through things owned by guy:
 		equip guy with item;
 						
-to flicker is a verb.
+to flicker is a verb. to reappear is a verb.
 
-To decide which object is the original version of (item - a thing):
+[To decide which object is the original version of (item - a thing):
 	if item is shimmering:
 		decide on the shimmer-twin of item;
 	decide on item.
 	
 To decide which object is the shimmer-clone of (item - a thing):
-	Now item is the original version of item;
 	let new-item be the shimmer-twin of item;
 	if new-item is nothing:
 		now new-item is a new object cloned from item;
@@ -4693,17 +4696,20 @@ To decide which object is the shimmer-clone of (item - a thing):
 	
 [We want to use a shimmer-clone if somebody has lost their equipment in the dungeon and now it needs to be replaced. But that's a bit complicated to track, so we do something simpler: we assume that non-treasure items belong to npcs, and if they're in the dungeon it's because an npc dropped them.
 	This allows the player to be given an already-placed item at the beginning of the game. They'll never know it was stolen from the dungeon!]
+]
 	
 Definition: a thing is npc-owned if it is non-treasure and it is on-stage.
 Definition: the gilded rapier is npc-owned: no.
 
 To decide which object is the version of (item - a thing) available to (guy - a person):
-	now item is the original version of item;
+	[now item is the original version of item;]
 	if item is npc-owned and item is not enclosed by guy:
-		decide on the shimmer-clone of item;
+		if the location of the item is the location:
+			say "[The item] [flicker] out of existence[if the location of guy is the location], and [reappear] in the possession of [the guy][end if]!";
+		remove the item from play;
 	decide on item.
 		
-Before printing the name of a shimmering thing:
+[Before printing the name of a shimmering thing:
 	say "shimmering [run paragraph on]".
 	
 Before printing the plural name of a shimmering thing:
@@ -4712,6 +4718,77 @@ Before printing the plural name of a shimmering thing:
 Every turn when the player encloses a shimmering thing:
 	repeat with item running through shimmering things enclosed by the player:
 		say "[The item] suddenly disappears, as if it were only a dream.";
-		remove item from play.
+		remove item from play.]
+		
+Chapter - Equipping
+
+To equip (guy - a person) with (box - a container):
+	[the set original owner to container rule makes sure everything in a container is owned by the container]
+	repeat with item running through things owned by the box:
+		equip guy with item.
+			
+To equip (guy - a person) with (item - a thing):
+	now item is the version of item available to guy;
+	move item to guy;
+	
+To equip (guy - a person) with (item - a scroll):
+	move item to guy;
+	if guy is the player:
+		identify item.
+		
+To equip (guy - a person) with (item - a grenade):
+	move item to guy;
+		
+To equip (guy - a person) with (item - a weapon):
+	repeat with impediment running through readied weapons enclosed by guy:
+		now impediment is not readied;
+		if impediment is not a natural weapon:
+			remove impediment from play;
+	if item is not a natural weapon:
+		now item is the version of item available to guy;
+		move item to guy;
+	now item is readied;
+	
+To replace (O - a description of objects) on (guy - a person) with (item - clothing):
+	Repeat with impediment running through things worn by guy:
+		if impediment matches O:
+			[uncurse items?]
+			remove impediment from play;
+	now item is the version of item available to guy;
+	now guy wears item.
+		
+To equip (guy - a person) with (item - a necklace):
+	replace necklaces on guy with item;
+		
+To equip (guy - a person) with (item - a hat):
+	replace hats on guy with item;
+		
+To equip (guy - a person) with (item - a shirt):
+	replace shirts on guy with item;
+		
+To equip (guy - a person) with (item - a cloak):
+	replace cloaks on guy with item;
+		
+To equip (guy - a person) with (item - shoes):
+	replace shoes on guy with item;
+		
+To equip (guy - a person) with (item - trousers):
+	replace trousers on guy with item;
+		
+To equip (guy - a person) with (item - belt):
+	replace belts on guy with item;
+		
+To equip (guy - a person) with (item - gauntlets):
+	replace gauntlets on guy with item;
+		
+To equip (guy - a person) with (item - a mask):
+	replace masks on guy with item;
+		
+To equip (guy - a person) with (item - a suit):
+	replace suits on guy with item;
+		
+To equip (guy - a person) with (item - a shield):
+	replace shields on guy with item;
+		
 
 Kerkerkruip Items ends here.
