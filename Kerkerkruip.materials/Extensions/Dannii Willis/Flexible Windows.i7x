@@ -360,10 +360,8 @@ Section - Deconstructing windows
 Deconstructing something is an activity on g-windows.
 
 For deconstructing a g-window (called win) (this is the basic deconstruction rule):
-	say "basic deconstruction rule: [printed name of win] [ref number of win][line break]";
 	now win is g-unpresent;
 	call FW_glk_window_close for the ref number of win;
-	say "basic deconstruction succeeded[line break]";
 
 
 
@@ -498,10 +496,6 @@ A glulx zeroing-reference rule (this is the set g-window rocks rule):
 			if the rock of win is 0:
 				now the rock of win is i;
 				increase i by 10;
-	[enable RulesOnSub;]
-
-To enable RulesOnSub:
-(- if ( glk_window_get_root() ) { RulesOnSub(); } -).
 
 A glulx zeroing-reference rule (this is the reset window properties rule):
 	repeat with win running through g-windows:
@@ -555,6 +549,13 @@ Before deconstructing a textual g-window (called win) (this is the fix the curre
 		focus parent;
 	if win is the current input window:
 		set the acting main window as the current input window;
+
+After deconstructing a textual g-window (called win) (this is the clear the I6 window variables rule):
+	[ The fix the current windows rule could have changed the acting main window to something other than win, so we don't check for win. ]
+	if the acting main window is g-unpresent:
+		now gg_mainwin is 0;
+	if win is the status window:
+		now gg_statuswin is 0;
 
 
 

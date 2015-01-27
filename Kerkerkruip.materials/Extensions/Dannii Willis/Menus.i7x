@@ -94,6 +94,9 @@ To decide what number is the chosen menu option for (x - a number):
 		decide on x - 87;
 	decide on 0;
 
+To request a key press:
+	say "[italic type]Press a key to go back.[roman type][run paragraph on]";
+
 
 
 Part - Displaying a menu
