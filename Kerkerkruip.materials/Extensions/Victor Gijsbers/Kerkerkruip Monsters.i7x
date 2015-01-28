@@ -5298,7 +5298,7 @@ Malygris-unghouling is a truth state that varies.
 Malygris-unghouled-times is a number that varies. Malygris-unghouled-times is 0.
 
 An AI action selection rule for Malygris when Malygris-unghouling is true (this is the consider unghouling rule):
-	if the current form is ghoul-form and at least two undead persons are in the location:
+	if the current form is ghoul-form and the player is not hidden and at least two undead persons are in the location:
 		choose a blank Row in the Table of AI Action Options;
 		now the Option entry is the action of Malygris unghouling;
 		now the Action Weight entry is a random number between 0 and 30;
