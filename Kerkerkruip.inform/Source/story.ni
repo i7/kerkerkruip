@@ -23,7 +23,7 @@ Section - 3rd Party Inclusions
 Include 6L38 Patches by Friends of I7.
 Include Basic Screen Effects by Emily Short. 
 Include Numbered Disambiguation Choices by Aaron Reed.
-Include version 10/140201 of Glulx Entry Points by Emily Short.
+Include version 10/150126 of Glulx Entry Points by Emily Short.
 Include version 8/140515 of Dynamic Objects by Jesse McGrew.
 Include Questions by Michael Callaghan.
 Include version 1/140209 of Interpreter Sniffing by Friends of I7.
@@ -40,16 +40,16 @@ The information panels are an option.
 Section - Graphics and Windows
 
 [ Disable the status line purely to prevent reverse mode from being switched on. This doesn't prevent us from opening the status line manually, which we already had to do. ]
-[Use no status line.]
+Use no status line.
 
 [ Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. It is not necessary to comment out Flexible Windows when Glimmr is commented in. ]
 
-[Include version 14/140419 of Flexible Windows by Jon Ingold.]
+Include version 15/150128 of Flexible Windows by Jon Ingold.
 
 [Include Kerkerkruip Glimmr Additions by Erik Temple.]
 
-Include version 1/140416 of Menus by Dannii Willis.
-[Include Kerkerkruip Windows by Erik Temple.]
+Include version 1/150128 of Menus by Dannii Willis.
+Include Windows by Kerkerkruip.
 
 [Include Extended Debugging by Erik Temple.]
 
