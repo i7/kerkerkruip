@@ -113,7 +113,7 @@ Last when play begins rule (this is the identify test object scrolls rule):
 Section - The test object console
 
 The early in turn sequence flag is a truth state variable. The early in turn sequence flag variable translates into I6 as "EarlyInTurnSequence".
-[The test object console is a truth state variable.
+The test object console is a truth state variable.
 
 Definition: a number is console:
 	if it is 96, yes;
@@ -139,11 +139,11 @@ Emptying is an action applying to nothing.
 Understand "empty" as emptying while the test object console is true.
 
 This is the show the console rule:
-	open up the status-window;
+	open up the status window;
 	now the early in turn sequence flag is true;
 	now the test object console is true;
 	while 1 is 1:
-		clear the main-window;
+		clear the main window;
 		say "[bold type]The following things will be forcibly included in dungeons:[roman type][paragraph break]";
 		repeat through the Table of Requested Test Objects:
 			say "[the Object name entry][line break]";
@@ -165,7 +165,7 @@ This is the show the console rule:
 	write File of Test Objects from Table of Requested Test Objects;
 	now the early in turn sequence flag is false;
 	now the test object console is false;
-	shut down the status-window;
+	shut down the status window;
 
 [ Unfortunately these variables are set in the Generate Action Rule. Not to worry, we can set them ourselves! ]
 To set the parser variables manually:
@@ -177,7 +177,7 @@ Rule for constructing the status line while the test object console is true:
 
 Table of Console Status
 left	central	right
-""	"The Kerkerkruip console"	""]
+""	"The Kerkerkruip console"	""
 
 
 
