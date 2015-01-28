@@ -4397,6 +4397,7 @@ To call an ally:
 			say "You briefly see an image of [the guy] flickering above the overmind, and a weird buzzing sound fills the dungeon. In the image, [the guy] [move] to [place].";
 			now last-seen-location of the guy is place;
 			now guy is seen;
+			now guy is not asleep;
 		try guy going the way;
 	otherwise:
 		say "You briefly see an image of [the guy] flickering above the overmind, and a weird buzzing sound fills the dungeon.".
@@ -4508,6 +4509,7 @@ Carry out calling:
 			otherwise:
 				try the noun going the way;
 			now last-seen-location of the noun is location of the noun;
+			now the noun is not asleep;
 		otherwise:
 			say "[The noun] [have] no way to reach you!";
 	otherwise:
@@ -5131,7 +5133,7 @@ The do nothing when all enemies hidden rule is listed in the Automatos AI rules.
 The reset AI variables rule is listed in the Automatos AI rules.
 The reactors target the main actor rule is listed in the Automatos AI rules.
 The select a target rule is listed in the Automatos AI rules.
-The compel an action rule is listed in the Automatos AI rules. [TO DO: check whether this makes sense.]
+[The compel an action rule is listed in the Automatos AI rules. ][TO DO: check whether this makes sense.]
 The insane people attack themselves rule is listed in the Automatos AI rules.
 The select a weapon rule is listed in the Automatos AI rules.
 
