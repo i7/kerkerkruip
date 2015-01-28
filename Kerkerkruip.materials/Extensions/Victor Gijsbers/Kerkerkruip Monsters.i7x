@@ -5201,6 +5201,40 @@ An aftereffects rule (this is the Automatos loses actions rule):
 			now q is a random number between 1 and (n minus 1);
 			remove entry q from Automatos AI list. [Yes, this can reduce the length of the list to 0!]
 
+Section - Power of Automatos
+
+Animation-used is a truth state that varies. Animation-used is false.
+
+The power of Automatos is a power. Automatos grants power of Automatos.
+The power level of power of Automatos is 4.
+The command text of power of Automatos is "[if animation-used is false]animate[end if]".
+The description of power of Automatos is "Type: active ability.[paragraph break]Command: link [italic type]someone[roman type].[paragraph break]The 'link' command will link your spirit to that of another person. Until you link to someone else, you will benefit from the concentration of the person you linked to just as if it were your own. Every turn, the link has a 10% probability of unravelling; but this probability is decreased by 1% for every 3 points of spirit you have, to a minimum of 1% at 27 spirit.[paragraph break]Command: reform.[paragraph break]You immediately heal for an amount of damage equal to your spirit score. However, your spirit score permanently drops by 5 points."
+The power-name of power of Automatos is "power of Automatos".
+
+Table of Enemy Powers (continued)
+power	faculty1	faculty2
+power of Automatos	mind	spirit
+
+Absorbing power of Automatos:
+	increase melee of the player by 4;
+	increase defence of the player by 4;
+	increase permanent health of the player by 20;
+	say "As Automatos dies, you feel its soul absorbed into your own body. ([bold type]Power of Automatos[roman type]: +4 attack, +4 defence, +20 health, and you can [italic type]animate[roman type] a single weapon to serve you in combat.[paragraph break]".
+
+Repelling power of Automatos:
+	decrease melee of the player by 4;
+	decrease defence of the player by 4;
+	decrease permanent health of the player by 20;
+	remove animated weapon from play.
+
+Status skill rule (this is the Automatos status skill rule):
+	if power of Automatos is granted:
+		say "You have the power of Automatos, which allows you to [bold type]animate[roman type] a single weapon. [italic type](Level 4)[roman type][line break][run paragraph on]".
+
+Section - Animated weapon
+
+Animated weapon is a friendly person.
+
 
 
 Chapter - Level 5 - Malygris
