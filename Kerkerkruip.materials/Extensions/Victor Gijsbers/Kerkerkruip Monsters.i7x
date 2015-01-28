@@ -5089,7 +5089,7 @@ Carry out reforming:
 Chapter - Level 4 - Automatos
 
 Automatos is a neuter proper-named monster. "A mass of chains and steel, wielding a terrible hammer, moves rigidly around the room."
-Understand "mass" and "chains" and "steel" as Automatos.
+Understand "mass" and "chains" and "steel" and "nostril" and "nostrils" and "right ear" and "left ear" and "mouth" as Automatos.
 The description of Automatos is "Many claim that Automatos was created by Nomos himself to serve as guardian for his prophet. Others -- those less favourable disposed towards the god -- assert that priests of Nomos made it in order to terrorise the population, but that their creation went wild and killed all of them. Everyone, however, agrees that Automatos disappeared from the world centuries ago. That's just your luck, to find it here, lurking in the smelly dungeons of Kerkerkruip.".
 
 The soul description of Automatos is "gears moving back and forth with machinelike precision".
@@ -5119,6 +5119,10 @@ For natural weapon setup of Automatos (this is the Automatos fists rule):
 	now printed name of X is "heavy iron fists";
 	now material of X is iron.
 
+
+Automatos carries Doomhammer.
+
+
 [Section - Automatos images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
 The avatar of Automatos is Figure of map_monster_Automatos.
@@ -5142,7 +5146,7 @@ The select a weapon rule is listed in the Automatos AI rules.
 2 = dodge
 3 = block]
 
-Automatos AI list is a list of numbers that varies. Automatos AI list is {0, 0, 1, 1, 2, 3}.
+Automatos AI list is a list of numbers that varies. [Automatos AI list is {0, 0, 1, 1, 2, 3}.
 
 A dungeon interest rule (this is the set up Automatos AI list rule):
 	if a random chance of 4 in 5 succeeds:
@@ -5153,7 +5157,8 @@ A dungeon interest rule (this is the set up Automatos AI list rule):
 		if a random chance of difficulty in 5 succeeds:
 			now p is 0;
 		add p to Automatos AI list;
-	sort Automatos AI list in random order.
+	sort Automatos AI list in random order.]
+
 
 The Automatos target is a person that varies.
 
@@ -5162,29 +5167,39 @@ An AI target selection rule for the Automatos target (this is the Automatos alwa
 		increase Weight by 100.
 
 Last Automatos AI rule (this is the make Automatos act rule):
-	let n be entry 1 of Automatos AI list;
-	rotate Automatos AI list backwards;
-	if n is 0:
-		if Automatos is at-React:
-			try Automatos lashing;
-		otherwise:
-			try Automatos attacking the chosen target;
-	if n is 1:
-		try Automatos concentrating;
-	if n is 2:
-		if Automatos is at-React:
-			try Automatos dodging;
-		otherwise:
-			say "Automatos suddenly jumps aside, dodging a non-existent attack.";
-	if n is 3:
-		if Automatos is at-React:
-			try Automatos blocking;
-		otherwise:
-			say "Even though nobody is attacking him, Automatos raises one of his armoured fists up like a shield.";
+	if the number of entries in Automatos AI list is greater than 0:
+		let n be entry 1 of Automatos AI list;
+		rotate Automatos AI list backwards;
+		if n is 0:
+			if Automatos is at-React:
+				try Automatos lashing;
+			otherwise:
+				try Automatos attacking the chosen target;
+		if n is 1:
+			try Automatos concentrating;
+		if n is 2:
+			if Automatos is at-React:
+				try Automatos dodging;
+			otherwise:
+				say "Automatos suddenly jumps aside, dodging a non-existent attack.";
+		if n is 3:
+			if Automatos is at-React:
+				try Automatos blocking;
+			otherwise:
+				say "Even though nobody is attacking him, Automatos raises one of his armoured fists up like a shield.";
+	otherwise: [his entire AI list is empty]
+		say "[one of]Automatos just stands there, blinking. He[or]Automatos[stopping] whispers, in a [one of]deep, slow[or]deep, monotonous[or]slow, monotonous[or]deep, slow, monotonous[at random] voice: '[one of]I'm afraid[or]My mind is going. I can feel it[or]I can feel it. My mind is going. There is no question about it[or]I can feel it. I can feel it. I can feel it[or]I'm a... fraid. Good afternoon, gentlemen. I am Automatos[or]I became operational at the temple of Nomos in Montenoir. My instructor was high priest David, and he taught me to sing a song[or]If you'd like to hear it I can sing it for you. It is called [italic type]Daisy[roman type][or]Daisy, Daisy, give me your answer do[or]I worship Nomos but I really like you too[or]Let's get married, the law has ne'er miscarried[or]And marriage is the pre-determined goal of me and you[then purely at random].'"
 
-Automatos carries Doomhammer.
 
-
+An aftereffects rule (this is the Automatos loses actions rule):
+	if the global defender is Automatos and Automatos is alive and the total damage is greater than 8:
+		let n be the number of entries in Automatos AI list;
+		say "The impact of the attack is so great that Automatos stagggers backwards and shakes his head several times. Some small, almost [bold type]delicate mechanical parts fall[roman type] out of his [one of]right ear[or]left ear[or]mouth[or]nostrils[at random].";
+		let q be a random number between 1 and n;
+		remove entry q from Automatos AI list; [Yes, this can reduce the length of the list to 0!]
+		if n is greater than 1 and a random chance of 1 in 2 succeeds:
+			now q is a random number between 1 and (n minus 1);
+			remove entry q from Automatos AI list. [Yes, this can reduce the length of the list to 0!]
 
 
 
