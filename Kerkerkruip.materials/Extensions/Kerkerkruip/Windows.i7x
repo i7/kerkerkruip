@@ -75,7 +75,7 @@ To place border (win - a graphics g-window):
 	if glulx graphics is supported:
 		open up win.
 
-[ The status window ]
+[ The stats window ]
 
 The border-1-window is a border spawned by the main window.
 The measurement is 6.
@@ -127,22 +127,26 @@ After deconstructing the powers window:
 
 [ The status window ]
 
-The border-7-window is a border spawned by the main window.
+[ Note: these must be moved when the acting main window changes. ]
+A status window border is a kind of border.
+
+The border-7-window is a status window border spawned by the main window.
 The measurement is 1.
 The position is g-placeabove.
 The background color is humanist crimson.
 
-The border-12-window is a border spawned by the main window.
+The border-12-window is a status window border spawned by the main window.
 The measurement is 7.
 The position is g-placeabove.
 The background color is header color.
 
-The border-13-window is a border spawned by the main window.
+The border-13-window is a status window border spawned by the main window.
 The measurement is 7.
 The position is g-placeabove.
 The background color is header color.
 
 Before constructing the status window:
+	now all status window borders are spawned by the acting main window;
 	if the current IO implementation is GarGlk:
 		place border border-12-window;
 
