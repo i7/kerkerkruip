@@ -1,10 +1,10 @@
-Kerkerkruip Test Sets by Mike Ciul begins here.
+Test Sets by Kerkerkruip begins here.
 
 Use authorial modesty.
 
 Volume - All Test Sets (not for release)
 
-Include Kerkerkruip Automated Testing by Mike Ciul.
+Include Automated Testing by Kerkerkruip.
 
 Section - Aite Champions vs Bat
 
@@ -2838,4 +2838,4 @@ failing move is a test step.
 Testing effects of failing move:
 	assert "truth is false" based on false.
 		
-Kerkerkruip Test Sets ends here.
+Test Sets ends here.

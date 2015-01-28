@@ -1,4 +1,4 @@
-Kerkerkruip Automated Testing by Mike Ciul begins here.
+Automated Testing by Kerkerkruip begins here.
 
 Use authorial modesty.
 
@@ -891,7 +891,7 @@ Test Arena is an arena. The staging area of Test Arena is maze-waiting-room.
 
 Test Arena is faction-imposing.
 
-Kerkerkruip Automated Testing ends here.
+Automated Testing ends here.
 
 ---- DOCUMENTATION ----
 
