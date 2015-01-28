@@ -1845,29 +1845,30 @@ To do the maze move:
 	if hate is present:
 		now the player is runner;
 	extract the player from combat, giving enemies a chance to hit;
-	say "You [if the player is runner]flee[otherwise]move[end if] through the tunnels, quickly losing all sense of direction.";
-	now the player is not runner;
-	repeat with item running through things in the maze:
-		unless item is the player:
-			unless item is a person:
-				remove item from play;
-			otherwise:
-				extract item from combat;
-				if maze-waiting-room encloses a person and the noun is maze-sound:
-					say "[conditional paragraph break][The item] follows you towards the sound.";
+	if the player is mobile: [Stop if being hit by enemies has made the player immobile; e.g., by being dead.]
+		say "You [if the player is runner]flee[otherwise]move[end if] through the tunnels, quickly losing all sense of direction.";
+		now the player is not runner;
+		repeat with item running through things in the maze:
+			unless item is the player:
+				unless item is a person:
+					remove item from play;
 				otherwise:
-					move item to maze-waiting-room;
-	if noun is maze-sound:
-		let guy be a random person in maze-waiting-room;
-		extract guy from combat [should be redundant, but won't do any harm];
-		move guy to maze;
-	now maze-sound is northwest;
-	update the combat status;
-	if combat status is peace:
-		if a random chance of 1 in 2 succeeds:
-			now maze-sound is a random cardinal direction;
-			say "[line break]A sound comes from somewhere [bold type][maze-sound][roman type] from here.";
-	try looking.
+					extract item from combat;
+					if maze-waiting-room encloses a person and the noun is maze-sound:
+						say "[conditional paragraph break][The item] follows you towards the sound.";
+					otherwise:
+						move item to maze-waiting-room;
+		if noun is maze-sound:
+			let guy be a random person in maze-waiting-room;
+			extract guy from combat [should be redundant, but won't do any harm];
+			move guy to maze;
+		now maze-sound is northwest;
+		update the combat status;
+		if combat status is peace:
+			if a random chance of 1 in 2 succeeds:
+				now maze-sound is a random cardinal direction;
+				say "[line break]A sound comes from somewhere [bold type][maze-sound][roman type] from here.";
+		try looking.
 
 Instead of throwing something to in the maze:
 	take no time;
