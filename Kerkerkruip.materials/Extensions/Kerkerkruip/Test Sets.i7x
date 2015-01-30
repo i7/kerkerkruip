@@ -956,7 +956,10 @@ Test play when testing temporary Nomos blood magic:
 	let the base chance be the chance of the player remaining concentrated;
 	try wearing the inquisitor's hood;
 	assert that (the chance of the player remaining concentrated - the base chance) is 15;
+	try concentrating;
+	transcribe and restart capturing;
 	try feeding the inquisitor's hood;
+	pause and assert that the event description includes "You feed 5 health to the inquisitor's hood, increasing its power \(and losing your concentration\)!";
 	transcribe and restart capturing;
 	try examining the inquisitor's hood;
 	pause and assert that the event description includes "This particular one gives you a \+25% chance of remaining concentrated when damaged\. It also increases your dreadful presence by 1\. Feeding 10 blood to the hood will temporarily add 10% to the chance of remaining concentrated";
@@ -1020,9 +1023,10 @@ Testing effects of malleus-earning:
 	try examining the malleus maleficarum;
 	pause and assert that the event description includes "Feeding 1 blood to the Malleus Maleficarum will give it a bonus of \+1 attack and \+1 damage on your next attack.* dreadful presence\.";
 	
-daggers-meeting is a extracting test step. The location-target of daggers-meeting is the swarm of daggers.
+daggers-meeting is a test step. 
 
 Testing effects of daggers-meeting:
+	prepare a test battle with the swarm of daggers;
 	now the health of the player is 1000;
 	now the health of the swarm of daggers is 100;
 	now the melee of the player is 100;
