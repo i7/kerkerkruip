@@ -2757,28 +2757,30 @@ damage-text is a test set.
 damage-text testing is a test step. The first move of damage-text is damage-text testing.
 
 Initial scheduling of damage-text testing:
-	prepare a test battle with Bodmall;
+	prepare a test battle with the reaper;
 	now the health of the player is 1000;
-	now the health of Bodmall is 1000;
-	compel the action of Bodmall waiting.
+	now the health of the reaper is 1000;
+	compel the action of the reaper waiting.
 	
 To check for damage typos:
 	assert that the event description does not include "<0-9> +<0-9>";
 	assert that the event description does not include ".*=<^\n>*=";
 	
 Testing effects of damage-text testing:
-	Have the Bodmall do a dodge reaction to a 100 melee hit with result "You deal <0-9>+ <^\n>+ = <0-9>+ damage";
+	Have the the reaper do a dodge reaction to a 100 melee hit with result "You deal <0-9>+ <^\n>+ = <0-9>+ damage";
 	check for damage typos;
 	say Divine lightning strikes the player;
-	pause and assert that the event description includes "A ball of lightning shoots from the sky, doing <3-7> damage to you";
+	pause and assert that the event description includes "A ball of lightning shoots from the sky, doing <3-7> damage to you"; [fails currently, but if it didn't, we might want another test for when the damage was reduced]
+	now the reusable item is a random fragmentation grenade;
+	have a fragmentation event in the location with the reusable item by the player;
+	pause and assert that the event description includes "<2-5> damage to the Reaper; and <2-5> damage to you";
+	now the player wears the armour of thorns;
+	now the blood magic level of the armour of thorns is 1;
+	have the player do a dodge reaction to a 100 melee hit by the reaper with result "The armour of thorns scratches the Reaper for 1 damage.";
 	
 
-[
-./Victor Gijsbers/kerkerkruip events and specials.i7x:	have no-source inflict damage on the guy;
-./Victor Gijsbers/Kerkerkruip Events.i7x:			have fragmentation-item inflict damage on guy;
-./Victor Gijsbers/Kerkerkruip Events.i7x:			have fragmentation-item inflict damage on guy, silently;	
+[	
 ./Victor Gijsbers/Kerkerkruip Items.i7x:				have armour of thorns inflict damage on global attacker;
-./Victor Gijsbers/Kerkerkruip Items.i7x:			have lion's shield inflict damage on global attacker, silently;
 ./Victor Gijsbers/Kerkerkruip Items.i7x:				have no-source inflict damage on guy;
 ./Victor Gijsbers/Kerkerkruip Items.i7x:				have no-source inflict damage on guy, silently;
 ./Victor Gijsbers/Kerkerkruip Items.i7x:		have no-source inflict damage on player;

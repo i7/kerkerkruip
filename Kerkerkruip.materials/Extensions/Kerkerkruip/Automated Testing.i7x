@@ -954,7 +954,10 @@ To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength 
 				assert "success" based on true; [record success]
 				[if there are successes, we must exit on one so further tests can be done]
 				stop;
-	assert "After [maximum attempts] attempt[s], [hit-description] resulted in '[outcome]' [success count] time[s] (Never within [percent-tolerance] percent of [success ratio] out of [total tries] versus a target of [likelihood])" based on whether or not likelihood is 0;
+	if total tries is 1:
+		assert "[hit-description] did not match '[outcome]':[paragraph break][the event description]" based on whether or not likelihood is 0;
+	otherwise:
+		assert "After [maximum attempts] attempt[s], [hit-description] resulted in '[outcome]' [success count] time[s] (Never within [percent-tolerance] percent of [success ratio] out of [total tries] versus a target of [likelihood])" based on whether or not likelihood is 0;
 	transcribe and restart capturing;
 	
 To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit with result (outcome - a text):
