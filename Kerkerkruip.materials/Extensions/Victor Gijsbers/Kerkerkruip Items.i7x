@@ -4086,7 +4086,7 @@ Instead of drinking vial of purification:
 	if the player worships Chton:
 		say "Chton prevents the vial of purification from doing its work; but your attempt at escaping undeath did not amuse him. A wave of extreme cold racks your body, dealing 15[run paragraph on]";
 		deal 15 points of divine damage;
-		have no-source inflict damage on player;
+		have no-source inflict damage on player; [why not Chton?]
 		say "!";
 		if the player is dead:
 			end the story saying "Don't worry; Chton will soon raise you as a mindless zombie.";

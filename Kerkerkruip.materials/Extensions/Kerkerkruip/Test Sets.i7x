@@ -2760,7 +2760,6 @@ Initial scheduling of damage-text testing:
 	prepare a test battle with the reaper;
 	now the health of the player is 1000;
 	now the health of the reaper is 1000;
-	compel the action of the reaper waiting.
 	
 To check for damage typos:
 	assert that the event description does not include "<0-9> +<0-9>";
@@ -2785,14 +2784,25 @@ Testing effects of damage-text testing:
 	now the player carries the reusable item;
 	try reading the reusable item;
 	pause and assert that the event description includes "A wave of unholy energy is released, dealing <3-6> damage to the Reaper; and <3-6> damage to you.";
-	
+	[not sure how we could trigger an unholy wave in another room, but it wouldn't print anything anyway]
+	now the player worships Chton;
+	now the player carries the vial of purification;
+	try drinking the vial of purification;
+	pause and assert that the event description includes "Chton prevents the vial of purification from doing its work; but your attempt at escaping undeath did not amuse him. A wave of extreme cold racks your body, dealing 15 damage!";
+	extract the player to the Temple of Aite;
+	try climbing the statue of Aite;
+	pause and assert that the event description includes "You cut yourself as soon as you touch the statue. The weapons deal 3 damage.";
+	prepare a test battle with the abyss of the soul;
+	try the abyss of the soul pulsating;
+	pause and assert that the event description includes "The abyss of the soul pulsates, sending out a wave of negative energy that deals <1-2> damage to you.";
+	prepare a test battle with the chain golem;
+	now the defence of the chain golem is 50;
+	now the body score of the player is -100;
+	now the concentration of the chain golem is 3;
+	try attacking the chain golem;
+	pause and assert that the event description includes "You attempt to duck under the whirling chains. You roll <0-9>+ \+ -100 \(body\) = -<0-9>+ against a target number of <0-9>+, failing the body check. One of the chains catches you with a loud smack, dealing 6 damage."
 
 [	
-./Victor Gijsbers/Kerkerkruip Items.i7x:				have no-source inflict damage on guy;
-./Victor Gijsbers/Kerkerkruip Items.i7x:				have no-source inflict damage on guy, silently;
-./Victor Gijsbers/Kerkerkruip Items.i7x:		have no-source inflict damage on player;
-./Victor Gijsbers/Kerkerkruip Locations.i7x:	have statue of Aite inflict damage on the player;
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:[Chain golem: when concentrating, surrounds itself with a whirling, slicing field of chains.] [Wounds inflicted by the chain golem continue to bleed?]
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:					have X inflict damage on the actor;
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:				have no-source inflict damage on explosion victim, silently;
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:		have the giant tentacle inflict damage on the chosen target, silently;
@@ -2802,7 +2812,6 @@ Testing effects of damage-text testing:
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:		have the swarm of bees inflict damage on guy, silently;
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:		have Israfel inflict damage on the global attacker, silently;
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:		have Isra inflict damage on global attacker, silently;
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:			have no-source inflict damage on the guy;
 ./Victor Gijsbers/Kerkerkruip Religion.i7x:	have Aite inflict damage on the guy, silently;
 ./Victor Gijsbers/Kerkerkruip Religion.i7x:		have Sul inflict damage on the player;
 ./Victor Gijsbers/Kerkerkruip Religion.i7x:	have Sul inflict damage on the player;
