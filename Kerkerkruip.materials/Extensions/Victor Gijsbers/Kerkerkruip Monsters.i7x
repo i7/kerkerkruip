@@ -1638,7 +1638,8 @@ Killing rule (this is the explode after death rule):
 							now the health of the explosion victim is -10;
 							have an event of the player killing explosion victim;
 				otherwise:
-					say "Your body explodes vehemently as you throw yourself at [the explosion victim], but you only deal [n] damage instead of the [health of the explosion victim] damage you needed to deal.[paragraph break]".
+					increase the health of the explosion victim by the total damage;
+					say "Your body explodes vehemently as you throw yourself at [the explosion victim], but you only deal [the total damage] damage instead of the [health of the explosion victim] damage you needed to deal.[paragraph break]".
 		
 Status skill rule (this is the jumping bomb power status skill rule):
 	if power of the bomb is granted:
@@ -6099,7 +6100,7 @@ Carry out the abyss of the soul pulsating:
 			say "[if n is 1 and original n is not 1]and [end if][run paragraph on]";
 			let m be a random number between 1 and the abyss of the soul strength;
 			deal m points of necromantic damage;
-			have no-source inflict damage on the guy; [why not the abyss?]
+			have no-source inflict damage on the guy; [why not the abyss? ]
 			say " [roman type]to [guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive and m is not 0] (which breaks [regarding the guy][possessive] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
 			unless total damage is 0:
 				now concentration of guy is 0;

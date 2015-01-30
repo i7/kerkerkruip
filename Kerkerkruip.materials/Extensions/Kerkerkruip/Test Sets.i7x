@@ -2797,15 +2797,25 @@ Testing effects of damage-text testing:
 	pause and assert that the event description includes "The abyss of the soul pulsates, sending out a wave of negative energy that deals <1-2> damage to you.";
 	prepare a test battle with the chain golem;
 	now the defence of the chain golem is 50;
+	now the melee of the player is 0;
+	now the health of the chain golem is 1000;
 	now the body score of the player is -100;
 	now the concentration of the chain golem is 3;
 	try attacking the chain golem;
-	pause and assert that the event description includes "You attempt to duck under the whirling chains. You roll <0-9>+ \+ -100 \(body\) = -<0-9>+ against a target number of <0-9>+, failing the body check. One of the chains catches you with a loud smack, dealing 6 damage."
-
+	pause and assert that the event description includes "You attempt to duck under the whirling chains. You roll <0-9>+ \+ -100 \(body\) = -<0-9>+ against a target number of <0-9>+, failing the body check. One of the chains catches you with a loud smack, dealing 6 damage.";
+	now the power of the bomb is granted;
+	now the health of the player is 0;
+	have an event of the chain golem killing the player;
+	pause and assert that the event description includes "Your body explodes vehemently as you throw yourself at the chain golem, but you only deal 5 damage instead of the 1000 damage you needed to deal.";
+	now the health of the player is 1000;
+	prepare a test battle with the tentacle;
+	now the chosen target is the player;
+	now the tentacle grapples the player;
+	try the tentacle tentacle-constricting;
+	pause and assert that the event description includes "The giant tentacle tightens its muscles, dealing 1 damage to you";
+	
 [	
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:					have X inflict damage on the actor;
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:				have no-source inflict damage on explosion victim, silently;
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:		have the giant tentacle inflict damage on the chosen target, silently;
+../Victor Gijsbers/Kerkerkruip Monsters.i7x:		have the giant tentacle inflict damage on the chosen target, silently;
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:		have global attacker weapon inflict damage on the global defender;  [The crucial line.]
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:The description of the tormentor of Aite is "You immediately recognise the black-robed mage as a tormentor of Aite, savage priests who specialise in inflicting pain on all who oppose their faith.".
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:		have the brambles inflict damage on guy;
