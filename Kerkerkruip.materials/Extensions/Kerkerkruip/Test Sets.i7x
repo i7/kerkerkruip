@@ -2774,13 +2774,20 @@ Testing effects of damage-text testing:
 	now the reusable item is a random fragmentation grenade;
 	have a fragmentation event in the location with the reusable item by the player;
 	pause and assert that the event description includes "<2-5> damage to the Reaper; and <2-5> damage to you";
+	[skip fragmentation in other rooms because no damage text is printed]
 	now the player wears the armour of thorns;
 	now the blood magic level of the armour of thorns is 1;
 	have the player do a dodge reaction to a 100 melee hit by the reaper with result "The armour of thorns scratches the Reaper for 1 damage.";
+	now the player wears the lion's shield;
+	now the defence of the player is 50;
+	have the player do a block reaction to a 0 melee hit by the reaper with result "The lion on the shield strikes out, and bites the Reaper for 2 damage.";
+	Now the reusable item is a random scroll of death;
+	now the player carries the reusable item;
+	try reading the reusable item;
+	pause and assert that the event description includes "A wave of unholy energy is released, dealing <3-6> damage to the Reaper; and <3-6> damage to you.";
 	
 
 [	
-./Victor Gijsbers/Kerkerkruip Items.i7x:				have armour of thorns inflict damage on global attacker;
 ./Victor Gijsbers/Kerkerkruip Items.i7x:				have no-source inflict damage on guy;
 ./Victor Gijsbers/Kerkerkruip Items.i7x:				have no-source inflict damage on guy, silently;
 ./Victor Gijsbers/Kerkerkruip Items.i7x:		have no-source inflict damage on player;
