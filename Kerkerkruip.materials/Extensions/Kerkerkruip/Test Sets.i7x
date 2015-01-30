@@ -2809,13 +2809,12 @@ Testing effects of damage-text testing:
 	pause and assert that the event description includes "Your body explodes vehemently as you throw yourself at the chain golem, but you only deal 5 damage instead of the 1000 damage you needed to deal.";
 	now the health of the player is 1000;
 	prepare a test battle with the tentacle;
-	now the chosen target is the player;
-	now the tentacle grapples the player;
+	have the player do a dodge reaction to a 100 melee hit by the tentacle with result "The tentacle deals 1 damage, wounding you to <0-9>+ health." in 1 out of 2 attempts;
+	check for damage typos;
 	try the tentacle tentacle-constricting;
 	pause and assert that the event description includes "The giant tentacle tightens its muscles, dealing 1 damage to you";
 	
 [	
-../Victor Gijsbers/Kerkerkruip Monsters.i7x:		have the giant tentacle inflict damage on the chosen target, silently;
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:		have global attacker weapon inflict damage on the global defender;  [The crucial line.]
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:The description of the tormentor of Aite is "You immediately recognise the black-robed mage as a tormentor of Aite, savage priests who specialise in inflicting pain on all who oppose their faith.".
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:		have the brambles inflict damage on guy;
