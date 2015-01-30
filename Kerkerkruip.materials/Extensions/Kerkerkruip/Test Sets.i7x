@@ -2501,84 +2501,6 @@ weapon aftereffects is a test set.
 Scenario when testing weapon aftereffects:
 	now the body score of fafhrd is 100;
 
-reaction-type is a kind of value. The reaction-types are no reaction, parry reaction, dodge reaction, block reaction.
-
-A reaction-type has a text called the report. The report of a reaction-type is usually "";
-
-The report of the parry reaction is "\(defender parrying\)".
-The report of the dodge reaction is "\(defender dodging\)".
-The report of the block reaction is "\(block (bonus|penalty)\)".
-
-To assign (reaction - a reaction-type) to (guy - a person):
-	if reaction is parry reaction:
-		now guy is at parry;
-	else if reaction is dodge reaction:
-		now guy is at dodge;
-	else if reaction is block reaction:
-		now guy is at-block;
-		
-To prepare a test battle with (guy - a person):
-	Repeat with the old enemy running through people in Test Arena:
-		if the old enemy is not the player:
-			extract the old enemy from combat;
-			remove the old enemy from play;
-	Generate the action of challenging guy in Test Arena;
-	Compel the action of guy waiting;
-	
-To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit by (aggressor - a person) with result (outcome - a text) in/on (likelihood - a number) out of (total tries - a number) attempts:
-	Let original-defender-weapon be a random readied weapon enclosed by guy;
-	Let original-attacker-weapon be a random readied weapon enclosed by aggressor;
-	Let success count be 0;
-	Let success ratio be 0;
-	Let maximum attempts be 100;
-	Let percent-tolerance be 5;
-	Let hit-description be "[guy] doing [reaction] to [strength] melee hit by [aggressor]";
-	[don't repeat if the result should always happen (1/1)]
-	If total tries is 1, now maximum attempts is 1;
-	[only repeat the specified amount if the result should never happen (0/X)]
-	if likelihood is 0, now maximum attempts is total tries;
-	Repeat with attempt count running from 1 to maximum attempts:
-		Let tolerance be percent-tolerance * attempt count / 100;
-		transcribe and restart capturing;
-		assign reaction to guy;
-		now the melee of the aggressor is strength;
-		now the health of guy is 1000;
-		now the defence of guy is 50;
-		now guy carries original-defender-weapon;
-		if original-defender-weapon is not readied, try guy readying original-defender-weapon;
-		now aggressor carries original-attacker-weapon;
-		if original-attacker-weapon is not readied, try aggressor readying original-attacker-weapon;
-		try the aggressor hitting guy;
-		stop and save event description because "[hit-description] attempt [attempt count] -";
-		if report of the reaction is not empty, assert that the event description includes "[report of reaction]";
-		if the event description matches the regular expression "[outcome]":
-			if the likelihood is 0:
-				assert "After [attempt count] attempts, [hit-description] resulted in '[outcome]'" based on false;
-				stop;
-			increment success count;
-			Let count factor be attempt count / total tries;
-			If count factor is 0, next; [not enough success yet. Keep trying]
-			now success ratio is success count / count factor;
-			Let error be the absolute value of (success ratio - likelihood);
-			if error is not greater than tolerance:
-				assert "success" based on true; [record success]
-				[if there are successes, we must exit on one so further tests can be done]
-				stop;
-	assert "After [maximum attempts] attempt[s], [hit-description] resulted in '[outcome]' [success count] time[s] (Never within [percent-tolerance] percent of [success ratio] out of [total tries] versus a target of [likelihood])" based on whether or not likelihood is 0;
-	
-To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit with result (outcome - a text):
-	have guy do a reaction to a strength melee hit by the player with result outcome.
-	
-To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit by (aggressor - a person) with result (outcome - a text):
-	have guy do a reaction to a strength melee hit by aggressor with result outcome in 1 out of 1 attempts.
-		
-To assert that/-- (item - a weapon) readied after (circumstance - a text):
-	assert "[The item] should be readied after [circumstance]" based on whether or not the player holds item and item is readied;
-	
-To assert no weapon after (circumstance - a text):
-	Let the item be a random readied weapon enclosed by the player;
-	assert "Nothing besides a natural weapon should be readied after [circumstance]" based on whether or not the item is nothing or the item is a natural weapon.
-		
 fafhrd-battling is a test step. The first move of weapon aftereffects is fafhrd-battling.
 
 initial scheduling of fafhrd-battling:
@@ -2827,6 +2749,56 @@ Initial scheduling of israfel-slaying:
 Testing effects of israfel-slaying:
 	try smiting Israfel;
 	assert that the died count of israfel is the challenger's initial defeats + 1 with label "died count of Israfel".
+	
+Section - Damage Text
+
+damage-text is a test set.
+
+damage-text testing is a test step. The first move of damage-text is damage-text testing.
+
+Initial scheduling of damage-text testing:
+	prepare a test battle with Bodmall;
+	now the health of the player is 1000;
+	now the health of Bodmall is 1000;
+	compel the action of Bodmall waiting.
+	
+To check for damage typos:
+	assert that the event description does not include "<0-9> +<0-9>";
+	assert that the event description does not include ".*=<^\n>*=";
+	
+Testing effects of damage-text testing:
+	Have the Bodmall do a dodge reaction to a 100 melee hit with result "You deal <0-9>+ <^\n>+ = <0-9>+ damage";
+	check for damage typos;
+	say Divine lightning strikes the player;
+	pause and assert that the event description includes "A ball of lightning shoots from the sky, doing <3-7> damage to you";
+	
+
+[
+./Victor Gijsbers/kerkerkruip events and specials.i7x:	have no-source inflict damage on the guy;
+./Victor Gijsbers/Kerkerkruip Events.i7x:			have fragmentation-item inflict damage on guy;
+./Victor Gijsbers/Kerkerkruip Events.i7x:			have fragmentation-item inflict damage on guy, silently;	
+./Victor Gijsbers/Kerkerkruip Items.i7x:				have armour of thorns inflict damage on global attacker;
+./Victor Gijsbers/Kerkerkruip Items.i7x:			have lion's shield inflict damage on global attacker, silently;
+./Victor Gijsbers/Kerkerkruip Items.i7x:				have no-source inflict damage on guy;
+./Victor Gijsbers/Kerkerkruip Items.i7x:				have no-source inflict damage on guy, silently;
+./Victor Gijsbers/Kerkerkruip Items.i7x:		have no-source inflict damage on player;
+./Victor Gijsbers/Kerkerkruip Locations.i7x:	have statue of Aite inflict damage on the player;
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:[Chain golem: when concentrating, surrounds itself with a whirling, slicing field of chains.] [Wounds inflicted by the chain golem continue to bleed?]
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:					have X inflict damage on the actor;
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:				have no-source inflict damage on explosion victim, silently;
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:		have the giant tentacle inflict damage on the chosen target, silently;
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:		have global attacker weapon inflict damage on the global defender;  [The crucial line.]
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:The description of the tormentor of Aite is "You immediately recognise the black-robed mage as a tormentor of Aite, savage priests who specialise in inflicting pain on all who oppose their faith.".
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:		have the brambles inflict damage on guy;
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:		have the swarm of bees inflict damage on guy, silently;
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:		have Israfel inflict damage on the global attacker, silently;
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:		have Isra inflict damage on global attacker, silently;
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:			have no-source inflict damage on the guy;
+./Victor Gijsbers/Kerkerkruip Religion.i7x:	have Aite inflict damage on the guy, silently;
+./Victor Gijsbers/Kerkerkruip Religion.i7x:		have Sul inflict damage on the player;
+./Victor Gijsbers/Kerkerkruip Religion.i7x:	have Sul inflict damage on the player;
+./Victor Gijsbers/Kerkerkruip Religion.i7x:			have Chton inflict damage on guy;
+./Victor Gijsbers/Kerkerkruip Systems.i7x:			have no-source inflict damage on falling-guy;]
 	
 Section - Example failure
 

@@ -448,7 +448,7 @@ Before showing the title screen (this is the run the unit tests rule):
 		if screen reader mode is unset:
 			enable screen reader mode;
 		if the number of filled rows in Table of Test Set Queue is 0 and the number of filled rows in Table of Test Results is 0:
-			try all-test queuing;
+			try all-test queueing;
 	if the number of filled rows in Table of Test Set Queue is 0:
 		display test results;
 		now done testing is true;
@@ -510,9 +510,9 @@ Carry out test queueing a test set:
 	say "[The test set understood] will run now.";
 	start test transcript with "[the test set understood]".
 	
-All-test queuing is an action out of world applying to nothing. Understand "queue test all" as all-test queuing.
+All-test queueing is an action out of world applying to nothing. Understand "queue test all" as all-test queueing.
 
-Carry out all-test queuing:
+Carry out all-test queueing:
 	queue all test sets;
 	say "All test sets will run now.";
 	start test transcript with "all test sets".
@@ -885,11 +885,91 @@ Definition: a direction (called way) is diggable:
 		otherwise:
 			decide on whether or not item is connectable;
 
-Section - Test Arena
+Section - Test Arena and Battle Phrases
 
 Test Arena is an arena. The staging area of Test Arena is maze-waiting-room.
 
 Test Arena is faction-imposing.
+
+reaction-type is a kind of value. The reaction-types are no reaction, parry reaction, dodge reaction, block reaction.
+
+A reaction-type has a text called the report. The report of a reaction-type is usually "";
+
+The report of the parry reaction is "\(defender parrying\)".
+The report of the dodge reaction is "\(defender dodging\)".
+The report of the block reaction is "\(block (bonus|penalty)\)".
+
+To assign (reaction - a reaction-type) to (guy - a person):
+	if reaction is parry reaction:
+		now guy is at parry;
+	else if reaction is dodge reaction:
+		now guy is at dodge;
+	else if reaction is block reaction:
+		now guy is at-block;
+		
+To prepare a test battle with (guy - a person):
+	Repeat with the old enemy running through people in Test Arena:
+		if the old enemy is not the player:
+			extract the old enemy from combat;
+			remove the old enemy from play;
+	Generate the action of challenging guy in Test Arena;
+	Compel the action of guy waiting;
+	
+To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit by (aggressor - a person) with result (outcome - a text) in/on (likelihood - a number) out of (total tries - a number) attempts:
+	Let original-defender-weapon be a random readied weapon enclosed by guy;
+	Let original-attacker-weapon be a random readied weapon enclosed by aggressor;
+	Let success count be 0;
+	Let success ratio be 0;
+	Let maximum attempts be 100;
+	Let percent-tolerance be 5;
+	Let hit-description be "[guy] doing [reaction] to [strength] melee hit by [aggressor]";
+	[don't repeat if the result should always happen (1/1)]
+	If total tries is 1, now maximum attempts is 1;
+	[only repeat the specified amount if the result should never happen (0/X)]
+	if likelihood is 0, now maximum attempts is total tries;
+	Repeat with attempt count running from 1 to maximum attempts:
+		Let tolerance be percent-tolerance * attempt count / 100;
+		transcribe and restart capturing;
+		assign reaction to guy;
+		now the melee of the aggressor is strength;
+		now the health of guy is 1000;
+		now the defence of guy is 50;
+		now guy carries original-defender-weapon;
+		if original-defender-weapon is not readied, try guy readying original-defender-weapon;
+		now aggressor carries original-attacker-weapon;
+		if original-attacker-weapon is not readied, try aggressor readying original-attacker-weapon;
+		try the aggressor hitting guy;
+		stop and save event description because "[hit-description] attempt [attempt count] -";
+		if report of the reaction is not empty, assert that the event description includes "[report of reaction]";
+		if the event description matches the regular expression "[outcome]":
+			if the likelihood is 0:
+				assert "After [attempt count] attempts, [hit-description] resulted in '[outcome]'" based on false;
+				stop;
+			increment success count;
+			Let count factor be attempt count / total tries;
+			If count factor is 0, next; [not enough success yet. Keep trying]
+			now success ratio is success count / count factor;
+			Let error be the absolute value of (success ratio - likelihood);
+			if error is not greater than tolerance:
+				assert "success" based on true; [record success]
+				[if there are successes, we must exit on one so further tests can be done]
+				stop;
+	assert "After [maximum attempts] attempt[s], [hit-description] resulted in '[outcome]' [success count] time[s] (Never within [percent-tolerance] percent of [success ratio] out of [total tries] versus a target of [likelihood])" based on whether or not likelihood is 0;
+	transcribe and restart capturing;
+	
+To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit with result (outcome - a text):
+	have guy do a reaction to a strength melee hit by the player with result outcome.
+	
+To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit by (aggressor - a person) with result (outcome - a text):
+	have guy do a reaction to a strength melee hit by aggressor with result outcome in 1 out of 1 attempts.
+		
+To assert that/-- (item - a weapon) readied after (circumstance - a text):
+	assert "[The item] should be readied after [circumstance]" based on whether or not the player holds item and item is readied;
+	
+To assert no weapon after (circumstance - a text):
+	Let the item be a random readied weapon enclosed by the player;
+	assert "Nothing besides a natural weapon should be readied after [circumstance]" based on whether or not the item is nothing or the item is a natural weapon.
+		
 
 Automated Testing ends here.
 

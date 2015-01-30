@@ -162,6 +162,8 @@ This is the show the console rule:
 				if the Object name entry is the printed name of the noun:
 					blank out the whole row;
 					break;
+		if test queueing or all-test queueing:
+			try the current action;
 	write File of Test Objects from Table of Requested Test Objects;
 	now the early in turn sequence flag is false;
 	now the test object console is false;
