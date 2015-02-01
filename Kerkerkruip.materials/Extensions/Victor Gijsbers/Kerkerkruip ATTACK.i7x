@@ -1932,6 +1932,13 @@ Last after reporting an actor hitting (this is the no longer at block after the 
 	now the global defender is not at-block;
 	continue the action;
 
+Chance to win rule (this is the CTW block bonus rule):
+	if chosen target wears a shield:
+		let item be a random shield worn by the chosen target;
+		let n be block bonus of item;
+		if the best defence is less than n:
+			now the best defence is n.
+
 An AI action selection rule for an at-React person (called P) (this is the AI block without shields rule):
 	choose row with an Option of the action of P blocking in the Table of AI Action Options;
 	if P does not wear a shield:
@@ -1940,18 +1947,18 @@ An AI action selection rule for an at-React person (called P) (this is the AI bl
 An attack modifier rule (this is the block defence bonus rule):
 	if the global defender is at-block:
 		if the global defender encloses a worn shield:
-			decrease the attack strength by 2;
+			[decrease the attack strength by 2;
 			if the numbers boolean is true:
-				say " - 2 (blocking)[run paragraph on]";
+				say " - 2 (blocking)[run paragraph on]";]
 			let item be a random shield worn by the global defender;
 			let n be block bonus of item;
 			decrease the attack strength by n;
 			if the numbers boolean is true:
 				if n is greater than 0:
-					say " - ", n, " (block bonus)[run paragraph on]";
+					say " - ", n, " (blocking)[run paragraph on]";
 				if n is less than 0:
 					now n is (0 - n);
-					say " + ", n, " (block penalty)[run paragraph on]";
+					say " + ", n, " (blocking)[run paragraph on]";
 
 Section - Expose
 
@@ -2132,7 +2139,7 @@ First AI action selection rule for an at-React person (called P) (this is the co
 First AI action selection rule for an at-React person (called P) (this is the consider blocking rule):
 	choose a blank Row in the Table of AI Action Options;
 	now the Option entry is the action of P blocking;
-	now the Action Weight entry is 1;
+	now the Action Weight entry is 5;
 
 First AI action selection rule for a person (called P) when the chosen weapon is not readied (this is the consider readying rule):
 	choose a blank Row in the Table of AI Action Options;
@@ -2204,7 +2211,7 @@ An AI action selection rule for an at-React person (called P) (this is the stand
 		let block rating be 0;
 		Let S be a random shield worn by P;
 		if S is a shield:
-			increase block rating by 2 + block bonus of S;
+			increase block rating by block bonus of S;
 		[ Adjust the weight of dodging ]
 		choose row with an Option of the action of P dodging in the Table of AI Action Options;
 		increase the Action Weight entry by dodgability;
@@ -2213,7 +2220,7 @@ An AI action selection rule for an at-React person (called P) (this is the stand
 			[increase dodgability based on likelihood of getting hit in future attacks (increase defensive flow?)]		
 		if parry rating is greater than dodgability:
 			decrease the Action Weight entry by 50;
-		if block rating is greater than dodgability:
+		if (block rating - 1) is greater than dodgability:
 			decrease the Action Weight entry by 50;
 		[ Adjust the weight of parrying ]
 		choose row with an Option of the action of P parrying in the Table of AI Action Options;
@@ -2223,7 +2230,7 @@ An AI action selection rule for an at-React person (called P) (this is the stand
 			[increase action weight based on chance to win of next attack?]
 		if dodgability is greater than parry rating:
 			decrease the Action Weight entry by 50;
-		if block rating is greater than parry rating:
+		if (block rating - 1) is greater than parry rating:
 			decrease the Action Weight entry by 50;
 		if a random chance of 1 in 8 succeeds:
 			increase Action Weight entry by (4 * (defensive flow of P));

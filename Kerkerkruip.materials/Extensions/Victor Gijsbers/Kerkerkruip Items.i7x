@@ -1466,9 +1466,9 @@ The wooden buckler is a minor shield.
 The wooden buckler is civilised.
 The wooden buckler is wood.
 
-The block bonus of wooden buckler is 1.
+The block bonus of wooden buckler is 3.
 
-The description of the wooden buckler is "No warrior could be proud of this small, unimpressive shield. Nonetheless, wearing it will allow you to block incoming attacks. [italic type]Block bonus: +1[roman type].".
+The description of the wooden buckler is "No warrior could be proud of this small, unimpressive shield. Nonetheless, wearing it will allow you to block incoming attacks. [italic type]Block bonus: +3[roman type].".
 
 
 Section - Bulwark of faith (major)
@@ -1485,15 +1485,15 @@ Instead of examining the bulwark of faith:
 		if guy is a person:
 			calculate the block bonus of the bulwark of faith;
 			say "This shield of shimmering [if the guy worships aite]red light[otherwise if the guy worships sul]golden light[otherwise if the guy worships nomos]silver light[otherwise if the guy worships chton]darkness[otherwise if the guy worships herm]shadows[otherwise]light[end if] gains its power from [regarding the guy][possessive] devotion to [if guy worships a god][a random god worshipped by guy][otherwise]a god[end if]. It's block bonus is equal to (favour + 3) / 4. Wearing it also slightly increases the chance of divine interventions on [regarding the guy][possessive] behalf. [italic type]Current block bonus: +[block bonus of the bulwark of faith][roman type]." instead;
-	say "This shield of shimmering light gains its power from the wearer's devotion to a god. It's block bonus is equal to (favour + 3) / 4. Wearing it also slightly increases the chance of divine interventions on your behalf.".
+	say "This shield of shimmering light gains its power from the wearer's devotion to a god. It's block bonus is equal to (favour + 2) / 2. Wearing it also slightly increases the chance of divine interventions on your behalf.".
 		
 To calculate the block bonus of the bulwark of faith:
 	if the bulwark of faith is worn:
 		let guy be a random person enclosing the bulwark of faith;
 		if guy is a person:
 			let n be favour of guy;
-			increase n by 3;
-			now n is (n / 4);
+			increase n by 2;
+			now n is (n / 2);
 			now block bonus of the bulwark of faith is n;
 		otherwise:
 			now block bonus of the bulwark of faith is 0;
@@ -1516,9 +1516,9 @@ The adamantine shield is a major shield.
 The adamantine shield is civilised.
 The adamantine shield is adamant.
 
-The block bonus of adamantine shield is 2.
+The block bonus of adamantine shield is 4.
 
-The description of adamantine shield is "Three serpents are eating each other on the intricate design of this indestructible shield. [italic type]Block bonus: +2[roman type].".
+The description of adamantine shield is "Three serpents are eating each other on the intricate design of this indestructible shield. [italic type]Block bonus: +4[roman type].".
 
 
 Section - Lion's shield (special)
@@ -1529,9 +1529,9 @@ The lion's shield is a shield.
 The lion's shield is iron.
 Understand "lion" as the lion's shield.
 
-The block bonus of the lion's shield is 2.
+The block bonus of the lion's shield is 4.
 
-The description of the lion's shield is "A lion's head has been painted on this magnificent shield. It is extremely lifelike -- so lifelike, in fact, that it will bite your enemies if you successfully block a non-projectile attack. [italic type]Block bonus: +2. Deals 2 damage on a successful block[roman type].".
+The description of the lion's shield is "A lion's head has been painted on this magnificent shield. It is extremely lifelike -- so lifelike, in fact, that it will bite your enemies if you successfully block a non-projectile attack. [italic type]Block bonus: +4. Deals 2 damage on a successful block[roman type].".
 
 Aftereffects rule (this is the lion's shield rule):
 	if the global attacker came too close to the lion's shield:
@@ -1542,6 +1542,19 @@ Aftereffects rule (this is the lion's shield rule):
 				say "The lion on the shield strikes out, biting [the global attacker]. But the lion's teeth are not sharp enough to penetrate and do damage.";
 			otherwise:
 				say "The lion on the shield strikes out, and bites [the global attacker] for [bold type][total damage] damage[roman type][if health of global attacker is less than 1], which is [bold type]lethal[roman type][end if].".
+
+Section - Thick metal sheet (monster)
+
+[Automatos]
+
+The metal sheet is a shield.
+The metal shield is huge. The metal sheet is iron.
+
+The block bonus of the metal sheet is 4.
+
+The description of the metal sheet is "This thick sheet of metal has been fashioned into a crude shield. But who needs subtlety when he can put several inches of steel between himself and his attacker?".
+
+
 
 Chapter - Cloneable
 
