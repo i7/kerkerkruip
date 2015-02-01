@@ -1554,6 +1554,29 @@ The block bonus of the metal sheet is 4.
 
 The description of the metal sheet is "This thick sheet of metal has been fashioned into a crude shield. But who needs subtlety when he can put several inches of steel between himself and his attacker?".
 
+Section - Shield of fanaticism
+
+[Defender of Aite]
+
+The shield of fanaticism is a shield. The shield of fanaticism is iron.
+
+The block bonus of the shield of fanaticism is 6.
+
+Instead of examining the shield of fanaticism:
+	calculate the block bonus of the shield of fanaticism;
+	say "It is well-known that nothing beats fanaticism when it comes to shielding the mind from outside influences; but the defenders of Aite have managed to transpose this trite observation to the much more vital dimension of physical protection. The block bonus of this aggressively decorated shield is equal to twice the number of worshippers of aite in the location; currently, that comes to [block bonus of the shield of fanaticism].".
+		
+To calculate the block bonus of the shield of fanaticism:
+	let room be the location of the shield of fanaticism;
+	let n be 0;
+	repeat with guy running through people enclosed by room:
+		if guy worships aite or guy is Aite-loved:
+			increase n by 2;
+	now block bonus of the shield of fanaticism is n.
+
+First carry out an actor blocking (this is the shield of fanaticism must be updated rule):
+	if the actor encloses the shield of fanaticism:
+		calculate the block bonus of the shield of fanaticism.
 
 
 Chapter - Cloneable

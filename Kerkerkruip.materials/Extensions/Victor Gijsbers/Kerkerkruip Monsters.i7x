@@ -3534,6 +3534,7 @@ The group level of the Defender of Aite is 4.
 
 The defender of Aite is Aite-loved.
 The defender of Aite carries the immaculate sword.
+The defender of Aite wears the shield of fanaticism.
 
 Defender of Aite is weapon user.
 
