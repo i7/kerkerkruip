@@ -135,8 +135,6 @@ Section - Properties
 A test step is a kind of value. Some test steps are defined by the Table of test steps.
 A test step has a test step called the next move. The next move of a test step is usually normal keyboard input.
 
-A test step can be repeatable. A test step has a number called the maximum repeats. The maximum repeats of a test step is usually 100. A test step can be uneventful.
-
 Table of test steps
 test step
 normal keyboard input
@@ -146,6 +144,8 @@ A test step has a text called the maxed out report. The maxed out report of a te
 A test step can be generated.
 
 Allowing screen effects is a truth state that varies.
+
+testing effects rules are a test step based rulebook.
 
 Section - Capture-aware Screen Clearing (in place of Section - Clearing the screen in Basic Screen Effects by Emily Short)
 
@@ -287,13 +287,13 @@ To schedule (the event described - a test step):
 	
 Before taking a player action when the scheduled event is generated (this is the test event effects rule):
 	stop and save event description because "testing effects of";
-	Let repeat be whether or not (the scheduled event is repeatable) and (the repeated moves > 0);
+	[Let repeat be whether or not (the scheduled event is repeatable) and (the repeated moves > 0);]
 	now the scheduled event is not generated;
 	say " .[run paragraph on]";
 	start capturing text;
 	follow the testing effects rules for the scheduled event;
 	transcribe and stop capturing because "done testing effects of";
-	Let repeat be whether or not the scheduled event is [still] repeatable;
+	[Let repeat be whether or not the scheduled event is [still] repeatable;
 	if repeat is true and the repeated moves is not less than the maximum repeats of the scheduled event:
 		now repeat is false;
 		if the scheduled event is uneventful:
@@ -301,111 +301,11 @@ Before taking a player action when the scheduled event is generated (this is the
 		otherwise:
 			assert "[the maxed out report of the scheduled event]" based on false;
 			Repeat with the attempt running through not achieved possible randomized outcomes:
-				assert "After [the scheduled event], [the attempt] was still not tested" based on false;
-	if repeat is true:
+				assert "After [the scheduled event], [the attempt] was still not tested" based on false;]
+	if there is a possible randomized outcome [repeat is true]:
 		schedule the scheduled event;
 	otherwise:
 		schedule the next move of the scheduled event;
-	
-Section - Generating Actions
-
-For taking a player action when the scheduled event is not the normal keyboard input (this is the test step player action rule):
-	if the player is at-React:
-		follow the choosing a player reaction rules;
-	otherwise:
-		follow the choosing a player action rules;
-		now the scheduled event is generated;
-		
-The test step player action rule is listed first in the for taking a player action rulebook.
-		
-A test step has an object called the location-target.
-
-To decide which room is the action-destination of (current move - a test step):
-	Let the current destination be the location-target of the current move;
-	if the current destination is nothing, decide on Null-room;
-	if the current destination is a room, decide on the current destination;
-	decide on the location of the current destination.
-
-The delayed action is a stored action that varies. The delayed action is the action of waiting.
-
-A test step can be extracting.
-
-For taking a player action (this is the move to the destination of a test step rule):
-	if the player is at-React:
-		make no decision;
-	Let the place be the action-destination of the scheduled event;
-	if the place is the location:
-		transcribe and restart capturing because "arrived at destination [the place] for";
-	if the place is Null-room or the place is the location:
-		make no decision;
-	if the scheduled event is extracting:
-		extract the player to the place;
-		generate the action of waiting;
-		rule succeeds;
-	Let the way be the best route from the location to the place;
-	if the way is not a direction:
-		record failure of the scheduled event with message "No available route from [the location] to [the location-target of the scheduled event] (in [the place])";
-		make no decision;
-	generate the action of going the way;
-		
-The move to the destination of a test step rule is listed before the test step player action rule in the for taking a player action rulebook.
-
-Choosing a player action is a rulebook. The choosing a player action rules have default success.
-
-Last choosing a player action rule (this is the wait by default rule):
-	generate the action of waiting.
-
-Choosing a player reaction is a rulebook. The choosing a player reaction rules have default success.
-
-[I7 names borrowed from Ron Newcomb's Original Parser]
-The action in progress is an action name that varies. 
-The person requesting is a person that varies. 
-The action in progress variable translates into I6 as "action".
-The person requesting variable translates into I6 as "act_requester".
-
-To begin the current action: (- BeginAction(action, noun, second); -)
-
-To generate (the desired action - a stored action):
-	transcribe "Player action: [the desired action]";
-	now the action in progress is the action name part of the desired action;
-	now the person asked is the actor part of the desired action;
-	[now the person requesting is nothing;] [not allowed in I7?]
-	if the person asked is not the player, now the person requesting is the player;
-	now the noun is the noun part of the desired action;
-	now the second noun is the second noun part of the desired action;
-	begin the current action;
-	
-The compelled action is a stored action that varies. The compelled action is the action of waiting.
-
-To compel (the desired action - a stored action):
-	Let the guy be the actor part of the desired action;
-	transcribe "compelling [the desired action][if the guy is asleep] and waking up [the guy]";
-	now the guy is not asleep;
-	Now the compelled action is the desired action.
-	
-The automated menu question answer is a number that varies.
-
-First for reading a command when the automated menu question answer is greater than 0:
-	change the text of the player's command to "[the automated menu question answer]".
-
-To select menu question answer (N - a number):
-	transcribe "Selecting answer [N]";
-	now the automated menu question answer is N;
-	carry out the reading a command activity;
-	now the automated menu question answer is 0;
-
-A Standard AI rule for a person (called P) (this is the compel an action rule):
-	if P is at-Act and the actor part of the compelled action is P:
-		try the compelled action;
-		now the compelled action is the action of waiting;
-		rule succeeds.
-	
-The compel an action rule is listed before the insane people attack themselves rule in the standard AI rulebook.
-
-Last choosing a player reaction:
-	generate the action of waiting.
-
-testing effects rules are a test step based rulebook.
 
 Chapter - Test Sets
 
@@ -554,40 +454,215 @@ Before printing the player's obituary when done testing is false (this is the ab
 Chapter - Randomized Events
 
 [TODO: put all randomized outcomes in a table and save it to a file. Then we can restart the game repeatedly and use randomized outcomes to generate statistics about dungeon generation]
+A randomized outcome is a kind of value. Some randomized outcomes are defined by the Table of Randomized Outcomes.
 
-[TODO: give randomized outcomes a target frequency. Allow them to be tested statistically or merely stop if they succeed (or fail) once]
+A randomized outcome has a text called the description.
 
-[TODO: throw out relations with randomized outcomes and let them stand on their own. Test steps (and dungeon generation) will always repeat when randomized outcomes are "pending," which happens whenever they are invoked but not resolved. Randomized outcomes have count, minimum occurrence and maximum occurrence and maybe a flag for when they are resolved. Different phrases to invoke them will set these values whether we want to resolve if it ever happens, if it ever doesn't happen, or happens within a specified frequency range]
-
-A randomized outcome is a kind of value. boring lack of results is a randomized outcome.
-
-A randomized outcome can be achieved.
-
-Event resolution relates various randomized outcomes to one test step. The verb to result from (he results from, they result from, it is required, it is resulting from) implies the event resolution relation.
-
-The outcome being tested is a randomized outcome that varies.
-
-Definition: a randomized outcome is possible if it results from the scheduled event;
-
-To decide whether (O - a randomized outcome) became the/-- possibility:
-	if O is not achieved and O is possible:
-		now the outcome being tested is O;
-		yes;
-	no.
-	
-To mark the/-- outcome as/-- achieved:
-	[say "achieved outcome [the outcome being tested].";]
-	now the outcome being tested is achieved;
-	
-testing effects:
-	unless a randomized outcome is possible, make no decision;
-  	follow the randomized outcome testing rules;
-	if every possible randomized outcome is achieved:
-		record success of the scheduled event;
+To say (result - a randomized outcome):
+	if the description of the result is not empty:
+		say "[description of the result]";
 	otherwise:
-		now the scheduled event is repeatable;
+		say "[the result]";
+		
+A randomized outcome can be untested, possible, failed, or achieved. A randomized outcome is usually untested.
+Definition: a randomized outcome is resolved if it is failed or it is achieved.
 
-randomized outcome testing is a rulebook.
+The last successful outcome is a randomized outcome that varies. The last successful outcome is boring lack of results.
+
+To decide whether (event - a randomized outcome) just succeeded:
+	if the event is untested, no;
+	decide on whether or not the event is the last successful outcome;
+
+A randomized outcome has a number called the likelihood. A randomized outcome has a number called the minimum attempts. [The expected probability of success is likelihood/minimum attempts]
+
+A randomized outcome has a number called the attempt count. A randomized outcome has a number called the success count.
+
+A randomized outcome has a number called the maximum attempts.
+
+Table of Randomized Outcomes
+outcome	description	attempt count	success count	likelihood (number)	minimum attempts (number)	maximum attempts (number)
+boring lack of results	""	0	0	0	1	1
+generic reusable event	""	0	0	1	1	100
+
+To decide whether we make (event - a randomized outcome) possible:
+	if event is untested:
+		now event is possible;
+		if the maximum attempts of event is 0:
+			if minimum attempts of event is 1:
+				now maximum attempts of event is 1;
+			otherwise:
+				now maximum attempts of event is 100;
+		now success count of event is 0;
+		now attempt count of event is 0;
+		if the last successful outcome is the event, now the last successful outcome is boring lack of results; [so this event will not be "just succeeded"]
+	decide on whether or not event is possible;
+	
+To make (event - a randomized outcome) possible:
+	Let throwaway result be whether or not we make the event possible.
+	
+[This phrase tells us whether we need to keep looping. It also resets everything as a side effect when we're done looping.
+
+To be used when deciding whether to repeat test steps]
+To decide whether we reset every possible outcome:
+	if there is a possible randomized outcome, no;
+	now every randomized outcome is untested;
+	yes.
+	
+[TODO: Normalize regex matches against event description so we can use a brief consistent phrase. Also, do we really need event description, or can we just use the captured text?]
+
+To test (event - a randomized outcome) against (success - a truth state):
+	[TODO: print a period to show progress]
+	unless we make the event possible, stop;
+	if success is true, now the last successful outcome is the event;
+	let percent-tolerance be 5; [a constant - do we want it to be a property?]
+	increment attempt count of the event;
+	if likelihood of the event is 0:
+		assert "[event] happened after [attempt count] attempts, but it should never happen" based on whether or not success is false;
+		if success is true:
+			now event is failed;
+			stop;
+	if success is true:
+		increment success count of the event;
+	Let target be (likelihood of the event * attempt count of the event) / (minimum attempts of the event); [parentheses are needed, but I don't know why]
+	Let tolerance be percent-tolerance * attempt count of the event / 100;
+	if the attempt count of event is less than the minimum attempts of event:
+		[not enough attempts to determine success or failure]
+		stop;
+	Let the error be the absolute value of (success count of the event - target);
+	if error is not greater than tolerance:
+		assert "success" based on true; [record that the test is completed]
+		[say "succeeded [success count of the event] times after [attempt count of the event] attempts, coming within [tolerance] of [target].";]
+		now the event is achieved;
+	otherwise if the attempt count of the event is not less than the maximum attempts of the event:
+		assert "After [maximum attempts of the event] attempt[s], [the event] happened [success count of the event] times (never within [tolerance] of the target number [target])" based on whether or not likelihood of the event is 0;
+		if likelihood of the event is 0, now the event is achieved;
+		otherwise now the event is failed.
+
+To test (event - a randomized outcome) against (T - a text):
+	test event against whether or not the event description matches the regular expression T;
+
+To fail (event - a randomized outcome) based on (result - a truth state):
+	now likelihood of event is 0;
+	test event against result;
+		
+To fail (event - a randomized outcome) on result (T - a text):
+	fail event based on whether or not the event description matches the regular expression T;
+	
+To achieve (event - a randomized outcome) based on (result - a truth state):
+	unless we make the event possible, stop;
+	increment attempt count of event;
+	if result is true:
+		now event is achieved;
+		now the last successful outcome is the event;
+		assert "success" based on true; [record that the test is completed]
+	otherwise if attempt count of event is not less than maximum attempts of event:
+		assert "[the event] never happened after [attempt count of event] attempts" based on false;
+		now event is failed;
+		
+To achieve (event - a randomized outcome) on result (T - a text):
+	achieve event based on whether or not the event description matches the regular expression T;
+	
+[TODO: combat round tests]
+
+Section - Generating Actions
+
+For taking a player action when the scheduled event is not the normal keyboard input (this is the test step player action rule):
+	if the player is at-React:
+		follow the choosing a player reaction rules;
+	otherwise:
+		follow the choosing a player action rules;
+		now the scheduled event is generated;
+		
+The test step player action rule is listed first in the for taking a player action rulebook.
+		
+A test step has an object called the location-target.
+
+To decide which room is the action-destination of (current move - a test step):
+	Let the current destination be the location-target of the current move;
+	if the current destination is nothing, decide on Null-room;
+	if the current destination is a room, decide on the current destination;
+	decide on the location of the current destination.
+
+The delayed action is a stored action that varies. The delayed action is the action of waiting.
+
+A test step can be extracting.
+
+Table of Randomized Outcomes (continued)
+outcome	description	likelihood	minimum attempts
+moving towards the destination	"finding a route from [the location] to [the location-target of the scheduled event][if the location-target of the scheduled event is not the action-destination of the scheduled event](in [the the action-destination of the scheduled event])[end if]"	1	1
+
+For taking a player action (this is the move to the destination of a test step rule):
+	if the player is at-React:
+		make no decision;
+	Let the place be the action-destination of the scheduled event;
+	if the place is the location:
+		transcribe and restart capturing because "arrived at destination [the place] for";
+	if the place is Null-room or the place is the location:
+		make no decision;
+	if the scheduled event is extracting:
+		extract the player to the place;
+		generate the action of waiting;
+		rule succeeds;
+	Let the way be the best route from the location to the place;
+	fail moving towards the destination based on whether or not the way is not a direction;
+	if the way is a direction, generate the action of going the way;
+		
+The move to the destination of a test step rule is listed before the test step player action rule in the for taking a player action rulebook.
+
+Choosing a player action is a rulebook. The choosing a player action rules have default success.
+
+Last choosing a player action rule (this is the wait by default rule):
+	generate the action of waiting.
+
+Choosing a player reaction is a rulebook. The choosing a player reaction rules have default success.
+
+[I7 names borrowed from Ron Newcomb's Original Parser]
+The action in progress is an action name that varies. 
+The person requesting is a person that varies. 
+The action in progress variable translates into I6 as "action".
+The person requesting variable translates into I6 as "act_requester".
+
+To begin the current action: (- BeginAction(action, noun, second); -)
+
+To generate (the desired action - a stored action):
+	transcribe "Player action: [the desired action]";
+	now the action in progress is the action name part of the desired action;
+	now the person asked is the actor part of the desired action;
+	[now the person requesting is nothing;] [not allowed in I7?]
+	if the person asked is not the player, now the person requesting is the player;
+	now the noun is the noun part of the desired action;
+	now the second noun is the second noun part of the desired action;
+	begin the current action;
+	
+The compelled action is a stored action that varies. The compelled action is the action of waiting.
+
+To compel (the desired action - a stored action):
+	Let the guy be the actor part of the desired action;
+	transcribe "compelling [the desired action][if the guy is asleep] and waking up [the guy]";
+	now the guy is not asleep;
+	Now the compelled action is the desired action.
+	
+The automated menu question answer is a number that varies.
+
+First for reading a command when the automated menu question answer is greater than 0:
+	change the text of the player's command to "[the automated menu question answer]".
+
+To select menu question answer (N - a number):
+	transcribe "Selecting answer [N]";
+	now the automated menu question answer is N;
+	carry out the reading a command activity;
+	now the automated menu question answer is 0;
+
+A Standard AI rule for a person (called P) (this is the compel an action rule):
+	if P is at-Act and the actor part of the compelled action is P:
+		try the compelled action;
+		now the compelled action is the action of waiting;
+		rule succeeds.
+	
+The compel an action rule is listed before the insane people attack themselves rule in the standard AI rulebook.
+
+Last choosing a player reaction:
+	generate the action of waiting.
 
 Chapter - Testing Dungeon Generation
 
@@ -635,13 +710,29 @@ To assert truth of/-- (C - a truth state) with message (T - an indexed text):
 To assert (T - an indexed text) based on (C - a truth state):
 	assert truth of C with message T;
 	
-To record a/-- success of (E - a test step):
-	now E is not repeatable;
-	assert truth of true with message "success."
+To succeed based on (result - a truth state) within (N - a number) attempts:
+	Now description of generic reusable event is "[the scheduled event]";
+	Now maximum attempts of generic reusable event is N;
+	achieve generic reusable event based on whether or not result is true;
+	if generic reusable event is resolved, now generic reusable event is untested;
 
-To record a/-- failure of/-- (E - a test step) with message (M - an indexed text):
-	now E is not repeatable;
-	assert truth of false with message M;
+To fail based on (result - a truth state) within (N - a number) attempts:
+	Now description of generic reusable event is "[the scheduled event] failing";
+	Now maximum attempts of generic reusable event is N;
+	fail generic reusable event based on whether or not result is true;
+	if generic reusable event is resolved, now generic reusable event is untested;
+	
+To succeed based on (result - a truth state):
+	succeed based on result within 100 attempts;
+	
+To succeed on result (R - a text):
+	succeed based on whether or not the event description matches the regular expression R;
+	
+To fail based on (result - a truth state):
+	fail based on result within 100 attempts;
+	
+To fail on result (R - a text):
+	fail based on whether or not the event description matches the regular expression R;
 	
 [ Assert that any condition is true, but with less information on failure ]
 To assert that/-- (C - a condition):
@@ -809,12 +900,19 @@ Section - Counting Actions
 
 A person has a number called the act count;
 
+[TODO: replace these counters with randomized outcomes?]
+
 A person has a number called the reaction count.
 
 Initial scheduling of a test step:
 	Repeat with guy running through people:
 		now the reaction count of guy is 0;
 		
+The testing combat round rules are an object based rulebook.
+
+A first combat round rule (this is the test combat round of previous main actor rule):
+	follow the testing combat round rules for the main actor;
+	
 A combat round rule (this is the count combat actions rule):
 	increment the act count of the main actor;
 
@@ -915,20 +1013,20 @@ To prepare a test battle with (guy - a person):
 	Generate the action of challenging guy in Test Arena;
 	Compel the action of guy waiting;
 	
+Combat hit is a randomized outcome.
+
 To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit by (aggressor - a person) with result (outcome - a text) in/on (likelihood - a number) out of (total tries - a number) attempts:
 	Let original-defender-weapon be a random readied weapon enclosed by guy;
 	Let original-attacker-weapon be a random readied weapon enclosed by aggressor;
-	Let success count be 0;
-	Let success ratio be 0;
-	Let maximum attempts be 100;
-	Let percent-tolerance be 5;
-	Let hit-description be "[guy] doing [reaction] to [strength] melee hit by [aggressor]";
+	Now the description of combat hit is "[guy] doing [reaction] to [strength] melee hit by [aggressor]";
 	[don't repeat if the result should always happen (1/1)]
-	If total tries is 1, now maximum attempts is 1;
+	If total tries is 1, now maximum attempts of combat hit is 1;
 	[only repeat the specified amount if the result should never happen (0/X)]
-	if likelihood is 0, now maximum attempts is total tries;
-	Repeat with attempt count running from 1 to maximum attempts:
-		Let tolerance be percent-tolerance * attempt count / 100;
+	if likelihood is 0, now maximum attempts of combat hit is total tries;
+	now minimum attempts of combat hit is total tries;
+	now likelihood of combat hit is likelihood;
+	make combat hit possible;
+	while combat hit is not resolved: 
 		transcribe and restart capturing;
 		assign reaction to guy;
 		now the melee of the aggressor is strength;
@@ -939,25 +1037,9 @@ To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength 
 		now aggressor carries original-attacker-weapon;
 		if original-attacker-weapon is not readied, try aggressor readying original-attacker-weapon;
 		try the aggressor hitting guy;
-		stop and save event description because "[hit-description] attempt [attempt count] -";
+		stop and save event description because "[combat hit] attempt [attempt count of combat hit] -";
 		if report of the reaction is not empty, assert that the event description includes "[report of reaction]";
-		if the event description matches the regular expression "[outcome]":
-			if the likelihood is 0:
-				assert "After [attempt count] attempts, [hit-description] resulted in '[outcome]'" based on false;
-				stop;
-			increment success count;
-			Let count factor be attempt count / total tries;
-			If count factor is 0, next; [not enough success yet. Keep trying]
-			now success ratio is success count / count factor;
-			Let error be the absolute value of (success ratio - likelihood);
-			if error is not greater than tolerance:
-				assert "success" based on true; [record success]
-				[if there are successes, we must exit on one so further tests can be done]
-				stop;
-	if total tries is 1:
-		assert "[hit-description] did not match '[outcome]':[paragraph break][the event description]" based on whether or not likelihood is 0;
-	otherwise:
-		assert "After [maximum attempts] attempt[s], [hit-description] resulted in '[outcome]' [success count] time[s] (Never within [percent-tolerance] percent of [success ratio] out of [total tries] versus a target of [likelihood])" based on whether or not likelihood is 0;
+		test combat hit against "[outcome]";
 	transcribe and restart capturing;
 	
 To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit with result (outcome - a text):
@@ -1029,11 +1111,20 @@ To have things happen during play, create a "test step," or more than one. A tes
 
 A test step corresponds to a turn, or multiple turns. It has a few rulebooks. The main ones are "initial scheduling" and "testing effects." These are test-step based rulebooks. There are also "choosing a player action" and "choosing a player reaction," which we will need if we want to actually do anything during a turn. Since these rulebooks are NOT test-step based, we will need to use the "testing (move - a test step)" phrase to invoke these at the proper time.
 
-A test step can be "repeatable," which means it will still be current on the next turn - but the initial scheduling will not run again. The maximum repeats property says how many times it can repeat before it fails. If we make it "uneventful" it will succeed instead when the maximum repeats are reached. To make a test step stop repeating, we can:
+A test step will repeat if any randomized events are "possible," i.e. they have been tested but not resolved. There is a generic randomized event you can use to repeat any test step. These phrases make it easy:
 
-	record success of starting-out;
-or
-	record failure of starting-out with message "we never got the frobulator";
+succeed at (text) based on (truth state)
+fail because (text) based on (truth state)
+
+You can specify number of repeats for these phrases:
+	
+succeed at (text) within (number) attempts based on (truth state)
+fail because (text) within (number) attempts based on (truth state)
+
+Here are some examples:
+	succed at "getting the frobulator" based on whether or not the player carries the frobulator;
+	
+	fail because "caught by the gremlin" within 20 attempts based on whether or not the gremlin is in the location;
 
 Section: Initial scheduling
 

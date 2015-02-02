@@ -44,16 +44,11 @@ A test play when testing Aite champions vs bat:
 	Repeat with guy running through people in Arena of the Gods:
 		now the defence of guy is 100;
 
-Player-targeted is a truth state that varies.
-Player-damaged is a truth state that varies.
-
 Aite spike vs bat is a test step. The first move of Aite champions vs bat is aite spike vs bat.
 
 After taking a player action when the scheduled event is aite spike vs bat:
 	repeat with guy running through people in the location:
 		now health of guy is 100;
-	now player-damaged is false;
-	now player-targeted is false;
 	
 Intervention possible when the scheduled event is aite spike vs bat:
 	unless the main actor is the player and intervention-god is Aite, rule fails;
@@ -61,35 +56,25 @@ Intervention possible when the scheduled event is aite spike vs bat:
 Intervention bonus when the scheduled event is aite spike vs bat:
 	if the main actor is the player, increase the intervention-bonus by 100;
 	
+Table of Randomized Outcomes (continued)
+outcome
+bat crashing into spike
+bat avoiding huge spike
+bat avoiding gigantic spike
+
 testing effects of aite spike vs bat:
-	now player-damaged is whether or not the health of the player is less than 100;
-	if the event description matches the regular expression "bursts out of the ground<^[line break]>+ you":
-		now player-targeted is true;
+	Let player-targeted be whether or not the event description matches the regular expression "bursts out of the ground<^[line break]>+ you";
+	if player-targeted is true:
 		assert that the event description includes "bursts out of the ground in front of you";
-	
-bat crashing into spike is a randomized outcome. It results from Aite spike vs bat.
-bat avoiding huge spike is a randomized outcome. It results from Aite spike vs bat.
-bat avoiding gigantic spike is a randomized outcome. It results from Aite spike vs bat.
-
-randomized outcome testing when bat crashing into spike became the possibility:
-	if player-damaged is false, make no decision;
-	mark the outcome achieved;
-	assert that the event description includes "crash into";
-	
-randomized outcome testing when bat avoiding huge spike became the possibility:
-	if player-targeted is false, make no decision;
-	if player-damaged is true, make no decision;
-	unless the event description matches the regular expression "huge <a-z>+ bursts out of the ground in front of you", make no decision;
-	mark the outcome achieved;
-	assert that the event description includes "You fly over";
-
-randomized outcome testing when bat avoiding gigantic spike became the possibility:
-	if player-targeted is false, make no decision;
- 	if player-damaged is true, make no decision;
-	unless the event description matches the regular expression "gigantic <a-z>+ bursts out of the ground in front of you", make no decision;
-	mark the outcome achieved;
-	assert that the event description includes "You fly around";
-
+	Let player-missed be whether or not player-targeted is true and the health of the player is 100;
+	achieve bat crashing into spike based on whether or not player-targeted is true and player-missed is false;
+	achieve bat avoiding huge spike based on whether or not player-missed is true and the event description matches the regular expression "huge <a-z>+ bursts out of the ground in front of you";
+	achieve bat avoiding gigantic spike based on whether or not player-missed is true and the event description matches the regular expression "gigantic <a-z>+ bursts out of the ground in front of you";
+	if the last successful outcome is:
+		-- bat crashing into spike: assert that the event description includes "crash into";
+		-- bat avoiding huge spike: assert that the event description includes "You fly over";
+		-- bat avoiding gigantic spike: assert that the event description includes "You fly around";
+				
 Arena-tormentor-enslaving is a test step.
 
 Choosing a player action when testing Arena-tormentor-enslaving:
@@ -350,14 +335,13 @@ initial scheduling of israfel-rejoining:
 testing effects of israfel-rejoining:
 	assert that israfel is in the location;
 	
-israfel-resplitting is repeatable test step.
+israfel-resplitting is a test step.
 
 Initial scheduling of israfel-resplitting:
 	compel the action of israfel israfel-splitting;
 	
 Testing effects of israfel-resplitting:
-	if israfel is off-stage:
-		record success of israfel-resplitting.
+	succeed based on whether or not israfel is off-stage;
 		
 unfrozen-fell-fleeing is a test step.   
 
@@ -466,12 +450,8 @@ Choosing a player action when testing driving drakul insane:
 After taking a player action when the scheduled event is driving drakul insane:
 	now the health of Drakul is 100;
 	
-drakul going insane is a randomized outcome. It results from driving drakul insane.
-
-randomized outcome testing when drakul going insane became the possibility:
-	if drakul is not insane, make no decision;
-	mark the outcome achieved;
-	assert that the event description includes "Drakul goes insane";
+Testing effects of driving drakul insane:
+	succeed on result "Drakul goes insane"
 	
 insane drakul statements is a test step.
 
@@ -494,37 +474,25 @@ After taking a player action when the scheduled event is insane drakul statement
 	compel the action of drakul waiting;
 	
 [some of these appear too unlikey to happen within 100 iterations. Increase iterations?]
-simple drakul identity is a randomized outcome. simple drakul identity results from insane drakul statements.
-nested conditionals is a randomized outcome. nested conditionals results from insane drakul statements. 
-nested belief is a randomized outcome. nested belief results from insane drakul statements.
-lifeblood-hinting is a randomized outcome. lifeblood-hinting results from insane drakul statements.
-vampire-turning-hinting is a randomized outcome. vampire-turning-hinting results from insane drakul statements.
 
-randomized outcome testing when simple drakul identity became the possibility:
-	if the event description matches the regular expression "Drakul says, 'I am ":
-		if the event description matches the regular expression "not|someone who|, and|, or", make no decision;
-		mark the outcome achieved;
-		assert that the event description includes "vampire|insane";
-		
-randomized outcome testing when nested conditionals became the possibility:
-	unless the event description matches the regular expression "Drakul says, 'If .*,", make no decision;
-	if the event description matches the regular expression "I would give you", make no decision;
-	if the event description matches the regular expression ", if|, and|, or", mark the outcome achieved;
-		
-randomized outcome testing when nested belief became the possibility:
-	unless the event description matches the regular expression "I believe that I believe", make no decision;
-	mark the outcome achieved;
-		
-randomized outcome testing when lifeblood-hinting became the possibility:
-	unless the event description matches the regular expression "a vial of my lifeblood\b", make no decision;
-	mark the outcome achieved;
-	assert that the event description includes "I am carrying| is in | can be found | is currently unreachable, ";
-	
-randomized outcome testing when vampire-turning-hinting became the possibility:
-	unless the event description matches the regular expression "\bI intend to vanquish Malygris after I make you my vampire-slave\b|\byou will never be my vampire-slave\b", make no decision;
+Table of Randomized Outcomes (continued)
+outcome
+simple drakul identity
+nested conditionals
+nested belief
+lifeblood-hinting
+vampire-turning-hinting
+
+Testing effects of insane drakul statements:
+	achieve simple drakul identity based on whether or not the event description matches the regular expression "Drakul says, 'I am " and the event description matches the regular expression "not|someone who|, and|, or";
+	if simple drakul identity just succeeded, assert that the event description matches the regular expression "vampire|insane";
+	achieve nested conditionals based on whether or not the event description matches the regular expression "Drakul says, 'If .*," and the event description matches the regular expression "I would give you" and the event description matches the regular expression ", if|, and|, or"; [TODO: make this one big regex? Or is it impossible because of ordering?]
+	achieve nested belief on result "I believe that I believe";
+	achieve lifeblood-hinting on result "a vial of my lifeblood\b";
+	if lifeblood-hinting just succeeded, assert that the event description matches the regular expression "I am carrying| is in | can be found | is currently unreachable, ";
+	achieve vampire-turning-hinting on result "\bI intend to vanquish Malygris after I make you my vampire-slave\b|\byou will never be my vampire-slave\b";
 	[this doesn't compile:
 	assert "Blood never lies achievement should be held" based on whether not there is a held achievement of Blood never lies in the Table of Held Achievements;]
-	mark the outcome achieved;
 
 Drakul suicide is a test step.
 
@@ -572,7 +540,16 @@ Scenario when testing Dreadful-Presence-Test:
 	now the blood ape is testobject;
 	now the zombie toad is testobject;
 	
-A person has a number called the cower count;
+A person has a randomized outcome called the cower counter. The cower counter of a person is usually the boring lack of results.
+Definition: a person is cowerer if the cower counter of it is not the boring lack of results.
+
+Table of Randomized Outcomes (continued)
+outcome	maximum attempts
+ape cower counter	300
+toad cower counter	300
+player cower counter	300
+
+The cower counter of the blood ape is ape cower counter. The cower counter of the zombie toad is toad cower counter. The cower counter of the player is player cower counter.
 
 Test play when testing Dreadful-Presence-Test:
 	repeat with guy running through denizen people:
@@ -606,44 +583,27 @@ To decide which number is the target cower percentage of (guy - a person):
 	if m < 0:
 		now m is 0;
 	decide on m;
-
-To check if (guy - a person) cowered this turn:
-	let pattern be indexed text;
-	now pattern is "[The guy] [cower] before your dreadful presence";
-	if the event description matches the regular expression pattern:
-		increment cower count of the guy;
-	
-To decide whether (guy - a person) is within (delta - a number) percent of cowering target:
-	if the act count of guy is 0, decide no;
-	let cower percentage be cower count of guy times 100 divided by the act count of guy;
-	let percent difference be cower percentage minus the target cower percentage of guy;
-	if the percent difference is less than 0, now the percent difference is 0 minus the percent difference;
-	decide on whether or not the percent difference not greater than delta;
-		
-To say cower report:
-	Repeat with guy running through people in the location:
-		say "After [act count of guy] rounds, [the guy] cowered [cower count of guy] times versus a target of [target cower percentage of guy] percent ([target cower percentage of guy times act count of guy divided by 100]).";
 	
 A test step can be cower-counting.
-
-A cower-counting test step is usually repeatable.
-
-When play begins (this is the set up cower counters rule):
-	repeat with E running through cower-counting test steps:
-		now the maxed out report of E is "[cower report]";
-		now the maximum repeats of E is 300;
 	
 initial scheduling for a cower-counting test step:
-	repeat with guy running through people:
-		now the cower count of guy is 0;
+	repeat with guy running through cowerer people:
+		Let counter be the cower counter of guy;
+		Now the description of counter is "[guy] cowering";
+		Let P be the target cower percentage of guy;
+		If P is 0 or P / 5 > 0:
+			[we don't need all that precision unless we need to distinguish P from 0]
+			now the likelihood of counter is P / 5;
+			now the minimum attempts of counter is 20;
+		otherwise:
+			now the likelihood of counter is P;
+			now the minimum attempts of counter is 100;
+		make the counter possible;
 
-testing effects of a cower-counting test step:
-	Let success count be 0;
-	Repeat with guy running through people in the location:
-		check if guy cowered this turn;
-		if guy is within 5 percent of cowering target, increment success count;	
-	if the repeated moves is at least 20 and success count is the number of people in the location:
-		record success of the scheduled event;
+testing combat round of a cowerer person (called guy) when testing a cower-counting test step:
+	stop and save event description because "testing if [guy] cowered";
+	test cower counter of guy against "[The guy] [cower] before your dreadful presence";
+	transcribe and restart capturing because "done testing if [guy] cowered";
 
 Ape-cowering is a cower-counting test step. The first move of Dreadful-Presence-Test is Ape-cowering.
 		
@@ -706,6 +666,7 @@ player-defended-by-herm is a randomized event;
 
 isra-defended-by-sul is a randomized event;]
 
+[
 Section - Bug 210
 
 bug-210 is a test set. 
@@ -2840,5 +2801,6 @@ failing move is a test step.
 
 Testing effects of failing move:
 	assert "truth is false" based on false.
-		
+]
+
 Test Sets ends here.
