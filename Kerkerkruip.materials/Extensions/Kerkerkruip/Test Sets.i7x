@@ -853,7 +853,6 @@ testing effects of fell-also-killing:
 	assert truth of whether or not the player carries the glass cannon with message "the glass cannon should still be carried";
 	assert truth of whether or not the glass cannon is readied with message "the glass cannon should still be readied";
 	
-[
 Section - Temporary Blood Magic from Nomos
 
 temporary Nomos blood magic is a test set.
@@ -867,6 +866,9 @@ Scenario when testing temporary Nomos blood magic:
 	now the swarm of daggers is testobject;
 	now the Temple of Nomos is testobject;
 	now columnated ruins is bannedobject;
+	now the armadillo is bannedobject;
+	now the reaper is bannedobject;
+	now the imp is bannedobject;
 	now everything is not cursed;
 
 The gown-timer is a number that varies;
@@ -885,7 +887,8 @@ Test play when testing temporary Nomos blood magic:
 	now the defence of the player is 50;
 	extract the player to the location of bodmall;
 	try smiting bodmall;
-	extract the player to the temple of nomos;
+	extract the player to the temple of nomos, making sure it is unoccupied;
+	extract the swarm of daggers to the temple of nomos;
 	have the player sacrifice a random granted power;
 	assert that the holder of the gown of the red court is the player;
 	assert truth of whether or not the player carries the gown of the red court with message "the gown of the red court should be carried";
@@ -894,8 +897,8 @@ Test play when testing temporary Nomos blood magic:
 	try examining the inquisitor's hood;
 	pause and assert that the event description includes "This particular one gives you a \+15% chance of remaining concentrated when damaged\. It also increases your dreadful presence by 1\. Feeding 5 blood to the hood will temporarily add 10% to the chance of remaining concentrated";
 	let the base chance be the chance of the player remaining concentrated;
-	try wearing the inquisitor's hood;
-	assert that (the chance of the player remaining concentrated - the base chance) is 15;
+	equip the player with the inquisitor's hood;
+	assert that (the chance of the player remaining concentrated - the base chance) is 15 with label "concentration bonus of the inquisitor's hood";
 	try concentrating;
 	transcribe and restart capturing;
 	try feeding the inquisitor's hood;
@@ -903,7 +906,7 @@ Test play when testing temporary Nomos blood magic:
 	transcribe and restart capturing;
 	try examining the inquisitor's hood;
 	pause and assert that the event description includes "This particular one gives you a \+25% chance of remaining concentrated when damaged\. It also increases your dreadful presence by 1\. Feeding 10 blood to the hood will temporarily add 10% to the chance of remaining concentrated";
-	assert that (the chance of the player remaining concentrated - the base chance) is 25;
+	assert that (the chance of the player remaining concentrated - the base chance) is 25 with label "concentration bonus of the inquisitor's hood after one feeding";
 	try taking off the inquisitor's hood;
 	assert that the dreadful presence of the player is 0;
 	try feeding the gown of the red court;
@@ -929,28 +932,31 @@ testing effects of second-gown-feeding:
 	assert that the dreadful presence of the player is 3;
 	decrease the gown-timer by 1;
 	assert that the blood timer of the gown of the red court is the gown-timer;
-	now the maximum repeats of first-gown-timeout is gown-timer;
 		
-first-gown-timeout is a repeatable hidden-traveling test step.
+first-gown-timeout is a hidden-traveling test step.
 
+To check the gown timer:
+	Let expected timer be gown-timer - (the repeated moves);
+	assert that the blood timer of the gown of the red court is the expected timer with label "blood timer of the gown ([gown-timer] - [repeated moves])" ;
+	
 testing effects of first-gown-timeout:
-	if the blood magic level of the gown of the red court > 1:
-		assert truth of whether or not the blood timer of the gown of the red court is (gown-timer - (the repeated moves + 1)) with message "Blood timer of [blood timer of the gown of the red court] should have been ([gown-timer] - [repeated moves + 1] = [gown-timer - (repeated moves + 1)])";
+	succeed based on whether or not the blood magic level of the gown of the red court is not greater than 1 within gown-timer attempts;
+	if waiting for resolution:
+		check the gown timer;
 	otherwise:
 		assert that the event description includes "Some of the blood power of the gown of the red court wears off";
 		now gown-timer is the blood timer of the gown of the red court;
 		assert that gown-timer is between 2 and 10;
-		now the maximum repeats of second-gown-timeout is gown-timer;
-		now first-gown-timeout is not repeatable
 	
-second-gown-timeout is a repeatable hidden-traveling test step. The next move of first-gown-timeout is second-gown-timeout.
+second-gown-timeout is a hidden-traveling test step.
 
 testing effects of second-gown-timeout:
-	assert that the blood timer of the gown of the red court is (gown-timer - (the repeated moves + 1));
-	if the blood timer of the gown of the red court is 0:
+	succeed based on whether or not the blood timer of the gown of the red court is 0 within gown-timer attempts;
+	if waiting for resolution:
+		check the gown timer;
+	otherwise:
 		assert that the blood magic level of the gown of the red court is 0;
 		assert that the event description includes "The blood power of the gown of the red court wears off completely";
-		now second-gown-timeout is not repeatable.
 		
 malleus-earning is a extracting test step. The location-target of malleus-earning is the temple of nomos.
 
@@ -1017,7 +1023,7 @@ testing effects of early-feeding:
        check that the malleus is fed.
        
 [Test for bug #337]
-bonus-surviving-attack is a repeatable test step. The maximum repeats is 20.
+bonus-surviving-attack is a test step.
 
 initial scheduling of bonus-surviving-attack:
 	now the melee of the swarm of daggers is 100;
@@ -1027,10 +1033,10 @@ initial scheduling of bonus-surviving-attack:
 	compel the action of the swarm of daggers attacking the player;
        
 testing effects of bonus-surviving-attack:
-       if the hitting count of the swarm of daggers is 0, make no decision;
+       if waiting for player reaction, make no decision;
        assert "the player should be damaged" based on whether or not the health of the player < 1000;
        check that the malleus is fed;
-       now bonus-surviving-attack is not repeatable;
+[
 
 Section - bug 234
 
@@ -1104,16 +1110,6 @@ banshees gone wild is an test set.
 
 [First every turn: say "Every turn rules run.";]
 
-To swap the occupants of (first place - a room) and (second place - a room):
-	Let swap place be a random unoccupied room;
-	Repeat with guy running through people in first place:
-		extract guy to the swap place;
-	if the second place is not the swap place:
-		Repeat with guy running through people in second place:
-			extract guy to first place;
-		Repeat with guy running through people in swap place:
-			extract guy to second place;
-			
 To set the tension to (N - a number):
 	transcribe "Setting tension to [N]";
 	now the tension is N;
@@ -1431,13 +1427,6 @@ testing effects of slow-sensing:
 	assert "sensing without psycholocation should take time" based on whether or not previously-fast is false;
 	
 exploring-everywhere is a repeatable extracting hidden-traveling test step. 
-
-Definition: A room (called place) is reachable:
-	if the place is the location, yes;
-	if the place is nogo, no;
-	decide on whether or not the best route from the location to the place is a direction.
-
-Definition: A thing is reachable if the location of it is a reachable room.
 
 Initial scheduling for exploring-everywhere:
 	Now the location-target of exploring-everywhere is a random unvisited reachable room.
@@ -1931,6 +1920,7 @@ Testing effects of malygris-robbing:
 	assert that the event description includes "Something has stopped you from teleporting";
 	assert that the event description includes "picking stuff up";
 
+[
 Section - Imp Teleporting Into Dreams
 
 bug-280 is a test set.
@@ -2781,5 +2771,6 @@ failing move is a test step.
 Testing effects of failing move:
 	assert "truth is false" based on false.
 
-]
+]]
+
 Test Sets ends here.

@@ -139,7 +139,14 @@ Table of test steps
 test step
 normal keyboard input
 
-A test step has a text called the maxed out report. The maxed out report of a test step is usually "[The scheduled event] repeated [repeated moves] times without resolution."
+[Warning: this returns 0 after the final outcome is resolved... is this undesirable? We could run through all not untested outcomes, but the number would still freeze after the last one resolved. That might be ok, though]
+
+To decide what number is the repeated moves:
+	Let the moves be 0;
+	Repeat with the event running through possible randomized outcomes:
+		if the attempt count of the event > the moves:
+			now the moves is the attempt count of the event;
+	decide on the moves.
 
 A test step can be generated.
 
@@ -253,8 +260,6 @@ To decide whether testing (D - a description of test steps):
 		if testing T, yes;
 	no.
 
-The repeated moves is a number that varies;
-
 The scheduled event is a test step that varies. The scheduled event is the normal keyboard input.
 
 Initial scheduling rules are a test step based rulebook.
@@ -276,12 +281,10 @@ To schedule (the event described - a test step):
 		otherwise:
 			log "  next step:  [the event described]";
 		follow the initial scheduling rules for the event described;
-		now the repeated moves is 0;
 	otherwise:
 		transcribe and stop capturing because "repeating";
 		start capturing text;
 		follow the rescheduling rules for the event described;
-		increment the repeated moves;
 	now the event described is not generated;
 	transcribe and restart capturing because "done scheduling";
 	
@@ -775,7 +778,28 @@ Include (-
 	
 Chapter - Helpful phrases
 
-To extract (guy - a person) to (place - a room):
+Definition: A room (called place) is reachable:
+	if the place is the location, yes;
+	if the place is nogo, no;
+	decide on whether or not the best route from the location to the place is a direction.
+
+Definition: A thing is reachable if the location of it is a reachable room.
+
+To swap the occupants of (first place - a room) and (second place - a room):
+	Let swap place be a random unoccupied room;
+	Repeat with guy running through people in first place:
+		extract guy to the swap place;
+	if the second place is not the swap place:
+		Repeat with guy running through people in second place:
+			extract guy to first place;
+		Repeat with guy running through people in swap place:
+			extract guy to second place;
+			
+To extract (guy - a person) to (place - a room), making sure it is unoccupied:
+	if making sure it is unoccupied and place is occupied:
+		Let elsewhere be a random unoccupied reachable room;
+		transcribe "moving occupants of [place] to [elsewhere]";
+		swap the occupants of place and elsewhere;
 	transcribe "moving [guy] to [place]";
 	extract guy from combat;
 	move guy to place;
