@@ -430,7 +430,7 @@ Last when play begins (this is the check info panel capacity rule):
 
 This is the open up game windows rule:
 	open side windows;
-	open up the status window.
+	open up the status window;
 
 
 

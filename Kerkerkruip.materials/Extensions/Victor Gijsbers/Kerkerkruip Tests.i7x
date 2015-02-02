@@ -537,7 +537,7 @@ Report fight-testing:
 	say "[italic type]When it came time to fight I thought, 'I'll just step aside'[line break] - The Flaming Lips, 'Fight Test'[roman type][paragraph break]"
 	
 For taking a player action when the fight count is at least 1 (this is the let test combatants fight rule):
-	transcribe and restart capturing;
+	update the event description;
 	now the health of the player is 1000;
 	if the combat status is not peace and (the number of friendly soul-granting people in the location is at least 1):
 		[continue the fight]

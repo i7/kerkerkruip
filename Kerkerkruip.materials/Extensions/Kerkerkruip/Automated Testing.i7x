@@ -34,31 +34,31 @@ To transcribe (T - a text):
 To say current test description:
 	say  "[current test set], [scheduled event] turn [the turn count], assertion count=[test assertion count]";
 	
+To update the/-- event description/--:
+	update the event description because "transcribe and stop capturing";
+	
+To update the/-- event description because (reason - a text):
+	stop capturing text;
+	if "[the captured text]" matches the regular expression ".":
+		transcribe "[reason] [current test description]";
+		update the event description;
+		now the event description is the substituted form of "[the event description][the captured text]";
+		append "[the captured text]" to file of test transcript;
+		start capturing text; [and clear the captured text]
+	
 To transcribe and stop capturing text/--:
 	transcribe and stop capturing because "transcribe and stop capturing";
 	
 To transcribe and stop capturing text/-- because (reason - a text):
-	stop capturing text;
-	if "[the captured text]" matches the regular expression ".":
-		transcribe "[reason] [current test description]";
-		append "[the captured text]" to file of test transcript;
-	 
-To transcribe and restart capturing text/--:
-	transcribe and restart capturing because "transcribe and restart capturing";
-	
-To transcribe and restart capturing text/-- because (reason - a text):
-	if text capturing is active, transcribe and stop capturing text because reason;
-	start capturing text;
-	
-To stop and save event description:
-	stop and save event description because "stop and save";
-	
-To stop and save event description because (reason - a text):
-	transcribe and stop capturing text because reason;
-	now the event description is the substituted form of "[the captured text]";
-	start capturing text; [clear the captured text]
+	if text capturing is active, update the event description because reason;
 	stop capturing text;
 	
+To clear the/-- event description:
+	clear the event description because "clearing the event description";
+To clear the/-- event description because (reason - a text):
+	if text capturing is active, update the event description because reason;
+	now the event description is "";
+			
 The file of test results is called "testresults".
 
 Table of Test Results
@@ -79,7 +79,7 @@ To queue (T - a test set):
 To queue all test sets:
 	Repeat with T running through enabled test sets:
 		queue T.
-		
+			
 To record a test attempt:
 	increment the test assertion count;
 	increment the total assertion count;
@@ -92,8 +92,7 @@ To record a test attempt:
 		now failures entry is 0;
 		now failure messages entry is "";
 	increment the total entry;
-	transcribe and stop capturing because "recording test attempt for";
-	start capturing text;
+	update event description because "recording test attempt for";
 
 To record a/-- failure report of/-- (msg - a text):
 	choose row with test set of current test set in Table of Test Results;	
@@ -143,7 +142,7 @@ normal keyboard input
 
 To decide what number is the repeated moves:
 	Let the moves be 0;
-	Repeat with the event running through possible randomized outcomes:
+	Repeat with the event running through possible outcomes:
 		if the attempt count of the event > the moves:
 			now the moves is the attempt count of the event;
 	decide on the moves.
@@ -271,7 +270,7 @@ Initial scheduling for a test step (this is the reset act counts rule):
 rescheduling rules are a test step based rulebook.
 
 To schedule (the event described - a test step):
-	transcribe and restart capturing because "scheduling [the event described] for";
+	update event description because "scheduling [the event described] for";
 	if the event described is not the scheduled event:
 		now the scheduled event is the event described;
 		if the event described is normal keyboard input:
@@ -286,20 +285,20 @@ To schedule (the event described - a test step):
 		start capturing text;
 		follow the rescheduling rules for the event described;
 	now the event described is not generated;
-	transcribe and restart capturing because "done scheduling";
 	
 Before taking a player action when the scheduled event is generated (this is the test event effects rule):
-	stop and save event description because "testing effects of";
 	[Let repeat be whether or not (the scheduled event is repeatable) and (the repeated moves > 0);]
 	now the scheduled event is not generated;
+	transcribe and stop capturing text;
 	say " .[run paragraph on]";
 	start capturing text;
 	follow the testing effects rules for the scheduled event;
-	transcribe and stop capturing because "done testing effects of";
-	if there is a possible randomized outcome [repeat is true]:
-		schedule the scheduled event;
-	otherwise:
+	clear event description;
+	if we reset every possible outcome:
 		schedule the next move of the scheduled event;
+	otherwise:
+		[repeats are needed]
+		schedule the scheduled event;
 
 Chapter - Test Sets
 
@@ -351,7 +350,6 @@ First for showing the title screen when done testing is false:
 	do nothing.
 	
 First after showing the title screen (this is the run all tests rule):
-	transcribe and stop capturing because "starting test set with";
 	if done testing is true, make no decision;
 	now allowing screen effects is false;
 	initialize test steps;
@@ -368,8 +366,11 @@ First after showing the title screen (this is the run all tests rule):
 			log "  [failures entry] failures in [test set entry]";
 	log "Now testing [the current test set].";
 	[TODO: handle interaction between test config file and scenario]
+	start capturing text;
 	follow the scenario rules;
-	transcribe and restart capturing text because "done setting scenario for";
+
+[Prevent the status window from opening]	
+The check info panel capacity rule does nothing when done testing is false.
 
 To decide which test set is the initiator of (the event -  a test step):
 	Repeat with the candidate running through test sets:
@@ -449,38 +450,38 @@ Before printing the player's obituary when done testing is false (this is the ab
 		
 Chapter - Randomized Events
 
-[TODO: put all randomized outcomes in a table and save it to a file. Then we can restart the game repeatedly and use randomized outcomes to generate statistics about dungeon generation]
-A randomized outcome is a kind of value. Some randomized outcomes are defined by the Table of Randomized Outcomes.
+[TODO: put all outcomes in a table and save it to a file. Then we can restart the game repeatedly and use outcomes to generate statistics about dungeon generation]
+An outcome is a kind of value. Some outcomes are defined by the Table of outcomes.
 
-A randomized outcome has a text called the description.
+An outcome has a text called the description.
 
-To say (result - a randomized outcome):
+To say (result - an outcome):
 	if the description of the result is not empty:
 		say "[description of the result]";
 	otherwise:
 		say "[the result]";
 		
-A randomized outcome can be untested, possible, failed, or achieved. A randomized outcome is usually untested.
-Definition: a randomized outcome is resolved if it is failed or it is achieved.
+An outcome can be untested, possible, failed, or achieved. An outcome is usually untested.
+Definition: an outcome is resolved if it is failed or it is achieved.
 
-The last successful outcome is a randomized outcome that varies. The last successful outcome is boring lack of results.
+The last successful outcome is an outcome that varies. The last successful outcome is boring lack of results.
 
-To decide whether (event - a randomized outcome) just succeeded:
+To decide whether (event - an outcome) just succeeded:
 	if the event is untested, no;
 	decide on whether or not the event is the last successful outcome;
 
-A randomized outcome has a number called the likelihood. A randomized outcome has a number called the minimum attempts. [The expected probability of success is likelihood/minimum attempts]
+An outcome has a number called the likelihood. An outcome has a number called the minimum attempts. [The expected probability of success is likelihood/minimum attempts]
 
-A randomized outcome has a number called the attempt count. A randomized outcome has a number called the success count.
+An outcome has a number called the attempt count. An outcome has a number called the success count.
 
-A randomized outcome has a number called the maximum attempts.
+An outcome has a number called the maximum attempts.
 
-Table of Randomized Outcomes
+Table of Outcomes
 outcome	description	attempt count	success count	likelihood (number)	minimum attempts (number)	maximum attempts (number)
 boring lack of results	""	0	0	0	1	1
 generic reusable event	""	0	0	1	1	100
 
-To decide whether we make (event - a randomized outcome) possible:
+To decide whether we make (event - an outcome) possible:
 	if event is untested:
 		now event is possible;
 		if the maximum attempts of event is 0:
@@ -493,35 +494,29 @@ To decide whether we make (event - a randomized outcome) possible:
 	if the last successful outcome is the event, now the last successful outcome is boring lack of results; [so this event will not be "just succeeded"]
 	decide on whether or not event is possible;
 	
-To make (event - a randomized outcome) possible:
+To make (event - an outcome) possible:
 	Let throwaway result be whether or not we make the event possible.
 	
 To decide whether waiting for resolution:
-	decide on whether or not there is a possible randomized outcome;
+	decide on whether or not there is a possible outcome;
 	
 [This phrase tells us whether we need to keep looping. It also resets everything as a side effect when we're done looping.
 
 To be used when deciding whether to repeat test steps]
 To decide whether we reset every possible outcome:
 	if waiting for resolution, no;
-	now every randomized outcome is untested;
+	now every outcome is untested;
 	yes.
 	
 [TODO: Normalize regex matches against event description so we can use a brief consistent phrase. Also, do we really need event description, or can we just use the captured text?]
 
-To test (event - a randomized outcome) against (success - a truth state):
+To test (event - an outcome) against (success - a truth state):
 	[TODO: print a period to show progress]
 	unless we make the event possible, stop;
 	let percent-tolerance be 5; [a constant - do we want it to be a property?]
 	increment attempt count of the event;
 	if likelihood of the event is 0:
-		assert "[event] happened after [attempt count of the event] attempts, but it should never happen" based on whether or not success is false;
-		if success is true:
-			now the event is failed;
-		otherwise:
-			now the last successful outcome is the event;
-			if the attempt count of the event is not less than the maximum attempts of the event:
-				now the event is achieved;
+		fail event based on success;
 	otherwise:
 		if success is true:
 			now the last successful outcome is the event;
@@ -537,20 +532,25 @@ To test (event - a randomized outcome) against (success - a truth state):
 			[say "succeeded [success count of the event] times after [attempt count of the event] attempts, coming within [tolerance] of [target].";]
 			now the event is achieved;
 		otherwise if the attempt count of the event is not less than the maximum attempts of the event:
-			assert "After [maximum attempts of the event] attempt[s], [the event] happened [success count of the event] times (never within [tolerance] of the target number [target])" based on whether or not likelihood of the event is 0;
+			assert "After [maximum attempts of the event] attempt[s], [the event] happened [success count of the event] times (never within [tolerance] of the target number [target])" based on false;
 			now the event is failed.
 
-To test (event - a randomized outcome) against (T - a text):
+To test (event - an outcome) against (T - a text):
 	test event against whether or not the event description matches the regular expression T;
 
-To fail (event - a randomized outcome) based on (result - a truth state):
-	now likelihood of event is 0;
-	test event against result;
+To fail (event - an outcome) based on (result - a truth state):
+	if result is true:
+		assert "[event] happened after [attempt count of the event] attempts, but it should never happen" based on false;
+		now the event is failed;
+	otherwise:
+		now the last successful outcome is the event;
+		if the attempt count of the event is not less than the maximum attempts of the event:
+			now the event is achieved;
 		
-To fail (event - a randomized outcome) on result (T - a text):
+To fail (event - an outcome) on result (T - a text):
 	fail event based on whether or not the event description matches the regular expression T;
 	
-To achieve (event - a randomized outcome) based on (result - a truth state):
+To achieve (event - an outcome) based on (result - a truth state):
 	unless we make the event possible, stop;
 	increment attempt count of event;
 	if result is true:
@@ -561,7 +561,7 @@ To achieve (event - a randomized outcome) based on (result - a truth state):
 		assert "[the event] never happened after [attempt count of event] attempts" based on false;
 		now event is failed;
 		
-To achieve (event - a randomized outcome) on result (T - a text):
+To achieve (event - an outcome) on result (T - a text):
 	achieve event based on whether or not the event description matches the regular expression T;
 	
 [TODO: combat round tests]
@@ -585,11 +585,9 @@ To decide which room is the action-destination of (current move - a test step):
 	if the current destination is a room, decide on the current destination;
 	decide on the location of the current destination.
 
-The delayed action is a stored action that varies. The delayed action is the action of waiting.
-
 A test step can be extracting.
 
-Table of Randomized Outcomes (continued)
+Table of Outcomes (continued)
 outcome	description	likelihood	minimum attempts
 moving towards the destination	"finding a route from [the location] to [the location-target of the scheduled event][if the location-target of the scheduled event is not the action-destination of the scheduled event](in [the the action-destination of the scheduled event])[end if]"	1	1
 compelling an action	"[the compelled action]"	1	1
@@ -600,7 +598,7 @@ For taking a player action (this is the move to the destination of a test step r
 		make no decision;
 	Let the place be the action-destination of the scheduled event;
 	if the place is the location:
-		transcribe and restart capturing because "arrived at destination [the place] for";
+		update event description because "arrived at destination [the place] for";
 	if the place is Null-room or the place is the location:
 		make no decision;
 	if the scheduled event is extracting:
@@ -721,14 +719,11 @@ To assert that/-- (A - a value) is (B - a value) with label (T - an indexed text
 		Let error_msg be an indexed text;
 		now error_msg is "Expected [T]: [B], Got: [A][line break]";
 		record a failure report of error_msg;
-
-To assert truth of/-- (C - a truth state) with message (T - an indexed text):
+	
+To assert (T - an indexed text) based on (C - a truth state):
 	record a test attempt;
 	unless C is true:
 		record a failure report of T;
-	
-To assert (T - an indexed text) based on (C - a truth state):
-	assert truth of C with message T;
 	
 To succeed based on (result - a truth state) within (N - a number) attempts:
 	Now description of generic reusable event is "[the scheduled event]";
@@ -745,14 +740,20 @@ To fail based on (result - a truth state) within (N - a number) attempts:
 To succeed based on (result - a truth state):
 	succeed based on result within 100 attempts;
 	
+To succeed on result (R - a text) within (N - a number) attempts:
+	succeed based on whether or not the event description matches the regular expression R within N attempts;
+	
 To succeed on result (R - a text):
-	succeed based on whether or not the event description matches the regular expression R;
+	succeed on result R within 100 attempts;
 	
 To fail based on (result - a truth state):
 	fail based on result within 100 attempts;
 	
+To fail on result (R - a text) within (N - a number) attempts:
+	fail based on whether or not the event description matches the regular expression R within N attempts;
+	
 To fail on result (R - a text):
-	fail based on whether or not the event description matches the regular expression R;
+	fail on result R within 100 attempts;
 	
 [ Assert that any condition is true, but with less information on failure ]
 To assert that/-- (C - a condition):
@@ -812,7 +813,7 @@ To have (guy - a person) defeat (loser - a person):
 	
 To have the player sacrifice (stuff - a power):
 	Let the power-level be the power level of stuff;
-	assert truth of whether or not power-level > 0 with message "power level of sacrificed ability should be positive";
+	assert "power level of sacrificed ability should be positive" based on whether or not power-level > 0;
 	Let divinity be a random god who infuses the location;
 	transcribe "Sacrificing [stuff] to [divinity]";
 	now the current question is "Which power do you want to sacrifice?";
@@ -824,37 +825,27 @@ To have the player sacrifice (stuff - a power):
 	follow the sacrifice rule;
 	assert that the favour of the player with divinity is the previous favour + the power-level;
 
-To assert that (message - an indexed text) includes (pattern - an indexed text):
+To assert that the event description includes (pattern - an indexed text):
 	record a test attempt;
-	unless message matches the regular expression pattern:
+	unless the event description matches the regular expression pattern:
 		Let error_msg be an indexed text;
-		now error_msg is "Regular expression '[pattern]' was not found in the text:[paragraph break]'[message]'[line break]";
+		now error_msg is "Regular expression '[pattern]' was not found in the text:[paragraph break]'[the event description]'[line break]";
 		record a failure report of error_msg;
 		
-To assert that (message - an indexed text) does not include (pattern - an indexed text):
+To assert that the event description does not include (pattern - an indexed text):
 	record a test attempt;
-	if message matches the regular expression pattern:
+	if the event description matches the regular expression pattern:
 		Let error_msg be an indexed text;
-		now error_msg is "Regular expression '[pattern]' should not have been found in the text:[paragraph break]'[message]'[line break]";
+		now error_msg is "Regular expression '[pattern]' should not have been found in the text:[paragraph break]'[the event description]'[line break]";
 		record a failure report of error_msg;
 
 To assert that (N - a number) is between (A - a number) and (B - a number):
-	assert truth of whether or not N is at least A and N is at most B with message "[N] is not between [A] and [B]";
+	assert "[N] is not between [A] and [B]" based on whether or not N is at least A and N is at most B;
 	
 To assert that (item - a thing) is in (place - an object):
 	Let msg be indexed text;
 	Now msg is "Expected location of [the item]: [place]. Got: [location of the item].";
-	assert truth of whether or not the location of item is place with message msg;
-	
-To pause and assert that the event description includes (pattern - an indexed text):
-	stop and save event description because "checking output of";
-	assert that the event description includes pattern;
-	transcribe and restart capturing because "done output of";
-	
-To pause and assert that the event description does not include (pattern - an indexed text):
-	stop and save event description because "checking output of";
-	assert that the event description does not include pattern;
-	transcribe and restart capturing because "done checking output of".
+	assert msg based on whether or not the location of item is place;
 
 Section - hiding-check, hidden-traveling and hiding-reveal
 
@@ -941,7 +932,7 @@ Section - Counting Actions
 
 A person has a number called the act count;
 
-[TODO: replace these counters with randomized outcomes?]
+[TODO: replace these counters with outcomes?]
 
 A person has a number called the reaction count.
 
@@ -991,7 +982,7 @@ A person has a number called the hitting count.
 To assert (N - a number) hit/hits by (guy - a person):
 	Let msg be indexed text;
 	Now msg is "Expected hitting count for [The guy]: [N] Got: [hitting count of the guy].";
-	assert truth of whether or not N is hitting count of the guy with message msg;
+	assert msg based on whether or not N is hitting count of the guy;
 
 First before an actor hitting (this is the increment hitting count rule):
 	increment the hitting count of the actor;
@@ -1058,7 +1049,7 @@ To prepare a test battle with (guy - a person), inviting groups:
 	Generate the action of challenging guy in Test Arena;
 	Compel the action of guy waiting;
 	
-Combat hit is a randomized outcome.
+Combat hit is an outcome.
 
 To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit by (aggressor - a person) with result (outcome - a text) in/on (likelihood - a number) out of (total tries - a number) attempts:
 	Let original-defender-weapon be a random readied weapon enclosed by guy;
@@ -1072,7 +1063,7 @@ To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength 
 	now likelihood of combat hit is likelihood;
 	make combat hit possible;
 	while combat hit is not resolved: 
-		transcribe and restart capturing;
+		clear event description;
 		assign reaction to guy;
 		now the melee of the aggressor is strength;
 		now the health of guy is 1000;
@@ -1082,10 +1073,9 @@ To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength 
 		now aggressor carries original-attacker-weapon;
 		if original-attacker-weapon is not readied, try aggressor readying original-attacker-weapon;
 		try the aggressor hitting guy;
-		stop and save event description because "[combat hit] attempt [attempt count of combat hit] -";
+		update event description because "[combat hit] attempt [attempt count of combat hit] -";
 		if report of the reaction is not empty, assert that the event description includes "[report of reaction]";
 		test combat hit against "[outcome]";
-	transcribe and restart capturing;
 	
 To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit with result (outcome - a text):
 	have guy do a reaction to a strength melee hit by the player with result outcome.
@@ -1219,14 +1209,27 @@ Chapter: Advanced usage
 
 Section: Controlling text capture
 
-Usually the event description contains all the text that was generated during the previous turn. But we can manipulate what is saved.
+Text capturing should work fine behind the scenes, but sometimes you might need to step in and take control.
 
-This phrase stops text capturing:
+Because sometimes the system needs to stop capturing and display something to the screen, the full output of the current turn is saved in a text called the "event description." This is automatically cleared at the beginning of a turn and updated when it is likely to be needed. But sometimes we might want to clear it and update it manually. Use these phrases:
+	
+clear the event description
 
-	stop and save event description
+This will set the event description to an empty string. As text is captured, it will be appended to the event description.
 
-And this restarts it:
+update the event description
 
-	Transcribe and start capturing;
+This will force the most recently captured text to be added to the end of the event description. Versions of these two phrases take a "reason" parameter, which will be included in the transcript, e.g:
+	
+clear the event description because "starting an iteration of the foobar test"
 
-It's important to use the "transcribe" version of this phrase so that our transcript output will contain everything.
+update the event description because "checking for frobnitz usage"
+
+If we want to output information to the screen, use the phrase:
+
+log (message - a text)
+
+And if we want to output something to the transcript only, use the phrase:
+
+transcribe (message - a text)
+

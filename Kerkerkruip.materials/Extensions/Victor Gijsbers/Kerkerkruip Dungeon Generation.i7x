@@ -92,7 +92,6 @@ A dungeon generation rule (this is the finish generating rule):
 		clear the screen.
 
 
-
 Section - Generation message code (for use with Glimmr Canvas Animation by Erik Temple)
 
 To print generation message (T - text):

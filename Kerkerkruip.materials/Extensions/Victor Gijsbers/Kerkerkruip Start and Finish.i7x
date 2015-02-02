@@ -279,7 +279,9 @@ To display the text menu:
 		replace player input;]
 
 To close the text menu:
+	say "closed the text menu";
 	clear the screen; 
+	say "cleared the screen";
 
 To say difficulty level (m - a number):
 	if m is 0:
