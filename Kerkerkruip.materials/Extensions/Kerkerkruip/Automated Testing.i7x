@@ -493,11 +493,14 @@ To decide whether we make (event - a randomized outcome) possible:
 To make (event - a randomized outcome) possible:
 	Let throwaway result be whether or not we make the event possible.
 	
+To decide whether waiting for resolution:
+	decide on whether or not there is a possible randomized outcome;
+	
 [This phrase tells us whether we need to keep looping. It also resets everything as a side effect when we're done looping.
 
 To be used when deciding whether to repeat test steps]
 To decide whether we reset every possible outcome:
-	if there is a possible randomized outcome, no;
+	if waiting for resolution, no;
 	now every randomized outcome is untested;
 	yes.
 	
@@ -584,6 +587,7 @@ Table of Randomized Outcomes (continued)
 outcome	description	likelihood	minimum attempts
 moving towards the destination	"finding a route from [the location] to [the location-target of the scheduled event][if the location-target of the scheduled event is not the action-destination of the scheduled event](in [the the action-destination of the scheduled event])[end if]"	1	1
 compelling an action	"[the compelled action]"	1	1
+reacting to compelled action	""	1	1
 
 For taking a player action (this is the move to the destination of a test step rule):
 	if the player is at-React:
@@ -609,6 +613,14 @@ Last choosing a player action rule (this is the wait by default rule):
 	generate the action of waiting.
 
 Choosing a player reaction is a rulebook. The choosing a player reaction rules have default success.
+
+First choosing a player reaction (this is the track reaction to compelled action rule):
+	if reacting to compelled action is possible, achieve reacting to compelled action based on true;
+	make no decision;
+	
+To decide whether waiting for player reaction:
+	if waiting for compelled action, yes;
+	decide on whether or not reacting to compelled action is possible;
 
 [I7 names borrowed from Ron Newcomb's Original Parser]
 The action in progress is an action name that varies. 
@@ -654,6 +666,9 @@ To select menu question answer (N - a number):
 A Standard AI rule for a person (called P) (this is the compel an action rule):
 	if P is at-Act and the actor part of the compelled action is P:
 		try the compelled action;
+		if the action name part of the compelled action is the attacking action:
+			if the noun part of the compelled action is the player:
+				make reacting to compelled action possible;
 		achieve compelling an action based on true;
 		now the compelled action is the action of waiting;
 		rule succeeds.
@@ -988,7 +1003,7 @@ Test Arena is an arena. The staging area of Test Arena is maze-waiting-room.
 
 Test Arena is faction-imposing.
 
-reaction-type is a kind of value. The reaction-types are no reaction, parry reaction, dodge reaction, block reaction.
+reaction-type is a kind of value. The reaction-types are no reaction, parry reaction, dodge reaction, block reaction. [TODO: use action names instead?]
 
 A reaction-type has a text called the report. The report of a reaction-type is usually "";
 

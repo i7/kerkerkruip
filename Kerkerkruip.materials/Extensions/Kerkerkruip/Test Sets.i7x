@@ -693,8 +693,8 @@ Choosing a player reaction when reaction-mindslug-killing is the scheduled event
 	rule succeeds;
 
 testing effects of reaction-mindslug-killing:
-	if waiting for compelled action, make no decision;
-	succeed based on whether or not the mindslug is dead;
+	if waiting for player reaction, make no decision;
+	assert "the mindslug should be dead" [succeed] based on whether or not the mindslug is dead;
 	if the mindslug is dead:
 		assert that the event description includes "The contemplative northern barbarian ends your life, with what seems to be a hint of sadness in his face";
 		assert that the event description includes "As the mindslug dies, you feel its powerful intelligence absorbed into your own body";
@@ -730,7 +730,7 @@ Initial scheduling of waiting-for-Malygris-attack:
 	compel the action of Malygris attacking the player;
 		
 testing effects of waiting-for-Malygris-attack:
-	[make sure this happens at the right time, not during reaction]
+	if waiting for player reaction, make no decision;
 	assert that the event description includes "defender was asleep";
 	assert truth of whether or not the player is not just-woken with message "the player should not be just-woken anymore";
 		
