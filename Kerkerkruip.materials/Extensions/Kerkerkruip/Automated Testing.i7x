@@ -293,15 +293,6 @@ Before taking a player action when the scheduled event is generated (this is the
 	start capturing text;
 	follow the testing effects rules for the scheduled event;
 	transcribe and stop capturing because "done testing effects of";
-	[Let repeat be whether or not the scheduled event is [still] repeatable;
-	if repeat is true and the repeated moves is not less than the maximum repeats of the scheduled event:
-		now repeat is false;
-		if the scheduled event is uneventful:
-			record success of the scheduled event;
-		otherwise:
-			assert "[the maxed out report of the scheduled event]" based on false;
-			Repeat with the attempt running through not achieved possible randomized outcomes:
-				assert "After [the scheduled event], [the attempt] was still not tested" based on false;]
 	if there is a possible randomized outcome [repeat is true]:
 		schedule the scheduled event;
 	otherwise:
@@ -450,6 +441,7 @@ For reading a command when done testing is false (this is the finish current tes
 Before printing the player's obituary when done testing is false (this is the abort the current test set if game over rule):
 	record failure report "the player died";
 	transcribe and stop capturing because "game over at";
+	write file of test results from Table of Test Results;
 	start the next test.
 		
 Chapter - Randomized Events
@@ -591,6 +583,7 @@ A test step can be extracting.
 Table of Randomized Outcomes (continued)
 outcome	description	likelihood	minimum attempts
 moving towards the destination	"finding a route from [the location] to [the location-target of the scheduled event][if the location-target of the scheduled event is not the action-destination of the scheduled event](in [the the action-destination of the scheduled event])[end if]"	1	1
+compelling an action	"[the compelled action]"	1	1
 
 For taking a player action (this is the move to the destination of a test step rule):
 	if the player is at-React:
@@ -626,7 +619,7 @@ The person requesting variable translates into I6 as "act_requester".
 To begin the current action: (- BeginAction(action, noun, second); -)
 
 To generate (the desired action - a stored action):
-	transcribe "Player action: [the desired action]";
+	transcribe "Player [if the player is at-react]re[end if]action: [the desired action]";
 	now the action in progress is the action name part of the desired action;
 	now the person asked is the actor part of the desired action;
 	[now the person requesting is nothing;] [not allowed in I7?]
@@ -641,7 +634,11 @@ To compel (the desired action - a stored action):
 	Let the guy be the actor part of the desired action;
 	transcribe "compelling [the desired action][if the guy is asleep] and waking up [the guy]";
 	now the guy is not asleep;
-	Now the compelled action is the desired action.
+	Now the compelled action is the desired action;
+	make compelling an action possible;
+	
+To decide whether waiting for compelled action:
+	decide on whether or not compelling an action is possible;
 	
 The automated menu question answer is a number that varies.
 
@@ -657,6 +654,7 @@ To select menu question answer (N - a number):
 A Standard AI rule for a person (called P) (this is the compel an action rule):
 	if P is at-Act and the actor part of the compelled action is P:
 		try the compelled action;
+		achieve compelling an action based on true;
 		now the compelled action is the action of waiting;
 		rule succeeds.
 	
@@ -1006,7 +1004,11 @@ To assign (reaction - a reaction-type) to (guy - a person):
 	else if reaction is block reaction:
 		now guy is at-block;
 		
-To prepare a test battle with (guy - a person):
+To prepare a test battle with (guy - a person), inviting groups:
+	if inviting groups:
+		now Test Arena is challenged-group-inviting;
+	otherwise:
+		now Test Arena is not challenged-group-inviting;
 	Repeat with the old enemy running through people in Test Arena:
 		if the old enemy is not the player:
 			extract the old enemy from combat;

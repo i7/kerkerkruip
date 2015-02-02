@@ -637,9 +637,9 @@ Test play when testing controlling pipes:
 	try examining the wheel;
 	pause and assert that the event description includes "which are currently closed\.";
 
-Section - Sul Champion vs Herm worshipper
+[Section - Sul Champion vs Herm worshipper
 
-[Sul Champion vs Herm worshipper is a test set.
+Sul Champion vs Herm worshipper is a test set.
 
 A scenario rule when testing Sul Champion vs Herm worshipper:
 	now Hall of Gods is testobject;
@@ -666,47 +666,38 @@ player-defended-by-herm is a randomized event;
 
 isra-defended-by-sul is a randomized event;]
 
-[
 Section - Bug 210
 
 bug-210 is a test set. 
 
 A scenario rule when testing bug-210:
-	now the mindslug is testobject;
-	now a random scroll of death is testobject;
+	now the reusable item is a random scroll of death;
 
 A test play when testing bug-210:
-	Let the death-scroll be a random not off-stage scroll of death;
-	Now the player carries the death-scroll;
-	extract the player to the location of the mindslug;
+	prepare a test battle with the mindslug, inviting groups;
 	now the health of the mindslug is 1;
 	now the weapon damage bonus of the claymore is 100;
 	now the melee of fafhrd is 100;
-	update the combat status;
 	assert truth of whether or not fafhrd carries the claymore with message "fafhrd should carry the claymore";
 	assert truth of whether or not the claymore is readied with message "the claymore should be readied";
 	assert truth of whether or not the number of readied weapons enclosed by fafhrd is 1 with message "fafhrd should only have one weapon readied";
 	
 Initial scheduling of reaction-mindslug-killing:
-	now the mind score of fafhrd is 100; [protects against mirror confusion]
 	compel the action of fafhrd attacking the player;
 	
-reaction-mindslug-killing is a repeatable test step. The first move of bug-210 is reaction-mindslug-killing.
+reaction-mindslug-killing is a test step. The first move of bug-210 is reaction-mindslug-killing.
 
 Choosing a player reaction when reaction-mindslug-killing is the scheduled event:
 	assert truth of whether or not the mindslug is alive with message "the mindslug should be alive";
-	if the player carries a scroll of death:
-		let the death-scroll be a random carried scroll of death;
-		generate the action of reading the death-scroll;
-		now the scheduled event is not repeatable;
-		rule succeeds;
+	generate the action of reading the reusable item;
+	rule succeeds;
 
 testing effects of reaction-mindslug-killing:
-	if the scheduled event is repeatable, make no decision;
-	assert that the event description includes "The contemplative northern barbarian ends your life, with what seems to be a hint of sadness in his face";
-	assert that the event description includes "As the mindslug dies, you feel its powerful intelligence absorbed into your own body";
-	assert truth of whether or not the mindslug is dead with message "the mindslug should be dead";
-	assert truth of whether or not (the player is not at-react) with message "the player should not be at-react"; [probably redundant]
+	if waiting for compelled action, make no decision;
+	succeed based on whether or not the mindslug is dead;
+	if the mindslug is dead:
+		assert that the event description includes "The contemplative northern barbarian ends your life, with what seems to be a hint of sadness in his face";
+		assert that the event description includes "As the mindslug dies, you feel its powerful intelligence absorbed into your own body";
 	
 Section - Dream of Sleeping
 
@@ -732,17 +723,14 @@ testing effects of sleeping-dream-waking:
 	assert that the concentration of Malygris is 2;
 	assert truth of whether or not the player is just-woken with message "the player should be just-woken";
 	
-Waiting-for-Malygris-attack is a repeatable test step. The next move of sleeping-dream-waking is waiting-for-Malygris-attack. 
+Waiting-for-Malygris-attack is a test step. The next move of sleeping-dream-waking is waiting-for-Malygris-attack. 
 
 Initial scheduling of waiting-for-Malygris-attack:
 	now the health of the player is 1000;
 	compel the action of Malygris attacking the player;
-	
-Carry out Malygris hitting the player when waiting-for-Malygris-attack is the scheduled event:
-	now waiting-for-Malygris-attack is not repeatable.
-	
+		
 testing effects of waiting-for-Malygris-attack:
-	if waiting-for-Malygris-attack is repeatable, make no decision;
+	[make sure this happens at the right time, not during reaction]
 	assert that the event description includes "defender was asleep";
 	assert truth of whether or not the player is not just-woken with message "the player should not be just-woken anymore";
 		
@@ -761,31 +749,25 @@ Test play when testing aite-healing:
 		now the defence of guy is 100;
 	decrease the health of the player by 3;
 	
-healer-not-healing is a repeatable test step. The first move of aite-healing is healer-not-healing. The maximum repeats of healer-not-healing is 20.
-	
-Before the healer of Aite doing anything when healer-not-healing is the scheduled event:
-	now healer-not-healing is uneventful;
+healer-not-healing is a test step. The first move of aite-healing is healer-not-healing.
 	
 testing effects of healer-not-healing:
-	unless the injury of the player is 3:
-		record failure of the scheduled event with message "the player should still be damaged for 3 health";
+	Fail based on whether or not the injury of the player is 3 within 20 attempts;
 		
-healer-healing-defender is a repeatable test step. The next move of healer-not-healing is healer-healing-defender. The maximum repeats of healer-healing-defender is 20.
+healer-healing-defender is a test step. The next move of healer-not-healing is healer-healing-defender.
 
 Initial scheduling of healer-healing-defender:
 	decrease the health of the healer of aite by 3;
 	decrease the health of the defender of aite by 4;
 	
 testing effects of healer-healing-defender:
-	if the injury of defender of Aite is less than 4:
-		record success of healer-healing-defender;
+	succeed based on whether or not the injury of defender of Aite is less than 4 within 20 attempts;
 		
-healer-healing-self is a repeatable test step. The next move of healer-healing-defender is healer-healing-self. The maximum repeats of healer-healing-self is 100.
+healer-healing-self is a test step. The next move of healer-healing-defender is healer-healing-self. 
 
 testing effects of healer-healing-self:
-	if the injury of healer of Aite is less than 3:
-		record success of healer-healing-self.
-		
+	succeed based on whether or not the injury of healer of Aite is less than 3;
+			
 Section - Sul's intervention
 
 sul-intervention-test is an test set [for issue #227].
@@ -875,6 +857,7 @@ testing effects of fell-also-killing:
 	assert truth of whether or not the player carries the glass cannon with message "the glass cannon should still be carried";
 	assert truth of whether or not the glass cannon is readied with message "the glass cannon should still be readied";
 	
+[
 Section - Temporary Blood Magic from Nomos
 
 temporary Nomos blood magic is a test set.
@@ -2801,6 +2784,6 @@ failing move is a test step.
 
 Testing effects of failing move:
 	assert "truth is false" based on false.
-]
 
+]
 Test Sets ends here.
