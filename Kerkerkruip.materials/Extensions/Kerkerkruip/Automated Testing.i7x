@@ -373,6 +373,7 @@ First after showing the title screen (this is the run all tests rule):
 		if failures entry > 0:
 			log "  [failures entry] failures in [test set entry]";
 	log "Now testing [the current test set].";
+	[TODO: handle interaction between test config file and scenario]
 	follow the scenario rules;
 	transcribe and restart capturing text because "done setting scenario for";
 
@@ -494,7 +495,7 @@ To decide whether we make (event - a randomized outcome) possible:
 				now maximum attempts of event is 100;
 		now success count of event is 0;
 		now attempt count of event is 0;
-		if the last successful outcome is the event, now the last successful outcome is boring lack of results; [so this event will not be "just succeeded"]
+	if the last successful outcome is the event, now the last successful outcome is boring lack of results; [so this event will not be "just succeeded"]
 	decide on whether or not event is possible;
 	
 To make (event - a randomized outcome) possible:
