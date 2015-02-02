@@ -738,21 +738,17 @@ testing effects of waiting-for-Malygris-attack:
 Section - Healer of Aite Healing
 
 aite-healing is a test set.
-
-Scenario when testing aite-healing:
-	now the statue of shards is bannedobject;
-	now healer of aite is testobject.
 	
-Test play when testing aite-healing:
-	extract the player to the location of healer of aite;
+healer-not-healing is a test step. The first move of aite-healing is healer-not-healing.
+	
+Initial scheduling of healer-not-healing:
+	prepare a test battle with the healer of Aite, inviting groups;
 	Repeat with guy running through people:
 		now the defence of guy is 100;
 	decrease the health of the player by 3;
 	
-healer-not-healing is a test step. The first move of aite-healing is healer-not-healing.
-	
 testing effects of healer-not-healing:
-	Fail based on whether or not the injury of the player is 3 within 20 attempts;
+	Fail based on whether or not the injury of the player is less than 3 within 20 attempts;
 		
 healer-healing-defender is a test step. The next move of healer-not-healing is healer-healing-defender.
 

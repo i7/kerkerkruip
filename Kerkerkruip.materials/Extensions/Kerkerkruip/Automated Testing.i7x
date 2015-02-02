@@ -509,30 +509,33 @@ To decide whether we reset every possible outcome:
 To test (event - a randomized outcome) against (success - a truth state):
 	[TODO: print a period to show progress]
 	unless we make the event possible, stop;
-	if success is true, now the last successful outcome is the event;
 	let percent-tolerance be 5; [a constant - do we want it to be a property?]
 	increment attempt count of the event;
 	if likelihood of the event is 0:
-		assert "[event] happened after [attempt count] attempts, but it should never happen" based on whether or not success is false;
+		assert "[event] happened after [attempt count of the event] attempts, but it should never happen" based on whether or not success is false;
 		if success is true:
-			now event is failed;
+			now the event is failed;
+		otherwise:
+			now the last successful outcome is the event;
+			if the attempt count of the event is not less than the maximum attempts of the event:
+				now the event is achieved;
+	otherwise:
+		if success is true:
+			now the last successful outcome is the event;
+			increment success count of the event;
+		Let target be (likelihood of the event * attempt count of the event) / (minimum attempts of the event); [parentheses are needed, but I don't know why]
+		Let tolerance be percent-tolerance * attempt count of the event / 100;
+		if the attempt count of event is less than the minimum attempts of event:
+			[not enough attempts to determine success or failure]
 			stop;
-	if success is true:
-		increment success count of the event;
-	Let target be (likelihood of the event * attempt count of the event) / (minimum attempts of the event); [parentheses are needed, but I don't know why]
-	Let tolerance be percent-tolerance * attempt count of the event / 100;
-	if the attempt count of event is less than the minimum attempts of event:
-		[not enough attempts to determine success or failure]
-		stop;
-	Let the error be the absolute value of (success count of the event - target);
-	if error is not greater than tolerance:
-		assert "success" based on true; [record that the test is completed]
-		[say "succeeded [success count of the event] times after [attempt count of the event] attempts, coming within [tolerance] of [target].";]
-		now the event is achieved;
-	otherwise if the attempt count of the event is not less than the maximum attempts of the event:
-		assert "After [maximum attempts of the event] attempt[s], [the event] happened [success count of the event] times (never within [tolerance] of the target number [target])" based on whether or not likelihood of the event is 0;
-		if likelihood of the event is 0, now the event is achieved;
-		otherwise now the event is failed.
+		Let the error be the absolute value of (success count of the event - target);
+		if error is not greater than tolerance:
+			assert "success" based on true; [record that the test is completed]
+			[say "succeeded [success count of the event] times after [attempt count of the event] attempts, coming within [tolerance] of [target].";]
+			now the event is achieved;
+		otherwise if the attempt count of the event is not less than the maximum attempts of the event:
+			assert "After [maximum attempts of the event] attempt[s], [the event] happened [success count of the event] times (never within [tolerance] of the target number [target])" based on whether or not likelihood of the event is 0;
+			now the event is failed.
 
 To test (event - a randomized outcome) against (T - a text):
 	test event against whether or not the event description matches the regular expression T;
