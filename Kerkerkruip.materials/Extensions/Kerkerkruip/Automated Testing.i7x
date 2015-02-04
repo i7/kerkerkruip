@@ -38,18 +38,19 @@ To update the/-- event description/--:
 	update the event description because "transcribe and stop capturing";
 	
 To update the/-- event description because (reason - a text):
-	stop capturing text;
-	if "[the captured text]" matches the regular expression ".":
-		transcribe "[reason] [current test description]";
-		now the event description is the substituted form of "[the event description][the captured text]";
-		append "[the captured text]" to file of test transcript;
+	if text capturing is active: [is this necessary to check? Is it a good idea?]
+		stop capturing text;
+		if "[the captured text]" matches the regular expression ".":
+			transcribe "[reason] [current test description]";
+			now the event description is the substituted form of "[the event description][the captured text]";
+			append "[the captured text]" to file of test transcript;
 		start capturing text; [and clear the captured text]
 	
 To transcribe and stop capturing text/--:
 	transcribe and stop capturing because "transcribe and stop capturing";
 	
 To transcribe and stop capturing text/-- because (reason - a text):
-	if text capturing is active, update the event description because reason;
+	update the event description because reason;
 	stop capturing text;
 	
 To clear the/-- event description:
@@ -349,6 +350,7 @@ First for showing the title screen when done testing is false:
 	do nothing.
 	
 First after showing the title screen (this is the run all tests rule):
+	transcribe and stop capturing because "starting test set with";
 	if done testing is true, make no decision;
 	now allowing screen effects is false;
 	initialize test steps;
