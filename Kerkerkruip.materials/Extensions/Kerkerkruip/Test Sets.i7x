@@ -1657,7 +1657,6 @@ Test play when testing bug-262:
 	Repeat with item running through treasure packs:
 		assert "[The item] should be off-stage, but it is in [the holder of the item][if holder of the item is not a room] (in [location of the item])" based on whether or not item is off-stage;
 
-[
 Section - bug 245
 
 bug-245 is a test set.
@@ -1672,13 +1671,12 @@ Initial scheduling of ape-growing:
 	now the health of the player is 1000;
 	now the melee of the player is 100;
 	
-ape-growing is a extracting hidden-traveling hiding-reveal repeatable test step. The first move of bug-245 is ape-growing. The location-target of ape-growing is the blood ape. 
+ape-growing is a extracting hidden-traveling hiding-reveal test step. The first move of bug-245 is ape-growing. The location-target of ape-growing is the blood ape. 
 
+[TODO:  a 100-melee hit phrase right here would cut through the crap]
 testing effects of ape-growing:
-	if the size of the blood ape is greater than medium:
-		record success of ape-growing;
-		make no decision;
-	compel the action of the blood ape attacking the player;
+	succeed based on whether or not the size of the blood ape is greater than medium;
+	if waiting for resolution, compel the action of the blood ape attacking the player;
 	
 Choosing a player reaction when testing ape-growing:
 	generate the action of exposing;
@@ -1713,7 +1711,8 @@ testing effects of bodmall-bleeding:
 	assert "the player should now be bigger than medium, but [regarding the player][they] [are] [size of the player]" based on whether or not the size of the player is greater than medium;
 	assert "bodmall should have reacted exactly once, but she reacted [reaction count of bodmall] times" based on whether or not the reaction count of Bodmall is 1;
 	assert "bodmall should be at-inactive, but she is [combat state of bodmall]" based on whether or not bodmall is at-inactive;
-	
+
+[
 Section - Maze Moving
 
 [Moving around in the maze - check that all people have 0 concentration and are at-inactive. Check that the right thing happens when retreating or running from an opponent in the maze. Maybe check grenade-throwing effects in the maze]
