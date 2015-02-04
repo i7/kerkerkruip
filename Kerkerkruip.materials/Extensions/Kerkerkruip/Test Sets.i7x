@@ -1594,7 +1594,6 @@ no-new-blessed-grenade is a grenade-producing test step.
 testing effects of no-new-blessed-grenade:
 	fail based on whether or not the blessed grenade is not off-stage within 100 attempts;
 
-[
 Section - At-react after getting mazed - bug 210
 
 maze-resetting is a test set.
@@ -1627,6 +1626,7 @@ testing effects of overmind-mazing:
 Section - bug 262
 
 [this bug will not happen with normal testobject placement, so this is a bit of a gamble]
+[TODO: create testing dungeon generation rulebook. save the table of outcomes to a file and continue the test if any of them are open]
 
 bug-262 is a test set.
 
@@ -1657,6 +1657,7 @@ Test play when testing bug-262:
 	Repeat with item running through treasure packs:
 		assert "[The item] should be off-stage, but it is in [the holder of the item][if holder of the item is not a room] (in [location of the item])" based on whether or not item is off-stage;
 
+[
 Section - bug 245
 
 bug-245 is a test set.
