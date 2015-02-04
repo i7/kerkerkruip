@@ -41,7 +41,6 @@ To update the/-- event description because (reason - a text):
 	stop capturing text;
 	if "[the captured text]" matches the regular expression ".":
 		transcribe "[reason] [current test description]";
-		update the event description;
 		now the event description is the substituted form of "[the event description][the captured text]";
 		append "[the captured text]" to file of test transcript;
 		start capturing text; [and clear the captured text]
