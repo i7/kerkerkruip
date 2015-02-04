@@ -1954,7 +1954,7 @@ imp-stashing is a test step.
 Testing effects of imp-stashing:
 	succeed based on whether or not a package of ment is in the lair of the imp within 2 attempts;
 	
-[
+
 Section - Starting Kits
 
 starting-kits-test is an test set.
@@ -1997,7 +1997,7 @@ Generation test when testing starting-kits-test:
 	Assert that the original owner of the sword of light is the angel of compassion with label "original owner of the sword of light";
 	Assert that the original owner of the claymore is fafhrd with label "original owner of the claymore";
 		[TODO: starting kit items should match the player's size?]
-				
+
 Section - Bloodlust - issue 279
 
 bloodlust-279 is a test set.
@@ -2052,7 +2052,7 @@ choosing a player action when testing hitting-ape:
 testing effects of hitting-ape:
 	assert that bloodlusting is true when "after hitting the ape the first time";
 	
-fafhrd-killing-ape is a repeatable test step.
+fafhrd-killing-ape is a test step.
 
 initial scheduling of fafhrd-killing-ape:
 	now the melee of fafhrd is 100;
@@ -2069,8 +2069,7 @@ testing effects of fafhrd-killing-ape:
 	if the blood ape is alive:
 		make no decision;
 	assert that bloodlusting is false when "after Fafhrd kills the ape";
-	now fafhrd-killing-ape is not repeatable.
-	
+
 Section - bug 291
 
 bug-291 is a test set.
@@ -2116,7 +2115,7 @@ Testing effects of shaman-choosing:
 	assert that the player is fully alert;
 	assert that the event description does not include "fog of sleep";
 	
-teleport-waking is a repeatable test step. The maximum repeats of teleport-waking is 5.
+teleport-waking is a test step.
 
 initial scheduling of teleport-waking:
 	now the reusable item is a random scroll of teleportation;
@@ -2130,11 +2129,10 @@ Choosing a player reaction when testing teleport-waking:
 	generate the action of reading the reusable item.
 	
 Testing effects of teleport-waking:
-	unless the act count of the healer of aite is at least 1, make no decision;
+	if waiting for compelled action, make no decision;
 	if the player is at-react, make no decision;
 	assert that the player is fully alert;
 	assert that the event description includes "fog of sleep";
-	record success of teleport-waking;
 	
 sleepy-teleport is a hidden-traveling item-reading test step.
 
@@ -2162,16 +2160,18 @@ choosing a player action when testing sleepy-slaying:
 testing effects of sleepy-slaying:
 	assert that the event description includes "fog of sleep";
 	assert that the player is fully alert.
-		
+
+
 Section - bug 244
 
 [This test is not catching the bug I saw. I have no idea how to reproduce it.]
+[TODO: try new dungeon generation idea]
 
 bug-244 is an test set.
 
 Scenario when testing bug-244:
 	now generation info is true;
-	now the generation minimum is 100;
+	now the generation minimum is 20;
 	now the rarity of the mausoleum is 0;
 
 Map approval rule when testing bug-244 (this is the only approve secret mausoleum maps rule):
@@ -2248,25 +2248,6 @@ testing effects of other-fanatics-killing:
 
 [TODO: test armadillo and reaper following]
 
-Section - Armadillo wandering
-
-armadillo-wandering is a test set.
-
-Scenario when testing armadillo-wandering:
-	now the ravenous armadillo is testobject;
-
-waiting-for-armadillo-move is a repeatable test step. The first move of armadillo-wandering is waiting-for-armadillo-move.
-
-armadillo-start is a room that varies.
-
-Initial scheduling of waiting-for-armadillo-move:
-	now armadillo-start is the location of the ravenous armadillo.
-	
-Testing effects of waiting-for-armadillo-move:
-	if the location of the armadillo is not armadillo-start:
-		record success of waiting-for-armadillo-move.
-		
-[TODO: test armadillo and reaper following]
 
 Section - Armadillo wandering
 
@@ -2275,7 +2256,7 @@ armadillo-wandering is a test set.
 Scenario when testing armadillo-wandering:
 	now the ravenous armadillo is testobject;
 
-waiting-for-armadillo-move is a repeatable test step. The first move of armadillo-wandering is waiting-for-armadillo-move.
+waiting-for-armadillo-move is a test step. The first move of armadillo-wandering is waiting-for-armadillo-move.
 
 armadillo-start is a room that varies.
 
@@ -2283,9 +2264,9 @@ Initial scheduling of waiting-for-armadillo-move:
 	now armadillo-start is the location of the ravenous armadillo.
 	
 Testing effects of waiting-for-armadillo-move:
-	if the location of the armadillo is not armadillo-start:
-		record success of waiting-for-armadillo-move.
-					
+	succeed based on whether or not the location of the armadillo is not armadillo-start.
+
+
 Section - Unlocking - issue 243
 
 unlocking-behavior is a test set.
@@ -2322,7 +2303,8 @@ Scenario when testing unlocking-behavior:
 	assert that placement possibility is true when "in apprentice level";
 	enable advanced content;
 	assert that placement possibility is true when "in apprentice level when advanced content is enabled";
-		
+
+
 Section - bug 293 - Sensing Isra and Fell
 
 bug-293 is a test set
@@ -2333,17 +2315,13 @@ scenario when testing bug-293:
 	
 israfel-meeting-293 is an extracting hidden-traveling test step. The first move of bug-293 is israfel-meeting-293. The location-target of israfel-meeting-293 is israfel.
 
-israfel-splitting-293 is a hiding-reveal repeatable test step. 
+israfel-splitting-293 is a hiding-reveal test step. 
 
 initial scheduling of israfel-splitting-293:
 	assert "isra should be off-stage" based on whether or not isra is off-stage;
 	assert "fell should be off-stage" based on whether or not fell is off-stage;
 	compel the action of israfel israfel-splitting.
-	
-Testing effects of israfel-splitting-293:
-	if isra is off-stage, make no decision;
-	record success of the scheduled event.
-	
+		
 isra-and-fell-scattering is a hidden-traveling item-throwing test step.
 
 Testing effects of isra-and-fell-scattering:
@@ -2395,7 +2373,7 @@ Testing effects of fell-defeating-293:
 	assert "israfel should be off-stage" based on whether or not israfel is off-stage;
 	[assert that the event description includes "Israfel's dying cry shakes the foundations of the world";]
 	assert "power of israfel should be granted" based on whether or not the power of israfel is granted.
-	
+
 Section - Weapon aftereffects
 
 weapon aftereffects is a test set.
@@ -2426,12 +2404,12 @@ Testing effects of fafhrd-battling:
 	assert that the event description does not include "The claymore shatters";
 	assert that the global attacker weapon is a random natural weapon enclosed by the player with label "global attacker weapon";
 	[restore rapier to the player]
-	transcribe and restart capturing;
+	clear event description;
 	now the gilded rapier is not readied;
 	now the player carries the gilded rapier;
 	try readying the gilded rapier;
 	try taking inventory;
-	stop and save event description;
+	update event description;
 	assert that the event description includes "gilded rapier \(readied\)";
 	assert that the event description does not include "\(readied\).*\(readied\)";
 	assert that the number of readied weapons enclosed by the player is 1 with label "number of player's readied weapons ([the list of readied weapons enclosed by the player])";
@@ -2597,6 +2575,7 @@ when hitting with damage (done)
 hitting without damage (not done)
 vs chain golem, bodmall, and hand-to-hand attacker, and missing - (all started)]
 
+[
 Section - Bug 351 - scroll cloning
 
 bug-351 is a test set.
@@ -2612,9 +2591,9 @@ Initial scheduling of knowledge-gaining:
 	Now the reusable item is a random scroll of knowledge.
 
 Testing effects of knowledge-gaining:
-	transcribe and restart capturing;
+	clear event description;
 	find a healthy scroll;
-	stop and save event description;
+	update event description;
 	assert that the event description includes "You have found a scroll";
 	Repeat with item running through scrolls enclosed by the player:
 		assert "The true name and obfuscated name of [item] should be different, but they are both '[true name of item]'" based on whether or not the true name of item is not the obfuscated name of item;

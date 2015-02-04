@@ -517,7 +517,29 @@ To decide whether we reset every possible outcome:
 	now every outcome is untested;
 	yes.
 	
-[TODO: Normalize regex matches against event description so we can use a brief consistent phrase. Also, do we really need event description, or can we just use the captured text?]
+[These phrases can be used with while loops]
+To decide whether we haven't reset every possible outcome:
+	decide on whether or not not (we reset every possible outcome).
+	
+To decide whether we haven't reset (event - an outcome):
+	if event is not resolved, yes; [different from "every possible" version - it makes sure the loop runs at least once]
+	now event is untested;
+	no.
+	
+To decide whether we haven't achieved (event - an outcome) in (likelihood - a number) out of (minimum tries - a number) attempts giving up after (maximum tries - a number) attempts:
+	if event is untested:
+		now the likelihood of event is likelihood;
+		now the minimum attempts of event is minimum tries;
+		now the maximum attempts of event is maximum tries;
+	decide on whether or not we haven't reset event.	
+
+To decide whether we haven't achieved (event - an outcome) in (likelihood - a number) out of (total tries - a number) attempts:
+	let maximum tries be 100;
+	If total tries is 1, now maximum tries is 1;
+	if likelihood is 0, now maximum tries is total tries;
+	decide on whether or not we haven't achieved event in likelihood out of total tries attempts giving up after maximum tries attempts.
+		
+[TODO: Normalize regex matches against event description so we can use a brief consistent phrase. ]
 
 To test (event - an outcome) against (success - a truth state):
 	[TODO: print a period to show progress]
@@ -545,7 +567,7 @@ To test (event - an outcome) against (success - a truth state):
 			now the event is failed.
 
 To test (event - an outcome) against (T - a text):
-	update the event description; [todo - roll this into a text-testing phrase?]
+	update the event description because "testing [event] against '[T]'"; [todo - roll this into a text-testing phrase?]
 	test event against whether or not the event description matches the regular expression T;
 
 To fail (event - an outcome) based on (result - a truth state):
@@ -980,6 +1002,8 @@ Definition: A room is occupied rather than unoccupied if it encloses a person.
 
 Section - Counting Hits
 
+[TODO: get rid of this? we can use outcomes instead]
+
 A person has a number called the hitting count.
 
 To assert (N - a number) hit/hits by (guy - a person):
@@ -1050,35 +1074,44 @@ To prepare a test battle with (guy - a person), inviting groups:
 			extract the old enemy from combat;
 			remove the old enemy from play;
 	Generate the action of challenging guy in Test Arena;
-	Compel the action of guy waiting;
+	Compel the action of guy waiting; [TODO: suppress all NPC actions instead]
 	
 Combat hit is an outcome.
 
-To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit by (aggressor - a person) with result (outcome - a text) in/on (likelihood - a number) out of (total tries - a number) attempts:
+carry out an actor hitting (this is the debug hitting marker rule):
+	log "mark 1";
+	
+the debug hitting marker rule is listed before the consider the attack modifier rules rule in the carry out hitting rules.
+
+attack modifier (this is the debug attack modifier marker rule):
+	log "mark 2";
+	
+the debug attack modifier marker rule is listed before the Malleus remove tension rule in the attack modifier rules.
+
+To test (guy - a person) doing a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit by (aggressor - a person) with result (outcome - a text) in/on (likelihood - a number) out of (total tries - a number) attempts:
+	if combat hit is untested:
+		now the description of combat hit is the substituted form of "[guy] doing [reaction] to [strength] melee hit by [aggressor]";
+		now the melee of the aggressor is strength;
+		now the defence of guy is 50;
+	now the health of guy is 1000;
 	Let original-defender-weapon be a random readied weapon enclosed by guy;
 	Let original-attacker-weapon be a random readied weapon enclosed by aggressor;
-	Now the description of combat hit is "[guy] doing [reaction] to [strength] melee hit by [aggressor]";
+	clear event description because "about to attempt [combat hit]";
+	assign reaction to guy;
+	try aggressor hitting guy;
+	[update event description because "[combat hit] attempt [attempt count of combat hit] -";
+	if report of the reaction is not empty, assert that the event description includes "[report of reaction]";
+	test combat hit against "[outcome]";
+	[transcribe re-equipping?]
+	equip guy with original-defender-weapon;
+	equip aggressor with original-attacker-weapon;]
+	
+To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit by (aggressor - a person) with result (outcome - a text) in/on (likelihood - a number) out of (total tries - a number) attempts:
 	[don't repeat if the result should always happen (1/1)]
-	If total tries is 1, now maximum attempts of combat hit is 1;
 	[only repeat the specified amount if the result should never happen (0/X)]
-	if likelihood is 0, now maximum attempts of combat hit is total tries;
-	now minimum attempts of combat hit is total tries;
-	now likelihood of combat hit is likelihood;
 	make combat hit possible;
-	while combat hit is not resolved: 
-		clear event description;
-		assign reaction to guy;
-		now the melee of the aggressor is strength;
-		now the health of guy is 1000;
-		now the defence of guy is 50;
-		now guy carries original-defender-weapon;
-		if original-defender-weapon is not readied, try guy readying original-defender-weapon;
-		now aggressor carries original-attacker-weapon;
-		if original-attacker-weapon is not readied, try aggressor readying original-attacker-weapon;
-		try the aggressor hitting guy;
-		update event description because "[combat hit] attempt [attempt count of combat hit] -";
-		if report of the reaction is not empty, assert that the event description includes "[report of reaction]";
-		test combat hit against "[outcome]";
+	while we haven't reset combat hit: 
+		test guy doing reaction to a strength melee hit by aggressor with result outcome in likelihood out of total tries attempts;
 	
 To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit with result (outcome - a text):
 	have guy do a reaction to a strength melee hit by the player with result outcome.

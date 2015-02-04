@@ -1882,8 +1882,6 @@ The map-label of Maze is Figure of map_label_Maze.
 
 Section - Getting mazed
 
-Pre-maze-location is a room that varies.
-
 To maze (the first guy - a person) and (the second guy - a person):
 	if first guy is in the maze, stop;
 	if first guy is not alive or second guy is not alive, stop;
