@@ -567,7 +567,7 @@ This is the dreadful presence effect rule:
 				decrease m by (3  times level of main actor);
 				if m > 40:
 					now m is 40;
-				if m < 0:
+				if m < 1:
 					now m is 1;
 				if a random chance of m in 100 succeeds:
 					say "[The main actor] [cower] before [regarding the guy][possessive] [bold type]dreadful presence[roman type]!";

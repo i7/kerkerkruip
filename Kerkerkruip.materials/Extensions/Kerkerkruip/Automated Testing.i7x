@@ -32,7 +32,14 @@ To transcribe (T - a text):
 		append "[message]" to file of test transcript;
 
 To say current test description:
-	say  "[current test set], [scheduled event] turn [the turn count], assertion count=[test assertion count]";
+	say  "[current test set], [scheduled event] turn [the turn count], ";
+	if there is an achieved outcome:
+		say "achieved [the list of achieved outcomes] | ";
+	if there is a failed outcome:
+		say "failed [the list of failed outcomes] | ";
+	repeat with event running through possible outcomes:
+		say "'[event]' [success count of event]/[attempt count of event] times | ";
+	say "([test assertion count] assertions)";
 	
 To update the/-- event description/--:
 	update the event description because "transcribe and stop capturing";
@@ -55,6 +62,7 @@ To transcribe and stop capturing text/-- because (reason - a text):
 	
 To clear the/-- event description:
 	clear the event description because "clearing the event description";
+	
 To clear the/-- event description because (reason - a text):
 	if text capturing is active, update the event description because reason;
 	now the event description is "";
@@ -289,7 +297,7 @@ To schedule (the event described - a test step):
 Before taking a player action when the scheduled event is generated (this is the test event effects rule):
 	[Let repeat be whether or not (the scheduled event is repeatable) and (the repeated moves > 0);]
 	now the scheduled event is not generated;
-	transcribe and stop capturing text;
+	transcribe and stop capturing text because "testing effects of";
 	say " .[run paragraph on]";
 	start capturing text;
 	follow the testing effects rules for the scheduled event;
@@ -537,6 +545,7 @@ To test (event - an outcome) against (success - a truth state):
 			now the event is failed.
 
 To test (event - an outcome) against (T - a text):
+	update the event description; [todo - roll this into a text-testing phrase?]
 	test event against whether or not the event description matches the regular expression T;
 
 To fail (event - an outcome) based on (result - a truth state):
@@ -545,10 +554,11 @@ To fail (event - an outcome) based on (result - a truth state):
 		now the event is failed;
 	otherwise:
 		now the last successful outcome is the event;
-		if the attempt count of the event is not less than the maximum attempts of the event:
+		if the attempt count of the event is not less than the minimum attempts of the event:
 			now the event is achieved;
 		
 To fail (event - an outcome) on result (T - a text):
+	update the event description;
 	fail event based on whether or not the event description matches the regular expression T;
 	
 To achieve (event - an outcome) based on (result - a truth state):
@@ -657,6 +667,11 @@ To compel (the desired action - a stored action):
 To decide whether waiting for compelled action:
 	decide on whether or not compelling an action is possible;
 	
+To forget the/-- compelled action:
+	if the compelled action is not the action of waiting:
+		achieve compelling an action based on true;
+		now the compelled action is the action of waiting;
+	
 The automated menu question answer is a number that varies.
 
 First for reading a command when the automated menu question answer is greater than 0:
@@ -674,8 +689,7 @@ A Standard AI rule for a person (called P) (this is the compel an action rule):
 		if the action name part of the compelled action is the attacking action:
 			if the noun part of the compelled action is the player:
 				make reacting to compelled action possible;
-		achieve compelling an action based on true;
-		now the compelled action is the action of waiting;
+		forget the compelled action;
 		rule succeeds.
 	
 The compel an action rule is listed before the insane people attack themselves rule in the standard AI rulebook.
@@ -721,7 +735,7 @@ To assert that/-- (A - a value) is (B - a value) with label (T - an indexed text
 		now error_msg is "Expected [T]: [B], Got: [A][line break]";
 		record a failure report of error_msg;
 	
-To assert (T - an indexed text) based on (C - a truth state):
+To assert (T - a text) based on (C - a truth state):
 	record a test attempt;
 	unless C is true:
 		record a failure report of T;
@@ -755,30 +769,32 @@ To fail on result (R - a text) within (N - a number) attempts:
 	
 To fail on result (R - a text):
 	fail on result R within 100 attempts;
+		
+To assert that the event description includes (pattern - an indexed text):
+	record a test attempt;
+	unless the event description matches the regular expression pattern:
+		Let error_msg be an indexed text;
+		now error_msg is "Regular expression '[pattern]' was not found in the text:[paragraph break]'[the event description]'[line break]";
+		record a failure report of error_msg;
+		
+To assert that the event description does not include (pattern - an indexed text):
+	record a test attempt;
+	if the event description matches the regular expression pattern:
+		Let error_msg be an indexed text;
+		now error_msg is "Regular expression '[pattern]' should not have been found in the text:[paragraph break]'[the event description]'[line break]";
+		record a failure report of error_msg;
+
+To assert that (N - a number) is between (A - a number) and (B - a number):
+	assert "[N] is not between [A] and [B]" based on whether or not N is at least A and N is at most B;
 	
-[ Assert that any condition is true, but with less information on failure ]
-To assert that/-- (C - a condition):
-	(- Assert_Condition({C}); -).
+To assert that (item - a thing) is in (place - an object):
+	Let msg be indexed text;
+	Now msg is "Expected location of [the item]: [place]. Got: [location of the item].";
+	assert msg based on whether or not the location of item is place;
 
-Include (-
-[ Assert_Condition C;
-	EndCapture();
-	(+ the test assertion count +)++;
-	(+ the total assertion count +)++;
-	if (~~(C))
-	{
-		(+ the assertion failures count +)++;
-		print "Failure for test: ";
-		print (TEXT_TY_Say) (+ the current unit test name +);
-		print ", assertion: ", (+ the test assertion count +), ". (Asserted condition is false)^";
-	}
-	StartCapture();
-];
--).
-
-
-	
 Chapter - Helpful phrases
+
+Section - Movement
 
 Definition: A room (called place) is reachable:
 	if the place is the location, yes;
@@ -807,11 +823,8 @@ To extract (guy - a person) to (place - a room), making sure it is unoccupied:
 	move guy to place;
 	update the combat status;
 	
-To have (guy - a person) defeat (loser - a person):
-	transcribe "having [guy] defeat [loser]";
-	Now the health of loser is -1;
-	Have an event of guy killing loser;	
-	
+Section - Religion
+
 To have the player sacrifice (stuff - a power):
 	Let the power-level be the power level of stuff;
 	assert "power level of sacrificed ability should be positive" based on whether or not power-level > 0;
@@ -824,29 +837,18 @@ To have the player sacrifice (stuff - a power):
 	now the number understood is 1;
 	let the previous favour be the favour of the player with divinity;
 	follow the sacrifice rule;
-	assert that the favour of the player with divinity is the previous favour + the power-level;
-
-To assert that the event description includes (pattern - an indexed text):
-	record a test attempt;
-	unless the event description matches the regular expression pattern:
-		Let error_msg be an indexed text;
-		now error_msg is "Regular expression '[pattern]' was not found in the text:[paragraph break]'[the event description]'[line break]";
-		record a failure report of error_msg;
-		
-To assert that the event description does not include (pattern - an indexed text):
-	record a test attempt;
-	if the event description matches the regular expression pattern:
-		Let error_msg be an indexed text;
-		now error_msg is "Regular expression '[pattern]' should not have been found in the text:[paragraph break]'[the event description]'[line break]";
-		record a failure report of error_msg;
-
-To assert that (N - a number) is between (A - a number) and (B - a number):
-	assert "[N] is not between [A] and [B]" based on whether or not N is at least A and N is at most B;
+	assert that the favour of the player with divinity is the previous favour + the power-level with label "favour of the player";
 	
-To assert that (item - a thing) is in (place - an object):
-	Let msg be indexed text;
-	Now msg is "Expected location of [the item]: [place]. Got: [location of the item].";
-	assert msg based on whether or not the location of item is place;
+intervention-blocking is a truth state variable.
+
+To block interventions:
+	now intervention-blocking is true.
+	
+To allow interventions:
+	now intervention-blocking is false.
+	
+First intervention possible when intervention-blocking is true:
+	rule fails.
 
 Section - hiding-check, hidden-traveling and hiding-reveal
 
@@ -1091,6 +1093,11 @@ To assert no weapon after (circumstance - a text):
 	Let the item be a random readied weapon enclosed by the player;
 	assert "Nothing besides a natural weapon should be readied after [circumstance]" based on whether or not the item is nothing or the item is a natural weapon.
 		
+To have (guy - a person) defeat (loser - a person):
+	transcribe "having [guy] defeat [loser]";
+	Now the health of loser is -1;
+	Have an event of guy killing loser;	
+	
 
 Automated Testing ends here.
 

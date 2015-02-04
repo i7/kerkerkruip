@@ -86,7 +86,7 @@ testing effects of Arena-tormentor-enslaving:
 	assert that the event description includes "ball of lightning .* damage to the tormentor of Aite";
 	if the tormentor of Aite is alive:
 		assert that the event description includes "The tormentor of Aite prostrates herself. 'I beg for your mercy, O great Aite,' she prays. Then she rises to fight you again!";
-		assert that the tormentor of Aite opposes the player;
+		assert "tormentor should oppose the player" based on whether or not the tormentor of Aite opposes the player;
 	otherwise:
 		assert that the event description includes ", killing her";
 
@@ -99,6 +99,7 @@ A scenario rule when testing Defender-enslaving:
 	now mindslug is testobject;
 	now Hall of Gods is testobject;
 	now Temple of Sul is testobject;
+	block interventions;
 	
 A test play when testing Defender-enslaving:
 	try butterflying;
@@ -126,7 +127,7 @@ testing effects of Arena-defender-enslaving:
 	assert that the event description includes "will do your bidding";
 	assert that the event description includes "ball of lightning .* damage to the defender of Aite";
 	assert that the event description includes "The defender of Aite prostrates himself. 'I beg for your mercy, O great Aite,' he prays. Then he rises to fight you again!";
-	assert that the defender of Aite opposes the player;
+	assert "the defender should oppose the player" based on whether or not the defender of Aite opposes the player;
 
 Arena-defender-re-enslaving is a test step. The next move of Arena-defender-enslaving is Arena-defender-re-enslaving.   
 
@@ -138,10 +139,6 @@ Before taking a player action when Arena-defender-re-enslaving is the scheduled 
 	now the health of the player is 1;
 	now the permanent health of the player is 100;
 	now enslave-cooldown is 0;
-	
-[prevent Aite spikes]
-Intervention possible when Arena-defender-re-enslaving is the scheduled event:
-	rule fails.
 	
 testing effects of Arena-defender-re-enslaving:
 	assert that the event description includes "will do your bidding";
@@ -347,9 +344,10 @@ Testing effects of israfel-resplitting:
 unfrozen-fell-fleeing is a test step.   
 
 Initial scheduling of unfrozen-fell-fleeing:
-	compel the action of fell waiting;
+	compel the action of fell waiting; [TODO: create a "prevent action" or "make everyone wait" phrase instead of compelling waiting?]
 	
 Choosing a player action when testing unfrozen-fell-fleeing:
+	forget the compelled action;
 	generate the action of retreating.
 
 initial scheduling of unfrozen-fell-fleeing:
@@ -399,8 +397,8 @@ Initial scheduling for tentacle-retreat:
 testing effects for tentacle-retreat:
 	assert that the event description includes "bravely run away";
 	assert one hit by tentacle;
-	assert that the player is grappled by the tentacle;
-	assert that the location of the player is the location of the tentacle;
+	assert "the player should be grappled" based on whether or not the player is grappled by the tentacle;
+	assert that the tentacle is in the location;
 
 tentacle-dig-retreat is a test step. The next move of tentacle-retreat is tentacle-dig-retreat.
 
@@ -413,7 +411,7 @@ choosing a player action when testing tentacle-dig-retreat:
 testing effects for tentacle-dig-retreat:
 	assert that the event description includes "magically create a tunnel";
 	assert one hit by tentacle;
-	assert that the player is grappled by the tentacle;
+	assert "the player should be grappled" based on whether or not the player is grappled by the tentacle;
 	assert that the location of the player is the location of the tentacle;
 	
 
@@ -485,12 +483,13 @@ lifeblood-hinting
 vampire-turning-hinting
 
 Testing effects of insane drakul statements:
-	achieve simple drakul identity based on whether or not the event description matches the regular expression "Drakul says, 'I am " and the event description matches the regular expression "not|someone who|, and|, or";
-	if simple drakul identity just succeeded, assert that the event description matches the regular expression "vampire|insane";
+	if waiting for compelled action, make no decision;
+	achieve simple drakul identity based on whether or not the event description matches the regular expression "Drakul says, 'I am " and not (the event description matches the regular expression "not|someone who|, and|, or"); [TODO: nicer matching phrases]
+	if simple drakul identity just succeeded, assert that the event description includes "vampire|insane";
 	achieve nested conditionals based on whether or not the event description matches the regular expression "Drakul says, 'If .*," and the event description matches the regular expression "I would give you" and the event description matches the regular expression ", if|, and|, or"; [TODO: make this one big regex? Or is it impossible because of ordering?]
 	achieve nested belief on result "I believe that I believe";
 	achieve lifeblood-hinting on result "a vial of my lifeblood\b";
-	if lifeblood-hinting just succeeded, assert that the event description matches the regular expression "I am carrying| is in | can be found | is currently unreachable, ";
+	if lifeblood-hinting just succeeded, assert that the event description includes "I am carrying| is in | can be found | is currently unreachable, ";
 	achieve vampire-turning-hinting on result "\bI intend to vanquish Malygris after I make you my vampire-slave\b|\byou will never be my vampire-slave\b";
 	[this doesn't compile:
 	assert "Blood never lies achievement should be held" based on whether not there is a held achievement of Blood never lies in the Table of Held Achievements;]
@@ -540,6 +539,7 @@ Dreadful-Presence-Test is a test set.
 Scenario when testing Dreadful-Presence-Test:
 	now the blood ape is testobject;
 	now the zombie toad is testobject;
+	block interventions;
 	
 A person has an outcome called the cower counter. The cower counter of a person is usually the boring lack of results.
 Definition: a person is cowerer if the cower counter of it is not the boring lack of results.
@@ -574,16 +574,14 @@ Test play when testing Dreadful-Presence-Test:
 To decide which number is the target cower percentage of (guy - a person):
 	if guy is undead, decide on 0;
 	if guy is the player and the player is not insane, decide on 0;
-	let n be dreadful presence of the player;
-	let m be 10 times n;
-	increase m by 5;
-	decrease m by final mind of guy;
-	decrease m by level of guy;
-	if m > 40:
-		now m is 40;
-	if m < 0:
-		now m is 0;
-	decide on m;
+	let P be (dreadful presence of the player) times 12;
+	if P is 0, decide on 0;
+	decrease P by (3 times level of guy);
+	if P > 40:
+		decide on 40;
+	if P < 1:
+		decide on 1;
+	decide on P;
 	
 A test step can be cower-counting.
 	
@@ -600,9 +598,11 @@ initial scheduling for a cower-counting test step:
 			now the likelihood of counter is P;
 			now the minimum attempts of counter is 100;
 		make the counter possible;
+		transcribe "Set [the counter] target to [likelihood of the counter]/[minimum attempts of the counter]";
 
 testing combat round of a cowerer person (called guy) when testing a cower-counting test step:
 	test cower counter of guy against "[The guy] [cower] before your dreadful presence";
+	clear the event description; [todo: have a separate combat round text?]
 
 Ape-cowering is a cower-counting test step. The first move of Dreadful-Presence-Test is Ape-cowering.
 		
@@ -801,9 +801,7 @@ scenario when testing divine reward:
 	now Bodmall is testobject;
 	now Hall of Gods is testobject;
 	now the glass cannon is testobject;
-	
-First intervention possible when testing divine reward:
-	rule fails;
+	block interventions;
 	
 Test play when testing divine reward:
 	now the player carries the glass cannon;
@@ -853,9 +851,6 @@ testing effects of fell-also-killing:
 Section - Temporary Blood Magic from Nomos
 
 temporary Nomos blood magic is a test set.
-
-first intervention possible when testing temporary Nomos blood magic:
-	rule fails.
 	
 Scenario when testing temporary Nomos blood magic:
 	now Bodmall is testobject;
@@ -867,6 +862,7 @@ Scenario when testing temporary Nomos blood magic:
 	now the reaper is bannedobject;
 	now the imp is bannedobject;
 	now everything is not cursed;
+	block interventions;
 
 The gown-timer is a number that varies;
 
