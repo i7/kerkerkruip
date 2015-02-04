@@ -1853,7 +1853,6 @@ Testing effects of first-maze-smiting:
 	assert that the player is located in the maze;
 	assert that the combat status is peace.
 
-[	
 Section - Hiding Penalites
 
 hiding-penalties is a test set.
@@ -2749,6 +2748,6 @@ failing move is a test step.
 Testing effects of failing move:
 	assert "truth is false" based on false.
 
-]]
+]
 
 Test Sets ends here.
