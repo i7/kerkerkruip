@@ -1712,7 +1712,6 @@ testing effects of bodmall-bleeding:
 	assert "bodmall should have reacted exactly once, but she reacted [reaction count of bodmall] times" based on whether or not the reaction count of Bodmall is 1;
 	assert "bodmall should be at-inactive, but she is [combat state of bodmall]" based on whether or not bodmall is at-inactive;
 
-[
 Section - Maze Moving
 
 [Moving around in the maze - check that all people have 0 concentration and are at-inactive. Check that the right thing happens when retreating or running from an opponent in the maze. Maybe check grenade-throwing effects in the maze]
@@ -1736,16 +1735,14 @@ Initial scheduling of minotaur-meeting:
 	now the health of the player is 1000;
 	now the defence of the player is 0;
 	
-getting-mazed is a repeatable test step.
+getting-mazed is a test step.
 
 Initial scheduling of getting-mazed:
 	compel the action of the minotaur attacking the player.
 
 Testing effects of getting-mazed:
-	if the event description matches the regular expression "minotaur deals":
-		now getting-mazed is not repeatable;
-	otherwise:
-		make no decision;
+	succeed on result "minotaur deals";
+	if waiting for resolution, make no decision;
 	assert that the location is Maze;
 	assert "the player should be at-inactive, but [regarding the player][they] [are] [combat state of the player]" based on whether or not the player is at-inactive;
 	assert "the minotaur should be at-inactive, but he is [combat state of the minotaur]" based on whether or not the minotaur is at-inactive;
@@ -1760,17 +1757,16 @@ Choosing a player action when testing directionless-throwing:
 Testing effects of directionless-throwing:
 	assert that the event description includes "There is no point throwing grenades into twisty little passages";
 	assert "Trying to throw things in the maze should not take time" based on whether or not the take no time boolean is true;
-	assert that the reusable item is carried.
+	assert "[the reusable item] should be carried" based on whether or not the reusable item is carried.
 	
-sound-finding is a repeatable test step.   
+sound-finding is a test step.   
 
 Choosing a player action when testing sound-finding:
 	generate the action of going north.
 
 Testing effects of sound-finding:
-	if maze-sound is a cardinal direction:
-		record success of sound-finding.
-		
+	succeed based on whether or not maze-sound is a cardinal direction.
+			
 maze-summoning is an item-reading test step.
 
 Initial scheduling of maze-summoning:
@@ -1794,7 +1790,7 @@ Choosing a player action when testing a sound-following test step:
 Definition: a person is not-yet-active if the act count of it is 0.
 
 First combat round rule when testing summoned-fleeing:
-	stop and save event description;
+	update event description;
 	if every person who is not the player is not-yet-active:
 		assert that the event description includes "You flee through the tunnels, quickly losing all sense of direction.[line break][line break][The monster summoned] follows you towards the sound.";
 		if the monster summoned is non-attacker:
@@ -1804,7 +1800,7 @@ First combat round rule when testing summoned-fleeing:
 	if the act count of the main actor is 0:
 		[this assertion can interrupt the event description]
 		assert that the main actor has 0 levels of concentration;
-	start capturing text;
+	clear event description;
 
 testing effects of summoned-fleeing:
 	assert that the monster summoned is located in the maze;
@@ -1830,15 +1826,15 @@ Testing effects of multiple-fleeing:
 	assert that the monster summoned is located in maze-waiting-room;
 	assert 1 hit by the minotaur;
 	
-multiple-sound-seeking is a repeatable test step.   
+multiple-sound-seeking is a test step.   
 
 Choosing a player action when testing multiple-sound-seeking:
 	generate the action of going north.
 
 Testing effects of multiple-sound-seeking:
-	if the maze-sound is a cardinal direction:
-		assert that the number of people in maze-waiting-room is 2;
-		record success of multiple-sound-seeking.
+	succeed based on whether or not the maze-sound is a cardinal direction;
+	if waiting for resolution, make no decision;
+	assert that the number of people in maze-waiting-room is 2;
 		
 first-rejoining is a sound-following test step.
 
@@ -1856,7 +1852,8 @@ Choosing a player action when testing first-maze-smiting:
 Testing effects of first-maze-smiting:
 	assert that the player is located in the maze;
 	assert that the combat status is peace.
-	
+
+[	
 Section - Hiding Penalites
 
 hiding-penalties is a test set.
