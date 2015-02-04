@@ -1512,7 +1512,6 @@ testing effects of secret-room-remembering:
 
 [psycholocation + sense]
 
-[
 Section - Blessed Grenade - bug #261
 
 blessed-grenade-test is a test set.
@@ -1532,15 +1531,16 @@ A test step can be grenade-producing.
 
 When play begins:
 	repeat with the move running through grenade-producing test steps:
-		now the move is repeatable;
 		now the move is hidden-traveling;
 		now the move is extracting;
 		now the location-target of the move is the alchemical laboratory.
 
-blessed-grenade-alchemy is a grenade-producing test step. The first move of blessed-grenade-test is blessed-grenade-alchemy. The maximum repeats of blessed-grenade-alchemy is 300.
+blessed-grenade-alchemy is a grenade-producing test step. The first move of blessed-grenade-test is blessed-grenade-alchemy.
 
 Choosing a player action when testing a grenade-producing test step:
 	generate the action of inserting the reusable item into the curious machine.
+
+[TODO: make this a while loop, not a cycle of turns]
 
 First every turn when the scheduled event is a grenade-producing test step (called the current move):
 	Now the health of the player is 100;
@@ -1554,26 +1554,24 @@ Last testing effects of a grenade-producing test step:
 		if item is not a custom-grenade, remove item from play;
 
 testing effects of blessed-grenade-alchemy:
-	unless the event description matches the regular expression "Blessed Grenade":
-		make no decision;
-	now blessed-grenade-alchemy is not repeatable;
+	succeed on result "Blessed Grenade" within 300 attempts;
+	if waiting for resolution, make no decision;
 	Repeat with the item running through grenades:
 		Let name be indexed text;
 		Now name is the printed name of the item;
 		if the name is "Blessed Grenade":
 			assert "[The item] in [holder of the item] looks like a blessed grenade, but it isn't" based on whether or not the item is the blessed grenade;
-			if the item is in the location:
-				record success of blessed-grenade-alchemy;
+			assert that the item is in the location;
 		
-no-extra-blessed-grenade is an uneventful grenade-producing test step. The maximum repeats of no-extra-blessed-grenade is 100. [This number could be higher, but it's a slow test] 
+no-extra-blessed-grenade is a grenade-producing test step. [This number could be higher, but it's a slow test] 
 
 Initial scheduling of no-extra-blessed-grenade:
 	assert that the location of the blessed grenade is Alchemical Laboratory with label "location of the blessed grenade";
 	assert "The blessed grenade should be placed" based on whether or not the blessed grenade is placed;
 	assert "The blessed grenade should not be cloneable" based on whether or not the blessed grenade is not cloneable;
+	
 testing effects of no-extra-blessed-grenade:
-	if the event description matches the regular expression "Blessed Grenade":
-		record failure of no-extra-blessed-grenade with message "The machine produced an extra blessed grenade, impossibly".
+	fail on result "Blessed Grenade" within 100 attempts [could be more if we made this faster].
 	
 throwing-blessed is a test step.
 
@@ -1591,13 +1589,12 @@ testing effects of throwing-blessed:
 	assert "The blessed grenade should be off-stage" based on whether or not the blessed grenade is off-stage;
 	assert that the event description includes "As the grenade explodes you hear the singing of angels, several of whom swoop down from the heavens with huge swords and eviscerate <^[line break]>*Drakul";
 	
-no-new-blessed-grenade is an uneventful grenade-producing test step. The maximum repeats of no-new-blessed-grenade is 100.
+no-new-blessed-grenade is a grenade-producing test step. 
 
 testing effects of no-new-blessed-grenade:
-	if the blessed grenade is not off-stage:
-		record failure of no-new-blessed-grenade with message "The blessed grenade should be off-stage".
+	fail based on whether or not the blessed grenade is not off-stage within 100 attempts;
 
-		
+[
 Section - At-react after getting mazed - bug 210
 
 maze-resetting is a test set.
