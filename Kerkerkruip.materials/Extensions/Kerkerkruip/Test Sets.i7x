@@ -1897,7 +1897,6 @@ Testing effects of malygris-robbing:
 	assert that the event description includes "Something has stopped you from teleporting";
 	assert that the event description includes "picking stuff up";
 
-[
 Section - Imp Teleporting Into Dreams
 
 bug-280 is a test set.
@@ -1922,44 +1921,40 @@ Initial scheduling of reaper-seeking:
 Testing effects of reaper-seeking:
 	assert "the combat status should not be peace" based on whether or not the combat status is not peace;
 
-imp-dreaming is a repeatable uneventful item-throwing test step. The maximum repeats of imp-dreaming is 20.
+imp-dreaming is an item-throwing test step.
 
 Testing effects of imp-dreaming:
 	assert that the location is garden of thorns;
-	if the location of the imp is the location:
-		record failure of imp-dreaming with message "The imp teleported into the dream (act count=[act count of the imp])";
+	fail based on whether or not the location of the imp is the location within 20 attempts;
 	wake the player up;
 	update the combat status; [risky?]
 	assert "we should be with the reaper in [location of the reaper] but we are in [the location]" based on whether or not the location is the location of the reaper;
 	assert "the combat status should not be peace" based on whether or not the combat status is not peace;
 	
-imp-appearing is a repeatable test step.
+imp-appearing is a test step.
 
 Testing effects of imp-appearing:
-	if the location of the imp is the location:
-		record success of imp-appearing;
+	succeed based on whether or not the location of the imp is the location:
 		
-imp-thieving is a repeatable test step.
+imp-thieving is a test step.
 
 Testing effects of imp-thieving:
-	if the event description matches the regular expression "The imp grabs the package of ment with its thieving little claws":
-		record success of imp-thieving;
-		
-imp-vanishing is a repeatable test step.   
+	succeed on result "The imp grabs the package of ment with its thieving little claws";
+			
+imp-vanishing is a test step.   
 
 Choosing a player action when testing imp-vanishing:
 	generate the action of attacking the imp;
 
 Testing effects of imp-vanishing:
-	if the location of the imp is lair of the imp:
-		record success of imp-vanishing;
+	succeed based on whether or not the location of the imp is lair of the imp;
 		
-imp-stashing is a repeatable test step. The maximum repeats of imp-stashing is 2.
+imp-stashing is a test step.
 
 Testing effects of imp-stashing:
-	if a package of ment is in the lair of the imp:
-		record success of imp-stashing;
-
+	succeed based on whether or not a package of ment is in the lair of the imp within 2 attempts;
+	
+[
 Section - Starting Kits
 
 starting-kits-test is an test set.
