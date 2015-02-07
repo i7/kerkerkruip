@@ -166,8 +166,8 @@ title	text
 "[fixed letter spacing]Sixth heaven              [achievement sixth heaven]"	"Get a +6 ment bonus."
 "[fixed letter spacing]Durin's bane              [achievement durin's bane][variable letter spacing]"	"Wake up an unbeatable foe."
 "[fixed letter spacing]Blood never lies          [achievement blood never lies][variable letter spacing]"	"Get a vampire to reveal his plans."
-"[fixed letter spacing]Stealing away             [achievement stealing away][variable letter spacing]"	"Escape from the dungeon using a stolen scroll"
-"[fixed letter spacing]Welcome to the masquerade [achievement stealing away][variable letter spacing]"	"Be embraced by one of the kindred"
+"[fixed letter spacing]Stealing away             [achievement stealing away][variable letter spacing]"	"Escape from the dungeon using a stolen scroll."
+"[fixed letter spacing]Welcome to the masquerade [achievement stealing away][variable letter spacing]"	"Be embraced by one of the kindred."
 
 To say setup achievement menu:
 	if Table of Held Achievements is empty:
