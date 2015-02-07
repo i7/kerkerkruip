@@ -1120,7 +1120,7 @@ Last check an actor hitting when the noun wears the cloak of reflection (this is
 	if the global attacker weapon is ranged:
 		unless reflection-attack is true: [No infinite reflections]
 			let n be 15 * (1 + blood magic level of cloak of reflection);
-			if a random chance of n in 10 succeeds:
+			if a random chance of n in 100 succeeds:
 				if noun is not runner or noun is not player:
 					say "[if the noun is the player]The[otherwise][regarding the noun][Possessive][end if] cloak of reflection [bold type]reflects[roman type] the attack back to [the actor]!";
 				otherwise:
