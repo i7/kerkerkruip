@@ -5767,7 +5767,9 @@ An AI action selection rule for the rotting corpse (this is the rotting corpse w
 	let P be the rotting corpse;
 	if the rotting head is not part of the rotting corpse:
 		choose row with an Option of the action of P concentrating in the Table of AI Action Options;
-		decrease the Action Weight entry by 1000.
+		decrease the Action Weight entry by 1000;
+		choose row with an Option of the action of P waiting in the Table of AI Action Options;
+		decrease the Action Weight entry by 50. [Prefer attacking over waiting when concentration is impossible.]
 
 An attack modifier rule (this is the rotting corpse attack modifier rule):
 	if the global attacker is the rotting corpse:
