@@ -2429,14 +2429,14 @@ Testing effects of fafhrd-battling:
 scythe-vs-fafhrd is a test step.
 
 Initial scheduling of scythe-vs-fafhrd:
-	now the player carries the scythe of oxidation;
+	equip the player with the scythe of oxidation;
 	now the body score of fafhrd is 0;
-	generate the action of readying the scythe of oxidation;
-	compel the action of fafhrd waiting;
-	
+	make everyone wait;
+		
 Testing effects of scythe-vs-fafhrd:
 	have fafhrd do no reaction to a 100 melee hit with result "You deal";
 	have fafhrd do a parry reaction to a 100 melee hit with result "You deal";
+	assert that the event description does not include "the claymore rusts";
 	assert "Fafhrd should not be rusted" based on whether or not Fafhrd is not rusted;
 	assert "The claymore should not be rusted" based on whether or not the claymore is not rusted;
 	have fafhrd do a parry reaction to a 0 melee hit with result "Having been in contact with the scythe of oxidation, the claymore rusts";
@@ -2473,7 +2473,7 @@ Initial scheduling of lionshield-vs-chains:
 		now the player carries S;
 	now the player carries the lion's shield;
 	now the player wears the lion's shield;
-	compel the action of the chain golem waiting;
+	make everyone wait;
 	
 Testing effects of lionshield-vs-chains:
 	now the health of the chain golem is 100;
@@ -2489,7 +2489,7 @@ Initial scheduling of chains-vs-thorns:
 	Repeat with item running through suits worn by the player:
 		now the player carries item;
 	Now the player wears the armour of thorns;
-	compel the action of the chain golem waiting;
+	make everyone wait;
 	
 Testing effects of chains-vs-thorns:
 	now the health of the chain golem is 100;
@@ -2559,7 +2559,7 @@ mouser-vs-thorns is a test step.
 
 Initial scheduling of mouser-vs-thorns:
 	[player already wears the armour of thorns]
-	compel the action of mouser waiting;
+	make everyone wait;
 	
 Testing effects of mouser-vs-thorns:
 	now the health of mouser is 100;

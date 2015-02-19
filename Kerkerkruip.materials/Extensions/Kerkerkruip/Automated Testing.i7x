@@ -525,7 +525,16 @@ To decide whether we haven't reset (event - an outcome):
 	if event is not resolved, yes; [different from "every possible" version - it makes sure the loop runs at least once]
 	now event is untested;
 	no.
-	
+
+To decide whether we haven't reset (event - an outcome) after success:
+	if event is not resolved, yes; [different from "every possible" version - it makes sure the loop runs at least once]
+	if event is achieved and the last successful outcome is not the event:
+		[keep trying until we end on success]
+		now event is possible;
+		yes;
+	now event is untested;
+	no.
+		
 To decide whether we haven't achieved (event - an outcome) in (likelihood - a number) out of (minimum tries - a number) attempts giving up after (maximum tries - a number) attempts:
 	if event is untested:
 		now the likelihood of event is likelihood;
@@ -568,6 +577,7 @@ To test (event - an outcome) against (success - a truth state):
 
 To test (event - an outcome) against (T - a text):
 	update the event description because "testing [event] against '[T]'"; [todo - roll this into a text-testing phrase?]
+	[TODO: include event description in failure report]
 	test event against whether or not the event description matches the regular expression T;
 
 To fail (event - an outcome) based on (result - a truth state):
@@ -679,6 +689,15 @@ To generate (the desired action - a stored action):
 	
 The compelled action is a stored action that varies. The compelled action is the action of waiting.
 
+Suppress npc action is a truth state that varies.
+
+First initial scheduling rule (this is the enable npc actions rule):
+	now suppress npc action is false;
+	
+To make everyone wait:
+	transcribe "suppressing NPC actions";
+	now suppress npc action is true;
+	
 To compel (the desired action - a stored action):
 	Let the guy be the actor part of the desired action;
 	transcribe "compelling [the desired action][if the guy is asleep] and waking up [the guy]";
@@ -712,9 +731,16 @@ A Standard AI rule for a person (called P) (this is the compel an action rule):
 			if the noun part of the compelled action is the player:
 				make reacting to compelled action possible;
 		forget the compelled action;
-		rule succeeds.
+		rule succeeds;
+
+A Standard AI rule for a person (called P) (this is the suppress actions rule):
+	if suppress npc action is true:
+		transcribe "suppressed action for [P]";
+		rule succeeds;
 	
-The compel an action rule is listed before the insane people attack themselves rule in the standard AI rulebook.
+The compel an action rule is listed before the suppress actions rule in the standard AI rulebook.
+
+The suppress actions rule is listed before the insane people attack themselves rule in the standard AI rulebook.
 
 Last choosing a player reaction:
 	generate the action of waiting.
@@ -1074,43 +1100,36 @@ To prepare a test battle with (guy - a person), inviting groups:
 			extract the old enemy from combat;
 			remove the old enemy from play;
 	Generate the action of challenging guy in Test Arena;
-	Compel the action of guy waiting; [TODO: suppress all NPC actions instead]
+	make everyone wait.
 	
-Combat hit is an outcome.
+Table of Outcomes (continued)
+outcome	description	likelihood	minimum attempts
+combat hit	""	1	1
 
-carry out an actor hitting (this is the debug hitting marker rule):
-	log "mark 1";
-	
-the debug hitting marker rule is listed before the consider the attack modifier rules rule in the carry out hitting rules.
-
-attack modifier (this is the debug attack modifier marker rule):
-	log "mark 2";
-	
-the debug attack modifier marker rule is listed before the Malleus remove tension rule in the attack modifier rules.
-
-To test (guy - a person) doing a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit by (aggressor - a person) with result (outcome - a text) in/on (likelihood - a number) out of (total tries - a number) attempts:
+To test (guy - a person) doing a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit by (aggressor - a person) with result (outcome - a text) in (likelihood - a number) out of (total tries - a number) attempts:
 	if combat hit is untested:
-		now the description of combat hit is the substituted form of "[guy] doing [reaction] to [strength] melee hit by [aggressor]";
+		now the description of combat hit is the substituted form of "[guy] doing [reaction] to [strength] melee hit by [aggressor] with result '[outcome]'";
 		now the melee of the aggressor is strength;
 		now the defence of guy is 50;
+		now likelihood of combat hit is likelihood;
+		now minimum attempts of combat hit is total tries;
+		now maximum attempts of combat hit is 0;
 	now the health of guy is 1000;
 	Let original-defender-weapon be a random readied weapon enclosed by guy;
 	Let original-attacker-weapon be a random readied weapon enclosed by aggressor;
-	clear event description because "about to attempt [combat hit]";
+	clear event description because "start attempt [attempt count of combat hit] -";
 	assign reaction to guy;
 	try aggressor hitting guy;
-	[update event description because "[combat hit] attempt [attempt count of combat hit] -";
+	update event description because "finish attempt [attempt count of combat hit] -";
 	if report of the reaction is not empty, assert that the event description includes "[report of reaction]";
 	test combat hit against "[outcome]";
-	[transcribe re-equipping?]
-	equip guy with original-defender-weapon;
-	equip aggressor with original-attacker-weapon;]
+	if combat hit is [still] possible:
+		[transcribe re-equipping?]
+		equip guy with original-defender-weapon;
+		equip aggressor with original-attacker-weapon;
 	
 To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit by (aggressor - a person) with result (outcome - a text) in/on (likelihood - a number) out of (total tries - a number) attempts:
-	[don't repeat if the result should always happen (1/1)]
-	[only repeat the specified amount if the result should never happen (0/X)]
-	make combat hit possible;
-	while we haven't reset combat hit: 
+	while we haven't reset combat hit after success: 
 		test guy doing reaction to a strength melee hit by aggressor with result outcome in likelihood out of total tries attempts;
 	
 To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit with result (outcome - a text):
