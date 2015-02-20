@@ -2080,11 +2080,15 @@ Scenario when testing bug-291:
 	now the reusable item is a random morphean grenade;
 	now the swarm of daggers is testobject;
 	now the hall of mirrors is bannedobject;
+	now the lair of the imp is bannedobject;
+	now the armadillo is bannedobject;
+	now the reaper is bannedobject;
 
 sleepy-throwing is an extracting item-throwing test step. The first move of bug-291 is sleepy-throwing. The location-target of sleepy-throwing is the healer of aite.
 
-Initial scheduling of sleepy-throwing:
-	now the player is just-woken.
+Before taking a player action when testing sleepy-throwing:
+	now the player is just-woken;
+	clear event description;
 	
 Testing effects of sleepy-throwing:
 	assert that the player is tungausy warrior with label "identity of the player";
