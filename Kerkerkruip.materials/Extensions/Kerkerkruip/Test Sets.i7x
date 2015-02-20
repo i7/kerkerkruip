@@ -2575,20 +2575,11 @@ when hitting with damage (done)
 hitting without damage (not done)
 vs chain golem, bodmall, and hand-to-hand attacker, and missing - (all started)]
 
-[
 Section - Bug 351 - scroll cloning
 
 bug-351 is a test set.
-
-Scenario when testing bug-351:
-	Now the quartering room is testobject.
 	
 knowledge-gaining is an item-reading test step. The first move of bug-351 is knowledge-gaining.
-
-Initial scheduling of knowledge-gaining:
-	if the quartering room is occupied:
-		swap the occupants of the quartering room and a random unoccupied reachable room;
-	Now the reusable item is a random scroll of knowledge.
 
 Testing effects of knowledge-gaining:
 	clear event description;
@@ -2600,7 +2591,7 @@ Testing effects of knowledge-gaining:
 	Repeat with item running through scrolls:
 		let item-name be the true name of item;
 		assert "The true name of [item] should not be obfuscated, but it is [true name of item], which is an obfuscated name'" based on whether or not item-name is a not obfuscated scroll name;
-		
+
 Section - Bug 352 - exploded property
 
 bug-352 is a test set.
@@ -2630,7 +2621,7 @@ Initial scheduling of israfel-slaying:
 Testing effects of israfel-slaying:
 	try smiting Israfel;
 	assert that the died count of israfel is the challenger's initial defeats + 1 with label "died count of Israfel".
-	
+
 Section - Damage Text
 
 damage-text is a test set.
@@ -2707,7 +2698,8 @@ Testing effects of damage-text testing:
 ./Victor Gijsbers/Kerkerkruip Religion.i7x:	have Sul inflict damage on the player;
 ./Victor Gijsbers/Kerkerkruip Religion.i7x:			have Chton inflict damage on guy;
 ./Victor Gijsbers/Kerkerkruip Systems.i7x:			have no-source inflict damage on falling-guy;]
-	
+
+[	
 Section - Example failure
 
 example failure is a test set.
