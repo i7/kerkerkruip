@@ -297,9 +297,7 @@ To schedule (the event described - a test step):
 Before taking a player action when the scheduled event is generated (this is the test event effects rule):
 	[Let repeat be whether or not (the scheduled event is repeatable) and (the repeated moves > 0);]
 	now the scheduled event is not generated;
-	transcribe and stop capturing text because "testing effects of";
-	say " .[run paragraph on]";
-	start capturing text;
+	update the event description because "testing effects of";
 	follow the testing effects rules for the scheduled event;
 	clear event description;
 	if we reset every possible outcome:
@@ -509,10 +507,16 @@ To make (event - an outcome) possible:
 To decide whether waiting for resolution:
 	decide on whether or not there is a possible outcome;
 	
+To report an iteration because (reason - a text):
+	transcribe and stop capturing text because reason;
+	say " .[run paragraph on]";
+	start capturing text;
+	
 [This phrase tells us whether we need to keep looping. It also resets everything as a side effect when we're done looping.
 
 To be used when deciding whether to repeat test steps]
 To decide whether we reset every possible outcome:
+	report an iteration because "checking possible outcomes -";
 	if waiting for resolution, no;
 	now every outcome is untested;
 	yes.
@@ -522,11 +526,13 @@ To decide whether we haven't reset every possible outcome:
 	decide on whether or not not (we reset every possible outcome).
 	
 To decide whether we haven't reset (event - an outcome):
+	report an iteration because "checking one outcome -";
 	if event is not resolved, yes; [different from "every possible" version - it makes sure the loop runs at least once]
 	now event is untested;
 	no.
 
 To decide whether we haven't reset (event - an outcome) after success:
+	report an iteration because "checking one outcome until success -";
 	if event is not resolved, yes; [different from "every possible" version - it makes sure the loop runs at least once]
 	if event is achieved and the last successful outcome is not the event:
 		[keep trying until we end on success]

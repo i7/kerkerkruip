@@ -2385,6 +2385,8 @@ weapon aftereffects is a test set.
 Scenario when testing weapon aftereffects:
 	now the body score of fafhrd is 100;
 
+The sometimes feed armour of thorns rule does nothing when testing weapon aftereffects.
+
 fafhrd-battling is a test step. The first move of weapon aftereffects is fafhrd-battling.
 
 initial scheduling of fafhrd-battling:
