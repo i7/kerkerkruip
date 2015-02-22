@@ -120,12 +120,16 @@ To say grand test summary:
 To display test results:
 	If the number of filled rows in Table of Test Results is 0, stop;
 	log "Test results:[line break]";
-	Repeat through Table of Test Results:	
-		log "[test set entry]: [total entry] tests, [failures entry] failures[line break]";
+	Repeat through Table of Test Results:
+		if failures entry is 0:
+			transcribe "[test set entry]: [total entry] tests, all passed";
+		otherwise:	
+			log "[test set entry]: [total entry] tests, [failures entry] failures";
 	log "Total: [grand test summary].";
 	Repeat through Table of Test Results:
 		if failures entry is at least 1:
-			log "[line break]Failures for [test set entry]:[paragraph break]";
+			log "";
+			log "Failures for [test set entry]:";
 			log "[failure messages entry]";	
 	say "To view a full transcript of all tests, see the file 'testtranscript.glkdata' in the project directory.";
 	Blank out the whole of Table of Test Results;
