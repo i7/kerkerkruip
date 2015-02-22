@@ -1090,7 +1090,7 @@ A reaction-type has a text called the report. The report of a reaction-type is u
 
 The report of the parry reaction is "\(defender parrying\)".
 The report of the dodge reaction is "\(defender dodging\)".
-The report of the block reaction is "\(block (bonus|penalty)\)".
+The report of the block reaction is "\(blocking\)".
 
 To assign (reaction - a reaction-type) to (guy - a person):
 	if reaction is parry reaction:
