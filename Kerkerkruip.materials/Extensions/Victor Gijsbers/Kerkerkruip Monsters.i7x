@@ -3981,7 +3981,6 @@ To launch the thorns:
 	if n is 0:
 		say "no damage to anyone.";
 	let original n be n;
-	let concentest be false;
 	repeat with guy running through all alive not druidic persons in location:
 		let m be a random number between 1 and brambles strength;
 		deal m points of physical damage;

@@ -106,8 +106,9 @@ To record a/-- failure report of/-- (msg - a text):
 	choose row with test set of current test set in Table of Test Results;	
 	increment the assertion failures count;
 	increment the failures entry;
-	now the failure messages entry is the substituted form of "[failure messages entry]Failure for test: [the current test set], step: [the scheduled event], assertion [the test assertion count]: [msg][paragraph break]";
-	log the failure messages entry;
+	let new message be "Failure for test: [the current test set], step: [the scheduled event], assertion [the test assertion count]: [msg][paragraph break]";
+	now the failure messages entry is the substituted form of "[failure messages entry][new message]";
+	log the new message;
 	
 To say grand test summary:
 	let grand test total be 0;
@@ -293,8 +294,7 @@ To schedule (the event described - a test step):
 			log "  next step:  [the event described]";
 		follow the initial scheduling rules for the event described;
 	otherwise:
-		transcribe and stop capturing because "repeating";
-		start capturing text;
+		transcribe "rescheduling [the event described]";
 		follow the rescheduling rules for the event described;
 	now the event described is not generated;
 	

@@ -2687,14 +2687,24 @@ Testing effects of damage-text testing:
 	assert that the event description includes "Your body explodes vehemently as you throw yourself at the chain golem, but you only deal 5 damage instead of the 1000 damage you needed to deal.";
 	now the health of the player is 1000;
 	prepare a test battle with the tentacle;
-	have the player do a dodge reaction to a 100 melee hit by the tentacle with result "The tentacle deals 1 damage, wounding you to <0-9>+ health." in 1 out of 2 attempts;
+	now the tension is 0;
+	now the concentration of the tentacle is 0;
+	have the player do a dodge reaction to a 100 melee hit by the tentacle with result "The tentacle deals 0 damage but holds on to you.";
+	check for damage typos;
+	now the tentacle does not grapple the player;
+	now the tension is 3;
+	[This next test fails, not because of a text problem, but because of a logic problem - see issue #378]
+	have the player do a dodge reaction to a 100 melee hit by the tentacle with result "The tentacle deals 0 + 1 (tension) = 1 damage, wounding you to <0-9>+ health.";
 	check for damage typos;
 	try the tentacle tentacle-constricting;
 	assert that the event description includes "The giant tentacle tightens its muscles, dealing 1 damage to you";
+	clear event description;
+	now brambles strength is 1;
+	launch the thorns;
+	assert that the event description includes "Thorns shoot towards everyone, dealing 1 damage to the giant tentacle and 1 damage to you\.";
 	
 [	
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:		have global attacker weapon inflict damage on the global defender;  [The crucial line.]
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:The description of the tormentor of Aite is "You immediately recognise the black-robed mage as a tormentor of Aite, savage priests who specialise in inflicting pain on all who oppose their faith.".
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:		have the brambles inflict damage on guy;
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:		have the swarm of bees inflict damage on guy, silently;
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:		have Israfel inflict damage on the global attacker, silently;
