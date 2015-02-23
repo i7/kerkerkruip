@@ -2707,6 +2707,8 @@ Testing effects of damage-text testing:
 	have israfel do no reaction to a 100 melee hit with result "Israfel's flames burn you for 3 damage\.";
 	try israfel israfel-splitting;
 	have isra do no reaction to a 100 melee hit with result "Isra's flames burn you for 2 damage\.";
+	clear event description;
+	
 	
 bees-damage-text is a test step.
 
@@ -2716,7 +2718,7 @@ Initial scheduling of bees-damage-text:
 	make everyone wait;
 	
 Testing effects of bees-damage-text:
-	assert that the event description includes "The swarm of bees attacks you, dealing <1-3> damage\.";
+	assert that the event description includes "The swarm of bees attacks <^\n+>, dealing <1-3> damage\.";
 	
 	
 [	
