@@ -2708,7 +2708,14 @@ Testing effects of damage-text testing:
 	try israfel israfel-splitting;
 	have isra do no reaction to a 100 melee hit with result "Isra's flames burn you for 2 damage\.";
 	clear event description;
-	
+	deal 3 points of Aite-damage to the player on behalf of the player;
+	assert that the event description includes "A huge <a-w>+ bursts out of the ground, skewering you for 3 damage!";
+	extract the player to the temple of Sul;
+	now the reusable item is a random scroll of ghoulification;
+	try reading the reusable item;
+	clear event description;
+	try sacrificing;
+	assert that the event description includes "Sul abhors the undead! Divine wrath strikes you instantly, dealing 10 damage\.";
 	
 bees-damage-text is a test step.
 
@@ -2718,7 +2725,7 @@ Initial scheduling of bees-damage-text:
 	make everyone wait;
 	
 Testing effects of bees-damage-text:
-	assert that the event description includes "The swarm of bees attacks <^\n+>, dealing <1-3> damage\.";
+	assert that the event description includes "The swarm of bees attacks <^\n>+, dealing <1-3> damage\.";
 	
 	
 [	
