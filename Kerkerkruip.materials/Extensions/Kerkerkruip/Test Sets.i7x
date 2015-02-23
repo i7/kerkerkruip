@@ -2715,7 +2715,15 @@ Testing effects of damage-text testing:
 	try reading the reusable item;
 	clear event description;
 	try sacrificing;
+	[TODO: divine damage reduction - sandals of the heretic?]
 	assert that the event description includes "Sul abhors the undead! Divine wrath strikes you instantly, dealing 10 damage\.";
+	now the player carries the vial of purification;
+	try drinking the vial of purification;
+	now the player worships Sul;
+	now the player carries the reusable item;
+	clear event description;
+	try reading the reusable item;
+	assert that the event description includes "Before you finish reading it, the scroll burns up in your hands! Sul is not amused by your defiant behaviour, and deals 10 damage to you\."
 	
 bees-damage-text is a test step.
 
