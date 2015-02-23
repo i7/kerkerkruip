@@ -2702,6 +2702,8 @@ Testing effects of damage-text testing:
 	now brambles strength is 1;
 	launch the thorns;
 	assert that the event description includes "Thorns shoot towards everyone, dealing 1 damage to the giant tentacle and 1 damage to you\.";
+	prepare a test battle with israfel;
+	have israfel do no reaction to a 100 melee hit with result "Israfel's flames burn you for 3 damage\.";
 	
 bees-damage-text is a test step.
 
