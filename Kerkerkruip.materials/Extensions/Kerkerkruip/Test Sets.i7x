@@ -2703,6 +2703,17 @@ Testing effects of damage-text testing:
 	launch the thorns;
 	assert that the event description includes "Thorns shoot towards everyone, dealing 1 damage to the giant tentacle and 1 damage to you\.";
 	
+bees-damage-text is a test step.
+
+Initial scheduling of bees-damage-text:
+	move the swarm of bees to the location;
+	now the health of the player is 1000;
+	make everyone wait;
+	
+Testing effects of bees-damage-text:
+	assert that the event description includes "The swarm of bees attacks you, dealing <1-3> damage\.";
+	
+	
 [	
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:		have global attacker weapon inflict damage on the global defender;  [The crucial line.]
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:		have the brambles inflict damage on guy;
