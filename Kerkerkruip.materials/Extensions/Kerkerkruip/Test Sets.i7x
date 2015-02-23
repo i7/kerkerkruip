@@ -2703,7 +2703,10 @@ Testing effects of damage-text testing:
 	launch the thorns;
 	assert that the event description includes "Thorns shoot towards everyone, dealing 1 damage to the giant tentacle and 1 damage to you\.";
 	prepare a test battle with israfel;
+	[TODO: try with heat damage resistance]
 	have israfel do no reaction to a 100 melee hit with result "Israfel's flames burn you for 3 damage\.";
+	try israfel israfel-splitting;
+	have isra do no reaction to a 100 melee hit with result "Isra's flames burn you for 2 damage\.";
 	
 bees-damage-text is a test step.
 
