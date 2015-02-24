@@ -2642,15 +2642,11 @@ Initial scheduling of damage-text testing:
 	now the health of the player is 1000;
 	now the health of the reaper is 1000;
 	
-To check for damage typos:
-	assert that the event description does not include "<0-9> +<0-9>";
-	assert that the event description does not include ".*=<^\n>*=";
-	
 Testing effects of damage-text testing:
 	Have the reaper do a dodge reaction to a 100 melee hit with result "(\n|^)You deal <1-9><0-9>* damage";
 	now the tension is 3;
 	Have the the reaper do a dodge reaction to a 100 melee hit with result "(\n|^)You deal <1-9><0-9>* \+ 1 \(tension\) = <0-9>+ damage";
-	check for damage typos;
+	check damage of the reaper with 1000 health after "You deal";
 	clear event description;
 	say Divine lightning strikes the player;
 	assert that the event description includes "(\n|^)A ball of lightning shoots from the sky, doing <3-7> damage to you"; [fails currently, but if it didn't, we might want another test for when the damage was reduced]
@@ -2704,40 +2700,48 @@ Testing effects of damage-text testing:
 	now the tension is 0;
 	now the concentration of the tentacle is 0;
 	have the player do a dodge reaction to a 100 melee hit by the tentacle with result "(\n|^)The giant tentacle deals 0 damage but holds on to you.";
-	check for damage typos;
+	check damage of the player with 1000 health after "deals";
 	now the tentacle does not grapple the player;
 	now the tension is 3;
 	[This next test fails, not because of a text problem, but because of a logic problem - see issue #378]
-	have the player do a dodge reaction to a 100 melee hit by the tentacle with result "(\n|^)The giant tentacle deals 0 + 1 (tension) = 1 damage, wounding you to <0-9>+ health.";
-	check for damage typos;
+	have the player do a dodge reaction to a 100 melee hit by the tentacle with result "(\n|^)The giant tentacle deals 0 + 1 (tension) = 1 damage, wounding you to 999 health.";
+	check damage of the player with 1000 health after "deals"; [somewhat redundant here]
 	clear event description;
 	try the tentacle tentacle-constricting;
 	assert that the event description includes "(\n|^)The giant tentacle tightens its muscles, dealing 1 damage to you";
+	check damage of the player with 1000 health after "dealing";
 	clear event description;
 	now brambles strength is 1;
 	launch the thorns;
 	assert that the event description includes "(\n|^)Thorns shoot towards everyone, dealing 1 damage to the giant tentacle; and 1 damage to you\.";
+	check damage of the player with 1000 health after "to the giant tentacle; and";
 	prepare a test battle with israfel;
 	[TODO: try with heat damage resistance]
 	have israfel do no reaction to a 100 melee hit with result "(\n|^)Israfel's flames burn you for 3 damage\.";
+	check damage of the player with 1000 health after "burn you for";
 	try israfel israfel-splitting;
 	have isra do no reaction to a 100 melee hit with result "(\n|^)Isra's flames burn you for 2 damage\.";
+	check damage of the player with 1000 health after "burn you for";
 	clear event description;
 	deal 3 points of Aite-damage to the player on behalf of the player;
 	assert that the event description includes "(\n|^)A huge <a-w>+ bursts out of the ground, skewering you for 3 damage!";
+	check damage of the player with 1000 health after "skewering you for";
 	now the reusable item is a random scroll of ghoulification;
 	now the player carries the reusable item;
 	try reading the reusable item;
+	now the health of Isra is 1000;
 	clear event description;
 	have Chton intervene on behalf of the player;
 	[TODO: necromantic damage reduction?]
 	assert that the event description includes "(\n|^)Chton suddenly sends a wave of unholy energy through the room, dealing <3-6> damage to Fell; and <3-6> damage to Isra\.";
+	check damage of Isra with 1000 health after "to Fell; and";
 	extract the player to the temple of Sul;
 	now the player does not worship chton;
 	clear event description;
 	try sacrificing;
 	[TODO: divine damage reduction - sandals of the heretic?]
 	assert that the event description includes "(\n|^)Sul abhors the undead! Divine wrath strikes you instantly, dealing 10 damage\.";
+	check damage of the player with 1000 health after "dealing";
 	now the player carries the vial of purification;
 	try drinking the vial of purification;
 	now the player worships Sul;
@@ -2745,10 +2749,12 @@ Testing effects of damage-text testing:
 	clear event description;
 	try reading the reusable item;
 	assert that the event description includes "(\n|^)Before you finish reading it, the scroll burns up in your hands! Sul is not amused by your defiant behaviour, and deals 10 damage to you\.";
+	check damage of the player with 1000 health after "deals";
 	extract the player to vast staircase;
 	clear event description;
 	try direction-jumping down;
 	assert that the event description includes "(\n|^)With a loud smack, you land in [the room down from Vast Staircase], receiving <1-9> damage\.";
+	check damage of the player with 1000 health after "receiving";
 	
 bees-damage-text is a test step.
 
@@ -2826,17 +2832,20 @@ Choosing a player action when testing armadillo-runner:
 	generate the action of going the way-to-get-back.
 	
 To check damage of (guy - a person) with (previous health - a number) health after (preamble - a text):
-	assert that the event description includes "[preamble]\s*(<1-9><0-9>*<^\n>+) damage";
+	assert that the event description does not include "<0-9> +<0-9>"; [why this?]
+	assert that the event description does not include ".*=<^\n>*=";
+	assert that the event description includes "[preamble]\s*(\d*<^\n>+) damage";
 	Let the damage expression be the text matching subexpression 1;
 	Let the value be 0;
 	if the damage expression matches the regular expression "=\s*(\d*)":
 		now the value is the text matching subexpression 1 as a number;
 		replace the regular expression "=<^\n=>*$" in the damage expression with "";
-		assert "no extra equals signs in damage expression" based on whether or not not (the damage expression matches the regular expression "=");
 		assert that the calculated value of the damage expression is the value with label "calculated value of [the damage expression]";
 	otherwise if the damage expression matches the regular expression "(\d*)":
 		now the value is the text matching subexpression 1 as a number;
 	assert that value is (previous health - health of guy) with label "damage to [guy]"; 
+	[set things up for the next test]
+	now the health of guy is previous health;
 
 Testing effects of armadillo-runner:
 	assert that the event description includes "(\n|^)The ravenous armadillo deals <1-9><^\n>* \+ 1 \(you are running\)<^\n>* = (<0-9>+) damage";
