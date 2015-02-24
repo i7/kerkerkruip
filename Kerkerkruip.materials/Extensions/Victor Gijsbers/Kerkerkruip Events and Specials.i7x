@@ -328,7 +328,7 @@ Check ChosenFighting (this is the can't ChosenFight twice rule):
 
 To say Divine lightning strikes (guy - a person):
 	let x be a random number between 3 and 7;
-	say "A ball of lightning shoots from the sky, doing [x][run paragraph on]";
+	say "A ball of lightning shoots from the sky, doing [run paragraph on]";
 	deal x points of divine damage;
 	have no-source inflict damage on the guy;
 	say " to [the guy]";

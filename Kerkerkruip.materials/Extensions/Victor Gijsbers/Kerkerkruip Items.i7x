@@ -973,26 +973,18 @@ The description of the robe of the dead mage is "Dominique, marquis of Savon, on
 A general damage multiplier rule when the victim wears the robe of the dead mage (this is the robe of the dead mage damage multiplier rule):
 	if concentration of the global defender is:
 		-- 1:
-			unless damage silence is true:
-				say " + 25% (robe of the dead mage)[run paragraph on]";
-				now damage comment is true;
+			add damage comment "+ 25% (robe of the dead mage)";
 			increase the total damage by the total damage divided by 4;
 		-- 2:
-			unless damage silence is true:
-				say " +50% (robe of the dead mage)[run paragraph on]";
-				now damage comment is true;
+			add damage comment "+50% (robe of the dead mage)";
 			increase the total damage by the total damage divided by 2;		
 		-- 3:
-			unless damage silence is true:
-				say " + 75% (robe of the dead mage)[run paragraph on]";
-				now damage comment is true;
+			add damage comment "+ 75% (robe of the dead mage)";
 			let n be the total damage divided by 4;
 			now the total damage is the total damage times 2;
 			decrease the total damage by n;
 		-- 4:
-			unless damage silence is true:
-				say " + 100% (robe of the dead mage)[run paragraph on]";
-				now damage comment is true;
+			add damage comment "+ 100% (robe of the dead mage)";
 			now the total damage is the total damage times 2.
 
 An attack modifier rule (this is the robe of the dead mage protects you rule):
@@ -1060,7 +1052,7 @@ An aftereffects rule (this is the armour of thorns rule):
 		if total damage is greater than 0:
 			let n be blood magic level of the armour of thorns;
 			if n is greater than 0:
-				say "The [armour of thorns] [if blood magic level of armour of thorns is 1]scratches[otherwise if blood magic level of armour of thorns is 2]pricks[otherwise if blood magic level of armour of thorns is 3]hurts[otherwise]impales[end if] [the global attacker] for[run paragraph on]";
+				say "The [armour of thorns] [if blood magic level of armour of thorns is 1]scratches[otherwise if blood magic level of armour of thorns is 2]pricks[otherwise if blood magic level of armour of thorns is 3]hurts[otherwise]impales[end if] [the global attacker] for [run paragraph on]";
 				deal n points of physical damage;
 				have armour of thorns inflict damage on global attacker;
 				say "[if the global attacker is dead], killing [regarding the global attacker][them][end if].";
@@ -1542,6 +1534,8 @@ Aftereffects rule (this is the lion's shield rule):
 				say "The lion on the shield strikes out, biting [the global attacker]. But the lion's teeth are not sharp enough to penetrate and do damage.";
 			otherwise:
 				say "The lion on the shield strikes out, and bites [the global attacker] for [bold type][total damage] damage[roman type][if health of global attacker is less than 1], which is [bold type]lethal[roman type][end if].".
+				
+[we could maybe use "damage consequences" here, but we don't want redundant concentration-losing messages]
 
 Section - Thick metal sheet (monster)
 
@@ -2498,9 +2492,7 @@ Status attribute rule (this is the protection status rule):
 
 A general damage multiplier rule when the hit protection of the victim is greater than 0 (this is the protection damage multiplier rule):
 	if total damage greater than 0:
-		unless damage silence is true:
-			say " - 100% (protection)[run paragraph on]";
-			now damage comment is true;
+		add damage comment "- 100% (protection)";
 		now total damage is 0;
 		decrease hit protection of the global defender by 1.
 
@@ -2575,9 +2567,9 @@ An unholy wave rule (this is the standard unholy wave rule):
 			let m be a random number between 3 and 6;
 			deal m points of necromantic damage;
 			if the unholy wave location is the location:
-				say "[if n is 1 and original n is not 1] and[end if] [m][run paragraph on]";
+				say "[if n is 1 and original n is not 1] and[end if] [run paragraph on]";
 				have no-source inflict damage on guy;
-				say " to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive] (which breaks [regarding the guy][possessive] concentration)[end if][if n is not 1];[otherwise].[line break][end if][run paragraph on]";
+				say " [damage consequences][if n is not 1];[otherwise].[line break][end if][run paragraph on]";
 			otherwise:
 				have no-source inflict damage on guy, silently;
 			unless total damage is 0:
@@ -4120,7 +4112,7 @@ Instead of drinking vial of purification:
 	remove noun from play;
 	let n be 0;
 	if the player worships Chton:
-		say "Chton prevents the vial of purification from doing its work; but your attempt at escaping undeath did not amuse him. A wave of extreme cold racks your body, dealing 15[run paragraph on]";
+		say "Chton prevents the vial of purification from doing its work; but your attempt at escaping undeath did not amuse him. A wave of extreme cold racks your body, dealing [run paragraph on]";
 		deal 15 points of divine damage;
 		have no-source inflict damage on player; [why not Chton?]
 		say "!";
@@ -4590,9 +4582,7 @@ A remove general damage rule (this is the brightest flame damage reduction rule)
 		let n be total damage;
 		if n is greater than 0:
 			now total damage is 0;
-			unless damage silence is true:
-				say " - [n] (brightest flame)[run paragraph on]";
-				now damage comment is true.
+			add damage comment "- [n] (brightest flame)".
 	
 Every turn when brightest-flame-counter is not 0:
 	if main actor is the player:

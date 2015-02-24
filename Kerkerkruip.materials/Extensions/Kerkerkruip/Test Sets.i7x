@@ -2632,6 +2632,9 @@ Section - Damage Text
 
 damage-text is a test set.
 
+Scenario when testing damage-text:
+	now Vast Staircase is testobject;
+
 damage-text testing is a test step. The first move of damage-text is damage-text testing.
 
 Initial scheduling of damage-text testing:
@@ -2644,86 +2647,108 @@ To check for damage typos:
 	assert that the event description does not include ".*=<^\n>*=";
 	
 Testing effects of damage-text testing:
-	Have the the reaper do a dodge reaction to a 100 melee hit with result "You deal <0-9>+ <^\n>+ = <0-9>+ damage";
+	Have the reaper do a dodge reaction to a 100 melee hit with result "(\n|^)You deal <1-9><0-9>* damage";
+	now the tension is 3;
+	Have the the reaper do a dodge reaction to a 100 melee hit with result "(\n|^)You deal <1-9><0-9>* \+ 1 \(tension\) = <0-9>+ damage";
 	check for damage typos;
+	clear event description;
 	say Divine lightning strikes the player;
-	assert that the event description includes "A ball of lightning shoots from the sky, doing <3-7> damage to you"; [fails currently, but if it didn't, we might want another test for when the damage was reduced]
+	assert that the event description includes "(\n|^)A ball of lightning shoots from the sky, doing <3-7> damage to you"; [fails currently, but if it didn't, we might want another test for when the damage was reduced]
 	now the reusable item is a random fragmentation grenade;
+	clear event description;
 	have a fragmentation event in the location with the reusable item by the player;
 	assert that the event description includes "<2-5> damage to the Reaper; and <2-5> damage to you";
 	[skip fragmentation in other rooms because no damage text is printed]
 	now the player wears the armour of thorns;
 	now the blood magic level of the armour of thorns is 1;
-	have the player do a dodge reaction to a 100 melee hit by the reaper with result "The armour of thorns scratches the Reaper for 1 damage.";
+	have the player do a dodge reaction to a 100 melee hit by the reaper with result "(\n|^)The armour of thorns scratches the Reaper for 1 damage.";
 	now the player wears the lion's shield;
 	now the defence of the player is 50;
-	have the player do a block reaction to a 0 melee hit by the reaper with result "The lion on the shield strikes out, and bites the Reaper for 2 damage.";
+	have the player do a block reaction to a 0 melee hit by the reaper with result "(\n|^)The lion on the shield strikes out, and bites the Reaper for 2 damage.";
 	Now the reusable item is a random scroll of death;
 	now the player carries the reusable item;
+	clear event description;
 	try reading the reusable item;
-	assert that the event description includes "A wave of unholy energy is released, dealing <3-6> damage to the Reaper; and <3-6> damage to you.";
+	assert that the event description includes "(\n|^)A wave of unholy energy is released, dealing <3-6> damage to the Reaper; and <3-6> damage to you.";
 	[not sure how we could trigger an unholy wave in another room, but it wouldn't print anything anyway]
 	now the player worships Chton;
 	now the player carries the vial of purification;
+	clear event description;
 	try drinking the vial of purification;
-	assert that the event description includes "Chton prevents the vial of purification from doing its work; but your attempt at escaping undeath did not amuse him. A wave of extreme cold racks your body, dealing 15 damage!";
+	assert that the event description includes "(\n|^)Chton prevents the vial of purification from doing its work; but your attempt at escaping undeath did not amuse him. A wave of extreme cold racks your body, dealing 15 damage!";
 	extract the player to the Temple of Aite;
+	clear event description;
 	try climbing the statue of Aite;
-	assert that the event description includes "You cut yourself as soon as you touch the statue. The weapons deal 3 damage.";
+	assert that the event description includes "(\n|^)You cut yourself as soon as you touch the statue. The weapons deal 3 damage.";
 	prepare a test battle with the abyss of the soul;
+	clear event description;
 	try the abyss of the soul pulsating;
-	assert that the event description includes "The abyss of the soul pulsates, sending out a wave of negative energy that deals <1-2> damage to you.";
+	assert that the event description includes "(\n|^)The abyss of the soul pulsates, sending out a wave of negative energy that deals <1-2> damage to you.";
 	prepare a test battle with the chain golem;
 	now the defence of the chain golem is 50;
 	now the melee of the player is 0;
 	now the health of the chain golem is 1000;
 	now the body score of the player is -100;
 	now the concentration of the chain golem is 3;
+	clear event description;
 	try attacking the chain golem;
-	assert that the event description includes "You attempt to duck under the whirling chains. You roll <0-9>+ \+ -100 \(body\) = -<0-9>+ against a target number of <0-9>+, failing the body check. One of the chains catches you with a loud smack, dealing 6 damage.";
+	assert that the event description includes "(\n|^)You attempt to duck under the whirling chains. You roll <0-9>+ \+ -100 \(body\) = -<0-9>+ against a target number of <0-9>+, failing the body check. One of the chains catches you with a loud smack, dealing 6 damage.";
 	now the power of the bomb is granted;
 	now the health of the player is 0;
+	now the health of the chain golem is 1000;
+	clear event description;
 	have an event of the chain golem killing the player;
-	assert that the event description includes "Your body explodes vehemently as you throw yourself at the chain golem, but you only deal 5 damage instead of the 1000 damage you needed to deal.";
+	assert that the event description includes "(\n|^)Your body explodes vehemently as you throw yourself at the chain golem, but you only deal 5 damage instead of the 1000 damage you needed to deal.";
 	now the health of the player is 1000;
 	prepare a test battle with the tentacle;
 	now the tension is 0;
 	now the concentration of the tentacle is 0;
-	have the player do a dodge reaction to a 100 melee hit by the tentacle with result "The tentacle deals 0 damage but holds on to you.";
+	have the player do a dodge reaction to a 100 melee hit by the tentacle with result "(\n|^)The giant tentacle deals 0 damage but holds on to you.";
 	check for damage typos;
 	now the tentacle does not grapple the player;
 	now the tension is 3;
 	[This next test fails, not because of a text problem, but because of a logic problem - see issue #378]
-	have the player do a dodge reaction to a 100 melee hit by the tentacle with result "The tentacle deals 0 + 1 (tension) = 1 damage, wounding you to <0-9>+ health.";
+	have the player do a dodge reaction to a 100 melee hit by the tentacle with result "(\n|^)The giant tentacle deals 0 + 1 (tension) = 1 damage, wounding you to <0-9>+ health.";
 	check for damage typos;
+	clear event description;
 	try the tentacle tentacle-constricting;
-	assert that the event description includes "The giant tentacle tightens its muscles, dealing 1 damage to you";
+	assert that the event description includes "(\n|^)The giant tentacle tightens its muscles, dealing 1 damage to you";
 	clear event description;
 	now brambles strength is 1;
 	launch the thorns;
-	assert that the event description includes "Thorns shoot towards everyone, dealing 1 damage to the giant tentacle and 1 damage to you\.";
+	assert that the event description includes "(\n|^)Thorns shoot towards everyone, dealing 1 damage to the giant tentacle; and 1 damage to you\.";
 	prepare a test battle with israfel;
 	[TODO: try with heat damage resistance]
-	have israfel do no reaction to a 100 melee hit with result "Israfel's flames burn you for 3 damage\.";
+	have israfel do no reaction to a 100 melee hit with result "(\n|^)Israfel's flames burn you for 3 damage\.";
 	try israfel israfel-splitting;
-	have isra do no reaction to a 100 melee hit with result "Isra's flames burn you for 2 damage\.";
+	have isra do no reaction to a 100 melee hit with result "(\n|^)Isra's flames burn you for 2 damage\.";
 	clear event description;
 	deal 3 points of Aite-damage to the player on behalf of the player;
-	assert that the event description includes "A huge <a-w>+ bursts out of the ground, skewering you for 3 damage!";
-	extract the player to the temple of Sul;
+	assert that the event description includes "(\n|^)A huge <a-w>+ bursts out of the ground, skewering you for 3 damage!";
 	now the reusable item is a random scroll of ghoulification;
+	now the player carries the reusable item;
 	try reading the reusable item;
+	clear event description;
+	have Chton intervene on behalf of the player;
+	[TODO: necromantic damage reduction?]
+	assert that the event description includes "(\n|^)Chton suddenly sends a wave of unholy energy through the room, dealing <3-6> damage to Fell; and <3-6> damage to Isra\.";
+	extract the player to the temple of Sul;
+	now the player does not worship chton;
 	clear event description;
 	try sacrificing;
 	[TODO: divine damage reduction - sandals of the heretic?]
-	assert that the event description includes "Sul abhors the undead! Divine wrath strikes you instantly, dealing 10 damage\.";
+	assert that the event description includes "(\n|^)Sul abhors the undead! Divine wrath strikes you instantly, dealing 10 damage\.";
 	now the player carries the vial of purification;
 	try drinking the vial of purification;
 	now the player worships Sul;
-	now the player carries the reusable item;
+	now the player carries the reusable item; [scroll of ghoulfication]
 	clear event description;
 	try reading the reusable item;
-	assert that the event description includes "Before you finish reading it, the scroll burns up in your hands! Sul is not amused by your defiant behaviour, and deals 10 damage to you\."
+	assert that the event description includes "(\n|^)Before you finish reading it, the scroll burns up in your hands! Sul is not amused by your defiant behaviour, and deals 10 damage to you\.";
+	extract the player to vast staircase;
+	clear event description;
+	try direction-jumping down;
+	assert that the event description includes "(\n|^)With a loud smack, you land in [the room down from Vast Staircase], receiving <1-9> damage\.";
 	
 bees-damage-text is a test step.
 
@@ -2735,6 +2760,8 @@ Initial scheduling of bees-damage-text:
 Testing effects of bees-damage-text:
 	assert that the event description includes "The swarm of bees attacks <^\n>+, dealing <1-3> damage\.";
 	
+[TODO: tests for all damage modifier rules]
+[TODO: test damage effects, e.g. fragmentation grenade exploding in another room]
 	
 [	
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:		have global attacker weapon inflict damage on the global defender;  [The crucial line.]

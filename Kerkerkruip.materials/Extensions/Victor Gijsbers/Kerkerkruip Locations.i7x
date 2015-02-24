@@ -496,7 +496,7 @@ Instead of touching the statue of Aite:
 	try climbing the statue of Aite.
 
 Instead of climbing the statue of Aite:
-	say "You cut yourself as soon as you touch the statue. The weapons deal 3[run paragraph on]";
+	say "You cut yourself as soon as you touch the statue. The weapons deal [run paragraph on]";
 	deal 3 points of physical damage;
 	have statue of Aite inflict damage on the player;
 	say ".";

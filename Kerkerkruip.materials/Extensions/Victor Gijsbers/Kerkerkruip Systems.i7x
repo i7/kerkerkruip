@@ -1682,9 +1682,9 @@ Last falling rule (this is the standard deal falling damage rule):
 			if a random chance of 1 in 10 succeeds: [make it slightly dangerous]
 				increase m by 5;
 			deal m points of physical damage;
-			have no-source inflict damage on falling-guy;
+			have no-source inflict damage on falling-guy, silently;
 			if falling-guy is the player:
-				say "With a loud smack, you land in [the location], [if total damage is 0]receiving no damage[otherwise]receiving [bold type][total damage] damage[roman type][end if].";
+				say "With a loud smack, you land in [the location], receiving [if total damage is 0] no damage[otherwise][bold type][total damage] damage[roman type][end if].";
 				now concentration of player is 0;
 				now the take no time boolean is false;
 				if player is dead:

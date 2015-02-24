@@ -378,12 +378,12 @@ To deal (X - a number) points of Aite-damage to (guy - a person) on behalf of (t
 		if a random chance of 1 in the size factor succeeds:
 			say "! [regarding the guy][They] [fly] [if plus gigantic damage]around[otherwise]over[end if] it, narrowly avoiding the sharp point.";
 			stop;
-		say ". [regarding the guy][They] [crash] into it for [bold type][X] damage[roman type]!";
+		say ". [regarding the guy][They] [crash] into it";
 	otherwise:
 		now X is X times the size factor divided by 2;
-		say ", skewering [the guy] for [bold type][X] damage[roman type]!";
+		say ", skewering [the guy]";
 	deal X points of divine damage;
-	have Aite inflict damage on the guy, silently;
+	say " for [damage we have Aite inflict on the guy]!";
 	unless the guy is dead:
 		let the guy lose concentration;
 		if the guy is the player and the player is hidden:
@@ -399,7 +399,6 @@ To deal (X - a number) points of Aite-damage to (guy - a person) on behalf of (t
 			if the guy is beloved of Aite:
 				say "Clearly, it doesn't always pay off to serve the mad goddess.";
 		have an event of the supplicant killing the guy;
-
 
 To have Aite grant concentration to (guy - a person):
 	if the concentration of the guy is at least 3:
@@ -617,11 +616,8 @@ Chapter - Sul
 
 Check sacrificing (this is the cannot sacrifice to Sul when undead rule):
 	if the location of the player is dedicated to sul and the player is undead:
-		let m be health of the player;
 		deal 10 points of divine damage;
-		have Sul inflict damage on the player;
-		let n be (m minus health of the player);
-		say "Sul abhors the undead! Divine wrath strikes you instantly, dealing [bold type][n] damage[roman type].";
+		say "Sul abhors the undead! Divine wrath strikes you instantly, dealing [the damage we have Sul inflict on the player].";
 		if the player is dead:
 			end the story saying "Your attempt at contrition wasn't appreciated.";
 		rule fails.
@@ -694,11 +690,10 @@ Last check reading a scroll of ghoulification:
 
 To do the Sul vengance:
 	remove noun from play;
-	let m be health of the player;
+	say "Before you finish reading it, the scroll burns up in your hands! Sul is not amused by your defiant behaviour, and deals [run paragraph on]";
 	deal 10 points of divine damage;
 	have Sul inflict damage on the player;
-	let n be (m minus health of the player);
-	say "Before you finish reading it, the scroll burns up in your hands! Sul is not amused by your defiant behaviour, and deals [bold type][n]damage[roman type] to you.";
+	say " [damage consequences].";
 	if the player is dead:
 		end the story saying "And you will know My name is the Lady when I lay My vengeance upon thee.";
 
@@ -841,9 +836,9 @@ To have (benefactor - Chton) intervene on behalf of (supplicant - a person):
 				increase m by 1;
 			let p be health of guy;
 			deal m points of necromantic damage;
+			say "[if n is 1 and original n is not 1]and [end if][run paragraph on]";
 			have Chton inflict damage on guy;
-			let q be (p minus health of guy);
-			say "[if n is 1 and original n is not 1]and [end if][q] damage to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive] (which breaks [regarding the guy][possessive] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
+			say " [damage consequences][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
 			now concentration of the guy is 0;
 			decrease n by 1;
 			if n is 0:

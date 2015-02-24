@@ -749,6 +749,7 @@ The after damage rules are a rulebook. [For things like losing concentration.]
 The victim is a person that varies.
 The total damage is a number that varies.
 
+The unmodified damage is a number that varies. [the amount of damage specified before any effects can alter it]
 Damage comment is a truth state that varies. [Automatically set to false, then to true by any rules that prints "+ .." or "- ..." damage.]
 Damage silence is a truth state that varies. [Automatically set to true or false depending on whether "silently" is invoked.]
 
@@ -775,6 +776,13 @@ Section - Dealing damage
 To deal (n - a number) points of (type - a damage type):
 	increase the harm of type by n.
 
+Section - Damage comments
+
+To add damage comment (msg - a text):
+	unless damage silence is true:
+		say "[if damage comment is false][unmodified damage][end if] [msg][run paragraph on]";
+		now damage comment is true;
+	
 Section - Adding specific damage
 
 [Effects that add damage to an already established damage profile should do so using this phrase. You can add damage normally, which means the damage is always added; or conditional on damage of that type already being dealt. Heat vulnerability -- which adds 2 damage when heat damage is being dealt -- should add 2 points of heat damage conditionally; while a curse that adds 2 heat damage to any damage you get from any source should add the damage normally.]
@@ -783,10 +791,7 @@ To add (n - a number) points of (type - a damage type) with reason (reason - som
 	if not conditionally or harm of type is greater than 0:
 		increase harm of type by n;
 		unless n is 0:
-			unless damage silence is true:
-				say " + [n] ([reason])[run paragraph on]";
-				now damage comment is true.
-
+			add damage comment "+ [n] ([reason])";
 
 Section - Removing specific damage
 
@@ -800,9 +805,7 @@ To remove (n - a number) points of (type - a damage type) with reason (reason - 
 	decrease harm of type by n;
 	now removed damage is n;
 	unless removed damage is 0:
-		unless damage silence is true:
-			say " - [removed damage] ([reason])[run paragraph on]";
-			now damage comment is true.
+		add damage comment "- [removed damage] ([reason])";
 
 Section - Multiplying specific damage
 
@@ -822,13 +825,11 @@ To multiply (type - a damage type) by (percentage - a number) percent with reaso
 		now rounding error of type is (n - p);
 		let change be (harm of type minus m);
 		now harm of type is m;
-		unless damage silence is true:
-			if change is less than 0:
-				now change is (0 - change);
-				say " - [change] ([reason])[run paragraph on]";
-			otherwise:
-				say " + [change] ([reason])[run paragraph on]";
-			now damage comment is true.
+		if change is less than 0:
+			now change is (0 - change);
+			add damage comment "- [change] ([reason])";
+		otherwise:
+			add damage comment "+ [change] ([reason])".
 
 First specific damage multiplier rule (this is the reset rounding error rule):
 	reset rounding errors.
@@ -864,9 +865,7 @@ Section - Adding total damage
 To add (n - a number) points of general damage with reason (reason - some text):
 	increase total damage by n;
 	unless n is 0:
-		unless damage silence is true:
-			say " + [n] ([reason])[run paragraph on]";
-			now damage comment is true.
+		add damage comment "+ [n] ([reason])";
 
 Section - Removing total damage
 
@@ -876,9 +875,7 @@ To remove (n - a number) points of general damage with reason (reason - some tex
 	decrease total damage by n;
 	now removed damage is n;
 	unless removed damage is 0:
-		unless damage silence is true:
-			say " - [removed damage] ([reason])[run paragraph on]";
-			now damage comment is true.
+		add damage comment "- [removed damage] ([reason])";
 
 Section - Multiplying total damage
 
@@ -893,13 +890,10 @@ To multiply general damage by (percentage - a number) percent with reason (reaso
 		let p be m times 100;
 		now general damage rounding error is (n - p);
 		now total damage is m;
-		unless damage silence is true:
-			say " x [percentage]% ([reason])[run paragraph on]";
-			now damage comment is true.
+		add damage comment "x [percentage]% ([reason])";
 
 First general damage multiplier rule (this is the reset general rounding error rule):
 	now general damage rounding error is 0.
-	
 
 
 
@@ -918,10 +912,10 @@ To have (source - a thing) inflict damage on (guy - a person), silently:
 		now damage silence is false;
 	now total damage is 0;
 	follow the before damage rules; [this is where immunities should be taken care of]
-	let n be 0;
+	now unmodified damage is 0;
 	repeat with type running through damage types:
-		increase n by harm of type;
-	if n is 0:  [totally immune to our damage]
+		increase unmodified damage by harm of type;
+	if unmodified damage is 0:  [totally immune to our damage]
 		now total damage is 0;
 	otherwise:
 		follow the add specific damage rules;
@@ -936,21 +930,20 @@ To have (source - a thing) inflict damage on (guy - a person), silently:
 		follow the general damage multiplier rules;
 		if total damage is less than 0:
 			now total damage is 0;
-[	unless silently:
-		if damage comment is true or (damage-by-hitting is true and override-normal-attack-damage-rule is false):
-			say " = [bold type]", total damage, " damage[roman type][run paragraph on]";
-		otherwise:
-			say " [bold type]", total damage, " damage[roman type][run paragraph on]";] [Let's try something else.]
 	unless silently:
-		if damage comment is true:
-			say " = [bold type]", total damage, " damage[roman type][run paragraph on]";
-		otherwise:
-			say " + 0 = [bold type]", total damage, " damage[roman type][run paragraph on]";			
+		say "[if damage comment is true] = [end if][bold type]", total damage, " damage[roman type][run paragraph on]";
 	decrease health of the victim by total damage;
 	follow the after damage rules;
 	reset the damage profile;
-	now damage-by-hitting is false.
+	now damage-by-hitting is false;
+	
+To say the/-- damage we have (source - a thing) inflict on (guy - a person):
+	say run paragraph on;
+	have source inflict damage on guy;
 
+[Note that this phrase says the victim loses concentration, but it doesn't do the concentration breaking itself TODO: fix that to work with silent options]
+To say damage consequences:
+	say "to [the victim][if victim is dead] (which is [bold type]lethal[roman type])[end if][if concentration of victim is greater than 0 and victim is alive and total damage is not 0] (which breaks [regarding the victim][possessive] concentration)[end if][run paragraph on]";
 
 Chapter - Testing Damage
 
@@ -1357,8 +1350,9 @@ Carry out an actor hitting (this is the set up attack damage rule):
 		unless damage die of the global attacker weapon is less than 1:
 			now the attack damage is a random number between 1 and the damage die of the global attacker weapon;
 		increase the attack damage by weapon damage bonus of the global attacker weapon; [1d(damage die) + WDB]
+		[TODO: consider what to do if the numbers boolean is false]
 		if the numbers boolean is true:
-			say "[roman type][The global attacker] [deal] ", the attack damage, "[run paragraph on]";
+			say "[roman type][The global attacker] [deal] [run paragraph on]";
 		now harm of physical damage is attack damage;
 		now damage-by-hitting is true;	
 		have global attacker weapon inflict damage on the global defender;  [The crucial line.]

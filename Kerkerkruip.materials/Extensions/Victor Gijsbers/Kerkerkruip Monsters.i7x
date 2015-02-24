@@ -1248,7 +1248,7 @@ First carry out an actor attacking the chain golem (this is the attack a spinnin
 			if test result is false:
 				let n be two times the concentration of the chain golem;
 				unless n is 0:
-					say " One of the chains catches [the actor] with a loud smack, dealing ";
+					say " One of the chains catches [the actor] with a loud smack, dealing [run paragraph on]";
 					deal n points of physical damage;
 					let X be a random natural weapon part of the chain golem;
 					have X inflict damage on the actor;
@@ -1625,6 +1625,7 @@ Killing rule (this is the explode after death rule):
 			if explosion victim is the player:
 				say "Your body explodes vehemently, but there is nobody here who could grant you a soul.[paragraph break]";
 			otherwise:
+				let damage target be the health of the explosion victim;
 				let m be final body of the player;
 				if m is less than 5, now m is 5;
 				let n be a random number between 5 and m;
@@ -1639,7 +1640,7 @@ Killing rule (this is the explode after death rule):
 							have an event of the player killing explosion victim;
 				otherwise:
 					[increase the health of the explosion victim by the total damage;] [Why this? Looks like a bug.]
-					say "Your body explodes vehemently as you throw yourself at [the explosion victim], but you only deal [the total damage] damage instead of the [health of the explosion victim] damage you needed to deal.[paragraph break]".
+					say "Your body explodes vehemently as you throw yourself at [the explosion victim], but you only deal [the total damage] damage instead of the [damage target] damage you needed to deal.[paragraph break]".
 		
 Status skill rule (this is the jumping bomb power status skill rule):
 	if power of the bomb is granted:
@@ -3125,7 +3126,7 @@ Carry out an actor hitting (this is the show the damage dealt by the giant tenta
 			now the attack damage is a random number between 1 and the damage die of the global attacker weapon;
 		increase the attack damage by weapon damage bonus of the global attacker weapon; [1d(damage die) + WDB]
 		if the numbers boolean is true:
-			say "[roman type][The global attacker] [deal][run paragraph on]";
+			say "[roman type][The global attacker] [deal] [run paragraph on]";
 		now harm of physical damage is attack damage;
 		now damage-by-hitting is true;	
 		have global attacker weapon inflict damage on the global defender;  [The crucial line.]
@@ -3976,7 +3977,7 @@ Carry out an actor launching:
 	now brambles strength is 0.
 
 To launch the thorns:
-	say "Thorns shoot towards everyone, dealing[run paragraph on]";
+	say "Thorns shoot towards everyone, dealing [run paragraph on]";
 	let n be the number of alive not druidic persons in location;
 	if n is 0:
 		say "no damage to anyone.";
@@ -3984,9 +3985,9 @@ To launch the thorns:
 	repeat with guy running through all alive not druidic persons in location:
 		let m be a random number between 1 and brambles strength;
 		deal m points of physical damage;
-		say "[if n is 1 and original n is not 1]and[end if][run paragraph on]";
+		say "[if n is 1 and original n is not 1]and [end if][run paragraph on]";
 		have the brambles inflict damage on guy;
-		say " to [the name of the guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive and m is not 0] (which breaks [regarding the guy][possessive] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
+		say " [damage consequences][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
 		decrease n by 1;
 		if n is 0:
 			say ""; [For an extra newline. Don't ask.]
@@ -6106,7 +6107,7 @@ Carry out the abyss of the soul pulsating:
 			let m be a random number between 1 and the abyss of the soul strength;
 			deal m points of necromantic damage;
 			have no-source inflict damage on the guy; [why not the abyss? ]
-			say " [roman type]to [guy][if guy is dead] (which is [bold type]lethal[roman type])[end if][roman type][if concentration of the guy is greater than 0 and guy is alive and m is not 0] (which breaks [regarding the guy][possessive] concentration)[end if][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
+			say " [damage consequences][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
 			unless total damage is 0:
 				now concentration of guy is 0;
 			decrease n by 1;

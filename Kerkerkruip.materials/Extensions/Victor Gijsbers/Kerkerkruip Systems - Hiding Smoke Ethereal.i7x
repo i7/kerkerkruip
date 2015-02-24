@@ -405,9 +405,7 @@ A specific damage multiplier rule (this is the ethereal damage immunity rule):
 				increase n by harm of type;
 				now harm of type is 0;
 		if n is greater than 0:
-			unless damage silence is true:
-				say " - [n] ([if victim is not ethereal]attacker[end if] ethereal)[run paragraph on]";
-				now damage comment is true.
+			add damage comment "- [n] ([if victim is not ethereal]attacker[end if] ethereal)";
 		
 First impeded movement rule (this is the can always move when ethereal rule):
 	if test subject is ethereal:
