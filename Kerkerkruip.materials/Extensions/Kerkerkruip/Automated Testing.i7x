@@ -876,6 +876,9 @@ To extract (guy - a person) to (place - a room), making sure it is unoccupied:
 		Let elsewhere be a random unoccupied reachable room;
 		transcribe "moving occupants of [place] to [elsewhere]";
 		swap the occupants of place and elsewhere;
+	if guy is the player:
+		now way-to-get-back is the best route from the place to the location;
+		now way-to-get-there is the opposite of way-to-get-back;
 	transcribe "moving [guy] to [place]";
 	extract guy from combat;
 	move guy to place;

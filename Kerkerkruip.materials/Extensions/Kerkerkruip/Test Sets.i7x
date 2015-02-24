@@ -2763,17 +2763,105 @@ Testing effects of bees-damage-text:
 [TODO: tests for all damage modifier rules]
 [TODO: test damage effects, e.g. fragmentation grenade exploding in another room]
 	
-[	
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:		have global attacker weapon inflict damage on the global defender;  [The crucial line.]
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:		have the brambles inflict damage on guy;
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:		have the swarm of bees inflict damage on guy, silently;
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:		have Israfel inflict damage on the global attacker, silently;
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:		have Isra inflict damage on global attacker, silently;
-./Victor Gijsbers/Kerkerkruip Religion.i7x:	have Aite inflict damage on the guy, silently;
-./Victor Gijsbers/Kerkerkruip Religion.i7x:		have Sul inflict damage on the player;
-./Victor Gijsbers/Kerkerkruip Religion.i7x:	have Sul inflict damage on the player;
-./Victor Gijsbers/Kerkerkruip Religion.i7x:			have Chton inflict damage on guy;
-./Victor Gijsbers/Kerkerkruip Systems.i7x:			have no-source inflict damage on falling-guy;]
+Section - Damage Modifiers
+
+damage-modifiers is a test set.
+
+To decide what number is digit (T - a text):
+	Let C be character number 1 in T;
+	Repeat with value running from 0 to 9:
+		if character number (value + 1) in "0123456789" is T:
+			decide on value;
+			
+To decide what number is (T - a text) as a number:
+	Let the sign be 1;
+	Let the value be 0;
+	if T matches the regular expression "\+":
+		replace the regular expression "<^+>*\+" in T with "";
+	if T matches the regular expression "-":
+		replace the regular expression "<^->*-" in T with "";
+		now the sign is -1;
+	while T matches the regular expression "^\D*(\d)":
+		now the value is (value * 10) + digit (text matching subexpression 1);
+		replace the regular expression "^\D*\d" in T with "";
+	decide on the sign * the value;
+	
+To decide what number is the calculated value of (T - a text):
+	unless T matches the regular expression "^\D*(\d+)":
+		decide on 0;
+	Let the value be the text matching subexpression 1 as a number;
+	replace the regular expression "^\D*\d+" in T with "";
+	while T is not empty:
+		if T matches the regular expression "^<^\dx+->*(<+->\s*\d+)%":
+			let the percent be the text matching subexpression 1 as a number;
+			let the factor be 100 + the percent;
+			now the value is (value * factor) / 100;
+			replace the regular expression "^\D*\d+%" in T with "";
+		otherwise if T matches the regular expression "^<^\dx+->*x\s*(\d+)%":
+			let the percent be the text matching subexpression 1 as a number;
+			now the value is (value * percent) / 100;
+			replace the regular expression "^\D*\d+%" in T with "";
+		otherwise if T matches the regular expression "^<^\dx+->*(<+->\s*\d+)":
+			let the term be the text matching subexpression 1 as a number;
+			now the value is value + term;
+			replace the regular expression "^\D*\d+" in T with "";
+		otherwise:
+			break;
+	decide on the value.
+
+scenario when testing damage-modifiers:
+	now the armadillo is testobject.
+
+damage-modifier-testing is test step. The first move of damage-modifiers is damage-modifier-testing.
+
+armadillo-runner is an extracting test step. The location-target of armadillo-runner is the armadillo.
+
+Initial scheduling of armadillo-runner:
+	now retreat location is the location of the armadillo;
+	now the health of the player is 1000;
+	now the melee of the armadillo is 100;
+	make everyone wait.
+
+Choosing a player action when testing armadillo-runner:
+	generate the action of going the way-to-get-back.
+	
+To check damage of (guy - a person) with (previous health - a number) health after (preamble - a text):
+	assert that the event description includes "[preamble]\s*(<1-9><0-9>*<^\n>+) damage";
+	Let the damage expression be the text matching subexpression 1;
+	Let the value be 0;
+	if the damage expression matches the regular expression "=\s*(\d*)":
+		now the value is the text matching subexpression 1 as a number;
+		replace the regular expression "=<^\n=>*$" in the damage expression with "";
+		assert "no extra equals signs in damage expression" based on whether or not not (the damage expression matches the regular expression "=");
+		assert that the calculated value of the damage expression is the value with label "calculated value of [the damage expression]";
+	otherwise if the damage expression matches the regular expression "(\d*)":
+		now the value is the text matching subexpression 1 as a number;
+	assert that value is (previous health - health of guy) with label "damage to [guy]"; 
+
+Testing effects of armadillo-runner:
+	assert that the event description includes "(\n|^)The ravenous armadillo deals <1-9><^\n>* \+ 1 \(you are running\)<^\n>* = (<0-9>+) damage";
+	check damage of the player with 1000 health after "deals";
+
+[Extensions mciul$ grep -irl 'specific damage' .
+./Victor Gijsbers/Kerkerkruip Actions and UI.i7x
+./Victor Gijsbers/Kerkerkruip ATTACK.i7x
+./Victor Gijsbers/Kerkerkruip Items.i7x
+./Victor Gijsbers/Kerkerkruip Locations.i7x
+./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x
+./Victor Gijsbers/Kerkerkruip Monsters.i7x
+./Victor Gijsbers/Kerkerkruip Religion.i7x
+./Victor Gijsbers/Kerkerkruip Systems - Hiding Smoke Ethereal.i7x
+./Victor Gijsbers/Kerkerkruip Systems.i7x
+
+Extensions mciul$ grep -irl 'general damage' .
+./Victor Gijsbers/Kerkerkruip ATTACK.i7x
+./Victor Gijsbers/Kerkerkruip Items.i7x
+./Victor Gijsbers/Kerkerkruip Monsters.i7x
+./Victor Gijsbers/Kerkerkruip Religion.i7x
+./Victor Gijsbers/Kerkerkruip Systems.i7x
+./Victor Gijsbers/Kerkerkruip Tests.i7x
+
+]
 
 [	
 Section - Example failure
