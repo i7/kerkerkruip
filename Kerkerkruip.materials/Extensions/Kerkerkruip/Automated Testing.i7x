@@ -700,14 +700,20 @@ To generate (the desired action - a stored action):
 	
 The compelled action is a stored action that varies. The compelled action is the action of waiting.
 
+A test step can be npc-suppressing or npc-enabling. A test step is usually npc-suppressing. Normal keyboard input is npc-enabling.
+
 Suppress npc action is a truth state that varies.
 
-First initial scheduling rule (this is the enable npc actions rule):
-	now suppress npc action is false;
+First initial scheduling rule for a test step (called current move) (this is the enable npc actions rule):
+	now suppress npc action is whether or not current move is npc-suppressing;
 	
 To make everyone wait:
 	transcribe "suppressing NPC actions";
 	now suppress npc action is true;
+	
+To let everyone act:
+	transcribe "enabling NPC actions";
+	now suppress npc action is false;
 	
 To compel (the desired action - a stored action):
 	Let the guy be the actor part of the desired action;
@@ -736,6 +742,7 @@ To select menu question answer (N - a number):
 	now the automated menu question answer is 0;
 
 A Standard AI rule for a person (called P) (this is the compel an action rule):
+	transcribe "compel an action rule";
 	if P is at-Act and the actor part of the compelled action is P:
 		try the compelled action;
 		if the action name part of the compelled action is the attacking action:
@@ -745,6 +752,7 @@ A Standard AI rule for a person (called P) (this is the compel an action rule):
 		rule succeeds;
 
 A Standard AI rule for a person (called P) (this is the suppress actions rule):
+	transcribe "suppress actions rule";
 	if suppress npc action is true:
 		transcribe "suppressed action for [P]";
 		rule succeeds;

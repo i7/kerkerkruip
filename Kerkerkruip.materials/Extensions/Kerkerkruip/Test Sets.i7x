@@ -344,10 +344,10 @@ Testing effects of israfel-resplitting:
 unfrozen-fell-fleeing is a test step.   
 
 Initial scheduling of unfrozen-fell-fleeing:
-	compel the action of fell waiting; [TODO: create a "prevent action" or "make everyone wait" phrase instead of compelling waiting?]
+	compel the action of fell waiting; [TODO: see if it works without this line now that npc-suppressing is the default]
 	
 Choosing a player action when testing unfrozen-fell-fleeing:
-	forget the compelled action;
+	forget the compelled action; [TODO: this should be ok to delete too, as above]
 	generate the action of retreating.
 
 initial scheduling of unfrozen-fell-fleeing:
@@ -2777,21 +2777,20 @@ scenario when testing damage-modifiers:
 	now the armadillo is testobject.
 
 damage-modifier-testing is an extracting test step. The first move of damage-modifiers is damage-modifier-testing. The location-target of damage-modifier-testing is the armadillo.
-
-Initial scheduling of damage-modifier-testing:
-	make everyone wait;
 	
 Testing effects of damage-modifier-testing:
 	equip the player with the robe of the dead mage;
-	have the player do no reaction to a 100 melee hit by the armadillo with result "deals";
+	have the player do no reaction to a 100 melee hit by the armadillo with result "deals", checking damage;
 	assert that the event description does not include "\(robe of the dead mage\)<^\n>+ damage";
-	check damage of the player with 1000 health after "deals";
 	repeat with conc-level running from 1 to 4:
 		now the concentration of the player is conc-level;
-		have the player do no reaction to a 100 melee hit by the armadillo with result "\+ [conc-level * 25]% \(robe of the dead mage\)";
+		have the player do no reaction to a 100 melee hit by the armadillo with result "\+ [conc-level * 25]% \(robe of the dead mage\)", checking damage;
 		assert that the concentration of the player is conc-level with label "concentration of the player";
-		check damage of the player with 1000 health after "deals";
 	try taking off the robe of the dead mage;	
+	now the hit protection of the player is 1;
+	have the player do no reaction to a 100 melee hit by the armadillo with result "- 100% \(protection\)", checking damage;
+	equip the player with dragon armour;
+	have the player do no reaction to a 100 melee hit by the armadillo with result "- 2 \(dragon armour\)", checking damage;
 
 armadillo-runner is a test step. 
 
@@ -2803,7 +2802,6 @@ Initial scheduling of armadillo-runner:
 	now the offensive flow of the armadillo is 1;
 	now the concentration of the armadillo is 2;
 	now the tension is 3;
-	make everyone wait.
 
 Choosing a player action when testing armadillo-runner:
 	generate the action of going the way-to-get-back.
@@ -2838,12 +2836,50 @@ Testing effects of radiance-reduction:
 	equip the player with plate mail;
 	have the player do no reaction to a 100 melee hit by the angel of compassion with result "- 2 \(plate mail\)<^\n>+ damage", checking damage;
 	
+heat-damage-testing is a test step.
+
+Initial scheduling of heat-damage-testing:
+	equip the player with dragon armour;
+	now the internal heat of the sword of light is 5;
+	compel the action of the angel of compassion attacking the player;
+	
+Testing effects of heat-damage-testing:
+	if waiting for player reaction, make no decision;
+	assert that the event description includes "\+ 5 \(sword of light is hot\)<^\n>+ damage";
+	assert that the event description includes "- 4 \(dragon armour protects against heat\)<^\n>+ damage";
+	check damage of the player with 1000 health after "deals";
+	now the internal heat of the sword of light is 3;
+	now the heat strength of the sword of light is 3;
+	have the player do no reaction to a 100 melee hit by the angel of compassion with result "- 3 \(dragon armour protects against heat\)";
+	
+	
 
 [Extensions mciul$ grep -irl 'specific damage' .
 ./Victor Gijsbers/Kerkerkruip Actions and UI.i7x - done
 ./Victor Gijsbers/Kerkerkruip ATTACK.i7x - done
-./Victor Gijsbers/Kerkerkruip Items.i7x - did robe of the dead mage
-./Victor Gijsbers/Kerkerkruip Locations.i7x
+./Victor Gijsbers/Kerkerkruip Items.i7x - 
+Victor Gijsbers/Kerkerkruip Items.i7x:A general damage multiplier rule when the hit protection of the victim is greater than 0 (this is the protection damage multiplier rule):
+Victor Gijsbers/Kerkerkruip Items.i7x:An add specific damage rule (this is the sneaking sword damage bonus rule):
+Victor Gijsbers/Kerkerkruip Items.i7x:An add specific damage rule (this is the holy sword damage bonus rule):
+Victor Gijsbers/Kerkerkruip Items.i7x:An add specific damage rule (this is the sword of light damage bonus rule):
+Victor Gijsbers/Kerkerkruip Items.i7x:An add general damage rule (this is the dagger extra tension damage bonus rule):
+Victor Gijsbers/Kerkerkruip Items.i7x:				add n points of general damage with reason "dagger benefits from tension".
+Victor Gijsbers/Kerkerkruip Items.i7x:An add specific damage rule (this is the Giantbane damage bonus rule):
+Victor Gijsbers/Kerkerkruip Items.i7x:An add general damage rule (this is the executioner's axe extra tension damage bonus rule):
+Victor Gijsbers/Kerkerkruip Items.i7x:				add n points of general damage with reason "executioner's axe benefits from tension".
+Victor Gijsbers/Kerkerkruip Items.i7x:An add general damage rule (this is the scythe of slaying deals great damage to undead rule):
+Victor Gijsbers/Kerkerkruip Items.i7x:			add 5 points of general damage with reason "slaying undead".
+Victor Gijsbers/Kerkerkruip Items.i7x:An add specific damage rule (this is the Malleus blood damage bonus rule):
+Victor Gijsbers/Kerkerkruip Items.i7x:An add general damage rule (this is the crossbow extra tension damage bonus rule):
+Victor Gijsbers/Kerkerkruip Items.i7x:				add n points of general damage with reason "crossbow benefits from tension".
+Victor Gijsbers/Kerkerkruip Items.i7x:A general damage multiplier rule when the player has the rod of the master builder (this is the rod of master builder damage multiplier rule):
+Victor Gijsbers/Kerkerkruip Items.i7x:			multiply general damage by 50 percent with reason "rod of the master builder".
+Victor Gijsbers/Kerkerkruip Items.i7x:An add general damage rule (this is the ment damage bonus rule):
+Victor Gijsbers/Kerkerkruip Items.i7x:				add ment bonus points of general damage with reason "ment".
+Victor Gijsbers/Kerkerkruip Items.i7x:A remove general damage rule (this is the ment damage protection rule):
+Victor Gijsbers/Kerkerkruip Items.i7x:			remove ment bonus points of general damage with reason "ment".
+Victor Gijsbers/Kerkerkruip Items.i7x:A remove general damage rule (this is the brightest flame damage reduction rule):
+c./Victor Gijsbers/Kerkerkruip Locations.i7x
 ./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x
 ./Victor Gijsbers/Kerkerkruip Religion.i7x
