@@ -584,6 +584,10 @@ To decide which number is the target cower percentage of (guy - a person):
 	decide on P;
 	
 A test step can be cower-counting.
+
+When play begins:
+	Repeat with event running through cower-counting test steps:
+		now event is npc-enabling.
 	
 initial scheduling for a cower-counting test step:
 	repeat with guy running through cowerer people:
@@ -738,18 +742,23 @@ Section - Healer of Aite Healing
 
 aite-healing is a test set.
 	
-healer-not-healing is a test step. The first move of aite-healing is healer-not-healing.
+healer-not-healing is an npc-enabling test step. The first move of aite-healing is healer-not-healing.
 	
+Table of Outcomes (continued)
+outcome	description	likelihood	minimum attempts
+healer-healing-player	""	0	20
+
 Initial scheduling of healer-not-healing:
 	prepare a test battle with the healer of Aite, inviting groups;
 	Repeat with guy running through people:
 		now the defence of guy is 100;
 	decrease the health of the player by 3;
+	make healer-healing-player possible;
 	
-testing effects of healer-not-healing:
-	Fail based on whether or not the injury of the player is less than 3 within 20 attempts;
+testing combat round of the healer of aite when testing healer-not-healing:
+	fail healer-healing-player based on whether or not the injury of the player is less than 3;
 		
-healer-healing-defender is a test step. The next move of healer-not-healing is healer-healing-defender.
+healer-healing-defender is an npc-enabling test step. The next move of healer-not-healing is healer-healing-defender.
 
 Initial scheduling of healer-healing-defender:
 	decrease the health of the healer of aite by 3;
@@ -758,7 +767,7 @@ Initial scheduling of healer-healing-defender:
 testing effects of healer-healing-defender:
 	succeed based on whether or not the injury of defender of Aite is less than 4 within 20 attempts;
 		
-healer-healing-self is a test step. The next move of healer-healing-defender is healer-healing-self. 
+healer-healing-self is an npc-enabling test step. The next move of healer-healing-defender is healer-healing-self. 
 
 testing effects of healer-healing-self:
 	succeed based on whether or not the injury of healer of Aite is less than 3;

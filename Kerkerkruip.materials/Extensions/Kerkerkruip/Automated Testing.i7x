@@ -591,6 +591,8 @@ To test (event - an outcome) against (T - a text):
 	test event against whether or not the event description matches the regular expression T;
 
 To fail (event - an outcome) based on (result - a truth state):
+	unless we make the event possible, stop;
+	increment attempt count of event;
 	if result is true:
 		assert "[event] happened after [attempt count of the event] attempts, but it should never happen" based on false;
 		now the event is failed;
@@ -615,6 +617,7 @@ To achieve (event - an outcome) based on (result - a truth state):
 		now event is failed;
 		
 To achieve (event - an outcome) on result (T - a text):
+	update the event description;
 	achieve event based on whether or not the event description matches the regular expression T;
 	
 [TODO: combat round tests]
@@ -742,7 +745,6 @@ To select menu question answer (N - a number):
 	now the automated menu question answer is 0;
 
 A Standard AI rule for a person (called P) (this is the compel an action rule):
-	transcribe "compel an action rule";
 	if P is at-Act and the actor part of the compelled action is P:
 		try the compelled action;
 		if the action name part of the compelled action is the attacking action:
@@ -752,7 +754,6 @@ A Standard AI rule for a person (called P) (this is the compel an action rule):
 		rule succeeds;
 
 A Standard AI rule for a person (called P) (this is the suppress actions rule):
-	transcribe "suppress actions rule";
 	if suppress npc action is true:
 		transcribe "suppressed action for [P]";
 		rule succeeds;
@@ -1203,7 +1204,6 @@ To prepare a test battle with (guy - a person), inviting groups:
 			extract the old enemy from combat;
 			remove the old enemy from play;
 	Generate the action of challenging guy in Test Arena;
-	make everyone wait.
 	
 Table of Outcomes (continued)
 outcome	description	likelihood	minimum attempts
