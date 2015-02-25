@@ -658,9 +658,10 @@ For taking a player action (this is the move to the destination of a test step r
 		extract the player to the place;
 		generate the action of waiting;
 		rule succeeds;
-	Let the way be the best route from the location to the place;
-	fail moving towards the destination based on whether or not the way is not a direction;
-	if the way is a direction, generate the action of going the way;
+	Now the way-to-get-there is the best route from the location to the place;
+	Now the way-to-get-back is the opposite of the way-to-get-there;
+	fail moving towards the destination based on whether or not the way-to-get-there is not a direction;
+	if the way-to-get-there is a direction, generate the action of going the way-to-get-there;
 		
 The move to the destination of a test step rule is listed before the test step player action rule in the for taking a player action rulebook.
 

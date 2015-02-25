@@ -976,7 +976,7 @@ A general damage multiplier rule when the victim wears the robe of the dead mage
 			add damage comment "+ 25% (robe of the dead mage)";
 			increase the total damage by the total damage divided by 4;
 		-- 2:
-			add damage comment "+50% (robe of the dead mage)";
+			add damage comment "+ 50% (robe of the dead mage)";
 			increase the total damage by the total damage divided by 2;		
 		-- 3:
 			add damage comment "+ 75% (robe of the dead mage)";

@@ -1099,6 +1099,7 @@ Section - Banshees Gone Wild - bug 248
 banshees gone wild is an test set.
 
 [First every turn: say "Every turn rules run.";]
+[TODO: get rid of "travel sneakily"]
 
 To set the tension to (N - a number):
 	transcribe "Setting tension to [N]";
@@ -2818,14 +2819,33 @@ To decide what number is the calculated value of (T - a text):
 scenario when testing damage-modifiers:
 	now the armadillo is testobject.
 
-damage-modifier-testing is test step. The first move of damage-modifiers is damage-modifier-testing.
+damage-modifier-testing is an extracting test step. The first move of damage-modifiers is damage-modifier-testing. The location-target of damage-modifier-testing is the armadillo.
 
-armadillo-runner is an extracting test step. The location-target of armadillo-runner is the armadillo.
+Initial scheduling of damage-modifier-testing:
+	make everyone wait;
+	
+Testing effects of damage-modifier-testing:
+	equip the player with the robe of the dead mage;
+	have the player do no reaction to a 100 melee hit by the armadillo with result "deals";
+	assert that the event description does not include "\(robe of the dead mage\)<^\n>+ damage";
+	check damage of the player with 1000 health after "deals";
+	repeat with conc-level running from 1 to 4:
+		now the concentration of the player is conc-level;
+		have the player do no reaction to a 100 melee hit by the armadillo with result "\+ [conc-level * 25]% \(robe of the dead mage\)";
+		assert that the concentration of the player is conc-level with label "concentration of the player";
+		check damage of the player with 1000 health after "deals";
+	try taking off the robe of the dead mage;	
+
+armadillo-runner is a test step. 
 
 Initial scheduling of armadillo-runner:
 	now retreat location is the location of the armadillo;
 	now the health of the player is 1000;
 	now the melee of the armadillo is 100;
+	now the inherent damage modifier of the armadillo is 1;
+	now the offensive flow of the armadillo is 1;
+	now the concentration of the armadillo is 2;
+	now the tension is 3;
 	make everyone wait.
 
 Choosing a player action when testing armadillo-runner:
@@ -2849,6 +2869,10 @@ To check damage of (guy - a person) with (previous health - a number) health aft
 
 Testing effects of armadillo-runner:
 	assert that the event description includes "(\n|^)The ravenous armadillo deals <1-9><^\n>* \+ 1 \(you are running\)<^\n>* = (<0-9>+) damage";
+	assert that the event description includes "\+ 1 \(offensive flow\) ";
+	assert that the event description includes "\+ 2 \(concentration\) ";
+	assert that the event description includes "\+ 1 \(tension\) ";
+	assert that the event description includes "\+ 1 \(inherent bonus\) ";
 	check damage of the player with 1000 health after "deals";
 
 [Extensions mciul$ grep -irl 'specific damage' .
