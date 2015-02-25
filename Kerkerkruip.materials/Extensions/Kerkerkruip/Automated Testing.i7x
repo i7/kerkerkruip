@@ -749,9 +749,9 @@ A Standard AI rule for a person (called P) (this is the suppress actions rule):
 		transcribe "suppressed action for [P]";
 		rule succeeds;
 	
-The compel an action rule is listed before the suppress actions rule in the standard AI rulebook.
-
 The suppress actions rule is listed before the insane people attack themselves rule in the standard AI rulebook.
+
+The compel an action rule is listed before the suppress actions rule in the standard AI rulebook.
 
 Last choosing a player reaction:
 	generate the action of waiting.
@@ -1082,6 +1082,87 @@ Definition: a direction (called way) is diggable:
 		otherwise:
 			decide on whether or not item is connectable;
 
+Section - Checking Damage Reports
+
+The expression scan position is a number that varies.
+
+To decide what number is digit (T - a text):
+	Let C be character number 1 in T;
+	Repeat with value running from 0 to 9:
+		if character number (value + 1) in "0123456789" is C:
+			decide on value;
+	decide on -1;
+			
+To decide what number is the number we scan in (T - a text):
+	Let the value be 0;
+	Let digit-encountered be false;
+	while the expression scan position is not greater than the number of characters in T:
+		Let C be character number expression scan position in T;
+		Let the next digit be digit C;
+		if the next digit is not -1:
+			now value is (value * 10) + the next digit;
+			now digit-encountered is true;
+		otherwise:
+			if digit-encountered is true:
+				decide on value;
+		increment the expression scan position;
+	decide on value;	
+	
+To decide what number is the next term in (T - a text) we apply to (N - a number):
+	Let the value be the number we scan in T;
+	if character number expression scan position in T is "%":
+		now the value is (the value * N) / 100;
+		increment the expression scan position;
+	decide on the value.
+	
+To decide what number is the next product in (T - a text) we apply to (N - a number):
+	Let the value be (the number we scan in T) * N;
+	if character number expression scan position in T is "%":
+		now the value is the value / 100;
+		increment the expression scan position;
+	decide on the value.
+	
+To skip parenthetical in (T - a text):
+	while expression scan position is not greater than the number of characters in T:
+		if character number expression scan position in T is ")":
+			break;
+		otherwise:
+			increment expression scan position;
+	assert "All open parentheses in [T] should be closed" based on whether or not the expression scan position is not greater than the number of characters in T;
+	increment expression scan position [past the closing paren].
+	
+To decide what number is the calculated value of (T - a text):
+	now the expression scan position is 0;
+	let the running total be the number we scan in T;
+	let the final total be -1;
+	while the expression scan position is not greater than the number of characters in T:
+		Let the operator be character number expression scan position in T;
+		increment expression scan position;
+		if the operator is "-":
+			decrease the running total by the next term in T we apply to the running total;
+			if the running total is 0, now the running total is 0;
+		otherwise if the operator is "+":
+			increase the running total by the next term in T we apply to the running total;
+		otherwise if the operator is "x":
+			now the running total is the next product in T we apply to the running total;
+		otherwise if the operator is "=":
+			now the final total is the number we scan in T;
+			assert that the running total is the final total with label "calculated damage";
+			assert that (expression scan position - 1) is the number of characters in T with label "number of scanned characters";
+		otherwise if the operator is "(":
+			skip parenthetical in T;
+		otherwise:
+			assert that the operator is " " with label "character between terms";
+	decide on the running total.
+
+To check damage of (guy - a person) with (previous health - a number) health after (preamble - a text):
+	assert that the event description includes "[preamble]\s*(\d*<^\n>+) damage";
+	Let the damage expression be the text matching subexpression 1;
+	Let the value be the calculated value of the damage expression;
+	assert that value is (previous health - health of guy) with label "damage to [guy]"; 
+	[set things up for the next test]
+	now the health of guy is previous health;
+
 Section - Test Arena and Battle Phrases
 
 Test Arena is an arena. The staging area of Test Arena is maze-waiting-room.
@@ -1120,7 +1201,7 @@ Table of Outcomes (continued)
 outcome	description	likelihood	minimum attempts
 combat hit	""	1	1
 
-To test (guy - a person) doing a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit by (aggressor - a person) with result (outcome - a text) in (likelihood - a number) out of (total tries - a number) attempts:
+To test (guy - a person) doing a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit by (aggressor - a person) with result (outcome - a text) in (likelihood - a number) out of (total tries - a number) attempts, checking damage:
 	if combat hit is untested:
 		now the description of combat hit is the substituted form of "[guy] doing [reaction] to [strength] melee hit by [aggressor] with result '[outcome]'";
 		now the melee of the aggressor is strength;
@@ -1137,20 +1218,31 @@ To test (guy - a person) doing a/-- (reaction - a reaction-type) to a/-- (streng
 	update event description because "finish attempt [attempt count of combat hit] -";
 	if report of the reaction is not empty, assert that the event description includes "[report of reaction]";
 	test combat hit against "[outcome]";
+	if combat hit just succeeded and checking damage:
+		check damage of guy with 1000 health after "[aggressor] [deal]";
 	if combat hit is [still] possible:
 		[transcribe re-equipping?]
 		equip guy with original-defender-weapon;
 		equip aggressor with original-attacker-weapon;
 	
-To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit by (aggressor - a person) with result (outcome - a text) in/on (likelihood - a number) out of (total tries - a number) attempts:
+To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit by (aggressor - a person) with result (outcome - a text) in/on (likelihood - a number) out of (total tries - a number) attempts, checking damage:
 	while we haven't reset combat hit after success: 
-		test guy doing reaction to a strength melee hit by aggressor with result outcome in likelihood out of total tries attempts;
+		if checking damage:
+			test guy doing reaction to a strength melee hit by aggressor with result outcome in likelihood out of total tries attempts, checking damage;
+		otherwise:
+			test guy doing reaction to a strength melee hit by aggressor with result outcome in likelihood out of total tries attempts.
 	
-To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit with result (outcome - a text):
-	have guy do a reaction to a strength melee hit by the player with result outcome.
+To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit with result (outcome - a text), checking damage:
+	if checking damage:
+		have guy do a reaction to a strength melee hit by the player with result outcome, checking damage;
+	otherwise:
+		have guy do a reaction to a strength melee hit by the player with result outcome.
 	
-To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit by (aggressor - a person) with result (outcome - a text):
-	have guy do a reaction to a strength melee hit by aggressor with result outcome in 1 out of 1 attempts.
+To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit by (aggressor - a person) with result (outcome - a text), checking damage:
+	if checking damage:
+		have guy do a reaction to a strength melee hit by aggressor with result outcome in 1 out of 1 attempts, checking damage;
+	otherwise:
+		have guy do a reaction to a strength melee hit by aggressor with result outcome in 1 out of 1 attempts.
 		
 To assert that/-- (item - a weapon) readied after (circumstance - a text):
 	assert "[The item] should be readied after [circumstance]" based on whether or not the player holds item and item is readied;

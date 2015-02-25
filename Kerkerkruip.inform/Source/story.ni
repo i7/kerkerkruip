@@ -179,7 +179,7 @@ The menu question rules have outcomes exit (success), retry (failure), menu (fai
 The first menu question rule (this is the invalid menu reply rule):
 	if the player's command matches "help" or the player's command matches "menu" or the player's command matches "hint" or the player's command matches "info":
 		if closed question mode is true and menu question mode is true:
-			menu;		
+			menu;		 
 	if the player's command does not match "[number]":
 		if closed question mode is true:
 			retry;

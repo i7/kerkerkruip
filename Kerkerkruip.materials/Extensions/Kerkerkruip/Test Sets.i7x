@@ -2646,8 +2646,7 @@ Initial scheduling of damage-text testing:
 Testing effects of damage-text testing:
 	Have the reaper do a dodge reaction to a 100 melee hit with result "(\n|^)You deal <1-9><0-9>* damage";
 	now the tension is 3;
-	Have the the reaper do a dodge reaction to a 100 melee hit with result "(\n|^)You deal <1-9><0-9>* \+ 1 \(tension\) = <0-9>+ damage";
-	check damage of the reaper with 1000 health after "You deal";
+	Have the the reaper do a dodge reaction to a 100 melee hit with result "(\n|^)You deal <1-9><0-9>* \+ 1 \(tension\) = <0-9>+ damage", checking damage;
 	clear event description;
 	say Divine lightning strikes the player;
 	assert that the event description includes "(\n|^)A ball of lightning shoots from the sky, doing <3-7> damage to you"; [fails currently, but if it didn't, we might want another test for when the damage was reduced]
@@ -2774,48 +2773,6 @@ Section - Damage Modifiers
 
 damage-modifiers is a test set.
 
-To decide what number is digit (T - a text):
-	Let C be character number 1 in T;
-	Repeat with value running from 0 to 9:
-		if character number (value + 1) in "0123456789" is T:
-			decide on value;
-			
-To decide what number is (T - a text) as a number:
-	Let the sign be 1;
-	Let the value be 0;
-	if T matches the regular expression "\+":
-		replace the regular expression "<^+>*\+" in T with "";
-	if T matches the regular expression "-":
-		replace the regular expression "<^->*-" in T with "";
-		now the sign is -1;
-	while T matches the regular expression "^\D*(\d)":
-		now the value is (value * 10) + digit (text matching subexpression 1);
-		replace the regular expression "^\D*\d" in T with "";
-	decide on the sign * the value;
-	
-To decide what number is the calculated value of (T - a text):
-	unless T matches the regular expression "^\D*(\d+)":
-		decide on 0;
-	Let the value be the text matching subexpression 1 as a number;
-	replace the regular expression "^\D*\d+" in T with "";
-	while T is not empty:
-		if T matches the regular expression "^<^\dx+->*(<+->\s*\d+)%":
-			let the percent be the text matching subexpression 1 as a number;
-			let the factor be 100 + the percent;
-			now the value is (value * factor) / 100;
-			replace the regular expression "^\D*\d+%" in T with "";
-		otherwise if T matches the regular expression "^<^\dx+->*x\s*(\d+)%":
-			let the percent be the text matching subexpression 1 as a number;
-			now the value is (value * percent) / 100;
-			replace the regular expression "^\D*\d+%" in T with "";
-		otherwise if T matches the regular expression "^<^\dx+->*(<+->\s*\d+)":
-			let the term be the text matching subexpression 1 as a number;
-			now the value is value + term;
-			replace the regular expression "^\D*\d+" in T with "";
-		otherwise:
-			break;
-	decide on the value.
-
 scenario when testing damage-modifiers:
 	now the armadillo is testobject.
 
@@ -2851,22 +2808,6 @@ Initial scheduling of armadillo-runner:
 Choosing a player action when testing armadillo-runner:
 	generate the action of going the way-to-get-back.
 	
-To check damage of (guy - a person) with (previous health - a number) health after (preamble - a text):
-	assert that the event description does not include "<0-9> +<0-9>"; [why this?]
-	assert that the event description does not include ".*=<^\n>*=";
-	assert that the event description includes "[preamble]\s*(\d*<^\n>+) damage";
-	Let the damage expression be the text matching subexpression 1;
-	Let the value be 0;
-	if the damage expression matches the regular expression "=\s*(\d*)":
-		now the value is the text matching subexpression 1 as a number;
-		replace the regular expression "=<^\n=>*$" in the damage expression with "";
-		assert that the calculated value of the damage expression is the value with label "calculated value of [the damage expression]";
-	otherwise if the damage expression matches the regular expression "(\d*)":
-		now the value is the text matching subexpression 1 as a number;
-	assert that value is (previous health - health of guy) with label "damage to [guy]"; 
-	[set things up for the next test]
-	now the health of guy is previous health;
-
 Testing effects of armadillo-runner:
 	assert that the event description includes "(\n|^)The ravenous armadillo deals <1-9><^\n>* \+ 1 \(you are running\)<^\n>* = (<0-9>+) damage";
 	assert that the event description includes "\+ 1 \(offensive flow\) ";
@@ -2875,10 +2816,33 @@ Testing effects of armadillo-runner:
 	assert that the event description includes "\+ 1 \(inherent bonus\) ";
 	check damage of the player with 1000 health after "deals";
 
+radiance-reduction is a test step.
+
+Initial scheduling of radiance-reduction:
+	prepare a test battle with the angel of compassion;
+	equip the player with the fuligin cloak;
+	now the melee of the angel of compassion is 100;
+	now the health of the player is 1000;
+	compel the action of the angel of compassion attacking the player;
+	
+Testing effects of radiance-reduction:
+	if waiting for player reaction, make no decision;
+	assert that the event description includes "- 2 \(fuligin cloak\)<^\n>+ damage";
+	check damage of the player with 1000 health after "deals";
+	equip the player with the sandals of the heretic;
+	clear event description;
+	say Divine lightning strikes the player;
+	assert that the event description includes "- 2 \(sandals of the heretic\)<^\n>+ damage";
+	check damage of the player with 1000 health after "A ball of lightning shoots from the sky, doing";
+	try taking off the fuligin cloak;
+	equip the player with plate mail;
+	have the player do no reaction to a 100 melee hit by the angel of compassion with result "- 2 \(plate mail\)<^\n>+ damage", checking damage;
+	
+
 [Extensions mciul$ grep -irl 'specific damage' .
-./Victor Gijsbers/Kerkerkruip Actions and UI.i7x
-./Victor Gijsbers/Kerkerkruip ATTACK.i7x
-./Victor Gijsbers/Kerkerkruip Items.i7x
+./Victor Gijsbers/Kerkerkruip Actions and UI.i7x - done
+./Victor Gijsbers/Kerkerkruip ATTACK.i7x - done
+./Victor Gijsbers/Kerkerkruip Items.i7x - did robe of the dead mage
 ./Victor Gijsbers/Kerkerkruip Locations.i7x
 ./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x
