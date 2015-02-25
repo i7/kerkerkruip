@@ -755,8 +755,11 @@ A Standard AI rule for a person (called P) (this is the compel an action rule):
 
 A Standard AI rule for a person (called P) (this is the suppress actions rule):
 	if suppress npc action is true:
-		transcribe "suppressed action for [P]";
-		rule succeeds;
+		if P is at-react:
+			transcribe "allowing [P] to react";
+		otherwise:
+			transcribe "suppressed action for [P]";
+			rule succeeds;
 	
 The suppress actions rule is listed before the insane people attack themselves rule in the standard AI rulebook.
 
@@ -1008,12 +1011,6 @@ A person has a number called the act count;
 
 [TODO: replace these counters with outcomes?]
 
-A person has a number called the reaction count.
-
-Initial scheduling of a test step:
-	Repeat with guy running through people:
-		now the reaction count of guy is 0;
-		
 The testing combat round rules are an object based rulebook.
 
 A first combat round rule (this is the test combat round of previous main actor rule):
@@ -1022,9 +1019,6 @@ A first combat round rule (this is the test combat round of previous main actor 
 A combat round rule (this is the count combat actions rule):
 	increment the act count of the main actor;
 
-Before an at-react person doing something (this is the count reactions rule):
-	increment the reaction count of the actor;
-	
 The count combat actions rule is listed before the dreadful presence effect rule in the combat round rules.
 	
 Section - The reusable item

@@ -1708,19 +1708,21 @@ Initial scheduling of bodmall-meeting:
 	
 bodmall-bleeding is a test step.   
 
+Table of Outcomes (continued)
+outcome	description	likelihood	minimum attempts
+bodmall-reaction	""	1	100
+
 Choosing a player action when testing bodmall-bleeding:
 	generate the action of attacking bodmall.
 
-Initial scheduling of bodmall-bleeding:
-	now the initiative of Bodmall is -2;
-	
-last initiative update rule when testing bodmall-bleeding:
-	now the initiative of Bodmall is -2;
+Before Bodmall doing something when testing bodmall-bleeding:
+	test bodmall-reaction against whether or not Bodmall is at-react;
 	
 testing effects of bodmall-bleeding:
 	assert "the player should now be bigger than medium, but [regarding the player][they] [are] [size of the player]" based on whether or not the size of the player is greater than medium;
-	assert "bodmall should have reacted exactly once, but she reacted [reaction count of bodmall] times" based on whether or not the reaction count of Bodmall is 1;
+	assert that the success count of bodmall-reaction is 1 with label "number of times Bodmall reacted";
 	assert "bodmall should be at-inactive, but she is [combat state of bodmall]" based on whether or not bodmall is at-inactive;
+	now bodmall-reaction is untested;
 
 Section - Maze Moving
 
@@ -1920,7 +1922,7 @@ Scenario when testing bug-280:
 	now the reusable item is a random morphean grenade;
 	now the vast staircase is bannedobject.
 	
-reaper-seeking is a hidden-traveling extracting hiding-reveal test step. The  first move of bug-280 is reaper-seeking. The location-target of reaper-seeking is the reaper.
+reaper-seeking is an extracting test step. The  first move of bug-280 is reaper-seeking. The location-target of reaper-seeking is the reaper.
 
 Initial scheduling of reaper-seeking:
 	assert "Lair of the imp should be placed" based on whether or not lair of the imp is placed;
@@ -1931,7 +1933,7 @@ Initial scheduling of reaper-seeking:
 Testing effects of reaper-seeking:
 	assert "the combat status should not be peace" based on whether or not the combat status is not peace;
 
-imp-dreaming is an item-throwing test step.
+imp-dreaming is an npc-enabling item-throwing test step.
 
 Testing effects of imp-dreaming:
 	assert that the location is garden of thorns;
@@ -1941,15 +1943,15 @@ Testing effects of imp-dreaming:
 	assert "we should be with the reaper in [location of the reaper] but we are in [the location]" based on whether or not the location is the location of the reaper;
 	assert "the combat status should not be peace" based on whether or not the combat status is not peace;
 	
-imp-appearing is a test step.
+imp-appearing is an npc-enabling test step.
 
 Testing effects of imp-appearing:
 	succeed based on whether or not the location of the imp is the location:
 		
 imp-thieving is a test step.
 
-Testing effects of imp-thieving:
-	succeed on result "The imp grabs the package of ment with its thieving little claws";
+Initial scheduling of imp-thieving:
+	compel the action of the imp imp-grabbing.
 			
 imp-vanishing is a test step.   
 
@@ -1959,7 +1961,7 @@ Choosing a player action when testing imp-vanishing:
 Testing effects of imp-vanishing:
 	succeed based on whether or not the location of the imp is lair of the imp;
 		
-imp-stashing is a test step.
+imp-stashing is an npc-enabling test step.
 
 Testing effects of imp-stashing:
 	succeed based on whether or not a package of ment is in the lair of the imp within 2 attempts;
