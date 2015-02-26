@@ -564,10 +564,10 @@ To test (event - an outcome) against (success - a truth state):
 	[TODO: print a period to show progress]
 	unless we make the event possible, stop;
 	let percent-tolerance be 5; [a constant - do we want it to be a property?]
-	increment attempt count of the event;
 	if likelihood of the event is 0:
 		fail event based on success;
 	otherwise:
+		increment attempt count of the event;
 		if success is true:
 			now the last successful outcome is the event;
 			increment success count of the event;

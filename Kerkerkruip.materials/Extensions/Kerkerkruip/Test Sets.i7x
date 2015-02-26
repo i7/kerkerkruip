@@ -2804,6 +2804,11 @@ Testing effects of damage-modifier-testing:
 	have the player do no reaction to a 100 melee hit by the armadillo with result "- 100% \(protection\)", checking damage;
 	equip the player with dragon armour;
 	have the player do no reaction to a 100 melee hit by the armadillo with result "- 2 \(dragon armour\)" in 1 out of 3 attempts, checking damage;
+	equip the player with the executioner's axe;
+	now the tension is 2;
+	have the armadillo do no reaction to a 100 melee hit by the player with result "executioner's axe benefits from tension<^\n>+ damage" in 0 out of 1 attempts, checking damage;
+	now the tension is 3;
+	have the armadillo do no reaction to a 100 melee hit by the player with result "\+ 1 \(executioner's axe benefits from tension\)<^\n>+ damage";
 	equip the player with giantbane;
 	now the tension is 3;
 	have the armadillo do no reaction to a 100 melee hit by the player with result "dagger benefits from tension<^\n>+ damage" in 0 out of 1 attempts, checking damage;
@@ -2906,9 +2911,6 @@ Testing effects of holy-damage:
 ./Victor Gijsbers/Kerkerkruip Actions and UI.i7x - done
 ./Victor Gijsbers/Kerkerkruip ATTACK.i7x - done
 ./Victor Gijsbers/Kerkerkruip Items.i7x - 
-Victor Gijsbers/Kerkerkruip Items.i7x:An add specific damage rule (this is the Giantbane damage bonus rule):
-Victor Gijsbers/Kerkerkruip Items.i7x:An add general damage rule (this is the executioner's axe extra tension damage bonus rule):
-Victor Gijsbers/Kerkerkruip Items.i7x:				add n points of general damage with reason "executioner's axe benefits from tension".
 Victor Gijsbers/Kerkerkruip Items.i7x:An add general damage rule (this is the scythe of slaying deals great damage to undead rule):
 Victor Gijsbers/Kerkerkruip Items.i7x:			add 5 points of general damage with reason "slaying undead".
 Victor Gijsbers/Kerkerkruip Items.i7x:An add specific damage rule (this is the Malleus blood damage bonus rule):
