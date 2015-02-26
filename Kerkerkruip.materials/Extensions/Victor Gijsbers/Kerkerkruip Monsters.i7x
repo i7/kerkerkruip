@@ -5212,33 +5212,108 @@ Animation-used is a truth state that varies. Animation-used is false.
 
 The power of Automatos is a power. Automatos grants power of Automatos.
 The power level of power of Automatos is 4.
-The command text of power of Automatos is "[if animation-used is false]animate[end if]".
-The description of power of Automatos is "Type: active ability.[paragraph break]Command: link [italic type]someone[roman type].[paragraph break]The 'link' command will link your spirit to that of another person. Until you link to someone else, you will benefit from the concentration of the person you linked to just as if it were your own. Every turn, the link has a 10% probability of unravelling; but this probability is decreased by 1% for every 3 points of spirit you have, to a minimum of 1% at 27 spirit.[paragraph break]Command: reform.[paragraph break]You immediately heal for an amount of damage equal to your spirit score. However, your spirit score permanently drops by 5 points."
+The command text of power of Automatos is "[if animation-used is false]bind[end if]".
+The description of power of Automatos is "Type: active ability.[paragraph break]Command: bind [italic type]someone[roman type].[paragraph break]The 'bind' command will lock someone into a behavioural pattern consisting of one or two actions. The binding lasts for your mind / 2 turns."
 The power-name of power of Automatos is "power of Automatos".
 
 Table of Enemy Powers (continued)
 power	faculty1	faculty2
-power of Automatos	mind	spirit
+power of Automatos	mind	--
 
 Absorbing power of Automatos:
 	increase melee of the player by 4;
 	increase defence of the player by 4;
 	increase permanent health of the player by 20;
-	say "As Automatos dies, you feel its soul absorbed into your own body. ([bold type]Power of Automatos[roman type]: +4 attack, +4 defence, +20 health, and you can [italic type]animate[roman type] a single weapon to serve you in combat.[paragraph break]".
+	say "As Automatos dies, you feel its soul absorbed into your own body. ([bold type]Power of Automatos[roman type]: +4 attack, +4 defence, +20 health, and you can [italic type]bind[roman type] your enemies into a rigid behavioural pattern.[paragraph break]".
 
 Repelling power of Automatos:
 	decrease melee of the player by 4;
 	decrease defence of the player by 4;
 	decrease permanent health of the player by 20;
-	remove animated weapon from play.
+	repeat with guy running through bound people:
+		now guy is not bound.
 
 Status skill rule (this is the Automatos status skill rule):
 	if power of Automatos is granted:
-		say "You have the power of Automatos, which allows you to [bold type]animate[roman type] a single weapon. [italic type](Level 4)[roman type][line break][run paragraph on]".
+		say "You have the power of Automatos, which allows you to [bold type]bind[roman type] enemies into a behavioural pattern. [italic type](Level 4)[roman type][line break][run paragraph on]".
 
-Section - Animated weapon
+Section - Binding
 
-Animated weapon is a friendly person.
+A person can be bound or not bound. A person is usually not bound.
+A person has a list of numbers called the binding-list.
+A person has a number called the binding index. [Counts the number of times a person has performed a bound action.]
+A person has a truth state called just-acted-bound.
+
+To bind (guy - a person):
+	now binding-list of guy is {};
+	let n be a random number between 1 and 2;
+	while n is greater than 0:
+		decrease n by 1;
+		add a random number between 0 and 2 to binding-list of guy;
+	now guy is bound;
+	now just-acted-bound of guy is false.
+
+The bound AI rules are a person based rulebook.
+
+The do nothing when all enemies hidden rule is listed in the bound AI rules.
+The reset AI variables rule is listed in the bound AI rules.
+The reactors target the main actor rule is listed in the bound AI rules.
+The select a target rule is listed in the bound AI rules.
+[The compel an action rule is listed in the Automatos AI rules. ][TO DO: check whether this makes sense.]
+The insane people attack themselves rule is listed in the bound AI rules.
+The select a weapon rule is listed in the bound AI rules.
+
+First standard AI rule for a bound person (called P) (this is the bound persons rule):
+	follow the bound AI rules for P;
+	rule succeeds.
+
+Last bound AI rule for a person (called guy) (this is the make bound people act rule):
+	now just-acted-bound of guy is true;
+	increase binding index of guy by 1;
+	let n be entry 1 of binding-list of guy;
+	rotate binding-list of guy backwards;
+	if n is 0:
+		if guy is at-React:
+			try guy lashing;
+		otherwise:
+			try guy attacking the chosen target;
+	if n is 1:
+		try guy concentrating;
+	if n is 2:
+		if guy is at-React:
+			try guy dodging;
+		otherwise:
+			say "[The guy] suddenly [jump] aside, dodging a non-existent attack.".
+
+Every turn (this is the potentially release bound people rule):
+	let n be 0;
+	repeat with guy running through bound people in the location:
+		if just-acted-bound of guy is true:
+			now n is (binding index) of guy times 2;
+			if n is greater than final mind of the player:
+				say "[The guy] [bold type]breaks free[roman type] of [our] mental bondage!";
+				now guy is not bound.
+						
+Binding is an action applying to one thing. Understand "bind [thing]" as binding.
+
+[Check binding:
+	if the power of Automatos is not granted:
+		take no time;
+		say "You do not possess that power." instead.]
+
+Check binding:
+	if the noun is not a person:
+		take no time;
+		say "You can only bind people." instead.
+
+Check binding:
+	if the noun is the player:
+		take no time;
+		say "You cannot bind yourself." instead.
+		
+Carry out binding:
+	say "You focus your will on [the noun], envisioning cogwheels and chains. [Possessive] actions will now be bound into a rigid, robotic pattern!";
+	bind the noun.
 
 
 
