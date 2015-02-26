@@ -2803,7 +2803,7 @@ Testing effects of damage-modifier-testing:
 	now the hit protection of the player is 1;
 	have the player do no reaction to a 100 melee hit by the armadillo with result "- 100% \(protection\)", checking damage;
 	equip the player with dragon armour;
-	have the player do no reaction to a 100 melee hit by the armadillo with result "- 2 \(dragon armour\)", checking damage;
+	have the player do no reaction to a 100 melee hit by the armadillo with result "- 2 \(dragon armour\)" in 1 out of 3 attempts, checking damage;
 
 armadillo-runner is a test step. 
 
@@ -2838,8 +2838,14 @@ Initial scheduling of radiance-reduction:
 	
 Testing effects of radiance-reduction:
 	if waiting for player reaction, make no decision;
+	assert that the event description includes "\+ 4 \(sword of light radiance bonus\)";
 	assert that the event description includes "- 2 \(fuligin cloak\)<^\n>+ damage";
 	check damage of the player with 1000 health after "deals";
+	now the sword of light is iron;
+	have the player do no reaction to a 100 melee hit by the angel of compassion with result "sword of light radiance bonus" in 0 out of 1 attempts, checking damage;
+	now the sword of light is radiance;
+	now the radiation of the angel of compassion is 0;
+	have the player do no reaction to a 100 melee hit by the angel of compassion with result "sword of light radiance bonus" in 0 out of 1 attempts, checking damage;
 	equip the player with the sandals of the heretic;
 	clear event description;
 	say Divine lightning strikes the player;
@@ -2849,6 +2855,7 @@ Testing effects of radiance-reduction:
 	force the fuligin cloak to work;
 	have the angel of compassion do no reaction to a 100 melee hit with result "\+ 1 \(sneaky attack\)<^\n>+ damage", checking damage;
 	try taking off the fuligin cloak;
+	now the radiation of the angel of compassion is 2;
 	equip the player with plate mail;
 	have the player do no reaction to a 100 melee hit by the angel of compassion with result "- 2 \(plate mail\)<^\n>+ damage", checking damage;
 	
@@ -2866,16 +2873,26 @@ Testing effects of heat-damage-testing:
 	check damage of the player with 1000 health after "deals";
 	now the internal heat of the sword of light is 3;
 	now the heat strength of the sword of light is 3;
-	have the player do no reaction to a 100 melee hit by the angel of compassion with result "- 3 \(dragon armour protects against heat\)";
+	have the player do no reaction to a 100 melee hit by the angel of compassion with result "- 2 \(dragon armour\)" in 1 out of 3 attempts, checking damage;
+	assert that the event description includes "- 3 \(dragon armour protects against heat\)";
 	
+holy-damage is a test step.
+
+Initial scheduling of holy-damage:
+	prepare a test battle with the healer of Aite;
+	revive the rotting corpse in the location;
+	revive the smoke demon in the location;
 	
+Testing effects of holy-damage:
+	Now the spirit score of the healer of Aite is 9;
+	have the rotting corpse do no reaction to a 100 melee hit by the healer of Aite with result "\+ 2 \(holiness\)", checking damage;
+	have the smoke demon do no reaction to a 100 melee hit by the healer of Aite with result "\+ 2 \(holiness\)", checking damage;
+	have the player do no reaction to a 100 melee hit by the healer of Aite with result "\+ 2 \(holiness\)" in 0 out of 1 attempts, checking damage;
 
 [Extensions mciul$ grep -irl 'specific damage' .
 ./Victor Gijsbers/Kerkerkruip Actions and UI.i7x - done
 ./Victor Gijsbers/Kerkerkruip ATTACK.i7x - done
 ./Victor Gijsbers/Kerkerkruip Items.i7x - 
-Victor Gijsbers/Kerkerkruip Items.i7x:An add specific damage rule (this is the sneaking sword damage bonus rule):
-Victor Gijsbers/Kerkerkruip Items.i7x:An add specific damage rule (this is the holy sword damage bonus rule):
 Victor Gijsbers/Kerkerkruip Items.i7x:An add specific damage rule (this is the sword of light damage bonus rule):
 Victor Gijsbers/Kerkerkruip Items.i7x:An add general damage rule (this is the dagger extra tension damage bonus rule):
 Victor Gijsbers/Kerkerkruip Items.i7x:				add n points of general damage with reason "dagger benefits from tension".
