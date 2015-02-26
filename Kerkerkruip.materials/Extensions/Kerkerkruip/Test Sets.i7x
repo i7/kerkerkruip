@@ -2804,11 +2804,14 @@ Testing effects of damage-modifier-testing:
 	have the player do no reaction to a 100 melee hit by the armadillo with result "- 100% \(protection\)", checking damage;
 	equip the player with dragon armour;
 	have the player do no reaction to a 100 melee hit by the armadillo with result "- 2 \(dragon armour\)" in 1 out of 3 attempts, checking damage;
-	equip the player with the gorgeous dagger;
+	equip the player with giantbane;
 	now the tension is 3;
 	have the armadillo do no reaction to a 100 melee hit by the player with result "dagger benefits from tension<^\n>+ damage" in 0 out of 1 attempts, checking damage;
+	assert that the event description does not include "Giantbane's special<^\n>+ damage";
 	now the tension is 4;
+	now the armadillo is large;
 	have the armadillo do no reaction to a 100 melee hit by the player with result "\+ 1 \(dagger benefits from tension\)", checking damage;
+	assert that the event description includes "\+ 3 \(Giantbane's special\)<^\n>+ damage";
 
 armadillo-runner is a test step. 
 
@@ -2903,8 +2906,6 @@ Testing effects of holy-damage:
 ./Victor Gijsbers/Kerkerkruip Actions and UI.i7x - done
 ./Victor Gijsbers/Kerkerkruip ATTACK.i7x - done
 ./Victor Gijsbers/Kerkerkruip Items.i7x - 
-Victor Gijsbers/Kerkerkruip Items.i7x:An add general damage rule (this is the dagger extra tension damage bonus rule):
-Victor Gijsbers/Kerkerkruip Items.i7x:				add n points of general damage with reason "dagger benefits from tension".
 Victor Gijsbers/Kerkerkruip Items.i7x:An add specific damage rule (this is the Giantbane damage bonus rule):
 Victor Gijsbers/Kerkerkruip Items.i7x:An add general damage rule (this is the executioner's axe extra tension damage bonus rule):
 Victor Gijsbers/Kerkerkruip Items.i7x:				add n points of general damage with reason "executioner's axe benefits from tension".
