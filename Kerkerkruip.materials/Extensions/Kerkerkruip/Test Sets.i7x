@@ -2851,6 +2851,9 @@ Testing effects of damage-modifier-testing:
 	have the player do no reaction to a 100 melee hit by the armadillo with result "- \d+ \(brightest flame\)<^\n>+ damage", checking damage;
 	assert that the total damage is 0 with label "total damage with brightest flame";
 	now the brightest-flame-counter is 0;
+	now the armadillo is insane;
+	have the player do no reaction to a 100 melee hit by the armadillo with result "\+ 10 \(insane burst of strength\)" in 1 out of 8 attempts, checking damage;
+	now the armadillo is hostile;
 
 armadillo-runner is a test step. 
 
@@ -2862,6 +2865,8 @@ Initial scheduling of armadillo-runner:
 	now the inherent damage modifier of the armadillo is 1;
 	now the offensive flow of the armadillo is 1;
 	now the concentration of the armadillo is 2;
+	now the innate bloodlust of the armadillo is 1;
+	now the armadillo is bloodlusting;
 	now the tension is 3;
 
 Choosing a player action when testing armadillo-runner:
@@ -2873,6 +2878,7 @@ Testing effects of armadillo-runner:
 	assert that the event description includes "\+ 2 \(concentration\) ";
 	assert that the event description includes "\+ 1 \(tension\) ";
 	assert that the event description includes "\+ 1 \(inherent bonus\) ";
+	assert that the event description includes "\+ 1 \(bloodlust\)";
 	assert that the event description includes "x 50% \(rod of the master builder\) ";
 	check damage of the player with 1000 health after "deals";
 
@@ -2980,8 +2986,6 @@ Testing effects of ment-damage:
 ./Victor Gijsbers/Kerkerkruip Actions and UI.i7x - done
 ./Victor Gijsbers/Kerkerkruip ATTACK.i7x - done
 ./Victor Gijsbers/Kerkerkruip Items.i7x - done
-./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x:A before damage rule (this is the undead immune to necromantic damage rule):
-./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x:A remove specific damage rule (this is the deathly-resistant rule):
 ./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x:An add specific damage rule (this is the bloodlusting damage bonus rule):
 ./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x:An add specific damage rule (this is the insane people sometimes get insane damage bonus rule):
 ./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x:An add specific damage rule (this is the asleep damage bonus rule):
