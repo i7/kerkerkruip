@@ -2804,6 +2804,11 @@ Testing effects of damage-modifier-testing:
 	have the player do no reaction to a 100 melee hit by the armadillo with result "- 100% \(protection\)", checking damage;
 	equip the player with dragon armour;
 	have the player do no reaction to a 100 melee hit by the armadillo with result "- 2 \(dragon armour\)" in 1 out of 3 attempts, checking damage;
+	equip the player with the gorgeous dagger;
+	now the tension is 3;
+	have the armadillo do no reaction to a 100 melee hit by the player with result "dagger benefits from tension<^\n>+ damage" in 0 out of 1 attempts, checking damage;
+	now the tension is 4;
+	have the armadillo do no reaction to a 100 melee hit by the player with result "\+ 1 \(dagger benefits from tension\)", checking damage;
 
 armadillo-runner is a test step. 
 
