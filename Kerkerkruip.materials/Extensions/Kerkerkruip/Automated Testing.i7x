@@ -855,8 +855,11 @@ To assert that the event description does not include (pattern - an indexed text
 		now error_msg is "Regular expression '[pattern]' should not have been found in the text:[paragraph break]'[the event description]'[line break]";
 		record a failure report of error_msg;
 
+To assert that (N - a number) is between (A - a number) and (B - a number) with label (L - a text):
+	assert "[L] [N] is not between [A] and [B]" based on whether or not N is at least A and N is at most B;
+	
 To assert that (N - a number) is between (A - a number) and (B - a number):
-	assert "[N] is not between [A] and [B]" based on whether or not N is at least A and N is at most B;
+	assert that N is between A and B with label "value";
 	
 To assert that (item - a thing) is in (place - an object):
 	Let msg be indexed text;
@@ -1111,20 +1114,31 @@ To decide what number is the number we scan in (T - a text):
 		increment the expression scan position;
 	decide on value;	
 	
+To decide what number is approximately (P - a number) percent of (N - a number):
+	Let the rounded-down value be (N * P) / 100;
+	Let the rounded-up value be (N + the test-round-error) * P;
+	Let the rounded-up remainder be the remainder after dividing the rounded-up value by 100;
+	now the rounded-up value is the rounded-up value / 100;
+	now the test-round-error is (the rounded-up value - the rounded-down value);
+	if the rounded-up remainder is at least 1:
+		increase the test-round-error by 1;
+	decide on the rounded-down value.
+	
 To decide what number is the next term in (T - a text) we apply to (N - a number):
 	Let the value be the number we scan in T;
 	if character number expression scan position in T is "%":
-		now the value is (the value * N) / 100;
+		now the value is approximately (the value) percent of N;
 		increment the expression scan position;
 	decide on the value.
 	
 To decide what number is the next product in (T - a text) we apply to (N - a number):
-	Let the value be (the number we scan in T) * N;
+	Let the factor be (the number we scan in T);
 	if character number expression scan position in T is "%":
-		now the value is the value / 100;
 		increment the expression scan position;
-	decide on the value.
-	
+	otherwise:
+		now the factor is the factor * 100;
+	decide on approximately (the factor) percent of N;
+		
 To skip parenthetical in (T - a text):
 	while expression scan position is not greater than the number of characters in T:
 		if character number expression scan position in T is ")":
@@ -1134,8 +1148,11 @@ To skip parenthetical in (T - a text):
 	assert "All open parentheses in [T] should be closed" based on whether or not the expression scan position is not greater than the number of characters in T;
 	increment expression scan position [past the closing paren].
 	
+The test-round-error is a number that varies;
+
 To decide what number is the calculated value of (T - a text):
 	now the expression scan position is 0;
+	now the test-round-error is 0;
 	let the running total be the number we scan in T;
 	let the final total be -1;
 	while the expression scan position is not greater than the number of characters in T:
@@ -1150,19 +1167,22 @@ To decide what number is the calculated value of (T - a text):
 			now the running total is the next product in T we apply to the running total;
 		otherwise if the operator is "=":
 			now the final total is the number we scan in T;
-			assert that the running total is the final total with label "calculated damage";
+			assert that the final total is between running total and (running total + test-round-error) with label "final damage";
 			assert that (expression scan position - 1) is the number of characters in T with label "number of scanned characters";
 		otherwise if the operator is "(":
 			skip parenthetical in T;
 		otherwise:
 			assert that the operator is " " with label "character between terms";
-	decide on the running total.
+	if the final total is -1:
+		decide on the running total;
+	otherwise:
+		decide on the final total.
 
 To check damage of (guy - a person) with (previous health - a number) health after (preamble - a text):
 	assert that the event description includes "[preamble]\s*(\d*<^\n>+) damage";
 	Let the damage expression be the text matching subexpression 1;
 	Let the value be the calculated value of the damage expression;
-	assert that value is (previous health - health of guy) with label "damage to [guy]"; 
+	assert that (previous health - health of guy) is value with label "damage to [guy]"; 
 	[set things up for the next test]
 	now the health of guy is previous health;
 

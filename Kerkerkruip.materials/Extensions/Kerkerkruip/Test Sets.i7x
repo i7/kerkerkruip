@@ -2791,6 +2791,13 @@ scenario when testing damage-modifiers:
 
 damage-modifier-testing is an extracting test step. The first move of damage-modifiers is damage-modifier-testing. The location-target of damage-modifier-testing is the armadillo.
 	
+Definition: a room is precarious if it is Bridge of Doom or it is the Vast Staircase.
+
+Initial scheduling of damage-modifier-testing:
+	Let the place be the location of the armadillo;
+	if the place is a precarious room:
+		swap the occupants of the place and a random not precarious habitable placed room.
+	
 Testing effects of damage-modifier-testing:
 	equip the player with the robe of the dead mage;
 	have the player do no reaction to a 100 melee hit by the armadillo with result "deals", checking damage;
@@ -2808,7 +2815,12 @@ Testing effects of damage-modifier-testing:
 	now the tension is 2;
 	have the armadillo do no reaction to a 100 melee hit by the player with result "executioner's axe benefits from tension<^\n>+ damage" in 0 out of 1 attempts, checking damage;
 	now the tension is 3;
-	have the armadillo do no reaction to a 100 melee hit by the player with result "\+ 1 \(executioner's axe benefits from tension\)<^\n>+ damage";
+	have the armadillo do no reaction to a 100 melee hit by the player with result "\+ 1 \(executioner's axe benefits from tension\)<^\n>+ damage", checking damage;
+	equip the player with Malleus Maleficarum;
+	now the blood magic level of Malleus Maleficarum is 1;
+	now the tension is 10;
+	have the armadillo do no reaction to a 100 melee hit by the player with result "\+ 1 \(Malleus Maleficarum blood bonus\)<^\n>+ damage", checking damage;
+	assert that the event description does not include "tension<^\n>+ damage";
 	equip the player with giantbane;
 	now the tension is 3;
 	have the armadillo do no reaction to a 100 melee hit by the player with result "dagger benefits from tension<^\n>+ damage" in 0 out of 1 attempts, checking damage;
@@ -2898,21 +2910,24 @@ holy-damage is a test step.
 
 Initial scheduling of holy-damage:
 	prepare a test battle with the healer of Aite;
+	revive the reaper in the location;
+	equip the reaper with the scythe of slaying;
 	revive the rotting corpse in the location;
 	revive the smoke demon in the location;
 	
 Testing effects of holy-damage:
 	Now the spirit score of the healer of Aite is 9;
-	have the rotting corpse do no reaction to a 100 melee hit by the healer of Aite with result "\+ 2 \(holiness\)", checking damage;
-	have the smoke demon do no reaction to a 100 melee hit by the healer of Aite with result "\+ 2 \(holiness\)", checking damage;
+	have the rotting corpse do no reaction to a 100 melee hit by the healer of Aite with result "\+ 2 \(holiness\)<^\n>+ damage", checking damage;
+	have the smoke demon do no reaction to a 100 melee hit by the healer of Aite with result "\+ 2 \(holiness\)<^\n>+ damage", checking damage;
 	have the player do no reaction to a 100 melee hit by the healer of Aite with result "\+ 2 \(holiness\)" in 0 out of 1 attempts, checking damage;
+	have the rotting corpse do no reaction to a 100 melee hit by the reaper with result "\+ 5 \(slaying undead\)<^\n>+ damage", checking damage;
+	have the smoke demon do no reaction to a 100 melee hit by the reaper with result "\+ 5 \(slaying undead\)<^\n>+ damage" in 0 out of 1 attempts, checking damage;
+
 
 [Extensions mciul$ grep -irl 'specific damage' .
 ./Victor Gijsbers/Kerkerkruip Actions and UI.i7x - done
 ./Victor Gijsbers/Kerkerkruip ATTACK.i7x - done
 ./Victor Gijsbers/Kerkerkruip Items.i7x - 
-Victor Gijsbers/Kerkerkruip Items.i7x:An add general damage rule (this is the scythe of slaying deals great damage to undead rule):
-Victor Gijsbers/Kerkerkruip Items.i7x:			add 5 points of general damage with reason "slaying undead".
 Victor Gijsbers/Kerkerkruip Items.i7x:An add specific damage rule (this is the Malleus blood damage bonus rule):
 Victor Gijsbers/Kerkerkruip Items.i7x:An add general damage rule (this is the crossbow extra tension damage bonus rule):
 Victor Gijsbers/Kerkerkruip Items.i7x:				add n points of general damage with reason "crossbow benefits from tension".
