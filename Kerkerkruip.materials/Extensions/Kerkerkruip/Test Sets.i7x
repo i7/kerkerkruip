@@ -2821,6 +2821,12 @@ Testing effects of damage-modifier-testing:
 	now the tension is 10;
 	have the armadillo do no reaction to a 100 melee hit by the player with result "\+ 1 \(Malleus Maleficarum blood bonus\)<^\n>+ damage", checking damage;
 	assert that the event description does not include "tension<^\n>+ damage";
+	equip the player with the Yahvinnian crossbow;
+	now the tension is 1;
+	have the armadillo do no reaction to a 100 melee hit by the player with result "crossbow benefits from tension<^\n>+ damage" in 0 out of 1 attempts, checking damage;
+	now the current shots of the Yahvinnian crossbow is 1;
+	now the tension is 2;
+	have the armadillo do no reaction to a 100 melee hit by the player with result "\+ 1 \(crossbow benefits from tension\)<^\n>+ damage", checking damage;
 	equip the player with giantbane;
 	now the tension is 3;
 	have the armadillo do no reaction to a 100 melee hit by the player with result "dagger benefits from tension<^\n>+ damage" in 0 out of 1 attempts, checking damage;
@@ -2833,6 +2839,7 @@ Testing effects of damage-modifier-testing:
 armadillo-runner is a test step. 
 
 Initial scheduling of armadillo-runner:
+	now the player carries the rod of the master builder;
 	now retreat location is the location of the armadillo;
 	now the health of the player is 1000;
 	now the melee of the armadillo is 100;
@@ -2850,6 +2857,7 @@ Testing effects of armadillo-runner:
 	assert that the event description includes "\+ 2 \(concentration\) ";
 	assert that the event description includes "\+ 1 \(tension\) ";
 	assert that the event description includes "\+ 1 \(inherent bonus\) ";
+	assert that the event description includes "x 50% \(rod of the master builder\) ";
 	check damage of the player with 1000 health after "deals";
 
 radiance-reduction is a test step.
@@ -2928,9 +2936,6 @@ Testing effects of holy-damage:
 ./Victor Gijsbers/Kerkerkruip Actions and UI.i7x - done
 ./Victor Gijsbers/Kerkerkruip ATTACK.i7x - done
 ./Victor Gijsbers/Kerkerkruip Items.i7x - 
-Victor Gijsbers/Kerkerkruip Items.i7x:An add specific damage rule (this is the Malleus blood damage bonus rule):
-Victor Gijsbers/Kerkerkruip Items.i7x:An add general damage rule (this is the crossbow extra tension damage bonus rule):
-Victor Gijsbers/Kerkerkruip Items.i7x:				add n points of general damage with reason "crossbow benefits from tension".
 Victor Gijsbers/Kerkerkruip Items.i7x:A general damage multiplier rule when the player has the rod of the master builder (this is the rod of master builder damage multiplier rule):
 Victor Gijsbers/Kerkerkruip Items.i7x:			multiply general damage by 50 percent with reason "rod of the master builder".
 Victor Gijsbers/Kerkerkruip Items.i7x:An add general damage rule (this is the ment damage bonus rule):
