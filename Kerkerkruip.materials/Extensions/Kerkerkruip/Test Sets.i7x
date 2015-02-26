@@ -2646,6 +2646,8 @@ Section - Damage Text
 
 damage-text is a test set.
 
+[Test every instance of the "inflict" phrase. If you add an invocation, please consider adding a test here.]
+
 Scenario when testing damage-text:
 	now Vast Staircase is testobject;
 
@@ -2786,6 +2788,17 @@ Section - Damage Modifiers
 
 damage-modifiers is a test set.
 
+[Test every rule in the following rulebooks:
+	
+add specific damage
+remove specific damage
+specific damage multiplier
+add general damage
+remove general damage
+general damage multiplier
+
+If you add any rules, please consider adding a test here]
+
 scenario when testing damage-modifiers:
 	now the armadillo is testobject.
 
@@ -2835,6 +2848,10 @@ Testing effects of damage-modifier-testing:
 	now the armadillo is large;
 	have the armadillo do no reaction to a 100 melee hit by the player with result "\+ 1 \(dagger benefits from tension\)", checking damage;
 	assert that the event description includes "\+ 3 \(Giantbane's special\)<^\n>+ damage";
+	now the brightest-flame-counter is 1;
+	have the player do no reaction to a 100 melee hit by the armadillo with result "- \d+ \(brightest flame\)<^\n>+ damage", checking damage;
+	assert that the total damage is 0 with label "total damage with brightest flame";
+	now the brightest-flame-counter is 0;
 
 armadillo-runner is a test step. 
 
@@ -2931,17 +2948,17 @@ Testing effects of holy-damage:
 	have the rotting corpse do no reaction to a 100 melee hit by the reaper with result "\+ 5 \(slaying undead\)<^\n>+ damage", checking damage;
 	have the smoke demon do no reaction to a 100 melee hit by the reaper with result "\+ 5 \(slaying undead\)<^\n>+ damage" in 0 out of 1 attempts, checking damage;
 
+ment-damage is a test step.
+
+Testing effects of ment-damage:
+	have the ment kick in;
+	have the healer of Aite do no reaction to a 100 melee hit by the player with result "\+ 1 \(ment\)<^\n>+ damage", checking damage;
+	have the player do no reaction to a 100 melee hit by the healer of Aite with result "- 1 \(ment\)<^\n>+ damage", checking damage;
 
 [Extensions mciul$ grep -irl 'specific damage' .
 ./Victor Gijsbers/Kerkerkruip Actions and UI.i7x - done
 ./Victor Gijsbers/Kerkerkruip ATTACK.i7x - done
 ./Victor Gijsbers/Kerkerkruip Items.i7x - 
-Victor Gijsbers/Kerkerkruip Items.i7x:A general damage multiplier rule when the player has the rod of the master builder (this is the rod of master builder damage multiplier rule):
-Victor Gijsbers/Kerkerkruip Items.i7x:			multiply general damage by 50 percent with reason "rod of the master builder".
-Victor Gijsbers/Kerkerkruip Items.i7x:An add general damage rule (this is the ment damage bonus rule):
-Victor Gijsbers/Kerkerkruip Items.i7x:				add ment bonus points of general damage with reason "ment".
-Victor Gijsbers/Kerkerkruip Items.i7x:A remove general damage rule (this is the ment damage protection rule):
-Victor Gijsbers/Kerkerkruip Items.i7x:			remove ment bonus points of general damage with reason "ment".
 Victor Gijsbers/Kerkerkruip Items.i7x:A remove general damage rule (this is the brightest flame damage reduction rule):
 c./Victor Gijsbers/Kerkerkruip Locations.i7x
 ./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x
