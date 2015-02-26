@@ -3181,9 +3181,9 @@ Section - Sword of light (monster)
 
 [Carried by the angel of compassion.]
 
-The sword of light is a sword. It is radiance. The description of the sword of light is "It seems to consist of pure radiance.".
+The sword of light is a sword. It is radiance. The description of the sword of light is "It seems to consist of pure [material of the sword of light].".
 
-The special weapon info of the sword of light is "; damage increases with the wielder's angelic radiance[run paragraph on]".
+The special weapon info of the sword of light is "; [if sword of light is radiance]damage increases with the wielder's angelic radiance[otherwise]no special bonus when it is made of [material of the sword of light][end if][run paragraph on]".
 
 An add specific damage rule (this is the sword of light damage bonus rule):
 	if damage-by-hitting is true:

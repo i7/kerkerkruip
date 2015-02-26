@@ -2842,6 +2842,11 @@ Testing effects of radiance-reduction:
 	assert that the event description includes "- 2 \(fuligin cloak\)<^\n>+ damage";
 	check damage of the player with 1000 health after "deals";
 	now the sword of light is iron;
+	clear event description;
+	try examining the sword of light;
+	assert that the event description includes "It seems to consist of pure iron.";
+	assert that the event description does not include "damage increases";
+	assert that the event description includes "; no special bonus when it is made of iron";
 	have the player do no reaction to a 100 melee hit by the angel of compassion with result "sword of light radiance bonus" in 0 out of 1 attempts, checking damage;
 	now the sword of light is radiance;
 	now the radiation of the angel of compassion is 0;
@@ -2893,7 +2898,6 @@ Testing effects of holy-damage:
 ./Victor Gijsbers/Kerkerkruip Actions and UI.i7x - done
 ./Victor Gijsbers/Kerkerkruip ATTACK.i7x - done
 ./Victor Gijsbers/Kerkerkruip Items.i7x - 
-Victor Gijsbers/Kerkerkruip Items.i7x:An add specific damage rule (this is the sword of light damage bonus rule):
 Victor Gijsbers/Kerkerkruip Items.i7x:An add general damage rule (this is the dagger extra tension damage bonus rule):
 Victor Gijsbers/Kerkerkruip Items.i7x:				add n points of general damage with reason "dagger benefits from tension".
 Victor Gijsbers/Kerkerkruip Items.i7x:An add specific damage rule (this is the Giantbane damage bonus rule):
