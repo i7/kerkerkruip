@@ -2873,14 +2873,16 @@ Choosing a player action when testing armadillo-runner:
 	generate the action of going the way-to-get-back.
 	
 Testing effects of armadillo-runner:
-	assert that the event description includes "(\n|^)The ravenous armadillo deals <1-9><^\n>* \+ 1 \(you are running\)<^\n>* = (<0-9>+) damage";
+	check damage of the player with 1000 health after "The ravenous armadillo deals";
+	[TODO: more automation of damage description tests, use everywhere]
+	now the event description is the damage description;
+	assert that the event description includes "\+ 1 \(you are running\) ";
 	assert that the event description includes "\+ 1 \(offensive flow\) ";
 	assert that the event description includes "\+ 2 \(concentration\) ";
 	assert that the event description includes "\+ 1 \(tension\) ";
 	assert that the event description includes "\+ 1 \(inherent bonus\) ";
 	assert that the event description includes "\+ 1 \(bloodlust\)";
 	assert that the event description includes "x 50% \(rod of the master builder\) ";
-	check damage of the player with 1000 health after "deals";
 
 radiance-reduction is a test step.
 

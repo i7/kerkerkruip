@@ -1182,10 +1182,12 @@ To decide what number is the calculated value of (T - a text):
 	otherwise:
 		decide on the final total.
 
+The damage description is a text variable.
+
 To check damage of (guy - a person) with (previous health - a number) health after (preamble - a text):
 	assert that the event description includes "[preamble]\s*(\d*<^\n>+) damage";
-	Let the damage expression be the text matching subexpression 1;
-	Let the value be the calculated value of the damage expression;
+	now the damage description is the text matching subexpression 1;
+	Let the value be the calculated value of the damage description;
 	assert that (previous health - health of guy) is value with label "damage to [guy]"; 
 	[set things up for the next test]
 	now the health of guy is previous health;
