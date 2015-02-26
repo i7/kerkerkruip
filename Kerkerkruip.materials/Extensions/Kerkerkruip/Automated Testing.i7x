@@ -1173,6 +1173,10 @@ To decide what number is the calculated value of (T - a text):
 			skip parenthetical in T;
 		otherwise:
 			assert that the operator is " " with label "character between terms";
+		if the running total < 0:
+			now test-round-error is running total + test-round-error;
+			if test-round-error < 0, now test-round-error is 0;
+			now the running total is 0;
 	if the final total is -1:
 		decide on the running total;
 	otherwise:

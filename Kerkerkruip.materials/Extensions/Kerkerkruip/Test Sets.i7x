@@ -2754,7 +2754,6 @@ Testing effects of damage-text testing:
 	now the player does not worship chton;
 	clear event description;
 	try sacrificing;
-	[TODO: divine damage reduction - sandals of the heretic?]
 	assert that the event description includes "(\n|^)Sul abhors the undead! Divine wrath strikes you instantly, dealing 10 damage\.";
 	check damage of the player with 1000 health after "dealing";
 	now the player carries the vial of purification;
@@ -2906,6 +2905,10 @@ Testing effects of radiance-reduction:
 	say Divine lightning strikes the player;
 	assert that the event description includes "- 2 \(sandals of the heretic\)<^\n>+ damage";
 	check damage of the player with 1000 health after "A ball of lightning shoots from the sky, doing";
+	now chton-killing is true;
+	have the player do no reaction to a 100 melee hit by the angel of compassion with result "\+ 2 \(Chton's wrath pulls you to your grave\)<^\n>+ damage", checking damage;
+	now chton-killing is false;
+	assert that the event description includes "- 2 \(sandals of the heretic\)";
 	equip the player with the sneaking sword;
 	force the fuligin cloak to work;
 	have the angel of compassion do no reaction to a 100 melee hit with result "\+ 1 \(sneaky attack\)<^\n>+ damage", checking damage;
@@ -2934,7 +2937,7 @@ Testing effects of heat-damage-testing:
 holy-damage is a test step.
 
 Initial scheduling of holy-damage:
-	prepare a test battle with the healer of Aite;
+	prepare a test battle with the healer of Aite, inviting groups;
 	revive the reaper in the location;
 	equip the reaper with the scythe of slaying;
 	revive the rotting corpse in the location;
@@ -2947,33 +2950,76 @@ Testing effects of holy-damage:
 	have the player do no reaction to a 100 melee hit by the healer of Aite with result "\+ 2 \(holiness\)" in 0 out of 1 attempts, checking damage;
 	have the rotting corpse do no reaction to a 100 melee hit by the reaper with result "\+ 5 \(slaying undead\)<^\n>+ damage", checking damage;
 	have the smoke demon do no reaction to a 100 melee hit by the reaper with result "\+ 5 \(slaying undead\)<^\n>+ damage" in 0 out of 1 attempts, checking damage;
-
+	have the smoke demon do no reaction to a 100 melee hit by the tormentor of Aite with result "0 damage" in 0 out of 1 attempts, checking damage;
+	have the rotting corpse do no reaction to a 100 melee hit by the tormentor of Aite with result "0 damage", checking damage;
+	[TODO: undead immune to necromantic damage message]
+	
 ment-damage is a test step.
 
 Testing effects of ment-damage:
 	have the ment kick in;
-	have the healer of Aite do no reaction to a 100 melee hit by the player with result "\+ 1 \(ment\)<^\n>+ damage", checking damage;
-	have the player do no reaction to a 100 melee hit by the healer of Aite with result "- 1 \(ment\)<^\n>+ damage", checking damage;
+	have the defender of Aite do no reaction to a 100 melee hit by the player with result "\+ 1 \(ment\)<^\n>+ damage", checking damage;
+	have the player do no reaction to a 100 melee hit by the defender of Aite with result "- 1 \(ment\)<^\n>+ damage", checking damage;
 
+[TODO: before damage rules]
 [Extensions mciul$ grep -irl 'specific damage' .
 ./Victor Gijsbers/Kerkerkruip Actions and UI.i7x - done
 ./Victor Gijsbers/Kerkerkruip ATTACK.i7x - done
-./Victor Gijsbers/Kerkerkruip Items.i7x - 
-Victor Gijsbers/Kerkerkruip Items.i7x:A remove general damage rule (this is the brightest flame damage reduction rule):
-c./Victor Gijsbers/Kerkerkruip Locations.i7x
-./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x
-./Victor Gijsbers/Kerkerkruip Monsters.i7x
-./Victor Gijsbers/Kerkerkruip Religion.i7x
-./Victor Gijsbers/Kerkerkruip Systems - Hiding Smoke Ethereal.i7x
-./Victor Gijsbers/Kerkerkruip Systems.i7x
+./Victor Gijsbers/Kerkerkruip Items.i7x - done
+./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x:A before damage rule (this is the undead immune to necromantic damage rule):
+./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x:A remove specific damage rule (this is the deathly-resistant rule):
+./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x:An add specific damage rule (this is the bloodlusting damage bonus rule):
+./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x:An add specific damage rule (this is the insane people sometimes get insane damage bonus rule):
+./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x:An add specific damage rule (this is the asleep damage bonus rule):
+./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x:A remove specific damage rule (this is the less damage when stunning rule):
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add specific damage rule (this is the more damage when piercing rule):
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:A remove specific damage rule (this is the armadillo physical damage reduction rule):
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:A remove general damage rule (this is the power of the armadillo gives damage resistance rule):
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:		remove 1 points of general damage with reason "armadillo".
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:A remove general damage rule (this is the scales gives damage resistance rule):
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:		remove n points of general damage with reason "scales".
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:A remove general damage rule (this is the wisps of pain take less damage rule):
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:		remove 5 points of general damage with reason "hard to damage".
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add specific damage rule (this is the chain golem damage depends on concentration rule):
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add general damage rule (this is the howl damage bonus rule):
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:			add n points of general damage with reason "howling".
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add specific damage rule (this is the power of the hound damage modifier rule):
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add specific damage rule (this is the betrayel damage bonus rule):
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add specific damage rule (this is the power of the minotaur damage bonus rule):
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:A remove specific damage rule (this is the barkskin decreases damage rule):
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:A remove specific damage rule (this is the druid is dealt less damage by natural materials rule):
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add specific damage rule (this is the link concentration damage modifier rule):
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:A general damage multiplier rule (this is the limbless rotting corpse can't attack rule):
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:			multiply general damage by 0 percent with reason "no means of attack".
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add specific damage rule (this is the malignant chanter damage bonus rule):
+./Victor Gijsbers/Kerkerkruip Monsters.i7x:A specific damage multiplier rule when the victim is the smoke demon (this is the smoke demon denseness multiplier rule):
+./Victor Gijsbers/Kerkerkruip Religion.i7x:A remove specific damage rule (this is the worshipping Nomos damage reduction rule):
+./Victor Gijsbers/Kerkerkruip Religion.i7x:An add specific damage rule (this is the Nomos damage bonus rule):
+./Victor Gijsbers/Kerkerkruip Religion.i7x:An add specific damage rule (this is the undead slayer damage bonus rule):
+./Victor Gijsbers/Kerkerkruip Religion.i7x:An add specific damage rule (this is the demon slayer damage bonus rule):
+./Victor Gijsbers/Kerkerkruip Religion.i7x:A general damage multiplier rule when someone worships sul (this is the sul sometimes prevents damage rule):
+./Victor Gijsbers/Kerkerkruip Religion.i7x:		multiply general damage by 0 percent with reason "Sul intervenes".
+./Victor Gijsbers/Kerkerkruip Systems - Hiding Smoke Ethereal.i7x:A specific damage multiplier rule (this is the ethereal damage immunity rule):
+./Victor Gijsbers/Kerkerkruip Systems.i7x:An add specific damage rule (this is the size damage increase rule):
+./Victor Gijsbers/Kerkerkruip Systems.i7x:A remove specific damage rule (this is the size damage decrease rule):
+./Victor Gijsbers/Kerkerkruip Systems.i7x:An add specific damage rule (this is the undead silver damage rule):
+./Victor Gijsbers/Kerkerkruip Systems.i7x:A remove specific damage rule (this is the non-undead silver damage rule):
+./Victor Gijsbers/Kerkerkruip Systems.i7x:A remove specific damage rule (this is the iron or silver suit acts as a faraday cage rule):
+./Victor Gijsbers/Kerkerkruip Systems.i7x:Before damage rule:
+./Victor Gijsbers/Kerkerkruip Systems.i7x:An add specific damage rule (this is the heat increases damage rule):
+./Victor Gijsbers/Kerkerkruip Systems.i7x:A remove specific damage rule (this is the material heat resistance rule):
+./Victor Gijsbers/Kerkerkruip Systems.i7x:An add specific damage rule (this is the intrinsic heat vulnerability rule):
+./Victor Gijsbers/Kerkerkruip Systems.i7x:A remove specific damage rule (this is the intrinsic heat resistance rule):
+./Victor Gijsbers/Kerkerkruip Systems.i7x:Before damage rule:
+./Victor Gijsbers/Kerkerkruip Systems.i7x:A remove specific damage rule (this is the rust decreases damage rule):
+./Victor Gijsbers/Kerkerkruip Systems.i7x:A remove general damage rule (this is the death-blessed rule):
+./Victor Gijsbers/Kerkerkruip Systems.i7x:			remove 10 points of general damage with reason "blessing of life";
+./Victor Gijsbers/Kerkerkruip Systems.i7x:An add general damage rule (this is the death-cursed rule):
+./Victor Gijsbers/Kerkerkruip Systems.i7x:			add 10 points of general damage with reason "curse of death";
+./Victor Gijsbers/Kerkerkruip Systems.i7x:A remove specific damage rule (this is the ghoul damage reduction rule):
+./Victor Gijsbers/Kerkerkruip Systems.i7x:An add specific damage rule (this is the disintegrating flesh damage modifier rule):
+./Victor Gijsbers/Kerkerkruip Systems.i7x:A remove specific damage rule (this is the metallic scales damage reduction rule):
 
-Extensions mciul$ grep -irl 'general damage' .
-./Victor Gijsbers/Kerkerkruip ATTACK.i7x
-./Victor Gijsbers/Kerkerkruip Items.i7x
-./Victor Gijsbers/Kerkerkruip Monsters.i7x
-./Victor Gijsbers/Kerkerkruip Religion.i7x
-./Victor Gijsbers/Kerkerkruip Systems.i7x
-./Victor Gijsbers/Kerkerkruip Tests.i7x
 
 ]
 
