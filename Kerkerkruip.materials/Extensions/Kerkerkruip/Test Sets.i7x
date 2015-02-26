@@ -1728,6 +1728,8 @@ Section - Maze Moving
 
 [Moving around in the maze - check that all people have 0 concentration and are at-inactive. Check that the right thing happens when retreating or running from an opponent in the maze. Maybe check grenade-throwing effects in the maze]
 
+[TODO: get rid of act count from this - this is the last test to use it]
+
 To assert that (item - a thing) is located in (place - a room):
 	assert "[The item] should be in [place], but [they] is in [location of item]" based on whether or not the location of item is place.
 	
@@ -2843,6 +2845,9 @@ Testing effects of radiance-reduction:
 	say Divine lightning strikes the player;
 	assert that the event description includes "- 2 \(sandals of the heretic\)<^\n>+ damage";
 	check damage of the player with 1000 health after "A ball of lightning shoots from the sky, doing";
+	equip the player with the sneaking sword;
+	force the fuligin cloak to work;
+	have the angel of compassion do no reaction to a 100 melee hit with result "\+ 1 \(sneaky attack\)<^\n>+ damage", checking damage;
 	try taking off the fuligin cloak;
 	equip the player with plate mail;
 	have the player do no reaction to a 100 melee hit by the angel of compassion with result "- 2 \(plate mail\)<^\n>+ damage", checking damage;
@@ -2869,7 +2874,6 @@ Testing effects of heat-damage-testing:
 ./Victor Gijsbers/Kerkerkruip Actions and UI.i7x - done
 ./Victor Gijsbers/Kerkerkruip ATTACK.i7x - done
 ./Victor Gijsbers/Kerkerkruip Items.i7x - 
-Victor Gijsbers/Kerkerkruip Items.i7x:A general damage multiplier rule when the hit protection of the victim is greater than 0 (this is the protection damage multiplier rule):
 Victor Gijsbers/Kerkerkruip Items.i7x:An add specific damage rule (this is the sneaking sword damage bonus rule):
 Victor Gijsbers/Kerkerkruip Items.i7x:An add specific damage rule (this is the holy sword damage bonus rule):
 Victor Gijsbers/Kerkerkruip Items.i7x:An add specific damage rule (this is the sword of light damage bonus rule):

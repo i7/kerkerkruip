@@ -1221,7 +1221,7 @@ To test (guy - a person) doing a/-- (reaction - a reaction-type) to a/-- (streng
 	if report of the reaction is not empty, assert that the event description includes "[report of reaction]";
 	test combat hit against "[outcome]";
 	if combat hit just succeeded and checking damage:
-		check damage of guy with 1000 health after "[aggressor] [deal]";
+		check damage of guy with 1000 health after "[regarding the aggressor] [deal]";
 	if combat hit is [still] possible:
 		[transcribe re-equipping?]
 		equip guy with original-defender-weapon;
