@@ -2952,7 +2952,21 @@ Testing effects of holy-damage:
 	have the smoke demon do no reaction to a 100 melee hit by the reaper with result "\+ 5 \(slaying undead\)<^\n>+ damage" in 0 out of 1 attempts, checking damage;
 	have the smoke demon do no reaction to a 100 melee hit by the tormentor of Aite with result "0 damage" in 0 out of 1 attempts, checking damage;
 	have the rotting corpse do no reaction to a 100 melee hit by the tormentor of Aite with result "0 damage", checking damage;
-	[TODO: undead immune to necromantic damage message]
+	assert that the event description includes "- \d+ \(undead immune to necromantic damage\)";
+	now the player is deathly-resistant;
+	clear event description;
+	have chton intervene on behalf of the player;
+	[TODO: phrase to check damage in multiple-person damage report]
+	assert that the event description includes "dealing<^\n>* (\d+) - 2 \(resistant to deathly magic\) = (\d+) damage to you";
+	now the expression scan position is 0;
+	Let original damage be the number we scan in the text matching subexpression 1;
+	now the expression scan position is 0;
+	Let final damage be the number we scan in the text matching subexpression 2;
+	Let expected damage be original damage - 2;
+	if expected damage < 0, now expected damage is 0;
+	assert that final damage is expected damage with label "calculated damage";
+	assert that the health of the player is 1000 - final damage with label "actual damage to the player";
+	now the health of the player is 1000;
 	
 ment-damage is a test step.
 
