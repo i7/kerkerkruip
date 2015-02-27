@@ -2809,6 +2809,7 @@ Definition: a room is precarious if it is Bridge of Doom or it is the Vast Stair
 
 Initial scheduling of damage-modifier-testing:
 	Let the place be the location of the armadillo;
+	now the inherent damage modifier of the armadillo is 2;
 	if the place is a precarious room:
 		swap the occupants of the place and a random not precarious habitable placed room.
 	
@@ -2865,7 +2866,6 @@ Initial scheduling of armadillo-runner:
 	now retreat location is the location of the armadillo;
 	now the health of the player is 1000;
 	now the melee of the armadillo is 100;
-	now the inherent damage modifier of the armadillo is 1;
 	now the offensive flow of the armadillo is 1;
 	now the concentration of the armadillo is 2;
 	now the innate bloodlust of the armadillo is 1;
@@ -2882,7 +2882,7 @@ Testing effects of armadillo-runner:
 	assert that the damage description includes "\+ 1 \(offensive flow\) ";
 	assert that the damage description includes "\+ 2 \(concentration\) ";
 	assert that the damage description includes "\+ 1 \(tension\) ";
-	assert that the damage description includes "\+ 1 \(inherent bonus\) ";
+	assert that the damage description includes "\+ 2 \(inherent bonus\) ";
 	assert that the damage description includes "\+ 1 \(bloodlust\)";
 	assert that the damage description includes "x 50% \(rod of the master builder\) ";
 

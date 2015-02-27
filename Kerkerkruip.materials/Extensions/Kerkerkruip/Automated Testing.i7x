@@ -838,11 +838,11 @@ To fail on result (R - a text):
 	fail on result R within 100 attempts;
 		
 To assert result (pattern - a text):
-	update event description because "testing for result [pattern]";
+	update event description because "testing for result '[pattern]'";
 	assert that the event description includes pattern;
 	
 To assert absence of result (pattern - a text):
-	update event description because "testing for absence of [pattern]";
+	update event description because "testing for absence of '[pattern]'";
 	assert that the event description does not include pattern;
 	
 To assert that the (description - a text) includes (pattern - a text):
