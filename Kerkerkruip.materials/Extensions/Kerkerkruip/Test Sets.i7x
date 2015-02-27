@@ -755,6 +755,8 @@ Initial scheduling of healer-not-healing:
 	decrease the health of the player by 3;
 	make healer-healing-player possible;
 	
+[TODO: permit/enable action, like compelling an action in that it uses outcomes to make sure it's happened, but it doesn't specify which action]
+
 testing combat round of the healer of aite when testing healer-not-healing:
 	fail healer-healing-player based on whether or not the injury of the player is less than 3;
 		
@@ -2661,7 +2663,7 @@ Initial scheduling of damage-text testing:
 Testing effects of damage-text testing:
 	Have the reaper do a dodge reaction to a 100 melee hit with result "(\n|^)You deal <1-9><0-9>* damage";
 	now the tension is 3;
-	Have the the reaper do a dodge reaction to a 100 melee hit with result "(\n|^)You deal <1-9><0-9>* \+ 1 \(tension\) = <0-9>+ damage", checking damage;
+	Have the the reaper do a dodge reaction to a 100 melee hit with result "\+ 1 \(tension\)", checking damage;
 	clear event description;
 	say Divine lightning strikes the player;
 	assert result "(\n|^)A ball of lightning shoots from the sky, doing <3-7> damage to you"; [fails currently, but if it didn't, we might want another test for when the damage was reduced]
@@ -2812,8 +2814,7 @@ Initial scheduling of damage-modifier-testing:
 	
 Testing effects of damage-modifier-testing:
 	equip the player with the robe of the dead mage;
-	have the player do no reaction to a 100 melee hit by the armadillo with result "deals", checking damage;
-	assert absence of result "\(robe of the dead mage\)<^\n>+ damage";
+	have the player do no reaction to a 100 melee hit by the armadillo with result "robe of the dead mage" in 0 out of 1 attempts, checking damage;
 	repeat with conc-level running from 1 to 4:
 		now the concentration of the player is conc-level;
 		have the player do no reaction to a 100 melee hit by the armadillo with result "\+ [conc-level * 25]% \(robe of the dead mage\)", checking damage;
@@ -2825,32 +2826,32 @@ Testing effects of damage-modifier-testing:
 	have the player do no reaction to a 100 melee hit by the armadillo with result "- 2 \(dragon armour\)" in 1 out of 3 attempts, checking damage;
 	equip the player with the executioner's axe;
 	now the tension is 2;
-	have the armadillo do no reaction to a 100 melee hit by the player with result "executioner's axe benefits from tension<^\n>+ damage" in 0 out of 1 attempts, checking damage;
+	have the armadillo do no reaction to a 100 melee hit by the player with result "executioner's axe benefits from tension" in 0 out of 1 attempts, checking damage;
 	now the tension is 3;
-	have the armadillo do no reaction to a 100 melee hit by the player with result "\+ 1 \(executioner's axe benefits from tension\)<^\n>+ damage", checking damage;
+	have the armadillo do no reaction to a 100 melee hit by the player with result "\+ 1 \(executioner's axe benefits from tension\) ", checking damage;
 	equip the player with Malleus Maleficarum;
 	now the blood magic level of Malleus Maleficarum is 1;
 	now the tension is 10;
-	have the armadillo do no reaction to a 100 melee hit by the player with result "\+ 1 \(Malleus Maleficarum blood bonus\)<^\n>+ damage", checking damage;
+	have the armadillo do no reaction to a 100 melee hit by the player with result "\+ 1 \(Malleus Maleficarum blood bonus\) ", checking damage;
 	assert absence of result "tension<^\n>+ damage";
 	equip the player with the Yahvinnian crossbow;
 	now the tension is 1;
-	have the armadillo do no reaction to a 100 melee hit by the player with result "crossbow benefits from tension<^\n>+ damage" in 0 out of 1 attempts, checking damage;
+	have the armadillo do no reaction to a 100 melee hit by the player with result "crossbow benefits from tension" in 0 out of 1 attempts, checking damage;
 	now the current shots of the Yahvinnian crossbow is 1;
 	now the tension is 2;
-	have the armadillo do no reaction to a 100 melee hit by the player with result "\+ 1 \(crossbow benefits from tension\)<^\n>+ damage", checking damage;
+	have the armadillo do no reaction to a 100 melee hit by the player with result "\+ 1 \(crossbow benefits from tension\) ", checking damage;
 	equip the player with giantbane;
 	now the armadillo is just-woken;
 	now the tension is 3;
-	have the armadillo do no reaction to a 100 melee hit by the player with result "dagger benefits from tension<^\n>+ damage" in 0 out of 1 attempts, checking damage;
+	have the armadillo do no reaction to a 100 melee hit by the player with result "dagger benefits from tension" in 0 out of 1 attempts, checking damage;
 	assert that the damage description does not include "Giantbane's special";
 	assert that the damage description includes "\+ 2 \(defender was asleep\)";
 	now the tension is 4;
 	now the armadillo is large;
 	have the armadillo do no reaction to a 100 melee hit by the player with result "\+ 1 \(dagger benefits from tension\)", checking damage;
-	assert result "\+ 3 \(Giantbane's special\)<^\n>+ damage";
+	assert that the damage description includes "\+ 3 \(Giantbane's special\)";
 	now the brightest-flame-counter is 1;
-	have the player do no reaction to a 100 melee hit by the armadillo with result "- \d+ \(brightest flame\)<^\n>+ damage", checking damage;
+	have the player do no reaction to a 100 melee hit by the armadillo with result "- \d+ \(brightest flame\) ", checking damage;
 	assert that the total damage is 0 with label "total damage with brightest flame";
 	now the brightest-flame-counter is 0;
 	now the armadillo is insane;
@@ -2915,16 +2916,16 @@ Testing effects of radiance-reduction:
 	assert result "- 2 \(sandals of the heretic\)<^\n>+ damage";
 	check damage of the player with 1000 health after "A ball of lightning shoots from the sky, doing";
 	now chton-killing is true;
-	have the player do no reaction to a 100 melee hit by the angel of compassion with result "\+ 2 \(Chton's wrath pulls you to your grave\)<^\n>+ damage", checking damage;
+	have the player do no reaction to a 100 melee hit by the angel of compassion with result "\+ 2 \(Chton's wrath pulls you to your grave\) ", checking damage;
 	now chton-killing is false;
 	assert result "- 2 \(sandals of the heretic\)";
 	equip the player with the sneaking sword;
 	force the fuligin cloak to work;
-	have the angel of compassion do no reaction to a 100 melee hit with result "\+ 1 \(sneaky attack\)<^\n>+ damage", checking damage;
+	have the angel of compassion do no reaction to a 100 melee hit with result "\+ 1 \(sneaky attack\) ", checking damage;
 	try taking off the fuligin cloak;
 	now the radiation of the angel of compassion is 2;
 	equip the player with plate mail;
-	have the player do no reaction to a 100 melee hit by the angel of compassion with result "- 2 \(plate mail\)<^\n>+ damage", checking damage;
+	have the player do no reaction to a 100 melee hit by the angel of compassion with result "- 2 \(plate mail\) ", checking damage;
 	
 heat-damage-testing is a test step.
 
@@ -2954,13 +2955,13 @@ Initial scheduling of holy-damage:
 	
 Testing effects of holy-damage:
 	Now the spirit score of the healer of Aite is 9;
-	have the rotting corpse do no reaction to a 100 melee hit by the healer of Aite with result "\+ 2 \(holiness\)<^\n>+ damage", checking damage;
-	have the smoke demon do no reaction to a 100 melee hit by the healer of Aite with result "\+ 2 \(holiness\)<^\n>+ damage", checking damage;
+	have the rotting corpse do no reaction to a 100 melee hit by the healer of Aite with result "\+ 2 \(holiness\) ", checking damage;
+	have the smoke demon do no reaction to a 100 melee hit by the healer of Aite with result "\+ 2 \(holiness\) ", checking damage;
 	have the player do no reaction to a 100 melee hit by the healer of Aite with result "\+ 2 \(holiness\)" in 0 out of 1 attempts, checking damage;
-	have the rotting corpse do no reaction to a 100 melee hit by the reaper with result "\+ 5 \(slaying undead\)<^\n>+ damage", checking damage;
+	have the rotting corpse do no reaction to a 100 melee hit by the reaper with result "\+ 5 \(slaying undead\) ", checking damage;
 	have the smoke demon do no reaction to a 100 melee hit by the reaper with result "\+ 5 \(slaying undead\)<^\n>+ damage" in 0 out of 1 attempts, checking damage;
-	have the smoke demon do no reaction to a 100 melee hit by the tormentor of Aite with result "0 damage" in 0 out of 1 attempts, checking damage;
-	have the rotting corpse do no reaction to a 100 melee hit by the tormentor of Aite with result "0 damage", checking damage;
+	have the smoke demon do no reaction to a 100 melee hit by the tormentor of Aite with result " 0$" in 0 out of 1 attempts, checking damage;
+	have the rotting corpse do no reaction to a 100 melee hit by the tormentor of Aite with result " 0$", checking damage;
 	assert result "- \d+ \(undead immune to necromantic damage\)";
 	now the player is deathly-resistant;
 	clear event description;
@@ -2981,8 +2982,8 @@ ment-damage is a test step.
 
 Testing effects of ment-damage:
 	have the ment kick in;
-	have the defender of Aite do no reaction to a 100 melee hit by the player with result "\+ 1 \(ment\)<^\n>+ damage", checking damage;
-	have the player do no reaction to a 100 melee hit by the defender of Aite with result "- 1 \(ment\)<^\n>+ damage", checking damage;
+	have the defender of Aite do no reaction to a 100 melee hit by the player with result "\+ 1 \(ment\) ", checking damage;
+	have the player do no reaction to a 100 melee hit by the defender of Aite with result "- 1 \(ment\) ", checking damage;
 
 [TODO: before damage rules]
 [Extensions mciul$ grep -irl 'specific damage' .
