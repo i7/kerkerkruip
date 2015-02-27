@@ -66,15 +66,15 @@ bat avoiding gigantic spike
 testing effects of aite spike vs bat:
 	Let player-targeted be whether or not the event description matches the regular expression "bursts out of the ground<^[line break]>+ you";
 	if player-targeted is true:
-		assert that the event description includes "bursts out of the ground in front of you";
+		assert result "bursts out of the ground in front of you";
 	Let player-missed be whether or not player-targeted is true and the health of the player is 100;
 	achieve bat crashing into spike based on whether or not player-targeted is true and player-missed is false;
 	achieve bat avoiding huge spike based on whether or not player-missed is true and the event description matches the regular expression "huge <a-z>+ bursts out of the ground in front of you";
 	achieve bat avoiding gigantic spike based on whether or not player-missed is true and the event description matches the regular expression "gigantic <a-z>+ bursts out of the ground in front of you";
 	if the last successful outcome is:
-		-- bat crashing into spike: assert that the event description includes "crash into";
-		-- bat avoiding huge spike: assert that the event description includes "You fly over";
-		-- bat avoiding gigantic spike: assert that the event description includes "You fly around";
+		-- bat crashing into spike: assert result "crash into";
+		-- bat avoiding huge spike: assert result "You fly over";
+		-- bat avoiding gigantic spike: assert result "You fly around";
 				
 Arena-tormentor-enslaving is a test step.
 
@@ -82,13 +82,13 @@ Choosing a player action when testing Arena-tormentor-enslaving:
 	generate the action of enslaving the tormentor of Aite.
 	
 testing effects of Arena-tormentor-enslaving:
-	assert that the event description includes "will do your bidding";
-	assert that the event description includes "ball of lightning .* damage to the tormentor of Aite";
+	assert result "will do your bidding";
+	assert result "ball of lightning .* damage to the tormentor of Aite";
 	if the tormentor of Aite is alive:
-		assert that the event description includes "The tormentor of Aite prostrates herself. 'I beg for your mercy, O great Aite,' she prays. Then she rises to fight you again!";
+		assert result "The tormentor of Aite prostrates herself. 'I beg for your mercy, O great Aite,' she prays. Then she rises to fight you again!";
 		assert "tormentor should oppose the player" based on whether or not the tormentor of Aite opposes the player;
 	otherwise:
-		assert that the event description includes ", killing her";
+		assert result ", killing her";
 
 Section - Enslaving the Defender
 
@@ -124,9 +124,9 @@ Choosing a player action when testing Arena-defender-enslaving:
 	generate the action of enslaving the defender of Aite.
 
 testing effects of Arena-defender-enslaving:
-	assert that the event description includes "will do your bidding";
-	assert that the event description includes "ball of lightning .* damage to the defender of Aite";
-	assert that the event description includes "The defender of Aite prostrates himself. 'I beg for your mercy, O great Aite,' he prays. Then he rises to fight you again!";
+	assert result "will do your bidding";
+	assert result "ball of lightning .* damage to the defender of Aite";
+	assert result "The defender of Aite prostrates himself. 'I beg for your mercy, O great Aite,' he prays. Then he rises to fight you again!";
 	assert "the defender should oppose the player" based on whether or not the defender of Aite opposes the player;
 
 Arena-defender-re-enslaving is a test step. The next move of Arena-defender-enslaving is Arena-defender-re-enslaving.   
@@ -141,10 +141,10 @@ Before taking a player action when Arena-defender-re-enslaving is the scheduled 
 	now enslave-cooldown is 0;
 	
 testing effects of Arena-defender-re-enslaving:
-	assert that the event description includes "will do your bidding";
-	assert that the event description includes "ball of lightning .* damage to the defender of Aite, killing him";
+	assert result "will do your bidding";
+	assert result "ball of lightning .* damage to the defender of Aite, killing him";
 	assert that the location is Hall of Gods;
-	assert that the event description includes "receives the soul";
+	assert result "receives the soul";
 	assert that the health of the player is 100;
 	assert "the defender of Aite should be off-stage" based on whether or not defender of Aite is off-stage. 
 
@@ -173,7 +173,7 @@ A test play when testing Chton champion vs bat:
 	extract the player to Hall of Gods;
 	clear the event description;
 	have the player and Drakul fight in Arena of the Gods;
-	assert that the event description includes "grants you 2 divine favour![line break][line break]Herm gifts you <^\n>+; and increases your hiding bonus to \+2\.[line break][line break]You are transported to the Arena of the Gods, where the angry Drakul awaits, preparing himself to"
+	assert result "grants you 2 divine favour![line break][line break]Herm gifts you <^\n>+; and increases your hiding bonus to \+2\.[line break][line break]You are transported to the Arena of the Gods, where the angry Drakul awaits, preparing himself to"
 	
 arena-vampire-joining is a test step. The first move of Chton champion vs bat is arena-vampire-joining.   
 
@@ -183,7 +183,7 @@ Choosing a player action when testing arena-vampire-joining:
 The summoned creature is an object that varies;
 
 testing effects for arena-vampire-joining:
-	assert that the event description includes "You turn into a vampire, but your opponent doesn't care";
+	assert result "You turn into a vampire, but your opponent doesn't care";
 	update the combat status;
 	assert that the combat status is combat;
 	try reading a random scroll of summoning enclosed by the player;
@@ -202,10 +202,10 @@ Before taking a player action when the scheduled event is chton-arena-cheating:
 	
 testing effects for chton-arena-cheating:
 	[should the lifeblood appear a second time just because drinking it removes it from play?]
-	assert that the event description includes ["infamous vampire, who crumbles away into ashes"] "infamous vampire, a small vial";
-	assert that the event description includes "receives the blood";
+	assert result ["infamous vampire, who crumbles away into ashes"] "infamous vampire, a small vial";
+	assert result "receives the blood";
 	assert that the health of the player is 33;
-	assert that the event description includes "transported back to the Hall of the Gods";
+	assert result "transported back to the Hall of the Gods";
 	assert that the location of the summoned creature is Hall of Gods;
 	assert that drakul's lifeblood is in Hall of Gods;
 	
@@ -276,7 +276,7 @@ Before taking a player action [or reaction] when mindslug-retreat is the schedul
 	now concentration of mouser is 0;
 		
 testing effects for mindslug-retreat:
-	assert that the event description includes "bravely run away";
+	assert result "bravely run away";
 	assert one hit by mindslug;
 	assert one hit by fafhrd;
 	assert zero hits by mouser;
@@ -291,7 +291,7 @@ Choosing a player action when testing mindslug-runner:
 	generate the action of going the way-to-get-back;
 	
 testing effects for mindslug-runner:
-	assert that the event description includes "run past your enemies";
+	assert result "run past your enemies";
 	assert one hit by mindslug;
 	assert one hit by fafhrd;
 	assert one hit by mouser;
@@ -395,7 +395,7 @@ Initial scheduling for tentacle-retreat:
 	now the health of the player is 100;
 		
 testing effects for tentacle-retreat:
-	assert that the event description includes "bravely run away";
+	assert result "bravely run away";
 	assert one hit by tentacle;
 	assert "the player should be grappled" based on whether or not the player is grappled by the tentacle;
 	assert that the tentacle is in the location;
@@ -409,7 +409,7 @@ choosing a player action when testing tentacle-dig-retreat:
 	generate the action of digging a random diggable direction.
 	
 testing effects for tentacle-dig-retreat:
-	assert that the event description includes "magically create a tunnel";
+	assert result "magically create a tunnel";
 	assert one hit by tentacle;
 	assert "the player should be grappled" based on whether or not the player is grappled by the tentacle;
 	assert that the location of the player is the location of the tentacle;
@@ -435,11 +435,11 @@ A test play when testing insane-drakul:
 	try readying staff of insanity;
 	clear the event description because "setting up test play";
 	try Drakul concentrating;
-	assert that the event description includes "Drakul smiles a little wider";
+	assert result "Drakul smiles a little wider";
 	try Drakul concentrating;
-	assert that the event description includes "'There is no need to fear me,' Drakul says as he concentrates more deeply\.";
+	assert result "'There is no need to fear me,' Drakul says as he concentrates more deeply\.";
 	try Drakul concentrating;
-	assert that the event description includes "Drakul attains the highest state of concentration. 'It feels so good to be alive!'";
+	assert result "Drakul attains the highest state of concentration. 'It feels so good to be alive!'";
 	
 Driving Drakul insane is a test step. The first move of insane-drakul is driving Drakul insane.   
 
@@ -463,11 +463,11 @@ Initial scheduling of insane drakul statements:
 	now the concentration of drakul is 0;
 	clear the event description;
 	try Drakul concentrating;
-	assert that the event description includes "Drakul smiles a little wider";
+	assert result "Drakul smiles a little wider";
 	try Drakul concentrating;
-	assert that the event description includes "'An insane vampire always tells the truth\. And I tell you: You should fear me!' Drakul says as he concentrates more deeply.";
+	assert result "'An insane vampire always tells the truth\. And I tell you: You should fear me!' Drakul says as he concentrates more deeply.";
 	try Drakul concentrating;
-	assert that the event description includes "Drakul attains the highest state of concentration\. 'It feels so good to be alive - but I am undead!'";
+	assert result "Drakul attains the highest state of concentration\. 'It feels so good to be alive - but I am undead!'";
 
 After taking a player action when the scheduled event is insane drakul statements:
 	compel the action of drakul waiting;
@@ -485,11 +485,11 @@ vampire-turning-hinting
 Testing effects of insane drakul statements:
 	if waiting for compelled action, make no decision;
 	achieve simple drakul identity based on whether or not the event description matches the regular expression "Drakul says, 'I am " and not (the event description matches the regular expression "not|someone who|, and|, or"); [TODO: nicer matching phrases]
-	if simple drakul identity just succeeded, assert that the event description includes "vampire|insane";
+	if simple drakul identity just succeeded, assert result "vampire|insane";
 	achieve nested conditionals based on whether or not the event description matches the regular expression "Drakul says, 'If .*," and the event description matches the regular expression "I would give you" and the event description matches the regular expression ", if|, and|, or"; [TODO: make this one big regex? Or is it impossible because of ordering?]
 	achieve nested belief on result "I believe that I believe";
 	achieve lifeblood-hinting on result "a vial of my lifeblood\b";
-	if lifeblood-hinting just succeeded, assert that the event description includes "I am carrying| is in | can be found | is currently unreachable, ";
+	if lifeblood-hinting just succeeded, assert result "I am carrying| is in | can be found | is currently unreachable, ";
 	achieve vampire-turning-hinting on result "\bI intend to vanquish Malygris after I make you my vampire-slave\b|\byou will never be my vampire-slave\b";
 	[this doesn't compile:
 	assert "Blood never lies achievement should be held" based on whether not there is a held achievement of Blood never lies in the Table of Held Achievements;]
@@ -501,7 +501,7 @@ Initial scheduling of drakul suicide:
 	now the melee of drakul is 100;
 	clear the event description;
 	try drakul hitting drakul;
-	assert that the event description includes "drains his own blood, a small vial";
+	assert result "drains his own blood, a small vial";
 	
 Section - Enemies should always start out awake in Arena of the Fallen
 
@@ -628,17 +628,17 @@ Test play when testing controlling pipes:
 	now pipes-open is true;
 	clear the event description;
 	try looking;
-	assert that the event description includes "Several large pipes continuously spew forth vapours into this room\. A big wheel is attached";
+	assert result "Several large pipes continuously spew forth vapours into this room\. A big wheel is attached";
 	try examining the pipes;
-	assert that the event description includes " They are currently spewing vapours into the room\.";
+	assert result " They are currently spewing vapours into the room\.";
 	try examining the wheel;
-	assert that the event description includes "which are currently open\.";
+	assert result "which are currently open\.";
 	try turning the wheel;
 	clear the event description;
 	try examining the pipes;
-	assert that the event description includes " They are currently shut off\.";
+	assert result " They are currently shut off\.";
 	try examining the wheel;
-	assert that the event description includes "which are currently closed\.";
+	assert result "which are currently closed\.";
 
 [Section - Sul Champion vs Herm worshipper
 
@@ -699,8 +699,8 @@ testing effects of reaction-mindslug-killing:
 	if waiting for player reaction, make no decision;
 	assert "the mindslug should be dead" [succeed] based on whether or not the mindslug is dead;
 	if the mindslug is dead:
-		assert that the event description includes "The contemplative northern barbarian ends your life, with what seems to be a hint of sadness in his face";
-		assert that the event description includes "As the mindslug dies, you feel its powerful intelligence absorbed into your own body";
+		assert result "The contemplative northern barbarian ends your life, with what seems to be a hint of sadness in his face";
+		assert result "As the mindslug dies, you feel its powerful intelligence absorbed into your own body";
 	
 Section - Dream of Sleeping
 
@@ -721,7 +721,7 @@ Choosing a player action when testing sleeping-dream-waking:
 	generate the action of exiting.
 
 testing effects of sleeping-dream-waking:
-	assert that the event description includes "Malygris standing over you";
+	assert result "Malygris standing over you";
 	assert that Malygris is awake;
 	assert that the concentration of Malygris is 2;
 	assert "the player should be just-woken" based on whether or not the player is just-woken;
@@ -734,7 +734,7 @@ Initial scheduling of waiting-for-Malygris-attack:
 		
 testing effects of waiting-for-Malygris-attack:
 	if waiting for player reaction, make no decision;
-	assert that the event description includes "defender was asleep";
+	assert result "defender was asleep";
 	assert "the player should not be just-woken anymore" based on whether or not the player is not just-woken;
 		
 	
@@ -792,13 +792,13 @@ Test play when testing sul-intervention-test:
 	now the melee of the swarm of daggers is 100;
 	clear the event description;
 	try the swarm of daggers hitting the player;
-	assert that the event description includes "swarm of daggers deals";
-	assert that the event description does not include "Programming error";
+	assert result "swarm of daggers deals";
+	assert absence of result "Programming error";
 	now the melee of the player is 100;
 	clear the event description;
 	try the player hitting the swarm of daggers;
-	assert that the event description includes "You deal";
-	assert that the event description does not include "Programming error";
+	assert result "You deal";
+	assert absence of result "Programming error";
 	[TODO: check frequency of intervention]
 
 Section - Reward in Arena of the Gods
@@ -842,7 +842,7 @@ testing effects of isra-only-killing:
 	assert "Isra should be dead" based on whether or not Isra is dead;
 	assert "Fell should be alive" based on whether or not Fell is not dead;
 	assert "The player should not be healed" based on whether or not the health of the player is less than the permanent health of the player;
-	assert that the event description does not include "Nomos receives .* and fully heals you";
+	assert absence of result "Nomos receives .* and fully heals you";
 
 fell-also-killing is a test step. The next move of isra-only-killing is fell-also-killing.   
 
@@ -851,8 +851,8 @@ Choosing a player action when testing fell-also-killing:
 
 testing effects of fell-also-killing:
 	assert that the location is Hall of Gods;
-	assert that the event description includes "receives the soul";
-	assert that the event description does not include "receives the soul.* receives the soul";
+	assert result "receives the soul";
+	assert absence of result "receives the soul.* receives the soul";
 	assert that the health of the player is the permanent health of the player;
 	assert "the glass cannon should still be carried" based on whether or not the player carries the glass cannon;
 	assert "the glass cannon should still be readied" based on whether or not the glass cannon is readied;
@@ -897,17 +897,17 @@ Test play when testing temporary Nomos blood magic:
 	assert "the inquisitor's hood should be carried" based on whether or not the player carries the inquisitor's hood;
 	clear the event description;
 	try examining the inquisitor's hood;
-	assert that the event description includes "This particular one gives you a \+15% chance of remaining concentrated when damaged\. It also increases your dreadful presence by 1\. Feeding 5 blood to the hood will temporarily add 10% to the chance of remaining concentrated";
+	assert result "This particular one gives you a \+15% chance of remaining concentrated when damaged\. It also increases your dreadful presence by 1\. Feeding 5 blood to the hood will temporarily add 10% to the chance of remaining concentrated";
 	let the base chance be the chance of the player remaining concentrated;
 	equip the player with the inquisitor's hood;
 	assert that (the chance of the player remaining concentrated - the base chance) is 15 with label "concentration bonus of the inquisitor's hood";
 	try concentrating;
 	clear the event description;
 	try feeding the inquisitor's hood;
-	assert that the event description includes "You feed 5 health to the inquisitor's hood, increasing its power \(and losing your concentration\)!";
+	assert result "You feed 5 health to the inquisitor's hood, increasing its power \(and losing your concentration\)!";
 	clear the event description;
 	try examining the inquisitor's hood;
-	assert that the event description includes "This particular one gives you a \+25% chance of remaining concentrated when damaged\. It also increases your dreadful presence by 1\. Feeding 10 blood to the hood will temporarily add 10% to the chance of remaining concentrated";
+	assert result "This particular one gives you a \+25% chance of remaining concentrated when damaged\. It also increases your dreadful presence by 1\. Feeding 10 blood to the hood will temporarily add 10% to the chance of remaining concentrated";
 	assert that (the chance of the player remaining concentrated - the base chance) is 25 with label "concentration bonus of the inquisitor's hood after one feeding";
 	try taking off the inquisitor's hood;
 	assert that the dreadful presence of the player is 0;
@@ -916,7 +916,7 @@ Test play when testing temporary Nomos blood magic:
 	assert that gown-timer is between 2 and 10;
 	clear the event description;
 	try examining the gown of the red court;
-	assert that the event description includes "Wearing the gown gives you two levels of dreadful presence. You can feed the gown 8 blood";
+	assert result "Wearing the gown gives you two levels of dreadful presence. You can feed the gown 8 blood";
 	assert that the dreadful presence of the player is 0;
 	now the gown of the red court is not cursed;
 	try wearing the gown of the red court;
@@ -945,7 +945,7 @@ testing effects of first-gown-timeout:
 	if waiting for resolution:
 		check the gown timer;
 	otherwise:
-		assert that the event description includes "Some of the blood power of the gown of the red court wears off";
+		assert result "Some of the blood power of the gown of the red court wears off";
 		now gown-timer is the blood timer of the gown of the red court;
 		assert that gown-timer is between 2 and 10;
 	
@@ -957,7 +957,7 @@ testing effects of second-gown-timeout:
 		check the gown timer;
 	otherwise:
 		assert that the blood magic level of the gown of the red court is 0;
-		assert that the event description includes "The blood power of the gown of the red court wears off completely";
+		assert result "The blood power of the gown of the red court wears off completely";
 		
 malleus-earning is a extracting test step. The location-target of malleus-earning is the temple of nomos.
 
@@ -968,7 +968,7 @@ Testing effects of malleus-earning:
 	try readying the malleus maleficarum;
 	assert "the malleus maleficarum should be readied" based on whether or not the malleus maleficarum is readied;
 	try examining the malleus maleficarum;
-	assert that the event description includes "Feeding 1 blood to the Malleus Maleficarum will give it a bonus of \+1 attack and \+1 damage on your next attack.* dreadful presence\.";
+	assert result "Feeding 1 blood to the Malleus Maleficarum will give it a bonus of \+1 attack and \+1 damage on your next attack.* dreadful presence\.";
 	
 daggers-meeting is a test step. 
 
@@ -987,7 +987,7 @@ Initial scheduling of nomos-bonus-examining:
 	now the nomos bonus is true;
 
 Testing effects of nomos-bonus-examining:
-	assert that the event description includes "swarm of daggers attacks using sharp points";
+	assert result "swarm of daggers attacks using sharp points";
 
 malleus-bonus-attacking is a hidden-traveling test step.   
 
@@ -999,7 +999,7 @@ Choosing a player action when testing malleus-bonus-attacking:
 to check that the malleus is fed:
        clear the event description;
        try examining the malleus maleficarum;
-       assert that the event description includes "Feeding 2 blood to the Malleus Maleficarum will give it an additional bonus of \+1 attack and \+1 damage on your next attack.* dreadful presence; blood bonus of \+1 attack and \+1 damage";
+       assert result "Feeding 2 blood to the Malleus Maleficarum will give it an additional bonus of \+1 attack and \+1 damage on your next attack.* dreadful presence; blood bonus of \+1 attack and \+1 damage";
 
 Initial scheduling for malleus-bonus-attacking:
 	assert that the nomos bonus is true with label "nomos bonus";
@@ -1009,11 +1009,11 @@ Initial scheduling for malleus-bonus-attacking:
 	now the nomos bonus is true;
 	
 testing effects of malleus-bonus-attacking:
-	assert that the event description includes "You plan on turning human, but find yourself attacking the swarm of daggers instead";
+	assert result "You plan on turning human, but find yourself attacking the swarm of daggers instead";
 	assert that the hitting count of the player is 1 with label "player's hitting count (bug #281)";
 	assert that the blood magic level of malleus maleficarum is 0 with label "malleus blood magic level";
-	assert that the event description includes " \+ 1 \(Malleus Maleficarum blood\) \+ 3 \(the law is with you\) = <0-9>+, you beat the swarm of daggers[']s defence rating";
-	assert that the event description includes " \+ 1 \(Malleus Maleficarum blood bonus\) \+ 3 \(the law is with you\) = <0-9>+ damage";
+	assert result " \+ 1 \(Malleus Maleficarum blood\) \+ 3 \(the law is with you\) = <0-9>+, you beat the swarm of daggers[']s defence rating";
+	assert result " \+ 1 \(Malleus Maleficarum blood bonus\) \+ 3 \(the law is with you\) = <0-9>+ damage";
         
 early-feeding is a test step.
 
@@ -1061,8 +1061,8 @@ Test play when testing bug-234:
 	[also test bug 235]
 	clear the event description;
 	try linking the holy sword;
-	assert that the event description includes "You can only link to persons";
-	assert that the event description does not include "You forge a spiritual link";
+	assert result "You can only link to persons";
+	assert absence of result "You forge a spiritual link";
 
 still-linking is a test step. The first move of bug-234 is still-linking.
 
@@ -1098,9 +1098,9 @@ Test play when testing challenger-mazing:
 	now the health of the defender of Aite is 100;
 	clear the event description;
 	try hitting the defender of aite;
-	assert that the event description includes "you beat the defender of Aite's defence";
-	assert that the event description does not include "You plan on challenging the defender of Aite in the maze";
-	assert that the event description includes "Space and time begin to twist";
+	assert result "you beat the defender of Aite's defence";
+	assert absence of result "You plan on challenging the defender of Aite in the maze";
+	assert result "Space and time begin to twist";
 	assert that the location is Arena of the Gods.
 	
 Section - Banshees Gone Wild - bug 248
@@ -1135,7 +1135,7 @@ Test play when testing banshees gone wild:
 Waiting-for-banshees is a hidden-traveling test step. The first move of banshees gone wild is waiting-for-banshees.
 
 testing effects of waiting-for-banshees:
-	assert that the event description includes "banshees suddenly break loose";
+	assert result "banshees suddenly break loose";
 	assert that the living banshees boolean is true;
 
 banshee-fleeing is a  hidden-traveling test step. The next move of waiting-for-banshees is banshee-fleeing.
@@ -1173,7 +1173,7 @@ banshee-return-waiting is a hidden-traveling test step.
 	
 testing effects of banshee-return-waiting:
 	assert "Tension should be at least 10" based on whether or not the tension is at least 10;
-	assert that the event description includes "banshees suddenly break loose";
+	assert result "banshees suddenly break loose";
 	assert that the living banshees boolean is true;
 ]	
 
@@ -1193,7 +1193,7 @@ Choosing a player action when testing reaction-ape-killing:
 testing effects of reaction-ape-killing:
 	if waiting for player reaction, make no decision;
 	assert "the blood ape should be dead" based on whether or not the blood ape is dead;
-	assert that the event description includes "Bored by a lack of tension";
+	assert result "Bored by a lack of tension";
 	assert that the living banshees boolean is false;
 
 Section - Remembering Text
@@ -1249,7 +1249,7 @@ Choosing a player action when testing nothing-to-remember:
 	Generate the action of remembering. 
 
 testing effects of nothing-to-remember:
-	assert that the event description includes "You have not yet explored:\n( - the <a-w>+ exit of the entrance hall \(where you currently are\)\n)+\nYou have visited the following rooms: the entrance hall \(here\)\.\n\nTip:"
+	assert result "You have not yet explored:\n( - the <a-w>+ exit of the entrance hall \(where you currently are\)\n)+\nYou have visited the following rooms: the entrance hall \(here\)\.\n\nTip:"
 	
 dumb-sensing is a test step.   
 
@@ -1269,7 +1269,7 @@ choosing a player action when testing a psy-scroll-reading test step:
 testing effects of psy-scroll-reading test step:
 	[TODO: text that sensing takes no time]
 	assert "The player should be psycholocating now" based on the psycholocation boolean;
-	assert that the event description includes "When you are psycholocating, sensing does not take time"
+	assert result "When you are psycholocating, sensing does not take time"
 
 unexplored-sensing is a test step.   
 
@@ -1278,8 +1278,8 @@ Choosing a player action when testing unexplored-sensing:
 
 testing effects of unexplored-sensing:
 	Repeat with the enemy running through {swarm of daggers, blood ape, demon of rage, angel of compassion, minotaur, bodmall, malygris}:
-		assert that the event description includes "[soul description of the enemy], (from the )?[best route from the location to the location of the enemy][line break]";
-	assert that the event description includes "- a turning in on itself of space and time, on which you cannot bear to focus your attention, somewhere [general direction from the location to the Eternal Prison][line break]"
+		assert result "[soul description of the enemy], (from the )?[best route from the location to the location of the enemy][line break]";
+	assert result "- a turning in on itself of space and time, on which you cannot bear to focus your attention, somewhere [general direction from the location to the Eternal Prison][line break]"
 
 [ - a bolt of black shot through with a blaze of hot white, from the south
  - an aura like sharpened steel, from the east
@@ -1295,7 +1295,7 @@ Choosing a player action when testing remembering-daggers:
 	Generate the action of remembering.
 		
 testing effects of remembering-daggers:
-	assert that the event description includes "You have visited the following rooms:.*You have seen the following creatures in these locations:.*- the swarm of daggers \(level 1\) in [the location] \(where you currently are\)"
+	assert result "You have visited the following rooms:.*You have seen the following creatures in these locations:.*- the swarm of daggers \(level 1\) in [the location] \(where you currently are\)"
 
 [before we can get the partway-path psycholocating message, we have to put a visited room between us and an unseen creature. Find one that's at least two moves away and then go 1 move towards it.]
 
@@ -1337,8 +1337,8 @@ Choosing a player action when testing partial-explored-sensing:
 	Generate the action of sensing.
 
 testing effects of partial-explored-sensing:
-	assert that the event description includes "the soul of the swarm of daggers here with you, like an aura like sharpened steel[line break]";
-	assert that the event description includes "[soul description of the faraway enemy], [best route from on-the-way place to location of the faraway enemy] from [the on-the-way place] \(which lies [best route from the location to on-the-way place] from here\)[line break]"
+	assert result "the soul of the swarm of daggers here with you, like an aura like sharpened steel[line break]";
+	assert result "[soul description of the faraway enemy], [best route from on-the-way place to location of the faraway enemy] from [the on-the-way place] \(which lies [best route from the location to on-the-way place] from here\)[line break]"
 
 meeting-malygris is a hidden-traveling test step. The location-target of meeting-malygris is Malygris.
 	
@@ -1359,7 +1359,7 @@ testing effects of moving-malygris:
 	if waiting for compelled action:
 		fail based on whether or not the location of malygris is not the location;
 		make no decision;
-	assert that the event description includes "Malygris suddenly teleports away";
+	assert result "Malygris suddenly teleports away";
 	
 [First choosing a player action when testing moving-malygris:
 	if the location of Malygris is not the location:
@@ -1374,7 +1374,7 @@ Choosing a player action when testing remembering-malygris:
 	Generate the action of remembering.
 
 testing effects of remembering-malygris:
-	assert that the event description includes "You have seen the following creatures in these locations:.*You have also seen Malygris, but you don't know where he is now"
+	assert result "You have seen the following creatures in these locations:.*You have also seen Malygris, but you don't know where he is now"
 	
 remembering-lost-plural is a test step.   
 
@@ -1385,7 +1385,7 @@ Initial scheduling of remembering-lost-plural:
 	now the last-seen-location of the swarm of daggers is null-room.
 	
 testing effects of remembering-lost-plural:
-	assert that the event description includes "You have also seen (Malygris|the swarm of daggers) and (Malygris|the swarm of daggers), but you don't know where they are now"
+	assert result "You have also seen (Malygris|the swarm of daggers) and (Malygris|the swarm of daggers), but you don't know where they are now"
 	 
 dungeon-clearing is a test step.
 
@@ -1406,8 +1406,8 @@ Choosing a player action when testing malygris-only-remembering:
 	generate the action of remembering.
 
 testing effects of Malygris-only-remembering:
-	assert that the event description does not include "You have seen the following creatures in these locations";
-	assert that the event description includes "You have also seen Malygris, but you don't know where he is now"
+	assert absence of result "You have seen the following creatures in these locations";
+	assert result "You have also seen Malygris, but you don't know where he is now"
 	
 slow-sensing is a test step.   
 
@@ -1441,8 +1441,8 @@ Choosing a player action when testing remembering-everything-reachable:
 	generate the action of remembering.
 
 testing effects of remembering-everything-reachable:
-	assert that the event description includes "All locations have been explored";
-	assert that the event description does not include "You have not yet explored";
+	assert result "All locations have been explored";
+	assert absence of result "You have not yet explored";
 	 
 explored-psycholocating is a hidden-traveling extracting psy-scroll-reading test step.
 
@@ -1466,7 +1466,7 @@ Initial scheduling of malygris-sensing:
 	Now the last-seen-location of Malygris is null-room;
 
 testing effects of malygris-sensing:
-	assert that the event description includes "[soul description of malygris], in [the location of Malygris]";
+	assert result "[soul description of malygris], in [the location of Malygris]";
 	assert "psycholocation sensing should not take time" based on previously-fast;
 
 map-reading is a test step.
@@ -1476,7 +1476,7 @@ choosing a player action when testing map-reading:
 	generate the action of reading M;
 	
 testing effects of map-reading:
-	assert that the event description includes "a complete floor plan of the dungeon of Kerkerkruip imprints itself on your mind"
+	assert result "a complete floor plan of the dungeon of Kerkerkruip imprints itself on your mind"
 	
 map-remembering is a test step.   
 
@@ -1485,8 +1485,8 @@ Choosing a player action when testing map-remembering:
 
 testing effects of map-remembering:
 	Assert that the number of secretly placed rooms is 2;
-	assert that the event description includes "Based on the map you found.*secret rooms in the dungeon, one <^[line break]>+, one <^[line break]>+.";
-	assert that the event description includes "You have also seen Malygris, but you don't know where he is. With your powers of psycholocation, you might be able to SENSE it";
+	assert result "Based on the map you found.*secret rooms in the dungeon, one <^[line break]>+, one <^[line break]>+.";
+	assert result "You have also seen Malygris, but you don't know where he is. With your powers of psycholocation, you might be able to SENSE it";
 	
 getting-close-to-vault is a hidden-traveling extracting test step.
 
@@ -1515,8 +1515,8 @@ Choosing a player action when testing secret-room-remembering:
 	generate the action of remembering.
 
 testing effects of secret-room-remembering:
-	assert that the event description includes "Based on the map you found.*a secret room in the dungeon, <a-z>";
-	assert that the event description does not include "secret room in the dungeon, one";
+	assert result "Based on the map you found.*a secret room in the dungeon, <a-z>";
+	assert absence of result "secret room in the dungeon, one";
 	
 [make sure tunnels don't show up when they shouldn't, make sure they do show up in unexplored list]
 
@@ -1597,7 +1597,7 @@ testing effects of throwing-blessed:
 	assert "The blessed grenade should be exploded" based on whether or not the blessed grenade is exploded;
 	assert "The blessed grenade should be placed" based on whether or not the Blessed Grenade is placed;
 	assert "The blessed grenade should be off-stage" based on whether or not the blessed grenade is off-stage;
-	assert that the event description includes "As the grenade explodes you hear the singing of angels, several of whom swoop down from the heavens with huge swords and eviscerate <^[line break]>*Drakul";
+	assert result "As the grenade explodes you hear the singing of angels, several of whom swoop down from the heavens with huge swords and eviscerate <^[line break]>*Drakul";
 	
 no-new-blessed-grenade is a grenade-producing test step. 
 
@@ -1769,7 +1769,7 @@ Choosing a player action when testing directionless-throwing:
 	generate the action of throwing the reusable item to north;
 
 Testing effects of directionless-throwing:
-	assert that the event description includes "There is no point throwing grenades into twisty little passages";
+	assert result "There is no point throwing grenades into twisty little passages";
 	assert "Trying to throw things in the maze should not take time" based on whether or not the take no time boolean is true;
 	assert "[the reusable item] should be carried" based on whether or not the reusable item is carried.
 	
@@ -1788,7 +1788,7 @@ Initial scheduling of maze-summoning:
 	now the player carries the reusable item;
 	
 Testing effects of maze-summoning:
-	assert that the event description includes "[a monster summoned] appears before you"
+	assert result "[a monster summoned] appears before you"
 	
 A test step can be sound-following.
 
@@ -1806,7 +1806,7 @@ Definition: a person is not-yet-active if the act count of it is 0.
 First combat round rule when testing summoned-fleeing:
 	update event description;
 	if every person who is not the player is not-yet-active:
-		assert that the event description includes "You flee through the tunnels, quickly losing all sense of direction.[line break][line break][The monster summoned] follows you towards the sound.";
+		assert result "You flee through the tunnels, quickly losing all sense of direction.[line break][line break][The monster summoned] follows you towards the sound.";
 		if the monster summoned is non-attacker:
 			assert 0 hits by the monster summoned;
 		otherwise:
@@ -1887,9 +1887,9 @@ Choosing a player action when testing bodmall-sneaking:
 	generate the action of throwing G;
 	
 Testing effects of bodmall-sneaking:
-	assert that the event description includes "first taking the teleportation grenade";
-	assert that the event description includes "Malygris, perhaps the greatest of all living sorcerers, is standing here";
-	assert that the event description does not include "picking stuff up";
+	assert result "first taking the teleportation grenade";
+	assert result "Malygris, perhaps the greatest of all living sorcerers, is standing here";
+	assert absence of result "picking stuff up";
 	
 malygris-robbing is a hidden-traveling test step.
 
@@ -1908,8 +1908,8 @@ Testing effects of malygris-robbing:
 	assert that the teleportation beacon is located in the location;
 	assert that malygris is located in the location;
 	assert that bodmall is located in the location;
-	assert that the event description includes "Something has stopped you from teleporting";
-	assert that the event description includes "picking stuff up";
+	assert result "Something has stopped you from teleporting";
+	assert result "picking stuff up";
 
 Section - Imp Teleporting Into Dreams
 
@@ -2106,7 +2106,7 @@ Before taking a player action when testing sleepy-throwing:
 	
 Testing effects of sleepy-throwing:
 	assert that the player is tungausy warrior with label "identity of the player";
-	assert that the event description does not include "fog of sleep";
+	assert absence of result "fog of sleep";
 	
 hut-entering is a test step.
 
@@ -2131,7 +2131,7 @@ Testing effects of shaman-choosing:
 	assert that the player is the true body of the player with label "true body of the player";
 	assert that the player is awake;
 	assert that the player is fully alert;
-	assert that the event description does not include "fog of sleep";
+	assert absence of result "fog of sleep";
 	
 teleport-waking is a test step.
 
@@ -2150,7 +2150,7 @@ Testing effects of teleport-waking:
 	if waiting for compelled action, make no decision;
 	if the player is at-react, make no decision;
 	assert that the player is fully alert;
-	assert that the event description includes "fog of sleep";
+	assert result "fog of sleep";
 	
 sleepy-teleport is a hidden-traveling item-reading test step.
 
@@ -2160,7 +2160,7 @@ Initial scheduling of sleepy-teleport:
 	
 Testing effects of sleepy-teleport:
 	assert that the player is just-woken;
-	assert that the event description does not include "fog of sleep";
+	assert absence of result "fog of sleep";
 	
 sleepy-status is a test step.
 
@@ -2168,7 +2168,7 @@ Choosing a player action when testing sleepy-status:
 	generate the action of asking status.
 	
 Testing effects of sleepy-status:
-	assert that the event description includes "You are just-woken: The next attack against you gets a \+3 bonus and \+2 damage\.";
+	assert result "You are just-woken: The next attack against you gets a \+3 bonus and \+2 damage\.";
 	
 sleepy-slaying is a hidden-traveling test step.
 
@@ -2176,7 +2176,7 @@ choosing a player action when testing sleepy-slaying:
 	generate the action of smiting the swarm of daggers;
 	
 testing effects of sleepy-slaying:
-	assert that the event description includes "fog of sleep";
+	assert result "fog of sleep";
 	assert that the player is fully alert.
 
 
@@ -2248,7 +2248,7 @@ Testing effects of healer-first-killing:
 	assert "The tormentor of Aite should be alive" based on whether or not the tormentor of Aite is alive;
 	assert "The defender should be alive" based on whether or not the defender of Aite is alive;
 	assert "The player should not be healed" based on whether or not the health of the player is less than the permanent health of the player;
-	assert that the event description does not include "Sul receives .* and fully heals you";
+	assert absence of result "Sul receives .* and fully heals you";
 	
 other-fanatics-killing is an item-throwing test step.
 
@@ -2260,8 +2260,8 @@ testing effects of other-fanatics-killing:
 	assert "The tormentor should be dead" based on whether or not the tormentor of Aite is dead;
 	assert "The defender should be dead" based on whether or not the defender of Aite is dead;
 	assert that the location is Hall of Gods with label "current location";
-	assert that the event description includes "receives the soul";
-	assert that the event description does not include "receives the soul.* receives the soul";
+	assert result "receives the soul";
+	assert absence of result "receives the soul.* receives the soul";
 	assert that the health of the player is the permanent health of the player with label "health of the player";
 
 [TODO: test armadillo and reaper following]
@@ -2369,8 +2369,8 @@ Choosing a player action when testing sensing-293:
 Testing effects of sensing-293:
 	assert "Isra should be psycholocatable" based on whether or not Isra is psycholocation-revealed;
 	assert "Fell should be psycholocatable" based on whether or not fell is psycholocation-revealed;
-	assert that the event description includes "frozen lightning";
-	assert that the event description includes "molten thunder";
+	assert result "frozen lightning";
+	assert result "molten thunder";
 	
 isra-defeating-293 is a test step.
 
@@ -2389,7 +2389,7 @@ Testing effects of fell-defeating-293:
 	assert "isra should be dead" based on whether or not isra is dead;
 	assert "fell should be dead" based on whether or not fell is dead;
 	assert "israfel should be off-stage" based on whether or not israfel is off-stage;
-	[assert that the event description includes "Israfel's dying cry shakes the foundations of the world";]
+	[assert result "Israfel's dying cry shakes the foundations of the world";]
 	assert "power of israfel should be granted" based on whether or not the power of israfel is granted.
 
 Section - Weapon aftereffects
@@ -2421,7 +2421,7 @@ Testing effects of fafhrd-battling:
 	assert no weapon after "the claymore parries the rapier";
 	[claymore parries fists]
 	have Fafhrd do a parry reaction to a 0 melee hit with result "you do not overcome Fafhrd";
-	assert that the event description does not include "The claymore shatters";
+	assert absence of result "The claymore shatters";
 	assert that the global attacker weapon is a random natural weapon enclosed by the player with label "global attacker weapon";
 	[restore rapier to the player]
 	clear event description;
@@ -2430,8 +2430,8 @@ Testing effects of fafhrd-battling:
 	try readying the gilded rapier;
 	try taking inventory;
 	update event description;
-	assert that the event description includes "gilded rapier \(readied\)";
-	assert that the event description does not include "\(readied\).*\(readied\)";
+	assert result "gilded rapier \(readied\)";
+	assert absence of result "\(readied\).*\(readied\)";
 	assert that the number of readied weapons enclosed by the player is 1 with label "number of player's readied weapons ([the list of readied weapons enclosed by the player])";
 	have the player do a dodge reaction to a 0 melee hit by Fafhrd with result "Fafhrd does not overcome your defence rating";
 	assert the gilded rapier readied after "successfully dodging the claymore";
@@ -2456,7 +2456,7 @@ Initial scheduling of scythe-vs-fafhrd:
 Testing effects of scythe-vs-fafhrd:
 	have fafhrd do no reaction to a 100 melee hit with result "You deal";
 	have fafhrd do a parry reaction to a 100 melee hit with result "You deal";
-	assert that the event description does not include "the claymore rusts";
+	assert absence of result "the claymore rusts";
 	assert "Fafhrd should not be rusted" based on whether or not Fafhrd is not rusted;
 	assert "The claymore should not be rusted" based on whether or not the claymore is not rusted;
 	have fafhrd do a parry reaction to a 0 melee hit with result "Having been in contact with the scythe of oxidation, the claymore rusts";
@@ -2498,7 +2498,7 @@ Initial scheduling of lionshield-vs-chains:
 Testing effects of lionshield-vs-chains:
 	now the health of the chain golem is 100;
 	have the player do a dodge reaction to a 0 melee hit by the chain golem with result "the chain golem does not overcome";
-	assert that the event description does not include "The lion on the shield strikes out, and bites the chain golem for 2 damage";
+	assert absence of result "The lion on the shield strikes out, and bites the chain golem for 2 damage";
 	assert that the health of the chain golem is 100 with label "health of the chain golem";
 	have the player do a block reaction to a 0 melee hit by the chain golem with result "The lion on the shield strikes out, and bites the chain golem for 2 damage";
 	assert that the health of the chain golem is 98 with label "health of the chain golem";
@@ -2514,7 +2514,7 @@ Initial scheduling of chains-vs-thorns:
 Testing effects of chains-vs-thorns:
 	now the health of the chain golem is 100;
 	have the player do a dodge reaction to a 0 melee hit by the the chain golem with result "the chain golem does not overcome";
-	assert that the event description does not include "The armour of thorns scratches the chain golem for 1 damage";
+	assert absence of result "The armour of thorns scratches the chain golem for 1 damage";
 	assert that the health of the chain golem is 100 with label "health of the chain golem";
 	have the player do a dodge reaction to a 100 melee hit by the the chain golem with result "The armour of thorns scratches the chain golem for 1 damage";
 	assert that the health of the chain golem is 99 with label "health of the chain golem";
@@ -2530,7 +2530,7 @@ Initial scheduling of lionshield-vs-bodmall:
 Testing effects of lionshield-vs-bodmall:
 	now the health of bodmall is 100;
 	have the player do a block reaction to a 0 melee hit by bodmall with result "Bodmall does not overcome";
-	assert that the event description does not include "lion on the shield strikes out";
+	assert absence of result "lion on the shield strikes out";
 	assert that the health of bodmall is 100 with label "health of bodmall";
 	
 bodmall-vs-thorns is a test step.
@@ -2543,7 +2543,7 @@ Testing effects of bodmall-vs-thorns:
 	now the health of bodmall is 100;
 	[should the lion's shield bite the chain golem or not? Should it be because the chains are a natural weapon or because they are tethered? or both?]
 	have the player do a dodge reaction to a 0 melee hit by bodmall with result "Bodmall does not overcome";
-	assert that the event description does not include "The armour of thorns scratches Bodmall for 1 damage";
+	assert absence of result "The armour of thorns scratches Bodmall for 1 damage";
 	assert that the health of Bodmall is 100 with label "health of bodmall";
 	have the player do a dodge reaction to a 100 melee hit by Bodmall with result "Bodmall beats your defence rating";
 	assert that the health of Bodmall is 100 with label "health of Bodmall";
@@ -2585,7 +2585,7 @@ Testing effects of mouser-vs-thorns:
 	now the health of mouser is 100;
 	[should the lion's shield bite the chain golem or not? Should it be because the chains are a natural weapon or because they are tethered? or both?]
 	have the player do a dodge reaction to a 0 melee hit by the mouser with result "Mouser does not overcome";
-	assert that the event description does not include "The armour of thorns scratches Mouser for 1 damage";
+	assert absence of result "The armour of thorns scratches Mouser for 1 damage";
 	assert that the health of mouser is 100 with label "health of mouser";
 	have the player do a dodge reaction to a 100 melee hit by the mouser with result "The armour of thorns scratches Mouser for 1 damage";
 	assert that the health of mouser is 99 with label "health of mouser";
@@ -2605,7 +2605,7 @@ Testing effects of knowledge-gaining:
 	clear event description;
 	find a healthy scroll;
 	update event description;
-	assert that the event description includes "You have found a scroll";
+	assert result "You have found a scroll";
 	Repeat with item running through scrolls enclosed by the player:
 		assert "The true name and obfuscated name of [item] should be different, but they are both '[true name of item]'" based on whether or not the true name of item is not the obfuscated name of item;
 	Repeat with item running through scrolls:
@@ -2622,7 +2622,7 @@ Initial scheduling of throwing-352:
 	now the reusable item is a random smoke grenade.
 	
 Testing effects of throwing-352:
-	assert that the event description does not include "Run-time problem"
+	assert absence of result "Run-time problem"
 	
 Section - Died Counts
 
@@ -2664,11 +2664,11 @@ Testing effects of damage-text testing:
 	Have the the reaper do a dodge reaction to a 100 melee hit with result "(\n|^)You deal <1-9><0-9>* \+ 1 \(tension\) = <0-9>+ damage", checking damage;
 	clear event description;
 	say Divine lightning strikes the player;
-	assert that the event description includes "(\n|^)A ball of lightning shoots from the sky, doing <3-7> damage to you"; [fails currently, but if it didn't, we might want another test for when the damage was reduced]
+	assert result "(\n|^)A ball of lightning shoots from the sky, doing <3-7> damage to you"; [fails currently, but if it didn't, we might want another test for when the damage was reduced]
 	now the reusable item is a random fragmentation grenade;
 	clear event description;
 	have a fragmentation event in the location with the reusable item by the player;
-	assert that the event description includes "<2-5> damage to the Reaper; and <2-5> damage to you";
+	assert result "<2-5> damage to the Reaper; and <2-5> damage to you";
 	[skip fragmentation in other rooms because no damage text is printed]
 	now the player wears the armour of thorns;
 	now the blood magic level of the armour of thorns is 1;
@@ -2680,21 +2680,21 @@ Testing effects of damage-text testing:
 	now the player carries the reusable item;
 	clear event description;
 	try reading the reusable item;
-	assert that the event description includes "(\n|^)A wave of unholy energy is released, dealing <3-6> damage to the Reaper; and <3-6> damage to you.";
+	assert result "(\n|^)A wave of unholy energy is released, dealing <3-6> damage to the Reaper; and <3-6> damage to you.";
 	[not sure how we could trigger an unholy wave in another room, but it wouldn't print anything anyway]
 	now the player worships Chton;
 	now the player carries the vial of purification;
 	clear event description;
 	try drinking the vial of purification;
-	assert that the event description includes "(\n|^)Chton prevents the vial of purification from doing its work; but your attempt at escaping undeath did not amuse him. A wave of extreme cold racks your body, dealing 15 damage!";
+	assert result "(\n|^)Chton prevents the vial of purification from doing its work; but your attempt at escaping undeath did not amuse him. A wave of extreme cold racks your body, dealing 15 damage!";
 	extract the player to the Temple of Aite;
 	clear event description;
 	try climbing the statue of Aite;
-	assert that the event description includes "(\n|^)You cut yourself as soon as you touch the statue. The weapons deal 3 damage.";
+	assert result "(\n|^)You cut yourself as soon as you touch the statue. The weapons deal 3 damage.";
 	prepare a test battle with the abyss of the soul;
 	clear event description;
 	try the abyss of the soul pulsating;
-	assert that the event description includes "(\n|^)The abyss of the soul pulsates, sending out a wave of negative energy that deals <1-2> damage to you.";
+	assert result "(\n|^)The abyss of the soul pulsates, sending out a wave of negative energy that deals <1-2> damage to you.";
 	prepare a test battle with the chain golem;
 	now the defence of the chain golem is 50;
 	now the melee of the player is 0;
@@ -2703,13 +2703,13 @@ Testing effects of damage-text testing:
 	now the concentration of the chain golem is 3;
 	clear event description;
 	try attacking the chain golem;
-	assert that the event description includes "(\n|^)You attempt to duck under the whirling chains. You roll <0-9>+ \+ -100 \(body\) = -<0-9>+ against a target number of <0-9>+, failing the body check. One of the chains catches you with a loud smack, dealing 6 damage.";
+	assert result "(\n|^)You attempt to duck under the whirling chains. You roll <0-9>+ \+ -100 \(body\) = -<0-9>+ against a target number of <0-9>+, failing the body check. One of the chains catches you with a loud smack, dealing 6 damage.";
 	now the power of the bomb is granted;
 	now the health of the player is 0;
 	now the health of the chain golem is 1000;
 	clear event description;
 	have an event of the chain golem killing the player;
-	assert that the event description includes "(\n|^)Your body explodes vehemently as you throw yourself at the chain golem, but you only deal 5 damage instead of the 1000 damage you needed to deal.";
+	assert result "(\n|^)Your body explodes vehemently as you throw yourself at the chain golem, but you only deal 5 damage instead of the 1000 damage you needed to deal.";
 	now the health of the player is 1000;
 	prepare a test battle with the tentacle;
 	now the tension is 0;
@@ -2723,12 +2723,12 @@ Testing effects of damage-text testing:
 	check damage of the player with 1000 health after "deals"; [somewhat redundant here]
 	clear event description;
 	try the tentacle tentacle-constricting;
-	assert that the event description includes "(\n|^)The giant tentacle tightens its muscles, dealing 1 damage to you";
+	assert result "(\n|^)The giant tentacle tightens its muscles, dealing 1 damage to you";
 	check damage of the player with 1000 health after "dealing";
 	clear event description;
 	now brambles strength is 1;
 	launch the thorns;
-	assert that the event description includes "(\n|^)Thorns shoot towards everyone, dealing 1 damage to the giant tentacle; and 1 damage to you\.";
+	assert result "(\n|^)Thorns shoot towards everyone, dealing 1 damage to the giant tentacle; and 1 damage to you\.";
 	check damage of the player with 1000 health after "to the giant tentacle; and";
 	prepare a test battle with israfel;
 	[TODO: try with heat damage resistance]
@@ -2739,7 +2739,7 @@ Testing effects of damage-text testing:
 	check damage of the player with 1000 health after "burn you for";
 	clear event description;
 	deal 3 points of Aite-damage to the player on behalf of the player;
-	assert that the event description includes "(\n|^)A huge <a-w>+ bursts out of the ground, skewering you for 3 damage!";
+	assert result "(\n|^)A huge <a-w>+ bursts out of the ground, skewering you for 3 damage!";
 	check damage of the player with 1000 health after "skewering you for";
 	now the reusable item is a random scroll of ghoulification;
 	now the player carries the reusable item;
@@ -2748,13 +2748,13 @@ Testing effects of damage-text testing:
 	clear event description;
 	have Chton intervene on behalf of the player;
 	[TODO: necromantic damage reduction?]
-	assert that the event description includes "(\n|^)Chton suddenly sends a wave of unholy energy through the room, dealing <3-6> damage to Fell; and <3-6> damage to Isra\.";
+	assert result "(\n|^)Chton suddenly sends a wave of unholy energy through the room, dealing <3-6> damage to Fell; and <3-6> damage to Isra\.";
 	check damage of Isra with 1000 health after "to Fell; and";
 	extract the player to the temple of Sul;
 	now the player does not worship chton;
 	clear event description;
 	try sacrificing;
-	assert that the event description includes "(\n|^)Sul abhors the undead! Divine wrath strikes you instantly, dealing 10 damage\.";
+	assert result "(\n|^)Sul abhors the undead! Divine wrath strikes you instantly, dealing 10 damage\.";
 	check damage of the player with 1000 health after "dealing";
 	now the player carries the vial of purification;
 	try drinking the vial of purification;
@@ -2762,12 +2762,12 @@ Testing effects of damage-text testing:
 	now the player carries the reusable item; [scroll of ghoulfication]
 	clear event description;
 	try reading the reusable item;
-	assert that the event description includes "(\n|^)Before you finish reading it, the scroll burns up in your hands! Sul is not amused by your defiant behaviour, and deals 10 damage to you\.";
+	assert result "(\n|^)Before you finish reading it, the scroll burns up in your hands! Sul is not amused by your defiant behaviour, and deals 10 damage to you\.";
 	check damage of the player with 1000 health after "deals";
 	extract the player to vast staircase;
 	clear event description;
 	try direction-jumping down;
-	assert that the event description includes "(\n|^)With a loud smack, you land in [the room down from Vast Staircase], receiving <1-9> damage\.";
+	assert result "(\n|^)With a loud smack, you land in [the room down from Vast Staircase], receiving <1-9> damage\.";
 	check damage of the player with 1000 health after "receiving";
 	
 bees-damage-text is a test step.
@@ -2778,7 +2778,7 @@ Initial scheduling of bees-damage-text:
 	make everyone wait;
 	
 Testing effects of bees-damage-text:
-	assert that the event description includes "The swarm of bees attacks <^\n>+, dealing <1-3> damage\.";
+	assert result "The swarm of bees attacks <^\n>+, dealing <1-3> damage\.";
 	
 [TODO: tests for all damage modifier rules]
 [TODO: test damage effects, e.g. fragmentation grenade exploding in another room]
@@ -2813,7 +2813,7 @@ Initial scheduling of damage-modifier-testing:
 Testing effects of damage-modifier-testing:
 	equip the player with the robe of the dead mage;
 	have the player do no reaction to a 100 melee hit by the armadillo with result "deals", checking damage;
-	assert that the event description does not include "\(robe of the dead mage\)<^\n>+ damage";
+	assert absence of result "\(robe of the dead mage\)<^\n>+ damage";
 	repeat with conc-level running from 1 to 4:
 		now the concentration of the player is conc-level;
 		have the player do no reaction to a 100 melee hit by the armadillo with result "\+ [conc-level * 25]% \(robe of the dead mage\)", checking damage;
@@ -2832,7 +2832,7 @@ Testing effects of damage-modifier-testing:
 	now the blood magic level of Malleus Maleficarum is 1;
 	now the tension is 10;
 	have the armadillo do no reaction to a 100 melee hit by the player with result "\+ 1 \(Malleus Maleficarum blood bonus\)<^\n>+ damage", checking damage;
-	assert that the event description does not include "tension<^\n>+ damage";
+	assert absence of result "tension<^\n>+ damage";
 	equip the player with the Yahvinnian crossbow;
 	now the tension is 1;
 	have the armadillo do no reaction to a 100 melee hit by the player with result "crossbow benefits from tension<^\n>+ damage" in 0 out of 1 attempts, checking damage;
@@ -2840,13 +2840,15 @@ Testing effects of damage-modifier-testing:
 	now the tension is 2;
 	have the armadillo do no reaction to a 100 melee hit by the player with result "\+ 1 \(crossbow benefits from tension\)<^\n>+ damage", checking damage;
 	equip the player with giantbane;
+	now the armadillo is just-woken;
 	now the tension is 3;
 	have the armadillo do no reaction to a 100 melee hit by the player with result "dagger benefits from tension<^\n>+ damage" in 0 out of 1 attempts, checking damage;
-	assert that the event description does not include "Giantbane's special<^\n>+ damage";
+	assert that the damage description does not include "Giantbane's special";
+	assert that the damage description includes "\+ 2 \(defender was asleep\)";
 	now the tension is 4;
 	now the armadillo is large;
 	have the armadillo do no reaction to a 100 melee hit by the player with result "\+ 1 \(dagger benefits from tension\)", checking damage;
-	assert that the event description includes "\+ 3 \(Giantbane's special\)<^\n>+ damage";
+	assert result "\+ 3 \(Giantbane's special\)<^\n>+ damage";
 	now the brightest-flame-counter is 1;
 	have the player do no reaction to a 100 melee hit by the armadillo with result "- \d+ \(brightest flame\)<^\n>+ damage", checking damage;
 	assert that the total damage is 0 with label "total damage with brightest flame";
@@ -2875,14 +2877,13 @@ Choosing a player action when testing armadillo-runner:
 Testing effects of armadillo-runner:
 	check damage of the player with 1000 health after "The ravenous armadillo deals";
 	[TODO: more automation of damage description tests, use everywhere]
-	now the event description is the damage description;
-	assert that the event description includes "\+ 1 \(you are running\) ";
-	assert that the event description includes "\+ 1 \(offensive flow\) ";
-	assert that the event description includes "\+ 2 \(concentration\) ";
-	assert that the event description includes "\+ 1 \(tension\) ";
-	assert that the event description includes "\+ 1 \(inherent bonus\) ";
-	assert that the event description includes "\+ 1 \(bloodlust\)";
-	assert that the event description includes "x 50% \(rod of the master builder\) ";
+	assert that the damage description includes "\+ 1 \(you are running\) ";
+	assert that the damage description includes "\+ 1 \(offensive flow\) ";
+	assert that the damage description includes "\+ 2 \(concentration\) ";
+	assert that the damage description includes "\+ 1 \(tension\) ";
+	assert that the damage description includes "\+ 1 \(inherent bonus\) ";
+	assert that the damage description includes "\+ 1 \(bloodlust\)";
+	assert that the damage description includes "x 50% \(rod of the master builder\) ";
 
 radiance-reduction is a test step.
 
@@ -2895,15 +2896,15 @@ Initial scheduling of radiance-reduction:
 	
 Testing effects of radiance-reduction:
 	if waiting for player reaction, make no decision;
-	assert that the event description includes "\+ 4 \(sword of light radiance bonus\)";
-	assert that the event description includes "- 2 \(fuligin cloak\)<^\n>+ damage";
+	assert result "\+ 4 \(sword of light radiance bonus\)";
+	assert result "- 2 \(fuligin cloak\)<^\n>+ damage";
 	check damage of the player with 1000 health after "deals";
 	now the sword of light is iron;
 	clear event description;
 	try examining the sword of light;
-	assert that the event description includes "It seems to consist of pure iron.";
-	assert that the event description does not include "damage increases";
-	assert that the event description includes "; no special bonus when it is made of iron";
+	assert result "It seems to consist of pure iron.";
+	assert absence of result "damage increases";
+	assert result "; no special bonus when it is made of iron";
 	have the player do no reaction to a 100 melee hit by the angel of compassion with result "sword of light radiance bonus" in 0 out of 1 attempts, checking damage;
 	now the sword of light is radiance;
 	now the radiation of the angel of compassion is 0;
@@ -2911,12 +2912,12 @@ Testing effects of radiance-reduction:
 	equip the player with the sandals of the heretic;
 	clear event description;
 	say Divine lightning strikes the player;
-	assert that the event description includes "- 2 \(sandals of the heretic\)<^\n>+ damage";
+	assert result "- 2 \(sandals of the heretic\)<^\n>+ damage";
 	check damage of the player with 1000 health after "A ball of lightning shoots from the sky, doing";
 	now chton-killing is true;
 	have the player do no reaction to a 100 melee hit by the angel of compassion with result "\+ 2 \(Chton's wrath pulls you to your grave\)<^\n>+ damage", checking damage;
 	now chton-killing is false;
-	assert that the event description includes "- 2 \(sandals of the heretic\)";
+	assert result "- 2 \(sandals of the heretic\)";
 	equip the player with the sneaking sword;
 	force the fuligin cloak to work;
 	have the angel of compassion do no reaction to a 100 melee hit with result "\+ 1 \(sneaky attack\)<^\n>+ damage", checking damage;
@@ -2934,13 +2935,13 @@ Initial scheduling of heat-damage-testing:
 	
 Testing effects of heat-damage-testing:
 	if waiting for player reaction, make no decision;
-	assert that the event description includes "\+ 5 \(sword of light is hot\)<^\n>+ damage";
-	assert that the event description includes "- 4 \(dragon armour protects against heat\)<^\n>+ damage";
+	assert result "\+ 5 \(sword of light is hot\)<^\n>+ damage";
+	assert result "- 4 \(dragon armour protects against heat\)<^\n>+ damage";
 	check damage of the player with 1000 health after "deals";
 	now the internal heat of the sword of light is 3;
 	now the heat strength of the sword of light is 3;
 	have the player do no reaction to a 100 melee hit by the angel of compassion with result "- 2 \(dragon armour\)" in 1 out of 3 attempts, checking damage;
-	assert that the event description includes "- 3 \(dragon armour protects against heat\)";
+	assert result "- 3 \(dragon armour protects against heat\)";
 	
 holy-damage is a test step.
 
@@ -2960,12 +2961,12 @@ Testing effects of holy-damage:
 	have the smoke demon do no reaction to a 100 melee hit by the reaper with result "\+ 5 \(slaying undead\)<^\n>+ damage" in 0 out of 1 attempts, checking damage;
 	have the smoke demon do no reaction to a 100 melee hit by the tormentor of Aite with result "0 damage" in 0 out of 1 attempts, checking damage;
 	have the rotting corpse do no reaction to a 100 melee hit by the tormentor of Aite with result "0 damage", checking damage;
-	assert that the event description includes "- \d+ \(undead immune to necromantic damage\)";
+	assert result "- \d+ \(undead immune to necromantic damage\)";
 	now the player is deathly-resistant;
 	clear event description;
 	have chton intervene on behalf of the player;
 	[TODO: phrase to check damage in multiple-person damage report]
-	assert that the event description includes "dealing<^\n>* (\d+) - 2 \(resistant to deathly magic\) = (\d+) damage to you";
+	assert result "dealing<^\n>* (\d+) - 2 \(resistant to deathly magic\) = (\d+) damage to you";
 	now the expression scan position is 0;
 	Let original damage be the number we scan in the text matching subexpression 1;
 	now the expression scan position is 0;
@@ -2988,8 +2989,6 @@ Testing effects of ment-damage:
 ./Victor Gijsbers/Kerkerkruip Actions and UI.i7x - done
 ./Victor Gijsbers/Kerkerkruip ATTACK.i7x - done
 ./Victor Gijsbers/Kerkerkruip Items.i7x - done
-./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x:An add specific damage rule (this is the bloodlusting damage bonus rule):
-./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x:An add specific damage rule (this is the insane people sometimes get insane damage bonus rule):
 ./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x:An add specific damage rule (this is the asleep damage bonus rule):
 ./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x:A remove specific damage rule (this is the less damage when stunning rule):
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add specific damage rule (this is the more damage when piercing rule):

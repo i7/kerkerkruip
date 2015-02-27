@@ -100,7 +100,6 @@ To record a test attempt:
 		now failures entry is 0;
 		now failure messages entry is "";
 	increment the total entry;
-	update event description because "recording test attempt for";
 
 To record a/-- failure report of/-- (msg - a text):
 	choose row with test set of current test set in Table of Test Results;	
@@ -827,6 +826,7 @@ To succeed based on (result - a truth state):
 	succeed based on result within 100 attempts;
 	
 To succeed on result (R - a text) within (N - a number) attempts:
+	update event description because "testing for [R] within [N] attempts - ";
 	succeed based on whether or not the event description matches the regular expression R within N attempts;
 	
 To succeed on result (R - a text):
@@ -836,23 +836,32 @@ To fail based on (result - a truth state):
 	fail based on result within 100 attempts;
 	
 To fail on result (R - a text) within (N - a number) attempts:
+	update event description because "testing for absence of [R] within [N] attempts - ";
 	fail based on whether or not the event description matches the regular expression R within N attempts;
 	
 To fail on result (R - a text):
 	fail on result R within 100 attempts;
 		
-To assert that the event description includes (pattern - an indexed text):
+To assert result (pattern - a text):
+	update event description because "testing for result [pattern]";
+	assert that the event description includes pattern;
+	
+To assert absence of result (pattern - a text):
+	update event description because "testing for absence of [pattern]";
+	assert that the event description does not include pattern;
+	
+To assert that the (description - a text) includes (pattern - a text):
 	record a test attempt;
-	unless the event description matches the regular expression pattern:
+	unless the description matches the regular expression pattern:
 		Let error_msg be an indexed text;
-		now error_msg is "Regular expression '[pattern]' was not found in the text:[paragraph break]'[the event description]'[line break]";
+		now error_msg is "Regular expression '[pattern]' was not found in the text:[paragraph break]'[the description]'[line break]";
 		record a failure report of error_msg;
 		
-To assert that the event description does not include (pattern - an indexed text):
+To assert that the (description - a text) does not include (pattern - a text):
 	record a test attempt;
-	if the event description matches the regular expression pattern:
+	if the description matches the regular expression pattern:
 		Let error_msg be an indexed text;
-		now error_msg is "Regular expression '[pattern]' should not have been found in the text:[paragraph break]'[the event description]'[line break]";
+		now error_msg is "Regular expression '[pattern]' should not have been found in the text:[paragraph break]'[the description]'[line break]";
 		record a failure report of error_msg;
 
 To assert that (N - a number) is between (A - a number) and (B - a number) with label (L - a text):
