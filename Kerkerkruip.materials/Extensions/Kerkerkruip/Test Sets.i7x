@@ -2966,6 +2966,7 @@ Initial scheduling of holy-damage:
 	revive the rotting corpse in the location;
 	revive the smoke demon in the location;
 	revive the armadillo in the location;
+	revive the wisps of pain in the location;
 	
 Testing effects of holy-damage:
 	Now the spirit score of the healer of Aite is 9;
@@ -3008,6 +3009,7 @@ Testing effects of holy-damage:
 	have a fragmentation event in the location with a random fragmentation grenade by the player;
 	assert result "\d - \d \(tough scales\) = \d damage to the ravenous armadillo";
 	assert result "\d - 1 \(armadillo\) = \d damage to you";
+	assert result "\d - \d \(hard to damage\) = 0 damage to the wisps of pain";
 	now the player is at-scale;
 	have the player do no reaction to a 100 melee hit by the Tormentor of Aite with result "- 6 \(scales\)";
 	
@@ -3023,8 +3025,6 @@ Testing effects of ment-damage:
 ./Victor Gijsbers/Kerkerkruip Actions and UI.i7x - done
 ./Victor Gijsbers/Kerkerkruip ATTACK.i7x - done
 ./Victor Gijsbers/Kerkerkruip Items.i7x - done
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:A remove general damage rule (this is the scales gives damage resistance rule):
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:		remove n points of general damage with reason "scales".
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:A remove general damage rule (this is the wisps of pain take less damage rule):
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:		remove 5 points of general damage with reason "hard to damage".
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add specific damage rule (this is the chain golem damage depends on concentration rule):
