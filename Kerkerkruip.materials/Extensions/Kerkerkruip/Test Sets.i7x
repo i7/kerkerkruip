@@ -2867,12 +2867,15 @@ Testing effects of damage-modifier-testing:
 	now the tension is 3;
 	now the hound provoker is Miranda;
 	now the hound status is 1;
+	now the concentration of Miranda is 2;
+	now Miranda is linked to the player;
 	have Miranda do no reaction to a 100 melee hit by the player with result "dagger benefits from tension" in 0 out of 1 attempts, checking damage;
 	assert that the damage description does not include "Giantbane's special";
 	assert that the damage description includes "\+ 2 \(defender was asleep\)";
 	assert that the damage description includes "\+ 3 \(piercing\)";
 	assert that the damage description includes "\+ 3 \(howling\)";
 	assert that the damage description includes "\+ 2 \(counterstrike\)";
+	assert that the damage description includes "\+ 2 \(link\)";
 	now the hound status is 0;
 	now the tension is 4;
 	now Miranda is large;
@@ -3066,7 +3069,6 @@ Testing effects of ment-damage:
 ./Victor Gijsbers/Kerkerkruip ATTACK.i7x - done
 ./Victor Gijsbers/Kerkerkruip Items.i7x - done
 ./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x - done
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:A remove specific damage rule (this is the druid is dealt less damage by natural materials rule):
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add specific damage rule (this is the link concentration damage modifier rule):
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:A general damage multiplier rule (this is the limbless rotting corpse can't attack rule):
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:			multiply general damage by 0 percent with reason "no means of attack".
