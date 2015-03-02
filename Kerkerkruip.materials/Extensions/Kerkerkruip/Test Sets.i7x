@@ -2835,6 +2835,9 @@ Testing effects of damage-modifier-testing:
 	have Miranda do no reaction to a 100 melee hit by the player with result "executioner's axe benefits from tension" in 0 out of 1 attempts, checking damage;
 	now the tension is 3;
 	have Miranda do no reaction to a 100 melee hit by the player with result "\+ 1 \(executioner's axe benefits from tension\) ", checking damage;
+	now the power of the minotaur is granted;
+	now the body score of the player is 25;
+	have Miranda do no reaction to a 100 melee hit by the player with result "\+ 10 \(axe proficiency\)" in 1 out of 4 attempts, checking damage;
 	equip the player with Malleus Maleficarum;
 	now the blood magic level of Malleus Maleficarum is 1;
 	now the tension is 10;
@@ -3049,7 +3052,6 @@ Testing effects of ment-damage:
 ./Victor Gijsbers/Kerkerkruip ATTACK.i7x - done
 ./Victor Gijsbers/Kerkerkruip Items.i7x - done
 ./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x - done
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add specific damage rule (this is the betrayel damage bonus rule):
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add specific damage rule (this is the power of the minotaur damage bonus rule):
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:A remove specific damage rule (this is the barkskin decreases damage rule):
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:A remove specific damage rule (this is the druid is dealt less damage by natural materials rule):
