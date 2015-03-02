@@ -2835,6 +2835,11 @@ Testing effects of damage-modifier-testing:
 	have Miranda do no reaction to a 100 melee hit by the player with result "executioner's axe benefits from tension" in 0 out of 1 attempts, checking damage;
 	now the tension is 3;
 	have Miranda do no reaction to a 100 melee hit by the player with result "\+ 1 \(executioner's axe benefits from tension\) ", checking damage;
+	extract Bodmall to the location;
+	now Bodmall is barkskinned;
+	[barkskin does not protect against axes]
+	have Bodmall do no reaction to a 100 melee hit by the player with result "barkskin" in 0 out of 1 attempts;
+	remove Bodmall from play;
 	now the power of the minotaur is granted;
 	now the body score of the player is 25;
 	have Miranda do no reaction to a 100 melee hit by the player with result "\+ 10 \(axe proficiency\)" in 1 out of 4 attempts, checking damage;
@@ -3014,15 +3019,22 @@ Testing effects of holy-damage:
 	now the health of the player is 1000;
 	now the inherent damage modifier of the player is 4;
 	have the armadillo do no reaction to a 100 melee hit by the player with result "- 4 \(tough scales\)", checking damage;
+	now the inherent damage modifier of the tormentor of Aite is 7;
+	[TODO: inherent damage modifier should use primary damage type, not physical!]
 	have the armadillo do no reaction to a 100 melee hit by the Tormentor of Aite with result "tough scales" in 0 out of 1 attempts; [physical damage reduction only]
 	now the power of the armadillo is granted;
-	now the inherent damage modifier of the tormentor of Aite is 7;
+	now the player is barkskinned;
 	have the player do no reaction to a 100 melee hit by the Tormentor of Aite with result "- 1 \(armadillo\)", checking damage; [general damage reduction - TODO: should it be?]
+	assert that the damage description does not include "barkskin";
 	clear event description;
 	have a fragmentation event in the location with a random fragmentation grenade by the player;
 	assert result "\d - \d \(tough scales\) = \d damage to the ravenous armadillo";
-	assert result "\d - 1 \(armadillo\) = \d damage to you";
 	assert result "\d - \d \(hard to damage\) = 0 damage to the wisps of pain";
+	assert result "(; <^;>+ damage to you)";
+	now the event description is the text matching subexpression 1;
+	check damage of the player with 1000 health after ";";
+	assert that the damage description includes "- 1 \(armadillo\)";
+	assert that the damage description includes "- 1 \(barkskin\)";
 	now the player is at-scale;
 	have the player do no reaction to a 100 melee hit by the Tormentor of Aite with result "- 6 \(scales\)";
 	
@@ -3052,7 +3064,6 @@ Testing effects of ment-damage:
 ./Victor Gijsbers/Kerkerkruip ATTACK.i7x - done
 ./Victor Gijsbers/Kerkerkruip Items.i7x - done
 ./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x - done
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add specific damage rule (this is the power of the minotaur damage bonus rule):
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:A remove specific damage rule (this is the barkskin decreases damage rule):
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:A remove specific damage rule (this is the druid is dealt less damage by natural materials rule):
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add specific damage rule (this is the link concentration damage modifier rule):
