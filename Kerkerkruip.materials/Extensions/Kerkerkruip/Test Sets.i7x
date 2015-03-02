@@ -2809,6 +2809,8 @@ damage-modifier-testing is an extracting test step. The first move of damage-mod
 Definition: a room is precarious if it is Bridge of Doom or it is the Vast Staircase.
 
 Initial scheduling of damage-modifier-testing:
+	equip Miranda with nunchucks;
+	Now the nunchucks are wood;
 	Let the place be the location of Miranda;
 	now the inherent damage modifier of Miranda is 2;
 	if the place is a precarious room:
@@ -2836,6 +2838,7 @@ Testing effects of damage-modifier-testing:
 	now the tension is 3;
 	have Miranda do no reaction to a 100 melee hit by the player with result "\+ 1 \(executioner's axe benefits from tension\) ", checking damage;
 	extract Bodmall to the location;
+	have Bodmall do no reaction to a 100 melee hit by Miranda with result "- 1 \(druid resistant to wood\)";
 	now Bodmall is barkskinned;
 	[barkskin does not protect against axes]
 	have Bodmall do no reaction to a 100 melee hit by the player with result "barkskin" in 0 out of 1 attempts;
@@ -2985,6 +2988,7 @@ Initial scheduling of holy-damage:
 	revive the smoke demon in the location;
 	revive the armadillo in the location;
 	revive the wisps of pain in the location;
+	revive Bodmall in the location;
 	
 Testing effects of holy-damage:
 	Now the spirit score of the healer of Aite is 9;
@@ -3023,18 +3027,16 @@ Testing effects of holy-damage:
 	[TODO: inherent damage modifier should use primary damage type, not physical!]
 	have the armadillo do no reaction to a 100 melee hit by the Tormentor of Aite with result "tough scales" in 0 out of 1 attempts; [physical damage reduction only]
 	now the power of the armadillo is granted;
-	now the player is barkskinned;
 	have the player do no reaction to a 100 melee hit by the Tormentor of Aite with result "- 1 \(armadillo\)", checking damage; [general damage reduction - TODO: should it be?]
-	assert that the damage description does not include "barkskin";
+	have Bodmall do no reaction to a 100 melee hit by the Tormentor of Aite with result "barkskin" in 0 out of 1 attempts;
+	now the inherent damage modifier of the smoke demon is 4;
+	have Bodmall do no reaction to a 100 melee hit by the smoke demon with result "- 3 \(druid resistant to vapour\)";
 	clear event description;
 	have a fragmentation event in the location with a random fragmentation grenade by the player;
 	assert result "\d - \d \(tough scales\) = \d damage to the ravenous armadillo";
 	assert result "\d - \d \(hard to damage\) = 0 damage to the wisps of pain";
-	assert result "(; <^;>+ damage to you)";
-	now the event description is the text matching subexpression 1;
-	check damage of the player with 1000 health after ";";
-	assert that the damage description includes "- 1 \(armadillo\)";
-	assert that the damage description includes "- 1 \(barkskin\)";
+	assert result "\d - 1 \(barkskin\) = \d damage to Bodmall";
+	assert result "\d - 1 \(armadillo\) = \d damage to you";
 	now the player is at-scale;
 	have the player do no reaction to a 100 melee hit by the Tormentor of Aite with result "- 6 \(scales\)";
 	
@@ -3064,7 +3066,6 @@ Testing effects of ment-damage:
 ./Victor Gijsbers/Kerkerkruip ATTACK.i7x - done
 ./Victor Gijsbers/Kerkerkruip Items.i7x - done
 ./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x - done
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:A remove specific damage rule (this is the barkskin decreases damage rule):
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:A remove specific damage rule (this is the druid is dealt less damage by natural materials rule):
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add specific damage rule (this is the link concentration damage modifier rule):
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:A general damage multiplier rule (this is the limbless rotting corpse can't attack rule):
