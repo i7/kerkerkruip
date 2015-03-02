@@ -3042,6 +3042,11 @@ Testing effects of holy-damage:
 	assert result "\d - 1 \(armadillo\) = \d damage to you";
 	now the player is at-scale;
 	have the player do no reaction to a 100 melee hit by the Tormentor of Aite with result "- 6 \(scales\)";
+	while the limbs of the rotting corpse > 0:
+		have the rotting corpse do no reaction to a 100 melee hit with result "As the corpse reels back from the blow, his rotting ";
+	Let X be a random natural weapon part of the rotting corpse;
+	have the player do no reaction to a 100 melee hit by the rotting corpse with result "x 0 \(no means of attack\)"; [TODO: this fails because the primary damage is 0. should it? is there a way for the primary damage to be more?]
+	
 	
 slave-attacking is a test step.
 
@@ -3069,7 +3074,6 @@ Testing effects of ment-damage:
 ./Victor Gijsbers/Kerkerkruip ATTACK.i7x - done
 ./Victor Gijsbers/Kerkerkruip Items.i7x - done
 ./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x - done
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add specific damage rule (this is the link concentration damage modifier rule):
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:A general damage multiplier rule (this is the limbless rotting corpse can't attack rule):
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:			multiply general damage by 0 percent with reason "no means of attack".
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add specific damage rule (this is the malignant chanter damage bonus rule):
