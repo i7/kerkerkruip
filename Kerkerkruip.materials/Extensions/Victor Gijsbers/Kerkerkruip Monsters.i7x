@@ -2848,7 +2848,7 @@ An attack modifier rule (this is the betrayal attack modifier rule):
 		if the numbers boolean is true, say " + 6 (betrayed by [master])[run paragraph on]";
 		increase the attack strength by 6.
 
-An add specific damage rule (this is the betrayel damage bonus rule):
+An add specific damage rule (this is the betrayal damage bonus rule):
 	if damage-by-hitting is true:
 		if the victim is betrayed:
 			add 4 points of physical damage with reason "betrayed by [master]".

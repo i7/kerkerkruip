@@ -3023,6 +3023,19 @@ Testing effects of holy-damage:
 	now the player is at-scale;
 	have the player do no reaction to a 100 melee hit by the Tormentor of Aite with result "- 6 \(scales\)";
 	
+slave-attacking is a test step.
+
+Initial scheduling of slave-attacking:
+	now the health of the reaper is 1000;
+	now the reaper is player-enslaved;
+	
+Choosing a player action when testing slave-attacking:
+	generate the action of attacking the reaper;
+	
+Testing effects of slave-attacking:
+	check damage of the reaper with 1000 health after "You deal";
+	assert that the damage description includes "\+ 4 \(betrayed by [master]\)";
+
 ment-damage is a test step.
 
 Testing effects of ment-damage:
@@ -3036,7 +3049,6 @@ Testing effects of ment-damage:
 ./Victor Gijsbers/Kerkerkruip ATTACK.i7x - done
 ./Victor Gijsbers/Kerkerkruip Items.i7x - done
 ./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x - done
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add specific damage rule (this is the power of the hound damage modifier rule):
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add specific damage rule (this is the betrayel damage bonus rule):
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add specific damage rule (this is the power of the minotaur damage bonus rule):
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:A remove specific damage rule (this is the barkskin decreases damage rule):
