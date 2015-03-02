@@ -3002,12 +3002,14 @@ Testing effects of holy-damage:
 	have the armadillo do no reaction to a 100 melee hit by the player with result "- 4 \(tough scales\)", checking damage;
 	have the armadillo do no reaction to a 100 melee hit by the Tormentor of Aite with result "tough scales" in 0 out of 1 attempts; [physical damage reduction only]
 	now the power of the armadillo is granted;
-	now the inherent damage modifier of the tormentor of Aite is 1;
+	now the inherent damage modifier of the tormentor of Aite is 7;
 	have the player do no reaction to a 100 melee hit by the Tormentor of Aite with result "- 1 \(armadillo\)", checking damage; [general damage reduction - TODO: should it be?]
 	clear event description;
 	have a fragmentation event in the location with a random fragmentation grenade by the player;
 	assert result "\d - \d \(tough scales\) = \d damage to the ravenous armadillo";
 	assert result "\d - 1 \(armadillo\) = \d damage to you";
+	now the player is at-scale;
+	have the player do no reaction to a 100 melee hit by the Tormentor of Aite with result "- 6 \(scales\)";
 	
 ment-damage is a test step.
 
@@ -3021,9 +3023,6 @@ Testing effects of ment-damage:
 ./Victor Gijsbers/Kerkerkruip Actions and UI.i7x - done
 ./Victor Gijsbers/Kerkerkruip ATTACK.i7x - done
 ./Victor Gijsbers/Kerkerkruip Items.i7x - done
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:A remove specific damage rule (this is the armadillo physical damage reduction rule):
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:A remove general damage rule (this is the power of the armadillo gives damage resistance rule):
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:		remove 1 points of general damage with reason "armadillo".
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:A remove general damage rule (this is the scales gives damage resistance rule):
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:		remove n points of general damage with reason "scales".
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:A remove general damage rule (this is the wisps of pain take less damage rule):
