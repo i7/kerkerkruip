@@ -2854,11 +2854,15 @@ Testing effects of damage-modifier-testing:
 	now the stun count of the player is 0;
 	now the player is at-howl;
 	now the tension is 3;
+	now the hound provoker is Miranda;
+	now the hound status is 1;
 	have Miranda do no reaction to a 100 melee hit by the player with result "dagger benefits from tension" in 0 out of 1 attempts, checking damage;
 	assert that the damage description does not include "Giantbane's special";
 	assert that the damage description includes "\+ 2 \(defender was asleep\)";
 	assert that the damage description includes "\+ 3 \(piercing\)";
 	assert that the damage description includes "\+ 3 \(howling\)";
+	assert that the damage description includes "\+ 2 \(counterstrike\)";
+	now the hound status is 0;
 	now the tension is 4;
 	now Miranda is large;
 	have Miranda do no reaction to a 100 melee hit by the player with result "\+ 1 \(dagger benefits from tension\)", checking damage;
@@ -3031,8 +3035,7 @@ Testing effects of ment-damage:
 ./Victor Gijsbers/Kerkerkruip Actions and UI.i7x - done
 ./Victor Gijsbers/Kerkerkruip ATTACK.i7x - done
 ./Victor Gijsbers/Kerkerkruip Items.i7x - done
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add general damage rule (this is the howl damage bonus rule):
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:			add n points of general damage with reason "howling".
+./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x - done
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add specific damage rule (this is the power of the hound damage modifier rule):
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add specific damage rule (this is the betrayel damage bonus rule):
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add specific damage rule (this is the power of the minotaur damage bonus rule):
