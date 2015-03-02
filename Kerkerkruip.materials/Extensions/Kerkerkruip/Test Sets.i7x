@@ -2988,6 +2988,7 @@ Initial scheduling of holy-damage:
 	revive the reaper in the location;
 	equip the reaper with the scythe of slaying;
 	revive the rotting corpse in the location;
+	revive the malignant chanter in the location;
 	revive the smoke demon in the location;
 	revive the armadillo in the location;
 	revive the wisps of pain in the location;
@@ -2996,7 +2997,15 @@ Initial scheduling of holy-damage:
 Testing effects of holy-damage:
 	Now the spirit score of the healer of Aite is 9;
 	have the rotting corpse do no reaction to a 100 melee hit by the healer of Aite with result "\+ 2 \(holiness\) ", checking damage;
+	now the concentration of the smoke demon is 2;
 	have the smoke demon do no reaction to a 100 melee hit by the healer of Aite with result "\+ 2 \(holiness\) ", checking damage;
+	assert that the damage description includes "^ (\d) \+ 2 \(holiness\) \+ (\d) \(smoke demon is quite dense\)";
+	Now the expression scan position is 0;
+	Let base damage be the number we scan in text matching subexpression 1;
+	Now the expression scan position is 0;
+	Let density damage be the number we scan in text matching subexpression 2;
+	[holy sword does divine damage, so doesn't add to the density damage]
+	assert that density damage is (base damage) / 2 with label "density damage";
 	have the player do no reaction to a 100 melee hit by the healer of Aite with result "\+ 2 \(holiness\)" in 0 out of 1 attempts, checking damage;
 	have the rotting corpse do no reaction to a 100 melee hit by the reaper with result "\+ 5 \(slaying undead\) ", checking damage;
 	have the smoke demon do no reaction to a 100 melee hit by the reaper with result "\+ 5 \(slaying undead\)<^\n>+ damage" in 0 out of 1 attempts, checking damage;
@@ -3007,7 +3016,7 @@ Testing effects of holy-damage:
 	now the unmodified damage is 1000; [should trigger a bug I'm tracking down here:]
 	now the tormentor of aite is at-pierce;
 	have the rotting corpse do no reaction to a 100 melee hit by the tormentor of Aite with result " 0$", checking damage;
-	assert that the damage description includes "^<1-9>"; [unmodified damage should be nonzero]
+	assert that the damage description includes "^\s*<1-9>"; [unmodified damage should be nonzero]
 	assert that the damage description includes "- \d+ \(undead immune to necromantic damage\)";
 	assert that the damage description does not include "\+ 3 \(piercing\)"; [TODO: should it?]
 	now the player is deathly-resistant;
@@ -3042,10 +3051,12 @@ Testing effects of holy-damage:
 	assert result "\d - 1 \(armadillo\) = \d damage to you";
 	now the player is at-scale;
 	have the player do no reaction to a 100 melee hit by the Tormentor of Aite with result "- 6 \(scales\)";
+	now the concentration of the malignant chanter is 1;
+	have the player do no reaction to a 100 melee hit by the rotting corpse with result "\+ 1 \(malignant chanter\)", checking damage;
 	while the limbs of the rotting corpse > 0:
 		have the rotting corpse do no reaction to a 100 melee hit with result "As the corpse reels back from the blow, his rotting ";
 	Let X be a random natural weapon part of the rotting corpse;
-	have the player do no reaction to a 100 melee hit by the rotting corpse with result "x 0 \(no means of attack\)"; [TODO: this fails because the primary damage is 0. should it? is there a way for the primary damage to be more?]
+	have the player do no reaction to a 100 melee hit by the rotting corpse with result "x 0 \(no means of attack\), checking damage"; [TODO: this fails because the primary damage is 0. should it? is there a way for the primary damage to be more?]
 	
 	
 slave-attacking is a test step.
@@ -3074,8 +3085,6 @@ Testing effects of ment-damage:
 ./Victor Gijsbers/Kerkerkruip ATTACK.i7x - done
 ./Victor Gijsbers/Kerkerkruip Items.i7x - done
 ./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x - done
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:A general damage multiplier rule (this is the limbless rotting corpse can't attack rule):
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:			multiply general damage by 0 percent with reason "no means of attack".
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add specific damage rule (this is the malignant chanter damage bonus rule):
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:A specific damage multiplier rule when the victim is the smoke demon (this is the smoke demon denseness multiplier rule):
 ./Victor Gijsbers/Kerkerkruip Religion.i7x:A remove specific damage rule (this is the worshipping Nomos damage reduction rule):

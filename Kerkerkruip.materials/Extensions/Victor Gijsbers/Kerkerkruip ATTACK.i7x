@@ -823,7 +823,7 @@ To multiply (type - a damage type) by (percentage - a number) percent with reaso
 		let m be n divided by 100;
 		let p be m times 100;
 		now rounding error of type is (n - p);
-		let change be (harm of type minus m);
+		let change be (m - harm of type);
 		now harm of type is m;
 		if change is less than 0:
 			now change is (0 - change);
