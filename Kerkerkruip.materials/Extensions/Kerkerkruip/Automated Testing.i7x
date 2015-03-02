@@ -1250,7 +1250,7 @@ To test (guy - a person) doing a/-- (reaction - a reaction-type) to a/-- (streng
 	update event description because "finish attempt [attempt count of combat hit] -";
 	if report of the reaction is not empty, assert that the event description includes "[report of reaction]";
 	if checking damage:
-		check damage of guy with 1000 health after "[regarding the aggressor] [deal]";
+		check damage of guy with 1000 health after "\n[The aggressor] [deal]";
 		test combat hit against whether or not damage description matches the regular expression outcome;
 	otherwise:
 		test combat hit against outcome;		

@@ -1566,7 +1566,7 @@ Last testing effects of a grenade-producing test step:
 		if item is not a custom-grenade, remove item from play;
 
 testing effects of blessed-grenade-alchemy:
-	succeed on result "Blessed Grenade" within 300 attempts;
+	succeed on result "the Blessed Grenade drops on the ground" within 300 attempts;
 	if waiting for resolution, make no decision;
 	Repeat with the item running through grenades:
 		Let name be indexed text;
@@ -1583,7 +1583,7 @@ Initial scheduling of no-extra-blessed-grenade:
 	assert "The blessed grenade should not be cloneable" based on whether or not the blessed grenade is not cloneable;
 	
 testing effects of no-extra-blessed-grenade:
-	fail on result "Blessed Grenade" within 100 attempts [could be more if we made this faster].
+	fail on result "the Blessed Grenade drops on the ground" within 100 attempts [could be more if we made this faster].
 	
 throwing-blessed is a test step.
 
@@ -2801,82 +2801,92 @@ general damage multiplier
 If you add any rules, please consider adding a test here]
 
 scenario when testing damage-modifiers:
-	now the armadillo is testobject.
+	now Hall of Mirrors is bannedobject;
+	now Miranda is testobject.
 
-damage-modifier-testing is an extracting test step. The first move of damage-modifiers is damage-modifier-testing. The location-target of damage-modifier-testing is the armadillo.
+damage-modifier-testing is an extracting test step. The first move of damage-modifiers is damage-modifier-testing. The location-target of damage-modifier-testing is Miranda.
 	
 Definition: a room is precarious if it is Bridge of Doom or it is the Vast Staircase.
 
 Initial scheduling of damage-modifier-testing:
-	Let the place be the location of the armadillo;
-	now the inherent damage modifier of the armadillo is 2;
+	Let the place be the location of Miranda;
+	now the inherent damage modifier of Miranda is 2;
 	if the place is a precarious room:
 		swap the occupants of the place and a random not precarious habitable placed room.
 	
 Testing effects of damage-modifier-testing:
 	equip the player with the robe of the dead mage;
-	have the player do no reaction to a 100 melee hit by the armadillo with result "robe of the dead mage" in 0 out of 1 attempts, checking damage;
+	have the player do no reaction to a 100 melee hit by Miranda with result "robe of the dead mage" in 0 out of 1 attempts, checking damage;
 	repeat with conc-level running from 1 to 4:
 		now the concentration of the player is conc-level;
-		have the player do no reaction to a 100 melee hit by the armadillo with result "\+ [conc-level * 25]% \(robe of the dead mage\)", checking damage;
+		have the player do no reaction to a 100 melee hit by Miranda with result "\+ [conc-level * 25]% \(robe of the dead mage\)", checking damage;
 		assert that the concentration of the player is conc-level with label "concentration of the player";
 	try taking off the robe of the dead mage;	
 	now the hit protection of the player is 1;
-	have the player do no reaction to a 100 melee hit by the armadillo with result "- 100% \(protection\)", checking damage;
+	have the player do no reaction to a 100 melee hit by Miranda with result "- 100% \(protection\)", checking damage;
 	equip the player with dragon armour;
-	have the player do no reaction to a 100 melee hit by the armadillo with result "- 2 \(dragon armour\)" in 1 out of 3 attempts, checking damage;
+	have the player do no reaction to a 100 melee hit by Miranda with result "- 2 \(dragon armour\)" in 1 out of 3 attempts;
+	check damage of the player with 1000 health after "Miranda deals";
+	now Miranda is at-stun;
+	have the player do no reaction to a 100 melee hit by Miranda with result "- 1 \(stunning\)", checking damage;
+	now Miranda is not at-stun;
 	equip the player with the executioner's axe;
 	now the tension is 2;
-	have the armadillo do no reaction to a 100 melee hit by the player with result "executioner's axe benefits from tension" in 0 out of 1 attempts, checking damage;
+	have Miranda do no reaction to a 100 melee hit by the player with result "executioner's axe benefits from tension" in 0 out of 1 attempts, checking damage;
 	now the tension is 3;
-	have the armadillo do no reaction to a 100 melee hit by the player with result "\+ 1 \(executioner's axe benefits from tension\) ", checking damage;
+	have Miranda do no reaction to a 100 melee hit by the player with result "\+ 1 \(executioner's axe benefits from tension\) ", checking damage;
 	equip the player with Malleus Maleficarum;
 	now the blood magic level of Malleus Maleficarum is 1;
 	now the tension is 10;
-	have the armadillo do no reaction to a 100 melee hit by the player with result "\+ 1 \(Malleus Maleficarum blood bonus\) ", checking damage;
+	have Miranda do no reaction to a 100 melee hit by the player with result "\+ 1 \(Malleus Maleficarum blood bonus\) ", checking damage;
 	assert absence of result "tension<^\n>+ damage";
 	equip the player with the Yahvinnian crossbow;
 	now the tension is 1;
-	have the armadillo do no reaction to a 100 melee hit by the player with result "crossbow benefits from tension" in 0 out of 1 attempts, checking damage;
+	have Miranda do no reaction to a 100 melee hit by the player with result "crossbow benefits from tension" in 0 out of 1 attempts, checking damage;
 	now the current shots of the Yahvinnian crossbow is 1;
 	now the tension is 2;
-	have the armadillo do no reaction to a 100 melee hit by the player with result "\+ 1 \(crossbow benefits from tension\) ", checking damage;
+	have Miranda do no reaction to a 100 melee hit by the player with result "\+ 1 \(crossbow benefits from tension\) ", checking damage;
 	equip the player with giantbane;
-	now the armadillo is just-woken;
+	now Miranda is just-woken;
+	now the player is at-pierce;
+	now the body score of the player is 5;
+	now the stun count of the player is 0;
+	assert that the final body of the player is 5 with label "final body of the player";
 	now the tension is 3;
-	have the armadillo do no reaction to a 100 melee hit by the player with result "dagger benefits from tension" in 0 out of 1 attempts, checking damage;
+	have Miranda do no reaction to a 100 melee hit by the player with result "dagger benefits from tension" in 0 out of 1 attempts, checking damage;
 	assert that the damage description does not include "Giantbane's special";
 	assert that the damage description includes "\+ 2 \(defender was asleep\)";
+	assert that the damage description includes "\+ 3 \(piercing\)";
 	now the tension is 4;
-	now the armadillo is large;
-	have the armadillo do no reaction to a 100 melee hit by the player with result "\+ 1 \(dagger benefits from tension\)", checking damage;
+	now Miranda is large;
+	have Miranda do no reaction to a 100 melee hit by the player with result "\+ 1 \(dagger benefits from tension\)", checking damage;
 	assert that the damage description includes "\+ 3 \(Giantbane's special\)";
 	now the brightest-flame-counter is 1;
-	have the player do no reaction to a 100 melee hit by the armadillo with result "- \d+ \(brightest flame\) ", checking damage;
+	have the player do no reaction to a 100 melee hit by Miranda with result "- \d+ \(brightest flame\) ", checking damage;
 	assert that the total damage is 0 with label "total damage with brightest flame";
 	now the brightest-flame-counter is 0;
-	now the armadillo is insane;
-	have the player do no reaction to a 100 melee hit by the armadillo with result "\+ 10 \(insane burst of strength\)" in 1 out of 8 attempts, checking damage;
-	now the armadillo is hostile;
+	now Miranda is insane;
+	have the player do no reaction to a 100 melee hit by Miranda with result "\+ 10 \(insane burst of strength\)" in 1 out of 8 attempts, checking damage;
+	now Miranda is hostile;
 
-armadillo-runner is a test step. 
+Miranda-runner is a test step. 
 
-Initial scheduling of armadillo-runner:
+Initial scheduling of Miranda-runner:
 	now the player carries the rod of the master builder;
-	now retreat location is the location of the armadillo;
+	now retreat location is the location of Miranda;
 	now the health of the player is 1000;
-	now the melee of the armadillo is 100;
-	now the offensive flow of the armadillo is 1;
-	now the concentration of the armadillo is 2;
-	now the innate bloodlust of the armadillo is 1;
-	now the armadillo is bloodlusting;
+	now the melee of Miranda is 100;
+	now the offensive flow of Miranda is 1;
+	now the concentration of Miranda is 2;
+	now the innate bloodlust of Miranda is 1;
+	now Miranda is bloodlusting;
 	now the tension is 3;
 
-Choosing a player action when testing armadillo-runner:
+Choosing a player action when testing Miranda-runner:
 	generate the action of going the way-to-get-back.
 	
-Testing effects of armadillo-runner:
-	check damage of the player with 1000 health after "The ravenous armadillo deals";
+Testing effects of Miranda-runner:
+	check damage of the player with 1000 health after "Miranda deals";
 	[TODO: more automation of damage description tests, use everywhere]
 	assert that the damage description includes "\+ 1 \(you are running\) ";
 	assert that the damage description includes "\+ 1 \(offensive flow\) ";
@@ -2941,13 +2951,16 @@ Testing effects of heat-damage-testing:
 	check damage of the player with 1000 health after "deals";
 	now the internal heat of the sword of light is 3;
 	now the heat strength of the sword of light is 3;
-	have the player do no reaction to a 100 melee hit by the angel of compassion with result "- 2 \(dragon armour\)" in 1 out of 3 attempts, checking damage;
+	have the player do no reaction to a 100 melee hit by the angel of compassion with result "- 2 \(dragon armour\)" in 1 out of 3 attempts;
+	check damage of the player with 1000 health after "The angel of compassion deals";
 	assert result "- 3 \(dragon armour protects against heat\)";
 	
 holy-damage is a test step.
 
 Initial scheduling of holy-damage:
 	prepare a test battle with the healer of Aite, inviting groups;
+	now the inherent damage modifier of the defender of aite is 2;
+	remove the dragon armour from play;
 	revive the reaper in the location;
 	equip the reaper with the scythe of slaying;
 	revive the rotting corpse in the location;
@@ -2960,9 +2973,16 @@ Testing effects of holy-damage:
 	have the player do no reaction to a 100 melee hit by the healer of Aite with result "\+ 2 \(holiness\)" in 0 out of 1 attempts, checking damage;
 	have the rotting corpse do no reaction to a 100 melee hit by the reaper with result "\+ 5 \(slaying undead\) ", checking damage;
 	have the smoke demon do no reaction to a 100 melee hit by the reaper with result "\+ 5 \(slaying undead\)<^\n>+ damage" in 0 out of 1 attempts, checking damage;
+	now the tormentor of aite is at-pierce;
+	now the body score of the tormentor of aite is 8;
 	have the smoke demon do no reaction to a 100 melee hit by the tormentor of Aite with result " 0$" in 0 out of 1 attempts, checking damage;
+	assert that the damage description includes "\+ 3 \(piercing\)"; [TODO: should it?]
+	now the unmodified damage is 1000; [should trigger a bug I'm tracking down here:]
+	now the tormentor of aite is at-pierce;
 	have the rotting corpse do no reaction to a 100 melee hit by the tormentor of Aite with result " 0$", checking damage;
-	assert result "- \d+ \(undead immune to necromantic damage\)";
+	assert that the damage description includes "^<1-9>"; [unmodified damage should be nonzero]
+	assert that the damage description includes "- \d+ \(undead immune to necromantic damage\)";
+	assert that the damage description does not include "\+ 3 \(piercing\)"; [TODO: should it?]
 	now the player is deathly-resistant;
 	clear event description;
 	have chton intervene on behalf of the player;
@@ -2990,8 +3010,6 @@ Testing effects of ment-damage:
 ./Victor Gijsbers/Kerkerkruip Actions and UI.i7x - done
 ./Victor Gijsbers/Kerkerkruip ATTACK.i7x - done
 ./Victor Gijsbers/Kerkerkruip Items.i7x - done
-./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x:An add specific damage rule (this is the asleep damage bonus rule):
-./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x:A remove specific damage rule (this is the less damage when stunning rule):
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add specific damage rule (this is the more damage when piercing rule):
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:A remove specific damage rule (this is the armadillo physical damage reduction rule):
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:A remove general damage rule (this is the power of the armadillo gives damage resistance rule):
