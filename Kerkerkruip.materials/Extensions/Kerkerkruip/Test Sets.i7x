@@ -2850,13 +2850,15 @@ Testing effects of damage-modifier-testing:
 	now Miranda is just-woken;
 	now the player is at-pierce;
 	now the body score of the player is 5;
+	now the mind score of the player is 5;
 	now the stun count of the player is 0;
-	assert that the final body of the player is 5 with label "final body of the player";
+	now the player is at-howl;
 	now the tension is 3;
 	have Miranda do no reaction to a 100 melee hit by the player with result "dagger benefits from tension" in 0 out of 1 attempts, checking damage;
 	assert that the damage description does not include "Giantbane's special";
 	assert that the damage description includes "\+ 2 \(defender was asleep\)";
 	assert that the damage description includes "\+ 3 \(piercing\)";
+	assert that the damage description includes "\+ 3 \(howling\)";
 	now the tension is 4;
 	now Miranda is large;
 	have Miranda do no reaction to a 100 melee hit by the player with result "\+ 1 \(dagger benefits from tension\)", checking damage;
@@ -2868,6 +2870,10 @@ Testing effects of damage-modifier-testing:
 	now Miranda is insane;
 	have the player do no reaction to a 100 melee hit by Miranda with result "\+ 10 \(insane burst of strength\)" in 1 out of 8 attempts, checking damage;
 	now Miranda is hostile;
+	extract the chain golem to the location;
+	now the concentration of the chain golem is 1;
+	have the player do no reaction to a 100 melee hit by the chain golem with result "\+ 2 \(golem spinning\)", checking damage;
+	remove the chain golem from play;
 
 Miranda-runner is a test step. 
 
@@ -3025,9 +3031,6 @@ Testing effects of ment-damage:
 ./Victor Gijsbers/Kerkerkruip Actions and UI.i7x - done
 ./Victor Gijsbers/Kerkerkruip ATTACK.i7x - done
 ./Victor Gijsbers/Kerkerkruip Items.i7x - done
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:A remove general damage rule (this is the wisps of pain take less damage rule):
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:		remove 5 points of general damage with reason "hard to damage".
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add specific damage rule (this is the chain golem damage depends on concentration rule):
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add general damage rule (this is the howl damage bonus rule):
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:			add n points of general damage with reason "howling".
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add specific damage rule (this is the power of the hound damage modifier rule):
