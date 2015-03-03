@@ -3062,16 +3062,21 @@ Testing effects of holy-damage:
 	have the player do no reaction to a 100 melee hit by the Tormentor of Aite with result "- 6 \(scales\)";
 	now the concentration of the malignant chanter is 1;
 	have the player do no reaction to a 100 melee hit by the rotting corpse with result "\+ 1 \(malignant chanter\)", checking damage;
-	while the limbs of the rotting corpse > 0:
-		have the rotting corpse do no reaction to a 100 melee hit with result "As the corpse reels back from the blow, his rotting ";
-	Let X be a random natural weapon part of the rotting corpse;
-	have the player do no reaction to a 100 melee hit by the rotting corpse with result "x 0 \(no means of attack\), checking damage"; [TODO: this fails because the primary damage is 0. should it? is there a way for the primary damage to be more?]
 	now the player worships Nomos;
 	now the favour of the player is 9;
 	have the player do no reaction to a 100 melee hit by the armadillo with result "- 4 \(Nomos\)";
 	now nomos bonus is true;
 	have the defender of Aite do no reaction to a 100 melee hit by the player with result "\+ 4 \(the law is with you\)";
+	now the player worships Sul;
+	have the rotting corpse do no reaction to a 100 melee hit by the player with result "\+ 2 \(undead slayer\)";
+	have the smoke demon do no reaction to a 100 melee hit by the player with result "\+ 2 \(demon slayer\)";
+	[chance of no intervention = (39/40)^9 = 79.6%]
+	have the player do no reaction to a 100 melee hit by the armadillo with result "x 0% \(Sul intervenes\)" in 1 out of 5 attempts;
 	now the player worships nothing;
+	while the limbs of the rotting corpse > 0:
+		have the rotting corpse do no reaction to a 100 melee hit with result "As the corpse reels back from the blow, his rotting ";
+	Let X be a random natural weapon part of the rotting corpse;
+	have the player do no reaction to a 100 melee hit by the rotting corpse with result "x 0 \(no means of attack\), checking damage"; [TODO: this fails because the primary damage is 0. should it? is there a way for the primary damage to be more?]
 	
 slave-attacking is a test step.
 
@@ -3100,7 +3105,6 @@ Testing effects of ment-damage:
 ./Victor Gijsbers/Kerkerkruip Items.i7x - done
 ./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x - done
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x - done
-./Victor Gijsbers/Kerkerkruip Religion.i7x:An add specific damage rule (this is the Nomos damage bonus rule):
 ./Victor Gijsbers/Kerkerkruip Religion.i7x:An add specific damage rule (this is the undead slayer damage bonus rule):
 ./Victor Gijsbers/Kerkerkruip Religion.i7x:An add specific damage rule (this is the demon slayer damage bonus rule):
 ./Victor Gijsbers/Kerkerkruip Religion.i7x:A general damage multiplier rule when someone worships sul (this is the sul sometimes prevents damage rule):
