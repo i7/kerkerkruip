@@ -2991,6 +2991,7 @@ Initial scheduling of holy-damage:
 	revive the malignant chanter in the location;
 	revive the smoke demon in the location;
 	revive the armadillo in the location;
+	now the inherent damage modifier of the armadillo is 4;
 	revive the wisps of pain in the location;
 	revive Bodmall in the location;
 	
@@ -3007,6 +3008,13 @@ Testing effects of holy-damage:
 	[holy sword does divine damage, so doesn't add to the density damage]
 	assert that density damage is (base damage) / 2 with label "density damage";
 	have the player do no reaction to a 100 melee hit by the healer of Aite with result "\+ 2 \(holiness\)" in 0 out of 1 attempts, checking damage;
+	now the reusable item is a random scroll of ghoulification;
+	now the player carries the reusable item;
+	try reading the reusable item;
+	have the player do no reaction to a 100 melee hit by the healer of Aite with result "\+ 2 \(holiness\)", checking damage;
+	assert that the event description includes "- 2 \(sandals of the heretic\)";
+	now the player carries the vial of purification;
+	try drinking the vial of purification;
 	have the rotting corpse do no reaction to a 100 melee hit by the reaper with result "\+ 5 \(slaying undead\) ", checking damage;
 	have the smoke demon do no reaction to a 100 melee hit by the reaper with result "\+ 5 \(slaying undead\)<^\n>+ damage" in 0 out of 1 attempts, checking damage;
 	now the tormentor of aite is at-pierce;
@@ -3049,6 +3057,7 @@ Testing effects of holy-damage:
 	assert result "\d - \d \(hard to damage\) = 0 damage to the wisps of pain";
 	assert result "\d - 1 \(barkskin\) = \d damage to Bodmall";
 	assert result "\d - 1 \(armadillo\) = \d damage to you";
+	try taking off the sandals of the heretic;
 	now the player is at-scale;
 	have the player do no reaction to a 100 melee hit by the Tormentor of Aite with result "- 6 \(scales\)";
 	now the concentration of the malignant chanter is 1;
@@ -3057,7 +3066,12 @@ Testing effects of holy-damage:
 		have the rotting corpse do no reaction to a 100 melee hit with result "As the corpse reels back from the blow, his rotting ";
 	Let X be a random natural weapon part of the rotting corpse;
 	have the player do no reaction to a 100 melee hit by the rotting corpse with result "x 0 \(no means of attack\), checking damage"; [TODO: this fails because the primary damage is 0. should it? is there a way for the primary damage to be more?]
-	
+	now the player worships Nomos;
+	now the favour of the player is 9;
+	have the player do no reaction to a 100 melee hit by the armadillo with result "- 4 \(Nomos\)";
+	now nomos bonus is true;
+	have the defender of Aite do no reaction to a 100 melee hit by the player with result "\+ 4 \(the law is with you\)";
+	now the player worships nothing;
 	
 slave-attacking is a test step.
 
@@ -3085,9 +3099,7 @@ Testing effects of ment-damage:
 ./Victor Gijsbers/Kerkerkruip ATTACK.i7x - done
 ./Victor Gijsbers/Kerkerkruip Items.i7x - done
 ./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x - done
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:An add specific damage rule (this is the malignant chanter damage bonus rule):
-./Victor Gijsbers/Kerkerkruip Monsters.i7x:A specific damage multiplier rule when the victim is the smoke demon (this is the smoke demon denseness multiplier rule):
-./Victor Gijsbers/Kerkerkruip Religion.i7x:A remove specific damage rule (this is the worshipping Nomos damage reduction rule):
+./Victor Gijsbers/Kerkerkruip Monsters.i7x - done
 ./Victor Gijsbers/Kerkerkruip Religion.i7x:An add specific damage rule (this is the Nomos damage bonus rule):
 ./Victor Gijsbers/Kerkerkruip Religion.i7x:An add specific damage rule (this is the undead slayer damage bonus rule):
 ./Victor Gijsbers/Kerkerkruip Religion.i7x:An add specific damage rule (this is the demon slayer damage bonus rule):
