@@ -2808,6 +2808,13 @@ damage-modifier-testing is an extracting test step. The first move of damage-mod
 	
 Definition: a room is precarious if it is Bridge of Doom or it is the Vast Staircase.
 
+Table of Outcomes (continued)
+outcome	description	likelihood	minimum attempts
+death-blessing	""	1	15
+death-curse	""	1	20
+blessing-reset	""	1	2
+curse-reset	""	1	2
+
 Initial scheduling of damage-modifier-testing:
 	equip Miranda with nunchucks;
 	Now the nunchucks are wood;
@@ -2842,7 +2849,10 @@ Testing effects of damage-modifier-testing:
 	now Bodmall is barkskinned;
 	[barkskin does not protect against axes]
 	have Bodmall do no reaction to a 100 melee hit by the player with result "barkskin" in 0 out of 1 attempts;
+	equip the player with the plate mail;
+	have the player do no reaction to a 100 melee hit by Bodmall with result "- 3 \(suit acts as a Faraday cage\)";
 	remove Bodmall from play;
+	try taking off the plate mail;
 	now the power of the minotaur is granted;
 	now the body score of the player is 25;
 	have Miranda do no reaction to a 100 melee hit by the player with result "\+ 10 \(axe proficiency\)" in 1 out of 4 attempts, checking damage;
@@ -2880,22 +2890,51 @@ Testing effects of damage-modifier-testing:
 	now the hound status is 0;
 	now the tension is 4;
 	have Miranda do no reaction to a 100 melee hit by the player with result "\+ 1 \(dagger benefits from tension\)", checking damage;
-	have the chain golem do no reaction to a 100 melee hit by the player with result "\+ 3 \(Giantbane's special\)";
+	now the player is small;
+	have the chain golem do no reaction to a 100 melee hit by the player with result "\+ 4 \(Giantbane's special\)", checking damage;
+	assert that the damage description includes "- 1 \(small attacker\)";
+	now the player is medium;
 	now the brightest-flame-counter is 1;
-	now Miranda is small;
 	have the player do no reaction to a 100 melee hit by Miranda with result "- \d+ \(brightest flame\) ", checking damage;
-	assert that the event description includes "- 1 \(small attacker\)";
 	assert that the total damage is 0 with label "total damage with brightest flame";
 	now the brightest-flame-counter is 0;
 	now Miranda is insane;
 	have the player do no reaction to a 100 melee hit by Miranda with result "\+ 10 \(insane burst of strength\)" in 1 out of 8 attempts, checking damage;
 	now Miranda is hostile;
 	now the concentration of the chain golem is 1;
+	now disintegrating flesh is adapted;
+	now metallic scales are adapted;
 	have the player do no reaction to a 100 melee hit by the chain golem with result "\+ 2 \(golem spinning\)", checking damage;
 	assert that the damage description includes "\+ 1 \(large attacker\)"; [TODO: primary or physical damage? size-agnostic?]
+	assert that the damage description includes "\+ 1 \(disintegrating flesh\)";
+	assert that the damage description includes "- 1 \(metallic scales\)";
+	now disintegrating flesh is not adapted;
+	now metallic scales are not adapted;
 	remove the chain golem from play;
 	[not tested: ethereal damage removal]
-
+	make death-blessing possible; [we only need one to start the loop]
+	while we haven't reset every possible outcome:
+		now the player is death-cursed;
+		now the player is death-blessed; [nothing says you can't be both!]
+		now the health of the player is 1000;
+		deal 6 points of physical damage;
+		deal 5 points of necromantic damage;
+		clear event description because "testing death effects -";
+		say "Chton tests you with [run paragraph on]";
+		have Chton inflict damage on the player;
+		check damage of the player with 1000 health after "Chton tests you with";
+		test death-blessing against "- 10 \(blessing of life\)";
+		if death-blessing just succeeded:
+			test blessing-reset against whether or not the player is death-blessed;
+		unless blessing-reset is resolved, now death-blessing is possible; [this is a hack - implement dependencies?]
+		test death-curse against "\+ 10 \(curse of death\)";
+		if death-curse just succeeded:
+			test curse-reset against whether or not the player is death-cursed;
+		unless curse-reset is resolved, now death-curse is possible;
+	now the player is not death-blessed;
+	now the player is not death-cursed;
+	say paragraph break;
+	
 Miranda-runner is a test step. 
 
 Initial scheduling of Miranda-runner:
@@ -2967,27 +3006,37 @@ Testing effects of radiance-reduction:
 heat-damage-testing is a test step.
 
 Initial scheduling of heat-damage-testing:
+	revive the armadillo in the location;
 	equip the player with dragon armour;
 	now the internal heat of the sword of light is 5;
 	compel the action of the angel of compassion attacking the player;
 	
 Testing effects of heat-damage-testing:
 	if waiting for player reaction, make no decision;
-	assert result "\+ 5 \(sword of light is hot\)<^\n>+ damage";
-	assert result "- 4 \(dragon armour protects against heat\)<^\n>+ damage";
-	check damage of the player with 1000 health after "deals";
-	now the internal heat of the sword of light is 3;
-	now the heat strength of the sword of light is 3;
-	have the player do no reaction to a 100 melee hit by the angel of compassion with result "- 2 \(dragon armour\)" in 1 out of 3 attempts;
-	check damage of the player with 1000 health after "The angel of compassion deals";
-	assert result "- 3 \(dragon armour protects against heat\)";
+	check damage of the player with 1000 health after "angel of compassion deals";
+	assert that the damage description includes "\+ 5 \(sword of light is hot\)";
+	assert that the damage description includes "- 4 \(dragon armour protects against heat\)";
+	have the armadillo do no reaction to 100 melee hit by the angel of compassion with result "- 2 \(victim made of bone\)", checking damage;
+	assert that the damage description includes "- 3 \(intrinsic heat resistance\)";
+	now the internal heat of the sword of light is 2;
+	now the heat strength of the sword of light is 2;
+	now the intrinsic heat resistance of the player is -1;
+	have the player do no reaction to a 100 melee hit by the angel of compassion with result "- 2 \(dragon armour\)" in 1 out of 3 attempts, checking damage;
+	assert that the damage description includes "\+ 1 \(intrinsic heat vulnerability\)"; 
+	assert that the damage description includes "- 3 \(dragon armour protects against heat\)";
+	have the player do no reaction to a 100 melee hit by the armadillo with result "intrinsic heat vulnerability" in 0 out of 1 attempts, checking damage;
+	equip the player with the scythe of flaming;
+	now the scythe of flaming is rusted;
+	have the angel of compassion do no reaction to a 100 melee hit by the player with result "- 3 \(victim made of radiance\)", checking damage;
+	assert that the damage description includes "\(scythe of flaming is hot\)"; [not mentioning rust or heat]
+	assert that the damage description includes "- 2 \(rust\)";
+	try taking off the dragon armour;
 	
 holy-damage is a test step.
 
 Initial scheduling of holy-damage:
 	prepare a test battle with the healer of Aite, inviting groups;
 	now the inherent damage modifier of the defender of aite is 2;
-	remove the dragon armour from play;
 	revive the reaper in the location;
 	equip the reaper with the scythe of slaying;
 	revive the rotting corpse in the location;
@@ -3015,11 +3064,18 @@ Testing effects of holy-damage:
 	now the player carries the reusable item;
 	try reading the reusable item;
 	have the player do no reaction to a 100 melee hit by the healer of Aite with result "\+ 2 \(holiness\)", checking damage;
-	assert that the event description includes "- 2 \(sandals of the heretic\)";
+	assert that the damage description includes "- 1 \(ghoul\)";
+	assert that the damage description includes "- 2 \(sandals of the heretic\)";
 	now the player carries the vial of purification;
 	try drinking the vial of purification;
 	have the rotting corpse do no reaction to a 100 melee hit by the reaper with result "\+ 5 \(slaying undead\) ", checking damage;
+	assert that the damage description includes "\+ 4 \(silver\)";
+	assert that the damage description does not include "- \d+ \(silver\)";
 	have the smoke demon do no reaction to a 100 melee hit by the reaper with result "\+ 5 \(slaying undead\)<^\n>+ damage" in 0 out of 1 attempts, checking damage;
+	assert that the damage description includes "\+ 4 \(silver\)";
+	assert that the damage description does not include "- \d+ \(silver\)";
+	have the player do no reaction to a 100 melee hit by the reaper with result "- 1 \(silver\)", checking damage;
+	assert that the damage description does not include "\+ \d+ \(silver\)";
 	now the tormentor of aite is at-pierce;
 	now the body score of the tormentor of aite is 8;
 	have the smoke demon do no reaction to a 100 melee hit by the tormentor of Aite with result " 0$" in 0 out of 1 attempts, checking damage;
@@ -3109,23 +3165,6 @@ Testing effects of ment-damage:
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x - done
 ./Victor Gijsbers/Kerkerkruip Religion.i7x - done
 ./Victor Gijsbers/Kerkerkruip Systems - Hiding Smoke Ethereal.i7x:A specific damage multiplier rule (this is the ethereal damage immunity rule) - not tested
-./Victor Gijsbers/Kerkerkruip Systems.i7x:An add specific damage rule (this is the size damage increase rule):
-./Victor Gijsbers/Kerkerkruip Systems.i7x:A remove specific damage rule (this is the size damage decrease rule):
-./Victor Gijsbers/Kerkerkruip Systems.i7x:An add specific damage rule (this is the undead silver damage rule):
-./Victor Gijsbers/Kerkerkruip Systems.i7x:A remove specific damage rule (this is the non-undead silver damage rule):
-./Victor Gijsbers/Kerkerkruip Systems.i7x:A remove specific damage rule (this is the iron or silver suit acts as a faraday cage rule):
-./Victor Gijsbers/Kerkerkruip Systems.i7x:Before damage rule:
-./Victor Gijsbers/Kerkerkruip Systems.i7x:An add specific damage rule (this is the heat increases damage rule):
-./Victor Gijsbers/Kerkerkruip Systems.i7x:A remove specific damage rule (this is the material heat resistance rule):
-./Victor Gijsbers/Kerkerkruip Systems.i7x:An add specific damage rule (this is the intrinsic heat vulnerability rule):
-./Victor Gijsbers/Kerkerkruip Systems.i7x:A remove specific damage rule (this is the intrinsic heat resistance rule):
-./Victor Gijsbers/Kerkerkruip Systems.i7x:Before damage rule:
-./Victor Gijsbers/Kerkerkruip Systems.i7x:A remove specific damage rule (this is the rust decreases damage rule):
-./Victor Gijsbers/Kerkerkruip Systems.i7x:A remove general damage rule (this is the death-blessed rule):
-./Victor Gijsbers/Kerkerkruip Systems.i7x:			remove 10 points of general damage with reason "blessing of life";
-./Victor Gijsbers/Kerkerkruip Systems.i7x:An add general damage rule (this is the death-cursed rule):
-./Victor Gijsbers/Kerkerkruip Systems.i7x:			add 10 points of general damage with reason "curse of death";
-./Victor Gijsbers/Kerkerkruip Systems.i7x:A remove specific damage rule (this is the ghoul damage reduction rule):
 ./Victor Gijsbers/Kerkerkruip Systems.i7x:An add specific damage rule (this is the disintegrating flesh damage modifier rule):
 ./Victor Gijsbers/Kerkerkruip Systems.i7x:A remove specific damage rule (this is the metallic scales damage reduction rule):
 

@@ -555,7 +555,6 @@ To decide whether we haven't achieved (event - an outcome) in (likelihood - a nu
 [TODO: Normalize regex matches against event description so we can use a brief consistent phrase. ]
 
 To test (event - an outcome) against (success - a truth state):
-	[TODO: print a period to show progress]
 	unless we make the event possible, stop;
 	let percent-tolerance be 5; [a constant - do we want it to be a property?]
 	if likelihood of the event is 0:
@@ -1189,7 +1188,7 @@ To decide what number is the calculated value of (T - a text):
 The damage description is a text variable.
 
 To check damage of (guy - a person) with (previous health - a number) health after (preamble - a text):
-	assert that the event description includes "[preamble](\s*\d*<^\n>+) damage";
+	assert result "[preamble](\s*\d*<^\n>+) damage";
 	now the damage description is the text matching subexpression 1;
 	Let the value be the calculated value of the damage description;
 	assert that (previous health - health of guy) is value with label "damage to [guy]"; 

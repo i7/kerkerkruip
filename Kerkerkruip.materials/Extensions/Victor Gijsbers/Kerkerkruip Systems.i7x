@@ -1172,7 +1172,8 @@ A person has a number called the intrinsic heat resistance. The intrinsic heat r
 
 An add specific damage rule (this is the intrinsic heat vulnerability rule):
 	if intrinsic heat resistance of victim is less than 0:
-		add (intrinsic heat resistance of victim) points of heat damage with reason "intrinsic heat vulnerability", conditionally.
+		let vulnerability be 0 - intrinsic heat resistance of victim;
+		add vulnerability points of heat damage with reason "intrinsic heat vulnerability", conditionally.
 
 A remove specific damage rule (this is the intrinsic heat resistance rule):
 	if intrinsic heat resistance of victim is greater than 0:
