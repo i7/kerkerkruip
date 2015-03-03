@@ -2858,6 +2858,7 @@ Testing effects of damage-modifier-testing:
 	now the tension is 2;
 	have Miranda do no reaction to a 100 melee hit by the player with result "\+ 1 \(crossbow benefits from tension\) ", checking damage;
 	equip the player with giantbane;
+	extract the chain golem to the location;
 	now Miranda is just-woken;
 	now the player is at-pierce;
 	now the body score of the player is 5;
@@ -2878,20 +2879,22 @@ Testing effects of damage-modifier-testing:
 	assert that the damage description includes "\+ 2 \(link\)";
 	now the hound status is 0;
 	now the tension is 4;
-	now Miranda is large;
 	have Miranda do no reaction to a 100 melee hit by the player with result "\+ 1 \(dagger benefits from tension\)", checking damage;
-	assert that the damage description includes "\+ 3 \(Giantbane's special\)";
+	have the chain golem do no reaction to a 100 melee hit by the player with result "\+ 3 \(Giantbane's special\)";
 	now the brightest-flame-counter is 1;
+	now Miranda is small;
 	have the player do no reaction to a 100 melee hit by Miranda with result "- \d+ \(brightest flame\) ", checking damage;
+	assert that the event description includes "- 1 \(small attacker\)";
 	assert that the total damage is 0 with label "total damage with brightest flame";
 	now the brightest-flame-counter is 0;
 	now Miranda is insane;
 	have the player do no reaction to a 100 melee hit by Miranda with result "\+ 10 \(insane burst of strength\)" in 1 out of 8 attempts, checking damage;
 	now Miranda is hostile;
-	extract the chain golem to the location;
 	now the concentration of the chain golem is 1;
 	have the player do no reaction to a 100 melee hit by the chain golem with result "\+ 2 \(golem spinning\)", checking damage;
+	assert that the damage description includes "\+ 1 \(large attacker\)"; [TODO: primary or physical damage? size-agnostic?]
 	remove the chain golem from play;
+	[not tested: ethereal damage removal]
 
 Miranda-runner is a test step. 
 
@@ -3098,18 +3101,14 @@ Testing effects of ment-damage:
 	have the defender of Aite do no reaction to a 100 melee hit by the player with result "\+ 1 \(ment\) ", checking damage;
 	have the player do no reaction to a 100 melee hit by the defender of Aite with result "- 1 \(ment\) ", checking damage;
 
-[TODO: before damage rules]
-[Extensions mciul$ grep -irl 'specific damage' .
+[
 ./Victor Gijsbers/Kerkerkruip Actions and UI.i7x - done
 ./Victor Gijsbers/Kerkerkruip ATTACK.i7x - done
 ./Victor Gijsbers/Kerkerkruip Items.i7x - done
 ./Victor Gijsbers/Kerkerkruip Monster Abilities.i7x - done
 ./Victor Gijsbers/Kerkerkruip Monsters.i7x - done
-./Victor Gijsbers/Kerkerkruip Religion.i7x:An add specific damage rule (this is the undead slayer damage bonus rule):
-./Victor Gijsbers/Kerkerkruip Religion.i7x:An add specific damage rule (this is the demon slayer damage bonus rule):
-./Victor Gijsbers/Kerkerkruip Religion.i7x:A general damage multiplier rule when someone worships sul (this is the sul sometimes prevents damage rule):
-./Victor Gijsbers/Kerkerkruip Religion.i7x:		multiply general damage by 0 percent with reason "Sul intervenes".
-./Victor Gijsbers/Kerkerkruip Systems - Hiding Smoke Ethereal.i7x:A specific damage multiplier rule (this is the ethereal damage immunity rule):
+./Victor Gijsbers/Kerkerkruip Religion.i7x - done
+./Victor Gijsbers/Kerkerkruip Systems - Hiding Smoke Ethereal.i7x:A specific damage multiplier rule (this is the ethereal damage immunity rule) - not tested
 ./Victor Gijsbers/Kerkerkruip Systems.i7x:An add specific damage rule (this is the size damage increase rule):
 ./Victor Gijsbers/Kerkerkruip Systems.i7x:A remove specific damage rule (this is the size damage decrease rule):
 ./Victor Gijsbers/Kerkerkruip Systems.i7x:An add specific damage rule (this is the undead silver damage rule):
