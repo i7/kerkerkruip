@@ -2945,6 +2945,7 @@ Initial scheduling of Miranda-runner:
 	now the offensive flow of Miranda is 1;
 	now the concentration of Miranda is 2;
 	now the innate bloodlust of Miranda is 1;
+	[TODO: test bloodlust/insane strength with staff of pain (no bonus?)]
 	now Miranda is bloodlusting;
 	now the tension is 3;
 
@@ -3051,14 +3052,16 @@ Testing effects of holy-damage:
 	Now the spirit score of the healer of Aite is 9;
 	have the rotting corpse do no reaction to a 100 melee hit by the healer of Aite with result "\+ 2 \(holiness\) ", checking damage;
 	now the concentration of the smoke demon is 2;
+	now the tension is 9;
 	have the smoke demon do no reaction to a 100 melee hit by the healer of Aite with result "\+ 2 \(holiness\) ", checking damage;
-	assert that the damage description includes "^ (\d) \+ 2 \(holiness\) \+ (\d) \(smoke demon is quite dense\)";
+	assert that the damage description includes "^ (\d) \+ 2 \(holiness\) \+ 3 \(tension\) \+ (<1-9>) \(smoke demon is quite dense\)";
 	Now the expression scan position is 0;
 	Let base damage be the number we scan in text matching subexpression 1;
 	Now the expression scan position is 0;
 	Let density damage be the number we scan in text matching subexpression 2;
 	[holy sword does divine damage, so doesn't add to the density damage]
-	assert that density damage is (base damage) / 2 with label "density damage";
+	assert that density damage is (base damage + 3) / 4 with label "density damage";
+	now the tension is 0;
 	have the player do no reaction to a 100 melee hit by the healer of Aite with result "\+ 2 \(holiness\)" in 0 out of 1 attempts, checking damage;
 	now the reusable item is a random scroll of ghoulification;
 	now the player carries the reusable item;
@@ -3079,13 +3082,14 @@ Testing effects of holy-damage:
 	now the tormentor of aite is at-pierce;
 	now the body score of the tormentor of aite is 8;
 	have the smoke demon do no reaction to a 100 melee hit by the tormentor of Aite with result " 0$" in 0 out of 1 attempts, checking damage;
-	assert that the damage description includes "\+ 3 \(piercing\)"; [TODO: should it?]
-	now the unmodified damage is 1000; [should trigger a bug I'm tracking down here:]
+	assert that the damage description does not include "\+ 3 \(piercing\)"; [piercing only affects physical damage]
+	now the unmodified damage is 1000; [triggers an old bug]
 	now the tormentor of aite is at-pierce;
 	have the rotting corpse do no reaction to a 100 melee hit by the tormentor of Aite with result " 0$", checking damage;
 	assert that the damage description includes "^\s*<1-9>"; [unmodified damage should be nonzero]
 	assert that the damage description includes "- \d+ \(undead immune to necromantic damage\)";
-	assert that the damage description does not include "\+ 3 \(piercing\)"; [TODO: should it?]
+	assert that the damage description does not include "piercing";
+	assert that the total damage is 0;
 	now the player is deathly-resistant;
 	clear event description;
 	have chton intervene on behalf of the player;
@@ -3100,10 +3104,11 @@ Testing effects of holy-damage:
 	assert that final damage is expected damage with label "calculated damage";
 	assert that the health of the player is 1000 - final damage with label "actual damage to the player";
 	now the health of the player is 1000;
+	now the player is not deathly-resistant;
 	now the inherent damage modifier of the player is 4;
 	have the armadillo do no reaction to a 100 melee hit by the player with result "- 4 \(tough scales\)", checking damage;
 	now the inherent damage modifier of the tormentor of Aite is 7;
-	[TODO: inherent damage modifier should use primary damage type, not physical!]
+	[TODO: turn the staff of pain silver and check effects on undead and demons]
 	have the armadillo do no reaction to a 100 melee hit by the Tormentor of Aite with result "tough scales" in 0 out of 1 attempts; [physical damage reduction only]
 	now the power of the armadillo is granted;
 	have the player do no reaction to a 100 melee hit by the Tormentor of Aite with result "- 1 \(armadillo\)", checking damage; [general damage reduction - TODO: should it be?]
@@ -3134,8 +3139,8 @@ Testing effects of holy-damage:
 	now the player worships nothing;
 	while the limbs of the rotting corpse > 0:
 		have the rotting corpse do no reaction to a 100 melee hit with result "As the corpse reels back from the blow, his rotting ";
-	Let X be a random natural weapon part of the rotting corpse;
-	have the player do no reaction to a 100 melee hit by the rotting corpse with result "x 0 \(no means of attack\), checking damage"; [TODO: this fails because the primary damage is 0. should it? is there a way for the primary damage to be more?]
+	now the concentration of the rotting corpse is 3;
+	have the player do no reaction to a 100 melee hit by the rotting corpse with result "x 0% \(no means of attack\)", checking damage;
 	
 slave-attacking is a test step.
 

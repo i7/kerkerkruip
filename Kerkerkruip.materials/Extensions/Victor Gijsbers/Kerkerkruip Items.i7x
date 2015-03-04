@@ -3072,7 +3072,7 @@ An add specific damage rule (this is the sneaking sword damage bonus rule):
 		if damage-source is the sneaking sword:
 			if the global attacker is hidden:
 				let n be blood magic level of sneaking sword;
-				add n points of physical damage with reason "sneaky attack".
+				add n points of damage with reason "sneaky attack".
 
 A treasure placement rule (this is the sneaking sword can be singing sword rule):
 	if a random chance of 1 in 5 succeeds:
@@ -3239,12 +3239,15 @@ Chance to win rule when the chosen weapon is a dagger (this is the CTW dagger co
 	let n be the tension divided by 2;
 	increase the chance-to-win by n.
 		
-An add general damage rule (this is the dagger extra tension damage bonus rule):
+An add specific damage rule (this is the dagger extra tension damage bonus rule):
 	if damage-by-hitting is true:
 		if the damage-source is a dagger:
+			[TODO: reduce dagger damage against hard materials?]
 			let n be the tension divided by 4;
 			if n is not 0:
-				add n points of general damage with reason "dagger benefits from tension".
+				add n points of primary damage with reason "dagger benefits from tension".
+
+The dagger extra tension damage bonus rule is listed last in the add specific damage rules.
 
 The special weapon info of a dagger is usually "; benefits from tension[run paragraph on]".
 
@@ -3393,7 +3396,7 @@ An add specific damage rule (this is the Giantbane damage bonus rule):
 			let n be the size difference of the global attacker and the global defender;
 			if n is greater than 0:
 				now n is n + 2;
-				add n points of physical damage with reason "Giantbane's special".
+				add n points of damage with reason "Giantbane's special".
 
 			
 Section - Dagger of draining (monster)
@@ -3518,13 +3521,15 @@ The weapon damage bonus of the executioner's axe is 4.
 The parry-with bonus of the executioner's axe is -2.
 The weapon attack bonus of the executioner's axe is -3.
 
-An add general damage rule (this is the executioner's axe extra tension damage bonus rule):
+An add specific damage rule (this is the executioner's axe extra tension damage bonus rule):
 	if damage-by-hitting is true:
 		if damage-source is the executioner's axe:
 			let n be 0;
 			now n is the tension divided by 3;
 			if n is not 0:
-				add n points of general damage with reason "executioner's axe benefits from tension".
+				add n points of damage with reason "executioner's axe benefits from tension".
+
+The executioner's axe extra tension damage bonus rule is listed last in the add specific damage rules.
 
 An attack modifier rule (this is the executioner's axe is better in temple of Nomos rule):
 	if the global attacker weapon is the executioner's axe and the location is the Temple of Nomos:
@@ -3588,10 +3593,10 @@ Section - Scythe of slaying (monster)
 
 The scythe of slaying is a scythe. The scythe of slaying is silver. The description of the scythe of slaying is "Ages ago, the monks of Averoigne forged these weapons, imbuing them with powerful enchantments against the living dead.".
 
-An add general damage rule (this is the scythe of slaying deals great damage to undead rule):
+An add specific damage rule (this is the scythe of slaying deals great damage to undead rule):
 	if damage-by-hitting is true:
 		if damage-source is the scythe of slaying and victim is undead:
-			add 5 points of general damage with reason "slaying undead".
+			add 5 points of damage with reason "slaying undead".
 
 The special weapon info of the scythe of slaying is "; massive damage against undead[run paragraph on]".
 
@@ -3653,8 +3658,7 @@ The parry-against bonus of a staff of pain is usually -2.
 The weapon damage bonus of a staff of pain is usually 0.
 
 First before damage rule when the damage-source is a staff of pain (this is the staff of pain rule):
-	now harm of necromantic damage is (harm of necromantic damage + harm of physical damage);
-	now harm of physical damage is 0.
+	convert primary damage to necromantic damage.
 
 
 Section - Druidic staff (reward)
@@ -3891,7 +3895,7 @@ An add specific damage rule (this is the Malleus blood damage bonus rule):
 		if damage-source is Malleus Maleficarum:
 			let bonus be the blood magic level of Malleus Maleficarum;
 			if the bonus is greater than 0:
-				add bonus points of physical damage with reason "Malleus Maleficarum blood bonus".
+				add bonus points of damage with reason "Malleus Maleficarum blood bonus".
 
 Section - Doomhammer (monster)
 
@@ -3920,12 +3924,14 @@ Chance to win rule when the chosen weapon is a crossbow (this is the CTW crossbo
 	let n be the tension divided by 3;
 	increase the chance-to-win by n.
 		
-An add general damage rule (this is the crossbow extra tension damage bonus rule):
+An add specific damage rule (this is the crossbow extra tension damage bonus rule):
 	if damage-by-hitting is true:
 		if the damage-source is a crossbow:
 			let n be the tension divided by 2;
 			if n is not 0:
-				add n points of general damage with reason "crossbow benefits from tension".
+				add n points of damage with reason "crossbow benefits from tension".
+
+The crossbow extra tension damage bonus rule is listed last in the add specific damage rules.
 
 The special weapon info of a crossbow is usually "; damage benefits strongly from tension[run paragraph on]".
 
@@ -4418,12 +4424,14 @@ Chance to win rule (this is the CTW ment penalty rule): [To make sure the AI cor
 	if the ment timer is greater than 0:
 		decrease the chance-to-win by ment bonus.			
 
-An add general damage rule (this is the ment damage bonus rule):
+An add specific damage rule (this is the ment damage bonus rule):
 	if damage-by-hitting is true:
 		if the global attacker is the player:
 			if ment timer is greater than 0:
-				add ment bonus points of general damage with reason "ment".
+				add ment bonus points of damage with reason "ment".
 			
+The ment damage bonus rule is listed last in the add specific damage rules.
+
 A remove general damage rule (this is the ment damage protection rule):
 	if victim is the player:
 		if ment timer is greater than 0:

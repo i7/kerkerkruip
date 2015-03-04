@@ -120,7 +120,7 @@ An attack modifier rule (this is the running is risky rule):
 An add specific damage rule (this is the running is very risky rule):
 	if damage-by-hitting is true:
 		if the victim is a runner pc:
-			add 1 points of physical damage with reason "you are running".
+			add 1 points of damage with reason "you are running".
 
 
 

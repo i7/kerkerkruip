@@ -731,18 +731,17 @@ Section - Rulebooks and globals
 
 We then count al specific damage types, and get the total damage.
 
-4. Add general damage. -- This should be used sparingly or not at all, because damage ought to be of a specific type.
+4. Add general damage. -- deleted, problematic. Use add specific damage with "primary damage" instead
 5. Remove general damage.
 6. Multiply general damage.
 
 Deal damage!]
 
-The before damage rules are a rulebook. [Probably used sparingly.]
+The before damage rules are a rulebook. [Probably used sparingly. Setup and convert damage types]
 The add specific damage rules are a rulebook. [For rules pertaining to specific types of damage.]
 The remove specific damage rules are a rulebook. [For rules pertaining to specific types of damage.]
 The specific damage multiplier rules are a rulebook. [Idem, but rules that multiply the damage by a constant.]
-The add general damage rules are a rulebook. [Next three rulebooks idem, but for general damage.]
-The remove general damage rules are a rulebook.
+The remove general damage rules are a rulebook. [Next two rulebooks idem, but for general damage.]
 The general damage multiplier rules are a rulebook.
 The after damage rules are a rulebook. [For things like losing concentration.]
 
@@ -761,11 +760,17 @@ Section - The damage profile
 
 A damage type has a number called the harm.
 
+Primary damage is a damage type that varies.
+
+Primary-damage-selected is a truth state that varies.
+
 Section - Resetting damage profile
 
 [We don't need to invoke this ourselves, since it is automatically invoked when damage is inflicted.]
 
 To reset the damage profile:
+	Now primary damage is physical damage;
+	Now primary-damage-selected is false;
 	repeat with q running through damage types:
 		now the harm of q is 0.
 
@@ -774,7 +779,19 @@ Section - Dealing damage
 [Invoke with phrases like "deal 2 points of fire damage".]
 
 To deal (n - a number) points of (type - a damage type):
+	if primary-damage-selected is false:
+		now primary damage is type;
+		now primary-damage-selected is true;
 	increase the harm of type by n.
+
+Section - Converting damage
+
+to convert (old damage - a damage type) to (new damage - a damage type):
+	now the harm of new damage is the harm of new damage + the harm of old damage;
+	now the harm of old damage is 0;
+	[automatically change primary damage. TODO: should we only do that with a separate phrase?]
+	if old damage is primary damage and primary-damage-selected is true:
+		now primary damage is new damage.
 
 Section - Damage comments
 
@@ -792,6 +809,18 @@ To add (n - a number) points of (type - a damage type) with reason (reason - som
 		increase harm of type by n;
 		unless n is 0:
 			add damage comment "+ [n] ([reason])";
+
+Section - Adding primary damage
+
+[We don't add general damage because new damage without a type is too hard to deal with. Instead, we add primary damage when the type is not specified. Using this phrase allows us a debugging check]
+
+To add (n - a number) points of damage with reason (reason - some text):
+	if primary-damage-selected is false:
+		say "[bold type]Programming error: primary damage not selected. Default value is [primary damage].[roman type]";
+		now primary-damage-selected is true;
+	increase harm of primary damage by n;
+	unless n is 0:
+		add damage comment "+ [n] ([reason])";
 
 Section - Removing specific damage
 
@@ -828,7 +857,7 @@ To multiply (type - a damage type) by (percentage - a number) percent with reaso
 		if change is less than 0:
 			now change is (0 - change);
 			add damage comment "- [change] ([reason])";
-		otherwise:
+		otherwise if change is greater than 0:
 			add damage comment "+ [change] ([reason])".
 
 First specific damage multiplier rule (this is the reset rounding error rule):
@@ -860,13 +889,6 @@ As expected, since 0.5 x 2 = 1.]
 
 [What we do not compensate for is this. Suppose I get 5 heat damage and 5 physical damage. Both are halved. I will then get 2 + 2 = 4 damage, rather than 5. We could add up remaining rounding errors and see that another point of damage ought to be dealt; but what type is it supposed to have, and how are we to indicate to the player what is happening? Better just ignore it. It's a feature, not a bug.]
 
-Section - Adding total damage
-
-To add (n - a number) points of general damage with reason (reason - some text):
-	increase total damage by n;
-	unless n is 0:
-		add damage comment "+ [n] ([reason])";
-
 Section - Removing total damage
 
 To remove (n - a number) points of general damage with reason (reason - some text):
@@ -896,7 +918,6 @@ First general damage multiplier rule (this is the reset general rounding error r
 	now general damage rounding error is 0.
 
 
-
 Section - Inflicting damage
 
 [Always call this when you're inflicting damage!]
@@ -910,26 +931,21 @@ To have (source - a thing) inflict damage on (guy - a person), silently:
 		now damage silence is true;
 	otherwise:
 		now damage silence is false;
-	now total damage is 0;
-	follow the before damage rules; [this is where immunities should be taken care of]
 	now unmodified damage is 0;
 	repeat with type running through damage types:
 		increase unmodified damage by harm of type;
-	if unmodified damage is 0:  [totally immune to our damage]
+	follow the before damage rules; [Can convert damage types, but do not modify total damage amount here - use specific damage multiplier rules for immunities]
+	now total damage is 0;
+	follow the add specific damage rules;
+	follow the remove specific damage rules;	
+	follow the specific damage multiplier rules;
+	repeat with type running through damage types:
+		unless harm of type is less than 0:
+			increase total damage by harm of type;
+	follow the remove general damage rules;	
+	follow the general damage multiplier rules;
+	if total damage is less than 0:
 		now total damage is 0;
-	otherwise:
-		follow the add specific damage rules;
-		follow the remove specific damage rules;	
-		follow the specific damage multiplier rules;
-		now total damage is 0;
-		repeat with type running through damage types:
-			unless harm of type is less than 0:
-				increase total damage by harm of type;
-		follow the add general damage rules;
-		follow the remove general damage rules;	
-		follow the general damage multiplier rules;
-		if total damage is less than 0:
-			now total damage is 0;
 	unless silently:
 		say "[if damage comment is true] = [end if][bold type]", total damage, " damage[roman type][run paragraph on]";
 	decrease health of the victim by total damage;
@@ -1343,33 +1359,38 @@ First contact rule (this is the standard whether the attack hit rule):
 
 Section - Dealing damage
 
-Override-normal-attack-damage-rule is a truth state that varies. Override-normal-attack-damage-rule is false.
+Dealing attack damage is an activity.
 
 Carry out an actor hitting (this is the set up attack damage rule):
-	if override-normal-attack-damage-rule is false:
-		unless damage die of the global attacker weapon is less than 1:
-			now the attack damage is a random number between 1 and the damage die of the global attacker weapon;
+	carry out the dealing attack damage activity;
+	say "[roman type][paragraph break]".
+	
+Before dealing attack damage (this is the before dealing normal attack damage rule):
+	[TODO: consider what to do if the numbers boolean is false]
+	if the numbers boolean is true:
+		say "[roman type][The global attacker] [deal] [run paragraph on]";
+	
+For dealing attack damage (this is the for dealing normal attack damage rule):
+	unless damage die of the global attacker weapon is less than 1:
+		now the attack damage is a random number between 1 and the damage die of the global attacker weapon;
 		increase the attack damage by weapon damage bonus of the global attacker weapon; [1d(damage die) + WDB]
-		[TODO: consider what to do if the numbers boolean is false]
-		if the numbers boolean is true:
-			say "[roman type][The global attacker] [deal] [run paragraph on]";
-		now harm of physical damage is attack damage;
-		now damage-by-hitting is true;	
-		have global attacker weapon inflict damage on the global defender;  [The crucial line.]
-		if the total damage is less than 1:
-			say ", allowing [the global defender] to escape unscathed.[run paragraph on]";
-		otherwise:
-			[non-fatal]
-			if the health of the global defender is greater than 0:
-				say ", wounding [the global defender] to ", health of the global defender, " health.[run paragraph on]" ;
-			[fatal]
-			otherwise:
-				say ", killing [the name of the global defender].[run paragraph on]";
-		say "[roman type][paragraph break]";
-	otherwise:
-		now override-normal-attack-damage-rule is false.
-
-
+	deal attack damage points of physical damage;
+	now damage-by-hitting is true;	[TODO: is "the dealing attack damage activity is going on" enough?]
+	have global attacker weapon inflict damage on the global defender;  [The crucial line.]
+	
+After dealing attack damage (this is the normal attack escape unscathed rule):
+	if the total damage is less than 1:
+		say ", allowing [the global defender] to escape unscathed.[run paragraph on]";
+		rule succeeds;
+	
+After dealing attack damage (this is the normal fatal attack rule):
+	if the health of the global defender is not greater than 0:
+		say ", killing [the name of the global defender].[run paragraph on]";
+		rule succeeds;
+	
+After dealing attack damage (this is the normal non-fatal attack rule):
+	say ", wounding [the global defender] to ", health of the global defender, " health.[run paragraph on]" ;
+		
 Section - Aftereffects
 
 The aftereffects rules is a rulebook.
@@ -1469,7 +1490,7 @@ An attack modifier rule (this is the defensive flow attack modifier rule):
 An add specific damage rule (this is the new offensive flow damage modifier rule):
 	if damage-by-hitting is true:
 		let bonus be offensive flow of the global attacker;
-		add bonus points of physical damage with reason "offensive flow".
+		add bonus points of damage with reason "offensive flow".
 
 An aftereffects rule (this is the lose flow when hit rule):
 	if the total damage is greater than 0 and the global defender is alive:
@@ -1724,7 +1745,7 @@ An add specific damage rule (this is the new concentration damage modifier rule)
 				let the first dummy be 0;
 				if the concentration of the global attacker is 2, now the first dummy is 2;
 				if the concentration of the global attacker is 3, now the first dummy is 4;
-				add first dummy points of physical damage with reason "concentration".
+				add first dummy points of damage with reason "concentration".
 
 Section - Losing Concentration
 
@@ -2405,11 +2426,13 @@ An attack modifier rule (this is the standard tension attack modifier rule):
 			say " + ", the tension bonus, " (tension)[run paragraph on]";
 		increase the attack strength by the tension bonus;
 		
-An add general damage rule (this is the new tension damage modifier rule):
+An add specific damage rule (this is the new tension damage modifier rule):
 	if damage-by-hitting is true:
 		let the bonus be the tension divided by 3;
 		if the bonus is not 0:
-			add bonus points of general damage with reason "tension".
+			add bonus points of damage with reason "tension".
+
+The new tension damage modifier rule is listed last in the add specific damage rules.
 
 An aftereffects rule when the total damage is greater than 0 (this is the standard reduce tension after hit rule):		
 	now the tension is the tension minus 4;
@@ -2721,7 +2744,7 @@ A person has a number called the inherent damage modifier. The inherent damage m
 An add specific damage rule (this is the inherent damage modifier rule):
 	if damage-by-hitting is true:
 		if the inherent damage modifier of the global attacker is not 0:
-			add (inherent damage modifier of the global attacker) points of physical damage with reason "inherent bonus".
+			add (inherent damage modifier of the global attacker) points of damage with reason "inherent bonus".
 
 
 Section - Weapon descriptions

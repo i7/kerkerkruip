@@ -636,6 +636,7 @@ An add specific damage rule (this is the size damage increase rule):
 	if damage-by-hitting is true:
 		if the global attacker is not medium:
 			if the global attacker weapon is not size-agnostic:
+				[staff of pain is size-agnostic. If there were another weapon that did non-physical damage, would it do size damage?]
 				if the size of the global attacker is:
 					-- large:
 						add 1 points of physical damage with reason "large attacker";
@@ -959,7 +960,7 @@ Section - Silver
 			increase the attack damage by 4;]
 
 An add specific damage rule (this is the undead silver damage rule):
-	if damage-material is silver:
+	if damage-material is silver and primary damage is physical damage:
 		if victim is undead or victim is demonic:
 			add 4 points of physical damage with reason "silver".
 
@@ -1618,14 +1619,14 @@ A remove general damage rule (this is the death-blessed rule):
 			if a random chance of 1 in 2 succeeds:
 				now the victim is not death-blessed.
 
-An add general damage rule (this is the death-cursed rule):
+An add specific damage rule (this is the death-cursed rule):
 	if victim is death-cursed:
 		if a random chance of 1 in 20 succeeds:
-			add 10 points of general damage with reason "curse of death";
+			add 10 points of damage with reason "curse of death";
 			if a random chance of 1 in 2 succeeds:
 				now the victim is not death-cursed.
 
-
+The death-cursed rule is listed last in the add specific damage rules.
 
 Chapter - Falling
 
@@ -2175,7 +2176,8 @@ Section - Disintegrating flesh
 
 An add specific damage rule (this is the disintegrating flesh damage modifier rule):
 	if the victim is the player and disintegrating flesh is adapted:
-		add 1 points of physical damage with reason "disintegrating flesh".
+		if primary damage is physical damage:
+			add 1 points of physical damage with reason "disintegrating flesh".
 
 
 Section - Metallic scales

@@ -38,9 +38,9 @@ Status attribute rule (this is the undead status rule):
 		
 Section - Undead rules
 
-A before damage rule (this is the undead immune to necromantic damage rule):
+A specific damage multiplier rule (this is the undead immune to necromantic damage rule):
 	if creature-type of victim is undead:
-		remove 1000 points of necromantic damage with reason "undead immune to necromantic damage".
+		multiply necromantic damage by 0 percent with reason "undead immune to necromantic damage".
 
 Chapter - Subtypes
 
@@ -461,7 +461,7 @@ An add specific damage rule (this is the bloodlusting damage bonus rule):
 	if damage-by-hitting is true:
 		if the global attacker is bloodlusting:
 			let n be bloodlust of global attacker;
-			if n is not 0:
+			if n is not 0 and primary damage is physical damage:
 				add n points of physical damage with reason "bloodlust".
 
 Section - Status
@@ -604,7 +604,7 @@ Last AI action selection rule (this is the insane randomise the action result ru
 An add specific damage rule (this is the insane people sometimes get insane damage bonus rule):
 	if damage-by-hitting is true:
 		if global attacker is insane and global attacker weapon is not size-agnostic:
-			if a random chance of 1 in 8 succeeds:
+			if a random chance of 1 in 8 succeeds and primary damage is physical damage: [TODO: what about projectile?]
 				add 10 points of physical damage with reason "insane burst of strength".
 
 Chapter - Beloved of Aite
@@ -692,7 +692,7 @@ An attack modifier rule (this is the asleep gives attack bonus rule):
 An add specific damage rule (this is the asleep damage bonus rule):
 	if damage-by-hitting is true: [this only works for attacks]
 		if victim is just-woken:
-			add 2 points of physical damage with reason "defender was asleep".
+			add 2 points of damage with reason "defender was asleep".
 
 Last carry out an actor hitting (this is the remove just-woken rule):
 	now global defender is not just-woken.

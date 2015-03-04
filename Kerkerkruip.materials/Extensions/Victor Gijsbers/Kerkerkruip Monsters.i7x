@@ -334,19 +334,11 @@ Carry out piercing:
 	try the actor attacking the noun instead.
 
 An add specific damage rule (this is the more damage when piercing rule):
-	if damage-by-hitting is true:
+	if damage-by-hitting is true and primary damage is physical damage:
 		if the global attacker is at-pierce:
 			let n be the final body of the global attacker divided by 5;
 			increase n by 2;
 			add n points of physical damage with reason "piercing".
-
-
-
-
-		
-		
-		
-		
 
 
 
@@ -1272,7 +1264,7 @@ First carry out an actor attacking the chain golem (this is the attack a spinnin
 The chain golem is abnormal-concentrating.
 
 An add specific damage rule (this is the chain golem damage depends on concentration rule):
-	if damage-by-hitting is true:
+	if damage-by-hitting is true and primary damage is physical damage:
 		if the global attacker is the chain golem and the concentration of the chain golem is not 0:
 			let n be the concentration of the chain golem times 2;
 			add n points of physical damage with reason "golem spinning".
@@ -2029,12 +2021,12 @@ An attack modifier rule (this is the howl attack bonus rule rule):
 		if the numbers boolean is true, say " + 4 (howling)[run paragraph on]";
 		increase the attack strength by 4.	
 
-An add general damage rule (this is the howl damage bonus rule):
+An add specific damage rule (this is the howl damage bonus rule):
 	if damage-by-hitting is true:
 		if the global attacker is at-howl:
 			let n be final mind of the global attacker / 3;
 			increase n by 2;
-			add n points of general damage with reason "howling".
+			add n points of damage with reason "howling".
 			
 Aftereffects rule (this is the take away howling rule):
 	now the global attacker is not at-howl.
@@ -2202,9 +2194,9 @@ An attack modifier rule (this is the power of the hound attack modifier rule):
 		increase the attack strength by 2;
 
 An add specific damage rule (this is the power of the hound damage modifier rule):
-	if damage-by-hitting is true:
+	if damage-by-hitting is true and primary damage is physical damage:
 		if hound status is 1 and the victim is the hound provoker:
-			add 2 points of physical damage with reason "counterstrike".
+			add 2 points of damage with reason "counterstrike".
 
 An AI action selection rule for the hound (this is the hound likes to counterstrike but never parries rule):
 	[ Attack with the instant response turn]
@@ -2851,7 +2843,7 @@ An attack modifier rule (this is the betrayal attack modifier rule):
 An add specific damage rule (this is the betrayal damage bonus rule):
 	if damage-by-hitting is true:
 		if the victim is betrayed:
-			add 4 points of physical damage with reason "betrayed by [master]".
+			add 4 points of damage with reason "betrayed by [master]".
 
 AI action selection rule for a person (called P) (this is the betrayed people always wait rule):
 	if P is betrayed:
@@ -3116,36 +3108,13 @@ Report giant tentacle waiting when giant tentacle is insane:
 	say "The giant tentacle tries to hide by imitating a leaf of grass.";
 	rule succeeds.	
 
-To deal is a verb.
-
-[ This is almost the same as the set up attack damage rule, except with the option to mention that the tentacle still holds on to the defender. ]
-Carry out an actor hitting (this is the show the damage dealt by the giant tentacle rule):
-	if global attacker is the giant tentacle:
-		now override-normal-attack-damage-rule is true;
-		unless damage die of the global attacker weapon is less than 1:
-			now the attack damage is a random number between 1 and the damage die of the global attacker weapon;
-		increase the attack damage by weapon damage bonus of the global attacker weapon; [1d(damage die) + WDB]
-		if the numbers boolean is true:
-			say "[roman type][The global attacker] [deal] [run paragraph on]";
-		now harm of physical damage is attack damage;
-		now damage-by-hitting is true;	
-		have global attacker weapon inflict damage on the global defender;  [The crucial line.]
+After dealing attack damage when the global attacker is the giant tentacle (this is the show tentacle grappling with attack damage rule):
+	if the giant tentacle grapples the global defender:
 		if the the total damage is less than 1:
-			unless the giant tentacle grapples the global defender:
-				say ", allowing [the global defender] to escape unscathed.[run paragraph on]";
-			otherwise:
-				say " but holds on to [the global defender].[run paragraph on]";
-		otherwise:
-			[non-fatal]
-			if the health of the global defender is greater than 0:
-				say ", wounding [the global defender] to ", health of the global defender, " health.[run paragraph on]" ;
-			[fatal]
-			otherwise:
-				say ", killing [the name of the global defender].[run paragraph on]";
-		say "[roman type][paragraph break]".
+			say " but holds on to [the global defender].[run paragraph on]";
+			rule succeeds;
 
-The show the damage dealt by the giant tentacle rule is listed before the set up attack damage rule in the carry out hitting rules.
-
+The show tentacle grappling with attack damage rule is listed first in the after dealing attack damage rules.
 
 
 Section - Power of the Tentacle
@@ -3330,7 +3299,7 @@ Absorbing power of minotaur:
 	say "As the minotaur dies, you feel its soul absorbed into your own body. ([bold type]Power of the minotaur[roman type]: +3 attack,  +2 defence, +17 health; ability to use the minotaur's axe; faculty bonus in the maze; a (your body)% chance of dealing 10 bonus damage when attacking with an axe.)[paragraph break]".
 
 An add specific damage rule (this is the power of the minotaur damage bonus rule):
-	if damage-by-hitting is true:
+	if damage-by-hitting is true and primary damage is physical damage:
 		if the power of the minotaur is granted and the actor is the player and the global attacker weapon is an axe:
 			let n be final body of the player;
 			if a random chance of n in 100 succeeds:
@@ -4971,7 +4940,7 @@ An add specific damage rule (this is the link concentration damage modifier rule
 					now the bonus is 4;
 				-- otherwise:
 					make no decision;
-			add bonus points of physical damage with reason "link".
+			add bonus points of damage with reason "link".
 
 Status attribute rule (this is the link status rule):
 	now world test subject is the player;
@@ -6470,7 +6439,7 @@ An add specific damage rule (this is the malignant chanter damage bonus rule):
 		if the location encloses the malignant chanter:
 			if the global attacker is undead and the global attacker is not the malignant chanter:
 				if concentration of the malignant chanter is greater than 0:
-					add (concentration of the malignant chanter) points of physical damage with reason "malignant chanter".
+					add (concentration of the malignant chanter) points of damage with reason "malignant chanter".
 		
 Chance to win rule when the location encloses the malignant chanter (this is the CTW malignant chanter rule):
 	if the global attacker is undead and the global attacker is not the malignant chanter:
@@ -6843,17 +6812,14 @@ Report the smoke demon concentrating:
 
 A specific damage multiplier rule when the victim is the smoke demon (this is the smoke demon denseness multiplier rule):
 	if concentration of the smoke demon is:
-		-- 1:
-			multiply physical damage by 125 percent with reason "smoke demon is somewhat dense";
+		-- 0:
+			multiply physical damage by 75 percent with reason "smoke demon is completely vaporous";
 		-- 2:
-			multiply physical damage by 150 percent with reason "smoke demon is quite dense";
+			multiply physical damage by 125 percent with reason "smoke demon is quite dense";
 		-- 3:
-			multiply physical damage by 175 percent with reason "smoke demon is very dense";
+			multiply physical damage by 150 percent with reason "smoke demon is very dense";
 		-- 4:
-			multiply physical damage by 200 percent with reason "smoke demon is extremely dense".
-
-
-
+			multiply physical damage by 175 percent with reason "smoke demon is extremely dense";
 
 Chapter - Imp
 

@@ -455,6 +455,8 @@ Before printing the player's obituary when done testing is false (this is the ab
 		
 Chapter - Randomized Events
 
+Section - Outcomes
+
 [TODO: put all outcomes in a table and save it to a file. Then we can restart the game repeatedly and use outcomes to generate statistics about dungeon generation]
 An outcome is a kind of value. Some outcomes are defined by the Table of outcomes.
 
@@ -486,6 +488,50 @@ outcome	description	attempt count	success count	likelihood (number)	minimum atte
 boring lack of results	""	0	0	0	1	1
 generic reusable event	""	0	0	1	1	100
 
+Section - Statistical Help
+
+An outcome has a number called the maximum tolerance.
+
+[This phrase helps us set a reasonable error tolerance of repeated tests so they will succeed most of the time. If we use a success rate of 0.99, that will set a threshold of error such that the outcome will be achieved for 99% of random seeds]
+
+To set the maximum tolerance for (event - an outcome) with (success rate - a real number) achievement:
+	Let success-target be (likelihood of event * maximum attempts of event) / (minimum attempts of event);
+	Let P be (likelihood of event) / (minimum attempts of event * 1.0);
+	Let current rate be 0.0;
+	Let current threshold be 0;
+	while current rate < success rate:
+		increase current rate by the probability of winning (success-target + current threshold) times out of maximum attempts of event with likelihood P;
+		if current threshold > 0:
+			increase current rate by the probability of winning (success-target - current threshold) times out of maximum attempts of event with likelihood P;
+		increment current threshold;
+	now the maximum tolerance of event is current threshold - 1;
+			
+To decide what real number is the probability of winning (K - a number) times out of (N - a number) with likelihood (P - a real number):
+	if K < 0 or K > N:
+		decide on 0.0;
+	let product be 1.0;
+	[probability = N choose K * P(success)^N * P(failure)^(K-N)]
+	[N choose K method cribbed from Wikipedia page on the binomial coefficient]
+	[interspersed with multiplying by P and 1 - P to prevent the number from getting too big or too small]
+	Repeat with i running from 1 to K:
+		now product is product * (n + 1 - i) / (i * 1.0);
+		now product is product * P;
+		if i is not greater than (N - K):
+			now product is product * (1 - P);
+	Repeat with i running from (K + 1) to (N - K):
+		now product is product * (1 - P);
+	decide on product;
+		
+[
+To decide what real number is (N - a number) choose (K - a number):
+	Let the product be 1.0;
+	Repeat with i running from 1 to K:
+		now product is product * (n + 1 - i) / (i * 1.0);
+	decide on product;
+]
+
+Section - Controlling Outcomes
+
 To decide whether we make (event - an outcome) possible:
 	if event is untested:
 		now event is possible;
@@ -496,6 +542,7 @@ To decide whether we make (event - an outcome) possible:
 				now maximum attempts of event is 100;
 		now success count of event is 0;
 		now attempt count of event is 0;
+		set the maximum tolerance for event with 0.99 achievement;
 	if the last successful outcome is the event, now the last successful outcome is boring lack of results; [so this event will not be "just succeeded"]
 	decide on whether or not event is possible;
 	
@@ -539,6 +586,8 @@ To decide whether we haven't reset (event - an outcome) after success:
 	now event is untested;
 	no.
 		
+Section - Testing Outcomes
+
 To decide whether we haven't achieved (event - an outcome) in (likelihood - a number) out of (minimum tries - a number) attempts giving up after (maximum tries - a number) attempts:
 	if event is untested:
 		now the likelihood of event is likelihood;
@@ -556,7 +605,6 @@ To decide whether we haven't achieved (event - an outcome) in (likelihood - a nu
 
 To test (event - an outcome) against (success - a truth state):
 	unless we make the event possible, stop;
-	let percent-tolerance be 5; [a constant - do we want it to be a property?]
 	if likelihood of the event is 0:
 		fail event based on success;
 	otherwise:
@@ -565,7 +613,7 @@ To test (event - an outcome) against (success - a truth state):
 			now the last successful outcome is the event;
 			increment success count of the event;
 		Let target be (likelihood of the event * attempt count of the event) / (minimum attempts of the event); [parentheses are needed, but I don't know why]
-		Let tolerance be percent-tolerance * attempt count of the event / 100;
+		Let tolerance be maximum tolerance of the event * attempt count of the event / maximum attempts of the event;
 		if the attempt count of event is less than the minimum attempts of event:
 			[not enough attempts to determine success or failure]
 			stop;
