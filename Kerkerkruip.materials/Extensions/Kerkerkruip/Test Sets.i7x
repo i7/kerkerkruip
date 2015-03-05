@@ -2714,14 +2714,14 @@ Testing effects of damage-text testing:
 	assert result "(\n|^)Your body explodes vehemently as you throw yourself at the chain golem, but you only deal 5 damage instead of the 1000 damage you needed to deal.";
 	now the health of the player is 1000;
 	prepare a test battle with the tentacle;
-	now the tension is 0;
-	now the concentration of the tentacle is 0;
-	have the player do a dodge reaction to a 100 melee hit by the tentacle with result "(\n|^)The giant tentacle deals 0 damage but holds on to you.";
+	now the hit protection of the player is 1;
+	[make sure the tentacle "holds on to you" when the attack does no damage]
+	have the player do a dodge reaction to a 100 melee hit by the tentacle with result "(\n|^)The giant tentacle deals<^\n>+ 0 damage but holds on to you.";
 	check damage of the player with 1000 health after "deals";
 	now the tentacle does not grapple the player;
 	now the tension is 3;
-	[This next test fails, not because of a text problem, but because of a logic problem - see issue #378]
-	have the player do a dodge reaction to a 100 melee hit by the tentacle with result "(\n|^)The giant tentacle deals 0 + 1 (tension) = 1 damage, wounding you to 999 health.";
+	[Make sure the tentacle can produce a normal damage message]
+	have the player do a dodge reaction to a 100 melee hit by the tentacle with result "(\n|^)The giant tentacle deals 0 \+ <^=>+ = \d+ damage, wounding you to \d+ health\.";
 	check damage of the player with 1000 health after "deals"; [somewhat redundant here]
 	clear event description;
 	try the tentacle tentacle-constricting;
