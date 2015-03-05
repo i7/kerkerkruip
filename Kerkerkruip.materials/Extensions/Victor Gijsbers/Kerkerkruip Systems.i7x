@@ -908,8 +908,8 @@ radiance	"radiant"	999	melter	1000
 darkness	"dark"	999	melter	1000
 adamant	"adamantine"	999	melter	1000
 vapour	"vapourous"	999	burner	1000
-fire		"fiery"	999		burner	1000
-electricity	"electric"		999		burner	1000
+fire	"fiery"	999	burner	1000
+electricity	"electric"	999	burner	1000
 
 Understand the material property as describing a thing.
 [Understand the material-adjective property as describing a material.]

@@ -546,9 +546,9 @@ Definition: a person is cowerer if the cower counter of it is not the boring lac
 
 Table of Outcomes (continued)
 outcome	maximum attempts
-ape cower counter	300
-toad cower counter	300
-player cower counter	300
+ape cower counter	200
+toad cower counter	200
+player cower counter	200
 
 The cower counter of the blood ape is ape cower counter. The cower counter of the zombie toad is toad cower counter. The cower counter of the player is player cower counter.
 
@@ -594,8 +594,8 @@ initial scheduling for a cower-counting test step:
 		Let counter be the cower counter of guy;
 		Now the description of counter is "[guy] cowering";
 		Let P be the target cower percentage of guy;
-		If P is 0 or P / 5 > 0:
-			[we don't need all that precision unless we need to distinguish P from 0]
+		If the remainder after dividing P by 5 is 0:
+			[we don't need all that precision]
 			now the likelihood of counter is P / 5;
 			now the minimum attempts of counter is 20;
 		otherwise:

@@ -3239,6 +3239,15 @@ Chance to win rule when the chosen weapon is a dagger (this is the CTW dagger co
 	let n be the tension divided by 2;
 	increase the chance-to-win by n.
 		
+[Thoughts on seeing Automatos knocked back by the force of a dagger blow:
+
+A hammer or a mace or a sword can do damage through sheer force. But a dagger just isn't massive enough to do that. I've decided to imagine serious damage by a dagger as corresponding to a very accurate hit against a vital area. In such a case, a dagger could damage Automatos' programming, but the text would be different.
+
+I still think it's reasonable that a dagger would be less effective against some materials, but there's a real can of worms there... how does a weapon damage a vaporous being? How does something damage a being made of darkness or radiance? Some answers could be fun... darkness and radiance might damage each other more than solid objects would... but it could also be a big pain in the butt.
+
+I also think daggers are overpowered. At times, the gorgeous dagger can be better than the adamantine sword, and it's usually better than an axe. Not only does it hit more often, but when it does it can do huge damage. I'm considering getting rid of the dagger tension damage completely. We have lots of other weapons with a tension damage bonus, let the dagger stick with the attack bonus.
+]
+
 An add specific damage rule (this is the dagger extra tension damage bonus rule):
 	if damage-by-hitting is true:
 		if the damage-source is a dagger:
