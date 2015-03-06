@@ -5168,7 +5168,7 @@ An aftereffects rule (this is the Automatos loses actions rule):
 	if the global defender is Automatos and Automatos is alive and the total damage is greater than 7:
 		let n be the number of entries in Automatos AI list;
 		if n is greater than 0:
-			say "The impact of the attack is so great that Automatos stagggers backwards and shakes his head several times. Some small, almost [bold type]delicate mechanical parts fall[roman type] out of his [one of]right ear[or]left ear[or]mouth[or]nostrils[at random].";
+			say "[if the global attacker weapon is a dagger]The dagger has struck deep between plates of steel and dislodged something inside Automatos. The behemoth [otherwise]The impact of the attack is so great that Automatos [end if]staggers backwards and shakes its head several times. Some small, almost [bold type]delicate mechanical parts fall[roman type] out of its [one of]right ear[or]left ear[or]mouth[or]nostrils[at random].";
 			let q be a random number between 1 and n;
 			remove entry q from Automatos AI list; [Yes, this can reduce the length of the list to 0!]
 			if n is greater than 1 and a random chance of 1 in 2 succeeds:

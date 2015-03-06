@@ -704,7 +704,13 @@ To decrease the size of (item - a weapon):
 			if size of item is tiny or size of item is medium or size of item is huge:
 				increase parry-against bonus of item by 1;
 				decrease dodge bonus of item by 1.
-	
+
+To set the size of (item - a weapon) to (target - a size):
+	while the size of item is less than target:
+		increase the size of item;
+	while the size of item is greater than target:
+		decrease the size of item.
+
 A dungeon interest rule (this is the change weapon sizes rule):
 	repeat with item running through not off-stage not non-treasure not carried not size-agnostic weapons:
 		if a random chance of 1 in 20 succeeds:

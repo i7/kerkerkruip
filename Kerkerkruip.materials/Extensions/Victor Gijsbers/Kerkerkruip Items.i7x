@@ -2444,10 +2444,7 @@ To do the adamantine blade shuffle:
 	now the adamantine blade is not rusted;
 	now the heat strength of the adamantine blade is 0;
 	now adamantine blade is medium;
-	while the size difference of adamantine blade and the player > 0:
-		increase the size of adamantine blade;
-	while the size difference of adamantine blade and the player < 0:
-		decrease the size of adamantine blade.
+	set the size of the adamantine blade to the size of the player;
 		
 
 Every turn when the adamantine blade is not off-stage (this is the adamantine blade countdown rule):
@@ -3302,8 +3299,9 @@ tension 20: +6 +2
 An add specific damage rule (this is the dagger extra tension damage bonus rule):
 	if damage-by-hitting is true:
 		if the damage-source is a dagger:
-			[TODO: reduce dagger damage against hard materials?]
-			let n be the tension divided by 4;
+			let n be 0;
+			if the tension is at least 1, increment n;
+			if the tension is at least 8, increment n;
 			if n is not 0:
 				add n points of primary damage with reason "dagger benefits from tension".
 

@@ -2869,13 +2869,21 @@ Testing effects of damage-modifier-testing:
 	have Miranda do no reaction to a 100 melee hit by the player with result "\+ 1 \(crossbow benefits from tension\) ", checking damage;
 	equip the player with giantbane;
 	extract the chain golem to the location;
+	now the tension is 20;
+	have Miranda do no reaction to a 100 melee hit by the player with result "\+ 2 \(dagger benefits from tension\)", checking damage;
+	now the tension is 8;
+	have Miranda do no reaction to a 100 melee hit by the player with result "\+ 2 \(dagger benefits from tension\)", checking damage;
+	now the tension is 7;
+	have Miranda do no reaction to a 100 melee hit by the player with result "\+ 1 \(dagger benefits from tension\)", checking damage;
+	now the tension is 1;
+	have Miranda do no reaction to a 100 melee hit by the player with result "\+ 1 \(dagger benefits from tension\)", checking damage;
+	now the tension is 0;
 	now Miranda is just-woken;
 	now the player is at-pierce;
 	now the body score of the player is 5;
 	now the mind score of the player is 5;
 	now the stun count of the player is 0;
 	now the player is at-howl;
-	now the tension is 3;
 	now the hound provoker is Miranda;
 	now the hound status is 1;
 	now the concentration of Miranda is 2;
@@ -2888,8 +2896,6 @@ Testing effects of damage-modifier-testing:
 	assert that the damage description includes "\+ 2 \(counterstrike\)";
 	assert that the damage description includes "\+ 2 \(link\)";
 	now the hound status is 0;
-	now the tension is 4;
-	have Miranda do no reaction to a 100 melee hit by the player with result "\+ 1 \(dagger benefits from tension\)", checking damage;
 	now the player is small;
 	have the chain golem do no reaction to a 100 melee hit by the player with result "\+ 4 \(Giantbane's special\)", checking damage;
 	assert that the damage description includes "- 1 \(small attacker\)";
@@ -3032,6 +3038,7 @@ Testing effects of heat-damage-testing:
 	assert that the damage description includes "\(scythe of flaming is hot\)"; [not mentioning rust or heat]
 	assert that the damage description includes "- 2 \(rust\)";
 	try taking off the dragon armour;
+	now the scythe of flaming is not rusted;
 	
 holy-damage is a test step.
 
@@ -3162,6 +3169,22 @@ Testing effects of ment-damage:
 	have the defender of Aite do no reaction to a 100 melee hit by the player with result "\+ 1 \(ment\) ", checking damage;
 	have the player do no reaction to a 100 melee hit by the defender of Aite with result "- 1 \(ment\) ", checking damage;
 
+automatos-tests is a test set.
+
+automatos-blow is a test step. The first move of automatos-tests is automatos-blow;
+
+Initial scheduling of automatos-blow:
+	prepare a test battle with Automatos.
+	
+Testing effects of automatos-blow:
+	equip the player with the executioner's axe;
+	now the tension is 12;
+	have Automatos do no reaction to a 100 melee hit by the player with result "The impact of the attack is so great that Automatos staggers backwards and shakes its head several times. Some small, almost delicate mechanical parts fall out of its ";
+	equip the player with the gorgeous dagger;
+	set the size of the gorgeous dagger to medium;
+	now the tension is 12;
+	have Automatos do no reaction to a 100 melee hit by the player with result "The dagger has struck deep between plates of steel and dislodged something inside Automatos. The behemoth staggers backwards and shakes its head several times. Some small, almost delicate mechanical parts fall out of its ";
+	
 [
 ./Victor Gijsbers/Kerkerkruip Actions and UI.i7x - done
 ./Victor Gijsbers/Kerkerkruip ATTACK.i7x - done
