@@ -6812,14 +6812,14 @@ Report the smoke demon concentrating:
 
 A specific damage multiplier rule when the victim is the smoke demon (this is the smoke demon denseness multiplier rule):
 	if concentration of the smoke demon is:
-		-- 0:
-			multiply physical damage by 75 percent with reason "smoke demon is completely vaporous";
+		-- 1:
+			multiply physical damage by 125 percent with reason "smoke demon is completely vaporous";
 		-- 2:
-			multiply physical damage by 125 percent with reason "smoke demon is quite dense";
+			multiply physical damage by 150 percent with reason "smoke demon is quite dense";
 		-- 3:
-			multiply physical damage by 150 percent with reason "smoke demon is very dense";
+			multiply physical damage by 175 percent with reason "smoke demon is very dense";
 		-- 4:
-			multiply physical damage by 175 percent with reason "smoke demon is extremely dense";
+			multiply physical damage by 200 percent with reason "smoke demon is extremely dense";
 
 Chapter - Imp
 

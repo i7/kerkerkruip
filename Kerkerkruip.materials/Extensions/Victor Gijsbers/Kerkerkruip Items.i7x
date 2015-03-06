@@ -3246,6 +3246,57 @@ A hammer or a mace or a sword can do damage through sheer force. But a dagger ju
 I still think it's reasonable that a dagger would be less effective against some materials, but there's a real can of worms there... how does a weapon damage a vaporous being? How does something damage a being made of darkness or radiance? Some answers could be fun... darkness and radiance might damage each other more than solid objects would... but it could also be a big pain in the butt.
 
 I also think daggers are overpowered. At times, the gorgeous dagger can be better than the adamantine sword, and it's usually better than an axe. Not only does it hit more often, but when it does it can do huge damage. I'm considering getting rid of the dagger tension damage completely. We have lots of other weapons with a tension damage bonus, let the dagger stick with the attack bonus.
+
+Old dagger performance: (damage bonus = tension/4)
+
+max damage roll: 3 + max concentration: 4 = 1-7 damage
+
+tension 0: +0 +0 = +0 (1-7)
+tension 1: +0 +0
+tension 2: +0 +0
+tension 3: +1 +0 = +1 (2-8)
+tension 4: +1 +1 = +2 (3-9)
+tension 5: +1 +1
+tension 6: +2 +1 = +3 (4-10)
+tension 7: +2 +1
+tension 8: +2 +2 = +4 (5-11)
+tension 9: +3 +2 = +5 (6-12)
+tension 10: +3 +2
+tension 11: +3 +2 
+tension 12: +4 +3 = +7 (8-14)
+tension 13: +4 +3
+tension 14: +4 +3
+tension 15: +5 +3 = +8 (9-15)
+tension 16: +5 +4 = +9 (10-16)
+tension 17: +5 +4
+tension 18: +6 +4 = +10 (11-17)
+tension 19: +6 +4 
+tension 20: +6 +5 = +11 (12-18 damage)
+
+desired extra damage: (damage bonus somewhat logarithmic)
+	
+tension 0: +0 +0 = +0
+tension 1: +0 +1 = +1
+tension 2: +0 +1
+tension 3: +1 +1 = +2
+tension 4: +1 +1 
+tension 5: +1 +1
+tension 6: +2 +1 = +3
+tension 7: +2 +1
+tension 8: +2 +2 = +4
+tension 9: +3 +2 = +5
+tension 10: +3 +2
+tension 11: +3 +2
+tension 12: +4 +2 = +6
+tension 13: +4 +2
+tension 14: +4 +2
+tension 15: +5 +2 = +7
+tension 16: +5 +2
+tension 17: +5 +2
+tension 18: +6 +2 = +8
+tension 19: +6 +2
+tension 20: +6 +2
+
 ]
 
 An add specific damage rule (this is the dagger extra tension damage bonus rule):

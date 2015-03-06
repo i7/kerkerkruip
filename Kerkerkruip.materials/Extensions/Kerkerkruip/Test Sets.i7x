@@ -3060,7 +3060,7 @@ Testing effects of holy-damage:
 	Now the expression scan position is 0;
 	Let density damage be the number we scan in text matching subexpression 2;
 	[holy sword does divine damage, so doesn't add to the density damage]
-	assert that density damage is (base damage + 3) / 4 with label "density damage";
+	assert that density damage is (base damage + 3) / 2 with label "density damage";
 	now the tension is 0;
 	have the player do no reaction to a 100 melee hit by the healer of Aite with result "\+ 2 \(holiness\)" in 0 out of 1 attempts, checking damage;
 	now the reusable item is a random scroll of ghoulification;
