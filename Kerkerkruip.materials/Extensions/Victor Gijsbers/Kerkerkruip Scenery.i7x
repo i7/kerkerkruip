@@ -13,10 +13,14 @@ Considered extra is a thing that varies.
 
 Dungeon interest rule (this is the add extra scenery rule):
 	let n be the number of off-stage extra things;
+	if n is 0, make no decision;
 	if n is greater than 8, now n is 8;
 	now n is a random number between 1 and n;
 	repeat with i running from 1 to n:
 		now considered extra is a random off-stage extra thing;
+		if considered extra is nothing:
+			say "Programming error: Attempted to select a nonexistent off-stage extra thing (number of choices: [n] choice number: [i])[line break]";
+			stop;
 		choose an extra room;
 		unless considered room is Entrance Hall:
 			move considered extra to considered room;

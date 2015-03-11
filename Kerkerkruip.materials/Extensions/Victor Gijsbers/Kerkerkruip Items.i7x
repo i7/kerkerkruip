@@ -1120,7 +1120,7 @@ Last check an actor hitting when the noun wears the cloak of reflection (this is
 				now reflection-attack is true;
 				try the actor hitting the actor instead.
 
-A dungeon interest rule (this is the Malygris sometimes wears the cloak of reflection rule):
+Last starting kit setup for Malygris (this is the Malygris sometimes wears the cloak of reflection rule):
 	if a random chance of 1 in 10 succeeds:
 		if Malygris does not wear a cloak:
 			now Malygris wears the cloak of reflection;
@@ -2722,7 +2722,7 @@ Carry out reading scroll of afternoon delights:
 Malygris-scroll-chest is a container.
 Three scrolls of afternoon delights and one scroll of enchantment and one scroll of summoning are in Malygris-scroll-chest.
 
-A dungeon interest rule (this is the sometimes give Malygris afternoon delights rule):
+Last starting kit setup for Malygris (this is the sometimes give Malygris afternoon delights rule):
 	let item be a random thing in Malygris-scroll-chest;
 	move item to Malygris.
 

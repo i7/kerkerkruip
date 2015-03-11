@@ -76,7 +76,7 @@ with 100 blank rows
 The file of test set queue is called "testqueue"
 
 Table of Test Set Queue
-Test Set (test set)	Random-Seed (number)
+Test Set (test set)	Random-Seed (number)	Unresolved Count (number)
 with 100 blank rows
 
 To queue (T - a test set):
@@ -116,6 +116,8 @@ To say grand test summary:
 		now grand test total is grand test total plus total entry;
 		now grand test failures is grand test failures plus failures entry;
 	say "[grand test total] test[s] in [number of filled rows in Table of Test Results] set[s], [grand test failures] failure[s]";
+	if there is a possible outcome:
+		say "; [number of possible outcomes] outcome[s] still being tested" ;
 	
 To display test results:
 	If the number of filled rows in Table of Test Results is 0, stop;
@@ -328,7 +330,7 @@ Done testing is a truth state that varies.
 To decide whether testing (T - a test set):
 	if done testing is true, no;
 	decide on whether or not the current test set is T;
-
+	
 [The random seed rule is listed before the reaper carries a random scythe rule in the when play begins rules.]
 
 The file of noninteractive tests is called "noninteractivetests".
@@ -339,6 +341,9 @@ Before showing the title screen (this is the run the unit tests rule):
 	now allowing screen effects is true;
 	if the file of test set queue exists:
 		read file of test set queue into Table of Test Set Queue;
+	choose row 1 in Table of Test Set Queue;
+	if there is an unresolved count entry and the unresolved count entry is at least 1:
+		load test outcomes;
 	if the file of test results exists:
 		read file of test results into Table of Test Results;
 	if the file of noninteractive tests exists:
@@ -361,9 +366,8 @@ First after showing the title screen (this is the run all tests rule):
 	Choose row 1 in Table of Test Set Queue;
 	if the random-seed entry is not 0:
 		log "Seeding random number generator with [random-seed entry]";
-		seed the random-number generator with the random-seed entry;
+		now the xorshift seed is the random-seed entry;
 	now the current test set is the test set entry;	
-	blank out the whole row;
 	Now the current unit test name is "[the current test set]";
 	log "Completed so far: [grand test summary], with [number of filled rows in Table of Test Set Queue] set[s] left to test";
 	Repeat through Table of Test Results:
@@ -395,7 +399,9 @@ To initialize test steps:
 	
 Last when play begins (this is the start the next test rule):
 	if done testing is false:
-		follow the test play rules;
+		update event description;
+		follow the generation test rules;
+		follow the test play rules; [TODO: get rid of these]
 		schedule the first move of the current test set;
 	
 The scenario rules are a rulebook.
@@ -437,9 +443,28 @@ Chapter - Resetting the Game After Each Test Set (in place of Chapter - The Unit
 The current unit test name is an indexed text variable.
 
 To start the/-- next test:
+	choose row 1 in Table of Test Set Queue;
+	if waiting for resolution:
+		now the unresolved count entry is the number of possible outcomes;
+		if the random-seed entry is not 0:
+			if the xorshift seed is the random-seed entry:
+				Let throwaway result be a random number from 1 to 2;
+				transcribe "advancing random seed to [the xorshift seed]";	
+			if the xorshift seed is 0:
+				[TODO: find out why this happens]
+				increment the random-seed entry;
+			otherwise:		
+				now the the random-seed entry is the xorshift seed;
+		transcribe "restarting with random seed [random-seed entry] to continue [current test description]";
+		save test outcomes;
+	otherwise:
+		[this doesn't work: delete file of test outcomes;]
+		if the current test set is the test set entry:
+			blank out the whole row;
 	write file of test set queue from Table of Test Set Queue;
 	if file of save data exists:
 		delete file of save data;
+	transcribe and stop capturing because "starting the next test after";
 	restart immediately.
 
 For reading a command when done testing is false (this is the finish current test set rule):
@@ -460,16 +485,19 @@ Section - Outcomes
 [TODO: put all outcomes in a table and save it to a file. Then we can restart the game repeatedly and use outcomes to generate statistics about dungeon generation]
 An outcome is a kind of value. Some outcomes are defined by the Table of outcomes.
 
-An outcome has a text called the description.
-
 To say (result - an outcome):
 	if the description of the result is not empty:
 		say "[description of the result]";
 	otherwise:
 		say "[the result]";
 		
-An outcome can be untested, possible, failed, or achieved. An outcome is usually untested.
-Definition: an outcome is resolved if it is failed or it is achieved.
+outcome state is a kind of value. The outcome states are outcome-untested, outcome-possible, outcome-failed, and outcome-achieved.
+
+Definition: an outcome is resolved if the state of it is at least outcome-failed.
+Definition: an outcome is untested if the state of it is outcome-untested.
+Definition: an outcome is possible if the state of it is outcome-possible.
+Definition: an outcome is failed if the state of it is outcome-failed.
+Definition: an outcome is achieved if the state of it is outcome-achieved.
 
 The last successful outcome is an outcome that varies. The last successful outcome is boring lack of results.
 
@@ -477,20 +505,43 @@ To decide whether (event - an outcome) just succeeded:
 	if the event is untested, no;
 	decide on whether or not the event is the last successful outcome;
 
-An outcome has a number called the likelihood. An outcome has a number called the minimum attempts. [The expected probability of success is likelihood/minimum attempts]
-
-An outcome has a number called the attempt count. An outcome has a number called the success count.
-
-An outcome has a number called the maximum attempts.
-
 Table of Outcomes
-outcome	description	attempt count	success count	likelihood (number)	minimum attempts (number)	maximum attempts (number)
-boring lack of results	""	0	0	0	1	1
-generic reusable event	""	0	0	1	1	100
+outcome	description	attempt count	success count	likelihood (number)	minimum attempts (number)	maximum attempts (number)	maximum tolerance (number)	state (outcome state)
+boring lack of results	""	0	0	0	1	1	0	outcome-untested
+generic reusable event	""	0	0	1	1	100	0	--
 
+Section - Outcome Persistence
+
+The file of test outcomes is called "testoutcomes"
+
+To save test outcomes:
+	Repeat through Table of Outcomes:
+		now the description entry is the description of the outcome entry;
+		[now the antecedent entry is the antecedent of the outcome entry;]
+		now the attempt count entry is the attempt count of the outcome entry;
+		now the success count entry is the success count of the outcome entry;
+		now the likelihood entry is the likelihood of the outcome entry;
+		now the minimum attempts entry is the minimum attempts of the outcome entry;
+		now the maximum attempts entry is the maximum attempts of the outcome entry;
+		now the state entry is the state of the outcome entry;
+		[ingore maximum tolerance, it will be recalculated]
+	write file of test outcomes from table of outcomes;
+	
+To load test outcomes:
+	unless file of test outcomes exists, stop;
+	Read file of test outcomes into table of outcomes;
+	Repeat through table of outcomes:
+		[skip description entry]
+		[now the antecedent of the outcome entry is the antecedent entry;]
+		if there is an attempt count entry, now the attempt count of the outcome entry is the attempt count entry;
+		if there is a success count entry, now the success count of the outcome entry is the success count entry;
+		if there is a likelihood entry, now the likelihood of the outcome entry is the likelihood entry;
+		if there is a minimum attempts entry, now the minimum attempts of the outcome entry is the minimum attempts entry;
+		if there is a maximum attempts entry, now the maximum attempts of the outcome entry is the maximum attempts entry;
+		[ingore maximum tolerance, it will be recalculated]
+		if there is a state entry, now the state of the outcome entry is the state entry;
+		
 Section - Statistical Help
-
-An outcome has a number called the maximum tolerance.
 
 [This phrase helps us set a reasonable error tolerance of repeated tests so they will succeed most of the time. If we use a success rate of 0.99, that will set a threshold of error such that the outcome will be achieved for 99% of random seeds]
 
@@ -534,20 +585,23 @@ Section - Controlling Outcomes
 
 To decide whether we make (event - an outcome) possible:
 	if event is untested:
-		now event is possible;
+		now state of event is outcome-possible;
 		if the maximum attempts of event is 0:
 			if minimum attempts of event is 1:
 				now maximum attempts of event is 1;
 			otherwise:
 				now maximum attempts of event is 100;
-		now success count of event is 0;
-		now attempt count of event is 0;
 		set the maximum tolerance for event with 0.99 achievement;
 	if the last successful outcome is the event, now the last successful outcome is boring lack of results; [so this event will not be "just succeeded"]
 	decide on whether or not event is possible;
 	
 To make (event - an outcome) possible:
 	Let throwaway result be whether or not we make the event possible.
+	
+To reset (event - an outcome):
+	now success count of event is 0;
+	now attempt count of event is 0;
+	now state of event is outcome-untested;
 	
 To decide whether waiting for resolution:
 	decide on whether or not there is a possible outcome;
@@ -563,7 +617,9 @@ To be used when deciding whether to repeat test steps]
 To decide whether we reset every possible outcome:
 	report an iteration because "checking possible outcomes -";
 	if waiting for resolution, no;
-	now every outcome is untested;
+	Repeat with event running through outcomes:
+		reset event;
+	[TODO: do all resetting here, instead of when we make possible?]
 	yes.
 	
 [These phrases can be used with while loops]
@@ -573,7 +629,7 @@ To decide whether we haven't reset every possible outcome:
 To decide whether we haven't reset (event - an outcome):
 	report an iteration because "checking one outcome -";
 	if event is not resolved, yes; [different from "every possible" version - it makes sure the loop runs at least once]
-	now event is untested;
+	reset event;
 	no.
 
 To decide whether we haven't reset (event - an outcome) after success:
@@ -581,9 +637,9 @@ To decide whether we haven't reset (event - an outcome) after success:
 	if event is not resolved, yes; [different from "every possible" version - it makes sure the loop runs at least once]
 	if event is achieved and the last successful outcome is not the event:
 		[keep trying until we end on success]
-		now event is possible;
+		now state of event is outcome-possible;
 		yes;
-	now event is untested;
+	reset event;
 	no.
 		
 Section - Testing Outcomes
@@ -621,10 +677,10 @@ To test (event - an outcome) against (success - a truth state):
 		if error is not greater than tolerance:
 			assert "success" based on true; [record that the test is completed]
 			[say "succeeded [success count of the event] times after [attempt count of the event] attempts, coming within [tolerance] of [target].";]
-			now the event is achieved;
+			now the state of event is outcome-achieved;
 		otherwise if the attempt count of the event is not less than the maximum attempts of the event:
 			assert "After [maximum attempts of the event] attempt[s], [the event] happened [success count of the event] times (never within [tolerance] of the target number [target])" based on false;
-			now the event is failed.
+			now the state of event is outcome-failed.
 
 To test (event - an outcome) against (T - a text):
 	update the event description because "testing [event] against '[T]'"; [todo - roll this into a text-testing phrase?]
@@ -636,13 +692,14 @@ To fail (event - an outcome) based on (result - a truth state):
 	increment attempt count of event;
 	if result is true:
 		assert "[event] happened after [attempt count of the event] attempts, but it should never happen" based on false;
-		now the event is failed;
+		now the state of event is outcome-failed;
 	otherwise:
 		now the last successful outcome is the event;
 		if the attempt count of the event is not less than the minimum attempts of the event:
-			now the event is achieved;
+			now the state of event is outcome-achieved;
 		
 To fail (event - an outcome) on result (T - a text):
+	[TODO: don't test regexp if we're going to ignore the test result]
 	update the event description;
 	fail event based on whether or not the event description matches the regular expression T;
 	
@@ -650,12 +707,12 @@ To achieve (event - an outcome) based on (result - a truth state):
 	unless we make the event possible, stop;
 	increment attempt count of event;
 	if result is true:
-		now event is achieved;
+		now state of event is outcome-achieved;
 		now the last successful outcome is the event;
 		assert "success" based on true; [record that the test is completed]
 	otherwise if attempt count of event is not less than maximum attempts of event:
 		assert "[the event] never happened after [attempt count of event] attempts" based on false;
-		now event is failed;
+		now state of event is outcome-failed;
 		
 To achieve (event - an outcome) on result (T - a text):
 	update the event description;
@@ -813,22 +870,30 @@ Chapter - Testing Dungeon Generation
 
 The generation test rules is a rulebook.
 
-the generation count is a number that varies.
+[Generation test rules may test outcomes - if they are left unresolved, the game will restart and they'll be tested again]
+
+[the generation count is a number that varies.
 the generation minimum is a number that varies.
 		
+[TODO: replace this with hard reboot]
+
 This is the generate many test dungeons rule:
-	while the generation count < the generation minimum:
+	now description of generic reusable event is "generating a dungeon";
+	make generic reusable event possible;
+	while we haven't reset every possible outcome:
 		[aw, here we go again. We have to undo all the treasure placement... and what else?]
 		Repeat with guy running through denizen npc people:
+			Repeat with item running through things had by guy:
+				if item is worn by guy or item is carried by guy:
+					remove item from play;
 			remove guy from play;
 		Repeat with item running through on-stage not non-treasure things:
 			remove item from play;
 		follow the dungeon generation rules;
-		increment the generation count;
 		follow the generation test rules;
-		say "* [generation minimum - generation count] more dungeons to generate for [the current test set]";
+		achieve generic reusable event based on true;
 
-The generate many test dungeons rule substitutes for the create the dungeon rule when the generation minimum is at least 1.
+The generate many test dungeons rule substitutes for the create the dungeon rule when done testing is false.]
 
 Chapter - The assert phrase (in place of Chapter - The assert phrase in Simple Unit Tests by Dannii Willis)
 
@@ -856,13 +921,13 @@ To succeed based on (result - a truth state) within (N - a number) attempts:
 	Now description of generic reusable event is "[the scheduled event]";
 	Now maximum attempts of generic reusable event is N;
 	achieve generic reusable event based on whether or not result is true;
-	if generic reusable event is resolved, now generic reusable event is untested;
+	if generic reusable event is resolved, reset generic reusable event; [TODO: is this necessary?]
 
 To fail based on (result - a truth state) within (N - a number) attempts:
 	Now description of generic reusable event is "[the scheduled event] failing";
 	Now minimum attempts of generic reusable event is N;
 	fail generic reusable event based on whether or not result is true;
-	if generic reusable event is resolved, now generic reusable event is untested;
+	if generic reusable event is resolved, reset generic reusable event; [TODO: is this necessary?]
 	
 To succeed based on (result - a truth state):
 	succeed based on result within 100 attempts;

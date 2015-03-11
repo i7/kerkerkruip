@@ -23,7 +23,7 @@ application rulebook check if the test applies and marks it as completed - or ch
 assertion rulebook runs the test's assertions]
 	
 A test play when testing Aite champions vs bat:
-	say "updating monster statistics.";
+	say "DEBUG: updating monster statistics.";
 	[TODO: Why doesn't this interrupt text capture when doing it from the killing rules does?]
 	update the monster statistics;
 	assert "should be capturing text" based on whether or not text capturing is active;
@@ -1718,13 +1718,15 @@ Choosing a player action when testing bodmall-bleeding:
 	generate the action of attacking bodmall.
 
 Before Bodmall doing something when testing bodmall-bleeding:
+	[TODO: keep counting outcomes even after they're achieved -
+	then we can do a normal "achieve" instead of "test"]
 	test bodmall-reaction against whether or not Bodmall is at-react;
 	
 testing effects of bodmall-bleeding:
 	assert "the player should now be bigger than medium, but [regarding the player][they] [are] [size of the player]" based on whether or not the size of the player is greater than medium;
 	assert that the success count of bodmall-reaction is 1 with label "number of times Bodmall reacted";
 	assert "bodmall should be at-inactive, but she is [combat state of bodmall]" based on whether or not bodmall is at-inactive;
-	now bodmall-reaction is untested;
+	reset bodmall-reaction;
 
 Section - Maze Moving
 
@@ -1981,11 +1983,24 @@ Scenario when testing starting-kits-test:
 	now the gorgeous dagger is testobject;
 	now the evil dagger is testobject;
 	now Metastasio's hat is testobject;
-	now the generation minimum is 20.
+	set difficulty to 1;
 	
 malygris-heal-max is a number that varies.
 
 
+[TODO: make tests that can save outcomes and restart the game]
+
+Table of Outcomes (continued)
+outcome	description	likelihood	minimum attempts	maximum attempts
+malygris-healing	"Malygris should be able to heal sometimes"	1	20	
+too-much-malygris-healing	"[malygris-heal-max divided by 60] and [remainder after dividing malygris-heal-max by 60] 60ths is too much healing for Malygris"	0	5
+shimmering-player-item	""	0	30
+got-addicts-amulet	""	1	128	256
+uncursed-addicts-amulet	""	0	2
+got-shield	""	1	20
+not-wearing-shield	""	0	5
+sword-of-light-owner	""	1	10	10
+claymore-owner	""	1	10	10
 
 Generation test when testing starting-kits-test:
 	now the heal power of Malygris is 0;
@@ -1996,24 +2011,20 @@ Generation test when testing starting-kits-test:
 		now malygris-heal-max is max healing;
 	if max healing is at least 1:
 		say "* Malygris can heal [max healing divided by 60] and [remainder after dividing max healing by 60] 60ths per turn[line break]";
-	if (max healing) is greater than (60 times 3):
-		assert "[max healing divided by 60] and [remainder after dividing max healing by 60] 60ths is too much healing for Malygris" based on false;
-		now generation minimum is 0;
-	if generation count is generation minimum:
-		assert "Malygris should be able to heal sometimes" based on whether or not the malygris-heal-max is at least 1;
+	achieve malygris-healing based on whether or not max healing is at least 1;
+	fail too-much-malygris-healing based on whether or not (max healing) is greater than (60 times 3);
 	[no shimmer weapons]
 	[We place all of the player's possible starting kit items in the dungeon, tempting the starting kit rules to make shimmer-copies. But it must resist the temptation!]
 	Repeat with item running through things enclosed by the player:
-		assert "[The item] should not be shimmering" based on whether or not the item is not shimmering;
-		if the item is the addict's amulet:
-			[TODO: test that the addict's amulet is chosen sometimes]
-			assert "the addict's amulet should still be cursed" based on whether or not the addict's amulet is cursed;
-		otherwise:
-			assert "[the item] should not be cursed" based on whether or not the item is not cursed;
-	Assert that the original owner of the sword of light is the angel of compassion with label "original owner of the sword of light";
-	Assert that the original owner of the claymore is fafhrd with label "original owner of the claymore";
-		[TODO: starting kit items should match the player's size?]
-
+		fail shimmering-player-item based on whether or not the item is shimmering;
+		test got-addicts-amulet against whether or not the item is the addict's amulet;
+		if item is the addict's amulet, fail uncursed-addicts-amulet based on whether or not item is not cursed;
+		achieve got-shield based on whether or not item is a shield;
+		if item is a shield, fail not-wearing-shield based on whether or not the player does not wear item;
+	fail sword-of-light-owner based on whether or not the original owner of the sword of light is not the angel of compassion;
+	fail claymore-owner based on whether or not the original owner of the claymore is not fafhrd;
+	[TODO: starting kit items should match the player's size?]
+	
 Section - Bloodlust - issue 279
 
 bloodlust-279 is a test set.
@@ -2189,9 +2200,13 @@ Section - bug 244
 
 bug-244 is an test set.
 
+Table of Outcomes (continued)
+outcome	description	likelihood	minimum attempts
+mausoleum-not-placed	""	0	20
+
+
 Scenario when testing bug-244:
 	now generation info is true;
-	now the generation minimum is 20;
 	now the rarity of the mausoleum is 0;
 
 Map approval rule when testing bug-244 (this is the only approve secret mausoleum maps rule):
@@ -2202,7 +2217,7 @@ Map approval rule when testing bug-244 (this is the only approve secret mausoleu
 		rule fails;
 	
 Generation test when testing bug-244:
-	assert "The mausoleum should be placed" based on whether or not the mausoleum is placed;
+	fail mausoleum-not-placed based on whether or not the mausoleum is not placed;
 	assert "The mausoleum should be marked secretly placeable" based on whether or not the mausoleum is secretly placeable;
 	
 final-generation-test is a test step. The first move of bug-244 is final-generation-test.
@@ -2932,11 +2947,11 @@ Testing effects of damage-modifier-testing:
 		test death-blessing against "- 10 \(blessing of life\)";
 		if death-blessing just succeeded:
 			test blessing-reset against whether or not the player is death-blessed;
-		unless blessing-reset is resolved, now death-blessing is possible; [this is a hack - implement dependencies?]
+		unless blessing-reset is resolved, make death-blessing possible; [this is a hack - implement dependencies?]
 		test death-curse against "\+ 10 \(curse of death\)";
 		if death-curse just succeeded:
 			test curse-reset against whether or not the player is death-cursed;
-		unless curse-reset is resolved, now death-curse is possible;
+		unless curse-reset is resolved, make death-curse possible;
 	now the player is not death-blessed;
 	now the player is not death-cursed;
 	say paragraph break;
