@@ -58,23 +58,23 @@ Intervention bonus when the scheduled event is aite spike vs bat:
 	if the main actor is the player, increase the intervention-bonus by 100;
 	
 Table of Outcomes (continued)
-outcome
-bat crashing into spike
-bat avoiding huge spike
-bat avoiding gigantic spike
+outcome	antecedent
+player-targeted	--
+spike-flyer	player-targeted
+player-missed	player-targeted
+player-damaged	player-targeted
+bat crashing into spike	player-damaged
+bat avoiding huge spike	player-missed
+bat avoiding gigantic spike	player-missed	
 
 testing effects of aite spike vs bat:
-	Let player-targeted be whether or not the event description matches the regular expression "bursts out of the ground<^[line break]>+ you";
-	if player-targeted is true:
-		assert result "bursts out of the ground in front of you";
-	Let player-missed be whether or not player-targeted is true and the health of the player is 100;
-	achieve bat crashing into spike based on whether or not player-targeted is true and player-missed is false;
-	achieve bat avoiding huge spike based on whether or not player-missed is true and the event description matches the regular expression "huge <a-z>+ bursts out of the ground in front of you";
-	achieve bat avoiding gigantic spike based on whether or not player-missed is true and the event description matches the regular expression "gigantic <a-z>+ bursts out of the ground in front of you";
-	if the last successful outcome is:
-		-- bat crashing into spike: assert result "crash into";
-		-- bat avoiding huge spike: assert result "You fly over";
-		-- bat avoiding gigantic spike: assert result "You fly around";
+	achieve player-targeted on result "bursts out of the ground<^[line break]>+ you";
+	achieve spike-flyer on result "bursts out of the ground in front of you";
+	achieve player-missed based on whether or not health of the player is 100;
+	achieve player-damaged based on whether or not the health of the player is less than 100;
+	achieve bat crashing into spike on result "crash into";
+	achieve bat avoiding huge spike on result "huge <a-z>+ bursts out of the ground in front of you";
+	achieve bat avoiding gigantic spike on result "gigantic <a-z>+ bursts out of the ground in front of you";
 				
 Arena-tormentor-enslaving is a test step.
 
@@ -475,21 +475,30 @@ After taking a player action when the scheduled event is insane drakul statement
 [some of these appear too unlikey to happen within 100 iterations. Increase iterations?]
 
 Table of Outcomes (continued)
-outcome
-simple drakul identity
-nested conditionals
-nested belief
-lifeblood-hinting
-vampire-turning-hinting
+outcome	antecedent
+drakul statement	--
+drakul identity	drakul statement
+simple drakul identity	drakul identity
+drakul conditional	drakul statement
+double conditional	drakul conditional
+nested conditionals	double conditional
+nested belief	drakul statement
+lifeblood-hinting	drakul statement
+lifeblood-location	lifeblood-hinting
+vampire-turning-hinting	drakul statement
 
 Testing effects of insane drakul statements:
 	if waiting for compelled action, make no decision;
-	achieve simple drakul identity based on whether or not the event description matches the regular expression "Drakul says, 'I am " and not (the event description matches the regular expression "not|someone who|, and|, or"); [TODO: nicer matching phrases]
-	if simple drakul identity just succeeded, assert result "vampire|insane";
-	achieve nested conditionals based on whether or not the event description matches the regular expression "Drakul says, 'If .*," and the event description matches the regular expression "I would give you" and the event description matches the regular expression ", if|, and|, or"; [TODO: make this one big regex? Or is it impossible because of ordering?]
+	achieve drakul statement on result "Drakul says, '(<^'\n>*)";
+	now the event description is the text matching subexpression 1;
+	achieve drakul identity on result "I am .+ (vampire|insane)";
+	achieve simple drakul identity based on whether or not not (the event description matches the regular expression "not|someone who|, and|, or"); [TODO: test/achieve on absence of result]
+	achieve drakul conditional on result "^If .*,";
+	achieve double conditional on result "I would give you";
+	achieve nested conditionals on result ", if|, and|, or";;
 	achieve nested belief on result "I believe that I believe";
 	achieve lifeblood-hinting on result "a vial of my lifeblood\b";
-	if lifeblood-hinting just succeeded, assert result "I am carrying| is in | can be found | is currently unreachable, ";
+	achieve lifeblood-location on result "I am carrying| is in | can be found | is currently unreachable, ";
 	achieve vampire-turning-hinting on result "\bI intend to vanquish Malygris after I make you my vampire-slave\b|\byou will never be my vampire-slave\b";
 	[this doesn't compile:
 	assert "Blood never lies achievement should be held" based on whether not there is a held achievement of Blood never lies in the Table of Held Achievements;]
@@ -1984,6 +1993,7 @@ Scenario when testing starting-kits-test:
 	now the evil dagger is testobject;
 	now Metastasio's hat is testobject;
 	set difficulty to 1;
+	[assert "the addict's amulet should start off cursed" based on whether or not the addict's amulet is cursed;]
 	
 malygris-heal-max is a number that varies.
 
@@ -1991,16 +2001,16 @@ malygris-heal-max is a number that varies.
 [TODO: make tests that can save outcomes and restart the game]
 
 Table of Outcomes (continued)
-outcome	description	likelihood	minimum attempts	maximum attempts
-malygris-healing	"Malygris should be able to heal sometimes"	1	20	
-too-much-malygris-healing	"[malygris-heal-max divided by 60] and [remainder after dividing malygris-heal-max by 60] 60ths is too much healing for Malygris"	0	5
-shimmering-player-item	""	0	30
-got-addicts-amulet	""	1	128	256
-uncursed-addicts-amulet	""	0	2
-got-shield	""	1	20
-not-wearing-shield	""	0	5
-sword-of-light-owner	""	1	10	10
-claymore-owner	""	1	10	10
+outcome	description	likelihood	minimum attempts	maximum attempts	antecedent
+malygris-healing	"Malygris should be able to heal sometimes"	1	20	--	--
+too-much-malygris-healing	"[malygris-heal-max divided by 60] and [remainder after dividing malygris-heal-max by 60] 60ths is too much healing for Malygris"	0	5	--	--
+shimmering-player-item	""	0	30	--	--
+got-addicts-amulet	""	1	128	256	--
+uncursed-addicts-amulet	""	0	2	--	got-addicts-amulet	
+got-shield	""	1	20	--	--
+not-wearing-shield	""	0	5	--	got-shield
+sword-of-light-owner	""	1	10	10	--
+claymore-owner	""	1	10	10	--
 
 Generation test when testing starting-kits-test:
 	now the heal power of Malygris is 0;
@@ -2017,10 +2027,11 @@ Generation test when testing starting-kits-test:
 	[We place all of the player's possible starting kit items in the dungeon, tempting the starting kit rules to make shimmer-copies. But it must resist the temptation!]
 	Repeat with item running through things enclosed by the player:
 		fail shimmering-player-item based on whether or not the item is shimmering;
-		test got-addicts-amulet against whether or not the item is the addict's amulet;
-		if item is the addict's amulet, fail uncursed-addicts-amulet based on whether or not item is not cursed;
-		achieve got-shield based on whether or not item is a shield;
-		if item is a shield, fail not-wearing-shield based on whether or not the player does not wear item;
+	Let item be a random shield had by the player;
+	achieve got-shield based on whether or not item is a shield;
+	fail not-wearing-shield based on whether or not the player does not wear a shield;
+	test got-addicts-amulet against whether or not the player wears the addict's amulet;
+	fail uncursed-addicts-amulet based on whether or not item is not cursed;
 	fail sword-of-light-owner based on whether or not the original owner of the sword of light is not the angel of compassion;
 	fail claymore-owner based on whether or not the original owner of the claymore is not fafhrd;
 	[TODO: starting kit items should match the player's size?]
@@ -2197,12 +2208,13 @@ Section - bug 244
 
 [This test is not catching the bug I saw. I have no idea how to reproduce it.]
 [TODO: try new dungeon generation idea]
+[TODO: roll this into another dungeon generation test set]
 
 bug-244 is an test set.
 
 Table of Outcomes (continued)
 outcome	description	likelihood	minimum attempts
-mausoleum-not-placed	""	0	20
+mausoleum-placed	""	20	20
 
 
 Scenario when testing bug-244:
@@ -2217,14 +2229,9 @@ Map approval rule when testing bug-244 (this is the only approve secret mausoleu
 		rule fails;
 	
 Generation test when testing bug-244:
-	fail mausoleum-not-placed based on whether or not the mausoleum is not placed;
+	test mausoleum-placed against whether or not the mausoleum is placed;
 	assert "The mausoleum should be marked secretly placeable" based on whether or not the mausoleum is secretly placeable;
 	
-final-generation-test is a test step. The first move of bug-244 is final-generation-test.
-
-Testing effects of final-generation-test:
-	assert "The mausoleum should be marked secretly placeable" based on whether or not the mausoleum is secretly placeable;
-
 Section - Bug 301 Redux
 
 bug-301-aite is a test set.
@@ -2824,11 +2831,11 @@ damage-modifier-testing is an extracting test step. The first move of damage-mod
 Definition: a room is precarious if it is Bridge of Doom or it is the Vast Staircase.
 
 Table of Outcomes (continued)
-outcome	description	likelihood	minimum attempts
-death-blessing	""	1	15
-death-curse	""	1	20
-blessing-reset	""	1	2
-curse-reset	""	1	2
+outcome	description	likelihood	minimum attempts	antecedent
+death-blessing	""	1	15	--
+death-curse	""	1	20	--
+blessing-reset	""	1	2	death-blessing
+curse-reset	""	1	2	death-curse
 
 Initial scheduling of damage-modifier-testing:
 	equip Miranda with nunchucks;
@@ -2843,6 +2850,7 @@ Testing effects of damage-modifier-testing:
 	have the player do no reaction to a 100 melee hit by Miranda with result "robe of the dead mage" in 0 out of 1 attempts, checking damage;
 	repeat with conc-level running from 1 to 4:
 		now the concentration of the player is conc-level;
+		transcribe "setting player concentration to [conc-level]";
 		have the player do no reaction to a 100 melee hit by Miranda with result "\+ [conc-level * 25]% \(robe of the dead mage\)", checking damage;
 		assert that the concentration of the player is conc-level with label "concentration of the player";
 	try taking off the robe of the dead mage;	
@@ -2945,12 +2953,10 @@ Testing effects of damage-modifier-testing:
 		have Chton inflict damage on the player;
 		check damage of the player with 1000 health after "Chton tests you with";
 		test death-blessing against "- 10 \(blessing of life\)";
-		if death-blessing just succeeded:
-			test blessing-reset against whether or not the player is death-blessed;
+		test blessing-reset against whether or not the player is death-blessed;
 		unless blessing-reset is resolved, make death-blessing possible; [this is a hack - implement dependencies?]
 		test death-curse against "\+ 10 \(curse of death\)";
-		if death-curse just succeeded:
-			test curse-reset against whether or not the player is death-cursed;
+		test curse-reset against whether or not the player is death-cursed;
 		unless curse-reset is resolved, make death-curse possible;
 	now the player is not death-blessed;
 	now the player is not death-cursed;
@@ -3230,5 +3236,46 @@ Testing effects of failing move:
 	assert "truth is false" based on false.
 
 ]
+
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts	maximum attempts	antecedent
+coin-flip	1	2	20	--
+easy-flip	1	1	20	coin-flip
+third-flip	1	2	20	easy-flip
+new-flip	1	2	20	--
+after-new-flip	1	2	20	new-flip
+insufficient-flip	1	2	20	--
+impossible-flip	39	40	400	insufficient-flip
+more-impossible	1	2	1	impossible-flip
+first-time	2	10	100	--
+after-first	2	3	30	first-time
+wrong-success	2	3	30	after-first
+intended-failure	0	0	100	--
+unintended-success	0	0	100	--
+
+
+Outcome-behavior is a test set.
+
+[This is a meta-test. impossible-flip, more-impossible, after-first, wrong-success, and unintended-success should fail.]
+
+Definition: outcome-behavior is enabled:
+	decide on whether or not the number of filled rows in Table of Test Set Queue is 1. [only runs when it's the only test]
+
+Outcome-behavior-testing is a test step. The first move of outcome-behavior is outcome-behavior-testing.
+
+Testing effects of outcome-behavior-testing:
+	test coin-flip against whether or not a random chance of 1 in 2 succeeds;
+	test easy-flip against true;
+	test third-flip against whether or not a random chance of 1 in 2 succeeds;
+	test new-flip against whether or not a random chance of 1 in 2 succeeds;
+	test after-new-flip against whether or not a random chance of 1 in 2 succeeds;
+	test insufficient-flip against whether or not a random chance of 1 in 2 succeeds;
+	test impossible-flip against false;
+	test more-impossible against true;
+	test first-time against whether or not the attempt count of coin-flip is 1;
+	test after-first against true;
+	test wrong-success against whether or not a random chance of 1 in 3 succeeds;
+	fail intended-failure based on false;
+	fail unintended-success based on true;
 
 Test Sets ends here.

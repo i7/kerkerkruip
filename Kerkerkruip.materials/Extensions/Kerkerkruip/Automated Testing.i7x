@@ -499,16 +499,35 @@ Definition: an outcome is possible if the state of it is outcome-possible.
 Definition: an outcome is failed if the state of it is outcome-failed.
 Definition: an outcome is achieved if the state of it is outcome-achieved.
 
-The last successful outcome is an outcome that varies. The last successful outcome is boring lack of results.
+An outcome can be just-succeeded;
+	
+[Outcome properties:
 
-To decide whether (event - an outcome) just succeeded:
-	if the event is untested, no;
-	decide on whether or not the event is the last successful outcome;
+description - a 'printed name' style text
+attempt count - number of times outcome has been tested
+success count - number of times a test "succeeded"
+likelihood -
+minimum attempts -
+
+The probability of a test "succeeding" should be likelihood / minimum attempts.
+
+This has some special interpretations:
+	
+if likelihood = 0 or likelihood = minimum attempts, then success or failure of each test is considered a certainty, and the whole outcome will fail if a single test does not perform as expected
+if minimum attempts = 0, then likelihood is considered a minimum number of successes, not a probability. Setting likelihood to 1 means the whole outcome will be achieved if a single test succeeds
+For all other values, a tolerance range will be established that should achieve the outcome in 99% of cases with correctly randomized successes
+
+maximum attempts - outcome will "time out" and fail if it reaches this number without being achieved first. If you don't set this, a reasonable default will be chosen for you
+maximum tolerance - do not set, will be calculated
+state - determines whether the outcome should be tested. do not set directly, use "make ... possible" phrases, etc
+dependency - determines whether the next outcome should be tested. do not set directly, use "serial outcome dependency" phrases
+]
 
 Table of Outcomes
-outcome	description	attempt count	success count	likelihood (number)	minimum attempts (number)	maximum attempts (number)	maximum tolerance (number)	state (outcome state)
-boring lack of results	""	0	0	0	1	1	0	outcome-untested
-generic reusable event	""	0	0	1	1	100	0	--
+outcome	description	attempt count	success count	likelihood (number)	minimum attempts (number)	maximum attempts (number)	maximum tolerance (number)	state (outcome state)	antecedent (outcome)
+boring lack of results	""	0	0	0	1	1	0	outcome-untested	boring lack of results
+generic reusable event	""	0	0	1	1	100	0	--	--
+finish-on-success	""	0	0	1	1	1	0	--	--	
 
 Section - Outcome Persistence
 
@@ -517,13 +536,13 @@ The file of test outcomes is called "testoutcomes"
 To save test outcomes:
 	Repeat through Table of Outcomes:
 		now the description entry is the description of the outcome entry;
-		[now the antecedent entry is the antecedent of the outcome entry;]
 		now the attempt count entry is the attempt count of the outcome entry;
 		now the success count entry is the success count of the outcome entry;
 		now the likelihood entry is the likelihood of the outcome entry;
 		now the minimum attempts entry is the minimum attempts of the outcome entry;
 		now the maximum attempts entry is the maximum attempts of the outcome entry;
 		now the state entry is the state of the outcome entry;
+		now the antecedent entry is the antecedent of the outcome entry;
 		[ingore maximum tolerance, it will be recalculated]
 	write file of test outcomes from table of outcomes;
 	
@@ -532,7 +551,6 @@ To load test outcomes:
 	Read file of test outcomes into table of outcomes;
 	Repeat through table of outcomes:
 		[skip description entry]
-		[now the antecedent of the outcome entry is the antecedent entry;]
 		if there is an attempt count entry, now the attempt count of the outcome entry is the attempt count entry;
 		if there is a success count entry, now the success count of the outcome entry is the success count entry;
 		if there is a likelihood entry, now the likelihood of the outcome entry is the likelihood entry;
@@ -540,22 +558,26 @@ To load test outcomes:
 		if there is a maximum attempts entry, now the maximum attempts of the outcome entry is the maximum attempts entry;
 		[ingore maximum tolerance, it will be recalculated]
 		if there is a state entry, now the state of the outcome entry is the state entry;
-		
+		if there is an antecedent entry, now the the antecedent of the outcome entry is the antecedent entry;
+
 Section - Statistical Help
 
 [This phrase helps us set a reasonable error tolerance of repeated tests so they will succeed most of the time. If we use a success rate of 0.99, that will set a threshold of error such that the outcome will be achieved for 99% of random seeds]
 
 To set the maximum tolerance for (event - an outcome) with (success rate - a real number) achievement:
-	Let success-target be (likelihood of event * maximum attempts of event) / (minimum attempts of event);
-	Let P be (likelihood of event) / (minimum attempts of event * 1.0);
-	Let current rate be 0.0;
-	Let current threshold be 0;
-	while current rate < success rate:
-		increase current rate by the probability of winning (success-target + current threshold) times out of maximum attempts of event with likelihood P;
-		if current threshold > 0:
-			increase current rate by the probability of winning (success-target - current threshold) times out of maximum attempts of event with likelihood P;
-		increment current threshold;
-	now the maximum tolerance of event is current threshold - 1;
+	if minimum attempts of event is 0 or likelihood of event is 0 or likelihood of event is minimum attempts of event:
+		now maximum tolerance of event is 0;
+	otherwise:
+		Let success-target be (likelihood of event * maximum attempts of event) / (minimum attempts of event);
+		Let P be (likelihood of event) / (minimum attempts of event * 1.0);
+		Let current rate be 0.0;
+		Let current threshold be 0;
+		while current rate < success rate:
+			increase current rate by the probability of winning (success-target + current threshold) times out of maximum attempts of event with likelihood P;
+			if current threshold > 0:
+				increase current rate by the probability of winning (success-target - current threshold) times out of maximum attempts of event with likelihood P;
+			increment current threshold;
+		now the maximum tolerance of event is current threshold - 1;
 			
 To decide what real number is the probability of winning (K - a number) times out of (N - a number) with likelihood (P - a real number):
 	if K < 0 or K > N:
@@ -583,7 +605,35 @@ To decide what real number is (N - a number) choose (K - a number):
 
 Section - Controlling Outcomes
 
-To decide whether we make (event - an outcome) possible:
+The dependency test outcome is an outcome that varies. The dependency test outcome is boring lack of results.
+
+[Returns true if another outcome depends on the event, and also sets the dependency test outcome so we can use the "dependent" adjective]
+
+To decide whether (event - an outcome) has unresolved dependents:
+	now the dependency test outcome is the event;
+	decide on whether or not there is a not resolved dependent outcome.
+	
+Definition: an outcome (called event) is dependent:
+	Let candidate be the event;
+	while candidate is not boring lack of results:
+		now candidate is the antecedent of the candidate;
+		[We don't check for cyclical dependencies. Beware!]
+		if candidate is the dependency test outcome:
+			decide yes;
+	decide no.
+	
+[this phrase has no side effects]
+To decide whether (event - an outcome) is still testable:
+	if event is possible:
+		if the antecedent of the event is boring lack of results:
+			decide yes;
+		otherwise:
+			decide on whether or not the antecedent of the event is just-succeeded;
+	otherwise:
+		decide on whether or not the event has unresolved dependents.
+			
+[this version has the side effect of initializing untested outcomes and resetting the just-succeeded flag. Use this first, and use "is still testable" afterwards]
+To decide whether we make (event - an outcome) testable:
 	if event is untested:
 		now state of event is outcome-possible;
 		if the maximum attempts of event is 0:
@@ -592,16 +642,19 @@ To decide whether we make (event - an outcome) possible:
 			otherwise:
 				now maximum attempts of event is 100;
 		set the maximum tolerance for event with 0.99 achievement;
-	if the last successful outcome is the event, now the last successful outcome is boring lack of results; [so this event will not be "just succeeded"]
-	decide on whether or not event is possible;
+	Let testability be whether or not event is still testable;
+	now the event is not just-succeeded;
+	decide on testability;
 	
 To make (event - an outcome) possible:
-	Let throwaway result be whether or not we make the event possible.
+	Let throwaway result be whether or not we make the event testable.
 	
 To reset (event - an outcome):
 	now success count of event is 0;
 	now attempt count of event is 0;
 	now state of event is outcome-untested;
+	now event is not just-succeeded;
+	[reset dependents?]
 	
 To decide whether waiting for resolution:
 	decide on whether or not there is a possible outcome;
@@ -629,16 +682,11 @@ To decide whether we haven't reset every possible outcome:
 To decide whether we haven't reset (event - an outcome):
 	report an iteration because "checking one outcome -";
 	if event is not resolved, yes; [different from "every possible" version - it makes sure the loop runs at least once]
-	reset event;
-	no.
-
-To decide whether we haven't reset (event - an outcome) after success:
-	report an iteration because "checking one outcome until success -";
-	if event is not resolved, yes; [different from "every possible" version - it makes sure the loop runs at least once]
-	if event is achieved and the last successful outcome is not the event:
-		[keep trying until we end on success]
-		now state of event is outcome-possible;
-		yes;
+	if the event has unresolved dependents:
+		if event is not just-succeeded:
+			yes; [keep looping until success if there are dependents]
+	repeat with item running through dependent outcomes:
+		reset item;
 	reset event;
 	no.
 		
@@ -659,28 +707,44 @@ To decide whether we haven't achieved (event - an outcome) in (likelihood - a nu
 		
 [TODO: Normalize regex matches against event description so we can use a brief consistent phrase. ]
 
+To decide whether (event - an outcome) timed out:
+	decide on whether or not the attempt count of the event is not less than the maximum attempts of the event;
+	
+To decide whether (event - an outcome) can fail:
+	if event is not possible, decide no;
+	[if chance of success is 0 or certainty, we fail as soon as we exceed tolerance, before reaching the minimum attempts]
+	if likelihood of event is 0, decide yes; [impossibility - should never get a "successful" test]
+	if likelihood of event is minimum attempts of the event, decide yes; [certainty - should never get an "unsuccessful" test]
+	decide on whether or not the event timed out.
+	
+To decide whether (event - an outcome) can be achieved:
+	if event is not possible, decide no;
+	decide on whether or not the attempt count of the event is at least the minimum attempts of the event.
+	
+To resolve (event - an outcome):
+	Let target be the likelihood of the event;
+	if the minimum attempts of the event is not 0:
+		now target is (target * attempt count of the event) / (minimum attempts of the event); [parentheses are needed, but I don't know why]
+	Let the error be the absolute value of (success count of the event - target);
+	Let the tolerance be (maximum tolerance of the event * attempt count of the event) / maximum attempts of the event;
+	if the event can fail and error is greater than tolerance:
+		now the state of event is outcome-failed;
+		assert "After [attempt count of the event] attempt[s], [the event] happened [success count of the event] times (never within [tolerance] of the target number [target])" based on false;
+	otherwise if the event can be achieved and error is not greater than tolerance:
+		now the state of event is outcome-achieved;
+		assert "success" based on true;
+			
 To test (event - an outcome) against (success - a truth state):
-	unless we make the event possible, stop;
-	if likelihood of the event is 0:
-		fail event based on success;
-	otherwise:
+	if we make the event testable:
 		increment attempt count of the event;
 		if success is true:
-			now the last successful outcome is the event;
 			increment success count of the event;
-		Let target be (likelihood of the event * attempt count of the event) / (minimum attempts of the event); [parentheses are needed, but I don't know why]
-		Let tolerance be maximum tolerance of the event * attempt count of the event / maximum attempts of the event;
-		if the attempt count of event is less than the minimum attempts of event:
-			[not enough attempts to determine success or failure]
-			stop;
-		Let the error be the absolute value of (success count of the event - target);
-		if error is not greater than tolerance:
-			assert "success" based on true; [record that the test is completed]
-			[say "succeeded [success count of the event] times after [attempt count of the event] attempts, coming within [tolerance] of [target].";]
-			now the state of event is outcome-achieved;
-		otherwise if the attempt count of the event is not less than the maximum attempts of the event:
-			assert "After [maximum attempts of the event] attempt[s], [the event] happened [success count of the event] times (never within [tolerance] of the target number [target])" based on false;
-			now the state of event is outcome-failed.
+		if event is resolved and event timed out and the event has unresolved dependents:
+			Repeat with item running through dependent not resolved outcomes:
+				assert "[item] ([success count of item]/[attempt count of item]) stalled because [state of event] [event] timed out after [attempt count of event] attempts" based on false;
+				now state of item is outcome-failed;
+		resolve event;
+		if success is not (whether or not likelihood of the event is 0), now the event is just-succeeded;
 
 To test (event - an outcome) against (T - a text):
 	update the event description because "testing [event] against '[T]'"; [todo - roll this into a text-testing phrase?]
@@ -688,15 +752,8 @@ To test (event - an outcome) against (T - a text):
 	test event against whether or not the event description matches the regular expression T;
 
 To fail (event - an outcome) based on (result - a truth state):
-	unless we make the event possible, stop;
-	increment attempt count of event;
-	if result is true:
-		assert "[event] happened after [attempt count of the event] attempts, but it should never happen" based on false;
-		now the state of event is outcome-failed;
-	otherwise:
-		now the last successful outcome is the event;
-		if the attempt count of the event is not less than the minimum attempts of the event:
-			now the state of event is outcome-achieved;
+	now likelihood of event is 0;
+	test event against result;
 		
 To fail (event - an outcome) on result (T - a text):
 	[TODO: don't test regexp if we're going to ignore the test result]
@@ -704,16 +761,10 @@ To fail (event - an outcome) on result (T - a text):
 	fail event based on whether or not the event description matches the regular expression T;
 	
 To achieve (event - an outcome) based on (result - a truth state):
-	unless we make the event possible, stop;
-	increment attempt count of event;
-	if result is true:
-		now state of event is outcome-achieved;
-		now the last successful outcome is the event;
-		assert "success" based on true; [record that the test is completed]
-	otherwise if attempt count of event is not less than maximum attempts of event:
-		assert "[the event] never happened after [attempt count of event] attempts" based on false;
-		now state of event is outcome-failed;
-		
+	now likelihood of event is 1;
+	now minimum attempts of event is 0;
+	test event against result;
+			
 To achieve (event - an outcome) on result (T - a text):
 	update the event description;
 	achieve event based on whether or not the event description matches the regular expression T;
@@ -1342,11 +1393,13 @@ To prepare a test battle with (guy - a person), inviting groups:
 	Generate the action of challenging guy in Test Arena;
 	
 Table of Outcomes (continued)
-outcome	description	likelihood	minimum attempts
-combat hit	""	1	1
+outcome	description	likelihood	minimum attempts	antecedent
+combat hit	""	1	1	--
+after-combat-hit	""	1	1	combat hit
 
 To test (guy - a person) doing a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit by (aggressor - a person) with result (outcome - a text) in (likelihood - a number) out of (total tries - a number) attempts, checking damage:
 	if combat hit is untested:
+		reset after-combat-hit;
 		now the description of combat hit is the substituted form of "[guy] doing [reaction] to [strength] melee hit by [aggressor] with result '[outcome]'";
 		now the melee of the aggressor is strength;
 		now the defence of guy is 50;
@@ -1365,14 +1418,15 @@ To test (guy - a person) doing a/-- (reaction - a reaction-type) to a/-- (streng
 		check damage of guy with 1000 health after "\n[The aggressor] [deal]";
 		test combat hit against whether or not damage description matches the regular expression outcome;
 	otherwise:
-		test combat hit against outcome;		
-	if combat hit is [still] possible:
+		test combat hit against outcome;
+	test after-combat-hit against true; [this forces combat hit to end on success]
+	if combat hit is still testable:
 		[transcribe re-equipping?]
 		equip guy with original-defender-weapon;
 		equip aggressor with original-attacker-weapon;
 	
 To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit by (aggressor - a person) with result (outcome - a text) in/on (likelihood - a number) out of (total tries - a number) attempts, checking damage:
-	while we haven't reset combat hit after success: 
+	while we haven't reset combat hit: 
 		if checking damage:
 			test guy doing reaction to a strength melee hit by aggressor with result outcome in likelihood out of total tries attempts, checking damage;
 		otherwise:
@@ -1618,7 +1672,7 @@ Initial scheduling for ape-cower-test:
 	make ape-cowering possible.
 	
 We can also repeat outcome tests outside of the normal test step loop. We use a special phrase as a while condition:
-	
+[TODO: fix this]	
 	While we haven't reset combat hit:
 
 	While we haven't reset combat hit after success:
