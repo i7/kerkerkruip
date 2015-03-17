@@ -2540,6 +2540,10 @@ Testing effects of chains-vs-thorns:
 	have the player do a dodge reaction to a 0 melee hit by the the chain golem with result "the chain golem does not overcome";
 	assert absence of result "The armour of thorns scratches the chain golem for 1 damage";
 	assert that the health of the chain golem is 100 with label "health of the chain golem";
+	now the hit protection of the player is 1;
+	have the player do a dodge reaction to a 100 melee hit by the the chain golem with result "The armour of thorns scratches the chain golem for 1 damage" in 0 out of 1 attempts;
+	now the hit protection of the player is 0;
+	now the inherent damage modifier of the chain golem is 2;
 	have the player do a dodge reaction to a 100 melee hit by the the chain golem with result "The armour of thorns scratches the chain golem for 1 damage";
 	assert that the health of the chain golem is 99 with label "health of the chain golem";
 

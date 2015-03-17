@@ -741,7 +741,7 @@ To test (event - an outcome) against (success - a truth state):
 			increment success count of the event;
 		if event is resolved and event timed out and the event has unresolved dependents:
 			Repeat with item running through dependent not resolved outcomes:
-				assert "[item] ([success count of item]/[attempt count of item]) stalled because [state of event] [event] timed out after [attempt count of event] attempts" based on false;
+				assert "[item] ([success count of item]/[attempt count of item]) stalled because [state of event] [event] timed out after [attempt count of event - 1] attempt[s]" based on false;
 				now state of item is outcome-failed;
 		resolve event;
 		if success is not (whether or not likelihood of the event is 0), now the event is just-succeeded;
@@ -1424,6 +1424,7 @@ To test (guy - a person) doing a/-- (reaction - a reaction-type) to a/-- (streng
 		[transcribe re-equipping?]
 		equip guy with original-defender-weapon;
 		equip aggressor with original-attacker-weapon;
+		reset after-combat-hit;
 	
 To have (guy - a person) do a/-- (reaction - a reaction-type) to a/-- (strength - a number) melee hit by (aggressor - a person) with result (outcome - a text) in/on (likelihood - a number) out of (total tries - a number) attempts, checking damage:
 	while we haven't reset combat hit: 
