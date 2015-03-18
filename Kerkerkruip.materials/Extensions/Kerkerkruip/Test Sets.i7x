@@ -2835,11 +2835,11 @@ damage-modifier-testing is an extracting test step. The first move of damage-mod
 Definition: a room is precarious if it is Bridge of Doom or it is the Vast Staircase.
 
 Table of Outcomes (continued)
-outcome	description	likelihood	minimum attempts	antecedent
-death-blessing	""	1	15	--
-death-curse	""	1	20	--
-blessing-reset	""	1	2	death-blessing
-curse-reset	""	1	2	death-curse
+outcome	description	likelihood	minimum attempts	maximum attempts	antecedent
+death-blessing	""	1	15	100	--
+death-curse	""	1	20	100	--
+blessing-reset	""	1	2	10	death-blessing
+curse-reset	""	1	2	10	death-curse
 
 Initial scheduling of damage-modifier-testing:
 	equip Miranda with nunchucks;

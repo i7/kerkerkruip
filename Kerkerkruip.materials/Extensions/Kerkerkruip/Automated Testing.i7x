@@ -709,42 +709,67 @@ To decide whether we haven't achieved (event - an outcome) in (likelihood - a nu
 
 To decide whether (event - an outcome) timed out:
 	decide on whether or not the attempt count of the event is not less than the maximum attempts of the event;
-	
-To decide whether (event - an outcome) can fail:
-	if event is not possible, decide no;
-	[if chance of success is 0 or certainty, we fail as soon as we exceed tolerance, before reaching the minimum attempts]
-	if likelihood of event is 0, decide yes; [impossibility - should never get a "successful" test]
-	if likelihood of event is minimum attempts of the event, decide yes; [certainty - should never get an "unsuccessful" test]
-	decide on whether or not the event timed out.
-	
-To decide whether (event - an outcome) can be achieved:
-	if event is not possible, decide no;
-	decide on whether or not the attempt count of the event is at least the minimum attempts of the event.
-	
+		
+To decide what number is the expected successes of (event - an outcome) after (attempts - a number):
+	if the minimum attempts of the event is 0, decide on likelihood of the event;
+	decide on (likelihood of the event * attempts) / minimum attempts of the event;
+
 To resolve (event - an outcome):
-	Let target be the likelihood of the event;
-	if the minimum attempts of the event is not 0:
-		now target is (target * attempt count of the event) / (minimum attempts of the event); [parentheses are needed, but I don't know why]
-	Let the error be the absolute value of (success count of the event - target);
-	Let the tolerance be (maximum tolerance of the event * attempt count of the event) / maximum attempts of the event;
-	if the event can fail and error is greater than tolerance:
+	Let the tolerance be the maximum tolerance of the event;
+	Let target be the expected successes of the event after the maximum attempts of the event;
+	let the upper bound be target + tolerance;
+	let the lower bound be (target - tolerance)  - maximum attempts of the event + attempt count of the event;
+	if the success count of the event is less than the lower bound or the success count of the event is greater than the upper bound:
+		[achievement is impossible within the maximum number of attempts]
 		now the state of event is outcome-failed;
-		assert "After [attempt count of the event] attempt[s], [the event] happened [success count of the event] times (never within [tolerance] of the target number [target])" based on false;
-	otherwise if the event can be achieved and error is not greater than tolerance:
-		now the state of event is outcome-achieved;
-		assert "success" based on true;
+		assert "After [attempt count of the event] attempt[s], [the event] happened [success count of the event] times (not between [lower bound] and [upper bound] with tolerance [maximum tolerance of the event])" based on false;
+	otherwise if the attempt count of the event is at least the minimum attempts of the event:
+		now the tolerance is (tolerance * attempt count of the event) / maximum attempts of the event;
+		now target is expected successes of the event after the attempt count of the event;
+		now the upper bound is the target + tolerance;
+		now the lower bound is the target - tolerance;
+		if likelihood of the event is at least 1 and lower bound is less than 1:
+			say "Programming error: I don't think this code should be needed.";
+			now lower bound is 1;
+		if the success count of the event is at least lower bound and the success count of the event is at most upper bound:
+			now the state of event is outcome-achieved;
+			assert "success" based on true;
+
+[
+failure tolerance: no way end result will be within tolerance.
+
+eg 1 in 15 with 200 attempts
+success-target=13
+tolerance=9
+maximum failures=200-13-9=178
+(max success=22, min success=4)
+
+necessary success = min success - maximum attempts + attempts
+at 196 attempts:
+4 - 200 + 196 = 0
+at 197:
+4 - 200 + 197 = 1
+]
+	
+To resolve dependents of (event - an outcome):
+	if the state of the event is outcome-failed or the event timed out:
+		if the event has unresolved dependents:
+			Repeat with item running through dependent not resolved outcomes:
+				[if the event failed, dependents fail silently. If the event succeeded, they fail noisily]
+				if state of the event is outcome-achieved, assert "[item] ([success count of item]/[attempt count of item]) stalled because [event] timed out after [attempt count of event - 1] attempt[s]" based on false;
+				now state of item is outcome-failed;
 			
 To test (event - an outcome) against (success - a truth state):
 	if we make the event testable:
 		increment attempt count of the event;
 		if success is true:
 			increment success count of the event;
-		if event is resolved and event timed out and the event has unresolved dependents:
-			Repeat with item running through dependent not resolved outcomes:
-				assert "[item] ([success count of item]/[attempt count of item]) stalled because [state of event] [event] timed out after [attempt count of event - 1] attempt[s]" based on false;
-				now state of item is outcome-failed;
-		resolve event;
-		if success is not (whether or not likelihood of the event is 0), now the event is just-succeeded;
+		if event is resolved:
+			resolve dependents of the event;
+		otherwise:
+			resolve event;
+		[There is a subtle conflict between "success count" and "just-succeeded". "success count" is the number of times the "success" condition was met. However, if likelihood is 0, this is not really a success - it will result in a positive "error" during resolution. On the other hand, just-succeeded is only true if we got a desirable result, even if that result is false (as it should be in the case of likelihood=0). Feel free to suggest better names for these two variables]
+		if success is (whether or not likelihood of the event is greater than 0), now the event is just-succeeded;
 
 To test (event - an outcome) against (T - a text):
 	update the event description because "testing [event] against '[T]'"; [todo - roll this into a text-testing phrase?]
