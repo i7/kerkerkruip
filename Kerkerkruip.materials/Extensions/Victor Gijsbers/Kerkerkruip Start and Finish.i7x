@@ -893,7 +893,7 @@ teleport-kit is an advanced rapier-based starting kit. teleport-kit contains a s
 
 [no special rules needed for teleport-kit]
 
-addict-kit is an advanced rapier-based starting kit. The rarity is 4. [should we also require that the difficulty is at least 1? We may need to implement placement possible rules for starting kits if so]
+addict-kit is an advanced rapier-based starting kit. The rarity is 2. [should we also require that the difficulty is at least 1? We may need to implement placement possible rules for starting kits if so]
 	
 Last starting kit setup when selecting addict-kit (this is the cursed amulet stays cursed rule):
 	equip the player with the addict's amulet;

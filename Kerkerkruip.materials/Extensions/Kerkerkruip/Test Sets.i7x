@@ -2007,17 +2007,22 @@ malygris-heal-max is a number that varies.
 
 [TODO: make tests that can save outcomes and restart the game]
 
+To say malygris-heal-max-message:
+	say "[malygris-heal-max divided by 60] and [remainder after dividing malygris-heal-max by 60] 60ths is too much healing for Malygris";
+	
 Table of Outcomes (continued)
 outcome	description	likelihood	minimum attempts	maximum attempts	antecedent
-malygris-healing	"Malygris should be able to heal sometimes"	1	20	--	--
-too-much-malygris-healing	"[malygris-heal-max divided by 60] and [remainder after dividing malygris-heal-max by 60] 60ths is too much healing for Malygris"	0	5	--	--
+malygris-healing	""	1	20	--	--
+too-much-malygris-healing	"[malygris-heal-max-message]"	0	5	--	--
 shimmering-player-item	""	0	30	--	--
-got-addicts-amulet	""	1	128	256	--
-uncursed-addicts-amulet	""	0	2	--	got-addicts-amulet	
+got-addicts-amulet	""	1	32	128	--
+cursed-addicts-amulet	""	2	2	--	got-addicts-amulet	
 got-shield	""	1	20	--	--
-not-wearing-shield	""	0	5	--	got-shield
-sword-of-light-owner	""	1	10	10	--
-claymore-owner	""	1	10	10	--
+wearing-shield	""	5	5	--	got-shield
+compassion-placed	""	1	0	--	--
+fafhrd-placed	""	1	0	--	--
+sword-of-light-owner	""	10	10	10	compassion-placed
+claymore-owner	""	10	10	10	fafhrd-placed
 
 Generation test when testing starting-kits-test:
 	now the heal power of Malygris is 0;
@@ -2036,12 +2041,15 @@ Generation test when testing starting-kits-test:
 		fail shimmering-player-item based on whether or not the item is shimmering;
 	Let item be a random shield had by the player;
 	achieve got-shield based on whether or not item is a shield;
-	fail not-wearing-shield based on whether or not the player does not wear a shield;
+	test wearing-shield against whether or not item is a shield worn by the player;
 	test got-addicts-amulet against whether or not the player wears the addict's amulet;
-	fail uncursed-addicts-amulet based on whether or not item is not cursed;
-	fail sword-of-light-owner based on whether or not the original owner of the sword of light is not the angel of compassion;
-	fail claymore-owner based on whether or not the original owner of the claymore is not fafhrd;
+	test cursed-addicts-amulet against whether or not the addict's amulet is cursed;
+	test compassion-placed against whether or not the angel of compassion is denizen;
+	test sword-of-light-owner against whether or not the original owner of the sword of light is the angel of compassion;
+	test fafhrd-placed against whether or not fafhrd is denizen;
+	test claymore-owner against whether or not the original owner of the claymore is fafhrd;
 	[TODO: starting kit items should match the player's size?]
+	[TODO: check ownership/starting kits in Arena of the Gods and Arena of the Fallen]
 	
 Section - Bloodlust - issue 279
 
