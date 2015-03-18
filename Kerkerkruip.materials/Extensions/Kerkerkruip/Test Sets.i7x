@@ -1955,6 +1955,7 @@ Testing effects of imp-dreaming:
 	fail based on whether or not the location of the imp is the location within 20 attempts;
 	wake the player up;
 	update the combat status; [risky?]
+	assert "we should no longer be in garden of thorns" based on whether or not the location is not garden of thorns;
 	assert "we should be with the reaper in [location of the reaper] but we are in [the location]" based on whether or not the location is the location of the reaper;
 	assert "the combat status should not be peace" based on whether or not the combat status is not peace;
 	
@@ -1968,18 +1969,24 @@ imp-thieving is a test step.
 Initial scheduling of imp-thieving:
 	compel the action of the imp imp-grabbing.
 			
+The imp's loot is an object that varies;
+
+Testing effects of imp-thieving:
+	Now the imp's loot is a random thing carried by the imp;
+	assert "the imp should have stolen something" based on whether or not the imp's loot is a thing;
+
 imp-vanishing is a test step.   
 
 Choosing a player action when testing imp-vanishing:
 	generate the action of attacking the imp;
 
 Testing effects of imp-vanishing:
-	succeed based on whether or not the location of the imp is lair of the imp;
+	assert that the location of the imp is lair of the imp;
 		
 imp-stashing is an npc-enabling test step.
 
 Testing effects of imp-stashing:
-	succeed based on whether or not a package of ment is in the lair of the imp within 2 attempts;
+	succeed based on whether or not the imp's loot is in the lair of the imp within 2 attempts;
 	
 
 Section - Starting Kits

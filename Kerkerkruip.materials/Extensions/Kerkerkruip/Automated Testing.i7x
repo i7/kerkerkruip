@@ -692,19 +692,6 @@ To decide whether we haven't reset (event - an outcome):
 		
 Section - Testing Outcomes
 
-To decide whether we haven't achieved (event - an outcome) in (likelihood - a number) out of (minimum tries - a number) attempts giving up after (maximum tries - a number) attempts:
-	if event is untested:
-		now the likelihood of event is likelihood;
-		now the minimum attempts of event is minimum tries;
-		now the maximum attempts of event is maximum tries;
-	decide on whether or not we haven't reset event.	
-
-To decide whether we haven't achieved (event - an outcome) in (likelihood - a number) out of (total tries - a number) attempts:
-	let maximum tries be 100;
-	If total tries is 1, now maximum tries is 1;
-	if likelihood is 0, now maximum tries is total tries;
-	decide on whether or not we haven't achieved event in likelihood out of total tries attempts giving up after maximum tries attempts.
-		
 [TODO: Normalize regex matches against event description so we can use a brief consistent phrase. ]
 
 To decide whether (event - an outcome) timed out:
@@ -722,7 +709,7 @@ To resolve (event - an outcome):
 	if the success count of the event is less than the lower bound or the success count of the event is greater than the upper bound:
 		[achievement is impossible within the maximum number of attempts]
 		now the state of event is outcome-failed;
-		assert "After [attempt count of the event] attempt[s], [the event] happened [success count of the event] times (not between [lower bound] and [upper bound] with tolerance [maximum tolerance of the event])" based on false;
+		assert "After [attempt count of the event] attempt[s], [the event] happened [success count of the event] times (not between [lower bound] and [upper bound] of target [target] for maximum attempts [maximum attempts of event] with tolerance [tolerance])" based on false;
 	otherwise if the attempt count of the event is at least the minimum attempts of the event:
 		now the tolerance is (tolerance * attempt count of the event) / maximum attempts of the event;
 		now target is expected successes of the event after the attempt count of the event;
@@ -994,13 +981,13 @@ To assert (T - a text) based on (C - a truth state):
 		record a failure report of T;
 	
 To succeed based on (result - a truth state) within (N - a number) attempts:
-	Now description of generic reusable event is "[the scheduled event]";
+	Now description of generic reusable event is "test step [the scheduled event]";
 	Now maximum attempts of generic reusable event is N;
 	achieve generic reusable event based on whether or not result is true;
 	if generic reusable event is resolved, reset generic reusable event; [TODO: is this necessary?]
 
 To fail based on (result - a truth state) within (N - a number) attempts:
-	Now description of generic reusable event is "[the scheduled event] failing";
+	Now description of generic reusable event is "test step [the scheduled event] failing";
 	Now minimum attempts of generic reusable event is N;
 	fail generic reusable event based on whether or not result is true;
 	if generic reusable event is resolved, reset generic reusable event; [TODO: is this necessary?]
