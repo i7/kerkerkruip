@@ -475,17 +475,17 @@ After taking a player action when the scheduled event is insane drakul statement
 [some of these appear too unlikey to happen within 100 iterations. Increase iterations?]
 
 Table of Outcomes (continued)
-outcome	antecedent
-drakul statement	--
-drakul identity	drakul statement
-simple drakul identity	drakul identity
-drakul conditional	drakul statement
-double conditional	drakul conditional
-nested conditionals	double conditional
-nested belief	drakul statement
-lifeblood-hinting	drakul statement
-lifeblood-location	lifeblood-hinting
-vampire-turning-hinting	drakul statement
+outcome	maximum attempts	antecedent
+drakul statement	200	--
+drakul identity	--	drakul statement
+simple drakul identity	--	drakul identity
+drakul conditional	--	drakul statement
+double conditional	--	drakul conditional
+nested conditionals	--	double conditional
+nested belief	200	drakul statement
+lifeblood-hinting	--	drakul statement
+lifeblood-location	--	lifeblood-hinting
+vampire-turning-hinting	--	drakul statement
 
 Testing effects of insane drakul statements:
 	if waiting for compelled action, make no decision;
@@ -2842,6 +2842,8 @@ general damage multiplier
 If you add any rules, please consider adding a test here]
 
 scenario when testing damage-modifiers:
+	Repeat with guy running through people:
+		now inherent damage modifier of the guy is 10;
 	now Hall of Mirrors is bannedobject;
 	now Miranda is testobject.
 
@@ -2852,7 +2854,7 @@ Definition: a room is precarious if it is Bridge of Doom or it is the Vast Stair
 Table of Outcomes (continued)
 outcome	description	likelihood	minimum attempts	maximum attempts	antecedent
 death-blessing	""	1	15	100	--
-death-curse	""	1	20	100	--
+death-curse	""	1	20	133	--
 blessing-reset	""	1	2	10	death-blessing
 curse-reset	""	1	2	10	death-curse
 
@@ -2860,7 +2862,7 @@ Initial scheduling of damage-modifier-testing:
 	equip Miranda with nunchucks;
 	Now the nunchucks are wood;
 	Let the place be the location of Miranda;
-	now the inherent damage modifier of Miranda is 2;
+	[now the inherent damage modifier of Miranda is 2;]
 	if the place is a precarious room:
 		swap the occupants of the place and a random not precarious habitable placed room.
 	
@@ -3005,7 +3007,7 @@ Testing effects of Miranda-runner:
 	assert that the damage description includes "\+ 1 \(offensive flow\) ";
 	assert that the damage description includes "\+ 2 \(concentration\) ";
 	assert that the damage description includes "\+ 1 \(tension\) ";
-	assert that the damage description includes "\+ 2 \(inherent bonus\) ";
+	assert that the damage description includes "\+ 10 \(inherent bonus\) ";
 	assert that the damage description includes "\+ 1 \(bloodlust\)";
 	assert that the damage description includes "x 50% \(rod of the master builder\) ";
 
@@ -3077,21 +3079,21 @@ Testing effects of heat-damage-testing:
 	have the angel of compassion do no reaction to a 100 melee hit by the player with result "- 3 \(victim made of radiance\)", checking damage;
 	assert that the damage description includes "\(scythe of flaming is hot\)"; [not mentioning rust or heat]
 	assert that the damage description includes "- 2 \(rust\)";
-	try taking off the dragon armour;
+	remove the dragon armour from play;
 	now the scythe of flaming is not rusted;
 	
 holy-damage is a test step.
 
 Initial scheduling of holy-damage:
 	prepare a test battle with the healer of Aite, inviting groups;
-	now the inherent damage modifier of the defender of aite is 2;
+	[now the inherent damage modifier of the defender of aite is 2;]
 	revive the reaper in the location;
 	equip the reaper with the scythe of slaying;
 	revive the rotting corpse in the location;
 	revive the malignant chanter in the location;
 	revive the smoke demon in the location;
 	revive the armadillo in the location;
-	now the inherent damage modifier of the armadillo is 4;
+	[now the inherent damage modifier of the armadillo is 4;]
 	revive the wisps of pain in the location;
 	revive Bodmall in the location;
 	
@@ -3101,13 +3103,13 @@ Testing effects of holy-damage:
 	now the concentration of the smoke demon is 2;
 	now the tension is 9;
 	have the smoke demon do no reaction to a 100 melee hit by the healer of Aite with result "\+ 2 \(holiness\) ", checking damage;
-	assert that the damage description includes "^ (\d) \+ 2 \(holiness\) \+ 3 \(tension\) \+ (<1-9>) \(smoke demon is quite dense\)";
+	assert that the damage description includes "^ (\d) \+ 10 \(inherent bonus\) \+ 2 \(holiness\) \+ 3 \(tension\) \+ (<1-9>) \(smoke demon is quite dense\)";
 	Now the expression scan position is 0;
 	Let base damage be the number we scan in text matching subexpression 1;
 	Now the expression scan position is 0;
 	Let density damage be the number we scan in text matching subexpression 2;
 	[holy sword does divine damage, so doesn't add to the density damage]
-	assert that density damage is (base damage + 3) / 2 with label "density damage";
+	assert that density damage is (base damage + 10 + 3) / 2 with label "density damage";
 	now the tension is 0;
 	have the player do no reaction to a 100 melee hit by the healer of Aite with result "\+ 2 \(holiness\)" in 0 out of 1 attempts, checking damage;
 	now the reusable item is a random scroll of ghoulification;
@@ -3152,15 +3154,15 @@ Testing effects of holy-damage:
 	assert that the health of the player is 1000 - final damage with label "actual damage to the player";
 	now the health of the player is 1000;
 	now the player is not deathly-resistant;
-	now the inherent damage modifier of the player is 4;
+	[now the inherent damage modifier of the player is 4;]
 	have the armadillo do no reaction to a 100 melee hit by the player with result "- 4 \(tough scales\)", checking damage;
-	now the inherent damage modifier of the tormentor of Aite is 7;
+	[now the inherent damage modifier of the tormentor of Aite is 7;]
 	[TODO: turn the staff of pain silver and check effects on undead and demons]
 	have the armadillo do no reaction to a 100 melee hit by the Tormentor of Aite with result "tough scales" in 0 out of 1 attempts; [physical damage reduction only]
 	now the power of the armadillo is granted;
 	have the player do no reaction to a 100 melee hit by the Tormentor of Aite with result "- 1 \(armadillo\)", checking damage; [general damage reduction - TODO: should it be?]
 	have Bodmall do no reaction to a 100 melee hit by the Tormentor of Aite with result "barkskin" in 0 out of 1 attempts;
-	now the inherent damage modifier of the smoke demon is 4;
+	[now the inherent damage modifier of the smoke demon is 4;]
 	have Bodmall do no reaction to a 100 melee hit by the smoke demon with result "- 3 \(druid resistant to vapour\)";
 	clear event description;
 	have a fragmentation event in the location with a random fragmentation grenade by the player;

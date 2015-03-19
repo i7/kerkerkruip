@@ -82,7 +82,7 @@ with 100 blank rows
 To queue (T - a test set):
 	choose a blank row in Table of Test Set Queue;
 	Now test set entry is T;
-	Now the random-seed entry is 26. [TODO: set this manually if desired]
+	Now the random-seed entry is 31. [TODO: set this manually if desired]
 	
 To queue all test sets:
 	Repeat with T running through enabled test sets:
@@ -365,8 +365,9 @@ First after showing the title screen (this is the run all tests rule):
 	initialize test steps;
 	Choose row 1 in Table of Test Set Queue;
 	if the random-seed entry is not 0:
-		log "Seeding random number generator with [random-seed entry]";
-		now the xorshift seed is the random-seed entry;
+		log "Seeding random number generator and dungeon generation with [random-seed entry]";
+		now the dungeon generation seed is the random-seed entry;
+		seed the random-number generator with the random-seed entry;
 	now the current test set is the test set entry;	
 	Now the current unit test name is "[the current test set]";
 	log "Completed so far: [grand test summary], with [number of filled rows in Table of Test Set Queue] set[s] left to test";
@@ -377,6 +378,10 @@ First after showing the title screen (this is the run all tests rule):
 	[TODO: handle interaction between test config file and scenario]
 	start capturing text;
 	follow the scenario rules;
+	
+A last startup rule (this is the keep using the xorshift generator for automated tests rule):
+	if done testing is false:
+		now the xorshift seed is the dungeon generation seed.
 
 [Prevent the status window from opening]	
 The check info panel capacity rule does nothing when done testing is false.
@@ -447,13 +452,12 @@ To start the/-- next test:
 	if waiting for resolution:
 		now the unresolved count entry is the number of possible outcomes;
 		if the random-seed entry is not 0:
-			if the xorshift seed is the random-seed entry:
+			if the dungeon generation seed is 0:
+				increment the random-seed entry;
+			otherwise:
+				now the xorshift seed is the dungeon generation seed;
 				Let throwaway result be a random number from 1 to 2;
 				transcribe "advancing random seed to [the xorshift seed]";	
-			if the xorshift seed is 0:
-				[TODO: find out why this happens]
-				increment the random-seed entry;
-			otherwise:		
 				now the the random-seed entry is the xorshift seed;
 		transcribe "restarting with random seed [random-seed entry] to continue [current test description]";
 		save test outcomes;
@@ -1121,6 +1125,7 @@ To force the fuligin cloak to work:
 	transcribe "hiding immediately";
 	if the player does not enclose the fuligin cloak, now the player carries the fuligin cloak;
 	if the fuligin cloak is not worn, try wearing the fuligin cloak;
+	now the fuligin cloak is not cursed;
 	now the player is hidden;
 		
 Carry out taking off:
@@ -1419,6 +1424,8 @@ To test (guy - a person) doing a/-- (reaction - a reaction-type) to a/-- (streng
 		now minimum attempts of combat hit is total tries;
 		now maximum attempts of combat hit is 0;
 	now the health of guy is 1000;
+	now guy is not asleep; [or should we handle just-woken?]
+	now aggressor is not asleep;
 	Let original-defender-weapon be a random readied weapon enclosed by guy;
 	Let original-attacker-weapon be a random readied weapon enclosed by aggressor;
 	clear event description because "start attempt [attempt count of combat hit] -";
