@@ -1959,6 +1959,7 @@ Testing effects of imp-dreaming:
 imp-appearing is an npc-enabling test step.
 
 Testing effects of imp-appearing:
+	now the reusable item is nothing; [if the imp steals it, we don't want it coming back]
 	succeed based on whether or not the location of the imp is the location:
 		
 imp-thieving is a test step.
