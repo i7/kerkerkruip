@@ -308,10 +308,7 @@ Initial scheduling of fell-freezing:
 	Now Fell presses the player;
 	now the initiative of Fell is 100;
 	compel the action of fell israfel-reuniting;
-	
-Last carry out an actor israfel-reuniting when testing parting shots:
-	now the initiative of the actor is -2;
-	
+		
 frozen-fell-fleeing is a test step.   
 
 Choosing a player action when testing frozen-fell-fleeing:
