@@ -82,7 +82,7 @@ with 100 blank rows
 To queue (T - a test set):
 	choose a blank row in Table of Test Set Queue;
 	Now test set entry is T;
-	Now the random-seed entry is 31. [TODO: set this manually if desired]
+	Now the random-seed entry is 32. [TODO: set this manually if desired]
 	
 To queue all test sets:
 	Repeat with T running through enabled test sets:
@@ -1075,13 +1075,16 @@ To extract (guy - a person) to (place - a room), making sure it is unoccupied:
 		Let elsewhere be a random unoccupied reachable room;
 		transcribe "moving occupants of [place] to [elsewhere]";
 		swap the occupants of place and elsewhere;
-	if guy is the player:
-		now way-to-get-back is the best route from the place to the location;
-		now way-to-get-there is the opposite of way-to-get-back;
-	transcribe "moving [guy] to [place]";
-	extract guy from combat;
-	move guy to place;
-	update the combat status;
+	if place is not the location of guy:
+		if guy is the player:
+			now way-to-get-back is the best route from the place to the location;
+			now way-to-get-there is the opposite of way-to-get-back;
+		transcribe "moving [guy] to [place]";
+		extract guy from combat;
+		move guy to place;
+		update the combat status;
+	otherwise:
+		transcribe "[the guy] [are] already in [place]";
 	
 Section - Religion
 
