@@ -2025,8 +2025,6 @@ sword-of-light-owner	""	10	10	10	compassion-placed
 claymore-owner	""	10	10	10	fafhrd-placed
 
 Generation test when testing starting-kits-test:
-	now the heal power of Malygris is 0;
-	follow the equip all encounterable creatures rule [usually done after approval];
 	[Malygris heal power]
 	let max healing be (heal power of Malygris) * 60 / (heal cooldown of Malygris);
 	if max healing is greater than malygris-heal-max:
