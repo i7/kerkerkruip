@@ -2854,6 +2854,9 @@ If you add any rules, please consider adding a test here]
 scenario when testing damage-modifiers:
 	Repeat with guy running through people:
 		now inherent damage modifier of the guy is 10;
+	now the tungausy totem is bannedobject;
+	now the focal totem is bannedobject;
+	now the totem of the bull is bannedobject;
 	now Hall of Mirrors is bannedobject;
 	now Miranda is testobject.
 
@@ -2942,6 +2945,8 @@ Testing effects of damage-modifier-testing:
 	now the hound status is 1;
 	now the concentration of Miranda is 2;
 	now Miranda is linked to the player;
+	assert that the final body of the player is 5 with label "final body of the player";
+	assert that the final mind of the player is 5 with label "final mind of the player";
 	have Miranda do no reaction to a 100 melee hit by the player with result "dagger benefits from tension" in 0 out of 1 attempts, checking damage;
 	assert that the damage description does not include "Giantbane's special";
 	assert that the damage description includes "\+ 2 \(defender was asleep\)";

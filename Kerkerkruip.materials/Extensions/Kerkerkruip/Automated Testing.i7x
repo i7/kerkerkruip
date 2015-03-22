@@ -82,7 +82,7 @@ with 100 blank rows
 To queue (T - a test set):
 	choose a blank row in Table of Test Set Queue;
 	Now test set entry is T;
-	Now the random-seed entry is 32. [TODO: set this manually if desired]
+	Now the random-seed entry is 33. [TODO: set this manually if desired]
 	
 To queue all test sets:
 	Repeat with T running through enabled test sets:
