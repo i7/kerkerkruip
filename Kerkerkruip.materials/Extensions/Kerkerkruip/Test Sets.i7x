@@ -2013,7 +2013,7 @@ outcome	description	likelihood	minimum attempts	maximum attempts	antecedent
 malygris-healing	""	1	20	--	--
 too-much-malygris-healing	"[malygris-heal-max-message]"	0	5	--	--
 shimmering-player-item	""	0	30	--	--
-got-addicts-amulet	""	1	32	128	--
+got-addicts-amulet	""	2	64	256	--
 cursed-addicts-amulet	""	2	2	--	got-addicts-amulet	
 got-shield	""	1	20	--	--
 wearing-shield	""	5	5	--	got-shield
@@ -2327,6 +2327,7 @@ unlocking-behavior is a test set.
 to assert that placement possibility is (allowable - a truth state) when (conditions - indexed text):
 	now basic game mode is false;
 	follow the decide basic mode rule;
+	assert "basic game mode should not be [allowable] when  difficulty is [the difficulty] and advanced content is [if advanced content is enabled]en[otherwise]dis[end if]abled and the dungeon generation seed is [the dungeon generation seed]" based on whether or not basic game mode is not allowable;
 	now the rarity of Space-Time Discontinuum is 0;
 	now the considered room is Space-Time Discontinuum;
 	follow the placement possible rules;
@@ -2340,12 +2341,13 @@ to assert that placement possibility is (allowable - a truth state) when (condit
 	
 	
 Scenario when testing unlocking-behavior:
+	Let the saved seed be the dungeon generation seed;
+	now the dungeon generation seed is 0;
 	set difficulty to 0;
 	disable advanced content;
 	assert that setting of current difficulty is 0 with label "current difficulty setting";
 	assert that difficulty is 0 with label "difficulty";
 	assert "advanced content should be disabled" based on whether or not advanced content is disabled;
-	now the considered room is Space-Time Discontinuum;
 	assert that placement possibility is false when "in novice level";
 	enable advanced content;
 	assert that placement possibility is true when "in novice level with advanced content enabled";
@@ -2356,6 +2358,17 @@ Scenario when testing unlocking-behavior:
 	assert that placement possibility is true when "in apprentice level";
 	enable advanced content;
 	assert that placement possibility is true when "in apprentice level when advanced content is enabled";
+	now the dungeon generation seed is the saved seed;
+	set difficulty to 0;
+	disable advanced content;
+	assert that placement possibility is true when "in novice level with a preset dungeon generation seed";
+	enable advanced content;
+	assert that placement possibility is true when "in novice level with advanced content enabled with a preset dungeon generation seed";
+	set difficulty to 1;
+	disable advanced content;
+	assert that placement possibility is true when "in apprentice level with a preset dungeon generation seed";
+	enable advanced content;
+	assert that placement possibility is true when "in apprentice level when advanced content is enabled with a preset dungeon generation seed";
 
 
 Section - bug 293 - Sensing Isra and Fell
