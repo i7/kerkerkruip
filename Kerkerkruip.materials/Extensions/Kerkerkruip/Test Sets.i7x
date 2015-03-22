@@ -2711,6 +2711,7 @@ Initial scheduling of damage-text testing:
 	now the health of the reaper is 1000;
 	
 Testing effects of damage-text testing:
+	now the tension is 0;
 	Have the reaper do a dodge reaction to a 100 melee hit with result "(\n|^)You deal <1-9><0-9>* damage";
 	now the tension is 3;
 	Have the the reaper do a dodge reaction to a 100 melee hit with result "\+ 1 \(tension\)", checking damage;
