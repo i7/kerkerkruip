@@ -1,7 +1,7 @@
 language: node_js
 install: ./tools/travis_install
 script:
-    - set -e && ./tools/travis_build
+    - ./tools/travis_build
     - ./tools/travis_tests
 notifications:
     email: false
