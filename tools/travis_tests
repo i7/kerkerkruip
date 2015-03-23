@@ -40,7 +40,7 @@ vm.stdout.on( 'data', function ( data )
 	}
 	
 	// Unless there are 0 total failures the script will exit with 1
-	if ( /Total: (\d+) tests, 0 failures/.test( data ) )
+	if ( /^Total.+0 failures/.test( data ) )
 	{
 		testresults = 0;
 	}
