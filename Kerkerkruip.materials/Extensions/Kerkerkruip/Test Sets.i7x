@@ -2218,7 +2218,6 @@ testing effects of sleepy-slaying:
 Section - bug 244
 
 [This test is not catching the bug I saw. I have no idea how to reproduce it.]
-[TODO: try new dungeon generation idea]
 [TODO: roll this into another dungeon generation test set]
 
 bug-244 is an test set.
