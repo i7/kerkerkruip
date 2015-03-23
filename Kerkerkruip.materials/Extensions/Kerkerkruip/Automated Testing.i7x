@@ -331,8 +331,6 @@ To decide whether testing (T - a test set):
 	if done testing is true, no;
 	decide on whether or not the current test set is T;
 	
-[The random seed rule is listed before the reaper carries a random scythe rule in the when play begins rules.]
-
 The file of noninteractive tests is called "noninteractivetests".
 
 The run the unit tests rule is listed before the load achievements rule in the before showing the title screen rules.
@@ -354,10 +352,14 @@ Before showing the title screen (this is the run the unit tests rule):
 	if the number of filled rows in Table of Test Set Queue is 0:
 		display test results;
 		now done testing is true;
+	otherwise:
+		now roguelike mode is false;
 
 First for showing the title screen when done testing is false:
 	do nothing.
 	
+To decide which number is (T - a test set) as a number: (- {T} -);
+
 First after showing the title screen (this is the run all tests rule):
 	transcribe and stop capturing because "starting test set with";
 	if done testing is true, make no decision;
@@ -374,7 +376,7 @@ First after showing the title screen (this is the run all tests rule):
 	Repeat through Table of Test Results:
 		if failures entry > 0:
 			log "  [failures entry] failures in [test set entry]";
-	log "Now testing [the current test set].";
+	log "Now testing [the current test set] ([test set entry as a number]).";
 	[TODO: handle interaction between test config file and scenario]
 	start capturing text;
 	follow the scenario rules;
