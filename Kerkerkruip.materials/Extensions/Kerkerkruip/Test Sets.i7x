@@ -2860,6 +2860,9 @@ scenario when testing damage-modifiers:
 	now Hall of Mirrors is bannedobject;
 	now Miranda is testobject.
 
+Last starting kit setup for Miranda when testing damage-modifiers:
+	remove Miranda's amulet from play;
+	
 damage-modifier-testing is an extracting test step. The first move of damage-modifiers is damage-modifier-testing. The location-target of damage-modifier-testing is Miranda.
 	
 Definition: a room is precarious if it is Bridge of Doom or it is the Vast Staircase.
