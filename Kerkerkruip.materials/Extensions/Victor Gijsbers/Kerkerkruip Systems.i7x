@@ -681,6 +681,16 @@ An attack modifier rule (this is the shield size attack modifier rule):
 
 [No chance to win rule: monsters who start using over- or undersized weapons probably deserve being clumsy.]
 
+Section - Size of Things
+
+To increase the size of (item - a thing):
+	unless the size of item is gargantuan:
+		now the size of item is the size after the size of item;
+		
+To decrease the size of (item - a thing):
+	unless the size of item is tiny:
+		now the size of item is the size before the size of item;
+		
 Section - Size of weapons
 
 [These operations are now reversible.]

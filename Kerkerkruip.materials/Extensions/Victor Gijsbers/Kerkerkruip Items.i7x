@@ -1476,7 +1476,7 @@ Instead of examining the bulwark of faith:
 		let guy be a random person enclosing the bulwark of faith;
 		if guy is a person:
 			calculate the block bonus of the bulwark of faith;
-			say "This shield of shimmering [if the guy worships aite]red light[otherwise if the guy worships sul]golden light[otherwise if the guy worships nomos]silver light[otherwise if the guy worships chton]darkness[otherwise if the guy worships herm]shadows[otherwise]light[end if] gains its power from [regarding the guy][possessive] devotion to [if guy worships a god][a random god worshipped by guy][otherwise]a god[end if]. It's block bonus is equal to (favour + 3) / 4. Wearing it also slightly increases the chance of divine interventions on [regarding the guy][possessive] behalf. [italic type]Current block bonus: +[block bonus of the bulwark of faith][roman type]." instead;
+			say "This shield of shimmering [if the guy worships aite]red light[otherwise if the guy worships sul]golden light[otherwise if the guy worships nomos]silver light[otherwise if the guy worships chton]darkness[otherwise if the guy worships herm]shadows[otherwise]light[end if] gains its power from [regarding the guy][possessive] devotion to [if guy worships a god][a random god worshipped by guy][otherwise]a god[end if]. It's block bonus is equal to (favour + 2) / 2. Wearing it also slightly increases the chance of divine interventions on [regarding the guy][possessive] behalf. [italic type]Current block bonus: +[block bonus of the bulwark of faith][roman type]." instead;
 	say "This shield of shimmering light gains its power from the wearer's devotion to a god. It's block bonus is equal to (favour + 2) / 2. Wearing it also slightly increases the chance of divine interventions on your behalf.".
 		
 To calculate the block bonus of the bulwark of faith:
@@ -2061,8 +2061,8 @@ A thing can be crescendi-immune. A thing is usually not crescendi-immune.
 An unguentum crescendi is a kind of salve. The plural of unguentum crescendi is unguenta crescendi. The description of unguentum crescendi is "An expensive alchemical salve that can be rubbed on weapons or people to make them grow. It can be used multiple times.". Understand "salve" as unguentum crescendi.
 
 Carry out applying unguentum crescendi to something:
-	unless the second noun is a weapon or the second noun is a person:
-		say "The salve will only work on weapons and persons.";
+	unless the second noun is a weapon or the second noun is a shield or the second noun is a person:
+		say "The salve will only work on weapons, shields and persons.";
 		take no time;
 	otherwise:
 		if the second noun is gargantuan:
@@ -2087,8 +2087,8 @@ A thing can be diminuendi-immune. A thing is usually not diminuendi-immune.
 An unguentum diminuendi is a kind of salve. The plural of unguentum diminuendi is unguenta diminuendi. The description of unguentum diminuendi is "An expensive alchemical salve that can be rubbed on weapons or people to make them shrink. It can be used multiple times.". Understand "salve" as unguentum diminuendi.
 
 Carry out applying unguentum diminuendi to something:
-	unless the second noun is a weapon or the second noun is a person:
-		say "The salve will only work on weapons and persons.";
+	unless the second noun is a weapon or the second noun is a shield or the second noun is a person:
+		say "The salve will only work on weapons, shields and persons.";
 		take no time;
 	otherwise:
 		if the second noun is tiny:

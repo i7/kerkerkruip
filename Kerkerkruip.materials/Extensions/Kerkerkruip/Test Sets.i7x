@@ -3316,4 +3316,42 @@ Testing effects of outcome-behavior-testing:
 	fail intended-failure based on false;
 	fail unintended-success based on true;
 
+Resizing salves is a test set.
+
+To assert that (item - a thing) is (size - a size):
+	assert "[the item] should be [size], but it is [size of item]" based on whether or not the size of item is size;
+	
+Test play when testing resizing salves:
+	Let object-list be {yourself, the spiked mace of the ape king, the gilded rapier, the wooden buckler, the plate mail};
+	Let the salve-list be a list of things;
+	Add a random unguentum crescendi to the salve-list;
+	Add a random unguentum diminuendi to the salve-list;
+	Repeat with item running through the salve-list:
+		now the player carries item;
+		Repeat with target running through object-list:
+			now the player carries target;
+			Let prev-size be medium;
+			now target is medium;
+			clear event description;
+			try putting the item on the target;
+			while prev-size is not the size of target:
+				[TODO: how does size affect weapon stats? what about shield stats?]
+				if prev-size is [still] the size of target:
+					assert result "You carefully apply the salve to [if target is the player]yourself[otherwise][the target][end if], turning ";
+				clear event description;
+				now prev-size is the size of target;
+				try putting the item on the target;
+			if the target is the spiked mace of the ape king:
+				assert result "Some magic seems to protect the spiked mace of the ape king from the salve\.";
+				assert that the target is medium;
+			otherwise if the target is the plate mail:
+				assert result "The salve will only work on weapons, shields and persons\.";
+				assert that the target is medium;
+			otherwise if the item is an unguentum crescendi:
+				assert result "You cannot make [if target is the player]yourself[otherwise][the target] any bigger\.";
+				assert that the target is gargantuan;
+			otherwise:
+				assert result "You cannot make [if target is the player]yourself[otherwise][the target] any smaller\.";
+				assert that the target is tiny;
+	
 Test Sets ends here.
