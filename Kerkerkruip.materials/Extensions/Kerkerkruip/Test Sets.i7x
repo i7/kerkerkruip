@@ -211,7 +211,7 @@ testing effects for chton-arena-cheating:
 	
 Section - Parting Shots
 
-parting shots is an test set.
+parting shots is a test set.
 
 A scenario rule when testing parting shots:
 	now israfel is testobject;
@@ -414,7 +414,7 @@ testing effects for tentacle-dig-retreat:
 
 Section - Insane Drakul
 
-insane-drakul is an test set.
+insane-drakul is a test set.
 
 A scenario rule when testing insane-drakul:
 	Now drakul's lifeblood is bannedobject;
@@ -782,7 +782,7 @@ testing effects of healer-healing-self:
 			
 Section - Sul's intervention
 
-sul-intervention-test is an test set [for issue #227].
+sul-intervention-test is a test set [for issue #227].
 
 Scenario when testing sul-intervention-test:
 	now Temple of Sul is testobject;
@@ -1048,7 +1048,7 @@ testing effects of bonus-surviving-attack:
 
 Section - bug 234
 
-bug-234 is an test set.
+bug-234 is a test set.
 
 Scenario when testing bug-234:
 	Now Israfel is testobject;
@@ -1082,7 +1082,7 @@ testing effects of still-linking:
 	
 Section - Attempting to Maze Someone in Arena of the Gods
 
-challenger-mazing is an test set.
+challenger-mazing is a test set.
 
 Scenario when testing challenger-mazing:
 	Now Bodmall is testobject;
@@ -1113,7 +1113,7 @@ Test play when testing challenger-mazing:
 	
 Section - Banshees Gone Wild - bug 248
 
-banshees gone wild is an test set.
+banshees gone wild is a test set.
 
 [First every turn: say "Every turn rules run.";]
 [TODO: get rid of "travel sneakily"]
@@ -1989,7 +1989,7 @@ Testing effects of imp-stashing:
 
 Section - Starting Kits
 
-starting-kits-test is an test set.
+starting-kits-test is a test set.
 
 Scenario when testing starting-kits-test:
 	now generation info is true;
@@ -2220,7 +2220,7 @@ Section - bug 244
 [This test is not catching the bug I saw. I have no idea how to reproduce it.]
 [TODO: roll this into another dungeon generation test set]
 
-bug-244 is an test set.
+bug-244 is a test set.
 
 Table of Outcomes (continued)
 outcome	description	likelihood	minimum attempts
