@@ -116,8 +116,16 @@ To say grand test summary:
 		now grand test total is grand test total plus total entry;
 		now grand test failures is grand test failures plus failures entry;
 	say "[grand test total] test[s] in [number of filled rows in Table of Test Results] set[s], [grand test failures] failure[s]";
-	if there is a possible outcome:
-		say "; [number of possible outcomes] outcome[s] still being tested" ;
+	Let the remaining outcome tests be 0;
+	Repeat with event running through possible outcomes:
+		Let ancestor be event;
+		while ancestor is not boring lack of results:
+			Let remainder be maximum attempts of ancestor - attempt count of ancestor;
+			if remainder is greater than the remaining outcome tests:
+				now remaining outcome tests is the remainder;
+			now ancestor is the antecedent of ancestor;
+	if the remaining outcome tests is at least 1:
+		say "; [number of possible outcomes] outcome[s] to be tested up to [remaining outcome tests] more times" ;
 	
 To display test results:
 	If the number of filled rows in Table of Test Results is 0, stop;
