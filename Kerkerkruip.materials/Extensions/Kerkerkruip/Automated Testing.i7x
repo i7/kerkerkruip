@@ -25,7 +25,7 @@ To log (msg - a text):
 	if currently capturing is true, start capturing text;
 	
 To transcribe (T - a text):
-	let message be the substituted form of "[bracket][T][close bracket][command clarification break]";
+	let message be "[bracket][T][close bracket][command clarification break]";
 	if text capturing is active:
 		say message;
 	otherwise:
@@ -48,9 +48,9 @@ To update the/-- event description because (reason - a text):
 	if text capturing is active: [is this necessary to check? Is it a good idea?]
 		stop capturing text;
 		if "[the captured text]" matches the regular expression ".":
-			transcribe "[reason] [current test description]";
 			now the event description is the substituted form of "[the event description][the captured text]";
 			append "[the captured text]" to file of test transcript;
+			transcribe "[reason] [current test description]";
 		start capturing text; [and clear the captured text]
 	
 To transcribe and stop capturing text/--:
@@ -1401,15 +1401,16 @@ A reaction-type has a text called the report. The report of a reaction-type is u
 
 The report of the parry reaction is "\(defender parrying\)".
 The report of the dodge reaction is "\(defender dodging\)".
-The report of the block reaction is "\(blocking\)".
+The report of the block reaction is "\(blocking\)". [ watch out - no message if block bonus is 0]
 
 To assign (reaction - a reaction-type) to (guy - a person):
+	now guy is at-react;
 	if reaction is parry reaction:
-		now guy is at parry;
+		try guy parrying;
 	else if reaction is dodge reaction:
-		now guy is at dodge;
+		try guy dodging;
 	else if reaction is block reaction:
-		now guy is at-block;
+		try guy blocking;
 		
 To prepare a test battle with (guy - a person), inviting groups:
 	if inviting groups:
@@ -1441,10 +1442,10 @@ To test (guy - a person) doing a/-- (reaction - a reaction-type) to a/-- (streng
 	now aggressor is not asleep;
 	Let original-defender-weapon be a random readied weapon enclosed by guy;
 	Let original-attacker-weapon be a random readied weapon enclosed by aggressor;
-	clear event description because "start attempt [attempt count of combat hit] -";
+	clear event description because "start [guy] doing [reaction] to [strength] melee hit by [aggressor] with result '[outcome]' attempt [attempt count of combat hit] -";
 	assign reaction to guy;
 	try aggressor hitting guy;
-	update event description because "finish attempt [attempt count of combat hit] -";
+	update event description because "finish [guy] doing [reaction] to [strength] melee hit by [aggressor] with result '[outcome]' attempt [attempt count of combat hit] -";
 	if report of the reaction is not empty, assert that the event description includes "[report of reaction]";
 	if checking damage:
 		check damage of guy with 1000 health after "\n[The aggressor] [deal]";

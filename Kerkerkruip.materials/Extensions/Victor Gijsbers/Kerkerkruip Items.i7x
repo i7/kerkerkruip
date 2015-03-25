@@ -1446,6 +1446,8 @@ An AI action selection rule for a person (called P) (this is the concentrate to 
 
 Chapter - Shields
 
+A shield can be size-agnostic. A shield is usually not size-agnostic.
+
 Check readying a shield:
 	try wearing the noun instead.
 	
@@ -1468,6 +1470,7 @@ Section - Bulwark of faith (major)
 There is a major shield called the bulwark of faith.
 The bulwark of faith is religious.
 The bulwark of faith is radiance.
+The bulwark of faith is size-agnostic.
 
 The block bonus of the bulwark of faith is 0.
 
@@ -1480,6 +1483,7 @@ Instead of examining the bulwark of faith:
 	say "This shield of shimmering light gains its power from the wearer's devotion to a god. It's block bonus is equal to (favour + 2) / 2. Wearing it also slightly increases the chance of divine interventions on your behalf.".
 		
 To calculate the block bonus of the bulwark of faith:
+	now block bonus of the bulwark of faith is 0;
 	if the bulwark of faith is worn:
 		let guy be a random person enclosing the bulwark of faith;
 		if guy is a person:
@@ -1487,10 +1491,6 @@ To calculate the block bonus of the bulwark of faith:
 			increase n by 2;
 			now n is (n / 2);
 			now block bonus of the bulwark of faith is n;
-		otherwise:
-			now block bonus of the bulwark of faith is 0;
-	otherwise:
-		now block bonus of the bulwark of faith is 0.
 
 First carry out an actor blocking (this is the bulwark of faith must be updated rule):
 	if the actor encloses the bulwark of faith:

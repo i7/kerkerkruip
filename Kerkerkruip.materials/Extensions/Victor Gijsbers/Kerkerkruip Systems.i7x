@@ -670,14 +670,15 @@ An attack modifier rule (this is the weapon size attack modifier rule):
 An attack modifier rule (this is the shield size attack modifier rule):
 	if the global defender is at-block:
 		let item be a random shield worn by the global defender;
-		let n be the size difference of the global defender and item;
-		if n is greater than 0:
-			if the numbers boolean is true, say " + [n] (defender using outsized shield)[run paragraph on]";
-			increase the attack strength by n;			
-		if n is less than 0:
-			now n is 0 minus n;
-			if the numbers boolean is true, say " + [n] (defender's shield too small)[run paragraph on]";
-			increase the attack strength by n.
+		if item is not size-agnostic:
+			let n be the size difference of the global defender and item;
+			if n is greater than 0:
+				if the numbers boolean is true, say " + [n] (defender using outsized shield)[run paragraph on]";
+				increase the attack strength by n;			
+			if n is less than 0:
+				now n is 0 minus n;
+				if the numbers boolean is true, say " + [n] (defender's shield too small)[run paragraph on]";
+				increase the attack strength by n.
 
 [No chance to win rule: monsters who start using over- or undersized weapons probably deserve being clumsy.]
 
@@ -903,6 +904,7 @@ Chapter - Size-agnostic
 [Some weapons are not dependent on the user's size for their damage output.]
 
 A weapon can be size-agnostic. A weapon is usually not size-agnostic.
+
 
 
 Chapter - Materials

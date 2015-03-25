@@ -3326,7 +3326,7 @@ To assert that (item - a thing) is (size - a size):
 	assert "[the item] should be [size], but it is [size of item]" based on whether or not the size of item is size;
 	
 Test play when testing resizing salves:
-	Let object-list be {yourself, the spiked mace of the ape king, the gilded rapier, the wooden buckler, the plate mail};
+	Let object-list be {yourself, the spiked mace of the ape king, the gilded rapier, the wooden buckler, the bulwark of faith, the plate mail};
 	Let the salve-list be a list of things;
 	Add a random unguentum crescendi to the salve-list;
 	Add a random unguentum diminuendi to the salve-list;
@@ -3357,5 +3357,13 @@ Test play when testing resizing salves:
 			otherwise:
 				assert result "You cannot make [if target is the player]yourself[otherwise][the target] any smaller\.";
 				assert that the target is tiny;
-	
+	prepare a test battle with the armadillo;
+	now the player is medium;
+	equip the player with the wooden buckler;
+	have the player do a block reaction to a 100 melee hit by the armadillo with result "\+ 2 \(defender's shield too small\)";
+	equip the player with the bulwark of faith;
+	now the player worships Sul;
+	now favour of the player is 1;
+	have the player do a block reaction to a 100 melee hit by the armadillo with result "defender's shield too small" in 0 out of 1 attempts;
+		
 Test Sets ends here.
