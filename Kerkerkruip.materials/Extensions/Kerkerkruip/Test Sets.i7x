@@ -1537,6 +1537,7 @@ blessed-grenade-test is a test set.
 Scenario when testing blessed-grenade-test:
 	now Drakul is testobject;
 	now the Alchemical Laboratory is testobject;
+	now the Blessed Grenade is bannedobject;
 	
 Test play when testing blessed-grenade-test:
 	now the defence of the player is 100;
