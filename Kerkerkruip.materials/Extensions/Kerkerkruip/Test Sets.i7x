@@ -1971,6 +1971,7 @@ Initial scheduling of imp-thieving:
 The imp's loot is an object that varies;
 
 Testing effects of imp-thieving:
+	if waiting for compelled action, make no decision;
 	Now the imp's loot is a random thing carried by the imp;
 	assert "the imp should have stolen something" based on whether or not the imp's loot is a thing;
 
