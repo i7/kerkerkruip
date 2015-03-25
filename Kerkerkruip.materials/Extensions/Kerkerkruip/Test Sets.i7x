@@ -1978,8 +1978,9 @@ imp-vanishing is a test step.
 Choosing a player action when testing imp-vanishing:
 	generate the action of attacking the imp;
 
-Testing effects of imp-vanishing:
-	assert that the location of the imp is lair of the imp;
+First every turn when testing imp-vanishing:
+	[before the imp has a chance to act independently]
+	succeed based on whether or not the location of the imp is lair of the imp;
 		
 imp-stashing is an npc-enabling test step.
 
@@ -2059,6 +2060,7 @@ Scenario when testing bloodlust-279:
 	now the blood ape is testobject;
 	now the mindslug is testobject;
 	now the hall of mirrors is bannedobject;
+	now lair of the imp is bannedobject;
 	
 meeting-daggers is an extracting test step. The first move of bloodlust-279 is meeting-daggers. The location-target of meeting-daggers is the swarm of daggers.
 
@@ -3241,7 +3243,7 @@ Testing effects of automatos-blow:
 	have Automatos do no reaction to a 100 melee hit by the player with result "The impact of the attack is so great that Automatos staggers backwards and shakes its head several times. Some small, almost delicate mechanical parts fall out of its ";
 	equip the player with the gorgeous dagger;
 	set the size of the gorgeous dagger to medium;
-	now the tension is 12;
+	now the tension is 15;
 	have Automatos do no reaction to a 100 melee hit by the player with result "The dagger has struck deep between plates of steel and dislodged something inside Automatos. The behemoth staggers backwards and shakes its head several times. Some small, almost delicate mechanical parts fall out of its ";
 	
 [
