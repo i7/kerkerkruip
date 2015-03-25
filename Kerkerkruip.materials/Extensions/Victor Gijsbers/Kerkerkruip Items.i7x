@@ -1542,7 +1542,7 @@ Section - Thick metal sheet (monster)
 [Automatos]
 
 The metal sheet is a shield.
-The metal shield is huge. The metal sheet is iron.
+The metal sheet is huge. The metal sheet is iron.
 
 The block bonus of the metal sheet is 4.
 
