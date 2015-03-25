@@ -5175,6 +5175,34 @@ An aftereffects rule (this is the Automatos loses actions rule):
 				now q is a random number between 1 and (n minus 1);
 				remove entry q from Automatos AI list. [Yes, this can reduce the length of the list to 0!]
 
+
+Section - Automatos prose
+
+Report Automatos hitting a dead pc:
+	say "Automatos smashes you into a bloody pulp. Not the slightest hint of an emotion crosses his face.";
+	rule succeeds.
+
+Report Automatos attacking:
+	unless the actor is the noun:
+		say "Automatos lumbers towards [the noun] with all the force of an avalanche.";
+	otherwise:
+		say "'My mind has gone,' Automatos states sadly as he tries to screw off his own head.";
+	rule succeeds.
+
+Report Automatos dodging:
+	say "Jumping back with surprising speed, Automatos dodges the attack.";
+	rule succeeds.
+
+Report Automatos parrying:
+	say "Automatos raises his weapon to deflect the blow.";
+	rule succeeds.
+
+Report Automatos blocking:
+	say "Automatos raises his shield to deflect the blow.";
+	rule succeeds.
+
+
+
 Section - Power of Automatos
 
 Animation-used is a truth state that varies. Animation-used is false.
