@@ -1539,14 +1539,40 @@ Scenario when testing blessed-grenade-test:
 	now the Alchemical Laboratory is testobject;
 	now the Blessed Grenade is bannedobject;
 	
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts	maximum attempts
+getting-blessed	1	0	400
+no-extra-blessed	0	400	400
+
 Test play when testing blessed-grenade-test:
 	now the defence of the player is 100;
 	now the player carries the reusable item;
 	Now the reusable item is the staff of insanity;
 	Now every room is not rust-spored;
 	Now every thing is not rusted;
+	extract the player to the alchemical laboratory, making sure it is unoccupied;
+	while we haven't reset getting-blessed:
+		produce a grenade;
+		test getting-blessed against "the Blessed Grenade drops on the ground";
+	while we haven't reset no-extra-blessed:
+		produce a grenade;
+		test no-extra-blessed against "the Blessed Grenade drops on the ground";
 
-A test step can be grenade-producing.
+To produce a grenade:
+	Repeat with item running through grenades in the location:
+		if item is not a custom-grenade, remove item from play;
+	Now every room is not rust-spored;
+	Now every thing is not rusted;
+	now the player carries the reusable item;
+	clear event description;
+	try inserting the reusable item into the curious machine;
+	Now the health of the player is 100;
+	Now the player is not asleep;
+	if the location is not Alchemical Laboratory, extract the player to Alchemical Laboratory;
+	[If the current move is hidden-traveling, now the player is hidden;]
+	
+	
+[A test step can be grenade-producing.
 
 When play begins:
 	repeat with the move running through grenade-producing test steps:
@@ -1571,7 +1597,8 @@ First every turn when the scheduled event is a grenade-producing test step (call
 Last testing effects of a grenade-producing test step:
 	Repeat with item running through grenades in the location:
 		if item is not a custom-grenade, remove item from play;
-
+]
+[
 testing effects of blessed-grenade-alchemy:
 	succeed on result "the Blessed Grenade drops on the ground" within 400 attempts;
 	if waiting for resolution, make no decision;
@@ -1591,12 +1618,13 @@ Initial scheduling of no-extra-blessed-grenade:
 	
 testing effects of no-extra-blessed-grenade:
 	fail on result "the Blessed Grenade drops on the ground" within 400 attempts [it would be nice to make faster].
-	
-throwing-blessed is a test step.
+]
+
+throwing-blessed is a test step. The first move of blessed-grenade-test is throwing-blessed;
 
 Initial scheduling of throwing-blessed:
 	now the player carries the blessed grenade;
-	extract the player to the location of Drakul;
+	extract Drakul to the Alchemical Laboratory;
 	
 Choosing a player action when testing throwing-blessed:
 	generate the action of throwing the blessed grenade;
@@ -1607,11 +1635,16 @@ testing effects of throwing-blessed:
 	assert "The blessed grenade should be placed" based on whether or not the Blessed Grenade is placed;
 	assert "The blessed grenade should be off-stage" based on whether or not the blessed grenade is off-stage;
 	assert result "As the grenade explodes you hear the singing of angels, several of whom swoop down from the heavens with huge swords and eviscerate <^[line break]>*Drakul";
+	while we haven't reset no-extra-blessed:
+		produce a grenade;
+		test no-extra-blessed against "the Blessed Grenade drops on the ground";
+	assert "The Blessed Grenade should be off-stage" based on whether or not the blessed grenade is off-stage.
 	
-no-new-blessed-grenade is a grenade-producing test step. 
+[no-new-blessed-grenade is a grenade-producing test step. 
 
 testing effects of no-new-blessed-grenade:
 	fail based on whether or not the blessed grenade is not off-stage within 100 attempts;
+]
 
 Section - At-react after getting mazed - bug 210
 
