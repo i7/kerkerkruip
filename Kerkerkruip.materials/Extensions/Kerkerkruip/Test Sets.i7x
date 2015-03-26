@@ -1573,7 +1573,7 @@ Last testing effects of a grenade-producing test step:
 		if item is not a custom-grenade, remove item from play;
 
 testing effects of blessed-grenade-alchemy:
-	succeed on result "the Blessed Grenade drops on the ground" within 300 attempts;
+	succeed on result "the Blessed Grenade drops on the ground" within 400 attempts;
 	if waiting for resolution, make no decision;
 	Repeat with the item running through grenades:
 		Let name be indexed text;
@@ -1590,7 +1590,7 @@ Initial scheduling of no-extra-blessed-grenade:
 	assert "The blessed grenade should not be cloneable" based on whether or not the blessed grenade is not cloneable;
 	
 testing effects of no-extra-blessed-grenade:
-	fail on result "the Blessed Grenade drops on the ground" within 100 attempts [could be more if we made this faster].
+	fail on result "the Blessed Grenade drops on the ground" within 400 attempts [it would be nice to make faster].
 	
 throwing-blessed is a test step.
 

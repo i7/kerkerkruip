@@ -1653,7 +1653,7 @@ A check attacking rule (this is the alternative do not attack friendly people ru
 				take no time;
 				say "[The noun] [are] [our] friend, not [our] enemy!" instead.
 				
-Last report attacking:
+Last report attacking (this is the set up attacking from peace rule):
 	if attacking-from-peace is true:
 		now attacking-from-peace is false;
 		now combat state of the noun is at-React;

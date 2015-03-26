@@ -82,7 +82,7 @@ with 100 blank rows
 To queue (T - a test set):
 	choose a blank row in Table of Test Set Queue;
 	Now test set entry is T;
-	Now the random-seed entry is 38. [TODO: set this manually if desired]
+	Now the random-seed entry is 39. [TODO: set this manually if desired]
 	
 To queue all test sets:
 	Repeat with T running through enabled test sets:
@@ -1404,13 +1404,14 @@ The report of the dodge reaction is "\(defender dodging\)".
 The report of the block reaction is "\(blocking\)". [ watch out - no message if block bonus is 0]
 
 To assign (reaction - a reaction-type) to (guy - a person):
-	now guy is at-react;
+	now guy is at-react; [enable reactions]
 	if reaction is parry reaction:
 		try guy parrying;
 	else if reaction is dodge reaction:
 		try guy dodging;
 	else if reaction is block reaction:
 		try guy blocking;
+	now guy is at-Inactive; [clear reaction state]
 		
 To prepare a test battle with (guy - a person), inviting groups:
 	if inviting groups:
