@@ -2439,6 +2439,7 @@ sul-sacrifice damage text	1	1
 deathly-scroll damage text	1	1
 downstairs damage text	1	1
 bees damage text	1	1
+glass damage text	1	1
 
 Regular scheduling of Aite-spike damage text: deal 3 points of Aite-damage to the player on behalf of the player.
 Testing effects of Aite-spike damage text: if we assert 3 damage to the player after "A huge <a-w>+ bursts out of the ground, skewering you for", rule succeeds.
@@ -2485,6 +2486,13 @@ Initial scheduling of bees damage text:
 	compel the action of waiting;
 	
 Testing effects of bees damage text: if we assert result "The swarm of bees attacks <^\n>+, dealing <1-3> damage\.", rule succeeds.
+
+initial scheduling of glass damage text:
+	prepare a test battle with the chain golem;
+	equip the player with the glass cannon.
+
+regular scheduling of glass damage text: do the action of the chain golem waiting for a 100 melee hit by the player.
+testing effects of glass damage text: if we assert result "You deal 10 ", rule succeeds.
 
 Section - Damage Modifiers
 
