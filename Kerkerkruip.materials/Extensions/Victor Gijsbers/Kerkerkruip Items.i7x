@@ -1075,7 +1075,7 @@ The fuligin cloak is cloth.
 The description of the fuligin cloak is "Fuligin, the colour that is darker than black. Wearing this powerful cloak allows you to become hidden and sneak through the dungeon undetected. It also makes you somewhat resistant to radiant damage.".
 
 Every turn when the player wears the fuligin cloak (this is the blend into shadows rule):
-	update the combat status;
+	update the combat status; [TODO: is this safe? "hate is present" might be safer]
 	if combat status is peace:
 		if the player is not hidden and the player is alive and the player is the main actor:
 			hide.
@@ -4816,13 +4816,6 @@ Chapter - Returning Items to their Owners
 
 A thing has an object called the original owner. [Set the original owner of a starting kit to assign that kit to a person]
 
-[A thing can be shimmering. A thing is usually not shimmering.
-Understand the shimmering property as describing a thing.
-Understand "shimmering" as a thing when the item described is shimmering.
-Understand "not-shimmering" and "not shimmering" and "unshimmering" as a thing when the item described is not shimmering.
-
-A thing has an object called the shimmer-twin. The shimmer-twin of a thing is usually nothing.]
-
 The verb to be owned by means the original owner property.
 
 When play begins (this is the set original owner to container rule):
@@ -4842,28 +4835,6 @@ Last starting kit setup rule for a person (called guy) (this is the restore owne
 		equip guy with item;
 						
 to flicker is a verb. to reappear is a verb.
-
-[To decide which object is the original version of (item - a thing):
-	if item is shimmering:
-		decide on the shimmer-twin of item;
-	decide on item.
-	
-To decide which object is the shimmer-clone of (item - a thing):
-	let new-item be the shimmer-twin of item;
-	if new-item is nothing:
-		now new-item is a new object cloned from item;
-		now new-item is shimmering;
-		now shimmer-twin of new-item is item;
-		now shimmer-twin of item is new-item;
-	if new-item is on-stage:
-		if the location of new-item is the location: [do we need a full scope check here?]
-			say "[The new-item] [flicker] out of existence!";
-		remove the new-item from play;
-	decide on new-item.
-	
-[We want to use a shimmer-clone if somebody has lost their equipment in the dungeon and now it needs to be replaced. But that's a bit complicated to track, so we do something simpler: we assume that non-treasure items belong to npcs, and if they're in the dungeon it's because an npc dropped them.
-	This allows the player to be given an already-placed item at the beginning of the game. They'll never know it was stolen from the dungeon!]
-]
 	
 Definition: a thing is npc-owned if it is non-treasure and it is on-stage.
 Definition: the gilded rapier is npc-owned: no.
@@ -4875,17 +4846,6 @@ To decide which object is the version of (item - a thing) available to (guy - a 
 			say "[The item] [flicker] out of existence[if the location of guy is the location], and [reappear] in the possession of [the guy][end if]!";
 		remove the item from play;
 	decide on item.
-		
-[Before printing the name of a shimmering thing:
-	say "shimmering [run paragraph on]".
-	
-Before printing the plural name of a shimmering thing:
-	say "shimmering [run paragraph on]".	
-
-Every turn when the player encloses a shimmering thing:
-	repeat with item running through shimmering things enclosed by the player:
-		say "[The item] suddenly disappears, as if it were only a dream.";
-		remove item from play.]
 		
 Chapter - Equipping
 

@@ -453,7 +453,7 @@ Check an actor challenging someone in the Maze when the location is Arena of the
 To prostrate is a verb. To pray is a verb. To rise is a verb.
 
 First every turn when the location is Arena of the Gods (this is the reject enslavement in Arena of the Gods rule):
-	Repeat with offender running through god-champion people who do not oppose the player:
+	Repeat with offender running through alive god-champion people who do not oppose the player:
 		if offender does not oppose the player:
 			say "[The challenged god] is angered by [regarding the offender][possessive] lack of faith! [Divine lightning strikes offender].";
 			if offender is alive:

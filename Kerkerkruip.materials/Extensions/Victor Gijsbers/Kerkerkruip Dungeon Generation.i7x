@@ -19,8 +19,8 @@ After showing the title screen (this is the seed the xorshift generator rule):
 	otherwise:
 		now the xorshift seed is the dungeon generation seed;
 
-The show the banner and dungeon generation seed rule is listed instead of the display banner rule in the startup rules.
-A startup rule (this is the show the banner and dungeon generation seed rule):
+The show the banner with dungeon generation seed rule is listed instead of the display banner rule in the startup rules.
+A startup rule (this is the show the banner with dungeon generation seed rule):
 	say "[banner text]Dungeon seed: [dungeon generation seed in hexadecimal to 8 places][xorshift seed in hexadecimal to 4 places][line break]";
 	if the dungeon generation check is not 0 and the dungeon generation check failed:
 		say "[line break][bold type]Warning:[roman type] The dungeon that has been generated does not match the dungeon seed you entered. Check if the seed you entered is for a different version of [Kerkerkruip].";
@@ -441,6 +441,9 @@ To place (a - a room) next to (b - a room):
 				change the way exit of b to a;
 				let reverse be the opposite of way;
 				change the reverse exit of a to b;
+				[TODO: a is only normally placed if b is normally placed
+				actually the safest way would probably be to do a final pass after
+				the map is complete, checking which placed rooms have a route to Entrance Hall - anything that doesn't becomes secretly placed at that point.]
 				mark a as normally placed;
 				if generation info is true, say "* Placed [a] [way] of [b].[line break][run paragraph on]".
 			

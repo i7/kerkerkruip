@@ -1676,7 +1676,7 @@ Last check opening the tomb of the ancient king:
 
 A last creating the map rule (this is the potentially connect the Mausoleum rule):
 	if Mausoleum is not placed and a random chance of 1 in 10 succeeds: [TODO]
-		let place be a random placed connectable room;
+		let place be a random normally placed connectable room;
 		place mausoleum next to place;
 
 The potentially connect the Mausoleum rule is listed after the place secret rooms rule in the creating the map rules.

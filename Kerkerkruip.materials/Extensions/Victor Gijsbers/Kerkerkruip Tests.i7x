@@ -230,8 +230,10 @@ Attack modifier rule (this is the smiting guarantees hit rule):
 Last general damage multiplier rule (this is the smiting overrides damage multiplier rule):
 	if damage-by-hitting is true:
 		if the global attacker is smiter:
-			say " (reset to 100 by smiting)[run paragraph on]";
+			say "(reset to 100 by smiting) [run paragraph on]";
 			now total damage is 100;
+			
+[TODO: make whitespace work with all damage possibilities]
 
 Ramboing is an action applying to nothing. Understand "rambo" as ramboing.
 
@@ -559,7 +561,7 @@ For taking a player action when the fight count is at least 1 (this is the let t
 	try battling the test-challenger;
 	try recruiting the test-champion;
 
-The let test combatants fight rule is listed before the test step player action rule in the for taking a player action rulebook.
+The let test combatants fight rule is listed before the compel player attack rule in the for taking a player action rulebook.
 
 Section - Died and Kill Stats
 

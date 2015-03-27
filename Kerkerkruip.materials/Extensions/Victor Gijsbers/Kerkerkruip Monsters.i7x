@@ -5372,7 +5372,7 @@ After reporting Malygris teleporting:
 			now Malygris-summon-countdown is a random number between 5 and 7;
 		if the teleport amount of Malygris is 0:
 			if demonic assassin is alive and demonic assassin is off-stage: [failed to summon last time]
-				now Malygris-summon-countdown is a random number between 4 and 5. [and this time he is faster]
+				now Malygris-summon-countdown is a random number between 4 and 5; [and this time he is faster]
 
 Starting kit setup for Malygris (this is the randomise Malygris teleporting rule):
 	if a random chance of 1 in 4 succeeds: [teleporting]
@@ -6910,7 +6910,6 @@ An AI action selection rule for the imp (this is the imp considers imping rule):
 				increase Action Weight entry by 1000.
 
 Carry out the imp imping:
-[	say "TEST: [combat state of the imp].";]
 	if the combat state of the imp is at-React:
 		if (the location of the imp is not Lair of the Imp) and (the imp is not teleport impossible aware):
 			try the imp teleporting instead;
