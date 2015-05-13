@@ -1373,7 +1373,7 @@ Before dealing attack damage (this is the before dealing normal attack damage ru
 For dealing attack damage (this is the for dealing normal attack damage rule):
 	unless damage die of the global attacker weapon is less than 1:
 		now the attack damage is a random number between 1 and the damage die of the global attacker weapon;
-		increase the attack damage by weapon damage bonus of the global attacker weapon; [1d(damage die) + WDB]
+	increase the attack damage by weapon damage bonus of the global attacker weapon; [1d(damage die) + WDB]
 	deal attack damage points of physical damage;
 	now damage-by-hitting is true;	[TODO: is "the dealing attack damage activity is going on" enough?]
 	have global attacker weapon inflict damage on the global defender;  [The crucial line.]
