@@ -2243,6 +2243,8 @@ To decide which number is the current blood cost of (item - a thing):
 	decide on n.
 
 Total blood magic is a number that varies. Total blood magic is 0.
+
+A thing can be blood-awakened. A thing is usually not blood-awakened. [Used by items which do not increase in power when fed, but are awakened for another use. Changes a message below.]
 	
 Section - Feeding
 	
@@ -2261,7 +2263,7 @@ Carry out feeding:
 		say "You feed [n] health to [the noun], which is more than your body can handle.";
 		end the story saying "Foolish people should not dabble in blood magic.";
 	otherwise:
-		say "You feed [n] health to [the noun], increasing [their] power[if concentration of the player is greater than 0] (and losing your concentration)[end if]!";
+		say "You feed [n] health to [the noun], [if the noun is blood-awakened]making it active[otherwise]increasing [their] power[end if][if concentration of the player is greater than 0] (and losing your concentration)[end if]!";
 		increase blood magic level of the noun by 1;
 		reset the blood timer of the noun;
 		now concentration of the player is 0;

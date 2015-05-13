@@ -2922,8 +2922,82 @@ One scroll of knowledge is in the knowing-scroll-pack.
 One scroll of mapping is in the knowing-scroll-pack.
 One scroll of psycholocation is in the knowing-scroll-pack.
 
+Section - The palimpsest (epic)
 
+The palimpsest is a readable blood-awakened epic thing.  The palimpsest is magical.
+Palimpsest-active is a truth state that varies. Palimpsest-active is true.
 
+Palimpsest-scroll is a scroll name that varies.
+Definition: a scroll is palimpsestic if it is palimpsest-equal.
+
+To decide whether (item - a scroll) is palimpsest-equal:
+	let x be true name of item;
+	if x is palimpsest-scroll:
+		decide yes;
+	decide no.
+
+A dungeon interest rule (this is the set original palimpsest scroll rule):
+	let n be a random number between 1 and 8;
+	if n is:
+		-- 1: now palimpsest-scroll is teleportation;
+		-- 2: now palimpsest-scroll is teleportation;
+		-- 3: now palimpsest-scroll is knowledge;
+		-- 4: now palimpsest-scroll is curse removal;
+		-- 5: now palimpsest-scroll is alteration;
+		-- 6: now palimpsest-scroll is death;
+		-- 7: now palimpsest-scroll is protection;
+		-- 8: now palimpsest-scroll is a random not obfuscated scroll name;
+
+The blood magic cost of palimpsest is 4.
+The blood magic level of palimpsest is 0.
+The blood magic maximum of palimpsest is 99.
+
+Instead of examining the palimpsest:
+	let item be a random palimpsestic scroll;
+	say "Before now, you had only heard rumours of such items: magical palimpsests that can replicate again and again the effect of any scroll -- if one is willing to pay the price of blood. This particular example has been used to copy [an item]. (To replicate the contents of another scroll on it, use a command like 'replicate scroll of protection'.)[paragraph break][if palimpsest-active is true]The palimpsest is ready to be used[otherwise]The palimpsest needs to be fed more blood if it is to be used again[end if]."
+
+Check feeding palimpsest:
+	if palimpsest-active is true:
+		take no time;
+		say "The palimpsest is still active, so feeding it would serve no purpose." instead.
+		
+[Feeding message.]
+
+Carry out feeding the palimpsest:
+	now palimpsest-active is true.
+
+[Feeding result.]
+		
+Carry out reading the palimpsest:
+	let item be a random palimpsestic scroll;
+	let place be holder of item;
+	move item to the player;
+	try reading item;
+	move item to place;
+	now palimpsest-active is false.
+
+[Replicating]
+
+Replicating is an action applying to one thing. Understand "replicate [thing]" and "copy [thing]" as replicating.
+
+Check replicating:
+	if the noun is not a scroll:
+		take no time;
+		say "You can only replicate scrolls." instead.
+		
+Check replicating:
+	unless the player has the palimpsest:
+		take no time;
+		say "You must have a magical palimpsest in order to replicate scrolls." instead.
+		
+Check replicating:
+	unless palimpsest-active is true:
+		take no time;
+		say "The palimpsest is currently inactive. You will have to feed it before you can use it in any way." instead.
+		
+Carry out replicating:
+	now palimpsest-scroll is true name of the noun;
+	say "You copy [the noun] onto the palimpsest."
 
 
 Chapter - Magical guides
