@@ -2,27 +2,6 @@ Automated Testing by Kerkerkruip begins here.
 
 Use authorial modesty.
 
-[Using outcomes only:
-
-To queue a test, make its final dependency possible
-
-To run test, trace dependencies backwards, then run them in forwards order
-
-How to distinguish branching dependencies from dependencies that are used in two different places? Use 'reusable' property?
-
-two ways to run tests - implicitly or explicitly. Maybe branching dependencies need to be explicit
-
-special outcomes: taking a turn, restarting for tests
-
-taking a turn sets an action - either player or npc
-
-By default every outcome depends on its predecessor?
-
-To compel (action) - take a turn
-To react to (person) with (action) - take a turn with attack/react rounds
-To wait for (person) to act
-]
-
 Volume - Test Framework (not for release)
 
 Include Simple Unit Tests by Dannii Willis.
@@ -35,7 +14,6 @@ Chapter - Randomized Events
 
 Section - Outcomes
 
-[TODO: put all outcomes in a table and save it to a file. Then we can restart the game repeatedly and use outcomes to generate statistics about dungeon generation]
 An outcome is a kind of value. Some outcomes are defined by the Table of outcomes.
 
 outcome state is a kind of value. The outcome states are outcome-untested, outcome-possible, outcome-failed, and outcome-achieved.
@@ -50,7 +28,6 @@ An outcome can be unscheduled, scheduled for immediate testing, scheduled for la
 	
 [Outcome properties:
 
-description - a 'printed name' style text
 attempt count - number of times outcome has been tested
 success count - number of times a test "succeeded"
 likelihood -
@@ -66,8 +43,8 @@ For all other values, a tolerance range will be established that should achieve 
 
 maximum attempts - outcome will "time out" and fail if it reaches this number without being achieved first. If you don't set this, a reasonable default will be chosen for you
 maximum tolerance - do not set, will be calculated
-state - determines whether the outcome should be tested. do not set directly, use "make ... possible" phrases, etc
-dependency - determines whether the next outcome should be tested. do not set directly, use "serial outcome dependency" phrases
+state - determines whether the outcome has been tested and whether more testing is needed
+antecedent - the outcome that must succeed before this can be tested
 ]
 
 Table of Outcomes
@@ -162,7 +139,7 @@ For taking a player action when testing compelling an action (this is the compel
 		forget the compelled action;
 		test compelling an action against true;
 	otherwise:
-		[TODO: try this
+		[This code could prevent infinite loops, but it might be a little overeager. Consider it a TODO:
 		unless (the location of the guy is the location and the combat status is combat) or the guy is acting independently:
 			now the failure report is "[The guy] is not available to try [the compelled action]";
 			test compelling an action against false;]
@@ -197,17 +174,7 @@ The player combat round action rule is listed first in the for taking a player a
 The compel player action rule is listed before the player combat round action rule in the for taking a player action rulebook.
 The compel player reaction rule is listed before the compel player action rule in the for taking a player action rulebook.
 The compel player attack rule is listed before the compel player reaction rule in the for taking a player action rulebook.
-		
-[A test step has an object called the location-target.
 
-To decide which room is the action-destination of (current move - a test step):
-	Let the current destination be the location-target of the current move;
-	if the current destination is nothing, decide on Null-room;
-	if the current destination is a room, decide on the current destination;
-	decide on the location of the current destination.
-
-A test step can be extracting.]
-	
 to say (event - compelling an attack):
 	say "compelling [the compelled attacker] to attack [the actor part of the compelled action]";
 
@@ -226,21 +193,6 @@ Definition: an outcome is schedule-blocking if it is at least taking a turn and 
 Regular scheduling of a schedule-blocking outcome (called the event) (this is the regular block scheduling rule):
 	now the event is scheduled for later testing.
 	
-[TODO: make this work? or just get rid of it?]
-For taking a player action when the scheduled event is not boring lack of results (this is the move to the destination of an outcome rule):
-	if the player is at-React:
-		make no decision;
-	if the location-to-go is the location:
-		update event description because "arrived at destination [the location] for";
-	if the location-to-go is Null-room or the location-to-go is the location:
-		make no decision;
-	Now the way-to-get-there is the best route from the location to the location-to-go;
-	Now the way-to-get-back is the opposite of the way-to-get-there;
-	assert "no route from [the location] to [the location-to-go]" based on whether or not the way-to-get-there is not a direction;
-	if the way-to-get-there is a direction, generate the action of going the way-to-get-there;
-		
-The move to the destination of an outcome rule is listed before the compel player attack rule in the for taking a player action rulebook.
-
 [I7 names borrowed from Ron Newcomb's Original Parser]
 The action in progress is an action name that varies. 
 The person requesting is a person that varies. 
@@ -327,7 +279,6 @@ A Standard AI rule for a person (called P) when testing compelling a reaction (t
 
 A Standard AI rule for a person (called P) when testing compelling an action (this is the compel an action rule):
 	unless the actor part of the compelled action is P and P is at-Act:
-		[what about acting independently? Maybe not an issue]
 		make no decision;
 	try the compelled action;
 	forget the compelled action;
@@ -350,8 +301,6 @@ The compel a reaction rule is listed before the compel an action rule in the sta
 The compel an attack rule is listed before the compel a reaction rule in the standard AI rulebook.
 
 Section - Testing Outcomes
-
-[TODO: Normalize regex matches against event description so we can use a brief consistent phrase. ]
 
 To decide whether (event - an outcome) timed out:
 	decide on whether or not the attempt count of the event is not less than the maximum attempts of the event;
@@ -426,11 +375,6 @@ To test (event - an outcome) against (success - a truth state):
 		now the event is just-succeeded;
 	otherwise:
 		now the event is just-tested;
-
-To test (event - an outcome) against (T - a text):
-	update the event description because "testing [event] against '[T]'"; [todo - roll this into a text-testing phrase?]
-	[TODO: include event description in failure report]
-	test event against whether or not the event description matches the regular expression T;
 
 Chapter - Persistent data
 
@@ -746,16 +690,12 @@ Section - Controlling Outcomes
 
 The dependency test root is an outcome that varies. The dependency test root is boring lack of results.
 
-[The phrase below returns true if another outcome depends on the event, and also sets the dependency test outcome so we can use the "dependent" adjective
-
-Dependency is defined differently for different outcomes. In effect, the dependency tree has two segments:
+[Dependency is defined differently for different outcomes. In effect, the dependency tree has two segments:
 	
-an unbranching "trunk" of preset outcomes, ending at the scheduled event
+an set of preset outcomes, all preceding testing of the scheduled event
 a branching tree of outcomes, all rooted at the scheduled event
 
-Everything in the full tree except for the scheduled outcome is "scheduled anonymously" - i.e. the tree is identified by scheduled event only.
-
-When scheduling happens, everything in the "trunk" will be manually made possible. No other branches should be followed, even though many preset outcomes have multiple dependents. But all the branches of the scheduled event should be made possible. This phrase reflects that: preset outcomes only search for possible dependents, while non-preset outcomes follow all branches of "not resolved" dependents.
+When scheduling happens, all the presets will be manually made possible - often by phrases invoked within a "regular scheduling" rule. No other branches should be followed, even though many preset outcomes have multiple dependents. But all the branches of the scheduled event should be made possible. This phrase reflects that: preset outcomes only search for possible dependents, while non-preset outcomes follow all branches of "not resolved" dependents.
 ]
 
 To decide whether (event - an outcome) has unresolved dependents:
@@ -862,13 +802,7 @@ To decide whether testing (D - a description of outcomes):
 		if testing T, yes;
 	no.
 
-[initial scheduling rules don't ever run for preset outcomes]
-
 Initial scheduling rules are an outcome based rulebook.
-
-[Initial scheduling for a test step (this is the reset act counts rule):
-	repeat with guy running through people:
-		now the act count of guy is 0;]
 			
 regular scheduling rules are an outcome based rulebook.
 
@@ -878,36 +812,9 @@ The scheduled event is an outcome that varies. The scheduled event is boring lac
 
 The outcome described is an outcome that varies.
 
-[[TODO: do we still need these? or can we use immediately schedulable or something?]
-
-Definition: an outcome is blocker if it is pending and it is not just-succeeded;
-
-[TODO: get rid of this phrase!
-use this phrase for outcomes that have already started being tested]
-Definition: an outcome (called event) is pending:
-	if event is already scheduled, yes;
-	if event is untested, no;
-	unless the antecedent of the event is boring lack of results or the antecedent of the event is just-succeeded, no;
-	if event is possible, yes;
-	if the event has unresolved dependents, yes;
-	if the event is preset and the scheduled event is pending, yes;
-	no.
-		
-Definition: boring lack of results is pending: no.]
-
-[use this phrase for outcomes that might not be possible yet, but should be]
-[We must be aware of the special meaning of "boring lack of results" when it is an antecedent. It gives default behavior to outcomes,
-but default behavior is different depending on whether an outcome is preset or not.
-
-Preset outcomes that depend on boring lack of results are independent - they have no blockers.
-
-Non-preset outcomes that depend on boring lack of results follow sequential behavior. In practice, they are blocked by the outcome that comes before them AND by the entire dependency tree attached to that outcome. 
-
-This is complicated by the fact that outcomes depending on "restarting for tests" are considered primary - playthroughs that start when the game is rebooted and end when the next test set is encountered. The primary outcome is set when we reboot. We can't run a sequential step unless its immediate precursor belongs to the same primary outcome.
-
-Most of these rules are unimportant except when starting the game. At that point we must search through all the outcomes until we find the primary outcome.]
+[resettable means we can reset this and all its dependents and presets, and go on to the next test step]
 	
-Definition: boring lack of results is resettable: no; [or yes?]
+Definition: boring lack of results is resettable: no;
 
 Definition: an outcome (called event) is resettable:
 	if event is not the scheduled event, no;
@@ -918,7 +825,6 @@ Definition: an outcome (called event) is resettable:
 		if item is not restarting for tests and item is preset:
 			if item is already scheduled, no;
 			if item is possible, no;
-	[if there is a pending not test set outcome that is not restarting for tests, [TODO: fix this hack!] no;]
 	yes;
 	
 [This phrase determines if an outcome should be scheduled before resetting or rescheduling the scheduled event. It may not necessarily be schedulable right now (for that we use "immediately schedulable")]
@@ -933,7 +839,7 @@ To decide whether (event - an outcome) needs scheduling:
 		While blocker is not boring lack of results:
 			if blocker is just-tested, no; [we need a rescheduling so the antecedent can be just-succeeded]
 			now blocker is the antecedent of blocker; 
-	if [event is not a test set and - redundant?] the test set of event is not the primary outcome, no; [this includes presets, which are scheduled manually or by antecedent]
+	if the test set of event is not the primary outcome, no; [this includes presets, which are scheduled manually or by antecedent]
 	if event is resolved and not (event has unresolved dependents), no;
 	yes.
 
@@ -1077,14 +983,9 @@ To test effects of (event - an outcome):
 	let resolution be whether or not the event is resolved;
 	test the event against success;
 	if resolution is false or success is false, transcribe "tested effects of [if success is true][current test description] - success[otherwise][the outcome described] ([success count of the outcome described]/[attempt count of the outcome described]) - no success[end if]";
-	[update event description because "done testing effects of [event] -";]
-	[todo: make dependents unscheduled?]
 
 Before taking a player action when done testing is false (this is the test event effects rule):
-	[Let repeat be whether or not (the scheduled event is repeatable) and (the repeated moves > 0);]
-	[now the scheduled event is not generated; todo: this happens when an outcome compels an action]
 	if taking a turn is scheduled for later testing, test taking a turn against true;
-	[TODO: always schedule taking a turn, just to ensure timeouts?]
 	continue scheduling;
 
 Section - Counting Actions
@@ -1102,8 +1003,6 @@ A first combat round rule (this is the test combat round of previous main actor 
 				assert "[act-outcome of guy] can't be tested because [guy] is not here" based on false;
 				now the act-outcome of guy is unscheduled;
 				now the state of act-outcome of guy is outcome-failed;
-				[TODO: make this work more cleanly - use a combat round timeout or something?]
-				[TODO: special fail immediately phrase?]
 
 Chapter - Starting Tests
 
