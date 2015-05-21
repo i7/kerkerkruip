@@ -207,9 +207,6 @@ To decide which room is the action-destination of (current move - a test step):
 	decide on the location of the current destination.
 
 A test step can be extracting.]
-
-to say (event - moving towards the destination):
-	say "moving from [the location] towards [the location-to-go]";
 	
 to say (event - compelling an attack):
 	say "compelling [the compelled attacker] to attack [the actor part of the compelled action]";
@@ -220,14 +217,11 @@ to say (event - compelling a reaction):
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts
 taking a turn	1	0
-moving towards the destination	1	0
 compelling an attack	1	0
 compelling an action	1	0
 compelling a reaction	1	1
-free combat round	1	0
-free npc action	1	1
 
-Definition: an outcome is schedule-blocking if it is at least taking a turn and it is less than free npc action.
+Definition: an outcome is schedule-blocking if it is at least taking a turn and it is at most compelling a reaction.
 
 Regular scheduling of a schedule-blocking outcome (called the event) (this is the regular block scheduling rule):
 	now the event is scheduled for later testing.
@@ -242,7 +236,7 @@ For taking a player action when the scheduled event is not boring lack of result
 		make no decision;
 	Now the way-to-get-there is the best route from the location to the location-to-go;
 	Now the way-to-get-back is the opposite of the way-to-get-there;
-	fail moving towards the destination based on whether or not the way-to-get-there is not a direction;
+	assert "no route from [the location] to [the location-to-go]" based on whether or not the way-to-get-there is not a direction;
 	if the way-to-get-there is a direction, generate the action of going the way-to-get-there;
 		
 The move to the destination of an outcome rule is listed before the compel player attack rule in the for taking a player action rulebook.
@@ -273,7 +267,6 @@ A person has an outcome called the act-outcome. The act-outcome of a person is u
 Definition: a person is scheduled to act freely:
 	Let the event be the act-outcome of it;
 	if the event is boring lack of results, no;
-	if the event is free npc action, yes;
 	decide on whether or not the event is scheduled for later testing;
 
 Suppress npc action is a truth state that varies.
@@ -297,11 +290,6 @@ To wait for (guy - a person) to act freely:
 		transcribe "waking [the guy] up so [they] can act freely";
 	now the act-outcome of the guy is the outcome described;
 	now the outcome described is scheduled for later testing;
-	
-To allow (guy - a person) to act freely: [TODO: make this work, or delete it (and delete free npc action)]
-	if guy is asleep:
-		transcribe "waking [the guy] up so [they] can act freely if they want";
-	now the act-outcome of the guy is free npc action;
 	
 Initial scheduling of taking a turn:
 	now suppress npc action is true;
@@ -443,26 +431,6 @@ To test (event - an outcome) against (T - a text):
 	update the event description because "testing [event] against '[T]'"; [todo - roll this into a text-testing phrase?]
 	[TODO: include event description in failure report]
 	test event against whether or not the event description matches the regular expression T;
-
-To fail (event - an outcome) based on (result - a truth state):
-	now likelihood of event is 0;
-	test event against result;
-		
-To fail (event - an outcome) on result (T - a text):
-	[TODO: don't test regexp if we're going to ignore the test result]
-	update the event description;
-	fail event based on whether or not the event description matches the regular expression T;
-	
-To achieve (event - an outcome) based on (result - a truth state):
-	now likelihood of event is 1;
-	now minimum attempts of event is 0;
-	test event against result;
-			
-To achieve (event - an outcome) on result (T - a text):
-	update the event description;
-	achieve event based on whether or not the event description matches the regular expression T;
-	
-[TODO: combat round tests]
 
 Chapter - Persistent data
 
