@@ -1312,7 +1312,7 @@ To allow interventions:
 First intervention possible when intervention-blocking is true:
 	rule fails.
 
-Section - hiding-check, hidden-traveling and hiding-reveal
+Section - hiding, traveling sneakily
 
 Traveling sneakily is a truth state that varies.
 
@@ -1367,17 +1367,6 @@ The reusable item is an object that varies.
 First regular scheduling of an outcome (this is the return the reusable item rule):
 	if the reusable item is a thing and the reusable item is not carried:
 		now the player carries the reusable item;
-	
-[A test step can be item-reading.
-
-Choosing a player action when testing an item-reading test step:
-	generate the action of reading the reusable item.
-
-A test step can be item-throwing.
-
-Choosing a player action when testing an item-throwing test step:
-	generate the action of throwing the reusable item.
-]
 
 Section - Readied weapons
 
@@ -1390,13 +1379,11 @@ Definition: A room is occupied rather than unoccupied if it encloses a person.
 
 Section - Counting Hits
 
-[TODO: get rid of this? we can use outcomes instead]
 
 A person has a number called the hitting count.
 
 First before an actor hitting (this is the increment hitting count rule):
 	increment the hitting count of the actor;
-	[log "incremented hitting count of [the actor] to [hitting count of the actor]";]
 			
 To reset hitting counts:
 	Repeat with guy running through people:
@@ -1522,29 +1509,11 @@ To decide what number is the calculated value of (T - a text):
 	otherwise:
 		decide on the final total.
 
-[Checking damage is a truth state that varies;
-
-First before dealing attack damage when checking damage is true (this is the start capturing damage description rule):
-	give no transcription reason;
-	update the event description;	
-
-Last after dealing attack damage when checking damage is true (this is the finish capturing damage description rule):
-	now the damage description is "[the captured text]";
-	clear event description;]
-
 Section - Test Arena and Battle Phrases
 
 Test Arena is an arena. The staging area of Test Arena is maze-waiting-room.
 
 Test Arena is faction-imposing.
-
-[reaction-type is a kind of value. The reaction-types are no reaction, parry reaction, dodge reaction, block reaction. [TODO: use action names instead?]
-
-A reaction-type has a text called the report. The report of a reaction-type is usually "";
-
-The report of the parry reaction is "\(defender parrying\)".
-The report of the dodge reaction is "\(defender dodging\)".
-The report of the block reaction is "\(blocking\)". [ watch out - no message if block bonus is 0]]
 		
 To prepare a test battle with (guy - a person), inviting groups:
 	if inviting groups:
@@ -1564,32 +1533,21 @@ Table of Outcomes (continued)
 outcome	likelihood	minimum attempts
 combat hit	1	1
 
-The original defender weapon is an object that varies.
-The original attacker weapon is an object that varies.
-
 To decide what person is the compelled actor: decide on the actor part of the compelled action;
 
 [TODO: extract text for reaction, attack roll and attack damage if requested]
 
-[TODO: use the compelled action instead of reactor/reaction]
 To do (reaction - a stored action) for/-- a (strength - a number) melee hit by (aggressor - a person):
 	now the compelled action is reaction;
 	now the compelled attacker is aggressor;
 	now the melee of the compelled attacker is strength;
 	now the defence of the compelled actor is 50;
 	schedule combat hit;
-	
-Initial scheduling of combat hit:
-	[TODO: does this work? do we need it?]
-	Now the original defender weapon is a random readied weapon enclosed by the compelled actor;
-	now the original attacker weapon is a random readied weapon enclosed by the compelled attacker;
-	
+		
 Regular scheduling of combat hit:
 	now the health of the compelled actor is 1000;
 	now the compelled actor is not asleep;
 	now the compelled attacker is not asleep;
-	equip the compelled actor with the original defender weapon;
-	equip the compelled attacker with the original attacker weapon;
 	clear event description;
 	now the compelled actor is at-react; [enable reactions]
 	try the compelled action;
