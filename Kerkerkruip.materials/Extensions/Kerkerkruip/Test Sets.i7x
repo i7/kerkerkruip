@@ -3461,7 +3461,7 @@ regular scheduling of sleeping-dream-waking: compel the action of exiting.
 testing effects of sleeping-dream-waking:
 	assert result "Malygris standing over you";
 	assert "Malygris should be awake" based on whether or not Malygris is not asleep;
-	assert that the concentration of Malygris is 2;
+	assert that the concentration of Malygris is 2 with label "concentration of Malygris";
 	assert "the player should be just-woken" based on whether or not the player is just-woken;
 	rule succeeds.
 	

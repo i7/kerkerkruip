@@ -506,7 +506,7 @@ Random-Seed (number)	Unresolved Count (number)
 0	0
 with 1 blank row
 
-To decide what number is the initial test random seed: decide on 68.
+To decide what number is the initial test random seed: decide on 69.
 
 To queue (T - an outcome):
 	make T testable;
@@ -727,7 +727,7 @@ To decide what number is the calculated maximum attempts of (event - an outcome)
 		now max is 1;
 	repeat with item running through outcomes:
 		if item depends on event:
-			Let dependent-max be the calculated maximum attempts of item;
+			Let dependent-max be the calculated maximum attempts of item; [TODO: multiply by minimum / likelihood?]
 			if dependent-max is greater than max:
 				now max is dependent-max;
 	decide on max;
@@ -997,7 +997,7 @@ A first combat round rule (this is the test combat round of previous main actor 
 		now the act-outcome of the main actor is scheduled for immediate testing;
 		continue scheduling;
 	if a person is scheduled to act freely:
-		clear event description;
+		clear event description; [TODO: capture combat round text?]
 		Repeat with guy running through scheduled to act freely people:
 			unless the location of guy is the location:
 				assert "[act-outcome of guy] can't be tested because [guy] is not here" based on false;
@@ -1631,18 +1631,6 @@ To decide whether we assert that (item - a weapon) readied:
 		yes;
 	now the failure report is "[The item] should be readied after [the outcome described]";
 	no.
-	
-To assert no weapon after (circumstance - a text):
-	Let the item be a random readied weapon enclosed by the player;
-	assert "Nothing besides a natural weapon should be readied after [circumstance]" based on whether or not the item is nothing or the item is a natural weapon.
-	
-To decide whether we assert no weapon:
-	Let the item be a random readied weapon enclosed by the player;
-	if item is a natural weapon or item is nothing:
-		now the failure report is "";
-		yes;
-	now the failure report is "[The item] is readied, but nothing besides a natural weapon should be readied after [the outcome described]";
-	no.
 		
 To have (guy - a person) defeat (loser - a person):
 	transcribe "having [guy] defeat [loser]";
@@ -1675,140 +1663,343 @@ to run the target test set. Entering an invalid value of TARGET-SET will produce
 
 The queue test commands can also be run from the debug console (press ~ when in the opening menu), but no error messages are shown from the console at the time of this writing (2015-02-27).
 
-Section: Assertions
+To run tests noninteractively, create a file called "noninteractivetests" and then run Kerkerkruip from a command-line interpreter.
 
-To perform the tests, we have a wide variety of assertion phrases.
+Section: Outcomes
 
-First, there's a simple "X is Y" assertion, but we give it a label so the output will be clear about what we're comparing:
-
-	assert that the body score of the player is 5 with label "body score of the player";
-
-If we aren't looking for exact equality, we can use a range:
-
-	assert that the body score of the player is between 4 and 6 with label "body score of the player";
+Automated Testing defines a kind of value called "outcome." Outcomes describe the structure of a test, and they can form branching dependency trees. They must be defined in the Table of Outcomes:
 	
-and we can test any truth state:
+	Table of Outcomes (continued)
+	outcome	likelihood	minimum attempts	maximum attempts	antecedent
+	healer-healing-player	0	20	100	--
 
-	assert "the body score of the player should be at least 5, but it is [body score of the player]" based on whether or not the body score of the player is at least 5;
+Section: Dependency, Presets, Test Sets, Test Steps
 
-We can also test the text that is output by the game, using regular expressions:
+An outcome can have an "antecedent." If it does, it will not be scheduled or tested until its antecedent has produced the expected result. Any outcome that has an antecedent is considered to be "dependent."
+
+Section: Presets
+
+Some outcomes are designed to be used by multiple tests. These are called "preset" outcomes. The default outcome is a preset, and it is called "boring lack of results." It functions as a null outcome.
+
+Most presets must be scheduled manually, and there are phrases to schedule each of these. Presets generally don't follow a dependency tree, but form a pool of requirements that must be fulfilled before the non-preset outcomes can be tested. Many of them depend on particular events happening in the game, like a character getting a turn.
+
+Presets are not tested in the same way as other outcomes - internal code causes them to be resolved when their goals have been achieved.
+
+Test Sets
+
+If an outcome has the special preset antecedent "restarting for tests," it will trigger a restart of the game every time it is tested. An outcome like this is considered a "test set". Test sets can be run individually from within the game with the "queue test" command, and when "queue test all" is run, each test set will be run.
+
+If a test set is tested more than once, it will restart the game each time, so it can (and should) be used to test dungeon generation.
+
+After a test set and its dependents are resolved, every outcome following it will be tested in the order that it appears in the Table of Outcomes, until another test set is encountered.
+
+Test Steps
+
+If an outcome doesn't have an antecedent, it will wait until all prior dependencies have been fulfilled before it will be scheduled or tested. An outcome like this is considered a "test step," and it is the basic unit of test structures. When a test step is scheduled, the captured text will be cleared and all previous outcomes will be reset. This test step will now be considered to be "the scheduled event." The scheduled event will be tested, and if the rule succeeds, its dependencies will be tested. If anything is left unresolved after all possible dependencies have been tested, the scheduled event will be tested again, and the process repeats either until every dependency is resolved, or something times out.
+
+Ordering
+
+Ordering is important when it comes to outcomes. Outcomes listed first in the Table will be tested first. Because of this, dependencies must always follow their antecedent without any gaps. This is fine:
 	
-	assert result "'Do not be afraid, for I will end your suffering!' the Reaper exclaims\.";
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts	maximum attempts	antecedent
+drakul statement	1	1	200	--
+drakul identity	1	0	--	drakul statement
+simple drakul identity	1	0	--	drakul identity
+drakul conditional	1	0	--	drakul statement
+double conditional	1	0	--	drakul conditional
+nested conditionals	1	0	--	double conditional
+lifeblood-hinting	1	0	--	drakul statement
+lifeblood-location	1	0	--	lifeblood-hinting
+vampire-turning-hinting	1	0	--	drakul statement
+Drakul suicide	1	1	--	--
+
+But this would not be:
 	
-	assert absence of result "Having been in contact with the scythe of oxidation, the lion's shield rusts\.";
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts	maximum attempts	antecedent
+drakul statement	1	1	200	--
+drakul identity	1	0	--	drakul statement
+simple drakul identity	1	0	--	drakul identity
+Drakul suicide	1	1	--	--
+drakul conditional	1	0	--	drakul statement
 
-Under the hood, these phrases are managing a text called the "event description." This text accumulates from the captured text, and is normally cleared at the beginning of each turn. To manually clear it, we can say:
+...because Drakul suicide is a test step, and drakul statement would be reset before drakul conditional could be tested.
+
+Section: Resolving Outcomes
+
+When an outcome is tested, its likelihood is compared with its minimum and maximum attempts. If the frequency of success falls within a certain range of tolerance, the outcome will be considered "resolved" and it will not be tested any further. The tolerance is determined by the three numbers specified:
 	
-	clear event description
-
-and we can also force it to update immediately with any text that has just been captured:
+likelihood / minimum attempts represents the expected frequency of success. For example:
 	
-	update event description
+	0 likelihood / 1 minimum attempt means it should be tested once, and the rule should not succeed.
+	1 likelihood / 1 minimum attempt means it should be tested once, and the rule should succeed.
+	20 likelihood / 20 minimum attempts means it should be tested 20 times exactly, and the rule should succeed every time.
+	1 likelihood / 3 minimum attempts means the rule should succeed once out of every three attempts, with a certain error tolerance allowed (which is calculated for you)
+	1 likelihood / 0 minimum attempts means the rule should succeed at least once.
 	
-These commands cause debug messages to be written to the transcript file, so to help make the file more readable, we can say what's going on when we invoke them:
+The maximum attempts are used mainly in the final two cases, where success is not strictly deterministic. If the maximum is reached, the outcome is considered to have "timed out" and the failure will be reported. The maximum attempts also determine how strict the error tolerance will be - the tolerance is calculated such that the test will be accurate 99% of the time, regardless of what the maximum attempts are.
+
+Likelihood and minimum attempts should always be specified, but maximum attempts may be left blank. A reasonable default will be chosen (usually 1 or 100, unless it is influenced by dependencies).
+
+Using Dependency to Test Probabilities
+
+The most powerful aspect of dependency is to test events that depend on each other within the game. For example, if there is a one-in-three chance that the player will drop her weapon, and there is a one-in-five chance that the weapon will be destroyed when it is dropped, we can test that like so:
 	
-	clear event description because "about to examine the amulet";
-	try examining the amulet;
-	update event description because "testing amulet description";
-	
-Once we have updated the event description, we can test it (or any text) with the "includes" assertion:
-	
-	assert that the event description includes "Feeding \d+ blood to the amulet will increase its power by \d+";
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts	antecedent
+risky move	1	1	--
+dropped-weapon	1	3	risky move
+destroyed-weapon	1	5	dropped-weapon
 
-	assert that the damage description does not include "\+ \d+ \(heat\)";
-	
-There are more ways to perform related sets of assertions, which we will examine later.
+This way, "risky move" will be scheduled again every time we want to test "dropped-weapon", which will be tested again every time we want to test "destroyed-weapon." But "destroyed-weapon" will not be tested unless "dropped-weapon" actually happened.
 
-Section: Test Sets
+Section: Scheduling and Testing Outcomes
 
-To make a test, we create a "test set:"
+Three rulebooks determine how each outcome is tested:
 
-	bug-xyz is a test set.
-
-Each test set will start a fresh game with a new dungeon. We can use the phrase "when testing bug-xyz" in our rules.
-
-There is a rulebook that runs before dungeon generation called the scenario rules. We can use this to set things as testobject just as if we had forced them to be included from the console. We can also set them as bannedobject, to prevent them from appearing in the dungeon.
-
-	Scenario when testing bug-xyz:
-		now the swarm of daggers is testobject;
-		now the Hall of Mirrors is bannedobject;
-
-Section: Test Steps
-
-To have things happen on a turn-by-turn basis, create a "test step," or more than one. A test step is a kind of value, and they run in the order that they were declared in the source. We must specify which test step is the first one of the test set, and the rest will follow automatically:
-
-	starting-out is a test step. The first move of bug-xyz is starting-out.
-
-	second-move is a test step.
-
-A test step corresponds to a turn, or multiple turns. It has a few rulebooks. The main ones are "initial scheduling" and "testing effects." These are test-step based rulebooks. There are also "choosing a player action" and "choosing a player reaction," which we will need if we want to actually do anything during a turn.
-
-Section: Initial scheduling
-
-	initial scheduling of starting-out:
-    		now the defence of the player is 100.
-
-Initial scheduling runs as soon as the test step first becomes active, and it doesn't run again even if the step repeats.
-
-Section: Rescheduling
-
-We can use rescheduling rules if there is anything we need to do when a test step repeats (see later for how that can happen)
-
-Section: Testing effects
-
-Testing effects runs at the very end of each turn, right before the next test step is scheduled - even if the same test step repeats.
-
-	Testing effects of starting-out:
-		assert that the location is Bridge of Doom with label "the player's location";
-		assert that the event description includes "dodging would be suicidal";
-
-Section: Player and NPC actions
-
-There are two rulebooks for making the player take an action: "Choosing a player action" and "Choosing a player reaction." These rulebooks, which have default success, have a default rule at the end that makes the player wait. Both should make use of the "generate (action - a stored action)" phrase.
-
-	Choosing a player action when testing starting-out:
-		generate the action of going the best route from the location to the location of the swarm of daggers.
-
-	Choosing a player reaction when testing dagger-strike:
-		generate the action of dodging.
-
-Since these rulebooks are NOT test-step based, we must need to use "when testing (move - a test step)" instead of giving a test step as the object of the rule.
-
-To make other people do things, we can use the "compel (action - a stored action)" phrase.
-
-	Initial scheduling of dagger-strike:
-		compel the action of the swarm of daggers attacking the player.
-
-By default, all (non-compelled) NPC actions are suppressed during tests. In the transcript, we can see when a character gets a combat round because the message "[suppressed action for X]" appears. NPCs are allowed to react, however. If we do want to allow NPCs to act freely, we can set a property of the test step:
-	
-	ape-cowering is an npc-enabling test step.
-	
-We can also enable AI actions manually with the phrase:
-
-	Let everyone act freely;
-	
-And disable them again with:
-	
-	Make everone wait;
-	
-Here's a little example of a complete test step:
-	
-	Armadillo-runner is a test step.
-	
-	Initial scheduling of armadillo-runner:
-		now the melee of the armadillo is 100;
+	initial scheduling of (event - an outcome):
+	regular scheduling of (event - an outcome):
+	testing effects of (event - an outcome):
 		
-	Choosing a player action when testing armadillo-runner:
-		generate the action of going the way-to-get-back.
-		
-	Testing effects of armadillo-runner:
-		assert result "The ravenous armadillo deals \d<^\n>+ damage";
+The initial scheduling rules create the circumstances that the test requires. Any output produced during these rules will be forgotten.
 
+The regular scheduling rules run every time a test is repeated. They should perform the action that the outcome is testing, after resetting any state that the action may have changed in previous iterations.
+
+The testing effects rules determine whether the action had the desired result. The rule should succeed if the test performed as expected.
+
+Here's an example:
+	
+	initial scheduling of aite-smashing: extract the player to the Temple of Aite.
+		
+	regular scheduling of aite-smashing:
+		now aite-wrath is false;
+		now the Statue of Aite is in the Temple of Aite;
+		try attacking the Statue of Aite.
+		
+	testing effects of aite-smashing: if aite-wrath is true, rule succeeds.
+
+Section: Assertions as Conditions
+
+We can always perform very simple tests on outcomes:
+	
+	testing effects of fafhrd-parry-fail: if the claymore is not rusted, rule succeeds.
+	
+But there are some phrases to help us make more complicated assertions. These are especially helpful when there is more than one "wrong" result, because the phrase will include the actual result in the failure report.
+
+	if we assert result "You drop the gilded rapier", rule succeeds.
+	
+	if we assert absence of result "You drop the gilded rapier", rule succeeds.
+	
+	if we assert that the health of the chain golem is 98, rule succeeds.
+	
+	if we assert that the health of the chain golem is between 90 and 99, rule succeeds.
+	
+These are the main phrases we will need: the first makes sure that the text (a regular expression) was found in the captured output. The second makes sure that it wasn't found. The third compares two values, and the fourth compares a value with a range (inclusively).
+
+Section: Standalone Assertions
+
+In addition to the assertion-conditions above, we can also make isolated assertions if we don't want to create a whole new outcome to test them:
+	
+testing effects of sleeping-dream-waking:
+	assert result "Malygris standing over you";
+	assert absence of result "arrives from the";
+	assert "Malygris should be awake" based on whether or not Malygris is not asleep;
+	assert that the concentration of Malygris is 2 with label "concentration of Malygris";
+	if the player is just-woken, rule succeeds.
+	
+Here we have phrases to test the captured output as before, but we also have two new kinds of phrases: The first tests whether a condition is true, and the second compares values while giving a label which will appear in the failure message if they don't match. There is also a "between" version just like the assertion-condition:
+	
+	assert that the concentration of Malygris is between 1 and 3 with label "concentration of Malygris";
+	
+These are good to use in outcomes that will only be tested once, but if an outcome is repeated, they can lead to a big dump of repeated failure messages. In that case, dependencies might work better.
+	
+Sometimes we will want to test a smaller portion of text. Currently there is one other option: to capture the damage description. The tests remember what set of output we are currently testing, and the "assert result" phrases will refer to that. We can change it implicity using this phrase:
+	
+	check damage of (guy - a person) with (N - a number) health after (prefix - a text):
+	
+Here's an example:
+	
+	check damage of the player with 1000 health after "Miranda deals";
+	
+This will search the captured text for the words "Miranda deals" and save the text between that prefix and the word "damage." This text will then be checked to make sure the damage calculation adds up correctly, and we will be switched to damage text capture mode for all future "assert result" phrases.
+A few more phrases do similar things:
+	
+	to decide whether we assert (prefix - a text) to (guy - a person) a total of (expected damage - a number) damage (suffix - a text):
+
+Example:
+	
+	if we assert "The giant tentacle deals" to the player a total of 0 damage "but holds on to you\.", rule succeeds.
+	
+If we don't care about the amount, we can use the "any damage" variation:
+	
+	if we assert "Chton suddenly sends a wave of unholy energy through the room, dealing <3-6> damage to Fell; and" to Isra any damage "to Isra\.", rule succeeds.
+
+Section: Capturing Text
+
+All output of the tests is captured and saved in the transcript file. In addition, some recently produced output is saved for use by tests.
+
+To switch back and forth between testing the entire output and testing damage text, we use these phrases:
+	
+	capture whole events;
+	capture damage text;
+	
+These phrases don't change what has already been captured, they just select what the "assert result" phrases will test. So if the captured text were:
+	
+	Time passes.
+
+	Rolling 4 + 100 (inherent bonus) - 1 (robe of the dead mage) + 1 (overmind) = 104, Miranda beats your defence rating of 50.
+
+	Miranda deals 6 + 10 (inherent bonus) = 16 damage, wounding you to 984 health.
+
+... and we gave this command:
+	
+	check damage of the player with 1000 health after "Miranda deals";
+	
+..the damage description would now be:
+	
+	6 + 10 (inherent bonus) = 16
+	
+This assertion would succeed:
+	
+	assert result "\+ 10 \(inherent bonus\)";
+	
+But this would fail:
+	
+	assert result "wounding you";
+	
+...until we gave this command:
+	
+	capture whole events;
+	
+...and then it would succeed.
+	
+Section: Updating the Captured Text
+
+If we do want to change what has been captured, we can use these phrases:
+	
+	clear event description;
+	clear event description because "testing the frobnitz";
+	
+The clear event description phrase will do just that - but it leaves the damage description alone. If we want to put something new in the damage description, we must use one of the damage assertions above. 
+
+	update event description;
+	update event description because "we just hopped the third rail";
+	
+The "update event description" phrase will append any text that has been captured since the description was last updated.
+
+Both phrases can take a "because" text, which will be written to the transcript - but only if there was any text in the event description already. If we want to write something to the transcript no matter what, we can use this phrase:
+	
+	transcribe "this text will always appear in the transcript";
+	
+Finally, we can output a message to both the screen and the transcript:
+
+	log "this text will appear on the screen and also in the transcript";
+
+Normally we will not need to ever invoke the clear/update phrases ourselves. Here are some practices that will make sure we always get the output we want to test:
+
+The "testing effects" rules should produce no game output.
+The "scheduling" rules should perform no assertions.
+The "initial scheduling" rules should not produce any output that we'd want to test (to put it another way, if there is output we don't want to test, we should put it here).
+
+Output is cleared when the scheduled event is scheduled. It is not cleared for dependents. Here's an example:
+
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts	antecedent
+talking to God	1	1	--
+listening for God's answer	1	1000	--
+A detail about the answer	1	1	listening for God's answer
+
+In this example, the output of "talking to God" will be cleared before we schedule "listening for God's answer". But the output of that will NOT be cleared before we test "A detail about the answer," because that outcome depends on "listening for God's answer."
+
+There is one exception, and that is when we test individual combat rounds with the "wait for (guy - a person) to act freely" phrase. In this case, output is cleared before every combat round.
+	
+Section: Moving People Around
+
+Moving people in Kerkerkruip has many side effects. To help us deal with this, here are some phrases:
+	
+	To extract (guy - a person) to (place - a room), making sure it is unoccupied:
+		
+This moves the guy to the selected room. If we use the "making sure it is unoccupied" option, it removes any other rogues who might be there.
+
+	To swap the occupants of (first place - a room) and (second place - a room):
+		
+This does pretty much what it sounds like.
+
+	To force the fuligin cloak to work:
+		
+This makes the player instantly hidden. To unhide the player, we simply "try taking off the fuligin cloak."
+
+	To travel sneakily to (place - a room):
+		
+This also moves the player to the specified room, but it uses the "going" action and makes sure that rooms and monsters on the way will be visited and seen. It also uses the fuligin cloak to keep the player hidden so no one will attack us as we move.
+
+	Definition: a direction (called way) is diggable:
+
+This is convenient when testing digging tools.
+
+Section: Compelling Actions
+
+Tests don't have to run through the full turn sequence, but sometimes we want them to. We can do this by compelling an action - this will cause the player or a rogue to try whatever action we specify, but only when it is their turn in the combat round. The every turn rules will run and all combatants will get their own round. Normally, each rogue's action is suppressed with the message "[suppressed action for X]", but we can control that as well. Rogues are always allowed to react, however.
+
+Phrases to control player and rogue action should normally be invoked from "regular scheduling" rules:
+	
+	To compel (the desired action - a stored action):
+		
+Example:
+	regular scheduling of throwing-blessed: compel the action of throwing the Blessed Grenade.
+	
+For convenience, there is a variable called "the reusable item," which will be returned the player before regular scheduling of a test step. This enables us to repeat actions that consume an object:
+	
+	initial scheduling of throwing-blessed: now the reusable item is a random morphean grenade.
+	regular scheduling of throwing-blessed: compel the action of throwing the reusable item.
+	
+We can also compel reactions:
+	
+	initial scheduling of reaction-ape-killing:
+		now the health of the blood ape is 1;
+		now the reusable item is a random scroll of death.
+		
+	regular scheduling of reaction-ape-killing: compel the action of reading the reusable item as a reaction to the blood ape.
+	
+This will cause the blood ape to attack the player, and the player to read the scroll of death as a reaction.
+
+If we want to allow NPCs to act freely, we can use this phrase:
+
+	To wait for (guy - a person) to act freely:
+		
+Example:
+	
+	regular scheduling of ape-cowering: wait for the blood ape to act freely.
+	
+	testing effects of ape-cowering: if we assert result "The blood ape cowers before your dreadful presence", rule succeeds.
+
+One more useful property is the "hitting count." This is a number that is reset to 0 for every person when a test set is scheduled. It is incremented for a person whenever they try the hitting action. For example, to test whether the blood ape hit a retreating player:
+	
+	regular scheduling of ape-retreat: compel the action of retreating.
+	
+	testing effects of ape-retreat: if we assert that the hitting count of the blood ape is 1, rule succeeds.
+
+Section: Quick Controlled Attacks
+
+Sometimes we want an attack to happen, but we don't want to go through the whole turn sequence. This phrase can help:
+	
+	To do (reaction - a stored action) for/-- a (strength - a number) melee hit by (aggressor - a person):
+		
+This phrase sets several useful properties: it sets the defender's defence to 50 and the attacker's melee to the strength specified. This gives us a good degree of certainty about whether the attack will hit. (Avoiding certain influences like the Hall of Mirrors and Miranda's amulet will also help.) It also sets the defender's health to 1000, so we can be confident that the defender will survive, and we can measure the damage done. Also, if we use the "capture damage text" option before invoking the phrase, we will automatically check that the damage report is consistent with the defender's health after the attack:
+	
+	regular scheduling of concentrated-hit:
+		capture damage text;
+		now the concentration of the blood ape is 2;
+		do the action of waiting for a 100 melee hit by the blood ape.
+		
+	testing effects of concentrated-hit: if we assert result "\+ 2 \(concentration\)", rule succeeds.
+		
 Section: Handling Questions
 
 Kerkerkruip occasionally asks the player questions. If we want the player to answer a menu question instead of taking an action, we can use the "select menu question answer (N - a number)" phrase:
 
-	Choosing a player action when testing entree-selection:
+	regular scheduling of entree-selection:
 		Let m be 0;
 		repeat with entree running through banquet-items:
 			increment m;
@@ -1816,162 +2007,67 @@ Kerkerkruip occasionally asks the player questions. If we want the player to ans
 				break;
 		select menu question answer m;
 
-Section: Outcomes
+Section: Manipulating Religion
 
-Automated Testing defines a kind of value called "outcome." Outcomes help us make repeated assertions, and assertions that must be grouped together. They must be defined in the Table of Outcomes:
+Here are some phrases that help us test religious situations:
+
+	To have the player sacrifice (stuff - a power):
+		
+This handles the menu operations involved in choosing a power to sacrifice.
+
+	To block interventions:
 	
-	Table of Outcomes (continued)
-	outcome	description	likelihood	minimum attempts	maximum attempts
-	healer-healing-player	""	0	20	100
+This sets a variable such that gods will not intervene.
 
-An outcome starts out "untested," and then when it is first tested it becomes "possible." If the test is conclusive, it will become either "achieved" or "failed." We have phrases to do this, which perform the necessary assertions for us:
+	To allow interventions:
+		
+This ensures that gods will intervene as they normally do.
+
+Section: Miscellaneous Phrases
+
+	To set the tension to (N - a number):
+		
+Sets the tension, and writes a message to the transcript to record it.
+
+	To decide what number is the number we scan in (T - a text):
+		
+This can be used to parse text into numbers, and it is used when checking damage. It requires setting a variable called the "expression scan position" - if we want to parse the first number in the text, we set it to 0.
+
+	To prepare a test battle with (guy - a person), inviting groups:
+
+This transports the player and the guy to a room called Test Arena, where there are no exits and no funny room or scenery effects. The "inviting groups" option brings the guy's allied group as well. To add additional combatants, this is the safest phrase:
 	
-	test Bodmall-reaction against whether or not Bodmall is at-react;
-	test ape-cowering against "The blood ape cowers before your dreadful presence!";
+	revive another-guy in the location;
+
+If we want to get a rogue's power, or see some effects of killing it:
 	
-	achieve bat crashing into spike based on whether or not the injury of the player is at least 1;
-	achieve nested belief on result "I believe that I believe";
+	To have (guy - a person) defeat (loser - a person):
+		
+We don't even need to be in the same room for that to work.
+
+Section: Dungeon Scenarios
+
+Just as we can require objects from the Kerkerkruip Console, we can force things to be included or excluded from a test when the dungeon is generated. For this we use the "scenario" rules:
 	
-	fail healer-healing player based on whether or not the injury of the player is less than 3;
-	fail forbidden-teleport on result "Malygris suddenly teleports away";
+	Scenario for insane-drakul:
+		Now drakul's lifeblood is bannedobject;
+		Now drakul is testobject;
+		
+This will ensure that Drakul is placed in the dungeon, and when he is killed, his lifeblood will appear. "testobject" and "bannedobject" work for rooms as well as most treasures and rogues. Dreams can be given the property "current-test-dream". At this time, starting kits can't be controlled this way, but equipment and abilities can be rearranged after dungeon generation if necessary.
 
-When an outcome is tested, its likelihood is compared with its minimum and maximum attempts. Exactly how many times it is tested depends on these three numbers:
+Section: Testing Dungeon Creation
 
-In the general case, we use the "test ... against" phrase to test an outcome. It will be tested for the minimum number of attempts, and then the number of successes (times the condition was met) will be compared with a target frequency. The target frequency is calculated as (likelihood/minimum attempts). If the number of successes ever comes close enough to the target, the event will be achieved, and if the maximum number of attempts is reached without ever coming in range, it will fail.
-
-The "achieve" and "fail" phrases are for outcomes that are tested repeatedly until they happen once. In the "achieve" case, the outcome will be tested up to the maximum attempts, but in the "fail" case, testing will stop after the minimum attempts. If the given condition (either a regular expression match or a truth state) is met, the outcome will be achieved or failed depending on which phrase we invoked.
-
-We can use the standard "test...against" phrase to get the same behavior as "achieve and fail:" if the likelihood of an event is set to 0, testing it has the same effect as the "fail" phrase. If the likelihood is set to the minimum attempts, the effect is similar, but the result must be true to succeed, instead of false. If the minimum attempts is set to 0, testing the outcome has the same effect as the "achieve" phrase - that is, it will be achieved as soon as the result is true. Here are some examples:
-	
-	Table of Outcomes (continued)
-	outcome	likelihood	minimum attempts
-	nested belief	1	0
-	healer-healing-player	0	20
-	healer-not-healing-player	20	20
-	
-	achieve nested belief on result "I believe that I believe"
-	test nested belief against result "I believe that I believe" [same as above]
-	
-	fail healer-healing-player based on whether or not the injury of the player is 3;
-	test healer-healing-player against whether or not the injury of the player is less than 3; [same as above]
-	test healer-not-healing-player against whether or not the injury of the player is at least 3; [same again]
-
-In some cases the action repetition of outcomes can be handled for us. Any test step will repeat if there are outcomes currently set to "outcome-possible." There are some predefined outcomes we can use implicitly. The most common one is used this way:
-
-	Testing effects of sound-finding:
-		succeed based on whether or not maze-sound is a cardinal direction.
-
-	Testing effects of banshee-returning:
-		succeed on result "banshees suddenly break loose";
-	
-	Testing effects of imp-dreaming:
-		fail based on whether or not the imp is in the location within 20 attempts;
-
-	Testing effects of no-extra-blessed-grenade:
-		fail on result "Blessed Grenade" within 100 attempts.
-
-The "within X attempts" is optional for all four phrase styles, and manually sets the minimum or maximum attempts based on whether we are looking for success or failure.
-
-We must keep in mind that an outcome does not normally become possible until it is tested. That works fine if we test it in the "testing effects" rulebook, because that is guaranteed to run for every test step. But if our outcome depends on something that doesn't necessarily happen every turn, we may need to manually make it possible:
-	
-Initial scheduling for ape-cower-test:
-	make ape-cowering possible.
-	
-We can also repeat outcome tests outside of the normal test step loop. We use a special phrase as a while condition:
-
-	While we haven't reset combat hit:
-
-Section: Outcome dependencies
-
-Some outcomes may not be testable until certain other conditions are met. We can ensure that those conditions are met without getting stuck in an infinite loop if they don't. The way to do this is with dependencies, or as they are called with outcomes, "antecedents."
-
-	Table of Outcomes (continued)
-	outcome	antecedent
-	drakul statement	--
-	nested belief	drakul statement
-	
-Antecedents are checked automatically before recording success or failure of an outcome. If we do this:
-	
-	achieve drakul statement on result "Drakul says, '";
-	achieve nested belief on result "I believe that I believe";
-	
-Nested Belief will not be tested unless Drakul Statement has just happened. Note that Drakul Statement will have been achieved after the first pass, but it will continue to be checked as long as it has unresolved "dependents" - that is, other outcomes that have it for an antecedent. However, once its maximum attempts have been reached, all of its dependents will "time out" - whether or not they have been resolved.
-
-Section: Generation tests
-
-Outcome states and dependencies can be maintained even after a restart. This makes a convenient way to test dungeon generation. To test the state of the game after dungeon generation, use the "generation test" rulebook:
+Outcome states and dependencies are maintained even after a restart. This makes a convenient way to test dungeon generation. To test the state of the game after dungeon generation, just make sure that the test set can be tested multiple times:
 	
 	Table of Outcomes (continued)
 	outcome	likelihood	minimum attempts	maximum attempts	antecedent
-	got-addicts-amulet	2	64	256	--
+	got-addicts-amulet	2	64	256	restarting for tests
 	cursed-addicts-amulet	2	2	--	got-addicts-amulet	
 
-	Generation test when testing starting-kits-test:
-		test got-addicts-amulet against whether or not the player wears the addict's amulet;
+	Testing effects of got-addicts-amulet: if the player wears the addict's amulet, rule succeeds.
+	Testing effects of cursed-addicts-amulet: if the addict's amulet is cursed, rule succeeds.
 	
-At the time of this writing (2015-03-23), we will get stuck in an infinite loop if we add any test steps after testing an outcome in a generation test. We must limit our test sets to either test dungeon generation or turns, but not both.
+Section: Randomness
 
-Section: Combat tests
-
-Some of the most interesting and complex mechanics in Kerkerkruip involve combat, and many of them take place during the hitting action. We have some special phrases to help us tease these mechanics out:
+Automated Testing has a global variable that is used to set the random number generator, both for dungeon generation and for play. This is called the "initial test random seed." We can change this number if we want to run all the tests under a different configuration, and we should change it periodically, whenever all tests are passing.
 	
-	now the health of the player is 1000;
-	now the melee of the mindslug is 100;
-	clear event description;
-	try the mindslug hitting the player;
-	check damage of the player with 1000 health after "The mindslug deals";
-
-The "check damage" phrase extracts all the text it finds in the event description between the prefix we supply ("The mindslug deals") and the final text " damage". Then it reads all the damage comments in this text and checks that they add up to the total, and compares the total to the health of the person specified in the phrase. We supply the value of the person's health before the damage occurred, and the phrase asserts that everything is as expected. It also resets health to the number we specified so we can perform more of the same tests. It also saves the text it extracted from the event description in a variable called "the damage description," which we can test ourselves:
-	
-	assert that the damage description includes "\+ 1 \(you are running\) ";
-	assert that the damage description does not include "Giantbane's special";
-	
-We can also automate the hitting itself:
-	
-	have Fafhrd do no reaction to a 100 melee hit with result "You deal";
-
-	have fafhrd do a parry reaction to a 0 melee hit with result "Having been in contact with the scythe of oxidation, the claymore rusts";
-	
-	have the player do a parry reaction to a 0 melee hit by Fafhrd with result "The claymore shatters the gilded rapier!";
-
-	have mouser do a dodge reaction to a 100 melee hit by the player with result "you drop the gilded rapier" in 1 out of 6 attempts;
-
-	have the player do a parry reaction to a 100 melee hit by mouser with result "you drop the gilded rapier" in 0 out of 20 attempts;
-
-	have the player do no reaction to a 100 melee hit by the armadillo with result "\+ [conc-level * 25]% \(robe of the dead mage\)", checking damage;
-	
-	have the player do no reaction to a 100 melee hit by the armadillo with result "robe of the dead mage" in 0 out of 1 attempts, checking damage;
-	
-Each of these phrases performs a hit for us, setting a number of important conditions. It sets the health of the person being hit to 1000, and sets their reaction (no reaction doesn't set anything, block reaction sets them to at-block, and similarly for the parry reaction and dodge reaction). It sets the melee of the attacker to the number we specify and it sets the defence of the defender to 50, so we can be reasonably sure whether the attack will hit or not. For the result we give a text to match with the result of the hit, which will serve as our success condition.
-
-If we don't specify a number of attempts, it does just one. If we do, it sets that as the minimum attempts for an outcome called "combat hit" and repeats the attempt until it is achieved or failed.
-
-Finally, we can specify whether we're checking damage. If we're not checking damage, the result text is matched against the entire event description. But if we do, not only does the phrase invoke the "check damage" test, it also compares the result text with the damage description instead of the event description.
-
-These phrases all make sure that the final hit is successful (as long the combat hit was achieved), so we can test additional circumstances afterwards. Here's an example of how this can be useful:
-	
-	have mouser do a dodge reaction to a 100 melee hit by the player with result "you drop the gilded rapier" in 1 out of 6 attempts;
-	assert "the gilded rapier should be on the floor" based on whether or not the gilded rapier is in the location;
-
-The "X melee hit" phrase does quite a bit of cleanup after each attack, including restoring any dropped, rusted, or shattered weapons. [TODO: hooks or rulebook for this?] Using the combination of the cleanup stage and the "after success" requirement, we can test not only the frequency with which the greasy gauntlets cause the player to drop a weapon, but also what happens afterwards.
-
-Section: Other properties of test steps
-
-TODO. (There are lots more properties of test steps - look through the code to see what they do. Location-target and hiding-check are useful for getting around the dungeon, for example.)
-
-Section: Controlling text capture
-
-We've already gone over the basics of how text is captured, but sometimes we need a little bit more. Because sometimes the system needs to stop capturing and display something to the screen, the full output of the current turn is saved in a "event description." This is automatically cleared at the beginning of a turn and updated when it is likely to be needed. Recall that we may use these phrases to clear and update the captured text:
-		
-clear the event description because "starting an iteration of the foobar test"
-
-update the event description because "checking for frobnitz usage"
-
-We can also control output directly, both to the screen and to the transcript. If we want to output information to the screen, use the phrase:
-
-log (message - a text)
-
-And if we want to output something to the transcript only, use the phrase:
-
-transcribe (message - a text)
-
