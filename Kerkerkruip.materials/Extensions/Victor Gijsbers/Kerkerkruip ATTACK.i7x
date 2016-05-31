@@ -1759,7 +1759,7 @@ An aftereffects rule (this is the alternative lose concentration when hit rule):
 		unless a random chance of remain concentrated chance in 100 succeeds:
 			let the global defender lose concentration;
 		otherwise:
-			say "[The global defender] [bold type][remain] concentrated[roman type].";.
+			say "[The global defender] [bold type][remain] concentrated[roman type].";
 
 A remain concentrated rule (this is the damage penalty for remaining concentrated rule):
 	decrease remain concentrated chance by total damage.
@@ -2283,7 +2283,7 @@ Definition: a weapon is waiting to be reloaded if its current shots is 0 and its
 
 A weapon has a text called the shots text. The shots text of a weapon is usually "shots".
 A weapon has a verb called the reload verb. The reload verb of a weapon is usually the verb reload.
-A weapon has a text called the out of ammo text. The out of ammo text of a weapon is usually "You pull the trigger, but nothing happens--you're out of ammo!".
+A weapon has a text called the out-of-ammo text. The out-of-ammo text of a weapon is usually "You pull the trigger, but nothing happens--you're out of ammo!".
 
 [Maximum shots: number of rounds the weapon can be used when fully loaded. Current shots: number of shots still loaded. Maximum load time: number of rounds it takes to load the weapon. Current load time: number of rounds it still takes to load the weapon.]
 
@@ -2308,7 +2308,7 @@ After an actor hitting when the maximum shots of the global attacker weapon is g
 Check attacking (this is the cannot attack when out of ammo rule):
 	let item be a random readied weapon enclosed by the player;
 	if the maximum shots of item is greater than 0 and the current shots of item is not greater than 0:
-		say "[out of ammo text of item][paragraph break]" instead.
+		say "[out-of-ammo text of item][paragraph break]" instead.
 
 Section - Reloading
 
@@ -2653,7 +2653,7 @@ To test the spirit of (guy - a person) against (n - a number):
 	test the faculty of guy against n described as "".
 
 To test the faculty of (guy - a person) against (n - a number):
-	test the faculty of guy against n described as "":
+	test the faculty of guy against n described as "".
 
 Section - Faculty increase
 

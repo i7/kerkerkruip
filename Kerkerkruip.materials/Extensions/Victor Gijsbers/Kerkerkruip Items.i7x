@@ -401,7 +401,7 @@ Last check wearing a hat:
 		let item be a random hat worn by the player;
 		take no time;
 		say "You will first have to take off [the item]." instead;
-	[abide by the suit check rule]. 
+	[abide by the suit check rule.]
 		
 Last check wearing a shirt:
 	if the player wears a shirt:
@@ -427,7 +427,7 @@ Last check wearing shoes:
 		let item be a random shoes worn by the player;
 		take no time;
 		say "You will first have to take off [the item]." instead;
-	[abide by the suit check rule]. 
+	[abide by the suit check rule.]
 		
 Last check wearing a trousers:
 	if the player wears a trousers:
@@ -519,7 +519,7 @@ Last check taking off a suit:
 	if the player wears a cursed shield:
 		let item be a random shield worn by the player;
 		take no time;
-		say "You will first have to uncurse [the item]." instead;.
+		say "You will first have to uncurse [the item]." instead;
 
 Last check wearing a shield:
 	if the player wears a shield:
@@ -3559,7 +3559,7 @@ An aftereffects rule (this is the dagger of draining aftereffects rule):
 			-- 4:
 				decrease spirit score of the global defender by 1;
 				increase spirit score of the global attacker by 1;
-				say "[regarding the global defender][possessive] spirit score, transferring it to [the global attacker].";.
+				say "[regarding the global defender][possessive] spirit score, transferring it to [the global attacker].";
 
 An AI weapon selection rule for the dagger of draining (this is the Malygris prefers the dagger of draining rule):
 	increase the Weight by 10.
@@ -4533,14 +4533,14 @@ A faculty bonus rule (this is the ment ability bonus rule):
 	if the test subject is the player:
 		if ment timer is greater than 0:
 			increase faculty bonus score by ment bonus;
-			[say " + [ment bonus] (ment)[run paragraph on]"].
+			[say " + [ment bonus] (ment)[run paragraph on]".]
 				
 A faculty bonus rule (this is the feeling down ability penalty rule):
 	if the test subject is the player:
 		if the ment addiction is greater than 0:
 			if the ment timer is 0:
 				decrease faculty bonus score by ment addiction;
-				[say " - [ment addiction] (feeling down)[run paragraph on]"].				
+				[say " - [ment addiction] (feeling down)[run paragraph on]".]			
 				
 An attack modifier rule (this is the ment attack and defence bonus rule):
 	if the global attacker is the player:

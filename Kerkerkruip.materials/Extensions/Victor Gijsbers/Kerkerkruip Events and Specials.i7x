@@ -33,7 +33,7 @@ Instead of going in Elemental Plane of Smoke when the player can move:
 	now concentration of the player is 0;
 	repeat with item running through things in Elemental Plane of Smoke:
 		unless item is a person or item is a backdrop:
-			move item to Elemental Plane of Smoke Storage.;
+			move item to Elemental Plane of Smoke Storage;
 	let lijst be a list of things;
 	repeat with item running through things in Elemental Plane of Smoke Storage:
 		if a random chance of 1 in 20 succeeds:

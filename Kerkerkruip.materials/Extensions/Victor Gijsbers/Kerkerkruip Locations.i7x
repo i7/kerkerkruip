@@ -1403,7 +1403,7 @@ Instead of listening to the banshees:
 	say "[if the living banshees boolean is true]They screams are bloodcurdling[otherwise]No actual sound escapes from the walls[end if].".
 
 [Declaring a variable which determines whether the banshees find enough tension to break loose from the walls]
-The living banshees boolean is a truth state variable that varies. The living banshees boolean is false.
+The living banshees boolean is a truth state variable. The living banshees boolean is false.
 
 To decide which number is the bansheemod:
 	let x be the tension;

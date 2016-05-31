@@ -670,7 +670,6 @@ Carry out the ravenous armadillo armadillo-eating:
 			if way is a direction:
 				say "You hear a crunching noise [best route from location of player to location of ravenous armadillo].";
 		move item to the armadillo stomach;
-[		say "TEST CODE: eaten [item]."].
 
 
 Section - The armadillo stomach
@@ -1160,7 +1159,7 @@ Repelling power of the wisps:
 	decrease melee of the player by 1;
 	decrease defence of the player by 1;
 	decrease permanent health of the player by 6;
-	[say "The pain that didn't kill you, [bold type]made you stronger[roman type]! (Repelling the power of the wisps has given you a permanent +[wisp-strength] bonus to body, mind and spirit.)"].
+	[say "The pain that didn't kill you, [bold type]made you stronger[roman type]! (Repelling the power of the wisps has given you a permanent +[wisp-strength] bonus to body, mind and spirit.)".]
 
 A faculty bonus rule (this is the wisps faculty penalty or bonus rule):
 	if wisp-strength is not 0:
@@ -5385,7 +5384,7 @@ Starting kit setup for Malygris (this is the randomise Malygris teleporting rule
 		otherwise:
 			now teleport amount of Malygris is a random number between 4 and 20;
 			now teleport eagerness of Malygris is 6;
-		if generation info is true, say "* Teleport amount of Malyrgis set to [teleport amount of Malygris].";.
+		if generation info is true, say "* Teleport amount of Malyrgis set to [teleport amount of Malygris].";
 
 Section - Special power - Summoning the demonic assassin
 
@@ -5967,7 +5966,7 @@ An AI action selection rule for the aswang (this is the aswang considers shape s
 		increase Action Weight entry by 10;
 [		if a random chance of 1 in 30 succeeds: [and just to spice things up a bit]
 		now considered-shape is a random as-shape;
-		now Action Weight entry is a random number between 1 and 30].
+		now Action Weight entry is a random number between 1 and 30.]
 
 Carry out the aswang aswang-shifting:
 	while considered-shape is as-shape of the aswang:
