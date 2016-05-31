@@ -1133,7 +1133,7 @@ An AI action selection rule for an at-Act disarmer person (called P) (this is th
 
 To see is a verb. To manage is a verb.
 
-Carry out a person disarming:
+Carry out an actor disarming:
 	now disarm-actor is the actor;
 	let X be a random readied weapon carried by the noun;
 	now disarm-weapon is X;
@@ -1170,7 +1170,7 @@ An AI action selection rule for an at-React concentration-breaking reactor perso
 		increase Action Weight entry by cbr strength of P;
 		decrease Action Weight entry by final body of the main actor.
 
-Carry out a person concentration-breaking:
+Carry out an actor concentration-breaking:
 	say first cbr text of the actor;
 	test the body of the noun against cbr strength of the actor;
 	if test result is false:
