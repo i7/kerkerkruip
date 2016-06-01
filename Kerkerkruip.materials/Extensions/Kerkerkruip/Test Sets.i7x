@@ -1736,6 +1736,7 @@ Scenario for bug-291:
 	now the lair of the imp is bannedobject;
 	now the armadillo is bannedobject;
 	now the reaper is bannedobject;
+	now the dimensional anchor is bannedobject;
 
 initial scheduling of sleepy-throwing: extract the player to the location of the healer of aite.
 regular scheduling of sleepy-throwing:
