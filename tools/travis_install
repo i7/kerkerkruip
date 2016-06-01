@@ -4,9 +4,7 @@ set -e
 
 # This script will prepare the Travis CI environment for building Kerkerkruip
 
-sudo apt-get install -y expect-dev sshpass &
-
-wget http://inform7.com/download/content/6L38/I7_6L38_Linux_all.tar.gz &
+wget http://inform7.com/download/content/6M62/I7_6M62_Linux_all.tar.gz &
 wget https://github.com/i7/extensions/archive/master.zip &
 
 wget http://www.emshort.com/pl/payloads/Aaron%20Reed/Numbered%20Disambiguation%20Choices.i7x &
@@ -14,18 +12,16 @@ wget http://inform7.com/extensions/Jesse%20McGrew/Dynamic%20Objects/Dynamic%20Ob
 wget http://inform7.com/extensions/Michael%20Callaghan/Questions/Questions.i7x
 wait
 
-tar -xzf I7_6L38_Linux_all.tar.gz
+tar -xzf I7_6M62_Linux_all.tar.gz
 unzip -q master.zip
 wait
 
-cd inform7-6L38
-sudo ./install-inform7.sh
+cd inform7-6M62
+./install-inform7.sh --prefix ../i7
 cd ..
-sudo cp tools/i7 /usr/local/bin/
-i7 -v
+./i7/bin/i7 -v
 
 cp -R -n extensions-master/. "Kerkerkruip.materials/Extensions/"
-mkdir "Kerkerkruip.materials/Extensions/Aaron Reed/"
 cp "Numbered Disambiguation Choices.i7x" "Kerkerkruip.materials/Extensions/Aaron Reed/"
 cp "Dynamic Objects.i7x" "Kerkerkruip.materials/Extensions/Jesse McGrew/"
 cp "Questions.i7x" "Kerkerkruip.materials/Extensions/Michael Callaghan/"

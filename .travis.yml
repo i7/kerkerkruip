@@ -1,4 +1,10 @@
 language: node_js
+sudo: false
+addons:
+  apt:
+    packages:
+    - expect-dev
+    - sshpass
 install: ./tools/travis_install
 script:
     - ./tools/travis_build
