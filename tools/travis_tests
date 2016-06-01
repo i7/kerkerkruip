@@ -12,7 +12,7 @@ var fd = fs.openSync( 'noninteractivetests', 'w' );
 fs.closeSync( fd );
 
 // Use unbuffer to force line buffering (otherwise we'd get all the output in one go)
-var vm = spawn( 'unbuffer', [ '/usr/local/share/inform7/Interpreters/dumb-git', 'Kerkerkruip.gblorb' ] );
+var vm = spawn( 'unbuffer', [ './i7/share/inform7/Interpreters/dumb-git', 'Kerkerkruip.gblorb' ] );
 
 var completed = 0, testresults = 1;
 
