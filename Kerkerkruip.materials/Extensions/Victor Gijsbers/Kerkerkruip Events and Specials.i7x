@@ -526,7 +526,7 @@ To say Actually (honest - a truth state) Drakul statement:
 		otherwise:	
 			say "Two plus two is [not four]";
 	otherwise:
-		say "[one of][Actually honest recursive statement][or][Actually honest I Drakul statement][or]You are [actually honest noun predicate of player][as decreasingly likely outcomes]";
+		say "[one of][Actually honest recursive statement][or][Actually honest I Drakul statement][or]You are [actually honest noun predicate of player][as decreasingly likely outcomes]".
 	
 To say (N - a number) in sentence case:
 	if N is:
@@ -551,11 +551,11 @@ To say actually (honest - a truth state) Drakul statement:
 	say "[one of]two plus two is [if honest is true]four[otherwise][not four][end if][or][Actually honest I Drakul statement][or]you are [actually honest noun predicate of player][or][actually honest Drakul hint][at random]";
 	[TODO: add lowercase recursive lie/truth?]
 		
-To say actually (honest - a truth state) I Drakul statement:
+To say Actually (honest - a truth state) I Drakul statement:
 	if a random chance of 3 in 5 succeeds:
 		say Drakul's honest belief;
 	otherwise:
-		say "I am [actually honest noun predicate of Drakul]";
+		say "I am [actually honest noun predicate of Drakul]".
 	
 To say Drakul's (honest - a truth state) belief:
 	say "I believe that ";

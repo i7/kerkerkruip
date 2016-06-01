@@ -440,7 +440,8 @@ Check an actor challenging someone in (this is the NPCs simulate arena battle ru
 		Let the defeated be the noun;
 		if the person asked is not alive:
 			now the defeated is the person asked;
-		say "[The name of the person asked] and [the name of the noun] briefly flicker in and out of existence. When they become solid once more, [bold type][the name of the defeated] has been killed[roman type]!";
+		[For some reason, "the name of the person asked" does not compile.]	
+		say "[The person asked] and [the name of the noun] briefly flicker in and out of existence. When they become solid once more, [bold type][the name of the defeated] has been killed[roman type]!";
 	[This is a hack to record the minotaur's death if it mazes an npc. If the noun is killed, its death will be recorded as a result of the minotaur's original hit.]
 	if the person asked is dead:
 		have an event of the noun killing the person asked;

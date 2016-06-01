@@ -79,7 +79,7 @@ To load test outcomes:
 		if there is a maximum attempts entry, now the maximum attempts of the outcome entry is the maximum attempts entry;
 		[ingore maximum tolerance, it will be recalculated]
 		if there is a state entry, now the state of the outcome entry is the state entry;
-		if there is an antecedent entry, now the the antecedent of the outcome entry is the antecedent entry;
+		if there is an antecedent entry, now the antecedent of the outcome entry is the antecedent entry;
 
 Section - Statistical Help
 
@@ -1133,7 +1133,7 @@ Regular scheduling of restarting for tests:
 				now the xorshift seed is the dungeon generation seed;
 				Let throwaway result be a random number from 1 to 2;
 				transcribe "advancing random seed to [the xorshift seed]";	
-				now the the random-seed entry is the xorshift seed;
+				now the random-seed entry is the xorshift seed;
 		otherwise:
 			transcribe "saving xorshift seed [the xorshift seed]";
 			now the random-seed entry is the xorshift seed;
@@ -1421,25 +1421,25 @@ The expression scan position is a number that varies.
 
 To decide what number is digit (T - a text):
 	Let C be character number 1 in T;
-	Repeat with value running from 0 to 9:
-		if character number (value + 1) in "0123456789" is C:
-			decide on value;
+	Repeat with digit-value running from 0 to 9:
+		if character number (digit-value + 1) in "0123456789" is C:
+			decide on digit-value;
 	decide on -1;
 			
 To decide what number is the number we scan in (T - a text):
-	Let the value be 0;
+	Let scanned-value be 0;
 	Let digit-encountered be false;
 	while the expression scan position is not greater than the number of characters in T:
 		Let C be character number expression scan position in T;
 		Let the next digit be digit C;
 		if the next digit is not -1:
-			now value is (value * 10) + the next digit;
+			now scanned-value is (scanned-value * 10) + the next digit;
 			now digit-encountered is true;
 		otherwise:
 			if digit-encountered is true:
-				decide on value;
+				decide on scanned-value;
 		increment the expression scan position;
-	decide on value;	
+	decide on scanned-value;	
 	
 To decide what number is approximately (P - a number) percent of (N - a number):
 	Let the rounded-down value be (N * P) / 100;
@@ -1452,11 +1452,11 @@ To decide what number is approximately (P - a number) percent of (N - a number):
 	decide on the rounded-down value.
 	
 To decide what number is the next term in (T - a text) we apply to (N - a number):
-	Let the value be the number we scan in T;
+	Let scanned-value be the number we scan in T;
 	if character number expression scan position in T is "%":
-		now the value is approximately (the value) percent of N;
+		now scanned-value is approximately (scanned-value) percent of N;
 		increment the expression scan position;
-	decide on the value.
+	decide on scanned-value.
 	
 To decide what number is the next product in (T - a text) we apply to (N - a number):
 	Let the factor be (the number we scan in T);
@@ -1577,10 +1577,10 @@ to decide whether we assert (prefix - a text) to (guy - a person) any damage (su
 	capture whole events;
 	assert result "[prefix](\s*\d*<^\n>+) damage\s+[suffix]";
 	capture damage text;
-	now the damage description is the text matching subexpression 1;
-	Let the value be the calculated value of the damage description;
-	unless the actual damage is the value:
-		now failure report is "damage to [guy] is [actual damage], but damage description adds up to [the value]";
+	now the damage description is the text matching subexpression 1;	
+	Let damage-value be the calculated value of the damage description;
+	unless the actual damage is damage-value:
+		now failure report is "damage to [guy] is [actual damage], but damage description adds up to [damage-value]";
 		no;
 	now failure report is "";
 	yes.
@@ -1611,9 +1611,9 @@ To decide whether we assert described damage to (guy - a person) with (previous 
 	assert result "[preamble](\s*\d*<^\n>+) damage";
 	capture damage text;
 	now the damage description is the text matching subexpression 1;
-	Let the value be the calculated value of the damage description;
-	unless the actual damage is the value:
-		now failure report is "damage to [guy] is [actual damage], but damage description adds up to [the value]";
+	Let damage-value be the calculated value of the damage description;
+	unless the actual damage is damage-value:
+		now failure report is "damage to [guy] is [actual damage], but damage description adds up to [damage-value]";
 		no;
 	now failure report is "";
 	yes.

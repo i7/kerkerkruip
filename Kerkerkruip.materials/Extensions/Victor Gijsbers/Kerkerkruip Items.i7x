@@ -52,7 +52,7 @@ A treasure pack is a kind of container.
 Dungeon finish rule (this is the remove treasure packs rule):
 	repeat with item running through treasure packs:
 		if item is not off-stage:
-			let X be a random thing that contains item;
+			let X be a random object that contains item;
 			if the location of item contains item, let X be the location of item; 
 			repeat with Y running through things contained by item:
 				move Y to X;
