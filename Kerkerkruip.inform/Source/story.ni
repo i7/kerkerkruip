@@ -22,7 +22,7 @@ Section - 3rd Party Inclusions
 
 Include 6L38 Patches by Friends of I7.
 Include Basic Screen Effects by Emily Short. 
-Include Numbered Disambiguation Choices by Aaron Reed.
+Include version 7 of Numbered Disambiguation Choices by Aaron Reed.
 Include version 10/150126 of Glulx Entry Points by Emily Short.
 Include version 8/140515 of Dynamic Objects by Jesse McGrew.
 Include Questions by Michael Callaghan.
@@ -258,6 +258,12 @@ The saved question prompt is text that varies. [TODO - remove when above has bee
 Section - Numbered Disambiguation Fix
 
 [Not sure if this is necessary, but it won't do any harm!]
+[TODO: Check if this is still necessary or appropriate with version 7 of Numbered Disambiguation Choices. Note that the documentation for the extension suggests this:
+
+If you want to change this so numbers can only be used immediately after a disambiguation question is asked, add the following to your code:
+
+	Every turn: follow the Numbered Disambiguation Choices reset disambiguables rule.
+]
 
 Definition: an object (called item) is still-disambiguable if disambiguation ID of item > 0.
 
