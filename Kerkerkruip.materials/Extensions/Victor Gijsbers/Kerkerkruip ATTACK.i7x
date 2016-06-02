@@ -74,6 +74,11 @@ To say the name of (P - a person):
 	now the printing dead property is false;
 	say the P;
 	now the printing dead property is true;
+	
+To say The name of (P - a person):
+	now the printing dead property is false;
+	say The P;
+	now the printing dead property is true;
 
 To say the names of (L - a list of people):
 	now the printing dead property is false;
