@@ -922,6 +922,7 @@ The intervention rarity of Herm is 30;
 
 Before an actor hitting someone who worships Herm:
 	unless the global defender gets intervention, make no decision;
+	if the global defender encloses an unloaded readied weapon, make no decision;
 	say "[bold type]Herm[roman type] bends space and time around [the noun] and [the actor], and you suddenly find [if the noun is the player]yourself in the role of attacker[otherwise]that [the noun] is attacking [the actor] instead[end if]!";
 	try the noun hitting the actor instead.
 			
