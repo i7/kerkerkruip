@@ -918,7 +918,7 @@ Intervention possible when intervention-god is Herm:
 	unless the location of the global attacker is the location of the global defender, rule fails;
 	rule succeeds.
 
-The intervention rarity of Herm is 20;
+The intervention rarity of Herm is 30;
 
 Before an actor hitting someone who worships Herm:
 	unless the global defender gets intervention, make no decision;
