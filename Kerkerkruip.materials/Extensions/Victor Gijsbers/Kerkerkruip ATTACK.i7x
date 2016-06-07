@@ -2293,6 +2293,10 @@ A weapon has a text called the out-of-ammo text. The out-of-ammo text of a weapo
 
 [Maximum shots: number of rounds the weapon can be used when fully loaded. Current shots: number of shots still loaded. Maximum load time: number of rounds it takes to load the weapon. Current load time: number of rounds it still takes to load the weapon.]
 
+When play begins (this is the set current load time rule):
+	repeat with item running through reloadable weapons:
+		now current load time of item is maximum load time of item.
+
 [Set maximum shots to 0 for any weapon that shouldn't use these statistics. Set maximum load time to -1 in case a weapon cannot be reloaded. NEVER set maximum load time to 0 for a weapon with maximum shots not 0.]
 
 [The basic system does NOT deal with ammo. Everyone is assumed to have infinite ammunition.]
