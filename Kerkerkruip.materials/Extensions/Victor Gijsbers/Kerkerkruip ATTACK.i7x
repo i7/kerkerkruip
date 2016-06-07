@@ -2284,6 +2284,7 @@ A weapon has a number called the maximum load time. The maximum load time of a w
 A weapon has a number called the current load time. The current load time of a weapon is usually 0.
 
 Definition: a weapon is unloaded if its current shots is 0 and its maximum shots is greater than 0.
+Definition: a weapon is reloadable if its maximum shots is greater than 0.
 Definition: a weapon is waiting to be reloaded if its current shots is 0 and its maximum shots is greater than 0 and its maximum load time is greater than 0.
 
 A weapon has a text called the shots text. The shots text of a weapon is usually "shots".
@@ -2353,6 +2354,24 @@ Report an actor reloading (this is the standard report reloading rule):
 		say "[The actor] [if the maximum load time of the noun is 1][adapt reload verb of the noun][otherwise][finish] [present participle of reload verb of the noun][end if] [the noun].";
 	otherwise:
 		say "[The actor] [if the current load time of the noun plus 1 is the maximum load time of the noun][start][otherwise][continue][end if] [present participle of reload verb of the noun] [the noun].".
+		
+Section - Nounless reloading
+
+Nounless reloading is an action applying to nothing.
+
+Understand "reload" as nounless reloading.
+
+Instead of nounless reloading:
+	if the player encloses an unloaded readied weapon:
+		let item be a random unloaded readied weapon enclosed by the player;
+		try reloading item;
+	otherwise if the player encloses a readied reloadable weapon:
+		take no time;
+		let item be a random readied reloadable weapon enclosed by the player;
+		say "[The item] [are] already loaded.";
+	otherwise:
+		take no time;
+		say "You'll have to specify which weapon you want to reload.".
 
 Section - Reloading and choosing a weapon AI rules
 
