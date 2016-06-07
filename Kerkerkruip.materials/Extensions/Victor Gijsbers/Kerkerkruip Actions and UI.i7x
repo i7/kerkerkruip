@@ -1103,6 +1103,7 @@ Section - Inventory
 The print empty inventory rule is not listed in any rulebook.
 The print standard inventory rule is not listed in any rulebook.
 The readied inventory listing rule is not listed in any rulebook.
+The show ammo in inventory rule is not listed in any rulebook.
 
 Carry out taking inventory: 
 	take no time;
@@ -1124,6 +1125,16 @@ This is the full panel inventory rule:
 
 After printing the name of a readied weapon while stock-taking (this is the readied stock listing rule):
 	say " (readied)".
+	
+After printing the name of a weapon (called item) while stock-taking (this is the show ammo in stock listing rule):
+	if the maximum shots of item is not 0:
+		if the current shots of item is not 0:
+			say " ([current shots of item] of [maximum shots of item] [shots text of item] left)";
+		otherwise:
+			if the maximum load time of item is not -1:
+				say " (no [shots text of item] left; [current load time of item] round[if current load time of item is not 1]s[end if] [infinitive of reload verb of item])";
+			otherwise:
+				say " (no [shots text of item] left; cannot be [past participle of reload verb of item])".
 
 For stock-taking:
 	let m be the number of things enclosed by the player;
