@@ -2967,7 +2967,12 @@ Check feeding palimpsest:
 Carry out feeding the palimpsest:
 	now palimpsest-active is true.
 
-[Feeding result.]
+[Reading.]
+
+Check reading the palimpsest:
+	if palimpsest-active is false:
+		take no time;
+		say "The palimpsest is inactive now. You'll have to feed it before you can use it again." instead.
 		
 Carry out reading the palimpsest:
 	let item be a random palimpsestic scroll;
