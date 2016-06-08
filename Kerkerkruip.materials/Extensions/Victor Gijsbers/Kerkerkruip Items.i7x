@@ -1525,7 +1525,7 @@ The block bonus of the lion's shield is 4.
 
 The description of the lion's shield is "A lion's head has been painted on this magnificent shield. It is extremely lifelike -- so lifelike, in fact, that it will bite your enemies if you successfully block a non-projectile attack. [italic type]Block bonus: +4. Deals 2 damage on a successful block[roman type].".
 
-Aftereffects rule (this is the lion's shield rule):
+Last aftereffects rule (this is the lion's shield rule):
 	if the global attacker came too close to the lion's shield:
 		if the total damage is 0:
 			deal 2 points of physical damage;
@@ -1533,7 +1533,8 @@ Aftereffects rule (this is the lion's shield rule):
 			if total damage is 0:
 				say "The lion on the shield strikes out, biting [the global attacker]. But the lion's teeth are not sharp enough to penetrate and do damage.";
 			otherwise:
-				say "The lion on the shield strikes out, and bites [the global attacker] for [bold type][total damage] damage[roman type][if health of global attacker is less than 1], which is [bold type]lethal[roman type][end if].".
+				say "The lion on the shield strikes out, and bites [the global attacker] for [bold type][total damage] damage[roman type][if health of global attacker is less than 1], which is [bold type]lethal[roman type][end if].";
+			now total damage is 0.
 				
 [we could maybe use "damage consequences" here, but we don't want redundant concentration-losing messages]
 
