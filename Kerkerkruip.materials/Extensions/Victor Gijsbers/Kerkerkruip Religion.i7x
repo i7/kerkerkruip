@@ -415,26 +415,31 @@ Chapter - Nomos
 
 Section - Favour rules
 
+To say Nomos ensures protection and also:
+	if hit protection of the player < 1:
+		say "Nomos ensures protection from the next successful attack against you, and also";
+		increase hit protection of the player by 1;
+	otherwise:
+		say "Nomos";
+
 Favour rule for Nomos (this is the Nomos favour 1 rule):
 	if divine favour is 1:
-		say "Nomos grants you protection from the next successful attack against you, and also gifts you a gown of the red court.";
-		increase hit protection of player by 1;
+		say "[Nomos ensures protection and also] gifts you a gown of the red court.";
 		move gown of the red court to the player.
 
 Favour rule for Nomos (this is the Nomos favour 3 rule):
 	if divine favour is 3:
-		say "Nomos grants you a point of physical damage reduction, protection from the next successful attack, and an inquisitor's hood.";
-		increase hit protection of player by 1;
+		say "[Nomos ensures protection and also] grants you a point of physical damage reduction and an inquisitor's hood.";
 		move inquisitor's hood to the player.
 
 Favour rule for Nomos (this is the Nomos favour 6 rule):
 	if divine favour is 6:
-		say "Nomos grants you a total of two physical damage reduction and the Malleus Maleficarum.";
+		say "[Nomos ensures protection and also] grants you a total of two physical damage reduction and the Malleus Maleficarum.";
 		move Malleus Maleficarum to the player.
 
 Favour rule for Nomos (this is the Nomos favour 9 rule):
 	if divine favour is 9:
-		say "Nomos grants you a total of four physical damage reduction, and the Tome of Law!";
+		say "[Nomos ensures protection and also] grants you a total of four physical damage reduction, and the Tome of Law!";
 		move Tome of Law to the player.
 
 Section - Damage reduction
