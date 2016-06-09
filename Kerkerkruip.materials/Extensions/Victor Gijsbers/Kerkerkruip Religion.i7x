@@ -423,12 +423,13 @@ Favour rule for Nomos (this is the Nomos favour 1 rule):
 
 Favour rule for Nomos (this is the Nomos favour 3 rule):
 	if divine favour is 3:
-		say "Nomos grants you a point of physical damage reduction, and an inquisitor's hood.";
+		say "Nomos grants you a point of physical damage reduction, protection from the next successful attack, and an inquisitor's hood.";
+		increase hit protection of player by 1;
 		move inquisitor's hood to the player.
 
 Favour rule for Nomos (this is the Nomos favour 6 rule):
 	if divine favour is 6:
-		say "Nomos grants you a total of two physical damage reduction, and the Malleus Maleficarum.";
+		say "Nomos grants you a total of two physical damage reduction and the Malleus Maleficarum.";
 		move Malleus Maleficarum to the player.
 
 Favour rule for Nomos (this is the Nomos favour 9 rule):
@@ -591,8 +592,10 @@ Before attacklike behaviour when Nomos counter is greater than 0 (this is the No
 
 An attack modifier rule (this is the Nomos attack bonus rule):
 	if Nomos bonus is true and the global attacker is the Nomos attacker:
-		if the numbers boolean is true, say " + [nomos piety] (the law is with [the Nomos attacker])[run paragraph on]";
-		increase the attack strength by nomos piety.
+		let f be the favour of the Nomos attacker with Nomos;
+		let bonus be (f + 1) / 2;
+		if the numbers boolean is true, say " + [bonus] (the law is with [the Nomos attacker])[run paragraph on]";
+		increase the attack strength by bonus.
 
 An add specific damage rule (this is the Nomos damage bonus rule):
 	if damage-by-hitting is true:

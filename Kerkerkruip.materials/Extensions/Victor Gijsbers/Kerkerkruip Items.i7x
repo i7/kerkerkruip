@@ -759,7 +759,7 @@ Section - The inquisitor's hood (Nomos)
 
 [Gifted by Nomos.]
 
-The inquisitor's hood is a hat. The description of the inquisitor's hood is "Dedication to Nomos requires discipline and concentration. To avoid being distracted by the blows of their enemies and the screams of tortured heretics, the inquisitors wear these magical hoods. This particular one gives you a +[current hood bonus]% chance of remaining concentrated when damaged. It also increases your dreadful presence by 1. [italic type]Feeding [current blood cost of the inquisitor's hood] blood to the hood will temporarily add 10% to the chance of remaining concentrated[roman type]."
+The inquisitor's hood is a hat. The description of the inquisitor's hood is "Dedication to Nomos requires discipline and concentration. To avoid being distracted by the blows of their enemies and the screams of tortured heretics, the inquisitors wear these magical hoods. This particular one gives you a +[current hood bonus]% chance of remaining concentrated when damaged. It also allows you to maintain concentration when paying blood magic costs. [italic type]Feeding [current blood cost of the inquisitor's hood] blood to the hood will temporarily add 15% to the chance of remaining concentrated[roman type]."
 
 The blood magic cost of the inquisitor's hood is 5.
 The minimum blood timeout of the inquisitor's hood is 10.
@@ -767,15 +767,30 @@ The maximum blood timeout of the inquisitor's hood is 15.
 The blood magic maximum of the hood is 8.
 
 To decide what number is the current hood bonus:
-	Decide on 15 + (blood magic level of the inquisitor's hood * 10);
+	Decide on 20 + (blood magic level of the inquisitor's hood * 15);
 
 A remain concentrated rule (this is the inquisitor's hood concentration rule):
 	if global defender wears the inquisitor's hood:
 		increase remain concentrated chance by the current hood bonus.
 
-A dread rule (this is the inquisitor's hood dread rule):
-	if test subject wears inquisitor's hood:
-		increase dread dummy by 1.
+The standard carry out feeding rule does nothing if the player wears the hood.
+
+[TODO: roll this behavior into general damage and concentration systems]
+
+Carry out feeding when the inquisitor's hood is worn (this is the keep concentration when feeding rule):
+	let n be current blood cost of the noun;
+	decrease health of the player by n; [bypassing damage system, of course]
+	if health of the player is less than 1:
+		say "You feed [n] health to [the noun], which is more than your body can handle.";
+		end the story saying "Foolish people should not dabble in blood magic.";
+	otherwise:		
+		say "You feed [n] health to [the noun], [if the noun is blood-awakened]making it active[otherwise]increasing [their] power[end if][if concentration of the player is greater than 0] (maintaining concentration)[end if]!";
+		increase blood magic level of the noun by 1;
+		reset the blood timer of the noun;
+		increase total blood magic by n;
+		if total blood magic is greater than 49:
+			award achievement Give them blood.
+
 
 Section - Antler of the Tungausy Shaman (major)
 
@@ -1013,7 +1028,7 @@ The gown of the red court is a shirt. The gown of the red court is cloth. The de
 To decide which number is the/-- gown's current bonus:
 	decide on 1 + the blood magic level of the gown of the red court;
 
-A dread rule (this is the gown of the read court dread rule):
+A dread rule (this is the gown of the red court dread rule):
 	if test subject wears gown of the red court:
 		increase dread dummy by the gown's current bonus.
 

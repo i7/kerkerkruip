@@ -2256,13 +2256,13 @@ Check feeding:
 	if blood magic level of the noun is blood magic maximum of the noun:
 		say "[The noun] [are] satiated." instead.
 
-Carry out feeding:
+Carry out feeding (this is the standard carry out feeding rule):
 	let n be current blood cost of the noun;
 	decrease health of the player by n; [bypassing damage system, of course]
 	if health of the player is less than 1:
 		say "You feed [n] health to [the noun], which is more than your body can handle.";
 		end the story saying "Foolish people should not dabble in blood magic.";
-	otherwise:
+	otherwise:		
 		say "You feed [n] health to [the noun], [if the noun is blood-awakened]making it active[otherwise]increasing [their] power[end if][if concentration of the player is greater than 0] (and losing your concentration)[end if]!";
 		increase blood magic level of the noun by 1;
 		reset the blood timer of the noun;
