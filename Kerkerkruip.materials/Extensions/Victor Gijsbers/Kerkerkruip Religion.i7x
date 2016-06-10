@@ -415,8 +415,23 @@ Chapter - Nomos
 
 Section - Favour rules
 
-To say Nomos ensures protection and also:
-	if hit protection of the player < 1:
+[Nomos boons... protection, skill? enchantment? weapon matching?]
+
+To say Nomos reads a scroll and also:
+	Let item be a random readied weapon enclosed by the player;
+	if item is not a natural weapon and a random chance of (divine favour) in 10 succeeds:
+		[TODO: increase shield block bonus; problematic because some shields get recalculated]	
+		say "Nomos enchants [the item] for you, and also";
+		increase weapon attack bonus of item by 1;
+		increase weapon damage bonus of item by 1;
+	otherwise if item is not a natural weapon and item is not size-agnostic and the size of the item is not the size of the player and a random chance of (divine favour) in 6 succeeds:
+		[TODO: shield size?]
+		say "Nomos makes you [size of item] to match your weapon, and also";
+		now the size of the player is the size of item;
+	otherwise if the player skill bonus timer is 0 and a random chance of (divine favour) in 7 succeeds:
+		say "Nomos gives you a temporary bonus to body, mind and spirit, making you feel very skilled, and also";
+		increase the player skill bonus timer by a random number between 15 and 20;
+	otherwise if hit protection of the player < 1:
 		say "Nomos ensures protection from the next successful attack against you, and also";
 		increase hit protection of the player by 1;
 	otherwise:
@@ -424,22 +439,22 @@ To say Nomos ensures protection and also:
 
 Favour rule for Nomos (this is the Nomos favour 1 rule):
 	if divine favour is 1:
-		say "[Nomos ensures protection and also] gifts you a gown of the red court.";
+		say "[Nomos reads a scroll and also] gifts you a gown of the red court.";
 		move gown of the red court to the player.
 
 Favour rule for Nomos (this is the Nomos favour 3 rule):
 	if divine favour is 3:
-		say "[Nomos ensures protection and also] grants you a point of physical damage reduction and an inquisitor's hood.";
+		say "[Nomos reads a scroll and also] grants you a point of physical damage reduction and an inquisitor's hood.";
 		move inquisitor's hood to the player.
 
 Favour rule for Nomos (this is the Nomos favour 6 rule):
 	if divine favour is 6:
-		say "[Nomos ensures protection and also] grants you a total of two physical damage reduction and the Malleus Maleficarum.";
+		say "[Nomos reads a scroll and also] grants you a total of two physical damage reduction and the Malleus Maleficarum.";
 		move Malleus Maleficarum to the player.
 
 Favour rule for Nomos (this is the Nomos favour 9 rule):
 	if divine favour is 9:
-		say "[Nomos ensures protection and also] grants you a total of four physical damage reduction, and the Tome of Law!";
+		say "[Nomos reads a scroll and also] grants you a total of four physical damage reduction, and the Tome of Law!";
 		move Tome of Law to the player.
 
 Section - Damage reduction
@@ -598,7 +613,7 @@ Before attacklike behaviour when Nomos counter is greater than 0 (this is the No
 An attack modifier rule (this is the Nomos attack bonus rule):
 	if Nomos bonus is true and the global attacker is the Nomos attacker:
 		let f be the favour of the Nomos attacker with Nomos;
-		let bonus be (f + 1) / 2;
+		let bonus be (f + 3) / 2;
 		if the numbers boolean is true, say " + [bonus] (the law is with [the Nomos attacker])[run paragraph on]";
 		increase the attack strength by bonus.
 
