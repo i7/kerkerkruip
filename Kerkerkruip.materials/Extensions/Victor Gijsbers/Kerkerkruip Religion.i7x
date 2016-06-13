@@ -424,13 +424,13 @@ To say Nomos reads a scroll and also:
 		say "Nomos enchants [the item] for you, and also";
 		increase weapon attack bonus of item by 1;
 		increase weapon damage bonus of item by 1;
-	otherwise if item is not a natural weapon and item is not size-agnostic and the size of the item is not the size of the player and a random chance of (divine favour) in 6 succeeds:
-		[TODO: shield size?]
-		say "Nomos makes you [size of item] to match your weapon, and also";
-		now the size of the player is the size of item;
 	otherwise if the player skill bonus timer is 0 and a random chance of (divine favour) in 7 succeeds:
 		say "Nomos gives you a temporary bonus to body, mind and spirit, making you feel very skilled, and also";
 		increase the player skill bonus timer by a random number between 15 and 20;
+	otherwise if item is not a natural weapon and item is not size-agnostic and the size of the item is not the size of the player and a random chance of 2 in 3 succeeds:
+		[TODO: shield size? other alterations?]
+		say "Nomos makes you [size of item] to match your weapon, and also";
+		now the size of the player is the size of item;
 	otherwise if hit protection of the player < 1:
 		say "Nomos ensures protection from the next successful attack against you, and also";
 		increase hit protection of the player by 1;

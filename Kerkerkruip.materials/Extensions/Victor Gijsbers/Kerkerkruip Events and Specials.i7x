@@ -519,15 +519,24 @@ Section - General Say Phrases
 [Most of these phrases involve a truth state parameter, which will toggle whether they say something true or something false. The parameter is called honest for lack of a better word]
 
 To say Actually (honest - a truth state) Drakul statement:
-	if a random chance of 1 in 20 succeeds:
-		if honest is true:
-			Let N be a random number from 1 to 10;
-			say "[N in sentence case] plus [N in words] is [N + N in words]";
-		otherwise:	
-			say "Two plus two is [not four]";
+	if a random chance of 1 in 10 succeeds:
+		say "[one of][Actually honest addition statement][or][Actually honest vampire explanation][or][Actually honest sanity explanation][at random]";
 	otherwise:
 		say "[one of][Actually honest recursive statement][or][Actually honest I Drakul statement][or]You are [actually honest noun predicate of player][as decreasingly likely outcomes]".
-	
+
+To say actually (honest - a truth state) Drakul statement:
+	say "[one of][actually honest simple statement][or][Actually honest I Drakul statement][or]you are [actually honest noun predicate of player][or][actually honest Drakul hint][at random]";
+		
+To say Actually (honest - a truth state) addition statement:
+	if honest is true:
+		Let N be a random number from 1 to 10;
+		say "[N in sentence case] plus [N in words] is [N + N in words]";
+	otherwise:	
+		say "Two plus two is [not four]";
+
+To say actually (honest - a truth state) simple statement:
+	say "[one of]two plus two is [if honest is true]four[otherwise][not four][end if][or][actually honest vampire explanation][or][actually honest sanity explanation][at random]"
+
 To say (N - a number) in sentence case:
 	if N is:
 		-- 1: say "One";
@@ -544,13 +553,33 @@ To say (N - a number) in sentence case:
 		
 To say not four:
 	say "[one of]five[or][a random number from 6 to 100 in words][or][a random number from 101 to 20000 in words][at random]";
+
+To say Actually (honest - a truth state) vampire explanation:
+	if honest is true:
+		say "Where I come from, [actually true vampire explanation]";
+	otherwise:
+		say "Vampires are the most trustworthy creatures you'll ever meet".
 	
+To say actually (honest - a truth state) vampire explanation:
+	if honest is true:
+		say "vampires tell only what they believe to be lies";
+	otherwise:
+		say "vampires are the most trustworthy creatures you'll ever meet".
+
+To say Actually (honest - a truth state) sanity explanation:
+	if honest is true:
+		say "Where I come from, [actually true sanity explanation]";
+	otherwise:
+		say "Insane beings never hurt themselves or their friends".
+		
+to say actually (honest - a truth state) sanity explanation:
+	if honest is true:
+		say "insane beings believe [one of]all false[or]no true[at random] statements";
+	otherwise:
+		say "insane beings never hurt themselves or their friends".
+
 [TODO: add dungeon truth/lie statements e.g. there is a hidden room, epic artifact, monster, sarcophagus contains an undead creature, abyss of the soul is in the dungeon]
 
-To say actually (honest - a truth state) Drakul statement:
-	say "[one of]two plus two is [if honest is true]four[otherwise][not four][end if][or][Actually honest I Drakul statement][or]you are [actually honest noun predicate of player][or][actually honest Drakul hint][at random]";
-	[TODO: add lowercase recursive lie/truth?]
-		
 To say Actually (honest - a truth state) I Drakul statement:
 	if a random chance of 3 in 5 succeeds:
 		say Drakul's honest belief;
@@ -666,6 +695,8 @@ To say actually (honest - a truth state) compound identity of (guy - a person):
 		now second honesty is true;
 	say "a[if first honesty is whether or not guy is insane]n in[otherwise] [end if]sane [actually second honesty vampiric identity of guy]";
 
+			
+	
 Section - Drakul Hints
 
 Drakul's plans revealed is a truth state that varies.

@@ -1032,10 +1032,10 @@ A dread rule (this is the gown of the red court dread rule):
 	if test subject wears gown of the red court:
 		increase dread dummy by the gown's current bonus.
 
-The blood magic cost of the gown of the red court is 4.
+The blood magic cost of the gown of the red court is 2.
 The blood magic maximum of the gown of the red court is 5.
-The minimum blood timeout of the gown of the red court is 2.
-The maximum blood timeout of the gown of the red court is 8.
+The minimum blood timeout of the gown of the red court is 4.
+The maximum blood timeout of the gown of the red court is 10.
 
 
 Section - Armour of thorns (major)
