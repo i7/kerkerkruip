@@ -899,6 +899,8 @@ Last starting kit setup when selecting addict-kit (this is the cursed amulet sta
 	
 The cursed amulet stays cursed rule is listed after the player starting kit rule in the starting kit setup rules.
 
+
+
 Chapter - The end
 
 Section - Death message
@@ -959,9 +961,6 @@ To do the level 10 victory with (guy - a person):
 
 Section - What happens after the obituary
 
-First after printing the player's obituary (this is the reset prompt for death or victory rule):
-	now the command prompt is the peaceful prompt.
-
 After printing the player's obituary (this is the update the difficulty rule):
 	if the player is victorious:
 		increase the total victories by 1, table only;
@@ -975,25 +974,11 @@ After printing the player's obituary (this is the update the difficulty rule):
 			decrease difficulty by 1;
 	set current difficulty to difficulty;
 
+Last after printing the player's obituary rule (this is the press any key to restart rule):
+	say "[paragraph break]Please any to return to the main menu.";
+	wait for any key;
+	follow the immediately restart the VM rule;
 
-
-Section - The final question
-
-[First stuff to get around an Inform 7 bug.]
-Table of Literal Topics
-text	topic
-"new"	"new"
-
-When play begins: 
-	choose row with a final response rule of immediately restore saved game rule in the Table of Final Question Options; 
-	blank out the whole row;
-	choose row with a final response rule of immediately undo rule in the Table of Final Question Options; 
-	blank out the whole row;
-	choose a row with a text of "new" in the Table of Literal Topics;
-	let new be the topic entry;	
-	choose row with a final response rule of immediately restart the VM rule in the Table of Final Question Options;
-	now topic entry is new;
-	now final question wording entry is "start a NEW game";
 
 
 Section - Quitting
