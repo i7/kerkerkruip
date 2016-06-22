@@ -348,11 +348,9 @@ Menu command seed:
 		let T be "[the player's command]";
 		if T is "":
 			redraw the menu;
-		if number of characters in T is 8 or number of characters in T is 12:
+		if number of characters in T is 8:
 			if T exactly matches the regular expression "<0-9a-fA-F>+":
 				process the seed for T;
-				if number of characters in T is 12:
-					process the seed check for T;
 				break;
 		say "That is not a valid dungeon seed. Please try again, or press Enter to return to the menu.[paragraph break]";
 	say "[paragraph break]Please enter a difficulty level, or press Enter to use your current level.[paragraph break]";
@@ -372,7 +370,6 @@ Menu command seed:
 
 To request a seed: (- seed_request(); -).
 To process the seed for (T - a text): (- seed_process( {T} ); -).
-To process the seed check for (T - a text): (- seed_process_check( {T} ); -).
 To process the level for (T - a text): (- level_process( {T} ); -).
 
 Include (-
@@ -415,32 +412,6 @@ Array seed_esc_terminator -> 1;
 		}
 	}
 	(+ the dungeon generation seed +) = progress;
-	! Clean up
-	TEXT_TY_Untransmute( txt, p1, cp1 );
-];
-
-[ seed_process_check txt p1 cp1 i ch progress;
-	! Transmute the text
-	cp1 = txt-->0;
-	p1 = TEXT_TY_Temporarily_Transmute( txt );
-	for ( i = 8 : i < 12 : i++ )
-	{
-		! Decode the hex characters
-		ch = BlkValueRead( txt, i );
-		if ( ch >= '0' && ch <= '9' )
-		{
-			progress = progress * 16 + ch - '0';
-		}
-		else if ( ch >= 'A' && ch <= 'F' )
-		{
-			progress = progress * 16 + ch - 55;
-		}
-		else if ( ch >= 'a' && ch <= 'f' )
-		{
-			progress = progress * 16 + ch - 87;
-		}
-	}
-	(+ the dungeon generation check +) = progress;
 	! Clean up
 	TEXT_TY_Untransmute( txt, p1, cp1 );
 ];

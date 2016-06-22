@@ -1074,7 +1074,7 @@ First after showing the title screen (this is the run all tests rule):
 The scenario rules are an outcome based rulebook.
 	
 this is the keep using the xorshift generator for automated tests rule:
-	say "[banner text]Dungeon seed: [dungeon generation seed in hexadecimal to 8 places][xorshift seed in hexadecimal to 4 places][line break]";
+	say "[banner text]Dungeon seed: [dungeon generation seed in hexadecimal][line break]";
 
 The keep using the xorshift generator for automated tests rule substitutes for the show the banner with dungeon generation seed rule when done testing is false.
 

@@ -6,10 +6,9 @@ Use authorial modesty.
 
 Book - The dungeon generation seed
 
-[ We use an xorshift generator to produce all random numbers during the dungeon generation process. The dungeon seed is the initial xorshift seed in hexadecimal, and optionally the lower half of the final xorshift seed at the end of the process, which is used to check if the dungeon was correctly generated. So a valid seed will be either 8 or 12 digits long. If we are careful it should be possible to use seeds across minor updates, but not major ones. ]
+[ We use an xorshift generator to produce all random numbers during the dungeon generation process. The dungeon seed is the initial xorshift seed in hexadecimal, 8 digits long. It might be possible to use seeds across minor updates, but we do not recommend it. ]
 
 The dungeon generation seed is a number variable.
-The dungeon generation check is a number variable. 
 
 After showing the title screen (this is the seed the xorshift generator rule):
 	[ Seed the xorshift generator ]
@@ -21,13 +20,11 @@ After showing the title screen (this is the seed the xorshift generator rule):
 
 The show the banner with dungeon generation seed rule is listed instead of the display banner rule in the startup rules.
 A startup rule (this is the show the banner with dungeon generation seed rule):
-	say "[banner text]Dungeon seed: [dungeon generation seed in hexadecimal to 8 places][xorshift seed in hexadecimal to 4 places][line break]";
-	if the dungeon generation check is not 0 and the dungeon generation check failed:
-		say "[line break][bold type]Warning:[roman type] The dungeon that has been generated does not match the dungeon seed you entered. Check if the seed you entered is for a different version of [Kerkerkruip].";
+	say "[banner text]Dungeon seed: [dungeon generation seed in hexadecimal][line break]";
 	now the xorshift seed is 0;
 
-To say (value - a number) in hexadecimal to (digits - a number) places:
-	(- say_hex( {value}, {digits} ); -).
+To say (value - a number) in hexadecimal:
+	(- say_hex( {value}, 8 ); -).
 
 Include (-
 [ say_hex value digits i temp;
@@ -46,9 +43,6 @@ Include (-
 	}
 ];
 -).
-
-To decide if the dungeon generation check failed:
-	(- ( xorshift_seed & $FFFF ~= (+ dungeon generation check +) ) -).
 
 
 
