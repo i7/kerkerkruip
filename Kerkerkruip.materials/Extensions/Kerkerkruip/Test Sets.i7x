@@ -640,6 +640,7 @@ hood-gift-in-combat	1	1	--
 unfed-hood-description	1	1	--
 unfed-hood-power	1	1	--
 concentrated-hood-feeding	1	1	--
+still-concentrated-with-hood	1	1	--
 fed-hood-description	1	1	--
 fed-hood-power	1	1	--
 
@@ -681,21 +682,23 @@ regular scheduling of an outcome (called event):
 	if event is unfed-hood-description or event is fed-hood-description:
 		try examining the inquisitor's hood.
 		
-testing effects of unfed-hood-description: if we assert result "This particular one gives you a \+15% chance of remaining concentrated when damaged\. It also increases your dreadful presence by 1\. Feeding 5 blood to the hood will temporarily add 10% to the chance of remaining concentrated", rule succeeds.
+testing effects of unfed-hood-description: if we assert result "This particular one gives you a \+20% chance of remaining concentrated when damaged\. It also allows you to maintain concentration when paying blood magic costs\. Feeding 5 blood to the hood will temporarily add 15% to the chance of remaining concentrated", rule succeeds.
 
 regular scheduling of unfed-hood-power:
 	now tnbm-number is the chance of the player remaining concentrated;
 	equip the player with the inquisitor's hood.
 	
-testing effects of unfed-hood-power: if we assert that (the chance of the player remaining concentrated - tnbm-number) is 15, rule succeeds.
+testing effects of unfed-hood-power: if we assert that (the chance of the player remaining concentrated - tnbm-number) is 20, rule succeeds.
 
 initial scheduling of concentrated-hood-feeding: try concentrating.
 regular scheduling of concentrated-hood-feeding: try feeding the inquisitor's hood.
-testing effects of concentrated-hood-feeding: if we assert result "You feed 5 health to the inquisitor's hood, increasing its power \(and losing your concentration\)!", rule succeeds.
+testing effects of concentrated-hood-feeding: if we assert result "You feed 5 health to the inquisitor's hood, increasing its power \(maintaining concentration\)!", rule succeeds.
 
-testing effects of fed-hood-description: if we assert result "This particular one gives you a \+25% chance of remaining concentrated when damaged\. It also increases your dreadful presence by 1\. Feeding 10 blood to the hood will temporarily add 10% to the chance of remaining concentrated", rule succeeds.
+testing effects of still-concentrated-with-hood: if we assert that the concentration of the player is 1 with label "player's concentration", rule succeeds.
 
-testing effects of fed-hood-power: if we assert that (the chance of the player remaining concentrated - the tnbm-number) is 25 with label "concentration bonus of the inquisitor's hood after one feeding", rule succeeds.
+testing effects of fed-hood-description: if we assert result "This particular one gives you a \+35% chance of remaining concentrated when damaged\. It also allows you to maintain concentration when paying blood magic costs\. Feeding 10 blood to the hood will temporarily add 15% to the chance of remaining concentrated", rule succeeds.
+
+testing effects of fed-hood-power: if we assert that (the chance of the player remaining concentrated - the tnbm-number) is 35 with label "concentration bonus of the inquisitor's hood after one feeding", rule succeeds.
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts
@@ -713,7 +716,7 @@ initial scheduling of unworn-fed-gown:
 testing effects of unworn-fed-gown: if we assert that tnbm-number is between 2 and 10, rule succeeds.
 	
 regular scheduling of fed-gown-description: try examining the gown of the red court.
-testing effects of fed-gown-description: if we assert result "Wearing the gown gives you two levels of dreadful presence. You can feed the gown 8 blood", rule succeeds.
+testing effects of fed-gown-description: if we assert result "Wearing the gown gives you two levels of dreadful presence. You can feed the gown 4 blood", rule succeeds.
 
 testing effects of dreadless-unworn-gown: if we assert that the dreadful presence of the player is 0, rule succeeds.
 
@@ -806,7 +809,7 @@ testing effects of malleus-bonus-attacking:
 	assert result "You plan on turning human, but find yourself attacking the swarm of daggers instead";
 	assert that the hitting count of the player is 1 with label "player's hitting count (bug #281)";
 	assert that the blood magic level of malleus maleficarum is 0 with label "malleus blood magic level";
-	assert result " \+ 1 \(Malleus Maleficarum blood\) \+ 3 \(the law is with you\) = <0-9>+, you beat the swarm of daggers[']s defence rating";
+	assert result " \+ 1 \(Malleus Maleficarum blood\) \+ 4 \(the law is with you\) = <0-9>+, you beat the swarm of daggers[']s defence rating";
 	assert result " \+ 1 \(Malleus Maleficarum blood bonus\) \+ 3 \(the law is with you\) = <0-9>+ damage";
 	
 [Test for bug #337]
