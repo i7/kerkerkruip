@@ -12,7 +12,7 @@ The story headline is "An IF roguelike".
 The story genre is "dungeon crawl".
 The release number is 10.
 The story description is "Kerkerkruip is a short-form roguelike in the interactive fiction medium, featuring meaningful tactical and strategic depth, innovative game play, zero grinding, and a sword & sorcery setting that does not rehash tired clichés."
-[Release along with cover art and a file of "Gargoyle config file" called "Kerkerkruip.ini".] [bug #1413]
+Release along with cover art and a file of "Gargoyle config file" called "Kerkerkruip.ini".
 
 Section - 3rd Party Inclusions
 
@@ -20,7 +20,6 @@ Section - 3rd Party Inclusions
 
 [Include version 1/131215 of Alternative Startup Rules by Dannii Willis.]
 
-Include 6L38 Patches by Friends of I7.
 Include Basic Screen Effects by Emily Short. 
 Include version 7 of Numbered Disambiguation Choices by Aaron Reed.
 Include version 10/150126 of Glulx Entry Points by Emily Short.
@@ -44,7 +43,8 @@ Use no status line.
 
 [ Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. It is not necessary to comment out Flexible Windows when Glimmr is commented in. ]
 
-Include version 15/150128 of Flexible Windows by Jon Ingold.
+Include version 15/160609 of Flexible Windows by Jon Ingold.
+Include Hyperlinks by Kerkerkruip.
 
 [Include Kerkerkruip Glimmr Additions by Erik Temple.]
 

@@ -205,7 +205,7 @@ Figure opening figure is the file "smallercover.jpg".
 Showing the text title screen is a truth state variable.
 
 Rule for showing the title screen (this is the text title screen rule):
-	shut down the status window; [in case we've come to the menu with it open]
+	close the status window; [in case we've come to the menu with it open]
 	display the text menu;
 	play the theme music;
 	while 1 is 1:

@@ -167,7 +167,7 @@ This is the show the console rule:
 	write File of Test Objects from Table of Requested Test Objects;
 	now the early in turn sequence flag is false;
 	now the test object console is false;
-	shut down the status window;
+	close the status window;
 
 [ Unfortunately these variables are set in the Generate Action Rule. Not to worry, we can set them ourselves! ]
 To set the parser variables manually:

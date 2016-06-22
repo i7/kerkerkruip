@@ -98,7 +98,7 @@ After constructing the stats window:
 	place border border-5-window;
 
 After deconstructing the stats window:
-	shut down border-1-window;
+	close border-1-window;
 
 [ The powers window ]
 
@@ -123,7 +123,7 @@ After constructing the powers window:
 	place border border-6-window;
 
 After deconstructing the powers window:
-	shut down border-2-window;
+	close border-2-window;
 
 [ The status window ]
 
@@ -156,9 +156,9 @@ After constructing the status window:
 	place border border-7-window;
 
 After deconstructing the status window:
-	shut down border-7-window;
-	shut down border-12-window;
-	shut down border-13-window;
+	close border-7-window;
+	close border-12-window;
+	close border-13-window;
 
 [ The inventory window ]
 
@@ -386,14 +386,14 @@ Check disabling the information panels:
 
 Carry out enabling the information panels:
 	enable the window panels flag;
-	shut down the status window;
+	close the status window;
 	open side windows;
 	open up the status window;
 	say "The information panels have been enabled. Type PANELS to disable them again." instead;
 
 Carry out disabling the information panels:
 	disable the window panels flag;
-	shut down the status window;
+	close the status window;
 	close side windows;
 	open up the status window;
 	say "The information panels have been disabled. Type PANELS to re-enable them." instead;
@@ -410,8 +410,8 @@ To open side windows:
 	open up the inventory-window;
 	
 To close side windows:
-	shut down the stats window;
-	shut down the inventory-window;
+	close the stats window;
+	close the inventory-window;
 	
 
 Section - Events
@@ -443,7 +443,7 @@ First before displaying (this is the fix our windows rule before displaying rule
 	open up the status window;
 
 Last after displaying:
-	shut down the status window;
+	close the status window;
 	if in-game menu-checking:
 		open side windows;
 		open up the status window;
@@ -452,7 +452,7 @@ Last after displaying:
 
 [We also need to reset the windows when a game is restored.]
 After restoring from a saved game:
-	shut down the status window;
+	close the status window;
 	close side windows;
 	follow the check info panel capacity rule.
 
