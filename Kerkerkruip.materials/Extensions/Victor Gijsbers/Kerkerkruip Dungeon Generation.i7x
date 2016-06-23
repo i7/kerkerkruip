@@ -954,7 +954,7 @@ The dungeon interest rules are a rulebook.
 To make the dungeon interesting:
 	follow the dungeon interest rules.
 
-Book - Finising the dungeon
+Book - Finishing the dungeon
 
 The dungeon finish rules are a rulebook.
 
