@@ -152,7 +152,7 @@ When play begins (this is the set up natural weapons rule):
 			
 A last reviving rule for a person (called guy) (this is the re-equip when reviving rule):
 	Repeat with item running through things had by guy:
-		remove item from play;
+		unless the original owner of item is guy, remove item from play;
 	set up a kit for guy.
 	
 Chapter - Level 1 - Swarm of Daggers

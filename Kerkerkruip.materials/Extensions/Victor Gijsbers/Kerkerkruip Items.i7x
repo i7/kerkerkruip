@@ -4872,9 +4872,12 @@ When play begins (this is the set original owner to container rule):
 			
 The set original owner to container rule is listed before the place treasures rule in the dungeon generation rules.
 
-First starting kit setup rule for a person (called guy) (this is the note ownership rule):
-	Repeat with item running through things had by guy:
-		now the original owner of item is guy;
+When play begins (this is the note everyone's possessions rule):
+	Repeat with guy running through people:
+		Repeat with item running through things had by guy:
+			now the original owner of item is guy;
+			
+The note everyone's possessions rule is listed before the place treasures rule in the dungeon generation rules.
 		
 Last starting kit setup rule for a person (called guy) (this is the restore ownership rule):
 	Repeat with item running through things owned by guy:

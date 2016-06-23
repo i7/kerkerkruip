@@ -2819,6 +2819,8 @@ Initial scheduling of radiance-reduction:
 regular scheduling of radiance-reduction: compel the action of waiting as a reaction to the angel of compassion.
 	
 Testing effects of radiance-reduction:
+	assert that a random readied weapon enclosed by the angel of compassion is the sword of light with label "Angel of Compassion's weapon";
+	assert that the location of the sword of light is the location of the angel of compassion with label "location of the sword of light";
 	check damage of the player with 1000 health after "deals";
 	assert result "\+ 4 \(sword of light radiance bonus\)";
 	if we assert result "- 2 \(fuligin cloak\)", rule succeeds.
