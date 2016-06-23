@@ -32,8 +32,9 @@ First resetting the map rule (this is the remove rarity from testobjects rule):
 		now rarity of item is 0;
 		now item is basic;
 	repeat with item running through testobject things:
-		now rarity of item is 0;
-		now item is basic;
+		if item is not a starting kit:
+			now rarity of item is 0;
+			now item is basic;
 
 A placement possible rule (this is the don't place banned rooms rule):
 	if considered room is bannedobject:
@@ -70,7 +71,8 @@ First treasure placement rule (this is the remove bannedobject treasures rule):
 
 Last treasure placement rule (this is the place non-person testobjects rule):
 	if generation info is true, print generation message "    Placing testobjects...";
-	now all off-stage testobject things are in the Entrance Hall;
+	Repeat with item running through off-stage testobject things:
+		if item is not a starting kit, now item is in the Entrance Hall;
 
 First dungeon interest rule (this is the ban extra scenery rule):
 	Now every bannedobject thing is not extra.

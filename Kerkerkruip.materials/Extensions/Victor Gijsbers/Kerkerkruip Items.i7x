@@ -1546,6 +1546,7 @@ Last aftereffects rule (this is the lion's shield rule):
 			deal 2 points of physical damage;
 			have lion's shield inflict damage on global attacker, silently;
 			if total damage is 0:
+				[rust can cause this, but it's hard to understand why from the text... write some tests for this?]
 				say "The lion on the shield strikes out, biting [the global attacker]. But the lion's teeth are not sharp enough to penetrate and do damage.";
 			otherwise:
 				say "The lion on the shield strikes out, and bites [the global attacker] for [bold type][total damage] damage[roman type][if health of global attacker is less than 1], which is [bold type]lethal[roman type][end if].";

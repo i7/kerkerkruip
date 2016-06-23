@@ -1510,11 +1510,14 @@ Section - To Extract From Combat
 Last chance to hit is a truth state that varies.
 
 To extract (guy - a person) from combat, giving enemies a chance to hit:
-	if the guy is off-stage, stop;
-	if giving enemies a chance to hit and the guy is not hidden:
-		now last chance to hit is true;
-	follow the sudden combat reset rules for guy;
-	now last chance to hit is false;
+	if the guy is off-stage:
+		[This makes sure people introduced for the first time get their starting kits]
+		follow the reviving rules for guy;
+	otherwise:
+		if giving enemies a chance to hit and the guy is not hidden:
+			now last chance to hit is true;
+		follow the sudden combat reset rules for guy;
+		now last chance to hit is false;
 
 Section - The Sudden Combat Reset Rules
 

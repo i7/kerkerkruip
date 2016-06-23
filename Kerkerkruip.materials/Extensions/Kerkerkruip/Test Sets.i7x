@@ -2288,6 +2288,7 @@ fragmentation damage text	1	1	--
 
 Scenario for damage-text:
 	now Vast Staircase is testobject;
+	now slaying-kit is testobject;
 
 Initial scheduling of basic attack damage text:
 	prepare a test battle with the reaper;
@@ -2295,7 +2296,9 @@ Initial scheduling of basic attack damage text:
 	set the tension to 0;
 	
 Regular scheduling of basic attack damage text: do the action of the reaper dodging a 100 melee hit by the player.
-Testing effects of basic attack damage text: if we assert result "(\n|^)You deal <1-9><0-9>* damage", rule succeeds.
+Testing effects of basic attack damage text:
+	assert that a random readied weapon enclosed by the Reaper is the scythe of slaying with label "Reaper's weapon";
+	if we assert result "(\n|^)You deal <1-9><0-9>* damage", rule succeeds.
 
 Regular scheduling of tense attack damage text:
 	set the tension to 3;
