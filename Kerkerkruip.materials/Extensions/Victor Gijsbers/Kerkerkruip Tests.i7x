@@ -74,7 +74,18 @@ Last treasure placement rule (this is the place non-person testobjects rule):
 
 First dungeon interest rule (this is the ban extra scenery rule):
 	Now every bannedobject thing is not extra.
-		
+
+Starting kit placement possible rule (this is the starting kit testobject rule):
+	if the considered starting kit is testobject:
+		rule succeeds;
+	otherwise:
+		repeat with alternate running through starting kits:
+			if alternate is testobject and the recipient of alternate is the considered kit recipient:
+				rule fails.
+	
+Starting kit placement possible rule (this is the starting kit bannedobject rule):
+	if the considered starting kit is bannedobject, rule fails;
+	
 Section - The test object file
 
 The File of Test Objects is called "KerkerkruipTestObjects".

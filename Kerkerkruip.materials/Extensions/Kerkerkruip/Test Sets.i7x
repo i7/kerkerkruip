@@ -3207,9 +3207,12 @@ regular scheduling of automatos-stab:
 	
 testing effects of automatos-stab: if we assert result "The dagger has struck deep between plates of steel and dislodged something inside Automatos. The behemoth staggers backwards and shakes its head several times. Some small, almost delicate mechanical parts fall out of its ", rule succeeds.
 	
-Section - Outcome Behavior
+[
 
-[meta tests]
+
+[These are meta tests, created to make sure that the test framework is working. If there seems to be a problem with the test framework, uncomment this section and check that the tests behave as described.]
+
+Section - Outcome Behavior
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	maximum attempts	antecedent
@@ -3264,6 +3267,8 @@ Testing effects of wait-a-turn:
 
 Regular scheduling of jump-a-turn: compel the action of jumping.
 Testing effects of jump-a-turn: if we assert result "You jump", rule succeeds.
+
+]
 
 Chapter - Simple Tests
 

@@ -506,7 +506,7 @@ Random-Seed (number)	Unresolved Count (number)
 0	0
 with 1 blank row
 
-To decide what number is the initial test random seed: decide on 69.
+To decide what number is the initial test random seed: decide on 70.
 
 To queue (T - an outcome):
 	make T testable;

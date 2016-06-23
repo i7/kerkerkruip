@@ -4792,12 +4792,16 @@ Carry out reading Tome of Briar Roses:
 
 Chapter - Starting kits
 
+Section - Who needs kits
+
 Definition: a person is encounterable if it is denizen or the level of it is 0.
 
 A dungeon interest rule (this is the equip all encounterable creatures rule):
 	Repeat with guy running through encounterable people:
 		set up a kit for guy;
 		
+Section - Kit definition
+
 A starting kit is a kind of container. A starting kit has a person called the recipient. The recipient of a starting kit is usually yourself.
 
 A person has an object called the selected kit.
@@ -4812,27 +4816,47 @@ To decide whether selecting (item - a starting kit):
 
 [The verb to be equipped by means the selected kit property;]
 
-The starting kit setup rules are an object based rulebook. [on starting kits]
+Section - Starting Kit Placement Possible Rules
 
-A starting kit can be available.
-		
-To decide whether (item - a starting kit) is available to (guy - a person):
-	unless the recipient of item is the guy, no;
-	if basic game mode is true and item is advanced, no;
-	if item is too rare, no;
-	yes.
+The starting kit placement possible rules are a rulebook.
+
+The considered kit recipient is a person that varies.
+The considered starting kit is a starting kit that varies.
 	
-To set up a kit for (guy - a person):
-	repeat with item running through starting kits:
-		if item is available to guy, now item is available;
-		otherwise now item is not available;
-	Now the selected kit of guy is a random available starting kit;
-	Follow the starting kit setup rules for the guy;
+First starting kit placement possible rule (this is the only assign kits to the recipient rule):
+	unless the recipient of considered starting kit is the considered kit recipient, rule fails;
+	
+A starting kit placement possible rule (this is the limit kits in basic game mode rule):
+	if basic game mode is true and considered starting kit is advanced, rule fails;
+	
+A starting kit placement possible rule (this is the control kit rarity rule):
+	if considered starting kit is too rare, rule fails;
+	
+Last starting kit placement possible rule:
+	Rule succeeds.
+	
+Section - Starting Kit Setup Rules
+
+The starting kit setup rules are an object based rulebook. [on starting kits]
 
 Starting kit setup rule for a person (called guy) (this is the unpack starting kit rule):
 	if the selected kit of guy is a starting kit:
 		equip the guy with the selected kit of the guy;
 		
+Section - Setting up a Kit
+
+A starting kit can be available.
+	
+To set up a kit for (guy - a person):
+	now considered kit recipient is the guy;
+	repeat with item running through starting kits:
+		now considered starting kit is the item;
+		now item is not available;
+		Follow the starting kit placement possible rules;
+		If rule succeeded, now item is available;
+	Now the selected kit of guy is a random available starting kit;
+	Follow the starting kit setup rules for the guy;
+
 Chapter - Returning Items to their Owners
 
 A thing has an object called the original owner. [Set the original owner of a starting kit to assign that kit to a person]
