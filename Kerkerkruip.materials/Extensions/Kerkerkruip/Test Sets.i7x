@@ -1851,9 +1851,12 @@ armadillo-wandering	1	1	--	restarting for tests
 armadillo-can-move	1	1	--	--
 armadillo-moved	1	0	200	--
 
-Scenario for armadillo-wandering: now the ravenous armadillo is testobject.
+Scenario for armadillo-wandering:
+	now the ravenous armadillo is testobject.
 
 Armadillo-origin is a room that varies.
+
+Initial scheduling of armadillo-wandering: Now the armadillo is not asleep.
 
 Testing effects of armadillo-wandering: if the ravenous armadillo is acting independently, rule succeeds.
 Testing effects of armadillo-can-move: if the ravenous armadillo can move, rule succeeds.
