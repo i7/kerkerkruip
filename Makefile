@@ -67,7 +67,4 @@ endif
 
 # Deploy a zip to the Kerkerkruip downloads server
 deploy: Kerkerkruip.zip
-	cp Kerkerkruip.zip kerkerkruip-git.zip
-#	sshpass -e \
-#		echo "cat cd downloads.kerkerkruip.org\n put kerkerkruip-git.zip\n bye" | \
-#		sftp -oBatchMode=no -oStrictHostKeyChecking=no -b - ${KUSER}@${KSERVER}
+	lftp -c "open -u ${KUSER},dummy sftp://${KSERVER}; put Kerkerkruip.zip -o downloads.kerkerkruip.org/kerkerkruip-git.zip"
