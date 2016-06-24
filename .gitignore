@@ -11,6 +11,7 @@
 *Release
 *Reserved
 *.rtf
+*Settings.plist
 *.skein
 *.tiff
 *.zip
