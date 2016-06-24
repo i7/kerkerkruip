@@ -3,6 +3,7 @@
 *.blurb
 *Build
 *.DS_Store
+*.gblorb
 *.glk*
 *.iFiction
 *Index
@@ -14,3 +15,4 @@
 *.tiff
 i7
 Inform
+KerkerkruipS*
