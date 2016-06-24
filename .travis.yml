@@ -1,13 +1,21 @@
+notifications:
+  email: false
 language: node_js
 sudo: false
 addons:
   apt:
     packages:
-    - expect-dev
-    - sshpass
-install: ./tools/travis_install
+      - expect-dev
+      - sshpass
+cache:
+  directories:
+    - i7
+    #- Inform
+install:
+  - make setup
 script:
-    - ./tools/travis_build
-    - ./tools/travis_tests
-notifications:
-    email: false
+  - make Kerkerkruip.gblorb
+  - if [[ $TRAVIS_REPO_SLUG == i7/kerkerkruip ]] &&
+       [[ $TRAVIS_BRANCH == master ]] &&
+       [[ $TRAVIS_PULL_REQUEST == false ]]; then make deploy; fi
+  - ./tools/travis_tests

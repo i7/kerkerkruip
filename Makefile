@@ -16,16 +16,17 @@ SHELL = /bin/bash -o pipefail
 CURL = curl -L -s -S
 
 # Mark which rules are not actually generating files
-.PHONY: all clean setup
+.PHONY: all clean deploy setup
 
 all: setup
 
 clean:
-	$(RM) %.gblorb
+	$(RM) %.gblorb *.zip
 	$(RM) -r i7 Inform
 
 # Setup the Inform 7 environment we need
-setup: i7 Inform/Extensions
+INFORM_ENV = i7 Inform/Extensions
+setup: $(INFORM_ENV)
 
 # Download and install Inform 7
 i7:
@@ -53,8 +54,20 @@ else
     INFORM6_OPTS = -E2w~S~DG
 endif
 
-%.gblorb: setup
+%.gblorb: $(INFORM_ENV)
 	export HOME=$(BASE); ./i7/libexec/ni --format=ulx --internal ./i7/share/inform7/Internal --noprogress --project "$*.inform" $(NI_OPTS) | grep -Ev "ve also read"
 	./i7/libexec/inform6 $(INFORM6_OPTS) "$*.inform/Build/auto.inf" -o "$*.inform/Build/output.ulx"
 	./i7/libexec/cBlorb -unix "$*.inform/Release.blurb" "$*.materials/Release/$@"
 	cp "$*.materials/Release/$@" "$@"
+
+# Prepare a zip for distribution
+%.zip: %.gblorb
+	cd "$*.materials/Release/" && zip "$@" *
+	mv "$*.materials/Release/$@" .
+
+# Deploy a zip to the Kerkerkruip downloads server
+deploy: Kerkerkruip.zip
+	cp Kerkerkruip.zip kerkerkruip-git.zip
+#	sshpass -e \
+#		echo "cat cd downloads.kerkerkruip.org\n put kerkerkruip-git.zip\n bye" | \
+#		sftp -oBatchMode=no -oStrictHostKeyChecking=no -b - ${KUSER}@${KSERVER}
