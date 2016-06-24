@@ -11,6 +11,9 @@ cache:
   directories:
     - i7
     #- Inform
+before_install:
+  # Travis will make an empty i7 directory because we are caching it, so remove it
+  - "[[ ! $(ls -A i7) ]] && rmdir i7 || true"
 install:
   - make setup
 script:
