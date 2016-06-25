@@ -748,7 +748,15 @@ Understand "commands" and "show commands" as showing commands.
 Carry out showing commands:
 		say "The most important special commands in [italic type]Kerkerkruip[roman type] are: attack (a), parry (p), dodge (do), concentrate (c), status, remember (r), sense, equip, go to. Some of the standard interactive fiction commands are: look (l), inventory (i), go, take, drop, wear, take off, read, put A in B.".
 
+Chapter - Statistics command
 
+Requesting rogue statistics is an action out of world. Understand "statistics" as requesting rogue statistics.
+
+Carry out requesting rogue statistics:
+	Say "You have battled the following creatures:[paragraph break]";
+	Repeat with guy running through encountered people:
+		say "[The guy] defeated you [kill count of guy] times, and was defeated [died count of guy] times[line break]";
+	say conditional paragraph break;
 
 
 Chapter - Jumping in a direction
