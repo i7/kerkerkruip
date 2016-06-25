@@ -946,7 +946,7 @@ After printing the player's obituary (this is the update the difficulty rule):
 	set current difficulty to difficulty;
 
 Last after printing the player's obituary rule (this is the press any key to restart rule):
-	say "[paragraph break]Please any to return to the main menu.";
+	say "[paragraph break]Please press any key to return to the main menu.";
 	wait for any key;
 	follow the immediately restart the VM rule;
 
