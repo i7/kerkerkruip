@@ -419,7 +419,7 @@ Section - Favour rules
 
 To say Nomos reads a scroll and also:
 	Let item be a random readied weapon enclosed by the player;
-	if item is not a natural weapon and a random chance of (divine favour) in 10 succeeds:
+	if item is not a natural weapon and a random chance of (divine favour * divine favour) in 100 succeeds:
 		[TODO: increase shield block bonus; problematic because some shields get recalculated]	
 		say "Nomos enchants [the item] for you, and also";
 		increase weapon attack bonus of item by 1;
