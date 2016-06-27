@@ -2187,8 +2187,8 @@ Testing effects of thorns-dodge-chains:
 	if the health of the chain golem is 99, rule succeeds.
 
 Initial scheduling of lionshield-vs-bodmall:
-	now the health of bodmall is 100;
-	prepare a test battle with bodmall.
+	prepare a test battle with bodmall;
+	now the health of bodmall is 100.
 	
 [TODO: make sure the lion's shield doesn't work when it's not worn or when not blocking]
 [TODO: test everything with the demonic mistress - tethered but not natural weapon]
