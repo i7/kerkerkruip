@@ -770,6 +770,7 @@ malleus-bonus-attacking	0	1
 early-feeding	1	1
 bonus-surviving-attack	1	1
 malleus-fed-after-attack	1	1
+malleus-blood-tension	1	1
 
 initial scheduling of malleus-earning: have the player defeat the jumping bomb.
 regular scheduling of malleus-earning: have the player sacrifice a random granted power.
@@ -801,7 +802,7 @@ initial scheduling for a malleus-feeding outcome:
 	
 regular scheduling of a malleus-fed outcome: try examining the malleus maleficarum.
 testing effects of a malleus-fed outcome: if we assert result "Feeding 2 blood to the Malleus Maleficarum will give it an additional bonus of \+1 attack and \+1 damage on your next attack.* dreadful presence; blood bonus of \+1 attack and \+1 damage", rule succeeds.
-
+	
 initial scheduling of malleus-bonus-attacking: now the nomos bonus is true.
 regular scheduling of malleus-bonus-attacking: compel the action of turning human. 
 [turning human is not acting fast, but a rule sets the take no time boolean for it. This will be too late to stop the nomos bonus from changing our action]
@@ -823,7 +824,12 @@ initial scheduling of bonus-surviving-attack:
 regular scheduling of bonus-surviving-attack: compel the action of the player waiting as a reaction to the swarm of daggers.
 testing effects of bonus-surviving-attack: if the health of the player < 1000, rule succeeds.
 
-[TODO: increase malleus blood bonus!]
+initial scheduling of malleus-blood-tension: now the tension is 10.
+regular scheduling of malleus-blood-tension: try feeding the gown of the red court.
+
+Testing effects of malleus-blood-tension:
+	assert result "The Malleus Maleficarum uses your bloodletting to reduce the tension";
+	if we assert that the tension is 4, rule succeeds.
 
 Section - bug 234
 

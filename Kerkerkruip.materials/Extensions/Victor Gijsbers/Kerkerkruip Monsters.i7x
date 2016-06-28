@@ -5657,6 +5657,7 @@ Every turn (this is the Nameless Horror kills all rule):
 				let guy be a random alive person enclosed by the location of Nameless Horror;
 			decrease health of guy by 100; [Bypasses the damage system.]
 			if guy is dead:
+				[TODO: have an event of the Nameless Horror killing guy?]
 				remove guy from play.
 
 Every turn when Nameless Horror is follower (this is the increase hunger of Nameless Horror rule):

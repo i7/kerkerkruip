@@ -4007,7 +4007,7 @@ The special weapon info of a hammer is usually "; stuns opponents[run paragraph 
 
 Section - Malleus Maleficarum (Nomos)
 
-The Malleus Maleficarum is a hammer. The indefinite article is "the". The description of the Malleus Maleficarum is "To kill witches and other creatures of chaos, one needs to be accurate and methodical. This hammer is an excellent tool for the task. [italic type]Feeding [current blood cost of Malleus maleficarum] blood to the Malleus Maleficarum will give it a[if blood magic level of malleus maleficarum is at least 1]n additional[end if] bonus of +1 attack and +1 damage on your next attack[roman type]." Understand "hammer" as the Malleus Maleficarum.
+The Malleus Maleficarum is a hammer. The indefinite article is "the". The description of the Malleus Maleficarum is "To kill witches and other creatures of chaos, one needs to be accurate and methodical. This hammer is an excellent tool for the task. [italic type]Feeding [current blood cost of Malleus maleficarum] blood to the Malleus Maleficarum will give it a[if blood magic level of malleus maleficarum is at least 1]n additional[end if] bonus of +1 attack and +1 damage on your next attack[roman type]. When the Malleus is readied, paying blood magic costs also reduces the tension." Understand "hammer" as the Malleus Maleficarum.
 
 The weapon attack bonus of Malleus Maleficarum is 1.
 The damage die of Malleus Maleficarum is 5.
@@ -4050,6 +4050,10 @@ An add specific damage rule (this is the Malleus blood damage bonus rule):
 			let bonus be the blood magic level of Malleus Maleficarum;
 			if the bonus is greater than 0:
 				add bonus points of damage with reason "Malleus Maleficarum blood bonus".
+
+Last carry out feeding when the Malleus Maleficarum is readied (this is the feeding reduces tension for Malleus wielder rule):
+	say "The Malleus Maleficarum uses your bloodletting to reduce the tension.";
+	follow the standard reduce tension after hit rule.
 
 Section - Doomhammer (monster)
 

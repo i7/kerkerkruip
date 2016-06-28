@@ -2462,10 +2462,10 @@ An add specific damage rule (this is the new tension damage modifier rule):
 
 The new tension damage modifier rule is listed last in the add specific damage rules.
 
-An aftereffects rule when the total damage is greater than 0 (this is the standard reduce tension after hit rule):		
-	now the tension is the tension minus 4;
-	now the tension is the tension times 8;
-	now the tension is the tension divided by 10;
+An aftereffects rule when the total damage is greater than 0 (this is the standard reduce tension after hit rule):	
+	now the tension is the tension minus 4;	
+	now the tension is the tension times 8;	
+	now the tension is the tension divided by 10;	
 	if the tension is less than 0:
 		now the tension is 0;
 
