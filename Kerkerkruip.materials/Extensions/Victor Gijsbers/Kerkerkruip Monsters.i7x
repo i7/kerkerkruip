@@ -5462,7 +5462,7 @@ Report Malygris attacking:
 	unless the actor is the noun:
 		say "Smiling his wicked, slim smile, Malygris lunges towards [the noun].";
 	otherwise:
-		say "'I'll make this a little less one-sided, by softening myself up for you,' Maltgris confides.";
+		say "'I'll make this a little less one-sided, by softening myself up for you,' Malygris confides.";
 	rule succeeds.
 
 Report Malygris dodging:
