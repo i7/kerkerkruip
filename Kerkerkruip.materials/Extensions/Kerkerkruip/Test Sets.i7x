@@ -824,7 +824,10 @@ initial scheduling of bonus-surviving-attack:
 regular scheduling of bonus-surviving-attack: compel the action of the player waiting as a reaction to the swarm of daggers.
 testing effects of bonus-surviving-attack: if the health of the player < 1000, rule succeeds.
 
-initial scheduling of malleus-blood-tension: now the tension is 10.
+initial scheduling of malleus-blood-tension:
+	now total damage is 0;
+	now the tension is 10.
+
 regular scheduling of malleus-blood-tension: try feeding the gown of the red court.
 
 Testing effects of malleus-blood-tension:
