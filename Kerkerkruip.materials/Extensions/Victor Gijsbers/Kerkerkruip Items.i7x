@@ -4053,7 +4053,7 @@ An add specific damage rule (this is the Malleus blood damage bonus rule):
 
 Last carry out feeding when the Malleus Maleficarum is readied (this is the feeding reduces tension for Malleus wielder rule):
 	reduce tension after hit;
-	say "The Malleus Maleficarum uses your bloodletting to reduce the tension to [tension].";
+	say "The Malleus Maleficarum uses your bloodletting to reduce the tension.";
 
 Section - Doomhammer (monster)
 
