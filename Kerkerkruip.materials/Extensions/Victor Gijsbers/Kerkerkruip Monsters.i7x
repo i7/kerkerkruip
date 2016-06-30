@@ -3488,12 +3488,20 @@ Section - Power
 
 The power of mercy is a power. The angel of mercy grants the power of mercy.
 The power level of power of mercy is 3.
-The command text of power of mercy is "flash". [need a name that doesn't conflict with flash grenade]
-The description of power of mercy is "Type: active and passive ability.[paragraph break]Command: flash.[paragraph break]As an action or reaction, you can create a flash of bright light, blinding anyone who sees it. This ability has a cooldown.[paragraph break]In addition, any time you are damaged in combat, you will grow smaller and more radiant. This effect lasts until combat is over."
+The command text of power of mercy is "pardon".
+The description of power of mercy is "Type: active and passive ability.[paragraph break]Command: pardon.[paragraph break]As reaction, you can forgive your attacker for seeking to harm you. This reduces the damage you receive from them by (your spirit / 4). This damage reduction will occur every time that person hits you, until you attack them back. If someone you have pardoned hits you, they must succeed at a spirit check against (your spirit + 4) or lose 1 point of spirit.[paragraph break]In addition, any time you are damaged in combat, you will grow smaller and more radiant. This effect lasts until combat is over."
 
 The power-name of power of mercy is "power of mercy".
 
 [TODO: grant eyeless vision? immune to radiance? or just protect from own flash power?]
+[pardon power: makes it harder for enemy to hit/damage you, but only until you hit back, and only usable after they hit you... or force them to retreat? 
+
+"pardoning softens blows"
+
+mercy killing - if you damage an enemy to low enough health, does extra damage to kill them... if it's not enough, does no damage? keep concentration?
+
+-- stop blow but add damage to next attack!
+]
 
 Table of Enemy Powers (continued)
 power	faculty1	faculty2
@@ -3501,10 +3509,7 @@ power of mercy	spirit	--
 
 Status skill rule (this is the mercy status skill rule):
 	if the power of mercy is granted:
-		say "You have the power of mercy, which causes you to shrink and grow more radiant when hit. You can also [bold type]flash[roman type], which blinds opponents. [italic type](Level 3)[roman type][line break][run paragraph on]".
-
-[TODO: should angel of mercy state affect power when killed? Maybe we should have a bonus for kiling it quickly (mercifully!)?]
-[should we reduce permanent health but give a permanent bonus when shrinking?]
+		say "You have the power of mercy, which causes you to shrink in size and grow more radiant when hit. You can also [bold type]pardon[roman type] your attacker, softening the blow and weakening their spirit. [italic type](Level 3)[roman type][line break][run paragraph on]".
 
 Absorbing power of mercy:
 	increase melee of the player by 2;
@@ -3512,14 +3517,103 @@ Absorbing power of mercy:
 	increase permanent health of the player by 17;
 	say "As the angel dies, its generosity of spirit becomes yours. ([bold type]Power of mercy[roman type]: +2 attack, +3 defence, +17 health, shrink and become radiant when hit, and you can create a flash of light.)[paragraph break]";
 
-Repelling power of compassion:
+Repelling power of mercy:
 	decrease melee of the player by 2;
 	decrease defence of the player by 3;
 	decrease permanent health of the player by 17;
-	now radiation of the player is 0;
+	now every person is not pardoned.
 
 [TODO: flash command, radiation and shrinking effects]
 
+Section - Power of Mercy - Aftereffects
+
+mercy-radiation is a number that varies. mercy-radiation is 0.
+
+Aftereffects rule (this is the mercy damage rule):
+	if global defender is the player and the total damage is greater than 0:
+		if power of mercy is granted:
+			let previous-size be the size of the player;
+			if previous-size > tiny:
+				["hate is present" is deprecated, but it's not safe to update the combat status here, because this can happen when combat status needs to be concluding]
+				if hate is present:
+					now the size of the player is the size before previous-size;
+					say "You shrink to [bold type][size of the player][roman type] size!";
+					let n be 20 - total damage;
+					if n < 0, now n is 0;
+					test the spirit of the player against n;
+					if test result is true:
+						say "You gain a level of radiance!";
+						increase mercy-radiation by 1;
+						increase the radiation of the player by 1;
+					otherwise:
+						say "Your spirit was not strong enough to increase your radiance this time.";
+			if the global attacker is pardoned:
+				let n be (final spirit of the global defender) + 4;
+				test the spirit of the global attacker against n;
+				if test result is true:
+					say "[regarding the global attacker][Possessive] spirit holds fast.";
+				otherwise:
+					say "[The global attacker] is shamed by [their] actions, and diminishes in spirit.";
+					decrease spirit score of the global attacker by 1.
+								
+Every turn when mercy-radiation is not 0 (this is the revert back to normal radiance rule):
+	if combat status is peace:
+		let base-radiation be the radiation of the player - mercy-radiation;
+		if base-radiation is 0:
+			say "All of your radiance is extinguished with your mercy.";
+		otherwise:
+			say "With your mercy extinguished, you revert to [base-radiation] levels of radiance.";
+		now the radiation of the player is base-radiation;
+
+Section - Power of Mercy - Pardoning
+
+A person can be pardoned.
+
+[Instead, maintain concentration when hit by pardoned person?]
+
+A remove specific damage rule (this is the pardoning softens the blow rule):
+	if victim is the player and the power of mercy is granted:
+		[TODO: let the angel of mercy do this too? use this to reduce general damage, or add back health?]
+		if (damage-by-hitting is true) and (the global attacker is pardoned):
+			Let n be (final spirit of the victim) / 4;
+			remove n points of physical damage with reason "pardoning softens the blow".
+
+Status attribute rule (this is the pardon status rule):
+	now world test subject is the player;
+	if a worldsharer person is pardoned:
+		if long status is true:
+			say "You have [bold type]pardoned[roman type] [the list of pardoned people].[line break][run paragraph on]".
+
+Last carry out examining a pardoned person:
+	say "You have pardoned [the noun] for attacking you, and their ability to harm you is diminished.";
+
+Pardoning is an action applying to nothing. Understand "pardon" as pardoning.
+
+Check pardoning:
+	if the power of mercy is not granted:
+		take no time;
+		say "You do not possess that power." instead.
+
+Check pardoning:
+	if the player is not at-react:
+		take no time;
+		say "You can only pardon as a reaction." instead.
+		
+[TODO: pardon non-attackers like the abyss of the soul?]
+
+Check pardoning:
+	if the global attacker is pardoned:
+		take no time;
+		say "You have already pardoned [the global attacker]." instead.
+		
+Carry out pardoning:
+	now the global attacker is pardoned;
+	say "You pardon [the global attacker], and [their] ability to harm you is diminished."
+
+First carry out attacking:
+	if the global defender is pardoned:
+		say "You revoke your pardon, and strike back at the one who wronged you!";
+		now the global defender is not pardoned.
 
 Chapter - Level 4 - Fanatics of Aite 
 
