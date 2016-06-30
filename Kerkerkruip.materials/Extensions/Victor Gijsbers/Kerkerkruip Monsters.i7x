@@ -3369,8 +3369,156 @@ Status skill rule (this is the minotaur power status skill rule):
 		say "Your [bold type]axe proficiency[roman type] gives you a (your body)% chance of dealing 10 bonus damage when attacking with an axe. You can also use the special power of the minotaur's axe, and are stronger in the maze. [italic type](Level 3)[roman type][line break][run paragraph on]".
 
 
+Chapter - Level 3 - Angel of Mercy
+
+The Angel of Mercy is a female monster. "A [if angel of mercy is gargantuan]vast, [otherwise if angel of mercy is huge]great, [otherwise if angel of mercy is large]big, [otherwise if angel of mercy is small]diminuitive, [otherwise if angel of mercy is tiny]miniscule, [end if][if  radiation of Angel of Mercy is 0]diffuse[otherwise if radiation of Angel of Mercy is 1]glowing[otherwise if radiation of Angel of Mercy is 2]luminous[otherwise if radiation of Angel of Mercy is 3]brilliant[otherwise if radiation of Angel of Mercy is 4]blinding[otherwise]impossibly bright[end if] presence hovers before you, swirling like mist from one form to another."
+
+The description of the Angel of Mercy is "At the moment her form resembles [one of]a beautiful young woman holding a white rose[or]a grandmotherly woman wrapped in white linen[or]a sprightly doe[or]nothing but a cloud[or]an undulating white dragon[or]a cup spilling over with sparkling liquid[at random]. Looking upon her fills your heart with warmth and drives thoughts of battle from your mind. Every blow she receives makes her smaller, but increases her radiance. She is currently [size of Angel of Mercy] and her radiance is [radiation of Angel of Mercy]."
+
+[TODO: change description with concentration?]
+
+The soul description of the Angel of Mercy is "a heart of purest silver".
+
+The level of the Angel of Mercy is 3.
+[The ID of the Angel of Mercy is .]
+The Angel of Mercy is gargantuan.
+The Angel of Mercy is talker.
+The Angel of Mercy is thrower. [have Angel of Mercy throw grenades in another direction?]
+Material of the Angel of Mercy is radiance.
+
+The Angel of Mercy is advanced.
+
+The angel of Mercy is angelic.
+Angel of Mercy is flyer.
+Radiation of angel of Mercy is 0.
+
+The health of the angel of Mercy is 40.
+The melee of the angel of Mercy is 3.
+The defence of the angel of Mercy is 12.
+
+The body score of the angel of mercy is 7.
+The mind score of the angel of mercy is 7.
+The spirit score of the angel of mercy is 12.
+
+For natural weapon setup of the angel of mercy (this is the angel of mercy's nails rule):
+	let X be the natural weapon described;
+	now damage die of X is 5;
+	now dodge bonus of X is 0;
+	now parry-against bonus of X is -1;
+	now parry-with bonus of X is 0;  [high for a natural weapon. Give the angel some equipment?]
+	now printed name of X is "angel's nails";
+	now X is plural-named;
+
+[
+Section - Equipment
+
+The angel of mercy carries a cool weapon and maybe a shield too... should benefit from radiance
+
+super sharp weapon - kills mercifully - scythe? sword?
+]
+
+Section - Getting smaller
+
+[The angel of mercy gets smaller and more radiant when damaged.]
+
+Aftereffects rule (this is the angel of mercy shrinks when hit rule):
+	if the global defender is the angel of mercy and the total damage is greater than 0:
+		let previous-size be the size of the angel of mercy;
+		if previous-size is not tiny:
+			now the angel of mercy is the size before previous-size;
+		if the angel of mercy is within the location:
+			if previous-size is not tiny:
+				say "The angel of mercy smiles at [the global attacker] and seems to shiver with cold. With a sigh, her form collapses in on itself until she is [size of angel of mercy] - but [if radiation of angel of mercy is 1]starts to shine with radiance[otherwise]even more radiant[end if]!";
+			otherwise:
+				say "Now no more than a darting point of light, the angel flickers and grows even brighter!";
+		otherwise:
+			Let way be the best route from the location of the player to the location of the angel of mercy;
+			if way is a direction:
+				say "Somewhere [way], you hear a sigh of pity that chills you to your bones.";
+			otherwise:
+				say "Somewhere in the dungeon, you hear a sigh of pity that chills you to your bones.";
 
 
+				
+A reviving rule for the angel of mercy (this is the reviving angel of mercy rule):
+	now radiation of angel of mercy is 0;
+	now the size of angel of mercy is gargantuan;
+	
+[
+Section - Angel of Mercy images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of angel of compassion is Figure of map_monster_angel_of_mercy.
+The legend-label of angel of compassion is Figure of map_legend_angel_of_mercy.
+]
+
+Section - Prose
+
+Report an actor hitting the dead angel of mercy:
+	say "The angel shinks to a pinpoint so bright you can't bear to look, then disappears completely!";
+	[TODO: blinds you when she dies? What about blind/eyeless viewers?]
+	rule succeeds.
+
+Report the angel of mercy hitting a dead pc:
+	say "'In death may you find the peace you could not achieve in life,' the angel murmurs as you draw your last breath.";
+	rule succeeds.
+
+Report the angel of mercy concentrating:
+	say "[if concentration of the angel of compassion is 1]The Angel of Mercy gathers her form in concentration.[otherwise if concentration of the angel of compassion is 2]The Angel of Mercy's shape flows faster and more intensely.[otherwise if concentration of the angel of compassion is 3]'Retreat now, and I shall not harm you,' the angel commands, fierce with righteous energy.[end if]";
+	rule succeeds.
+	
+[TODO: angel of mercy doesn't hit runners (but ony if maximally concentrated?)]
+
+Report the angel of compassion attacking:
+	unless the actor is the noun:
+		say "'I bear no ill will, but I shall defend this place,' the Angel of Mercy declares as she strikes out at [the noun].";
+	otherwise:
+		say "'The most difficult to forgive is always oneself!' the angel of compassion screams as she claws at her own face.";
+	rule succeeds.
+
+Report the angel of mercy dodging:
+	say "The angel shifts to avoid the attack.";
+	rule succeeds.
+
+Report the angel of mercy waiting when the angel of mercy is insane:
+	say "The Angel of Mercy improvises a song that climaxes in the refrain 'Kill them all and let me sort them out!'";
+	rule succeeds.
+
+
+Section - Power
+
+The power of mercy is a power. The angel of mercy grants the power of mercy.
+The power level of power of mercy is 3.
+The command text of power of mercy is "flash". [need a name that doesn't conflict with flash grenade]
+The description of power of mercy is "Type: active and passive ability.[paragraph break]Command: flash.[paragraph break]As an action or reaction, you can create a flash of bright light, blinding anyone who sees it. This ability has a cooldown.[paragraph break]In addition, any time you are damaged in combat, you will grow smaller and more radiant. This effect lasts until combat is over."
+
+The power-name of power of mercy is "power of mercy".
+
+[TODO: grant eyeless vision? immune to radiance? or just protect from own flash power?]
+
+Table of Enemy Powers (continued)
+power	faculty1	faculty2
+power of mercy	spirit	--
+
+Status skill rule (this is the mercy status skill rule):
+	if the power of mercy is granted:
+		say "You have the power of mercy, which causes you to shrink and grow more radiant when hit. You can also [bold type]flash[roman type], which blinds opponents. [italic type](Level 3)[roman type][line break][run paragraph on]".
+
+[TODO: should angel of mercy state affect power when killed? Maybe we should have a bonus for kiling it quickly (mercifully!)?]
+[should we reduce permanent health but give a permanent bonus when shrinking?]
+
+Absorbing power of mercy:
+	increase melee of the player by 2;
+	increase defence of the player by 3;
+	increase permanent health of the player by 17;
+	say "As the angel dies, its generosity of spirit becomes yours. ([bold type]Power of mercy[roman type]: +2 attack, +3 defence, +17 health, shrink and become radiant when hit, and you can create a flash of light.)[paragraph break]";
+
+Repelling power of compassion:
+	decrease melee of the player by 2;
+	decrease defence of the player by 3;
+	decrease permanent health of the player by 17;
+	now radiation of the player is 0;
+
+[TODO: flash command, radiation and shrinking effects]
 
 
 Chapter - Level 4 - Fanatics of Aite 
