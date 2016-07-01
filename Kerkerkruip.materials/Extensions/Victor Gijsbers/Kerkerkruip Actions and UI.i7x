@@ -11,6 +11,8 @@ To ready is a verb.
 To fly is a verb.
 To crash is a verb.
 To attack is a verb.
+To receive is a verb.
+To remain is a verb.
 
 Volume - Special actions
 
