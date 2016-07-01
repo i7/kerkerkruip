@@ -3042,8 +3042,6 @@ An AI action selection rule for the at-React giant tentacle (this is the tentacl
 		now the Option entry is the action of the the giant tentacle tentacle-shaking;
 		now the Action Weight entry is 15 plus 5 times the concentration of the main actor;
 
-To remain is a verb.
-
 Carry out the giant tentacle tentacle-shaking:
 	say "The giant tentacle vigourously shakes [the main actor] while projecting the horrifying image of Tooloo.[italic type] [run paragraph on]";
 	let n be 12;
@@ -3086,6 +3084,51 @@ Section - and the tentacle throws
 
 Tentacle-throwing is an action applying to nothing.
 
+[First we set one of three throwing behaviours -- the player doesn't know which one. Behaviour 1 is linear with grappling strength but rare, behaviour 2 throws only with high grappling strength, behaviour 3 is a less predidtable version of 2.]
+
+Tentacle-throw-ai is a number that varies.
+
+A dungeon interest rule (this is the set tentacle throwing behaviour rule):
+	let n be a random number between 1 and 3;
+	now tentacle-throw-ai is n.
+
+[The AI rule]
+
+An AI action selection rule for the at-Act giant tentacle (this is the tentacle considers throwing rule):
+	if the giant tentacle grapples the chosen target:
+		choose a blank Row in the Table of AI Action Options;
+		now the Option entry is the action of the giant tentacle tentacle-throwing;
+		now the Action Weight entry is 0;
+		if tentacle-throw-ai is 1:
+			if a random chance of constriction level in 50 succeeds:
+				now the Action Weight entry is 20;
+		if tentacle-throw-ai is 2:
+			if constriction level is greater than 3:
+				if a random chance of 1 in 3 succeeds:
+					now the Action Weight entry is 20;
+		if tentacle-throw-ai is 3:
+			if constriction level is greater than 4 or a random chance of 1 in 5 succeeds:
+				if a random chance of 1 in 3 succeeds:
+					now the Action Weight entry is 20;
+		say "TEST: [tentacle-throw-ai], [Action Weight entry]".
+
+Carry out the giant tentacle tentacle-throwing:
+	now constriction level is 0;
+	now giant tentacle does not grapple the chosen target;
+	let n be a random number between 2 and 4;
+	if giant tentacle is large:
+		now n is n + 3;
+	if giant tentacle is huge:
+		now n is n + 6;
+	if giant tentacle is gargantuan:
+		now n is n + 9;
+	deal n points of physical damage;
+	have the giant tentacle inflict damage on the chosen target, silently;
+	say "The giant tentacle suddenly uncoils like a whip, throwing [the name of the chosen target] across the room. A sickening smack is heard when [the name of the chosen target] [hit] the [one of]wall[or]floor[or]ceiling, and then the floor,[as decreasingly likely outcomes] and [receive] [bold type][total damage] damage[roman type].";
+	if the chosen target is dead:
+		have an event of the giant tentacle killing the chosen target;
+	if the player is dead:
+		end the story saying "You were thrown out by the tentacle.";
 
 
 Section - Tentacle prose
