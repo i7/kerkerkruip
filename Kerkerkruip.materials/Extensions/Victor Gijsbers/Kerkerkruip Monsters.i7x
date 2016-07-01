@@ -2218,7 +2218,7 @@ Carry out an actor challenging someone in (this is the remove hound status when 
 
 Chapter - Level 2 - Angel of Compassion
 
-An angel of compassion is a monster. "An angel hovers here, [if angel-of-compassion-strength > 3]enveloped in blinding and overwhelming radiance[otherwise if angel-of-compassion-strength is 3]shining with divine glory[otherwise if angel-of-compassion-strength is 2]lessened by grief, but still majestic[otherwise if angel-of-compassion-strength is 1]saddened and wizened[otherwise]enveloped in sadness and all its glory gone[end if]."
+An angel of compassion is a neuter monster. "An angel hovers here, [if angel-of-compassion-strength > 3]enveloped in blinding and overwhelming radiance[otherwise if angel-of-compassion-strength is 3]shining with divine glory[otherwise if angel-of-compassion-strength is 2]lessened by grief, but still majestic[otherwise if angel-of-compassion-strength is 1]saddened and wizened[otherwise]enveloped in sadness and all its glory gone[end if]."
 
 The level of the angel of compassion is 2.
 The ID of the angel of compassion is 33.
@@ -3371,9 +3371,9 @@ Status skill rule (this is the minotaur power status skill rule):
 
 Chapter - Level 3 - Angel of Mercy
 
-The Angel of Mercy is a female monster. "A [if angel of mercy is gargantuan]vast, [otherwise if angel of mercy is huge]great, [otherwise if angel of mercy is large]big, [otherwise if angel of mercy is small]diminuitive, [otherwise if angel of mercy is tiny]miniscule, [end if][if  radiation of Angel of Mercy is 0]diffuse[otherwise if radiation of Angel of Mercy is 1]glowing[otherwise if radiation of Angel of Mercy is 2]luminous[otherwise if radiation of Angel of Mercy is 3]brilliant[otherwise if radiation of Angel of Mercy is 4]blinding[otherwise]impossibly bright[end if] presence hovers before you, swirling like mist from one form to another."
+The angel of mercy is a neuter monster. "A [if angel of mercy is gargantuan]vast, [otherwise if angel of mercy is huge]great, [otherwise if angel of mercy is large]big, [otherwise if angel of mercy is small]diminuitive, [otherwise if angel of mercy is tiny]miniscule, [end if][if  radiation of Angel of Mercy is 0]diffuse[otherwise if radiation of Angel of Mercy is 1]glowing[otherwise if radiation of Angel of Mercy is 2]luminous[otherwise if radiation of Angel of Mercy is 3]brilliant[otherwise if radiation of Angel of Mercy is 4]blinding[otherwise]impossibly bright[end if] presence hovers before you, swirling like mist from one form to another."
 
-The description of the Angel of Mercy is "At the moment her form resembles [one of]a beautiful young woman holding a white rose[or]a grandmotherly woman wrapped in white linen[or]a sprightly doe[or]nothing but a cloud[or]an undulating white dragon[or]a cup spilling over with sparkling liquid[at random]. Looking upon her fills your heart with warmth and drives thoughts of battle from your mind. Every blow she receives makes her smaller, but increases her radiance. She is currently [size of Angel of Mercy] and her radiance is [radiation of Angel of Mercy]."
+The description of the Angel of Mercy is "At the moment its form resembles [one of]a graceful young man holding a white rose[or]a grandmotherly woman wrapped in white linen[or]a sprightly doe[or]nothing but a cloud[or]an undulating white dragon[or]a cup spilling over with sparkling liquid[at random]. Looking upon it fills your heart with warmth and drives thoughts of battle from your mind. Every blow the angel receives makes it smaller, but increases its radiance. It is currently [size of Angel of Mercy] and it has [radiation of Angel of Mercy] level[if radiation of angel of mercy is not 1][s][end if] of radiation."
 
 [TODO: change description with concentration?]
 
@@ -3426,6 +3426,7 @@ Aftereffects rule (this is the angel of mercy shrinks when hit rule):
 		let previous-size be the size of the angel of mercy;
 		if previous-size is not tiny:
 			now the angel of mercy is the size before previous-size;
+		increase the radiation of angel of mercy by 1;
 		if the angel of mercy is within the location:
 			if previous-size is not tiny:
 				say "The angel of mercy smiles at [the global attacker] and seems to shiver with cold. With a sigh, her form collapses in on itself until she is [size of angel of mercy] - but [if radiation of angel of mercy is 1]starts to shine with radiance[otherwise]even more radiant[end if]!";
@@ -3436,19 +3437,26 @@ Aftereffects rule (this is the angel of mercy shrinks when hit rule):
 			if way is a direction:
 				say "Somewhere [way], you hear a sigh of pity that chills you to your bones.";
 			otherwise:
-				say "Somewhere in the dungeon, you hear a sigh of pity that chills you to your bones.";
-
-
+				say "Somewhere in the dungeon, you hear a sigh of pity that chills you to your bones."; 
 				
 A reviving rule for the angel of mercy (this is the reviving angel of mercy rule):
 	now radiation of angel of mercy is 0;
 	now the size of angel of mercy is gargantuan;
 	
+Section - Mercy for Runners
+
+To decide whether (fighter - Angel of Mercy) would take a parting shot at (deserter - a person):
+	[TODO: make this a rulebook - this might allow the angel to take parting shots when not maximally concentrated,
+	as the prose suggests]
+	no.
+	
+[TODO: come up with some interesting following behavior?]	
+
 [
 Section - Angel of Mercy images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
-The avatar of angel of compassion is Figure of map_monster_angel_of_mercy.
-The legend-label of angel of compassion is Figure of map_legend_angel_of_mercy.
+The avatar of angel of mercy is Figure of map_monster_angel_of_mercy.
+The legend-label of angel of mercy is Figure of map_legend_angel_of_mercy.
 ]
 
 Section - Prose
@@ -3463,16 +3471,16 @@ Report the angel of mercy hitting a dead pc:
 	rule succeeds.
 
 Report the angel of mercy concentrating:
-	say "[if concentration of the angel of compassion is 1]The Angel of Mercy gathers her form in concentration.[otherwise if concentration of the angel of compassion is 2]The Angel of Mercy's shape flows faster and more intensely.[otherwise if concentration of the angel of compassion is 3]'Retreat now, and I shall not harm you,' the angel commands, fierce with righteous energy.[end if]";
+	say "[if concentration of the angel of mercy is 1]The angel of mercy gathers its form in concentration.[otherwise if concentration of the angel of mercy is 2]The angel of mercy's shape flows faster and more intensely.[otherwise if concentration of the angel of mercy is 3]'Retreat now, and I shall not harm you,' the angel commands, fierce with righteous energy.[end if]";
 	rule succeeds.
 	
 [TODO: angel of mercy doesn't hit runners (but ony if maximally concentrated?)]
 
-Report the angel of compassion attacking:
+Report the angel of mercy attacking:
 	unless the actor is the noun:
-		say "'I bear no ill will, but I shall defend this place,' the Angel of Mercy declares as she strikes out at [the noun].";
+		say "'[if the health of the noun is less than 10]Your death will be quick and painless[otherwise]I bear you no ill will, but I shall defend my allies[end if],' the angel of mercy declares as it strikes out at [the noun].";
 	otherwise:
-		say "'The most difficult to forgive is always oneself!' the angel of compassion screams as she claws at her own face.";
+		say "'The most difficult to forgive is always oneself!' the angel of mercy screams as it claws at its own face.";
 	rule succeeds.
 
 Report the angel of mercy dodging:
@@ -3480,7 +3488,7 @@ Report the angel of mercy dodging:
 	rule succeeds.
 
 Report the angel of mercy waiting when the angel of mercy is insane:
-	say "The Angel of Mercy improvises a song that climaxes in the refrain 'Kill them all and let me sort them out!'";
+	say "The angel of mercy improvises a song that climaxes in the refrain 'Kill them all and let me sort them out!'";
 	rule succeeds.
 
 
@@ -3529,6 +3537,8 @@ Section - Power of Mercy - Aftereffects
 
 mercy-radiation is a number that varies. mercy-radiation is 0.
 
+To diminish is a verb.
+
 Aftereffects rule (this is the mercy damage rule):
 	if global defender is the player and the total damage is greater than 0:
 		if power of mercy is granted:
@@ -3551,9 +3561,9 @@ Aftereffects rule (this is the mercy damage rule):
 				let n be (final spirit of the global defender) + 4;
 				test the spirit of the global attacker against n;
 				if test result is true:
-					say "[regarding the global attacker][Possessive] spirit holds fast.";
+					say "[regarding the global attacker][Possessive] attack is righteous! [Their] spirit holds fast.";
 				otherwise:
-					say "[The global attacker] is shamed by [their] actions, and diminishes in spirit.";
+					say "[The global attacker] [are] shamed by [their] actions, and [diminish] in spirit.";
 					decrease spirit score of the global attacker by 1.
 								
 Every turn when mercy-radiation is not 0 (this is the revert back to normal radiance rule):
@@ -3564,6 +3574,7 @@ Every turn when mercy-radiation is not 0 (this is the revert back to normal radi
 		otherwise:
 			say "With your mercy extinguished, you revert to [base-radiation] levels of radiance.";
 		now the radiation of the player is base-radiation;
+		now mercy-radiation is 0;
 
 Section - Power of Mercy - Pardoning
 
