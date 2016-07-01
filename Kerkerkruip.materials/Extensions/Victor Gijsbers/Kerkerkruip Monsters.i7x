@@ -2891,6 +2891,7 @@ For natural weapon setup of the giant tentacle (this is the giant tentacle weapo
 	now parry-with bonus of X is -2;	
 	now the damage die of X is 0;
 	now printed name of X is "tentacle";
+	now X is size-agnostic.
 
 The giant tentacle is eyeless.
 
@@ -3079,6 +3080,11 @@ Status attribute rule (this is the tentacle-confused status rule):
 			say "You are [bold type]confused[roman type] by the giant tentacle, which gives you a -2 attack penalty on your next attack.[line break][run paragraph on]";
 		otherwise:
 			say "[@ check initial position of attribute]confused[run paragraph on]";
+
+
+Section - and the tentacle throws
+
+Tentacle-throwing is an action applying to nothing.
 
 
 
