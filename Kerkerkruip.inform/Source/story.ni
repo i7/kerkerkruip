@@ -43,10 +43,10 @@ Use no status line.
 
 [ Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. It is not necessary to comment out Flexible Windows when Glimmr is commented in. ]
 
-Include version 15/160609 of Flexible Windows by Jon Ingold.
+Include version 15/160628 of Flexible Windows by Jon Ingold.
 Include Hyperlinks by Kerkerkruip.
 
-[Include Kerkerkruip Glimmr Additions by Erik Temple.]
+Include Kerkerkruip Glimmr Additions by Erik Temple.
 
 Include version 1/150128 of Menus by Dannii Willis.
 Include Windows by Kerkerkruip.
@@ -92,7 +92,7 @@ Include Test Sets by Kerkerkruip.
 
 Section - Increase memory settings
 
-Use MAX_PROP_TABLE_SIZE of 800000.
+Use MAX_PROP_TABLE_SIZE of 1000000.
 Use MAX_OBJ_PROP_COUNT of 256.
 Use MAX_STATIC_DATA of 500000.
 Use MAX_OBJECTS of 1000.
@@ -102,6 +102,7 @@ Use MAX_LABELS of 20000.
 Use ALLOC_CHUNK_SIZE of 32768.
 Use MAX_NUM_STATIC_STRINGS of 40000.
 Use MAX_DICT_ENTRIES of 2000.
+Use MAX_ARRAYS of 20000.
 
 
 Section - Score

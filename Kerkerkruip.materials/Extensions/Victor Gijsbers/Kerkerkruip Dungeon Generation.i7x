@@ -92,10 +92,11 @@ To print generation message (T - text):
 	say T;
 	start a 1 millisecond timer;
 	wait for glk input;
+	let event-outcome be a number;
 	if the current glk event is timer-event:
 		start a 0 millisecond timer;
 	otherwise if the current glk event is glk-initiated:[handle window resizes, basically]
-		let event-outcome be glk event handled in null-event context.
+		now event-outcome is glk event handled in null-event context.
 
 To start a/-- (T - a number) millisecond timer:
 	(- if (glk_gestalt(gestalt_Timer, 0)) glk_request_timer_events({T});  -)

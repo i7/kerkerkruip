@@ -13,15 +13,35 @@ Include Glimmr Animation Fader - Black by Erik Temple.
 [Use Glimmr debugging.
 
 To say >console:
-	say echo stream of main-window.
+	say echo stream of main window.
 
 To say <:
- 	say stream of main-window;
+ 	say stream of main window;
 	say run paragraph on.
 	
 [First for showing the title screen:
 	Try switching the story transcript on;
 	continue the action.]]
+
+g-deep-blue is always "2A5E".
+g-sky-blue is always "bde4fc".
+g-black is always "0".
+g-white is always "FFFFFF".
+
+
+
+To decide what number is the character code entered in (win - a g-window):
+	(- WinGetKey( {win}.(+ ref number +) ) -)
+	
+	
+Include (-
+
+[ WinGetKey win i;
+	i = VM_KeyChar(win); 
+	return i;
+];
+
+-)
 
 
 Chapter - Simplifying Glimmr credits
@@ -38,11 +58,11 @@ After restoring from a saved game:
 Chapter - Setting background colors for Gargoyle
 
 To open up the graphics-window:
-	if graphics-window is g-unpresent and the main-window is ancestral to graphics-window:
+	if graphics-window is g-unpresent and the main window is ancestral to graphics-window:
 		set the Gargoyle background color to the color g-black;
 		open up graphics-window;
 
-Before window-shutting the graphics-window:
+Before deconstructing the graphics-window:
 	if the graphics-window is g-present:
 		set the Gargoyle background color to the color g-white;
 
@@ -294,7 +314,7 @@ Figure of Button-Options is the file "button-Options.png".
 Figure of Button-Quit is the file "button-Quit.png".
 [Figure of Button-Reset is the file "button-Reset.png".]
 Figure of Button-Score Info is the file "button-Score-Info.png".
-Figure of Button-Skip Apprentice is the file "button-Skip-to-Apprentice.png".
+[Figure of Button-Skip Apprentice is the file "button-Skip-to-Apprentice.png".]
 [Pressed buttons]
 Figure of button-Continue_pressed is the file "button-Continue_pressed.png".
 Figure of button-Help_pressed is the file "button-Help_pressed.png".
@@ -302,7 +322,7 @@ Figure of button-New Game_pressed is the file "button-New Game_pressed.png".
 Figure of button-Options_pressed is the file "button-Options_pressed.png".
 Figure of button-Quit_pressed is the file "button-Quit_pressed.png".
 Figure of button-Score-Info_pressed is the file "button-Score-Info_pressed.png".
-Figure of button-Skip-to-Apprentice_pressed is the file "button-Skip-to-Apprentice_pressed.png".
+[Figure of button-Skip-to-Apprentice_pressed is the file "button-Skip-to-Apprentice_pressed.png".]
 [Toggles]
 Figure of Toggle-Sound_On is the file "toggle-Sound_On.png".
 Figure of Toggle-Sound_Off is the file "toggle-Sound_Off.png".
@@ -622,13 +642,13 @@ First finally quitting the game rule (this is the set session flag on quit rule)
 Chapter - Set up the graphics window
 [We don't want to see the main text window at all until the game proper begins. Strictly speaking, we should probably hack the Inform library to allow for this--but that is not a minor undertaking. Instead, we will simply open the graphics window so that it covers the main text window entirely (note the 100 measurement below--this indicates that the graphics window will be split off from the main window at 100% of the latter's height). The Glulx Status Window Control extension suppresses the opening of the status window; we will open it later, only after closing the graphics window.]
 
-The graphics-window is a graphics g-window spawned by the main-window. The position of the graphics-window is g-placeabove. The measurement of the graphics-window is 100. The back-colour of the graphics-window is g-black. The graphics-window is g-graphlinked.
+The graphics-window is a graphics g-window spawned by the main window. The position of the graphics-window is g-placeabove. The measurement of the graphics-window is 100. The background color of the graphics-window is g-black. The graphics-window is g-graphlinked.
 
 [These rules prevent any graphics window from updating during animation other than the graphics-window. This is to prevent border windows, which are graphics windows, from being animated during music fadeouts, principally when graphics are not enabled but the player's interpreter is capable of using them.]
 The animation window-updating rule is not listed in any rulebook.
 
 For updating graphics windows for animation (this is the specific animation window-updating rule):
-	Follow the window-drawing rules for the graphics-window.
+	refresh the graphics-window;
 
 
 Chapter - Animation code support
@@ -666,7 +686,7 @@ Redraw-menu is a truth state variable. Redraw-menu is false.
 		replace the text "Sound of " in T with "";
 		say "   ([count]) [T][line break]";
 	while 1 is 1:
-		let k be the character code entered in the main-window - 48;
+		let k be the character code entered in the main window - 48;
 		if k is less than (count + 1) and k is greater than 0:
 			now count is 0;
 			repeat with tune running through sound-names:
@@ -675,10 +695,9 @@ Redraw-menu is a truth state variable. Redraw-menu is false.
 					decide on tune.]
 
 For showing the title screen when full graphics support is true and main menu graphics are enabled (this is the graphic title screen rule):
-	shut down the status-window; [needed on restart]
+	close the status window; [needed on restart]
 	close side windows; [needed on restart]
-	open up the graphics-window;
-	open up the graphics-window;
+	open the graphics-window;
 	if the session flag is enabled:
 		disable the session flag;
 		play the theme music;
@@ -688,9 +707,9 @@ For showing the title screen when full graphics support is true and main menu gr
 	set JUMP POINT redraw_menu;
 	now menu-active is true;
 	now redraw-menu is false;
-	shut down the status-window; [for returning from a text menu]
+	close the status window; [for returning from a text menu]
 	close side windows;[probably not necessary here, but added for future-proofing.]
-	open up the graphics-window;[it is possible that it may be closed on return from a menu]
+	open the graphics-window;[it is possible that it may be closed on return from a menu]
 	fade in the main menu;
 	pause for 2000 milliseconds, accepting input;
 	if the number of entries in the monster-card queue is greater than 0:
@@ -703,7 +722,7 @@ For showing the title screen when full graphics support is true and main menu gr
 	if redraw-menu is true:
 		JUMP to redraw_menu;
 	otherwise:
-		clear the main-window;[we don't want to see old content in the main window when the menu closes]
+		clear the main window;[we don't want to see old content in the main window when the menu closes]
 		close title screen;
 		[open the status window.]
 
@@ -723,24 +742,22 @@ To menu-continue game:
 	do nothing.
 
 To menu-quit game:
-	clear the main-window;[Some interpreters will show the main window after we've quit, so we handle that.]
+	clear the main window;[Some interpreters will show the main window after we've quit, so we handle that.]
 	say "Thank you for playing Kerkerkruip!";
 	close title screen;
 	stop game abruptly.
 
 To menu-request help menu:
-	now the current menu is the Table of Kerkerkruip Help;
 	close title screen;
-	carry out the displaying activity.
+	display the Table of Kerkerkruip Help menu with title "Kerkerkruip";
 
 To menu-request options menu:
-	now the current menu is Table of Options Menu;
 	close title screen;
-	carry out the displaying activity.
+	display the (Table of Options Menu) menu with title "Options";
 
-To menu-skip novice:
+[To menu-skip novice:
 	set difficulty to 1;
-	delete file of save data.
+	delete file of save data.]
 
 
 Chapter - Title animation
@@ -821,7 +838,7 @@ New_Game	Figure of Button-New Game	{51, 49}	Figure of button-New Game_pressed	Fi
 Options_Button	Figure of Button-Options	{333, 49}	Figure of button-Options_pressed	Figure of Button-Options
 Quit_Game	Figure of Button-Quit	{477, 49}	Figure of button-Quit_pressed	Figure of Button-Quit
 ScoreInfo_Button	Figure of Button-Score Info	{580, 665}	Figure of button-Score-Info_pressed	Figure of Button-Score Info
-Skip_Button	Figure of Button-Skip Apprentice	{63, 670}	Figure of button-Skip-to-Apprentice_pressed	Figure of Button-Skip Apprentice
+[Skip_Button	Figure of Button-Skip Apprentice	{63, 670}	Figure of button-Skip-to-Apprentice_pressed	Figure of Button-Skip Apprentice]
 
 [Reset_Victories	Figure of Button-Reset	{521, 674}[without a modal confirmation, it seems best to leave this for the Options menu]]
 
@@ -920,7 +937,7 @@ To animate monster cards:
 		activate item;
 	let index be 0;
 	while menu-active is true:
-		shut down the status-window; [on returning from a text menu]
+		close the status window; [on returning from a text menu]
 		close side windows;[probably not necessary, but included for future-proofing]
 		open up the graphics-window;[it is possible that it may be closed on return from a menu]
 		increase index by 1;
@@ -959,10 +976,10 @@ To prepare type slugs:
 		activate Continue_Game;
 	otherwise:
 		deactivate Continue_Game;
-	if difficulty is 0:
+	[if difficulty is 0:
 		activate Skip_Button;
 	otherwise:
-		deactivate Skip_Button;
+		deactivate Skip_Button;]
 	set display for the Sound_Toggle.
 
 To prepare difficulty levels for display:
@@ -1048,12 +1065,15 @@ To prepare monster cards:
 
 Chapter - Input to main menu
 
+To request character input in (win - a g-window):
+	(- glk_request_char_event({win}.(+ ref number +)); -)
+
 Event-handled is a truth state variable.
 
 To wait for main menu input until all animations are complete:
 	while animation is queued and menu-active is true:[We don't want any new animations to start if our input is moving us out of the main menu]
-		cancel character input in the main-window;
-		request character input in the main-window;
+		cancel character input in the main window;
+		request character input in the main window;
 		now event-handled is false;
 		wait for glk input;
 		if the current glk event is glk-initiated or the current glk event is mouse-event or the current glk event is char-event:
@@ -1073,10 +1093,11 @@ Glulx character input rule when the graphics-window is g-present (this is the gr
 		#if utilizing animation debugging;
 		say "[>console][CA]Key pressed ([key]).[<]";
 		#end if;
-		handle graphical key code key;
+		[handle graphical key code key;]
+		convert the hyperlink code to the character code;
 
-To handle graphical key code (key - a number):
-	let action be the rule produced by the menu command rules for key;
+[To handle graphical key code (key - a number):
+	let action-to-take be the rule produced by the menu command rules for key;
 	if rule succeeded:
 		cease animating all tracks but the button-press track;
 	if the outcome of the rulebook is the start the game outcome:
@@ -1086,8 +1107,8 @@ To handle graphical key code (key - a number):
 		menu-quit game;
 	otherwise if rule succeeded:
 		close title screen;
-		consider action;
-		move on from main menu;
+		consider action-to-take;
+		move on from main menu;]
 
 
 Section - Key codes
@@ -1104,22 +1125,32 @@ Menu command info:
 Section - Graphic links
 
 Graphlink processing rule for New_Game:
-	handle graphical key code 78;
+	[handle graphical key code 78;]
+	now menu-active is false;
+	convert the hyperlink code to the character code;
 	
 Graphlink processing rule for Continue_Game:
-	handle graphical key code 32;
+	[handle graphical key code 32;]
+	now menu-active is false;
+	convert the hyperlink code to the character code;
 	
 Graphlink processing rule for Quit_Game:
-	handle graphical key code 81;
+	[handle graphical key code 81;]
+	now menu-active is false;
+	convert the hyperlink code to the character code;
 
 Graphlink processing rule for Options_Button:
-	handle graphical key code 79;
+	[handle graphical key code 79;]
+	now menu-active is false;
+	convert the hyperlink code to the character code;
 
 Graphlink processing rule for Help_Button:
-	handle graphical key code 72;
+	[handle graphical key code 72;]
+	now menu-active is false;
+	convert the hyperlink code to the character code;
 
-Graphlink processing rule for Skip_Button:
-	handle graphical key code 83;
+[Graphlink processing rule for Skip_Button:
+	handle graphical key code 83;]
 
 Graphlink processing rule for Sound_Toggle:
 	toggle sound;
@@ -1135,7 +1166,7 @@ To set display for (item - the Sound_Toggle):
 	otherwise:
 		now the image-ID of the item is the disabled-state of the item.
 
-First menu command skip:
+[First menu command skip:
 	animate the button-fade track as a fade animation targeting the Skip_Button and using the Black-fader from 0 percent to 100 percent at 8 fps with a duration of 3 frames;
 
 The button-fade track is an animation track. The animation-callback is "[@ process visuals after skipping difficulty]".
@@ -1143,7 +1174,7 @@ The button-fade track is an animation track. The animation-callback is "[@ proce
 To process visuals after skipping difficulty:
 	deactivate the animation-target of the button-fade track;
 	prepare difficulty levels for display;
-	prepare type slugs.
+	prepare type slugs.]
 
 Section - Visual button response
 [We use visual button response for both keypresses and for clicks: keyboard input triggers the graphlink rules for the appropriate button.]
@@ -1177,15 +1208,18 @@ Score-Tip	Figure of Tooltip-Score	{343, 474}
 
 Chapter - Closing the title screen
 
-The window-fading track is an animation track. The animation-callback of the window-fading track is "[@ now the associated canvas of the graphics-window is the g-null-canvas]".
+The window-fading track is an animation track. The animation-callback of the window-fading track is "[@ clear the associated canvas of the graphics-window]".
 The music-fading track is an animation track. The animation-callback of the music-fading track is "[@ stop background channel]".
+
+To clear the associated canvas of the graphics-window:
+	now the associated canvas of the graphics-window is the g-null-canvas;
 
 To close title screen:
 	open up the graphics-window;[window may be closed.]
 	cease animating all tracks but the button-press track;[allows the button-press animation to complete];
 	repeat with tip running through tooltips:
 		deactivate tip;[turn off all tooltips]
-	cancel character input in the main-window;[just in case we're somehow waiting for input]
+	cancel character input in the main window;[just in case we're somehow waiting for input]
 	now the display-layer of the black-fader is 10001;[need to put fader above transition container to fade out whole menu]
 	let fade-length be 6;
 	if menu-active is false:
@@ -1195,7 +1229,7 @@ To close title screen:
 		animate the music-fading track as a custom animation at 8 fps with a duration of (fade-length) frames;
 	delay input until all animations are complete;
 	now the display-layer of the black-fader is 9999;
-	shut down the graphics-window;
+	close the graphics-window;
 	[open the status window.]
 	
 To cease animating all tracks but (target - an animation track):
@@ -1213,14 +1247,9 @@ Chapter - The map window
 
 The map window is modal--the game can't be played while the window is open, and the game text is not visible.]
 
-The map-window is a graphics g-window spawned by the main-window. The position is g-placebelow. The measurement is 100. The back-colour is g-black. The arbitrary scaling factor is 1.0000. The map-window is g-graphlinked.
+The map-window is a graphics g-window spawned by the main window. The position is g-placebelow. The measurement is 100. The background color is g-black. The arbitrary scaling factor is 1.0000. The map-window is g-graphlinked.
 
 The map-canvas is a g-canvas. The associated canvas of the map-window is the map-canvas.
-
-Table of Common Color Values (continued)
-glulx color value	assigned number
-g-deep-blue	10846
-g-sky-blue	12444924[#bde4fc]
 
 
 After constructing the map-window (this is the prevent drawing the map window on opening rule):
@@ -1240,13 +1269,13 @@ Check showing the map:
 
 Carry out showing the map:
 	follow the dungeon extent calculation rules;
-	shut down the status-window;
+	close the status window;
 	close side windows;
 	set the Gargoyle background color to the color g-black;
 	open up the map-window;
 	follow the glulx arranging rules;
 	while true is true:
-		let keystroke be the character code entered in the main-window;
+		let keystroke be the character code entered in the main window;
 		if the display status of the left_arrow is g-active:
 			if keystroke is -2[left arrow]:
 				scroll map west;
@@ -1280,13 +1309,13 @@ To scroll map (dir - direction):
 		now scroll-offset-y of the map-renderer is max-scroll-offset-y of the map-renderer;
 	if the scroll-offset-y of the map-renderer is less than (0 - the max-scroll-offset-y of the map-renderer):
 		now scroll-offset-y of the map-renderer is (0 - max-scroll-offset-y of the map-renderer);
-	follow the window-drawing rules for the map-window.
+	refresh the map-window;
 
 Report showing the map:
-	shut down the map-window;
+	close the map-window;
 	set the Gargoyle background color to the color g-white;
 	open side windows;
-	open up the status-window;
+	open the status window;
 	if there is a display-inactive size-sensitive g-element[i.e., if we have had to hide any of the UI elements, the map window was too small]:
 		say "[bracket]The window was too small to show the map comfortably. Try increasing the size of your game window.[close bracket][line break]";
 	say "Map consulted.";

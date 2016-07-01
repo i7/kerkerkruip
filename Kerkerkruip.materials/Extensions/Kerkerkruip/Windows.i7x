@@ -20,6 +20,7 @@ The header color is always "#DDDDDD".
 The status color is always "#BCBCBC".
 Humanist crimson is always "#9C1F00".
 
+The Gargoyle cursor color is "#9C1F00".
 
 
 Chapter - Window definitions
