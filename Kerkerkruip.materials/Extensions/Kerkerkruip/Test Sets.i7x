@@ -2513,6 +2513,49 @@ initial scheduling of glass damage text:
 regular scheduling of glass damage text: do the action of the chain golem waiting for a 100 melee hit by the player.
 testing effects of glass damage text: if we assert result "You deal 10 ", rule succeeds.
 
+Section - Attack Modifiers
+
+[TODO: add everything methodically]
+
+[TODO: make sure attack rolls add up]
+
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts	antecedent
+attack-modifiers	0	1	restarting for tests
+radiance-defend-sighted	1	1	--
+radiance-attack-sighted	1	1	--
+radiance-defend-blind	1	1	--
+radiance-attack-blind	1	1	--
+radiance-defend-eyeless	1	1	--
+radiance-attack-eyeless	1	1	--
+
+Initial scheduling of radiance-defend-sighted:
+	prepare a test battle with the Angel of Compassion;
+	
+regular scheduling of radiance-defend-sighted: do the action of the angel of compassion waiting for a 0 melee hit by the player.
+testing effects of radiance-defend-sighted: if we assert result "- 4 \(radiance\)<^[line break]>* you do not overcome", rule succeeds.
+
+regular scheduling of radiance-attack-sighted: do the action of waiting for a 0 melee hit by the angel of compassion.
+testing effects of radiance-attack-sighted: if we assert result "\+ 4 \(radiance\)<^[line break]>* compassion does not overcome", rule succeeds.
+
+initial scheduling of radiance-defend-blind: now flash-grenade-timer of the player is 5.
+regular scheduling of radiance-defend-blind: do the action of the angel of compassion waiting for a 0 melee hit by the player.
+testing effects of radiance-defend-blind: if we assert absence of result "- 4 \(radiance\)<^[line break]>* you do not overcome", rule succeeds.
+
+regular scheduling of radiance-attack-blind: do the action of waiting for a 0 melee hit by the angel of compassion.
+testing effects of radiance-attack-blind: if we assert absence of result "\+ 4 \(radiance\)<^[line break]>* compassion does not overcome", rule succeeds.
+
+initial scheduling of radiance-defend-eyeless:
+	now flash-grenade-timer of the player is 0;
+	now eyeless vision is adapted.
+
+regular scheduling of radiance-defend-eyeless: do the action of the angel of compassion waiting for a 0 melee hit by the player.
+testing effects of radiance-defend-eyeless: if we assert absence of result "- 4 \(radiance\)<^[line break]>* you do not overcome", rule succeeds.
+
+regular scheduling of radiance-attack-eyeless: do the action of waiting for a 0 melee hit by the angel of compassion.
+testing effects of radiance-attack-eyeless: if we assert absence of result "\+ 4 \(radiance\)<^[line break]>* compassion does not overcome", rule succeeds.
+
+
 Section - Damage Modifiers
 
 [Test every rule in the following rulebooks:
