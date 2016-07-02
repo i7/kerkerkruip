@@ -5494,7 +5494,6 @@ Section - Special power - Healing
 
 starting kit setup for Malygris (this is the randomise Malygris healing rule):
 	if a random chance of 1 in 5 succeeds:
-		now heal cooldown of Malygris is a random number between 1 and 5;
 		repeat with i running from 1 to 3:
 			increase heal power of Malygris by a random number between 1 and (heal cooldown of Malygris);
 		if generation info is true, say "* Malygris has heal power of [heal power of Malygris] and heal cooldown of [heal cooldown of Malygris].".
