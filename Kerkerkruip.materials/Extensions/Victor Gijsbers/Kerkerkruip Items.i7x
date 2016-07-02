@@ -3504,7 +3504,7 @@ The vampiric dagger is a major dagger.
 The vampiric dagger is deathly.
 The vampiric dagger is iron.
 
-The description of the vampiric dagger is "This sleek dagger will magically transfer some of the damage dealt to the target as health to its owner.".
+The description of the vampiric dagger is "This sleek dagger will magically transfer some of the damage dealt to the target as health to its owner, provided that the target has blood. Unless you are in vampire form, it cannot heal you beyond your maximum health.".
 
 The special weapon info of the vampiric dagger is "; leeches some health (works much better for vampires); benefits from tension[run paragraph on]".
 
@@ -3513,7 +3513,7 @@ The weapon attack bonus of the vampiric dagger is 0.
 The weapon damage bonus of the vampiric dagger is 0.
 
 An aftereffects rule (this is the vampiric dagger leeches rule):
-	if the global attacker weapon is the vampiric dagger and the total damage is greater than 0:
+	if the global attacker weapon is the vampiric dagger and the total damage is greater than 0 and the material of the global defender is flesh and the global defender is not undead:
 		let n be a random number between 1 and the total damage;
 		unless the global attacker is the player and the current form is vampire-form:
 			if n is greater than 1:

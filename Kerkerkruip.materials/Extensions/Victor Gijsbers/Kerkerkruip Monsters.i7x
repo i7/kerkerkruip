@@ -6623,7 +6623,7 @@ The legend-label of Drakul is Figure of map_legend_Drakul.
 Section - Drakul drains the living
 
 Aftereffects rule (this is the Drakul drinks blood rule):
-	if the global attacker is Drakul and the global defender is not undead:
+	if the global attacker is Drakul and the global defender is not undead and the material of the global defender is flesh:
 		if the total damage is greater than 0:
 			if Drakul-victory is false:
 				say "Drakul [bold type]drinks [regarding the global defender][possessive] blood[roman type], gaining [total damage] health!";
