@@ -3088,7 +3088,7 @@ Tentacle-throwing is an action applying to nothing.
 
 Tentacle-throw-ai is a number that varies.
 
-A dungeon interest rule (this is the set tentacle throwing behaviour rule):
+Starting kit setup for giant tentacle (this is the set tentacle throwing behaviour rule):
 	let n be a random number between 1 and 3;
 	now tentacle-throw-ai is n.
 
@@ -5414,7 +5414,7 @@ The teleport eagerness of Malygris is 8.
 Malygris-summon-countdown is a number that varies. Malygris-summon-countdown is 0.
 
 After reporting Malygris teleporting:
-	if teleportation-destination is not the location of the player:
+	if teleportation-destination is not the location of the player and Malygris is not asleep:
 		if the teleport amount of Malygris is 1:
 			now Malygris-summon-countdown is a random number between 5 and 7;
 		if the teleport amount of Malygris is 0:
@@ -5436,7 +5436,7 @@ Starting kit setup for Malygris (this is the randomise Malygris teleporting rule
 
 Section - Special power - Summoning the demonic assassin
 
-Every turn when Malygris-summon-countdown is not 0:
+Every turn when Malygris-summon-countdown is not 0 and Malygris is not asleep:
 	if the location of Malygris is the location of the player and the player is not hidden:
 		say "Your [if just-discovered is true]discovery[otherwise]arrival[end if] interrupts [if teleport amount of Malygris is 1]an intricate[otherwise]a hasty[end if] summoning ritual that Malygris was attempting to perform.";
 		now Malygris-summon-countdown is 0; [his attempt at summoning has failed because the player has interrupted it]

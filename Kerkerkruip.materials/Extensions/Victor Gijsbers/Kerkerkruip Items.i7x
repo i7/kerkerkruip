@@ -4799,11 +4799,16 @@ Chapter - Starting kits
 
 Section - Who needs kits
 
-Definition: a person is encounterable if it is denizen or the level of it is 0.
+[Definition: a person is encounterable if it is denizen or the level of it is 0.
 
 A dungeon interest rule (this is the equip all encounterable creatures rule):
 	Repeat with guy running through encounterable people:
+		set up a kit for guy;]
+		
+A dungeon interest rule (this is the equip all creatures rule):
+	Repeat with guy running through people:
 		set up a kit for guy;
+
 		
 Section - Kit definition
 
