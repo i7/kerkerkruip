@@ -3109,8 +3109,7 @@ An AI action selection rule for the at-Act giant tentacle (this is the tentacle 
 		if tentacle-throw-ai is 3:
 			if constriction level is greater than 4 or a random chance of 1 in 5 succeeds:
 				if a random chance of 1 in 3 succeeds:
-					now the Action Weight entry is 20;
-		say "TEST: [tentacle-throw-ai], [Action Weight entry]".
+					now the Action Weight entry is 20.
 
 Carry out the giant tentacle tentacle-throwing:
 	now constriction level is 0;
