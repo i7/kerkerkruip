@@ -2995,7 +2995,10 @@ Carry out reading the palimpsest:
 	let place be holder of item;
 	move item to the player;
 	try reading item;
-	move item to place;
+	if place is nothing:
+		remove item from play;
+	otherwise:
+		move item to place;
 	now palimpsest-active is false.
 
 [Replicating]
