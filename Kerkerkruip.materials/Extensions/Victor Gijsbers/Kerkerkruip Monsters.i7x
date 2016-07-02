@@ -3088,7 +3088,7 @@ Tentacle-throwing is an action applying to nothing.
 
 Tentacle-throw-ai is a number that varies.
 
-A dungeon interest rule (this is the set tentacle throwing behaviour rule):
+Starting kit setup for giant tentacle (this is the set tentacle throwing behaviour rule):
 	let n be a random number between 1 and 3;
 	now tentacle-throw-ai is n.
 
