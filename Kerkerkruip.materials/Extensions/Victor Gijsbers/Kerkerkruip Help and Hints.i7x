@@ -146,7 +146,7 @@ Section - Achievements
 
 Table of Achievement Menu
 title	text
-"[run paragraph on][setup achievement menu][fixed letter spacing]Assistant Dungeoneer    [achievement assistant dungeoneer]"	"Kill a level 1 creature."
+"[run paragraph on][setup achievement menu][fixed letter spacing]Assistant Dungeoneer      [achievement assistant dungeoneer]"	"Kill a level 1 creature."
 "[fixed letter spacing]Adventurer                [achievement adventurer]"	"Kill a level 2 creature."
 "[fixed letter spacing]Hunter                    [achievement hunter]"	"Kill a level 3 creature."
 "[fixed letter spacing]Destroyer                 [achievement destroyer]"	"Kill a level 4 creature."
