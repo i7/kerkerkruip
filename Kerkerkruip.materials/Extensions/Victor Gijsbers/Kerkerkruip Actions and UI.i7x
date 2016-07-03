@@ -469,7 +469,7 @@ Carry out remembering:
 		otherwise:
 			say "they are[run paragraph on]";
 		if psycholocation is active:
-			say ". With your powers of psycholocation, you might be able to SENSE it.";
+			say ". With your powers of psycholocation, you might be able to SENSE [if the number of memory-lost people is 1][regarding a random memory-lost person][them][otherwise]them[end if].";
 		otherwise:
 			say " now.";
 	Let the tip text be the next tip text;
