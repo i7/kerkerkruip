@@ -298,6 +298,7 @@ Every turn (this is the have followers follow rule):
 		repeat with guy running through worldsharer follower persons:
 			if guy is elsewhere:
 				now test subject is guy;
+				now last-seen-location of the guy is Null-Room; [The fact that guy might have followed is enough to create uncertainty for the player.]
 				follow the followers rules;
 				unless rule failed:
 					if guy can move and guy is not asleep:
