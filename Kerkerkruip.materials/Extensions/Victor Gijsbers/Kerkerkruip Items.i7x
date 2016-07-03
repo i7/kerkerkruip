@@ -1877,6 +1877,7 @@ An exploding rule (this is the teleportation grenade explodes rule):
 				if guy is not the player:
 					let n be teleport amount of guy;
 					try the guy teleporting;
+					if exploding-location is not the location of the player and location of the guy is not the location of the player:
 						now last-seen-location of the guy is Null-Room; [resets remembering even when the player isn't there to witness the teleportation, but did throw the grenade]
 					now teleport amount of guy is n; [compensating]
 					if follower percentile chance of guy is greater than 20:
