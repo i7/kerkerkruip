@@ -5107,7 +5107,7 @@ Carry out reforming:
 Chapter - Level 4 - Automatos
 
 Automatos is a neuter proper-named monster. "A man made of steel and chains[if Automatos carries doomhammer], wielding a terrible hammer,[end if] moves rigidly around the room."
-Understand "mass" and "chains" and "steel" and "nostril" and "nostrils" and "right ear" and "left ear" and "mouth" as Automatos.
+Understand "man" and "mass" and "chains" and "steel" and "nostril" and "nostrils" and "right ear" and "left ear" and "mouth" as Automatos.
 The description of Automatos is "Many claim that Automatos was created by Nomos himself to serve as guardian for his prophet. Others -- those less favourable disposed towards the god -- assert that priests of Nomos made it in order to terrorise the population, but that their creation went wild and killed all of them. Everyone, however, agrees that Automatos disappeared from the world centuries ago. That's just your luck, to find it here, lurking in the smelly dungeons of Kerkerkruip.".
 
 The soul description of Automatos is "gears moving back and forth with machinelike precision".
@@ -5494,6 +5494,7 @@ Section - Special power - Healing
 
 starting kit setup for Malygris (this is the randomise Malygris healing rule):
 	if a random chance of 1 in 5 succeeds:
+		now heal cooldown of Malygris is a random number between 2 and 5;
 		repeat with i running from 1 to 3:
 			increase heal power of Malygris by a random number between 1 and (heal cooldown of Malygris);
 		if generation info is true, say "* Malygris has heal power of [heal power of Malygris] and heal cooldown of [heal cooldown of Malygris].".
