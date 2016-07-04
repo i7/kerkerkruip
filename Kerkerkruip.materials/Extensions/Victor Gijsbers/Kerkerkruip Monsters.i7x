@@ -5289,6 +5289,7 @@ A person has a number called the binding index. [Counts the number of times a pe
 A person has a truth state called just-acted-bound.
 
 To bind (guy - a person):
+	now binding index of guy is 0;
 	now binding-list of guy is {};
 	let n be a random number between 1 and 2;
 	while n is greater than 0:
