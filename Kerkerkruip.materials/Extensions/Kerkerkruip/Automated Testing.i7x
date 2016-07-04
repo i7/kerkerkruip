@@ -1645,7 +1645,7 @@ Chapter: Basics
 
 Section: Introduction
 
-Kerkerkruip Automated Testing provides a framework for creating detailed playthroughs and testing that they behave as expected. Each playthrough, called a "test set" starts before dungeon generation and goes turn by turn until we run out of tests. A summary of tests will be output in the game console, but a detailed transcript will also be written to a file called "testtranscript."
+Kerkerkruip Automated Testing provides a framework for creating detailed playthroughs and testing that they behave as expected. Each test is associated with an "outcome." If an outcome involves starting a new playthrough with dungeon generation, it is considered a "test set." Every outcome that follows that one is considered a "test step." We can test every outcome starting with a particular test set, or we can test all outcomes. A summary of tests will be output in the game console, but a detailed transcript will also be written to a file called "testtranscript."
 
 Kerkerkrup Automated Testing is built on the foundation of Simple Unit Tests by Dannii Willis, and makes heavy use of Text Capture by Eric Eve.
 

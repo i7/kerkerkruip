@@ -3086,11 +3086,9 @@ Tentacle-throwing is an action applying to nothing.
 
 [First we set one of three throwing behaviours -- the player doesn't know which one. Behaviour 1 is linear with grappling strength but rare, behaviour 2 throws only with high grappling strength, behaviour 3 is a less predidtable version of 2.]
 
-Tentacle-throw-ai is a number that varies.
-
-A dungeon interest rule (this is the set tentacle throwing behaviour rule):
-	let n be a random number between 1 and 3;
-	now tentacle-throw-ai is n.
+linear-tentacle-throw is a starting kit. The recipient is the giant tentacle.
+high-grapple-tentacle-throw is a starting kit. The recipient is the giant tentacle.
+unpredictable-tentacle-throw is a starting kit. The recipient is the giant tentacle.
 
 [The AI rule]
 
@@ -3099,18 +3097,19 @@ An AI action selection rule for the at-Act giant tentacle (this is the tentacle 
 		choose a blank Row in the Table of AI Action Options;
 		now the Option entry is the action of the giant tentacle tentacle-throwing;
 		now the Action Weight entry is 0;
-		if tentacle-throw-ai is 1:
+		Let style be the selected kit of the giant tentacle;
+		if style is linear-tentacle-throw:
 			if a random chance of constriction level in 50 succeeds:
 				now the Action Weight entry is 20;
-		if tentacle-throw-ai is 2:
+		if style is high-grapple-tentacle-throw:
 			if constriction level is greater than 3:
 				if a random chance of 1 in 3 succeeds:
 					now the Action Weight entry is 20;
-		if tentacle-throw-ai is 3:
+		if style is unpredictable-tentacle-throw:
 			if constriction level is greater than 4 or a random chance of 1 in 5 succeeds:
 				if a random chance of 1 in 3 succeeds:
 					now the Action Weight entry is 20;
-		say "TEST: [tentacle-throw-ai], [Action Weight entry]".
+		say "TEST: [style], [Action Weight entry]".
 
 Carry out the giant tentacle tentacle-throwing:
 	now constriction level is 0;

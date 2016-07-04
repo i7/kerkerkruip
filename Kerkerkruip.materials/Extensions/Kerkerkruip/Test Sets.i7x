@@ -2555,6 +2555,130 @@ testing effects of radiance-defend-eyeless: if we assert absence of result "- 4 
 regular scheduling of radiance-attack-eyeless: do the action of waiting for a 0 melee hit by the angel of compassion.
 testing effects of radiance-attack-eyeless: if we assert absence of result "\+ 4 \(radiance\)<^[line break]>* compassion does not overcome", rule succeeds.
 
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts
+blind-reading	1	1
+eyeless-reading	0	1
+sighted-reading	0	1
+
+[scroll-reading isn't an attack modifier, but it's related because many attack modifiers involve perception]
+
+Definition: an outcome is illiteracy-testing if it is blind-reading or it is eyeless-reading or it is sighted-reading.
+
+Initial scheduling of a illiteracy-testing outcome:
+	Now the player skill bonus timer is 0;
+	Now the reusable item is a random scroll of skill.
+
+Regular scheduling of an illiteracy-testing outcome: try reading the reusable item.
+
+Testing effects of an illiteracy-testing outcome: if we assert that the player skill bonus timer is 0, rule succeeds.
+
+Initial scheduling of blind-reading:
+	Now eyeless vision is not adapted;
+	Now flash-grenade-timer of the player is 5;
+
+Initial scheduling of eyeless-reading:
+	Now eyeless vision is adapted;
+	Now flash-grenade-timer of the player is 5;
+	
+Initial scheduling of sighted-reading:
+	Now eyeless vision is not adapted;
+	Now flash-grenade-timer of the player is 0;
+	
+[blindness:
+./Kerkerkruip Actions and UI.i7x:Check reading when the player is blind (this is the cannot read when blind rule):
+./Kerkerkruip Actions and UI.i7x:[All this just because the player can be blind... and it probably stops working in the next release of Inform.]
+./Kerkerkruip Actions and UI.i7x:				say "can [if the locale paragraph count is greater than 0]also [end if][run paragraph on][unless player is blind][run paragraph on]see[otherwise]feel[end if] ";
+./Kerkerkruip Dreams.i7x:The bedroom window is scenery in the Bedroom. "The curtains are closed, but blindingly bright sunlight illuminates them from outside and casts a yellow glow around the room." Understand "curtains", "window", "sun", and "sunlight" as the bedroom window.
+./Kerkerkruip Events and Specials.i7x:	say "[if lijst is not empty]Running through the smoke, you stumble across [a list of things that list-inhabit lijst][otherwise][one of]You stumble blindly through the smoke[or]You run through an endless world of clouds[or]Nothing appears to change, no matter how long you run[as decreasingly likely outcomes][end if][if lijst2 is not empty]. You feel that you are being followed by [the list of things that list-inhabit lijst2][end if].".
+./Kerkerkruip Items.i7x:Section - Blindfold (minor)
+./Kerkerkruip Items.i7x:The blindfold is a minor mask. The description of the blindfold is "Wearing this blindfold will prevent you from seeing anything.".
+./Kerkerkruip Items.i7x:The blindfold is civilised.
+./Kerkerkruip Items.i7x:The blindfold is cloth.
+./Kerkerkruip Items.i7x:A blindness rule (this is the blindfold rule):
+./Kerkerkruip Items.i7x:	if the test subject wears the blindfold:
+./Kerkerkruip Items.i7x:A treasure placement rule (this is the acuity can be blindness rule):
+./Kerkerkruip Items.i7x:		now the hidden identity of the goggles of acuity is the goggles of blindness.
+./Kerkerkruip Items.i7x:Section - Goggles of blindness (cursed)
+./Kerkerkruip Items.i7x:The goggles of blindness are a cursed curse-identified mask. They are plural-named. The indefinite article is "the". 
+./Kerkerkruip Items.i7x:The goggles of blindness are leather.
+./Kerkerkruip Items.i7x:A blindness rule (this is the goggles of blindness rule):
+./Kerkerkruip Items.i7x:	if the test subject wears the goggles of blindness:
+./Kerkerkruip Items.i7x:The description of goggles of blindness is "These goggles prevent the wearer from seeing anything at all. A free-for-all fight between condemned criminals forced to wear such goggles is one of the most beloved shows during the Feast of Flesh; you smile as you recall the spectacle.".
+./Kerkerkruip Items.i7x:A flash grenade is a kind of grenade. The description of a flash grenade is "When thrown, this magical grenade emits a pulse of searing light so strong that it will blind anyone in its vicinity, even if they close their eyes. The device is universally judged to be Metastasio's most useless invention.".
+./Kerkerkruip Items.i7x:			unless main actor is blind:
+./Kerkerkruip Items.i7x:A blindness rule (this is the blind if flashed rule):
+./Kerkerkruip Items.i7x:				unless guy is blind:
+./Kerkerkruip Items.i7x:				say "The flash grenade explodes, and a blinding light [unless lijst is empty]burns away the retinae of anyone unlucky enough to see it clearly, namely, [lijst with definite articles][otherwise]flashes through the room[end if].";
+./Kerkerkruip Items.i7x:		if the player is blinded:
+./Kerkerkruip Items.i7x:			now the player is not blinded;
+./Kerkerkruip Items.i7x:			say "The waters cure you of your blindness.";
+./Kerkerkruip Locations.i7x:		unless the global attacker is blind:
+./Kerkerkruip Locations.i7x:				say " - [n] (blinding light)[run paragraph on]";
+./Kerkerkruip Locations.i7x:The hall of mirrors is a room. "Mirrors surround you on all sides in an impossible geometry[run paragraph on][unless the player is blind]. Myriad reflections follow your every movement -- though some, always in the corner of your eyes, seem to behave differently[end if]."
+./Kerkerkruip Locations.i7x:	unless the player is blind:
+./Kerkerkruip Locations.i7x:	unless the global attacker is blind:
+./Kerkerkruip Locations.i7x:The phantasmagoria is a room. "This huge hall is filled with the radiant images of warriors long dead, fighting their bloody battles over and over again.[run paragraph on][unless the player is blind] You see [phantasmagoria show] -- but the scene changes before you can focus on any details.[run paragraph on][end if]"
+./Kerkerkruip Locations.i7x:			unless guy is blind:
+./Kerkerkruip Locations.i7x:		say "Suddenly, [one of]a disintegrating skeletal warrior appears[or]a blast of dragon's fire appears[or]a naked male slave appears, screaming in fear[or]a naked female slave appears, fleeing in tears[or]a huge fountain of fire appears[or]a crashing ballista bolt appears[or]a drowning knight appears, crying for his god[or]a ghost appears, devouring the flesh of a still living man[or]a frenzied bull elephant appears[or]a shrieking princess appears in the claws of a demon[or]an obese king carried by seven blind eunuchs appears[or]a newly reanimated soldier appears, taking a blow for his necromancing comrade[at random]. [unless lijst is empty]While only an image that flickers and then disappears, it [bold type]startles [lijst with definite articles][roman type][otherwise]The illusions do not affect anyone[end if].".
+./Kerkerkruip Locations.i7x:	unless P is blind:
+./Kerkerkruip Monster Abilities.i7x:Chapter - Blindness
+./Kerkerkruip Monster Abilities.i7x:A person can be blinded. A person is usually not blinded. [Blinded is a property that makes you blind. It can be cured.]
+./Kerkerkruip Monster Abilities.i7x:A person can be eyeless. A person is usually not eyeless. [An eyeless person is blind but not negatively affected by blindness.]
+./Kerkerkruip Monster Abilities.i7x:The blindness rules are a rulebook.
+./Kerkerkruip Monster Abilities.i7x:To decide whether (guy - a person) is blind:
+./Kerkerkruip Monster Abilities.i7x:	follow the blindness rules;
+./Kerkerkruip Monster Abilities.i7x:A blindness rule (this is the blind if blinded rule):
+./Kerkerkruip Monster Abilities.i7x:	if test subject is blinded:
+./Kerkerkruip Monster Abilities.i7x:A blindness rule (this is the blind if eyeless rule):
+./Kerkerkruip Monster Abilities.i7x:	if test subject is eyeless:
+./Kerkerkruip Monster Abilities.i7x:Status attribute rule (this is the blindness status rule):
+./Kerkerkruip Monster Abilities.i7x:	if player is blind:
+./Kerkerkruip Monster Abilities.i7x:			say "You are [bold type]blind[roman type].[line break][run paragraph on]";
+./Kerkerkruip Monster Abilities.i7x:			say "[@ check initial position of attribute]blind[run paragraph on]";
+./Kerkerkruip Monster Abilities.i7x:Status attribute rule (this is the eyeless status rule):
+./Kerkerkruip Monster Abilities.i7x:	if player is eyeless:
+./Kerkerkruip Monster Abilities.i7x:			say "[@ check initial position of attribute]eyeless[run paragraph on]";
+./Kerkerkruip Monster Abilities.i7x:An attack modifier rule (this is the blindness attack modifier rule):
+./Kerkerkruip Monster Abilities.i7x:	if the global attacker is blind and the global attacker is not eyeless:
+./Kerkerkruip Monster Abilities.i7x:		say " - 3 (blindness)[run paragraph on]";
+./Kerkerkruip Monster Abilities.i7x:An attack modifier rule (this is the blindness defence modifier rule):
+./Kerkerkruip Monster Abilities.i7x:	if the global defender is blind and the global defender is not eyeless:
+./Kerkerkruip Monster Abilities.i7x:		say " + 2 (defender blind)[run paragraph on]";
+./Kerkerkruip Monster Abilities.i7x:Chance to win rule (this is the CTW blindness bonus rule):
+./Kerkerkruip Monster Abilities.i7x:	if the global attacker is blind and the global attacker is not eyeless:
+./Kerkerkruip Monster Abilities.i7x:	if the global defender is blind and the global defender is not eyeless:
+./Kerkerkruip Monster Abilities.i7x:		unless global defender is blind or global defender is radiance-immune:
+./Kerkerkruip Monster Abilities.i7x:		unless global attacker is blind or the global attacker is radiance-immune:
+./Kerkerkruip Monsters.i7x:The swarm of daggers is eyeless.
+./Kerkerkruip Monsters.i7x:The chain golem is eyeless.
+./Kerkerkruip Monsters.i7x:	say "The chains lash out one final time, blindly seeking prey -- but fall down limply before they can hit anyone. With thousands of [if chain golem is iron]hard metal [end if]clicks they start falling asunder.";
+./Kerkerkruip Monsters.i7x:The jumping bomb is eyeless.
+./Kerkerkruip Monsters.i7x:An angel of compassion is a monster. "An angel hovers here, [if angel-of-compassion-strength > 3]enveloped in blinding and overwhelming radiance[otherwise if angel-of-compassion-strength is 3]shining with divine glory[otherwise if angel-of-compassion-strength is 2]lessened by grief, but still majestic[otherwise if angel-of-compassion-strength is 1]saddened and wizened[otherwise]enveloped in sadness and all its glory gone[end if]."
+./Kerkerkruip Monsters.i7x:The giant tentacle is eyeless.
+./Kerkerkruip Monsters.i7x:	now printed name of X is "blinding flame";
+./Kerkerkruip Monsters.i7x:An aftereffects rule (this is the Israfel's blinding attack rule):
+./Kerkerkruip Monsters.i7x:		unless global defender is blind:
+./Kerkerkruip Monsters.i7x:				say "Israfel's flaming attack [bold type]blinds[roman type] [the global defender].".
+./Kerkerkruip Monsters.i7x:An aftereffects rule (this is the Fell's blinding attack rule):
+./Kerkerkruip Monsters.i7x:		unless global defender is blind:
+./Kerkerkruip Monsters.i7x:				say "Fell's nails strike [regarding the global defender][possessive] eyes, [bold type]blinding[roman type] [them] for 3 turns.".
+./Kerkerkruip Monsters.i7x:The Nameless Horror is eyeless.
+./Kerkerkruip Monsters.i7x:The rotting corpse is eyeless.
+./Kerkerkruip Monsters.i7x:The abyss of the soul is eyeless.
+./Kerkerkruip Monsters.i7x:The mummified priest is eyeless.
+./Kerkerkruip Monsters.i7x:The smoke demon is eyeless.
+./Kerkerkruip Systems - Hiding Smoke Ethereal.i7x:			unless guy is blind:
+./Kerkerkruip Systems - Hiding Smoke Ethereal.i7x:9+ smoke: -3  because it cannot get worse than blindness
+./Kerkerkruip Systems - Hiding Smoke Ethereal.i7x:[Some characters do not receive penalties for being in a room with smoke. Those who are eyeless, for instance, and those who are naturally immune to smoke. ]
+./Kerkerkruip Systems - Hiding Smoke Ethereal.i7x:A smoke immunity rule (this is the smoke immune if eyeless rule):
+./Kerkerkruip Systems - Hiding Smoke Ethereal.i7x:	if test subject is blind:
+./Kerkerkruip Systems.i7x:eyeless vision	"You gain the ability to [bold type]see without eyes[roman type]!"	"You lose your eyeless vision."
+./Kerkerkruip Systems.i7x:Section - Eyeless vision
+./Kerkerkruip Systems.i7x:First blindness rule (this is the not blind if darkvision rule):
+./Kerkerkruip Systems.i7x:	if test subject is player and eyeless vision is adapted:
+./Kerkerkruip Tests.i7x:A blindness rule (this is the smiting is blind rule):
+]
 
 Section - Damage Modifiers
 
