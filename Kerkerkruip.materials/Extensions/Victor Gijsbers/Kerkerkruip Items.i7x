@@ -1563,7 +1563,7 @@ The metal sheet is huge. The metal sheet is iron.
 
 The block bonus of the metal sheet is 4.
 
-The description of the metal sheet is "This thick sheet of metal has been fashioned into a crude shield. But who needs subtlety when he can put several inches of steel between himself and his attacker?".
+The description of the metal sheet is "This thick sheet of metal has been fashioned into a crude shield. But when you can put several inches of steel between yourself and your attacker, you can afford crudeness. [italic type]Block bonus: +4[roman type].".
 
 Section - Shield of fanaticism
 
