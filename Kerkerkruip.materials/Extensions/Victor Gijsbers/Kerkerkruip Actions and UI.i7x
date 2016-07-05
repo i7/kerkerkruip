@@ -1011,70 +1011,11 @@ Carry out requesting the story file version:
 
 
 
+Chapter - Replacing "You can see" in case the player is blind
 
+The you-can-also-see rule response (D) is "[regarding the player][can] also [run paragraph on][unless player is blind]see[otherwise]feel[end if] ".
 
-Chapter - Replacing "You can see" is not a joke
-
-[All this just because the player can be blind... and it probably stops working in the next release of Inform.
-
-Hey! It still works! But it should be possible to replace it with something much simpler now...
-
-The you-can-also-see rule response (D) is "[regarding the player][can] also [run paragraph on][unless player is blind][run paragraph on]see[otherwise]feel[end if]".
-
-The you-can-also-see rule response (E) is:"[regarding the player][can] [run paragraph on][unless player is blind][run paragraph on]see[otherwise]feel[end if]".
-
-maybe we don't even need the run paragraph on?]
-
-The you-can-also-see rule is not listed in any rulebook.
-
-For printing the locale description (this is the alternative-you-can-also-see rule):
-	let the domain be the parameter-object;
-	let the mentionable count be 0;
-	repeat with item running through things:
-		now the item is not marked for listing;
-	repeat through the Table of Locale Priorities:
-		[say "[notable-object entry] - [locale description priority entry].";]
-		if the locale description priority entry is greater than 0,
-			now the notable-object entry is marked for listing;
-		increase the mentionable count by 1;
-	if the mentionable count is greater than 0:
-		repeat with item running through things:
-			if the item is mentioned:
-				now the item is not marked for listing;
-		begin the listing nondescript items activity with the domain;
-		if the number of marked for listing things is 0:
-			abandon the listing nondescript items activity with the domain;
-		otherwise:
-			if handling the listing nondescript items activity:
-				if the domain is a room:
-					if the domain is the location, say "You ";
-					otherwise say "In [the domain] you ";
-				otherwise if the domain is a supporter:
-					say "On [the domain] you ";
-				otherwise if the domain is an animal:
-					say "On [the domain] you ";
-				otherwise:
-					say "In [the domain] you ";
-				say "can [if the locale paragraph count is greater than 0]also [end if][run paragraph on][unless player is blind][run paragraph on]see[otherwise]feel[end if] ";
-				let the common holder be nothing;
-				let contents form of list be true;
-				repeat with list item running through marked for listing things:
-					if the holder of the list item is not the common holder:
-						if the common holder is nothing,
-							now the common holder is the holder of the list item;
-						otherwise now contents form of list is false;
-					if the list item is mentioned, now the list item is not marked for listing;
-				filter list recursion to unmentioned things;
-				if contents form of list is true and the common holder is not nothing,
-					list the contents of the common holder, as a sentence, including contents,
-						giving brief inventory information, tersely, not listing
-						concealed items, listing marked items only;
-				otherwise say "[a list of marked for listing things including contents]";
-				if the domain is the location, say " here";
-				say ".[paragraph break]";
-				unfilter list recursion;
-			end the listing nondescript items activity with the domain;
-	continue the activity.
+The you-can-also-see rule response (E) is "[regarding the player][can] [run paragraph on][unless player is blind]see[otherwise]feel[end if] ".
 
 Chapter - Whether all includes
 
