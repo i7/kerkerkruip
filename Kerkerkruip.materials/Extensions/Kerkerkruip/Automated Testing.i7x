@@ -1173,15 +1173,19 @@ To decide whether we assert that/-- (A - a value) is (B - a value) with label (T
 	now the failure report is "Expected [T]: [B], Got: [A]";
 	no.
 
+To say trimmed (T - a text):
+	replace the regular expression "^\s+|\s+$" in T with "";
+	say T;
+
 To decide whether we assert result (T - a text):
 	update event description because "checking if result includes '[T]'";
 	if capturing damage text:
 		unless the damage description matches the regular expression T:
-			now the failure report is "Regular expression '[T]' was not found in damage text:[paragraph break]'[the damage description]'[line break]";
+			now the failure report is "Regular expression '[T]' was not found in damage text:[paragraph break]'[trimmed the damage description]'[line break]";
 			no;
 	otherwise:
 		unless the event description matches the regular expression T:
-			now the failure report is "Regular expression '[T]' was not found in the text:[paragraph break]'[the event description]'[line break]";
+			now the failure report is "Regular expression '[T]' was not found in the text:[paragraph break]'[trimmed the event description]'[line break]";
 			no;
 	now failure report is "";
 	yes.
@@ -1190,11 +1194,11 @@ To decide whether we assert absence of result (T - a text):
 	update event description because "checking if result does not include '[T]'";
 	if capturing damage text:
 		if the damage description matches the regular expression T:
-			now the failure report is "Regular expression '[T]' was found in damage text (when it should not have been):[paragraph break]'[the damage description]'[line break]";
+			now the failure report is "Regular expression '[T]' was found in damage text (when it should not have been):[paragraph break]'[trimmed the damage description]'[line break]";
 			no;
 	otherwise:
 		if the event description matches the regular expression T:
-			now the failure report is "Regular expression '[T]' was found in the text (when it should not have been):[paragraph break]'[the event description]'[line break]";
+			now the failure report is "Regular expression '[T]' was found in the text (when it should not have been):[paragraph break]'[trimmed the event description]'[line break]";
 			no;
 	now failure report is "";
 	yes.
