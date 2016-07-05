@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# Run Kerkerkruip's test suite
+
+# The test suite doesn't always work well if old test files exist
+rm -f test*
+
+# Run the tests non-interactively
+echo 'Running the Kerkerkruip test suite:'
+touch noninteractivetests
+./i7/share/inform7/Interpreters/dumb-git Kerkerkruip.gblorb > testlog &
+
+# Show a basic progress marker
+PID=$!
+while [ -d /proc/$PID ]
+do
+    sleep 10
+    printf "#"
+done
+
+# Output the results
+echo
+sed -n '/Test results/,$p' testlog > test-results
+cat test-results
+
+# Store the number of errors
+RESULT=$(sed -nrs 's/.*Total: [0-9]+ tests in [0-9]+ sets, ([0-9]+) failures.*/\1/p' test-results)
+
+# Clean up and exit
+rm noninteractivetests test*
+exit $RESULT

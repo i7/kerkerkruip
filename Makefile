@@ -16,7 +16,7 @@ SHELL = /bin/bash -o pipefail
 CURL = curl -L -s -S
 
 # Mark which rules are not actually generating files
-.PHONY: all clean deploy setup
+.PHONY: all clean deploy setup test
 
 all: setup
 
@@ -54,7 +54,7 @@ else
     INFORM6_OPTS = -E2w~S~DG
 endif
 
-%.gblorb: $(INFORM_ENV)
+%.gblorb: $(INFORM_ENV) %.inform/Source/story.ni %.materials/Extensions/*/*.i7x
 	export HOME=$(BASE); ./i7/libexec/ni --format=ulx --internal ./i7/share/inform7/Internal --noprogress --project "$*.inform" $(NI_OPTS) | grep -Ev "ve also read"
 	./i7/libexec/inform6 $(INFORM6_OPTS) "$*.inform/Build/auto.inf" -o "$*.inform/Build/output.ulx"
 	./i7/libexec/cBlorb -unix "$*.inform/Release.blurb" "$*.materials/Release/$@"
@@ -64,6 +64,10 @@ endif
 %.zip: %.gblorb
 	cd "$*.materials/Release/" && zip "$@" *
 	mv "$*.materials/Release/$@" .
+
+# Run the test suite
+test: Kerkerkruip.gblorb
+	./tools/tests
 
 # Deploy a zip to the Kerkerkruip downloads server
 deploy: Kerkerkruip.zip
