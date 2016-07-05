@@ -23,9 +23,9 @@ script:
   - make test
 after_script:
   - if [[ $TRAVIS_REPO_SLUG == i7/kerkerkruip ]] && [[ $TRAVIS_BRANCH == master ]] && [[ $TRAVIS_PULL_REQUEST == false ]]
-    then
-      openssl aes-256-cbc -K $encrypted_f8c474e594c4_key -iv $encrypted_f8c474e594c4_iv -in .travis/kerkerkruip_rsa.enc -out .travis/kerkerkruip_rsa -d
-      chmod 600 .travis/kerkerkruip_rsa
-      eval $(ssh-agent -s) && ssh-add .travis/kerkerkruip_rsa
-      make deploy
+    then;
+      openssl aes-256-cbc -K $encrypted_f8c474e594c4_key -iv $encrypted_f8c474e594c4_iv -in .travis/kerkerkruip_rsa.enc -out .travis/kerkerkruip_rsa -d;
+      chmod 600 .travis/kerkerkruip_rsa;
+      eval $(ssh-agent -s) && ssh-add .travis/kerkerkruip_rsa;
+      make deploy;
     fi

@@ -19,7 +19,7 @@ player-missed	1	0	player-targeted
 player-damaged	1	0	player-targeted
 bat crashing into spike	1	0	player-damaged
 bat avoiding huge spike	1	0	player-missed
-bat avoiding gigantic spike	1	0	player-missed	
+bat avoiding gigantic spike	1	0	player-missed
 Arena-tormentor-enslaving	1	0	--
 arena-tormentor-damaged	1	0	arena-tormentor-enslaving
 arena-tormentor-killed	1	0	arena-tormentor-enslaving
@@ -31,7 +31,7 @@ Scenario rule for aite champions vs mindbat:
 	now Hall of Gods is testobject;
 	now Drakul's lifeblood is testobject;
 	now Temple of Chton is testobject;
-	
+
 Regular scheduling of aite champions vs mindbat:
 	[TODO: Why doesn't this interrupt text capture when doing it from the killing rules does?]
 	update the monster statistics;
@@ -53,15 +53,15 @@ regular scheduling of player-targeted:
 	repeat with guy running through people in the location:
 		now health of guy is 1000;
 	compel the action of waiting;
-		
+
 First intervention possible when testing aite champions vs mindbat:
 	unless testing player-targeted, rule fails;
 	unless the main actor is the player and intervention-god is Aite, rule fails;
-	
+
 Intervention bonus when testing player-targeted:
 	if the main actor is the player, increase the intervention-bonus by 100;
-	
-testing effects of player-targeted: if we assert result "bursts out of the ground<^[line break]>+ you", rule succeeds.
+
+testing effects of player-targeted: if we assert result "bursts out of the ground<^\n>+ you", rule succeeds.
 testing effects of spike-flyer: if we assert result "bursts out of the ground in front of you", rule succeeds.
 testing effects of player-missed: if the health of the player is 1000, rule succeeds.
 testing effects of player-damaged: if the health of the player is less than 1000, rule succeeds.
@@ -71,20 +71,20 @@ testing effects of bat avoiding gigantic spike: if we assert result "gigantic <a
 
 Initial scheduling of Arena-tormentor-enslaving:
 	now the health of the tormentor of Aite is the permanent health of the tormentor of Aite;
-	
+
 Regular scheduling of Arena-tormentor-enslaving:
 	now enslave-cooldown is 0;
 	compel the action of enslaving the tormentor of Aite.
-	
+
 testing effects of Arena-tormentor-enslaving:
 	assert result "will do your bidding";
 	if we assert result "ball of lightning .* damage to the tormentor of Aite", rule succeeds.
-	
+
 Testing effects of Arena-tormentor-damaged:
 	if the tormentor of Aite is not alive, make no decision;
 	assert "tormentor should oppose the player" based on whether or not the tormentor of Aite opposes the player;
 	if we assert result "The tormentor of Aite prostrates herself. 'I beg for your mercy, O great Aite,' she prays. Then she rises to fight you again!", rule succeeds;
-	
+
 testing effects of Arena-tormentor-killed:
 	if the tormentor of Aite is dead, rule succeeds;
 
@@ -105,7 +105,7 @@ initial scheduling of Defender-enslaving:
 	now the favour of the player is 4; [not sure if this is really important]
 	have the player defeat the healer of Aite;
 	now the health of Defender of Aite is 100;
-	
+
 regular scheduling of an outcome (called event):
 	if event is defender-enslaving or event is defender-re-enslaving:
 		now enslave-cooldown is 0;
@@ -121,7 +121,7 @@ regular scheduling of defender-re-enslaving:
 	now the health of Defender of Aite is 1;
 	now the health of the player is 1;
 	now the permanent health of the player is 100;
-	
+
 testing effects of defender-re-enslaving:
 	assert result "will do your bidding";
 	assert result "ball of lightning .* damage to the defender of Aite, killing him";
@@ -159,7 +159,7 @@ initial scheduling of herm-arena-bonus:
 
 regular scheduling of herm-arena-bonus: have the player and Drakul fight in Arena of the Gods;
 testing effects of herm-arena-bonus: if we assert result "grants you 2 divine favour![line break][line break]Herm gifts you <^\n>+; and increases your hiding bonus to \+2\.[line break][line break]You are transported to the Arena of the Gods, where the angry Drakul awaits, preparing himself to", rule succeeds;
-	
+
 regular scheduling of arena-vampire-joining: compel the action of drinking Drakul's lifeblood.
 testing effects for arena-vampire-joining: if we assert result "You turn into a vampire, but your opponent doesn't care", rule succeeds.
 
@@ -167,7 +167,7 @@ regular scheduling of herm-ally-summoning:
 	update the combat status;
 	assert that the combat status is combat;
 	try reading the reusable item;
-	
+
 testing effects of herm-ally-summoning: if the monster summoned does not oppose the player, rule succeeds.
 testing effects of summoned-drakul-opponent: if the monster summoned opposes drakul, rule succeeds.
 
@@ -175,7 +175,7 @@ Regular scheduling of chton-arena-cheating:
 	Now the health of the player is 1;
 	Now the permanent health of the player is 100;
 	compel the action of smiting drakul.
-	
+
 testing effects for chton-arena-cheating:
 	[should the lifeblood appear a second time just because drinking it removes it from play?]
 	assert result ["infamous vampire, who crumbles away into ashes"] "infamous vampire, a small vial";
@@ -209,7 +209,7 @@ initial scheduling of parting shots:
 	Travel sneakily to the location of the mindslug;
 	now the defence of the player is 100;
 	now every person enclosed by the location is not asleep.
-	
+
 Testing effects of mindslug-hiding-check:
 	assert that the mindslug is in the location;
 	assert that fafhrd is in the location;
@@ -218,15 +218,15 @@ Testing effects of mindslug-hiding-check:
 	if the player is hidden, rule succeeds.
 
 regular scheduling of mindslug-hidden-retreat: compel the action of retreating.
-		
+
 testing effects for mindslug-hidden-retreat:
 	assert that the hitting count of mindslug is 0 with label "hitting count of mindslug";
 	assert that the hitting count of fafhrd is 0 with label "hitting count of fafhrd";
 	assert that the hitting count of mouser is 0 with label "hitting count of mouser";
 	rule succeeds.
-	
+
 initial scheduling of mindslug-hidden-runner: extract the player to the location of the mindslug.
-	
+
 regular scheduling of mindslug-hidden-runner: compel the action of going way-to-get-back.
 testing effects for mindslug-hidden-runner:
 	assert that the hitting count of mindslug is 0 with label "hitting count of mindslug";
@@ -239,7 +239,7 @@ Initial scheduling for mindslug-reveal: try going way-to-get-there.
 regular scheduling of mindslug-reveal: compel the action of taking off the fuligin cloak.
 Testing effects of mindslug-reveal: if the player is not hidden, rule succeeds.
 
-regular scheduling of mindslug-retreat: 
+regular scheduling of mindslug-retreat:
 	now mindslug presses the player;
 	now concentration of mindslug is 0;
 	now fafhrd does not press the player;
@@ -247,7 +247,7 @@ regular scheduling of mindslug-retreat:
 	now mouser does not press the player;
 	now concentration of mouser is 0;
 	compel the action of retreating.
-		
+
 testing effects for mindslug-retreat:
 	assert that the hitting count of mindslug is 1 with label "hitting count of mindslug";
 	assert that the hitting count of fafhrd is 1 with label "hitting count of fafhrd";
@@ -259,13 +259,13 @@ Initial scheduling of mindslug-runner:
 	now retreat location is the location of the mindslug;
 
 regular scheduling of mindslug-runner: compel the action of going the way-to-get-back.
-	
+
 testing effects for mindslug-runner:
 	assert that the hitting count of mindslug is 1 with label "hitting count of mindslug";
 	assert that the hitting count of fafhrd is 1 with label "hitting count of fafhrd";
 	assert that the hitting count of mouser is 1 with label "hitting count of mouser";
 	if we assert result "run past your enemies", rule succeeds.
-	
+
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts
 fell-freezing	0	1
@@ -279,19 +279,19 @@ Initial scheduling of fell-freezing:
 	try taking off the fuligin cloak;
 	now the health of israfel is 1000;
 	try israfel israfel-splitting.
-	
+
 regular scheduling of fell-freezing:
 	now Fell presses the player;
 	compel the action of Fell israfel-reuniting.
-	
+
 regular scheduling of frozen-fell-fleeing: compel the action of retreating.
 
 testing effects of frozen-fell-fleeing:
 	assert that israfel-reuniting-initiator is Fell with label "the reuniting initiator";
 	if we assert that the hitting count of Fell is 0, rule succeeds.
-	
+
 regular scheduling of israfel-rejoining: compel the action of going the way-to-get-there.
-testing effects of israfel-rejoining: if we assert that the location of Israfel is the location, rule succeeds. 
+testing effects of israfel-rejoining: if we assert that the location of Israfel is the location, rule succeeds.
 [TODO: what if Fell is still there?]
 
 regular scheduling of israfel-resplitting: compel the action of israfel israfel-splitting.
@@ -300,7 +300,7 @@ Testing effects of israfel-resplitting: if israfel is off-stage, rule succeeds.
 initial scheduling of unfrozen-fell-fleeing: now fell presses the player.
 regular scheduling of unfrozen-fell-fleeing: compel the action of retreating.
 testing effects of unfrozen-fell-fleeing: if we assert that the hitting count of Fell is 1 with label "hitting count of Fell", rule succeeds.
-	
+
 Section - Retreating from the Tentacle
 
 Table of Outcomes (continued)
@@ -315,34 +315,34 @@ Scenario for tentacle-grab:
 	now the hall of mirrors is bannedobject;
 	Now the pickaxe is testobject;
 	Now every not connectable room is bannedobject; [the bridge of doom stops digging]
-	
+
 initial scheduling of tentacle-grab:
 	now the player carries the pickaxe;
 	Travel sneakily to the location of the tentacle;
 	now every person enclosed by the location is not asleep;
-	
+
 initial scheduling of tentacle-retreat:
 	try taking off the fuligin cloak;
 	now the health of the player is 1000;
 	now the defence of the player is 0.
-	
+
 regular scheduling of tentacle-retreat: compel the action of retreating.
-		
+
 Initial scheduling for tentacle-retreat:
 	now tentacle presses the player;
 	now concentration of tentacle is 3;
 	now the melee of the tentacle is 50;
 	now the health of the player is 100;
-		
+
 testing effects for tentacle-retreat:
 	assert result "bravely run away";
 	assert that the hitting count of tentacle is 1 with label "hitting count of tentacle";
 	assert "the player should be grappled" based on whether or not the player is grappled by the tentacle;
 	if the tentacle is in the location, rule succeeds.
 
-initial scheduling for tentacle-dig-retreat: now the tentacle does not grapple the player.	
+initial scheduling for tentacle-dig-retreat: now the tentacle does not grapple the player.
 regular scheduling of tentacle-dig-retreat: compel the action of digging a random diggable direction.
-	
+
 testing effects for tentacle-dig-retreat:
 	assert result "magically create a tunnel";
 	assert that the hitting count of tentacle is 1 with label "hitting count of tentacle";
@@ -365,18 +365,18 @@ insane-max-concentration	1	1	--
 Scenario for insane-drakul:
 	Now drakul's lifeblood is bannedobject;
 	Now drakul is testobject;
-	
+
 Initial scheduling of insane-drakul:
-	now the mind score of the player is 100;  
+	now the mind score of the player is 100;
 	extract the player to the location of drakul;
 	equip the player with the staff of insanity;
 	while the size of the staff of insanity is less than medium:
 		increase the size of the staff of insanity;
-		
+
 Regular scheduling of an outcome (called event):
 	if event is drakul-mild-concentration or event is drakul-med-concentration or event is drakul-max-concentration or event is insane-mild-concentration or event is insane-med-concentration or event is insane-max-concentration:
 		try Drakul concentrating;
-		
+
 Testing effects of drakul-mild-concentration: if we assert result "Drakul smiles a little wider", rule succeeds.
 
 Testing effects of drakul-med-concentration: if we assert result "'There is no need to fear me,' Drakul says as he concentrates more deeply\.", rule succeeds.
@@ -385,7 +385,7 @@ Testing effects of drakul-max-concentration: if we assert result "Drakul attains
 
 Regular scheduling of driving drakul insane: do the action of Drakul waiting for a 100 melee hit by the player.
 Testing effects of driving drakul insane: if we assert result "Drakul goes insane", rule succeeds.
-	
+
 Initial scheduling of insane-mild-concentration:
 	if there is a held achievement of Blood never lies in the Table of Held Achievements:
 		do nothing;
@@ -393,7 +393,7 @@ Initial scheduling of insane-mild-concentration:
 		choose row with held achievement of Blood never lies in the Table of Held Achievements;
 		blank out the whole row;]
 	now the concentration of drakul is 0;
-	
+
 Testing effects of insane-mild-concentration: if we assert result "Drakul smiles a little wider", rule succeeds.
 
 Testing effects of insane-med-concentration: if we assert result "'An insane vampire always tells the truth\. And I tell you: You should fear me!' Drakul says as he concentrates more deeply.", rule succeeds.
@@ -437,10 +437,10 @@ testing effects of vampire-turning-hinting: if we assert result "\bI intend to v
 Initial scheduling of drakul suicide:
 	now the health of drakul is 1;
 	now the melee of drakul is 100;
-	
+
 regular scheduling of drakul suicide: try drakul hitting drakul.
 Testing effects of drakul suicide: if we assert result "drains his own blood, a small vial", rule succeeds.
-	
+
 Section - Dreadful Presence
 
 [E91A270C9962]
@@ -469,13 +469,13 @@ player-cower2	6	25	200	insane-player-cowering
 	if P < 1:
 		decide on 1;
 	decide on P;
-	
+
 blood ape: (dreadful presence 2) * 12 - (level 1 *3) = 21
 insane player: (dreadful presence 2) * 12 - (level 0 * 3) = 24]
 
 Scenario for Dreadful-Presence-Test:
 	block interventions;
-	
+
 regular scheduling of Dreadful-Presence-Test:
 	repeat with guy running through denizen people:
 		now the defence of guy is 100;
@@ -486,9 +486,9 @@ regular scheduling of Dreadful-Presence-Test:
 	try readying the malleus;
 	prepare a test battle with the blood ape;
 	revive the zombie toad in the location;
-	
+
 Testing effects of player-presence: if we assert that the dreadful presence of the player is 2, rule succeeds;
-	
+
 To decide which object is the cowerer of (event - an outcome):
 	if event is ape-cower1 or event is ape-cower2:
 		decide on the blood ape;
@@ -505,7 +505,7 @@ regular scheduling of an outcome (called event):
 		now the health of the player is 1000;
 		now the health of the blood ape is 1000;
 		now the health of the zombie toad is 1000;
-	
+
 regular scheduling of a cower-counter outcome (called event): wait for the cowerer of event to act freely;
 
 testing effects of a cower-counter outcome (called the event) (this is the cower counting rule):
@@ -564,20 +564,20 @@ Initial scheduling of bug-210:
 	now the health of the mindslug is 1;
 	now the weapon damage bonus of the claymore is 100;
 	now the melee of Fafhrd is 100;
-	
+
 Testing effects of bug-210:
 	assert "fafhrd should carry the claymore" based on whether or not fafhrd carries the claymore;
 	assert "the claymore should be readied" based on whether or not the claymore is readied;
 	assert "fafhrd should only have one weapon readied" based on whether or not the number of readied weapons enclosed by fafhrd is 1;
-	
+
 regular scheduling of reaction-mindslug-killing: compel the action of reading the reusable item as a reaction to fafhrd.
-	
+
 [TODO: make sure the mindslug is alive before the reaction?]
 
 testing effects of reaction-mindslug-killing: if the mindslug is dead, rule succeeds.
 
 testing effects of mindslug-soul-revival: if we assert result "The contemplative northern barbarian ends your life, with what seems to be a hint of sadness in his face.*As the mindslug dies, you feel its powerful intelligence absorbed into your own body", rule succeeds.
-		
+
 Section - Reward in Arena of the Gods
 
 [for issue #228]
@@ -593,7 +593,7 @@ scenario for divine reward:
 	now Hall of Gods is testobject;
 	now the glass cannon is testobject;
 	block interventions;
-	
+
 Initial scheduling of divine reward:
 	equip the player with the glass cannon;
 	now the defence of the player is 100;
@@ -629,7 +629,7 @@ testing effects of fell-also-killing:
 	assert "the glass cannon should still be carried" based on whether or not the player carries the glass cannon;
 	assert "the glass cannon should still be readied" based on whether or not the glass cannon is readied;
 	rule succeeds.
-	
+
 Section - Temporary Blood Magic from Nomos
 
 Table of Outcomes (continued)
@@ -665,7 +665,7 @@ To decide what number is the chance of (guy - a person) remaining concentrated:
 	follow the remain concentrated rules;
 	now the global defender is previous defender;
 	decide on the remain concentrated chance.
-	
+
 Initial scheduling of temporary Nomos blood magic:
 	now every room is not rust-spored;
 	now the health of the player is 1000;
@@ -673,7 +673,7 @@ Initial scheduling of temporary Nomos blood magic:
 	have the player defeat Bodmall;
 	extract the player to the temple of nomos, making sure it is unoccupied;
 	extract the swarm of daggers to the temple of nomos;
-	
+
 regular scheduling of temporary Nomos blood magic: have the player sacrifice a random granted power.
 testing effects of gown-gift-in-combat: if the player carries the gown of the red court, rule succeeds.
 testing effects of hood-gift-in-combat: if the player carries the inquisitor's hood, rule succeeds.
@@ -681,13 +681,13 @@ testing effects of hood-gift-in-combat: if the player carries the inquisitor's h
 regular scheduling of an outcome (called event):
 	if event is unfed-hood-description or event is fed-hood-description:
 		try examining the inquisitor's hood.
-		
+
 testing effects of unfed-hood-description: if we assert result "This particular one gives you a \+20% chance of remaining concentrated when damaged\. It also allows you to maintain concentration when paying blood magic costs\. Feeding 5 blood to the hood will temporarily add 15% to the chance of remaining concentrated", rule succeeds.
 
 regular scheduling of unfed-hood-power:
 	now tnbm-number is the chance of the player remaining concentrated;
 	equip the player with the inquisitor's hood.
-	
+
 testing effects of unfed-hood-power: if we assert that (the chance of the player remaining concentrated - tnbm-number) is 20, rule succeeds.
 
 initial scheduling of concentrated-hood-feeding: try concentrating.
@@ -712,9 +712,9 @@ initial scheduling of unworn-fed-gown:
 	try taking off the inquisitor's hood;
 	try feeding the gown of the red court;
 	Now the tnbm-number is the blood timer of the gown of the red court;
-	
+
 testing effects of unworn-fed-gown: if we assert that tnbm-number is between 2 and 10, rule succeeds.
-	
+
 regular scheduling of fed-gown-description: try examining the gown of the red court.
 testing effects of fed-gown-description: if we assert result "Wearing the gown gives you two levels of dreadful presence. You can feed the gown 4 blood", rule succeeds.
 
@@ -730,7 +730,7 @@ testing effects of second-gown-feeding:
 	assert that the dreadful presence of the player is 3;
 	decrease the tnbm-number by 1;
 	if we assert that the blood timer of the gown of the red court is the tnbm-number, rule succeeds.
-	
+
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	maximum attempts	antecedent
 first-gown-timeout	1	0	10	--
@@ -751,7 +751,7 @@ testing effects of an outcome (called event):
 		otherwise:
 			Let expected timer be tnbm-number - (attempt count of the event + 1);
 			assert that the blood timer of the gown of the red court is the expected timer with label "blood timer of the gown ([tnbm-number] - [attempt count of the event + 1])";
-					
+
 testing effects of first-timeout-wearoff: if we assert result "Some of the blood power of the gown of the red court wears off", rule succeeds.
 
 initial scheduling of gown-timer-reset: now tnbm-number is the blood timer of the gown of the red court.
@@ -787,7 +787,7 @@ initial scheduling of nomos-bonus-examining:
 	now the health of the swarm of daggers is 100;
 	now the melee of the player is 100;
 	now the nomos bonus is true;
-	
+
 regular scheduling of nomos-bonus-examining: compel the action of examining the swarm of daggers.
 Testing effects of nomos-bonus-examining:
 	assert that the nomos bonus is true with label "nomos bonus";
@@ -799,12 +799,12 @@ Definition: an outcome is malleus-fed if it is malleus-feeding or it is malleus-
 initial scheduling for a malleus-feeding outcome:
 	now the nomos bonus is false;
 	try feeding the malleus maleficarum;
-	
+
 regular scheduling of a malleus-fed outcome: try examining the malleus maleficarum.
 testing effects of a malleus-fed outcome: if we assert result "Feeding 2 blood to the Malleus Maleficarum will give it an additional bonus of \+1 attack and \+1 damage on your next attack.* dreadful presence; blood bonus of \+1 attack and \+1 damage", rule succeeds.
-	
+
 initial scheduling of malleus-bonus-attacking: now the nomos bonus is true.
-regular scheduling of malleus-bonus-attacking: compel the action of turning human. 
+regular scheduling of malleus-bonus-attacking: compel the action of turning human.
 [turning human is not acting fast, but a rule sets the take no time boolean for it. This will be too late to stop the nomos bonus from changing our action]
 testing effects of malleus-bonus-attacking:
 	assert result "You plan on turning human, but find yourself attacking the swarm of daggers instead";
@@ -812,7 +812,7 @@ testing effects of malleus-bonus-attacking:
 	assert that the blood magic level of malleus maleficarum is 0 with label "malleus blood magic level";
 	assert result " \+ 1 \(Malleus Maleficarum blood\) \+ 4 \(the law is with you\) = <0-9>+, you beat the swarm of daggers[']s defence rating";
 	assert result " \+ 1 \(Malleus Maleficarum blood bonus\) \+ 3 \(the law is with you\) = <0-9>+ damage";
-	
+
 [Test for bug #337]
 
 initial scheduling of bonus-surviving-attack:
@@ -848,7 +848,7 @@ Scenario for bug-234:
 	Now the swarm of daggers is testobject;
 	Now temple of Herm is testobject;
 	Now Hall of Gods is testobject;
-	
+
 initial scheduling of bug-234:
 	extract the player to the location of Israfel;
 	have the player defeat israfel;
@@ -883,7 +883,7 @@ Scenario for mazing-tests:
 	Now Hall of Gods is testobject;
 	now the overmind is testobject;
 	now the hall of mirrors is bannedobject;
-	
+
 initial scheduling of mazing-tests:
 	now the player worships Nomos;
 	raise the favour of the player by 4;
@@ -892,7 +892,7 @@ initial scheduling of mazing-tests:
 	equip the player with the minotaur's axe;
 	extract the player to hall of gods;
 	have the player and the healer of aite fight in the arena of the gods;
-	
+
 regular scheduling of axing-defender: do the action of the defender of Aite waiting for a 100 melee hit by the player.
 
 testing effects of axing-defender:
@@ -913,7 +913,7 @@ initial scheduling of overmind-mazing: extract the player to the location of the
 regular scheduling of overmind-mazing: compel the action of the overmind waiting as a reaction to the player.
 testing effects of overmind-mazing: if the location is Maze, rule succeeds.
 testing effects of overmind-maze-reset: if the combat state of the overmind is at-inactive, rule succeeds.
-	
+
 Section - Banshees Gone Wild - bug 248
 
 Table of Outcomes (continued)
@@ -934,7 +934,7 @@ Scenario for banshees gone wild:
 	now the reaper is testobject;
 	now the reusable item is a random scroll of death;
 	now the statue of shards is bannedobject;
-	
+
 Initial scheduling of banshees gone wild:
 	swap the occupants of the location of the blood ape and the Hall of Raging Banshees;
 	travel sneakily to Hall of Raging Banshees;
@@ -945,7 +945,7 @@ Initial scheduling of banshees gone wild:
 	now the health of the blood ape is 1;
 	now the defence of the player is 100;
 	now the health of the player is 100;
-	
+
 regular scheduling of waiting-for-banshees: compel the action of waiting.
 testing effects of waiting-for-banshees: if the living banshees boolean is true, rule succeeds.
 testing effects of banshees-break-loose: if we assert result "banshees suddenly break loose", rule succeeds.
@@ -953,7 +953,7 @@ testing effects of banshees-break-loose: if we assert result "banshees suddenly 
 regular scheduling of banshee-fleeing:
 	force the fuligin cloak to work;
 	compel the action of going way-to-get-back.
-	
+
 testing effects of banshee-fleeing:
 	assert that the tension is 0 with label "tension";
 	assert that the living banshees boolean is false with label "banshees living";
@@ -973,7 +973,7 @@ regular scheduling of reaction-ape-killing: compel the action of reading the reu
 testing effects of reaction-ape-killing:
 	assert result "Bored by a lack of tension";
 	if the living banshees boolean is false, rule succeeds.
-	
+
 [The original test involved fleeing the room as soon as the ape was dead. But I think this was just to avoid a delayed message - I think this is also fine]
 
 Section - Remembering Text
@@ -995,7 +995,7 @@ Scenario for remembering-text:
 	now hall of vapours is bannedobject;
 	now the rod of the master builder is testobject;
 	now generation info is true;
-	
+
 [in case the first map is rejected, Arcane Vault must be switched back from testobject to bannedobject every time]
 first creating the map rule when testing remembering-text:
 	now every secretly placeable room is bannedobject; [prevent normal placement of Arcane Vault to simulate conditions for bug 244]
@@ -1005,14 +1005,14 @@ last creating the map rule when testing remembering-text (this is the force Arca
 	assert "Arcane Vault should not yet be placed" based on whether or not Arcane Vault is not placed;
 	now Arcane Vault is testobject;
 	now the rarity of Arcane Vault is 0;
-	
-The place all secret testobject rooms rule is listed after the force Arcane Vault to be secretly placed rule in the creating the map rules; 
-	
+
+The place all secret testobject rooms rule is listed after the force Arcane Vault to be secretly placed rule in the creating the map rules;
+
 Initial scheduling of remembering-text:
 	Now every room is not rust-spored;
 	now the reusable item is a random scroll of mapping;
 	equip the player with the rod of the master builder;
-	
+
 testing effects of remembering-text:
 	assert "Eternal Prison should be secretly placed" based on whether or not the eternal prison is secretly placed;
 	assert "Lake of Lava should be placed" based on whether or not the lake of lava is placed;
@@ -1038,7 +1038,7 @@ partial-explored-sensing 	1	1
 
 [TODO: figure out if "seen" needs to be updated even when acting fast]
 
-regular scheduling of nothing-to-remember: try remembering. 
+regular scheduling of nothing-to-remember: try remembering.
 testing effects of nothing-to-remember: if we assert result "You have not yet explored:\n( - the <a-w>+ exit of the entrance hall \(where you currently are\)\n)+\nYou have visited the following rooms: the entrance hall \(here\)\.\n\nTip:", rule succeeds.
 
 [sensing should take no time if you don't have enough powers to do it]
@@ -1052,14 +1052,14 @@ regular scheduling of a psy-scroll-reading outcome: try reading the reusable ite
 testing effects of a psy-scroll-reading outcome:
 	assert "The player should be psycholocating now" based on the psycholocation boolean;
 	assert result "When you are psycholocating, sensing does not take time";
-	
+
 regular scheduling of unexplored-sensing: compel the action of sensing.
 
 testing effects of unexplored-sensing:
 	Repeat with the enemy running through {swarm of daggers, blood ape, demon of rage, angel of compassion, minotaur, bodmall, malygris}:
 		assert result "[soul description of the enemy], (from the )?[best route from the location to the location of the enemy][line break]";
 	assert result "- a turning in on itself of space and time, on which you cannot bear to focus your attention, somewhere [general direction from the location to the Eternal Prison][line break]";
-	
+
 [ - a bolt of black shot through with a blaze of hot white, from the south
  - an aura like sharpened steel, from the east
  - a zone of tautened, reddened air, from the west
@@ -1072,7 +1072,7 @@ initial scheduling of remembering-daggers: travel sneakily to the location of th
 regular scheduling of remembering-daggers: compel the action of remembering.
 testing effects of remembering-daggers: if we assert result "You have visited the following rooms:.*You have seen the following creatures in these locations:.*- the swarm of daggers \(level 1\) in [the location] \(where you currently are\)", rule succeeds.
 
-[before we can get the partway-path psycholocating message, we have to put a visited room between us and an unseen creature. Find one 
+[before we can get the partway-path psycholocating message, we have to put a visited room between us and an unseen creature. Find one
  that's at least two moves away and then go 1 move towards it.]
 The sensing-place is a room that varies.
 The on-the-way place is a room that varies.
@@ -1102,8 +1102,8 @@ Initial scheduling of middle-psycholocating:
 regular scheduling of partial-explored-sensing: compel the action of sensing.
 testing effects of partial-explored-sensing:
 	assert result "the soul of the swarm of daggers here with you, like an aura like sharpened steel[line break]";
-	if we assert result "[soul description of the faraway enemy], [best route from on-the-way place to location of the faraway enemy] from [the on-the-way place] \(which lies [best route from the location to on-the-way place] from here\)[line break]", rule succeeds.	
-	
+	if we assert result "[soul description of the faraway enemy], [best route from on-the-way place to location of the faraway enemy] from [the on-the-way place] \(which lies [best route from the location to on-the-way place] from here\)[line break]", rule succeeds.
+
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts
 meeting-malygris	1	1
@@ -1121,22 +1121,22 @@ regular scheduling of meeting-malygris:
 	now traveling sneakily is true;
 	wait for Malygris to act freely.
 Testing effects of meeting-malygris: if we assert result "(does not (detect|notice)|remains unaware of) you(r presence)?[run paragraph on]", rule succeeds.
-	
+
 regular scheduling of psycholocation-expiring: compel the action of waiting.
 testing effects of psycholocation-expiring: if psycholocation is inactive, rule succeeds.
-		
+
 Initial scheduling for moving-malygris: try taking off the fuligin cloak.
 regular scheduling of moving-malygris:
 	now the teleport amount of Malygris is 1;
 	compel the action of Malygris teleporting.
-	
+
 testing effects of moving-malygris: if we assert result "Malygris suddenly teleports away", rule succeeds.
-	
+
 regular scheduling of remembering-malygris: try remembering.
 testing effects of remembering-malygris: if we assert result "You have seen the following creatures in these locations:.*You have also seen Malygris, but you don't know where he is now", rule succeeds.
 
 Initial scheduling of remembering-lost-plural: now the last-seen-location of the swarm of daggers is null-room.
-regular scheduling of remembering-lost-plural: try remembering.	
+regular scheduling of remembering-lost-plural: try remembering.
 testing effects of remembering-lost-plural: if we assert result "You have also seen (Malygris|the swarm of daggers) and (Malygris|the swarm of daggers), but you don't know where they are now", rule succeeds.
 
 regular scheduling of wanderer-waiting: compel the action of waiting.
@@ -1150,7 +1150,7 @@ Initial scheduling for dungeon-clearing:
 	Repeat with guy running through denizen persons:
 		if guy is the player or the level of guy is at least 5, next;
 		have the player defeat guy;
-		
+
 testing effects of dungeon-clearing:
 	assert that the number of reachable persons is 2;
 	assert "Malygris (in [the location of Malygris]) should be reachable from [the location]" based on whether or not Malygris is reachable;
@@ -1160,7 +1160,7 @@ regular scheduling of malygris-only-remembering: try remembering.
 testing effects of Malygris-only-remembering:
 	assert absence of result "You have seen the following creatures in these locations";
 	if we assert result "You have also seen Malygris, but you don't know where he is now", rule succeeds.
-	
+
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts
 slow-sensing	1	1
@@ -1178,7 +1178,7 @@ testing effects of slow-sensing: if previously-fast is false, rule succeeds.
 regular scheduling of exploring-everywhere:
 	let destination be a random unvisited reachable room;
 	if destination is a room, extract the player to destination;
-	
+
 testing effects of exploring-everywhere: unless there is an unvisited reachable room, rule succeeds.
 testing effects of unexplored-vault: if Arcane Vault is unvisited, rule succeeds.
 
@@ -1202,12 +1202,12 @@ testing effects of malygris-sensing:
 initial scheduling of map-reading: now the reusable item is a random scroll of mapping.
 regular scheduling of map-reading: compel the action of reading the reusable item.
 testing effects of map-reading: if we assert result "a complete floor plan of the dungeon of Kerkerkruip imprints itself on your mind", rule succeeds.
-	
+
 regular scheduling of map-remembering: try remembering.
 testing effects of map-remembering:
 	Assert that the number of secretly placed rooms is 2;
-	assert result "Based on the map you found.*secret rooms in the dungeon, one <^[line break]>+, one <^[line break]>+.";
-	assert result "You have also seen Malygris, but you don't know where he is. With your powers of psycholocation, you might be able to SENSE it";
+	assert result "Based on the map you found.*secret rooms in the dungeon, one <^\n>+, one <^\n>+.";
+	assert result "You have also seen Malygris, but you don't know where he is. With your powers of psycholocation, you might be able to SENSE him";
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	maximum attempts
@@ -1224,7 +1224,7 @@ Initial scheduling of digging-to-vault:
 			now the closest place is the place;
 	force the fuligin cloak to work;
 	extract the player to the closest place.
-	
+
 regular scheduling of digging-to-vault: compel the action of digging a single general direction from the location to Arcane Vault.
 testing effects of digging-to-vault: if the location is a secretly placed room, rule succeeds.
 [it doesn't actually have to be the vault - if we hit another secret room on the way we should stop]
@@ -1234,7 +1234,7 @@ regular scheduling of secret-room-remembering: compel the action of remembering.
 testing effects of secret-room-remembering:
 	assert result "Based on the map you found.*a secret room in the dungeon, <a-z>";
 	assert absence of result "secret room in the dungeon, one";
-	
+
 [TODO: make sure tunnels don't show up when they shouldn't, make sure they do show up in unexplored list]
 
 [TODO: psycholocation + sense]
@@ -1245,7 +1245,7 @@ Scenario for blessed-grenade-test:
 	now Drakul is testobject;
 	now the Alchemical Laboratory is testobject;
 	now the Blessed Grenade is bannedobject;
-	
+
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	maximum attempts	antecedent
 blessed-grenade-test	0	1	1	restarting for tests
@@ -1261,10 +1261,10 @@ initial scheduling of blessed-grenade-test:
 	Now every room is not rust-spored;
 	Now every thing is not rusted;
 	extract the player to the alchemical laboratory, making sure it is unoccupied;
-	
+
 regular scheduling of getting-blessed: produce a grenade.
 testing effects of getting-blessed: if we assert result "the Blessed Grenade drops on the ground", rule succeeds.
-	 
+
 regular scheduling of no-extra-blessed: produce a grenade.
 testing effects of no-extra-blessed: if we assert result "the Blessed Grenade drops on the ground", rule succeeds.
 
@@ -1282,26 +1282,26 @@ To produce a grenade:
 	Now the player is not asleep;
 	if the location is not Alchemical Laboratory, extract the player to Alchemical Laboratory;
 	[If the current move is hidden-traveling, now the player is hidden;]
-	
+
 Regular scheduling of throwing-blessed:
 	now the player carries the blessed grenade;
 	extract Drakul to the Alchemical Laboratory;
 	compel the action of throwing the blessed grenade;
-	
+
 testing effects of throwing-blessed:
 	assert "Drakul should be dead" based on whether or not Drakul is dead;
 	assert "The blessed grenade should be exploded" based on whether or not the blessed grenade is exploded;
 	assert "The blessed grenade should be placed" based on whether or not the Blessed Grenade is placed;
 	assert "The blessed grenade should be off-stage" based on whether or not the blessed grenade is off-stage;
-	assert result "As the grenade explodes you hear the singing of angels, several of whom swoop down from the heavens with huge swords and eviscerate <^[line break]>*Drakul";
+	assert result "As the grenade explodes you hear the singing of angels, several of whom swoop down from the heavens with huge swords and eviscerate <^\n>*Drakul";
 	rule succeeds.
-	
+
 Regular scheduling of no-new-blessed: produce a grenade.
 
 Testing effects of no-new-blessed:
 	assert "The Blessed Grenade should be off-stage" based on whether or not the blessed grenade is off-stage;
 	if we assert result "the Blessed Grenade drops on the ground", rule succeeds;
-	
+
 
 Section - bug 262
 
@@ -1314,12 +1314,12 @@ no-placed-treasure-packs	5	5	--	bug-262
 Scenario for generation-tests:
 	now generation info is true;
 
-[		
+[
 First dungeon finish rule:
 	repeat with pack running through not non-treasure things:
 		repeat with item running through things enclosed by pack:
 			now the valuation of item is the valuation of pack;
-			
+
 TODO: figure out what all that crap is for
 	]
 
@@ -1349,7 +1349,7 @@ testing effects of bug-244 (this is the mausoleum must be secret rule):
 	let the path be the best route from Entrance Hall to the mausoleum;
 	if the path is a direction, rule fails;
 	rule succeeds.
-	
+
 [Finally found the cause of bug 244! The mausoleum could become connected to a secretly placed room. That made things kind of complicated!]
 Testing effects of mausoleum-secret: if the mausoleum is secretly placeable, rule succeeds;
 
@@ -1360,7 +1360,7 @@ outcome	likelihood	minimum attempts	maximum attempts	antecedent
 malygris-healing	1	5	--	generation-tests
 too-much-malygris-healing	0	10	--	malygris-healing
 got-addicts-amulet	2	64	256	generation-tests
-cursed-addicts-amulet	2	2	--	got-addicts-amulet	
+cursed-addicts-amulet	2	2	--	got-addicts-amulet
 got-shield	1	8	--	generation-tests
 wearing-shield	5	5	--	got-shield
 compassion-placed	1	0	--	generation-tests
@@ -1382,7 +1382,7 @@ Regular scheduling of malygris-healing:
 	now malygris-heal-max is (heal power of Malygris) * 60 / (heal cooldown of Malygris);
 	if the heal power of Malygris is at least 1:
 		say "* Malygris can heal [malygris-heal-max divided by 60] and [remainder after dividing malygris-heal-max by 60] 60ths per turn[line break]";
-		
+
 Testing effects of malygris-healing: if malygris-heal-max is at least 1, rule succeeds.
 Testing effects of too-much-malygris-healing:
 	if malygris-heal-max is greater than (60 times 3):
@@ -1420,12 +1420,12 @@ Scenario for bug-245:
 	now the blood ape is testobject;
 	now bodmall is testobject;
 	now the hall of mirrors is bannedobject;
-	
+
 Initial scheduling of ape-growing:
 	extract the player to the location of the blood ape;
 	now the defence of the player is 0;
 	now the melee of the player is 100;
-	
+
 regular scheduling of ape-growing: do the action of waiting for a 100 melee hit by the blood ape.
 testing effects of ape-growing: if the size of the blood ape is greater than medium, rule succeeds.
 
@@ -1438,7 +1438,7 @@ initial scheduling of bodmall-meeting:
 	extract the player to the location of Bodmall.
 regular scheduling of bodmall-meeting: compel the action of waiting.
 testing effects of bodmall-meeting: rule succeeds.
-	
+
 regular scheduling of bodmall-attack: compel the action of attacking bodmall.
 testing effects of bodmall-attack: rule succeeds.
 
@@ -1450,10 +1450,10 @@ A standard AI rule for a person (called P) when testing bodmall-attack (this is 
 	if P is Bodmall:
 		now bodmall-reaction is scheduled for immediate testing;
 		test effects of bodmall-reaction;
-	
+
 First combat round rule when testing bodmall-attack and bodmall-reaction is achieved (this is the bodmall should only react once rule):
-	assert that the combat state of Bodmall is at-inactive with label "combat state of bodmall". 
-	
+	assert that the combat state of Bodmall is at-inactive with label "combat state of bodmall".
+
 The make sure Bodmall reacts rule is listed before the compel an attack rule in the standard AI rules.
 The bodmall should only react once rule is listed before test combat round of previous main actor rule in the combat round rules.
 
@@ -1487,11 +1487,11 @@ Scenario for maze-moving:
 	now the minotaur is testobject;
 	now the hall of mirrors is bannedobject;
 	now the reusable item is a random flash grenade;
-	
+
 Initial scheduling of getting-mazed:
 	now the health of the player is 1000;
 	extract the player to the location of the minotaur;
-	
+
 regular scheduling of getting-mazed: compel the action of exposing as a reaction to the minotaur.
 
 Testing effects of getting-mazed: if the location is Maze, rule succeeds.
@@ -1500,7 +1500,7 @@ Testing effects of mazing-minotaur-inactive: if the minotaur is at-inactive, rul
 Testing effects of mazing-minotaur-staged: if we assert that the location of the minotaur is maze-waiting-room, rule succeeds.
 Testing effects of no-maze-sound-yet: if maze-sound is northwest, rule succeeds.
 Testing effects of mazing-minotaur-damage: if we assert result "minotaur deals", rule succeeds.
-	
+
 Regular scheduling of directionless-throwing: try throwing the reusable item to north.
 Testing effects of directionless-throwing: if we assert result "There is no point throwing grenades into twisty little passages", rule succeeds.
 testing effects of fast-throwing-failure: if the take no time boolean is true, rule succeeds.
@@ -1508,7 +1508,7 @@ testing effects of inconsequential-throwing: if the reusable item is carried, ru
 
 regular scheduling of meta-throwing-test: remove the reusable item from play.
 testing effects of meta-throwing-test: unless the reusable item is carried, rule succeeds.
-	
+
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	antecedent
 sound-finding	1	0	--
@@ -1532,7 +1532,7 @@ Testing effects of maze-summoning: if we assert result "[a monster summoned] app
 Initial scheduling of summoned-fleeing:
 	now the concentration of the player is 3;
 	now the concentration of the monster summoned is 3;
-	
+
 regular scheduling of summoned-fleeing: try going maze-sound.
 
 testing effects of summoned-fleeing: if we assert result "You flee through the tunnels, quickly losing all sense of direction.[line break][line break][The monster summoned] follows you towards the sound.", rule succeeds.
@@ -1572,25 +1572,25 @@ regular scheduling of multiple-fleeing: try going north.
 Testing effects of multiple-fleeing:
 	assert that everyone is unconcentrated;
 	if we assert absence of result "follows you", rule succeeds.
-	
+
 testing effects of minotaur-staged: if the location of the  minotaur is maze-waiting-room, rule succeeds.
 testing effects of summoned-staged: if the location of the monster summoned is maze-waiting-room, rule succeeds.
 testing effects of minotaur-parting-shot: if we assert that the hitting count of the minotaur is 1, rule succeeds.
-	
+
 regular scheduling of multiple-sound-seeking: compel the action of going north.
 
 Testing effects of multiple-sound-seeking: if the maze-sound is a cardinal direction, rule succeeds.
 testing effects of multiple-staged: if we assert that the number of people in maze-waiting-room is 2, rule succeeds.
-		
+
 regular scheduling of first-rejoining: compel the action of going maze-sound.
 Testing effects of first-rejoining: if we assert that the number of people in maze [including the player] is 2, rule succeeds.
 testing effects of one-staged: if we assert that the number of people in maze-waiting-room is 1, rule succeeds.
-	
+
 regular scheduling of first-maze-smiting:
 	now opposition test subject is the player;
 	Let the enemy be a random opposer person enclosed by the location;
 	compel the action of smiting the enemy.
-	
+
 Testing effects of first-maze-smiting: if we assert that the location of the player is the maze, rule succeeds.
 Testing effects of maze-peace: if we assert that the combat status is peace, rule succeeds.
 
@@ -1615,7 +1615,7 @@ Scenario for bug-280:
 	now the dream of briar roses is current-test-dream;
 	now the reusable item is a random morphean grenade;
 	now the vast staircase is bannedobject.
-	
+
 Testing effects of bug-280:
 	assert that the combat state of the player is at-inactive with label "combat state of the player";
 	if the lair of the imp is placed and the imp is denizen and the dimensional anchor is off-stage, rule succeeds.
@@ -1629,7 +1629,7 @@ Testing effects of reaper-seeking: if we assert that the combat state of the pla
 regular scheduling of rose-dreaming:
 	compel the action of throwing the reusable item;
 	now suppress npc action is false.
-	
+
 Testing effects of rose-dreaming: if we assert that the location is garden of thorns, rule succeeds.
 
 testing effects of imp-out-of-dream: unless the location of the imp is the location, rule succeeds.
@@ -1638,7 +1638,7 @@ testing effects of imp-inactive: unless the imp is acting independently, rule su
 regular scheduling of woke-from-garden:
 	wake the player up;
 	update the combat status. [risky?]
-	
+
 testing effects of woke-from-garden: unless the location is garden of thorns, rule succeeds.
 testing effects of woke-with-reaper: if we assert that the location is the location of the reaper, rule succeeds.
 testing effects of woke-in-combat: unless the combat status is peace, rule succeeds.
@@ -1667,7 +1667,7 @@ testing effects of imp-vanishing: if we assert that the location of the imp is l
 
 regular scheduling of imp-stashing: compel the action of waiting.
 Testing effects of imp-stashing: if we assert that the holder of the imp's loot is the lair of the imp, rule succeeds.
-	
+
 
 Section - Bloodlust - issue 279
 
@@ -1689,23 +1689,23 @@ Initial scheduling of hitting-daggers:
 	now the melee of the player is 100;
 	now the defence of the player is 100;
 	now the health of the swarm of daggers is 50;
-	
+
 regular scheduling of hitting-daggers: compel the action of the swarm of daggers waiting as a reaction to the player.
 Testing effects of hitting-daggers: if the player is bloodlusting, rule succeeds.
-	
+
 regular scheduling of smiting-daggers: compel the action of smiting the swarm of daggers.
-	
+
 Testing effects of smiting-daggers: if we assert that the combat status is peace, rule succeeds.
 Testing effects of smitten-daggers: if the player is notlusting, rule succeeds.
-	
+
 [If we can think of any tricky cases where the combat status changes during the every turn stage, we should test those]
-		
+
 Initial scheduling of hitting-ape:
 	have the player defeat the mindslug;
 	revive the blood ape in the location;
 	revive fafhrd in the location;
 	now the health of the blood ape is 100;
-	
+
 regular scheduling of hitting-ape: compel the action of the blood ape waiting as a reaction to the player.
 testing effects of hitting-ape: if the player is bloodlusting, rule succeeds.
 
@@ -1718,7 +1718,7 @@ first standard AI rule for Fafhrd when testing fafhrd-killing-ape (this is the F
 	now the health of the blood ape is 1;
 	try Fafhrd attacking the blood ape;
 	rule succeeds.
-	
+
 The Fafhrd kills ape after player's hit rule is listed before the compel a reaction rule in the standard AI rulebook.
 
 testing effects of fafhrd-killing-ape: if the blood ape is not alive, rule succeeds.
@@ -1754,14 +1754,14 @@ initial scheduling of sleepy-throwing: extract the player to the location of the
 regular scheduling of sleepy-throwing:
 	now the player is just-woken;
 	compel the action of throwing the reusable item.
-	
+
 Testing effects of sleepy-throwing: if we assert absence of result "fog of sleep", rule succeeds.
 Testing effects of in-tungausy-dream: if we assert that the player is tungausy warrior, rule succeeds.
-	
+
 regular scheduling of hut-entering: compel the action of going inside.
-	
+
 regular scheduling of shaman-choosing: select menu question answer 1.
-	
+
 Testing effects of shaman-choosing:
 	Now opposition test subject is the player;
 	Repeat with guy running through opposer people in the location:
@@ -1769,27 +1769,27 @@ Testing effects of shaman-choosing:
 	assert that the player is the true body of the player with label "true body of the player";
 	assert absence of result "fog of sleep";
 	if player is not asleep, rule succeeds.
-	
+
 Testing effects of player-alert: unless the player is just-woken, rule succeeds.
-	
+
 initial scheduling of teleport-waking:
 	now the reusable item is a random scroll of teleportation;
 	now the healer of aite is not asleep;
 	now the teleportation beacon is in a random unoccupied placed room;
 	now teleportation-beacon-on is true.
-	
+
 regular scheduling of teleport-waking: compel the action of reading the reusable item as a reaction to the healer of aite.
 Before reading when testing teleport-waking: now the player is just-woken.
-	
+
 Testing effects of teleport-waking:
 	assert result "fog of sleep";
 	unless the player is just-woken, rule succeeds.
-	
+
 Initial scheduling of sleepy-teleport: now the teleportation beacon is in the location of the swarm of daggers.
 regular scheduling of sleepy-teleport:
 	now the player is just-woken;
 	compel the action of reading the reusable item.
-	
+
 Testing effects of sleepy-teleport:
 	assert absence of result "fog of sleep";
 	if the player is just-woken, rule succeeds.
@@ -1798,7 +1798,7 @@ regular scheduling of sleepy-status: compel the action of asking status.
 Testing effects of sleepy-status: if we assert result "You are just-woken: The next attack against you gets a \+3 bonus and \+2 damage\.", rule succeeds.
 
 regular scheduling of sleepy-slaying: compel the action of smiting the swarm of daggers;
-	
+
 testing effects of sleepy-slaying:
 	assert result "fog of sleep";
 	unless the player is just-woken, rule succeeds.
@@ -1817,7 +1817,7 @@ scenario for bug-301-aite:
 	now Hall of Gods is testobject;
 	now the reusable item is a random fragmentation grenade;
 	block interventions;
-		
+
 Initial scheduling of bug-301-aite:
 	Now every room is not rust-spored;
 	Now every thing is not rusted;
@@ -1826,17 +1826,17 @@ Initial scheduling of bug-301-aite:
 	raise the favour of the player by 4;
 	extract the player to Hall of Gods;
 	have the player and healer of Aite fight in Arena of the Gods;
-	
+
 Initial scheduling of healer-first-killing: now the health of the player is the permanent health of the player - 1.
 regular scheduling of healer-first-killing: compel the action of smiting the healer of aite.
-	
+
 Testing effects of healer-first-killing:
 	assert "The healer should be dead" based on whether or not the healer of Aite is dead;
 	assert "The tormentor of Aite should be alive" based on whether or not the tormentor of Aite is alive;
 	assert "The defender should be alive" based on whether or not the defender of Aite is alive;
 	assert "The player should not be healed" based on whether or not the health of the player is less than the permanent health of the player;
 	if we assert absence of result "Sul receives .* and fully heals you", rule succeeds.
-	
+
 Initial scheduling of other-fanatics-killing:
 	now the health of the tormentor of Aite is 1;
 	now the health of the defender of Aite is 1;
@@ -1894,8 +1894,8 @@ to assert that placement possibility is (allowable - a truth state) when (condit
 	assert "The armadillo should be [if allowable is false]im[end if]possible to place [conditions]" based on whether or not allowable is (whether or not the rule succeeded);
 	[not-too-difficult is no longer used to place treasure - the smoky blade is now placed by the stock minor treasure rule]
 	[assert "The smoky blade should [if allowable is false]not [end if]be not-too-difficult" based on whether or not allowable is (whether or not the smoky blade is not-too-difficult);]
-	
-	
+
+
 Scenario for unlocking-behavior:
 	Let the saved seed be the dungeon generation seed;
 	now the dungeon generation seed is 0;
@@ -1947,7 +1947,7 @@ testing effects of israfel-splitting-293: if Israfel is off-stage, rule succeeds
 
 regular scheduling of isra-and-fell-scattering: compel the action of throwing the reusable item.
 Testing effects of isra-and-fell-scattering: if isra is not off-stage and fell is not off-stage, rule succeeds.
-	
+
 initial scheduling of psycholocating-293:
 	if the location of Isra is the location:
 		extract Isra to a random unoccupied reachable room;
@@ -1964,26 +1964,26 @@ initial scheduling of psycholocating-293:
 regular scheduling of psycholocating-293:
 	try reading the reusable item;
 	try sensing.
-	
+
 Testing effects of psycholocating-293:
 	assert "Isra should be psycholocatable" based on whether or not Isra is psycholocation-revealed;
 	assert "Fell should be psycholocatable" based on whether or not fell is psycholocation-revealed;
 	assert result "frozen lightning";
 	assert result "molten thunder";
 	rule succeeds.
-	
+
 initial scheduling of isra-defeating-293: have the player defeat isra.
 Testing effects of isra-defeating-293: unless the power of israfel is granted, rule succeeds.
-	
+
 initial scheduling of fell-defeating-293: have the player defeat fell.
-	
+
 Testing effects of fell-defeating-293:
 	assert "isra should be dead" based on whether or not isra is dead;
 	assert "fell should be dead" based on whether or not fell is dead;
 	assert "israfel should be off-stage" based on whether or not israfel is off-stage;
 	[assert result "Israfel's dying cry shakes the foundations of the world";]
 	if the power of israfel is granted, rule succeeds.
-	
+
 Section - Weapon aftereffects
 
 Table of Outcomes (continued)
@@ -2034,14 +2034,14 @@ initial scheduling of fafhrd-battling:
 	prepare a test battle with fafhrd;
 	now the defence of the player is 50;
 	now the health of the player is 1000;
-		
+
 Testing effects of fafhrd-battling: if we assert that the location of Fafhrd is test arena, rule succeeds.
 
 regular scheduling of basic-hit: do the action of Fafhrd waiting for a 100 melee hit by the player.
 testing effects of basic-hit:
 	assert that the gilded rapier readied after "Fafhrd is hit";
 	if we assert result "You deal", rule succeeds.
-	
+
 regular scheduling of fafhrd-dodge: do the action of Fafhrd dodging a 0 melee hit by the player.
 Testing effects of fafhrd-dodge: if we assert result "you do not overcome Fafhrd", rule succeeds.
 
@@ -2061,7 +2061,7 @@ testing effects of rapier-inventory:
 	assert absence of result "\(readied\).*\(readied\)";
 	if we assert result "gilded rapier \(readied\)", rule succeeds.
 
-regular scheduling of dodge-fafhrd: do the action of dodging a 0 melee hit by Fafhrd. 
+regular scheduling of dodge-fafhrd: do the action of dodging a 0 melee hit by Fafhrd.
 testing effects of dodge-fafhrd: if we assert result "Fafhrd does not overcome your defence rating", rule succeeds.
 
 regular scheduling of dodge-fafhrd-fail: do the action of dodging a 100 melee hit by Fafhrd.
@@ -2073,11 +2073,11 @@ Testing effects of parry-fafhrd-fail: if we assert result "Fafhrd beats your def
 regular scheduling of parry-fafhrd-protected:
 	now the hit protection of the player is 1;
 	do the action of parrying a 100 melee hit by Fafhrd.
-	
+
 Testing effects of parry-fafhrd-protected:
 	assert that the hit protection of the player is 0 with label "hit protection of the player";
 	if we assert result "Fafhrd beats your defence rating", rule succeeds.
-	
+
 regular scheduling of parry-fafhrd: do the action of parrying a 0 melee hit by Fafhrd.
 Testing effects of parry-fafhrd: if we assert result "The claymore shatters the gilded rapier!", rule succeeds.
 
@@ -2105,7 +2105,7 @@ Testing effects of fafhrd-parry-fail:
 	assert absence of result "the claymore rusts";
 	assert "Fafhrd should not be rusted" based on whether or not Fafhrd is not rusted;
 	if the claymore is not rusted, rule succeeds.
-	
+
 regular scheduling of fafhrd-parry-scythe: do the action of fafhrd parrying a 0 melee hit by the player.
 Testing effects of fafhrd-parry-scythe:
 	assert result "Having been in contact with the scythe of oxidation, the claymore rusts";
@@ -2163,7 +2163,7 @@ Testing effects of lionshield-vs-chains:
 	assert result "the chain golem does not overcome";
 	assert absence of result "The lion on the shield strikes out, and bites the chain golem for 2 damage";
 	if the health of the chain golem is 100, rule succeeds.
-	
+
 regular scheduling of lion-block-chains: do the action of blocking a 0 melee hit by the chain golem.
 Testing effects of lion-block-chains:
 	assert result "The lion on the shield strikes out, and bites the chain golem for 2 damage";
@@ -2178,7 +2178,7 @@ Testing effects of chains-vs-thorns:
 	assert result "the chain golem does not overcome";
 	assert absence of result "The armour of thorns scratches the chain golem for 1 damage";
 	if the health of the chain golem is 100, rule succeeds.
-	
+
 initial scheduling of thorns-dodge-chains-protected:
 	now the health of the chain golem is 100;
 	now the hit protection of the player is 1;
@@ -2189,7 +2189,7 @@ testing effects of thorns-dodge-chains-protected: if we assert absence of result
 initial scheduling of thorns-dodge-chains:
 	now the hit protection of the player is 0;
 	now the inherent damage modifier of the chain golem is 2;
-	
+
 regular scheduling of thorns-dodge-chains: do the action of dodging a 100 melee hit by the the chain golem.
 Testing effects of thorns-dodge-chains:
 	assert result "The armour of thorns scratches the chain golem for 1 damage";
@@ -2198,7 +2198,7 @@ Testing effects of thorns-dodge-chains:
 Initial scheduling of lionshield-vs-bodmall:
 	prepare a test battle with bodmall;
 	now the health of bodmall is 100.
-	
+
 [TODO: make sure the lion's shield doesn't work when it's not worn or when not blocking]
 [TODO: test everything with the demonic mistress - tethered but not natural weapon]
 
@@ -2237,7 +2237,7 @@ Initial scheduling of mouser-dodge-greasy:
 	equip the player with the greasy gauntlets;
 	equip the player with the gilded rapier;
 	prepare a test battle with mouser;
-	
+
 regular scheduling of mouser-dodge-greasy: do the action of mouser dodging a 0 melee hit by the player.
 testing effects of mouser-dodge-greasy: if we assert absence of result "you drop the gilded rapier", rule succeeds.
 
@@ -2267,19 +2267,19 @@ regular scheduling of mouser-vs-thorns:
 	now the health of mouser is 100;
 	[TODO:should the thorns scratch the chain golem or not? Should it be because the chains are a natural weapon or because they are tethered? or both?]
 	do the action of dodging a 0 melee hit by the mouser.
-	
+
 testing effects of mouser-vs-thorns:
 	assert result "Mouser does not overcome";
 	assert absence of result "The armour of thorns scratches Mouser for 1 damage";
 	if we assert that the health of mouser is 100, rule succeeds.
-		
+
 regular scheduling of thorns-dodge-mouser-fail: do the action of dodging a 100 melee hit by the mouser.
 testing effects of thorns-dodge-mouser-fail:
 	assert result "The armour of thorns scratches Mouser for 1 damage";
 	if we assert that the health of mouser is 99, rule succeeds.
 
 [TODO: Hot weapons only do heat damage (or break because of heat)? if not projectile]
-[TODO: test armor of thorns (started) and Israfel (not started), 
+[TODO: test armor of thorns (started) and Israfel (not started),
 when hitting with damage (done)
 hitting without damage (not done)
 vs chain golem, bodmall, and hand-to-hand attacker, and missing - (all started)]
@@ -2289,7 +2289,7 @@ Section - Damage Text
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	antecedent
 damage-text	0	1	restarting for tests
-basic attack damage text	1	1	--	
+basic attack damage text	1	1	--
 tense attack damage text	1	1	--
 divine-lightning text	1	1	--
 fragmentation damage text	1	1	--
@@ -2306,7 +2306,7 @@ Initial scheduling of basic attack damage text:
 	prepare a test battle with the reaper;
 	now the health of the player is 1000;
 	set the tension to 0;
-	
+
 Regular scheduling of basic attack damage text: do the action of the reaper dodging a 100 melee hit by the player.
 Testing effects of basic attack damage text:
 	assert that a random readied weapon enclosed by the Reaper is the scythe of slaying with label "Reaper's weapon";
@@ -2321,7 +2321,7 @@ Testing effects of tense attack damage text: if we assert result "\+ 1 \(tension
 
 regular scheduling of divine-lightning text: say Divine lightning strikes the player;
 testing effects of divine-lightning text: if we assert result "(\n|^)A ball of lightning shoots from the sky, doing <3-7> damage to you", rule succeeds.
-	
+
 regular scheduling of fragmentation damage text: have a fragmentation event in the location with a random fragmentation grenade by the player.
 testing effects of fragmentation damage text: if we assert result "<2-5> damage to the Reaper; and <2-5> damage to you", rule succeeds.
 
@@ -2346,14 +2346,14 @@ Testing effects of dodge-thorns damage text: if we assert result "(\n|^)The armo
 Regular scheduling of lion-block damage text:
 	now the player wears the lion's shield;
 	do the action of blocking a 0 melee hit by the reaper.
-	
+
 Testing effects of lion-block damage text: if we assert result "(\n|^)The lion on the shield strikes out, and bites the Reaper for 2 damage.", rule succeeds.
 
 Regular scheduling of death-scroll damage text:
 	Now the reusable item is a random scroll of death;
 	now the player carries the reusable item;
 	try reading the reusable item.
-	
+
 Testing effects of death-scroll damage text: if we assert result "(\n|^)A wave of unholy energy is released, dealing <3-6> damage to the Reaper; and <3-6> damage to you.", rule succeeds.
 
 [not sure how we could trigger an unholy wave in another room, but it wouldn't print anything anyway]
@@ -2362,15 +2362,15 @@ Regular scheduling of anti-purification damage text:
 	now the player worships Chton;
 	now the player carries the vial of purification;
 	try drinking the vial of purification.
-	
+
 Testing effects of anti-purification damage text: if we assert result "(\n|^)Chton prevents the vial of purification from doing its work; but your attempt at escaping undeath did not amuse him. A wave of extreme cold racks your body, dealing 15 damage!", rule succeeds.
 
 Regular scheduling of aite-statue damage text:
 	extract the player to the Temple of Aite;
 	try climbing the statue of Aite.
-	
+
 Testing effects of aite-statue damage text: if we assert result "(\n|^)You cut yourself as soon as you touch the statue\. The weapons deal 3 damage\.", rule succeeds.
-	
+
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts
 abyss-wave damage text	1	1
@@ -2388,9 +2388,9 @@ Initial scheduling of chain-smack damage text:
 	now the health of the chain golem is 1000;
 	now the defence of the chain golem is 50;
 	now the concentration of the chain golem is 3.
-	
+
 regular scheduling of chain-smack damage text: try attacking the chain golem.
-[TODO: make sure attacking doesn't leave crap in the delayed actions table?]	
+[TODO: make sure attacking doesn't leave crap in the delayed actions table?]
 Testing effects of chain-smack damage text: if we assert result "(\n|^)You attempt to duck under the whirling chains\. You roll <0-9>+ \+ -100 \(body\) = -<0-9>+ against a target number of <0-9>+, failing the body check\. One of the chains catches you with a loud smack, dealing 6 damage\.", rule succeeds.
 
 Regular scheduling of bomb-power damage text:
@@ -2398,7 +2398,7 @@ Regular scheduling of bomb-power damage text:
 	now the health of the player is 0;
 	now the health of the chain golem is 1000;
 	have an event of the chain golem killing the player.
-	
+
 Testing effects of bomb-power damage text: if we assert result "(\n|^)Your body explodes vehemently as you throw yourself at the chain golem, but you only deal 5 damage instead of the 1000 damage you needed to deal.", rule succeeds.
 
 Table of Outcomes (continued)
@@ -2411,14 +2411,14 @@ Initial scheduling of tentacle-hold no damage text:
 	prepare a test battle with the tentacle;
 	now the hit protection of the player is 1;
 	[make sure the tentacle "holds on to you" when the attack does no damage]
-	
+
 regular scheduling of tentacle-hold no damage text: do the action of dodging a 100 melee hit by the tentacle.
 Testing effects of tentacle-hold no damage text: if we assert "The giant tentacle deals" to the player a total of 0 damage "but holds on to you\.", rule succeeds.
-	
+
 Initial scheduling of tentacle-attack wounding text:
 	now the tentacle does not grapple the player;
 	set the tension to 3;
-	
+
 regular scheduling of tentacle-attack wounding text: do the action of dodging a 100 melee hit by the tentacle.
 Testing effects of tentacle-attack wounding text:
 	assert result "(\n|^)The giant tentacle deals 0 \+ <^=>+ = \d+ damage, wounding you to \d+ health\.";
@@ -2434,22 +2434,22 @@ thorns-launch damage text	1	1
 israfel-burn damage text	1	1
 isra-burn damage text	1	1
 
-Regular scheduling of thorns-launch damage text: 
+Regular scheduling of thorns-launch damage text:
 	now brambles strength is 1;
 	launch the thorns.
 
 Testing effects of thorns-launch damage text: if we assert "Thorns shoot towards everyone, dealing 1 damage to the giant tentacle; and" to the player a total of 1 damage "to you\.", rule succeeds.
-	
+
 Initial scheduling of israfel-burn damage text: prepare a test battle with Israfel.
 regular scheduling of israfel-burn damage text: do the action of Israfel waiting for a 100 melee hit by the player.
 Testing effects of israfel-burn damage text: if we assert 3 damage to the player after "Israfel's flames burn you for", rule succeeds.
-	
+
 initial scheduling of isra-burn damage text: try israfel israfel-splitting.
 regular scheduling of isra-burn damage text: do the action of isra waiting for a 100 melee hit by the player.
 Testing effects of isra-burn damage text: if we assert 2 damage to the player after "Isra's flames burn you for", rule succeeds.
 
 [TODO: check damage and damage description in one phrase?]
-	
+
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts
 aite-spike damage text	1	1
@@ -2462,7 +2462,7 @@ glass damage text	1	1
 
 Regular scheduling of Aite-spike damage text: deal 3 points of Aite-damage to the player on behalf of the player.
 Testing effects of Aite-spike damage text: if we assert 3 damage to the player after "A huge <a-w>+ bursts out of the ground, skewering you for", rule succeeds.
-	
+
 Regular scheduling of chton-wave damage text:
 	now the reusable item is a random scroll of ghoulification;
 	now the player carries the reusable item;
@@ -2480,7 +2480,7 @@ Regular scheduling of sul-sacrifice damage text:
 	now the player does not worship chton;
 	clear event description;
 	try sacrificing;
-	
+
 Testing effects of sul-sacrifice damage text: if we assert 10 damage to the player after "Sul abhors the undead! Divine wrath strikes you instantly, dealing", rule succeeds.
 
 Regular scheduling of deathly-scroll damage text:
@@ -2497,13 +2497,13 @@ Regular scheduling of downstairs damage text:
 	extract the player to vast staircase;
 	clear event description;
 	try direction-jumping down.
-	
+
 Testing effects of downstairs damage text: if we assert described damage to the player with 1000 health after "With a loud smack, you land in [the room down from Vast Staircase], receiving", rule succeeds.
-	
+
 Initial scheduling of bees damage text:
 	move the swarm of bees to the location;
 	compel the action of waiting;
-	
+
 Testing effects of bees damage text: if we assert result "The swarm of bees attacks <^\n>+, dealing <1-3> damage\.", rule succeeds.
 
 initial scheduling of glass damage text:
@@ -2531,35 +2531,35 @@ radiance-attack-eyeless	1	1	--
 
 Initial scheduling of radiance-defend-sighted:
 	prepare a test battle with the Angel of Compassion;
-	
+
 regular scheduling of radiance-defend-sighted: do the action of the angel of compassion waiting for a 0 melee hit by the player.
-testing effects of radiance-defend-sighted: if we assert result "- 4 \(radiance\)<^[line break]>* you do not overcome", rule succeeds.
+testing effects of radiance-defend-sighted: if we assert result "- 4 \(radiance\)<^\n>* you do not overcome", rule succeeds.
 
 regular scheduling of radiance-attack-sighted: do the action of waiting for a 0 melee hit by the angel of compassion.
-testing effects of radiance-attack-sighted: if we assert result "\+ 4 \(radiance\)<^[line break]>* compassion does not overcome", rule succeeds.
+testing effects of radiance-attack-sighted: if we assert result "\+ 4 \(radiance\)<^\n>* compassion does not overcome", rule succeeds.
 
 initial scheduling of radiance-defend-blind: now flash-grenade-timer of the player is 5.
 regular scheduling of radiance-defend-blind: do the action of the angel of compassion waiting for a 0 melee hit by the player.
-testing effects of radiance-defend-blind: if we assert absence of result "- 4 \(radiance\)<^[line break]>* you do not overcome", rule succeeds.
+testing effects of radiance-defend-blind: if we assert absence of result "- 4 \(radiance\)<^\n>* you do not overcome", rule succeeds.
 
 regular scheduling of radiance-attack-blind: do the action of waiting for a 0 melee hit by the angel of compassion.
-testing effects of radiance-attack-blind: if we assert absence of result "\+ 4 \(radiance\)<^[line break]>* compassion does not overcome", rule succeeds.
+testing effects of radiance-attack-blind: if we assert absence of result "\+ 4 \(radiance\)<^\n>* compassion does not overcome", rule succeeds.
 
 initial scheduling of radiance-defend-eyeless:
 	now flash-grenade-timer of the player is 0;
 	now eyeless vision is adapted.
 
 regular scheduling of radiance-defend-eyeless: do the action of the angel of compassion waiting for a 0 melee hit by the player.
-testing effects of radiance-defend-eyeless: if we assert absence of result "- 4 \(radiance\)<^[line break]>* you do not overcome", rule succeeds.
+testing effects of radiance-defend-eyeless: if we assert absence of result "- 4 \(radiance\)<^\n>* you do not overcome", rule succeeds.
 
 regular scheduling of radiance-attack-eyeless: do the action of waiting for a 0 melee hit by the angel of compassion.
-testing effects of radiance-attack-eyeless: if we assert absence of result "\+ 4 \(radiance\)<^[line break]>* compassion does not overcome", rule succeeds.
+testing effects of radiance-attack-eyeless: if we assert absence of result "\+ 4 \(radiance\)<^\n>* compassion does not overcome", rule succeeds.
 
 
 Section - Damage Modifiers
 
 [Test every rule in the following rulebooks:
-	
+
 add specific damage
 remove specific damage
 specific damage multiplier
@@ -2571,7 +2571,7 @@ If you add any rules, please consider adding a test here]
 
 [TODO: tests for all damage modifier rules]
 [TODO: test damage effects, e.g. fragmentation grenade exploding in another room]
-	
+
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	antecedent
 damage-modifiers	0	1	restarting for tests
@@ -2592,7 +2592,7 @@ scenario for damage-modifiers:
 
 Last starting kit setup for Miranda when testing damage-modifiers:
 	remove Miranda's amulet from play;
-	
+
 Definition: a room is precarious if it is Bridge of Doom or it is the Vast Staircase.
 
 Initial scheduling of dead-mage-damage:
@@ -2604,12 +2604,12 @@ Initial scheduling of dead-mage-damage:
 		swap the occupants of the place and a random not precarious habitable placed room;
 	extract the player to the location of Miranda;
 	equip the player with the robe of the dead mage.
-	
+
 regular scheduling of dead-mage-damage:
 	now the concentration of the player is the attempt count of dead-mage-damage;
 	transcribe "setting player concentration to [concentration of the player]";
 	do the action of waiting for a 100 melee hit by Miranda.
-	
+
 testing effects of dead-mage-damage:
 	let conc-level be the attempt count of dead-mage-damage;
 	if conc-level is 0:
@@ -2619,16 +2619,16 @@ testing effects of dead-mage-damage:
 	if the concentration of the player is conc-level, rule succeeds.
 
 initial scheduling of protection-damage:
-	try taking off the robe of the dead mage;	
+	try taking off the robe of the dead mage;
 	now the hit protection of the player is 1.
-	
+
 regular scheduling of protection-damage: do the action of waiting for a 100 melee hit by Miranda.
 testing effects of protection-damage: if we assert result "- 100% \(protection\)", rule succeeds.
 
 initial scheduling of dragonarmor-damage: equip the player with dragon armour.
 regular scheduling of dragonarmor-damage: do the action of waiting for a 100 melee hit by Miranda.
 testing effects of dragonarmor-damage: if we assert result "- 2 \(dragon armour\)", rule succeeds.
-	
+
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts
 stun-damage	1	1
@@ -2646,7 +2646,7 @@ initial scheduling of no-execution-damage:
 	now Miranda is not at-stun;
 	equip the player with the executioner's axe;
 	set the tension to 2.
-	
+
 regular scheduling of no-execution-damage: do the action of Miranda waiting for a 100 melee hit by the player.
 testing effects of no-execution-damage: if we assert absence of result "executioner's axe benefits from tension", rule succeeds.
 
@@ -2657,7 +2657,7 @@ testing effects of execution-damage: if we assert result "\+ 1 \(executioner's a
 initial scheduling of druid-vs-wood: extract Bodmall to the location.
 regular scheduling of druid-vs-wood: do the action of Bodmall waiting for a 100 melee hit by Miranda.
 Testing effects of druid-vs-wood: if we assert result "- 1 \(druid resistant to wood\)", rule succeeds.
-	
+
 [barkskin does not protect against axes]
 initial scheduling of bark-vs-axe: now Bodmall is barkskinned.
 regular scheduling of bark-vs-axe: do the action of Bodmall waiting for a 100 melee hit by the player.
@@ -2679,7 +2679,7 @@ initial scheduling of pro-axe-damage:
 	try taking off the plate mail;
 	now the power of the minotaur is granted;
 	now the body score of the player is 25.
-	
+
 regular scheduling of pro-axe-damage: do the action of Miranda waiting for a 100 melee hit by the player.
 testing effects of pro-axe-damage: if we assert result "\+ 10 \(axe proficiency\)", rule succeeds.
 
@@ -2692,11 +2692,11 @@ regular scheduling of malleus-blood-damage: do the action of Miranda waiting for
 testing effects of malleus-blood-damage:
 	assert result "\+ 1 \(Malleus Maleficarum blood bonus\) ";
 	if we assert absence of result "tension<^\n>+ damage", rule succeeds.
-	
+
 initial scheduling of no-crossbow-tension-damage:
 	equip the player with the Yahvinnian crossbow;
 	set the tension to 1.
-	
+
 regular scheduling of no-crossbow-tension-damage: do the action of Miranda waiting for a 100 melee hit by the player.
 testing effects of no-crossbow-tension-damage: if we assert absence of result "crossbow benefits from tension", rule succeeds.
 
@@ -2739,7 +2739,7 @@ initial scheduling of giantbane-vs-miranda:
 	now the hound status is 1;
 	now the concentration of Miranda is 2;
 	now Miranda is linked to the player.
-	
+
 regular scheduling of giantbane-vs-miranda: do the action of Miranda waiting for a 100 melee hit by the player.
 
 testing effects of giantbane-vs-miranda:
@@ -2756,7 +2756,7 @@ testing effects of giantbane-vs-miranda:
 initial scheduling of giantbane-vs-chain:
 	now the hound status is 0;
 	now the player is small.
-	
+
 regular scheduling of giantbane-vs-chain: do the action of the chain golem waiting for a 100 melee hit by the player.
 testing effects of giantbane-vs-chain:
 	assert result "- 1 \(small attacker\)";
@@ -2780,7 +2780,7 @@ testing effects of brightflame-damage:
 Initial scheduling of insane-damage:
 	now the brightest-flame-counter is 0;
 	now Miranda is insane.
-	
+
 regular scheduling of insane-damage: do the action of waiting for a 100 melee hit by Miranda.
 testing effects of insane-damage: if we assert result "\+ 10 \(insane burst of strength\)", rule succeeds.
 
@@ -2797,7 +2797,7 @@ testing effects of altered-vs-chain:
 	assert result "\+ 1 \(disintegrating flesh\)";
 	assert result "- 1 \(metallic scales\)";
 	rule succeeds.
-	
+
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	maximum attempts	antecedent
 blessed-and-cursed	0	1	--	--
@@ -2821,9 +2821,9 @@ regular scheduling of blessed-and-cursed:
 		clear event description;
 		say "Chton tests you with [run paragraph on]";
 		have Chton inflict damage on the player;
-	
+
 testing effects of blessed-and-cursed: check damage of the player with 1000 health after "Chton tests you with".
-		
+
 testing effects of death-blessing: if we assert result "- 10 \(blessing of life\)", rule succeeds.
 testing effects of blessing-reset: if the player is death-blessed, rule succeeds.
 testing effects of death-curse: if we assert result "\+ 10 \(curse of death\)", rule succeeds.
@@ -2853,7 +2853,7 @@ Initial scheduling of Miranda-runner:
 	set the tension to 3;
 
 regular scheduling of Miranda-runner: compel the action of going the way-to-get-back.
-	
+
 Testing effects of Miranda-runner:
 	check damage of the player with 1000 health after "Miranda deals";
 	assert result "\+ 1 \(you are running\) ";
@@ -2870,16 +2870,16 @@ Initial scheduling of radiance-reduction:
 	equip the player with the fuligin cloak;
 	now the melee of the angel of compassion is 100;
 	now the health of the player is 1000.
-	
+
 regular scheduling of radiance-reduction: compel the action of waiting as a reaction to the angel of compassion.
-	
+
 Testing effects of radiance-reduction:
 	assert that a random readied weapon enclosed by the angel of compassion is the sword of light with label "Angel of Compassion's weapon";
 	assert that the location of the sword of light is the location of the angel of compassion with label "location of the sword of light";
 	check damage of the player with 1000 health after "deals";
 	assert result "\+ 4 \(sword of light radiance bonus\)";
 	if we assert result "- 2 \(fuligin cloak\)", rule succeeds.
-	
+
 initial scheduling of iron-angelsword-description: now the sword of light is iron.
 regular scheduling of iron-angelsword-description:
 	capture whole events;
@@ -2888,7 +2888,7 @@ testing effects of iron-angelsword-description:
 	assert result "It seems to consist of pure iron.";
 	assert absence of result "damage increases";
 	if we assert result "; no special bonus when it is made of iron", rule succeeds.
-	
+
 regular scheduling of iron-angelsword-damage: do the action of waiting for a 100 melee hit by the angel of compassion.
 testing effects of iron-angelsword-damage: if we assert absence of result "sword of light radiance bonus", rule succeeds.
 
@@ -2930,7 +2930,7 @@ initial scheduling of plate-damage:
 	try taking off the fuligin cloak;
 	now the radiation of the angel of compassion is 2;
 	equip the player with plate mail.
-	
+
 regular scheduling of plate-damage: do the action of waiting for a 100 melee hit by the angel of compassion.
 testing effects of plate-damage: if we assert result "- 2 \(plate mail\) ", rule succeeds.
 
@@ -2950,7 +2950,7 @@ Initial scheduling of heat-damage-testing:
 	now the heat strength of the sword of light is 5;
 
 regular scheduling of dragon-vs-hotsword: do the action of waiting for a 100 melee hit by the angel of compassion.
-	
+
 Testing effects of dragon-vs-hotsword:
 	assert result "\+ 5 \(sword of light is hot\)";
 	if we assert result "- 4 \(dragon armour protects against heat\)", rule succeeds.
@@ -2969,9 +2969,9 @@ initial scheduling of dragon-heat-plus-damage:
 regular scheduling of dragon-heat-plus-damage: do the action of waiting for a 100 melee hit by the angel of compassion.
 testing effects of dragon-heat-plus-damage: if we assert result "- 2 \(dragon armour\)", rule succeeds.
 testing effects of heat-vulnerable-damage:
-	assert result "- 3 \(dragon armour protects against heat\)"; 
+	assert result "- 3 \(dragon armour protects against heat\)";
 	if we assert result "\+ 1 \(intrinsic heat vulnerability\)", rule succeeds.
-	
+
 regular scheduling of cool-armadillo-damage: do the action of waiting for a 100 melee hit by the armadillo.
 testing effects of cool-armadillo-damage: if we assert absence of result "intrinsic heat vulnerability", rule succeeds.
 
@@ -2997,7 +2997,7 @@ Initial scheduling of undead-vs-holy-damage:
 	revive the rotting corpse in the location;
 	revive the smoke demon in the location;
 	Now the spirit score of the healer of Aite is 9.
-	
+
 The undeadguy is a person that varies. The undeadguy is the rotting corpse. [Inform doesn't seem to like "rotting corpse" in stored action]
 
 regular scheduling of undead-vs-holy-damage: do the action of the undeadguy waiting for a 100 melee hit by the healer of Aite.
@@ -3019,7 +3019,7 @@ testing effects of demon-vs-holy-damage:
 	[holy sword does divine damage, so doesn't add to the density damage]
 	assert that density damage is (base damage + 10 + 3) / 2 with label "density damage";
 	if we assert result "\+ 2 \(holiness\) ", rule succeeds.
-	
+
 initial scheduling of human-vs-holy-damage: set the tension to 0.
 regular scheduling of human-vs-holy-damage: do the action of waiting for a 100 melee hit by the healer of Aite.
 testing effects of human-vs-holy-damage: if we assert absence of result "holiness", rule succeeds.
@@ -3069,7 +3069,7 @@ testing effects of human-vs-silver:
 initial scheduling of necromantic-pierce:
 	now the tormentor of aite is at-pierce;
 	now the body score of the tormentor of aite is 8.
-	
+
 regular scheduling of necromantic-pierce: do the action of the smoke demon waiting for a 100 melee hit by the tormentor of Aite.
 testing effects of necromantic-pierce:
 	assert absence of result "\+ 3 \(piercing\)"; [piercing only affects physical damage]
@@ -3112,7 +3112,7 @@ testing effects of chton-resistant:
 	if expected damage < 0, now expected damage is 0;
 	assert that final damage is expected damage with label "calculated damage";
 	if we assert that the health of the player is 1000 - final damage, rule succeeds.
-	
+
 initial scheduling of scales-damage:
 	revive the armadillo in the location;
 	now the health of the player is 1000;
@@ -3153,7 +3153,7 @@ testing effects of frag-damage:
 	assert result "\d - \d \(hard to damage\) = 0 damage to the wisps of pain";
 	assert result "\d - 1 \(barkskin\) = \d damage to Bodmall";
 	assert result "\d - 1 \(armadillo\) = \d damage to you";
-	
+
 initial scheduling of scale-power:
 	try taking off the sandals of the heretic;
 	now the player is at-scale.
@@ -3163,14 +3163,14 @@ Testing effects of scale-power: if we assert result "- 6 \(scales\)", rule succe
 initial scheduling of chanter-damage:
 	revive the malignant chanter in the location;
 	now the concentration of the malignant chanter is 1.
-	
+
 regular scheduling of chanter-damage: do the action of waiting for a 100 melee hit by the rotting corpse.
 testing effects of chanter-damage: if we assert result "\+ 1 \(malignant chanter\)", rule succeeds.
 
 initial scheduling of nomos-damage-reduction:
 	now the player worships Nomos;
 	now the favour of the player is 9.
-	
+
 regular scheduling of nomos-damage-reduction: do the action of waiting for a 100 melee hit by the armadillo.
 Testing effects of nomos-damage-reduction: if we assert result "- 4 \(Nomos\)", rule succeeds.
 
@@ -3210,7 +3210,7 @@ testing effects of no-sul-intervention:
 
 initial scheduling of limb-removal:
 	now the player worships nothing;
-	
+
 regular scheduling of limb-removal: do the action of the undeadguy waiting for a 100 melee hit by the player.
 Testing effects of limb-removal:
 	capture whole events;
@@ -3223,7 +3223,7 @@ testing effects of limbless-damage: if we assert result "x 0% \(no means of atta
 Initial scheduling of slave-attacking:
 	now the health of the reaper is 1000;
 	now the reaper is player-enslaved.
-	
+
 regular scheduling of slave-attacking: compel the action of attacking the reaper.
 Testing effects of slave-attacking:
 	capture whole events;
@@ -3248,25 +3248,25 @@ automatos-stab	1	1	--
 Initial scheduling of automatos-tests:
 	prepare a test battle with Automatos;
 	equip the player with the executioner's axe.
-	
+
 regular scheduling of automatos-blow:
 	equip the player with the executioner's axe;
 	set the tension to 12;
 	do the action of Automatos waiting for a 100 melee hit by the player.
-	
+
 testing effects of automatos-blow:
 	if we assert result "The impact of the attack is so great that Automatos staggers backwards and shakes its head several times. Some small, almost delicate mechanical parts fall out of its ", rule succeeds.
-	
+
 initial scheduling of automatos-stab:
 	equip the player with the gorgeous dagger;
 	set the size of the gorgeous dagger to medium;
-	
+
 regular scheduling of automatos-stab:
 	set the tension to 15;
 	do the action of Automatos waiting for a 100 melee hit by the player.
-	
+
 testing effects of automatos-stab: if we assert result "The dagger has struck deep between plates of steel and dislodged something inside Automatos. The behemoth staggers backwards and shakes its head several times. Some small, almost delicate mechanical parts fall out of its ", rule succeeds.
-	
+
 [
 
 
@@ -3297,7 +3297,7 @@ jump-a-turn	1	0	2	--
 
 [Definition: outcome-behavior is enabled:
 	decide on whether or not the number of filled rows in Table of Test Set Queue is 1. [only runs when it's the only test]
-	
+
 not sure how to do this now]
 
 Testing effects of outcome-behavior: rule succeeds.
@@ -3320,7 +3320,7 @@ Regular scheduling of wait-a-turn:
 	compel the action of waiting;
 	transcribe "DEBUG: compelled waiting";
 	update event description;
-	
+
 Testing effects of wait-a-turn:
 	if we assert result "Time passes", rule succeeds;
 	otherwise say "No time passing in '[event description]'!";
@@ -3341,13 +3341,13 @@ Outcome	likelihood	minimum attempts	antecedent
 Simple tests	0	1	restarting for tests
 Resizing salves	1	1	--
 too-small-block	1	1	--
-agnostic-block	1	1	--	
+agnostic-block	1	1	--
 
 To decide whether we assert that (item - a thing) is (size - a size):
 	if the size of item is size, yes;
 	now the failure report is "[the item] should be [size], but it is [size of item]";
 	no.
-	
+
 Testing effects of resizing salves:
 	Let object-list be {yourself, the spiked mace of the ape king, the gilded rapier, the wooden buckler, the bulwark of faith, the plate mail};
 	Let the salve-list be a list of things;
@@ -3386,18 +3386,18 @@ Initial scheduling of too-small-block:
 	prepare a test battle with the armadillo;
 	now the player is medium;
 	equip the player with the wooden buckler;
-	
+
 Regular scheduling of too-small-block: do the action of blocking a 100 melee hit by the armadillo.
 Testing effects of too-small-block: if we assert result "\+ 2 \(defender's shield too small\)", rule succeeds.
-	
+
 Initial scheduling of agnostic-block:
 	equip the player with the bulwark of faith;
 	now the player worships Sul;
 	now favour of the player is 1;
-	
+
 Regular scheduling of agnostic-block: do the action of blocking a 100 melee hit by the armadillo.
 Testing effects of agnostic-block: if we assert absence of result "defender's shield too small", rule succeeds.
-	
+
 Section - Controlling pipes
 
 Table of Outcomes (continued)
@@ -3409,11 +3409,11 @@ x-closed pipes	1	1
 x-closed wheel	1	1
 
 Scenario for simple tests: now Hall of Vapours is testobject. [TODO: run scenario for ALL outcomes in the same test set?]
-	
+
 initial scheduling of open-pipes:
 	extract the player to Hall of Vapours;
 	now pipes-open is true;
-	
+
 Regular scheduling of open-pipes: try looking.
 Testing effects of open-pipes: if we assert result "Several large pipes continuously spew forth vapours into this room\. A big wheel is attached", rule succeeds.
 
@@ -3441,11 +3441,11 @@ bug-351-true-name	1	1
 regular scheduling of bug-351-find: find a healthy scroll.
 testing effects of bug-351-find: if we assert result "You have found a scroll", rule succeeds.
 
-testing effects of bug-351-obsc-name: 
+testing effects of bug-351-obsc-name:
 	Repeat with item running through scrolls enclosed by the player:
 		unless we assert "The true name and obfuscated name of [item] should be different, but they are both '[true name of item]'" based on whether or not the true name of item is not the obfuscated name of item, rule fails;
 	rule succeeds.
-	
+
 testing effects of bug-351-true-name:
 	Repeat with item running through scrolls:
 		let item-name be the true name of item;
@@ -3461,7 +3461,7 @@ throwing-352	1	1
 Initial scheduling of throwing-352: now the reusable item is a random smoke grenade.
 Regular scheduling of throwing-352: try throwing the reusable item.
 Testing effects of throwing-352: if we assert absence of result "Run-time problem", rule succeeds.
-	
+
 Section - Died Counts
 
 Table of Outcomes (continued)
@@ -3475,12 +3475,12 @@ Initial scheduling of died-count-test:
 	move Isra to Entrance Hall;
 	revive Israfel in Entrance Hall;
 	prepare a test battle with israfel;
-	
+
 Regular scheduling of died-count-test: try smiting Israfel.
-	
+
 Testing effects of died-count-test: if we assert that the died count of israfel is the challenger's initial defeats + 1 with label "died count of Israfel", rule succeeds.
 
-	
+
 Section - Enemies should always start out awake in Arena of the Fallen
 
 Table of Outcomes (continued)
@@ -3490,7 +3490,7 @@ dead-fallen	1	1
 awake-in-fallen-arena	1	1
 
 Scenario for Simple Tests: now Entrance to the Arena is testobject.
-	
+
 initial scheduling of Sleeping Fallen:
 	now the player worships nothing;
 	now the favour of the player is 0;
@@ -3498,7 +3498,7 @@ initial scheduling of Sleeping Fallen:
 	now the blood ape is asleep;
 	Now the reusable item is a random scroll of death;
 	now the health of the blood ape is 1;
-	
+
 Regular scheduling of Sleeping fallen: try reading the reusable item.
 Testing effects of sleeping fallen: if the blood ape is asleep, rule succeeds.
 Testing effects of dead-fallen: if the blood ape is dead, rule succeeds.
@@ -3522,7 +3522,7 @@ Initial scheduling of sleeping-dream-dreaming:
 	now the reusable item is a random morphean grenade;
 	Now Malygris is asleep;
 	extract the player to Entrance Hall, making sure it is unoccupied.
-	
+
 regular scheduling of sleeping-dream-dreaming: compel the action of throwing the reusable item.
 testing effects of sleeping-dream-dreaming: if the player is the untroubled sleeper, rule succeeds.
 
@@ -3533,14 +3533,14 @@ testing effects of sleeping-dream-waking:
 	assert that the concentration of Malygris is 2 with label "concentration of Malygris";
 	assert "the player should be just-woken" based on whether or not the player is just-woken;
 	rule succeeds.
-	
+
 Initial scheduling of Malygris-missing-sleeper:
 	now the health of the player is 1000;
 	now the defence of the player is 50;
 	now the melee of Malygris is 0;
-	
+
 regular scheduling of Malygris-missing-sleeper: compel the action of waiting as a reaction to Malygris.
-		
+
 testing effects of malygris-missing-sleeper: if we assert result "defender was asleep<^\n>+Malygris does not overcome your defence rating", rule succeeds.
 testing effects of still-sleepy: if the player is just-woken, rule succeeds.
 
@@ -3565,17 +3565,17 @@ Initial scheduling of healer-not-healing-player:
 		now the melee of guy is 0;
 		now the health of guy is the permanent health of guy;
 	decrease the health of the player by 3;
-	
+
 regular scheduling of the scheduled event: [does not apply to dependents]
 	if the scheduled event is at least healer-not-healing-player and the scheduled event is at most healer-healing-self:
 		wait for the healer of Aite to act freely.
-	
+
 testing effects of healer-not-healing-player: if the injury of the player is at least 3, rule succeeds.
-		
+
 Initial scheduling of healer-healing-defender:
 	decrease the health of the healer of aite by 3;
 	decrease the health of the defender of aite by 4;
-	
+
 testing effects of healer-healing-defender: if the injury of defender of Aite is less than 4, rule succeeds.
 testing effects of healer-still-injured: if the injury of healer of Aite is at least 3, rule succeeds.
 testing effects of healer-healing-self: if the injury of healer of Aite is less than 3, rule succeeds.
@@ -3603,17 +3603,17 @@ Initial scheduling of bodmall-sneaking:
 	now the floor-item is a random teleportation grenade;
 	extract the player to the location of Bodmall;
 	force the fuligin cloak to work;
-	
+
 regular scheduling of bodmall-sneaking:
 	now the floor-item is in the location;
 	compel the action of throwing the floor-item.
-	
+
 Testing effects of bodmall-sneaking:
 	assert result "first taking the teleportation grenade";
 	assert result "Malygris, perhaps the greatest of all living sorcerers, is standing here";
 	assert absence of result "picking stuff up";
 	rule succeeds.
-	
+
 Testing effects of anchored-to-malygris:
 	repeat with guy running through people in the location:
 		assert "teleportation should be impossible for [guy]" based on whether or not teleportation is impossible for guy;
@@ -3623,7 +3623,7 @@ regular scheduling of malygris-robbing:
 	force the fuligin cloak to work;
 	now the floor-item is in the location;
 	compel the action of throwing the floor-item;
-	
+
 [if the player teleports away but reappears in the same room, their hiding penalty will be wiped out. This could be considered a bug, but I don't think it's worth fixing. Anyway, we can avoid it for testing purposes by using the dimensional anchor.]
 
 Testing effects of malygris-robbing: if we assert result "picking stuff up", rule succeeds.

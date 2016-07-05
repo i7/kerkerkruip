@@ -25,7 +25,7 @@ Definition: an outcome is failed if the state of it is outcome-failed.
 Definition: an outcome is achieved if the state of it is outcome-achieved.
 
 An outcome can be unscheduled, scheduled for immediate testing, scheduled for later testing, just-tested, or just-succeeded.
-	
+
 [Outcome properties:
 
 attempt count - number of times outcome has been tested
@@ -36,7 +36,7 @@ minimum attempts -
 The probability of a test "succeeding" should be likelihood / minimum attempts.
 
 This has some special interpretations:
-	
+
 if likelihood = 0 or likelihood = minimum attempts, then success or failure of each test is considered a certainty, and the whole outcome will fail if a single test does not perform as expected
 if minimum attempts = 0, then likelihood is considered a minimum number of successes, not a probability. Setting likelihood to 1 means the whole outcome will be achieved if a single test succeeds
 For all other values, a tolerance range will be established that should achieve the outcome in 99% of cases with correctly randomized successes
@@ -67,7 +67,7 @@ To save test outcomes:
 		now the antecedent entry is the antecedent of the outcome entry;
 		[ingore maximum tolerance, it will be recalculated]
 	write file of test outcomes from table of outcomes;
-	
+
 To load test outcomes:
 	unless file of test outcomes exists, stop;
 	Read file of test outcomes into table of outcomes;
@@ -99,7 +99,7 @@ To set the maximum tolerance for (event - an outcome) with (success rate - a rea
 				increase current rate by the probability of winning (success-target - current threshold) times out of maximum attempts of event with likelihood P;
 			increment current threshold;
 		now the maximum tolerance of event is current threshold - 1;
-			
+
 To decide what real number is the probability of winning (K - a number) times out of (N - a number) with likelihood (P - a real number):
 	if K < 0 or K > N:
 		decide on 0.0;
@@ -115,7 +115,7 @@ To decide what real number is the probability of winning (K - a number) times ou
 	Repeat with i running from (K + 1) to (N - K):
 		now product is product * (1 - P);
 	decide on product;
-		
+
 [
 To decide what real number is (N - a number) choose (K - a number):
 	Let the product be 1.0;
@@ -131,7 +131,7 @@ For taking a player action when a person is scheduled to act freely (this is the
 		generate the action of waiting;
 	otherwise:
 		generate the compelled action;
-	
+
 For taking a player action when testing compelling an action (this is the compel player action rule):
 	Let the guy be the actor part of the compelled action;
 	if (the player is at-act or the combat status is peace) and the guy is the player:
@@ -148,7 +148,7 @@ For taking a player action when testing compelling an action (this is the compel
 	schedule taking a turn;
 
 To say (event - compelling an action):
-	say "compelling [the compelled action]"; 
+	say "compelling [the compelled action]";
 
 For taking a player action when testing compelling a reaction (this is the compel player reaction rule):
 	if the actor part of the compelled action is the player and the player is at-react:
@@ -169,7 +169,7 @@ For taking a player action when testing compelling an attack (this is the compel
 		transcribe "[combat state of the player] player waits until [the compelled attacker] can be compelled to attack";
 		generate the action of waiting;
 		schedule taking a turn.
-	
+
 The player combat round action rule is listed first in the for taking a player action rulebook.
 The compel player action rule is listed before the player combat round action rule in the for taking a player action rulebook.
 The compel player reaction rule is listed before the compel player action rule in the for taking a player action rulebook.
@@ -192,10 +192,10 @@ Definition: an outcome is schedule-blocking if it is at least taking a turn and 
 
 Regular scheduling of a schedule-blocking outcome (called the event) (this is the regular block scheduling rule):
 	now the event is scheduled for later testing.
-	
+
 [I7 names borrowed from Ron Newcomb's Original Parser]
-The action in progress is an action name that varies. 
-The person requesting is a person that varies. 
+The action in progress is an action name that varies.
+The person requesting is a person that varies.
 The action in progress variable translates into I6 as "action".
 The person requesting variable translates into I6 as "act_requester".
 
@@ -210,7 +210,7 @@ To generate (the desired action - a stored action):
 	now the noun is the noun part of the desired action;
 	now the second noun is the second noun part of the desired action;
 	begin the current action;
-	
+
 The compelled attacker is an object that varies.
 The compelled action is a stored action that varies. The compelled action is the action of waiting.
 
@@ -229,27 +229,27 @@ To compel (the desired action - a stored action):
 	now the guy is not asleep;
 	Now the compelled action is the desired action;
 	schedule compelling an action; [this should automatically stop and wait for a turn]
-	
+
 To compel (the desired action - a stored action) as a reaction to (guy - a person):
 	transcribe "setting the compelled attacker to [the guy][if the guy is asleep] and waking [them] up";
 	now the guy is not asleep;
 	Now the compelled attacker is the guy;
 	Now the compelled action is the desired action;
 	schedule compelling an attack; [this should automatically stop and wait for a turn]
-	
+
 To wait for (guy - a person) to act freely:
 	if guy is asleep:
 		transcribe "waking [the guy] up so [they] can act freely";
 	now the act-outcome of the guy is the outcome described;
 	now the outcome described is scheduled for later testing;
-	
+
 Initial scheduling of taking a turn:
 	now suppress npc action is true;
-	
+
 To forget the/-- compelled action:
 	now the compelled attacker is nothing;
 	now the compelled action is the action of waiting;
-	
+
 The automated menu question answer is a number that varies.
 
 First for reading a command when the automated menu question answer is greater than 0:
@@ -268,7 +268,7 @@ A Standard AI rule for the compelled attacker when testing compelling an attack 
 	test compelling an attack against true;
 	schedule compelling a reaction;
 	rule succeeds.
-		
+
 A Standard AI rule for a person (called P) when testing compelling a reaction (this is the compel a reaction rule):
 	unless the actor part of the compelled action is P and P is at-React:
 		make no decision;
@@ -284,7 +284,7 @@ A Standard AI rule for a person (called P) when testing compelling an action (th
 	forget the compelled action;
 	test compelling an action against true;
 	rule succeeds.
-	
+
 A Standard AI rule for a person (called P) (this is the suppress actions rule):
 	if suppress npc action is true:
 		if P is scheduled to act freely:
@@ -294,7 +294,7 @@ A Standard AI rule for a person (called P) (this is the suppress actions rule):
 		otherwise:
 			transcribe "suppressed action for [P]";
 			rule succeeds;
-	
+
 The suppress actions rule is listed before the insane people attack themselves rule in the standard AI rulebook.
 The compel an action rule is listed before the suppress actions rule in the standard AI rulebook.
 The compel a reaction rule is listed before the compel an action rule in the standard AI rulebook.
@@ -304,15 +304,15 @@ Section - Testing Outcomes
 
 To decide whether (event - an outcome) timed out:
 	decide on whether or not the attempt count of the event is not less than the maximum attempts of the event;
-	
+
 To decide whether (event - restarting for tests) timed out: no.
-		
+
 To decide what number is the expected successes of (event - an outcome) after (attempts - a number):
 	if the minimum attempts of the event is 0, decide on likelihood of the event;
 	decide on (likelihood of the event * attempts) / minimum attempts of the event;
 
 The failure report is a text that varies;
-	
+
 To resolve (event - an outcome):
 	Let the tolerance be the maximum tolerance of the event;
 	Let target be the expected successes of the event after the maximum attempts of the event;
@@ -350,7 +350,7 @@ at 196 attempts:
 at 197:
 4 - 200 + 197 = 1
 ]
-	
+
 To resolve dependents of (event - an outcome):
 	if the state of the event is outcome-failed or the event timed out:
 		if the event has unresolved dependents:
@@ -392,7 +392,7 @@ To decide whether capturing whole events: decide on whether or not the capture m
 To capture damage text: now the capture mode is 1.
 To decide whether capturing damage text: decide on whether or not the capture mode is 1.
 
-The transcription reason is a text that varies. 
+The transcription reason is a text that varies.
 transcription reason reporting mode is a number that varies.
 
 To give default transcription reason: Now transcription reason reporting mode is 0.
@@ -412,7 +412,7 @@ To log (msg - a text):
 	say "[line break][T]";
 	append "**** [T] [bracket][current test description][close bracket][line break]" to file of test transcript;
 	if currently capturing is true, start capturing text;
-	
+
 To transcribe (T - a text):
 	let message be "[bracket][T][close bracket][command clarification break]";
 	give no transcription reason;
@@ -436,7 +436,7 @@ To say current test description:
 		repeat with event running through possible relevant outcomes:
 			say "'[event]' [success count of event]/[attempt count of event] times | ";
 		say "([test assertion count] assertions)";
-	
+
 To decide whether the captured text is empty: (- (captured_text-->0 == 0) -)
 
 To flush to transcript:
@@ -458,13 +458,13 @@ To update the/-- event description, anonymously:
 		unless the captured text is empty:
 			now the event description is the substituted form of "[the event description][the captured text]";
 		flush to transcript;
-	
+
 To update the/-- event description because (reason - a text):
 	if text capturing is active:
 		give custom transcription reason;
 		now transcription reason is reason;
 	update event description;
-	
+
 To transcribe and stop capturing text/--:
 	if text capturing is active:
 		if giving default transcription reason:
@@ -472,27 +472,27 @@ To transcribe and stop capturing text/--:
 			give custom transcription reason;
 		update the event description;
 		stop capturing text;
-	
+
 To transcribe and stop capturing text/-- because (reason - a text):
 	if text capturing is active:
 		give custom transcription reason;
 		now transcription reason is reason;
 		transcribe and stop capturing.
-	
+
 To clear the/-- event description:
 	if text capturing is active:
 		if giving default transcription reason:
 			give no transcription reason; [if we want a message when clearing event description, we have to specify one]
 		stop capturing text;
-		flush to transcript;			
+		flush to transcript;
 	now the event description is "";
-	
+
 To clear the/-- event description because (reason - a text):
 	if text capturing is active:
 		now transcription reason is reason;
 		give custom transcription reason;
 		clear event description;
-			
+
 The file of test results is called "testresults".
 
 Table of Test Results
@@ -514,11 +514,11 @@ To queue (T - an outcome):
 	unless there is an unresolved count entry:
 		now the unresolved count entry is 0;
 	increment the unresolved count entry;
-	
+
 To queue all automated tests:
 	Repeat with T running through enabled outcomes:
 		queue T.
-			
+
 To record a test attempt:
 	increment the test assertion count;
 	increment the total assertion count;
@@ -533,18 +533,18 @@ To record a test attempt:
 	increment the total entry;
 
 To record a/-- failure:
-	choose row with test set of primary outcome in Table of Test Results;	
+	choose row with test set of primary outcome in Table of Test Results;
 	increment the assertion failures count;
-	increment the failures entry;	
+	increment the failures entry;
 	let new message be "Failure for test: [the primary outcome], step: [the scheduled event], [if the outcome described is not the scheduled event][the outcome described], [end if]assertion [the test assertion count]: [the failure report][paragraph break]";
 	log the new message;
 	now the failure messages entry is the substituted form of "[failure messages entry][new message]";
 	now the failure report is "";
-	
+
 To record a/-- failure report of/-- (msg - a text):
 	now the failure report is msg;
 	record a failure;
-	
+
 To say grand test summary:
 	let grand test total be 0;
 	let grand test failures be 0;
@@ -555,28 +555,28 @@ To say grand test summary:
 	Let the remaining outcome tests be the maximum attempts of the primary outcome - attempt count of the primary outcome;
 	if the remaining outcome tests is at least 1:
 		say "; [number of not preset possible outcomes] outcome[s] to be tested up to [remaining outcome tests] more times" ;
-		
+
 [TODO: square these numbers with 'requeueable' count?]
 
 To decide whether there are test results to display:
 	decide on whether or not the number of filled rows in Table of Test Results is at least 1;
-		
+
 To display test results:
 	log "Test results:[line break]";
 	Repeat through Table of Test Results:
 		if failures entry is 0:
 			transcribe "[test set entry]: [total entry] tests, all passed";
-		otherwise:	
+		otherwise:
 			log "[test set entry]: [total entry] tests, [failures entry] failures";
 	log "Total: [grand test summary].";
 	Repeat through Table of Test Results:
 		if failures entry is at least 1:
 			log "";
 			log "Failures for [test set entry]:";
-			log "[failure messages entry]";	
+			log "[failure messages entry]";
 	say "To view a full transcript of all tests, see the file 'testtranscript.glkdata' in the project directory.";
 	Blank out the whole of Table of Test Results;
-	write file of test results from Table of Test Results; 
+	write file of test results from Table of Test Results;
 	if the file of noninteractive tests exists:
 		stop the game abruptly;
 	otherwise:
@@ -602,7 +602,7 @@ Section - Capture-aware waiting for key-presses (in place of Section - Waiting f
 Include (-
 
 ! Wait for a safe non navigating key. The user might press Down/PgDn or use the mouse scroll wheel to scroll a page of text, so we will stop those key codes from continuing.
-[ KeyPause key; 
+[ KeyPause key;
 	if (capture_active) {
 		rfalse;
 	}
@@ -630,13 +630,13 @@ Include (-
 	}
 	while (i ~= 13 or 31 or 32)
 	{
-		i = VM_KeyChar();	
+		i = VM_KeyChar();
 	}
 ];
 
 ! No longer used but included just in case
 [ GetKey;
-	return VM_KeyChar(); 
+	return VM_KeyChar();
 ];
 
 [ AwareClearScreen;
@@ -673,7 +673,7 @@ For pausing the game (this is the standard pausing the game rule):
 
 To decide what number is the chosen letter:
 	(- GetKey() -)
-		
+
 To stop the/-- game abruptly:
 	(- quit; -)
 
@@ -691,7 +691,7 @@ Section - Controlling Outcomes
 The dependency test root is an outcome that varies. The dependency test root is boring lack of results.
 
 [Dependency is defined differently for different outcomes. In effect, the dependency tree has two segments:
-	
+
 an set of preset outcomes, all preceding testing of the scheduled event
 a branching tree of outcomes, all rooted at the scheduled event
 
@@ -702,7 +702,7 @@ To decide whether (event - an outcome) has unresolved dependents:
 	repeat with item running through outcomes:
 		if item currently depends on event, yes;
 	no.
-	
+
 To decide whether (event - an outcome) depends on (blocker - an outcome):
 	Let candidate be the event;
 	while candidate is not boring lack of results:
@@ -711,14 +711,14 @@ To decide whether (event - an outcome) depends on (blocker - an outcome):
 		if candidate is blocker:
 			decide yes;
 	decide no.
-	
+
 To decide whether (event - an outcome) currently depends on (blocker - an outcome):
 	unless event depends on blocker, no;
 	if the blocker is preset:
 		decide on whether or not event is possible;
 	otherwise:
 		decide on whether or not event is not resolved;
-	
+
 To decide what number is the calculated maximum attempts of (event - an outcome):
 	unless maximum attempts of event is 0:
 		decide on the maximum attempts of event;
@@ -731,7 +731,7 @@ To decide what number is the calculated maximum attempts of (event - an outcome)
 			if dependent-max is greater than max:
 				now max is dependent-max;
 	decide on max;
-	
+
 To make (event - an outcome) testable:
 	if event is untested:
 		now state of event is outcome-possible;
@@ -740,7 +740,7 @@ To make (event - an outcome) testable:
 
 To make (event - boring lack of results) testable:
 	do nothing;
-		
+
 Definition: an outcome is test set if the antecedent of it is restarting for tests.
 Definition: an outcome is test step if it is not preset and the antecedent of it is boring lack of results.
 
@@ -762,7 +762,7 @@ To find test sets:
 	while the next test set is boring lack of results and item is not boring lack of results:
 		if item is a test set, now the next test set is item;
 		now item is the outcome after item;
-		
+
 To decide which outcome is the test set of (event - an outcome):
 	if the first test set is boring lack of results:
 		find test sets;
@@ -779,13 +779,13 @@ Definition: An outcome (called event) is preset:
 	if the first test set is boring lack of results:
 		find test sets;
 	decide on whether or not event is less than the first test set.
-	
+
 To report an iteration because (reason - a text):
 	clear event description because reason;
 	stop capturing text;
 	say " .[run paragraph on]";
 	start capturing text;
-		
+
 
 Section - Scheduling
 
@@ -796,14 +796,14 @@ To decide whether testing (T - an outcome):
 	if T is the scheduled event, yes;
 	if T is the primary outcome, yes;
 	no;
-	
+
 To decide whether testing (D - a description of outcomes):
 	Repeat with T running through D:
 		if testing T, yes;
 	no.
 
 Initial scheduling rules are an outcome based rulebook.
-			
+
 regular scheduling rules are an outcome based rulebook.
 
 rescheduling is a truth state that varies.
@@ -813,7 +813,7 @@ The scheduled event is an outcome that varies. The scheduled event is boring lac
 The outcome described is an outcome that varies.
 
 [resettable means we can reset this and all its dependents and presets, and go on to the next test step]
-	
+
 Definition: boring lack of results is resettable: no;
 
 Definition: an outcome (called event) is resettable:
@@ -826,7 +826,7 @@ Definition: an outcome (called event) is resettable:
 			if item is already scheduled, no;
 			if item is possible, no;
 	yes;
-	
+
 [This phrase determines if an outcome should be scheduled before resetting or rescheduling the scheduled event. It may not necessarily be schedulable right now (for that we use "immediately schedulable")]
 
 To decide whether (event - an outcome) needs scheduling:
@@ -838,7 +838,7 @@ To decide whether (event - an outcome) needs scheduling:
 		Let blocker be the antecedent of the event;
 		While blocker is not boring lack of results:
 			if blocker is just-tested, no; [we need a rescheduling so the antecedent can be just-succeeded]
-			now blocker is the antecedent of blocker; 
+			now blocker is the antecedent of blocker;
 	if the test set of event is not the primary outcome, no; [this includes presets, which are scheduled manually or by antecedent]
 	if event is resolved and not (event has unresolved dependents), no;
 	yes.
@@ -859,7 +859,7 @@ Definition: an outcome (called event) is reschedulable:
 
 To reset (event - boring lack of results):
 	do nothing.
-	
+
 To reset (event - an outcome):
 	if event is the scheduled event:
 		[transcribe "DEBUG: reset [event], which is the scheduled event";]
@@ -883,7 +883,7 @@ To prepare (event - an outcome) for rescheduling:
 	repeat with item running through outcomes:
 		if item is preset or item depends on event, now item is unscheduled;
 	now the event is unscheduled;
-			
+
 Definition: an outcome (called event) is already scheduled if it is scheduled for immediate testing or it is scheduled for later testing;
 Definition: an outcome (called event) is already tested if it is just-tested or it is just-succeeded;
 
@@ -904,22 +904,22 @@ Definition: an outcome (called event) is immediately schedulable:
 	Repeat with dependent running through already scheduled outcomes:
 		if the antecedent of dependent is the event, no;
 	yes;
-		
+
 Definition: an outcome (called event) is immediately testable:
 	unless event is scheduled for immediate testing, no;
 	if event is preset, yes;
 	if a preset outcome is scheduled for later testing, no;
 	yes.
-	
+
 [The scheduled event is the earliest event that can be repeated. We test it and all its dependents together. It often has major side effects,
 like taking a turn. Its antecedent is always a preset - restarting for tests if it's the beginning of a set, or boring lack of results if
 no antecedent has been specified.]
-		
+
 To schedule (the event - boring lack of results):
 	transcribe and stop capturing because "boring lack of results was the new event of";
 	say line break;
 	start capturing text;
-	
+
 To schedule (the event - an outcome):
 	[transcribe "DEBUG: scheduling [event]";]
 	if event is a test step:
@@ -940,7 +940,7 @@ To schedule (the event - an outcome):
 		schedule the antecedent of the event;
 	otherwise:
 		transcribe "WARNING: [the event] could not be scheduled, nor could its antecedent [antecedent of the event]";
-	
+
 To decide which outcome is the test step after (event - an outcome):
 	Now event is the outcome after event;
 	While event is not boring lack of results:
@@ -1012,7 +1012,7 @@ To decide what number is (T - an outcome) as a number: (- {T} -);
 To decide what outcome is (T - a number) as an outcome: (- {T} -);
 
 Done testing is a truth state that varies.
-	
+
 The file of noninteractive tests is called "noninteractivetests".
 
 The run the unit tests rule is listed before the load achievements rule in the before showing the title screen rules.
@@ -1022,7 +1022,7 @@ Definition: an outcome is requeueable:
 	if it is possible, yes;
 	if it is untested, no;
 	decide on whether or not it has unresolved dependents.
-	
+
 Before showing the title screen (this is the run the unit tests rule):
 	now allowing screen effects is true;
 	if the file of test set queue exists:
@@ -1070,17 +1070,17 @@ First after showing the title screen (this is the run all tests rule):
 			log "  [failures entry] failures in [test set entry]";
 	schedule taking a turn;
 	follow the scenario rules for the primary outcome;
-	
+
 The scenario rules are an outcome based rulebook.
-	
+
 this is the keep using the xorshift generator for automated tests rule:
 	say "[banner text]Dungeon seed: [dungeon generation seed in hexadecimal][line break]";
 
 The keep using the xorshift generator for automated tests rule substitutes for the show the banner with dungeon generation seed rule when done testing is false.
 
-[Prevent the status window from opening]	
+[Prevent the status window from opening]
 The check info panel capacity rule does nothing when done testing is false.
-	
+
 Chapter - Commands to Start Tests
 
 Test queueing is an action out of world applying to one outcome. Understand "queue test [outcome]" as test queueing.
@@ -1089,21 +1089,21 @@ Carry out test queueing an outcome:
 	say "[The outcome understood] will run now.";
 	queue the outcome understood;
 	start test transcript with "[the outcome understood]";
-	
+
 All-test queueing is an action out of world applying to nothing. Understand "queue test all" as all-test queueing.
 
 Carry out all-test queueing:
 	queue all automated tests;
 	say "All automated tests will run now.";
 	start test transcript with "all tests".
-		
+
 To start test transcript with (T - a text):
 	unless the file of noninteractive tests exists:
 		pause the game;
 	write "Test transcript for Kerkerkruip: [T].[line break]" to file of test transcript;
 	start the next test;
-	
-	
+
+
 Understand "queue test/tests" and "queue test [text]" as a mistake ("You can 'queue test all' or test one of the following sets: [list automated tests]").
 
 To say list automated tests:
@@ -1115,7 +1115,7 @@ Chapter - Resetting the Game After Each Test Set (in place of Chapter - The Unit
 
 To start the/-- next test:
 	schedule restarting for tests;
-	
+
 Regular scheduling of restarting for tests:
 	write file of test results from Table of Test Results;
 	choose row 1 in Table of Test Set Queue;
@@ -1132,7 +1132,7 @@ Regular scheduling of restarting for tests:
 			otherwise:
 				now the xorshift seed is the dungeon generation seed;
 				Let throwaway result be a random number from 1 to 2;
-				transcribe "advancing random seed to [the xorshift seed]";	
+				transcribe "advancing random seed to [the xorshift seed]";
 				now the random-seed entry is the xorshift seed;
 		otherwise:
 			transcribe "saving xorshift seed [the xorshift seed]";
@@ -1148,12 +1148,12 @@ Regular scheduling of restarting for tests:
 For reading a command when done testing is false (this is the finish the last test rule):
 	transcribe and stop capturing text because "finished final test";
 	start the next test;
-	
+
 Before printing the player's obituary when done testing is false (this is the abort the primary outcome if game over rule):
 	record failure report "the player died";
 	transcribe and stop capturing because "game over at";
 	start the next test.
-		
+
 Chapter - The assert phrase (in place of Chapter - The assert phrase in Simple Unit Tests by Dannii Willis)
 
 The test assertion count is a number variable.
@@ -1165,14 +1165,14 @@ To decide whether we assert (T - a text) based on (result - a truth state):
 	if result is true, yes;
 	now the failure report is T;
 	no.
-	
+
 To decide whether we assert that/-- (A - a value) is (B - a value) with label (T - an indexed text):
 	if A is B:
 		now failure report is "";
 		yes;
 	now the failure report is "Expected [T]: [B], Got: [A]";
 	no.
-	
+
 To decide whether we assert result (T - a text):
 	update event description because "checking if result includes '[T]'";
 	if capturing damage text:
@@ -1185,16 +1185,16 @@ To decide whether we assert result (T - a text):
 			no;
 	now failure report is "";
 	yes.
-	
+
 To decide whether we assert absence of result (T - a text):
 	update event description because "checking if result does not include '[T]'";
 	if capturing damage text:
 		if the damage description matches the regular expression T:
-			now the failure report is "Regular expression '[T]' was not found in damage text:[paragraph break]'[the damage description]'[line break]";
+			now the failure report is "Regular expression '[T]' was found in damage text (when it should not have been):[paragraph break]'[the damage description]'[line break]";
 			no;
 	otherwise:
 		if the event description matches the regular expression T:
-			now the failure report is "Regular expression '[T]' was not found in the text:[paragraph break]'[the event description]'[line break]";
+			now the failure report is "Regular expression '[T]' was found in the text (when it should not have been):[paragraph break]'[the event description]'[line break]";
 			no;
 	now failure report is "";
 	yes.
@@ -1202,7 +1202,7 @@ To decide whether we assert absence of result (T - a text):
 To assert result (pattern - a text):
 	record a test attempt;
 	unless we assert result pattern, record a failure;
-	
+
 To assert absence of result (pattern - a text):
 	record a test attempt;
 	unless we assert absence of result pattern, record a failure;
@@ -1210,7 +1210,7 @@ To assert absence of result (pattern - a text):
 [ Assert that two values are the same ]
 To assert that/-- (A - a value) is (B - a value):
 	assert that A is B with label "value";
-	
+
 To assert that/-- (A - a value) is (B - a value) with label (T - an indexed text):
 	record a test attempt;
 	unless A is B:
@@ -1224,7 +1224,7 @@ To decide whether we assert that/-- (A - a value) is (B - a value):
 		yes;
 	now the failure report is "Expected value for [the outcome described]: [B], Got: [A]";
 	no.
-		
+
 To assert (T - a text) based on (C - a truth state):
 	record a test attempt;
 	unless C is true:
@@ -1232,7 +1232,7 @@ To assert (T - a text) based on (C - a truth state):
 
 To assert that (N - a number) is between (A - a number) and (B - a number) with label (L - a text):
 	assert "[L] [N] is not between [A] and [B]" based on whether or not N is at least A and N is at most B;
-	
+
 To decide whether we assert that (N - a number) is between (low - a number) and (high - a number):
 	if N is greater than high or N is less than low:
 		now the failure report is "[N] is outside expected range of [low]-[high]";
@@ -1242,7 +1242,7 @@ To decide whether we assert that (N - a number) is between (low - a number) and 
 
 To assert that (N - a number) is between (A - a number) and (B - a number):
 	assert that N is between A and B with label "value";
-	
+
 To assert that (item - a thing) is in (place - an object):
 	Let msg be indexed text;
 	Now msg is "Expected location of [the item]: [place]. Got: [location of the item].";
@@ -1268,7 +1268,7 @@ To swap the occupants of (first place - a room) and (second place - a room):
 			extract guy to first place;
 		Repeat with guy running through people in swap place:
 			extract guy to second place;
-			
+
 To extract (guy - a person) to (place - a room), making sure it is unoccupied:
 	if making sure it is unoccupied and place is occupied:
 		Let elsewhere be a random unoccupied reachable room;
@@ -1284,7 +1284,7 @@ To extract (guy - a person) to (place - a room), making sure it is unoccupied:
 		update the combat status;
 	otherwise:
 		transcribe "[the guy] [are] already in [place]";
-	
+
 Section - Religion
 
 To have the player sacrifice (stuff - a power):
@@ -1300,15 +1300,15 @@ To have the player sacrifice (stuff - a power):
 	let the previous favour be the favour of the player with divinity;
 	follow the sacrifice rule;
 	assert that the favour of the player with divinity is the previous favour + the power-level with label "favour of the player";
-	
+
 intervention-blocking is a truth state variable.
 
 To block interventions:
 	now intervention-blocking is true.
-	
+
 To allow interventions:
 	now intervention-blocking is false.
-	
+
 First intervention possible when intervention-blocking is true:
 	rule fails.
 
@@ -1329,10 +1329,10 @@ To force the fuligin cloak to work:
 	if the fuligin cloak is not worn, try wearing the fuligin cloak;
 	now the fuligin cloak is not cursed;
 	now the player is hidden;
-		
+
 Carry out taking off:
 	if the noun is the fuligin cloak, now traveling sneakily is false;
-	
+
 To travel sneakily to (place - a room):
 	transcribe "traveling sneakily to [place]";
 	force the fuligin cloak to work;
@@ -1351,15 +1351,15 @@ To travel sneakily to (place - a room):
 			stop;
 	now the way-to-get-back is the best route from the location to the retreat location;
 	update the combat status.
-			
+
 previously-fast is a truth state that varies.
-	
+
 After taking a player action (this is the assume all actions are fast until every turn runs rule):
 	now previously-fast is true;
-	
+
 First every turn (this is the remember if the last turn took time rule):
 	now previously-fast is false;
-	
+
 Section - The reusable item
 
 The reusable item is an object that varies.
@@ -1372,7 +1372,7 @@ Section - Readied weapons
 
 To decide which object is the current weapon of (guy - a person):
 	decide on a random readied weapon enclosed by guy.
-	
+
 Section - Occupied and Unoccupied
 
 Definition: A room is occupied rather than unoccupied if it encloses a person.
@@ -1384,11 +1384,11 @@ A person has a number called the hitting count.
 
 First before an actor hitting (this is the increment hitting count rule):
 	increment the hitting count of the actor;
-			
+
 To reset hitting counts:
 	Repeat with guy running through people:
 		Now the hitting count of guy is 0.
-		
+
 A last initial scheduling rule for a test step (this is the reset hitting counts when scheduling a test step rule):
 	reset hitting counts;
 
@@ -1404,7 +1404,7 @@ Definition: a direction (called way) is diggable:
 		decide on whether or not there is at least one not placed tunnel;
 	otherwise:
 		let item be the room at x by y by z;
-		if item is the room way from the location: 
+		if item is the room way from the location:
 			no;
 		otherwise:
 			decide on whether or not item is connectable;
@@ -1414,7 +1414,7 @@ Section - Tension
 To set the tension to (N - a number):
 	transcribe "Setting tension to [N]";
 	now the tension is N;
-		
+
 Section - Checking Damage Reports
 
 The expression scan position is a number that varies.
@@ -1425,7 +1425,7 @@ To decide what number is digit (T - a text):
 		if character number (digit-value + 1) in "0123456789" is C:
 			decide on digit-value;
 	decide on -1;
-			
+
 To decide what number is the number we scan in (T - a text):
 	Let scanned-value be 0;
 	Let digit-encountered be false;
@@ -1439,8 +1439,8 @@ To decide what number is the number we scan in (T - a text):
 			if digit-encountered is true:
 				decide on scanned-value;
 		increment the expression scan position;
-	decide on scanned-value;	
-	
+	decide on scanned-value;
+
 To decide what number is approximately (P - a number) percent of (N - a number):
 	Let the rounded-down value be (N * P) / 100;
 	Let the rounded-up value be (N + the test-round-error) * P;
@@ -1450,14 +1450,14 @@ To decide what number is approximately (P - a number) percent of (N - a number):
 	if the rounded-up remainder is at least 1:
 		increase the test-round-error by 1;
 	decide on the rounded-down value.
-	
+
 To decide what number is the next term in (T - a text) we apply to (N - a number):
 	Let scanned-value be the number we scan in T;
 	if character number expression scan position in T is "%":
 		now scanned-value is approximately (scanned-value) percent of N;
 		increment the expression scan position;
 	decide on scanned-value.
-	
+
 To decide what number is the next product in (T - a text) we apply to (N - a number):
 	Let the factor be (the number we scan in T);
 	if character number expression scan position in T is "%":
@@ -1465,7 +1465,7 @@ To decide what number is the next product in (T - a text) we apply to (N - a num
 	otherwise:
 		now the factor is the factor * 100;
 	decide on approximately (the factor) percent of N;
-		
+
 To skip parenthetical in (T - a text):
 	while expression scan position is not greater than the number of characters in T:
 		if character number expression scan position in T is ")":
@@ -1474,7 +1474,7 @@ To skip parenthetical in (T - a text):
 			increment expression scan position;
 	assert "All open parentheses in [T] should be closed" based on whether or not the expression scan position is not greater than the number of characters in T;
 	increment expression scan position [past the closing paren].
-	
+
 The test-round-error is a number that varies;
 
 To decide what number is the calculated value of (T - a text):
@@ -1514,7 +1514,7 @@ Section - Test Arena and Battle Phrases
 Test Arena is an arena. The staging area of Test Arena is maze-waiting-room.
 
 Test Arena is faction-imposing.
-		
+
 To prepare a test battle with (guy - a person), inviting groups:
 	if inviting groups:
 		now Test Arena is challenged-group-inviting;
@@ -1525,10 +1525,10 @@ To prepare a test battle with (guy - a person), inviting groups:
 			extract the old enemy from combat;
 			remove the old enemy from play;
 	Generate the action of challenging guy in Test Arena;
-	
+
 To say (event - combat hit):
 	say "doing [the compelled action] for a [melee of compelled attacker] hit by [the compelled attacker]".
-	
+
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts
 combat hit	1	1
@@ -1543,7 +1543,7 @@ To do (reaction - a stored action) for/-- a (strength - a number) melee hit by (
 	now the melee of the compelled attacker is strength;
 	now the defence of the compelled actor is 50;
 	schedule combat hit;
-		
+
 Regular scheduling of combat hit:
 	now the health of the compelled actor is 1000;
 	now the compelled actor is not asleep;
@@ -1554,7 +1554,7 @@ Regular scheduling of combat hit:
 	now the compelled actor is at-Inactive; [clear reaction state]
 	try the compelled attacker hitting the compelled actor;
 	update event description because "combat hit -";
-	
+
 [TODO: forget the compelled action? When resetting?]
 
 Testing effects of combat hit:
@@ -1577,14 +1577,14 @@ to decide whether we assert (prefix - a text) to (guy - a person) any damage (su
 	capture whole events;
 	assert result "[prefix](\s*\d*<^\n>+) damage\s+[suffix]";
 	capture damage text;
-	now the damage description is the text matching subexpression 1;	
+	now the damage description is the text matching subexpression 1;
 	Let damage-value be the calculated value of the damage description;
 	unless the actual damage is damage-value:
 		now failure report is "damage to [guy] is [actual damage], but damage description adds up to [damage-value]";
 		no;
 	now failure report is "";
 	yes.
-		
+
 to decide whether we assert (prefix - a text) to (guy - a person) a total of (expected damage - a number) damage (suffix - a text):
 	Let the actual damage be 1000 - health of guy;
 	unless we assert prefix to guy any damage suffix:
@@ -1594,7 +1594,7 @@ to decide whether we assert (prefix - a text) to (guy - a person) a total of (ex
 		no;
 	now failure report is "";
 	yes.
-	
+
 to decide whether we assert (expected damage - a number) damage to (guy - a person) after (preamble - a text):
 	Let the actual damage be 1000 - health of guy;
 	unless we assert described damage to guy with 1000 health after preamble, no;
@@ -1603,7 +1603,7 @@ to decide whether we assert (expected damage - a number) damage to (guy - a pers
 		no;
 	now failure report is "";
 	yes.
-	
+
 To decide whether we assert described damage to (guy - a person) with (previous health - a number) health after (preamble - a text):
 	Let the actual damage be previous health - health of guy;
 	now the health of guy is 1000; [set things up for the next test]
@@ -1617,25 +1617,25 @@ To decide whether we assert described damage to (guy - a person) with (previous 
 		no;
 	now failure report is "";
 	yes.
-	
+
 To check damage of (guy - a person) with (previous health - a number) health after (preamble - a text):
 	record a test attempt;
 	unless we assert described damage to guy with (previous health) health after preamble, record a failure.
-		
+
 To assert that/-- (item - a weapon) readied after (circumstance - a text):
 	assert "[The item] should be readied after [circumstance]" based on whether or not the player holds item and item is readied;
-	
+
 To decide whether we assert that (item - a weapon) readied:
 	if the player holds item and item is readied:
 		now the failure report is "";
 		yes;
 	now the failure report is "[The item] should be readied after [the outcome described]";
 	no.
-		
+
 To have (guy - a person) defeat (loser - a person):
 	transcribe "having [guy] defeat [loser]";
 	Now the health of loser is -1;
-	Have an event of guy killing loser;	
+	Have an event of guy killing loser;
 
 Automated Testing ends here.
 
@@ -1654,11 +1654,11 @@ Section: Invoking Tests
 To run the tests, enter the command
 
 	> QUEUE TEST ALL
-	
+
 to run all test sets, or
 
 	> QUEUE TEST TARGET-SET
-	
+
 to run the target test set. Entering an invalid value of TARGET-SET will produce an error listing all possible test sets.
 
 The queue test commands can also be run from the debug console (press ~ when in the opening menu), but no error messages are shown from the console at the time of this writing (2015-02-27).
@@ -1668,7 +1668,7 @@ To run tests noninteractively, create a file called "noninteractivetests" and th
 Section: Outcomes
 
 Automated Testing defines a kind of value called "outcome." Outcomes describe the structure of a test, and they can form branching dependency trees. They must be defined in the Table of Outcomes:
-	
+
 	Table of Outcomes (continued)
 	outcome	likelihood	minimum attempts	maximum attempts	antecedent
 	healer-healing-player	0	20	100	--
@@ -1700,7 +1700,7 @@ If an outcome doesn't have an antecedent, it will wait until all prior dependenc
 Ordering
 
 Ordering is important when it comes to outcomes. Outcomes listed first in the Table will be tested first. Because of this, dependencies must always follow their antecedent without any gaps. This is fine:
-	
+
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	maximum attempts	antecedent
 drakul statement	1	1	200	--
@@ -1715,7 +1715,7 @@ vampire-turning-hinting	1	0	--	drakul statement
 Drakul suicide	1	1	--	--
 
 But this would not be:
-	
+
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	maximum attempts	antecedent
 drakul statement	1	1	200	--
@@ -1729,15 +1729,15 @@ drakul conditional	1	0	--	drakul statement
 Section: Resolving Outcomes
 
 When an outcome is tested, its likelihood is compared with its minimum and maximum attempts. If the frequency of success falls within a certain range of tolerance, the outcome will be considered "resolved" and it will not be tested any further. The tolerance is determined by the three numbers specified:
-	
+
 likelihood / minimum attempts represents the expected frequency of success. For example:
-	
+
 	0 likelihood / 1 minimum attempt means it should be tested once, and the rule should not succeed.
 	1 likelihood / 1 minimum attempt means it should be tested once, and the rule should succeed.
 	20 likelihood / 20 minimum attempts means it should be tested 20 times exactly, and the rule should succeed every time.
 	1 likelihood / 3 minimum attempts means the rule should succeed once out of every three attempts, with a certain error tolerance allowed (which is calculated for you)
 	1 likelihood / 0 minimum attempts means the rule should succeed at least once.
-	
+
 The maximum attempts are used mainly in the final two cases, where success is not strictly deterministic. If the maximum is reached, the outcome is considered to have "timed out" and the failure will be reported. The maximum attempts also determine how strict the error tolerance will be - the tolerance is calculated such that the test will be accurate 99% of the time, regardless of what the maximum attempts are.
 
 Likelihood and minimum attempts should always be specified, but maximum attempts may be left blank. A reasonable default will be chosen (usually 1 or 100, unless it is influenced by dependencies).
@@ -1745,7 +1745,7 @@ Likelihood and minimum attempts should always be specified, but maximum attempts
 Using Dependency to Test Probabilities
 
 The most powerful aspect of dependency is to test events that depend on each other within the game. For example, if there is a one-in-three chance that the player will drop her weapon, and there is a one-in-five chance that the weapon will be destroyed when it is dropped, we can test that like so:
-	
+
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	antecedent
 risky move	1	1	--
@@ -1761,7 +1761,7 @@ Three rulebooks determine how each outcome is tested:
 	initial scheduling of (event - an outcome):
 	regular scheduling of (event - an outcome):
 	testing effects of (event - an outcome):
-		
+
 The initial scheduling rules create the circumstances that the test requires. Any output produced during these rules will be forgotten.
 
 The regular scheduling rules run every time a test is repeated. They should perform the action that the outcome is testing, after resetting any state that the action may have changed in previous iterations.
@@ -1769,70 +1769,70 @@ The regular scheduling rules run every time a test is repeated. They should perf
 The testing effects rules determine whether the action had the desired result. The rule should succeed if the test performed as expected.
 
 Here's an example:
-	
+
 	initial scheduling of aite-smashing: extract the player to the Temple of Aite.
-		
+
 	regular scheduling of aite-smashing:
 		now aite-wrath is false;
 		now the Statue of Aite is in the Temple of Aite;
 		try attacking the Statue of Aite.
-		
+
 	testing effects of aite-smashing: if aite-wrath is true, rule succeeds.
 
 Section: Assertions as Conditions
 
 We can always perform very simple tests on outcomes:
-	
+
 	testing effects of fafhrd-parry-fail: if the claymore is not rusted, rule succeeds.
-	
+
 But there are some phrases to help us make more complicated assertions. These are especially helpful when there is more than one "wrong" result, because the phrase will include the actual result in the failure report.
 
 	if we assert result "You drop the gilded rapier", rule succeeds.
-	
+
 	if we assert absence of result "You drop the gilded rapier", rule succeeds.
-	
+
 	if we assert that the health of the chain golem is 98, rule succeeds.
-	
+
 	if we assert that the health of the chain golem is between 90 and 99, rule succeeds.
-	
+
 These are the main phrases we will need: the first makes sure that the text (a regular expression) was found in the captured output. The second makes sure that it wasn't found. The third compares two values, and the fourth compares a value with a range (inclusively).
 
 Section: Standalone Assertions
 
 In addition to the assertion-conditions above, we can also make isolated assertions if we don't want to create a whole new outcome to test them:
-	
+
 testing effects of sleeping-dream-waking:
 	assert result "Malygris standing over you";
 	assert absence of result "arrives from the";
 	assert "Malygris should be awake" based on whether or not Malygris is not asleep;
 	assert that the concentration of Malygris is 2 with label "concentration of Malygris";
 	if the player is just-woken, rule succeeds.
-	
+
 Here we have phrases to test the captured output as before, but we also have two new kinds of phrases: The first tests whether a condition is true, and the second compares values while giving a label which will appear in the failure message if they don't match. There is also a "between" version just like the assertion-condition:
-	
+
 	assert that the concentration of Malygris is between 1 and 3 with label "concentration of Malygris";
-	
+
 These are good to use in outcomes that will only be tested once, but if an outcome is repeated, they can lead to a big dump of repeated failure messages. In that case, dependencies might work better.
-	
+
 Sometimes we will want to test a smaller portion of text. Currently there is one other option: to capture the damage description. The tests remember what set of output we are currently testing, and the "assert result" phrases will refer to that. We can change it implicity using this phrase:
-	
+
 	check damage of (guy - a person) with (N - a number) health after (prefix - a text):
-	
+
 Here's an example:
-	
+
 	check damage of the player with 1000 health after "Miranda deals";
-	
+
 This will search the captured text for the words "Miranda deals" and save the text between that prefix and the word "damage." This text will then be checked to make sure the damage calculation adds up correctly, and we will be switched to damage text capture mode for all future "assert result" phrases.
 A few more phrases do similar things:
-	
+
 	to decide whether we assert (prefix - a text) to (guy - a person) a total of (expected damage - a number) damage (suffix - a text):
 
 Example:
-	
+
 	if we assert "The giant tentacle deals" to the player a total of 0 damage "but holds on to you\.", rule succeeds.
-	
+
 If we don't care about the amount, we can use the "any damage" variation:
-	
+
 	if we assert "Chton suddenly sends a wave of unholy energy through the room, dealing <3-6> damage to Fell; and" to Isra any damage "to Isra\.", rule succeeds.
 
 Section: Capturing Text
@@ -1840,12 +1840,12 @@ Section: Capturing Text
 All output of the tests is captured and saved in the transcript file. In addition, some recently produced output is saved for use by tests.
 
 To switch back and forth between testing the entire output and testing damage text, we use these phrases:
-	
+
 	capture whole events;
 	capture damage text;
-	
+
 These phrases don't change what has already been captured, they just select what the "assert result" phrases will test. So if the captured text were:
-	
+
 	Time passes.
 
 	Rolling 4 + 100 (inherent bonus) - 1 (robe of the dead mage) + 1 (overmind) = 104, Miranda beats your defence rating of 50.
@@ -1853,45 +1853,45 @@ These phrases don't change what has already been captured, they just select what
 	Miranda deals 6 + 10 (inherent bonus) = 16 damage, wounding you to 984 health.
 
 ... and we gave this command:
-	
+
 	check damage of the player with 1000 health after "Miranda deals";
-	
+
 ..the damage description would now be:
-	
+
 	6 + 10 (inherent bonus) = 16
-	
+
 This assertion would succeed:
-	
+
 	assert result "\+ 10 \(inherent bonus\)";
-	
+
 But this would fail:
-	
+
 	assert result "wounding you";
-	
+
 ...until we gave this command:
-	
+
 	capture whole events;
-	
+
 ...and then it would succeed.
-	
+
 Section: Updating the Captured Text
 
 If we do want to change what has been captured, we can use these phrases:
-	
+
 	clear event description;
 	clear event description because "testing the frobnitz";
-	
-The clear event description phrase will do just that - but it leaves the damage description alone. If we want to put something new in the damage description, we must use one of the damage assertions above. 
+
+The clear event description phrase will do just that - but it leaves the damage description alone. If we want to put something new in the damage description, we must use one of the damage assertions above.
 
 	update event description;
 	update event description because "we just hopped the third rail";
-	
+
 The "update event description" phrase will append any text that has been captured since the description was last updated.
 
 Both phrases can take a "because" text, which will be written to the transcript - but only if there was any text in the event description already. If we want to write something to the transcript no matter what, we can use this phrase:
-	
+
 	transcribe "this text will always appear in the transcript";
-	
+
 Finally, we can output a message to both the screen and the transcript:
 
 	log "this text will appear on the screen and also in the transcript";
@@ -1913,25 +1913,25 @@ A detail about the answer	1	1	listening for God's answer
 In this example, the output of "talking to God" will be cleared before we schedule "listening for God's answer". But the output of that will NOT be cleared before we test "A detail about the answer," because that outcome depends on "listening for God's answer."
 
 There is one exception, and that is when we test individual combat rounds with the "wait for (guy - a person) to act freely" phrase. In this case, output is cleared before every combat round.
-	
+
 Section: Moving People Around
 
 Moving people in Kerkerkruip has many side effects. To help us deal with this, here are some phrases:
-	
+
 	To extract (guy - a person) to (place - a room), making sure it is unoccupied:
-		
+
 This moves the guy to the selected room. If we use the "making sure it is unoccupied" option, it removes any other rogues who might be there.
 
 	To swap the occupants of (first place - a room) and (second place - a room):
-		
+
 This does pretty much what it sounds like.
 
 	To force the fuligin cloak to work:
-		
+
 This makes the player instantly hidden. To unhide the player, we simply "try taking off the fuligin cloak."
 
 	To travel sneakily to (place - a room):
-		
+
 This also moves the player to the specified room, but it uses the "going" action and makes sure that rooms and monsters on the way will be visited and seen. It also uses the fuligin cloak to keep the player hidden so no one will attack us as we move.
 
 	Definition: a direction (called way) is diggable:
@@ -1943,58 +1943,58 @@ Section: Compelling Actions
 Tests don't have to run through the full turn sequence, but sometimes we want them to. We can do this by compelling an action - this will cause the player or a rogue to try whatever action we specify, but only when it is their turn in the combat round. The every turn rules will run and all combatants will get their own round. Normally, each rogue's action is suppressed with the message "[suppressed action for X]", but we can control that as well. Rogues are always allowed to react, however.
 
 Phrases to control player and rogue action should normally be invoked from "regular scheduling" rules:
-	
+
 	To compel (the desired action - a stored action):
-		
+
 Example:
 	regular scheduling of throwing-blessed: compel the action of throwing the Blessed Grenade.
-	
+
 For convenience, there is a variable called "the reusable item," which will be returned the player before regular scheduling of a test step. This enables us to repeat actions that consume an object:
-	
+
 	initial scheduling of throwing-blessed: now the reusable item is a random morphean grenade.
 	regular scheduling of throwing-blessed: compel the action of throwing the reusable item.
-	
+
 We can also compel reactions:
-	
+
 	initial scheduling of reaction-ape-killing:
 		now the health of the blood ape is 1;
 		now the reusable item is a random scroll of death.
-		
+
 	regular scheduling of reaction-ape-killing: compel the action of reading the reusable item as a reaction to the blood ape.
-	
+
 This will cause the blood ape to attack the player, and the player to read the scroll of death as a reaction.
 
 If we want to allow NPCs to act freely, we can use this phrase:
 
 	To wait for (guy - a person) to act freely:
-		
+
 Example:
-	
+
 	regular scheduling of ape-cowering: wait for the blood ape to act freely.
-	
+
 	testing effects of ape-cowering: if we assert result "The blood ape cowers before your dreadful presence", rule succeeds.
 
 One more useful property is the "hitting count." This is a number that is reset to 0 for every person when a test set is scheduled. It is incremented for a person whenever they try the hitting action. For example, to test whether the blood ape hit a retreating player:
-	
+
 	regular scheduling of ape-retreat: compel the action of retreating.
-	
+
 	testing effects of ape-retreat: if we assert that the hitting count of the blood ape is 1, rule succeeds.
 
 Section: Quick Controlled Attacks
 
 Sometimes we want an attack to happen, but we don't want to go through the whole turn sequence. This phrase can help:
-	
+
 	To do (reaction - a stored action) for/-- a (strength - a number) melee hit by (aggressor - a person):
-		
+
 This phrase sets several useful properties: it sets the defender's defence to 50 and the attacker's melee to the strength specified. This gives us a good degree of certainty about whether the attack will hit. (Avoiding certain influences like the Hall of Mirrors and Miranda's amulet will also help.) It also sets the defender's health to 1000, so we can be confident that the defender will survive, and we can measure the damage done. Also, if we use the "capture damage text" option before invoking the phrase, we will automatically check that the damage report is consistent with the defender's health after the attack:
-	
+
 	regular scheduling of concentrated-hit:
 		capture damage text;
 		now the concentration of the blood ape is 2;
 		do the action of waiting for a 100 melee hit by the blood ape.
-		
+
 	testing effects of concentrated-hit: if we assert result "\+ 2 \(concentration\)", rule succeeds.
-		
+
 Section: Handling Questions
 
 Kerkerkruip occasionally asks the player questions. If we want the player to answer a menu question instead of taking an action, we can use the "select menu question answer (N - a number)" phrase:
@@ -2012,62 +2012,61 @@ Section: Manipulating Religion
 Here are some phrases that help us test religious situations:
 
 	To have the player sacrifice (stuff - a power):
-		
+
 This handles the menu operations involved in choosing a power to sacrifice.
 
 	To block interventions:
-	
+
 This sets a variable such that gods will not intervene.
 
 	To allow interventions:
-		
+
 This ensures that gods will intervene as they normally do.
 
 Section: Miscellaneous Phrases
 
 	To set the tension to (N - a number):
-		
+
 Sets the tension, and writes a message to the transcript to record it.
 
 	To decide what number is the number we scan in (T - a text):
-		
+
 This can be used to parse text into numbers, and it is used when checking damage. It requires setting a variable called the "expression scan position" - if we want to parse the first number in the text, we set it to 0.
 
 	To prepare a test battle with (guy - a person), inviting groups:
 
 This transports the player and the guy to a room called Test Arena, where there are no exits and no funny room or scenery effects. The "inviting groups" option brings the guy's allied group as well. To add additional combatants, this is the safest phrase:
-	
+
 	revive another-guy in the location;
 
 If we want to get a rogue's power, or see some effects of killing it:
-	
+
 	To have (guy - a person) defeat (loser - a person):
-		
+
 We don't even need to be in the same room for that to work.
 
 Section: Dungeon Scenarios
 
 Just as we can require objects from the Kerkerkruip Console, we can force things to be included or excluded from a test when the dungeon is generated. For this we use the "scenario" rules:
-	
+
 	Scenario for insane-drakul:
 		Now drakul's lifeblood is bannedobject;
 		Now drakul is testobject;
-		
+
 This will ensure that Drakul is placed in the dungeon, and when he is killed, his lifeblood will appear. "testobject" and "bannedobject" work for rooms as well as most treasures and rogues. Dreams can be given the property "current-test-dream". At this time, starting kits can't be controlled this way, but equipment and abilities can be rearranged after dungeon generation if necessary.
 
 Section: Testing Dungeon Creation
 
 Outcome states and dependencies are maintained even after a restart. This makes a convenient way to test dungeon generation. To test the state of the game after dungeon generation, just make sure that the test set can be tested multiple times:
-	
+
 	Table of Outcomes (continued)
 	outcome	likelihood	minimum attempts	maximum attempts	antecedent
 	got-addicts-amulet	2	64	256	restarting for tests
-	cursed-addicts-amulet	2	2	--	got-addicts-amulet	
+	cursed-addicts-amulet	2	2	--	got-addicts-amulet
 
 	Testing effects of got-addicts-amulet: if the player wears the addict's amulet, rule succeeds.
 	Testing effects of cursed-addicts-amulet: if the addict's amulet is cursed, rule succeeds.
-	
+
 Section: Randomness
 
 Automated Testing has a global variable that is used to set the random number generator, both for dungeon generation and for play. This is called the "initial test random seed." We can change this number if we want to run all the tests under a different configuration, and we should change it periodically, whenever all tests are passing.
-	
