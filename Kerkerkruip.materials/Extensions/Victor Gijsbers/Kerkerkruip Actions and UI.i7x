@@ -1015,7 +1015,15 @@ Carry out requesting the story file version:
 
 Chapter - Replacing "You can see" is not a joke
 
-[All this just because the player can be blind... and it probably stops working in the next release of Inform.]
+[All this just because the player can be blind... and it probably stops working in the next release of Inform.
+
+Hey! It still works! But it should be possible to replace it with something much simpler now...
+
+The you-can-also-see rule response (D) is "[regarding the player][can] also [run paragraph on][unless player is blind][run paragraph on]see[otherwise]feel[end if]".
+
+The you-can-also-see rule response (E) is:"[regarding the player][can] [run paragraph on][unless player is blind][run paragraph on]see[otherwise]feel[end if]".
+
+maybe we don't even need the run paragraph on?]
 
 The you-can-also-see rule is not listed in any rulebook.
 

@@ -2554,39 +2554,8 @@ testing effects of radiance-defend-eyeless: if we assert absence of result "- 4 
 
 regular scheduling of radiance-attack-eyeless: do the action of waiting for a 0 melee hit by the angel of compassion.
 testing effects of radiance-attack-eyeless: if we assert absence of result "\+ 4 \(radiance\)<^[line break]>* compassion does not overcome", rule succeeds.
-
-Table of Outcomes (continued)
-outcome	likelihood	minimum attempts
-blind-reading	1	1
-eyeless-reading	0	1
-sighted-reading	0	1
-
-[scroll-reading isn't an attack modifier, but it's related because many attack modifiers involve perception]
-
-Definition: an outcome is illiteracy-testing if it is blind-reading or it is eyeless-reading or it is sighted-reading.
-
-Initial scheduling of a illiteracy-testing outcome:
-	Now the player skill bonus timer is 0;
-	Now the reusable item is a random scroll of skill.
-
-Regular scheduling of an illiteracy-testing outcome: try reading the reusable item.
-
-Testing effects of an illiteracy-testing outcome: if we assert that the player skill bonus timer is 0, rule succeeds.
-
-Initial scheduling of blind-reading:
-	Now eyeless vision is not adapted;
-	Now flash-grenade-timer of the player is 5;
-
-Initial scheduling of eyeless-reading:
-	Now eyeless vision is adapted;
-	Now flash-grenade-timer of the player is 5;
-	
-Initial scheduling of sighted-reading:
-	Now eyeless vision is not adapted;
-	Now flash-grenade-timer of the player is 0;
 	
 [blindness:
-./Kerkerkruip Actions and UI.i7x:Check reading when the player is blind (this is the cannot read when blind rule):
 ./Kerkerkruip Actions and UI.i7x:[All this just because the player can be blind... and it probably stops working in the next release of Inform.]
 ./Kerkerkruip Actions and UI.i7x:				say "can [if the locale paragraph count is greater than 0]also [end if][run paragraph on][unless player is blind][run paragraph on]see[otherwise]feel[end if] ";
 ./Kerkerkruip Dreams.i7x:The bedroom window is scenery in the Bedroom. "The curtains are closed, but blindingly bright sunlight illuminates them from outside and casts a yellow glow around the room." Understand "curtains", "window", "sun", and "sunlight" as the bedroom window.
@@ -3456,16 +3425,83 @@ Testing effects of jump-a-turn: if we assert result "You jump", rule succeeds.
 
 Chapter - Simple Tests
 
-Section - Resizing salves
-
 [tests that don't require restart]
 
 Table of Outcomes (continued)
 Outcome	likelihood	minimum attempts	antecedent
 Simple tests	0	1	restarting for tests
-Resizing salves	1	1	--
-too-small-block	1	1	--
-agnostic-block	1	1	--	
+
+Section - Reading Ability
+
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts
+blind-reading	1	1
+eyeless-reading	0	1
+sighted-reading	0	1
+
+Definition: an outcome is illiteracy-testing if it is blind-reading or it is eyeless-reading or it is sighted-reading.
+
+Initial scheduling of a illiteracy-testing outcome:
+	Now the player skill bonus timer is 0;
+	Now the reusable item is a random scroll of skill.
+
+Regular scheduling of an illiteracy-testing outcome: try reading the reusable item.
+
+Testing effects of an illiteracy-testing outcome: if we assert that the player skill bonus timer is 0, rule succeeds.
+
+Initial scheduling of blind-reading:
+	Now eyeless vision is not adapted;
+	equip the player with the blindfold;
+
+Initial scheduling of eyeless-reading: Now eyeless vision is adapted.
+	
+Initial scheduling of sighted-reading:
+	Now eyeless vision is not adapted;
+	remove the blindfold from play.
+	
+Section - Looking while blind
+
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts
+you-can-feel	1	1
+you-can-see	1	1
+you-can-also-feel	1	1
+you-can-also-see	1	1
+
+Initial scheduling of you-can-feel: 
+	extract the player to Entrance Hall, making sure it is unoccupied;
+	Repeat with item running through portable things in Entrance Hall:
+		remove item from play;
+	Now the magical spade is in the location;
+	Equip the player with the blindfold.
+	
+Regular scheduling of you-can-feel: try looking.
+testing effects of you-can-feel: if we assert result "You can feel a magical spade here", rule succeeds.
+
+Initial scheduling of you-can-see: remove the blindfold from play.
+regular scheduling of you-can-see: try looking.
+testing effects of you-can-see: if we assert result "You can see a magical spade here", rule succeeds.
+
+Initial scheduling of you-can-also-feel:
+	extract the player to Arcane Vault;
+	Now the magical spade is in the location;
+	equip the player with the blindfold.
+	
+regular scheduling of you-can-also-feel: try looking.
+testing effects of you-can-also-feel: if we assert result "You can also feel a magical spade here", rule succeeds.
+	
+initial scheduling of you-can-also-see: remove the blindfold from play.
+regular scheduling of you-can-also-see: try looking.
+testing effects of you-can-also-see: if we assert result "You can also see a magical spade here", rule succeeds.
+
+
+Section - Resizing salves
+
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts
+Resizing salves	1	1
+too-small-block	1	1
+agnostic-block	1	1
 
 To decide whether we assert that (item - a thing) is (size - a size):
 	if the size of item is size, yes;
@@ -3532,7 +3568,7 @@ x-open wheel	1	1
 x-closed pipes	1	1
 x-closed wheel	1	1
 
-Scenario for simple tests: now Hall of Vapours is testobject. [TODO: run scenario for ALL outcomes in the same test set?]
+Scenario for simple tests: now Hall of Vapours is testobject.
 	
 initial scheduling of open-pipes:
 	extract the player to Hall of Vapours;
