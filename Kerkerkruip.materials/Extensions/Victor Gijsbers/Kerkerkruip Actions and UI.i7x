@@ -469,7 +469,7 @@ Carry out remembering:
 		otherwise:
 			say "they are[run paragraph on]";
 		if psycholocation is active:
-			say ". With your powers of psycholocation, you might be able to SENSE it.";
+			say ". With your powers of psycholocation, you might be able to SENSE [if the number of memory-lost people is 1][regarding a random memory-lost person][them][otherwise]them[end if].";
 		otherwise:
 			say " now.";
 	Let the tip text be the next tip text;
@@ -507,8 +507,12 @@ A person has a room called the last-seen-location. The last-seen-location of a p
 [I'm going to try "every turn", but I'm pretty sure this will lead to bugs.]
 
 Every turn (this is the set last-seen-location rule):
-	repeat with guy running through alive persons in the location:
-		now last-seen-location of guy is the location.
+	repeat with guy running through alive persons:
+		if location of the guy is the location:
+			now last-seen-location of guy is the location;
+		otherwise:
+			if last-seen-location of guy is the location: [the guy isn't here but is supposed to be here -- update accordingly]
+				now last-seen-location of guy is the Null-Room.
 
 After reporting an npc teleporting (this is the reset last-seen-location after teleporting rule):
 	if teleportation-from is the location and teleportation-destination is not the location:

@@ -3108,8 +3108,7 @@ An AI action selection rule for the at-Act giant tentacle (this is the tentacle 
 		if style is unpredictable-tentacle-throw:
 			if constriction level is greater than 4 or a random chance of 1 in 5 succeeds:
 				if a random chance of 1 in 3 succeeds:
-					now the Action Weight entry is 20;
-		say "TEST: [style], [Action Weight entry]".
+					now the Action Weight entry is 20.
 
 Carry out the giant tentacle tentacle-throwing:
 	now constriction level is 0;
@@ -5107,7 +5106,7 @@ Carry out reforming:
 Chapter - Level 4 - Automatos
 
 Automatos is a neuter proper-named monster. "A man made of steel and chains[if Automatos carries doomhammer], wielding a terrible hammer,[end if] moves rigidly around the room."
-Understand "mass" and "chains" and "steel" and "nostril" and "nostrils" and "right ear" and "left ear" and "mouth" as Automatos.
+Understand "man" and "mass" and "chains" and "steel" and "nostril" and "nostrils" and "right ear" and "left ear" and "mouth" as Automatos.
 The description of Automatos is "Many claim that Automatos was created by Nomos himself to serve as guardian for his prophet. Others -- those less favourable disposed towards the god -- assert that priests of Nomos made it in order to terrorise the population, but that their creation went wild and killed all of them. Everyone, however, agrees that Automatos disappeared from the world centuries ago. That's just your luck, to find it here, lurking in the smelly dungeons of Kerkerkruip.".
 
 The soul description of Automatos is "gears moving back and forth with machinelike precision".
@@ -5289,6 +5288,7 @@ A person has a number called the binding index. [Counts the number of times a pe
 A person has a truth state called just-acted-bound.
 
 To bind (guy - a person):
+	now binding index of guy is 0;
 	now binding-list of guy is {};
 	let n be a random number between 1 and 2;
 	while n is greater than 0:
@@ -5414,7 +5414,7 @@ The teleport eagerness of Malygris is 8.
 Malygris-summon-countdown is a number that varies. Malygris-summon-countdown is 0.
 
 After reporting Malygris teleporting:
-	if teleportation-destination is not the location of the player:
+	if teleportation-destination is not the location of the player and Malygris is not asleep:
 		if the teleport amount of Malygris is 1:
 			now Malygris-summon-countdown is a random number between 5 and 7;
 		if the teleport amount of Malygris is 0:
@@ -5436,7 +5436,7 @@ Starting kit setup for Malygris (this is the randomise Malygris teleporting rule
 
 Section - Special power - Summoning the demonic assassin
 
-Every turn when Malygris-summon-countdown is not 0:
+Every turn when Malygris-summon-countdown is not 0 and Malygris is not asleep:
 	if the location of Malygris is the location of the player and the player is not hidden:
 		say "Your [if just-discovered is true]discovery[otherwise]arrival[end if] interrupts [if teleport amount of Malygris is 1]an intricate[otherwise]a hasty[end if] summoning ritual that Malygris was attempting to perform.";
 		now Malygris-summon-countdown is 0; [his attempt at summoning has failed because the player has interrupted it]
@@ -5494,7 +5494,7 @@ Section - Special power - Healing
 
 starting kit setup for Malygris (this is the randomise Malygris healing rule):
 	if a random chance of 1 in 5 succeeds:
-		now heal cooldown of Malygris is a random number between 1 and 5;
+		now heal cooldown of Malygris is a random number between 2 and 5;
 		repeat with i running from 1 to 3:
 			increase heal power of Malygris by a random number between 1 and (heal cooldown of Malygris);
 		if generation info is true, say "* Malygris has heal power of [heal power of Malygris] and heal cooldown of [heal cooldown of Malygris].".
@@ -6623,7 +6623,7 @@ The legend-label of Drakul is Figure of map_legend_Drakul.
 Section - Drakul drains the living
 
 Aftereffects rule (this is the Drakul drinks blood rule):
-	if the global attacker is Drakul and the global defender is not undead:
+	if the global attacker is Drakul and the global defender is not undead and the material of the global defender is flesh:
 		if the total damage is greater than 0:
 			if Drakul-victory is false:
 				say "Drakul [bold type]drinks [regarding the global defender][possessive] blood[roman type], gaining [total damage] health!";

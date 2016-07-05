@@ -298,11 +298,19 @@ Every turn (this is the have followers follow rule):
 		repeat with guy running through worldsharer follower persons:
 			if guy is elsewhere:
 				now test subject is guy;
+				now last-seen-location of the guy is Null-Room; [The fact that guy might have followed is enough to create uncertainty for the player.]
 				follow the followers rules;
 				unless rule failed:
 					if guy can move and guy is not asleep:
-						let the way be the best route from the location of guy to the location of the player;
-						if way is a direction, try guy going the way.
+						if guy opposes the player and a random chance of 1 in 5 succeeds: [Hostile followers sometimes move in unexpected directions]
+							if at least one room is adjacent to the location of guy:
+								let place2 be the location of guy; [needed because of a bug in inform]
+								let place be a random room which is adjacent to place2;
+								let way be the direction from the location of guy to place;
+								try guy going the way;
+						otherwise:
+							let the way be the best route from the location of guy to the location of the player;
+							if way is a direction, try guy going the way.
 
 A followers rule (this is the follower percentile chance rule):
 	let n be the follower percentile chance of the test subject;

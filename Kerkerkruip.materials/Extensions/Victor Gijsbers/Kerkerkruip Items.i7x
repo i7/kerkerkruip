@@ -1563,7 +1563,7 @@ The metal sheet is huge. The metal sheet is iron.
 
 The block bonus of the metal sheet is 4.
 
-The description of the metal sheet is "This thick sheet of metal has been fashioned into a crude shield. But who needs subtlety when he can put several inches of steel between himself and his attacker?".
+The description of the metal sheet is "This thick sheet of metal has been fashioned into a crude shield. But when you can put several inches of steel between yourself and your attacker, you can afford crudeness. [italic type]Block bonus: +4[roman type].".
 
 Section - Shield of fanaticism
 
@@ -1877,6 +1877,8 @@ An exploding rule (this is the teleportation grenade explodes rule):
 				if guy is not the player:
 					let n be teleport amount of guy;
 					try the guy teleporting;
+					if exploding-location is not the location of the player and location of the guy is not the location of the player:
+						now last-seen-location of the guy is Null-Room; [resets remembering even when the player isn't there to witness the teleportation, but did throw the grenade]
 					now teleport amount of guy is n; [compensating]
 					if follower percentile chance of guy is greater than 20:
 						decrease follower percentile chance of guy by 10; [disoriented]
@@ -2995,7 +2997,10 @@ Carry out reading the palimpsest:
 	let place be holder of item;
 	move item to the player;
 	try reading item;
-	move item to place;
+	if place is nothing:
+		remove item from play;
+	otherwise:
+		move item to place;
 	now palimpsest-active is false.
 
 [Replicating]
@@ -3504,7 +3509,7 @@ The vampiric dagger is a major dagger.
 The vampiric dagger is deathly.
 The vampiric dagger is iron.
 
-The description of the vampiric dagger is "This sleek dagger will magically transfer some of the damage dealt to the target as health to its owner.".
+The description of the vampiric dagger is "This sleek dagger will magically transfer some of the damage dealt to the target as health to its owner, provided that the target has blood. Unless you are in vampire form, it cannot heal you beyond your maximum health.".
 
 The special weapon info of the vampiric dagger is "; leeches some health (works much better for vampires); benefits from tension[run paragraph on]".
 
@@ -3513,7 +3518,7 @@ The weapon attack bonus of the vampiric dagger is 0.
 The weapon damage bonus of the vampiric dagger is 0.
 
 An aftereffects rule (this is the vampiric dagger leeches rule):
-	if the global attacker weapon is the vampiric dagger and the total damage is greater than 0:
+	if the global attacker weapon is the vampiric dagger and the total damage is greater than 0 and the material of the global defender is flesh and the global defender is not undead:
 		let n be a random number between 1 and the total damage;
 		unless the global attacker is the player and the current form is vampire-form:
 			if n is greater than 1:
@@ -4799,10 +4804,14 @@ Chapter - Starting kits
 
 Section - Who needs kits
 
-Definition: a person is encounterable if it is denizen or the level of it is 0.
+[Definition: a person is encounterable if it is denizen or the level of it is 0.
 
 A dungeon interest rule (this is the equip all encounterable creatures rule):
 	Repeat with guy running through encounterable people:
+		set up a kit for guy;]
+		
+A dungeon interest rule (this is the equip all creatures rule):
+	Repeat with guy running through people:
 		set up a kit for guy;
 		
 Section - Kit definition
