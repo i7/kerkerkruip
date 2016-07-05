@@ -2556,10 +2556,6 @@ regular scheduling of radiance-attack-eyeless: do the action of waiting for a 0 
 testing effects of radiance-attack-eyeless: if we assert absence of result "\+ 4 \(radiance\)<^[line break]>* compassion does not overcome", rule succeeds.
 	
 [blindness:
-./Kerkerkruip Actions and UI.i7x:[All this just because the player can be blind... and it probably stops working in the next release of Inform.]
-./Kerkerkruip Actions and UI.i7x:				say "can [if the locale paragraph count is greater than 0]also [end if][run paragraph on][unless player is blind][run paragraph on]see[otherwise]feel[end if] ";
-./Kerkerkruip Dreams.i7x:The bedroom window is scenery in the Bedroom. "The curtains are closed, but blindingly bright sunlight illuminates them from outside and casts a yellow glow around the room." Understand "curtains", "window", "sun", and "sunlight" as the bedroom window.
-./Kerkerkruip Events and Specials.i7x:	say "[if lijst is not empty]Running through the smoke, you stumble across [a list of things that list-inhabit lijst][otherwise][one of]You stumble blindly through the smoke[or]You run through an endless world of clouds[or]Nothing appears to change, no matter how long you run[as decreasingly likely outcomes][end if][if lijst2 is not empty]. You feel that you are being followed by [the list of things that list-inhabit lijst2][end if].".
 ./Kerkerkruip Items.i7x:Section - Blindfold (minor)
 ./Kerkerkruip Items.i7x:The blindfold is a minor mask. The description of the blindfold is "Wearing this blindfold will prevent you from seeing anything.".
 ./Kerkerkruip Items.i7x:The blindfold is civilised.
@@ -3435,9 +3431,13 @@ Section - Reading Ability
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts
+blindfold-works	1	1
 blind-reading	1	1
 eyeless-reading	0	1
 sighted-reading	0	1
+
+Initial scheduling of blindfold-works: equip the player with the blindfold.
+Testing effects of blindfold-works: if the player is blind, rule succeeds.
 
 Definition: an outcome is illiteracy-testing if it is blind-reading or it is eyeless-reading or it is sighted-reading.
 
@@ -3449,9 +3449,7 @@ Regular scheduling of an illiteracy-testing outcome: try reading the reusable it
 
 Testing effects of an illiteracy-testing outcome: if we assert that the player skill bonus timer is 0, rule succeeds.
 
-Initial scheduling of blind-reading:
-	Now eyeless vision is not adapted;
-	equip the player with the blindfold;
+Initial scheduling of blind-reading: Now eyeless vision is not adapted.
 
 Initial scheduling of eyeless-reading: Now eyeless vision is adapted.
 	
