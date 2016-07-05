@@ -2556,21 +2556,7 @@ regular scheduling of radiance-attack-eyeless: do the action of waiting for a 0 
 testing effects of radiance-attack-eyeless: if we assert absence of result "\+ 4 \(radiance\)<^[line break]>* compassion does not overcome", rule succeeds.
 	
 [blindness:
-./Kerkerkruip Items.i7x:Section - Blindfold (minor)
-./Kerkerkruip Items.i7x:The blindfold is a minor mask. The description of the blindfold is "Wearing this blindfold will prevent you from seeing anything.".
-./Kerkerkruip Items.i7x:The blindfold is civilised.
-./Kerkerkruip Items.i7x:The blindfold is cloth.
-./Kerkerkruip Items.i7x:A blindness rule (this is the blindfold rule):
-./Kerkerkruip Items.i7x:	if the test subject wears the blindfold:
-./Kerkerkruip Items.i7x:A treasure placement rule (this is the acuity can be blindness rule):
-./Kerkerkruip Items.i7x:		now the hidden identity of the goggles of acuity is the goggles of blindness.
-./Kerkerkruip Items.i7x:Section - Goggles of blindness (cursed)
-./Kerkerkruip Items.i7x:The goggles of blindness are a cursed curse-identified mask. They are plural-named. The indefinite article is "the". 
-./Kerkerkruip Items.i7x:The goggles of blindness are leather.
-./Kerkerkruip Items.i7x:A blindness rule (this is the goggles of blindness rule):
-./Kerkerkruip Items.i7x:	if the test subject wears the goggles of blindness:
-./Kerkerkruip Items.i7x:The description of goggles of blindness is "These goggles prevent the wearer from seeing anything at all. A free-for-all fight between condemned criminals forced to wear such goggles is one of the most beloved shows during the Feast of Flesh; you smile as you recall the spectacle.".
-./Kerkerkruip Items.i7x:A flash grenade is a kind of grenade. The description of a flash grenade is "When thrown, this magical grenade emits a pulse of searing light so strong that it will blind anyone in its vicinity, even if they close their eyes. The device is universally judged to be Metastasio's most useless invention.".
+~./Kerkerkruip Items.i7x:A flash grenade is a kind of grenade. The description of a flash grenade is "When thrown, this magical grenade emits a pulse of searing light so strong that it will blind anyone in its vicinity, even if they close their eyes. The device is universally judged to be Metastasio's most useless invention.".
 ./Kerkerkruip Items.i7x:			unless main actor is blind:
 ./Kerkerkruip Items.i7x:A blindness rule (this is the blind if flashed rule):
 ./Kerkerkruip Items.i7x:				unless guy is blind:
@@ -3431,12 +3417,18 @@ Section - Reading Ability
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts
+blindness-goggles-work	1	1
 blindfold-works	1	1
 blind-reading	1	1
 eyeless-reading	0	1
 sighted-reading	0	1
 
-Initial scheduling of blindfold-works: equip the player with the blindfold.
+Initial scheduling of blindness-goggles-work: equip the player with the goggles of blindness.
+Testing effects of blindness-goggles-work: if the player is blind, rule succeeds.
+
+Initial scheduling of blindfold-works:
+	remove the goggles of blindness from play;
+	equip the player with the blindfold.
 Testing effects of blindfold-works: if the player is blind, rule succeeds.
 
 Definition: an outcome is illiteracy-testing if it is blind-reading or it is eyeless-reading or it is sighted-reading.
