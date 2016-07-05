@@ -15,7 +15,7 @@ PID=$!
 while [ -d /proc/$PID ]
 do
     sleep 10
-    printf "#"
+    echo -ne "`grep Completed testlog | tail -n1`\r"
 done
 
 # Output the results
