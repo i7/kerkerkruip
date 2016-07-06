@@ -2,7 +2,8 @@ Kerkerkruip Glimmr Additions by Erik Temple begins here.
 
 Use authorial modesty.
 
-Include version 1/130420 of Glimmr Graphic Hyperlinks by Erik Temple.[Get the latest version at https://glimmr-i7x.googlecode.com/svn/trunk/Glimmr%20Graphic%20Hyperlinks.i7x]
+[ Get the latest version at https://github.com/i7/extensions ]
+Include version 1/130420 of Glimmr Graphic Hyperlinks by Erik Temple.
 Include Glimmr Canvas Animation by Erik Temple.
 Include Glimmr Bitmap Font by Erik Temple.
 Include Kerkerkruip Image Fonts by Erik Temple.
@@ -55,7 +56,8 @@ After restoring from a saved game:
 	reset the Glulx timer.[Kerkerkruip doesn't use the standard library restore code, so we need to reproduce Glimmr Canvas Animation's restore protection here.]
 
 
-Chapter - Setting background colors for Gargoyle
+[ Not needed anymore? ]
+[Chapter - Setting background colors for Gargoyle
 
 To open up the graphics-window:
 	if graphics-window is g-unpresent and the main window is ancestral to graphics-window:
@@ -64,7 +66,7 @@ To open up the graphics-window:
 
 Before deconstructing the graphics-window:
 	if the graphics-window is g-present:
-		set the Gargoyle background color to the color g-white;
+		set the Gargoyle background color to the color g-white;]
 
 
 Chapter - Assets
@@ -576,7 +578,7 @@ Chapter - Graphics support
 
 Full graphics support is a truth state variable.
 
-Rule for starting the virtual machine (this is the graphics support rule):
+Before starting the virtual machine (this is the graphics support rule):
 	if glulx graphics is supported and glulx graphic-window mouse input is supported and glulx timekeeping is supported and glulx PNG transparency is supported:
 		now full graphics support is true.
 
@@ -640,6 +642,7 @@ First finally quitting the game rule (this is the set session flag on quit rule)
 
 
 Chapter - Set up the graphics window
+
 [We don't want to see the main text window at all until the game proper begins. Strictly speaking, we should probably hack the Inform library to allow for this--but that is not a minor undertaking. Instead, we will simply open the graphics window so that it covers the main text window entirely (note the 100 measurement below--this indicates that the graphics window will be split off from the main window at 100% of the latter's height). The Glulx Status Window Control extension suppresses the opening of the status window; we will open it later, only after closing the graphics window.]
 
 The graphics-window is a graphics g-window spawned by the main window. The position of the graphics-window is g-placeabove. The measurement of the graphics-window is 100. The background color of the graphics-window is g-black. The graphics-window is g-graphlinked.
@@ -702,7 +705,7 @@ For showing the title screen when full graphics support is true and main menu gr
 		disable the session flag;
 		play the theme music;
 	otherwise:
-		show a minimovie;	
+		[show a minimovie;]
 		show the title;
 	set JUMP POINT redraw_menu;
 	now menu-active is true;
@@ -797,7 +800,7 @@ Animation rule for the command-movie:
 		now the cursor of the command-container is the number of characters in the text-string of the command-container;
 	otherwise:
 		now the cursor of the command-container is -99;
-	
+
 
 Section - Show the title
 
@@ -899,6 +902,7 @@ To prepare central zone:
 
 
 Section - Show the startup instructions
+
 [The animation here will also trigger, via callback, a second animation that will loop until we provide input.]
 
 To show startup instructions:
@@ -909,6 +913,7 @@ To show startup instructions:
 
 
 Section - Transition animation
+
 [The transition links the title image to the rogues gallery. If there are no enemies in the gallery yet, we have a different treatment.]
 
 The transition-container is a sprite. It is center-aligned. The image-ID is Figure of Null. The origin is {330, 359}. The display-layer is 10000. The associated canvas is the main-menu.
@@ -1176,7 +1181,9 @@ To process visuals after skipping difficulty:
 	prepare difficulty levels for display;
 	prepare type slugs.]
 
+
 Section - Visual button response
+
 [We use visual button response for both keypresses and for clicks: keyboard input triggers the graphlink rules for the appropriate button.]
 
 The button-press track is an animation track.
@@ -1240,7 +1247,7 @@ To cease animating all tracks but (target - an animation track):
 Animation rule for the music-fading track:
 	decrement the volume of the background;
 	set simple volume for background channel to volume of background.
-
+[
 
 Chapter - The map window
 [The map is available even if the player has indicated that he doesn't want main menu graphics. There is no reason to disable it, since a player can always choose whether she wants it. It is of course not available if there are no graphics at all.
@@ -1813,7 +1820,7 @@ Carry out revealing the entire map:
 	now all alive not off-stage persons are seen;
 	if the eternal prison is not placed, now the nameless horror is not seen;
 	try showing the map.
-
+]
 
 Section - Testing for graphics assets (for use with Extended Debugging by Erik Temple)
 

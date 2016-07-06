@@ -1006,7 +1006,7 @@ Finally quitting the game (this is the stop sounds on quit rule):
 		stop selected channel.
 
 
-Section - Fading out the theme music A (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+[Section - Fading out the theme music A (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
 To fade out the theme music:
 	animate the music-fading track as a custom animation at 8 fps with a duration of (initial volume of the background) frames;
@@ -1014,7 +1014,7 @@ To fade out the theme music:
 
 
 
-Section - Fading out the theme music B (for use without Kerkerkruip Glimmr Additions by Erik Temple)
+Section - Fading out the theme music B (for use without Kerkerkruip Glimmr Additions by Erik Temple)]
 
 [This is used only for the text menu--the graphics menu uses an animation track.]
 
