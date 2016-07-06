@@ -2555,12 +2555,12 @@ testing effects of radiance-defend-eyeless: if we assert absence of result "- 4 
 
 regular scheduling of radiance-attack-eyeless: do the action of waiting for a 0 melee hit by the angel of compassion.
 testing effects of radiance-attack-eyeless: if we assert absence of result "\+ 4 \(radiance\)<^\n>* compassion does not overcome", rule succeeds.
-	
+
+[No test for "blinded" - it is not implemented.]
+[TODO: Consider removing it... but allow the vial of purification to cure flash grenade blindness? or have another blindness-cured property that overrides the flash grenade?]
+
 [blindness:
-./Kerkerkruip Items.i7x:		if the player is blinded:
-./Kerkerkruip Items.i7x:			now the player is not blinded;
-./Kerkerkruip Items.i7x:			say "The waters cure you of your blindness.";
-./Kerkerkruip Locations.i7x:		unless the global attacker is blind:
+../Kerkerkruip Locations.i7x:		unless the global attacker is blind:
 ./Kerkerkruip Locations.i7x:				say " - [n] (blinding light)[run paragraph on]";
 ./Kerkerkruip Locations.i7x:The hall of mirrors is a room. "Mirrors surround you on all sides in an impossible geometry[run paragraph on][unless the player is blind]. Myriad reflections follow your every movement -- though some, always in the corner of your eyes, seem to behave differently[end if]."
 ./Kerkerkruip Locations.i7x:	unless the player is blind:
@@ -3489,7 +3489,7 @@ flash-eyeless-player	1	1
 flash-sighted-player	1	1
 blind-when-flashed	1	1
 
-[A note on flash-eyeless-player: the grenade does blind the player, but having eyeless vision should make that irrelevant. That should be tested elsewhere.]
+[A note on flash-eyeless-player: the grenade does blind the player, but having eyeless vision should make that irrelevant. That should be tested elsewhere. It would not be bad if this changed, though.]
 
 Definition: an outcome is flash-blinding if it is flash-blindfolded or it is flash-eyeless-player or it is flash-sighted-player.
 
@@ -3522,13 +3522,6 @@ Initial scheduling of flash-eyeless-player:
 Initial scheduling of flash-sighted-player: now eyeless vision is not adapted.
 
 testing effects of blind-when-flashed: if the player is blind, rule succeeds.
-
-[~./Kerkerkruip Items.i7x:A flash grenade is a kind of grenade. The description of a flash grenade is "When thrown, this magical grenade emits a pulse of searing light so strong that it will blind anyone in its vicinity, even if they close their eyes. The device is universally judged to be Metastasio's most useless invention.".
-./Kerkerkruip Items.i7x:			unless main actor is blind:
-./Kerkerkruip Items.i7x:A blindness rule (this is the blind if flashed rule):
-./Kerkerkruip Items.i7x:				unless guy is blind:
-./Kerkerkruip Items.i7x:				say "The flash grenade explodes, and a blinding light [unless lijst is empty]burns away the retinae of anyone unlucky enough to see it clearly, namely, [lijst with definite articles][otherwise]flashes through the room[end if].";
-]
 
 Section - Resizing salves
 
