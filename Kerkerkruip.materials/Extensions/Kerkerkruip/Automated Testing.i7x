@@ -551,10 +551,13 @@ To say grand test summary:
 	Repeat through Table of Test Results:
 		now grand test total is grand test total plus total entry;
 		now grand test failures is grand test failures plus failures entry;
-	say "[grand test total] test[s] in [number of filled rows in Table of Test Results] set[s], [grand test failures] failure[s]";
-	Let the remaining outcome tests be the maximum attempts of the primary outcome - attempt count of the primary outcome;
-	if the remaining outcome tests is at least 1:
-		say "; [number of not preset possible outcomes] outcome[s] to be tested up to [remaining outcome tests] more times" ;
+	choose row 1 in Table of Test Set Queue;
+	let total test count be (number of filled rows in Table of Test Results) plus unresolved count entry;
+	say "[grand test total] test[s] in [number of filled rows in Table of Test Results]/[total test count] set[s], [grand test failures] failure[s]";
+	if the width of the main window is at least 98:
+		let the remaining outcome tests be the maximum attempts of the primary outcome - attempt count of the primary outcome;
+		if the number of not preset possible outcomes is at least 1:
+			say "; testing [number of not preset possible outcomes] outcome[s] up to [remaining outcome tests] more time[s]" ;
 
 [TODO: square these numbers with 'requeueable' count?]
 
@@ -562,13 +565,13 @@ To decide whether there are test results to display:
 	decide on whether or not the number of filled rows in Table of Test Results is at least 1;
 
 To display test results:
-	log "Test results:[line break]";
+	log "Test results:";
 	Repeat through Table of Test Results:
 		if failures entry is 0:
 			transcribe "[test set entry]: [total entry] tests, all passed";
 		otherwise:
 			log "[test set entry]: [total entry] tests, [failures entry] failures";
-	log "Total: [grand test summary].";
+	log "[line break]Full results: [grand test summary].";
 	Repeat through Table of Test Results:
 		if failures entry is at least 1:
 			log "";
@@ -1064,7 +1067,7 @@ First after showing the title screen (this is the run all tests rule):
 		log "Seeding random number generator and dungeon generation with [random-seed entry]";
 		now the dungeon generation seed is the random-seed entry;
 		seed the random-number generator with the random-seed entry;
-	log "Completed so far: [grand test summary], with [unresolved count entry] set[s] left to test";
+	log "Current progress: [grand test summary]";
 	Repeat through Table of Test Results:
 		if failures entry > 0:
 			log "  [failures entry] failures in [test set entry]";
