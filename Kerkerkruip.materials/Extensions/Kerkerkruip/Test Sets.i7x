@@ -2557,11 +2557,6 @@ regular scheduling of radiance-attack-eyeless: do the action of waiting for a 0 
 testing effects of radiance-attack-eyeless: if we assert absence of result "\+ 4 \(radiance\)<^\n>* compassion does not overcome", rule succeeds.
 	
 [blindness:
-~./Kerkerkruip Items.i7x:A flash grenade is a kind of grenade. The description of a flash grenade is "When thrown, this magical grenade emits a pulse of searing light so strong that it will blind anyone in its vicinity, even if they close their eyes. The device is universally judged to be Metastasio's most useless invention.".
-./Kerkerkruip Items.i7x:			unless main actor is blind:
-./Kerkerkruip Items.i7x:A blindness rule (this is the blind if flashed rule):
-./Kerkerkruip Items.i7x:				unless guy is blind:
-./Kerkerkruip Items.i7x:				say "The flash grenade explodes, and a blinding light [unless lijst is empty]burns away the retinae of anyone unlucky enough to see it clearly, namely, [lijst with definite articles][otherwise]flashes through the room[end if].";
 ./Kerkerkruip Items.i7x:		if the player is blinded:
 ./Kerkerkruip Items.i7x:			now the player is not blinded;
 ./Kerkerkruip Items.i7x:			say "The waters cure you of your blindness.";
@@ -3485,6 +3480,55 @@ initial scheduling of you-can-also-see: remove the blindfold from play.
 regular scheduling of you-can-also-see: try looking.
 testing effects of you-can-also-see: if we assert result "You can also see a magical spade here", rule succeeds.
 
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts
+flash-blindfolded	0	1
+flash-sighted-monster	1	1
+flash-eyeless-monster	1	1
+flash-eyeless-player	1	1
+flash-sighted-player	1	1
+blind-when-flashed	1	1
+
+[A note on flash-eyeless-player: the grenade does blind the player, but having eyeless vision should make that irrelevant. That should be tested elsewhere.]
+
+Definition: an outcome is flash-blinding if it is flash-blindfolded or it is flash-eyeless-player or it is flash-sighted-player.
+
+Definition: an outcome is flash-resetting if it is flash-blinding or it is the outcome after blind-when-flashed.
+
+Initial scheduling of flash-blindfolded:
+	now the reusable item is a random flash grenade;
+	prepare a test battle with the jumping bomb;
+	revive Miranda in the location;
+	equip the player with the blindfold.
+	
+Initial scheduling of a flash-resetting outcome:
+	Repeat with guy running through people:
+		now the flash-grenade-timer of guy is 0;
+	
+Regular scheduling of a flash-blinding outcome:
+	Now the reusable item is not rusted;
+	try throwing the reusable item.
+	
+testing effects of a flash-blinding outcome: if the flash-grenade-timer of the player > 0, rule succeeds.
+
+testing effects of flash-sighted-monster: if the flash-grenade-timer of Miranda > 0, rule succeeds.
+
+testing effects of flash-eyeless-monster: if we assert that the flash-grenade-timer of the jumping bomb is 0, rule succeeds.
+
+Initial scheduling of flash-eyeless-player:
+	remove the blindfold from play;
+	now eyeless vision is adapted.
+	
+Initial scheduling of flash-sighted-player: now eyeless vision is not adapted.
+
+testing effects of blind-when-flashed: if the player is blind, rule succeeds.
+
+[~./Kerkerkruip Items.i7x:A flash grenade is a kind of grenade. The description of a flash grenade is "When thrown, this magical grenade emits a pulse of searing light so strong that it will blind anyone in its vicinity, even if they close their eyes. The device is universally judged to be Metastasio's most useless invention.".
+./Kerkerkruip Items.i7x:			unless main actor is blind:
+./Kerkerkruip Items.i7x:A blindness rule (this is the blind if flashed rule):
+./Kerkerkruip Items.i7x:				unless guy is blind:
+./Kerkerkruip Items.i7x:				say "The flash grenade explodes, and a blinding light [unless lijst is empty]burns away the retinae of anyone unlucky enough to see it clearly, namely, [lijst with definite articles][otherwise]flashes through the room[end if].";
+]
 
 Section - Resizing salves
 
