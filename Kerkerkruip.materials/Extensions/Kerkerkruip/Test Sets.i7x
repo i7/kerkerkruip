@@ -2645,10 +2645,7 @@ Testing effects of eyeless-monster-attack-mirrors:
 	if we assert absence of result "Confused by the mirrors", rule succeeds.
 
 [blindness:
-./Kerkerkruip Locations.i7x:The hall of mirrors is a room. "Mirrors surround you on all sides in an impossible geometry[run paragraph on][unless the player is blind]. Myriad reflections follow your every movement -- though some, always in the corner of your eyes, seem to behave differently[end if]."
-./Kerkerkruip Locations.i7x:	unless the player is blind:
-./Kerkerkruip Locations.i7x:	unless the global attacker is blind:
-./Kerkerkruip Locations.i7x:The phantasmagoria is a room. "This huge hall is filled with the radiant images of warriors long dead, fighting their bloody battles over and over again.[run paragraph on][unless the player is blind] You see [phantasmagoria show] -- but the scene changes before you can focus on any details.[run paragraph on][end if]"
+../Kerkerkruip Locations.i7x:The phantasmagoria is a room. "This huge hall is filled with the radiant images of warriors long dead, fighting their bloody battles over and over again.[run paragraph on][unless the player is blind] You see [phantasmagoria show] -- but the scene changes before you can focus on any details.[run paragraph on][end if]"
 ./Kerkerkruip Locations.i7x:			unless guy is blind:
 ./Kerkerkruip Locations.i7x:		say "Suddenly, [one of]a disintegrating skeletal warrior appears[or]a blast of dragon's fire appears[or]a naked male slave appears, screaming in fear[or]a naked female slave appears, fleeing in tears[or]a huge fountain of fire appears[or]a crashing ballista bolt appears[or]a drowning knight appears, crying for his god[or]a ghost appears, devouring the flesh of a still living man[or]a frenzied bull elephant appears[or]a shrieking princess appears in the claws of a demon[or]an obese king carried by seven blind eunuchs appears[or]a newly reanimated soldier appears, taking a blow for his necromancing comrade[at random]. [unless lijst is empty]While only an image that flickers and then disappears, it [bold type]startles [lijst with definite articles][roman type][otherwise]The illusions do not affect anyone[end if].".
 ./Kerkerkruip Locations.i7x:	unless P is blind:
