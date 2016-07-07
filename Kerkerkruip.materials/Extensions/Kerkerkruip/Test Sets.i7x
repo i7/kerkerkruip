@@ -2524,44 +2524,83 @@ outcome	likelihood	minimum attempts	antecedent
 attack-modifiers	0	1	restarting for tests
 radiance-defend-sighted	1	1	--
 radiance-attack-sighted	1	1	--
-radiance-defend-blind	1	1	--
-radiance-attack-blind	1	1	--
-radiance-defend-eyeless	1	1	--
-radiance-attack-eyeless	1	1	--
+radiance-defend-blind	0	1	--
+radiance-attack-blind	0	1	--
+radiance-defend-eyeless-player	0	1	--
+radiance-attack-eyeless-player	0	1	--
+radiance-defend-eyeless-monster	1	1	--
+radiance-attack-eyeless-monster	1	1	--
+
+Definition: an outcome is radiance-defending if it is radiance-defend-sighted or it is radiance-defend-blind or it is radiance-defend-eyeless-player.
+
+Definition: an outcome is radiance-attacking if it is radiance-attack-sighted or it is radiance-attack-blind or it is radiance-attack-eyeless-player.
 
 Initial scheduling of radiance-defend-sighted:
 	prepare a test battle with the Angel of Compassion;
 
-regular scheduling of radiance-defend-sighted: do the action of the angel of compassion waiting for a 0 melee hit by the player.
-testing effects of radiance-defend-sighted: if we assert result "- 4 \(radiance\)<^\n>* you do not overcome", rule succeeds.
+regular scheduling of a radiance-defending outcome: do the action of the angel of compassion waiting for a 0 melee hit by the player.
+testing effects of a radiance-defending outcome: if we assert result "- 4 \(radiance\)<^\n>* you do not overcome", rule succeeds.
 
-regular scheduling of radiance-attack-sighted: do the action of waiting for a 0 melee hit by the angel of compassion.
-testing effects of radiance-attack-sighted: if we assert result "\+ 4 \(radiance\)<^\n>* compassion does not overcome", rule succeeds.
+regular scheduling of a radiance-attacking outcome: do the action of waiting for a 0 melee hit by the angel of compassion.
+testing effects of a radiance-attacking outcome: if we assert result "\+ 4 \(radiance\)<^\n>* compassion does not overcome", rule succeeds.
 
 initial scheduling of radiance-defend-blind: now flash-grenade-timer of the player is 5.
-regular scheduling of radiance-defend-blind: do the action of the angel of compassion waiting for a 0 melee hit by the player.
-testing effects of radiance-defend-blind: if we assert absence of result "- 4 \(radiance\)<^\n>* you do not overcome", rule succeeds.
 
-regular scheduling of radiance-attack-blind: do the action of waiting for a 0 melee hit by the angel of compassion.
-testing effects of radiance-attack-blind: if we assert absence of result "\+ 4 \(radiance\)<^\n>* compassion does not overcome", rule succeeds.
-
-initial scheduling of radiance-defend-eyeless:
+initial scheduling of radiance-defend-eyeless-player:
 	now flash-grenade-timer of the player is 0;
 	now eyeless vision is adapted.
 
-regular scheduling of radiance-defend-eyeless: do the action of the angel of compassion waiting for a 0 melee hit by the player.
+initial scheduling of radiance-defend-eyeless-monster:
+	now the radiation of the player is 4;
+	now eyeless vision is not adapted;
+	prepare a test battle with the jumping bomb.
+	
+regular scheduling of radiance-defend-eyeless-monster: do the action of waiting for a 0 melee hit by the jumping bomb.
 
-testing effects of radiance-defend-eyeless: if we assert absence of result "- 4 \(radiance\)<^\n>* you do not overcome", rule succeeds.
+testing effects of radiance-defend-eyeless-monster: if we assert absence of result "- 4 \(radiance\)<^\n>* jumping bomb does not overcome", rule succeeds.
 
-regular scheduling of radiance-attack-eyeless: do the action of waiting for a 0 melee hit by the angel of compassion.
-testing effects of radiance-attack-eyeless: if we assert absence of result "\+ 4 \(radiance\)<^\n>* compassion does not overcome", rule succeeds.
+regular scheduling of radiance-attack-eyeless-monster:
+	Let guy be the jumping bomb; [The compiler doesn't like the word "jumping" in the name of an actor for an action description]
+	do the action of guy waiting for a 0 melee hit by the player.
+
+testing effects of radiance-attack-eyeless-monster: if we assert absence of result "\+ 4 \(radiance\)<^\n>* you do not overcome", rule succeeds.
 
 [No test for "blinded" - it is not implemented.]
 [TODO: Consider removing it... but allow the vial of purification to cure flash grenade blindness? or have another blindness-cured property that overrides the flash grenade?]
 
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts
+sighted-attack-bright	1	1
+blind-attack-bright	0	1
+eyeless-player-attack-bright	0	1
+eyeless-monster-attack-bright	1	1
+
+Definition: an outcome is bomb-bright-defending if it is sighted-attack-bright or it is blind-attack-bright or it is eyeless-player-attack-bright.
+
+Initial scheduling of sighted-attack-bright:
+	extract the player to Entrance Hall, making sure it is unoccupied;
+	now the smoke timer of Entrance Hall is 0;
+	extract the jumping bomb to Entrance Hall.
+
+regular scheduling of a bomb-bright-defending outcome:
+	Let guy be the jumping bomb;
+	do the action of guy waiting for a 0 melee hit by the player.
+
+testing effects of a bomb-bright-defending outcome: if we assert result "- 2 \(blinding light\)<^\n>* you do not overcome", rule succeeds.
+
+initial scheduling of blind-attack-bright: now flash-grenade-timer of the player is 5.
+
+initial scheduling of eyeless-player-attack-bright:
+	now flash-grenade-timer of the player is 0;
+	now eyeless vision is adapted.
+
+initial scheduling of eyeless-monster-attack-bright: now eyeless vision is not adapted.
+	
+regular scheduling of eyeless-monster-attack-bright: do the action of waiting for a 0 melee hit by the jumping bomb.
+
+testing effects of eyeless-monster-attack-bright: if we assert absence of result "- 2 \(blinding light\)<^\n>* jumping bomb does not overcome", rule succeeds.
+
 [blindness:
-../Kerkerkruip Locations.i7x:		unless the global attacker is blind:
-./Kerkerkruip Locations.i7x:				say " - [n] (blinding light)[run paragraph on]";
 ./Kerkerkruip Locations.i7x:The hall of mirrors is a room. "Mirrors surround you on all sides in an impossible geometry[run paragraph on][unless the player is blind]. Myriad reflections follow your every movement -- though some, always in the corner of your eyes, seem to behave differently[end if]."
 ./Kerkerkruip Locations.i7x:	unless the player is blind:
 ./Kerkerkruip Locations.i7x:	unless the global attacker is blind:
