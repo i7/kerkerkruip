@@ -2559,9 +2559,11 @@ regular scheduling of radiance-defend-eyeless-monster: do the action of waiting 
 
 testing effects of radiance-defend-eyeless-monster: if we assert absence of result "- 4 \(radiance\)<^\n>* jumping bomb does not overcome", rule succeeds.
 
+[The compiler doesn't like the word "jumping" in the name of an actor for an action description. A "to decide which person" phrase doesn't seem to work either]
+JB is a person that varies. JB is the jumping bomb.
+	
 regular scheduling of radiance-attack-eyeless-monster:
-	Let guy be the jumping bomb; [The compiler doesn't like the word "jumping" in the name of an actor for an action description]
-	do the action of guy waiting for a 0 melee hit by the player.
+	do the action of JB waiting for a 0 melee hit by the player.
 
 testing effects of radiance-attack-eyeless-monster: if we assert absence of result "\+ 4 \(radiance\)<^\n>* you do not overcome", rule succeeds.
 
@@ -2583,8 +2585,7 @@ Initial scheduling of sighted-attack-bright:
 	extract the jumping bomb to Entrance Hall.
 
 regular scheduling of a bomb-bright-defending outcome:
-	Let guy be the jumping bomb;
-	do the action of guy waiting for a 0 melee hit by the player.
+	do the action of JB waiting for a 0 melee hit by the player.
 
 testing effects of a bomb-bright-defending outcome: if we assert result "- 2 \(blinding light\)<^\n>* you do not overcome", rule succeeds.
 
@@ -2599,6 +2600,49 @@ initial scheduling of eyeless-monster-attack-bright: now eyeless vision is not a
 regular scheduling of eyeless-monster-attack-bright: do the action of waiting for a 0 melee hit by the jumping bomb.
 
 testing effects of eyeless-monster-attack-bright: if we assert absence of result "- 2 \(blinding light\)<^\n>* jumping bomb does not overcome", rule succeeds.
+
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts
+sighted-attack-mirrors	5	5
+blind-attack-mirrors	0	5
+eyeless-player-attack-mirrors	0	5
+eyeless-monster-attack-mirrors	5	5
+
+Definition: an outcome is mirror-attacking if it is sighted-attack-mirrors or it is blind-attack-mirrors or it is eyeless-player-attack-mirrors.
+
+Initial scheduling of sighted-attack-mirrors:
+	Extract the player to Hall of Mirrors, making sure it is unoccupied;
+	Extract the jumping bomb to Hall of Mirrors;
+	now the mind score of the player is 3;
+	now the spirit score of the player is 0;
+	now the mind score of the jumping bomb is 3;
+	now the spirit score of the jumping bomb is 0;
+	[these stats, with tension 0, should cause mirrors to intervene 100% of the time]
+	Repeat with item running through extra things in Hall of Mirrors:
+		remove item from play. [remove Focal Totem, etc]
+		
+Regular scheduling of a mirror-attacking test step:
+	Now the tension is 0;
+	do the action of JB waiting for a 100 melee hit by the player.
+	
+Testing effects of a mirror-attacking test step:
+	if we assert result "Confused by the mirrors, you start attacking a reflection", rule succeeds.
+
+Initial scheduling of blind-attack-mirrors: equip the player with the blindfold.
+
+Initial scheduling of eyeless-player-attack-mirrors:
+	remove the blindfold from play;
+	now eyeless vision is adapted.
+	
+Initial scheduling of eyeless-monster-attack-mirrors: now eyeless vision is not adapted.
+
+Regular scheduling of eyeless-monster-attack-mirrors:
+	Now the tension is 0;
+	now bomb-escape is true;
+	do the action of waiting for a 100 melee hit by the jumping bomb.
+	
+Testing effects of eyeless-monster-attack-mirrors:
+	if we assert absence of result "Confused by the mirrors", rule succeeds.
 
 [blindness:
 ./Kerkerkruip Locations.i7x:The hall of mirrors is a room. "Mirrors surround you on all sides in an impossible geometry[run paragraph on][unless the player is blind]. Myriad reflections follow your every movement -- though some, always in the corner of your eyes, seem to behave differently[end if]."
