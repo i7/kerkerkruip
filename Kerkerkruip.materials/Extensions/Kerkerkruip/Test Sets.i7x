@@ -2644,13 +2644,9 @@ Regular scheduling of eyeless-monster-attack-mirrors:
 Testing effects of eyeless-monster-attack-mirrors:
 	if we assert absence of result "Confused by the mirrors", rule succeeds.
 
+[skipping test for AI concentrating in Phantasmagoria - how would we test that anyway?]
+
 [blindness:
-../Kerkerkruip Locations.i7x:The phantasmagoria is a room. "This huge hall is filled with the radiant images of warriors long dead, fighting their bloody battles over and over again.[run paragraph on][unless the player is blind] You see [phantasmagoria show] -- but the scene changes before you can focus on any details.[run paragraph on][end if]"
-./Kerkerkruip Locations.i7x:			unless guy is blind:
-./Kerkerkruip Locations.i7x:		say "Suddenly, [one of]a disintegrating skeletal warrior appears[or]a blast of dragon's fire appears[or]a naked male slave appears, screaming in fear[or]a naked female slave appears, fleeing in tears[or]a huge fountain of fire appears[or]a crashing ballista bolt appears[or]a drowning knight appears, crying for his god[or]a ghost appears, devouring the flesh of a still living man[or]a frenzied bull elephant appears[or]a shrieking princess appears in the claws of a demon[or]an obese king carried by seven blind eunuchs appears[or]a newly reanimated soldier appears, taking a blow for his necromancing comrade[at random]. [unless lijst is empty]While only an image that flickers and then disappears, it [bold type]startles [lijst with definite articles][roman type][otherwise]The illusions do not affect anyone[end if].".
-./Kerkerkruip Locations.i7x:	unless P is blind:
-./Kerkerkruip Monster Abilities.i7x:Chapter - Blindness
-./Kerkerkruip Monster Abilities.i7x:A person can be blinded. A person is usually not blinded. [Blinded is a property that makes you blind. It can be cured.]
 ./Kerkerkruip Monster Abilities.i7x:A person can be eyeless. A person is usually not eyeless. [An eyeless person is blind but not negatively affected by blindness.]
 ./Kerkerkruip Monster Abilities.i7x:The blindness rules are a rulebook.
 ./Kerkerkruip Monster Abilities.i7x:To decide whether (guy - a person) is blind:
@@ -3602,6 +3598,47 @@ Initial scheduling of flash-eyeless-player:
 Initial scheduling of flash-sighted-player: now eyeless vision is not adapted.
 
 testing effects of blind-when-flashed: if the player is blind, rule succeeds.
+
+Section - Phantasmagoria Distractions
+
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts	maximum attempts	antecedent
+phantasmagoria-event-blind	1	3	--	--
+blind-player-startled	0	10	--	phantasmagoria-event-blind
+phantasmagoria-event-eyeless	1	3	--	--
+eyeless-player-startled	0	10	--	phantasmagoria-event-eyeless
+phantasmagoria-event-sighted	1	3	200	--
+sighted-player-startled	4	5	--	phantasmagoria-event-sighted
+eyeless-monster-startled	0	10	--	phantasmagoria-event-sighted
+
+Definition: an outcome is phantasmagoria-distracting if it is phantasmagoria-event-blind or it is phantasmagoria-event-eyeless or it is phantasmagoria-event-sighted.
+
+First independent action rule when testing a phantasmagoria-distracting outcome: rule fails.
+[Don't let wandering monsters in]
+
+Definition: an outcome is player-distracting if the antecedent of it is phantasmagoria-distracting and it is not eyeless-monster-startled.
+
+Initial scheduling of phantasmagoria-event-blind:
+	extract the player to phantasmagoria, making sure it is unoccupied;
+	extract the jumping bomb to phantasmagoria;
+	equip the player with the blindfold.
+
+Regular scheduling of a phantasmagoria-distracting outcome:
+	Repeat with guy running through people in the location:
+		Now the concentration of guy is 1;
+	Compel the action of waiting.
+
+Testing effects of a phantasmagoria-distracting outcome: if we assert result "Suddenly, <^\n>+ appears", rule succeeds.
+
+Initial scheduling of phantasmagoria-event-eyeless:
+	remove the blindfold from play;
+	now eyeless vision is adapted.
+	
+Initial scheduling of phantasmagoria-event-sighted: now eyeless vision is not adapted.
+	
+Testing effects of a player-distracting outcome: if the concentration of the player is 0, rule succeeds.
+
+Testing effects of eyeless-monster-startled: if the concentration of the jumping bomb is 0, rule succeeds.
 
 Section - Resizing salves
 
