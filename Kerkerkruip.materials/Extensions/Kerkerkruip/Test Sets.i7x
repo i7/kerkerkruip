@@ -2644,6 +2644,33 @@ Regular scheduling of eyeless-monster-attack-mirrors:
 Testing effects of eyeless-monster-attack-mirrors:
 	if we assert absence of result "Confused by the mirrors", rule succeeds.
 
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts
+blind-attack	1	1
+blind-eyeless-player-attack	0	1
+eyeless-player-attack	0	1
+sighted-attack	0	1
+eyeless-monster-attack	1	1
+
+Definition: an outcome is blindness-penalty-checking if it is blind-attack or it is blind-eyeless-player-attack or it is eyeless-player-attack or it is sighted-attack.
+
+Regular scheduling of a blindness-penalty-checking outcome: Do the action of the JB waiting for a 0 melee hit by the player.
+Testing effects of blindness-penalty-checking outcome: If we assert result "- 3 \(blindness\)", rule succeeds.
+
+Initial scheduling of blind-attack: equip the player with the blindfold.
+
+Initial scheduling of blind-eyeless-player-attack: now eyeless vision is adapted.
+
+Initial scheduling of eyeless-player-attack: remove the blindfold from play.
+
+Initial scheduling of sighted-attack: now eyeless vision is not adapted.
+
+Regular scheduling of eyeless-monster-attack: do the action of waiting for a 0 melee hit by JB.
+
+Testing effects of eyeless-monster-attack: if we assert absence of result "- 3 \(blindness\)", rule succeeds.
+
+[TODO: blind defender]
+
 [skipping test for AI concentrating in Phantasmagoria - how would we test that anyway?]
 
 [blindness:
@@ -3657,24 +3684,6 @@ Testing effects of eyeless-player-status: if we assert result "You do not need e
 
 Initial scheduling of jumping-bomb-blind: now eyeless vision is not adapted.
 Testing effects of jumping-bomb-blind: if the jumping bomb is blind, rule succeeds.
-
-
-[./Kerkerkruip Monster Abilities.i7x:A person can be eyeless. A person is usually not eyeless. [An eyeless person is blind but not negatively affected by blindness.]
-./Kerkerkruip Monster Abilities.i7x:The blindness rules are a rulebook.
-./Kerkerkruip Monster Abilities.i7x:To decide whether (guy - a person) is blind:
-./Kerkerkruip Monster Abilities.i7x:	follow the blindness rules;
-./Kerkerkruip Monster Abilities.i7x:A blindness rule (this is the blind if blinded rule):
-./Kerkerkruip Monster Abilities.i7x:	if test subject is blinded:
-./Kerkerkruip Monster Abilities.i7x:A blindness rule (this is the blind if eyeless rule):
-./Kerkerkruip Monster Abilities.i7x:	if test subject is eyeless:
-./Kerkerkruip Monster Abilities.i7x:Status attribute rule (this is the blindness status rule):
-./Kerkerkruip Monster Abilities.i7x:	if player is blind:
-./Kerkerkruip Monster Abilities.i7x:			say "You are [bold type]blind[roman type].[line break][run paragraph on]";
-./Kerkerkruip Monster Abilities.i7x:			say "[@ check initial position of attribute]blind[run paragraph on]";
-./Kerkerkruip Monster Abilities.i7x:Status attribute rule (this is the eyeless status rule):
-./Kerkerkruip Monster Abilities.i7x:	if player is eyeless:
-./Kerkerkruip Monster Abilities.i7x:			say "[@ check initial position of attribute]eyeless[run paragraph on]";
-]
 
 Section - Resizing salves
 
