@@ -2647,15 +2647,25 @@ Testing effects of eyeless-monster-attack-mirrors:
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts
 blind-attack	1	1
+blind-defend	1	1
 blind-eyeless-player-attack	0	1
+blind-eyeless-player-defend	0	1
 eyeless-player-attack	0	1
+eyeless-player-defend	0	1
 sighted-attack	0	1
+sighted-defend	0	1
 eyeless-monster-attack	1	1
+eyeless-monster-defend	1	1
 
-Definition: an outcome is blindness-penalty-checking if it is blind-attack or it is blind-eyeless-player-attack or it is eyeless-player-attack or it is sighted-attack.
+Definition: an outcome is blindness-attack-checking if it is blind-attack or it is blind-eyeless-player-attack or it is eyeless-player-attack or it is sighted-attack.
 
-Regular scheduling of a blindness-penalty-checking outcome: Do the action of the JB waiting for a 0 melee hit by the player.
-Testing effects of blindness-penalty-checking outcome: If we assert result "- 3 \(blindness\)", rule succeeds.
+Regular scheduling of a blindness-attack-checking outcome: Do the action of the JB waiting for a 0 melee hit by the player.
+Testing effects of blindness-attack-checking outcome: If we assert result "- 3 \(blindness\)", rule succeeds.
+
+Definition: an outcome is blindness-defend-checking if it is blind-defend or it is blind-eyeless-player-defend or it is eyeless-player-defend or it is sighted-defend.
+
+Regular scheduling of a blindness-defend-checking outcome: Do the action of the player waiting for a 0 melee hit by the jumping bomb.
+Testing effects of blindness-defend-checking outcome: If we assert result "\+ 2 \(defender blind\)", rule succeeds.
 
 Initial scheduling of blind-attack: equip the player with the blindfold.
 
@@ -2669,7 +2679,9 @@ Regular scheduling of eyeless-monster-attack: do the action of waiting for a 0 m
 
 Testing effects of eyeless-monster-attack: if we assert absence of result "- 3 \(blindness\)", rule succeeds.
 
-[TODO: blind defender]
+Regular scheduling of eyeless-monster-defend: do the action of JB waiting for a 0 melee hit by player.
+
+Testing effects of eyeless-monster-defend: if we assert absence of result "\(defender blind\)", rule succeeds.
 
 [skipping test for AI concentrating in Phantasmagoria - how would we test that anyway?]
 
