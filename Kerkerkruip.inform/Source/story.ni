@@ -41,7 +41,7 @@ Section - Graphics and Windows
 [ Disable the status line purely to prevent reverse mode from being switched on. This doesn't prevent us from opening the status line manually, which we already had to do. ]
 Use no status line.
 
-[ Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. It is not necessary to comment out Flexible Windows when Glimmr is commented in. ]
+[ Testing with Glimmr installed will be slower, due to compilation and graphics, so commits to story.ni would generally best be made with it commented out. ]
 
 Include version 15/160628 of Flexible Windows by Jon Ingold.
 Include Hyperlinks by Kerkerkruip.
@@ -135,18 +135,6 @@ Every turn:
 		now Banquet is not current-test-dream;]
 
 [Dream of Tungausy Shaman is current-test-dream.]
-
-
-[Section - Flexible Windows relisting
-
-[Kerkerkruip's when play begin rules don't fire until after the menu is cleared. This means that extension such as Flexible Windows that have critical startup code in when play begins need to be adjusted. Due to weaknesses in Inform's extension interactions, this has to be in story.ni rather than the Kerkerkruip Glimmr Additions extension.]
-
-The allocate rocks rule is not listed in the when play begins rules. The allocate rocks rule is listed before the show the title screen rule in the startup rules.
-The initial hyperlink request rule is not listed in the when play begins rules. The initial hyperlink request rule is listed before the show the title screen rule in the startup rules.
-
-Section - Relist rock validation rule (not for release)
-
-The rock validation rule is not listed in the when play begins rules. The rock validation rule is listed before the show the title screen rule in the startup rules.]
 
 
 
