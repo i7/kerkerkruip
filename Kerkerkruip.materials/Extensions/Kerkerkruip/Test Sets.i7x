@@ -2686,24 +2686,7 @@ Testing effects of eyeless-monster-defend: if we assert absence of result "\(def
 [skipping test for AI concentrating in Phantasmagoria - how would we test that anyway?]
 
 [blindness:
-./Kerkerkruip Monster Abilities.i7x:An attack modifier rule (this is the blindness attack modifier rule):
-./Kerkerkruip Monster Abilities.i7x:	if the global attacker is blind and the global attacker is not eyeless:
-./Kerkerkruip Monster Abilities.i7x:		say " - 3 (blindness)[run paragraph on]";
-./Kerkerkruip Monster Abilities.i7x:An attack modifier rule (this is the blindness defence modifier rule):
-./Kerkerkruip Monster Abilities.i7x:	if the global defender is blind and the global defender is not eyeless:
-./Kerkerkruip Monster Abilities.i7x:		say " + 2 (defender blind)[run paragraph on]";
-./Kerkerkruip Monster Abilities.i7x:Chance to win rule (this is the CTW blindness bonus rule):
-./Kerkerkruip Monster Abilities.i7x:	if the global attacker is blind and the global attacker is not eyeless:
-./Kerkerkruip Monster Abilities.i7x:	if the global defender is blind and the global defender is not eyeless:
-./Kerkerkruip Monster Abilities.i7x:		unless global defender is blind or global defender is radiance-immune:
-./Kerkerkruip Monster Abilities.i7x:		unless global attacker is blind or the global attacker is radiance-immune:
-./Kerkerkruip Monsters.i7x:The swarm of daggers is eyeless.
-./Kerkerkruip Monsters.i7x:The chain golem is eyeless.
-./Kerkerkruip Monsters.i7x:	say "The chains lash out one final time, blindly seeking prey -- but fall down limply before they can hit anyone. With thousands of [if chain golem is iron]hard metal [end if]clicks they start falling asunder.";
-./Kerkerkruip Monsters.i7x:The jumping bomb is eyeless.
-./Kerkerkruip Monsters.i7x:An angel of compassion is a monster. "An angel hovers here, [if angel-of-compassion-strength > 3]enveloped in blinding and overwhelming radiance[otherwise if angel-of-compassion-strength is 3]shining with divine glory[otherwise if angel-of-compassion-strength is 2]lessened by grief, but still majestic[otherwise if angel-of-compassion-strength is 1]saddened and wizened[otherwise]enveloped in sadness and all its glory gone[end if]."
-./Kerkerkruip Monsters.i7x:The giant tentacle is eyeless.
-./Kerkerkruip Monsters.i7x:	now printed name of X is "blinding flame";
+TODO: increase hiding roll if all enemies blind?
 ./Kerkerkruip Monsters.i7x:An aftereffects rule (this is the Israfel's blinding attack rule):
 ./Kerkerkruip Monsters.i7x:		unless global defender is blind:
 ./Kerkerkruip Monsters.i7x:				say "Israfel's flaming attack [bold type]blinds[roman type] [the global defender].".
@@ -3408,6 +3391,30 @@ testing effects of ment-damage-bonus: if we assert result "\+ 1 \(ment\) ", rule
 regular scheduling of ment-damage-reduction: do the action of waiting for a 100 melee hit by the defender of Aite.
 testing effects of ment-damage-reduction: if we assert result "- 1 \(ment\) ", rule succeeds.
 
+Section - Damage Consequences
+
+[mostly concentration effects. Currently there is no single system for triggering losing concentration, TODO: create a damage consequences system similar to attack aftereffects.]
+
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts	antecedent
+damage consequences	0	1	restarting for tests
+launch-break-concentration	1	1	--
+launch-broke-concentration	1	1	launch-break-concentration
+
+Initial scheduling of launch-break-concentration:
+	prepare a test battle with Bodmall;
+	try smiting Bodmall;
+	prepare a test battle with the minotaur;
+	try summoning brambles;
+	now the concentration of the minotaur is 3;
+	[TODO: once the system is integrated, we may have to repeat the test given that sometimes the enemy can remain concentrated]
+	now brambles strength is 1.
+	
+regular scheduling of launch-break-concentration: try launching.
+testing effects of launch-break-concentration: if we assert result "Thorns shoot towards everyone, dealing 1 damage to the minotaur \(which breaks the minotaur's concentration\)", rule succeeds.
+
+testing effects of launch-broke-concentration: if we assert that the concentration of the minotaur is 0, rule succeeds.
+	
 Section - Automatos
 
 Table of Outcomes (continued)
