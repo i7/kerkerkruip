@@ -2683,6 +2683,37 @@ Regular scheduling of eyeless-monster-defend: do the action of JB waiting for a 
 
 Testing effects of eyeless-monster-defend: if we assert absence of result "\(defender blind\)", rule succeeds.
 
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts
+israfel-blinds-sighted	1	1
+israfel-blinds-blind	0	1
+israfel-blinds-blind-eyeless	0	1
+israfel-blinds-eyeless-player	0	1
+israfel-blinds-eyeless-monster	1	1
+
+Definition: an outcome is israfel-blinding if it is israfel-blinds-sighted or it is israfel-blinds-blind or it is israfel-blinds-blind-eyeless or it is israfel-blinds-eyeless-player.
+
+initial scheduling of israfel-blinds-sighted:
+	prepare a test battle with israfel;
+	extract the jumping bomb to the location;
+	
+Regular scheduling of an israfel-blinding outcome: do the action of waiting for a 100 melee hit by Israfel.
+Testing effects of an israfel-blinding outcome: if we assert result "Israfel's flaming attack blinds you", rule succeeds.
+
+Initial scheduling of israfel-blinds-blind-eyeless:
+	now the flash-grenade-timer of the player is 5;
+	now eyeless vision is adapted.
+
+Initial scheduling of israfel-blinds-eyeless-player: now the flash-grenade-timer of the player is 0.
+
+Initial scheduling of israfel-blinds-eyeless-monster:
+	now eyeless vision is not adapted;
+	now the flash-grenade-timer of the player is 0.
+	
+Regular scheduling of israfel-blinds-eyeless-monster: do the action of JB waiting for a 100 melee hit by Israfel.
+
+Testing effects of israfel-blinds-eyeless-monster: if we assert absence of result "flaming attack blinds", rule succeeds.
+
 [skipping test for AI concentrating in Phantasmagoria - how would we test that anyway?]
 
 [blindness:
