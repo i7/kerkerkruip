@@ -2701,6 +2701,7 @@ Regular scheduling of an israfel-blinding outcome: do the action of waiting for 
 Testing effects of an israfel-blinding outcome: if we assert result "Israfel's flaming attack blinds you", rule succeeds.
 
 Initial scheduling of israfel-blinds-blind-eyeless:
+	[Israfel's code re-blinds anyone who has a flash grenade timer <= 6 but is not blind... not sure why it's written that way, but the effect is that an eyeless player can be re-blinded when they're already blind. This is currently considered a failure.]
 	now the flash-grenade-timer of the player is 5;
 	now eyeless vision is adapted.
 
@@ -2718,9 +2719,6 @@ Testing effects of israfel-blinds-eyeless-monster: if we assert absence of resul
 
 [blindness:
 TODO: increase hiding roll if all enemies blind?
-./Kerkerkruip Monsters.i7x:An aftereffects rule (this is the Israfel's blinding attack rule):
-./Kerkerkruip Monsters.i7x:		unless global defender is blind:
-./Kerkerkruip Monsters.i7x:				say "Israfel's flaming attack [bold type]blinds[roman type] [the global defender].".
 ./Kerkerkruip Monsters.i7x:An aftereffects rule (this is the Fell's blinding attack rule):
 ./Kerkerkruip Monsters.i7x:		unless global defender is blind:
 ./Kerkerkruip Monsters.i7x:				say "Fell's nails strike [regarding the global defender][possessive] eyes, [bold type]blinding[roman type] [them] for 3 turns.".
