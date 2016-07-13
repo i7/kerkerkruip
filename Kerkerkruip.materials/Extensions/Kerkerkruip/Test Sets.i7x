@@ -2278,8 +2278,73 @@ testing effects of thorns-dodge-mouser-fail:
 	assert result "The armour of thorns scratches Mouser for 1 damage";
 	if we assert that the health of mouser is 99, rule succeeds.
 
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts
+israfel-blinds-sighted	1	1
+israfel-blinds-blind	0	1
+israfel-blinds-blind-eyeless	0	1
+israfel-blinds-eyeless-player	0	1
+israfel-blinds-eyeless-monster	1	1
+
+Definition: an outcome is israfel-blinding if it is israfel-blinds-sighted or it is israfel-blinds-blind or it is israfel-blinds-blind-eyeless or it is israfel-blinds-eyeless-player.
+
+initial scheduling of israfel-blinds-sighted:
+	prepare a test battle with israfel;
+	extract the jumping bomb to the location;
+	
+Regular scheduling of an israfel-blinding outcome: do the action of waiting for a 100 melee hit by Israfel.
+Testing effects of an israfel-blinding outcome: if we assert result "Israfel's flaming attack blinds you", rule succeeds.
+
+Initial scheduling of israfel-blinds-blind-eyeless:
+	[Israfel's code re-blinds anyone who has a flash grenade timer <= 6 but is not blind... not sure why it's written that way, but the effect is that an eyeless player can be re-blinded when they're already blind. This is currently considered a failure.]
+	now the flash-grenade-timer of the player is 5;
+	now eyeless vision is adapted.
+
+Initial scheduling of israfel-blinds-eyeless-player: now the flash-grenade-timer of the player is 0.
+
+Initial scheduling of israfel-blinds-eyeless-monster:
+	now eyeless vision is not adapted;
+	now the flash-grenade-timer of the player is 0.
+	
+Regular scheduling of israfel-blinds-eyeless-monster: do the action of JB waiting for a 100 melee hit by Israfel.
+
+Testing effects of israfel-blinds-eyeless-monster: if we assert absence of result "flaming attack blinds", rule succeeds.
+
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts
+fell-blinds-sighted	1	1
+fell-blinds-blind	0	1
+fell-blinds-blind-eyeless	0	1
+fell-blinds-eyeless-player	0	1
+fell-blinds-eyeless-monster	1	1
+
+Definition: an outcome is fell-blinding if it is fell-blinds-sighted or it is fell-blinds-blind or it is fell-blinds-blind-eyeless or it is fell-blinds-eyeless-player.
+
+initial scheduling of fell-blinds-sighted:
+	prepare a test battle with fell;
+	extract the jumping bomb to the location;
+	
+Regular scheduling of an fell-blinding outcome: do the action of waiting for a 100 melee hit by fell.
+Testing effects of an fell-blinding outcome: if we assert result "Fell's nails strike your eyes, blinding you for 3 turns", rule succeeds.
+
+Initial scheduling of fell-blinds-blind-eyeless:
+	[fell's code re-blinds anyone who has a flash grenade timer <= 6 but is not blind... not sure why it's written that way, but the effect is that an eyeless player can be re-blinded when they're already blind. This is currently considered a failure.]
+	now the flash-grenade-timer of the player is 2;
+	now eyeless vision is adapted.
+
+Initial scheduling of fell-blinds-eyeless-player: now the flash-grenade-timer of the player is 0.
+
+Initial scheduling of fell-blinds-eyeless-monster:
+	now eyeless vision is not adapted;
+	now the flash-grenade-timer of the player is 0.
+	
+Regular scheduling of fell-blinds-eyeless-monster: do the action of JB waiting for a 100 melee hit by fell.
+
+Testing effects of fell-blinds-eyeless-monster: if we assert absence of result "Fell's nails strike", rule succeeds.
+
+
 [TODO: Hot weapons only do heat damage (or break because of heat)? if not projectile]
-[TODO: test armor of thorns (started) and Israfel (not started),
+[TODO: test armor of thorns (started) and Israfel (done yet?),
 when hitting with damage (done)
 hitting without damage (not done)
 vs chain golem, bodmall, and hand-to-hand attacker, and missing - (all started)]
@@ -2683,50 +2748,10 @@ Regular scheduling of eyeless-monster-defend: do the action of JB waiting for a 
 
 Testing effects of eyeless-monster-defend: if we assert absence of result "\(defender blind\)", rule succeeds.
 
-Table of Outcomes (continued)
-outcome	likelihood	minimum attempts
-israfel-blinds-sighted	1	1
-israfel-blinds-blind	0	1
-israfel-blinds-blind-eyeless	0	1
-israfel-blinds-eyeless-player	0	1
-israfel-blinds-eyeless-monster	1	1
-
-Definition: an outcome is israfel-blinding if it is israfel-blinds-sighted or it is israfel-blinds-blind or it is israfel-blinds-blind-eyeless or it is israfel-blinds-eyeless-player.
-
-initial scheduling of israfel-blinds-sighted:
-	prepare a test battle with israfel;
-	extract the jumping bomb to the location;
-	
-Regular scheduling of an israfel-blinding outcome: do the action of waiting for a 100 melee hit by Israfel.
-Testing effects of an israfel-blinding outcome: if we assert result "Israfel's flaming attack blinds you", rule succeeds.
-
-Initial scheduling of israfel-blinds-blind-eyeless:
-	[Israfel's code re-blinds anyone who has a flash grenade timer <= 6 but is not blind... not sure why it's written that way, but the effect is that an eyeless player can be re-blinded when they're already blind. This is currently considered a failure.]
-	now the flash-grenade-timer of the player is 5;
-	now eyeless vision is adapted.
-
-Initial scheduling of israfel-blinds-eyeless-player: now the flash-grenade-timer of the player is 0.
-
-Initial scheduling of israfel-blinds-eyeless-monster:
-	now eyeless vision is not adapted;
-	now the flash-grenade-timer of the player is 0.
-	
-Regular scheduling of israfel-blinds-eyeless-monster: do the action of JB waiting for a 100 melee hit by Israfel.
-
-Testing effects of israfel-blinds-eyeless-monster: if we assert absence of result "flaming attack blinds", rule succeeds.
-
 [skipping test for AI concentrating in Phantasmagoria - how would we test that anyway?]
 
 [blindness:
 TODO: increase hiding roll if all enemies blind?
-./Kerkerkruip Monsters.i7x:An aftereffects rule (this is the Fell's blinding attack rule):
-./Kerkerkruip Monsters.i7x:		unless global defender is blind:
-./Kerkerkruip Monsters.i7x:				say "Fell's nails strike [regarding the global defender][possessive] eyes, [bold type]blinding[roman type] [them] for 3 turns.".
-./Kerkerkruip Monsters.i7x:The Nameless Horror is eyeless.
-./Kerkerkruip Monsters.i7x:The rotting corpse is eyeless.
-./Kerkerkruip Monsters.i7x:The abyss of the soul is eyeless.
-./Kerkerkruip Monsters.i7x:The mummified priest is eyeless.
-./Kerkerkruip Monsters.i7x:The smoke demon is eyeless.
 ./Kerkerkruip Systems - Hiding Smoke Ethereal.i7x:			unless guy is blind:
 ./Kerkerkruip Systems - Hiding Smoke Ethereal.i7x:9+ smoke: -3  because it cannot get worse than blindness
 ./Kerkerkruip Systems - Hiding Smoke Ethereal.i7x:[Some characters do not receive penalties for being in a room with smoke. Those who are eyeless, for instance, and those who are naturally immune to smoke. ]
