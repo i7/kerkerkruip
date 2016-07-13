@@ -328,35 +328,54 @@ Part - Complex attributes
 
 Chapter - Blindness
 
-A person can be blinded. A person is usually not blinded. [Blinded is a property that makes you blind. It can be cured.]
-
 A person can be eyeless. A person is usually not eyeless. [An eyeless person is blind but not negatively affected by blindness.]
 
-The blindness rules are a rulebook.
+Section - Perceptive
 
-To decide whether (guy - a person) is blind:
+[Perception rules determine whether a person can perceive reality with precision, whether they're using their eyes or not]
+The perception rules are a rulebook.
+
+To decide whether (guy - a person) is perceptive:
 	now test subject is guy;
-	follow the blindness rules;
-	if rule succeeded:
-		decide yes;
+	follow the perception rules;
+	if rule failed:
+		decide no;
 	otherwise:
-		decide no.
+		decide yes.
 
-A blindness rule (this is the blind if blinded rule):
-	if test subject is blinded:
-		rule succeeds.
-
-A blindness rule (this is the blind if eyeless rule):
+A perception rule (this is the perceptive if eyeless rule):
 	if test subject is eyeless:
 		rule succeeds.
-		
+
+Section - Eye-using
+
+[Vision rules determine whether a person is using their eyes currently. If they are, they are vulnerable to distractions, illusions, and blinding effects]
+The vision rules are a rulebook.
+
+To decide whether (guy - a person) is eye-using:
+	unless guy is perceptive:
+		no;
+	now test subject is guy;
+	follow the vision rules;
+	if rule failed:
+		decide no;
+	otherwise:
+		decide yes.
+
+A vision rule (this is the no vision if eyeless rule):
+	if test subject is eyeless:
+		rule fails.
+
+Section - Blindness Effects
+
 Status attribute rule (this is the blindness status rule):
-	if player is blind:
+	unless player is perceptive:
 		if long status is true:
 			say "You are [bold type]blind[roman type].[line break][run paragraph on]";
 		otherwise:
 			say "[@ check initial position of attribute]blind[run paragraph on]";
-	
+
+[I don't think there's any effect that can make the player eyeless - this is different from the eyeless vision adaptation]
 Status attribute rule (this is the eyeless status rule):
 	if player is eyeless:
 		if long status is true:
@@ -365,19 +384,19 @@ Status attribute rule (this is the eyeless status rule):
 			say "[@ check initial position of attribute]eyeless[run paragraph on]";
 
 An attack modifier rule (this is the blindness attack modifier rule):
-	if the global attacker is blind and the global attacker is not eyeless:
+	unless the global attacker is perceptive:
 		say " - 3 (blindness)[run paragraph on]";
 		decrease the attack strength by 3;
 
 An attack modifier rule (this is the blindness defence modifier rule):
-	if the global defender is blind and the global defender is not eyeless:
+	unless the global defender is perceptive:
 		say " + 2 (defender blind)[run paragraph on]";
 		increase the attack strength by 2;
 
 Chance to win rule (this is the CTW blindness bonus rule):
-	if the global attacker is blind and the global attacker is not eyeless:
+	unless the global attacker is perceptive:
 		decrease the chance-to-win by 3;
-	if the global defender is blind and the global defender is not eyeless:
+	unless the global defender is perceptive:
 		increase the chance-to-win by 2.
 
 Chapter - Being enraged
@@ -518,13 +537,13 @@ Definition: a person (called guy) is radiance-immune if ((guy is angelic) or (gu
 
 An attack modifier rule (this is the radiance attack bonus rule):
 	if the global attacker is radiant:
-		unless global defender is blind or global defender is radiance-immune:
+		if global defender is eye-using and global defender is not radiance-immune:
 			let n be radiation of global attacker;
 			if n is not 0:
 				say " + ", n, " (radiance)[run paragraph on]";
 				increase the attack strength by n;
 	if the global defender is radiant:
-		unless global attacker is blind or the global attacker is radiance-immune:
+		if global attacker is eye-using and the global attacker is not radiance-immune:
 			let n be radiation of global defender;
 			if n is not 0:
 				say " - ", n, " (radiance)[run paragraph on]";

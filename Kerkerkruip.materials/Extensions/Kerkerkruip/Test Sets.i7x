@@ -3599,12 +3599,12 @@ eyeless-reading	0	1
 sighted-reading	0	1
 
 Initial scheduling of blindness-goggles-work: equip the player with the goggles of blindness.
-Testing effects of blindness-goggles-work: if the player is blind, rule succeeds.
+Testing effects of blindness-goggles-work: unless the player is perceptive, rule succeeds.
 
 Initial scheduling of blindfold-works:
 	remove the goggles of blindness from play;
 	equip the player with the blindfold.
-Testing effects of blindfold-works: if the player is blind, rule succeeds.
+Testing effects of blindfold-works: unless the player is perceptive, rule succeeds.
 
 Definition: an outcome is illiteracy-testing if it is blind-reading or it is eyeless-reading or it is sighted-reading.
 
@@ -3700,7 +3700,7 @@ Initial scheduling of flash-eyeless-player:
 	
 Initial scheduling of flash-sighted-player: now eyeless vision is not adapted.
 
-testing effects of blind-when-flashed: if the player is blind, rule succeeds.
+testing effects of blind-when-flashed: unless the player is perceptive, rule succeeds.
 
 Section - Phantasmagoria Distractions
 
@@ -3749,32 +3749,46 @@ Section - Blindness Rules
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts
-player-blind	1	1
+player-blind	0	1
 player-blind-status	1	1
-eyeless-player-blind	1	1
-eyeless-player-status	0	1
-jumping-bomb-blind	1	1
+blind-player-vision	0	1
+blind-eyeless-player-perceptive	1	1
+blind-eyeless-player-vision	0	1
+eyeless-player-perceptive	1	1
+eyeless-player-vision	0	1
+eyeless-player-status	1	1
+sighted-player-perceptive	1	1
+sighted-player-vision	1	1
+jumping-bomb-perceptive	1	1
+jumping-bomb-not-eye-using	1	1
+compassion-perceptive	1	1
+compassion-eye-using	1	1
+
+Definition: an outcome is perception-testing if it is player-blind or it is eyeless-player-perceptive or it is sighted-player-perceptive.
+
+Definition: an outcome is vision-testing if it is blind-player-vision or it is eyeless-player-vision or it is sighted-player-vision.
 
 Initial scheduling of player-blind: now the flash-grenade-timer of the player is 5.
-Testing effects of player-blind: if the player is blind, rule succeeds.
+
+Testing effects of a perception-testing outcome: if the player is perceptive, rule succeeds.
+Testing effects of a vision-testing outcome: if the player is eye-using, rule succeeds.
 
 regular scheduling of player-blind-status: try asking status.
 Testing effects of player-blind-status: if we assert result "You are blind", rule succeeds.
 
-Initial scheduling of eyeless-player-blind:
-	now the flash-grenade-timer of the player is 0;
-	now eyeless vision is adapted.
-
-Testing effects of eyeless-player-blind: if the player is blind, rule succeeds.
-
-[
-There's no way currently to give the player the eyeless attribute, which is what this represents. The eyeless vision adaptation is described elsewhere.
+Initial scheduling of blind-eyeless-player-perceptive: now eyeless vision is adapted.
+Initial scheduling of eyeless-player-perceptive: now the flash-grenade-timer of the player is 0.
+Initial scheduling of sighted-player-perceptive: now eyeless vision is not adapted.
 
 regular scheduling of eyeless-player-status: try asking status.
-Testing effects of eyeless-player-status: if we assert result "You do not need eyes to perceive your surroundings", rule succeeds.]
+Testing effects of eyeless-player-status: if we assert result "You do not need eyes to perceive your surroundings", rule succeeds.
 
-Initial scheduling of jumping-bomb-blind: now eyeless vision is not adapted.
-Testing effects of jumping-bomb-blind: if the jumping bomb is blind, rule succeeds.
+Testing effects of jumping-bomb-perceptive: if the jumping bomb is perceptive, rule succeeds.
+Testing effects of jumping-bomb-not-eye-using: unless the jumping bomb is eye-using, rule succeeds.
+Testing effects of compassion-perceptive: if the angel of compassion is perceptive, rule succeeds.
+Testing effects of compassion-eye-using: if the angel of compassion is eye-using, rule succeeds.
+
+[TODO: test for number of perceiving enemies]
 
 Section - Resizing salves
 

@@ -878,9 +878,10 @@ Check reading a not readable thing (this is the can only read readable things ru
 	take no time;
 	say "You cannot read that." instead.
 
-Check reading when the player is blind (this is the cannot read when blind rule):
-	take no time;
-	say "[The noun] has not been written in braille." instead.
+Check reading (this is the cannot read when blind rule):
+	unless the player is perceptive:
+		take no time;
+		say "[The noun] has not been written in braille." instead.
 
 
 Chapter - Taking from sleepers
@@ -1017,9 +1018,9 @@ Carry out requesting the story file version:
 
 Chapter - Replacing "You can see" in case the player is blind
 
-The you-can-also-see rule response (D) is "[regarding the player][can] also [run paragraph on][unless player is blind]see[otherwise]feel[end if] ".
+The you-can-also-see rule response (D) is "[regarding the player][can] also [run paragraph on][if player is perceptive]see[otherwise]feel[end if] ".
 
-The you-can-also-see rule response (E) is "[regarding the player][can] [run paragraph on][unless player is blind]see[otherwise]feel[end if] ".
+The you-can-also-see rule response (E) is "[regarding the player][can] [run paragraph on][if player is perceptive]see[otherwise]feel[end if] ".
 
 Chapter - Whether all includes
 

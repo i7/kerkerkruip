@@ -1340,9 +1340,9 @@ The blindfold is a minor mask. The description of the blindfold is "Wearing this
 The blindfold is civilised.
 The blindfold is cloth.
 
-A blindness rule (this is the blindfold rule):
+A perception rule (this is the blindfold rule):
 	if the test subject wears the blindfold:
-		rule succeeds.
+		rule fails.
 
 Section - Goggles of acuity (major)
 
@@ -1360,14 +1360,16 @@ A faculty bonus rule (this is the faculty bonus of the goggles of acuity rule):
 
 The description of the goggles of acuity is "These goggles have been magically enchanted to make the wearer more aware of anything that happens around him. They were originally made for the marquis of Savon, who wasted his eyes poring over ancient tomes in his ill-lit library, but their use extends far beyond that of reading glasses. [italic type](They grant a +1 bonus to body, mind and spirit.)[roman type]".
 
+[TODO: these goggles only work if the player is eye-using? Make goggles of blindness do the same for eyeless players]
+
 Section - Goggles of blindness (cursed)
 
 The goggles of blindness are a cursed curse-identified mask. They are plural-named. The indefinite article is "the". 
 The goggles of blindness are leather.
 
-A blindness rule (this is the goggles of blindness rule):
+A perception rule (this is the goggles of blindness rule):
 	if the test subject wears the goggles of blindness:
-		rule succeeds.
+		rule fails.
 
 The description of goggles of blindness is "These goggles prevent the wearer from seeing anything at all. A free-for-all fight between condemned criminals forced to wear such goggles is one of the most beloved shows during the Feast of Flesh; you smile as you recall the spectacle.".
 
@@ -1733,7 +1735,7 @@ Every turn (this is the recover from flash rule):
 	if the flash-grenade-timer of the main actor is greater than 0:
 		decrease flash-grenade-timer of the main actor by 1;
 		if flash-grenade-timer of the main actor is 0:
-			unless main actor is blind:
+			if the main actor is eye-using:
 				if the main actor is alive:
 					if the location of the main actor is the location of the player:
 						if the main actor is conscious:
@@ -1741,9 +1743,9 @@ Every turn (this is the recover from flash rule):
 						otherwise:
 							say "[regarding the main actor][Possessive] [bold type]eyes function again[roman type].".
 				
-A blindness rule (this is the blind if flashed rule):
+A perception rule (this is the blind if flashed rule):
 	if flash-grenade-timer of test subject is greater than 0:
-		rule succeeds.				
+		rule fails.				
 
 A reviving rule for a person (called guy) (this is the reset flash grenade timer when reviving rule):
 	now the flash-grenade-timer of the guy is 0;
@@ -1758,7 +1760,7 @@ An exploding rule (this is the flash grenade explodes rule):
 		otherwise:
 			let lijst be a list of person;
 			repeat with guy running through alive persons in exploding-location:
-				unless guy is blind:
+				if guy is eye-using:
 					let n be 15;
 					decrease n by (final body of guy / 3);
 					unless guy is smoke immune:
@@ -4296,10 +4298,6 @@ Instead of drinking vial of purification:
 			now m is 1;
 		if m is 1:
 			say "The waters purify you of all undead influences.";
-			now n is 1;
-		if the player is blinded:
-			now the player is not blinded;
-			say "The waters cure you of your blindness.";
 			now n is 1;
 		if disintegrating flesh is adapted:
 			unmutate disintegrating flesh;

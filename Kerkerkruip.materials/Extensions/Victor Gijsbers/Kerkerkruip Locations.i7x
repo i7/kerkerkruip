@@ -56,7 +56,7 @@ The red light is scenery in Entrance Hall. The description of the red light is "
 
 An attack modifier rule (this is the attack penalty in Entrance Hall rule):
 	if the location is Entrance Hall:
-		unless the global attacker is blind:
+		if the global attacker is eye-using:
 			let n be 2 minus the smoke penalty of Entrance Hall;
 			if n is greater than 0:
 				say " - [n] (blinding light)[run paragraph on]";
@@ -72,7 +72,7 @@ The map-label of Entrance Hall is Figure of map_label_Entrance.
 
 Chapter - Hall of Mirrors
 
-The hall of mirrors is a room. "Mirrors surround you on all sides in an impossible geometry[run paragraph on][unless the player is blind]. Myriad reflections follow your every movement -- though some, always in the corner of your eyes, seem to behave differently[end if]."
+The hall of mirrors is a room. "Mirrors surround you on all sides in an impossible geometry[run paragraph on][if the player is eye-using]. Myriad reflections follow your every movement -- though some, always in the corner of your eyes, seem to behave differently[end if]."
 
 Hall of Mirrors is habitable.
 Hall of Mirrors is connectable.
@@ -99,11 +99,11 @@ Fragmentation rule (this is the hall of mirrors fragmentation rule):
 
 After printing the name of something while looking when the location is the Hall of Mirrors:
 	say "[run paragraph on]";
-	unless the player is blind:
+	if the player is eye-using:
 		say " [one of](reflected thousandfold)[or](mirrored all around you)[or](copied and copied by mirrors)[or](multiplied ad infinitum)[at random]".
 
 Check an actor hitting when the location is Hall of Mirrors (this is the sometimes attack a mirror image in Hall of Mirrors rule):
-	unless the global attacker is blind:
+	if the global attacker is eye-using:
 		unless the global attacker grapples the global defender:
 			unless the global defender grapples the global attacker:
 				unless reflection-attack is true:
@@ -130,7 +130,7 @@ The map-label of Hall of Mirrors is Figure of map_label_Mirrors.
 
 Chapter - Phantasmagoria
 
-The phantasmagoria is a room. "This huge hall is filled with the radiant images of warriors long dead, fighting their bloody battles over and over again.[run paragraph on][unless the player is blind] You see [phantasmagoria show] -- but the scene changes before you can focus on any details.[run paragraph on][end if]"
+The phantasmagoria is a room. "This huge hall is filled with the radiant images of warriors long dead, fighting their bloody battles over and over again.[run paragraph on][if the player is eye-using] You see [phantasmagoria show] -- but the scene changes before you can focus on any details.[run paragraph on][end if]"
 
 Phantasmagoria is connectable.
 Phantasmagoria is not connection-inviting.
@@ -173,7 +173,7 @@ Every turn when the location is the phantasmagoria and the combat status is not 
 	if a random chance of 1 in n succeeds:
 		let lijst be a list of persons;
 		repeat with guy running through alive persons enclosed by the location:
-			unless guy is blind:
+			if guy is eye-using:
 				if concentration of guy is greater than 0:
 					if a random number between 1 and 5 is greater than the concentration of guy:
 						add guy to lijst;
@@ -181,7 +181,7 @@ Every turn when the location is the phantasmagoria and the combat status is not 
 		say "Suddenly, [one of]a disintegrating skeletal warrior appears[or]a blast of dragon's fire appears[or]a naked male slave appears, screaming in fear[or]a naked female slave appears, fleeing in tears[or]a huge fountain of fire appears[or]a crashing ballista bolt appears[or]a drowning knight appears, crying for his god[or]a ghost appears, devouring the flesh of a still living man[or]a frenzied bull elephant appears[or]a shrieking princess appears in the claws of a demon[or]an obese king carried by seven blind eunuchs appears[or]a newly reanimated soldier appears, taking a blow for his necromancing comrade[at random]. [unless lijst is empty]While only an image that flickers and then disappears, it [bold type]startles [lijst with definite articles][roman type][otherwise]The illusions do not affect anyone[end if].".
 
 An AI action selection rule for a person (called P) when the location is Phantasmagoria (this is the concentration is often futile in Phantasmagoria rule):
-	unless P is blind:
+	if P is eye-using:
 		choose row with an Option of the action of P concentrating in the Table of AI Action Options;
 		decrease the Action Weight entry by 2 times the concentration of P.
 

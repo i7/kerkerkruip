@@ -2185,8 +2185,12 @@ A flying rule (this is the wings flying rule):
 
 Section - Eyeless vision
 
-First blindness rule (this is the not blind if darkvision rule):
+First perception rule (this is the perceptive if darkvision rule):
 	if test subject is player and eyeless vision is adapted:
+		rule succeeds.
+		
+First vision rule (this is the eyeless if darkvision rule):
+	if test subject is the player and eyeless vision is adapted:
 		rule fails.
 
 Section - Pseudopods

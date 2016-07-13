@@ -83,7 +83,7 @@ A detection rule (this is the number of enemies increases probability of detecti
 	let n be 0;
 	repeat with guy running through people in the location:
 		if guy opposes the player:
-			unless guy is blind:
+			unless guy is perceptive:
 				unless guy is asleep:
 					increase n by 1;
 	if n is not 0:
@@ -294,7 +294,7 @@ A smoke immunity rule (this is the smoke immune if smoke attuned rule):
 		rule succeeds.
 
 A smoke immunity rule (this is the smoke immune if eyeless rule):
-	if test subject is blind:
+	unless test subject is eye-using:
 		rule succeeds.
 
 

@@ -226,9 +226,9 @@ Understand "smite [something]" as smiting.
 
 A person can be smiter.
 
-A blindness rule (this is the smiting is blind rule):
+A vision rule (this is the smiting is eyeless rule):
 	if test subject is smiter:
-		rule succeeds.
+		rule fails.
 
 Carry out an actor smiting:
 	Now the actor is smiter;
