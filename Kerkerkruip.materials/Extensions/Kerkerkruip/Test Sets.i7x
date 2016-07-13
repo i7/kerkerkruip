@@ -3752,7 +3752,7 @@ outcome	likelihood	minimum attempts
 player-blind	1	1
 player-blind-status	1	1
 eyeless-player-blind	1	1
-eyeless-player-status	1	1
+eyeless-player-status	0	1
 jumping-bomb-blind	1	1
 
 Initial scheduling of player-blind: now the flash-grenade-timer of the player is 5.
