@@ -2750,18 +2750,36 @@ Testing effects of eyeless-monster-defend: if we assert absence of result "\(def
 
 [skipping test for AI concentrating in Phantasmagoria - how would we test that anyway?]
 
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts
+blind-smoke-attack	0	1
+blind-eyeless-player-smoke-attack	0	1
+eyeless-player-smoke-attack	0	1
+sighted-smoke-attack	1	1
+eyeless-monster-smoke-attack	1	1
+
+Definition: an outcome is blindness-smoke-attack-checking if it is blind-smoke-attack or it is blind-eyeless-player-smoke-attack or it is eyeless-player-smoke-attack or it is sighted-smoke-attack.
+
+Regular scheduling of a blindness-smoke-attack-checking outcome: Do the action of the JB waiting for a 0 melee hit by the player.
+Testing effects of blindness-smoke-attack-checking outcome: If we assert result "- 2 \(smoke\)", rule succeeds.
+
+Initial scheduling of blind-smoke-attack:
+	prepare a test battle with the jumping bomb;
+	now the smoke timer of the location is 8;
+	equip the player with the blindfold.
+
+Initial scheduling of blind-eyeless-player-smoke-attack: now eyeless vision is adapted.
+
+Initial scheduling of eyeless-player-smoke-attack: remove the blindfold from play.
+
+Initial scheduling of sighted-smoke-attack: now eyeless vision is not adapted.
+
+Regular scheduling of eyeless-monster-smoke-attack: do the action of waiting for a 0 melee hit by JB.
+
+Testing effects of eyeless-monster-smoke-attack: if we assert absence of result "\(smoke\)", rule succeeds.
+
 [blindness:
 TODO: increase hiding roll if all enemies blind?
-./Kerkerkruip Systems - Hiding Smoke Ethereal.i7x:			unless guy is blind:
-./Kerkerkruip Systems - Hiding Smoke Ethereal.i7x:9+ smoke: -3  because it cannot get worse than blindness
-./Kerkerkruip Systems - Hiding Smoke Ethereal.i7x:[Some characters do not receive penalties for being in a room with smoke. Those who are eyeless, for instance, and those who are naturally immune to smoke. ]
-./Kerkerkruip Systems - Hiding Smoke Ethereal.i7x:A smoke immunity rule (this is the smoke immune if eyeless rule):
-./Kerkerkruip Systems - Hiding Smoke Ethereal.i7x:	if test subject is blind:
-./Kerkerkruip Systems.i7x:eyeless vision	"You gain the ability to [bold type]see without eyes[roman type]!"	"You lose your eyeless vision."
-./Kerkerkruip Systems.i7x:Section - Eyeless vision
-./Kerkerkruip Systems.i7x:First blindness rule (this is the not blind if darkvision rule):
-./Kerkerkruip Systems.i7x:	if test subject is player and eyeless vision is adapted:
-./Kerkerkruip Tests.i7x:A blindness rule (this is the smiting is blind rule):
 ]
 
 Section - Damage Modifiers
