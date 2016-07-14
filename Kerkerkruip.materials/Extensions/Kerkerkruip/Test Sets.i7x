@@ -3781,7 +3781,7 @@ Initial scheduling of eyeless-player-perceptive: now the flash-grenade-timer of 
 Initial scheduling of sighted-player-perceptive: now eyeless vision is not adapted.
 
 regular scheduling of eyeless-player-status: try asking status.
-Testing effects of eyeless-player-status: if we assert result "You do not need eyes to perceive your surroundings", rule succeeds.
+Testing effects of eyeless-player-status: if we assert result "Your altered body has eyeless vision", rule succeeds.
 
 Testing effects of jumping-bomb-perceptive: if the jumping bomb is perceptive, rule succeeds.
 Testing effects of jumping-bomb-not-eye-using: unless the jumping bomb is eye-using, rule succeeds.
