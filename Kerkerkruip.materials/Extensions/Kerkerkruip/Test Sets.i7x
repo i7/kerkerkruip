@@ -3664,7 +3664,7 @@ outcome	likelihood	minimum attempts
 flash-blindfolded	0	1
 flash-sighted-monster	1	1
 flash-eyeless-monster	1	1
-flash-eyeless-player	1	1
+flash-eyeless-player	0	1
 flash-sighted-player	1	1
 blind-when-flashed	1	1
 
@@ -3764,9 +3764,9 @@ jumping-bomb-not-eye-using	1	1
 compassion-perceptive	1	1
 compassion-eye-using	1	1
 
-Definition: an outcome is perception-testing if it is player-blind or it is eyeless-player-perceptive or it is sighted-player-perceptive.
+Definition: an outcome is perception-testing if it is player-blind or it is blind-eyeless-player-perceptive or it is eyeless-player-perceptive or it is sighted-player-perceptive.
 
-Definition: an outcome is vision-testing if it is blind-player-vision or it is eyeless-player-vision or it is sighted-player-vision.
+Definition: an outcome is vision-testing if it is blind-player-vision or it is blind-eyeless-player-vision or it is eyeless-player-vision or it is sighted-player-vision.
 
 Initial scheduling of player-blind: now the flash-grenade-timer of the player is 5.
 
