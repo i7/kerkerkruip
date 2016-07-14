@@ -1360,7 +1360,7 @@ A faculty bonus rule (this is the faculty bonus of the goggles of acuity rule):
 
 The description of the goggles of acuity is "These goggles have been magically enchanted to make the wearer more aware of anything that happens around him. They were originally made for the marquis of Savon, who wasted his eyes poring over ancient tomes in his ill-lit library, but their use extends far beyond that of reading glasses. [italic type](They grant a +1 bonus to body, mind and spirit.)[roman type]".
 
-[TODO: these goggles only work if the player is eye-using? Make goggles of blindness do the same for eyeless players]
+[TODO: these goggles only work if the player is using eyes? Make goggles of blindness do the same for eyeless players]
 
 Section - Goggles of blindness (cursed)
 
@@ -1735,7 +1735,7 @@ Every turn (this is the recover from flash rule):
 	if the flash-grenade-timer of the main actor is greater than 0:
 		decrease flash-grenade-timer of the main actor by 1;
 		if flash-grenade-timer of the main actor is 0:
-			if the main actor is eye-using:
+			if the main actor is using eyes:
 				if the main actor is alive:
 					if the location of the main actor is the location of the player:
 						if the main actor is conscious:
@@ -1760,7 +1760,7 @@ An exploding rule (this is the flash grenade explodes rule):
 		otherwise:
 			let lijst be a list of person;
 			repeat with guy running through alive persons in exploding-location:
-				if guy is eye-using:
+				if guy is using eyes:
 					let n be 15;
 					decrease n by (final body of guy / 3);
 					unless guy is smoke immune:

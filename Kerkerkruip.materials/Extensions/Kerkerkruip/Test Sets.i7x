@@ -3771,7 +3771,7 @@ Definition: an outcome is vision-testing if it is blind-player-vision or it is b
 Initial scheduling of player-blind: now the flash-grenade-timer of the player is 5.
 
 Testing effects of a perception-testing outcome: if the player is perceptive, rule succeeds.
-Testing effects of a vision-testing outcome: if the player is eye-using, rule succeeds.
+Testing effects of a vision-testing outcome: if the player is using eyes, rule succeeds.
 
 regular scheduling of player-blind-status: try asking status.
 Testing effects of player-blind-status: if we assert result "You are blind", rule succeeds.
@@ -3784,9 +3784,9 @@ regular scheduling of eyeless-player-status: try asking status.
 Testing effects of eyeless-player-status: if we assert result "Your altered body has eyeless vision", rule succeeds.
 
 Testing effects of jumping-bomb-perceptive: if the jumping bomb is perceptive, rule succeeds.
-Testing effects of jumping-bomb-not-eye-using: unless the jumping bomb is eye-using, rule succeeds.
+Testing effects of jumping-bomb-not-eye-using: unless the jumping bomb is using eyes, rule succeeds.
 Testing effects of compassion-perceptive: if the angel of compassion is perceptive, rule succeeds.
-Testing effects of compassion-eye-using: if the angel of compassion is eye-using, rule succeeds.
+Testing effects of compassion-eye-using: if the angel of compassion is using eyes, rule succeeds.
 
 [TODO: test for number of perceiving enemies]
 

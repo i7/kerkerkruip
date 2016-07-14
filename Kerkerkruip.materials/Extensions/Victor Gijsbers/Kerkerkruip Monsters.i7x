@@ -4652,7 +4652,7 @@ Section - Israfel's attack
 
 An aftereffects rule (this is the Israfel's blinding attack rule):
 	if the global attacker is Israfel and total damage is greater than 0 and global defender is alive:
-		if global defender is eye-using:
+		if global defender is using eyes:
 			unless flash-grenade-timer of global defender > 6:
 				now flash-grenade-timer of global defender is 6;
 				say "Israfel's flaming attack [bold type]blinds[roman type] [the global defender].".
@@ -4843,7 +4843,7 @@ Section - Fell specials and AI
 
 An aftereffects rule (this is the Fell's blinding attack rule):
 	if the global attacker is Fell and total damage is greater than 0 and global defender is alive:
-		if global defender is eye-using:
+		if global defender is using eyes:
 			unless flash-grenade-timer of global defender > 3:
 				now flash-grenade-timer of global defender is 3;
 				say "Fell's nails strike [regarding the global defender][possessive] eyes, [bold type]blinding[roman type] [them] for 3 turns.".

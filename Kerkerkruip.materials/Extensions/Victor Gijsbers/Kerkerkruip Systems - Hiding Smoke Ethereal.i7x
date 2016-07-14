@@ -294,7 +294,7 @@ A smoke immunity rule (this is the smoke immune if smoke attuned rule):
 		rule succeeds.
 
 A smoke immunity rule (this is the smoke immune if eyeless rule):
-	unless test subject is eye-using:
+	unless test subject is using eyes:
 		rule succeeds.
 
 

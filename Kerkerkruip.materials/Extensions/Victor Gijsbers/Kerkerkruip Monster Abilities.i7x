@@ -347,12 +347,12 @@ A perception rule (this is the perceptive if eyeless rule):
 	if test subject is eyeless:
 		rule succeeds.
 
-Section - Eye-using
+Section - using eyes
 
 [Vision rules determine whether a person is using their eyes currently. If they are, they are vulnerable to distractions, illusions, and blinding effects]
 The vision rules are a rulebook.
 
-To decide whether (guy - a person) is eye-using:
+To decide whether (guy - a person) is using eyes:
 	unless guy is perceptive:
 		no;
 	now test subject is guy;
@@ -537,13 +537,13 @@ Definition: a person (called guy) is radiance-immune if ((guy is angelic) or (gu
 
 An attack modifier rule (this is the radiance attack bonus rule):
 	if the global attacker is radiant:
-		if global defender is eye-using and global defender is not radiance-immune:
+		if global defender is using eyes and global defender is not radiance-immune:
 			let n be radiation of global attacker;
 			if n is not 0:
 				say " + ", n, " (radiance)[run paragraph on]";
 				increase the attack strength by n;
 	if the global defender is radiant:
-		if global attacker is eye-using and the global attacker is not radiance-immune:
+		if global attacker is using eyes and the global attacker is not radiance-immune:
 			let n be radiation of global defender;
 			if n is not 0:
 				say " - ", n, " (radiance)[run paragraph on]";
