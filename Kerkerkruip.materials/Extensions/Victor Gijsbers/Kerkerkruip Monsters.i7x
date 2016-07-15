@@ -155,6 +155,13 @@ A last reviving rule for a person (called guy) (this is the re-equip when revivi
 		unless the original owner of item is guy, remove item from play;
 	set up a kit for guy.
 	
+Chapter - Ability Cooldowns
+
+To decide what number is a/the/-- cooldown with max (m - a number) scaled by (k - a number):
+	Let n be m - (final spirit of the player / k);
+	if n < 0, decide on 0;
+	decide on n.
+	
 Chapter - Level 1 - Swarm of Daggers
 
 Section - Definitions
@@ -328,9 +335,7 @@ Check piercing:
 
 Carry out piercing:
 	now the player is at-pierce;
-	let n be the final spirit of the player divided by 3;
-	let o be 12 minus n;
-	now pierce-cooldown is o;
+	now pierce-cooldown is a cooldown with max 12 scaled by 3;
 	try the actor attacking the noun instead.
 
 An add specific damage rule (this is the more damage when piercing rule):
@@ -783,9 +788,7 @@ Check scaling:
 Carry out scaling:
 	say "Hard scales appear all over your body.[paragraph break]";
 	now the player is at-scale;
-	let n be 10;
-	decrease n by final spirit of the player divided by 4;
-	now scales-cooldown is n.
+	now scales-cooldown is a cooldown with max 10 scaled by 4.
 	
 Aftereffects rule (this is the remove at-scale rule):
 	now the global defender is not at-scale.
@@ -1085,7 +1088,7 @@ Tormenting is an action applying to nothing. Understand "torment" as tormenting.
 
 Carry out an actor tormenting:
 	if actor is the player:
-		now torment-cooldown is 12 - final spirit of the player / 3;
+		now torment-cooldown is a cooldown with max 12 scaled by 3;
 	let lijst be a list of persons;
 	repeat with guy running through alive persons enclosed by the location:
 		if concentration of guy is greater than 0:
@@ -1388,7 +1391,7 @@ Check lashing:
 
 Carry out an actor lashing:
 	if the actor is the player:
-		now lash-cooldown is 10 - final spirit of the player / 5;
+		now lash-cooldown is a cooldown with max 10 scaled by 5;
 	choose a blank row in the Table of Delayed Actions;
 	let n be 10 - final spirit of the actor / 4;
 	let m be a random number between n and 12;
@@ -2796,7 +2799,7 @@ Carry out enslaving:
 					blank out the whole row;
 		now concentration of the noun is 0;
 	now concentration of the player is 0;
-	now enslave-cooldown is 9 - (final spirit of the player / 3).
+	now enslave-cooldown is a cooldown with max 9 scaled by 3.
 
 To say master:
 	if the player is male:
