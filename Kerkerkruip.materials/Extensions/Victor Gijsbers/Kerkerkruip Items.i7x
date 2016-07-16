@@ -163,20 +163,20 @@ After readying something cursed:
 	now the noun is curse-identified.
 
 Check readying (this is the cannot ready when holding a cursed weapon rule):
-	if the player has a readied cursed weapon:
-		let item be a random readied cursed weapon had by the player;
+	if the player wields a cursed weapon:
+		let item be a random cursed weapon wielded by the player;
 		say "You cannot ready a new weapon until you have gotten rid of [the item]." instead.
 
 Check dropping (this is the cannot drop a cursed readied weapon rule):
-	if the noun is a readied cursed weapon had by the player:
+	if the noun is a readied cursed weapon wielded by the player:
 		say "You cannot let go of [the noun]." instead.
 
 Check putting it on (this is the cannot put on a cursed readied weapon rule):
-	if the noun is a readied cursed weapon had by the player:
+	if the noun is a cursed weapon wielded by the player:
 		say "You cannot let go of [the noun]." instead.
 		
 Check inserting it into (this is the cannot insert a cursed readied weapon rule):
-	if the noun is a readied cursed weapon had by the player:
+	if the noun is a cursed weapon wielded by the player:
 		say "You cannot let go of [the noun]." instead.
 
 A treasure placement rule:
@@ -443,8 +443,8 @@ Last check wearing a belt:
 		say "You will first have to take off [the item]." instead. 
 		
 Last check wearing gauntlets:
-	if the player encloses at least one cursed readied weapon:
-		let item be a random cursed readied weapon enclosed by the player;
+	if the player wields at least one cursed weapon:
+		let item be a random cursed weapon wielded by the player;
 		take no time;
 		say "You will first have to uncurse [the item]." instead;
 	if the player wears gauntlets:
@@ -454,8 +454,8 @@ Last check wearing gauntlets:
 	[abide by the suit check rule]. 
 
 Last check taking off gauntlets:
-	if the player encloses at least one cursed readied weapon:
-		let item be a random cursed readied weapon enclosed by the player;
+	if the player wields at least one cursed weapon:
+		let item be a random cursed weapon wielded by the player;
 		take no time;
 		say "You will first have to uncurse [the item]." instead.
 				
@@ -1311,7 +1311,7 @@ Last aftereffects rule (this is the greasy gauntlets rule):
 				do the grease drop with the global defender.
 
 To do the grease drop with (guy - a person):
-	let item be a random readied weapon enclosed by guy;
+	let item be the current weapon of guy;
 	unless item is a natural weapon:
 		now item is not readied;
 		move item to the location of guy;
@@ -2474,7 +2474,7 @@ Every turn when the adamantine blade is not off-stage (this is the adamantine bl
 		if adamantine blade is worldsharer:
 			now adamantine blade timer is adamantine blade timer minus 1;
 			if the adamantine blade timer is less than 1:
-				if the adamantine blade is enclosed by the player and the adamantine blade is readied:
+				if the player wields the adamantine blade:
 					say "The adamantine blade [bold type]vanishes[roman type] as suddenly as it appeared!";
 				otherwise if the adamantine blade is visible:
 					say "The adamantine blade suddenly vanishes.";
@@ -2716,7 +2716,7 @@ The plural of scroll of enchantment is scrolls of enchantment.
 
 
 Carry out reading a scroll of enchantment (this is the basic weapon enchantment rule):
-	let item be a random readied weapon enclosed by the player;
+	let item be the current weapon of the player;
 	if item is a natural weapon:
 		say "You aren't wielding a weapon, so the scroll of enchantment fizzles.";
 	otherwise:
@@ -3120,6 +3120,15 @@ Carry out reading the ancient papyrus:
 
 Part - Weapons
 
+Chapter - Wielding
+
+Weapon-readying relates a person (called the wielder) to a weapon (called the item) when the item is readied and the wielder encloses the item.
+
+The verb to wield means the weapon-readying relation.
+
+To decide which object is the current weapon of (guy - a person):
+	decide on a random weapon wielded by guy.
+
 Chapter - Sword
 
 A sword is a kind of weapon. 
@@ -3184,20 +3193,20 @@ Section - Singing sword (cursed)
 The singing sword is a cursed curse-identified sword. The description of the singing sword is "When you wield it, this sword hums all the time, and sometimes breaks out into song. This will make it hard to hide. You wonder how Mouser tamed it...".
 
 Every turn (this is the singing sword fun rule):
-	if the singing sword is readied and the player is the main actor and the player encloses the singing sword:
+	if the player is the main actor and the player wields the singing sword:
 		if the combat status is peace or the singing sword is not tamed:
 			if a random chance of 1 in 15 succeeds:
 				say "'[one of]We are the champions![run paragraph on][or]Who wants to live forever?[run paragraph on][or]Stay true to your dungeon.[run paragraph on][or]We don't need no teleportation![run paragraph on][or]O, the wars, they will be fought again.[run paragraph on][or]I'll take you to the candy shop.[run paragraph on][or]I wanna take a ride on your disco stick![run paragraph on][as decreasingly likely outcomes]' sings your sword.[line break][paragraph break]"
 
 Detection rule (this is the singing sword detection rule):
-	if the singing sword is readied and the player encloses the singing sword and the singing sword is not tamed:
+	if the player wields the singing sword and the singing sword is not tamed:
 		say " - 5 (singing sword)[run paragraph on]";
 		decrease the hiding roll by 5.
 
 The singing sword can be tamed. The singing sword is not tamed.
 The singing contest is a number that varies. The singing contest is 0.
 
-Instead of singing when the player encloses the readied not tamed singing sword:
+Instead of singing when the player wields the not tamed singing sword:
 	if singing contest is 0:
 		say "You start singing a soft tune. 'Ha, is that the best you can do?' your sword asks. 'Beat this!' And he breaks out in a loud and boisterous battle song.";
 	if singing contest is 1:
@@ -3240,7 +3249,7 @@ The holy sword is a sword. The description of the holy sword is "This sword shin
 The special weapon info of the holy sword is "; deals extra damage to undead and demons; shines with light, making it harder to hide[run paragraph on]".
 
 Detection rule (this is the holy sword detection rule):
-	if the holy sword is readied and the player encloses the holy sword:
+	if the player wields the holy sword:
 		say " - 2 (holy sword)[run paragraph on]";
 		decrease the hiding roll by 2.
 
@@ -3272,7 +3281,7 @@ The demon blade is cursed.
 The internal heat of the demon blade is 4.
 
 Check attacking (this is the attacking with the demon blade is a bad idea rule):
-	if the player carries the demon blade and the demon blade is readied:
+	if the player wields the demon blade:
 		if a random chance of 3 in 5 succeeds:
 			say "The [bold type]demonic blade[roman type] turns on you!";
 			try the player hitting the player instead;
@@ -3466,7 +3475,7 @@ Last after reporting an actor hitting (this is the hit again with the dagger of 
 
 This is the special dagger of double strike rule:
 	if the main actor is the player:
-		if the dagger of double strike is readied and the player encloses the dagger of the double strike:
+		if the player wields the dagger of double strike:
 			if making-double-strike is false:
 				if the player is alive and the noun is alive:
 					now making-double-strike is true;
@@ -3623,7 +3632,7 @@ The description of the fearsome axe is "While not exactly a nimble weapon, this 
 To cower is a verb.
 
 Last carry out an actor attacking (this is the fearsome axe rule):
-	if the actor encloses the fearsome axe and the fearsome axe is readied and the noun is conscious:
+	if the actor wields the fearsome axe and the noun is conscious:
 		let n be the final mind of the actor;
 		decrease n by the final mind of the noun;
 		if n is greater than 0:
@@ -3649,7 +3658,7 @@ The description of the fearful axe is "While not exactly a nimble weapon, this a
 The special weapon info of the fearful axe is "; makes the wielder a coward[run paragraph on]".
 
 Last check an actor attacking (this is the fearful axe rule):
-	if the actor encloses the fearful axe and the fearful axe is readied:
+	if the actor wields the fearful axe:
 		let n be (20 - final mind of the actor);
 		if n is greater than 0:
 			if a random chance of n in 100 succeeds:
@@ -3857,15 +3866,15 @@ The weapon attack bonus of the was sceptre is 0.
 The weapon damage bonus of the was sceptre is 0.
 
 A body bonus rule (this is the body penalty of the was sceptre rule):
-	if the test subject carries the readied was sceptre:
+	if the test subject wields the was sceptre:
 		decrease faculty bonus score by 2.
 
 A mind bonus rule (this is the mind penalty of the was sceptre rule):
-	if the test subject carries the readied was sceptre:
+	if the test subject wields the was sceptre:
 		decrease faculty bonus score by 2.
 
 A spirit bonus rule (this is the spirit bonus of the was sceptre rule):
-	if the test subject carries the readied was sceptre:
+	if the test subject wields the was sceptre:
 		increase faculty bonus score by 4.
 
 Section - Caduceus  (epic)
@@ -3905,15 +3914,15 @@ Aftereffects rule (this is the staff of insanity makes people insane rule):
 			now faction of the global defender is insane.
 
 An attack modifier rule (this is the staff of insanity weakens the wielder rule):
-	if the global defender encloses the staff of insanity and the staff of insanity is readied:
+	if the global defender wields the staff of insanity:
 		say " + 2 (defender wields staff of insanity)[run paragraph on]";
 		increase the attack strength by 2;
-	if the global attacker encloses the staff of insanity and the staff of insanity is readied:
+	if the global attacker wields the staff of insanity:
 		say " - 2 (attacker wields staff of insanity)[run paragraph on]";
 		decrease the attack strength by 2.	
 
 A faculty bonus rule (this is the staff of insanity faculty penalty rule):
-	if the test subject encloses the staff of insanity and the staff of insanity is readied:
+	if the test subject wields the staff of insanity:
 		decrease faculty bonus score by 3.
 
 
@@ -3990,10 +3999,10 @@ An aftereffects rule (this is the spiked mace grows rule):
 			if spiked-mace-blood is less than 12:
 				say "The spiked mace of the ape king grows!"
 				
-The basic weapon enchantment rule does nothing when the spiked mace of the ape king is readied.
+The basic weapon enchantment rule does nothing when the player wields the spiked mace of the ape king.
 
 Carry out reading a scroll of enchantment (this is the enchanment grows spiked mace rule):
-	if the spiked mace of the ape king is readied:
+	if the player wields the spiked mace of the ape king:
 		increase spiked-mace-blood by 1;
 		set stats for the spiked mace of the ape king;
 		if spiked-mace-blood is less than 12:
@@ -4050,7 +4059,7 @@ Aftereffects rule (this is the Malleus blood spent rule):
 		now the blood magic level of Malleus Maleficarum is 0.
 	
 A dread rule (this is the malleus dread rule):
-	if test subject carries Malleus Maleficarum and Malleus Maleficarum is readied:
+	if test subject wields Malleus Maleficarum:
 		increase dread dummy by 1.
 		
 Attack modifier rule (this is the Malleus blood attack bonus rule):
@@ -4067,9 +4076,10 @@ An add specific damage rule (this is the Malleus blood damage bonus rule):
 			if the bonus is greater than 0:
 				add bonus points of damage with reason "Malleus Maleficarum blood bonus".
 
-Last carry out feeding when the Malleus Maleficarum is readied (this is the feeding reduces tension for Malleus wielder rule):
+Last carry out feeding (this is the feeding reduces tension for Malleus wielder rule):
 	reduce tension after hit;
-	say "The Malleus Maleficarum uses your bloodletting to reduce the tension.";
+	if the player wields the Malleus Maleficarum:
+		say "The Malleus Maleficarum uses your bloodletting to reduce the tension.";
 
 Section - Doomhammer (monster)
 
@@ -4461,7 +4471,7 @@ Before unreadying the hand of Vecna:
 Vecna-betraying is a truth state that varies. Vecna-betraying is false.
 Vecna-timer is a number that varies. Vecna-timer is 0.
 
-Every turn when the hand of Vecna is part of the player:
+Every turn when the hand of Vecna is part of the player:	
 	if the player carries a readied weapon:
 		let X be a random readied weapon carried by the player;
 		now X is not readied;
@@ -4936,7 +4946,7 @@ To equip (guy - a person) with (item - a grenade):
 	move item to guy;
 		
 To equip (guy - a person) with (item - a weapon):
-	repeat with impediment running through readied weapons enclosed by guy:
+	repeat with impediment running through weapons wielded by guy:
 		now impediment is not readied;
 		if impediment is not a natural weapon:
 			remove impediment from play;
