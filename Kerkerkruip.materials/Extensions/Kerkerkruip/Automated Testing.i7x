@@ -1084,6 +1084,9 @@ The keep using the xorshift generator for automated tests rule substitutes for t
 [Prevent the status window from opening]
 The check info panel capacity rule does nothing when done testing is false.
 
+[Prevent manually selected test objects from appearing]
+The mark test objects from file rule does nothing when done testing is false.
+
 Chapter - Commands to Start Tests
 
 Test queueing is an action out of world applying to one outcome. Understand "queue test [outcome]" as test queueing.

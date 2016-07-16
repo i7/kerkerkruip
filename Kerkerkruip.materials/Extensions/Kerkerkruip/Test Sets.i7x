@@ -198,7 +198,10 @@ mindslug-reveal	1	1	--
 mindslug-retreat	1	1	--
 mindslug-runner	1	1	--
 
+[TODO: ignore testobject choices from file when running automated tests]
+
 scenario for parting shots:
+	now generation info is true;
 	now israfel is testobject;
 	now mindslug is testobject;
 	now armadillo is testobject.
@@ -270,7 +273,7 @@ Table of Outcomes (continued)
 outcome	likelihood	minimum attempts
 fell-freezing	0	1
 frozen-fell-fleeing	1	1
-israfel-rejoining	1	1
+israfel-rejoining	1	0
 israfel-resplitting	1	1
 unfrozen-fell-fleeing	1	1
 
@@ -290,7 +293,12 @@ testing effects of frozen-fell-fleeing:
 	assert that israfel-reuniting-initiator is Fell with label "the reuniting initiator";
 	if we assert that the hitting count of Fell is 0, rule succeeds.
 
-regular scheduling of israfel-rejoining: compel the action of going the way-to-get-there.
+regular scheduling of israfel-rejoining:
+	if the attempt count of israfel-rejoining is 0:
+		compel the action of going the way-to-get-there;
+	otherwise:
+		compel the action of waiting.
+
 testing effects of israfel-rejoining: if we assert that the location of Israfel is the location, rule succeeds.
 [TODO: what if Fell is still there?]
 

@@ -703,7 +703,7 @@ To put monsters in the rooms:
 [		say max;]
 		if max is not 0:
 			sort Table of Suitable monsters in random order;
-			sort Table of Suitable monsters in reverse Room Score order;
+			sort Table of Suitable monsters in reverse Monster Score order;
 			let pos1 be a random number between 1 and max;
 			let pos2 be a random number between 1 and max;
 			let pos3 be a random number between 1 and max;
@@ -711,7 +711,7 @@ To put monsters in the rooms:
 			if pos3 is less than pos1, now pos1 is pos3;
 [			say "(choosing row [pos1] out of [max])";]
 			choose row pos1 in the Table of Suitable Monsters;
-			if generation info is true, say "* Placing [applicant entry] (level [global monster level]) in [considered room].[line break][run paragraph on]";
+			if generation info is true, say "* Placing suitable monster choice [pos1], [applicant entry] (level [global monster level]) in [considered room].[line break][run paragraph on]";
 			move applicant entry to considered room.
 
 Section - Filling the Table of Suitable Monsters
