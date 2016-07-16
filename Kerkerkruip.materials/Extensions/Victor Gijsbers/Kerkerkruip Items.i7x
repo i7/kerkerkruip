@@ -2715,7 +2715,7 @@ The description of a scroll of enchantment is "Reading this scroll will permanen
 The plural of scroll of enchantment is scrolls of enchantment.
 
 
-Carry out reading a scroll of enchantment:
+Carry out reading a scroll of enchantment (this is the basic weapon enchantment rule):
 	let item be a random readied weapon enclosed by the player;
 	if item is a natural weapon:
 		say "You aren't wielding a weapon, so the scroll of enchantment fizzles.";
@@ -3938,21 +3938,19 @@ The spiked mace of the ape king is iron.
 The spiked mace of the ape king is crescendi-immune. The spiked mace of the ape king is diminuendi-immune.
 
 Table of Spiked Mace of the Ape King
-Blood	Dam	WDB	DOD	PAB		PWB	Size
-0		3		0		-1		0		0		tiny
-1		3		0		-1		0		0		tiny
-2		4		0		0		0		0		small
-3		5		1		0		0		0		small
-4		5		1		0		0		0		medium
-5		6		2		0		0		0		medium
-6		7		2		0		0		-1		large
-7		8		3		1		-1		-1		large
-8		8		3		1		-1		-1		huge
-9		9		4		1		-1		-2		huge
-10		10		4		1		-2		-2		gargantuan
-11		11		4		1		-2		-2		gargantuan
-
-[TODO: scroll of enchantment is mainly wasted on spiked mace. Probably ok but we should make it clear]
+Blood	Dam	WDB	DOD	PAB	PWB	Size
+0	3	0	-1	0	0	tiny
+1	3	0	-1	0	0	tiny
+2	4	0	0	0	0	small
+3	5	1	0	0	0	small
+4	5	1	0	0	0	medium
+5	6	2	0	0	0	medium
+6	7	2	0	0	-1	large
+7	8	3	1	-1	-1	large
+8	8	3	1	-1	-1	huge
+9	9	4	1	-1	-2	huge
+10	10	4	1	-2	-2	gargantuan
+11	11	4	1	-2	-2	gargantuan
 
 Spiked-mace-blood is a number that varies. Spiked-mace-blood is 0.
 
@@ -3992,7 +3990,16 @@ An aftereffects rule (this is the spiked mace grows rule):
 			if spiked-mace-blood is less than 12:
 				say "The spiked mace of the ape king grows!"
 				
+The basic weapon enchantment rule does nothing when the spiked mace of the ape king is readied.
 
+Carry out reading a scroll of enchantment (this is the enchanment grows spiked mace rule):
+	if the spiked mace of the ape king is readied:
+		increase spiked-mace-blood by 1;
+		set stats for the spiked mace of the ape king;
+		if spiked-mace-blood is less than 12:
+			say "A flash of red light comes from the spiked mace of the ape king, and it grows!"
+
+	
 Chapter - Hammer
 
 Section - Stunning weapon
