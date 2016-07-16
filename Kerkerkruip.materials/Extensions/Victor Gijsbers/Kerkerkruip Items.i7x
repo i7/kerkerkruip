@@ -3952,6 +3952,8 @@ Blood	Dam	WDB	DOD	PAB		PWB	Size
 10		10		4		1		-2		-2		gargantuan
 11		11		4		1		-2		-2		gargantuan
 
+[TODO: scroll of enchantment is mainly wasted on spiked mace. Probably ok but we should make it clear]
+
 Spiked-mace-blood is a number that varies. Spiked-mace-blood is 0.
 
 To set stats for the spiked mace of the ape king:
