@@ -815,7 +815,7 @@ Last when play begins (this is the introduction rule):
 
 Section - Starting kits
 
-[ We used to generate all random numbers in advance so that the number of random numbers generated doesn't depend on the difficulty... if that's a problem, we can probably just do starting kits later on after all dungeon generation is finished]
+[ We used to generate all random numbers in advance so that the number of random numbers generated doesn't depend on the 	... if that's a problem, we can probably just do starting kits later on after all dungeon generation is finished]
 
 A starting kit can be rapier-based.
 
@@ -862,15 +862,17 @@ teleport-kit is an advanced rapier-based starting kit. teleport-kit contains a s
 
 [no special rules needed for teleport-kit]
 
-addict-kit is an advanced rapier-based starting kit. The rarity is 2. [should we also require that the difficulty is at least 1? We may need to implement placement possible rules for starting kits if so]
+addict-kit is an advanced rapier-based starting kit. The rarity is 2.
 	
+Starting kit placement possible rule (this is the no novice addicts rule):
+	[this prevents the addict kit from appearing in novice games even if basic game mode is disabled]
+	if considered starting kit is addict-kit and difficulty < 1, rule fails.
+
 Last starting kit setup when selecting addict-kit (this is the cursed amulet stays cursed rule):
 	equip the player with the addict's amulet;
 	have the ment kick in.
 	
 The cursed amulet stays cursed rule is listed after the player starting kit rule in the starting kit setup rules.
-
-
 
 Chapter - The end
 

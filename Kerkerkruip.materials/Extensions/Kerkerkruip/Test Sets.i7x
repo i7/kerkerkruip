@@ -300,7 +300,6 @@ regular scheduling of israfel-rejoining:
 		compel the action of waiting.
 
 testing effects of israfel-rejoining: if we assert that the location of Israfel is the location, rule succeeds.
-[TODO: what if Fell is still there?]
 
 regular scheduling of israfel-resplitting: compel the action of israfel israfel-splitting.
 Testing effects of israfel-resplitting: if israfel is off-stage, rule succeeds.
@@ -2372,8 +2371,10 @@ fragmentation damage text	1	1	--
 [TODO: test #384 - glass cannon weapon damage bonus]
 
 Scenario for damage-text:
+	now generation info is true;
 	now Vast Staircase is testobject;
 	now slaying-kit is testobject;
+	now addict-kit is bannedobject;
 
 Initial scheduling of basic attack damage text:
 	prepare a test battle with the reaper;
