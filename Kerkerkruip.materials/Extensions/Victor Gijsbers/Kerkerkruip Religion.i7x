@@ -584,7 +584,7 @@ Before doing anything (this is the Nomos makes you attack rule):
 			try attacking X instead;
 			deactivate Nomos bonus;
 		otherwise:
-			say "[The actor] [plan] on [current action], but [find] [regarding the actor][their] body attacking itself instead!";
+			say "[The actor] [plan] on [current action], but [regarding the actor][find] [their] body attacking itself instead!";
 			try the player hitting the player instead;
 			deactivate Nomos bonus;
 			if the player is dead:
