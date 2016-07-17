@@ -359,8 +359,7 @@ Testreadying is an action applying to nothing. Understand "testready" as testrea
 
 Carry out testreadying:
 	repeat with guy running through not off-stage persons:
-		let item be a random readied weapon enclosed by guy;
-		say "[guy] - [item][line break]".
+		say "[guy] - [the current weapon of guy][line break]".
 
 Section - Changing Story Tense and Viewpoint
 
@@ -400,7 +399,7 @@ To back up stats of (guy - a person), overriding previous backups:
 		now creature entry is guy;
 	now true faction entry is original faction of guy;
 	now location entry is location of guy;
-	now weapon entry is a random readied weapon enclosed by guy;
+	now weapon entry is the current weapon of guy;
 	if weapon entry is nothing, now weapon entry is a random natural weapon enclosed by guy;
 	now body entry is the body score of guy;
 	now mind entry is the mind score of guy;
@@ -424,7 +423,7 @@ A reviving rule for a person (called guy) (this is the restore stats when revivi
 		[don't reset factions during a fighttest]
 		now original faction of guy is true faction entry;
 		now faction of guy is original faction of guy;
-	Repeat with item running through readied weapons enclosed by guy:
+	Repeat with item running through weapons wielded by guy:
 		now item is not readied;
 	If weapon entry is not a natural weapon:
 		[TODO: what if the weapon is in the dungeon? Use shimmer-weapon?]
