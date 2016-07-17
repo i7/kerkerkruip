@@ -3615,7 +3615,9 @@ Initial scheduling of Nomos intervention effects:
 	now the reusable item is a random scroll of teleportation;
 	extract the swarm of daggers to the temple of Nomos.
 	
-Before reading a command when testing Nomos intervention effects: say "reading a command, nomos attacker=[nomos attacker] counter=[nomos counter], bonus=[nomos bonus]";
+[We can use this to see when the reading a command activity runs:
+
+Before reading a command when testing Nomos intervention effects: say "reading a command, nomos attacker=[nomos attacker] counter=[nomos counter], bonus=[nomos bonus]";]
 
 Testing effects of Nomos intervention effects:
 	if the number of people in Entrance Hall is 0, rule succeeds.
