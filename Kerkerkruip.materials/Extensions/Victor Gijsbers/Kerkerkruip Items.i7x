@@ -2437,9 +2437,8 @@ The description of a scroll of the blade is "Reading this scroll will make a tem
 The plural of scroll of the blade is scrolls of the blade.
 
 Carry out reading a scroll of the blade:
-	repeat with item running through weapons enclosed by the player:
-		if item is readied:
-			now item is not readied;
+	repeat with item running through weapons wielded by the player:
+		now item is not readied;
 	move adamantine blade to player;
 	now adamantine blade is readied;
 	do the adamantine blade shuffle;
@@ -3116,18 +3115,7 @@ Carry out reading the ancient papyrus:
 	otherwise:
 		now the player is death-cursed.
 
-
-
 Part - Weapons
-
-Chapter - Wielding
-
-Weapon-readying relates a person (called the wielder) to a weapon (called the item) when the item is readied and the wielder encloses the item.
-
-The verb to wield means the weapon-readying relation.
-
-To decide which object is the current weapon of (guy - a person):
-	decide on a random weapon wielded by guy.
 
 Chapter - Sword
 

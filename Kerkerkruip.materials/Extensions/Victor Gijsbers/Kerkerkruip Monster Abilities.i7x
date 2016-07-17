@@ -1046,7 +1046,7 @@ Check stunning (this is the stun yourself rule):
 		say "You can't bring yourself to do it." instead.
 
 Check stunning:
-	let item be a random readied weapon had by the player;
+	let item be the current weapon of the player;
 	if item is ranged:
 		take no time;
 		say "You cannot stun with ranged weapons." instead.

@@ -400,7 +400,7 @@ Last carry out examining a person:
 			say " [The noun] carries [a list of things carried by the noun].[run paragraph on]"; 	
 		if the number of things worn by the noun is greater than 0:
 			say " [The noun] wears [a list of things worn by the noun].[run paragraph on]";
-		let item be a random readied weapon enclosed by the noun;
+		let item be the current weapon of the noun;
 		if item is a natural weapon:
 			say " [The noun] [attack] using [item]: 1d[damage die of item] + [weapon damage bonus of the item] damage; [if weapon attack bonus of the item is less than 0]-[otherwise]+[end if][absolute value of weapon attack bonus of the item] attack modifier[if the item is ranged]; ranged[end if][natural parry and dodge info of the item][if the item is silver]; good against undead and demons[end if][special weapon info of the item][roman type].[run paragraph on]";
 		otherwise:
@@ -828,7 +828,7 @@ Understand "[option]" as toggling.
 
 Chapter - New standard responses
 
-The description of yourself is "[if greatest power of the player is 0]You have fought many men and quite a few women, but fighting Malygris is something else. Your hairs are raised on end, and your body quivers with fear[otherwise if greatest power of the player is 1]Your victory, though small, has given you a little confidence. Perhaps you can survive long enough to escape this dungeon[otherwise if greatest power of the player is 2]This is going better than expected. Could it be that Malygris is not as invulnerable as you used to believe? You dare not yet hope[otherwise if greatest power of the player is 3]Flushed with success, you go boldly through the dungeon[otherwise if greatest power of the player is 4]History will remember you as one of the greatest of warriors! If you kill Malygris and manage to find a historian, that is[end if].[if a random natural weapon part of the player is readied or the player does not enclose a readied weapon][paragraph break][player natural attack].[line break][end if]".
+The description of yourself is "[if greatest power of the player is 0]You have fought many men and quite a few women, but fighting Malygris is something else. Your hairs are raised on end, and your body quivers with fear[otherwise if greatest power of the player is 1]Your victory, though small, has given you a little confidence. Perhaps you can survive long enough to escape this dungeon[otherwise if greatest power of the player is 2]This is going better than expected. Could it be that Malygris is not as invulnerable as you used to believe? You dare not yet hope[otherwise if greatest power of the player is 3]Flushed with success, you go boldly through the dungeon[otherwise if greatest power of the player is 4]History will remember you as one of the greatest of warriors! If you kill Malygris and manage to find a historian, that is[end if].[if the current weapon of the player is a natural weapon or the current weapon of the player is nothing][paragraph break][player natural attack].[line break][end if]".
 
 To say player natural attack:
 	let item be a random natural weapon part of the player;

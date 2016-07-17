@@ -1117,11 +1117,22 @@ Chapter - The weapon kind
 
 A weapon is a kind of thing.
 
+Section - Readied
+
 [ A readied weapon is one that is not just carried by the actor, but actually in use. ]
 A weapon can be readied. A weapon is usually not readied.
 
 After printing the name of a readied weapon while taking inventory (this is the readied inventory listing rule):
 	say " (readied)".
+
+Weapon-readying relates a person (called the wielder) to a weapon (called the item) when the item is readied and the wielder encloses the item.
+
+The verb to wield means the weapon-readying relation.
+
+To decide which object is the current weapon of (guy - a person):
+	decide on a random weapon wielded by guy.
+
+Section - Weapon Stats
 
 [ The damage die is the die size used to calculate damage. Base damage dealt by the weapon is 1d(damage die) + weapon damage bonus. So a standard weapon deals 1d6 damage; a weapon with a damage die of 0 and a weapon damage bonus of 5 always deals 5 damage, and so on. Negative damage die is counted as 0, but negative weapon damage bonus is possible. ]
 A weapon has a number called the damage die. The damage die of a weapon is usually 6.
@@ -1257,8 +1268,8 @@ Setting action variables for hitting (this is the new reset hitting variables ru
 	now the global attacker is the actor;
 	now the global defender is the noun;
 	ready natural weapons;
-	now the global attacker weapon is a random readied weapon enclosed by the actor;
-	now the global defender weapon is a random readied weapon enclosed by the noun;
+	now the global attacker weapon is the current weapon of the actor;
+	now the global defender weapon is the current weapon of the noun;
 	have the actor start pressing the noun;
 	now the attack strength is 0;
 	now the attack damage is 0;
@@ -1552,7 +1563,7 @@ First check readying (this is the do not ready weapons on the ground rule):
 		say "[We] will [have] to get [the noun] first." instead.
 
 Check readying (this is the cannot ready what is already readied rule):
-	if the noun is readied and the noun is enclosed by the player:
+	if the player wields the noun:
 		take no time;
 		say "[We] [are] already wielding [the noun]." instead.
 
@@ -1593,7 +1604,7 @@ Understand "unready [thing]" as unreadying. Understand "unwield [thing]" as unre
 Does the player mean unreadying a readied weapon: it is very likely.
 
 Check unreadying (this is the can only unready what is readied rule):
-	unless the noun is a readied weapon enclosed by the actor:
+	unless the actor wields the noun:
 		take no time;
 		say "You are not wielding that." instead.
 		
@@ -1856,7 +1867,7 @@ Last after reporting an actor hitting (this is the no longer at parry after the 
 
 Chance to win rule (this is the CTW parry bonus rule):
 	let n be the parry-against bonus of the chosen weapon;
-	let item be a random readied weapon enclosed by the chosen target;
+	let item be the current weapon of the chosen target;
 	increase n by parry-with bonus of item;
 	increase n by 2;
 	if the best defence is less than n:
@@ -2036,12 +2047,12 @@ An AI target selection rule for a person (called target) (this is the prefer con
 		increase the Weight by 2;
 
 An AI target selection rule for a person (called target) (this is the prefer those with good weapons rule):
-	let item be a random readied weapon enclosed by the target;
+	let item be the current weapon of the target;
 	increase the Weight by the damage die of the item divided by 2;
 
 An AI target selection rule for a person (called target) (this is the do not prefer good parriers rule):
-	let item be a random readied weapon enclosed by the running AI;
-	let item2 be a random readied weapon enclosed by the target;
+	let item be the current weapon of the running AI;
+	let item2 be the current weapon of the target;
 	let n be dodge bonus of item;
 	let m be parry-against bonus of item + parry-with bonus of item2;
 	if m > n:
@@ -2224,8 +2235,8 @@ An AI action selection rule for an at-Act person (called P) (this is the concent
 
 An AI action selection rule for an at-React person (called P) (this is the standard defense against attack select rule):
 	if the action name part of the main actor's action is the attacking action:
-		let the attacker's weapon be a random readied weapon enclosed by the main actor;
-		let the defendant's weapon be a random readied weapon enclosed by P;
+		let the attacker's weapon be the current weapon of the main actor;
+		let the defendant's weapon be the current weapon of P;
 		let dodgability be (2 + dodge bonus of the attacker's weapon);
 		let parry rating be (2 + parry-against bonus of the attacker's weapon + parry-with bonus of the defendant's weapon);
 		let block rating be 0;
@@ -2316,7 +2327,7 @@ After an actor hitting when the maximum shots of the global attacker weapon is g
 	continue the action;
 
 Check attacking (this is the cannot attack when out of ammo rule):
-	let item be a random readied weapon enclosed by the player;
+	let item be the current weapon of the player;
 	if the maximum shots of item is greater than 0 and the current shots of item is not greater than 0:
 		say "[out-of-ammo text of item][paragraph break]" instead.
 
@@ -2366,12 +2377,12 @@ Nounless reloading is an action applying to nothing.
 Understand "reload" as nounless reloading.
 
 Instead of nounless reloading:
-	if the player encloses an unloaded readied weapon:
-		let item be a random unloaded readied weapon enclosed by the player;
+	if the player wields an unloaded weapon:
+		let item be a random unloaded weapon wielded by the player;
 		try reloading item;
-	otherwise if the player encloses a readied reloadable weapon:
+	otherwise if the player wields a reloadable weapon:
 		take no time;
-		let item be a random readied reloadable weapon enclosed by the player;
+		let item be a random reloadable weapon wielded by the player;
 		say "[The item] [are] already loaded.";
 	otherwise:
 		take no time;

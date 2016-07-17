@@ -418,7 +418,7 @@ Section - Favour rules
 [Nomos boons... protection, skill? enchantment? weapon matching?]
 
 To say Nomos reads a scroll and also:
-	Let item be a random readied weapon enclosed by the player;
+	Let item be the current weapon of the player;
 	if item is not a natural weapon and a random chance of (divine favour * divine favour) in 100 succeeds:
 		[TODO: increase shield block bonus; problematic because some shields get recalculated]	
 		say "Nomos enchants [the item] for you, and also";
@@ -662,7 +662,7 @@ Favour rule for Sul (this is the Sul favour 3 rule):
 
 Favour rule for Sul (this is the Sul favour 6 rule):
 	if divine favour is 6:
-		let item be a random readied weapon enclosed by the player;
+		let item be the current weapon of the player;
 		if item is a natural weapon:
 			say "Sul makes you a demon slayer; she also attempts to bless your weapon, but you aren't wielding any.";
 		otherwise:
@@ -945,7 +945,7 @@ The intervention rarity of Herm is 30;
 
 Before an actor hitting someone who worships Herm:
 	unless the global defender gets intervention, make no decision;
-	if the global defender encloses an unloaded readied weapon, make no decision;
+	if the global defender wields an unloaded weapon, make no decision;
 	say "[bold type]Herm[roman type] bends space and time around [the noun] and [the actor], and you suddenly find [if the noun is the player]yourself in the role of attacker[otherwise]that [the noun] is attacking [the actor] instead[end if]!";
 	try the noun hitting the actor instead.
 			

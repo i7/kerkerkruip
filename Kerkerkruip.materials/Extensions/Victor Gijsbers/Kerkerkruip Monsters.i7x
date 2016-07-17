@@ -1231,7 +1231,7 @@ To attempt is a verb. To die is a verb.
 
 First carry out an actor attacking the chain golem (this is the attack a spinning chain golem rule):
 	if the chain golem is conscious:
-		let W be a random readied weapon held by the actor;
+		let W be the current weapon of the actor;
 		unless W is ranged:
 			say "[The actor] [attempt] to duck under the whirling chains. [run paragraph on]";
 			let n be the concentration of the chain golem;
@@ -1650,7 +1650,7 @@ Chapter - Level 2 - The reaper
 
 Section - Definitions
 
-The Reaper is a male monster. The reaper is not neuter. "A pale man in dark robes[if the reaper carries a readied scythe], wielding a huge scythe,[end if] stands here. It is the Reaper, a serial killer who believes he is Death himself."
+The Reaper is a male monster. The reaper is not neuter. "A pale man in dark robes[if the reaper wields a scythe], wielding a huge scythe,[end if] stands here. It is the Reaper, a serial killer who believes he is Death himself."
 
 Understand "pale" and "man" and "dark" and "robes" and "serial" and "killer" and "him" as the Reaper.
 
@@ -3877,8 +3877,7 @@ Section - Standard attack modifier effect of brambles
 An attack modifier rule (this is the brambles attack modifier rule):
 	if the brambles are in the location:
 		unless the global attacker is druidic or the global attacker is flying:
-			let W be a random readied weapon held by the actor;
-			unless W is ranged:
+			unless the current weapon of the actor is ranged:
 				say " - 2 (brambles impede movement)[run paragraph on]";
 				decrease attack strength by 2;
 	if the global defender is the player and the brambles are in the location:
@@ -5805,12 +5804,12 @@ The material of a rotting limb is usually flesh.
 [Rotting limbs can be turned into permanent items by some special effects.]
 A rotting limb has a truth state called the preservation status. The preservation status of a rotting limb is usually false.
 Carry out reading a scroll of enchantment (this is the enchantment preserves rotting limbs rule):
-	let item be a random readied weapon enclosed by the player;
+	let item be the current weapon of the player;
 	if item is a rotting limb:
 		now preservation status of item is true.
 Favour rule for Sul (this is the Sul favour 6 rotting limb rule):
 	if divine favour is 6:
-		let item be a random readied weapon enclosed by the player;
+		let item be the current weapon of the player;
 		if item is a rotting limb:
 			now preservation status of item is true.
 
@@ -6376,7 +6375,7 @@ Report the mummified priest hitting a dead pc:
 
 Report the mummified priest attacking:
 	unless the actor is the noun:
-		say "The mummified priest stalks towards [the noun][if the mummified priest carries the readied was sceptre] with his sceptre raised[end if].";
+		say "The mummified priest stalks towards [the noun][if the mummified priest wields the was sceptre] with his sceptre raised[end if].";
 	otherwise:
 		say "The mummified priest tears at its own bandages.";
 	rule succeeds.
