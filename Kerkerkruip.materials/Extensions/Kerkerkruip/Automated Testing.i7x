@@ -1378,11 +1378,6 @@ First regular scheduling of an outcome (this is the return the reusable item rul
 	if the reusable item is a thing and the reusable item is not carried:
 		now the player carries the reusable item;
 
-Section - Readied weapons
-
-To decide which object is the current weapon of (guy - a person):
-	decide on a random readied weapon enclosed by guy.
-
 Section - Occupied and Unoccupied
 
 Definition: A room is occupied rather than unoccupied if it encloses a person.

@@ -2349,7 +2349,7 @@ Regular scheduling of fell-blinds-eyeless-monster: do the action of JB waiting f
 
 Testing effects of fell-blinds-eyeless-monster: if we assert absence of result "Fell's nails strike", rule succeeds.
 
-
+[TODO: stun effect - Malleus should not stun dead opponent]
 [TODO: Hot weapons only do heat damage (or break because of heat)? if not projectile]
 [TODO: test armor of thorns (started) and Israfel (done yet?),
 when hitting with damage (done)
