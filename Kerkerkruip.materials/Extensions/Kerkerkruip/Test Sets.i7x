@@ -3747,8 +3747,8 @@ testing effects of waking-awake-enemy: if we assert result "You can only awaken 
 [$ egrep -irl 'asleep|conscious' Kerkerkruip.materials/Extensions/
 Kerkerkruip.materials/Extensions//Kerkerkruip/Automated Testing.i7x - done, I think
 Kerkerkruip.materials/Extensions//Kerkerkruip/Test Sets.i7x - done, I think
+Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Actions and UI.i7x - done
 
-Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Actions and UI.i7x
 Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Dreams.i7x
 Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Events and Specials.i7x
 Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Events.i7x

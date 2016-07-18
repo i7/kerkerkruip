@@ -90,7 +90,7 @@ To dream (item - a dream):
 To wake the player up:
 	wait for any key;
 	clear the screen;
-	repeat with guy running through asleep people in the location:
+	repeat with guy running through asleep people in the location: [should this be dreamer-location?]
 		if a random chance of 1 in 4 succeeds:
 			now guy is not asleep;
 	now dreaming is false;
@@ -465,6 +465,9 @@ Instead of waking the player when the player is on the bed:
 	try waking up;
 
 Instead of waking up when the player is on the bed:
+	try getting off the bed.
+
+Instead of exiting when the player is on the bed:
 	try getting off the bed.
 
 Instead of waiting when the player is on the bed:
