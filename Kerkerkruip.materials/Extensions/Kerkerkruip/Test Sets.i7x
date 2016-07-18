@@ -3775,9 +3775,9 @@ Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Actions and UI.i7x
 Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Dreams.i7x - done
 Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Events and Specials.i7x - done
 Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Events.i7x - done
+Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Items.i7x - done
+Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Locations.i7x - done
 
-Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Items.i7x
-Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Locations.i7x
 Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Monster Abilities.i7x
 Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Monsters.i7x
 Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Religion.i7x

@@ -2044,7 +2044,7 @@ Section - Comfy chair
 The comfy chair is a chair and scenery in the Zen Room. The description of the comfy chair is "A leather, well worn chair, but quite cozy to look at[if chairinheritor and comfy chair share a world]. Somehow, you feel it is owned by [the chairinheritor][end if]." Understand "comfortable looking","well worn" and "leather" as the comfy chair.
  
 Report entering the comfy chair:
-	if the comfy chair is in the Zen room and chairinheritor is not in the Zen room and chairinheritor is conscious and chairinheritor is not off-stage:
+	if the comfy chair is in the Zen room and chairinheritor is not in the Zen room and chairinheritor is conscious in this world:
 		if the best route from the Zen room to the location of the chairinheritor is a direction:
 			let chair-route be a list of rooms;
 			let place be the Zen room;

@@ -1230,7 +1230,7 @@ For natural weapon setup of the chain golem (this is the lashing chains rule):
 To attempt is a verb. To die is a verb.
 
 First carry out an actor attacking the chain golem (this is the attack a spinning chain golem rule):
-	if the chain golem is conscious:
+	if the chain golem is conscious in this world:
 		let W be the current weapon of the actor;
 		unless W is ranged:
 			say "[The actor] [attempt] to duck under the whirling chains. [run paragraph on]";
@@ -1519,7 +1519,7 @@ An attack modifier rule (this is the jumping bomb concentration attack modifier 
 		decrease the attack strength by n.
 			
 An attack modifier rule (this is the jumping bomb concentration defence modifier rule):
-	if the global defender is the jumping bomb and the concentration of the jumping bomb is greater than 0 and the jumping bomb is conscious:
+	if the global defender is the jumping bomb and the concentration of the jumping bomb is greater than 0 and the jumping bomb is conscious in this world:
 		let n be the concentration of the jumping bomb;
 		say " - ", n, " (speed of the jumping bomb)[run paragraph on]";
 		decrease the attack strength by n.	
@@ -1696,7 +1696,7 @@ The legend-label of reaper is Figure of map_legend_reaper.
 Section - The Reaper follows you!
 
 Every turn when the Reaper is in the location and the Reaper is not follower (this is the Reaper starts following rule):
-	if the player is not hidden and the reaper is conscious:
+	if the player is not hidden and the reaper is conscious in this world:
 		say "'Do not be afraid, for I will end your suffering!' the Reaper exclaims.";
 		now the Reaper is follower.
 	
@@ -4607,7 +4607,7 @@ An attack modifier rule (this is the overmind attack and defence bonus rule):
 
 Section - Useful overmind stuff
 
-Definition: a person is overmind-ally if (it is conscious) and (it is not off-stage) and (level of it is less than 4) and (faction of it does not hate faction of the overmind) and (location of the overmind is not location of it) and (the best route from the location of the overmind to the location of it is a direction).
+Definition: a person is overmind-ally if (it is conscious in this world) and (level of it is less than 4) and (faction of it does not hate faction of the overmind) and (location of the overmind is not location of it) and (the best route from the location of the overmind to the location of it is a direction).
 
 To decide which number is the potential overmind allies:
 	let n be the number of overmind-ally persons;

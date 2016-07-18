@@ -117,10 +117,7 @@ Part - Simple attributes
 
 Chapter - Conscious
 
-Definition: a person (called guy) is conscious if (guy is alive) and (guy is not asleep).
-Definition: a person (called guy) is unconscious if guy is not conscious.
-
-[more nuanced phrases can be found in Dreams]
+[Consciousness phrases have been moved to Dreams]
 
 Chapter - Elsewhere
 
@@ -131,7 +128,7 @@ Chapter - Active-Opposer
 [This adjective uses the opposition test subject in the same way as the opposer adjective]
 
 Definition: a person (called guy) is active-opposer:
-	if guy is not conscious, no;
+	unless guy is conscious in this world, no;
 	if guy is opposition test subject and guy is not insane, no;
 	Decide on whether or not guy is opposer;
 
@@ -214,7 +211,7 @@ To decide whether (guy - a person) can move:
 		decide no;
 	decide yes.
 
-Definition: A person is mobile if it is conscious and it can move.
+Definition: A person is mobile if it is conscious in this world and it can move.
 
 Check entering when not the player can move (this is the cannot enter when unable to move rule):
 	take no time;
@@ -300,7 +297,7 @@ Every turn (this is the have followers follow rule):
 				now last-seen-location of the guy is Null-Room; [The fact that guy might have followed is enough to create uncertainty for the player.]
 				follow the followers rules;
 				unless rule failed:
-					if guy can move and guy is conscious in this world:
+					if guy is mobile: [mobile requires worldsharer, so it's a little redundant]
 						if guy opposes the player and a random chance of 1 in 5 succeeds: [Hostile followers sometimes move in unexpected directions]
 							if at least one room is adjacent to the location of guy:
 								let place2 be the location of guy; [needed because of a bug in inform]

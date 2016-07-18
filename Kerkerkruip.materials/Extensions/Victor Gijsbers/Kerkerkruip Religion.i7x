@@ -941,7 +941,7 @@ Section - Herm's intervention
 Intervention possible when intervention-god is Herm:
 	unless an actor hitting, rule fails;
 	unless the global defender is intervention-guy, rule fails;
-	unless the global defender is conscious, rule fails;
+	unless the global defender is conscious in this world, rule fails;
 	unless the location of the global attacker is the location of the global defender, rule fails;
 	rule succeeds.
 
