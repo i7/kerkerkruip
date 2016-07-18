@@ -211,6 +211,10 @@ To decide whether (guy - a person) can move:
 		decide no;
 	decide yes.
 
+[The mobile adjective builds on the "conscious in this world" phrase defined in Kerkerkruip Dreams.
+
+A "conscious in this world" person is both worldsharer and conscious, while there are some worlds (namely, dreams) where even asleep people behave as though conscious.]
+
 Definition: A person is mobile if it is conscious in this world and it can move.
 
 Check entering when not the player can move (this is the cannot enter when unable to move rule):

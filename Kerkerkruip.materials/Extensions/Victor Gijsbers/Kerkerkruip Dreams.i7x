@@ -36,7 +36,10 @@ To decide which person is the/-- true body of (guy - a person):
 		decide on the dreamer;
 	decide on guy;
 
-["asleep in this world" determines whether someone is capable of fighting - while the player is dreaming, all sleeping people are capable of fighting. This includes the player most importantly.]
+["conscious in this world" determines whether someone is capable of fighting and potentially moving around. In fact, it is referenced from the "mobile" adjective. While the player is dreaming, all sleeping people are capable of fighting. This includes the player most importantly.
+
+The "in this world" part indicates two things: One, that the person is worldsharer, but also that "this world" is a world where people sleep. As the rules are now, nobody sleeps in any dream world, although we can change that by adding more details to this phrase.]
+
 To decide whether (guy - a person) is conscious in this world:
 	if guy is not alive, no;
 	unless guy and the player share a world, no;
@@ -44,6 +47,8 @@ To decide whether (guy - a person) is conscious in this world:
 	if guy is asleep, no;
 	yes.
 	
+["sleeping in this world" works similarly. Both phrases will return false if the guy is dead or not sharing a world with the player.]
+
 To decide whether (guy - a person) is sleeping in this world:
 	if guy is conscious in this world, no;
 	if guy is not alive, no;
