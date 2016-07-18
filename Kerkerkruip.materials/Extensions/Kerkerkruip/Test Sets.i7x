@@ -3726,7 +3726,8 @@ regular scheduling of waking-awake-self: try awaking the player;
 testing effects of waking-awake-self: if we assert result "Perhaps you are in a dream, but you are unable to wake yourself", rule succeeds.
 
 initial scheduling of waking-asleep-self:
-	prepare a test battle with the swarm of daggers;
+	extract the player to the Temple of Nomos;
+	extract the swarm of daggers to the Temple of Nomos;
 	try throwing the reusable item; [should still be a Morphean grenade]
 
 regular scheduling of waking-asleep-self: try awaking the player;
