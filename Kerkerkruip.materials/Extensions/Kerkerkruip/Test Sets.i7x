@@ -3589,22 +3589,26 @@ Testing effects of jump-a-turn: if we assert result "You jump", rule succeeds.
 
 ]
 
-Chapter - Nomos Intervention Effects
+Chapter - Sleep Effects
+
+Section - Nomos interventions and dreams
 
 Table of Outcomes (continued)
-Outcome	likelihood	minimum attempts	antecedent
-Nomos intervention effects	1	1	restarting for tests
-teleport-with-nomos-bonus	1	1	--
-nomos-peace-attack	1	1	--
-dream-with-nomos-counter	1	1	--
-dream-with-nomos-bonus	1	1	--
-wake-with-nomos-bonus	1	1	--
+Outcome	likelihood	minimum attempts	maximum attempts	antecedent
+Sleep effects	1	1	--	restarting for tests
+teleport-with-nomos-bonus	1	1	--	--
+nomos-peace-attack	1	1	--	--
+dream-with-nomos-counter	1	1	--	--
+dream-until-nomos-bonus	1	0	2	--
+dream-with-nomos-bonus	1	1	--	--
+wake-with-nomos-bonus	1	0	--	--
+nomos-bonus-after-dream	0	1	--	wake-with-nomos-bonus
 
-Scenario for Nomos intervention effects:
+Scenario for sleep effects:
 	now the Lair of the Imp is bannedobject;
 	now Temple of Nomos is testobject.
 	
-Initial scheduling of Nomos intervention effects:
+Initial scheduling of sleep effects:
 	prepare a test battle with Miranda;
 	try smiting Miranda;
 	extract the player to the temple of Nomos, making sure it is unoccupied;
@@ -3619,7 +3623,7 @@ Initial scheduling of Nomos intervention effects:
 
 Before reading a command when testing Nomos intervention effects: say "reading a command, nomos attacker=[nomos attacker] counter=[nomos counter], bonus=[nomos bonus]";]
 
-Testing effects of Nomos intervention effects:
+Testing effects of sleep effects:
 	if the number of people in Entrance Hall is 0, rule succeeds.
 	
 Initial scheduling of teleport-with-nomos-bonus:
@@ -3641,22 +3645,49 @@ Initial scheduling of dream-with-nomos-counter:
 	now the reusable item is a random morphean grenade;
 	extract the player to Temple of Nomos;
 	now the health of the swarm of daggers is 100;
-	now the Nomos counter is 1;
 	now Dream of Monty Hall is testobject;
+	now the defence of the player is 50;
+	now the melee of the player is 0;
+	now the Nomos counter is 1;
 	now the Nomos attacker is the player.
 	
 Regular scheduling of dream-with-nomos-counter: compel the action of throwing the reusable item;
 testing effects of dream-with-nomos-counter: if the Nomos attacker is asleep, rule succeeds.
 
+Regular scheduling of dream-until-nomos-bonus: compel the action of waiting.
+testing effects of dream-until-nomos-bonus: if the nomos bonus is true, rule succeeds.
+
+[For now we will allow the Nomos bonus to go off in a dream if the player is the Nomos attacker (not true in most dreams, but true in Monty Hall). We may change this later]
+
 Regular scheduling of dream-with-nomos-bonus: compel the action of opening the pearl chest.
-testing effects of dream-with-nomos-bonus: if we assert absence of result "attacking itself", rule succeeds.
+testing effects of dream-with-nomos-bonus: if we assert result "you do not overcome your defense", rule succeeds.
 
 regular scheduling of wake-with-nomos-bonus: compel the action of opening the pearl chest.
-testing effects of wake-with-nomos-bonus:
-	assert that dreaming is false with label "dreaming";
-	if we assert that the nomos bonus is true, rule succeeds.
+testing effects of wake-with-nomos-bonus: if we assert that dreaming is false, rule succeeds.
+
+testing effects of nomos-bonus-after-dream: if we assert that the nomos bonus is true, rule succeeds.
 	
-[The Dream of Monty Hall uses the actual player... this is not necessary here but it should be an option for dreams that include combat, I think. So maybe it makes sense to have the nomos bonus apply, but if that's the case, we need to have the attack succeed. At any rate, the test itself may need review.]
+Section - Picking pockets
+
+Table of Outcomes (continued)
+Outcome	likelihood	minimum attempts
+robbing-wakeful-malygris	1	1
+robbing-sleeping-malygris	1	1
+
+[TODO: robbing from someone who is asleep in the dream with you?]
+
+Initial scheduling of robbing-wakeful-malygris:
+	now Malygris is not asleep;
+	extract the player to the location of Malygris.
+	
+Regular scheduling of robbing-wakeful-malygris: compel the action of taking the dagger of draining.
+Testing effects of robbing-wakeful-malygris: if we assert result "That seems to belong to Malygris", rule succeeds.
+
+initial scheduling of robbing-sleeping-malygris:
+	now Malygris is asleep;
+	
+Regular scheduling of robbing-sleeping-malygris: compel the action of taking the dagger of draining.
+Testing effects of robbing-sleeping-malygris: if we assert result "You have a \d+% chance of successfully stealing the dagger of draining", rule succeeds.
 
 Chapter - Simple Tests
 

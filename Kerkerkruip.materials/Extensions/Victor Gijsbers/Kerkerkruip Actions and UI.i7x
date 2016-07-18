@@ -888,18 +888,25 @@ Chapter - Taking from sleepers
 
 The can't take living people's possessions rule is not listed in any rulebook.
 
-Check an actor taking (this is the can't take living awake people's possessions rule):
-	let the local ceiling be the common ancestor of the actor with the noun;
-	let the owner be the not-counting-parts holder of the noun;
+To decide which object is the keeper of (item - a thing) from (guy - a person):
+	let the local ceiling be the common ancestor of the guy with the item;
+	let the owner be the not-counting-parts holder of the item;
 	while the owner is not nothing and the owner is not the local ceiling:
-		if the owner is a conscious person:
-			if the actor is the player:
-				say "[regarding the noun][Those] [seem] to belong to [the owner]." (A);
-			stop the action;
-		let the owner be the not-counting-parts holder of the owner;
+		if the owner is a person:
+			decide on the owner;
+		otherwise:
+			now the owner is the not-counting-parts holder of the owner;
+
+Check an actor taking (this is the can't take living awake people's possessions rule):
+	Let the owner be the keeper of the noun from the actor;
+	if the owner is a person and the owner is conscious in this world:
+		if the actor is the player:
+			say "[regarding the noun][Those] [seem] to belong to [the owner]." (A);
+		stop the action;
 
 Last check an actor taking (this is the pickpocket rule):
-	if an asleep person encloses the noun:
+	Let the owner be the keeper of the noun from the actor;
+	if owner is a person and owner is sleeping in this world:
 		if a pickpocket check fails:
 			do nothing instead;
 		otherwise:

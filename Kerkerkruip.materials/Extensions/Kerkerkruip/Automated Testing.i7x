@@ -225,20 +225,21 @@ Suppress npc action is a truth state that varies.
 
 To compel (the desired action - a stored action):
 	Let the guy be the actor part of the desired action;
-	transcribe "compelling [the desired action][if the guy is asleep] and waking up [the guy]";
-	now the guy is not asleep;
+	transcribe "compelling [the desired action][if the guy is sleeping in this world] and waking up [the guy]";
+	if the guy is sleeping in this world, now the guy is not asleep;
 	Now the compelled action is the desired action;
 	schedule compelling an action; [this should automatically stop and wait for a turn]
 
 To compel (the desired action - a stored action) as a reaction to (guy - a person):
-	transcribe "setting the compelled attacker to [the guy][if the guy is asleep] and waking [them] up";
-	now the guy is not asleep;
+	transcribe "setting the compelled attacker to [the guy][if the guy is sleeping in this world] and waking [them] up";
+	if the guy is sleeping in this world, now the guy is not asleep;
 	Now the compelled attacker is the guy;
 	Now the compelled action is the desired action;
 	schedule compelling an attack; [this should automatically stop and wait for a turn]
 
 To wait for (guy - a person) to act freely:
-	if guy is asleep:
+	if guy is sleeping in this world:
+		[TODO: where does the waking actually happen?]
 		transcribe "waking [the guy] up so [they] can act freely";
 	now the act-outcome of the guy is the outcome described;
 	now the outcome described is scheduled for later testing;
@@ -1551,8 +1552,8 @@ To do (reaction - a stored action) for/-- a (strength - a number) melee hit by (
 
 Regular scheduling of combat hit:
 	now the health of the compelled actor is 1000;
-	now the compelled actor is not asleep;
-	now the compelled attacker is not asleep;
+	if the compelled actor is sleeping in this world, now the compelled actor is not asleep;
+	if the compelled attacker is sleeping in this world, now the compelled attacker is not asleep;
 	clear event description;
 	now the compelled actor is at-react; [enable reactions]
 	try the compelled action;
