@@ -3380,7 +3380,7 @@ The description of the Angel of Mercy is "At the moment its form resembles [one 
 The soul description of the Angel of Mercy is "a heart of purest silver".
 
 The level of the Angel of Mercy is 3.
-[The ID of the Angel of Mercy is .]
+The ID of the Angel of Mercy is 43.
 The Angel of Mercy is gargantuan.
 The Angel of Mercy is talker.
 The Angel of Mercy is thrower. [have Angel of Mercy throw grenades in another direction?]
