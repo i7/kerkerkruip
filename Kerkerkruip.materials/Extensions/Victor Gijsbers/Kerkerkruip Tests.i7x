@@ -120,6 +120,11 @@ After showing the title screen (this is the mark test objects from file rule):
 			if the Object name entry is test text:
 				now R is testobject;
 				break;
+		repeat with R running through dreams:
+			now test text is "[printed name of R]";
+			if the Object name entry is test text:
+				now R is testobject;
+				break;
 		repeat with R running through things:
 			now test text is "[printed name of R]";
 			if the Object name entry is test text:
@@ -153,15 +158,22 @@ Menu command console:
 Adding is an action applying to one visible thing.
 Understand "add [any thing]" as adding while the test object console is true.
 Understand "add [any room]" as adding while the test object console is true.
-[This doesn't work: Understand "add [any dream]" as adding while the test object console is true.]
+[This doesn't work: ]
+Understand "add [any dream]" as adding while the test object console is true.
+
+Understand "dream of briar rose" and "dream of briar roses" as dream of briar roses.
+Understand "dream of tungausy shaman" as dream of tungausy shaman.
+Understand "dream of the banquet" and "dream of banquet" as Dream of the Banquet.
+Understand "dream of monty hall" as dream of monty hall.
+Understand "dream of sleeping" as Dream of Sleeping.
 
 Deleting is an action applying to one visible thing.
 Understand "delete [any thing]" as deleting while the test object console is true.
 Understand "delete [any room]" as deleting while the test object console is true.
-[Understand "delete [any dream]" as deleting while the test object console is true.]
+Understand "delete [any dream]" as deleting while the test object console is true.
 Understand "del [any thing]" as deleting while the test object console is true.
 Understand "del [any room]" as deleting while the test object console is true.
-[Understand "del [any dream]" as deleting while the test object console is true.]
+Understand "del [any dream]" as deleting while the test object console is true.
 
 Emptying is an action applying to nothing.
 Understand "empty" as emptying while the test object console is true.

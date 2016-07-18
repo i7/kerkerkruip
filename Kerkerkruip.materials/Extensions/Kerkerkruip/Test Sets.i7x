@@ -3646,7 +3646,7 @@ Initial scheduling of dream-with-nomos-counter:
 	now the Nomos attacker is the player.
 	
 Regular scheduling of dream-with-nomos-counter: compel the action of throwing the reusable item;
-testing effects of dream-with-nomos-counter: [if we assert absence of result "attack this turn", ] rule succeeds.
+testing effects of dream-with-nomos-counter: if the Nomos attacker is asleep, rule succeeds.
 
 Regular scheduling of dream-with-nomos-bonus: compel the action of opening the pearl chest.
 testing effects of dream-with-nomos-bonus: if we assert absence of result "attacking itself", rule succeeds.

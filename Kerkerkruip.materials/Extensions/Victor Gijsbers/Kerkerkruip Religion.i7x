@@ -504,7 +504,7 @@ The Nomos bonus is a truth state that varies. The Nomos bonus is false.
 
 Every turn (this is the decrease the Nomos counter rule):
 	if (the main actor is the player) and (the current action is not the action of the player dontparsing):
-		if Nomos counter is greater than 0:
+		if Nomos counter is greater than 0 and (the Nomos attacker is conscious in this world):
 			decrease Nomos counter by 1;
 			if Nomos counter is 0:
 				activate Nomos bonus;
@@ -577,15 +577,19 @@ Before doing anything (this is the Nomos makes you attack rule):
 			make no decision;
 		if the actor is not the main actor or the combat state of the actor is at-react:
 			make no decision;
+		unless the actor is conscious in this world:
+			make no decision;
 		now opposition test subject is the Nomos attacker;
 		if at least one opposer alive person is enclosed by the location:
 			let X be a random opposer person enclosed by the location;
 			say "[The actor] [plan] on [current action], but [regarding the actor][find] [themselves] attacking [the X] instead.";
 			try attacking X instead;
+			[TODO: nothing happens after the "instead"]
 			deactivate Nomos bonus;
 		otherwise:
 			say "[The actor] [plan] on [current action], but [regarding the actor][find] [their] body attacking itself instead!";
 			try the player hitting the player instead;
+			[TODO:  nothing happens after the "instead"]
 			deactivate Nomos bonus;
 			if the player is dead:
 				end the story saying "Nomos is not to be toyed with.".

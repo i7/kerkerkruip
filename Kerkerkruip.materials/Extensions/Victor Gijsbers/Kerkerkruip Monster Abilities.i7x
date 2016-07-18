@@ -120,6 +120,8 @@ Chapter - Conscious
 Definition: a person (called guy) is conscious if (guy is alive) and (guy is not asleep).
 Definition: a person (called guy) is unconscious if guy is not conscious.
 
+[more nuanced phrases can be found in Dreams]
+
 Chapter - Elsewhere
 
 Definition: a person (called guy) is elsewhere if the location of guy is not the location of the player.
@@ -270,11 +272,8 @@ To decide whether (guy - a person) is acting independently:
 
 The independent action rules are a rulebook.
 
-A first independent action rule (this is the can't act independently when unconscious rule):
-	if the test subject is not conscious, rule fails;
-
-A first independent action rule (this is the must share player's world to act independently rule):
-	unless the player and test subject share a world, rule fails;
+A first independent action rule (this is the can't act independently unless conscious in this world rule):
+	unless the test subject is conscious in this world, rule fails;
 
 [This is a more permissive alternative to the must share player's world to act independently rule:]
 [A first independent action rule (this is the can't act independently off-stage rule):
@@ -301,7 +300,7 @@ Every turn (this is the have followers follow rule):
 				now last-seen-location of the guy is Null-Room; [The fact that guy might have followed is enough to create uncertainty for the player.]
 				follow the followers rules;
 				unless rule failed:
-					if guy can move and guy is not asleep:
+					if guy can move and guy is conscious in this world:
 						if guy opposes the player and a random chance of 1 in 5 succeeds: [Hostile followers sometimes move in unexpected directions]
 							if at least one room is adjacent to the location of guy:
 								let place2 be the location of guy; [needed because of a bug in inform]
@@ -584,7 +583,7 @@ Definition: a person (called guy) is dreadful if (dreadful presence of guy > 0).
 Section - Dreadful presence effect
 
 This is the dreadful presence effect rule:
-	if combat status is combat and main actor is not undead and the main actor is not asleep:
+	if combat status is combat and main actor is not undead and the main actor is conscious in this world:
 		now the opposition test subject is the main actor;
 		repeat with guy running through not hidden active-opposer people in the location:
 			let n be dreadful presence of guy;
@@ -663,7 +662,7 @@ A person can be just-woken. A person is usually not just-woken.
 To decide whether all enemies are asleep:
 	repeat with guy running through people in the location:
 		if faction of the guy hates faction of the player:
-			if guy is not asleep:
+			if guy is conscious in this world:
 				decide on false;
 	decide on true.
 
@@ -676,7 +675,7 @@ Dungeon interest rule (this is the put people asleep rule):
 To wake is a verb.
 
 First carry out an actor hitting (this is the being attacked wakes people up rule):  [Before the attack because then the prose describing the attack will generally make more sense]
-	if the global defender is asleep and the global defender is alive:
+	if the global defender is sleeping in this world:
 		now the global defender is not asleep;
 		say "[The global defender] [bold type][wake] up[roman type], surprised by the attack!";
 		now global defender is just-woken.
@@ -684,7 +683,7 @@ First carry out an actor hitting (this is the being attacked wakes people up rul
 To sleep is a verb.
 
 This is the asleep rule:
-	if the main actor is asleep and combat status is combat:
+	if the main actor is sleeping in this world and combat status is combat:
 		unless a random chance of tension in 50 succeeds:
 			say "[The main actor] [sleep] peacefully[roman type].";
 			now combat status is concluding;
@@ -693,22 +692,24 @@ This is the asleep rule:
 			now main actor is not asleep.
 
 Aftereffects rule (this is the wake people when fighting rule):
-	repeat with guy running through asleep people in the location:
-		if a random chance of 1 in 5 succeeds:
-			say "The sounds of combat [bold type]wake [the guy][roman type]!";
-			now guy is not asleep.
+	repeat with guy running through people in the location:
+		if guy is sleeping in this world:
+			if a random chance of 1 in 5 succeeds:
+				say "The sounds of combat [bold type]wake [the guy][roman type]!";
+				now guy is not asleep.
 
 The asleep rule is listed before the the main actor chooses an action rule in the combat round rules.
 
 This is the asleep reactions rule:
 	repeat with guy running through at-React persons:
-		if guy is asleep:
+		unless guy is conscious in this world:
 			now combat state of guy is at-Inactive.
 
 The asleep reactions rule is listed before the the reactors choose reactions rule in the combat round rules.
 
 First check an actor hitting (this is the stop hitting if the attacker is asleep rule):
-	if the global attacker is asleep:
+	unless the global attacker is conscious in this world:
+		[or perhaps we should say the global attacker is not the player?]
 		stop the action.
 
 An attack modifier rule (this is the asleep gives attack bonus rule):
@@ -734,7 +735,7 @@ For printing a locale paragraph about a thing (called the item)
 			not "":
 			increase the locale paragraph count by 1;
 			if item is a person:
-				if item is asleep:
+				if item is sleeping in this world:
 					say "[The item] [lie] on the ground, sleeping.[run paragraph on]";
 					say "[paragraph break]";
 				otherwise:
@@ -759,8 +760,9 @@ For printing a locale paragraph about a thing (called the item)
 The use initial appearance in room descriptions except when asleep rule is listed after the offer items to writing a paragraph about rule in the for printing a locale paragraph about rules. [TODO: changed to make the game compile, see http://inform7.com/mantis/view.php?id=1247 . Check whether it places the rule in the right location.]
 The use initial appearance in room descriptions rule is not listed in any rulebook.
 
-After printing the name of an asleep person while listing contents of a room:
-	say " (sleeping)[run paragraph on]".
+After printing the name of a person (called guy) while listing contents of a room:
+	if guy is sleeping in this world:
+		say " (sleeping)[run paragraph on]".
 
 A followers rule (this is the follower must be able to act independently rule):
 	follow the independent action rules;

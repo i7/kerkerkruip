@@ -36,6 +36,19 @@ To decide which person is the/-- true body of (guy - a person):
 		decide on the dreamer;
 	decide on guy;
 
+["asleep in this world" determines whether someone is capable of fighting - while the player is dreaming, all sleeping people are capable of fighting. This includes the player most importantly.]
+To decide whether (guy - a person) is conscious in this world:
+	unless guy and the player share a world, no;
+	if dreaming is true, yes;
+	if guy is asleep, no;
+	yes.
+	
+To decide whether (guy - a person) is sleeping in this world:
+	if guy is conscious in this world, no;
+	if guy is not alive, no;
+	if guy is asleep, yes;
+	no.
+
 Section - Starting dreams
 
 Every turn when the player is asleep and dreaming is false (this is the start a dream rule):
