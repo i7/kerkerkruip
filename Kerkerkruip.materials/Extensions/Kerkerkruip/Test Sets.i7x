@@ -3599,7 +3599,6 @@ Sleep effects	1	1	--	restarting for tests
 teleport-with-nomos-bonus	1	1	--	--
 nomos-peace-attack	1	1	--	--
 dream-with-nomos-counter	1	1	--	--
-dream-until-nomos-bonus	1	0	2	--
 dream-with-nomos-bonus	1	1	--	--
 wake-with-nomos-bonus	1	0	--	--
 nomos-bonus-after-dream	0	1	--	wake-with-nomos-bonus
@@ -3654,13 +3653,13 @@ Initial scheduling of dream-with-nomos-counter:
 Regular scheduling of dream-with-nomos-counter: compel the action of throwing the reusable item;
 testing effects of dream-with-nomos-counter: if the Nomos attacker is asleep, rule succeeds.
 
-Regular scheduling of dream-until-nomos-bonus: compel the action of waiting.
-testing effects of dream-until-nomos-bonus: if the nomos bonus is true, rule succeeds.
+[Regular scheduling of dream-until-nomos-bonus: compel the action of waiting.
+testing effects of dream-until-nomos-bonus: if the nomos bonus is true, rule succeeds.]
 
 [For now we will allow the Nomos bonus to go off in a dream if the player is the Nomos attacker (not true in most dreams, but true in Monty Hall). We may change this later]
 
 Regular scheduling of dream-with-nomos-bonus: compel the action of opening the pearl chest.
-testing effects of dream-with-nomos-bonus: if we assert result "you do not overcome your defense", rule succeeds.
+testing effects of dream-with-nomos-bonus: if we assert result "you do not overcome your defence", rule succeeds.
 
 regular scheduling of wake-with-nomos-bonus: compel the action of opening the pearl chest.
 testing effects of wake-with-nomos-bonus: if we assert that dreaming is false, rule succeeds.

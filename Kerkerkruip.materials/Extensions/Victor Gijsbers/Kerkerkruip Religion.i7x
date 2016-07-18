@@ -569,7 +569,7 @@ After attacklike behaviour (this is the attacking is never fast rule):
 
 To plan is a verb. To find is a verb.
 
-Before doing anything (this is the Nomos makes you attack rule):
+First before doing anything (this is the Nomos makes you attack rule):
 	if the current action is unattacklike:
 		if Nomos bonus is false or the take no time boolean is true:
 			make no decision;
