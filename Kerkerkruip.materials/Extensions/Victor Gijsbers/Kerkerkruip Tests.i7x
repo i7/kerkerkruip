@@ -27,12 +27,14 @@ Section - Dungeon generation rules
 
 An object can be randomly included, bannedobject, or testobject. An object is usually randomly included.
 
+Definition: a thing is test-placeable if it is not a starting kit.
+
 First resetting the map rule (this is the remove rarity from testobjects rule):
 	repeat with item running through testobject rooms:
 		now rarity of item is 0;
 		now item is basic;
 	repeat with item running through testobject things:
-		if item is not a starting kit:
+		if item is test-placeable:
 			now rarity of item is 0;
 			now item is basic;
 
@@ -72,7 +74,7 @@ First treasure placement rule (this is the remove bannedobject treasures rule):
 Last treasure placement rule (this is the place non-person testobjects rule):
 	if generation info is true, print generation message "    Placing testobjects...";
 	Repeat with item running through off-stage testobject things:
-		if item is not a starting kit, now item is in the Entrance Hall;
+		if item is test-placeable, now item is in the Entrance Hall;
 
 First dungeon interest rule (this is the ban extra scenery rule):
 	Now every bannedobject thing is not extra.
@@ -85,8 +87,18 @@ Starting kit placement possible rule (this is the starting kit testobject rule):
 			if alternate is testobject and the recipient of alternate is the considered kit recipient:
 				rule fails.
 	
-Starting kit placement possible rule (this is the starting kit bannedobject rule):
+Starting kit placement possible rule (this is the 
+ bannedobject rule):
 	if the considered starting kit is bannedobject, rule fails;
+	
+Dreamability rule (this is the only dream testobject dreams rule):
+	if a dream is testobject:
+		if the considered dream is testobject:
+			rule succeeds;
+		otherwise:
+			rule fails.
+			
+The only dream testobject dreams rule is listed before the unredreamable rule in the dreamability rules.
 	
 Section - The test object file
 
@@ -141,12 +153,15 @@ Menu command console:
 Adding is an action applying to one visible thing.
 Understand "add [any thing]" as adding while the test object console is true.
 Understand "add [any room]" as adding while the test object console is true.
+[This doesn't work: Understand "add [any dream]" as adding while the test object console is true.]
 
 Deleting is an action applying to one visible thing.
 Understand "delete [any thing]" as deleting while the test object console is true.
 Understand "delete [any room]" as deleting while the test object console is true.
+[Understand "delete [any dream]" as deleting while the test object console is true.]
 Understand "del [any thing]" as deleting while the test object console is true.
 Understand "del [any room]" as deleting while the test object console is true.
+[Understand "del [any dream]" as deleting while the test object console is true.]
 
 Emptying is an action applying to nothing.
 Understand "empty" as emptying while the test object console is true.

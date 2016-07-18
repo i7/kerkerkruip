@@ -7,28 +7,22 @@ Section - The dream kind
 A dream is a kind of object. A dream can be dreamt or undreamt. A dream is usually undreamt. [Dreamt once dream.]
 A dream can be redreamable. A dream is usually not redreamable. [Redreamable dreams can be dreamt more than once.]
 
-Dreamable test boolean is a truth state that varies.
+The considered dream is a dream that varies.
 
-A dream has a rule called the dreamable rule.
-The dreamable rule of a dream is usually the simple dreamable rule.
-
-This is the simple dreamable rule:
-	now dreamable test boolean is true.
+The dreamability rules are a rulebook.
 
 To decide whether (potential dream - a dream) is dreamable:
-	if potential dream is dreamt and potential dream is not redreamable:
-		decide on false;
-	otherwise:
-		follow dreamable rule of potential dream;
-		decide on dreamable test boolean.
+	now the considered dream is potential dream;
+	follow the dreamability rules;
+	if rule failed:
+		decide no;
+	decide yes.
+
+First dreamability rule (this is the unredreamable rule):
+	if the considered dream is dreamt and the considered dream is not redreamable:
+		rule fails.
 
 A dream has a rule called the start the dream rule.
-
-Section - Special option for testing
-
-[But not "only for testing", because I reference it below.]
-
-A dream can be current-test-dream. [Make a dream current-test-dream for guaranteed dreaming of it.]
 	
 Section - What is Real, What is a Dream
 
@@ -54,8 +48,8 @@ with 20 blank rows
 	
 To do a dream:
 	extract the player from combat;
-	if at least one dream is current-test-dream:
-		let item be a random current-test-dream dream;
+	if at least one dream is testobject:
+		let item be a random testobject dream;
 		dream item;
 	otherwise:
 		blank out the whole of the Table of Candidate Dreams;
@@ -171,7 +165,7 @@ A menu question rule (this is the sleeping beauty rule):
 
 Chapter - Dream of Tungausy Shaman
 
-Dream of Tungausy Shaman is a dream. [Dream of Tungausy Shaman is current-test-dream.]
+Dream of Tungausy Shaman is a dream.
 
 The start the dream rule of dream of Tungausy Shaman is the start dream of Tungausy Shaman rule.
 
@@ -231,7 +225,7 @@ A menu question rule (this is the vibrating pool rule):
 
 Chapter - Dream of the Banquet
 
-Dream of the Banquet is a dream. Dream of the Banquet is redreamable. The dreamable rule of Dream of the Banquet is the must see two diners before dreaming rule. The start the dream rule of Dream of the Banquet is the start the dream of the banquet rule.
+Dream of the Banquet is a dream. Dream of the Banquet is redreamable. The start the dream rule of Dream of the Banquet is the start the dream of the banquet rule.
 
 Definition: a person (called guy) is banquet-dining if guy opposes the true body of the player and (guy and the true body of the player share a world).
 
@@ -239,10 +233,9 @@ Definition: a person (called guy) is banquet-menu if guy is seen and guy is banq
 
 Definition: Malygris is banquet-menu if Malygris is banquet-dining and the location of Malygris is the location of the true body of the player.
 
-
-
-This is the must see two diners before dreaming rule:
-	now dreamable test boolean is whether or not the number of banquet-menu people is at least two;
+Dreamability rule (this is the must see two diners before banqueting rule):
+	if the considered dream is Dream of the Banquet:
+		unless the number of banquet-menu people is at least two, rule fails.
 
 This is the start the dream of the banquet rule:
 	now the health of Chef is the health of the player;

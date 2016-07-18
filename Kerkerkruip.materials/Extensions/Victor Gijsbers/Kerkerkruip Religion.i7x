@@ -580,7 +580,7 @@ Before doing anything (this is the Nomos makes you attack rule):
 		now opposition test subject is the Nomos attacker;
 		if at least one opposer alive person is enclosed by the location:
 			let X be a random opposer person enclosed by the location;
-			say "[The actor] [plan] on [current action], but [find] [themselves] attacking [the X] instead.";
+			say "[The actor] [plan] on [current action], but [regarding the actor][find] [themselves] attacking [the X] instead.";
 			try attacking X instead;
 			deactivate Nomos bonus;
 		otherwise:
