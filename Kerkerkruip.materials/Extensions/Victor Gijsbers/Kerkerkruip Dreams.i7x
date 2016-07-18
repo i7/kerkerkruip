@@ -38,6 +38,7 @@ To decide which person is the/-- true body of (guy - a person):
 
 ["asleep in this world" determines whether someone is capable of fighting - while the player is dreaming, all sleeping people are capable of fighting. This includes the player most importantly.]
 To decide whether (guy - a person) is conscious in this world:
+	if guy is not alive, no;
 	unless guy and the player share a world, no;
 	if dreaming is true, yes;
 	if guy is asleep, no;

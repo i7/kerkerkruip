@@ -3719,6 +3719,10 @@ waking-awake-self	1	1
 waking-asleep-self	1	1
 waking-asleep-enemy	1	1
 waking-awake-enemy	1	1
+dreaming-with-grenade	1	1
+exploding-in-dream	1	1
+waking-with-grenade	1	1
+exploding-awake	1	1
 
 [TODO: waking asleep enemy when dreaming? are allies any different?]
 
@@ -3744,14 +3748,34 @@ testing effects of waking-asleep-enemy: if we assert result "With a swift kick, 
 regular scheduling of waking-awake-enemy: try awaking the swarm of daggers.
 testing effects of waking-awake-enemy: if we assert result "You can only awaken sleeping persons", rule succeeds.
 
+initial scheduling of dreaming-with-grenade:
+	now every dream is randomly included;
+	now Dream of Briar Roses is testobject; [player keeps their body]
+	
+regular scheduling of dreaming-with-grenade: compel the action of throwing the reusable item.
+testing effects of dreaming-with-grenade: if yourself is asleep, rule succeeds.
+
+initial scheduling of exploding-in-dream: now the reusable item is a random smoke grenade.
+regular scheduling of exploding-in-dream: compel the action of throwing the reusable item;
+testing effects of exploding-in-dream: if yourself is asleep, rule succeeds.
+
+initial scheduling of waking-with-grenade:
+	try going up;
+	select menu question answer 1;
+
+testing effects of waking-with-grenade: if the swarm of daggers is asleep, rule succeeds.
+	
+regular scheduling of exploding-awake: compel the action of throwing the reusable item.
+testing effects of exploding-awake: if the swarm of daggers is not asleep, rule succeeds.
+
 [$ egrep -irl 'asleep|conscious' Kerkerkruip.materials/Extensions/
 Kerkerkruip.materials/Extensions//Kerkerkruip/Automated Testing.i7x - done, I think
 Kerkerkruip.materials/Extensions//Kerkerkruip/Test Sets.i7x - done, I think
 Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Actions and UI.i7x - done
+Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Dreams.i7x - done
+Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Events and Specials.i7x - done
+Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Events.i7x - done
 
-Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Dreams.i7x
-Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Events and Specials.i7x
-Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Events.i7x
 Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Items.i7x
 Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Locations.i7x
 Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Monster Abilities.i7x

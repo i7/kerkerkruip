@@ -1615,8 +1615,9 @@ Exploding-grenade is a thing that varies.
 The exploding rules are a rulebook.
 
 First exploding rule (this is the exploding wakes people up rule):
-	repeat with guy running through asleep persons in exploding-location:
-		now guy is not asleep.
+	repeat with guy running through persons in exploding-location:
+		if guy is sleeping in this world:
+			now guy is not asleep.
 
 Section - Custom grenade
 
@@ -1738,7 +1739,7 @@ Every turn (this is the recover from flash rule):
 			if the main actor is using eyes:
 				if the main actor is alive:
 					if the location of the main actor is the location of the player:
-						if the main actor is conscious:
+						if the main actor is conscious in this world:
 							say "[The main actor] can [bold type]see again[roman type]!";
 						otherwise:
 							say "[regarding the main actor][Possessive] [bold type]eyes function again[roman type].".
@@ -3620,7 +3621,7 @@ The description of the fearsome axe is "While not exactly a nimble weapon, this 
 To cower is a verb.
 
 Last carry out an actor attacking (this is the fearsome axe rule):
-	if the actor wields the fearsome axe and the noun is conscious:
+	if the actor wields the fearsome axe and the noun is conscious in this world:
 		let n be the final mind of the actor;
 		decrease n by the final mind of the noun;
 		if n is greater than 0:
