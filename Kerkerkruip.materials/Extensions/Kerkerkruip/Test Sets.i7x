@@ -3594,14 +3594,10 @@ Chapter - Sleep Effects
 Section - Nomos interventions and dreams
 
 Table of Outcomes (continued)
-Outcome	likelihood	minimum attempts	maximum attempts	antecedent
-Sleep effects	1	1	--	restarting for tests
-teleport-with-nomos-bonus	1	1	--	--
-nomos-peace-attack	1	1	--	--
-dream-with-nomos-counter	1	1	--	--
-dream-with-nomos-bonus	1	1	--	--
-wake-with-nomos-bonus	1	0	--	--
-nomos-bonus-after-dream	0	1	--	wake-with-nomos-bonus
+Outcome	likelihood	minimum attempts	antecedent
+Sleep effects	1	1	restarting for tests
+teleport-with-nomos-bonus	1	1	--
+nomos-peace-attack	1	1	--
 
 Scenario for sleep effects:
 	now the Lair of the Imp is bannedobject;
@@ -3640,32 +3636,59 @@ Testing effects of teleport-with-nomos-bonus:
 Regular scheduling of nomos-peace-attack: compel the action of waiting.
 Testing effects of nomos-peace-attack: if we assert result "You plan on waiting, but find your body attacking itself instead!", rule succeeds.
 
-Initial scheduling of dream-with-nomos-counter:
+Table of Outcomes (continued)
+Outcome	likelihood	minimum attempts
+montyhall-with-nomos-counter	1	1
+montyhall-with-nomos-bonus	1	1
+nomos-montyhall-wake	1	0
+nomos-bonus-after-montyhall	0	1
+tungausy-with-nomos-counter	1	1
+tungausy-with-nomos-bonus	1	1
+nomos-tungausy-wake	1	1
+nomos-bonus-after-tungausy	1	1
+nomos-attack-after-tungausy	1	1
+
+Definition: an outcome is nomos-sleeping if it is montyhall-with-nomos-counter or it is tungausy-with-nomos-counter.
+Definition: an outcome is nomos-dream-bonus if it is montyhall-with-nomos-bonus or it is tungausy-with-nomos-bonus.
+Definition: an outcome is nomos-waking if it is nomos-montyhall-wake or it is nomos-tungausy-wake.
+Definition: an outcome is nomos-after-dream if it is nomos-bonus-after-montyhall or it is nomos-bonus-after-tungausy.
+
+First initial scheduling of a nomos-sleeping outcome:
+	now every dream is randomly included;
 	now the reusable item is a random morphean grenade;
 	extract the player to Temple of Nomos;
 	now the health of the swarm of daggers is 100;
-	now Dream of Monty Hall is testobject;
 	now the defence of the player is 50;
 	now the melee of the player is 0;
 	now the Nomos counter is 1;
 	now the Nomos attacker is the player.
 	
-Regular scheduling of dream-with-nomos-counter: compel the action of throwing the reusable item;
-testing effects of dream-with-nomos-counter: if the Nomos attacker is asleep, rule succeeds.
+Initial scheduling of montyhall-with-nomos-counter: now Dream of Monty Hall is testobject.
 
-[Regular scheduling of dream-until-nomos-bonus: compel the action of waiting.
-testing effects of dream-until-nomos-bonus: if the nomos bonus is true, rule succeeds.]
+Initial scheduling of tungausy-with-nomos-counter: now Dream of Tungausy Shaman is testobject.
+
+Regular scheduling of a nomos-sleeping outcome: compel the action of throwing the reusable item;
+testing effects of a nomos-sleeping outcome: if the Nomos attacker is asleep, rule succeeds.
 
 [For now we will allow the Nomos bonus to go off in a dream if the player is the Nomos attacker (not true in most dreams, but true in Monty Hall). We may change this later]
 
-Regular scheduling of dream-with-nomos-bonus: compel the action of opening the pearl chest.
-testing effects of dream-with-nomos-bonus: if we assert result "you do not overcome your defence", rule succeeds.
+Regular scheduling of montyhall-with-nomos-bonus: compel the action of opening the pearl chest.
+testing effects of montyhall-with-nomos-bonus: if we assert result "you do not overcome your defence", rule succeeds.
 
-regular scheduling of wake-with-nomos-bonus: compel the action of opening the pearl chest.
-testing effects of wake-with-nomos-bonus: if we assert that dreaming is false, rule succeeds.
+Regular scheduling of tungausy-with-nomos-bonus: compel the action of going inside.
+testing effects of tungausy-with-nomos-bonus:
+	assert absence of result "Yourself follows the rules";
+	if we assert absence of result "attacking itself", rule succeeds.
 
-testing effects of nomos-bonus-after-dream: if we assert that the nomos bonus is true, rule succeeds.
-	
+regular scheduling of nomos-tungausy-wake: select menu question answer 1.
+regular scheduling of nomos-montyhall-wake: compel the action of opening the pearl chest.
+testing effects of a nomos-waking outcome: if we assert that dreaming is false, rule succeeds.
+
+testing effects of a nomos-after-dream outcome: if we assert that the nomos bonus is true, rule succeeds.
+
+regular scheduling of nomos-attack-after-tungausy: compel the action of waiting.
+testing effects of nomos-attack-after-tungausy: if we assert result "You plan on waiting, but find yourself attacking the swarm of daggers instead", rule succeeds.
+
 Section - Picking pockets
 
 Table of Outcomes (continued)

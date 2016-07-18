@@ -346,7 +346,7 @@ A perception rule (this is the perceptive if eyeless rule):
 	if test subject is eyeless:
 		rule succeeds.
 
-Section - using eyes
+Section - Using Eyes
 
 [Vision rules determine whether a person is using their eyes currently. If they are, they are vulnerable to distractions, illusions, and blinding effects]
 The vision rules are a rulebook.
