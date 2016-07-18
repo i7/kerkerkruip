@@ -950,7 +950,12 @@ Awaking is an action applying to one thing.
 Understand "wake [person]" and "wake up [person]" and "wake [person] up" and "awake [person]" and "awaken [person]" as awaking.
 
 Check awaking:
-	if the noun is not asleep:
+	if the noun is the player:
+		take no time;
+		say "Perhaps you are in a dream, but you are unable to wake yourself." instead.
+
+Check awaking:
+	unless the noun is sleeping in this world:
 		take no time;
 		say "You can only awaken sleeping persons." instead.
 

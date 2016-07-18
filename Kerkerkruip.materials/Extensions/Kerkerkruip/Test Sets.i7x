@@ -3711,6 +3711,55 @@ initial scheduling of robbing-sleeping-malygris:
 Regular scheduling of robbing-sleeping-malygris: compel the action of taking the dagger of draining.
 Testing effects of robbing-sleeping-malygris: if we assert result "You have a \d+% chance of successfully stealing the dagger of draining", rule succeeds.
 
+Section - Waking People Up
+
+Table of Outcomes (continued)
+Outcome	likelihood	minimum attempts
+waking-awake-self	1	1
+waking-asleep-self	1	1
+waking-asleep-enemy	1	1
+waking-awake-enemy	1	1
+
+[TODO: waking asleep enemy when dreaming? are allies any different?]
+
+regular scheduling of waking-awake-self: try awaking the player;
+testing effects of waking-awake-self: if we assert result "Perhaps you are in a dream, but you are unable to wake yourself", rule succeeds.
+
+initial scheduling of waking-asleep-self:
+	prepare a test battle with the swarm of daggers;
+	try throwing the reusable item; [should still be a Morphean grenade]
+
+regular scheduling of waking-asleep-self: try awaking the player;
+testing effects of waking-asleep-self: if we assert result "Perhaps you are in a dream, but you are unable to wake yourself", rule succeeds.
+
+initial scheduling of waking-asleep-enemy:
+	wake the player up;
+	now the swarm of daggers is asleep;
+	update the combat status.
+	
+regular scheduling of waking-asleep-enemy: try awaking the swarm of daggers.
+testing effects of waking-asleep-enemy: if we assert result "With a swift kick, you wake up the swarm of daggers\. Not very subtle, perhaps, but it is certainly effective", rule succeeds.
+
+regular scheduling of waking-awake-enemy: try awaking the swarm of daggers.
+testing effects of waking-awake-enemy: if we assert result "You can only awaken sleeping persons", rule succeeds.
+
+[$ egrep -irl 'asleep|conscious' Kerkerkruip.materials/Extensions/
+Kerkerkruip.materials/Extensions//Kerkerkruip/Automated Testing.i7x - done, I think
+Kerkerkruip.materials/Extensions//Kerkerkruip/Test Sets.i7x - done, I think
+
+Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Actions and UI.i7x
+Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Dreams.i7x
+Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Events and Specials.i7x
+Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Events.i7x
+Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Items.i7x
+Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Locations.i7x
+Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Monster Abilities.i7x
+Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Monsters.i7x
+Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Religion.i7x
+Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Systems - Hiding Smoke Ethereal.i7x
+Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Systems.i7x
+]
+
 Chapter - Simple Tests
 
 [tests that don't require restart]
