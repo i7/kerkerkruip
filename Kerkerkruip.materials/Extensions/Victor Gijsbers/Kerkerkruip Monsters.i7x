@@ -2218,7 +2218,7 @@ Carry out an actor challenging someone in (this is the remove hound status when 
 
 Chapter - Level 2 - Angel of Compassion
 
-An angel of compassion is a monster. "An angel hovers here, [if angel-of-compassion-strength > 3]enveloped in blinding and overwhelming radiance[otherwise if angel-of-compassion-strength is 3]shining with divine glory[otherwise if angel-of-compassion-strength is 2]lessened by grief, but still majestic[otherwise if angel-of-compassion-strength is 1]saddened and wizened[otherwise]enveloped in sadness and all its glory gone[end if]."
+An angel of compassion is a neuter monster. "An angel hovers here, [if angel-of-compassion-strength > 3]enveloped in blinding and overwhelming radiance[otherwise if angel-of-compassion-strength is 3]shining with divine glory[otherwise if angel-of-compassion-strength is 2]lessened by grief, but still majestic[otherwise if angel-of-compassion-strength is 1]saddened and wizened[otherwise]enveloped in sadness and all its glory gone[end if]."
 
 The level of the angel of compassion is 2.
 The ID of the angel of compassion is 33.
@@ -3369,9 +3369,262 @@ Status skill rule (this is the minotaur power status skill rule):
 		say "Your [bold type]axe proficiency[roman type] gives you a (your body)% chance of dealing 10 bonus damage when attacking with an axe. You can also use the special power of the minotaur's axe, and are stronger in the maze. [italic type](Level 3)[roman type][line break][run paragraph on]".
 
 
+Chapter - Level 3 - Angel of Mercy
+
+The angel of mercy is a neuter monster. "A [if angel of mercy is gargantuan]vast, [otherwise if angel of mercy is huge]great, [otherwise if angel of mercy is large]big, [otherwise if angel of mercy is small]diminuitive, [otherwise if angel of mercy is tiny]miniscule, [end if][if  radiation of Angel of Mercy is 0]diffuse[otherwise if radiation of Angel of Mercy is 1]glowing[otherwise if radiation of Angel of Mercy is 2]luminous[otherwise if radiation of Angel of Mercy is 3]brilliant[otherwise if radiation of Angel of Mercy is 4]blinding[otherwise]impossibly bright[end if] presence hovers before you, swirling like mist from one form to another."
+
+The description of the Angel of Mercy is "At the moment its form resembles [one of]a graceful young man holding a white rose[or]a grandmotherly woman wrapped in white linen[or]a sprightly doe[or]nothing but a cloud[or]an undulating white dragon[or]a cup spilling over with sparkling liquid[at random]. Looking upon it fills your heart with warmth and drives thoughts of battle from your mind. Every blow the angel receives makes it smaller, but increases its radiance. It is currently [size of Angel of Mercy] and it has [radiation of Angel of Mercy] level[if radiation of angel of mercy is not 1][s][end if] of radiation."
+
+[TODO: change description with concentration?]
+
+The soul description of the Angel of Mercy is "a heart of purest silver".
+
+The level of the Angel of Mercy is 3.
+[The ID of the Angel of Mercy is .]
+The Angel of Mercy is gargantuan.
+The Angel of Mercy is talker.
+The Angel of Mercy is thrower. [have Angel of Mercy throw grenades in another direction?]
+Material of the Angel of Mercy is radiance.
+
+The Angel of Mercy is advanced.
+
+The angel of Mercy is angelic.
+Angel of Mercy is flyer.
+Radiation of angel of Mercy is 0.
+
+The health of the angel of Mercy is 40.
+The melee of the angel of Mercy is 3.
+The defence of the angel of Mercy is 12.
+
+The body score of the angel of mercy is 7.
+The mind score of the angel of mercy is 7.
+The spirit score of the angel of mercy is 12.
+
+For natural weapon setup of the angel of mercy (this is the angel of mercy's nails rule):
+	let X be the natural weapon described;
+	now damage die of X is 5;
+	now dodge bonus of X is 0;
+	now parry-against bonus of X is -1;
+	now parry-with bonus of X is 0;  [high for a natural weapon. Give the angel some equipment?]
+	now printed name of X is "angel's nails";
+	now X is plural-named;
+
+[
+Section - Equipment
+
+The angel of mercy carries a cool weapon and maybe a shield too... should benefit from radiance
+
+super sharp weapon - kills mercifully - scythe? sword?
+]
+
+Section - Getting smaller
+
+[The angel of mercy gets smaller and more radiant when damaged.]
+
+Aftereffects rule (this is the angel of mercy shrinks when hit rule):
+	if the global defender is the angel of mercy and the total damage is greater than 0:
+		let previous-size be the size of the angel of mercy;
+		if previous-size is not tiny:
+			now the angel of mercy is the size before previous-size;
+		increase the radiation of angel of mercy by 1;
+		if the angel of mercy is within the location:
+			if previous-size is not tiny:
+				say "The angel of mercy smiles at [the global attacker] and seems to shiver with cold. With a sigh, her form collapses in on itself until she is [size of angel of mercy] - but [if radiation of angel of mercy is 1]starts to shine with radiance[otherwise]even more radiant[end if]!";
+			otherwise:
+				say "Now no more than a darting point of light, the angel flickers and grows even brighter!";
+		otherwise:
+			Let way be the best route from the location of the player to the location of the angel of mercy;
+			if way is a direction:
+				say "Somewhere [way], you hear a sigh of pity that chills you to your bones.";
+			otherwise:
+				say "Somewhere in the dungeon, you hear a sigh of pity that chills you to your bones."; 
+				
+A reviving rule for the angel of mercy (this is the reviving angel of mercy rule):
+	now radiation of angel of mercy is 0;
+	now the size of angel of mercy is gargantuan;
+	
+Section - Mercy for Runners
+
+To decide whether (fighter - Angel of Mercy) would take a parting shot at (deserter - a person):
+	[TODO: make this a rulebook - this might allow the angel to take parting shots when not maximally concentrated,
+	as the prose suggests]
+	no.
+	
+[TODO: come up with some interesting following behavior?]	
+
+[
+Section - Angel of Mercy images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+The avatar of angel of mercy is Figure of map_monster_angel_of_mercy.
+The legend-label of angel of mercy is Figure of map_legend_angel_of_mercy.
+]
+
+Section - Prose
+
+Report an actor hitting the dead angel of mercy:
+	say "The angel shinks to a pinpoint so bright you can't bear to look, then disappears completely!";
+	[TODO: blinds you when she dies? What about blind/eyeless viewers?]
+	rule succeeds.
+
+Report the angel of mercy hitting a dead pc:
+	say "'In death may you find the peace you could not achieve in life,' the angel murmurs as you draw your last breath.";
+	rule succeeds.
+
+Report the angel of mercy concentrating:
+	say "[if concentration of the angel of mercy is 1]The angel of mercy gathers its form in concentration.[otherwise if concentration of the angel of mercy is 2]The angel of mercy's shape flows faster and more intensely.[otherwise if concentration of the angel of mercy is 3]'Retreat now, and I shall not harm you,' the angel commands, fierce with righteous energy.[end if]";
+	rule succeeds.
+	
+[TODO: angel of mercy doesn't hit runners (but ony if maximally concentrated?)]
+
+Report the angel of mercy attacking:
+	unless the actor is the noun:
+		say "'[if the health of the noun is less than 10]Your death will be quick and painless[otherwise]I bear you no ill will, but I shall defend my allies[end if],' the angel of mercy declares as it strikes out at [the noun].";
+	otherwise:
+		say "'The most difficult to forgive is always oneself!' the angel of mercy screams as it claws at its own face.";
+	rule succeeds.
+
+Report the angel of mercy dodging:
+	say "The angel shifts to avoid the attack.";
+	rule succeeds.
+
+Report the angel of mercy waiting when the angel of mercy is insane:
+	say "The angel of mercy improvises a song that climaxes in the refrain 'Kill them all and let me sort them out!'";
+	rule succeeds.
 
 
+Section - Power
 
+The power of mercy is a power. The angel of mercy grants the power of mercy.
+The power level of power of mercy is 3.
+The command text of power of mercy is "pardon".
+The description of power of mercy is "Type: active and passive ability.[paragraph break]Command: pardon.[paragraph break]As reaction, you can forgive your attacker for seeking to harm you. This reduces the damage you receive from them by (your spirit / 4). This damage reduction will occur every time that person hits you, until you attack them back. If someone you have pardoned hits you, they must succeed at a spirit check against (your spirit + 4) or lose 1 point of spirit.[paragraph break]In addition, any time you are damaged in combat, you will grow smaller and more radiant. This effect lasts until combat is over."
+
+The power-name of power of mercy is "power of mercy".
+
+[TODO: grant eyeless vision? immune to radiance? or just protect from own flash power?]
+[pardon power: makes it harder for enemy to hit/damage you, but only until you hit back, and only usable after they hit you... or force them to retreat? 
+
+"pardoning softens blows"
+
+mercy killing - if you damage an enemy to low enough health, does extra damage to kill them... if it's not enough, does no damage? keep concentration?
+
+-- stop blow but add damage to next attack!
+]
+
+Table of Enemy Powers (continued)
+power	faculty1	faculty2
+power of mercy	spirit	--
+
+Status skill rule (this is the mercy status skill rule):
+	if the power of mercy is granted:
+		say "You have the power of mercy, which causes you to shrink in size and grow more radiant when hit. You can also [bold type]pardon[roman type] your attacker, softening the blow and weakening their spirit. [italic type](Level 3)[roman type][line break][run paragraph on]".
+
+Absorbing power of mercy:
+	increase melee of the player by 2;
+	increase defence of the player by 3;
+	increase permanent health of the player by 17;
+	say "As the angel dies, its generosity of spirit becomes yours. ([bold type]Power of mercy[roman type]: +2 attack, +3 defence, +17 health, shrink and become radiant when hit, and you can create a flash of light.)[paragraph break]";
+
+Repelling power of mercy:
+	decrease melee of the player by 2;
+	decrease defence of the player by 3;
+	decrease permanent health of the player by 17;
+	now every person is not pardoned.
+
+[TODO: flash command, radiation and shrinking effects]
+
+Section - Power of Mercy - Aftereffects
+
+mercy-radiation is a number that varies. mercy-radiation is 0.
+
+To diminish is a verb.
+
+Aftereffects rule (this is the mercy damage rule):
+	if global defender is the player and the total damage is greater than 0:
+		if power of mercy is granted:
+			let previous-size be the size of the player;
+			if previous-size > tiny:
+				["hate is present" is deprecated, but it's not safe to update the combat status here, because this can happen when combat status needs to be concluding]
+				if hate is present:
+					now the size of the player is the size before previous-size;
+					say "You shrink to [bold type][size of the player][roman type] size!";
+					let n be 20 - total damage;
+					if n < 0, now n is 0;
+					test the spirit of the player against n;
+					if test result is true:
+						say "You gain a level of radiance!";
+						increase mercy-radiation by 1;
+						increase the radiation of the player by 1;
+					otherwise:
+						say "Your spirit was not strong enough to increase your radiance this time.";
+			if the global attacker is pardoned:
+				let n be (final spirit of the global defender) + 4;
+				test the spirit of the global attacker against n;
+				if test result is true:
+					say "[regarding the global attacker][Possessive] attack is righteous! [Their] spirit holds fast.";
+				otherwise:
+					say "[The global attacker] [are] shamed by [their] actions, and [diminish] in spirit.";
+					decrease spirit score of the global attacker by 1.
+								
+Every turn when mercy-radiation is not 0 (this is the revert back to normal radiance rule):
+	if combat status is peace:
+		let base-radiation be the radiation of the player - mercy-radiation;
+		if base-radiation is 0:
+			say "All of your radiance is extinguished with your mercy.";
+		otherwise:
+			say "With your mercy extinguished, you revert to [base-radiation] levels of radiance.";
+		now the radiation of the player is base-radiation;
+		now mercy-radiation is 0;
+
+Section - Power of Mercy - Pardoning
+
+A person can be pardoned.
+
+[Instead, maintain concentration when hit by pardoned person?]
+
+A remove specific damage rule (this is the pardoning softens the blow rule):
+	if victim is the player and the power of mercy is granted:
+		[TODO: let the angel of mercy do this too? use this to reduce general damage, or add back health?]
+		if (damage-by-hitting is true) and (the global attacker is pardoned):
+			Let n be (final spirit of the victim) / 4;
+			remove n points of physical damage with reason "pardoning softens the blow".
+
+Status attribute rule (this is the pardon status rule):
+	now world test subject is the player;
+	if a worldsharer person is pardoned:
+		if long status is true:
+			say "You have [bold type]pardoned[roman type] [the list of pardoned people].[line break][run paragraph on]".
+
+Last carry out examining a pardoned person:
+	say "You have pardoned [the noun] for attacking you, and their ability to harm you is diminished.";
+
+Pardoning is an action applying to nothing. Understand "pardon" as pardoning.
+
+Check pardoning:
+	if the power of mercy is not granted:
+		take no time;
+		say "You do not possess that power." instead.
+
+Check pardoning:
+	if the player is not at-react:
+		take no time;
+		say "You can only pardon as a reaction." instead.
+		
+[TODO: pardon non-attackers like the abyss of the soul?]
+
+Check pardoning:
+	if the global attacker is pardoned:
+		take no time;
+		say "You have already pardoned [the global attacker]." instead.
+		
+Carry out pardoning:
+	now the global attacker is pardoned;
+	say "You pardon [the global attacker], and [their] ability to harm you is diminished."
+
+First carry out attacking:
+	if the global defender is pardoned:
+		say "You revoke your pardon, and strike back at the one who wronged you!";
+		now the global defender is not pardoned.
 
 Chapter - Level 4 - Fanatics of Aite 
 
