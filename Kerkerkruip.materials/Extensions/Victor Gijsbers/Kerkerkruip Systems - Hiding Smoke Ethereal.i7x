@@ -19,7 +19,7 @@ Status attribute rule (this is the hidden status rule):
 			say "[@ check initial position of attribute]hidden[run paragraph on]";
 
 An attack modifier rule (this is the hidden gives a small attack bonus rule):
-	if the global attacker is hidden and the global defender is not asleep: [you'll already get the asleep bonus]
+	if the global attacker is hidden and the global defender is conscious in this world: [you'll already get the asleep bonus]
 		say " + 2 (hidden)[run paragraph on]";
 		increase attack strength by 2.
 
@@ -82,10 +82,8 @@ A detection rule (this is the tension increases probability of detection rule):
 A detection rule (this is the number of enemies increases probability of detection rule):
 	let n be 0;
 	repeat with guy running through people in the location:
-		if guy opposes the player:
-			unless guy is perceptive:
-				unless guy is asleep:
-					increase n by 1;
+		if guy opposes the player and guy is perceptive and guy is conscious in this world:
+			increase n by 1;
 	if n is not 0:
 		say " - [n] (number of perceiving enemies)[run paragraph on]";
 		decrease the hiding roll by n.

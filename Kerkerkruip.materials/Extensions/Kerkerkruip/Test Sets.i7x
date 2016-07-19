@@ -3591,19 +3591,167 @@ Testing effects of jump-a-turn: if we assert result "You jump", rule succeeds.
 
 Chapter - Sleep Effects
 
+Table of Outcomes (continued)
+Outcome	likelihood	minimum attempts	antecedent
+sleep effects	0	1	restarting for tests
+
+Scenario for sleep effects:
+	now the drawing room is bannedobject; [preparing a test battle triggers "it is only a drawing"] 
+	now the Lair of the Imp is bannedobject;
+	now Temple of Nomos is testobject.
+	
+Section - Sneaking Around Sleepers
+
+Table of Outcomes (continued)
+Outcome	likelihood	minimum attempts
+robbing-wakeful-malygris	1	1
+robbing-sleeping-malygris	1	1
+
+[TODO: robbing from someone who is asleep in the dream with you?]
+
+Initial scheduling of robbing-wakeful-malygris:
+	now Malygris is not asleep;
+	extract the player to the location of Malygris.
+	
+Regular scheduling of robbing-wakeful-malygris: compel the action of taking the dagger of draining.
+Testing effects of robbing-wakeful-malygris: if we assert result "That seems to belong to Malygris", rule succeeds.
+
+initial scheduling of robbing-sleeping-malygris:
+	now Malygris is asleep;
+	
+Regular scheduling of robbing-sleeping-malygris: compel the action of taking the dagger of draining.
+Testing effects of robbing-sleeping-malygris: if we assert result "You have a \d+% chance of successfully stealing the dagger of draining", rule succeeds.
+
+Table of Outcomes (continued)
+Outcome	likelihood	minimum attempts
+hiding-from-blind-and-sleeper	1	1
+hiding-from-blind	1	1
+hiding-from-sleeper	1	1
+hiding-from-watchers	1	1
+
+initial scheduling of hiding-from-blind-and-sleeper:
+	prepare a test battle with the jumping bomb;
+	extract the hound to the location;
+	now the flash-grenade-timer of the hound is 5;
+	now the jumping bomb is asleep;
+	try sneaking.
+	
+initial scheduling of hiding-from-blind:
+	now the jumping bomb is not asleep;
+	now the flash-grenade-timer of the hound is 5.
+
+initial scheduling of hiding-from-sleeper:
+	now the jumping bomb is asleep;
+	now the flash-grenade-timer of the hound is 0.
+	
+initial scheduling of hiding-from-watchers: now the jumping bomb is not asleep.
+
+regular scheduling of an outcome (called event):
+	if the event is at least hiding-from-blind-and-sleeper and the event is at most hiding-from-watchers, compel the action of waiting.
+
+testing effects of hiding-from-blind-and-sleeper: if we assert absence of result "number of perceiving enemies", rule succeeds.
+testing effects of hiding-from-blind: if we assert result " - 1 \(number of perceiving enemies\)", rule succeeds.
+testing effects of hiding-from-sleeper: if we assert result " - 1 \(number of perceiving enemies\)", rule succeeds.
+testing effects of hiding-from-watchers: if we assert result " - 2 \(number of perceiving enemies\)", rule succeeds.
+
+Section - Waking People Up
+
+Table of Outcomes (continued)
+Outcome	likelihood	minimum attempts
+waking-awake-self	1	1
+sleeping-to-wake	1	1
+waking-asleep-self	1	1
+waking-asleep-enemy	1	1
+waking-awake-enemy	1	1
+dreaming-with-grenade	1	1
+exploding-in-dream	1	1
+waking-with-grenade	1	1
+exploding-awake	1	1
+
+[TODO: waking asleep enemy when dreaming? are allies any different?]
+
+regular scheduling of waking-awake-self: try awaking the player;
+testing effects of waking-awake-self: if we assert result "Perhaps you are in a dream, but you are unable to wake yourself", rule succeeds.
+
+initial scheduling of sleeping-to-wake:
+	extract the player to the Temple of Nomos;
+	extract the swarm of daggers to the Temple of Nomos;
+	now the reusable item is a random morphean grenade.
+
+regular scheduling of sleeping-to-wake: compel the action of throwing the reusable item.
+testing effects of sleeping-to-wake: if we assert that dreamer-location is Temple of Nomos, rule succeeds.
+
+regular scheduling of waking-asleep-self: try awaking the player;
+testing effects of waking-asleep-self: if we assert result "Perhaps you are in a dream, but you are unable to wake yourself", rule succeeds.
+
+initial scheduling of waking-asleep-enemy:
+	wake the player up;
+	now the swarm of daggers is asleep; [unnecessary currently, but not sure if it's supposed to be]
+	update the combat status.
+	
+regular scheduling of waking-asleep-enemy: try awaking the swarm of daggers.
+testing effects of waking-asleep-enemy: if we assert result "With a swift kick, you wake up the swarm of daggers\. Not very subtle, perhaps, but it is certainly effective", rule succeeds.
+
+regular scheduling of waking-awake-enemy: try awaking the swarm of daggers.
+testing effects of waking-awake-enemy: if we assert result "You can only awaken sleeping persons", rule succeeds.
+
+initial scheduling of dreaming-with-grenade:
+	now every dream is randomly included;
+	now Dream of Briar Roses is testobject; [player keeps their body]
+	
+regular scheduling of dreaming-with-grenade: compel the action of throwing the reusable item.
+testing effects of dreaming-with-grenade: if yourself is asleep, rule succeeds.
+
+initial scheduling of exploding-in-dream: now the reusable item is a random smoke grenade.
+regular scheduling of exploding-in-dream: compel the action of throwing the reusable item;
+testing effects of exploding-in-dream: if yourself is asleep, rule succeeds.
+
+initial scheduling of waking-with-grenade:
+	try going up;
+	select menu question answer 1;
+
+testing effects of waking-with-grenade: if the swarm of daggers is asleep, rule succeeds.
+	
+regular scheduling of exploding-awake: compel the action of throwing the reusable item.
+testing effects of exploding-awake: if the swarm of daggers is not asleep, rule succeeds.
+
+Section - Specific Monster Sleep Effects
+
+Table of Outcomes (continued)
+Outcome	likelihood	minimum attempts	antecedent
+sleeping-hound-unprepared	0	1	--
+awake-hound-unprepared-for-hidden	0	1	--
+awake-hound-prepared	1	1	--
+
+Definition: an outcome is hound-provoking if it is sleeping-hound-unprepared or it is awake-hound-unprepared-for-hidden or it is awake-hound-prepared.
+
+initial scheduling of sleeping-hound-unprepared:
+	prepare a test battle with the hound;
+	now the hound is asleep;
+	now the health of the player is 1000;
+	now the melee of the hound is 100; [convince the hound's AI that attacking is best]
+	now the defence of the hound is 50;
+	now the melee of the player is 0.
+	
+initial scheduling of awake-hound-unprepared-for-hidden: try sneaking.
+
+initial scheduling of awake-hound-prepared: try taking off the fuligin cloak.
+
+regular scheduling of a hound-provoking outcome:
+	compel the action of attacking the hound;
+	now suppress npc action is false.
+
+testing effects of a hound-provoking outcome: if we assert result "you do not overcome the hound's defence rating of 50\.\n\n<^\n>+ your attack, the hound jumps at you", rule succeeds.
+
 Section - Nomos interventions and dreams
 
 Table of Outcomes (continued)
 Outcome	likelihood	minimum attempts	antecedent
-Sleep effects	1	1	restarting for tests
+dreamy-nomos-worshipper	1	1	--
 teleport-with-nomos-bonus	1	1	--
 nomos-peace-attack	1	1	--
 
-Scenario for sleep effects:
-	now the Lair of the Imp is bannedobject;
-	now Temple of Nomos is testobject.
-	
-Initial scheduling of sleep effects:
+Initial scheduling of dreamy-nomos-worshipper:
 	prepare a test battle with Miranda;
 	try smiting Miranda;
 	extract the player to the temple of Nomos, making sure it is unoccupied;
@@ -3618,7 +3766,7 @@ Initial scheduling of sleep effects:
 
 Before reading a command when testing Nomos intervention effects: say "reading a command, nomos attacker=[nomos attacker] counter=[nomos counter], bonus=[nomos bonus]";]
 
-Testing effects of sleep effects:
+Testing effects of dreamy-nomos-worshipper:
 	if the number of people in Entrance Hall is 0, rule succeeds.
 	
 Initial scheduling of teleport-with-nomos-bonus:
@@ -3689,112 +3837,6 @@ testing effects of a nomos-after-dream outcome: if we assert that the nomos bonu
 regular scheduling of nomos-attack-after-tungausy: compel the action of waiting.
 testing effects of nomos-attack-after-tungausy: if we assert result "You plan on waiting, but find yourself attacking the swarm of daggers instead", rule succeeds.
 
-Section - Picking pockets
-
-Table of Outcomes (continued)
-Outcome	likelihood	minimum attempts
-robbing-wakeful-malygris	1	1
-robbing-sleeping-malygris	1	1
-
-[TODO: robbing from someone who is asleep in the dream with you?]
-
-Initial scheduling of robbing-wakeful-malygris:
-	now Malygris is not asleep;
-	extract the player to the location of Malygris.
-	
-Regular scheduling of robbing-wakeful-malygris: compel the action of taking the dagger of draining.
-Testing effects of robbing-wakeful-malygris: if we assert result "That seems to belong to Malygris", rule succeeds.
-
-initial scheduling of robbing-sleeping-malygris:
-	now Malygris is asleep;
-	
-Regular scheduling of robbing-sleeping-malygris: compel the action of taking the dagger of draining.
-Testing effects of robbing-sleeping-malygris: if we assert result "You have a \d+% chance of successfully stealing the dagger of draining", rule succeeds.
-
-Section - Waking People Up
-
-Table of Outcomes (continued)
-Outcome	likelihood	minimum attempts
-waking-awake-self	1	1
-waking-asleep-self	1	1
-waking-asleep-enemy	1	1
-waking-awake-enemy	1	1
-dreaming-with-grenade	1	1
-exploding-in-dream	1	1
-waking-with-grenade	1	1
-exploding-awake	1	1
-
-[TODO: waking asleep enemy when dreaming? are allies any different?]
-
-regular scheduling of waking-awake-self: try awaking the player;
-testing effects of waking-awake-self: if we assert result "Perhaps you are in a dream, but you are unable to wake yourself", rule succeeds.
-
-initial scheduling of waking-asleep-self:
-	extract the player to the Temple of Nomos;
-	extract the swarm of daggers to the Temple of Nomos;
-	try throwing the reusable item; [should still be a Morphean grenade]
-
-regular scheduling of waking-asleep-self: try awaking the player;
-testing effects of waking-asleep-self: if we assert result "Perhaps you are in a dream, but you are unable to wake yourself", rule succeeds.
-
-initial scheduling of waking-asleep-enemy:
-	wake the player up;
-	now the swarm of daggers is asleep;
-	update the combat status.
-	
-regular scheduling of waking-asleep-enemy: try awaking the swarm of daggers.
-testing effects of waking-asleep-enemy: if we assert result "With a swift kick, you wake up the swarm of daggers\. Not very subtle, perhaps, but it is certainly effective", rule succeeds.
-
-regular scheduling of waking-awake-enemy: try awaking the swarm of daggers.
-testing effects of waking-awake-enemy: if we assert result "You can only awaken sleeping persons", rule succeeds.
-
-initial scheduling of dreaming-with-grenade:
-	now every dream is randomly included;
-	now Dream of Briar Roses is testobject; [player keeps their body]
-	
-regular scheduling of dreaming-with-grenade: compel the action of throwing the reusable item.
-testing effects of dreaming-with-grenade: if yourself is asleep, rule succeeds.
-
-initial scheduling of exploding-in-dream: now the reusable item is a random smoke grenade.
-regular scheduling of exploding-in-dream: compel the action of throwing the reusable item;
-testing effects of exploding-in-dream: if yourself is asleep, rule succeeds.
-
-initial scheduling of waking-with-grenade:
-	try going up;
-	select menu question answer 1;
-
-testing effects of waking-with-grenade: if the swarm of daggers is asleep, rule succeeds.
-	
-regular scheduling of exploding-awake: compel the action of throwing the reusable item.
-testing effects of exploding-awake: if the swarm of daggers is not asleep, rule succeeds.
-
-Section - Specific Monster Sleep Effects
-
-Table of Outcomes (continued)
-Outcome	likelihood	minimum attempts	antecedent
-sleeping-hound-unprepared	0	1	--
-awake-hound-unprepared-for-hidden	0	1	--
-awake-hound-prepared	1	1	--
-
-Definition: an outcome is hound-provoking if it is sleeping-hound-unprepared or it is awake-hound-unprepared-for-hidden or it is awake-hound-prepared.
-
-initial scheduling of sleeping-hound-unprepared:
-	prepare a test battle with the hound;
-	now the hound is asleep;
-	now the health of the player is 1000;
-	now the melee of the hound is 100; [convince the hound's AI that attacking is best]
-	now the defence of the hound is 50;
-	now the melee of the player is 0.
-	
-initial scheduling of awake-hound-unprepared-for-hidden: try sneaking.
-
-initial scheduling of awake-hound-prepared: try taking off the fuligin cloak.
-
-regular scheduling of a hound-provoking outcome:
-	compel the action of attacking the hound;
-	now suppress npc action is false.
-
-testing effects of a hound-provoking outcome: if we assert result "you do not overcome the hound's defence rating of 50\.\n\n<^\n>+ your attack, the hound jumps at you", rule succeeds.
 
 [$ egrep -irl 'asleep|conscious' Kerkerkruip.materials/Extensions/
 Kerkerkruip.materials/Extensions//Kerkerkruip/Automated Testing.i7x - done, I think
@@ -3806,9 +3848,9 @@ Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Events.i7x - done
 Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Items.i7x - done
 Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Locations.i7x - done
 Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Monster Abilities.i7x - done
+Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Monsters.i7x - done
+Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Religion.i7x - done
 
-Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Monsters.i7x
-Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Religion.i7x
 Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Systems - Hiding Smoke Ethereal.i7x
 Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Systems.i7x
 ]

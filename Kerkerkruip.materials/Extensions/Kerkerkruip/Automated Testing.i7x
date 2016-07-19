@@ -1277,14 +1277,20 @@ Definition: A room (called place) is reachable:
 Definition: A thing is reachable if the location of it is a reachable room.
 
 To swap the occupants of (first place - a room) and (second place - a room):
-	Let swap place be a random unoccupied room;
-	Repeat with guy running through people in first place:
-		extract guy to the swap place;
-	if the second place is not the swap place:
-		Repeat with guy running through people in second place:
-			extract guy to first place;
-		Repeat with guy running through people in swap place:
-			extract guy to second place;
+	if second place is nothing:
+		transcribe "removing occupants of [first place] from play";
+		repeat with guy running through people in first place:
+			extract guy from combat;
+			remove guy from play;
+	otherwise:
+		Let swap place be a random unoccupied room;
+		Repeat with guy running through people in first place:
+			extract guy to the swap place;
+		if the second place is not the swap place:
+			Repeat with guy running through people in second place:
+				extract guy to first place;
+			Repeat with guy running through people in swap place:
+				extract guy to second place;
 
 To extract (guy - a person) to (place - a room), making sure it is unoccupied:
 	if making sure it is unoccupied and place is occupied:
@@ -1294,7 +1300,10 @@ To extract (guy - a person) to (place - a room), making sure it is unoccupied:
 	if place is not the location of guy:
 		if guy is the player:
 			now way-to-get-back is the best route from the place to the location;
-			now way-to-get-there is the opposite of way-to-get-back;
+			if way-to-get-back is a direction:
+				now way-to-get-there is the opposite of way-to-get-back;
+			otherwise:
+				now way-to-get-there is nothing;
 		transcribe "moving [guy] to [place]";
 		extract guy from combat;
 		move guy to place;
@@ -1337,8 +1346,8 @@ A detection rule when traveling sneakily is true:
 	say "+ 100 (traveling sneakily for testing purposes)[run paragraph on]";
 	increase hiding roll by 100;
 
-The way-to-get-back is a direction that varies.
-The way-to-get-there is a direction that varies.
+The way-to-get-back is an object that varies. [a direction or nothing]
+The way-to-get-there is an object that varies. [a direction or nothing]
 
 To force the fuligin cloak to work:
 	transcribe "hiding immediately";
