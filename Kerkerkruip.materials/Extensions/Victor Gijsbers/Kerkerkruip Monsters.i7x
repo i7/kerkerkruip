@@ -1902,7 +1902,7 @@ Last killing rule (this is the demon of rage gets stronger rule):
 			do the demon of rage power-up.
 
 To do the demon of rage power-up:
-	now demon of rage is not asleep;
+	if demon of rage is sleeping in this world, now demon of rage is not asleep;
 	increase demon-of-rage-number by 1;
 	if a random chance of 2 in 3 succeeds:
 		increase melee of demon of rage by 1;
@@ -2170,10 +2170,10 @@ Every turn when hound status > 0:
 Hound-preparedness-possible is a truth state that varies.
 
 First carry out hitting (this is the remember whether preparedness was possible rule):
-	if the noun is asleep or the actor is hidden:
-		now hound-preparedness-possible is false;
+	if the noun is conscious in this world and the actor is not hidden:
+		now hound-preparedness-possible is true;
 	otherwise:
-		now hound-preparedness-possible is true.
+		now hound-preparedness-possible is false.
 
 An aftereffects rule (this is the set up the power of the hound rule):
 	[ Check that we're not running from a battle - the power isn't used in that circumstance! ]
@@ -4671,7 +4671,7 @@ To call an ally:
 			say "You briefly see an image of [the guy] flickering above the overmind, and a weird buzzing sound fills the dungeon. In the image, [the guy] [move] to [place].";
 			now last-seen-location of the guy is place;
 			now guy is seen;
-			now guy is not asleep;
+			if guy is sleeping in this world, now guy is not asleep;
 		try guy going the way;
 	otherwise:
 		say "You briefly see an image of [the guy] flickering above the overmind, and a weird buzzing sound fills the dungeon.".
@@ -4783,7 +4783,7 @@ Carry out calling:
 			otherwise:
 				try the noun going the way;
 			now last-seen-location of the noun is location of the noun;
-			now the noun is not asleep;
+			if the noun is sleeping in this world, now the noun is not asleep;
 		otherwise:
 			say "[The noun] [have] no way to reach you!";
 	otherwise:
@@ -5671,7 +5671,7 @@ The teleport eagerness of Malygris is 8.
 Malygris-summon-countdown is a number that varies. Malygris-summon-countdown is 0.
 
 After reporting Malygris teleporting:
-	if teleportation-destination is not the location of the player and Malygris is not asleep:
+	if teleportation-destination is not the location of the player and Malygris is conscious in this world:
 		if the teleport amount of Malygris is 1:
 			now Malygris-summon-countdown is a random number between 5 and 7;
 		if the teleport amount of Malygris is 0:
@@ -5693,7 +5693,7 @@ Starting kit setup for Malygris (this is the randomise Malygris teleporting rule
 
 Section - Special power - Summoning the demonic assassin
 
-Every turn when Malygris-summon-countdown is not 0 and Malygris is not asleep:
+Every turn when Malygris-summon-countdown is not 0 and Malygris is conscious in this world:
 	if the location of Malygris is the location of the player and the player is not hidden:
 		say "Your [if just-discovered is true]discovery[otherwise]arrival[end if] interrupts [if teleport amount of Malygris is 1]an intricate[otherwise]a hasty[end if] summoning ritual that Malygris was attempting to perform.";
 		now Malygris-summon-countdown is 0; [his attempt at summoning has failed because the player has interrupted it]

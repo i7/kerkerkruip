@@ -238,13 +238,11 @@ To compel (the desired action - a stored action) as a reaction to (guy - a perso
 	schedule compelling an attack; [this should automatically stop and wait for a turn]
 
 To wait for (guy - a person) to act freely:
-	if guy is sleeping in this world:
-		[TODO: where does the waking actually happen?]
-		transcribe "waking [the guy] up so [they] can act freely";
+	[TODO: waking or not-waking options?]
 	now the act-outcome of the guy is the outcome described;
 	now the outcome described is scheduled for later testing;
 
-Initial scheduling of taking a turn:
+First initial scheduling of taking a turn (this is the usually suppress npc action rule):
 	now suppress npc action is true;
 
 To forget the/-- compelled action:
@@ -254,7 +252,12 @@ To forget the/-- compelled action:
 The automated menu question answer is a number that varies.
 
 First for reading a command when the automated menu question answer is greater than 0:
-	change the text of the player's command to "[the automated menu question answer]".
+	change the text of the player's command to "[the automated menu question answer]";
+
+First after reading a command when done testing is false (this is the restart capture after reading a command rule):
+	[We don't need to worry about the finish the last test rule, because it restarts before we get here. The reading a command activity causes text capturing to stop, even when "text capturing is active" remains true. Normally we don't use the reading a command rulebook during automated tests, but we do it when we answer questions. This seems to fix it:]
+	transcribe and stop capturing text because "faked a command";
+	start capturing text.
 
 To select menu question answer (N - a number):
 	transcribe "Selecting answer [N]";
@@ -1776,12 +1779,12 @@ The testing effects rules determine whether the action had the desired result. T
 
 Here's an example:
 
-	initial scheduling of aite-smashing: extract the player to the Temple of Aite.
-
-	regular scheduling of aite-smashing:
+	initial scheduling of aite-smashing:
+		extract the player to the Temple of Aite.
 		now aite-wrath is false;
 		now the Statue of Aite is in the Temple of Aite;
-		try attacking the Statue of Aite.
+
+	regular scheduling of aite-smashing: try attacking the Statue of Aite.
 
 	testing effects of aite-smashing: if aite-wrath is true, rule succeeds.
 
@@ -1791,7 +1794,7 @@ We can always perform very simple tests on outcomes:
 
 	testing effects of fafhrd-parry-fail: if the claymore is not rusted, rule succeeds.
 
-But there are some phrases to help us make more complicated assertions. These are especially helpful when there is more than one "wrong" result, because the phrase will include the actual result in the failure report.
+But there are some phrases to help us make more complicated assertions. These are especially helpful when there is more than one possible "wrong" value for what we're testing, because the phrase will include the actual value in the failure report.
 
 	if we assert result "You drop the gilded rapier", rule succeeds.
 
@@ -1985,6 +1988,12 @@ One more useful property is the "hitting count." This is a number that is reset 
 	regular scheduling of ape-retreat: compel the action of retreating.
 
 	testing effects of ape-retreat: if we assert that the hitting count of the blood ape is 1, rule succeeds.
+
+And if we want to give all NPCs total freedom, we can do this:
+	
+	now suppress npc action is false.
+	
+This may be necessary if we are testing initiative bonuses, for example. The "suppress npc action" variable is usually set to true at the beginning of a test step. We can reset it in an initial scheduling rule.
 
 Section: Quick Controlled Attacks
 

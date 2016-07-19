@@ -3768,6 +3768,33 @@ testing effects of waking-with-grenade: if the swarm of daggers is asleep, rule 
 regular scheduling of exploding-awake: compel the action of throwing the reusable item.
 testing effects of exploding-awake: if the swarm of daggers is not asleep, rule succeeds.
 
+Section - Specific Monster Sleep Effects
+
+Table of Outcomes (continued)
+Outcome	likelihood	minimum attempts	antecedent
+sleeping-hound-unprepared	0	1	--
+awake-hound-unprepared-for-hidden	0	1	--
+awake-hound-prepared	1	1	--
+
+Definition: an outcome is hound-provoking if it is sleeping-hound-unprepared or it is awake-hound-unprepared-for-hidden or it is awake-hound-prepared.
+
+initial scheduling of sleeping-hound-unprepared:
+	prepare a test battle with the hound;
+	now the hound is asleep;
+	now the melee of the player is 0;
+	now the defence of the hound is 50;
+	
+initial scheduling of awake-hound-unprepared-for-hidden: try sneaking.
+
+initial scheduling of awake-hound-prepared: try taking off the fuligin cloak.
+
+regular scheduling of a hound-provoking outcome:
+	now suppress npc action is false;
+	compel the action of attacking the hound;
+	wait for the hound to act freely.
+
+testing effects of a hound-provoking outcome: if we assert result "you do not overcome the hound's defence rating of 50\.\n\n<^\n>+ your attack, the hound jumps at you", rule succeeds.
+
 [$ egrep -irl 'asleep|conscious' Kerkerkruip.materials/Extensions/
 Kerkerkruip.materials/Extensions//Kerkerkruip/Automated Testing.i7x - done, I think
 Kerkerkruip.materials/Extensions//Kerkerkruip/Test Sets.i7x - done, I think
@@ -3777,8 +3804,8 @@ Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Events and Special
 Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Events.i7x - done
 Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Items.i7x - done
 Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Locations.i7x - done
+Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Monster Abilities.i7x - done
 
-Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Monster Abilities.i7x
 Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Monsters.i7x
 Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Religion.i7x
 Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Systems - Hiding Smoke Ethereal.i7x
