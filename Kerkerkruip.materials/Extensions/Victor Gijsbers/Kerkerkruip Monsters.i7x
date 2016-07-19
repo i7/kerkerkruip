@@ -1902,7 +1902,7 @@ Last killing rule (this is the demon of rage gets stronger rule):
 			do the demon of rage power-up.
 
 To do the demon of rage power-up:
-	if demon of rage is sleeping in this world, now demon of rage is not asleep;
+	now demon of rage is not asleep;
 	increase demon-of-rage-number by 1;
 	if a random chance of 2 in 3 succeeds:
 		increase melee of demon of rage by 1;
