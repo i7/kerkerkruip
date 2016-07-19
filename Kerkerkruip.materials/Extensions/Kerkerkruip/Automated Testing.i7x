@@ -222,6 +222,7 @@ Definition: a person is scheduled to act freely:
 	decide on whether or not the event is scheduled for later testing;
 
 Suppress npc action is a truth state that varies.
+[TODO: allow everyone to act, without messing up the normal suppresion behavior]
 
 To compel (the desired action - a stored action):
 	Let the guy be the actor part of the desired action;
@@ -242,7 +243,7 @@ To wait for (guy - a person) to act freely:
 	now the act-outcome of the guy is the outcome described;
 	now the outcome described is scheduled for later testing;
 
-First initial scheduling of taking a turn (this is the usually suppress npc action rule):
+Initial scheduling of taking a turn (this is the usually suppress npc action rule):
 	now suppress npc action is true;
 
 To forget the/-- compelled action:

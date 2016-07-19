@@ -3789,9 +3789,8 @@ initial scheduling of awake-hound-unprepared-for-hidden: try sneaking.
 initial scheduling of awake-hound-prepared: try taking off the fuligin cloak.
 
 regular scheduling of a hound-provoking outcome:
-	now suppress npc action is false;
 	compel the action of attacking the hound;
-	wait for the hound to act freely.
+	now suppress npc action is false.
 
 testing effects of a hound-provoking outcome: if we assert result "you do not overcome the hound's defence rating of 50\.\n\n<^\n>+ your attack, the hound jumps at you", rule succeeds.
 
