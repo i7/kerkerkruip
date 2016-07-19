@@ -1635,7 +1635,7 @@ Testing effects of reaper-seeking: if we assert that the combat state of the pla
 
 regular scheduling of rose-dreaming:
 	compel the action of throwing the reusable item;
-	now suppress npc action is false.
+	now suppress npc action is false. [I don't think this actually does anything]
 
 Testing effects of rose-dreaming: if we assert that the location is garden of thorns, rule succeeds.
 
@@ -3781,8 +3781,10 @@ Definition: an outcome is hound-provoking if it is sleeping-hound-unprepared or 
 initial scheduling of sleeping-hound-unprepared:
 	prepare a test battle with the hound;
 	now the hound is asleep;
-	now the melee of the player is 0;
+	now the health of the player is 1000;
+	now the melee of the hound is 100; [convince the hound's AI that attacking is best]
 	now the defence of the hound is 50;
+	now the melee of the player is 0.
 	
 initial scheduling of awake-hound-unprepared-for-hidden: try sneaking.
 

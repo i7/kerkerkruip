@@ -2161,8 +2161,7 @@ A combat round rule when the combat status is combat (this is the alternative de
 		now the main actor is the next participant;
 	now the combat state of the main actor is at-Act;
 
-[ After a successful turn reset the saved initative ]
-Every turn when hound status > 0:
+Every turn when hound status > 0 (this is the reset the saved initiative after an extra hound turn rule):
 	if hound status is 1:
 		now the initiative of the main actor is saved initiative;
 	decrease hound status by 1.

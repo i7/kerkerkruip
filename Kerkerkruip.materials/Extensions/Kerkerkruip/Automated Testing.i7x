@@ -243,8 +243,10 @@ To wait for (guy - a person) to act freely:
 	now the act-outcome of the guy is the outcome described;
 	now the outcome described is scheduled for later testing;
 
-Initial scheduling of taking a turn (this is the usually suppress npc action rule):
-	now suppress npc action is true;
+First initial scheduling of an outcome (called event) (this is the usually suppress npc action rule):
+	[This should be timed to suppress all npc action most of the time, but if suppression is manually disabled, we should wait to turn it back on until the test step is tested]
+	if event is a test step or event is a test set:
+		now suppress npc action is true;
 
 To forget the/-- compelled action:
 	now the compelled attacker is nothing;
@@ -1983,18 +1985,14 @@ Example:
 	regular scheduling of ape-cowering: wait for the blood ape to act freely.
 
 	testing effects of ape-cowering: if we assert result "The blood ape cowers before your dreadful presence", rule succeeds.
+	
+Using this phrase creates a link between the outcome that invoked it and the person being waited for. It will cause the outcome to be tested immediately after that person gets a combat round, and the captured text will contain only the text that was output during that round. If we want to test combat round output for more than one person in a single turn, we must make a separate outcome for each person, and create another outcome to be the antecedent of everything tested in that turn. The antecedent must not have any turn-generating effects like compelling an action or waiting for anyone to act freely.
 
 One more useful property is the "hitting count." This is a number that is reset to 0 for every person when a test set is scheduled. It is incremented for a person whenever they try the hitting action. For example, to test whether the blood ape hit a retreating player:
 
 	regular scheduling of ape-retreat: compel the action of retreating.
 
 	testing effects of ape-retreat: if we assert that the hitting count of the blood ape is 1, rule succeeds.
-
-And if we want to give all NPCs total freedom, we can do this:
-	
-	now suppress npc action is false.
-	
-This may be necessary if we are testing initiative bonuses, for example. The "suppress npc action" variable is usually set to true at the beginning of a test step. We can reset it in an initial scheduling rule.
 
 Section: Quick Controlled Attacks
 
