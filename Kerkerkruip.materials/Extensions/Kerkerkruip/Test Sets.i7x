@@ -6,9 +6,9 @@ Volume - All Test Sets (not for release)
 
 Include Automated Testing by Kerkerkruip.
 
-Chapter - Tests
+Book - Tests
 
-Section - aite champions vs mindbat
+Chapter - aite champions vs mindbat
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	antecedent
@@ -130,7 +130,7 @@ testing effects of defender-re-enslaving:
 	assert "the defender of Aite should be off-stage" based on whether or not defender of Aite is off-stage;
 	if the health of the player is 100, rule succeeds;
 
-Section - Chton Champion vs Bat
+Chapter - Chton Champion vs Bat
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	antecedent
@@ -186,7 +186,7 @@ testing effects for chton-arena-cheating:
 	assert that drakul's lifeblood is in Hall of Gods;
 	rule succeeds.
 
-Section - Parting Shots
+Chapter - Parting Shots
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	antecedent
@@ -197,6 +197,7 @@ mindslug-hidden-runner	1	1	--
 mindslug-reveal	1	1	--
 mindslug-retreat	1	1	--
 mindslug-runner	1	1	--
+mindslug-sleeper-runner	1	1	--
 
 [TODO: ignore testobject choices from file when running automated tests]
 
@@ -269,6 +270,19 @@ testing effects for mindslug-runner:
 	assert that the hitting count of mouser is 1 with label "hitting count of mouser";
 	if we assert result "run past your enemies", rule succeeds.
 
+initial scheduling of mindslug-sleeper-runner:
+	extract the player to the location of the mindslug;
+	now retreat location is the location of the mindslug;
+	now fafhrd is asleep;
+	
+regular scheduling of mindslug-sleeper-runner: compel the action of going the way-to-get-back.
+
+testing effects for mindslug-sleeper-runner:
+	assert that the hitting count of mindslug is 1 with label "hitting count of mindslug";
+	assert that the hitting count of fafhrd is 0 with label "hitting count of fafhrd";
+	assert that the hitting count of mouser is 1 with label "hitting count of mouser";
+	if we assert result "run past your enemies", rule succeeds.
+
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts
 fell-freezing	0	1
@@ -308,7 +322,7 @@ initial scheduling of unfrozen-fell-fleeing: now fell presses the player.
 regular scheduling of unfrozen-fell-fleeing: compel the action of retreating.
 testing effects of unfrozen-fell-fleeing: if we assert that the hitting count of Fell is 1 with label "hitting count of Fell", rule succeeds.
 
-Section - Retreating from the Tentacle
+Chapter - Retreating from the Tentacle
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	antecedent
@@ -356,7 +370,7 @@ testing effects for tentacle-dig-retreat:
 	assert "the player should be grappled" based on whether or not the player is grappled by the tentacle;
 	if the tentacle is in the location, rule succeeds.
 
-Section - Insane Drakul
+Chapter - Insane Drakul
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	antecedent
@@ -448,7 +462,7 @@ Initial scheduling of drakul suicide:
 regular scheduling of drakul suicide: try drakul hitting drakul.
 Testing effects of drakul suicide: if we assert result "drains his own blood, a small vial", rule succeeds.
 
-Section - Dreadful Presence
+Chapter - Dreadful Presence
 
 [E91A270C9962]
 
@@ -520,7 +534,7 @@ testing effects of a cower-counter outcome (called the event) (this is the cower
 
 initial scheduling of insane-player-cowering: now the player is insane.
 
-Section - Sul Champion vs Herm worshipper
+Chapter - Sul Champion vs Herm worshipper
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	antecedent
@@ -556,7 +570,7 @@ Testing effects of isra-undamaged: if we assert 0 damage to Isra after "You deal
 Testing effects of isra-defended-by-sul: if we assert result "\(Sul intervenes\)", rule succeeds.
 
 
-Section - Bug 210
+Chapter - Bug 210
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	antecedent
@@ -585,7 +599,7 @@ testing effects of reaction-mindslug-killing: if the mindslug is dead, rule succ
 
 testing effects of mindslug-soul-revival: if we assert result "The contemplative northern barbarian ends your life, with what seems to be a hint of sadness in his face.*As the mindslug dies, you feel its powerful intelligence absorbed into your own body", rule succeeds.
 
-Section - Reward in Arena of the Gods
+Chapter - Reward in Arena of the Gods
 
 [for issue #228]
 
@@ -637,7 +651,7 @@ testing effects of fell-also-killing:
 	assert "the glass cannon should still be readied" based on whether or not the glass cannon is readied;
 	rule succeeds.
 
-Section - Temporary Blood Magic from Nomos
+Chapter - Temporary Blood Magic from Nomos
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	antecedent
@@ -841,7 +855,7 @@ Testing effects of malleus-blood-tension:
 	assert result "The Malleus Maleficarum uses your bloodletting to reduce the tension";
 	if we assert that the tension is 4, rule succeeds.
 
-Section - bug 234
+Chapter - bug 234
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	maximum attempts	antecedent
@@ -878,7 +892,7 @@ testing effects of still-linking: if the healer of Aite is linked to the player,
 
 [not sure if this is testing the bug correctly]
 
-Section - Attempting to Maze Someone in Arena of the Gods
+Chapter - Attempting to Maze Someone in Arena of the Gods
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	antecedent
@@ -921,7 +935,7 @@ regular scheduling of overmind-mazing: compel the action of the overmind waiting
 testing effects of overmind-mazing: if the location is Maze, rule succeeds.
 testing effects of overmind-maze-reset: if the combat state of the overmind is at-inactive, rule succeeds.
 
-Section - Banshees Gone Wild - bug 248
+Chapter - Banshees Gone Wild - bug 248
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	antecedent
@@ -983,7 +997,7 @@ testing effects of reaction-ape-killing:
 
 [The original test involved fleeing the room as soon as the ape was dead. But I think this was just to avoid a delayed message - I think this is also fine]
 
-Section - Remembering Text
+Chapter - Remembering Text
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	antecedent
@@ -1246,7 +1260,7 @@ testing effects of secret-room-remembering:
 
 [TODO: psycholocation + sense]
 
-Section - Blessed Grenade - bug #261
+Chapter - Blessed Grenade - bug #261
 
 Scenario for blessed-grenade-test:
 	now Drakul is testobject;
@@ -1310,7 +1324,7 @@ Testing effects of no-new-blessed:
 	if we assert result "the Blessed Grenade drops on the ground", rule succeeds;
 
 
-Section - bug 262
+Chapter - bug 262
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	maximum attempts	antecedent
@@ -1411,7 +1425,7 @@ Testing effects of claymore-owner: if the original owner of the claymore is fafh
 	[TODO: starting kit items should match the player's size?]
 	[TODO: check ownership/starting kits in Arena of the Gods and Arena of the Fallen]
 
-Section - bug 245
+Chapter - bug 245
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	antecedent
@@ -1470,7 +1484,7 @@ testing effects of bodmall-bleeding:
 	assert "bodmall should be at-inactive, but she is [combat state of bodmall]" based on whether or not bodmall is at-inactive;
 	rule succeeds.
 
-Section - Maze Moving
+Chapter - Maze Moving
 
 [Moving around in the maze - check that all people have 0 concentration and are at-inactive. Check that the right thing happens when retreating or running from an opponent in the maze. Maybe check grenade-throwing effects in the maze]
 
@@ -1601,7 +1615,7 @@ regular scheduling of first-maze-smiting:
 Testing effects of first-maze-smiting: if we assert that the location of the player is the maze, rule succeeds.
 Testing effects of maze-peace: if we assert that the combat status is peace, rule succeeds.
 
-Section - Imp Teleporting Into Dreams
+Chapter - Imp Teleporting Into Dreams
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	antecedent
@@ -1676,7 +1690,7 @@ regular scheduling of imp-stashing: compel the action of waiting.
 Testing effects of imp-stashing: if we assert that the holder of the imp's loot is the lair of the imp, rule succeeds.
 
 
-Section - Bloodlust - issue 279
+Chapter - Bloodlust - issue 279
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	antecedent
@@ -1731,7 +1745,7 @@ The Fafhrd kills ape after player's hit rule is listed before the compel a react
 testing effects of fafhrd-killing-ape: if the blood ape is not alive, rule succeeds.
 testing effects of fafhrd-killed-ape: if the player is notlusting, rule succeeds.
 
-Section - bug 291
+Chapter - bug 291
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	antecedent
@@ -1810,7 +1824,7 @@ testing effects of sleepy-slaying:
 	assert result "fog of sleep";
 	unless the player is just-woken, rule succeeds.
 
-Section - Bug 301 Redux
+Chapter - Bug 301 Redux
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	antecedent
@@ -1859,7 +1873,7 @@ testing effects of other-fanatics-killing:
 
 [TODO: test reaper following]
 
-Section - Armadillo wandering
+Chapter - Armadillo wandering
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	maximum attempts	antecedent
@@ -1881,7 +1895,7 @@ Initial scheduling of armadillo-moved: now armadillo-origin is the location of t
 Regular scheduling of armadillo-moved: compel the action of waiting.
 Testing effects of armadillo-moved: if the location of the armadillo is not the armadillo-origin, rule succeeds.
 
-Section - Unlocking - issue 243
+Chapter - Unlocking - issue 243
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	antecedent
@@ -1933,7 +1947,7 @@ Scenario for unlocking-behavior:
 	enable advanced content;
 	assert that placement possibility is true when "in apprentice level when advanced content is enabled with a preset dungeon generation seed";
 
-Section - bug 293 - Sensing Isra and Fell
+Chapter - bug 293 - Sensing Isra and Fell
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	antecedent
@@ -1991,7 +2005,7 @@ Testing effects of fell-defeating-293:
 	[assert result "Israfel's dying cry shakes the foundations of the world";]
 	if the power of israfel is granted, rule succeeds.
 
-Section - Weapon aftereffects
+Chapter - Weapon aftereffects
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	antecedent
@@ -2356,7 +2370,7 @@ when hitting with damage (done)
 hitting without damage (not done)
 vs chain golem, bodmall, and hand-to-hand attacker, and missing - (all started)]
 
-Section - Damage Text
+Chapter - Damage Text
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	antecedent
@@ -2587,7 +2601,7 @@ initial scheduling of glass damage text:
 regular scheduling of glass damage text: do the action of the chain golem waiting for a 100 melee hit by the player.
 testing effects of glass damage text: if we assert result "You deal 10 ", rule succeeds.
 
-Section - Attack Modifiers
+Chapter - Attack Modifiers
 
 [TODO: add everything methodically]
 
@@ -2791,7 +2805,7 @@ Testing effects of eyeless-monster-smoke-attack: if we assert absence of result 
 TODO: increase hiding roll if all enemies blind?
 ]
 
-Section - Damage Modifiers
+Chapter - Damage Modifiers
 
 [Test every rule in the following rulebooks:
 
@@ -3472,7 +3486,7 @@ testing effects of ment-damage-bonus: if we assert result "\+ 1 \(ment\) ", rule
 regular scheduling of ment-damage-reduction: do the action of waiting for a 100 melee hit by the defender of Aite.
 testing effects of ment-damage-reduction: if we assert result "- 1 \(ment\) ", rule succeeds.
 
-Section - Damage Consequences
+Chapter - Damage Consequences
 
 [mostly concentration effects. Currently there is no single system for triggering losing concentration, TODO: create a damage consequences system similar to attack aftereffects.]
 
@@ -3496,7 +3510,7 @@ testing effects of launch-break-concentration: if we assert result "Thorns shoot
 
 testing effects of launch-broke-concentration: if we assert that the concentration of the minotaur is 0, rule succeeds.
 	
-Section - Automatos
+Chapter - Automatos
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	antecedent
@@ -3850,8 +3864,8 @@ Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Locations.i7x - do
 Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Monster Abilities.i7x - done
 Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Monsters.i7x - done
 Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Religion.i7x - done
+Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Systems - Hiding Smoke Ethereal.i7x - done
 
-Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Systems - Hiding Smoke Ethereal.i7x
 Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Systems.i7x
 ]
 

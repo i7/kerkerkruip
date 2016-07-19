@@ -1530,7 +1530,8 @@ To decide whether (fighter - a person) would take a parting shot at (deserter - 
 	if last chance to hit is false, no;
 	unless deserter is the player, no;
 	if fighter is the player or fighter is the deserter, no;
-	if fighter is non-attacker or fighter is asleep or fighter is not alive, no;
+	if fighter is non-attacker, no;
+	unless fighter is conscious in this world, no;
 	unless fighter opposes deserter, no;
 	if deserter is runner, yes;
 	if concentration of fighter is greater than 0, yes;
