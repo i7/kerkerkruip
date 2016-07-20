@@ -52,35 +52,6 @@ outcome		attempt count	success count	likelihood (number)	minimum attempts (numbe
 boring lack of results	0	0	0	1	1	0	outcome-untested	boring lack of results
 restarting for tests	0	0	1	1	1	0	--	--
 
-Section - Outcome Persistence
-
-The file of test outcomes is called "testoutcomes"
-
-To save test outcomes:
-	Repeat through Table of Outcomes:
-		now the attempt count entry is the attempt count of the outcome entry;
-		now the success count entry is the success count of the outcome entry;
-		now the likelihood entry is the likelihood of the outcome entry;
-		now the minimum attempts entry is the minimum attempts of the outcome entry;
-		now the maximum attempts entry is the maximum attempts of the outcome entry;
-		now the state entry is the state of the outcome entry;
-		now the antecedent entry is the antecedent of the outcome entry;
-		[ingore maximum tolerance, it will be recalculated]
-	write file of test outcomes from table of outcomes;
-
-To load test outcomes:
-	unless file of test outcomes exists, stop;
-	Read file of test outcomes into table of outcomes;
-	Repeat through table of outcomes:
-		if there is an attempt count entry, now the attempt count of the outcome entry is the attempt count entry;
-		if there is a success count entry, now the success count of the outcome entry is the success count entry;
-		if there is a likelihood entry, now the likelihood of the outcome entry is the likelihood entry;
-		if there is a minimum attempts entry, now the minimum attempts of the outcome entry is the minimum attempts entry;
-		if there is a maximum attempts entry, now the maximum attempts of the outcome entry is the maximum attempts entry;
-		[ingore maximum tolerance, it will be recalculated]
-		if there is a state entry, now the state of the outcome entry is the state entry;
-		if there is an antecedent entry, now the antecedent of the outcome entry is the antecedent entry;
-
 Section - Statistical Help
 
 [This phrase helps us set a reasonable error tolerance of repeated tests so they will succeed most of the time. If we use a success rate of 0.99, that will set a threshold of error such that the outcome will be achieved for 99% of random seeds]
@@ -385,6 +356,37 @@ To test (event - an outcome) against (success - a truth state):
 
 Chapter - Persistent data
 
+Section - Outcome Persistence
+
+The file of test outcomes is called "testoutcomes"
+
+To save test outcomes:
+	Repeat through Table of Outcomes:
+		now the attempt count entry is the attempt count of the outcome entry;
+		now the success count entry is the success count of the outcome entry;
+		now the likelihood entry is the likelihood of the outcome entry;
+		now the minimum attempts entry is the minimum attempts of the outcome entry;
+		now the maximum attempts entry is the maximum attempts of the outcome entry;
+		now the state entry is the state of the outcome entry;
+		now the antecedent entry is the antecedent of the outcome entry;
+		[ingore maximum tolerance, it will be recalculated]
+	write file of test outcomes from table of outcomes;
+
+To load test outcomes:
+	unless file of test outcomes exists, stop;
+	Read file of test outcomes into table of outcomes;
+	Repeat through table of outcomes:
+		if there is an attempt count entry, now the attempt count of the outcome entry is the attempt count entry;
+		if there is a success count entry, now the success count of the outcome entry is the success count entry;
+		if there is a likelihood entry, now the likelihood of the outcome entry is the likelihood entry;
+		if there is a minimum attempts entry, now the minimum attempts of the outcome entry is the minimum attempts entry;
+		if there is a maximum attempts entry, now the maximum attempts of the outcome entry is the maximum attempts entry;
+		[ingore maximum tolerance, it will be recalculated]
+		if there is a state entry, now the state of the outcome entry is the state entry;
+		if there is an antecedent entry, now the antecedent of the outcome entry is the antecedent entry;
+
+Section - The Test Transcript
+
 The file of test transcript is called "testtranscript".
 
 The event description is a text that varies.
@@ -500,11 +502,15 @@ To clear the/-- event description because (reason - a text):
 		give custom transcription reason;
 		clear event description;
 
+Section - Test Results
+
 The file of test results is called "testresults".
 
 Table of Test Results
 Test Set (outcome)	Total (number)	Failures (number)	Failure Messages (indexed text)
 with 100 blank rows
+
+Section - Test Queue
 
 The file of test set queue is called "testqueue"
 
@@ -512,8 +518,6 @@ Table of Test Set Queue
 Random-Seed (number)	Unresolved Count (number)
 0	0
 with 1 blank row
-
-To decide what number is the initial test random seed: decide on 70.
 
 To queue (T - an outcome):
 	make T testable;
@@ -587,10 +591,40 @@ To display test results:
 	say "To view a full transcript of all tests, see the file 'testtranscript.glkdata' in the project directory.";
 	Blank out the whole of Table of Test Results;
 	write file of test results from Table of Test Results;
-	if the file of noninteractive tests exists:
-		stop the game abruptly;
-	otherwise:
+	if running interactively is true:
 		pause the game;
+	otherwise:
+		stop the game abruptly;
+
+Section - Testing Configuration Files
+
+The file of noninteractive tests is called "noninteractivetests".
+
+Running interactively is a truth state that varies. Running interactively is true.
+
+The file of random seeding (owned by another project) is called "randomseed".
+
+Table of Initial Test Random Seed
+seed value (number)
+71
+
+To decide what number is the initial test random seed:
+	choose row 1 in Table of Initial Test Random Seed;
+	decide on seed value entry.
+
+To load testing configuration:
+	if file of noninteractive tests exists, now running interactively is false;
+	if file of random seeding exists:
+		read file of random seeding into Table of Initial Test Random Seed;
+
+Setting the random seed to is an action out of world applying to one number. Understand "randomseed [number]" as setting the random seed to.
+
+Carry out setting the random seed to:
+	choose row 1 in Table of Initial Test Random Seed;
+	Let oldseed be the seed value entry;
+	now the seed value entry is the number understood;
+	write file of random seeding from Table of Initial Test Random Seed;
+	say "Changed random seed from [oldseed] to [seed value entry] and saved to file."
 
 Chapter - Controlling Text Capture
 
@@ -1023,8 +1057,6 @@ To decide what outcome is (T - a number) as an outcome: (- {T} -);
 
 Done testing is a truth state that varies.
 
-The file of noninteractive tests is called "noninteractivetests".
-
 The run the unit tests rule is listed before the load achievements rule in the before showing the title screen rules.
 
 Definition: an outcome is requeueable:
@@ -1046,7 +1078,8 @@ Before showing the title screen (this is the run the unit tests rule):
 		load test outcomes;
 	if the file of test results exists:
 		read file of test results into Table of Test Results;
-	if the file of noninteractive tests exists:
+	load testing configuration;
+	if running interactively is false:
 		if screen reader mode is unset:
 			enable screen reader mode;
 		if the remaining tests is 0:
@@ -1111,7 +1144,7 @@ Carry out all-test queueing:
 	start test transcript with "all tests".
 
 To start test transcript with (T - a text):
-	unless the file of noninteractive tests exists:
+	if running interactively is true:
 		pause the game;
 	write "Test transcript for Kerkerkruip: [T].[line break]" to file of test transcript;
 	start the next test;

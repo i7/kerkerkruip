@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+SEED_VALUE=$1
+
+echo "* //KerkerkruipScripts// noninteractivetests\
+! Table of Initial Test Random Seed (1)\
+$SEED" > randomseed
