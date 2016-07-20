@@ -613,9 +613,11 @@ To decide what number is the initial test random seed:
 	decide on seed value entry.
 
 To load testing configuration:
+	log "loading testing configuration";
 	if file of noninteractive tests exists, now running interactively is false;
 	if file of random seeding exists:
 		read file of random seeding into Table of Initial Test Random Seed;
+		log "loaded new random seed: [initial test random seed]";
 
 Setting the random seed to is an action out of world applying to one number. Understand "randomseed [number]" as setting the random seed to.
 
