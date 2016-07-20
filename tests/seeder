@@ -2,4 +2,4 @@
 
 SEED_VALUE=$1
 
-printf "* //KerkerkruipScripts// noninteractivetests\n! Table of Initial Test Random Seed (1)\n$SEED_VALUE\n" > randomseed.glkdata
+printf "* //KerkerkruipScripts// noninteractivetests\n! Table of Initial Test Random Seed (1)\n$SEED_VALUE\n" > randomseed
