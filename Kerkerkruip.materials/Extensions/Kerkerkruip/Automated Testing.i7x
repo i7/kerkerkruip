@@ -437,7 +437,12 @@ Definition: an outcome (called event) is relevant:
 To say current test description:
 	unless the scheduled event is boring lack of results:
 		if the primary outcome is not boring lack of results:
-			say  "[primary outcome], [scheduled event][if the outcome described is not the scheduled event], [the outcome described][end if] attempt [attempt count of the outcome described] turn [the turn count], ";
+			say  "[primary outcome]";
+			if the scheduled event is not the primary outcome:
+				say ", [scheduled event]";
+			if the outcome described is not the scheduled event and the outcome described is not boring lack of results:
+				say ", [the outcome described] attempt [attempt count of the outcome described]";
+			say " turn [the turn count], ";
 		if there is a relevant achieved outcome:
 			say "achieved [the list of relevant achieved outcomes] | ";
 		if there is a relevant failed outcome:
@@ -1394,7 +1399,7 @@ Carry out taking off:
 
 To travel sneakily to (place - a room):
 	transcribe "traveling sneakily to [place]";
-	force the fuligin cloak to work;
+	try sneaking;
 	While the location is not the place:
 		now the way-to-get-there is the best route from the location to the place;
 		record a test attempt;
@@ -1974,19 +1979,29 @@ Moving people in Kerkerkruip has many side effects. To help us deal with this, h
 
 	To extract (guy - a person) to (place - a room), making sure it is unoccupied:
 
-This moves the guy to the selected room. If we use the "making sure it is unoccupied" option, it removes any other rogues who might be there.
+This moves the guy to the selected room. If we use the "making sure it is unoccupied" option, it removes any other rogues who might be there. The occupants will be kept in the dungeon if possible, but if there are no empty rooms they could travel to, they will be removed from play.
 
 	To swap the occupants of (first place - a room) and (second place - a room):
 
-This does pretty much what it sounds like.
+"Swap the occupants" does pretty much what it sounds like. The second place is allowed to be nothing, in which case the occupants of the first place will be removed from play and not replaced with anyone.
 
-	To force the fuligin cloak to work:
+	Try sneaking
 
-This makes the player instantly hidden. To unhide the player, we simply "try taking off the fuligin cloak."
+The sneaking action makes the player instantly hidden, with a +100 hiding bonus so they can't be discovered. To unhide the player:
+
+	try taking off the fuligin cloak
+	
+The sneaking action is implicit in this phrase:
 
 	To travel sneakily to (place - a room):
 
-This also moves the player to the specified room, but it uses the "going" action and makes sure that rooms and monsters on the way will be visited and seen. It also uses the fuligin cloak to keep the player hidden so no one will attack us as we move.
+This also moves the player to the specified room, but it uses the "going" action and makes sure that rooms and monsters on the way will be visited and seen, although since the player is hidden they will not be seen or attacked by anyone they encounter.
+
+	way-to-get-there
+	
+	way-to-get-back
+	
+These variables are set when extracting the player or when traveling sneakily, to give the test a convenient direction for the player to travel they need to retreat (way-to-get-back), or come back to the room again afterwards (way-to-get-there). When such a way exists, these values are opposite directions of each other. When no such way exists, these values are set to nothing, so tests should take care when using them.
 
 	Definition: a direction (called way) is diggable:
 

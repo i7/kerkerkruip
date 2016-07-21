@@ -187,6 +187,7 @@ This is the show the console rule:
 		say "[bold type]The following things will be forcibly included in dungeons:[roman type][paragraph break]";
 		repeat through the Table of Requested Test Objects:
 			say "[the Object name entry][line break]";
+		say "[line break][bold type]The initial test random seed is set to: [roman type][the initial test random seed][line break]";
 		say "[line break]Commands: ADD THING, DELETE THING, EMPTY (the whole list), QUIT[paragraph break]";
 		follow the parse command rule;
 		set the parser variables manually;
@@ -202,7 +203,7 @@ This is the show the console rule:
 				if the Object name entry is the printed name of the noun:
 					blank out the whole row;
 					break;
-		if test queueing or all-test queueing:
+		if test queueing or all-test queueing or setting the random seed to:
 			try the current action;
 	write File of Test Objects from Table of Requested Test Objects;
 	now the early in turn sequence flag is false;

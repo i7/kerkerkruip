@@ -9,6 +9,7 @@ rm -f test*
 SEED=$(date "+%s")
 echo "Setting random seed to $SEED"
 ./seeder $SEED
+echo $SEED >> recent-seeds
 echo -e '\nRunning the Kerkerkruip test suite:'
 touch noninteractivetests
 COLS=$(tput cols)
