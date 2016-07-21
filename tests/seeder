@@ -3,3 +3,6 @@
 SEED_VALUE=$1
 
 printf "* //KerkerkruipScripts// noninteractivetests\n! Table of Initial Test Random Seed (1)\n$SEED_VALUE\n" > randomseed
+
+# if SEED_VALUE is not saved in the list of recent seeds already, add it
+[ -f recent-seeds ] && egrep -q "^${SEED_VALUE}\b" recent-seeds || echo $SEED_VALUE >> recent-seeds
