@@ -1813,10 +1813,10 @@ testing effects of sleepy-slaying:
 Chapter - Bug 301 Redux
 
 Table of Outcomes (continued)
-outcome	likelihood	minimum attempts	antecedent
-bug-301-aite 	0	1	restarting for tests
-healer-first-killing	1	1	--
-other-fanatics-killing	1	1	--
+outcome	likelihood	minimum attempts	label	antecedent
+bug-301-aite 	0	1	--	restarting for tests
+healer-first-killing	1	1	--	--
+other-fanatics-killing	1	1	"compel throwing"	--
 
 scenario for bug-301-aite:
 	now Temple of Sul is testobject;
@@ -1848,7 +1848,6 @@ Initial scheduling of other-fanatics-killing:
 	now the health of the tormentor of Aite is 1;
 	now the health of the defender of Aite is 1;
 
-regular scheduling of other-fanatics-killing: compel the action of throwing the reusable item.
 testing effects of other-fanatics-killing:
 	assert "The tormentor should be dead" based on whether or not the tormentor of Aite is dead;
 	assert "The defender should be dead" based on whether or not the defender of Aite is dead;
@@ -1936,13 +1935,13 @@ Scenario for unlocking-behavior:
 Chapter - bug 293 - Sensing Isra and Fell
 
 Table of Outcomes (continued)
-outcome	likelihood	minimum attempts	antecedent
-bug-293	0	1	restarting for tests
-israfel-splitting-293	1	1	--
-isra-and-fell-scattering	1	1	--
-psycholocating-293	1	1	--
-isra-defeating-293	1	1	--
-fell-defeating-293	1	1	--
+outcome	likelihood	minimum attempts	label	antecedent
+bug-293	0	1	--	restarting for tests
+israfel-splitting-293	1	1	--	--
+isra-and-fell-scattering	1	1	"compel throwing"	--
+psycholocating-293	1	1	--	--
+isra-defeating-293	1	1	--	--
+fell-defeating-293	1	1	--	--
 
 scenario for bug-293:
 	now the reusable item is a random teleportation grenade;
@@ -1952,7 +1951,6 @@ initial scheduling of israfel-splitting-293: extract the player to the location 
 regular scheduling of israfel-splitting-293: compel the action of israfel israfel-splitting.
 testing effects of israfel-splitting-293: if Israfel is off-stage, rule succeeds.
 
-regular scheduling of isra-and-fell-scattering: compel the action of throwing the reusable item.
 Testing effects of isra-and-fell-scattering: if isra is not off-stage and fell is not off-stage, rule succeeds.
 
 initial scheduling of psycholocating-293:
@@ -2380,8 +2378,6 @@ Scenario for damage-text:
 	now Vast Staircase is testobject;
 	now slaying-kit is testobject;
 	now addict-kit is bannedobject;
-	Repeat with guy running through people:
-		now inherent damage modifier of the guy is 10;
 
 Initial scheduling of basic attack damage text:
 	prepare a test battle with the reaper;
@@ -2409,12 +2405,17 @@ testing effects of fragmentation damage text: if we assert result "<2-5> damage 
 [skip fragmentation in other rooms because no damage text is printed]
 
 Table of Outcomes (continued)
-outcome	likelihood	minimum attempts
-dodge-thorns damage text	1	1
-lion-block damage text	1	1
-death-scroll damage text	1	1
-anti-purification damage text	1	1
-aite-statue damage text	1	1
+outcome	likelihood	minimum attempts	label
+dodge-thorns damage text	1	1	--
+lion-block damage text	1	1	--
+death-scroll damage text	1	1	"try reading"
+anti-purification damage text	1	1	--
+aite-statue damage text	1	1	--
+
+Initial scheduling of dodge-thorns damage text:
+	[This is for the rest of the tests, to make sure everyone does some damage when they hit]
+	Repeat with guy running through people:
+		now inherent damage modifier of the guy is 10;
 
 Regular scheduling of dodge-thorns damage text:
 	now the armour of thorns is not cursed;
@@ -2430,10 +2431,7 @@ Regular scheduling of lion-block damage text:
 
 Testing effects of lion-block damage text: if we assert result "(\n|^)The lion on the shield strikes out, and bites the Reaper for 2 damage.", rule succeeds.
 
-Regular scheduling of death-scroll damage text:
-	Now the reusable item is a random scroll of death;
-	now the player carries the reusable item;
-	try reading the reusable item.
+Initial scheduling of death-scroll damage text: now the reusable item is a random scroll of death.
 
 Testing effects of death-scroll damage text: if we assert result "(\n|^)A wave of unholy energy is released, dealing <3-6> damage to the Reaper; and <3-6> damage to you.", rule succeeds.
 
