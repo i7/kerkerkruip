@@ -1518,13 +1518,13 @@ regular scheduling of meta-throwing-test: remove the reusable item from play.
 testing effects of meta-throwing-test: unless the reusable item is carried, rule succeeds.
 
 Table of Outcomes (continued)
-outcome	likelihood	minimum attempts	antecedent
-sound-finding	1	0	--
-maze-summoning	1	1	--
-summoned-fleeing	1	1	--
-summoned-hits	1	1	summoned-fleeing
-summoned-followed	1	1	summoned-fleeing
-arrived-at-minotaur	1	1	summoned-fleeing
+outcome	likelihood	minimum attempts	label	antecedent
+sound-finding	1	0	--	--
+maze-summoning	1	1	"try reading"	--
+summoned-fleeing	1	1	--	--
+summoned-hits	1	1	--	summoned-fleeing
+summoned-followed	1	1	--	summoned-fleeing
+arrived-at-minotaur	1	1	--	summoned-fleeing
 
 To assert that everyone is unconcentrated:
 	Repeat with guy running through people in the location:
@@ -1534,7 +1534,6 @@ regular scheduling of sound-finding: compel the action of going north.
 Testing effects of sound-finding: if maze-sound is a cardinal direction, rule succeeds.
 
 Initial scheduling of maze-summoning: now the the reusable item is a random scroll of summoning.
-regular scheduling of maze-summoning: try reading the reusable item.
 Testing effects of maze-summoning: if we assert result "[a monster summoned] appears before you", rule succeeds.
 
 Initial scheduling of summoned-fleeing:
