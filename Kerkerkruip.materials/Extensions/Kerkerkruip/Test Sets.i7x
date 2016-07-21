@@ -2031,6 +2031,8 @@ parry-fafhrd-protected-retaining	1	1	parry-fafhrd-protected
 parry-fafhrd	1	1	--
 parry-fafhrd-shatter	1	1	parry-fafhrd
 
+initial scheduling of weapon aftereffects: now every weapon is not cursed.
+
 Definition: an outcome is rapier-retaining if it is basic-hit-retaining or it is fafhrd-dodge-retaining or it is rapier-recovery or it is dodge-fafhrd-retaining or it is dodge-fafhrd-fail-retaining or it is parry-fafhrd-fail-retaining or it is parry-fafhrd-protected-retaining or it is greasy-retaining or it is greasy-parry-fail-retaining.
 Definition: an outcome is weapon-losing if it is parried-rapier-shatters or it is parry-fafhrd-shatter or it is greasy-undodged-dropped or it is greasy-parry-dropped.
 
@@ -2197,7 +2199,7 @@ Initial scheduling of chains-vs-thorns:
 regular scheduling of chains-vs-thorns: do the action of dodging a 0 melee hit by the the chain golem.
 Testing effects of chains-vs-thorns:
 	assert result "the chain golem does not overcome";
-	assert absence of result "The armour of thorns scratches the chain golem for 1 damage";
+	assert absence of result "armour of thorns scratches the chain golem for 1 damage";
 	if the health of the chain golem is 100, rule succeeds.
 
 initial scheduling of thorns-dodge-chains-protected:
@@ -2205,7 +2207,7 @@ initial scheduling of thorns-dodge-chains-protected:
 	now the hit protection of the player is 1;
 
 regular scheduling of thorns-dodge-chains-protected: do the action of dodging a 100 melee hit by the the chain golem.
-testing effects of thorns-dodge-chains-protected: if we assert absence of result "The armour of thorns scratches the chain golem", rule succeeds.
+testing effects of thorns-dodge-chains-protected: if we assert absence of result "armour of thorns scratches the chain golem", rule succeeds.
 
 initial scheduling of thorns-dodge-chains:
 	now the hit protection of the player is 0;
@@ -2213,7 +2215,7 @@ initial scheduling of thorns-dodge-chains:
 
 regular scheduling of thorns-dodge-chains: do the action of dodging a 100 melee hit by the the chain golem.
 Testing effects of thorns-dodge-chains:
-	assert result "The armour of thorns scratches the chain golem for 1 damage";
+	assert result "armour of thorns scratches the chain golem for 1 damage";
 	if the health of the chain golem is 99, rule succeeds.
 
 Initial scheduling of lionshield-vs-bodmall:
@@ -2234,7 +2236,7 @@ Testing effects of lionshield-vs-bodmall:
 regular scheduling of bodmall-vs-thorns: do the action of dodging a 0 melee hit by bodmall.
 Testing effects of bodmall-vs-thorns:
 	assert result "Bodmall does not overcome";
-	assert absence of result "The armour of thorns scratches Bodmall for 1 damage";
+	assert absence of result "armour of thorns scratches Bodmall for 1 damage";
 	if we assert that the health of Bodmall is 100, rule succeeds.
 
 regular scheduling of thorns-dodge-bodmall-fail: do the action of dodging a 100 melee hit by Bodmall.
@@ -2291,12 +2293,12 @@ regular scheduling of mouser-vs-thorns:
 
 testing effects of mouser-vs-thorns:
 	assert result "Mouser does not overcome";
-	assert absence of result "The armour of thorns scratches Mouser for 1 damage";
+	assert absence of result "armour of thorns scratches Mouser for 1 damage";
 	if we assert that the health of mouser is 100, rule succeeds.
 
 regular scheduling of thorns-dodge-mouser-fail: do the action of dodging a 100 melee hit by the mouser.
 testing effects of thorns-dodge-mouser-fail:
-	assert result "The armour of thorns scratches Mouser for 1 damage";
+	assert result "armour of thorns scratches Mouser for 1 damage";
 	if we assert that the health of mouser is 99, rule succeeds.
 
 Table of Outcomes (continued)
@@ -2424,7 +2426,8 @@ anti-purification damage text	1	1
 aite-statue damage text	1	1
 
 Regular scheduling of dodge-thorns damage text:
-	now the player wears the armour of thorns;
+	now the armour of thorns is not cursed;
+	equip the player with the armour of thorns;
 	now the blood magic level of the armour of thorns is 1;
 	now inherent damage modifier of the reaper is 10;
 	do the action of dodging a 100 melee hit by the reaper.

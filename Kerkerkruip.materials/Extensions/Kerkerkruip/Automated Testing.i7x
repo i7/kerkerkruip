@@ -442,14 +442,18 @@ To say current test description:
 				say ", [scheduled event]";
 			if the outcome described is not the scheduled event and the outcome described is not boring lack of results:
 				say ", [the outcome described] attempt [attempt count of the outcome described]";
-			say " turn [the turn count], ";
-		if there is a relevant achieved outcome:
-			say "achieved [the list of relevant achieved outcomes] | ";
-		if there is a relevant failed outcome:
-			say "failed [the list of relevant failed outcomes] | ";
-		repeat with event running through possible relevant outcomes:
-			say "'[event]' [success count of event]/[attempt count of event] times | ";
-		say "([test assertion count] assertions)";
+		if the test assertion count > 0:
+			if the primary outcome is not boring lack of results:
+				say " turn [the turn count], ";				
+			if there is a relevant achieved outcome:
+				say "achieved [the list of relevant achieved outcomes] | ";
+			if there is a relevant failed outcome:
+				say "failed [the list of relevant failed outcomes] | ";
+			repeat with event running through possible relevant outcomes:
+				if the number of relevant outcomes > 1 and event is not the primary outcome:
+					say "'event'";
+				say " [success count of event]/[attempt count of event] times | ";
+			say "([test assertion count] assertions)";
 
 To decide whether the captured text is empty: (- (captured_text-->0 == 0) -)
 
