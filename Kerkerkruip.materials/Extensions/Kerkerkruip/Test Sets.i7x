@@ -2530,58 +2530,53 @@ Testing effects of isra-burn damage text: if we assert 2 damage to the player af
 [TODO: check damage and damage description in one phrase?]
 
 Table of Outcomes (continued)
-outcome	likelihood	minimum attempts
-aite-spike damage text	1	1
-chton-wave damage text	1	1
-sul-sacrifice damage text	1	1
-deathly-scroll damage text	1	1
-downstairs damage text	1	1
-bees damage text	1	1
-glass damage text	1	1
+outcome	likelihood	minimum attempts	label
+aite-spike damage text	1	1	--
+chton-wave damage text	1	1	--
+sul-sacrifice damage text	1	1	--
+deathly-scroll damage text	1	1	"try reading"
+downstairs damage text	1	1	--
+bees damage text	1	1	--
+glass damage text	1	1	--
 
 Regular scheduling of Aite-spike damage text: deal 3 points of Aite-damage to the player on behalf of the player.
 Testing effects of Aite-spike damage text: if we assert 3 damage to the player after "A huge <a-w>+ bursts out of the ground, skewering you for", rule succeeds.
 
-Regular scheduling of chton-wave damage text:
+Initial scheduling of chton-wave damage text:
 	now the reusable item is a random scroll of ghoulification;
-	now the player carries the reusable item;
-	try reading the reusable item;
 	now the health of Isra is 1000;
-	clear event description;
+
+regular scheduling of chton-wave damage text:
+	try reading the reusable item;
 	have Chton intervene on behalf of the player.
 
 Testing effects of chton-wave damage text: if we assert "Chton suddenly sends a wave of unholy energy through the room, dealing <3-6> damage to Fell; and" to Isra any damage "to Isra\.", rule succeeds.
 
 [TODO: necromantic damage reduction?]
 
-Regular scheduling of sul-sacrifice damage text:
+Initial scheduling of sul-sacrifice damage text:
 	extract the player to the temple of Sul;
-	now the player does not worship chton;
-	clear event description;
-	try sacrificing;
+	now the player does not worship chton.
+	
+Regular scheduling of sul-sacrifice damage text:	try sacrificing.
 
 Testing effects of sul-sacrifice damage text: if we assert 10 damage to the player after "Sul abhors the undead! Divine wrath strikes you instantly, dealing", rule succeeds.
 
-Regular scheduling of deathly-scroll damage text:
+Initial scheduling of deathly-scroll damage text:
 	now the player carries the vial of purification;
 	try drinking the vial of purification;
 	now the player worships Sul;
-	now the player carries the reusable item; [scroll of ghoulfication TODO: we should already have it]
-	clear event description;
-	try reading the reusable item;
 
 Testing effects of deathly-scroll damage text: if we assert "Before you finish reading it, the scroll burns up in your hands! Sul is not amused by your defiant behaviour, and deals" to the player a total of 10 damage "to you\.", rule succeeds.
 
-Regular scheduling of downstairs damage text:
-	extract the player to vast staircase;
-	clear event description;
-	try direction-jumping down.
+Initial scheduling of downstairs damage text: extract the player to vast staircase.
+Regular scheduling of downstairs damage text: try direction-jumping down.
 
 Testing effects of downstairs damage text: if we assert described damage to the player with 1000 health after "With a loud smack, you land in [the room down from Vast Staircase], receiving", rule succeeds.
 
 Initial scheduling of bees damage text:
 	move the swarm of bees to the location;
-	compel the action of waiting;
+	compel the action of waiting; [TODO: "wait" label]
 
 Testing effects of bees damage text: if we assert result "The swarm of bees attacks <^\n>+, dealing <1-3> damage\.", rule succeeds.
 
@@ -3661,16 +3656,16 @@ testing effects of hiding-from-watchers: if we assert result " - 2 \(number of p
 Section - Waking People Up
 
 Table of Outcomes (continued)
-Outcome	likelihood	minimum attempts
-waking-awake-self	1	1
-sleeping-to-wake	1	1
-waking-asleep-self	1	1
-waking-asleep-enemy	1	1
-waking-awake-enemy	1	1
-dreaming-with-grenade	1	1
-exploding-in-dream	1	1
-waking-with-grenade	1	1
-exploding-awake	1	1
+Outcome	likelihood	minimum attempts	label
+waking-awake-self	1	1	--
+sleeping-to-wake	1	1	"compel throwing"
+waking-asleep-self	1	1	--
+waking-asleep-enemy	1	1	--
+waking-awake-enemy	1	1	--
+dreaming-with-grenade	1	1	"compel throwing"
+exploding-in-dream	1	1	"compel throwing"
+waking-with-grenade	1	1	--
+exploding-awake	1	1	"compel throwing"
 
 [TODO: waking asleep enemy when dreaming? are allies any different?]
 
@@ -3682,7 +3677,6 @@ initial scheduling of sleeping-to-wake:
 	extract the swarm of daggers to the Temple of Nomos;
 	now the reusable item is a random morphean grenade.
 
-regular scheduling of sleeping-to-wake: compel the action of throwing the reusable item.
 testing effects of sleeping-to-wake: if we assert that dreamer-location is Temple of Nomos, rule succeeds.
 
 regular scheduling of waking-asleep-self: try awaking the player;
@@ -3703,20 +3697,17 @@ initial scheduling of dreaming-with-grenade:
 	now every dream is randomly included;
 	now Dream of Briar Roses is testobject; [player keeps their body]
 	
-regular scheduling of dreaming-with-grenade: compel the action of throwing the reusable item.
 testing effects of dreaming-with-grenade: if yourself is asleep, rule succeeds.
 
 initial scheduling of exploding-in-dream: now the reusable item is a random smoke grenade.
-regular scheduling of exploding-in-dream: compel the action of throwing the reusable item;
 testing effects of exploding-in-dream: if yourself is asleep, rule succeeds.
 
 initial scheduling of waking-with-grenade:
 	try going up;
-	select menu question answer 1;
+	select menu question answer 1.
 
 testing effects of waking-with-grenade: if the swarm of daggers is asleep, rule succeeds.
 	
-regular scheduling of exploding-awake: compel the action of throwing the reusable item.
 testing effects of exploding-awake: if the swarm of daggers is not asleep, rule succeeds.
 
 Section - Specific Monster Sleep Effects
@@ -3750,9 +3741,9 @@ testing effects of a hound-provoking outcome: if we assert result "you do not ov
 Section - Nomos interventions and dreams
 
 Table of Outcomes (continued)
-Outcome	likelihood	minimum attempts	antecedent
+Outcome	likelihood	minimum attempts	label
 dreamy-nomos-worshipper	1	1	--
-teleport-with-nomos-bonus	1	1	--
+teleport-with-nomos-bonus	1	1	"compel reading"
 nomos-peace-attack	1	1	--
 
 Initial scheduling of dreamy-nomos-worshipper:
@@ -3776,8 +3767,6 @@ Testing effects of dreamy-nomos-worshipper:
 Initial scheduling of teleport-with-nomos-bonus:
 	now the Nomos counter is 1;
 	now the Nomos attacker is the player.
-	
-Regular scheduling of teleport-with-nomos-bonus: compel the action of reading the reusable item.
 
 Testing effects of teleport-with-nomos-bonus:
 	assert that the combat status is peace with label "combat status";
@@ -3789,23 +3778,18 @@ Regular scheduling of nomos-peace-attack: compel the action of waiting.
 Testing effects of nomos-peace-attack: if we assert result "You plan on waiting, but find your body attacking itself instead!", rule succeeds.
 
 Table of Outcomes (continued)
-Outcome	likelihood	minimum attempts
-montyhall-with-nomos-counter	1	1
-montyhall-with-nomos-bonus	1	1
-nomos-montyhall-wake	1	0
-nomos-bonus-after-montyhall	0	1
-tungausy-with-nomos-counter	1	1
-tungausy-with-nomos-bonus	1	1
-nomos-tungausy-wake	1	1
-nomos-bonus-after-tungausy	1	1
-nomos-attack-after-tungausy	1	1
+Outcome	likelihood	minimum attempts	label
+montyhall-with-nomos-counter	1	1	"nomos sleeping"
+montyhall-with-nomos-bonus	1	1	--
+nomos-montyhall-wake	1	0	"nomos waking"
+nomos-bonus-after-montyhall	0	1	"nomos after dream"
+tungausy-with-nomos-counter	1	1	"nomos sleeping"
+tungausy-with-nomos-bonus	1	1	--
+nomos-tungausy-wake	1	1	"nomos waking"
+nomos-bonus-after-tungausy	1	1	"nomos after dream"
+nomos-attack-after-tungausy	1	1	--
 
-Definition: an outcome is nomos-sleeping if it is montyhall-with-nomos-counter or it is tungausy-with-nomos-counter.
-Definition: an outcome is nomos-dream-bonus if it is montyhall-with-nomos-bonus or it is tungausy-with-nomos-bonus.
-Definition: an outcome is nomos-waking if it is nomos-montyhall-wake or it is nomos-tungausy-wake.
-Definition: an outcome is nomos-after-dream if it is nomos-bonus-after-montyhall or it is nomos-bonus-after-tungausy.
-
-First initial scheduling of a nomos-sleeping outcome:
+First initial scheduling of an outcome labeled "nomos sleeping":
 	now every dream is randomly included;
 	now the reusable item is a random morphean grenade;
 	extract the player to Temple of Nomos;
@@ -3819,8 +3803,8 @@ Initial scheduling of montyhall-with-nomos-counter: now Dream of Monty Hall is t
 
 Initial scheduling of tungausy-with-nomos-counter: now Dream of Tungausy Shaman is testobject.
 
-Regular scheduling of a nomos-sleeping outcome: compel the action of throwing the reusable item;
-testing effects of a nomos-sleeping outcome: if the Nomos attacker is asleep, rule succeeds.
+Regular scheduling of an outcome labeled "nomos sleeping": compel the action of throwing the reusable item;
+testing effects of an outcome labeled "nomos sleeping": if the Nomos attacker is asleep, rule succeeds.
 
 [For now we will allow the Nomos bonus to go off in a dream if the player is the Nomos attacker (not true in most dreams, but true in Monty Hall). We may change this later]
 
@@ -3834,30 +3818,12 @@ testing effects of tungausy-with-nomos-bonus:
 
 regular scheduling of nomos-tungausy-wake: select menu question answer 1.
 regular scheduling of nomos-montyhall-wake: compel the action of opening the pearl chest.
-testing effects of a nomos-waking outcome: if we assert that dreaming is false, rule succeeds.
+testing effects of an outcome labeled "nomos waking": if we assert that dreaming is false, rule succeeds.
 
-testing effects of a nomos-after-dream outcome: if we assert that the nomos bonus is true, rule succeeds.
+testing effects of an outcome labeled "nomos after dream": if we assert that the nomos bonus is true, rule succeeds.
 
 regular scheduling of nomos-attack-after-tungausy: compel the action of waiting.
 testing effects of nomos-attack-after-tungausy: if we assert result "You plan on waiting, but find yourself attacking the swarm of daggers instead", rule succeeds.
-
-
-[$ egrep -irl 'asleep|conscious' Kerkerkruip.materials/Extensions/
-Kerkerkruip.materials/Extensions//Kerkerkruip/Automated Testing.i7x - done, I think
-Kerkerkruip.materials/Extensions//Kerkerkruip/Test Sets.i7x - done, I think
-Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Actions and UI.i7x - done
-Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Dreams.i7x - done
-Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Events and Specials.i7x - done
-Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Events.i7x - done
-Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Items.i7x - done
-Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Locations.i7x - done
-Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Monster Abilities.i7x - done
-Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Monsters.i7x - done
-Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Religion.i7x - done
-Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Systems - Hiding Smoke Ethereal.i7x - done
-
-Kerkerkruip.materials/Extensions//Victor Gijsbers/Kerkerkruip Systems.i7x
-]
 
 Chapter - Simple Tests
 
@@ -3870,12 +3836,12 @@ Simple tests	0	1	restarting for tests
 Section - Reading Ability
 
 Table of Outcomes (continued)
-outcome	likelihood	minimum attempts
-blindness-goggles-work	1	1
-blindfold-works	1	1
-blind-reading	1	1
-eyeless-reading	0	1
-sighted-reading	0	1
+outcome	likelihood	minimum attempts	label
+blindness-goggles-work	1	1	--
+blindfold-works	1	1	--
+blind-reading	1	1	"illiteracy"
+eyeless-reading	0	1	"illiteracy"
+sighted-reading	0	1	"illiteracy"
 
 Initial scheduling of blindness-goggles-work: equip the player with the goggles of blindness.
 Testing effects of blindness-goggles-work: unless the player is perceptive, rule succeeds.
@@ -3885,15 +3851,12 @@ Initial scheduling of blindfold-works:
 	equip the player with the blindfold.
 Testing effects of blindfold-works: unless the player is perceptive, rule succeeds.
 
-Definition: an outcome is illiteracy-testing if it is blind-reading or it is eyeless-reading or it is sighted-reading.
-
-Initial scheduling of a illiteracy-testing outcome:
+Initial scheduling of an outcome labeled "illiteracy":
 	Now the player skill bonus timer is 0;
 	Now the reusable item is a random scroll of skill.
 
-Regular scheduling of an illiteracy-testing outcome: try reading the reusable item.
-
-Testing effects of an illiteracy-testing outcome: if we assert that the player skill bonus timer is 0, rule succeeds.
+Regular scheduling of an outcome labeled "illiteracy": try reading the reusable item.
+Testing effects of an outcome labeled "illiteracy": if we assert that the player skill bonus timer is 0, rule succeeds.
 
 Initial scheduling of blind-reading: Now eyeless vision is not adapted.
 
