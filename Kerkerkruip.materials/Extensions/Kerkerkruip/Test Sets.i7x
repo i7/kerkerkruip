@@ -133,13 +133,13 @@ testing effects of defender-re-enslaving:
 Chapter - Chton Champion vs Bat
 
 Table of Outcomes (continued)
-outcome	likelihood	minimum attempts	antecedent
-Chton champion vs bat	0	1	restarting for tests
-herm-arena-bonus	1	1	--
-arena-vampire-joining	1	1	--
-herm-ally-summoning	1	1	--
-summoned-drakul-opponent	1	1	--
-chton-arena-cheating	1	1	--
+outcome	likelihood	minimum attempts	label	antecedent
+Chton champion vs bat	0	1	--	restarting for tests
+herm-arena-bonus	1	1	--	--
+arena-vampire-joining	1	1	--	--
+herm-ally-summoning	1	1	"try reading"	--
+summoned-drakul-opponent	1	1	--	--
+chton-arena-cheating	1	1	--	--
 
 scenario rule for Chton champion vs bat:
 	now Hall of Gods is testobject;
@@ -163,10 +163,9 @@ testing effects of herm-arena-bonus: if we assert result "grants you 2 divine fa
 regular scheduling of arena-vampire-joining: compel the action of drinking Drakul's lifeblood.
 testing effects for arena-vampire-joining: if we assert result "You turn into a vampire, but your opponent doesn't care", rule succeeds.
 
-regular scheduling of herm-ally-summoning:
+Initial scheduling of herm-ally-summoning:
 	update the combat status;
 	assert that the combat status is combat;
-	try reading the reusable item;
 
 testing effects of herm-ally-summoning: if the monster summoned does not oppose the player, rule succeeds.
 testing effects of summoned-drakul-opponent: if the monster summoned opposes drakul, rule succeeds.
@@ -1048,14 +1047,14 @@ testing effects of remembering-text:
 	rule succeeds. [TODO: make these all actual tests, so the dungeon will be regenerated if they fail?]
 
 Table of Outcomes (continued)
-outcome	likelihood	minimum attempts
-nothing-to-remember	1	1
-powerless-sensing	1	1
-early-psycholocation	0	1
-unexplored-sensing	0	1
-remembering-daggers	1	1
-middle-psycholocating	0	1
-partial-explored-sensing 	1	1
+outcome	likelihood	minimum attempts	label
+nothing-to-remember	1	1	--
+powerless-sensing	1	1	--
+early-psycholocation	0	1	"psycholocate"
+unexplored-sensing	0	1	--
+remembering-daggers	1	1	--
+middle-psycholocating	0	1	"psycholocate"
+partial-explored-sensing 	1	1	--
 
 [TODO: figure out if "seen" needs to be updated even when acting fast]
 
@@ -1066,11 +1065,9 @@ testing effects of nothing-to-remember: if we assert result "You have not yet ex
 regular scheduling of powerless-sensing: compel the action of sensing.
 testing effects of powerless-sensing: if previously-fast is true, rule succeeds.
 
-Definition: an outcome is psy-scroll-reading if it is early-psycholocation or it is middle-psycholocating or it is explored-psycholocating.
-
-initial scheduling of a psy-scroll-reading outcome: now the reusable item is a random scroll of psycholocation.
-regular scheduling of a psy-scroll-reading outcome: try reading the reusable item.
-testing effects of a psy-scroll-reading outcome:
+initial scheduling of an outcome labeled "psycholocate": now the reusable item is a random scroll of psycholocation.
+regular scheduling of an outcome labeled "psycholocate": try reading the reusable item.
+testing effects of an outcome labeled "psycholocate":
 	assert "The player should be psycholocating now" based on the psycholocation boolean;
 	assert result "When you are psycholocating, sensing does not take time";
 
@@ -1183,15 +1180,15 @@ testing effects of Malygris-only-remembering:
 	if we assert result "You have also seen Malygris, but you don't know where he is now", rule succeeds.
 
 Table of Outcomes (continued)
-outcome	likelihood	minimum attempts
-slow-sensing	1	1
-exploring-everywhere	1	0
-unexplored-vault	1	1
-remembering-everything-reachable	1	1
-explored-psycholocating	0	1
-malygris-sensing	1	1
-map-reading	1	1
-map-remembering	0	1
+outcome	likelihood	minimum attempts	label
+slow-sensing	1	1	--
+exploring-everywhere	1	0	--
+unexplored-vault	1	1	--
+remembering-everything-reachable	1	1	--
+explored-psycholocating	0	1	"psycholocate"
+malygris-sensing	1	1	--
+map-reading	1	1	"compel reading"
+map-remembering	0	1	--
 
 regular scheduling of slow-sensing: compel the action of sensing.
 testing effects of slow-sensing: if previously-fast is false, rule succeeds.
@@ -1221,7 +1218,6 @@ testing effects of malygris-sensing:
 	if previously-fast is true, rule succeeds.
 
 initial scheduling of map-reading: now the reusable item is a random scroll of mapping.
-regular scheduling of map-reading: compel the action of reading the reusable item.
 testing effects of map-reading: if we assert result "a complete floor plan of the dungeon of Kerkerkruip imprints itself on your mind", rule succeeds.
 
 regular scheduling of map-remembering: try remembering.
@@ -1268,28 +1264,21 @@ Scenario for blessed-grenade-test:
 	now the Blessed Grenade is bannedobject;
 
 Table of Outcomes (continued)
-outcome	likelihood	minimum attempts	maximum attempts	antecedent
-blessed-grenade-test	0	1	1	restarting for tests
-getting-blessed	1	0	400	--
-no-extra-blessed	0	400	400	--
-throwing-blessed	1	0	10	--
-no-new-blessed	0	400	400	--
+outcome	likelihood	minimum attempts	maximum attempts	label	antecedent
+blessed-grenade-test	0	1	1	--	restarting for tests
+getting-blessed	1	0	400	"produce grenade"	--
+no-extra-blessed	0	400	400	"produce grenade"	--
+throwing-blessed	1	0	10	--	--
+no-new-blessed	0	400	400	"produce grenade"	--
 
 initial scheduling of blessed-grenade-test:
 	now the defence of the player is 100;
 	Now the reusable item is the staff of insanity;
-	now the player carries the reusable item;
 	Now every room is not rust-spored;
 	Now every thing is not rusted;
 	extract the player to the alchemical laboratory, making sure it is unoccupied;
 
-regular scheduling of getting-blessed: produce a grenade.
-testing effects of getting-blessed: if we assert result "the Blessed Grenade drops on the ground", rule succeeds.
-
-regular scheduling of no-extra-blessed: produce a grenade.
-testing effects of no-extra-blessed: if we assert result "the Blessed Grenade drops on the ground", rule succeeds.
-
-To produce a grenade:
+Regular scheduling of an outcome labeled "produce grenade":
 	Repeat with item running through grenades in the location:
 		if item is not a custom-grenade, remove item from play;
 	Now every room is not rust-spored;
@@ -1304,6 +1293,8 @@ To produce a grenade:
 	if the location is not Alchemical Laboratory, extract the player to Alchemical Laboratory;
 	[If the current move is hidden-traveling, now the player is hidden;]
 
+Testing effects of an outcome labeled "produce grenade": if we assert result "the Blessed Grenade drops on the ground", rule succeeds.
+
 Regular scheduling of throwing-blessed:
 	now the player carries the blessed grenade;
 	extract Drakul to the Alchemical Laboratory;
@@ -1317,12 +1308,8 @@ testing effects of throwing-blessed:
 	assert result "As the grenade explodes you hear the singing of angels, several of whom swoop down from the heavens with huge swords and eviscerate <^\n>*Drakul";
 	rule succeeds.
 
-Regular scheduling of no-new-blessed: produce a grenade.
-
-Testing effects of no-new-blessed:
-	assert "The Blessed Grenade should be off-stage" based on whether or not the blessed grenade is off-stage;
-	if we assert result "the Blessed Grenade drops on the ground", rule succeeds;
-
+First testing effects of no-new-blessed:
+	assert "The Blessed Grenade should be off-stage" based on whether or not the blessed grenade is off-stage.
 
 Chapter - bug 262
 
@@ -4205,11 +4192,10 @@ testing effects of bug-351-true-name:
 Section - Bug 352 - exploded property
 
 Table of Outcomes (continued)
-outcome	likelihood	minimum attempts
-throwing-352	1	1
+outcome	likelihood	label	minimum attempts
+throwing-352	1	"try throwing"	1
 
 Initial scheduling of throwing-352: now the reusable item is a random smoke grenade.
-Regular scheduling of throwing-352: try throwing the reusable item.
 Testing effects of throwing-352: if we assert absence of result "Run-time problem", rule succeeds.
 
 Section - Died Counts
@@ -4234,10 +4220,10 @@ Testing effects of died-count-test: if we assert that the died count of israfel 
 Section - Enemies should always start out awake in Arena of the Fallen
 
 Table of Outcomes (continued)
-outcome	likelihood	minimum attempts
-sleeping fallen	1	1
-dead-fallen	1	1
-awake-in-fallen-arena	1	1
+outcome	likelihood	label	minimum attempts
+sleeping fallen	1	"try reading"	1
+dead-fallen	1	--	1
+awake-in-fallen-arena	1	--	1
 
 Scenario for Simple Tests: now Entrance to the Arena is testobject.
 
@@ -4249,7 +4235,6 @@ initial scheduling of Sleeping Fallen:
 	Now the reusable item is a random scroll of death;
 	now the health of the blood ape is 1;
 
-Regular scheduling of Sleeping fallen: try reading the reusable item.
 Testing effects of sleeping fallen: if the blood ape is asleep, rule succeeds.
 Testing effects of dead-fallen: if the blood ape is dead, rule succeeds.
 
@@ -4259,13 +4244,13 @@ testing effects of awake-in-fallen-arena: if the blood ape is not asleep, rule s
 Section - Dream of Sleeping
 
 Table of Outcomes (continued)
-outcome	likelihood	minimum attempts
-sleeping-dream-dreaming	1	1
-sleeping-dream-waking	1	1
-malygris-missing-sleeper	1	1
-still-sleepy	1	1
-malygris-hitting-sleeper	1	1
-slapped-awake	1	1
+outcome	likelihood	label	minimum attempts
+sleeping-dream-dreaming	1	"compel throwing"	1
+sleeping-dream-waking	1	--	1
+malygris-missing-sleeper	1	--	1
+still-sleepy	1	--	1
+malygris-hitting-sleeper	1	--	1
+slapped-awake	1	--	1
 
 Initial scheduling of sleeping-dream-dreaming:
 	now the dream of sleeping is testobject;
@@ -4273,7 +4258,6 @@ Initial scheduling of sleeping-dream-dreaming:
 	Now Malygris is asleep;
 	extract the player to Entrance Hall, making sure it is unoccupied.
 
-regular scheduling of sleeping-dream-dreaming: compel the action of throwing the reusable item.
 testing effects of sleeping-dream-dreaming: if the player is the untroubled sleeper, rule succeeds.
 
 regular scheduling of sleeping-dream-waking: compel the action of exiting.
