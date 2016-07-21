@@ -5,11 +5,13 @@
 # The test suite doesn't always work well if old test files exist
 rm -f test*
 
-# Run the tests non-interactively
-SEED=$(date "+%s")
+# Set the random seed to the command line argument, if given
+# otherwise set it to the time
+SEED=${1:-$(date "+%s")}
 echo "Setting random seed to $SEED"
 ./seeder $SEED
-echo $SEED >> recent-seeds
+
+# Run the tests non-interactively
 echo -e '\nRunning the Kerkerkruip test suite:'
 touch noninteractivetests
 COLS=$(tput cols)
