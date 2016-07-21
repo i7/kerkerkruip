@@ -2008,41 +2008,45 @@ Testing effects of fell-defeating-293:
 Chapter - Weapon aftereffects
 
 Table of Outcomes (continued)
-outcome	likelihood	minimum attempts	antecedent
-weapon aftereffects	0	1	restarting for tests
-fafhrd-battling	1	1	--
-basic-hit	1	1	--
-basic-hit-retaining	5	5	basic-hit
-fafhrd-dodge	1	1	--
-fafhrd-dodge-retaining	5	5	fafhrd-dodge
-fafhrd-parry-rapier	1	1	--
-parried-rapier-shatters	1	1	fafhrd-parry-rapier
-fafhrd-parry-fists	1	1	--
-rapier-recovery	1	1	--
-rapier-inventory	1	1	--
-dodge-fafhrd	1	1	--
-dodge-fafhrd-retaining	1	1	dodge-fafhrd
-dodge-fafhrd-fail	1	1	--
-dodge-fafhrd-fail-retaining	1	1	dodge-fafhrd-fail
-parry-fafhrd-fail	1	1	--
-parry-fafhrd-fail-retaining	1	1	parry-fafhrd-fail
-parry-fafhrd-protected	1	1	--
-parry-fafhrd-protected-retaining	1	1	parry-fafhrd-protected
-parry-fafhrd	1	1	--
-parry-fafhrd-shatter	1	1	parry-fafhrd
+outcome	likelihood	minimum attempts	label	antecedent
+weapon aftereffects	0	1	--	restarting for tests
+fafhrd-battling	1	1	--	--
+basic-hit	1	1	--	--
+basic-hit-retaining	5	5	"retain rapier"	basic-hit
+fafhrd-dodge	1	1	--	--
+fafhrd-dodge-retaining	5	5	"retain rapier"	fafhrd-dodge
+fafhrd-parry-rapier	1	1	--	--
+parried-rapier-shatters	1	1	"lose weapon"	fafhrd-parry-rapier
+fafhrd-parry-fists	1	1	--	--
+rapier-recovery	1	1	"retain rapier"	--
+rapier-inventory	1	1	--	--
+dodge-fafhrd	1	1	--	--
+dodge-fafhrd-retaining	1	1	"retain rapier"	dodge-fafhrd
+dodge-fafhrd-fail	1	1	--	--
+dodge-fafhrd-fail-retaining	1	1	"retain rapier"	dodge-fafhrd-fail
+parry-fafhrd-fail	1	1	--	--
+parry-fafhrd-fail-retaining	1	1	"retain rapier"	parry-fafhrd-fail
+parry-fafhrd-protected	1	1	--	--
+parry-fafhrd-protected-retaining	1	1	"retain rapier"	parry-fafhrd-protected
+parry-fafhrd	1	1	--	--
+parry-fafhrd-shatter	1	1	"lose weapon"	parry-fafhrd
 
-initial scheduling of weapon aftereffects: now every weapon is not cursed.
+initial scheduling of weapon aftereffects:
+	Repeat with guy running through people:
+		now inherent damage modifier of the guy is 10;
+	now every weapon is not cursed.
 
-Definition: an outcome is rapier-retaining if it is basic-hit-retaining or it is fafhrd-dodge-retaining or it is rapier-recovery or it is dodge-fafhrd-retaining or it is dodge-fafhrd-fail-retaining or it is parry-fafhrd-fail-retaining or it is parry-fafhrd-protected-retaining or it is greasy-retaining or it is greasy-parry-fail-retaining.
+[Definition: an outcome is rapier-retaining if it is basic-hit-retaining or it is fafhrd-dodge-retaining or it is rapier-recovery or it is dodge-fafhrd-retaining or it is dodge-fafhrd-fail-retaining or it is parry-fafhrd-fail-retaining or it is parry-fafhrd-protected-retaining or it is greasy-retaining or it is greasy-parry-fail-retaining.
 Definition: an outcome is weapon-losing if it is parried-rapier-shatters or it is parry-fafhrd-shatter or it is greasy-undodged-dropped or it is greasy-parry-dropped.
+]
 
-Last testing effects of a rapier-retaining outcome:
+Last testing effects of an outcome labeled "retain rapier":
 	if the number of readied weapons enclosed by the player is greater than 1:
 		now the failure report is "the player has too many readied weapons: [the list of readied weapons enclosed by the player]";
 		rule fails;
 	if the player holds the gilded rapier and the gilded rapier is readied, rule succeeds.
 
-Last testing effects of a weapon-losing outcome:
+Last testing effects of a outcome labeled "lose weapon":
 	if the number of readied weapons enclosed by the player is greater than 1:
 		now the failure report is "the player has too many readied weapons: [the list of readied weapons enclosed by the player]";
 		rule fails;
@@ -2211,7 +2215,6 @@ testing effects of thorns-dodge-chains-protected: if we assert absence of result
 
 initial scheduling of thorns-dodge-chains:
 	now the hit protection of the player is 0;
-	now the inherent damage modifier of the chain golem is 2;
 
 regular scheduling of thorns-dodge-chains: do the action of dodging a 100 melee hit by the the chain golem.
 Testing effects of thorns-dodge-chains:
@@ -2245,16 +2248,16 @@ Testing effects of thorns-dodge-bodmall-fail:
 	if we assert that the health of Bodmall is 100, rule succeeds.
 
 Table of Outcomes (continued)
-outcome	likelihood	minimum attempts	antecedent
+outcome	likelihood	minimum attempts	label	antecedent
 mouser-dodge-greasy	20	20	--
-mouser-parry-greasy	20	20	--
-greasy-retaining	1	1	--
-greasy-undodged-drop	1	6	--
-greasy-undodged-dropped	1	1	greasy-undodged-drop
-greasy-parry-fail	20	20	--
-greasy-parry-fail-retaining	1	1	--
-greasy-parry-drop	1	4	--
-greasy-parry-dropped	1	1	greasy-parry-drop
+mouser-parry-greasy	20	20	--	--
+greasy-retaining	1	1	"retain rapier"	--
+greasy-undodged-drop	1	6	--	--
+greasy-undodged-dropped	1	1	"lose weapon"	greasy-undodged-drop
+greasy-parry-fail	20	20	--	--
+greasy-parry-fail-retaining	1	1	"retain rapier"	--
+greasy-parry-drop	1	4	--	--
+greasy-parry-dropped	1	1	"lose weapon"	greasy-parry-drop
 
 Initial scheduling of mouser-dodge-greasy:
 	equip the player with the greasy gauntlets;
@@ -2391,6 +2394,8 @@ Scenario for damage-text:
 	now Vast Staircase is testobject;
 	now slaying-kit is testobject;
 	now addict-kit is bannedobject;
+	Repeat with guy running through people:
+		now inherent damage modifier of the guy is 10;
 
 Initial scheduling of basic attack damage text:
 	prepare a test battle with the reaper;
@@ -2429,7 +2434,6 @@ Regular scheduling of dodge-thorns damage text:
 	now the armour of thorns is not cursed;
 	equip the player with the armour of thorns;
 	now the blood magic level of the armour of thorns is 1;
-	now inherent damage modifier of the reaper is 10;
 	do the action of dodging a 100 melee hit by the reaper.
 
 Testing effects of dodge-thorns damage text: if we assert result "(\n|^)The armour of thorns scratches the Reaper for 1 damage.", rule succeeds.
@@ -2851,7 +2855,6 @@ Initial scheduling of dead-mage-damage:
 	equip Miranda with nunchucks;
 	Now the nunchucks are wood;
 	Let the place be the location of Miranda;
-	[now the inherent damage modifier of Miranda is 2;]
 	if the place is a precarious room:
 		swap the occupants of the place and a random not precarious habitable placed room;
 	extract the player to the location of Miranda;

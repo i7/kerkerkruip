@@ -48,9 +48,13 @@ antecedent - the outcome that must succeed before this can be tested
 ]
 
 Table of Outcomes
-outcome		attempt count	success count	likelihood (number)	minimum attempts (number)	maximum attempts (number)	maximum tolerance (number)	state (outcome state)	antecedent (outcome)
-boring lack of results	0	0	0	1	1	0	outcome-untested	boring lack of results
-restarting for tests	0	0	1	1	1	0	--	--
+outcome	attempt count	success count	likelihood (number)	minimum attempts (number)	maximum attempts (number)	maximum tolerance (number)	state (outcome state)	label (text)	antecedent (outcome)
+boring lack of results	0	0	0	1	1	0	outcome-untested	--	boring lack of results
+restarting for tests	0	0	1	1	1	0	--	--	--
+
+label-tagging relates an outcome (called the event) to a text (called the tag) when the label of the event is the tag.
+
+The verb to be labeled means the label-tagging relation.
 
 Section - Statistical Help
 
