@@ -1154,10 +1154,14 @@ To start test transcript with (T - a text):
 	write "Test transcript for Kerkerkruip: [T].[line break]" to file of test transcript;
 	start the next test;
 
+Wrong-test queueing is an action out of world applying to one topic. Understand "queue test [text]" as wrong-test queueing.
+	Check wrong-test queueing:
+		try test listing instead.
 
-Understand "queue test/tests" and "queue test [text]" as a mistake ("You can 'queue test all' or test one of the following sets: [list automated tests]").
+Test listing is an action out of world applying to nothing. Understand "queue test/tests" and "list test/tests" as test listing.
 
-To say list automated tests:
+Carry out test listing:
+	say "You can 'queue test all' or test one of the following sets:";
 	repeat with T running through enabled outcomes:
 		say "[line break][T]";
 	say paragraph break.

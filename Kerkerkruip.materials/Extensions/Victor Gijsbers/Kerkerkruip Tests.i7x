@@ -188,7 +188,7 @@ This is the show the console rule:
 		repeat through the Table of Requested Test Objects:
 			say "[the Object name entry][line break]";
 		say "[line break][bold type]The initial test random seed is set to: [roman type][the initial test random seed][line break]";
-		say "[line break]Commands: ADD THING, DELETE THING, EMPTY (the whole list), QUIT[paragraph break]";
+		say "[line break]Commands: ADD thing, DELETE thing, EMPTY (the whole list), QUEUE TEST testname, QUEUE TEST ALL, RANDOMSEED number, QUIT[paragraph break]";
 		follow the parse command rule;
 		set the parser variables manually;
 		if quitting the game:
@@ -205,6 +205,9 @@ This is the show the console rule:
 					break;
 		if test queueing or all-test queueing or setting the random seed to:
 			try the current action;
+		if wrong-test queueing or test listing:
+			try the current action;
+			pause the game;
 	write File of Test Objects from Table of Requested Test Objects;
 	now the early in turn sequence flag is false;
 	now the test object console is false;
