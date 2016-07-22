@@ -2197,7 +2197,7 @@ A scroll is a kind of thing.
 A scroll is usually improper-named.
 A scroll is usually civilised.
 A scroll is usually paper.
-A scroll is readable.
+A scroll is readable-aloud.
 Understand "scroll" as a scroll.
 Understand "scrolls" as the plural of a scroll.
 
@@ -2968,7 +2968,7 @@ One scroll of psycholocation is in the knowing-scroll-pack.
 
 Section - The palimpsest (epic)
 
-The palimpsest is a readable blood-awakened epic thing.  The palimpsest is magical.
+The palimpsest is a readable-aloud blood-awakened epic thing.  The palimpsest is magical.
 Palimpsest-active is a truth state that varies. Palimpsest-active is true.
 
 Palimpsest-scroll is a scroll name that varies.
@@ -3054,7 +3054,7 @@ Carry out replicating:
 
 Chapter - Magical guides
 
-A magical guide is a kind of thing. A magical guide is readable. Understand "book" and "manual" as a magical guide.
+A magical guide is a kind of thing. A magical guide is silently-readable. Understand "book" and "manual" as a magical guide.
 
 Last before printing the name of a magical guide:
 	say "[italic type]".
@@ -3126,7 +3126,7 @@ Chapter - Other readables
 
 Section - Ancient papyrus
 
-The ancient papyrus is a minor thing. The ancient papyrus is paper and readable.
+The ancient papyrus is a minor thing. The ancient papyrus is paper and readable-aloud.
 The ancient papyrus is deathly.
 
 The description of the ancient papyrus is "This almost crumbling document contains a spell that may bless you or curse you. There's no way of knowing which without reading it -- and even then, the effects may not be immediately apparent.".
@@ -4741,7 +4741,7 @@ Instead of eating a package of ment (this is the ment cannot be eaten rule):
 Chapter - Tomes
 
 A tome is a kind of thing.
-A tome is readable.
+A tome is readable-aloud.
 The indefinite article of a tome is usually "the".
 
 The description of a tome is usually "Who knows what will happen if you decide to read this legendary work of magic?"

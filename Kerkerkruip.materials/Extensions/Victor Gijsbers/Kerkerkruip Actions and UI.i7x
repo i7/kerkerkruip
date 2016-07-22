@@ -342,10 +342,10 @@ First carry out waiting:
 	say "You settle in for a longer wait...";
 	While actual wait-time < intended wait-time:
 		Carry out the extended waiting activity;
-	if actual wait-time is 1:
-		say "Only one turn has passed.";
+	if intended wait-time is 0:
+		say "You stop waiting after [actual wait-time] turn[s]";
 	otherwise:
-		say "[actual wait-time] turn[s] [pass].";
+		say "[actual wait-time] turns pass uneventfully.";
 	Now actual wait-time is 0;
 	take no time [oh, the irony!];
 	rule succeeds.
@@ -930,10 +930,12 @@ Report talking to:
 Chapter - Reading
 
 Reading is an action applying to one thing. Understand the command "read" as something new. Understand "read [thing]" as reading.
-A thing can be readable.
+A thing can be unreadable, silently-readable, or readable-aloud.
+Definition: a thing is readable if it is not unreadable.
+
 Does the player mean reading a readable thing: it is likely.
 
-Check reading a not readable thing (this is the can only read readable things rule):
+Check reading an unreadable thing (this is the can only read readable things rule):
 	take no time;
 	say "You cannot read that." instead.
 

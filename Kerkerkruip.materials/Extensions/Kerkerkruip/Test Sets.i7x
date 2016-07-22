@@ -3965,6 +3965,8 @@ blind-eyeless-player-vision	0	1	"vision"
 eyeless-player-perceptive	1	1	"perception"
 eyeless-player-vision	0	1	"vision"
 eyeless-player-status	1	1	--
+bat-player-perceptive	1	1	"perception"
+bat-player-vision	0	1	"vision"
 sighted-player-perceptive	1	1	"perception"
 sighted-player-vision	1	1	"vision"
 jumping-bomb-perceptive	1	1	--
@@ -3981,8 +3983,16 @@ regular scheduling of player-blind-status: try asking status.
 Testing effects of player-blind-status: if we assert result "You are blind", rule succeeds.
 
 Initial scheduling of blind-eyeless-player-perceptive: now eyeless vision is adapted.
+
 Initial scheduling of eyeless-player-perceptive: now the flash-grenade-timer of the player is 0.
-Initial scheduling of sighted-player-perceptive: now eyeless vision is not adapted.
+initial scheduling of bat-player-perceptive:
+	now eyeless vision is not adapted;
+	now vampirebat-form is form-active;
+	try turning bat.
+
+Initial scheduling of sighted-player-perceptive:
+	try turning human;
+	now vampirebat-form is not form-active.
 
 regular scheduling of eyeless-player-status: try asking status.
 Testing effects of eyeless-player-status: if we assert result "Your altered body has eyeless vision", rule succeeds.

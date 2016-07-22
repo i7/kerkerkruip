@@ -134,9 +134,9 @@ Carry out concentrating:
 	if the player is hidden:
 		say "You shift your attention away from remaining hidden. [run paragraph on]".
 
-Carry out reading a scroll:
-	now hiding action penalty is 5;
-	now hiding action penalty text is "reading out loud".
+Carry out reading a readable-aloud thing:
+		now hiding action penalty is 5;
+		now hiding action penalty text is "reading out loud".
 
 Carry out dropping:
 	now hiding action penalty is 2;

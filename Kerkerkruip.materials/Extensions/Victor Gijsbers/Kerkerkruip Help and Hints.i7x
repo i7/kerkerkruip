@@ -219,6 +219,8 @@ tip
 "If you wear a shield, you can [italic type]block[roman type] attacks. Blocking no longer increases your flow as it did in Kerkerkruip 9, but you get a +2 defence bonus in addition to your shield bonus."
 "You can [italic type]expose[roman type] yourself to an attack if you actually want to get hit."
 "Offensive flow and defensive flow can never total more than 3."
+"The vial of purification can cure some forms of blindness and speed recovery from temporary ailments."
+"Vampire bat form gives you the power to see without eyes, but you can no longer read scrolls. This is a change from Kerkerkruip 9."
 
 To decide which text is the next tip text:
 	if a random chance of 3 in ((number of total victories) + 4) succeeds: [Expert tips show up more often when number of victories is higher.]

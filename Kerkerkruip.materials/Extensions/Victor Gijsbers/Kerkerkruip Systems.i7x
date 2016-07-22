@@ -1909,7 +1909,7 @@ This is the turn-vampire-bat rule:
 Status attribute rule (this is the vampire bat status rule):
 	if current form is vampirebat-form:
 		if long status is true:
-			say "You are a [bold type]vampire bat[roman type]: +2 defence, -2 attack, +2 bonus to hiding, bonus to running away, flying, cannot use weapons or clothing.[line break][run paragraph on]".
+			say "You are a [bold type]vampire bat[roman type]: +2 defence, -2 attack, +2 bonus to hiding, bonus to running away, flying, echolocation doesn't require eyes, cannot use scrolls, weapons or clothing.[line break][run paragraph on]".
 
 An attack modifier rule (this is the vampire bat has less chance to be hit rule):
 	if the global defender is the player and current form is vampirebat-form:
@@ -1933,6 +1933,14 @@ A flying rule (this is the vampire bat flies rule):
 	if test subject is player and the current form is vampirebat-form:
 		rule succeeds.
 
+A perception rule (this is the echolocation grants perception rule):
+	if test subject is the player and the current form is vampirebat-form:
+		rule succeeds.
+
+A vision rule (this is the echolocation requires no eyes rule):
+	if test subject is the player and the current form is vampirebat-form:
+		rule fails.
+
 An attack modifier rule (this is the vampire bat grants better retreat rule):
 	if the global defender is the player and current form is vampirebat-form and the global defender is retreater:
 		say " - 2 (bat form retreat bonus)[run paragraph on]";
@@ -1951,6 +1959,11 @@ Check wearing (this is the vampire bat cannot wear clothing rule):
 		take no time;
 		say "In bat form, you cannot wear clothing." instead.
 
+Check reading (this is the vampire bat cannot read aloud rule):
+	if the current form is vampirebat-form and the noun is readable-aloud:
+		take no time;
+		say "Your little bat jaws cannot form the words out loud." instead.
+	
 Every turn when the current form is vampirebat-form (this is the unready readied weapons when bat rule):
 	if the player encloses at least one readied weapon:
 		repeat with X running through readied weapons enclosed by the player:

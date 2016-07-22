@@ -375,13 +375,16 @@ Status attribute rule (this is the blindness status rule):
 		otherwise:
 			say "[@ check initial position of attribute]blind[run paragraph on]";
 
-[I don't think there's any effect that can make the player eyeless - this is different from the eyeless vision adaptation]
 Status attribute rule (this is the eyeless status rule):
-	if player is eyeless:
-		if long status is true:
-			say "You do not need [bold type]eyes[roman type] to perceive your surroundings.[line break][run paragraph on]";
-		otherwise:
-			say "[@ check initial position of attribute]eyeless[run paragraph on]";
+	unless the player is using eyes:
+		if player is perceptive:
+			if long status is true:
+				say "You do not need [bold type]eyes[roman type] to perceive your surroundings.[line break][run paragraph on]";
+			otherwise:
+				if vampirebat-form is form-active:
+					say "[@ check initial position of attribute]echolocating[run paragraph on]";
+				otherwise:
+					say "[@ check initial position of attribute]eyeless[run paragraph on]";
 
 An attack modifier rule (this is the blindness attack modifier rule):
 	unless the global attacker is perceptive:
