@@ -317,8 +317,6 @@ Last report going (this is the check whether destination reached rule):
 	if the location is the location-to-go:
 		now the location-to-go is Null-Room.
 
-[TODO:
-
 Chapter - Extended Waiting
 
 [This is an anti-grinding convenience, mainly so the player doesn't have to type "z" 15 times when they get a flash grenade thrown back at them]
@@ -331,10 +329,13 @@ Chapter - Extended Waiting
 Intended wait-time is a number that varies.
 Actual wait-time is a number that varies.
 
-Before doing anything besides waiting:
+Before doing anything other than waiting:
 	now intended wait-time is 0.
 	
-First carry out waiting:
+Last check waiting (this is the check for extended wait rule):
+	unless the combat status is peace:
+		now intended wait-time is 0;
+		make no decision;
 	if intended wait-time < 1:
 		now intended wait-time is 1;
 		make no decision;
@@ -342,24 +343,31 @@ First carry out waiting:
 	say "You settle in for a longer wait...";
 	While actual wait-time < intended wait-time:
 		Carry out the extended waiting activity;
-	if intended wait-time is 0:
-		say "You stop waiting after [actual wait-time] turn[s]";
+	if the player is dead:
+		make no decision;
+	otherwise if intended wait-time is 0:
+		say "You stop waiting after [actual wait-time] turn[s].";
 	otherwise:
 		say "[actual wait-time] turns pass uneventfully.";
 	Now actual wait-time is 0;
-	take no time [oh, the irony!];
-	rule succeeds.
+	take no time; [oh, the irony!]
+	stop the action.
 	
 Extended waiting is an activity.
 
-Vision before waiting is a truth state that varies.
-
-Before extended waiting (this is the check for blindness before waiting rule):
-	Now vision before waiting is whether or not the player is perceptive.
-
 For extended waiting (this is the time passes silently during extended waiting rule):
 	follow the every turn rules;
-	
+	follow the advance time rule.
+
+Vision-before-waiting is a truth state that varies.
+
+Before extended waiting (this is the check for blindness before waiting rule):
+	Now vision-before-waiting is (whether or not the player is perceptive).
+
+After extended waiting (this is the wait until you can see rule):
+	If vision-before-waiting is false and the player is perceptive:
+		now intended wait-time is 0.
+		
 After extended waiting (this is the mark extended time rule):
 	increment actual wait-time;
 
@@ -368,14 +376,16 @@ After extended waiting (this is the stop waiting in combat rule):
 	if the combat status is combat:
 		now intended wait-time is 0.
 		
-After extended waiting (this is the wait until you can see rule):
-	If vision before waiting is false and the player is perceptive:
+After extended waiting (this is the stop waiting for nomos bonus rule):
+	if the nomos counter is not greater than 1 and the nomos attacker is conscious in this world:
 		now intended wait-time is 0.
-		
+
 After extended waiting (this is the stop waiting when dead rule):
 	if the player is dead:
 		now intended wait-time is 0.
-]
+
+An after damage rule (this is the any damage stops waiting rule):
+	now intended wait-time is 0.
 
 Chapter - Status
 
