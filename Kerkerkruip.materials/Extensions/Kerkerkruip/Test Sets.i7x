@@ -4007,6 +4007,9 @@ eyeless-player-bgoggles-b	1	1	"goggle bonus"
 eyes-player-bgoggles-p	0	1	"perception"
 eyes-player-bgoggles-v	0	1	"vision"
 eyes-player-bgoggles-b	1	1	"no goggle bonus"
+bgoggles-purification	1	1	"bgoggles drink"
+bgoggles-uncursed	0	1	"bgoggles drink"
+bgoggles-purification-nosurprise	1	1	"bgoggles drink"
 eyeless-player-agoggles-p	1	1	"perception"
 eyeless-player-agoggles-v	0	1	"vision"
 eyeless-player-agoggles-b	1	1	"no goggle bonus"
@@ -4029,18 +4032,6 @@ testing effects of an outcome labeled "x bgoggles": if we assert result "they gr
 
 regular scheduling of eyeless-wear-bgoggles: try wearing the goggles of blindness.
 testing effects of eyeless-wear-bgoggles: if we assert result "Your eyeless vision combines with the magic of the goggles to give you heightened senses! \(\+1 bonus to body, mind and spirit\.\)", rule succeeds.
-	
-initial scheduling of eyes-player-bgoggles-p: now eyeless vision is not adapted.
-	
-initial scheduling of eyeless-player-agoggles-p:
-	now eyeless vision is adapted;
-	equip the player with the goggles of acuity.
-	
-initial scheduling of blind-player-agoggles-b:
-	now the flash-grenade-timer of the player is 5;
-	now eyeless vision is not adapted.
-	
-initial scheduling of eyes-player-agoggles-p: now the flash-grenade-timer of the player is 0.
 
 testing effects of an outcome labeled "goggle bonus":
 	assert that the final body of the player is 4 with label "final body";
@@ -4051,6 +4042,38 @@ testing effects of an outcome labeled "no goggle bonus":
 	assert that the final body of the player is 3 with label "final body";
 	assert that the final mind of the player is 5 with label "final mind";
 	if we assert that the final spirit of the player is 7, rule succeeds.
+
+initial scheduling of eyes-player-bgoggles-p: now eyeless vision is not adapted.
+
+initial scheduling of an outcome labeled "bgoggles drink":
+	now eyeless vision is not adapted;
+	now the player carries the vial of purification.
+
+regular scheduling of an outcome labeled "bgoggles drink": try drinking the vial of purification.
+last testing effects of an outcome labeled "bgoggles drink": if eyeless vision is adapted, rule succeeds.
+
+initial scheduling of bgoggles-purification: now blindness-goggles-secret-known is false.
+
+testing effects of bgoggles-purification:
+	assert result "Although the waters cannot break the curse of the goggles, they give you the power to see without eyes!\n\nThe magic of the goggles combines with your eyeless vision to give you heightened senses";
+
+initial scheduling of bgoggles-uncursed: now the goggles of blindness are not cursed.
+testing effects of bgoggles-uncursed: assert absence of result "the waters cannot break the curse of the goggles".
+
+initial scheduling of bgoggles-purification-nosurprise: now the goggles of blindness are cursed.
+testing effects of bgoggles-purification-nosurprise:
+	assert result "they give you the power to see without eyes";
+	assert absence of result "magic of the goggles combines with your eyeless vision".
+	
+initial scheduling of eyeless-player-agoggles-p:
+	now eyeless vision is adapted;
+	equip the player with the goggles of acuity.
+	
+initial scheduling of blind-player-agoggles-b:
+	now the flash-grenade-timer of the player is 5;
+	now eyeless vision is not adapted.
+	
+initial scheduling of eyes-player-agoggles-p: now the flash-grenade-timer of the player is 0.
 
 Section - Resizing salves
 

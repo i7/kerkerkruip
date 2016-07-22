@@ -1392,7 +1392,7 @@ Last report wearing the goggles of blindness (this is the reveal blindness-goggl
 		now blindness-goggles-secret-known is true.
 		
 Last mutating rule (this is the reveal eyeless with goggles secret rule):
-	if blindness-goggles-secret-known is true or mutated boolean is false:
+	if blindness-goggles-secret-known is true:
 		make no decision;
 	if the player wears the goggles of blindness and the player is perceptive:
 		say "The magic of the goggles combines with your eyeless vision to give you heightened senses! (+1 bonus to body, mind, and spirit.)";
@@ -4347,8 +4347,17 @@ Purification rule (this is the purify disintegrating flesh rule):
 Purification rule (this is the purify vision rule):
 	unless the player is perceptive:
 		now the flash-grenade-timer of the player is 0;
+		if the player wears the cursed goggles of blindness:
+			say "Although the waters cannot break the curse of the goggles, they [run paragraph on]";
+			now eyeless vision is adapted;
+		otherwise if the player is perceptive:
+			say "The waters [run paragraph on]";
 		if the player is perceptive:
-			say "The waters heal your eyes, allowing you to see again.";
+			if the player is using eyes:
+				say "heal your eyes, allowing you to see again.";
+			otherwise:
+				say "give you the power to see without eyes!";
+				follow the reveal eyeless with goggles secret rule;
 			now player-purified is true;
 
 Purification rule (this is the purify stunning rule):
