@@ -377,7 +377,7 @@ After extended waiting (this is the stop waiting in combat rule):
 		now intended wait-time is 0.
 		
 After extended waiting (this is the stop waiting for nomos bonus rule):
-	if the nomos counter is not greater than 1 and the nomos attacker is conscious in this world:
+	if the nomos counter 1 and the nomos attacker is conscious in this world:
 		now intended wait-time is 0.
 
 After extended waiting (this is the stop waiting when dead rule):
