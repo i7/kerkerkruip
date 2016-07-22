@@ -1355,10 +1355,10 @@ A treasure placement rule (this is the acuity can be blindness rule):
 		now the hidden identity of the goggles of acuity is the goggles of blindness.
 
 A faculty bonus rule (this is the faculty bonus of the goggles of acuity rule):
-	if the test subject wears the goggles of acuity:
+	if the test subject wears the goggles of acuity and the test subject is using eyes:
 		increase faculty bonus score by 1.
 
-The description of the goggles of acuity is "These goggles have been magically enchanted to make the wearer more aware of anything that happens around him. They were originally made for the marquis of Savon, who wasted his eyes poring over ancient tomes in his ill-lit library, but their use extends far beyond that of reading glasses. [italic type](They grant a +1 bonus to body, mind and spirit.)[roman type]".
+The description of the goggles of acuity is "These goggles have been magically enchanted to make the wearer more aware of anything that happens around him. They were originally made for the marquis of Savon, who wasted his eyes poring over ancient tomes in his ill-lit library, but their use extends far beyond that of reading glasses. [italic type](They grant a +1 bonus to body, mind and spirit if you are using your eyes to see.)[roman type]".
 
 [TODO: these goggles only work if the player is using eyes? Make goggles of blindness do the same for eyeless players]
 
@@ -1371,10 +1371,33 @@ A perception rule (this is the goggles of blindness rule):
 	if the test subject wears the goggles of blindness:
 		rule fails.
 
-The description of goggles of blindness is "These goggles prevent the wearer from seeing anything at all. A free-for-all fight between condemned criminals forced to wear such goggles is one of the most beloved shows during the Feast of Flesh; you smile as you recall the spectacle.".
+blindness-goggles-secret-known is a truth state that varies.
 
+To decide whether we share the blindness-goggles secret:
+	if blindness-goggles-secret-known is true, yes;
+	if the player wears the goggles of blindness and the player is perceptive:
+		now blindness-goggles-secret-known is true;
+		yes;
+	no.
 
+The description of goggles of blindness is "These goggles prevent the wearer from seeing anything at all. A free-for-all fight between condemned criminals forced to wear such goggles is one of the most beloved shows during the Feast of Flesh; you smile as you recall the spectacle[if we share the blindness-goggles secret]. However, they grant a +1 bonus to body, mind, and spirit if you can still see when you're wearing them[end if].".
 
+A faculty bonus rule (this is the goggles of blindness surprise bonus rule):
+	if the test subject wears the goggles of blindness and the test subject is perceptive:
+		increase faculty bonus score by 1.
+
+Last report wearing the goggles of blindness (this is the reveal blindness-goggles secret rule):
+	if the player is perceptive:
+		say "Your eyeless vision combines with the magic of the goggles to give you heightened senses! (+1 bonus to body, mind and spirit.)";
+		now blindness-goggles-secret-known is true.
+		
+Last mutating rule (this is the reveal eyeless with goggles secret rule):
+	if blindness-goggles-secret-known is true or mutated boolean is false:
+		make no decision;
+	if the player wears the goggles of blindness and the player is perceptive:
+		say "The magic of the goggles combines with your eyeless vision to give you heightened senses! (+1 bonus to body, mind, and spirit.)";
+		now blindness-goggles-secret-known is true.
+	
 Chapter - Suits
 
 [Suits include hat, shirt, shoes, trousers, gauntlets. Furthermore, you cannot put on a suit if you wear a cursed cloak or a cursed belt.]
@@ -1744,11 +1767,6 @@ Every turn (this is the recover from flash rule):
 						otherwise:
 							say "[regarding the main actor][Possessive] [bold type]eyes function again[roman type].".
 				
-[TODO: carry out waiting when the flash-grenade-timer of the player is not 0:
-	if there are no timed effects (enemies following, danger countdowns):
-		now the flash-grenade-timer of the player is 0;
-			say "you wait until you can see again";]
-
 A perception rule (this is the blind if flashed rule):
 	if flash-grenade-timer of test subject is greater than 0:
 		rule fails.				

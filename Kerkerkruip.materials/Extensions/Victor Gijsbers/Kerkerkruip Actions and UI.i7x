@@ -317,6 +317,65 @@ Last report going (this is the check whether destination reached rule):
 	if the location is the location-to-go:
 		now the location-to-go is Null-Room.
 
+[TODO:
+
+Chapter - Extended Waiting
+
+[This is an anti-grinding convenience, mainly so the player doesn't have to type "z" 15 times when they get a flash grenade thrown back at them]
+
+[TODO: carry out waiting when the flash-grenade-timer of the player is not 0:
+	if there are no timed effects (enemies following, danger countdowns):
+		now the flash-grenade-timer of the player is 0;
+			say "you wait until you can see again";]
+
+Intended wait-time is a number that varies.
+Actual wait-time is a number that varies.
+
+Before doing anything besides waiting:
+	now intended wait-time is 0.
+	
+First carry out waiting:
+	if intended wait-time < 1:
+		now intended wait-time is 1;
+		make no decision;
+	Now intended wait-time is intended wait-time * 2;
+	say "You settle in for a longer wait...";
+	While actual wait-time < intended wait-time:
+		Carry out the extended waiting activity;
+	if actual wait-time is 1:
+		say "Only one turn has passed.";
+	otherwise:
+		say "[actual wait-time] turn[s] [pass].";
+	Now actual wait-time is 0;
+	take no time [oh, the irony!];
+	rule succeeds.
+	
+Extended waiting is an activity.
+
+Vision before waiting is a truth state that varies.
+
+Before extended waiting (this is the check for blindness before waiting rule):
+	Now vision before waiting is whether or not the player is perceptive.
+
+For extended waiting (this is the time passes silently during extended waiting rule):
+	follow the every turn rules;
+	
+After extended waiting (this is the mark extended time rule):
+	increment actual wait-time;
+
+After extended waiting (this is the stop waiting in combat rule):
+	update the combat status;
+	if the combat status is combat:
+		now intended wait-time is 0.
+		
+After extended waiting (this is the wait until you can see rule):
+	If vision before waiting is false and the player is perceptive:
+		now intended wait-time is 0.
+		
+After extended waiting (this is the stop waiting when dead rule):
+	if the player is dead:
+		now intended wait-time is 0.
+]
 
 Chapter - Status
 

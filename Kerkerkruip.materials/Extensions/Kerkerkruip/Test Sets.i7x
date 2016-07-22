@@ -3955,33 +3955,27 @@ Testing effects of eyeless-monster-startled: if the concentration of the jumping
 
 Section - Blindness Rules
 
-[skip blinded property]
-
 Table of Outcomes (continued)
-outcome	likelihood	minimum attempts
-player-blind	0	1
-player-blind-status	1	1
-blind-player-vision	0	1
-blind-eyeless-player-perceptive	1	1
-blind-eyeless-player-vision	0	1
-eyeless-player-perceptive	1	1
-eyeless-player-vision	0	1
-eyeless-player-status	1	1
-sighted-player-perceptive	1	1
-sighted-player-vision	1	1
-jumping-bomb-perceptive	1	1
-jumping-bomb-not-eye-using	1	1
-compassion-perceptive	1	1
-compassion-eye-using	1	1
-
-Definition: an outcome is perception-testing if it is player-blind or it is blind-eyeless-player-perceptive or it is eyeless-player-perceptive or it is sighted-player-perceptive.
-
-Definition: an outcome is vision-testing if it is blind-player-vision or it is blind-eyeless-player-vision or it is eyeless-player-vision or it is sighted-player-vision.
+outcome	likelihood	minimum attempts	label
+player-blind	0	1	"perception"
+player-blind-status	1	1	--
+blind-player-vision	0	1	"vision"
+blind-eyeless-player-perceptive	1	1	"perception"
+blind-eyeless-player-vision	0	1	"vision"
+eyeless-player-perceptive	1	1	"perception"
+eyeless-player-vision	0	1	"vision"
+eyeless-player-status	1	1	--
+sighted-player-perceptive	1	1	"perception"
+sighted-player-vision	1	1	"vision"
+jumping-bomb-perceptive	1	1	--
+jumping-bomb-not-eye-using	1	1	--
+compassion-perceptive	1	1	--
+compassion-eye-using	1	1	--
 
 Initial scheduling of player-blind: now the flash-grenade-timer of the player is 5.
 
-Testing effects of a perception-testing outcome: if the player is perceptive, rule succeeds.
-Testing effects of a vision-testing outcome: if the player is using eyes, rule succeeds.
+Testing effects of an outcome labeled "perception": if the player is perceptive, rule succeeds.
+Testing effects of an outcome labeled "vision": if the player is using eyes, rule succeeds.
 
 regular scheduling of player-blind-status: try asking status.
 Testing effects of player-blind-status: if we assert result "You are blind", rule succeeds.
@@ -3999,6 +3993,64 @@ Testing effects of compassion-perceptive: if the angel of compassion is percepti
 Testing effects of compassion-eye-using: if the angel of compassion is using eyes, rule succeeds.
 
 [TODO: test for number of perceiving enemies]
+
+Section - Goggle Effects
+
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts	label
+eyeless-x-bgoggles	0	1	"x bgoggles"
+eyeless-wear-bgoggles	1	1	--
+eyeless-x-bgoggles-known	1	1	"x bgoggles"
+eyeless-player-bgoggles-p	1	1	"perception"
+eyeless-player-bgoggles-v	0	1	"vision"
+eyeless-player-bgoggles-b	1	1	"goggle bonus"
+eyes-player-bgoggles-p	0	1	"perception"
+eyes-player-bgoggles-v	0	1	"vision"
+eyes-player-bgoggles-b	1	1	"no goggle bonus"
+eyeless-player-agoggles-p	1	1	"perception"
+eyeless-player-agoggles-v	0	1	"vision"
+eyeless-player-agoggles-b	1	1	"no goggle bonus"
+blind-player-agoggles-b	1	1	"no goggle bonus"
+eyes-player-agoggles-p	1	1	"perception"
+eyes-player-agoggles-v	1	1	"vision"
+eyes-player-agoggles-b	1	1	"goggle bonus"
+
+initial scheduling of eyeless-x-bgoggles:
+	extract the player to Test Arena; [no faculty effects]
+	now eyeless vision is adapted;
+	now the body score of the player is 3;
+	now the mind score of the player is 5;
+	now the spirit score of the player is 7;
+	now the player carries the goggles of blindness;
+	now blindness-goggles-secret-known is false;
+	
+regular scheduling of an outcome labeled "x bgoggles": try examining the goggles of blindness.
+testing effects of an outcome labeled "x bgoggles": if we assert result "they grant a \+1 bonus to body, mind, and spirit if you can still see when you're wearing them", rule succeeds.
+
+regular scheduling of eyeless-wear-bgoggles: try wearing the goggles of blindness.
+testing effects of eyeless-wear-bgoggles: if we assert result "Your eyeless vision combines with the magic of the goggles to give you heightened senses! \(\+1 bonus to body, mind and spirit\.\)", rule succeeds.
+	
+initial scheduling of eyes-player-bgoggles-p: now eyeless vision is not adapted.
+	
+initial scheduling of eyeless-player-agoggles-p:
+	now eyeless vision is adapted;
+	equip the player with the goggles of acuity.
+	
+initial scheduling of blind-player-agoggles-b:
+	now the flash-grenade-timer of the player is 5;
+	now eyeless vision is not adapted.
+	
+initial scheduling of eyes-player-agoggles-p: now the flash-grenade-timer of the player is 0.
+
+testing effects of an outcome labeled "goggle bonus":
+	assert that the final body of the player is 4 with label "final body";
+	assert that the final mind of the player is 6 with label "final mind";
+	if we assert that the final spirit of the player is 8, rule succeeds.
+
+testing effects of an outcome labeled "no goggle bonus":
+	assert that the final body of the player is 3 with label "final body";
+	assert that the final mind of the player is 5 with label "final mind";
+	if we assert that the final spirit of the player is 7, rule succeeds.
 
 Section - Resizing salves
 
