@@ -1744,6 +1744,11 @@ Every turn (this is the recover from flash rule):
 						otherwise:
 							say "[regarding the main actor][Possessive] [bold type]eyes function again[roman type].".
 				
+[TODO: carry out waiting when the flash-grenade-timer of the player is not 0:
+	if there are no timed effects (enemies following, danger countdowns):
+		now the flash-grenade-timer of the player is 0;
+			say "you wait until you can see again";]
+
 A perception rule (this is the blind if flashed rule):
 	if flash-grenade-timer of test subject is greater than 0:
 		rule fails.				
@@ -4286,10 +4291,12 @@ The vial of purification is a minor religious glass thing. Understand "holy" and
 
 Instead of eating vial of purification:
 	try drinking vial of purification.
-	
+
+The purification rules are a rulebook.
+player-purified is a truth state that varies.
+
 Instead of drinking vial of purification:
 	remove noun from play;
-	let n be 0;
 	if the player worships Chton:
 		say "Chton prevents the vial of purification from doing its work; but your attempt at escaping undeath did not amuse him. A wave of extreme cold racks your body, dealing [run paragraph on]";
 		deal 15 points of divine damage;
@@ -4298,21 +4305,46 @@ Instead of drinking vial of purification:
 		if the player is dead:
 			end the story saying "Don't worry; Chton will soon raise you as a mindless zombie.";
 	otherwise:
-		let m be 0;
-		now every undead player form is not form-active;
-		now human-form is form-active;
-		if current form is undead:
-			try changing form to human-form;
-			now m is 1;
-		if m is 1:
-			say "The waters purify you of all undead influences.";
-			now n is 1;
-		if disintegrating flesh is adapted:
-			unmutate disintegrating flesh;
-			now n is 1;
-		if n is 0:
+		now player-purified is false;
+		follow the purification rules;
+		if player-purified is false:
 			say "The holy water turns out to be powerless against your problems.".
+		
+Purification rule (this is the purify undead influences rule):	
+	let m be 0;
+	now every undead player form is not form-active;
+	now human-form is form-active;
+	if current form is undead:
+		try changing form to human-form;
+		now m is 1;
+	if m is 1:
+		say "The waters purify you of all undead influences.";
+		now player-purified is true.
+			
+Purification rule (this is the purify disintegrating flesh rule):
+	if disintegrating flesh is adapted:
+		unmutate disintegrating flesh;
+		now player-purified is true;
 
+Purification rule (this is the purify vision rule):
+	unless the player is perceptive:
+		now the flash-grenade-timer of the player is 0;
+		if the player is perceptive:
+			say "The waters heal your eyes, allowing you to see again.";
+			now player-purified is true;
+
+Purification rule (this is the purify stunning rule):
+	if the player is stunned:
+		now the stun count of the player is 0;
+		now the stun strength of the player is 0;
+		say "The waters clear your mind. You are no longer stunned!";
+		now player-purified is true;
+		
+Purification rule (this is the purify sleepiness rule):
+	if the player is just-woken:
+		now the player is not just-woken;
+		say "The waters stimulate your senses. You are now wide awake.";
+		now player-purified is true;
 
 Section - Rod of the Master Builder (epic)
 

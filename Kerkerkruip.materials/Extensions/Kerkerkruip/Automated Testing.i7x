@@ -1445,12 +1445,14 @@ First regular scheduling of an outcome (this is the return the reusable item rul
 		now the player carries the reusable item;
 
 Regular scheduling of an outcome labeled "try throwing" (this is the try throwing the reusable item rule):
+	now the reusable item is not rusted;
 	try throwing the reusable item.
 	
 Regular scheduling of an outcome labeled "try reading" (this is the try reading the reusable item rule):
 	try reading the reusable item.
 	
 Regular scheduling of an outcome labeled "compel throwing" (this is the compel throwing the reusable item rule):
+	now the reusable item is not rusted;
 	compel the action of throwing the reusable item.
 	
 Regular scheduling of an outcome labeled "compel reading" (this is the compel reading the reusable item rule):

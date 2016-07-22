@@ -2020,10 +2020,6 @@ initial scheduling of weapon aftereffects:
 		now inherent damage modifier of the guy is 10;
 	now every weapon is not cursed.
 
-[Definition: an outcome is rapier-retaining if it is basic-hit-retaining or it is fafhrd-dodge-retaining or it is rapier-recovery or it is dodge-fafhrd-retaining or it is dodge-fafhrd-fail-retaining or it is parry-fafhrd-fail-retaining or it is parry-fafhrd-protected-retaining or it is greasy-retaining or it is greasy-parry-fail-retaining.
-Definition: an outcome is weapon-losing if it is parried-rapier-shatters or it is parry-fafhrd-shatter or it is greasy-undodged-dropped or it is greasy-parry-dropped.
-]
-
 Last testing effects of an outcome labeled "retain rapier":
 	if the number of readied weapons enclosed by the player is greater than 1:
 		now the failure report is "the player has too many readied weapons: [the list of readied weapons enclosed by the player]";
@@ -2289,21 +2285,19 @@ testing effects of thorns-dodge-mouser-fail:
 	if we assert that the health of mouser is 99, rule succeeds.
 
 Table of Outcomes (continued)
-outcome	likelihood	minimum attempts
-israfel-blinds-sighted	1	1
-israfel-blinds-blind	0	1
-israfel-blinds-blind-eyeless	0	1
-israfel-blinds-eyeless-player	0	1
-israfel-blinds-eyeless-monster	1	1
-
-Definition: an outcome is israfel-blinding if it is israfel-blinds-sighted or it is israfel-blinds-blind or it is israfel-blinds-blind-eyeless or it is israfel-blinds-eyeless-player.
+outcome	likelihood	minimum attempts	label
+israfel-blinds-sighted	1	1	"israfel blinds"
+israfel-blinds-blind	0	1	"israfel blinds"
+israfel-blinds-blind-eyeless	0	1	"israfel blinds"
+israfel-blinds-eyeless-player	0	1	"israfel blinds"
+israfel-blinds-eyeless-monster	1	1	--
 
 initial scheduling of israfel-blinds-sighted:
 	prepare a test battle with israfel;
 	extract the jumping bomb to the location;
 	
-Regular scheduling of an israfel-blinding outcome: do the action of waiting for a 100 melee hit by Israfel.
-Testing effects of an israfel-blinding outcome: if we assert result "Israfel's flaming attack blinds you", rule succeeds.
+Regular scheduling of an outcome labeled "israfel blinds": do the action of waiting for a 100 melee hit by Israfel.
+Testing effects of an  outcome labeled "israfel blinds": if we assert result "Israfel's flaming attack blinds you", rule succeeds.
 
 Initial scheduling of israfel-blinds-blind-eyeless:
 	[Israfel's code re-blinds anyone who has a flash grenade timer <= 6 but is not blind... not sure why it's written that way, but the effect is that an eyeless player can be re-blinded when they're already blind. This is currently considered a failure.]
@@ -2321,24 +2315,21 @@ Regular scheduling of israfel-blinds-eyeless-monster: do the action of JB waitin
 Testing effects of israfel-blinds-eyeless-monster: if we assert absence of result "flaming attack blinds", rule succeeds.
 
 Table of Outcomes (continued)
-outcome	likelihood	minimum attempts
-fell-blinds-sighted	1	1
-fell-blinds-blind	0	1
-fell-blinds-blind-eyeless	0	1
-fell-blinds-eyeless-player	0	1
-fell-blinds-eyeless-monster	1	1
-
-Definition: an outcome is fell-blinding if it is fell-blinds-sighted or it is fell-blinds-blind or it is fell-blinds-blind-eyeless or it is fell-blinds-eyeless-player.
+outcome	likelihood	minimum attempts	label
+fell-blinds-sighted	1	1	"fell blinds"
+fell-blinds-blind	0	1	"fell blinds"
+fell-blinds-blind-eyeless	0	1	"fell blinds"
+fell-blinds-eyeless-player	0	1	"fell blinds"
+fell-blinds-eyeless-monster	1	1	--
 
 initial scheduling of fell-blinds-sighted:
 	prepare a test battle with fell;
 	extract the jumping bomb to the location;
 	
-Regular scheduling of an fell-blinding outcome: do the action of waiting for a 100 melee hit by fell.
-Testing effects of an fell-blinding outcome: if we assert result "Fell's nails strike your eyes, blinding you for 3 turns", rule succeeds.
+Regular scheduling of an outcome labeled "fell blinds": do the action of waiting for a 100 melee hit by fell.
+Testing effects of an outcome labeled "fell blinds": if we assert result "Fell's nails strike your eyes, blinding you for 3 turns", rule succeeds.
 
 Initial scheduling of fell-blinds-blind-eyeless:
-	[fell's code re-blinds anyone who has a flash grenade timer <= 6 but is not blind... not sure why it's written that way, but the effect is that an eyeless player can be re-blinded when they're already blind. This is currently considered a failure.]
 	now the flash-grenade-timer of the player is 2;
 	now eyeless vision is adapted.
 
@@ -2594,29 +2585,25 @@ Chapter - Attack Modifiers
 [TODO: make sure attack rolls add up]
 
 Table of Outcomes (continued)
-outcome	likelihood	minimum attempts	antecedent
-attack-modifiers	0	1	restarting for tests
-radiance-defend-sighted	1	1	--
-radiance-attack-sighted	1	1	--
-radiance-defend-blind	0	1	--
-radiance-attack-blind	0	1	--
-radiance-defend-eyeless-player	0	1	--
-radiance-attack-eyeless-player	0	1	--
-radiance-defend-eyeless-monster	1	1	--
-radiance-attack-eyeless-monster	1	1	--
-
-Definition: an outcome is radiance-defending if it is radiance-defend-sighted or it is radiance-defend-blind or it is radiance-defend-eyeless-player.
-
-Definition: an outcome is radiance-attacking if it is radiance-attack-sighted or it is radiance-attack-blind or it is radiance-attack-eyeless-player.
+outcome	likelihood	minimum attempts	label	antecedent
+attack-modifiers	0	1	--	restarting for tests
+radiance-defend-sighted	1	1	"radiant defender"	--
+radiance-attack-sighted	1	1	"radiant attacker"	--
+radiance-defend-blind	0	1	"radiant defender"	--
+radiance-attack-blind	0	1	"radiant attacker"	--
+radiance-defend-eyeless-player	0	1	"radiant defender"	--
+radiance-attack-eyeless-player	0	1	"radiant attacker"	--
+radiance-defend-eyeless-monster	1	1	--	--
+radiance-attack-eyeless-monster	1	1	--	--
 
 Initial scheduling of radiance-defend-sighted:
 	prepare a test battle with the Angel of Compassion;
 
-regular scheduling of a radiance-defending outcome: do the action of the angel of compassion waiting for a 0 melee hit by the player.
-testing effects of a radiance-defending outcome: if we assert result "- 4 \(radiance\)<^\n>* you do not overcome", rule succeeds.
+regular scheduling of an outcome labeled "radiant defender": do the action of the angel of compassion waiting for a 0 melee hit by the player.
+testing effects of an outcome labeled "radiant defender": if we assert result "- 4 \(radiance\)<^\n>* you do not overcome", rule succeeds.
 
-regular scheduling of a radiance-attacking outcome: do the action of waiting for a 0 melee hit by the angel of compassion.
-testing effects of a radiance-attacking outcome: if we assert result "\+ 4 \(radiance\)<^\n>* compassion does not overcome", rule succeeds.
+regular scheduling of an outcome labeled "radiant attacker": do the action of waiting for a 0 melee hit by the angel of compassion.
+testing effects of an outcome labeled "radiant attacker": if we assert result "\+ 4 \(radiance\)<^\n>* compassion does not overcome", rule succeeds.
 
 initial scheduling of radiance-defend-blind: now flash-grenade-timer of the player is 5.
 
@@ -2641,15 +2628,14 @@ regular scheduling of radiance-attack-eyeless-monster:
 
 testing effects of radiance-attack-eyeless-monster: if we assert absence of result "\+ 4 \(radiance\)<^\n>* you do not overcome", rule succeeds.
 
-[No test for "blinded" - it is not implemented.]
-[TODO: Consider removing it... but allow the vial of purification to cure flash grenade blindness? or have another blindness-cured property that overrides the flash grenade?]
+[TODO: Consider removing it... allow the vial of purification to cure flash grenade blindness? or have another blindness-cured property that overrides the flash grenade?]
 
 Table of Outcomes (continued)
-outcome	likelihood	minimum attempts
-sighted-attack-bright	1	1
-blind-attack-bright	0	1
-eyeless-player-attack-bright	0	1
-eyeless-monster-attack-bright	1	1
+outcome	likelihood	minimum attempts	label
+sighted-attack-bright	1	1	"bomb bright defense"
+blind-attack-bright	0	1	"bomb bright defense"
+eyeless-player-attack-bright	0	1	"bomb bright defense"
+eyeless-monster-attack-bright	1	1	--
 
 Definition: an outcome is bomb-bright-defending if it is sighted-attack-bright or it is blind-attack-bright or it is eyeless-player-attack-bright.
 
@@ -2658,10 +2644,10 @@ Initial scheduling of sighted-attack-bright:
 	now the smoke timer of Entrance Hall is 0;
 	extract the jumping bomb to Entrance Hall.
 
-regular scheduling of a bomb-bright-defending outcome:
+regular scheduling of an outcome labeled "bomb bright defense":
 	do the action of JB waiting for a 0 melee hit by the player.
 
-testing effects of a bomb-bright-defending outcome: if we assert result "- 2 \(blinding light\)<^\n>* you do not overcome", rule succeeds.
+testing effects of an outcome labeled "bomb bright defense": if we assert result "- 2 \(blinding light\)<^\n>* you do not overcome", rule succeeds.
 
 initial scheduling of blind-attack-bright: now flash-grenade-timer of the player is 5.
 
@@ -2676,13 +2662,11 @@ regular scheduling of eyeless-monster-attack-bright: do the action of waiting fo
 testing effects of eyeless-monster-attack-bright: if we assert absence of result "- 2 \(blinding light\)<^\n>* jumping bomb does not overcome", rule succeeds.
 
 Table of Outcomes (continued)
-outcome	likelihood	minimum attempts
-sighted-attack-mirrors	5	5
-blind-attack-mirrors	0	5
-eyeless-player-attack-mirrors	0	5
-eyeless-monster-attack-mirrors	5	5
-
-Definition: an outcome is mirror-attacking if it is sighted-attack-mirrors or it is blind-attack-mirrors or it is eyeless-player-attack-mirrors.
+outcome	likelihood	minimum attempts	label
+sighted-attack-mirrors	5	5	"mirrors attack"
+blind-attack-mirrors	0	5	"mirrors attack"
+eyeless-player-attack-mirrors	0	5	"mirrors attack"
+eyeless-monster-attack-mirrors	5	5	--
 
 Initial scheduling of sighted-attack-mirrors:
 	Extract the player to Hall of Mirrors, making sure it is unoccupied;
@@ -2695,11 +2679,11 @@ Initial scheduling of sighted-attack-mirrors:
 	Repeat with item running through extra things in Hall of Mirrors:
 		remove item from play. [remove Focal Totem, etc]
 		
-Regular scheduling of a mirror-attacking test step:
+Regular scheduling of an outcome labeled "mirrors attack":
 	Now the tension is 0;
 	do the action of JB waiting for a 100 melee hit by the player.
 	
-Testing effects of a mirror-attacking test step:
+Testing effects of an outcome labeled "mirrors attack":
 	if we assert result "Confused by the mirrors, you start attacking a reflection", rule succeeds.
 
 Initial scheduling of blind-attack-mirrors: equip the player with the blindfold.
@@ -2719,27 +2703,23 @@ Testing effects of eyeless-monster-attack-mirrors:
 	if we assert absence of result "Confused by the mirrors", rule succeeds.
 
 Table of Outcomes (continued)
-outcome	likelihood	minimum attempts
-blind-attack	1	1
-blind-defend	1	1
-blind-eyeless-player-attack	0	1
-blind-eyeless-player-defend	0	1
-eyeless-player-attack	0	1
-eyeless-player-defend	0	1
-sighted-attack	0	1
-sighted-defend	0	1
-eyeless-monster-attack	1	1
-eyeless-monster-defend	1	1
+outcome	likelihood	minimum attempts	label
+blind-attack	1	1	"blind attacker"
+blind-defend	1	1	"blind defender"
+blind-eyeless-player-attack	0	1	"blind attacker"
+blind-eyeless-player-defend	0	1	"blind defender"
+eyeless-player-attack	0	1	"blind attacker"
+eyeless-player-defend	0	1	"blind defender"
+sighted-attack	0	1	"blind attacker"
+sighted-defend	0	1	"blind defender"
+eyeless-monster-attack	1	1	--
+eyeless-monster-defend	1	1	--
 
-Definition: an outcome is blindness-attack-checking if it is blind-attack or it is blind-eyeless-player-attack or it is eyeless-player-attack or it is sighted-attack.
+Regular scheduling of an outcome labeled "blind attacker": Do the action of the JB waiting for a 0 melee hit by the player.
+Testing effects of an outcome labeled "blind attacker": If we assert result "- 3 \(blindness\)", rule succeeds.
 
-Regular scheduling of a blindness-attack-checking outcome: Do the action of the JB waiting for a 0 melee hit by the player.
-Testing effects of blindness-attack-checking outcome: If we assert result "- 3 \(blindness\)", rule succeeds.
-
-Definition: an outcome is blindness-defend-checking if it is blind-defend or it is blind-eyeless-player-defend or it is eyeless-player-defend or it is sighted-defend.
-
-Regular scheduling of a blindness-defend-checking outcome: Do the action of the player waiting for a 0 melee hit by the jumping bomb.
-Testing effects of blindness-defend-checking outcome: If we assert result "\+ 2 \(defender blind\)", rule succeeds.
+Regular scheduling of an outcome labeled "blind defender": Do the action of the player waiting for a 0 melee hit by the jumping bomb.
+Testing effects of an outcome labeled "blind defender": If we assert result "\+ 2 \(defender blind\)", rule succeeds.
 
 Initial scheduling of blind-attack: equip the player with the blindfold.
 
@@ -2760,17 +2740,15 @@ Testing effects of eyeless-monster-defend: if we assert absence of result "\(def
 [skipping test for AI concentrating in Phantasmagoria - how would we test that anyway?]
 
 Table of Outcomes (continued)
-outcome	likelihood	minimum attempts
-blind-smoke-attack	0	1
-blind-eyeless-player-smoke-attack	0	1
-eyeless-player-smoke-attack	0	1
-sighted-smoke-attack	1	1
-eyeless-monster-smoke-attack	1	1
+outcome	likelihood	minimum attempts	label
+blind-smoke-attack	0	1	"blind smoke attacker"
+blind-eyeless-player-smoke-attack	0	1	"blind smoke attacker"
+eyeless-player-smoke-attack	0	1	"blind smoke attacker"
+sighted-smoke-attack	1	1	"blind smoke attacker"
+eyeless-monster-smoke-attack	1	1	--
 
-Definition: an outcome is blindness-smoke-attack-checking if it is blind-smoke-attack or it is blind-eyeless-player-smoke-attack or it is eyeless-player-smoke-attack or it is sighted-smoke-attack.
-
-Regular scheduling of a blindness-smoke-attack-checking outcome: Do the action of the JB waiting for a 0 melee hit by the player.
-Testing effects of blindness-smoke-attack-checking outcome: If we assert result "- 2 \(smoke\)", rule succeeds.
+Regular scheduling of an outcome labeled "blind smoke attacker": Do the action of the JB waiting for a 0 melee hit by the player.
+Testing effects of an outcome labeled "blind smoke attacker": If we assert result "- 2 \(smoke\)", rule succeeds.
 
 Initial scheduling of blind-smoke-attack:
 	prepare a test battle with the jumping bomb;
@@ -2786,10 +2764,6 @@ Initial scheduling of sighted-smoke-attack: now eyeless vision is not adapted.
 Regular scheduling of eyeless-monster-smoke-attack: do the action of waiting for a 0 melee hit by JB.
 
 Testing effects of eyeless-monster-smoke-attack: if we assert absence of result "\(smoke\)", rule succeeds.
-
-[blindness:
-TODO: increase hiding roll if all enemies blind?
-]
 
 Chapter - Damage Modifiers
 
@@ -3713,12 +3687,10 @@ testing effects of exploding-awake: if the swarm of daggers is not asleep, rule 
 Section - Specific Monster Sleep Effects
 
 Table of Outcomes (continued)
-Outcome	likelihood	minimum attempts	antecedent
-sleeping-hound-unprepared	0	1	--
-awake-hound-unprepared-for-hidden	0	1	--
-awake-hound-prepared	1	1	--
-
-Definition: an outcome is hound-provoking if it is sleeping-hound-unprepared or it is awake-hound-unprepared-for-hidden or it is awake-hound-prepared.
+Outcome	likelihood	minimum attempts	label
+sleeping-hound-unprepared	0	1	"provoke hound"
+awake-hound-unprepared-for-hidden	0	1	"provoke hound"
+awake-hound-prepared	1	1	"provoke hound"
 
 initial scheduling of sleeping-hound-unprepared:
 	prepare a test battle with the hound;
@@ -3732,11 +3704,11 @@ initial scheduling of awake-hound-unprepared-for-hidden: try sneaking.
 
 initial scheduling of awake-hound-prepared: try taking off the fuligin cloak.
 
-regular scheduling of a hound-provoking outcome:
+regular scheduling of an outcome labeled "provoke hound":
 	compel the action of attacking the hound;
 	now suppress npc action is false.
 
-testing effects of a hound-provoking outcome: if we assert result "you do not overcome the hound's defence rating of 50\.\n\n<^\n>+ your attack, the hound jumps at you", rule succeeds.
+testing effects of an outcome labeled "provoke hound": if we assert result "you do not overcome the hound's defence rating of 50\.\n\n<^\n>+ your attack, the hound jumps at you", rule succeeds.
 
 Section - Nomos interventions and dreams
 
@@ -3902,19 +3874,15 @@ regular scheduling of you-can-also-see: try looking.
 testing effects of you-can-also-see: if we assert result "You can also see a magical spade here", rule succeeds.
 
 Table of Outcomes (continued)
-outcome	likelihood	minimum attempts
-flash-blindfolded	0	1
-flash-sighted-monster	1	1
-flash-eyeless-monster	1	1
-flash-eyeless-player	0	1
-flash-sighted-player	1	1
-blind-when-flashed	1	1
+outcome	likelihood	minimum attempts	label
+flash-blindfolded	0	1	"flash blinding"
+flash-sighted-monster	1	1	--
+flash-eyeless-monster	1	1	--
+flash-eyeless-player	0	1	"flash blinding"
+flash-sighted-player	1	1	"flash blinding"
+blind-when-flashed	1	1	--
 
-[A note on flash-eyeless-player: the grenade does blind the player, but having eyeless vision should make that irrelevant. That should be tested elsewhere. It would not be bad if this changed, though.]
-
-Definition: an outcome is flash-blinding if it is flash-blindfolded or it is flash-eyeless-player or it is flash-sighted-player.
-
-Definition: an outcome is flash-resetting if it is flash-blinding or it is the outcome after blind-when-flashed.
+Definition: an outcome is flash-resetting if it is labeled "flash blinding" or it is the outcome after blind-when-flashed.
 
 Initial scheduling of flash-blindfolded:
 	now the reusable item is a random flash grenade;
@@ -3926,11 +3894,11 @@ Initial scheduling of a flash-resetting outcome:
 	Repeat with guy running through people:
 		now the flash-grenade-timer of guy is 0;
 	
-Regular scheduling of a flash-blinding outcome:
+Regular scheduling of an outcome labeled "flash blinding":
 	Now the reusable item is not rusted;
 	try throwing the reusable item.
 	
-testing effects of a flash-blinding outcome: if the flash-grenade-timer of the player > 0, rule succeeds.
+testing effects of an outcome labeled "flash blinding": if the flash-grenade-timer of the player > 0, rule succeeds.
 
 testing effects of flash-sighted-monster: if the flash-grenade-timer of Miranda > 0, rule succeeds.
 
