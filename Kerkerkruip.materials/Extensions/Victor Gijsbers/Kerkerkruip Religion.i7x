@@ -509,6 +509,10 @@ Every turn (this is the decrease the Nomos counter rule):
 			if Nomos counter is 0:
 				activate Nomos bonus;
 
+The decrease the Nomos counter rule is listed before the spontaneous combat intervention rule in the every turn rules.
+
+[Nomos can intervene during anyone's turn, but if Nomos intervenes during your turn, the counter should not count down before you have a chance to act]
+
 To follow is a verb. To prepare is a verb.
 
 To activate Nomos bonus:
@@ -537,10 +541,13 @@ To have (benefactor - Nomos) intervene on behalf of (supplicant - a person):
 	if Nomos counter is 1 or Nomos counter is 2:
 		if a random chance of 1 in 2 succeeds:
 			increase Nomos counter by 1;
+	if the supplicant is the main actor and the Nomos counter > 1:
+		[likely to have a longer wait until next turn - this actually preserves older behavior]
+		decrease the Nomos counter by 1;
 	if the Nomos attacker is the player:
-		say "A deep voice inside your head speaks: 'You will attack [bold type][Nomos counter] turns[roman type] from now. The law will be with you.'";
+		say "A deep voice inside your head speaks: 'You will attack [bold type][Nomos counter] turn[s][roman type] from now. The law will be with you.'";
 	otherwise:
-		say "The god of Law speaks out loud: '[bold type][Nomos attacker][roman type], attack in [bold type][Nomos counter] turns[roman type] and my strength will guide you!'";
+		say "The god of Law speaks out loud: '[bold type][Nomos attacker][roman type], attack in [bold type][Nomos counter] turn[s][roman type] and my strength will guide you!'";
 
 Before reading a command (this is the planning notification rule):
 	if the main actor is the player and the Nomos attacker is the player:
@@ -638,7 +645,21 @@ To decide which number is Nomos piety of (guy - a person):
 	if f > 0:
 		decide on 2;
 	decide on 0.
-	
+
+Status combat stats rule (this is the nomos counter status rule):
+	if the nomos attacker is the player and the nomos counter > 0:
+		if long status is true:
+			say "Nomos has ordered you to attack [if the player is at-react]after[otherwise]in[end if] [bold type][nomos counter] turn[s][roman type].[line break][run paragraph on]";
+		otherwise:
+			say "Must attack [if the player is at-react]after[otherwise]in[end if] [bold type][nomos counter] turn[s][roman type].";
+
+Status combat stats rule (this is the nomos bonus status rule):
+	if the nomos attacker is the player and the nomos bonus is true:
+		if long status is true:
+			say "Nomos has ordered you to attack [bold type][if the player is at-react]next[otherwise]this[end if] turn[roman type].[line break][run paragraph on]";
+		otherwise:
+			say "Must attack [bold type][if the player is at-react]next[otherwise]this[end if] turn[roman type].";
+
 Chapter - Sul
 
 Check sacrificing (this is the cannot sacrifice to Sul when undead rule):

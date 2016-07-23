@@ -3495,7 +3495,7 @@ This is the special dagger of double strike rule:
 					try the player hitting the noun;
 					now making-double-strike is false.
 
-Every turn:
+Every turn (this is the reset double strike rule):
 	now making-double-strike is false.
 
 
@@ -4453,7 +4453,7 @@ Last every turn when the hand of glory is lit (this is the no tension with hand 
 To do the hand of glory removal:			
 	now hand of glory is not lit;
 	if the location of the player is the location of the hand of glory:
-		say "The hand of glory [bold type]suddeny melts away[roman type]!";
+		say "The hand of glory [bold type]suddenly melts away[roman type]!";
 	remove hand of glory from play.
 				
 Last initiative update rule (this is the hand of glory rule):

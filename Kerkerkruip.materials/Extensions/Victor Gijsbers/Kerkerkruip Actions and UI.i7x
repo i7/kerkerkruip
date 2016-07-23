@@ -368,6 +368,15 @@ After extended waiting (this is the wait until you can see rule):
 	If vision-before-waiting is false and the player is perceptive:
 		now intended wait-time is 0.
 		
+hand-was-lit is a truth state that varies.
+
+Before extended waiting (this is the check hand of glory before waiting rule):
+	Now hand-was-lit is whether or not the hand of glory is lit.
+	
+After extended waiting (this is the check hand of glory after waiting rule):
+	If hand-was-lit is true and the hand of glory is off-stage:
+		now intended wait-time is 0.
+
 After extended waiting (this is the mark extended time rule):
 	increment actual wait-time;
 
@@ -377,15 +386,21 @@ After extended waiting (this is the stop waiting in combat rule):
 		now intended wait-time is 0.
 		
 After extended waiting (this is the stop waiting for nomos bonus rule):
-	if the nomos counter is 1 and the nomos attacker is conscious in this world:
+	if the nomos bonus is true and the nomos attacker is conscious in this world:
 		now intended wait-time is 0.
 
 After extended waiting (this is the stop waiting when dead rule):
 	if the player is dead:
 		now intended wait-time is 0.
 
+After extended waiting (this is the no waiting after vecna betrays rule):
+	if vecna-betraying is true:
+		now intended wait-time is 0.
+
 An after damage rule (this is the any damage stops waiting rule):
 	now intended wait-time is 0.
+		
+[TODO: stop when the armadillo eats?]
 
 Chapter - Status
 

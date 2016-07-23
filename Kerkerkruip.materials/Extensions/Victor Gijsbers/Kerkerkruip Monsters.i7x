@@ -3372,7 +3372,7 @@ Chapter - Level 3 - Angel of Mercy
 
 The angel of mercy is a neuter monster. "A [if angel of mercy is gargantuan]vast, [otherwise if angel of mercy is huge]great, [otherwise if angel of mercy is large]big, [otherwise if angel of mercy is small]diminuitive, [otherwise if angel of mercy is tiny]miniscule, [end if][if  radiation of Angel of Mercy is 0]diffuse[otherwise if radiation of Angel of Mercy is 1]glowing[otherwise if radiation of Angel of Mercy is 2]luminous[otherwise if radiation of Angel of Mercy is 3]brilliant[otherwise if radiation of Angel of Mercy is 4]blinding[otherwise]impossibly bright[end if] presence hovers before you, swirling like mist from one form to another."
 
-The description of the Angel of Mercy is "At the moment its form resembles [one of]a graceful young man holding a white rose[or]a grandmotherly woman wrapped in white linen[or]a sprightly doe[or]nothing but a cloud[or]an undulating white dragon[or]a cup spilling over with sparkling liquid[at random]. Looking upon it fills your heart with warmth and drives thoughts of battle from your mind. Every blow the angel receives makes it smaller, but increases its radiance. It is currently [size of Angel of Mercy] and it has [radiation of Angel of Mercy] level[if radiation of angel of mercy is not 1][s][end if] of radiation."
+The description of the Angel of Mercy is "At the moment its form resembles [one of]a graceful young man holding a white rose[or]a grandmotherly woman wrapped in white linen[or]a sprightly doe[or]nothing but a cloud[or]an undulating white dragon[or]a cup spilling over with sparkling liquid[at random]. Looking upon it fills your heart with warmth and drives thoughts of battle from your mind.[paragraph break]Every blow the angel receives makes it smaller, but increases its radiance. It is currently [size of Angel of Mercy] and it has [radiation of Angel of Mercy] level[if radiation of angel of mercy is not 1][s][end if] of radiance."
 
 [TODO: change description with concentration?]
 
@@ -3401,7 +3401,8 @@ The spirit score of the angel of mercy is 12.
 
 For natural weapon setup of the angel of mercy (this is the angel of mercy's nails rule):
 	let X be the natural weapon described;
-	now damage die of X is 5;
+	now damage die of X is 4;
+	now the weapon damage bonus of X is -1;
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is -1;
 	now parry-with bonus of X is 0;  [high for a natural weapon. Give the angel some equipment?]
@@ -3421,14 +3422,14 @@ Section - Getting smaller
 [The angel of mercy gets smaller and more radiant when damaged.]
 
 Aftereffects rule (this is the angel of mercy shrinks when hit rule):
-	if the global defender is the angel of mercy and the total damage is greater than 0:
+	if the global defender is the angel of mercy and the total damage is greater than 0 and the angel of mercy is not dead:
 		let previous-size be the size of the angel of mercy;
 		if previous-size is not tiny:
 			now the angel of mercy is the size before previous-size;
 		increase the radiation of angel of mercy by 1;
 		if the angel of mercy is within the location:
 			if previous-size is not tiny:
-				say "The angel of mercy smiles at [the global attacker] and seems to shiver with cold. With a sigh, her form collapses in on itself until she is [size of angel of mercy] - but [if radiation of angel of mercy is 1]starts to shine with radiance[otherwise]even more radiant[end if]!";
+				say "The angel of mercy smiles at [the global attacker] and seems to shiver with cold. With a sigh, its form collapses in on itself until it is noticeably smaller - but [if radiation of angel of mercy is 1]the angel starts to shine with radiance[otherwise]even more radiant[end if]!";
 			otherwise:
 				say "Now no more than a darting point of light, the angel flickers and grows even brighter!";
 		otherwise:
@@ -3477,7 +3478,7 @@ Report the angel of mercy concentrating:
 
 Report the angel of mercy attacking:
 	unless the actor is the noun:
-		say "'[if the health of the noun is less than 10]Your death will be quick and painless[otherwise]I bear you no ill will, but I shall defend my allies[end if],' the angel of mercy declares as it strikes out at [the noun].";
+		say "'[if the health of the noun is less than 8]Your death will be quick and painless[otherwise]I bear you no ill will, but I shall defend my allies[end if],' the angel of mercy declares as it strikes out at [the noun].";
 	otherwise:
 		say "'The most difficult to forgive is always oneself!' the angel of mercy screams as it claws at its own face.";
 	rule succeeds.
