@@ -1363,6 +1363,24 @@ To extract (guy - a person) to (place - a room), making sure it is unoccupied:
 
 Section - Religion
 
+To have (guy - a person) worship (deity - a god) with (N - a number) favour:
+	transcribe "having [if guy is the player]the player[otherwise][the guy][end if] worship [deity] with [N] favour";
+	now guy worships deity;
+	now the favour of guy is 0;
+	raise favour of guy to N;
+	
+To set the Nomos counter to (N - a number):
+	Let guy be the player;
+	unless the player worships Nomos:
+		now guy is a random person who worships Nomos;
+	if guy is nothing:
+		transcribe "failed to set Nomos counter - no Nomos worshippers";
+		stop;
+	transcribe "setting Nomos counter for [guy] to [N] (main actor is [main actor], who is [combat state of main actor])";
+	now the Nomos attacker is guy;
+	now the Nomos bonus is false;
+	now the Nomos counter is N.
+
 To have the player sacrifice (stuff - a power):
 	Let the power-level be the power level of stuff;
 	assert "power level of sacrificed ability should be positive" based on whether or not power-level > 0;
