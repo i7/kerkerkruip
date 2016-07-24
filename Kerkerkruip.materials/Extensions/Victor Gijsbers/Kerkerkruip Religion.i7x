@@ -417,13 +417,15 @@ Section - Favour rules
 
 [Nomos boons... protection, skill? enchantment? weapon matching?]
 
+The nomos-shield is an object that varies.
+
 To say Nomos reads a scroll and also:
 	Let item be the current weapon of the player;
-	if item is not a natural weapon and a random chance of (divine favour * divine favour) in 100 succeeds:
+	Let current shield be a random shield worn by the player;
+	if current shield is a shield and current shield is not the nomos-shield and a random chance of (divine favour * divine favour) in 81 succeeds:
 		[TODO: increase shield block bonus; problematic because some shields get recalculated]	
-		say "Nomos enchants [the item] for you, and also";
-		increase weapon attack bonus of item by 1;
-		increase weapon damage bonus of item by 1;
+		say "Nomos blesses [the current shield] with an additional +2 block bonus, and also";
+		now nomos-shield is current shield;
 	otherwise if the player skill bonus timer is 0 and a random chance of (divine favour) in 7 succeeds:
 		say "Nomos gives you a temporary bonus to body, mind and spirit, making you feel very skilled, and also";
 		increase the player skill bonus timer by a random number between 15 and 20;
@@ -457,6 +459,15 @@ Favour rule for Nomos (this is the Nomos favour 9 rule):
 		say "[Nomos reads a scroll and also] grants you a total of four physical damage reduction, and the Tome of Law!";
 		move Tome of Law to the player.
 
+Section - Nomos-blessed shield
+
+An attack modifier rule (this is the Nomos blessed block defence bonus rule):
+	if the global defender is at-block and the global defender worships Nomos:
+		if the nomos-shield is a shield worn by the global defender:
+			decrease the attack strength by 2;
+			if the numbers boolean is true:
+				say " - 2 ([the nomos-shield] [are] blessed by Nomos)[run paragraph on]";
+			
 Section - Damage reduction
 
 A remove specific damage rule (this is the worshipping Nomos damage reduction rule):

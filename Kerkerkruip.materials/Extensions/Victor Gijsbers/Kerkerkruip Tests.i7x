@@ -528,6 +528,9 @@ Section - Test Battles
 
 battling is an action applying to one visible thing. Understand "battle [any person]" as battling.
 
+battling is bypassing-scope. [to make it possible in the Drawing Room]
+
+
 Carry out battling:
 	revive the noun fighting for arena-faction, with group;
 	try challenging the noun in Test Arena.
@@ -538,6 +541,8 @@ After arena arrival of Test Arena:
 		say "[The guy] appears, ready to fight for [faction of the guy]."
 		
 recruiting is an action applying to one visible thing. Understand "recruit [any person]" as recruiting.
+
+recruiting is bypassing-scope.
 
 Carry out recruiting:
 	revive the noun fighting for friendly, with group;
@@ -550,6 +555,8 @@ Report recruiting:
 	say "[The list of friendly npc people in the location] [appear], and [join] the friendly faction.";
 	
 fight-testing is an action applying to two visible things. Understand "fighttest [any person] vs [any person]" as fight-testing.
+
+fight-testing is bypassing-scope.
 
 The test-champion is a person variable.
 The test-challenger is a person variable.

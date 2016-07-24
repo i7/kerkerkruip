@@ -332,6 +332,9 @@ Actual wait-time is a number that varies.
 Before doing anything other than waiting:
 	now intended wait-time is 0.
 	
+Before printing a parser error:
+	now intended wait-time is 0.
+
 Last check waiting (this is the check for extended wait rule):
 	unless the combat status is peace:
 		now intended wait-time is 0;

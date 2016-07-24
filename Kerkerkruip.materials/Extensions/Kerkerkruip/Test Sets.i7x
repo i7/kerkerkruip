@@ -939,6 +939,9 @@ Scenario for banshees gone wild:
 	now the reusable item is a random scroll of death;
 	now the statue of shards is bannedobject;
 
+first independent action when testing banshees gone wild (this is the no wandering monsters when testing banshees rule):
+	rule fails.
+
 Initial scheduling of banshees gone wild:
 	swap the occupants of the location of the blood ape and the Hall of Raging Banshees;
 	travel sneakily to Hall of Raging Banshees;
@@ -2350,6 +2353,7 @@ fragmentation damage text	1	1	--
 
 Scenario for damage-text:
 	now generation info is true;
+	now Drawing Room is bannedobject;
 	now Vast Staircase is testobject;
 	now slaying-kit is testobject;
 	now addict-kit is bannedobject;
