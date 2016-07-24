@@ -319,21 +319,20 @@ Last report going (this is the check whether destination reached rule):
 
 Chapter - Extended Waiting
 
-[This is an anti-grinding convenience, mainly so the player doesn't have to type "z" 15 times when they get a flash grenade thrown back at them]
-
-[TODO: carry out waiting when the flash-grenade-timer of the player is not 0:
-	if there are no timed effects (enemies following, danger countdowns):
-		now the flash-grenade-timer of the player is 0;
-			say "you wait until you can see again";]
+[This is an anti-grinding convenience, mainly so the player doesn't have to type "z" 15 times when they get a flash grenade thrown back at them or get stunned]
 
 Intended wait-time is a number that varies.
 Actual wait-time is a number that varies.
 
-Before doing anything other than waiting:
+Before doing anything other than waiting (this is the normal actions interrupt waiting rule):
 	now intended wait-time is 0.
 	
-Before printing a parser error:
+Before printing a parser error (this is the typos interrupt waiting rule):
 	now intended wait-time is 0.
+
+After taking a player action (this is the all out of world actions interrupt waiting rule):
+	if the meta flag is true:
+		now intended wait-time is 0.
 
 Last check waiting (this is the check for extended wait rule):
 	unless the combat status is peace:
@@ -398,11 +397,12 @@ After extended waiting (this is the stop waiting when dead rule):
 
 After extended waiting (this is the no waiting after vecna betrays rule):
 	if vecna-betraying is true:
+		say "The hand of Vecna is too terrifying to allow you to keep waiting!";
 		now intended wait-time is 0.
 		
 was-rust-spored is a truth state that varies.
 
-Before extended waiting:
+Before extended waiting (this is the check for rust before waiting rule):
 	now was-rust-spored is whether or not the location is rust-spored.
 	
 After extended waiting (this is the don't wait for stuff to rust rule):
@@ -412,11 +412,20 @@ After extended waiting (this is the don't wait for stuff to rust rule):
 
 was-stunned is a truth state that varies.
 
-Before extended waiting:
+Before extended waiting (this is the check whether stunned before waiting rule):
 	now was-stunned is whether or not the player is stunned.
 	
-After extended waiting:
+After extended waiting (this is the stop waiting when no longer stunned rule):
 	if was-stunned is true and the player is not stunned:
+		now intended wait-time is 0.
+
+previous-head-count is a number that varies.
+
+Before extended waiting (this is the take attendance before waiting rule):
+	now previous-head-count is the number of people in the location.
+	
+After extended waiting (this is the stop waiting when friends arrive rule):
+	if the number of people in the location > previous-head-count:
 		now intended wait-time is 0.
 
 An after damage rule (this is the any damage stops waiting rule):

@@ -4481,6 +4481,9 @@ Section - Hand of Vecna
 
 The hand of Vecna is a thing. The material of the hand of Vecna is flesh. The description of the hand of Vecna is "Ages ago this mummified hand belonged to Vecna, the greatest undead sorceror the world has ever known... and also the most evil[if hand of Vecna is not part of the player]. Rumour has it that if you cut off your own hand and apply Vecna's to the stump, this mummified thing will become one with your body and grant you incredible powers. But it is also whispered that the hand always betrays its owner sooner rather than later. If you are brave and foolish enough to use the hand, simply type [italic type]wield hand[roman type]. You will permanently lose 10 health in the process[otherwise]. Now that the hand is part of your body, your natural attack consists of a very accurate and highly damaging lightning bolt. In addition, by typing 'gesture', you can stun everyone in the room and make them lose concentration, and by typing 'point at [italic type]someone[roman type]', you can fill them with so much agony that they lose two turns[end if]."
 
+Instead of wearing the hand of Vecna:
+	say "The hand of Vecna is not simply worn! If you wish it to be yours, you must cut off your own hand and put the hand of Vecna in its place. If you are sure you desire this, type [italic type]wield hand[roman type]. This action will permanently cost you 10 health.".
+
 Before readying the hand of Vecna:
 	if the hand of Vecna is not part of the player:
 		say "This is not going to be easy. All your instincts rebel against the very thought of cutting off your own hand ... but the lure of power cannot be resisted. At last you steel yourself, and with one fell swoop you sever your hand from your arm. The pain is incredible, and blood sprays everywhere. You push the hand of Vecna against the bleeding stump, and it immediately grafts itself onto your arm. The bleeding stops, thankfully, but it seems that the pain only grows worse.";
@@ -4516,6 +4519,15 @@ Before unreadying the hand of Vecna:
 		say "It's not part of you right now.";
 		rule succeeds.
 
+Status attribute rule (this is the hand of Vecna status rule):
+	if the hand of Vecna is part of the player:
+		if long status is true:
+			say "Your have replaced your own hand with the [bold type]Hand of Vecna[roman type] (lightning attack, you can [bold type]point[roman type] at someone to cause pain, and [bold type]gesture[roman type] to stun everyone.)[line break][run paragraph on]";
+			if vecna-betraying is true:
+				say "The hand of Vecna has [bold type]betrayed you[roman type] and now acts unpredictably.[line break][run paragraph on]";
+		otherwise:
+			say "[@ check initial position of attribute][if vecna-betraying is true]betrayed by[otherwise]one with[end if] the hand of Vecna[run paragraph on]";
+		
 Vecna-betraying is a truth state that varies. Vecna-betraying is false.
 Vecna-timer is a number that varies. Vecna-timer is 0.
 
