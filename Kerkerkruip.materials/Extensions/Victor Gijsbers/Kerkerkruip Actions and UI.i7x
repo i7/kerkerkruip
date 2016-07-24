@@ -352,7 +352,7 @@ Last check waiting (this is the check for extended wait rule):
 	otherwise:
 		say "[actual wait-time] turns pass uneventfully.";
 	Now actual wait-time is 0;
-	take no time; [oh, the irony!]
+	take no [more] time;
 	stop the action.
 	
 Extended waiting is an activity.
@@ -361,29 +361,11 @@ For extended waiting (this is the time passes silently during extended waiting r
 	follow the every turn rules;
 	follow the advance time rule.
 
-Vision-before-waiting is a truth state that varies.
-
-Before extended waiting (this is the check for blindness before waiting rule):
-	Now vision-before-waiting is (whether or not the player is perceptive).
-
-After extended waiting (this is the wait until you can see rule):
-	If vision-before-waiting is false and the player is perceptive:
-		now intended wait-time is 0.
-		
-hand-was-lit is a truth state that varies.
-
-Before extended waiting (this is the check hand of glory before waiting rule):
-	Now hand-was-lit is whether or not the hand of glory is lit.
-	
-After extended waiting (this is the check hand of glory after waiting rule):
-	If hand-was-lit is true and the hand of glory is off-stage:
-		now intended wait-time is 0.
-
 After extended waiting (this is the mark extended time rule):
 	increment actual wait-time;
 
 After extended waiting (this is the stop waiting in combat rule):
-	update the combat status;
+	update the combat status; [should be safe if we started off at peace]
 	if the combat status is combat:
 		now intended wait-time is 0.
 		
@@ -395,43 +377,51 @@ After extended waiting (this is the stop waiting when dead rule):
 	if the player is dead:
 		now intended wait-time is 0.
 
-After extended waiting (this is the no waiting after vecna betrays rule):
-	if vecna-betraying is true:
-		say "The hand of Vecna is too terrifying to allow you to keep waiting!";
-		now intended wait-time is 0.
-		
-was-rust-spored is a truth state that varies.
-
-Before extended waiting (this is the check for rust before waiting rule):
-	now was-rust-spored is whether or not the location is rust-spored.
-	
-After extended waiting (this is the don't wait for stuff to rust rule):
-	if was-rust-spored is false and the location is rust-spored:
-		if the location encloses a not rusted iron thing:
-			now intended wait-time is 0.
-
-was-stunned is a truth state that varies.
-
-Before extended waiting (this is the check whether stunned before waiting rule):
-	now was-stunned is whether or not the player is stunned.
-	
-After extended waiting (this is the stop waiting when no longer stunned rule):
-	if was-stunned is true and the player is not stunned:
-		now intended wait-time is 0.
-
-previous-head-count is a number that varies.
-
-Before extended waiting (this is the take attendance before waiting rule):
-	now previous-head-count is the number of people in the location.
-	
-After extended waiting (this is the stop waiting when friends arrive rule):
-	if the number of people in the location > previous-head-count:
-		now intended wait-time is 0.
-
 An after damage rule (this is the any damage stops waiting rule):
 	now intended wait-time is 0.
 		
 [TODO: stop when the armadillo eats?]
+
+Actionable development is a kind of value. Some actionable developments are vision development, stun development, rust development, smoke development, health development, betrayal development, possessions development, occupancy development.
+
+An actionable development has a number called the previous state.
+To decide what number is the current state of (event - an actionable development): decide on 0.
+
+To decide what number is the current state of (event - vision development):
+	if the player is perceptive, decide on 1. [default 0]
+	
+To decide what number is the current state of (event - stun development):
+	if the player is stunned, decide on 1.
+
+To decide what number is the current state of (event - rust development):
+	if the location is rust-spored, decide on 1 + the number of rusted things enclosed by the location.
+	
+To decide what number is the current state of (event - smoke development):
+	decide on the smoke penalty of the location.
+
+To decide what number is the current state of (event - health development):
+	decide on the health of the player + (the permanent health of the player * 100);
+
+To decide what number is the current state of (event - betrayal development):
+	if vecna-betraying is true, decide on 1.
+
+To decide what number is the current state of (event - possessions development):
+	[catches things that were dropped from the player to the location]
+	decide on the number of things enclosed by the player.
+
+To decide what number is the current state of (event - occupancy development):
+	decide on the number of things enclosed by the location.
+	
+Before extended waiting (this is the check initial state of actionable developments rule):
+	Repeat with event running through actionable developments:
+		now the previous state of event is the current state of event.
+		
+Last after extended waiting (this is the stop waiting if any actionable development takes effect rule):
+	if the intended wait-time is not 0:
+		Repeat with event running through actionable developments:
+			if the previous state of event is not the current state of event:
+				now intended wait-time is 0;
+				make no decision.
 
 Chapter - Status
 
