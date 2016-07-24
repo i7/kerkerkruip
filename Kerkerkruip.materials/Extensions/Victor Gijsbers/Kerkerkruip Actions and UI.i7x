@@ -399,6 +399,25 @@ After extended waiting (this is the stop waiting when dead rule):
 After extended waiting (this is the no waiting after vecna betrays rule):
 	if vecna-betraying is true:
 		now intended wait-time is 0.
+		
+was-rust-spored is a truth state that varies.
+
+Before extended waiting:
+	now was-rust-spored is whether or not the location is rust-spored.
+	
+After extended waiting (this is the don't wait for stuff to rust rule):
+	if was-rust-spored is false and the location is rust-spored:
+		if the location encloses a not rusted iron thing:
+			now intended wait-time is 0.
+
+was-stunned is a truth state that varies.
+
+Before extended waiting:
+	now was-stunned is whether or not the player is stunned.
+	
+After extended waiting:
+	if was-stunned is true and the player is not stunned:
+		now intended wait-time is 0.
 
 An after damage rule (this is the any damage stops waiting rule):
 	now intended wait-time is 0.

@@ -552,13 +552,23 @@ To have (benefactor - Nomos) intervene on behalf of (supplicant - a person):
 	if Nomos counter is 1 or Nomos counter is 2:
 		if a random chance of 1 in 2 succeeds:
 			increase Nomos counter by 1;
-	if the supplicant is the main actor and the Nomos counter > 1:
-		[likely to have a longer wait until next turn - this actually preserves older behavior]
+	if the supplicant is the main actor:
+		[likely to have a longer wait until next turn - this actually preserves older behavior, but explains it more clearly]
 		decrease the Nomos counter by 1;
 	if the Nomos attacker is the player:
-		say "A deep voice inside your head speaks: 'You will attack [bold type][Nomos counter] turn[s][roman type] from now. The law will be with you.'";
+		say "A deep voice inside your head speaks: 'You will attack [when the Nomos counter runs out]. The law will be with you.'";
 	otherwise:
-		say "The god of Law speaks out loud: '[bold type][Nomos attacker][roman type], attack in [bold type][Nomos counter] turn[s][roman type] and my strength will guide you!'";
+		say "The god of Law speaks out loud: '[bold type][Nomos attacker][roman type], attack [when the Nomos counter runs out] and my strength will guide you!'";
+	if the Nomos counter is 0:
+		activate nomos bonus.
+
+to say when the Nomos counter runs out:
+	if the Nomos counter is 0:
+		say "on your [bold type]next turn[roman type]";
+	otherwise:
+		if the Nomos attacker is the player:
+			say "[bold type][Nomos counter] turn[s][roman type] from now";
+		say "in [bold type][Nomos counter]turn[s][roman type]".
 
 Before reading a command (this is the planning notification rule):
 	if the main actor is the player and the Nomos attacker is the player:
@@ -717,7 +727,7 @@ Favour rule for Sul (this is the Sul favour 9 rule):
 
 Section - Protection from curses
 
-Every turn when the player worships Sul:
+Every turn when the player worships Sul (this is the Sul checks you for curses rule):
 	if the player encloses an uncurseable thing and the favour of the player with Sul > 0:
 		let K be a list of things;
 		repeat with item running through uncurseable things had by the player:

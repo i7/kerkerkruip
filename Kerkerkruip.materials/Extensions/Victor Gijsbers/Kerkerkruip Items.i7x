@@ -4607,7 +4607,7 @@ To decide which number is the ment bonus:
 
 The ment timer is a number that varies. The ment timer is 0.
 
-Every turn when the main actor is the player:
+Every turn when the main actor is the player (this is the come down from ment rule):
 	if the ment timer is greater than 0:
 		decrease the ment timer by 1;
 		if the ment timer is 0:
@@ -4615,7 +4615,7 @@ Every turn when the main actor is the player:
 
 The OD timer is a number that varies. The OD timer is 0.
 
-Every turn when the main actor is the player:
+Every turn when the main actor is the player (this is the ment OD rule):
 	if the OD timer is greater than 0:
 		decrease the OD timer by 1;
 		if the OD timer is 7:

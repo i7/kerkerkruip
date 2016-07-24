@@ -311,7 +311,7 @@ A person can be at-pierce. A person is usually not at-pierce.
 
 Pierce-cooldown is a number that varies. Pierce-cooldown is 0.
 
-Every turn when main actor is the player:
+Every turn when main actor is the player (this is the pierce cooldown rule):
 	if pierce-cooldown is greater than 0:
 		decrease pierce-cooldown by 1;
 		if combat status is peace:
@@ -774,7 +774,7 @@ Check scaling:
 
 Scales-cooldown is a number that varies. Scales-cooldown is 0.
 
-Every turn when main actor is the player:
+Every turn when main actor is the player (this is the scales cooldown rule):
 	if scales-cooldown is greater than 0:
 		decrease scales-cooldown by 1;
 		if combat status is peace:
@@ -1105,7 +1105,7 @@ Check tormenting:
 
 Torment-cooldown is a number that varies. Torment-cooldown is 0.
 
-Every turn when main actor is the player:
+Every turn when main actor is the player (this is the torment cooldown rule):
 	if torment-cooldown is greater than 0:
 		decrease torment-cooldown by 1;
 		if combat status is peace:
@@ -1407,7 +1407,7 @@ Report an actor lashing:
 
 Lash-cooldown is a number that varies. Lash-cooldown is 0.
 
-Every turn when main actor is the player:
+Every turn when main actor is the player (this is the lash cooldown rule):
 	if lash-cooldown is greater than 0:
 		decrease lash-cooldown by 1;
 		if combat status is peace:
@@ -2812,7 +2812,7 @@ A person can be sometime-enslaved. A person is usually not sometime-enslaved.
 
 Enslave-cooldown is a number that varies. Enslave-cooldown is 0.
 
-Every turn when main actor is the player:
+Every turn when main actor is the player (this is the enslave cooldown rule):
 	if enslave-cooldown is greater than 0:
 		decrease enslave-cooldown by 1;
 		if combat status is peace:
@@ -4169,7 +4169,7 @@ Every turn when brambles and the player share a world:
 	
 Section - Growing the brambles
 
-Every turn when the main actor is druidic:
+Every turn when the main actor is druidic (this is the grow brambles rule):
 	if the brambles are in the location:
 		increase brambles duration by 1;
 		let n be brambles duration;
@@ -4433,7 +4433,7 @@ An attack modifier rule (this is the golden fruit rule):
 		say " + 3 (golden fruit bonus)[run paragraph on]";
 		increase the attack strength by 3.
 
-Every turn when the main actor is druidic:
+Every turn when the main actor is druidic (this is the golden fruit timeout rule):
 	if the golden fruit timer is greater than 0:
 		decrease the golden fruit timer by 1;
 		if the golden fruit timer is 0:
@@ -4460,7 +4460,7 @@ Weird fruit is player-only.
 Weird fruit timer is a number that varies.
 Weird fruit place is a room that varies.
 
-Every turn when the main actor is druidic:
+Every turn when the main actor is druidic (this is the weird fruit timeout rule):
 	if the weird fruit timer is greater than 0:
 		decrease the weird fruit timer by 1;
 		if the weird fruit timer is 0:
