@@ -246,7 +246,7 @@ To display the text menu:
 	say "   Your best winning streak     :  [unless best-winning-streak is greater than 9] [end if][unless best-winning-streak is greater than 99] [end if]   [best-winning-streak][paragraph break]";]
 	say paragraph break;
 	say " ACTIONS:[line break]";
-	[if menu hyperlinks are enabled:
+	if menu hyperlinks are enabled:
 		set menu hyperlink for 32;
 		say "   [if the file of save data exists]Continue the game[otherwise]New game         [end if]            :    (SPACE)[line break]";
 		end menu hyperlink;
@@ -262,21 +262,21 @@ To display the text menu:
 		set menu hyperlink for 81;
 		say "   Quit                         :       Q   [line break]";
 		end menu hyperlink;
-	otherwise:]
-	say "   [if the file of save data exists]Continue the game[otherwise]New game         [end if]            :    (SPACE)[line break]";
-	if the file of save data exists:
-		say "   New game                     :       N[line break]";
-	say "   Load a specific dungeon seed :       S[line break]";
-	say "   Display menu                 :       M[line break]";
-	say "   Options                      :       O[line break]";
-	say "   Quit                         :       Q[line break]";
+	otherwise:
+		say "   [if the file of save data exists]Continue the game[otherwise]New game         [end if]            :    (SPACE)[line break]";
+		if the file of save data exists:
+			say "   New game                     :       N[line break]";
+		say "   Load a specific dungeon seed :       S[line break]";
+		say "   Display menu                 :       M[line break]";
+		say "   Options                      :       O[line break]";
+		say "   Quit                         :       Q[line break]";
 	say variable letter spacing;
 
-[A glulx input handling rule for a hyperlink-event while showing the text title screen is true (this is the intercept the main menu hyperlinks rule):
+A glulx input handling rule for a hyperlink-event while showing the text title screen is true (this is the intercept the main menu hyperlinks rule):
 	if menu hyperlinks are enabled:
 		convert the hyperlink code to the character code;
 		request hyperlink input again;
-		replace player input;]
+		replace player input;
 
 To close the text menu:
 	clear the screen; 
@@ -478,7 +478,9 @@ To show option (N - a number):
 			blank out the hidden-row entry;
 			stop;
 
-[Section - Screen reader mode
+
+
+Section - Screen reader mode
 
 Before showing the title screen (this is the screen reader mode rule):
 	if screen reader mode is enabled:
@@ -508,17 +510,19 @@ Last after displaying rule (this is the update the disable the popover menu wind
 	if screen reader mode is enabled:
 		now disable the popover menu window is true;
 	otherwise:
-		now disable the popover menu window is false;]
+		now disable the popover menu window is false;
 
-[Section - Menu graphics (for use with Kerkerkruip Glimmr Additions by Erik Temple)
+
+
+Section - Menu graphics (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
 Changed graphics option is a truth state variable.
 
 Table of Options Menu (continued)
 title	order	rule
-"Graphical menu: [bold type][if main menu graphics flag are enabled]On[otherwise]Off[end if][roman type]"	20	the toggle menu graphics rule
-"Graphical menu: [italic type]Disabled in screen reader mode"	21	--
-"Graphical menu: [italic type]Not possible in this interpreter"	22	--
+"Graphical main menu: [bold type][if main menu graphics flag are enabled]On[otherwise]Off[end if][roman type]"	20	the toggle menu graphics rule
+"Graphical main menu: [italic type]Disabled in screen reader mode"	21	--
+"Graphical main menu: [italic type]Not possible in this interpreter"	22	--
 
 An entering a menu rule for the Table of Options Menu (this is the show graphics rows rule):
 	update graphical menu rows;
@@ -545,9 +549,11 @@ A last exiting a menu rule (this is the restart if graphics were changed rule):
 		restart immediately;
 
 To restart immediately: 
-	(- @restart; -).]
+	(- @restart; -).
 
-[Section - Info panels
+
+
+Section - Info panels
 
 Table of Options Menu (continued)
 title	order	rule
@@ -563,9 +569,11 @@ An entering a menu rule for the Table of Options Menu (this is the show panels r
 		hide option 31;
 
 This is the toggle info panels rule:
-	toggle window panels flag;]
+	toggle window panels flag;
 
-[Section - Menu hyperlinks
+
+
+Section - Menu hyperlinks
 
 [ Menu hyperlinks are automatically enabled or disable above in the screen reader rule, but the user can also change the option if they want ]
 Before showing the title screen (this is the enable menu hyperlinks rule):
@@ -592,7 +600,9 @@ This is the toggle menu hyperlinks rule:
 
 An exiting a menu rule for the Table of Options Menu (this is the disable hyperlinks rule):
 	if menu hyperlinks are disabled:
-		now enable menu hyperlinks is false;]
+		now enable menu hyperlinks is false;
+
+
 
 Section - Sound
 

@@ -604,8 +604,6 @@ Check enabling the main menu graphics:
 		say "The graphical menu is already turned on." instead;
 		
 Check disabling the main menu graphics:
-	if full graphics support is false:
-		say "Unfortunately your interpreter can't display the graphical menu." instead;
 	if screen reader mode is enabled:
 		say "The graphical menu is disabled in screen reader mode." instead;
 	if main menu graphics are disabled:
@@ -727,6 +725,7 @@ For showing the title screen when full graphics support is true and main menu gr
 	otherwise:
 		clear the main window;[we don't want to see old content in the main window when the menu closes]
 		close title screen;
+		cancel character input in the main window;
 		[open the status window.]
 
 To set jump point redraw_menu:
@@ -1098,22 +1097,27 @@ Glulx character input rule when the graphics-window is g-present (this is the gr
 		#if utilizing animation debugging;
 		say "[>console][CA]Key pressed ([key]).[<]";
 		#end if;
-		[handle graphical key code key;]
-		convert the hyperlink code to the character code;
+		handle graphical key code key;
+		[convert the hyperlink code to the character code;]
 
-[To handle graphical key code (key - a number):
-	let action-to-take be the rule produced by the menu command rules for key;
-	if rule succeeded:
-		cease animating all tracks but the button-press track;
+To handle graphical key code (key - a number):
+	[let action-to-take be the rule produced by the menu command rules for key;]
+	follow the menu command rules for key;
+	[if rule succeeded:
+		cease animating all tracks but the button-press track;]
 	if the outcome of the rulebook is the start the game outcome:
 		move on from main menu, deactivating it;
 	otherwise if the outcome of the rulebook is the quit outcome:
+		stop the background channel;
 		now menu-active is false;
 		menu-quit game;
+	[otherwise if the outcome of the rulebook is the redraw the menu outcome:
+		display the text menu;
 	otherwise if rule succeeded:
 		close title screen;
-		consider action-to-take;
+		[consider action-to-take;]
 		move on from main menu;]
+
 
 
 Section - Key codes
@@ -1126,40 +1130,52 @@ Definition: a number is info:
 Menu command info:
 	follow the graphlink processing rules for ScoreInfo_Button;
 
+Menu command settings when the graphics-window is g-present:
+	close title screen;
+	display the (Table of Options Menu) menu with title "Options";
+	move on from main menu;
+	redraw the menu;
+
+Menu command showmenu when the graphics-window is g-present:
+	close title screen;
+	display the Table of Kerkerkruip Help menu with title "Kerkerkruip";
+	move on from main menu;
+	redraw the menu;
+
 
 Section - Graphic links
 
 Graphlink processing rule for New_Game:
-	[handle graphical key code 78;]
-	now menu-active is false;
-	convert the hyperlink code to the character code;
+	handle graphical key code 78;
+	[now menu-active is false;
+	convert the hyperlink code to the character code;]
 	
 Graphlink processing rule for Continue_Game:
-	[handle graphical key code 32;]
-	now menu-active is false;
-	convert the hyperlink code to the character code;
+	handle graphical key code 32;
+	[now menu-active is false;
+	convert the hyperlink code to the character code;]
 	
 Graphlink processing rule for Quit_Game:
-	[handle graphical key code 81;]
-	now menu-active is false;
-	convert the hyperlink code to the character code;
+	handle graphical key code 81;
+	[now menu-active is false;
+	convert the hyperlink code to the character code;]
 
 Graphlink processing rule for Options_Button:
-	[handle graphical key code 79;]
-	now menu-active is false;
-	convert the hyperlink code to the character code;
+	handle graphical key code 79;
+	[now menu-active is false;
+	convert the hyperlink code to the character code;]
 
 Graphlink processing rule for Help_Button:
-	[handle graphical key code 72;]
-	now menu-active is false;
-	convert the hyperlink code to the character code;
+	handle graphical key code 72;
+	[now menu-active is false;
+	convert the hyperlink code to the character code;]
 
 [Graphlink processing rule for Skip_Button:
 	handle graphical key code 83;]
 
 Graphlink processing rule for Sound_Toggle:
 	toggle sound;
-	implement sound settings.	
+	implement sound settings.
 
 To implement sound settings:
 	set display for the Sound_Toggle;
