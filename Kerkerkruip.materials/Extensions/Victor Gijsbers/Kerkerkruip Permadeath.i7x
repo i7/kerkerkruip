@@ -44,6 +44,7 @@ Restoring from a saved game is an activity.
 
 For restoring from a saved game (this is the default roguelike restore rule):
 	say "[bracket]Game successfully restored.[close bracket][line break]";
+	say "Dungeon seed: [dungeon generation seed in hexadecimal][line break]";
 	try looking.
 
 
