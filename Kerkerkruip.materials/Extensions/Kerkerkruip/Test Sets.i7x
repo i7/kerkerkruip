@@ -177,6 +177,8 @@ testing effects for chton-arena-cheating:
 
 Chapter - Parting Shots
 
+Section - Basic Behavior
+
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	antecedent
 parting shots	0	1	restarting for tests
@@ -196,6 +198,7 @@ scenario for parting shots:
 	now mindslug is testobject;
 	now armadillo is testobject.
 
+The wake people when fighting rule does nothing when testing parting shots.
 independent action when testing parting shots: rule fails.
 
 initial scheduling of parting shots:
@@ -226,7 +229,6 @@ testing effects for mindslug-hidden-runner:
 	assert that the hitting count of fafhrd is 0 with label "hitting count of fafhrd";
 	assert that the hitting count of mouser is 0 with label "hitting count of mouser";
 	rule succeeds.
-
 
 Initial scheduling for mindslug-reveal: try going way-to-get-there.
 regular scheduling of mindslug-reveal: compel the action of taking off the fuligin cloak.
@@ -272,6 +274,8 @@ testing effects for mindslug-sleeper-runner:
 	assert that the hitting count of mouser is 1 with label "hitting count of mouser";
 	if we assert result "run past your enemies", rule succeeds.
 
+Section - Israfel's Parting Shots
+
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts
 fell-freezing	0	1
@@ -310,6 +314,144 @@ Testing effects of israfel-resplitting: if israfel is off-stage, rule succeeds.
 initial scheduling of unfrozen-fell-fleeing: now fell presses the player.
 regular scheduling of unfrozen-fell-fleeing: compel the action of retreating.
 testing effects of unfrozen-fell-fleeing: if we assert that the hitting count of Fell is 1 with label "hitting count of Fell", rule succeeds.
+
+Chapter - Angel of Mercy Parting Shots
+
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts	maximum attempts	label	antecedent
+mercy parting shots	1	0	10	--	restarting for tests
+long-path-to-angel	1	0	--	--	mercy parting shots
+run-gargantuan-angel	1	1	--	"mercy run"	--
+dig-gargantuan-angel	1	1	--	--	--
+retreat-gargantuan-angel	1	1	--	"mercy retreat"	--
+gohome-gargantuan-angel	1	1	--	"mercy home"	--
+nothome-gargantuan-angel	1	1	--	"mercy home"	--
+retreatless-gargantuan-angel	1	1	--	"mercy retreat"	--
+run-medium-angel	1	1	50	"mercy run"	--
+angel-obstruct-unhurt	1	0	--	--	run-medium-angel
+aou-text	1	1	--	--	angel-obstruct-unhurt
+angel-escape-unhurt	1	0	--	--	run-medium-angel
+aeu-text	1	1	--	--	angel-escape-unhurt
+angel-obstruct-burn	1	0	--	--	run-medium-angel
+aob-text	1	1	--	--	angel-obstruct-burn
+angel-escape-burn	1	0	--	--	run-medium-angel
+aeb-text	1	1	--	--	angel-escape-burn
+
+[TODO: tiny player escape gargantuan angel]
+
+[TODO: Refactor into normal parting shots rules]
+
+Scenario for mercy parting shots:
+	now generation info is true;
+	now pickaxe-kit is testobject;
+	now vast staircase is testobject; [guaranteed to have 2 exits];
+	now angel of mercy is testobject;
+	now lair of the imp is bannedobject;
+	now the bull totem is bannedobject;
+
+mercy-retreat-place is a room that varies.
+mercy-way-from-entrance is a direction that varies.
+mercy-retreat-way is a direction that varies.
+mercy-run-way is a direction that varies.
+mercy-dig-way is a direction that varies.
+	
+regular scheduling of mercy parting shots:
+	extract the angel of mercy to Vast Staircase, making sure it is unoccupied;
+	travel sneakily to Vast Staircase;
+	try taking off the fuligin cloak;
+	now mercy-retreat-way is the best route from the location to retreat location;
+	now mercy-retreat-place is retreat location;
+	now mercy-run-way is up;
+	if mercy-run-way is mercy-retreat-way, now mercy-run-way is down;
+	now mercy-dig-way is a random diggable direction;
+	now angel of mercy is not asleep;
+	now the health of the player is 1000;
+
+[TODO: use map approval rules instead?]
+
+testing effects of mercy parting shots:
+	assert "mercy-retreat-way should be a direction" based on whether or not mercy-retreat-way is a direction;
+	assert "mercy-run-way should be a direction" based on whether or not mercy-run-way is a direction;
+	if mercy-dig-way is a direction, rule succeeds.
+
+testing effects of long-path-to-angel:
+	[force the dungeon to regenerate unless the path between Entrance Hall and Vapours is long enough for our tests]
+	Let way be the best route from Entrance Hall to Hall of Vapours;
+	Let waypoint be the room way from Entrance Hall;
+	unless waypoint is Hall of Vapours, rule succeeds.
+
+regular scheduling of an outcome labeled "mercy run": compel the action of going mercy-run-way.
+testing effects of an outcome labeled "mercy run": if we assert result "The Angel of Mercy cries out, 'Do not pass!' and moves to block your escape.<\n\s>+You attempt to get by", rule succeeds.
+
+regular scheduling of dig-gargantuan-angel: compel the action of digging mercy-dig-way.
+
+initial scheduling of retreat-gargantuan-angel:
+	extract the player to Vast Staircase;
+	now concentration of the angel of mercy is 3;
+	now angel of mercy presses the player;
+
+regular scheduling of retreat-gargantuan-angel: compel the action of going mercy-retreat-way.
+testing effects of an outcome (called event):
+	if event is labeled "mercy retreat" or event is gohome-gargantuan-angel:
+		assert that the hitting count of the angel of mercy is 0 with label "angel of mercy hitting count";
+		if the location is not Hall of Vapours, rule succeeds.
+
+initial scheduling of an outcome labeled "mercy home":
+	extract the player to Vast Staircase;
+	now retreat location is Vast Staircase.
+	
+regular scheduling of gohome-gargantuan-angel: compel the action of going mercy-retreat-way.
+
+regular scheduling of nothome-gargantuan-angel: compel the action of going mercy-run-way.
+testing effects of nothome-gargantuan-angel:
+	assert that the location is Vast Staircase;
+	assert that the hitting count of the angel of mercy is 0 with label "angel of mercy hitting count";
+	if we assert result "The Angel of Mercy cries out, 'Do not pass!' and moves to block your escape\. You attempt to get by, but the angel is just too big\.", rule succeeds.
+	
+initial scheduling of retreatless-gargantuan-angel:
+	extract the player to Entrance Hall;
+	now the player carries the rod of the master builder;
+	now mercy-way-from-entrance is the best route from Entrance Hall to Vast Staircase;
+	Let way be an object;
+	now way is mercy-way-from-entrance;
+	while way is a direction:
+		try collapsing way;
+		now way is the best route from Entrance Hall to Vast Staircase;
+	remove the rod of the master builder from play;
+	extract the player to Vast Staircase.
+
+regular scheduling of retreatless-gargantuan-angel: compel the action of going mercy-run-way.
+
+Initial scheduling of run-medium-angel:
+	extract the player to Entrance Hall;
+	try digging mercy-way-from-entrance; [reconnect]
+	now the angel of mercy is medium;
+	now radiation of the angel of mercy is 3;
+
+regular scheduling of run-medium-angel:
+	extract the player to Vast Staircase;
+	now the health of the player is 100;
+	now the body score of the player is 6.
+
+testing effects of angel-obstruct-unhurt:
+	if we assert that the location is Vast Staircase and we assert that the health of the player is 100, rule succeeds.
+testing effects of aou-text:
+	if we assert result "You attempt to get by without being burned. You roll \d+ \+ 6 \(body\) = \d+ against a target number of \d+, succeeding at the body check\. You are unhurt! Unfortunately, you were unable to escape", rule succeeds.
+	
+testing effects of angel-obstruct-burn:
+	if we assert that the location is Vast Staircase and the health of the player < 100, rule succeeds.
+testing effects of aob-text:
+	if we assert result "You attempt to get by without being burned. You roll \d+ \+ 6 \(body\) = \d+ against a target number of \d+, failing the body check\. As you get too close, its searing body burns you for \d+ damage and prevents your escape", rule succeeds.
+
+testing effects of angel-escape-unhurt:
+	if we assert that the health of the player is 100 and the location is not Vast Staircase, rule succeeds.
+testing effects of aeu-text:
+	if we assert result "You attempt to get by without being burned\. You roll \d+ \+ 6 \(body\) = \d+ against a target number of \d+, succeeding at the body check\. You are unhurt, and you escape as well!", rule succeeds.
+	
+testing effects of angel-escape-burn:
+	if the health of the player < 100 and the location is not Vast Staircase, rule succeeds.
+testing effects of aeb-text:
+	if we assert result  "You attempt to get by without being burned. You roll \d+ \+ 6 \(body\) = \d+ against a target number of \d+, failing the body check\. As you run past, its searing body burns you for \d+ damage. But you escape anyway!", rule succeeds.
 
 Chapter - Retreating from the Tentacle
 

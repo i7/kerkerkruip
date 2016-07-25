@@ -572,65 +572,33 @@ Status attribute rule (this is the size status rule):
 
 The standard measure is a medium thing. [You can test the size difference of the standard measure and X.]
 
+To decide which number is the size number of (item - a thing):
+	if item is medium, decide on 0;
+	if item is tiny, decide on -2;
+	if item is small, decide on -1;
+	if item is large, decide on 1;
+	if item is huge, decide on 2;
+	if item is gargantuan, decide on 3.
+
 To decide which number is the size difference of (a - a thing) and (b - a thing):
-	if a is medium and b is medium: [most common case, just to speed things up]
-		decide on 0;
-	let n be 0;
-	if a is tiny:
-		increase n by 2;
-	if a is small:
-		increase n by 1;		
-	if a is large:
-		decrease n by 1;
-	if a is huge:
-		decrease n by 2;	
-	if a is gargantuan:
-		decrease n by 3;
-	if b is tiny:
-		decrease n by 2;
-	if b is small:
-		decrease n by 1;		
-	if b is large:
-		increase n by 1;
-	if b is huge:
-		increase n by 2;	
-	if b is gargantuan:
-		increase n by 3;
-	decide on n.
+	decide on the size number of b - the size number of a.
 	
 [The resulting number lies between +5 (a is tiny, b is gargantuan) and -5 (a is gargantuan, b is tiny)]
 
 Section - Size and combat
 
 An attack modifier rule (this is the size attack modifier rule):
-	if the global defender is not medium:
-		if the global defender is tiny:
-			say " - 2 (defender tiny)[run paragraph on]";
-			decrease the attack strength by 2;
-		if the global defender is small:
-			say " - 1 (defender small)[run paragraph on]";
-			decrease the attack strength by 1;		
-		if the global defender is large:
-			say " + 1 (defender large)[run paragraph on]";
-			increase the attack strength by 1;
-		if the global defender is huge:
-			say " + 2 (defender huge)[run paragraph on]";
-			increase the attack strength by 2;
-		if the global defender is gargantuan:
-			say " + 3 (defender gargantuan)[run paragraph on]";
-			increase the attack strength by 3.
+	let n be the size number of the global defender;
+	if n < 0:
+		now n is 0 - n;
+		say " - [n] (defender [size of the global defender])[run paragraph on]";
+		decrease the attack strength by n;
+	if n > 0:
+		say " + [n] (defender [size of the global defender])[run paragraph on]";
+		increase the attack strength by n;
 
 Chance to win rule when the global defender is not medium (this is the CTW defender size bonus rule):
-	if the global defender is tiny:
-		decrease the chance-to-win by 2;
-	if the global defender is small:
-		decrease the chance-to-win by 1;		
-	if the global defender is large:
-		increase the chance-to-win by 1;
-	if the global defender is huge:
-		increase the chance-to-win by 2;
-	if the global defender is gargantuan:
-		increase the chance-to-win by 3.
+	increase the chance-to-win by the size number of the global defender.
 
 An add specific damage rule (this is the size damage increase rule):
 	if damage-by-hitting is true:
@@ -1525,18 +1493,40 @@ Section - The Sudden Combat Reset Rules
 
 The sudden combat reset rules are an object based rulebook.
 
-[This could be a whole rulebook in itself...]
+The parting shot rules are an an object based rulebook.
+
 To decide whether (fighter - a person) would take a parting shot at (deserter - a person):
-	if last chance to hit is false, no;
-	unless deserter is the player, no;
-	if fighter is the player or fighter is the deserter, no;
-	if fighter is non-attacker, no;
-	unless fighter is conscious in this world, no;
-	unless fighter opposes deserter, no;
-	if deserter is runner, yes;
-	if concentration of fighter is greater than 0, yes;
-	if fighter presses deserter or deserter presses fighter, yes;
+	now opposition test subject is deserter;
+	follow the parting shot rules for fighter;
+	if rule succeeded, yes;
 	no.
+	
+First parting shot rule for a person (this is the check if there is a chance to hit rule):
+	if last chance to hit is false, rule fails.
+	
+first parting shot rule for a person (called fighter) (this is the only take parting shots at the player rule):
+	unless opposition test subject is the player, rule fails.
+	
+first parting shot rule for a person (called fighter) (this is the don't take parting shots at yourself rule):
+	if fighter is the player or fighter is opposition test subject, rule fails.
+	
+first parting shot rule for a person (called fighter) (this is the non-attackers don't take parting shots rule):
+	if fighter is non-attacker, rule fails.
+	
+first parting shot rule for a person (called fighter) (this is the can't take a parting shot when sleeping rule):
+	unless fighter is conscious in this world, rule fails.
+	
+first parting shot rule for a person (called fighter) (this is the only take parting shots at enemies rule):
+	unless fighter is opposer, rule fails.
+	
+last parting shot rule for a person (called fighter) (this is the take parting shots at runners rule):
+	if opposition test subject is runner, rule succeeds.
+	
+last parting shot rule for a person (called fighter) (this is the take parting shots if concentrated rule):
+	if concentration of fighter is greater than 0, rule succeeds.
+	
+last parting shot rule for a person (called fighter) (this is the pressing parting shot rule):
+	if fighter presses opposition test subject or opposition test subject presses fighter, rule succeeds.
 
 A first sudden combat reset rule for a person (called the deserter) (this is the last chance to hit the deserter rule):
 	[this rule could use optimizing if things get slow - watch out for teleportation grenades in rooms with hundreds of people!]

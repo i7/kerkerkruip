@@ -127,10 +127,12 @@ Chapter - Active-Opposer
 
 [This adjective uses the opposition test subject in the same way as the opposer adjective]
 
-Definition: a person (called guy) is active-opposer:
-	unless guy is conscious in this world, no;
-	if guy is opposition test subject and guy is not insane, no;
-	Decide on whether or not guy is opposer;
+To decide whether (first guy - a person) actively opposes (second guy - a person):
+	unless first guy is conscious in this world, no;
+	if first guy is second guy and first guy is not insane, no;
+	Decide on whether or not first guy opposes second guy.
+	
+Definition: a person is active-opposer if it actively opposes opposition test subject.
 
 Chapter - Emotionless
 

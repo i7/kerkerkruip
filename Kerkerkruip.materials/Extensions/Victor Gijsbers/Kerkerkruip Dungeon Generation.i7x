@@ -115,14 +115,19 @@ An object has a number called the rarity. The rarity of an object is usually 0.
 Definition: an object (called item) is rare if rarity of item is greater than 0.
 
 To decide if (stuff - an object) is too rare:
-	let n be rarity of stuff;
-	while n is greater than 0:
-		if a random chance of 1 in 2 succeeds:
-			decide on true;
-		decrease n by 1;
-	decide on false.
+	decide on whether or not any of (rarity of stuff) chances of 1 in 2 succeed.
 
-
+To decide whether (roll count - a number) chances of (threshold - a number) in (die - a number) succeed:
+	Let success be false;
+	while roll count > 0:
+		unless a random chance of threshold in die succeeds:
+			decide no;
+		decrease roll count by 1;
+	decide yes.
+	
+To decide whether any of (roll count - a number) chances of (threshold - a number) in (die - a number) succeed:
+	unless roll count chances of (die - threshold) in die succeed, yes;
+	no.
 
 Section - Basic and advanced modes
 

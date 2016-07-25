@@ -3370,9 +3370,11 @@ Status skill rule (this is the minotaur power status skill rule):
 
 Chapter - Level 3 - Angel of Mercy
 
-The angel of mercy is a neuter monster. "A [if angel of mercy is gargantuan]vast, [otherwise if angel of mercy is huge]great, [otherwise if angel of mercy is large]big, [otherwise if angel of mercy is small]diminuitive, [otherwise if angel of mercy is tiny]miniscule, [end if][if  radiation of Angel of Mercy is 0]diffuse[otherwise if radiation of Angel of Mercy is 1]glowing[otherwise if radiation of Angel of Mercy is 2]luminous[otherwise if radiation of Angel of Mercy is 3]brilliant[otherwise if radiation of Angel of Mercy is 4]blinding[otherwise]impossibly bright[end if] presence hovers before you, swirling like mist from one form to another."
+The angel of mercy is a neuter monster. "A [if angel of mercy is gargantuan]vast, [otherwise if angel of mercy is huge]great, [otherwise if angel of mercy is large]big, [otherwise if angel of mercy is small]diminuitive, [otherwise if angel of mercy is tiny]miniscule, [end if][if  radiation of Angel of Mercy is 0]diffuse[otherwise if radiation of Angel of Mercy is 1]glowing[otherwise if radiation of Angel of Mercy is 2]luminous[otherwise if radiation of Angel of Mercy is 3]brilliant[otherwise if radiation of Angel of Mercy is 4]blinding[otherwise]impossibly bright[end if] presence hovers before you. This is the Angel of Mercy, pledged to remain here and defend Malygris of its own free will."
 
-The description of the Angel of Mercy is "At the moment its form resembles [one of]a graceful young man holding a white rose[or]a grandmotherly woman wrapped in white linen[or]a sprightly doe[or]nothing but a cloud[or]an undulating white dragon[or]a cup spilling over with sparkling liquid[at random]. Looking upon it fills your heart with warmth and drives thoughts of battle from your mind.[paragraph break]Every blow the angel receives makes it smaller, but increases its radiance. It is currently [size of Angel of Mercy] and it has [radiation of Angel of Mercy] level[if radiation of angel of mercy is not 1][s][end if] of radiance."
+[TODO: say "blocking/guarding all passage/all exits except for ...]
+
+The description of the Angel of Mercy is "It is hard to discern this creature's swirling form - its limbs could be arms, legs, wings or tail. Even so, looking upon the Angel of Mercy fills your heart with warmth and drives thoughts of battle from your mind.[paragraph break]Every blow the angel receives makes it smaller, but increases its radiance. It is currently [size of Angel of Mercy] and it has [radiation of Angel of Mercy] level[s] of radiance."
 
 [TODO: change description with concentration?]
 
@@ -3417,6 +3419,18 @@ The angel of mercy carries a cool weapon and maybe a shield too... should benefi
 super sharp weapon - kills mercifully - scythe? sword?
 ]
 
+[TODO: Angel of mercy carries two shields, shield of attraction and shield of reflection
+
+Shield of reflection is worn on the weapon arm, reflects ranged attacks when you parry (or use the reflect command) Cannot attack with it at all.
+
+Or.... shield of reflection absorbs all damage from attacks, when you attack it does that damage opponent?
+
+Shield of attraction makes weapons stick to it - works best on iron and silver, but works on everything somewhat. If a weapon sticks to it, you can ready it yourself
+
+Special interaction with chain golem - stops spinning, but chain golem can make a body roll to get unstuck and start spinning again. Same with all tethered weapons? Hm... tethered weapon stays with attacker but becomes unreadied maybe
+
+If the angel of mercy steals your weapon, it becomes the [whatever] of mercy - made of radiance, but with the same stats...? Angel of mercy does not attack until it has a weapon.]
+
 Section - Getting smaller
 
 [The angel of mercy gets smaller and more radiant when damaged.]
@@ -3429,7 +3443,7 @@ Aftereffects rule (this is the angel of mercy shrinks when hit rule):
 		increase the radiation of angel of mercy by 1;
 		if the angel of mercy is within the location:
 			if previous-size is not tiny:
-				say "The angel of mercy smiles at [the global attacker] and seems to shiver with cold. With a sigh, its form collapses in on itself until it is noticeably smaller - but [if radiation of angel of mercy is 1]the angel starts to shine with radiance[otherwise]even more radiant[end if]!";
+				say "The angel of mercy smiles at [the global attacker] and seems to shiver with cold. With a sigh, its form collapses in on itself and shrinks to [size of angel of mercy] size - but [if radiation of angel of mercy is 1]the angel starts to shine with radiance[otherwise]grows even more radiant[end if]!";
 			otherwise:
 				say "Now no more than a darting point of light, the angel flickers and grows even brighter!";
 		otherwise:
@@ -3449,6 +3463,135 @@ To decide whether (fighter - Angel of Mercy) would take a parting shot at (deser
 	[TODO: make this a rulebook - this might allow the angel to take parting shots when not maximally concentrated,
 	as the prose suggests]
 	no.
+	
+[this should replace the treat going as retreat when possible rule when the angel of mercy is in the room]
+
+[TODO: what about digging? maybe damage but not obstruction?]
+
+Last check going (this is the Angel of Mercy prevents running rule):
+	if the Angel of Mercy is in the location and the Angel of Mercy actively opposes the player:
+		Let the place be retreat location;
+		if place is nothing, now place is Entrance Hall;
+		Let the way be the direction from location to place;
+		if noun is way:
+			try retreating instead;
+		if way is not a direction:
+			say "The Angel of mercy says, 'Go, foolish adventurer - since you have nowhere to retreat to, I give you free passage.'"; 
+			make no decision;
+		Let B be final body of the player;
+		if B < 1, now B is 1;
+		say "The Angel of Mercy cries out, 'Do not pass!' and moves to block your escape.[run paragraph on]";
+		if the Angel of Mercy is gargantuan:
+			say "[run paragraph on] You attempt to get by, but the angel is just too big.[paragraph break]" instead;
+		now the total damage is 0;
+		if radiation of the Angel of Mercy is at least 1:
+			say "[paragraph break]You attempt to get by without being burned. [run paragraph on]";
+			have the angel of mercy damage the player by obstruction;
+			say " [run paragraph on]";
+		otherwise:
+			say "[paragraph break]You attempt to get by.[paragraph break]";
+		if the angel of mercy obstructs the player:
+			if the total damage is 0:
+				say "You are unhurt! Unfortunately, you were unable to escape.[paragraph break]";
+			otherwise:
+				say "As you get too close, [the angel of mercy's body] [burns the player with consequences][if the player is alive] and prevents your escape[end if].[paragraph break]";
+			now total damage is 0;
+			stop the action;
+		otherwise:
+			if the total damage is 0:
+				say "You are unhurt, and you escape as well!";
+			otherwise:
+				say "As you run past, [the angel of mercy's body] [burns the player with consequences][if the player is alive]. But you escape anyway![otherwise].[end if][paragraph break]";
+			now total damage is 0;
+			if the player is dead:
+				end the story saying "You ran into the flames and died.";
+
+The Angel of Mercy prevents running rule is listed before the treat going as retreat when possible rule in the check going rules.
+
+To have the angel of mercy damage (guy - a person) by obstruction:
+	if the radiation of the Angel of Mercy is 0, stop;
+	Let D be radiation of the Angel of Mercy - 1;
+	increase D by a random number from 0 to radiation of the Angel of Mercy;
+	increase D by a random number from 0 to (radiation of the Angel of Mercy / 2);
+	increase D by the size number of the Angel of Mercy;
+	Let n be D + 10 + (a random number from 0 to final body of the player * 2 / 3);
+	test the body of the player against n;
+	if test result is false:
+		deal D points of heat damage;
+	have the Angel of Mercy inflict damage on the player, silently.
+	
+[Damage range:
+
+radiance	tiny	small	medium	large	huge
+1	0	0	0-1	1-2	2-3
+2	0-2	0-3	1-4	2-5	3-6
+3	0-4	1-5	2-6	3-7	4-8
+4	1-7	2-8	3-9	4-10	5-11
+5	2-9	3-10	4-11	5-12	6-13
+]
+
+To decide whether the angel of mercy obstructs (guy - a person):
+	Let bulk be the size number of the Angel of Mercy + the size number of the guy;
+	Let target be the percent target for obstruction of guy by the angel of mercy;
+	Let B be final body of guy;
+	if B < 1, now B is 1; [always some chance, even with 0 body]
+	decide on whether or not B chances of target in 100 succeed.
+
+To decide what number is the percent target for obstruction of (guy - a person) by the angel of mercy:
+	Let N be the size number of the Angel of Mercy + the size number of the guy;
+	[if we make this roll 6 times (body score of 6) we want a pretty linear rate of success]
+	if N is not greater than -2:
+		decide on 74; [74% chance of failure on each roll, with 6 rolls it's about 1/6 chance of obstruction]
+	if N is -1:
+		decide on 83; [83% chance of failure]
+	if N is 0:
+		decide on 89; [89% chance of failure]
+	if N is 1:
+		decide on 93; [93% chance of failure]
+	if N is 2:
+		decide on 97; [97% chance of failure on each roll, with 6 rolls it's about 5/6 chance of obstruction]
+	[N is 3 or more, eg player is medium, angel is gargantuan]
+	decide on 100;
+	
+[TODO: the angel should do an average of 7 damage in order to get past it when the player has a body score of 5. This can either be all in one attempt if it's easy to get past (both angel and player are tiny), or in several small attempts if it's difficult. When it's gargantuan and the player is medium, it is impossible to get past. Higher body score should reduce the number of attempts needed. Fix damage amount and escape probability so this works right
+
+with body score of 6, what do we need to roll 6 times to get...
+the 6th root of 0.2 is 0.76472449133173
+the 6th root of 0.4 is 0.858374218932557
+the 6th root of 0.6 is 0.9183859021684453
+the 6th root of 0.8 is 0.9634924839989961
+
+the 6th root of 1/6 is 0.7418363755904023
+the 6th root of 2/6 is 0.8326831776556043
+the 6th root of 3/6 is 0.8908987181403393
+the 6th root of 4/6 is 0.9346552651840672
+the 6th root of 5/6 is 0.9700701154458004
+
+]
+		
+To say the angel of mercy's body:
+	if the size of the angel of mercy is at least huge:
+		say "its [size of the angel of mercy]";
+		if the radiation of the angel of mercy is at least 1:
+			say ", scalding body";
+		otherwise:
+			say " body";
+	otherwise:
+		if the radiation of the angel of mercy is at least 4:
+			say "its white-hot body";
+		otherwise if the radiation of the angel of mercy is at least 2:
+			say "its searing body";
+		otherwise if the radiation of the angel of mercy is at least 1:
+			say "its scalding body";
+		otherwise:
+			say "its body".
+			
+[
+player medium, angel huge, radiation 1 = 2 damage
+player gargantuan, angel tiny, radiation 5 = 10 damage
+player medium, angel tiny, radiation 5 = 5 damage]
+
+[instead have it attack or block runners?]
 	
 [TODO: come up with some interesting following behavior?]	
 
@@ -4916,11 +5059,24 @@ An aftereffects rule (this is the Israfel's burning defence rule):
 	if the global attacker came too close to Israfel and total damage is greater than 0:
 		deal 3 points of heat damage;
 		have Israfel inflict damage on the global attacker, silently;
-		say "Israfel's flames [bold type]burn[roman type] [the global attacker] [if global attacker is alive]for [bold type][total damage] damage[roman type][otherwise][bold type]to death[roman type][end if].";
+		say "Israfel's flames [burn the global attacker with consequences].";
 		if global attacker is the player and the player is not alive:
 			end the story saying "You will burn in Heaven.".
 
+To say burn (guy - a person) with consequences:
+	say "[bold type]burn[roman type] [no dead property][the guy][dead property] [burn consequences for guy][run paragraph on]";
 
+To say burns (guy - a person) with consequences:
+	say "[bold type]burns[roman type] [no dead property][the guy][dead property] [burn consequences for guy][run paragraph on]";
+	
+[this phrase, unlike the damage consequences say phrase, does have side effects on concentration]
+To say burn consequences for (guy - a person):
+	if the guy is alive:
+		say "for [bold type][total damage] damage[roman type][if concentration of guy is not 0] (which breaks[regarding the guy][possessive] concentration)[end if][run paragraph on]";
+		now concentration of guy is 0;
+	otherwise:
+		say "[bold type]to death[roman type][run paragraph on]".
+	
 Section - Israfel prose
 
 Report Israfel hitting a dead pc:
@@ -5003,7 +5159,7 @@ An aftereffects rule (this is the Isra's burning defence rule):
 	if the global attacker came too close to Isra and total damage is greater than 0:
 		deal 2 points of heat damage;
 		have Isra inflict damage on global attacker, silently;
-		say "Isra's flames [bold type]burn[roman type] [no dead property][the global attacker][dead property] [if global attacker is alive]for [bold type][total damage] damage[roman type][otherwise][bold type]to death[roman type][end if].";
+		say "Isra's flames [burn the global attacker with consequences].";
 		if global attacker is the player and the player is not alive:
 			end the story saying "You will burn in Heaven.".
 
