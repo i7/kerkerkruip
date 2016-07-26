@@ -6474,7 +6474,7 @@ An AI action selection rule for the as-witch aswang (this is the aswang as witch
 Carry out the aswang aswang-hexing:
 	say "The aswang attempts to hex [the noun]. [italic type][run paragraph on]";
 	let n be 11 + concentration of the aswang;
-	test the mind of the noun against n;
+	test the spirit of the noun against n;
 	if test result is false:
 		say " [roman type][The noun] [are] now [bold type]hexed[roman type].";
 		now the noun is hexed;
