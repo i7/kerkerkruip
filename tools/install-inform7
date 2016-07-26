@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+# Install Inform 7
+
+# Check if Inform 7 is already installed
+if [ -d "i7/Internal" ]; then
+    exit 0
+fi
+
+mkdir -p i7
+
+# In OSX we rely on Inform 7 already being installed
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    if [ ! -d "/Applications/Inform.app" ]; then
+        echo "Please install Inform 7 into the Applications folder"
+        exit 1
+    fi
+    echo "Using existing Inform 7 application"
+    ln -fs /Applications/Inform.app/Contents/MacOS ./i7/bin
+    ln -fs /Applications/Inform.app/Contents/Resources/Internal ./i7/Internal
+
+elif [[ "$OSTYPE" == "linux-gnu" ]]; then
+    # Check if Inform for Gnome has already been installed
+    if [ -d "/usr/lib/x86_64-linux-gnu/gnome-inform7" ]; then
+        echo "Using existing Inform for Gnome installation"
+        ln -fs /usr/lib/x86_64-linux-gnu/gnome-inform7 ./i7/bin
+        ln -fs /usr/share/gnome-inform7 ./i7/Internal
+
+    # Check for CLI Inform
+    elif [ -f "/usr/local/libexec/ni" ]; then
+        echo "Using existing CLI Inform 7 installation"
+        ln -fs /usr/local/libexec ./i7/bin
+        ln -fs /usr/local/share/inform7/Internal ./i7/Internal
+
+    # Install CLI Inform locally
+    else
+        echo "Installing CLI Inform 7 into i7/"
+    	curl -L -s -S -O http://inform7.com/download/content/6M62/I7_6M62_Linux_all.tar.gz
+    	tar -xzf I7_6M62_Linux_all.tar.gz
+    	cd inform7-6M62
+        ./install-inform7.sh --prefix ../i7/i7
+        cd ..
+        ln -fs $PWD/i7/i7/libexec ./i7/bin
+        ln -fs $PWD/i7/i7/share/inform7/Internal ./i7/Internal
+    	rm -r I7_6M62_Linux_all.tar.gz inform7-6M62
+    fi
+
+else
+    echo "Unknown operating system"
+    exit 1
+fi

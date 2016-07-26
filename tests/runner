@@ -15,7 +15,7 @@ echo "Setting random seed to $SEED"
 echo -e '\nRunning the Kerkerkruip test suite:'
 touch noninteractivetests
 COLS=$(tput cols)
-unbuffer ../i7/share/inform7/Interpreters/dumb-git -w $COLS Kerkerkruip.gblorb > testlog &
+unbuffer ../i7/bin/dumb-git -w $COLS Kerkerkruip.gblorb > testlog &
 
 # Output test progress
 PID=$!
