@@ -67,21 +67,17 @@ with 20 blank rows
 	
 To do a dream:
 	extract the player from combat;
-	if at least one dream is testobject:
-		let item be a random testobject dream;
-		dream item;
+	blank out the whole of the Table of Candidate Dreams;
+	repeat with item running through dreams:
+		if item is dreamable:
+			choose a blank row in Table of Candidate Dreams;
+			now candidate dream entry is item;
+	if number of filled rows in Table of Candidate Dreams is 0:
+		say "You sleep a dreamless sleep.";
 	otherwise:
-		blank out the whole of the Table of Candidate Dreams;
-		repeat with item running through dreams:
-			if item is dreamable:
-				choose a blank row in Table of Candidate Dreams;
-				now candidate dream entry is item;
-		if number of filled rows in Table of Candidate Dreams is 0:
-			say "You sleep a dreamless sleep.";
-		otherwise:
-			sort Table of Candidate Dreams in random order;
-			choose row 1 in Table of Candidate Dreams;
-			dream Candidate dream entry.
+		sort Table of Candidate Dreams in random order;
+		choose row 1 in Table of Candidate Dreams;
+		dream Candidate dream entry.
 
 To dream (item - a dream):
 	now dreaming is true;
