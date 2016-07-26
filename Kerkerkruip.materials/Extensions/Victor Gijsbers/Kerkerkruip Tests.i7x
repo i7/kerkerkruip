@@ -92,6 +92,8 @@ Starting kit placement possible rule (this is the
 	if the considered starting kit is bannedobject, rule fails;
 	
 Dreamability rule (this is the only dream testobject dreams rule):
+	if the considered dream is bannedobject:
+		rule fails;
 	if a dream is testobject:
 		if the considered dream is testobject:
 			rule succeeds;
