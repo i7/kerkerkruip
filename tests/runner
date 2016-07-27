@@ -13,24 +13,35 @@ echo "Setting random seed to $SEED"
 
 # Run the tests non-interactively
 echo -e '\nRunning the Kerkerkruip test suite:'
-touch noninteractivetests
+touch noninteractivetests noninteractivetests.glkdata # not sure which one we'll need
 COLS=$(tput cols)
-unbuffer ../i7/bin/dumb-git -w $COLS Kerkerkruip.gblorb > testlog &
+../i7/bin/dumb-git -w $COLS Kerkerkruip.gblorb > testlog && rm noninteractivetests* &
 
 # Output test progress
-PID=$!
-while [ -d /proc/$PID ]
+while [ -f noninteractivetests ]
 do
-    sleep 1
-    echo -ne '\033[2K'
-    echo -ne "`grep 'Current progress' testlog | tail -n1`\r"
+  sleep 1
+  PROGRESS=$(grep 'Current progress:' testtranscript.glkdata | tail -n1)
+  tput rmam # disable line wrap
+  printf "\r%-${COLS}s" "$PROGRESS" # print line, padded to the right with blank space, for the number of columns on the screen
+  tput smam # enable line wrap
 done
 
 # Output the full results
 echo -e '\n\n'
-sed -n '/Test results/,$p' testlog > test-results
+sed -n '/Test results/,$p' testtranscript.glkdata > test-results
+
+SUSPICIOUS_PATTERN="\\*\\*\\* Run-Time Problem |\\*\\*\\* Error on file |You can't reach into "
+if grep -q "$SUSPICIOUS_PATTERN" testtranscript.glkdata
+then
+  echo >> test-results
+  echo "Possible runtime issues found in test transcript:" >> test-results
+  echo >> test-results
+  grep -n $SUSPICIOUS_PATTERN testtranscript.glkdata
+fi
+
 cat test-results
 
 # Exit
-RESULT=$(sed -nrs 's/.*Full results: [0-9]+ tests in [0-9]+\/[0-9]+ sets, ([0-9]+) failure(s)?.*/\1/p' test-results)
+RESULT=$(perl -ne 'if (/Full results: [0-9]+ tests in [0-9]+\/[0-9]+ sets, ([0-9]+) failure(s)?/) { print $1 }' test-results)
 exit $RESULT
