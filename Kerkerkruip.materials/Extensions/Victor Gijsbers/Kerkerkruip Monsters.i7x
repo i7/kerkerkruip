@@ -2923,6 +2923,8 @@ An AI target selection rule for a person (called target) when the running AI is 
 	if the giant tentacle grapples the target and the target is not the giant tentacle:
 		increase the Weight by 1000;
 
+[TODO: generalize grappling rules and descriptions]
+
 Check wearing (this is the cannot wear when grappled rule):
 	if at least one person grapples the player:
 		let X be a random person grappling the player;
@@ -3370,11 +3372,25 @@ Status skill rule (this is the minotaur power status skill rule):
 
 Chapter - Level 3 - Angel of Mercy
 
-The angel of mercy is a neuter monster. "The Angel of Mercy hovers before you, a [if angel of mercy is gargantuan]vast, [otherwise if angel of mercy is huge]great, [otherwise if angel of mercy is large]big, [otherwise if angel of mercy is small]diminuitive, [otherwise if angel of mercy is tiny]miniscule, [end if][if  radiation of Angel of Mercy is 0]diffuse[otherwise if radiation of Angel of Mercy is 1]glowing[otherwise if radiation of Angel of Mercy is 2]luminous[otherwise if radiation of Angel of Mercy is 3]brilliant[otherwise if radiation of Angel of Mercy is 4]blinding[otherwise]impossibly bright[end if] presence. Its form is almost human, but ever shifting."
+The angel of mercy is a neuter monster. "A [if angel of mercy is gargantuan]vast, [otherwise if angel of mercy is huge]great, [otherwise if angel of mercy is large]big, [otherwise if angel of mercy is small]diminuitive, [otherwise if angel of mercy is tiny]miniscule, [end if][if  radiation of Angel of Mercy is 0]diffuse[otherwise if radiation of Angel of Mercy is 1]glowing[otherwise if radiation of Angel of Mercy is 2]luminous[otherwise if radiation of Angel of Mercy is 3]brilliant[otherwise if radiation of Angel of Mercy is 4]blinding[otherwise]impossibly bright[end if] presence hovers before you[if Angel of Mercy is gargantuan and mercy-retreat-direction is a direction], spread across the room to block all exits but [mercy-retreat-direction][end if][angel of mercy equipment]"
+
+To say angel of mercy equipment:
+	Let item be the current weapon of the angel of mercy;
+	if the angel of mercy wears a gauntlet:
+		if item is an artificial weapon:
+			say ". In one gauntleted hand it wields [the item]";
+		otherwise:
+			say ". A gauntlet of luminous bands encircles what might be a hand";
+	if the angel of mercy wears a shield:
+		if the angel of mercy wears a gauntlet:
+			say "and in another, it ";
+		otherwise:
+			say ". It [if the item is an artificial weapon]wields [the item] and [end if]";
+		say "carries a shield made of spinning, radiating lights"
 
 [TODO: say "blocking/guarding all passage/all exits except for ...]
 
-The description of the Angel of Mercy is "It is hard to discern this creature's swirling form - its limbs could be arms, legs, wings or tail. Even so, looking upon the Angel of Mercy fills your heart with warmth and drives thoughts of battle from your mind.[paragraph break]Every blow the angel receives makes it smaller, but increases its radiance. It is currently [size of Angel of Mercy] and it has [radiation of Angel of Mercy] level[s] of radiance."
+The description of the Angel of Mercy is "It is hard to discern this creature's swirling form - its limbs could be arms, legs, wings or tail. In the center is a face - or something resembling a face - that bears the serenity of only those who wield enormous power.[paragraph break]Every blow the angel receives makes it smaller, but increases its radiance. It is currently [size of Angel of Mercy] and it has [radiation of Angel of Mercy] level[s] of radiance."
 
 [TODO: change description with concentration?]
 
@@ -3385,6 +3401,7 @@ The ID of the Angel of Mercy is 43.
 The Angel of Mercy is gargantuan.
 The Angel of Mercy is talker.
 The Angel of Mercy is thrower. [have Angel of Mercy throw grenades in another direction?]
+The angel of Mercy is weapon user.
 Material of the Angel of Mercy is radiance.
 
 The Angel of Mercy is advanced.
@@ -3411,11 +3428,11 @@ For natural weapon setup of the angel of mercy (this is the angel of mercy's nai
 	now printed name of X is "angel's open hand";
 	[now X is plural-named;]
 
-[
 Section - Equipment
 
-The angel of mercy carries a cool weapon and maybe a shield too... should benefit from radiance
+The angel of mercy wears the gauntlet of attraction.
 
+[
 super sharp weapon - kills mercifully - scythe? sword?
 ]
 
@@ -3431,8 +3448,6 @@ Special interaction with chain golem (and all tethered weapons) - causes grappli
 
 If the angel of mercy steals your weapon, it becomes the [whatever] of mercy - made of radiance, but with the same stats...? Angel of mercy does not attack until it has a weapon.
 
-The gauntlet of attraction is gauntlets. The indefinite article is "the".
-The gauntlet of attraction is radiance. The description is "This single gauntlet, made of [material of the gauntlet of attraction], encircles the hand with rings of powerful force. A weapon parried while wearing it may sometimes be wrested from the attacker's grasp."
 
 [TODO: Make sure angel's AI prefers parrying non-projectile weapons, and blocking projetcile weapons]
 
@@ -3441,6 +3456,39 @@ The description of the gauntlets of grip is "These sturdy armoured gloves make i
 TODO: beg the Angel of mercy - roll a spirit check against (your health * 4) - if you succeed, the Angel gives you the Hand of Glory (lit) or the Scroll of Delights. If Scroll of Delights, the angel becomes your ally but doesn't attack...?
 ]
 
+Section - Stealing Weapons
+
+
+[TODO: transform all stolen weapons into size-agnostic radiant ones?]
+
+[TODO: steal more weapons instead of readying?]
+
+An AI action selection rule for the at-Act angel of mercy (this is the angel of mercy resists attacking rule):
+	choose row with an Option of the action of the angel of mercy attacking the chosen target in the Table of AI Action Options;
+	[TODO: don't attack unless the chosen target deserves it? tweak weights]
+	decrease the Action Weight entry by 4.
+		
+A last AI action selection rule for an at-React person (called guy) (this is the defender uses gauntlet of attraction to get weapons rule):
+	if the guy wears the gauntlet of attraction:
+		choose row with an Option of the guy parrying in the Table of AI Action Options;
+		if the Action Weight entry < 0:
+			now the Action Weight entry is 0;
+		if the current weapon of the guy is a natural weapon and the global attacker weapon is not a natural weapon and the global attacker weapon is not tethered:
+			[TODO: keep this in line with gauntlet abilities]
+			increase the Action Weight entry by 5;
+			if the guy is the Angel of Mercy:
+				increase the Action Weight entry by 2;
+				
+An AI action selection rule for the at-React angel of mercy (this is the angel of mercy doesn't dodge when too big rule):
+	choose row with an Option of the angel of mercy dodging in the Table of AI Action Options;
+	decrease the Action Weight entry by the size number of the angel of mercy.
+	
+The size attack modifier rule does nothing when the global defender is the angel of mercy and the global defender is at parry. [TODO: generalize this!]
+
+
+	
+[TODO: tweak CTW for parrying with gauntlets?]
+	
 Section - Getting smaller
 
 [The angel of mercy gets smaller and more radiant when damaged.]

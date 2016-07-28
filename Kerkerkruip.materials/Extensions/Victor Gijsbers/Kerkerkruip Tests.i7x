@@ -231,9 +231,7 @@ left	central	right
 
 
 
-Chapter - Tests (not for release)
-
-
+Chapter - Tests (not for release)	
 
 Section - Cheats - Plunk, plonk, smite, rambo, meatboy, butterfly, reduce, sneak
 

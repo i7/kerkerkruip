@@ -1272,6 +1272,7 @@ An attack modifier rule (this is the gauntlet attack modifier rule):
 					say " - [m] (gauntlets help when parrying with fists)[run paragraph on]";
 					decrease the attack strength by m.
 
+[TODO: give gauntlets their own parry-with bonus?]
 
 Section - Gauntlets of grip (major)
 
@@ -1320,6 +1321,27 @@ To do the grease drop with (guy - a person):
 		otherwise:
 			say "[The guy] [drop] [the item].".
 
+Section - Gauntlet of attraction (monster)
+
+To wrest is a verb.
+To retain is a verb.
+
+The gauntlet of attraction is gauntlets. The indefinite article is "the".
+The gauntlet of attraction is radiance. The description is "This single gauntlet, made of [material of the gauntlet of attraction], encircles the hand with rings of powerful force. A weapon parried while wearing it may sometimes be captured from the attacker's grasp."
+
+An aftereffects rule (this is the gauntlet of attraction steals weapons rule):
+	if the global defender is at parry and the global defender wears the gauntlet of attraction and the current weapon of the global defender is a natural weapon:
+		Let target be whatever the global defender weapon struck;
+		If target is an artificial weapon and target is not tethered:		
+			[TODO: parrying natural and tethered weapons causes grappling]
+			say "The gauntlet of attraction grips [the target]![paragraph break][The global attacker] tries to hold on. [run paragraph on]";
+			Let the gripping-force be the final body of the global defender + a random number from 1 to 10;
+			test the body of the global attacker against the gripping-force;
+			if test result is false:
+				say " [The global defender] [bold type][wrest] [the target] away[roman type] from [the global attacker]!";
+				now the global defender carries the target;
+			otherwise:
+				say " [The global attacker] [retain] [the target] and the gauntlet lets go!".
 
 Chapter - Masks
 [Includes masks, goggles, and anything else that covers the face.]

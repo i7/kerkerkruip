@@ -597,6 +597,8 @@ An attack modifier rule (this is the size attack modifier rule):
 		say " + [n] (defender [size of the global defender])[run paragraph on]";
 		increase the attack strength by n;
 
+[TODO: improve AI reaction selection based on effects - and consider taking away the size attack bonus when a big defender parries]
+
 Chance to win rule when the global defender is not medium (this is the CTW defender size bonus rule):
 	increase the chance-to-win by the size number of the global defender.
 

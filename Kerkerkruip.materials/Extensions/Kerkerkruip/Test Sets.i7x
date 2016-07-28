@@ -2157,6 +2157,9 @@ parry-fafhrd-protected-retaining	1	1	"retain rapier"	parry-fafhrd-protected
 parry-fafhrd	1	1	--	--
 parry-fafhrd-shatter	1	1	"lose weapon"	parry-fafhrd
 
+[TODO: claymore parries projectile & tethered weapon]
+[TODO: add gauntlet of attraction tests]
+
 initial scheduling of weapon aftereffects:
 	Repeat with guy running through people:
 		now inherent damage modifier of the guy is 10;
