@@ -1325,24 +1325,42 @@ Section - Gauntlet of attraction (monster)
 
 To wrest is a verb.
 To retain is a verb.
+To try is a verb.
+To reach is a verb.
 
 The gauntlet of attraction is gauntlets. The indefinite article is "the".
 The gauntlet of attraction is radiance. The description is "This single gauntlet, made of [material of the gauntlet of attraction], encircles the hand with rings of powerful force. A weapon parried while wearing it may sometimes be captured from the attacker's grasp."
 
-An aftereffects rule (this is the gauntlet of attraction steals weapons rule):
-	if the global defender is at parry and the global defender wears the gauntlet of attraction and the current weapon of the global defender is a natural weapon:
-		Let target be whatever the global defender weapon struck;
-		If target is an artificial weapon and target is not tethered:		
-			[TODO: parrying natural and tethered weapons causes grappling]
-			say "The gauntlet of attraction grips [the target]![paragraph break][The global attacker] tries to hold on. [run paragraph on]";
-			Let the gripping-force be the final body of the global defender + a random number from 1 to 10;
-			test the body of the global attacker against the gripping-force;
-			if test result is false:
-				say " [The global defender] [bold type][wrest] [the target] away[roman type] from [the global attacker]!";
-				now the global defender carries the target;
-			otherwise:
-				say " [The global attacker] [retain] [the target] and the gauntlet lets go!".
+To decide what object is whatever the gauntlet can steal:
+	unless the global defender wears the gauntlet of attraction:
+		decide on nothing;
+	if the current weapon of the global defender is an artificial weapon:
+		decide on nothing;
+	if the global attacker weapon is a natural weapon or the global attacker weapon is tethered:
+		[TODO: this could mean grappling]
+		decide on nothing;
+	decide on the global attacker weapon.
 
+An aftereffects rule (this is the gauntlet of attraction steals weapons rule):
+	Let target be whatever the gauntlet can steal;
+	If target is a weapon and target is whatever the global defender weapon struck:
+		[TODO: parrying natural and tethered weapons causes grappling]
+		say "The gauntlet of attraction grips [the target]![paragraph break][The global attacker] [try] to hold on. [run paragraph on]";
+		Let the gripping-force be the final body of the global defender + a random number from 1 to 10;
+		test the body of the global attacker against the gripping-force;
+		if test result is false:
+			say " [The global defender] [bold type][wrest] [the target] away[roman type] from [the global attacker]!";
+			now the global defender carries the target;
+			now the target is not readied;
+		otherwise:
+			say " [The global attacker] [bold type][retain] [the target][roman type] and the gauntlet lets go!".
+
+Report an actor parrying when the actor wears the gauntlet of attraction (this is the report parrying with the gauntlet of attraction rule):
+	let the target be whatever the gauntlet can steal;
+	if the target is a weapon:
+		say "[The actor] [reach] out a gauntleted hand to stop [the target].";
+		rule succeeds.
+	
 Chapter - Masks
 [Includes masks, goggles, and anything else that covers the face.]
 

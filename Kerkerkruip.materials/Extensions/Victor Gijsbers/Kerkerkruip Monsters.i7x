@@ -3372,7 +3372,7 @@ Status skill rule (this is the minotaur power status skill rule):
 
 Chapter - Level 3 - Angel of Mercy
 
-The angel of mercy is a neuter monster. "A [if angel of mercy is gargantuan]vast, [otherwise if angel of mercy is huge]great, [otherwise if angel of mercy is large]big, [otherwise if angel of mercy is small]diminuitive, [otherwise if angel of mercy is tiny]miniscule, [end if][if  radiation of Angel of Mercy is 0]diffuse[otherwise if radiation of Angel of Mercy is 1]glowing[otherwise if radiation of Angel of Mercy is 2]luminous[otherwise if radiation of Angel of Mercy is 3]brilliant[otherwise if radiation of Angel of Mercy is 4]blinding[otherwise]impossibly bright[end if] presence hovers before you[if Angel of Mercy is gargantuan and mercy-retreat-direction is a direction], spread across the room to block all exits but [mercy-retreat-direction][end if][angel of mercy equipment]"
+The angel of mercy is a neuter monster. "A [if angel of mercy is gargantuan]vast, [otherwise if angel of mercy is huge]great, [otherwise if angel of mercy is large]big, [otherwise if angel of mercy is small]diminuitive, [otherwise if angel of mercy is tiny]miniscule, [end if][if  radiation of Angel of Mercy is 0]diffuse[otherwise if radiation of Angel of Mercy is 1]glowing[otherwise if radiation of Angel of Mercy is 2]luminous[otherwise if radiation of Angel of Mercy is 3]brilliant[otherwise if radiation of Angel of Mercy is 4]blinding[otherwise]impossibly bright[end if] presence hovers before you: the angel of Mercy[if Angel of Mercy is gargantuan and mercy-retreat-direction is a direction], spread across the room to block all exits but [mercy-retreat-direction][end if][angel of mercy equipment]."
 
 To say angel of mercy equipment:
 	Let item be the current weapon of the angel of mercy;
@@ -3468,25 +3468,49 @@ An AI action selection rule for the at-Act angel of mercy (this is the angel of 
 	[TODO: don't attack unless the chosen target deserves it? tweak weights]
 	decrease the Action Weight entry by 4.
 		
-A last AI action selection rule for an at-React person (called guy) (this is the defender uses gauntlet of attraction to get weapons rule):
+An AI action selection rule for an at-React person (called guy) (this is the defender uses gauntlet of attraction to get weapons rule):
 	if the guy wears the gauntlet of attraction:
 		choose row with an Option of the guy parrying in the Table of AI Action Options;
 		if the Action Weight entry < 0:
 			now the Action Weight entry is 0;
 		if the current weapon of the guy is a natural weapon and the global attacker weapon is not a natural weapon and the global attacker weapon is not tethered:
 			[TODO: keep this in line with gauntlet abilities]
-			increase the Action Weight entry by 5;
+			increase the Action Weight entry by 10;
 			if the guy is the Angel of Mercy:
 				increase the Action Weight entry by 2;
 				
+The defender uses gauntlet of attraction to get weapons rule is listed after the standard defense against attack select rule in the AI action selection rules.
+
 An AI action selection rule for the at-React angel of mercy (this is the angel of mercy doesn't dodge when too big rule):
 	choose row with an Option of the angel of mercy dodging in the Table of AI Action Options;
 	decrease the Action Weight entry by the size number of the angel of mercy.
 	
 The size attack modifier rule does nothing when the global defender is the angel of mercy and the global defender is at parry. [TODO: generalize this!]
 
+Section - Making weapons mercy-compatible
 
+To focus is a verb.
+
+Mercifying is an action applying to one thing.
+
+Carry out an actor mercifying a weapon:
+	say "[The actor] [focus] [their] power upon [the noun], until it begins to [bold type]shine with inner light[roman type]! [The noun] fluctuates in size and becomes capable of much more damage, but more difficult to wield accurately. It is now a weapon fit for mercy-killing.";
+	now the material of the noun is radiance;
+	now the noun is size-agnostic;
+	increase the damage die of the noun by 4; [TODO: base it on how much damage this weapon has done?]
+	decrease the weapon damage bonus of the noun by 1;
+	decrease the weapon attack bonus of the noun by 1;
 	
+An AI action selection rule for the angel of mercy (this is the angel of mercy customises weapons rule):
+	if the chosen weapon is an artificial weapon:
+		if the chosen weapon is not radiance or the chosen weapon is not size-agnostic:
+			choose a blank row in Table of AI Action Options;
+			now the Option entry is the action of the angel of mercy mercifying the chosen weapon;
+			now the Action Weight entry is 5;
+			Let d be the size difference of the chosen weapon and the angel of mercy;
+			if d < 0, now d is 0 - d;
+			increase the action weight entry by d * 2;
+		
 [TODO: tweak CTW for parrying with gauntlets?]
 	
 Section - Getting smaller
