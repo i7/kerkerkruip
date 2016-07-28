@@ -199,6 +199,7 @@ scenario for parting shots:
 	now armadillo is testobject.
 
 The wake people when fighting rule does nothing when testing parting shots.
+The asleep rule does nothing when testing parting shots.
 independent action when testing parting shots: rule fails.
 
 initial scheduling of parting shots:
@@ -375,13 +376,18 @@ testing effects of mercy parting shots:
 	if mercy-dig-way is a direction, rule succeeds.
 
 testing effects of long-path-to-angel:
-	[force the dungeon to regenerate unless the path between Entrance Hall and Vapours is long enough for our tests]
-	Let way be the best route from Entrance Hall to Hall of Vapours;
+	[force the dungeon to regenerate unless the path between Entrance Hall and Staircases is long enough for our tests]
+	Let way be the best route from Entrance Hall to Vast Staircase;
 	Let waypoint be the room way from Entrance Hall;
-	unless waypoint is Hall of Vapours, rule succeeds.
+	unless waypoint is Vast Staircase, rule succeeds.
 
 regular scheduling of an outcome labeled "mercy run": compel the action of going mercy-run-way.
-testing effects of an outcome labeled "mercy run": if we assert result "The Angel of Mercy cries out, 'Do not pass!' and moves to block your escape.<\n\s>+You attempt to get by", rule succeeds.
+testing effects of an outcome (called event):
+	if the event is labeled "mercy run" or the event is dig-gargantuan-angel:
+		if we assert result "The Angel of Mercy cries out, 'Do not pass!' and moves to block your escape.<\n\s>+You attempt to get by", rule succeeds.
+
+First testing effects of a test step when testing mercy parting shots:
+	assert "no grappling allowed at the end of the turn" based on whether or not the angel of mercy does not grapple the player.
 
 regular scheduling of dig-gargantuan-angel: compel the action of digging mercy-dig-way.
 
@@ -394,18 +400,23 @@ regular scheduling of retreat-gargantuan-angel: compel the action of going mercy
 testing effects of an outcome (called event):
 	if event is labeled "mercy retreat" or event is gohome-gargantuan-angel:
 		assert that the hitting count of the angel of mercy is 0 with label "angel of mercy hitting count";
-		if the location is not Hall of Vapours, rule succeeds.
+		assert absence of result "block your escape";
+		if we assert that the location is mercy-retreat-place, rule succeeds.
 
 initial scheduling of an outcome labeled "mercy home":
 	extract the player to Vast Staircase;
-	now retreat location is Vast Staircase.
+	now retreat location is Vast Staircase;
+	if the best route from the location to Entrance Hall is a direction:
+		now mercy-retreat-way is the best route from the location to Entrance Hall;
+		now mercy-retreat-place is the room mercy-retreat-way from the location.
 	
 regular scheduling of gohome-gargantuan-angel: compel the action of going mercy-retreat-way.
+first testing effects of gohome-gargantuan-angel: assert absence of result "foolish adventurer".
 
 regular scheduling of nothome-gargantuan-angel: compel the action of going mercy-run-way.
 testing effects of nothome-gargantuan-angel:
 	assert that the location is Vast Staircase;
-	assert that the hitting count of the angel of mercy is 0 with label "angel of mercy hitting count";
+	assert that the hitting count of the angel of mercy is 1 with label "angel of mercy hitting count";
 	if we assert result "The Angel of Mercy cries out, 'Do not pass!' and moves to block your escape\. You attempt to get by, but the angel is just too big\.", rule succeeds.
 	
 initial scheduling of retreatless-gargantuan-angel:
@@ -418,9 +429,11 @@ initial scheduling of retreatless-gargantuan-angel:
 		try collapsing way;
 		now way is the best route from Entrance Hall to Vast Staircase;
 	remove the rod of the master builder from play;
-	extract the player to Vast Staircase.
+	extract the player to Vast Staircase;
+	now mercy-retreat-place is the room mercy-run-way from Vast Staircase.
 
 regular scheduling of retreatless-gargantuan-angel: compel the action of going mercy-run-way.
+First testing effects of retreatless-gargantuan-angel: assert result "foolish adventurer".
 
 Initial scheduling of run-medium-angel:
 	extract the player to Entrance Hall;

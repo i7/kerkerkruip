@@ -3370,7 +3370,7 @@ Status skill rule (this is the minotaur power status skill rule):
 
 Chapter - Level 3 - Angel of Mercy
 
-The angel of mercy is a neuter monster. "A [if angel of mercy is gargantuan]vast, [otherwise if angel of mercy is huge]great, [otherwise if angel of mercy is large]big, [otherwise if angel of mercy is small]diminuitive, [otherwise if angel of mercy is tiny]miniscule, [end if][if  radiation of Angel of Mercy is 0]diffuse[otherwise if radiation of Angel of Mercy is 1]glowing[otherwise if radiation of Angel of Mercy is 2]luminous[otherwise if radiation of Angel of Mercy is 3]brilliant[otherwise if radiation of Angel of Mercy is 4]blinding[otherwise]impossibly bright[end if] presence hovers before you. This is the Angel of Mercy, pledged to remain here and defend Malygris of its own free will."
+The angel of mercy is a neuter monster. "The Angel of Mercy hovers before you, a [if angel of mercy is gargantuan]vast, [otherwise if angel of mercy is huge]great, [otherwise if angel of mercy is large]big, [otherwise if angel of mercy is small]diminuitive, [otherwise if angel of mercy is tiny]miniscule, [end if][if  radiation of Angel of Mercy is 0]diffuse[otherwise if radiation of Angel of Mercy is 1]glowing[otherwise if radiation of Angel of Mercy is 2]luminous[otherwise if radiation of Angel of Mercy is 3]brilliant[otherwise if radiation of Angel of Mercy is 4]blinding[otherwise]impossibly bright[end if] presence. Its form is almost human, but ever shifting."
 
 [TODO: say "blocking/guarding all passage/all exits except for ...]
 
@@ -3403,13 +3403,13 @@ The spirit score of the angel of mercy is 12.
 
 For natural weapon setup of the angel of mercy (this is the angel of mercy's nails rule):
 	let X be the natural weapon described;
-	now damage die of X is 4;
+	now damage die of X is 2;
 	now the weapon damage bonus of X is -1;
 	now dodge bonus of X is 0;
-	now parry-against bonus of X is -1;
-	now parry-with bonus of X is 0;  [high for a natural weapon. Give the angel some equipment?]
-	now printed name of X is "angel's nails";
-	now X is plural-named;
+	now parry-against bonus of X is 0;
+	now parry-with bonus of X is -4;
+	now printed name of X is "angel's open hand";
+	[now X is plural-named;]
 
 [
 Section - Equipment
@@ -3419,17 +3419,27 @@ The angel of mercy carries a cool weapon and maybe a shield too... should benefi
 super sharp weapon - kills mercifully - scythe? sword?
 ]
 
-[TODO: Angel of mercy carries two shields, shield of attraction and shield of reflection
+[TODO: Angel of mercy carries shield of reflection and gauntlet of attraction
 
-Shield of reflection is worn on the weapon arm, reflects ranged attacks when you parry (or use the reflect command) Cannot attack with it at all.
+Shield of reflection reflects ranged attacks when you parry (or use the reflect command) Cannot attack with it at all.
 
 Or.... shield of reflection absorbs all damage from attacks, when you attack it does that damage opponent?
 
-Shield of attraction makes weapons stick to it - works best on iron and silver, but works on everything somewhat. If a weapon sticks to it, you can ready it yourself
+gauntlet of attraction makes weapons stick to it - works best on iron and silver, but works on everything somewhat. If a weapon sticks to it, you can ready it yourself
 
-Special interaction with chain golem - stops spinning, but chain golem can make a body roll to get unstuck and start spinning again. Same with all tethered weapons? Hm... tethered weapon stays with attacker but becomes unreadied maybe
+Special interaction with chain golem (and all tethered weapons) - causes grappling? stops spinning, but chain golem can make a body roll to get unstuck and start spinning again. Same with all tethered weapons? Hm... tethered weapon stays with attacker but becomes unreadied maybe
 
-If the angel of mercy steals your weapon, it becomes the [whatever] of mercy - made of radiance, but with the same stats...? Angel of mercy does not attack until it has a weapon.]
+If the angel of mercy steals your weapon, it becomes the [whatever] of mercy - made of radiance, but with the same stats...? Angel of mercy does not attack until it has a weapon.
+
+The gauntlet of attraction is gauntlets. The indefinite article is "the".
+The gauntlet of attraction is radiance. The description is "This single gauntlet, made of [material of the gauntlet of attraction], encircles the hand with rings of powerful force. A weapon parried while wearing it may sometimes be wrested from the attacker's grasp."
+
+[TODO: Make sure angel's AI prefers parrying non-projectile weapons, and blocking projetcile weapons]
+
+The description of the gauntlets of grip is "These sturdy armoured gloves make it easier to parry your opponent's attacks.".
+
+TODO: beg the Angel of mercy - roll a spirit check against (your health * 4) - if you succeed, the Angel gives you the Hand of Glory (lit) or the Scroll of Delights. If Scroll of Delights, the angel becomes your ally but doesn't attack...?
+]
 
 Section - Getting smaller
 
@@ -3459,54 +3469,60 @@ A reviving rule for the angel of mercy (this is the reviving angel of mercy rule
 	
 Section - Mercy for Runners
 
-To decide whether (fighter - Angel of Mercy) would take a parting shot at (deserter - a person):
-	[TODO: make this a rulebook - this might allow the angel to take parting shots when not maximally concentrated,
-	as the prose suggests]
-	no.
+To run is a verb.
+To escape is a verb.
+
+To decide what object is mercy-retreat-direction:
+	Let way be the best route from the location to the retreat location;
+	if the way is a direction, decide on the way;
+	decide on the best route from the location to Entrance Hall.
 	
-[this should replace the treat going as retreat when possible rule when the angel of mercy is in the room]
-
-[TODO: what about digging? maybe damage but not obstruction?]
-
-Last check going (this is the Angel of Mercy prevents running rule):
-	if the Angel of Mercy is in the location and the Angel of Mercy actively opposes the player:
-		Let the place be retreat location;
-		if place is nothing, now place is Entrance Hall;
-		Let the way be the direction from location to place;
-		if noun is way:
-			try retreating instead;
-		if way is not a direction:
+A parting shot rule for the Angel of Mercy:
+	if the opposition test subject is not runner:
+		rule fails;
+	if the noun is mercy-retreat-direction:
+		[if you got teleported here and just want to go back]
+		rule fails;
+	if mercy-retreat-direction is nothing:
+		if the opposition test subject is the player:
 			say "The Angel of mercy says, 'Go, foolish adventurer - since you have nowhere to retreat to, I give you free passage.'"; 
-			make no decision;
-		Let B be final body of the player;
-		if B < 1, now B is 1;
-		say "The Angel of Mercy cries out, 'Do not pass!' and moves to block your escape.[run paragraph on]";
-		if the Angel of Mercy is gargantuan:
-			say "[run paragraph on] You attempt to get by, but the angel is just too big.[paragraph break]" instead;
+		rule fails;
+	rule succeeds.
+	
+Instead of the Angel of Mercy hitting a runner person (this is the Angel of Mercy obstructs runners rule):
+	say "The Angel of Mercy cries out, 'Do not pass!' and moves to block [regarding the noun][possessive] escape.[run paragraph on]";
+	if the Angel of Mercy is gargantuan:
+		say "[run paragraph on] [The noun] [attempt] to get by, but the angel is just too big.[paragraph break]";
+		now the angel of mercy grapples the noun;
+	otherwise:
 		now the total damage is 0;
 		if radiation of the Angel of Mercy is at least 1:
-			say "[paragraph break]You attempt to get by without being burned. [run paragraph on]";
-			have the angel of mercy damage the player by obstruction;
+			say "[paragraph break][The noun] [attempt] to get by without being burned. [run paragraph on]";
+			have the angel of mercy damage the noun by obstruction;
 			say " [run paragraph on]";
 		otherwise:
-			say "[paragraph break]You attempt to get by.[paragraph break]";
-		if the angel of mercy obstructs the player:
+			say "[paragraph break][The noun] [attempt] to get by.[paragraph break]";
+		if the angel of mercy obstructs the noun:
 			if the total damage is 0:
-				say "You are unhurt! Unfortunately, you were unable to escape.[paragraph break]";
+				say "[The noun] [are] unhurt! Unfortunately, [they] [adapt the verb are in the past tense] unable to escape.[paragraph break]";
 			otherwise:
-				say "As you get too close, [the angel of mercy's body] [burns the player with consequences][if the player is alive] and prevents your escape[end if].[paragraph break]";
-			now total damage is 0;
-			stop the action;
+				say "As [the noun] [get] too close, [the angel of mercy's body] [burns the noun with consequences][if the noun is alive] and prevents [their] escape[end if].[paragraph break]";
+			now the Angel of Mercy grapples the noun;
 		otherwise:
 			if the total damage is 0:
-				say "You are unhurt, and you escape as well!";
+				say "[The noun] [are] unhurt, and [they] [escape] as well!";
 			otherwise:
-				say "As you run past, [the angel of mercy's body] [burns the player with consequences][if the player is alive]. But you escape anyway![otherwise].[end if][paragraph break]";
-			now total damage is 0;
+				say "As [the noun] [run] past, [the angel of mercy's body] [burns the noun with consequences][if the noun is alive]. But [they] escape anyway![otherwise].[end if][paragraph break]";
 			if the player is dead:
 				end the story saying "You ran into the flames and died.";
+		now total damage is 0;
 
-The Angel of Mercy prevents running rule is listed before the treat going as retreat when possible rule in the check going rules.
+Every turn when the Angel of Mercy grapples someone (called guy) (this is the Angel of Mercy lets go unless it's got your weapon rule):
+	[TODO: unless the Angel of Mercy wears the gauntlet of attraction and the gauntlet's prize is the current weapon of guy:]
+	now the Angel of Mercy does not grapple guy.
+
+
+[TODO: what about digging? maybe damage but not obstruction?]
 
 To have the angel of mercy damage (guy - a person) by obstruction:
 	if the radiation of the Angel of Mercy is 0, stop;
@@ -3623,7 +3639,18 @@ Report the angel of mercy attacking:
 	unless the actor is the noun:
 		say "'[if the health of the noun is less than 8]Your death will be quick and painless[otherwise]I bear you no ill will, but I shall defend my allies[end if],' the angel of mercy declares as it strikes out at [the noun].";
 	otherwise:
-		say "'The most difficult to forgive is always oneself!' the angel of mercy screams as it claws at its own face.";
+		Let the item be the current weapon of the angel of mercy;
+		if the item is a whip or the item is a staff or the item is a mace or the item is a hammer or the original material of the item is wood:
+			say "'Mea culpa, mea culpa, mea maxima culpa!' the angel of mercy intones at it flagellates its own back.";
+		otherwise:
+			say "'The most difficult of all to forgive is oneself!' the angel of mercy screams as it ";
+			if the item is a natural weapon:
+				say "claws";
+			otherwise if the item is a dagger:
+				say "stabs";
+			otherwise:
+				say "hacks";
+			say " at its own face.";
 	rule succeeds.
 
 Report the angel of mercy dodging:
@@ -3631,7 +3658,7 @@ Report the angel of mercy dodging:
 	rule succeeds.
 
 Report the angel of mercy waiting when the angel of mercy is insane:
-	say "The angel of mercy improvises a song that climaxes in the refrain 'Kill them all and let me sort them out!'";
+	say "[one of]The angel of mercy improvises a song that climaxes in the refrain 'Kill them all and let Sul sort them out!'[or]The angel of mercy declares, 'Never interrupt your enemy when [regarding the player][they]['re] in the middle of making a mistake!' and then slips on a banana peel to demonstrate.[at random]";
 	rule succeeds.
 
 

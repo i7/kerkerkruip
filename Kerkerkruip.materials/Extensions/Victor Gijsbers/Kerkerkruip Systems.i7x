@@ -1501,24 +1501,26 @@ To decide whether (fighter - a person) would take a parting shot at (deserter - 
 	if rule succeeded, yes;
 	no.
 	
-First parting shot rule for a person (this is the check if there is a chance to hit rule):
-	if last chance to hit is false, rule fails.
-	
-first parting shot rule for a person (called fighter) (this is the only take parting shots at the player rule):
-	unless opposition test subject is the player, rule fails.
-	
-first parting shot rule for a person (called fighter) (this is the don't take parting shots at yourself rule):
-	if fighter is the player or fighter is opposition test subject, rule fails.
-	
-first parting shot rule for a person (called fighter) (this is the non-attackers don't take parting shots rule):
-	if fighter is non-attacker, rule fails.
+first parting shot rule for a person (called fighter) (this is the only take parting shots at enemies rule):
+	unless fighter is opposer, rule fails.
 	
 first parting shot rule for a person (called fighter) (this is the can't take a parting shot when sleeping rule):
 	unless fighter is conscious in this world, rule fails.
 	
-first parting shot rule for a person (called fighter) (this is the only take parting shots at enemies rule):
-	unless fighter is opposer, rule fails.
+first parting shot rule for a person (called fighter) (this is the non-attackers don't take parting shots rule):
+	if fighter is non-attacker, rule fails.
 	
+first parting shot rule for a person (called fighter) (this is the don't take parting shots at yourself rule):
+	if fighter is the player or fighter is opposition test subject, rule fails.
+	
+first parting shot rule for a person (called fighter) (this is the only take parting shots at the player rule):
+	unless opposition test subject is the player, rule fails.
+	
+First parting shot rule for a person (this is the check if there is a chance to hit rule):
+	if last chance to hit is false, rule fails.
+
+[The previous rules get listed in reverse order. Then come specific rules defined elsewhere. Finally, these:]
+
 last parting shot rule for a person (called fighter) (this is the take parting shots at runners rule):
 	if opposition test subject is runner, rule succeeds.
 	
