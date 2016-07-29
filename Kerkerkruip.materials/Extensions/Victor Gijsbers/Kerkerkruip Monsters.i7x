@@ -3372,7 +3372,22 @@ Status skill rule (this is the minotaur power status skill rule):
 
 Chapter - Level 3 - Angel of Mercy
 
-The angel of mercy is a neuter monster. "A [if angel of mercy is gargantuan]vast, [otherwise if angel of mercy is huge]great, [otherwise if angel of mercy is large]big, [otherwise if angel of mercy is small]diminuitive, [otherwise if angel of mercy is tiny]miniscule, [end if][if  radiation of Angel of Mercy is 0]diffuse[otherwise if radiation of Angel of Mercy is 1]glowing[otherwise if radiation of Angel of Mercy is 2]luminous[otherwise if radiation of Angel of Mercy is 3]brilliant[otherwise if radiation of Angel of Mercy is 4]blinding[otherwise]impossibly bright[end if] presence hovers before you: the angel of Mercy[if Angel of Mercy is gargantuan and mercy-retreat-direction is a direction], spread across the room to block all exits but [mercy-retreat-direction][end if][angel of mercy equipment]."
+The angel of mercy is a neuter monster. "A [angel of mercy's form] presence[if Angel of Mercy is gargantuan and mercy-retreat-direction is a direction] spreads across the room, blocking every exit but [mercy-retreat-direction][otherwise] hovers before you[end if][angel of mercy equipment]."
+
+To say angel of mercy's form:
+	if size of angel of mercy is:
+		-- gargantuan: say "vast ";
+		-- huge: say "great ";
+		-- large: say "big ";
+		-- small: say "diminuitive ";
+		-- tiny: say "miniscule ";
+	if radiation of angel of mercy is:
+		-- 0: say "diffuse";
+		-- 1: say "glowing";
+		-- 2: say "luminous";
+		-- 3: say "brilliant";
+		-- 4: say "blinding";
+		-- otherwise: say "impossibly bright";
 
 To say angel of mercy equipment:
 	Let item be the current weapon of the angel of mercy;
@@ -3380,13 +3395,13 @@ To say angel of mercy equipment:
 		if item is an artificial weapon:
 			say ". In one gauntleted hand it wields [the item]";
 		otherwise:
-			say ". A gauntlet of luminous bands encircles what might be a hand";
+			say ". What might be a hand is ringed by contracting bands of light";
 	if the angel of mercy wears a shield:
 		if the angel of mercy wears a gauntlet:
-			say "and in another, it ";
+			say ". Another limb ";
 		otherwise:
 			say ". It [if the item is an artificial weapon]wields [the item] and [end if]";
-		say "carries a shield made of spinning, radiating lights"
+		say "carries a shield made of radiating lights"
 
 [TODO: say "blocking/guarding all passage/all exits except for ...]
 
@@ -3411,7 +3426,7 @@ Angel of Mercy is flyer.
 Radiation of angel of Mercy is 0.
 
 The health of the angel of Mercy is 40.
-The melee of the angel of Mercy is 3.
+The melee of the angel of Mercy is 1.
 The defence of the angel of Mercy is 12.
 
 The body score of the angel of mercy is 7.
@@ -3432,18 +3447,13 @@ Section - Equipment
 
 The angel of mercy wears the gauntlet of attraction.
 
+The angel of mercy wears the shield of reflection.
+
 [
 super sharp weapon - kills mercifully - scythe? sword?
 ]
 
-[TODO: Angel of mercy carries shield of reflection and gauntlet of attraction
-
-Shield of reflection reflects ranged attacks when you parry (or use the reflect command) Cannot attack with it at all.
-
-Or.... shield of reflection absorbs all damage from attacks, when you attack it does that damage opponent?
-
-gauntlet of attraction makes weapons stick to it - works best on iron and silver, but works on everything somewhat. If a weapon sticks to it, you can ready it yourself
-
+[
 Special interaction with chain golem (and all tethered weapons) - causes grappling? stops spinning, but chain golem can make a body roll to get unstuck and start spinning again. Same with all tethered weapons? Hm... tethered weapon stays with attacker but becomes unreadied maybe
 
 If the angel of mercy steals your weapon, it becomes the [whatever] of mercy - made of radiance, but with the same stats...? Angel of mercy does not attack until it has a weapon.
@@ -3463,18 +3473,19 @@ Section - Stealing Weapons
 
 [TODO: steal more weapons instead of readying?]
 
-An AI action selection rule for the at-Act angel of mercy (this is the angel of mercy resists attacking rule):
+An AI action selection rule for the at-Act angel of mercy (this is the angel of mercy doesn't want to attack rule):
 	choose row with an Option of the action of the angel of mercy attacking the chosen target in the Table of AI Action Options;
 	[TODO: don't attack unless the chosen target deserves it? tweak weights]
-	decrease the Action Weight entry by 4.
+	decrease the Action Weight entry by 10;
+	if the current weapon of the angel of mercy is a natural weapon:
+		decrease the Action Weight entry by 10 [more].
 		
 An AI action selection rule for an at-React person (called guy) (this is the defender uses gauntlet of attraction to get weapons rule):
 	if the guy wears the gauntlet of attraction:
 		choose row with an Option of the guy parrying in the Table of AI Action Options;
 		if the Action Weight entry < 0:
 			now the Action Weight entry is 0;
-		if the current weapon of the guy is a natural weapon and the global attacker weapon is not a natural weapon and the global attacker weapon is not tethered:
-			[TODO: keep this in line with gauntlet abilities]
+		if the gauntlet can steal the current weapon of the main actor for the guy:
 			increase the Action Weight entry by 10;
 			if the guy is the Angel of Mercy:
 				increase the Action Weight entry by 2;
@@ -3513,6 +3524,17 @@ An AI action selection rule for the angel of mercy (this is the angel of mercy c
 		
 [TODO: tweak CTW for parrying with gauntlets?]
 	
+Section - Reflecting Attacks
+
+An AI action selection rule for an at-React person (called guy) (this is the use shield to reflect ranged attacks rule):
+	if the current weapon of the main actor is ranged and the guy wears the shield of reflection:
+		choose row with Option of the guy blocking in Table of AI Action Options;
+		increase Action Weight entry by a random number from 1 to 10.
+
+Report the angel of mercy blocking:
+	say "The angel turns its shield towards the attack, and for a moment you see [regarding the main actor][possessive] image reflected in the lights.";
+	rule succeeds.
+
 Section - Getting smaller
 
 [The angel of mercy gets smaller and more radiant when damaged.]
@@ -3738,11 +3760,21 @@ Section - Power
 
 The power of mercy is a power. The angel of mercy grants the power of mercy.
 The power level of power of mercy is 3.
-The command text of power of mercy is "pardon".
-The description of power of mercy is "Type: active and passive ability.[paragraph break]Command: pardon.[paragraph break]As reaction, you can forgive your attacker for seeking to harm you. This reduces the damage you receive from them by (your spirit / 4). This damage reduction will occur every time that person hits you, until you attack them back. If someone you have pardoned hits you, they must succeed at a spirit check against (your spirit + 4) or lose 1 point of spirit.[paragraph break]In addition, any time you are damaged in combat, you will grow smaller and more radiant. This effect lasts until combat is over."
+The command text of power of mercy is "mercy power".
+The description of power of mercy is "Type: passive ability.[paragraph break]Command: none.[paragraph break]Effect: Any time you are damaged in combat, you will grow smaller. You also have a chance to become more radiant, which increases with your spirit. This effect lasts until combat is over."
 
 The power-name of power of mercy is "power of mercy".
 
+[WIth two nice items, I don't think we need an active ability... but here's what it was going to be:
+
+[paragraph break]Command: pardon.[paragraph break]As reaction, you can forgive your attacker for seeking to harm you. This reduces the damage you receive from them by (your spirit / 4). This damage reduction will occur every time that person hits you, until you attack them back. If someone you have pardoned hits you, they must succeed at a spirit check against (your spirit + 4) or lose 1 point of spirit.
+
+You can also [bold type]pardon[roman type] your attacker, softening the blow and weakening their spirit. [italic type](Level 3)[roman type][line break][run paragraph on]".
+
+	now every person is not pardoned.
+
+
+]
 [TODO: grant eyeless vision? immune to radiance? or just protect from own flash power?]
 [pardon power: makes it harder for enemy to hit/damage you, but only until you hit back, and only usable after they hit you... or force them to retreat? 
 
@@ -3759,19 +3791,18 @@ power of mercy	spirit	--
 
 Status skill rule (this is the mercy status skill rule):
 	if the power of mercy is granted:
-		say "You have the power of mercy, which causes you to shrink in size and grow more radiant when hit. You can also [bold type]pardon[roman type] your attacker, softening the blow and weakening their spirit. [italic type](Level 3)[roman type][line break][run paragraph on]".
-
+		say "You have the power of mercy, which causes you to shrink in size and grow more radiant when hit.";
+		
 Absorbing power of mercy:
 	increase melee of the player by 2;
 	increase defence of the player by 3;
 	increase permanent health of the player by 17;
-	say "As the angel dies, its generosity of spirit becomes yours. ([bold type]Power of mercy[roman type]: +2 attack, +3 defence, +17 health, shrink and become radiant when hit, and you can create a flash of light.)[paragraph break]";
+	say "As the angel dies, its generosity of spirit becomes yours. ([bold type]Power of mercy[roman type]: +2 attack, +3 defence, +17 health, shrink and become radiant when hit.)[paragraph break]";
 
 Repelling power of mercy:
 	decrease melee of the player by 2;
 	decrease defence of the player by 3;
 	decrease permanent health of the player by 17;
-	now every person is not pardoned.
 
 [TODO: flash command, radiation and shrinking effects]
 
@@ -3790,7 +3821,7 @@ Aftereffects rule (this is the mercy damage rule):
 				if hate is present:
 					now the size of the player is the size before previous-size;
 					say "You shrink to [bold type][size of the player][roman type] size!";
-					let n be 20 - total damage;
+					let n be 5 - total damage + a random number from 0 to 20;
 					if n < 0, now n is 0;
 					test the spirit of the player against n;
 					if test result is true:
@@ -3799,6 +3830,7 @@ Aftereffects rule (this is the mercy damage rule):
 						increase the radiation of the player by 1;
 					otherwise:
 						say "Your spirit was not strong enough to increase your radiance this time.";
+[
 			if the global attacker is pardoned:
 				let n be (final spirit of the global defender) + 4;
 				test the spirit of the global attacker against n;
@@ -3807,7 +3839,8 @@ Aftereffects rule (this is the mercy damage rule):
 				otherwise:
 					say "[The global attacker] [are] shamed by [their] actions, and [diminish] in spirit.";
 					decrease spirit score of the global attacker by 1.
-								
+]
+
 Every turn when mercy-radiation is not 0 (this is the revert back to normal radiance rule):
 	if combat status is peace:
 		let base-radiation be the radiation of the player - mercy-radiation;
@@ -3818,6 +3851,7 @@ Every turn when mercy-radiation is not 0 (this is the revert back to normal radi
 		now the radiation of the player is base-radiation;
 		now mercy-radiation is 0;
 
+[
 Section - Power of Mercy - Pardoning
 
 A person can be pardoned.
@@ -3867,6 +3901,7 @@ First carry out attacking:
 	if the global defender is pardoned:
 		say "You revoke your pardon, and strike back at the one who wronged you!";
 		now the global defender is not pardoned.
+]
 
 Chapter - Level 4 - Fanatics of Aite 
 

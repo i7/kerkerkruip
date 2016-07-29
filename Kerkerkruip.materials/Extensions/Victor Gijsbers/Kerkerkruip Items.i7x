@@ -1323,6 +1323,8 @@ To do the grease drop with (guy - a person):
 
 Section - Gauntlet of attraction (monster)
 
+[Angel of Mercy]
+
 To wrest is a verb.
 To retain is a verb.
 To try is a verb.
@@ -1331,34 +1333,40 @@ To reach is a verb.
 The gauntlet of attraction is gauntlets. The indefinite article is "the".
 The gauntlet of attraction is radiance. The description is "This single gauntlet, made of [material of the gauntlet of attraction], encircles the hand with rings of powerful force. A weapon parried while wearing it may sometimes be captured from the attacker's grasp."
 
-To decide what object is whatever the gauntlet can steal:
-	unless the global defender wears the gauntlet of attraction:
-		decide on nothing;
-	if the current weapon of the global defender is an artificial weapon:
-		decide on nothing;
-	if the global attacker weapon is a natural weapon or the global attacker weapon is tethered:
+[This phrase returns yes if the wearer of the gauntlet has the ability to steal weapons. It does not check if they parried successfully, or if they parried at all - that's done in the aftereffects.]
+
+To decide whether the gauntlet can steal (item - an object) for (guy - a person):
+	if item is not a weapon:
+		no;
+	unless the guy wears the gauntlet of attraction:
+		no;
+	if the current weapon of the guy is an artificial weapon:
+		no;
+	if the item is a natural weapon or the item is tethered:
 		[TODO: this could mean grappling]
-		decide on nothing;
-	decide on the global attacker weapon.
+		no;
+	yes.
 
 An aftereffects rule (this is the gauntlet of attraction steals weapons rule):
-	Let target be whatever the gauntlet can steal;
-	If target is a weapon and target is whatever the global defender weapon struck:
+	Let the loot be whatever the global defender weapon struck;
+	If the gauntlet can steal the loot for the global defender:
 		[TODO: parrying natural and tethered weapons causes grappling]
-		say "The gauntlet of attraction grips [the target]![paragraph break][The global attacker] [try] to hold on. [run paragraph on]";
-		Let the gripping-force be the final body of the global defender + a random number from 1 to 10;
+		say "The gauntlet of attraction grips [the loot]![paragraph break][The global attacker] [try] to hold on. [run paragraph on]";
+		Let the gripping-force be 0;
+		repeat with die roll running from 1 to 3:
+			increase gripping-force by a random number from 1 to (the final body of the global defender - 1);
 		test the body of the global attacker against the gripping-force;
 		if test result is false:
-			say " [The global defender] [bold type][wrest] [the target] away[roman type] from [the global attacker]!";
-			now the global defender carries the target;
-			now the target is not readied;
+			say " [The global defender] [bold type][wrest] [the loot] away[roman type] from [the global attacker]!";
+			now the global defender carries the loot;
+			now the loot is not readied;
 		otherwise:
-			say " [The global attacker] [bold type][retain] [the target][roman type] and the gauntlet lets go!".
+			say " [The global attacker] [bold type][retain] [the loot][roman type] and the gauntlet lets go!".
 
 Report an actor parrying when the actor wears the gauntlet of attraction (this is the report parrying with the gauntlet of attraction rule):
-	let the target be whatever the gauntlet can steal;
-	if the target is a weapon:
-		say "[The actor] [reach] out a gauntleted hand to stop [the target].";
+	Let the loot be the current weapon of the main actor;
+	if the gauntlet can steal the loot for the actor:
+		say "[The actor] [reach] out a gauntleted hand to stop [the loot].";
 		rule succeeds.
 	
 Chapter - Masks
@@ -1630,7 +1638,7 @@ The block bonus of the metal sheet is 4.
 
 The description of the metal sheet is "This thick sheet of metal has been fashioned into a crude shield. But when you can put several inches of steel between yourself and your attacker, you can afford crudeness. [italic type]Block bonus: +4[roman type].".
 
-Section - Shield of fanaticism
+Section - Shield of fanaticism (monster)
 
 [Defender of Aite]
 
@@ -1654,7 +1662,23 @@ First carry out an actor blocking (this is the shield of fanaticism must be upda
 	if the actor encloses the shield of fanaticism:
 		calculate the block bonus of the shield of fanaticism.
 
+Section - Shield of reflection (monster)
 
+[Angel of Mercy]
+
+The shield of reflection is a shield. The shield of reflection is radiance.
+
+The block bonus of the shield of reflection is 4. The description is "Lines of force radiate and spiral out from this [if the shield of reflection is radiance]radiant[end if] shield. It possesses the power to repel ranged attacks and reflect them back at the attacker."
+
+The shield of reflection is size-agnostic.
+
+Aftereffects (this is the shield of reflection reflects attacks rule):
+	if the global attacker weapon is ranged and reflection-attack is false:
+		if the shield of reflection is whatever the global attacker weapon struck:
+			say "The attack [bold type]bounces off[roman type] the shield of reflection towards [the global attacker]!";
+			now reflection-attack is true;
+			try the global attacker hitting the global attacker instead.
+	
 Chapter - Cloneable
 
 Definition: A thing is cloneable: no. [Lots of things can be cloned, but most things don't need to be cloned. Cloneable means we shouldn't use the original]
