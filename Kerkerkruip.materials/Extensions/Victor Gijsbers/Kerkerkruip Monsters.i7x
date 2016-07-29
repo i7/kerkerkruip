@@ -3491,8 +3491,8 @@ An AI action selection rule for the at-Act angel of mercy (this is the angel of 
 	if concentration of the angel of mercy is 3:
 		choose row with an Option of the action of the angel of mercy waiting in the Table of AI Action Options;
 		now action weight entry is 0;
-	unless the angel of mercy opposes the player:
-		[Angel of Mercy never attacks former allies]
+	if the angel of mercy is friendly:
+		[Angel of Mercy befriends the player, but doesn't attack former allies]
 		decrease the Action Weight entry by 1000.
 		
 An AI action selection rule for an at-React person (called guy) (this is the defender uses gauntlet of attraction to get weapons rule):
