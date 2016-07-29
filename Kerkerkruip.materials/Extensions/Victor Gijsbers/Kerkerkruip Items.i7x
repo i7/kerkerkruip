@@ -1331,7 +1331,20 @@ To try is a verb.
 To reach is a verb.
 
 The gauntlet of attraction is gauntlets. The indefinite article is "the".
-The gauntlet of attraction is radiance. The description is "This single gauntlet encircles the hand with rings of powerful force. A weapon parried while wearing it may sometimes be captured from the attacker's grasp. However, anyone who wears the gauntlet without a weapon does much less damage in combat."
+The gauntlet of attraction is radiance. The description is "This single gauntlet encircles the hand with rings of force. When the wearer is unarmed, it gives a -3 parry bonus and may sometimes capture the weapon it parries - but it also halves the damage done by the wearer's fist."
+
+This is the gauntlet of attraction attack modifier rule:
+	if the global defender wears the gauntlet of attraction:
+		if the global defender is at parry:
+			if global defender weapon is a natural weapon:
+				let n be parry-with bonus of the global defender weapon;
+				now n is 0 - n;
+				if n < 0, now n is 0;
+				increase n by 3;
+				say " - [n] (gauntlet attracts weapons)[run paragraph on]";
+				decrease the attack strength by n.
+
+The gauntlet of attraction attack modifier rule substitutes for the gauntlet attack modifier rule when the global defender wears the gauntlet of attraction.
 
 [This phrase returns yes if the wearer of the gauntlet has the ability to steal weapons. It does not check if they parried successfully, or if they parried at all - that's done in the aftereffects.]
 
@@ -1354,7 +1367,7 @@ An aftereffects rule (this is the gauntlet of attraction steals weapons rule):
 		say "The gauntlet of attraction grips [the loot]![paragraph break][The global attacker] [try] to hold on. [run paragraph on]";
 		Let the gripping-force be 0;
 		repeat with die roll running from 1 to 3:
-			increase gripping-force by a random number from 1 to (the final body of the global defender - 1);
+			increase gripping-force by a random number from 1 to (the final body of the global defender);
 		test the body of the global attacker against the gripping-force;
 		if test result is false:
 			say " [The global defender] [bold type][wrest] [the loot] away[roman type] from [the global attacker]!";

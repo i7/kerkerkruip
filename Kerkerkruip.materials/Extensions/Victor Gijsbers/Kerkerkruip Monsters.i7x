@@ -3390,18 +3390,25 @@ To say angel of mercy's form:
 		-- otherwise: say "impossibly bright";
 
 To say angel of mercy equipment:
-	Let item be the current weapon of the angel of mercy;
-	if the angel of mercy wears a gauntlet:
-		if item is an artificial weapon:
-			say ". In one gauntleted hand it wields [the item]";
-		otherwise:
-			say ". What might be a hand is ringed by contracting bands of light";
+	Let new-sentence be whether or not angel of mercy is gargantuan and mercy-retreat-direction is a direction;
+	if new-sentence is true:
+		say ". It ";
+	otherwise:
+		say ", and ";
+	if the angel of mercy wears something:
+		say "wear[if new-sentence is true]s[otherwise]ing[end if] a glowing ";		
 	if the angel of mercy wears a shield:
+		say "shield";
 		if the angel of mercy wears a gauntlet:
-			say ". Another limb ";
+			say " and ";
+	if the angel of mercy wears a gauntlet:
+		say "gauntlet";
+	Let item be the current weapon of the angel of mercy;
+	if the item is an artificial weapon:
+		if the angel of mercy wears something:
+			say ", and wield[if new-sentence is true]s[otherwise]ing[end if]";
 		otherwise:
-			say ". It [if the item is an artificial weapon]wields [the item] and [end if]";
-		say "carries a shield made of radiating lights"
+			say "wield[if new-sentence is true]s[otherwise]ing[end if] [regarding the original owner of the item][possessive] [item]".
 
 [TODO: say "blocking/guarding all passage/all exits except for ...]
 
@@ -3430,7 +3437,7 @@ The melee of the angel of Mercy is 1.
 The defence of the angel of Mercy is 12.
 
 The body score of the angel of mercy is 7.
-The mind score of the angel of mercy is 7.
+The mind score of the angel of mercy is 5.
 The spirit score of the angel of mercy is 12.
 
 For natural weapon setup of the angel of mercy (this is the angel of mercy's nails rule):
@@ -3439,7 +3446,7 @@ For natural weapon setup of the angel of mercy (this is the angel of mercy's nai
 	now the weapon damage bonus of X is -1;
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is 0;
-	now parry-with bonus of X is -4;
+	now parry-with bonus of X is -2;
 	now printed name of X is "angel's open hand";
 	[now X is plural-named;]
 
@@ -3476,9 +3483,14 @@ Section - Stealing Weapons
 An AI action selection rule for the at-Act angel of mercy (this is the angel of mercy doesn't like attacking rule):
 	choose row with an Option of the action of the angel of mercy attacking the chosen target in the Table of AI Action Options;
 	[TODO: don't attack unless the chosen target deserves it? tweak weights]
-	decrease the Action Weight entry by 10;
+	decrease the Action Weight entry by 5;
 	if the current weapon of the angel of mercy is a natural weapon:
 		decrease the Action Weight entry by 5;
+	if the concentration of the chosen target is 0:
+		decrease the Action Weight entry by 5;
+	if concentration of the angel of mercy is 3:
+		choose row with an Option of the action of the angel of mercy waiting in the Table of AI Action Options;
+		now action weight entry is 0;
 	unless the angel of mercy opposes the player:
 		[Angel of Mercy never attacks former allies]
 		decrease the Action Weight entry by 1000.
@@ -3532,10 +3544,12 @@ Section - Reflecting Attacks
 An AI action selection rule for an at-React person (called guy) (this is the use shield to reflect ranged attacks rule):
 	if the current weapon of the main actor is ranged and the guy wears the shield of reflection:
 		choose row with Option of the guy blocking in Table of AI Action Options;
-		increase Action Weight entry by a random number from 1 to 10.
+		increase Action Weight entry by a random number from 1 to 20;
+		choose row with Option of the guy parrying in Table of AI Action Options;
+		decrease Action Weight entry by 5;
 
 Report the angel of mercy blocking:
-	say "The angel turns its shield towards the attack, and for a moment you see [regarding the main actor][possessive] image reflected in the lights.";
+	say "The angel turns its shield towards the attack[if a random chance of 1 in 3 succeeds], and for a moment you see [regarding the main actor][possessive] image reflected in the lights[end if].";
 	rule succeeds.
 
 Section - Getting smaller
@@ -3550,7 +3564,7 @@ Aftereffects rule (this is the angel of mercy shrinks when hit rule):
 		increase the radiation of angel of mercy by 1;
 		if the angel of mercy is within the location:
 			if previous-size is not tiny:
-				say "The angel of mercy smiles at [the global attacker] and seems to shiver with cold. With a sigh, its form collapses in on itself and shrinks to [size of angel of mercy] size - but [if radiation of angel of mercy is 1]the angel starts to shine with radiance[otherwise]grows even more radiant[end if]!";
+				say "The angel of mercy shivers. Its form collapses on itself and shrinks to [size of angel of mercy] size - but [if radiation of angel of mercy is 1]the angel starts to shine with radiance[otherwise]grows even more radiant[end if]!";
 			otherwise:
 				say "Now no more than a darting point of light, the angel flickers and grows even brighter!";
 		otherwise:
@@ -3725,7 +3739,7 @@ Understand the commands "plead" or "petition" as "beg".
 
 Understand "beg [mercy]" and "beg for [mercy]" as begging for mercy.
 
-Understand "mercy" and "forgiveness" and "clemency" and "pardon" as "[mercy]".
+Understand "mercy" and "pity" and "forgiveness" and "clemency" and "pardon" as "[mercy]".
 
 Understand "[mercy]" as the angel of mercy. [this is a shortcut so we don't have to create a separate object representing the concept of mercy rather than the person]
 
@@ -3818,7 +3832,7 @@ Report the angel of mercy attacking:
 	otherwise:
 		Let the item be the current weapon of the angel of mercy;
 		if the item is a whip or the item is a staff or the item is a mace or the item is a hammer or the original material of the item is wood:
-			say "'Mea culpa, mea culpa, mea maxima culpa!' the angel of mercy intones at it flagellates its own back.";
+			say "[italic type]'Mea culpa, mea culpa, mea maxima culpa!'[roman type] the angel of mercy intones at it flagellates its own back.";
 		otherwise:
 			say "'The most difficult of all to forgive is oneself!' the angel of mercy screams as it ";
 			if the item is a natural weapon:
@@ -3834,8 +3848,11 @@ Report the angel of mercy dodging:
 	say "The angel shifts to avoid the attack.";
 	rule succeeds.
 
-Report the angel of mercy waiting when the angel of mercy is insane:
-	say "[one of]The angel of mercy improvises a song that climaxes in the refrain 'Kill them all and let Sul sort them out!'[or]The angel of mercy declares, 'Never interrupt your enemy when [regarding the player][they]['re] in the middle of making a mistake!' and then slips on a banana peel to demonstrate.[at random]";
+Report the angel of mercy waiting:
+	if the angel of mercy is insane:
+		say "[one of]The angel of mercy improvises a song that climaxes in the refrain 'Kill them all and let Sul sort them out!'[or]The angel of mercy declares, 'Never interrupt your enemy when [regarding the player][they]['re] in the middle of making a mistake!' and then slips on a banana peel to demonstrate.[at random]";
+	otherwise:
+		say "The angel of mercy waits for someone else to make a move.";
 	rule succeeds.
 
 

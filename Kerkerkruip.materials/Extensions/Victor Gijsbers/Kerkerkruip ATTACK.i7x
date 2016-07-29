@@ -1458,7 +1458,7 @@ Definition: a shield is proximity-triggered:
 	unless the global defender wears it, no;
 	decide on whether or not the global defender is at-block;
 	
-Definition: clothing is proximity-triggered if it is worn;
+Definition: clothing is proximity-triggered if it someone wears it;
 
 Section - Killing
 
@@ -1977,10 +1977,7 @@ An AI action selection rule for an at-React person (called P) (this is the AI bl
 
 An attack modifier rule (this is the block defence bonus rule):
 	if the global defender is at-block:
-		if the global defender encloses a worn shield:
-			[decrease the attack strength by 2;
-			if the numbers boolean is true:
-				say " - 2 (blocking)[run paragraph on]";]
+		if the global defender wears a shield:
 			let item be a random shield worn by the global defender;
 			let n be block bonus of item;
 			decrease the attack strength by n;
