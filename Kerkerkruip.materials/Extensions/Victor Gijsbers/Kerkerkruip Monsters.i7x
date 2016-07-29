@@ -4134,7 +4134,7 @@ Section - Power of the Fanatics of Aite
 The power of the Fanatics of Aite is a power. Healer of Aite grants power of the Fanatics of Aite.
 The power level of power of the Fanatics of Aite is 4.
 The command text of power of the fanatics of Aite is "sacrifice".
-The description of power of the fanatics of Aite is "Type: active and passive ability.[paragraph break]Command: sacrifice.[paragraph break]Effect: If you are not in a temple, you can still sacrifice powers. If you don't worhsip a god, you can sacrificy to Aite in this way; otherwise, you will worship to the god you're already worshipping. The probability that your god's combat interventions will occur increases as if your piety were spirit/4 higher than it actually is. If you worship Aite, the probability that her interventions will benefit you increases, and they deal more damage."
+The description of power of the fanatics of Aite is "Type: active and passive ability.[paragraph break]Command: sacrifice.[paragraph break]Effect: If you are not in a temple, you can still sacrifice powers. If you don't worship a god, you can sacrifice to Aite in this way; otherwise, you will sacrifice to the god you're already worshipping. The probability that your god's combat interventions will occur increases as if your piety were spirit/4 higher than it actually is. If you worship Aite, the probability that her interventions will benefit you increases, and they deal more damage."
 The power-name of power of the fanatics of Aite is "power of the fanatics".
 
 Table of Enemy Powers (continued)
