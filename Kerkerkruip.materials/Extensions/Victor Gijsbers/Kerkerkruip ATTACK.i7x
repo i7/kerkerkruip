@@ -1458,7 +1458,7 @@ Definition: a shield is proximity-triggered:
 	unless the global defender wears it, no;
 	decide on whether or not the global defender is at-block;
 	
-Definition: clothing is proximity-triggered if it someone wears it;
+Definition: clothing is proximity-triggered if someone wears it;
 
 Section - Killing
 
