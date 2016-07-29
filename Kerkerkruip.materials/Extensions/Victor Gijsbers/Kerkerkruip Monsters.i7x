@@ -3473,12 +3473,15 @@ Section - Stealing Weapons
 
 [TODO: steal more weapons instead of readying?]
 
-An AI action selection rule for the at-Act angel of mercy (this is the angel of mercy doesn't want to attack rule):
+An AI action selection rule for the at-Act angel of mercy (this is the angel of mercy doesn't like attacking rule):
 	choose row with an Option of the action of the angel of mercy attacking the chosen target in the Table of AI Action Options;
 	[TODO: don't attack unless the chosen target deserves it? tweak weights]
 	decrease the Action Weight entry by 10;
 	if the current weapon of the angel of mercy is a natural weapon:
-		decrease the Action Weight entry by 10 [more].
+		decrease the Action Weight entry by 5;
+	unless the angel of mercy opposes the player:
+		[Angel of Mercy never attacks former allies]
+		decrease the Action Weight entry by 1000.
 		
 An AI action selection rule for an at-React person (called guy) (this is the defender uses gauntlet of attraction to get weapons rule):
 	if the guy wears the gauntlet of attraction:
@@ -3711,6 +3714,86 @@ Section - Angel of Mercy images for the map (for use with Kerkerkruip Glimmr Add
 The avatar of angel of mercy is Figure of map_monster_angel_of_mercy.
 The legend-label of angel of mercy is Figure of map_legend_angel_of_mercy.
 ]
+
+Section - Begging for Mercy
+
+Begging for mercy is an action applying to nothing.
+
+Understand "beg" as begging for mercy.
+
+Understand the commands "plead" or "petition" as "beg".
+
+Understand "beg [mercy]" and "beg for [mercy]" as begging for mercy.
+
+Understand "mercy" and "forgiveness" and "clemency" and "pardon" as "[mercy]".
+
+Understand "[mercy]" as the angel of mercy. [this is a shortcut so we don't have to create a separate object representing the concept of mercy rather than the person]
+
+Understand "beg [someone] for [something]" and "request [something] from/of [someone]" as asking it for.
+
+To heed is a verb.
+To grant is a verb.
+
+Check asking someone for something:
+	if the second noun is the angel of mercy:
+		if the noun is the angel of mercy:
+			instead try begging for mercy;
+		otherwise:
+			say "[The noun] [grant] you no mercy." instead;
+	if the noun is the angel of mercy and the angel of mercy actively opposes the player:
+		say "'All I can give you is mercy, or a quick death,' the angel of mercy replies." instead;
+	otherwise:
+		say "[The noun] [do not heed] your request." instead.
+		
+Generally asking for is an action applying to one thing. [This doesn't do much, but it helps to give a hint if you're in the room with the angel of mercy]
+
+Understand "ask for [something]" and "beg for [something]" and "request [something]" as generally asking for.
+
+Check generally asking for:
+	if the angel of mercy is in the location:
+		instead try asking the angel of mercy for the noun;
+	say "No one listens to your request." instead.
+
+Check begging for mercy:
+	unless the angel of mercy is in the location and the angel of mercy actively opposes the player:
+		say "No one listens to your plea." instead.		
+
+begging-count is a number that varies.
+
+Carry out hitting a friendly angel of mercy:
+	now begging-count is 10.
+
+The angel of mercy doesn't like attacking rule does nothing when begging-count > 3.
+
+Carry out begging for mercy:
+	say "You beg the angel to spare your life. [run paragraph on]";
+	if begging-count > 3:
+		say "[paragraph break]'I may be forgiving, but I am not a fool!' the angel hisses.";
+		rule succeeds;
+	let n be 3;
+	repeat with die roll running from 1 to (begging-count + 1) * 4:
+		increase n by a random number from 1 to the health of the player;
+	increment begging-count;
+	test the spirit of the player against n;
+	if test result is false:
+		say "The angel searches your face for sincere contrition, but [bold type]does not find it[roman type].[paragraph break]'I may lessen your pain, but I will not spare your life.' it says.";
+		rule succeeds;
+	say "The angel is [bold type]moved by[roman type] your humble plea![paragraph break]'I will spare you, then.' it says. 'But I will not fight your enemies.'";
+	now the Angel of Mercy is friendly;
+	Let item be the mercy-boon;
+	if item is a scroll:
+		identify item;
+	if item is a thing:
+		say "[line break]'Take this, child,' the angel commands you. 'Perhaps it will help you survive long enough to learn the error of your ways.' It places [bold type][an item][roman type] in your hands!";
+		now the player carries the item.
+
+To decide which thing is the mercy-boon:
+	Let boon-list be a list of things;
+	if the hand of glory is off-stage, add the hand of glory to boon-list;
+	if every scroll of afternoon delights is off-stage, add a random scroll of afternoon delights to boon-list;
+	if boon-list is empty, decide on nothing;
+	sort boon-list in random order;
+	decide on entry 1 in boon-list.
 
 Section - Prose
 

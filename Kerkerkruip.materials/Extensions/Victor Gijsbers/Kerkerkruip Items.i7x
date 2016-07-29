@@ -1331,7 +1331,7 @@ To try is a verb.
 To reach is a verb.
 
 The gauntlet of attraction is gauntlets. The indefinite article is "the".
-The gauntlet of attraction is radiance. The description is "This single gauntlet, made of [material of the gauntlet of attraction], encircles the hand with rings of powerful force. A weapon parried while wearing it may sometimes be captured from the attacker's grasp."
+The gauntlet of attraction is radiance. The description is "This single gauntlet encircles the hand with rings of powerful force. A weapon parried while wearing it may sometimes be captured from the attacker's grasp. However, anyone who wears the gauntlet without a weapon does much less damage in combat."
 
 [This phrase returns yes if the wearer of the gauntlet has the ability to steal weapons. It does not check if they parried successfully, or if they parried at all - that's done in the aftereffects.]
 
@@ -1369,6 +1369,10 @@ Report an actor parrying when the actor wears the gauntlet of attraction (this i
 		say "[The actor] [reach] out a gauntleted hand to stop [the loot].";
 		rule succeeds.
 	
+A specific damage multiplier rule when the global attacker wears the gauntlet of attraction (this is the gauntlet softens blows rule):
+	if damage-by-hitting is true and the global attacker weapon is a natural weapon:
+		multiply primary damage by 50 percent with reason "gauntlet softens blows".
+
 Chapter - Masks
 [Includes masks, goggles, and anything else that covers the face.]
 
