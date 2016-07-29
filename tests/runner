@@ -21,7 +21,9 @@ COLS=$(tput cols)
 while [ -f noninteractivetests ]
 do
   sleep 1
-  PROGRESS=$(grep 'Current progress:' testtranscript.glkdata | tail -n1)
+  TESTTRANSCRIPT=testtranscript
+  [ -f $TESTTRANSCRIPT ] || TESTTRANSCRIPT=testtranscript.glkdata
+  PROGRESS=$(grep 'Current progress:' $TESTTRANSCRIPT | tail -n1)
   tput rmam # disable line wrap
   printf "\r%-${COLS}s" "$PROGRESS" # print line, padded to the right with blank space, for the number of columns on the screen
   tput smam # enable line wrap
@@ -29,15 +31,15 @@ done
 
 # Output the full results
 echo -e '\n\n'
-sed -n '/Test results/,$p' testtranscript.glkdata > test-results
+sed -n '/Test results/,$p' $TESTTRANSCRIPT > test-results
 
 SUSPICIOUS_PATTERN="\\*\\*\\* Run-Time Problem |\\*\\*\\* Error on file |You can't reach into "
-if grep -q "$SUSPICIOUS_PATTERN" testtranscript.glkdata
+if grep -q "$SUSPICIOUS_PATTERN" $TESTTRANSCRIPT
 then
   echo >> test-results
   echo "Possible runtime issues found in test transcript:" >> test-results
   echo >> test-results
-  grep -n $SUSPICIOUS_PATTERN testtranscript.glkdata
+  grep -n $SUSPICIOUS_PATTERN $TESTTRANSCRIPT
 fi
 
 cat test-results
