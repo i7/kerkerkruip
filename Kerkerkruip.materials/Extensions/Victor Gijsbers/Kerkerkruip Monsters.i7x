@@ -2492,6 +2492,8 @@ Carry out the mindslug mindblasting:
 			if the concentration of the noun is greater than 0:
 				let the noun lose concentration;
 	now the concentration of the mindslug is 0.
+	
+[TODO: find out why Fafhrd and Mouser keep attacking a mindslug-enslaved NPC. I'm guessing because they haven't chosen new targets? Player was hidden when it happened... and if it hadn't happened, the fight test would have gone on forever... or was it because of faction manipulations?]
 		
 An AI target selection rule for a person (called target) when the running AI is the mindslug (this is the mindslug prefers low mind score rule):
 	decrease the Weight by the mind score of the target.
@@ -3372,7 +3374,7 @@ Status skill rule (this is the minotaur power status skill rule):
 
 Chapter - Level 3 - Angel of Mercy
 
-The angel of mercy is a neuter monster. "A [angel of mercy's form] presence[if Angel of Mercy is gargantuan and mercy-retreat-direction is a direction] spreads across the room, blocking every exit but [mercy-retreat-direction][otherwise] hovers before you[end if][angel of mercy equipment]."
+The angel of mercy is a neuter monster. "A [angel of mercy's form] presence [angel of mercy details]."
 
 To say angel of mercy's form:
 	if size of angel of mercy is:
@@ -3389,12 +3391,17 @@ To say angel of mercy's form:
 		-- 4: say "blinding";
 		-- otherwise: say "impossibly bright";
 
-To say angel of mercy equipment:
-	Let new-sentence be whether or not angel of mercy is gargantuan and mercy-retreat-direction is a direction;
+To say angel of mercy details:
+	let new-sentence be true;
+	if Angel of Mercy is gargantuan and mercy-retreat-direction is a direction:
+		say "spreads across the room[if the number of exit directions > 1], blocking every exit but [mercy-retreat-direction][end if]";
+	otherwise:
+		say "hovers before you";
+		now new-sentence is false;
 	if new-sentence is true:
 		say ". It ";
 	otherwise:
-		say ", and ";
+		say ",  ";
 	if the angel of mercy wears something:
 		say "wear[if new-sentence is true]s[otherwise]ing[end if] a glowing ";		
 	if the angel of mercy wears a shield:
@@ -3406,9 +3413,8 @@ To say angel of mercy equipment:
 	Let item be the current weapon of the angel of mercy;
 	if the item is an artificial weapon:
 		if the angel of mercy wears something:
-			say ", and wield[if new-sentence is true]s[otherwise]ing[end if]";
-		otherwise:
-			say "wield[if new-sentence is true]s[otherwise]ing[end if] [regarding the original owner of the item][possessive] [item]".
+			say ", and ";
+		say "wield[if new-sentence is true]s[otherwise]ing[end if] [regarding the original owner of the item][possessive] [item]".
 
 [TODO: say "blocking/guarding all passage/all exits except for ...]
 
@@ -3432,12 +3438,12 @@ The angel of Mercy is angelic.
 Angel of Mercy is flyer.
 Radiation of angel of Mercy is 0.
 
-The health of the angel of Mercy is 40.
-The melee of the angel of Mercy is 1.
-The defence of the angel of Mercy is 12.
+The health of the angel of Mercy is 45.
+The melee of the angel of Mercy is 0.
+The defence of the angel of Mercy is 9.
 
-The body score of the angel of mercy is 7.
-The mind score of the angel of mercy is 5.
+The body score of the angel of mercy is 8.
+The mind score of the angel of mercy is 4.
 The spirit score of the angel of mercy is 12.
 
 For natural weapon setup of the angel of mercy (this is the angel of mercy's nails rule):
@@ -3473,7 +3479,7 @@ The description of the gauntlets of grip is "These sturdy armoured gloves make i
 TODO: beg the Angel of mercy - roll a spirit check against (your health * 4) - if you succeed, the Angel gives you the Hand of Glory (lit) or the Scroll of Delights. If Scroll of Delights, the angel becomes your ally but doesn't attack...?
 ]
 
-Section - Stealing Weapons
+Section - Reactions and Stealing Weapons
 
 
 [TODO: transform all stolen weapons into size-agnostic radiant ones?]
@@ -3483,7 +3489,7 @@ Section - Stealing Weapons
 An AI action selection rule for the at-Act angel of mercy (this is the angel of mercy doesn't like attacking rule):
 	choose row with an Option of the action of the angel of mercy attacking the chosen target in the Table of AI Action Options;
 	[TODO: don't attack unless the chosen target deserves it? tweak weights]
-	decrease the Action Weight entry by 5;
+	decrease the Action Weight entry by 7;
 	if the current weapon of the angel of mercy is a natural weapon:
 		decrease the Action Weight entry by 5;
 	if the concentration of the chosen target is 0:
@@ -3502,16 +3508,15 @@ An AI action selection rule for an at-React person (called guy) (this is the def
 			now the Action Weight entry is 0;
 		if the gauntlet can steal the current weapon of the main actor for the guy:
 			increase the Action Weight entry by 10;
-			if the guy is the Angel of Mercy:
-				increase the Action Weight entry by 2;
 				
 The defender uses gauntlet of attraction to get weapons rule is listed after the standard defense against attack select rule in the AI action selection rules.
-
-An AI action selection rule for the at-React angel of mercy (this is the angel of mercy doesn't dodge when too big rule):
-	choose row with an Option of the angel of mercy dodging in the Table of AI Action Options;
-	decrease the Action Weight entry by the size number of the angel of mercy.
 	
 The size attack modifier rule does nothing when the global defender is the angel of mercy and the global defender is at parry. [TODO: generalize this!]
+
+An AI action selection rule for the at-React angel of mercy (this is the angel of mercy doesn't parry when too small rule):
+	Let n be the size number of the angel of mercy - 1;
+	choose row with an Option of the angel of mercy parrying in the Table of AI Action Options;
+	increase the Action Weight entry by n;
 
 Section - Making weapons mercy-compatible
 
@@ -3812,7 +3817,7 @@ To decide which thing is the mercy-boon:
 Section - Prose
 
 Report an actor hitting the dead angel of mercy:
-	say "The angel shinks to a pinpoint so bright you can't bear to look, then disappears completely!";
+	say "The angel shinks to a pinpoint so bright [if the player is using eyes]you can't bear to look[otherwise]you can feel the intensity[end if], then disappears completely!";
 	[TODO: blinds you when she dies? What about blind/eyeless viewers?]
 	rule succeeds.
 
@@ -3845,8 +3850,13 @@ Report the angel of mercy attacking:
 	rule succeeds.
 
 Report the angel of mercy dodging:
-	say "The angel shifts to avoid the attack.";
+	say "The angel [if the size of the angel of mercy is less than large]zips away[otherwise]shifts[end if] to avoid the attack.";
 	rule succeeds.
+
+Report the angel of mercy parrying:
+	Let item be the current weapon of the angel of mercy;
+	if item is not a natural weapon:
+		say "The angel parries with [regarding the original owner of the item][possessive][if the original owner of the item is the global attacker] own[end if] weapon.";
 
 Report the angel of mercy waiting:
 	if the angel of mercy is insane:

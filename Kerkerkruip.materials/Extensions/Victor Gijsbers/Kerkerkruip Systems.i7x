@@ -589,13 +589,14 @@ Section - Size and combat
 
 An attack modifier rule (this is the size attack modifier rule):
 	let n be the size number of the global defender;
-	if n < 0:
-		now n is 0 - n;
-		say " - [n] (defender [size of the global defender])[run paragraph on]";
-		decrease the attack strength by n;
 	if n > 0:
 		say " + [n] (defender [size of the global defender])[run paragraph on]";
 		increase the attack strength by n;
+	otherwise if n < 0:
+		now n is 0 - n;
+		say " - [n] (defender [size of the global defender])[run paragraph on]";
+		decrease the attack strength by n;
+
 
 [TODO: improve AI reaction selection based on effects - and consider taking away the size attack bonus when a big defender parries]
 

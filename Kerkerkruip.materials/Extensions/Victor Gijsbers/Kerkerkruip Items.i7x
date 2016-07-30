@@ -1331,20 +1331,18 @@ To try is a verb.
 To reach is a verb.
 
 The gauntlet of attraction is gauntlets. The indefinite article is "the".
-The gauntlet of attraction is radiance. The description is "This single gauntlet encircles the hand with rings of force. When the wearer is unarmed, it gives a -3 parry bonus and may sometimes capture the weapon it parries - but it also halves the damage done by the wearer's fist."
+The gauntlet of attraction is radiance. The description is "This single gauntlet encircles the hand with rings of force. When the wearer is unarmed, it gives a -2 parry bonus and may sometimes capture the weapon it parries - but it also halves the damage done by the wearer's fist."
 
 This is the gauntlet of attraction attack modifier rule:
 	if the global defender wears the gauntlet of attraction:
 		if the global defender is at parry:
 			if global defender weapon is a natural weapon:
-				let n be parry-with bonus of the global defender weapon;
-				now n is 0 - n;
-				if n < 0, now n is 0;
-				increase n by 3;
-				say " - [n] (gauntlet attracts weapons)[run paragraph on]";
-				decrease the attack strength by n.
+				say " - [2] (gauntlet attracts weapons)[run paragraph on]";
+				decrease the attack strength by 2.
 
 The gauntlet of attraction attack modifier rule substitutes for the gauntlet attack modifier rule when the global defender wears the gauntlet of attraction.
+
+The parry defence bonus rule does nothing when the global defender wears the gauntlet of attraction and the global defender weapon is a natural weapon.
 
 [This phrase returns yes if the wearer of the gauntlet has the ability to steal weapons. It does not check if they parried successfully, or if they parried at all - that's done in the aftereffects.]
 
@@ -1685,7 +1683,7 @@ Section - Shield of reflection (monster)
 
 The shield of reflection is a shield. The shield of reflection is radiance.
 
-The block bonus of the shield of reflection is 4. The description is "Lines of force radiate and spiral out from this [if the shield of reflection is radiance]radiant[end if] shield. It possesses the power to repel ranged attacks and reflect them back at the attacker."
+The block bonus of the shield of reflection is 3. The description is "Lines of force radiate and spiral out from this [if the shield of reflection is radiance]radiant[end if] shield. It possesses the power to repel ranged attacks and reflect them back at the attacker."
 
 The shield of reflection is size-agnostic.
 

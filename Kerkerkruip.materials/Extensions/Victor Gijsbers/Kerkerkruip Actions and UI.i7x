@@ -1310,28 +1310,30 @@ Carry out looking (this is the alternative room description heading rule):
 	say line break;
 	say run paragraph on with special look spacing;
 
+Definition: a direction (called way) is exit:
+	Let further place be the room way from the location;
+	unless further place is a room:
+		no;
+	if further place is nogo:
+		no;
+	yes.
+	
 Report looking (this is the room exits rule):
-	let count be 0;
-	repeat with way running through direction:
-		let further place be the room the way from the location;
-		if further place is a room and further place is not nogo:
-			increase count by 1;
+	let count be the number of exit directions;
 	if count is not 0:
 		if count is 1:
-			repeat with way running through direction:
-				let further place be the room the way from the location;
-				if further place is a room and further place is not nogo:
-					say "An exit leads [way][if further place is visited] (to [the further place])[end if].";
+			Let way be a random exit direction;
+			Let further place be the room way from the location;
+			say "An exit leads [way][if further place is visited] (to [the further place])[end if].";
 		otherwise:
 			say "Exits lead ";
-			repeat with way running through direction:
+			repeat with way running through exit directions:
 				let further place be the room the way from the location;
-				if further place is a room and further place is not nogo:
-					if count is greater than 1:
-						say "[way][if further place is visited] (to [the further place])[end if][if count is greater than 2],[end if] ";
-						decrease count by 1;
-					otherwise:
-						say "and [way][if further place is visited] (to [the further place])[end if].".
+				if count is greater than 1:
+					say "[way][if further place is visited] (to [the further place])[end if][if count is greater than 2],[end if] ";
+					decrease count by 1;
+				otherwise:
+					say "and [way][if further place is visited] (to [the further place])[end if].".
 	
 
 
