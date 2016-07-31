@@ -1358,6 +1358,8 @@ To decide whether the gauntlet can steal (item - an object) for (guy - a person)
 		no;
 	yes.
 
+A weapon has an object called the previous owner.
+
 An aftereffects rule (this is the gauntlet of attraction steals weapons rule):
 	Let the loot be whatever the global defender weapon struck;
 	If the gauntlet can steal the loot for the global defender:
@@ -1369,6 +1371,7 @@ An aftereffects rule (this is the gauntlet of attraction steals weapons rule):
 		test the body of the global attacker against the gripping-force;
 		if test result is false:
 			say " [The global defender] [bold type][wrest] [the loot] away[roman type] from [the global attacker]!";
+			now the previous owner of the loot is the global attacker;
 			now the global defender carries the loot;
 			now the loot is not readied;
 		otherwise:

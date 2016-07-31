@@ -3414,7 +3414,7 @@ To say angel of mercy details:
 	if the item is an artificial weapon:
 		if the angel of mercy wears something:
 			say ", and ";
-		say "wield[if new-sentence is true]s[otherwise]ing[end if] [regarding the original owner of the item][possessive] [item]".
+		say "wield[if new-sentence is true]s[otherwise]ing[end if] [the item]".
 
 [TODO: say "blocking/guarding all passage/all exits except for ...]
 
@@ -3437,8 +3437,9 @@ The Angel of Mercy is advanced.
 The angel of Mercy is angelic.
 Angel of Mercy is flyer.
 Radiation of angel of Mercy is 0.
+follower percentile chance of the angel of mercy is 0.
 
-The health of the angel of Mercy is 45.
+The health of the angel of Mercy is 46.
 The melee of the angel of Mercy is 0.
 The defence of the angel of Mercy is 9.
 
@@ -3489,7 +3490,7 @@ Section - Reactions and Stealing Weapons
 An AI action selection rule for the at-Act angel of mercy (this is the angel of mercy doesn't like attacking rule):
 	choose row with an Option of the action of the angel of mercy attacking the chosen target in the Table of AI Action Options;
 	[TODO: don't attack unless the chosen target deserves it? tweak weights]
-	decrease the Action Weight entry by 7;
+	decrease the Action Weight entry by 8;
 	if the current weapon of the angel of mercy is a natural weapon:
 		decrease the Action Weight entry by 5;
 	if the concentration of the chosen target is 0:
@@ -3582,6 +3583,9 @@ Aftereffects rule (this is the angel of mercy shrinks when hit rule):
 A reviving rule for the angel of mercy (this is the reviving angel of mercy rule):
 	now radiation of angel of mercy is 0;
 	now the size of angel of mercy is gargantuan;
+	now begging-count is 0;
+	now mercy-command-broken is false;
+	now mercy-wasted is false.
 	
 Section - Mercy for Runners
 
@@ -3648,6 +3652,7 @@ To have the angel of mercy damage (guy - a person) by obstruction:
 	increase D by the size number of the Angel of Mercy;
 	Let n be D + 10 + (a random number from 0 to final body of the player * 2 / 3);
 	test the body of the player against n;
+	[TODO: have Sul intervene?]
 	if test result is false:
 		deal D points of heat damage;
 	have the Angel of Mercy inflict damage on the player, silently.
@@ -3777,47 +3782,108 @@ Check begging for mercy:
 	unless the angel of mercy is in the location and the angel of mercy actively opposes the player:
 		say "No one listens to your plea." instead.		
 
+Check begging for mercy:
+	unless the angel of mercy opposes the player:
+		say "The angel is already on your side." instead.
+
 begging-count is a number that varies.
+mercy-wasted is a truth state that varies.
+mercy-command-broken is a truth state that varies;
 
-Carry out hitting a friendly angel of mercy:
-	now begging-count is 10.
+Carry out attacking when the angel of mercy is friendly:
+	break the angel of mercy's command;
+	if the angel of mercy is within the location:
+		if the angel of mercy is sleeping in this world:
+			now the angel of mercy is not asleep;
+			say "The angel of mercy is awoken by your act of aggression. It [run paragraph on]";
+		otherwise:
+			say "The angel of mercy [run paragraph on]";
+		say "sighs with disappointment. 'It is too bad. I had hoped to spare your life, but I see you are too in love with death. Let your death be the last one here, then.'";
+		alert the angel of mercy to betrayal.
 
-The angel of mercy doesn't like attacking rule does nothing when begging-count > 3.
+Last killing rule (this is the don't disappoint the angel of mercy rule):
+	if the player is not dead and angel of mercy is not dead:
+		if killer-guy is the player and the angel of mercy is friendly and the player and the angel of mercy share a world:
+			break the angel of mercy's command;
+			if the angel of mercy is sleeping in this world:
+				now the angel of mercy is not asleep;
+				if the location of the angel of mercy is the location:
+					say "The angel of mercy is startled awake by your act of murder! [run paragraph on]";
+			if the location of the angel of mercy is the location:
+				say "The angel of mercy sighs with disappointment, then fixes you with a cold stare.";
+			otherwise:
+				let way be the best route from the location to the location of the angel of mercy;
+				say "You hear a deep sigh of disappointment somewhere [if way is a direction][way][otherwise]in the dungeon[end if].";
+			alert the angel of mercy to betrayal.
+	
+To break the angel of mercy's command:
+	if mercy-command-broken is false:
+		say "Breaking the command of the angel of mercy costs you [bold type]5 spirit[roman type]!";
+		decrease the spirit score of the player by 5;
+		now mercy-command-broken is true.
+	
+To alert the angel of mercy to betrayal:	
+	now mercy-wasted is true;
+	now the angel of mercy is hostile;
+	now the angel of mercy is follower;
+	increase the follower percentile chance of the angel of mercy by 50;
+
+The angel of mercy doesn't like attacking rule does nothing when mercy-wasted is true.
 
 Carry out begging for mercy:
-	say "You beg the angel to spare your life. [run paragraph on]";
+	increment begging-count;
+	say "You beg the angel to spare your life[if begging-count is 2] a second time[otherwise if begging-count is 3] a third time[otherwise if begging-count > 3] yet again[end if]. [run paragraph on]";
+	if mercy-wasted is true:
+		say "[paragraph break]'A quick death is more than you deserve,' the angel replies coldly. 'I will grant you that, but no more.'";
+		rule succeeds;
 	if begging-count > 3:
 		say "[paragraph break]'I may be forgiving, but I am not a fool!' the angel hisses.";
 		rule succeeds;
-	let n be 3;
-	repeat with die roll running from 1 to (begging-count + 1) * 4:
+	let n be 6;
+	repeat with die roll running from 1 to begging-count:
 		increase n by a random number from 1 to the health of the player;
-	increment begging-count;
+	decrease n by the favour of the player with Sul;
 	test the spirit of the player against n;
-	if test result is false:
-		say "The angel searches your face for sincere contrition, but [bold type]does not find it[roman type].[paragraph break]'I may lessen your pain, but I will not spare your life.' it says.";
+	if test result is false:					
+		say "The angel searches your face for sincere contrition, but [bold type]does not find it[roman type].[paragraph break]'I may lessen your pain, but I will not spare your life.' it says.";						
 		rule succeeds;
-	say "The angel is [bold type]moved by[roman type] your humble plea![paragraph break]'I will spare you, then.' it says. 'But I will not fight your enemies.'";
+	say "The angel is [bold type]moved by[roman type] your humble plea! [run paragraph on]";
 	now the Angel of Mercy is friendly;
 	Let item be the mercy-boon;
 	if item is a scroll:
 		identify item;
-	if item is a thing:
-		say "[line break]'Take this, child,' the angel commands you. 'Perhaps it will help you survive long enough to learn the error of your ways.' It places [bold type][an item][roman type] in your hands!";
-		now the player carries the item.
+	if item is the angel of mercy:
+		say "'I will spare your life,' the angel says, 'and also, I will accompany you as a peaceful witness, and we shall harm no one.'";
+		now the angel of mercy is follower;
+		now the follower percentile chance of the angel of mercy is 100;
+	otherwise:
+		say "'I will spare your life, and you shall harm no one,' the angel says. 'Now take this. Perhaps it will help you survive long enough to learn the error of your ways.' It places [bold type][an item][roman type] in your hands!'";
+		now the player carries the item;
 
 To decide which thing is the mercy-boon:
 	Let boon-list be a list of things;
+	add the angel of mercy to boon-list;
 	if the hand of glory is off-stage, add the hand of glory to boon-list;
 	if every scroll of afternoon delights is off-stage, add a random scroll of afternoon delights to boon-list;
-	if boon-list is empty, decide on nothing;
 	sort boon-list in random order;
 	decide on entry 1 in boon-list.
+
+An absorption stopping rule (this is the you already got mercy rule):
+	if the test subject is the angel of mercy and mercy-wasted is true:
+		say "You are unable to absorb the soul of the angel of mercy! It seems you have already been granted mercy, and you have squandered it.";
+		rule succeeds.
+
+the you already got mercy rule is listed after the abyss of the soul absorbs all souls rule in the absorption stopping rules.
+
+An AI Action Selection rule for the angel of mercy (this is the angel doesn't concentrate when friendly rule):
+	if the angel of mercy is friendly:
+		Choose row with an option of the angel of mercy concentrating in the table of AI Action Options;
+		decrease the action weight entry by 100.
 
 Section - Prose
 
 Report an actor hitting the dead angel of mercy:
-	say "The angel shinks to a pinpoint so bright [if the player is using eyes]you can't bear to look[otherwise]you can feel the intensity[end if], then disappears completely!";
+	say "The angel shinks to a pinpoint so bright [run paragraph on][if the player is using eyes]you can't bear to look[otherwise]you can feel the intensity[end if], then disappears completely!";
 	[TODO: blinds you when she dies? What about blind/eyeless viewers?]
 	rule succeeds.
 
@@ -3833,7 +3899,7 @@ Report the angel of mercy concentrating:
 
 Report the angel of mercy attacking:
 	unless the actor is the noun:
-		say "'[if the health of the noun is less than 8]Your death will be quick and painless[otherwise]I bear you no ill will, but I shall defend my allies[end if],' the angel of mercy declares as it strikes out at [the noun].";
+		say "'[if the health of the noun is less than 8]Your death will be quick and painless[otherwise]I bear you no ill will, but I will stop you if I must[end if],' the angel of mercy declares as it strikes out at [the noun].";
 	otherwise:
 		Let the item be the current weapon of the angel of mercy;
 		if the item is a whip or the item is a staff or the item is a mace or the item is a hammer or the original material of the item is wood:
@@ -3856,13 +3922,14 @@ Report the angel of mercy dodging:
 Report the angel of mercy parrying:
 	Let item be the current weapon of the angel of mercy;
 	if item is not a natural weapon:
-		say "The angel parries with [regarding the original owner of the item][possessive][if the original owner of the item is the global attacker] own[end if] weapon.";
+		say "The angel parries with [regarding the previous owner of the item][possessive][if the previous owner of the item is the main actor] own[end if] weapon.";
+		rule succeeds.
 
 Report the angel of mercy waiting:
 	if the angel of mercy is insane:
 		say "[one of]The angel of mercy improvises a song that climaxes in the refrain 'Kill them all and let Sul sort them out!'[or]The angel of mercy declares, 'Never interrupt your enemy when [regarding the player][they]['re] in the middle of making a mistake!' and then slips on a banana peel to demonstrate.[at random]";
 	otherwise:
-		say "The angel of mercy waits for someone else to make a move.";
+		say "The angel of mercy waits[one of] for someone else to make a move[or] again, calm and alert[or], resting in meditation[or] patiently[or] peacefully[then at random].";
 	rule succeeds.
 
 
@@ -3903,16 +3970,25 @@ Status skill rule (this is the mercy status skill rule):
 	if the power of mercy is granted:
 		say "You have the power of mercy, which causes you to shrink in size and grow more radiant when hit.";
 		
+[
+The health of the angel of Mercy is 46.
+The melee of the angel of Mercy is 0.
+The defence of the angel of Mercy is 9.
+
+The body score of the angel of mercy is 8.
+The mind score of the angel of mercy is 4.
+The spirit score of the angel of mercy is 12.
+]
 Absorbing power of mercy:
 	increase melee of the player by 2;
 	increase defence of the player by 3;
-	increase permanent health of the player by 17;
-	say "As the angel dies, its generosity of spirit becomes yours. ([bold type]Power of mercy[roman type]: +2 attack, +3 defence, +17 health, shrink and become radiant when hit.)[paragraph break]";
+	increase permanent health of the player by 20;
+	say "As the angel dies, its generosity of spirit becomes yours. ([bold type]Power of mercy[roman type]: +2 attack, +3 defence, +20 health, shrink and become radiant when hit.)[paragraph break]";
 
 Repelling power of mercy:
 	decrease melee of the player by 2;
 	decrease defence of the player by 3;
-	decrease permanent health of the player by 17;
+	decrease permanent health of the player by 20;
 
 [TODO: flash command, radiation and shrinking effects]
 
@@ -3931,7 +4007,7 @@ Aftereffects rule (this is the mercy damage rule):
 				if hate is present:
 					now the size of the player is the size before previous-size;
 					say "You shrink to [bold type][size of the player][roman type] size!";
-					let n be 5 - total damage + a random number from 0 to 20;
+					let n be (a random number from 5 to 25) - total damage;
 					if n < 0, now n is 0;
 					test the spirit of the player against n;
 					if test result is true:
@@ -3940,16 +4016,6 @@ Aftereffects rule (this is the mercy damage rule):
 						increase the radiation of the player by 1;
 					otherwise:
 						say "Your spirit was not strong enough to increase your radiance this time.";
-[
-			if the global attacker is pardoned:
-				let n be (final spirit of the global defender) + 4;
-				test the spirit of the global attacker against n;
-				if test result is true:
-					say "[regarding the global attacker][Possessive] attack is righteous! [Their] spirit holds fast.";
-				otherwise:
-					say "[The global attacker] [are] shamed by [their] actions, and [diminish] in spirit.";
-					decrease spirit score of the global attacker by 1.
-]
 
 Every turn when mercy-radiation is not 0 (this is the revert back to normal radiance rule):
 	if combat status is peace:
@@ -3960,58 +4026,6 @@ Every turn when mercy-radiation is not 0 (this is the revert back to normal radi
 			say "With your mercy extinguished, you revert to [base-radiation] levels of radiance.";
 		now the radiation of the player is base-radiation;
 		now mercy-radiation is 0;
-
-[
-Section - Power of Mercy - Pardoning
-
-A person can be pardoned.
-
-[Instead, maintain concentration when hit by pardoned person?]
-
-A remove specific damage rule (this is the pardoning softens the blow rule):
-	if victim is the player and the power of mercy is granted:
-		[TODO: let the angel of mercy do this too? use this to reduce general damage, or add back health?]
-		if (damage-by-hitting is true) and (the global attacker is pardoned):
-			Let n be (final spirit of the victim) / 4;
-			remove n points of physical damage with reason "pardoning softens the blow".
-
-Status attribute rule (this is the pardon status rule):
-	now world test subject is the player;
-	if a worldsharer person is pardoned:
-		if long status is true:
-			say "You have [bold type]pardoned[roman type] [the list of pardoned people].[line break][run paragraph on]".
-
-Last carry out examining a pardoned person:
-	say "You have pardoned [the noun] for attacking you, and their ability to harm you is diminished.";
-
-Pardoning is an action applying to nothing. Understand "pardon" as pardoning.
-
-Check pardoning:
-	if the power of mercy is not granted:
-		take no time;
-		say "You do not possess that power." instead.
-
-Check pardoning:
-	if the player is not at-react:
-		take no time;
-		say "You can only pardon as a reaction." instead.
-		
-[TODO: pardon non-attackers like the abyss of the soul?]
-
-Check pardoning:
-	if the global attacker is pardoned:
-		take no time;
-		say "You have already pardoned [the global attacker]." instead.
-		
-Carry out pardoning:
-	now the global attacker is pardoned;
-	say "You pardon [the global attacker], and [their] ability to harm you is diminished."
-
-First carry out attacking:
-	if the global defender is pardoned:
-		say "You revoke your pardon, and strike back at the one who wronged you!";
-		now the global defender is not pardoned.
-]
 
 Chapter - Level 4 - Fanatics of Aite 
 
