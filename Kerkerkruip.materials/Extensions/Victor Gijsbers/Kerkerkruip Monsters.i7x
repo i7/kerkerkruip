@@ -3401,7 +3401,7 @@ To say angel of mercy details:
 	if new-sentence is true:
 		say ". It ";
 	otherwise:
-		say ",  ";
+		say ", ";
 	if the angel of mercy wears something:
 		say "wear[if new-sentence is true]s[otherwise]ing[end if] a glowing ";		
 	if the angel of mercy wears a shield:
@@ -3619,22 +3619,19 @@ Instead of the Angel of Mercy hitting a runner person (this is the Angel of Merc
 		if radiation of the Angel of Mercy is at least 1:
 			say "[paragraph break][The noun] [attempt] to get by without being burned. [run paragraph on]";
 			have the angel of mercy damage the noun by obstruction;
-			say " [run paragraph on]";
 		otherwise:
 			say "[paragraph break][The noun] [attempt] to get by.[paragraph break]";
-		if the angel of mercy obstructs the noun:
-			if the total damage is 0:
-				say "[The noun] [are] unhurt! Unfortunately, [they] [adapt the verb are in the past tense] unable to escape.[paragraph break]";
-			otherwise:
-				say "As [the noun] [get] too close, [the angel of mercy's body] [burns the noun with consequences][if the noun is alive] and prevents [their] escape[end if].[paragraph break]";
+		if the noun is dead:
+			if the noun is the player:
+				end the story saying "You ran into the flames and died.";
+		otherwise if the angel of mercy obstructs the noun:
+			say "[if test result is true]! [otherwise][paragraph break][end if]Unfortunately, [they] [adapt the verb are in the past tense] [bold type]unable to escape[roman type].[paragraph break]";
 			now the Angel of Mercy grapples the noun;
 		otherwise:
-			if the total damage is 0:
-				say "[The noun] [are] unhurt, and [they] [escape] as well!";
+			if test result is true:
+				say ", and [the noun] [bold type][escape][roman type] as well!";
 			otherwise:
-				say "As [the noun] [run] past, [the angel of mercy's body] [burns the noun with consequences][if the noun is alive]. But [they] escape anyway![otherwise].[end if][paragraph break]";
-			if the player is dead:
-				end the story saying "You ran into the flames and died.";
+				say "[paragraph break][The noun] [bold type][escape][roman type] anyway!";
 		now total damage is 0;
 
 Every turn when the Angel of Mercy grapples someone (called guy) (this is the Angel of Mercy lets go unless it's got your weapon rule):
@@ -3654,8 +3651,12 @@ To have the angel of mercy damage (guy - a person) by obstruction:
 	test the body of the player against n;
 	[TODO: have Sul intervene?]
 	if test result is false:
+		say " [The angel of mercy's body] [bold type]burns[roman type] [no dead property][the guy][dead property] for [run paragraph on]";
 		deal D points of heat damage;
-	have the Angel of Mercy inflict damage on the player, silently.
+		have the Angel of Mercy inflict damage on the player;
+		say "[burn consequences for the noun].[run paragraph on]";
+	otherwise:
+		say " [The guy] [are] unhurt[run paragraph on]";
 	
 [Damage range:
 
@@ -3668,6 +3669,9 @@ radiance	tiny	small	medium	large	huge
 ]
 
 To decide whether the angel of mercy obstructs (guy - a person):
+	if test result is false and the total damage is 0:
+		[Failed the body check for damage, but damage was 0... so player should fail at something!]
+		yes;
 	Let bulk be the size number of the Angel of Mercy + the size number of the guy;
 	Let target be the percent target for obstruction of guy by the angel of mercy;
 	Let B be final body of guy;
@@ -3706,22 +3710,22 @@ the 6th root of 5/6 is 0.9700701154458004
 
 ]
 		
-To say the angel of mercy's body:
+To say The angel of mercy's body:
 	if the size of the angel of mercy is at least huge:
-		say "its [size of the angel of mercy]";
+		say "The angel's [size of the angel of mercy]";
 		if the radiation of the angel of mercy is at least 1:
 			say ", scalding body";
 		otherwise:
 			say " body";
 	otherwise:
 		if the radiation of the angel of mercy is at least 4:
-			say "its white-hot body";
+			say "The angel's white-hot body";
 		otherwise if the radiation of the angel of mercy is at least 2:
-			say "its searing body";
+			say "The angel's searing body";
 		otherwise if the radiation of the angel of mercy is at least 1:
-			say "its scalding body";
+			say "The angel's scalding body";
 		otherwise:
-			say "its body".
+			say "The angel's body".
 			
 [
 player medium, angel huge, radiation 1 = 2 damage
@@ -3861,6 +3865,7 @@ Carry out begging for mercy:
 		now the player carries the item;
 
 To decide which thing is the mercy-boon:
+	[TODO: Tome of the brigtest flame! Add Arcane Vault to the dungeon?]
 	Let boon-list be a list of things;
 	add the angel of mercy to boon-list;
 	if the hand of glory is off-stage, add the hand of glory to boon-list;
@@ -5322,18 +5327,16 @@ An aftereffects rule (this is the Israfel's burning defence rule):
 			end the story saying "You will burn in Heaven.".
 
 To say burn (guy - a person) with consequences:
-	say "[bold type]burn[roman type] [no dead property][the guy][dead property] [burn consequences for guy][run paragraph on]";
+	say "[bold type]burn[roman type] [no dead property][the guy][dead property] for [bold type][total damage] damage[roman type][burn consequences for guy][run paragraph on]";
 
-To say burns (guy - a person) with consequences:
-	say "[bold type]burns[roman type] [no dead property][the guy][dead property] [burn consequences for guy][run paragraph on]";
-	
 [this phrase, unlike the damage consequences say phrase, does have side effects on concentration]
 To say burn consequences for (guy - a person):
 	if the guy is alive:
-		say "for [bold type][total damage] damage[roman type][if concentration of guy is not 0] (which breaks[regarding the guy][possessive] concentration)[end if][run paragraph on]";
-		now concentration of guy is 0;
+		if total damage > 0 and concentration of guy > 0:
+			say " (which breaks[regarding the guy][possessive] concentration)[run paragraph on]";
+			now concentration of guy is 0;
 	otherwise:
-		say "[bold type]to death[roman type][run paragraph on]".
+		say " [bold type]to death[roman type][run paragraph on]".
 	
 Section - Israfel prose
 

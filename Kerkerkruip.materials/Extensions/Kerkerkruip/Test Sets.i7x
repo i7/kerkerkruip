@@ -454,7 +454,7 @@ testing effects of aou-text:
 testing effects of angel-obstruct-burn:
 	if we assert that the location is Vast Staircase and the health of the player < 100, rule succeeds.
 testing effects of aob-text:
-	if we assert result "You attempt to get by without being burned. You roll \d+ \+ 6 \(body\) = \d+ against a target number of \d+, failing the body check\. As you get too close, its searing body burns you for \d+ damage and prevents your escape", rule succeeds.
+	if we assert result "You attempt to get by without being burned. You roll \d+ \+ 6 \(body\) = \d+ against a target number of \d+, failing the body check\. The angel's searing body burns you for 3 damage\.\n\nUnfortunately, you were unable to escape\.", rule succeeds.
 
 testing effects of angel-escape-unhurt:
 	if we assert that the health of the player is 100 and the location is not Vast Staircase, rule succeeds.
@@ -464,7 +464,7 @@ testing effects of aeu-text:
 testing effects of angel-escape-burn:
 	if the health of the player < 100 and the location is not Vast Staircase, rule succeeds.
 testing effects of aeb-text:
-	if we assert result  "You attempt to get by without being burned. You roll \d+ \+ 6 \(body\) = \d+ against a target number of \d+, failing the body check\. As you run past, its searing body burns you for \d+ damage. But you escape anyway!", rule succeeds.
+	if we assert result  "You attempt to get by without being burned. You roll \d+ \+ 6 \(body\) = \d+ against a target number of \d+, failing the body check\. The angel's searing body burns you for 3 damage\.\n\nYou escape anyway!", rule succeeds.
 
 Chapter - Retreating from the Tentacle
 
