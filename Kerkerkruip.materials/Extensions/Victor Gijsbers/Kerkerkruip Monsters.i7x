@@ -3498,9 +3498,6 @@ An AI action selection rule for the at-Act angel of mercy (this is the angel of 
 	if concentration of the angel of mercy is 3:
 		choose row with an Option of the action of the angel of mercy waiting in the Table of AI Action Options;
 		now action weight entry is 0;
-	if the angel of mercy is friendly:
-		[Angel of Mercy befriends the player, but doesn't attack former allies]
-		decrease the Action Weight entry by 1000.
 		
 An AI action selection rule for an at-React person (called guy) (this is the defender uses gauntlet of attraction to get weapons rule):
 	if the guy wears the gauntlet of attraction:
@@ -3681,7 +3678,7 @@ To decide whether the angel of mercy obstructs (guy - a person):
 To decide what number is the percent target for obstruction of (guy - a person) by the angel of mercy:
 	Let N be the size number of the Angel of Mercy + the size number of the guy;
 	[if we make this roll 6 times (body score of 6) we want a pretty linear rate of success]
-	if N is not greater than -2:
+	if N is at most -2:
 		decide on 74; [74% chance of failure on each roll, with 6 rolls it's about 1/6 chance of obstruction]
 	if N is -1:
 		decide on 83; [83% chance of failure]
@@ -3794,7 +3791,7 @@ begging-count is a number that varies.
 mercy-wasted is a truth state that varies.
 mercy-command-broken is a truth state that varies;
 
-Carry out attacking when the angel of mercy is friendly:
+Carry out attacking when the angel of mercy is merciful:
 	break the angel of mercy's command;
 	if the angel of mercy is within the location:
 		if the angel of mercy is sleeping in this world:
@@ -3807,7 +3804,7 @@ Carry out attacking when the angel of mercy is friendly:
 
 Last killing rule (this is the don't disappoint the angel of mercy rule):
 	if the player is not dead and angel of mercy is not dead:
-		if killer-guy is the player and the angel of mercy is friendly and the player and the angel of mercy share a world:
+		if killer-guy is the player and the angel of mercy is merciful and the player and the angel of mercy share a world:
 			break the angel of mercy's command;
 			if the angel of mercy is sleeping in this world:
 				now the angel of mercy is not asleep;
@@ -3852,7 +3849,7 @@ Carry out begging for mercy:
 		say "The angel searches your face for sincere contrition, but [bold type]does not find it[roman type].[paragraph break]'I may lessen your pain, but I will not spare your life.' it says.";						
 		rule succeeds;
 	say "The angel is [bold type]moved by[roman type] your humble plea! [run paragraph on]";
-	now the Angel of Mercy is friendly;
+	now the Angel of Mercy is merciful;
 	Let item be the mercy-boon;
 	if item is a scroll:
 		identify item;
@@ -3880,11 +3877,15 @@ An absorption stopping rule (this is the you already got mercy rule):
 
 the you already got mercy rule is listed after the abyss of the soul absorbs all souls rule in the absorption stopping rules.
 
-An AI Action Selection rule for the angel of mercy (this is the angel doesn't concentrate when friendly rule):
-	if the angel of mercy is friendly:
-		Choose row with an option of the angel of mercy concentrating in the table of AI Action Options;
-		decrease the action weight entry by 100.
+An AI Action Selection rule for a merciful person (called guy) (this is the merciful people don't concentrate rule):
+	Choose row with an option of the guy concentrating in the table of AI Action Options;
+	decrease the action weight entry by 100.
 
+An AI action selection rule for a merciful person (called guy) (this is the merciful people don't attack rule):
+	choose row with an Option of the guy attacking the chosen target in the Table of AI Action Options;
+	[Angel of Mercy befriends the player, but doesn't attack former allies]
+	decrease the Action Weight entry by 1000.
+		
 Section - Prose
 
 Report an actor hitting the dead angel of mercy:
@@ -3904,7 +3905,7 @@ Report the angel of mercy concentrating:
 
 Report the angel of mercy attacking:
 	unless the actor is the noun:
-		say "'[if the health of the noun is less than 8]Your death will be quick and painless[otherwise]I bear you no ill will, but I will stop you if I must[end if],' the angel of mercy declares as it strikes out at [the noun].";
+		say "'[if the health of the noun is less than 9]Your death will be quick and painless,' the angel of mercy declares as it[otherwise if the health of the noun is at least the permanent health of the noun]I bear you no ill will, but I will stop you if I must,' the angel of mercy declares as it[otherwise]The angel of mercy silently[end if] strikes out at [the noun].";
 	otherwise:
 		Let the item be the current weapon of the angel of mercy;
 		if the item is a whip or the item is a staff or the item is a mace or the item is a hammer or the original material of the item is wood:
@@ -3974,16 +3975,7 @@ power of mercy	spirit	--
 Status skill rule (this is the mercy status skill rule):
 	if the power of mercy is granted:
 		say "You have the power of mercy, which causes you to shrink in size and grow more radiant when hit.";
-		
-[
-The health of the angel of Mercy is 46.
-The melee of the angel of Mercy is 0.
-The defence of the angel of Mercy is 9.
 
-The body score of the angel of mercy is 8.
-The mind score of the angel of mercy is 4.
-The spirit score of the angel of mercy is 12.
-]
 Absorbing power of mercy:
 	increase melee of the player by 2;
 	increase defence of the player by 3;

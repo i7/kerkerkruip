@@ -408,123 +408,31 @@ Understand "tense [text]" as a mistake ("Tense can only be set to one of the fol
 
 Carry out tense-changing:
 	now the story tense is the grammatical tense understood;
-	say "[bracket]Story tense is now [the story tense].[close bracket]";
-	
-Section - Backup Stats
+	say "[bracket]Story tense is now [the story tense].[close bracket]";	
 
-Table of Backup Stats
-creature	true faction	location	weapon	body	mind	spirit	permanent health	melee	defence	radiation	creature material	weapon material	damage die	weapon damage	dodge	parry-against	parry-with
-a person	a faction	a room	a weapon	a number	a number	a number	a number	a number	a number	a number	a material	a material	a number	a number	a number	a number	a number
-with 20 blank rows.
-
-[TODO: make a rulebook for equipping all people, and run it in a reviving rule]
-
-To back up stats of (guy - a person), overriding previous backups:
-	if there is a creature of guy in Table of Backup Stats:
-		if overriding previous backups:
-			choose row with creature of guy in Table of Backup Stats;
-		otherwise:
-			stop;
-	otherwise:
-		choose a blank row in Table of Backup Stats;
-		now creature entry is guy;
-	now true faction entry is original faction of guy;
-	now location entry is location of guy;
-	now weapon entry is the current weapon of guy;
-	if weapon entry is nothing, now weapon entry is a random natural weapon enclosed by guy;
-	now body entry is the body score of guy;
-	now mind entry is the mind score of guy;
-	now spirit entry is the spirit score of guy;
-	now permanent health entry is permanent health of guy;
-	now melee entry is melee of guy;
-	now defence entry is defence of guy;
-	now radiation entry is radiation of guy;
-	now creature material entry is material of guy;
-	now weapon material entry is material of weapon entry;
-	now damage die entry is damage die of weapon entry;
-	now weapon damage entry is weapon damage bonus of weapon entry;
-	now dodge entry is dodge bonus of weapon entry;
-	now parry-against entry is parry-against bonus of weapon entry;
-	now parry-with entry is parry-with bonus of weapon entry;
-	
-A reviving rule for a person (called guy) (this is the restore stats when reviving rule):
-	unless there is a creature of guy in Table of Backup Stats, make no decision;
-	choose row with creature of guy in Table of Backup Stats;
-	if the fight count is 0:
-		[don't reset factions during a fighttest]
-		now original faction of guy is true faction entry;
-		now faction of guy is original faction of guy;
-	Repeat with item running through weapons wielded by guy:
-		now item is not readied;
-	If weapon entry is not a natural weapon:
-		[TODO: what if the weapon is in the dungeon? Use shimmer-weapon?]
-		now guy carries weapon entry;
-	now weapon entry is readied;
-	now the body score of guy is body entry;
-	now the mind score of guy is mind entry;
-	now the spirit score of guy is spirit entry;
-	now permanent health of guy is permanent health entry;
-	now melee of guy is melee entry;
-	now defence of guy is defence entry;
-	now radiation of guy is radiation entry;
-	now material of guy is creature material entry;
-	now damage die of weapon entry is damage die entry;
-	now weapon damage bonus of weapon entry is weapon damage entry;
-	now dodge bonus of weapon entry is dodge entry;
-	now parry-against bonus of weapon entry is parry-against entry;
-	now parry-with bonus of weapon entry is parry-with entry;
-	
-To restore loyalties and locations:
-	Repeat through Table of Backup Stats:
-		if the creature entry is dead, next;
-		now the original faction of creature entry is true faction entry;
-		now the faction of creature entry is true faction entry;
-		extract the creature entry from combat;
-		if the location entry is nothing:
-			remove the creature entry from play;
-		otherwise:
-			move the creature entry to the location entry.
-			
 To revive (guy - a person) fighting for (side - a faction), with group:
-	back up stats of the guy;
+	[back up stats of the guy;]
 	follow the reviving rules for guy;
 	now the faction of the guy is side;
+	if the guy is the mindslug:
+		repeat with X running through factions:
+			unless X is mindslug-enslaved:
+				now X does not hate mindslug-enslaved;
+				now mindslug-enslaved does not hate X;
+				if X hates side:
+					now X hates mindslug-enslaved;
+				if side hates X:
+					now mindslug-enslaved hates X;
 	now the original faction of the guy is side;
 	if with group:
 		repeat with follower running through people who accompany guy:
 			revive follower fighting for side;
 
-Requesting backup stats is an action out of world applying to nothing. Understand "backups" as requesting backup stats.
-
-Carry out requesting backup stats:
-	say "The following monsters have backup data saved:[paragraph break]";
-	repeat through the table of Backup Stats:
-		say "[creature entry]:[line break]";
-		say "  faction: [true faction entry][line break]";
-		say "  location: [location entry][line break]";
-		say "  body score: [body entry][line break]";
-		say "  mind score: [mind entry][line break]";
-		say "  spirit score: [spirit entry][line break]";
-		say "  permanent health: [permanent health entry][line break]";
-		say "  attack strength: [melee entry][line break]";
-		say "  defence: [defence entry][line break]";
-		say "  radiance: [radiation entry][line break]";
-		say "  material: [creature material entry][line break]";
-		say "  [weapon entry] material: [weapon material entry][line break]";
-		say "  [weapon entry] damage: 1d[damage die entry] + [weapon damage entry][line break]";
-		say "  [weapon entry] parry-against: [parry-against entry][line break]";
-		say "  [weapon entry] parry-with: [parry-with entry][line break]";
-		say line break.
-
-Backing up is an action out of world applying to one visible thing. Understand "backup [any person]" as backing up.
-
-Carry out backing up:
-	back up stats of the noun, overriding previous backups.
-	
-Report backing up:
-	say "Backed up stats of [the noun].";
+[TODO: don't change mouser and fafhrd to arena-faction in Arena of the Fallen?]
 	
 Section - Test Battles
+
+
 
 battling is an action applying to one visible thing. Understand "battle [any person]" as battling.
 
@@ -554,22 +462,52 @@ To appear is a verb. To join is a verb.
 Report recruiting:
 	say "[The list of friendly npc people in the location] [appear], and [join] the friendly faction.";
 	
-fight-testing is an action applying to two visible things. Understand "fighttest [any person] vs [any person]" as fight-testing.
+Section - Automated Fight Tests
 
-fight-testing is bypassing-scope.
+The file of fight challenger (owned by another project) is called "fightchallenger".
+The file of fight champion (owned by another project) is called "fightchampion".
+
+Automated fight test is a truth state that varies.
+running a fight test is a truth state that varies.
+
+Before showing the title screen (this is the check for fight test rule):
+	if the file of fight challenger exists:
+		now automated fight test is true;
+		if screen reader mode is unset:
+			enable screen reader mode;
+		now roguelike mode is false.
+		
+The check for fight test rule is listed before the load achievements rule in the before showing the title screen rules.
+			
+First for showing the title screen when automated fight test is true:
+	do nothing.
+	
+First after showing the title screen (this is the set up fight test rule):
+	transcribe and stop capturing because "fight test";
+	now allowing screen effects is false;
+	start capturing text;
+	now generation info is true;
+
+[Prevent the status window from opening]
+The check info panel capacity rule does nothing when automated fight test is true.
+
+[Prevent manually selected test objects from appearing]
+The mark test objects from file rule does nothing when automated fight test is true.
+
+fight-testing it against is an action applying to two visible things. Understand "fighttest [any person] vs [any person]" as fight-testing it against.
+
+fight-testing something against is bypassing-scope.
 
 The test-champion is a person variable.
 The test-challenger is a person variable.
-The fight count is a number variable.
+[The fight count is a number variable.]
 The champion's initial defeats is a number variable.
 The challenger's initial defeats is a number variable.
 
-Carry out fight-testing:
+Carry out fight-testing someone against someone:
 	now the test-champion is the noun;
 	now the test-challenger is the second noun;
-	back up stats of the test-champion;
-	back up stats of the test-challenger;
-	now the fight count is 100;
+	now running a fight test is true;
 	say "Fight details are being recorded in testtranscript.glkdata";
 	start capturing text;
 	try sneaking;
@@ -585,33 +523,50 @@ To decide what number is the champion's defeats:
 To decide what number is the challenger's defeats:
 	decide on the died count of the test-challenger - the challenger's initial defeats.
 	
-Report fight-testing:
+Report fight-testing something against something:
 	say "[italic type]When it came time to fight I thought, 'I'll just step aside'[line break] - The Flaming Lips, 'Fight Test'[roman type][paragraph break]"
 	
-For taking a player action when the fight count is at least 1 (this is the let test combatants fight rule):
-	update the event description;
-	now the health of the player is 1000;
-	if the combat status is not peace and (the number of friendly soul-granting people in the location is at least 1):
+For taking a player action when automated fight test is true (this is the start automated fight test rule):	
+	update the event description because "starting automated fight test";
+	Let challenger be the player;
+	Let champion be the player;
+	Let challenger-text be "[text of file of fight challenger]";
+	Let champion-text be "[text of file of fight champion]";
+	repeat with guy running through people:
+		if challenger-text is the printed name of guy:
+			now challenger is guy;
+		if champion-text is the printed name of guy:
+			now champion is guy;
+	if champion is the player:
+		append "Fight test champion is not allowed to be the player. '[champion-text]' probably didn't match any monster names[line break]ERROR" to file of test transcript;
+		stop the game abruptly;
+	if challenger is the player:
+		append "Fight test challenger is not allowed to be the player. '[challenger-text]' probably didn't match any monster names[line break]ERROR" to file of test transcript;
+		stop the game abruptly;
+	try fight-testing champion against challenger.
+		
+For taking a player action when running a fight test is true (this is the let test combatants fight rule):
+	update the event description because "letting test combatants fight";
+	now the health of the player is 1000;	
+	now opposition test subject is the player;
+	if the combat status is not peace and (the number of not opposer people in the location is at least 2):
 		[continue the fight]
 		rule succeeds;
-	decrement the fight count;
-	Let the total kills be the champion's defeats + the challenger's defeats;
-	if the fight count is 0:
-		log "In 100 fights, [The test-champion] was killed [the champion's defeats] times and [the test-challenger] was killed [the challenger's defeats] times.";
-		[TODO: reset died and kill counts? Can it be done for groups?]
-		now the Test Arena is not challenged-group-inviting;
-		transcribe and stop capturing;
-		restore loyalties and locations;
-		make no decision;
-	log "With [fight count] fights left, [the test-champion] was killed [the champion's defeats] times and [the test-challenger] was killed [the challenger's defeats] times.";
-	Repeat with guy running through npc people in Test Arena:
-		say "Removing [the guy] from Test Arena.";
-		extract the guy from combat;
-		remove the guy from play;
-	try battling the test-challenger;
-	try recruiting the test-champion;
+	append "Fight concluded. The winner is:[line break]" to file of test transcript;
+	if the champion's defeats is 0 and the number of not opposer people in the location is at least 2:
+		append "[test-champion]" to file of test transcript;
+	otherwise if the challenger's defeats is 0 and the number of opposer people in the location is at least 1:
+		append "[test-challenger]" to file of test transcript;
+	otherwise:
+		append "nobody" to file of test transcript;
+	if automated fight test is true:
+		stop the game abruptly;
+	otherwise:
+		now running a fight test is false.
 
-The let test combatants fight rule is listed before the compel player attack rule in the for taking a player action rulebook.
+The start automated fight test rule is listed before the compel player attack rule in the for taking a player action rulebook.
+
+The let test combatants fight rule is listed before the start automated fight test rule in the for taking a player action rulebook.
 
 Section - Died and Kill Stats
 

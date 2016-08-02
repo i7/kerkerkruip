@@ -56,6 +56,7 @@ Chapter - New factions
 undead-faction is a faction.
 horrific-faction is a faction.
 mindslug-enslaved is a faction.
+merciful is a faction.
 player-enslaved is a faction.
 insane is a faction.
 arena-faction is a faction.
@@ -78,8 +79,10 @@ When play begins (this is the set factions rule):
 			now X hates undead-faction;
 		if friendly hates X:
 			now player-enslaved hates X;
+			now merciful hates X;
 		if X hates friendly:
-			now X hates player-enslaved.
+			now X hates player-enslaved;
+			now X hates merciful;
 
 [And now some stuff we need because horrors might attack themselves.]
 

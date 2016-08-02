@@ -1,0 +1,52 @@
+#!/bin/sh
+
+if [ $# -ne 2 ]
+then
+  echo "Usage: $0 CHAMPION CHALLENGER";
+  exit 1
+fi
+CHAMPION=$1
+CHALLENGER=$2
+rm -f test*
+printf "* //KerkerkruipScripts// fightchallenger\n$CHALLENGER" > fightchallenger
+printf "* //KerkerkruipScripts// fightchampion\n$CHAMPION" > fightchampion
+for DATAFILE in fightchallenger fightchampion
+do
+  cp $DATAFILE ${DATAFILE}.glkdata
+done
+
+TIMESTAMP=$(date "+%Y-%m-%d-%H%M%S")
+FIGHT_COUNT=100
+[ -f tmp.log ] && rm tmp.log
+echo "$TIMESTAMP: Running $FIGHT_COUNT fights between $CHAMPION and $CHALLENGER..."
+for i in $(seq $FIGHT_COUNT)
+do
+  COLS=$(tput cols)
+  ../i7/bin/dumb-git -w $COLS ../Kerkerkruip.inform/Build/output.ulx >tmp.out
+  SCRIPT=testtranscript
+  [ -f $SCRIPT ] || SCRIPT=testtranscript.glkdata
+  WINNER=$(tail -n1 $SCRIPT)
+  if [ "$WINNER" = "ERROR" ]
+  then
+    echo "Fight fail! $(tail -n2 $SCRIPT | head -n1) - Details in $SCRIPT"
+    exit 1
+  fi
+  [ -d transcripts ] || mkdir transcripts
+  mv $SCRIPT "transcripts/$TIMESTAMP-$i.transcript"
+  echo "Fight test $TIMESTAMP-$i [$CHAMPION] vs [$CHALLENGER] winner: $WINNER" >> tmp.log
+
+  CHALLENGER_WINS=$(egrep -c ": $CHALLENGER\$" tmp.log)
+  CHAMPION_WINS=$(egrep -c ": $CHAMPION\$" tmp.log)
+  tput rmam # disable line wrap
+  PROGRESS="Fight $i winner: $WINNER ($CHAMPION: $CHAMPION_WINS, $CHALLENGER: $CHALLENGER_WINS)"
+  printf "\r%-${COLS}s" "$PROGRESS" # print line padded to the right with blanks
+  tput smam # enable line wrap
+done
+
+echo "Fight test $TIMESTAMP summary: in $FIGHT_COUNT fights, $CHALLENGER won $CHALLENGER_WINS times, $CHAMPION won $CHAMPION_WINS times" >> tmp.log
+
+tail -n1 tmp.log
+cat tmp.log >> fighttest.log
+rm tmp.log fightchallenger* fightchampion*
+
+
