@@ -3441,7 +3441,7 @@ follower percentile chance of the angel of mercy is 0.
 
 The health of the angel of Mercy is 46.
 The melee of the angel of Mercy is 0.
-The defence of the angel of Mercy is 9.
+The defence of the angel of Mercy is 10.
 
 The body score of the angel of mercy is 8.
 The mind score of the angel of mercy is 4.
@@ -3491,7 +3491,7 @@ An AI action selection rule for the at-Act angel of mercy (this is the angel of 
 	choose row with an Option of the action of the angel of mercy attacking the chosen target in the Table of AI Action Options;
 	[TODO: don't attack unless the chosen target deserves it? tweak weights]
 	decrease the Action Weight entry by 8;
-	if the current weapon of the angel of mercy is a natural weapon:
+	if the current weapon of the angel of mercy is a natural weapon and the angel of mercy wears the gauntlet of attraction:
 		decrease the Action Weight entry by 5;
 	if the concentration of the chosen target is 0:
 		decrease the Action Weight entry by 5;
@@ -3499,6 +3499,12 @@ An AI action selection rule for the at-Act angel of mercy (this is the angel of 
 		choose row with an Option of the action of the angel of mercy waiting in the Table of AI Action Options;
 		now action weight entry is 0;
 		
+An AI action selection rule for the at-Act angel of mercy (this is the angel of mercy attacks more when attacked rule):
+	choose row with an Option of the action of the angel of mercy attacking the chosen target in the Table of AI Action Options;
+	increase the Action Weight entry by the radiation of the Angel of Mercy;
+	Let n be the permanent health of the Angel of Mercy - the health of the angel of mercy;
+	increase the Action Weight entry by (n + 5) / 10;
+
 An AI action selection rule for an at-React person (called guy) (this is the defender uses gauntlet of attraction to get weapons rule):
 	if the guy wears the gauntlet of attraction:
 		choose row with an Option of the guy parrying in the Table of AI Action Options;
@@ -3515,6 +3521,12 @@ An AI action selection rule for the at-React angel of mercy (this is the angel o
 	Let n be the size number of the angel of mercy - 1;
 	choose row with an Option of the angel of mercy parrying in the Table of AI Action Options;
 	increase the Action Weight entry by n;
+	
+An AI action selection rule for the angel of mercy (this is the angel of mercy's gloves come off rule):
+	if the current weapon of the angel of mercy is a natural weapon and the angel of mercy wears the gauntlet of attraction and the size number of the angel of mercy < 2:
+		choose a blank row in the Table of AI Action Options;
+		now the Option entry is the action of the angel of mercy taking off the gauntlet of attraction;
+		now the Action Weight entry is -2 * the size number of the angel of mercy.
 
 Section - Making weapons mercy-compatible
 
@@ -3589,6 +3601,8 @@ Section - Mercy for Runners
 To run is a verb.
 To escape is a verb.
 
+The obstructed runner is an object that varies.
+
 To decide what object is mercy-retreat-direction:
 	Let way be the best route from the location to the retreat location;
 	if the way is a direction, decide on the way;
@@ -3610,7 +3624,7 @@ Instead of the Angel of Mercy hitting a runner person (this is the Angel of Merc
 	say "The Angel of Mercy cries out, 'Do not pass!' and moves to block [regarding the noun][possessive] escape.[run paragraph on]";
 	if the Angel of Mercy is gargantuan:
 		say "[run paragraph on] [The noun] [attempt] to get by, but the angel is just too big.[paragraph break]";
-		now the angel of mercy grapples the noun;
+		now the obstructed runner is the noun;
 	otherwise:
 		now the total damage is 0;
 		if radiation of the Angel of Mercy is at least 1:
@@ -3623,7 +3637,7 @@ Instead of the Angel of Mercy hitting a runner person (this is the Angel of Merc
 				end the story saying "You ran into the flames and died.";
 		otherwise if the angel of mercy obstructs the noun:
 			say "[if test result is true]! [otherwise][paragraph break][end if]Unfortunately, [they] [adapt the verb are in the past tense] [bold type]unable to escape[roman type].[paragraph break]";
-			now the Angel of Mercy grapples the noun;
+			now the obstructed runner is the noun;
 		otherwise:
 			if test result is true:
 				say ", and [the noun] [bold type][escape][roman type] as well!";
@@ -3631,10 +3645,12 @@ Instead of the Angel of Mercy hitting a runner person (this is the Angel of Merc
 				say "[paragraph break][The noun] [bold type][escape][roman type] anyway!";
 		now total damage is 0;
 
-Every turn when the Angel of Mercy grapples someone (called guy) (this is the Angel of Mercy lets go unless it's got your weapon rule):
-	[TODO: unless the Angel of Mercy wears the gauntlet of attraction and the gauntlet's prize is the current weapon of guy:]
-	now the Angel of Mercy does not grapple guy.
+An impeded movement rule (this is the obstruction impedes movement rule):
+	if the test subject is the obstructed runner:
+		rule fails.
 
+Every turn (this is the free the obstructed runner rule):
+	now the obstructed runner is nothing.
 
 [TODO: what about digging? maybe damage but not obstruction?]
 
