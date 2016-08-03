@@ -3441,7 +3441,7 @@ follower percentile chance of the angel of mercy is 0.
 
 The health of the angel of Mercy is 46.
 The melee of the angel of Mercy is 0.
-The defence of the angel of Mercy is 10.
+The defence of the angel of Mercy is 11.
 
 The body score of the angel of mercy is 8.
 The mind score of the angel of mercy is 4.
@@ -3546,6 +3546,23 @@ An AI action selection rule for the angel of mercy (this is the angel of mercy's
 			if ranged-count is 0:
 				increase n by 2;
 		now the Action Weight entry is n.
+		
+An AI action selection rule for the angel of mercy (this is the angel of mercy puts the gauntlet back on rule):
+	if the angel of mercy carries the gauntlet of attraction and the size number of the angel of mercy > 0:
+		Let weapon-count be 0;
+		now opposition test subject is the angel of mercy;
+		repeat with guy running through opposer people in the location:
+			Let item be the current weapon of guy;
+			if item is a hand-to-hand artificial weapon:
+				increase weapon-count by 1;
+				if the concentration of guy > 0:
+					increase weapon-count by 1;
+		if weapon-count is at least 1:
+			choose a blank row in the Table of AI Action Options;
+			now the Option entry is the action of the angel of mercy wearing the gauntlet of attraction;
+			let n be the size number of the angel of mercy;
+			now the Action Weight entry is n + weapon-count - 3;
+			
 
 Section - Making weapons mercy-compatible
 
