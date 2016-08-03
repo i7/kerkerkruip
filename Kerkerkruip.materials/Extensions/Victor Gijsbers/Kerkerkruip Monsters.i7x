@@ -3490,20 +3490,24 @@ Section - Reactions and Stealing Weapons
 An AI action selection rule for the at-Act angel of mercy (this is the angel of mercy doesn't like attacking rule):
 	choose row with an Option of the action of the angel of mercy attacking the chosen target in the Table of AI Action Options;
 	[TODO: don't attack unless the chosen target deserves it? tweak weights]
-	decrease the Action Weight entry by 8;
+	decrease the Action Weight entry by 10;
 	if the current weapon of the angel of mercy is a natural weapon and the angel of mercy wears the gauntlet of attraction:
 		decrease the Action Weight entry by 5;
 	if the concentration of the chosen target is 0:
-		decrease the Action Weight entry by 5;
+		Let T be the tension / 3;
+		if T > 5, now T is 5;
+		decrease the Action Weight entry by 5 - T;
 	if concentration of the angel of mercy is 3:
 		choose row with an Option of the action of the angel of mercy waiting in the Table of AI Action Options;
 		now action weight entry is 0;
 		
 An AI action selection rule for the at-Act angel of mercy (this is the angel of mercy attacks more when attacked rule):
 	choose row with an Option of the action of the angel of mercy attacking the chosen target in the Table of AI Action Options;
-	increase the Action Weight entry by the radiation of the Angel of Mercy;
-	Let n be the permanent health of the Angel of Mercy - the health of the angel of mercy;
-	increase the Action Weight entry by (n + 5) / 10;
+	Let r be the radiation of the Angel of Mercy;
+	Let h be the permanent health of the Angel of Mercy - the health of the angel of mercy;
+	Let n be (h + 4) / 5	 + (r * 2);
+	if n > 10, now n is 10;
+	increase the Action Weight entry by n;
 
 An AI action selection rule for an at-React person (called guy) (this is the defender uses gauntlet of attraction to get weapons rule):
 	if the guy wears the gauntlet of attraction:
@@ -3523,10 +3527,25 @@ An AI action selection rule for the at-React angel of mercy (this is the angel o
 	increase the Action Weight entry by n;
 	
 An AI action selection rule for the angel of mercy (this is the angel of mercy's gloves come off rule):
-	if the current weapon of the angel of mercy is a natural weapon and the angel of mercy wears the gauntlet of attraction and the size number of the angel of mercy < 2:
+	if the current weapon of the angel of mercy is a natural weapon and the angel of mercy wears the gauntlet of attraction:
+		Let weapon-count be 0;
+		Let ranged-count be 0;
+		now opposition test subject is the angel of mercy;
+		repeat with guy running through opposer people in the location:
+			if the gauntlet can steal current weapon of guy for the angel of mercy:
+				increase weapon-count by 1;
+			otherwise if current weapon of guy is ranged:
+				increase ranged-count by 1;
+		if weapon-count is at least 1 and the size number of the angel of mercy > 0:
+			make no decision;
 		choose a blank row in the Table of AI Action Options;
 		now the Option entry is the action of the angel of mercy taking off the gauntlet of attraction;
-		now the Action Weight entry is -2 * the size number of the angel of mercy.
+		let n be -1 * the size number of the angel of mercy;
+		if weapon-count is 0:
+			if n < 0, now n is 0;
+			if ranged-count is 0:
+				increase n by 2;
+		now the Action Weight entry is n.
 
 Section - Making weapons mercy-compatible
 
@@ -3921,7 +3940,7 @@ Report the angel of mercy concentrating:
 
 Report the angel of mercy attacking:
 	unless the actor is the noun:
-		say "'[if the health of the noun is less than 9]Your death will be quick and painless,' the angel of mercy declares as it[otherwise if the health of the noun is at least the permanent health of the noun]I bear you no ill will, but I will stop you if I must,' the angel of mercy declares as it[otherwise]The angel of mercy silently[end if] strikes out at [the noun].";
+		say "[if the health of the noun is less than 11]'Your death will be quick and painless,' the angel of mercy declares as it[otherwise if the health of the noun is at least the permanent health of the noun]'I bear you no ill will, but I will stop you if I must,' the angel of mercy declares as it[otherwise]The angel of mercy silently[end if] strikes out at [the noun].";
 	otherwise:
 		Let the item be the current weapon of the angel of mercy;
 		if the item is a whip or the item is a staff or the item is a mace or the item is a hammer or the original material of the item is wood:
