@@ -274,7 +274,7 @@ Before looking or taking inventory (this is the reset disambiguation IDs rule):
 Section - Auto-transcript while testing (not for release)
 
 Last when play begins (this is the switch story transcript on rule):
-	if text capturing is active, make no decision;
+	if text capturing is active or automated fight test is true, make no decision;
 	try switching the story transcript on;
 	try asking status;
 	try taking inventory;

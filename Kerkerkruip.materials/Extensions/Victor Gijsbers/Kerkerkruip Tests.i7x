@@ -410,26 +410,6 @@ Carry out tense-changing:
 	now the story tense is the grammatical tense understood;
 	say "[bracket]Story tense is now [the story tense].[close bracket]";	
 
-To revive (guy - a person) fighting for (side - a faction), with group:
-	[back up stats of the guy;]
-	follow the reviving rules for guy;
-	now the faction of the guy is side;
-	if the guy is the mindslug:
-		repeat with X running through factions:
-			unless X is mindslug-enslaved:
-				now X does not hate mindslug-enslaved;
-				now mindslug-enslaved does not hate X;
-				if X hates side:
-					now X hates mindslug-enslaved;
-				if side hates X:
-					now mindslug-enslaved hates X;
-	now the original faction of the guy is side;
-	if with group:
-		repeat with follower running through people who accompany guy:
-			revive follower fighting for side;
-
-[TODO: don't change mouser and fafhrd to arena-faction in Arena of the Fallen?]
-	
 Section - Test Battles
 
 
@@ -461,7 +441,28 @@ To appear is a verb. To join is a verb.
 
 Report recruiting:
 	say "[The list of friendly npc people in the location] [appear], and [join] the friendly faction.";
+
+To revive (guy - a person) fighting for (side - a faction), with group:
+	[back up stats of the guy;]
+	follow the reviving rules for guy;
+	now the faction of the guy is side;
+	if the guy is the mindslug:
+		repeat with X running through factions:
+			unless X is mindslug-enslaved:
+				now X does not hate mindslug-enslaved;
+				now mindslug-enslaved does not hate X;
+				if X hates side:
+					now X hates mindslug-enslaved;
+				if side hates X:
+					now mindslug-enslaved hates X;
+	now the original faction of the guy is side;
+	if with group:
+		repeat with follower running through people who accompany guy:
+			revive follower fighting for side;
+
+[TODO: don't change mouser and fafhrd to arena-faction in Arena of the Fallen?]
 	
+
 Section - Automated Fight Tests
 
 The file of fight challenger (owned by another project) is called "fightchallenger".
@@ -534,10 +535,10 @@ For taking a player action when automated fight test is true (this is the start 
 		if champion-text is the printed name of guy:
 			now champion is guy;
 	if champion is the player:
-		say "Fight test champion is not allowed to be the player. '[champion-text]' probably didn't match any monster names[line break]ERROR[line break]";
+		say "Fight test champion is not allowed to be the player. '[champion-text]' probably didn't match any monster names[line break]ERROR";
 		stop the game abruptly;
 	if challenger is the player:
-		say "Fight test challenger is not allowed to be the player. '[challenger-text]' probably didn't match any monster names[line break]ERROR[line break]";
+		say "Fight test challenger is not allowed to be the player. '[challenger-text]' probably didn't match any monster names[line break]ERROR";
 		stop the game abruptly;
 	try fight-testing champion against challenger.
 		
@@ -550,11 +551,11 @@ For taking a player action when running a fight test is true (this is the let te
 		rule succeeds;
 	say "Fight concluded. The winner is:[line break]";
 	if the champion's defeats is 0 and the number of not opposer people in the location is at least 2:
-		say "[test-champion][line break]";
+		say "[test-champion]";
 	otherwise if the challenger's defeats is 0 and the number of opposer people in the location is at least 1:
-		say "[test-challenger][line break]";
+		say "[test-challenger]";
 	otherwise:
-		say "nobody[line break]";
+		say "nobody";
 	if automated fight test is true:
 		stop the game abruptly;
 	otherwise:
