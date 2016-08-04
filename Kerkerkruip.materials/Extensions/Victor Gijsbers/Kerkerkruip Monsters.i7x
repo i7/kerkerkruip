@@ -1261,7 +1261,7 @@ First carry out an actor attacking the chain golem (this is the attack a spinnin
 				otherwise:
 					say " One of the chains catches [the actor] with a loud smack, but it deals no damage[roman type].";
 			otherwise:
-				say "[paragraph break]".
+				say "[paragraph break]".		
 
 The chain golem is abnormal-concentrating.
 
@@ -3119,16 +3119,20 @@ An AI action selection rule for the at-Act giant tentacle (this is the tentacle 
 Carry out the giant tentacle tentacle-throwing:
 	now constriction level is 0;
 	now giant tentacle does not grapple the chosen target;
-	let n be a random number between 2 and 4;
-	if giant tentacle is large:
-		now n is n + 3;
-	if giant tentacle is huge:
-		now n is n + 6;
-	if giant tentacle is gargantuan:
-		now n is n + 9;
+	Let n be the size number of the giant tentacle * 3;
+	if n < 0, now n is 0;
+	increase n by a random number between 2 and 4;
 	deal n points of physical damage;
 	have the giant tentacle inflict damage on the chosen target, silently;
-	say "The giant tentacle suddenly uncoils like a whip, throwing [the name of the chosen target] across the room. A sickening smack is heard when [the name of the chosen target] [hit] the [one of]wall[or]floor[or]ceiling, and then the floor,[as decreasingly likely outcomes] and [receive] [bold type][total damage] damage[roman type].";
+	say "The giant tentacle suddenly uncoils like a whip, throwing [the name of the chosen target] across the room. A sickening smack is heard when [the name of the chosen target] [hit] the [one of]wall[or]floor[or]ceiling, and then the floor,[as decreasingly likely outcomes] and [receive] [bold type][total damage] damage[roman type][run paragraph on]";	
+	if the actor is alive:
+		if the total damage > 0:
+			if the concentration of the chosen target is not zero:
+				say ". [The chosen target] [bold type][lose] concentration[roman type][run paragraph on]";
+				now concentration of the chosen target is 0;
+		say ".";
+	otherwise:
+		say ". [The chosen target] [are] [bold type]killed instantly[roman type].";
 	if the chosen target is dead:
 		have an event of the giant tentacle killing the chosen target;
 	if the player is dead:
