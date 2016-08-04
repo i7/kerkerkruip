@@ -3531,7 +3531,7 @@ An AI action selection rule for the at-React angel of mercy (this is the angel o
 	increase the Action Weight entry by n;
 	
 An AI action selection rule for the angel of mercy (this is the angel of mercy's gloves come off rule):
-	if the current weapon of the angel of mercy is a natural weapon and the angel of mercy wears the gauntlet of attraction:
+	if the angel of mercy wears the gauntlet of attraction and the angel of mercy does not enclose an artificial weapon:
 		Let weapon-count be 0;
 		Let ranged-count be 0;
 		now opposition test subject is the angel of mercy;
