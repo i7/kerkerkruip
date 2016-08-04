@@ -547,8 +547,10 @@ For taking a player action when running a fight test is true (this is the let te
 	now the health of the player is 1000;	
 	now opposition test subject is the player;
 	if the combat status is not peace and (the number of not opposer people in the location is at least 2):
-		[continue the fight]
-		rule succeeds;
+		[this avoids the case where the player's champion was defeated and had no allies]
+		if the champion's defeats is 0 and the challenger's defeats is 0:
+			[this avoids the case where the player's champion was defeated individually but its allies survived]
+			rule succeeds; [continue the fight]
 	say "Fight concluded. The winner is:[line break]";
 	if the champion's defeats is 0 and the number of not opposer people in the location is at least 2:
 		say "[test-champion]";

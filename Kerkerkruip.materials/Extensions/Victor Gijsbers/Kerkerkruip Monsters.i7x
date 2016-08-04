@@ -3550,7 +3550,9 @@ An AI action selection rule for the angel of mercy (this is the angel of mercy's
 			if ranged-count is 0:
 				increase n by 2;
 		now the Action Weight entry is n.
-		
+
+[TODO: Angel picks up a weapon if no enemies have weapons]
+	
 An AI action selection rule for the angel of mercy (this is the angel of mercy puts the gauntlet back on rule):
 	if the angel of mercy carries the gauntlet of attraction and the size number of the angel of mercy > 0:
 		Let weapon-count be 0;
@@ -3566,7 +3568,6 @@ An AI action selection rule for the angel of mercy (this is the angel of mercy p
 			now the Option entry is the action of the angel of mercy wearing the gauntlet of attraction;
 			let n be the size number of the angel of mercy;
 			now the Action Weight entry is n + weapon-count - 3;
-			
 
 Section - Making weapons mercy-compatible
 

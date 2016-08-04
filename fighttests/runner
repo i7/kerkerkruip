@@ -41,6 +41,7 @@ do
   tput smam # enable line wrap
 done
 
+echo
 echo "Fight test $TIMESTAMP summary: in $FIGHT_COUNT fights, $CHALLENGER won $CHALLENGER_WINS times, $CHAMPION won $CHAMPION_WINS times" >> tmp.log
 
 tail -n1 tmp.log
