@@ -22,9 +22,8 @@ echo "$TIMESTAMP: Running $FIGHT_COUNT fights between $CHAMPION and $CHALLENGER.
 for i in $(seq $FIGHT_COUNT)
 do
   COLS=$(tput cols)
-  ../i7/bin/dumb-git -w $COLS ../Kerkerkruip.inform/Build/output.ulx >tmp.out
-  SCRIPT=testtranscript
-  [ -f $SCRIPT ] || SCRIPT=testtranscript.glkdata
+  SCRIPT=$(printf "transcripts/$TIMESTAMP-%03d.transcript" $i)
+  ../i7/bin/dumb-git -w $COLS ../Kerkerkruip.inform/Build/output.ulx >$SCRIPT
   WINNER=$(tail -n1 $SCRIPT)
   if [ "$WINNER" = "ERROR" ]
   then
@@ -32,7 +31,6 @@ do
     exit 1
   fi
   [ -d transcripts ] || mkdir transcripts
-  mv $SCRIPT "transcripts/$TIMESTAMP-$i.transcript"
   echo "Fight test $TIMESTAMP-$i [$CHAMPION] vs [$CHALLENGER] winner: $WINNER" >> tmp.log
 
   CHALLENGER_WINS=$(egrep -c ": $CHALLENGER\$" tmp.log)

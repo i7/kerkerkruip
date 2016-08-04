@@ -482,10 +482,8 @@ The check for fight test rule is listed before the load achievements rule in the
 First for showing the title screen when automated fight test is true:
 	do nothing.
 	
-First after showing the title screen (this is the set up fight test rule):
-	transcribe and stop capturing because "fight test";
+First after showing the title screen when automated fight test is true (this is the set up fight test rule):
 	now allowing screen effects is false;
-	start capturing text;
 	now generation info is true;
 
 [Prevent the status window from opening]
@@ -508,8 +506,6 @@ Carry out fight-testing someone against someone:
 	now the test-champion is the noun;
 	now the test-challenger is the second noun;
 	now running a fight test is true;
-	say "Fight details are being recorded in testtranscript.glkdata";
-	start capturing text;
 	try sneaking;
 	now the Test Arena is challenged-group-inviting;
 	try battling the test-challenger;
@@ -527,7 +523,7 @@ Report fight-testing something against something:
 	say "[italic type]When it came time to fight I thought, 'I'll just step aside'[line break] - The Flaming Lips, 'Fight Test'[roman type][paragraph break]"
 	
 For taking a player action when automated fight test is true (this is the start automated fight test rule):	
-	update the event description because "starting automated fight test";
+	say "[bracket]starting automated fight test[close bracket][line break]";
 	Let challenger be the player;
 	Let champion be the player;
 	Let challenger-text be "[text of file of fight challenger]";
@@ -538,27 +534,27 @@ For taking a player action when automated fight test is true (this is the start 
 		if champion-text is the printed name of guy:
 			now champion is guy;
 	if champion is the player:
-		append "Fight test champion is not allowed to be the player. '[champion-text]' probably didn't match any monster names[line break]ERROR" to file of test transcript;
+		say "Fight test champion is not allowed to be the player. '[champion-text]' probably didn't match any monster names[line break]ERROR[line break]";
 		stop the game abruptly;
 	if challenger is the player:
-		append "Fight test challenger is not allowed to be the player. '[challenger-text]' probably didn't match any monster names[line break]ERROR" to file of test transcript;
+		say "Fight test challenger is not allowed to be the player. '[challenger-text]' probably didn't match any monster names[line break]ERROR[line break]";
 		stop the game abruptly;
 	try fight-testing champion against challenger.
 		
 For taking a player action when running a fight test is true (this is the let test combatants fight rule):
-	update the event description because "letting test combatants fight";
+	say "[bracket]letting test combatants fight[close bracket][line break]";
 	now the health of the player is 1000;	
 	now opposition test subject is the player;
 	if the combat status is not peace and (the number of not opposer people in the location is at least 2):
 		[continue the fight]
 		rule succeeds;
-	append "Fight concluded. The winner is:[line break]" to file of test transcript;
+	say "Fight concluded. The winner is:[line break]";
 	if the champion's defeats is 0 and the number of not opposer people in the location is at least 2:
-		append "[test-champion]" to file of test transcript;
+		say "[test-champion][line break]";
 	otherwise if the challenger's defeats is 0 and the number of opposer people in the location is at least 1:
-		append "[test-challenger]" to file of test transcript;
+		say "[test-challenger][line break]";
 	otherwise:
-		append "nobody" to file of test transcript;
+		say "nobody[line break]";
 	if automated fight test is true:
 		stop the game abruptly;
 	otherwise:
