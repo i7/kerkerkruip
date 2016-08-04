@@ -3126,13 +3126,13 @@ Carry out the giant tentacle tentacle-throwing:
 	have the giant tentacle inflict damage on the chosen target, silently;
 	say "The giant tentacle suddenly uncoils like a whip, throwing [the name of the chosen target] across the room. A sickening smack is heard when [the name of the chosen target] [hit] the [one of]wall[or]floor[or]ceiling, and then the floor,[as decreasingly likely outcomes] and [receive] [bold type][total damage] damage[roman type][run paragraph on]";	
 	if the actor is alive:
-		if the total damage > 0:
-			if the concentration of the chosen target is not zero:
-				say ". [The chosen target] [bold type][lose] concentration[roman type][run paragraph on]";
-				now concentration of the chosen target is 0;
-		say ".";
+		if the total damage > 0 and the concentration of the chosen target is not zero:
+			say ". [regarding the chosen target][They] [bold type][lose] concentration[roman type]!";
+			now concentration of the chosen target is 0;
+		otherwise:
+			say ".";
 	otherwise:
-		say ". [The chosen target] [are] [bold type]killed instantly[roman type].";
+		say ". [regarding the chosen target][They] [are] [bold type]killed instantly[roman type].";
 	if the chosen target is dead:
 		have an event of the giant tentacle killing the chosen target;
 	if the player is dead:
