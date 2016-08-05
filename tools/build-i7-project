@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+# Build an Inform 7 project
+# Must be run from the same folder as the i7 folder, as prepared by install-inform7
+
+# Process the arguments
+while getopts "p:r" opt; do
+    case $opt in
+        p)
+            PROJECT=$OPTARG
+            ;;
+        r)
+            RELEASE=true
+            ;;
+    esac
+done
+
+# Set build options
+if [ "$RELEASE" = true ] ; then
+    NI_OPTS="--release"
+    INFORM6_OPTS="-E2w~S~DG"
+    echo "Starting release build of $PROJECT"
+else
+    INFORM6_OPTS="-E2w~SDG"
+    echo "Starting development build of $PROJECT"
+fi
+echo
+
+# Inform 7
+./i7/bin/ni --format=ulx --noprogress --internal ./i7/Internal --external ./Inform --project "$PROJECT.inform" $NI_OPTS | grep -Ev "ve also read"
+echo
+
+# Inform 6
+./i7/bin/inform6 $INFORM6_OPTS "$PROJECT.inform/Build/auto.inf" -o "$PROJECT.inform/Build/output.ulx"
+echo
+
+# cBlorb
+./i7/bin/cBlorb -unix "$PROJECT.inform/Release.blurb" "$PROJECT.materials/Release/$PROJECT.gblorb"
+cp "$PROJECT.materials/Release/$PROJECT.gblorb" "$PROJECT.gblorb"
+echo

@@ -21,9 +21,10 @@ CURL = curl -L -s -S
 all: setup
 
 clean:
-	$(RM) %.gblorb *.zip
+	$(RM) *.gblorb *.zip
 	$(RM) -r i7 Inform
 	cd tools && make -f glulxe.make clean
+	$(RM) -r Kerkerkruip.materials/Release
 
 # Setup the Inform 7 environment we need
 INFORM_ENV = i7/Internal Inform/Extensions
@@ -47,23 +48,8 @@ Inform/Extensions:
 	$(CURL) -o "Inform/Extensions/Aaron Reed/Numbered Disambiguation Choices.i7x" "http://www.emshort.com/pl/payloads/Aaron%20Reed/Numbered%20Disambiguation%20Choices.i7x"
 	rm -r extensions-master master.zip
 
-# Build (optinally release) the story
-RELEASE ?= false
-ifeq ($(RELEASE), false)
-    NI_OPTS =
-    INFORM6_OPTS = -E2w~SDG
-else
-    NI_OPTS = --release
-    INFORM6_OPTS = -E2w~S~DG
-endif
-
 %.gblorb: $(INFORM_ENV) %.inform/Source/story.ni %.materials/Extensions/*/*.i7x
-	./i7/bin/ni --format=ulx --noprogress --internal ./i7/Internal --external "$(BASE)/Inform" --project "$*.inform" $(NI_OPTS) | grep -Ev "ve also read"
-	@echo
-	./i7/bin/inform6 $(INFORM6_OPTS) "$*.inform/Build/auto.inf" -o "$*.inform/Build/output.ulx"
-	@echo
-	./i7/bin/cBlorb -unix "$*.inform/Release.blurb" "$*.materials/Release/$@"
-	cp "$*.materials/Release/$@" "$@"
+	./tools/build-i7-project -p "$*"
 
 # Prepare a zip for distribution
 %.zip: %.gblorb
