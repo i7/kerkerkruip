@@ -3451,7 +3451,7 @@ The body score of the angel of mercy is 8.
 The mind score of the angel of mercy is 4.
 The spirit score of the angel of mercy is 12.
 
-For natural weapon setup of the angel of mercy (this is the angel of mercy's nails rule):
+For natural weapon setup of the angel of mercy (this is the angel of mercy's hand rule):
 	let X be the natural weapon described;
 	now damage die of X is 2;
 	now the weapon damage bonus of X is -1;
@@ -3487,9 +3487,8 @@ TODO: beg the Angel of mercy - roll a spirit check against (your health * 4) - i
 Section - Reactions and Stealing Weapons
 
 
-[TODO: transform all stolen weapons into size-agnostic radiant ones?]
-
 [TODO: steal more weapons instead of readying?]
+[TODO: uncurse weapons before stealing? Prevent gauntlet from stealing cursed weapons, or have it transfer curses]
 
 An AI action selection rule for the at-Act angel of mercy (this is the angel of mercy doesn't like attacking rule):
 	choose row with an Option of the action of the angel of mercy attacking the chosen target in the Table of AI Action Options;
@@ -3518,8 +3517,12 @@ An AI action selection rule for an at-React person (called guy) (this is the def
 		choose row with an Option of the guy parrying in the Table of AI Action Options;
 		if the Action Weight entry < 0:
 			now the Action Weight entry is 0;
-		if the gauntlet can steal the current weapon of the main actor for the guy:
-			increase the Action Weight entry by 10;
+		Let item be the current weapon of the main actor;
+		if the gauntlet can steal the item for the guy:
+			if the item is angel-worthy:
+				increase the Action Weight entry by 10;
+			otherwise:
+				decrease the Action Weight entry by 100;
 				
 The defender uses gauntlet of attraction to get weapons rule is listed after the standard defense against attack select rule in the AI action selection rules.
 	
@@ -3537,21 +3540,50 @@ An AI action selection rule for the angel of mercy (this is the angel of mercy's
 		now opposition test subject is the angel of mercy;
 		repeat with guy running through opposer people in the location:
 			if the gauntlet can steal current weapon of guy for the angel of mercy:
-				increase weapon-count by 1;
+				if current weapon of guy is angel-worthy:
+					increase weapon-count by 1;
 			otherwise if current weapon of guy is ranged:
 				increase ranged-count by 1;
 		if weapon-count is at least 1 and the size number of the angel of mercy > 0:
 			make no decision;
-		choose a blank row in the Table of AI Action Options;
-		now the Option entry is the action of the angel of mercy taking off the gauntlet of attraction;
 		let n be -1 * the size number of the angel of mercy;
 		if weapon-count is 0:
 			if n < 0, now n is 0;
 			if ranged-count is 0:
 				increase n by 2;
-		now the Action Weight entry is n.
+		Let loot be a random angel-worthy weapon in the location;
+		if loot is a weapon:
+			if n > 0:
+				[TODO: watch out for weird effects of weapons only expected to be used by the player]
+				choose a blank row in the Table of AI Action Options;
+				now the Option entry is the action of the angel of mercy taking loot;
+				now the Action Weight entry is n - 2;
+		otherwise:
+			choose a blank row in the Table of AI Action Options;		
+			now the Option entry is the action of the angel of mercy taking off the gauntlet of attraction;
+			now the Action Weight entry is n.
 
-[TODO: Angel picks up a weapon if no enemies have weapons]
+Definition: a weapon (called item) is angel-worthy:
+	if item is epic, no;
+	if item is deathly, no;
+	if item is tricky, no;
+	yes.
+
+[TODO: Angel picks up a weapon if no enemies have weapons
+
+weapons to avoid:
+	demon blade (cursed) - original owner is a demonic person
+	backstabber (cursed) - hidden identity of something
+	fearful axe (cursed, hidden identity)
+	staff of pain (deathly)
+	caduceus (epic, but maybe worth trying)
+	staff of insanity (epic)
+	glass cannon (epic)
+	
+TODO: can the angel manage a crossbow?
+TODO: what if player gets hit with the caduceus?
+	
+]
 	
 An AI action selection rule for the angel of mercy (this is the angel of mercy puts the gauntlet back on rule):
 	if the angel of mercy carries the gauntlet of attraction and the size number of the angel of mercy > 0:

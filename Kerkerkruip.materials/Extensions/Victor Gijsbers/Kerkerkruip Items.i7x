@@ -664,6 +664,7 @@ Section - Crown of Hargo (cursed)
 
 The crown of Hargo is a cursed curse-identified hat. The indefinite article is "the". 
 The crown of Hargo is iron.
+The crown of Hargo is tricky.
 
 An attack modifier rule (this is the crown of Hargo rule):
 	if the global defender wears the crown of Hargo:
@@ -699,6 +700,7 @@ Section - The demon lord's diadem (cursed)
 
 The demon lord's diadem is a cursed curse-identified hat. The indefinite article is "the". 
 The demon lord's diadem is silver.
+The demon lord's diadem is tricky.
 
 A spirit bonus rule (this is the spirit bonus of the demon lord's diadem rule):
 	if the test subject wears the demon lord's diadem:
@@ -902,6 +904,7 @@ Section - Bodice of breathlessness (cursed)
 
 The bodice of breathlessness is a cursed curse-identified shirt. The indefinite article is "the".
 The bodice of breathlessness is cloth.
+The bodice of breathlessness is tricky.
 
 A body bonus rule (this is the body bonus of the bodice of breathlessness rule):
 	if the test subject wears the bodice of breathlessness:
@@ -1212,6 +1215,8 @@ Section - Boots of wandering (cursed)
 
 The boots of wandering are cursed curse-identified shoes. The boots of wandering are plural-named. The indefinite article of boots of wandering is "the". The description of boots of wandering is "These graceful boots were supposed to grant their wearer impeccable footwork in combat. Unfortunately, when a prince of Algir wore these boots in the War of the Woods, they were cursed by a dying druid. They are now exceedingly unsafe.".
 
+The boots of wandering are tricky.
+
 Before doing anything when the player wears the boots of wandering (this is the boots of wandering weirdness rule):
 	if the player can move:
 		unless the combat state of the player is at-React:
@@ -1242,6 +1247,8 @@ A treasure placement rule (this is the sandals can be heretical rule):
 Section - Sandals of the heretic (cursed)
 
 The sandals of the heretic are cursed curse-identified shoes. The sandals of the heretic are plural-named. The indefinite article of the sandals of the heretic is "the". The description of the sandals of the heretic is "Simple sandals, but they have been imbued with special significance ever since the infamous heretic Volter used them to trample a high priest. Wearing these slippers will make it impossible to sacrifice powers to the gods, but does grant you 2 resistance against divine damage.".
+
+The sandals of the heretic are tricky.
 
 Check sacrificing (this is the cannot sacrifice when wearing heretical sandals rule):
 	if the player wears the sandals of the heretic:
@@ -1300,6 +1307,8 @@ Section - Greasy gauntlets (cursed)
 The greasy gauntlets are cursed curse-identified gauntlets. The greasy gauntlets are plural-named. The indefinite article is "the".
 The greasy gauntlets are iron.
 The description of the greasy gauntlets is "These armoured gloves are supernaturally slick and greasy. It might be hard to hold on to a weapon while wearing them.".
+
+The greasy gauntlets are tricky.
 
 Last aftereffects rule (this is the greasy gauntlets rule):
 	if the global attacker wears the greasy gauntlets and the total damage is greater than 0:
@@ -1368,12 +1377,16 @@ An aftereffects rule (this is the gauntlet of attraction steals weapons rule):
 		Let the gripping-force be 0;
 		repeat with die roll running from 1 to 3:
 			increase gripping-force by a random number from 1 to (the final body of the global defender);
+		if the loot is cursed:
+			decrease gripping-force by 3;
 		test the body of the global attacker against the gripping-force;
 		if test result is false:
-			say " [The global defender] [bold type][wrest] [the loot] away[roman type] from [the global attacker]!";
+			say " [The global defender] [bold type][wrest] [the loot] away[roman type] from [the global attacker][if the loot is curse-identified], uncursing it in the process[end if]!";
 			now the previous owner of the loot is the global attacker;
 			now the global defender carries the loot;
 			now the loot is not readied;
+			now the loot is not cursed;
+			now the loot is not curse-identified;
 		otherwise:
 			say " [The global attacker] [bold type][retain] [the loot][roman type] and the gauntlet lets go!".
 
@@ -1432,6 +1445,7 @@ Section - Goggles of blindness (cursed)
 
 The goggles of blindness are a cursed curse-identified mask. They are plural-named. The indefinite article is "the". 
 The goggles of blindness are leather.
+The goggles of blindness are tricky.
 
 A perception rule (this is the goggles of blindness rule):
 	if the test subject wears the goggles of blindness:
@@ -3285,6 +3299,7 @@ A treasure placement rule (this is the sneaking sword can be singing sword rule)
 Section - Singing sword (cursed)
 
 The singing sword is a cursed curse-identified sword. The description of the singing sword is "When you wield it, this sword hums all the time, and sometimes breaks out into song. This will make it hard to hide. You wonder how Mouser tamed it...".
+The singing sword is tricky.
 
 Every turn (this is the singing sword fun rule):
 	if the player is the main actor and the player wields the singing sword:
@@ -3585,6 +3600,7 @@ Section - The backstabber (cursed)
 
 There is a cursed curse-identified dagger called the backstabber.
 The backstabber is iron.
+The backstabber is tricky.
 Understand "dagger" as the backstabber.
 
 A treasure placement rule (this is the double strike can be backstabber rule):
@@ -3742,7 +3758,7 @@ A treasure placement rule (this is the fearsome can be fearful rule):
 
 Section - Fearful axe (cursed)
 
-The fearful axe is a cursed curse-identified axe. The fearful axe is iron.
+The fearful axe is a cursed curse-identified axe. The fearful axe is iron. The fearful axe is tricky.
 
 The damage die of the fearful axe is 5.
 The parry-with bonus of the fearful axe is -1.
@@ -3912,7 +3928,8 @@ Section - Staff of pain (monster)
 A staff of pain is a kind of weapon. The plural of staff of pain is staves of pain.
 A staff of pain is usually wood. A staff of pain is projectile.
 A staff of pain is size-agnostic.
-The description of a staff of pain is "The staff of pain wounds with necromantic magic that can be neither parried nor dodged.".
+A staff of pain is deathly.
+The description of a staff of pain is "The staff of pain wounds with necromantic magic that can be neither parried nor dodged.". [TODO: make this really true - perhaps by using "does nothing" rules, or by making the defender not at-parry or at-dodge]
 
 The damage die of a staff of pain is usually 4.
 The weapon attack bonus of a staff of pain is usually 0.
