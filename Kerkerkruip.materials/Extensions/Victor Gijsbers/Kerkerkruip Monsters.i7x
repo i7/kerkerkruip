@@ -2492,8 +2492,6 @@ Carry out the mindslug mindblasting:
 			if the concentration of the noun is greater than 0:
 				let the noun lose concentration;
 	now the concentration of the mindslug is 0.
-	
-[TODO: find out why Fafhrd and Mouser keep attacking a mindslug-enslaved NPC. I'm guessing because they haven't chosen new targets? Player was hidden when it happened... and if it hadn't happened, the fight test would have gone on forever... or was it because of faction manipulations?]
 		
 An AI target selection rule for a person (called target) when the running AI is the mindslug (this is the mindslug prefers low mind score rule):
 	decrease the Weight by the mind score of the target.
@@ -3420,11 +3418,7 @@ To say angel of mercy details:
 			say ", and ";
 		say "wield[if new-sentence is true]s[otherwise]ing[end if] [the item]".
 
-[TODO: say "blocking/guarding all passage/all exits except for ...]
-
 The description of the Angel of Mercy is "It is hard to discern this creature's swirling form - its limbs could be arms, legs, wings or tail. In the center is a face - or something resembling a face - that bears the serenity of only those who wield enormous power.[paragraph break]Every blow the angel receives makes it smaller, but increases its radiance. It is currently [size of Angel of Mercy] and it has [radiation of Angel of Mercy] level[s] of radiance."
-
-[TODO: change description with concentration?]
 
 The soul description of the Angel of Mercy is "a heart of purest silver".
 
@@ -3473,22 +3467,12 @@ super sharp weapon - kills mercifully - scythe? sword?
 
 [
 Special interaction with chain golem (and all tethered weapons) - causes grappling? stops spinning, but chain golem can make a body roll to get unstuck and start spinning again. Same with all tethered weapons? Hm... tethered weapon stays with attacker but becomes unreadied maybe
-
-If the angel of mercy steals your weapon, it becomes the [whatever] of mercy - made of radiance, but with the same stats...? Angel of mercy does not attack until it has a weapon.
-
-
-[TODO: Make sure angel's AI prefers parrying non-projectile weapons, and blocking projetcile weapons]
-
-The description of the gauntlets of grip is "These sturdy armoured gloves make it easier to parry your opponent's attacks.".
-
-TODO: beg the Angel of mercy - roll a spirit check against (your health * 4) - if you succeed, the Angel gives you the Hand of Glory (lit) or the Scroll of Delights. If Scroll of Delights, the angel becomes your ally but doesn't attack...?
 ]
 
 Section - Reactions and Stealing Weapons
 
 
 [TODO: steal more weapons instead of readying?]
-[TODO: uncurse weapons before stealing? Prevent gauntlet from stealing cursed weapons, or have it transfer curses]
 
 An AI action selection rule for the at-Act angel of mercy (this is the angel of mercy doesn't like attacking rule):
 	choose row with an Option of the action of the angel of mercy attacking the chosen target in the Table of AI Action Options;
@@ -3553,8 +3537,7 @@ An AI action selection rule for the angel of mercy (this is the angel of mercy's
 				increase n by 2;
 		Let loot be a random angel-worthy weapon in the location;
 		if loot is a weapon:
-			if n > 0:
-				[TODO: watch out for weird effects of weapons only expected to be used by the player]
+			if n > 2:
 				choose a blank row in the Table of AI Action Options;
 				now the Option entry is the action of the angel of mercy taking loot;
 				now the Action Weight entry is n - 2;
@@ -3569,9 +3552,7 @@ Definition: a weapon (called item) is angel-worthy:
 	if item is tricky, no;
 	yes.
 
-[TODO: Angel picks up a weapon if no enemies have weapons
-
-weapons to avoid:
+[weapons to avoid:
 	demon blade (cursed) - original owner is a demonic person
 	backstabber (cursed) - hidden identity of something
 	fearful axe (cursed, hidden identity)
@@ -3724,8 +3705,6 @@ An impeded movement rule (this is the obstruction impedes movement rule):
 
 Every turn (this is the free the obstructed runner rule):
 	now the obstructed runner is nothing.
-
-[TODO: what about digging? maybe damage but not obstruction?]
 
 To have the angel of mercy damage (guy - a person) by obstruction:
 	if the radiation of the Angel of Mercy is 0, stop;
@@ -3989,8 +3968,6 @@ Report the angel of mercy hitting a dead pc:
 Report the angel of mercy concentrating:
 	say "[if concentration of the angel of mercy is 1]The angel of mercy gathers its form in concentration.[otherwise if concentration of the angel of mercy is 2]The angel of mercy's shape flows faster and more intensely.[otherwise if concentration of the angel of mercy is 3]'Retreat now, and I shall not harm you,' the angel commands, fierce with righteous energy.[end if]";
 	rule succeeds.
-	
-[TODO: angel of mercy doesn't hit runners (but ony if maximally concentrated?)]
 
 Report the angel of mercy attacking:
 	unless the actor is the noun:
@@ -4075,8 +4052,6 @@ Repelling power of mercy:
 	decrease melee of the player by 2;
 	decrease defence of the player by 3;
 	decrease permanent health of the player by 20;
-
-[TODO: flash command, radiation and shrinking effects]
 
 Section - Power of Mercy - Aftereffects
 
