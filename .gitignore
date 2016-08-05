@@ -25,4 +25,5 @@ KerkerkruipS*
 tests/*test*
 tests/*seed*
 tools/cheapglk
+tools/*git
 tools/*glulxe
