@@ -23,6 +23,7 @@ all: setup
 clean:
 	$(RM) %.gblorb *.zip
 	$(RM) -r i7 Inform
+	cd tools && make -f glulxe.make clean
 
 # Setup the Inform 7 environment we need
 INFORM_ENV = i7/Internal Inform/Extensions
@@ -31,6 +32,11 @@ setup: $(INFORM_ENV)
 # Download and install Inform 7
 i7/Internal:
 	./tools/install-inform7
+
+# Download and build dumb-glulxe
+i7/dumb-glulxe:
+	cd tools && make -f glulxe.make
+	cp tools/dumb-glulxe i7/dumb-glulxe
 
 # Download the extensions we need, pretending ~/Inform is in this directory
 Inform/Extensions:
@@ -66,7 +72,7 @@ endif
 
 # Run the test suite
 # Link the story file to the tests subfolder to keep its datafiles separate
-test: Kerkerkruip.gblorb
+test: i7/dumb-glulxe Kerkerkruip.gblorb
 	ln -fs $(BASE)/Kerkerkruip.gblorb ./tests/Kerkerkruip.gblorb
 	cd ./tests && ./runner
 

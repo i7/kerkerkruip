@@ -24,3 +24,5 @@ KerkerkruipA*
 KerkerkruipS*
 tests/*test*
 tests/*seed*
+tools/cheapglk
+tools/*glulxe

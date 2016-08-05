@@ -15,7 +15,7 @@ echo "Setting random seed to $SEED"
 echo -e '\nRunning the Kerkerkruip test suite:'
 touch noninteractivetests noninteractivetests.glkdata # not sure which one we'll need
 COLS=$(tput cols)
-../i7/bin/dumb-git -w $COLS Kerkerkruip.gblorb > testlog && rm noninteractivetests* &
+../i7/dumb-glulxe -w $COLS Kerkerkruip.gblorb > testlog && rm noninteractivetests* &
 
 # Output test progress
 while [ -f noninteractivetests ]

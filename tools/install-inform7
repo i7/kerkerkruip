@@ -16,9 +16,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
         exit 1
     fi
     echo "Using existing Inform 7 application"
-
     ln -fs /Applications/Inform.app/Contents/MacOS ./i7/bin
-    # TODO: obtain a command-line interpreter and call it ./i7/bin/dumb-git
     ln -fs /Applications/Inform.app/Contents/Resources/Internal ./i7/Internal
 
 elif [[ "$OSTYPE" == "linux-gnu" ]]; then

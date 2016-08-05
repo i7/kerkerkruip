@@ -7,7 +7,6 @@ language: node_js
 addons:
   apt:
     packages:
-      - expect-dev
       - lftp
 
 cache:
