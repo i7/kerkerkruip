@@ -980,6 +980,7 @@ testing effects of malleus-bonus-attacking:
 
 initial scheduling of bonus-surviving-attack:
 	now the melee of the swarm of daggers is 100;
+	now the inherent damage modifier of the swarm of daggers is 10;
 	now the health of the player is 1000;
 	now the hit protection of the player is 0;
 	now dagger-scattered is 0;
