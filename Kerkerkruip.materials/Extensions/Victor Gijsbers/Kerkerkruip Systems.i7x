@@ -154,7 +154,9 @@ Section - Mood
 
 [Mood is used during generation of the dungeon. Rooms with the same mood are more often placed together, and treasures are often placed in a room with fits their mood.
 
-The tricky mood is reserved for things that the player probably wouldn't want, concealed by false identities. They are usually cursed and non-treasure.]
+The tricky mood is reserved for things that the player probably wouldn't want, concealed by false identities. They are usually cursed and non-treasure.
+
+TODO: might be better to have an "undesirable" valuation than a tricky mood - but too much code uses the "non-treasure" valuation to avoid placing things, and that would need refactoring]
 
 Mood is a kind of value. The moods are civilised, religious, barren, deathly, elemental, magical, alchemical, tricky and non-mood.
 A room has a mood. The mood of a room is usually barren.

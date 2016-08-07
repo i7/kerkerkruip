@@ -3531,17 +3531,17 @@ An AI action selection rule for the angel of mercy (this is the angel of mercy's
 		if weapon-count is at least 1 and the size number of the angel of mercy > 0:
 			make no decision;
 		let n be -1 * the size number of the angel of mercy;
-		if weapon-count is 0:
-			if n < 0, now n is 0;
-			if ranged-count is 0:
-				increase n by 2;
 		Let loot be a random angel-worthy weapon in the location;
-		if loot is a weapon:
-			if n > 2:
+		if loot is a weapon and weapon-count is 0:
+			if n > -3:
 				choose a blank row in the Table of AI Action Options;
 				now the Option entry is the action of the angel of mercy taking loot;
-				now the Action Weight entry is n - 2;
+				now the Action Weight entry is n;
 		otherwise:
+			if weapon-count is 0:
+				if n < 0, now n is 0;
+			if ranged-count is 0:
+				increase n by 2;
 			choose a blank row in the Table of AI Action Options;		
 			now the Option entry is the action of the angel of mercy taking off the gauntlet of attraction;
 			now the Action Weight entry is n.

@@ -660,7 +660,7 @@ Include (-
 
 ! Wait for a safe non navigating key. The user might press Down/PgDn or use the mouse scroll wheel to scroll a page of text, so we will stop those key codes from continuing.
 [ KeyPause key;
-	if (capture_active || ~(+ allowing screen effects +)) {
+	if (capture_active || ~~(+ allowing screen effects +)) {
 		rfalse;
 	}
 	while ( 1 )
@@ -682,7 +682,7 @@ Include (-
 ];
 
 [ SPACEPause i;
-	if (capture_active || ~(+ allowing screen effects +)) {
+	if (capture_active || ~~(+ allowing screen effects +)) {
 		rfalse;
 	}
 	while (i ~= 13 or 31 or 32)
