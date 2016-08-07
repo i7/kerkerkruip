@@ -3545,14 +3545,14 @@ The evil dagger is deathly.
 The evil dagger is iron.
 
 The blood magic cost of evil dagger is 1.
-The blood magic level of evil dagger is 2.
-The blood magic maximum of evil dagger is 99.
+The blood magic level of evil dagger is 1.
+The blood magic maximum of evil dagger is 49.
 
-The description of evil dagger is "This dagger was once used as a ritual weapon by a Yahvinnan death cult. Whenever it hits someone, its evil magic has a [blood magic level of evil dagger]% chance of killing the target outright. This percentage will increase by 1% when the dagger is fed."
+The description of evil dagger is "This dagger was once used as a ritual weapon by a Yahvinnan death cult. Whenever it hits someone, its evil magic has a [blood magic level of evil dagger * 2]% chance of killing the target outright. This percentage will increase by 2% when the dagger is fed."
 
 A contact rule (this is the evil dagger bonus rule):
 	if the global attacker weapon is the evil dagger:
-		if a random chance of (blood magic level of evil dagger) in 100 succeeds:
+		if a random chance of (blood magic level of evil dagger) in 50 succeeds:
 			now health of global defender is -1; [Instakill effect bypasses the damage system.]
 			say "[roman type]The evil magic of the dagger [bold type]immediately kills[roman type] [no dead property][the global defender][dead property]!";
 			rule fails.

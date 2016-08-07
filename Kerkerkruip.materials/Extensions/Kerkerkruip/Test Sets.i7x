@@ -2742,6 +2742,9 @@ radiance-attack-eyeless-player	0	1	"radiant attacker"	--
 radiance-defend-eyeless-monster	1	1	--	--
 radiance-attack-eyeless-monster	1	1	--	--
 
+Scenario for attack-modifiers:
+	now evil-kit is bannedobject.
+
 Initial scheduling of radiance-defend-sighted:
 	prepare a test battle with the Angel of Compassion;
 
