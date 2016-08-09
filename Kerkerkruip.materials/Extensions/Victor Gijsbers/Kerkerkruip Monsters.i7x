@@ -1213,7 +1213,7 @@ The health of the chain golem is 28.
 The melee of the chain golem is 1.
 The defence of the chain golem is 8.
 
-The body score of the chain golem is 9.
+The body score of the chain golem is 7.
 The mind score of the chain golem is 4.
 The spirit score of the chain golem is 7.
 
@@ -1234,7 +1234,7 @@ First carry out an actor attacking the chain golem (this is the attack a spinnin
 		let W be the current weapon of the actor;
 		unless W is ranged:
 			say "[The actor] [attempt] to duck under the whirling chains. [run paragraph on]";
-			let n be 9;
+			let n be 7;
 			repeat with die roll running from 1 to concentration of the chain golem:
 				increase n by a random number from 2 to 3;
 			test the body of the actor against n;
