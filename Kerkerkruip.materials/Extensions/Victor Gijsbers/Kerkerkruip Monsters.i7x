@@ -1451,11 +1451,11 @@ The soul description of the jumping bomb is "a pulsating bundle of glowing ember
 
 The health of the jumping bomb is 22.
 The melee of the jumping bomb is 2.
-The defence of the jumping bomb is 8.
+The defence of the jumping bomb is 7.
 
 The body score of the jumping bomb is 8.
-The spirit score of the jumping bomb is 3. 
-The mind score of the jumping bomb is 3.
+The mind score of the jumping bomb is 1.
+The spirit score of the jumping bomb is 1. 
 
 When play begins (this is the make jumping bomb easier for novices rule):
 	if difficulty is 0:
