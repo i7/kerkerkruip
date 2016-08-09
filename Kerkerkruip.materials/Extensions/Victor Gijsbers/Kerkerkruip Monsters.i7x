@@ -179,7 +179,7 @@ The swarm of daggers is flyer.
 The swarm of daggers is not talker.
 The swarm of daggers is thrower.
 
-The health of the swarm of daggers is 16.
+The health of the swarm of daggers is 15.
 The melee of the swarm of daggers is 4.
 The defence of the swarm of daggers is 6.
 The body score of the swarm of daggers is 6.

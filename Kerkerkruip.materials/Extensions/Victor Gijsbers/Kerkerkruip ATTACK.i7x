@@ -342,7 +342,7 @@ The initiative update rules are a rulebook.
 Section - Standard initiative rules
 
 First initiative update rule (this is the no low initiative trap rule):
-	repeat with X running through all alive persons enclosed by the location:				
+	repeat with X running through all alive persons enclosed by the location:
 		if the initiative of X is less than -2:
 			now the initiative of X is -2.
 		
@@ -351,7 +351,7 @@ Initiative update rule (this is the increase initiative every round rule):
 		increase the initiative of X by 2.
 	
 Initiative update rule (this is the random initiative rule):
-	repeat with X running through all alive persons enclosed by the location:				
+	repeat with X running through all alive persons enclosed by the location:
 		increase the initiative of X by a random number between 0 and 2.
 
 A starting the combat round rule (this is the reset the initiative of the main actor rule):
@@ -534,6 +534,8 @@ Switching weightings off is an action out of world. Understand "weightings off" 
 Carry out switching weightings off (this is the standard switching weightings off rule):
 	now show AI weightings is false;
 	say "You will no longer see the AI weightings.".
+
+[TODO: show initiative information?]
 
 Chapter - The pressing relation
 
