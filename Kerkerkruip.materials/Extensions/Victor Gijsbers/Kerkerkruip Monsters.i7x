@@ -1235,7 +1235,7 @@ First carry out an actor attacking the chain golem (this is the attack a spinnin
 		unless W is ranged:
 			say "[The actor] [attempt] to duck under the whirling chains. [run paragraph on]";
 			let n be 9;
-			for die roll running from 1 to concentration of the chain golem:
+			repeat with die roll running from 1 to concentration of the chain golem:
 				increase n by a random number from 2 to 3;
 			test the body of the actor against n;
 			if test result is false:
