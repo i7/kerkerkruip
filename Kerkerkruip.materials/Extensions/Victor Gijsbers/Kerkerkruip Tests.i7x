@@ -567,6 +567,14 @@ The start automated fight test rule is listed before the compel player attack ru
 
 The let test combatants fight rule is listed before the start automated fight test rule in the for taking a player action rulebook.
 
+A contact rule when the global attacker is the jumping bomb (this is the jumping bomb fight-test kamikaze rule):
+	if bomb-escape is true and automated fight test is true:
+		say "[roman type]The jumping bomb gives [the global defender] a free dodge. Next time it hits someone, they will die.";
+		now bomb-escape is false;
+		rule fails;
+
+The jumping bomb fight-test kamikaze rule is listed before the jumping bomb kamikaze rule in the contact rules.
+	
 Section - Died and Kill Stats
 
 Requesting died-and-killed records is an action out of world applying to nothing. Understand "records" as requesting died-and-killed records.
