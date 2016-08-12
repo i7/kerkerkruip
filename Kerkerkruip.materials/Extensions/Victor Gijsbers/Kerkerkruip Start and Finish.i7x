@@ -154,6 +154,8 @@ To give the player a stat penalty:
 Section - Applying the difficulty
 
 After showing the title screen (this is the apply the difficulty rule):
+	if generation info is true:
+		say "Applying difficulty level [difficulty].";
 [	if difficulty is 0:
 		increase health of the player by 5;
 		increase permanent health of the player by 5;
@@ -178,6 +180,8 @@ After showing the title screen (this is the apply the difficulty rule):
 			repeat with guy running through monsters:
 				repeat with i running from 1 to n:
 					buff guy;
+				if generation info is true:
+					say "[The guy] now has:[line break][health of guy] health[line break][melee of guy] attack[line break][defence of guy] defence[line break][body score of guy] body[line break][mind score of guy] mind[line break][spirit score of guy] spirit[paragraph break]";
 			
 To buff (guy - a person):
 	let m be a random number between 1 and 8;

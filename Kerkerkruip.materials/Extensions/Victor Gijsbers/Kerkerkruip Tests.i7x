@@ -476,6 +476,7 @@ Before showing the title screen (this is the check for fight test rule):
 		now automated fight test is true;
 		if screen reader mode is unset:
 			enable screen reader mode;
+		set difficulty to 1;
 		now roguelike mode is false.
 		
 The check for fight test rule is listed before the load achievements rule in the before showing the title screen rules.
@@ -553,9 +554,9 @@ For taking a player action when running a fight test is true (this is the let te
 			rule succeeds; [continue the fight]
 	say "Fight concluded. The winner is:[line break]";
 	if the champion's defeats is 0 and the number of not opposer people in the location is at least 2:
-		say "[test-champion]";
+		say "[printed name of test-champion]";
 	otherwise if the challenger's defeats is 0 and the number of opposer people in the location is at least 1:
-		say "[test-challenger]";
+		say "[printed name of test-challenger]";
 	otherwise:
 		say "nobody";
 	if automated fight test is true:

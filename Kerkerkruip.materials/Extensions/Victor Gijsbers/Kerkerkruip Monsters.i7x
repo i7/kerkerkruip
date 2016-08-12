@@ -561,7 +561,7 @@ The description of ravenous armadillo is "As their name suggests, ravenous armad
 
 The soul description of the ravenous armadillo is "energy like a screen of scales".
 
-The health of the ravenous armadillo is 12.
+The health of the ravenous armadillo is 10.
 The melee of the ravenous armadillo is 0.
 The defence of the ravenous armadillo is 6.
 
@@ -1234,9 +1234,9 @@ First carry out an actor attacking the chain golem (this is the attack a spinnin
 		let W be the current weapon of the actor;
 		unless W is ranged:
 			say "[The actor] [attempt] to duck under the whirling chains. [run paragraph on]";
-			let n be 7;
+			let n be 6;
 			repeat with die roll running from 1 to concentration of the chain golem:
-				increase n by a random number from 2 to 3;
+				increase n by a random number from 1 to 3;
 			test the body of the actor against n;
 			if test result is false:
 				let n be two times the concentration of the chain golem;
@@ -1455,7 +1455,7 @@ The defence of the jumping bomb is 8.
 
 The body score of the jumping bomb is 8.
 The mind score of the jumping bomb is 1.
-The spirit score of the jumping bomb is 1. 
+The spirit score of the jumping bomb is 3. 
 
 When play begins (this is the make jumping bomb easier for novices rule):
 	if difficulty is 0:
@@ -2061,7 +2061,7 @@ The description of the hound is "The black hound is ever watchful, ready to puni
 
 The soul description of the hound is "a sharp yellow eye, narrowed and alert".
 
-The health of the hound is 17.
+The health of the hound is 14.
 The melee of the hound is 2.
 The defence of the hound is 9.
 
@@ -2879,7 +2879,7 @@ Material of the giant tentacle is flesh.
 
 The health of giant tentacle is 35.
 The melee of giant tentacle is 3.
-The defence of giant tentacle is 11.
+The defence of giant tentacle is 12.
 
 The body score of giant tentacle is 8.
 The mind score of giant tentacle is 10.
@@ -3436,11 +3436,11 @@ Angel of Mercy is flyer.
 Radiation of angel of Mercy is 0.
 follower percentile chance of the angel of mercy is 0.
 
-The health of the angel of Mercy is 46.
+The health of the angel of Mercy is 43.
 The melee of the angel of Mercy is 0.
 The defence of the angel of Mercy is 11.
 
-The body score of the angel of mercy is 8.
+The body score of the angel of mercy is 7.
 The mind score of the angel of mercy is 4.
 The spirit score of the angel of mercy is 12.
 
@@ -5273,7 +5273,7 @@ Israfel is group leading.
 Israfel is not initially accompanied.
 Israfel is not defeated individually.
 
-The health of Israfel is 40.
+The health of Israfel is 38.
 The melee of Israfel is 2.
 The defence of Israfel is 10.
 
@@ -5307,7 +5307,7 @@ Israfel-trance is a number that varies. Israfel-trance is 1.
 Israfel-trancing is an action applying to nothing.
 
 Carry out Israfel Israfel-trancing:
-	increase Israfel-trance by 1;
+	if a random chance of 2 in 3 succeeds, increase Israfel-trance by 1;
 	let n be (permanent health of Israfel - health of Israfel);
 	if n > Israfel-trance:
 		now n is Israfel-trance;
@@ -5442,7 +5442,7 @@ The level of Isra is 4.
 Isra is not defeated individually.
 Isra accompanies Israfel.
 
-The health of Isra is 20.
+The health of Isra is 19.
 The melee of Isra is 0.
 The defence of Isra is 10.
 
@@ -5539,7 +5539,7 @@ The level of Fell is 4.
 Fell is not defeated individually.
 Fell accompanies Israfel.
 
-The health of Fell is 20.
+The health of Fell is 19.
 The melee of Fell is 3.
 The defence of Fell is 10.
 
