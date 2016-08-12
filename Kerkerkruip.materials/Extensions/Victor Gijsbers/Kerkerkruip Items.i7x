@@ -3239,13 +3239,23 @@ Part - Weapons
 
 Chapter - Sword
 
+to gain is a verb.
+
 A sword is a kind of weapon. 
 A sword is usually iron.
 The parry-with bonus of a sword is usually 1.
 
 Understand "blade" as a sword.
 
+An aftereffects rule (this is the gain defensive flow from parrying with sword rule):
+	if the global defender is at parry:
+		if whatever the global attacker weapon struck is a sword and a random chance of 1 in 2 succeeds:
+			say "[regarding the global defender][Possessive] sword deflects the blow so well that [they] [gain] a point of defensive flow!";
+			up the defensive flow of the global defender.
+			
+The gain defensive flow from parrying with sword rule is listed after the gain offensive flow from parrying rule in the aftereffects rules.
 
+The special weapon info of a sword is usually "; parrying sometimes adds defensive flow[run paragraph on]".
 
 Section - Smoky blade (minor)
 
@@ -3278,7 +3288,7 @@ Section - Sneaking sword (monster)
 
 There is a sword called the sneaking sword. The description of sneaking sword is "This sword is especially suitable for making sneaky attacks, dealing [blood magic level of sneaking sword] extra damage. This damage bonus will increase by 1 if the sword is fed."
 
-The special weapon info of the sneaking sword is "; +[blood magic level of sneaking sword] damage when hidden[run paragraph on]"
+The special weapon info of the sneaking sword is "; parrying sometimes adds defensive flow; +[blood magic level of sneaking sword] damage when hidden[run paragraph on]"
 
 The blood magic cost of sneaking sword is 2.
 The blood magic level of sneaking sword is 1.
@@ -3338,7 +3348,7 @@ Section - Claymore (monster)
 
 The claymore is a sword. The description of claymore is "This big sword is mainly used by barbarian tribes. Depending on your body score, it has a chance of destroying any weapon that parries it or is parried by it. (The probability is 5% for every 4 points of body; i.e., 5% at 4 body, 10% at 8 body, and so on.)"
 
-The special weapon info of the claymore is "; shatters weapons[run paragraph on]"
+The special weapon info of the claymore is "; parrying sometimes adds defensive flow; shatters weapons[run paragraph on]"
 
 An aftereffects rule (this is the claymore can cause weapons to break rule):
 	Let target be whatever the claymore struck;
@@ -3355,7 +3365,7 @@ Section - Holy sword (monster)
 
 The holy sword is a sword. The description of the holy sword is "This sword shines with a clear white light. It deals additional damage to undead and demons. (It deals 1 extra damage for each 4 points of spirit; i.e., 1 damage at 4 spirit, 2 damage at 8 spirit, and so on.)".
 
-The special weapon info of the holy sword is "; deals extra damage to undead and demons; shines with light, making it harder to hide[run paragraph on]".
+The special weapon info of the holy sword is "; parrying sometimes adds defensive flow; deals extra damage to undead and demons; shines with light, making it harder to hide[run paragraph on]".
 
 Detection rule (this is the holy sword detection rule):
 	if the player wields the holy sword:
@@ -3378,7 +3388,7 @@ The immaculate sword is a sword. The description of the immaculate sword is "Abs
 The immaculate sword is incorruptible.
 Damage die of the immaculate sword is 8.
 
-The special weapon info of the immaculate sword is "; cannot be corrupted[run paragraph on]".
+The special weapon info of the immaculate sword is "; parrying sometimes adds defensive flow; cannot be corrupted[run paragraph on]".
 
 Section - Demon blade (monster)
 
@@ -3401,7 +3411,7 @@ Section - Sword of light (monster)
 
 The sword of light is a sword. It is radiance. The description of the sword of light is "It seems to consist of pure [material of the sword of light].".
 
-The special weapon info of the sword of light is "; [if sword of light is radiance]damage increases with the wielder's angelic radiance[otherwise]no special bonus when it is made of [material of the sword of light][end if][run paragraph on]".
+The special weapon info of the sword of light is "; parrying sometimes adds defensive flow; [if sword of light is radiance]damage increases with the wielder's angelic radiance[otherwise]no special bonus when it is made of [material of the sword of light][end if][run paragraph on]".
 
 An add specific damage rule (this is the sword of light damage bonus rule):
 	if damage-by-hitting is true:
@@ -3457,65 +3467,7 @@ Chance to win rule when the chosen weapon is a dagger (this is the CTW dagger co
 	let n be the tension divided by 2;
 	increase the chance-to-win by n.
 		
-[Thoughts on seeing Automatos knocked back by the force of a dagger blow:
-
-A hammer or a mace or a sword can do damage through sheer force. But a dagger just isn't massive enough to do that. I've decided to imagine serious damage by a dagger as corresponding to a very accurate hit against a vital area. In such a case, a dagger could damage Automatos' programming, but the text would be different.
-
-I still think it's reasonable that a dagger would be less effective against some materials, but there's a real can of worms there... how does a weapon damage a vaporous being? How does something damage a being made of darkness or radiance? Some answers could be fun... darkness and radiance might damage each other more than solid objects would... but it could also be a big pain in the butt.
-
-I also think daggers are overpowered. At times, the gorgeous dagger can be better than the adamantine sword, and it's usually better than an axe. Not only does it hit more often, but when it does it can do huge damage. I'm considering getting rid of the dagger tension damage completely. We have lots of other weapons with a tension damage bonus, let the dagger stick with the attack bonus.
-
-Old dagger performance: (damage bonus = tension/4)
-
-max damage roll: 3 + max concentration: 4 = 1-7 damage
-
-tension 0: +0 +0 = +0 (1-7)
-tension 1: +0 +0
-tension 2: +0 +0
-tension 3: +1 +0 = +1 (2-8)
-tension 4: +1 +1 = +2 (3-9)
-tension 5: +1 +1
-tension 6: +2 +1 = +3 (4-10)
-tension 7: +2 +1
-tension 8: +2 +2 = +4 (5-11)
-tension 9: +3 +2 = +5 (6-12)
-tension 10: +3 +2
-tension 11: +3 +2 
-tension 12: +4 +3 = +7 (8-14)
-tension 13: +4 +3
-tension 14: +4 +3
-tension 15: +5 +3 = +8 (9-15)
-tension 16: +5 +4 = +9 (10-16)
-tension 17: +5 +4
-tension 18: +6 +4 = +10 (11-17)
-tension 19: +6 +4 
-tension 20: +6 +5 = +11 (12-18 damage)
-
-desired extra damage: (damage bonus somewhat logarithmic)
-	
-tension 0: +0 +0 = +0
-tension 1: +0 +1 = +1
-tension 2: +0 +1
-tension 3: +1 +1 = +2
-tension 4: +1 +1 
-tension 5: +1 +1
-tension 6: +2 +1 = +3
-tension 7: +2 +1
-tension 8: +2 +2 = +4
-tension 9: +3 +2 = +5
-tension 10: +3 +2
-tension 11: +3 +2
-tension 12: +4 +2 = +6
-tension 13: +4 +2
-tension 14: +4 +2
-tension 15: +5 +2 = +7
-tension 16: +5 +2
-tension 17: +5 +2
-tension 18: +6 +2 = +8
-tension 19: +6 +2
-tension 20: +6 +2
-
-]
+[daggers used to do extra damage based on tension. That is no longer the case.
 
 An add specific damage rule (this is the dagger extra tension damage bonus rule):
 	if damage-by-hitting is true:
@@ -3526,9 +3478,9 @@ An add specific damage rule (this is the dagger extra tension damage bonus rule)
 			if n is not 0:
 				add n points of primary damage with reason "dagger benefits from tension".
 
-The dagger extra tension damage bonus rule is listed last in the add specific damage rules.
+The dagger extra tension damage bonus rule is listed last in the add specific damage rules.]
 
-The special weapon info of a dagger is usually "; benefits from tension[run paragraph on]".
+The special weapon info of a dagger is usually "; attack benefits from tension[run paragraph on]".
 
 Section - Gorgeous dagger (minor)
 
@@ -3723,7 +3675,7 @@ An axe is usually iron.
 
 The damage die of an axe is usually 4.
 The weapon attack bonus of an axe is usually -1.
-The weapon damage bonus of an axe is usually 2.
+The weapon damage bonus of an axe is usually 3.
 The dodge bonus of an axe is usually 1.
 The parry-against bonus of an axe is usually -2.
 
@@ -3797,7 +3749,7 @@ Carry out feeding (this is the feed the executioner's axe rule):
 		increase the weapon attack bonus of the executioner's axe by 1.
 
 The damage die of the executioner's axe is 7.
-The weapon damage bonus of the executioner's axe is 4.
+The weapon damage bonus of the executioner's axe is 5.
 The parry-with bonus of the executioner's axe is -2.
 The weapon attack bonus of the executioner's axe is -3.
 
@@ -3830,7 +3782,7 @@ The minotaur's axe is large.
 
 The damage die of the minotaur's axe is 6.
 The weapon attack bonus of the minotaur's axe is -2.
-The weapon damage bonus of the minotaur's axe is 3.
+The weapon damage bonus of the minotaur's axe is 4.
 The parry-with bonus of the minotaur's axe is -2.
 
 
@@ -4279,7 +4231,7 @@ The unlock text of the magical pickaxe is "an item that functions both as a weap
 
 The damage die of the pickaxe is 5.
 The weapon attack bonus of the pickaxe is -1.
-The weapon damage bonus of the pickaxe is 2.
+The weapon damage bonus of the pickaxe is 3.
 The dodge bonus of the pickaxe is 1.
 The parry-against bonus of the pickaxe is -1.
 The parry-with bonus of the pickaxe is 0.

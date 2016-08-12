@@ -3280,7 +3280,7 @@ Material of the minotaur is flesh.
 The minotaur is advanced.
 
 The health of minotaur is 35.
-The melee of minotaur is 2.
+The melee of minotaur is 1.
 The defence of minotaur is 11.
 
 The body score of minotaur is 10.

@@ -15,6 +15,7 @@ do
   cp $DATAFILE ${DATAFILE}.glkdata
 done
 
+cp ../Kerkerkruip.inform/Build/output.ulx output.ulx
 TIMESTAMP=$(date "+%Y-%m-%d-%H%M%S")
 FIGHT_COUNT=100
 [ -f tmp.log ] && rm tmp.log
@@ -23,7 +24,7 @@ for i in $(seq $FIGHT_COUNT)
 do
   COLS=$(tput cols)
   SCRIPT=$(printf "transcripts/$TIMESTAMP-%03d.transcript" $i)
-  ../i7/dumb-git -w $COLS ../Kerkerkruip.inform/Build/output.ulx >$SCRIPT
+  ../i7/dumb-git -w $COLS output.ulx >$SCRIPT
   WINNER=$(tail -n1 $SCRIPT)
   if [ "$WINNER" = "ERROR" ]
   then
