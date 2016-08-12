@@ -3257,7 +3257,7 @@ The gain defensive flow from parrying with sword rule is listed after the gain o
 
 The special weapon info of a sword is usually "; parrying sometimes adds defensive flow[run paragraph on]".
 
-An AI Action selection rule for a person (called guy) (this is the sword-users like to parry rule):
+An AI Action selection rule for an at-react person (called guy) (this is the sword-users like to parry rule):
 	if the current weapon of guy is a sword:
 		choose row with an option of guy parrying in Table of AI Action Options;
 		increase Action Weight entry by 1;
