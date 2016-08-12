@@ -1,0 +1,15 @@
+#!/bin/sh
+
+TIMESTAMP=$(date "+%y%m%d")
+OUTFILE=roundrobin.$TIMESTAMP.results
+[ -f $OUTFILE ] && rm $OUTFILE
+echo "Running round robin of all monsters in file 'monsters'..."
+cat monsters | while read CHAMPION
+do
+  cat monsters | while read CHALLENGER
+  do
+    [ "$CHAMPION" = "$CHALLENGER" ] && break
+    ./runner "$CHAMPION" "$CHALLENGER" | tail -n1 >>$OUTFILE
+    tail -n1 $OUTFILE
+  done
+done
