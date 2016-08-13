@@ -825,7 +825,7 @@ The health of Miranda is 14.
 The melee of Miranda is 0.
 The defence of Miranda is 7.
 The body score of Miranda is 5.
-The mind score of Miranda is 7.
+The mind score of Miranda is 8.
 The spirit score of Miranda is 5.
 
 Miranda is weapon user.
@@ -1238,8 +1238,8 @@ First carry out an actor attacking the chain golem (this is the attack a spinnin
 		unless W is ranged:
 			say "[The actor] [attempt] to duck under the whirling chains. [run paragraph on]";
 			let n be 6;
-			repeat with die roll running from 1 to concentration of the chain golem:
-				increase n by a random number from 1 to 3;
+			repeat with i running from 1 to concentration of the chain golem:
+				increase n by a random number between 1 and 2;
 			test the body of the actor against n;
 			if test result is false:
 				let n be two times the concentration of the chain golem;
