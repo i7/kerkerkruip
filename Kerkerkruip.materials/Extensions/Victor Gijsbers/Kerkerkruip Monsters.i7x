@@ -2880,7 +2880,7 @@ The giant tentacle is not talker.
 The giant tentacle is thrower.
 Material of the giant tentacle is flesh.
 
-The health of giant tentacle is 35.
+The health of giant tentacle is 38.
 The melee of giant tentacle is 3.
 The defence of giant tentacle is 12.
 
@@ -3283,7 +3283,7 @@ Material of the minotaur is flesh.
 The minotaur is advanced.
 
 The health of minotaur is 35.
-The melee of minotaur is 1.
+The melee of minotaur is 2.
 The defence of minotaur is 11.
 
 The body score of minotaur is 10.
