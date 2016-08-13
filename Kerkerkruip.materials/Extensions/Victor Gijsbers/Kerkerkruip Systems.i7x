@@ -436,6 +436,7 @@ Check an actor challenging someone in (this is the NPCs simulate arena battle ru
 	let m be level of the person asked;
 	increase m by 2;
 	while the person asked is alive and the noun is alive:
+		[TODO: use CTW rules instead?]
 		if a random chance of m in n succeeds:  [chance is: LVL1 + 2 / (LVL1 + 2 + LVL2 + 2); creatures of the same level: 1/2; level 4 vs level 3: 6/11; level 4 vs level 2: 6/10; level 4 vs level 0: 6/8.]
 			decrease health of the noun by 2;  [bypassing the damage system; this is a very rough approximation anyway]
 		otherwise:

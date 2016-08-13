@@ -575,6 +575,15 @@ A contact rule when the global attacker is the jumping bomb (this is the jumping
 		rule fails;
 
 The jumping bomb fight-test kamikaze rule is listed before the jumping bomb kamikaze rule in the contact rules.
+
+Check an actor challenging someone in (this is the minotaur should only maze people during fight tests if fighting multiple opponents rule):
+	if automated fight test is true and the second noun is not test arena:
+		Now opposition test subject is the actor;
+		if the number of opposer people enclosed by the location is at most 1:
+			say "[The actor] does not need to start a new arena battle with [the noun] because there are no other opponents - canceling effect.";
+			stop the action.
+			
+The minotaur should only maze people during fight tests if fighting multiple opponents rule is listed before the NPCs simulate arena battle rule in the check challenging it in rules.
 	
 Section - Died and Kill Stats
 

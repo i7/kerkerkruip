@@ -146,7 +146,7 @@ Before printing the name of a cursed curse-identified thing:
 Before printing the plural name of a cursed curse-identified thing:
 	say "cursed ".
 
-A treasure placement rule:
+A treasure placement rule (this is the sometimes curse clothing rule):
 	repeat with item running through corruptible clothing:
 		[ Do the last random chance early so that the number of random numbers generated doesn't depend on the difficulty ]
 		let r be a random number between 1 and 5;
@@ -179,7 +179,7 @@ Check inserting it into (this is the cannot insert a cursed readied weapon rule)
 	if the noun is a cursed weapon wielded by the player:
 		say "You cannot let go of [the noun]." instead.
 
-A treasure placement rule:
+A treasure placement rule (this is the sometimes curse weapons rule):
 	repeat with item running through corruptible weapons:
 		unless item is a natural weapon:
 			[ Do the last random chance early so that the number of random numbers generated doesn't depend on the difficulty ]

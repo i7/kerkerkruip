@@ -117,18 +117,22 @@ Definition: an object (called item) is rare if rarity of item is greater than 0.
 To decide if (stuff - an object) is too rare:
 	decide on whether or not any of (rarity of stuff) chances of 1 in 2 succeed.
 
-To decide whether (roll count - a number) chances of (threshold - a number) in (die - a number) succeed:
-	Let success be false;
-	while roll count > 0:
-		unless a random chance of threshold in die succeeds:
-			decide no;
-		decrease roll count by 1;
-	decide yes.
-	
-To decide whether any of (roll count - a number) chances of (threshold - a number) in (die - a number) succeed:
-	unless roll count chances of (die - threshold) in die succeed, yes;
-	no.
+To decide which number is the smallest of (roll count - a number) random numbers between (min - a number) and (max - a number):
+	Let smallest be max;
+	repeat with i running from 1 to roll count:
+		Let die roll be a random number between min and max;
+		if die roll < smallest:
+			now smallest is die roll;
+	decide on smallest.
 
+To decide whether any of (roll count - a number) chances of (threshold - a number) in (die - a number) succeed:
+	Let n be the smallest of roll count random numbers between 1 and die;
+	decide on whether or not n is at most threshold.
+
+To decide whether (roll count - a number) chances of (threshold - a number) in (die - a number) succeed:
+	unless any of roll count chances of (die - threshold) in die succeed, yes;
+	no.
+	
 Section - Basic and advanced modes
 
 An object can be basic or advanced. An object is usually basic.
@@ -365,7 +369,6 @@ Placement possible rule (this is the do not place advanced rooms in novice mode 
 
 Last placement possible rule:
 	rule succeeds.
-
 
 Section - Scoring the suitable rooms
 
@@ -709,11 +712,7 @@ To put monsters in the rooms:
 		if max is not 0:
 			sort Table of Suitable monsters in random order;
 			sort Table of Suitable monsters in reverse Monster Score order;
-			let pos1 be a random number between 1 and max;
-			let pos2 be a random number between 1 and max;
-			let pos3 be a random number between 1 and max;
-			if pos2 is less than pos1, now pos1 is pos2;
-			if pos3 is less than pos1, now pos1 is pos3;
+			let pos1 be the smallest of 3 random numbers between 1 and max;
 [			say "(choosing row [pos1] out of [max])";]
 			choose row pos1 in the Table of Suitable Monsters;
 			if generation info is true, say "* Placing suitable monster choice [pos1], [applicant entry] (level [global monster level]) in [considered room].[line break][run paragraph on]";
@@ -785,105 +784,39 @@ First treasure placement rule (this is the remove rare items rule):
 			if generation info is true:
 				say "* Decided that [X] is too rare. ".
 			
-
-A treasure placement rule (this is the stock minor treasure rule):
-	print generation message "    Placing minor treasures...";
-	let n be a number;
-	let stuff be a thing;
+First treasure placement rule (this is the remove advanced items in basic mode rule):
 	if basic game mode is true:
-		now n is the number of off-stage basic minor things;
-	otherwise:
-		now n is the number of off-stage minor things;
-	let m be a random number between 7 and 14;
-	if m is greater than n:
+		repeat with X running through advanced things:
+			now X is non-treasure;
+
+To place between (min - a number) and (max - a number) treasures from (D - a description of objects):
+	let stuff be a thing;
+	Let n be the number of D;
+	Let m be a random number from min to max;
+	if m > n:
 		now m is n;
-	repeat with i running from 1 to m:
-		if basic game mode is true:
-			now stuff is a random off-stage basic minor thing;
-		otherwise:
-			now stuff is a random off-stage minor thing;
+	Repeat with i running from 1 to m:
+		now stuff is a random D;
 		now considered treasure is stuff;
 		choose a room;
 		move stuff to considered room;
 		if generation info is true, say "* placed [stuff] in [considered room]".
 		
+A treasure placement rule (this is the stock minor treasure rule):
+	print generation message "    Placing minor treasures...";
+	place between 7 and 14 treasures from off-stage minor things.
+			
 A treasure placement rule (this is the stock major treasure rule):
 	print generation message "    Placing major treasures...";
-	let n be a number;
-	let stuff be a thing;
-	if basic game mode is true:
-		now n is the number of off-stage basic major things;
-	otherwise:
-		now n is the number of off-stage major things;
-	let m be a random number between 4 and 6;
-	if m is greater than n, now m is n;
-	repeat with i running from 1 to m:
-		if basic game mode is true:
-			now stuff is a random off-stage basic major thing;
-		otherwise:
-			now stuff is a random off-stage major thing;
-[		let place be a random placed placeable room;
-		if distance of place is less than 2:
-			let place be a random placed placeable room; [increasing probability of this treasure being farther from Entrance Hall]
-		if distance of place is less than 1:
-			let place be a random placed placeable room;
-		move stuff to place;]
-		now considered treasure is stuff;
-		choose a room;
-		move stuff to considered room;
-		if generation info is true, say "* placed [stuff] in [considered room]".		
-
+	place between 4 and 6 treasures from off-stage major things.
 
 A treasure placement rule (this is the stock epic treasure rule):
 	print generation message "    Placing epic treasures (well, you hope)...";
-	let n be a number;
-	let stuff be a thing;
-	if basic game mode is true:
-		now n is the number of off-stage basic epic things;
-	otherwise:
-		now n is the number of off-stage epic things;
-	let m be a random number between 1 and 2;
-	if m is greater than n, now m is n;
-	repeat with i running from 1 to m:
-		if basic game mode is true:
-			now stuff is a random off-stage basic epic thing;
-		otherwise:
-			now stuff is a random off-stage epic thing;
-[		let place be a random placed placeable room;
-		if distance of place is less than 3: [increasing probability of this treasure being farther from Entrance Hall]
-			let place be a random placed placeable room;
-		if distance of place is less than 3:
-			let place be a random placed placeable room;
-		while distance of place is less than 2: [There can be at most 7 room with distance less than 2, so this while should never loop infinitely]
-			let place be a random placed placeable room;
-		move stuff to place;]
-		now considered treasure is stuff;
-		choose a room;
-		move stuff to considered room;		
-		if generation info is true, say "* placed [stuff] in [considered room]".		
-
+	place between 1 and 2 treasures from off-stage epic things.		
 
 A treasure placement rule (this is the stock special treasure rule):
 	print generation message "    Placing special treasures...";
-	let n be a number;
-	let stuff be a thing;
-	if basic game mode is true:
-		now n is the number of off-stage basic special things;
-	otherwise:
-		now n is the number of off-stage special things;
-	let m be a random number between 0 and 1;
-	if m is greater than n, now m is n;
-	unless m is 0:
-		repeat with i running from 1 to m:
-			if basic game mode is true:
-				now stuff is a random off-stage basic special thing;
-			otherwise:
-				now stuff is a random off-stage special thing;
-			now considered treasure is stuff;
-			choose a room;
-			move stuff to considered room;		
-			if generation info is true, say "* placed [stuff] in [considered room]".	
-		
+	place between 0 and 1 treasures from off-stage special things.
 
 Section - Choosing a room
 
@@ -901,11 +834,7 @@ To choose a room:
 	if max is 0:
 		now considered room is Entrance Hall;
 	otherwise:
-		let pos1 be a random number between 1 and max;
-		let pos2 be a random number between 1 and max;
-		let pos3 be a random number between 1 and max;
-		if pos2 is less than pos1, now pos1 is pos2;
-		if pos3 is less than pos1, now pos1 is pos3;
+		let pos1 be the smallest of 3 random numbers between 1 and max;
 		choose row pos1 in the Table of Suitable rooms;
 		now considered room is Candidate entry.
 

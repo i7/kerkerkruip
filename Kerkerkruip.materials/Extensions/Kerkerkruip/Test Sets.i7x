@@ -3081,9 +3081,7 @@ regular scheduling of dagger-tension-damage:
 		-- 3: set the tension to 1;
 	do the action of Miranda waiting for a 100 melee hit by the player.
 testing effects of dagger-tension-damage:
-	Let the expected damage be 2;
-	if the attempt count of the outcome described is at least 2, now the expected damage is 1;
-	if we assert result "\+ [expected damage] \(dagger benefits from tension\)", rule succeeds.
+	if we assert absence of result "\+ \d+ \(dagger benefits from tension\)", rule succeeds.
 
 initial scheduling of giantbane-vs-miranda:
 	set the tension to 0;
@@ -3644,7 +3642,8 @@ initial scheduling of automatos-stab:
 	set the size of the gorgeous dagger to medium;
 
 regular scheduling of automatos-stab:
-	set the tension to 15;
+	set the tension to 20;
+	now the concentration of the player is 3;
 	do the action of Automatos waiting for a 100 melee hit by the player.
 
 testing effects of automatos-stab: if we assert result "The dagger has struck deep between plates of steel and dislodged something inside Automatos. The behemoth staggers backwards and shakes its head several times. Some small, almost delicate mechanical parts fall out of its ", rule succeeds.
