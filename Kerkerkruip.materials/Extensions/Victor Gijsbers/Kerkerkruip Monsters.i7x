@@ -3,6 +3,9 @@ Kerkerkruip Monsters by Victor Gijsbers begins here.
 Use authorial modesty.
 
 
+Chapter - Definition of other
+
+Definition: a person is other if it is not the player.
 
 Chapter - Groups of enemies
 
