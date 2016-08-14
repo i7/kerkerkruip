@@ -2066,7 +2066,7 @@ The health of the hound is 15.
 The melee of the hound is 2.
 The defence of the hound is 9.
 
-The body score of the hound is 7.
+The body score of the hound is 6.
 The mind score of the hound is 7.
 The spirit score of the hound is 5.
 
