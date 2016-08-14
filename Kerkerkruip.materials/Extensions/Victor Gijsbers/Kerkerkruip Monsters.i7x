@@ -1242,7 +1242,7 @@ First carry out an actor attacking the chain golem (this is the attack a spinnin
 			if test result is false:
 				unless chain-threat is 0:
 					say " One of the chains catches [the actor] with a loud smack, dealing [run paragraph on]";
-					deal chain-threat points of physical damage;
+					deal (chain-threat * 2 + 1) / 3 points of physical damage;
 					let X be a random natural weapon part of the chain golem;
 					have X inflict damage on the actor;
 					if the actor is alive:
