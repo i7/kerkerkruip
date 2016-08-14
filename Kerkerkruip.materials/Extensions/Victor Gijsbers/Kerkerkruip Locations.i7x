@@ -804,7 +804,7 @@ STD-firstturn is a truth state that varies. STD-firstturn is true. [To ensure th
 An initiative update rule (this is the initiative is almost completely random in Space-Time Discontinuum rule):
 	if STD-firstturn is false:
 		if location is Space-Time Discontinuum and the location is not initiative-conferring:
-			repeat with X running through all alive persons enclosed by the location:				
+			repeat with X running through all alive persons enclosed by the location:
 				now the initiative of X is a random number between 0 and 100;
 			now STD-firstturn is false.
 

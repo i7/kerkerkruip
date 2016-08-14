@@ -106,7 +106,7 @@ To print generation message (T - text):
 	say T.
 
 
-Section - Rarity
+Section - Rarity and multiple die rolls
 
 [Objects have a rarity. The probability of an object being put on the list for possible placement is 1/(2^rarity), i.e., 100% for rarity 0, 50% for rarity 1, 25% for rarity 2, and so on.]
 
@@ -117,13 +117,16 @@ Definition: an object (called item) is rare if rarity of item is greater than 0.
 To decide if (stuff - an object) is too rare:
 	decide on whether or not any of (rarity of stuff) chances of 1 in 2 succeed.
 
-To decide which number is the smallest of (roll count - a number) random numbers between (min - a number) and (max - a number):
+To decide which number is the smallest of (roll count - a number) random numbers from (min - a number) to (max - a number):
 	Let smallest be max;
 	repeat with i running from 1 to roll count:
 		Let die roll be a random number between min and max;
 		if die roll < smallest:
 			now smallest is die roll;
 	decide on smallest.
+
+To decide which number is the smallest of (roll count - a number) random numbers between (min - a number) and (max - a number):
+	decide on the smallest of roll count random numbers from min to max.
 
 To decide whether any of (roll count - a number) chances of (threshold - a number) in (die - a number) succeed:
 	Let n be the smallest of roll count random numbers between 1 and die;
@@ -133,6 +136,15 @@ To decide whether (roll count - a number) chances of (threshold - a number) in (
 	unless any of roll count chances of (die - threshold) in die succeed, yes;
 	no.
 	
+To decide which number is the sum of (roll count - a number) random numbers from (min - a number) to (max - a number):
+	Let sum be 0;
+	repeat with i running from 1 to roll count:
+		increase sum by a random number between min and max;
+	decide on sum;
+
+To decide which number is the sum of (roll count - a number) random numbers between (min - a number) and (max - a number):
+	Decide on the sum of roll count random numbers from min to max.
+
 Section - Basic and advanced modes
 
 An object can be basic or advanced. An object is usually basic.

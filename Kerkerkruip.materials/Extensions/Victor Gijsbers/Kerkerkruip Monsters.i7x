@@ -1237,15 +1237,12 @@ First carry out an actor attacking the chain golem (this is the attack a spinnin
 		let W be the current weapon of the actor;
 		unless W is ranged:
 			say "[The actor] [attempt] to duck under the whirling chains. [run paragraph on]";
-			let n be 6;
-			repeat with i running from 1 to concentration of the chain golem:
-				increase n by a random number between 1 and 2;
-			test the body of the actor against n;
+			let chain-threat be the sum of (concentration of the chain golem) random numbers from 1 to 3;
+			test the body of the actor against (chain-threat + 6);
 			if test result is false:
-				let n be two times the concentration of the chain golem;
-				unless n is 0:
+				unless chain-threat is 0:
 					say " One of the chains catches [the actor] with a loud smack, dealing [run paragraph on]";
-					deal n points of physical damage;
+					deal chain-threat points of physical damage;
 					let X be a random natural weapon part of the chain golem;
 					have X inflict damage on the actor;
 					if the actor is alive:
@@ -2964,7 +2961,7 @@ An aftereffects rule (this is the tentacle lets go when damaged rule):
 			let X be a random person grappled by the giant tentacle;
 			if (total damage) chances of 2 in 3 succeed:
 				say "Flinching in pain, the tentacle loosens its grip but [bold type]holds on[roman type] to [the X].";
-				decrease constriction level by the smallest of 3 random numbers between 1 and total damage;
+				decrease constriction level by the smallest of 3 random numbers from 1 to total damage;
 				if constriction level < 0, now constriction level is 0;
 			otherwise:
 				say "Recoiling in pain, the giant tentacle [bold type]lets go[roman type] of [the X].";
@@ -3918,8 +3915,7 @@ Carry out begging for mercy:
 		say "[paragraph break]'I may be forgiving, but I am not a fool!' the angel hisses.";
 		rule succeeds;
 	let n be 6;
-	repeat with die roll running from 1 to begging-count:
-		increase n by a random number from 1 to the health of the player;
+	increase n by the sum of begging-count random numbers from 1 to the health of the player;
 	decrease n by the favour of the player with Sul;
 	test the spirit of the player against n;
 	if test result is false:					
@@ -4076,16 +4072,41 @@ Aftereffects rule (this is the mercy damage rule):
 				["hate is present" is deprecated, but it's not safe to update the combat status here, because this can happen when combat status needs to be concluding]
 				if hate is present:
 					now the size of the player is the size before previous-size;
-					say "You shrink to [bold type][size of the player][roman type] size!";
-					let n be (a random number from 5 to 25) - total damage;
-					if n < 0, now n is 0;
-					test the spirit of the player against n;
+					say "You shrink to [bold type][size of the player][roman type] size!";			
+					let die-min be the square root of (400 / total damage);
+					let die-max be the square root of (2500 / total damage);
+					if die-min < 1, now die-min is 1;
+					if die-max < 2, now die-max is 2;	
+					let n be the sum of 4 random numbers from die-min to die-max;
+					test the spirit of the player against (n + 2) / 4;
 					if test result is true:
 						say "You gain a level of radiance!";
 						increase mercy-radiation by 1;
 						increase the radiation of the player by 1;
 					otherwise:
 						say "Your spirit was not strong enough to increase your radiance this time.";
+						
+[
+approx mercy spirit score targets:
+
+damage	min target	avg target	max target
+1	20	35	50
+2	16
+3	13
+4	11
+5	10	15	20
+6	9
+7	8
+8	7
+9	7
+10	6		9
+
+This comes to approximately x/sqrt(damage) where x is the min/avg/max with 1 damage
+
+We create a curve with four die rolls, then divide by 4
+
+To make the square root more accurate, we square the target and divide before taking the square root - that's how we get 400 and 2500.
+]
 
 Every turn when mercy-radiation is not 0 (this is the revert back to normal radiance rule):
 	if combat status is peace:
@@ -6234,8 +6255,7 @@ Section - Special power - Healing
 starting kit setup for Malygris (this is the randomise Malygris healing rule):
 	if a random chance of 1 in 5 succeeds:
 		now heal cooldown of Malygris is a random number between 2 and 5;
-		repeat with i running from 1 to 3:
-			increase heal power of Malygris by a random number between 1 and (heal cooldown of Malygris);
+		increase heal power of Malygris by the sum of 3 random numbers between 1 and (heal cooldown of Malygris);
 		if generation info is true, say "* Malygris has heal power of [heal power of Malygris] and heal cooldown of [heal cooldown of Malygris].".
 				
 
