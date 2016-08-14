@@ -1237,12 +1237,13 @@ First carry out an actor attacking the chain golem (this is the attack a spinnin
 		let W be the current weapon of the actor;
 		unless W is ranged:
 			say "[The actor] [attempt] to duck under the whirling chains. [run paragraph on]";
-			let chain-threat be the sum of (concentration of the chain golem) random numbers from 1 to 3;
-			test the body of the actor against (chain-threat + 6);
+			let chain-threat be the sum of (concentration of the chain golem) random numbers from 2 to 3;
+			test the body of the actor against (chain-threat + 7);
 			if test result is false:
-				unless chain-threat is 0:
+				let n be chain-threat - concentration of the chain golem;
+				unless n is 0:
 					say " One of the chains catches [the actor] with a loud smack, dealing [run paragraph on]";
-					deal (chain-threat * 2 + 1) / 3 points of physical damage;
+					deal n points of physical damage;
 					let X be a random natural weapon part of the chain golem;
 					have X inflict damage on the actor;
 					if the actor is alive:
@@ -2071,7 +2072,7 @@ The spirit score of the hound is 5.
 
 For natural weapon setup of the hound (this is the hound's teeth rule):
 	let X be the natural weapon described;
-	now damage die of X is 6; [Its bite is worse than its bark!]
+	now damage die of X is 5;
 	now dodge bonus of X is 0;
 	now parry-against bonus of X is 0;
 	now parry-with bonus of X is -2;
