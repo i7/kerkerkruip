@@ -821,7 +821,7 @@ The description of Miranda is "Although she is currently working as one of Malyg
 
 The soul description of Miranda is "a cloud of staggering purple".
 
-The health of Miranda is 17.
+The health of Miranda is 18.
 The melee of Miranda is 0.
 The defence of Miranda is 7.
 The body score of Miranda is 5.
@@ -1212,7 +1212,7 @@ The description of the chain golem is "A hulking form made of [if chain golem is
 
 The soul description of the chain golem is "lashings of steel".
 
-The health of the chain golem is 25.
+The health of the chain golem is 24.
 The melee of the chain golem is 1.
 The defence of the chain golem is 8.
 
@@ -2062,7 +2062,7 @@ The description of the hound is "The black hound is ever watchful, ready to puni
 
 The soul description of the hound is "a sharp yellow eye, narrowed and alert".
 
-The health of the hound is 14.
+The health of the hound is 15.
 The melee of the hound is 2.
 The defence of the hound is 9.
 
