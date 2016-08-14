@@ -1238,7 +1238,7 @@ First carry out an actor attacking the chain golem (this is the attack a spinnin
 		unless W is ranged:
 			say "[The actor] [attempt] to duck under the whirling chains. [run paragraph on]";
 			let chain-threat be the sum of (concentration of the chain golem) random numbers from 2 to 3;
-			test the body of the actor against (chain-threat + 7);
+			test the body of the actor against (chain-threat + 6);
 			if test result is false:
 				let n be chain-threat - concentration of the chain golem;
 				unless n is 0:
