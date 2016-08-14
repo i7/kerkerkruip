@@ -821,12 +821,12 @@ The description of Miranda is "Although she is currently working as one of Malyg
 
 The soul description of Miranda is "a cloud of staggering purple".
 
-The health of Miranda is 14.
+The health of Miranda is 17.
 The melee of Miranda is 0.
 The defence of Miranda is 7.
 The body score of Miranda is 5.
 The mind score of Miranda is 8.
-The spirit score of Miranda is 5.
+The spirit score of Miranda is 4.
 
 Miranda is weapon user.
 
@@ -1212,7 +1212,7 @@ The description of the chain golem is "A hulking form made of [if chain golem is
 
 The soul description of the chain golem is "lashings of steel".
 
-The health of the chain golem is 28.
+The health of the chain golem is 25.
 The melee of the chain golem is 1.
 The defence of the chain golem is 8.
 
@@ -2962,9 +2962,14 @@ An aftereffects rule (this is the tentacle lets go when damaged rule):
 	if the global defender is the giant tentacle and the total damage is greater than 0:
 		if the giant tentacle grapples someone and the giant tentacle is alive:
 			let X be a random person grappled by the giant tentacle;
-			say "Recoiling in pain, the giant tentacle [bold type]lets go[roman type] of [the X].";
-			now giant tentacle does not grapple X;
-			now constriction level is 0.
+			if (total damage) chances of 2 in 3 succeed:
+				say "Flinching in pain, the tentacle loosens its grip but [bold type]holds on[roman type] to [the X].";
+				decrease constriction level by the smallest of 3 random numbers between 1 and total damage;
+				if constriction level < 0, now constriction level is 0;
+			otherwise:
+				say "Recoiling in pain, the giant tentacle [bold type]lets go[roman type] of [the X].";
+				now giant tentacle does not grapple X;
+				now constriction level is 0.
 
 Every turn (this is the reset grappling after going rule):
 	if the location of the player is not the location of the giant tentacle:
@@ -3051,6 +3056,8 @@ An AI action selection rule for the at-React giant tentacle (this is the tentacl
 Carry out the giant tentacle tentacle-shaking:
 	say "The giant tentacle vigourously shakes [the main actor] while projecting the horrifying image of Tooloo.[italic type] [run paragraph on]";
 	let n be 12;
+	increase n by a random number between 1 and tension;
+	decrease n by a random number between 0 and constriction level;
 	test the mind of the main actor against n; 
 	say "[roman type]";
 	if test result is true:
@@ -3105,15 +3112,15 @@ An AI action selection rule for the at-Act giant tentacle (this is the tentacle 
 		now the Action Weight entry is 0;
 		Let style be the selected kit of the giant tentacle;
 		if style is linear-tentacle-throw:
-			if a random chance of constriction level in 50 succeeds:
+			if a random chance of constriction level + (tension / 2) in 50 succeeds:
 				now the Action Weight entry is 20;
 		if style is high-grapple-tentacle-throw:
 			if constriction level is greater than 3:
-				if a random chance of 1 in 3 succeeds:
+				if a random chance of 2 in 5 succeeds:
 					now the Action Weight entry is 20;
 		if style is unpredictable-tentacle-throw:
 			if constriction level is greater than 4 or a random chance of 1 in 5 succeeds:
-				if a random chance of 1 in 3 succeeds:
+				if a random chance of 1 in 2 succeeds:
 					now the Action Weight entry is 20.
 
 Carry out the giant tentacle tentacle-throwing:
