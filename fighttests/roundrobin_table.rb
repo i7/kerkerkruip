@@ -23,8 +23,8 @@ File.readlines(results).each do |line|
 end
 
 puts "Table of fight results:"
-puts "|#{legend.join("|")}"
-puts "-------|#{legend.map {'-'}.join("|")}"
+puts "\n |#{legend.join("|")}"
+puts "-------|#{legend.map {'---'}.join("|")}"
 monsters.each do |monster|
   columns = monsters.map do |other|
     scores[monster][other] || "X"
@@ -37,9 +37,9 @@ monster_totals = monsters.map {|m| [m, scores[m].values.inject(0) {|sum, score| 
 
 ranking = monsters.sort { |a, b| monster_totals[a] <=> monster_totals[b] }
 
-puts "\n\nRankings:\n"
+puts "\n\nRankings:"
 
-puts "monster|performance|weakest defeater|losses to defeater|strongest defeated|wins to defeated"
+puts "\nmonster|performance|weakest defeater|losses to defeater|strongest defeated|wins to defeated"
 puts "-------|-----------|----------------|------------------|------------------|----------------"
 ranking.each do |monster|
   percent = monster_totals[monster] * 100 / fights_per_monster
