@@ -1,3 +1,5 @@
 transcripts
 *.results
 challengers
+output.ulx
+*.log
