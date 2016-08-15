@@ -1761,6 +1761,7 @@ Scenario for bug-280:
 	now the reaper is testobject;
 	now the lair of the imp is testobject;
 	now the dimensional anchor is bannedobject;
+	now the armadillo is bannedobject;
 	now the teleportation beacon is bannedobject; [test with the imp?]
 	now the dream of briar roses is testobject;
 	now the reusable item is a random morphean grenade;
@@ -2608,7 +2609,7 @@ Initial scheduling of chain-smack damage text:
 
 regular scheduling of chain-smack damage text: try attacking the chain golem.
 [TODO: make sure attacking doesn't leave crap in the delayed actions table?]
-Testing effects of chain-smack damage text: if we assert result "(\n|^)You attempt to duck under the whirling chains\. You roll <0-9>+ \+ -100 \(body\) = -<0-9>+ against a target number of <0-9>+, failing the body check\. One of the chains catches you with a loud smack, dealing 6 damage\.", rule succeeds.
+Testing effects of chain-smack damage text: if we assert result "(\n|^)You attempt to duck under the whirling chains\. You roll <0-9>+ \+ -100 \(body\) = -<0-9>+ against a target number of <0-9>+, failing the body check\. One of the chains catches you with a loud smack, dealing <3-6> damage\.", rule succeeds.
 
 Regular scheduling of bomb-power damage text:
 	now the power of the bomb is granted;
