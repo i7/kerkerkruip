@@ -223,6 +223,7 @@ tip
 "Vampire bat form gives you the power to see without eyes, but you can no longer read scrolls. This is a change from Kerkerkruip 9."
 "Parrying with a sword grants the usual offensive flow bonus, but 50% of the time it also adds one point of defensive flow. This is a change from Kerkerkruip 9."
 "Daggers still get an extra attack bonus from tension, but they no longer get an extra damage bonus. This is a change from Kerkerkruip 9."
+"When you parry, your size does not affect the attack strength, although parrying with a size-mismatched weapon will give you a penalty. This is a change from Kerkerkruip 9."
 
 To decide which text is the next tip text:
 	if a random chance of 3 in ((number of total victories) + 4) succeeds: [Expert tips show up more often when number of victories is higher.]

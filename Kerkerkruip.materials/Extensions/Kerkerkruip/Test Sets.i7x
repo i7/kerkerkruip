@@ -2779,7 +2779,7 @@ regular scheduling of radiance-attack-eyeless-monster:
 
 testing effects of radiance-attack-eyeless-monster: if we assert absence of result "\+ 4 \(radiance\)<^\n>* you do not overcome", rule succeeds.
 
-[TODO: Consider removing it... allow the vial of purification to cure flash grenade blindness? or have another blindness-cured property that overrides the flash grenade?]
+Section - Bright Lights in Entrance Hall Attack Modifier
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	label
@@ -2811,6 +2811,8 @@ initial scheduling of eyeless-monster-attack-bright: now eyeless vision is not a
 regular scheduling of eyeless-monster-attack-bright: do the action of waiting for a 0 melee hit by the jumping bomb.
 
 testing effects of eyeless-monster-attack-bright: if we assert absence of result "- 2 \(blinding light\)<^\n>* jumping bomb does not overcome", rule succeeds.
+
+Section - Hall of Mirrors Attack Modifier
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	label
@@ -2853,6 +2855,8 @@ Regular scheduling of eyeless-monster-attack-mirrors:
 Testing effects of eyeless-monster-attack-mirrors:
 	if we assert absence of result "Confused by the mirrors", rule succeeds.
 
+Section - Blindness Attack Modifiers
+
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	label
 blind-attack	1	1	"blind attacker"
@@ -2890,6 +2894,8 @@ Testing effects of eyeless-monster-defend: if we assert absence of result "\(def
 
 [skipping test for AI concentrating in Phantasmagoria - how would we test that anyway?]
 
+Section - Smoke Attack Modifier
+
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	label
 blind-smoke-attack	0	1	"blind smoke attacker"
@@ -2915,6 +2921,59 @@ Initial scheduling of sighted-smoke-attack: now eyeless vision is not adapted.
 Regular scheduling of eyeless-monster-smoke-attack: do the action of waiting for a 0 melee hit by JB.
 
 Testing effects of eyeless-monster-smoke-attack: if we assert absence of result "\(smoke\)", rule succeeds.
+
+Section - Size Attack Modifiers
+
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts	label
+too-small-block	1	1	--
+agnostic-block	1	1	--
+player-size-wait	6	6	"growing defender"
+player-size-dodge	6	6	"growing defender"
+player-size-parry	6	6	"growing defender"
+
+Initial scheduling of too-small-block:
+	prepare a test battle with the armadillo;
+	now the player is medium;
+	now the wooden buckler is tiny;
+	equip the player with the wooden buckler;
+
+Regular scheduling of too-small-block: do the action of blocking a 100 melee hit by the armadillo.
+Testing effects of too-small-block: if we assert result "\+ 2 \(defender's shield too small\)", rule succeeds.
+
+Initial scheduling of agnostic-block:
+	equip the player with the bulwark of faith;
+	now the player worships Sul;
+	now favour of the player is 1;
+
+Regular scheduling of agnostic-block: do the action of blocking a 100 melee hit by the armadillo.
+Testing effects of agnostic-block: if we assert absence of result "defender's shield too small", rule succeeds.
+
+Initial scheduling of an outcome labeled "growing defender":
+	now the player is tiny;
+	
+First regular scheduling of an outcome labeled "growing defender":
+	if the attempt count of the outcome described > 1:
+		now the size of the player is the size after the size of the player;
+		
+Testing effects of an outcome labeled "growing defender":
+	Let n be the size number of the player;
+	Let minus-n be 0 - n;
+	if the outcome described is player-size-parry:
+		if n < 0:
+			assert result "\+ [minus-n] \(parrying with outsized weapon\)";
+		if n > 0:
+			assert result "\+ [n] \(parrying with undersized weapon\)";
+	if n is 0 or the outcome described is player-size-parry:
+		if we assert absence of result "defender [size of the player]", rule succeeds;
+	otherwise if n < 0:
+		if we assert result "- [minus-n] \(defender [size of the player]\)", rule succeeds;
+	otherwise if n > 0:
+		if we assert result "\+ [n] \(defender [size of the player]\)", rule succeeds.
+
+regular scheduling of player-size-wait: do the action of waiting for a 0 melee hit by the armadillo.
+regular scheduling of player-size-dodge: do the action of dodging a 0 melee hit by the armadillo.
+regular scheduling of player-size-parry: do the action of parrying a 0 melee hit by the armadillo.
 
 Chapter - Damage Modifiers
 
@@ -4238,8 +4297,6 @@ Section - Resizing salves
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts
 Resizing salves	1	1
-too-small-block	1	1
-agnostic-block	1	1
 
 To decide whether we assert that (item - a thing) is (size - a size):
 	if the size of item is size, yes;
@@ -4279,22 +4336,6 @@ Testing effects of resizing salves:
 				assert result "You cannot make [if target is the player]yourself[otherwise][the target] any smaller\.";
 				assert that the target is tiny;
 	rule succeeds;
-
-Initial scheduling of too-small-block:
-	prepare a test battle with the armadillo;
-	now the player is medium;
-	equip the player with the wooden buckler;
-
-Regular scheduling of too-small-block: do the action of blocking a 100 melee hit by the armadillo.
-Testing effects of too-small-block: if we assert result "\+ 2 \(defender's shield too small\)", rule succeeds.
-
-Initial scheduling of agnostic-block:
-	equip the player with the bulwark of faith;
-	now the player worships Sul;
-	now favour of the player is 1;
-
-Regular scheduling of agnostic-block: do the action of blocking a 100 melee hit by the armadillo.
-Testing effects of agnostic-block: if we assert absence of result "defender's shield too small", rule succeeds.
 
 Section - Controlling pipes
 

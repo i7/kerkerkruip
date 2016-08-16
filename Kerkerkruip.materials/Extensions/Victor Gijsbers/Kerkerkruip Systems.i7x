@@ -593,17 +593,15 @@ To decide which number is the size difference of (a - a thing) and (b - a thing)
 Section - Size and combat
 
 An attack modifier rule (this is the size attack modifier rule):
-	let n be the size number of the global defender;
-	if n > 0:
-		say " + [n] (defender [size of the global defender])[run paragraph on]";
-		increase the attack strength by n;
-	otherwise if n < 0:
-		now n is 0 - n;
-		say " - [n] (defender [size of the global defender])[run paragraph on]";
-		decrease the attack strength by n;
-
-
-[TODO: improve AI reaction selection based on effects - and consider taking away the size attack bonus when a big defender parries]
+	if the global defender is not at parry:
+		let n be the size number of the global defender;
+		if n > 0:
+			say " + [n] (defender [size of the global defender])[run paragraph on]";
+			increase the attack strength by n;
+		otherwise if n < 0:
+			now n is 0 - n;
+			say " - [n] (defender [size of the global defender])[run paragraph on]";
+			decrease the attack strength by n;
 
 Chance to win rule when the global defender is not medium (this is the CTW defender size bonus rule):
 	increase the chance-to-win by the size number of the global defender.
@@ -658,6 +656,24 @@ An attack modifier rule (this is the shield size attack modifier rule):
 
 [No chance to win rule: monsters who start using over- or undersized weapons probably deserve being clumsy.]
 
+An attack modifier rule (this is the parry size attack modifier rule):
+	if the global defender is at parry:
+		if the global defender weapon is not size-agnostic:
+			if the global defender weapon is not a natural weapon part of the global defender:
+				Let n be the size difference of the global defender and the global defender weapon;
+				if n > 0:
+					say " + [n] (parrying with outsized weapon)[run paragraph on]";
+					increase the attack strength by n;
+				otherwise if n < 0:
+					now n is 0 - n;
+					say " + [n] (parrying with undersized weapon)[run paragraph on]";
+					increase the attack strength by n;
+
+An AI action selection rule for an at-React person (called guy) (this is the parrying is better when big rule):
+	Let n be the size number of the guy;
+	choose row with an Option of the guy parrying in the Table of AI Action Options;
+	increase the Action Weight entry by n;
+	
 Section - Size of Things
 
 To increase the size of (item - a thing):
