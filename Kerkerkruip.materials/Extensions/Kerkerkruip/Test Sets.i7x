@@ -2944,6 +2944,7 @@ First regular scheduling of an outcome when testing damage-modifiers: capture da
 scenario for damage-modifiers:
 	Repeat with guy running through people:
 		now inherent damage modifier of the guy is 10;
+	now addict-kit is bannedobject;
 	now the tungausy totem is bannedobject;
 	now the focal totem is bannedobject;
 	now the totem of the bull is bannedobject;

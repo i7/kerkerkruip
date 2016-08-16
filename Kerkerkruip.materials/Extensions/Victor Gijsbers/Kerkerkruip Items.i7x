@@ -1374,7 +1374,7 @@ An aftereffects rule (this is the gauntlet of attraction steals weapons rule):
 	If the gauntlet can steal the loot for the global defender:
 		[TODO: parrying natural and tethered weapons causes grappling]
 		say "The gauntlet of attraction grips [the loot]![paragraph break][The global attacker] [try] to hold on. [run paragraph on]";
-		Let the gripping-force be the sum of 3 random numbers from 1 to (the final body of the global defender);
+		Let the gripping-force be the sum of 3 random numbers from 2 to (the final body of the global defender);
 		if the loot is cursed:
 			decrease gripping-force by 3;
 		test the body of the global attacker against the gripping-force;
