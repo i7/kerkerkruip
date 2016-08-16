@@ -568,7 +568,8 @@ to say when the Nomos counter runs out:
 	otherwise:
 		if the Nomos attacker is the player:
 			say "[bold type][Nomos counter] turn[s][roman type] from now";
-		say "in [bold type][Nomos counter]turn[s][roman type]".
+		otherwise:
+			say "in [bold type][Nomos counter]turn[s][roman type]".
 
 Before reading a command (this is the planning notification rule):
 	if the main actor is the player and the Nomos attacker is the player:
