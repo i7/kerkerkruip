@@ -3517,13 +3517,6 @@ An AI action selection rule for an at-React person (called guy) (this is the def
 				
 The defender uses gauntlet of attraction to get weapons rule is listed after the standard defense against attack select rule in the AI action selection rules.
 	
-The size attack modifier rule does nothing when the global defender is the angel of mercy and the global defender is at parry. [TODO: generalize this!]
-
-An AI action selection rule for the at-React angel of mercy (this is the angel of mercy doesn't parry when too small rule):
-	Let n be the size number of the angel of mercy - 1;
-	choose row with an Option of the angel of mercy parrying in the Table of AI Action Options;
-	increase the Action Weight entry by n;
-	
 An AI action selection rule for the angel of mercy (this is the angel of mercy's gloves come off rule):
 	if the angel of mercy wears the gauntlet of attraction and the angel of mercy does not enclose an artificial weapon:
 		Let weapon-count be 0;
@@ -4110,7 +4103,7 @@ To make the square root more accurate, we square the target and divide before ta
 ]
 
 Every turn when mercy-radiation is not 0 (this is the revert back to normal radiance rule):
-	if combat status is peace:
+	if combat status is peace and the player is the true body of the player:
 		let base-radiation be the radiation of the player - mercy-radiation;
 		if base-radiation is 0:
 			say "All of your radiance is extinguished with your mercy.";

@@ -1353,10 +1353,15 @@ To find the corpse:
 			move putrefying arm to player;
 	otherwise:
 		if a random chance of 4 in 5 succeeds:
-			say "The most valuable thing you find is an embalmed hand gripping a candle.";
-			move hand of glory to player;
+			if the hand of glory is off-stage:
+				say "The most valuable thing you find is an embalmed hand gripping a candle.";
+				move hand of glory to player;
+			otherwise:
+				say "The most valuable thing you find is a putrefying arm that might function as a club.";
+				move putrefying arm to player;
 		otherwise:
 			say "You find an evil object of immense power, the [bold type]hand of Vecna[roman type]!";
+			move hand of vecna to player;
 	now pile search count is -2; [ Account for the increment ]
 
 The putrefying arm is a weapon.
