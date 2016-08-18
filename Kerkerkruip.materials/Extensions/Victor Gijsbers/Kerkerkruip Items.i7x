@@ -2330,9 +2330,7 @@ sliwi 	"SLIWI LIDINNA"	true   [Dannii Willis]
 clawe	"CLAWE DARKE"	true   [Wade Clarke]
 
 Definition: a scroll name is obfuscated if obfuscated of it is true.
-[Definition: a scroll name is unhealthy if the mood of it is deathly.
-Definition: a scroll name is healthy if obfuscated of it is not true and it is not unhealthy.]
-Definition: a scroll name is findable if it is not an obfuscated scroll name.
+Definition: a scroll name is findable if it is not an obfuscated scroll name. [Use special case definitions to make scrolls unfindable]
 
 Understand "mort" and "eilysh" as mort.
 Understand "cemil" and "kui" as cemil.

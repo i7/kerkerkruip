@@ -1454,6 +1454,81 @@ testing effects of throwing-blessed:
 First testing effects of no-new-blessed:
 	assert "The Blessed Grenade should be off-stage" based on whether or not the blessed grenade is off-stage.
 
+Chapter - Pile of Limbs
+
+Scenario for pile-of-limbs-test:
+	now quartering room is testobject;
+	now mausoleum is bannedobject;
+	now ravenous armadillo is bannedobject;
+	now lair of the imp is bannedobject;
+	Repeat with guy running through follower monsters:
+		now guy is bannedobject.
+
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts	maximum attempts	label	antecedent
+pile-of-limbs-test	0	1	1	--	restarting for tests
+early-pile-search	0	1	--	"search pile"	--	
+getting-deathly	1	0	--	--	early-pile-search
+getting-healthy	1	0	--	--	early-pile-search
+getting-delights	0	100	--	--	early-pile-search
+getting-bad-scroll	0	100	--	--	early-pile-search
+early-out	1	0	--	"out of scrolls"	early-pile-search
+corpse-appears	14	15	--	--	early-out
+find-glory	1	0	--	--	early-out
+find-vecna	1	0	200	--	early-out
+late-pile-search	0	1	--	"search pile"	--
+late-out	1	0	20	"out of scrolls"	late-pile-search
+find-arm	1	0	--	--	late-out
+after-search	1	1	--	--	--
+	
+initial scheduling of pile-of-limbs-test:
+	now the defence of the player is 100;
+	extract the player to the quartering room, making sure it is unoccupied;
+
+Regular scheduling of an outcome labeled "search pile":
+	Repeat with item running through scrolls enclosed by the location:
+		remove item from play;
+	if the player carries the hand of glory:
+		remove the hand of glory from play;
+	if the player carries the hand of vecna:
+		remove the hand of vecna from play;
+	Repeat with guy running through people enclosed by the location:
+		if guy opposes the player:
+			remove guy from play;
+	if the pile search count < 0:
+		now the pile search count is 0;
+	try searching the large pile of body parts;
+
+Testing effects of getting-deathly:
+	Let item be a random scroll carried by the player;
+	if item is a scroll of death or item is a scroll of summoning or item is a scroll of ghoulification, rule succeeds.
+	
+Testing effects of getting-healthy:
+	Let item be a random scroll carried by the player;
+	if item is a scroll of death or item is a scroll of summoning or item is a scroll of ghoulification, rule fails;
+	if item is a scroll, rule succeeds.
+
+Testing effects of getting-delights: if the player carries a scroll of afternoon delights, rule succeeds.
+
+[This is an extremely longwinded way of making sure a scroll is legit:]
+Testing effects of getting-bad-scroll:
+	Let item be a random scroll carried by the player;
+	if item is not a scroll, rule fails;
+	unless item is a scroll of afternoon delights or item is a scroll of death or item is a scroll of summoning or item is a scroll of ghoulification or item is a scroll of teleportation or item is a scroll of knowledge or item is a scroll of curse removal or item is a scroll of shadows or item is a scroll of the blade or item is a scroll of protection or item is a scroll of skill or item is a scroll of alteration or item is a scroll of mapping or item is a scroll of psycholocation or item is a scroll of enchantment:
+		now the failure report is "The player got [the item], which is a scroll, but not one of a meaningful kind.";
+		rule succeeds.
+		
+
+Testing effects of an outcome labeled "out of scrolls": unless the player carries a scroll, rule succeeds.
+Testing effects of corpse-appears: if the rotting corpse is in the location, rule succeeds.
+Testing effects of find-glory: if the player carries the hand of glory, rule succeeds.
+Testing effects of find-vecna: if the player carries the hand of vecna, rule succeeds.
+
+Initial scheduling of late-pile-search: extract the rotting corpse to Entrance Hall.
+Testing effects of find-arm: if the player carries the putrefying arm, rule succeeds.
+Regular scheduling of after-search: try searching the large pile of body parts;
+Testing effects of after-search: if we assert result "You find nothing else in the pile", rule succeeds.
+
 Chapter - bug 262
 
 Table of Outcomes (continued)
