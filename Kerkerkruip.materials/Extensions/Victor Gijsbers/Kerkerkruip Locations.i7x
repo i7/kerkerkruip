@@ -1317,10 +1317,10 @@ Instead of searching the large pile of body parts:
 	increment pile search count;
 
 To find an unhealthy scroll:
-	find a scroll of type random unhealthy findable scroll name;
+	find a scroll of type random deathly findable scroll name;
 
 To find a healthy scroll:
-	find a scroll of type random healthy findable scroll name;
+	find a scroll of type random not deathly findable scroll name;
 
 [
 This phrase expects N to be an un-obfuscated scroll name. If it is not, you'll get an obfuscated scroll that can't be identified and does nothing.

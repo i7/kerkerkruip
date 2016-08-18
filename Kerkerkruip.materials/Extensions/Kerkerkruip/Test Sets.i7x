@@ -2543,6 +2543,8 @@ testing effects of fragmentation damage text: if we assert result "<2-5> damage 
 
 [skip fragmentation in other rooms because no damage text is printed]
 
+Section - Defensive and Religious Items Damage Text
+
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	label
 dodge-thorns damage text	1	1	--
@@ -2588,6 +2590,8 @@ Regular scheduling of aite-statue damage text:
 	try climbing the statue of Aite.
 
 Testing effects of aite-statue damage text: if we assert result "(\n|^)You cut yourself as soon as you touch the statue\. The weapons deal 3 damage\.", rule succeeds.
+
+Section - Special Monster Power Damage Text
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts
@@ -2646,6 +2650,8 @@ Testing effects of tentacle-attack wounding text:
 regular scheduling of tentacle-constrict damage text: try the tentacle tentacle-constricting;
 Testing effects of tentacle-constrict damage text: if we assert "The giant tentacle tightens its muscles, dealing" to the player a total of 1 damage "to you", rule succeeds.
 
+Section - Bodmall Thorns and Israfel Burning Damage Text
+
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts
 thorns-launch damage text	1	1
@@ -2667,6 +2673,8 @@ regular scheduling of isra-burn damage text: do the action of isra waiting for a
 Testing effects of isra-burn damage text: if we assert 2 damage to the player after "Isra's flames burn you for", rule succeeds.
 
 [TODO: check damage and damage description in one phrase?]
+
+Section - Miscellaneous Damage Text
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	label
@@ -4012,7 +4020,7 @@ Table of Outcomes (continued)
 Outcome	likelihood	minimum attempts	antecedent
 Simple tests	0	1	restarting for tests
 
-Section - Reading Ability
+Section - Reading Ability Simple Test
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	label
@@ -4045,7 +4053,7 @@ Initial scheduling of sighted-reading:
 	Now eyeless vision is not adapted;
 	remove the blindfold from play.
 	
-Section - Looking while blind
+Section - Looking while blind Simple Test
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts
@@ -4119,7 +4127,7 @@ Initial scheduling of flash-sighted-player: now eyeless vision is not adapted.
 
 testing effects of blind-when-flashed: unless the player is perceptive, rule succeeds.
 
-Section - Phantasmagoria Distractions
+Section - Phantasmagoria Distractions Simple Test
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	maximum attempts	antecedent
@@ -4160,7 +4168,7 @@ Testing effects of a player-distracting outcome: if the concentration of the pla
 
 Testing effects of eyeless-monster-startled: if the concentration of the jumping bomb is 0, rule succeeds.
 
-Section - Blindness Rules
+Section - Blindness Rules Simple Test
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	label
@@ -4211,7 +4219,7 @@ Testing effects of compassion-eye-using: if the angel of compassion is using eye
 
 [TODO: test for number of perceiving enemies]
 
-Section - Goggle Effects
+Section - Goggle Effects Simple Test
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	label
@@ -4292,7 +4300,7 @@ initial scheduling of blind-player-agoggles-b:
 	
 initial scheduling of eyes-player-agoggles-p: now the flash-grenade-timer of the player is 0.
 
-Section - Resizing salves
+Section - Resizing salves Simple Test
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts
@@ -4337,7 +4345,7 @@ Testing effects of resizing salves:
 				assert that the target is tiny;
 	rule succeeds;
 
-Section - Controlling pipes
+Section - Controlling pipes Simple Test
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts
@@ -4369,13 +4377,14 @@ testing effects of x-closed pipes: if we assert result " They are currently shut
 regular scheduling of x-closed wheel: try examining the wheel.
 testing effects of x-closed wheel: if we assert result "which are currently closed\.", rule succeeds.
 
-Section - Bug 351 - scroll cloning
+Section - Bug 351 - scroll cloning Simple Test
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts
 bug-351-find	1	1
 bug-351-obsc-name	1	1
 bug-351-true-name	1	1
+bug-351-findable	1	1
 
 regular scheduling of bug-351-find: find a healthy scroll.
 testing effects of bug-351-find: if we assert result "You have found a scroll", rule succeeds.
@@ -4390,8 +4399,16 @@ testing effects of bug-351-true-name:
 		let item-name be the true name of item;
 		unless we assert "The true name of [item] should not be obfuscated, but it is [true name of item], which is an obfuscated name'" based on whether or not item-name is a not obfuscated scroll name, rule fails;
 	rule succeeds.
+	
+testing effects of bug-351-findable:
+	Repeat with item running through not obfuscated scroll names:
+		Let should-be-findable be true;
+		if item is delights:
+			now should-be-findable is false;
+		unless we assert that (whether or not item is findable) is should-be-findable with label "[item] is findable", rule fails;
+	rule succeeds.
 
-Section - Bug 352 - exploded property
+Section - Bug 352 - exploded property Simple Test
 
 Table of Outcomes (continued)
 outcome	likelihood	label	minimum attempts
@@ -4400,7 +4417,7 @@ throwing-352	1	"try throwing"	1
 Initial scheduling of throwing-352: now the reusable item is a random smoke grenade.
 Testing effects of throwing-352: if we assert absence of result "Run-time problem", rule succeeds.
 
-Section - Died Counts
+Section - Died Counts Simple Test
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts
@@ -4419,7 +4436,7 @@ Regular scheduling of died-count-test: try smiting Israfel.
 Testing effects of died-count-test: if we assert that the died count of israfel is the challenger's initial defeats + 1 with label "died count of Israfel", rule succeeds.
 
 
-Section - Enemies should always start out awake in Arena of the Fallen
+Section - Enemies should always start out awake in Arena of the Fallen Simple Test
 
 Table of Outcomes (continued)
 outcome	likelihood	label	minimum attempts
@@ -4443,7 +4460,7 @@ Testing effects of dead-fallen: if the blood ape is dead, rule succeeds.
 initial scheduling of awake-in-fallen-arena: have the player and the blood ape fight in Arena of the Fallen.
 testing effects of awake-in-fallen-arena: if the blood ape is not asleep, rule succeeds.
 
-Section - Dream of Sleeping
+Section - Dream of Sleeping Simple Test
 
 Table of Outcomes (continued)
 outcome	likelihood	label	minimum attempts
@@ -4485,7 +4502,7 @@ regular scheduling of Malygris-hitting-sleeper: compel the action of waiting as 
 testing effects of Malygris-hitting-sleeper: if we assert result "Malygris deals<^\n>+ \+ 2 \(defender was asleep\)", rule succeeds.
 testing effects of slapped-awake: if the player is not just-woken, rule succeeds.
 
-Section - Healer of Aite Healing
+Section - Healer of Aite Healing Simple Test
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	maximum attempts	antecedent
@@ -4516,7 +4533,7 @@ testing effects of healer-healing-defender: if the injury of defender of Aite is
 testing effects of healer-still-injured: if the injury of healer of Aite is at least 3, rule succeeds.
 testing effects of healer-healing-self: if the injury of healer of Aite is less than 3, rule succeeds.
 
-Section - Hiding Penalites
+Section - Hiding Penalites Simple Test
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	antecedent

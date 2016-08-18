@@ -698,9 +698,8 @@ Section - Favour rules
 Favour rule for Sul (this is the Sul favour 1 rule):
 	if divine favour is 1:
 		say "Sul grants you knowledge of deathly magic, so that you will not inadvertently use it; she gives you immunity to angelic radiance; and she protects you from curses.";
-		identify a random scroll of death;
-		identify a random scroll of ghoulification;
-		identify a random scroll of summoning.
+		while there is an unidentified deathly scroll:
+			identify a random unidentified deathly scroll.
 
 Favour rule for Sul (this is the Sul favour 3 rule):
 	if divine favour is 3:
@@ -741,19 +740,7 @@ Every turn when the player worships Sul (this is the Sul checks you for curses r
 
 Section - Unable to use deathly magic
 
-[TODO: see if we can change this to one rule, "Last check reading an unhealthy scroll"]
-
-Last check reading a scroll of death:
-	if player worships Sul:
-		do the Sul vengance;
-		rule fails.
-
-Last check reading a scroll of summoning:
-	if player worships Sul:
-		do the Sul vengance;
-		rule fails.
-		
-Last check reading a scroll of ghoulification:
+Last check reading a deathly scroll:
 	if player worships Sul:
 		do the Sul vengance;
 		rule fails.

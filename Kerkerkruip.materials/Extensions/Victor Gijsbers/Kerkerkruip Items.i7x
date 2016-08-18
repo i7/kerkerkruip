@@ -2309,9 +2309,11 @@ If it has more than one word you'll need to add extra understand phrases - see t
 A scroll name is a kind of value.
 Some scroll names are defined by the Table of Scroll Names.
 
+A scroll name has a mood. A scroll name is usually civilised.
+
 Table of Scroll Names
-scroll name	printed name	obfuscated	unhealthy	unfindable
-mort	"MORT EILYSH"	true	false  	false[Emily Short]
+scroll name	printed name	obfuscated	mood
+mort	"MORT EILYSH"	true	civilised [Emily Short]
 cemil	"CEMIL KUI"	true  [Mike Ciul]
 ban	"BAN GNAD"	true   [Angband]
 chetnak	"CHETNAK"	true   [Nethack]
@@ -2328,9 +2330,9 @@ sliwi 	"SLIWI LIDINNA"	true   [Dannii Willis]
 clawe	"CLAWE DARKE"	true   [Wade Clarke]
 
 Definition: a scroll name is obfuscated if obfuscated of it is true.
-Definition: a scroll name is unhealthy if unhealthy of it is true.
-Definition: a scroll name is healthy if obfuscated of it is not true and unhealthy of it is not true.
-Definition: a scroll name is findable if unfindable of it is not true. [and obfuscated of it is not true?]
+[Definition: a scroll name is unhealthy if the mood of it is deathly.
+Definition: a scroll name is healthy if obfuscated of it is not true and it is not unhealthy.]
+Definition: a scroll name is findable if it is not an obfuscated scroll name.
 
 Understand "mort" and "eilysh" as mort.
 Understand "cemil" and "kui" as cemil.
@@ -2373,14 +2375,15 @@ Rule for printing the plural name of a scroll (called S) (this is the printing t
 Instead of examining an unidentified scroll:
 	say "You'll have to read this scroll to find out what it does."
 
-When play begins (this is the obfuscate scrolls rule):
+When play begins (this is the obfuscate scrolls and set mood rule):
 	let names be the list of obfuscated scroll names;
 	sort names in random order;
 	Repeat with S running through not obfuscated scroll names:
-		Let N be entry 1 of names;
+		Let code-name be entry 1 of names;
 		remove entry 1 from names;
-		repeat with I running through scrolls identified as S:
-			now the obfuscated name of I is N;
+		repeat with item running through scrolls identified as S:
+			now the obfuscated name of item is code-name;
+			now the mood of item is the mood of S;
 
 To identify (S - a scroll):
 	now the true name of S is revealed.
@@ -2413,8 +2416,8 @@ Carry out reading a scroll of teleportation:
 Section - Scroll of Ghoulification		
 
 Table of Scroll Names (continued)
-scroll name	unhealthy
-ghoulification	true
+scroll name	mood
+ghoulification	deathly
 
 A scroll of ghoulification is a kind of scroll.
 The true name of a scroll of ghoulification is ghoulification.
@@ -2496,8 +2499,8 @@ Carry out reading a scroll of shadows:
 Section - Scroll of Summoning
 
 Table of Scroll Names (continued)
-scroll name	unhealthy
-summoning	true
+scroll name	mood
+summoning	deathly
 
 A scroll of summoning is a kind of scroll.
 The true name of a scroll of summoning is summoning.
@@ -2719,8 +2722,8 @@ An unholy wave rule (this is the standard unholy wave rule):
 		end the story saying "Your life force has been negated".
 
 Table of Scroll Names (continued)
-scroll name	unhealthy
-death	true
+scroll name	mood
+death	deathly
 
 A scroll of death is a kind of scroll.
 The true name of a scroll of death is death.
@@ -2844,8 +2847,10 @@ Carry out reading a scroll of enchantment (this is the basic weapon enchantment 
 Section - Scroll of Afternoon Delights (Malygris)
 
 Table of Scroll Names (continued)
-scroll name	unfindable
-delights	true
+scroll name
+delights
+
+Definition: delights is findable: no.
 
 Understand "afternoon" and "delights" and "afternoon delights" as delights.
 
