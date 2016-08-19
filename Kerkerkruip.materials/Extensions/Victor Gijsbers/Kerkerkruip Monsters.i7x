@@ -5142,10 +5142,12 @@ Carry out the overmind overmind-calling:
 				now guy accompanies the overmind;]
 	now concentration of the overmind is 0.
 
-A sudden combat reset rule for the overmind (this is the release followers when overmind dies rule):
-	if the overmind is dead:
-		repeat with guy running through people who accompany the overmind:
-			now guy does not accompany the overmind.
+A sudden combat reset rule for a dead person (called guy) (this is the release overmind followers on death rule):
+	if guy is the overmind:
+		repeat with ally running through people who accompany the overmind:
+			now ally does not accompany the overmind;
+	otherwise if guy accompanies the overmind:
+		now guy does not accompany the overmind.
 
 To move is a verb.
 
