@@ -579,7 +579,7 @@ The jumping bomb fight-test kamikaze rule is listed before the jumping bomb kami
 Check an actor challenging someone in (this is the minotaur should only maze people during fight tests if fighting multiple opponents rule):
 	if automated fight test is true and the second noun is not test arena:
 		Now opposition test subject is the actor;
-		if the number of other opposer people enclosed by the location is at most 1:
+		if the number of opposer npc people enclosed by the location is at most 1:
 			say "[The actor] does not need to start a new arena battle with [the noun] because there are no other opponents - canceling effect.";
 			stop the action.
 			

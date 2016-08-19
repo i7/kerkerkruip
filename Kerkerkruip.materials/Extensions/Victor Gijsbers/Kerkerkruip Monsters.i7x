@@ -3,10 +3,6 @@ Kerkerkruip Monsters by Victor Gijsbers begins here.
 Use authorial modesty.
 
 
-Chapter - Definition of other
-
-Definition: a person is other if it is not the player.
-
 Chapter - Groups of enemies
 
 [ Sometimes enemies are grouped together. We will use a relationship to link a leading enemy with its companions, and properties of each leader will describe the nature of each grouping. ]
@@ -5145,6 +5141,11 @@ Carry out the overmind overmind-calling:
 			if level of guy is less than 4 and guy does not oppose the overmind:
 				now guy accompanies the overmind;]
 	now concentration of the overmind is 0.
+
+A sudden combat reset rule for the overmind (this is the release followers when overmind dies rule):
+	if the overmind is dead:
+		repeat with guy running through people who accompany the overmind:
+			now guy does not accompany the overmind.
 
 To move is a verb.
 

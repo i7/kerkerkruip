@@ -2208,6 +2208,64 @@ Testing effects of fell-defeating-293:
 	[assert result "Israfel's dying cry shakes the foundations of the world";]
 	if the power of israfel is granted, rule succeeds.
 
+Chapter - Bug #397  - Overmind and Soul Absorption
+
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts	label	antecedent
+bug-397	0	1	--	restarting for tests
+overmind-assembly	1	0	"overmind call"	--
+overmind-alliance	1	1	"overmind call"	--
+absorb-first-ally	1	1	"absorb target"	--
+absorb-overmind	1	1	"absorb target"	--
+absorb-second-ally	1	1	"absorb target"	--
+
+Scenario for bug-397:
+	Now the overmind is testobject;
+	now the armadillo is bannedobject;
+	now lair of the imp is bannedobject;
+	Repeat with guy running through follower monsters:
+		now guy is bannedobject;
+
+first-overmind-ally is an object that varies.
+second-overmind-ally is an object that varies.
+		
+initial scheduling of bug-397:
+	extract the player to the location of the overmind;
+
+Regular scheduling of an outcome labeled "overmind call":
+	now the concentration of the overmind is 1;
+	compel the action of the overmind overmind-calling.
+
+Testing effects of overmind-assembly:
+	Repeat with guy running through npc people in the location:
+		unless guy opposes the overmind or the level of guy is 0 or the level of guy > 3:
+			if first-overmind-ally is nothing:
+				transcribe "making [guy] the first target";
+				now first-overmind-ally is guy;
+			otherwise if first-overmind-ally is not guy:
+				transcribe "making [guy] the second target";
+				now second-overmind-ally is guy;
+				if first-overmind-ally accompanies the overmind:
+					rule succeeds;
+				otherwise:
+					rule fails.
+
+Testing effects of overmind-alliance: if second-overmind-ally accompanies the overmind, rule succeeds.
+
+The smiting target is a person that varies.
+
+Regular scheduling of an outcome labeled "absorb target":
+	now the health of the player is 1;
+	compel the action of smiting the smiting target.
+Testing effects of an outcome labeled "absorb target":
+	assert that the health of the player is permanent health of the player with label "health of the player";
+	Let soul be a random power granted by the smiting target;
+	if soul is granted, rule succeeds.
+
+Initial scheduling of absorb-overmind: now the smiting target is the overmind.
+Initial scheduling of absorb-first-ally: now the smiting target is first-overmind-ally.
+Initial scheduling of absorb-second-ally: now the smiting target is second-overmind-ally.
+
 Chapter - Weapon aftereffects
 
 Table of Outcomes (continued)
