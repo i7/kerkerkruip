@@ -1472,7 +1472,7 @@ getting-deathly	1	0	--	--	early-pile-search
 getting-healthy	1	0	--	--	early-pile-search
 getting-delights	0	100	--	--	early-pile-search
 getting-bad-scroll	0	100	--	--	early-pile-search
-early-out	1	0	--	"out of scrolls"	early-pile-search
+early-out	1	0	1000	"out of scrolls"	early-pile-search
 corpse-appears	14	15	--	--	early-out
 find-glory	1	0	--	--	early-out
 find-vecna	1	0	200	--	early-out
