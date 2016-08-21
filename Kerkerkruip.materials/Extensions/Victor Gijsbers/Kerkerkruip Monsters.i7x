@@ -5140,10 +5140,10 @@ Carry out the overmind overmind-calling:
 			call an ally;
 		otherwise:
 			call all allies;
-		[ Make overmind allies in the location accompany the overmind ]
+		[[ Make overmind allies in the location accompany the overmind ]   [Leads to bug #397]
 		repeat with guy running through all npc alive people in the location of the overmind:
 			if level of guy is less than 4 and guy does not oppose the overmind:
-				now guy accompanies the overmind;
+				now guy accompanies the overmind;]
 	now concentration of the overmind is 0.
 
 To move is a verb.
