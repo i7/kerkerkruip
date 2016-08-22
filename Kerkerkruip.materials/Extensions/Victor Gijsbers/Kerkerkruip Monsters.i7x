@@ -3483,10 +3483,11 @@ An AI action selection rule for the at-Act angel of mercy (this is the angel of 
 	decrease the Action Weight entry by 10;
 	if the current weapon of the angel of mercy is a natural weapon and the angel of mercy wears the gauntlet of attraction:
 		decrease the Action Weight entry by 5;
-	if the concentration of the chosen target is 0:
-		Let T be the tension / 3;
-		if T > 5, now T is 5;
-		decrease the Action Weight entry by 5 - T;
+		if the concentration of the chosen target is 0:
+			decrease the Action Weight entry by 5;
+			Let T be the tension / 3;
+			if T > 5, now T is 5;
+			increase the Action Weight entry by T;
 	if concentration of the angel of mercy is 3:
 		choose row with an Option of the action of the angel of mercy waiting in the Table of AI Action Options;
 		now action weight entry is 0;
@@ -3495,7 +3496,7 @@ An AI action selection rule for the at-Act angel of mercy (this is the angel of 
 	choose row with an Option of the action of the angel of mercy attacking the chosen target in the Table of AI Action Options;
 	Let r be the radiation of the Angel of Mercy;
 	Let h be the permanent health of the Angel of Mercy - the health of the angel of mercy;
-	Let n be (h + 4) / 5	 + (r * 2);
+	Let n be (h + 4) / 5 + (r * 3);
 	if n > 10, now n is 10;
 	increase the Action Weight entry by n;
 
@@ -3628,7 +3629,7 @@ Instead of the angel of mercy singing:
 	Repeat with guy running through people in the location of the angel of mercy:
 		if concentration of guy > 0:
 			Let n be final mind of guy; [use spirit instead?]
-			unless a random chance of n in 20 * song-strength succeeds:
+			unless a random chance of n in 25 * song-strength succeeds:
 				decrease concentration of guy by 1;
 				if concentration of guy is 0:
 					add guy to completely-lost-list;
