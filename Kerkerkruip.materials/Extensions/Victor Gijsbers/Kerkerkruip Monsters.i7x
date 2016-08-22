@@ -3538,6 +3538,8 @@ An AI action selection rule for the angel of mercy (this is the angel of mercy's
 				if n < 0, now n is 0;
 			if ranged-count is 0:
 				increase n by 2;
+			if the concentration of the angel of mercy < 3:
+				decrease n by 3;
 			choose a blank row in the Table of AI Action Options;		
 			now the Option entry is the action of the angel of mercy taking off the gauntlet of attraction;
 			now the Action Weight entry is n.
@@ -3569,14 +3571,12 @@ An AI action selection rule for the angel of mercy (this is the angel of mercy p
 		repeat with guy running through opposer people in the location:
 			Let item be the current weapon of guy;
 			if item is a hand-to-hand artificial weapon:
-				increase weapon-count by 1;
-				if the concentration of guy > 0:
-					increase weapon-count by 1;
+				increase weapon-count by 1 + concentration of guy;
 		if weapon-count is at least 1:
 			choose a blank row in the Table of AI Action Options;
 			now the Option entry is the action of the angel of mercy wearing the gauntlet of attraction;
 			let n be the size number of the angel of mercy;
-			now the Action Weight entry is n + weapon-count - 3;
+			now the Action Weight entry is n + weapon-count - 6;
 
 Section - Making weapons mercy-compatible
 
@@ -3616,6 +3616,60 @@ An AI action selection rule for an at-React person (called guy) (this is the use
 Report the angel of mercy blocking:
 	say "The angel turns its shield towards the attack[if a random chance of 1 in 3 succeeds], and for a moment you see [regarding the main actor][possessive] image reflected in the lights[end if].";
 	rule succeeds.
+
+Section - Angel of Mercy Sings to Reduce Tension and Concentration
+
+Instead of the angel of mercy singing:
+	let completely-lost-list be a list of people;
+	let partly-lost-list be a list of people;
+	let song-strength be concentration of the angel of mercy;
+	now concentration of the angel of mercy is 0;
+	now the tension is tension * (4 - song-strength) / 4;
+	Repeat with guy running through people in the location of the angel of mercy:
+		if concentration of guy > 0:
+			Let n be final mind of guy; [use spirit instead?]
+			unless a random chance of n in 20 * song-strength succeeds:
+				decrease concentration of guy by 1;
+				if concentration of guy is 0:
+					add guy to completely-lost-list;
+				otherwise:
+					add guy to partly-lost-list;
+	say "The angel of mercy sings a beloved old tune, [mercy song]. Its voice is so hauntingly beautiful that everyone forgets for a moment why they were fighting. [if song-strength is 3]Most[otherwise if song-strength is 2]Much[otherwise]A little[end if] of the tension dissipates[run paragraph on]";
+	if the number of entries in partly-lost-list > 0:
+		say ", [if the number of entries in completely-lost-list > 0]and [end if][partly-lost-list with definite articles] [bold type][regarding the number of entries in partly-lost-list][lose] some concentration[roman type][run paragraph on]";
+	if the number of entries in completely-lost-list > 0:
+		if the number of entries in partly-lost-list is 0:
+			say ",";
+		say " and [completely-lost-list with definite articles] [bold type][regarding the number of entries in completely-lost-list][lose] all concentration[roman type]";
+	say "."
+
+To say mercy song:
+	say "[italic type][one of]the Hymn of the Forgiven Sun[or]the Lament of the Betrayer[or]the Lion's Psalm[or]the Electrostatic Lullaby[at random][roman type]";
+	
+An AI action selection rule for the Angel of Mercy (this is the Angel of Mercy soothes with music rule):
+	Let n be -6;
+	Let item be the current weapon of the angel of mercy;
+	if the item is a natural weapon and the angel of mercy wears the gauntlet of attraction:
+		now item is the gauntlet of attraction;
+	if the concentration of the Angel of Mercy > 0:
+		if item is the gauntlet of attraction:	
+			increase n by the tension;
+		Repeat with guy running through people in the location:
+			if guy opposes Angel of Mercy:
+				increase n by concentration of guy * 3;
+			otherwise:
+				unless guy is the Angel of Mercy and the item is the gauntlet of attraction:
+					[concentration should be saved for attacking, not singing]
+					decrease n by concentration of guy * 3;
+		if n > 0:
+			if item is the gauntlet of attraction:
+				now n is n * the concentration of the Angel of Mercy;
+			choose a blank row in Table of AI Action Options;
+			now the Option entry is the action of the Angel of Mercy singing;
+			now the Action Weight entry is n / 2;
+	if n < 3 and item is the gauntlet of attraction:
+		choose row with Option of the angel of mercy concentrating in Table of AI Action Options;
+		increase Action Weight entry by 2.
 
 Section - Getting smaller
 
@@ -3940,9 +3994,7 @@ An absorption stopping rule (this is the you already got mercy rule):
 
 the you already got mercy rule is listed after the abyss of the soul absorbs all souls rule in the absorption stopping rules.
 
-An AI Action Selection rule for a merciful person (called guy) (this is the merciful people don't concentrate rule):
-	Choose row with an option of the guy concentrating in the table of AI Action Options;
-	decrease the action weight entry by 100.
+[TODO: should mercy affect concentration? readying or dropping weapons?]
 
 An AI action selection rule for a merciful person (called guy) (this is the merciful people don't attack rule):
 	choose row with an Option of the guy attacking the chosen target in the Table of AI Action Options;

@@ -810,6 +810,7 @@ fed-hood-description	1	1	--
 fed-hood-power	1	1	--
 
 Scenario for temporary Nomos blood magic:
+	now addict-kit is bannedobject;
 	now the overmind is bannedobject;
 	now the swarm of daggers is testobject;
 	now the Temple of Nomos is testobject;
@@ -4152,7 +4153,7 @@ Chapter - Simple Tests
 Table of Outcomes (continued)
 Outcome	likelihood	minimum attempts	antecedent
 Simple tests	0	1	restarting for tests
-
+		
 Section - Reading Ability Simple Test
 
 Table of Outcomes (continued)

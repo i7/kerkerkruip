@@ -563,6 +563,12 @@ A detection rule (this is the radiance makes it harder to hide detection rule):
 		say " - ", n, " (radiance)[run paragraph on]";
 		decrease hiding roll by n.
 
+Chance to win rule (this is the CTW radiance bonus rule):
+	if the global defender is using eyes and the global defender is not radiance-immune:
+		increase the chance-to-win by the radiation of the global attacker;
+	if the global attacker is using eyes and the global attacker is not radiance-immune:
+		decrease the chance-to-win by the radiation of the global defender.
+
 Section - Status
 
 Status attribute rule (this is the radiance status rule):
