@@ -3699,7 +3699,7 @@ Instead of the angel of mercy singing:
 	say "."
 
 To say mercy song:				
-	say "[italic type][one of]the Hymn of the Forgiven Sun[or]the Lament of the Betrayer[or]the Lion's Psalm[or]the Electrostatic Lullaby[at random][roman type]";
+	say "[italic type][one of]the Hymn of the Forgiven Sun[or]the Lament of the Betrayer[or]the Lion's Psalm[or]the Electrostatic Lullaby[or]Farewell to Plundering[or]There'll be Peace in the Dungeon By and By[at random][roman type]";
 	
 A first AI action selection rule for the Angel of Mercy (this is the Angel of Mercy considers singing rule):
 	choose a blank row in Table of AI Action Options;
@@ -3738,7 +3738,7 @@ An AI action selection rule for the Angel of Mercy (this is the Angel of Mercy s
 	if the concentration of the Angel of Mercy > 0 and n > 0:
 		choose row with an Option of the Angel of Mercy singing in Table of AI Action Options;
 		now the Action Weight entry is n;
-	if n < 3 and the angel of mercy is not at-React:
+	if n < 3 and the angel of mercy is not at-React and passiveness > 0:
 		choose row with Option of the angel of mercy concentrating in Table of AI Action Options;
 		increase Action Weight entry by passiveness.
 
