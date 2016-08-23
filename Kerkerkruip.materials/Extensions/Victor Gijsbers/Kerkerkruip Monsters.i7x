@@ -3691,11 +3691,11 @@ Instead of the angel of mercy singing:
 				add guy to partly-lost-list;
 	say "The angel of mercy sings a beloved old tune, [mercy song]. Its voice is so hauntingly beautiful that everyone forgets for a moment why they were fighting. [if song-strength is 3]Most[otherwise if song-strength is 2]Much[otherwise]A little[end if] of the tension dissipates[run paragraph on]";
 	if the number of entries in partly-lost-list > 0:
-		say ", [if the number of entries in completely-lost-list is 0]and [end if][partly-lost-list with definite articles] [bold type][regarding the number of entries in partly-lost-list][lose] some concentration[roman type][run paragraph on]";
+		say ", [if the number of entries in completely-lost-list is 0]and [end if][partly-lost-list with definite articles] [bold type][lose] some concentration[roman type][run paragraph on]";
 	if the number of entries in completely-lost-list > 0:
 		if the number of entries in partly-lost-list is 0:
 			say ",";
-		say " and [completely-lost-list with definite articles] [bold type][regarding the number of entries in completely-lost-list][lose] all concentration[roman type]";
+		say " and [completely-lost-list with definite articles] [bold type][lose] all concentration[roman type]";
 	say "."
 
 To say mercy song:				
