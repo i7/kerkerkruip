@@ -3474,76 +3474,20 @@ Special interaction with chain golem (and all tethered weapons) - causes grappli
 
 Section - Reactions and Stealing Weapons
 
-
 [TODO: steal more weapons instead of readying?]
 
-An AI action selection rule for the at-Act angel of mercy (this is the angel of mercy doesn't like attacking rule):
-	choose row with an Option of the action of the angel of mercy attacking the chosen target in the Table of AI Action Options;
-	[TODO: don't attack unless the chosen target deserves it? tweak weights]
-	decrease the Action Weight entry by 10;
-	if the current weapon of the angel of mercy is a natural weapon and the angel of mercy wears the gauntlet of attraction:
-		decrease the Action Weight entry by 5;
-		if the concentration of the chosen target is 0:
-			decrease the Action Weight entry by 5;
-			Let T be the tension / 3;
-			if T > 5, now T is 5;
-			increase the Action Weight entry by T;
-	if concentration of the angel of mercy is 3:
-		choose row with an Option of the action of the angel of mercy waiting in the Table of AI Action Options;
-		now action weight entry is 0;
-		
-An AI action selection rule for the at-Act angel of mercy (this is the angel of mercy attacks more when attacked rule):
-	choose row with an Option of the action of the angel of mercy attacking the chosen target in the Table of AI Action Options;
-	Let r be the radiation of the Angel of Mercy;
-	Let h be the permanent health of the Angel of Mercy - the health of the angel of mercy;
-	Let n be (h + 4) / 5 + (r * 3);
-	if n > 10, now n is 10;
-	increase the Action Weight entry by n;
-
-An AI action selection rule for an at-React person (called guy) (this is the defender uses gauntlet of attraction to get weapons rule):
-	if the guy wears the gauntlet of attraction:
-		choose row with an Option of the guy parrying in the Table of AI Action Options;
-		if the Action Weight entry < 0:
-			now the Action Weight entry is 0;
-		Let item be the current weapon of the main actor;
-		if the gauntlet can steal the item for the guy:
-			if the item is angel-worthy:
-				increase the Action Weight entry by 10;
-			otherwise:
-				decrease the Action Weight entry by 100;
-				
-The defender uses gauntlet of attraction to get weapons rule is listed after the standard defense against attack select rule in the AI action selection rules.
+To decide whether mercy is unarmed:
+	decide on whether or not the angel of mercy wears the gauntlet of attraction and the angel of mercy does not enclose an artificial weapon.
 	
-An AI action selection rule for the angel of mercy (this is the angel of mercy's gloves come off rule):
-	if the angel of mercy wears the gauntlet of attraction and the angel of mercy does not enclose an artificial weapon:
-		Let weapon-count be 0;
-		Let ranged-count be 0;
-		now opposition test subject is the angel of mercy;
-		repeat with guy running through opposer people in the location:
+To decide which number is the angel-stealable weapon count:
+	let weapon-count be 0;
+	now opposition test subject is the angel of mercy;
+	repeat with guy running through opposer people in the location of the angel of mercy:
+		if guy actively opposes the angel of mercy and guy is not hidden:
 			if the gauntlet can steal current weapon of guy for the angel of mercy:
 				if current weapon of guy is angel-worthy:
 					increase weapon-count by 1;
-			otherwise if current weapon of guy is ranged:
-				increase ranged-count by 1;
-		if weapon-count is at least 1 and the size number of the angel of mercy > 0:
-			make no decision;
-		let n be -1 * the size number of the angel of mercy;
-		Let loot be a random angel-worthy weapon in the location;
-		if loot is a weapon and weapon-count is 0:
-			if n > -3:
-				choose a blank row in the Table of AI Action Options;
-				now the Option entry is the action of the angel of mercy taking loot;
-				now the Action Weight entry is n;
-		otherwise:
-			if weapon-count is 0:
-				if n < 0, now n is 0;
-			if ranged-count is 0:
-				increase n by 2;
-			if the concentration of the angel of mercy < 3:
-				decrease n by 3;
-			choose a blank row in the Table of AI Action Options;		
-			now the Option entry is the action of the angel of mercy taking off the gauntlet of attraction;
-			now the Action Weight entry is n.
+	decide on weapon-count.
 
 Definition: a weapon (called item) is angel-worthy:
 	if item is epic, no;
@@ -3560,13 +3504,111 @@ Definition: a weapon (called item) is angel-worthy:
 	staff of insanity (epic)
 	glass cannon (epic)
 	
-TODO: can the angel manage a crossbow?
 TODO: what if player gets hit with the caduceus?
-	
 ]
+			
+To decide which number is the angel-reflectable weapon count:
+	let ranged-count be 0;
+	if the angel of mercy wears the shield of reflection:
+		now opposition test subject is the angel of mercy;
+		repeat with guy running through opposer people in the location of the angel of mercy:
+			if guy actively opposes the angel of mercy and guy is not hidden:
+				if current weapon of guy is ranged:
+					increase ranged-count by 1;
+	decide on ranged-count.
+
+[mercy passiveness determines whether the angel is likely to attack or to prevent attacks
+
+0 or less means attack
+1 means prefer reflecting ranged attacks to attacking
+> 1 means avoid attacking
+]
+
+To decide what number is the mercy passiveness:
+	Let n be the angel-stealable weapon count - the angel-reflectable weapon count;
+	unless mercy is unarmed:
+		if n > 0:
+			now n is 0;
+	if the angel of mercy is merciful:
+		increase n by 5;
+	decide on n.
+
+An AI action selection rule for the at-Act angel of mercy (this is the angel of mercy doesn't like attacking rule):
+	choose row with an Option of the action of the angel of mercy attacking the chosen target in the Table of AI Action Options;
+	[TODO: don't attack unless the chosen target deserves it? tweak weights]
+	decrease the Action Weight entry by 10;
+	if the current weapon of the chosen target is ranged and the Angel of Mercy wears the shield of reflection:
+		decrease the Action Weight entry by 3;
+	if mercy is unarmed:
+		decrease the Action Weight entry by 5;
+		if the concentration of the chosen target is 0:
+			decrease the Action Weight entry by 5;
+			Let T be the tension / 3;
+			if T > 5, now T is 5;
+			increase the Action Weight entry by T;
+	if concentration of the angel of mercy is 3:
+		choose row with an Option of the action of the angel of mercy waiting in the Table of AI Action Options;
+		now action weight entry is mercy passiveness;
+		
+An AI action selection rule for the at-Act angel of mercy (this is the angel of mercy attacks more when attacked rule):
+	choose row with an Option of the action of the angel of mercy attacking the chosen target in the Table of AI Action Options;
+	Let r be the radiation of the Angel of Mercy;
+	Let h be the permanent health of the Angel of Mercy - the health of the angel of mercy;
+	Let n be (h + 4) / 5 + (r * 3);
+	if n > 10, now n is 10;
+	increase the Action Weight entry by n;
+
+An AI action selection rule for an at-React person (called guy) (this is the defender uses gauntlet of attraction to get weapons rule):
+	if the guy wears the gauntlet of attraction:
+		choose row with an Option of the guy parrying in the Table of AI Action Options;
+		if the Action Weight entry < 0:
+			now the Action Weight entry is 0;
+		Let item be the current weapon of the main actor;
+		if the gauntlet can steal the item for the guy:			
+			if the item is angel-worthy:
+				increase the Action Weight entry by 10;
+			otherwise:
+				[avoid stealing weapons with dangerous or complicated side effects]
+				decrease the Action Weight entry by 100;
+				
+The defender uses gauntlet of attraction to get weapons rule is listed after the standard defense against attack select rule in the AI action selection rules.
+
+An AI action selection rule for the angel of mercy (this is the angel of mercy's gloves come off rule):
+	if mercy is unarmed:
+		Let weapon-count be the angel-stealable weapon count;
+		Let ranged-count be the angel-reflectable weapon count;
+		if weapon-count is at least 1 and the size number of the angel of mercy > 0:
+			make no decision;
+		let n be the 3 * (2 - the size number of the angel of mercy);
+		Let loot be a random angel-worthy weapon [on the ground] in the location;
+		if loot is a weapon and weapon-count is 0:
+			if n > -3:
+				choose a blank row in the Table of AI Action Options;
+				now the Option entry is the action of the angel of mercy taking loot;
+				now the Action Weight entry is n;
+		otherwise:
+			if weapon-count is 0:
+				if n < 0, now n is 0;
+			if ranged-count is 0:
+				increase n by 2;
+			if the concentration of the angel of mercy < 3:
+				decrease n by 3;
+			choose a blank row in the Table of AI Action Options;		
+			now the Option entry is the action of the angel of mercy taking off the gauntlet of attraction;
+			now the Action Weight entry is n.
+			
+Carry out the angel of mercy taking off the gauntlet of attraction:
+	now mercy-attack-count is 0.
 	
+mercy-attack-count is a number that varies.
+
+Carry out the angel of mercy hitting (this is the track mercy attack count rule):
+	if the actor is the angel of mercy:
+		increment mercy-attack-count;
+
 An AI action selection rule for the angel of mercy (this is the angel of mercy puts the gauntlet back on rule):
 	if the angel of mercy carries the gauntlet of attraction and the size number of the angel of mercy > 0:
+		if mercy-attack-count < 1, make no decision; [must hit someone at least once with bare hand]
 		Let weapon-count be 0;
 		now opposition test subject is the angel of mercy;
 		repeat with guy running through opposer people in the location:
@@ -3608,17 +3650,26 @@ An AI action selection rule for the angel of mercy (this is the angel of mercy c
 Section - Reflecting Attacks
 
 An AI action selection rule for an at-React person (called guy) (this is the use shield to reflect ranged attacks rule):
-	if the current weapon of the main actor is ranged and the guy wears the shield of reflection:
-		choose row with Option of the guy blocking in Table of AI Action Options;
-		increase Action Weight entry by a random number from 1 to 20;
-		choose row with Option of the guy parrying in Table of AI Action Options;
-		decrease Action Weight entry by 5;
+	if the guy wears the shield of reflection:
+		if current weapon of the main actor is ranged:
+			choose row with Option of the guy blocking in Table of AI Action Options;
+			increase Action Weight entry by 14;
+			decrease Action Weight entry by the chance-to-lose;
+			if the chance-to-lose < 10:
+				increase Action Weight entry by the concentration of the guy * (10 - chance-to-lose) / 5;
+			choose row with Option of the guy parrying in Table of AI Action Options;
+			decrease Action Weight entry by 5;
+		otherwise:
+			choose row with Option of the guy blocking in Table of AI Action Options;
+			decrease Action Weight entry by concentration of guy;
 
 Report the angel of mercy blocking:
 	say "The angel turns its shield towards the attack[if a random chance of 1 in 3 succeeds], and for a moment you see [regarding the main actor][possessive] image reflected in the lights[end if].";
 	rule succeeds.
 
 Section - Angel of Mercy Sings to Reduce Tension and Concentration
+
+[TODO: discourage singing with full concentration?]
 
 Instead of the angel of mercy singing:
 	let completely-lost-list be a list of people;
@@ -3627,50 +3678,69 @@ Instead of the angel of mercy singing:
 	now concentration of the angel of mercy is 0;
 	now the tension is tension * (4 - song-strength) / 4;
 	Repeat with guy running through people in the location of the angel of mercy:
-		if concentration of guy > 0:
-			Let n be final mind of guy; [use spirit instead?]
-			unless a random chance of n in 25 * song-strength succeeds:
-				decrease concentration of guy by 1;
-				if concentration of guy is 0:
-					add guy to completely-lost-list;
-				otherwise:
-					add guy to partly-lost-list;
+		Let c be concentration of guy;
+		if c > 0:
+			Repeat with i running from 1 to song-strength:
+				Let n be final mind of guy; [use spirit instead?]
+				unless a random chance of n in 40 succeeds:
+					decrease concentration of guy by 1;
+			if concentration of guy is at most 0:
+				now concentration of guy is 0;
+				add guy to completely-lost-list;
+			otherwise if concentration of guy < c:
+				add guy to partly-lost-list;
 	say "The angel of mercy sings a beloved old tune, [mercy song]. Its voice is so hauntingly beautiful that everyone forgets for a moment why they were fighting. [if song-strength is 3]Most[otherwise if song-strength is 2]Much[otherwise]A little[end if] of the tension dissipates[run paragraph on]";
 	if the number of entries in partly-lost-list > 0:
-		say ", [if the number of entries in completely-lost-list > 0]and [end if][partly-lost-list with definite articles] [bold type][regarding the number of entries in partly-lost-list][lose] some concentration[roman type][run paragraph on]";
+		say ", [if the number of entries in completely-lost-list is 0]and [end if][partly-lost-list with definite articles] [bold type][regarding the number of entries in partly-lost-list][lose] some concentration[roman type][run paragraph on]";
 	if the number of entries in completely-lost-list > 0:
 		if the number of entries in partly-lost-list is 0:
 			say ",";
 		say " and [completely-lost-list with definite articles] [bold type][regarding the number of entries in completely-lost-list][lose] all concentration[roman type]";
 	say "."
 
-To say mercy song:
+To say mercy song:				
 	say "[italic type][one of]the Hymn of the Forgiven Sun[or]the Lament of the Betrayer[or]the Lion's Psalm[or]the Electrostatic Lullaby[at random][roman type]";
 	
+A first AI action selection rule for the Angel of Mercy (this is the Angel of Mercy considers singing rule):
+	choose a blank row in Table of AI Action Options;
+	now the Option entry is the action of the Angel of Mercy singing;
+	now the Action Weight entry is -100;
+	
 An AI action selection rule for the Angel of Mercy (this is the Angel of Mercy soothes with music rule):
-	Let n be -6;
-	Let item be the current weapon of the angel of mercy;
-	if the item is a natural weapon and the angel of mercy wears the gauntlet of attraction:
-		now item is the gauntlet of attraction;
-	if the concentration of the Angel of Mercy > 0:
-		if item is the gauntlet of attraction:	
-			increase n by the tension;
-		Repeat with guy running through people in the location:
-			if guy opposes Angel of Mercy:
-				increase n by concentration of guy * 3;
-			otherwise:
-				unless guy is the Angel of Mercy and the item is the gauntlet of attraction:
-					[concentration should be saved for attacking, not singing]
-					decrease n by concentration of guy * 3;
-		if n > 0:
-			if item is the gauntlet of attraction:
-				now n is n * the concentration of the Angel of Mercy;
-			choose a blank row in Table of AI Action Options;
-			now the Option entry is the action of the Angel of Mercy singing;
-			now the Action Weight entry is n / 2;
-	if n < 3 and item is the gauntlet of attraction:
+	let passiveness be mercy passiveness;
+	if the angel of mercy is at-React and concentration of the angel of mercy > 0:
+		choose row with an Option of the angel of mercy singing in Table of AI Action Options;
+		if Action Weight entry < chance-to-lose and chance-to-lose > 5:
+			now Action Weight entry is chance-to-lose;
+		make no decision;
+	Let general benefit be 0;
+	Repeat with guy running through not hidden people in the location:
+		if guy actively opposes Angel of Mercy:
+			increase general benefit by concentration of guy;
+			decrease general benefit by concentration of the Angel of Mercy;
+	Let tension-loss be the tension * (concentration of the Angel of Mercy) / 4;
+	Let future-CTW be the chance-to-win - concentration attack bonus of the Angel of Mercy - (tension-loss / 2);
+	Let future-concentration be the concentration of the chosen target - the concentration of the Angel of Mercy;
+	If future-concentration < 0:
+		now future-concentration is 0;
+	Let future-CTL be the chance-to-lose - concentration attack bonus of the chosen target + attack bonus for concentration level future-concentration - (tension-loss / 2);
+	Let chance-improvement be chance-to-lose - future-CTL;
+	if the current weapon of the chosen target is ranged and the angel of mercy wears the shield of reflection:
+		if chance-to-lose < 8 and future-CTL < 3 and chance-improvement > 0:
+			[don't discourage the enemy from attacking too much]
+			now chance-improvement is 0;
+	if passiveness < 1:
+		increase chance-improvement by future-CTW - chance-to-win;
+	if chance-to-lose > 10:
+		if passiveness > 0 or future-CTW > 5:
+			increase chance-improvement by 5;
+	Let n be chance-improvement + general benefit;
+	if the concentration of the Angel of Mercy > 0 and n > 0:
+		choose row with an Option of the Angel of Mercy singing in Table of AI Action Options;
+		now the Action Weight entry is n;
+	if n < 3 and the angel of mercy is not at-React:
 		choose row with Option of the angel of mercy concentrating in Table of AI Action Options;
-		increase Action Weight entry by 2.
+		increase Action Weight entry by passiveness.
 
 Section - Getting smaller
 
@@ -5770,33 +5840,19 @@ The verb to be linked to implies the concentration link relation.
 An attack modifier rule (this is the link concentration attack modifier rule):
 	now world test subject is the actor;
 	if a worldsharer person is linked to the actor:
-		let the bonus be 0;
-		if the concentration of linked guy of the actor is:
-			-- 0:
-				make no decision;
-			-- 1:
-				now the bonus is 2;
-			-- 2:
-				now the bonus is 4;
-			-- 3:
-				now the bonus is 8;
-		if the numbers boolean is true:
-			say " + ", the bonus, " ([regarding linked guy of the actor][possessive] concentration)[run paragraph on]";
-		increase the attack strength by the bonus.
+		let the bonus be the concentration attack bonus of (linked guy of the actor);
+		if the bonus > 0:
+			if the numbers boolean is true:
+				say " + ", the bonus, " ([regarding linked guy of the actor][possessive] concentration)[run paragraph on]";
+			increase the attack strength by the bonus.
 
 An add specific damage rule (this is the link concentration damage modifier rule):
 	if damage-by-hitting is true:
 		now world test subject is the actor;
 		if a worldsharer person is linked to the actor:
-			let the bonus be 0;
-			if the concentration of linked guy of the actor is:
-				-- 2:
-					now the bonus is 2;
-				-- 3:
-					now the bonus is 4;
-				-- otherwise:
-					make no decision;
-			add bonus points of damage with reason "link".
+			let the bonus be the concentration damage bonus of (linked guy of the actor);
+			if the bonus > 0:
+				add bonus points of damage with reason "link".
 
 Status attribute rule (this is the link status rule):
 	now world test subject is the player;
@@ -5807,13 +5863,7 @@ Status attribute rule (this is the link status rule):
 Chance to win rule (this is the CTW link concentration bonus rule):
 	now world test subject is the running AI;
 	if a worldsharer person is linked to the running AI:
-		if the concentration of linked guy of the running AI is:
-			-- 1:
-				increase the chance-to-win by 2;
-			-- 2:
-				increase the chance-to-win by 4;
-			-- 3:
-				increase the chance-to-win by 8;
+		increase the chance-to-win by the concentration attack bonus of (linked guy of the running AI);
 
 Every turn when a person is linked to the player (this is the unravelling link rule):
 	let x be the number of people enclosed by the location;

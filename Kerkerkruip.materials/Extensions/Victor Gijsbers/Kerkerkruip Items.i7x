@@ -1700,17 +1700,35 @@ Section - Shield of reflection (monster)
 
 The shield of reflection is a shield. The shield of reflection is radiance.
 
-The block bonus of the shield of reflection is 3. The description is "Lines of force radiate and spiral out from this [if the shield of reflection is radiance]radiant[end if] shield. It possesses the power to repel ranged attacks and reflect them back at the attacker."
+The block bonus of the shield of reflection is 3. The description is "Lines of force radiate and spiral out from this [if the shield of reflection is radiance]radiant[end if] shield. It possesses the power to repel ranged attacks and reflect them back at the attacker. Reflected attacks benefit from the wearer's concentration, but also cause the wearer to lose concentration."
 
 The shield of reflection is size-agnostic.
+
+reflection-linked-guy is an object that varies.
 
 Aftereffects (this is the shield of reflection reflects attacks rule):
 	if the global attacker weapon is ranged and reflection-attack is false:
 		if the shield of reflection is whatever the global attacker weapon struck:
 			say "The attack [bold type]bounces off[roman type] the shield of reflection towards [the global attacker]!";
 			now reflection-attack is true;
-			try the global attacker hitting the global attacker instead.
-	
+			now reflection-linked-guy is the global defender;
+			try the global attacker hitting the global attacker;
+			now the concentration of reflection-linked-guy is 0;
+			now reflection-linked-guy is nothing;
+
+An attack modifier rule (this is the shield reflection attack bonus rule):
+	if reflection-linked-guy is a person:
+		let the bonus be the concentration attack bonus of reflection-linked-guy;
+		if the bonus > 0:
+			say " + [bonus] (concentration of shield bearer)[run paragraph on]";
+			increase the attack strength by the bonus;
+
+An add specific damage rule (this is the shield reflection damage modifier rule):
+	if damage-by-hitting is true and reflection-linked-guy is a person:
+		Let the first dummy be the concentration damage bonus of reflection-linked-guy;
+		if the first dummy > 0:
+			add first dummy points of damage with reason "concentration of shield bearer".
+
 Chapter - Cloneable
 
 Definition: A thing is cloneable: no. [Lots of things can be cloned, but most things don't need to be cloned. Cloneable means we shouldn't use the original]

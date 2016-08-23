@@ -1737,17 +1737,25 @@ Report an actor concentrating (this is the standard concentrating prose rule):
 
 Section - Concentration improves attack strength
 
-An attack modifier rule (this is the concentration attack modifier rule):
-	let the bonus be 0;
-	if the concentration of the actor is:
+To decide what number is the concentration attack bonus of (guy - a person):
+	decide on the attack bonus for concentration level (concentration of guy).
+	
+To decide what number is the attack bonus for concentration level (N - a number):
+	if the N is:
 		-- 0:
-			make no decision;
+			decide on 0;
 		-- 1:
-			now the bonus is 2;
+			decide on 2;
 		-- 2:
-			now the bonus is 4;
+			decide on 4;
 		-- 3:
-			now the bonus is 8;
+			decide on 8;
+	say "*** Run-time Problem: Tried to calculate concentration attack bonus for concentration level [N].";
+	decide on 0.
+			
+An attack modifier rule (this is the concentration attack modifier rule):
+	let the bonus be the concentration attack bonus of the actor;
+	if the bonus is 0, make no decision;
 	if the numbers boolean is true:
 		say " + ", the bonus, " (concentration)[run paragraph on]";
 	increase the attack strength by the bonus;
@@ -1756,13 +1764,18 @@ Section - Concentration improves attack damage for normal-concentrating people
 
 A person can be normal-concentrating or abnormal-concentrating. A person is usually normal-concentrating.
 
+To decide what number is the concentration damage bonus of (guy - a person):
+	if concentration of guy is 2:
+		decide on 2;
+	if concentration of guy is 3:
+		decide on 4;
+	decide on 0.
+
 An add specific damage rule (this is the new concentration damage modifier rule):
 	if damage-by-hitting is true:
 		if global attacker is normal-concentrating:
-			if the concentration of the global attacker is greater than 1:
-				let the first dummy be 0;
-				if the concentration of the global attacker is 2, now the first dummy is 2;
-				if the concentration of the global attacker is 3, now the first dummy is 4;
+			Let the first dummy be the concentration damage bonus of the global attacker;
+			if the first dummy > 0:
 				add first dummy points of damage with reason "concentration".
 
 Section - Losing Concentration
@@ -1813,13 +1826,7 @@ new everyone loses concentration when combat status is peace rule is listed befo
 Section - Concentration improves AI chance to win
 
 Chance to win rule (this is the CTW concentration bonus rule):
-	if the concentration of the running AI is:
-		-- 1:
-			increase the chance-to-win by 2;
-		-- 2:
-			increase the chance-to-win by 4;
-		-- 3:
-			increase the chance-to-win by 8;
+	increase the chance-to-win by the concentration attack bonus of the running AI.
 	
 Chapter - Parrying
 
@@ -2184,14 +2191,32 @@ The chance to win rulebook have a number called the best defence.
 
 The AI action selection rulebook have a number called the chance-to-win.
 The AI action selection rulebook have a number called the normalised chance-to-win.
+The AI action selection rulebook have a number called the chance-to-lose.
+
+[TODO: chance-to-lose is new! This is the main actor's chance to win, so that number can be used by an at-react AI to figure out the best defence more effectively - including deciding whether there's any point defending at all.
+
+In order for this to work, the chance-to-win rules must be run for the PLAYER whenever the player attacks an NPC.]
 
 First AI action selection rule (this is the calculate the chance to win rule):
 	now the chance-to-win is the number produced by the chance to win rules;
-	now the normalised chance-to-win is the chance-to-win;
+	now the normalised chance-to-win is the chance-to-win;	
 	if the normalised chance-to-win is greater than 10:
 		now the normalised chance-to-win is 10;
 	if the normalised chance-to-win is less than 0:
 		now the normalised chance-to-win is 0;
+	let the saved AI be the running AI;
+	let the saved target be the chosen target;
+	let the saved weapon be the chosen weapon;
+	if the running AI is at-react:
+		now the running AI is the main actor;
+	otherwise:
+		now the running AI is the chosen target;
+	now the chosen target is the saved AI;
+	now the chosen weapon is the current weapon of the running AI;
+	now the chance-to-lose is the number produced by the chance to win rules;
+	now the chosen weapon is the saved weapon;
+	now the chosen target is the saved target;
+	now the running AI is the saved AI;
 
 First chance to win rule (this is the CTW default rule):
 	now the chance-to-win is 10.
@@ -2231,6 +2256,8 @@ An AI action selection rule for an at-Act person (called P) (this is the concent
 	increase the Action Weight entry by the concentration of the chosen target;
 	if the concentration of the chosen target is 3:
 		increase the Action Weight entry by 2;
+
+[TODO: use the chance-to-lose here?]
 
 An AI action selection rule for an at-React person (called P) (this is the standard defense against attack select rule):
 	if the action name part of the main actor's action is the attacking action:
