@@ -25,9 +25,9 @@ end
 puts "Table of fight results:"
 puts "\n |#{legend.join("|")}"
 puts "-------|#{legend.map {'---'}.join("|")}"
-monsters.each do |monster|
+monsters.each_with_index do |monster, monster_index|
   columns = monsters.map do |other|
-    scores[monster][other] || "X"
+    scores[monster][other] || "#{legend[monster_index]}"
   end
   puts "#{monster}|#{columns.join("|")}"
 end

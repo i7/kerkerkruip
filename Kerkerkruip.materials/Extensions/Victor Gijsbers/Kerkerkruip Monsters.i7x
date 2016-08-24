@@ -3708,16 +3708,13 @@ A first AI action selection rule for the Angel of Mercy (this is the Angel of Me
 	
 An AI action selection rule for the Angel of Mercy (this is the Angel of Mercy soothes with music rule):
 	let passiveness be mercy passiveness;
-	if the angel of mercy is at-React and concentration of the angel of mercy > 0:
-		choose row with an Option of the angel of mercy singing in Table of AI Action Options;
-		if Action Weight entry < chance-to-lose and chance-to-lose > 5:
-			now Action Weight entry is chance-to-lose;
-		make no decision;
 	Let general benefit be 0;
 	Repeat with guy running through not hidden people in the location:
 		if guy actively opposes Angel of Mercy:
-			increase general benefit by concentration of guy;
-			decrease general benefit by concentration of the Angel of Mercy;
+			Let diff be concentration of guy - concentration of the Angel of Mercy;
+			if diff > 0:
+				increase general benefit by diff;
+	decrease general benefit by concentration of the Angel of Mercy;
 	Let tension-loss be the tension * (concentration of the Angel of Mercy) / 4;
 	Let future-CTW be the chance-to-win - concentration attack bonus of the Angel of Mercy - (tension-loss / 2);
 	Let future-concentration be the concentration of the chosen target - the concentration of the Angel of Mercy;
@@ -3725,22 +3722,31 @@ An AI action selection rule for the Angel of Mercy (this is the Angel of Mercy s
 		now future-concentration is 0;
 	Let future-CTL be the chance-to-lose - concentration attack bonus of the chosen target + attack bonus for concentration level future-concentration - (tension-loss / 2);
 	Let chance-improvement be chance-to-lose - future-CTL;
-	if the current weapon of the chosen target is ranged and the angel of mercy wears the shield of reflection:
-		if chance-to-lose < 8 and future-CTL < 3 and chance-improvement > 0:
-			[don't discourage the enemy from attacking too much]
-			now chance-improvement is 0;
 	if passiveness < 1:
-		increase chance-improvement by future-CTW - chance-to-win;
+		Let baseline be chance-to-win;
+		if baseline > 5:
+			now baseline is 5;
+		increase chance-improvement by future-CTW - baseline;
 	if chance-to-lose > 10:
 		if passiveness > 0 or future-CTW > 5:
 			increase chance-improvement by 5;
-	Let n be chance-improvement + general benefit;
-	if the concentration of the Angel of Mercy > 0 and n > 0:
-		choose row with an Option of the Angel of Mercy singing in Table of AI Action Options;
-		now the Action Weight entry is n;
-	if n < 3 and the angel of mercy is not at-React and passiveness > 0:
-		choose row with Option of the angel of mercy concentrating in Table of AI Action Options;
-		increase Action Weight entry by passiveness.
+	if the angel of mercy is at-React:	
+		if concentration of the angel of mercy > 0 and chance-to-lose > 5:
+			if passiveness > 0 or future-CTW > 3:
+				choose row with an Option of the angel of mercy singing in Table of AI Action Options;
+				now Action Weight entry is chance-improvement + general benefit;
+	otherwise:
+		if the current weapon of the chosen target is ranged and the angel of mercy wears the shield of reflection:
+			if chance-to-lose < 8 and future-CTL < 3 and chance-improvement > 0:
+				[don't discourage the enemy from attacking too much]
+				now chance-improvement is 0;
+		Let n be chance-improvement + general benefit;
+		if the concentration of the Angel of Mercy > 0 and n > 0:
+			choose row with an Option of the Angel of Mercy singing in Table of AI Action Options;
+			now the Action Weight entry is n;
+		if n < 3 and passiveness > 0:
+			choose row with Option of the angel of mercy concentrating in Table of AI Action Options;
+			increase Action Weight entry by passiveness.
 
 Section - Getting smaller
 
@@ -4084,8 +4090,14 @@ Report the angel of mercy hitting a dead pc:
 	rule succeeds.
 
 Report the angel of mercy concentrating:
-	say "[if concentration of the angel of mercy is 1]The angel of mercy gathers its form in concentration.[otherwise if concentration of the angel of mercy is 2]The angel of mercy's shape flows faster and more intensely.[otherwise if concentration of the angel of mercy is 3]'Retreat now, and I shall not harm you,' the angel commands, fierce with righteous energy.[end if]";
+	say "[if concentration of the angel of mercy is 1]The angel of mercy gathers its form in concentration.[otherwise if concentration of the angel of mercy is 2]The angel of mercy's shape flows faster and more intensely.[otherwise if concentration of the angel of mercy is 3][Mercy commands], fierce with righteous energy.[end if]";
 	rule succeeds.
+
+To say Mercy commands:
+	if the angel of mercy is merciful:
+		say "'Let no one come to harm here!' the angel proclaims";
+	otherwise:
+		say "'Retreat now, and I shall not harm you,' the angel commands";
 
 Report the angel of mercy attacking:
 	unless the actor is the noun:
@@ -5458,7 +5470,7 @@ Israfel-trance is a number that varies. Israfel-trance is 1.
 Israfel-trancing is an action applying to nothing.
 
 Carry out Israfel Israfel-trancing:
-	if a random chance of 2 in 3 succeeds, increase Israfel-trance by 1;
+	increase Israfel-trance by 1;
 	let n be (permanent health of Israfel - health of Israfel);
 	if n > Israfel-trance:
 		now n is Israfel-trance;
