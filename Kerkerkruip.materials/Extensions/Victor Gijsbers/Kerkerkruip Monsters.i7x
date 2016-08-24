@@ -4300,10 +4300,15 @@ Report the healer of Aite hitting a dead pc:
 
 Report the healer of Aite attacking:
 	unless the actor is the noun:
-		say "The healer pokes his sword at [the noun].";
+		if the healer of Aite wields a sword:
+			say "The healer pokes his sword at [the noun].";
+			rule succeeds;
+		otherwise if the current weapon of the healer of Aite is a natural weapon:
+			say "The healer throws a punch at [the noun].";
+			rule succeeds;
 	otherwise:
 		say "'My head has offended me,' the healer announces. 'It must be cut off.'";
-	rule succeeds.
+		rule succeeds.
 
 Report the healer of Aite dodging:
 	say "'Save me, great Aite!' the healer exclaims as he attempts to duck away.";
@@ -4371,11 +4376,12 @@ Report the tormentor of Aite hitting a dead pc:
 	rule succeeds.
 
 Report the tormentor of Aite attacking:
-	unless actor is the noun:
-		say "The tormentor raises her staff, preparing to cause pain to [the noun].";
-	otherwise:
-		say "The tormentor tries to put her staff in a place where the sun doesn't shine.";
-	rule succeeds.
+	if actor wields a staff of pain:		
+		unless actor is the noun:
+			say "The tormentor raises her staff, preparing to cause pain to [the noun].";
+		otherwise:
+			say "The tormentor tries to put her staff in a place where the sun doesn't shine.";
+		rule succeeds.
 
 Report the tormentor of Aite dodging:
 	say "'You will never get me!' the tormentor exclaims as she attempts to duck away.";
@@ -7241,7 +7247,7 @@ Report the mummified priest hitting a dead pc:
 	rule succeeds.
 
 Report the mummified priest attacking:
-	unless the actor is the noun:
+	unless the actor is the noun:		
 		say "The mummified priest stalks towards [the noun][if the mummified priest wields the was sceptre] with his sceptre raised[end if].";
 	otherwise:
 		say "The mummified priest tears at its own bandages.";
