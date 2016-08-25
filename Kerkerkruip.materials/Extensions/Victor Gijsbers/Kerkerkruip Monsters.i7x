@@ -3478,15 +3478,31 @@ Section - Reactions and Stealing Weapons
 
 To decide whether mercy is unarmed:
 	decide on whether or not the angel of mercy wears the gauntlet of attraction and the angel of mercy does not enclose an artificial weapon.
+
+To decide whether mercy can steal from (guy - a person):
+	unless guy actively opposes the angel of mercy:
+		no;
+	if guy is hidden:
+		no;
+	unless gauntlet can steal current weapon of guy for the angel of mercy:
+		no;
+	decide on whether or not current weapon of guy is angel-worthy.
+
+To decide whether mercy can reflect at (guy - a person):
+	unless the angel of mercy wears the shield of reflection:
+		no;
+	unless guy actively opposes the angel of mercy:
+		no;
+	if guy is hidden:
+		no;
+	decide on whether or not current weapon of guy is ranged.
 	
 To decide which number is the angel-stealable weapon count:
 	let weapon-count be 0;
 	now opposition test subject is the angel of mercy;
 	repeat with guy running through opposer people in the location of the angel of mercy:
-		if guy actively opposes the angel of mercy and guy is not hidden:
-			if the gauntlet can steal current weapon of guy for the angel of mercy:
-				if current weapon of guy is angel-worthy:
-					increase weapon-count by 1;
+		if mercy can steal from guy:
+			increase weapon-count by 1;
 	decide on weapon-count.
 
 Definition: a weapon (called item) is angel-worthy:
@@ -3512,9 +3528,8 @@ To decide which number is the angel-reflectable weapon count:
 	if the angel of mercy wears the shield of reflection:
 		now opposition test subject is the angel of mercy;
 		repeat with guy running through opposer people in the location of the angel of mercy:
-			if guy actively opposes the angel of mercy and guy is not hidden:
-				if current weapon of guy is ranged:
-					increase ranged-count by 1;
+			if mercy can reflect at guy:
+				increase ranged-count by 1;
 	decide on ranged-count.
 
 [mercy passiveness determines whether the angel is likely to attack or to prevent attacks
@@ -3528,7 +3543,7 @@ To decide what number is the mercy passiveness:
 	Let n be the angel-stealable weapon count - the angel-reflectable weapon count;
 	unless mercy is unarmed:
 		if n > 0:
-			now n is 0;
+			now n is the size number of the angel of mercy - 2;
 	if the angel of mercy is merciful:
 		increase n by 5;
 	decide on n.
@@ -3591,8 +3606,7 @@ An AI action selection rule for the angel of mercy (this is the angel of mercy's
 				if n < 0, now n is 0;
 			if ranged-count is 0:
 				increase n by 2;
-			if the concentration of the angel of mercy < 3:
-				decrease n by 3;
+			increase n by the concentration of the angel of mercy - 3;
 			choose a blank row in the Table of AI Action Options;		
 			now the Option entry is the action of the angel of mercy taking off the gauntlet of attraction;
 			now the Action Weight entry is n.
@@ -3669,8 +3683,6 @@ Report the angel of mercy blocking:
 
 Section - Angel of Mercy Sings to Reduce Tension and Concentration
 
-[TODO: discourage singing with full concentration?]
-
 Instead of the angel of mercy singing:
 	let completely-lost-list be a list of people;
 	let partly-lost-list be a list of people;
@@ -3682,7 +3694,7 @@ Instead of the angel of mercy singing:
 		if c > 0:
 			Repeat with i running from 1 to song-strength:
 				Let n be final mind of guy; [use spirit instead?]
-				unless a random chance of n in 40 succeeds:
+				unless a random chance of n in 50 succeeds:
 					decrease concentration of guy by 1;
 			if concentration of guy is at most 0:
 				now concentration of guy is 0;
@@ -3706,47 +3718,54 @@ A first AI action selection rule for the Angel of Mercy (this is the Angel of Me
 	now the Option entry is the action of the Angel of Mercy singing;
 	now the Action Weight entry is -100;
 	
+To decide what number is the mercy singing concentration loss of (guy - a person):
+	if concentration of angel of mercy > concentration of guy:
+		decide on concentration of guy;
+	otherwise:
+		decide on concentration of angel of mercy.
+
+[This returns the loss of guy's attack bonus if the angel of mercy sings, as a positive number]
+To decide which number is the mercy singing effect on (guy - a person):
+	Let tension-loss be the tension * (concentration of the Angel of Mercy) / 4;
+	Let future-concentration be the concentration of guy - the mercy singing concentration loss of guy;
+	decide on tension-loss + concentration attack bonus of guy - attack bonus for concentration level future-concentration;
+
 An AI action selection rule for the Angel of Mercy (this is the Angel of Mercy soothes with music rule):
 	let passiveness be mercy passiveness;
-	Let general benefit be 0;
-	Repeat with guy running through not hidden people in the location:
+	Let need be chance-to-lose + passiveness;
+	Let future-CTL be chance-to-lose - the mercy singing effect on the chosen target;
+	Let effectiveness be chance-to-lose - future-CTL;
+	Repeat with guy running through not hidden people in the location of the angel of mercy:
 		if guy actively opposes Angel of Mercy:
-			Let diff be concentration of guy - concentration of the Angel of Mercy;
-			if diff > 0:
-				increase general benefit by diff;
-	decrease general benefit by concentration of the Angel of Mercy;
-	Let tension-loss be the tension * (concentration of the Angel of Mercy) / 4;
-	Let future-CTW be the chance-to-win - concentration attack bonus of the Angel of Mercy - (tension-loss / 2);
-	Let future-concentration be the concentration of the chosen target - the concentration of the Angel of Mercy;
-	If future-concentration < 0:
-		now future-concentration is 0;
-	Let future-CTL be the chance-to-lose - concentration attack bonus of the chosen target + attack bonus for concentration level future-concentration - (tension-loss / 2);
-	Let chance-improvement be chance-to-lose - future-CTL;
-	if passiveness < 1:
-		Let baseline be chance-to-win;
-		if baseline > 5:
-			now baseline is 5;
-		increase chance-improvement by future-CTW - baseline;
-	if chance-to-lose > 10:
-		if passiveness > 0 or future-CTW > 5:
-			increase chance-improvement by 5;
-	if the angel of mercy is at-React:	
-		if concentration of the angel of mercy > 0 and chance-to-lose > 5:
-			if passiveness > 0 or future-CTW > 3:
-				choose row with an Option of the angel of mercy singing in Table of AI Action Options;
-				now Action Weight entry is chance-improvement + general benefit;
+			if concentration of guy is 3 and guy is not the chosen target:
+				increase need by 1;
+			increase effectiveness by mercy singing concentration loss of guy;
+	if the angel of mercy is at-React:
+		decrease need by 3; [a fair guess at the bonus of the best defence]
+		Let future-CTW be the chance-to-win - the mercy singing effect on the Angel of Mercy;
+		if passiveness < 1 and future-CTW > effectiveness:
+			now effectiveness is future-CTW;
 	otherwise:
-		if the current weapon of the chosen target is ranged and the angel of mercy wears the shield of reflection:
-			if chance-to-lose < 8 and future-CTL < 3 and chance-improvement > 0:
-				[don't discourage the enemy from attacking too much]
-				now chance-improvement is 0;
-		Let n be chance-improvement + general benefit;
-		if the concentration of the Angel of Mercy > 0 and n > 0:
-			choose row with an Option of the Angel of Mercy singing in Table of AI Action Options;
-			now the Action Weight entry is n;
-		if n < 3 and passiveness > 0:
+		decrease effectiveness by concentration of the angel of mercy;
+		if need > 5:
+			now need is 5;
+		if mercy can steal from the chosen target or mercy can reflect at the chosen target:
+			if chance-to-lose < 8 and future-CTL < 3:
+				[don't discourage the enemy from attacking]
+				now need is 0;
+			if chance-to-lose > 7 and future-CTL > 0 and need < 4:
+				[bring enemy's attack into a safer range]
+				now need is 4;
+		if passiveness < 1:
+			decrease need by chance-to-win;
+	if need > 0:
+		if the concentration of the Angel of Mercy > 0 and effectiveness > 0:
+			choose row with an Option of the angel of mercy singing in Table of AI Action Options;
+			now Action Weight entry is effectiveness * need / 2;
+		otherwise if passiveness > 0 and angel of mercy is not at-react:
 			choose row with Option of the angel of mercy concentrating in Table of AI Action Options;
 			increase Action Weight entry by passiveness.
+
 
 Section - Getting smaller
 

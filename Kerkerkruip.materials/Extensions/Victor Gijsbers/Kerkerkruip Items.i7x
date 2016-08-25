@@ -4166,7 +4166,7 @@ An add specific damage rule (this is the Malleus blood damage bonus rule):
 				add bonus points of damage with reason "Malleus Maleficarum blood bonus".
 
 Last carry out feeding (this is the feeding reduces tension for Malleus wielder rule):
-	reduce tension after hit;
+	now the tension is the tension after hit;
 	if the player wields the Malleus Maleficarum:
 		say "The Malleus Maleficarum uses your bloodletting to reduce the tension.";
 
