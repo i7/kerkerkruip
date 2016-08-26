@@ -7,6 +7,9 @@ then
 fi
 CHAMPION=$1
 CHALLENGER=$2
+CHAMP=$(echo $CHAMPION | perl -ne '@n=split; print $n[-1]')
+CHALL=$(echo $CHALLENGER | perl -ne '@n=split; print $n[-1]')
+
 rm -f test*
 printf "* //KerkerkruipScripts// fightchallenger\n$CHALLENGER" > fightchallenger
 printf "* //KerkerkruipScripts// fightchampion\n$CHAMPION" > fightchampion
@@ -16,23 +19,23 @@ do
 done
 
 cp ../Kerkerkruip.inform/Build/output.ulx output.ulx
-TIMESTAMP=$(date "+%Y-%m-%d-%H%M%S")
+TEST_ID=$(date "+%Y%m%d_%H%M_${CHAMP}_${CHALL}")
 FIGHT_COUNT=100
 [ -f tmp.log ] && rm tmp.log
-echo "$TIMESTAMP: Running $FIGHT_COUNT fights between $CHAMPION and $CHALLENGER..."
+echo "$TEST_ID: Running $FIGHT_COUNT fights..."
 for i in $(seq $FIGHT_COUNT)
 do
   COLS=$(tput cols)
-  SCRIPT=$(printf "transcripts/$TIMESTAMP-%03d.transcript" $i)
-  ../i7/dumb-git -w $COLS output.ulx >$SCRIPT
-  WINNER=$(tail -n1 $SCRIPT)
+  TRANSCRIPT=$(printf "transcripts/$TEST_ID-%03d.transcript" $i)
+  ../i7/dumb-git -w $COLS output.ulx >$TRANSCRIPT
+  WINNER=$(tail -n1 $TRANSCRIPT)
   if [ "$WINNER" = "ERROR" ]
   then
-    echo "Fight fail! $(tail -n2 $SCRIPT | head -n1) - Details in $SCRIPT"
+    echo "Fight fail! $(tail -n2 $TRANSCRIPT | head -n1) - Details in $TRANSCRIPT"
     exit 1
   fi
   [ -d transcripts ] || mkdir transcripts
-  echo "Fight test $TIMESTAMP-$i [$CHAMPION] vs [$CHALLENGER] winner: $WINNER" >> tmp.log
+  echo "$TRANSCRIPT winner: $WINNER" >> tmp.log
 
   CHALLENGER_WINS=$(egrep -c ": $CHALLENGER\$" tmp.log)
   CHAMPION_WINS=$(egrep -c ": $CHAMPION\$" tmp.log)
@@ -43,7 +46,7 @@ do
 done
 
 echo
-echo "Fight test $TIMESTAMP summary: in $FIGHT_COUNT fights, $CHALLENGER won $CHALLENGER_WINS times, $CHAMPION won $CHAMPION_WINS times" >> tmp.log
+echo "Fight test $TEST_ID summary: in $FIGHT_COUNT fights, $CHAMPION won $CHAMPION_WINS times, $CHALLENGER won $CHALLENGER_WINS times" >> tmp.log
 
 tail -n1 tmp.log
 cat tmp.log >> fighttest.log

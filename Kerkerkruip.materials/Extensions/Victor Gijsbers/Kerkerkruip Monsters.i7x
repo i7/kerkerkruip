@@ -2288,6 +2288,7 @@ To do the angel of compassion power-down:
 				say "You hear a [bold type]tortured wail[roman type] somewhere in the dungeon.".
 				
 A reviving rule for the angel of compassion (this is the restore radiant strength when reviving angel of compassion rule):
+	[TODO: restore faculties too? Maybe reviving rules already do that?]
 	now radiation of angel of compassion is 4;
 	now angel-of-compassion-strength is 4;
 
@@ -2421,9 +2422,9 @@ The description of the mindslug is "It is of the dreaded race of mindslugs, abom
 
 The soul description of the mindslug is "inspiralling reflections in green ooze".
 
-The health of the mindslug is 28.
+The health of the mindslug is 26.
 The melee of the mindslug is 2.
-The defence of the mindslug is 8.
+The defence of the mindslug is 7.
 
 The body score of the mindslug is 3.
 The mind score of the mindslug is 11.
@@ -4281,7 +4282,7 @@ The level of the healer of Aite is 4.
 The healer of Aite is group leading.
 The healer of Aite is not defeated individually.
 
-The health of the Healer of Aite is 20.
+The health of the Healer of Aite is 18.
 The melee of the Healer of Aite is 1.
 The defence of the Healer of Aite is 8.
 
@@ -4292,6 +4293,7 @@ The spirit score of Healer of Aite is 9.
 The group level of the Healer of Aite is 4.
 
 Heal power of the healer of Aite is 5.
+Heal cooldown of the healer of Aite is 4.
 The healer of Aite is Aite-loved.
 The healer of Aite carries the holy sword.
 
@@ -4434,8 +4436,8 @@ The defender of Aite accompanies the healer of Aite.
 
 
 The health of the Defender of Aite is 23.
-The melee of the Defender of Aite is 1.
-The defence of the Defender of Aite is 11.
+The melee of the Defender of Aite is 0.
+The defence of the Defender of Aite is 10.
 
 The body score of Defender of Aite is 12.
 The mind score of Defender of Aite is 10.
@@ -5458,7 +5460,7 @@ Israfel is group leading.
 Israfel is not initially accompanied.
 Israfel is not defeated individually.
 
-The health of Israfel is 38.
+The health of Israfel is 40.
 The melee of Israfel is 2.
 The defence of Israfel is 10.
 
@@ -5627,7 +5629,7 @@ The level of Isra is 4.
 Isra is not defeated individually.
 Isra accompanies Israfel.
 
-The health of Isra is 19.
+The health of Isra is 20.
 The melee of Isra is 0.
 The defence of Isra is 10.
 
@@ -5724,7 +5726,7 @@ The level of Fell is 4.
 Fell is not defeated individually.
 Fell accompanies Israfel.
 
-The health of Fell is 19.
+The health of Fell is 20.
 The melee of Fell is 3.
 The defence of Fell is 10.
 

@@ -10,10 +10,11 @@ fi
 CHAMPIONS=$1
 CHALLENGERS=$2
 
-TIMESTAMP=$(date "+%y%m%d")
-OUTFILE=roundrobin.$TIMESTAMP.results
+TIMESTAMP=$(date "+%y%m%d%H")
+COMMIT=$(git log --pretty=format:"%h" HEAD^!)
+OUTFILE=roundrobin.$TIMESTAMP-$COMMIT.results
 [ -f $OUTFILE ] && rm $OUTFILE
-echo "Pairing all monsters in $CHAMPIONS vs monsters in $CHALLENGERS, writing output to $OUTFILE..."
+echo "Pairing all $CHAMPIONS vs $CHALLENGERS, writing output to $OUTFILE..."
 cat $CHAMPIONS | while read CHAMPION
 do
   cat $CHALLENGERS | while read CHALLENGER
