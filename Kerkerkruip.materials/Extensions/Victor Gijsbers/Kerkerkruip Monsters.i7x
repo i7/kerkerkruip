@@ -3762,10 +3762,6 @@ An AI action selection rule for the Angel of Mercy (this is the Angel of Mercy s
 		if the concentration of the Angel of Mercy > 0 and effectiveness > 0:
 			choose row with an Option of the angel of mercy singing in Table of AI Action Options;
 			now Action Weight entry is effectiveness * need / 2;
-		otherwise if passiveness > 0 and angel of mercy is not at-react:
-			choose row with Option of the angel of mercy concentrating in Table of AI Action Options;
-			increase Action Weight entry by passiveness.
-
 
 Section - Getting smaller
 
