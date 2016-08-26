@@ -3688,7 +3688,7 @@ Instead of the angel of mercy singing:
 	let partly-lost-list be a list of people;
 	let song-strength be concentration of the angel of mercy;
 	now concentration of the angel of mercy is 0;
-	now the tension is tension * (4 - song-strength) / 4;
+	now the tension is (tension * (4 - song-strength)) / 4;
 	Repeat with guy running through people in the location of the angel of mercy:
 		Let c be concentration of guy;
 		if c > 0:
@@ -3731,6 +3731,8 @@ To decide which number is the mercy singing effect on (guy - a person):
 	decide on tension-loss + concentration attack bonus of guy - attack bonus for concentration level future-concentration;
 
 An AI action selection rule for the Angel of Mercy (this is the Angel of Mercy soothes with music rule):
+	if concentration of the Angel of Mercy is 0:
+		make no decision;
 	let passiveness be mercy passiveness;
 	Let need be chance-to-lose + passiveness;
 	Let future-CTL be chance-to-lose - the mercy singing effect on the chosen target;
@@ -3758,10 +3760,9 @@ An AI action selection rule for the Angel of Mercy (this is the Angel of Mercy s
 				now need is 4;
 		if passiveness < 1:
 			decrease need by chance-to-win;
-	if need > 0:
-		if the concentration of the Angel of Mercy > 0 and effectiveness > 0:
-			choose row with an Option of the angel of mercy singing in Table of AI Action Options;
-			now Action Weight entry is effectiveness * need / 2;
+	if need > 0 and effectiveness > 0:
+		choose row with an Option of the angel of mercy singing in Table of AI Action Options;
+		now Action Weight entry is effectiveness * need / 2;
 
 Section - Getting smaller
 
