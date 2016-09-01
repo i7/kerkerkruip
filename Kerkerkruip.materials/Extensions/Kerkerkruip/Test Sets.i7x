@@ -2246,12 +2246,12 @@ Testing effects of overmind-assembly:
 			otherwise if first-overmind-ally is not guy:
 				transcribe "making [guy] the second target";
 				now second-overmind-ally is guy;
-				if first-overmind-ally accompanies the overmind:
-					rule succeeds;
-				otherwise:
-					rule fails.
+				[TODO: if we want monsters to claim kills for the ovemind,
+				that has to be implemented and tested]
+				rule succeeds;
 
-Testing effects of overmind-alliance: if second-overmind-ally accompanies the overmind, rule succeeds.
+[once again, we are not currently testing if the second-overmind-ally is claiming kills for the overmind]
+Testing effects of overmind-alliance: rule succeeds.
 
 The smiting target is a person that varies.
 
