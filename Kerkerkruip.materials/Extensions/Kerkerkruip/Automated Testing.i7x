@@ -2089,7 +2089,7 @@ Example:
 
 	testing effects of ape-cowering: if we assert result "The blood ape cowers before your dreadful presence", rule succeeds.
 	
-Using this phrase creates a link between the outcome that invoked it and the person being waited for. It will cause the outcome to be tested immediately after that person gets a combat round, and the captured text will contain only the text that was output during that round. If we want to test combat round output for more than one person in a single turn, we must make a separate outcome for each person, and create another outcome to be the antecedent of everything tested in that turn. The antecedent must not have any turn-generating effects like compelling an action or waiting for anyone to act freely.
+Using this phrase creates a link between the outcome that invoked it and the person being waited for. It will cause the outcome to be tested immediately after that person gets a combat round, and the captured text will contain only the text that was output during that round. If we want to test combat round output for more than one person in a single turn, we must make a separate outcome for each person, and create another outcome to be the antecedent of everything tested in that turn. The antecedent must not have any turn-generating effects like compelling an action or waiting for anyone to act freely. Don't forget to make sure that the person is not asleep before using this phrase!
 
 One more useful property is the "hitting count." This is a number that is reset to 0 for every person when a test set is scheduled. It is incremented for a person whenever they try the hitting action. For example, to test whether the blood ape hit a retreating player:
 

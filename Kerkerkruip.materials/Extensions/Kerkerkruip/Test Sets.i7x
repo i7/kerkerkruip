@@ -642,7 +642,8 @@ Scenario for Dreadful-Presence-Test:
 	block interventions;
 
 regular scheduling of Dreadful-Presence-Test:
-	repeat with guy running through denizen people:
+	repeat with guy running through people:
+		now guy is not asleep;
 		now the defence of guy is 100;
 	now the mind score of the player is 10;
 	now the player worships Nomos;
@@ -1283,6 +1284,7 @@ Malygris-only-remembering	1	1
 initial scheduling of meeting-malygris: travel sneakily to the location of Malygris.
 regular scheduling of meeting-malygris:
 	now traveling sneakily is true;
+	now malygris is not asleep;
 	wait for Malygris to act freely.
 Testing effects of meeting-malygris: if we assert result "(does not (detect|notice)|remains unaware of) you(r presence)?[run paragraph on]", rule succeeds.
 
@@ -1475,10 +1477,10 @@ getting-deathly	1	0	--	--	early-pile-search
 getting-healthy	1	0	--	--	early-pile-search
 getting-delights	0	100	--	--	early-pile-search
 getting-bad-scroll	0	100	--	--	early-pile-search
-early-out	1	0	1000	"out of scrolls"	early-pile-search
+early-out	1	0	2000	"out of scrolls"	early-pile-search
 corpse-appears	14	15	--	--	early-out
 find-glory	1	0	--	--	early-out
-find-vecna	1	0	200	--	early-out
+find-vecna	1	0	400	--	early-out
 late-pile-search	0	1	--	"search pile"	--
 late-out	1	0	20	"out of scrolls"	late-pile-search
 find-arm	1	0	--	--	late-out
@@ -1524,8 +1526,8 @@ Testing effects of getting-bad-scroll:
 
 Testing effects of an outcome labeled "out of scrolls": unless the player carries a scroll, rule succeeds.
 Testing effects of corpse-appears: if the rotting corpse is in the location, rule succeeds.
-Testing effects of find-glory: if the player carries the hand of glory, rule succeeds.
-Testing effects of find-vecna: if the player carries the hand of vecna, rule succeeds.
+Testing effects of find-glory: if we assert that the holder of the hand of glory is the player, rule succeeds.
+Testing effects of find-vecna: if we assert that the holder of the hand of vecna is the player, rule succeeds.
 
 Initial scheduling of late-pile-search: extract the rotting corpse to Entrance Hall.
 Testing effects of find-arm: if the player carries the putrefying arm, rule succeeds.
@@ -3142,11 +3144,11 @@ If you add any rules, please consider adding a test here]
 [TODO: test damage effects, e.g. fragmentation grenade exploding in another room]
 
 Table of Outcomes (continued)
-outcome	likelihood	minimum attempts	antecedent
-damage-modifiers	0	1	restarting for tests
-dead-mage-damage	5	5	--
-protection-damage	1	1	--
-dragonarmor-damage	1	3	--
+outcome	likelihood	minimum attempts	maximum attempts	antecedent
+damage-modifiers	0	1	--	restarting for tests
+dead-mage-damage	5	5	--	--
+protection-damage	1	1	--	--
+dragonarmor-damage	1	3	21	--
 
 First regular scheduling of an outcome when testing damage-modifiers: capture damage text.
 
@@ -3237,11 +3239,11 @@ regular scheduling of faraday-cage: do the action of waiting for a 100 melee hit
 Testing effects of faraday-cage: if we assert result "- 3 \(suit acts as a Faraday cage\)", rule succeeds.
 
 Table of Outcomes (continued)
-outcome	likelihood	minimum attempts
-pro-axe-damage	1	4
-malleus-blood-damage	1	1
-no-crossbow-tension-damage	1	1
-crossbow-tension-damage	1	1
+outcome	likelihood	minimum attempts	maximum attempts
+pro-axe-damage	1	4	20
+malleus-blood-damage	1	1	--
+no-crossbow-tension-damage	1	1	--
+crossbow-tension-damage	1	1	--
 
 initial scheduling of pro-axe-damage:
 	remove Bodmall from play;
@@ -3746,16 +3748,16 @@ regular scheduling of nomos-bonus-damage: do the action of the defender of Aite 
 Testing effects of nomos-bonus-damage: if we assert result "\+ 4 \(the law is with you\)", rule succeeds.
 
 Table of Outcomes (continued)
-outcome	likelihood	minimum attempts
-undead-vs-sul-worshipper	1	1
-demon-vs-sul-worshipper	1	1
-sul-intervention	1	5
-no-sul-intervention	10	10
-limb-removal	1	0
-limbless-damage	1	1
-slave-attacking	1	1
-ment-damage-bonus	1	1
-ment-damage-reduction	1	1
+outcome	likelihood	minimum attempts	maximum attempts
+undead-vs-sul-worshipper	1	1	--
+demon-vs-sul-worshipper	1	1	--
+sul-intervention	1	5	20
+no-sul-intervention	10	10	--
+limb-removal	1	0	--
+limbless-damage	1	1	--
+slave-attacking	1	1	--
+ment-damage-bonus	1	1	--
+ment-damage-reduction	1	1	--
 
 initial scheduling of undead-vs-sul-worshipper: now the player worships Sul.
 regular scheduling of undead-vs-sul-worshipper: do the action of the undeadguy waiting for a 100 melee hit by the player.
@@ -3776,6 +3778,10 @@ testing effects of no-sul-intervention:
 	if we assert absence of result "x 0% \(Sul intervenes\)", rule succeeds.
 
 initial scheduling of limb-removal:
+	Repeat with item running through rotting limbs:
+		[TODO: prevent rotting limbs from being cursed, or at least curse-identified?]
+		now item is not cursed;
+		now item is not curse-identified;
 	now the player worships nothing;
 
 regular scheduling of limb-removal: do the action of the undeadguy waiting for a 100 melee hit by the player.
@@ -4656,6 +4662,7 @@ healer-healing-self	1	0	20	--
 Initial scheduling of healer-not-healing-player:
 	prepare a test battle with the healer of Aite, inviting groups;
 	Repeat with guy running through people in the location:
+		now guy is not asleep;
 		now the defence of guy is 50;
 		now the melee of guy is 0;
 		now the health of guy is the permanent health of guy;
