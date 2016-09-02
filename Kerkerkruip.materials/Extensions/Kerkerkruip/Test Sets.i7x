@@ -612,16 +612,16 @@ Chapter - Dreadful Presence
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	maximum attempts	antecedent
-dreadful-presence-test	0	1	200	restarting for tests
+dreadful-presence-test	0	1	--	restarting for tests
 player-presence	1	1	1	dreadful-presence-test
 ape-only-cowering	0	1	200	--
-ape-cower1	21	100	200	ape-only-cowering
-toad-cower1	0	20	200	ape-only-cowering
-player-cower1	0	20	200	ape-only-cowering
+ape-cower1	21	100	100	ape-only-cowering
+toad-cower1	0	20	--	ape-only-cowering
+player-cower1	0	20	--	ape-only-cowering
 insane-player-cowering	0	1	200	--
-ape-cower2	21	100	200	insane-player-cowering
-toad-cower2	0	20	200	insane-player-cowering
-player-cower2	6	25	200	insane-player-cowering
+ape-cower2	21	100	100	insane-player-cowering
+toad-cower2	0	20	--	insane-player-cowering
+player-cower2	6	25	100	insane-player-cowering
 
 [To decide which number is the target cower percentage of (guy - a person):
 	if guy is undead, decide on 0;
@@ -1159,6 +1159,8 @@ Scenario for remembering-text:
 	now hall of vapours is bannedobject;
 	now the rod of the master builder is testobject;
 	now generation info is true;
+	
+initial scheduling of remembering-text: now every room is not rust-spored.
 
 [in case the first map is rejected, Arcane Vault must be switched back from testobject to bannedobject every time]
 first creating the map rule when testing remembering-text:
@@ -1410,10 +1412,10 @@ Scenario for blessed-grenade-test:
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	maximum attempts	label	antecedent
 blessed-grenade-test	0	1	1	--	restarting for tests
-getting-blessed	1	0	400	"produce grenade"	--
-no-extra-blessed	0	400	400	"produce grenade"	--
+getting-blessed	1	0	1000	"produce grenade"	--
+no-extra-blessed	0	300	300	"produce grenade"	--
 throwing-blessed	1	0	10	--	--
-no-new-blessed	0	400	400	"produce grenade"	--
+no-new-blessed	0	300	300	"produce grenade"	--
 
 initial scheduling of blessed-grenade-test:
 	now the defence of the player is 100;
@@ -1424,23 +1426,23 @@ initial scheduling of blessed-grenade-test:
 
 Regular scheduling of an outcome labeled "produce grenade":
 	Repeat with item running through grenades in the location:
-		if item is not a custom-grenade, remove item from play;
+		remove item from play;
 	Now every room is not rust-spored;
 	Now every thing is not rusted;
 	if the reusable item is not a thing:
 		transcribe "DEBUG: produce a grenade - no reusable item";
 	now the player carries the reusable item;
-	clear event description;
 	try inserting the reusable item into the curious machine;
 	Now the health of the player is 100;
 	Now the player is not asleep;
 	if the location is not Alchemical Laboratory, extract the player to Alchemical Laboratory;
 	[If the current move is hidden-traveling, now the player is hidden;]
 
-Testing effects of an outcome labeled "produce grenade": if we assert result "the Blessed Grenade drops on the ground", rule succeeds.
+Testing effects of an outcome labeled "produce grenade": if we assert that the holder of the blessed grenade is the location, rule succeeds.
+
+Initial scheduling of no-extra-blessed: now the player carries the blessed grenade.
 
 Regular scheduling of throwing-blessed:
-	now the player carries the blessed grenade;
 	extract Drakul to the Alchemical Laboratory;
 	compel the action of throwing the blessed grenade;
 
@@ -1976,6 +1978,8 @@ Scenario for bug-291:
 	now the armadillo is bannedobject;
 	now the reaper is bannedobject;
 	now the dimensional anchor is bannedobject;
+
+initial scheduling of bug-291: Now every room is not rust-spored.
 
 initial scheduling of sleepy-throwing: extract the player to the location of the healer of aite.
 regular scheduling of sleepy-throwing:
@@ -3115,6 +3119,10 @@ Testing effects of an outcome labeled "growing defender":
 
 regular scheduling of player-size-wait: do the action of waiting for a 0 melee hit by the armadillo.
 regular scheduling of player-size-dodge: do the action of dodging a 0 melee hit by the armadillo.
+
+initial scheduling of player-size-parry:
+	equip the player with the gilded rapier;
+	now the gilded rapier is medium.
 regular scheduling of player-size-parry: do the action of parrying a 0 melee hit by the armadillo.
 
 Chapter - Damage Modifiers
@@ -3361,7 +3369,7 @@ Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	maximum attempts	antecedent
 blessed-and-cursed	0	1	--	--
 death-blessing	1	15	100	blessed-and-cursed
-death-curse	1	20	133	blessed-and-cursed
+death-curse	1	20	100	blessed-and-cursed
 blessing-reset	1	2	10	death-blessing
 curse-reset	1	2	10	death-curse
 
@@ -3925,6 +3933,8 @@ Scenario for sleep effects:
 	now the Lair of the Imp is bannedobject;
 	now Temple of Nomos is testobject.
 	
+Initial scheduling of sleep effects: now every room is not rust-spored.
+	
 Section - Sneaking Around Sleepers
 
 Table of Outcomes (continued)
@@ -4146,6 +4156,44 @@ testing effects of an outcome labeled "nomos after dream": if we assert that the
 regular scheduling of nomos-attack-after-tungausy: compel the action of waiting.
 testing effects of nomos-attack-after-tungausy: if we assert result "You plan on waiting, but find yourself attacking the swarm of daggers instead", rule succeeds.
 
+Chapter - Startling Phantasms Test
+
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts	maximum attempts	label	antecedent
+startling phantasms	0	1	--	--	restarting for tests
+phantasmagoria-event-blind	1	3	--	"startling phantasm"	--
+blind-player-startled	0	10	--	"startle player"	phantasmagoria-event-blind
+phantasmagoria-event-eyeless	1	3	--	"startling phantasm"	--
+eyeless-player-startled	0	10	--	"startle player"	phantasmagoria-event-eyeless
+phantasmagoria-event-sighted	1	3	100	"startling phantasm"	--
+sighted-player-startled	4	5	30	"startle player"	phantasmagoria-event-sighted
+eyeless-monster-startled	0	10	--	--	phantasmagoria-event-sighted
+
+First independent action rule when testing an outcome labeled "startling phantasm": rule fails.
+[Don't let wandering monsters in]
+
+Initial scheduling of phantasmagoria-event-blind:
+	extract the player to phantasmagoria, making sure it is unoccupied;
+	extract the jumping bomb to phantasmagoria;
+	equip the player with the blindfold.
+
+Regular scheduling of an outcome labeled "startling phantasm":
+	Repeat with guy running through people in the location:
+		Now the concentration of guy is 1;
+	Compel the action of waiting.
+
+Testing effects of an outcome labeled "startling phantasm": if we assert result "Suddenly, <^\n>+ appears", rule succeeds.
+
+Initial scheduling of phantasmagoria-event-eyeless:
+	remove the blindfold from play;
+	now eyeless vision is adapted.
+	
+Initial scheduling of phantasmagoria-event-sighted: now eyeless vision is not adapted.
+	
+Testing effects of an outcome labeled "startle player": if the concentration of the player is 0, rule succeeds.
+
+Testing effects of eyeless-monster-startled: if the concentration of the jumping bomb is 0, rule succeeds.
+
 Chapter - Simple Tests
 
 [tests that don't require restart]
@@ -4239,7 +4287,7 @@ Initial scheduling of flash-blindfolded:
 	revive Miranda in the location;
 	equip the player with the blindfold.
 	
-Initial scheduling of a flash-resetting outcome:
+First initial scheduling of a flash-resetting outcome:
 	Repeat with guy running through people:
 		now the flash-grenade-timer of guy is 0;
 	
@@ -4260,47 +4308,6 @@ Initial scheduling of flash-eyeless-player:
 Initial scheduling of flash-sighted-player: now eyeless vision is not adapted.
 
 testing effects of blind-when-flashed: unless the player is perceptive, rule succeeds.
-
-Section - Phantasmagoria Distractions Simple Test
-
-Table of Outcomes (continued)
-outcome	likelihood	minimum attempts	maximum attempts	antecedent
-phantasmagoria-event-blind	1	3	--	--
-blind-player-startled	0	10	--	phantasmagoria-event-blind
-phantasmagoria-event-eyeless	1	3	--	--
-eyeless-player-startled	0	10	--	phantasmagoria-event-eyeless
-phantasmagoria-event-sighted	1	3	200	--
-sighted-player-startled	4	5	--	phantasmagoria-event-sighted
-eyeless-monster-startled	0	10	--	phantasmagoria-event-sighted
-
-Definition: an outcome is phantasmagoria-distracting if it is phantasmagoria-event-blind or it is phantasmagoria-event-eyeless or it is phantasmagoria-event-sighted.
-
-First independent action rule when testing a phantasmagoria-distracting outcome: rule fails.
-[Don't let wandering monsters in]
-
-Definition: an outcome is player-distracting if the antecedent of it is phantasmagoria-distracting and it is not eyeless-monster-startled.
-
-Initial scheduling of phantasmagoria-event-blind:
-	extract the player to phantasmagoria, making sure it is unoccupied;
-	extract the jumping bomb to phantasmagoria;
-	equip the player with the blindfold.
-
-Regular scheduling of a phantasmagoria-distracting outcome:
-	Repeat with guy running through people in the location:
-		Now the concentration of guy is 1;
-	Compel the action of waiting.
-
-Testing effects of a phantasmagoria-distracting outcome: if we assert result "Suddenly, <^\n>+ appears", rule succeeds.
-
-Initial scheduling of phantasmagoria-event-eyeless:
-	remove the blindfold from play;
-	now eyeless vision is adapted.
-	
-Initial scheduling of phantasmagoria-event-sighted: now eyeless vision is not adapted.
-	
-Testing effects of a player-distracting outcome: if the concentration of the player is 0, rule succeeds.
-
-Testing effects of eyeless-monster-startled: if the concentration of the jumping bomb is 0, rule succeeds.
 
 Section - Blindness Rules Simple Test
 
@@ -4383,6 +4390,7 @@ initial scheduling of eyeless-x-bgoggles:
 	now the body score of the player is 3;
 	now the mind score of the player is 5;
 	now the spirit score of the player is 7;
+	now the player skill bonus timer is 0;
 	now the player carries the goggles of blindness;
 	now blindness-goggles-secret-known is false;
 	

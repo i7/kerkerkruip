@@ -39,7 +39,7 @@ This has some special interpretations:
 
 if likelihood = 0 or likelihood = minimum attempts, then success or failure of each test is considered a certainty, and the whole outcome will fail if a single test does not perform as expected
 if minimum attempts = 0, then likelihood is considered a minimum number of successes, not a probability. Setting likelihood to 1 means the whole outcome will be achieved if a single test succeeds
-For all other values, a tolerance range will be established that should achieve the outcome in 98% of cases with correctly randomized successes
+For all other values, a tolerance range will be established that should achieve the outcome in 99.5% of cases with correctly randomized successes
 
 maximum attempts - outcome will "time out" and fail if it reaches this number without being achieved first. If you don't set this, a reasonable default will be chosen for you
 maximum tolerance - do not set, will be calculated
@@ -58,7 +58,7 @@ The verb to be labeled means the label-tagging relation.
 
 Section - Statistical Help
 
-[This phrase helps us set a reasonable error tolerance of repeated tests so they will succeed most of the time. If we use a success rate of 0.98, that will set a threshold of error such that the outcome will be achieved for 98% of random seeds]
+[This phrase helps us set a reasonable error tolerance of repeated tests so they will succeed most of the time. If we use a success rate of 0.995, that will set a threshold of error such that the outcome will be achieved for 99.5% of random seeds]
 
 To set the maximum tolerance for (event - an outcome) with (success rate - a real number) achievement:
 	if minimum attempts of event is 0 or likelihood of event is 0 or likelihood of event is minimum attempts of event:
@@ -789,11 +789,13 @@ To decide what number is the calculated maximum attempts of (event - an outcome)
 				now max is dependent-max;
 	decide on max;
 
+[Note that INCREASING the target achievement results in SHORTER times to success - increasing target achievement broadens the range outcomes that are considered successful, by raising tolerances]
+
 To make (event - an outcome) testable:
 	if event is untested:
 		now state of event is outcome-possible;
 		now maximum attempts of event is the calculated maximum attempts of event;
-		set the maximum tolerance for event with 0.98 achievement;
+		set the maximum tolerance for event with 0.995 achievement;
 
 To make (event - boring lack of results) testable:
 	do nothing;
@@ -1841,7 +1843,7 @@ likelihood / minimum attempts represents the expected frequency of success. For 
 	1 likelihood / 3 minimum attempts means the rule should succeed once out of every three attempts, with a certain error tolerance allowed (which is calculated for you)
 	1 likelihood / 0 minimum attempts means the rule should succeed at least once.
 
-The maximum attempts are used mainly in the final two cases, where success is not strictly deterministic. If the maximum is reached, the outcome is considered to have "timed out" and the failure will be reported. The maximum attempts also determine how strict the error tolerance will be - the tolerance is calculated such that the test will be accurate 98% of the time, regardless of what the maximum attempts are.
+The maximum attempts are used mainly in the final two cases, where success is not strictly deterministic. If the maximum is reached, the outcome is considered to have "timed out" and the failure will be reported. The maximum attempts also determine how strict the error tolerance will be - the tolerance is calculated such that the test will be accurate 99.5% of the time, regardless of what the maximum attempts are.
 
 Likelihood and minimum attempts should always be specified, but maximum attempts may be left blank. A reasonable default will be chosen (usually 1 or 100, unless it is influenced by dependencies).
 
