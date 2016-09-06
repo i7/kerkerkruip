@@ -4059,6 +4059,14 @@ Carry out begging for mercy:
 	if test result is false:					
 		say "The angel searches your face for sincere contrition, but [bold type]does not find it[roman type].[paragraph break]'I may lessen your pain, but I will not spare your life.' it says.";						
 		rule succeeds;
+	otherwise:
+		grant the angel's mercy.
+		
+To grant the angel's mercy:	
+	if the player is at-react:
+		repeat through Table of Delayed Actions:
+			if the action to take entry is the action of the angel of mercy hitting the player:
+				blank out the whole row;				
 	say "The angel is [bold type]moved by[roman type] your humble plea! [run paragraph on]";
 	now the Angel of Mercy is merciful;
 	Let item be the mercy-boon;
