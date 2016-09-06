@@ -21,19 +21,19 @@ COLS=$(tput cols)
 TESTTRANSCRIPT=testtranscript
 while [ -f noninteractivetests ]
 do
-  if [ -t 0 ]
+  if [ $CI = true ]
   then
+    # in continuous integration environment (Travis) - just output dots
+    sleep 10
+    printf "."
+  else
+    # in a terminal... show a status line that rewrites itself
     sleep 1
-    # we are in a terminal... hope this test works!
     [ -f $TESTTRANSCRIPT ] || TESTTRANSCRIPT=testtranscript.glkdata
     PROGRESS=$(grep 'Current progress:' $TESTTRANSCRIPT | tail -n1)
     tput rmam # disable line wrap
     printf "\r%-${COLS}s" "$PROGRESS" # print line, padded to the right with blank space, for the number of columns on the screen
     tput smam # enable line wrap
-  else
-    # in Travis or whatever noninteractive environment, just output a few dots
-    sleep 10
-    printf "."
   fi
 done
 
