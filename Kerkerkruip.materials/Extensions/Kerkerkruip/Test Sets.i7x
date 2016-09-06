@@ -1572,7 +1572,7 @@ Section - bug 244
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	maximum attempts	antecedent
-bug-244	1	0	200	generation-tests
+bug-244	1	0	300	generation-tests
 mausoleum-secret	5	5	--	bug-244
 
 testing effects of bug-244 (this is the mausoleum must be secret rule):

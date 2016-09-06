@@ -22,7 +22,7 @@ TESTTRANSCRIPT=testtranscript
 while [ -f noninteractivetests ]
 do
   [ -f $TESTTRANSCRIPT ] || TESTTRANSCRIPT=testtranscript.glkdata
-  if [ $CI = true ]
+  if [ $CI -a $CI = true ]
   then
     # in continuous integration environment (Travis) - just output dots
     sleep 10
