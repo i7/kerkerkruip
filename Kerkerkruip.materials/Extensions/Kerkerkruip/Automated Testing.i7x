@@ -207,8 +207,10 @@ To compel (the desired action - a stored action):
 	schedule compelling an action; [this should automatically stop and wait for a turn]
 
 To compel (the desired action - a stored action) as a reaction to (guy - a person):
-	transcribe "setting the compelled attacker to [the guy][if the guy is sleeping in this world] and waking [them] up";
+	Let the compelled defender be the actor part of the desired action;
+	transcribe "setting the compelled attacker to [the guy][if the guy is sleeping in this world] and waking [them] up[end if][if the compelled defender is sleeping in this world] and waking [the compelled defender] up[end if]";
 	if the guy is sleeping in this world, now the guy is not asleep;
+	if the compelled defender is sleeping in this world, now the compelled defender is not asleep;
 	Now the compelled attacker is the guy;
 	Now the compelled action is the desired action;
 	schedule compelling an attack; [this should automatically stop and wait for a turn]
@@ -1319,6 +1321,15 @@ To assert that (item - a thing) is in (place - an object):
 
 Chapter - Helpful phrases
 
+Section - Scenario Settings
+
+To ban wandering monsters:
+	now the overmind is bannedobject;
+	now lair of the imp is bannedobject;
+	now the armadillo is bannedobject;
+	Repeat with guy running through follower monsters:
+		now guy is bannedobject.
+
 Section - Movement
 
 Definition: A room (called place) is reachable:
@@ -2171,6 +2182,10 @@ Just as we can require objects from the Kerkerkruip Console, we can force things
 		Now drakul is testobject;
 
 This will ensure that Drakul is placed in the dungeon, and when he is killed, his lifeblood will appear. "testobject" and "bannedobject" work for rooms as well as most treasures and rogues. Dreams can be given the property "current-test-dream". At this time, starting kits can't be controlled this way, but equipment and abilities can be rearranged after dungeon generation if necessary.
+
+Some scenarios are common to many tests. In several cases, we want to prevent monsters from wandering into the room where we are testing things. Since the Reaper, the armadillo, and the imp tend to do this, we can ban all wanderers at once with the phrase:
+
+	ban wandering monsters;
 
 Section: Testing Dungeon Creation
 

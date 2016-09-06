@@ -812,13 +812,10 @@ fed-hood-power	1	1	--
 
 Scenario for temporary Nomos blood magic:
 	now addict-kit is bannedobject;
-	now the overmind is bannedobject;
 	now the swarm of daggers is testobject;
 	now the Temple of Nomos is testobject;
 	now columnated ruins is bannedobject;
-	now the armadillo is bannedobject;
-	now the reaper is bannedobject;
-	now the imp is bannedobject;
+	ban wandering monsters;
 	now everything is not cursed;
 	block interventions;
 
@@ -1464,10 +1461,7 @@ Chapter - Pile of Limbs
 Scenario for pile-of-limbs-test:
 	now quartering room is testobject;
 	now mausoleum is bannedobject;
-	now ravenous armadillo is bannedobject;
-	now lair of the imp is bannedobject;
-	Repeat with guy running through follower monsters:
-		now guy is bannedobject.
+	ban wandering monsters.
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	maximum attempts	label	antecedent
@@ -1838,10 +1832,10 @@ woke-with-reaper	20	20	woke-from-garden
 woke-in-combat	20	20	woke-from-garden
 
 Scenario for bug-280:
-	now the reaper is testobject;
-	now the lair of the imp is testobject;
+	ban wandering monsters;
+	now the reaper is testobject; [overriding the wandering ban]
+	now the lair of the imp is testobject; [overriding the wandering ban]
 	now the dimensional anchor is bannedobject;
-	now the armadillo is bannedobject;
 	now the teleportation beacon is bannedobject; [test with the imp?]
 	now the dream of briar roses is testobject;
 	now the reusable item is a random morphean grenade;
@@ -1976,9 +1970,7 @@ Scenario for bug-291:
 	now the healer of aite is testobject;
 	now the swarm of daggers is testobject;
 	now the hall of mirrors is bannedobject;
-	now the lair of the imp is bannedobject;
-	now the armadillo is bannedobject;
-	now the reaper is bannedobject;
+	ban wandering monsters;
 	now the dimensional anchor is bannedobject;
 
 initial scheduling of bug-291: Now every room is not rust-spored.
@@ -2227,11 +2219,8 @@ absorb-overmind	1	1	"absorb target"	--
 absorb-second-ally	1	1	"absorb target"	--
 
 Scenario for bug-397:
-	Now the overmind is testobject;
-	now the armadillo is bannedobject;
-	now lair of the imp is bannedobject;
-	Repeat with guy running through follower monsters:
-		now guy is bannedobject;
+	ban wandering monsters;
+	Now the overmind is testobject; [overriding the wandering ban]
 
 first-overmind-ally is an object that varies.
 second-overmind-ally is an object that varies.
