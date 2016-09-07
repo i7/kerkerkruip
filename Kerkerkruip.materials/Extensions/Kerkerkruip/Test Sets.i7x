@@ -3359,8 +3359,8 @@ testing effects of altered-vs-chain:
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	maximum attempts	antecedent
 blessed-and-cursed	0	1	--	--
-death-blessing	1	15	100	blessed-and-cursed
-death-curse	1	20	100	blessed-and-cursed
+death-blessing	1	15	200	blessed-and-cursed
+death-curse	1	20	300	blessed-and-cursed
 blessing-reset	1	2	10	death-blessing
 curse-reset	1	2	10	death-curse
 
