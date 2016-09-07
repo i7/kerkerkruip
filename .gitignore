@@ -27,3 +27,5 @@ tests/*seed*
 tools/cheapglk
 tools/*git
 tools/*glulxe
+randomseed
+recent-seeds
