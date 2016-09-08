@@ -1216,8 +1216,8 @@ For reading a command when done testing is false (this is the finish the last te
 	transcribe and stop capturing text because "finished final test";
 	start the next test;
 
-Before printing the player's obituary when done testing is false (this is the abort the primary outcome if game over rule):
-	record failure report "the player died";
+First after printing the player's obituary when done testing is false (this is the abort the primary outcome if game over rule):
+	record failure report "the game ended";
 	transcribe and stop capturing because "game over at";
 	start the next test.
 
@@ -1347,23 +1347,31 @@ Definition: A thing is reachable if the location of it is a reachable room.
 
 To swap the occupants of (first place - a room) and (second place - a room):
 	if second place is nothing:
-		transcribe "removing occupants of [first place] from play";
 		repeat with guy running through people in first place:
+			transcribe "removing [guy] from play";
 			extract guy from combat;
 			remove guy from play;
 	otherwise:
 		Let swap place be a random unoccupied room;
 		Repeat with guy running through people in first place:
+			transcribe "moving [guy] to [swap place]";
 			extract guy to the swap place;
 		if the second place is not the swap place:
 			Repeat with guy running through people in second place:
+				transcribe "moving [guy] to [first place]";
 				extract guy to first place;
 			Repeat with guy running through people in swap place:
+				transcribe "finally moving [guy] to [second place]";
 				extract guy to second place;
 
 To extract (guy - a person) to (place - a room), making sure it is unoccupied:
 	if making sure it is unoccupied and place is occupied:
 		Let elsewhere be a random unoccupied reachable room;
+		if elsewhere is nothing:
+			now elsewhere is a random unoccupied placed not nogo room;
+		if elsewhere is [still] nothing:
+			now elsewhere is a random unoccupied not nogo room;
+		[we want to avoid removing the occupants from play, because if Malygris is one of the occupants, the game ends!]
 		transcribe "moving occupants of [place] to [elsewhere]";
 		swap the occupants of place and elsewhere;
 	if place is not the location of guy:

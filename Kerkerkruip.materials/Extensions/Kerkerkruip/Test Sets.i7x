@@ -4004,6 +4004,7 @@ exploding-awake	1	1	"compel throwing"
 
 [TODO: waking asleep enemy when dreaming? are allies any different?]
 
+initial scheduling of waking-awake-self: try taking off the fuligin cloak;
 regular scheduling of waking-awake-self: try awaking the player;
 testing effects of waking-awake-self: if we assert result "Perhaps you are in a dream, but you are unable to wake yourself", rule succeeds.
 
@@ -4091,6 +4092,9 @@ Initial scheduling of dreamy-nomos-worshipper:
 [We can use this to see when the reading a command activity runs:
 
 Before reading a command when testing Nomos intervention effects: say "reading a command, nomos attacker=[nomos attacker] counter=[nomos counter], bonus=[nomos bonus]";]
+
+First testing effects when testing sleep effects:
+	transcribe "Player's health: [health of player]/[permanent health of player]";
 
 Testing effects of dreamy-nomos-worshipper:
 	if the number of people in Entrance Hall is 0, rule succeeds.
