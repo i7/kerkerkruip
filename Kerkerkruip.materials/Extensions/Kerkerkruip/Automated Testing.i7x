@@ -1330,6 +1330,12 @@ To ban wandering monsters:
 	Repeat with guy running through follower monsters:
 		now guy is bannedobject.
 
+To ban faculty modifiers:
+	now the bull totem is bannedobject;
+	now the focal totem is bannedobject;
+	now tungausy totem is bannedobject;
+	now addict-kit is bannedobject.
+
 Section - Movement
 
 Definition: A room (called place) is reachable:
@@ -2186,6 +2192,10 @@ This will ensure that Drakul is placed in the dungeon, and when he is killed, hi
 Some scenarios are common to many tests. In several cases, we want to prevent monsters from wandering into the room where we are testing things. Since the Reaper, the armadillo, and the imp tend to do this, we can ban all wanderers at once with the phrase:
 
 	ban wandering monsters;
+	
+Many objects in the dungeon affect faculties. If a test requires that a faculty have a particular value, this can be used to avoid them:
+	
+	ban faculty modifiers;
 
 Section: Testing Dungeon Creation
 

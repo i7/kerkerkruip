@@ -345,10 +345,11 @@ aeb-text	1	1	--	--	angel-escape-burn
 Scenario for mercy parting shots:
 	now generation info is true;
 	now pickaxe-kit is testobject;
+	ban wandering monsters;
+	ban faculty modifiers;
+	now bridge of doom is bannedobject; [can't collapse connection]
 	now vast staircase is testobject; [guaranteed to have 2 exits];
 	now angel of mercy is testobject;
-	now lair of the imp is bannedobject;
-	now the bull totem is bannedobject;
 
 mercy-retreat-place is a room that varies.
 mercy-way-from-entrance is a direction that varies.
@@ -427,6 +428,9 @@ initial scheduling of retreatless-gargantuan-angel:
 	now way is mercy-way-from-entrance;
 	while way is a direction:
 		try collapsing way;
+		if way is the best route from Entrance Hall to Vast Staircase:
+			assert "Failed to collapse [way] from Entrance Hall to [the room way from Entrance Hall]" based on false;
+			break;
 		now way is the best route from Entrance Hall to Vast Staircase;
 	remove the rod of the master builder from play;
 	extract the player to Vast Staircase;

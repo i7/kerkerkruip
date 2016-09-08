@@ -22,15 +22,19 @@ TESTTRANSCRIPT=testtranscript
 while [ -f noninteractivetests ]
 do
   [ -f $TESTTRANSCRIPT ] || TESTTRANSCRIPT=testtranscript.glkdata
+  sleep 1
+  PROGRESS=$(grep 'Current progress:' $TESTTRANSCRIPT | tail -n1)
   if [ $CI -a $CI = true ]
   then
-    # in continuous integration environment (Travis) - just output dots
-    sleep 10
-    printf "."
+    # in Travis - show progress line by line as it develops
+    if [ "$LAST_PROGRESS" != "$PROGRESS" ]
+    then
+      LAST_PROGRESS="$PROGRESS"
+      echo "$PROGRESS"
+    fi
   else
     # in a terminal... show a status line that rewrites itself
     sleep 1
-    PROGRESS=$(grep 'Current progress:' $TESTTRANSCRIPT | tail -n1)
     tput rmam # disable line wrap
     printf "\r%-${COLS}s" "$PROGRESS" # print line, padded to the right with blank space, for the number of columns on the screen
     tput smam # enable line wrap
