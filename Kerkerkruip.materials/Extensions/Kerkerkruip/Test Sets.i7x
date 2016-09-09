@@ -815,7 +815,7 @@ fed-hood-description	1	1	--
 fed-hood-power	1	1	--
 
 Scenario for temporary Nomos blood magic:
-	now addict-kit is bannedobject;
+	ban faculty modifiers;
 	now the swarm of daggers is testobject;
 	now the Temple of Nomos is testobject;
 	now columnated ruins is bannedobject;
@@ -2646,10 +2646,10 @@ fragmentation damage text	1	1	--
 
 Scenario for damage-text:
 	now generation info is true;
+	ban faculty modifiers;
 	now Drawing Room is bannedobject;
 	now Vast Staircase is testobject;
 	now slaying-kit is testobject;
-	now addict-kit is bannedobject;
 
 Initial scheduling of basic attack damage text:
 	prepare a test battle with the reaper;
@@ -3148,10 +3148,7 @@ First regular scheduling of an outcome when testing damage-modifiers: capture da
 scenario for damage-modifiers:
 	Repeat with guy running through people:
 		now inherent damage modifier of the guy is 10;
-	now addict-kit is bannedobject;
-	now the tungausy totem is bannedobject;
-	now the focal totem is bannedobject;
-	now the totem of the bull is bannedobject;
+	ban faculty modifiers;
 	now Hall of Mirrors is bannedobject;
 	now Miranda is testobject.
 
