@@ -723,6 +723,28 @@ Every turn when the ravenous armadillo is acting independently (this is the arma
 				let way be the direction from the location of the ravenous armadillo to place;
 				[say "TEST CODE: trying the armadillo going [way].";]
 				try the ravenous armadillo going way.
+				
+Section - Armadillo and Drakul's lifeblood
+
+[We should have a Corrosion event, and perhaps a Digestion event? to implement this cleanly.]
+
+[TODO: create a digestion rulebook that gives the armadillo all sorts of effects when it digests Essences, Salves, Ment, etc!
+
+Generalizing the effects of all these things would help.
+]
+
+Last carry out the ravenous armadillo armadillo-eating:
+	if the armadillo food is Drakul's lifeblood:
+		remove Drakul's lifeblood from play;
+		if the ravenous armadillo is in the location:
+			say "The armadillo suddenly becomes deathly pale!";
+		now the printed name of the ravenous armadillo is "vampire armadillo";
+		increase melee of ravenous armadillo by 1;
+		decrease defence of ravenous armadillo by 2;
+		increase mind score of ravenous armadillo by 2;
+		now ravenous armadillo is undead;
+		now faction of ravenous armadillo is undead-faction.
+
 
 Section - Power of the Armadillo
 
