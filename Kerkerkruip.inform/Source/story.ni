@@ -275,5 +275,6 @@ Section - Auto-transcript while testing (not for release)
 Last when play begins (this is the switch story transcript on rule):
 	if text capturing is active or automated fight test is true, make no decision;
 	try switching the story transcript on;
+	say "Current level: [difficulty level difficulty] ([difficulty])[paragraph break]";
 	try asking status;
 	try taking inventory;
