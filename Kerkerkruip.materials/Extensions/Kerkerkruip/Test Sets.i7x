@@ -193,19 +193,19 @@ mindslug-sleeper-runner	1	1	--
 [TODO: ignore testobject choices from file when running automated tests]
 
 scenario for parting shots:
+	prevent sleeping;
 	now generation info is true;
 	now israfel is testobject;
 	now mindslug is testobject;
 	now armadillo is testobject.
 
 The wake people when fighting rule does nothing when testing parting shots.
-The asleep rule does nothing when testing parting shots.
+The asleep rule does nothing when testing parting shots. [why?]
 independent action when testing parting shots: rule fails.
 
 initial scheduling of parting shots:
 	Travel sneakily to the location of the mindslug;
 	now the defence of the player is 100;
-	now every person enclosed by the location is not asleep.
 
 Testing effects of mindslug-hiding-check:
 	assert that the mindslug is in the location;
@@ -343,6 +343,7 @@ aeb-text	1	1	--	--	angel-escape-burn
 [TODO: Refactor into normal parting shots rules]
 
 Scenario for mercy parting shots:
+	prevent sleeping;
 	now generation info is true;
 	now pickaxe-kit is testobject;
 	ban wandering monsters;
@@ -366,7 +367,6 @@ regular scheduling of mercy parting shots:
 	now mercy-run-way is up;
 	if mercy-run-way is mercy-retreat-way, now mercy-run-way is down;
 	now mercy-dig-way is a random diggable direction;
-	now angel of mercy is not asleep;
 	now the health of the player is 1000;
 
 [TODO: use map approval rules instead?]
@@ -479,6 +479,7 @@ tentacle-retreat	1	1	--
 tentacle-dig-retreat	1	1	--
 
 Scenario for tentacle-grab:
+	prevent sleeping;
 	Now the giant tentacle is testobject;
 	now the fuligin cloak is testobject;
 	now the hall of mirrors is bannedobject;
@@ -488,7 +489,6 @@ Scenario for tentacle-grab:
 initial scheduling of tentacle-grab:
 	now the player carries the pickaxe;
 	Travel sneakily to the location of the tentacle;
-	now every person enclosed by the location is not asleep;
 
 initial scheduling of tentacle-retreat:
 	try taking off the fuligin cloak;
@@ -643,11 +643,11 @@ blood ape: (dreadful presence 2) * 12 - (level 1 *3) = 21
 insane player: (dreadful presence 2) * 12 - (level 0 * 3) = 24]
 
 Scenario for Dreadful-Presence-Test:
+	prevent sleeping;
 	block interventions;
 
 regular scheduling of Dreadful-Presence-Test:
 	repeat with guy running through people:
-		now guy is not asleep;
 		now the defence of guy is 100;
 	now the mind score of the player is 10;
 	now the player worships Nomos;
@@ -1434,6 +1434,7 @@ Regular scheduling of an outcome labeled "produce grenade":
 	Now every thing is not rusted;
 	if the reusable item is not a thing:
 		transcribe "DEBUG: produce a grenade - no reusable item";
+	now exploding-grenade is the player; [if we produce a grenade but it explodes, this will keep track of that]
 	now the player carries the reusable item;
 	try inserting the reusable item into the curious machine;
 	Now the health of the player is 100;
@@ -1441,7 +1442,13 @@ Regular scheduling of an outcome labeled "produce grenade":
 	if the location is not Alchemical Laboratory, extract the player to Alchemical Laboratory;
 	[If the current move is hidden-traveling, now the player is hidden;]
 
-Testing effects of an outcome labeled "produce grenade": if we assert that the holder of the blessed grenade is the location, rule succeeds.
+Testing effects of an outcome labeled "produce grenade":
+	if exploding-grenade is a grenade:
+		[we got a grenade, but it exploded]
+		if we assert that exploding-grenade is the blessed grenade, rule succeeds;
+	otherwise:
+		[the grenade we just got is now on the floor]
+		if we assert that the holder of the blessed grenade is the location, rule succeeds.
 
 Initial scheduling of no-extra-blessed: now the player carries the blessed grenade.
 
@@ -1646,6 +1653,7 @@ bodmall-reaction	1	1	bodmall-attack
 bodmall-bleeding	1	1	bodmall-attack
 
 Scenario for bug-245:
+	prevent sleeping;
 	now the blood ape is testobject;
 	now bodmall is testobject;
 	now the hall of mirrors is bannedobject;
@@ -1663,7 +1671,6 @@ testing effects of ape-smiting: if the power of the ape is granted, rule succeed
 
 initial scheduling of bodmall-meeting:
 	now the health of bodmall is 1000;
-	now bodmall is not asleep;
 	extract the player to the location of Bodmall.
 regular scheduling of bodmall-meeting: compel the action of waiting.
 testing effects of bodmall-meeting: rule succeeds.
@@ -2089,11 +2096,10 @@ armadillo-can-move	1	1	--	--
 armadillo-moved	1	0	200	--
 
 Scenario for armadillo-wandering:
+	prevent sleeping;
 	now the ravenous armadillo is testobject.
 
 Armadillo-origin is a room that varies.
-
-Initial scheduling of armadillo-wandering: Now the armadillo is not asleep.
 
 Testing effects of armadillo-wandering: if the ravenous armadillo is acting independently, rule succeeds.
 Testing effects of armadillo-can-move: if the ravenous armadillo can move, rule succeeds.
@@ -2647,6 +2653,7 @@ fragmentation damage text	1	1	--
 Scenario for damage-text:
 	now generation info is true;
 	ban faculty modifiers;
+	prevent sleeping;
 	now Drawing Room is bannedobject;
 	now Vast Staircase is testobject;
 	now slaying-kit is testobject;

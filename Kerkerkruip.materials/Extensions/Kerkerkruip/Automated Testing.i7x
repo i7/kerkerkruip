@@ -1336,6 +1336,10 @@ To ban faculty modifiers:
 	now tungausy totem is bannedobject;
 	now addict-kit is bannedobject.
 
+To prevent sleeping:
+	Repeat with guy running through people:
+		now initial sleep chance of guy is 0.
+
 Section - Movement
 
 Definition: A room (called place) is reachable:
