@@ -3604,7 +3604,8 @@ An AI action selection rule for an at-React person (called guy) (this is the def
 		Let item be the current weapon of the main actor;
 		if the gauntlet can steal the item for the guy:			
 			if the item is angel-worthy:
-				increase the Action Weight entry by 10;
+				increase the Action Weight entry by 17;
+				decrease the Action Weight entry by the chance-to-lose;
 			otherwise:
 				[avoid stealing weapons with dangerous or complicated side effects]
 				decrease the Action Weight entry by 100;
@@ -3612,6 +3613,7 @@ An AI action selection rule for an at-React person (called guy) (this is the def
 The defender uses gauntlet of attraction to get weapons rule is listed after the standard defense against attack select rule in the AI action selection rules.
 
 An AI action selection rule for the angel of mercy (this is the angel of mercy's gloves come off rule):
+	if the angel of mercy is at-react, make no decision;
 	if mercy is unarmed:
 		Let weapon-count be the angel-stealable weapon count;
 		Let ranged-count be the angel-reflectable weapon count;
