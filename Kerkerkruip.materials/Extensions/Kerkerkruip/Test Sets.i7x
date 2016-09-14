@@ -1578,7 +1578,7 @@ Section - bug 244
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	maximum attempts	antecedent
 bug-244	1	0	300	generation-tests
-mausoleum-secret	5	5	--	bug-244
+mausoleum-secret	10	10	--	bug-244
 
 testing effects of bug-244 (this is the mausoleum must be secret rule):
 	if the mausoleum is not placed, rule fails;
@@ -1587,7 +1587,7 @@ testing effects of bug-244 (this is the mausoleum must be secret rule):
 	rule succeeds.
 
 [Finally found the cause of bug 244! The mausoleum could become connected to a secretly placed room. That made things kind of complicated!]
-Testing effects of mausoleum-secret: if the mausoleum is secretly placeable, rule succeeds;
+Testing effects of mausoleum-secret: if the mausoleum is secretly placed, rule succeeds;
 
 Section - Starting Kits
 
@@ -3156,6 +3156,7 @@ scenario for damage-modifiers:
 	Repeat with guy running through people:
 		now inherent damage modifier of the guy is 10;
 	ban faculty modifiers;
+	prevent curses;
 	now Hall of Mirrors is bannedobject;
 	now Miranda is testobject.
 
@@ -3932,8 +3933,7 @@ Outcome	likelihood	minimum attempts	antecedent
 sleep effects	0	1	restarting for tests
 
 Scenario for sleep effects:
-	now the drawing room is bannedobject; [preparing a test battle triggers "it is only a drawing"] 
-	now the Lair of the Imp is bannedobject;
+	ban wandering monsters;
 	now Temple of Nomos is testobject.
 	
 Initial scheduling of sleep effects: now every room is not rust-spored.
@@ -4208,7 +4208,10 @@ Chapter - Simple Tests
 Table of Outcomes (continued)
 Outcome	likelihood	minimum attempts	antecedent
 Simple tests	0	1	restarting for tests
-		
+
+Scenario for simple tests:
+	ban faculty modifiers.
+
 Section - Reading Ability Simple Test
 
 Table of Outcomes (continued)

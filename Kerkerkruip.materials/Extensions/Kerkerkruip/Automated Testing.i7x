@@ -1340,6 +1340,19 @@ To prevent sleeping:
 	Repeat with guy running through people:
 		now initial sleep chance of guy is 0.
 
+Curse prevention is a truth state that varies.
+
+To prevent curses:
+	now curse prevention is true.
+
+The sometimes curse clothing rule does nothing when curse prevention is true.
+The sometimes curse weapons rule does nothing when curse prevention is true.
+
+Last treasure placement rule (this is the prevent curses for testing rule):
+	if curse prevention is true:
+		Repeat with item running through things:
+			now the hidden identity of item is non-thing.
+
 Section - Movement
 
 Definition: A room (called place) is reachable:
