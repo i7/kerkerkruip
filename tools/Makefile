@@ -24,12 +24,10 @@ cheapglk/Make.cheapglk: cheapglk/Makefile
 	$(MAKE) -C cheapglk
 
 git:
-	$(CURL) -o "Git.tar.gz" https://github.com/DavidKinder/Git/archive/master.tar.gz
+	$(CURL) -o "Git.tar.gz" https://github.com/curiousdannii/Git/archive/travis.tar.gz
 	tar xf Git.tar.gz
-	mv Git-master git
+	mv Git-travis git
 	rm Git.tar.gz
-# gcc 5.4 needs the -lm option to be specified now
-	sed -i '53s/.*/LIBS = -L$$(GLKLIBDIR) $$(GLKLIB) $$(LINKLIBS) -lm/' git/Makefile
 
 glulxe:
 	$(CURL) -o "glulxe.tar.gz" https://github.com/erkyrath/glulxe/archive/master.tar.gz

@@ -11,8 +11,6 @@ MAKEFLAGS = "-j $(JOBS)"
 # Location of the project so we don't cross-wire relative paths.
 BASE := $(shell cd "$(shell dirname $(lastword $(MAKEFILE_LIST)))/" && pwd)
 
-SHELL = /bin/bash -o pipefail
-
 CURL = curl -L -s -S
 
 # Mark which rules are not actually generating files
@@ -23,7 +21,7 @@ all: setup
 clean:
 	$(RM) *.gblorb *.zip
 	$(RM) -r i7 Inform
-	cd tools && make -f interpreters.make clean
+	$(MAKE) -C tools clean
 	$(RM) -r Kerkerkruip.materials/Release
 
 # Setup the Inform 7 environment we need
@@ -35,8 +33,8 @@ i7/Internal:
 	./tools/install-inform7
 
 # Download and build dumb-git or glulxe
-i7/dumb-%:
-	cd tools && make -f interpreters.make dumb-$*
+i7/dumb-%: tools/Makefile
+	$(MAKE) -C tools dumb-$*
 	cp tools/dumb-$* i7/dumb-$*
 
 # Download the extensions we need, pretending ~/Inform is in this directory
