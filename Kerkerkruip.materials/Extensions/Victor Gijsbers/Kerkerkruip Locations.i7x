@@ -278,10 +278,7 @@ An additional placement rule:
 			place chosen room from Bridge of Doom at x by y by z;
 		otherwise:
 			let place be the room at x by y by z;
-			let way be the direction from Bridge of Doom to place;
-			change the way exit of Bridge of Doom to place;
-			let reverse be the opposite of way;
-			change the reverse exit of place to Bridge of Doom;
+			connect Bridge of Doom to place;
 		now x is x-coordinate of Bridge of Doom;
 		now y is y-coordinate of Bridge of Doom;
 		now z is z-coordinate of Bridge of Doom - 1;	
@@ -867,10 +864,7 @@ An additional placement rule:
 			place chosen room from Vast Staircase at x by y by z;
 		otherwise:
 			let place be the room at x by y by z;
-			let way be the direction from Vast Staircase to place;
-			change the way exit of Vast Staircase to place;
-			let reverse be the opposite of way;
-			change the reverse exit of place to Vast Staircase;
+			connect Vast Staircase to place;
 		now placing Vast Staircase is false.
 
 To decide whether the staircase still goes down:  [The player may collapse the passage.]

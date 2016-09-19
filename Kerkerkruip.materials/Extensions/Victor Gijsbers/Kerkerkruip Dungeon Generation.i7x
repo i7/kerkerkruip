@@ -234,6 +234,23 @@ Creating the map rule (this is the locate and connect all rooms rule):
 			otherwise:
 				place chosen room from place at x by y by z;
 
+Section - Making Connections
+
+To connect (destination - a room) to (origin - a room):
+	if origin is not placed and destination is placed:
+		connect origin to destination;
+	if destination is not placed:
+		say "*** Run-time Problem: Tried to connect [destination] to [origin], when [origin] is not placed.";
+	Let way be the direction from origin to destination;
+	change the way exit of origin to destination;
+	Let reverse be the opposite of way;
+	change the reverse exit of destination to origin;
+	if origin is normally placed:
+		mark destination as normally placed;
+	otherwise if destination is not placed:
+		[TODO: is it a bug if we ever get here?]
+		mark destination as secretly placed.
+
 Section - Adding tunnels
 
 Last creating the map rule (this is the potentially add a tunnel rule):
@@ -251,11 +268,8 @@ To create a tunnel:
 	let R be false;
 	while R is false:
 		if absolute distance between P and Q is 1:
-			let way be the direction from P to Q;
 			if generation info is true, say "* Adding connection between [P] and [Q]. Destination reached.[line break][run paragraph on]";
-			change the way exit of P to Q;
-			let reverse be the opposite of way;
-			change the reverse exit of Q to P;
+			connect P to Q;
 			now R is true;
 		otherwise:
 			if the number of rooms surrounding x-coordinate of P by y-coordinate of P by z-coordinate of P is the number of cardinal directions:
@@ -278,9 +292,7 @@ To create a tunnel:
 						let T be the room at x by y by z;
 						if T is placeable and T is connectable:
 							if generation info is true, say "* Adding connection between [P] and [T].[line break][run paragraph on]";
-							change the way exit of P to T;
-							let reverse be the opposite of way;
-							change the reverse exit of T to P;
+							connect P to T;
 							now P is T;
 						otherwise:
 							if generation info is true, say "* Giving up on tunnel building.[line break][run paragraph on]";	
@@ -303,9 +315,7 @@ Last creating the map (this is the possibly adding some further connections rule
 				if further place is not the room way of place:
 					if a random chance of 1 in 4 succeeds or place is connection-inviting or further place is connection-inviting: [gives a roughly 1 in 2 chance of connections being made]
 						if generation info is true, say "* Adding connection between [place] and [further place].[line break][run paragraph on]";
-						change the way exit of place to further place;
-						let reverse be the opposite of way;
-						change the reverse exit of further place to place;
+						connect place to further place;
 						if a random chance of 1 in 4 succeeds:
 							now place collapses further place.
 
@@ -429,12 +439,8 @@ To place (new place - a room) from (original place - a room) at (x - a number) b
 		now x-coordinate of new place is x;
 		now y-coordinate of new place is y;
 		now z-coordinate of new place is z;
-		let way be the direction from original place to new place;
-		change the way exit of original place to new place;
-		let reverse be the opposite of way;
-		change the reverse exit of new place to original place;
-		mark new place as normally placed;
-		if generation info is true, say "* [Way] of [original place] ([x-coordinate of original place], [y-coordinate of original place], [z-coordinate of original place]) is [new place] ([x], [y], [z]).[line break][run paragraph on]";
+		connect original place to new place;
+		if generation info is true, say "* [best route from original place to new place] of [original place] ([x-coordinate of original place], [y-coordinate of original place], [z-coordinate of original place]) is [new place] ([x], [y], [z]).[line break][run paragraph on]";
 		now additional considered room is new place;
 		now additional original room is original place;
 		follow the additional placement rules.
@@ -452,14 +458,8 @@ To place (a - a room) next to (b - a room):
 				now x-coordinate of a is x;
 				now y-coordinate of a is y;
 				now z-coordinate of a is z;
-				change the way exit of b to a;
-				let reverse be the opposite of way;
-				change the reverse exit of a to b;
-				[TODO: a is only normally placed if b is normally placed
-				actually the safest way would probably be to do a final pass after
-				the map is complete, checking which placed rooms have a route to Entrance Hall - anything that doesn't becomes secretly placed at that point.]
-				mark a as normally placed;
-				if generation info is true, say "* Placed [a] [way] of [b].[line break][run paragraph on]".
+				connect a to b;
+				if generation info is true, say "* Placed [a] [best route from b to a] of [b].[line break][run paragraph on]".
 			
 Chapter - Other routines
 

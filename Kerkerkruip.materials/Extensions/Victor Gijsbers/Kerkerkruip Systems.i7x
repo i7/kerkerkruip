@@ -181,7 +181,7 @@ First carry out going (this is the collapse rule):
 		if the room noun of location collapses location:
 			let n be greatest power of the player;
 			if a random chance of n in 3 succeeds:
-				let X be room noun of location;
+				let X be room noun of location;				
 				change the noun exit of location to nothing;
 				let reverse be the opposite of noun;
 				change the reverse exit of X to nothing;
@@ -247,9 +247,7 @@ Carry out digging:
 			take no time;
 		otherwise:
 			if item is connectable:
-				change the noun exit of the location to item; 
-    				let reverse be the opposite of noun; 
-    				change the reverse exit of item to the location;
+				connect the location to item;
 				say "You [if tunneling claws is adapted]quickly dig[otherwise]magically create[end if] a tunnel [noun].";
 				do the dig move;
 			otherwise:

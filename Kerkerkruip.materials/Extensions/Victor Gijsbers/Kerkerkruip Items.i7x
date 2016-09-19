@@ -5092,6 +5092,8 @@ To equip (guy - a person) with (item - a weapon):
 		move item to guy;
 	now item is readied;
 	
+[TODO: suits impede shirts and trousers - this isn't handled]
+
 To replace (O - a description of objects) on (guy - a person) with (item - clothing):
 	Repeat with impediment running through things worn by guy:
 		if impediment matches O:
