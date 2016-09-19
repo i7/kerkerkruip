@@ -239,7 +239,7 @@ Section - Making Connections
 To connect (destination - a room) to (origin - a room):
 	if origin is not placed and destination is placed:
 		connect origin to destination;
-	if destination is not placed:
+	if origin is not placed:
 		say "*** Run-time Problem: Tried to connect [destination] to [origin], when [origin] is not placed.";
 	Let way be the direction from origin to destination;
 	change the way exit of origin to destination;
