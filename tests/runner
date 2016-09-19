@@ -45,8 +45,8 @@ done
 echo -e '\n\n'
 sed -n '/Test results/,$p' $TESTTRANSCRIPT | grep -Ev "all passed" > test-results
 
-SUSPICIOUS_PATTERN="\\*\\*\\* Run-Time Problem |\\*\\*\\* Error on file |You can't reach into "
-if grep -q "$SUSPICIOUS_PATTERN" $TESTTRANSCRIPT
+SUSPICIOUS_PATTERN="\\*\\*\\* Run-Time Problem\b|\\*\\*\\* Error on file |You can't reach into "
+if egrep -q "$SUSPICIOUS_PATTERN" $TESTTRANSCRIPT
 then
   echo >> test-results
   echo "Possible runtime issues found in test transcript:" >> test-results
