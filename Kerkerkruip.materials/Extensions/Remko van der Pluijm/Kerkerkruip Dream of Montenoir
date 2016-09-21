@@ -220,9 +220,9 @@ A damage multiplier rule (this is the no death in Back ally of Bar in Montenoir 
 			say "Just as you are about to give the final blow to [the name of the global defender], you see a group of people intervening. 'Hold it right there...' Then, someone from the bystanders is walking towards you.  'Thank you so much, adventurer! I will never forget that you thought this punk a lesson. You will have my eternal gratitude! By the way, my name is [printed name of unnamed prisoner].'[paragraph break][bold type]As you wake up, you realise you can free [printed name of unnamed prisoner] by PUSHING the prison door GENTLY.[roman type]" ;
 			fully heal the player;
 			create the unnamed prisoner;
-			let destination be a random placed placeable teleportable room;
+			let destination be the location;
 			while destination is the location of the player:
-				let destination be a random placed placeable teleportable room;
+				let destination be a random placed placeable teleport-receiving room;
 			now the strong prison door is enclosed by destination;
 		otherwise:
 			decrease the spirit score of the player by 5;

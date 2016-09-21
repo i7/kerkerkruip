@@ -501,6 +501,7 @@ Section - Definitions of human and vampire
 
 Definition: A person (called guy) is vampire:
 	if guy is the player and the current form is vampire-form, yes;
+	if the printed name of guy matches the regular expression "vampir", yes; [for the ravenous armadillo... currently this will never be checked though]
 	no.
 
 Definition: Drakul is vampire: yes.

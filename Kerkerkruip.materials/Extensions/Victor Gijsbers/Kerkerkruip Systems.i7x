@@ -79,7 +79,7 @@ A room can be connection-inviting. A room is usually not connection-inviting. [I
 
 A room can be placeable. A room is usually placeable. [Not placeable rooms are not considered during the normal dungeon creation.]
 
-A room can be secretly placeable. A room is usually not secretly placeable. [A room can be both placeable and secretly placeable. If so, it has a chance to be placed in the main dungeon and another outside the connected dungeon.]
+A room can be secretly placeable. A room is usually not secretly placeable. [A room can be both placeable and secretly placeable. If so, it has a chance to be placed in the main dungeon and another outside the connected dungeon. At the time of this writing, only the Arcane Vault has this distinction.]
 
 A room can be habitable. A room is usually habitable. [Monsters can be placed in it.]
 
@@ -91,12 +91,13 @@ A room can be nogo. A room is usually not nogo. [Nogo rooms are not listed in ex
 
 To mark (place - a room) as normally placed:
 	now place is placed;
+	now place is placeable;
 	now place is not secretly placeable;
 
 To mark (place - a room) as secretly placed:
 	now place is placed;
 	now place is secretly placeable;
-	now place is not teleportable;
+	now place is not placeable;
 
 Section - Derived Properties of Rooms
 

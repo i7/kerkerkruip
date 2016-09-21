@@ -876,6 +876,8 @@ A room can be teleportable. A room is usually teleportable. [A teleportable room
 
 Definition: a room is teleport-receiving if it is normally placed and it is teleportable and it is not nogo. [Teleport-receiving means you can teleport to it right now]
 
+[TODO: should discovered secret rooms also be teleportable? See issue #412]
+
 [We have teleport rules which check whether a person can teleport.]
 The teleport impossible rules are a rulebook.
 

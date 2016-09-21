@@ -7919,7 +7919,7 @@ Carry out the imp imp-grabbing:
 Carry out an actor teleporting (this is the imp teleporting rule):
 	if the actor is the imp:
 		if the location of the imp is the Lair of the Imp:
-			if location is teleportable:
+			if location is teleport-receiving:
 				now teleportation-destination is location;
 			otherwise:
 				now teleportation-destination is location of the imp;

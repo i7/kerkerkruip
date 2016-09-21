@@ -633,6 +633,8 @@ To say the road to (place - a room):
 		otherwise:
 			say "no known path[run paragraph on]".
 
+Definition: a room is map-secret if it is unvisited and it is secretly placed and it is not nogo and it is not the location.
+
 To say map description:
 	calculate the extent of the dungeon;
 	let x-adjust be (0 - extent-minimum-x) + 1;[These numbers will allow us to transform the coordinates so that each starts with 1]
@@ -652,11 +654,11 @@ To say map description:
 		say "[if dx is -1]south[end if][if dx is 1]north[end if][if dy is -1]west[end if][if dy is 1]east[end if][if dy is 0 or dx is 0]-central[end if] part ";
 	say "of the complex. [run paragraph on]";
 	if the mapping boolean is true[i.e., this shows only if we've seen a map!]:
-		let count be the number of unvisited placed not nogo not teleportable rooms that are not the location;
+		let count be the number of map-secret rooms;
 		if count is greater than 0:
 			say "The map indicates that there [if count is greater than 1]are [count in words] secret rooms[otherwise]is a secret room[end if] in the dungeon[run paragraph on]";
 			let max-count be count;
-			repeat with place running through unvisited placed not nogo not teleportable rooms that are not the location:
+			repeat with place running through map-secret rooms:
 				decrement count;
 				say ", [if max-count is greater than 1]one [end if][triaxial way from location to place][run paragraph on]";
 			say ". [run paragraph on]";

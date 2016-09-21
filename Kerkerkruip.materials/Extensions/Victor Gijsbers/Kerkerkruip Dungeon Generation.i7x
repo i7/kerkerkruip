@@ -240,7 +240,7 @@ To connect (destination - a room) to (origin - a room):
 	if origin is not placed and destination is placed:
 		connect origin to destination;
 	if origin is not placed:
-		say "*** Run-time Problem: Tried to connect [destination] to [origin], when [origin] is not placed.";
+		say "*** Run-Time Problem: Tried to connect [destination] to [origin], when [origin] is not placed.";
 	Let way be the direction from origin to destination;
 	change the way exit of origin to destination;
 	Let reverse be the opposite of way;
@@ -248,7 +248,8 @@ To connect (destination - a room) to (origin - a room):
 	if origin is normally placed:
 		mark destination as normally placed;
 	otherwise if destination is not placed:
-		[TODO: is it a bug if we ever get here?]
+		if generation info is true:
+			say "*** Run-Time Problem (warning): Connecting [destination] to [origin] when [origin] is secretly placed."; [maybe it's ok, but I want to be notified]
 		mark destination as secretly placed.
 
 Section - Adding tunnels
