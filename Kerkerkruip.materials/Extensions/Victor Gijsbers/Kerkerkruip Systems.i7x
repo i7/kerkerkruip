@@ -89,9 +89,9 @@ A room can be extra-accepting. A room is usually extra-accepting. [Extras can be
 
 A room can be nogo. A room is usually not nogo. [Nogo rooms are not listed in exits and remember commands.]
 
-To mark (place - a room) as normally placed:
+[marking a room as openly placed will not necessarily make it "normally placed" - but it will prevent it from being secretly placed. See below for definitions]
+To mark (place - a room) as openly placed:
 	now place is placed;
-	now place is placeable;
 	now place is not secretly placeable;
 
 To mark (place - a room) as secretly placed:
@@ -101,8 +101,10 @@ To mark (place - a room) as secretly placed:
 
 Section - Derived Properties of Rooms
 
+[secretly placed means they shouldn't start out reachable, but they will remain secretly placed even after they become reachable. Keep in mind that nogo rooms and tunnels are NEITHER normally nor secretly placed]
 Definition: A room is secretly placed if it is placed and it is secretly placeable.
 
+[normally placed means that it is a regular room and it's placed. nogo rooms, secret rooms, and tunnels are NOT normally placed]
 Definition: A room is normally placed if it is placed and it is placeable.
 
 Definition: A room is denizen if it is placed and it is not nogo.

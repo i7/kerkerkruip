@@ -1190,6 +1190,7 @@ testing effects of remembering-text:
 	assert "Lake of Lava should not be secretly placed" based on whether or not lake of lava is not secretly placed;
 	assert "Lake of Lava should not be placeable" based on whether or not lake of lava is not placeable;
 	assert "Arcane Vault should be secretly placed" based on whether or not the arcane vault is secretly placed;
+	assert "Arcane Vault should not be normally placed" based on whether or not the arcane vault is not normally placed;
 	assert "Arcane Vault should be denizen" based on whether or not the arcane vault is denizen;
 	assert "Arcane Vault should not be reachable" based on whether or not the arcane vault is not reachable;
 	rule succeeds. [TODO: make these all actual tests, so the dungeon will be regenerated if they fail?]

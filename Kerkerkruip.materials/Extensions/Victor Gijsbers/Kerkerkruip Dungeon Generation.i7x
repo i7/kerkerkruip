@@ -245,12 +245,11 @@ To connect (destination - a room) to (origin - a room):
 	change the way exit of origin to destination;
 	Let reverse be the opposite of way;
 	change the reverse exit of destination to origin;
-	if origin is normally placed:
-		mark destination as normally placed;
-	otherwise if destination is not placed:
-		if generation info is true:
-			say "*** Run-Time Problem (warning): Connecting [destination] to [origin] when [origin] is secretly placed."; [maybe it's ok, but I want to be notified]
-		mark destination as secretly placed.
+	[We might run into problems if we connect a destination to a secret room -
+	even though the destination is unreachable, it is not marked as secret.
+	We should take care not to do that during map generation, although
+	it is perfectly fine when digging.]
+	mark destination as openly placed;
 
 Section - Adding tunnels
 
@@ -459,6 +458,8 @@ To place (a - a room) next to (b - a room):
 				now x-coordinate of a is x;
 				now y-coordinate of a is y;
 				now z-coordinate of a is z;
+				if b is secretly placed:
+					say "*** Run-Time Problem (warning): Placing [a] next to [b], which is secretly placed.";
 				connect a to b;
 				if generation info is true, say "* Placed [a] [best route from b to a] of [b].[line break][run paragraph on]".
 			
