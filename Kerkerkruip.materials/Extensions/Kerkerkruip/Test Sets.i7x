@@ -3935,6 +3935,7 @@ sleep effects	0	1	restarting for tests
 
 Scenario for sleep effects:
 	ban wandering monsters;
+	prevent sleeping [unless I say otherwise!];
 	now Temple of Nomos is testobject.
 	
 Initial scheduling of sleep effects: now every room is not rust-spored.

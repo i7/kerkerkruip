@@ -18,14 +18,16 @@ do
   cp $DATAFILE ${DATAFILE}.glkdata
 done
 
-TEST_ID=$(date "+%Y%m%d_%H%M_${CHAMP}_${CHALL}")
+TIMESTAMP=$(date "+%Y%m%d_%H%M")
+COMMIT=$(git log --pretty=format:"%h" HEAD^!)
+TEST_ID="${TIMESTAMP}_${COMMIT}_${CHAMP}_${CHALL}"
 FIGHT_COUNT=100
 [ -f tmp.log ] && rm tmp.log
 echo "$TEST_ID: Running $FIGHT_COUNT fights..."
 for i in $(seq $FIGHT_COUNT)
 do
   COLS=$(tput cols)
-  TRANSCRIPT=$(printf "transcripts/$TEST_ID-%03d.transcript" $i)
+  TRANSCRIPT=$(printf "transcripts/${TEST_ID}_%03d.transcript" $i)
   ../i7/dumb-git -w $COLS ../Kerkerkruip.gblorb >$TRANSCRIPT
   WINNER=$(tail -n1 $TRANSCRIPT)
   if [ "$WINNER" = "ERROR" ]

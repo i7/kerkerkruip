@@ -797,7 +797,7 @@ To make (event - an outcome) testable:
 	if event is untested:
 		now state of event is outcome-possible;
 		now maximum attempts of event is the calculated maximum attempts of event;
-		set the maximum tolerance for event with 0.995 achievement;
+		set the maximum tolerance for event with 0.998 achievement;
 
 To make (event - boring lack of results) testable:
 	do nothing;
