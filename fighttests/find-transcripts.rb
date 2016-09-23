@@ -4,7 +4,7 @@
 def transcripts_from_file(fh)
   fh.each_line do |line|
     if line =~ (/Fight test (\S+) summary:/)
-      Dir.glob("transcripts/#{$1}*.transcript").each do |path|
+      Dir.glob("#{File.dirname(__FILE__)}/transcripts/#{$1}*.transcript").each do |path|
         puts path
       end
     end

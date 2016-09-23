@@ -22,6 +22,12 @@ TIMESTAMP=$(date "+%Y%m%d_%H%M")
 COMMIT=$(git log --pretty=format:"%h" HEAD^!)
 TEST_ID="${TIMESTAMP}_${COMMIT}_${CHAMP}_${CHALL}"
 FIGHT_COUNT=100
+
+echo "Building Kerkerkruip commit $COMMIT..."
+#TODO: make sure we're up to date
+pushd .. && make Kerkerkruip.gblorb
+popd
+
 [ -f tmp.log ] && rm tmp.log
 echo "$TEST_ID: Running $FIGHT_COUNT fights..."
 for i in $(seq $FIGHT_COUNT)
