@@ -11,9 +11,15 @@ CHAMPIONS=$1
 CHALLENGERS=$2
 
 TIMESTAMP=$(date "+%y%m%d%H")
-COMMIT=$(git log --pretty=format:"%h" HEAD^!)
+[ -f Kerkerkruip.gblorb ] && rm Kerkerkruip.gblorb
+COMMIT=$(./check-build.sh)
+if [ $? -ne 0 ]
+then
+  echo "$COMMIT"
+  exit 1
+fi
 OUTFILE=roundrobin.$TIMESTAMP-$COMMIT.results
-[ -f $OUTFILE ] && rm $OUTFILE
+[ -f "$OUTFILE" ] && rm "$OUTFILE"
 echo "Pairing all $CHAMPIONS vs $CHALLENGERS, writing output to $OUTFILE..."
 cat $CHAMPIONS | while read CHAMPION
 do
