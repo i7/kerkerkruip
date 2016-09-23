@@ -12,12 +12,12 @@ CHALLENGERS=$2
 
 TIMESTAMP=$(date "+%y%m%d%H")
 [ -f Kerkerkruip.gblorb ] && rm Kerkerkruip.gblorb
-COMMIT=$(./check-build.sh)
-if [ $? -ne 0 ]
+if !  ./check-build.sh
 then
-  echo "$COMMIT"
+  echo "Build failed."
   exit 1
 fi
+COMMIT=$(cat COMMIT)
 OUTFILE=roundrobin.$TIMESTAMP-$COMMIT.results
 [ -f "$OUTFILE" ] && rm "$OUTFILE"
 echo "Pairing all $CHAMPIONS vs $CHALLENGERS, writing output to $OUTFILE..."

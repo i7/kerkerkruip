@@ -20,12 +20,12 @@ do
 done
 
 TIMESTAMP=$(date "+%Y%m%d_%H%M")
-COMMIT=$(./check-build.sh)
-if [ $? -ne 0 ]
+if ! ./check-build.sh
 then
-  echo "$COMMIT"
+  echo "No build."
   exit 2
 fi
+COMMIT=$(cat COMMIT)
 TEST_ID="${TIMESTAMP}_${COMMIT}_${CHAMP}_${CHALL}"
 FIGHT_COUNT=100
 
