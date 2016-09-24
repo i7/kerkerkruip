@@ -577,8 +577,6 @@ Status attribute rule (this is the size status rule):
 
 [Note: sizes of a person are meant to reflect how big they themselves are. Sizes of objects are meant to reflect for what size person they were meant. Thus, a 'medium dagger' is much smaller than a 'medium bed': both are normal-sized objects as they are made for normal-sized humans. A huge dagger might be about the same size as a medium sword -- it would just be hard to handle for a medium person, because the hilt would be too big to grip with a hand!]
 
-The standard measure is a medium thing. [You can test the size difference of the standard measure and X.]
-
 To decide which number is the size number of (item - a thing):
 	if item is medium, decide on 0;
 	if item is tiny, decide on -2;
@@ -749,7 +747,7 @@ To decrease the size of (guy - a person):
 Section - Other effects of size
 
 A detection rule (this is the size increases probability of detection rule):
-	let n be the size difference of (the player) and (the standard measure);
+	let n be the size number of the player;
 	if n > 0:
 		say " + ", n, " ([size of the player])[run paragraph on]";
 	if n < 0:

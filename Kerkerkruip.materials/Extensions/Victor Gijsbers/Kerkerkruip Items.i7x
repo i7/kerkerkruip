@@ -2536,7 +2536,7 @@ Carry out reading a scroll of summoning:
 			now follower percentile chance of guy is 60;
 		now the monster summoned is guy;
 		if the combat state of the player is at-React:
-			let the target for summons avoidance be eleven plus (three times the size difference of the standard measure and the guy);
+			let the target for summons avoidance be eleven plus (three times the size number of the guy);
 			test the spirit of the main actor against the target for summons avoidance described as "[the monster summoned] is [the size of the monster summoned]";
 			if the test result is true:
 				say " [regarding the guy][Possessive] sudden appearance does not interfere with [regarding the main actor][their] attack.";
