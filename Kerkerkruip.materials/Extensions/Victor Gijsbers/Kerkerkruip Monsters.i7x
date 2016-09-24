@@ -4079,7 +4079,7 @@ Carry out begging for mercy:
 	let n be 6;
 	increase n by the sum of begging-count random numbers from 1 to the health of the player;
 	decrease n by the favour of the player with Sul;
-	test the spirit of the player against n;
+	test the spirit of the player against n; [described as "begging for the nth time with X health and X favour with Sul"]
 	if test result is false:					
 		say "The angel searches your face for sincere contrition, but [bold type]does not find it[roman type].[paragraph break]'I may lessen your pain, but I will not spare your life.' it says.";						
 		rule succeeds;
@@ -4252,7 +4252,7 @@ Aftereffects rule (this is the mercy damage rule):
 					if die-min < 1, now die-min is 1;
 					if die-max < 2, now die-max is 2;	
 					let n be the sum of 4 random numbers from die-min to die-max;
-					test the spirit of the player against (n + 2) / 4;
+					test the spirit of the player against (n + 2) / 4 described as "enduring [total damage] damage";
 					if test result is true:
 						say "You gain a level of radiance!";
 						increase mercy-radiation by 1;
