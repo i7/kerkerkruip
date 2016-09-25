@@ -3467,7 +3467,7 @@ The health of the angel of Mercy is 43.
 The melee of the angel of Mercy is 0.
 The defence of the angel of Mercy is 11.
 
-The body score of the angel of mercy is 7.
+The body score of the angel of mercy is 8.
 The mind score of the angel of mercy is 4.
 The spirit score of the angel of mercy is 12.
 
@@ -3607,6 +3607,7 @@ An AI action selection rule for an at-React person (called guy) (this is the def
 				increase the Action Weight entry by 10;
 				if the chance-to-lose < 7:
 					increase the Action Weight entry by 4;
+					[TODO: decrease the Action Weight entry by the chance-to-lose divided by 2;]
 			otherwise:
 				[avoid stealing weapons with dangerous or complicated side effects]
 				decrease the Action Weight entry by 100;
