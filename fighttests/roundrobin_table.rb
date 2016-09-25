@@ -63,7 +63,7 @@ ranking.each do |monster|
       defeated
     end
   end
-  puts "#{monster}|#{percent}%|#{min_defeater}|#{scores[min_defeater][monster]}|#{max_defeated}|#{scores[monster][max_defeated]}"
+  puts "#{monster}|#{percent}% (#{monster_totals[monster]})|#{min_defeater}|#{scores[min_defeater][monster]}|#{max_defeated}|#{scores[monster][max_defeated]}"
 end
 
 

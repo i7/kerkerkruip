@@ -1705,6 +1705,15 @@ flaming-kit is a starting kit. The recipient is the Reaper. flaming-kit contains
 slaying-kit is a starting kit. The recipient is the Reaper. slaying-kit contains the scythe of slaying.
 oxidation-kit is a starting kit. The recipient is the Reaper. oxidation-kit contains the scythe of oxidation.
 
+Section - Oxidation AI
+
+An AI action selection rule for an at-react person (called guy) (this is the parry with scythe of oxidation to rust weapons rule):
+	if the current weapon of the guy is the scythe of oxidation:
+		if the current weapon of the main actor is a not rusted iron thing:
+			choose row with Option of the guy parrying in table of AI Action Options;
+			increase the Action Weight entry by 10;
+			decrease the Action Weight entry by the chance-to-lose.
+
 Section - Reaper images for the map (for use with Kerkerkruip Glimmr Additions by Erik Temple)
 
 The avatar of reaper is Figure of map_monster_reaper.
@@ -3467,7 +3476,7 @@ The health of the angel of Mercy is 43.
 The melee of the angel of Mercy is 0.
 The defence of the angel of Mercy is 11.
 
-The body score of the angel of mercy is 7.
+The body score of the angel of mercy is 8.
 The mind score of the angel of mercy is 4.
 The spirit score of the angel of mercy is 12.
 
@@ -3604,7 +3613,7 @@ An AI action selection rule for an at-React person (called guy) (this is the def
 		Let item be the current weapon of the main actor;
 		if the gauntlet can steal the item for the guy:			
 			if the item is angel-worthy:
-				increase the Action Weight entry by 13;
+				increase the Action Weight entry by 20;
 				decrease the Action Weight entry by the chance-to-lose;
 			otherwise:
 				[avoid stealing weapons with dangerous or complicated side effects]
