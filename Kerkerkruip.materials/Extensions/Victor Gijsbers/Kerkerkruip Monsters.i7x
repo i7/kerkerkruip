@@ -3607,7 +3607,7 @@ An AI action selection rule for an at-React person (called guy) (this is the def
 				increase the Action Weight entry by 10;
 				if the chance-to-lose < 7:
 					increase the Action Weight entry by 4;
-					[TODO: decrease the Action Weight entry by the chance-to-lose divided by 2;]
+					decrease the Action Weight entry by the chance-to-lose divided by 2;
 			otherwise:
 				[avoid stealing weapons with dangerous or complicated side effects]
 				decrease the Action Weight entry by 100;
