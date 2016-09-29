@@ -1486,7 +1486,7 @@ For natural weapon setup of the jumping bomb (this is the bomb's surface rule):
 	now parry-against bonus of X is -3;
 	now parry-with bonus of X is -2;
 	now printed name of X is "bomb's detonating surface";
-	now special weapon info of X is "kills instantly";
+	now special weapon info of X is "; kills instantly";
 
 Initiative update rule when the jumping bomb is enclosed by the location (this is the jumping bomb has slightly less initiative rule):
 	if a random chance of 1 in 5 succeeds:
