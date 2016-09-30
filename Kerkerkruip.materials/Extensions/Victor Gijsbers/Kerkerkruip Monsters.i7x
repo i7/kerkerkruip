@@ -3604,10 +3604,10 @@ An AI action selection rule for an at-React person (called guy) (this is the def
 		Let item be the current weapon of the main actor;
 		if the gauntlet can steal the item for the guy:			
 			if the item is angel-worthy:
-				increase the Action Weight entry by 9;
-				if the chance-to-lose < 10:
-					increase the Action Weight entry by 10;
-					decrease the Action Weight entry by the chance-to-lose;
+				increase the Action Weight entry by 10;
+				if the chance-to-lose < 9:
+					increase the Action Weight entry by 6;
+					decrease the Action Weight entry by the chance-to-lose / 2;
 			otherwise:
 				[avoid stealing weapons with dangerous or complicated side effects]
 				decrease the Action Weight entry by 100;
