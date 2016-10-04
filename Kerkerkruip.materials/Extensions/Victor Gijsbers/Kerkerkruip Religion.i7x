@@ -327,6 +327,8 @@ A beloved of Aite rule (this is the worshippers are beloved of Aite rule):
 
 Section - Aite's engagement in combat
 
+The intervention rarity of Aite is 75.
+
 Intervention possible when intervention-god is Aite:
 	rule succeeds.
 
@@ -383,13 +385,15 @@ To deal (X - a number) points of Aite-damage to (guy - a person) on behalf of (t
 		now X is X times the size factor divided by 2;
 		say ", skewering [the guy]";
 	deal X points of divine damage;
-	say " for [damage we have Aite inflict on the guy]!";
-	unless the guy is dead:
-		let the guy lose concentration;
-		if the guy is the player and the player is hidden:
-			now the player is not hidden;
-			say "Your cry of pain reveals your presence.";
-	if health of the guy is less than 1:
+	say " for [damage we have Aite inflict on the guy][run paragraph on]";
+	if the total damage > 0:
+		if guy is dead:
+			say ", [bold type]killing [regarding the guy][them][roman type]";
+		otherwise if concentration of guy > 0:
+			say ", [bold type]breaking [regarding the guy][possessive] concentration";
+			now concentration of the guy is 0;
+	say "![paragraph break]";
+	if the guy is dead:
 		if the guy is the player:
 			if the player is the supplicant:
 				end the story saying "Aite is a dangerous mistress";
@@ -399,6 +403,16 @@ To deal (X - a number) points of Aite-damage to (guy - a person) on behalf of (t
 			if the guy is beloved of Aite:
 				say "Clearly, it doesn't always pay off to serve the mad goddess.";
 		have an event of the supplicant killing the guy;
+	otherwise:
+		if the guy is the player:
+			if the player is hidden:
+				now the player is not hidden;
+				say "Your cry of pain reveals your presence.";
+		otherwise:
+			if the guy is sleeping in this world:
+				now the guy is not asleep;
+				say "[The guy] [wake] up!"
+
 
 To have Aite grant concentration to (guy - a person):
 	if the concentration of the guy is at least 3:

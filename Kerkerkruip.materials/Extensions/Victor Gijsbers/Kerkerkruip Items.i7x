@@ -1700,7 +1700,7 @@ Section - Shield of reflection (monster)
 
 The shield of reflection is a shield. The shield of reflection is radiance.
 
-The block bonus of the shield of reflection is 3. The description is "Lines of force radiate and spiral out from this [if the shield of reflection is radiance]radiant[end if] shield. It possesses the power to repel ranged attacks and reflect them back at the attacker. Reflected attacks benefit from the wearer's concentration, but also cause the wearer to lose concentration."
+The block bonus of the shield of reflection is 3. The description is "Lines of force radiate and spiral out from this [if the shield of reflection is radiance]radiant[end if] shield. It possesses the power to repel ranged attacks and reflect them back at the attacker. Reflected attacks benefit from the wearer's concentration, but also cause the wearer to lose concentration. [italic type]Block bonus: [block bonus of the shield of reflection][roman type]."
 
 The shield of reflection is size-agnostic.
 

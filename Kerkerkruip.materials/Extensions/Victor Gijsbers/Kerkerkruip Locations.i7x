@@ -1656,7 +1656,9 @@ Mausoleum is deathly.
 
 The rarity of Mausoleum is 4.
 
-The tomb of the ancient king is scenery in the mausoleum. The tomb of the ancient king is a closed openable container. Understand "marble" and "screw" and "screws" and "lid" and "sculptures" and "sculpted" and "head" and "heads" and "mausoleum" as the tomb of the ancient king. The description of the tomb of the ancient king is "The tomb is made of richly sculpted marble. Some of the sculptures serve as screws to hold the tomb closed.".
+The tomb of the ancient king is scenery in the mausoleum. The tomb of the ancient king is a closed openable container. Understand "marble" and "screw" and "screws" and "lid" and "sculptures" and "sculpted" and "head" and "heads" as the tomb of the ancient king. The description of the tomb of the ancient king is "The tomb is made of richly sculpted marble. Some of the sculptures serve as screws to hold the tomb closed.".
+
+Understand "mausoleum" as the tomb of the ancient king when the location is Mausoleum. [mainly useful to prevent misunderstandings in the test console]
 
 Tomb-ancient-king-counter is a number that varies. Tomb-ancient-king-counter is 0.
 
