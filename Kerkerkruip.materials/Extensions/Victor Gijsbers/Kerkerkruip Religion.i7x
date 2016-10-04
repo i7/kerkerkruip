@@ -385,9 +385,14 @@ To deal (X - a number) points of Aite-damage to (guy - a person) on behalf of (t
 		now X is X times the size factor divided by 2;
 		say ", skewering [the guy]";
 	deal X points of divine damage;
-	say " for [damage we have Aite inflict on the guy][damage consequences]![paragraph break]";
+	say " for [damage we have Aite inflict on the guy][run paragraph on]";
 	if the total damage > 0:
-		now concentration of the guy is 0;
+		if guy is dead:
+			say ", [bold type]killing [regarding the guy][them][roman type]";
+		otherwise if concentration of guy > 0:
+			say ", [bold type]breaking [regarding the guy][possessive] concentration";
+			now concentration of the guy is 0;
+	say "![paragraph break]";
 	if the guy is dead:
 		if the guy is the player:
 			if the player is the supplicant:
