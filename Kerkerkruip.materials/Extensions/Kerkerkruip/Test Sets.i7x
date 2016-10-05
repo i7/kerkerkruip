@@ -2819,9 +2819,39 @@ Section - Miscellaneous Damage Text
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	label
 aite-spike damage text	1	1	--
+asdt-sleeper	1	1	"spike healer"
+asdt-concentration	1	1	"spike healer"
+asdt-dead-beloved	1	1	"spike healer"
 
 Regular scheduling of Aite-spike damage text: deal 3 points of Aite-damage to the player on behalf of the player.
 Testing effects of Aite-spike damage text: if we assert 3 damage to the player after "A huge <a-w>+ bursts out of the ground, skewering you for", rule succeeds.
+
+Initial scheduling of asdt-sleeper:
+	prepare a test battle with the healer of Aite;
+	now the health of the healer of Aite is 1000;
+	now the healer of Aite is asleep;
+	
+Testing effects of asdt-sleeper:
+	assert "healer of Aite should be awake" based on whether or not the healer of Aite is not asleep;
+	if we assert result "A huge <a-w>+ bursts out of the ground, skewering the healer of Aite for 3 damage!\n\nThe healer of Aite wakes up!", rule succeeds.
+		
+Initial scheduling of asdt-concentration:
+	now the health of the healer of Aite is 1000;
+	now the concentration of the healer of Aite is 3;
+	
+Regular scheduling of an outcome labeled "spike healer": deal 3 points of Aite-damage to the healer of Aite on behalf of the player.
+
+Testing effects of asdt-concentration:
+	assert that the concentration of the healer of aite is 0 with label "concentration of the healer";
+	if we assert result "A huge <a-w>+ bursts out of the ground, skewering the healer of Aite for 3 damage, breaking his concentration!", rule succeeds.
+
+Initial scheduling of asdt-dead-beloved:
+	now the health of the healer of Aite is 1;
+	now the concentration of the healer of Aite is 3;
+
+Testing effects of asdt-dead-beloved:
+	assert "healer should be dead" based on whether or not the healer of Aite is dead;
+	if we assert result "A huge <a-w>+ bursts out of the ground, skewering the healer of Aite for 3 damage and killing him!\n\nClearly, it doesn't always pay off to serve the mad goddess\.", rule succeeds.
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	label
@@ -2833,6 +2863,8 @@ bees damage text	1	1	--
 glass damage text	1	1	--
 
 Initial scheduling of chton-wave damage text:
+	prepare a test battle with Isra;
+	revive Fell in the location;
 	now the reusable item is a random scroll of ghoulification;
 	now the health of Isra is 1000;
 

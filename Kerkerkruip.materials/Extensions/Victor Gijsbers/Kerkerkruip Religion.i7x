@@ -388,9 +388,9 @@ To deal (X - a number) points of Aite-damage to (guy - a person) on behalf of (t
 	say " for [damage we have Aite inflict on the guy][run paragraph on]";
 	if the total damage > 0:
 		if guy is dead:
-			say ", [bold type]killing [regarding the guy][them][roman type]";
+			say " and [bold type]killing [regarding the guy][them][roman type]";
 		otherwise if concentration of guy > 0:
-			say ", [bold type]breaking [regarding the guy][possessive] concentration";
+			say ", [bold type]breaking [regarding the guy][their] concentration";
 			now concentration of the guy is 0;
 	say "![paragraph break]";
 	if the guy is dead:

@@ -1344,7 +1344,7 @@ To prevent sleeping:
 To allow teleportation:
 	now the dimensional anchor is bannedobject;
 	now the teleportation beacon is bannedobject.
-
+	
 Curse prevention is a truth state that varies.
 
 To prevent curses:
