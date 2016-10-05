@@ -1149,14 +1149,13 @@ outcome	likelihood	minimum attempts	antecedent
 remembering-text	1	1	restarting for tests
 
 Scenario for remembering-text:
+	allow teleportation;
 	now Bodmall is testobject;
 	now the minotaur is testobject;
 	now the angel of compassion is testobject;
 	now the demon of rage is testobject;
 	now the swarm of daggers is testobject;
 	now the blood ape is testobject;
-	now the teleportation beacon is bannedobject;
-	now the dimensional anchor is bannedobject;
 	now bridge of doom is testobject;
 	now hall of vapours is bannedobject;
 	now the rod of the master builder is testobject;
@@ -1843,19 +1842,19 @@ woke-from-garden	20	20	imp-out-of-dream
 woke-with-reaper	20	20	woke-from-garden
 woke-in-combat	20	20	woke-from-garden
 
+[TODO: test imp with teleportation beacon?]
+
 Scenario for bug-280:
 	ban wandering monsters;
+	allow teleportation;
 	now the reaper is testobject; [overriding the wandering ban]
 	now the lair of the imp is testobject; [overriding the wandering ban]
-	now the dimensional anchor is bannedobject;
-	now the teleportation beacon is bannedobject; [test with the imp?]
 	now the dream of briar roses is testobject;
 	now the reusable item is a random morphean grenade;
 	now the vast staircase is bannedobject.
 
 Testing effects of bug-280:
-	assert that the combat state of the player is at-inactive with label "combat state of the player";
-	if the lair of the imp is placed and the imp is denizen and the dimensional anchor is off-stage, rule succeeds.
+	if we assert that the combat state of the player is at-inactive with label "combat state of the player", rule succeeds.
 
 Initial scheduling of reaper-seeking:
 	extract the player to the location of the reaper;
@@ -1983,7 +1982,7 @@ Scenario for bug-291:
 	now the swarm of daggers is testobject;
 	now the hall of mirrors is bannedobject;
 	ban wandering monsters;
-	now the dimensional anchor is bannedobject;
+	allow teleportation;
 
 initial scheduling of bug-291: Now every room is not rust-spored.
 
@@ -2820,15 +2819,18 @@ Section - Miscellaneous Damage Text
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	label
 aite-spike damage text	1	1	--
+
+Regular scheduling of Aite-spike damage text: deal 3 points of Aite-damage to the player on behalf of the player.
+Testing effects of Aite-spike damage text: if we assert 3 damage to the player after "A huge <a-w>+ bursts out of the ground, skewering you for", rule succeeds.
+
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts	label
 chton-wave damage text	1	1	--
 sul-sacrifice damage text	1	1	--
 deathly-scroll damage text	1	1	"try reading"
 downstairs damage text	1	1	--
 bees damage text	1	1	--
 glass damage text	1	1	--
-
-Regular scheduling of Aite-spike damage text: deal 3 points of Aite-damage to the player on behalf of the player.
-Testing effects of Aite-spike damage text: if we assert 3 damage to the player after "A huge <a-w>+ bursts out of the ground, skewering you for", rule succeeds.
 
 Initial scheduling of chton-wave damage text:
 	now the reusable item is a random scroll of ghoulification;
@@ -3935,6 +3937,7 @@ sleep effects	0	1	restarting for tests
 
 Scenario for sleep effects:
 	ban wandering monsters;
+	allow teleportation;
 	prevent sleeping [unless I say otherwise!];
 	now Temple of Nomos is testobject.
 	
@@ -4700,7 +4703,8 @@ still-with-malygris	1	1	malygris-robbing
 still-with-bodmall	1	1	malygris-robbing
 not-teleported	1	1	malygris-robbing
 
-scenario for simple tests: now bodmall is testobject.
+scenario for simple tests:	
+	now bodmall is testobject.
 
 the floor-item is an object that varies.
 

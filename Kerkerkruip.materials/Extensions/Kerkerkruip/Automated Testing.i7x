@@ -1324,6 +1324,7 @@ Chapter - Helpful phrases
 Section - Scenario Settings
 
 To ban wandering monsters:
+	now the smoke demon time-out is -1; [a bit of a hack, but prevents it from becoming 0]
 	now the overmind is bannedobject;
 	now lair of the imp is bannedobject;
 	now the armadillo is bannedobject;
@@ -1339,6 +1340,10 @@ To ban faculty modifiers:
 To prevent sleeping:
 	Repeat with guy running through people:
 		now initial sleep chance of guy is 0.
+
+To allow teleportation:
+	now the dimensional anchor is bannedobject;
+	now the teleportation beacon is bannedobject.
 
 Curse prevention is a truth state that varies.
 

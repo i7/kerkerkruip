@@ -7733,6 +7733,9 @@ Section - Making it appear and disappear
 
 A room can be smoke-demoned. A room is usually not smoke-demoned.
 
+[The main purpose of the smoke demon time-out seems to be to prevent the smoke demon reappearing too soon after it has gone.
+
+TODO: give it a better name, more distinguishable from "smoke timer"]
 The smoke demon time-out is a number that varies. The smoke demon time-out is 0.
 
 Every turn when the smoke demon time-out is not 0:
