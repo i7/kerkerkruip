@@ -1337,9 +1337,19 @@ To ban faculty modifiers:
 	now tungausy totem is bannedobject;
 	now addict-kit is bannedobject.
 
-To prevent sleeping:
+preventing sleep surprises is a truth state that varies.
+
+To prevent sleep surprises:
+	now preventing sleep surprises is true;
 	Repeat with guy running through people:
 		now initial sleep chance of guy is 0.
+
+This is the stay asleep rule:
+	if the main actor is sleeping in this world and combat status is combat:
+		say "[The main actor] [sleep] peacefully[roman type].";
+		now combat status is concluding;
+
+The stay asleep rule substitutes for the asleep rule when preventing sleep surprises is true.
 
 To allow teleportation:
 	now the dimensional anchor is bannedobject;

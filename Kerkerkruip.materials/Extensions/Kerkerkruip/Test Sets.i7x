@@ -193,7 +193,7 @@ mindslug-sleeper-runner	1	1	--
 [TODO: ignore testobject choices from file when running automated tests]
 
 scenario for parting shots:
-	prevent sleeping;
+	prevent sleep surprises;
 	now generation info is true;
 	now israfel is testobject;
 	now mindslug is testobject;
@@ -343,7 +343,7 @@ aeb-text	1	1	--	--	angel-escape-burn
 [TODO: Refactor into normal parting shots rules]
 
 Scenario for mercy parting shots:
-	prevent sleeping;
+	prevent sleep surprises;
 	now generation info is true;
 	now pickaxe-kit is testobject;
 	ban wandering monsters;
@@ -479,7 +479,7 @@ tentacle-retreat	1	1	--
 tentacle-dig-retreat	1	1	--
 
 Scenario for tentacle-grab:
-	prevent sleeping;
+	prevent sleep surprises;
 	Now the giant tentacle is testobject;
 	now the fuligin cloak is testobject;
 	now the hall of mirrors is bannedobject;
@@ -643,7 +643,7 @@ blood ape: (dreadful presence 2) * 12 - (level 1 *3) = 21
 insane player: (dreadful presence 2) * 12 - (level 0 * 3) = 24]
 
 Scenario for Dreadful-Presence-Test:
-	prevent sleeping;
+	prevent sleep surprises;
 	block interventions;
 
 regular scheduling of Dreadful-Presence-Test:
@@ -1663,7 +1663,7 @@ bodmall-reaction	1	1	bodmall-attack
 bodmall-bleeding	1	1	bodmall-attack
 
 Scenario for bug-245:
-	prevent sleeping;
+	prevent sleep surprises;
 	now the blood ape is testobject;
 	now bodmall is testobject;
 	now the hall of mirrors is bannedobject;
@@ -2106,7 +2106,7 @@ armadillo-can-move	1	1	--	--
 armadillo-moved	1	0	200	--
 
 Scenario for armadillo-wandering:
-	prevent sleeping;
+	prevent sleep surprises;
 	now the ravenous armadillo is testobject.
 
 Armadillo-origin is a room that varies.
@@ -2663,7 +2663,7 @@ fragmentation damage text	1	1	--
 Scenario for damage-text:
 	now generation info is true;
 	ban faculty modifiers;
-	prevent sleeping;
+	prevent sleep surprises;
 	now Drawing Room is bannedobject;
 	now Vast Staircase is testobject;
 	now slaying-kit is testobject;
@@ -3991,7 +3991,7 @@ sleep effects	0	1	restarting for tests
 Scenario for sleep effects:
 	ban wandering monsters;
 	allow teleportation;
-	prevent sleeping [unless I say otherwise!];
+	prevent sleep surprises;
 	now Temple of Nomos is testobject.
 	
 Initial scheduling of sleep effects: now every room is not rust-spored.
@@ -4123,7 +4123,8 @@ initial scheduling of sleeping-hound-unprepared:
 	now the melee of the hound is 100; [convince the hound's AI that attacking is best]
 	now the defence of the hound is 50;
 	now the melee of the player is 0.
-	
+
+
 initial scheduling of awake-hound-unprepared-for-hidden: try sneaking.
 
 initial scheduling of awake-hound-prepared: try taking off the fuligin cloak.
