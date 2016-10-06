@@ -508,7 +508,7 @@ An attack modifier rule (this is the Aite-loved bonus in Temple of Aite rule):
 
 Chance to win rule (this is the CTW Aite bonus rule):
 	if the location is the Temple of Aite:
-		if the global attacker is beloved of Aite:
+		if the running AI is beloved of Aite:
 			increase the chance-to-win by 2.
 
 
