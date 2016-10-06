@@ -798,7 +798,7 @@ Carry out sensing when psycholocation is inactive:
 	if greatest power of the player is greater than 2:
 		let the way be the best route from the location of player to the location of Malygris;
 		if way is a direction:
-			say "You feel that the shortest route towards Malygris lies [way].[line break]";
+			say "You feel that the shortest route towards Malygris lies [way].";
 		otherwise:
 			if the location of the player is the location of Malygris:
 				say "Malygris is right here.[line break]";
@@ -809,9 +809,11 @@ Carry out sensing:
 	if player is denizen:
 		if greatest power of the player is greater than 3:
 			now world test subject is player;
+			Let report-count be 0;
 			repeat with item running through worldsharer epic things:
 				if location of item is not location of the player and location of item is placed:
-					say "[line break]You sense an epic artefact that [directions to location of item].[line break]";
+					increment report-count;
+					say "You sense an[if report-count > 1]other[end if] epic artefact that [directions to location of item].";
 					
 
 To say directions to (destination - a room):

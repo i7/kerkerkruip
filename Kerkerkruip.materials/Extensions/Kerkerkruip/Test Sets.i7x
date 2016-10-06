@@ -1197,29 +1197,42 @@ testing effects of remembering-text:
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	label
 nothing-to-remember	1	1	--
-powerless-sensing	1	1	--
+powerless-sensing	1	1	"compel sensing"
+item-sensing	1	1	"compel sensing"
 early-psycholocation	0	1	"psycholocate"
-unexplored-sensing	0	1	--
+unexplored-sensing	0	1	"compel sensing"
 remembering-daggers	1	1	--
 middle-psycholocating	0	1	"psycholocate"
-partial-explored-sensing 	1	1	--
+partial-explored-sensing 	1	1	"compel sensing"
 
 [TODO: figure out if "seen" needs to be updated even when acting fast]
 
 regular scheduling of nothing-to-remember: try remembering.
 testing effects of nothing-to-remember: if we assert result "You have not yet explored:\n( - the <a-w>+ exit of the entrance hall \(where you currently are\)\n)+\nYou have visited the following rooms: the entrance hall \(here\)\.\n\nTip:", rule succeeds.
 
+regular scheduling of an outcome labeled "compel sensing": compel the action of sensing.
+
 [sensing should take no time if you don't have enough powers to do it]
-regular scheduling of powerless-sensing: compel the action of sensing.
 testing effects of powerless-sensing: if previously-fast is true, rule succeeds.
+
+initial scheduling of item-sensing:
+	repeat with item running through denizen epic things:
+		unless the player encloses item:
+			remove item from play;
+	now the staff of insanity is in Arcane Vault;
+	now the suit of dragon armour is in Arcane Vault;
+	now the power of bodmall is granted.
+	
+testing effects of item-sensing:
+	if we assert result "You sense an (epic artefact that is currently unreachable, but lies somewhere.*)\n+You sense another \1", rule succeeds.
+
+initial scheduling of early-psycholocation: now the power of bodmall is not granted.
 
 initial scheduling of an outcome labeled "psycholocate": now the reusable item is a random scroll of psycholocation.
 regular scheduling of an outcome labeled "psycholocate": try reading the reusable item.
 testing effects of an outcome labeled "psycholocate":
 	assert "The player should be psycholocating now" based on the psycholocation boolean;
 	assert result "When you are psycholocating, sensing does not take time";
-
-regular scheduling of unexplored-sensing: compel the action of sensing.
 
 testing effects of unexplored-sensing:
 	Repeat with the enemy running through {swarm of daggers, blood ape, demon of rage, angel of compassion, minotaur, bodmall, malygris}:
@@ -1265,7 +1278,6 @@ Initial scheduling of middle-psycholocating:
 		now the on-the-way place is the next stop from the on-the-way place to the target;
 	extract the player to the sensing-place.
 
-regular scheduling of partial-explored-sensing: compel the action of sensing.
 testing effects of partial-explored-sensing:
 	assert result "the soul of the swarm of daggers here with you, like an aura like sharpened steel[line break]";
 	if we assert result "[soul description of the faraway enemy], [best route from on-the-way place to location of the faraway enemy] from [the on-the-way place] \(which lies [best route from the location to on-the-way place] from here\)[line break]", rule succeeds.
@@ -1330,16 +1342,15 @@ testing effects of Malygris-only-remembering:
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	label
-slow-sensing	1	1	--
+slow-sensing	1	1	"compel sensing"
 exploring-everywhere	1	0	--
 unexplored-vault	1	1	--
 remembering-everything-reachable	1	1	--
 explored-psycholocating	0	1	"psycholocate"
-malygris-sensing	1	1	--
+malygris-sensing	1	1	"compel sensing"
 map-reading	1	1	"compel reading"
 map-remembering	0	1	--
 
-regular scheduling of slow-sensing: compel the action of sensing.
 testing effects of slow-sensing: if previously-fast is false, rule succeeds.
 
 regular scheduling of exploring-everywhere:
@@ -1361,7 +1372,6 @@ Initial scheduling for explored-psycholocating:
 
 
 Initial scheduling of malygris-sensing: Now the last-seen-location of Malygris is null-room.
-regular scheduling of malygris-sensing: compel the action of sensing.
 testing effects of malygris-sensing:
 	assert result "[soul description of malygris], in [the location of Malygris]";
 	if previously-fast is true, rule succeeds.
@@ -3854,8 +3864,7 @@ launch-break-concentration	1	1	--
 launch-broke-concentration	1	1	launch-break-concentration
 
 Initial scheduling of launch-break-concentration:
-	prepare a test battle with Bodmall;
-	try smiting Bodmall;
+	now the power of bodmall is granted;
 	prepare a test battle with the minotaur;
 	try summoning brambles;
 	now the concentration of the minotaur is 3;

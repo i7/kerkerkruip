@@ -1439,8 +1439,6 @@ A faculty bonus rule (this is the faculty bonus of the goggles of acuity rule):
 
 The description of the goggles of acuity is "These goggles have been magically enchanted to make the wearer more aware of anything that happens around him. They were originally made for the marquis of Savon, who wasted his eyes poring over ancient tomes in his ill-lit library, but their use extends far beyond that of reading glasses. [italic type](They grant a +1 bonus to body, mind and spirit if you are using your eyes to see.)[roman type]".
 
-[TODO: these goggles only work if the player is using eyes? Make goggles of blindness do the same for eyeless players]
-
 Section - Goggles of blindness (cursed)
 
 The goggles of blindness are a cursed curse-identified mask. They are plural-named. The indefinite article is "the". 
