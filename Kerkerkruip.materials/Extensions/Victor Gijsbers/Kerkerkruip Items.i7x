@@ -3872,27 +3872,6 @@ An aftereffects rule (this is the scythe of oxidation rusts stuff rule):
 
 	[TODO: if the target is a person or a natural weapon, spread the rust between both?]
 	[TODO: if the damage was reduced to 0, still rust the global defender?]
-	
-[	if the global attacker weapon is the scythe of oxidation:
-		if the global defender is at parry and the total damage is 0:
-			if the global defender weapon is iron and the global defender weapon is not rusted:
-				say "Having been in contact with the scythe of oxidation, [the global defender weapon] [bold type][rust][roman type].";
-				now the global defender weapon is rusted;
-	if the global defender weapon is the scythe of oxidation:
-		if the global defender is at parry and the total damage is 0:
-			if the global attacker weapon is iron and the global attacker weapon is not rusted:
-				if the global attacker weapon is not a part of the global attacker:
-					say "Having been in contact with the scythe of oxidation, [the global attacker weapon] [bold type][rust][roman type].";
-					now the global attacker weapon is rusted;
-				otherwise:
-					if the global defender is not rusted and the global defender is alive:
-						say "Having hit the scythe of oxidation, [the global defender] [bold type][rust][roman type]!";			
-						now the global defender is rusted;
-	if the global attacker weapon is the scythe of oxidation:
-		if the global defender is iron and the total damage is greater than 0:
-			if the global defender is not rusted and the global defender is alive:
-				say "Having been hit with the scythe of oxidation, [the global defender] [bold type][rust][roman type]!";			
-				now the global defender is rusted.]
 
 
 Chapter - Staves
@@ -4297,14 +4276,16 @@ After readying the glass cannon:
 		end the story saying "You were a little too fragile for that.".
 
 An aftereffects rule (this is the glass cannon shatters when used to parry rule):
-	if the global defender weapon is the glass cannon:
-		if the global defender is at parry and the total damage is 0:
-			if a random chance of total damage in 10 succeeds:
-				say "The impact [bold type]shatters the glass cannon[roman type].";
-				remove the glass cannon from play;
-			otherwise:
-				say "The glass cannon [bold type]survives the impact[roman type], but barely.";
-				decrease weapon damage bonus of glass cannon by 2.
+	if the glass cannon is whatever the global attacker weapon struck:
+		Let fragility be the weapon damage bonus of the glass cannon;
+		if fragility < 1:
+			now fragility is 1;
+		if a random chance of 1 in fragility succeeds:
+			say "The impact [bold type]shatters the glass cannon[roman type].";
+			remove the glass cannon from play;
+		otherwise:
+			say "The glass cannon [bold type]survives the impact[roman type], but barely.";
+			decrease weapon damage bonus of glass cannon by 2.
 
 The special weapon info of the glass cannon is "; makes you easier to hit; permanently halves your health when readied[run paragraph on]".
 

@@ -2639,6 +2639,23 @@ Regular scheduling of fell-blinds-eyeless-monster: do the action of JB waiting f
 
 Testing effects of fell-blinds-eyeless-monster: if we assert absence of result "Fell's nails strike", rule succeeds.
 
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts	antecedent
+glass-parry-shatter	1	0	--
+glass-gone	1	1	glass-parry-shatter
+
+Initial scheduling of glass-parry-shatter:
+	remove the greasy gauntlets from play;
+	equip the player with the glass cannon;
+	
+regular scheduling of glass-parry-shatter:
+	now the health of the player is 1000;
+	do the action of parrying a 0 melee hit by fell.
+
+testing effects of glass-parry-shatter: if we assert result "The impact shatters the glass cannon", rule succeeds.
+	
+testing effects of glass-gone: if the glass cannon is off-stage, rule succeeds.
+
 [TODO: stun effect - Malleus should not stun dead opponent]
 [TODO: Hot weapons only do heat damage (or break because of heat)? if not projectile]
 [TODO: test armor of thorns (started) and Israfel (done yet?),
