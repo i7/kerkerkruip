@@ -2830,11 +2830,14 @@ Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	label
 aite-spike damage text	1	1	--
 asdt-sleeper	1	1	"spike healer"
+asdt-reduction	1	1	"spike healer"
 asdt-concentration	1	1	"spike healer"
 asdt-dead-beloved	1	1	"spike healer"
 
 Regular scheduling of Aite-spike damage text: deal 3 points of Aite-damage to the player on behalf of the player.
 Testing effects of Aite-spike damage text: if we assert 3 damage to the player after "A huge <a-w>+ bursts out of the ground, skewering you for", rule succeeds.
+
+Regular scheduling of an outcome labeled "spike healer": deal 3 points of Aite-damage to the healer of Aite on behalf of the player.
 
 Initial scheduling of asdt-sleeper:
 	prepare a test battle with the healer of Aite;
@@ -2845,12 +2848,21 @@ Testing effects of asdt-sleeper:
 	assert "healer of Aite should be awake" based on whether or not the healer of Aite is not asleep;
 	if we assert result "A huge <a-w>+ bursts out of the ground, skewering the healer of Aite for 3 damage!\n\nThe healer of Aite wakes up!", rule succeeds.
 		
+Initial scheduling of asdt-reduction:
+	now the health of the healer of Aite is 1000;
+	now the concentration of the healer of Aite is 3.
+
+Remove specific damage when testing asdt-reduction:
+	Remove 3 points of divine damage with reason "testing divine damage reduction".
+
+Testing effects of asdt-reduction:
+	assert that the concentration of the healer of Aite is 3 with label "healer's concentration";
+	if we assert 0 damage to the healer of Aite after "A huge <a-w>+ bursts out of the ground, skewering the healer of Aite for", rule succeeds.
+
 Initial scheduling of asdt-concentration:
 	now the health of the healer of Aite is 1000;
 	now the concentration of the healer of Aite is 3;
 	
-Regular scheduling of an outcome labeled "spike healer": deal 3 points of Aite-damage to the healer of Aite on behalf of the player.
-
 Testing effects of asdt-concentration:
 	assert that the concentration of the healer of aite is 0 with label "concentration of the healer";
 	if we assert result "A huge <a-w>+ bursts out of the ground, skewering the healer of Aite for 3 damage, breaking his concentration!", rule succeeds.
