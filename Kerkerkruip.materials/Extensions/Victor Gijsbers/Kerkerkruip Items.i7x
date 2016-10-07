@@ -1311,24 +1311,24 @@ The description of the greasy gauntlets is "These armoured gloves are supernatur
 The greasy gauntlets are tricky.
 
 Last aftereffects rule (this is the greasy gauntlets rule):
-	if the global attacker wears the greasy gauntlets and the total damage is greater than 0:
-		if the global attacker weapon is not projectile:
-			if a random chance of 1 in 6 succeeds:
-				do the grease drop with the global attacker;
-	if the global defender wears the greasy gauntlets and the global defender is at parry and the total damage is 0:
+	Let the item be whatever the global attacker weapon struck;
+	[TODO: why don't we drop our weapon when parried or blocked?]
+	if the item is the global defender and the global attacker weapon is not projectile:
+		test strength 6 grip of global attacker against grease;
+	if the item is the global defender weapon:
 		if the parry-against bonus of the global attacker weapon is greater than -1:
-			if a random chance of 1 in 4 succeeds:
-				do the grease drop with the global defender.
+			test strength 4 grip of global defender against grease.
 
-To do the grease drop with (guy - a person):
-	let item be the current weapon of guy;
-	unless item is a natural weapon:
-		now item is not readied;
-		move item to the location of guy;
-		if guy is the player:
-			say "Because of the force of the blow and the slipperiness of the gauntlets, you [bold type]drop [the item][roman type].";
-		otherwise:
-			say "[The guy] [drop] [the item].".
+To test strength (grip strength - a number) grip of (guy - a person) against grease:
+	if guy wears the greasy gauntlets and a random chance of 1 in (grip strength) succeeds:
+		let item be the current weapon of guy;
+		unless item is a natural weapon:
+			now item is not readied;
+			move item to the location of guy;
+			if guy is the player:
+				say "Because of the force of the blow and the slipperiness of the gauntlets, you [bold type]drop [the item][roman type].";
+			otherwise:
+				say "[The guy] [drop] [the item].".
 
 Section - Gauntlet of attraction (monster)
 
@@ -1374,12 +1374,16 @@ An aftereffects rule (this is the gauntlet of attraction steals weapons rule):
 	If the gauntlet can steal the loot for the global defender:
 		[TODO: parrying natural and tethered weapons causes grappling]
 		say "The gauntlet of attraction grips [the loot]![paragraph break][The global attacker] [try] to hold on. [run paragraph on]";
-		Let the gripping-force be the final body of the global defender;
+		Let the attraction-force be the final body of the global defender;
 		now roller is the global defender;
-		increase the gripping-force by a roll of the dice;
+		increase the attraction-force by a roll of the dice;
 		if the loot is cursed:
-			decrease gripping-force by 3;
-		test the body of the global attacker against the gripping-force;
+			decrease attraction-force by 3;
+		if the global attacker wears the greasy gauntlets: [a hack! need a rulebook?]
+			increase attraction-force by 3;
+		if the global attacker wears the gauntlets of grip:
+			decrease attraction-force by 3;
+		test the body of the global attacker against the attraction-force;
 		if test result is false:
 			say " [The global defender] [bold type][wrest] [the loot] away[roman type] from [the global attacker][if the loot is curse-identified], uncursing it in the process[end if]!";
 			now the previous owner of the loot is the global attacker;
