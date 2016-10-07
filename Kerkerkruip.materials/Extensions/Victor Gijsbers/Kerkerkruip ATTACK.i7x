@@ -1431,7 +1431,7 @@ Section - Weapon interactions during aftereffects
 To decide what object is whatever (item - a thing) struck:
 	if the attack hit:
 		if item is the global attacker weapon, decide on the global defender;
-		if item is the global defender, decide on the global attacker weapon;
+		if item is the global defender, decide on the global attacker weapon; [TODO: change this line to match asymmetry below?]
 		[what about clothing?]
 		decide on nothing;
 	if item is the global attacker weapon:
@@ -1439,7 +1439,7 @@ To decide what object is whatever (item - a thing) struck:
 		if the global defender is at-block, decide on a random shield worn by the global defender;
 		decide on nothing;
 	[The next line makes this phrase asymmetrical -
-	 the global attacker weapon can hit weapons and shields if it is projectile, but they can't hit it]
+	 the global attacker weapon can hit weapons and shields if it is projectile, but they can't hit it.]
 	if the global attacker weapon is projectile, decide on nothing;
 	if item is the global defender weapon and the global defender is at parry, decide on the global attacker weapon;
 	if item is a shield worn by the global defender and the global defender is at-block, decide on the global attacker weapon;

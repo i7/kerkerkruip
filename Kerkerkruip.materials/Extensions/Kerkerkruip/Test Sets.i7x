@@ -2640,9 +2640,9 @@ Regular scheduling of fell-blinds-eyeless-monster: do the action of JB waiting f
 Testing effects of fell-blinds-eyeless-monster: if we assert absence of result "Fell's nails strike", rule succeeds.
 
 Table of Outcomes (continued)
-outcome	likelihood	minimum attempts	antecedent
-glass-parry-shatter	1	0	--
-glass-gone	1	1	glass-parry-shatter
+outcome	likelihood	minimum attempts	label	antecedent
+glass-parry-shatter	1	0	--	--
+glass-gone	1	1	"lose weapon"	glass-parry-shatter
 
 Initial scheduling of glass-parry-shatter:
 	remove the greasy gauntlets from play;
@@ -2653,8 +2653,43 @@ regular scheduling of glass-parry-shatter:
 	do the action of parrying a 0 melee hit by fell.
 
 testing effects of glass-parry-shatter: if we assert result "The impact shatters the glass cannon", rule succeeds.
-	
-testing effects of glass-gone: if the glass cannon is off-stage, rule succeeds.
+
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts	label	antecedent
+demonblade-parry-shatter	1	0	"demon blade"	--
+demonblade-parry-gone	1	1	--	demonblade-parry-shatter
+demonblade-parried-shatter	1	0	"demon blade"	--
+demonblade-parried-gone	1	1	--	demonblade-parried-shatter
+demonblade-blocked-shatter	1	0	"demon blade"	--
+demonblade-blocked-gone	1	1	--	demonblade-blocked-shatter
+demonblade-hit-shatter	1	0	"demon blade"	--
+demonblade-hit-gone	1	1	--	demonblade-hit-shatter
+demonblade-miss-shatter	0	100	"demon blade"	--
+
+First initial scheduling of demonblade-parry-shatter:
+	prepare a test battle with the demonic assassin;
+	remove the greasy gauntlets from play;
+	equip the player with the gilded rapier;
+	equip the player with the wooden buckler;
+
+Last initial scheduling of an outcome labeled "demon blade": equip the demonic assassin with the demon blade.
+Testing effects of an outcome labeled "demon blade": if we assert result "The demon blade, weakened by being heated, is destroyed!", rule succeeds.
+
+Testing effects of an outcome (called event):
+	if the antecedent of event is labeled "demon blade":
+		if the demon blade is off-stage, rule succeeds.
+
+Regular scheduling of demonblade-parry-shatter: do the demonic assassin parrying a 0 melee hit by the player.
+
+Regular scheduling of demonblade-parried-shatter: do parrying a 0 melee hit by the demonic assassin.
+
+Regular scheduling of demonblade-blocked-shatter: do blocking a 0 melee hit by the demonic assassin.
+
+Regular scheduling of demonblade-hit-shatter: do dodging a 100 melee hit by the demonic assassin.
+
+Regular scheduling of demonblade-miss-shatter: do dodging a 0 melee hit by the demonic assassin.
+
+[TODO: can shields get hot and get destroyed?]
 
 [TODO: stun effect - Malleus should not stun dead opponent]
 [TODO: Hot weapons only do heat damage (or break because of heat)? if not projectile]

@@ -3553,6 +3553,7 @@ Definition: a weapon (called item) is angel-worthy:
 	glass cannon (epic)
 	
 TODO: what if player gets hit with the caduceus?
+TODO: prevent angel from altering incorruptible weapons?
 ]
 			
 To decide which number is the angel-reflectable weapon count:

@@ -1148,26 +1148,21 @@ An add specific damage rule (this is the heat increases damage rule):
 Section - Weapons
 
 An aftereffects rule (this is the heat can cause weapons to break rule):
-	let n be heat strength of the global attacker weapon;
-	let m be heat strength of the global defender weapon;
-	if n is greater than 0 and global attacker weapon is not ranged:
-		[For now, let's say tethered weapons can't break from heat. It's because they're flexible. Sure.]
-		if the global attacker weapon is corruptible:
-			if the total damage is greater than 0 or defender is at parry:
-				if a random chance of n in 50 succeeds:
-					turn off mentioning hotness;			
-					say "[The global attacker weapon], weakened by being heated, is [bold type]destroyed[roman type]!";
-					turn on mentioning hotness;				
-					remove global attacker weapon from play;
-	if the total damage is less than 1 and the defender is at parry:
-		if m is greater than 0:
-			if the global defender weapon is corruptible:
-				if a random chance of n in 50 succeeds:
-					turn off mentioning hotness;			
-					say "[The global defender weapon], weakened by being heated, is [bold type]destroyed[roman type]!";
-					turn on mentioning hotness;				
-					remove global defender weapon from play.
+	Let the item be whatever the global attacker weapon struck;
+	if the item is a thing and the global attacker weapon is an artificial corruptible not projectile weapon:
+		stress the global attacker weapon against heat;
+	if the item is an artificial weapon:
+		stress the item against heat.
+		
+[TODO: what about hot natural weapons? Can that happen?]
 
+To stress (item - a thing) against heat:
+	if item is hot:
+		if a random chance of (heat strength of item) in 50 succeeds:
+			turn off mentioning hotness;
+			say "[The item], weakened by being heated, is [bold type]destroyed[roman type]!";
+			turn on mentioning hotness;
+			remove item from play.
 
 Section - Material heat resistance
 
