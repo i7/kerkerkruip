@@ -104,6 +104,7 @@ To wake the player up:
 		move the player to dreamer-location;
 	otherwise:
 		try looking;
+	update the combat status; [this might be the wrong place, but I think it's needed]
 	now the take no time boolean is false.
 [
 Section - Stripping player of possessions
