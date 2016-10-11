@@ -2983,6 +2983,28 @@ initial scheduling of glass damage text:
 regular scheduling of glass damage text: do the action of the chain golem waiting for a 100 melee hit by the player.
 testing effects of glass damage text: if we assert result "You deal 10 ", rule succeeds.
 
+Table of Outcomes (continued)
+outcome	likelihood	minimum attempts
+nomos-fail-damage-text	1	1
+
+Initial scheduling of nomos-fail-damage-text:
+	have the player worship Nomos with 1 favour;
+	prepare a test battle with the armadillo;
+	equip the player with the Yahvinnian crossbow;
+	now the current shots of the Yahvinnian crossbow is 0;
+	now the nomos attacker is the player;
+	now the nomos bonus is true;
+	now hit protection of the player is 0;
+	now the health of the player is 1000;
+	now the concentration of the player is 1;
+	
+Regular scheduling of nomos-fail-damage-text: compel the action of reloading the Yahvinnian crossbow;
+
+Testing effects of nomos-fail-damage-text:
+	assert that the location of the Yahvinnian crossbow is nothing with label "location of the crossbow";
+	assert that the health of the player is 995 with label "health of the player";
+	if we assert result "Nomos is angered by the failure of your attack! He destroys the Yahvinnian crossbow, dealing 5 damage to you \(which breaks your concentration\)\.", rule succeeds;
+
 Chapter - Attack Modifiers
 
 [TODO: add everything methodically]

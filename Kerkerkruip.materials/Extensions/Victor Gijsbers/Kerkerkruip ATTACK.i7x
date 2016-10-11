@@ -2354,7 +2354,7 @@ After an actor hitting when the maximum shots of the global attacker weapon is g
 
 Check attacking (this is the cannot attack when out of ammo rule):
 	let item be the current weapon of the player;
-	if the maximum shots of item is greater than 0 and the current shots of item is not greater than 0:
+	if item is unloaded:
 		say "[out-of-ammo text of item][paragraph break]" instead.
 
 Section - Reloading

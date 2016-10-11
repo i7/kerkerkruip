@@ -527,6 +527,23 @@ Definition: a person is Nomos-attacker if it is the Nomos attacker. [ Definition
 The Nomos counter is a number that varies. The Nomos counter is 0.
 The Nomos bonus is a truth state that varies. The Nomos bonus is false.
 
+Every turn (this is the fix uncleared Nomos bonus rule):
+	if the Nomos bonus is true and the main actor is the Nomos attacker:
+		deactivate Nomos bonus;
+		Let item be the current weapon of the Nomos attacker;
+		say "Nomos is angered by the failure of [regarding the Nomos attacker][possessive] attack! ";
+		if item is an artificial weapon:
+			[This can happen if the current weapon was unloaded when the bonus activated]
+			remove item from play;
+			say "He [bold type]destroys [the item][roman type], dealing [run paragraph on]";
+		otherwise:
+			say "He strikes [the item], dealing [run paragraph on]";
+		deal 5 points of divine damage;
+		have Nomos inflict damage on the Nomos attacker;
+		say " [damage consequences].";
+		if the player is dead:
+			end the story saying "Nomos favours the well-prepared.";
+			
 Every turn (this is the decrease the Nomos counter rule):
 	if (the main actor is the player) and (the current action is not the action of the player dontparsing):
 		if Nomos counter is greater than 0 and (the Nomos attacker is conscious in this world):
@@ -538,10 +555,12 @@ The decrease the Nomos counter rule is listed before the spontaneous combat inte
 
 [Nomos can intervene during anyone's turn, but if Nomos intervenes during your turn, the counter should not count down before you have a chance to act]
 
+The fix uncleared Nomos bonus rule is listed before the decrease the Nomos counter rule in the every turn rules.
+
 To follow is a verb. To prepare is a verb.
 
 To activate Nomos bonus:
-	now Nomos bonus is true;
+	now Nomos bonus is true;	
 	if the Nomos attacker is not the player, say "[The Nomos attacker] [follow] the rules of [their] God, and [prepare] to attack!";
 
 [An AI action selection rule for an at-Act person who is the Nomos attacker (this is the Nomos attacker AI should obey Nomos rule):] [ bug #1411 ]
@@ -554,7 +573,7 @@ An AI action selection rule for an at-Act Nomos-attacker person (this is the Nom
 		decrease Action Weight entry by 1500;
 
 To deactivate Nomos bonus:
-	now Nomos bonus is false;
+	now Nomos bonus is false;	
 		
 To have (benefactor - Nomos) intervene on behalf of (supplicant - a person):
 	if the Nomos counter > 0 or the Nomos bonus is true:
@@ -613,29 +632,26 @@ After attacklike behaviour (this is the attacking is never fast rule):
 To plan is a verb. To find is a verb.
 
 First before doing anything (this is the Nomos makes you attack rule):
+	if Nomos bonus is false or the take no time boolean is true:
+		make no decision;
+	if the actor is not the Nomos attacker:
+		make no decision;
+	if the actor is not the main actor or the combat state of the actor is at-react:
+		make no decision;
+	unless the actor is conscious in this world:
+		make no decision;			
 	if the current action is unattacklike:
-		if Nomos bonus is false or the take no time boolean is true:
-			make no decision;
-		if the actor is not the Nomos attacker:
-			make no decision;
-		if the actor is not the main actor or the combat state of the actor is at-react:
-			make no decision;
-		unless the actor is conscious in this world:
-			make no decision;
 		now opposition test subject is the Nomos attacker;
 		if at least one opposer alive person is enclosed by the location:
 			let X be a random opposer person enclosed by the location;
 			say "[The actor] [plan] on [current action], but [regarding the actor][find] [themselves] attacking [the X] instead.";
 			try attacking X instead;
-			[TODO: nothing happens after the "instead"]
-			deactivate Nomos bonus;
 		otherwise:
 			say "[The actor] [plan] on [current action], but [regarding the actor][find] [their] body attacking itself instead!";
-			try the player hitting the player instead;
-			[TODO:  nothing happens after the "instead"]
-			deactivate Nomos bonus;
+			try the player hitting the player;
 			if the player is dead:
-				end the story saying "Nomos is not to be toyed with.".
+				end the story saying "Nomos is not to be toyed with.";
+			stop the action.
 
 Before attacklike behaviour when Nomos counter is greater than 0 (this is the Nomos stops you from attacking rule):
 	say "Deciding to break the command of Nomos, you plan on attacking [the noun]. However, you find yourself ";
