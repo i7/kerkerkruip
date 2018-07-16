@@ -306,6 +306,14 @@ Carry out butterflying:
 	say "Float like a butterfly, sting like a bee! No one can hit you now.";
 	now defence of the player is 100;
 
+Superskilling is an action applying to nothing. Understand "superskill"as superskilling.
+
+Carry out superskilling:
+	say "Your skills increase.";
+	increase body score of player by 5;
+	increase mind score of player by 5;
+	increase spirit score of player by 5.
+
 Winning is an action applying to nothing. Understand "win" as winning.
 
 Carry out winning:
