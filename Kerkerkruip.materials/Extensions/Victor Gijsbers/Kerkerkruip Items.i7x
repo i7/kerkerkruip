@@ -4078,12 +4078,15 @@ Carry out reading a scroll of enchantment (this is the enchanment grows spiked m
 		if spiked-mace-blood is less than 12:
 			say "A flash of red light comes from the spiked mace of the ape king, and it grows!"
 
+
 	
 Chapter - Hammer
 
 Section - Stunning weapon
 
 A weapon can be stunning-weapon. A weapon is usually not stunning-weapon. [A stunning weapon always stuns, without damage penalty. When combined with the stun action, it is extra effective.]
+
+[Stunning is defined in Kerkerkruip Monster Abilities]
 
 Section - The hammer kind
 
@@ -4158,6 +4161,17 @@ The doomhammer is a huge hammer. The doomhammer is iron. The description of the 
 The damage die of the doomhammer is 8.
 The weapon damage bonus of the doomhammer is 3.
 
+
+Section - The spiritual hammer
+
+
+An add specific damage rule (this is the spiritual hammer bonus damage rule):
+	if damage-by-hitting is true:
+		if damage-source is the spiritual hammer:
+			unless final spirit of the global attacker is less than 15:
+				add 4 points of heat damage with reason "hammer's inner fire".
+			
+The special weapon info of the spiritual hammer is "; stuns opponents; deals extra heat damage when wielded with high spirit score[run paragraph on]".
 
 Chapter - Crossbows
 
