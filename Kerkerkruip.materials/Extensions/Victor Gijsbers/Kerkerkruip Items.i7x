@@ -4164,6 +4164,7 @@ The weapon damage bonus of the doomhammer is 3.
 
 Section - The spiritual hammer
 
+The spiritual hammer is a major hammer. The indefinite article is "the". The rarity of the spiritual hammer is 2. The spitirual hammer is iron. The description of the spiritual hammer is "[if final spirit of the player is less than 15]Monastic symbols have been etched into the massive head of this hammer. Already a fine weapon, its true powers will become apparent only when wielded by those with a high spirit score. If your spirit ever rises to 15, the hammer will start to glow with inner fire, dealing significantly more damage[otherwise if player has the spiritual hammer]Monastic symbols have been etched into the massive head of this hammer. Because of your high spirit score, the hammer glows with an inner fire that generates no heat, but will deal significant damage in combat[otherwise]Monastic symbols have been etched into the massive head of this hammer. Already a fine weapon, its true powers will become apparent only when wielded by those with a high spirit score[end if].[line break]"
 
 An add specific damage rule (this is the spiritual hammer bonus damage rule):
 	if damage-by-hitting is true:
