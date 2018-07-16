@@ -1782,27 +1782,30 @@ Section - Losing Concentration
 
 The remain concentrated chance is a number that varies.
 The remain concentrated rules are a rulebook.
+The global concentration loser is a person that varies.
 
 An aftereffects rule (this is the alternative lose concentration when hit rule):
 	if the total damage is greater than 0 and the global defender is alive and the concentration of the global defender is not 0:
-		now the remain concentrated chance is 0;
-		follow the remain concentrated rules;
-		unless a random chance of remain concentrated chance in 100 succeeds:
-			let the global defender lose concentration;
-		otherwise:
-			say "[The global defender] [bold type][remain] concentrated[roman type].";
+		have the global defender lose concentration with penalty total damage.
 
-A remain concentrated rule (this is the damage penalty for remaining concentrated rule):
-	decrease remain concentrated chance by total damage.
+To have (the victim - a person) lose concentration with penalty (penalty - a number):
+	now the global concentration loser is the victim;
+	now the remain concentrated chance is 0;
+	decrease remain concentrated chance by penalty;
+	follow the remain concentrated rules;
+	unless a random chance of remain concentrated chance in 100 succeeds:
+		if the concentration of the victim > 0:
+			now the concentration of the victim is 0;
+			follow the lose concentration prose rules for the victim;
+		otherwise:
+			say "[The victim] [bold type][remain] concentrated[roman type].";
+
+[A remain concentrated rule (this is the damage penalty for remaining concentrated rule):
+	decrease remain concentrated chance by total damage.] [Obsolote.]
 
 After an actor hitting (this is the lose concentration after attacking rule):
 	now the concentration of the global attacker is 0;
 	continue the action;
-
-To let (the defender - a person) lose concentration:
-	if the concentration of the defender > 0:
-		now the concentration of the defender is 0;
-		follow the lose concentration prose rules for the defender;
 
 The lose concentration prose rules are a person based rulebook.
 

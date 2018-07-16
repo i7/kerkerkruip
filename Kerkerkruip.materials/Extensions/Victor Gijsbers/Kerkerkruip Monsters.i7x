@@ -2518,7 +2518,7 @@ Carry out the mindslug mindblasting:
 				say "[The noun] is now under the control of the mindslug.";
 		otherwise:
 			if the concentration of the noun is greater than 0:
-				let the noun lose concentration;
+				have the noun lose concentration with penalty n;
 	now the concentration of the mindslug is 0.
 		
 An AI target selection rule for a person (called target) when the running AI is the mindslug (this is the mindslug prefers low mind score rule):
@@ -3093,7 +3093,7 @@ Carry out the giant tentacle tentacle-shaking:
 		now the main actor is tentacle-confused;
 		if the concentration of the main actor is greater than 0:
 			say " [run paragraph on]";
-			let the main actor lose concentration;
+			have the main actor lose concentration with penalty n;
 		otherwise:
 			say "[paragraph break]".
 
