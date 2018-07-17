@@ -772,7 +772,7 @@ To decide what number is the current hood bonus:
 	Decide on 20 + (blood magic level of the inquisitor's hood * 15);
 
 A remain concentrated rule (this is the inquisitor's hood concentration rule):
-	if global defender wears the inquisitor's hood:
+	if global concentration loser wears the inquisitor's hood:
 		increase remain concentrated chance by the current hood bonus.
 
 The standard carry out feeding rule does nothing if the player wears the hood.
@@ -842,7 +842,7 @@ The pale phylactery is silver.
 The description of the pale phylactery is "A small silver amulet inlaid with colourless stones that were not formed on our planet. When worn on the forehead, the phylactery gives you a +10% chance of remaining concentrated when damaged. But its true power is only revealed when you are under the influence of ment: for in that state, it ensures that you lose only one level of concentration when you attack.".
 
 A remain concentrated rule (this is the pale phylactery concentration rule):
-	if global defender wears the pale phylactery:
+	if global concentration loser wears the pale phylactery:
 		increase remain concentrated chance by 10.
 
 After an actor hitting (this is the alternative lose concentration after attacking rule):
@@ -1015,7 +1015,7 @@ Chance to win rule (this is the CTW robe of the dead mage rule):
 		decrease the chance-to-win by 1.
 
 A remain concentrated rule (this is the robe of the dead mage concentration rule):
-	if global defender wears the robe of the dead mage:
+	if global concentration loser wears the robe of the dead mage:
 		increase remain concentrated chance by 1000.
 
 
@@ -2730,8 +2730,6 @@ An unholy wave rule (this is the standard unholy wave rule):
 				say " [damage consequences][if n is not 1];[otherwise].[line break][end if][run paragraph on]";
 			otherwise:
 				have no-source inflict damage on guy, silently;
-			unless total damage is 0:
-				now concentration of the guy is 0;
 			decrease n by 1;
 			if n is 0 and the unholy wave location is the location:
 				say ""; [For an extra newline. Don't ask.]

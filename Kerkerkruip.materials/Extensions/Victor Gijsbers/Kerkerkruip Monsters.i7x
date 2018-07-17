@@ -4941,8 +4941,6 @@ To launch the thorns:
 		say "[if n is 1 and original n is not 1]and [end if][run paragraph on]";
 		have the brambles inflict damage on guy;
 		say " [damage consequences][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
-		if total damage > 0:
-			now concentration of guy is 0;
 		decrease n by 1;
 		if n is 0:
 			say ""; [For an extra newline. Don't ask.]

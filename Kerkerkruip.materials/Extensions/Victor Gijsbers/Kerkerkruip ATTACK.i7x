@@ -927,7 +927,7 @@ First general damage multiplier rule (this is the reset general rounding error r
 
 Section - Inflicting damage
 
-[Always call this when you're inflicting damage!]
+[Always call this when you're inflicting damage! IF YOU DEAL DAMAGE OUTSUDE OF COMBAT, PLEASE ALSO SAY DAMAGE CONSEQUENCES.]
 
 To have (source - a thing) inflict damage on (guy - a person), silently:
 	now the victim is guy;
@@ -953,6 +953,10 @@ To have (source - a thing) inflict damage on (guy - a person), silently:
 	follow the general damage multiplier rules;
 	if total damage is less than 0:
 		now total damage is 0;
+	if total damage is greater than 0:
+		if concentration of guy is greater than 0:
+			unless damage-by-hitting is true: [attacks call concentration losing on their own, with different prose, in an aftereffects rule]
+				have guy silently lose concentration with penalty total damage;
 	unless silently:
 		say "[if damage comment is true] = [end if][bold type]", total damage, " damage[roman type][run paragraph on]";
 	decrease health of the victim by total damage;
@@ -964,18 +968,18 @@ To say the/-- damage we have (source - a thing) inflict on (guy - a person):
 	say run paragraph on;
 	have source inflict damage on guy;
 
-[Note that this phrase says the victim loses concentration, but it doesn't do the concentration breaking itself TODO: fix that to work with silent options]
+[Use this phrase only when damage (possible 0) has been dealt.]
 To say damage consequences:
-	say "to [the victim][if victim is dead] (which is [bold type]lethal[roman type])[end if][if concentration of victim is greater than 0 and victim is alive and total damage is not 0] (which breaks [regarding the victim][possessive] concentration)[end if][run paragraph on]";
+	say "to [the victim][if victim is dead] (which is [bold type]lethal[roman type])[end if][if concentration broken of victim is true] (which breaks [regarding the victim][possessive] concentration)[end if][run paragraph on]";
 
-Chapter - Testing Damage
+[Chapter - Testing Damage
 
 Testdamaging is an action applying to nothing. Understand "testdamage" as testdamaging.
 
 Carry out testdamaging:
 	deal 2 points of physical damage;
 	deal 3 points of divine damage;
-	have no-source inflict damage on player.
+	have no-source inflict damage on player.]
 
 [Volumes Introduction, The Main System, and Plug-ins forked from Inform ATTACK]
 
@@ -1784,11 +1788,27 @@ The remain concentrated chance is a number that varies.
 The remain concentrated rules are a rulebook.
 The global concentration loser is a person that varies.
 
+A person has a truth state called concentration broken.
+
 An aftereffects rule (this is the alternative lose concentration when hit rule):
 	if the total damage is greater than 0 and the global defender is alive and the concentration of the global defender is not 0:
 		have the global defender lose concentration with penalty total damage.
 
 To have (the victim - a person) lose concentration with penalty (penalty - a number):
+	now the global concentration loser is the victim;
+	now concentration broken of the victim is false;
+	now the remain concentrated chance is 0;
+	decrease remain concentrated chance by penalty;
+	follow the remain concentrated rules;
+	unless a random chance of remain concentrated chance in 100 succeeds:
+		if the concentration of the victim > 0:
+			now the concentration of the victim is 0;
+			now concentration broken of the victim is true;
+			follow the lose concentration prose rules for the victim;
+	otherwise:
+		say "[The victim] [bold type][remain] concentrated[roman type].";
+		
+To have (the victim - a person) silently lose concentration with penalty (penalty - a number): [TODO]
 	now the global concentration loser is the victim;
 	now the remain concentrated chance is 0;
 	decrease remain concentrated chance by penalty;
@@ -1796,12 +1816,7 @@ To have (the victim - a person) lose concentration with penalty (penalty - a num
 	unless a random chance of remain concentrated chance in 100 succeeds:
 		if the concentration of the victim > 0:
 			now the concentration of the victim is 0;
-			follow the lose concentration prose rules for the victim;
-		otherwise:
-			say "[The victim] [bold type][remain] concentrated[roman type].";
-
-[A remain concentrated rule (this is the damage penalty for remaining concentrated rule):
-	decrease remain concentrated chance by total damage.] [Obsolote.]
+			now concentration broken of the victim is true.
 
 After an actor hitting (this is the lose concentration after attacking rule):
 	now the concentration of the global attacker is 0;
@@ -2783,7 +2798,7 @@ An attack modifier rule (this is the body defence bonus rule):
 		decrease the attack strength by 3.
 	
 A remain concentrated rule (this is the mind bonus for remaining concentrated rule):
-	increase remain concentrated chance by 2 times final mind of the global defender.
+	increase remain concentrated chance by 2 times final mind of the global concentration loser.
 
 Initiative update rule (this is the increase initiative based on spirit rule):
 	repeat with X running through all alive persons enclosed by the location:

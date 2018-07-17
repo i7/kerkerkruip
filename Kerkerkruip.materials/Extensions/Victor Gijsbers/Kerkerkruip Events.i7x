@@ -68,8 +68,6 @@ A fragmentation rule (this is the basic fragmentation damage rule):
 			say " [damage consequences][if n is not 1];[otherwise].[line break][end if][run paragraph on]";
 		otherwise:
 			have fragmentation-item inflict damage on guy, silently;	
-		unless total damage is 0:
-			now concentration of the guy is 0;
 		decrease n by 1;
 		if n is 0:
 			if fragmentation-place is the location:
