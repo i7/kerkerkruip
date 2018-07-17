@@ -13,6 +13,8 @@ To crash is a verb.
 To attack is a verb.
 To receive is a verb.
 To remain is a verb.
+To fail is a verb.
+To succeed is a verb.
 
 Volume - Special actions
 

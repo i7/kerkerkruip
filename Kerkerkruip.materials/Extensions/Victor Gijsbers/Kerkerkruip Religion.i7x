@@ -389,9 +389,8 @@ To deal (X - a number) points of Aite-damage to (guy - a person) on behalf of (t
 	if the total damage > 0:
 		if guy is dead:
 			say " and [bold type]killing [regarding the guy][them][roman type]";
-		otherwise if concentration of guy > 0:
+		otherwise if concentration broken of guy is true:
 			say ", [bold type]breaking [regarding the guy][their] concentration";
-			now concentration of the guy is 0;
 	say "![paragraph break]";
 	if the guy is dead:
 		if the guy is the player:
@@ -401,7 +400,7 @@ To deal (X - a number) points of Aite-damage to (guy - a person) on behalf of (t
 				end the story saying "A maddening laughter of the Goddess is the last sound you'll ever hear";
 		otherwise:
 			if the guy is beloved of Aite:
-				say "Clearly, it doesn't always pay off to serve the mad goddess.";
+				say "Clearly, it doesn't always pay to serve the mad goddess.";
 		have an event of the supplicant killing the guy;
 	otherwise:
 		if the guy is the player:
@@ -926,7 +925,6 @@ To have (benefactor - Chton) intervene on behalf of (supplicant - a person):
 			say "[if n is 1 and original n is not 1]and [end if][run paragraph on]";
 			have Chton inflict damage on guy;
 			say " [damage consequences][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
-			now concentration of the guy is 0;
 			decrease n by 1;
 			if n is 0:
 				say ""; [For an extra newline. Don't ask.]

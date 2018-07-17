@@ -887,7 +887,7 @@ Starting kit setup for Miranda (this is the setting up Miranda rule):
 	otherwise:
 		now Miranda is not Disarmer;
 		now Miranda is concentration-breaking reactor;
-		now cbr strength of Miranda is 9;
+		now cbr strength of Miranda is 15;
 	equip Miranda with the monk's robe;
 	if a random chance of 1 in 5 succeeds:
 		equip Miranda with Miranda's amulet.
@@ -1113,10 +1113,9 @@ Carry out an actor tormenting:
 	let lijst be a list of persons;
 	repeat with guy running through alive persons enclosed by the location:
 		if concentration of guy is greater than 0:
-			let n be final mind of guy;
-			unless a random chance of n in 50 succeeds:
+			have guy lose concentration with penalty -20, silently;
+			if concentration broken of guy is true:
 				add guy to lijst;
-				now concentration of guy is 0;
 	say "[if the actor is the player]You project[otherwise if the actor is the wisps of pain]The wisps of pain suddenly release[otherwise][The actor] releases[end if] a wave of tormenting energy, [if number of entries in lijst is 1 and the player is listed in lijst]breaking [bold type]your concentration[roman type][otherwise if number of entries in lijst is not 0]breaking the [bold type]concentration[roman type] of [lijst with definite articles][otherwise]which doesn't seem to do anything[end if]."
 
 Check tormenting:
@@ -1266,8 +1265,9 @@ First carry out an actor attacking the chain golem (this is the attack a spinnin
 					have X inflict damage on the actor;
 					if the actor is alive:
 						if the concentration of the actor is not zero:
-							say " and breaking [regarding the actor][possessive] concentration.";
-							now concentration of the actor is 0;
+							have the actor lose concentration with penalty n, silently;
+							if concentration broken of the actor is true:
+								say " and breaking [regarding the actor][possessive] concentration.";
 						otherwise:
 							say ".";
 					otherwise:
@@ -1844,8 +1844,6 @@ Check reaping (this is the reaping a dead person rule):
 		say "You attempt to reap [the noun], but the strain is too much for your weak body." instead.]
 
 Carry out reaping:
-	repeat with guy running through persons in the location:
-		now concentration of guy is 0;
 	let n be final spirit of the player;
 	unless a random chance of n in 33 succeeds:
 		decrease health of the player by greatest power of the player; [Bypasses damage system.]
@@ -3160,8 +3158,11 @@ Carry out the giant tentacle tentacle-throwing:
 	say "The giant tentacle suddenly uncoils like a whip, throwing [the name of the chosen target] across the room. A sickening smack is heard when [the name of the chosen target] [hit] the [one of]wall[or]floor[or]ceiling, and then the floor,[as decreasingly likely outcomes] and [receive] [bold type][total damage] damage[roman type][run paragraph on]";	
 	if the actor is alive:
 		if the total damage > 0 and the concentration of the chosen target is not zero:
-			say ". [regarding the chosen target][They] [bold type][lose] concentration[roman type]!";
-			now concentration of the chosen target is 0;
+			have the chosen target lose concentration with penalty total damage, silently;
+			if concentration broken of chosen target is true:
+				say ". [regarding the chosen target][They] [bold type][lose] concentration[roman type]!";
+			otherwise:
+				say ".";
 		otherwise:
 			say ".";
 	otherwise:
@@ -3746,7 +3747,7 @@ Instead of the angel of mercy singing:
 	say "."
 
 To say mercy song:				
-	say "[italic type][one of]the Hymn of the Forgiven Sun[or]the Lament of the Betrayer[or]the Lion's Psalm[or]the Electrostatic Lullaby[or]Farewell to Plundering[or]There'll be Peace in the Dungeon By and By[at random][roman type]";
+	say "[italic type][one of]the Hymn of the Forgiven Sun[or]the Lament of the Betrayer[or]the Lion's Psalm[or]the Electrostatic Lullaby[or]Farewell to Plundering[or]There'll be Peace in the Dungeon By and By[or][at random][roman type]";
 	
 A first AI action selection rule for the Angel of Mercy (this is the Angel of Mercy considers singing rule):
 	choose a blank row in Table of AI Action Options;
@@ -5072,8 +5073,7 @@ Every turn when the swarm of bees is in the location:
 		let n be a random number between 1 and 3;
 		deal n points of physical damage;
 		have the swarm of bees inflict damage on guy, silently;
-		say "The swarm of bees attacks [the guy], dealing [bold type][n] damage[roman type][if health of guy is less than 1], which is [bold type]deadly[roman type][otherwise if concentration of guy is greater than 0] and breaking [bold type]concentration[roman type][end if].";
-		now concentration of guy is 0;
+		say "The swarm of bees attacks [the guy], dealing [bold type][n] damage[roman type][if health of guy is less than 1], which is [bold type]deadly[roman type][otherwise if concentration broken of guy is true] and breaking [bold type]concentration[roman type][end if].";
 		if guy is the player and health of the player is less than 0:
 			end the story saying "A stinging defeat!".
 			
@@ -5247,7 +5247,7 @@ The legend-label of overmind is Figure of map_legend_overmind.
 Section - Overmind can break concentration
 
 Overmind is concentration-breaking reactor.
-Cbr strength of overmind is 12.
+Cbr strength of overmind is 20.
 
 First cbr text of overmind is "The overmind quickly launches a tiny sphere of metal, attempting to break [regarding the noun][possessive] concentration. [italic type][run paragraph on]".
 Cbr fail text of overmind is "[roman type] The sphere misses, and [regarding the noun][possessive] attack continues unhampered.[paragraph break]".
@@ -5614,9 +5614,8 @@ To say burn (guy - a person) with consequences:
 [this phrase, unlike the damage consequences say phrase, does have side effects on concentration]
 To say burn consequences for (guy - a person):
 	if the guy is alive:
-		if total damage > 0 and concentration of guy > 0:
+		if concentration broken of guy is true:
 			say " (which breaks[regarding the guy][possessive] concentration)[run paragraph on]";
-			now concentration of guy is 0;
 	otherwise:
 		say " [bold type]to death[roman type][run paragraph on]".
 	
@@ -7163,8 +7162,6 @@ Carry out the abyss of the soul pulsating:
 			deal m points of necromantic damage;
 			have no-source inflict damage on the guy; [why not the abyss? ]
 			say " [damage consequences][if n is not 1]; [otherwise].[line break][end if][run paragraph on]";
-			unless total damage is 0:
-				now concentration of guy is 0;
 			decrease n by 1;
 			if n is 0:
 				say ""; [For an extra newline. Don't ask.]

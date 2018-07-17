@@ -953,10 +953,11 @@ To have (source - a thing) inflict damage on (guy - a person), silently:
 	follow the general damage multiplier rules;
 	if total damage is less than 0:
 		now total damage is 0;
+	now concentration broken of guy is false;
 	if total damage is greater than 0:
 		if concentration of guy is greater than 0:
 			unless damage-by-hitting is true: [attacks call concentration losing on their own, with different prose, in an aftereffects rule]
-				have guy silently lose concentration with penalty total damage;
+				have guy lose concentration with penalty total damage, silently;
 	unless silently:
 		say "[if damage comment is true] = [end if][bold type]", total damage, " damage[roman type][run paragraph on]";
 	decrease health of the victim by total damage;
@@ -1794,7 +1795,7 @@ An aftereffects rule (this is the alternative lose concentration when hit rule):
 	if the total damage is greater than 0 and the global defender is alive and the concentration of the global defender is not 0:
 		have the global defender lose concentration with penalty total damage.
 
-To have (the victim - a person) lose concentration with penalty (penalty - a number):
+To have (the victim - a person) lose concentration with penalty (penalty - a number), silently:
 	now the global concentration loser is the victim;
 	now concentration broken of the victim is false;
 	now the remain concentrated chance is 0;
@@ -1804,11 +1805,13 @@ To have (the victim - a person) lose concentration with penalty (penalty - a num
 		if the concentration of the victim > 0:
 			now the concentration of the victim is 0;
 			now concentration broken of the victim is true;
-			follow the lose concentration prose rules for the victim;
+			unless silently:
+				follow the lose concentration prose rules for the victim;
 	otherwise:
-		say "[The victim] [bold type][remain] concentrated[roman type].";
+		unless silently:
+			say "[The victim] [bold type][remain] concentrated[roman type].";
 		
-To have (the victim - a person) silently lose concentration with penalty (penalty - a number): [TODO]
+[To have (the victim - a person) silently lose concentration with penalty (penalty - a number): [TODO]
 	now the global concentration loser is the victim;
 	now the remain concentrated chance is 0;
 	decrease remain concentrated chance by penalty;
@@ -1816,7 +1819,7 @@ To have (the victim - a person) silently lose concentration with penalty (penalt
 	unless a random chance of remain concentrated chance in 100 succeeds:
 		if the concentration of the victim > 0:
 			now the concentration of the victim is 0;
-			now concentration broken of the victim is true.
+			now concentration broken of the victim is true.]
 
 After an actor hitting (this is the lose concentration after attacking rule):
 	now the concentration of the global attacker is 0;

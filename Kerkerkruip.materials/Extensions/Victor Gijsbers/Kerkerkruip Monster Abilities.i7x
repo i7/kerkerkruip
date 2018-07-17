@@ -1218,11 +1218,14 @@ An AI action selection rule for an at-React concentration-breaking reactor perso
 
 Carry out an actor concentration-breaking:
 	say first cbr text of the actor;
-	test the body of the noun against cbr strength of the actor;
-	if test result is false:
+	let x be cbr strength of the actor;
+	decrease x by 50;
+	have the noun lose concentration with penalty x, silently;
+	if concentration broken of the noun is true:
+		say "([The noun] [fail] at a random chance of [remain concentrated chance] in 100.)[run paragraph on]";
 		say cbr success text of the actor;
-		now concentration of the noun is 0;
 	otherwise:
+		say "([The noun] [succeed] at a random chance of [remain concentrated chance] in 100.)[run paragraph on]";
 		say cbr fail text of the actor.	
 
 

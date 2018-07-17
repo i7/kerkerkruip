@@ -116,7 +116,7 @@ Check an actor hitting when the location is Hall of Mirrors (this is the sometim
 						rule fails;
 		[				consider the take away until attack circumstances rules;]
 					otherwise:
-						say " Seeing through the illusion created by the mirrors, [if global attacker is the player]you attack[otherwise][the global attacker] attacks[end if] the real [if global defender is not the player][global defender][otherwise]you[end if].".
+						say " Seeing through the illusion created by the mirrors, [if global attacker is the player]you attack[otherwise][the global attacker] [attack][end if] the real [if global defender is not the player][global defender][otherwise]you[end if].".
 
 An AI action selection rule for a person (called P) when the location is Hall of Mirrors (this is the concentration is more important in the Hall of Mirrors rule):
 	choose row with an Option of the action of P concentrating in the Table of AI Action Options;
@@ -176,8 +176,9 @@ Every turn when the location is the phantasmagoria and the combat status is not 
 			if guy is using eyes:
 				if concentration of guy is greater than 0:
 					if a random number between 1 and 5 is greater than the concentration of guy:
-						add guy to lijst;
-						now concentration of guy is 0;
+						have guy lose concentration with penalty 0, silently;
+						if concentration broken of guy is true:
+							add guy to lijst;
 		say "Suddenly, [one of]a disintegrating skeletal warrior appears[or]a blast of dragon's fire appears[or]a naked male slave appears, screaming in fear[or]a naked female slave appears, fleeing in tears[or]a huge fountain of fire appears[or]a crashing ballista bolt appears[or]a drowning knight appears, crying for his god[or]a ghost appears, devouring the flesh of a still living man[or]a frenzied bull elephant appears[or]a shrieking princess appears in the claws of a demon[or]an obese king carried by seven blind eunuchs appears[or]a newly reanimated soldier appears, taking a blow for his necromancing comrade[at random]. [unless lijst is empty]While only an image that flickers and then disappears, it [bold type]startles [lijst with definite articles][roman type][otherwise]The illusions do not affect anyone[end if].".
 
 An AI action selection rule for a person (called P) when the location is Phantasmagoria (this is the concentration is often futile in Phantasmagoria rule):
