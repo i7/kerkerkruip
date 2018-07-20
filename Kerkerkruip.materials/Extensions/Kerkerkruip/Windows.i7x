@@ -366,6 +366,8 @@ Chapter - Opening and closing windows
 The information panels are an option. Understand "panels" and "side panels" as the information panels.
 Understand "info [option]" as toggling.
 
+Panel silence is a truth state that varies. Panel silence is false.
+
 Check toggling the information panels:
 	if window panels are enabled:
 		try disabling the information panels;
@@ -374,29 +376,41 @@ Check toggling the information panels:
 
 Check enabling the information panels:
 	if screen reader mode is enabled:
-		say "Information panels are disabled in screen reader mode." instead;
+		if panel silence is false:
+			say "Information panels are disabled in screen reader mode.";
+		do nothing instead;
 	if window panels are enabled:
-		say "The information panels are already enabled." instead;
-		
+		if panel silence is false:
+			say "The information panels are already enabled.";
+		do nothing instead;		
+
 Check disabling the information panels:
 	if screen reader mode is enabled:
-		say "Information panels are disabled in screen reader mode." instead;
+		if panel silence is false:
+			say "Information panels are disabled in screen reader mode.";
+		do nothing instead;
 	if window panels are disabled:
-		say "The information panels are already disabled." instead;
+		if panel silence is false:
+			say "The information panels are already disabled.";
+		do nothing instead;
 
 Carry out enabling the information panels:
 	enable the window panels flag;
 	close the status window;
 	open side windows;
 	open up the status window;
-	say "The information panels have been enabled. Type PANELS to disable them again." instead;
+	if panel silence is false:
+		say "The information panels have been enabled. Type PANELS to disable them again.";
+	do nothing instead;
 
 Carry out disabling the information panels:
 	disable the window panels flag;
 	close the status window;
 	close side windows;
 	open up the status window;
-	say "The information panels have been disabled. Type PANELS to re-enable them." instead;
+	if panel silence is false:
+		say "The information panels have been disabled. Type PANELS to re-enable them.";
+	do nothing instead;
 	
 To open side windows:
 	if window panels are disabled:
@@ -413,6 +427,17 @@ To close side windows:
 	close the stats window;
 	close the inventory-window;
 	
+
+[For some reason, 'script on' turns off the information panels even though they are still supposed to be open.]
+
+Last report switching the story transcript on:
+	if window panels are enabled:
+		now panel silence is true;
+		try disabling the information panels;
+		try enabling the information panels;
+		now panel silence is false.
+
+
 
 Section - Events
 
