@@ -393,6 +393,7 @@ Aftereffects rule (this is the blood ape grows in size when hit rule):
 			if size of blood ape is large or size of blood ape is gargantuan:
 				increase melee of blood ape by 1;
 			let X be a random natural weapon part of the blood ape;
+			increase damage die of X by 1;
 			if the blood ape is medium:
 				now dodge bonus of X is 0;
 				now parry-against bonus of X is 0;
