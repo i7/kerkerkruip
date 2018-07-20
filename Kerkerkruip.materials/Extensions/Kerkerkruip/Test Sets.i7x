@@ -2925,7 +2925,7 @@ Initial scheduling of asdt-dead-beloved:
 
 Testing effects of asdt-dead-beloved:
 	assert "healer should be dead" based on whether or not the healer of Aite is dead;
-	if we assert result "A huge <a-w>+ bursts out of the ground, skewering the healer of Aite for 3 damage and killing him!\n\nClearly, it doesn't always pay off to serve the mad goddess\.", rule succeeds.
+	if we assert result "A huge <a-w>+ bursts out of the ground, skewering the healer of Aite for 3 damage and killing him!\n\nClearly, it doesn't always pay to serve the mad goddess\.", rule succeeds.
 
 Table of Outcomes (continued)
 outcome	likelihood	minimum attempts	label
