@@ -344,7 +344,7 @@ Definition: a number is seed:
 	no.
 Menu command seed:
 	clear the screen;
-	say "[line break][bold type]Load a specific dungeon seed[roman type][paragraph break]Please enter a dungeon seed, or press Enter to return to the menu.[paragraph break]";
+	say "[line break][bold type]Load a specific dungeon seed[roman type][paragraph break]Please enter a dungeon seed, or press Enter to return to the menu. (When you start a new game, a dungeon seed is shown; you can share this with other people so you can all play the same game.)[paragraph break]";
 	[ Note: also accepts Esc (if supported by the terp ]
 	while 1 is 1:
 		say "> [run paragraph on]";
