@@ -295,16 +295,20 @@ Player-vulnerable-to-bridge is a truth state that varies. Player-vulnerable-to-b
 
 After an actor hitting (this is the better not dodge on bridge of doom rule):
 	if the location is the bridge of doom and the global defender can move:
-		if the player is the global defender and the player is at dodge:
+		if the global defender is at dodge:
 			if the attack strength is less than the defence of the global defender:
-				unless the player is flying:
-					if player-vulnerable-to-bridge is true:
-						say "You successfully dodge the attack of [the global attacker]. Since there is no place to dodge to on the narrow bridge, your maneuver continues with an involuntary downward movement.";
-						end the story saying "You fell into the lava";
-						stop the action;
-					otherwise:
-						say "You successfully dodge the attack of [the global attacker]. Since there is no place to dodge to on the narrow bridge, your maneuver almost ends in a drop down into the lava -- but you manage to [bold type]regain your balance[roman type] almost miraculously. This is something you might not want to try again.";
-						now player-vulnerable-to-bridge is true;
+				unless the global defender is flying:
+					if the global defender is the player:
+						if player-vulnerable-to-bridge is true:
+							say "You successfully dodge the attack of [the global attacker]. Since there is no place to dodge to on the narrow bridge, your maneuver continues with an involuntary downward movement.";
+							end the story saying "You fell into the lava";
+							stop the action;
+						otherwise:
+							say "You successfully dodge the attack of [the global attacker]. Since there is no place to dodge to on the narrow bridge, your maneuver almost ends in a drop down into the lava -- but you manage to [bold type]regain your balance[roman type] almost miraculously. This is something you might not want to try again.";
+							now player-vulnerable-to-bridge is true;
+					otherwise: 
+						say "[The global defender] [avoid] the attack, but in doing so [step] from the bridge and [plunge] into the lava below!";
+						now the health of global defender is -10; [Instakill.]
 	continue the action.
 
 To balance is a verb. To manage is a verb.

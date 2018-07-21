@@ -6130,10 +6130,17 @@ Last Automatos AI rule (this is the make Automatos act rule):
 		if n is 1:
 			try Automatos concentrating;
 		if n is 2:
-			if Automatos is at-React:
-				try Automatos dodging;
+			if location of Automatos is Bridge of Doom: [He never spawns there, but if he is somehow transported there...]
+				if Automatos is at-React:
+					try Automatos dodging;
+				otherwise:
+					say "Automatos suddenly jumps aside, but in doing so steps from the bridge and plunges into the lava below!";
+				now the health of Automatos is -10; [Instakill.]
 			otherwise:
-				say "Automatos suddenly jumps aside, dodging a non-existent attack.";
+				if Automatos is at-React:
+					try Automatos dodging;
+				otherwise:
+					say "Automatos suddenly jumps aside, dodging a non-existent attack.";
 		if n is 3:
 			if Automatos wears a shield:
 				if Automatos is at-React:
@@ -6157,6 +6164,7 @@ An aftereffects rule (this is the Automatos loses actions rule):
 				now q is a random number between 1 and (n minus 1);
 				remove entry q from Automatos AI list. [Yes, this can reduce the length of the list to 0!]
 
+[Automatos doesn't attack runners if he's not about to attack,]
 Parting shot rule for Automatos (this is the Automatos only attacks those running away if his AI is in attack state rule):
 	if the number of entries in Automatos AI list is greater than 0:
 		let n be entry 1 of Automatos AI list;
@@ -6164,6 +6172,12 @@ Parting shot rule for Automatos (this is the Automatos only attacks those runnin
 			rotate Automatos AI list backwards; [the AI gets rotated as normal, since he will attack]
 			rule succeeds;
 	rule fails.
+
+[Do not place Automatos in Bridge of Doom.]
+
+A monster placement scoring rule (this is the Automatos not on Bridge of Doom rule):
+	if considered monster is Automatos and considered room is Bridge of Doom:
+		decrease current monster score by 100.
 
 
 Section - Automatos prose

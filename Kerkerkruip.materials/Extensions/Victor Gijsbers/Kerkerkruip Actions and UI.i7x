@@ -15,6 +15,9 @@ To receive is a verb.
 To remain is a verb.
 To fail is a verb.
 To succeed is a verb.
+To avoid is a verb.
+To step is a verb.
+To plunge is a verb.
 
 Volume - Special actions
 
