@@ -1477,9 +1477,9 @@ Instead of taking the incense:
 
 [The dancing Tungausy shamans are scenery in the Tungausy Sweat Lodge. They are plural-named. Understand "men", "man", "shaman", "chanting", "circle", "dancer", "dancers" as the dancing Tungausy shamans. The description of the dancing Tungausy shamans is "You're not certain whether they are real or a figment, but you feel sure that they cannot harm you, nor you them."]
 
-Instead of doing anything to the dancing Tungausy shamans:
+[Instead of doing anything to the dancing Tungausy shamans:
 	say the description of the dancing Tungausy shamans;
-	say line break.
+	say line break.]
 
 To decide which number is the incensemod:
 	let x be the tension;
