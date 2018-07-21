@@ -14,7 +14,7 @@ Considered extra is a thing that varies.
 Dungeon interest rule (this is the add extra scenery rule):
 	let n be the number of off-stage extra things;
 	if n is 0, make no decision;
-	if n is greater than 8, now n is 8;
+	if n is greater than 5, now n is 5;
 	now n is a random number between 1 and n;
 	repeat with i running from 1 to n:
 		now considered extra is a random off-stage extra thing;
@@ -168,7 +168,7 @@ The throne of the god-king is a civilised adamant fixed in place extra chair. "T
 
 A faculty bonus rule (this is the throne of the god-king bonus rule):
 	if the test subject is on the throne of the god-king:
-		increase faculty bonus score by 5.
+		increase faculty bonus score by 10.
 
 
 Chapter - Flickering lights
@@ -187,11 +187,11 @@ Chapter - Tungausy Totem
 
 The Tungausy totem is a religious fixed in place extra thing. "A primitive totem pole of the Tungausy people casts its eerie glance about the room." Understand "pole" as the tungausy totem.
 
-The description of the tungausy totem is "Being in the presence of the Tungausy totem gives anyone a +5 bonus to spirit.".
+The description of the tungausy totem is "Being in the presence of the Tungausy totem gives anyone a +10 bonus to spirit.".
 
 A spirit bonus rule (this is the tungausy totem spirit bonus rule):
 	if the tungausy totem is in the location:
-		increase faculty bonus score by 5.
+		increase faculty bonus score by 10.
 
 An extra scoring rule (this is the tungausy totem and sweat lodge not together rule):
 	if considered extra is tungausy totem:
@@ -202,21 +202,21 @@ Chapter - Focal totem
 
 The focal totem is a magical fixed in place extra thing. "The harsh but regular geometries of a focal totem calm your mind." Understand "harsh" and "geometries" as the focal totem.
 
-The description of the focal totem is "The magic cults of Yahvinna have developed these weird-looking totems to increase their mental concentration; it gives anyone a +5 bonus to mind."
+The description of the focal totem is "The magic cults of Yahvinna have developed these weird-looking totems to increase their mental concentration; it gives anyone a +10 bonus to mind."
 
 A mind bonus rule (this is the focal totem mind bonus rule):
 	if the focal totem is in the location:
-		increase faculty bonus score by 5.
+		increase faculty bonus score by 10.
 
 Chapter - Totem of the Bull
 
 The totem of the bull is a religious fixed in place extra thing. "A totem pole in the form of a stylised bull inspires you to feats of bodily strength." Understand "pole" as the totem of the bull.
 
-The description of the totem of the bull is "According to some tales, the totem poles of the alargansi people can turn into real bulls in times of need. You doubt that this is true, but it is certainly the case that this totem grants anyone a +5 bonus to body.".
+The description of the totem of the bull is "According to some tales, the totem poles of the alargansi people can turn into real bulls in times of need. You doubt that this is true, but it is certainly the case that this totem grants anyone a +10 bonus to body.".
 
 A body bonus rule (this is the totem of the bull body bonus rule):
 	if the totem of the bull is in the location:
-		increase faculty bonus score by 5.
+		increase faculty bonus score by 10.
 
 Part - Symbols
 
