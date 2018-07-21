@@ -6157,6 +6157,14 @@ An aftereffects rule (this is the Automatos loses actions rule):
 				now q is a random number between 1 and (n minus 1);
 				remove entry q from Automatos AI list. [Yes, this can reduce the length of the list to 0!]
 
+Parting shot rule for Automatos (this is the Automatos only attacks those running away if his AI is in attack state rule):
+	if the number of entries in Automatos AI list is greater than 0:
+		let n be entry 1 of Automatos AI list;
+		if n is 0:
+			rotate Automatos AI list backwards; [the AI gets rotated as normal, since he will attack]
+			rule succeeds;
+	rule fails.
+
 
 Section - Automatos prose
 
