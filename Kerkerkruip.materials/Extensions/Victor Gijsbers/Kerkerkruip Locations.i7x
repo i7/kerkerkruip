@@ -1390,7 +1390,7 @@ The Hall of the Raging Banshees is extra-accepting.
 The Hall of the Raging Banshees is vp-agnostic.
 The Hall of the Raging Banshees is deathly.
 
-The rarity of Hall of the Raging Banshees is 1.
+The rarity of Hall of the Raging Banshees is 2.
 
 There is a thing called the banshees. "A horde of banshees is flying through the room, screaming and howling."
 
@@ -1457,7 +1457,7 @@ The map-label of Hall of the Raging Banshees is Figure of map_label_Banshees.
 
 Chapter - Tungausy Sweat Lodge 
 
-The Tungausy sweat lodge is a room. "The penetrating scent of herbs pervades your nostrils as you enter the Tungausy Sweat Lodge.  Men wearing skull masks encircle you, chanting monotonously in an ancient tongue.  Incense burners produce a grey, thick smoke. Though you may feel feeble due to the intense smoke, the incense places your soul in a state of trance, assisting you in the use of certain powers. [italic type](Current tension modifier: +[incensemod] spirit, -[incensemod] on attacks.)[roman type]"
+The Tungausy sweat lodge is a room. "The penetrating scent of herbs pervades your nostrils as you enter the Tungausy Sweat Lodge.  Though you may feel feeble due to the intense smoke, the incense places your soul in a state of trance, assisting you in the use of certain powers. [italic type](Current tension modifier: +[incensemod] spirit, -[incensemod] on attacks.)[roman type]"
 
 The Tungausy Sweat Lodge is connectable.
 The Tungausy Sweat Lodge is not connection-inviting.
@@ -1468,14 +1468,14 @@ The Tungausy Sweat Lodge is extra-accepting.
 The Tungausy Sweat Lodge is vp-agnostic.
 The Tungausy Sweat Lodge is religious.
 
-The rarity of Tungausy Sweat Lodge is 1.
+The rarity of Tungausy Sweat Lodge is 2.
 
 The incense is scenery. Understand "scent", "herbs", "indigenous", "indigenous herbs", "smoke" as incense.  The description of the incense is "The smell of the incense is pervading, containing a mixture of sweet and spicy senses". The incense is in the Tungausy Sweat Lodge.
 
 Instead of taking the incense:
-	say "The circle of chanting shamans prevents you from getting anywhere near the incense".
+	say "The incense is burned in inaccessible censers.".
 
-The dancing Tungausy shamans are scenery in the Tungausy Sweat Lodge. They are plural-named. Understand "men", "man", "shaman", "chanting", "circle", "dancer", "dancers" as the dancing Tungausy shamans. The description of the dancing Tungausy shamans is "You're not certain whether they are real or a figment, but you feel sure that they cannot harm you, nor you them."
+[The dancing Tungausy shamans are scenery in the Tungausy Sweat Lodge. They are plural-named. Understand "men", "man", "shaman", "chanting", "circle", "dancer", "dancers" as the dancing Tungausy shamans. The description of the dancing Tungausy shamans is "You're not certain whether they are real or a figment, but you feel sure that they cannot harm you, nor you them."]
 
 Instead of doing anything to the dancing Tungausy shamans:
 	say the description of the dancing Tungausy shamans;
