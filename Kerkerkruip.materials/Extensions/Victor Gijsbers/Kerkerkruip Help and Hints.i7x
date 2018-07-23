@@ -80,12 +80,14 @@ title	text
 "Mindslug (mind & spirit)"	"Level: 3[paragraph break][description of the power of the mindslug]"
 "Giant tentacle (mind)"	"Level: 3[paragraph break][description of the power of the tentacle]"
 "Minotaur (body)"	"Level: 3[paragraph break][description of the power of the minotaur]"
+"Angel of mercy (spirit)"	"Level: 3[paragraph break][description of the power of mercy]"
 ""	--
 "[bold type]Level 4"	--
 "Fanatics of Aite (spirit)"	"Level: 4[paragraph break][description of the power of the fanatics]"
 "Bodmall (body)"	"Level: 4[paragraph break][description of the power of Bodmall]"
 "Overmind (mind)"	"Level: 4[paragraph break][description of the power of the overmind]"
 "Israfel (spirit)"	"Level: 4[paragraph break][description of the power of Israfel]"
+"Automatos (mind)"	"Level: 4[paragraph break][description of the power of Automatos]"
 
 
 To say total credits:
