@@ -45,6 +45,12 @@ Include (-
 -).
 
 
+Seed-showing is an action out of world. Understand "seed" as seed-showing.
+
+Carry out seed-showing:
+	say "The current dungeon seed is: [dungeon generation seed in hexadecimal]. The difficulty is: [difficulty]."
+
+
 
 Book - Creating the Dungeon
 
