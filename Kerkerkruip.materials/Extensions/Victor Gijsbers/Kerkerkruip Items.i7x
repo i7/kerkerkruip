@@ -2582,15 +2582,17 @@ Carry out reading a scroll of the blade:
 		now item is not readied;
 	move adamantine blade to player;
 	now adamantine blade is readied;
+	set pronouns from adamantine blade;
 	do the adamantine blade shuffle;
 	if the player is not ethereal:
-		say "A magical sword formed of adamant suddenly appears in your hands!";
+		say "A magical sword formed of adamant suddenly appears in your hands! [run paragraph on]";
+		try examining the adamantine blade;
 	otherwise:
 		say "A magical sword formed of adamant suddenly appears in your hands -- and falls through them to the ground!";
 		now adamantine blade is not readied;
 		move adamantine blade to the location;
 
-The adamantine blade is an adamant weapon. The description of the adamantine blade is "This is a magical blade made of the hardest substance in the universe. You wonder how long the spell will last." Understand "sword" as the adamantine blade.
+The adamantine blade is an adamant weapon. The description of the adamantine blade is "This summoned blade is made of the hardest substance in the universe. You wonder how long the spell will last." Understand "sword" and "magical" and "summoned" as the adamantine blade.
 
 The adamantine blade timer is a number that varies.
 
@@ -2860,6 +2862,7 @@ Carry out reading a scroll of enchantment (this is the basic weapon enchantment 
 	otherwise:
 		increase weapon attack bonus of item by 1;
 		increase weapon damage bonus of item by 1;
+		set pronouns from item;
 		say "A flash of golden light comes from [the item]! It seems deadlier and more accurate."
 
 Section - Scroll of Afternoon Delights (Malygris)
