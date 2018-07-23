@@ -2654,7 +2654,7 @@ A general damage multiplier rule when the hit protection of the victim is greate
 	if total damage greater than 0:
 		add damage comment "- 100% (protection)";
 		now total damage is 0;
-		decrease hit protection of the global defender by 1.
+		decrease hit protection of the victim by 1.
 
 A reviving rule for a person (called guy) (this is the no protection when revived rule):
 	now the hit protection of the guy is 0;
