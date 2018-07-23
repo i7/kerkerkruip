@@ -46,6 +46,14 @@ Use no status line.
 Include version 15/160609 of Flexible Windows by Jon Ingold.
 Include Hyperlinks by Kerkerkruip.
 
+
+[Let's give a custom error message when players attempt 'map' without Glimmr. Useful as long as Glimmr doesn't work, we can delete if afterwards.]
+
+Showing the map is an action out of world. Understand "map" and "show the/-- map" and "m" as showing the map.
+
+Carry out showing the map:
+	say "Unfortunately, the graphical map cannot be shown in this beta version of Kerkerkruip. Sorry!".
+
 [Include Kerkerkruip Glimmr Additions by Erik Temple.]
 
 Include version 1/150128 of Menus by Dannii Willis.
