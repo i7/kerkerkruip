@@ -866,7 +866,7 @@ Showing commands is an action out of world.
 Understand "commands" and "show commands" as showing commands.
 	
 Carry out showing commands:
-		say "The most important special commands in [italic type]Kerkerkruip[roman type] are: attack (a), parry (p), dodge (do), concentrate (c), status, remember (r), sense, equip, go to. Some of the standard interactive fiction commands are: look (l), inventory (i), go, take, drop, wear, take off, read, put A in B.".
+		say "The most important special commands in [italic type]Kerkerkruip[roman type] are: attack (a), parry (p), dodge (do), concentrate (c), status, remember (r), sense, equip, go to. Some of the standard interactive fiction commands are: look (l), inventory (i), go, take, drop, wear, take off, read, put A in B. But check the menu for more information! (To get there, type 'menu'.)".
 
 Chapter - Statistics command
 
