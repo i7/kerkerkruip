@@ -971,7 +971,7 @@ To say the/-- damage we have (source - a thing) inflict on (guy - a person):
 
 [Use this phrase only when damage (possible 0) has been dealt.]
 To say damage consequences:
-	say "to [the victim][if victim is dead] (which is [bold type]lethal[roman type])[end if][if concentration broken of victim is true] (which breaks [regarding the victim][possessive] concentration)[end if][run paragraph on]";
+	say "to [the victim][if victim is dead] (which is [bold type]lethal[roman type])[otherwise if concentration broken of victim is true] (which breaks [regarding the victim][possessive] concentration)[end if][run paragraph on]";
 
 [Chapter - Testing Damage
 
