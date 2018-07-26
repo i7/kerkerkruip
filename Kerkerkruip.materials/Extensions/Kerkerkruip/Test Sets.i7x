@@ -2902,7 +2902,8 @@ Testing effects of asdt-sleeper:
 		
 Initial scheduling of asdt-reduction:
 	now the health of the healer of Aite is 1000;
-	now the concentration of the healer of Aite is 3.
+	now the concentration of the healer of Aite is 3;
+	prevent remaining concentrated. [is this right?]
 
 Remove specific damage when testing asdt-reduction:
 	Remove 3 points of divine damage with reason "testing divine damage reduction".
@@ -2914,6 +2915,7 @@ Testing effects of asdt-reduction:
 Initial scheduling of asdt-concentration:
 	now the health of the healer of Aite is 1000;
 	now the concentration of the healer of Aite is 3;
+	prevent remaining concentrated.
 	
 Testing effects of asdt-concentration:
 	assert that the concentration of the healer of aite is 0 with label "concentration of the healer";
@@ -2997,6 +2999,7 @@ Initial scheduling of nomos-fail-damage-text:
 	now hit protection of the player is 0;
 	now the health of the player is 1000;
 	now the concentration of the player is 1;
+	prevent remaining concentrated.
 	
 Regular scheduling of nomos-fail-damage-text: compel the action of reloading the Yahvinnian crossbow;
 
@@ -3954,7 +3957,7 @@ Initial scheduling of launch-break-concentration:
 	prepare a test battle with the minotaur;
 	try summoning brambles;
 	now the concentration of the minotaur is 3;
-	[TODO: once the system is integrated, we may have to repeat the test given that sometimes the enemy can remain concentrated]
+	prevent remaining concentrated;
 	now brambles strength is 1.
 	
 regular scheduling of launch-break-concentration: try launching.

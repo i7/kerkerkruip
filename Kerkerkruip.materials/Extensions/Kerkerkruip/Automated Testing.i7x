@@ -1370,8 +1370,8 @@ Last treasure placement rule (this is the prevent curses for testing rule):
 
 preventing remaining concentrated is a truth state that varies.
 
-First initial scheduling of a test step:
-	now preventing remaining concentrated is false; [reset every step]
+First initial scheduling of a test step (this is the allow remaining concentrated for a test rule):
+	now preventing remaining concentrated is false;
 
 To prevent remaining concentrated:
 	now preventing remaining concentrated is true;
