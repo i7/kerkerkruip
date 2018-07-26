@@ -1368,15 +1368,15 @@ Last treasure placement rule (this is the prevent curses for testing rule):
 		Repeat with item running through things:
 			now the hidden identity of item is non-thing.
 
-preventing remaining-concentrated is a truth state that varies.
+preventing remaining concentrated is a truth state that varies.
 
 First initial scheduling of a test step:
-	now preventing remaining-concentrated is false; [reset every step]
+	now preventing remaining concentrated is false; [reset every step]
 
 To prevent remaining concentrated:
 	now preventing remaining concentrated is true;
 	
-First remain concentrated rule (this is the prevent remaining concentrated for a test rule):
+First remain concentrated rule when preventing remaining concentrated is true (this is the prevent remaining concentrated for a test rule):
 	now remain concentrated chance is 0;
 	rule fails.
 
