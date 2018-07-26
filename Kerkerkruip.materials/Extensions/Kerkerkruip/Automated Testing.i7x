@@ -1368,11 +1368,13 @@ Last treasure placement rule (this is the prevent curses for testing rule):
 		Repeat with item running through things:
 			now the hidden identity of item is non-thing.
 
+Section - Turn Settings
+
 preventing remaining concentrated is a truth state that varies.
 
 First initial scheduling of a test step (this is the allow remaining concentrated for a test rule):
 	now preventing remaining concentrated is false;
-
+	
 To prevent remaining concentrated:
 	now preventing remaining concentrated is true;
 	
@@ -2231,6 +2233,10 @@ If we want to get a rogue's power, or see some effects of killing it:
 
 We don't even need to be in the same room for that to work.
 
+To make sure that damage always breaks concentration:
+	
+	prevent remaining concentrated;
+
 Section: Dungeon Scenarios
 
 Just as we can require objects from the Kerkerkruip Console, we can force things to be included or excluded from a test when the dungeon is generated. For this we use the "scenario" rules:
@@ -2248,6 +2254,17 @@ Some scenarios are common to many tests. In several cases, we want to prevent mo
 Many objects in the dungeon affect faculties. If a test requires that a faculty have a particular value, this can be used to avoid them:
 	
 	ban faculty modifiers;
+	
+To make sure no rogues start out asleep, but also make sure they don't wake up spontaneously after we put them to sleep, we can use this phrase:
+	
+	prevent sleep surprises;
+	
+To make sure we are always able to teleport normally (this phrase prevents placement of the dimensional anchor and the teleportation beacon):
+	
+	allow teleportation;
+	
+To prevent the placement of any secretly cursed items in the dungeon:
+	prevent curses;
 
 Section: Testing Dungeon Creation
 
