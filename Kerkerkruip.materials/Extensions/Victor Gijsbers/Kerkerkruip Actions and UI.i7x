@@ -379,7 +379,7 @@ After extended waiting (this is the stop waiting for nomos bonus rule):
 		now intended wait-time is 0.
 
 After extended waiting (this is the stop waiting when dead rule):
-	if the player is dead:
+	if the player is dead or the story has ended:
 		now intended wait-time is 0.
 
 An after damage rule (this is the any damage stops waiting rule):
