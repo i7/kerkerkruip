@@ -346,7 +346,7 @@ An absorption stopping rule (this is the chef can't absorb souls rule):
 
 Chapter - Dream of Monty Hall
 
-Monty Hall is a room. "The large, circular hall is completely empty except for [if Monty-Hall-voice is not 2]three[otherwise]two[end if] chests[if the marble black chest is in Monty Hall]. One chest is made of black marble[end if][if the pure gold chest is in Monty Hall]. One chest is made of pure gold[end if][if the iridiscent pearl chest is in Monty Hall]. One chest is made of iridiscent pearl[end if]."
+Monty Hall is a room. "The large, circular hall is completely empty except for [if Monty-Hall-voice is not 2]three[otherwise]two[end if] chests[if the marble black chest is in Monty Hall]. One chest is made of black marble[end if][if the pure gold chest is in Monty Hall]. One chest is made of pure gold[end if][if the iridescent pearl chest is in Monty Hall]. One chest is made of iridescent pearl[end if]."
 Monty Hall is not placeable.
 
 Dream of Monty Hall is a dream.
@@ -365,11 +365,11 @@ Every turn when the location is Monty Hall:
 		
 The marble black chest is a scenery closed openable container in Monty Hall. The description of the marble black chest is "This chest is cool and smooth to the touch. Patterns in the marble suggest fantastic landscapes full of horror and wonder.".
 
-The iridiscent pearl chest is a scenery closed openable container in Monty Hall. The description of the iridiscent pearl chest is "This chest flaunts a million shades of colour, like a peacock. Its smooth whiteness promises both everlasting beauty and death.".
+The iridescent pearl chest is a scenery closed openable container in Monty Hall. The description of the iridescent pearl chest is "This chest flaunts a million shades of colour, like a peacock. Its smooth whiteness promises both everlasting beauty and death.".
 
 The pure gold chest is a scenery closed openable container in Monty Hall. The description of the pure gold chest is "This chest has been polished so well that you can see your own face in it, made infinitely more precious by the noble metal. People would die for such richness.".
 
-The Monty-list is a list of things that varies. The Monty-list is {marble black chest, iridiscent pearl chest, pure gold chest}.
+The Monty-list is a list of things that varies. The Monty-list is {marble black chest, iridescent pearl chest, pure gold chest}.
 
 When play begins:
 	sort Monty-list in random order.

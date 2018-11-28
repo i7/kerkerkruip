@@ -1746,7 +1746,7 @@ Report the Reaper hitting a dead pc:
 
 Report the reaper attacking:
 	unless the actor is the noun:
-		say "The Reaper advances towards [the noun][one of][or], with a skulllike grin[or], saying 'Et in Arcadia ego!' in a booming voice[as decreasingly likely outcomes].";
+		say "The Reaper advances towards [the noun][one of][or], with a skull-like grin[or], saying 'Et in Arcadia ego!' in a booming voice[as decreasingly likely outcomes].";
 	otherwise:
 		say "'What is dead may never die!' the Reaper screams.";
 	rule succeeds.
@@ -4142,7 +4142,7 @@ An AI action selection rule for a merciful person (called guy) (this is the merc
 Section - Prose
 
 Report an actor hitting the dead angel of mercy:
-	say "The angel shinks to a pinpoint so bright [run paragraph on][if the player is using eyes]you can't bear to look[otherwise]you can feel the intensity[end if], then disappears completely!";
+	say "The angel shrinks to a pinpoint so bright [run paragraph on][if the player is using eyes]you can't bear to look[otherwise]you can feel the intensity[end if], then disappears completely!";
 	[TODO: blinds you when she dies? What about blind/eyeless viewers?]
 	rule succeeds.
 
@@ -5095,7 +5095,7 @@ The description of the crawling fruit is "From a distance, they appear to be fru
 
 Fruit-launching crawling fruit:
 	if the number of alive undead persons in the location is less than 1:
-		say "[line break]The crawling fruit release beetles and worms that hunger for dead flesh. Unfortunaly, they find no undead monsters[if large pile of body parts is in the location]; but they do devour the pile of human body parts[end if].";
+		say "[line break]The crawling fruit release beetles and worms that hunger for dead flesh. Unfortunately, they find no undead monsters[if large pile of body parts is in the location]; but they do devour the pile of human body parts[end if].";
 	otherwise:
 		let K be the list of alive undead persons in the location;
 		say "[line break]The crawling fruit release [bold type]beetles and worms[roman type] that hunger for dead flesh. They feast on the body of [K with definite articles], decreasing health by 50%.";
@@ -7340,7 +7340,7 @@ Report the mummified priest parrying:
 	rule succeeds.
 				
 Report the mummified priest waiting when the mummified priest is insane:
-	say "The mummified priest runs around on all fours in immitation of a dung beetle.";
+	say "The mummified priest runs around on all fours in imitation of a dung beetle.";
 	rule succeeds.
 
 
