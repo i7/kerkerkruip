@@ -254,7 +254,7 @@ Every turn when the location is the Arena of the Fallen and the combat status is
 	otherwise if distractionchance > 6:
 		let X be a random number between 1 and distractionchance - 2;
 		decrease the health of guy by X;  [The spectators bypass the normal damage system.]
-		say "Disgruntled by  lack of blood, the spectators decide to lend a helping hand. [one of]Grippling claws tears away at[or]A small dagger, coated with a bit of blood, slices[or]Noxious fumes envelop[or]A small rock is flinged at[purely at random] you[if guy is not the player]r opponent[end if], doing [X] damage[if health of guy is less than 1] and killing [the guy][end if]!";
+		say "Disgruntled by  lack of blood, the spectators decide to lend a helping hand. [one of]Grippling claws tears away at[or]A small dagger, coated with a bit of blood, slices[or]Noxious fumes envelop[or]A small rock is flung at[purely at random] you[if guy is not the player]r opponent[end if], doing [X] damage[if health of guy is less than 1] and killing [the guy][end if]!";
 		now the current dissatisfaction is 0;
 		increase the demon boredom by 2.
 

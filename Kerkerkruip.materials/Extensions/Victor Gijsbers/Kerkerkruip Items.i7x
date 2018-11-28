@@ -1682,7 +1682,7 @@ The block bonus of the shield of fanaticism is 6.
 
 Instead of examining the shield of fanaticism:
 	calculate the block bonus of the shield of fanaticism;
-	say "It is well-known that nothing beats fanaticism when it comes to shielding the mind from outside influences; but the defenders of Aite have managed to transpose this trite observation to the much more vital dimension of physical protection. The block bonus of this aggressively decorated shield is equal to twice the number of worshippers of aite in the location; currently, that comes to [block bonus of the shield of fanaticism].".
+	say "It is well-known that nothing beats fanaticism when it comes to shielding the mind from outside influences; but the defenders of Aite have managed to transpose this trite observation to the much more vital dimension of physical protection. The block bonus of this aggressively decorated shield is equal to twice the number of worshippers of Aite in the location; currently, that comes to [block bonus of the shield of fanaticism].".
 		
 To calculate the block bonus of the shield of fanaticism:
 	let room be the location of the shield of fanaticism;
@@ -4072,7 +4072,7 @@ An aftereffects rule (this is the spiked mace grows rule):
 				
 The basic weapon enchantment rule does nothing when the player wields the spiked mace of the ape king.
 
-Carry out reading a scroll of enchantment (this is the enchanment grows spiked mace rule):
+Carry out reading a scroll of enchantment (this is the enchantment grows spiked mace rule):
 	if the player wields the spiked mace of the ape king:
 		increase spiked-mace-blood by 1;
 		set stats for the spiked mace of the ape king;
@@ -4652,7 +4652,7 @@ Carry out gesturing:
 	if the number of people in the location is one:
 		say "Your gesture has no effect, since you are alone.";
 	otherwise:
-		say "The hand of Vecna gestures a forbidden sign, and everyone arounds you screams in pain -- they have lost their concentration and will be stunned for the next six turns.";
+		say "The hand of Vecna gestures a forbidden sign, and everyone around you screams in pain -- they have lost their concentration and will be stunned for the next six turns.";
 		repeat with guy running through people in the location:
 			unless guy is player:
 				now concentration of guy is 0;
